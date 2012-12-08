@@ -1,25 +1,18 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using Catrobat.IDEWindowsPhone.Resources;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using IDEWindowsPhone.Resources;
 
-namespace IDEWindowsPhone
+namespace Catrobat.IDEWindowsPhone
 {
     public partial class App : Application
     {
         /// <summary>
-        /// Provides easy access to the root frame of the Phone Application.
-        /// </summary>
-        /// <returns>The root frame of the Phone Application.</returns>
-        public static PhoneApplicationFrame RootFrame { get; private set; }
-
-        /// <summary>
-        /// Constructor for the Application object.
+        ///     Constructor for the Application object.
         /// </summary>
         public App()
         {
@@ -39,7 +32,7 @@ namespace IDEWindowsPhone
             if (Debugger.IsAttached)
             {
                 // Display the current frame rate counters.
-                Application.Current.Host.Settings.EnableFrameRateCounter = true;
+                Current.Host.Settings.EnableFrameRateCounter = true;
 
                 // Show the areas of the app that are being redrawn in each frame.
                 //Application.Current.Host.Settings.EnableRedrawRegions = true;
@@ -54,8 +47,13 @@ namespace IDEWindowsPhone
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
-
         }
+
+        /// <summary>
+        ///     Provides easy access to the root frame of the Phone Application.
+        /// </summary>
+        /// <returns>The root frame of the Phone Application.</returns>
+        public static PhoneApplicationFrame RootFrame { get; private set; }
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
@@ -101,69 +99,6 @@ namespace IDEWindowsPhone
             }
         }
 
-        #region Phone application initialization
-
-        // Avoid double-initialization
-        private bool phoneApplicationInitialized = false;
-
-        // Do not add any additional code to this method
-        private void InitializePhoneApplication()
-        {
-            if (phoneApplicationInitialized)
-                return;
-
-            // Create the frame but don't set it as RootVisual yet; this allows the splash
-            // screen to remain active until the application is ready to render.
-            RootFrame = new PhoneApplicationFrame();
-            RootFrame.Navigated += CompleteInitializePhoneApplication;
-
-            // Handle navigation failures
-            RootFrame.NavigationFailed += RootFrame_NavigationFailed;
-
-            // Handle reset requests for clearing the backstack
-            RootFrame.Navigated += CheckForResetNavigation;
-
-            // Ensure we don't initialize again
-            phoneApplicationInitialized = true;
-        }
-
-        // Do not add any additional code to this method
-        private void CompleteInitializePhoneApplication(object sender, NavigationEventArgs e)
-        {
-            // Set the root visual to allow the application to render
-            if (RootVisual != RootFrame)
-                RootVisual = RootFrame;
-
-            // Remove this handler since it is no longer needed
-            RootFrame.Navigated -= CompleteInitializePhoneApplication;
-        }
-
-        private void CheckForResetNavigation(object sender, NavigationEventArgs e)
-        {
-            // If the app has received a 'reset' navigation, then we need to check
-            // on the next navigation to see if the page stack should be reset
-            if (e.NavigationMode == NavigationMode.Reset)
-                RootFrame.Navigated += ClearBackStackAfterReset;
-        }
-
-        private void ClearBackStackAfterReset(object sender, NavigationEventArgs e)
-        {
-            // Unregister the event so it doesn't get called again
-            RootFrame.Navigated -= ClearBackStackAfterReset;
-
-            // Only clear the stack for 'new' (forward) and 'refresh' navigations
-            if (e.NavigationMode != NavigationMode.New && e.NavigationMode != NavigationMode.Refresh)
-                return;
-
-            // For UI consistency, clear the entire page stack
-            while (RootFrame.RemoveBackEntry() != null)
-            {
-                ; // do nothing
-            }
-        }
-
-        #endregion
-
         // Initialize the app's font and flow direction as defined in its localized resource strings.
         //
         // To ensure that the font of your application is aligned with its supported languages and that the
@@ -201,7 +136,7 @@ namespace IDEWindowsPhone
                 //
                 // If a compiler error is hit then ResourceFlowDirection is missing from
                 // the resource file.
-                FlowDirection flow = (FlowDirection)Enum.Parse(typeof(FlowDirection), AppResources.ResourceFlowDirection);
+                var flow = (FlowDirection) Enum.Parse(typeof (FlowDirection), AppResources.ResourceFlowDirection);
                 RootFrame.FlowDirection = flow;
             }
             catch
@@ -219,5 +154,68 @@ namespace IDEWindowsPhone
                 throw;
             }
         }
+
+        #region Phone application initialization
+
+        // Avoid double-initialization
+        private bool phoneApplicationInitialized;
+
+        // Do not add any additional code to this method
+        private void InitializePhoneApplication()
+        {
+            if (phoneApplicationInitialized)
+                return;
+
+            // Create the frame but don't set it as RootVisual yet; this allows the splash
+            // screen to remain active until the application is ready to render.
+            RootFrame = new PhoneApplicationFrame();
+            RootFrame.Navigated += CompleteInitializePhoneApplication;
+
+            // Handle navigation failures
+            RootFrame.NavigationFailed += RootFrame_NavigationFailed;
+
+            // Handle reset requests for clearing the backstack
+            RootFrame.Navigated += CheckForResetNavigation;
+
+            // Ensure we don't initialize again
+            phoneApplicationInitialized = true;
+        }
+
+        // Do not add any additional code to this method
+        private void CompleteInitializePhoneApplication(object sender, NavigationEventArgs e)
+        {
+            // Set the root visual to allow the application to render
+            if (RootVisual != null && RootVisual != RootFrame)
+                RootVisual = RootFrame;
+
+            // Remove this handler since it is no longer needed
+            RootFrame.Navigated -= CompleteInitializePhoneApplication;
+        }
+
+        private void CheckForResetNavigation(object sender, NavigationEventArgs e)
+        {
+            // If the app has received a 'reset' navigation, then we need to check
+            // on the next navigation to see if the page stack should be reset
+            if (e.NavigationMode == NavigationMode.Reset)
+                RootFrame.Navigated += ClearBackStackAfterReset;
+        }
+
+        private void ClearBackStackAfterReset(object sender, NavigationEventArgs e)
+        {
+            // Unregister the event so it doesn't get called again
+            RootFrame.Navigated -= ClearBackStackAfterReset;
+
+            // Only clear the stack for 'new' (forward) and 'refresh' navigations
+            if (e.NavigationMode != NavigationMode.New && e.NavigationMode != NavigationMode.Refresh)
+                return;
+
+            // For UI consistency, clear the entire page stack
+            while (RootFrame.RemoveBackEntry() != null)
+            {
+                ; // do nothing
+            }
+        }
+
+        #endregion
     }
 }

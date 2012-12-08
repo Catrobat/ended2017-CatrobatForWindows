@@ -1,20 +1,19 @@
-﻿using Windows.UI.Xaml;
+﻿using MonoGame.Framework;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using MonoGame.Framework;
 
-
-namespace PlayerWindowsStore
+namespace Catrobat.PlayerWindowsStore
 {
     /// <summary>
-    /// The root page used to display the game.
+    ///     The root page used to display the game.
     /// </summary>
     public sealed partial class GamePage : SwapChainBackgroundPanel
     {
-        readonly Game1 _game;
+        private readonly Game1 _game;
 
         public GamePage(string launchArguments)
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             // Create the game.
             _game = XamlGame<Game1>.Create(launchArguments, Window.Current.CoreWindow, this);

@@ -7,8 +7,8 @@
     <ProjectGuid>{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IDEWindowsStore</RootNamespace>
-    <AssemblyName>IDEWindowsStore</AssemblyName>
+    <RootNamespace>Catrobat.IDEWindowsStore</RootNamespace>
+    <AssemblyName>Catrobat.IDEWindowsStore</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
