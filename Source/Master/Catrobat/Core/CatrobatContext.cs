@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using Catrobat.Core.Helpers;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Resources.SampleProjects;
 using Catrobat.Core.Storage;
 
 namespace Catrobat.Core

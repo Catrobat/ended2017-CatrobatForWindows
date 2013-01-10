@@ -13,13 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDEWindowsPhone", "IDEWindo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerCommon", "PlayerCommon\PlayerCommon.csproj", "{D7993461-F88B-4EEE-872B-40268D0E33F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerWindowsStore", "PlayerWindowsStore\PlayerWindowsStore.csproj", "{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerWindowsPhone7", "PlayerWindowsPhone7\PlayerWindowsPhone7.csproj", "{6CB5C936-7EB1-446E-8E4A-C8E3CE3D4B70}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -44,9 +42,6 @@ Global
 		SccProjectUniqueName7 = PlayerWindowsPhone7\\PlayerWindowsPhone7.csproj
 		SccProjectName7 = PlayerWindowsPhone7
 		SccLocalPath7 = PlayerWindowsPhone7
-		SccProjectUniqueName8 = PlayerWindowsStore\\PlayerWindowsStore.csproj
-		SccProjectName8 = PlayerWindowsStore
-		SccLocalPath8 = PlayerWindowsStore
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,30 +140,6 @@ Global
 		{D7993461-F88B-4EEE-872B-40268D0E33F6}.Release|ARM.ActiveCfg = Release|Any CPU
 		{D7993461-F88B-4EEE-872B-40268D0E33F6}.Release|x64.ActiveCfg = Release|Any CPU
 		{D7993461-F88B-4EEE-872B-40268D0E33F6}.Release|x86.ActiveCfg = Release|Any CPU
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Debug|ARM.ActiveCfg = Debug|ARM
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Debug|ARM.Build.0 = Debug|ARM
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Debug|ARM.Deploy.0 = Debug|ARM
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Debug|x64.ActiveCfg = Debug|x64
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Debug|x64.Build.0 = Debug|x64
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Debug|x64.Deploy.0 = Debug|x64
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Debug|x86.ActiveCfg = Debug|x86
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Debug|x86.Build.0 = Debug|x86
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Debug|x86.Deploy.0 = Debug|x86
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Release|ARM.ActiveCfg = Release|ARM
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Release|ARM.Build.0 = Release|ARM
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Release|ARM.Deploy.0 = Release|ARM
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Release|x64.ActiveCfg = Release|x64
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Release|x64.Build.0 = Release|x64
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Release|x64.Deploy.0 = Release|x64
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Release|x86.ActiveCfg = Release|x86
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Release|x86.Build.0 = Release|x86
-		{0B6C9EE6-D543-4CE6-B280-97F0453ADE95}.Release|x86.Deploy.0 = Release|x86
 		{6CB5C936-7EB1-446E-8E4A-C8E3CE3D4B70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6CB5C936-7EB1-446E-8E4A-C8E3CE3D4B70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CB5C936-7EB1-446E-8E4A-C8E3CE3D4B70}.Debug|ARM.ActiveCfg = Debug|Any CPU

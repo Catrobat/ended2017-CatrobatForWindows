@@ -1,54 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Storage;
+using Catrobat.Core.ZIP;
 
-namespace Catrobat.Core
+namespace Catrobat.Core.Resources.SampleProjects
 {
-    public class SampleProjectLoader
+  public class SampleProjectLoader
+  {
+    private readonly Dictionary<string, string> sampleProjectNames = new Dictionary<string, string>
     {
-        private readonly Dictionary<string, string> sampleProjectNames = new Dictionary<string, string>
-            {
-                {"default.catroid", "Dafault"},
-                {"speakBrick.catroid", "SpeakBrick"},
-                {"Broadcast_test.catroid", "BroadCastBricks"},
-                {"pointTo.catroid", "PointBrick"},
-                {"LookBricks.catroid", "LookBrick"},
-                {"MotionBrick.catroid", "Motion"},
-                {"SwitchBackground.catroid", "BackgroundSwitching"},
-                {"glideTo.catroid", "GlideTo"},
-            };
+      {"default.catroid", "Dafault"},
+      {"speakBrick.catroid", "SpeakBrick"},
+      {"Broadcast_test.catroid", "BroadCastBricks"},
+      {"pointTo.catroid", "PointBrick"},
+      {"LookBricks.catroid", "LookBrick"},
+      {"MotionBrick.catroid", "Motion"},
+      {"SwitchBackground.catroid", "BackgroundSwitching"},
+      {"glideTo.catroid", "GlideTo"},
+    };
 
-        public void LoadSampleProjects()
+    public void LoadSampleProjects()
+    {
+      foreach (var pair in sampleProjectNames)
+      {
+        string projectFileName = pair.Key;
+        string projectName = pair.Value;
+
+        string path = "Resources/SampleProjects/";
+        path += projectFileName;
+
+        var resourceStream = StorageSystem.GetStorage().OpenResourcesStream(path);
+        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContext.ProjectsPath + "/" + projectName);
+
+
+        using (IStorage storage = StorageSystem.GetStorage())
         {
-            foreach (var pair in sampleProjectNames)
-            {
-                string projectFileName = pair.Key;
-                string projectName = pair.Value;
+          string xml = storage.ReadTestFile(CatrobatContext.ProjectsPath + "/" + projectName + "/" +
+                                   Project.ProjectCodePath);
 
-                string path = "Resources/SampleProjects/";
-                path += projectFileName;
+          var project = new Project(xml);
+          project.SetProjectName(projectName);
 
-                var uri = new Uri("/MetroCatData;component/" + path, UriKind.Relative);
-#if SILVERLIGHT
-          var resourceStream = Application.GetResourceStream(uri).Stream;
-          CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContext.ProjectsPath + "/" + projectName);
-        #else
-                // TODO: implement me
-#endif
-
-                using (IStorage storage = StorageSystem.GetStorage())
-                {
-                    string xml =
-                        storage.ReadTestFile(CatrobatContext.ProjectsPath + "/" + projectName + "/" +
-                                             Project.ProjectCodePath);
-
-                    var project = new Project(xml);
-                    project.SetProjectName(projectName);
-
-                    project.Save();
-                }
-            }
+          project.Save();
         }
+      }
     }
+  }
 }
