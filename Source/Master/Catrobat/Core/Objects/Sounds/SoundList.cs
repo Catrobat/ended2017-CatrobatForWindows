@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Xml.Linq;
 
-namespace Catrobat.Core.Objects
+namespace Catrobat.Core.Objects.Sounds
 {
     public class SoundList : DataObject
     {
@@ -10,7 +10,7 @@ namespace Catrobat.Core.Objects
 
         public SoundList(Sprite parent)
         {
-            Sounds = new ObservableCollection<SoundInfo>();
+            Sounds = new ObservableCollection<Sound>();
             sprite = parent;
         }
 
@@ -20,7 +20,7 @@ namespace Catrobat.Core.Objects
             LoadFromXML(xElement);
         }
 
-        public ObservableCollection<SoundInfo> Sounds { get; set; }
+        public ObservableCollection<Sound> Sounds { get; set; }
 
         public Sprite Sprite
         {
@@ -37,16 +37,16 @@ namespace Catrobat.Core.Objects
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            Sounds = new ObservableCollection<SoundInfo>();
+            Sounds = new ObservableCollection<Sound>();
             foreach (XElement element in xRoot.Elements())
-                Sounds.Add(new SoundInfo(element, sprite));
+                Sounds.Add(new Sound(element, sprite));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("soundList");
 
-            foreach (SoundInfo sound in Sounds)
+            foreach (Sound sound in Sounds)
                 xRoot.Add(sound.CreateXML());
 
             return xRoot;
@@ -55,15 +55,15 @@ namespace Catrobat.Core.Objects
         public DataObject Copy(Sprite parent)
         {
             var newSoundList = new SoundList(parent);
-            foreach (SoundInfo info in Sounds)
-                newSoundList.Sounds.Add(info.Copy(parent) as SoundInfo);
+            foreach (Sound info in Sounds)
+                newSoundList.Sounds.Add(info.Copy(parent) as Sound);
 
             return newSoundList;
         }
 
         public void Delete()
         {
-            foreach (SoundInfo sound in Sounds)
+            foreach (Sound sound in Sounds)
                 sound.Delete();
         }
     }

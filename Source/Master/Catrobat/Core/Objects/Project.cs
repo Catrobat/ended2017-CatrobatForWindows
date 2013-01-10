@@ -5,6 +5,8 @@ using System.Globalization;
 using System.IO;
 using System.Xml.Linq;
 using Catrobat.Core.ConverterLib;
+using Catrobat.Core.Objects.Bricks;
+using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Storage;
 
 namespace Catrobat.Core.Objects
@@ -301,7 +303,7 @@ namespace Catrobat.Core.Objects
         {
             foreach (Sprite sprite in spriteList.Sprites)
             {
-                foreach (CostumeData costume in sprite.Costumes.Costumes)
+                foreach (Costume costume in sprite.Costumes.Costumes)
                 {
                     byte[] image = costume.Image; // Forces load of image
                     byte[] thumbnail = costume.Thumbnail; // Forces load of thumbnail

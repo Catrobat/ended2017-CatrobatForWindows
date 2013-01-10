@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
-using Catrobat.Core.Helpers;
+using Catrobat.Core.Misc.Helpers;
 
 namespace Catrobat.Core.Objects
 {

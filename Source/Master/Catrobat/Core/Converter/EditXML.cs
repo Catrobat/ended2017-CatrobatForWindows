@@ -66,20 +66,20 @@ namespace Catrobat.Core.ConverterLib
             {
                 var elementsToAdd = new List<XElement>();
                 int id = 0;
-                foreach (XElement soundInfoRef in soundList.Elements("Common.SoundInfo"))
+                foreach (XElement soundInfoRef in soundList.Elements("Common.Sound"))
                 {
                     id++;
                     if (soundInfoRef.Attribute("reference") != null)
                     {
-                        XElement soundInfo = PathHelper.GetElement(soundInfoRef);
+                        XElement Sound = PathHelper.GetElement(soundInfoRef);
                         XElement correctSoundInfoRef = PathHelper.GetSoundListPath(id);
 
-                        foreach (XElement elementHoldingRef in doc.Descendants("soundInfo"))
+                        foreach (XElement elementHoldingRef in doc.Descendants("Sound"))
                             if (elementHoldingRef.Attribute("reference") != null &&
                                 elementHoldingRef.Attribute("reference").Value.Contains("Bricks.PlaySoundBrick"))
                             {
                                 XElement holdingElement = PathHelper.GetElement(elementHoldingRef);
-                                if (holdingElement == soundInfo)
+                                if (holdingElement == Sound)
                                 {
                                     elementHoldingRef.Parent.Add(new XElement(correctSoundInfoRef));
                                     referencesToRemove.Add(elementHoldingRef);
@@ -90,13 +90,13 @@ namespace Catrobat.Core.ConverterLib
                             element.Remove();
                         referencesToRemove.Clear();
 
-                        soundInfo.Name = "Common.SoundInfo";
+                        Sound.Name = "Common.Sound";
 
                         elementsToRemove.Add(soundInfoRef);
-                        elementsToRemove.Add(soundInfo);
+                        elementsToRemove.Add(Sound);
 
-                        elementsToAdd.Add(new XElement(soundInfo));
-                        soundInfo.Parent.Add(correctSoundInfoRef);
+                        elementsToAdd.Add(new XElement(Sound));
+                        Sound.Parent.Add(correctSoundInfoRef);
                     }
                 }
 

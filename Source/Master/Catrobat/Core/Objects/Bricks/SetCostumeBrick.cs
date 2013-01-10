@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
-using Catrobat.Core.Helpers;
+using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Objects.Costumes;
 
-namespace Catrobat.Core.Objects
+namespace Catrobat.Core.Objects.Bricks
 {
     public class SetCostumeBrick : Brick
     {
@@ -33,7 +34,7 @@ namespace Catrobat.Core.Objects
             }
         }
 
-        public CostumeData Costume
+        public Costume Costume
         {
             get
             {

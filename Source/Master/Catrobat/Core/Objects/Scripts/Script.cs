@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Bricks;
 
 namespace Catrobat.Core.Objects
 {

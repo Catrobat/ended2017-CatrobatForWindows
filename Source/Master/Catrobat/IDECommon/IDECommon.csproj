@@ -45,6 +45,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\LocalizedStrings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Resources\Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ApplicationResources.resx" />
+    <EmbeddedResource Include="Resources\Bricks\BrickResources.de.resx" />
+    <EmbeddedResource Include="Resources\Bricks\BrickResources.resx" />
+    <EmbeddedResource Include="Resources\Editor\EditorResources.resx" />
+    <EmbeddedResource Include="Resources\Main\MainResources.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Main\MainResources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -30,11 +30,11 @@ namespace Catrobat.Core.ConverterLib
 
         public static XElement GetSoundListPath(int id)
         {
-            string path = "../../../../../soundList/soundInfo";
+            string path = "../../../../../soundList/Sound";
             if (id > 1)
                 path += "[" + id + "]";
 
-            var soundRef = new XElement("soundInfo");
+            var soundRef = new XElement("Sound");
             var attributeRef = new XAttribute("reference", path);
             soundRef.Add(attributeRef);
 

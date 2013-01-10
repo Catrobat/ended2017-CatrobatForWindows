@@ -5,11 +5,25 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone">
 
-    <!--Application Resources-->
-    <Application.Resources>
-    </Application.Resources>
+  <Application.Resources>
+    <!--Global View Model Locator-->
 
-    <Application.ApplicationLifetimeObjects>
+
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Resources\Resources.xaml"/>
+        <ResourceDictionary Source="ViewModel/Resources.xaml"/>
+        <ResourceDictionary Source="Themes/ThemeResources.xaml"/>
+        <ResourceDictionary Source="Views/Editor/Scripts/ScriptBrickTemplates.xaml"/>
+        <ResourceDictionary Source="Views/Editor/Scripts/ReorderableListBoxStyles.xaml"/>
+        <ResourceDictionary Source="Views/Editor/Scripts/ScriptBrickAddData.xaml"/>
+        <ResourceDictionary Source="Controls/ImageButton/ImageButtonTemplates.xaml"/>
+        <ResourceDictionary Source="Controls/ScreenshotButton/ScreenshotButtonTemplates.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+
+  <Application.ApplicationLifetimeObjects>
         <!--Required object that handles lifetime events for the application-->
         <shell:PhoneApplicationService
             Launching="Application_Launching" Closing="Application_Closing"

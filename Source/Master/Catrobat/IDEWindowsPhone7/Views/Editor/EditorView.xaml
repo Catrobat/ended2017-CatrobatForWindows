@@ -1,0 +1,214 @@
+﻿<phone:PhoneApplicationPage x:Class="Catrobat.IDEWindowsPhone7.Views.Editor.EditorView"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            xmlns:reorderableListbox="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.ReorderableListbox"
+                            xmlns:imageButton="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.ImageButton"
+                            xmlns:c="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.PlayButton"
+                            mc:Ignorable="d"
+                            d:DesignWidth="480"
+                            d:DesignHeight="768"
+                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                            FontSize="{StaticResource PhoneFontSizeNormal}"
+                            Foreground="{StaticResource PhoneForegroundBrush}"
+                            SupportedOrientations="Portrait"
+                            Orientation="Portrait"
+                            shell:SystemTray.IsVisible="True"
+                            DataContext="{Binding Editor, Source={StaticResource Locator}}">
+
+  
+  <Grid x:Name="LayoutRoot"
+          Background="Transparent">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <controls:Pivot Name="pivotMain" Title="{ Binding CurrentProject.ProjectName }" SelectionChanged="pivotMain_SelectionChanged">
+      <controls:PivotItem Name="pivotSprites" Header="{Binding Path=Editor.PivotObjects, Source={StaticResource LocalizedStrings}}">
+        <reorderableListbox:ReorderListBox
+          x:Name="reorderListBoxSprites"
+          Margin="0 -25 0 0"
+          Height="560"
+          IsReorderEnabled="True"
+          ItemsSource="{Binding Sprites}"
+          d:DataContext="{Binding}"
+          SelectionChanged="reorderListBoxSprites_SelectionChanged"
+          ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleNormal}"
+          Foreground="White"
+          >
+          <reorderableListbox:ReorderListBox.ItemTemplate>
+            <DataTemplate>
+              <Grid Background="{StaticResource ObjectsBrush}" Margin="0 5 0 5" Height="90">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="3*"></ColumnDefinition>
+                  <ColumnDefinition Width="1*"></ColumnDefinition>
+                  <ColumnDefinition Width="1*"></ColumnDefinition>
+                  <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock FontSize="28" Margin="15 20 5 5" Text="{Binding Name}" />
+                <imageButton:ImageButton Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" x:Name="btnEditSpriteName" 
+                  ImageName="edit"
+                  Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
+                  Template="{StaticResource ImageButtonControlTemplate}" 
+                  Margin="5 5 5 5" Click="btnEditSpriteName_Click"
+                  IsAutoColor="False" IsDark="True"/>
+
+                <imageButton:ImageButton Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" x:Name="btnCopySprite" 
+                  ImageName="copy"
+                  Text="{Binding Path=Editor.ButtonCopy, Source={StaticResource LocalizedStrings}}"
+                  Template="{StaticResource ImageButtonControlTemplate}" 
+                  Margin="5 5 5 5" Click="btnCopySprite_Click" 
+                  IsAutoColor="False" IsDark="True"/>
+
+                <imageButton:ImageButton Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" x:Name="btnDeleteSprite" 
+                  ImageName="delete"
+                  Text="{Binding Path=Editor.ButtonDelete, Source={StaticResource LocalizedStrings}}"
+                  Template="{StaticResource ImageButtonControlTemplate}" 
+                  Margin="5 5 5 5"
+                  Click="btnDeleteSprite_Click"
+                  IsAutoColor="False" IsDark="True"/>
+              </Grid>
+            </DataTemplate>
+          </reorderableListbox:ReorderListBox.ItemTemplate>
+        </reorderableListbox:ReorderListBox>
+
+      </controls:PivotItem>
+
+      <!--Pivot item scripts-->
+      <controls:PivotItem Name="pivotScripts" Header="{Binding Path=Editor.PivotActions, Source={StaticResource LocalizedStrings}}">
+        <reorderableListbox:ReorderListBox
+          VerticalAlignment="Top"
+          x:Name="reorderListBoxScriptBricks"
+          Margin="0 -25 0 0"
+          Height="560"
+          IsReorderEnabled="True"
+          ItemsSource="{Binding ScriptBricks}"
+          ItemTemplate="{StaticResource ScriptsBrickTemplate}"
+          SelectionChanged="reorderListBoxScriptBricks_SelectionChanged"
+          Loaded="reorderListBoxScriptBricks_Loaded"
+          ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
+          Foreground="White"
+          />
+        <!--ManipulationStarted="reorderListBoxScriptBricks_ManipulationStarted"-->
+
+      </controls:PivotItem>
+
+      <!--Pivot item costume-->
+      <controls:PivotItem Name="pivotCostumes" Header="{Binding Path=Editor.PivotCostumes, Source={StaticResource LocalizedStrings}}">
+        <reorderableListbox:ReorderListBox
+          x:Name="reorderListBoxCostumes"
+          Margin="0 -25 0 0"
+          Height="560"
+          IsReorderEnabled="True"
+          ItemsSource="{Binding Costumes}"
+          SelectionChanged="reorderListBoxCostumes_SelectionChanged"
+          ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleNormal}"
+          Foreground="White">
+          <reorderableListbox:ReorderListBox.ItemTemplate>
+            <DataTemplate>
+              <Grid Background="{StaticResource CostumesBrush}" Margin="0 5 0 5">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="1*" />
+                  <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="{Binding Image}" MaxWidth="120" MaxHeight="120" Margin="10 5 5 5" VerticalAlignment="Stretch" />
+
+                <Grid Grid.Column="1" Margin="5">
+                  <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                  </Grid.RowDefinitions>
+                  <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" VerticalAlignment="Center" />
+
+                  <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 15 0" >
+                    <imageButton:ImageButton Grid.Column="0" VerticalAlignment="Center" x:Name="btnEditCostumeName" 
+                      ImageName="edit"
+                      Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
+                      Template="{StaticResource ImageButtonControlTemplate}"
+                      Margin="5 5 5 5" Click="btnEditCostumeName_Click" 
+                      IsAutoColor="False" IsDark="True"/>
+
+                    <imageButton:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="btnCopyCostume" 
+                      ImageName="copy"
+                      Text="{Binding Path=Editor.ButtonCopy, Source={StaticResource LocalizedStrings}}"
+                      Template="{StaticResource ImageButtonControlTemplate}" 
+                      Margin="5 5 5 5" Click="btnCopyCostume_Click"
+                      IsAutoColor="False" IsDark="True"/>
+
+                    <imageButton:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="btnDeleteCostume" 
+                      ImageName="delete"
+                      Text="{Binding Path=Editor.ButtonDelete, Source={StaticResource LocalizedStrings}}"
+                      Template="{StaticResource ImageButtonControlTemplate}"
+                      Margin="5 5 5 5"
+                      Click="btnDeleteCostume_Click"
+                      IsAutoColor="False" IsDark="True"/>
+                  </StackPanel>
+                </Grid>
+              </Grid>
+            </DataTemplate>
+          </reorderableListbox:ReorderListBox.ItemTemplate>
+        </reorderableListbox:ReorderListBox>
+      </controls:PivotItem>
+
+      <!--Pivot item sounds-->
+      <controls:PivotItem Name="pivotSounds" Header="{Binding Path=Editor.PivotSounds, Source={StaticResource LocalizedStrings}}">
+        <reorderableListbox:ReorderListBox
+          x:Name="reorderListBoxSounds"
+          Margin="0 -25 0 0"
+          Height="560"
+          IsReorderEnabled="True"
+          ItemsSource="{Binding Sounds}"
+          SelectionChanged="reorderListBoxSounds_SelectionChanged"
+          ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleNormal}"
+          Foreground="White">
+          <reorderableListbox:ReorderListBox.ItemTemplate>
+            <DataTemplate>
+              <Grid Background="{StaticResource SoundsBrush}" Margin="0 5 0 5">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="1*" />
+                  <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <c:PlayButton Grid.Column="0" Height="80" Width="80" Click="buttonSoundPlay_Click" />
+                <Grid Grid.Column="1" Margin="5">
+                  <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                  </Grid.RowDefinitions>
+                  <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" VerticalAlignment="Center" />
+
+                  <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 15 0" >
+                    <imageButton:ImageButton Grid.Column="0" VerticalAlignment="Center"
+                      ImageName="edit"
+                      Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
+                      Template="{StaticResource ImageButtonControlTemplate}"
+                      Margin="5 5 5 5" Click="btnEditSoundName_Click" 
+                      IsAutoColor="False" IsDark="True"/>
+
+                    <!--<c:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="btnCopySound" 
+                      ImageName="copy"
+                      Text="{Binding Path=Editor.ButtonCopy, Source={StaticResource LocalizedStrings}}"
+                      Template="{StaticResource ImageButtonControlTemplate}" 
+                      Margin="5 5 5 5" Click=""/>-->
+
+                    <imageButton:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="btnDeleteSound" 
+                      ImageName="delete"
+                      Text="{Binding Path=Editor.ButtonDelete, Source={StaticResource LocalizedStrings}}"
+                      Template="{StaticResource ImageButtonControlTemplate}"
+                      Margin="5 5 5 5"
+                      Click="btnDeleteSound_Click"
+                      IsAutoColor="False" IsDark="True"/>
+                  </StackPanel>
+                </Grid>
+              </Grid>
+            </DataTemplate>
+          </reorderableListbox:ReorderListBox.ItemTemplate>
+        </reorderableListbox:ReorderListBox>
+      </controls:PivotItem>
+    </controls:Pivot>
+  </Grid>
+</phone:PhoneApplicationPage>

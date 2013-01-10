@@ -18,6 +18,8 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,14 +48,23 @@
     <Compile Include="Converter\Converter.cs" />
     <Compile Include="Converter\EditXML.cs" />
     <Compile Include="Converter\PathHelper.cs" />
-    <Compile Include="Helpers\ApplicationInformation.cs" />
-    <Compile Include="Helpers\DeviceInformationHelper.cs" />
-    <Compile Include="Helpers\FileNameGenerator.cs" />
-    <Compile Include="Helpers\ImageHelper.cs" />
-    <Compile Include="Helpers\ReadHelper.cs" />
-    <Compile Include="Helpers\XPathHelper.cs" />
+    <Compile Include="CostumeBuilder.cs" />
+    <Compile Include="Misc\Helpers\FormatHelper.cs" />
+    <Compile Include="Misc\Helpers\ApplicationInformation.cs" />
+    <Compile Include="Misc\Helpers\DeviceInformationHelper.cs" />
+    <Compile Include="Misc\Helpers\FileNameGenerator.cs" />
+    <Compile Include="Misc\Helpers\FormUpload.cs" />
+    <Compile Include="Misc\Helpers\ImageHelper.cs" />
+    <Compile Include="Misc\Helpers\LanguageHelper.cs" />
+    <Compile Include="Misc\Helpers\MD5.cs" />
+    <Compile Include="Misc\Helpers\ReadHelper.cs" />
+    <Compile Include="Misc\Helpers\XPathHelper.cs" />
     <Compile Include="ICatrobatContext.cs" />
     <Compile Include="LocalSettings.cs" />
+    <Compile Include="Misc\JSON\JSONClassDeserializer.cs" />
+    <Compile Include="Misc\JSON\JSONStatusResponse.cs" />
+    <Compile Include="Misc\ServerCommunication.cs" />
+    <Compile Include="Misc\UtilToken.cs" />
     <Compile Include="Objects\Bricks\Brick.cs" />
     <Compile Include="Objects\Bricks\BrickList.cs" />
     <Compile Include="Objects\Bricks\BroadcastBrick.cs" />
@@ -100,9 +111,9 @@
     <Compile Include="Objects\Bricks\TurnLeftBrick.cs" />
     <Compile Include="Objects\Bricks\TurnRightBrick.cs" />
     <Compile Include="Objects\Bricks\WaitBrick.cs" />
-    <Compile Include="Objects\Costume\CostumeData.cs" />
-    <Compile Include="Objects\Costume\CostumeDataList.cs" />
-    <Compile Include="Objects\Costume\CostumeReference.cs" />
+    <Compile Include="Objects\Costumes\Costume.cs" />
+    <Compile Include="Objects\Costumes\CostumeList.cs" />
+    <Compile Include="Objects\Costumes\CostumeReference.cs" />
     <Compile Include="Objects\DataObject.cs" />
     <Compile Include="Objects\DataRootObject.cs" />
     <Compile Include="Objects\OnlineProjectHeader.cs" />
@@ -113,8 +124,8 @@
     <Compile Include="Objects\Scripts\ScriptList.cs" />
     <Compile Include="Objects\Scripts\StartScript.cs" />
     <Compile Include="Objects\Scripts\WhenScript.cs" />
-    <Compile Include="Objects\Sounds\SoundInfo.cs" />
-    <Compile Include="Objects\Sounds\SoundInfoReference.cs" />
+    <Compile Include="Objects\Sounds\Sound.cs" />
+    <Compile Include="Objects\Sounds\SoundReference.cs" />
     <Compile Include="Objects\Sounds\SoundList.cs" />
     <Compile Include="Objects\Sprite.cs" />
     <Compile Include="Objects\SpriteList.cs" />
@@ -147,6 +158,7 @@
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

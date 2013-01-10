@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
-using Catrobat.Core.Helpers;
+using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects.Sounds;
 
-namespace Catrobat.Core.Objects
+namespace Catrobat.Core.Objects.Bricks
 {
     public class PlaySoundBrick : Brick
     {
-        private SoundInfoReference soundInfoReference;
+        private SoundReference soundInfoReference;
 
         public PlaySoundBrick()
         {
@@ -21,7 +21,7 @@ namespace Catrobat.Core.Objects
         {
         }
 
-        internal SoundInfoReference SoundInfoReference
+        internal SoundReference SoundInfoReference
         {
             get { return soundInfoReference; }
             set
@@ -34,35 +34,35 @@ namespace Catrobat.Core.Objects
             }
         }
 
-        public SoundInfo SoundInfo
+        public Sound Sound
         {
             get
             {
                 if (soundInfoReference == null)
                     return null;
 
-                return soundInfoReference.SoundInfo;
+                return soundInfoReference.Sound;
             }
             set
             {
                 if (soundInfoReference == null)
                 {
-                    soundInfoReference = new SoundInfoReference(sprite);
+                    soundInfoReference = new SoundReference(sprite);
                     soundInfoReference.Reference = XPathHelper.getReference(value, sprite);
                 }
 
-                if (soundInfoReference.SoundInfo == value)
+                if (soundInfoReference.Sound == value)
                     return;
 
-                soundInfoReference.SoundInfo = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("SoundInfo"));
+                soundInfoReference.Sound = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("Sound"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            if (xRoot.Element("soundInfo") != null)
-                soundInfoReference = new SoundInfoReference(xRoot.Element("soundInfo"), sprite);
+            if (xRoot.Element("Sound") != null)
+                soundInfoReference = new SoundReference(xRoot.Element("Sound"), sprite);
         }
 
         internal override XElement CreateXML()
@@ -81,7 +81,7 @@ namespace Catrobat.Core.Objects
         {
             var newBrick = new PlaySoundBrick(parent);
             if (soundInfoReference != null)
-                newBrick.soundInfoReference = soundInfoReference.Copy(parent) as SoundInfoReference;
+                newBrick.soundInfoReference = soundInfoReference.Copy(parent) as SoundReference;
 
             return newBrick;
         }

@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Xml.Linq;
 
-namespace Catrobat.Core.Objects
+namespace Catrobat.Core.Objects.Bricks
 {
     public class SetBrightnessBrick : Brick
     {

@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Objects.Sounds;
 
 namespace Catrobat.Core.Objects
 {
     public class Sprite : DataObject
     {
-        private CostumeDataList costumes;
+        private CostumeList costumes;
         private string name;
 
         private ScriptList scripts;
@@ -16,7 +18,7 @@ namespace Catrobat.Core.Objects
         {
             Project = project;
             scripts = new ScriptList(this);
-            costumes = new CostumeDataList(this);
+            costumes = new CostumeList(this);
             sounds = new SoundList(this);
         }
 
@@ -54,7 +56,7 @@ namespace Catrobat.Core.Objects
             }
         }
 
-        public CostumeDataList Costumes
+        public CostumeList Costumes
         {
             get { return costumes; }
             set
@@ -83,7 +85,7 @@ namespace Catrobat.Core.Objects
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("costumeDataList") != null)
-                costumes = new CostumeDataList(xRoot.Element("costumeDataList"), this);
+                costumes = new CostumeList(xRoot.Element("costumeDataList"), this);
 
             name = xRoot.Element("name").Value;
 
@@ -119,7 +121,7 @@ namespace Catrobat.Core.Objects
             var newSprite = new Sprite(Project);
             newSprite.name = name;
             if (costumes != null)
-                newSprite.costumes = costumes.Copy(newSprite) as CostumeDataList;
+                newSprite.costumes = costumes.Copy(newSprite) as CostumeList;
             if (sounds != null)
                 newSprite.sounds = sounds.Copy(newSprite) as SoundList;
             if (scripts != null)

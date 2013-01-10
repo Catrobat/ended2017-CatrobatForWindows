@@ -1,5 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Objects.Bricks;
+using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Objects.Sounds;
 
 namespace Catrobat.Core
 {
@@ -55,14 +58,14 @@ namespace Catrobat.Core
             var sprite = new Sprite(project);
             sprite.Name = "Object 1";
 
-            sprite.Costumes = new CostumeDataList(sprite);
-            var costume = new CostumeData("Cat", sprite);
+            sprite.Costumes = new CostumeList(sprite);
+            var costume = new Costume("Cat", sprite);
             var image = new byte[0]; //new BitmapImage(new Uri(costume.FileName, UriKind.Relative)); // TODO: fix me
             //costume.Image = image;
             sprite.Costumes.Costumes.Add(costume);
 
             sprite.Sounds = new SoundList(sprite);
-            var sound = new SoundInfo("Miau_Sound", sprite);
+            var sound = new Sound("Miau_Sound", sprite);
             sprite.Sounds.Sounds.Add(sound);
 
             sprite.Scripts = new ScriptList(sprite);

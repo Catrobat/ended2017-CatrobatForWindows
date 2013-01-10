@@ -1,0 +1,64 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Catrobat.IDEWindowsPhone7.Views.Main.OnlineProjectPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded"
+    DataContext="{Binding Main.SelectedOnlineProject, Source={StaticResource Locator}}">
+
+  <!--LayoutRoot is the root grid where all page content is placed-->
+  <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <!--TitlePanel contains the name of the application and page title-->
+    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+      <TextBlock x:Name="ApplicationTitle" Text="{Binding Author}" Style="{StaticResource PhoneTextNormalStyle}"/>
+      <TextBlock x:Name="PageTitle" Text="{Binding ProjectName}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+    </StackPanel>
+
+    <!--ContentPanel - place additional content here-->
+    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="200" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Image Width="200" Height="333" Grid.Column="0" VerticalAlignment="Top" Source="{Binding ScreenshotBigUrl}" />
+
+      <StackPanel Grid.Column="1" Margin="15 0 5 0">
+        <TextBlock Text="{Binding Path=Main.OnlineProjectProject, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0" />
+        <TextBlock Text="{Binding ProjectName}" TextWrapping="Wrap" />
+        <TextBlock Text="{Binding Path=Main.OnlineProjectDescription, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0 10 0 0" />
+        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
+        <TextBlock Text="{Binding Path=Main.OnlineProjectUploaded, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0 10 0 0" />
+        <TextBlock TextWrapping="Wrap" x:Name="UploadedLabel" />
+        <TextBlock FontWeight="Bold" Text="{Binding Author}" TextWrapping="Wrap" />
+        <TextBlock TextWrapping="Wrap" x:Name="VersionLabel" />
+        <TextBlock Text="{Binding Path=Main.OnlineProjectStatistics, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0 10 0 0" />
+        <TextBlock TextWrapping="Wrap" x:Name="ViewsLabel" />
+        <TextBlock TextWrapping="Wrap" x:Name="DownloadsLabel" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+
+  <phone:PhoneApplicationPage.ApplicationBar>
+    <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+      <shell:ApplicationBarIconButton IconUri="/Content/Images/ApplicationBar/dark/appbar.download.rest.png" Text="*" Click="Download_Click" />
+      <shell:ApplicationBar.MenuItems>
+        <shell:ApplicationBarMenuItem Text="*" Click="Report_Click" />
+        <shell:ApplicationBarMenuItem Text="*" Click="License_Click" />
+      </shell:ApplicationBar.MenuItems>
+    </shell:ApplicationBar>
+  </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
