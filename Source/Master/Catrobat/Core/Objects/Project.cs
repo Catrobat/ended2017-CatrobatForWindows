@@ -381,7 +381,7 @@ namespace Catrobat.Core.Objects
                     document.Save(writer, SaveOptions.None);
 
                     string xml = writer.GetStringBuilder().ToString();
-                    storage.WriteTestFile(BasePath + "/" + ProjectCodePath, xml);
+                    storage.WriteTextFile(BasePath + "/" + ProjectCodePath, xml);
                 }
                 catch
                 {

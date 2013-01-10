@@ -48,14 +48,12 @@ namespace Catrobat.Core.Storage
 
     bool IncreaseQuotaTo(long quota);
 
-    string ReadTestFile(string path);
+    string ReadTextFile(string path);
 
-    void WriteTestFile(string path, string content);
+    void WriteTextFile(string path, string content);
 
     object ReadSerializableObject(string path, Type type);
 
     void WriteSerializableObject(string path, object serializableObject);
-
-    Stream OpenResourcesStream(string path);
   }
 }

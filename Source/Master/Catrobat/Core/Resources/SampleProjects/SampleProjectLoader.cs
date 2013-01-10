@@ -29,14 +29,14 @@ namespace Catrobat.Core.Resources.SampleProjects
         string path = "Resources/SampleProjects/";
         path += projectFileName;
 
-        var resourceStream = StorageSystem.GetStorage().OpenResourcesStream(path);
+        var resourceStream = ResourceLoader.OpenResourceStream(path);
         CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContext.ProjectsPath + "/" + projectName);
 
 
         using (IStorage storage = StorageSystem.GetStorage())
         {
-          string xml = storage.ReadTestFile(CatrobatContext.ProjectsPath + "/" + projectName + "/" +
-                                   Project.ProjectCodePath);
+          string xml = storage.ReadTextFile(CatrobatContext.ProjectsPath + "/" + projectName + "/" +
+                                   Project.ProjectCodePath); // TODO: use ResourceLoader instead
 
           var project = new Project(xml);
           project.SetProjectName(projectName);

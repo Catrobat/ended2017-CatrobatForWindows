@@ -121,8 +121,10 @@
     <Compile Include="Objects\SpriteReference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\SampleProjects\SampleProjectLoader.cs" />
+    <Compile Include="Storage\IResources.cs" />
     <Compile Include="Storage\IStorage.cs" />
     <Compile Include="Storage\IStorageFactory.cs" />
+    <Compile Include="Storage\ResourceManager.cs" />
     <Compile Include="Storage\StorageSystem.cs" />
     <Compile Include="XmlStringWriter.cs" />
     <Compile Include="ZIP\CatrobatZip.cs" />

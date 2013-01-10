@@ -95,7 +95,7 @@ namespace Catrobat.Core
             {
                 using (IStorage storage = StorageSystem.GetStorage())
                 {
-                    string xml = storage.ReadTestFile(projectCodeFile + "/" + Project.ProjectCodePath);
+                    string xml = storage.ReadTextFile(projectCodeFile + "/" + Project.ProjectCodePath);
                     CurrentProject = new Project(xml);
                 }
             }
@@ -156,7 +156,7 @@ namespace Catrobat.Core
 
                 storage.CopyDirectory(sourcePath, destinationPath);
 
-                string xml = storage.ReadTestFile(destinationPath + "/" + Project.ProjectCodePath);
+                string xml = storage.ReadTextFile(destinationPath + "/" + Project.ProjectCodePath);
                 var newProject = new Project(xml);
                 newProject.SetProjectName(newProjectName);
                 newProject.Save();
@@ -276,7 +276,7 @@ namespace Catrobat.Core
 #endif
                 }
 
-                string xml = storage.ReadTestFile(projectCodeFile + "/" + Project.ProjectCodePath);
+                string xml = storage.ReadTextFile(projectCodeFile + "/" + Project.ProjectCodePath);
                 CurrentProject = new Project(xml);
 
                 CurrentProject.SetProjectName(projectName);
