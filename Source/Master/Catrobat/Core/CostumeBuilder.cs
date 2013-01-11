@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO;
-using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Costumes;
-using Catrobat.Core.Storage;
 
-namespace MetroCatData
+namespace Catrobat.Core
 {
   #region Delegates
   public delegate void LoadCostumeSuccess();

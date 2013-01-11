@@ -12,7 +12,6 @@ using Microsoft.Phone.Controls;
 using System.Collections.ObjectModel;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
-using MetroCatIDE.ViewModel;
 using Microsoft.Xna.Framework.Media;
 
 namespace Catrobat.IDEWindowsPhone7.Views.Editor.Sounds

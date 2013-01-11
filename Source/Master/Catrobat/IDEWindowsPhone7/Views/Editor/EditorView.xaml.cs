@@ -17,7 +17,6 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
 using System.Windows.Controls;
-using MetroCatIDE.ViewModel;
 using System.Windows;
 using System.ComponentModel;
 using SoundState = Microsoft.Xna.Framework.Audio.SoundState;

@@ -8,7 +8,6 @@ using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone7.Misc.Storage;
 using Catrobat.IDEWindowsPhone7.Themes;
 using Catrobat.IDEWindowsPhone7.ViewModel;
-using MetroCatIDE.ViewModel;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Resources;

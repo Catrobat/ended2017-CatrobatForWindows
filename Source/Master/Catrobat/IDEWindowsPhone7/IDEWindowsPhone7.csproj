@@ -115,6 +115,9 @@
     <Compile Include="Misc\Storage\StorageFactoryPhone7.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Misc\Storage\StoragePhone7.cs" />
+    <Compile Include="TestMainPage.xaml.cs">
+      <DependentUpon>TestMainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Themes\ColorChooser.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeChooser.cs" />
@@ -220,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="TestMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
