@@ -6,7 +6,7 @@
   xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+  xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
   xmlns:reorderableListbox="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.ReorderableListbox"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -29,7 +29,7 @@
     
     <!--ContentPanel - place additional content here-->
     <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10 0 0 15" VerticalAlignment="Top">
-      <controls:PivotItem Name="pivotScripts" Header="Aktionen">
+      <!--<controls:PivotItem Name="pivotScripts" Header="Aktionen">-->
         <reorderableListbox:ReorderListBox
           Margin="-10 0 10 10"
           IsReorderEnabled="False"
@@ -40,7 +40,7 @@
           SelectionChanged="reorderListBoxScriptBricks_SelectionChanged"
           ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleAddNewScriptBrick}">
         </reorderableListbox:ReorderListBox>
-      </controls:PivotItem>
+      <!--</controls:PivotItem>-->
     </Grid>
   </Grid>
 </phone:PhoneApplicationPage>

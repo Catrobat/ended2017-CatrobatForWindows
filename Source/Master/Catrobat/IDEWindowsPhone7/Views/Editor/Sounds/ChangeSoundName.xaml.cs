@@ -2,11 +2,10 @@
 using System.Windows.Controls;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.IDECommon.Resources;
-using MetroCatIDE;
+using Catrobat.IDECommon.Resources.Editor;
 using Microsoft.Phone.Controls;
 using System.ComponentModel;
 using Microsoft.Phone.Shell;
-using MetroCatIDE.Content.Resources.Editor;
 
 namespace Catrobat.IDEWindowsPhone7.Views.Editor.Sounds
 {

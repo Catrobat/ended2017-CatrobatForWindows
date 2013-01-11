@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Windows.Controls;
+using Catrobat.Core.Objects;
+using Catrobat.Core.Objects.Bricks;
 using Catrobat.IDECommon.Resources;
+using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.IDEWindowsPhone7.ViewModel;
-using MetroCatIDE;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using MetroCatIDE.Content.Resources.Editor;
 using System.ComponentModel;
 
 namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts

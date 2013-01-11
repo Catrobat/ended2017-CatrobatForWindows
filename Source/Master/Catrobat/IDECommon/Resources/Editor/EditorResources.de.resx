@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BroadcastMessage" xml:space="preserve">
+    <value>Nachricht</value>
+  </data>
+  <data name="ButtonAddCostume" xml:space="preserve">
+    <value>Neues Kostüm</value>
+  </data>
+  <data name="ButtonAddObject" xml:space="preserve">
+    <value>Neues Objekt</value>
+  </data>
+  <data name="ButtonAddScript" xml:space="preserve">
+    <value>Neue Aktion</value>
+  </data>
+  <data name="ButtonAddSound" xml:space="preserve">
+    <value>Neuer Klang</value>
+  </data>
+  <data name="ButtonBack" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="ButtonCancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ButtonChange" xml:space="preserve">
+    <value>Ändern</value>
+  </data>
+  <data name="ButtonCopy" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="ButtonDelete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="ButtonPlayProject" xml:space="preserve">
+    <value>Projekt abspielen</value>
+  </data>
+  <data name="ButtonSave" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="ButtonUse" xml:space="preserve">
+    <value>Verwenden</value>
+  </data>
+  <data name="Camera" xml:space="preserve">
+    <value>Kamera</value>
+  </data>
+  <data name="CostumeName" xml:space="preserve">
+    <value>Kostümname</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Bild</value>
+  </data>
+  <data name="ImageGallery" xml:space="preserve">
+    <value>Bildergalerie</value>
+  </data>
+  <data name="MediaLibrary" xml:space="preserve">
+    <value>Medienbibliothek</value>
+  </data>
+  <data name="MenuProjectSettings" xml:space="preserve">
+    <value>Projekt Einstellungen</value>
+  </data>
+  <data name="MenuStartSite" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="MessageBoxDeleteCostumeHeader" xml:space="preserve">
+    <value>Löschen des Kostüms</value>
+  </data>
+  <data name="MessageBoxDeleteCostumeText1" xml:space="preserve">
+    <value>Sind Sie sicher, dass sie das Kostüm: </value>
+  </data>
+  <data name="MessageBoxDeleteCostumeText2" xml:space="preserve">
+    <value>löschen wollen?</value>
+  </data>
+  <data name="MessageBoxDeleteSoundHeader" xml:space="preserve">
+    <value>Löschen des Sounds </value>
+  </data>
+  <data name="MessageBoxDeleteSoundText1" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie den Klang: </value>
+  </data>
+  <data name="MessageBoxDeleteSoundText2" xml:space="preserve">
+    <value> löschen wollen?</value>
+  </data>
+  <data name="MessageBoxDeleteSpriteHeader" xml:space="preserve">
+    <value>Löschen des Objekts</value>
+  </data>
+  <data name="MessageBoxDeleteSpriteText1" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie das Objekt: </value>
+  </data>
+  <data name="MessageBoxDeleteSpriteText2" xml:space="preserve">
+    <value> löschen wollen?</value>
+  </data>
+  <data name="MessageBoxNotEnoughSpaceImageHeader" xml:space="preserve">
+    <value>Zu wenig Speicherplatz</value>
+  </data>
+  <data name="MessageBoxNotEnoughSpaceImageText" xml:space="preserve">
+    <value>Ohne zusätzlichen Speicherplatz kann das Bild nicht gespeichert werden.</value>
+  </data>
+  <data name="MessageBoxNotEnoughSpaceSoundHeader" xml:space="preserve">
+    <value>Zu wenig Speicherplatz</value>
+  </data>
+  <data name="MessageBoxNotEnoughSpaceSoundText" xml:space="preserve">
+    <value>Ohne zusätzlichen Speicherplatz kann der Klang nicht gespeichert werden.</value>
+  </data>
+  <data name="MessageBoxWrongImageFormatHeader" xml:space="preserve">
+    <value>Nicht unterstütztes Format</value>
+  </data>
+  <data name="MessageBoxWrongImageFormatText" xml:space="preserve">
+    <value>Das gewählte Bild hat leider ein nicht unterstütztes Format.</value>
+  </data>
+  <data name="NothingItem" xml:space="preserve">
+    <value>Nichts...</value>
+  </data>
+  <data name="PivotActions" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="PivotCostumes" xml:space="preserve">
+    <value>Kostüme</value>
+  </data>
+  <data name="PivotObjects" xml:space="preserve">
+    <value>Objekte</value>
+  </data>
+  <data name="PivotSounds" xml:space="preserve">
+    <value>Klänge</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Projektname</value>
+  </data>
+  <data name="Recorder" xml:space="preserve">
+    <value>Recorder</value>
+  </data>
+  <data name="RecorderRecord" xml:space="preserve">
+    <value>Rec</value>
+  </data>
+  <data name="RecorderRecordTime" xml:space="preserve">
+    <value>Zeit</value>
+  </data>
+  <data name="RecorderStop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="Recording" xml:space="preserve">
+    <value>Aufnahme</value>
+  </data>
+  <data name="SoundName" xml:space="preserve">
+    <value>Klangname</value>
+  </data>
+  <data name="SpriteName" xml:space="preserve">
+    <value>Objektname</value>
+  </data>
+  <data name="TitleChangeCostumeName" xml:space="preserve">
+    <value>KOSTÜMNAMEN ÄNDERN</value>
+  </data>
+  <data name="TitleChangeSoundName" xml:space="preserve">
+    <value>KLANGNAMEN ÄNDERN</value>
+  </data>
+  <data name="TitleChangeSpriteName" xml:space="preserve">
+    <value>OBJEKTNAMEN ÄNDERN</value>
+  </data>
+  <data name="TitleChooseBrick" xml:space="preserve">
+    <value>BAUSTEIN WÄHLEN</value>
+  </data>
+  <data name="TitleChooseCategory" xml:space="preserve">
+    <value>KATEGORIE WÄHLEN</value>
+  </data>
+  <data name="TitleChooseCostumeName" xml:space="preserve">
+    <value>KOSTÜMNAMEN WÄHLEN</value>
+  </data>
+  <data name="TitleChooseSound" xml:space="preserve">
+    <value>KLANG WÄHLEN</value>
+  </data>
+  <data name="TitleChooseSoundName" xml:space="preserve">
+    <value>KLANGNAMEN WÄHLEN</value>
+  </data>
+  <data name="TitleNewBroadcastMessage" xml:space="preserve">
+    <value>NEUE NACHRICHT</value>
+  </data>
+  <data name="TitleNewCostume" xml:space="preserve">
+    <value>NEUES KOSTÜM</value>
+  </data>
+  <data name="TitleNewSound" xml:space="preserve">
+    <value>NEUER KLANG</value>
+  </data>
+  <data name="TitleNewSprite" xml:space="preserve">
+    <value>NEUES OBJEKT</value>
+  </data>
+  <data name="TitleProjectSettings" xml:space="preserve">
+    <value>PROJEKT EINSTELLUNGEN</value>
+  </data>
+  <data name="TitleRecorder" xml:space="preserve">
+    <value>KLANG AUFNEHMEN</value>
+  </data>
+</root>

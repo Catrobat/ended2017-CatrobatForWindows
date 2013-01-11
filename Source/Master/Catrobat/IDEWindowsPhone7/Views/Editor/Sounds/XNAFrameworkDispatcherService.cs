@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Threading;
+using Microsoft.Xna.Framework;
 
 namespace Catrobat.IDEWindowsPhone7.Views.Editor.Sounds
 {

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using Catrobat.IDEWindowsPhone7.Controls.PlayButton;
+using Catrobat.IDEWindowsPhone7.Controls.Buttons;
 using Microsoft.Xna.Framework.Media;
 
 namespace Catrobat.IDEWindowsPhone7.Views.Editor.Sounds

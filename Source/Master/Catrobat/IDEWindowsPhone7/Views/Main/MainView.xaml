@@ -3,14 +3,13 @@
                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                             xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-                            xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                             xmlns:MvvmLightExtras="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
                             xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone7.Converters"
-                            xmlns:screenshotButton="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.ScreenshotButton"
-                            xmlns:imageButton="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.ImageButton"
+                            xmlns:imageButton="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.Buttons"
+                            xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -67,7 +66,7 @@
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="{ Binding CurrentProject.ProjectName}" Margin="0 0 0 20" Style="{StaticResource PhoneTextLargeStyle}" />
             <Grid Height="400">
               <Image Name="imageCurrentProjectScreenshot" Source="{Binding CurrentProjectScreenshot}" />
-              <screenshotButton:ScreenshotButton VerticalAlignment="Center" x:Name="buttonPlayCurrentProject"          
+              <imageButton:ScreenshotButton VerticalAlignment="Center" x:Name="buttonPlayCurrentProject"          
                 Template="{StaticResource ScreenshotButtonControlTemplate}"
                 Margin="0,0,0,0" Click="buttonPlayCurrentProject_Click" Width="130" />
             </Grid>

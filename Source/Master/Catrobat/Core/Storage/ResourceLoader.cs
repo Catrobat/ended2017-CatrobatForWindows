@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Catrobat.Core.Storage
 {
-  class ResourceLoader
+  public class ResourceLoader
   {
     private static IResources _resources;
 

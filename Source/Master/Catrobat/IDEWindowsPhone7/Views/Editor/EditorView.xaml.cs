@@ -4,7 +4,8 @@ using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.IDECommon.Resources;
-using Catrobat.IDEWindowsPhone7.Controls.PlayButton;
+using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDEWindowsPhone7.Controls.Buttons;
 using Catrobat.IDEWindowsPhone7.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone7.Misc;
 using Catrobat.IDEWindowsPhone7.ViewModel;
@@ -12,15 +13,12 @@ using Catrobat.IDEWindowsPhone7.Views.Editor.Costumes;
 using Catrobat.IDEWindowsPhone7.Views.Editor.Scripts;
 using Catrobat.IDEWindowsPhone7.Views.Editor.Sounds;
 using Catrobat.IDEWindowsPhone7.Views.Editor.Sprites;
-using MetroCatIDE;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
 using System.Windows.Controls;
 using MetroCatIDE.ViewModel;
 using System.Windows;
-using MetroCatIDE.Views.Editor.Sounds;
-using MetroCatIDE.Content.Resources.Editor;
 using System.ComponentModel;
 using SoundState = Microsoft.Xna.Framework.Audio.SoundState;
 
@@ -266,9 +264,9 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor
       }
     }
 
-    private void SoundPlayerStateChanged(SoundState oldState, SoundState newState)
+    private void SoundPlayerStateChanged(Misc.SoundState soundState, Misc.SoundState newState)
     {
-      if (newState == SoundState.Stopped)
+      if (newState == Misc.SoundState.Stopped)
         Dispatcher.BeginInvoke(() =>
         {
           reorderListBoxSounds.ItemsSource = null;

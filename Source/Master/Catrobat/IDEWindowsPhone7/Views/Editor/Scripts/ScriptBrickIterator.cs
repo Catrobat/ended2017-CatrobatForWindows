@@ -55,13 +55,13 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
         if (brickEnumerator.Current == null)
         {
           brickEnumerator.Dispose();
-          brickEnumerator = scriptEnumerator.Current.BrickList.Bricks.GetEnumerator();
+          brickEnumerator = scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
           scriptEnumerator.MoveNext();
 
           if (scriptEnumerator.Current == null)
             return false;
           else
-            brickEnumerator = scriptEnumerator.Current.BrickList.Bricks.GetEnumerator();
+            brickEnumerator = scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
         }
       }
       else
@@ -70,7 +70,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
 
         if (scriptEnumerator.Current != null)
         {
-          brickEnumerator = scriptEnumerator.Current.BrickList.Bricks.GetEnumerator();
+          brickEnumerator = scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
         }
       }
 

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows.Controls;
+using Catrobat.Core;
+using Catrobat.Core.Objects;
 using Catrobat.IDECommon.Resources;
-using MetroCatIDE;
+using Catrobat.IDECommon.Resources.Editor;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using MetroCatIDE.Content.Resources.Editor;
 using System.ComponentModel;
 
 namespace Catrobat.IDEWindowsPhone7.Views.Editor.Sprites

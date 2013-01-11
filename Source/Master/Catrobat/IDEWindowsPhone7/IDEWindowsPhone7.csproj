@@ -61,6 +61,7 @@
       <HintPath>..\packages\MvvmLightLibs.4.1.26.1\lib\sl4-wp71\GalaSoft.MvvmLight.WP71.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2012.10.30\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
@@ -88,15 +89,15 @@
     <Compile Include="Controls\Bricks\MasterBrick.cs" />
     <Compile Include="Controls\Bricks\NormalBrick.cs" />
     <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
-    <Compile Include="Controls\ImageButton\ImageButton.cs" />
-    <Compile Include="Controls\PlayButton\PlayButton.xaml.cs">
+    <Compile Include="Controls\Buttons\ImageButton.cs" />
+    <Compile Include="Controls\Buttons\PlayButton.xaml.cs">
       <DependentUpon>PlayButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ReorderableListbox\NegativeValueConverter.cs" />
     <Compile Include="Controls\ReorderableListbox\PullDownToRefreshPanel.cs" />
     <Compile Include="Controls\ReorderableListbox\ReorderListBox.cs" />
     <Compile Include="Controls\ReorderableListbox\ReorderListBoxItem.cs" />
-    <Compile Include="Controls\ScreenshotButton\ScreenshotButton.cs" />
+    <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
     <Compile Include="Controls\SplashScreen\AnimatedSplashScreen.xaml.cs">
       <DependentUpon>AnimatedSplashScreen.xaml</DependentUpon>
     </Compile>
@@ -108,6 +109,7 @@
     <Compile Include="Converters\IntStringConverter.cs" />
     <Compile Include="Converters\NullColorConverter.cs" />
     <Compile Include="Converters\SecondStringMillisecondConverter.cs" />
+    <Compile Include="Misc\MemoryMonitor.cs" />
     <Compile Include="Misc\SoundPlayer.cs" />
     <Compile Include="Misc\Storage\ResourcesPhone7.cs" />
     <Compile Include="Misc\Storage\StorageFactoryPhone7.cs" />
@@ -198,15 +200,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="Controls\ImageButton\ImageButtonTemplates.xaml">
+    <Page Include="Controls\Buttons\ImageButtonTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\PlayButton\PlayButton.xaml">
+    <Page Include="Controls\Buttons\PlayButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ScreenshotButton\ScreenshotButtonTemplates.xaml">
+    <Page Include="Controls\Buttons\ScreenshotButtonTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -343,7 +345,6 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="README_FIRST.txt" />
     <Content Include="Resources\ApplicationBar\dark\appbar.add.rest.png" />
     <Content Include="Resources\ApplicationBar\dark\appbar.back.rest.png" />
     <Content Include="Resources\ApplicationBar\dark\appbar.basecircle.rest.png" />
@@ -458,6 +459,11 @@
       <Project>{73EDA75E-B249-40CB-A883-C2521A72B1C0}</Project>
       <Name>IDECommon</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\ImageButton\" />
+    <Folder Include="Controls\PlayButton\" />
+    <Folder Include="Controls\ScreenshotButton\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />

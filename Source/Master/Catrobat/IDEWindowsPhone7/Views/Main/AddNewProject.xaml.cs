@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Catrobat.IDECommon.Resources.Main;
 using Catrobat.IDEWindowsPhone7.ViewModel;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using MetroCatIDE.Content.Resources.Main;
 
 namespace Catrobat.IDEWindowsPhone7.Views.Main
 {

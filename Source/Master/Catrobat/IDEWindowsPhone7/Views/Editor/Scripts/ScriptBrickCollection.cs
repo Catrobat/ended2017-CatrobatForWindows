@@ -18,7 +18,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
         if (selectedSprite == null)
           return new ObservableCollection<Script>();
 
-        return selectedSprite.ScriptList.Scripts;
+        return selectedSprite.Scripts.Scripts;
       } 
     }
 
@@ -59,7 +59,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
         foreach (Script script in scripts)
         {
           scriptBeginIndex = scriptEndIndex + 1;
-          scriptEndIndex += script.BrickList.Bricks.Count + 1;
+          scriptEndIndex += script.Bricks.Bricks.Count + 1;
 
           if (scriptEndIndex > lastViewIndex && scriptBeginIndex >= firstViewIndex)
             break;
@@ -76,7 +76,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
           OnScriptAdded(startScript, IndexOf(startScript));
         }
 
-        lastFullScript.BrickList.Bricks.Add(brick);
+        lastFullScript.Bricks.Bricks.Add(brick);
 
         //OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)); // TODO: make faster and use method below instead
         OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, scriptBrick, IndexOf(scriptBrick)));
@@ -144,7 +144,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
       OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, script, index));
 
       int brickIndex = index;
-      foreach (Brick brick in script.BrickList.Bricks)
+      foreach (Brick brick in script.Bricks.Bricks)
       {
         brickIndex++;
         OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, brick, brickIndex));
@@ -156,7 +156,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
       OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, script, index));
 
       int brickIndex = index;
-      foreach (Brick brick in script.BrickList.Bricks)
+      foreach (Brick brick in script.Bricks.Bricks)
       {
         //brickIndex++;
         OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, brick, brickIndex));
@@ -187,7 +187,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
         }
 
         count++;
-        foreach (Brick brick in script.BrickList.Bricks)
+        foreach (Brick brick in script.Bricks.Bricks)
         {
           if (count == index)
           {
@@ -218,7 +218,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
       {
         if (scriptToRemove != null)
         {
-          scriptToRemove.BrickList.Bricks.Remove(brickToRemove);
+          scriptToRemove.Bricks.Bricks.Remove(brickToRemove);
           OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, brickToRemove, index));
         }
       }
@@ -235,7 +235,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
       { 
         int count = 0;
         foreach (Script script in scripts)
-          count += script.BrickList.Bricks.Count + 1;
+          count += script.Bricks.Bricks.Count + 1;
         return count;
       }
     }
@@ -272,7 +272,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
         scripts.Add((Script)value);
 
       if (value is Brick)
-        scripts[scripts.Count - 1].BrickList.Bricks.Add((Brick)value);
+        scripts[scripts.Count - 1].Bricks.Bricks.Add((Brick)value);
 
       return 1; // TODO: should probably not be 1 ?
     }
@@ -284,7 +284,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
       else
         foreach (Script script in scripts)
         {
-          if (script.BrickList.Bricks.Contains(value as Brick))
+          if (script.Bricks.Bricks.Contains(value as Brick))
             return true;
         }
 
@@ -355,7 +355,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
           if (count > index)
             break;
 
-          count += script.BrickList.Bricks.Count + 1;
+          count += script.Bricks.Bricks.Count + 1;
           scriptIndex++;
         }
 
@@ -375,11 +375,11 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
         foreach (Script script in scripts)
         {
           count++;
-          foreach (Brick brick in script.BrickList.Bricks)
+          foreach (Brick brick in script.Bricks.Bricks)
           {
             if (count == index)
             {
-              script.BrickList.Bricks.Insert(brickCount, (Brick)value);
+              script.Bricks.Bricks.Insert(brickCount, (Brick)value);
               OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, value, index));
               return;
             }
@@ -390,7 +390,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
 
           if (count == index)
           {
-            script.BrickList.Bricks.Insert(brickCount, (Brick)value);
+            script.Bricks.Bricks.Insert(brickCount, (Brick)value);
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, value, index));
             return;
           }
@@ -422,9 +422,9 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
       else if (value is Brick)
       {
         foreach(Script script in scripts)
-          if (script.BrickList.Bricks.Contains(value as Brick))
+          if (script.Bricks.Bricks.Contains(value as Brick))
           {
-            script.BrickList.Bricks.Remove(value as Brick);
+            script.Bricks.Bricks.Remove(value as Brick);
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, value, index));
           }
       }

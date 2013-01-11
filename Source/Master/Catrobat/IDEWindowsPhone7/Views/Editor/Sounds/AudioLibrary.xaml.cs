@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Catrobat.Core;
+using Catrobat.Core.Objects.Sounds;
+using Catrobat.Core.Storage;
 using Catrobat.IDECommon.Resources;
-using Catrobat.IDEWindowsPhone7.Controls.PlayButton;
+using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDEWindowsPhone7.Controls.Buttons;
 using Catrobat.IDEWindowsPhone7.ViewModel;
-using MetroCatIDE;
-using MetroCatIDE.Views.Editor.Sounds;
 using Microsoft.Phone.Controls;
 using System.Collections.ObjectModel;
 using Microsoft.Phone.Shell;
-using MetroCatIDE.Content.Resources.Editor;
 using System.ComponentModel;
 using MetroCatIDE.ViewModel;
 using Microsoft.Xna.Framework.Media;
@@ -109,7 +110,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Sounds
         }
       }
 
-      editorViewModel.SelectedSprite.SoundList.Sounds.Add(sound);
+      editorViewModel.SelectedSprite.Sounds.Sounds.Add(sound);
       NavigationService.RemoveBackEntry();
       NavigationService.GoBack();
     }

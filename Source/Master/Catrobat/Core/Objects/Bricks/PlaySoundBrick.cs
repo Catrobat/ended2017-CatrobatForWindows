@@ -1,89 +1,94 @@
-﻿using System.ComponentModel;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
+using System.ComponentModel;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects.Sounds;
 
 namespace Catrobat.Core.Objects.Bricks
 {
-    public class PlaySoundBrick : Brick
+  public class PlaySoundBrick : Brick
+  {
+    private SoundReference soundReference;
+    internal SoundReference SoundReference
     {
-        private SoundReference soundInfoReference;
+      get
+      {
+        return soundReference;
+      }
+      set
+      {
+        if (this.soundReference == value)
+          return;
 
-        public PlaySoundBrick()
-        {
-        }
-
-        public PlaySoundBrick(Sprite parent) : base(parent)
-        {
-        }
-
-        public PlaySoundBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
-
-        internal SoundReference SoundInfoReference
-        {
-            get { return soundInfoReference; }
-            set
-            {
-                if (soundInfoReference == value)
-                    return;
-
-                soundInfoReference = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("SoundInfoReference"));
-            }
-        }
-
-        public Sound Sound
-        {
-            get
-            {
-                if (soundInfoReference == null)
-                    return null;
-
-                return soundInfoReference.Sound;
-            }
-            set
-            {
-                if (soundInfoReference == null)
-                {
-                    soundInfoReference = new SoundReference(sprite);
-                    soundInfoReference.Reference = XPathHelper.getReference(value, sprite);
-                }
-
-                if (soundInfoReference.Sound == value)
-                    return;
-
-                soundInfoReference.Sound = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sound"));
-            }
-        }
-
-        internal override void LoadFromXML(XElement xRoot)
-        {
-            if (xRoot.Element("Sound") != null)
-                soundInfoReference = new SoundReference(xRoot.Element("Sound"), sprite);
-        }
-
-        internal override XElement CreateXML()
-        {
-            var xRoot = new XElement("playSoundBrick");
-
-            if (soundInfoReference != null)
-                xRoot.Add(soundInfoReference.CreateXML());
-
-            ////CreateCommonXML(xRoot);
-
-            return xRoot;
-        }
-
-        public override DataObject Copy(Sprite parent)
-        {
-            var newBrick = new PlaySoundBrick(parent);
-            if (soundInfoReference != null)
-                newBrick.soundInfoReference = soundInfoReference.Copy(parent) as SoundReference;
-
-            return newBrick;
-        }
+        this.soundReference = value;
+        this.OnPropertyChanged(new PropertyChangedEventArgs("SoundReference"));
+      }
     }
+    public Sound Sound
+    {
+      get
+      {
+        if (soundReference == null)
+          return null;
+
+        return soundReference.Sound;
+      }
+      set
+      {
+        if (this.soundReference == null)
+        {
+          soundReference = new SoundReference(sprite);
+          soundReference.Reference = XPathHelper.getReference(value, sprite);
+        }
+
+        if (this.soundReference.Sound == value)
+          return;
+
+        this.soundReference.Sound = value;
+
+        if (value == null)
+          this.soundReference = null;
+
+        this.OnPropertyChanged(new PropertyChangedEventArgs("SoundInfo"));
+      }
+    }
+
+    public PlaySoundBrick() { }
+
+    public PlaySoundBrick(Sprite parent) : base(parent) { }
+
+    public PlaySoundBrick(XElement xElement, Sprite parent) : base(xElement, parent) { }
+
+    internal override void LoadFromXML(XElement xRoot)
+    {
+      if (xRoot.Element("soundInfo") != null)
+        soundReference = new SoundReference(xRoot.Element("soundInfo"), sprite);
+    }
+
+    internal override XElement CreateXML()
+    {
+      XElement xRoot = new XElement("playSoundBrick");
+
+      if (soundReference != null)
+        xRoot.Add(soundReference.CreateXML());
+
+      ////CreateCommonXML(xRoot);
+
+      return xRoot;
+    }
+
+    public override DataObject Copy(Sprite parent)
+    {
+      PlaySoundBrick newBrick = new PlaySoundBrick(parent);
+      if (soundReference != null)
+        newBrick.soundReference = soundReference.Copy(parent) as SoundReference;
+
+      return newBrick;
+    }
+
+    public void UpdateReference()
+    {
+      if (soundReference != null)
+        soundReference.Reference = XPathHelper.getReference(soundReference.Sound, sprite);
+    }
+  }
 }

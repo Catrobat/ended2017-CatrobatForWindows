@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Catrobat.Core.Objects.Costumes;
 using Catrobat.IDECommon.Resources;
+using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.IDEWindowsPhone7.ViewModel;
 using MetroCatData;
-using MetroCatIDE;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
-using MetroCatIDE.Content.Resources.Editor;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
 using MetroCatIDE.ViewModel;
@@ -165,7 +165,7 @@ namespace Catrobat.IDEWindowsPhone7.Views.Editor.Costumes
     private void save()
     {
       Costume costume = builder.Save(txtName.Text);
-      editorViewModel.SelectedSprite.CostumeList.Costumes.Add(costume);
+      editorViewModel.SelectedSprite.Costumes.Costumes.Add(costume);
       NavigationService.GoBack();
     }
 

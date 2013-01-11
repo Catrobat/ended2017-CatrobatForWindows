@@ -1,6 +1,11 @@
-﻿using Catrobat.Core;
+﻿using System.IO;
+using System.Windows.Interop;
+using Catrobat.Core;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
+using Catrobat.IDECommon.Resources;
+using Catrobat.IDECommon.Resources.Main;
 using Catrobat.IDEWindowsPhone7.Themes;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
@@ -30,7 +35,7 @@ namespace Catrobat.IDEWindowsPhone7.ViewModel
 
       set
       {
-        if (Thread.CurrentThread.CurrentCulture == value)
+        if (Thread.CurrentThread.CurrentCulture.Equals(value))
           return;
 
         Thread.CurrentThread.CurrentCulture = value;
@@ -60,7 +65,19 @@ namespace Catrobat.IDEWindowsPhone7.ViewModel
 
     public Project CurrentProject { get { return catrobatContext.CurrentProject; } }
 
-    public BitmapImage CurrentProjectScreenshot { get { return CurrentProject.ProjectScreenshot; } }
+    public BitmapImage CurrentProjectScreenshot
+    {
+      get
+      {
+        using (var memoryStream = new MemoryStream(CurrentProject.ProjectScreenshot,
+          0, CurrentProject.ProjectScreenshot.Length))
+        {
+          var bitmapImage = new BitmapImage();
+          bitmapImage.SetSource(memoryStream);
+          return bitmapImage;
+        }
+      }
+    }
 
     public ObservableCollection<ProjectHeader> LocalProjects { get { return catrobatContext.LocalProjects; } }
 
@@ -193,10 +210,10 @@ namespace Catrobat.IDEWindowsPhone7.ViewModel
 
     private void DeleteLocalProject(string projectName)
     {
-      var message = new DialogMessage(String.Format(MetroCatIDE.Content.Resources.Main.MainResources.MainDeleteProjectDialogMessage, projectName), DialogMessageCallback)
+      var message = new DialogMessage(String.Format(MainResources.MainDeleteProjectDialogMessage, projectName), DialogMessageCallback)
       {
         Button = MessageBoxButton.OKCancel,
-        Caption = MetroCatIDE.Content.Resources.Main.MainResources.MainDeleteProjectDialogTitle
+        Caption = MainResources.MainDeleteProjectDialogTitle
       };
 
       Messenger.Default.Send(message);
@@ -215,10 +232,10 @@ namespace Catrobat.IDEWindowsPhone7.ViewModel
 
     private void CopyLocalProject(string projectName)
     {
-      var message = new DialogMessage(String.Format(MetroCatIDE.Content.Resources.Main.MainResources.MainCopyProjectDialogMessage, projectName), DialogMessageCallback)
+      var message = new DialogMessage(String.Format(MainResources.MainCopyProjectDialogMessage, projectName), DialogMessageCallback)
       {
         Button = MessageBoxButton.OKCancel,
-        Caption = MetroCatIDE.Content.Resources.Main.MainResources.MainCopyProjectDialogTitle
+        Caption = MainResources.MainCopyProjectDialogTitle
       };
 
       Messenger.Default.Send(message);

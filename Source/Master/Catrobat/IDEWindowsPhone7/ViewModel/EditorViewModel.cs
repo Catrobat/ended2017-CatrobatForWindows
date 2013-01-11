@@ -1,4 +1,5 @@
-﻿using Catrobat.Core;
+﻿using System.IO;
+using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
@@ -109,7 +110,7 @@ namespace Catrobat.IDEWindowsPhone7.ViewModel
       // TODO: change this
       this.broadcastObject = broadcastObject;
 
-      if(OnAddedBroadcastMessage != null)
+      if (OnAddedBroadcastMessage != null)
         OnAddedBroadcastMessage.Invoke();
     }
 
@@ -275,7 +276,7 @@ namespace Catrobat.IDEWindowsPhone7.ViewModel
       get
       {
         if (selectedSprite != null)
-          return selectedSprite.CostumeList.Costumes;
+          return selectedSprite.Costumes.Costumes;
         else
           return null;
       }
@@ -289,7 +290,19 @@ namespace Catrobat.IDEWindowsPhone7.ViewModel
       }
     }
 
-    public BitmapImage CurrentProjectScreenshot { get { return CurrentProject.ProjectScreenshot; } }
+    public BitmapImage CurrentProjectScreenshot
+    {
+      get
+      {
+        using (var memoryStream = new MemoryStream(CurrentProject.ProjectScreenshot,
+          0, CurrentProject.ProjectScreenshot.Length))
+        {
+          var bitmapImage = new BitmapImage();
+          bitmapImage.SetSource(memoryStream);
+          return bitmapImage;
+        }
+      }
+    }
 
     # endregion
 

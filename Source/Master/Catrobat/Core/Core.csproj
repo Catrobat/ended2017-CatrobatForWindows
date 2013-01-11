@@ -135,7 +135,7 @@
     <Compile Include="Storage\IResources.cs" />
     <Compile Include="Storage\IStorage.cs" />
     <Compile Include="Storage\IStorageFactory.cs" />
-    <Compile Include="Storage\ResourceManager.cs" />
+    <Compile Include="Storage\ResourceLoader.cs" />
     <Compile Include="Storage\StorageSystem.cs" />
     <Compile Include="XmlStringWriter.cs" />
     <Compile Include="ZIP\CatrobatZip.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Catrobat.IDECommon.Resources.Main;
 using Catrobat.IDEWindowsPhone7.ViewModel;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -23,8 +24,8 @@ namespace Catrobat.IDEWindowsPhone7.Views.Main
     private void LocalizeApplicationBar()
     {
       _uploadButton = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
-      _uploadButton.Text = MetroCatIDE.Content.Resources.Main.MainResources.ButtonUpload;
-      ((ApplicationBarIconButton)ApplicationBar.Buttons[1]).Text = MetroCatIDE.Content.Resources.Main.MainResources.ButtonCancel;
+      _uploadButton.Text = MainResources.ButtonUpload;
+      ((ApplicationBarIconButton)ApplicationBar.Buttons[1]).Text = MainResources.ButtonCancel;
     }
 
     private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)

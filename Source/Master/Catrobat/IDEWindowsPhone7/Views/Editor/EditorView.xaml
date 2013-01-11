@@ -5,10 +5,9 @@
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                            xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
                             xmlns:reorderableListbox="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.ReorderableListbox"
-                            xmlns:imageButton="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.ImageButton"
-                            xmlns:c="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.PlayButton"
+                            xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+                            xmlns:imageButton="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.Buttons"
                             mc:Ignorable="d"
                             d:DesignWidth="480"
                             d:DesignHeight="768"
@@ -173,7 +172,7 @@
                   <ColumnDefinition Width="1*" />
                   <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
-                <c:PlayButton Grid.Column="0" Height="80" Width="80" Click="buttonSoundPlay_Click" />
+                <imageButton:PlayButton Grid.Column="0" Height="80" Width="80" Click="buttonSoundPlay_Click" />
                 <Grid Grid.Column="1" Margin="5">
                   <Grid.RowDefinitions>
                     <RowDefinition />

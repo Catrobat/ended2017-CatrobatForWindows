@@ -1,6 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using Catrobat.IDECommon.Resources.Bricks;
+using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDECommon.Resources.Main;
 
 namespace Catrobat.IDECommon.Resources
 {

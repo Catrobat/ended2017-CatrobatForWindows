@@ -51,8 +51,8 @@ namespace Catrobat.IDEWindowsPhone7.ViewModel
 
     private void Save()
     {
-      catrobatContext.CurrentProject.Save();
-      catrobatContext.CreateNewProject(_projectName);
+      CatrobatContext.Instance.CurrentProject.Save();
+      CatrobatContext.Instance.CreateNewProject(_projectName);
 
       ProjectName = "";
     }

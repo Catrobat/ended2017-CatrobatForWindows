@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Catrobat.IDEWindowsPhone7.Controls.ImageButton
+namespace Catrobat.IDEWindowsPhone7.Controls.Buttons
 {
   public class ImageButton : Button
   {

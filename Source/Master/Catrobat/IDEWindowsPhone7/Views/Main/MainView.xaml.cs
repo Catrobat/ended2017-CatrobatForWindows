@@ -1,4 +1,7 @@
-﻿using Catrobat.IDEWindowsPhone7.ViewModel;
+﻿using Catrobat.Core;
+using Catrobat.Core.Misc;
+using Catrobat.IDEWindowsPhone7.ViewModel;
+using KBB.Mobile.Controls;
 using Microsoft.Phone.Controls;
 using System;
 using System.Windows.Controls;
