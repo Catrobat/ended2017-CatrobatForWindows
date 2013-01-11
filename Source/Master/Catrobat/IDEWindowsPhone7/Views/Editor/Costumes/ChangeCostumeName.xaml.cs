@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
+using IDEWindowsPhone7;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Catrobat.Core.Storage
@@ -15,9 +16,13 @@ namespace Catrobat.Core.Storage
       _resources = resources;
     }
 
-    public static Stream OpenResourceStream(string uri)
+    public static Stream GetResourceStream(string uri)
     {
-      return _resources.OpenResourceStream(uri);
+      uri = uri.Replace('/', '.');
+      uri = uri.Replace('\\', '.');
+      return Assembly.GetExecutingAssembly().GetManifestResourceStream("Catrobat.Core." + uri);
+
+      //return _resources.OpenResourceStream(uri);
     }
   }
 }

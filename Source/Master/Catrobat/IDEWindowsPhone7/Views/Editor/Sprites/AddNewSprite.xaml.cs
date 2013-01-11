@@ -4,6 +4,7 @@ using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
+using IDEWindowsPhone7;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;

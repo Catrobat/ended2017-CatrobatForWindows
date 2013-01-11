@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
+using IDEWindowsPhone7;
 
 namespace Catrobat.IDEWindowsPhone7.ViewModel
 {

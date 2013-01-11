@@ -9,6 +9,7 @@ using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.IDEWindowsPhone7.Controls.Buttons;
 using Catrobat.IDEWindowsPhone7.ViewModel;
+using IDEWindowsPhone7;
 using MetroCatIDE.Views.Editor.Sounds;
 using Microsoft.Phone.Controls;
 using System.IO;

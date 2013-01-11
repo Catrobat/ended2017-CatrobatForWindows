@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.IDEWindowsPhone7.Views.Editor.Scripts;
+using IDEWindowsPhone7;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDEWindowsPhone7.Controls.ReorderableListbox

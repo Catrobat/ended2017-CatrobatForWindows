@@ -26,7 +26,7 @@
         <TemplateType5>
           <BackgroundImageURI IsRelative="true" IsResource="false">Resources\Application\Background.png</BackgroundImageURI>
           <Count>0</Count>
-          <Title>MetroCat</Title>
+          <Title>Views/Main/mainView.xaml</Title>
         </TemplateType5>
       </PrimaryToken>
     </Tokens>

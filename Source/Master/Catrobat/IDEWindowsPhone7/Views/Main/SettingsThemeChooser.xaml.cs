@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using Catrobat.IDEWindowsPhone7.Themes;
+using IDEWindowsPhone7;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDEWindowsPhone7.Views.Main

@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.IDEWindowsPhone7.ViewModel;
+using IDEWindowsPhone7;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts

@@ -12,7 +12,7 @@ namespace Catrobat.IDEWindowsPhone7.Misc.Storage
   {
     public Stream OpenResourceStream(string uri)
     {
-      var resourceUri = new Uri("/Core;component/" + uri, UriKind.Relative);
+      var resourceUri = new Uri("/Catrobat.Core;component/" + uri, UriKind.Relative);
       return Application.GetResourceStream(resourceUri).Stream;
     }
   }

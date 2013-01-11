@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
+using IDEWindowsPhone7;
 using Microsoft.Phone.Controls;
 using System.ComponentModel;
 using Microsoft.Phone.Shell;

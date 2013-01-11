@@ -1,6 +1,7 @@
 ﻿using System;
 using Catrobat.Core.Objects;
 using Catrobat.IDEWindowsPhone7.ViewModel;
+using IDEWindowsPhone7;
 using Microsoft.Phone.Controls;
 using System.Collections.ObjectModel;
 

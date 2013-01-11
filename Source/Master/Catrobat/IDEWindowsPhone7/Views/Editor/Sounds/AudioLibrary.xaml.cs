@@ -8,6 +8,7 @@ using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.IDEWindowsPhone7.Controls.Buttons;
 using Catrobat.IDEWindowsPhone7.ViewModel;
+using IDEWindowsPhone7;
 using Microsoft.Phone.Controls;
 using System.Collections.ObjectModel;
 using Microsoft.Phone.Shell;

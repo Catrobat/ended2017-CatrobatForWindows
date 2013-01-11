@@ -141,15 +141,21 @@
     <Compile Include="ZIP\CatrobatZip.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\default.catroid" />
-    <None Include="Resources\SampleProjects\Broadcast_test.catroid" />
-    <None Include="Resources\SampleProjects\default.catroid" />
-    <None Include="Resources\SampleProjects\glideTo.catroid" />
-    <None Include="Resources\SampleProjects\LookBricks.catroid" />
-    <None Include="Resources\SampleProjects\MotionBrick.catroid" />
-    <None Include="Resources\SampleProjects\pointTo.catroid" />
-    <None Include="Resources\SampleProjects\speakBrick.catroid" />
-    <None Include="Resources\SampleProjects\SwitchBackground.catroid" />
+    <Content Include="Resources\default.catroid" />
+    <EmbeddedResource Include="Resources\SampleProjects\Aquarium_v2.catrobat" />
+    <EmbeddedResource Include="Resources\SampleProjects\Broadcast_test.catroid" />
+    <EmbeddedResource Include="Resources\SampleProjects\default.catroid" />
+    <EmbeddedResource Include="Resources\SampleProjects\Egg_timer.catrobat" />
+    <EmbeddedResource Include="Resources\SampleProjects\Fishy.catroid" />
+    <EmbeddedResource Include="Resources\SampleProjects\glideTo.catroid" />
+    <EmbeddedResource Include="Resources\SampleProjects\HAL9000.catrobat" />
+    <EmbeddedResource Include="Resources\SampleProjects\LookBricks.catroid" />
+    <EmbeddedResource Include="Resources\SampleProjects\MotionBrick.catroid" />
+    <EmbeddedResource Include="Resources\SampleProjects\Pacman.catrobat" />
+    <EmbeddedResource Include="Resources\SampleProjects\Piano.catrobat" />
+    <EmbeddedResource Include="Resources\SampleProjects\pointTo.catroid" />
+    <EmbeddedResource Include="Resources\SampleProjects\speakBrick.catroid" />
+    <EmbeddedResource Include="Resources\SampleProjects\SwitchBackground.catroid" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SharpCompress.WP7, Version=0.8.1.0, Culture=neutral, processorArchitecture=MSIL">

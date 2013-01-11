@@ -5,6 +5,7 @@ using Catrobat.Core.Objects.Bricks;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.IDEWindowsPhone7.ViewModel;
+using IDEWindowsPhone7;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;

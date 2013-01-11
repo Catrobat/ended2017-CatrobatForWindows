@@ -13,6 +13,7 @@ using Catrobat.IDEWindowsPhone7.Views.Editor.Costumes;
 using Catrobat.IDEWindowsPhone7.Views.Editor.Scripts;
 using Catrobat.IDEWindowsPhone7.Views.Editor.Sounds;
 using Catrobat.IDEWindowsPhone7.Views.Editor.Sprites;
+using IDEWindowsPhone7;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
