@@ -1,0 +1,14 @@
+﻿<Content.Project>
+  <androidVersion>10</androidVersion>
+  <catroidVersionCode>10</catroidVersionCode>
+  <catroidVersionName>0.6.0beta</catroidVersionName>
+  <deviceName>HTC Desire</deviceName>
+  <projectName>Project Elements Test</projectName>
+  <screenHeight>800</screenHeight>
+  <screenWidth>480</screenWidth>
+  <spriteList>
+    <Content.Sprite>
+      <name>Hintergrund</name>
+    </Content.Sprite>
+  </spriteList>
+</Content.Project>

@@ -24,9 +24,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EB6B4F
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsWindowsStore", "TestsWindowsStore\TestsWindowsStore.csproj", "{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsWindowsPhone7", "TestsWindowsPhone7\TestsWindowsPhone7.csproj", "{F5761681-9DB2-41F3-8185-A2849ED64898}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 11
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -54,6 +58,12 @@ Global
 		SccProjectUniqueName8 = PlayerWindowsStore\\PlayerWindowsStore.csproj
 		SccProjectName8 = PlayerWindowsStore
 		SccLocalPath8 = PlayerWindowsStore
+		SccProjectUniqueName9 = TestsWindowsStore\\TestsWindowsStore.csproj
+		SccProjectName9 = TestsWindowsStore
+		SccLocalPath9 = TestsWindowsStore
+		SccProjectUniqueName10 = TestsWindowsPhone7\\TestsWindowsPhone7.csproj
+		SccProjectName10 = TestsWindowsPhone7
+		SccLocalPath10 = TestsWindowsPhone7
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -186,6 +196,42 @@ Global
 		{0CA5501B-6FAC-465D-8ED7-64C95F0534EF}.Release|x86.ActiveCfg = Release|x86
 		{0CA5501B-6FAC-465D-8ED7-64C95F0534EF}.Release|x86.Build.0 = Release|x86
 		{0CA5501B-6FAC-465D-8ED7-64C95F0534EF}.Release|x86.Deploy.0 = Release|x86
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Debug|ARM.ActiveCfg = Debug|ARM
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Debug|ARM.Build.0 = Debug|ARM
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Debug|ARM.Deploy.0 = Debug|ARM
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Debug|x64.ActiveCfg = Debug|x64
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Debug|x64.Build.0 = Debug|x64
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Debug|x64.Deploy.0 = Debug|x64
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Debug|x86.ActiveCfg = Debug|x86
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Debug|x86.Build.0 = Debug|x86
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Debug|x86.Deploy.0 = Debug|x86
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Release|ARM.ActiveCfg = Release|ARM
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Release|ARM.Build.0 = Release|ARM
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Release|ARM.Deploy.0 = Release|ARM
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Release|x64.ActiveCfg = Release|x64
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Release|x64.Build.0 = Release|x64
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Release|x64.Deploy.0 = Release|x64
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Release|x86.ActiveCfg = Release|x86
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Release|x86.Build.0 = Release|x86
+		{9F9E8B1D-7FDD-48DD-9B89-8ECF3A474A5D}.Release|x86.Deploy.0 = Release|x86
+		{F5761681-9DB2-41F3-8185-A2849ED64898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5761681-9DB2-41F3-8185-A2849ED64898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5761681-9DB2-41F3-8185-A2849ED64898}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F5761681-9DB2-41F3-8185-A2849ED64898}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F5761681-9DB2-41F3-8185-A2849ED64898}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F5761681-9DB2-41F3-8185-A2849ED64898}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F5761681-9DB2-41F3-8185-A2849ED64898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5761681-9DB2-41F3-8185-A2849ED64898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5761681-9DB2-41F3-8185-A2849ED64898}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F5761681-9DB2-41F3-8185-A2849ED64898}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F5761681-9DB2-41F3-8185-A2849ED64898}.Release|x64.ActiveCfg = Release|Any CPU
+		{F5761681-9DB2-41F3-8185-A2849ED64898}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
