@@ -20,8 +20,6 @@ namespace Catrobat.IDEWindowsPhone7.Views.Main
 
     public MainView()
     {
-        // GIT TEST
-        // GIT TEST 2
       InitializeComponent();
 
       #region DEBUG
