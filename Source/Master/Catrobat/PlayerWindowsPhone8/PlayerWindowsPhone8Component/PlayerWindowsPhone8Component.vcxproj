@@ -76,13 +76,15 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <CompileAsWinRT>true</CompileAsWinRT>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\DirectXTK\Inc;$(ProjectDir)\..\..\FMOD\inc;$(ProjectDir)\..\..\FMOD\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+      <AdditionalLibraryDirectories>$(ProjectDir)\..\..\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -108,13 +110,15 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <CompileAsWinRT>true</CompileAsWinRT>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\DirectXTK\Inc;$(ProjectDir)\..\..\FMOD\inc;$(ProjectDir)\..\..\FMOD\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxguid.lib;XAudio2.lib;fmodex_arm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+      <AdditionalLibraryDirectories>$(ProjectDir)\..\..\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -142,7 +146,7 @@
   <ItemGroup>
     <ClInclude Include="BasicTimer.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
-    <ClInclude Include="CubeRenderer.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="DirectXHelper.h" />
     <ClInclude Include="Direct3DBase.h" />
     <ClInclude Include="Direct3DContentProvider.h" />
@@ -150,7 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
-    <ClCompile Include="CubeRenderer.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Direct3DBase.cpp" />
     <ClCompile Include="Direct3DContentProvider.cpp" />
     <ClCompile Include="pch.cpp">
@@ -166,6 +170,11 @@
       <ShaderType>Vertex</ShaderType>
       <ShaderModel>4.0_level_9_3</ShaderModel>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DirectXTK\DirectXTK_WindowsPhone8.vcxproj">
+      <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsPhone\v$(TargetPlatformVersion)\Microsoft.Cpp.WindowsPhone.$(TargetPlatformVersion).targets" />

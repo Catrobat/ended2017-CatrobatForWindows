@@ -125,6 +125,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fmodex_arm.dll" />
+    <Content Include="fmodex_x86.dll" />
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png">
