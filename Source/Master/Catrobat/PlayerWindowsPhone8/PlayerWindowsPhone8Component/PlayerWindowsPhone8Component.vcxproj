@@ -108,7 +108,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <CompileAsWinRT>true</CompileAsWinRT>
-      <AdditionalIncludeDirectories>C:\Users\Hannes\Documents\Catrobat\Source\Master\Catrobat\DirectXTK\Inc;C:\Users\Hannes\Downloads\DirectXTK\Inc;C:\Users\Maximilian\Desktop\Catrobat\Catrobat\Source\Master\Catrobat\FMOD\inc;C:\Users\Maximilian\Desktop\FMOD Programmers API Windows Phone\examples\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\DirectXTK\Inc;$(ProjectDir)\..\..\FMOD\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
