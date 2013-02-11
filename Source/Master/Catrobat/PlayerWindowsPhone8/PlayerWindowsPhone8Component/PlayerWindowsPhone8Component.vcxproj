@@ -108,7 +108,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <CompileAsWinRT>true</CompileAsWinRT>
-      <AdditionalIncludeDirectories>C:\Users\Hannes\Downloads\DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Hannes\Documents\Catrobat\Source\Master\Catrobat\DirectXTK\Inc;C:\Users\Hannes\Downloads\DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -169,7 +169,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\..\Downloads\DirectXTK\DirectXTK_WindowsPhone8.vcxproj">
+    <ProjectReference Include="..\..\DirectXTK\DirectXTK_WindowsPhone8.vcxproj">
       <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
     </ProjectReference>
   </ItemGroup>
