@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "PlayerWindowsPhone8Component.h"
 #include "Direct3DContentProvider.h"
+#include "fmod.hpp"
+#include "fmod_errors.h"
 
 using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
@@ -85,9 +87,53 @@ HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceCo
 	m_renderer->UpdateDevice(device, context, renderTargetView);
 	m_renderer->Render();
 
+	static bool test = false;
+
+	if (!test)
+	{
+
+		test = true;
+	}
+
 	RequestAdditionalFrame();
 
 	return S_OK;
+}
+
+int FMOD_Main()
+{
+    FMOD::System     *system;
+    FMOD::Sound      *sound1;
+    FMOD::Channel    *channel = 0;
+    FMOD_RESULT       result;
+    unsigned int      version;
+    void             *extradriverdata = 0;
+
+    /*
+        Create a System object and initialize
+    */
+    result = FMOD::System_Create(&system);
+
+    result = system->getVersion(&version);
+
+    FMOD_SPEAKERMODE speakerMode = FMOD_SPEAKERMODE_STEREO;
+    result = system->getDriverCaps(0, NULL, NULL, &speakerMode);
+
+    result = system->setSpeakerMode(speakerMode);
+
+    result = system->init(32, FMOD_INIT_NORMAL, extradriverdata);
+
+    result = system->createSound("ms-appx:///media/wave.mp3", FMOD_HARDWARE, 0, &sound1);
+
+	result = system->playSound(FMOD_CHANNEL_FREE, sound1, false, &channel);
+
+    
+    /*
+        Shut down
+    */
+    result = sound1->release();
+
+    return 0;
 }
 
 }
