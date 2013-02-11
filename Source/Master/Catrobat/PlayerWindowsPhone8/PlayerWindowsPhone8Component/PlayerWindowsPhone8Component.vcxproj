@@ -146,7 +146,7 @@
   <ItemGroup>
     <ClInclude Include="BasicTimer.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
-    <ClInclude Include="CubeRenderer.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="DirectXHelper.h" />
     <ClInclude Include="Direct3DBase.h" />
     <ClInclude Include="Direct3DContentProvider.h" />
@@ -154,7 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
-    <ClCompile Include="CubeRenderer.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Direct3DBase.cpp" />
     <ClCompile Include="Direct3DContentProvider.cpp" />
     <ClCompile Include="pch.cpp">

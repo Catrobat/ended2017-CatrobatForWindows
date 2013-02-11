@@ -56,7 +56,7 @@ void Direct3DBackground::OnPointerReleased(DrawingSurfaceManipulationHost^ sende
 // Interface With Direct3DContentProvider
 HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device)
 {
-	m_renderer = ref new CubeRenderer();
+	m_renderer = ref new Renderer();
 	m_renderer->Initialize(device);
 	m_renderer->UpdateForWindowSizeChange(WindowBounds.Width, WindowBounds.Height);
 

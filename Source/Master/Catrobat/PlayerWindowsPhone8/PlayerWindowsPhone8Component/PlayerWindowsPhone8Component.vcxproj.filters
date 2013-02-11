@@ -6,18 +6,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
-    <ClCompile Include="CubeRenderer.cpp" />
     <ClCompile Include="Direct3DBase.cpp" />
     <ClCompile Include="Direct3DContentProvider.cpp" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicTimer.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
-    <ClInclude Include="CubeRenderer.h" />
     <ClInclude Include="DirectXHelper.h" />
     <ClInclude Include="Direct3DBase.h" />
     <ClInclude Include="Direct3DContentProvider.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Renderer.h" />
   </ItemGroup>
 </Project>
