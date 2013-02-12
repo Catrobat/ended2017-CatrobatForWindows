@@ -18,7 +18,7 @@ void Renderer::CreateDeviceResources()
 {
 	Direct3DBase::CreateDeviceResources();
 
-	m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_d3dContext.Get()));
+	//m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_d3dContext.Get()));
 }
 
 void Renderer::CreateWindowSizeDependentResources()
@@ -33,6 +33,13 @@ void Renderer::Update(float timeTotal, float timeDelta)
 
 void Renderer::Render()
 {
+	static bool init_hack = false;
+	if (!init_hack)
+	{
+		m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_d3dContext.Get()));
+		init_hack = true;
+	}
+
 	// This code is Generating a Midnightblue Background on our screen
 	m_d3dContext->OMSetRenderTargets(
 		1,
