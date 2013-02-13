@@ -26,7 +26,11 @@ void Renderer::CreateWindowSizeDependentResources()
 {
 	Direct3DBase::CreateWindowSizeDependentResources();
 
-	m_testObject = new TestObject(m_windowBounds.Width / 2, m_windowBounds.Height / 2, &m_windowBounds);
+	CreateTestObject1();
+	CreateTestObject2();
+	CreateTestObject3();
+	CreateTestObject4();
+	CreateTestObject5();
 	m_testObject->LoadTexture(m_d3dDevice.Get());
 }
 
@@ -72,4 +76,26 @@ void Renderer::Render()
 
 	m_spriteBatch->End();
 	// ---------------------------------------------------------------------->
+}
+
+void Renderer::CreateTestObject1()
+{
+	// BaseObject(float x, float y, Rect *windowBounds)
+	m_testObject = new TestObject();
+}
+
+void Renderer::CreateTestObject2()
+{
+}
+
+void Renderer::CreateTestObject3()
+{
+}
+
+void Renderer::CreateTestObject4()
+{
+}
+
+void Renderer::CreateTestObject5()
+{
 }

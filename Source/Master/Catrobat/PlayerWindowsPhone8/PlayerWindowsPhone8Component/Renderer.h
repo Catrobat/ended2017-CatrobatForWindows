@@ -34,4 +34,9 @@ private:
 
 	// Just for testing
 	TestObject *m_testObject;
+	void CreateTestObject1();
+	void CreateTestObject2();
+	void CreateTestObject3();
+	void CreateTestObject4();
+	void CreateTestObject5();
 };
