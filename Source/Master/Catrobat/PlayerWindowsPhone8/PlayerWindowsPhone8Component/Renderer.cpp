@@ -27,10 +27,9 @@ void Renderer::CreateWindowSizeDependentResources()
 	Direct3DBase::CreateWindowSizeDependentResources();
 
 	CreateTestObject1();
-	CreateTestObject2();
-	CreateTestObject3();
-	CreateTestObject4();
-	CreateTestObject5();
+	//CreateTestObject2();
+	//CreateTestObject3();
+	//CreateTestObject4();
 	m_testObject->LoadTexture(m_d3dDevice.Get());
 }
 
@@ -80,22 +79,27 @@ void Renderer::Render()
 
 void Renderer::CreateTestObject1()
 {
-	// BaseObject(float x, float y, Rect *windowBounds)
-	//m_testObject = new TestObject();
+	// TestObject(float posX, float posY, Rect *windowBounds, float originX, float originY);
+	m_testObject = new TestObject(50, 50, &m_windowBounds);
 }
 
 void Renderer::CreateTestObject2()
 {
+	// TestObject(float x, float y, float width, float height, float originX, float originY);
+	m_testObject = new TestObject(50, 50, 100, 100, 0, 0);
 }
 
 void Renderer::CreateTestObject3()
 {
+	// TestObject(Rect *position, float originX, float originY);
+	Rect position(50, 50, 100, 100);
+	m_testObject = new TestObject(position);
 }
 
 void Renderer::CreateTestObject4()
 {
-}
-
-void Renderer::CreateTestObject5()
-{
+	// TestObject(Point location, Size size, float originX = 0, float originY = 0); 
+	Point location(50, 50);
+	Size size(100, 100);
+	m_testObject = new TestObject(location, size);
 }

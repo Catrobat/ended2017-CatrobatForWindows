@@ -17,10 +17,10 @@ public:
 	virtual void LoadTexture(ID3D11Device* d3dDevice) = 0;
 
 protected:
-	BaseObject(float posX, float posY, Rect *windowBounds, float originX = 0, float originY = 0);
+	BaseObject(float posX, float posY, Rect *windowBounds, float originX, float originY);
 	BaseObject(float x, float y, float width, float height, float originX, float originY);
-	BaseObject(Rect *position, float originX = 0, float originY = 0);
-	BaseObject(Point location, Size size, float originX = 0, float originY = 0);
+	BaseObject(Rect position, float originX, float originY);
+	BaseObject(Point location, Size size, float originX, float originY);
 	~BaseObject(void);
 
 	ID3D11ShaderResourceView* m_Texture;

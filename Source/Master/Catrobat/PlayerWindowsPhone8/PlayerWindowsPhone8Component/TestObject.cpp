@@ -11,7 +11,7 @@ TestObject::TestObject(float x, float y, float width, float height, float origin
 {
 }
 
-TestObject::TestObject(Rect *position, float originX , float originY) :
+TestObject::TestObject(Rect position, float originX , float originY) :
 	BaseObject(position, originX, originY)
 {
 }

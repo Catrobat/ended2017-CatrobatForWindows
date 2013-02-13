@@ -38,5 +38,4 @@ private:
 	void CreateTestObject2();
 	void CreateTestObject3();
 	void CreateTestObject4();
-	void CreateTestObject5();
 };
