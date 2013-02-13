@@ -18,12 +18,16 @@ void Renderer::CreateDeviceResources()
 {
 	Direct3DBase::CreateDeviceResources();
 
+	// SpriteBatch should be create here if anyhow possible (meanwhile use Hack)
 	//m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_d3dContext.Get()));
 }
 
 void Renderer::CreateWindowSizeDependentResources()
 {
 	Direct3DBase::CreateWindowSizeDependentResources();
+
+	m_testObject = new TestObject(0.0f, 0.0f, &m_windowBounds);
+	m_testObject->LoadTexture(m_d3dDevice.Get());
 }
 
 void Renderer::Update(float timeTotal, float timeDelta)
@@ -63,6 +67,8 @@ void Renderer::Render()
 	// SpriteBatch for Drawing. Call Draw Methods of the Objects here.
 	// ---------------------------------------------------------------------->
 	m_spriteBatch->Begin();
+
+	m_testObject->Draw(m_spriteBatch.get());
 
 	m_spriteBatch->End();
 	// ---------------------------------------------------------------------->

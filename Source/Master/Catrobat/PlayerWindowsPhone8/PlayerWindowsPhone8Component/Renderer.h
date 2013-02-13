@@ -2,6 +2,7 @@
 
 #include "Direct3DBase.h"
 #include "SpriteBatch.h"
+#include "TestObject.h"
 
 #include <wrl/client.h>
 
@@ -30,4 +31,7 @@ private:
 
 	// Use this scale if you calucalte positions on the screen
 	float m_scale;
+
+	// Just for testing
+	TestObject *m_testObject;
 };

@@ -12,18 +12,16 @@ using namespace Windows::Foundation;
 class BaseObject
 {
 public:
-	BaseObject(void);
-	BaseObject(float x, float y, Rect *windowBounds);
-
-	// Make these and the whole class pure virtual later.
-	void Draw(SpriteBatch *spriteBatch);
-	void LoadTexture(ID3D11Device* d3dDevice);
+	virtual void Draw(SpriteBatch *spriteBatch) = 0;
+	virtual void LoadTexture(ID3D11Device* d3dDevice) = 0;
 
 	float posX;
 	float posY;
 	float diameter;
 
-private:
+protected:
+	BaseObject(void);
+	BaseObject(float x, float y, Rect *windowBounds);
 	~BaseObject(void);
 
 	ID3D11ShaderResourceView* m_Texture;
