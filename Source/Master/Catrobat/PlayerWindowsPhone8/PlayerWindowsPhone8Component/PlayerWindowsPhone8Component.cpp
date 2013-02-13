@@ -1,8 +1,7 @@
 #include "pch.h"
 #include "PlayerWindowsPhone8Component.h"
 #include "Direct3DContentProvider.h"
-#include "fmod.hpp"
-#include "fmod_errors.h"
+#include <thread>
 
 using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
@@ -56,9 +55,14 @@ void Direct3DBackground::OnPointerReleased(DrawingSurfaceManipulationHost^ sende
 // Interface With Direct3DContentProvider
 HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device)
 {
+	// Initialize Renderer
 	m_renderer = ref new Renderer();
 	m_renderer->Initialize(device);
 	m_renderer->UpdateForWindowSizeChange(WindowBounds.Width, WindowBounds.Height);
+
+	// Initialize Sound
+	m_soundmanager = new SoundManager();
+	m_soundmanager->Initialize();
 
 	// Restart timer after renderer has finished initializing.
 	m_timer->Reset();
@@ -68,6 +72,8 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 
 void Direct3DBackground::Disconnect()
 {
+	free(m_soundmanager);
+	m_soundmanager = nullptr;
 	m_renderer = nullptr;
 }
 
@@ -91,6 +97,12 @@ HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceCo
 
 	if (!test)
 	{
+		//std::thread* thr = new std::thread(FMOD_Main);
+		//thr->join();
+		//FMOD_Main();
+
+		Sound *sound = m_soundmanager->CreateSound(/* Parameters */);
+		sound->Play();
 
 		test = true;
 	}
@@ -98,42 +110,6 @@ HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceCo
 	RequestAdditionalFrame();
 
 	return S_OK;
-}
-
-int FMOD_Main()
-{
-    FMOD::System     *system;
-    FMOD::Sound      *sound1;
-    FMOD::Channel    *channel = 0;
-    FMOD_RESULT       result;
-    unsigned int      version;
-    void             *extradriverdata = 0;
-
-    /*
-        Create a System object and initialize
-    */
-    result = FMOD::System_Create(&system);
-
-    result = system->getVersion(&version);
-
-    FMOD_SPEAKERMODE speakerMode = FMOD_SPEAKERMODE_STEREO;
-    result = system->getDriverCaps(0, NULL, NULL, &speakerMode);
-
-    result = system->setSpeakerMode(speakerMode);
-
-    result = system->init(32, FMOD_INIT_NORMAL, extradriverdata);
-
-    result = system->createSound("ms-appx:///media/wave.mp3", FMOD_HARDWARE, 0, &sound1);
-
-	result = system->playSound(FMOD_CHANNEL_FREE, sound1, false, &channel);
-
-    
-    /*
-        Shut down
-    */
-    result = sound1->release();
-
-    return 0;
 }
 
 }

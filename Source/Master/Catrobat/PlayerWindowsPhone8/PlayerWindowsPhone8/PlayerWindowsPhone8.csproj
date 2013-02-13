@@ -147,6 +147,7 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="wave.mp3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PlayerWindowsPhone8Component\PlayerWindowsPhone8Component.vcxproj">

@@ -144,6 +144,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseObject.h" />
     <ClInclude Include="BasicTimer.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
     <ClInclude Include="Renderer.h" />
@@ -151,8 +152,12 @@
     <ClInclude Include="Direct3DBase.h" />
     <ClInclude Include="Direct3DContentProvider.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="TestObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Direct3DBase.cpp" />
@@ -160,6 +165,9 @@
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="TestObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="SimplePixelShader.hlsl">
@@ -175,6 +183,9 @@
     <ProjectReference Include="..\..\DirectXTK\DirectXTK_WindowsPhone8.vcxproj">
       <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="CatTexture.dds" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsPhone\v$(TargetPlatformVersion)\Microsoft.Cpp.WindowsPhone.$(TargetPlatformVersion).targets" />
