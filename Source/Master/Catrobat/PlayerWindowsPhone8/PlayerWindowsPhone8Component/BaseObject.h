@@ -4,6 +4,7 @@
 
 #include "DDSTextureLoader.h"
 #include <D3D11.h>
+#include <windows.foundation.h>
 
 using namespace std;
 using namespace DirectX;
