@@ -81,7 +81,7 @@ void Renderer::Render()
 void Renderer::CreateTestObject1()
 {
 	// BaseObject(float x, float y, Rect *windowBounds)
-	m_testObject = new TestObject();
+	//m_testObject = new TestObject();
 }
 
 void Renderer::CreateTestObject2()

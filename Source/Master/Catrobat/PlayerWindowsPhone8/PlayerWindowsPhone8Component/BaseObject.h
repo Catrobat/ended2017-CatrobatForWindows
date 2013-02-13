@@ -13,27 +13,22 @@ using namespace Windows::Foundation;
 class BaseObject
 {
 public:
-	// We need to differ the two constructors which would have the same signature.
-	enum TypeOfConstructor 
-	{
-		WidthAndHeight,
-		Points
-	};
-
 	virtual void Draw(SpriteBatch *spriteBatch) = 0;
 	virtual void LoadTexture(ID3D11Device* d3dDevice) = 0;
 
 protected:
-	BaseObject(void);
-	BaseObject(float x, float y, Rect *windowBounds);
-	BaseObject(float topX, float topY, float botX, float botY, TypeOfConstructor type);
-	BaseObject(Rect *position);
-	BaseObject(Point location, Size size);
+	BaseObject(float posX, float posY, Rect *windowBounds, float originX = 0, float originY = 0);
+	BaseObject(float x, float y, float width, float height, float originX, float originY);
+	BaseObject(Rect *position, float originX = 0, float originY = 0);
+	BaseObject(Point location, Size size, float originX = 0, float originY = 0);
 	~BaseObject(void);
 
 	ID3D11ShaderResourceView* m_Texture;
 
-	RECT m_position;
+	XMFLOAT2 m_position;
+	XMFLOAT2 m_sourceOrigin;
+	XMFLOAT2 m_objectScale;
+
 	float scale;
 };
 
