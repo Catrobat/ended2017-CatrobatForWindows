@@ -26,8 +26,8 @@ void Renderer::CreateWindowSizeDependentResources()
 {
 	Direct3DBase::CreateWindowSizeDependentResources();
 
-	//m_testObject = new TestObject(0.0f, 0.0f, &m_windowBounds);
-	//m_testObject->LoadTexture(m_d3dDevice.Get());
+	m_testObject = new TestObject(0.0f, 0.0f, &m_windowBounds);
+	m_testObject->LoadTexture(m_d3dDevice.Get());
 }
 
 void Renderer::Update(float timeTotal, float timeDelta)
