@@ -19,14 +19,14 @@ void Renderer::CreateDeviceResources()
 	Direct3DBase::CreateDeviceResources();
 
 	// SpriteBatch should be create here if anyhow possible (meanwhile use Hack)
-	m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_d3dContext.Get()));
+	// m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_d3dContext.Get()));
 }
 
 void Renderer::CreateWindowSizeDependentResources()
 {
 	Direct3DBase::CreateWindowSizeDependentResources();
 
-	m_testObject = new TestObject(0.0f, 0.0f, &m_windowBounds);
+	m_testObject = new TestObject(m_windowBounds.Width / 2, m_windowBounds.Height / 2, &m_windowBounds);
 	m_testObject->LoadTexture(m_d3dDevice.Get());
 }
 
