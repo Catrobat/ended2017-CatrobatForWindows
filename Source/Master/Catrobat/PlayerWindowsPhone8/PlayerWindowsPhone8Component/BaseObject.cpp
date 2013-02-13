@@ -12,7 +12,7 @@ BaseObject::BaseObject()
 BaseObject::BaseObject(float x, float y, Rect *windowBounds)
 {
 	scale = DisplayProperties::LogicalDpi / 96.0f;
-	diameter = windowBounds->Width / 10.0f * scale;
+}
 
 BaseObject::BaseObject(Rect *position)
 {
