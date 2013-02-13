@@ -3,6 +3,7 @@
 #include "Direct3DContentProvider.h"
 #include "fmod.hpp"
 #include "fmod_errors.h"
+#include <thread>
 
 using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
@@ -111,6 +112,7 @@ int FMOD_Main()
 
 	//system->
 
+	while (true) std::this_thread::yield();
     
     /*
         Shut down
@@ -129,7 +131,9 @@ HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceCo
 
 	if (!test)
 	{
-		FMOD_Main();
+		std::thread* thr = new std::thread(FMOD_Main);
+		//thr->join();
+		//FMOD_Main();
 		test = true;
 	}
 

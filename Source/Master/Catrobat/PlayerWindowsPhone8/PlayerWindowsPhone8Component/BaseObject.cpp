@@ -8,7 +8,7 @@ BaseObject::BaseObject(float x, float y, Rect *windowBounds)
 	posX = x;
 	posY = y;
 	scale = DisplayProperties::LogicalDpi / 96.0f;
-	diameter = windowBounds->Width / 10.0f * scale;
+	diameter = windowBounds->Width * scale;
 
 	m_Texture = nullptr;
 }
