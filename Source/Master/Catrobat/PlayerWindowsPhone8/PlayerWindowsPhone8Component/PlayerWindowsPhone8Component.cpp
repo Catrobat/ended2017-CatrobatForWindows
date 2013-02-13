@@ -72,6 +72,8 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 
 void Direct3DBackground::Disconnect()
 {
+	free(m_soundmanager);
+	m_soundmanager = nullptr;
 	m_renderer = nullptr;
 }
 
@@ -98,6 +100,10 @@ HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceCo
 		//std::thread* thr = new std::thread(FMOD_Main);
 		//thr->join();
 		//FMOD_Main();
+
+		Sound *sound = m_soundmanager->CreateSound(/* Parameters */);
+		sound->Play();
+
 		test = true;
 	}
 

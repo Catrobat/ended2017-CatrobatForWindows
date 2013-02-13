@@ -22,3 +22,10 @@ void SoundManager::Initialize()
 SoundManager::~SoundManager(void)
 {
 }
+
+Sound* SoundManager::CreateSound()
+{
+	Sound* result = new Sound(system, channel);
+	result->Load();
+	return result;	
+}
