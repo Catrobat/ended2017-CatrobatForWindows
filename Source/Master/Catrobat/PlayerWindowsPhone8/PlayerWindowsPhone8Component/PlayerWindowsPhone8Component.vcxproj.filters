@@ -10,6 +10,7 @@
     <ClCompile Include="Direct3DContentProvider.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="BaseObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicTimer.h" />
@@ -19,5 +20,6 @@
     <ClInclude Include="Direct3DContentProvider.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="BaseObject.h" />
   </ItemGroup>
 </Project>
