@@ -12,6 +12,8 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Sound.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicTimer.h" />
@@ -23,6 +25,8 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="TestObject.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Sound.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="CatTexture.dds" />
