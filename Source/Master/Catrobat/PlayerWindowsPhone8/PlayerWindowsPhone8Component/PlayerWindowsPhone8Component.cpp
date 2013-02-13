@@ -82,24 +82,6 @@ HRESULT Direct3DBackground::PrepareResources(_In_ const LARGE_INTEGER* presentTa
 	return S_OK;
 }
 
-HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
-{
-	m_renderer->UpdateDevice(device, context, renderTargetView);
-	m_renderer->Render();
-
-	static bool test = false;
-
-	if (!test)
-	{
-
-		test = true;
-	}
-
-	RequestAdditionalFrame();
-
-	return S_OK;
-}
-
 int FMOD_Main()
 {
     FMOD::System     *system;
@@ -123,17 +105,37 @@ int FMOD_Main()
 
     result = system->init(32, FMOD_INIT_NORMAL, extradriverdata);
 
-    result = system->createSound("ms-appx:///media/wave.mp3", FMOD_HARDWARE, 0, &sound1);
+    result = system->createSound("ms-appx:///wave.mp3", FMOD_HARDWARE, 0, &sound1);
 
 	result = system->playSound(FMOD_CHANNEL_FREE, sound1, false, &channel);
+
+	//system->
 
     
     /*
         Shut down
     */
-    result = sound1->release();
+    //result = sound1->release();
 
     return 0;
+}
+
+HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
+{
+	m_renderer->UpdateDevice(device, context, renderTargetView);
+	m_renderer->Render();
+
+	static bool test = false;
+
+	if (!test)
+	{
+		FMOD_Main();
+		test = true;
+	}
+
+	RequestAdditionalFrame();
+
+	return S_OK;
 }
 
 }
