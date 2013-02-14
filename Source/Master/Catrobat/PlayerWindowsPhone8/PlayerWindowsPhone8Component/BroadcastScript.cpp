@@ -2,6 +2,7 @@
 #include "BroadcastScript.h"
 
 
-BroadcastScript::BroadcastScript()
+BroadcastScript::BroadcastScript() : 
+	Script(TypeOfScript::BroadcastScript)
 {
 }

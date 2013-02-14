@@ -2,6 +2,7 @@
 #include "WhenScript.h"
 
 
-WhenScript::WhenScript()
+WhenScript::WhenScript() :
+	Script(TypeOfScript::WhenScript)
 {
 }

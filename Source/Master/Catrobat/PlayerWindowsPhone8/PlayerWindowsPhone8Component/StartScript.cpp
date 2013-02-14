@@ -2,6 +2,8 @@
 #include "StartScript.h"
 
 
-StartScript::StartScript(void)
+StartScript::StartScript() : 
+	Script(TypeOfScript::StartScript)
 {
 }
+

@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "XMLParser.h"
+#include "StartScript.h"
+#include "BroadcastScript.h"
+#include "WhenScript.h"
 
 #include <iostream>
 #include <fstream>
@@ -177,15 +180,18 @@ LookData *XMLParser::parseLookData(xml_node<> *baseNode)
 
 Script *XMLParser::parseStartScript(xml_node<> *baseNode)
 {
-	return NULL;
+	StartScript *script = new StartScript();
+	return script;
 }
 
 Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode)
 {
-	return NULL;
+	BroadcastScript *script = new BroadcastScript();
+	return script;
 }
 
 Script *XMLParser::parseWhenScript(xml_node<> *baseNode)
 {
-	return NULL;
+	WhenScript *script = new WhenScript();
+	return script;
 }
