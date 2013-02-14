@@ -39,6 +39,7 @@ void XMLParser::parseXML(string xml)
 	char *str = doc.first_node()->name();
 
 	Project *project = parseProjectInformation(&doc);	
+	parseSpriteList(&doc, project->getSpriteList());
 }
 
 Project* XMLParser::parseProjectInformation(xml_document<> *doc)
@@ -96,5 +97,48 @@ Project* XMLParser::parseProjectInformation(xml_document<> *doc)
 		screenWidth = atoi(node->value());
 	}
 
-	return new Project(androidVersion, catroidVersionCode, catroidVersionName, projectName, screenWidth, screenHeight, NULL);
+	return new Project(androidVersion, catroidVersionCode, catroidVersionName, projectName, screenWidth, screenHeight);
+}
+
+void XMLParser::parseSpriteList(xml_document<> *doc, SpriteList *spriteList)
+{
+	xml_node<> *node = doc->first_node()->first_node()->first_node("Content.Sprite");
+	while (node)
+	{
+		spriteList->addSprite(parseSprite(node));
+		node = doc->first_node()->first_node()->next_sibling("Content.Sprite");
+	}	
+}
+
+Sprite *XMLParser::parseSprite(xml_node<> *baseNode)
+{
+	xml_node<> *node = baseNode->first_node("Common.CostumeData");
+	Sprite *sprite = new Sprite((string)node->first_node("name")->value());
+	while (node)
+	{
+		sprite->addLookData(parseLookData(node));
+		node = node->next_sibling("Common.CostumeData");
+
+	}	
+	return sprite;
+}
+
+LookData *XMLParser::parseLookData(xml_node<> *baseNode)
+{
+	string filename, name;
+
+	baseNode = baseNode->first_node("filename");
+	if (baseNode)
+	{
+		filename = baseNode->value();
+	}
+
+	baseNode = baseNode->first_node("name");
+	if (baseNode)
+	{
+		name = baseNode->value();
+	}
+
+	LookData *lookData = new LookData(filename, name);
+	return lookData;
 }

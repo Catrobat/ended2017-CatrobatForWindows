@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <list>
 
 #include "LookData.h"
 
@@ -9,11 +10,13 @@ using namespace std;
 class Sprite
 {
 public:
-	Sprite(LookData *lookData, string name);
+	Sprite(string name);
 	~Sprite();
 
+	void addLookData(LookData *lookData);
+
 private:
-	LookData *m_lookData;
+	list<LookData*> *m_lookDatas;
 	string m_name;
 };
 

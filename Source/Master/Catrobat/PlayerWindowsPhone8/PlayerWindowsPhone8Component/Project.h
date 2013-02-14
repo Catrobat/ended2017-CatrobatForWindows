@@ -7,7 +7,7 @@ class Project
 {
 public:
 	Project(int androidVersion, int catroidVersionCode, string CatroidVersionName, string projectName, 
-		int screenWidth, int screenHeight, SpriteList *spriteList);
+		int screenWidth, int screenHeight);
 	~Project();
 
 	int getAndroidVersion();

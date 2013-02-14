@@ -2,8 +2,14 @@
 #include "Sprite.h"
 
 
-Sprite::Sprite(LookData *lookData, string name) :
-	m_lookData(lookData), m_name(name)
+Sprite::Sprite(string name) :
+	m_name(name)
 {
+	m_lookDatas = new list<LookData*>();
+}
+
+void Sprite::addLookData(LookData *lookData)
+{
+	m_lookDatas->push_back(lookData);
 }
 

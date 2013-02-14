@@ -2,10 +2,11 @@
 #include "Project.h"
 
 
-Project::Project(int androidVersion, int catroidVersionCode, string catroidVersionName, string projectName, int screenWidth, int screenHeight, SpriteList *spriteList) :
+Project::Project(int androidVersion, int catroidVersionCode, string catroidVersionName, string projectName, int screenWidth, int screenHeight) :
 	m_androidVersion(androidVersion), m_catroidVersionCode(catroidVersionCode), m_catroidVersionName(catroidVersionName),
-	m_projectName(projectName), m_screenWidth(screenWidth), m_screenHeight(screenHeight), m_spriteList(spriteList)
+	m_projectName(projectName), m_screenWidth(screenWidth), m_screenHeight(screenHeight)
 {
+	m_spriteList = new SpriteList();
 }
 
 int Project::getAndroidVersion()
