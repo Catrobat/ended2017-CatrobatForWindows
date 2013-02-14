@@ -1,8 +1,20 @@
 #pragma once
+
+#include <list>
+
+#include "Sprite.h"
+
+using namespace std;
+
 class SpriteList
 {
 public:
-	SpriteList(void);
-	~SpriteList(void);
+	SpriteList();
+	~SpriteList();
+
+	void addSprite(Sprite *sprite);
+
+private:
+	list<Sprite*> *m_sprites;
 };
 

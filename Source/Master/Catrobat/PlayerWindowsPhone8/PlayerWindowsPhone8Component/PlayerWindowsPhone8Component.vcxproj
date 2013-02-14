@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="BasicTimer.h" />
+    <ClInclude Include="LookData.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
     <ClInclude Include="Project.h" />
     <ClInclude Include="Renderer.h" />
@@ -158,12 +159,14 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteList.h" />
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="XMLParser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseObject.cpp" />
+    <ClCompile Include="LookData.cpp" />
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
     <ClCompile Include="Project.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -174,6 +177,7 @@
     </ClCompile>
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteList.cpp" />
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="XMLParser.cpp" />

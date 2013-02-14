@@ -2,11 +2,13 @@
 #include "SpriteList.h"
 
 
-SpriteList::SpriteList(void)
+SpriteList::SpriteList()
 {
+	m_sprites = new list<Sprite*>();
 }
 
-
-SpriteList::~SpriteList(void)
+void SpriteList::addSprite(Sprite *sprite)
 {
+	m_sprites->push_back(sprite);
 }
+

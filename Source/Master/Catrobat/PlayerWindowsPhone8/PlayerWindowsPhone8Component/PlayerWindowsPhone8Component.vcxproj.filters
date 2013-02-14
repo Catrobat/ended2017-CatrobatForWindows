@@ -35,6 +35,10 @@
     <ClCompile Include="SpriteList.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="LookData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -77,6 +81,10 @@
     <ClInclude Include="SpriteList.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="LookData.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="CatTexture.dds" />
