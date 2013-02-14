@@ -29,8 +29,12 @@
     <ClCompile Include="XMLParser.cpp">
       <Filter>XMLParser</Filter>
     </ClCompile>
-    <ClCompile Include="Project.cpp" />
-    <ClCompile Include="SpriteList.cpp" />
+    <ClCompile Include="Project.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteList.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -67,8 +71,12 @@
     <ClInclude Include="XMLParser.h">
       <Filter>XMLParser</Filter>
     </ClInclude>
-    <ClInclude Include="Project.h" />
-    <ClInclude Include="SpriteList.h" />
+    <ClInclude Include="Project.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteList.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="CatTexture.dds" />

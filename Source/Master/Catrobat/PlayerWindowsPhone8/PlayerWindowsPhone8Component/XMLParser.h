@@ -11,5 +11,7 @@ public:
 	~XMLParser();
 
 	void loadXML(string fileName);
+private:
+	void parseXML(string xml);
 };
 
