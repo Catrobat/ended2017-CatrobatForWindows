@@ -112,10 +112,16 @@ void XMLParser::parseSpriteList(xml_document<> *doc, SpriteList *spriteList)
 
 Sprite *XMLParser::parseSprite(xml_node<> *baseNode)
 {
-	xml_node<> *node = baseNode->first_node("costumeDataList")->first_node("Common.CostumeData");
+	xml_node<> *node = baseNode->first_node("name");
+	if (!node)
+		return NULL;
+
+	Sprite *sprite = new Sprite(node->value());
+
+	node = baseNode->first_node("costumeDataList")->first_node("Common.CostumeData");
 	if (node && node->first_node("name"))
 	{
-		Sprite *sprite = new Sprite(node->first_node("name")->value());
+		
 		while (node)
 		{
 			sprite->addLookData(parseLookData(node));
@@ -135,7 +141,7 @@ LookData *XMLParser::parseLookData(xml_node<> *baseNode)
 	string filename, name;
 	xml_node<> *node;
 
-	node = baseNode->first_node("filename");
+	node = baseNode->first_node("fileName");
 	if (node)
 	{
 		filename = node->value();
