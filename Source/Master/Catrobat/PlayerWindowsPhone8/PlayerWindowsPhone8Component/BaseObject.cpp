@@ -3,19 +3,6 @@
 
 using namespace Windows::Graphics::Display;
 
-BaseObject::BaseObject(float posX, float posY, Rect *windowBounds, float originX, float originY)
-{
-	scale = DisplayProperties::LogicalDpi / 96.0f;
-	m_Texture = nullptr;
-
-	m_position.x = posX;
-	m_position.y = posY;
-	m_sourceOrigin.x = originX;
-	m_sourceOrigin.y = originY;
-	m_objectScale.x = windowBounds->Width;
-	m_objectScale.y = windowBounds->Height;
-}
-
 BaseObject::BaseObject(Rect position, float originX, float originY)
 {
 	scale = DisplayProperties::LogicalDpi / 96.0f;

@@ -17,7 +17,6 @@ public:
 	virtual void LoadTexture(ID3D11Device* d3dDevice) = 0;
 
 protected:
-	BaseObject(float posX, float posY, Rect *windowBounds, float originX, float originY);
 	BaseObject(float x, float y, float width, float height, float originX, float originY);
 	BaseObject(Rect position, float originX, float originY);
 	BaseObject(Point location, Size size, float originX, float originY);
