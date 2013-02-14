@@ -181,6 +181,14 @@ LookData *XMLParser::parseLookData(xml_node<> *baseNode)
 Script *XMLParser::parseStartScript(xml_node<> *baseNode)
 {
 	StartScript *script = new StartScript();
+
+	// TODO: Check if every Script HAS to have this attribute
+	xml_attribute<> *spriteReferenceAttribute = baseNode->first_attribute();
+	if (spriteReferenceAttribute)
+	{
+		script->addSpriteReference(spriteReferenceAttribute->value());
+	}
+
 	parseBrickList(baseNode, script);
 	return script;
 }
@@ -192,6 +200,14 @@ Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode)
 		return NULL;
 
 	BroadcastScript *script = new BroadcastScript(node->value());
+
+	// TODO: Check if every Script HAS to have this attribute
+	xml_attribute<> *spriteReferenceAttribute = baseNode->first_attribute("sprite reference");
+	if (spriteReferenceAttribute)
+	{
+		script->addSpriteReference(spriteReferenceAttribute->value());
+	}
+
 	parseBrickList(baseNode, script);
 	return script;
 }
@@ -203,6 +219,14 @@ Script *XMLParser::parseWhenScript(xml_node<> *baseNode)
 		return NULL;
 
 	WhenScript *script = new WhenScript(node->value());
+
+	// TODO: Check if every Script HAS to have this attribute
+	xml_attribute<> *spriteReferenceAttribute = baseNode->first_attribute("sprite reference");
+	if (spriteReferenceAttribute)
+	{
+		script->addSpriteReference(spriteReferenceAttribute->value());
+	}
+
 	parseBrickList(baseNode, script);
 	return script;
 }
