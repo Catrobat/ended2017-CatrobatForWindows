@@ -119,21 +119,14 @@ Sprite *XMLParser::parseSprite(xml_node<> *baseNode)
 	Sprite *sprite = new Sprite(node->value());
 
 	node = baseNode->first_node("costumeDataList")->first_node("Common.CostumeData");
-	if (node && node->first_node("name"))
+	
+	while (node)
 	{
-		
-		while (node)
-		{
-			sprite->addLookData(parseLookData(node));
-			node = node->next_sibling("Common.CostumeData");
+		sprite->addLookData(parseLookData(node));
+		node = node->next_sibling("Common.CostumeData");
 
-		}	
-		return sprite;
-	}
-	else
-	{
-		return NULL;
-	}
+	}	
+	return sprite;
 }
 
 LookData *XMLParser::parseLookData(xml_node<> *baseNode)
