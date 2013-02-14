@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<Content.Project>
+  <androidVersion>15</androidVersion>
+  <catroidVersionCode>515</catroidVersionCode>
+  <catroidVersionName>0.6.0beta-515-debug</catroidVersionName>
+  <deviceName>HTC EVO 3D X515m</deviceName>
+  <projectName>DefaultProject</projectName>
+  <screenHeight>960</screenHeight>
+  <screenWidth>540</screenWidth>
+  <spriteList>
+    <Content.Sprite>
+      <costumeDataList>
+        <Common.CostumeData>
+          <fileName>5A71C6F41035979503BA294F78A09336_background</fileName>
+          <name>background</name>
+        </Common.CostumeData>
+      </costumeDataList>
+      <name>Background</name>
+      <scriptList>
+        <Content.StartScript>
+          <brickList/>
+          <sprite reference="../../.."/>
+        </Content.StartScript>
+        <Content.BroadcastScript>
+          <brickList>
+            <Bricks.SetCostumeBrick>
+              <sprite reference="../../../../.."/>
+            </Bricks.SetCostumeBrick>
+          </brickList>
+          <sprite reference="../../.."/>
+          <receivedMessage></receivedMessage>
+        </Content.BroadcastScript>
+      </scriptList>
+      <soundList/>
+    </Content.Sprite>
+    <Content.Sprite>
+      <costumeDataList>
+        <Common.CostumeData>
+          <fileName>34A109A82231694B6FE09C216B390570_normalCat</fileName>
+          <name>normalCat</name>
+        </Common.CostumeData>
+        <Common.CostumeData>
+          <fileName>395CD6389BD601812BDB299934A0CCB4_banzaiCat</fileName>
+          <name>banzaiCat</name>
+        </Common.CostumeData>
+        <Common.CostumeData>
+          <fileName>B4497E87AC34B1329DD9B14C08EEAFF0_cheshireCat</fileName>
+          <name>cheshireCat</name>
+        </Common.CostumeData>
+      </costumeDataList>
+      <name>Catroid</name>
+      <scriptList>
+        <Content.StartScript>
+          <brickList>
+            <Bricks.SetCostumeBrick>
+              <sprite reference="../../../../.."/>
+            </Bricks.SetCostumeBrick>
+          </brickList>
+          <sprite reference="../../.."/>
+        </Content.StartScript>
+        <Content.WhenScript>
+          <brickList>
+            <Bricks.SetCostumeBrick>
+              <costumeData reference="../../../../../costumeDataList/Common.CostumeData[2]"/>
+              <sprite reference="../../../../.."/>
+            </Bricks.SetCostumeBrick>
+            <Bricks.WaitBrick>
+              <sprite reference="../../../../.."/>
+              <timeToWaitInMilliSeconds>500</timeToWaitInMilliSeconds>
+            </Bricks.WaitBrick>
+            <Bricks.SetCostumeBrick>
+              <costumeData reference="../../../../../costumeDataList/Common.CostumeData[3]"/>
+              <sprite reference="../../../../.."/>
+            </Bricks.SetCostumeBrick>
+            <Bricks.WaitBrick>
+              <sprite reference="../../../../.."/>
+              <timeToWaitInMilliSeconds>500</timeToWaitInMilliSeconds>
+            </Bricks.WaitBrick>
+            <Bricks.SetCostumeBrick>
+              <costumeData reference="../../../../../costumeDataList/Common.CostumeData"/>
+              <sprite reference="../../../../.."/>
+            </Bricks.SetCostumeBrick>
+          </brickList>
+          <sprite reference="../../.."/>
+          <action>Tapped</action>
+        </Content.WhenScript>
+      </scriptList>
+      <soundList/>
+    </Content.Sprite>
+  </spriteList>
+</Content.Project>
