@@ -2,25 +2,25 @@
 #include "Project.h"
 
 
-Project::Project(int version, int versionCode, string versionName, string projectName, int screenWidth, int screenHeight, SpriteList *spriteList) :
-	m_version(version), m_versionCode(versionCode), m_versionName(versionName),
+Project::Project(int androidVersion, int catroidVersionCode, string catroidVersionName, string projectName, int screenWidth, int screenHeight, SpriteList *spriteList) :
+	m_androidVersion(androidVersion), m_catroidVersionCode(catroidVersionCode), m_catroidVersionName(catroidVersionName),
 	m_projectName(projectName), m_screenWidth(screenWidth), m_screenHeight(screenHeight), m_spriteList(spriteList)
 {
 }
 
-int Project::getVersion()
+int Project::getAndroidVersion()
 {
-	return m_version;
+	return m_androidVersion;
 }
 
-int Project::getVersionCode()
+int Project::getCatroidVersionCode()
 {
-	return m_versionCode;
+	return m_catroidVersionCode;
 }
 
-string Project::getVersionName()
+string Project::getCatroidVersionName()
 {
-	return m_versionName;
+	return m_catroidVersionName;
 }
 
 string Project::getProjectName()
