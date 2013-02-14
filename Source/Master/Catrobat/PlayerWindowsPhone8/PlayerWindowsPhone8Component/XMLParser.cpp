@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <string>
 
 XMLParser::XMLParser()
 {
@@ -12,7 +11,7 @@ XMLParser::XMLParser()
 void XMLParser::loadXML(string fileName)
 {
 	ifstream inputFile;
-	inputFile.open("testProject/projectcode.xml");
+	inputFile.open(fileName);
 
 	string text;
 	while(!inputFile.eof())

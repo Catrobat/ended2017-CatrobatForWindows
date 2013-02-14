@@ -2,6 +2,7 @@
 #include "PlayerWindowsPhone8Component.h"
 #include "Direct3DContentProvider.h"
 #include <thread>
+#include "XMLParser.h"
 
 using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
@@ -63,6 +64,12 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	// Initialize Sound
 	m_soundmanager = new SoundManager();
 	m_soundmanager->Initialize();
+
+	// XML
+	XMLParser* xml = new XMLParser();
+	xml->loadXML("testProject/projectcode.xml");
+
+	free(xml);
 
 	// Restart timer after renderer has finished initializing.
 	m_timer->Reset();
