@@ -102,41 +102,49 @@ Project* XMLParser::parseProjectInformation(xml_document<> *doc)
 
 void XMLParser::parseSpriteList(xml_document<> *doc, SpriteList *spriteList)
 {
-	xml_node<> *node = doc->first_node()->first_node()->first_node("Content.Sprite");
+	xml_node<> *node = doc->first_node()->first_node("spriteList")->first_node("Content.Sprite");
 	while (node)
 	{
 		spriteList->addSprite(parseSprite(node));
-		node = doc->first_node()->first_node()->next_sibling("Content.Sprite");
+		node = node->next_sibling("Content.Sprite");
 	}	
 }
 
 Sprite *XMLParser::parseSprite(xml_node<> *baseNode)
 {
-	xml_node<> *node = baseNode->first_node("Common.CostumeData");
-	Sprite *sprite = new Sprite((string)node->first_node("name")->value());
-	while (node)
+	xml_node<> *node = baseNode->first_node("costumeDataList")->first_node("Common.CostumeData");
+	if (node && node->first_node("name"))
 	{
-		sprite->addLookData(parseLookData(node));
-		node = node->next_sibling("Common.CostumeData");
+		Sprite *sprite = new Sprite(node->first_node("name")->value());
+		while (node)
+		{
+			sprite->addLookData(parseLookData(node));
+			node = node->next_sibling("Common.CostumeData");
 
-	}	
-	return sprite;
+		}	
+		return sprite;
+	}
+	else
+	{
+		return NULL;
+	}
 }
 
 LookData *XMLParser::parseLookData(xml_node<> *baseNode)
 {
 	string filename, name;
+	xml_node<> *node;
 
-	baseNode = baseNode->first_node("filename");
-	if (baseNode)
+	node = baseNode->first_node("filename");
+	if (node)
 	{
-		filename = baseNode->value();
+		filename = node->value();
 	}
 
-	baseNode = baseNode->first_node("name");
-	if (baseNode)
+	node = baseNode->first_node("name");
+	if (node)
 	{
-		name = baseNode->value();
+		name = node->value();
 	}
 
 	LookData *lookData = new LookData(filename, name);
