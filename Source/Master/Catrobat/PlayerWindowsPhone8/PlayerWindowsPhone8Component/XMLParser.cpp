@@ -55,66 +55,42 @@ Project* XMLParser::parseProjectInformation(xml_document<> *doc)
 	}
 
 	// catroidVersionCode
-	node = node->next_sibling("catroidVersionCode");
-	if (!node)
-	{
-		node = doc->first_node()->first_node("catroidVersionCode");
-	}
+	node = doc->first_node()->first_node("catroidVersionCode");
 	if (node)
 	{
 		catroidVersionCode = atoi(node->value());
 	}
 
 	// catroiVersionName
-	node = node->next_sibling("catroidVersionName");
-	if (!node)
-	{
-		node = doc->first_node()->first_node("catroidVersionName");
-	}
+	node = doc->first_node()->first_node("catroidVersionName");
 	if (node)
 	{
 		catroidVersionName = node->value();
 	}
 
 	// deviceName
-	node = node->next_sibling("deviceName");
-	if (!node)
-	{
-		node = doc->first_node()->first_node("deviceName");
-	}
+	node = doc->first_node()->first_node("deviceName");
 	if (node)
 	{
 		deviceName = node->value();
 	}
 
 	// projectName
-	node = node->next_sibling("projectName");
-	if (!node)
-	{
-		node = doc->first_node()->first_node("projectName");
-	}
+	node = doc->first_node()->first_node("projectName");
 	if (node)
 	{
 		projectName = node->value();
 	}
 
 	// screenHeight
-	node = node->next_sibling("screenHeight");
-	if (!node)
-	{
-		node = doc->first_node()->first_node("screenHeight");
-	}
+	node = doc->first_node()->first_node("screenHeight");
 	if (node)
 	{
 		screenHeight = atoi(node->value());
 	}
 
 	// screenWidth
-	node = node->next_sibling("screenWidth");
-	if (!node)
-	{
-		node = doc->first_node()->first_node("screenWidth");
-	}
+	node = doc->first_node()->first_node("screenWidth");
 	if (node)
 	{
 		screenWidth = atoi(node->value());
