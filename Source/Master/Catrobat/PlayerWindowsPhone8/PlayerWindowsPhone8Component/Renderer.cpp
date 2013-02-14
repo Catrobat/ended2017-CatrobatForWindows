@@ -1,11 +1,13 @@
 ﻿#include "pch.h"
 #include "Renderer.h"
+//#include "rapidxml/rapidxml.hpp"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
 using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
 using namespace Windows::Graphics::Display;
+//using namespace rapidxml;
 
 Renderer::Renderer() :
 	m_loadingComplete(false),
@@ -26,9 +28,9 @@ void Renderer::CreateWindowSizeDependentResources()
 {
 	Direct3DBase::CreateWindowSizeDependentResources();
 
-	CreateTestObject1();
+	//CreateTestObject1();
 	//CreateTestObject2();
-	//CreateTestObject3();
+	CreateTestObject3();
 	//CreateTestObject4();
 	m_testObject->LoadTexture(m_d3dDevice.Get());
 }
@@ -94,6 +96,9 @@ void Renderer::CreateTestObject3()
 	// TestObject(Rect *position, float originX, float originY);
 	Rect position(50, 50, 100, 100);
 	m_testObject = new TestObject(position);
+
+	//xml_document<> doc;
+	//doc.parse<0>("");
 }
 
 void Renderer::CreateTestObject4()
