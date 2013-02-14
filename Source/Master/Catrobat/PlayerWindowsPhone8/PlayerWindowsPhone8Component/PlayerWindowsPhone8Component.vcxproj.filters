@@ -1,34 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <FxCompile Include="SimplePixelShader.hlsl" />
-    <FxCompile Include="SimpleVertexShader.hlsl" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
-    <ClCompile Include="Direct3DBase.cpp" />
-    <ClCompile Include="Direct3DContentProvider.cpp" />
-    <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="BaseObject.cpp" />
-    <ClCompile Include="TestObject.cpp" />
-    <ClCompile Include="SoundManager.cpp" />
-    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="BaseObject.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="TestObject.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3DBase.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3DContentProvider.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Sounds</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicTimer.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
-    <ClInclude Include="DirectXHelper.h" />
-    <ClInclude Include="Direct3DBase.h" />
-    <ClInclude Include="Direct3DContentProvider.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="BaseObject.h" />
-    <ClInclude Include="TestObject.h" />
-    <ClInclude Include="SoundManager.h" />
-    <ClInclude Include="Sound.h" />
+    <ClInclude Include="BaseObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="TestObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicTimer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3DBase.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3DContentProvider.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXHelper.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Sounds</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="CatTexture.dds" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{e6ba634f-bf91-45e2-9285-0496d03d6afe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{4c1f71dc-b3ed-4e5e-9ec7-255b9306bfd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sounds">
+      <UniqueIdentifier>{45af6725-67fa-413e-a248-9a2e00614a16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

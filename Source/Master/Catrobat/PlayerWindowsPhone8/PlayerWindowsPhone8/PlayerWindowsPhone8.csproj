@@ -124,6 +124,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="testProject\.nomedia" />
+    <None Include="testProject\CatTexture.dds" />
     <None Include="testProject\images\.nomedia" />
     <None Include="testProject\images\34A109A82231694B6FE09C216B390570_normalCat" />
     <None Include="testProject\images\395CD6389BD601812BDB299934A0CCB4_banzaiCat" />
