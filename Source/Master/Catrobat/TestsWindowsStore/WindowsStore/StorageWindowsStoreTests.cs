@@ -1,16 +1,10 @@
 ﻿using System;
-using Catrobat.Core;
-using Catrobat.Core.Storage;
-using Catrobat.Core.ZIP;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using System.IO;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media.Imaging;
 
-namespace TestsWindowsStore.Data
+namespace Catrobat.TestsWindowsStore.WindowsStore
 {
   [TestClass]
-  public class Phone7StorageTests
+  public class StorageWindowsStoreTests
   {
     [TestMethod]
     public void DeleteDirectoryTest()

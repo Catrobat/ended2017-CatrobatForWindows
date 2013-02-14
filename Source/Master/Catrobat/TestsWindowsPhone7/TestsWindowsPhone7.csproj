@@ -67,7 +67,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\Phone7StorageTests.cs" />
+    <Compile Include="Data\StoragePhone7Tests.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

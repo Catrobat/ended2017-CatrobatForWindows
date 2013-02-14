@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 namespace TestsWindowsPhone7.Data
 {
   [TestClass]
-  public class Phone7StorageTests : SilverlightTest
+  public class StoragePhone7Tests : SilverlightTest
   {
     [TestMethod]
     public void DeleteDirectoryTest()

@@ -121,7 +121,7 @@
     <Compile Include="Data\DataReadingTests.cs" />
     <Compile Include="Data\DataWritingTests.cs" />
     <Compile Include="Data\FileNameGeneratorTest.cs" />
-    <Compile Include="Data\Phone7StorageTests.cs" />
+    <Compile Include="WindowsStore\StorageWindowsStoreTests.cs" />
     <Compile Include="Data\ProjectTests.cs" />
     <Compile Include="Data\SampleData\SampleLoader.cs" />
     <Compile Include="Data\ScriptBrickCollectionTests.cs" />
