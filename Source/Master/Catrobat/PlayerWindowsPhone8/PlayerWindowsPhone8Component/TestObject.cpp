@@ -1,11 +1,6 @@
 #include "pch.h"
 #include "TestObject.h"
 
-TestObject::TestObject(float posX, float posY, Rect *windowBounds, float originX, float originY) :
-	BaseObject(posX, posY, windowBounds, originX, originY)
-{
-}
-
 TestObject::TestObject(float x, float y, float width, float height, float originX, float originY) :
 	BaseObject(x, y, width, height, originX, originY)
 {
