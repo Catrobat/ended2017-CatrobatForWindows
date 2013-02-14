@@ -32,13 +32,17 @@ void XMLParser::loadXML(string fileName)
 
 void XMLParser::parseXML(string xml)
 {
+	// TODO: WE NEED ERROR HANDLING!
+
 	xml_document<> doc;
 	char *test = (char*) xml.c_str();
 	doc.parse<0>(test);
 	char *str = doc.first_node()->name();
 
 	// Read Project Information
-	xml_node<> *node = doc.first_node()->first_node();
+	xml_node<> *node = doc.first_node()->first_node("androidVersion");
+	int androidVersion = atoi(node->value());
 
-	string androidVersion = node->value();	
+	node = node->next_sibling("catroidVersionCode");
+	int androidVersionCode = atoi(node->value());
 }
