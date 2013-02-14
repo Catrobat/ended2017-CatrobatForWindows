@@ -53,6 +53,9 @@
     <ClCompile Include="BroadcastScript.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -111,6 +114,9 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="BroadcastScript.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

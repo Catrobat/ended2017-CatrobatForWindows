@@ -7,6 +7,7 @@
 #include "SpriteList.h"
 #include "Sprite.h"
 #include "LookData.h"
+#include "Brick.h"
 
 using namespace std;
 using namespace rapidxml;
@@ -27,5 +28,8 @@ private:
 	Script *parseStartScript(xml_node<> *baseNode);
 	Script *parseBroadcastScript(xml_node<> *baseNode);
 	Script *parseWhenScript(xml_node<> *baseNode);
+	void parseBrickList(xml_node<> *baseNode, Script *script);
+	Brick *parseCostumeBrick(xml_node<> *baseNode);
+	Brick *parseWaitBrick(xml_node<> *baseNode);
 };
 

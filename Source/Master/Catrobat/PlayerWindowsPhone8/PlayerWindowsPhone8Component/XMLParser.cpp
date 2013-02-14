@@ -181,17 +181,47 @@ LookData *XMLParser::parseLookData(xml_node<> *baseNode)
 Script *XMLParser::parseStartScript(xml_node<> *baseNode)
 {
 	StartScript *script = new StartScript();
+	parseBrickList(baseNode, script);
 	return script;
 }
 
 Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode)
 {
 	BroadcastScript *script = new BroadcastScript();
+	parseBrickList(baseNode, script);
 	return script;
 }
 
 Script *XMLParser::parseWhenScript(xml_node<> *baseNode)
 {
 	WhenScript *script = new WhenScript();
+	parseBrickList(baseNode, script);
 	return script;
+}
+
+void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("brickList")->first_node("Bricks.SetCostumeBrick");
+	while(node)
+	{
+		script->addBrick(parseCostumeBrick(node));
+		node = node->next_sibling("Bricks.SetCostumeBrick");
+	}
+
+	node = baseNode->first_node("brickList")->first_node("Bricks.WaitBrick");
+	while(node)
+	{
+		script->addBrick(parseWaitBrick(node));
+		node = node->next_sibling("Bricks.WaitBrick");
+	}
+}
+
+Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode)
+{
+	return new Brick("costume");
+}
+
+Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode)
+{
+	return new Brick("wait");
 }

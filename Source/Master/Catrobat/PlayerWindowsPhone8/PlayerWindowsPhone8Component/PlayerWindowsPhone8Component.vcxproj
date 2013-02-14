@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="BasicTimer.h" />
+    <ClInclude Include="Brick.h" />
     <ClInclude Include="BroadcastScript.h" />
     <ClInclude Include="LookData.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -170,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseObject.cpp" />
+    <ClCompile Include="Brick.cpp" />
     <ClCompile Include="BroadcastScript.cpp" />
     <ClCompile Include="LookData.cpp" />
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
