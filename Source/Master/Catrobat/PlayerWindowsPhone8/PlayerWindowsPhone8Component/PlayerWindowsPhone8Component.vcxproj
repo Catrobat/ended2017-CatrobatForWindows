@@ -158,6 +158,7 @@
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="TestObject.h" />
+    <ClInclude Include="XMLParser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseObject.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="XMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DirectXTK\DirectXTK_WindowsPhone8.vcxproj">

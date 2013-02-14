@@ -26,6 +26,7 @@
     <ClCompile Include="SoundManager.cpp">
       <Filter>Sounds</Filter>
     </ClCompile>
+    <ClCompile Include="XMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -59,6 +60,7 @@
     <ClInclude Include="SoundManager.h">
       <Filter>Sounds</Filter>
     </ClInclude>
+    <ClInclude Include="XMLParser.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="CatTexture.dds" />
@@ -72,6 +74,9 @@
     </Filter>
     <Filter Include="Sounds">
       <UniqueIdentifier>{45af6725-67fa-413e-a248-9a2e00614a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XMLParser">
+      <UniqueIdentifier>{f05256e5-559a-4d33-beb7-99d07774a905}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
