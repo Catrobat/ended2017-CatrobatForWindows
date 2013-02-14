@@ -20,7 +20,6 @@ public:
 
 protected:
 	Script(TypeOfScript scriptType);
-	~Script();
 
 private:
 	TypeOfScript m_scriptType;

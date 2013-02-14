@@ -4,7 +4,10 @@ class BroadcastScript :
 	public Script
 {
 public:
-	BroadcastScript();
+	BroadcastScript(string receivedMessage);
 	~BroadcastScript();
+
+private:
+	string m_receivedMessage;
 };
 

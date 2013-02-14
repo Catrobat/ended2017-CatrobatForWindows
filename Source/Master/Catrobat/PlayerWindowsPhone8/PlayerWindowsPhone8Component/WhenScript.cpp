@@ -2,7 +2,7 @@
 #include "WhenScript.h"
 
 
-WhenScript::WhenScript() :
-	Script(TypeOfScript::WhenScript)
+WhenScript::WhenScript(string action) :
+	Script(TypeOfScript::WhenScript), m_action(action)
 {
 }

@@ -187,14 +187,22 @@ Script *XMLParser::parseStartScript(xml_node<> *baseNode)
 
 Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode)
 {
-	BroadcastScript *script = new BroadcastScript();
+	xml_node<> *node = baseNode->first_node("receivedMessage");
+	if (!node)
+		return NULL;
+
+	BroadcastScript *script = new BroadcastScript(node->value());
 	parseBrickList(baseNode, script);
 	return script;
 }
 
 Script *XMLParser::parseWhenScript(xml_node<> *baseNode)
 {
-	WhenScript *script = new WhenScript();
+	xml_node<> *node = baseNode->first_node("action");
+	if (!node)
+		return NULL;
+
+	WhenScript *script = new WhenScript(node->value());
 	parseBrickList(baseNode, script);
 	return script;
 }

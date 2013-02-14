@@ -4,7 +4,10 @@ class WhenScript :
 	public Script
 {
 public:
-	WhenScript();
+	WhenScript(string action);
 	~WhenScript();
+
+private:
+	string m_action;
 };
 
