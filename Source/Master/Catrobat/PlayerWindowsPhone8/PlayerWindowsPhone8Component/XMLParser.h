@@ -1,8 +1,13 @@
 #pragma once
+
+using namespace std;
+
 class XMLParser
 {
 public:
-	XMLParser(void);
-	~XMLParser(void);
+	XMLParser();
+	~XMLParser();
+
+	void loadXML(string fileName);
 };
 
