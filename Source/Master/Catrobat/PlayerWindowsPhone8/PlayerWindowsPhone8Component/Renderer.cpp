@@ -1,13 +1,11 @@
 ﻿#include "pch.h"
 #include "Renderer.h"
-//#include "rapidxml/rapidxml.hpp"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
 using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
 using namespace Windows::Graphics::Display;
-//using namespace rapidxml;
 
 Renderer::Renderer() :
 	m_loadingComplete(false),
@@ -19,9 +17,6 @@ Renderer::Renderer() :
 void Renderer::CreateDeviceResources()
 {
 	Direct3DBase::CreateDeviceResources();
-
-	// SpriteBatch should be create here if anyhow possible (meanwhile use Hack)
-	// m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_d3dContext.Get()));
 }
 
 void Renderer::CreateWindowSizeDependentResources()
@@ -96,9 +91,6 @@ void Renderer::CreateTestObject3()
 	// TestObject(Rect *position, float originX, float originY);
 	Rect position(50, 50, 100, 100);
 	m_testObject = new TestObject(position);
-
-	//xml_document<> doc;
-	//doc.parse<0>("");
 }
 
 void Renderer::CreateTestObject4()
