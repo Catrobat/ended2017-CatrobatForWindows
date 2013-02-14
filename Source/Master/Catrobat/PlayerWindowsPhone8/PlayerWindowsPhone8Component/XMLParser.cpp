@@ -126,6 +126,31 @@ Sprite *XMLParser::parseSprite(xml_node<> *baseNode)
 		node = node->next_sibling("Common.CostumeData");
 
 	}	
+
+	node = baseNode->first_node("scriptList")->first_node("Content.StartScript");
+
+	while (node)
+	{
+		sprite->addScript(parseStartScript(node));
+		node = node->next_sibling("Content.StartScript");
+	}
+
+	node = baseNode->first_node("scriptList")->first_node("Content.BroadcastScript");
+
+	while (node)
+	{
+		sprite->addScript(parseBroadcastScript(node));
+		node = node->next_sibling("Content.BroadcastScript");
+	}
+
+	node = baseNode->first_node("scriptList")->first_node("Content.WhenScript");
+
+	while (node)
+	{
+		sprite->addScript(parseWhenScript(node));
+		node = node->next_sibling("Content.WhenScript");
+	}
+
 	return sprite;
 }
 
@@ -148,4 +173,19 @@ LookData *XMLParser::parseLookData(xml_node<> *baseNode)
 
 	LookData *lookData = new LookData(filename, name);
 	return lookData;
+}
+
+Script *XMLParser::parseStartScript(xml_node<> *baseNode)
+{
+	return NULL;
+}
+
+Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode)
+{
+	return NULL;
+}
+
+Script *XMLParser::parseWhenScript(xml_node<> *baseNode)
+{
+	return NULL;
 }

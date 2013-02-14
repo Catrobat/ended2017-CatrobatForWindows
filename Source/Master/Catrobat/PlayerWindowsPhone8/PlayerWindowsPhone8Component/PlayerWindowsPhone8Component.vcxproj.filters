@@ -38,7 +38,21 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="LookData.cpp" />
+    <ClCompile Include="Script.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="StartScript.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="WhenScript.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="LookData.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="BroadcastScript.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -84,7 +98,21 @@
     <ClInclude Include="Sprite.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="LookData.h" />
+    <ClInclude Include="Script.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="StartScript.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="WhenScript.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="LookData.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BroadcastScript.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="CatTexture.dds" />

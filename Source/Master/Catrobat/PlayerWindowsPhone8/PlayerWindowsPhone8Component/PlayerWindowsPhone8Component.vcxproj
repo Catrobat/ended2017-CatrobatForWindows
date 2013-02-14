@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="BasicTimer.h" />
+    <ClInclude Include="BroadcastScript.h" />
     <ClInclude Include="LookData.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
     <ClInclude Include="Project.h" />
@@ -157,15 +158,19 @@
     <ClInclude Include="Direct3DBase.h" />
     <ClInclude Include="Direct3DContentProvider.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Script.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteList.h" />
+    <ClInclude Include="StartScript.h" />
     <ClInclude Include="TestObject.h" />
+    <ClInclude Include="WhenScript.h" />
     <ClInclude Include="XMLParser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseObject.cpp" />
+    <ClCompile Include="BroadcastScript.cpp" />
     <ClCompile Include="LookData.cpp" />
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
     <ClCompile Include="Project.cpp" />
@@ -175,11 +180,14 @@
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Script.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteList.cpp" />
+    <ClCompile Include="StartScript.cpp" />
     <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="WhenScript.cpp" />
     <ClCompile Include="XMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>

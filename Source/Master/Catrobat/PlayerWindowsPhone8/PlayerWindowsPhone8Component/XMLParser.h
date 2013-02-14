@@ -24,5 +24,8 @@ private:
 	void parseSpriteList(xml_document<> *doc, SpriteList *spriteList);
 	Sprite *parseSprite(xml_node<> *baseNode);
 	LookData *parseLookData(xml_node<> *baseNode);
+	Script *parseStartScript(xml_node<> *baseNode);
+	Script *parseBroadcastScript(xml_node<> *baseNode);
+	Script *parseWhenScript(xml_node<> *baseNode);
 };
 
