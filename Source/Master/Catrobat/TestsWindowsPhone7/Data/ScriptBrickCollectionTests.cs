@@ -1,8 +1,8 @@
 ﻿using System;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using System.Collections;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestsWindowsStore.Data
 {
