@@ -12,3 +12,8 @@ void Script::addBrick(Brick *brick)
 {
 	m_brickList->push_back(brick);
 }
+
+void Script::addSpriteReference(string spriteReference)
+{
+	m_spriteReference = spriteReference;
+}

@@ -3,6 +3,8 @@
 #include "StartScript.h"
 #include "BroadcastScript.h"
 #include "WhenScript.h"
+#include "CostumeBrick.h"
+#include "WaitBrick.h"
 
 #include <iostream>
 #include <fstream>
@@ -181,6 +183,14 @@ LookData *XMLParser::parseLookData(xml_node<> *baseNode)
 Script *XMLParser::parseStartScript(xml_node<> *baseNode)
 {
 	StartScript *script = new StartScript();
+
+	// TODO: Check if every Script HAS to have this attribute
+	xml_attribute<> *spriteReferenceAttribute = baseNode->first_node("sprite")->first_attribute();
+	if (spriteReferenceAttribute)
+	{
+		script->addSpriteReference(spriteReferenceAttribute->value());
+	}
+
 	parseBrickList(baseNode, script);
 	return script;
 }
@@ -192,6 +202,14 @@ Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode)
 		return NULL;
 
 	BroadcastScript *script = new BroadcastScript(node->value());
+
+	// TODO: Check if every Script HAS to have this attribute
+	xml_attribute<> *spriteReferenceAttribute = baseNode->first_node("sprite")->first_attribute();
+	if (spriteReferenceAttribute)
+	{
+		script->addSpriteReference(spriteReferenceAttribute->value());
+	}
+
 	parseBrickList(baseNode, script);
 	return script;
 }
@@ -203,6 +221,14 @@ Script *XMLParser::parseWhenScript(xml_node<> *baseNode)
 		return NULL;
 
 	WhenScript *script = new WhenScript(node->value());
+
+	// TODO: Check if every Script HAS to have this attribute
+	xml_attribute<> *spriteReferenceAttribute = baseNode->first_node("sprite")->first_attribute();
+	if (spriteReferenceAttribute)
+	{
+		script->addSpriteReference(spriteReferenceAttribute->value());
+	}
+
 	parseBrickList(baseNode, script);
 	return script;
 }
@@ -226,10 +252,29 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 
 Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode)
 {
-	return new Brick("costume");
+	xml_attribute<> *spriteRef = baseNode->first_node("sprite")->first_attribute("reference");
+	if (!spriteRef)
+		return NULL;
+	string spriteReference = spriteRef->value();
+
+	xml_node<> *costumeDataNode =  baseNode->first_node("costumeData");
+	if (costumeDataNode)
+	{
+		xml_attribute<> *costumeDataRef = costumeDataNode->first_attribute("reference");
+		if (costumeDataRef)
+		{
+			CostumeBrick *brick = new CostumeBrick(spriteReference, costumeDataRef->value());
+			return brick;
+		}
+	}
+	return new CostumeBrick(spriteReference);
+	
 }
 
 Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode)
 {
-	return new Brick("wait");
+	int time = atoi(baseNode->first_node("timeToWaitInMilliSeconds")->value());
+	string spriteReference = baseNode->first_node("sprite")->first_attribute()->value();
+	
+	return new WaitBrick(spriteReference, time);
 }

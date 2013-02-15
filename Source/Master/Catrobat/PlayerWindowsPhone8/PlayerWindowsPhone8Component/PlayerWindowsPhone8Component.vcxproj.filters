@@ -56,6 +56,10 @@
     <ClCompile Include="Brick.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="WaitBrick.cpp" />
+    <ClCompile Include="CostumeBrick.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -119,6 +123,8 @@
     <ClInclude Include="Brick.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="CostumeBrick.h" />
+    <ClInclude Include="WaitBrick.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="CatTexture.dds" />

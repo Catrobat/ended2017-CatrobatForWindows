@@ -115,53 +115,15 @@
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\CatrobatContextTests.cs" />
-    <Compile Include="Data\CopyTests.cs" />
-    <Compile Include="Data\DataDeletingTests.cs" />
-    <Compile Include="Data\DataReadingTests.cs" />
-    <Compile Include="Data\DataWritingTests.cs" />
-    <Compile Include="Data\FileNameGeneratorTest.cs" />
-    <Compile Include="Data\Phone7StorageTests.cs" />
-    <Compile Include="Data\ProjectTests.cs" />
-    <Compile Include="Data\SampleData\SampleLoader.cs" />
-    <Compile Include="Data\ScriptBrickCollectionTests.cs" />
-    <Compile Include="Data\XmlConverterTests.cs" />
-    <Compile Include="Data\XMLPathHelperTests.cs" />
-    <Compile Include="Data\XPathHelperTests.cs" />
-    <Compile Include="Data\ZipTests.cs" />
-    <Compile Include="IDE\ConverterTest.cs" />
-    <Compile Include="Player\XnaDataCreatingTests.cs" />
+    <Compile Include="Tests\Data\StorageWindowsStoreTests.cs" />
+    <Compile Include="Tests\IDE\ConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Data\SampleData\SampleProjects\default.catroid" />
-    <None Include="Data\SampleData\SampleProjects\test.catroid" />
-    <None Include="Data\SampleData\SampleProjects\UltimateTest.catroid" />
     <None Include="TestsWindowsStore_TemporaryKey.pfx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\SampleData\SampleProjects\Converter\PointToBrick.xml" />
-    <Content Include="Data\SampleData\SampleProjects\Converter\ProjectElements.xml" />
-    <Content Include="Data\SampleData\SampleProjects\Converter\UltimateTest.xml" />
-    <Content Include="Data\SampleData\SampleProjects\projectcode.xml" />
-    <Content Include="Data\SampleData\SampleProjects\simple.xml" />
-    <Content Include="Data\SampleData\SampleProjects\ultimateTest.xml" />
-    <Content Include="Images\UnitTestLogo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\UnitTestSmallLogo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\UnitTestSplashScreen.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\UnitTestStoreLogo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
@@ -172,6 +134,9 @@
       <Project>{f1eef384-9527-49e6-8f5a-3f88671cdbac}</Project>
       <Name>IDEWindowsStore</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Misc\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
