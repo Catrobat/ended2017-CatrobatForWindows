@@ -2,7 +2,7 @@
 #include "Brick.h"
 
 
-Brick::Brick(string type) :
-	m_type(type)
+Brick::Brick(TypeOfBrick brickType, string spriteReference) :
+	m_brickType(brickType), m_spriteReference(spriteReference)
 {
 }

@@ -7,10 +7,16 @@ using namespace std;
 class Brick
 {
 public:
-	Brick(string type);
-	~Brick();
+	enum TypeOfBrick
+	{
+		CostumeBrick,
+		WaitBrick
+	};
+
+	Brick(TypeOfBrick brickType, string spriteReference);
 
 private:
-	string m_type;
+	TypeOfBrick m_brickType;
+	string m_spriteReference;
 };
 
