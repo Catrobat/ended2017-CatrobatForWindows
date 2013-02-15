@@ -16,29 +16,30 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
       switch (project)
       {
         case Projects.Core:
-          fullUri += "Core";
+          fullUri += "Core/";
           break;
         case Projects.IdePhone:
-          fullUri += "IDEWindowsPhone";
+          fullUri += "IDEWindowsPhone/";
           break;
         case Projects.IdeStore:
-          fullUri += "IDEWindowsStroe";
+          fullUri += "IDEWindowsStroe/";
           break;
         case Projects.TestsPhone:
-          fullUri += "TestsWindowsPhone";
+          fullUri += "TestsWindowsPhone/";
           break;
         case Projects.TestsStore:
-          fullUri += "TestsWindowsStore";
+          fullUri += "TestsWindowsStore/";
           break;
         default:
           throw new ArgumentOutOfRangeException("project");
       }
 
+      fullUri += uri;
 
-      // TODO: does the code below work?
+      // TODO: Find a way to get resources from assembly within Unittest Project
       Func<Task<Stream>> sync = async delegate() 
       {
-        var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(new Uri(fullUri, UriKind.Relative));
+        var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(new Uri(fullUri));
         return (await file.OpenAsync(FileAccessMode.Read)).AsStream();
       };
 
