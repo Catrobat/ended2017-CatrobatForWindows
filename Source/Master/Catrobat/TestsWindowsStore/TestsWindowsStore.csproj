@@ -124,7 +124,6 @@
     <Compile Include="WindowsStore\StorageWindowsStoreTests.cs" />
     <Compile Include="Data\ProjectTests.cs" />
     <Compile Include="Data\SampleData\SampleLoader.cs" />
-    <Compile Include="Data\ScriptBrickCollectionTests.cs" />
     <Compile Include="Data\XmlConverterTests.cs" />
     <Compile Include="Data\XMLPathHelperTests.cs" />
     <Compile Include="Data\XPathHelperTests.cs" />

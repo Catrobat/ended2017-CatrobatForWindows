@@ -3,6 +3,7 @@ using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using TestsWindowsStore.Data.SampleData;
+using Catrobat.Core.Storage;
 
 namespace TestsWindowsStore.Data
 {
@@ -16,19 +17,18 @@ namespace TestsWindowsStore.Data
 
       SampleLoader.LoadSampleProject("test.catroid", "DefaultProject");
 
-      string newProjectName = "TestProjectCreateNew"; 
+      string newProjectName = "TestProjectCreateNew";
 
       CatrobatContext.Instance.CreateNewProject(newProjectName);
 
-      throw new NotImplementedException("Implement for WindowsStore");
-      //using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
-      //{
-      //  Assert.AreEqual(CatrobatContext.Instance.CurrentProject.BasePath, CatrobatContext.ProjectsPath + "/" + newProjectName);
+      using (IStorage storage = StorageSystem.GetStorage())
+      {
+        Assert.AreEqual(CatrobatContext.Instance.CurrentProject.BasePath, CatrobatContext.ProjectsPath + "/" + newProjectName);
 
-      //  Assert.IsTrue(isolatedStorage.FileExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ProjectCodePath));
-      //  Assert.IsTrue(isolatedStorage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ImagesPath));
-      //  Assert.IsTrue(isolatedStorage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.SoundsPath));
-      //}
+        Assert.IsTrue(storage.FileExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ProjectCodePath));
+        Assert.IsTrue(storage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ImagesPath));
+        Assert.IsTrue(storage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.SoundsPath));
+      }
 
       TestHelper.InitializeAndClearCatrobatContext();
     }
@@ -43,21 +43,20 @@ namespace TestsWindowsStore.Data
 
       Assert.AreEqual(CatrobatContext.Instance.CurrentProject.ProjectName, "DefaultProject2");
 
-      throw new NotImplementedException("Implement for WindowsStore");
-      //using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
-      //{
-      //  Assert.IsTrue(isolatedStorage.FileExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ProjectCodePath));
-      //  Assert.IsTrue(isolatedStorage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ImagesPath));
-      //  Assert.IsTrue(isolatedStorage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.SoundsPath));
-      //}
+      using (IStorage storage = StorageSystem.GetStorage())
+      {
+        Assert.IsTrue(storage.FileExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ProjectCodePath));
+        Assert.IsTrue(storage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ImagesPath));
+        Assert.IsTrue(storage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.SoundsPath));
+      }
 
-      //CatrobatContext.Instance.DeleteProject("DefaultProject1");
+      CatrobatContext.Instance.DeleteProject("DefaultProject1");
 
-      //using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
-      //{
-      //  Assert.IsTrue(isolatedStorage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath));
-      //  Assert.IsFalse(isolatedStorage.DirectoryExists(CatrobatContext.ProjectsPath + "/" + "DefaultProject1"));
-      //}
+      using (IStorage storage = StorageSystem.GetStorage())
+      {
+        Assert.IsTrue(storage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath));
+        Assert.IsFalse(storage.DirectoryExists(CatrobatContext.ProjectsPath + "/" + "DefaultProject1"));
+      }
 
       TestHelper.InitializeAndClearCatrobatContext();
     }
@@ -72,20 +71,19 @@ namespace TestsWindowsStore.Data
 
       Assert.AreEqual(CatrobatContext.Instance.CurrentProject.ProjectName, "DefaultProject2");
 
-      throw new NotImplementedException("Implement for WindowsStore");
-      //using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
-      //{
-      //  Assert.IsTrue(isolatedStorage.FileExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ProjectCodePath));
-      //  Assert.IsTrue(isolatedStorage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ImagesPath));
-      //  Assert.IsTrue(isolatedStorage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.SoundsPath));
-      //}
+      using (IStorage storage = StorageSystem.GetStorage())
+      {
+        Assert.IsTrue(storage.FileExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ProjectCodePath));
+        Assert.IsTrue(storage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ImagesPath));
+        Assert.IsTrue(storage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.SoundsPath));
+      }
 
-      //CatrobatContext.Instance.DeleteProject("DefaultProject2");
+      CatrobatContext.Instance.DeleteProject("DefaultProject2");
 
-      //using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
-      //{
-      //  Assert.IsFalse(isolatedStorage.DirectoryExists(CatrobatContext.ProjectsPath + "/" + "DefaultProject2"));
-      //}
+      using (IStorage storage = StorageSystem.GetStorage())
+      {
+        Assert.IsFalse(storage.DirectoryExists(CatrobatContext.ProjectsPath + "/" + "DefaultProject2"));
+      }
 
       Assert.IsTrue(CatrobatContext.Instance.CurrentProject.ProjectName == CatrobatContext.DefaultProjectName);
 
@@ -121,13 +119,12 @@ namespace TestsWindowsStore.Data
 
       CatrobatContext.Instance.CurrentProject.ProjectName = "RenamedProject";
 
-      throw new NotImplementedException("Implement for WindowsStore");
-      //using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
-      //{
-      //  Assert.IsTrue(isolatedStorage.FileExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ProjectCodePath));
-      //  Assert.IsTrue(isolatedStorage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ImagesPath));
-      //  Assert.IsTrue(isolatedStorage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.SoundsPath));
-      //}
+      using (IStorage storage = StorageSystem.GetStorage())
+      {
+        Assert.IsTrue(storage.FileExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ProjectCodePath));
+        Assert.IsTrue(storage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ImagesPath));
+        Assert.IsTrue(storage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.SoundsPath));
+      }
 
       TestHelper.InitializeAndClearCatrobatContext();
     }

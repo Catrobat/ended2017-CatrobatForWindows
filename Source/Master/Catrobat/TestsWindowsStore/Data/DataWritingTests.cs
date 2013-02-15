@@ -15,12 +15,12 @@ namespace TestsWindowsStore.Data
         [TestMethod]
         public void DataWriteSimpleTest()
         {
-            string originalPath = "Tests/Data/SampleData/SampleProjects/ultimateTest.xml";
+            string originalPath = "Data/SampleData/SampleProjects/ultimateTest.xml";
 
             SampleLoader.LoadSampleXML("ultimateTest");
             CatrobatContext.Instance.CurrentProject.Save();
 
-            Stream originalStream = ResourceLoader.GetResourceStream(Projects.Core, originalPath);
+            Stream originalStream = ResourceLoader.GetResourceStream(Projects.TestsStore, originalPath);
             StreamReader originalReader = new StreamReader(originalStream);
             String originalXml = originalReader.ReadToEnd();
 

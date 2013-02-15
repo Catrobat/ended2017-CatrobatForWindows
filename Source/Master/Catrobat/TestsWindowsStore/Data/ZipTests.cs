@@ -2,6 +2,8 @@
 using Catrobat.Core.ZIP;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Windows.UI.Xaml;
+using System.IO;
+using Catrobat.Core.Storage;
 
 namespace TestsWindowsStore.Data
 {
@@ -11,72 +13,67 @@ namespace TestsWindowsStore.Data
     [TestMethod]
     public void UnZipSimpleTest()
     {
-      throw new NotImplementedException("Implement for WindowsStore");
+      TestHelper.InitializeAndClearCatrobatContext();
+      string path = "Data/SampleData/SampleProjects/test.catroid";
 
-      //TestHelper.InitializeAndClearCatrobatContext();
-      //string path = "Tests/Data/SampleData/SampleProjects/test.catroid";
-      //Uri uri = new Uri("/MetroCatUT;component/" + path, UriKind.Relative);
-      //var resourceStreamInfo = Application.GetResourceStream(uri);
-      //CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStreamInfo.Stream, "Projects/TestProject");
+      Stream originalStream = ResourceLoader.GetResourceStream(Projects.TestsStore, path);
+      CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
 
-      //IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication();
+      using (IStorage storage = StorageSystem.GetStorage())
+      {
+        Assert.AreEqual(storage.DirectoryExists("/Projects/TestProject"), true);
 
-      //Assert.AreEqual(isolatedStorage.DirectoryExists("/Projects/TestProject"), true);
+        Assert.AreEqual(storage.FileExists("/Projects/TestProject/.nomedia"), true);
 
-      //Assert.AreEqual(isolatedStorage.FileExists("/Projects/TestProject/.nomedia"), true);
+        Assert.AreEqual(storage.FileExists("/Projects/TestProject/projectcode.xml"), true);
 
-      //Assert.AreEqual(isolatedStorage.FileExists("/Projects/TestProject/projectcode.xml"), true);
-
-      //Assert.AreEqual(isolatedStorage.FileExists("/Projects/TestProject/screenshot.png"), true);
+        Assert.AreEqual(storage.FileExists("/Projects/TestProject/screenshot.png"), true);
 
 
+        Assert.AreEqual(storage.DirectoryExists("/Projects/TestProject/images"), true);
 
-      //Assert.AreEqual(isolatedStorage.DirectoryExists("/Projects/TestProject/images"), true);
+        Assert.AreEqual(storage.FileExists("/Projects/TestProject/images/.nomedia"), true);
 
-      //Assert.AreEqual(isolatedStorage.FileExists("/Projects/TestProject/images/.nomedia"), true);
+        Assert.AreEqual(storage.FileExists("/Projects/TestProject/images/5A71C6F41035979503BA294F78A09336_background"), true);
 
-      //Assert.AreEqual(isolatedStorage.FileExists("/Projects/TestProject/images/5A71C6F41035979503BA294F78A09336_background"), true);
+        Assert.AreEqual(storage.FileExists("/Projects/TestProject/images/34A109A82231694B6FE09C216B390570_normalCat"), true);
 
-      //Assert.AreEqual(isolatedStorage.FileExists("/Projects/TestProject/images/34A109A82231694B6FE09C216B390570_normalCat"), true);
+        Assert.AreEqual(storage.FileExists("/Projects/TestProject/images/395CD6389BD601812BDB299934A0CCB4_banzaiCat"), true);
 
-      //Assert.AreEqual(isolatedStorage.FileExists("/Projects/TestProject/images/395CD6389BD601812BDB299934A0CCB4_banzaiCat"), true);
-
-      //Assert.AreEqual(isolatedStorage.FileExists("/Projects/TestProject/images/B4497E87AC34B1329DD9B14C08EEAFF0_cheshireCat"), true);
-      
+        Assert.AreEqual(storage.FileExists("/Projects/TestProject/images/B4497E87AC34B1329DD9B14C08EEAFF0_cheshireCat"), true);
 
 
-      //Assert.AreEqual(isolatedStorage.DirectoryExists("/Projects/TestProject/sounds"), true);
+        Assert.AreEqual(storage.DirectoryExists("/Projects/TestProject/sounds"), true);
 
-      //Assert.AreEqual(isolatedStorage.FileExists("/Projects/TestProject/sounds/.nomedia"), true);
+        Assert.AreEqual(storage.FileExists("/Projects/TestProject/sounds/.nomedia"), true);
+      }
     }
 
     [TestMethod]
     public void ZipSimpleTest()
     {
-      throw new NotImplementedException("Implement for WindowsStore");
-      //TestHelper.InitializeAndClearCatrobatContext();
-      //string path = "Tests/Data/SampleData/SampleProjects/test.catroid";
-      //Uri uri = new Uri("/MetroCatUT;component/" + path, UriKind.Relative);
-      //var resourceStreamInfo = Application.GetResourceStream(uri);
-      //CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStreamInfo.Stream, "Projects/TestProject");
+      TestHelper.InitializeAndClearCatrobatContext();
+      string path = "Data/SampleData/SampleProjects/test.catroid";
 
-      //using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
-      //{
-      //  isolatedStorage.CreateDirectory("/Projects");
-      //  isolatedStorage.CreateDirectory("/Projects/TestProjectZipped");
+      Stream originalStream = ResourceLoader.GetResourceStream(Projects.TestsStore, path);
+      CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
 
-      //  string writePath = "/Projects/TestProjectZipped/test.catroid";
-      //  string sourcePath = "Projects/TestProject";
 
-      //  if (isolatedStorage.FileExists(writePath))
-      //    isolatedStorage.DeleteFile(writePath);
-        
-      //  IsolatedStorageFileStream fileStream = isolatedStorage.CreateFile(writePath);
-      //  CatrobatZip.ZipCatrobatPackage(fileStream, sourcePath);
-      //  fileStream.Close();
+      using (IStorage storage = StorageSystem.GetStorage())
+      {
+        string writePath = "/Projects/TestProjectZipped/test.catroid";
+        string sourcePath = "Projects/TestProject";
 
-      //  Assert.AreEqual(isolatedStorage.FileExists("/Projects/TestProjectZipped/test.catroid"), true);
-      //}
+        if (storage.FileExists(writePath))
+          storage.DeleteFile(writePath);
+
+        using (Stream fileStream = storage.OpenFile(writePath, StorageFileMode.Create, StorageFileAccess.Write))
+        {
+          CatrobatZip.ZipCatrobatPackage(fileStream, sourcePath);
+        }
+
+        Assert.AreEqual(storage.FileExists("/Projects/TestProjectZipped/test.catroid"), true);
+      }
     }
   }
 }
