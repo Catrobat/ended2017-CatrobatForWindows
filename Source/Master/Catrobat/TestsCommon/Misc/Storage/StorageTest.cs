@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection;
 using Catrobat.Core.Storage;
 using System;
 
@@ -98,7 +99,7 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public string BasePath
     {
-      get { return ""; }
+      get { return Assembly.GetExecutingAssembly().CodeBase; }
     }
   }
 }
