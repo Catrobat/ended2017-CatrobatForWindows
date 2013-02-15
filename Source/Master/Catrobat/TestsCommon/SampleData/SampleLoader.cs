@@ -10,7 +10,7 @@ namespace Catrobat.TestsCommon.SampleData
 {
   public class SampleLoader
   {
-    private static string path = "Data/SampleData/SampleProjects/";
+    private static string path = "SampleData/SampleProjects/";
 
     public static Project LoadSampleXML(string sampleName)
     {

@@ -21,7 +21,7 @@ namespace Catrobat.TestsCommon.Tests
     [TestMethod]
     public void DataWriteSimpleTest()
     {
-      string originalPath = "Data/SampleData/SampleProjects/ultimateTest.xml";
+      string originalPath = "SampleData/SampleProjects/ultimateTest.xml";
 
       SampleLoader.LoadSampleXML("ultimateTest");
       CatrobatContext.Instance.CurrentProject.Save();
