@@ -41,13 +41,13 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public void DeleteDirectory(string path)
     {
-      if (DirectoryExists(path))
+      if (Directory.Exists(path))
         Directory.Delete(basepath + path);
     }
 
     public void DeleteFile(string path)
     {
-      if (FileExists(path))
+      if (File.Exists(path))
         File.Delete(basepath + path);
     }
 
@@ -59,7 +59,7 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public void CopyDirectory(string sourcePath, string destinationPath)
     {
-      if (DirectoryExists(sourcePath))
+      if (Directory.Exists(sourcePath))
       {
         Directory.CreateDirectory(basepath + destinationPath);
 
@@ -79,7 +79,11 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public void CopyFile(string sourcePath, string destinationPath)
     {
-      throw new NotImplementedException();
+      if (File.Exists(basepath + sourcePath))
+      {
+        string content = File.ReadAllText(basepath + sourcePath, System.Text.Encoding.UTF8);
+        File.WriteAllText(basepath + destinationPath, content, System.Text.Encoding.UTF8);
+      }
     }
 
     public Stream OpenFile(string path, StorageFileMode mode, StorageFileAccess access)
@@ -153,7 +157,10 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public byte[] LoadImage(string pathToImage)
     {
-      throw new NotImplementedException();
+      if(File.Exists(basepath + pathToImage))
+        return File.ReadAllBytes(basepath + pathToImage);
+      else
+        return null;
     }
 
     public bool IncreaseQuotaTo(long quota)
@@ -163,12 +170,15 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public string ReadTextFile(string path)
     {
-      throw new NotImplementedException();
+      if (File.Exists(basepath + path))
+        return File.ReadAllText(basepath + path, System.Text.Encoding.UTF8);
+      else
+        return null;
     }
 
     public void WriteTextFile(string path, string content)
     {
-      throw new NotImplementedException();
+      File.WriteAllText(basepath + path, content, System.Text.Encoding.UTF8);
     }
 
     public object ReadSerializableObject(string path, Type type)
@@ -183,7 +193,7 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public void Dispose()
     {
-      throw new NotImplementedException();
+      
     }
 
     public string BasePath
