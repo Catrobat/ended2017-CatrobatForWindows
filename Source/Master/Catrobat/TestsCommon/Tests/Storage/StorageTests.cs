@@ -11,6 +11,13 @@ namespace Catrobat.TestsCommon.Tests.Storage
   [TestClass]
   public class StorageWindowsStoreTests
   {
+    [ClassInitialize()]
+    public static void TestClassInitialize(TestContext testContext)
+    {
+      TestHelper.InitializeTests();
+    }
+
+
     [TestMethod]
     public void DeleteDirectoryTest()
     {
@@ -64,7 +71,6 @@ namespace Catrobat.TestsCommon.Tests.Storage
     [TestMethod]
     public void CopyDirectoryTest()
     {
-      TestHelper.InitializeAndClearCatrobatContext();
       IStorage storage = new StorageTest();
       var basePath = storage.BasePath;
 
