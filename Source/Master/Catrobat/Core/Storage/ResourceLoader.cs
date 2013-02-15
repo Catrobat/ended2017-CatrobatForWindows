@@ -18,11 +18,7 @@ namespace Catrobat.Core.Storage
 
     public static Stream GetResourceStream(string uri)
     {
-      uri = uri.Replace('/', '.');
-      uri = uri.Replace('\\', '.');
-      return Assembly.GetExecutingAssembly().GetManifestResourceStream("Catrobat.Core." + uri);
-
-      //return _resources.OpenResourceStream(uri);
+      return _resources.OpenResourceStream(uri);
     }
   }
 }

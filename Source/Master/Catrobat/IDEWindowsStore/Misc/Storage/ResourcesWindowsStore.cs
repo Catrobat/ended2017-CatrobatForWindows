@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Catrobat.Core.Storage;
 using System;
+using System.Reflection;
 
 namespace Catrobat.IDEWindowsStore.Misc.Storage
 {
@@ -8,9 +9,13 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
   {
     public Stream OpenResourceStream(string uri)
     {
-      throw new NotImplementedException();
-      //var resourceUri = new Uri("/Catrobat.Core;component/" + uri, UriKind.Relative);
+      //var resourceUri = new Uri("Core/" + uri, UriKind.Relative);
       //return Application.GetResourceStream(resourceUri).Stream;
+
+      //uri = uri.Replace('/', '.');
+      //uri = uri.Replace('\\', '.');
+      //return Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceUri);
+      return null;
     }
   }
 }
