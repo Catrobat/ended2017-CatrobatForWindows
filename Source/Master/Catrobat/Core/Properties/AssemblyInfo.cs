@@ -15,7 +15,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
-[assembly: InternalsVisibleTo("TestsWindowsStore")]
+[assembly: InternalsVisibleTo("Catrobat.TestsWindowsStore")]
 
 // Version information for an assembly consists of the following four values:
 //
