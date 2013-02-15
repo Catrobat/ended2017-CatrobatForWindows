@@ -64,9 +64,9 @@
     <Compile Include="SampleData\SampleLoader.cs" />
     <Compile Include="Tests\CatrobatContextTests.cs" />
     <Compile Include="Tests\CopyTests.cs" />
-    <Compile Include="Tests\DataDeletingTests.cs" />
-    <Compile Include="Tests\DataReadingTests.cs" />
-    <Compile Include="Tests\DataWritingTests.cs" />
+    <Compile Include="Tests\Data\DataDeletingTests.cs" />
+    <Compile Include="Tests\Data\DataReadingTests.cs" />
+    <Compile Include="Tests\Data\DataWritingTests.cs" />
     <Compile Include="Tests\FileNameGeneratorTest.cs" />
     <Compile Include="Tests\ProjectTests.cs" />
     <Compile Include="Tests\Storage\StorageTests.cs" />
@@ -88,7 +88,9 @@
     <None Include="SampleData\SampleProjects\test.catroid" />
     <None Include="SampleData\SampleProjects\UltimateTest.catroid" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Tests\IDE\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{a4e10bed-8f56-46a6-b78d-bfef1363b195}</Project>
