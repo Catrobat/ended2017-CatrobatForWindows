@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Catrobat.Core.Storage;
 using System;
 using System.Reflection;
+using Windows.Storage;
 
 namespace Catrobat.IDEWindowsStore.Misc.Storage
 {
@@ -33,21 +34,18 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
           throw new ArgumentOutOfRangeException("project");
       }
 
-      //fullUri += uri;
 
-      //Task<Stream> = 
+      // TODO: does the code below work?
+      Func<Task<Stream>> sync = async delegate() 
+      {
+        var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(new Uri(fullUri, UriKind.Relative));
+        return (await file.OpenAsync(FileAccessMode.Read)).AsStream();
+      };
 
-      //var file = Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(new Uri(fullUri, UriKind.Relative));
-      //file.
-      
+      var stream = sync.Invoke();
 
-      //var resourceUri = new Uri("Core/" + uri, UriKind.Relative);
-      //return Application.GetResourceStream(resourceUri).Stream;
-
-      //uri = uri.Replace('/', '.');
-      //uri = uri.Replace('\\', '.');
-      //return Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceUri);
-      return null;
+      stream.Wait();
+      return stream.Result;
     }
   }
 }

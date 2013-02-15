@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Threading;
 
@@ -36,7 +37,9 @@ namespace Catrobat.Core.Misc.Helpers
 
     public static string GetCurrentCultureLanguageCode()
     {
-      return Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+      // TODO: implement me
+      throw new NotImplementedException();
+      //return Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
     }
   }
 }
