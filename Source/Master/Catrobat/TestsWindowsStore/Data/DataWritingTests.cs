@@ -20,7 +20,7 @@ namespace TestsWindowsStore.Data
             SampleLoader.LoadSampleXML("ultimateTest");
             CatrobatContext.Instance.CurrentProject.Save();
 
-            Stream originalStream = ResourceLoader.GetResourceStream("/MetroCatUT;component/" + originalPath);
+            Stream originalStream = ResourceLoader.GetResourceStream(Projects.Core, originalPath);
             StreamReader originalReader = new StreamReader(originalStream);
             String originalXml = originalReader.ReadToEnd();
 
