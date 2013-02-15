@@ -95,5 +95,10 @@ namespace Catrobat.TestsCommon.Misc.Storage
     {
       throw new NotImplementedException();
     }
+
+    public string BasePath
+    {
+      get { return ""; }
+    }
   }
 }

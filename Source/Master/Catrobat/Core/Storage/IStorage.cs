@@ -55,5 +55,7 @@ namespace Catrobat.Core.Storage
     object ReadSerializableObject(string path, Type type);
 
     void WriteSerializableObject(string path, object serializableObject);
+
+    string BasePath { get; }
   }
 }

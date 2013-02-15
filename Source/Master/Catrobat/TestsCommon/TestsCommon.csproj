@@ -69,6 +69,7 @@
     <Compile Include="Tests\DataWritingTests.cs" />
     <Compile Include="Tests\FileNameGeneratorTest.cs" />
     <Compile Include="Tests\ProjectTests.cs" />
+    <Compile Include="Tests\Storage\StorageTests.cs" />
     <Compile Include="Tests\XmlConverterTests.cs" />
     <Compile Include="Tests\XmlPathHelperTests.cs" />
     <Compile Include="Tests\XPathHelperTests.cs" />

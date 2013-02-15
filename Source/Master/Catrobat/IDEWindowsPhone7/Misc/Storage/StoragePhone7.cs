@@ -291,5 +291,7 @@ namespace Catrobat.IDEWindowsPhone7.Misc.Storage
     {
       throw new NotImplementedException();
     }
+
+    public string BasePath { get { return ""; } }
   }
 }
