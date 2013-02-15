@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using System.Xml.Linq;
 using System.Collections.Generic;
 using TestsWindowsStore.Data.SampleData;
+using Catrobat.Core.ConverterLib;
 
 
 namespace TestsWindowsStore.Data
