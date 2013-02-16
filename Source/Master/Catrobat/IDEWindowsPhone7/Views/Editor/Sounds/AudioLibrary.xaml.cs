@@ -6,16 +6,16 @@ using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Storage;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
-using Catrobat.IDEWindowsPhone7.Controls.Buttons;
-using Catrobat.IDEWindowsPhone7.ViewModel;
-using IDEWindowsPhone7;
+using Catrobat.IDEWindowsPhone.Controls.Buttons;
+using Catrobat.IDEWindowsPhone.ViewModel;
+using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using System.Collections.ObjectModel;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
 using Microsoft.Xna.Framework.Media;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Editor.Sounds
+namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
   public partial class AudioLibrary : PhoneApplicationPage
   {

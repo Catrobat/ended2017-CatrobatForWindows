@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Catrobat.IDEWindowsPhone7.Controls.Buttons
+namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 {
   public class ScreenshotButton : Button
   {

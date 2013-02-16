@@ -119,6 +119,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Piano\.nomedia" />
+    <None Include="Piano\images\.nomedia" />
+    <None Include="Piano\images\3673EC84679EE425A215B86B085EC292_cheshireCat" />
+    <None Include="Piano\images\7064E57016F4326F59F0B098D83EB259_normalCat" />
+    <None Include="Piano\images\FE5DF421A5746EC7FC916AC1B94ECC17_banzaiCat" />
+    <None Include="Piano\sounds\.nomedia" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
@@ -135,6 +141,28 @@
   <ItemGroup>
     <Content Include="fmodex_arm.dll" />
     <Content Include="fmodex_x86.dll" />
+    <Content Include="Piano\images\79870B892D64D36E7D5B443F0FA84355_4506173839_4436e0cf32_z.jpg" />
+    <Content Include="Piano\images\CDFBEA05486D1511FF1EEC1152A0A9C6_Hitbox.png" />
+    <Content Include="Piano\images\E3763BB42302FCC355901554C27D16F8_Hitbox 2.png" />
+    <Content Include="Piano\projectcode.xml" />
+    <Content Include="Piano\screenshot.png" />
+    <Content Include="Piano\sounds\1D6DBEB2BCDAC65CD432DA951F5CEE91_6.wav" />
+    <Content Include="Piano\sounds\1E4219D960663B5055E5692347987C39_2.wav" />
+    <Content Include="Piano\sounds\271201EC2152486AC04C416A8C1C8C1A_16.wav" />
+    <Content Include="Piano\sounds\28D0D034AD9AE21A205D597F5A770257_11.wav" />
+    <Content Include="Piano\sounds\2F9DE06270471576F974ED1FC4D7D489_5.wav" />
+    <Content Include="Piano\sounds\418302FE5ABF6E4709B0AAEF1A7BFE29_13.wav" />
+    <Content Include="Piano\sounds\5ACFC9748C92793F90FDD6C63A4ADF4E_8.wav" />
+    <Content Include="Piano\sounds\6EB65397AFE36E9282B38BAB1446EE91_4.wav" />
+    <Content Include="Piano\sounds\874BF37B8E479F77ED930D54A8C3E2F7_9.wav" />
+    <Content Include="Piano\sounds\A08DA096862163B3A2F895ACBAFF6286_14.wav" />
+    <Content Include="Piano\sounds\A341F4F3636DEADD80BB2345C0C70ECF_3.wav" />
+    <Content Include="Piano\sounds\B8A9B699C5C3B28D5ADCB2DDB7728E85_1.wav" />
+    <Content Include="Piano\sounds\BF4A6760A09E7934F33E595162E49B19_12.wav" />
+    <Content Include="Piano\sounds\CDD7F0EEF311A71F838AD364B0C195F5_7.wav" />
+    <Content Include="Piano\sounds\D2AA87A0F6D700758CF63BFE67C6C171_17.wav" />
+    <Content Include="Piano\sounds\DF4516853C7C977C7CD8B1FB3EC8D1F0_10.wav" />
+    <Content Include="Piano\sounds\FF936042E608B0B1F3E62CE1C3176CE6_15.wav" />
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png">

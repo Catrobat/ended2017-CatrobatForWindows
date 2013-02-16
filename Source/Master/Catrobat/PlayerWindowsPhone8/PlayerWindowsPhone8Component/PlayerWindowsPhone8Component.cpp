@@ -66,8 +66,8 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	m_soundmanager->Initialize();
 
 	// XML
-	XMLParser* xml = new XMLParser();
-	xml->loadXML("testProject/projectcode.xml");
+	XMLParser *xml = new XMLParser();
+	xml->loadXML("Piano/projectcode.xml");
 
 	free(xml);
 

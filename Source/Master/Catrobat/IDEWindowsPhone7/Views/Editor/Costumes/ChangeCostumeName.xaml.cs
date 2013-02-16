@@ -3,12 +3,12 @@ using System.Windows.Controls;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
-using IDEWindowsPhone7;
+using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Editor.Costumes
+namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 {
   public partial class ChangeCostumeName : PhoneApplicationPage
   {

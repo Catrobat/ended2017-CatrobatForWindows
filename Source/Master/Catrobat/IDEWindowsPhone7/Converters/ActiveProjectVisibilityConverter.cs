@@ -4,7 +4,7 @@ using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.Objects;
 
-namespace Catrobat.IDEWindowsPhone7.Converters
+namespace Catrobat.IDEWindowsPhone.Converters
 {
   public class ActiveProjectVisibilityConverter : IValueConverter
   {

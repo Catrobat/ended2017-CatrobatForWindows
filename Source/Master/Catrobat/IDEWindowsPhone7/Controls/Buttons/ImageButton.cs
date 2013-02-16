@@ -3,11 +3,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Catrobat.IDEWindowsPhone7.Controls.Buttons
+namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 {
   public class ImageButton : Button
   {
-    private string path = "/IDEWindowsPhone7;component/Resources/ImageButtons/";
+    private string path = "/IDEWindowsPhone;component/Resources/ImageButtons/";
     private bool dark = ((Visibility)Application.Current.Resources["PhoneDarkThemeVisibility"] == Visibility.Visible);
     private string dark_theme = "_dark.png";
     private string light_theme = "_light.png";

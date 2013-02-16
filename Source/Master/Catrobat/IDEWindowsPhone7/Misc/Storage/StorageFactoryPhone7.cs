@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Catrobat.Core.Storage;
 
-namespace Catrobat.IDEWindowsPhone7.Misc.Storage
+namespace Catrobat.IDEWindowsPhone.Misc.Storage
 {
   public class StorageFactoryPhone7 : IStorageFactory
   {

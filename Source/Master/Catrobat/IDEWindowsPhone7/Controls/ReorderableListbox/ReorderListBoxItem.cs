@@ -12,7 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Media;
 
-namespace Catrobat.IDEWindowsPhone7.Controls.ReorderableListbox
+namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
 {
     /// <summary>
     /// Extends ListBoxItem to support a styleable drag handle, drop-indicator spacing,

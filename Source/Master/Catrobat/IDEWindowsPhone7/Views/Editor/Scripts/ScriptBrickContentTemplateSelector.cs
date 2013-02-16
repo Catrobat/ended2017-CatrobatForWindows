@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
-using Catrobat.IDEWindowsPhone7.Controls.DynamicDataTemplates;
+using Catrobat.IDEWindowsPhone.Controls.DynamicDataTemplates;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
+namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
   public class ScriptBrickContentTemplateSelector : DataTemplateSelector
   {

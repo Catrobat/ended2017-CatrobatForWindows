@@ -6,7 +6,7 @@ using System.Windows.Media.Imaging;
 using Catrobat.Core.Storage;
 using System;
 
-namespace Catrobat.IDEWindowsPhone7.Misc.Storage
+namespace Catrobat.IDEWindowsPhone.Misc.Storage
 {
   public class StoragePhone7 : IStorage
   {
@@ -291,5 +291,7 @@ namespace Catrobat.IDEWindowsPhone7.Misc.Storage
     {
       throw new NotImplementedException();
     }
+
+    public string BasePath { get { return ""; } }
   }
 }

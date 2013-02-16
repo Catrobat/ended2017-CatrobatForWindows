@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Catrobat.IDEWindowsPhone7.Controls.DynamicDataTemplates
+namespace Catrobat.IDEWindowsPhone.Controls.DynamicDataTemplates
 {
   public class DataTemplateSelector : ContentControl
   {

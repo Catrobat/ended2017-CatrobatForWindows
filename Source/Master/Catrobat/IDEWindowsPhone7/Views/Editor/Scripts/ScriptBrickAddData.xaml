@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:s="clr-namespace:Catrobat.IDEWindowsPhone7.Views.Editor.Scripts"
+  xmlns:s="clr-namespace:Catrobat.IDEWindowsPhone.Views.Editor.Scripts"
   xmlns:d="clr-namespace:Catrobat.Core.Objects.Bricks;assembly=Catrobat.Core"
   xmlns:objects="clr-namespace:Catrobat.Core.Objects;assembly=Catrobat.Core">
 

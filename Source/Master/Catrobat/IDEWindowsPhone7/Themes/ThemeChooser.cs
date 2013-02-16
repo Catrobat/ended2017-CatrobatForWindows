@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace Catrobat.IDEWindowsPhone7.Themes
+namespace Catrobat.IDEWindowsPhone.Themes
 {
   public class ThemeChooser : INotifyPropertyChanged
   {

@@ -5,16 +5,17 @@ using Catrobat.Core.ZIP;
 using System.IO;
 using System.Xml.Linq;
 using Catrobat.Core.Storage;
+using Catrobat.TestsCommon.Misc.Storage;
 
 namespace Catrobat.TestsCommon.SampleData
 {
   public class SampleLoader
   {
-    private static string path = "Data/SampleData/SampleProjects/";
+    private static string path = BasePathHelper.GetSampleDataPath() + "SampleProjects/";
 
     public static Project LoadSampleXML(string sampleName)
     {
-      Stream stream = ResourceLoader.GetResourceStream(Projects.TestsStore, path + sampleName + ".xml");
+      Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, path + sampleName + ".xml");
       StreamReader reader = new StreamReader(stream);
 
       String xml = reader.ReadToEnd();
@@ -23,7 +24,7 @@ namespace Catrobat.TestsCommon.SampleData
 
     public static XDocument LoadSampleXDocument(string sampleName)
     {
-      Stream stream = ResourceLoader.GetResourceStream(Projects.TestsStore, path + sampleName + ".xml");
+      Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, path + sampleName + ".xml");
       StreamReader reader = new StreamReader(stream);
 
       String xml = reader.ReadToEnd();
@@ -32,7 +33,7 @@ namespace Catrobat.TestsCommon.SampleData
 
     public static void LoadSampleProject(string sampleName, string sampleProjectName)
     {
-      Stream stream = ResourceLoader.GetResourceStream(Projects.TestsStore, path + sampleName + ".xml");
+      Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, path + sampleName);
       CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContext.ProjectsPath + "/" + sampleProjectName);
 
       CatrobatContext.Instance.SetCurrentProject(sampleProjectName);

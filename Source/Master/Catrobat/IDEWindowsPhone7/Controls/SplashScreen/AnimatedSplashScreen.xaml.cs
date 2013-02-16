@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Threading;
 using System.Windows.Media.Imaging;
 
-namespace Catrobat.IDEWindowsPhone7.Controls.SplashScreen
+namespace Catrobat.IDEWindowsPhone.Controls.SplashScreen
 {
   public partial class AnimatedSplashScreen : UserControl
   {
@@ -26,13 +26,13 @@ namespace Catrobat.IDEWindowsPhone7.Controls.SplashScreen
           if (imageActive)
           {
             imageActive = false;
-            BitmapImage image = new BitmapImage(new Uri("/IDEWindowsPhone7;component/Resources/Application/down.png", UriKind.Relative));
+            BitmapImage image = new BitmapImage(new Uri("/IDEWindowsPhone;component/Resources/Application/down.png", UriKind.Relative));
             imageSplashCat.Source = image;
           }
           else
           {
             imageActive = true;
-            BitmapImage image = new BitmapImage(new Uri("/IDEWindowsPhone7;component/Resources/Application/up.png", UriKind.Relative));
+            BitmapImage image = new BitmapImage(new Uri("/IDEWindowsPhone;component/Resources/Application/up.png", UriKind.Relative));
             imageSplashCat.Source = image;
           }
 

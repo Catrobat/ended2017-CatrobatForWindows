@@ -95,5 +95,11 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
     {
       throw new NotImplementedException();
     }
+
+
+    public string BasePath
+    {
+      get { return ""; }
+    }
   }
 }

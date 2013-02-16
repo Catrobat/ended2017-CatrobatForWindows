@@ -9,9 +9,11 @@ namespace Catrobat.TestsCommon.Misc
   {
     public static void InitializeAndClearCatrobatContext()
     {
-      using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
+      InitializeTests();
+
+      using (var storage = StorageSystem.GetStorage())
       {
-        isolatedStorage.DeleteFolder("");
+        storage.DeleteDirectory("");
       }
 
       CatrobatContext.Instance.CurrentProject = null;

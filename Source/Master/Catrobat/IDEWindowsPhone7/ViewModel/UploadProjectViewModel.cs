@@ -7,7 +7,7 @@ using System.Threading;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace Catrobat.IDEWindowsPhone7.ViewModel
+namespace Catrobat.IDEWindowsPhone.ViewModel
 {
   public class UploadProjectViewModel : ViewModelBase, INotifyPropertyChanged
   {

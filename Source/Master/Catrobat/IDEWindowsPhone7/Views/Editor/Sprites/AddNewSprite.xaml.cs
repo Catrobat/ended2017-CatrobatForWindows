@@ -4,12 +4,12 @@ using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
-using IDEWindowsPhone7;
+using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Editor.Sprites
+namespace Catrobat.IDEWindowsPhone.Views.Editor.Sprites
 {
   public partial class AddNewSprite : PhoneApplicationPage
   {

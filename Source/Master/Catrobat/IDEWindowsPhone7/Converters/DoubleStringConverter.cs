@@ -2,7 +2,7 @@
 using System.Windows.Data;
 using Catrobat.Core.Misc.Helpers;
 
-namespace Catrobat.IDEWindowsPhone7.Converters
+namespace Catrobat.IDEWindowsPhone.Converters
 {
   public class DoubleStringConverter : IValueConverter
   {

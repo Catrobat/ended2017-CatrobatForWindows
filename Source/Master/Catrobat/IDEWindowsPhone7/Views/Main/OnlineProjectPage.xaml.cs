@@ -10,7 +10,7 @@ using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using System.Globalization;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Main
+namespace Catrobat.IDEWindowsPhone.Views.Main
 {
   public partial class OnlineProjectPage : PhoneApplicationPage
   {

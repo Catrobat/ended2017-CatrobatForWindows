@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Audio;
 using System.Threading;
 using System.IO;
 
-namespace Catrobat.IDEWindowsPhone7.Misc
+namespace Catrobat.IDEWindowsPhone.Misc
 {
   public enum SoundState { Playing, Paused, Stopped }
   public delegate void SoundStateChanged(SoundState oldState, SoundState newState);

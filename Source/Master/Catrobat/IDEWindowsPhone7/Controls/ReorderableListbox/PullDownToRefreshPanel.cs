@@ -13,7 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Catrobat.IDEWindowsPhone7.Controls.ReorderableListbox
+namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
 {
     /// <summary>
     /// Attaches a pull-down-to-refresh mechanism to a ScrollViewer.

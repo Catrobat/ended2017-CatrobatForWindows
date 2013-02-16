@@ -5,15 +5,15 @@ using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
-using Catrobat.IDEWindowsPhone7.Controls.Buttons;
-using Catrobat.IDEWindowsPhone7.Controls.ReorderableListbox;
-using Catrobat.IDEWindowsPhone7.Misc;
-using Catrobat.IDEWindowsPhone7.ViewModel;
-using Catrobat.IDEWindowsPhone7.Views.Editor.Costumes;
-using Catrobat.IDEWindowsPhone7.Views.Editor.Scripts;
-using Catrobat.IDEWindowsPhone7.Views.Editor.Sounds;
-using Catrobat.IDEWindowsPhone7.Views.Editor.Sprites;
-using IDEWindowsPhone7;
+using Catrobat.IDEWindowsPhone.Controls.Buttons;
+using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
+using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
+using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
+using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
+using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
+using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
@@ -22,7 +22,7 @@ using System.Windows;
 using System.ComponentModel;
 using SoundState = Microsoft.Xna.Framework.Audio.SoundState;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Editor
+namespace Catrobat.IDEWindowsPhone.Views.Editor
 {
   public partial class EditorView : PhoneApplicationPage
   {

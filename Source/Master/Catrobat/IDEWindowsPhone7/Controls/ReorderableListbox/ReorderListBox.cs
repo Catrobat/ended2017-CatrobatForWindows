@@ -18,11 +18,11 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
-using Catrobat.IDEWindowsPhone7.Views.Editor.Scripts;
-using IDEWindowsPhone7;
+using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
+using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 
-namespace Catrobat.IDEWindowsPhone7.Controls.ReorderableListbox
+namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
 {
   /// <summary>
   /// Extends ListBox to enable drag-and-drop reorder within the list.

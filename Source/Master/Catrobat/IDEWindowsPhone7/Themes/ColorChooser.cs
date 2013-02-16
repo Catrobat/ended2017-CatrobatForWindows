@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace Catrobat.IDEWindowsPhone7.Themes
+namespace Catrobat.IDEWindowsPhone.Themes
 {
   public class ColorChooser
   {

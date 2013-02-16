@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
-using Catrobat.IDEWindowsPhone7.Controls.Buttons;
+using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Microsoft.Xna.Framework.Media;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Editor.Sounds
+namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
   public class SoundListItem : INotifyPropertyChanged
   {

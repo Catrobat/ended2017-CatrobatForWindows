@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-namespace Catrobat.IDEWindowsPhone7.Converters
+namespace Catrobat.IDEWindowsPhone.Converters
 {
   public class NullColorConverter : IValueConverter
   {

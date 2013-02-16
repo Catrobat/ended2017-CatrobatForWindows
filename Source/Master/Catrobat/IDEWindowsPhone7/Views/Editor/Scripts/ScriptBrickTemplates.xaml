@@ -3,9 +3,9 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
   xmlns:MvvmLightExtras="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
-  xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone7.Converters"
-  xmlns:sb="clr-namespace:Catrobat.IDEWindowsPhone7.Views.Editor.Scripts"
-  xmlns:rlb="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.Bricks">
+  xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
+  xmlns:sb="clr-namespace:Catrobat.IDEWindowsPhone.Views.Editor.Scripts"
+  xmlns:rlb="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Bricks">
 
   <SolidColorBrush x:Key="SoundsBrush" Color="#FFE035D5" />
   <SolidColorBrush x:Key="CostumesBrush" Color="#FF8A018C" />

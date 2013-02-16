@@ -3,12 +3,12 @@ using System.Windows.Controls;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
-using IDEWindowsPhone7;
+using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using System.ComponentModel;
 using Microsoft.Phone.Shell;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Editor.Sounds
+namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
   public partial class ChangeSoundName : PhoneApplicationPage
   {

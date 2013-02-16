@@ -31,5 +31,7 @@ private:
 	void parseBrickList(xml_node<> *baseNode, Script *script);
 	Brick *parseCostumeBrick(xml_node<> *baseNode);
 	Brick *parseWaitBrick(xml_node<> *baseNode);
+	Brick *parsePlaceAtBrick(xml_node<> *baseNode);
+	Brick *parseSetGhostEffectBrick(xml_node<> *baseNode);
 };
 

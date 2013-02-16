@@ -14,13 +14,13 @@ using System.Windows.Shapes;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Storage;
-using Catrobat.IDEWindowsPhone7.Misc.Storage;
-using Catrobat.IDEWindowsPhone7.Themes;
-using Catrobat.IDEWindowsPhone7.ViewModel;
+using Catrobat.IDEWindowsPhone.Misc.Storage;
+using Catrobat.IDEWindowsPhone.Themes;
+using Catrobat.IDEWindowsPhone.ViewModel;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace IDEWindowsPhone7
+namespace IDEWindowsPhone
 {
   public partial class App : Application
   {
@@ -36,7 +36,7 @@ namespace IDEWindowsPhone7
     public App()
     {
       StorageSystem.SetStorageFactory(new StorageFactoryPhone7());
-      ResourceLoader.SetResourceLoader(new ResourcesPhone7());
+      ResourceLoader.SetResourceLoader(new ResourcesPhone());
 
       // Global handler for uncaught exceptions. 
       UnhandledException += Application_UnhandledException;

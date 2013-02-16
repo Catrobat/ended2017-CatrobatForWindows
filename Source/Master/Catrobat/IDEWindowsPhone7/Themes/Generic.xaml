@@ -10,7 +10,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:reorderableListbox="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.ReorderableListbox">
+    xmlns:reorderableListbox="clr-namespace:Catrobat.IDEWindowsPhone.Controls.ReorderableListbox">
 
   <Style
         TargetType="reorderableListbox:ReorderListBox">

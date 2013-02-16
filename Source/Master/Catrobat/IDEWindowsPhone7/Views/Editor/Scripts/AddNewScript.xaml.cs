@@ -1,11 +1,11 @@
 ﻿using System;
 using Catrobat.Core.Objects;
-using Catrobat.IDEWindowsPhone7.ViewModel;
-using IDEWindowsPhone7;
+using Catrobat.IDEWindowsPhone.ViewModel;
+using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using System.Collections.ObjectModel;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
+namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
   public class BrickCollection : ObservableCollection<DataObject> { }
   public enum BrickCategory { Motion, Looks, Sounds, Control  }

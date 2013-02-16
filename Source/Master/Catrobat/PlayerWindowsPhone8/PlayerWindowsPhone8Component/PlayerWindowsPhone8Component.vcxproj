@@ -153,6 +153,7 @@
     <ClInclude Include="BroadcastScript.h" />
     <ClInclude Include="CostumeBrick.h" />
     <ClInclude Include="LookData.h" />
+    <ClInclude Include="PlaceAtBrick.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
     <ClInclude Include="Project.h" />
     <ClInclude Include="Renderer.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Direct3DContentProvider.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Script.h" />
+    <ClInclude Include="SetGhostEffectBrick.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h" />
@@ -177,6 +179,7 @@
     <ClCompile Include="BroadcastScript.cpp" />
     <ClCompile Include="CostumeBrick.cpp" />
     <ClCompile Include="LookData.cpp" />
+    <ClCompile Include="PlaceAtBrick.cpp" />
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
     <ClCompile Include="Project.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -186,6 +189,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Script.cpp" />
+    <ClCompile Include="SetGhostEffectBrick.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp" />

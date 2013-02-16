@@ -2,11 +2,11 @@
 using System.Windows;
 using System.Windows.Controls;
 using Catrobat.IDECommon.Resources.Main;
-using Catrobat.IDEWindowsPhone7.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Main
+namespace Catrobat.IDEWindowsPhone.Views.Main
 {
   public partial class AddNewProject : PhoneApplicationPage
   {

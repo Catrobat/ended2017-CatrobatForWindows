@@ -1,9 +1,9 @@
 ﻿using System.Windows.Controls;
-using Catrobat.IDEWindowsPhone7.Themes;
-using IDEWindowsPhone7;
+using Catrobat.IDEWindowsPhone.Themes;
+using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Main
+namespace Catrobat.IDEWindowsPhone.Views.Main
 {
   public partial class SettingsThemeChooser : PhoneApplicationPage
   {
