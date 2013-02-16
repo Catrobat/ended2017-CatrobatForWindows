@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.SampleData;
 
-namespace Catrobat.TestsCommon.Tests
+namespace Catrobat.TestsCommon.Tests.Data
 {
   [TestClass]
   public class DataWritingTests

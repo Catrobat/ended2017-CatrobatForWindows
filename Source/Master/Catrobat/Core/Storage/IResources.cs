@@ -6,7 +6,9 @@ using System.Text;
 
 namespace Catrobat.Core.Storage
 {
-  public enum Projects { Core, IdePhone, IdeStore, TestsPhone, TestsStore, IDECommon }
+  public enum Projects { Core, IdePhone, IdeStore, TestsPhone, TestsStore, IDECommon,
+    TestCommon
+  }
 
   public interface IResources
   {

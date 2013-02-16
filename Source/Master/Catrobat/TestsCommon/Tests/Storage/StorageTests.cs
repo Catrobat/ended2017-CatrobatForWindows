@@ -2,9 +2,11 @@
 using System.IO;
 using System.IO.IsolatedStorage;
 using Catrobat.Core.Storage;
+using Catrobat.Core.ZIP;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.Misc.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Reflection;
 
 namespace Catrobat.TestsCommon.Tests.Storage
 {
@@ -15,177 +17,196 @@ namespace Catrobat.TestsCommon.Tests.Storage
     public static void TestClassInitialize(TestContext testContext)
     {
       TestHelper.InitializeTests();
+
+      using (IStorage storage = new StorageTest())
+      {
+        var basePath = storage.BasePath;
+        if(Directory.Exists(basePath))
+          Directory.Delete(basePath,true);
+      }
     }
 
 
     [TestMethod]
     public void DeleteDirectoryTest()
     {
-      throw new NotImplementedException("Implement for TestStorage");
-      //TestHelper.InitializeAndClearCatrobatContext();
-      //IStorage storage = new Phone7Storage();
+      using (IStorage storage = new StorageTest())
+      {
+        var basePath = storage.BasePath + "DeleteDirectoryTest/";
 
-      //using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
-      //{
-      //  isolatedStorage.CreateDirectory("TestFolder1");
-      //  isolatedStorage.CreateDirectory("TestFolder1/f2");
-      //  isolatedStorage.CreateDirectory("TestFolder1/f2/f3");
-      //  IsolatedStorageFileStream file1 = isolatedStorage.CreateFile("TestFolder1/f2/f3/file1.txt");
-      //  file1.Close();
-      //  IsolatedStorageFileStream file2 = isolatedStorage.CreateFile("TestFolder1/f2/file2.bin");
-      //  file2.Close();
+        Directory.CreateDirectory(basePath);
 
-      //  storage.DeleteDirectory("TestFolder1/f2");
+        Directory.CreateDirectory(basePath + "Folder1/F2/F3");
 
-      //  Assert.IsTrue(isolatedStorage.DirectoryExists("TestFolder1"));
-      //  Assert.IsFalse(isolatedStorage.DirectoryExists("TestFolder1/f2"));
-      //}
+        var file1 = File.Create(basePath + "Folder1/F2/F3/file1.txt");
+        file1.Close();
+        var file2 = File.Create(basePath + "Folder1/F2/F3/file2.bin");
+        file2.Close();
 
-      //TestHelper.InitializeAndClearCatrobatContext();
+        storage.DeleteDirectory("DeleteDirectoryTest/Folder1/F2");
+
+        Assert.IsTrue(Directory.Exists(basePath + "Folder1"));
+        Assert.IsFalse(Directory.Exists(basePath + "Folder1/F2"));
+      }
     }
 
     [TestMethod]
     public void DeleteFileTest()
     {
-      throw new NotImplementedException("Implement for TestStorage");
-      //TestHelper.InitializeAndClearCatrobatContext();
-      //IStorage storage = new Phone7Storage();
+      using (IStorage storage = new StorageTest())
+      {
+        var basePath = storage.BasePath + "DeleteFileTest/";
 
-      //using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
-      //{
-      //  isolatedStorage.CreateDirectory("TestFolder1");
-      //  IsolatedStorageFileStream file1 = isolatedStorage.CreateFile("TestFolder1/file1.txt");
-      //  file1.Close();
-      //  IsolatedStorageFileStream file2 = isolatedStorage.CreateFile("TestFolder1/file2.bin");
-      //  file2.Close();
+        Directory.CreateDirectory(basePath);
 
-      //  storage.DeleteFile("TestFolder1/file1.txt");
+        var file1 = File.Create(basePath + "file1.txt");
+        file1.Close();
 
-      //  Assert.IsFalse(isolatedStorage.FileExists("TestFolder1/file1.txt"));
-      //  Assert.IsTrue(isolatedStorage.FileExists("TestFolder1/file2.bin"));
-      //}
+        var file2 = File.Create(basePath + "file2.bin");
+        file2.Close();
 
-      //TestHelper.InitializeAndClearCatrobatContext();
+        storage.DeleteFile("DeleteFileTest/file1.txt");
+
+        Assert.IsFalse(File.Exists(basePath + "file1.txt"));
+        Assert.IsTrue(File.Exists(basePath + "file2.bin"));
+      }
     }
 
     [TestMethod]
     public void CopyDirectoryTest()
     {
-      IStorage storage = new StorageTest();
-      var basePath = storage.BasePath;
+      using (IStorage storage = new StorageTest())
+      {
+        var basePath = storage.BasePath + "CopyDirectoryTest/";
 
-      //Directory.CreateDirectory(basePath + "CopyDirectoryTestFolder1");
-      //Directory.CreateDirectory(basePath + "CopyDirectoryTestFolder1/f2");
-      Directory.CreateDirectory(basePath + "CopyDirectoryTestFolder1/f2/f3");
+        Directory.CreateDirectory(basePath + "CopyDirectoryTestFolder1/f2/f3");
 
-      var fileStream1 = File.Create(basePath + "CopyDirectoryTestFolder1/f2/f3/file1.txt");
-      fileStream1.Close();
+        var file1 = File.Create(basePath + "CopyDirectoryTestFolder1/f2/f3/file1.txt");
+        file1.Close();
 
-      var fileStream2 = File.Create(basePath + "CopyDirectoryTestFolder1/f2/file2.bin");
-      fileStream2.Close();
+        var file2 = File.Create(basePath + "CopyDirectoryTestFolder1/f2/file2.bin");
+        file2.Close();
 
-      storage.CopyDirectory("CopyDirectoryTestFolder1", "CopyDirectoryTestFolder1_copy");
+        storage.CopyDirectory("CopyDirectoryTest/CopyDirectoryTestFolder1", "CopyDirectoryTest/CopyDirectoryTestFolder1_copy");
 
-      Assert.IsTrue(Directory.Exists(basePath + "CopyDirectoryTestFolder1_copy"));
-      Assert.IsTrue(Directory.Exists(basePath + "CopyDirectoryTestFolder1_copy/f2"));
-      Assert.IsTrue(Directory.Exists(basePath + "CopyDirectoryTestFolder1_copy/f2/f3"));
+        Assert.IsTrue(Directory.Exists(basePath + "CopyDirectoryTestFolder1_copy"));
+        Assert.IsTrue(Directory.Exists(basePath + "CopyDirectoryTestFolder1_copy/f2"));
+        Assert.IsTrue(Directory.Exists(basePath + "CopyDirectoryTestFolder1_copy/f2/f3"));
 
-      Assert.IsTrue(File.Exists(basePath + "CopyDirectoryTestFolder1_copy/f2/file2.bin"));
-      Assert.IsTrue(File.Exists(basePath + "CopyDirectoryTestFolder1_copy/f2/f3/file1.txt"));
+        Assert.IsTrue(File.Exists(basePath + "CopyDirectoryTestFolder1_copy/f2/file2.bin"));
+        Assert.IsTrue(File.Exists(basePath + "CopyDirectoryTestFolder1_copy/f2/f3/file1.txt"));
+      }
     }
 
     [TestMethod]
     public void CopyFileTest()
     {
-      throw new NotImplementedException("Implement for TestStorage");
-      //TestHelper.InitializeAndClearCatrobatContext();
-      //IStorage storage = new Phone7Storage();
+      using (IStorage storage = new StorageTest())
+      {
+        var basePath = storage.BasePath + "CopyFileTest/";
 
-      //using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
-      //{
-      //  isolatedStorage.CreateDirectory("TestFolder1");
-      //  IsolatedStorageFileStream file1 = isolatedStorage.CreateFile("TestFolder1/file1.txt");
-      //  file1.Close();
+        Directory.CreateDirectory(basePath);
 
-      //  storage.CopyFile("TestFolder1/file1.txt", "TestFolder1/file2.txt");
+        File.WriteAllText(basePath + "file1.txt", "TESTING\n123");
 
-      //  Assert.IsTrue(isolatedStorage.FileExists("TestFolder1/file1.txt"));
-      //  Assert.IsTrue(isolatedStorage.FileExists("TestFolder1/file2.txt"));
-      //}
+        storage.CopyFile("CopyFileTest/file1.txt", "CopyFileTest/Copy/copied_file1.txt");
+        storage.CopyFile("CopyFileTest/file1.txt", "CopyFileTest/copied_file2.txt");
+
+        Assert.IsTrue(Directory.Exists(basePath + "Copy/"));
+
+        Assert.IsTrue(File.Exists(basePath + "file1.txt"));
+        Assert.IsTrue(File.Exists(basePath + "Copy/copied_file1.txt"));
+        Assert.IsTrue(File.Exists(basePath + "copied_file2.txt"));
+
+        string file1Content = File.ReadAllText((basePath + "file1.txt"), System.Text.Encoding.UTF8);
+        string copiedFile1Content = File.ReadAllText((basePath + "Copy/copied_file1.txt"), System.Text.Encoding.UTF8);
+        string copiedFile2Content = File.ReadAllText((basePath + "copied_file2.txt"), System.Text.Encoding.UTF8);
+        Assert.AreEqual(file1Content, copiedFile1Content);
+        Assert.AreEqual(file1Content, copiedFile2Content);
+      }
     }
 
     [TestMethod]
     public void OpenFileTest()
     {
-      throw new NotImplementedException("Implement for TestStorage");
-      //TestHelper.InitializeAndClearCatrobatContext();
-      //IStorage storage = new Phone7Storage();
+      using (IStorage storage = new StorageTest())
+      {
+        var basePath = storage.BasePath + "OpenFileTest/";
 
-      //using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
-      //{
-      //  isolatedStorage.CreateDirectory("TestFolder1");
-      //  IsolatedStorageFileStream file1 = isolatedStorage.CreateFile("TestFolder1/file1.txt");
-      //  file1.Close();
-      //  IsolatedStorageFileStream file2 = isolatedStorage.CreateFile("TestFolder1/file2.txt");
-      //  file2.Close();
+        Directory.CreateDirectory(basePath);
 
-      //  Stream fileStream1 = storage.OpenFile("TestFolder1/file1.txt", StorageFileMode.OpenOrCreate, StorageFileAccess.ReadWrite);
-      //  Assert.IsTrue(fileStream1.CanRead);
-      //  Assert.IsTrue(fileStream1.CanWrite);
-      //  fileStream1.Close();
+        var file1 = File.Create(basePath + "file1.txt");
+        file1.Close();
 
-      //  Stream fileStream2 = storage.OpenFile("TestFolder1/file1.txt", StorageFileMode.OpenOrCreate, StorageFileAccess.Read);
-      //  Assert.IsTrue(fileStream2.CanRead);
-      //  Assert.IsFalse(fileStream2.CanWrite);
-      //  fileStream2.Close();
+        Stream fileStream1 = storage.OpenFile("OpenFileTest/file1.txt", StorageFileMode.OpenOrCreate, StorageFileAccess.ReadWrite);
+        Assert.IsTrue(fileStream1.CanRead);
+        Assert.IsTrue(fileStream1.CanWrite);
+        fileStream1.Close();
 
-      //  Stream fileStream3 = storage.OpenFile("TestFolder1/file1.txt", StorageFileMode.OpenOrCreate, StorageFileAccess.Write);
-      //  Assert.IsFalse(fileStream3.CanRead);
-      //  Assert.IsTrue(fileStream3.CanWrite);
-      //  fileStream3.Close();
-      //}
+        Stream fileStream2 = storage.OpenFile("OpenFileTest/file2.txt", StorageFileMode.OpenOrCreate, StorageFileAccess.Read);
+        Assert.IsTrue(fileStream2.CanRead);
+        Assert.IsFalse(fileStream2.CanWrite);
+        fileStream2.Close();
+
+        Stream fileStream3 = storage.OpenFile("OpenFileTest/file2.txt", StorageFileMode.OpenOrCreate, StorageFileAccess.Write);
+        Assert.IsFalse(fileStream3.CanRead);
+        Assert.IsTrue(fileStream3.CanWrite);
+        fileStream3.Close();
+      }
     }
 
     [TestMethod]
     public void RenameDirectoryTest()
     {
-      throw new NotImplementedException("Implement for TestStorage");
-      //TestHelper.InitializeAndClearCatrobatContext();
-      //IStorage storage = new Phone7Storage();
+      using (IStorage storage = new StorageTest())
+      {
+        var basePath = storage.BasePath + "RenameDirectoryTest/";
 
-      //using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
-      //{
-      //  isolatedStorage.CreateDirectory("RenameDirectoryTestFolder1");
-      //  isolatedStorage.CreateDirectory("RenameDirectoryTestFolder1/f2");
-      //  isolatedStorage.CreateDirectory("RenameDirectoryTestFolder1/f2/f3");
-      //  IsolatedStorageFileStream file1 = isolatedStorage.CreateFile("RenameDirectoryTestFolder1/f2/f3/file1.txt");
-      //  file1.Close();
-      //  IsolatedStorageFileStream file2 = isolatedStorage.CreateFile("RenameDirectoryTestFolder1/f2/file2.bin");
-      //  file2.Close();
+        Directory.CreateDirectory(basePath);
 
-      //  storage.RenameDirectory("RenameDirectoryTestFolder1/f2", "renamed2");
+        Directory.CreateDirectory(basePath + "Folder1/F2/F3");
 
-      //  Assert.IsTrue(isolatedStorage.DirectoryExists("RenameDirectoryTestFolder1/renamed2"));
-      //  Assert.IsTrue(isolatedStorage.DirectoryExists("RenameDirectoryTestFolder1/renamed2/f3"));
-      //  Assert.IsTrue(isolatedStorage.FileExists("RenameDirectoryTestFolder1/renamed2/file2.bin"));
-      //  Assert.IsTrue(isolatedStorage.FileExists("RenameDirectoryTestFolder1/renamed2/f3/file1.txt"));
-      //}
+        var file1 = File.Create(basePath + "Folder1/F2/F3/file1.txt");
+        file1.Close();
+        var file2 = File.Create(basePath + "Folder1/F2/file2.bin");
+        file2.Close();
+
+        storage.RenameDirectory("RenameDirectoryTest/Folder1/F2", "RenameDirectoryTest/Folder1/renamed2");
+
+        Assert.IsTrue(Directory.Exists(basePath + "Folder1/renamed2"));
+        Assert.IsTrue(Directory.Exists(basePath + "Folder1/renamed2/F3"));
+        Assert.IsTrue(File.Exists(basePath + "Folder1/renamed2/file2.bin"));
+        Assert.IsTrue(File.Exists(basePath + "Folder1/renamed2/F3/file1.txt"));
+      }
+    }
+
+    private string GetSampleDataPath()
+    {
+      string path = Assembly.GetExecutingAssembly().CodeBase;
+      int end = path.LastIndexOf(("Catrobat/"), System.StringComparison.Ordinal) + 9;
+      path = path.Substring(8, end - 8);
+      path += "TestsCommon/SampleData/SampleProjects/";
+
+      return path;
     }
 
     [TestMethod]
     public void LoadImageTest()
     {
-      throw new NotImplementedException("Implement for TestStorage");
-      //TestHelper.InitializeAndClearCatrobatContext();
-      //IStorage storage = new Phone7Storage();
+      using (IStorage storage = new StorageTest())
+      {
+        var basePath = storage.BasePath + "LoadImageTest/";
+        var sampleDataPath = GetSampleDataPath();
 
-      //string projectPath = "Tests/Data/SampleData/SampleProjects/test.catroid";
-      //Uri uri = new Uri("/MetroCatUT;component/" + projectPath, UriKind.Relative);
-      //var resourceStreamInfo = Application.GetResourceStream(uri);
-      //CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStreamInfo.Stream, "TestLoadImage");
+        Directory.CreateDirectory(basePath);
 
-      //BitmapImage image = storage.LoadImage("TestLoadImage/screenshot.png");
-      //Assert.AreNotEqual(image, null);
+        Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleDataPath + "test.catroid");
+        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
+        stream.Close();
+
+        var image = storage.LoadImage("LoadImageTest/screenshot.png");
+        Assert.AreNotEqual(image, null);
+      }
     }
 
     [TestMethod]
@@ -212,12 +233,15 @@ namespace Catrobat.TestsCommon.Tests.Storage
     [TestMethod]
     public void ReadWriteTextFileTest()
     {
-      throw new NotImplementedException("Implement for TestStorage");
-      //TestHelper.InitializeAndClearCatrobatContext();
-      //IStorage storage = new Phone7Storage();
+      using (IStorage storage = new StorageTest())
+      {
+        var basePath = storage.BasePath + "ReadWriteTextFileTest/";
 
-      //storage.WriteTextFile("test.txt", "test123");
-      //Assert.AreEqual(storage.ReadTextFile("test.txt"), "test123") ;
+        Directory.CreateDirectory(basePath);
+
+        storage.WriteTextFile("ReadWriteTextFileTest/test.txt", "test123");
+        Assert.AreEqual(storage.ReadTextFile("ReadWriteTextFileTest/test.txt"), "test123");
+      }
     }
 
     [TestMethod]
