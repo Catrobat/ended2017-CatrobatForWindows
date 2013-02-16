@@ -48,6 +48,15 @@ namespace Catrobat.TestsCommon.Tests.Data
       originalXml = originalXml.Replace("encoding=\"utf-8\"", "encoding=\"UTF-8\"");
       writtenXml = writtenXml.Replace("encoding=\"utf-8\"", "encoding=\"UTF-8\"");
 
+      originalXml = originalXml.Replace("\n\r", "\n");
+      writtenXml = writtenXml.Replace("\n\r", "\n");
+
+      originalXml = originalXml.Replace("\r\n", "\n");
+      writtenXml = writtenXml.Replace("\r\n", "\n");
+
+      originalXml = originalXml.Replace("\r", "");
+      writtenXml = writtenXml.Replace("\r", "");
+
       Assert.AreEqual(originalXml, writtenXml);
     }
 
@@ -79,6 +88,16 @@ namespace Catrobat.TestsCommon.Tests.Data
       // replaye "encoding="utf-8"" with "encoding="UTF-8""
       originalXml = originalXml.Replace("encoding=\"utf-8\"", "encoding=\"UTF-8\"");
       writtenXml = writtenXml.Replace("encoding=\"utf-8\"", "encoding=\"UTF-8\"");
+
+      originalXml = originalXml.Replace("\n\r", "\n");
+      writtenXml = writtenXml.Replace("\n\r", "\n");
+
+      originalXml = originalXml.Replace("\r\n", "\n");
+      writtenXml = writtenXml.Replace("\r\n", "\n");
+
+      originalXml = originalXml.Replace("\r", "");
+      writtenXml = writtenXml.Replace("\r", "");
+
 
       Assert.AreEqual(originalXml, writtenXml);
     }
