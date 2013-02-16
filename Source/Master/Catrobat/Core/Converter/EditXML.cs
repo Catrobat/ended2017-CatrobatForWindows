@@ -244,17 +244,30 @@ namespace Catrobat.Core.Converter
             {
                 if (element.Attribute("reference") != null)
                 {
-                    string reference = element.Attribute("reference").Value;
-                    int pos = reference.LastIndexOf("/") + 1;
-                    string begin = reference.Substring(0, pos);
-                    string end = reference.Substring(pos, reference.Length - pos);
-                    if (end.Contains("."))
+                  string reference = element.Attribute("reference").Value;
+                  string newReference = "";
+                  foreach (string part in reference.Split('/'))
+                  {
+                    if (part == "..")
                     {
-                        end = end.Split('.')[1];
-                        end = end.Substring(0, 1).ToLower() + end.Substring(1, end.Length - 1);
+                      newReference += part + "/";
                     }
+                    else
+                    {
+                      if (part.Contains("."))
+                      {
+                        string temp = part.Split('.')[1];
+                        newReference += temp.Substring(0, 1).ToLower() + temp.Substring(1, temp.Length - 1) + "/";
+                      }
+                      else
+                        newReference += part + "/";
+                    }
+                  }
 
-                    element.Attribute("reference").Value = begin + end;
+                  if (newReference.EndsWith("/"))
+                    newReference = newReference.Substring(0, newReference.Length - 1);
+
+                  element.Attribute("reference").Value = newReference;
                 }
                 if (element.Attribute("class") != null)
                 {
