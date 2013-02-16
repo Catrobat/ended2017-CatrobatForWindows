@@ -109,7 +109,11 @@ Project* XMLParser::parseProjectInformation(xml_document<> *doc)
 
 void XMLParser::parseSpriteList(xml_document<> *doc, SpriteList *spriteList)
 {
-	xml_node<> *node = doc->first_node()->first_node("spriteList")->first_node("Content.Sprite");
+	xml_node<> *spriteListNode = doc->first_node()->first_node("spriteList");
+	if (!spriteListNode)
+		return;
+
+	xml_node<> *node = spriteListNode->first_node("Content.Sprite");
 	while (node)
 	{
 		spriteList->addSprite(parseSprite(node));
@@ -125,37 +129,42 @@ Sprite *XMLParser::parseSprite(xml_node<> *baseNode)
 
 	Sprite *sprite = new Sprite(node->value());
 
-	node = baseNode->first_node("costumeDataList")->first_node("Common.CostumeData");
-	
+	node = baseNode->first_node();
 	while (node)
 	{
-		sprite->addLookData(parseLookData(node));
-		node = node->next_sibling("Common.CostumeData");
+		string test = node->name();
+		if (strcmp(node->name(), "costumeDataList") == 0)
+		{
+			xml_node<> *costumeDataNode = node->first_node("Common.CostumeData");
+			while (costumeDataNode)
+			{
+				sprite->addLookData(parseLookData(costumeDataNode));
+				costumeDataNode = costumeDataNode->next_sibling("Common.CostumeData");
 
-	}	
+			}	
+		}
+		else if (strcmp(node->name(), "scriptList") == 0)
+		{
+			xml_node<> *scriptListNode = node->first_node();
+			while (scriptListNode)
+			{
+				if (strcmp(scriptListNode->name(), "Content.StartScript") == 0)
+				{
+					sprite->addScript(parseStartScript(scriptListNode));
+				}
+				else if (strcmp(scriptListNode->name(), "Content.BroadcastScript") == 0)
+				{
+					sprite->addScript(parseBroadcastScript(scriptListNode));
+				}
+				else if (strcmp(scriptListNode->name(), "Content.WhenScript") == 0)
+				{
+					sprite->addScript(parseWhenScript(scriptListNode));
+				}
 
-	node = baseNode->first_node("scriptList")->first_node("Content.StartScript");
-
-	while (node)
-	{
-		sprite->addScript(parseStartScript(node));
-		node = node->next_sibling("Content.StartScript");
-	}
-
-	node = baseNode->first_node("scriptList")->first_node("Content.BroadcastScript");
-
-	while (node)
-	{
-		sprite->addScript(parseBroadcastScript(node));
-		node = node->next_sibling("Content.BroadcastScript");
-	}
-
-	node = baseNode->first_node("scriptList")->first_node("Content.WhenScript");
-
-	while (node)
-	{
-		sprite->addScript(parseWhenScript(node));
-		node = node->next_sibling("Content.WhenScript");
+				scriptListNode = scriptListNode->next_sibling();
+			}
+		}
+		node = node->next_sibling();
 	}
 
 	return sprite;
