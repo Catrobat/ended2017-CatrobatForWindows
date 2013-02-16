@@ -180,23 +180,13 @@ namespace Catrobat.TestsCommon.Tests.Storage
       }
     }
 
-    private string GetSampleDataPath()
-    {
-      string path = Assembly.GetExecutingAssembly().CodeBase;
-      int end = path.LastIndexOf(("Catrobat/"), System.StringComparison.Ordinal) + 9;
-      path = path.Substring(8, end - 8);
-      path += "TestsCommon/SampleData/SampleProjects/";
-
-      return path;
-    }
-
     [TestMethod]
     public void LoadImageTest()
     {
       using (IStorage storage = new StorageTest())
       {
         var basePath = storage.BasePath + "LoadImageTest/";
-        var sampleDataPath = GetSampleDataPath();
+        var sampleDataPath = BasePathHelper.GetSampleDataPath() + "SampleProjects/";
 
         Directory.CreateDirectory(basePath);
 
@@ -216,7 +206,7 @@ namespace Catrobat.TestsCommon.Tests.Storage
       //using (IStorage storage = new StorageTest())
       //{
       //  var basePath = storage.BasePath + "SaveImageTest/";
-      //  var sampleDataPath = GetSampleDataPath();
+      //  var sampleDataPath = BasePathHelper.GetSampleDataPath() + "SampleProjects/";
 
       //  Directory.CreateDirectory(basePath);
 

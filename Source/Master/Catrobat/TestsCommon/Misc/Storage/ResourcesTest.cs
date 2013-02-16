@@ -18,18 +18,16 @@ namespace Catrobat.TestsCommon.Misc.Storage
       {
         case Projects.Core:
           projectPath = "Core/";
-          break;
+          return File.Open(basePath + projectPath + uri, FileMode.Open, FileAccess.Read);
         case Projects.IdeCommon:
           projectPath = "IDECommon/";
-          break;
+          return File.Open(basePath + projectPath + uri, FileMode.Open, FileAccess.Read);
         case Projects.TestCommon:
           projectPath = "TestsWindowsPhone/";
-          break;
+          return File.Open(uri, FileMode.Open, FileAccess.Read);
         default:
           throw new ArgumentOutOfRangeException("project");
       }
-
-      return File.Open(uri, FileMode.Open, FileAccess.Read);
     }
   }
 }

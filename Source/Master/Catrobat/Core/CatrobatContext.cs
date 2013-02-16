@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
@@ -9,6 +10,7 @@ using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Resources.SampleProjects;
 using Catrobat.Core.Storage;
+using Catrobat.Core.ZIP;
 
 namespace Catrobat.Core
 {
@@ -30,12 +32,13 @@ namespace Catrobat.Core
     {
       bool firstTimeUse = !RestoreLocalSettings();
 
-      if (Debugger.IsAttached)
-      {
-        var loader = new SampleProjectLoader();
-        loader.LoadSampleProjects();
-        UpdateLocalProjects();
-      }
+      //TODO: fix this
+      //if (Debugger.IsAttached)
+      //{
+      //  var loader = new SampleProjectLoader();
+      //  loader.LoadSampleProjects();
+      //  UpdateLocalProjects();
+      //}
 
       if (firstTimeUse)
       {
@@ -305,12 +308,8 @@ namespace Catrobat.Core
 
         if (!storage.FileExists(projectCodeFile))
         {
-#if SILVERLIGHT
-            Stream stream = Application.GetResourceStream(new Uri("/MetroCatData;component/" + DefaultProjectPath, UriKind.Relative)).Stream;
-            CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectCodeFile);
-#else
-          // TODO: implement me
-#endif
+          Stream stream = ResourceLoader.GetResourceStream(Projects.Core, DefaultProjectPath);
+          CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectCodeFile);
         }
 
         string xml = storage.ReadTextFile(projectCodeFile + "/" + Project.ProjectCodePath);

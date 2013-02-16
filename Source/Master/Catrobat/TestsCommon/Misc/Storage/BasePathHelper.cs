@@ -26,5 +26,13 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
       return basePath;
     }
+
+    public static string GetSampleDataPath()
+    {
+      string path = GetTestBasePathWithBranch();
+      path += "TestsCommon/SampleData/";
+
+      return path;
+    }
   }
 }
