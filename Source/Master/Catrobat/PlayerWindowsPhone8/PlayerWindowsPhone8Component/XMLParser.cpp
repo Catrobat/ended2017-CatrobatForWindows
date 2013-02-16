@@ -250,79 +250,115 @@ Script *XMLParser::parseWhenScript(xml_node<> *baseNode)
 
 void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 {
-	// Maybe refactor this to a big loop with different if statements?
+	xml_node<> *brickListNode = baseNode->first_node("brickList");
+	if (!brickListNode)
+		return;
 
-	xml_node<> *node = baseNode->first_node("brickList")->first_node("Bricks.SetCostumeBrick");
+	xml_node<> *node = brickListNode->first_node();
 	while(node)
 	{
-		script->addBrick(parseCostumeBrick(node));
-		node = node->next_sibling("Bricks.SetCostumeBrick");
-	}
-
-	node = baseNode->first_node("brickList")->first_node("Bricks.WaitBrick");
-	while(node)
-	{
-		script->addBrick(parseWaitBrick(node));
-		node = node->next_sibling("Bricks.WaitBrick");
-	}
-
-	node = baseNode->first_node("brickList")->first_node("Bricks.PlaceAtBrick");
-	while(node)
-	{
-		script->addBrick(parsePlaceAtBrick(node));
-		node = node->next_sibling("Bricks.PlaceAtBrick");
-	}
-
-	node = baseNode->first_node("brickList")->first_node("Bricks.SetGhostEffectBrick");
-	while(node)
-	{
-		script->addBrick(parseSetGhostEffectBrick(node));
-		node = node->next_sibling("Bricks.SetGhostEffectBrick");
+		if (strcmp(node->name(), "Bricks.SetCostumeBrick") == 0)
+		{
+			script->addBrick(parseCostumeBrick(node));
+		}
+		else if(strcmp(node->name(), "Bricks.WaitBrick") == 0)
+		{
+			script->addBrick(parseWaitBrick(node));
+		}
+		else if(strcmp(node->name(), "Bricks.PlaceAtBrick") == 0)
+		{
+			script->addBrick(parsePlaceAtBrick(node));
+		}
+		else if(strcmp(node->name(), "Bricks.SetGhostEffectBrick") == 0)
+		{
+			script->addBrick(parseSetGhostEffectBrick(node));
+		}
+		node = node->next_sibling();
 	}
 }
 
 Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode)
 {
-	xml_attribute<> *spriteRef = baseNode->first_node("sprite")->first_attribute("reference");
+	xml_node<> *spriteNode = baseNode->first_node("sprite");
+	if (!spriteNode)
+		return NULL;
+
+	xml_attribute<> *spriteRef = spriteNode->first_attribute("reference");
 	if (!spriteRef)
 		return NULL;
+
 	string spriteReference = spriteRef->value();
 
 	xml_node<> *costumeDataNode =  baseNode->first_node("costumeData");
-	if (costumeDataNode)
-	{
-		xml_attribute<> *costumeDataRef = costumeDataNode->first_attribute("reference");
-		if (costumeDataRef)
-		{
-			CostumeBrick *brick = new CostumeBrick(spriteReference, costumeDataRef->value());
-			return brick;
-		}
-	}
-	return new CostumeBrick(spriteReference);
-	
+	if (!costumeDataNode)
+		return NULL;
+
+	xml_attribute<> *costumeDataRef = costumeDataNode->first_attribute("reference");
+	if (!costumeDataRef)
+		return NULL;
+
+	return new CostumeBrick(spriteReference, costumeDataRef->value());	
 }
 
 Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode)
 {
-	int time = atoi(baseNode->first_node("timeToWaitInMilliSeconds")->value());
-	string spriteReference = baseNode->first_node("sprite")->first_attribute()->value();
-	
+	xml_node<> *node = baseNode->first_node("timeToWaitInMilliSeconds");
+	if (!node)
+		return NULL;
+
+	int time = atoi(node->value());
+
+	node = baseNode->first_node("sprite");
+	if (!node) 
+		return NULL;
+
+	xml_attribute<> *spriteReferenceAttribute = node->first_attribute();
+	if (!spriteReferenceAttribute)
+		return NULL;
+
+	string spriteReference = spriteReferenceAttribute->value();
 	return new WaitBrick(spriteReference, time);
 }
 
 Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode)
 {
-	float postionX = atof(baseNode->first_node("xPosition")->value());
-	float postionY = atof(baseNode->first_node("yPosition")->value());
-	string spriteReference = baseNode->first_node("sprite")->first_attribute()->value();
+	xml_node<> *node = baseNode->first_node("xPosition");
+	if (!node)
+		return NULL;
+	float postionX = atof(node->value());
 
+	node = baseNode->first_node("yPosition");
+	if (!node)
+		return NULL;
+	float postionY = atof(node->value());
+
+	node = baseNode->first_node("sprite");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *spriteReferenceAttribute = node->first_attribute();
+	if (!spriteReferenceAttribute)
+		return NULL;
+
+	string spriteReference = spriteReferenceAttribute->value();
 	return new PlaceAtBrick(spriteReference, postionX, postionY);
 }
 
 Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode)
 {
-	float transparency = atof(baseNode->first_node("transparency")->value());
-	string spriteReference = baseNode->first_node("sprite")->first_attribute()->value();
+	xml_node<> *node = baseNode->first_node("transparency");
+	if (!node)
+		return NULL;
+	float transparency = atof(node->value());
 
+	node = baseNode->first_node("sprite");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *spriteReferenceAttribute = node->first_attribute();
+	if (!spriteReferenceAttribute)
+		return NULL;
+
+	string spriteReference = spriteReferenceAttribute->value();
 	return new SetGhostEffectBrick(spriteReference, transparency);
 }
