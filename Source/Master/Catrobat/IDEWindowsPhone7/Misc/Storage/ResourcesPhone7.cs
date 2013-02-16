@@ -19,7 +19,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
         case Projects.Core:
           projectPath = "/Catrobat.Core;component/";
           break;
-        case Projects.IDECommon:
+        case Projects.IdeCommon:
           projectPath = "/Catrobat.IDECommon;component/";
           break;
         case Projects.IdePhone:

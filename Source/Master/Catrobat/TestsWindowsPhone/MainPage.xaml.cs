@@ -5,10 +5,10 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Catrobat.TestsWindowsPhone.Misc;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Testing;
-using TestsWindowsPhone.Misc;
 
 namespace TestsWindowsPhone
 {

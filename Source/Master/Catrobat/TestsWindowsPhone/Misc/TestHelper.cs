@@ -3,7 +3,7 @@ using Catrobat.Core;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
 
-namespace TestsWindowsPhone.Misc
+namespace Catrobat.TestsWindowsPhone.Misc
 {
   public static class TestHelper
   {

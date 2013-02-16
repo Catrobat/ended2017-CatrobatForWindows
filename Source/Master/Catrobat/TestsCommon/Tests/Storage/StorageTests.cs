@@ -200,7 +200,7 @@ namespace Catrobat.TestsCommon.Tests.Storage
 
         Directory.CreateDirectory(basePath);
 
-        Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleDataPath + "SampleProjects/test.catroid");
+        Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleDataPath + "test.catroid");
         CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
         stream.Close();
 

@@ -4,10 +4,10 @@ using Catrobat.Core;
 using Catrobat.Core.Storage;
 using Catrobat.Core.ZIP;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
+using Catrobat.TestsWindowsPhone.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.IO.IsolatedStorage;
-using TestsWindowsPhone.Misc;
 
 namespace Catrobat.TestsWindowsPhone.Tests.Storage
 {
