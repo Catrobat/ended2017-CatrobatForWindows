@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace Catrobat.Core.ConverterLib
+namespace Catrobat.Core.Converter
 {
     internal class EditXML
     {

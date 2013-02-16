@@ -11,7 +11,7 @@ namespace Catrobat.TestsCommon.SampleData
 {
   public class SampleLoader
   {
-    private static string path = BasePathHelper.GetSampleDataPath() + "SampleProjects/";
+    private static string path = BasePathHelper.GetSampleProjectsPath();
 
     public static Project LoadSampleXML(string sampleName)
     {
@@ -19,6 +19,7 @@ namespace Catrobat.TestsCommon.SampleData
       StreamReader reader = new StreamReader(stream);
 
       String xml = reader.ReadToEnd();
+      stream.Close();
       return new Project(xml);
     }
 

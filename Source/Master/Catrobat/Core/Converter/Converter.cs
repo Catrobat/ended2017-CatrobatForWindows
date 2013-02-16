@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace Catrobat.Core.ConverterLib
+namespace Catrobat.Core.Converter
 {
     public class Converter
     {

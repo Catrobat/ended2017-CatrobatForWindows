@@ -216,6 +216,9 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public void WriteTextFile(string path, string content)
     {
+      if (!Directory.Exists(BasePath + GetFilePath(path)))
+        Directory.CreateDirectory(BasePath + GetFilePath(path));
+
       File.WriteAllText(BasePath + path, content, System.Text.Encoding.UTF8);
     }
 

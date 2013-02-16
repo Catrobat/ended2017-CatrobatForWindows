@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 using System.Collections.Generic;
-using Catrobat.Core.ConverterLib;
+using Catrobat.Core.Converter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.SampleData;

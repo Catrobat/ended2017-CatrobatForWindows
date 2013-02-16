@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Xml.Linq;
-using Catrobat.Core.ConverterLib;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Storage;
@@ -258,7 +257,7 @@ namespace Catrobat.Core.Objects
       document = XDocument.Load(new StringReader(xml));
       document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
-      Converter.Convert(document);
+      Converter.Converter.Convert(document);
 
       XElement project = document.Element("project");
       applicationVersionCode = int.Parse(project.Element("applicationVersionCode").Value);

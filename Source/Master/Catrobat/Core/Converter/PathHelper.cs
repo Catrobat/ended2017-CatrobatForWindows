@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Catrobat.Core.ConverterLib
+namespace Catrobat.Core.Converter
 {
     public class PathHelper
     {
@@ -30,7 +30,7 @@ namespace Catrobat.Core.ConverterLib
 
         public static XElement GetSoundListPath(int id)
         {
-            string path = "../../../../../soundList/Sound";
+            string path = "../../../../../soundList/soundInfo";
             if (id > 1)
                 path += "[" + id + "]";
 

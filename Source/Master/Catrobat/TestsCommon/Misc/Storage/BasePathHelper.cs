@@ -34,5 +34,13 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
       return path;
     }
+
+    public static string GetSampleProjectsPath()
+    {
+      string path = GetSampleDataPath();
+      path += "SampleProjects/";
+
+      return path;
+    }
   }
 }

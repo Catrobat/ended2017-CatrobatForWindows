@@ -186,11 +186,11 @@ namespace Catrobat.TestsCommon.Tests.Storage
       using (IStorage storage = new StorageTest())
       {
         var basePath = storage.BasePath + "LoadImageTest/";
-        var sampleDataPath = BasePathHelper.GetSampleDataPath() + "SampleProjects/";
+        var sampleProjectsPath = BasePathHelper.GetSampleProjectsPath();
 
         Directory.CreateDirectory(basePath);
 
-        Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleDataPath + "test.catroid");
+        Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleProjectsPath + "test.catroid");
         CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
         stream.Close();
 
@@ -206,11 +206,11 @@ namespace Catrobat.TestsCommon.Tests.Storage
       //using (IStorage storage = new StorageTest())
       //{
       //  var basePath = storage.BasePath + "SaveImageTest/";
-      //  var sampleDataPath = BasePathHelper.GetSampleDataPath() + "SampleProjects/";
+      //  var sampleProjectsPath = BasePathHelper.GetSampleProjectsPath();
 
       //  Directory.CreateDirectory(basePath);
 
-      //  Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleDataPath + "SampleProjects/test.catroid");
+      //  Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleProjectsPath + "test.catroid");
       //  CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
       //  stream.Close();
 

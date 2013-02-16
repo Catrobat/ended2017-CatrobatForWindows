@@ -32,7 +32,7 @@ namespace Catrobat.Core.Misc.Helpers
 
             if (dataObject is Sound)
             {
-                reference = "../../../../../soundList/Sound";
+                reference = "../../../../../soundList/soundInfo";
                 foreach (Sound Sound in spriteContainingDataObject.Sounds.Sounds)
                 {
                     pos++;
