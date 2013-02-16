@@ -185,7 +185,7 @@ namespace Catrobat.TestsCommon.Tests.Storage
       string path = Assembly.GetExecutingAssembly().CodeBase;
       int end = path.LastIndexOf(("Catrobat/"), System.StringComparison.Ordinal) + 9;
       path = path.Substring(8, end - 8);
-      path += "TestsCommon/SampleData/SampleProjects/";
+      path += "TestsCommon/SampleData/";
 
       return path;
     }
@@ -195,16 +195,9 @@ namespace Catrobat.TestsCommon.Tests.Storage
     {
       using (IStorage storage = new StorageTest())
       {
-        var basePath = storage.BasePath + "LoadImageTest/";
         var sampleDataPath = GetSampleDataPath();
 
-        Directory.CreateDirectory(basePath);
-
-        Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleDataPath + "test.catroid");
-        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
-        stream.Close();
-
-        var image = storage.LoadImage("LoadImageTest/screenshot.png");
+        var image = storage.LoadImage(sampleDataPath + "screenshot.png");
         Assert.AreNotEqual(image, null);
       }
     }

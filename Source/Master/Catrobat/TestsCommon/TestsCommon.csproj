@@ -82,6 +82,7 @@
     <Content Include="SampleData\SampleProjects\projectcode.xml" />
     <Content Include="SampleData\SampleProjects\simple.xml" />
     <Content Include="SampleData\SampleProjects\ultimateTest.xml" />
+    <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SampleData\SampleProjects\default.catroid" />
