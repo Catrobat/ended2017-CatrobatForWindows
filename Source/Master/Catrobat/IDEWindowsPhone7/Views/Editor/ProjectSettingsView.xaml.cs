@@ -1,12 +1,12 @@
 ﻿using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
-using IDEWindowsPhone7;
+using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
 using System;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Editor
+namespace Catrobat.IDEWindowsPhone.Views.Editor
 {
   public partial class ProjectSettingsView : PhoneApplicationPage
   {

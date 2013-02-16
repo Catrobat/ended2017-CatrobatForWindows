@@ -2,7 +2,7 @@
 using System.Windows;
 using Microsoft.Phone.Controls;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Editor.Sounds
+namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
   public partial class AddNewSound : PhoneApplicationPage
   {

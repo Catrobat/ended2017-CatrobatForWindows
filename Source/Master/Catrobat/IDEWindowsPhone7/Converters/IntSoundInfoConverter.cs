@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Data;
 using Catrobat.Core.Objects.Sounds;
-using Catrobat.IDEWindowsPhone7.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel;
 using Microsoft.Practices.ServiceLocation;
 
-namespace Catrobat.IDEWindowsPhone7.Converters
+namespace Catrobat.IDEWindowsPhone.Converters
 {
   public class IntSoundInfoConverter : IValueConverter
   {

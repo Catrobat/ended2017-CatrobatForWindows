@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Threading;
 using GalaSoft.MvvmLight.Command;
 
-namespace Catrobat.IDEWindowsPhone7.ViewModel
+namespace Catrobat.IDEWindowsPhone.ViewModel
 {
   public class UploadProjectLoginViewModel : ViewModelBase, INotifyPropertyChanged
   {

@@ -6,7 +6,7 @@ using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Main;
-using Catrobat.IDEWindowsPhone7.Themes;
+using Catrobat.IDEWindowsPhone.Themes;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
@@ -18,9 +18,9 @@ using System.Collections.Generic;
 using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
-using IDEWindowsPhone7;
+using IDEWindowsPhone;
 
-namespace Catrobat.IDEWindowsPhone7.ViewModel
+namespace Catrobat.IDEWindowsPhone.ViewModel
 {
   public class MainViewModel : ViewModelBase, INotifyPropertyChanged
   {

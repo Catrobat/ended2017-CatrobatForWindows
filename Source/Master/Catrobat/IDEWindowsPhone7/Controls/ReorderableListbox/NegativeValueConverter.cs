@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Catrobat.IDEWindowsPhone7.Controls.ReorderableListbox
+namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
 {
     public class NegativeValueConverter : IValueConverter
     {

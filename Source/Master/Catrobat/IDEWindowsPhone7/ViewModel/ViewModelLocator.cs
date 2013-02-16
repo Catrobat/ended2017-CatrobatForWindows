@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
-namespace Catrobat.IDEWindowsPhone7.ViewModel
+namespace Catrobat.IDEWindowsPhone.ViewModel
 {
   public class ViewModelLocator
   {

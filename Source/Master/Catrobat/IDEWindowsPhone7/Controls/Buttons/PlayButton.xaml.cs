@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.ComponentModel;
 
-namespace Catrobat.IDEWindowsPhone7.Controls.Buttons
+namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 {
   public delegate void PlayStateChanged(object sender, PlayButtonState state);
   public enum PlayButtonState {Play, Pause}

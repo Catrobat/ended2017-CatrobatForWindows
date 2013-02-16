@@ -62,18 +62,18 @@
     <Compile Include="Misc\TestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleData\SampleLoader.cs" />
-    <Compile Include="Tests\CatrobatContextTests.cs" />
-    <Compile Include="Tests\CopyTests.cs" />
+    <Compile Include="Tests\Data\CatrobatContextTests.cs" />
+    <Compile Include="Tests\Data\CopyTests.cs" />
     <Compile Include="Tests\Data\DataDeletingTests.cs" />
     <Compile Include="Tests\Data\DataReadingTests.cs" />
     <Compile Include="Tests\Data\DataWritingTests.cs" />
-    <Compile Include="Tests\FileNameGeneratorTest.cs" />
-    <Compile Include="Tests\ProjectTests.cs" />
+    <Compile Include="Tests\Misc\FileNameGeneratorTest.cs" />
+    <Compile Include="Tests\Data\ProjectTests.cs" />
     <Compile Include="Tests\Storage\StorageTests.cs" />
-    <Compile Include="Tests\XmlConverterTests.cs" />
-    <Compile Include="Tests\XmlPathHelperTests.cs" />
-    <Compile Include="Tests\XPathHelperTests.cs" />
-    <Compile Include="Tests\ZipTests.cs" />
+    <Compile Include="Tests\Data\XmlConverterTests.cs" />
+    <Compile Include="Tests\Data\XmlPathHelperTests.cs" />
+    <Compile Include="Tests\Data\XPathHelperTests.cs" />
+    <Compile Include="Tests\Misc\ZipTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SampleData\SampleProjects\Converter\PointToBrick.xml" />

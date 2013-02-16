@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.ComponentModel;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
+namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
   public class ScriptBrickCollection : IList, ICollection, IEnumerable, INotifyCollectionChanged, INotifyPropertyChanged
   {

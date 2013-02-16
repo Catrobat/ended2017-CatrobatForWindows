@@ -3,7 +3,7 @@ using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using System.Collections.ObjectModel;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Editor.Scripts
+namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
   public class ScriptBrickIterator : IEnumerator<DataObject>
   {

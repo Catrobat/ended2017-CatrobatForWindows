@@ -2,8 +2,8 @@
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-  xmlns:bricks="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.Bricks"
-  xmlns:reorderableListbox="clr-namespace:Catrobat.IDEWindowsPhone7.Controls.ReorderableListbox">
+  xmlns:bricks="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Bricks"
+  xmlns:reorderableListbox="clr-namespace:Catrobat.IDEWindowsPhone.Controls.ReorderableListbox">
 
   <Style TargetType="bricks:NormalBrick">
     <Setter Property="Template">

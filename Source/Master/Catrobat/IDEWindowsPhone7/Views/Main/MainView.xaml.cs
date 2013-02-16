@@ -1,6 +1,6 @@
 ﻿using Catrobat.Core;
 using Catrobat.Core.Misc;
-using Catrobat.IDEWindowsPhone7.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel;
 using KBB.Mobile.Controls;
 using Microsoft.Phone.Controls;
 using System;
@@ -10,7 +10,7 @@ using Microsoft.Practices.ServiceLocation;
 using GalaSoft.MvvmLight.Messaging;
 using System.Diagnostics;
 
-namespace Catrobat.IDEWindowsPhone7.Views.Main
+namespace Catrobat.IDEWindowsPhone.Views.Main
 {
   public partial class MainView : PhoneApplicationPage
   {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Media.Imaging;
 
-namespace Catrobat.IDEWindowsPhone7.Themes
+namespace Catrobat.IDEWindowsPhone.Themes
 {
   public class Theme
   {

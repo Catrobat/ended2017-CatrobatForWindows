@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Catrobat.IDEWindowsPhone7.Controls.Bricks
+namespace Catrobat.IDEWindowsPhone.Controls.Bricks
 {
   public class MasterBrick : ContentControl
   {

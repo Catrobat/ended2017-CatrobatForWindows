@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Catrobat.IDEWindowsPhone7.Misc.Storage
+namespace Catrobat.IDEWindowsPhone.Misc.Storage
 {
   public class ResourcesPhone7 : IResources
   {

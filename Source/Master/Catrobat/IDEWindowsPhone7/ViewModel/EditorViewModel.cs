@@ -4,14 +4,14 @@ using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Sounds;
-using Catrobat.IDEWindowsPhone7.Views.Editor.Scripts;
+using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 
-namespace Catrobat.IDEWindowsPhone7.ViewModel
+namespace Catrobat.IDEWindowsPhone.ViewModel
 {
   public class EditorViewModel : ViewModelBase
   {

@@ -3,7 +3,7 @@ using GalaSoft.MvvmLight;
 using System.ComponentModel;
 using GalaSoft.MvvmLight.Command;
 
-namespace Catrobat.IDEWindowsPhone7.ViewModel
+namespace Catrobat.IDEWindowsPhone.ViewModel
 {
   public class AddNewProjectViewModel : ViewModelBase, INotifyPropertyChanged
   {
