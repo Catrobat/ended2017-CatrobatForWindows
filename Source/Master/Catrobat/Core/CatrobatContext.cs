@@ -217,7 +217,7 @@ namespace Catrobat.Core
 
       using (IStorage storage = StorageSystem.GetStorage())
       {
-        string[] projectNames = storage.GetDirectoryNames(ProjectsPath + "/*");
+        string[] projectNames = storage.GetDirectoryNames(ProjectsPath);
 
         foreach (string projectName in projectNames)
         {

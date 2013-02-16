@@ -24,12 +24,12 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
     public string[] GetDirectoryNames(string path)
     {
-      return iso.GetDirectoryNames(path);
+      return iso.GetDirectoryNames(path + "/*");
     }
 
     public string[] GetFileNames(string path)
     {
-      return iso.GetFileNames(path);
+      return iso.GetFileNames(path + "/*.*");
     }
 
     private void CreateFoldersIfNotExist(string path, bool isFilePath)
