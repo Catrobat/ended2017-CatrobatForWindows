@@ -19,7 +19,7 @@ namespace Catrobat.TestsCommon.SampleData
       StreamReader reader = new StreamReader(stream);
 
       String xml = reader.ReadToEnd();
-      stream.Close();
+      stream.Dispose();
       return new Project(xml);
     }
 
@@ -29,6 +29,7 @@ namespace Catrobat.TestsCommon.SampleData
       StreamReader reader = new StreamReader(stream);
 
       String xml = reader.ReadToEnd();
+      reader.Dispose();
       return XDocument.Load(new StringReader(xml));
     }
 
@@ -36,7 +37,7 @@ namespace Catrobat.TestsCommon.SampleData
     {
       Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, path + sampleName);
       CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContext.ProjectsPath + "/" + sampleProjectName);
-
+      stream.Dispose();
       CatrobatContext.Instance.SetCurrentProject(sampleProjectName);
       CatrobatContext.Instance.CurrentProject.SetProjectName(sampleProjectName);
     }
