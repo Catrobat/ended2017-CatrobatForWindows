@@ -185,7 +185,7 @@ namespace Catrobat.TestsCommon.Tests.Storage
       string path = Assembly.GetExecutingAssembly().CodeBase;
       int end = path.LastIndexOf(("Catrobat/"), System.StringComparison.Ordinal) + 9;
       path = path.Substring(8, end - 8);
-      path += "TestsCommon/SampleData/";
+      path += "TestsCommon/SampleData/SampleProjects/";
 
       return path;
     }
@@ -195,9 +195,16 @@ namespace Catrobat.TestsCommon.Tests.Storage
     {
       using (IStorage storage = new StorageTest())
       {
+        var basePath = storage.BasePath + "LoadImageTest/";
         var sampleDataPath = GetSampleDataPath();
 
-        var image = storage.LoadImage(sampleDataPath + "screenshot.png");
+        Directory.CreateDirectory(basePath);
+
+        Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleDataPath + "SampleProjects/test.catroid");
+        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
+        stream.Close();
+
+        var image = storage.LoadImage("LoadImageTest/screenshot.png");
         Assert.AreNotEqual(image, null);
       }
     }
@@ -206,21 +213,25 @@ namespace Catrobat.TestsCommon.Tests.Storage
     public void SaveImageTest()
     {
       throw new NotImplementedException("Implement for TestStorage");
-      //TestHelper.InitializeAndClearCatrobatContext();
-      //IStorage storage = new Phone7Storage();
+      //using (IStorage storage = new StorageTest())
+      //{
+      //  var basePath = storage.BasePath + "SaveImageTest/";
+      //  var sampleDataPath = GetSampleDataPath();
 
-      //string projectPath = "Tests/Data/SampleData/SampleProjects/test.catroid";
-      //Uri uri = new Uri("/MetroCatUT;component/" + projectPath, UriKind.Relative);
-      //var resourceStreamInfo = Application.GetResourceStream(uri);
-      //CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStreamInfo.Stream, "TestLoadImage");
+      //  Directory.CreateDirectory(basePath);
 
-      //BitmapImage image = storage.LoadImage("TestLoadImage/screenshot.png");
-      //storage.SaveImage("TestLoadImage2/screenshot.png", image);
-      //BitmapImage image2 = storage.LoadImage("TestLoadImage2/screenshot.png");
+      //  Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleDataPath + "SampleProjects/test.catroid");
+      //  CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
+      //  stream.Close();
 
-      //// TODO: Maybe check if pixels are corect?
+      //  var image = storage.LoadImage("LoadImageTest/screenshot.png");
+      //  storage.SaveImage("TestLoadImage2/screenshot.png", image);
+      //  BitmapImage image2 = storage.LoadImage("TestLoadImage2/screenshot.png");
 
-      //Assert.AreNotEqual(image, null);
+      //  // TODO: Maybe check if pixels are corect?
+
+      //  Assert.AreNotEqual(image, null);
+      //}
     }
 
     [TestMethod]
