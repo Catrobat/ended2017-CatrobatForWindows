@@ -4,7 +4,7 @@ class WhenScript :
 	public Script
 {
 public:
-	WhenScript(string action);
+	WhenScript(string action, string spriteReference);
 	~WhenScript();
 
 private:

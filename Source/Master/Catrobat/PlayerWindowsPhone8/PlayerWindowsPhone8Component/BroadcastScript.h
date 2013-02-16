@@ -4,7 +4,7 @@ class BroadcastScript :
 	public Script
 {
 public:
-	BroadcastScript(string receivedMessage);
+	BroadcastScript(string receivedMessage, string spriteReference);
 	~BroadcastScript();
 
 private:

@@ -2,7 +2,7 @@
 #include "BroadcastScript.h"
 
 
-BroadcastScript::BroadcastScript(string receivedMessage) : 
-	Script(TypeOfScript::BroadcastScript), m_receivedMessage(receivedMessage)
+BroadcastScript::BroadcastScript(string receivedMessage, string spriteReference) : 
+	Script(TypeOfScript::BroadcastScript, spriteReference), m_receivedMessage(receivedMessage)
 {
 }

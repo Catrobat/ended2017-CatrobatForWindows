@@ -2,8 +2,8 @@
 #include "StartScript.h"
 
 
-StartScript::StartScript() : 
-	Script(TypeOfScript::StartScript)
+StartScript::StartScript(string spriteReference) : 
+	Script(TypeOfScript::StartScript, spriteReference)
 {
 }
 

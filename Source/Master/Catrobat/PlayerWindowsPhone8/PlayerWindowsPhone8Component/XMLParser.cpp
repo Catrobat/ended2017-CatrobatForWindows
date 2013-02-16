@@ -174,72 +174,76 @@ LookData *XMLParser::parseLookData(xml_node<> *baseNode)
 {
 	string filename, name;
 	xml_node<> *node;
-
+	string test = baseNode->name();
 	node = baseNode->first_node("fileName");
-	if (node)
-	{
-		filename = node->value();
-	}
+	if (!node)
+		return NULL;
+	
+	filename = node->value();
+	
 
 	node = baseNode->first_node("name");
-	if (node)
-	{
-		name = node->value();
-	}
+	if (!node)
+		return NULL;
 
+	name = node->value();
+	
 	LookData *lookData = new LookData(filename, name);
 	return lookData;
 }
 
 Script *XMLParser::parseStartScript(xml_node<> *baseNode)
 {
-	StartScript *script = new StartScript();
+	xml_node<> *spriteReferenceNode = baseNode->first_node("sprite");
+	if (!spriteReferenceNode)
+		return NULL;
 
-	// TODO: Check if every Script HAS to have this attribute
-	xml_attribute<> *spriteReferenceAttribute = baseNode->first_node("sprite")->first_attribute();
-	if (spriteReferenceAttribute)
-	{
-		script->addSpriteReference(spriteReferenceAttribute->value());
-	}
+	xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute();
+		
+	if (!spriteReferenceAttribute)
+		return NULL;
 
+	StartScript *script = new StartScript(spriteReferenceAttribute->value());
 	parseBrickList(baseNode, script);
 	return script;
 }
 
 Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode)
 {
-	xml_node<> *node = baseNode->first_node("receivedMessage");
-	if (!node)
+	xml_node<> *spriteReferenceNode = baseNode->first_node("sprite");
+	if (!spriteReferenceNode)
 		return NULL;
 
-	BroadcastScript *script = new BroadcastScript(node->value());
+	xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute();
 
-	// TODO: Check if every Script HAS to have this attribute
-	xml_attribute<> *spriteReferenceAttribute = baseNode->first_node("sprite")->first_attribute();
-	if (spriteReferenceAttribute)
-	{
-		script->addSpriteReference(spriteReferenceAttribute->value());
-	}
+	if (!spriteReferenceAttribute)
+		return NULL;
 
+	xml_node<> *messageNode = baseNode->first_node("receivedMessage");
+	if (!messageNode)
+		return NULL;
+
+	BroadcastScript *script = new BroadcastScript(messageNode->value(), spriteReferenceAttribute->value());
 	parseBrickList(baseNode, script);
 	return script;
 }
 
 Script *XMLParser::parseWhenScript(xml_node<> *baseNode)
 {
-	xml_node<> *node = baseNode->first_node("action");
-	if (!node)
+	xml_node<> *spriteReferenceNode = baseNode->first_node("sprite");
+	if (!spriteReferenceNode)
 		return NULL;
 
-	WhenScript *script = new WhenScript(node->value());
+	xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute();
 
-	// TODO: Check if every Script HAS to have this attribute
-	xml_attribute<> *spriteReferenceAttribute = baseNode->first_node("sprite")->first_attribute();
-	if (spriteReferenceAttribute)
-	{
-		script->addSpriteReference(spriteReferenceAttribute->value());
-	}
+	if (!spriteReferenceAttribute)
+		return NULL;
 
+	xml_node<> *actionNode = baseNode->first_node("action");
+	if (!actionNode)
+		return NULL;
+
+	WhenScript *script = new WhenScript(actionNode->value(), spriteReferenceAttribute->value());
 	parseBrickList(baseNode, script);
 	return script;
 }
