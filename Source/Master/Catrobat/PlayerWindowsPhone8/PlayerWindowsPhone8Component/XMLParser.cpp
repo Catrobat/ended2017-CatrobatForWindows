@@ -5,6 +5,8 @@
 #include "WhenScript.h"
 #include "CostumeBrick.h"
 #include "WaitBrick.h"
+#include "SetGhostEffectBrick.h"
+#include "PlaceAtBrick.h"
 
 #include <iostream>
 #include <fstream>
@@ -235,6 +237,8 @@ Script *XMLParser::parseWhenScript(xml_node<> *baseNode)
 
 void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 {
+	// Maybe refactor this to a big loop with different if statements?
+
 	xml_node<> *node = baseNode->first_node("brickList")->first_node("Bricks.SetCostumeBrick");
 	while(node)
 	{
@@ -247,6 +251,20 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 	{
 		script->addBrick(parseWaitBrick(node));
 		node = node->next_sibling("Bricks.WaitBrick");
+	}
+
+	node = baseNode->first_node("brickList")->first_node("Bricks.PlaceAtBrick");
+	while(node)
+	{
+		script->addBrick(parsePlaceAtBrick(node));
+		node = node->next_sibling("Bricks.PlaceAtBrick");
+	}
+
+	node = baseNode->first_node("brickList")->first_node("Bricks.SetGhostEffectBrick");
+	while(node)
+	{
+		script->addBrick(parseSetGhostEffectBrick(node));
+		node = node->next_sibling("Bricks.SetGhostEffectBrick");
 	}
 }
 
@@ -277,4 +295,21 @@ Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode)
 	string spriteReference = baseNode->first_node("sprite")->first_attribute()->value();
 	
 	return new WaitBrick(spriteReference, time);
+}
+
+Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode)
+{
+	float postionX = atof(baseNode->first_node("xPosition")->value());
+	float postionY = atof(baseNode->first_node("yPosition")->value());
+	string spriteReference = baseNode->first_node("sprite")->first_attribute()->value();
+
+	return new PlaceAtBrick(spriteReference, postionX, postionY);
+}
+
+Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode)
+{
+	float transparency = atof(baseNode->first_node("transparency")->value());
+	string spriteReference = baseNode->first_node("sprite")->first_attribute()->value();
+
+	return new SetGhostEffectBrick(spriteReference, transparency);
 }

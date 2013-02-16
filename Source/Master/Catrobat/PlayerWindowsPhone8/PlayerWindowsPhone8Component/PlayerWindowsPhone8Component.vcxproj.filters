@@ -54,11 +54,19 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="Brick.cpp">
-      <Filter>Objects</Filter>
+      <Filter>Objects\Bricks</Filter>
     </ClCompile>
-    <ClCompile Include="WaitBrick.cpp" />
     <ClCompile Include="CostumeBrick.cpp">
-      <Filter>Objects</Filter>
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="WaitBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaceAtBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="SetGhostEffectBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,10 +129,20 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Brick.h">
-      <Filter>Objects</Filter>
+      <Filter>Objects\Bricks</Filter>
     </ClInclude>
-    <ClInclude Include="CostumeBrick.h" />
-    <ClInclude Include="WaitBrick.h" />
+    <ClInclude Include="WaitBrick.h">
+      <Filter>Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="CostumeBrick.h">
+      <Filter>Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaceAtBrick.h">
+      <Filter>Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="SetGhostEffectBrick.h">
+      <Filter>Objects\Bricks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="CatTexture.dds" />
@@ -141,6 +159,9 @@
     </Filter>
     <Filter Include="XMLParser">
       <UniqueIdentifier>{f05256e5-559a-4d33-beb7-99d07774a905}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bricks">
+      <UniqueIdentifier>{dd3bec63-c1d8-47f4-b4c0-3a7929a37ea1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

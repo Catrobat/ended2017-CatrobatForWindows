@@ -10,7 +10,9 @@ public:
 	enum TypeOfBrick
 	{
 		CostumeBrick,
-		WaitBrick
+		WaitBrick,
+		PlaceAtBrick,
+		SetGhostEffectBrick
 	};
 
 	Brick(TypeOfBrick brickType, string spriteReference);
