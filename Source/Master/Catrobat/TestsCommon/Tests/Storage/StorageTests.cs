@@ -172,7 +172,7 @@ namespace Catrobat.TestsCommon.Tests.Storage
         var file2 = File.Create(basePath + "Folder1/F2/file2.bin");
         file2.Close();
 
-        storage.RenameDirectory("RenameDirectoryTest/Folder1/F2", "RenameDirectoryTest/Folder1/renamed2");
+        storage.RenameDirectory("RenameDirectoryTest/Folder1/F2", "renamed2");
 
         Assert.IsTrue(Directory.Exists(basePath + "Folder1/renamed2"));
         Assert.IsTrue(Directory.Exists(basePath + "Folder1/renamed2/F3"));
