@@ -26,7 +26,7 @@ namespace Catrobat.TestsCommon.Tests.Data
       SampleLoader.LoadSampleXML("ultimateTest");
       CatrobatContext.Instance.CurrentProject.Save();
 
-      Stream originalStream = ResourceLoader.GetResourceStream(Projects.TestsStore, originalPath);
+      Stream originalStream = ResourceLoader.GetResourceStream(Projects.TestCommon, originalPath);
       StreamReader originalReader = new StreamReader(originalStream);
       String originalXml = originalReader.ReadToEnd();
 

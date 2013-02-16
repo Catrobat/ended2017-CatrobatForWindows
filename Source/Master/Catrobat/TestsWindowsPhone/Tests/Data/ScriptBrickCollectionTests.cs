@@ -2,8 +2,8 @@
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
+using Catrobat.TestsWindowsPhone.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestsWindowsPhone.SampleData;
 
 namespace Catrobat.TestsWindowsPhone.Tests.Data
 {

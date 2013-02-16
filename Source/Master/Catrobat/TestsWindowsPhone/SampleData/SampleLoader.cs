@@ -6,7 +6,7 @@ using System.IO;
 using System.Xml.Linq;
 using Catrobat.Core.Storage;
 
-namespace TestsWindowsPhone.SampleData
+namespace Catrobat.TestsWindowsPhone.SampleData
 {
   public class SampleLoader
   {

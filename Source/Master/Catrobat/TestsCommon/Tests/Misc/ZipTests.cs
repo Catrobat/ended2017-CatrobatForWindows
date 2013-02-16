@@ -4,7 +4,7 @@ using Catrobat.Core.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.TestsCommon.Misc;
 
-namespace Catrobat.TestsCommon.Tests
+namespace Catrobat.TestsCommon.Tests.Misc
 {
   [TestClass]
   public class ZipTests
@@ -21,7 +21,7 @@ namespace Catrobat.TestsCommon.Tests
       TestHelper.InitializeAndClearCatrobatContext();
       string path = "SampleData/SampleProjects/test.catroid";
 
-      Stream originalStream = ResourceLoader.GetResourceStream(Projects.TestsStore, path);
+      Stream originalStream = ResourceLoader.GetResourceStream(Projects.TestCommon, path);
       CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
 
       using (IStorage storage = StorageSystem.GetStorage())
@@ -60,7 +60,7 @@ namespace Catrobat.TestsCommon.Tests
       TestHelper.InitializeAndClearCatrobatContext();
       string path = "Data/SampleData/SampleProjects/test.catroid";
 
-      Stream originalStream = ResourceLoader.GetResourceStream(Projects.TestsStore, path);
+      Stream originalStream = ResourceLoader.GetResourceStream(Projects.TestCommon, path);
       CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
 
 
