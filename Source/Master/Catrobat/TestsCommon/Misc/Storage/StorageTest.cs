@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using Catrobat.Core.Storage;
 using System;
+using System.Runtime.Serialization;
 
 namespace Catrobat.TestsCommon.Misc.Storage
 {
@@ -253,12 +254,23 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public object ReadSerializableObject(string path, Type type)
     {
-      throw new NotImplementedException();
+      using (Stream fileStream = this.OpenFile(path, StorageFileMode.Open, StorageFileAccess.Read))
+      {
+        DataContractSerializer serializer = new DataContractSerializer(type);
+        object serialireableObject = serializer.ReadObject(fileStream); // TODO: does not working any more
+        fileStream.Close();
+        return serialireableObject;
+      }
     }
 
     public void WriteSerializableObject(string path, object serializableObject)
     {
-      throw new NotImplementedException();
+      using (Stream fileStream = this.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write))
+      {
+        DataContractSerializer serializer = new DataContractSerializer(serializableObject.GetType());
+        serializer.WriteObject(fileStream, serializableObject);
+        fileStream.Close();
+      }
     }
 
     public void Dispose()

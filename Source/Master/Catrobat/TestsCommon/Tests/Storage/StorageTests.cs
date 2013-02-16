@@ -7,6 +7,7 @@ using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.Misc.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
+using Catrobat.Core;
 
 namespace Catrobat.TestsCommon.Tests.Storage
 {
@@ -241,17 +242,18 @@ namespace Catrobat.TestsCommon.Tests.Storage
     [TestMethod]
     public void ReadWriteSerializableObjectTest()
     {
-      throw new NotImplementedException("Implement for TestStorage");
-      //TestHelper.InitializeAndClearCatrobatContext();
-      //IStorage storage = new Phone7Storage();
+      TestHelper.InitializeAndClearCatrobatContext();
 
-      //LocalSettings settingsWrite = new LocalSettings();
-      //settingsWrite.CurrentProjectName = "ProjectName";
+      using (var storage = StorageSystem.GetStorage())
+      {
+        LocalSettings settingsWrite = new LocalSettings();
+        settingsWrite.CurrentProjectName = "ProjectName";
 
-      //storage.WriteSerializableObject("testobject", settingsWrite);
-      //LocalSettings settingsRead = (LocalSettings) storage.ReadSerializableObject("testobject", settingsWrite.GetType());
+        storage.WriteSerializableObject("testobject", settingsWrite);
+        LocalSettings settingsRead = (LocalSettings)storage.ReadSerializableObject("testobject", settingsWrite.GetType());
 
-      //Assert.AreEqual(settingsRead.CurrentProjectName, "ProjectName");
+        Assert.AreEqual(settingsRead.CurrentProjectName, "ProjectName");
+      }
     }
   }
 }
