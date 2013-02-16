@@ -185,10 +185,10 @@ namespace Catrobat.TestsCommon.Tests.Storage
     {
       using (IStorage storage = new StorageTest())
       {
-        var basePath = storage.BasePath + "LoadImageTest/";
+        var basePath = "LoadImageTest/";
         var sampleProjectsPath = BasePathHelper.GetSampleProjectsPath();
 
-        Directory.CreateDirectory(basePath);
+        Directory.CreateDirectory(storage.BasePath + basePath);
 
         Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleProjectsPath + "test.catroid");
         CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);

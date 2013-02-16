@@ -8,7 +8,8 @@ namespace Catrobat.TestsCommon.Misc.Storage
 {
   public class StorageTest : IStorage
   {
-    
+    private List<Stream> openedStreams = new List<Stream>();
+
     public long Quota
     {
       get { throw new NotImplementedException(); }
@@ -210,7 +211,9 @@ namespace Catrobat.TestsCommon.Misc.Storage
             break;
         }
 
-      return File.Open(BasePath + path, fileMode, fileAccess);
+      var stream = File.Open(BasePath + path, fileMode, fileAccess);
+      openedStreams.Add(stream);
+      return stream;
     }
 
     public void RenameDirectory(string directoryPath, string newDirectoryName)
@@ -260,7 +263,8 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public void Dispose()
     {
-      
+      foreach (var stream in openedStreams)
+        stream.Dispose();
     }
 
     public string BasePath
