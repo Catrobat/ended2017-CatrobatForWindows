@@ -74,15 +74,15 @@ namespace Catrobat.TestsCommon.Tests.Storage
       IStorage storage = new StorageTest();
       var basePath = storage.BasePath;
 
-      Directory.CreateDirectory(basePath + "CopyDirectoryTestFolder1");
-      Directory.CreateDirectory(basePath + "CopyDirectoryTestFolder1/f2");
+      //Directory.CreateDirectory(basePath + "CopyDirectoryTestFolder1");
+      //Directory.CreateDirectory(basePath + "CopyDirectoryTestFolder1/f2");
       Directory.CreateDirectory(basePath + "CopyDirectoryTestFolder1/f2/f3");
 
-      var file1 = File.Create(basePath + "CopyDirectoryTestFolder1/f2/f3/file1.txt");
-      file1.Close();
+      var fileStream1 = File.Create(basePath + "CopyDirectoryTestFolder1/f2/f3/file1.txt");
+      fileStream1.Close();
 
-      var file2 = File.Create(basePath + "CopyDirectoryTestFolder1/f2/file2.bin");
-      file2.Close();
+      var fileStream2 = File.Create(basePath + "CopyDirectoryTestFolder1/f2/file2.bin");
+      fileStream2.Close();
 
       storage.CopyDirectory("CopyDirectoryTestFolder1", "CopyDirectoryTestFolder1_copy");
 
