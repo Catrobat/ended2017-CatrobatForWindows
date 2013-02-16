@@ -3,6 +3,7 @@ using Catrobat.Core;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Catrobat.Core.Storage;
 
 namespace Catrobat.TestsCommon.Tests.Data
 {
@@ -29,13 +30,12 @@ namespace Catrobat.TestsCommon.Tests.Data
     [TestMethod]
     public void StoreLocalSettingsTest()
     {
-      throw new NotImplementedException("Implement for WindowsStore");
-      //CatrobatContext.Instance.StoreLocalSettings();
+      CatrobatContext.Instance.StoreLocalSettings();
 
-      //using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
-      //{
-      //  Assert.AreEqual(isolatedStorage.FileExists(CatrobatContext.LocalSettingsFilePath), true);
-      //}
+      using (var storage = StorageSystem.GetStorage())
+      {
+        Assert.AreEqual(storage.FileExists(CatrobatContext.LocalSettingsFilePath), true);
+      }
     }
   }
 }

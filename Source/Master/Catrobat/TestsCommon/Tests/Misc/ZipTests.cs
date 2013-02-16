@@ -58,7 +58,7 @@ namespace Catrobat.TestsCommon.Tests.Misc
     public void ZipSimpleTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();
-      string path = "Data/SampleData/SampleProjects/test.catroid";
+      string path = "SampleData/SampleProjects/test.catroid";
 
       Stream originalStream = ResourceLoader.GetResourceStream(Projects.TestCommon, path);
       CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");

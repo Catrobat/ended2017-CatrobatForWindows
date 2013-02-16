@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using Catrobat.Core.Storage;
 using System;
@@ -31,12 +32,30 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public string[] GetDirectoryNames(string path)
     {
-      return Directory.GetDirectories(BasePath + path);
+      path = FormatPath(path);
+
+      var directoryPaths = Directory.GetDirectories(BasePath + path);
+
+      var directoryNames = new List<string>();
+
+      foreach (string directoryPath in directoryPaths)
+        directoryNames.Add(GetName(directoryPath));
+
+      return directoryNames.ToArray();
     }
 
     public string[] GetFileNames(string path)
     {
-      return Directory.GetFiles(BasePath + path);
+      path = FormatPath(path);
+
+      var filePaths = Directory.GetFiles(BasePath + path);
+
+      var fileNames = new List<string>();
+
+      foreach(string filePath in filePaths)
+        fileNames.Add(GetName(filePath));
+
+      return fileNames.ToArray();
     }
 
     public void DeleteDirectory(string path)
@@ -87,6 +106,11 @@ namespace Catrobat.TestsCommon.Misc.Storage
       return path.Substring(0, path.Length - GetName(path).Length);
     }
 
+    private string FormatPath(string pathToFormat)
+    {
+      return pathToFormat.Replace('\\', '/');
+    }
+
     public void CopyFile(string sourcePath, string destinationPath)
     {
       if (File.Exists(BasePath + sourcePath))
@@ -102,6 +126,8 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public Stream OpenFile(string path, StorageFileMode mode, StorageFileAccess access)
     {
+      path = path.Replace('\\', '/');
+
       FileMode fileMode = FileMode.Append;
       FileAccess fileAccess = FileAccess.Read;
 
