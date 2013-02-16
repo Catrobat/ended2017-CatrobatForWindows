@@ -200,30 +200,29 @@ namespace Catrobat.TestsCommon.Tests.Storage
       }
     }
 
-    [TestMethod]
-    public void SaveImageTest()
-    {
-      throw new NotImplementedException("Implement for TestStorage");
-      //using (IStorage storage = new StorageTest())
-      //{
-      //  var basePath = storage.BasePath + "SaveImageTest/";
-      //  var sampleProjectsPath = BasePathHelper.GetSampleProjectsPath();
+    //[TestMethod]
+    //public void SaveImageTest()
+    //{
+    //  using (IStorage storage = new StorageTest())
+    //  {
+    //    var basePath = storage.BasePath + "SaveImageTest/";
+    //    var sampleProjectsPath = BasePathHelper.GetSampleProjectsPath();
 
-      //  Directory.CreateDirectory(basePath);
+    //    Directory.CreateDirectory(basePath);
 
-      //  Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleProjectsPath + "test.catroid");
-      //  CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
-      //  stream.Close();
+    //    Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleProjectsPath + "test.catroid");
+    //    CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
+    //    stream.Close();
 
-      //  var image = storage.LoadImage("LoadImageTest/screenshot.png");
-      //  storage.SaveImage("TestLoadImage2/screenshot.png", image);
-      //  BitmapImage image2 = storage.LoadImage("TestLoadImage2/screenshot.png");
+    //    var image = storage.LoadImage("LoadImageTest/screenshot.png");
+    //    storage.SaveImage("TestLoadImage2/screenshot.png", image);
+    //    BitmapImage image2 = storage.LoadImage("TestLoadImage2/screenshot.png");
 
-      //  // TODO: Maybe check if pixels are corect?
+    //     TODO: Maybe check if pixels are corect?
 
-      //  Assert.AreNotEqual(image, null);
-      //}
-    }
+    //    Assert.AreNotEqual(image, null);
+    //  }
+    //}
 
     [TestMethod]
     public void ReadWriteTextFileTest()

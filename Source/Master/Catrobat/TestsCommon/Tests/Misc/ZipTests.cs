@@ -62,7 +62,7 @@ namespace Catrobat.TestsCommon.Tests.Misc
 
       Stream originalStream = ResourceLoader.GetResourceStream(Projects.TestCommon, path);
       CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
-
+      originalStream.Dispose();
 
       using (IStorage storage = StorageSystem.GetStorage())
       {

@@ -36,7 +36,6 @@ namespace Catrobat.TestsCommon.Tests.Data
         Assert.IsTrue(storage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.SoundsPath));
       }
 
-      TestHelper.InitializeAndClearCatrobatContext();
     }
 
     [TestMethod]
@@ -63,8 +62,6 @@ namespace Catrobat.TestsCommon.Tests.Data
         Assert.IsTrue(storage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath));
         Assert.IsFalse(storage.DirectoryExists(CatrobatContext.ProjectsPath + "/" + "DefaultProject1"));
       }
-
-      TestHelper.InitializeAndClearCatrobatContext();
     }
 
     [TestMethod]
@@ -92,8 +89,6 @@ namespace Catrobat.TestsCommon.Tests.Data
       }
 
       Assert.IsTrue(CatrobatContext.Instance.CurrentProject.ProjectName == CatrobatContext.DefaultProjectName);
-
-      TestHelper.InitializeAndClearCatrobatContext();
     }
 
     [TestMethod]
@@ -112,8 +107,6 @@ namespace Catrobat.TestsCommon.Tests.Data
       CatrobatContext.Instance.SetCurrentProject(oldProjectName);
 
       Assert.AreEqual(CatrobatContext.Instance.CurrentProject.ProjectName, oldProjectName);
-
-      TestHelper.InitializeAndClearCatrobatContext();
     }
 
     [TestMethod]
@@ -131,8 +124,6 @@ namespace Catrobat.TestsCommon.Tests.Data
         Assert.IsTrue(storage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ImagesPath));
         Assert.IsTrue(storage.DirectoryExists(CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.SoundsPath));
       }
-
-      TestHelper.InitializeAndClearCatrobatContext();
     }
 
     [TestMethod]
@@ -163,8 +154,6 @@ namespace Catrobat.TestsCommon.Tests.Data
 
       Assert.AreEqual(loaclProjects.Count, 3);
       Assert.IsTrue(found1 && found2);
-
-      TestHelper.InitializeAndClearCatrobatContext();
     }
 
     [TestMethod]
@@ -187,8 +176,6 @@ namespace Catrobat.TestsCommon.Tests.Data
       CatrobatContext.Instance.CopyProject(newProjectName1);
       CatrobatContext.Instance.SetCurrentProject(copyToTest2);
       Assert.IsTrue(CatrobatContext.Instance.CurrentProject.ProjectName == copyToTest2);
-
-      TestHelper.InitializeAndClearCatrobatContext();
     }
   }
 }
