@@ -4,7 +4,7 @@ using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.TestsCommon.Tests
+namespace Catrobat.TestsCommon.Tests.Data
 {
   [TestClass]
   public class DataReadingTests
