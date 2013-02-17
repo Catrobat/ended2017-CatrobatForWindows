@@ -35,7 +35,7 @@ namespace Catrobat.Core.Resources.SampleProjects
         string path = "Resources/SampleProjects/";
         path += projectFileName;
 
-        var resourceStream = ResourceLoader.GetResourceStream(Projects.Core, path);
+        var resourceStream = ResourceLoader.GetResourceStream(ResourceScope.Core, path);
         CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContext.ProjectsPath + "/" + projectName);
 
         using (IStorage storage = StorageSystem.GetStorage())

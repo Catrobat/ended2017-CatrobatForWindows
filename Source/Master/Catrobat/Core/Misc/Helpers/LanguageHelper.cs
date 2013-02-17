@@ -7,6 +7,13 @@ namespace Catrobat.Core.Misc.Helpers
 {
   public class LanguageHelper
   {
+    private static ICulture _culture;
+
+    public static void SetICulture(ICulture culture)
+    {
+      _culture = culture;
+    }
+
     private static string[] supportedLanguageCodes = 
     { 
       "DE","EN"
@@ -37,9 +44,7 @@ namespace Catrobat.Core.Misc.Helpers
 
     public static string GetCurrentCultureLanguageCode()
     {
-      // TODO: implement me
-      throw new NotImplementedException();
-      //return Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+      return _culture.Get2LetterCultureColde();
     }
   }
 }

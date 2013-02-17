@@ -16,7 +16,7 @@ namespace Catrobat.Core.Storage
       _resources = resources;
     }
 
-    public static Stream GetResourceStream(Projects project, string uri)
+    public static Stream GetResourceStream(ResourceScope project, string uri)
     {
       return _resources.OpenResourceStream(project, uri);
     }

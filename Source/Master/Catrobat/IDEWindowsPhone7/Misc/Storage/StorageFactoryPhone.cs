@@ -6,11 +6,11 @@ using Catrobat.Core.Storage;
 
 namespace Catrobat.IDEWindowsPhone.Misc.Storage
 {
-  public class StorageFactoryPhone7 : IStorageFactory
+  public class StorageFactoryPhone : IStorageFactory
   {
     public IStorage CreateStorage()
     {
-      return new StoragePhone7();
+      return new StoragePhone();
     }
   }
 }

@@ -35,7 +35,7 @@ namespace IDEWindowsPhone
     /// </summary>
     public App()
     {
-      StorageSystem.SetStorageFactory(new StorageFactoryPhone7());
+      StorageSystem.SetStorageFactory(new StorageFactoryPhone());
       ResourceLoader.SetResourceLoader(new ResourcesPhone());
 
       // Global handler for uncaught exceptions. 

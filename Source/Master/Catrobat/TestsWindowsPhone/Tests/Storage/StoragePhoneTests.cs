@@ -18,7 +18,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
     public void DeleteDirectoryTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();
-      IStorage storage = new StoragePhone7();
+      IStorage storage = new StoragePhone();
 
       using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
       {
@@ -43,7 +43,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
     public void DeleteFileTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();
-      IStorage storage = new StoragePhone7();
+      IStorage storage = new StoragePhone();
 
       using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
       {
@@ -66,7 +66,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
     public void CopyDirectoryTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();
-      IStorage storage = new StoragePhone7();
+      IStorage storage = new StoragePhone();
 
       using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
       {
@@ -93,7 +93,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
     public void CopyFileTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();
-      IStorage storage = new StoragePhone7();
+      IStorage storage = new StoragePhone();
 
       using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
       {
@@ -112,7 +112,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
     public void OpenFileTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();
-      IStorage storage = new StoragePhone7();
+      IStorage storage = new StoragePhone();
 
       using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
       {
@@ -143,7 +143,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
     public void RenameDirectoryTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();
-      IStorage storage = new StoragePhone7();
+      IStorage storage = new StoragePhone();
 
       using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
       {
@@ -168,7 +168,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
     public void LoadImageTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();
-      IStorage storage = new StoragePhone7();
+      IStorage storage = new StoragePhone();
 
       string projectPath = "Tests/Data/SampleData/SampleProjects/test.catroid";
       Uri uri = new Uri("/MetroCatUT;component/" + projectPath, UriKind.Relative);
@@ -183,7 +183,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
     public void SaveImageTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();
-      IStorage storage = new StoragePhone7();
+      IStorage storage = new StoragePhone();
 
       string projectPath = "Tests/Data/SampleData/SampleProjects/test.catroid";
       Uri uri = new Uri("/MetroCatUT;component/" + projectPath, UriKind.Relative);
@@ -205,7 +205,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
     public void ReadWriteTextFileTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();
-      IStorage storage = new StoragePhone7();
+      IStorage storage = new StoragePhone();
 
       storage.WriteTextFile("test.txt", "test123");
       Assert.AreEqual(storage.ReadTextFile("test.txt"), "test123");
@@ -215,7 +215,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
     public void ReadWriteSerializableObjectTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();
-      IStorage storage = new StoragePhone7();
+      IStorage storage = new StoragePhone();
 
       LocalSettings settingsWrite = new LocalSettings();
       settingsWrite.CurrentProjectName = "ProjectName";

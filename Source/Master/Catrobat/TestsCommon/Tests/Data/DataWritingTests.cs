@@ -25,7 +25,7 @@ namespace Catrobat.TestsCommon.Tests.Data
       var project = SampleLoader.LoadSampleXML("simple");
       project.Save();
 
-      Stream originalStream = ResourceLoader.GetResourceStream(Projects.TestCommon, BasePathHelper.GetSampleProjectsPath() + "simple.xml");
+      Stream originalStream = ResourceLoader.GetResourceStream(ResourceScope.TestCommon, BasePathHelper.GetSampleProjectsPath() + "simple.xml");
       StreamReader originalReader = new StreamReader(originalStream);
       String originalXml = originalReader.ReadToEnd();
       originalStream.Close();
@@ -66,7 +66,7 @@ namespace Catrobat.TestsCommon.Tests.Data
       var project = SampleLoader.LoadSampleXML("ultimateTest");
       project.Save();
 
-      Stream originalStream = ResourceLoader.GetResourceStream(Projects.TestCommon, BasePathHelper.GetSampleProjectsPath() + "ultimateTest.xml");
+      Stream originalStream = ResourceLoader.GetResourceStream(ResourceScope.TestCommon, BasePathHelper.GetSampleProjectsPath() + "ultimateTest.xml");
       StreamReader originalReader = new StreamReader(originalStream);
       String originalXml = originalReader.ReadToEnd();
       originalStream.Close();

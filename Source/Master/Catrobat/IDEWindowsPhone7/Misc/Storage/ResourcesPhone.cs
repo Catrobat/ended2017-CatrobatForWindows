@@ -10,22 +10,22 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 {
   public class ResourcesPhone : IResources
   {
-    public Stream OpenResourceStream(Projects project, string uri)
+    public Stream OpenResourceStream(ResourceScope project, string uri)
     {
       string projectPath = "";
 
       switch (project)
       {
-        case Projects.Core:
+        case ResourceScope.Core:
           projectPath = "/Catrobat.Core;component/";
           break;
-        case Projects.IdeCommon:
+        case ResourceScope.IdeCommon:
           projectPath = "/Catrobat.IDECommon;component/";
           break;
-        case Projects.IdePhone:
+        case ResourceScope.IdePhone:
           projectPath = "";
           break;
-        case Projects.TestsPhone:
+        case ResourceScope.TestsPhone:
           projectPath = "";
           break;
         default:

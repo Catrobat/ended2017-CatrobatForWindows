@@ -8,7 +8,7 @@ using System;
 
 namespace Catrobat.IDEWindowsPhone.Misc.Storage
 {
-  public class StoragePhone7 : IStorage
+  public class StoragePhone : IStorage
   {
     private IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication();
 
@@ -277,19 +277,31 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
       iso.Dispose();
     }
 
-    public long Quota
-    {
-      get { throw new NotImplementedException(); }
-    }
-
     byte[] IStorage.LoadImage(string pathToImage)
     {
-      throw new NotImplementedException();
-    }
+      try
+      {
+        BitmapImage bitmapImage = new BitmapImage();
 
-    public bool IncreaseQuotaTo(long quota)
-    {
-      throw new NotImplementedException();
+        byte[] myByteArray = null;
+
+        using (IsolatedStorageFileStream isfs = iso.OpenFile(pathToImage, FileMode.Open, FileAccess.Read))
+        {
+          myByteArray = new byte[isfs.Length];
+
+          isfs.Read(myByteArray, 0, myByteArray.Length);
+
+          bitmapImage.SetSource(isfs);
+          isfs.Close();
+
+        }
+
+        return myByteArray;
+      }
+      catch
+      {
+        return null;
+      }
     }
 
     public string BasePath { get { return ""; } }

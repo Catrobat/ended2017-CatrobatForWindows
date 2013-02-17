@@ -42,7 +42,7 @@ namespace Catrobat.TestsWindowsPhone.Misc
 
     internal static void InitializeTests()
     {
-      StorageSystem.SetStorageFactory(new StorageFactoryPhone7());
+      StorageSystem.SetStorageFactory(new StorageFactoryPhone());
       ResourceLoader.SetResourceLoader(new ResourcesPhone());
     }
   }

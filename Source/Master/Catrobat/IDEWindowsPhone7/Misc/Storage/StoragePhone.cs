@@ -8,7 +8,7 @@ using System;
 
 namespace Catrobat.IDEWindowsPhone.Misc.Storage
 {
-  public class StoragePhone7 : IStorage
+  public class StoragePhone : IStorage
   {
     private IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication();
 

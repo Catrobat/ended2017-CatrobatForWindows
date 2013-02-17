@@ -7,6 +7,14 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Catrobat.IDEWindowsPhone.Resources;
+using Catrobat.Core;
+using Catrobat.IDEWindowsPhone.Themes;
+using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.Core.Storage;
+using Catrobat.IDEWindowsPhone.Misc.Storage;
+using Catrobat.Core.Misc.Helpers;
+using System.Globalization;
+using Catrobat.IDEWindowsPhone.Misc;
 
 
 namespace IDEWindowsPhone
@@ -24,6 +32,10 @@ namespace IDEWindowsPhone
     /// </summary>
     public App()
     {
+      StorageSystem.SetStorageFactory(new StorageFactoryPhone());
+      ResourceLoader.SetResourceLoader(new ResourcesPhone());
+      LanguageHelper.SetICulture(new CulturePhone());
+
       // Global handler for uncaught exceptions.
       UnhandledException += Application_UnhandledException;
 
@@ -62,6 +74,29 @@ namespace IDEWindowsPhone
     // This code will not execute when the application is reactivated
     private void Application_Launching(object sender, LaunchingEventArgs e)
     {
+      if (CatrobatContext.Instance.LocalSettings.CurrentLanguageString == null)
+        CatrobatContext.Instance.LocalSettings.CurrentLanguageString = LanguageHelper.GetCurrentCultureLanguageCode();
+
+
+      if (CatrobatContext.Instance.LocalSettings.CurrentThemeIndex != -1)
+        (App.Current.Resources["ThemeChooser"] as ThemeChooser).SelectedThemeIndex = CatrobatContext.Instance.LocalSettings.CurrentThemeIndex;
+
+      if (CatrobatContext.Instance.LocalSettings.CurrentLanguageString != null)
+        (App.Current.Resources["Locator"] as ViewModelLocator).Main.CurrentCulture = new CultureInfo(CatrobatContext.Instance.LocalSettings.CurrentLanguageString);
+
+      CatrobatContext.Instance.ContextSaving += ContextSaving;
+    }
+
+    private void ContextSaving()
+    {
+      ThemeChooser themeChooser = (App.Current.Resources["ThemeChooser"] as ThemeChooser);
+      MainViewModel mainViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Main;
+
+      if (themeChooser.SelectedTheme != null)
+        CatrobatContext.Instance.LocalSettings.CurrentThemeIndex = themeChooser.SelectedThemeIndex;
+
+      if (mainViewModel.CurrentCulture != null)
+        CatrobatContext.Instance.LocalSettings.CurrentLanguageString = mainViewModel.CurrentCulture.Name;
     }
 
     // Code to execute when the application is activated (brought to foreground)

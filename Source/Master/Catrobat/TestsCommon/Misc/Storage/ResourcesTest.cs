@@ -8,7 +8,7 @@ namespace Catrobat.TestsCommon.Misc.Storage
 {
   public class ResourcesTest : IResources
   {
-    public Stream OpenResourceStream(Projects project, string uri)
+    public Stream OpenResourceStream(ResourceScope project, string uri)
     {
       string projectPath = "";
 
@@ -16,15 +16,15 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
       switch (project)
       {
-        case Projects.Core:
+        case ResourceScope.Core:
           projectPath = "Core/";
           break;
 
-        case Projects.IdeCommon:
+        case ResourceScope.IdeCommon:
           projectPath = "IDECommon/";
           break;
 
-        case Projects.TestCommon:
+        case ResourceScope.TestCommon:
           projectPath = "TestsCommon/";
           break;
 

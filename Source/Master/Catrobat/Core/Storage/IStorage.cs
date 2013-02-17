@@ -22,8 +22,6 @@ namespace Catrobat.Core.Storage
 
   public interface IStorage : IDisposable
   {
-    long Quota { get; }
-
     bool DirectoryExists(string path);
 
     bool FileExists(string path);
@@ -45,8 +43,6 @@ namespace Catrobat.Core.Storage
     void RenameDirectory(string directoryPath, string newDirectoryName);
 
     byte[] LoadImage(string pathToImage);
-
-    bool IncreaseQuotaTo(long quota);
 
     string ReadTextFile(string path);
 
