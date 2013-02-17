@@ -217,7 +217,7 @@ namespace Catrobat.Core
 
       using (IStorage storage = StorageSystem.GetStorage())
       {
-        string[] projectNames = storage.GetDirectoryNames(ProjectsPath + "/*");
+        string[] projectNames = storage.GetDirectoryNames(ProjectsPath);
 
         foreach (string projectName in projectNames)
         {
@@ -308,7 +308,7 @@ namespace Catrobat.Core
 
         if (!storage.FileExists(projectCodeFile))
         {
-          Stream stream = ResourceLoader.GetResourceStream(Projects.Core, DefaultProjectPath);
+          Stream stream = ResourceLoader.GetResourceStream(ResourceScope.SampleProjects, DefaultProjectPath);
           CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectCodeFile);
         }
 

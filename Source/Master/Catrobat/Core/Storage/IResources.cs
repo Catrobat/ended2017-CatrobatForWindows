@@ -6,11 +6,10 @@ using System.Text;
 
 namespace Catrobat.Core.Storage
 {
-  public enum Projects { Core, IdePhone, IdeStore, TestsPhone, TestsStore, IdeCommon, TestCommon
-  }
+  public enum ResourceScope { Core, IdePhone, IdeStore, TestsPhone, TestsStore, IdeCommon, TestCommon, SampleProjects }
 
   public interface IResources
   {
-    Stream OpenResourceStream(Projects project, string url);
+    Stream OpenResourceStream(ResourceScope project, string url);
   }
 }

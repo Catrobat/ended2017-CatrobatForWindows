@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Globalization;
 using System.Xml.Linq;
 using System.Collections.Generic;
-using Catrobat.Core.ConverterLib;
+using Catrobat.Core.Converter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.SampleData;
@@ -50,7 +51,7 @@ namespace Catrobat.TestsCommon.Tests.Data
       Assert.AreEqual(project.Element("applicationVersionName").IsBefore(project.Element("applicationXmlVersion")), true);
 
       Assert.AreNotEqual(project.Element("applicationXmlVersion"), null);
-      Assert.AreEqual(double.Parse(project.Element("applicationXmlVersion").Value), 1.0);
+      Assert.AreEqual(double.Parse(project.Element("applicationXmlVersion").Value, CultureInfo.InvariantCulture), 1.0);
       Assert.AreEqual(project.Element("applicationXmlVersion").IsAfter(project.Element("applicationVersionName")), true);
       Assert.AreEqual(project.Element("applicationXmlVersion").IsBefore(project.Element("deviceName")), true);
 

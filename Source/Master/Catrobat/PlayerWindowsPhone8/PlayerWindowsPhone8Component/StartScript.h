@@ -4,7 +4,7 @@ class StartScript :
 	public Script
 {
 public:
-	StartScript();
+	StartScript(string spriteReference);
 	~StartScript();
 };
 

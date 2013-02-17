@@ -83,12 +83,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Resources\Resources.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\ApplicationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationResources.Designer.cs</LastGenOutput>

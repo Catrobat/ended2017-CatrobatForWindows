@@ -116,7 +116,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests\Data\StorageWindowsStoreTests.cs" />
-    <Compile Include="Tests\IDE\ConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Misc\" />
+    <Folder Include="Tests\IDE\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

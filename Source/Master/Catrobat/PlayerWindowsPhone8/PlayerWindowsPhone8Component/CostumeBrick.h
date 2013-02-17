@@ -4,7 +4,6 @@ class CostumeBrick :
 	public Brick
 {
 public:
-	CostumeBrick(string spriteReference);
 	CostumeBrick(string spriteReference, string costumeDataReference);
 
 	string m_costumeDataReference;

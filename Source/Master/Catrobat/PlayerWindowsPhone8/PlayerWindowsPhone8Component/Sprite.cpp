@@ -7,6 +7,7 @@ Sprite::Sprite(string name) :
 {
 	m_lookDatas = new list<LookData*>();
 	m_scripts = new list<Script*>();
+	m_soundInfos = new list<SoundInfo*>();
 }
 
 void Sprite::addLookData(LookData *lookData)
@@ -18,4 +19,11 @@ void Sprite::addScript(Script *script)
 {
 	m_scripts->push_back(script);
 }
+
+void Sprite::addSoundInfo(SoundInfo *soundInfo)
+{
+	m_soundInfos->push_back(soundInfo);
+}
+
+
 

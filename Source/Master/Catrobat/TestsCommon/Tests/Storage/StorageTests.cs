@@ -7,6 +7,7 @@ using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.Misc.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
+using Catrobat.Core;
 
 namespace Catrobat.TestsCommon.Tests.Storage
 {
@@ -171,7 +172,7 @@ namespace Catrobat.TestsCommon.Tests.Storage
         var file2 = File.Create(basePath + "Folder1/F2/file2.bin");
         file2.Close();
 
-        storage.RenameDirectory("RenameDirectoryTest/Folder1/F2", "RenameDirectoryTest/Folder1/renamed2");
+        storage.RenameDirectory("RenameDirectoryTest/Folder1/F2", "renamed2");
 
         Assert.IsTrue(Directory.Exists(basePath + "Folder1/renamed2"));
         Assert.IsTrue(Directory.Exists(basePath + "Folder1/renamed2/F3"));
@@ -185,12 +186,12 @@ namespace Catrobat.TestsCommon.Tests.Storage
     {
       using (IStorage storage = new StorageTest())
       {
-        var basePath = storage.BasePath + "LoadImageTest/";
-        var sampleDataPath = BasePathHelper.GetSampleDataPath() + "SampleProjects/";
+        var basePath = "LoadImageTest/";
+        var sampleProjectsPath = BasePathHelper.GetSampleProjectsPath();
 
-        Directory.CreateDirectory(basePath);
+        Directory.CreateDirectory(storage.BasePath + basePath);
 
-        Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleDataPath + "test.catroid");
+        Stream stream = ResourceLoader.GetResourceStream(ResourceScope.TestCommon, sampleProjectsPath + "test.catroid");
         CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
         stream.Close();
 
@@ -199,30 +200,29 @@ namespace Catrobat.TestsCommon.Tests.Storage
       }
     }
 
-    [TestMethod]
-    public void SaveImageTest()
-    {
-      throw new NotImplementedException("Implement for TestStorage");
-      //using (IStorage storage = new StorageTest())
-      //{
-      //  var basePath = storage.BasePath + "SaveImageTest/";
-      //  var sampleDataPath = BasePathHelper.GetSampleDataPath() + "SampleProjects/";
+    //[TestMethod]
+    //public void SaveImageTest()
+    //{
+    //  using (IStorage storage = new StorageTest())
+    //  {
+    //    var basePath = storage.BasePath + "SaveImageTest/";
+    //    var sampleProjectsPath = BasePathHelper.GetSampleProjectsPath();
 
-      //  Directory.CreateDirectory(basePath);
+    //    Directory.CreateDirectory(basePath);
 
-      //  Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleDataPath + "SampleProjects/test.catroid");
-      //  CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
-      //  stream.Close();
+    //    Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleProjectsPath + "test.catroid");
+    //    CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
+    //    stream.Close();
 
-      //  var image = storage.LoadImage("LoadImageTest/screenshot.png");
-      //  storage.SaveImage("TestLoadImage2/screenshot.png", image);
-      //  BitmapImage image2 = storage.LoadImage("TestLoadImage2/screenshot.png");
+    //    var image = storage.LoadImage("LoadImageTest/screenshot.png");
+    //    storage.SaveImage("TestLoadImage2/screenshot.png", image);
+    //    BitmapImage image2 = storage.LoadImage("TestLoadImage2/screenshot.png");
 
-      //  // TODO: Maybe check if pixels are corect?
+    //     TODO: Maybe check if pixels are corect?
 
-      //  Assert.AreNotEqual(image, null);
-      //}
-    }
+    //    Assert.AreNotEqual(image, null);
+    //  }
+    //}
 
     [TestMethod]
     public void ReadWriteTextFileTest()
@@ -241,17 +241,18 @@ namespace Catrobat.TestsCommon.Tests.Storage
     [TestMethod]
     public void ReadWriteSerializableObjectTest()
     {
-      throw new NotImplementedException("Implement for TestStorage");
-      //TestHelper.InitializeAndClearCatrobatContext();
-      //IStorage storage = new Phone7Storage();
+      TestHelper.InitializeAndClearCatrobatContext();
 
-      //LocalSettings settingsWrite = new LocalSettings();
-      //settingsWrite.CurrentProjectName = "ProjectName";
+      using (var storage = StorageSystem.GetStorage())
+      {
+        LocalSettings settingsWrite = new LocalSettings();
+        settingsWrite.CurrentProjectName = "ProjectName";
 
-      //storage.WriteSerializableObject("testobject", settingsWrite);
-      //LocalSettings settingsRead = (LocalSettings) storage.ReadSerializableObject("testobject", settingsWrite.GetType());
+        storage.WriteSerializableObject("testobject", settingsWrite);
+        LocalSettings settingsRead = (LocalSettings)storage.ReadSerializableObject("testobject", settingsWrite.GetType());
 
-      //Assert.AreEqual(settingsRead.CurrentProjectName, "ProjectName");
+        Assert.AreEqual(settingsRead.CurrentProjectName, "ProjectName");
+      }
     }
   }
 }

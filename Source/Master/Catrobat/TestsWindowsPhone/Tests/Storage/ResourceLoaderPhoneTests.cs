@@ -12,7 +12,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
     {
       ResourceLoader.SetResourceLoader(new ResourcesPhone());
 
-      var stream = ResourceLoader.GetResourceStream(Projects.TestsPhone, "SampleData/SampleProjects/simple.xml");
+      var stream = ResourceLoader.GetResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/simple.xml");
       Assert.AreNotEqual(stream, null);
     }
   }

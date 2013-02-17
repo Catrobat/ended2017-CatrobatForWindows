@@ -1,13 +1,16 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using Catrobat.Core.Storage;
 using System;
+using System.Runtime.Serialization;
 
 namespace Catrobat.TestsCommon.Misc.Storage
 {
   public class StorageTest : IStorage
   {
-    
+    private List<Stream> openedStreams = new List<Stream>();
+
     public long Quota
     {
       get { throw new NotImplementedException(); }
@@ -31,12 +34,30 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public string[] GetDirectoryNames(string path)
     {
-      return Directory.GetDirectories(BasePath + path);
+      path = FormatPath(path);
+
+      var directoryPaths = Directory.GetDirectories(BasePath + path);
+
+      var directoryNames = new List<string>();
+
+      foreach (string directoryPath in directoryPaths)
+        directoryNames.Add(GetName(directoryPath));
+
+      return directoryNames.ToArray();
     }
 
     public string[] GetFileNames(string path)
     {
-      return Directory.GetFiles(BasePath + path);
+      path = FormatPath(path);
+
+      var filePaths = Directory.GetFiles(BasePath + path);
+
+      var fileNames = new List<string>();
+
+      foreach(string filePath in filePaths)
+        fileNames.Add(GetName(filePath));
+
+      return fileNames.ToArray();
     }
 
     public void DeleteDirectory(string path)
@@ -49,17 +70,6 @@ namespace Catrobat.TestsCommon.Misc.Storage
     {
       if (File.Exists(BasePath + path))
         File.Delete(BasePath + path);
-    }
-
-    private string GetName(string path)
-    {
-      int startSlash = path.LastIndexOf("/", System.StringComparison.Ordinal) + 1;
-      int startBackSlash = path.LastIndexOf("\\", System.StringComparison.Ordinal) + 1;
-
-      if (startSlash > startBackSlash)
-        return path.Substring(startSlash);
-      else
-        return path.Substring(startBackSlash);
     }
 
     public void CopyDirectory(string sourcePath, string destinationPath)
@@ -82,19 +92,14 @@ namespace Catrobat.TestsCommon.Misc.Storage
       }
     }
 
-    private string GetFilePath(string path)
-    {
-      return path.Substring(0, path.Length - GetName(path).Length);
-    }
-
     public void CopyFile(string sourcePath, string destinationPath)
     {
       if (File.Exists(BasePath + sourcePath))
       {
         string content = File.ReadAllText(BasePath + sourcePath, System.Text.Encoding.UTF8);
         
-        if(!Directory.Exists(BasePath + GetFilePath(destinationPath)))
-          Directory.CreateDirectory(BasePath + GetFilePath(destinationPath));
+        if(!Directory.Exists(BasePath + GetPath(destinationPath)))
+          Directory.CreateDirectory(BasePath + GetPath(destinationPath));
 
         File.WriteAllText(BasePath + destinationPath, content, System.Text.Encoding.UTF8);
       }
@@ -102,6 +107,8 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public Stream OpenFile(string path, StorageFileMode mode, StorageFileAccess access)
     {
+      path = path.Replace('\\', '/');
+
       FileMode fileMode = FileMode.Append;
       FileAccess fileAccess = FileAccess.Read;
 
@@ -152,16 +159,16 @@ namespace Catrobat.TestsCommon.Misc.Storage
         {
           case StorageFileMode.Create:
             {
-              if (!Directory.Exists(BasePath + GetFilePath(path)))
-                Directory.CreateDirectory(BasePath + GetFilePath(path));
+              if (!Directory.Exists(BasePath + GetPath(path)))
+                Directory.CreateDirectory(BasePath + GetPath(path));
               var file = File.Create(BasePath + path);
               file.Close();
             }
             break;
           case StorageFileMode.CreateNew:
             {
-              if (!Directory.Exists(BasePath + GetFilePath(path)))
-                Directory.CreateDirectory(BasePath + GetFilePath(path));
+              if (!Directory.Exists(BasePath + GetPath(path)))
+                Directory.CreateDirectory(BasePath + GetPath(path));
               if (!File.Exists(BasePath + path))
               {
                 var file = File.Create(BasePath + path);
@@ -173,8 +180,8 @@ namespace Catrobat.TestsCommon.Misc.Storage
             break;
           case StorageFileMode.OpenOrCreate:
             {
-              if (!Directory.Exists(BasePath + GetFilePath(path)))
-                Directory.CreateDirectory(BasePath + GetFilePath(path));
+              if (!Directory.Exists(BasePath + GetPath(path)))
+                Directory.CreateDirectory(BasePath + GetPath(path));
               if (!File.Exists(BasePath + path))
               {
                 var file = File.Create(BasePath + path);
@@ -184,13 +191,15 @@ namespace Catrobat.TestsCommon.Misc.Storage
             break;
         }
 
-      return File.Open(BasePath + path, fileMode, fileAccess);
+      var stream = File.Open(BasePath + path, fileMode, fileAccess);
+      openedStreams.Add(stream);
+      return stream;
     }
 
     public void RenameDirectory(string directoryPath, string newDirectoryName)
     {
       if (Directory.Exists(BasePath + directoryPath))
-        Directory.Move(BasePath + directoryPath, BasePath + newDirectoryName);
+        Directory.Move(BasePath + directoryPath, BasePath + GetPath(directoryPath) + newDirectoryName);
     }
 
     public byte[] LoadImage(string pathToImage)
@@ -216,22 +225,37 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public void WriteTextFile(string path, string content)
     {
+      if (!Directory.Exists(BasePath + GetPath(path)))
+        Directory.CreateDirectory(BasePath + GetPath(path));
+
       File.WriteAllText(BasePath + path, content, System.Text.Encoding.UTF8);
     }
 
     public object ReadSerializableObject(string path, Type type)
     {
-      throw new NotImplementedException();
+      using (Stream fileStream = this.OpenFile(path, StorageFileMode.Open, StorageFileAccess.Read))
+      {
+        DataContractSerializer serializer = new DataContractSerializer(type);
+        object serialireableObject = serializer.ReadObject(fileStream); // TODO: does not working any more
+        fileStream.Close();
+        return serialireableObject;
+      }
     }
 
     public void WriteSerializableObject(string path, object serializableObject)
     {
-      throw new NotImplementedException();
+      using (Stream fileStream = this.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write))
+      {
+        DataContractSerializer serializer = new DataContractSerializer(serializableObject.GetType());
+        serializer.WriteObject(fileStream, serializableObject);
+        fileStream.Close();
+      }
     }
 
     public void Dispose()
     {
-      
+      foreach (var stream in openedStreams)
+        stream.Dispose();
     }
 
     public string BasePath
@@ -245,5 +269,27 @@ namespace Catrobat.TestsCommon.Misc.Storage
         return basePath;
       }
     }
+
+    private string GetName(string path)
+    {
+      int startSlash = path.LastIndexOf("/", System.StringComparison.Ordinal) + 1;
+      int startBackSlash = path.LastIndexOf("\\", System.StringComparison.Ordinal) + 1;
+
+      if (startSlash > startBackSlash)
+        return path.Substring(startSlash);
+      else
+        return path.Substring(startBackSlash);
+    }
+
+    private string GetPath(string path)
+    {
+      return path.Substring(0, path.Length - GetName(path).Length);
+    }
+
+    private string FormatPath(string pathToFormat)
+    {
+      return pathToFormat.Replace('\\', '/');
+    }
+
   }
 }

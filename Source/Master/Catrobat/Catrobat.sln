@@ -33,9 +33,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsCommon", "TestsCommon\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsWindowsPhone", "TestsWindowsPhone\TestsWindowsPhone.csproj", "{E4E15E4C-3DA6-4C47-9117-8B0BF02C4239}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDEWindowsPhone", "IDEWindowsPhone\IDEWindowsPhone.csproj", "{CDDB2C02-9584-45C6-9A7D-2B04B322C232}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 12
+		SccNumberOfProjects = 13
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -72,6 +74,9 @@ Global
 		SccProjectUniqueName11 = TestsWindowsPhone\\TestsWindowsPhone.csproj
 		SccProjectName11 = TestsWindowsPhone
 		SccLocalPath11 = TestsWindowsPhone
+		SccProjectUniqueName12 = IDEWindowsPhone\\IDEWindowsPhone.csproj
+		SccProjectName12 = IDEWindowsPhone
+		SccLocalPath12 = IDEWindowsPhone
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -347,6 +352,38 @@ Global
 		{E4E15E4C-3DA6-4C47-9117-8B0BF02C4239}.Release|x86.ActiveCfg = Release|x86
 		{E4E15E4C-3DA6-4C47-9117-8B0BF02C4239}.Release|x86.Build.0 = Release|x86
 		{E4E15E4C-3DA6-4C47-9117-8B0BF02C4239}.Release|x86.Deploy.0 = Release|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|ARM.ActiveCfg = Debug|ARM
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|ARM.Build.0 = Debug|ARM
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|ARM.Deploy.0 = Debug|ARM
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|Win32.ActiveCfg = Debug|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|Win32.Build.0 = Debug|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|Win32.Deploy.0 = Debug|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|x86.ActiveCfg = Debug|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|x86.Build.0 = Debug|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|x86.Deploy.0 = Debug|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|ARM.ActiveCfg = Release|ARM
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|ARM.Build.0 = Release|ARM
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|ARM.Deploy.0 = Release|ARM
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|Mixed Platforms.Build.0 = Release|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|Mixed Platforms.Deploy.0 = Release|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|Win32.ActiveCfg = Release|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|Win32.Build.0 = Release|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|Win32.Deploy.0 = Release|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|x64.ActiveCfg = Release|Any CPU
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|x86.ActiveCfg = Release|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|x86.Build.0 = Release|x86
+		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

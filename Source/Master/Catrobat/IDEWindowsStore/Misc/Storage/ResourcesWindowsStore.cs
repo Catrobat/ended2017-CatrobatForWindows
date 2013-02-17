@@ -9,25 +9,25 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
 {
   public class ResourcesWindowsStore : IResources
   {
-    public Stream OpenResourceStream(Projects project, string uri)
+    public Stream OpenResourceStream(ResourceScope project, string uri)
     {
       string fullUri = "ms-appx:///";
 
       switch (project)
       {
-        case Projects.Core:
+        case ResourceScope.Core:
           fullUri += "Core/";
           break;
-        case Projects.IdePhone:
+        case ResourceScope.IdePhone:
           fullUri += "IDEWindowsPhone/";
           break;
-        case Projects.IdeStore:
+        case ResourceScope.IdeStore:
           fullUri += "IDEWindowsStroe/";
           break;
-        case Projects.TestsPhone:
+        case ResourceScope.TestsPhone:
           fullUri += "TestsWindowsPhone/";
           break;
-        case Projects.TestsStore:
+        case ResourceScope.TestsStore:
           fullUri += "TestsWindowsStore/";
           break;
         default:

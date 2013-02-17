@@ -20,7 +20,7 @@ public:
 	void addSpriteReference(string spriteReference);
 
 protected:
-	Script(TypeOfScript scriptType);
+	Script(TypeOfScript scriptType, string spriteReference);
 
 private:
 	TypeOfScript m_scriptType;

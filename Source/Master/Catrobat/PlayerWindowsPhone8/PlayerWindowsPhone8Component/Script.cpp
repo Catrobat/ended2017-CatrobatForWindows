@@ -2,8 +2,8 @@
 #include "Script.h"
 
 
-Script::Script(TypeOfScript scriptType) :
-	m_scriptType(scriptType)
+Script::Script(TypeOfScript scriptType, string spriteReference) :
+	m_scriptType(scriptType), m_spriteReference(spriteReference)
 {
 	m_brickList = new list<Brick*>();
 }

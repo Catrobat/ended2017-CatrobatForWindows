@@ -1,0 +1,32 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Catrobat.IDEWindowsPhone.Views.Editor.Sounds.ChangeSoundName"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+  <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
+      <TextBlock Margin="0" Text="{Binding Path=Editor.TitleChangeSoundName, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+    </StackPanel>
+
+    <StackPanel Grid.Row="1" Margin="10 0 0 15">
+      <TextBlock Margin="0" Text="{Binding Path=Editor.SoundName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBox Margin="-10 0 10 0" Name="txtName" HorizontalAlignment="Stretch" TextChanged="txtName_TextChanged" />
+    </StackPanel>
+  </Grid>
+</phone:PhoneApplicationPage>

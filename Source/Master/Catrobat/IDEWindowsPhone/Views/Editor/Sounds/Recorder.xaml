@@ -1,0 +1,91 @@
+﻿<phone:PhoneApplicationPage 
+  x:Class="Catrobat.IDEWindowsPhone.Views.Editor.Sounds.Recorder"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+  xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:c="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
+  FontFamily="{StaticResource PhoneFontFamilyNormal}"
+  FontSize="{StaticResource PhoneFontSizeNormal}"
+  Foreground="{StaticResource PhoneForegroundBrush}"
+  SupportedOrientations="Portrait" Orientation="Portrait"
+  mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+  shell:SystemTray.IsVisible="True">
+  
+  <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+
+    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
+      <TextBlock Margin="0" Text="{Binding Path=Editor.TitleRecorder, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+    </StackPanel>
+
+    <Grid Name="gDisplay" Grid.Row="1" Margin="0 15 0 0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="4*"/>
+        <RowDefinition Height="1*"/>
+      </Grid.RowDefinitions>
+      <Grid Grid.Row="0" Height="100">
+        <c:PlayButton VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="btnPlay" Click="btnPlay_Click" Height="100" Width="100" DataContext="{Binding}" />
+      </Grid>
+      <TextBlock Grid.Row="1" HorizontalAlignment="Center" Name="tbTime" Text="{Binding Path=Editor.RecorderRecordTime, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" />
+    </Grid>
+
+    <Grid Name="gRecordButtons"  Grid.Row="2" Margin="0 15 0 0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
+
+      <Button Grid.Column="0" HorizontalAlignment="Center" Name="btnRecord" Click="btnRecord_Click">
+        <Button.Template>
+          <ControlTemplate>
+            <Grid Background="Transparent">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition/>
+              </Grid.RowDefinitions>
+              <Image Grid.Row="0" x:Name="NormalImage" Source="/Views/Editor/Sounds/Recordericons/rec.png" HorizontalAlignment="Center" Height="80" />
+              <TextBlock Grid.Row="1" FontSize="18" Name="tbRec" Text="{Binding Path=Editor.RecorderRecord, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}" />
+            </Grid>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+      <Button Grid.Column="1" Height="120" HorizontalAlignment="Center" Name="btnStop" Click="btnStop_Click">
+        <Button.Template>
+          <ControlTemplate>
+            <Grid Background="Transparent">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition/>
+              </Grid.RowDefinitions>
+              <Image Grid.Row="0" x:Name="NormalImage" Source="/Views/Editor/Sounds/Recordericons/stop.png" HorizontalAlignment="Center" Height="80" />
+              <TextBlock Grid.Row="1" FontSize="18" Name="tbStop" Text="{Binding Path=Editor.RecorderStop, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}" />
+            </Grid>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+    </Grid>
+
+    <Grid Name="gButtons" Grid.Row="3" Margin="0 15 0 0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <Button Grid.Column="0" Name="btnUse" IsEnabled="False" Content="{Binding Path=Editor.ButtonUse, Source={StaticResource LocalizedStrings}}" Click="btnUse_Click" />
+      <Button Grid.Column="1" Name="btnCancel" Content="{Binding Path=Editor.ButtonCancel, Source={StaticResource LocalizedStrings}}" Click="btnCancel_Click" />
+    </Grid>
+
+    <StackPanel Grid.Row="1" Margin="10 0 0 15" Name="stackPanelChangeName">
+      <TextBlock Margin="0" Text="{Binding Path=Editor.SoundName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBox Margin="-10 0 10 0" Name="txtName" HorizontalAlignment="Stretch" TextChanged="txtName_TextChanged" />
+    </StackPanel>
+  </Grid>
+</phone:PhoneApplicationPage>

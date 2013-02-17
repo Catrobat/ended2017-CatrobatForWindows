@@ -52,7 +52,7 @@ namespace Catrobat.Core.ZIP
 
         private static void WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage, string basePath)
         {
-            string searchPattern = basePath + "/*";
+            string searchPattern = basePath;
             string[] fileNames = storage.GetFileNames(searchPattern);
 
             foreach (string fileName in fileNames)

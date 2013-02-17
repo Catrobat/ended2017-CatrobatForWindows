@@ -72,7 +72,7 @@ namespace Catrobat.Core.Objects.Sounds
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("Sound");
+            var xRoot = new XElement("soundInfo");
 
             xRoot.Add(new XElement("fileName", fileName));
 

@@ -38,19 +38,7 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Script.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="StartScript.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="WhenScript.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="LookData.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="BroadcastScript.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="Brick.cpp">
@@ -67,6 +55,21 @@
     </ClCompile>
     <ClCompile Include="SetGhostEffectBrick.cpp">
       <Filter>Objects\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="WhenScript.cpp">
+      <Filter>Objects\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="StartScript.cpp">
+      <Filter>Objects\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="BroadcastScript.cpp">
+      <Filter>Objects\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Script.cpp">
+      <Filter>Objects\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundInfo.cpp">
+      <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,19 +116,7 @@
     <ClInclude Include="Sprite.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Script.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="StartScript.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="WhenScript.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="LookData.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="BroadcastScript.h">
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Brick.h">
@@ -142,6 +133,21 @@
     </ClInclude>
     <ClInclude Include="SetGhostEffectBrick.h">
       <Filter>Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="WhenScript.h">
+      <Filter>Objects\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="StartScript.h">
+      <Filter>Objects\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="BroadcastScript.h">
+      <Filter>Objects\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Script.h">
+      <Filter>Objects\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundInfo.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +168,9 @@
     </Filter>
     <Filter Include="Objects\Bricks">
       <UniqueIdentifier>{dd3bec63-c1d8-47f4-b4c0-3a7929a37ea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Scripts">
+      <UniqueIdentifier>{fda72b0d-ed6b-4c59-9473-4911f7bd4bc6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
