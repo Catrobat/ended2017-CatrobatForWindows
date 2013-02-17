@@ -6,7 +6,7 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Catrobat.IDEWindowsPhone.Resources;
+using Catrobat.IDEWindowsPhone.Content.Resources;
 using Catrobat.Core;
 using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.ViewModel;

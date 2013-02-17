@@ -52,7 +52,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition/>
               </Grid.RowDefinitions>
-              <Image Grid.Row="0" x:Name="NormalImage" Source="/MetroCatIDE;component/Views/Editor/Sounds/Recordericons/rec.png" HorizontalAlignment="Center" Height="80" />
+              <Image Grid.Row="0" x:Name="NormalImage" Source="/Views/Editor/Sounds/Recordericons/rec.png" HorizontalAlignment="Center" Height="80" />
               <TextBlock Grid.Row="1" FontSize="18" Name="tbRec" Text="{Binding Path=Editor.RecorderRecord, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}" />
             </Grid>
           </ControlTemplate>
@@ -66,7 +66,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition/>
               </Grid.RowDefinitions>
-              <Image Grid.Row="0" x:Name="NormalImage" Source="/MetroCatIDE;component/Views/Editor/Sounds/Recordericons/stop.png" HorizontalAlignment="Center" Height="80" />
+              <Image Grid.Row="0" x:Name="NormalImage" Source="/Views/Editor/Sounds/Recordericons/stop.png" HorizontalAlignment="Center" Height="80" />
               <TextBlock Grid.Row="1" FontSize="18" Name="tbStop" Text="{Binding Path=Editor.RecorderStop, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}" />
             </Grid>
           </ControlTemplate>

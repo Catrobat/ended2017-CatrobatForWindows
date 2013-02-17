@@ -2,12 +2,13 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 {
   public class ImageButton : Button
   {
-    private string path = "Resources/ImageButtons/";
+    private string path = "/Content/Images/ImageButtons/";
     private bool dark = ((Visibility)Application.Current.Resources["PhoneDarkThemeVisibility"] == Visibility.Visible);
     private string dark_theme = "_dark.png";
     private string light_theme = "_light.png";

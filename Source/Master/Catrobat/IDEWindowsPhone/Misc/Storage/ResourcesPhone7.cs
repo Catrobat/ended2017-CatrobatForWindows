@@ -47,7 +47,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
           }
         case ResourceScope.SampleProjects:
           {
-            projectPath = "";
+            projectPath = "Content/";
             var resourceUri = new Uri(projectPath + uri, UriKind.Relative);
             var resource = Application.GetResourceStream(resourceUri);
 

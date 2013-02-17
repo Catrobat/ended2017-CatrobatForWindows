@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Catrobat.IDEWindowsPhone.Resources {
+namespace Catrobat.IDEWindowsPhone.Content.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Catrobat.IDEWindowsPhone.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Catrobat.IDEWindowsPhone.Resources.AppResources", typeof(AppResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Catrobat.IDEWindowsPhone.Content.Resources.AppResources", typeof(AppResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
