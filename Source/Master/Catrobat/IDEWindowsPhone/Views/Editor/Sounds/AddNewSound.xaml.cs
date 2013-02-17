@@ -13,12 +13,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
     private void btnMediaLibrary_Click(object sender, RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Editor/Sounds/AudioLibrary.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Editor/Sounds/AudioLibrary.xaml", UriKind.Relative));
     }
 
     private void btnRecorder_Click(object sender, RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Editor/Sounds/Recorder.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Editor/Sounds/Recorder.xaml", UriKind.Relative));
     }
   }
 }

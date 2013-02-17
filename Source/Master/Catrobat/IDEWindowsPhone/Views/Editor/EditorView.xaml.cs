@@ -195,12 +195,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
     private void menueMainMenue_Click(object sender, EventArgs e)
     {
-      NavigationService.Navigate(new Uri("/MetroCatIDE;component/MainView.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Main/MainView.xaml", UriKind.Relative));
     }
 
     private void menueProjectSettings_Click(object sender, EventArgs e)
     {
-      NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Editor/ProjectSettingsView.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Editor/ProjectSettingsView.xaml", UriKind.Relative));
     }
 
 
@@ -219,7 +219,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
     private void btnEditSpriteName_Click(object sender, RoutedEventArgs e)
     {
       ChangeSpriteName.Sprite = ((Button)sender).DataContext as Sprite;
-      NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Editor/Sprites/ChangeSpriteName.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Editor/Sprites/ChangeSpriteName.xaml", UriKind.Relative));
     }
 
     private void btnCopySprite_Click(object sender, RoutedEventArgs e)
@@ -245,7 +245,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
     private void btnEditSoundName_Click(object sender, RoutedEventArgs e)
     {
       ChangeSoundName.Sound = ((Button)sender).DataContext as Sound;
-      NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Editor/Sounds/ChangeSoundName.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Editor/Sounds/ChangeSoundName.xaml", UriKind.Relative));
     }
 
     private void buttonSoundPlay_Click(object sender, RoutedEventArgs e)
@@ -290,7 +290,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
     private void btnEditCostumeName_Click(object sender, System.Windows.RoutedEventArgs e)
     {
       ChangeCostumeName.Costume = ((Button)sender).DataContext as Costume;
-      NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Editor/Costumes/ChangeCostumeName.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Editor/Costumes/ChangeCostumeName.xaml", UriKind.Relative));
     }
 
     private void btnCopyCostume_Click(object sender, RoutedEventArgs e)
@@ -302,7 +302,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
     private void OnStartAddBroadcastMessage()
     {
-      NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Editor/Scripts/NewBroadcastMessage.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Editor/Scripts/NewBroadcastMessage.xaml", UriKind.Relative));
     }
 
     #region Appbar
@@ -362,22 +362,22 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
     {
       if (pivotMain.SelectedItem == pivotSprites)
       {
-        NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Editor/Sprites/AddNewSprite.xaml", UriKind.Relative));
+        NavigationService.Navigate(new Uri("/Views/Editor/Sprites/AddNewSprite.xaml", UriKind.Relative));
       }
       else if (pivotMain.SelectedItem == pivotScripts)
       {
         firstVisibleScriptBrickIndex = reorderListBoxScriptBricks.FirstVisibleItemIndex;
         lastVisibleScriptBrickIndex = reorderListBoxScriptBricks.LastVisibleItemIndex;
 
-        NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Editor/Scripts/AddNewScript.xaml", UriKind.Relative));
+        NavigationService.Navigate(new Uri("/Views/Editor/Scripts/AddNewScript.xaml", UriKind.Relative));
       }
       else if (pivotMain.SelectedItem == pivotCostumes)
       {
-        NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Editor/Costumes/AddNewCostume.xaml", UriKind.Relative));
+        NavigationService.Navigate(new Uri("/Views/Editor/Costumes/AddNewCostume.xaml", UriKind.Relative));
       }
       else if (pivotMain.SelectedItem == pivotSounds)
       {
-        NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Editor/Sounds/AddNewSound.xaml", UriKind.Relative));
+        NavigationService.Navigate(new Uri("/Views/Editor/Sounds/AddNewSound.xaml", UriKind.Relative));
       }
     }
 

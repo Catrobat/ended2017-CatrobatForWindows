@@ -51,7 +51,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void navigationCallback()
     {
-      Action action = () => NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Main/UploadProjectPage.xaml", UriKind.Relative));
+      Action action = () => NavigationService.Navigate(new Uri("/Views/Main/UploadProjectPage.xaml", UriKind.Relative));
       Dispatcher.BeginInvoke(action);
     }
 

@@ -10,7 +10,7 @@
     d:DesignHeight="480" d:DesignWidth="480">
 
   <Grid x:Name="LayoutRoot" Background="Black" Height="800" Width="480">
-    <Image Source="/IDEWindowsPhone;component/Resources/Application/up.png" x:Name="imageSplashCat" Stretch="None" Margin="0,0,0,50" />
+    <Image Source="Resources/Application/up.png" x:Name="imageSplashCat" Stretch="None" Margin="0,0,0,50" />
   </Grid>
 
 </UserControl>

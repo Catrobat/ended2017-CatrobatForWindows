@@ -26,13 +26,13 @@ namespace Catrobat.IDEWindowsPhone.Controls.SplashScreen
           if (imageActive)
           {
             imageActive = false;
-            BitmapImage image = new BitmapImage(new Uri("/IDEWindowsPhone;component/Resources/Application/down.png", UriKind.Relative));
+            BitmapImage image = new BitmapImage(new Uri("Resources/Application/down.png", UriKind.Relative));
             imageSplashCat.Source = image;
           }
           else
           {
             imageActive = true;
-            BitmapImage image = new BitmapImage(new Uri("/IDEWindowsPhone;component/Resources/Application/up.png", UriKind.Relative));
+            BitmapImage image = new BitmapImage(new Uri("Resources/Application/up.png", UriKind.Relative));
             imageSplashCat.Source = image;
           }
 

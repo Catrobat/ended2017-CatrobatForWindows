@@ -59,34 +59,34 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void buttonEditCurrentProject_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Editor/EditorView.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Editor/EditorView.xaml", UriKind.Relative));
     }
 
     private void buttonCreateNewProject_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Main/AddNewProject.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Main/AddNewProject.xaml", UriKind.Relative));
     }
 
     private void stackPanelSettingsLanguage_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Main/SettingsLanguageChooser.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Main/SettingsLanguageChooser.xaml", UriKind.Relative));
     }
 
     private void stackPanelSettingsDesign_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Main/SettingsThemeChooser.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Main/SettingsThemeChooser.xaml", UriKind.Relative));
     }
 
     private void stackPanelSettingsBricks_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Main/SettingsBrickCategories.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Main/SettingsBrickCategories.xaml", UriKind.Relative));
     }
 
     private void OnlineProject_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       if (OnlineProjectListBox.SelectedItem != null)
       {
-        NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Main/OnlineProjectPage.xaml", UriKind.Relative));
+        NavigationService.Navigate(new Uri("/Views/Main/OnlineProjectPage.xaml", UriKind.Relative));
       }
     }
 
@@ -139,12 +139,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     {
       if (registered)
       {
-        Action action = () => NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Main/UploadProjectPage.xaml", UriKind.Relative));
+        Action action = () => NavigationService.Navigate(new Uri("/Views/Main/UploadProjectPage.xaml", UriKind.Relative));
         Dispatcher.BeginInvoke(action);
       }
       else
       {
-        Action action = () => NavigationService.Navigate(new Uri("/MetroCatIDE;component/Views/Main/UploadProjectLoginPage.xaml", UriKind.Relative));
+        Action action = () => NavigationService.Navigate(new Uri("/Views/Main/UploadProjectLoginPage.xaml", UriKind.Relative));
         Dispatcher.BeginInvoke(action);
       }
     }

@@ -7,7 +7,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 {
   public class ImageButton : Button
   {
-    private string path = "/IDEWindowsPhone;component/Resources/ImageButtons/";
+    private string path = "Resources/ImageButtons/";
     private bool dark = ((Visibility)Application.Current.Resources["PhoneDarkThemeVisibility"] == Visibility.Visible);
     private string dark_theme = "_dark.png";
     private string light_theme = "_light.png";
