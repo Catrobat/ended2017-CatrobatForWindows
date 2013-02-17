@@ -11,4 +11,3 @@ void SpriteList::addSprite(Sprite *sprite)
 {
 	m_sprites->push_back(sprite);
 }
-

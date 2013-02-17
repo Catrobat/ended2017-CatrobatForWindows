@@ -164,6 +164,18 @@ Sprite *XMLParser::parseSprite(xml_node<> *baseNode)
 				scriptListNode = scriptListNode->next_sibling();
 			}
 		}
+		else if (strcmp(node->name(), "soundList") == 0)
+		{
+			xml_node<> *soundListNode = node->first_node();
+			while (soundListNode)
+			{
+				xml_attribute<> *soundInfoAttribute = soundListNode->first_attribute("reference");
+				if (!soundInfoAttribute)
+					continue;
+				sprite->addSoundInfo(new SoundInfo(soundInfoAttribute->value()));
+				soundListNode = soundListNode->next_sibling();
+			}
+		}
 		node = node->next_sibling();
 	}
 
@@ -198,7 +210,7 @@ Script *XMLParser::parseStartScript(xml_node<> *baseNode)
 	if (!spriteReferenceNode)
 		return NULL;
 
-	xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute();
+	xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute("reference");
 		
 	if (!spriteReferenceAttribute)
 		return NULL;
@@ -214,7 +226,7 @@ Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode)
 	if (!spriteReferenceNode)
 		return NULL;
 
-	xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute();
+	xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute("reference");
 
 	if (!spriteReferenceAttribute)
 		return NULL;
@@ -234,7 +246,7 @@ Script *XMLParser::parseWhenScript(xml_node<> *baseNode)
 	if (!spriteReferenceNode)
 		return NULL;
 
-	xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute();
+	xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute("reference");
 
 	if (!spriteReferenceAttribute)
 		return NULL;
@@ -312,7 +324,7 @@ Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode)
 	if (!node) 
 		return NULL;
 
-	xml_attribute<> *spriteReferenceAttribute = node->first_attribute();
+	xml_attribute<> *spriteReferenceAttribute = node->first_attribute("reference");
 	if (!spriteReferenceAttribute)
 		return NULL;
 
@@ -336,7 +348,7 @@ Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode)
 	if (!node)
 		return NULL;
 
-	xml_attribute<> *spriteReferenceAttribute = node->first_attribute();
+	xml_attribute<> *spriteReferenceAttribute = node->first_attribute("reference");
 	if (!spriteReferenceAttribute)
 		return NULL;
 
@@ -355,7 +367,7 @@ Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode)
 	if (!node)
 		return NULL;
 
-	xml_attribute<> *spriteReferenceAttribute = node->first_attribute();
+	xml_attribute<> *spriteReferenceAttribute = node->first_attribute("reference");
 	if (!spriteReferenceAttribute)
 		return NULL;
 

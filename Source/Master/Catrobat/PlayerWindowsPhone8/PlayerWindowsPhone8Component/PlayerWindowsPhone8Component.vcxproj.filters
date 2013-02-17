@@ -68,6 +68,9 @@
     <ClCompile Include="Script.cpp">
       <Filter>Objects\Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="SoundInfo.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="Script.h">
       <Filter>Objects\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundInfo.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -164,6 +164,7 @@
     <ClInclude Include="Script.h" />
     <ClInclude Include="SetGhostEffectBrick.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundInfo.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteList.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="SetGhostEffectBrick.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SoundInfo.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteList.cpp" />
