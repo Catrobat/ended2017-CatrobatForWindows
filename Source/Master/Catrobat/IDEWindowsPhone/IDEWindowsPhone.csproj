@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CDDB2C02-9584-45C6-9A7D-2B04B322C232}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Catrobat.IDEWindowsPhone</RootNamespace>
+    <AssemblyName>Catrobat.IDEWindowsPhone</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>IDEWindowsPhone_$(Configuration)_$(Platform).xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>IDEWindowsPhone.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Bricks\MasterBrick.cs" />
+    <Compile Include="Controls\Bricks\NormalBrick.cs" />
+    <Compile Include="Controls\Buttons\ImageButton.cs" />
+    <Compile Include="Controls\Buttons\PlayButton.xaml.cs">
+      <DependentUpon>PlayButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
+    <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
+    <Compile Include="Controls\ReorderableListbox\NegativeValueConverter.cs" />
+    <Compile Include="Controls\ReorderableListbox\PullDownToRefreshPanel.cs" />
+    <Compile Include="Controls\ReorderableListbox\ReorderListBox.cs" />
+    <Compile Include="Controls\ReorderableListbox\ReorderListBoxItem.cs" />
+    <Compile Include="Controls\SplashScreen\AnimatedSplashScreen.xaml.cs">
+      <DependentUpon>AnimatedSplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\ActiveProjectVisibilityConverter.cs" />
+    <Compile Include="Converters\DoubleStringConverter.cs" />
+    <Compile Include="Converters\FloatStringConverter.cs" />
+    <Compile Include="Converters\IntCostumeReferenceConverter.cs" />
+    <Compile Include="Converters\IntSoundInfoConverter.cs" />
+    <Compile Include="Converters\IntStringConverter.cs" />
+    <Compile Include="Converters\NullColorConverter.cs" />
+    <Compile Include="Converters\SecondStringMillisecondConverter.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Misc\MemoryMonitor.cs" />
+    <Compile Include="Misc\SoundPlayer.cs" />
+    <Compile Include="Misc\Storage\ResourcesPhone7.cs" />
+    <Compile Include="Misc\Storage\StorageFactoryPhone7.cs" />
+    <Compile Include="Misc\Storage\StoragePhone7.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\ColorChooser.cs" />
+    <Compile Include="Themes\Theme.cs" />
+    <Compile Include="Themes\ThemeChooser.cs" />
+    <Compile Include="ViewModel\AddNewProjectViewModel.cs" />
+    <Compile Include="ViewModel\EditorViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ProjectSettingsViewModel.cs" />
+    <Compile Include="ViewModel\UploadProjectLoginViewModel.cs" />
+    <Compile Include="ViewModel\UploadProjectViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\Editor\Costumes\AddNewCostume.xaml.cs">
+      <DependentUpon>AddNewCostume.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Costumes\ChangeCostumeName.xaml.cs">
+      <DependentUpon>ChangeCostumeName.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\EditorView.xaml.cs">
+      <DependentUpon>EditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\ProjectSettingsView.xaml.cs">
+      <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Scripts\AddNewBrick.xaml.cs">
+      <DependentUpon>AddNewBrick.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Scripts\AddNewScript.xaml.cs">
+      <DependentUpon>AddNewScript.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Scripts\NewBroadcastMessage.xaml.cs">
+      <DependentUpon>NewBroadcastMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Scripts\ScriptBrickCollection.cs" />
+    <Compile Include="Views\Editor\Scripts\ScriptBrickContentTemplateSelector.cs" />
+    <Compile Include="Views\Editor\Scripts\ScriptBrickIterator.cs" />
+    <Compile Include="Views\Editor\Sounds\AddNewSound.xaml.cs">
+      <DependentUpon>AddNewSound.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\AudioLibrary.xaml.cs">
+      <DependentUpon>AudioLibrary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\ChangeSoundName.xaml.cs">
+      <DependentUpon>ChangeSoundName.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\Recorder.xaml.cs">
+      <DependentUpon>Recorder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\SoundListItem.cs" />
+    <Compile Include="Views\Editor\Sounds\WaveHeaderWriter.cs" />
+    <Compile Include="Views\Editor\Sounds\XNAFrameworkDispatcherService.cs" />
+    <Compile Include="Views\Editor\Sprites\AddNewSprite.xaml.cs">
+      <DependentUpon>AddNewSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sprites\ChangeSpriteName.xaml.cs">
+      <DependentUpon>ChangeSpriteName.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\AddNewProject.xaml.cs">
+      <DependentUpon>AddNewProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\OnlineProjectPage.xaml.cs">
+      <DependentUpon>OnlineProjectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\SettingsBrickCategories.xaml.cs">
+      <DependentUpon>SettingsBrickCategories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\SettingsLanguageChooser.xaml.cs">
+      <DependentUpon>SettingsLanguageChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\SettingsThemeChooser.xaml.cs">
+      <DependentUpon>SettingsThemeChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\UploadProjectLoginPage.xaml.cs">
+      <DependentUpon>UploadProjectLoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\UploadProjectPage.xaml.cs">
+      <DependentUpon>UploadProjectPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="Controls\Buttons\ImageButtonTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Buttons\PlayButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Buttons\ScreenshotButtonTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SplashScreen\AnimatedSplashScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <ApplicationDefinition Include="Resources\Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ThemeResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewModel\Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\AddNewCostume.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\ChangeCostumeName.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\EditorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\ProjectSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Scripts\AddNewBrick.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Scripts\AddNewScript.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Scripts\NewBroadcastMessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Scripts\ReorderableListBoxStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Scripts\ScriptBrickAddData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Scripts\ScriptBrickTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\AddNewSound.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\AudioLibrary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\ChangeSoundName.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\Recorder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sprites\AddNewSprite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sprites\ChangeSpriteName.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\AddNewProject.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\OnlineProjectPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\SettingsBrickCategories.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\SettingsLanguageChooser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\SettingsThemeChooser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\UploadProjectLoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\UploadProjectPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\AlignmentGrid.png" />
+    <Content Include="Assets\ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\FlipCycleTileMedium.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\FlipCycleTileSmall.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\IconicTileMediumLarge.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\IconicTileSmall.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="README_FIRST.txt" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
+    <Content Include="Views\Editor\Sounds\Recordericons\rec.png" />
+    <Content Include="Views\Editor\Sounds\Recordericons\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{A4E10BED-8F56-46A6-B78D-BFEF1363B195}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDECommon\IDECommon.csproj">
+      <Project>{73EDA75E-B249-40CB-A883-C2521A72B1C0}</Project>
+      <Name>IDECommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\ImageButton\" />
+    <Folder Include="Controls\PlayButton\" />
+    <Folder Include="Controls\ScreenshotButton\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WP8">
+      <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\GalaSoft.MvvmLight.Extras.WP8.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.WP8">
+      <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\GalaSoft.MvvmLight.WP8.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit">
+      <HintPath>..\packages\WPtoolkit.4.2012.10.30\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+</Project>

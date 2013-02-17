@@ -1,0 +1,63 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:s="clr-namespace:Catrobat.IDEWindowsPhone.Views.Editor.Scripts"
+  xmlns:d="clr-namespace:Catrobat.Core.Objects.Bricks;assembly=Catrobat.Core"
+  xmlns:objects="clr-namespace:Catrobat.Core.Objects;assembly=Catrobat.Core">
+
+  <s:BrickCollection x:Key="ScriptBrickAddDataMovement">
+    <d:PlaceAtBrick XPosition="0" YPosition="0" IsRealObject="False"></d:PlaceAtBrick>
+    <d:SetXBrick XPosition="0" IsRealObject="False"></d:SetXBrick>
+    <d:SetYBrick YPosition="0" IsRealObject="False"></d:SetYBrick>
+    <d:ChangeXByBrick XMovement="0" IsRealObject="False"></d:ChangeXByBrick>
+    <d:ChangeYByBrick YMovement="0" IsRealObject="False"></d:ChangeYByBrick>
+    <d:IfOnEdgeBounceBrick IsRealObject="False"></d:IfOnEdgeBounceBrick>
+    <d:MoveNStepsBrick Steps="1" IsRealObject="False"></d:MoveNStepsBrick>
+    <d:TurnLeftBrick Degrees="15" IsRealObject="False"></d:TurnLeftBrick>
+    <d:TurnRightBrick Degrees="15" IsRealObject="False"></d:TurnRightBrick>
+    <d:PointInDirectionBrick Degrees="90" IsRealObject="False"></d:PointInDirectionBrick>
+    <d:PointToBrick IsRealObject="False"></d:PointToBrick>
+    <d:GlideToBrick DurationInMilliSeconds="3" XDestination="0" YDestination="0" IsRealObject="False"></d:GlideToBrick>
+    <d:GoNStepsBackBrick IsRealObject="False"></d:GoNStepsBackBrick>
+    <d:ComeToFrontBrick IsRealObject="False"></d:ComeToFrontBrick>
+  </s:BrickCollection>
+
+  <s:BrickCollection x:Key="ScriptBrickAddDataSound">
+    <d:PlaySoundBrick IsRealObject="False"></d:PlaySoundBrick>
+    <d:StopAllSoundsBrick IsRealObject="False"></d:StopAllSoundsBrick>
+    <d:SetVolumeToBrick Volume="100" IsRealObject="False"></d:SetVolumeToBrick>
+    <d:ChangeVolumeByBrick Volume="100" IsRealObject="False"></d:ChangeVolumeByBrick>
+    <d:SpeakBrick Text="" IsRealObject="False"></d:SpeakBrick>
+  </s:BrickCollection>
+  
+  <s:BrickCollection x:Key="ScriptBrickAddDataLook">
+    <d:SetCostumeBrick IsRealObject="False"></d:SetCostumeBrick>
+    <d:NextCostumeBrick IsRealObject="False"></d:NextCostumeBrick>
+    <d:SetSizeToBrick Size="100" IsRealObject="False"></d:SetSizeToBrick>
+    <d:ChangeSizeByNBrick Size="20" IsRealObject="False"></d:ChangeSizeByNBrick>
+    <d:HideBrick IsRealObject="False"></d:HideBrick>
+    <d:ShowBrick IsRealObject="False"></d:ShowBrick>
+    <d:SetGhostEffectBrick Transparency="0" IsRealObject="False"></d:SetGhostEffectBrick>
+    <d:ChangeGhostEffectBrick ChangeGhostEffect="25" IsRealObject="False"></d:ChangeGhostEffectBrick>
+    <d:SetBrightnessBrick Brightness="0" IsRealObject="False"></d:SetBrightnessBrick>
+    <d:ChangeBrightnessBrick ChangeBrightness="25" IsRealObject="False"></d:ChangeBrightnessBrick>
+    <d:ClearGraphicEffectBrick IsRealObject="False"></d:ClearGraphicEffectBrick>
+  </s:BrickCollection>
+
+  <s:BrickCollection x:Key="ScriptBrickAddDataControl">
+    <objects:StartScript IsRealObject="False"></objects:StartScript>
+    <objects:WhenScript Action="Tapped" IsRealObject="False"></objects:WhenScript>
+    <d:WaitBrick TimeToWaitInMilliSeconds="1" IsRealObject="False"></d:WaitBrick>
+    <objects:BroadcastScript IsRealObject="False"></objects:BroadcastScript>
+    <d:BroadcastBrick IsRealObject="False"></d:BroadcastBrick>
+    <d:BroadcastWaitBrick IsRealObject="False"></d:BroadcastWaitBrick>
+    <d:NoteBrick Note="" IsRealObject="False"></d:NoteBrick>
+    <d:ForeverBrick IsRealObject="False"></d:ForeverBrick>
+    <d:RepeatBrick TimesToRepeat="3" IsRealObject="False"></d:RepeatBrick>
+  </s:BrickCollection>
+
+  <s:BrickCollection x:Key="ScriptBrickAddDataNXT">
+    
+  </s:BrickCollection>
+  
+</ResourceDictionary>
