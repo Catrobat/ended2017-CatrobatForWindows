@@ -12,7 +12,8 @@ public:
 		CostumeBrick,
 		WaitBrick,
 		PlaceAtBrick,
-		SetGhostEffectBrick
+		SetGhostEffectBrick,
+		PlaySoundBrick
 	};
 
 	Brick(TypeOfBrick brickType, string spriteReference);

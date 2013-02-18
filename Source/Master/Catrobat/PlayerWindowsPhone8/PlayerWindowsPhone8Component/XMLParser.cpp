@@ -7,6 +7,7 @@
 #include "WaitBrick.h"
 #include "SetGhostEffectBrick.h"
 #include "PlaceAtBrick.h"
+#include "PlaySoundBrick.h"
 
 #include <iostream>
 #include <fstream>
@@ -285,6 +286,10 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 		{
 			script->addBrick(parseSetGhostEffectBrick(node));
 		}
+		else if(strcmp(node->name(), "Bricks.PlaySoundBrick") == 0)
+		{
+			script->addBrick(parsePlaySoundBrick(node));
+		}
 		node = node->next_sibling();
 	}
 }
@@ -373,4 +378,32 @@ Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode)
 
 	string spriteReference = spriteReferenceAttribute->value();
 	return new SetGhostEffectBrick(spriteReference, transparency);
+}
+
+Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode)
+{
+	xml_node<> *soundInfoNode = baseNode->first_node("soundInfo");
+	if (!soundInfoNode)
+		return NULL;
+
+	xml_node<> *node = soundInfoNode->first_node("fileName");
+	if (!node)
+		return NULL;
+	string filename = node->value();
+
+	node = soundInfoNode->first_node("name");
+	if (!node)
+		return NULL;
+	string name = node->value();
+
+	node = baseNode->first_node("sprite");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *spriteReferenceAttribute = node->first_attribute("reference");
+	if (!spriteReferenceAttribute)
+		return NULL;
+
+	string spriteReference = spriteReferenceAttribute->value();
+	return new PlaySoundBrick(spriteReference, filename, name);
 }

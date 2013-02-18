@@ -71,6 +71,9 @@
     <ClCompile Include="SoundInfo.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="PlaySoundBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="SoundInfo.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaySoundBrick.h">
+      <Filter>Objects\Bricks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
