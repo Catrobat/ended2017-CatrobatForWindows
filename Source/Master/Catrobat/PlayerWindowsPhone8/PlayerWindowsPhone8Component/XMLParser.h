@@ -33,5 +33,6 @@ private:
 	Brick *parseWaitBrick(xml_node<> *baseNode);
 	Brick *parsePlaceAtBrick(xml_node<> *baseNode);
 	Brick *parseSetGhostEffectBrick(xml_node<> *baseNode);
+	Brick *parsePlaySoundBrick(xml_node<> *baseNode);
 };
 
