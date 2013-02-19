@@ -24,8 +24,8 @@ namespace Catrobat.Core
     public static string DefaultProjectName = "DefaultProject";
 
     public ContextSaving ContextSaving;
-    private Project currentProject;
-    private ObservableCollection<ProjectHeader> localProjects;
+    private Project _currentProject;
+    private ObservableCollection<ProjectHeader> _localProjects;
 
 
     private CatrobatContext()
@@ -43,8 +43,7 @@ namespace Catrobat.Core
       if (firstTimeUse)
       {
         RestoreDefaultProject(DefaultProjectName);
-        LocalSettings = new LocalSettings();
-        LocalSettings.CurrentProjectName = CurrentProject.ProjectName;
+        LocalSettings = new LocalSettings {CurrentProjectName = CurrentProject.ProjectName};
       }
       else
       {
@@ -95,13 +94,13 @@ namespace Catrobat.Core
 
     public Project CurrentProject
     {
-      get { return currentProject; }
+      get { return _currentProject; }
       set
       {
-        if (currentProject == value)
+        if (_currentProject == value)
           return;
 
-        currentProject = value;
+        _currentProject = value;
         OnPropertyChanged("CurrentProject");
         OnPropertyChanged("LocalProjects");
         UpdateLocalProjects();
@@ -112,10 +111,10 @@ namespace Catrobat.Core
     {
       get
       {
-        if (localProjects == null)
+        if (_localProjects == null)
           UpdateLocalProjects();
 
-        return localProjects;
+        return _localProjects;
       }
     }
 
@@ -123,11 +122,11 @@ namespace Catrobat.Core
 
     public void SetCurrentProject(string projectName)
     {
-      if (currentProject != null && currentProject.ProjectName == projectName)
+      if (_currentProject != null && _currentProject.ProjectName == projectName)
         return;
 
-      if (currentProject != null)
-        currentProject.Save();
+      if (_currentProject != null)
+        _currentProject.Save();
 
       string projectCodeFile = ProjectsPath + "/" + projectName;
 
@@ -149,13 +148,13 @@ namespace Catrobat.Core
     {
       RestoreDefaultProject(projectName);
 
-      currentProject.DeviceName = DeviceInformationHelper.DeviceName;
-      currentProject.Platform = "Windows Phone 7.5"; //TODO: get phone version
-      currentProject.PlatformVersion = "7.1.1"; // TODO: ?
-      currentProject.ApplicationVersionCode = 0; // TODO: ?
-      currentProject.ApplicationVersionName = StaticApplicationSettings.CurrentApplicationVersionName;
-      currentProject.ScreenHeight = DeviceInformationHelper.ScreenWidth;
-      currentProject.ScreenHeight = DeviceInformationHelper.ScreenHeight;
+      _currentProject.DeviceName = DeviceInformationHelper.DeviceName;
+      _currentProject.Platform = "Windows Phone 7.5"; //TODO: get phone version
+      _currentProject.PlatformVersion = "7.1.1"; // TODO: ?
+      _currentProject.ApplicationVersionCode = 0; // TODO: ?
+      _currentProject.ApplicationVersionName = StaticApplicationSettings.CurrentApplicationVersionName;
+      _currentProject.ScreenHeight = DeviceInformationHelper.ScreenWidth;
+      _currentProject.ScreenHeight = DeviceInformationHelper.ScreenHeight;
 
 
       // TODO: set other project properties here
@@ -170,7 +169,7 @@ namespace Catrobat.Core
         storage.DeleteDirectory(ProjectsPath + "/" + projectName);
       }
 
-      if (currentProject.ProjectName == projectName)
+      if (_currentProject.ProjectName == projectName)
       {
         RestoreDefaultProject(DefaultProjectName);
       }
@@ -210,10 +209,10 @@ namespace Catrobat.Core
       if (Instance == null || Instance.CurrentProject == null)
         return;
 
-      if (localProjects == null)
-        localProjects = new ObservableCollection<ProjectHeader>();
+      if (_localProjects == null)
+        _localProjects = new ObservableCollection<ProjectHeader>();
 
-      localProjects.Clear();
+      _localProjects.Clear();
 
       using (IStorage storage = StorageSystem.GetStorage())
       {
@@ -230,7 +229,7 @@ namespace Catrobat.Core
                   ProjectName = projectName,
                   Screenshot = projectScreenshot
                 };
-            localProjects.Add(projectHeader);
+            _localProjects.Add(projectHeader);
           }
         }
       }
@@ -238,7 +237,7 @@ namespace Catrobat.Core
 
     internal void StoreLocalSettings()
     {
-      LocalSettings.CurrentProjectName = currentProject.ProjectName;
+      LocalSettings.CurrentProjectName = _currentProject.ProjectName;
 
       if (ContextSaving != null)
         ContextSaving.Invoke();
@@ -257,7 +256,7 @@ namespace Catrobat.Core
         {
           if (storage.FileExists(LocalSettingsFilePath))
           {
-            storage.ReadSerializableObject(LocalSettingsFilePath, typeof(LocalSettings));
+            LocalSettings = storage.ReadSerializableObject(LocalSettingsFilePath, typeof(LocalSettings)) as LocalSettings;
           }
           else
           {
@@ -275,8 +274,8 @@ namespace Catrobat.Core
 
     public void Save()
     {
-      if (currentProject != null)
-        currentProject.Save();
+      if (_currentProject != null)
+        _currentProject.Save();
 
       StoreLocalSettings();
     }
@@ -323,7 +322,7 @@ namespace Catrobat.Core
 
     public void CleanUpSpriteReferences(Sprite deletedSprite)
     {
-      foreach (Sprite sprite in currentProject.SpriteList.Sprites)
+      foreach (Sprite sprite in _currentProject.SpriteList.Sprites)
         foreach (Script script in sprite.Scripts.Scripts)
           foreach (Brick brick in script.Bricks.Bricks)
             if (brick is PointToBrick)
