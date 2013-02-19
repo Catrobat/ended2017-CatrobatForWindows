@@ -101,5 +101,11 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
     {
       get { return ""; }
     }
+
+
+    public void SaveImage(string path, byte[] image)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

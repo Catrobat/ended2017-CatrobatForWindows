@@ -8,16 +8,16 @@
 
   public class StorageSystem
   {
-    private static IStorageFactory storageFactory;
+    private static IStorageFactory _storageFactory;
 
     public static void SetStorageFactory(IStorageFactory storage)
     {
-      storageFactory = storage;
+      _storageFactory = storage;
     }
 
     public static IStorage GetStorage()
     {
-      return storageFactory.CreateStorage();
+      return _storageFactory.CreateStorage();
     }
   }
 }

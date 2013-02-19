@@ -48,7 +48,6 @@
     <Compile Include="Converter\Converter.cs" />
     <Compile Include="Converter\EditXML.cs" />
     <Compile Include="Converter\PathHelper.cs" />
-    <Compile Include="CostumeBuilder.cs" />
     <Compile Include="Misc\Helpers\FormatHelper.cs" />
     <Compile Include="Misc\Helpers\ApplicationInformation.cs" />
     <Compile Include="Misc\Helpers\DeviceInformationHelper.cs" />

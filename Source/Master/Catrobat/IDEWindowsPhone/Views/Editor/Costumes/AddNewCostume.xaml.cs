@@ -5,6 +5,7 @@ using Catrobat.Core;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
@@ -36,25 +37,30 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
     {
       ApplicationBar = new ApplicationBar();
 
-      ApplicationBarIconButton btnSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.check.rest.png", UriKind.Relative));
-      btnSave.Text = EditorResources.ButtonSave;
+      var btnSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.check.rest.png", UriKind.Relative))
+        {
+          Text = EditorResources.ButtonSave
+        };
+
       btnSave.Click += btnSave_Click;
       ApplicationBar.Buttons.Add(btnSave);
 
-      ApplicationBarIconButton btnCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
-      btnCancel.Text = EditorResources.ButtonCancel;
+      var btnCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative))
+        {
+          Text = EditorResources.ButtonCancel
+        };
+
       btnCancel.Click += btnCancel_Click;
       ApplicationBar.Buttons.Add(btnCancel);
 
       Dispatcher.BeginInvoke(() =>
-      {
-        (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = saveEnaled;
+        {
+          var applicationBarIconButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+          if (applicationBarIconButton != null)
+            applicationBarIconButton.IsEnabled = saveEnaled;
 
-        if (isGaleryCameraOpen)
-          ApplicationBar.IsVisible = true;
-        else
-          ApplicationBar.IsVisible = false;
-      });
+          ApplicationBar.IsVisible = isGaleryCameraOpen;
+        });
     }
 
     private void LanguageChanged(object sender, PropertyChangedEventArgs e)
@@ -91,7 +97,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
     {
       lock (this)
       {
-        PhotoChooserTask photoChooserTask = new PhotoChooserTask();
+        var photoChooserTask = new PhotoChooserTask();
         photoChooserTask.Completed -= Task_Completed;
         photoChooserTask.Completed += Task_Completed;
         photoChooserTask.Show();
@@ -150,19 +156,15 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 
     private void LoadCostumeFailed()
     {
-      Dispatcher.BeginInvoke(() =>
-      {
-        MessageBox.Show(EditorResources.MessageBoxWrongImageFormatText,
-          EditorResources.MessageBoxWrongImageFormatHeader, MessageBoxButton.OK);
-      });
+      Dispatcher.BeginInvoke(() => MessageBox.Show(EditorResources.MessageBoxWrongImageFormatText, EditorResources.MessageBoxWrongImageFormatHeader, MessageBoxButton.OK));
     }
 
     private void btnSave_Click(object sender, EventArgs e)
     {
-      save();
+      Save();
     }
 
-    private void save()
+    private void Save()
     {
       Costume costume = builder.Save(txtName.Text);
       editorViewModel.SelectedSprite.Costumes.Costumes.Add(costume);

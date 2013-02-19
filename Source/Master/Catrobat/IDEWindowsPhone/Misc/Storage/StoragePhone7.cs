@@ -207,11 +207,12 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
       iso.DeleteDirectory(directoryPath);
     }
 
+
     public BitmapImage LoadImage(string pathToImage)
     {
       try
       {
-        BitmapImage bitmapImage = new BitmapImage();
+        var bitmapImage = new BitmapImage();
 
         using (IsolatedStorageFileStream isfs = iso.OpenFile(pathToImage, FileMode.Open, FileAccess.Read))
         {
@@ -227,26 +228,9 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
       }
     }
 
-    public void SaveImage(string path, BitmapImage image)
-    {
-      Stream fileStream = this.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write);
-      WriteableBitmap wb = new WriteableBitmap(image);
-      System.Windows.Media.Imaging.Extensions.SaveJpeg(wb, fileStream, wb.PixelWidth, wb.PixelHeight, 0, 85);
-      fileStream.Close();
-    }
-
-    public string ReadTextFile(string path)
-    {
-      Stream fileStream = this.OpenFile(path, StorageFileMode.Open, StorageFileAccess.Read);
-      StreamReader reader = new StreamReader(fileStream);
-      string text = reader.ReadToEnd();
-      fileStream.Close();
-      return text;
-    }
-
     public void WriteTextFile(string path, string content)
     {
-      StreamWriter writer = new StreamWriter(this.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write), Encoding.UTF8);
+      var writer = new StreamWriter(this.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write), Encoding.UTF8);
       writer.Write(content);
       writer.Close();
     }
@@ -255,7 +239,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
     {
       using (Stream fileStream = this.OpenFile(path, StorageFileMode.Open, StorageFileAccess.Read))
       {
-        DataContractSerializer serializer = new DataContractSerializer(type);
+        var serializer = new DataContractSerializer(type);
         object serialireableObject = serializer.ReadObject(fileStream); // TODO: does not working any more
         fileStream.Close();
         return serialireableObject;
@@ -266,22 +250,26 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
     {
       using (Stream fileStream = this.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write))
       {
-        DataContractSerializer serializer = new DataContractSerializer(serializableObject.GetType());
+        var serializer = new DataContractSerializer(serializableObject.GetType());
         serializer.WriteObject(fileStream, serializableObject);
         fileStream.Close();
       }
     }
 
-    public void Dispose()
+    public string ReadTextFile(string path)
     {
-      iso.Dispose();
+      var fileStream = this.OpenFile(path, StorageFileMode.Open, StorageFileAccess.Read);
+      var reader = new StreamReader(fileStream);
+      var text = reader.ReadToEnd();
+      fileStream.Close();
+      return text;
     }
 
     byte[] IStorage.LoadImage(string pathToImage)
     {
       try
       {
-        BitmapImage bitmapImage = new BitmapImage();
+        var bitmapImage = new BitmapImage();
 
         byte[] myByteArray = null;
 
@@ -302,6 +290,24 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
       {
         return null;
       }
+    }
+
+    public void SaveImage(string path, byte[] image)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void SaveImage(string path, BitmapImage image)
+    {
+      var fileStream = this.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write);
+      var wb = new WriteableBitmap(image);
+      wb.SaveJpeg(fileStream, wb.PixelWidth, wb.PixelHeight, 0, 85);
+      fileStream.Close();
+    }
+
+    public void Dispose()
+    {
+      iso.Dispose();
     }
 
     public string BasePath { get { return ""; } }

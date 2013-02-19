@@ -44,6 +44,8 @@ namespace Catrobat.Core.Storage
 
     byte[] LoadImage(string pathToImage);
 
+    void SaveImage(string path, byte[] image);
+
     string ReadTextFile(string path);
 
     void WriteTextFile(string path, string content);
