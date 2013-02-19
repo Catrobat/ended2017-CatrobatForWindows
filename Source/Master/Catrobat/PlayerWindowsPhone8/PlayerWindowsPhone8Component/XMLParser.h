@@ -18,8 +18,12 @@ public:
 	XMLParser();
 	~XMLParser();
 
+	Project *getProject();
+
 	void loadXML(string fileName);
 private:
+	Project *m_project;
+
 	void parseXML(string xml);
 	Project *parseProjectInformation(xml_document<> *doc);
 	void parseSpriteList(xml_document<> *doc, SpriteList *spriteList);

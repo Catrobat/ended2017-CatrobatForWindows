@@ -19,6 +19,8 @@ public:
 	void addScript(Script *script);
 	void addSoundInfo(SoundInfo *soundInfo);
 
+	string getName();
+
 private:
 	list<LookData*> *m_lookDatas;
 	list<Script*> *m_scripts;

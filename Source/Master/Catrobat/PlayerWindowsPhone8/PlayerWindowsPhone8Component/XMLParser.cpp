@@ -8,6 +8,7 @@
 #include "SetGhostEffectBrick.h"
 #include "PlaceAtBrick.h"
 #include "PlaySoundBrick.h"
+#include "rapidxml\rapidxml_print.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -37,6 +38,11 @@ void XMLParser::loadXML(string fileName)
 	inputFile.close();
 }
 
+Project *XMLParser::getProject()
+{
+	return m_project;
+}
+
 void XMLParser::parseXML(string xml)
 {
 	// TODO: WE NEED ERROR HANDLING!
@@ -46,8 +52,8 @@ void XMLParser::parseXML(string xml)
 	doc.parse<0>(test);
 	char *str = doc.first_node()->name();
 
-	Project *project = parseProjectInformation(&doc);	
-	parseSpriteList(&doc, project->getSpriteList());
+	m_project = parseProjectInformation(&doc);	
+	parseSpriteList(&doc, m_project->getSpriteList());
 }
 
 Project* XMLParser::parseProjectInformation(xml_document<> *doc)

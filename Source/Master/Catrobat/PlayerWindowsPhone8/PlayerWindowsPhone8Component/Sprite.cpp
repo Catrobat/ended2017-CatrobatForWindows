@@ -25,5 +25,10 @@ void Sprite::addSoundInfo(SoundInfo *soundInfo)
 	m_soundInfos->push_back(soundInfo);
 }
 
+string Sprite::getName()
+{
+	return m_name;
+}
+
 
 
