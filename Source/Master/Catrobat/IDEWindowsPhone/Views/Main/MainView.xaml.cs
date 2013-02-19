@@ -14,9 +14,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 {
   public partial class MainView : PhoneApplicationPage
   {
-    public MainViewModel mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+    private readonly MainViewModel _mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
 
-    private MemoryMonitor memoryMonitor;
+    private MemoryMonitor _memoryMonitor;
 
     public MainView()
     {
@@ -34,22 +34,19 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
       // Dirty but there is no way around this
       Messenger.Default.Register<DialogMessage>(
         this,
-        msg =>
-        {
-          Dispatcher.BeginInvoke(() =>
-            {
-              var result = MessageBox.Show(
-                  msg.Content,
-                  msg.Caption,
-                  msg.Button);
+        msg => Dispatcher.BeginInvoke(() =>
+          {
+            var result = MessageBox.Show(
+              msg.Content,
+              msg.Caption,
+              msg.Button);
 
-              if (msg.Callback != null)
-              {
-                // Send callback
-                msg.ProcessCallback(result);
-              }
-            });
-        });
+            if (msg.Callback != null)
+            {
+              // Send callback
+              msg.ProcessCallback(result);
+            }
+          }));
     }
 
     private void buttonPlayCurrentProject_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -101,7 +98,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
       if ((panoramaMain.SelectedItem == panoramaItemOnlineProjects) && (OnlineProjectListBox.Items.Count == 0))
       {
         // Load Data - this has to stay in code-behind
-        mainViewModel.LoadOnlineProjects(false);
+        _mainViewModel.LoadOnlineProjects(false);
       }
     }
 
@@ -109,21 +106,21 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void checkBoxShowMemory_Checked(object sender, RoutedEventArgs e)
     {
-      if (memoryMonitor == null)
+      if (_memoryMonitor == null)
       {
-        memoryMonitor = new MemoryMonitor(true, true);
+        _memoryMonitor = new MemoryMonitor(true, true);
       }
       else
       {
-        memoryMonitor.ShowVisualization = true;
+        _memoryMonitor.ShowVisualization = true;
       }
     }
 
     private void checkBoxShowMemory_Unchecked(object sender, RoutedEventArgs e)
     {
-      if (memoryMonitor != null)
+      if (_memoryMonitor != null)
       {
-        memoryMonitor.ShowVisualization = false;
+        _memoryMonitor.ShowVisualization = false;
       }
     }
 
@@ -132,10 +129,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     private void buttonUploadCurrentProject_Click(object sender, RoutedEventArgs e)
     {
       // Determine which page to open
-      ServerCommunication.checkToken(CatrobatContext.Instance.CurrentToken, checkTokenEvent);
+      ServerCommunication.checkToken(CatrobatContext.Instance.CurrentToken, CheckTokenEvent);
     }
 
-    private void checkTokenEvent(bool registered)
+    private void CheckTokenEvent(bool registered)
     {
       if (registered)
       {

@@ -8,31 +8,31 @@ namespace Catrobat.IDEWindowsPhone.Controls.SplashScreen
   public partial class AnimatedSplashScreen : UserControl
   {
     public static int MillisBetweenSwitch = 500;
-    bool imageActive = true;
+    bool _imageActive = true;
 
     public AnimatedSplashScreen()
     {
       InitializeComponent();
-      Thread thread = new Thread(switchImage);
+      Thread thread = new Thread(SwitchImage);
       thread.Start();
     }
 
-    private void switchImage()
+    private void SwitchImage()
     {
       while (true)
       {
         Dispatcher.BeginInvoke(() =>
         {
-          if (imageActive)
+          if (_imageActive)
           {
-            imageActive = false;
-            BitmapImage image = new BitmapImage(new Uri("Resources/Application/down.png", UriKind.Relative));
+            _imageActive = false;
+            var image = new BitmapImage(new Uri("Resources/Application/down.png", UriKind.Relative));
             imageSplashCat.Source = image;
           }
           else
           {
-            imageActive = true;
-            BitmapImage image = new BitmapImage(new Uri("Resources/Application/up.png", UriKind.Relative));
+            _imageActive = true;
+            var image = new BitmapImage(new Uri("Resources/Application/up.png", UriKind.Relative));
             imageSplashCat.Source = image;
           }
 
