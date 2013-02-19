@@ -191,9 +191,9 @@
       <Project>{A4E10BED-8F56-46A6-B78D-BFEF1363B195}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IDEWindowsPhone7\IDEWindowsPhone7.csproj">
-      <Project>{0D9534DA-1DD0-43D3-A9A0-40DE5FE09A7F}</Project>
-      <Name>IDEWindowsPhone7</Name>
+    <ProjectReference Include="..\IDEWindowsPhone\IDEWindowsPhone.csproj">
+      <Project>{CDDB2C02-9584-45C6-9A7D-2B04B322C232}</Project>
+      <Name>IDEWindowsPhone</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

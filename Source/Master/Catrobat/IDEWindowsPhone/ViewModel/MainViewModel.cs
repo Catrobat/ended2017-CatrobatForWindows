@@ -24,7 +24,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 {
   public class MainViewModel : ViewModelBase, INotifyPropertyChanged
   {
-    private readonly ICatrobatContext catrobatContext;
+    private readonly ICatrobatContext _catrobatContext;
     public new event PropertyChangedEventHandler PropertyChanged;
 
     public CultureInfo CurrentCulture
@@ -42,7 +42,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         Thread.CurrentThread.CurrentCulture = value;
         Thread.CurrentThread.CurrentUICulture = value;
 
-        ((LocalizedStrings)App.Current.Resources["LocalizedStrings"]).Reset();
+        ((LocalizedStrings)Application.Current.Resources["LocalizedStrings"]).Reset();
         RaisePropertyChanged("CurrentCulture");
         RaisePropertyChanged("CurrentCultureName");
       }
@@ -64,7 +64,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       }
     }
 
-    public Project CurrentProject { get { return catrobatContext.CurrentProject; } }
+    public Project CurrentProject { get { return _catrobatContext.CurrentProject; } }
 
     public BitmapImage CurrentProjectScreenshot
     {
@@ -80,11 +80,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       }
     }
 
-    public ObservableCollection<ProjectHeader> LocalProjects { get { return catrobatContext.LocalProjects; } }
+    public ObservableCollection<ProjectHeader> LocalProjects { get { return _catrobatContext.LocalProjects; } }
 
     public OnlineProjectHeader SelectedOnlineProject { get; set; }
 
-    private ObservableCollection<OnlineProjectHeader> _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
+    private readonly ObservableCollection<OnlineProjectHeader> _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
 
     public ObservableCollection<OnlineProjectHeader> OnlineProjects
     {
@@ -164,7 +164,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       CatrobatContext.Instance.PropertyChanged += CatrobatContextPropertyChanged;
       CatrobatContext.Instance.CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
 
-      (App.Current.Resources["ThemeChooser"] as ThemeChooser).PropertyChanged += ThemeChooserPropertyChanged;
+      var themeChooser = Application.Current.Resources["ThemeChooser"] as ThemeChooser;
+      if (themeChooser != null)
+        themeChooser.PropertyChanged += ThemeChooserPropertyChanged;
 
       // Commands
       DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProject);
@@ -173,9 +175,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       SetCurrentProjectCommand = new RelayCommand<string>(SetCurrentProject);
 
       if (IsInDesignMode)
-        catrobatContext = new CatrobatContextDesign();
+        _catrobatContext = new CatrobatContextDesign();
       else
-        catrobatContext = CatrobatContext.Instance;
+        _catrobatContext = CatrobatContext.Instance;
     }
 
     private void LoadOnlineProjectsCallback(List<OnlineProjectHeader> projects, bool append)
@@ -196,7 +198,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       ServerCommunication.LoadOnlineProjects(append, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
     }
 
-    public MessageBoxResult _dialogResult;
+    private MessageBoxResult _dialogResult;
 
     public RelayCommand<string> DeleteLocalProjectCommand
     {

@@ -23,6 +23,7 @@
 
   <phone:PhoneApplicationPage.Resources>
     <converters:ActiveProjectVisibilityConverter x:Key="ActiveProjectVisibilityConverter" />
+    <converters:BytesImageConverter x:Key="BytesImageConverter" />
     
     <Style x:Key="ContinuousListBoxButtonStyle" TargetType="Button">
       <Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
@@ -165,7 +166,7 @@
                     </i:Interaction.Triggers>
                     <Border Grid.Column="3" BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="4 0 0 0">
                       <Grid HorizontalAlignment="Right">
-                        <Image HorizontalAlignment="Right" Source="{Binding Screenshot}" MaxHeight="155" MaxWidth="160"/>
+                        <Image HorizontalAlignment="Right" Source="{Binding Screenshot, Converter={StaticResource BytesImageConverter}}" MaxHeight="155" MaxWidth="160"/>
                       </Grid>
                     </Border>
                   </Grid>

@@ -246,13 +246,6 @@ namespace Catrobat.Core
       using (IStorage storage = StorageSystem.GetStorage())
       {
         storage.WriteSerializableObject(LocalSettingsFilePath, LocalSettings);
-
-        //using (Stream fileStream = storage.OpenFile(LocalSettingsFilePath, StorageFileMode.Create, StorageFileAccess.ReadWrite))
-        //{
-        //  DataContractSerializer serializer = new DataContractSerializer(typeof(LocalSettings));
-        //  serializer.WriteObject(fileStream, LocalSettings);
-        //  fileStream.Close();
-        //}
       }
     }
 
@@ -265,13 +258,6 @@ namespace Catrobat.Core
           if (storage.FileExists(LocalSettingsFilePath))
           {
             storage.ReadSerializableObject(LocalSettingsFilePath, typeof(LocalSettings));
-
-            //using (Stream fileStream = storage.OpenFile(LocalSettingsFilePath, StorageFileMode.Open, StorageFileAccess.ReadWrite))
-            //{
-            //  DataContractSerializer serializer = new DataContractSerializer(typeof(LocalSettings));
-            //  LocalSettings = (LocalSettings)serializer.ReadObject(fileStream);
-            //  fileStream.Close();
-            //}
           }
           else
           {

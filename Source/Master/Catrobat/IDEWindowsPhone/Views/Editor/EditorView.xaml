@@ -8,7 +8,7 @@
                             xmlns:reorderableListbox="clr-namespace:Catrobat.IDEWindowsPhone.Controls.ReorderableListbox"
                             xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
                             xmlns:imageButton="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
-                            mc:Ignorable="d"
+                            xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters" mc:Ignorable="d"
                             d:DesignWidth="480"
                             d:DesignHeight="768"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -19,8 +19,11 @@
                             shell:SystemTray.IsVisible="True"
                             DataContext="{Binding Editor, Source={StaticResource Locator}}">
 
-  
-  <Grid x:Name="LayoutRoot"
+  <phone:PhoneApplicationPage.Resources>
+    <converters:BytesImageConverter x:Key="BytesImageConverter" />
+  </phone:PhoneApplicationPage.Resources>
+
+      <Grid x:Name="LayoutRoot"
           Background="Transparent">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
@@ -115,7 +118,7 @@
                   <ColumnDefinition Width="1*" />
                   <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="{Binding Image}" MaxWidth="120" MaxHeight="120" Margin="10 5 5 5" VerticalAlignment="Stretch" />
+                <Image Grid.Column="0" Source="{Binding Image, Converter={StaticResource BytesImageConverter}}" MaxWidth="120" MaxHeight="120" Margin="10 5 5 5" VerticalAlignment="Stretch" />
 
                 <Grid Grid.Column="1" Margin="5">
                   <Grid.RowDefinitions>
