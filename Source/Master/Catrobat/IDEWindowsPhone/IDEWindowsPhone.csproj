@@ -455,6 +455,8 @@
     <Content Include="Content\Images\ImageButtons\upload_light.png" />
     <Content Include="Content\Images\ImageButtons\upload_pressed_dark.png" />
     <Content Include="Content\Images\ImageButtons\upload_pressed_light.png" />
+    <Content Include="Content\Images\Misc\audio_library.png" />
+    <Content Include="Content\Images\Misc\audio_recorder.png" />
     <Content Include="Content\Images\Misc\camera.png" />
     <Content Include="Content\Images\Misc\galery.png" />
     <Content Include="Content\Resources\default.catroid" />
