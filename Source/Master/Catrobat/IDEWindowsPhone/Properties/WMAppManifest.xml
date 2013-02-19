@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{cddb2c02-9584-45c6-9a7d-2b04b322c232}" Title="IDEWindowsPhone" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="IDEWindowsPhone author" Description="Sample description" Publisher="IDEWindowsPhone" PublisherID="{00331c69-fa4b-4f1d-ad9a-e30a20e7d376}">
+  <App xmlns="" ProductID="{cddb2c02-9584-45c6-9a7d-2b04b322c232}" Title="Catrobat" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="IDEWindowsPhone author" Description="Catrobat IDE for Windows Phone" Publisher="IDEWindowsPhone" PublisherID="{00331c69-fa4b-4f1d-ad9a-e30a20e7d376}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
