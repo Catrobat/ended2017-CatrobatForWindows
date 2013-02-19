@@ -25,14 +25,13 @@
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
-      <!-- TODO: add me if it is possible to save song to isolatedstorage
-        <Button Name="btnMediaLibrary" Margin="0 0 10 10" Click="btnMediaLibrary_Click">
+      <!--<Button Name="btnMediaLibrary" Margin="0 0 10 10" Click="btnMediaLibrary_Click">
           <Button.Template>
-            <ControlTemplate>
-            <TextBlock Margin="0" Text="{Binding Path=Editor.MediaLibrary, Source={StaticResource LocalizedStrings}}" Name="tbMediaLibrary" Style="{StaticResource PhoneTextLargeStyle}" />
-            </ControlTemplate>
+          <ControlTemplate>
+          <TextBlock Margin="0" Text="{Binding Path=Editor.MediaLibrary, Source={StaticResource LocalizedStrings}}" Name="tbMediaLibrary" Style="{StaticResource PhoneTextLargeStyle}" />
+          </ControlTemplate>
           </Button.Template>
-        </Button>-->
+      </Button>-->
       <Button Name="btnRecorder" Margin="0 0 10 10" Click="btnRecorder_Click">
         <Button.Template>
           <ControlTemplate>

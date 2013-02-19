@@ -4,6 +4,7 @@ using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Catrobat.IDEWindowsPhone.Content.Resources;
@@ -47,6 +48,9 @@ namespace IDEWindowsPhone
 
       // Language display initialization
       InitializeLanguage();
+
+      ApplicationLifetimeObjects.Add(new RecorderDispatcher(TimeSpan.FromMilliseconds(50)));
+
 
       // Show graphics profiling information while debugging.
       if (Debugger.IsAttached)

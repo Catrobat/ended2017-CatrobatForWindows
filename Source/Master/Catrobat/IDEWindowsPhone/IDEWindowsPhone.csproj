@@ -180,8 +180,9 @@
     <Compile Include="Views\Editor\Sounds\ChangeSoundName.xaml.cs">
       <DependentUpon>ChangeSoundName.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Sounds\Recorder.xaml.cs">
-      <DependentUpon>Recorder.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Sounds\Recorder.cs" />
+    <Compile Include="Views\Editor\Sounds\SoundRecorder.xaml.cs">
+      <DependentUpon>SoundRecorder.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Sounds\SoundListItem.cs" />
     <Compile Include="Views\Editor\Sounds\WaveHeaderWriter.cs" />
@@ -306,7 +307,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Sounds\Recorder.xaml">
+    <Page Include="Views\Editor\Sounds\SoundRecorder.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

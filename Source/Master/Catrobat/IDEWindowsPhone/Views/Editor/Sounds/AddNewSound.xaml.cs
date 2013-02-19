@@ -18,7 +18,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
     private void btnRecorder_Click(object sender, RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/Views/Editor/Sounds/Recorder.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Editor/Sounds/SoundRecorder.xaml", UriKind.Relative));
     }
   }
 }
