@@ -20,7 +20,7 @@ using System.ComponentModel;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
-  public partial class SoundRecorder : PhoneApplicationPage
+  public partial class RecorderLauncher : PhoneApplicationPage
   {
     private EditorViewModel editorViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Editor;
     ApplicationBarIconButton btnSave;
@@ -33,7 +33,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
     private Recorder _recorder;
 
-    public SoundRecorder()
+    public RecorderLauncher()
     {
       InitializeComponent();
 
