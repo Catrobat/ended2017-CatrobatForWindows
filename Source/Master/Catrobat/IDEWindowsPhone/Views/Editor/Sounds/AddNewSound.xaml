@@ -33,7 +33,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
               </Grid.ColumnDefinitions>
-              <Image Source="/Content/Images/Misc/audio_library.png" Margin="30 15 15 15"></Image>
+              <Image Source="/Content/Images/Misc/AudioLibrary.png" Margin="30 15 15 15"></Image>
               <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Editor.MediaLibrary, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
             </Grid>
           </ControlTemplate>
@@ -47,7 +47,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
               </Grid.ColumnDefinitions>
-              <Image Source="/Content/Images/Misc/audio_recorder.png" Margin="30 15 15 15"></Image>
+              <Image Source="/Content/Images/Misc/AudioRecorder.png" Margin="30 15 15 15"></Image>
               <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Editor.Recorder, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
             </Grid>
           </ControlTemplate>

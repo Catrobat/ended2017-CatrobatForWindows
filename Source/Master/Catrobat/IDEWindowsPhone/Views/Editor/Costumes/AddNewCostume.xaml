@@ -33,7 +33,7 @@
                   <ColumnDefinition Width="Auto"/>
                   <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Image Source="/Content/Images/Misc/galery.png" Margin="30 15 15 15"></Image>
+                <Image Source="/Content/Images/Misc/Gallery.png" Margin="30 15 15 15"></Image>
                 <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Editor.ImageGallery, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
               </Grid>
             </ControlTemplate>
@@ -48,7 +48,7 @@
                   <ColumnDefinition Width="Auto"/>
                   <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Image Source="/Content/Images/Misc/camera.png" Margin="30 15 15 15"></Image>
+                <Image Source="/Content/Images/Misc/Camera.png" Margin="30 15 15 15"></Image>
                 <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Editor.Camera, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
               </Grid>
             </ControlTemplate>
