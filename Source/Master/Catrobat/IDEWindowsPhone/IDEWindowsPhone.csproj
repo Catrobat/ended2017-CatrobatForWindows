@@ -500,9 +500,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Theme\" />
-    <Folder Include="Controls\ImageButton\" />
-    <Folder Include="Controls\PlayButton\" />
-    <Folder Include="Controls\ScreenshotButton\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight.Extras.WP8">
