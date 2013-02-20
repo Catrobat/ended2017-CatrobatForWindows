@@ -3,6 +3,7 @@ using System.Windows.Interop;
 using Catrobat.Core;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Main;

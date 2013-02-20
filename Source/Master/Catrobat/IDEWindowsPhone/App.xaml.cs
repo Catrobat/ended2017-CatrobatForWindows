@@ -4,10 +4,10 @@ using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using Catrobat.IDEWindowsPhone.Content.Resources;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Catrobat.IDEWindowsPhone.Content.Resources;
 using Catrobat.Core;
 using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.ViewModel;
@@ -16,6 +16,7 @@ using Catrobat.IDEWindowsPhone.Misc.Storage;
 using Catrobat.Core.Misc.Helpers;
 using System.Globalization;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.Core.Misc.ServerCommunication;
 
 
 namespace IDEWindowsPhone
@@ -36,6 +37,7 @@ namespace IDEWindowsPhone
       StorageSystem.SetStorageFactory(new StorageFactoryPhone());
       ResourceLoader.SetResourceLoader(new ResourcesPhone());
       LanguageHelper.SetICulture(new CulturePhone());
+      ServerCommunication.SetIServerCommunication(new ServerCommunicationPhone());
 
       // Global handler for uncaught exceptions.
       UnhandledException += Application_UnhandledException;

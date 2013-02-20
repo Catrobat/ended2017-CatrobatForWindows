@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Catrobat.IDECommon.Resources {
+namespace Catrobat.Core.Resources {
     using System;
     using System.Reflection;
     
@@ -40,7 +40,7 @@ namespace Catrobat.IDECommon.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Catrobat.IDECommon.Resources.ApplicationResources", typeof(ApplicationResources).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Catrobat.Core.Resources.ApplicationResources", typeof(ApplicationResources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

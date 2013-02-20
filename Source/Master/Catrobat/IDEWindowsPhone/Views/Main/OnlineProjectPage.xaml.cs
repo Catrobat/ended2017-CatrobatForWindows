@@ -2,6 +2,7 @@
 using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.Misc;
+using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Main;
@@ -9,6 +10,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using System.Globalization;
+using Catrobat.Core.Resources;
 
 namespace Catrobat.IDEWindowsPhone.Views.Main
 {
@@ -40,7 +42,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     private void Download_Click(object sender, EventArgs e)
     {
       (sender as ApplicationBarIconButton).IsEnabled = false;
-      ServerCommunication.downloadAndSaveProject(((OnlineProjectHeader)DataContext).DownloadUrl, downloadCallback);
+      ServerCommunication.DownloadAndSaveProject(((OnlineProjectHeader)DataContext).DownloadUrl, downloadCallback);
 
       MessageBox.Show(MainResources.DownloadQueueMessage,
               MainResources.MessageBoxInformation, MessageBoxButton.OK);

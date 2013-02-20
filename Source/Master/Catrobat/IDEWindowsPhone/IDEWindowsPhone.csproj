@@ -98,6 +98,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Resources\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Bricks\MasterBrick.cs" />
     <Compile Include="Controls\Bricks\NormalBrick.cs" />
     <Compile Include="Controls\Buttons\ImageButton.cs" />
@@ -125,17 +130,13 @@
     <Compile Include="Misc\CostumeBuilder.cs" />
     <Compile Include="Misc\CulturePhone.cs" />
     <Compile Include="Misc\MemoryMonitor.cs" />
+    <Compile Include="Misc\ServerCommunicationPhone.cs" />
     <Compile Include="Misc\SoundPlayer.cs" />
     <Compile Include="Misc\Storage\ImageToBytesHelper.cs" />
     <Compile Include="Misc\Storage\ResourcesPhone7.cs" />
     <Compile Include="Misc\Storage\StorageFactoryPhone7.cs" />
     <Compile Include="Misc\Storage\StoragePhone7.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Content\Resources\AppResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AppResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Themes\ColorChooser.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeChooser.cs" />
