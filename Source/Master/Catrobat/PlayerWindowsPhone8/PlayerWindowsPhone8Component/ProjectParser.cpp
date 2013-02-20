@@ -24,6 +24,8 @@ ProjectParser::ProjectParser()
 void ProjectParser::saveXML(Project *project)
 {
 	xml_document<> doc;
+	m_doc = &doc;
+	m_project = project;
 	parseProjectInformation(&doc, project);
 	print(std::back_inserter(m_xml), doc);
 
@@ -73,21 +75,27 @@ void ProjectParser::parseProjectInformation(xml_document<> *doc, Project *projec
 		doc->allocate_string((char*) to_string(project->getScreenWidth()).c_str()));
 	root->append_node(node);
 
+	node = m_doc->allocate_node(node_element, "spriteList");
+	root->append_node(node);
+	xml_node<> *spriteNode = m_doc->allocate_node(node_element, "Content.Sprite");
+	node->append_node(spriteNode);
+	parseSpriteList(node);
+}
 
-	SpriteList *spriteList = project->getSpriteList();
+void ProjectParser::parseSpriteList(xml_node<> *baseNode)
+{
+	SpriteList *spriteList = m_project->getSpriteList();
 	if (spriteList)
 	{
 		int size = spriteList->Size();
 		for (int index = 0; index < size; index++)
 		{
-			node = doc->allocate_node(node_element, "Content.Sprite");
-			root->append_node(node);
 			Sprite *sprite = spriteList->getSprite(index);
-			xml_node<> *child = doc->allocate_node(node_element, "name", doc->allocate_string((char*) (sprite->getName().c_str())));
-			node->append_node(child);
+			xml_node<> *child = m_doc->allocate_node(node_element, "name", m_doc->allocate_string((char*) (sprite->getName().c_str())));
+			baseNode->append_node(child);
 
-			xml_node<> *scriptListNode = doc->allocate_node(node_element, "scriptList");
-			child->append_node(scriptListNode);
+			xml_node<> *scriptListNode = m_doc->allocate_node(node_element, "scriptList");
+			baseNode->append_node(scriptListNode);
 
 			for (int scriptIndex = 0; scriptIndex < sprite->Size(); scriptIndex++)
 			{
@@ -96,26 +104,22 @@ void ProjectParser::parseProjectInformation(xml_document<> *doc, Project *projec
 				if (script->getType() == Script::TypeOfScript::StartScript)
 				{
 					StartScript *startScript = (StartScript*) script;
-					scriptNode = doc->allocate_node(node_element, "Content.StartScript");
+					scriptNode = m_doc->allocate_node(node_element, "Content.StartScript");
 				}
 				else if (script->getType() == Script::TypeOfScript::BroadcastScript)
 				{
 					BroadcastScript *broadcastScript = (BroadcastScript*) script;
-					scriptNode = doc->allocate_node(node_element, "Content.BroadcastScript");
+					scriptNode = m_doc->allocate_node(node_element, "Content.BroadcastScript");
 				}
 				else if (script->getType() == Script::TypeOfScript::WhenScript)
 				{
 					WhenScript *whenScript = (WhenScript*) script;
-					scriptNode = doc->allocate_node(node_element, "Content.WhenScript");
-					xml_node<> *actionNode = doc->allocate_node(node_element, "action", doc->allocate_string((char*) whenScript->getAction().c_str()));
+					scriptNode = m_doc->allocate_node(node_element, "Content.WhenScript");
+					xml_node<> *actionNode = m_doc->allocate_node(node_element, "action", m_doc->allocate_string((char*) whenScript->getAction().c_str()));
 					scriptNode->append_node(actionNode);
 				}
 				scriptListNode->append_node(scriptNode);
 			}
 		}	
 	}
-	node = doc->allocate_node(node_element, "spriteList", 
-		doc->allocate_string((char*) to_string(project->getScreenWidth()).c_str()));
-	root->append_node(node);
-
 }
