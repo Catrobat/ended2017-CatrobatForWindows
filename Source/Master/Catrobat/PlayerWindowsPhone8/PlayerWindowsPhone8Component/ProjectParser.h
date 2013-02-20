@@ -8,7 +8,7 @@
 using namespace std;
 using namespace rapidxml;
 
-
+// 2 different Parsers for each job? For every parsing job a new instance of this object?? 
 class ProjectParser
 {
 public:
@@ -23,6 +23,10 @@ private:
 	Project *m_project;
 
 	void parseProjectInformation(xml_document<> *doc, Project *project);
-	void parseSpriteList(xml_node<> *baseNode);
+	void parseSprites(xml_node<> *baseNode);
+	void parseScripts(xml_node<> *scriptListNode, Sprite *sprite);
+
+	char *int2char(int value);
+	char *string2char(string value);
 };
 
