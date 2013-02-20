@@ -17,3 +17,8 @@ void Script::addSpriteReference(string spriteReference)
 {
 	m_spriteReference = spriteReference;
 }
+
+Script::TypeOfScript Script::getType()
+{
+	return m_scriptType;
+}

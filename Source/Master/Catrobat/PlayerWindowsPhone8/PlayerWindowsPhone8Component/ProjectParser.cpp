@@ -85,6 +85,33 @@ void ProjectParser::parseProjectInformation(xml_document<> *doc, Project *projec
 			Sprite *sprite = spriteList->getSprite(index);
 			xml_node<> *child = doc->allocate_node(node_element, "name", doc->allocate_string((char*) (sprite->getName().c_str())));
 			node->append_node(child);
+
+			xml_node<> *scriptListNode = doc->allocate_node(node_element, "scriptList");
+			child->append_node(scriptListNode);
+
+			for (int scriptIndex = 0; scriptIndex < sprite->Size(); scriptIndex++)
+			{
+				xml_node<> *scriptNode = NULL;
+				Script *script = sprite->getScript(scriptIndex);
+				if (script->getType() == Script::TypeOfScript::StartScript)
+				{
+					StartScript *startScript = (StartScript*) script;
+					scriptNode = doc->allocate_node(node_element, "Content.StartScript");
+				}
+				else if (script->getType() == Script::TypeOfScript::BroadcastScript)
+				{
+					BroadcastScript *broadcastScript = (BroadcastScript*) script;
+					scriptNode = doc->allocate_node(node_element, "Content.BroadcastScript");
+				}
+				else if (script->getType() == Script::TypeOfScript::WhenScript)
+				{
+					WhenScript *whenScript = (WhenScript*) script;
+					scriptNode = doc->allocate_node(node_element, "Content.WhenScript");
+					xml_node<> *actionNode = doc->allocate_node(node_element, "action", doc->allocate_string((char*) whenScript->getAction().c_str()));
+					scriptNode->append_node(actionNode);
+				}
+				scriptListNode->append_node(scriptNode);
+			}
 		}	
 	}
 	node = doc->allocate_node(node_element, "spriteList", 

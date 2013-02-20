@@ -30,5 +30,17 @@ string Sprite::getName()
 	return m_name;
 }
 
+int Sprite::Size()
+{
+	return m_scripts->size();
+}
+
+Script *Sprite::getScript(int index)
+{
+	list<Script*>::iterator it = m_scripts->begin();
+	advance(it, index);
+	return *it;
+}
+
 
 
