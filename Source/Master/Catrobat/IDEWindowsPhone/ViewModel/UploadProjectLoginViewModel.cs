@@ -1,5 +1,6 @@
 ﻿using Catrobat.Core;
 using Catrobat.Core.Misc;
+using Catrobat.Core.Misc.ServerCommunication;
 using GalaSoft.MvvmLight;
 using System.ComponentModel;
 using System.Threading;
@@ -107,7 +108,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     private void Login()
     {
-      ServerCommunication.registerOrCheckToken(_username, _password, _email,
+      ServerCommunication.RegisterOrCheckToken(_username, _password, _email,
         Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
         System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName, 
         Utils.calculateToken(_username, _password), registerOrCheckTokenCallback);

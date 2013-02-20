@@ -5,18 +5,18 @@ namespace Catrobat.IDEWindowsPhone.Themes
 {
   public class ColorChooser
   {
-    private static bool dark = ((Visibility)Application.Current.Resources["PhoneDarkThemeVisibility"] == Visibility.Visible);
-    private static Color darkColor = Colors.White;
-    private static Color lightColor = Colors.Black;
+    private static readonly bool Dark = ((Visibility)Application.Current.Resources["PhoneDarkThemeVisibility"] == Visibility.Visible);
+    private static readonly Color DarkColor = Colors.White;
+    private static readonly Color LightColor = Colors.Black;
 
     public SolidColorBrush WhiteDarkColor
     {
       get
       {
-        if (dark)
-          return new SolidColorBrush(darkColor);
+        if (Dark)
+          return new SolidColorBrush(DarkColor);
         else
-          return new SolidColorBrush(lightColor);
+          return new SolidColorBrush(LightColor);
       }
     }
   }

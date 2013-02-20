@@ -1,5 +1,6 @@
 ﻿using Catrobat.Core;
 using Catrobat.Core.Misc;
+using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.IDECommon.Resources.Main;
 using GalaSoft.MvvmLight;
 using System.ComponentModel;
@@ -81,7 +82,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     {
       catrobatContext.CurrentProject.ProjectName = _projectName;
 
-      ServerCommunication.uploadProject(_projectName, _projectDescription,
+      ServerCommunication.UploadProject(_projectName, _projectDescription,
         CatrobatContext.Instance.CurrentUserEmail,
         Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
         CatrobatContext.Instance.CurrentToken, UploadCallback);

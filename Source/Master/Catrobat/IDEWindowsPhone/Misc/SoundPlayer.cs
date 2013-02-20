@@ -39,18 +39,20 @@ namespace Catrobat.IDEWindowsPhone.Misc
             soundEffect = new SoundEffect(soundArray, Microphone.Default.SampleRate, AudioChannels.Mono).CreateInstance();
           }
       }
-
-      checkSoundThread = new System.Threading.Thread(checkIfSoundFinished);
     }
 
-    private void checkIfSoundFinished()
+    private void CheckIfSoundFinished()
     {
       SoundState newState = GetSoundState(soundEffect.State);
       SoundState previousStateTemp = previousState;
       previousState = newState;
 
-      while (newState == previousState)
+      do
+      {
         Thread.Sleep(50);
+        previousState = newState;
+        newState = GetSoundState(soundEffect.State);
+      } while (newState == previousState);
 
       if (SoundStateChanged != null)
         SoundStateChanged.Invoke(previousStateTemp, newState);
@@ -75,6 +77,11 @@ namespace Catrobat.IDEWindowsPhone.Misc
     {
       if (soundEffect != null)
       {
+        if (checkSoundThread != null)
+          checkSoundThread.Abort();
+        checkSoundThread = new Thread(CheckIfSoundFinished);
+        checkSoundThread.Start();
+
         soundEffect.Play();
         SoundState previousStateTemp = previousState;
         previousState = SoundState.Playing;

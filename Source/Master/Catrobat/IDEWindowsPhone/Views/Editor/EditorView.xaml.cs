@@ -31,6 +31,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
     int _firstVisibleScriptBrickIndex;
     int _lastVisibleScriptBrickIndex;
     private readonly SoundPlayer _soundPlayer;
+    private Sound _sound;
     private bool _updatePivote = true;
     private bool _isSpriteDragging = false;
 
@@ -83,7 +84,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
       changeAppbar();
     }
 
-
     private void pivotMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
       changeAppbar();
@@ -96,6 +96,14 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         reorderListBoxScriptBricks.ScrollIntoView(AddNewBrick.SelectedBrick);
         AddNewBrick.SelectedBrick = null;
       }
+    }
+
+    private void reorderListBoxScriptBricks_ManipulationStarted(object sender, System.Windows.Input.ManipulationStartedEventArgs e)
+    {
+      object dragItem = ((ReorderListBox)sender).DragItem;
+
+      if (dragItem is Script)
+        e.Complete();
     }
 
     private void LockPivotIfNoSpriteSelected()
@@ -135,7 +143,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
       }
     }
 
-
     private void reorderListBoxSprites_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
       ReorderListBox reorderableListbox = (sender as ReorderListBox);
@@ -164,15 +171,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
     {
       _updatePivote = false;
     }
-
-    private void reorderListBoxScriptBricks_ManipulationStarted(object sender, System.Windows.Input.ManipulationStartedEventArgs e)
-    {
-      object dragItem = ((ReorderListBox)sender).DragItem;
-
-      if (dragItem is Script)
-        e.Complete();
-    }
-
 
     private void reorderListBoxCostumes_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
@@ -251,11 +249,15 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
     private void buttonSoundPlay_Click(object sender, RoutedEventArgs e)
     {
       PlayButton btnPlay = sender as PlayButton;
+      
 
       if (btnPlay.State == PlayButtonState.Play)
       {
-        Sound sound = btnPlay.DataContext as Sound;
-        _soundPlayer.SetSound(sound);
+        if (_sound != btnPlay.DataContext as Sound)
+        {
+          _sound = btnPlay.DataContext as Sound;
+          _soundPlayer.SetSound(_sound);
+        }
         _soundPlayer.Play();
       }
       else

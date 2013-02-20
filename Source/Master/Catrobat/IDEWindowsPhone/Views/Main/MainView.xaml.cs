@@ -1,5 +1,6 @@
 ﻿using Catrobat.Core;
 using Catrobat.Core.Misc;
+using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using KBB.Mobile.Controls;
 using Microsoft.Phone.Controls;
@@ -129,7 +130,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     private void buttonUploadCurrentProject_Click(object sender, RoutedEventArgs e)
     {
       // Determine which page to open
-      ServerCommunication.checkToken(CatrobatContext.Instance.CurrentToken, CheckTokenEvent);
+      ServerCommunication.CheckToken(CatrobatContext.Instance.CurrentToken, CheckTokenEvent);
     }
 
     private void CheckTokenEvent(bool registered)

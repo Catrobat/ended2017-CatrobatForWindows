@@ -19,6 +19,8 @@ public:
 	void addBrick(Brick *brick);
 	void addSpriteReference(string spriteReference);
 
+	TypeOfScript getType();
+
 protected:
 	Script(TypeOfScript scriptType, string spriteReference);
 

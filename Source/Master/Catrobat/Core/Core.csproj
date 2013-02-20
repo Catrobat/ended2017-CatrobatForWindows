@@ -48,7 +48,6 @@
     <Compile Include="Converter\Converter.cs" />
     <Compile Include="Converter\EditXML.cs" />
     <Compile Include="Converter\PathHelper.cs" />
-    <Compile Include="CostumeBuilder.cs" />
     <Compile Include="Misc\Helpers\FormatHelper.cs" />
     <Compile Include="Misc\Helpers\ApplicationInformation.cs" />
     <Compile Include="Misc\Helpers\DeviceInformationHelper.cs" />
@@ -64,7 +63,8 @@
     <Compile Include="LocalSettings.cs" />
     <Compile Include="Misc\JSON\JSONClassDeserializer.cs" />
     <Compile Include="Misc\JSON\JSONStatusResponse.cs" />
-    <Compile Include="Misc\ServerCommunication.cs" />
+    <Compile Include="Misc\ServerCommunication\IServerCommunication.cs" />
+    <Compile Include="Misc\ServerCommunication\ServerCommunication.cs" />
     <Compile Include="Misc\UtilToken.cs" />
     <Compile Include="Objects\Bricks\Brick.cs" />
     <Compile Include="Objects\Bricks\BrickList.cs" />
@@ -132,6 +132,11 @@
     <Compile Include="Objects\SpriteList.cs" />
     <Compile Include="Objects\SpriteReference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\ApplicationResources.Designer.cs">
+      <DependentUpon>ApplicationResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\SampleProjects\SampleProjectLoader.cs" />
     <Compile Include="Storage\IResources.cs" />
     <Compile Include="Storage\IStorage.cs" />
@@ -142,6 +147,10 @@
     <Compile Include="ZIP\CatrobatZip.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\ApplicationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\default.catroid" />
     <EmbeddedResource Include="Resources\SampleProjects\Aquarium_v2.catrobat" />
     <EmbeddedResource Include="Resources\SampleProjects\Broadcast_test.catroid" />

@@ -12,38 +12,54 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
-  
-<Grid x:Name="LayoutRoot"
+
+  <Grid x:Name="LayoutRoot"
           Background="Transparent">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
+    <StackPanel>
+      <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
+        <TextBlock Margin="0" Text="{Binding Path=Editor.TitleNewCostume, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+      </StackPanel>
 
-    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Path=Editor.TitleNewCostume, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
-    </StackPanel>
+      <StackPanel Grid.Row="1" Margin="10 0 0 15" Name="stackPanelSelector">
+        <Button Margin="0 0 10 10" Name="btnGallery" Click="btnGallery_Click">
+          <Button.Template>
+            <ControlTemplate>
+              <Grid Margin="0 10 0 10" Background="{Binding Path=SelectedTheme.AccentColor1, Source={StaticResource ThemeChooser}}" HorizontalAlignment="Stretch" Height="120">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto"/>
+                  <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Content/Images/Misc/Gallery.png" Margin="30 15 15 15"></Image>
+                <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Editor.ImageGallery, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+              </Grid>
+            </ControlTemplate>
 
-    <StackPanel Grid.Row="1" Margin="10 0 0 15" Name="stackPanelSelector">
-      <Button Margin="0 0 10 10" Name="btnGallery" Click="btnGallery_Click">
-        <Button.Template>
-          <ControlTemplate>
-            <TextBlock Margin="0" Text="{Binding Path=Editor.ImageGallery, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextLargeStyle}" />
-          </ControlTemplate>
-        </Button.Template>
-      </Button>
-      <Button Margin="0 0 10 10" Name="btnCamera" Click="btnCamera_Click">
-        <Button.Template>
-          <ControlTemplate>
-            <TextBlock Margin="0" Text="{Binding Path=Editor.Camera, Source={StaticResource LocalizedStrings}}" Name="tbCamera" Style="{StaticResource PhoneTextLargeStyle}" />
-          </ControlTemplate>
-        </Button.Template>
-      </Button>
-    </StackPanel>
+          </Button.Template>
+        </Button>
+        <Button Margin="0 0 10 10" Name="btnCamera" Click="btnCamera_Click">
+          <Button.Template>
+            <ControlTemplate>
+              <Grid Margin="0 10 0 10" Background="{Binding Path=SelectedTheme.AccentColor2, Source={StaticResource ThemeChooser}}" HorizontalAlignment="Stretch" Height="120">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto"/>
+                  <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Content/Images/Misc/Camera.png" Margin="30 15 15 15"></Image>
+                <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Editor.Camera, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+              </Grid>
+            </ControlTemplate>
+          </Button.Template>
+        </Button>
+      </StackPanel>
 
-    <StackPanel Grid.Row="1" Margin="10 0 0 15" Name="stackPanelChangeName">
-      <TextBlock Margin="0" Text="{Binding Path=Editor.CostumeName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
-      <TextBox Margin="-10 0 10 0" Name="txtName" HorizontalAlignment="Stretch" TextChanged="txtName_TextChanged" />
+      <StackPanel Grid.Row="1" Margin="10 0 0 15" Name="stackPanelChangeName">
+        <TextBlock Margin="0" Text="{Binding Path=Editor.CostumeName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+        <TextBox Margin="-10 0 10 0" Name="txtName" HorizontalAlignment="Stretch" TextChanged="txtName_TextChanged" />
+      </StackPanel>
     </StackPanel>
   </Grid>
 </phone:PhoneApplicationPage>

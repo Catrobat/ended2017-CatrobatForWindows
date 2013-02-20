@@ -7,7 +7,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="30" d:DesignWidth="30">
+    d:DesignHeight="50" d:DesignWidth="50" Width="200" Height="200">
 
   <Grid x:Name="LayoutRoot" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Button Name="buttonPlay" Visibility="Visible" Margin="0" BorderBrush="Transparent" BorderThickness="0" Padding="0" Click="buttonPlay_Click">
@@ -50,7 +50,7 @@
                   <ColumnDefinition Width="9*"/>
                   <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
-                <Ellipse Grid.Row="1" Grid.Column="1" Fill="#00F4F4F5" Stroke="White" StrokeThickness="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Ellipse Grid.Row="1" Grid.Column="1" Fill="#00F4F4F5" Stroke="White" StrokeThickness="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
               </Grid>
               <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
@@ -63,7 +63,9 @@
                   <ColumnDefinition Width="2*"/>
                   <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Path Grid.Row="1" Grid.Column="1" Data="M211,328 L254,359.5 L211,392 z" Fill="#FFF4F4F5" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="0" />
+                <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  <Path  Data="M211,328 L254,359.5 L211,392 z"  Fill="#FFF4F4F5" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="0" />
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
@@ -110,7 +112,7 @@
                   <ColumnDefinition Width="9*"/>
                   <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
-                <Ellipse Grid.Row="1" Grid.Column="1" Fill="#00F4F4F5" Stroke="White" StrokeThickness="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Ellipse Grid.Row="1" Grid.Column="1" Fill="#00F4F4F5" Stroke="White" StrokeThickness="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
               </Grid>
               <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
@@ -123,10 +125,41 @@
                   <ColumnDefinition Width="2*"/>
                   <ColumnDefinition Width="1.5*"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Grid.Row="1" Grid.Column="1" Width="4" StrokeThickness="0" HorizontalAlignment="Right" Fill="White"/>
-                <Rectangle Grid.Row="1" Grid.Column="1" Width="4" Stroke="#FFDE0F0F" StrokeThickness="0" HorizontalAlignment="Left"  Fill="White"/>
+                <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  <Rectangle Width="10" StrokeThickness="0" HorizontalAlignment="Right" Fill="White"/>
+                  <Rectangle Width="10" Stroke="#FFDE0F0F"  StrokeThickness="0" HorizontalAlignment="Left"  Fill="White"/>
+                </Grid>
               </Grid>
             </Grid>
+            <!--<Grid Name="gridMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+              <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="0.5*"/>
+                  <RowDefinition Height="9*"/>
+                  <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="0.5*"/>
+                  <ColumnDefinition Width="9*"/>
+                  <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Ellipse Grid.Row="1" Grid.Column="1" Fill="#00F4F4F5" Stroke="White" StrokeThickness="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+              </Grid>
+              <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="1*"/>
+                  <RowDefinition Height="2*"/>
+                  <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="1.5*"/>
+                  <ColumnDefinition Width="2*"/>
+                  <ColumnDefinition Width="1.5*"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Grid.Row="1" Grid.Column="1" Width="7" StrokeThickness="0" HorizontalAlignment="Right" Fill="White"/>
+                <Rectangle Grid.Row="1" Grid.Column="1" Width="7" Stroke="#FFDE0F0F" StrokeThickness="0" HorizontalAlignment="Left"  Fill="White"/>
+              </Grid>
+            </Grid>-->
           </Grid>
         </ControlTemplate>
       </Button.Template>

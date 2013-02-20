@@ -13,6 +13,7 @@ using Microsoft.Phone.Controls;
 using System.Collections.ObjectModel;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
@@ -20,9 +21,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
   public partial class AudioLibrary : PhoneApplicationPage
   {
     private EditorViewModel editorViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Editor;
-    private Song song;
+    private Song SelectedSong;
     private ObservableCollection<SoundListItem> songs = new ObservableCollection<SoundListItem>();
-    private bool state = false;
+    private bool _songSelected = false;
     private ApplicationBarIconButton btnSave;
 
     public AudioLibrary()
@@ -67,15 +68,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
     protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
     {
-      state = false;
+      _songSelected = false;
       MediaPlayer.Pause();
+      FrameworkDispatcher.Update();
     }
 
     protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
     {
-      if (state)
+      if (_songSelected)
       {
-        state = false;
+        _songSelected = false;
         Dispatcher.BeginInvoke(() =>
         {
           stackPanelMediaLibrary.Visibility = Visibility.Visible;
@@ -131,9 +133,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
     private void lbxSongs_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-      state = true;
+      _songSelected = true;
 
-      song = (lbxSongs.SelectedItem as SoundListItem).Song;
+      MediaPlayer.Pause();
+      FrameworkDispatcher.Update();
+
+      SelectedSong = (lbxSongs.SelectedItem as SoundListItem).Song;
       
       Dispatcher.BeginInvoke(() =>
       {
@@ -142,7 +147,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
         ApplicationBar.IsVisible = true;
 
         Headline.Text = EditorResources.TitleChooseSoundName;
-        txtName.Text = song.Name;
+        txtName.Text = SelectedSong.Name;
         txtName.Focus();
         txtName.SelectAll();
       });
@@ -159,14 +164,17 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
           {
             MediaPlayer.Pause();
             soundItem.State = PlayButtonState.Pause;
+            FrameworkDispatcher.Update();
           }
         sound.State = PlayButtonState.Play;
         MediaPlayer.Play(sound.Song);
+        FrameworkDispatcher.Update();
       }
       else
       {
         sound.State = PlayButtonState.Pause;
         MediaPlayer.Pause();
+        FrameworkDispatcher.Update();
       }
     }
   }

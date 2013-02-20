@@ -16,30 +16,28 @@ using System.IO;
 using System.Threading;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
-using Microsoft.Xna.Framework.Audio;
+
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
-  public partial class Recorder : PhoneApplicationPage
+  public partial class RecorderLauncher : PhoneApplicationPage
   {
     private EditorViewModel editorViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Editor;
     ApplicationBarIconButton btnSave;
 
-    private Microphone currentMicrophone;
-    private byte[] audioBuffer;
-    private int sampleRate;
-    private bool stopRequested = false;
-    private MemoryStream currentRecordingStream;
-    private SoundEffectInstance sound;
-    private DateTime startTime;
-    TimeSpan timeGoneBy;
-    Thread playTime;
-    bool abort = false;
-    bool state = false;
+    private DateTime _startTime;
+    TimeSpan _timeGoneBy;
+    Thread _playTime;
+    private bool _abort = false;
+    private bool _songSelected = false;
 
-    public Recorder()
+    private Recorder _recorder;
+
+    public RecorderLauncher()
     {
       InitializeComponent();
+
+      _recorder = new Recorder();
 
       BuildApplicationBar();
       (App.Current.Resources["LocalizedStrings"] as LocalizedStrings).PropertyChanged += LanguageChanged;
@@ -76,19 +74,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
     protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
     {
-      if(sound != null)
-        sound.Stop();
-
-      if (currentMicrophone != null)
-      {
-        currentMicrophone.Stop();
-        currentMicrophone.BufferReady -= currentMicrophone_BufferReady;
-        currentMicrophone = null;
-      }
-      stopRequested = false;
-      currentRecordingStream = null;
-      sound = null;
-      abort = false;
+      _recorder.StopSound();
+      _recorder.StopRecording();
 
       stackPanelChangeName.Visibility = Visibility.Collapsed;
       ApplicationBar.IsVisible = false;
@@ -99,9 +86,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
     protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
     {
-      if (state)
+      if (_songSelected)
       {
-        state = false;
+        _songSelected = false;
+
         Dispatcher.BeginInvoke(() =>
         {
           gDisplay.Visibility = Visibility.Visible;
@@ -118,134 +106,99 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
     private void StartRecording()
     {
-      currentRecordingStream = new MemoryStream(1048576);
+      _recorder.StartRecording();
 
-      if (currentMicrophone == null)
-      {
-        currentMicrophone = Microphone.Default;
-        currentMicrophone.BufferDuration = TimeSpan.FromMilliseconds(300);
-        currentMicrophone.BufferReady += currentMicrophone_BufferReady;
-        audioBuffer = new byte[currentMicrophone.GetSampleSizeInBytes(
-                            currentMicrophone.BufferDuration)];
-        sampleRate = currentMicrophone.SampleRate;
-      }
-
-      stopRequested = false;
-      currentMicrophone.Start();
-
-      startTime = DateTime.UtcNow;
+      _startTime = DateTime.UtcNow;
       Thread counter = new System.Threading.Thread(CountTime);
       counter.Start();
     }
 
     private void CountTime()
-    {  
-      while (!stopRequested)
+    {
+      while (!_recorder.StopRequested)
       {
-        timeGoneBy = DateTime.UtcNow - startTime;
+        _timeGoneBy = DateTime.UtcNow - _startTime;
         Dispatcher.BeginInvoke(() =>
-        {
-          tbTime.Text = timeGoneBy.Minutes.ToString() + ":" + timeGoneBy.Seconds.ToString() + ":" + timeGoneBy.Milliseconds/100;
-        });
+          {
+            tbTime.Text = _timeGoneBy.Minutes.ToString() + ":" + _timeGoneBy.Seconds.ToString() + ":" +
+                          _timeGoneBy.Milliseconds / 100;
+          });
         Thread.Sleep(100);
       }
     }
 
-    private void RequestStopRecording()
-    {
-      stopRequested = true;
-    }
-
-    private void currentMicrophone_BufferReady(object sender, EventArgs e)
-    {
-      currentMicrophone.GetData(audioBuffer);
-      currentRecordingStream.Write(audioBuffer, 0, audioBuffer.Length);
-      if (!stopRequested)
-        return;
-      currentMicrophone.Stop();
-    }
-
     private void btnRecord_Click(object sender, RoutedEventArgs e)
     {
-      if (sound != null)
-      {
-        sound.Stop();
-        sound.Dispose();
-        sound = null;
-      }
+      _recorder.StopSound();
+      StartRecording();
 
       Dispatcher.BeginInvoke(() =>
-      {
-        btnUse.IsEnabled = false;
-        btnStop.IsEnabled = true;
-        btnRecord.IsEnabled = false;
-        btnPlay.State = PlayButtonState.Pause;
-        btnPlay.Visibility = Visibility.Collapsed;
-      });
-
-      StartRecording();
+        {
+          btnUse.IsEnabled = false;
+          btnStop.IsEnabled = true;
+          btnRecord.IsEnabled = false;
+          btnPlay.State = PlayButtonState.Pause;
+          btnPlay.Visibility = Visibility.Collapsed;
+        });
     }
 
     private void btnStop_Click(object sender, RoutedEventArgs e)
     {
-      RequestStopRecording();
+      _recorder.StopRecording();
 
       Dispatcher.BeginInvoke(() =>
-      {
-        btnUse.IsEnabled = true;
-        btnPlay.Visibility = Visibility.Visible;
-        btnStop.IsEnabled = false;
-        btnRecord.IsEnabled = true;
-      });
+        {
+          btnUse.IsEnabled = true;
+          btnPlay.Visibility = Visibility.Visible;
+          btnStop.IsEnabled = false;
+          btnRecord.IsEnabled = true;
+        });
     }
 
     private void btnPlay_Click(object sender, RoutedEventArgs e)
     {
-      if(sound == null)
-        sound = new SoundEffect(currentRecordingStream.ToArray(), currentMicrophone.SampleRate, AudioChannels.Mono).CreateInstance();
+      _recorder.InitializeSound();
 
-      if (btnPlay.State == PlayButtonState.Play)//this is actually Pause but because the playButton Template already set the new state by itself it is Play
+      if (btnPlay.State == PlayButtonState.Play)//Pause
       {
-        abort = false;
+        _abort = false;
         tbTime.Text = "0:0:0";
-        startTime = DateTime.UtcNow;
-        playTime = new System.Threading.Thread(ShowPlayTime);
-        playTime.Start();
+        _startTime = DateTime.UtcNow;
+        _playTime = new System.Threading.Thread(ShowPlayTime);
+        _playTime.Start();
 
-        sound.Play();
+        _recorder.PlaySound();
       }
       else
       {
-        abort = true;
-        sound.Stop();
+        _abort = true;
+        _recorder.StopSound();
       }
     }
 
     private void ShowPlayTime()
     {
-      TimeSpan playedTime = DateTime.UtcNow - startTime;
-      while (timeGoneBy > playedTime && !abort)
+      TimeSpan playedTime = DateTime.UtcNow - _startTime;
+      while (_timeGoneBy > playedTime && !_abort)
       {
         Dispatcher.BeginInvoke(() =>
         {
-          playedTime = DateTime.UtcNow - startTime;
+          playedTime = DateTime.UtcNow - _startTime;
           tbTime.Text = playedTime.Minutes.ToString() + ":" + playedTime.Seconds.ToString() + ":" + playedTime.Milliseconds / 100;
         });
         Thread.Sleep(100);
       }
       Dispatcher.BeginInvoke(() =>
       {
-        tbTime.Text = timeGoneBy.Minutes.ToString() + ":" + timeGoneBy.Seconds.ToString() + ":" + timeGoneBy.Milliseconds / 100;
+        tbTime.Text = _timeGoneBy.Minutes.ToString() + ":" + _timeGoneBy.Seconds.ToString() + ":" + _timeGoneBy.Milliseconds / 100;
         btnPlay.State = PlayButtonState.Pause;
       });
     }
 
     private void btnUse_Click(object sender, RoutedEventArgs e)
     {
-      state = true;
-
-      if (sound != null)
-        sound.Stop();
+      _songSelected = true;
+      _recorder.StopSound();
 
       Dispatcher.BeginInvoke(() =>
       {
@@ -264,9 +217,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
     private void btnCancel_Click(object sender, RoutedEventArgs e)
     {
-      currentRecordingStream = null;
-      if (sound != null)
-        sound.Stop();
+      _recorder.StopSound();
+      _recorder.StopRecording();
 
       NavigationService.RemoveBackEntry();
       NavigationService.GoBack();
@@ -280,13 +232,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
       using (IStorage storage = StorageSystem.GetStorage())
       {
-        using(var stream = storage.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write))
+        using (var stream = storage.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write))
         {
           BinaryWriter writer = new BinaryWriter(stream);
 
-          WaveHeaderWriter.WriteHeader(writer.BaseStream, sampleRate);
-          var dataBuffer = currentRecordingStream.GetBuffer();
-          writer.Write(dataBuffer, 0, (int)currentRecordingStream.Length);
+          WaveHeaderWriter.WriteHeader(writer.BaseStream, _recorder.SampleRate);
+          var dataBuffer = _recorder.GetSoundAsStream().GetBuffer();
+          writer.Write(dataBuffer, 0, (int)_recorder.GetSoundAsStream().Length);
           writer.Flush();
           writer.Close();
         }

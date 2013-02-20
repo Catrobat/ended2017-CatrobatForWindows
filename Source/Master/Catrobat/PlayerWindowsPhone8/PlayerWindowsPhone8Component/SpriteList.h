@@ -13,6 +13,8 @@ public:
 	~SpriteList();
 
 	void addSprite(Sprite *sprite);
+	int Size();
+	Sprite *getSprite(int index);
 
 private:
 	list<Sprite*> *m_sprites;

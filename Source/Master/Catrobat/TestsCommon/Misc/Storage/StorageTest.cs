@@ -9,7 +9,7 @@ namespace Catrobat.TestsCommon.Misc.Storage
 {
   public class StorageTest : IStorage
   {
-    private List<Stream> openedStreams = new List<Stream>();
+    private readonly List<Stream> _openedStreams = new List<Stream>();
 
     public long Quota
     {
@@ -192,7 +192,7 @@ namespace Catrobat.TestsCommon.Misc.Storage
         }
 
       var stream = File.Open(BasePath + path, fileMode, fileAccess);
-      openedStreams.Add(stream);
+      _openedStreams.Add(stream);
       return stream;
     }
 
@@ -254,7 +254,7 @@ namespace Catrobat.TestsCommon.Misc.Storage
 
     public void Dispose()
     {
-      foreach (var stream in openedStreams)
+      foreach (var stream in _openedStreams)
         stream.Dispose();
     }
 
@@ -291,5 +291,11 @@ namespace Catrobat.TestsCommon.Misc.Storage
       return pathToFormat.Replace('\\', '/');
     }
 
+
+
+    public void SaveImage(string path, byte[] image)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

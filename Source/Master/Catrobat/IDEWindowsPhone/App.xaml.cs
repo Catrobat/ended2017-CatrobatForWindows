@@ -4,9 +4,10 @@ using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using Catrobat.IDEWindowsPhone.Content.Resources;
+using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Catrobat.IDEWindowsPhone.Content.Resources;
 using Catrobat.Core;
 using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.ViewModel;
@@ -15,6 +16,7 @@ using Catrobat.IDEWindowsPhone.Misc.Storage;
 using Catrobat.Core.Misc.Helpers;
 using System.Globalization;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.Core.Misc.ServerCommunication;
 
 
 namespace IDEWindowsPhone
@@ -35,6 +37,7 @@ namespace IDEWindowsPhone
       StorageSystem.SetStorageFactory(new StorageFactoryPhone());
       ResourceLoader.SetResourceLoader(new ResourcesPhone());
       LanguageHelper.SetICulture(new CulturePhone());
+      ServerCommunication.SetIServerCommunication(new ServerCommunicationPhone());
 
       // Global handler for uncaught exceptions.
       UnhandledException += Application_UnhandledException;
@@ -47,6 +50,9 @@ namespace IDEWindowsPhone
 
       // Language display initialization
       InitializeLanguage();
+
+      ApplicationLifetimeObjects.Add(new RecorderDispatcher(TimeSpan.FromMilliseconds(50)));
+
 
       // Show graphics profiling information while debugging.
       if (Debugger.IsAttached)
@@ -109,12 +115,15 @@ namespace IDEWindowsPhone
     // This code will not execute when the application is closing
     private void Application_Deactivated(object sender, DeactivatedEventArgs e)
     {
+      CatrobatContext.Instance.Save();
     }
 
     // Code to execute when the application is closing (eg, user hit Back)
     // This code will not execute when the application is deactivated
     private void Application_Closing(object sender, ClosingEventArgs e)
     {
+      ViewModelLocator.Cleanup();
+      CatrobatContext.Instance.Save();
     }
 
     // Code to execute if a navigation fails

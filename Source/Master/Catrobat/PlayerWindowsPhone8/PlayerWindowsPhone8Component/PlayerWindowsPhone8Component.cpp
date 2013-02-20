@@ -3,6 +3,7 @@
 #include "Direct3DContentProvider.h"
 #include <thread>
 #include "XMLParser.h"
+#include "ProjectParser.h"
 
 using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
@@ -68,6 +69,9 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	// XML
 	XMLParser *xml = new XMLParser();
 	xml->loadXML("Piano/projectcode.xml");
+
+	ProjectParser *project = new ProjectParser();
+	project->saveXML(xml->getProject());
 
 	free(xml);
 
