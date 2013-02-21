@@ -130,8 +130,8 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
     public Stream OpenFile(string path, StorageFileMode mode, StorageFileAccess access)
     {
-      FileMode fileMode = FileMode.Append;
-      FileAccess fileAccess = FileAccess.Read;
+      var fileMode = FileMode.Append;
+      var fileAccess = FileAccess.Read;
 
       switch (mode)
       {
@@ -174,9 +174,6 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
           fileAccess = FileAccess.Write;
           break;
       }
-
-
-
 
       if (access == StorageFileAccess.Write || access == StorageFileAccess.ReadWrite)
         switch (mode)
@@ -263,18 +260,11 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
         using (IsolatedStorageFileStream isfs = _iso.OpenFile(pathToImage, FileMode.Open, FileAccess.Read))
         {
-          //myByteArray = new byte[isfs.Length];
-
-          //isfs.Read(myByteArray, 0, myByteArray.Length);
-
           bitmapImage.SetSource(isfs);
           isfs.Close();
 
           return bitmapImage;
-
         }
-
-        //return myByteArray;
       }
       catch
       {

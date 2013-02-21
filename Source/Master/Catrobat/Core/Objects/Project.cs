@@ -301,7 +301,7 @@ namespace Catrobat.Core.Objects
       {
         foreach (Costume costume in sprite.Costumes.Costumes)
         {
-          var image = costume.Image; // Forces load of image
+          //var image = costume.Image; // Forces load of image
         }
       }
     }

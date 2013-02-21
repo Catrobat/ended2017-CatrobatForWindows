@@ -8,7 +8,7 @@ using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Sounds;
-using Catrobat.Core.Resources.SampleProjects;
+using Catrobat.Core.Resources;
 using Catrobat.Core.Storage;
 using Catrobat.Core.ZIP;
 
@@ -32,13 +32,12 @@ namespace Catrobat.Core
     {
       bool firstTimeUse = !RestoreLocalSettings();
 
-      //TODO: fix this
-      //if (Debugger.IsAttached)
-      //{
-      //  var loader = new SampleProjectLoader();
-      //  loader.LoadSampleProjects();
-      //  UpdateLocalProjects();
-      //}
+      if (Debugger.IsAttached)
+      {
+        var loader = new SampleProjectLoader();
+        loader.LoadSampleProjects();
+        UpdateLocalProjects();
+      }
 
       if (firstTimeUse)
       {
