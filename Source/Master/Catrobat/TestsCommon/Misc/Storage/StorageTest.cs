@@ -202,7 +202,7 @@ namespace Catrobat.TestsCommon.Misc.Storage
         Directory.Move(BasePath + directoryPath, BasePath + GetPath(directoryPath) + newDirectoryName);
     }
 
-    public byte[] LoadImage(string pathToImage)
+    public object LoadImage(string pathToImage)
     {
       if (File.Exists(BasePath + pathToImage))
         return File.ReadAllBytes(BasePath + pathToImage);
@@ -291,9 +291,13 @@ namespace Catrobat.TestsCommon.Misc.Storage
       return pathToFormat.Replace('\\', '/');
     }
 
+    public void SaveImage(string path, object image)
+    {
+      throw new NotImplementedException();
+    }
 
 
-    public void SaveImage(string path, byte[] image)
+    public object LoadImageThumbnail(string pathToImage)
     {
       throw new NotImplementedException();
     }

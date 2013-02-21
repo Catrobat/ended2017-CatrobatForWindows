@@ -54,7 +54,6 @@
     <Compile Include="Misc\Helpers\FileNameGenerator.cs" />
     <Compile Include="Misc\Helpers\FormUpload.cs" />
     <Compile Include="Misc\Helpers\ICulture.cs" />
-    <Compile Include="Misc\Helpers\ImageHelper.cs" />
     <Compile Include="Misc\Helpers\LanguageHelper.cs" />
     <Compile Include="Misc\Helpers\MD5.cs" />
     <Compile Include="Misc\Helpers\ReadHelper.cs" />
@@ -137,7 +136,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\SampleProjects\SampleProjectLoader.cs" />
+    <Compile Include="Resources\SampleProjectLoader.cs" />
     <Compile Include="Storage\IResources.cs" />
     <Compile Include="Storage\IStorage.cs" />
     <Compile Include="Storage\IStorageFactory.cs" />
@@ -151,21 +150,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\default.catroid" />
-    <EmbeddedResource Include="Resources\SampleProjects\Aquarium_v2.catrobat" />
-    <EmbeddedResource Include="Resources\SampleProjects\Broadcast_test.catroid" />
-    <EmbeddedResource Include="Resources\SampleProjects\default.catroid" />
-    <EmbeddedResource Include="Resources\SampleProjects\Egg_timer.catrobat" />
-    <EmbeddedResource Include="Resources\SampleProjects\Fishy.catroid" />
-    <EmbeddedResource Include="Resources\SampleProjects\glideTo.catroid" />
-    <EmbeddedResource Include="Resources\SampleProjects\HAL9000.catrobat" />
-    <EmbeddedResource Include="Resources\SampleProjects\LookBricks.catroid" />
-    <EmbeddedResource Include="Resources\SampleProjects\MotionBrick.catroid" />
-    <EmbeddedResource Include="Resources\SampleProjects\Pacman.catrobat" />
-    <EmbeddedResource Include="Resources\SampleProjects\Piano.catrobat" />
-    <EmbeddedResource Include="Resources\SampleProjects\pointTo.catroid" />
-    <EmbeddedResource Include="Resources\SampleProjects\speakBrick.catroid" />
-    <EmbeddedResource Include="Resources\SampleProjects\SwitchBackground.catroid" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks">

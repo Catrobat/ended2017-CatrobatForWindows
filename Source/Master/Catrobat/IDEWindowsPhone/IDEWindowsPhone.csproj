@@ -130,9 +130,10 @@
     <Compile Include="Misc\CostumeBuilder.cs" />
     <Compile Include="Misc\CulturePhone.cs" />
     <Compile Include="Misc\MemoryMonitor.cs" />
+    <Compile Include="Misc\ResolutionHelper.cs" />
     <Compile Include="Misc\ServerCommunicationPhone.cs" />
     <Compile Include="Misc\SoundPlayer.cs" />
-    <Compile Include="Misc\Storage\ImageToBytesHelper.cs" />
+    <Compile Include="Misc\Storage\ImageFormatHelper.cs" />
     <Compile Include="Misc\Storage\ResourcesPhone7.cs" />
     <Compile Include="Misc\Storage\StorageFactoryPhone7.cs" />
     <Compile Include="Misc\Storage\StoragePhone7.cs" />
@@ -353,6 +354,20 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Resources\SampleProjects\Aquarium_v2.catrobat" />
+    <Content Include="Content\Resources\SampleProjects\Broadcast_test.catroid" />
+    <Content Include="Content\Resources\SampleProjects\default.catroid" />
+    <Content Include="Content\Resources\SampleProjects\Egg_timer.catrobat" />
+    <Content Include="Content\Resources\SampleProjects\Fishy.catroid" />
+    <Content Include="Content\Resources\SampleProjects\glideTo.catroid" />
+    <Content Include="Content\Resources\SampleProjects\HAL9000.catrobat" />
+    <Content Include="Content\Resources\SampleProjects\LookBricks.catroid" />
+    <Content Include="Content\Resources\SampleProjects\MotionBrick.catroid" />
+    <Content Include="Content\Resources\SampleProjects\Pacman.catrobat" />
+    <Content Include="Content\Resources\SampleProjects\Piano.catrobat" />
+    <Content Include="Content\Resources\SampleProjects\pointTo.catroid" />
+    <Content Include="Content\Resources\SampleProjects\speakBrick.catroid" />
+    <Content Include="Content\Resources\SampleProjects\SwitchBackground.catroid" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">

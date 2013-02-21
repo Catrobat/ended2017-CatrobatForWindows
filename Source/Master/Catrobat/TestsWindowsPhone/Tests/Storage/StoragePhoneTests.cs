@@ -175,7 +175,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
       var resourceStreamInfo = Application.GetResourceStream(uri);
       CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStreamInfo.Stream, "TestLoadImage");
 
-      byte[] image = storage.LoadImage("TestLoadImage/screenshot.png");
+      var image = storage.LoadImage("TestLoadImage/screenshot.png");
       Assert.AreNotEqual(image, null);
     }
 
@@ -190,11 +190,11 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
       var resourceStreamInfo = Application.GetResourceStream(uri);
       CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStreamInfo.Stream, "TestLoadImage");
 
-      byte[] image = storage.LoadImage("TestLoadImage/screenshot.png");
+      var image = storage.LoadImage("TestLoadImage/screenshot.png");
 
       throw new NotImplementedException("TODO: check next line");
       //storage.SaveImage("TestLoadImage2/screenshot.png", image);
-      byte[] image2 = storage.LoadImage("TestLoadImage2/screenshot.png");
+      var image2 = storage.LoadImage("TestLoadImage2/screenshot.png");
 
       // TODO: Maybe check if pixels are corect?
 

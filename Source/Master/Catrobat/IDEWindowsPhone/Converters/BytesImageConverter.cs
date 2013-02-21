@@ -11,16 +11,20 @@ namespace Catrobat.IDEWindowsPhone.Converters
   {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
-      var byteImage = value as Byte[];
+      return value;
 
-      return ImageToBytesHelper.ConvertByteToImage(byteImage);
+      //var byteImage = value as Byte[];
+
+      //return ImageFormatHelper.ConvertByteToImage(byteImage);
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
-      var bitmapImage = value as BitmapImage;
+      return value;
 
-      return ImageToBytesHelper.ConvertImageToBytes(bitmapImage);
+      //var bitmapImage = value as BitmapImage;
+
+      //return ImageFormatHelper.ConvertImageToBytes(bitmapImage);
     }
   }
 }

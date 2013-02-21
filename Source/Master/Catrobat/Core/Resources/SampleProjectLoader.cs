@@ -1,14 +1,14 @@
-﻿using System;
-using Catrobat.Core.Objects;
+﻿using Catrobat.Core.Objects;
 using Catrobat.Core.Storage;
 using Catrobat.Core.ZIP;
 using System.Collections.Generic;
+using System.Diagnostics;
 
-namespace Catrobat.Core.Resources.SampleProjects
+namespace Catrobat.Core.Resources
 {
   public class SampleProjectLoader
   {
-    private Dictionary<string, string> sampleProjectNames = new Dictionary<string, string>
+    private readonly Dictionary<string, string> _sampleProjectNames = new Dictionary<string, string>
     { 
       {"Piano.catrobat","Piano"},
       {"Pacman.catrobat","Pacman"},
@@ -27,7 +27,7 @@ namespace Catrobat.Core.Resources.SampleProjects
 
     public void LoadSampleProjects()
     {
-      foreach (KeyValuePair<string,string> pair in sampleProjectNames)
+      foreach (KeyValuePair<string,string> pair in _sampleProjectNames)
       {
         string projectFileName = pair.Key;
         string projectName = pair.Value;
@@ -35,11 +35,18 @@ namespace Catrobat.Core.Resources.SampleProjects
         string path = "Resources/SampleProjects/";
         path += projectFileName;
 
-        var resourceStream = ResourceLoader.GetResourceStream(ResourceScope.Core, path);
-        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContext.ProjectsPath + "/" + projectName);
+        var resourceStream = ResourceLoader.GetResourceStream(ResourceScope.SampleProjects, path);
+
+        if (resourceStream == null)
+          Debugger.Break(); // sample project does not exist: please remove from _sampleProjectNames or add to Core/Resources/SampleProjects
+
+        var projectFolderPath = CatrobatContext.ProjectsPath + "/" + projectName;
 
         using (IStorage storage = StorageSystem.GetStorage())
         {
+          if (!storage.DirectoryExists(projectFolderPath))
+            CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContext.ProjectsPath + "/" + projectName);
+
           string xml = storage.ReadTextFile(CatrobatContext.ProjectsPath + "/" + projectName + "/" + Project.ProjectCodePath);
 
           var project = new Project(xml);
