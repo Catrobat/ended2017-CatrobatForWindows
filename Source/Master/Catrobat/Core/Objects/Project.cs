@@ -31,7 +31,7 @@ namespace Catrobat.Core.Objects
     private string _platformVersion;
 
     private string _projectName;
-    private byte[] _projectScreenshot;
+    private object _projectScreenshot;
 
     private int _screenHeight;
 
@@ -188,7 +188,7 @@ namespace Catrobat.Core.Objects
     }
 
 
-    public byte[] ProjectScreenshot
+    public object ProjectScreenshot
     {
       get
       {
@@ -196,8 +196,7 @@ namespace Catrobat.Core.Objects
         {
           using (IStorage storage = StorageSystem.GetStorage())
           {
-            _projectScreenshot =
-                storage.LoadImage(CatrobatContext.Instance.CurrentProject.BasePath + "/screenshot.png");
+            _projectScreenshot = storage.LoadImage(CatrobatContext.Instance.CurrentProject.BasePath + "/screenshot.png");
           }
         }
 
@@ -214,15 +213,7 @@ namespace Catrobat.Core.Objects
           if (storage.FileExists(ScreenshotPath))
             storage.DeleteFile(ScreenshotPath);
 
-#if SILVERLIGHT
-            Stream fileStream = storage.OpenFile(ScreenshotPath, StorageFileMode.Create, StorageFileAccess.Write);
-            byte[] wb = new WriteableBitmap(value);
-            System.Windows.Media.Imaging.Extensions.SaveJpeg(wb, fileStream, wb.PixelWidth, wb.PixelHeight, 0, 85);
-            fileStream.Close();
-#else
-          // TODO: This code may not work
-
-#endif
+          storage.SaveImage(ScreenshotPath, value);
         }
 
         OnPropertyChanged(new PropertyChangedEventArgs("ProjectScreenshot"));
@@ -310,8 +301,7 @@ namespace Catrobat.Core.Objects
       {
         foreach (Costume costume in sprite.Costumes.Costumes)
         {
-          byte[] image = costume.Image; // Forces load of image
-          byte[] thumbnail = costume.Thumbnail; // Forces load of thumbnail
+          var image = costume.Image; // Forces load of image
         }
       }
     }

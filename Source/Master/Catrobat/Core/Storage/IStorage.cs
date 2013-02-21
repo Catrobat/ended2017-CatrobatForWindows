@@ -42,9 +42,11 @@ namespace Catrobat.Core.Storage
 
     void RenameDirectory(string directoryPath, string newDirectoryName);
 
-    byte[] LoadImage(string pathToImage);
+    object LoadImage(string pathToImage);
 
-    void SaveImage(string path, byte[] image);
+    object LoadImageThumbnail(string pathToImage);
+
+    void SaveImage(string path, object image);
 
     string ReadTextFile(string path);
 

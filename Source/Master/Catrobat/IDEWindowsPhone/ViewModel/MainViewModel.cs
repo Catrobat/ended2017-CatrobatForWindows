@@ -20,6 +20,7 @@ using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
 using IDEWindowsPhone;
+using System.Windows.Media;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel
 {
@@ -67,17 +68,18 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     public Project CurrentProject { get { return _catrobatContext.CurrentProject; } }
 
-    public BitmapImage CurrentProjectScreenshot
+    public ImageSource CurrentProjectScreenshot
     {
       get
       {
-        using (var memoryStream = new MemoryStream(CurrentProject.ProjectScreenshot,
-          0, CurrentProject.ProjectScreenshot.Length))
-        {
-          var bitmapImage = new BitmapImage();
-          bitmapImage.SetSource(memoryStream);
-          return bitmapImage;
-        }
+        return CurrentProject.ProjectScreenshot as ImageSource;
+
+        //using (var memoryStream = new MemoryStream(CurrentProject.ProjectScreenshot, 0, CurrentProject.ProjectScreenshot.Length))
+        //{
+        //  var bitmapImage = new BitmapImage();
+        //  bitmapImage.SetSource(memoryStream);
+        //  return bitmapImage;
+        //}
       }
     }
 

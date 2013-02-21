@@ -3,6 +3,6 @@
     public class ProjectHeader
     {
         public string ProjectName { get; set; }
-        public byte[] Screenshot { get; set; }
+        public object Screenshot { get; set; }
     }
 }

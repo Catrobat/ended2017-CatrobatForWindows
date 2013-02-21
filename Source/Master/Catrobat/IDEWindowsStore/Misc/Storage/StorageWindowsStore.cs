@@ -61,7 +61,7 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
       throw new NotImplementedException();
     }
 
-    public byte[] LoadImage(string pathToImage)
+    public object LoadImage(string pathToImage)
     {
       throw new NotImplementedException();
     }
@@ -103,7 +103,13 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
     }
 
 
-    public void SaveImage(string path, byte[] image)
+    public void SaveImage(string path, object image)
+    {
+      throw new NotImplementedException();
+    }
+
+
+    public object LoadImageThumbnail(string pathToImage)
     {
       throw new NotImplementedException();
     }

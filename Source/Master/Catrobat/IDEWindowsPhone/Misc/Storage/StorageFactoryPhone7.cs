@@ -10,7 +10,24 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
   {
     public IStorage CreateStorage()
     {
-      return new StoragePhone();
+      var storage = new StoragePhone();
+
+      switch(ResolutionHelper.CurrentResolution)
+      {
+        case Resolutions.WVGA:
+          storage.SetImageMaxThumbnailWidthHeight(150);
+          break;
+        case Resolutions.WXGA:
+          storage.SetImageMaxThumbnailWidthHeight(220);
+          break;
+        case Resolutions.HD720p:
+          storage.SetImageMaxThumbnailWidthHeight(220);
+          break;
+        default:
+          throw new ArgumentOutOfRangeException();
+      }
+
+      return storage;
     }
   }
 }

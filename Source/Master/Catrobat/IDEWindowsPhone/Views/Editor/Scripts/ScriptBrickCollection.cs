@@ -11,34 +11,34 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
   public class ScriptBrickCollection : IList, ICollection, IEnumerable, INotifyCollectionChanged, INotifyPropertyChanged
   {
-    private ObservableCollection<Script> scripts 
+    private ObservableCollection<Script> Scripts 
     { 
       get 
       {
-        if (selectedSprite == null)
+        if (_selectedSprite == null)
           return new ObservableCollection<Script>();
 
-        return selectedSprite.Scripts.Scripts;
+        return _selectedSprite.Scripts.Scripts;
       } 
     }
 
-    private Sprite selectedSprite;
+    private Sprite _selectedSprite;
 
-    private Brick lastDeletedBrick;
-    private Brick lastInsertedBrick;
-    private int lastDeletedIndex;
-    private int lastInsertedIndex;
+    private Brick _lastDeletedBrick;
+    private Brick _lastInsertedBrick;
+    private int _lastDeletedIndex;
+    private int _lastInsertedIndex;
 
     public int LastDeletedIndex
     {
-      get { return lastDeletedIndex; }
+      get { return _lastDeletedIndex; }
     }
 
     public DataObject PreventIsertOfNext {get; set;}
 
     public void Update(Sprite selectedSprite)
     {
-      this.selectedSprite = selectedSprite;
+      this._selectedSprite = selectedSprite;
       OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
     }
 
@@ -56,7 +56,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
         int scriptEndIndex = -1;
         int scriptBeginIndex = 0;
         Script lastFullScript = null;
-        foreach (Script script in scripts)
+        foreach (Script script in Scripts)
         {
           scriptBeginIndex = scriptEndIndex + 1;
           scriptEndIndex += script.Bricks.Bricks.Count + 1;
@@ -69,8 +69,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 
         if (lastFullScript == null)
         {
-          StartScript startScript = new StartScript(selectedSprite);
-          scripts.Add(startScript);
+          StartScript startScript = new StartScript(_selectedSprite);
+          Scripts.Add(startScript);
           lastFullScript = startScript;
 
           OnScriptAdded(startScript, IndexOf(startScript));
@@ -84,7 +84,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
       else if (scriptBrick is Script) // Add script at end of all
       {
         Script script = scriptBrick as Script;
-        scripts.Add(script);
+        Scripts.Add(script);
 
         //OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)); // TODO: make faster and use method below instead
         OnScriptAdded((Script)scriptBrick, IndexOf(scriptBrick));
@@ -108,7 +108,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
           }
           else
           {
-            NotifyCollectionChangedEventArgs args = new NotifyCollectionChangedEventArgs(e.Action, lastDeletedBrick, lastDeletedIndex);
+            NotifyCollectionChangedEventArgs args = new NotifyCollectionChangedEventArgs(e.Action, _lastDeletedBrick, _lastDeletedIndex);
             OnCollectionChanged(args);
           }
         }
@@ -121,7 +121,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
           }
           else
           {
-            NotifyCollectionChangedEventArgs args = new NotifyCollectionChangedEventArgs(e.Action, lastInsertedBrick, lastInsertedIndex);
+            NotifyCollectionChangedEventArgs args = new NotifyCollectionChangedEventArgs(e.Action, _lastInsertedBrick, _lastInsertedIndex);
             OnCollectionChanged(args);
           }
         }
@@ -178,7 +178,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
       Brick brickToRemove = null;
 
       int count = 0;
-      foreach (Script script in scripts)
+      foreach (Script script in Scripts)
       {
         if (count == index)
         {
@@ -194,8 +194,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
             scriptToRemove = script;
             brickToRemove = brick;
 
-            lastDeletedBrick = brick;
-            lastDeletedIndex = index;
+            _lastDeletedBrick = brick;
+            _lastDeletedIndex = index;
 
             break;
           }
@@ -209,7 +209,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 
       if (brickToRemove == null)
       {
-        scripts.Remove(scriptToRemove);
+        Scripts.Remove(scriptToRemove);
 
         OnScriptRemoved(scriptToRemove, index);
 
@@ -226,7 +226,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 
     public void Clear()
     {
-      scripts.Clear();
+      Scripts.Clear();
     }
 
     public int Count
@@ -234,7 +234,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
       get 
       { 
         int count = 0;
-        foreach (Script script in scripts)
+        foreach (Script script in Scripts)
           count += script.Bricks.Bricks.Count + 1;
         return count;
       }
@@ -258,31 +258,31 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 
     public IEnumerator<DataObject> GetEnumerator()
     {
-      return new ScriptBrickIterator(scripts) as IEnumerator<DataObject>;
+      return new ScriptBrickIterator(Scripts) as IEnumerator<DataObject>;
     }
 
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
     {
-      return new ScriptBrickIterator(scripts) as IEnumerator<DataObject>;
+      return new ScriptBrickIterator(Scripts) as IEnumerator<DataObject>;
     }
 
     public int Add(object value)
     {
       if (value is Script)
-        scripts.Add((Script)value);
+        Scripts.Add((Script)value);
 
       if (value is Brick)
-        scripts[scripts.Count - 1].Bricks.Bricks.Add((Brick)value);
+        Scripts[Scripts.Count - 1].Bricks.Bricks.Add((Brick)value);
 
       return 1; // TODO: should probably not be 1 ?
     }
 
     public bool Contains(object value)
     {
-      if (scripts.Contains(value as Script))
+      if (Scripts.Contains(value as Script))
         return true;
       else
-        foreach (Script script in scripts)
+        foreach (Script script in Scripts)
         {
           if (script.Bricks.Bricks.Contains(value as Brick))
             return true;
@@ -293,7 +293,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 
     public int ScriptIndexOf(Script value)
     {
-      return scripts.IndexOf(value);
+      return Scripts.IndexOf(value);
     }
 
     public int IndexOf(object value)
@@ -350,7 +350,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
       {
         int scriptIndex = 0;
 
-        foreach (Script script in scripts)
+        foreach (Script script in Scripts)
         {
           if (count > index)
             break;
@@ -359,20 +359,20 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
           scriptIndex++;
         }
 
-        scripts.Insert(scriptIndex, (Script)value);
+        Scripts.Insert(scriptIndex, (Script)value);
         OnScriptAdded((Script)value, count + 1);
       }
 
       if (value is Brick)
       {
         int brickCount = 0;
-        lastInsertedBrick = (Brick)value;
-        lastInsertedIndex = index;
+        _lastInsertedBrick = (Brick)value;
+        _lastInsertedIndex = index;
 
         if (index == 0) // Cannot insert brick before first sprite
           index = 1;
 
-        foreach (Script script in scripts)
+        foreach (Script script in Scripts)
         {
           count++;
           foreach (Brick brick in script.Bricks.Bricks)
@@ -412,16 +412,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
       if (value is Script)
       {
         Script script = value as Script;
-        if (scripts.Contains(script))
+        if (Scripts.Contains(script))
         {
-          scripts.Remove(script);
+          Scripts.Remove(script);
 
           OnScriptRemoved(script, index);
         }
       }
       else if (value is Brick)
       {
-        foreach(Script script in scripts)
+        foreach(Script script in Scripts)
           if (script.Bricks.Bricks.Contains(value as Brick))
           {
             script.Bricks.Bricks.Remove(value as Brick);
@@ -444,6 +444,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 
     private object GetAtIndex(int index)
     {
+
       IEnumerator<DataObject> enumerator = GetEnumerator(); // TODO: make faster do not use enumerator
 
       int count = 0;
@@ -456,7 +457,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
       }
 
       return null;
-      //throw new IndexOutOfRangeException();
     }
 
     public void CopyTo(Array array, int index)
@@ -472,7 +472,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 
     public object SyncRoot
     {
-      get { return scripts; }
+      get { return Scripts; }
     }
   }
 }

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Windows.Media;
 using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
@@ -108,7 +109,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     private void AddBroadcastMessageAction(DataObject broadcastObject)
     {
       // TODO: change this
-      this.broadcastObject = broadcastObject;
+      this._broadcastObject = broadcastObject;
 
       if (OnAddedBroadcastMessage != null)
         OnAddedBroadcastMessage.Invoke();
@@ -116,9 +117,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     public void AddBroadcastMessageAction(string message)
     {
-      if (!catrobatContext.CurrentProject.BroadcastMessages.Contains(message))
+      if (!_catrobatContext.CurrentProject.BroadcastMessages.Contains(message))
       {
-        catrobatContext.CurrentProject.BroadcastMessages.Add(message);
+        _catrobatContext.CurrentProject.BroadcastMessages.Add(message);
         RaisePropertyChanged("BroadcastMessages");
       }
     }
@@ -208,19 +209,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     # region Properties
 
-    private DataObject broadcastObject;
+    private DataObject _broadcastObject;
     public DataObject BroadcastObject
     {
-      get { return broadcastObject; }
+      get { return _broadcastObject; }
     }
 
-    private readonly ICatrobatContext catrobatContext;
+    private readonly ICatrobatContext _catrobatContext;
 
     public Project CurrentProject
     {
       get
       {
-        return catrobatContext.CurrentProject;
+        return _catrobatContext.CurrentProject;
       }
     }
 
@@ -232,18 +233,18 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       }
     }
 
-    private Sprite selectedSprite;
+    private Sprite _selectedSprite;
     public Sprite SelectedSprite
     {
       get
       {
-        return selectedSprite;
+        return _selectedSprite;
       }
       set
       {
-        selectedSprite = value;
+        _selectedSprite = value;
 
-        scriptBricks.Update(selectedSprite);
+        _scriptBricks.Update(_selectedSprite);
 
         RaisePropertyChanged("SelectedSprite");
         RaisePropertyChanged("Sounds");
@@ -251,12 +252,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       }
     }
 
-    private ScriptBrickCollection scriptBricks;
+    private readonly ScriptBrickCollection _scriptBricks;
     public ScriptBrickCollection ScriptBricks
     {
       get
       {
-        return scriptBricks;
+        return _scriptBricks;
       }
     }
 
@@ -264,8 +265,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     {
       get
       {
-        if (selectedSprite != null)
-          return selectedSprite.Sounds.Sounds;
+        if (_selectedSprite != null)
+          return _selectedSprite.Sounds.Sounds;
         else
           return null;
       }
@@ -275,8 +276,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     {
       get
       {
-        if (selectedSprite != null)
-          return selectedSprite.Costumes.Costumes;
+        if (_selectedSprite != null)
+          return _selectedSprite.Costumes.Costumes;
         else
           return null;
       }
@@ -286,21 +287,23 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     {
       get
       {
-        return catrobatContext.CurrentProject.BroadcastMessages;
+        return _catrobatContext.CurrentProject.BroadcastMessages;
       }
     }
 
-    public BitmapImage CurrentProjectScreenshot
+    public ImageSource CurrentProjectScreenshot
     {
       get
       {
-        using (var memoryStream = new MemoryStream(CurrentProject.ProjectScreenshot,
-          0, CurrentProject.ProjectScreenshot.Length))
-        {
-          var bitmapImage = new BitmapImage();
-          bitmapImage.SetSource(memoryStream);
-          return bitmapImage;
-        }
+        return CurrentProject.ProjectScreenshot as ImageSource;
+
+        //using (var memoryStream = new MemoryStream(CurrentProject.ProjectScreenshot,
+        //  0, CurrentProject.ProjectScreenshot.Length))
+        //{
+        //  var bitmapImage = new BitmapImage();
+        //  bitmapImage.SetSource(memoryStream);
+        //  return bitmapImage;
+        //}
       }
     }
 
@@ -323,15 +326,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
       if (IsInDesignMode)
       {
-        catrobatContext = new CatrobatContextDesign();
-        selectedSprite = catrobatContext.CurrentProject.SpriteList.Sprites[0];
+        _catrobatContext = new CatrobatContextDesign();
+        _selectedSprite = _catrobatContext.CurrentProject.SpriteList.Sprites[0];
       }
       else
       {
-        catrobatContext = CatrobatContext.Instance;
+        _catrobatContext = CatrobatContext.Instance;
       }
 
-      scriptBricks = new ScriptBrickCollection();
+      _scriptBricks = new ScriptBrickCollection();
     }
 
     public override void Cleanup()

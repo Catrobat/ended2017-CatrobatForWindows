@@ -2,34 +2,42 @@
 using System.IO.IsolatedStorage;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Catrobat.Core.Storage;
 using System;
+using ImageTools;
+using ImageTools.Filtering;
+using ImageTools.IO;
+using ImageTools.IO.Bmp;
+using ImageTools.IO.Gif;
+using ImageTools.IO.Png;
 
 namespace Catrobat.IDEWindowsPhone.Misc.Storage
 {
   public class StoragePhone : IStorage
   {
-    private IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication();
+    private readonly IsolatedStorageFile _iso = IsolatedStorageFile.GetUserStoreForApplication();
 
     public bool FileExists(string path)
     {
-      return iso.FileExists(path);
+      return _iso.FileExists(path);
     }
 
     public bool DirectoryExists(string path)
     {
-      return iso.DirectoryExists(path);
+      return _iso.DirectoryExists(path);
     }
 
     public string[] GetDirectoryNames(string path)
     {
-      return iso.GetDirectoryNames(path + "/*");
+      return _iso.GetDirectoryNames(path + "/*");
     }
 
     public string[] GetFileNames(string path)
     {
-      return iso.GetFileNames(path + "/*.*");
+      return _iso.GetFileNames(path + "/*.*");
     }
 
     private void CreateFoldersIfNotExist(string path, bool isFilePath)
@@ -44,13 +52,13 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
           subPath += "/" + splitPath[subIndex];
 
         if (subPath != "")
-          iso.CreateDirectory(subPath);
+          _iso.CreateDirectory(subPath);
       }
     }
 
     public void DeleteDirectory(string path)
     {
-      DeleteDirectory(path, iso);
+      DeleteDirectory(path, _iso);
     }
 
     private void DeleteDirectory(string path, IsolatedStorageFile iso)
@@ -86,7 +94,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
     public void CopyDirectory(string sourcePath, string destinationPath)
     {
       CreateFoldersIfNotExist(destinationPath, false);
-      CopyDirectory(sourcePath, destinationPath, iso);
+      CopyDirectory(sourcePath, destinationPath, _iso);
     }
 
     public void CopyDirectory(string sourcePath, string destinationPath, IsolatedStorageFile iso)
@@ -117,7 +125,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
     public void CopyFile(string sourcePath, string destinationPath)
     {
       CreateFoldersIfNotExist(destinationPath, true);
-      iso.CopyFile(sourcePath, destinationPath);
+      _iso.CopyFile(sourcePath, destinationPath);
     }
 
     public Stream OpenFile(string path, StorageFileMode mode, StorageFileAccess access)
@@ -180,7 +188,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
             break;
         }
 
-      IsolatedStorageFileStream isfs = iso.OpenFile(path, fileMode, fileAccess);
+      IsolatedStorageFileStream isfs = _iso.OpenFile(path, fileMode, fileAccess);
       return isfs;
     }
 
@@ -189,44 +197,24 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
       string newDirectoryPath = directoryPath.Remove(directoryPath.LastIndexOf('/'));
       newDirectoryPath += "/" + newDirectoryName;
 
-      iso.CreateDirectory(newDirectoryPath);
+      _iso.CreateDirectory(newDirectoryPath);
 
-      var folders = iso.GetDirectoryNames(directoryPath + "/*");
+      var folders = _iso.GetDirectoryNames(directoryPath + "/*");
 
       foreach (var folder in folders)
       {
-        iso.MoveDirectory(directoryPath + "/" + folder, newDirectoryPath + "/" + folder);
+        _iso.MoveDirectory(directoryPath + "/" + folder, newDirectoryPath + "/" + folder);
       }
 
-      foreach (var file in iso.GetFileNames(directoryPath + "/*"))
+      foreach (var file in _iso.GetFileNames(directoryPath + "/*"))
       {
-        if (iso.FileExists(directoryPath + "/" + file))
-          iso.MoveFile(directoryPath + "/" + file, newDirectoryPath + "/" + file);
+        if (_iso.FileExists(directoryPath + "/" + file))
+          _iso.MoveFile(directoryPath + "/" + file, newDirectoryPath + "/" + file);
       }
 
-      iso.DeleteDirectory(directoryPath);
+      _iso.DeleteDirectory(directoryPath);
     }
 
-
-    public BitmapImage LoadImage(string pathToImage)
-    {
-      try
-      {
-        var bitmapImage = new BitmapImage();
-
-        using (IsolatedStorageFileStream isfs = iso.OpenFile(pathToImage, FileMode.Open, FileAccess.Read))
-        {
-          bitmapImage.SetSource(isfs);
-          isfs.Close();
-        }
-
-        return bitmapImage;
-      }
-      catch
-      {
-        return null;
-      }
-    }
 
     public void WriteTextFile(string path, string content)
     {
@@ -265,7 +253,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
       return text;
     }
 
-    byte[] IStorage.LoadImage(string pathToImage)
+    public object LoadImage(string pathToImage)
     {
       try
       {
@@ -273,18 +261,20 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
         byte[] myByteArray = null;
 
-        using (IsolatedStorageFileStream isfs = iso.OpenFile(pathToImage, FileMode.Open, FileAccess.Read))
+        using (IsolatedStorageFileStream isfs = _iso.OpenFile(pathToImage, FileMode.Open, FileAccess.Read))
         {
-          myByteArray = new byte[isfs.Length];
+          //myByteArray = new byte[isfs.Length];
 
-          isfs.Read(myByteArray, 0, myByteArray.Length);
+          //isfs.Read(myByteArray, 0, myByteArray.Length);
 
           bitmapImage.SetSource(isfs);
           isfs.Close();
 
+          return bitmapImage;
+
         }
 
-        return myByteArray;
+        //return myByteArray;
       }
       catch
       {
@@ -292,12 +282,82 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
       }
     }
 
-    public void SaveImage(string path, byte[] image)
+    public BitmapImage LoadImageAsBitmapImage(string pathToImage)
+    {
+      try
+      {
+        var bitmapImage = new BitmapImage();
+
+        using (IsolatedStorageFileStream isfs = _iso.OpenFile(pathToImage, FileMode.Open, FileAccess.Read))
+        {
+          bitmapImage.SetSource(isfs);
+          isfs.Close();
+        }
+
+        return bitmapImage;
+      }
+      catch
+      {
+        return null;
+      }
+    }
+
+    private const string ThumbnailExtension = "_thumb.png";
+    private static int _imageThumbnailDefaultMaxWidthHeight = 200;
+
+    public void SetImageMaxThumbnailWidthHeight(int maxWidthHeight)
+    {
+      _imageThumbnailDefaultMaxWidthHeight = maxWidthHeight;
+    }
+
+    public object LoadImageThumbnail(string pathToImage)
+    {
+      var thumbnailPath = pathToImage + ThumbnailExtension;
+
+      if (this.FileExists(thumbnailPath))
+      {
+        var imageBitmapThumbnail = LoadImageAsBitmapImage(thumbnailPath);
+        return imageBitmapThumbnail;
+      }
+
+      var fullSizeBitmapImage = LoadImageAsBitmapImage(pathToImage);
+      var fullSizeImage = new WriteableBitmap(fullSizeBitmapImage).ToImage();
+
+      var thumbnailImage = CreateThumbnailImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight);
+
+      var fileStream1 = OpenFile(pathToImage + ThumbnailExtension, StorageFileMode.Create, StorageFileAccess.Write);
+      thumbnailImage.WriteToStream(fileStream1, pathToImage + ThumbnailExtension);
+      fileStream1.Dispose();
+
+      return thumbnailImage.ToBitmap();
+    }
+
+    public static ExtendedImage CreateThumbnailImage(ExtendedImage image, int maxWidthHeight)
+    {
+      int width;
+      int height;
+
+      if(image.PixelWidth > image.PixelHeight)
+      {
+        width = maxWidthHeight;
+        height = (int)((image.PixelHeight / (double)image.PixelWidth) * maxWidthHeight);
+      }
+      else
+      {
+        height = maxWidthHeight;
+        width = (int)((image.PixelWidth / (double)image.PixelHeight) * maxWidthHeight);
+      }
+
+      var resizedImage = ExtendedImage.Resize(image, width, height, new NearestNeighborResizer());
+      return resizedImage;
+    }
+
+    public void SaveImage(string path, object image)
     {
       throw new NotImplementedException();
     }
 
-    public void SaveImage(string path, BitmapImage image)
+    public void SaveBitmapImage(string path, BitmapImage image)
     {
       var fileStream = this.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write);
       var wb = new WriteableBitmap(image);
@@ -307,7 +367,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
     public void Dispose()
     {
-      iso.Dispose();
+      _iso.Dispose();
     }
 
     public string BasePath { get { return ""; } }

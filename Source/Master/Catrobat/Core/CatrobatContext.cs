@@ -222,8 +222,7 @@ namespace Catrobat.Core
         {
           if (projectName != Instance.CurrentProject.ProjectName)
           {
-            byte[] projectScreenshot =
-                storage.LoadImage(ProjectsPath + "/" + projectName + "/" + Project.ScreenshotPath);
+            object projectScreenshot =  storage.LoadImage(ProjectsPath + "/" + projectName + "/" + Project.ScreenshotPath);
             var projectHeader = new ProjectHeader
                 {
                   ProjectName = projectName,

@@ -130,9 +130,10 @@
     <Compile Include="Misc\CostumeBuilder.cs" />
     <Compile Include="Misc\CulturePhone.cs" />
     <Compile Include="Misc\MemoryMonitor.cs" />
+    <Compile Include="Misc\ResolutionHelper.cs" />
     <Compile Include="Misc\ServerCommunicationPhone.cs" />
     <Compile Include="Misc\SoundPlayer.cs" />
-    <Compile Include="Misc\Storage\ImageToBytesHelper.cs" />
+    <Compile Include="Misc\Storage\ImageFormatHelper.cs" />
     <Compile Include="Misc\Storage\ResourcesPhone7.cs" />
     <Compile Include="Misc\Storage\StorageFactoryPhone7.cs" />
     <Compile Include="Misc\Storage\StoragePhone7.cs" />
