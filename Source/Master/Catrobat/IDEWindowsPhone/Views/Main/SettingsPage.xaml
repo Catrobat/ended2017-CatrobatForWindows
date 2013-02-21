@@ -1,0 +1,37 @@
+﻿<phone:PhoneApplicationPage 
+  x:Class="Catrobat.IDEWindowsPhone.Views.Main.SettingsPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+  xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  FontFamily="{StaticResource PhoneFontFamilyNormal}"
+  FontSize="{StaticResource PhoneFontSizeNormal}"
+  Foreground="{StaticResource PhoneForegroundBrush}"
+  SupportedOrientations="Portrait" Orientation="Portrait"
+  mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+  shell:SystemTray.IsVisible="True">
+  <phone:PhoneApplicationPage.Resources>
+    <DataTemplate x:Key="ListBoxItemDesignStyle">
+      <Image Grid.Column="1" x:Name="imgDesign" Margin="10" Source="{Binding CroppedBackground}" />
+    </DataTemplate>
+  </phone:PhoneApplicationPage.Resources>
+
+  <Grid x:Name="LayoutRoot" Background="Transparent">
+    <StackPanel>
+      <StackPanel Name="stackPanelSettingsLanguage" Margin="10 0 10 10" Tap="stackPanelSettingsLanguage_Tap">
+        <TextBlock Grid.Row="0" Margin="0 0 10 10" Text="{Binding Path=Main.ListLanguage, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}" />
+        <TextBlock Grid.Row="1" Margin="0 -5 10 10" Text="{Binding CurrentCultureName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+      </StackPanel>
+      <StackPanel Name="stackPanelSettingsDesign" Margin="10 0 0 10" Tap="stackPanelSettingsDesign_Tap">
+        <TextBlock Grid.Row="0" Margin="0 0 10 10" Text="{Binding Path=Main.ListDesign, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}" />
+        <Image Grid.Row="1" Name="imgDesign" Margin="0 -20 10 15" Source="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.CroppedBackground}" />
+      </StackPanel>
+      <!--<StackPanel Name="stackPanelSettingsBricks" Margin="10 0 0 10" Tap="stackPanelSettingsBricks_Tap">
+            <TextBlock Grid.Row="0" Margin="0 0 10 10" Text="{Binding Path=Main.SettingsBricks, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}" />
+          </StackPanel>-->
+      <CheckBox Name="checkBoxShowMemory" Content="{Binding Path=Main.DEBUGShowMemory, Source={StaticResource LocalizedStrings}}" Checked="checkBoxShowMemory_Checked" Unchecked="checkBoxShowMemory_Unchecked" />
+    </StackPanel>
+  </Grid>
+</phone:PhoneApplicationPage>

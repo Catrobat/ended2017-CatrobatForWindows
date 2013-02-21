@@ -17,20 +17,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
   {
     private readonly MainViewModel _mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
 
-    private MemoryMonitor _memoryMonitor;
-
     public MainView()
     {
       InitializeComponent();
-
-      #region DEBUG
-
-      if (Debugger.IsAttached)
-        checkBoxShowMemory.Visibility = Visibility.Visible;
-      else
-        checkBoxShowMemory.Visibility = Visibility.Collapsed;
-
-      #endregion
 
       // Dirty but there is no way around this
       Messenger.Default.Register<DialogMessage>(
@@ -65,19 +54,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
       NavigationService.Navigate(new Uri("/Views/Main/AddNewProject.xaml", UriKind.Relative));
     }
 
-    private void stackPanelSettingsLanguage_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    private void buttonSettings_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/Views/Main/SettingsLanguageChooser.xaml", UriKind.Relative));
-    }
-
-    private void stackPanelSettingsDesign_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-    {
-      NavigationService.Navigate(new Uri("/Views/Main/SettingsThemeChooser.xaml", UriKind.Relative));
-    }
-
-    private void stackPanelSettingsBricks_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-    {
-      NavigationService.Navigate(new Uri("/Views/Main/SettingsBrickCategories.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Main/SettingsPage.xaml", UriKind.Relative));
     }
 
     private void OnlineProject_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -102,30 +81,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         _mainViewModel.LoadOnlineProjects(false);
       }
     }
-
-    #region DEBUG
-
-    private void checkBoxShowMemory_Checked(object sender, RoutedEventArgs e)
-    {
-      if (_memoryMonitor == null)
-      {
-        _memoryMonitor = new MemoryMonitor(true, true);
-      }
-      else
-      {
-        _memoryMonitor.ShowVisualization = true;
-      }
-    }
-
-    private void checkBoxShowMemory_Unchecked(object sender, RoutedEventArgs e)
-    {
-      if (_memoryMonitor != null)
-      {
-        _memoryMonitor.ShowVisualization = false;
-      }
-    }
-
-    #endregion
 
     private void buttonUploadCurrentProject_Click(object sender, RoutedEventArgs e)
     {

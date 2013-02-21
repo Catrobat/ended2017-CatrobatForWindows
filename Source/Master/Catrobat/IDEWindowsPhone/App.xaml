@@ -18,7 +18,8 @@
           <ResourceDictionary Source="Views/Editor/Scripts/ScriptBrickAddData.xaml"/>
           <ResourceDictionary Source="Controls/Buttons/ImageButtonTemplates.xaml"/>
           <ResourceDictionary Source="Controls/Buttons/ScreenshotButtonTemplates.xaml"/>
-        </ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Controls/Buttons/SettingsButtonTemplates.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
       </ResourceDictionary>
   </Application.Resources>
 
