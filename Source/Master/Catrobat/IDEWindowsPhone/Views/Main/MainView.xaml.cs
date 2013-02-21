@@ -70,7 +70,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     private void FilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
     {
       // Hack - needed because it won't update immediately without it!
-      (sender as TextBox).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+      var textBox = sender as TextBox;
+      if (textBox != null) textBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
     }
 
     private void panoramaMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
