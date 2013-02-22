@@ -70,7 +70,7 @@ namespace Catrobat.IDEWindowsPhone.Themes
 
     public ThemeChooser()
     {
-      var theme1 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_strings.png",
+      var theme1 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_strings",
                   "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/MainViewPanorama_strings_small.png")
         {
           AccentColor1 = new SolidColorBrush(Colors.Purple),
@@ -79,7 +79,7 @@ namespace Catrobat.IDEWindowsPhone.Themes
         };
 
 
-      var theme2 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_blue.png",
+      var theme2 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_blue",
                   "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/MainViewPanorama_cats_blue_small.png")
         {
           AccentColor1 = new SolidColorBrush(Colors.Purple),
@@ -87,7 +87,7 @@ namespace Catrobat.IDEWindowsPhone.Themes
           AccentColor3 = new SolidColorBrush(Colors.Orange)
         };
 
-      var theme3 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_pink.png",
+      var theme3 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_pink",
                              "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/MainViewPanorama_cats_pink_small.png")
         {
           AccentColor1 = new SolidColorBrush(Colors.Purple),

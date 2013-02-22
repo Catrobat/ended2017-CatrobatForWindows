@@ -99,6 +99,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     {
       // Commands
       LoginCommand = new RelayCommand(Login);
+      ForgottenCommand = new RelayCommand(Forgotten);
 
       if (IsInDesignMode)
         catrobatContext = new CatrobatContextDesign();

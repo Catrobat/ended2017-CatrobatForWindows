@@ -105,12 +105,16 @@
     </Compile>
     <Compile Include="Controls\Bricks\MasterBrick.cs" />
     <Compile Include="Controls\Bricks\NormalBrick.cs" />
+    <Compile Include="Controls\Buttons\SettingsButton.cs" />
     <Compile Include="Controls\Buttons\ImageButton.cs" />
     <Compile Include="Controls\Buttons\PlayButton.xaml.cs">
       <DependentUpon>PlayButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
     <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
+    <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
+      <DependentUpon>ListPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ReorderableListbox\NegativeValueConverter.cs" />
     <Compile Include="Controls\ReorderableListbox\PullDownToRefreshPanel.cs" />
     <Compile Include="Controls\ReorderableListbox\ReorderListBox.cs" />
@@ -197,6 +201,9 @@
     <Compile Include="Views\Main\AddNewProject.xaml.cs">
       <DependentUpon>AddNewProject.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Main\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -224,6 +231,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\Buttons\SettingsButtonTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Buttons\ImageButtonTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -233,6 +244,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Buttons\ScreenshotButtonTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ListPicker\ListPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -324,6 +339,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Main\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -354,6 +373,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_1280.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_800.png" />
     <Content Include="Content\Resources\SampleProjects\Aquarium_v2.catrobat" />
     <Content Include="Content\Resources\SampleProjects\Broadcast_test.catroid" />
     <Content Include="Content\Resources\SampleProjects\default.catroid" />
@@ -446,9 +467,8 @@
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\CroppedImages\MainViewPanorama_cats_blue_small.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\CroppedImages\MainViewPanorama_cats_pink_small.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\CroppedImages\MainViewPanorama_strings_small.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_blue.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_pink.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_blue_800.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_pink_800.png" />
     <Content Include="Content\Images\Application\Search.png" />
     <Content Include="Content\Images\ImageButtons\add_dark.png" />
     <Content Include="Content\Images\ImageButtons\add_light.png" />

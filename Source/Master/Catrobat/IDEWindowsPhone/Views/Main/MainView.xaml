@@ -16,8 +16,8 @@
                             SupportedOrientations="Portrait"
                             Orientation="Portrait"
                             mc:Ignorable="d"
-                            d:DesignWidth="480"
-                            d:DesignHeight="800"
+                            d:DesignWidth="720"
+                            d:DesignHeight="1280"
                             shell:SystemTray.IsVisible="False"
                             DataContext="{Binding Main, Source={StaticResource Locator}}">
 
@@ -204,7 +204,7 @@
       </controls:PanoramaItem>
 
       <!--Settings panorama item-->
-      <controls:PanoramaItem Name="panoramaItemSettings" Header="{Binding Path=Main.HeaderSettings, Source={StaticResource LocalizedStrings}}">
+      <!--<controls:PanoramaItem Name="panoramaItemSettings" Header="{Binding Path=Main.HeaderSettings, Source={StaticResource LocalizedStrings}}">
         <StackPanel>
           <StackPanel Name="stackPanelSettingsLanguage" Margin="10 0 10 10" Tap="stackPanelSettingsLanguage_Tap">
             <TextBlock Grid.Row="0" Margin="0 0 10 10" Text="{Binding Path=Main.ListLanguage, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}" />
@@ -214,19 +214,20 @@
             <TextBlock Grid.Row="0" Margin="0 0 10 10" Text="{Binding Path=Main.ListDesign, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}" />
             <Image Grid.Row="1" Name="imgDesign" Margin="0 -20 10 15" Source="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.CroppedBackground}" />
           </StackPanel>
-          <!--<StackPanel Name="stackPanelSettingsBricks" Margin="10 0 0 10" Tap="stackPanelSettingsBricks_Tap">
-            <TextBlock Grid.Row="0" Margin="0 0 10 10" Text="{Binding Path=Main.SettingsBricks, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}" />
-          </StackPanel>-->
           <CheckBox Name="checkBoxShowMemory" Content="{Binding Path=Main.DEBUGShowMemory, Source={StaticResource LocalizedStrings}}" Checked="checkBoxShowMemory_Checked" Unchecked="checkBoxShowMemory_Unchecked" />
         </StackPanel>
-      </controls:PanoramaItem>
+      </controls:PanoramaItem>-->
       
       <!--Help panorama item-->
       <controls:PanoramaItem Name="panoramaItemHelp" Header="{Binding Path=Main.HeaderAbout, Source={StaticResource LocalizedStrings}}">
-        <Grid>
+        <StackPanel>
           <TextBlock FontSize="26" TextWrapping="Wrap" Text="{Binding Path=Main.AboutText, Source={StaticResource LocalizedStrings}}" Margin="10 0 0 15" />
-          <TextBlock Text="{Binding ApplicationVersion}" Height="50" Width="200" Style="{StaticResource PhoneTextLargeStyle}" Margin="211,438,9,160" />
-        </Grid>
+          <StackPanel Orientation="Horizontal">
+            <imageButton:SettingsButton Grid.Column="0" VerticalAlignment="Center" x:Name="buttonSettings" 
+                Template="{StaticResource SettingsButtonControlTemplate}" Margin="0,0,0,0" Click="buttonSettings_Click" Width="130" />
+            <TextBlock Grid.Column="1" Text="{Binding ApplicationVersion}" Style="{StaticResource PhoneTextLargeStyle}" Margin="30" />
+          </StackPanel>
+        </StackPanel>
       </controls:PanoramaItem>
     </controls:Panorama>
   </Grid>

@@ -14,6 +14,10 @@ namespace Catrobat.Core.Objects
 
         private SoundList sounds;
 
+        public Sprite()
+        {
+        }
+
         public Sprite(Project project)
         {
             Project = project;
