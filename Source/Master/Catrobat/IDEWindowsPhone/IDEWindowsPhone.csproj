@@ -373,6 +373,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_1280.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_800.png" />
     <Content Include="Content\Resources\SampleProjects\Aquarium_v2.catrobat" />
     <Content Include="Content\Resources\SampleProjects\Broadcast_test.catroid" />
     <Content Include="Content\Resources\SampleProjects\default.catroid" />
@@ -465,9 +467,8 @@
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\CroppedImages\MainViewPanorama_cats_blue_small.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\CroppedImages\MainViewPanorama_cats_pink_small.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\CroppedImages\MainViewPanorama_strings_small.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_blue.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_pink.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_blue_800.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_pink_800.png" />
     <Content Include="Content\Images\Application\Search.png" />
     <Content Include="Content\Images\ImageButtons\add_dark.png" />
     <Content Include="Content\Images\ImageButtons\add_light.png" />

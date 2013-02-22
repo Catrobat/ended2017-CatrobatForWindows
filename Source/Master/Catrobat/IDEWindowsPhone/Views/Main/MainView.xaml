@@ -16,8 +16,8 @@
                             SupportedOrientations="Portrait"
                             Orientation="Portrait"
                             mc:Ignorable="d"
-                            d:DesignWidth="480"
-                            d:DesignHeight="800"
+                            d:DesignWidth="720"
+                            d:DesignHeight="1280"
                             shell:SystemTray.IsVisible="False"
                             DataContext="{Binding Main, Source={StaticResource Locator}}">
 

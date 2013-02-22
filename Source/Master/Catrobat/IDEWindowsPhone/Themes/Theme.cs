@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Catrobat.IDEWindowsPhone.Misc;
 
 namespace Catrobat.IDEWindowsPhone.Themes
 {
@@ -16,7 +17,20 @@ namespace Catrobat.IDEWindowsPhone.Themes
       {
         if (_background == null)
         {
-          _background = new BitmapImage(new Uri(_backgroundPath, UriKind.Relative));
+          switch (ResolutionHelper.CurrentResolution)
+          {
+            case Resolutions.WVGA:
+              _background = new BitmapImage(new Uri(_backgroundPath + "_800.png", UriKind.Relative));
+              break;
+            case Resolutions.WXGA:
+              _background = new BitmapImage(new Uri(_backgroundPath + "_800.png", UriKind.Relative));
+              break;
+            case Resolutions.HD720p:
+              _background = new BitmapImage(new Uri(_backgroundPath + "_800.png", UriKind.Relative));
+              break;
+            default:
+              throw new ArgumentOutOfRangeException();
+          }
         }
         return _background;
       }
