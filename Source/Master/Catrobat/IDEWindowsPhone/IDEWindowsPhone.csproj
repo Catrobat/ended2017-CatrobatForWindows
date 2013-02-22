@@ -112,6 +112,9 @@
     </Compile>
     <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
     <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
+    <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
+      <DependentUpon>ListPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ReorderableListbox\NegativeValueConverter.cs" />
     <Compile Include="Controls\ReorderableListbox\PullDownToRefreshPanel.cs" />
     <Compile Include="Controls\ReorderableListbox\ReorderListBox.cs" />
@@ -241,6 +244,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Buttons\ScreenshotButtonTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ListPicker\ListPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
