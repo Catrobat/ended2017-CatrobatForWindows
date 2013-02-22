@@ -12,6 +12,10 @@ namespace Catrobat.Core.Objects.Costumes
     private Sprite _sprite;
     private object _thumbnail;
 
+    public Costume()
+    {
+    }
+
     public Costume(string name, Sprite parent)
     {
       this._name = name;

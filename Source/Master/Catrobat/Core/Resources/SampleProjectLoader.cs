@@ -1,4 +1,5 @@
-﻿using Catrobat.Core.Objects;
+﻿using System;
+using Catrobat.Core.Objects;
 using Catrobat.Core.Storage;
 using Catrobat.Core.ZIP;
 using System.Collections.Generic;
@@ -35,25 +36,41 @@ namespace Catrobat.Core.Resources
         string path = "Resources/SampleProjects/";
         path += projectFileName;
 
-        var resourceStream = ResourceLoader.GetResourceStream(ResourceScope.SampleProjects, path);
-
-        if (resourceStream == null)
-          Debugger.Break(); // sample project does not exist: please remove from _sampleProjectNames or add to Core/Resources/SampleProjects
-
-        var projectFolderPath = CatrobatContext.ProjectsPath + "/" + projectName;
-
-        using (IStorage storage = StorageSystem.GetStorage())
+        System.IO.Stream resourceStream = null;
+        try
         {
-          if (!storage.DirectoryExists(projectFolderPath))
-            CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContext.ProjectsPath + "/" + projectName);
-
-          string xml = storage.ReadTextFile(CatrobatContext.ProjectsPath + "/" + projectName + "/" + Project.ProjectCodePath);
-
-          var project = new Project(xml);
-          project.SetProjectName(projectName);
-          
-          project.Save();
+          resourceStream = ResourceLoader.GetResourceStream(ResourceScope.SampleProjects, path);
         }
+        catch (Exception)
+        {
+          Debugger.Break();// sample project does not exist: please remove from _sampleProjectNames or add to Core/Resources/SampleProjects
+          continue;
+        }
+        try
+        {
+          var projectFolderPath = CatrobatContext.ProjectsPath + "/" + projectName;
+
+          using (IStorage storage = StorageSystem.GetStorage())
+          {
+            if (!storage.DirectoryExists(projectFolderPath))
+              CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContext.ProjectsPath + "/" + projectName);
+          }
+
+          using (IStorage storage = StorageSystem.GetStorage())
+          {
+            string xml = storage.ReadTextFile(CatrobatContext.ProjectsPath + "/" + projectName + "/" + Project.ProjectCodePath);
+
+            var project = new Project(xml);
+            project.SetProjectName(projectName);
+
+            project.Save();
+          }
+        }
+        catch (Exception)
+        {
+          
+        }
+
       }
     }
   }
