@@ -11,10 +11,11 @@
     d:DesignHeight="480" d:DesignWidth="480">
     
     <Grid x:Name="LayoutRoot">
-    <!--<toolkit:ListPicker Name="Picker" Height="Auto" Width="Auto"
-     SelectionChanged="Picker_SelectionChanged"></toolkit:ListPicker>-->
-    <ListBox Name="Picker" Height="Auto" Width="Auto"
-     SelectionChanged="Picker_SelectionChanged">
-    </ListBox>
+    <toolkit:ListPicker Name="Picker" Height="Auto" Width="Auto"
+     SelectionChanged="Picker_SelectionChanged" />
+    <!--<ListBox Name="Picker" Height="Auto" Width="Auto"
+     SelectionChanged="Picker_SelectionChanged" />-->
+    <!--<ComboBox Name="Picker" Height="Auto" Width="Auto"
+     SelectionChanged="Picker_SelectionChanged" />-->
   </Grid>
 </UserControl>

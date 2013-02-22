@@ -16,18 +16,48 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
     #region Properties
 
     public static readonly DependencyProperty ItemsSourceProperty =
-      DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ListPicker), new PropertyMetadata(default(IEnumerable), ItemsSourcePropertyChangedCallback));
+      DependencyProperty.Register("ItemsSource", typeof(IList), typeof(ListPicker), new PropertyMetadata(default(IList), ItemsSourcePropertyChangedCallback));
 
     private static void ItemsSourcePropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
     {
       var instance = dependencyObject as ListPicker;
       if (instance != null)
-        instance.Picker.ItemsSource = dependencyPropertyChangedEventArgs.NewValue as IEnumerable;
+      {
+        instance.ItemsCollection = new NullItemCollection
+          {SourceCollection = dependencyPropertyChangedEventArgs.NewValue as IList};
+
+        instance.Picker.ItemsSource = instance.ItemsCollection;
+
+        if (instance.NullItem != null)
+        {
+          instance.ItemsCollection.NullObject = instance.NullItem;
+        }
+
+        if (instance.SelectedItem != null && instance.Picker.SelectedItem == null)
+        {
+          var newObject = instance.SelectedItem;
+
+          var index = 0;
+          if (newObject != null)
+            index = instance.ItemsCollection.IndexOf(newObject);
+
+          if (instance.Picker.ItemsSource != null)
+            instance.Picker.SelectedIndex = index;
+
+          //var selectedItem = instance.ItemsCollection.NullObject;
+
+          //if (newObject != null)
+          //  selectedItem = newObject;
+
+          //if (instance.Picker.ItemsSource != null)
+          //  instance.Picker.SelectedItem = selectedItem;
+        }
+      }
     }
 
-    public IEnumerable ItemsSource
+    public IList ItemsSource
     {
-      get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+      get { return (IList)GetValue(ItemsSourceProperty); }
       set 
       { 
         SetValue(ItemsSourceProperty, value);
@@ -41,7 +71,24 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
     {
       var instance = dependencyObject as ListPicker;
       if (instance != null)
-        instance.Picker.SelectedItem = dependencyPropertyChangedEventArgs.NewValue;
+      {
+        object newObject = dependencyPropertyChangedEventArgs.NewValue ?? instance.NullItem;
+
+        var index = 0;
+        if (newObject != null)
+          index = instance.ItemsCollection.IndexOf(newObject);
+
+        if (instance.Picker.ItemsSource != null)
+          instance.Picker.SelectedIndex = index;
+
+        //var selectedItem = instance.ItemsCollection.NullObject;
+
+        //if (newObject != null)
+        //  selectedItem = newObject;
+
+        //if (instance.Picker.ItemsSource != null)
+        //  instance.Picker.SelectedItem = selectedItem;
+      }
     }
 
     public object SelectedItem
@@ -91,13 +138,29 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
       }
     }
 
+    public static readonly DependencyProperty NullItemProperty =
+      DependencyProperty.Register("NullItem", typeof (object), typeof (ListPicker), new PropertyMetadata(default(object), NullItemPropertyChanged));
+
+    private static void NullItemPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+    {
+      var instance = dependencyObject as ListPicker;
+      if (instance != null && instance.ItemsCollection != null) instance.ItemsCollection.NullObject = dependencyPropertyChangedEventArgs.NewValue;
+    }
+
+    public object NullItem
+    {
+      get { return (object) GetValue(NullItemProperty); }
+      set { SetValue(NullItemProperty, value); }
+    }
+
     #endregion
+
+    public NullItemCollection ItemsCollection;
+    //private object _selectedItemTemp = null;
 
     public ListPicker()
     {
       InitializeComponent();
-
-      //IEnumerable i = Picker.SelectedItem;
     }
 
 
@@ -110,7 +173,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
         return;
       }
 
-      SelectedItem = e.AddedItems;
+      SelectedItem = e.AddedItems[0];
     }
   }
 }
