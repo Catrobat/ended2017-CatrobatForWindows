@@ -112,6 +112,7 @@
     </Compile>
     <Compile Include="SampleData\SampleLoader.cs" />
     <Compile Include="Tests\Data\ScriptBrickCollectionTests.cs" />
+    <Compile Include="Tests\IDE\NullItemCollectionTests.cs" />
     <Compile Include="Tests\Storage\ResourceLoaderPhoneTests.cs" />
     <Compile Include="Tests\Storage\StoragePhoneTests.cs" />
     <Compile Include="Tests\IDE\ConverterTest.cs" />
