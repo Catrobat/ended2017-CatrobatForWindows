@@ -7,6 +7,7 @@
 //
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -215,6 +216,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         this.dragInterceptor.ManipulationDelta += this.dragInterceptor_ManipulationDelta;
         this.dragInterceptor.ManipulationCompleted += this.dragInterceptor_ManipulationCompleted;
       }
+
+      AddMarginToLastItem();
     }
 
     protected override DependencyObject GetContainerForItemOverride()
@@ -225,6 +228,11 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
     protected override bool IsItemItsOwnContainerOverride(object item)
     {
       return item is ReorderListBoxItem;
+    }
+
+    protected override void OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+      base.OnItemsChanged(e);
     }
 
     /// <summary>
@@ -283,6 +291,9 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
       {
         VisualStateManager.GoToState(itemContainer, ReorderListBoxItem.NotDraggingState, false);
       }
+
+      if (ItemsSource is ScriptBrickCollection)
+        AddMarginToLastItem();
     }
 
     /// <summary>
@@ -537,6 +548,28 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
       this.dragScrollDelta = 0;
       this.dropTargetIndex = -1;
       this.ClearDropTarget();
+    }
+
+    private void AddMarginToLastItem()
+    {
+      var list = ItemsSource as IList;
+      if (list != null)
+      {
+        foreach (var item in list)
+        {
+          var container = this.ItemContainerGenerator.ContainerFromItem(item);
+
+          var frameworkElement = container as FrameworkElement;
+          if (frameworkElement != null) frameworkElement.Margin = new Thickness(0, 0, 0, 0);
+        }
+
+        {
+          var container = this.ItemContainerGenerator.ContainerFromItem(list[list.Count - 1]);
+
+          var frameworkElement = container as FrameworkElement;
+          if (frameworkElement != null) frameworkElement.Margin = new Thickness(0, 0, 0, 50);
+        }
+      }
     }
 
     /// <summary>
