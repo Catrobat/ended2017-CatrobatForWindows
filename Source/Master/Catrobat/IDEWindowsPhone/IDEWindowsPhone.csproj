@@ -112,6 +112,9 @@
     </Compile>
     <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
     <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
+    <Compile Include="Controls\ListPicker\ListPickerPage.xaml.cs">
+      <DependentUpon>ListPickerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ListPicker\NullItemCollection.cs" />
     <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
       <DependentUpon>ListPicker.xaml</DependentUpon>
@@ -251,6 +254,10 @@
     <Page Include="Controls\ListPicker\ListPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ListPicker\ListPickerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SplashScreen\AnimatedSplashScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -517,7 +524,6 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="lib\Microsoft.Phone.Controls.Toolkit.dll" />
     <Content Include="Views\Editor\Sounds\Recordericons\rec.png" />
     <Content Include="Views\Editor\Sounds\Recordericons\stop.png" />
   </ItemGroup>
