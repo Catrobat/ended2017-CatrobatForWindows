@@ -23,19 +23,13 @@
     <converters:BytesImageConverter x:Key="BytesImageConverter" />
   </phone:PhoneApplicationPage.Resources>
 
-      <Grid x:Name="LayoutRoot"
-          Background="Transparent">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
-
+  <Grid x:Name="LayoutRoot">
     <controls:Pivot Name="pivotMain" Title="{ Binding CurrentProject.ProjectName }" SelectionChanged="pivotMain_SelectionChanged">
       <controls:PivotItem Name="pivotSprites" Header="{Binding Path=Editor.PivotObjects, Source={StaticResource LocalizedStrings}}">
         <reorderableListbox:ReorderListBox
           x:Name="reorderListBoxSprites"
           Margin="0 -25 0 0"
-          Height="560"
+          VerticalAlignment="Stretch"
           IsReorderEnabled="True"
           ItemsSource="{Binding Sprites}"
           d:DataContext="{Binding}"
@@ -84,10 +78,9 @@
       <!--Pivot item scripts-->
       <controls:PivotItem Name="pivotScripts" Header="{Binding Path=Editor.PivotActions, Source={StaticResource LocalizedStrings}}">
         <reorderableListbox:ReorderListBox
-          VerticalAlignment="Top"
           x:Name="reorderListBoxScriptBricks"
           Margin="0 -25 0 0"
-          Height="560"
+          VerticalAlignment="Stretch"
           IsReorderEnabled="True"
           ItemsSource="{Binding ScriptBricks}"
           ItemTemplate="{StaticResource ScriptsBrickTemplate}"
@@ -105,7 +98,7 @@
         <reorderableListbox:ReorderListBox
           x:Name="reorderListBoxCostumes"
           Margin="0 -25 0 0"
-          Height="560"
+          VerticalAlignment="Stretch"
           IsReorderEnabled="True"
           ItemsSource="{Binding Costumes}"
           SelectionChanged="reorderListBoxCostumes_SelectionChanged"
@@ -162,7 +155,7 @@
         <reorderableListbox:ReorderListBox
           x:Name="reorderListBoxSounds"
           Margin="0 -25 0 0"
-          Height="560"
+          VerticalAlignment="Stretch"
           IsReorderEnabled="True"
           ItemsSource="{Binding Sounds}"
           SelectionChanged="reorderListBoxSounds_SelectionChanged"

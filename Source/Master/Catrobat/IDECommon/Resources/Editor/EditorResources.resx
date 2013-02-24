@@ -222,6 +222,18 @@
   <data name="MessageBoxWrongImageFormatText" xml:space="preserve">
     <value>Unfortunately the image has a not supported format.</value>
   </data>
+  <data name="NoCostumeSelected" xml:space="preserve">
+    <value>No costume selected</value>
+  </data>
+  <data name="NoMessageSelected" xml:space="preserve">
+    <value>No message selected</value>
+  </data>
+  <data name="NoSoundSelected" xml:space="preserve">
+    <value>No sound selected</value>
+  </data>
+  <data name="NoSpriteSelected" xml:space="preserve">
+    <value>No object selected</value>
+  </data>
   <data name="NothingItem" xml:space="preserve">
     <value>Nothing...</value>
   </data>

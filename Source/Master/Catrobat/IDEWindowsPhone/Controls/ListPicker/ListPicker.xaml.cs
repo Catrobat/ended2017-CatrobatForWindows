@@ -23,43 +23,18 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
       var instance = dependencyObject as ListPicker;
       if (instance != null)
       {
-        instance.ItemsCollection = new NullItemCollection
-          {SourceCollection = dependencyPropertyChangedEventArgs.NewValue as IList};
+        instance.NullItemCollection = new NullItemCollection { SourceCollection = dependencyPropertyChangedEventArgs.NewValue as IList };
+        instance.NullItem = instance.NullItemCollection.NullObject;
 
-        instance.Picker.ItemsSource = instance.ItemsCollection;
-
-        if (instance.NullItem != null)
-        {
-          instance.ItemsCollection.NullObject = instance.NullItem;
-        }
-
-        if (instance.SelectedItem != null && instance.Picker.SelectedItem == null)
-        {
-          var newObject = instance.SelectedItem;
-
-          var index = 0;
-          if (newObject != null)
-            index = instance.ItemsCollection.IndexOf(newObject);
-
-          if (instance.Picker.ItemsSource != null)
-            instance.Picker.SelectedIndex = index;
-
-          //var selectedItem = instance.ItemsCollection.NullObject;
-
-          //if (newObject != null)
-          //  selectedItem = newObject;
-
-          //if (instance.Picker.ItemsSource != null)
-          //  instance.Picker.SelectedItem = selectedItem;
-        }
+        instance.ContentControlSelectedItem.Content = instance.SelectedItem ?? instance.NullItem;
       }
     }
 
     public IList ItemsSource
     {
       get { return (IList)GetValue(ItemsSourceProperty); }
-      set 
-      { 
+      set
+      {
         SetValue(ItemsSourceProperty, value);
       }
     }
@@ -72,30 +47,16 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
       var instance = dependencyObject as ListPicker;
       if (instance != null)
       {
-        object newObject = dependencyPropertyChangedEventArgs.NewValue ?? instance.NullItem;
-
-        var index = 0;
-        if (newObject != null)
-          index = instance.ItemsCollection.IndexOf(newObject);
-
-        if (instance.Picker.ItemsSource != null)
-          instance.Picker.SelectedIndex = index;
-
-        //var selectedItem = instance.ItemsCollection.NullObject;
-
-        //if (newObject != null)
-        //  selectedItem = newObject;
-
-        //if (instance.Picker.ItemsSource != null)
-        //  instance.Picker.SelectedItem = selectedItem;
+        var newObject = dependencyPropertyChangedEventArgs.NewValue ?? instance.NullItem;
+        instance.ContentControlSelectedItem.Content = newObject;
       }
     }
 
     public object SelectedItem
     {
-      get { return (object) GetValue(SelectedItemProperty); }
-      set 
-      { 
+      get { return (object)GetValue(SelectedItemProperty); }
+      set
+      {
         SetValue(SelectedItemProperty, value);
       }
     }
@@ -107,12 +68,12 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
     {
       var instance = dependencyObject as ListPicker;
       if (instance != null)
-        instance.Picker.IsEnabled = dependencyPropertyChangedEventArgs.NewValue is bool && (bool) dependencyPropertyChangedEventArgs.NewValue;
+        instance.ContentControlSelectedItem.IsEnabled = dependencyPropertyChangedEventArgs.NewValue is bool && (bool)dependencyPropertyChangedEventArgs.NewValue;
     }
 
     public new bool IsEnabled
     {
-      get { return (bool) GetValue(IsEnabledProperty); }
+      get { return (bool)GetValue(IsEnabledProperty); }
       set
       {
         SetValue(IsEnabledProperty, value);
@@ -125,37 +86,66 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
     private static void ItemTemplatePropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
     {
       var instance = dependencyObject as ListPicker;
-      if (instance != null) 
-        instance.Picker.ItemTemplate = dependencyPropertyChangedEventArgs.NewValue as DataTemplate;
+      if (instance != null)
+        instance.ContentControlSelectedItem.ContentTemplate = dependencyPropertyChangedEventArgs.NewValue as DataTemplate;
     }
 
     public DataTemplate ItemTemplate
     {
       get { return (DataTemplate)GetValue(ItemTemplateProperty); }
-      set 
-      { 
+      set
+      {
         SetValue(ItemTemplateProperty, value);
       }
     }
 
+
+
+
+    public static readonly DependencyProperty PageItemTemplateProperty =
+    DependencyProperty.Register("PageItemTemplate", typeof(DataTemplate), typeof(ListPicker), new PropertyMetadata(default(DataTemplate), PageItemTemplatePropertyChangedCallback));
+
+    private static void PageItemTemplatePropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+    {
+      var instance = dependencyObject as ListPicker;
+
+    }
+
+    public DataTemplate PageItemTemplate
+    {
+      get { return (DataTemplate)GetValue(PageItemTemplateProperty); }
+      set
+      {
+        SetValue(PageItemTemplateProperty, value);
+      }
+    }
+
+
+
+
     public static readonly DependencyProperty NullItemProperty =
-      DependencyProperty.Register("NullItem", typeof (object), typeof (ListPicker), new PropertyMetadata(default(object), NullItemPropertyChanged));
+      DependencyProperty.Register("NullItem", typeof(object), typeof(ListPicker), new PropertyMetadata(default(object), NullItemPropertyChanged));
 
     private static void NullItemPropertyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
     {
       var instance = dependencyObject as ListPicker;
-      if (instance != null && instance.ItemsCollection != null) instance.ItemsCollection.NullObject = dependencyPropertyChangedEventArgs.NewValue;
+      if (instance != null && instance.NullItemCollection != null) instance.NullItemCollection.NullObject = dependencyPropertyChangedEventArgs.NewValue;
+    }
+
+    public object GetItemWithNullItem()
+    {
+      return ContentControlSelectedItem.Content;
     }
 
     public object NullItem
     {
-      get { return (object) GetValue(NullItemProperty); }
+      get { return (object)GetValue(NullItemProperty); }
       set { SetValue(NullItemProperty, value); }
     }
 
     #endregion
 
-    public NullItemCollection ItemsCollection;
+    public NullItemCollection NullItemCollection { get; set; }
     //private object _selectedItemTemp = null;
 
     public ListPicker()
@@ -174,6 +164,15 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
       }
 
       SelectedItem = e.AddedItems[0];
+    }
+
+    private void ContentControlSelectedItem_OnClick(object sender, RoutedEventArgs e)
+    {
+      ListPickerPage.ListPicker = this;
+      var uri = new Uri("/Controls/ListPicker/ListPickerPage.xaml", UriKind.Relative);
+      var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
+      if (phoneApplicationFrame != null)
+        phoneApplicationFrame.Navigate(uri);
     }
   }
 }

@@ -8,14 +8,13 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" d:DesignWidth="480">
-    
-    <Grid x:Name="LayoutRoot">
-    <toolkit:ListPicker Name="Picker" Height="Auto" Width="Auto"
-     SelectionChanged="Picker_SelectionChanged" />
-    <!--<ListBox Name="Picker" Height="Auto" Width="Auto"
-     SelectionChanged="Picker_SelectionChanged" />-->
-    <!--<ComboBox Name="Picker" Height="Auto" Width="Auto"
-     SelectionChanged="Picker_SelectionChanged" />-->
+    d:DesignHeight="80" d:DesignWidth="480">
+
+  <Grid x:Name="LayoutRoot">
+      <Grid Name="GridSelectedItem">
+        <Button x:Name="ContentControlSelectedItem" Click="ContentControlSelectedItem_OnClick" HorizontalContentAlignment="Left" Background="Transparent">
+          <!--Selected item will be placed here-->
+        </Button>
+      </Grid>
   </Grid>
 </UserControl>
