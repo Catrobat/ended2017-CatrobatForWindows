@@ -24,17 +24,9 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
       if (instance != null)
       {
         instance.NullItemCollection = new NullItemCollection { SourceCollection = dependencyPropertyChangedEventArgs.NewValue as IList };
+        instance.NullItem = instance.NullItemCollection.NullObject;
 
-        if (instance.NullItem != null)
-        {
-          instance.NullItemCollection.NullObject = instance.NullItem;
-        }
-
-        if (instance.SelectedItem != null)
-        {
-          var newObject = instance.SelectedItem;
-          instance.ContentControlSelectedItem.Content = newObject;
-        }
+        instance.ContentControlSelectedItem.Content = instance.SelectedItem ?? instance.NullItem;
       }
     }
 
@@ -138,6 +130,11 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
     {
       var instance = dependencyObject as ListPicker;
       if (instance != null && instance.NullItemCollection != null) instance.NullItemCollection.NullObject = dependencyPropertyChangedEventArgs.NewValue;
+    }
+
+    public object GetItemWithNullItem()
+    {
+      return ContentControlSelectedItem.Content;
     }
 
     public object NullItem

@@ -377,6 +377,42 @@ namespace Catrobat.IDECommon.Resources.Editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No costume selected.
+        /// </summary>
+        public static string NoCostumeSelected {
+            get {
+                return ResourceManager.GetString("NoCostumeSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No message selected.
+        /// </summary>
+        public static string NoMessageSelected {
+            get {
+                return ResourceManager.GetString("NoMessageSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No sound selected.
+        /// </summary>
+        public static string NoSoundSelected {
+            get {
+                return ResourceManager.GetString("NoSoundSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No object selected.
+        /// </summary>
+        public static string NoSpriteSelected {
+            get {
+                return ResourceManager.GetString("NoSpriteSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nothing....
         /// </summary>
         public static string NothingItem {

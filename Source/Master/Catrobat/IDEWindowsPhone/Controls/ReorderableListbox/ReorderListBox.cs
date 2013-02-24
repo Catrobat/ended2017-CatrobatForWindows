@@ -563,11 +563,13 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
           if (frameworkElement != null) frameworkElement.Margin = new Thickness(0, 0, 0, 0);
         }
 
+        if (list.Count > 0)
         {
           var container = this.ItemContainerGenerator.ContainerFromItem(list[list.Count - 1]);
 
           var frameworkElement = container as FrameworkElement;
-          if (frameworkElement != null) frameworkElement.Margin = new Thickness(0, 0, 0, 50);
+          if (frameworkElement != null)
+            frameworkElement.Margin = new Thickness(0, 0, 0, 50);
         }
       }
     }

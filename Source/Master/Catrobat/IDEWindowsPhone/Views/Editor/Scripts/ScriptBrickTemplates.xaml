@@ -27,19 +27,7 @@
   <converters:FloatStringConverter  x:Key="FloatStringConverter" />
   <converters:IntStringConverter x:Key="IntStringConverter" />
   <converters:SecondStringMillisecondConverter x:Key="SecondStringMillisecondConverter" />
-
-  <Costumes:Costume x:Key="NullCostume">
-    <Costumes:Costume.Name>none selected</Costumes:Costume.Name>
-  </Costumes:Costume>
-  <Sounds:Sound x:Key="NullSound">
-    <Sounds:Sound.Name>none selected</Sounds:Sound.Name>
-  </Sounds:Sound>
-  <Objects:Sprite x:Key="NullSprite">
-    <Objects:Sprite.Name>none selected</Objects:Sprite.Name>
-  </Objects:Sprite>
-  <System:String x:Key="NullString">
-    none selected
-  </System:String>
+  
 
   <Style x:Key="LocalScrollViewerStyle" TargetType="ScrollViewer">
     <Setter Property="Template">
@@ -184,7 +172,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" Margin="10" Text="{Binding Path=Bricks.WhenIReceive, Source={StaticResource LocalizedStrings}}" />
-                <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" NullItem="{StaticResource NullString}" ItemTemplate="{StaticResource ListBoxBroadcastItem}" PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" ItemsSource="{Binding Editor.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding ReceivedMessage, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
+                <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" ItemTemplate="{StaticResource ListBoxBroadcastItem}" PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" ItemsSource="{Binding Editor.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding ReceivedMessage, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
                 <Button Grid.Row="1" Grid.Column="1" Width="150" Content="{Binding Path=Bricks.ButtonNew, Source={StaticResource LocalizedStrings}}" Command="{Binding Editor.StartAddBroadcastMessageCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" IsEnabled="{Binding IsRealObject}" />
               </Grid>
             </rlb:MasterBrick>
@@ -426,7 +414,7 @@
             <rlb:NormalBrick Background="{StaticResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
               <StackPanel>
                 <TextBlock VerticalAlignment="Center"  FontSize="24" Margin="10" Text="{Binding Path=Bricks.PointTo, Source={StaticResource LocalizedStrings}}" />
-                <controls:ListPicker ItemTemplate="{StaticResource ListBoxSpriteItem}" PageItemTemplate="{StaticResource PageListBoxSpriteItem}" NullItem="{StaticResource NullSprite}" ItemsSource="{Binding Editor.Sprites, Source={StaticResource Locator}, Mode=OneTime}"  SelectedItem="{Binding PointedSprite, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
+                <controls:ListPicker ItemTemplate="{StaticResource ListBoxSpriteItem}" PageItemTemplate="{StaticResource PageListBoxSpriteItem}" ItemsSource="{Binding Editor.Sprites, Source={StaticResource Locator}, Mode=OneTime}"  SelectedItem="{Binding PointedSprite, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
               </StackPanel>
             </rlb:NormalBrick>
           </Grid>
@@ -535,7 +523,7 @@
             <rlb:NormalBrick Background="{StaticResource SoundBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
               <StackPanel>
                 <TextBlock TextWrapping="Wrap" FontSize="24" Margin="10" Text="{Binding Path=Bricks.PlaySound, Source={StaticResource LocalizedStrings}}" />
-                <controls:ListPicker NullItem="{StaticResource NullSound}" ItemTemplate="{StaticResource ListBoxSoundItem}" PageItemTemplate="{StaticResource PageListBoxSoundItem}" ItemsSource="{Binding Editor.Sounds, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding Sound, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
+                <controls:ListPicker ItemTemplate="{StaticResource ListBoxSoundItem}" PageItemTemplate="{StaticResource PageListBoxSoundItem}" ItemsSource="{Binding Editor.Sounds, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding Sound, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
               </StackPanel>
             </rlb:NormalBrick>
           </Grid>
@@ -650,7 +638,7 @@
             <rlb:NormalBrick Background="{StaticResource LooksBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
               <StackPanel>
                 <TextBlock TextWrapping="Wrap" FontSize="24" Margin="10" Text="{Binding Path=Bricks.SetCostume, Source={StaticResource LocalizedStrings}}" />
-                <controls:ListPicker NullItem="{StaticResource NullCostume}" ItemTemplate="{StaticResource ListBoxCostumeItem}" PageItemTemplate="{StaticResource PageListBoxCostumeItem}" ItemsSource="{Binding Editor.Costumes, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding Costume, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
+                <controls:ListPicker ItemTemplate="{StaticResource ListBoxCostumeItem}" PageItemTemplate="{StaticResource PageListBoxCostumeItem}" ItemsSource="{Binding Editor.Costumes, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding Costume, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
               </StackPanel>
             </rlb:NormalBrick>
           </Grid>
@@ -807,7 +795,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" Margin="10" Text="{Binding Path=Bricks.Broadcast, Source={StaticResource LocalizedStrings}}" />
-                <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" NullItem="{StaticResource NullString}" ItemTemplate="{StaticResource ListBoxBroadcastItem}" PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" ItemsSource="{Binding Editor.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding BroadcastMessage, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
+                <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" ItemTemplate="{StaticResource ListBoxBroadcastItem}" PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" ItemsSource="{Binding Editor.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding BroadcastMessage, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
                 <Button Grid.Row="1" Grid.Column="1" Width="150" Content="{Binding Path=Bricks.ButtonNew, Source={StaticResource LocalizedStrings}}" Command="{Binding Editor.StartAddBroadcastMessageCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" IsEnabled="{Binding IsRealObject}" />
               </Grid>
             </rlb:NormalBrick>
@@ -830,7 +818,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" Margin="10" Text="{Binding Path=Bricks.BroadcastWait, Source={StaticResource LocalizedStrings}}" />
-                <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" NullItem="{StaticResource NullString}" ItemTemplate="{StaticResource ListBoxBroadcastItem}" PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" ItemsSource="{Binding Editor.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding BroadcastMessage, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
+                <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" ItemTemplate="{StaticResource ListBoxBroadcastItem}" PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" ItemsSource="{Binding Editor.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding BroadcastMessage, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
                 <Button Grid.Row="1" Grid.Column="1" Width="150" Content="{Binding Path=Bricks.ButtonNew, Source={StaticResource LocalizedStrings}}" Command="{Binding Editor.StartAddBroadcastMessageCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" IsEnabled="{Binding IsRealObject}" />
               </Grid>
             </rlb:NormalBrick>

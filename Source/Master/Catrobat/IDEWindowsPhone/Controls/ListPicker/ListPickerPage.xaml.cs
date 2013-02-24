@@ -25,7 +25,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
 
       ListBoxItems.ItemTemplate = ListPicker.PageItemTemplate;
       ListBoxItems.ItemsSource = ListPicker.NullItemCollection;
-      ListBoxItems.SelectedItem = ListPicker.SelectedItem;
+      ListBoxItems.SelectedItem = ListPicker.GetItemWithNullItem();
       base.OnNavigatedTo(e);
     }
 

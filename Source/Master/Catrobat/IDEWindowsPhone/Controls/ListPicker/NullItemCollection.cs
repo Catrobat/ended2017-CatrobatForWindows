@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Catrobat.IDECommon.Resources.Editor;
 
 namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
 {
@@ -29,22 +30,22 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
         {
           if (_sourceCollection is IList<Costume>)
           {
-            NullObject = new Costume{Name = "not selected"};
+            NullObject = new Costume { Name = EditorResources.NoCostumeSelected };
           }
 
           if (_sourceCollection is IList<Sound>)
           {
-            NullObject = new Sound { Name = "not selected" };
+            NullObject = new Sound { Name = EditorResources.NoSoundSelected };
           }
 
           if (_sourceCollection is IList<Sprite>)
           {
-            NullObject = new Sprite { Name = "not selected" };
+            NullObject = new Sprite { Name = EditorResources.NoSpriteSelected };
           }
 
           if (_sourceCollection is IList<String>)
           {
-            NullObject = "not selected";
+            NullObject = EditorResources.NoMessageSelected;
           }
         }
       }
