@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using Catrobat.Core.Storage;
 using System;
 
@@ -6,6 +7,8 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
 {
   public class StorageWindowsStore : IStorage
   {
+    private readonly List<Stream> _openedStreams = new List<Stream>();
+
     public long Quota
     {
       get { throw new NotImplementedException(); }
@@ -93,6 +96,9 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
 
     public void Dispose()
     {
+      foreach (var stream in _openedStreams)
+        stream.Dispose();
+
       throw new NotImplementedException();
     }
 

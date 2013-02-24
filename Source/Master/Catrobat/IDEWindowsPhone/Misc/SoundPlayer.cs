@@ -36,6 +36,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
             byte[] soundArray = new byte[stream.Length];
             stream.Read(soundArray, 0, soundArray.Length);
             stream.Close();
+            stream.Dispose();
             soundEffect = new SoundEffect(soundArray, Microphone.Default.SampleRate, AudioChannels.Mono).CreateInstance();
           }
       }

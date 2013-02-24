@@ -35,7 +35,7 @@ namespace IDEWindowsPhone
     public App()
     {
       StorageSystem.SetStorageFactory(new StorageFactoryPhone());
-      ResourceLoader.SetResourceLoader(new ResourcesPhone());
+      ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryPhone());
       LanguageHelper.SetICulture(new CulturePhone());
       ServerCommunication.SetIServerCommunication(new ServerCommunicationPhone());
 

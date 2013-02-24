@@ -58,6 +58,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Misc\Storage\BasePathHelper.cs" />
+    <Compile Include="Misc\Storage\ResourceLoaderFactoryTest.cs" />
     <Compile Include="Misc\Storage\ResourcesTest.cs" />
     <Compile Include="Misc\Storage\StorageFactoryTest.cs" />
     <Compile Include="Misc\Storage\StorageTest.cs" />

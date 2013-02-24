@@ -191,9 +191,14 @@ namespace Catrobat.TestsCommon.Tests.Storage
 
         Directory.CreateDirectory(storage.BasePath + basePath);
 
-        Stream stream = ResourceLoader.GetResourceStream(ResourceScope.TestCommon, sampleProjectsPath + "test.catroid");
-        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
-        stream.Close();
+        using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+        {
+          Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon,
+                                                            sampleProjectsPath + "test.catroid");
+          CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
+          stream.Close();
+          stream.Dispose();
+        }
 
         var image = storage.LoadImage("LoadImageTest/screenshot.png");
         Assert.AreNotEqual(image, null);
@@ -210,9 +215,13 @@ namespace Catrobat.TestsCommon.Tests.Storage
 
     //    Directory.CreateDirectory(basePath);
 
-    //    Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleProjectsPath + "test.catroid");
-    //    CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
-    //    stream.Close();
+    //    using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+    //    {
+    //        Stream stream = resourceLoader.OpenResourceStream((Projects.TestCommon, sampleProjectsPath + "test.catroid");
+    //        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
+    //        stream.Close();
+    //        stream.Dispose();
+    //    }
 
     //    var image = storage.LoadImage("LoadImageTest/screenshot.png");
     //    storage.SaveImage("TestLoadImage2/screenshot.png", image);

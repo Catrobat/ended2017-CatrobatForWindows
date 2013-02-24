@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Catrobat.Core.Storage
 {
-  public enum ResourceScope { Core, IdePhone, IdeStore, TestsPhone, TestsStore, IdeCommon, TestCommon, SampleProjects }
+  public enum ResourceScope { Core, IdePhone, IdeStore, TestsPhone, TestsStore, IdeCommon, TestCommon, Resources }
 
-  public interface IResources
+  public interface IResources: IDisposable
   {
     Stream OpenResourceStream(ResourceScope project, string url);
   }

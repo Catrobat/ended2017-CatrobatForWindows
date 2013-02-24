@@ -19,7 +19,7 @@ namespace Catrobat.Core
   public sealed class CatrobatContext : ICatrobatContext, INotifyPropertyChanged
   {
     public static string LocalSettingsFilePath = "Settings/settings";
-    public static string DefaultProjectPath = "Resources/default.catroid";
+    public static string DefaultProjectPath = "default.catroid";
     public static string ProjectsPath = "Projects";
     public static string DefaultProjectName = "DefaultProject";
 
@@ -291,8 +291,12 @@ namespace Catrobat.Core
 
         if (!storage.FileExists(projectCodeFile))
         {
-          Stream stream = ResourceLoader.GetResourceStream(ResourceScope.SampleProjects, DefaultProjectPath);
-          CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectCodeFile);
+          using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+          {
+            Stream stream = resourceLoader.OpenResourceStream(ResourceScope.Resources, DefaultProjectPath);
+            CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectCodeFile);
+            stream.Dispose();
+          }
         }
 
         string xml = storage.ReadTextFile(projectCodeFile + "/" + Project.ProjectCodePath);

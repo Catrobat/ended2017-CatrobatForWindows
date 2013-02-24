@@ -1,6 +1,7 @@
 ﻿using Catrobat.Core;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.ServerCommunication;
+using Catrobat.Core.Objects;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using KBB.Mobile.Controls;
 using Microsoft.Phone.Controls;
@@ -101,6 +102,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         Action action = () => NavigationService.Navigate(new Uri("/Views/Main/UploadProjectLoginPage.xaml", UriKind.Relative));
         Dispatcher.BeginInvoke(action);
       }
+    }
+
+    private void ButtonCopyLocalProject_OnClick(object sender, RoutedEventArgs e)
+    {
+      CatrobatContext.Instance.CopyProject(((sender as FrameworkElement).DataContext as Project).ProjectName);
+    }
+
+    private void ButtonDeleteLocalProject_OnClick(object sender, RoutedEventArgs e)
+    {
+      CatrobatContext.Instance.DeleteProject(((sender as FrameworkElement).DataContext as Project).ProjectName);
     }
   }
 }

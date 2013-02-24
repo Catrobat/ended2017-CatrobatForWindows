@@ -24,11 +24,19 @@ namespace Catrobat.TestsCommon.Tests.Data
     {
       var project = SampleLoader.LoadSampleXML("simple");
       project.Save();
+      String originalXml = null;
 
-      Stream originalStream = ResourceLoader.GetResourceStream(ResourceScope.TestCommon, BasePathHelper.GetSampleProjectsPath() + "simple.xml");
-      StreamReader originalReader = new StreamReader(originalStream);
-      String originalXml = originalReader.ReadToEnd();
-      originalStream.Close();
+      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      {
+        Stream originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon,
+                                                                  BasePathHelper.GetSampleProjectsPath() + "simple.xml");
+        StreamReader originalReader = new StreamReader(originalStream);
+        originalXml = originalReader.ReadToEnd();
+        originalReader.Close();
+        originalReader.Dispose();
+        originalStream.Close();
+        originalStream.Dispose();
+      }
 
       String writtenXml = "";
       using (IStorage storage = StorageSystem.GetStorage())
@@ -65,11 +73,19 @@ namespace Catrobat.TestsCommon.Tests.Data
     {
       var project = SampleLoader.LoadSampleXML("ultimateTest");
       project.Save();
-
-      Stream originalStream = ResourceLoader.GetResourceStream(ResourceScope.TestCommon, BasePathHelper.GetSampleProjectsPath() + "ultimateTest.xml");
-      StreamReader originalReader = new StreamReader(originalStream);
-      String originalXml = originalReader.ReadToEnd();
-      originalStream.Close();
+      String originalXml = null;
+      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      {
+        Stream originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon,
+                                                                  BasePathHelper.GetSampleProjectsPath() +
+                                                                  "ultimateTest.xml");
+        StreamReader originalReader = new StreamReader(originalStream);
+        originalXml = originalReader.ReadToEnd();
+        originalReader.Close();
+        originalReader.Dispose();
+        originalStream.Close();
+        originalStream.Dispose();
+      }
 
       String writtenXml = "";
       using (IStorage storage = StorageSystem.GetStorage())

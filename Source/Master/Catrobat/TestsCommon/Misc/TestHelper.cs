@@ -43,7 +43,7 @@ namespace Catrobat.TestsCommon.Misc
     internal static void InitializeTests()
     {
       StorageSystem.SetStorageFactory(new StorageFactoryTest());
-      ResourceLoader.SetResourceLoader(new ResourcesTest());
+      ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryTest());
     }
   }
 }
