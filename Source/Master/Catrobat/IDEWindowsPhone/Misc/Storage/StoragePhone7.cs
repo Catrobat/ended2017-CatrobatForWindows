@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.IO.IsolatedStorage;
 using System.Runtime.Serialization;
 using System.Text;
@@ -19,6 +20,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
   public class StoragePhone : IStorage
   {
     private readonly IsolatedStorageFile _iso = IsolatedStorageFile.GetUserStoreForApplication();
+    private readonly List<Stream> _openedStreams = new List<Stream>();
 
     public bool FileExists(string path)
     {
@@ -185,8 +187,10 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
             break;
         }
 
-      IsolatedStorageFileStream isfs = _iso.OpenFile(path, fileMode, fileAccess);
-      return isfs;
+      IsolatedStorageFileStream storageFileStream = _iso.OpenFile(path, fileMode, fileAccess);
+      _openedStreams.Add(storageFileStream);
+
+      return storageFileStream;
     }
 
     public void RenameDirectory(string directoryPath, string newDirectoryName)
@@ -218,6 +222,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
       var writer = new StreamWriter(this.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write), Encoding.UTF8);
       writer.Write(content);
       writer.Close();
+      writer.Dispose();
     }
 
     public object ReadSerializableObject(string path, Type type)
@@ -227,6 +232,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
         var serializer = new DataContractSerializer(type);
         object serialireableObject = serializer.ReadObject(fileStream); // TODO: does not working any more
         fileStream.Close();
+        fileStream.Dispose();
         return serialireableObject;
       }
     }
@@ -238,6 +244,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
         var serializer = new DataContractSerializer(serializableObject.GetType());
         serializer.WriteObject(fileStream, serializableObject);
         fileStream.Close();
+        fileStream.Dispose();
       }
     }
 
@@ -247,6 +254,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
       var reader = new StreamReader(fileStream);
       var text = reader.ReadToEnd();
       fileStream.Close();
+      fileStream.Dispose();
       return text;
     }
 
@@ -258,10 +266,11 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
         byte[] myByteArray = null;
 
-        using (IsolatedStorageFileStream isfs = _iso.OpenFile(pathToImage, FileMode.Open, FileAccess.Read))
+        using (IsolatedStorageFileStream storageFileStream = _iso.OpenFile(pathToImage, FileMode.Open, FileAccess.Read))
         {
-          bitmapImage.SetSource(isfs);
-          isfs.Close();
+          bitmapImage.SetSource(storageFileStream);
+          storageFileStream.Close();
+          storageFileStream.Dispose();
 
           return bitmapImage;
         }
@@ -278,10 +287,11 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
       {
         var bitmapImage = new BitmapImage();
 
-        using (IsolatedStorageFileStream isfs = _iso.OpenFile(pathToImage, FileMode.Open, FileAccess.Read))
+        using (IsolatedStorageFileStream storageFileStream = _iso.OpenFile(pathToImage, FileMode.Open, FileAccess.Read))
         {
-          bitmapImage.SetSource(isfs);
-          isfs.Close();
+          bitmapImage.SetSource(storageFileStream);
+          storageFileStream.Close();
+          storageFileStream.Dispose();
         }
 
         return bitmapImage;
@@ -317,6 +327,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
       var fileStream1 = OpenFile(pathToImage + ThumbnailExtension, StorageFileMode.Create, StorageFileAccess.Write);
       thumbnailImage.WriteToStream(fileStream1, pathToImage + ThumbnailExtension);
+      fileStream1.Close();
       fileStream1.Dispose();
 
       return thumbnailImage.ToBitmap();
@@ -353,11 +364,15 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
       var wb = new WriteableBitmap(image);
       wb.SaveJpeg(fileStream, wb.PixelWidth, wb.PixelHeight, 0, 85);
       fileStream.Close();
+      fileStream.Dispose();
     }
 
     public void Dispose()
     {
       _iso.Dispose();
+
+      foreach (var stream in _openedStreams)
+        stream.Dispose();
     }
 
     public string BasePath { get { return ""; } }

@@ -15,29 +15,47 @@ namespace Catrobat.TestsCommon.SampleData
 
     public static Project LoadSampleXML(string sampleName)
     {
-      Stream stream = ResourceLoader.GetResourceStream(ResourceScope.TestCommon, path + sampleName + ".xml");
-      StreamReader reader = new StreamReader(stream);
+      String xml = null;
+      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      {
+        Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName + ".xml");
+        StreamReader reader = new StreamReader(stream);
 
-      String xml = reader.ReadToEnd();
-      stream.Dispose();
+        xml = reader.ReadToEnd();
+        reader.Close();
+        reader.Dispose();
+        stream.Close();
+        stream.Dispose();
+      }
       return new Project(xml);
     }
 
     public static XDocument LoadSampleXDocument(string sampleName)
     {
-      Stream stream = ResourceLoader.GetResourceStream(ResourceScope.TestCommon, path + sampleName + ".xml");
-      StreamReader reader = new StreamReader(stream);
+      String xml = null;
+      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      {
+        Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName + ".xml");
+        StreamReader reader = new StreamReader(stream);
 
-      String xml = reader.ReadToEnd();
-      reader.Dispose();
+        xml = reader.ReadToEnd();
+        reader.Close();
+        reader.Dispose();
+        stream.Close();
+        stream.Dispose();
+      }
       return XDocument.Load(new StringReader(xml));
     }
 
     public static void LoadSampleProject(string sampleName, string sampleProjectName)
     {
-      Stream stream = ResourceLoader.GetResourceStream(ResourceScope.TestCommon, path + sampleName);
-      CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContext.ProjectsPath + "/" + sampleProjectName);
-      stream.Dispose();
+      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      {
+        Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName);
+        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContext.ProjectsPath + "/" + sampleProjectName);
+        stream.Close();
+        stream.Dispose();
+      }
       CatrobatContext.Instance.SetCurrentProject(sampleProjectName);
       CatrobatContext.Instance.CurrentProject.SetProjectName(sampleProjectName);
     }

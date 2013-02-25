@@ -21,8 +21,13 @@ namespace Catrobat.TestsCommon.Tests.Misc
       TestHelper.InitializeAndClearCatrobatContext();
       string path = "SampleData/SampleProjects/test.catroid";
 
-      Stream originalStream = ResourceLoader.GetResourceStream(ResourceScope.TestCommon, path);
-      CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
+      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      {
+        Stream originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path);
+        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
+        originalStream.Close();
+        originalStream.Dispose();
+      }
 
       using (IStorage storage = StorageSystem.GetStorage())
       {
@@ -60,9 +65,13 @@ namespace Catrobat.TestsCommon.Tests.Misc
       TestHelper.InitializeAndClearCatrobatContext();
       string path = "SampleData/SampleProjects/test.catroid";
 
-      Stream originalStream = ResourceLoader.GetResourceStream(ResourceScope.TestCommon, path);
-      CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
-      originalStream.Dispose();
+      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      {
+        Stream originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path);
+        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
+        originalStream.Close();
+        originalStream.Dispose();
+      }
 
       using (IStorage storage = StorageSystem.GetStorage())
       {
@@ -75,6 +84,8 @@ namespace Catrobat.TestsCommon.Tests.Misc
         using (Stream fileStream = storage.OpenFile(writePath, StorageFileMode.Create, StorageFileAccess.Write))
         {
           CatrobatZip.ZipCatrobatPackage(fileStream, sourcePath);
+          fileStream.Close();
+          fileStream.Dispose();
         }
 
         Assert.AreEqual(storage.FileExists("/Projects/TestProjectZipped/test.catroid"), true);

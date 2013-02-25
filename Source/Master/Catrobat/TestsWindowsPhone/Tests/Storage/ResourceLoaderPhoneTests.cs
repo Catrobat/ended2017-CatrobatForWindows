@@ -1,6 +1,7 @@
-﻿using Catrobat.Core.Storage;
+﻿using System.IO;
+using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
 namespace Catrobat.TestsWindowsPhone.Tests.Storage
 {
@@ -10,10 +11,16 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
     [TestMethod]
     public void ResourceLoaderTest()
     {
-      ResourceLoader.SetResourceLoader(new ResourcesPhone());
+      ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryPhone());
 
-      var stream = ResourceLoader.GetResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/simple.xml");
-      Assert.AreNotEqual(stream, null);
+      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      {
+        Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestsPhone,
+                                                          "SampleData/SampleProjects/simple.xml");
+        Assert.AreNotEqual(stream, null);
+        stream.Close();
+        stream.Dispose();
+      }
     }
   }
 }

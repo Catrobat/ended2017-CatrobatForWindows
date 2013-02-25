@@ -100,8 +100,6 @@ namespace Catrobat.TestsCommon.Tests.Data
       string oldProjectName = "test";
       SampleLoader.LoadSampleProject("test.catroid", oldProjectName);
 
-
-
       CatrobatContext.Instance.CreateNewProject(newProjectName);
 
       CatrobatContext.Instance.SetCurrentProject(oldProjectName);

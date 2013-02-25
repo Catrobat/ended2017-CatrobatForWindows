@@ -132,7 +132,8 @@
                         Template="{StaticResource ImageButtonControlTemplate}"
                         Margin="10" Command="{Binding Main.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
                         CommandParameter="{Binding ProjectName}"
-                        IsAutoColor="False" IsDark="True"/>
+                        IsAutoColor="False" IsDark="True"
+                        Click="ButtonCopyLocalProject_OnClick"/>
 
                       <StackPanel Grid.Column="0">
                         <i:Interaction.Triggers>
@@ -147,14 +148,14 @@
                         </Grid>
                         <TextBlock Foreground="{StaticResource PhoneForegroundBrush}" FontSize="12" Text="{Binding Path=Main.ActiveProject, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 -3 0 0" Visibility="{Binding Converter={StaticResource ActiveProjectVisibilityConverter}}" />
                       </StackPanel>
-                        <!-- Click="buttonDeleteLocalProject_Click"  -->
                       <imageButton:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonDeleteLocalProject" 
                         ImageName="delete"
                         Text="{Binding Path=Main.ButtonDelete, Source={StaticResource LocalizedStrings}}"
                         Template="{StaticResource ImageButtonControlTemplate}"
                         Margin="10" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
                         CommandParameter="{Binding ProjectName}"
-                        IsAutoColor="False" IsDark="True"/>
+                        IsAutoColor="False" IsDark="True"
+                        Click="ButtonDeleteLocalProject_OnClick"/>
                     </Grid>
                   </Grid>
                   <Grid Grid.Column="1">

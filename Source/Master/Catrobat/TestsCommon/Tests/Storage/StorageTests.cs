@@ -41,8 +41,11 @@ namespace Catrobat.TestsCommon.Tests.Storage
 
         var file1 = File.Create(basePath + "Folder1/F2/F3/file1.txt");
         file1.Close();
+        file1.Dispose();
+
         var file2 = File.Create(basePath + "Folder1/F2/F3/file2.bin");
         file2.Close();
+        file2.Dispose();
 
         storage.DeleteDirectory("DeleteDirectoryTest/Folder1/F2");
 
@@ -62,9 +65,11 @@ namespace Catrobat.TestsCommon.Tests.Storage
 
         var file1 = File.Create(basePath + "file1.txt");
         file1.Close();
+        file1.Dispose();
 
         var file2 = File.Create(basePath + "file2.bin");
         file2.Close();
+        file2.Dispose();
 
         storage.DeleteFile("DeleteFileTest/file1.txt");
 
@@ -84,9 +89,11 @@ namespace Catrobat.TestsCommon.Tests.Storage
 
         var file1 = File.Create(basePath + "CopyDirectoryTestFolder1/f2/f3/file1.txt");
         file1.Close();
+        file1.Dispose();
 
         var file2 = File.Create(basePath + "CopyDirectoryTestFolder1/f2/file2.bin");
         file2.Close();
+        file2.Dispose();
 
         storage.CopyDirectory("CopyDirectoryTest/CopyDirectoryTestFolder1", "CopyDirectoryTest/CopyDirectoryTestFolder1_copy");
 
@@ -122,6 +129,7 @@ namespace Catrobat.TestsCommon.Tests.Storage
         string file1Content = File.ReadAllText((basePath + "file1.txt"), System.Text.Encoding.UTF8);
         string copiedFile1Content = File.ReadAllText((basePath + "Copy/copied_file1.txt"), System.Text.Encoding.UTF8);
         string copiedFile2Content = File.ReadAllText((basePath + "copied_file2.txt"), System.Text.Encoding.UTF8);
+
         Assert.AreEqual(file1Content, copiedFile1Content);
         Assert.AreEqual(file1Content, copiedFile2Content);
       }
@@ -138,21 +146,25 @@ namespace Catrobat.TestsCommon.Tests.Storage
 
         var file1 = File.Create(basePath + "file1.txt");
         file1.Close();
+        file1.Dispose();
 
         Stream fileStream1 = storage.OpenFile("OpenFileTest/file1.txt", StorageFileMode.OpenOrCreate, StorageFileAccess.ReadWrite);
         Assert.IsTrue(fileStream1.CanRead);
         Assert.IsTrue(fileStream1.CanWrite);
         fileStream1.Close();
+        fileStream1.Dispose();
 
         Stream fileStream2 = storage.OpenFile("OpenFileTest/file2.txt", StorageFileMode.OpenOrCreate, StorageFileAccess.Read);
         Assert.IsTrue(fileStream2.CanRead);
         Assert.IsFalse(fileStream2.CanWrite);
         fileStream2.Close();
+        fileStream2.Dispose();
 
         Stream fileStream3 = storage.OpenFile("OpenFileTest/file2.txt", StorageFileMode.OpenOrCreate, StorageFileAccess.Write);
         Assert.IsFalse(fileStream3.CanRead);
         Assert.IsTrue(fileStream3.CanWrite);
         fileStream3.Close();
+        fileStream3.Dispose();
       }
     }
 
@@ -169,8 +181,11 @@ namespace Catrobat.TestsCommon.Tests.Storage
 
         var file1 = File.Create(basePath + "Folder1/F2/F3/file1.txt");
         file1.Close();
+        file1.Dispose();
+
         var file2 = File.Create(basePath + "Folder1/F2/file2.bin");
         file2.Close();
+        file2.Dispose();
 
         storage.RenameDirectory("RenameDirectoryTest/Folder1/F2", "renamed2");
 
@@ -191,9 +206,14 @@ namespace Catrobat.TestsCommon.Tests.Storage
 
         Directory.CreateDirectory(storage.BasePath + basePath);
 
-        Stream stream = ResourceLoader.GetResourceStream(ResourceScope.TestCommon, sampleProjectsPath + "test.catroid");
-        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
-        stream.Close();
+        using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+        {
+          Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon,
+                                                            sampleProjectsPath + "test.catroid");
+          CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
+          stream.Close();
+          stream.Dispose();
+        }
 
         var image = storage.LoadImage("LoadImageTest/screenshot.png");
         Assert.AreNotEqual(image, null);
@@ -210,9 +230,13 @@ namespace Catrobat.TestsCommon.Tests.Storage
 
     //    Directory.CreateDirectory(basePath);
 
-    //    Stream stream = ResourceLoader.GetResourceStream(Projects.TestCommon, sampleProjectsPath + "test.catroid");
-    //    CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
-    //    stream.Close();
+    //    using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+    //    {
+    //        Stream stream = resourceLoader.OpenResourceStream((Projects.TestCommon, sampleProjectsPath + "test.catroid");
+    //        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
+    //        stream.Close();
+    //        stream.Dispose();
+    //    }
 
     //    var image = storage.LoadImage("LoadImageTest/screenshot.png");
     //    storage.SaveImage("TestLoadImage2/screenshot.png", image);

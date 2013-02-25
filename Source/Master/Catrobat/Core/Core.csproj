@@ -137,6 +137,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Resources\SampleProjectLoader.cs" />
+    <Compile Include="Storage\IResourceLoaderFactory.cs" />
     <Compile Include="Storage\IResources.cs" />
     <Compile Include="Storage\IStorage.cs" />
     <Compile Include="Storage\IStorageFactory.cs" />

@@ -11,6 +11,8 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 {
   public class ResourcesPhone : IResources
   {
+    private readonly List<Stream> _openedStreams = new List<Stream>();
+
     public Stream OpenResourceStream(ResourceScope project, string uri)
     {
       string projectPath = "";
@@ -21,13 +23,17 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
           {
             projectPath = "Catrobat.Core.";
             var path = projectPath + uri.Replace("/", ".");
-            return Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
+            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
+            _openedStreams.Add(stream);
+            return stream;
           }
         case ResourceScope.IdeCommon:
           {
             projectPath = "Catrobat.IDECommon.";
             var path = projectPath + uri.Replace("/", ".");
-            return Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
+            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
+            _openedStreams.Add(stream);
+            return stream;
           }
         case ResourceScope.IdePhone:
           {
@@ -35,7 +41,14 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
             var resourceUri = new Uri(projectPath + uri, UriKind.Relative);
             var resource = Application.GetResourceStream(resourceUri);
 
-            return resource != null ? resource.Stream : null;
+            if (resource != null)
+            {
+              var stream = resource.Stream;
+              _openedStreams.Add(stream);
+              return stream;
+            }
+            else
+              return null;
           }
         case ResourceScope.TestsPhone:
           {
@@ -43,21 +56,40 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
             var resourceUri = new Uri(projectPath + uri, UriKind.Relative);
             var resource = Application.GetResourceStream(resourceUri);
 
-            return resource != null ? resource.Stream : null;
+            if (resource != null)
+            {
+              var stream = resource.Stream;
+              _openedStreams.Add(stream);
+              return stream;
+            }
+            else
+              return null;
           }
-        case ResourceScope.SampleProjects:
+        case ResourceScope.Resources:
           {
-            projectPath = "Content/";
+            projectPath = "Content/Resources/";
             var resourceUri = new Uri(projectPath + uri, UriKind.Relative);
             var resource = Application.GetResourceStream(resourceUri);
 
-            return resource != null ? resource.Stream : null;
+            if (resource != null)
+            {
+              var stream = resource.Stream;
+              _openedStreams.Add(stream);
+              return stream;
+            }
+            else
+              return null;
+
           }
         default:
           throw new ArgumentOutOfRangeException("project");
       }
+    }
 
-
+    public void Dispose()
+    {
+      foreach (var stream in _openedStreams)
+        stream.Dispose();
     }
   }
 }

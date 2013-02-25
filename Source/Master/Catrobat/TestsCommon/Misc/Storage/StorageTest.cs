@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using Catrobat.Core.Storage;
 using System;
 using System.Runtime.Serialization;
@@ -255,7 +256,10 @@ namespace Catrobat.TestsCommon.Misc.Storage
     public void Dispose()
     {
       foreach (var stream in _openedStreams)
+      {
+        stream.Close();
         stream.Dispose();
+      }
     }
 
     public string BasePath

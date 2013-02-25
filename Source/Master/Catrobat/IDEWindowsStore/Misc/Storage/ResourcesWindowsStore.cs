@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Catrobat.Core.Storage;
 using System;
@@ -9,6 +10,8 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
 {
   public class ResourcesWindowsStore : IResources
   {
+    private readonly List<Stream> _openedStreams = new List<Stream>();
+
     public Stream OpenResourceStream(ResourceScope project, string uri)
     {
       string fullUri = "ms-appx:///";
@@ -44,9 +47,16 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
       };
 
       var stream = sync.Invoke();
-
       stream.Wait();
+
+      _openedStreams.Add(stream.Result);
       return stream.Result;
+    }
+
+    public void Dispose()
+    {
+      foreach (var stream in _openedStreams)
+        stream.Dispose();
     }
   }
 }

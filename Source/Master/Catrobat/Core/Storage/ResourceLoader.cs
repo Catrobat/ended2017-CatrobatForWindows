@@ -9,16 +9,16 @@ namespace Catrobat.Core.Storage
 {
   public class ResourceLoader
   {
-    private static IResources _resources;
+    private static IResourceLoaderFactory _resourceFactory;
 
-    public static void SetResourceLoader(IResources resources)
+    public static void SetResourceLoaderFactory(IResourceLoaderFactory resourceFactory)
     {
-      _resources = resources;
+      _resourceFactory = resourceFactory;
     }
 
-    public static Stream GetResourceStream(ResourceScope project, string uri)
+    public static IResources CreateResourceLoader()
     {
-      return _resources.OpenResourceStream(project, uri);
+      return _resourceFactory.CreateResoucreLoader();
     }
   }
 }

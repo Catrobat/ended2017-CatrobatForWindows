@@ -33,13 +33,16 @@ namespace Catrobat.Core.Resources
         string projectFileName = pair.Key;
         string projectName = pair.Value;
 
-        string path = "Resources/SampleProjects/";
+        string path = "SampleProjects/";
         path += projectFileName;
 
         System.IO.Stream resourceStream = null;
         try
         {
-          resourceStream = ResourceLoader.GetResourceStream(ResourceScope.SampleProjects, path);
+          using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+          {
+            resourceStream = resourceLoader.OpenResourceStream(ResourceScope.Resources, path);
+          }
         }
         catch (Exception)
         {

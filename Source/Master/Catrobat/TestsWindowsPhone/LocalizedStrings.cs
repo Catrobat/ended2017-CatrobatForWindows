@@ -1,6 +1,6 @@
 ﻿using Catrobat.TestsWindowsPhone.Resources;
 
-namespace TestsWindowsPhone
+namespace Catrobat.TestsWindowsPhone
 {
   /// <summary>
   /// Provides access to string resources.

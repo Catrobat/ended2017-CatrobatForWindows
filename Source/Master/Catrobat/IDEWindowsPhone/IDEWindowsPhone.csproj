@@ -142,6 +142,7 @@
     <Compile Include="Misc\ServerCommunicationPhone.cs" />
     <Compile Include="Misc\SoundPlayer.cs" />
     <Compile Include="Misc\Storage\ImageFormatHelper.cs" />
+    <Compile Include="Misc\Storage\ResourceLoaderFactoryPhone.cs" />
     <Compile Include="Misc\Storage\ResourcesPhone7.cs" />
     <Compile Include="Misc\Storage\StorageFactoryPhone7.cs" />
     <Compile Include="Misc\Storage\StoragePhone7.cs" />

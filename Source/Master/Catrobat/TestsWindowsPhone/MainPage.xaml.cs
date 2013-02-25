@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using Catrobat.TestsWindowsPhone.Misc;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using Microsoft.Phone.Testing;
+﻿using Microsoft.Phone.Controls;
+using System.Threading;
+using Microsoft.VisualStudio.TestPlatform.Core;
+using vstest_executionengine_platformbridge;
+using Microsoft.VisualStudio.TestPlatform.TestExecutor;
 
-namespace TestsWindowsPhone
+namespace Catrobat.TestsWindowsPhone
 {
   public partial class MainPage : PhoneApplicationPage
   {
@@ -18,8 +12,10 @@ namespace TestsWindowsPhone
     public MainPage()
     {
       InitializeComponent();
-      TestHelper.InitializeTests();
-      this.Content = UnitTestSystem.CreateTestPage();
+
+      var wrapper = new TestExecutorServiceWrapper();
+      new Thread(new ServiceMain((param0, param1) => wrapper.SendMessage((ContractName)param0, param1)).Run).Start();
+
     }
   }
 }
