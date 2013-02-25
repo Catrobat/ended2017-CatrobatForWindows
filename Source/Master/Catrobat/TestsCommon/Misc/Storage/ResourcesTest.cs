@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Catrobat.Core.Storage;
 using System;
@@ -37,8 +39,8 @@ namespace Catrobat.TestsCommon.Misc.Storage
         default:
           throw new ArgumentOutOfRangeException("project");
       }
-
-      var stream = File.Open(basePath + projectPath + uri, FileMode.Open, FileAccess.Read);
+      
+      Stream stream = File.Open(basePath + projectPath + uri, FileMode.Open, FileAccess.Read);
       _openedStreams.Add(stream);
       return stream;
     }
@@ -46,7 +48,10 @@ namespace Catrobat.TestsCommon.Misc.Storage
     public void Dispose()
     {
       foreach (var stream in _openedStreams)
+      {
+        stream.Close();
         stream.Dispose();
+      }
     }
   }
 }

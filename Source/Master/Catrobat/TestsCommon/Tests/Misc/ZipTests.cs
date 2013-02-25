@@ -84,6 +84,8 @@ namespace Catrobat.TestsCommon.Tests.Misc
         using (Stream fileStream = storage.OpenFile(writePath, StorageFileMode.Create, StorageFileAccess.Write))
         {
           CatrobatZip.ZipCatrobatPackage(fileStream, sourcePath);
+          fileStream.Close();
+          fileStream.Dispose();
         }
 
         Assert.AreEqual(storage.FileExists("/Projects/TestProjectZipped/test.catroid"), true);
