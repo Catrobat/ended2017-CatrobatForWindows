@@ -1,11 +1,11 @@
 ﻿using System.Collections;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Bricks;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestsWindowsPhone.SampleData;
+using Catrobat.TestsWindowsPhone.SampleData;
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Catrobat.Core.Objects.Bricks;
+using Catrobat.Core.Objects;
 
-namespace Catrobat.TestsWindowsPhone.Tests.Data
+namespace TestsWindowsPhone.Tests.Data
 {
   [TestClass]
   public class ScriptBrickCollectionTests

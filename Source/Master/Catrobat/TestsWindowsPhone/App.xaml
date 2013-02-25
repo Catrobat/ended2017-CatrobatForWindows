@@ -1,13 +1,13 @@
 ﻿<Application
-    x:Class="TestsWindowsPhone.App"
+    x:Class="Catrobat.TestsWindowsPhone.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone">
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:TestsWindowsPhone="clr-namespace:Catrobat.TestsWindowsPhone">
 
     <!--Application Resources-->
     <Application.Resources>
-        <local:LocalizedStrings xmlns:local="clr-namespace:TestsWindowsPhone" x:Key="LocalizedStrings"/>
+        <TestsWindowsPhone:LocalizedStrings x:Key="LocalizedStrings"/>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

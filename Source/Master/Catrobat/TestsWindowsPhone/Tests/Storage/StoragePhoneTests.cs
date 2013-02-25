@@ -5,7 +5,7 @@ using Catrobat.Core.Storage;
 using Catrobat.Core.ZIP;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
 using Catrobat.TestsWindowsPhone.Misc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using System.IO;
 using System.IO.IsolatedStorage;
 

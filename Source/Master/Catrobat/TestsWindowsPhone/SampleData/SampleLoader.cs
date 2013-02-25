@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Catrobat.Core;
+using Catrobat.Core.Objects;
+using Catrobat.Core.Storage;
+using Catrobat.Core.ZIP;
+using System;
 using System.IO;
 using System.Xml.Linq;
 
-namespace TestsWindowsPhone.SampleData
+namespace Catrobat.TestsWindowsPhone.SampleData
 {
   public class SampleLoader
   {

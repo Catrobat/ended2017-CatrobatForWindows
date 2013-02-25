@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using TestsWindowsPhone.Resources;
+﻿using Microsoft.Phone.Controls;
 using System.Threading;
 using Microsoft.VisualStudio.TestPlatform.Core;
 using vstest_executionengine_platformbridge;
 using Microsoft.VisualStudio.TestPlatform.TestExecutor;
-using System.Reflection;
 
-namespace TestsWindowsPhone
+namespace Catrobat.TestsWindowsPhone
 {
   public partial class MainPage : PhoneApplicationPage
   {

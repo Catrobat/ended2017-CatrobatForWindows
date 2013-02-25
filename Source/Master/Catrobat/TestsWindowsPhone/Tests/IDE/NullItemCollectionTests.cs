@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using Catrobat.IDEWindowsPhone.Controls.ListPicker;
 using Catrobat.IDEWindowsPhone.Converters;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
 namespace Catrobat.TestsWindowsPhone.Tests.IDE
 {
