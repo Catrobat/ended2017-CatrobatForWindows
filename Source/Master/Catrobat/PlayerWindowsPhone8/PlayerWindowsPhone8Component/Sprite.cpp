@@ -30,9 +30,21 @@ string Sprite::getName()
 	return m_name;
 }
 
-int Sprite::Size()
+int Sprite::ScriptListSize()
 {
 	return m_scripts->size();
+}
+
+int Sprite::LookDataListSize()
+{
+	return m_lookDatas->size();
+}
+
+LookData *Sprite::getLookData(int index)
+{
+	list<LookData*>::iterator it = m_lookDatas->begin();
+	advance(it, index);
+	return *it;
 }
 
 Script *Sprite::getScript(int index)

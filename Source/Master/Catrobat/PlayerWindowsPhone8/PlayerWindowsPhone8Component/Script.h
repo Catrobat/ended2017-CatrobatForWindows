@@ -19,6 +19,11 @@ public:
 	void addBrick(Brick *brick);
 	void addSpriteReference(string spriteReference);
 
+	string SpriteReference();
+
+	int BrickListSize();
+	Brick *GetBrick(int index);
+
 	TypeOfScript getType();
 
 protected:

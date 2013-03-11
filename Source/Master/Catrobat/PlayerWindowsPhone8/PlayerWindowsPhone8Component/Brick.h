@@ -17,6 +17,8 @@ public:
 	};
 
 	Brick(TypeOfBrick brickType, string spriteReference);
+	
+	TypeOfBrick BrickType();
 
 private:
 	TypeOfBrick m_brickType;

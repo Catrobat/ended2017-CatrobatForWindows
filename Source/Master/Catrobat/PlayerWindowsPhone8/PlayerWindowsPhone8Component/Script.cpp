@@ -22,3 +22,20 @@ Script::TypeOfScript Script::getType()
 {
 	return m_scriptType;
 }
+
+string Script::SpriteReference()
+{
+	return m_spriteReference;
+}
+
+int Script::BrickListSize()
+{
+	return m_brickList->size();
+}
+
+Brick *Script::GetBrick(int index)
+{
+	list<Brick*>::iterator it = m_brickList->begin();
+	advance(it, index);
+	return *it;
+}
