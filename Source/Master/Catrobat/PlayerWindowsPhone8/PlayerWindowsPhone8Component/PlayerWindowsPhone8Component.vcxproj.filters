@@ -190,7 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="CatTexture.dds" />
-    <Image Include="C:\Users\Hannes\Desktop\script.dds" />
-    <Image Include="C:\Users\Hannes\Desktop\brick.dds" />
+    <Image Include="script.dds" />
+    <Image Include="brick.dds" />
   </ItemGroup>
 </Project>
