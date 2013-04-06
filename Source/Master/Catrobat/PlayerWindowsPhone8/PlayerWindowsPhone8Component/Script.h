@@ -34,7 +34,6 @@ public:
 
 protected:
 	Script(TypeOfScript scriptType, string spriteReference);
-	Script(Point location, Size size, float originX = 0, float originY = 0);
 
 private:
 	TypeOfScript m_scriptType;

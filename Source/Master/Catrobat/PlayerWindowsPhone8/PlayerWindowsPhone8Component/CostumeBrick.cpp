@@ -7,3 +7,8 @@ CostumeBrick::CostumeBrick(string spriteReference, string costumeDataReference) 
 {
 }
 
+CostumeBrick::CostumeBrick(string spriteReference) :
+	Brick(TypeOfBrick::CostumeBrick, spriteReference)
+{
+}
+

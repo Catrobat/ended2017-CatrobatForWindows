@@ -169,9 +169,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="CatTexture.dds" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Objects">
       <UniqueIdentifier>{e6ba634f-bf91-45e2-9285-0496d03d6afe}</UniqueIdentifier>
     </Filter>
@@ -190,5 +187,10 @@
     <Filter Include="Objects\Scripts">
       <UniqueIdentifier>{fda72b0d-ed6b-4c59-9473-4911f7bd4bc6}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="CatTexture.dds" />
+    <Image Include="C:\Users\Hannes\Desktop\script.dds" />
+    <Image Include="C:\Users\Hannes\Desktop\brick.dds" />
   </ItemGroup>
 </Project>

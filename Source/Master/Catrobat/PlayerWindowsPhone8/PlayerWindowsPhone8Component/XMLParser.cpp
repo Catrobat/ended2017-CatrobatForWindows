@@ -314,7 +314,7 @@ Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode)
 
 	xml_node<> *costumeDataNode =  baseNode->first_node("costumeData");
 	if (!costumeDataNode)
-		return NULL;
+		return new CostumeBrick(spriteReference);
 
 	xml_attribute<> *costumeDataRef = costumeDataNode->first_attribute("reference");
 	if (!costumeDataRef)

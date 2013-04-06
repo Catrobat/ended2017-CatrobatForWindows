@@ -214,6 +214,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="C:\Users\Hannes\Desktop\brick.dds" />
+    <Image Include="C:\Users\Hannes\Desktop\script.dds" />
     <Image Include="CatTexture.dds" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -5,6 +5,7 @@ class CostumeBrick :
 {
 public:
 	CostumeBrick(string spriteReference, string costumeDataReference);
+	CostumeBrick(string spriteReference);
 
 	string m_costumeDataReference;
 };

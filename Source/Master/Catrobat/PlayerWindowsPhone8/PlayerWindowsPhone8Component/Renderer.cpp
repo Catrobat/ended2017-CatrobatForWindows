@@ -70,8 +70,6 @@ void Renderer::Render()
 	m_spriteBatch->Begin();
 	ProjectDaemon::Instance()->getProject()->Render(m_spriteBatch.get());
 	//m_testObject->Draw(m_spriteBatch.get());
-	
-
 	m_spriteBatch->End();
 	// ---------------------------------------------------------------------->
 }

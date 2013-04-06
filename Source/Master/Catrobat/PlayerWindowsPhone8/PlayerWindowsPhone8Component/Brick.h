@@ -1,10 +1,12 @@
 #pragma once
 
+#include "BaseObject.h"
+
 #include <string>
 
 using namespace std;
 
-class Brick
+class Brick : BaseObject
 {
 public:
 	enum TypeOfBrick
@@ -16,9 +18,15 @@ public:
 		PlaySoundBrick
 	};
 
-	Brick(TypeOfBrick brickType, string spriteReference);
+	void Render(SpriteBatch *spriteBatch);
+	void LoadTextures(ID3D11Device* d3dDevice);
+	void Draw(SpriteBatch *spriteBatch);
+	void LoadTexture(ID3D11Device* d3dDevice);
 	
 	TypeOfBrick BrickType();
+
+protected:
+		Brick(TypeOfBrick brickType, string spriteReference);
 
 private:
 	TypeOfBrick m_brickType;
