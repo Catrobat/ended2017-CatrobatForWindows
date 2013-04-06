@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "Script.h"
 
+using namespace Windows::Foundation;
 
 Script::Script(TypeOfScript scriptType, string spriteReference) :
+	BaseObject(50, 50, 1, 1, 0, 0),
 	m_scriptType(scriptType), m_spriteReference(spriteReference)
 {
 	m_brickList = new list<Brick*>();
@@ -38,4 +40,24 @@ Brick *Script::GetBrick(int index)
 	list<Brick*>::iterator it = m_brickList->begin();
 	advance(it, index);
 	return *it;
+}
+
+void Script::Render(SpriteBatch *spriteBatch)
+{
+	Draw(spriteBatch);
+}
+
+void Script::LoadTextures(ID3D11Device* d3dDevice)
+{
+	LoadTexture(d3dDevice);
+}
+
+void Script::Draw(SpriteBatch *spriteBatch)
+{
+	spriteBatch->Draw(m_Texture, m_position, nullptr, Colors::Wheat, 0.0f, m_sourceOrigin, m_objectScale, SpriteEffects_None, 0.0f);
+}
+
+void Script::LoadTexture(ID3D11Device* d3dDevice)
+{
+	CreateDDSTextureFromFile(d3dDevice, L"CatTexture.dds", nullptr, &m_Texture, MAXSIZE_T);
 }

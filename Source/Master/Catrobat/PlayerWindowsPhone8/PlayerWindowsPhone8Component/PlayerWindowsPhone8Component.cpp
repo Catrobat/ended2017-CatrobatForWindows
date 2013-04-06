@@ -1,9 +1,11 @@
 #include "pch.h"
 #include "PlayerWindowsPhone8Component.h"
 #include "Direct3DContentProvider.h"
-#include <thread>
 #include "XMLParser.h"
 #include "ProjectParser.h"
+#include "ProjectDaemon.h"
+
+#include <thread>
 
 using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
@@ -68,10 +70,8 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 
 	// XML
 	XMLParser *xml = new XMLParser();
-	xml->loadXML("Piano/projectcode.xml");
-
-	ProjectParser *project = new ProjectParser();
-	project->saveXML(xml->getProject());
+	xml->loadXML("testProject/projectcode.xml");
+	ProjectDaemon::Instance()->setProject(xml->getProject());
 
 	free(xml);
 

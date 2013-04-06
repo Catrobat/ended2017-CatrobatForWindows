@@ -1,12 +1,13 @@
 #pragma once
 
 #include "Brick.h"
+#include "BaseObject.h"
 
 #include <list>
 
 using namespace std;
 
-class Script
+class Script : BaseObject
 {
 public:
 	enum TypeOfScript
@@ -19,6 +20,11 @@ public:
 	void addBrick(Brick *brick);
 	void addSpriteReference(string spriteReference);
 
+	void Render(SpriteBatch *spriteBatch);
+	void LoadTextures(ID3D11Device* d3dDevice);
+	void Draw(SpriteBatch *spriteBatch);
+	void LoadTexture(ID3D11Device* d3dDevice);
+
 	string SpriteReference();
 
 	int BrickListSize();
@@ -28,6 +34,7 @@ public:
 
 protected:
 	Script(TypeOfScript scriptType, string spriteReference);
+	Script(Point location, Size size, float originX = 0, float originY = 0);
 
 private:
 	TypeOfScript m_scriptType;

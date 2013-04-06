@@ -54,5 +54,21 @@ Script *Sprite::getScript(int index)
 	return *it;
 }
 
+void Sprite::Render(SpriteBatch *spriteBatch)
+{
+	for (int i = 0; i < ScriptListSize(); i++)
+	{
+		getScript(i)->Render(spriteBatch);
+	}
+}
+
+void Sprite::LoadTextures(ID3D11Device* d3dDevice)
+{
+	for (int i = 0; i < ScriptListSize(); i++)
+	{
+		getScript(i)->LoadTextures(d3dDevice);
+	}
+}
+
 
 

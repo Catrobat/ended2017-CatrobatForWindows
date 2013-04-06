@@ -77,6 +77,9 @@
     <ClCompile Include="ProjectParser.cpp">
       <Filter>XMLParser</Filter>
     </ClCompile>
+    <ClCompile Include="ProjectDaemon.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -160,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="ProjectParser.h">
       <Filter>XMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectDaemon.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

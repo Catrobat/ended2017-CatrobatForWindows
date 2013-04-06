@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "Renderer.h"
+#include "ProjectDaemon.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -24,9 +25,10 @@ void Renderer::CreateWindowSizeDependentResources()
 	Direct3DBase::CreateWindowSizeDependentResources();
 
 	//CreateTestObject2();
-	CreateTestObject3();
+	//CreateTestObject3();
 	//CreateTestObject4();
-	m_testObject->LoadTexture(m_d3dDevice.Get());
+	//m_testObject->LoadTexture(m_d3dDevice.Get());
+	ProjectDaemon::Instance()->getProject()->LoadTextures(m_d3dDevice.Get());
 }
 
 void Renderer::Update(float timeTotal, float timeDelta)
@@ -66,8 +68,9 @@ void Renderer::Render()
 	// SpriteBatch for Drawing. Call Draw Methods of the Objects here.
 	// ---------------------------------------------------------------------->
 	m_spriteBatch->Begin();
-
-	m_testObject->Draw(m_spriteBatch.get());
+	ProjectDaemon::Instance()->getProject()->Render(m_spriteBatch.get());
+	//m_testObject->Draw(m_spriteBatch.get());
+	
 
 	m_spriteBatch->End();
 	// ---------------------------------------------------------------------->

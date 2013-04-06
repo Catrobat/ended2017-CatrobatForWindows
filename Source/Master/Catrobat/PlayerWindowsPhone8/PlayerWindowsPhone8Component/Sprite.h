@@ -19,6 +19,9 @@ public:
 	void addScript(Script *script);
 	void addSoundInfo(SoundInfo *soundInfo);
 
+	void Render(SpriteBatch *spriteBatch);
+	void LoadTextures(ID3D11Device* d3dDevice);
+
 	int ScriptListSize();
 	Script *getScript(int index);
 	string getName();

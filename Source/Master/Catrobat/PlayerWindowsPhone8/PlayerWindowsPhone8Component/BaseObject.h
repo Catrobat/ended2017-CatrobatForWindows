@@ -20,7 +20,7 @@ protected:
 	BaseObject(float x, float y, float width, float height, float originX, float originY);
 	BaseObject(Rect position, float originX, float originY);
 	BaseObject(Point location, Size size, float originX, float originY);
-	~BaseObject(void);
+	//~BaseObject(void);
 
 	ID3D11ShaderResourceView* m_Texture;
 

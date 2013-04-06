@@ -157,6 +157,7 @@
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
     <ClInclude Include="PlaySoundBrick.h" />
     <ClInclude Include="Project.h" />
+    <ClInclude Include="ProjectDaemon.h" />
     <ClInclude Include="ProjectParser.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="DirectXHelper.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
     <ClCompile Include="PlaySoundBrick.cpp" />
     <ClCompile Include="Project.cpp" />
+    <ClCompile Include="ProjectDaemon.cpp" />
     <ClCompile Include="ProjectParser.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Direct3DBase.cpp" />

@@ -3,6 +3,7 @@
 #include "Direct3DBase.h"
 #include "SpriteBatch.h"
 #include "TestObject.h"
+#include "Project.h"
 
 #include <wrl/client.h>
 
