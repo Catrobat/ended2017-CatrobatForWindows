@@ -132,9 +132,14 @@
     </None>
     <None Include="testProject\.nomedia" />
     <None Include="testProject\CatTexture.dds" />
+    <None Include="testProject\images\.nomedia" />
+    <None Include="testProject\images\34A109A82231694B6FE09C216B390570_normalCat" />
     <None Include="testProject\images\34A109A82231694B6FE09C216B390570_normalCat.dds" />
+    <None Include="testProject\images\395CD6389BD601812BDB299934A0CCB4_banzaiCat" />
     <None Include="testProject\images\395CD6389BD601812BDB299934A0CCB4_banzaiCat.dds" />
+    <None Include="testProject\images\5A71C6F41035979503BA294F78A09336_background" />
     <None Include="testProject\images\5A71C6F41035979503BA294F78A09336_background.dds" />
+    <None Include="testProject\images\B4497E87AC34B1329DD9B14C08EEAFF0_cheshireCat" />
     <None Include="testProject\images\B4497E87AC34B1329DD9B14C08EEAFF0_cheshireCat.dds" />
     <None Include="testProject\sounds\.nomedia" />
   </ItemGroup>
