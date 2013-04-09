@@ -278,29 +278,29 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 	{
 		if (strcmp(node->name(), "Bricks.SetCostumeBrick") == 0)
 		{
-			script->addBrick(parseCostumeBrick(node));
+			script->addBrick(parseCostumeBrick(node, script));
 		}
 		else if(strcmp(node->name(), "Bricks.WaitBrick") == 0)
 		{
-			script->addBrick(parseWaitBrick(node));
+			script->addBrick(parseWaitBrick(node, script));
 		}
 		else if(strcmp(node->name(), "Bricks.PlaceAtBrick") == 0)
 		{
-			script->addBrick(parsePlaceAtBrick(node));
+			script->addBrick(parsePlaceAtBrick(node, script));
 		}
 		else if(strcmp(node->name(), "Bricks.SetGhostEffectBrick") == 0)
 		{
-			script->addBrick(parseSetGhostEffectBrick(node));
+			script->addBrick(parseSetGhostEffectBrick(node, script));
 		}
 		else if(strcmp(node->name(), "Bricks.PlaySoundBrick") == 0)
 		{
-			script->addBrick(parsePlaySoundBrick(node));
+			script->addBrick(parsePlaySoundBrick(node, script));
 		}
 		node = node->next_sibling();
 	}
 }
 
-Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode)
+Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode, Script *script)
 {
 	xml_node<> *spriteNode = baseNode->first_node("sprite");
 	if (!spriteNode)
@@ -334,7 +334,7 @@ Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode)
 	return new CostumeBrick(spriteReference, costumeDataRef->value(), index);	
 }
 
-Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode)
+Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script *script)
 {
 	xml_node<> *node = baseNode->first_node("timeToWaitInMilliSeconds");
 	if (!node)
@@ -354,7 +354,7 @@ Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode)
 	return new WaitBrick(spriteReference, time);
 }
 
-Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode)
+Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode, Script *script)
 {
 	xml_node<> *node = baseNode->first_node("xPosition");
 	if (!node)
@@ -378,7 +378,7 @@ Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode)
 	return new PlaceAtBrick(spriteReference, postionX, postionY);
 }
 
-Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode)
+Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
 {
 	xml_node<> *node = baseNode->first_node("transparency");
 	if (!node)
@@ -397,7 +397,7 @@ Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode)
 	return new SetGhostEffectBrick(spriteReference, transparency);
 }
 
-Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode)
+Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script *script)
 {
 	xml_node<> *soundInfoNode = baseNode->first_node("soundInfo");
 	if (!soundInfoNode)

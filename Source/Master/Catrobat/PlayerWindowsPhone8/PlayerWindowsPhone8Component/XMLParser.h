@@ -33,10 +33,10 @@ private:
 	Script *parseBroadcastScript(xml_node<> *baseNode);
 	Script *parseWhenScript(xml_node<> *baseNode);
 	void parseBrickList(xml_node<> *baseNode, Script *script);
-	Brick *parseCostumeBrick(xml_node<> *baseNode);
-	Brick *parseWaitBrick(xml_node<> *baseNode);
-	Brick *parsePlaceAtBrick(xml_node<> *baseNode);
-	Brick *parseSetGhostEffectBrick(xml_node<> *baseNode);
-	Brick *parsePlaySoundBrick(xml_node<> *baseNode);
+	Brick *parseCostumeBrick(xml_node<> *baseNode, Script *script);
+	Brick *parseWaitBrick(xml_node<> *baseNode, Script *script);
+	Brick *parsePlaceAtBrick(xml_node<> *baseNode, Script *script);
+	Brick *parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script);
+	Brick *parsePlaySoundBrick(xml_node<> *baseNode, Script *script);
 };
 
