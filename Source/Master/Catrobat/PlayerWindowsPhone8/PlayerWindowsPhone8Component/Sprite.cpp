@@ -65,5 +65,11 @@ void Sprite::LoadTextures(ID3D11Device* d3dDevice)
 
 void Sprite::Draw(SpriteBatch *spriteBatch)
 {
-	spriteBatch->Draw(getLookData(0)->Texture(), m_position, nullptr, Colors::Wheat, 0.0f, m_sourceOrigin, m_objectScale, SpriteEffects_None, 0.0f);
+	if (m_lookData == NULL)
+	{
+		m_lookData = getLookData(0);
+	}
+
+	if (m_lookData != NULL)
+		spriteBatch->Draw(m_lookData->Texture(), m_position, nullptr, Colors::Wheat, 0.0f, m_sourceOrigin, m_objectScale, SpriteEffects_None, 0.0f);
 }

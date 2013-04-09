@@ -20,7 +20,9 @@ string LookData::FileName()
 
 void LookData::LoadTexture(ID3D11Device* d3dDevice)
 {
-	CreateDDSTextureFromFile(d3dDevice, L"testProject/images/34A109A82231694B6FE09C216B390570_normalCat.dds", nullptr, &m_Texture, MAXSIZE_T);
+	std::wstring widestr = std::wstring(m_filename.begin(), m_filename.end());
+	const wchar_t* widecstr = widestr.c_str();
+	CreateDDSTextureFromFile(d3dDevice, widecstr, nullptr, &m_Texture, MAXSIZE_T);
 }
 
 ID3D11ShaderResourceView *LookData::Texture()
