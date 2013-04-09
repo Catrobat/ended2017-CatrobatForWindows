@@ -29,9 +29,9 @@ private:
 	void parseSpriteList(xml_document<> *doc, SpriteList *spriteList);
 	Sprite *parseSprite(xml_node<> *baseNode);
 	LookData *parseLookData(xml_node<> *baseNode);
-	Script *parseStartScript(xml_node<> *baseNode);
-	Script *parseBroadcastScript(xml_node<> *baseNode);
-	Script *parseWhenScript(xml_node<> *baseNode);
+	Script *parseStartScript(xml_node<> *baseNode, Sprite *sprite);
+	Script *parseBroadcastScript(xml_node<> *baseNode, Sprite *sprite);
+	Script *parseWhenScript(xml_node<> *baseNode, Sprite *sprite);
 	void parseBrickList(xml_node<> *baseNode, Script *script);
 	Brick *parseCostumeBrick(xml_node<> *baseNode, Script *script);
 	Brick *parseWaitBrick(xml_node<> *baseNode, Script *script);
@@ -39,4 +39,3 @@ private:
 	Brick *parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script);
 	Brick *parsePlaySoundBrick(xml_node<> *baseNode, Script *script);
 };
-

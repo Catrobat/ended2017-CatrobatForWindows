@@ -52,7 +52,7 @@ void XMLParser::parseXML(string xml)
 	doc.parse<0>(test);
 	char *str = doc.first_node()->name();
 
-	m_project = parseProjectInformation(&doc);	
+	m_project = parseProjectInformation(&doc);
 	parseSpriteList(&doc, m_project->getSpriteList());
 }
 
@@ -125,7 +125,7 @@ void XMLParser::parseSpriteList(xml_document<> *doc, SpriteList *spriteList)
 	{
 		spriteList->addSprite(parseSprite(node));
 		node = node->next_sibling("Content.Sprite");
-	}	
+	}
 }
 
 Sprite *XMLParser::parseSprite(xml_node<> *baseNode)
@@ -147,8 +147,7 @@ Sprite *XMLParser::parseSprite(xml_node<> *baseNode)
 			{
 				sprite->addLookData(parseLookData(costumeDataNode));
 				costumeDataNode = costumeDataNode->next_sibling("Common.CostumeData");
-
-			}	
+			}
 		}
 		else if (strcmp(node->name(), "scriptList") == 0)
 		{
@@ -157,15 +156,15 @@ Sprite *XMLParser::parseSprite(xml_node<> *baseNode)
 			{
 				if (strcmp(scriptListNode->name(), "Content.StartScript") == 0)
 				{
-					sprite->addScript(parseStartScript(scriptListNode));
+					sprite->addScript(parseStartScript(scriptListNode, sprite));
 				}
 				else if (strcmp(scriptListNode->name(), "Content.BroadcastScript") == 0)
 				{
-					sprite->addScript(parseBroadcastScript(scriptListNode));
+					sprite->addScript(parseBroadcastScript(scriptListNode, sprite));
 				}
 				else if (strcmp(scriptListNode->name(), "Content.WhenScript") == 0)
 				{
-					sprite->addScript(parseWhenScript(scriptListNode));
+					sprite->addScript(parseWhenScript(scriptListNode, sprite));
 				}
 
 				scriptListNode = scriptListNode->next_sibling();
@@ -197,28 +196,27 @@ LookData *XMLParser::parseLookData(xml_node<> *baseNode)
 	node = baseNode->first_node("fileName");
 	if (!node)
 		return NULL;
-	
+
 	filename = node->value();
-	
 
 	node = baseNode->first_node("name");
 	if (!node)
 		return NULL;
 
 	name = node->value();
-	
+
 	LookData *lookData = new LookData(filename, name);
 	return lookData;
 }
 
-Script *XMLParser::parseStartScript(xml_node<> *baseNode)
+Script *XMLParser::parseStartScript(xml_node<> *baseNode, Sprite *sprite)
 {
 	xml_node<> *spriteReferenceNode = baseNode->first_node("sprite");
 	if (!spriteReferenceNode)
 		return NULL;
 
 	xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute("reference");
-		
+
 	if (!spriteReferenceAttribute)
 		return NULL;
 
@@ -227,7 +225,7 @@ Script *XMLParser::parseStartScript(xml_node<> *baseNode)
 	return script;
 }
 
-Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode)
+Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode, Sprite *sprite)
 {
 	xml_node<> *spriteReferenceNode = baseNode->first_node("sprite");
 	if (!spriteReferenceNode)
@@ -247,7 +245,7 @@ Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode)
 	return script;
 }
 
-Script *XMLParser::parseWhenScript(xml_node<> *baseNode)
+Script *XMLParser::parseWhenScript(xml_node<> *baseNode, Sprite *sprite)
 {
 	xml_node<> *spriteReferenceNode = baseNode->first_node("sprite");
 	if (!spriteReferenceNode)
@@ -330,8 +328,8 @@ Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode, Script *script)
 		string index_str = ref.substr(begin + 1, end);
 		index = atoi(index_str.c_str());
 	}
-	
-	return new CostumeBrick(spriteReference, costumeDataRef->value(), index, script);	
+
+	return new CostumeBrick(spriteReference, costumeDataRef->value(), index, script);
 }
 
 Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script *script)
@@ -343,7 +341,7 @@ Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script *script)
 	int time = atoi(node->value());
 
 	node = baseNode->first_node("sprite");
-	if (!node) 
+	if (!node)
 		return NULL;
 
 	xml_attribute<> *spriteReferenceAttribute = node->first_attribute("reference");
