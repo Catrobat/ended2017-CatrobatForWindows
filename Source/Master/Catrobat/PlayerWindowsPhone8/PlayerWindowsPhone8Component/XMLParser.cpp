@@ -9,8 +9,6 @@
 #include "PlaceAtBrick.h"
 #include "PlaySoundBrick.h"
 #include "rapidxml\rapidxml_print.hpp"
-#include <string>
-#include "Script.h"
 
 #include <iostream>
 #include <fstream>
@@ -280,29 +278,29 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 	{
 		if (strcmp(node->name(), "Bricks.SetCostumeBrick") == 0)
 		{
-			script->addBrick(parseCostumeBrick(node, script));
+			script->addBrick(parseCostumeBrick(node));
 		}
 		else if(strcmp(node->name(), "Bricks.WaitBrick") == 0)
 		{
-			script->addBrick(parseWaitBrick(node, script));
+			script->addBrick(parseWaitBrick(node));
 		}
 		else if(strcmp(node->name(), "Bricks.PlaceAtBrick") == 0)
 		{
-			script->addBrick(parsePlaceAtBrick(node, script));
+			script->addBrick(parsePlaceAtBrick(node));
 		}
 		else if(strcmp(node->name(), "Bricks.SetGhostEffectBrick") == 0)
 		{
-			script->addBrick(parseSetGhostEffectBrick(node, script));
+			script->addBrick(parseSetGhostEffectBrick(node));
 		}
 		else if(strcmp(node->name(), "Bricks.PlaySoundBrick") == 0)
 		{
-			script->addBrick(parsePlaySoundBrick(node, script));
+			script->addBrick(parsePlaySoundBrick(node));
 		}
 		node = node->next_sibling();
 	}
 }
 
-Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode, Script* script)
+Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode)
 {
 	xml_node<> *spriteNode = baseNode->first_node("sprite");
 	if (!spriteNode)
@@ -316,27 +314,16 @@ Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode, Script* script)
 
 	xml_node<> *costumeDataNode =  baseNode->first_node("costumeData");
 	if (!costumeDataNode)
-		return new CostumeBrick(spriteReference, script);
+		return new CostumeBrick(spriteReference);
 
 	xml_attribute<> *costumeDataRef = costumeDataNode->first_attribute("reference");
 	if (!costumeDataRef)
 		return NULL;
 
-	string ref = costumeDataRef->value();
-
-	int begin = ref.find("[");
-	int end = ref.find("]");
-	int index = 0;
-	if (begin != string::npos && end != string::npos)
-	{
-		string index_str = ref.substr(begin + 1, end);
-		index = atoi(index_str.c_str());
-	}
-	
-	return new CostumeBrick(spriteReference, costumeDataRef->value(), script, index);	
+	return new CostumeBrick(spriteReference, costumeDataRef->value());	
 }
 
-Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script* script)
+Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode)
 {
 	xml_node<> *node = baseNode->first_node("timeToWaitInMilliSeconds");
 	if (!node)
@@ -353,10 +340,10 @@ Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script* script)
 		return NULL;
 
 	string spriteReference = spriteReferenceAttribute->value();
-	return new WaitBrick(spriteReference, script, time);
+	return new WaitBrick(spriteReference, time);
 }
 
-Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode, Script* script)
+Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode)
 {
 	xml_node<> *node = baseNode->first_node("xPosition");
 	if (!node)
@@ -377,10 +364,10 @@ Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode, Script* script)
 		return NULL;
 
 	string spriteReference = spriteReferenceAttribute->value();
-	return new PlaceAtBrick(spriteReference, script, postionX, postionY);
+	return new PlaceAtBrick(spriteReference, postionX, postionY);
 }
 
-Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode, Script* script)
+Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode)
 {
 	xml_node<> *node = baseNode->first_node("transparency");
 	if (!node)
@@ -396,10 +383,10 @@ Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode, Script* script)
 		return NULL;
 
 	string spriteReference = spriteReferenceAttribute->value();
-	return new SetGhostEffectBrick(spriteReference, script, transparency);
+	return new SetGhostEffectBrick(spriteReference, transparency);
 }
 
-Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script* script)
+Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode)
 {
 	xml_node<> *soundInfoNode = baseNode->first_node("soundInfo");
 	if (!soundInfoNode)
@@ -424,5 +411,5 @@ Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script* script)
 		return NULL;
 
 	string spriteReference = spriteReferenceAttribute->value();
-	return new PlaySoundBrick(spriteReference, script, filename, name);
+	return new PlaySoundBrick(spriteReference, filename, name);
 }

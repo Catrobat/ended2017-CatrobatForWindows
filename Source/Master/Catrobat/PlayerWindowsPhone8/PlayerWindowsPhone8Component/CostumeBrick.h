@@ -4,11 +4,9 @@ class CostumeBrick :
 	public Brick
 {
 public:
-	CostumeBrick(string spriteReference, string costumeDataReference, Script* parent, int index);
-	CostumeBrick(string spriteReference, Script* parent);
+	CostumeBrick(string spriteReference, string costumeDataReference);
+	CostumeBrick(string spriteReference);
 
-private:
 	string m_costumeDataReference;
-	int m_index;
 };
 
