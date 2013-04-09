@@ -314,7 +314,7 @@ Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode, Script *script)
 
 	xml_node<> *costumeDataNode =  baseNode->first_node("costumeData");
 	if (!costumeDataNode)
-		return new CostumeBrick(spriteReference);
+		return new CostumeBrick(spriteReference, script);
 
 	xml_attribute<> *costumeDataRef = costumeDataNode->first_attribute("reference");
 	if (!costumeDataRef)
@@ -331,7 +331,7 @@ Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode, Script *script)
 		index = atoi(index_str.c_str());
 	}
 	
-	return new CostumeBrick(spriteReference, costumeDataRef->value(), index);	
+	return new CostumeBrick(spriteReference, costumeDataRef->value(), index, script);	
 }
 
 Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script *script)
@@ -351,7 +351,7 @@ Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script *script)
 		return NULL;
 
 	string spriteReference = spriteReferenceAttribute->value();
-	return new WaitBrick(spriteReference, time);
+	return new WaitBrick(spriteReference, time, script);
 }
 
 Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode, Script *script)
@@ -375,7 +375,7 @@ Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode, Script *script)
 		return NULL;
 
 	string spriteReference = spriteReferenceAttribute->value();
-	return new PlaceAtBrick(spriteReference, postionX, postionY);
+	return new PlaceAtBrick(spriteReference, postionX, postionY, script);
 }
 
 Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
@@ -394,7 +394,7 @@ Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
 		return NULL;
 
 	string spriteReference = spriteReferenceAttribute->value();
-	return new SetGhostEffectBrick(spriteReference, transparency);
+	return new SetGhostEffectBrick(spriteReference, transparency, script);
 }
 
 Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script *script)
@@ -422,5 +422,5 @@ Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script *script)
 		return NULL;
 
 	string spriteReference = spriteReferenceAttribute->value();
-	return new PlaySoundBrick(spriteReference, filename, name);
+	return new PlaySoundBrick(spriteReference, filename, name, script);
 }
