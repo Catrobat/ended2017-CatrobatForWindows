@@ -36,7 +36,7 @@ void Brick::LoadTexture(ID3D11Device* d3dDevice)
 	auto files = installedLocation->GetFilesAsync();
 	auto appInstallDirectory = Windows::Storage::ApplicationData::Current->LocalFolder;
 	Platform::String^ output = "Installed Location: " + installedLocation->Path;
-	//CreateDDSTextureFromFile(d3dDevice, L"testProject/images/34A109A82231694B6FE09C216B390570_normalCat.dds", nullptr, &m_Texture, MAXSIZE_T);
-	CreateDDSTextureFromFile(d3dDevice, L"brick.dds", nullptr, &m_Texture, MAXSIZE_T);
+	CreateDDSTextureFromFile(d3dDevice, L"testProject/images/34A109A82231694B6FE09C216B390570_normalCat.dds", nullptr, &m_Texture, MAXSIZE_T);
+	//CreateDDSTextureFromFile(d3dDevice, L"brick.dds", nullptr, &m_Texture, MAXSIZE_T);
 }
 

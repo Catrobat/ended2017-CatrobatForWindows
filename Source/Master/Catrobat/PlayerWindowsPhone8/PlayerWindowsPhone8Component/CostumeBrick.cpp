@@ -2,8 +2,8 @@
 #include "CostumeBrick.h"
 
 
-CostumeBrick::CostumeBrick(string spriteReference, string costumeDataReference) :
-	Brick(TypeOfBrick::CostumeBrick, spriteReference), m_costumeDataReference(costumeDataReference)
+CostumeBrick::CostumeBrick(string spriteReference, string costumeDataReference, int index) :
+	Brick(TypeOfBrick::CostumeBrick, spriteReference), m_costumeDataReference(costumeDataReference), m_index(index)
 {
 }
 

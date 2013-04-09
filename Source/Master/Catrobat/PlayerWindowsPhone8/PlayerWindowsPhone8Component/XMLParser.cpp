@@ -320,7 +320,18 @@ Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode)
 	if (!costumeDataRef)
 		return NULL;
 
-	return new CostumeBrick(spriteReference, costumeDataRef->value());	
+	string ref = costumeDataRef->value();
+
+	int begin = ref.find("[");
+	int end = ref.find("]");
+	int index = 0;
+	if (begin != string::npos && end != string::npos)
+	{
+		string index_str = ref.substr(begin + 1, end);
+		index = atoi(index_str.c_str());
+	}
+	
+	return new CostumeBrick(spriteReference, costumeDataRef->value(), index);	
 }
 
 Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode)
