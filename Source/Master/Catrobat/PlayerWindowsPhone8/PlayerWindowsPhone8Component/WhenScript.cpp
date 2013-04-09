@@ -1,9 +1,8 @@
 #include "pch.h"
 #include "WhenScript.h"
 
-
-WhenScript::WhenScript(string action, string spriteReference) :
-	Script(TypeOfScript::WhenScript, spriteReference), m_action(action)
+WhenScript::WhenScript(string action, string spriteReference, Sprite *parent) :
+	Script(TypeOfScript::WhenScript, spriteReference, parent), m_action(action)
 {
 }
 

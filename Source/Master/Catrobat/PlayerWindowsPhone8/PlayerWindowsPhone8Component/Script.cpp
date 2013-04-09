@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "Script.h"
 
-Script::Script(TypeOfScript scriptType, string spriteReference) :
+Script::Script(TypeOfScript scriptType, string spriteReference, Sprite *parent) :
 	BaseObject(50, 50, 1, 1, 0, 0),
-	m_scriptType(scriptType), m_spriteReference(spriteReference)
+	m_scriptType(scriptType), m_spriteReference(spriteReference), m_parent(parent)
 {
 	m_brickList = new list<Brick*>();
 }

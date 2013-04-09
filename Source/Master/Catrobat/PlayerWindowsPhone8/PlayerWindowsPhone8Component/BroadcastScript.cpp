@@ -1,9 +1,8 @@
 #include "pch.h"
 #include "BroadcastScript.h"
 
-
-BroadcastScript::BroadcastScript(string receivedMessage, string spriteReference) : 
-	Script(TypeOfScript::BroadcastScript, spriteReference), m_receivedMessage(receivedMessage)
+BroadcastScript::BroadcastScript(string receivedMessage, string spriteReference, Sprite *parent) :
+	Script(TypeOfScript::BroadcastScript, spriteReference, parent), m_receivedMessage(receivedMessage)
 {
 }
 

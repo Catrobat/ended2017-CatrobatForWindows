@@ -7,6 +7,7 @@
 
 using namespace std;
 
+class Sprite;
 class Script : BaseObject
 {
 public:
@@ -33,11 +34,11 @@ public:
 	TypeOfScript getType();
 
 protected:
-	Script(TypeOfScript scriptType, string spriteReference);
+	Script(TypeOfScript scriptType, string spriteReference, Sprite *parent);
 
 private:
+	Sprite *m_parent;
 	TypeOfScript m_scriptType;
 	list<Brick*> *m_brickList;
 	string m_spriteReference;
 };
-

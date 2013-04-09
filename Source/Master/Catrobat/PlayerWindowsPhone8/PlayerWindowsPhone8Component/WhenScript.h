@@ -4,7 +4,7 @@ class WhenScript :
 	public Script
 {
 public:
-	WhenScript(string action, string spriteReference);
+	WhenScript(string action, string spriteReference, Sprite *parent);
 	~WhenScript();
 
 	string getAction();
@@ -12,4 +12,3 @@ public:
 private:
 	string m_action;
 };
-

@@ -220,7 +220,7 @@ Script *XMLParser::parseStartScript(xml_node<> *baseNode, Sprite *sprite)
 	if (!spriteReferenceAttribute)
 		return NULL;
 
-	StartScript *script = new StartScript(spriteReferenceAttribute->value());
+	StartScript *script = new StartScript(spriteReferenceAttribute->value(), sprite);
 	parseBrickList(baseNode, script);
 	return script;
 }
@@ -240,7 +240,7 @@ Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode, Sprite *sprite)
 	if (!messageNode)
 		return NULL;
 
-	BroadcastScript *script = new BroadcastScript(messageNode->value(), spriteReferenceAttribute->value());
+	BroadcastScript *script = new BroadcastScript(messageNode->value(), spriteReferenceAttribute->value(), sprite);
 	parseBrickList(baseNode, script);
 	return script;
 }
@@ -260,7 +260,7 @@ Script *XMLParser::parseWhenScript(xml_node<> *baseNode, Sprite *sprite)
 	if (!actionNode)
 		return NULL;
 
-	WhenScript *script = new WhenScript(actionNode->value(), spriteReferenceAttribute->value());
+	WhenScript *script = new WhenScript(actionNode->value(), spriteReferenceAttribute->value(), sprite);
 	parseBrickList(baseNode, script);
 	return script;
 }
