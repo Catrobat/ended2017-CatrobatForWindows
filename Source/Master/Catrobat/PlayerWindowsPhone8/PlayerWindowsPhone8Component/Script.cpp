@@ -67,3 +67,8 @@ void Script::LoadTexture(ID3D11Device* d3dDevice)
 {
 	CreateDDSTextureFromFile(d3dDevice, L"script.dds", nullptr, &m_Texture, MAXSIZE_T);
 }
+
+Sprite *Script::Parent()
+{
+	return m_parent;
+}

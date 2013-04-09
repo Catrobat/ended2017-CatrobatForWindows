@@ -18,6 +18,8 @@ public:
 		WhenScript
 	};
 
+	Sprite *Parent();
+
 	void addBrick(Brick *brick);
 	void addSpriteReference(string spriteReference);
 

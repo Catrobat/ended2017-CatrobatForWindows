@@ -19,6 +19,8 @@ public:
 		PlaySoundBrick
 	};
 
+	Script *Parent();
+
 	void Render(SpriteBatch *spriteBatch);
 	void LoadTextures(ID3D11Device* d3dDevice);
 	void Draw(SpriteBatch *spriteBatch);
