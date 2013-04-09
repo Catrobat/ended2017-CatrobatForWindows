@@ -48,7 +48,7 @@ void Project::Render(SpriteBatch *spriteBatch)
 {
 	for (int i = 0; i < m_spriteList->Size(); i++)
 	{
-		m_spriteList->getSprite(i)->Render(spriteBatch);
+		m_spriteList->getSprite(i)->Draw(spriteBatch);
 	}
 }
 

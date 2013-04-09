@@ -2,7 +2,6 @@
 #include "Script.h"
 
 Script::Script(TypeOfScript scriptType, string spriteReference, Sprite *parent) :
-	BaseObject(50, 50, 1, 1, 0, 0),
 	m_scriptType(scriptType), m_spriteReference(spriteReference), m_parent(parent)
 {
 	m_brickList = new list<Brick*>();
@@ -46,26 +45,6 @@ void Script::Render(SpriteBatch *spriteBatch)
 	{
 		GetBrick(i)->Render(spriteBatch);
 	}
-	Draw(spriteBatch);
-}
-
-void Script::LoadTextures(ID3D11Device* d3dDevice)
-{
-	for (int i = 0; i < BrickListSize(); i++)
-	{
-		GetBrick(i)->LoadTextures(d3dDevice);
-	}
-	LoadTexture(d3dDevice);
-}
-
-void Script::Draw(SpriteBatch *spriteBatch)
-{
-	spriteBatch->Draw(m_Texture, m_position, nullptr, Colors::Wheat, 0.0f, m_sourceOrigin, m_objectScale, SpriteEffects_None, 0.0f);
-}
-
-void Script::LoadTexture(ID3D11Device* d3dDevice)
-{
-	CreateDDSTextureFromFile(d3dDevice, L"script.dds", nullptr, &m_Texture, MAXSIZE_T);
 }
 
 Sprite *Script::Parent()

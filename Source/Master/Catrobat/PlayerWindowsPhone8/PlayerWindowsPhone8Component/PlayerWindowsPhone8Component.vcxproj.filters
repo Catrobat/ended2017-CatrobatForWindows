@@ -5,9 +5,6 @@
     <ClCompile Include="BaseObject.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="TestObject.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -84,9 +81,6 @@
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
     <ClInclude Include="BaseObject.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="TestObject.h">
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">

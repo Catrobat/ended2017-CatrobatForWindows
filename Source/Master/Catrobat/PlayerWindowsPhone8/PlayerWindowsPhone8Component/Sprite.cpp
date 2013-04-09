@@ -1,10 +1,11 @@
 #include "pch.h"
 #include "Sprite.h"
 
-
 Sprite::Sprite(string name) :
+	BaseObject(50, 50, 1, 1, 1, 1),
 	m_name(name)
 {
+	m_lookData = NULL;
 	m_lookDatas = new list<LookData*>();
 	m_scripts = new list<Script*>();
 	m_soundInfos = new list<SoundInfo*>();
@@ -54,21 +55,15 @@ Script *Sprite::getScript(int index)
 	return *it;
 }
 
-void Sprite::Render(SpriteBatch *spriteBatch)
-{
-	for (int i = 0; i < ScriptListSize(); i++)
-	{
-		getScript(i)->Render(spriteBatch);
-	}
-}
-
 void Sprite::LoadTextures(ID3D11Device* d3dDevice)
 {
-	for (int i = 0; i < ScriptListSize(); i++)
+	for (int i = 0; i < LookDataListSize(); i++)
 	{
-		getScript(i)->LoadTextures(d3dDevice);
+		getLookData(i)->LoadTexture(d3dDevice);
 	}
 }
 
-
-
+void Sprite::Draw(SpriteBatch *spriteBatch)
+{
+	spriteBatch->Draw(getLookData(0)->Texture(), m_position, nullptr, Colors::Wheat, 0.0f, m_sourceOrigin, m_objectScale, SpriteEffects_None, 0.0f);
+}

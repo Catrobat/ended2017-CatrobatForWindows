@@ -8,7 +8,7 @@
 using namespace std;
 
 class Sprite;
-class Script : BaseObject
+class Script
 {
 public:
 	enum TypeOfScript
@@ -24,9 +24,6 @@ public:
 	void addSpriteReference(string spriteReference);
 
 	void Render(SpriteBatch *spriteBatch);
-	void LoadTextures(ID3D11Device* d3dDevice);
-	void Draw(SpriteBatch *spriteBatch);
-	void LoadTexture(ID3D11Device* d3dDevice);
 
 	string SpriteReference();
 

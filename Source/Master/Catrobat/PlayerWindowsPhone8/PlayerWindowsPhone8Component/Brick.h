@@ -7,7 +7,7 @@
 using namespace std;
 class Script;
 
-class Brick : BaseObject
+class Brick
 {
 public:
 	enum TypeOfBrick
@@ -22,9 +22,6 @@ public:
 	Script *Parent();
 
 	void Render(SpriteBatch *spriteBatch);
-	void LoadTextures(ID3D11Device* d3dDevice);
-	void Draw(SpriteBatch *spriteBatch);
-	void LoadTexture(ID3D11Device* d3dDevice);
 
 	TypeOfBrick BrickType();
 

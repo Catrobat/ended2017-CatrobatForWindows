@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class Sprite
+class Sprite : BaseObject
 {
 public:
 	Sprite(string name);
@@ -19,8 +19,8 @@ public:
 	void addScript(Script *script);
 	void addSoundInfo(SoundInfo *soundInfo);
 
-	void Render(SpriteBatch *spriteBatch);
 	void LoadTextures(ID3D11Device* d3dDevice);
+	void Draw(SpriteBatch *spriteBatch);
 
 	int ScriptListSize();
 	Script *getScript(int index);
@@ -30,9 +30,9 @@ public:
 	LookData *getLookData(int index);
 
 private:
+	LookData *m_lookData;
 	list<LookData*> *m_lookDatas;
 	list<Script*> *m_scripts;
 	list<SoundInfo*> *m_soundInfos;
 	string m_name;
 };
-
