@@ -1,10 +1,11 @@
 #include "pch.h"
 #include "Brick.h"
+#include "Script.h"
 
-
-Brick::Brick(TypeOfBrick brickType, string spriteReference) :
+Brick::Brick(TypeOfBrick brickType, string spriteReference, Script* parent) :
 	BaseObject(200, 500, 1, 1, 0, 0),
-	m_brickType(brickType), m_spriteReference(spriteReference)
+	m_brickType(brickType), m_spriteReference(spriteReference),
+	m_parent(parent)
 {
 }
 
@@ -36,7 +37,7 @@ void Brick::LoadTexture(ID3D11Device* d3dDevice)
 	auto files = installedLocation->GetFilesAsync();
 	auto appInstallDirectory = Windows::Storage::ApplicationData::Current->LocalFolder;
 	Platform::String^ output = "Installed Location: " + installedLocation->Path;
-	//CreateDDSTextureFromFile(d3dDevice, L"testProject/images/34A109A82231694B6FE09C216B390570_normalCat.dds", nullptr, &m_Texture, MAXSIZE_T);
-	CreateDDSTextureFromFile(d3dDevice, L"brick.dds", nullptr, &m_Texture, MAXSIZE_T);
+	CreateDDSTextureFromFile(d3dDevice, L"testProject/images/34A109A82231694B6FE09C216B390570_normalCat.dds", nullptr, &m_Texture, MAXSIZE_T);
+	//CreateDDSTextureFromFile(d3dDevice, L"brick.dds", nullptr, &m_Texture, MAXSIZE_T);
 }
 

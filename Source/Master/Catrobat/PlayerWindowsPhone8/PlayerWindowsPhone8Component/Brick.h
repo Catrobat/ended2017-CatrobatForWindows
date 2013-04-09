@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BaseObject.h"
+#include "Script.h"
 
 #include <string>
 
@@ -26,10 +27,11 @@ public:
 	TypeOfBrick BrickType();
 
 protected:
-		Brick(TypeOfBrick brickType, string spriteReference);
+		Brick(TypeOfBrick brickType, string spriteReference, Script* parent);
 
 private:
 	TypeOfBrick m_brickType;
 	string m_spriteReference;
+	Script *m_parent;
 };
 
