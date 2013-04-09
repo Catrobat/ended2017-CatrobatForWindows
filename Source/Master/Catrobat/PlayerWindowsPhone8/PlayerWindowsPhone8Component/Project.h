@@ -18,6 +18,9 @@ public:
 	int getScreenHeight();
 	SpriteList *getSpriteList();
 
+	void Render(SpriteBatch *spriteBatch);
+	void LoadTextures(ID3D11Device* d3dDevice);
+
 private:
 	int m_androidVersion;
 	int m_catroidVersionCode;

@@ -6,7 +6,6 @@ using namespace Windows::Graphics::Display;
 BaseObject::BaseObject(Rect position, float originX, float originY)
 {
 	scale = DisplayProperties::LogicalDpi / 96.0f;
-	m_Texture = nullptr;
 
 	m_position.x = position.X;
 	m_position.y =  position.Y;
@@ -19,8 +18,7 @@ BaseObject::BaseObject(Rect position, float originX, float originY)
 BaseObject::BaseObject(Point location, Size size, float originX, float originY)
 {
 	scale = DisplayProperties::LogicalDpi / 96.0f;
-	m_Texture = nullptr;
-	
+
 	m_position.x = location.X;
 	m_position.y =  location.Y;
 	m_sourceOrigin.x = originX;
@@ -37,5 +35,4 @@ BaseObject::BaseObject(float x, float y, float width, float height, float origin
 	m_sourceOrigin.y = originY;
 	m_objectScale.x = width;
 	m_objectScale.y = height;
-
 }

@@ -4,7 +4,6 @@ class StartScript :
 	public Script
 {
 public:
-	StartScript(string spriteReference);
+	StartScript(string spriteReference, Sprite *parent);
 	~StartScript();
 };
-

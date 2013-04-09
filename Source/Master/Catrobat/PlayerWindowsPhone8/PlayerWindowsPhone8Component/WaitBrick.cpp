@@ -2,8 +2,8 @@
 #include "WaitBrick.h"
 
 
-WaitBrick::WaitBrick(string spriteReference, int timeToWaitInMilliSeconds) :
-	Brick(TypeOfBrick::WaitBrick, spriteReference), m_timeToWaitInMilliSeconds(timeToWaitInMilliSeconds)
+WaitBrick::WaitBrick(string spriteReference, int timeToWaitInMilliSeconds, Script *parent) :
+	Brick(TypeOfBrick::WaitBrick, spriteReference, parent), m_timeToWaitInMilliSeconds(timeToWaitInMilliSeconds)
 {
 }
 

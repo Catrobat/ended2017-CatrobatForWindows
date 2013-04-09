@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "Renderer.h"
+#include "ProjectDaemon.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -24,9 +25,10 @@ void Renderer::CreateWindowSizeDependentResources()
 	Direct3DBase::CreateWindowSizeDependentResources();
 
 	//CreateTestObject2();
-	CreateTestObject3();
+	//CreateTestObject3();
 	//CreateTestObject4();
-	m_testObject->LoadTexture(m_d3dDevice.Get());
+	//m_testObject->LoadTexture(m_d3dDevice.Get());
+	ProjectDaemon::Instance()->getProject()->LoadTextures(m_d3dDevice.Get());
 }
 
 void Renderer::Update(float timeTotal, float timeDelta)
@@ -66,30 +68,8 @@ void Renderer::Render()
 	// SpriteBatch for Drawing. Call Draw Methods of the Objects here.
 	// ---------------------------------------------------------------------->
 	m_spriteBatch->Begin();
-
-	m_testObject->Draw(m_spriteBatch.get());
-
+	ProjectDaemon::Instance()->getProject()->Render(m_spriteBatch.get());
+	//m_testObject->Draw(m_spriteBatch.get());
 	m_spriteBatch->End();
 	// ---------------------------------------------------------------------->
-}
-
-void Renderer::CreateTestObject2()
-{
-	// TestObject(float x, float y, float width, float height, float originX, float originY);
-	m_testObject = new TestObject(50, 50, 1, 1, 0, 0);
-}
-
-void Renderer::CreateTestObject3()
-{
-	// TestObject(Rect *position, float originX, float originY);
-	Rect position(50, 50, 1, 1);
-	m_testObject = new TestObject(position);
-}
-
-void Renderer::CreateTestObject4()
-{
-	// TestObject(Point location, Size size, float originX = 0, float originY = 0); 
-	Point location(50, 50);
-	Size size(1, 1);
-	m_testObject = new TestObject(location, size);
 }

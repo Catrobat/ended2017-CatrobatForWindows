@@ -157,6 +157,7 @@
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
     <ClInclude Include="PlaySoundBrick.h" />
     <ClInclude Include="Project.h" />
+    <ClInclude Include="ProjectDaemon.h" />
     <ClInclude Include="ProjectParser.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="DirectXHelper.h" />
@@ -171,7 +172,6 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteList.h" />
     <ClInclude Include="StartScript.h" />
-    <ClInclude Include="TestObject.h" />
     <ClInclude Include="WaitBrick.h" />
     <ClInclude Include="WhenScript.h" />
     <ClInclude Include="XMLParser.h" />
@@ -186,6 +186,7 @@
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
     <ClCompile Include="PlaySoundBrick.cpp" />
     <ClCompile Include="Project.cpp" />
+    <ClCompile Include="ProjectDaemon.cpp" />
     <ClCompile Include="ProjectParser.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Direct3DBase.cpp" />
@@ -201,7 +202,6 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteList.cpp" />
     <ClCompile Include="StartScript.cpp" />
-    <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="WaitBrick.cpp" />
     <ClCompile Include="WhenScript.cpp" />
     <ClCompile Include="XMLParser.cpp" />
@@ -212,7 +212,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="brick.dds" />
     <Image Include="CatTexture.dds" />
+    <Image Include="script.dds" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsPhone\v$(TargetPlatformVersion)\Microsoft.Cpp.WindowsPhone.$(TargetPlatformVersion).targets" />

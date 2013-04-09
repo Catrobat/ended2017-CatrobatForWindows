@@ -91,6 +91,12 @@ void ProjectParser::parseSprites(xml_node<> *baseNode)
 			xml_node<> *child = m_doc->allocate_node(node_element, "name", string2char(sprite->getName()));
 			spriteNode->append_node(child);
 
+
+			xml_node<> *lookDataListNode = m_doc->allocate_node(node_element, "costumeDataList");
+			spriteNode->append_node(lookDataListNode);
+
+			parseLookDatas(lookDataListNode, sprite);
+
 			xml_node<> *scriptListNode = m_doc->allocate_node(node_element, "scriptList");
 			spriteNode->append_node(scriptListNode);
 
@@ -101,10 +107,12 @@ void ProjectParser::parseSprites(xml_node<> *baseNode)
 
 void ProjectParser::parseScripts(xml_node<> *scriptListNode, Sprite *sprite)
 {
-	for (int scriptIndex = 0; scriptIndex < sprite->Size(); scriptIndex++)
+	for (int scriptIndex = 0; scriptIndex < sprite->ScriptListSize(); scriptIndex++)
 	{
 		xml_node<> *scriptNode = NULL;
 		Script *script = sprite->getScript(scriptIndex);
+		
+		// Change this to switch case too
 		if (script->getType() == Script::TypeOfScript::StartScript)
 		{
 			StartScript *startScript = (StartScript*) script;
@@ -114,15 +122,80 @@ void ProjectParser::parseScripts(xml_node<> *scriptListNode, Sprite *sprite)
 		{
 			BroadcastScript *broadcastScript = (BroadcastScript*) script;
 			scriptNode = m_doc->allocate_node(node_element, "Content.BroadcastScript");
+			scriptNode->append_node(m_doc->allocate_node(node_element, "receivedMessage", string2char(broadcastScript->ReceivedMessage())));
 		}
 		else if (script->getType() == Script::TypeOfScript::WhenScript)
 		{
 			WhenScript *whenScript = (WhenScript*) script;
 			scriptNode = m_doc->allocate_node(node_element, "Content.WhenScript");
-			xml_node<> *actionNode = m_doc->allocate_node(node_element, "action", string2char(whenScript->getAction()));
-			scriptNode->append_node(actionNode);
+			scriptNode->append_node(m_doc->allocate_node(node_element, "action", string2char(whenScript->getAction())));
 		}
+
+		xml_node<> *brickListNode = m_doc->allocate_node(node_element, "brickList");
+		scriptNode->append_node(brickListNode);
+
+		parseBricks(brickListNode, script);
+
+		xml_node<> *spriteNode = m_doc->allocate_node(node_element, "sprite");
+		spriteNode->append_attribute(m_doc->allocate_attribute("reference", string2char(script->SpriteReference())));
+		scriptNode->append_node(spriteNode);
+
 		scriptListNode->append_node(scriptNode);
+	}
+}
+
+void ProjectParser::parseLookDatas(xml_node<> *lookDataListNode, Sprite *sprite)
+{
+	for (int lookDataIndex = 0; lookDataIndex < sprite->LookDataListSize(); lookDataIndex++)
+	{
+		LookData *lookData = sprite->getLookData(lookDataIndex);
+		xml_node<> *lookDataNode = m_doc->allocate_node(node_element, "Common.CostumeData");
+		lookDataNode->append_node(m_doc->allocate_node(node_element, "fileName", string2char(lookData->FileName())));
+		lookDataNode->append_node(m_doc->allocate_node(node_element, "name", string2char(lookData->Name())));
+		lookDataListNode->append_node(lookDataNode);
+	}
+}
+
+void ProjectParser::parseBricks(xml_node<> *brickListNode, Script *script)
+{
+	for (int index = 0; index < script->BrickListSize(); index++)
+	{
+		xml_node<> *brickNode = NULL;
+		Brick *brick = script->GetBrick(index);
+		switch(brick->BrickType())
+		{
+			case Brick::TypeOfBrick::CostumeBrick:
+				{
+					CostumeBrick *costumeBrick = (CostumeBrick*) brick;
+					brickNode = m_doc->allocate_node(node_element, "Bricks.CostumeBrick");
+				}
+			break;
+			case Brick::TypeOfBrick::PlaceAtBrick:
+				{
+					PlaceAtBrick *placeAtBrick = (PlaceAtBrick*) brick;
+					brickNode = m_doc->allocate_node(node_element, "Bricks.PlaceAtBrick");
+				}
+			break;
+			case Brick::TypeOfBrick::PlaySoundBrick:
+				{
+					PlaySoundBrick *playSoundBrick = (PlaySoundBrick*) brick;
+					brickNode = m_doc->allocate_node(node_element, "Bricks.PlaySoundBrick");
+				}
+			break;
+			case Brick::TypeOfBrick::SetGhostEffectBrick:
+				{
+					SetGhostEffectBrick *setGhostEffectBrick = (SetGhostEffectBrick*) brick;
+					brickNode = m_doc->allocate_node(node_element, "Bricks.SetGhostEffectBrick");
+				}
+			break;
+			case Brick::TypeOfBrick::WaitBrick:
+				{
+					WaitBrick *waitBrick = (WaitBrick*) brick;
+					brickNode = m_doc->allocate_node(node_element, "Bricks.WaitBrick");
+				}
+			break;
+		}
+		brickListNode->append_node(brickNode);
 	}
 }
 

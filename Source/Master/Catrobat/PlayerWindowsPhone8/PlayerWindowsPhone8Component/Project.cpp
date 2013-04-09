@@ -43,3 +43,19 @@ SpriteList *Project::getSpriteList()
 {
 	return m_spriteList;
 }
+
+void Project::Render(SpriteBatch *spriteBatch)
+{
+	for (int i = 0; i < m_spriteList->Size(); i++)
+	{
+		m_spriteList->getSprite(i)->Draw(spriteBatch);
+	}
+}
+
+void Project::LoadTextures(ID3D11Device* d3dDevice)
+{
+	for (int i = 0; i < m_spriteList->Size(); i++)
+	{
+		m_spriteList->getSprite(i)->LoadTextures(d3dDevice);
+	}
+}

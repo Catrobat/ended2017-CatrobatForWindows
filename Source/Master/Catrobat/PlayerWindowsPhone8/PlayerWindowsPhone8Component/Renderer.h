@@ -2,7 +2,7 @@
 
 #include "Direct3DBase.h"
 #include "SpriteBatch.h"
-#include "TestObject.h"
+#include "Project.h"
 
 #include <wrl/client.h>
 
@@ -33,7 +33,6 @@ private:
 	float m_scale;
 
 	// Just for testing
-	TestObject *m_testObject;
 	void CreateTestObject2();
 	void CreateTestObject3();
 	void CreateTestObject4();

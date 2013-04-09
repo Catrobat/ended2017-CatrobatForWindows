@@ -5,9 +5,6 @@
     <ClCompile Include="BaseObject.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="TestObject.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -77,13 +74,13 @@
     <ClCompile Include="ProjectParser.cpp">
       <Filter>XMLParser</Filter>
     </ClCompile>
+    <ClCompile Include="ProjectDaemon.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
     <ClInclude Include="BaseObject.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="TestObject.h">
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
@@ -161,9 +158,9 @@
     <ClInclude Include="ProjectParser.h">
       <Filter>XMLParser</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="CatTexture.dds" />
+    <ClInclude Include="ProjectDaemon.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -184,5 +181,10 @@
     <Filter Include="Objects\Scripts">
       <UniqueIdentifier>{fda72b0d-ed6b-4c59-9473-4911f7bd4bc6}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="CatTexture.dds" />
+    <Image Include="script.dds" />
+    <Image Include="brick.dds" />
   </ItemGroup>
 </Project>

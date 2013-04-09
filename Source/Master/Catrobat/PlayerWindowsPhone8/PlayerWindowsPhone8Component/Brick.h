@@ -1,8 +1,11 @@
 #pragma once
 
+#include "BaseObject.h"
+
 #include <string>
 
 using namespace std;
+class Script;
 
 class Brick
 {
@@ -16,10 +19,17 @@ public:
 		PlaySoundBrick
 	};
 
-	Brick(TypeOfBrick brickType, string spriteReference);
+	Script *Parent();
+
+	void Render(SpriteBatch *spriteBatch);
+
+	TypeOfBrick BrickType();
+
+protected:
+	Brick(TypeOfBrick brickType, string spriteReference, Script *parent);
 
 private:
+	Script *m_parent;
 	TypeOfBrick m_brickType;
 	string m_spriteReference;
 };
-
