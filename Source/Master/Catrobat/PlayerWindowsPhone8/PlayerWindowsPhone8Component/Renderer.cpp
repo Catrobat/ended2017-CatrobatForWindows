@@ -10,6 +10,7 @@ using namespace Windows::Graphics::Display;
 
 Renderer::Renderer() :
 	m_loadingComplete(false),
+	m_startup(true),
 	m_indexCount(0)
 {
 	m_scale = DisplayProperties::LogicalDpi / 96.0f;
@@ -23,17 +24,16 @@ void Renderer::CreateDeviceResources()
 void Renderer::CreateWindowSizeDependentResources()
 {
 	Direct3DBase::CreateWindowSizeDependentResources();
-
-	//CreateTestObject2();
-	//CreateTestObject3();
-	//CreateTestObject4();
-	//m_testObject->LoadTexture(m_d3dDevice.Get());
 	ProjectDaemon::Instance()->getProject()->LoadTextures(m_d3dDevice.Get());
 }
 
 void Renderer::Update(float timeTotal, float timeDelta)
 {
-	// Standard Update Method (Use like in XNA :))
+	if (m_startup)
+	{
+		m_startup = false;
+		StartUpTasks();
+	}
 }
 
 void Renderer::Render()
@@ -69,7 +69,11 @@ void Renderer::Render()
 	// ---------------------------------------------------------------------->
 	m_spriteBatch->Begin();
 	ProjectDaemon::Instance()->getProject()->Render(m_spriteBatch.get());
-	//m_testObject->Draw(m_spriteBatch.get());
 	m_spriteBatch->End();
 	// ---------------------------------------------------------------------->
+}
+
+void Renderer::StartUpTasks()
+{
+	ProjectDaemon::Instance()->getProject()->StartUp();
 }

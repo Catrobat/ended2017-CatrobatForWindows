@@ -47,8 +47,7 @@ void Direct3DBackground::SetManipulationHost(DrawingSurfaceManipulationHost^ man
 void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender, PointerEventArgs^ args)
 {
 	// Insert your code here.
-	HANDLE ExampleEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, TEXT("ExampleEvent"));
-	SetEvent(ExampleEvent);
+
 }
 
 void Direct3DBackground::OnPointerMoved(DrawingSurfaceManipulationHost^ sender, PointerEventArgs^ args)

@@ -21,7 +21,7 @@ public:
 
 	void LoadTextures(ID3D11Device* d3dDevice);
 	void Draw(SpriteBatch *spriteBatch);
-	void Execute();
+	void StartUp();
 
 	int ScriptListSize();
 	Script *getScript(int index);

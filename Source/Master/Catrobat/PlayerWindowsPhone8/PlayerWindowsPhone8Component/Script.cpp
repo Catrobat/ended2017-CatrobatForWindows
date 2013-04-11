@@ -46,24 +46,20 @@ Brick *Script::GetBrick(int index)
 	return *it;
 }
 
-//void Script::Execute()
-//{
-//	auto WorkItem = ref new WorkItemHandler(
-//		[this](IAsyncAction^ workItem)
-//	{
-//		list<Brick*>::iterator it;
-//		while (true)
-//		{
-//			for(it=m_brickList->begin(); it!=m_brickList->end(); it++)
-//			{
-//				(*it)->Execute();
-//			}
-//			Concurrency::wait(10);
-//		}
-//	});
-//
-//	IAsyncAction^ ThreadPoolWorkItem = ThreadPool::RunAsync(WorkItem);
-//}
+void Script::Execute()
+{
+	auto WorkItem = ref new WorkItemHandler(
+		[this](IAsyncAction^ workItem)
+	{
+		for (int i = 0; i < BrickListSize(); i++)
+		{
+			GetBrick(i)->Execute();
+		}
+		Concurrency::wait(10);
+	});
+
+	IAsyncAction^ ThreadPoolWorkItem = ThreadPool::RunAsync(WorkItem);
+}
 
 Sprite *Script::Parent()
 {

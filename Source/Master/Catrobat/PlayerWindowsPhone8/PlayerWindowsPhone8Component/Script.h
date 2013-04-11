@@ -23,7 +23,7 @@ public:
 	void addBrick(Brick *brick);
 	void addSpriteReference(string spriteReference);
 
-	virtual void Execute() = 0;
+	void Execute();
 
 	string SpriteReference();
 

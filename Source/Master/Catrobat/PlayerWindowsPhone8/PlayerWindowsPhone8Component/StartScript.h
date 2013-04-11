@@ -6,6 +6,4 @@ class StartScript :
 public:
 	StartScript(string spriteReference, Sprite *parent);
 	~StartScript();
-
-	void Execute();
 };

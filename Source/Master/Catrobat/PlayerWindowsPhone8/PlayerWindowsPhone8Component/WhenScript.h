@@ -7,8 +7,6 @@ public:
 	WhenScript(string action, string spriteReference, Sprite *parent);
 	~WhenScript();
 
-	void Execute();
-
 	string getAction();
 
 private:
