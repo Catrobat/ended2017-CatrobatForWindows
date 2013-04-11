@@ -22,11 +22,7 @@
           <sprite reference="../../.."/>
         </Content.StartScript>
         <Content.BroadcastScript>
-          <brickList>
-            <Bricks.SetCostumeBrick>
-              <sprite reference="../../../../.."/>
-            </Bricks.SetCostumeBrick>
-          </brickList>
+          <brickList />
           <sprite reference="../../.."/>
           <receivedMessage></receivedMessage>
         </Content.BroadcastScript>
@@ -51,11 +47,7 @@
       <name>Catroid</name>
       <scriptList>
         <Content.StartScript>
-          <brickList>
-            <Bricks.SetCostumeBrick>
-              <sprite reference="../../../../.."/>
-            </Bricks.SetCostumeBrick>
-          </brickList>
+          <brickList />>
           <sprite reference="../../.."/>
         </Content.StartScript>
         <Content.WhenScript>

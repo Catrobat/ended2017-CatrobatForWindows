@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "WaitBrick.h"
-#include "dos.h"
+#include <windows.h>
+#include <ppltasks.h>
 
 WaitBrick::WaitBrick(string spriteReference, int timeToWaitInMilliSeconds, Script *parent) :
 	Brick(TypeOfBrick::WaitBrick, spriteReference, parent), m_timeToWaitInMilliSeconds(timeToWaitInMilliSeconds)
@@ -9,5 +10,5 @@ WaitBrick::WaitBrick(string spriteReference, int timeToWaitInMilliSeconds, Scrip
 
 void WaitBrick::Execute()
 {
-	//sleep(1);
+	Concurrency::wait(m_timeToWaitInMilliSeconds);
 }
