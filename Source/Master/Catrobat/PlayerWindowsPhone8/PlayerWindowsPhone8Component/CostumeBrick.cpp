@@ -7,6 +7,13 @@ CostumeBrick::CostumeBrick(string spriteReference, string costumeDataReference, 
 }
 
 CostumeBrick::CostumeBrick(string spriteReference, Script *parent) :
-	Brick(TypeOfBrick::CostumeBrick, spriteReference, parent)
+	Brick(TypeOfBrick::CostumeBrick, spriteReference, parent), m_index(0)
 {
+}
+
+int CostumeBrick::Index()
+{
+	if (m_index > 0)
+		return m_index - 1;
+	return m_index;
 }

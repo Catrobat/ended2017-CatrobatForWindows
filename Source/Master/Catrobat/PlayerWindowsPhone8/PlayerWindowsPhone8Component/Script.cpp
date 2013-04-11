@@ -39,11 +39,11 @@ Brick *Script::GetBrick(int index)
 	return *it;
 }
 
-void Script::Render(SpriteBatch *spriteBatch)
+void Script::Execute()
 {
 	for (int i = 0; i < BrickListSize(); i++)
 	{
-		GetBrick(i)->Render(spriteBatch);
+		GetBrick(i)->Execute();
 	}
 }
 

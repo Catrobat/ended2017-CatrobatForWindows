@@ -10,7 +10,7 @@ ProjectDaemon *ProjectDaemon::Instance()
 	return m_instance;
 }
 
-ProjectDaemon::ProjectDaemon(void)
+ProjectDaemon::ProjectDaemon()
 {
 }
 

@@ -4,7 +4,10 @@
 #include "XMLParser.h"
 #include "ProjectParser.h"
 #include "ProjectDaemon.h"
+#include "ScriptHandler.h"
 
+#include <windows.system.threading.h>
+#include <windows.foundation.h>
 #include <thread>
 
 using namespace Windows::Foundation;
@@ -67,6 +70,10 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	// Initialize Sound
 	m_soundmanager = new SoundManager();
 	m_soundmanager->Initialize();
+
+
+	ScriptHandler *test = new ScriptHandler();
+	
 
 	// XML
 	XMLParser *xml = new XMLParser();

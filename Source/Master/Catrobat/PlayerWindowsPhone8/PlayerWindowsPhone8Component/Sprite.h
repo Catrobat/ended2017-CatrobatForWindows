@@ -21,6 +21,7 @@ public:
 
 	void LoadTextures(ID3D11Device* d3dDevice);
 	void Draw(SpriteBatch *spriteBatch);
+	void Execute();
 
 	int ScriptListSize();
 	Script *getScript(int index);
@@ -28,6 +29,7 @@ public:
 
 	int LookDataListSize();
 	LookData *getLookData(int index);
+	void SetLookData(int index);
 
 private:
 	LookData *m_lookData;

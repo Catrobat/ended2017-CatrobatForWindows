@@ -77,6 +77,9 @@
     <ClCompile Include="ProjectDaemon.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="ScriptHandler.cpp">
+      <Filter>Objects\Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -160,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="ProjectDaemon.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptHandler.h">
+      <Filter>Objects\Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

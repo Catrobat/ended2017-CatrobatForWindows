@@ -21,7 +21,7 @@ public:
 
 	Script *Parent();
 
-	void Render(SpriteBatch *spriteBatch);
+	void Execute();
 
 	TypeOfBrick BrickType();
 
