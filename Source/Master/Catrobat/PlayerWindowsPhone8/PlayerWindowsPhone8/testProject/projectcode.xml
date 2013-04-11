@@ -50,7 +50,7 @@
           <brickList />>
           <sprite reference="../../.."/>
         </Content.StartScript>
-        <Content.WhenScript>
+        <Content.WhenScript> 
           <brickList>
             <Bricks.SetCostumeBrick>
               <costumeData reference="../../../../../costumeDataList/Common.CostumeData[2]"/>
