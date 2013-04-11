@@ -50,7 +50,7 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 	
 	Project* project = ProjectDaemon::Instance()->getProject();
 	SpriteList* sprites = project->getSpriteList();
-	for (int i = 0; i < sprites->Size(); i++)
+	for (int i = sprites->Size() - 1; i >= 0; i--)
 	{
 		D3D11_SHADER_RESOURCE_VIEW_DESC data;
 
