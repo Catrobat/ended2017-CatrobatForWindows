@@ -119,7 +119,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="brick.dds" />
     <None Include="Piano\.nomedia" />
     <None Include="Piano\images\.nomedia" />
     <None Include="Piano\images\3673EC84679EE425A215B86B085EC292_cheshireCat" />

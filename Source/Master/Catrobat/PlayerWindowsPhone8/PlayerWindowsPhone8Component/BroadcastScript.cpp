@@ -10,3 +10,8 @@ string BroadcastScript::ReceivedMessage()
 {
 	return m_receivedMessage;
 }
+
+void BroadcastScript::Execute()
+{
+
+}

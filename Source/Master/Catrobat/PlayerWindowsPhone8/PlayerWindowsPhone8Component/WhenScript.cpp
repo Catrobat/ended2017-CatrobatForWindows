@@ -10,3 +10,8 @@ string WhenScript::getAction()
 {
 	return m_action;
 }
+
+void WhenScript::Execute()
+{
+
+}

@@ -7,6 +7,8 @@ public:
 	BroadcastScript(string receivedMessage, string spriteReference, Sprite *parent);
 	~BroadcastScript();
 
+	void Execute();
+
 	string ReceivedMessage();
 
 private:
