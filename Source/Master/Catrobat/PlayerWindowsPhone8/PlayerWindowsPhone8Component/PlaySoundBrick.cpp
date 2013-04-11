@@ -6,3 +6,8 @@ PlaySoundBrick::PlaySoundBrick(string spriteReference, string filename, string n
 	m_filename(filename), m_name(name)
 {
 }
+
+void PlaySoundBrick::Execute()
+{
+
+}

@@ -327,6 +327,7 @@ Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode, Script *script)
 	{
 		string index_str = ref.substr(begin + 1, end);
 		index = atoi(index_str.c_str());
+		index--;
 	}
 
 	return new CostumeBrick(spriteReference, costumeDataRef->value(), index, script);

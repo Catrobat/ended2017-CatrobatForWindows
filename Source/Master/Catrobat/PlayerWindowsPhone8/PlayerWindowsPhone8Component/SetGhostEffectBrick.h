@@ -5,7 +5,7 @@ class SetGhostEffectBrick :
 {
 public:
 	SetGhostEffectBrick(string spriteReference, float transparency, Script *parent);
-
+	void Execute();
 private:
 	float m_transpareny;
 };

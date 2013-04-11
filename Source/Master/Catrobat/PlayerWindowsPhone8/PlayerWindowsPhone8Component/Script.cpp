@@ -1,5 +1,10 @@
 #include "pch.h"
 #include "Script.h"
+#include <windows.system.threading.h>
+#include <windows.foundation.h>
+
+using namespace Windows::System::Threading;
+using namespace Windows::Foundation;
 
 Script::Script(TypeOfScript scriptType, string spriteReference, Sprite *parent) :
 	m_scriptType(scriptType), m_spriteReference(spriteReference), m_parent(parent)
@@ -41,10 +46,18 @@ Brick *Script::GetBrick(int index)
 
 void Script::Execute()
 {
-	for (int i = 0; i < BrickListSize(); i++)
+	auto WorkItem = ref new WorkItemHandler(
+		[this](IAsyncAction^ workItem)
 	{
-		GetBrick(i)->Execute();
-	}
+		list<Brick*>::iterator it;
+		while (true)
+		for(it=m_brickList->begin(); it!=m_brickList->end(); it++)
+		{
+			 (*it)->Execute();
+		}
+	});
+
+	IAsyncAction^ ThreadPoolWorkItem = ThreadPool::RunAsync(WorkItem);
 }
 
 Sprite *Script::Parent()

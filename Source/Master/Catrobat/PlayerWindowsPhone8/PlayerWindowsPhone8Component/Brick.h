@@ -21,15 +21,14 @@ public:
 
 	Script *Parent();
 
-	void Execute();
+	virtual void Execute() = 0;
 
 	TypeOfBrick BrickType();
 
 protected:
 	Brick(TypeOfBrick brickType, string spriteReference, Script *parent);
-
-private:
 	Script *m_parent;
+private:
 	TypeOfBrick m_brickType;
 	string m_spriteReference;
 };
