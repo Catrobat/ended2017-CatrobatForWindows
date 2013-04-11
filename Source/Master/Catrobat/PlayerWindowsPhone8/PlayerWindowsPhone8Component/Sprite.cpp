@@ -2,7 +2,7 @@
 #include "Sprite.h"
 
 Sprite::Sprite(string name) :
-	BaseObject(50, 50, 1, 1, 1, 1),
+	BaseObject(0, 30, 1, 1, 1, 1),
 	m_name(name)
 {
 	m_lookData = NULL;
@@ -67,9 +67,40 @@ void Sprite::Draw(SpriteBatch *spriteBatch)
 {
 	if (m_lookData == NULL)
 	{
-		m_lookData = getLookData(0);
+		return;
 	}
 
 	if (m_lookData != NULL)
 		spriteBatch->Draw(m_lookData->Texture(), m_position, nullptr, Colors::Wheat, 0.0f, m_sourceOrigin, m_objectScale, SpriteEffects_None, 0.0f);
+}
+
+void Sprite::SetLookData(int index)
+{
+	m_lookData = getLookData(index);
+}
+
+LookData* Sprite::GetCurrentLookData()
+{
+	return m_lookData;
+}
+
+Bounds Sprite::getBounds()
+{
+	Bounds bounds;
+	bounds.x = m_position.x;
+	bounds.y = m_position.y;
+	bounds.width = 100;
+	bounds.height = 100;
+	return bounds;
+}
+
+void Sprite::StartUp()
+{
+	SetLookData(0);
+	for (int i = 0; i < ScriptListSize(); i++)
+	{
+		Script *script = getScript(i);
+		if (script->getType() == Script::TypeOfScript::StartScript)
+			script->Execute();
+	}
 }

@@ -4,7 +4,10 @@
 #include "XMLParser.h"
 #include "ProjectParser.h"
 #include "ProjectDaemon.h"
+#include "ScriptHandler.h"
 
+#include <windows.system.threading.h>
+#include <windows.foundation.h>
 #include <thread>
 
 using namespace Windows::Foundation;
@@ -44,6 +47,37 @@ void Direct3DBackground::SetManipulationHost(DrawingSurfaceManipulationHost^ man
 void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender, PointerEventArgs^ args)
 {
 	// Insert your code here.
+	
+	Project* project = ProjectDaemon::Instance()->getProject();
+	SpriteList* sprites = project->getSpriteList();
+	for (int i = sprites->Size() - 1; i >= 0; i--)
+	{
+		D3D11_SHADER_RESOURCE_VIEW_DESC data;
+
+		/*sprites->getSprite(i)->GetCurrentLookData()->Texture()->GetDesc(&data);
+		data.ViewDimension.Value*/
+
+		Bounds bounds = sprites->getSprite(i)->getBounds();
+		//if (args->CurrentPoint GetIntermediatePoints()->Size > 0)
+		{
+			int x = args->CurrentPoint->Position.X;
+			int y = args->CurrentPoint->Position.Y;
+
+			if (bounds.x <= x && bounds.y <= y && (bounds.x + bounds.width) >= x && (bounds.y + bounds.height) >= y)
+			{
+				for (int j = 0; j < sprites->getSprite(i)->ScriptListSize(); j++)
+				{
+					sprites->getSprite(i)->getScript(j)->Execute();
+				}
+
+				// One Hit is enough
+				break;
+			}
+		}
+	}
+
+	/*HANDLE ExampleEvent = OpenEvent(EVENT_ALL_ACCESS, FALSE, TEXT("ExampleEvent"));
+	SetEvent(ExampleEvent);*/
 }
 
 void Direct3DBackground::OnPointerMoved(DrawingSurfaceManipulationHost^ sender, PointerEventArgs^ args)
@@ -67,6 +101,10 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	// Initialize Sound
 	m_soundmanager = new SoundManager();
 	m_soundmanager->Initialize();
+
+
+	ScriptHandler *test = new ScriptHandler();
+	
 
 	// XML
 	XMLParser *xml = new XMLParser();

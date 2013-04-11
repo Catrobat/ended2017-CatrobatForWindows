@@ -5,7 +5,7 @@ class PlaySoundBrick :
 {
 public:
 	PlaySoundBrick(string spriteReference, string filename, string name, Script *parent);
-
+	void Execute();
 private:
 	string m_filename;
 	string m_name;

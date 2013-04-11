@@ -9,6 +9,14 @@
 
 using namespace std;
 
+struct Bounds
+{
+    float x;
+    float y;
+	float width;
+	float height;
+};
+
 class Sprite : BaseObject
 {
 public:
@@ -21,6 +29,7 @@ public:
 
 	void LoadTextures(ID3D11Device* d3dDevice);
 	void Draw(SpriteBatch *spriteBatch);
+	void StartUp();
 
 	int ScriptListSize();
 	Script *getScript(int index);
@@ -28,6 +37,10 @@ public:
 
 	int LookDataListSize();
 	LookData *getLookData(int index);
+	void SetLookData(int index);
+	LookData* GetCurrentLookData();
+
+	Bounds getBounds();
 
 private:
 	LookData *m_lookData;

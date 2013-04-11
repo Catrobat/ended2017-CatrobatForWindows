@@ -20,6 +20,7 @@ public:
 
 	void Render(SpriteBatch *spriteBatch);
 	void LoadTextures(ID3D11Device* d3dDevice);
+	void StartUp();
 
 private:
 	int m_androidVersion;

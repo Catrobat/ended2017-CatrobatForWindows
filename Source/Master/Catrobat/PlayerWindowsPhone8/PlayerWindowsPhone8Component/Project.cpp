@@ -59,3 +59,11 @@ void Project::LoadTextures(ID3D11Device* d3dDevice)
 		m_spriteList->getSprite(i)->LoadTextures(d3dDevice);
 	}
 }
+
+void Project::StartUp()
+{	
+	for (int i = 0; i < m_spriteList->Size(); i++)
+	{
+		m_spriteList->getSprite(i)->StartUp();
+	}
+}

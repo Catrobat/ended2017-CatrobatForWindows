@@ -6,3 +6,7 @@ PlaceAtBrick::PlaceAtBrick(string spriteReference, float positionX, float positi
 	m_positionX(positionX), m_positionY(positionY)
 {
 }
+
+void PlaceAtBrick::Execute()
+{
+}

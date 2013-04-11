@@ -11,10 +11,10 @@ public:
 	Project *getProject();
 
 private:
-	ProjectDaemon(void);
+	ProjectDaemon();
 	ProjectDaemon(ProjectDaemon const&);            
     ProjectDaemon& operator=(ProjectDaemon const&); 
-	~ProjectDaemon(void);
+	~ProjectDaemon();
 
 	static ProjectDaemon *m_instance;
 

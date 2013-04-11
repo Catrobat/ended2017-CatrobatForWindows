@@ -23,7 +23,7 @@ public:
 	void addBrick(Brick *brick);
 	void addSpriteReference(string spriteReference);
 
-	void Render(SpriteBatch *spriteBatch);
+	void Execute();
 
 	string SpriteReference();
 
@@ -35,9 +35,10 @@ public:
 protected:
 	Script(TypeOfScript scriptType, string spriteReference, Sprite *parent);
 
+	list<Brick*> *m_brickList;
+
 private:
 	Sprite *m_parent;
 	TypeOfScript m_scriptType;
-	list<Brick*> *m_brickList;
 	string m_spriteReference;
 };

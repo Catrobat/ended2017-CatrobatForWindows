@@ -18,12 +18,13 @@ public:
 	virtual void CreateDeviceResources() override;
 	virtual void CreateWindowSizeDependentResources() override;
 	virtual void Render() override;
-	
+
 	// Method for updating time-dependent objects.
 	void Update(float timeTotal, float timeDelta);
 
 private:
 	bool m_loadingComplete;
+	bool m_startup;
 	uint32 m_indexCount;
 
 	// SpriteBatch for Drawing (this is needed by all Object Draw Methods -> Use: m_spriteBatch.Get())
@@ -31,6 +32,8 @@ private:
 
 	// Use this scale if you calucalte positions on the screen
 	float m_scale;
+
+	void StartUpTasks();
 
 	// Just for testing
 	void CreateTestObject2();

@@ -6,3 +6,8 @@ SetGhostEffectBrick::SetGhostEffectBrick(string spriteReference, float transpare
 	m_transpareny(transparency)
 {
 }
+
+void SetGhostEffectBrick::Execute()
+{
+
+}
