@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "Script.h"
+
 #include <windows.system.threading.h>
 #include <windows.foundation.h>
+#include <ppltasks.h>
 
 using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
@@ -44,21 +46,24 @@ Brick *Script::GetBrick(int index)
 	return *it;
 }
 
-void Script::Execute()
-{
-	auto WorkItem = ref new WorkItemHandler(
-		[this](IAsyncAction^ workItem)
-	{
-		list<Brick*>::iterator it;
-		while (true)
-		for(it=m_brickList->begin(); it!=m_brickList->end(); it++)
-		{
-			 (*it)->Execute();
-		}
-	});
-
-	IAsyncAction^ ThreadPoolWorkItem = ThreadPool::RunAsync(WorkItem);
-}
+//void Script::Execute()
+//{
+//	auto WorkItem = ref new WorkItemHandler(
+//		[this](IAsyncAction^ workItem)
+//	{
+//		list<Brick*>::iterator it;
+//		while (true)
+//		{
+//			for(it=m_brickList->begin(); it!=m_brickList->end(); it++)
+//			{
+//				(*it)->Execute();
+//			}
+//			Concurrency::wait(10);
+//		}
+//	});
+//
+//	IAsyncAction^ ThreadPoolWorkItem = ThreadPool::RunAsync(WorkItem);
+//}
 
 Sprite *Script::Parent()
 {
