@@ -47,7 +47,7 @@
       <name>Catroid</name>
       <scriptList>
         <Content.StartScript>
-          <brickList />>
+          <brickList />
           <sprite reference="../../.."/>
         </Content.StartScript>
         <Content.WhenScript> 
