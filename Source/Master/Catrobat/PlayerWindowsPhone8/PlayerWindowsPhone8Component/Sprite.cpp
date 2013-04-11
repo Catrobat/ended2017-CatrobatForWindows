@@ -79,6 +79,21 @@ void Sprite::SetLookData(int index)
 	m_lookData = getLookData(index);
 }
 
+LookData* Sprite::GetCurrentLookData()
+{
+	return m_lookData;
+}
+
+Bounds Sprite::getBounds()
+{
+	Bounds bounds;
+	bounds.x = m_position.x;
+	bounds.y = m_position.y;
+	bounds.width = 100;
+	bounds.height = 100;
+	return bounds;
+}
+
 void Sprite::StartUp()
 {
 	SetLookData(0);

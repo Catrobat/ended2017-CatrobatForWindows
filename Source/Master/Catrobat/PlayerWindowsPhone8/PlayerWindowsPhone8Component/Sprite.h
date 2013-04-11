@@ -9,6 +9,14 @@
 
 using namespace std;
 
+struct Bounds
+{
+    float x;
+    float y;
+	float width;
+	float height;
+};
+
 class Sprite : BaseObject
 {
 public:
@@ -30,6 +38,9 @@ public:
 	int LookDataListSize();
 	LookData *getLookData(int index);
 	void SetLookData(int index);
+	LookData* GetCurrentLookData();
+
+	Bounds getBounds();
 
 private:
 	LookData *m_lookData;
