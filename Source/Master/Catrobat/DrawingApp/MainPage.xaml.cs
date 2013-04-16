@@ -16,7 +16,8 @@ namespace DrawingApp
     public partial class MainPage : PhoneApplicationPage
     {
         private Point currentPoint;
-        private Point oldPoint;   
+        private Point oldPoint;
+        private Double linethikness = 8;
         // Constructor
         public MainPage()
         {
@@ -27,7 +28,7 @@ namespace DrawingApp
             currentPoint = e.GetPosition(this.ContentPanelCanvas);
             Line line = new Line() { X1 = currentPoint.X, Y1 = currentPoint.Y, X2 = oldPoint.X, Y2 = oldPoint.Y };
             line.Stroke = new SolidColorBrush(Colors.Green);
-            line.StrokeThickness = 7;
+            line.StrokeThickness = linethikness;
             this.ContentPanelCanvas.Children.Add(line);
             oldPoint = currentPoint;
         }
@@ -35,6 +36,20 @@ namespace DrawingApp
         {
             currentPoint = e.GetPosition(ContentPanelCanvas);
             oldPoint = currentPoint;
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            linethikness = ((Slider)sender).Value;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (slider_thickness.Visibility == Visibility.Visible)
+                slider_thickness.Visibility = Visibility.Collapsed;
+            else
+                slider_thickness.Visibility = Visibility.Visible;
+
         }
     }
 }

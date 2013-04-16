@@ -23,14 +23,25 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="Catropaint for WP" Style="{StaticResource PhoneTextNormalStyle}"/>
-            
+
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <TextBlock Text="Drawing area here:" Margin="0,-10,0,10"/>
-            <Canvas x:Name="ContentPanelCanvas" Background="LightGray" Height="650" Width="450" MouseMove="ContentPanelCanvas_MouseMove" MouseLeftButtonDown="ContentPanelCanvas_MouseLeftButtonDown"/>
+            <Canvas x:Name="ContentPanelCanvas" Background="LightGray" Height="650" Width="450" MouseMove="ContentPanelCanvas_MouseMove" MouseLeftButtonDown="ContentPanelCanvas_MouseLeftButtonDown">
+                <Slider x:Name="slider_thickness" Canvas.Left="10" Canvas.Top="566" Width="430" ValueChanged="Slider_ValueChanged" Maximum="50" Minimum="0.5" Visibility="Collapsed"/>
+            </Canvas>
         </Grid>
     </Grid>
- 
+
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+            <shell:ApplicationBarIconButton x:Name="button1" IconUri="/Assets/AppBar/basecircle.png" Text="Thickness" IsEnabled="True" Click="button1_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
 </phone:PhoneApplicationPage>
