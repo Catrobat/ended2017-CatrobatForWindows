@@ -144,6 +144,9 @@
     </Content>
     <Content Include="Assets\AppBar\basecircle.png" />
     <Content Include="Assets\AppBar\cancel.png" />
+    <Content Include="Assets\ColorChooser\checkeredbg.png" />
+    <Content Include="Assets\ColorChooser\icon_color_chooser_tab_palette.png" />
+    <Content Include="Assets\ColorChooser\icon_color_chooser_tab_rgba.png" />
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -155,6 +158,9 @@
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Coding4Fun.Toolkit.Controls">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.5\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2012.10.30\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>

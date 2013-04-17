@@ -16,13 +16,9 @@ namespace DrawingApp
         public ColorChooser()
         {
             InitializeComponent();
-
-            this.DataContext = _photos;
-            _photos.Add(new Photo() { ImageUrl = "/Toolkit.Content/ApplicationBar.Cancel.png" });
-            _photos.Add(new Photo() { ImageUrl = "/Toolkit.Content/ApplicationBar.Cancel.png" });
+ 
         }
  
-        public ObservableCollection<Photo>  _photos = new ObservableCollection<Photo>();
 
         private void Pivot_Loaded(object sender, RoutedEventArgs e)
         {
@@ -40,11 +36,11 @@ namespace DrawingApp
             //TODO save chosen color
             NavigationService.GoBack();
         }
+
+        private void colorPicker1_ColorChanged(object sender, System.Windows.Media.Color color)
+        {
+
+        }
     }
-    public class Photo
-    {
-        public string Id { get; set; }
-        public string Title { get; set; }
-        public string ImageUrl { get; set; }
-    }
+ 
 }

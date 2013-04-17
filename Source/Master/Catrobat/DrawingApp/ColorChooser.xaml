@@ -6,6 +6,9 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+    xmlns:Coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -18,24 +21,58 @@
         <!--Pivot Control-->
         <phone:Pivot x:Name="HeaderTemplate" Title="Color Chooser" Loaded="Pivot_Loaded">
             <!--Pivot item one-->
-            <!--<phone:Pivot.HeaderTemplate>
+            <phone:Pivot.HeaderTemplate>
                 <DataTemplate>
-                    <Image x:Name="Palette" Source="/Toolkit.Content/ApplicationBar.Check.png" />
+                    <Image x:Name="Palette" Source="{Binding}" Width="60" Margin="0,20,0,0" />
                 </DataTemplate>
-            </phone:Pivot.HeaderTemplate>-->
-            <phone:PivotItem Header="Palette">
+            </phone:Pivot.HeaderTemplate>
+            <phone:PivotItem Header="/Assets/ColorChooser/icon_color_chooser_tab_palette.png" Margin="12,28,12,85">
                 <Grid>
-                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+                    <Grid Background="#FF171717" >
+                        <Rectangle Fill="Blue" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,47,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="#FF006D91" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,47,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="#FF16C2F5" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,47,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="LightBlue" HorizontalAlignment="Left" Width="100" Height="65" Margin="330,47,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="Red" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,117,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="OrangeRed" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,117,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="Orange" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,117,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="Yellow" HorizontalAlignment="Left" Width="100" Height="65" Margin="330,117,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="#FF7C00AA" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,187,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="#FFFF0080" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,187,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="Magenta" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,187,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="#FFFFADFB" HorizontalAlignment="Left" Width="100" Height="65" Margin="330,187,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="#FF146C01" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,257,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="#FF009C00" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,257,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="#FF4E8739" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,257,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="#FF8AEA39" HorizontalAlignment="Left" Width="100" Height="65" Margin="330,257,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="Black" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,327,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="DarkGray" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,327,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle Fill="White" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,327,0,0" Stroke="Black" VerticalAlignment="Top" />
+                        <Rectangle HorizontalAlignment="Left" Width="100" Height="65" Margin="330,327,0,0" Stroke="Black" VerticalAlignment="Top" >
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="/Assets/ColorChooser/checkeredbg.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
 
+
+                    </Grid>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap"   Width="150" Height="35" Margin="152,462,154,-55" TextAlignment="Center"  >
+ 
+                    	<Run FontWeight="Bold" Text="Selected Color"/>
+                    </TextBlock>
 
                 </Grid>
             </phone:PivotItem>
 
             <!--Pivot item two-->
-            <phone:PivotItem Header="Spectrum">
-                <Grid/>
+            <phone:PivotItem Header="/Assets/ColorChooser/icon_color_chooser_tab_rgba.png">
+                <Grid>
+                    <Coding4Fun:ColorPicker HorizontalAlignment="Left" Margin="6,6,0,0" Name="colorPicker1" VerticalAlignment="Top" Height="532" Width="444" ColorChanged="colorPicker1_ColorChanged" />
+
+                </Grid>
             </phone:PivotItem>
         </phone:Pivot>
+
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
