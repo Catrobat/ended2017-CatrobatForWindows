@@ -44,8 +44,7 @@ namespace DrawingApp
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            if (slider_thickness.Visibility == Visibility.Visible)
+        {if (slider_thickness.Visibility == Visibility.Visible)
                 slider_thickness.Visibility = Visibility.Collapsed;
             else
                 slider_thickness.Visibility = Visibility.Visible;
