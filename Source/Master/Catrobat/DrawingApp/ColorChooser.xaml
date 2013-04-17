@@ -1,0 +1,47 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="DrawingApp.ColorChooser"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--Pivot Control-->
+        <phone:Pivot x:Name="HeaderTemplate" Title="Color Chooser" Loaded="Pivot_Loaded">
+            <!--Pivot item one-->
+            <!--<phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <Image x:Name="Palette" Source="/Toolkit.Content/ApplicationBar.Check.png" />
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>-->
+            <phone:PivotItem Header="Palette">
+                <Grid>
+                    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+
+
+                </Grid>
+            </phone:PivotItem>
+
+            <!--Pivot item two-->
+            <phone:PivotItem Header="Spectrum">
+                <Grid/>
+            </phone:PivotItem>
+        </phone:Pivot>
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
+            <shell:ApplicationBarIconButton x:Name="Cancel" IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" Text="Cancel" IsEnabled="True" Click="Cancel_Click"/>
+            <shell:ApplicationBarIconButton x:Name="Done" IconUri="/Toolkit.Content/ApplicationBar.Check.png" Text="Done" IsEnabled="True" Click="Done_Click"/>
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>

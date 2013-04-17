@@ -50,5 +50,11 @@ namespace DrawingApp
                 slider_thickness.Visibility = Visibility.Visible;
 
         }
+
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/ColorChooser.xaml", UriKind.Relative));
+           
+        }
     }
 }
