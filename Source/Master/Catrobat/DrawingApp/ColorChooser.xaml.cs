@@ -44,6 +44,14 @@ namespace DrawingApp
         {
             (App.Current as App).ColorValue = color;
         }
+
+        private void Rectangle_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            SelectedColorRectangle.Fill = ((System.Windows.Shapes.Rectangle)sender).Fill;
+            System.Windows.Media.Brush brush = ((System.Windows.Shapes.Rectangle)sender).Fill;
+            System.Windows.Media.SolidColorBrush solidBrush = (System.Windows.Media.SolidColorBrush)brush;
+            (App.Current as App).ColorValue = solidBrush.Color;
+        }
     }
  
 }

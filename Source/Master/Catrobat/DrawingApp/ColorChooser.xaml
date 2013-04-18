@@ -26,42 +26,46 @@
                     <Image x:Name="Palette" Source="{Binding}" Width="60" Margin="0,20,0,0" />
                 </DataTemplate>
             </phone:Pivot.HeaderTemplate>
-            <phone:PivotItem Header="/Assets/ColorChooser/icon_color_chooser_tab_palette.png" Margin="12,28,12,85">
-                <Grid>
+            <phone:PivotItem Header="/Assets/ColorChooser/icon_color_chooser_tab_palette.png" Margin="12,28,12,3">
+              
                     <Grid Background="#FF171717" >
-                        <Rectangle Fill="Blue" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,47,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="#FF006D91" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,47,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="#FF16C2F5" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,47,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="LightBlue" HorizontalAlignment="Left" Width="100" Height="65" Margin="330,47,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="Red" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,117,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="OrangeRed" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,117,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="Orange" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,117,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="Yellow" HorizontalAlignment="Left" Width="100" Height="65" Margin="330,117,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="#FF7C00AA" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,187,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="#FFFF0080" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,187,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="Magenta" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,187,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="#FFFFADFB" HorizontalAlignment="Left" Width="100" Height="65" Margin="330,187,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="#FF146C01" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,257,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="#FF009C00" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,257,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="#FF4E8739" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,257,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="#FF8AEA39" HorizontalAlignment="Left" Width="100" Height="65" Margin="330,257,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="Black" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,327,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="DarkGray" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,327,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle Fill="White" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,327,0,0" Stroke="Black" VerticalAlignment="Top" />
-                        <Rectangle HorizontalAlignment="Left" Width="100" Height="65" Margin="330,327,0,0" Stroke="Black" VerticalAlignment="Top" >
+                        <Rectangle Fill="Blue" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,47,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="#FF006D91" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,47,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="#FF16C2F5" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,47,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="LightBlue" HorizontalAlignment="Left" Width="100" Height="65" Margin="330,47,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="Red" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,117,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="OrangeRed" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,117,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="Orange" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,117,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="Yellow" HorizontalAlignment="Left" Width="100" Height="65" Margin="330,117,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="#FF7C00AA" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,187,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="#FFFF0080" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,187,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="Magenta" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,187,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="#FFFFADFB" HorizontalAlignment="Left" Width="100" Height="65" Margin="330,187,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="#FF146C01" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,257,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="#FF009C00" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,257,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="#FF4E8739" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,257,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="#FF8AEA39" HorizontalAlignment="Left" Width="100" Height="65" Margin="330,257,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="Black" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,327,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="DarkGray" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,327,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle Fill="White" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,327,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+                    <Rectangle HorizontalAlignment="Left" Width="100" Height="65" Margin="330,327,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" >
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="/Assets/ColorChooser/checkeredbg.png"/>
                             </Rectangle.Fill>
                         </Rectangle>
 
-
-                    </Grid>
-                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap"   Width="150" Height="35" Margin="152,462,154,-55" TextAlignment="Center"  >
+                    <Rectangle x:Name="SelectedColorRectangle" Fill="#FF0000AE" Height="55" Stroke="Black" VerticalAlignment="Top" Width="269" HorizontalAlignment="Center" Margin="100,430,100,0"/>
+                    <TextBlock x:Name="SelectedColorBoxLabel" HorizontalAlignment="Center" TextWrapping="Wrap"   Width="150" Height="35" Margin="150,440,156,69" TextAlignment="Center"  >
  
                     	<Run FontWeight="Bold" Text="Selected Color"/>
+
+
                     </TextBlock>
 
                 </Grid>
+                   
+                    
+                
             </phone:PivotItem>
 
             <!--Pivot item two-->
@@ -72,7 +76,7 @@
                 </Grid>
             </phone:PivotItem>
         </phone:Pivot>
-
+        
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
