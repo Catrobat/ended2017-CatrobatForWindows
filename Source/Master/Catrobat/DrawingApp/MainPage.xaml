@@ -38,8 +38,8 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">
-            <shell:ApplicationBarIconButton x:Name="button1" IconUri="/Assets/AppBar/basecircle.png" Text="Thickness" IsEnabled="True" Click="button1_Click"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2" Click="ApplicationBarIconButton_Click"/>
+            <shell:ApplicationBarIconButton x:Name="button1" IconUri="/Assets/ColorChooser/icon_menu_strokes.png" Text="Thickness" IsEnabled="True" Click="button1_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/ColorChooser/icon_menu_color_palette.png" Text="Color" Click="ApplicationBarIconButton_Click"/>
 
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
