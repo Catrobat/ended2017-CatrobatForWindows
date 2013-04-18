@@ -43,6 +43,7 @@ namespace DrawingApp
         private void colorPicker1_ColorChanged(object sender, System.Windows.Media.Color color)
         {
             (App.Current as App).ColorValue = color;
+            SelectedColorRectangle.Fill = new System.Windows.Media.SolidColorBrush(color );
         }
 
         private void Rectangle_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
