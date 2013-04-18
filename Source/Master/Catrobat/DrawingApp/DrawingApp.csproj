@@ -147,6 +147,8 @@
     <Content Include="Assets\ColorChooser\checkeredbg.png" />
     <Content Include="Assets\ColorChooser\icon_color_chooser_tab_palette.png" />
     <Content Include="Assets\ColorChooser\icon_color_chooser_tab_rgba.png" />
+    <Content Include="Assets\ColorChooser\icon_menu_color_palette.png" />
+    <Content Include="Assets\ColorChooser\icon_menu_strokes.png" />
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
