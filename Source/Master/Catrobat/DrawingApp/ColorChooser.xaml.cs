@@ -17,10 +17,10 @@ namespace DrawingApp
         public ColorChooser()
         {
             InitializeComponent();
-            ColorValue = new System.Windows.Media.Color();
+            (App.Current as App).ColorValue = new System.Windows.Media.Color();
         }
 
-        public System.Windows.Media.Color ColorValue { get; set; }
+        
  
 
         private void Pivot_Loaded(object sender, RoutedEventArgs e)
@@ -42,7 +42,7 @@ namespace DrawingApp
 
         private void colorPicker1_ColorChanged(object sender, System.Windows.Media.Color color)
         {
-            ColorValue = color;
+            (App.Current as App).ColorValue = color;
         }
     }
  

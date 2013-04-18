@@ -23,6 +23,9 @@ namespace DrawingApp
         /// <returns>The root frame of the Phone Application.</returns>
         public PhoneApplicationFrame RootFrame { get; private set; }
 
+        //TODO
+        public System.Windows.Media.Color ColorValue { get; set; }
+
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
