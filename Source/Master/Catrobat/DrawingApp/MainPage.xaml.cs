@@ -27,7 +27,7 @@ namespace DrawingApp
         {
             currentPoint = e.GetPosition(this.ContentPanelCanvas);
             Line line = new Line() { X1 = currentPoint.X, Y1 = currentPoint.Y, X2 = oldPoint.X, Y2 = oldPoint.Y };
-            line.Stroke = new SolidColorBrush(Colors.Green);
+            line.Stroke = new SolidColorBrush( Colors.Orange);
             line.StrokeThickness = linethikness;
             this.ContentPanelCanvas.Children.Add(line);
             oldPoint = currentPoint;

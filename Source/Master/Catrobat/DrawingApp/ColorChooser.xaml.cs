@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Collections.ObjectModel;
+ 
 
 namespace DrawingApp
 {
@@ -16,8 +17,10 @@ namespace DrawingApp
         public ColorChooser()
         {
             InitializeComponent();
- 
+            ColorValue = new System.Windows.Media.Color();
         }
+
+        public System.Windows.Media.Color ColorValue { get; set; }
  
 
         private void Pivot_Loaded(object sender, RoutedEventArgs e)
@@ -39,7 +42,7 @@ namespace DrawingApp
 
         private void colorPicker1_ColorChanged(object sender, System.Windows.Media.Color color)
         {
-
+            ColorValue = color;
         }
     }
  
