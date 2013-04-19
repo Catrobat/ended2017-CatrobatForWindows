@@ -27,9 +27,9 @@
                 </DataTemplate>
             </phone:Pivot.HeaderTemplate>
             <phone:PivotItem Header="/Assets/ColorChooser/icon_color_chooser_tab_palette.png" Margin="12,28,12,3">
-              
-                    <Grid Background="#FF171717" >
-                        <Rectangle Fill="Blue" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,47,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
+
+                <Grid Background="#FF171717" >
+                    <Rectangle Fill="Blue" HorizontalAlignment="Left" Width="100" Height="65" Margin="15,47,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
                     <Rectangle Fill="#FF006D91" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,47,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
                     <Rectangle Fill="#FF16C2F5" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,47,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
                     <Rectangle Fill="LightBlue" HorizontalAlignment="Left" Width="100" Height="65" Margin="330,47,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
@@ -49,34 +49,27 @@
                     <Rectangle Fill="DarkGray" HorizontalAlignment="Left" Width="100" Height="65" Margin="120,327,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
                     <Rectangle Fill="White" HorizontalAlignment="Left" Width="100" Height="65" Margin="225,327,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" />
                     <Rectangle HorizontalAlignment="Left" Width="100" Height="65" Margin="330,327,0,0" Stroke="Black" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" >
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="/Assets/ColorChooser/checkeredbg.png"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/Assets/ColorChooser/checkeredbg.png" Stretch="None"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
 
                     <Rectangle x:Name="SelectedColorRectangle" Fill="#FF0000AE" Height="55" Stroke="Black" VerticalAlignment="Top" Width="269" HorizontalAlignment="Center" Margin="100,430,100,0"/>
-                    <TextBlock x:Name="SelectedColorBoxLabel" HorizontalAlignment="Center" TextWrapping="Wrap"   Width="150" Height="35" Margin="150,440,156,69" TextAlignment="Center"  >
- 
+                    <TextBlock x:Name="SelectedColorBoxLabel" HorizontalAlignment="Center" TextWrapping="Wrap"   Width="150" Height="35" Margin="150,440,156,69" TextAlignment="Center" Foreground="White"  >
                     	<Run FontWeight="Bold" Text="Selected Color"/>
-
-
                     </TextBlock>
-
                 </Grid>
-                   
-                    
-                
             </phone:PivotItem>
 
             <!--Pivot item two-->
             <phone:PivotItem Header="/Assets/ColorChooser/icon_color_chooser_tab_rgba.png">
                 <Grid>
-                    <Coding4Fun:ColorPicker HorizontalAlignment="Left" Margin="6,6,0,0" Name="colorPicker1" VerticalAlignment="Top" Height="532" Width="444" ColorChanged="colorPicker1_ColorChanged" />
+                    <Coding4Fun:ColorPicker HorizontalAlignment="Left" Margin="6,6,0,0" Name="ColorPicker" VerticalAlignment="Top" Height="532" Width="444" ColorChanged="colorPicker1_ColorChanged" Loaded="colorPicker1_Loaded" />
 
                 </Grid>
             </phone:PivotItem>
         </phone:Pivot>
-        
+
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False">

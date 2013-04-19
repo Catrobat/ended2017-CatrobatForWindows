@@ -26,11 +26,26 @@ namespace DrawingApp
         private void ContentPanelCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             currentPoint = e.GetPosition(this.ContentPanelCanvas);
-            Line line = new Line() { X1 = currentPoint.X, Y1 = currentPoint.Y, X2 = oldPoint.X, Y2 = oldPoint.Y };
-            
+            Line line = new Line() { X1 = currentPoint.X, Y1 = currentPoint.Y, X2 = oldPoint.X, Y2 = oldPoint.Y };            
             line.Stroke = new SolidColorBrush( (App.Current as App).ColorValue != null ?  (App.Current as App).ColorValue : Colors.Orange);
             line.StrokeThickness = linethikness;
+//            Rectangle rec = new Rectangle();
+//            rec.Height = linethikness;
+//            rec.Width = linethikness;            
+//            rec.Fill = new SolidColorBrush((App.Current as App).ColorValue);
+//            Canvas.SetTop(rec, currentPoint.Y - linethikness/2);
+//            Canvas.SetLeft(rec, currentPoint.X - linethikness/2);
+      //      line.Opacity = 0.1;
+            Ellipse elli = new Ellipse();
+            elli.Height = linethikness;
+            elli.Width = linethikness;
+            elli.Fill = new SolidColorBrush((App.Current as App).ColorValue);
+        //    elli.Opacity = 0.3;
+            Canvas.SetTop(elli, currentPoint.Y - linethikness / 2);
+            Canvas.SetLeft(elli, currentPoint.X - linethikness/2);
+
             this.ContentPanelCanvas.Children.Add(line);
+            this.ContentPanelCanvas.Children.Add(elli);
             oldPoint = currentPoint;
         }
         private void ContentPanelCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

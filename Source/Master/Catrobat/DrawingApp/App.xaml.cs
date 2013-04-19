@@ -60,6 +60,8 @@ namespace DrawingApp
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+            // Default ColorValue after Programm Launch
+            ColorValue = Colors.Black;
         }
 
         // Code to execute when the application is launching (eg, from Start)
