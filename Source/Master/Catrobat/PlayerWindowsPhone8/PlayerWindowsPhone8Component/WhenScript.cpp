@@ -7,11 +7,13 @@
 using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
 WhenScript::WhenScript(string action, string spriteReference, Sprite *parent) :
-	Script(TypeOfScript::WhenScript, spriteReference, parent), m_action(action)
+	Script(TypeOfScript::WhenScript, spriteReference, parent)
 {
+	if (action == "Tapped")
+		m_action = Action::Tapped;
 }
 
-string WhenScript::getAction()
+int WhenScript::getAction()
 {
 	return m_action;
 }

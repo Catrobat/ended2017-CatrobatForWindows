@@ -4,11 +4,15 @@ class WhenScript :
 	public Script
 {
 public:
+	enum Action 
+	{
+		Tapped
+	};
 	WhenScript(string action, string spriteReference, Sprite *parent);
 	~WhenScript();
 
-	string getAction();
+	int getAction();
 
 private:
-	string m_action;
+	int m_action;
 };
