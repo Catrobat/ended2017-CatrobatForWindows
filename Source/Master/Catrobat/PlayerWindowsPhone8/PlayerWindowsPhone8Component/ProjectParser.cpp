@@ -128,7 +128,7 @@ void ProjectParser::parseScripts(xml_node<> *scriptListNode, Sprite *sprite)
 		{
 			WhenScript *whenScript = (WhenScript*) script;
 			scriptNode = m_doc->allocate_node(node_element, "Content.WhenScript");
-			scriptNode->append_node(m_doc->allocate_node(node_element, "action", string2char(whenScript->getAction())));
+			//scriptNode->append_node(m_doc->allocate_node(node_element, "action", string2char(whenScript->getAction())));
 		}
 
 		xml_node<> *brickListNode = m_doc->allocate_node(node_element, "brickList");

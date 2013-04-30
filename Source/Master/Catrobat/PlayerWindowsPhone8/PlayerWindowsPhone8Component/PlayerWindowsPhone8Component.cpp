@@ -5,6 +5,7 @@
 #include "ProjectParser.h"
 #include "ProjectDaemon.h"
 #include "ScriptHandler.h"
+#include "WhenScript.h"
 
 #include <windows.system.threading.h>
 #include <windows.foundation.h>
@@ -67,7 +68,16 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 			{
 				for (int j = 0; j < sprites->getSprite(i)->ScriptListSize(); j++)
 				{
-					sprites->getSprite(i)->getScript(j)->Execute();
+					Script *script = sprites->getSprite(i)->getScript(j);
+					if (script->getType() == Script::TypeOfScript::WhenScript)
+					{
+						WhenScript *wScript = (WhenScript *) script; 
+						if (wScript->getAction() == WhenScript::Action::Tapped)
+						{
+							wScript->Execute();
+						}
+					}
+					
 				}
 
 				// One Hit is enough
