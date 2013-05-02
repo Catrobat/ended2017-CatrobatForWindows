@@ -38,7 +38,7 @@ public:
 
 	DWORD               dwMagic;	// 'DDS' (0x20534444)
 	DDS_HEADER          header;
-	BYTE				bdata[100000000];	// We need this for the main surface data
+	BYTE				*bdata;	// We need this for the main surface data
 	//BYTE				bdata2[1];	// Other surface data
 
 	DDSLoader(std::vector<unsigned char> image);
@@ -46,7 +46,7 @@ public:
 	void WriteFile();
 
 private:
-	std::vector<unsigned char> m_image;
+	unsigned int m_streamLength;
 	Windows::Storage::StorageFolder^ m_location; 
     Platform::String^ m_locationPath; 
 
