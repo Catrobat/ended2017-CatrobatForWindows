@@ -73,8 +73,32 @@ void DDSLoader::WriteFile()
 		// WRITE DWORD dwMagic
 		state->WriteByte(dwMagic);
 
-		// Write DDS_HEADER header
+		// Write DDS_HEADER 
 		WriteDWord(state, m_ddsHeader.dwSize);
+		WriteDWord(state, m_ddsHeader.dwFlags);
+	    WriteDWord(state, m_ddsHeader.dwHeight);
+	    WriteDWord(state, m_ddsHeader.dwWidth);
+	    WriteDWord(state, m_ddsHeader.dwPitchOrLinearSize);
+        WriteDWord(state, m_ddsHeader.dwDepth);
+	    WriteDWord(state, m_ddsHeader.dwMipMapCount);
+	    WriteDWord(state, m_ddsHeader.dwReserved1[11]);
+
+		// Write DDS_PIXELFORMAT 
+		WriteDWord(state, m_ddsHeader.ddspf.dwSize);
+		WriteDWord(state, m_ddsHeader.ddspf.dwFlags);
+		WriteDWord(state, m_ddsHeader.ddspf.dwFourCC);
+		WriteDWord(state, m_ddsHeader.ddspf.dwRGBBitCount);
+		WriteDWord(state, m_ddsHeader.ddspf.dwRBitMask);
+		WriteDWord(state, m_ddsHeader.ddspf.dwGBitMask);
+		WriteDWord(state, m_ddsHeader.ddspf.dwBBitMask);
+		WriteDWord(state, m_ddsHeader.ddspf.dwABitMask);
+
+		// Write DDS_HEADER 
+	    WriteDWord(state, m_ddsHeader.dwCaps);
+	    WriteDWord(state, m_ddsHeader.dwCaps2);
+        WriteDWord(state, m_ddsHeader.dwCaps3);
+	    WriteDWord(state, m_ddsHeader.dwCaps4);
+	    WriteDWord(state, m_ddsHeader.dwReserved2);
 
 		for (int index = 0; index < m_streamLength; index++)
 		{
