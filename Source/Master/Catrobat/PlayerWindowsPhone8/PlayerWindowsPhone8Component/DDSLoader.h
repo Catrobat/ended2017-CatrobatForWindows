@@ -61,6 +61,7 @@ public:
 	DDSLoader(std::vector<unsigned char> image, unsigned int width, unsigned int height);
 
 	void WriteFile();
+	void WriteDWord(Windows::Storage::Streams::DataWriter^ state, DWORD dword);
 
 private:
 	DDS_HEADER m_ddsHeader;

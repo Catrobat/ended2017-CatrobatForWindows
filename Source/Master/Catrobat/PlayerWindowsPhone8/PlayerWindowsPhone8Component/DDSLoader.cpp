@@ -56,7 +56,7 @@ DDSLoader::DDSLoader(vector<unsigned char> image, unsigned int width,  unsigned 
 
 void DDSLoader::WriteFile()
 {
-	PCWSTR SaveStateFile = L"testsave.txt";
+	PCWSTR SaveStateFile = L"testpic.dds";
     auto folder = ApplicationData::Current->LocalFolder;
     task<StorageFile^> getFileTask(folder->CreateFileAsync(ref new Platform::String(SaveStateFile), CreationCollisionOption::ReplaceExisting));
 
@@ -70,6 +70,12 @@ void DDSLoader::WriteFile()
         Streams::DataWriter^ state = ref new Streams::DataWriter(stream);
         *writer = state;
 		
+		// WRITE DWORD dwMagic
+		state->WriteByte(dwMagic);
+
+		// Write DDS_HEADER header
+		WriteDWord(state, m_ddsHeader.dwSize);
+
 		for (int index = 0; index < m_streamLength; index++)
 		{
 			state->WriteByte(bdata[index]);
@@ -83,4 +89,19 @@ void DDSLoader::WriteFile()
     {
         delete (*writer);
     });
+}
+
+void DDSLoader::WriteDWord(Streams::DataWriter^ state, DWORD dword)
+{
+	BYTE data4 = dword & 0x000000FF;
+	dword = dword >> 8;
+	BYTE data3= dword & 0x000000FF;
+	dword = dword >> 8;
+	BYTE data2 = dword & 0x000000FF;
+	dword = dword >> 8;
+	BYTE data1 = dword & 0x000000FF;
+	state->WriteByte(data1);
+	state->WriteByte(data2);
+	state->WriteByte(data3);
+	state->WriteByte(data4);
 }
