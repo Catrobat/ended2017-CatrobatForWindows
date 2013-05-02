@@ -89,8 +89,8 @@ Bounds Sprite::getBounds()
 	Bounds bounds;
 	bounds.x = m_position.x;
 	bounds.y = m_position.y;
-	bounds.width = 100;
-	bounds.height = 100;
+	bounds.width = (m_lookData != NULL) ? m_lookData->Width() : 0;
+	bounds.height = (m_lookData != NULL) ? m_lookData->Height() : 0;
 	return bounds;
 }
 
