@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 
+#define DDSD_MAGICNUMBER 0x20534444
 #define DDSD_CAPS 0x1
 #define DDSD_HEIGHT 0x2
 #define DDSD_WIDTH 0x4
@@ -53,7 +54,6 @@ public:
 	  DWORD           dwReserved2;
 	} DDS_HEADER;
 
-	DWORD               dwMagic;	// 'DDS' (0x20534444)
 	DDS_HEADER          header;
 	BYTE				*bdata;	// We need this for the main surface data
 	//BYTE				bdata2[1];	// Other surface data

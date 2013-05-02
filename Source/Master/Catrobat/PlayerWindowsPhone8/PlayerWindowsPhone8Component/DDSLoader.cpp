@@ -71,7 +71,7 @@ void DDSLoader::WriteFile()
         *writer = state;
 		
 		// WRITE DWORD dwMagic
-		state->WriteByte(dwMagic);
+		state->WriteByte(DDSD_MAGICNUMBER);
 
 		// Write DDS_HEADER 
 		WriteDWord(state, m_ddsHeader.dwSize);
