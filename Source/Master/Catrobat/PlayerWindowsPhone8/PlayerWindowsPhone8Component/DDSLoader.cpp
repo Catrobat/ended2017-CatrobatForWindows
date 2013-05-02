@@ -16,20 +16,21 @@ DDSLoader::DDSLoader(vector<unsigned char> image, unsigned int width,  unsigned 
 	bdata = new byte[image.size()];
 	for (int index = 0; index < image.size();)
 	{
-		bdata[index] = image.at(index + 3);     // A
-		bdata[index + 1] = image.at(index);     // R
-		bdata[index + 2] = image.at(index + 1); // G
-		bdata[index + 3] = image.at(index + 2); // B
+		bdata[index + 2] = image.at(index);     // A
+		bdata[index + 1] = image.at(index + 1); // R
+		bdata[index + 0] = image.at(index + 2); // G
+		bdata[index + 3] = image.at(index + 3); // B
 		index += 4;
 	}
 	m_streamLength = image.size();
 	m_ddsHeader.dwSize = DDSD_HEADERSIZE;
 	m_ddsHeader.dwWidth = width;
 	m_ddsHeader.dwHeight = height;
-	m_ddsHeader.dwFlags = DDSD_CAPS || DDSD_HEIGHT || DDSD_WIDTH || DDSD_PITCH || DDSD_PIXELFORMAT;
+	m_ddsHeader.dwFlags = DDSD_CAPS | DDSD_HEIGHT | DDSD_WIDTH | DDSD_PITCH | DDSD_PIXELFORMAT;
 	m_ddsHeader.dwPitchOrLinearSize = (width * 32 /* bits per pixel */ + 7) / 8;
 	m_ddsHeader.ddspf.dwSize = DDPF_HEADERSIZE;
-	m_ddsHeader.ddspf.dwFlags = DDPF_ALPHAPIXELS || DDPF_RGB;
+	m_ddsHeader.ddspf.dwFlags = DDPF_ALPHAPIXELS | DDPF_RGB;
+	m_ddsHeader.ddspf.dwFourCC = 0;
 	m_ddsHeader.ddspf.dwRGBBitCount = 32; // RGBA
 	m_ddsHeader.ddspf.dwABitMask = DDPF_AMASK;
 	m_ddsHeader.ddspf.dwRBitMask = DDPF_RMASK;
@@ -71,7 +72,7 @@ void DDSLoader::WriteFile()
         *writer = state;
 		
 		// WRITE DWORD dwMagic
-		state->WriteByte(DDSD_MAGICNUMBER);
+		WriteDWord(state, DDSD_MAGICNUMBER);
 
 		// Write DDS_HEADER 
 		WriteDWord(state, m_ddsHeader.dwSize);
@@ -81,13 +82,16 @@ void DDSLoader::WriteFile()
 	    WriteDWord(state, m_ddsHeader.dwPitchOrLinearSize);
         WriteDWord(state, m_ddsHeader.dwDepth);
 	    WriteDWord(state, m_ddsHeader.dwMipMapCount);
-	    WriteDWord(state, m_ddsHeader.dwReserved1[11]);
+		for (int i = 0; i < 11; i++)
+		{
+			WriteDWord(state, m_ddsHeader.dwReserved1[i]);
+		}
 
 		// Write DDS_PIXELFORMAT 
 		WriteDWord(state, m_ddsHeader.ddspf.dwSize);
 		WriteDWord(state, m_ddsHeader.ddspf.dwFlags);
-		WriteDWord(state, m_ddsHeader.ddspf.dwFourCC);
-		WriteDWord(state, m_ddsHeader.ddspf.dwRGBBitCount);
+		WriteDWord(state, m_ddsHeader.ddspf.dwFourCC); //
+		WriteDWord(state, m_ddsHeader.ddspf.dwRGBBitCount); //
 		WriteDWord(state, m_ddsHeader.ddspf.dwRBitMask);
 		WriteDWord(state, m_ddsHeader.ddspf.dwGBitMask);
 		WriteDWord(state, m_ddsHeader.ddspf.dwBBitMask);
@@ -124,8 +128,8 @@ void DDSLoader::WriteDWord(Streams::DataWriter^ state, DWORD dword)
 	BYTE data2 = dword & 0x000000FF;
 	dword = dword >> 8;
 	BYTE data1 = dword & 0x000000FF;
-	state->WriteByte(data1);
-	state->WriteByte(data2);
-	state->WriteByte(data3);
 	state->WriteByte(data4);
+	state->WriteByte(data3);
+	state->WriteByte(data2);
+	state->WriteByte(data1);
 }
