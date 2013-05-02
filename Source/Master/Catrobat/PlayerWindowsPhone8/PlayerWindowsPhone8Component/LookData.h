@@ -20,7 +20,7 @@ public:
 	string Name();
 
 private:
-	ID3D11ShaderResourceView* m_Texture;
+	ID3D11ShaderResourceView* m_texture;
 	string m_filename;
 	string m_name;
 };

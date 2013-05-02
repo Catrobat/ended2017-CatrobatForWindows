@@ -1,5 +1,9 @@
 #include "pch.h"
 #include "DDSLoader.h"
+#include "lodepng.h"
+#include "DDSTextureLoader.h"
+
+#include <D3D11.h>
 
 using namespace Microsoft::WRL;
 using namespace Windows::Storage;
@@ -8,118 +12,101 @@ using namespace Windows::Storage::Streams;
 using namespace Windows::Foundation;
 using namespace Windows::ApplicationModel;
 using namespace concurrency;
+using namespace DirectX;
 using namespace std;
 
-DDSLoader::DDSLoader(vector<unsigned char> image, unsigned int width,  unsigned int height)
+
+void DDSLoader::ConvertToDDS(vector<unsigned char> image, unsigned int width,  unsigned int height, BYTE **stream, unsigned int *streamSize)
 {
+	// Set HEADER values ---------------------------------------------------------------------------------------
+	DDS_HEADER ddsHeader;
+	unsigned int m_streamLength;
 	int index = 0;
-	bdata = new byte[image.size()];
-	for (int index = 0; index < image.size();)
+	BYTE *bdata = new byte[image.size()];
+	for (unsigned int index = 0; index < image.size();)
 	{
-		bdata[index + 2] = image.at(index);     // A
-		bdata[index + 1] = image.at(index + 1); // R
-		bdata[index + 0] = image.at(index + 2); // G
-		bdata[index + 3] = image.at(index + 3); // B
+		bdata[index + 2] = image.at(index + 0);     // A
+		bdata[index + 1] = image.at(index + 1);     // R
+		bdata[index + 0] = image.at(index + 2);		// G
+		bdata[index + 3] = image.at(index + 3);		// B
 		index += 4;
 	}
 	m_streamLength = image.size();
-	m_ddsHeader.dwSize = DDSD_HEADERSIZE;
-	m_ddsHeader.dwWidth = width;
-	m_ddsHeader.dwHeight = height;
-	m_ddsHeader.dwFlags = DDSD_CAPS | DDSD_HEIGHT | DDSD_WIDTH | DDSD_PITCH | DDSD_PIXELFORMAT;
-	m_ddsHeader.dwPitchOrLinearSize = (width * 32 /* bits per pixel */ + 7) / 8;
-	m_ddsHeader.ddspf.dwSize = DDPF_HEADERSIZE;
-	m_ddsHeader.ddspf.dwFlags = DDPF_ALPHAPIXELS | DDPF_RGB;
-	m_ddsHeader.ddspf.dwFourCC = 0;
-	m_ddsHeader.ddspf.dwRGBBitCount = 32; // RGBA
-	m_ddsHeader.ddspf.dwABitMask = DDPF_AMASK;
-	m_ddsHeader.ddspf.dwRBitMask = DDPF_RMASK;
-	m_ddsHeader.ddspf.dwGBitMask = DDPF_GMASK;
-	m_ddsHeader.ddspf.dwBBitMask = DDPF_BMASK;
-	m_ddsHeader.dwCaps = DDSCAPS_TEXTURE;
+	ddsHeader.dwSize = DDSD_HEADERSIZE;
+	ddsHeader.dwWidth = width;
+	ddsHeader.dwHeight = height;
+	ddsHeader.dwFlags = DDSD_CAPS | DDSD_HEIGHT | DDSD_WIDTH | DDSD_PITCH | DDSD_PIXELFORMAT;
+	ddsHeader.dwPitchOrLinearSize = (width * 32 /* bits per pixel */ + 7) / 8;
+	ddsHeader.ddspf.dwSize = DDPF_HEADERSIZE;
+	ddsHeader.ddspf.dwFlags = DDPF_ALPHAPIXELS | DDPF_RGB;
+	ddsHeader.ddspf.dwFourCC = 0;
+	ddsHeader.ddspf.dwRGBBitCount = 32; // RGBA
+	ddsHeader.ddspf.dwABitMask = DDPF_AMASK;
+	ddsHeader.ddspf.dwRBitMask = DDPF_RMASK;
+	ddsHeader.ddspf.dwGBitMask = DDPF_GMASK;
+	ddsHeader.ddspf.dwBBitMask = DDPF_BMASK;
+	ddsHeader.dwCaps = DDSCAPS_TEXTURE;
 
 	// Not required
-	m_ddsHeader.dwDepth = 0;
-	m_ddsHeader.dwMipMapCount = 0;
+	ddsHeader.dwDepth = 0;
+	ddsHeader.dwMipMapCount = 0;
 	for (int i = 0; i < 11; i++)
 	{
-		m_ddsHeader.dwReserved1[i] = 0;
+		ddsHeader.dwReserved1[i] = 0;
 	}
 
-	m_ddsHeader.dwCaps2 = 0;
-	m_ddsHeader.dwCaps3 = 0;
-	m_ddsHeader.dwCaps4 = 0;
-	m_ddsHeader.dwReserved2 = 0;
+	ddsHeader.dwCaps2 = 0;
+	ddsHeader.dwCaps3 = 0;
+	ddsHeader.dwCaps4 = 0;
+	ddsHeader.dwReserved2 = 0;
 
-	m_location = Package::Current->InstalledLocation; 
-	m_locationPath = Platform::String::Concat(m_location->Path, "//"); 
+	// Prepare STREAM for WRITING
+	*streamSize = 4 + ddsHeader.dwSize + m_streamLength;
+	*stream = new BYTE[*streamSize];
+
+	// WRITE STREAM --------------------------------------------------------------------------------------------
+	int byteIndex = 0;
+
+	// WRITE DWORD dwMagic
+	WriteDWord(*stream, &byteIndex, DDSD_MAGICNUMBER);
+
+	// Write DDS_HEADER
+	WriteDWord(*stream, &byteIndex, ddsHeader.dwSize);
+	WriteDWord(*stream, &byteIndex, ddsHeader.dwFlags);
+	WriteDWord(*stream, &byteIndex, ddsHeader.dwHeight);
+	WriteDWord(*stream, &byteIndex, ddsHeader.dwWidth);
+	WriteDWord(*stream, &byteIndex, ddsHeader.dwPitchOrLinearSize);
+    WriteDWord(*stream, &byteIndex, ddsHeader.dwDepth);
+	WriteDWord(*stream, &byteIndex, ddsHeader.dwMipMapCount);
+	for (int i = 0; i < 11; i++)
+	{
+		WriteDWord(*stream, &byteIndex, ddsHeader.dwReserved1[i]);
+	}
+
+	// Write DDS_PIXELFORMAT 
+	WriteDWord(*stream, &byteIndex, ddsHeader.ddspf.dwSize);
+	WriteDWord(*stream, &byteIndex, ddsHeader.ddspf.dwFlags);
+	WriteDWord(*stream, &byteIndex, ddsHeader.ddspf.dwFourCC);
+	WriteDWord(*stream, &byteIndex, ddsHeader.ddspf.dwRGBBitCount);
+	WriteDWord(*stream, &byteIndex, ddsHeader.ddspf.dwRBitMask);
+	WriteDWord(*stream, &byteIndex, ddsHeader.ddspf.dwGBitMask);
+	WriteDWord(*stream, &byteIndex, ddsHeader.ddspf.dwBBitMask);
+	WriteDWord(*stream, &byteIndex, ddsHeader.ddspf.dwABitMask);
+
+	// Write DDS_HEADER 
+	WriteDWord(*stream, &byteIndex, ddsHeader.dwCaps);
+	WriteDWord(*stream, &byteIndex, ddsHeader.dwCaps2);
+    WriteDWord(*stream, &byteIndex, ddsHeader.dwCaps3);
+	WriteDWord(*stream, &byteIndex, ddsHeader.dwCaps4);
+	WriteDWord(*stream, &byteIndex, ddsHeader.dwReserved2);
+
+	for (int index = 0; index < m_streamLength; index++)
+	{
+		((*stream)[byteIndex++]) = bdata[index];
+	}
 }
 
-void DDSLoader::WriteFile()
-{
-	PCWSTR SaveStateFile = L"testpic.dds";
-    auto folder = ApplicationData::Current->LocalFolder;
-    task<StorageFile^> getFileTask(folder->CreateFileAsync(ref new Platform::String(SaveStateFile), CreationCollisionOption::ReplaceExisting));
-
-    auto writer = std::make_shared<Streams::DataWriter^>(nullptr);
-
-    getFileTask.then([](StorageFile^ file)
-    {
-        return file->OpenAsync(FileAccessMode::ReadWrite);
-    }).then([this, writer](Streams::IRandomAccessStream^ stream)
-    {
-        Streams::DataWriter^ state = ref new Streams::DataWriter(stream);
-        *writer = state;
-		
-		// WRITE DWORD dwMagic
-		WriteDWord(state, DDSD_MAGICNUMBER);
-
-		// Write DDS_HEADER 
-		WriteDWord(state, m_ddsHeader.dwSize);
-		WriteDWord(state, m_ddsHeader.dwFlags);
-	    WriteDWord(state, m_ddsHeader.dwHeight);
-	    WriteDWord(state, m_ddsHeader.dwWidth);
-	    WriteDWord(state, m_ddsHeader.dwPitchOrLinearSize);
-        WriteDWord(state, m_ddsHeader.dwDepth);
-	    WriteDWord(state, m_ddsHeader.dwMipMapCount);
-		for (int i = 0; i < 11; i++)
-		{
-			WriteDWord(state, m_ddsHeader.dwReserved1[i]);
-		}
-
-		// Write DDS_PIXELFORMAT 
-		WriteDWord(state, m_ddsHeader.ddspf.dwSize);
-		WriteDWord(state, m_ddsHeader.ddspf.dwFlags);
-		WriteDWord(state, m_ddsHeader.ddspf.dwFourCC); //
-		WriteDWord(state, m_ddsHeader.ddspf.dwRGBBitCount); //
-		WriteDWord(state, m_ddsHeader.ddspf.dwRBitMask);
-		WriteDWord(state, m_ddsHeader.ddspf.dwGBitMask);
-		WriteDWord(state, m_ddsHeader.ddspf.dwBBitMask);
-		WriteDWord(state, m_ddsHeader.ddspf.dwABitMask);
-
-		// Write DDS_HEADER 
-	    WriteDWord(state, m_ddsHeader.dwCaps);
-	    WriteDWord(state, m_ddsHeader.dwCaps2);
-        WriteDWord(state, m_ddsHeader.dwCaps3);
-	    WriteDWord(state, m_ddsHeader.dwCaps4);
-	    WriteDWord(state, m_ddsHeader.dwReserved2);
-
-		for (int index = 0; index < m_streamLength; index++)
-		{
-			state->WriteByte(bdata[index]);
-		}
-
-        return state->StoreAsync();
-    }).then([writer](uint32 count)
-    {
-        return (*writer)->FlushAsync();
-    }).then([this, writer](bool flushed)
-    {
-        delete (*writer);
-    });
-}
-
-void DDSLoader::WriteDWord(Streams::DataWriter^ state, DWORD dword)
+void DDSLoader::WriteDWord(BYTE *stream, int *byteIndex, DWORD dword)
 {
 	BYTE data4 = dword & 0x000000FF;
 	dword = dword >> 8;
@@ -128,8 +115,21 @@ void DDSLoader::WriteDWord(Streams::DataWriter^ state, DWORD dword)
 	BYTE data2 = dword & 0x000000FF;
 	dword = dword >> 8;
 	BYTE data1 = dword & 0x000000FF;
-	state->WriteByte(data4);
-	state->WriteByte(data3);
-	state->WriteByte(data2);
-	state->WriteByte(data1);
+	stream[(*byteIndex)++] = data4;
+	stream[(*byteIndex)++] = data3;
+	stream[(*byteIndex)++] = data2;
+	stream[(*byteIndex)++] = data1;
 }
+
+void DDSLoader::LoadTexture(ID3D11Device* d3dDevice, string filename, ID3D11ShaderResourceView** texture)
+{
+	std::vector<unsigned char> image; //the raw pixels
+	unsigned int width, height;
+	unsigned error = lodepng::decode(image, width, height, filename);
+
+	BYTE *stream = nullptr;
+	unsigned int streamSize;
+	ConvertToDDS(image, width, height, &stream, &streamSize);
+	CreateDDSTextureFromMemory(d3dDevice, stream, streamSize, nullptr, texture, MAXSIZE_T);
+}
+

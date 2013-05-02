@@ -22,7 +22,7 @@
 #define DDPF_GMASK     0x0000FF00
 #define DDPF_BMASK     0x000000FF
 
-class DDSLoader
+static class DDSLoader
 {
 public:
 
@@ -54,20 +54,11 @@ public:
 	  DWORD           dwReserved2;
 	} DDS_HEADER;
 
-	DDS_HEADER          header;
-	BYTE				*bdata;	// We need this for the main surface data
-	//BYTE				bdata2[1];	// Other surface data
-
-	DDSLoader(std::vector<unsigned char> image, unsigned int width, unsigned int height);
-
-	void WriteFile();
-	void WriteDWord(Windows::Storage::Streams::DataWriter^ state, DWORD dword);
+	static void LoadTexture(ID3D11Device* d3dDevice, std::string filename, ID3D11ShaderResourceView** texture);
 
 private:
-	DDS_HEADER m_ddsHeader;
-	DDS_PIXELFORMAT m_ddsPixelformat;
-	unsigned int m_streamLength;
-	Windows::Storage::StorageFolder^ m_location; 
-    Platform::String^ m_locationPath; 
+
+	static void ConvertToDDS(std::vector<unsigned char> image, unsigned int width,  unsigned int height, BYTE **stream, unsigned int *streamSize);
+	static void WriteDWord(BYTE *stream, int *byteIndex, DWORD dword);
 };
 

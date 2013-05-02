@@ -116,23 +116,6 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	m_soundmanager = new SoundManager();
 	m_soundmanager->Initialize();
 
-	//ScriptHandler *test = new ScriptHandler();
-	// ----------------------------------------------------------------
-	std::vector<unsigned char> image; //the raw pixels
-	unsigned int width, height;
-
-	//decode
-	unsigned error = lodepng::decode(image, width, height, "testProject/screenshot.png");
-
-	//the pixels are now in the vector "image", 4 bytes per pixel, ordered RGBARGBA..., use it as texture, draw it, ...
-
-	DDSLoader *picLoader = new DDSLoader(image, width, height);
-	picLoader->WriteFile();
-
-
-	// ----------------------------------------------------------------
-	
-
 	// XML
 	XMLParser *xml = new XMLParser();
 	xml->loadXML("testProject/projectcode.xml");
