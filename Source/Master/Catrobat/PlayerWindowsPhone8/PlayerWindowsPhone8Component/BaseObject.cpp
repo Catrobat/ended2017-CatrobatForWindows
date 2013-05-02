@@ -27,12 +27,12 @@ BaseObject::BaseObject(Point location, Size size, float originX, float originY)
 	m_objectScale.y = size.Height;
 }
 
-BaseObject::BaseObject(float x, float y, float width, float height, float originX, float originY)
+BaseObject::BaseObject(float x, float y, float scaleX, float scaleY, float originX, float originY)
 {
 	m_position.x = x;
 	m_position.y =  y;
 	m_sourceOrigin.x = originX;
 	m_sourceOrigin.y = originY;
-	m_objectScale.x = width;
-	m_objectScale.y = height;
+	m_objectScale.x = scaleX;
+	m_objectScale.y = scaleY;
 }
