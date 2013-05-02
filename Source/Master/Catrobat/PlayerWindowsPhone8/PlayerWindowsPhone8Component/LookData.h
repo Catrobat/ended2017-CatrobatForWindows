@@ -19,8 +19,13 @@ public:
 	string FileName();
 	string Name();
 
+	unsigned int Width();
+	unsigned int Height();
+
 private:
-	ID3D11ShaderResourceView* m_Texture;
+	ID3D11ShaderResourceView* m_texture;
+	unsigned int m_width;
+	unsigned int m_height;
 	string m_filename;
 	string m_name;
 };
