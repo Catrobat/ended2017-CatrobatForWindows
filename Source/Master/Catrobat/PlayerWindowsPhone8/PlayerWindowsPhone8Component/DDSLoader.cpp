@@ -78,7 +78,7 @@ void DDSLoader::ConvertToDDS(vector<unsigned char> image, unsigned int width,  u
 	WriteDWord(*stream, &byteIndex, ddsHeader.dwPitchOrLinearSize);
     WriteDWord(*stream, &byteIndex, ddsHeader.dwDepth);
 	WriteDWord(*stream, &byteIndex, ddsHeader.dwMipMapCount);
-	for (int i = 0; i < 11; i++)
+	for (unsigned int i = 0; i < 11; i++)
 	{
 		WriteDWord(*stream, &byteIndex, ddsHeader.dwReserved1[i]);
 	}
@@ -100,7 +100,7 @@ void DDSLoader::ConvertToDDS(vector<unsigned char> image, unsigned int width,  u
 	WriteDWord(*stream, &byteIndex, ddsHeader.dwCaps4);
 	WriteDWord(*stream, &byteIndex, ddsHeader.dwReserved2);
 
-	for (int index = 0; index < m_streamLength; index++)
+	for (unsigned int index = 0; index < m_streamLength; index++)
 	{
 		((*stream)[byteIndex++]) = bdata[index];
 	}
@@ -121,15 +121,15 @@ void DDSLoader::WriteDWord(BYTE *stream, int *byteIndex, DWORD dword)
 	stream[(*byteIndex)++] = data1;
 }
 
-void DDSLoader::LoadTexture(ID3D11Device* d3dDevice, string filename, ID3D11ShaderResourceView** texture)
+void DDSLoader::LoadTexture(ID3D11Device* d3dDevice, string filename, ID3D11ShaderResourceView** texture, unsigned int *width, unsigned int *height)
 {
 	std::vector<unsigned char> image; //the raw pixels
-	unsigned int width, height;
-	unsigned error = lodepng::decode(image, width, height, filename);
+	//unsigned int width, height;
+	unsigned error = lodepng::decode(image, *width, *height, filename);
 
 	BYTE *stream = nullptr;
 	unsigned int streamSize;
-	ConvertToDDS(image, width, height, &stream, &streamSize);
+	ConvertToDDS(image, *width, *height, &stream, &streamSize);
 	CreateDDSTextureFromMemory(d3dDevice, stream, streamSize, nullptr, texture, MAXSIZE_T);
 }
 

@@ -54,7 +54,7 @@ public:
 	  DWORD           dwReserved2;
 	} DDS_HEADER;
 
-	static void LoadTexture(ID3D11Device* d3dDevice, std::string filename, ID3D11ShaderResourceView** texture);
+	static void LoadTexture(ID3D11Device* d3dDevice, std::string filename, ID3D11ShaderResourceView** texture, unsigned int *width, unsigned int *height);
 
 private:
 
