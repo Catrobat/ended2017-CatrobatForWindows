@@ -6,6 +6,10 @@
 #include "ProjectDaemon.h"
 #include "ScriptHandler.h"
 #include "WhenScript.h"
+#include "lodepng.h"
+#include "lodepng_util.h"
+#include "DDSLoader.h"
+
 
 #include <windows.system.threading.h>
 #include <windows.foundation.h>
@@ -112,8 +116,21 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	m_soundmanager = new SoundManager();
 	m_soundmanager->Initialize();
 
+	//ScriptHandler *test = new ScriptHandler();
+	// ----------------------------------------------------------------
+	std::vector<unsigned char> image; //the raw pixels
+	unsigned width, height;
 
-	ScriptHandler *test = new ScriptHandler();
+	//decode
+	unsigned error = lodepng::decode(image, width, height, "testProject/screenshot.png");
+
+	//the pixels are now in the vector "image", 4 bytes per pixel, ordered RGBARGBA..., use it as texture, draw it, ...
+
+	DDSLoader *picLoader = new DDSLoader(image);
+	picLoader->WriteFile();
+
+
+	// ----------------------------------------------------------------
 	
 
 	// XML

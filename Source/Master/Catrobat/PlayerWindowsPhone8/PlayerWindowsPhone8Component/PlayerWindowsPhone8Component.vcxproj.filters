@@ -80,6 +80,15 @@
     <ClCompile Include="ScriptHandler.cpp">
       <Filter>Objects\Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="lodepng.cpp">
+      <Filter>ddsConverter</Filter>
+    </ClCompile>
+    <ClCompile Include="lodepng_util.cpp">
+      <Filter>ddsConverter</Filter>
+    </ClCompile>
+    <ClCompile Include="DDSLoader.cpp">
+      <Filter>ddsConverter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -167,6 +176,15 @@
     <ClInclude Include="ScriptHandler.h">
       <Filter>Objects\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="lodepng.h">
+      <Filter>ddsConverter</Filter>
+    </ClInclude>
+    <ClInclude Include="lodepng_util.h">
+      <Filter>ddsConverter</Filter>
+    </ClInclude>
+    <ClInclude Include="DDSLoader.h">
+      <Filter>ddsConverter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -186,6 +204,9 @@
     </Filter>
     <Filter Include="Objects\Scripts">
       <UniqueIdentifier>{fda72b0d-ed6b-4c59-9473-4911f7bd4bc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ddsConverter">
+      <UniqueIdentifier>{0b77d6dc-7fe8-43ee-aba1-51564a63deae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

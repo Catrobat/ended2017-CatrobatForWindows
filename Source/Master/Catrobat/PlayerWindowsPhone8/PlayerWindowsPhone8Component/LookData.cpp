@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "LookData.h"
+#include <vector>
 
 using namespace DirectX;
 
@@ -20,6 +21,8 @@ string LookData::FileName()
 
 void LookData::LoadTexture(ID3D11Device* d3dDevice)
 {
+	std::vector<unsigned char> image;
+
 	m_filename = "testProject/images/" + m_filename + ".dds";
 	std::wstring widestr = std::wstring(m_filename.begin(), m_filename.end());
 	const wchar_t* widecstr = widestr.c_str();
