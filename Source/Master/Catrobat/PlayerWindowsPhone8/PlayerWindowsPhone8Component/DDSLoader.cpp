@@ -27,6 +27,28 @@ DDSLoader::DDSLoader(vector<unsigned char> image, unsigned int width,  unsigned 
 	m_ddsHeader.dwWidth = width;
 	m_ddsHeader.dwHeight = height;
 	m_ddsHeader.dwFlags = DDSD_CAPS || DDSD_HEIGHT || DDSD_WIDTH || DDSD_PITCH || DDSD_PIXELFORMAT;
+	m_ddsHeader.dwPitchOrLinearSize = (width * 32 /* bits per pixel */ + 7) / 8;
+	m_ddsHeader.ddspf.dwSize = DDPF_HEADERSIZE;
+	m_ddsHeader.ddspf.dwFlags = DDPF_ALPHAPIXELS || DDPF_RGB;
+	m_ddsHeader.ddspf.dwRGBBitCount = 32; // RGBA
+	m_ddsHeader.ddspf.dwABitMask = DDPF_AMASK;
+	m_ddsHeader.ddspf.dwRBitMask = DDPF_RMASK;
+	m_ddsHeader.ddspf.dwGBitMask = DDPF_GMASK;
+	m_ddsHeader.ddspf.dwBBitMask = DDPF_BMASK;
+	m_ddsHeader.dwCaps = DDSCAPS_TEXTURE;
+
+	// Not required
+	m_ddsHeader.dwDepth = 0;
+	m_ddsHeader.dwMipMapCount = 0;
+	for (int i = 0; i < 11; i++)
+	{
+		m_ddsHeader.dwReserved1[i] = 0;
+	}
+
+	m_ddsHeader.dwCaps2 = 0;
+	m_ddsHeader.dwCaps3 = 0;
+	m_ddsHeader.dwCaps4 = 0;
+	m_ddsHeader.dwReserved2 = 0;
 
 	m_location = Package::Current->InstalledLocation; 
 	m_locationPath = Platform::String::Concat(m_location->Path, "//"); 
