@@ -4,6 +4,13 @@
 #include <vector>
 #include <string>
 
+#define DDSD_CAPS 0x1
+#define DDSD_HEIGHT 0x2
+#define DDSD_WIDTH 0x4
+#define DDSD_PITCH 0x8
+#define DDSD_PIXELFORMAT 0x1000
+#define DDSD_HEADERSIZE 124
+
 class DDSLoader
 {
 public:

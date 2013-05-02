@@ -23,8 +23,11 @@ DDSLoader::DDSLoader(vector<unsigned char> image, unsigned int width,  unsigned 
 		index += 4;
 	}
 	m_streamLength = image.size();
+	m_ddsHeader.dwSize = DDSD_HEADERSIZE;
 	m_ddsHeader.dwWidth = width;
 	m_ddsHeader.dwHeight = height;
+	m_ddsHeader.dwFlags = DDSD_CAPS || DDSD_HEIGHT || DDSD_WIDTH || DDSD_PITCH || DDSD_PIXELFORMAT;
+
 	m_location = Package::Current->InstalledLocation; 
 	m_locationPath = Platform::String::Concat(m_location->Path, "//"); 
 }
