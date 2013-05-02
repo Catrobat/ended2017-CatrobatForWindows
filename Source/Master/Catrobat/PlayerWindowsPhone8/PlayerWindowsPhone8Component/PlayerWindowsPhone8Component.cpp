@@ -119,14 +119,14 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	//ScriptHandler *test = new ScriptHandler();
 	// ----------------------------------------------------------------
 	std::vector<unsigned char> image; //the raw pixels
-	unsigned width, height;
+	unsigned int width, height;
 
 	//decode
 	unsigned error = lodepng::decode(image, width, height, "testProject/screenshot.png");
 
 	//the pixels are now in the vector "image", 4 bytes per pixel, ordered RGBARGBA..., use it as texture, draw it, ...
 
-	DDSLoader *picLoader = new DDSLoader(image);
+	DDSLoader *picLoader = new DDSLoader(image, width, height);
 	picLoader->WriteFile();
 
 

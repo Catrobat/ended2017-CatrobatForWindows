@@ -10,15 +10,12 @@ using namespace Windows::ApplicationModel;
 using namespace concurrency;
 using namespace std;
 
-DDSLoader::DDSLoader(vector<unsigned char> image)
+DDSLoader::DDSLoader(vector<unsigned char> image, unsigned int width,  unsigned int height)
 {
 	int index = 0;
 	bdata = new byte[image.size()];
-	//for (vector<unsigned char>::iterator it = m_image.begin(); it != m_image.end(); it++)
 	for (int index = 0; index < image.size();)
 	{
-		// We have R32G32B32A32, but Microsoft tells me to use A8R8G8B8, A1R5G5B5, 
-		// A4R4G4B4, R8G8B8, R5G6B5, so lets see if this will work
 		bdata[index] = image.at(index + 3);     // A
 		bdata[index + 1] = image.at(index);     // R
 		bdata[index + 2] = image.at(index + 1); // G
@@ -26,13 +23,15 @@ DDSLoader::DDSLoader(vector<unsigned char> image)
 		index += 4;
 	}
 	m_streamLength = image.size();
+	m_ddsHeader.dwWidth = width;
+	m_ddsHeader.dwHeight = height;
 	m_location = Package::Current->InstalledLocation; 
 	m_locationPath = Platform::String::Concat(m_location->Path, "//"); 
 }
 
 void DDSLoader::WriteFile()
 {
-	PCWSTR SaveStateFile = L"testasave.txt";
+	PCWSTR SaveStateFile = L"testsave.txt";
     auto folder = ApplicationData::Current->LocalFolder;
     task<StorageFile^> getFileTask(folder->CreateFileAsync(ref new Platform::String(SaveStateFile), CreationCollisionOption::ReplaceExisting));
 

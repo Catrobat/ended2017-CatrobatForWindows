@@ -41,15 +41,15 @@ public:
 	BYTE				*bdata;	// We need this for the main surface data
 	//BYTE				bdata2[1];	// Other surface data
 
-	DDSLoader(std::vector<unsigned char> image);
+	DDSLoader(std::vector<unsigned char> image, unsigned int width, unsigned int height);
 
 	void WriteFile();
 
 private:
+	DDS_HEADER m_ddsHeader;
+	DDS_PIXELFORMAT m_ddsPixelformat;
 	unsigned int m_streamLength;
 	Windows::Storage::StorageFolder^ m_location; 
     Platform::String^ m_locationPath; 
-
-
 };
 
