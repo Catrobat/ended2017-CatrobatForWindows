@@ -124,7 +124,6 @@ void DDSLoader::WriteDWord(BYTE *stream, int *byteIndex, DWORD dword)
 void DDSLoader::LoadTexture(ID3D11Device* d3dDevice, string filename, ID3D11ShaderResourceView** texture, unsigned int *width, unsigned int *height)
 {
 	std::vector<unsigned char> image; //the raw pixels
-	//unsigned int width, height;
 	unsigned error = lodepng::decode(image, *width, *height, filename);
 
 	BYTE *stream = nullptr;

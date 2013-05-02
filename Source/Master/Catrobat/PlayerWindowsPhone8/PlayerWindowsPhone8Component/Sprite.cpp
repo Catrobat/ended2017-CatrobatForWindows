@@ -2,7 +2,7 @@
 #include "Sprite.h"
 
 Sprite::Sprite(string name) :
-	BaseObject(0, 30, 1, 1, 1, 1),
+	BaseObject(),
 	m_name(name)
 {
 	m_lookData = NULL;
@@ -55,8 +55,11 @@ Script *Sprite::getScript(int index)
 	return *it;
 }
 
-void Sprite::LoadTextures(ID3D11Device* d3dDevice)
+void Sprite::LoadTextures(ID3D11Device* d3dDevice, Windows::Foundation::Rect *windowBounds)
 {
+	m_position.x = (windowBounds->Width / 2);
+	m_position.y = windowBounds->Height / 2;
+
 	for (int i = 0; i < LookDataListSize(); i++)
 	{
 		getLookData(i)->LoadTexture(d3dDevice);
@@ -71,7 +74,7 @@ void Sprite::Draw(SpriteBatch *spriteBatch)
 	}
 
 	if (m_lookData != NULL)
-		spriteBatch->Draw(m_lookData->Texture(), m_position, nullptr, Colors::Wheat, 0.0f, m_sourceOrigin, m_objectScale, SpriteEffects_None, 0.0f);
+		spriteBatch->Draw(m_lookData->Texture(), m_position, nullptr, Colors::Wheat, 0.0f, XMFLOAT2(m_lookData->Width() / 2, m_lookData->Height() / 2), m_objectScale, SpriteEffects_None, 0.0f);
 }
 
 void Sprite::SetLookData(int index)
@@ -87,8 +90,8 @@ LookData* Sprite::GetCurrentLookData()
 Bounds Sprite::getBounds()
 {
 	Bounds bounds;
-	bounds.x = m_position.x;
-	bounds.y = m_position.y;
+	bounds.x = m_position.x - m_lookData->Width() / 2;
+	bounds.y = m_position.y - m_lookData->Height() / 2;
 	bounds.width = (m_lookData != NULL) ? m_lookData->Width() : 0;
 	bounds.height = (m_lookData != NULL) ? m_lookData->Height() : 0;
 	return bounds;
@@ -103,4 +106,10 @@ void Sprite::StartUp()
 		if (script->getType() == Script::TypeOfScript::StartScript)
 			script->Execute();
 	}
+}
+
+void Sprite::SetPosition(float x, float y)
+{
+	m_position.x += x;
+	m_position.y += y;
 }

@@ -121,9 +121,9 @@
   <ItemGroup>
     <None Include="Piano\.nomedia" />
     <None Include="Piano\images\.nomedia" />
-    <None Include="Piano\images\3673EC84679EE425A215B86B085EC292_cheshireCat" />
-    <None Include="Piano\images\7064E57016F4326F59F0B098D83EB259_normalCat" />
-    <None Include="Piano\images\FE5DF421A5746EC7FC916AC1B94ECC17_banzaiCat" />
+    <Content Include="Piano\images\3673EC84679EE425A215B86B085EC292_cheshireCat" />
+    <Content Include="Piano\images\7064E57016F4326F59F0B098D83EB259_normalCat" />
+    <Content Include="Piano\images\FE5DF421A5746EC7FC916AC1B94ECC17_banzaiCat" />
     <None Include="Piano\sounds\.nomedia" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">

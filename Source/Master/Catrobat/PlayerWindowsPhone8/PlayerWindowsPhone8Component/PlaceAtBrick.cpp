@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "PlaceAtBrick.h"
+#include "Script.h"
+#include "Sprite.h"
 
 PlaceAtBrick::PlaceAtBrick(string spriteReference, float positionX, float positionY, Script *parent) :
 	Brick(TypeOfBrick::PlaceAtBrick, spriteReference, parent),
@@ -9,4 +11,5 @@ PlaceAtBrick::PlaceAtBrick(string spriteReference, float positionX, float positi
 
 void PlaceAtBrick::Execute()
 {
+	m_parent->Parent()->SetPosition(m_positionX, m_positionY);
 }

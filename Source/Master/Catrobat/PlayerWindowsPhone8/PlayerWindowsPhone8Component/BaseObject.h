@@ -16,15 +16,8 @@ public:
 	virtual void Draw(SpriteBatch *spriteBatch) = 0;
 
 protected:
-	BaseObject(float x, float y, float width, float height, float originX, float originY);
-	BaseObject(Rect position, float originX, float originY);
-	BaseObject(Point location, Size size, float originX, float originY);
-	//~BaseObject(void);
+	BaseObject(float scaleX = 1, float scaleY = 1);
 
 	XMFLOAT2 m_position;
-	XMFLOAT2 m_sourceOrigin;
 	XMFLOAT2 m_objectScale;
-
-	float scale;
 };
-

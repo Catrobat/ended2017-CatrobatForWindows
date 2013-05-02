@@ -118,9 +118,8 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 
 	// XML
 	XMLParser *xml = new XMLParser();
-	xml->loadXML("testProject/projectcode.xml");
+	xml->loadXML("Piano/projectcode.xml");
 	ProjectDaemon::Instance()->setProject(xml->getProject());
-
 	free(xml);
 
 	// Restart timer after renderer has finished initializing.
@@ -161,7 +160,7 @@ HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceCo
 		//FMOD_Main();
 
 		Sound *sound = m_soundmanager->CreateSound(/* Parameters */);
-		sound->Play();
+		//sound->Play();
 
 		test = true;
 	}

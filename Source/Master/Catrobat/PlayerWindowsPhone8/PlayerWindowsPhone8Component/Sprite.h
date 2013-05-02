@@ -27,7 +27,7 @@ public:
 	void addScript(Script *script);
 	void addSoundInfo(SoundInfo *soundInfo);
 
-	void LoadTextures(ID3D11Device* d3dDevice);
+	void LoadTextures(ID3D11Device* d3dDevice, Windows::Foundation::Rect *windowBounds);
 	void Draw(SpriteBatch *spriteBatch);
 	void StartUp();
 
@@ -39,6 +39,8 @@ public:
 	LookData *getLookData(int index);
 	void SetLookData(int index);
 	LookData* GetCurrentLookData();
+
+	void SetPosition(float x, float y);
 
 	Bounds getBounds();
 

@@ -24,16 +24,16 @@ void Renderer::CreateDeviceResources()
 void Renderer::CreateWindowSizeDependentResources()
 {
 	Direct3DBase::CreateWindowSizeDependentResources();
-	ProjectDaemon::Instance()->getProject()->LoadTextures(m_d3dDevice.Get());
-}
-
-void Renderer::Update(float timeTotal, float timeDelta)
-{
+	ProjectDaemon::Instance()->getProject()->LoadTextures(m_d3dDevice.Get(), &m_windowBounds);
 	if (m_startup)
 	{
 		m_startup = false;
 		StartUpTasks();
 	}
+}
+
+void Renderer::Update(float timeTotal, float timeDelta)
+{
 }
 
 void Renderer::Render()
