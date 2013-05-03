@@ -27,7 +27,7 @@ public:
 	void addScript(Script *script);
 	void addSoundInfo(SoundInfo *soundInfo);
 
-	void LoadTextures(ID3D11Device* d3dDevice);
+	void LoadTextures(ID3D11Device* d3dDevice, Windows::Foundation::Rect *windowBounds);
 	void Draw(SpriteBatch *spriteBatch);
 	void StartUp();
 
@@ -40,7 +40,12 @@ public:
 	void SetLookData(int index);
 	LookData* GetCurrentLookData();
 
+	void SetPosition(float x, float y);
+	void GetPosition(float &x, float &y);
+
 	Bounds getBounds();
+
+	void SetTransparency(float transparency);
 
 private:
 	LookData *m_lookData;
@@ -48,4 +53,5 @@ private:
 	list<Script*> *m_scripts;
 	list<SoundInfo*> *m_soundInfos;
 	string m_name;
+	float m_transparency;
 };

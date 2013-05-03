@@ -107,6 +107,18 @@ void Direct3DBackground::OnPointerReleased(DrawingSurfaceManipulationHost^ sende
 // Interface With Direct3DContentProvider
 HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device)
 {
+	// XML
+	XMLParser *xml = new XMLParser();
+	//Platform::String^ localfolder = Windows::Storage::ApplicationData::Current->LocalFolder->Path;
+	//std::wstring fooW(localfolder->Begin());
+	//std::string fooA(fooW.begin(), fooW.end());
+
+	//xml->loadXML(fooA + "/Pacman/projectcode.xml");
+	ProjectDaemon::Instance()->setProject(xml->getProject());
+	free(xml);
+
+
+
 	// Initialize Renderer
 	m_renderer = ref new Renderer();
 	m_renderer->Initialize(device);
@@ -115,13 +127,6 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	// Initialize Sound
 	m_soundmanager = new SoundManager();
 	m_soundmanager->Initialize();
-
-	// XML
-	XMLParser *xml = new XMLParser();
-	xml->loadXML("testProject/projectcode.xml");
-	ProjectDaemon::Instance()->setProject(xml->getProject());
-
-	free(xml);
 
 	// Restart timer after renderer has finished initializing.
 	m_timer->Reset();
@@ -140,9 +145,9 @@ HRESULT Direct3DBackground::PrepareResources(_In_ const LARGE_INTEGER* presentTa
 {
 	m_timer->Update();
 	m_renderer->Update(m_timer->Total, m_timer->Delta);
-
-	desiredRenderTargetSize->width = RenderResolution.Width;
-	desiredRenderTargetSize->height = RenderResolution.Height;
+	
+	desiredRenderTargetSize->width = ProjectDaemon::Instance()->getProject()->getScreenWidth();
+	desiredRenderTargetSize->height = ProjectDaemon::Instance()->getProject()->getScreenHeight();
 
 	return S_OK;
 }
@@ -161,7 +166,7 @@ HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceCo
 		//FMOD_Main();
 
 		Sound *sound = m_soundmanager->CreateSound(/* Parameters */);
-		sound->Play();
+		//sound->Play();
 
 		test = true;
 	}

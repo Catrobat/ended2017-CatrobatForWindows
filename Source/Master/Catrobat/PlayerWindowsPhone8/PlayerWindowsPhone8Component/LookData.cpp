@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "LookData.h"
 #include "DDSLoader.h"
+#include "ProjectDaemon.h"
 
 #include <vector>
 
@@ -33,7 +34,7 @@ string LookData::FileName()
 
 void LookData::LoadTexture(ID3D11Device* d3dDevice)
 {
-	m_filename = "testProject/images/" + m_filename;
+	m_filename = ProjectDaemon::Instance()->getProject()->getProjectName() + "/images/" + m_filename;
 	DDSLoader::LoadTexture(d3dDevice, m_filename, &m_texture, &m_width, &m_height);
 }
 

@@ -19,7 +19,7 @@ public:
 	SpriteList *getSpriteList();
 
 	void Render(SpriteBatch *spriteBatch);
-	void LoadTextures(ID3D11Device* d3dDevice);
+	void LoadTextures(ID3D11Device* d3dDevice, Windows::Foundation::Rect *windowBounds);
 	void StartUp();
 
 private:

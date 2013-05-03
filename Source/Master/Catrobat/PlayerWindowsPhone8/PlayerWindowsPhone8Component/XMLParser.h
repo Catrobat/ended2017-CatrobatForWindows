@@ -36,6 +36,7 @@ private:
 	Brick *parseCostumeBrick(xml_node<> *baseNode, Script *script);
 	Brick *parseWaitBrick(xml_node<> *baseNode, Script *script);
 	Brick *parsePlaceAtBrick(xml_node<> *baseNode, Script *script);
+	Brick *parseGlideToBrick(xml_node<> *baseNode, Script *script);
 	Brick *parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script);
 	Brick *parsePlaySoundBrick(xml_node<> *baseNode, Script *script);
 };

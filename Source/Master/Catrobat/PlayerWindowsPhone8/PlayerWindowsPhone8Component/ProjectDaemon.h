@@ -8,6 +8,7 @@ public:
 	static ProjectDaemon *Instance();
 
 	void setProject(Project *project);
+	void loadProjects();
 	Project *getProject();
 
 private:

@@ -52,11 +52,11 @@ void Project::Render(SpriteBatch *spriteBatch)
 	}
 }
 
-void Project::LoadTextures(ID3D11Device* d3dDevice)
+void Project::LoadTextures(ID3D11Device* d3dDevice, Windows::Foundation::Rect *windowBounds)
 {
 	for (int i = 0; i < m_spriteList->Size(); i++)
 	{
-		m_spriteList->getSprite(i)->LoadTextures(d3dDevice);
+		m_spriteList->getSprite(i)->LoadTextures(d3dDevice, windowBounds);
 	}
 }
 

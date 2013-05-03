@@ -8,6 +8,7 @@
 #include "SetGhostEffectBrick.h"
 #include "PlaceAtBrick.h"
 #include "PlaySoundBrick.h"
+#include "GlideToBrick.h"
 #include "rapidxml\rapidxml_print.hpp"
 
 #include <iostream>
@@ -294,6 +295,10 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 		{
 			script->addBrick(parsePlaySoundBrick(node, script));
 		}
+		else if(strcmp(node->name(), "Bricks.GlideToBrick") == 0)
+		{
+			script->addBrick(parseGlideToBrick(node, script));
+		}
 		node = node->next_sibling();
 	}
 }
@@ -375,6 +380,35 @@ Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode, Script *script)
 
 	string spriteReference = spriteReferenceAttribute->value();
 	return new PlaceAtBrick(spriteReference, postionX, postionY, script);
+}
+
+Brick *XMLParser::parseGlideToBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("xDestination");
+	if (!node)
+		return NULL;
+	float destinationX = atof(node->value());
+
+	node = baseNode->first_node("yDestination");
+	if (!node)
+		return NULL;
+	float destinationY = atof(node->value());
+
+	node = baseNode->first_node("durationInMilliSeconds");
+	if (!node)
+		return NULL;
+	float duration = atof(node->value());
+
+	node = baseNode->first_node("sprite");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *spriteReferenceAttribute = node->first_attribute("reference");
+	if (!spriteReferenceAttribute)
+		return NULL;
+
+	string spriteReference = spriteReferenceAttribute->value();
+	return new GlideToBrick(spriteReference, destinationX, destinationY, duration, script);
 }
 
 Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
