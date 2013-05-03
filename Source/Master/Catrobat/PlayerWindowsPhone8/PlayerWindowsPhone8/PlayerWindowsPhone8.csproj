@@ -119,8 +119,22 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Pacman\.nomedia" />
+    <None Include="Pacman\images\.nomedia" />
+    <None Include="Pacman\images\3673EC84679EE425A215B86B085EC292_cheshireCat" />
+    <None Include="Pacman\images\7064E57016F4326F59F0B098D83EB259_normalCat" />
+    <None Include="Pacman\images\B978398F6E8D16B857AA81618F3EF879_background" />
+    <None Include="Pacman\images\FE5DF421A5746EC7FC916AC1B94ECC17_banzaiCat" />
+    <None Include="Pacman\sounds\.nomedia" />
     <None Include="Piano\.nomedia" />
     <None Include="Piano\images\.nomedia" />
+    <Content Include="Pacman\images\5189540A4CA64E16A0C06EF53881EC16_p2.png" />
+    <Content Include="Pacman\images\546ACA5DBA33F2CD9C61AF9806F71E2E_p3.png" />
+    <Content Include="Pacman\images\5E371F112F2DAE598CCDCD86533BF6CF_p0.png" />
+    <Content Include="Pacman\images\B015CF82515A9BF3149651AA6788B259_path3784.png" />
+    <Content Include="Pacman\images\DAACAFF0EA0EF32E28F5A0F8B79F03A5_p1.png" />
+    <Content Include="Pacman\projectcode.xml" />
+    <Content Include="Pacman\screenshot.png" />
     <Content Include="Piano\images\3673EC84679EE425A215B86B085EC292_cheshireCat" />
     <Content Include="Piano\images\7064E57016F4326F59F0B098D83EB259_normalCat" />
     <Content Include="Piano\images\FE5DF421A5746EC7FC916AC1B94ECC17_banzaiCat" />
