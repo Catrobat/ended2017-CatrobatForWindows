@@ -146,7 +146,7 @@
     <None Include="testProject\.nomedia" />
     <None Include="testProject\CatTexture.dds" />
     <Content Include="testProject\images\34A109A82231694B6FE09C216B390570_normalCat" />
-    <Content Include="testProject\images\395CD6389BD601812BDB299934A0CCB4_banzaiCat" />
+    <None Include="testProject\images\395CD6389BD601812BDB299934A0CCB4_banzaiCat" />
     <Content Include="testProject\images\5A71C6F41035979503BA294F78A09336_background" />
     <Content Include="testProject\images\B4497E87AC34B1329DD9B14C08EEAFF0_cheshireCat" />
     <None Include="testProject\sounds\.nomedia" />

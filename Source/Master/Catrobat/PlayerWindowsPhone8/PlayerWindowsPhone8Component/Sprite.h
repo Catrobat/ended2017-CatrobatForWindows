@@ -44,10 +44,13 @@ public:
 
 	Bounds getBounds();
 
+	void SetTransparency(float transparency);
+
 private:
 	LookData *m_lookData;
 	list<LookData*> *m_lookDatas;
 	list<Script*> *m_scripts;
 	list<SoundInfo*> *m_soundInfos;
 	string m_name;
+	float m_transparency;
 };

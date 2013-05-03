@@ -74,7 +74,7 @@ void Sprite::Draw(SpriteBatch *spriteBatch)
 	}
 
 	if (m_lookData != NULL)
-		spriteBatch->Draw(m_lookData->Texture(), m_position, nullptr, Colors::Wheat, 0.0f, XMFLOAT2(m_lookData->Width() / 2, m_lookData->Height() / 2), m_objectScale, SpriteEffects_None, 0.0f);
+		spriteBatch->Draw(m_lookData->Texture(), m_position, nullptr, Colors::White * m_transparency, 0.0f, XMFLOAT2(m_lookData->Width() / 2, m_lookData->Height() / 2), m_objectScale, SpriteEffects_None, 0.0f);
 }
 
 void Sprite::SetLookData(int index)
@@ -112,4 +112,9 @@ void Sprite::SetPosition(float x, float y)
 {
 	m_position.x += x;
 	m_position.y += y;
+}
+
+void Sprite::SetTransparency(float transparency)
+{
+	m_transparency = transparency;
 }

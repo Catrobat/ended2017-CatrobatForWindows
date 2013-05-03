@@ -139,7 +139,6 @@ HRESULT Direct3DBackground::PrepareResources(_In_ const LARGE_INTEGER* presentTa
 {
 	m_timer->Update();
 	m_renderer->Update(m_timer->Total, m_timer->Delta);
-
 	
 	desiredRenderTargetSize->width = ProjectDaemon::Instance()->getProject()->getScreenWidth();
 	desiredRenderTargetSize->height = ProjectDaemon::Instance()->getProject()->getScreenHeight();
