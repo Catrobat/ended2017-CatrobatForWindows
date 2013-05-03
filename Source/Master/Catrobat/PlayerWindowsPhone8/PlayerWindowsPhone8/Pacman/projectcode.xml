@@ -47,7 +47,7 @@
             <Bricks.PlaceAtBrick>
               <sprite reference="../../../../.."/>
               <xPosition>0</xPosition>
-              <yPosition>-300</yPosition>
+              <yPosition>0</yPosition>
             </Bricks.PlaceAtBrick>
             <Bricks.ForeverBrick>
               <loopEndBrick>

@@ -121,10 +121,10 @@
   <ItemGroup>
     <None Include="Pacman\.nomedia" />
     <None Include="Pacman\images\.nomedia" />
-    <None Include="Pacman\images\3673EC84679EE425A215B86B085EC292_cheshireCat" />
-    <None Include="Pacman\images\7064E57016F4326F59F0B098D83EB259_normalCat" />
-    <None Include="Pacman\images\B978398F6E8D16B857AA81618F3EF879_background" />
-    <None Include="Pacman\images\FE5DF421A5746EC7FC916AC1B94ECC17_banzaiCat" />
+    <Content Include="Pacman\images\3673EC84679EE425A215B86B085EC292_cheshireCat" />
+    <Content Include="Pacman\images\7064E57016F4326F59F0B098D83EB259_normalCat" />
+    <Content Include="Pacman\images\B978398F6E8D16B857AA81618F3EF879_background" />
+    <Content Include="Pacman\images\FE5DF421A5746EC7FC916AC1B94ECC17_banzaiCat" />
     <None Include="Pacman\sounds\.nomedia" />
     <None Include="Piano\.nomedia" />
     <None Include="Piano\images\.nomedia" />

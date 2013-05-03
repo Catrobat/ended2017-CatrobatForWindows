@@ -118,7 +118,7 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 
 	// XML
 	XMLParser *xml = new XMLParser();
-	xml->loadXML("Piano/projectcode.xml");
+	xml->loadXML("Pacman/projectcode.xml");
 	ProjectDaemon::Instance()->setProject(xml->getProject());
 	free(xml);
 
