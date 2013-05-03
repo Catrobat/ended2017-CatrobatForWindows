@@ -89,6 +89,9 @@
     <ClCompile Include="DDSLoader.cpp">
       <Filter>ddsConverter</Filter>
     </ClCompile>
+    <ClCompile Include="GlideToBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="DDSLoader.h">
       <Filter>ddsConverter</Filter>
+    </ClInclude>
+    <ClInclude Include="GlideToBrick.h">
+      <Filter>Objects\Bricks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

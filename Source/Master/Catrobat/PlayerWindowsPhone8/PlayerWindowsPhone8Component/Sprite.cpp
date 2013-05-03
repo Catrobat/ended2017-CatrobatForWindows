@@ -114,6 +114,12 @@ void Sprite::SetPosition(float x, float y)
 	m_position.y += y;
 }
 
+void Sprite::GetPosition(float &x, float &y)
+{
+	x = m_position.x;
+	y = m_position.y;
+}
+
 void Sprite::SetTransparency(float transparency)
 {
 	m_transparency = transparency;

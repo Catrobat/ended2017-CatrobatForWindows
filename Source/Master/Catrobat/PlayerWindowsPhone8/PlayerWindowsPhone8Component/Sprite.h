@@ -41,6 +41,7 @@ public:
 	LookData* GetCurrentLookData();
 
 	void SetPosition(float x, float y);
+	void GetPosition(float &x, float &y);
 
 	Bounds getBounds();
 

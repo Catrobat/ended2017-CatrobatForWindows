@@ -676,7 +676,7 @@
             <Bricks.PlaceAtBrick>
               <sprite reference="../../../../.."/>
               <xPosition>0</xPosition>
-              <yPosition>-500</yPosition>
+              <yPosition>0</yPosition>
             </Bricks.PlaceAtBrick>
             <Bricks.GlideToBrick>
               <durationInMilliSeconds>3000</durationInMilliSeconds>

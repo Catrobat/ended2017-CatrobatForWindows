@@ -153,6 +153,7 @@
     <ClInclude Include="BroadcastScript.h" />
     <ClInclude Include="CostumeBrick.h" />
     <ClInclude Include="DDSLoader.h" />
+    <ClInclude Include="GlideToBrick.h" />
     <ClInclude Include="lodepng.h" />
     <ClInclude Include="lodepng_util.h" />
     <ClInclude Include="LookData.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="BroadcastScript.cpp" />
     <ClCompile Include="CostumeBrick.cpp" />
     <ClCompile Include="DDSLoader.cpp" />
+    <ClCompile Include="GlideToBrick.cpp" />
     <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="lodepng_util.cpp" />
     <ClCompile Include="LookData.cpp" />
