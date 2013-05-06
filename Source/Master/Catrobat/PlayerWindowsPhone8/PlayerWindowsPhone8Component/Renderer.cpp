@@ -42,6 +42,7 @@ void Renderer::Render()
 	if (!init_hack)
 	{
 		m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_d3dContext.Get()));
+		m_spriteFont = unique_ptr<SpriteFont>(new SpriteFont(m_d3dDevice.Get(), L"italic.spritefont"));
 		init_hack = true;
 	}
 
@@ -69,6 +70,22 @@ void Renderer::Render()
 	// ---------------------------------------------------------------------->
 	m_spriteBatch->Begin();
 	ProjectDaemon::Instance()->getProject()->Render(m_spriteBatch.get());
+	vector<Platform::String^> *projectList = ProjectDaemon::Instance()->ProjectList();
+	int offset = 0;
+	for (unsigned int index = 0; index < projectList->size(); index++)
+	{
+		Platform::String^ rawString = projectList->at(index);
+		wstring tempName(rawString->Begin());
+		string filenameString(tempName.begin(), tempName.end());
+		std::wstring widestr = std::wstring(filenameString.begin(), filenameString.end());
+		const wchar_t* title = widestr.c_str();
+
+		m_spriteFont->DrawString(m_spriteBatch.get(), title, XMFLOAT2(10, offset+=100), Colors::Black);
+
+		ProjectDaemon::Instance()->OpenFolder(rawString);
+	}
+
+
 	m_spriteBatch->End();
 	// ---------------------------------------------------------------------->
 }

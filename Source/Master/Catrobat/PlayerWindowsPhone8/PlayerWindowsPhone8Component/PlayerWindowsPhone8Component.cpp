@@ -109,15 +109,17 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 {
 	// XML
 	XMLParser *xml = new XMLParser();
-	//Platform::String^ localfolder = Windows::Storage::ApplicationData::Current->LocalFolder->Path;
-	//std::wstring fooW(localfolder->Begin());
-	//std::string fooA(fooW.begin(), fooW.end());
+	//ProjectDaemon::Instance()->OpenProject("Piano", xml);
+	bool xmlLoaded = false;
 
-	//xml->loadXML(fooA + "/Pacman/projectcode.xml");
+	Platform::String^ localFolder = Windows::Storage::ApplicationData::Current->LocalFolder->Path;
+	wstring tempPath(localFolder->Begin());
+	string localPath(tempPath.begin(), tempPath.end());
+	ProjectDaemon::Instance()->InitializeProjectList();
+	xml->loadXML(localPath + "/Piano/projectcode.xml");
 	ProjectDaemon::Instance()->setProject(xml->getProject());
+	ProjectDaemon::Instance()->setProjectPath(localPath + "/" + ProjectDaemon::Instance()->getProject()->getProjectName());
 	free(xml);
-
-
 
 	// Initialize Renderer
 	m_renderer = ref new Renderer();
