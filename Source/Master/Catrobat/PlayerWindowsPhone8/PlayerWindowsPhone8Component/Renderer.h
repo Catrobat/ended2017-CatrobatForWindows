@@ -2,6 +2,7 @@
 
 #include "Direct3DBase.h"
 #include "SpriteBatch.h"
+#include "SpriteFont.h"
 #include "Project.h"
 
 #include <wrl/client.h>
@@ -29,6 +30,7 @@ private:
 
 	// SpriteBatch for Drawing (this is needed by all Object Draw Methods -> Use: m_spriteBatch.Get())
 	unique_ptr<SpriteBatch> m_spriteBatch;
+	std::unique_ptr<SpriteFont> m_spriteFont; 
 
 	// Use this scale if you calucalte positions on the screen
 	float m_scale;

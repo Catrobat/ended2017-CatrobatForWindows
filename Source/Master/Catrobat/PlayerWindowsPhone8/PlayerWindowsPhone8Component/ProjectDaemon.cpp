@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "ProjectDaemon.h"
+#include "XMLParser.h"
 
 #include <ppltasks.h>
 
@@ -23,6 +24,9 @@ ProjectDaemon *ProjectDaemon::Instance()
 
 ProjectDaemon::ProjectDaemon()
 {
+	m_projectLoaded = false;
+	m_projectList = new vector<Platform::String^>();
+	m_files = new vector<Platform::String^>();
 }
 
 void ProjectDaemon::setProject(Project *project)
@@ -30,9 +34,144 @@ void ProjectDaemon::setProject(Project *project)
 	m_project = project;
 }
 
+void ProjectDaemon::setProjectPath(string projectPath)
+{
+	m_projectPath = projectPath;
+}
+
+string ProjectDaemon::ProjectPath()
+{
+	return m_projectPath;
+}
+
 Project *ProjectDaemon::getProject()
 {
 	return m_project;
+}
+
+void ProjectDaemon::InitializeProjectList()
+{
+	m_projectList = new vector<Platform::String^>();
+	auto getRootFolder = Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderFromPathAsync(Windows::Storage::ApplicationData::Current->LocalFolder->Path);
+	getRootFolder->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFolder^>
+	( 
+		[this](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFolder^>^ operation, Windows::Foundation::AsyncStatus status) 
+		{    
+			if(status == Windows::Foundation::AsyncStatus::Completed) 
+			{        
+				auto rootFolderContent = operation->GetResults();        
+				IAsyncOperation<Windows::Foundation::Collections::IVectorView< Windows::Storage::StorageFolder^>^>^ getRootFolderContent = rootFolderContent->GetFoldersAsync();        
+				getRootFolderContent->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFolder^>^>
+				(         
+					[this](Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFolder^>^>^ operation, Windows::Foundation::AsyncStatus status) 
+					{            
+						if( status == Windows::Foundation::AsyncStatus::Completed ) 
+						{                
+							auto folderList = operation->GetResults();                
+							for(unsigned int index = 0; index < folderList->Size; ++index) 
+							{                    
+								Platform::String^ folderName = folderList->GetAt(index)->Name; 
+								wstring tempName(folderName->Begin());
+								string folderNameString(tempName.begin(), tempName.end());
+								m_projectList->push_back(folderName);
+							}            
+						}        
+					}
+				);    
+			}
+		}
+	);
+}
+
+void ProjectDaemon::OpenFolder(Platform::String^ folderName)
+{
+	m_files = new vector<Platform::String^>();
+	auto getFolder = Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderAsync(folderName);
+	getFolder->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFolder^>
+	(
+		[this](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFolder^>^ operation, Windows::Foundation::AsyncStatus status) 
+		{
+			if (status == Windows::Foundation::AsyncStatus::Completed)
+			{
+				auto folderContent = operation->GetResults();
+				m_currentFolder = folderContent->Name;
+
+				IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFile^>^>^ getFiles = folderContent->GetFilesAsync();
+				getFiles->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFile^>^>
+				(
+					[this](Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFile^>^>^ operation, Windows::Foundation::AsyncStatus status)
+					{
+						if (status == Windows::Foundation::AsyncStatus::Completed)
+						{
+							auto files = operation->GetResults();
+							for(unsigned int index = 0; index < files->Size; ++index) 
+							{
+								Platform::String^ filename = files->GetAt(index)->Name; 
+								wstring tempName(filename->Begin());
+								string filenameString(tempName.begin(), tempName.end());
+								m_files->push_back(filename);
+							}
+						}
+					}
+				);
+			}
+			else if (status == Windows::Foundation::AsyncStatus::Error)
+			{
+				// Not found
+			}
+		}
+	);
+}
+
+void ProjectDaemon::OpenProject(Platform::String^ projectName, XMLParser *xml)
+{
+	m_files = new vector<Platform::String^>();
+	auto getFolder = Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderAsync(projectName);
+	getFolder->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFolder^>
+	(
+	[this, xml](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFolder^>^ operation, Windows::Foundation::AsyncStatus status) 
+		{
+			if (status == Windows::Foundation::AsyncStatus::Completed)
+			{
+				auto folderContent = operation->GetResults();
+				IAsyncOperation<Windows::Storage::StorageFile^>^ getFiles = folderContent->GetFileAsync("projectcode.xml");
+				getFiles->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFile^>
+				(
+					[this, xml](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile^>^ operation, Windows::Foundation::AsyncStatus status)
+					{
+						if (status == Windows::Foundation::AsyncStatus::Completed)
+						{
+							auto projectCode = operation->GetResults();
+							Platform::String^ path = projectCode->Path;
+							wstring tempPath(path->Begin());
+							string pathString(tempPath.begin(), tempPath.end());
+							xml->loadXML(pathString);
+							setProject(xml->getProject());
+							m_projectLoaded = true;
+						}
+						else if (status == Windows::Foundation::AsyncStatus::Error)
+						{
+				
+						}
+					}
+				);
+			}
+			else if (status == Windows::Foundation::AsyncStatus::Error)
+			{
+			
+			}
+		}
+	);
+}
+
+vector<Platform::String^> *ProjectDaemon::ProjectList()
+{
+	return m_projectList;
+}
+
+vector<Platform::String^> *ProjectDaemon::FileList()
+{
+	return m_files;
 }
 
 void ProjectDaemon::loadProjects()
