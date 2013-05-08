@@ -101,7 +101,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     {
       get
       {
-        return StaticApplicationSettings.CurrentApplicationVersionName;
+        return StaticApplicationSettings.CurrentApplicationVersion.ToString();
       }
     }
 

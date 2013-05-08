@@ -18,7 +18,7 @@
 
         public static string CurrentApplicationVersionName
         {
-            get { return "MetroCat v0.1"; }
+            get { return "Catrobat for Windows v0.1"; }
         }
 
         public static int ThumbnailWidth
