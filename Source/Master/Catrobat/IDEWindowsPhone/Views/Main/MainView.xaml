@@ -21,39 +21,40 @@
                             shell:SystemTray.IsVisible="False"
                             DataContext="{Binding Main, Source={StaticResource Locator}}">
 
-  <phone:PhoneApplicationPage.Resources>
-    <converters:ActiveProjectVisibilityConverter x:Key="ActiveProjectVisibilityConverter" />
-    <converters:BytesImageConverter x:Key="BytesImageConverter" />
-    
-    <Style x:Key="ContinuousListBoxButtonStyle" TargetType="Button">
-      <Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
-      <Setter Property="BorderBrush" Value="{StaticResource PhoneAccentBrush}"/>
-    </Style>
+    <phone:PhoneApplicationPage.Resources>
+        <converters:ActiveProjectVisibilityConverter x:Key="ActiveProjectVisibilityConverter" />
+        <converters:BytesImageConverter x:Key="BytesImageConverter" />
+        <converters:VersionConverter x:Key="VersionConverter"/>
 
-    <Style x:Key="ContinuousListBox" TargetType="ListBox">
-      <Setter Property="Background" Value="Transparent"/>
-      <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-      <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-      <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-      <Setter Property="BorderThickness" Value="0"/>
-      <Setter Property="BorderBrush" Value="Transparent"/>
-      <Setter Property="Padding" Value="0"/>
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="ListBox">
-            <ScrollViewer x:Name="ScrollViewer" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" Padding="{TemplateBinding Padding}">
-              <StackPanel>
-                <ItemsPresenter/>
-                <Button Content="{Binding Path=Main.OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" Style="{StaticResource ContinuousListBoxButtonStyle}" Command="{Binding Main.LazyLoadOnlineProjectsCommand, Mode=OneWay, Source={StaticResource Locator}}" />
-              </StackPanel>
-            </ScrollViewer>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
-    </Style>
-  </phone:PhoneApplicationPage.Resources>
+        <Style x:Key="ContinuousListBoxButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PhoneAccentBrush}"/>
+        </Style>
 
-  <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Style x:Key="ContinuousListBox" TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <ScrollViewer x:Name="ScrollViewer" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" Padding="{TemplateBinding Padding}">
+                            <StackPanel>
+                                <ItemsPresenter/>
+                                <Button Content="{Binding Main.OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" Style="{StaticResource ContinuousListBoxButtonStyle}" Command="{Binding Main.LazyLoadOnlineProjectsCommand, Mode=OneWay, Source={StaticResource Locator}}" />
+                            </StackPanel>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
     <!--Panorama control-->
     <controls:Panorama Name="panoramaMain" SelectionChanged="panoramaMain_SelectionChanged">
       <controls:Panorama.Background>
@@ -219,15 +220,21 @@
         </StackPanel>
       </controls:PanoramaItem>-->
       
-      <!--Help panorama item-->
+      <!--About panorama item-->
       <controls:PanoramaItem Name="panoramaItemHelp" Header="{Binding Path=Main.HeaderAbout, Source={StaticResource LocalizedStrings}}">
         <StackPanel>
           <TextBlock FontSize="26" TextWrapping="Wrap" Text="{Binding Path=Main.AboutText, Source={StaticResource LocalizedStrings}}" Margin="10 0 0 15" />
-          <StackPanel Orientation="Horizontal">
+          <!-- StackPanel vs. Grid: 
+               StackPanel cannot limit width of TextBlock to wrap text into two lines -->
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="130" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <imageButton:SettingsButton Grid.Column="0" VerticalAlignment="Center" x:Name="buttonSettings" 
-                Template="{StaticResource SettingsButtonControlTemplate}" Margin="0,0,0,0" Click="buttonSettings_Click" Width="130" />
-            <TextBlock Grid.Column="1" Text="{Binding ApplicationVersion}" Style="{StaticResource PhoneTextLargeStyle}" Margin="30" />
-          </StackPanel>
+              Template="{StaticResource SettingsButtonControlTemplate}" Click="buttonSettings_Click"/>
+            <TextBlock Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Main.ApplicationNameAndVersion, Source={StaticResource LocalizedStrings}, Converter={StaticResource VersionConverter}}" Margin="30" TextWrapping="Wrap" />
+          </Grid>
         </StackPanel>
       </controls:PanoramaItem>
     </controls:Panorama>

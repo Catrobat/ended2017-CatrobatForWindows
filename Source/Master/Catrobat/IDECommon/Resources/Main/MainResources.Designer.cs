@@ -62,7 +62,7 @@ namespace Catrobat.IDECommon.Resources.Main {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MetroCat is an on-device visual progamming language for Windows Phone 7 devices that is inspired by the scratch programming language developed by the MIT.
+        ///   Looks up a localized string similar to Catrobat for Windows is an on-device visual progamming language for Windows Phone 8 devices that is inspired by the scratch programming language developed by the MIT.
         ///It is developed at the department of Software Technology at the University of Technology Graz, Austria.
         ///The program is licensed under the MS-RL Lizenz..
         /// </summary>
@@ -78,6 +78,15 @@ namespace Catrobat.IDECommon.Resources.Main {
         public static string ActiveProject {
             get {
                 return ResourceManager.GetString("ActiveProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Catrobat for Windows v{0}.
+        /// </summary>
+        public static string ApplicationNameAndVersion {
+            get {
+                return ResourceManager.GetString("ApplicationNameAndVersion", resourceCulture);
             }
         }
         

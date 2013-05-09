@@ -118,12 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutText" xml:space="preserve">
-    <value>MetroCat ist eine Entwicklungsumgebung für die grafische Programmiersprache Catrobat, inspiriert vom Scratch Projekt des MIT.
+    <value>Catrobat für Windows ist eine Entwicklungsumgebung für die grafische Programmiersprache Catrobat, inspiriert vom Scratch Projekt des MIT.
 Es wird am Institut für Software Technologie an der Technischen Universität Graz in Österreich entwickelt.
 Dieses Programm steht unter der MS-RL Lizenz.</value>
   </data>
   <data name="ActiveProject" xml:space="preserve">
     <value>aktiv</value>
+  </data>
+  <data name="ApplicationNameAndVersion" xml:space="preserve">
+    <value>Catrobat für Windows v{0}</value>
   </data>
   <data name="ButtonCancel" xml:space="preserve">
     <value>Abbrechen</value>
