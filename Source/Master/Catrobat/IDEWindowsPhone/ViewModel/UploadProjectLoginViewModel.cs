@@ -5,6 +5,10 @@ using GalaSoft.MvvmLight;
 using System.ComponentModel;
 using System.Threading;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+using Catrobat.IDECommon.Resources.Main;
+using System.Windows;
+using System;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel
 {
@@ -12,9 +16,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
   {
     private readonly ICatrobatContext catrobatContext;
     public new event PropertyChangedEventHandler PropertyChanged;
-
     public delegate void NavigationCallbackEvent();
 
+    private MessageBoxResult _missingLoginDataCallbackResult;
+    
     public NavigationCallbackEvent NavigationCallback { get; set; }
 
     private string _username;
@@ -102,17 +107,42 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       ForgottenCommand = new RelayCommand(Forgotten);
 
       if (IsInDesignMode)
+      {
         catrobatContext = new CatrobatContextDesign();
+      }
       else
+      {
         catrobatContext = CatrobatContext.Instance;
+      }
+    }
+
+    private void MissingLoginDataCallback(MessageBoxResult result)
+    {
+      _missingLoginDataCallbackResult = result;
     }
 
     private void Login()
     {
-      ServerCommunication.RegisterOrCheckToken(_username, _password, _email,
-        Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
-        System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName, 
-        Utils.calculateToken(_username, _password), registerOrCheckTokenCallback);
+      if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_email))
+      {
+        var message = new DialogMessage(MainResources.UploadProjectMissingLoginData, MissingLoginDataCallback)
+        {
+          Button = MessageBoxButton.OK,
+          Caption = ""
+        };
+
+        Messenger.Default.Send(message);
+      }
+      else
+      {
+        ServerCommunication.RegisterOrCheckToken(_username,
+                                                 _password,
+                                                 _email,
+                                                 Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
+                                                 System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName,
+                                                 Utils.calculateToken(_username, _password),
+                                                 registerOrCheckTokenCallback);
+      }
     }
 
     private void registerOrCheckTokenCallback(bool registered)
