@@ -269,6 +269,9 @@ Dieses Programm steht unter der MS-RL Lizenz.</value>
   <data name="TitleUploadProjectLogin" xml:space="preserve">
     <value>EINLOGGEN ODER REGISTRIEREN</value>
   </data>
+  <data name="UploadProjectMissingLoginData" xml:space="preserve">
+    <value>Login- oder Registrierungs- Daten sind nicht vollständig.</value>
+  </data>
   <data name="UploadProjectPassword" xml:space="preserve">
     <value>Passwort:</value>
   </data>

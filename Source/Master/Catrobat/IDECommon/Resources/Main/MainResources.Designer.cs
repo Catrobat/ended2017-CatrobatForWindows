@@ -10,8 +10,7 @@
 
 namespace Catrobat.IDECommon.Resources.Main {
     using System;
-    using System.Reflection;
-    
+  using System.Reflection;
     
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
@@ -519,6 +518,15 @@ namespace Catrobat.IDECommon.Resources.Main {
         public static string UploadProjectEmail {
             get {
                 return ResourceManager.GetString("UploadProjectEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login- or registration- data is incomplete..
+        /// </summary>
+        public static string UploadProjectMissingLoginData {
+            get {
+                return ResourceManager.GetString("UploadProjectMissingLoginData", resourceCulture);
             }
         }
         

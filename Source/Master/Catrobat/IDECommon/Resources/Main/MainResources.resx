@@ -272,6 +272,9 @@ The program is licensed under the MS-RL Lizenz.</value>
   <data name="UploadProjectEmail" xml:space="preserve">
     <value>Email:</value>
   </data>
+  <data name="UploadProjectMissingLoginData" xml:space="preserve">
+    <value>Login- or registration- data is incomplete.</value>
+  </data>
   <data name="UploadProjectPassword" xml:space="preserve">
     <value>Password:</value>
   </data>
