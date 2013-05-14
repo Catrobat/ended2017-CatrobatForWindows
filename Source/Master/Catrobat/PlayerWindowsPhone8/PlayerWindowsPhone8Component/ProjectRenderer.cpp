@@ -55,10 +55,6 @@ void ProjectRenderer::Render()
 	// ---------------------------------------------------------------------->
 	m_spriteBatch->Begin();
 	{
-		string loadingScreen("This is a Project :)");
-		std::wstring loadingScreenWidestr = std::wstring(loadingScreen.begin(), loadingScreen.end());
-		const wchar_t* lScreen = loadingScreenWidestr.c_str();
-
 		ProjectDaemon::Instance()->getProject()->Render(m_spriteBatch.get());
 	}
 	m_spriteBatch->End();
