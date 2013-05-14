@@ -108,13 +108,6 @@ void Direct3DBackground::OnPointerReleased(DrawingSurfaceManipulationHost^ sende
 // Interface With Direct3DContentProvider
 HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device)
 {
-	//Initialize Project Renderer
-	m_projectRenderer = ref new ProjectRenderer();
-	ProjectDaemon::Instance()->SetupRenderer(device, m_projectRenderer);
-
-	// XML
-	ProjectDaemon::Instance()->OpenProject("Pacman");
-
 	// Initialize Renderer
 	m_renderer = ref new Renderer();
 	m_renderer->Initialize(device);
@@ -122,6 +115,13 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	// Initialize Sound
 	m_soundmanager = new SoundManager();
 	m_soundmanager->Initialize();
+
+	//Initialize Project Renderer
+	m_projectRenderer = ref new ProjectRenderer();
+	ProjectDaemon::Instance()->SetupRenderer(device, m_projectRenderer);
+
+	// Load Project
+	ProjectDaemon::Instance()->OpenProject("Pacman");
 
 	// Restart timer after renderer has finished initializing.
 	m_timer->Reset();
