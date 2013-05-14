@@ -20,13 +20,14 @@ public:
 	// Method for updating time-dependent objects.
 	void Update(float timeTotal, float timeDelta);
 
+
 private:
 	bool m_loadingComplete;
 	bool m_startup;
 	uint32 m_indexCount;
 
 	// SpriteBatch for Drawing (this is needed by all Object Draw Methods -> Use: m_spriteBatch.Get())
-	unique_ptr<SpriteBatch> m_spriteBatch;
+	std::unique_ptr<SpriteBatch> m_spriteBatch;
 	std::unique_ptr<SpriteFont> m_spriteFont; 
 
 	// Use this scale if you calucalte positions on the screen

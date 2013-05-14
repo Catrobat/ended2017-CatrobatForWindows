@@ -3,8 +3,10 @@
 #include "pch.h"
 #include "BasicTimer.h"
 #include "Renderer.h"
-#include <DrawingSurfaceNative.h>
 #include "SoundManager.h"
+#include "ProjectRenderer.h"
+
+#include <DrawingSurfaceNative.h>
 
 namespace PhoneDirect3DXamlAppComponent
 {
@@ -43,6 +45,7 @@ internal:
 
 private:
 	Renderer^ m_renderer;
+	ProjectRenderer^ m_projectRenderer;
 	SoundManager* m_soundmanager;
 	BasicTimer^ m_timer;
 };
