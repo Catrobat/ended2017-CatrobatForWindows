@@ -142,16 +142,20 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 					{
 						if (status == Windows::Foundation::AsyncStatus::Completed)
 						{
+							// Get the Path 
 							auto projectCode = operation->GetResults();
 							Platform::String^ path = projectCode->Path;
 							wstring tempPath(path->Begin());
 							string pathString(tempPath.begin(), tempPath.end());
 
+							// Create and load XML
 							XMLParser *xml = new XMLParser();
 							xml->loadXML(pathString);
 
+							// Set Project to be accessed from everywhere
 							setProject(xml->getProject());
 
+							// Initialize Renderer and enable rendering to be started
 							m_renderer->Initialize(m_device);
 							m_finishedLoading = true;
 							free(xml);
