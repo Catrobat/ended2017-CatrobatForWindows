@@ -24,7 +24,6 @@ ProjectDaemon *ProjectDaemon::Instance()
 
 ProjectDaemon::ProjectDaemon()
 {
-	m_projectLoaded = false;
 	m_projectList = new vector<Platform::String^>();
 	m_files = new vector<Platform::String^>();
 }
@@ -147,7 +146,6 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName, XMLParser *xml)
 							string pathString(tempPath.begin(), tempPath.end());
 							xml->loadXML(pathString);
 							setProject(xml->getProject());
-							m_projectLoaded = true;
 						}
 						else if (status == Windows::Foundation::AsyncStatus::Error)
 						{
@@ -214,4 +212,9 @@ void ProjectDaemon::loadProjects()
             // handle me
         }
     });
+}
+
+void ProjectDaemon::SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRenderTargetSize)
+{
+	m_desiredRenderTargetSize = desiredRenderTargetSize;
 }

@@ -116,7 +116,7 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	wstring tempPath(localFolder->Begin());
 	string localPath(tempPath.begin(), tempPath.end());
 	ProjectDaemon::Instance()->InitializeProjectList();
-	xml->loadXML(localPath + "/Piano/projectcode.xml");
+	xml->loadXML(localPath + "/Pacman/projectcode.xml");
 	ProjectDaemon::Instance()->setProject(xml->getProject());
 	ProjectDaemon::Instance()->setProjectPath(localPath + "/" + ProjectDaemon::Instance()->getProject()->getProjectName());
 	free(xml);
@@ -124,7 +124,7 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	// Initialize Renderer
 	m_renderer = ref new Renderer();
 	m_renderer->Initialize(device);
-	m_renderer->UpdateForWindowSizeChange(WindowBounds.Width, WindowBounds.Height);
+	//m_renderer->UpdateForWindowSizeChange(WindowBounds.Width, WindowBounds.Height);
 
 	// Initialize Sound
 	m_soundmanager = new SoundManager();
@@ -147,13 +147,19 @@ HRESULT Direct3DBackground::PrepareResources(_In_ const LARGE_INTEGER* presentTa
 {
 	m_timer->Update();
 	m_renderer->Update(m_timer->Total, m_timer->Delta);
+
+	// Save this for later
+	ProjectDaemon::Instance()->SetDesiredRenderTargetSize(desiredRenderTargetSize);
 	
-	desiredRenderTargetSize->width = ProjectDaemon::Instance()->getProject()->getScreenWidth();
-	desiredRenderTargetSize->height = ProjectDaemon::Instance()->getProject()->getScreenHeight();
+	// This would set the desiredRenderTargetSize to the right values BUT we want the loading screen to be 
+	// handled with the Device Standard DRTS
+
+	//desiredRenderTargetSize->width = ProjectDaemon::Instance()->getProject()->getScreenWidth();
+	//desiredRenderTargetSize->height = ProjectDaemon::Instance()->getProject()->getScreenHeight();
 
 	return S_OK;
 }
-
+static int index = 0;
 HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
 {
 	m_renderer->UpdateDevice(device, context, renderTargetView);

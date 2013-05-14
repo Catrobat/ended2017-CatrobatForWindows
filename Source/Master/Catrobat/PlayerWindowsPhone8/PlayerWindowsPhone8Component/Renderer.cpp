@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "Renderer.h"
 #include "ProjectDaemon.h"
+#include "ProjectRenderer.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -23,6 +24,7 @@ void Renderer::CreateDeviceResources()
 
 void Renderer::CreateWindowSizeDependentResources()
 {
+	UpdateForWindowSizeChange(ProjectDaemon::Instance()->getProject()->getScreenWidth(), ProjectDaemon::Instance()->getProject()->getScreenHeight());
 	Direct3DBase::CreateWindowSizeDependentResources();
 	ProjectDaemon::Instance()->getProject()->LoadTextures(m_d3dDevice.Get(), &m_windowBounds);
 	if (m_startup)

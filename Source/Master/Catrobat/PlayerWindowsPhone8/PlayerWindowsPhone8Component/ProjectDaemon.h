@@ -4,6 +4,7 @@
 #include "XMLParser.h"
 
 #include <vector>
+#include <DrawingSurfaceNative.h>
 
 class ProjectDaemon
 {
@@ -22,7 +23,7 @@ public:
 	void OpenFolder(Platform::String^ folderName);
 	void OpenProject(Platform::String^ projectName, XMLParser *xml);
 
-	bool m_projectLoaded;
+	void SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRenderTargetSize);
 
 private:
 	ProjectDaemon();
@@ -37,5 +38,7 @@ private:
 	vector<Platform::String ^> *m_projectList;
 	vector<Platform::String ^> *m_files;
 	Platform::String^ m_currentFolder;
+
+	DrawingSurfaceSizeF* m_desiredRenderTargetSize;
 };
 

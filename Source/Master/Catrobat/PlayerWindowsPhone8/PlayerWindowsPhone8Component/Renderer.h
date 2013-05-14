@@ -7,9 +7,6 @@
 
 #include <wrl/client.h>
 
-using namespace std;
-using namespace DirectX;
-
 ref class Renderer sealed : public Direct3DBase
 {
 public:
