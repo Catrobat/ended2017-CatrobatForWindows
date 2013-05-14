@@ -20,8 +20,6 @@ public:
 	static ProjectDaemon *Instance();
 
 	void setProject(Project *project);
-	void setProjectPath(string projectPath);
-	void loadProjects();
 	Project *getProject();
 	string ProjectPath();
 	std::vector<Platform::String ^> *ProjectList();
@@ -29,7 +27,7 @@ public:
 
 	void InitializeProjectList();
 	void OpenFolder(Platform::String^ folderName);
-	void OpenProject(Platform::String^ projectName, XMLParser *xml);
+	void OpenProject(Platform::String^ projectName);
 	bool FinishedLoading();
 
 	void SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRenderTargetSize);

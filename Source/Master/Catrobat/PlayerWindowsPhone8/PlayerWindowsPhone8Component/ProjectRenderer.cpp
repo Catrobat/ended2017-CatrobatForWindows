@@ -59,7 +59,6 @@ void ProjectRenderer::Render()
 		std::wstring loadingScreenWidestr = std::wstring(loadingScreen.begin(), loadingScreen.end());
 		const wchar_t* lScreen = loadingScreenWidestr.c_str();
 
-		//m_spriteFont->DrawString(m_spriteBatch.get(), lScreen, XMFLOAT2(100, 300), Colors::Black);
 		ProjectDaemon::Instance()->getProject()->Render(m_spriteBatch.get());
 	}
 	m_spriteBatch->End();

@@ -64,21 +64,6 @@ void Renderer::Render()
 	// ---------------------------------------------------------------------->
 	m_spriteBatch->Begin();
 	{
-		/*vector<Platform::String^> *projectList = ProjectDaemon::Instance()->ProjectList();
-		int offset = 0;
-		for (unsigned int index = 0; index < projectList->size(); index++)
-		{
-			Platform::String^ rawString = projectList->at(index);
-			wstring tempName(rawString->Begin());
-			string filenameString(tempName.begin(), tempName.end());
-			std::wstring widestr = std::wstring(filenameString.begin(), filenameString.end());
-			const wchar_t* title = widestr.c_str();
-
-			m_spriteFont->DrawString(m_spriteBatch.get(), title, XMFLOAT2(10, offset+=100), Colors::Black);
-
-			ProjectDaemon::Instance()->OpenFolder(rawString);
-		}*/
-
 		string loadingScreen("This will be the loading screen :)");
 		std::wstring loadingScreenWidestr = std::wstring(loadingScreen.begin(), loadingScreen.end());
 		const wchar_t* lScreen = loadingScreenWidestr.c_str();

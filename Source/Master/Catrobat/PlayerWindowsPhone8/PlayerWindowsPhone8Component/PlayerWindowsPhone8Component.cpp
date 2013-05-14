@@ -113,8 +113,7 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	ProjectDaemon::Instance()->SetupRenderer(device, m_projectRenderer);
 
 	// XML
-	XMLParser *xml = new XMLParser();
-	ProjectDaemon::Instance()->OpenProject("Pacman", xml);
+	ProjectDaemon::Instance()->OpenProject("Pacman");
 
 	// Initialize Renderer
 	m_renderer = ref new Renderer();
