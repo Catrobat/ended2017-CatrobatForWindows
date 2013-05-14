@@ -92,6 +92,9 @@
     <ClCompile Include="GlideToBrick.cpp">
       <Filter>Objects\Bricks</Filter>
     </ClCompile>
+    <ClCompile Include="ProjectRenderer.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="GlideToBrick.h">
       <Filter>Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectRenderer.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

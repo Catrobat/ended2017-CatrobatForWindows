@@ -24,12 +24,6 @@ void Renderer::CreateDeviceResources()
 void Renderer::CreateWindowSizeDependentResources()
 {
 	Direct3DBase::CreateWindowSizeDependentResources();
-	ProjectDaemon::Instance()->getProject()->LoadTextures(m_d3dDevice.Get(), &m_windowBounds);
-	if (m_startup)
-	{
-		m_startup = false;
-		StartUpTasks();
-	}
 }
 
 void Renderer::Update(float timeTotal, float timeDelta)
@@ -69,28 +63,24 @@ void Renderer::Render()
 	// SpriteBatch for Drawing. Call Draw Methods of the Objects here.
 	// ---------------------------------------------------------------------->
 	m_spriteBatch->Begin();
-	ProjectDaemon::Instance()->getProject()->Render(m_spriteBatch.get());
-	vector<Platform::String^> *projectList = ProjectDaemon::Instance()->ProjectList();
-	int offset = 0;
-	for (unsigned int index = 0; index < projectList->size(); index++)
 	{
-		Platform::String^ rawString = projectList->at(index);
-		wstring tempName(rawString->Begin());
-		string filenameString(tempName.begin(), tempName.end());
-		std::wstring widestr = std::wstring(filenameString.begin(), filenameString.end());
-		const wchar_t* title = widestr.c_str();
+		string loadingScreen("This will be the loading screen :)");
+		std::wstring loadingScreenWidestr = std::wstring(loadingScreen.begin(), loadingScreen.end());
+		const wchar_t* lScreen = loadingScreenWidestr.c_str();
 
-		m_spriteFont->DrawString(m_spriteBatch.get(), title, XMFLOAT2(10, offset+=100), Colors::Black);
+		m_spriteFont->DrawString(m_spriteBatch.get(), lScreen, XMFLOAT2(100, 100), Colors::Black);
 
-		ProjectDaemon::Instance()->OpenFolder(rawString);
+		vector<string> *errors = ProjectDaemon::Instance()->ErrorList();
+		int offset = 100;
+		for (int index = 0; index < errors->size(); index++)
+		{
+			string error = errors->at(index);
+			std::wstring errorString = std::wstring(error.begin(), error.end());
+			const wchar_t* cerrorString = errorString.c_str();
+			m_spriteFont->DrawString(m_spriteBatch.get(), cerrorString, XMFLOAT2(100, offset += 100), Colors::Black);
+		}
 	}
-
-
 	m_spriteBatch->End();
+	
 	// ---------------------------------------------------------------------->
-}
-
-void Renderer::StartUpTasks()
-{
-	ProjectDaemon::Instance()->getProject()->StartUp();
 }

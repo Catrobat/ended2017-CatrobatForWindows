@@ -24,19 +24,15 @@ ProjectDaemon *ProjectDaemon::Instance()
 
 ProjectDaemon::ProjectDaemon()
 {
-	m_projectLoaded = false;
+	m_finishedLoading = false;
 	m_projectList = new vector<Platform::String^>();
 	m_files = new vector<Platform::String^>();
+	m_errorList = new vector<std::string>();
 }
 
 void ProjectDaemon::setProject(Project *project)
 {
 	m_project = project;
-}
-
-void ProjectDaemon::setProjectPath(string projectPath)
-{
-	m_projectPath = projectPath;
 }
 
 string ProjectDaemon::ProjectPath()
@@ -123,42 +119,57 @@ void ProjectDaemon::OpenFolder(Platform::String^ folderName)
 	);
 }
 
-void ProjectDaemon::OpenProject(Platform::String^ projectName, XMLParser *xml)
+void ProjectDaemon::OpenProject(Platform::String^ projectName)
 {
 	m_files = new vector<Platform::String^>();
 	auto getFolder = Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderAsync(projectName);
 	getFolder->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFolder^>
 	(
-	[this, xml](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFolder^>^ operation, Windows::Foundation::AsyncStatus status) 
+	[this](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFolder^>^ operation, Windows::Foundation::AsyncStatus status) 
 		{
 			if (status == Windows::Foundation::AsyncStatus::Completed)
 			{
 				auto folderContent = operation->GetResults();
+				Platform::String^ path = folderContent->Path;
+				wstring tempPath(path->Begin());
+				string pathString(tempPath.begin(), tempPath.end());
+				m_projectPath = pathString;
+
 				IAsyncOperation<Windows::Storage::StorageFile^>^ getFiles = folderContent->GetFileAsync("projectcode.xml");
 				getFiles->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFile^>
 				(
-					[this, xml](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile^>^ operation, Windows::Foundation::AsyncStatus status)
+					[this](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile^>^ operation, Windows::Foundation::AsyncStatus status)
 					{
 						if (status == Windows::Foundation::AsyncStatus::Completed)
 						{
+							// Get the Path 
 							auto projectCode = operation->GetResults();
 							Platform::String^ path = projectCode->Path;
 							wstring tempPath(path->Begin());
 							string pathString(tempPath.begin(), tempPath.end());
+
+							// Create and load XML
+							XMLParser *xml = new XMLParser();
 							xml->loadXML(pathString);
+
+							// Set Project to be accessed from everywhere
 							setProject(xml->getProject());
-							m_projectLoaded = true;
+
+							// Initialize Renderer and enable rendering to be started
+							m_renderer->Initialize(m_device);
+							m_finishedLoading = true;
+							free(xml);
 						}
 						else if (status == Windows::Foundation::AsyncStatus::Error)
 						{
-				
+							SetError(ProjectDaemon::Error::FILE_NOT_FOUND);
 						}
 					}
 				);
 			}
 			else if (status == Windows::Foundation::AsyncStatus::Error)
 			{
-			
+				SetError(ProjectDaemon::Error::FILE_NOT_FOUND);
 			}
 		}
 	);
@@ -174,44 +185,42 @@ vector<Platform::String^> *ProjectDaemon::FileList()
 	return m_files;
 }
 
-void ProjectDaemon::loadProjects()
+
+void ProjectDaemon::SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRenderTargetSize)
 {
-	PCWSTR SaveStateFile = L"";
-	auto folder = ApplicationData::Current->LocalFolder;
-    task<StorageFile^> getFileTask(folder->GetFileAsync(
-        ref new Platform::String(SaveStateFile)));
+	m_desiredRenderTargetSize = desiredRenderTargetSize;
+}
 
-    // Create a local to allow the DataReader to be passed between lambdas.
-    auto reader = std::make_shared<Streams::DataReader^>(nullptr);
-    getFileTask.then([this, reader](task<StorageFile^> fileTask)
-    {
-        try
-        {
-            StorageFile^ file = fileTask.get();
+void ProjectDaemon::ApplyDesiredRenderTargetSizeFromProject()
+{
+	m_desiredRenderTargetSize->width = m_project->getScreenWidth();
+	m_desiredRenderTargetSize->height = m_project->getScreenHeight();
+}
 
-            task<Streams::IRandomAccessStreamWithContentType^> (file->OpenReadAsync()).then([reader](Streams::IRandomAccessStreamWithContentType^ stream)
-            {
-                *reader = ref new Streams::DataReader(stream);
-                return (*reader)->LoadAsync(static_cast<uint32>(stream->Size));
-            }).then([this, reader](uint32 bytesRead)
-            {
-                Streams::DataReader^ state = (*reader);
+void ProjectDaemon::SetupRenderer(ID3D11Device1 *device, ProjectRenderer^ renderer)
+{
+	m_device = device;
+	m_renderer = renderer;
+}
 
-                try
-                {
-					
-                }
-                catch (Platform::Exception^ e)
-                {
-                    // handle me
-                }
-                
+bool ProjectDaemon::FinishedLoading()
+{
+	return m_finishedLoading;
+}
 
-            });;
-        }
-        catch (Platform::Exception^ e)
-        {
-            // handle me
-        }
-    });
+void ProjectDaemon::SetError(ProjectDaemon::Error error)
+{
+	switch (error)
+	{
+	case ProjectDaemon::FILE_NOT_FOUND:
+		m_errorList->push_back("Requested file could not be found");
+		break;
+	default:
+		break;
+	}
+}
+
+std::vector<std::string> *ProjectDaemon::ErrorList()
+{
+	return m_errorList;
 }

@@ -52,7 +52,8 @@ void Direct3DBackground::SetManipulationHost(DrawingSurfaceManipulationHost^ man
 void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender, PointerEventArgs^ args)
 {
 	// Insert your code here.
-	
+	if (!ProjectDaemon::Instance()->FinishedLoading())
+		return;
 	Project* project = ProjectDaemon::Instance()->getProject();
 	SpriteList* sprites = project->getSpriteList();
 	for (int i = sprites->Size() - 1; i >= 0; i--)
@@ -107,28 +108,20 @@ void Direct3DBackground::OnPointerReleased(DrawingSurfaceManipulationHost^ sende
 // Interface With Direct3DContentProvider
 HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device)
 {
-	// XML
-	XMLParser *xml = new XMLParser();
-	//ProjectDaemon::Instance()->OpenProject("Piano", xml);
-	bool xmlLoaded = false;
-
-	Platform::String^ localFolder = Windows::Storage::ApplicationData::Current->LocalFolder->Path;
-	wstring tempPath(localFolder->Begin());
-	string localPath(tempPath.begin(), tempPath.end());
-	ProjectDaemon::Instance()->InitializeProjectList();
-	xml->loadXML(localPath + "/Piano/projectcode.xml");
-	ProjectDaemon::Instance()->setProject(xml->getProject());
-	ProjectDaemon::Instance()->setProjectPath(localPath + "/" + ProjectDaemon::Instance()->getProject()->getProjectName());
-	free(xml);
-
 	// Initialize Renderer
 	m_renderer = ref new Renderer();
 	m_renderer->Initialize(device);
-	m_renderer->UpdateForWindowSizeChange(WindowBounds.Width, WindowBounds.Height);
 
 	// Initialize Sound
 	m_soundmanager = new SoundManager();
 	m_soundmanager->Initialize();
+
+	//Initialize Project Renderer
+	m_projectRenderer = ref new ProjectRenderer();
+	ProjectDaemon::Instance()->SetupRenderer(device, m_projectRenderer);
+
+	// Load Project
+	ProjectDaemon::Instance()->OpenProject("testProject");
 
 	// Restart timer after renderer has finished initializing.
 	m_timer->Reset();
@@ -141,23 +134,42 @@ void Direct3DBackground::Disconnect()
 	free(m_soundmanager);
 	m_soundmanager = nullptr;
 	m_renderer = nullptr;
+	m_projectRenderer = nullptr;
 }
 
 HRESULT Direct3DBackground::PrepareResources(_In_ const LARGE_INTEGER* presentTargetTime, _Inout_ DrawingSurfaceSizeF* desiredRenderTargetSize)
 {
 	m_timer->Update();
 	m_renderer->Update(m_timer->Total, m_timer->Delta);
+	m_projectRenderer->Update(m_timer->Total, m_timer->Delta);
+
+	// Save this for later
+	ProjectDaemon::Instance()->SetDesiredRenderTargetSize(desiredRenderTargetSize);
 	
-	desiredRenderTargetSize->width = ProjectDaemon::Instance()->getProject()->getScreenWidth();
-	desiredRenderTargetSize->height = ProjectDaemon::Instance()->getProject()->getScreenHeight();
+	// This would set the desiredRenderTargetSize to the right values BUT we want the loading screen to be 
+	// handled with the Device Standard DRTS
+
+	//desiredRenderTargetSize->width = ProjectDaemon::Instance()->getProject()->getScreenWidth();
+	//desiredRenderTargetSize->height = ProjectDaemon::Instance()->getProject()->getScreenHeight();
 
 	return S_OK;
 }
 
 HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
 {
-	m_renderer->UpdateDevice(device, context, renderTargetView);
-	m_renderer->Render();
+	if (!ProjectDaemon::Instance()->FinishedLoading())
+	{
+		// Render Loading Screen
+		m_renderer->UpdateDevice(device, context, renderTargetView);
+		m_renderer->Render();
+	}
+	else
+	{
+		// Render Project
+		m_projectRenderer->UpdateDevice(device, context, renderTargetView);
+		m_projectRenderer->Render();
+	}
+
 
 	static bool test = false;
 
