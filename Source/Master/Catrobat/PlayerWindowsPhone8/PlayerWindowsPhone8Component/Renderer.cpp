@@ -83,7 +83,17 @@ void Renderer::Render()
 		std::wstring loadingScreenWidestr = std::wstring(loadingScreen.begin(), loadingScreen.end());
 		const wchar_t* lScreen = loadingScreenWidestr.c_str();
 
-		m_spriteFont->DrawString(m_spriteBatch.get(), lScreen, XMFLOAT2(100, 300), Colors::Black);
+		m_spriteFont->DrawString(m_spriteBatch.get(), lScreen, XMFLOAT2(100, 100), Colors::Black);
+
+		vector<string> *errors = ProjectDaemon::Instance()->ErrorList();
+		int offset = 100;
+		for (int index = 0; index < errors->size(); index++)
+		{
+			string error = errors->at(index);
+			std::wstring errorString = std::wstring(error.begin(), error.end());
+			const wchar_t* cerrorString = errorString.c_str();
+			m_spriteFont->DrawString(m_spriteBatch.get(), cerrorString, XMFLOAT2(100, offset += 100), Colors::Black);
+		}
 	}
 	m_spriteBatch->End();
 	

@@ -52,7 +52,8 @@ void Direct3DBackground::SetManipulationHost(DrawingSurfaceManipulationHost^ man
 void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender, PointerEventArgs^ args)
 {
 	// Insert your code here.
-	
+	if (!ProjectDaemon::Instance()->FinishedLoading())
+		return;
 	Project* project = ProjectDaemon::Instance()->getProject();
 	SpriteList* sprites = project->getSpriteList();
 	for (int i = sprites->Size() - 1; i >= 0; i--)
@@ -114,11 +115,6 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	// XML
 	XMLParser *xml = new XMLParser();
 	ProjectDaemon::Instance()->OpenProject("Pacman", xml);
-
-	//Platform::String^ localFolder = Windows::Storage::ApplicationData::Current->LocalFolder->Path;
-	//wstring tempPath(localFolder->Begin());
-	//string localPath(tempPath.begin(), tempPath.end());
-	//ProjectDaemon::Instance()->InitializeProjectList();
 
 	// Initialize Renderer
 	m_renderer = ref new Renderer();

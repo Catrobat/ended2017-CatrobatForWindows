@@ -27,6 +27,7 @@ ProjectDaemon::ProjectDaemon()
 	m_finishedLoading = false;
 	m_projectList = new vector<Platform::String^>();
 	m_files = new vector<Platform::String^>();
+	m_errorList = new vector<std::string>();
 }
 
 void ProjectDaemon::setProject(Project *project)
@@ -157,14 +158,14 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName, XMLParser *xml)
 						}
 						else if (status == Windows::Foundation::AsyncStatus::Error)
 						{
-				
+							SetError(ProjectDaemon::Error::FILE_NOT_FOUND);
 						}
 					}
 				);
 			}
 			else if (status == Windows::Foundation::AsyncStatus::Error)
 			{
-			
+				SetError(ProjectDaemon::Error::FILE_NOT_FOUND);
 			}
 		}
 	);
@@ -242,4 +243,21 @@ void ProjectDaemon::SetupRenderer(ID3D11Device1 *device, ProjectRenderer^ render
 bool ProjectDaemon::FinishedLoading()
 {
 	return m_finishedLoading;
+}
+
+void ProjectDaemon::SetError(ProjectDaemon::Error error)
+{
+	switch (error)
+	{
+	case ProjectDaemon::FILE_NOT_FOUND:
+		m_errorList->push_back("Requested file could not be found");
+		break;
+	default:
+		break;
+	}
+}
+
+std::vector<std::string> *ProjectDaemon::ErrorList()
+{
+	return m_errorList;
 }
