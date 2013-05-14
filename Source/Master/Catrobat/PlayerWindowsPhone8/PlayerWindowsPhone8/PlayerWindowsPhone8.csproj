@@ -124,13 +124,13 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="testProject\.nomedia" />
-    <None Include="testProject\CatTexture.dds" />
-    <Content Include="testProject\images\34A109A82231694B6FE09C216B390570_normalCat" />
-    <None Include="testProject\images\395CD6389BD601812BDB299934A0CCB4_banzaiCat" />
-    <Content Include="testProject\images\5A71C6F41035979503BA294F78A09336_background" />
-    <Content Include="testProject\images\B4497E87AC34B1329DD9B14C08EEAFF0_cheshireCat" />
-    <None Include="testProject\sounds\.nomedia" />
+    <None Include="DefaultProject\.nomedia" />
+    <None Include="DefaultProject\CatTexture.dds" />
+    <Content Include="DefaultProject\images\34A109A82231694B6FE09C216B390570_normalCat" />
+    <None Include="DefaultProject\images\395CD6389BD601812BDB299934A0CCB4_banzaiCat" />
+    <Content Include="DefaultProject\images\5A71C6F41035979503BA294F78A09336_background" />
+    <Content Include="DefaultProject\images\B4497E87AC34B1329DD9B14C08EEAFF0_cheshireCat" />
+    <None Include="DefaultProject\sounds\.nomedia" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fmodex_arm.dll" />
@@ -156,8 +156,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="test.txt" />
-    <Content Include="testProject\projectcode.xml" />
-    <Content Include="testProject\screenshot.png" />
+    <Content Include="DefaultProject\projectcode.xml" />
+    <Content Include="DefaultProject\screenshot.png" />
     <Content Include="wave.mp3" />
   </ItemGroup>
   <ItemGroup>

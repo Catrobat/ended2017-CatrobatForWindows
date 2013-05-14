@@ -3,7 +3,8 @@
 
 Sprite::Sprite(string name) :
 	BaseObject(),
-	m_name(name)
+	m_name(name),
+	m_transparency(1)
 {
 	m_lookData = NULL;
 	m_lookDatas = new list<LookData*>();
