@@ -56,7 +56,7 @@ void XMLParser::parseXML(string xml)
 	char *str = doc.first_node()->name();
 
 	m_project = parseProjectHeader(&doc);
-	parseObjectList(&doc, m_project->getSpriteList());
+	parseObjectList(&doc, m_project->getObjectList());
 }
 
 Project* XMLParser::parseProjectHeader(xml_document<> *doc)
