@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "SetXBrick.h"
 #include "Script.h"
-#include "Sprite.h"
+#include "Object.h"
 
 SetXBrick::SetXBrick(string spriteReference, float positionX, Script *parent) :
 	Brick(TypeOfBrick::SetXBrick, spriteReference, parent),

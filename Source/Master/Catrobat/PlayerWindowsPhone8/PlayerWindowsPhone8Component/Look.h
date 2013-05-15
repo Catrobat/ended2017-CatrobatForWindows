@@ -8,11 +8,11 @@
 
 using namespace std;
 
-class LookData
+class Look
 {
 public:
-	LookData(string filename, string name);
-	~LookData();
+	Look(string filename, string name);
+	~Look();
 
 	void LoadTexture(ID3D11Device* d3dDevice);
 	ID3D11ShaderResourceView *Texture();

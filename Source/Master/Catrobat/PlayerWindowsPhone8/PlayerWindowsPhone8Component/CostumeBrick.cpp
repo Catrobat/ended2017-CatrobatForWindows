@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CostumeBrick.h"
 #include "Script.h"
-#include "Sprite.h"
+#include "Object.h"
 
 CostumeBrick::CostumeBrick(string spriteReference, string costumeDataReference, int index, Script *parent) :
 	Brick(TypeOfBrick::CostumeBrick, spriteReference, parent), m_costumeDataReference(costumeDataReference), m_index(index)
@@ -22,5 +22,5 @@ int CostumeBrick::Index()
 
 void CostumeBrick::Execute()
 {	
-	m_parent->Parent()->SetLookData(m_index);
+	m_parent->Parent()->SetLook(m_index);
 }

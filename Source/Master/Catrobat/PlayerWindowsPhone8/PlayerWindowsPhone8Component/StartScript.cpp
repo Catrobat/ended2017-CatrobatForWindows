@@ -8,7 +8,7 @@
 using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
 
-StartScript::StartScript(string spriteReference, Sprite *parent) :
+StartScript::StartScript(string spriteReference, Object *parent) :
 	Script(TypeOfScript::StartScript, spriteReference, parent)
 {
 }

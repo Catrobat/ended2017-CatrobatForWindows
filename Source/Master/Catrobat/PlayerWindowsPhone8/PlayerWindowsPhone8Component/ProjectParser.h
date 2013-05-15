@@ -24,8 +24,8 @@ private:
 
 	void parseProjectInformation(xml_document<> *doc, Project *project);
 	void parseSprites(xml_node<> *baseNode);
-	void parseScripts(xml_node<> *scriptListNode, Sprite *sprite);
-	void parseLookDatas(xml_node<> *lookDataListNode, Sprite *sprite);
+	void parseScripts(xml_node<> *scriptListNode, Object *sprite);
+	void parseLookDatas(xml_node<> *lookDataListNode, Object *sprite);
 	void parseBricks(xml_node<> *brickListNode, Script *script);
 
 	char *int2char(int value);

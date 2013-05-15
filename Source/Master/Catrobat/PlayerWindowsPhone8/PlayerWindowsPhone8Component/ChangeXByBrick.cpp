@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "ChangeXByBrick.h"
 #include "Script.h"
-#include "Sprite.h"
+#include "Object.h"
 
 ChangeXByBrick::ChangeXByBrick(string spriteReference, float offsetX, Script *parent) :
 	Brick(TypeOfBrick::ChangeXByBrick, spriteReference, parent),

@@ -160,7 +160,7 @@
     <ClInclude Include="HideBrick.h" />
     <ClInclude Include="lodepng.h" />
     <ClInclude Include="lodepng_util.h" />
-    <ClInclude Include="LookData.h" />
+    <ClInclude Include="Look.h" />
     <ClInclude Include="PlaceAtBrick.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
     <ClInclude Include="PlaySoundBrick.h" />
@@ -183,8 +183,8 @@
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundInfo.h" />
     <ClInclude Include="SoundManager.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="SpriteList.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectList.h" />
     <ClInclude Include="StartScript.h" />
     <ClInclude Include="TurnLeftBrick.h" />
     <ClInclude Include="TextureDaemon.h" />
@@ -206,7 +206,7 @@
     <ClCompile Include="HideBrick.cpp" />
     <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="lodepng_util.cpp" />
-    <ClCompile Include="LookData.cpp" />
+    <ClCompile Include="Look.cpp" />
     <ClCompile Include="PlaceAtBrick.cpp" />
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
     <ClCompile Include="PlaySoundBrick.cpp" />
@@ -230,8 +230,8 @@
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundInfo.cpp" />
     <ClCompile Include="SoundManager.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="SpriteList.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectList.cpp" />
     <ClCompile Include="StartScript.cpp" />
     <ClCompile Include="TurnLeftBrick.cpp" />
     <ClCompile Include="TextureDaemon.cpp" />

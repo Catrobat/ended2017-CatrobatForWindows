@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "GlideToBrick.h"
 #include "Script.h"
-#include "Sprite.h"
+#include "Object.h"
 #include <windows.h>
 #include <ppltasks.h>
 

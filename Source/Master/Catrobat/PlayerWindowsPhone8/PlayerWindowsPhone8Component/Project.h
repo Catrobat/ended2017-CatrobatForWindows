@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BaseObject.h"
-#include "SpriteList.h"
+#include "ObjectList.h"
 
 #include <vector>
 
@@ -41,7 +41,7 @@ public:
 	int							ScreenHeight();
 	int							ScreenWidth();
 
-	SpriteList					*getSpriteList();
+	ObjectList					*getObjectList();
 
 
 private:
@@ -68,6 +68,6 @@ private:
 	std::string					m_url;
 	std::string					m_userHandle;
 
-	SpriteList					*m_spriteList;
+	ObjectList					*m_objectList;
 };
 

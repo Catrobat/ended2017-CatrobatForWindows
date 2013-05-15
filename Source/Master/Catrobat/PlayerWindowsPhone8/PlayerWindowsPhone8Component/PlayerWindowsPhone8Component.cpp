@@ -55,15 +55,15 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 	if (!ProjectDaemon::Instance()->FinishedLoading())
 		return;
 	Project* project = ProjectDaemon::Instance()->getProject();
-	SpriteList* sprites = project->getSpriteList();
-	for (int i = sprites->Size() - 1; i >= 0; i--)
+	ObjectList* objects = project->getObjectList();
+	for (int i = objects->Size() - 1; i >= 0; i--)
 	{
 		D3D11_SHADER_RESOURCE_VIEW_DESC data;
 
 		/*sprites->getSprite(i)->GetCurrentLookData()->Texture()->GetDesc(&data);
 		data.ViewDimension.Value*/
 
-		Bounds bounds = sprites->getSprite(i)->getBounds();
+		Bounds bounds = objects->getObject(i)->getBounds();
 		bounds.x += ProjectDaemon::Instance()->getProject()->ScreenWidth() / 2;
 		bounds.y += ProjectDaemon::Instance()->getProject()->ScreenHeight() / 2;
 		//if (args->CurrentPoint GetIntermediatePoints()->Size > 0)
@@ -92,9 +92,9 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 
 			if (bounds.x <= normalizedX && bounds.y <= normalizedY && (bounds.x + bounds.width) >= normalizedX && (bounds.y + bounds.height) >= normalizedY)
 			{
-				for (int j = 0; j < sprites->getSprite(i)->ScriptListSize(); j++)
+				for (int j = 0; j < objects->getObject(i)->ScriptListSize(); j++)
 				{
-					Script *script = sprites->getSprite(i)->getScript(j);
+					Script *script = objects->getObject(i)->getScript(j);
 					if (script->getType() == Script::TypeOfScript::WhenScript)
 					{
 						WhenScript *wScript = (WhenScript *) script; 

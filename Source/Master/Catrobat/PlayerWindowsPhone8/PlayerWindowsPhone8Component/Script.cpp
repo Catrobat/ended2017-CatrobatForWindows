@@ -8,7 +8,7 @@
 using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
 
-Script::Script(TypeOfScript scriptType, string spriteReference, Sprite *parent) :
+Script::Script(TypeOfScript scriptType, string spriteReference, Object *parent) :
 	m_scriptType(scriptType), m_spriteReference(spriteReference), m_parent(parent)
 {
 	m_brickList = new list<Brick*>();
@@ -62,7 +62,7 @@ void Script::Execute()
 	IAsyncAction^ ThreadPoolWorkItem = ThreadPool::RunAsync(WorkItem);
 }
 
-Sprite *Script::Parent()
+Object *Script::Parent()
 {
 	return m_parent;
 }

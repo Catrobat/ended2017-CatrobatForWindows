@@ -28,15 +28,6 @@
     <ClCompile Include="Project.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteList.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="LookData.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Brick.cpp">
       <Filter>Objects\Bricks</Filter>
     </ClCompile>
@@ -54,9 +45,6 @@
     </ClCompile>
     <ClCompile Include="SoundInfo.cpp">
       <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectParser.cpp">
-      <Filter>XMLParser</Filter>
     </ClCompile>
     <ClCompile Include="ProjectDaemon.cpp">
       <Filter>Core</Filter>
@@ -133,6 +121,15 @@
     <ClCompile Include="SetYBrick.cpp">
       <Filter>Objects\Bricks\Movement</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectList.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Look.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -168,15 +165,6 @@
     <ClInclude Include="Project.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteList.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="LookData.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Brick.h">
       <Filter>Objects\Bricks</Filter>
     </ClInclude>
@@ -194,9 +182,6 @@
     </ClInclude>
     <ClInclude Include="SoundInfo.h">
       <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjectParser.h">
-      <Filter>XMLParser</Filter>
     </ClInclude>
     <ClInclude Include="ProjectDaemon.h">
       <Filter>Core</Filter>
@@ -272,6 +257,15 @@
     </ClInclude>
     <ClInclude Include="SetYBrick.h">
       <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectList.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Look.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

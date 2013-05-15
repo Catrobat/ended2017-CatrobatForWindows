@@ -34,9 +34,9 @@ private:
 	// ----------------------------------------------------------------------------------------------------------------------------------
 	
 	
-	Script*						parseStartScript			(xml_node<> *baseNode, Sprite *sprite);
-	Script*						parseBroadcastScript		(xml_node<> *baseNode, Sprite *sprite);
-	Script*						parseWhenScript				(xml_node<> *baseNode, Sprite *sprite);
+	Script*						parseStartScript			(xml_node<> *baseNode, Object *object);
+	Script*						parseBroadcastScript		(xml_node<> *baseNode, Object *object);
+	Script*						parseWhenScript				(xml_node<> *baseNode, Object *object);
 	void						parseBrickList				(xml_node<> *baseNode, Script *script);
 	Brick*						parseCostumeBrick			(xml_node<> *baseNode, Script *script);
 	Brick*						parseWaitBrick				(xml_node<> *baseNode, Script *script);

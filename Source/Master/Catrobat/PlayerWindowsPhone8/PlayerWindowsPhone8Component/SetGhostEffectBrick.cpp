@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "SetGhostEffectBrick.h"
 #include "Script.h"
-#include "Sprite.h"
+#include "Object.h"
 
 SetGhostEffectBrick::SetGhostEffectBrick(string spriteReference, float transparency, Script *parent) :
 	Brick(TypeOfBrick::SetGhostEffectBrick, spriteReference, parent),

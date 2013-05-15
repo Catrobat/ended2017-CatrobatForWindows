@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "HideBrick.h"
 #include "Script.h"
-#include "Sprite.h"
+#include "Object.h"
 
 HideBrick::HideBrick(string spriteReference, Script *parent) :
 	Brick(TypeOfBrick::HideBrick, spriteReference, parent)

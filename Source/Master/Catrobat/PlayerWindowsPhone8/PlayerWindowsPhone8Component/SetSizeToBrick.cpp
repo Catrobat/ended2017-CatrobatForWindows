@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "SetSizeToBrick.h"
 #include "Script.h"
-#include "Sprite.h"
+#include "Object.h"
 
 SetSizeToBrick::SetSizeToBrick(string spriteReference, float scale, Script *parent) :
 	Brick(TypeOfBrick::SetGhostEffectBrick, spriteReference, parent),

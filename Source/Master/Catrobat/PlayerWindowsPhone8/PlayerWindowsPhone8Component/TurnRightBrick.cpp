@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "TurnRightBrick.h"
 #include "Script.h"
-#include "Sprite.h"
+#include "Object.h"
 
 TurnRightBrick::TurnRightBrick(string spriteReference, float rotation, Script *parent) :
 	Brick(TypeOfBrick::TurnRightBrick, spriteReference, parent),

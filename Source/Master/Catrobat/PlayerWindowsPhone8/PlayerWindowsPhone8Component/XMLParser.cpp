@@ -233,7 +233,7 @@ void XMLParser::parseObjectList(xml_document<> *doc, ObjectList *objectList)
 	}
 }
 
-Sprite *XMLParser::parseObject(xml_node<> *baseNode)
+Object *XMLParser::parseObject(xml_node<> *baseNode)
 {
 	xml_node<> *node = baseNode->first_node("name");
 	if (!node)
@@ -250,7 +250,7 @@ Sprite *XMLParser::parseObject(xml_node<> *baseNode)
 			xml_node<> *lookNode = node->first_node("look");
 			while (lookNode)
 			{
-				object->addLook(parseLookData(lookNode));
+				object->addLook(parseLook(lookNode));
 				lookNode = lookNode->next_sibling("look");
 			}
 			#pragma endregion
@@ -298,7 +298,7 @@ Sprite *XMLParser::parseObject(xml_node<> *baseNode)
 	return object;
 }
 
-LookData *XMLParser::parseLook(xml_node<> *baseNode)
+Look *XMLParser::parseLook(xml_node<> *baseNode)
 {
 	string filename, name;
 	xml_node<> *node;
@@ -317,7 +317,7 @@ LookData *XMLParser::parseLook(xml_node<> *baseNode)
 	return look;
 }
 
-Script *XMLParser::parseStartScript(xml_node<> *baseNode, Sprite *sprite)
+Script *XMLParser::parseStartScript(xml_node<> *baseNode, Object *object)
 {
 	xml_node<> *spriteReferenceNode = baseNode->first_node("sprite");
 	if (!spriteReferenceNode)
@@ -328,12 +328,12 @@ Script *XMLParser::parseStartScript(xml_node<> *baseNode, Sprite *sprite)
 	if (!spriteReferenceAttribute)
 		return NULL;
 
-	StartScript *script = new StartScript(spriteReferenceAttribute->value(), sprite);
+	StartScript *script = new StartScript(spriteReferenceAttribute->value(), object);
 	parseBrickList(baseNode, script);
 	return script;
 }
 
-Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode, Sprite *sprite)
+Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode, Object *object)
 {
 	xml_node<> *spriteReferenceNode = baseNode->first_node("sprite");
 	if (!spriteReferenceNode)
@@ -348,12 +348,12 @@ Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode, Sprite *sprite)
 	if (!messageNode)
 		return NULL;
 
-	BroadcastScript *script = new BroadcastScript(messageNode->value(), spriteReferenceAttribute->value(), sprite);
+	BroadcastScript *script = new BroadcastScript(messageNode->value(), spriteReferenceAttribute->value(), object);
 	parseBrickList(baseNode, script);
 	return script;
 }
 
-Script *XMLParser::parseWhenScript(xml_node<> *baseNode, Sprite *sprite)
+Script *XMLParser::parseWhenScript(xml_node<> *baseNode, Object *object)
 {
 	xml_node<> *spriteReferenceNode = baseNode->first_node("sprite");
 	if (!spriteReferenceNode)
@@ -368,7 +368,7 @@ Script *XMLParser::parseWhenScript(xml_node<> *baseNode, Sprite *sprite)
 	if (!actionNode)
 		return NULL;
 
-	WhenScript *script = new WhenScript(actionNode->value(), spriteReferenceAttribute->value(), sprite);
+	WhenScript *script = new WhenScript(actionNode->value(), spriteReferenceAttribute->value(), object);
 	parseBrickList(baseNode, script);
 	return script;
 }

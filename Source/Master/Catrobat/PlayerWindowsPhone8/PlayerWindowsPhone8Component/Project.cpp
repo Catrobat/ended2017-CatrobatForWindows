@@ -1,8 +1,7 @@
 #include "pch.h"
 #include "Project.h"
 
-
-	Project::Project(
+Project::Project(
 	string								applicationBuildName,
 	int									applicationBuildNumber,
 	string								applicationName,
@@ -45,7 +44,7 @@
 	m_url								(url),
 	m_userHandle						(userHandle)
 {
-	m_spriteList = new SpriteList();
+	m_objectList = new ObjectList();
 }
 
 int Project::ScreenHeight()
@@ -58,31 +57,31 @@ int	Project::ScreenWidth()
 	return m_screenWidth;
 }
 
-SpriteList *Project::getSpriteList()
+ObjectList *Project::getObjectList()
 {
-	return m_spriteList;
+	return m_objectList;
 }
 
 void Project::Render(SpriteBatch *spriteBatch)
 {
-	for (int i = 0; i < m_spriteList->Size(); i++)
+	for (int i = 0; i < m_objectList->Size(); i++)
 	{
-		m_spriteList->getSprite(i)->Draw(spriteBatch);
+		m_objectList->getObject(i)->Draw(spriteBatch);
 	}
 }
 
 void Project::LoadTextures(ID3D11Device* d3dDevice)
 {
-	for (int i = 0; i < m_spriteList->Size(); i++)
+	for (int i = 0; i < m_objectList->Size(); i++)
 	{
-		m_spriteList->getSprite(i)->LoadTextures(d3dDevice);
+		m_objectList->getObject(i)->LoadTextures(d3dDevice);
 	}
 }
 
 void Project::StartUp()
 {	
-	for (int i = 0; i < m_spriteList->Size(); i++)
+	for (int i = 0; i < m_objectList->Size(); i++)
 	{
-		m_spriteList->getSprite(i)->StartUp();
+		m_objectList->getObject(i)->StartUp();
 	}
 }
