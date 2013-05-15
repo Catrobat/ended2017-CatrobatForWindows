@@ -97,14 +97,23 @@
     <ClCompile Include="TextureDaemon.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="ForeverBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
-    </ClCompile>
     <ClCompile Include="TurnLeftBrick.cpp">
       <Filter>Objects\Bricks</Filter>
     </ClCompile>
     <ClCompile Include="PlayerWindowsPhone8Component.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SetSizeToBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="HideBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeSizeByBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -210,14 +219,23 @@
     <ClInclude Include="TextureDaemon.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="ForeverBrick.h">
-      <Filter>Objects\Bricks</Filter>
-    </ClInclude>
     <ClInclude Include="TurnLeftBrick.h">
       <Filter>Objects\Bricks</Filter>
     </ClInclude>
     <ClInclude Include="PlayerWindowsPhone8Component.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SetSizeToBrick.h">
+      <Filter>Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowBrick.h">
+      <Filter>Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="HideBrick.h">
+      <Filter>Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeSizeByBrick.h">
+      <Filter>Objects\Bricks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

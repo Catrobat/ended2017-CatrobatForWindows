@@ -19,6 +19,10 @@ public:
 		PlaySoundBrick,
 		TurnLeftBrick,
 		ForeverBrick
+		HideBrick,
+		ShowBrick,
+		SetSizeToBrick,
+		ChangeSizeByBrick
 	};
 
 	Script *Parent();

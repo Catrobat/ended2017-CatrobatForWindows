@@ -151,10 +151,12 @@
     <ClInclude Include="BasicTimer.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="BroadcastScript.h" />
+    <ClInclude Include="ChangeSizeByBrick.h" />
     <ClInclude Include="CostumeBrick.h" />
     <ClInclude Include="DDSLoader.h" />
     <ClInclude Include="ForeverBrick.h" />
     <ClInclude Include="GlideToBrick.h" />
+    <ClInclude Include="HideBrick.h" />
     <ClInclude Include="lodepng.h" />
     <ClInclude Include="lodepng_util.h" />
     <ClInclude Include="LookData.h" />
@@ -173,6 +175,8 @@
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptHandler.h" />
     <ClInclude Include="SetGhostEffectBrick.h" />
+    <ClInclude Include="SetSizeToBrick.h" />
+    <ClInclude Include="ShowBrick.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundInfo.h" />
     <ClInclude Include="SoundManager.h" />
@@ -189,10 +193,12 @@
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="BroadcastScript.cpp" />
+    <ClCompile Include="ChangeSizeByBrick.cpp" />
     <ClCompile Include="CostumeBrick.cpp" />
     <ClCompile Include="DDSLoader.cpp" />
     <ClCompile Include="ForeverBrick.cpp" />
     <ClCompile Include="GlideToBrick.cpp" />
+    <ClCompile Include="HideBrick.cpp" />
     <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="lodepng_util.cpp" />
     <ClCompile Include="LookData.cpp" />
@@ -212,6 +218,8 @@
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptHandler.cpp" />
     <ClCompile Include="SetGhostEffectBrick.cpp" />
+    <ClCompile Include="SetSizeToBrick.cpp" />
+    <ClCompile Include="ShowBrick.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundInfo.cpp" />
     <ClCompile Include="SoundManager.cpp" />

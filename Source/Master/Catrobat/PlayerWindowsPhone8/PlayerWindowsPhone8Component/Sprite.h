@@ -47,6 +47,8 @@ public:
 
 	void SetTransparency(float transparency);
 	void SetRotation(float rotation);
+	void SetScale(float scale);
+	float GetScale();
 
 private:
 	LookData *m_lookData;

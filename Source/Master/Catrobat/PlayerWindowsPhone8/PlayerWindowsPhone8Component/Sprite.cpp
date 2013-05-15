@@ -141,3 +141,13 @@ void Sprite::SetRotation(float rotation)
 {
 	m_rotation = rotation;
 }
+
+void Sprite::SetScale(float scale)
+{
+	m_objectScale.x = m_objectScale.y = scale;
+}
+
+float Sprite::GetScale()
+{
+	return m_objectScale.x;
+}
