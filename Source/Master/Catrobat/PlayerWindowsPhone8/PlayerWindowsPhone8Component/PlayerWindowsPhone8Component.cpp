@@ -2,7 +2,6 @@
 #include "PlayerWindowsPhone8Component.h"
 #include "Direct3DContentProvider.h"
 #include "XMLParser.h"
-#include "ProjectParser.h"
 #include "ProjectDaemon.h"
 #include "ScriptHandler.h"
 #include "WhenScript.h"
