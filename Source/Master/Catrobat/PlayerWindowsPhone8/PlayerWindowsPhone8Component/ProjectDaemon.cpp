@@ -135,7 +135,7 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 				string pathString(tempPath.begin(), tempPath.end());
 				m_projectPath = pathString;
 
-				IAsyncOperation<Windows::Storage::StorageFile^>^ getFiles = folderContent->GetFileAsync("code.xml");
+				IAsyncOperation<Windows::Storage::StorageFile^>^ getFiles = folderContent->GetFileAsync("projectcode.xml");
 				getFiles->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFile^>
 				(
 					[this](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile^>^ operation, Windows::Foundation::AsyncStatus status)

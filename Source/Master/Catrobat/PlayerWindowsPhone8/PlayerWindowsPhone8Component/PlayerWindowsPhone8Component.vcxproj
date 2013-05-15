@@ -154,7 +154,6 @@
     <ClInclude Include="ChangeSizeByBrick.h" />
     <ClInclude Include="CostumeBrick.h" />
     <ClInclude Include="DDSLoader.h" />
-    <ClInclude Include="ForeverBrick.h" />
     <ClInclude Include="GlideToBrick.h" />
     <ClInclude Include="HideBrick.h" />
     <ClInclude Include="lodepng.h" />
@@ -196,7 +195,6 @@
     <ClCompile Include="ChangeSizeByBrick.cpp" />
     <ClCompile Include="CostumeBrick.cpp" />
     <ClCompile Include="DDSLoader.cpp" />
-    <ClCompile Include="ForeverBrick.cpp" />
     <ClCompile Include="GlideToBrick.cpp" />
     <ClCompile Include="HideBrick.cpp" />
     <ClCompile Include="lodepng.cpp" />

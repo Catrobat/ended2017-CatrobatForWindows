@@ -18,7 +18,7 @@ public:
 		SetGhostEffectBrick,
 		PlaySoundBrick,
 		TurnLeftBrick,
-		ForeverBrick
+		ForeverBrick,
 		HideBrick,
 		ShowBrick,
 		SetSizeToBrick,
