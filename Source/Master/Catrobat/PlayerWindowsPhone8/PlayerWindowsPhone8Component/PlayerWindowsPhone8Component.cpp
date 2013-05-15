@@ -9,8 +9,6 @@
 #include "lodepng.h"
 #include "lodepng_util.h"
 #include "DDSLoader.h"
-
-
 #include <windows.system.threading.h>
 #include <windows.foundation.h>
 #include <thread>
@@ -21,6 +19,7 @@ using namespace Windows::UI::Core;
 using namespace Microsoft::WRL;
 using namespace Windows::Phone::Graphics::Interop;
 using namespace Windows::Phone::Input::Interop;
+using namespace Windows::Graphics::Display;
 
 namespace PhoneDirect3DXamlAppComponent
 {
@@ -67,19 +66,27 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 		Bounds bounds = sprites->getSprite(i)->getBounds();
 		//if (args->CurrentPoint GetIntermediatePoints()->Size > 0)
 		{
+			float resolutionScaleFactor;
+			switch (DisplayProperties::ResolutionScale) {
+				case ResolutionScale::Scale100Percent:
+					resolutionScaleFactor = 1.0f;
+					break;
+				case ResolutionScale::Scale150Percent:
+					resolutionScaleFactor = 1.5f;
+					break;
+				case ResolutionScale::Scale160Percent:
+					resolutionScaleFactor = 1.6f;
+					break;
+			}
+
 			int actualX = args->CurrentPoint->Position.X;
 			int actualY = args->CurrentPoint->Position.Y;
 
-			double factorX = abs(ProjectDaemon::Instance()->getProject()->getScreenWidth() / m_originalWindowsBounds.X);
-			double factorY = abs(ProjectDaemon::Instance()->getProject()->getScreenHeight() / m_originalWindowsBounds.Y);
+			double factorX = abs(ProjectDaemon::Instance()->getProject()->getScreenWidth() / (m_originalWindowsBounds.X / resolutionScaleFactor));
+			double factorY = abs(ProjectDaemon::Instance()->getProject()->getScreenHeight() / (m_originalWindowsBounds.Y / resolutionScaleFactor));
 
 			int normalizedX = factorX * actualX;
-			int normalizedY = factorY * actualY;
-
-			ProjectDaemon::Instance()->test.X = normalizedX;
-			ProjectDaemon::Instance()->test.Y = normalizedY;
-
-			
+			int normalizedY = factorY * actualY;		
 
 			if (bounds.x <= normalizedX && bounds.y <= normalizedY && (bounds.x + bounds.width) >= normalizedX && (bounds.y + bounds.height) >= normalizedY)
 			{

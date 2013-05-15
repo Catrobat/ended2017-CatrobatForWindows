@@ -37,9 +37,6 @@ public:
 	void SetError(Error error);
 	std::vector<std::string> *ErrorList();
 
-	Windows::Foundation::Rect test;
-
-
 private:
 	ProjectDaemon();
 	ProjectDaemon(ProjectDaemon const&);            

@@ -56,11 +56,6 @@ void ProjectRenderer::Render()
 	m_spriteBatch->Begin();
 	{
 		ProjectDaemon::Instance()->getProject()->Render(m_spriteBatch.get());
-
-		string error = ".";
-		std::wstring errorString = std::wstring(error.begin(), error.end());
-		const wchar_t* cerrorString = errorString.c_str();
-		m_spriteFont->DrawString(m_spriteBatch.get(), cerrorString, XMFLOAT2(ProjectDaemon::Instance()->test.X,  ProjectDaemon::Instance()->test.Y), Colors::Black);
 	}
 	m_spriteBatch->End();
 	
