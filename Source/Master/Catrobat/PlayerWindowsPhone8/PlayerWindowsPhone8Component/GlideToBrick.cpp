@@ -6,7 +6,7 @@
 #include <ppltasks.h>
 
 GlideToBrick::GlideToBrick(string spriteReference, float xDestination, float yDestination, float duration, Script *parent) :
-	Brick(TypeOfBrick::PlaceAtBrick, spriteReference, parent),
+	Brick(TypeOfBrick::GlideToBrick, spriteReference, parent),
 	m_xDestination(xDestination), m_yDestination(yDestination),
 	m_duration(duration)
 {

@@ -22,7 +22,14 @@ public:
 		HideBrick,
 		ShowBrick,
 		SetSizeToBrick,
-		ChangeSizeByBrick
+		ChangeSizeByBrick,
+		TurnRightBrick,
+		SetXBrick,
+		SetYBrick,
+		ChangeXByBrick,
+		ChangeYByBrick,
+		GlideToBrick,
+		PointToBrick
 	};
 
 	Script *Parent();

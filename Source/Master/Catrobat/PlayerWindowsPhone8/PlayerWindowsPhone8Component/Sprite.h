@@ -47,6 +47,7 @@ public:
 
 	void SetTransparency(float transparency);
 	void SetRotation(float rotation);
+	float GetRotation();
 	void SetScale(float scale);
 	float GetScale();
 

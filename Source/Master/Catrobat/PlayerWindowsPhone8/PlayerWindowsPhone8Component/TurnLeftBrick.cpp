@@ -11,5 +11,5 @@ TurnLeftBrick::TurnLeftBrick(string spriteReference, float rotation, Script *par
 
 void TurnLeftBrick::Execute()
 {
-	m_parent->Parent()->SetRotation(m_rotation);
+	m_parent->Parent()->SetRotation(m_parent->Parent()->GetRotation() - m_rotation);
 }

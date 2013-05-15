@@ -40,18 +40,6 @@
     <ClCompile Include="Brick.cpp">
       <Filter>Objects\Bricks</Filter>
     </ClCompile>
-    <ClCompile Include="CostumeBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
-    </ClCompile>
-    <ClCompile Include="WaitBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
-    </ClCompile>
-    <ClCompile Include="PlaceAtBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
-    </ClCompile>
-    <ClCompile Include="SetGhostEffectBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
-    </ClCompile>
     <ClCompile Include="WhenScript.cpp">
       <Filter>Objects\Scripts</Filter>
     </ClCompile>
@@ -66,9 +54,6 @@
     </ClCompile>
     <ClCompile Include="SoundInfo.cpp">
       <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="PlaySoundBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
     </ClCompile>
     <ClCompile Include="ProjectParser.cpp">
       <Filter>XMLParser</Filter>
@@ -88,32 +73,65 @@
     <ClCompile Include="DDSLoader.cpp">
       <Filter>ddsConverter</Filter>
     </ClCompile>
-    <ClCompile Include="GlideToBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
-    </ClCompile>
     <ClCompile Include="ProjectRenderer.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="TextureDaemon.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="TurnLeftBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerWindowsPhone8Component.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="SetSizeToBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
+    <ClCompile Include="CostumeBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
     </ClCompile>
     <ClCompile Include="ShowBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
+      <Filter>Objects\Bricks\Look</Filter>
     </ClCompile>
     <ClCompile Include="HideBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
+      <Filter>Objects\Bricks\Look</Filter>
     </ClCompile>
     <ClCompile Include="ChangeSizeByBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="SetSizeToBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="SetGhostEffectBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="GlideToBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaceAtBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="TurnLeftBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="WaitBrick.cpp">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaySoundBrick.cpp">
+      <Filter>Objects\Bricks\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="TurnRightBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="PointToBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeXByBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeYByBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="SetXBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="SetYBrick.cpp">
+      <Filter>Objects\Bricks\Movement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,18 +180,6 @@
     <ClInclude Include="Brick.h">
       <Filter>Objects\Bricks</Filter>
     </ClInclude>
-    <ClInclude Include="WaitBrick.h">
-      <Filter>Objects\Bricks</Filter>
-    </ClInclude>
-    <ClInclude Include="CostumeBrick.h">
-      <Filter>Objects\Bricks</Filter>
-    </ClInclude>
-    <ClInclude Include="PlaceAtBrick.h">
-      <Filter>Objects\Bricks</Filter>
-    </ClInclude>
-    <ClInclude Include="SetGhostEffectBrick.h">
-      <Filter>Objects\Bricks</Filter>
-    </ClInclude>
     <ClInclude Include="WhenScript.h">
       <Filter>Objects\Scripts</Filter>
     </ClInclude>
@@ -188,9 +194,6 @@
     </ClInclude>
     <ClInclude Include="SoundInfo.h">
       <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="PlaySoundBrick.h">
-      <Filter>Objects\Bricks</Filter>
     </ClInclude>
     <ClInclude Include="ProjectParser.h">
       <Filter>XMLParser</Filter>
@@ -210,32 +213,65 @@
     <ClInclude Include="DDSLoader.h">
       <Filter>ddsConverter</Filter>
     </ClInclude>
-    <ClInclude Include="GlideToBrick.h">
-      <Filter>Objects\Bricks</Filter>
-    </ClInclude>
     <ClInclude Include="ProjectRenderer.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="TextureDaemon.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="TurnLeftBrick.h">
-      <Filter>Objects\Bricks</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerWindowsPhone8Component.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="SetSizeToBrick.h">
-      <Filter>Objects\Bricks</Filter>
+    <ClInclude Include="CostumeBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
     </ClInclude>
     <ClInclude Include="ShowBrick.h">
-      <Filter>Objects\Bricks</Filter>
+      <Filter>Objects\Bricks\Look</Filter>
     </ClInclude>
     <ClInclude Include="HideBrick.h">
-      <Filter>Objects\Bricks</Filter>
+      <Filter>Objects\Bricks\Look</Filter>
     </ClInclude>
     <ClInclude Include="ChangeSizeByBrick.h">
-      <Filter>Objects\Bricks</Filter>
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="SetSizeToBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="SetGhostEffectBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="GlideToBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaceAtBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="TurnLeftBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="WaitBrick.h">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaySoundBrick.h">
+      <Filter>Objects\Bricks\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="TurnRightBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="PointToBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeXByBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeYByBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="SetXBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="SetYBrick.h">
+      <Filter>Objects\Bricks\Movement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +295,18 @@
     </Filter>
     <Filter Include="ddsConverter">
       <UniqueIdentifier>{0b77d6dc-7fe8-43ee-aba1-51564a63deae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bricks\Movement">
+      <UniqueIdentifier>{8cc0696c-f9db-421b-8e06-575e0c8826a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bricks\Control">
+      <UniqueIdentifier>{b3beddef-05ae-47ca-8d85-217b802ab28e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bricks\Look">
+      <UniqueIdentifier>{02be717a-3274-4aac-9831-0296627114a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bricks\Sound">
+      <UniqueIdentifier>{957c57fe-65b2-4513-baec-b65f2e0acead}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
