@@ -55,6 +55,7 @@ void Script::Execute()
 		{
 			GetBrick(i)->Execute();
 		}
+		
 		Concurrency::wait(10);
 	});
 

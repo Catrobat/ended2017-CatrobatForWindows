@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Sprite.h"
+#include "ProjectDaemon.h"
 
 Sprite::Sprite(string name) :
 	BaseObject(),
@@ -56,10 +57,10 @@ Script *Sprite::getScript(int index)
 	return *it;
 }
 
-void Sprite::LoadTextures(ID3D11Device* d3dDevice, Windows::Foundation::Rect *windowBounds)
+void Sprite::LoadTextures(ID3D11Device* d3dDevice)
 {
-	m_position.x = (windowBounds->Width / 2);
-	m_position.y = windowBounds->Height / 2;
+	m_position.x = 0;
+	m_position.y = 0;
 
 	for (int i = 0; i < LookDataListSize(); i++)
 	{
@@ -74,8 +75,12 @@ void Sprite::Draw(SpriteBatch *spriteBatch)
 		return;
 	}
 
+	XMFLOAT2 position;
+	position.x = ProjectDaemon::Instance()->getProject()->getScreenWidth() / 2 + m_position.x;
+	position.y = ProjectDaemon::Instance()->getProject()->getScreenHeight() / 2 + m_position.y;
+
 	if (m_lookData != NULL)
-		spriteBatch->Draw(m_lookData->Texture(), m_position, nullptr, Colors::White * m_transparency, 0.0f, XMFLOAT2(m_lookData->Width() / 2, m_lookData->Height() / 2), m_objectScale, SpriteEffects_None, 0.0f);
+		spriteBatch->Draw(m_lookData->Texture(), position, nullptr, Colors::White * m_transparency, 0.0f, XMFLOAT2(m_lookData->Width() / 2, m_lookData->Height() / 2), m_objectScale, SpriteEffects_None, 0.0f);
 }
 
 void Sprite::SetLookData(int index)
@@ -111,8 +116,8 @@ void Sprite::StartUp()
 
 void Sprite::SetPosition(float x, float y)
 {
-	m_position.x += x;
-	m_position.y += y;
+	m_position.x = x;
+	m_position.y = y;
 }
 
 void Sprite::GetPosition(float &x, float &y)

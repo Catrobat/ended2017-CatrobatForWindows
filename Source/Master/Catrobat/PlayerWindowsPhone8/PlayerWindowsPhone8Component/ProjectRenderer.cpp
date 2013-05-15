@@ -10,7 +10,7 @@ void ProjectRenderer::CreateDeviceResources()
 {	
 	Direct3DBase::CreateDeviceResources();
 	UpdateForWindowSizeChange(ProjectDaemon::Instance()->getProject()->getScreenWidth(), ProjectDaemon::Instance()->getProject()->getScreenHeight());
-	ProjectDaemon::Instance()->getProject()->LoadTextures(m_d3dDevice.Get(), &m_windowBounds);
+	ProjectDaemon::Instance()->getProject()->LoadTextures(m_d3dDevice.Get());
 }
 
 void ProjectRenderer::CreateWindowSizeDependentResources()

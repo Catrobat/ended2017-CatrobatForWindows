@@ -14,17 +14,17 @@ GlideToBrick::GlideToBrick(string spriteReference, float xDestination, float yDe
 
 void GlideToBrick::Execute()
 {
-	//float steps = m_duration / 20; // 50 Hz
+	float steps = m_duration / 20; // 50 Hz
 
-	//float x_movement = m_xDestination / steps;
-	//float y_movement = m_yDestination / steps;
+	float x_movement = m_xDestination / steps;
+	float y_movement = m_yDestination / steps;
 
-	//for (int i = 0; i < steps; i++)
-	//{
-	//	float currentX, currentY;
-	//	m_parent->Parent()->GetPosition(currentX, currentY);
-	//	m_parent->Parent()->SetPosition(currentX + x_movement, currentY + y_movement);
+	for (int i = 0; i < steps; i++)
+	{
+		float currentX, currentY;
+		m_parent->Parent()->GetPosition(currentX, currentY);
+		m_parent->Parent()->SetPosition(currentX + x_movement, currentY + y_movement);
 
-	//	Concurrency::wait(20); // 50 Hz
-	//}
+		Concurrency::wait(20); // 50 Hz
+	}
 }

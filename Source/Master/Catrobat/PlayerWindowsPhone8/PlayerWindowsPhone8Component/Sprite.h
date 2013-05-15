@@ -27,7 +27,7 @@ public:
 	void addScript(Script *script);
 	void addSoundInfo(SoundInfo *soundInfo);
 
-	void LoadTextures(ID3D11Device* d3dDevice, Windows::Foundation::Rect *windowBounds);
+	void LoadTextures(ID3D11Device* d3dDevice);
 	void Draw(SpriteBatch *spriteBatch);
 	void StartUp();
 
