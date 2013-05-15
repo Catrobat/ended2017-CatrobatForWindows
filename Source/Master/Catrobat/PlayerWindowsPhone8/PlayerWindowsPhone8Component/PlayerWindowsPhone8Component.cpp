@@ -64,6 +64,8 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 		data.ViewDimension.Value*/
 
 		Bounds bounds = sprites->getSprite(i)->getBounds();
+		bounds.x += ProjectDaemon::Instance()->getProject()->getScreenWidth() / 2;
+		bounds.y += ProjectDaemon::Instance()->getProject()->getScreenHeight() / 2;
 		//if (args->CurrentPoint GetIntermediatePoints()->Size > 0)
 		{
 			float resolutionScaleFactor;
@@ -132,15 +134,14 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	m_renderer->Initialize(device);
 
 	// Initialize Sound
-	m_soundmanager = new SoundManager();
-	m_soundmanager->Initialize();
+	SoundManager::Instance()->Initialize();
 
 	//Initialize Project Renderer
 	m_projectRenderer = ref new ProjectRenderer();
 	ProjectDaemon::Instance()->SetupRenderer(device, m_projectRenderer);
 
 	// Load Project
-	ProjectDaemon::Instance()->OpenProject("835");
+	ProjectDaemon::Instance()->OpenProject("Piano");
 
 	// Restart timer after renderer has finished initializing.
 	m_timer->Reset();
@@ -150,8 +151,6 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 
 void Direct3DBackground::Disconnect()
 {
-	free(m_soundmanager);
-	m_soundmanager = nullptr;
 	m_renderer = nullptr;
 	m_projectRenderer = nullptr;
 }
@@ -194,21 +193,6 @@ HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceCo
 		// Render Project
 		m_projectRenderer->UpdateDevice(device, context, renderTargetView);
 		m_projectRenderer->Render();
-	}
-
-
-	static bool test = false;
-
-	if (!test)
-	{
-		//std::thread* thr = new std::thread(FMOD_Main);
-		//thr->join();
-		//FMOD_Main();
-
-		Sound *sound = m_soundmanager->CreateSound(/* Parameters */);
-		//sound->Play();
-
-		test = true;
 	}
 
 	RequestAdditionalFrame();

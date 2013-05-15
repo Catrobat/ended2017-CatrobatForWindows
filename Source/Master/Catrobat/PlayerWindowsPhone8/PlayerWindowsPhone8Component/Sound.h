@@ -2,6 +2,7 @@
 
 #include "fmod.hpp"
 #include "fmod_errors.h"
+#include <string>
 
 class Sound
 {
@@ -12,7 +13,7 @@ private:
 public:
 	Sound::Sound(FMOD::System *system, FMOD::Channel *channel);
 	~Sound(void);
-	void Load();
+	void Load(std::string filename);
 	void Release();
 	void Play();
 };

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "PlaySoundBrick.h"
+#include "SoundManager.h"
 
 PlaySoundBrick::PlaySoundBrick(string spriteReference, string filename, string name, Script *parent) :
 	Brick(TypeOfBrick::PlaySoundBrick, spriteReference, parent),
@@ -9,5 +10,5 @@ PlaySoundBrick::PlaySoundBrick(string spriteReference, string filename, string n
 
 void PlaySoundBrick::Execute()
 {
-
+	SoundManager::Instance()->CreateOrGetSound(m_filename)->Play();
 }

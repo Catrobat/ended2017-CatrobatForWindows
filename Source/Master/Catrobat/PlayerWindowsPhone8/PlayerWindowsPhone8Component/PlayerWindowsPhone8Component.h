@@ -46,7 +46,6 @@ internal:
 private:
 	Renderer^ m_renderer;
 	ProjectRenderer^ m_projectRenderer;
-	SoundManager* m_soundmanager;
 	BasicTimer^ m_timer;
 	Windows::Foundation::Rect m_originalWindowsBounds;
 };

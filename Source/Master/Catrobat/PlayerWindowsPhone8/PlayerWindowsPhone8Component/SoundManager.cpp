@@ -2,11 +2,24 @@
 #include "SoundManager.h"
 #include "fmod.hpp"
 #include "fmod_errors.h"
+#include <map>
+
+using namespace std;
+
+SoundManager *SoundManager::__instance = NULL;
+
+SoundManager *SoundManager::Instance()
+{
+	if (!__instance)
+		__instance = new SoundManager();
+	return __instance;
+}
 
 SoundManager::SoundManager(void)
 {
 	channel = 0;
 	extradriverdata = 0;
+	m_sounds = new map<string, Sound*>();
 }
 
 void SoundManager::Initialize()
@@ -23,9 +36,19 @@ SoundManager::~SoundManager(void)
 {
 }
 
-Sound* SoundManager::CreateSound()
+Sound* SoundManager::CreateOrGetSound(std::string filename)
 {
-	Sound* result = new Sound(system, channel);
-	result->Load();
-	return result;	
+	map<string, Sound*>::iterator currentSound;
+	currentSound = m_sounds->find(filename);
+	
+	if (currentSound == m_sounds->end())
+	{
+		Sound* result = new Sound(system, channel);
+		result->Load(filename);
+		return result;
+	}
+	else
+	{
+		return currentSound->second;
+	}
 }
