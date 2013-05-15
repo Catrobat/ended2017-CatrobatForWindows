@@ -70,11 +70,11 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 			int actualX = args->CurrentPoint->Position.X;
 			int actualY = args->CurrentPoint->Position.Y;
 
-			int offsetX = (m_originalWindowsBounds.X - ProjectDaemon::Instance()->getProject()->getScreenWidth()) / 2;
-			int offsetY = (m_originalWindowsBounds.Y - ProjectDaemon::Instance()->getProject()->getScreenHeight()) / 2;
+			double factorX = abs(ProjectDaemon::Instance()->getProject()->getScreenWidth() / m_originalWindowsBounds.X);
+			double factorY = abs(ProjectDaemon::Instance()->getProject()->getScreenHeight() / m_originalWindowsBounds.Y);
 
-			int normalizedX = (abs(m_originalWindowsBounds.X / ProjectDaemon::Instance()->getProject()->getScreenWidth()) * actualX) - offsetX;
-			int normalizedY = (abs(m_originalWindowsBounds.Y / ProjectDaemon::Instance()->getProject()->getScreenHeight()) * actualY) - offsetY;
+			int normalizedX = factorX * actualX;
+			int normalizedY = factorY * actualY;
 
 			ProjectDaemon::Instance()->test.X = normalizedX;
 			ProjectDaemon::Instance()->test.Y = normalizedY;
@@ -133,7 +133,7 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	ProjectDaemon::Instance()->SetupRenderer(device, m_projectRenderer);
 
 	// Load Project
-	ProjectDaemon::Instance()->OpenProject("testProject");
+	ProjectDaemon::Instance()->OpenProject("DefaultProject");
 
 	// Restart timer after renderer has finished initializing.
 	m_timer->Reset();
