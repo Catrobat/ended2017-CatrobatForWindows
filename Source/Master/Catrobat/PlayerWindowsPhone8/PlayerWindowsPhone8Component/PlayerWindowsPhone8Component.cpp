@@ -84,8 +84,8 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 			int actualX = args->CurrentPoint->Position.X;
 			int actualY = args->CurrentPoint->Position.Y;
 
-			double factorX = abs(ProjectDaemon::Instance()->getProject()->getScreenWidth() / (m_originalWindowsBounds.X / resolutionScaleFactor));
-			double factorY = abs(ProjectDaemon::Instance()->getProject()->getScreenHeight() / (m_originalWindowsBounds.Y / resolutionScaleFactor));
+			double factorX = abs(ProjectDaemon::Instance()->getProject()->ScreenWidth() / (m_originalWindowsBounds.X / resolutionScaleFactor));
+			double factorY = abs(ProjectDaemon::Instance()->getProject()->ScreenHeight() / (m_originalWindowsBounds.Y / resolutionScaleFactor));
 
 			int normalizedX = factorX * actualX;
 			int normalizedY = factorY * actualY;		

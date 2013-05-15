@@ -12,6 +12,7 @@
 #include "GlideToBrick.h"
 #include "rapidxml\rapidxml_print.hpp"
 
+#include <time.h>
 #include <iostream>
 #include <fstream>
 
@@ -54,66 +55,168 @@ void XMLParser::parseXML(string xml)
 	doc.parse<0>(test);
 	char *str = doc.first_node()->name();
 
-	m_project = parseProjectInformation(&doc);
+	m_project = parseProjectHeader(&doc);
 	parseSpriteList(&doc, m_project->getSpriteList());
 }
 
-Project* XMLParser::parseProjectInformation(xml_document<> *doc)
+Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 {
-	// Read Project Information
-	int androidVersion, catroidVersionCode, screenHeight, screenWidth;
-	string catroidVersionName, deviceName, projectName;
+	xml_node<> *baseNode = doc->first_node("program");
+	if (!baseNode)
+		return NULL;
+	baseNode = baseNode->first_node("header");
+	if (!baseNode)
+		return NULL;
 
-	// androidVersion
-	xml_node<> *node = doc->first_node()->first_node("androidVersion");
-	if (node)
-	{
-		androidVersion = atoi(node->value());
-	}
+#pragma region Local Variables Delcaration
 
-	// catroidVersionCode
-	node = doc->first_node()->first_node("catroidVersionCode");
-	if (node)
-	{
-		catroidVersionCode = atoi(node->value());
-	}
+	string					applicationBuildName;
+	int						applicationBuildNumber;
+	string					applicationName;
+	string					applicationVersion;
+	string					catrobatLanguageVersion;
+	time_t					dateTimeUpload;
+	string					description;
+	string					deviceName;
+	string					mediaLicense;
+	string					platform;
+	int						platformVersion;
+	string					programLicense;
+	string					programName;
+	bool					programScreenshotManuallyTaken;
+	string					remixOf;
+	int						screenHeight;
+	int						screenWidth;
+	vector<string>*			tags;
+	string					url;
+	string					userHandle;
 
-	// catroiVersionName
-	node = doc->first_node()->first_node("catroidVersionName");
-	if (node)
-	{
-		catroidVersionName = node->value();
-	}
+#pragma endregion
 
-	// deviceName
-	node = doc->first_node()->first_node("deviceName");
-	if (node)
-	{
-		deviceName = node->value();
-	}
+#pragma region Project Header Nodes
+	xml_node<> *projectInformationNode = baseNode->first_node("applicationBuildName");
+	if (!projectInformationNode)
+		return NULL;
+	applicationBuildName = projectInformationNode->value();
 
-	// projectName
-	node = doc->first_node()->first_node("projectName");
-	if (node)
-	{
-		projectName = node->value();
-	}
+	projectInformationNode = baseNode->first_node("applicationBuildNumber");
+	if (!projectInformationNode)
+		return NULL;
+	applicationBuildNumber = atoi(projectInformationNode->value());
 
-	// screenHeight
-	node = doc->first_node()->first_node("screenHeight");
-	if (node)
-	{
-		screenHeight = atoi(node->value());
-	}
+	projectInformationNode = baseNode->first_node("applicationName");
+	if (!projectInformationNode)
+		return NULL;
+	applicationName = projectInformationNode->value();
 
-	// screenWidth
-	node = doc->first_node()->first_node("screenWidth");
-	if (node)
-	{
-		screenWidth = atoi(node->value());
-	}
+	projectInformationNode = baseNode->first_node("applicationVersion");
+	if (!projectInformationNode)
+		return NULL;
+	applicationVersion = projectInformationNode->value();
 
-	return new Project(androidVersion, catroidVersionCode, catroidVersionName, projectName, screenWidth, screenHeight);
+	projectInformationNode = baseNode->first_node("catrobatLanguageVersion");
+	if (!projectInformationNode)
+		return NULL;
+	catrobatLanguageVersion = projectInformationNode->value();
+
+	projectInformationNode = baseNode->first_node("dateTimeUpload");
+	if (!projectInformationNode)
+		return NULL;
+	dateTimeUpload = parseDateTime(projectInformationNode->value());
+
+	projectInformationNode = baseNode->first_node("description");
+	if (!projectInformationNode)
+		return NULL;
+	description = projectInformationNode->value();
+
+	projectInformationNode = baseNode->first_node("deviceName");
+	if (!projectInformationNode)
+		return NULL;
+	deviceName = projectInformationNode->value();
+
+	projectInformationNode = baseNode->first_node("mediaLicense");
+	if (!projectInformationNode)
+		return NULL;
+	mediaLicense = projectInformationNode->value();
+
+	projectInformationNode = baseNode->first_node("platform");
+	if (!projectInformationNode)
+		return NULL;
+	platform = projectInformationNode->value();
+
+	projectInformationNode = baseNode->first_node("platformVersion");
+	if (!projectInformationNode)
+		return NULL;
+	platformVersion = atoi(projectInformationNode->value());
+
+	projectInformationNode = baseNode->first_node("programLicense");
+	if (!projectInformationNode)
+		return NULL;
+	programLicense = projectInformationNode->value();
+
+	projectInformationNode = baseNode->first_node("programName");
+	if (!projectInformationNode)
+		return NULL;
+	programName = projectInformationNode->value();
+
+	projectInformationNode = baseNode->first_node("programScreenshotManuallyTaken");
+	if (!projectInformationNode)
+		return NULL;
+	programScreenshotManuallyTaken = parseBoolean(projectInformationNode->value());
+
+	projectInformationNode = baseNode->first_node("remixOf");
+	if (!projectInformationNode)
+		return NULL;
+	remixOf = projectInformationNode->value();
+
+	projectInformationNode = baseNode->first_node("screenHeight");
+	if (!projectInformationNode)
+		return NULL;
+	screenHeight = atoi(projectInformationNode->value());
+
+	projectInformationNode = baseNode->first_node("screenWidth");
+	if (!projectInformationNode)
+		return NULL;
+	screenWidth = atoi(projectInformationNode->value());
+
+	projectInformationNode = baseNode->first_node("tags");
+	if (!projectInformationNode)
+		return NULL;
+	tags = parseVector(projectInformationNode->value());
+
+	projectInformationNode = baseNode->first_node("url");
+	if (!projectInformationNode)
+		return NULL;
+	url = projectInformationNode->value();
+
+	projectInformationNode = baseNode->first_node("userHandle");
+	if (!projectInformationNode)
+		return NULL;
+	userHandle = projectInformationNode->value();
+
+#pragma endregion
+
+	return new Project(	applicationBuildName, 
+						applicationBuildNumber, 
+						applicationName, 
+						applicationVersion, 
+						catrobatLanguageVersion, 
+						dateTimeUpload, 
+						description, 
+						deviceName,
+						mediaLicense, 
+						platform,
+						platformVersion,
+						programLicense,
+						programName,
+						programScreenshotManuallyTaken,
+						remixOf,
+						screenHeight,
+						screenWidth, 
+						tags,
+						url,
+						userHandle
+					);
 }
 
 void XMLParser::parseSpriteList(xml_document<> *doc, SpriteList *spriteList)
@@ -480,4 +583,24 @@ Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script *script)
 
 	string spriteReference = spriteReferenceAttribute->value();
 	return new PlaySoundBrick(spriteReference, filename, name, script);
+}
+
+bool XMLParser::parseBoolean(string input)
+{
+	if (input.compare("true") == 0)
+		return true;
+	else
+		return false;
+}
+
+vector<string> *XMLParser::parseVector(string input)
+{
+	return new vector<string>();
+}
+
+time_t XMLParser::parseDateTime(string input)
+{
+	time_t now;
+	time(&now);
+	return now;
 }

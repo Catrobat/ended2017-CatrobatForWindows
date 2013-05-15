@@ -167,7 +167,6 @@
     <ClInclude Include="PointToBrick.h" />
     <ClInclude Include="Project.h" />
     <ClInclude Include="ProjectDaemon.h" />
-    <ClInclude Include="ProjectParser.h" />
     <ClInclude Include="ProjectRenderer.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="DirectXHelper.h" />
@@ -214,7 +213,6 @@
     <ClCompile Include="PointToBrick.cpp" />
     <ClCompile Include="Project.cpp" />
     <ClCompile Include="ProjectDaemon.cpp" />
-    <ClCompile Include="ProjectParser.cpp" />
     <ClCompile Include="ProjectRenderer.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Direct3DBase.cpp" />
