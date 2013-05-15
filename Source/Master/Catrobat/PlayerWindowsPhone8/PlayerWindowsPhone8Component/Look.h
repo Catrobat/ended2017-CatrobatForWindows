@@ -4,14 +4,15 @@
 #include <D3D11.h>
 
 #include "DDSTextureLoader.h"
+#include "TextureDaemon.h"
 
 using namespace std;
 
-class LookData
+class Look
 {
 public:
-	LookData(string filename, string name);
-	~LookData();
+	Look(string filename, string name);
+	~Look();
 
 	void LoadTexture(ID3D11Device* d3dDevice);
 	ID3D11ShaderResourceView *Texture();
@@ -23,9 +24,7 @@ public:
 	unsigned int Height();
 
 private:
-	ID3D11ShaderResourceView* m_texture;
-	unsigned int m_width;
-	unsigned int m_height;
+	CatrobatTexture *m_texture;
 	string m_filename;
 	string m_name;
 };

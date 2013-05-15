@@ -3,7 +3,7 @@
 #include <string>
 #include <list>
 
-#include "LookData.h"
+#include "Look.h"
 #include "Script.h"
 #include "SoundInfo.h"
 
@@ -17,17 +17,17 @@ struct Bounds
 	float height;
 };
 
-class Sprite : BaseObject
+class Object : BaseObject
 {
 public:
-	Sprite(string name);
-	~Sprite();
+	Object(string name);
+	~Object();
 
-	void addLookData(LookData *lookData);
+	void addLook(Look *lookData);
 	void addScript(Script *script);
 	void addSoundInfo(SoundInfo *soundInfo);
 
-	void LoadTextures(ID3D11Device* d3dDevice, Windows::Foundation::Rect *windowBounds);
+	void LoadTextures(ID3D11Device* d3dDevice);
 	void Draw(SpriteBatch *spriteBatch);
 	void StartUp();
 
@@ -36,9 +36,9 @@ public:
 	string getName();
 
 	int LookDataListSize();
-	LookData *getLookData(int index);
-	void SetLookData(int index);
-	LookData* GetCurrentLookData();
+	Look *getLook(int index);
+	void SetLook(int index);
+	Look* GetCurrentLook();
 
 	void SetPosition(float x, float y);
 	void GetPosition(float &x, float &y);
@@ -46,12 +46,17 @@ public:
 	Bounds getBounds();
 
 	void SetTransparency(float transparency);
+	void SetRotation(float rotation);
+	float GetRotation();
+	void SetScale(float scale);
+	float GetScale();
 
 private:
-	LookData *m_lookData;
-	list<LookData*> *m_lookDatas;
+	Look *m_look;
+	list<Look*> *m_lookList;
 	list<Script*> *m_scripts;
 	list<SoundInfo*> *m_soundInfos;
 	string m_name;
-	float m_transparency;
+	float m_opacity;
+	float m_rotation;
 };

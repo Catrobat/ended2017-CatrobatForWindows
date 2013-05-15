@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class Sprite;
+class Object;
 class Script
 {
 public:
@@ -18,7 +18,7 @@ public:
 		WhenScript
 	};
 
-	Sprite *Parent();
+	Object *Parent();
 
 	void addBrick(Brick *brick);
 	void addSpriteReference(string spriteReference);
@@ -33,12 +33,12 @@ public:
 	TypeOfScript getType();
 
 protected:
-	Script(TypeOfScript scriptType, string spriteReference, Sprite *parent);
+	Script(TypeOfScript scriptType, string spriteReference, Object *parent);
 
 	list<Brick*> *m_brickList;
 
 private:
-	Sprite *m_parent;
+	Object *m_parent;
 	TypeOfScript m_scriptType;
 	string m_spriteReference;
 };

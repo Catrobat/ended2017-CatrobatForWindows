@@ -16,7 +16,20 @@ public:
 		WaitBrick,
 		PlaceAtBrick,
 		SetGhostEffectBrick,
-		PlaySoundBrick
+		PlaySoundBrick,
+		TurnLeftBrick,
+		ForeverBrick,
+		HideBrick,
+		ShowBrick,
+		SetSizeToBrick,
+		ChangeSizeByBrick,
+		TurnRightBrick,
+		SetXBrick,
+		SetYBrick,
+		ChangeXByBrick,
+		ChangeYByBrick,
+		GlideToBrick,
+		PointToBrick
 	};
 
 	Script *Parent();

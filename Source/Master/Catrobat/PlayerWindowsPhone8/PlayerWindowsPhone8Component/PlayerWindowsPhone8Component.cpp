@@ -2,24 +2,23 @@
 #include "PlayerWindowsPhone8Component.h"
 #include "Direct3DContentProvider.h"
 #include "XMLParser.h"
-#include "ProjectParser.h"
 #include "ProjectDaemon.h"
 #include "ScriptHandler.h"
 #include "WhenScript.h"
 #include "lodepng.h"
 #include "lodepng_util.h"
 #include "DDSLoader.h"
-
-
 #include <windows.system.threading.h>
 #include <windows.foundation.h>
 #include <thread>
+#include <math.h>
 
 using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
 using namespace Microsoft::WRL;
 using namespace Windows::Phone::Graphics::Interop;
 using namespace Windows::Phone::Input::Interop;
+using namespace Windows::Graphics::Display;
 
 namespace PhoneDirect3DXamlAppComponent
 {
@@ -55,25 +54,46 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 	if (!ProjectDaemon::Instance()->FinishedLoading())
 		return;
 	Project* project = ProjectDaemon::Instance()->getProject();
-	SpriteList* sprites = project->getSpriteList();
-	for (int i = sprites->Size() - 1; i >= 0; i--)
+	ObjectList* objects = project->getObjectList();
+	for (int i = objects->Size() - 1; i >= 0; i--)
 	{
 		D3D11_SHADER_RESOURCE_VIEW_DESC data;
 
 		/*sprites->getSprite(i)->GetCurrentLookData()->Texture()->GetDesc(&data);
 		data.ViewDimension.Value*/
 
-		Bounds bounds = sprites->getSprite(i)->getBounds();
+		Bounds bounds = objects->getObject(i)->getBounds();
+		bounds.x += ProjectDaemon::Instance()->getProject()->ScreenWidth() / 2;
+		bounds.y += ProjectDaemon::Instance()->getProject()->ScreenHeight() / 2;
 		//if (args->CurrentPoint GetIntermediatePoints()->Size > 0)
 		{
-			int x = args->CurrentPoint->Position.X;
-			int y = args->CurrentPoint->Position.Y;
+			float resolutionScaleFactor;
+			switch (DisplayProperties::ResolutionScale) {
+				case ResolutionScale::Scale100Percent:
+					resolutionScaleFactor = 1.0f;
+					break;
+				case ResolutionScale::Scale150Percent:
+					resolutionScaleFactor = 1.5f;
+					break;
+				case ResolutionScale::Scale160Percent:
+					resolutionScaleFactor = 1.6f;
+					break;
+			}
 
-			if (bounds.x <= x && bounds.y <= y && (bounds.x + bounds.width) >= x && (bounds.y + bounds.height) >= y)
+			int actualX = args->CurrentPoint->Position.X;
+			int actualY = args->CurrentPoint->Position.Y;
+
+			double factorX = abs(ProjectDaemon::Instance()->getProject()->ScreenWidth() / (m_originalWindowsBounds.X / resolutionScaleFactor));
+			double factorY = abs(ProjectDaemon::Instance()->getProject()->ScreenHeight() / (m_originalWindowsBounds.Y / resolutionScaleFactor));
+
+			int normalizedX = factorX * actualX;
+			int normalizedY = factorY * actualY;		
+
+			if (bounds.x <= normalizedX && bounds.y <= normalizedY && (bounds.x + bounds.width) >= normalizedX && (bounds.y + bounds.height) >= normalizedY)
 			{
-				for (int j = 0; j < sprites->getSprite(i)->ScriptListSize(); j++)
+				for (int j = 0; j < objects->getObject(i)->ScriptListSize(); j++)
 				{
-					Script *script = sprites->getSprite(i)->getScript(j);
+					Script *script = objects->getObject(i)->getScript(j);
 					if (script->getType() == Script::TypeOfScript::WhenScript)
 					{
 						WhenScript *wScript = (WhenScript *) script; 
@@ -113,15 +133,14 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	m_renderer->Initialize(device);
 
 	// Initialize Sound
-	m_soundmanager = new SoundManager();
-	m_soundmanager->Initialize();
+	SoundManager::Instance()->Initialize();
 
 	//Initialize Project Renderer
 	m_projectRenderer = ref new ProjectRenderer();
 	ProjectDaemon::Instance()->SetupRenderer(device, m_projectRenderer);
 
 	// Load Project
-	ProjectDaemon::Instance()->OpenProject("testProject");
+	ProjectDaemon::Instance()->OpenProject("835");
 
 	// Restart timer after renderer has finished initializing.
 	m_timer->Reset();
@@ -131,12 +150,11 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 
 void Direct3DBackground::Disconnect()
 {
-	free(m_soundmanager);
-	m_soundmanager = nullptr;
 	m_renderer = nullptr;
 	m_projectRenderer = nullptr;
 }
 
+static bool test = false;
 HRESULT Direct3DBackground::PrepareResources(_In_ const LARGE_INTEGER* presentTargetTime, _Inout_ DrawingSurfaceSizeF* desiredRenderTargetSize)
 {
 	m_timer->Update();
@@ -144,7 +162,13 @@ HRESULT Direct3DBackground::PrepareResources(_In_ const LARGE_INTEGER* presentTa
 	m_projectRenderer->Update(m_timer->Total, m_timer->Delta);
 
 	// Save this for later
-	ProjectDaemon::Instance()->SetDesiredRenderTargetSize(desiredRenderTargetSize);
+	if (!test)
+	{
+		m_originalWindowsBounds.X = desiredRenderTargetSize->width;
+		m_originalWindowsBounds.Y = desiredRenderTargetSize->height;
+		ProjectDaemon::Instance()->SetDesiredRenderTargetSize(desiredRenderTargetSize);
+		test = true;
+	}
 	
 	// This would set the desiredRenderTargetSize to the right values BUT we want the loading screen to be 
 	// handled with the Device Standard DRTS
@@ -168,21 +192,6 @@ HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceCo
 		// Render Project
 		m_projectRenderer->UpdateDevice(device, context, renderTargetView);
 		m_projectRenderer->Render();
-	}
-
-
-	static bool test = false;
-
-	if (!test)
-	{
-		//std::thread* thr = new std::thread(FMOD_Main);
-		//thr->join();
-		//FMOD_Main();
-
-		Sound *sound = m_soundmanager->CreateSound(/* Parameters */);
-		//sound->Play();
-
-		test = true;
 	}
 
 	RequestAdditionalFrame();

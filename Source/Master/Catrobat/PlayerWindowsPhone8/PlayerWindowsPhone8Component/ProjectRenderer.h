@@ -2,9 +2,11 @@
 
 #include "Direct3DBase.h"
 #include "SpriteBatch.h"
+#include "PrimitiveBatch.h"
 #include "SpriteFont.h"
 #include "Project.h"
 #include "ProjectRenderer.h"
+#include "VertexTypes.h" 
 
 ref class ProjectRenderer sealed : public Direct3DBase
 {

@@ -37,7 +37,6 @@ public:
 	void SetError(Error error);
 	std::vector<std::string> *ErrorList();
 
-
 private:
 	ProjectDaemon();
 	ProjectDaemon(ProjectDaemon const&);            

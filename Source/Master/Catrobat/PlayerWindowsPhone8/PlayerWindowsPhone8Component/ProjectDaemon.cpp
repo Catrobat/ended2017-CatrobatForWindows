@@ -135,7 +135,7 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 				string pathString(tempPath.begin(), tempPath.end());
 				m_projectPath = pathString;
 
-				IAsyncOperation<Windows::Storage::StorageFile^>^ getFiles = folderContent->GetFileAsync("projectcode.xml");
+				IAsyncOperation<Windows::Storage::StorageFile^>^ getFiles = folderContent->GetFileAsync("code.xml");
 				getFiles->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFile^>
 				(
 					[this](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile^>^ operation, Windows::Foundation::AsyncStatus status)
@@ -193,8 +193,8 @@ void ProjectDaemon::SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRende
 
 void ProjectDaemon::ApplyDesiredRenderTargetSizeFromProject()
 {
-	m_desiredRenderTargetSize->width = m_project->getScreenWidth();
-	m_desiredRenderTargetSize->height = m_project->getScreenHeight();
+	m_desiredRenderTargetSize->width = m_project->ScreenWidth();
+	m_desiredRenderTargetSize->height = m_project->ScreenHeight();
 }
 
 void ProjectDaemon::SetupRenderer(ID3D11Device1 *device, ProjectRenderer^ renderer)

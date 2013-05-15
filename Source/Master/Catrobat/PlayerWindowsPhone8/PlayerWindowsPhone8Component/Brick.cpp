@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Brick.h"
 #include "Script.h"
-#include "Sprite.h"
+#include "Object.h"
 #include "CostumeBrick.h"
 
 #include <windows.system.threading.h>

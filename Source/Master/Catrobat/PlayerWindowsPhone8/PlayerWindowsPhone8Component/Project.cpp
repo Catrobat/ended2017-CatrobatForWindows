@@ -1,69 +1,87 @@
 #include "pch.h"
 #include "Project.h"
 
-
-Project::Project(int androidVersion, int catroidVersionCode, string catroidVersionName, string projectName, int screenWidth, int screenHeight) :
-	m_androidVersion(androidVersion), m_catroidVersionCode(catroidVersionCode), m_catroidVersionName(catroidVersionName),
-	m_projectName(projectName), m_screenWidth(screenWidth), m_screenHeight(screenHeight)
+Project::Project(
+	string								applicationBuildName,
+	int									applicationBuildNumber,
+	string								applicationName,
+	string								applicationVersion,
+	string								catrobatLanguageVersion,
+	time_t								dateTimeUpload,
+	string								description,
+	string								deviceName,
+	string								mediaLicense,
+	string								platform,
+	int									platformVersion,
+	string								programLicense,
+	string								programName,
+	bool								programScreenshotManuallyTaken,
+	string								remixOf,
+	int									screenHeight,
+	int									screenWidth,
+	vector<string>*						tags,
+	string								url,
+	string								userHandle
+	) :
+	m_applicationBuildName				(applicationBuildName),
+	m_applicationBuildNumber			(applicationBuildNumber),
+	m_applicationName					(applicationName),
+	m_applicationVersion				(applicationVersion),
+	m_catrobatLanguageVersion			(catrobatLanguageVersion),
+	m_dateTimeUpload					(dateTimeUpload),
+	m_description						(description),
+	m_deviceName						(deviceName),
+	m_mediaLicense						(mediaLicense),
+	m_platform							(platform),
+	m_platformVersion					(platformVersion),
+	m_programLicense					(programLicense),
+	m_programName						(programName),
+	m_programScreenshotManuallyTaken	(programScreenshotManuallyTaken),
+	m_remixOf							(remixOf),
+	m_screenHeight						(screenHeight),
+	m_screenWidth						(screenWidth),	
+	m_tags								(tags),
+	m_url								(url),
+	m_userHandle						(userHandle)
 {
-	m_spriteList = new SpriteList();
+	m_objectList = new ObjectList();
 }
 
-int Project::getAndroidVersion()
-{
-	return m_androidVersion;
-}
-
-int Project::getCatroidVersionCode()
-{
-	return m_catroidVersionCode;
-}
-
-string Project::getCatroidVersionName()
-{
-	return m_catroidVersionName;
-}
-
-string Project::getProjectName()
-{
-	return m_projectName;
-}
-
-int Project::getScreenWidth()
-{
-	return m_screenWidth;
-}
-
-int Project::getScreenHeight()
+int Project::ScreenHeight()
 {
 	return m_screenHeight;
 }
 
-SpriteList *Project::getSpriteList()
+int	Project::ScreenWidth()
 {
-	return m_spriteList;
+	return m_screenWidth;
+}
+
+ObjectList *Project::getObjectList()
+{
+	return m_objectList;
 }
 
 void Project::Render(SpriteBatch *spriteBatch)
 {
-	for (int i = 0; i < m_spriteList->Size(); i++)
+	for (int i = 0; i < m_objectList->Size(); i++)
 	{
-		m_spriteList->getSprite(i)->Draw(spriteBatch);
+		m_objectList->getObject(i)->Draw(spriteBatch);
 	}
 }
 
-void Project::LoadTextures(ID3D11Device* d3dDevice, Windows::Foundation::Rect *windowBounds)
+void Project::LoadTextures(ID3D11Device* d3dDevice)
 {
-	for (int i = 0; i < m_spriteList->Size(); i++)
+	for (int i = 0; i < m_objectList->Size(); i++)
 	{
-		m_spriteList->getSprite(i)->LoadTextures(d3dDevice, windowBounds);
+		m_objectList->getObject(i)->LoadTextures(d3dDevice);
 	}
 }
 
 void Project::StartUp()
 {	
-	for (int i = 0; i < m_spriteList->Size(); i++)
+	for (int i = 0; i < m_objectList->Size(); i++)
 	{
-		m_spriteList->getSprite(i)->StartUp();
+		m_objectList->getObject(i)->StartUp();
 	}
 }
