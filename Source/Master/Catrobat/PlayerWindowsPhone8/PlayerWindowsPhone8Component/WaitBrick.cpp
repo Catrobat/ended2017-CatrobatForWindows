@@ -4,11 +4,11 @@
 #include <ppltasks.h>
 
 WaitBrick::WaitBrick(string spriteReference, int timeToWaitInMilliSeconds, Script *parent) :
-	Brick(TypeOfBrick::WaitBrick, spriteReference, parent), m_timeToWaitInMilliSeconds(timeToWaitInMilliSeconds)
+	Brick(TypeOfBrick::WaitBrick, spriteReference, parent), m_timeToWaitInSeconds(timeToWaitInMilliSeconds)
 {
 }
 
 void WaitBrick::Execute()
 {
-	Concurrency::wait(m_timeToWaitInMilliSeconds);
+	Concurrency::wait(m_timeToWaitInSeconds * 1000);
 }
