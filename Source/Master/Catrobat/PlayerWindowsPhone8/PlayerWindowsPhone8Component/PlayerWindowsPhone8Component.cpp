@@ -64,8 +64,8 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 		data.ViewDimension.Value*/
 
 		Bounds bounds = sprites->getSprite(i)->getBounds();
-		bounds.x += ProjectDaemon::Instance()->getProject()->getScreenWidth() / 2;
-		bounds.y += ProjectDaemon::Instance()->getProject()->getScreenHeight() / 2;
+		bounds.x += ProjectDaemon::Instance()->getProject()->ScreenWidth() / 2;
+		bounds.y += ProjectDaemon::Instance()->getProject()->ScreenHeight() / 2;
 		//if (args->CurrentPoint GetIntermediatePoints()->Size > 0)
 		{
 			float resolutionScaleFactor;
@@ -141,7 +141,7 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	ProjectDaemon::Instance()->SetupRenderer(device, m_projectRenderer);
 
 	// Load Project
-	ProjectDaemon::Instance()->OpenProject("Piano");
+	ProjectDaemon::Instance()->OpenProject("835");
 
 	// Restart timer after renderer has finished initializing.
 	m_timer->Reset();
