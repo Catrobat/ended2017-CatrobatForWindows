@@ -39,4 +39,5 @@ private:
 	Brick *parseGlideToBrick(xml_node<> *baseNode, Script *script);
 	Brick *parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script);
 	Brick *parsePlaySoundBrick(xml_node<> *baseNode, Script *script);
+	Brick *parseTurnLeftBrick(xml_node<> *baseNode, Script *script);
 };

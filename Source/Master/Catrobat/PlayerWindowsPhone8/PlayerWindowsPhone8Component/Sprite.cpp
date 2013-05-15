@@ -5,9 +5,10 @@
 Sprite::Sprite(string name) :
 	BaseObject(),
 	m_name(name),
-	m_transparency(1)
+	m_transparency(1),
+	m_rotation(0.0f),
+	m_lookData(NULL)
 {
-	m_lookData = NULL;
 	m_lookDatas = new list<LookData*>();
 	m_scripts = new list<Script*>();
 	m_soundInfos = new list<SoundInfo*>();
@@ -68,6 +69,11 @@ void Sprite::LoadTextures(ID3D11Device* d3dDevice)
 	}
 }
 
+double radians(float degree)
+{
+	return degree * 3.14159265 / 180;
+}
+
 void Sprite::Draw(SpriteBatch *spriteBatch)
 {
 	if (m_lookData == NULL)
@@ -80,7 +86,7 @@ void Sprite::Draw(SpriteBatch *spriteBatch)
 	position.y = ProjectDaemon::Instance()->getProject()->getScreenHeight() / 2 + m_position.y;
 
 	if (m_lookData != NULL)
-		spriteBatch->Draw(m_lookData->Texture(), position, nullptr, Colors::White * m_transparency, 0.0f, XMFLOAT2(m_lookData->Width() / 2, m_lookData->Height() / 2), m_objectScale, SpriteEffects_None, 0.0f);
+		spriteBatch->Draw(m_lookData->Texture(), position, nullptr, Colors::White * m_transparency, radians(m_rotation), XMFLOAT2(m_lookData->Width() / 2, m_lookData->Height() / 2), m_objectScale, SpriteEffects_None, 0.0f);
 }
 
 void Sprite::SetLookData(int index)
@@ -129,4 +135,9 @@ void Sprite::GetPosition(float &x, float &y)
 void Sprite::SetTransparency(float transparency)
 {
 	m_transparency = transparency;
+}
+
+void Sprite::SetRotation(float rotation)
+{
+	m_rotation = rotation;
 }

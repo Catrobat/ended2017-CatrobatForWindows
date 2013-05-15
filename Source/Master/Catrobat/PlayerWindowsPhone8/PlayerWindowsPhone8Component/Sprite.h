@@ -46,6 +46,7 @@ public:
 	Bounds getBounds();
 
 	void SetTransparency(float transparency);
+	void SetRotation(float rotation);
 
 private:
 	LookData *m_lookData;
@@ -54,4 +55,5 @@ private:
 	list<SoundInfo*> *m_soundInfos;
 	string m_name;
 	float m_transparency;
+	float m_rotation;
 };

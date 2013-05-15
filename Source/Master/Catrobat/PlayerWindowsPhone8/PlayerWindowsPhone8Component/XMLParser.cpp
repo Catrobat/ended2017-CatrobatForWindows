@@ -8,6 +8,7 @@
 #include "SetGhostEffectBrick.h"
 #include "PlaceAtBrick.h"
 #include "PlaySoundBrick.h"
+#include "TurnLeftBrick.h"
 #include "GlideToBrick.h"
 #include "rapidxml\rapidxml_print.hpp"
 
@@ -299,6 +300,10 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 		{
 			script->addBrick(parseGlideToBrick(node, script));
 		}
+		else if(strcmp(node->name(), "Bricks.TurnLeftBrick") == 0)
+		{
+			script->addBrick(parseTurnLeftBrick(node, script));
+		}
 		node = node->next_sibling();
 	}
 }
@@ -428,6 +433,25 @@ Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
 
 	string spriteReference = spriteReferenceAttribute->value();
 	return new SetGhostEffectBrick(spriteReference, transparency, script);
+}
+
+Brick *XMLParser::parseTurnLeftBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("degrees");
+	if (!node)
+		return NULL;
+	float rotation = atof(node->value());
+
+	node = baseNode->first_node("sprite");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *spriteReferenceAttribute = node->first_attribute("reference");
+	if (!spriteReferenceAttribute)
+		return NULL;
+
+	string spriteReference = spriteReferenceAttribute->value();
+	return new TurnLeftBrick(spriteReference, rotation, script);
 }
 
 Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script *script)
