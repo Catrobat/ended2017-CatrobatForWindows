@@ -4,9 +4,9 @@
 #include <rapidxml\rapidxml.hpp>
 
 #include "Project.h"
-#include "SpriteList.h"
-#include "Sprite.h"
-#include "LookData.h"
+#include "ObjectList.h"
+#include "Object.h"
+#include "Look.h"
 #include "Brick.h"
 
 using namespace std;
@@ -28,9 +28,12 @@ private:
 	// Parser
 	void						parseXML					(string xml);
 	Project*					parseProjectHeader			(xml_document<> *doc);
-	void						parseSpriteList				(xml_document<> *doc, SpriteList *spriteList);
-	Sprite*						parseSprite					(xml_node<> *baseNode);
-	LookData*					parseLookData				(xml_node<> *baseNode);
+	void						parseObjectList				(xml_document<> *doc, ObjectList *objectList);
+	Object*						parseObject					(xml_node<> *baseNode);
+	Look*						parseLook					(xml_node<> *baseNode);
+	// ----------------------------------------------------------------------------------------------------------------------------------
+	
+	
 	Script*						parseStartScript			(xml_node<> *baseNode, Sprite *sprite);
 	Script*						parseBroadcastScript		(xml_node<> *baseNode, Sprite *sprite);
 	Script*						parseWhenScript				(xml_node<> *baseNode, Sprite *sprite);

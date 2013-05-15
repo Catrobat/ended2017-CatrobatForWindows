@@ -56,7 +56,7 @@ void XMLParser::parseXML(string xml)
 	char *str = doc.first_node()->name();
 
 	m_project = parseProjectHeader(&doc);
-	parseSpriteList(&doc, m_project->getSpriteList());
+	parseObjectList(&doc, m_project->getSpriteList());
 }
 
 Project* XMLParser::parseProjectHeader(xml_document<> *doc)
@@ -219,99 +219,102 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 					);
 }
 
-void XMLParser::parseSpriteList(xml_document<> *doc, SpriteList *spriteList)
+void XMLParser::parseObjectList(xml_document<> *doc, ObjectList *objectList)
 {
-	xml_node<> *spriteListNode = doc->first_node()->first_node("spriteList");
-	if (!spriteListNode)
+	xml_node<> *objectListNode = doc->first_node()->first_node("objectList");
+	if (!objectListNode)
 		return;
 
-	xml_node<> *node = spriteListNode->first_node("Content.Sprite");
+	xml_node<> *node = objectListNode->first_node("object");
 	while (node)
 	{
-		spriteList->addSprite(parseSprite(node));
-		node = node->next_sibling("Content.Sprite");
+		objectList->addObject(parseObject(node));
+		node = node->next_sibling("object");
 	}
 }
 
-Sprite *XMLParser::parseSprite(xml_node<> *baseNode)
+Sprite *XMLParser::parseObject(xml_node<> *baseNode)
 {
 	xml_node<> *node = baseNode->first_node("name");
 	if (!node)
 		return NULL;
 
-	Sprite *sprite = new Sprite(node->value());
+	Object *object = new Object(node->value());
 
 	node = baseNode->first_node();
 	while (node)
 	{
-		string test = node->name();
-		if (strcmp(node->name(), "costumeDataList") == 0)
+		if (strcmp(node->name(), "lookList") == 0)
 		{
-			xml_node<> *costumeDataNode = node->first_node("Common.CostumeData");
-			while (costumeDataNode)
+			#pragma region lookList
+			xml_node<> *lookNode = node->first_node("look");
+			while (lookNode)
 			{
-				sprite->addLookData(parseLookData(costumeDataNode));
-				costumeDataNode = costumeDataNode->next_sibling("Common.CostumeData");
+				object->addLook(parseLookData(lookNode));
+				lookNode = lookNode->next_sibling("look");
 			}
+			#pragma endregion
 		}
 		else if (strcmp(node->name(), "scriptList") == 0)
 		{
+			#pragma region scriptList
 			xml_node<> *scriptListNode = node->first_node();
 			while (scriptListNode)
 			{
-				if (strcmp(scriptListNode->name(), "Content.StartScript") == 0)
+				if (strcmp(scriptListNode->name(), "startScript") == 0)
 				{
-					sprite->addScript(parseStartScript(scriptListNode, sprite));
+					object->addScript(parseStartScript(scriptListNode, object));
 				}
-				else if (strcmp(scriptListNode->name(), "Content.BroadcastScript") == 0)
+				else if (strcmp(scriptListNode->name(), "broadcastScript") == 0)
 				{
-					sprite->addScript(parseBroadcastScript(scriptListNode, sprite));
+					object->addScript(parseBroadcastScript(scriptListNode, object));
 				}
-				else if (strcmp(scriptListNode->name(), "Content.WhenScript") == 0)
+				else if (strcmp(scriptListNode->name(), "whenScript") == 0)
 				{
-					sprite->addScript(parseWhenScript(scriptListNode, sprite));
+					object->addScript(parseWhenScript(scriptListNode, object));
 				}
 
 				scriptListNode = scriptListNode->next_sibling();
 			}
+			#pragma endregion
 		}
 		else if (strcmp(node->name(), "soundList") == 0)
 		{
+			#pragma region soundList
 			xml_node<> *soundListNode = node->first_node();
 			while (soundListNode)
 			{
 				xml_attribute<> *soundInfoAttribute = soundListNode->first_attribute("reference");
 				if (!soundInfoAttribute)
 					continue;
-				sprite->addSoundInfo(new SoundInfo(soundInfoAttribute->value()));
+				object->addSoundInfo(new SoundInfo(soundInfoAttribute->value()));
 				soundListNode = soundListNode->next_sibling();
 			}
+			#pragma endregion
 		}
 		node = node->next_sibling();
 	}
 
-	return sprite;
+	return object;
 }
 
-LookData *XMLParser::parseLookData(xml_node<> *baseNode)
+LookData *XMLParser::parseLook(xml_node<> *baseNode)
 {
 	string filename, name;
 	xml_node<> *node;
-	string test = baseNode->name();
+
 	node = baseNode->first_node("fileName");
 	if (!node)
 		return NULL;
-
 	filename = node->value();
 
 	node = baseNode->first_node("name");
 	if (!node)
 		return NULL;
-
 	name = node->value();
 
-	LookData *lookData = new LookData(filename, name);
-	return lookData;
+	Look *look = new Look(filename, name);
+	return look;
 }
 
 Script *XMLParser::parseStartScript(xml_node<> *baseNode, Sprite *sprite)
