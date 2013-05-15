@@ -54,6 +54,6 @@ private:
 	list<Script*> *m_scripts;
 	list<SoundInfo*> *m_soundInfos;
 	string m_name;
-	float m_transparency;
+	float m_opacity;
 	float m_rotation;
 };
