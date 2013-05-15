@@ -14,6 +14,7 @@
 #include <windows.system.threading.h>
 #include <windows.foundation.h>
 #include <thread>
+#include <math.h>
 
 using namespace Windows::Foundation;
 using namespace Windows::UI::Core;
@@ -66,10 +67,21 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 		Bounds bounds = sprites->getSprite(i)->getBounds();
 		//if (args->CurrentPoint GetIntermediatePoints()->Size > 0)
 		{
-			int x = args->CurrentPoint->Position.X;
-			int y = args->CurrentPoint->Position.Y;
+			int actualX = args->CurrentPoint->Position.X;
+			int actualY = args->CurrentPoint->Position.Y;
 
-			if (bounds.x <= x && bounds.y <= y && (bounds.x + bounds.width) >= x && (bounds.y + bounds.height) >= y)
+			int offsetX = (m_originalWindowsBounds.X - ProjectDaemon::Instance()->getProject()->getScreenWidth()) / 2;
+			int offsetY = (m_originalWindowsBounds.Y - ProjectDaemon::Instance()->getProject()->getScreenHeight()) / 2;
+
+			int normalizedX = (abs(m_originalWindowsBounds.X / ProjectDaemon::Instance()->getProject()->getScreenWidth()) * actualX) - offsetX;
+			int normalizedY = (abs(m_originalWindowsBounds.Y / ProjectDaemon::Instance()->getProject()->getScreenHeight()) * actualY) - offsetY;
+
+			ProjectDaemon::Instance()->test.X = normalizedX;
+			ProjectDaemon::Instance()->test.Y = normalizedY;
+
+			
+
+			if (bounds.x <= normalizedX && bounds.y <= normalizedY && (bounds.x + bounds.width) >= normalizedX && (bounds.y + bounds.height) >= normalizedY)
 			{
 				for (int j = 0; j < sprites->getSprite(i)->ScriptListSize(); j++)
 				{
@@ -137,6 +149,7 @@ void Direct3DBackground::Disconnect()
 	m_projectRenderer = nullptr;
 }
 
+static bool test = false;
 HRESULT Direct3DBackground::PrepareResources(_In_ const LARGE_INTEGER* presentTargetTime, _Inout_ DrawingSurfaceSizeF* desiredRenderTargetSize)
 {
 	m_timer->Update();
@@ -144,7 +157,13 @@ HRESULT Direct3DBackground::PrepareResources(_In_ const LARGE_INTEGER* presentTa
 	m_projectRenderer->Update(m_timer->Total, m_timer->Delta);
 
 	// Save this for later
-	ProjectDaemon::Instance()->SetDesiredRenderTargetSize(desiredRenderTargetSize);
+	if (!test)
+	{
+		m_originalWindowsBounds.X = desiredRenderTargetSize->width;
+		m_originalWindowsBounds.Y = desiredRenderTargetSize->height;
+		ProjectDaemon::Instance()->SetDesiredRenderTargetSize(desiredRenderTargetSize);
+		test = true;
+	}
 	
 	// This would set the desiredRenderTargetSize to the right values BUT we want the loading screen to be 
 	// handled with the Device Standard DRTS
