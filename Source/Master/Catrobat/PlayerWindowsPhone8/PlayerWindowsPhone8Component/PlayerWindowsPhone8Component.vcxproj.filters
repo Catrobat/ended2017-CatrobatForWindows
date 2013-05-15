@@ -95,8 +95,8 @@
     <ClCompile Include="ProjectRenderer.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="TurnLeftBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
+    <ClCompile Include="TextureDaemon.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -200,8 +200,8 @@
     <ClInclude Include="ProjectRenderer.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="TurnLeftBrick.h">
-      <Filter>Objects\Bricks</Filter>
+    <ClInclude Include="TextureDaemon.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

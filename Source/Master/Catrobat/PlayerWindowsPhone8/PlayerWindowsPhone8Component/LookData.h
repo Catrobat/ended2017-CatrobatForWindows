@@ -4,6 +4,7 @@
 #include <D3D11.h>
 
 #include "DDSTextureLoader.h"
+#include "TextureDaemon.h"
 
 using namespace std;
 
@@ -23,9 +24,7 @@ public:
 	unsigned int Height();
 
 private:
-	ID3D11ShaderResourceView* m_texture;
-	unsigned int m_width;
-	unsigned int m_height;
+	CatrobatTexture *m_texture;
 	string m_filename;
 	string m_name;
 };

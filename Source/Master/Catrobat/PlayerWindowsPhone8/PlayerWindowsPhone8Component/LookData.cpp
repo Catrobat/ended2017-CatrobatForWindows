@@ -10,6 +10,7 @@ using namespace DirectX;
 LookData::LookData(string filename, string name) :
 	m_filename(filename), m_name(name)
 {
+	m_texture = new CatrobatTexture();
 }
 
 string LookData::Name()
@@ -19,12 +20,12 @@ string LookData::Name()
 
 unsigned int LookData::Width()
 {
-	return m_width;
+	return m_texture->width;
 }
 
 unsigned int LookData::Height()
 {
-	return m_height;
+	return m_texture->height;
 }
 
 string LookData::FileName()
@@ -34,11 +35,10 @@ string LookData::FileName()
 
 void LookData::LoadTexture(ID3D11Device* d3dDevice)
 {
-	m_filename = ProjectDaemon::Instance()->ProjectPath() + "/images/" + m_filename;
-	DDSLoader::LoadTexture(d3dDevice, m_filename, &m_texture, &m_width, &m_height);
+	TextureDaemon::Instance()->LoadTexture(d3dDevice, &m_texture, m_filename);
 }
 
 ID3D11ShaderResourceView *LookData::Texture()
 {
-	return m_texture;
+	return m_texture->texture;
 }

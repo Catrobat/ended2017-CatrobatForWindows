@@ -179,6 +179,7 @@
     <ClInclude Include="SpriteList.h" />
     <ClInclude Include="StartScript.h" />
     <ClInclude Include="TurnLeftBrick.h" />
+    <ClInclude Include="TextureDaemon.h" />
     <ClInclude Include="WaitBrick.h" />
     <ClInclude Include="WhenScript.h" />
     <ClInclude Include="XMLParser.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="SpriteList.cpp" />
     <ClCompile Include="StartScript.cpp" />
     <ClCompile Include="TurnLeftBrick.cpp" />
+    <ClCompile Include="TextureDaemon.cpp" />
     <ClCompile Include="WaitBrick.cpp" />
     <ClCompile Include="WhenScript.cpp" />
     <ClCompile Include="XMLParser.cpp" />
