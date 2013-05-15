@@ -17,7 +17,8 @@ public:
 		PlaceAtBrick,
 		SetGhostEffectBrick,
 		PlaySoundBrick,
-		TurnLeftBrick
+		TurnLeftBrick,
+		ForeverBrick
 	};
 
 	Script *Parent();
