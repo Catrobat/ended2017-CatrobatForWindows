@@ -319,7 +319,7 @@ Look *XMLParser::parseLook(xml_node<> *baseNode)
 
 Script *XMLParser::parseStartScript(xml_node<> *baseNode, Object *object)
 {
-	xml_node<> *spriteReferenceNode = baseNode->first_node("sprite");
+	xml_node<> *spriteReferenceNode = baseNode->first_node("object");
 	if (!spriteReferenceNode)
 		return NULL;
 
@@ -335,7 +335,7 @@ Script *XMLParser::parseStartScript(xml_node<> *baseNode, Object *object)
 
 Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode, Object *object)
 {
-	xml_node<> *spriteReferenceNode = baseNode->first_node("sprite");
+	xml_node<> *spriteReferenceNode = baseNode->first_node("object");
 	if (!spriteReferenceNode)
 		return NULL;
 
@@ -355,7 +355,7 @@ Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode, Object *object)
 
 Script *XMLParser::parseWhenScript(xml_node<> *baseNode, Object *object)
 {
-	xml_node<> *spriteReferenceNode = baseNode->first_node("sprite");
+	xml_node<> *spriteReferenceNode = baseNode->first_node("object");
 	if (!spriteReferenceNode)
 		return NULL;
 
@@ -382,31 +382,31 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 	xml_node<> *node = brickListNode->first_node();
 	while(node)
 	{
-		if (strcmp(node->name(), "Bricks.SetCostumeBrick") == 0)
+		if (strcmp(node->name(), "setLookBrick") == 0)
 		{
-			script->addBrick(parseCostumeBrick(node, script));
+			script->addBrick(parseLookBrick(node, script));
 		}
-		else if(strcmp(node->name(), "Bricks.WaitBrick") == 0)
+		else if(strcmp(node->name(), "waitBrick") == 0)
 		{
 			script->addBrick(parseWaitBrick(node, script));
 		}
-		else if(strcmp(node->name(), "Bricks.PlaceAtBrick") == 0)
+		else if(strcmp(node->name(), "placeAtBrick") == 0)
 		{
 			script->addBrick(parsePlaceAtBrick(node, script));
 		}
-		else if(strcmp(node->name(), "Bricks.SetGhostEffectBrick") == 0)
+		else if(strcmp(node->name(), "setGhostEffectBrick") == 0)
 		{
 			script->addBrick(parseSetGhostEffectBrick(node, script));
 		}
-		else if(strcmp(node->name(), "Bricks.PlaySoundBrick") == 0)
+		else if(strcmp(node->name(), "playSoundBrick") == 0)
 		{
 			script->addBrick(parsePlaySoundBrick(node, script));
 		}
-		else if(strcmp(node->name(), "Bricks.GlideToBrick") == 0)
+		else if(strcmp(node->name(), "glideToBrick") == 0)
 		{
 			script->addBrick(parseGlideToBrick(node, script));
 		}
-		else if(strcmp(node->name(), "Bricks.TurnLeftBrick") == 0)
+		else if(strcmp(node->name(), "turnLeftBrick") == 0)
 		{
 			script->addBrick(parseTurnLeftBrick(node, script));
 		}
@@ -414,27 +414,27 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 	}
 }
 
-Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::parseLookBrick(xml_node<> *baseNode, Script *script)
 {
-	xml_node<> *spriteNode = baseNode->first_node("sprite");
-	if (!spriteNode)
+	xml_node<> *objectNode = baseNode->first_node("object");
+	if (!objectNode)
 		return NULL;
 
-	xml_attribute<> *spriteRef = spriteNode->first_attribute("reference");
-	if (!spriteRef)
+	xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+	if (!objectRef)
 		return NULL;
 
-	string spriteReference = spriteRef->value();
+	string objectReference = objectRef->value();
 
-	xml_node<> *costumeDataNode =  baseNode->first_node("costumeData");
-	if (!costumeDataNode)
-		return new CostumeBrick(spriteReference, script);
+	xml_node<> *lookNode =  baseNode->first_node("look");
+	if (!lookNode)
+		return new CostumeBrick(objectReference, script);
 
-	xml_attribute<> *costumeDataRef = costumeDataNode->first_attribute("reference");
-	if (!costumeDataRef)
+	xml_attribute<> *lookRef = lookNode->first_attribute("reference");
+	if (!lookRef)
 		return NULL;
 
-	string ref = costumeDataRef->value();
+	string ref = lookRef->value();
 
 	int begin = ref.find("[");
 	int end = ref.find("]");
@@ -446,27 +446,27 @@ Brick *XMLParser::parseCostumeBrick(xml_node<> *baseNode, Script *script)
 		index--;
 	}
 
-	return new CostumeBrick(spriteReference, costumeDataRef->value(), index, script);
+	return new CostumeBrick(objectReference, lookRef->value(), index, script);
 }
 
 Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script *script)
 {
-	xml_node<> *node = baseNode->first_node("timeToWaitInMilliSeconds");
+	xml_node<> *node = baseNode->first_node("timeToWaitInSeconds");
 	if (!node)
 		return NULL;
 
 	int time = atoi(node->value());
 
-	node = baseNode->first_node("sprite");
+	node = baseNode->first_node("object");
 	if (!node)
 		return NULL;
 
-	xml_attribute<> *spriteReferenceAttribute = node->first_attribute("reference");
-	if (!spriteReferenceAttribute)
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
 		return NULL;
 
-	string spriteReference = spriteReferenceAttribute->value();
-	return new WaitBrick(spriteReference, time, script);
+	string objectReference = objectReferenceAttribute->value();
+	return new WaitBrick(objectReference, time, script);
 }
 
 Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode, Script *script)
@@ -481,16 +481,16 @@ Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode, Script *script)
 		return NULL;
 	float postionY = atof(node->value());
 
-	node = baseNode->first_node("sprite");
+	node = baseNode->first_node("object");
 	if (!node)
 		return NULL;
 
-	xml_attribute<> *spriteReferenceAttribute = node->first_attribute("reference");
-	if (!spriteReferenceAttribute)
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
 		return NULL;
 
-	string spriteReference = spriteReferenceAttribute->value();
-	return new PlaceAtBrick(spriteReference, postionX, postionY, script);
+	string objectReference = objectReferenceAttribute->value();
+	return new PlaceAtBrick(objectReference, postionX, postionY, script);
 }
 
 Brick *XMLParser::parseGlideToBrick(xml_node<> *baseNode, Script *script)
@@ -510,16 +510,16 @@ Brick *XMLParser::parseGlideToBrick(xml_node<> *baseNode, Script *script)
 		return NULL;
 	float duration = atof(node->value());
 
-	node = baseNode->first_node("sprite");
+	node = baseNode->first_node("object");
 	if (!node)
 		return NULL;
 
-	xml_attribute<> *spriteReferenceAttribute = node->first_attribute("reference");
-	if (!spriteReferenceAttribute)
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
 		return NULL;
 
-	string spriteReference = spriteReferenceAttribute->value();
-	return new GlideToBrick(spriteReference, destinationX, destinationY, duration, script);
+	string objectReference = objectReferenceAttribute->value();
+	return new GlideToBrick(objectReference, destinationX, destinationY, duration, script);
 }
 
 Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
@@ -529,16 +529,16 @@ Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
 		return NULL;
 	float transparency = atof(node->value());
 
-	node = baseNode->first_node("sprite");
+	node = baseNode->first_node("object");
 	if (!node)
 		return NULL;
 
-	xml_attribute<> *spriteReferenceAttribute = node->first_attribute("reference");
-	if (!spriteReferenceAttribute)
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
 		return NULL;
 
-	string spriteReference = spriteReferenceAttribute->value();
-	return new SetGhostEffectBrick(spriteReference, transparency, script);
+	string objectReference = objectReferenceAttribute->value();
+	return new SetGhostEffectBrick(objectReference, transparency, script);
 }
 
 Brick *XMLParser::parseTurnLeftBrick(xml_node<> *baseNode, Script *script)
@@ -548,16 +548,16 @@ Brick *XMLParser::parseTurnLeftBrick(xml_node<> *baseNode, Script *script)
 		return NULL;
 	float rotation = atof(node->value());
 
-	node = baseNode->first_node("sprite");
+	node = baseNode->first_node("object");
 	if (!node)
 		return NULL;
 
-	xml_attribute<> *spriteReferenceAttribute = node->first_attribute("reference");
-	if (!spriteReferenceAttribute)
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
 		return NULL;
 
-	string spriteReference = spriteReferenceAttribute->value();
-	return new TurnLeftBrick(spriteReference, rotation, script);
+	string objectReference = objectReferenceAttribute->value();
+	return new TurnLeftBrick(objectReference, rotation, script);
 }
 
 Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script *script)
@@ -576,16 +576,16 @@ Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script *script)
 		return NULL;
 	string name = node->value();
 
-	node = baseNode->first_node("sprite");
+	node = baseNode->first_node("object");
 	if (!node)
 		return NULL;
 
-	xml_attribute<> *spriteReferenceAttribute = node->first_attribute("reference");
-	if (!spriteReferenceAttribute)
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
 		return NULL;
 
-	string spriteReference = spriteReferenceAttribute->value();
-	return new PlaySoundBrick(spriteReference, filename, name, script);
+	string objectReference = objectReferenceAttribute->value();
+	return new PlaySoundBrick(objectReference, filename, name, script);
 }
 
 bool XMLParser::parseBoolean(string input)
