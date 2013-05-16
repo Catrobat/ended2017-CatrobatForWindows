@@ -10,10 +10,9 @@ using Catrobat.Core.ZIP;
 
 namespace Catrobat.Core.Misc.ServerCommunication
 {
-
   public class ServerCommunication
   {
-    public delegate void RegisterOrCheckTokenEvent(bool registered);
+    public delegate void RegisterOrCheckTokenEvent(bool registered, string errorCode, string statusMessage);
     public delegate void CheckTokenEvent(bool registered);
     public delegate void LoadOnlineProjectsEvent(List<OnlineProjectHeader> projects, bool append);
     public delegate void DownloadAndSaveProjectEvent(string filename);
@@ -39,8 +38,13 @@ namespace Catrobat.Core.Misc.ServerCommunication
       return _downloadCounter == 0;
     }
 
-    public static void RegisterOrCheckToken(string username, string password, string userEmail, string language, string country, string token,
-      RegisterOrCheckTokenEvent callback)
+    public static void RegisterOrCheckToken(string username, 
+                                            string password, 
+                                            string userEmail, 
+                                            string language, 
+                                            string country,
+                                            string token,
+                                            RegisterOrCheckTokenEvent callback)
     {
       // Generate post objects
       var postParameters = new Dictionary<string, object>
@@ -62,25 +66,27 @@ namespace Catrobat.Core.Misc.ServerCommunication
       }
 
       WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.CheckTokenOrRegisterUrl,
-        ApplicationResources.UserAgent, postParameters, (string a) =>
-        {
-          if (callback != null)
-          {
-            var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
-            if (response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK)
-            {
-              callback(false);
-            }
-            else if (response.StatusCode == StatusCodes.SERVER_RESPONSE_REGISTER_OK)
-            {
-              callback(true);
-            }
-            else
-            {
-              // TODO: Error Handling?
-            }
-          }
-        });
+                                                            ApplicationResources.UserAgent, 
+                                                            postParameters, 
+                                                            (string a) =>
+                                                                          {
+                                                                            if (callback != null)
+                                                                            {
+                                                                              var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
+                                                                              if (response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK)
+                                                                              {
+                                                                                callback(false, response.StatusCode.ToString(), response.StatusMessage);
+                                                                              }
+                                                                              else if (response.StatusCode == StatusCodes.SERVER_RESPONSE_REGISTER_OK)
+                                                                              {
+                                                                                callback(true, response.StatusCode.ToString(), response.StatusMessage);
+                                                                              }
+                                                                              else
+                                                                              {
+                                                                                callback(false, response.StatusCode.ToString(), response.StatusMessage);
+                                                                              }
+                                                                            }
+                                                                          });
     }
 
     public static void CheckToken(string token, CheckTokenEvent callback)
@@ -89,14 +95,16 @@ namespace Catrobat.Core.Misc.ServerCommunication
       var postParameters = new Dictionary<string, object> {{ApplicationResources.TOKEN, token}};
 
       WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.CheckTokenUrl,
-        ApplicationResources.UserAgent, postParameters, (string a) =>
-        {
-          if (callback != null)
-          {
-            var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
-            callback(response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK);
-          }
-        });
+                                                            ApplicationResources.UserAgent, 
+                                                            postParameters, 
+                                                            (string a) =>
+                                                                          {
+                                                                            if (callback != null)
+                                                                            {
+                                                                              var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
+                                                                              callback(response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK);
+                                                                            }
+                                                                          });
     }
 
     public static DateTime ConvertUnixTimeStamp(double timestamp)

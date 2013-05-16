@@ -28,17 +28,17 @@ private:
 	// Parser
 	void						parseXML					(string xml);
 	Project*					parseProjectHeader			(xml_document<> *doc);
+
 	void						parseObjectList				(xml_document<> *doc, ObjectList *objectList);
 	Object*						parseObject					(xml_node<> *baseNode);
 	Look*						parseLook					(xml_node<> *baseNode);
-	// ----------------------------------------------------------------------------------------------------------------------------------
-	
-	
+
 	Script*						parseStartScript			(xml_node<> *baseNode, Object *object);
 	Script*						parseBroadcastScript		(xml_node<> *baseNode, Object *object);
 	Script*						parseWhenScript				(xml_node<> *baseNode, Object *object);
+
 	void						parseBrickList				(xml_node<> *baseNode, Script *script);
-	Brick*						parseCostumeBrick			(xml_node<> *baseNode, Script *script);
+	Brick*						parseLookBrick				(xml_node<> *baseNode, Script *script);
 	Brick*						parseWaitBrick				(xml_node<> *baseNode, Script *script);
 	Brick*						parsePlaceAtBrick			(xml_node<> *baseNode, Script *script);
 	Brick*						parseGlideToBrick			(xml_node<> *baseNode, Script *script);

@@ -4,8 +4,8 @@ class WaitBrick :
 	public Brick
 {
 public:
-	WaitBrick(string spriteReference, int timeToWaitInMilliSeconds, Script *parent);
+	WaitBrick(string spriteReference, int timeToWaitInSeconds, Script *parent);
 	void Execute();
 private:
-	int m_timeToWaitInMilliSeconds;
+	int m_timeToWaitInSeconds;
 };

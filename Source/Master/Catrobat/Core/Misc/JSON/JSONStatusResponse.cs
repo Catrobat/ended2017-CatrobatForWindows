@@ -9,5 +9,11 @@ namespace Catrobat.Core.Misc.JSON
   {
     [DataMember(Name = "statusCode")]
     public StatusCodes StatusCode { get; set; }
+
+    [DataMember(Name = "answer")]
+    public string StatusMessage { get; set; }
+
+    [DataMember(Name = "preHeaderMessages")]
+    public string PreHeaderMessage { get; set; }
   }
 }

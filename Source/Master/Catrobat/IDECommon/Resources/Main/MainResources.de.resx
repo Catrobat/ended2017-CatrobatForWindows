@@ -269,6 +269,12 @@ Dieses Programm steht unter der MS-RL Lizenz.</value>
   <data name="TitleUploadProjectLogin" xml:space="preserve">
     <value>EINLOGGEN ODER REGISTRIEREN</value>
   </data>
+  <data name="UploadProjectLoginError" xml:space="preserve">
+    <value>Login Fehler. {0}</value>
+  </data>
+  <data name="UploadProjectLoginErrorCaption" xml:space="preserve">
+    <value>Login fehlgeschlagen</value>
+  </data>
   <data name="UploadProjectMissingLoginData" xml:space="preserve">
     <value>Login- oder Registrierungs- Daten sind nicht vollständig.</value>
   </data>
@@ -280,6 +286,9 @@ Dieses Programm steht unter der MS-RL Lizenz.</value>
   </data>
   <data name="UploadProjectProjectName" xml:space="preserve">
     <value>Projekt:</value>
+  </data>
+  <data name="UploadProjectUndefinedError" xml:space="preserve">
+    <value>Undefinierter Fehler. Fehlercode {0}</value>
   </data>
   <data name="UploadProjectUsername" xml:space="preserve">
     <value>Benutzername:</value>
