@@ -273,7 +273,7 @@ The program is licensed under the MS-RL Lizenz.</value>
     <value>Email:</value>
   </data>
   <data name="UploadProjectLoginError" xml:space="preserve">
-    <value>Login Error. Error code {0}</value>
+    <value>Login Error. {0}</value>
   </data>
   <data name="UploadProjectLoginErrorCaption" xml:space="preserve">
     <value>Login failed</value>

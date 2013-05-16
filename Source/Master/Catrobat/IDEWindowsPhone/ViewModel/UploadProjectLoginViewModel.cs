@@ -151,9 +151,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       _wrongLoginDataCallbackResult = result;
     }
 
-    private void registerOrCheckTokenCallback(bool registered, string errorCode)
+    private void registerOrCheckTokenCallback(bool registered, string errorCode, string statusMessage)
     {
       CatrobatContext.Instance.CurrentToken = Utils.calculateToken(_username, _password);
+      var messageString = string.IsNullOrEmpty(statusMessage) ? string.Format(MainResources.UploadProjectUndefinedError, errorCode) :
+                                                                string.Format(MainResources.UploadProjectLoginError, statusMessage);
 
       if (registered)
       {
@@ -162,10 +164,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
           NavigationCallback();
         }
       }
-      //TODO: better error message of delete this, if this StatusCode isn't relevant
+      //TODO: better error message or delete this, if this StatusCode isn't relevant
       else if (errorCode == Catrobat.Core.Misc.JSON.StatusCodes.SERVER_RESPONSE_TOKEN_OK.ToString())
       {
-        var message = new DialogMessage(string.Format(MainResources.UploadProjectLoginError, errorCode), WrongLoginDataCallback)
+        var message = new DialogMessage(messageString, WrongLoginDataCallback)
         {
           Button = MessageBoxButton.OK,
           Caption = MainResources.UploadProjectLoginErrorCaption
@@ -175,7 +177,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       }
       else //Unknown error
       {
-        var message = new DialogMessage(string.Format(MainResources.UploadProjectUndefinedError, errorCode), WrongLoginDataCallback)
+        var message = new DialogMessage(messageString, WrongLoginDataCallback)
         {
           Button = MessageBoxButton.OK,
           Caption = MainResources.UploadProjectLoginErrorCaption

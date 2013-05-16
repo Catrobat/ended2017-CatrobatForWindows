@@ -270,7 +270,7 @@ Dieses Programm steht unter der MS-RL Lizenz.</value>
     <value>EINLOGGEN ODER REGISTRIEREN</value>
   </data>
   <data name="UploadProjectLoginError" xml:space="preserve">
-    <value>Login Fehler. Fehlercode {0}</value>
+    <value>Login Fehler. {0}</value>
   </data>
   <data name="UploadProjectLoginErrorCaption" xml:space="preserve">
     <value>Login fehlgeschlagen</value>
