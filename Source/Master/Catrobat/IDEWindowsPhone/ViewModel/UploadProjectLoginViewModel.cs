@@ -19,6 +19,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     public delegate void NavigationCallbackEvent();
 
     private MessageBoxResult _missingLoginDataCallbackResult;
+    private MessageBoxResult _wrongLoginDataCallbackResult;
     
     public NavigationCallbackEvent NavigationCallback { get; set; }
 
@@ -128,7 +129,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         var message = new DialogMessage(MainResources.UploadProjectMissingLoginData, MissingLoginDataCallback)
         {
           Button = MessageBoxButton.OK,
-          Caption = ""
+          Caption = MainResources.UploadProjectLoginErrorCaption
         };
 
         Messenger.Default.Send(message);
@@ -145,13 +146,42 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       }
     }
 
-    private void registerOrCheckTokenCallback(bool registered)
+    private void WrongLoginDataCallback(MessageBoxResult result)
+    {
+      _wrongLoginDataCallbackResult = result;
+    }
+
+    private void registerOrCheckTokenCallback(bool registered, string errorCode)
     {
       CatrobatContext.Instance.CurrentToken = Utils.calculateToken(_username, _password);
 
-      if (NavigationCallback != null)
+      if (registered)
       {
-        NavigationCallback();
+        if (NavigationCallback != null)
+        {
+          NavigationCallback();
+        }
+      }
+      //TODO: better error message of delete this, if this StatusCode isn't relevant
+      else if (errorCode == Catrobat.Core.Misc.JSON.StatusCodes.SERVER_RESPONSE_TOKEN_OK.ToString())
+      {
+        var message = new DialogMessage(string.Format(MainResources.UploadProjectLoginError, errorCode), WrongLoginDataCallback)
+        {
+          Button = MessageBoxButton.OK,
+          Caption = MainResources.UploadProjectLoginErrorCaption
+        };
+
+        Messenger.Default.Send(message);
+      }
+      else //Unknown error
+      {
+        var message = new DialogMessage(string.Format(MainResources.UploadProjectUndefinedError, errorCode), WrongLoginDataCallback)
+        {
+          Button = MessageBoxButton.OK,
+          Caption = MainResources.UploadProjectLoginErrorCaption
+        };
+
+        Messenger.Default.Send(message);
       }
     }
 

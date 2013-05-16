@@ -10,10 +10,9 @@ using Catrobat.Core.ZIP;
 
 namespace Catrobat.Core.Misc.ServerCommunication
 {
-
   public class ServerCommunication
   {
-    public delegate void RegisterOrCheckTokenEvent(bool registered);
+    public delegate void RegisterOrCheckTokenEvent(bool registered, string errorCode);
     public delegate void CheckTokenEvent(bool registered);
     public delegate void LoadOnlineProjectsEvent(List<OnlineProjectHeader> projects, bool append);
     public delegate void DownloadAndSaveProjectEvent(string filename);
@@ -39,8 +38,13 @@ namespace Catrobat.Core.Misc.ServerCommunication
       return _downloadCounter == 0;
     }
 
-    public static void RegisterOrCheckToken(string username, string password, string userEmail, string language, string country, string token,
-      RegisterOrCheckTokenEvent callback)
+    public static void RegisterOrCheckToken(string username, 
+                                            string password, 
+                                            string userEmail, 
+                                            string language, 
+                                            string country,
+                                            string token,
+                                            RegisterOrCheckTokenEvent callback)
     {
       // Generate post objects
       var postParameters = new Dictionary<string, object>
@@ -69,15 +73,15 @@ namespace Catrobat.Core.Misc.ServerCommunication
             var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
             if (response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK)
             {
-              callback(false);
+              callback(false, response.StatusCode.ToString());
             }
             else if (response.StatusCode == StatusCodes.SERVER_RESPONSE_REGISTER_OK)
             {
-              callback(true);
+              callback(true, response.StatusCode.ToString());
             }
             else
             {
-              // TODO: Error Handling?
+              callback(false, response.StatusCode.ToString());
             }
           }
         });

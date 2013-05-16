@@ -522,6 +522,24 @@ namespace Catrobat.IDECommon.Resources.Main {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login Error. Error code {0}.
+        /// </summary>
+        public static string UploadProjectLoginError {
+            get {
+                return ResourceManager.GetString("UploadProjectLoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login failed.
+        /// </summary>
+        public static string UploadProjectLoginErrorCaption {
+            get {
+                return ResourceManager.GetString("UploadProjectLoginErrorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login- or registration- data is incomplete..
         /// </summary>
         public static string UploadProjectMissingLoginData {
@@ -554,6 +572,15 @@ namespace Catrobat.IDECommon.Resources.Main {
         public static string UploadProjectProjectName {
             get {
                 return ResourceManager.GetString("UploadProjectProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undefined error. Error code {0}.
+        /// </summary>
+        public static string UploadProjectUndefinedError {
+            get {
+                return ResourceManager.GetString("UploadProjectUndefinedError", resourceCulture);
             }
         }
         
