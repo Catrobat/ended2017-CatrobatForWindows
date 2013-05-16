@@ -287,11 +287,17 @@ Dieses Programm steht unter der MS-RL Lizenz.</value>
   <data name="UploadProjectProjectName" xml:space="preserve">
     <value>Projekt:</value>
   </data>
+  <data name="UploadProjectRegistrationSucessful" xml:space="preserve">
+    <value>Registrierung erfolgreich!</value>
+  </data>
   <data name="UploadProjectUndefinedError" xml:space="preserve">
     <value>Undefinierter Fehler. Fehlercode {0}</value>
   </data>
   <data name="UploadProjectUsername" xml:space="preserve">
     <value>Benutzername:</value>
+  </data>
+  <data name="UploadProjectWelcome" xml:space="preserve">
+    <value>Willkommen {0}!</value>
   </data>
   <data name="UploadQueueMessage" xml:space="preserve">
     <value>Dein Projekt wird hochgeladen. Das kann eine Weile dauern, aber wir sagen dir Bescheid, wenn es oben ist!</value>
