@@ -290,11 +290,17 @@ The program is licensed under the MS-RL Lizenz.</value>
   <data name="UploadProjectProjectName" xml:space="preserve">
     <value>Project:</value>
   </data>
+  <data name="UploadProjectRegistrationSucessful" xml:space="preserve">
+    <value>Registration successful!</value>
+  </data>
   <data name="UploadProjectUndefinedError" xml:space="preserve">
     <value>Undefined error. Error code {0}</value>
   </data>
   <data name="UploadProjectUsername" xml:space="preserve">
     <value>Username:</value>
+  </data>
+  <data name="UploadProjectWelcome" xml:space="preserve">
+    <value>Welcome {0}!</value>
   </data>
   <data name="UploadQueueMessage" xml:space="preserve">
     <value>Your project is being uploaded. This might take a little while, but we'll tell you when it's finished!</value>

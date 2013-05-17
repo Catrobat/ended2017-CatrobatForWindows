@@ -20,6 +20,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     private MessageBoxResult _missingLoginDataCallbackResult;
     private MessageBoxResult _wrongLoginDataCallbackResult;
+    private MessageBoxResult _registrationSuccessfulCallbackResult;
     
     public NavigationCallbackEvent NavigationCallback { get; set; }
 
@@ -151,32 +152,55 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       _wrongLoginDataCallbackResult = result;
     }
 
-    private void registerOrCheckTokenCallback(bool registered, string errorCode, string statusMessage)
+    private void RegistrationSuccessfulCallback(MessageBoxResult result)
     {
-      CatrobatContext.Instance.CurrentToken = Utils.calculateToken(_username, _password);
-      var messageString = string.IsNullOrEmpty(statusMessage) ? string.Format(MainResources.UploadProjectUndefinedError, errorCode) :
-                                                                string.Format(MainResources.UploadProjectLoginError, statusMessage);
+      _registrationSuccessfulCallbackResult = result;
 
-      if (registered)
+      if (result == MessageBoxResult.OK)
       {
         if (NavigationCallback != null)
         {
           NavigationCallback();
         }
+        else
+        {
+          //TODO: Throw error because of navigation callback shouldn't be null
+          throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
+        }
       }
-      //TODO: better error message or delete this, if this StatusCode isn't relevant
-      else if (errorCode == Catrobat.Core.Misc.JSON.StatusCodes.SERVER_RESPONSE_TOKEN_OK.ToString())
+    }
+
+    private void registerOrCheckTokenCallback(bool registered, string errorCode, string statusMessage)
+    {
+      CatrobatContext.Instance.CurrentToken = Utils.calculateToken(_username, _password);
+
+      if (registered)
       {
-        var message = new DialogMessage(messageString, WrongLoginDataCallback)
+        var message = new DialogMessage(string.Format(MainResources.UploadProjectWelcome, _username), RegistrationSuccessfulCallback)
         {
           Button = MessageBoxButton.OK,
-          Caption = MainResources.UploadProjectLoginErrorCaption
+          Caption = MainResources.UploadProjectRegistrationSucessful
         };
 
         Messenger.Default.Send(message);
       }
+      else if (errorCode == Catrobat.Core.Misc.JSON.StatusCodes.SERVER_RESPONSE_TOKEN_OK.ToString())
+      {
+        if (NavigationCallback != null)
+        {
+          NavigationCallback();
+        }
+        else
+        {
+          //TODO: Throw error because of navigation callback shouldn't be null
+          throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
+        }
+      }
       else //Unknown error
       {
+        var messageString = string.IsNullOrEmpty(statusMessage) ? string.Format(MainResources.UploadProjectUndefinedError, errorCode) :
+                                                                  string.Format(MainResources.UploadProjectLoginError, statusMessage);
+
         var message = new DialogMessage(messageString, WrongLoginDataCallback)
         {
           Button = MessageBoxButton.OK,
