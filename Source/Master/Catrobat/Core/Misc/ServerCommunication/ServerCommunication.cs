@@ -66,8 +66,8 @@ namespace Catrobat.Core.Misc.ServerCommunication
       }
 
       WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.CheckTokenOrRegisterUrl,
-                                                            ApplicationResources.UserAgent, 
-                                                            postParameters, 
+                                                            ApplicationResources.UserAgent,
+                                                            postParameters,
                                                             (string a) =>
                                                                           {
                                                                             if (callback != null)
@@ -113,7 +113,7 @@ namespace Catrobat.Core.Misc.ServerCommunication
       return origin.AddSeconds(timestamp);
     }
 
-    public static void LoadOnlineProjects(bool append, string filterText, int offset, LoadOnlineProjectsEvent callback)
+    public static void LoadOnlineProjects(  bool append, string filterText, int offset, LoadOnlineProjectsEvent callback)
     {
       _iServerCommunication.LoadOnlineProjects(append, filterText, offset, callback);
     }

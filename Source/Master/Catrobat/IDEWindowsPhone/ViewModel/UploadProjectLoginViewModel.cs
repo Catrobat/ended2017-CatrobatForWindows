@@ -176,7 +176,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
       if (registered)
       {
-        var message = new DialogMessage(string.Format(MainResources.UploadProjectWelcome, _username), WrongLoginDataCallback)
+        var message = new DialogMessage(string.Format(MainResources.UploadProjectWelcome, _username), RegistrationSuccessfulCallback)
         {
           Button = MessageBoxButton.OK,
           Caption = MainResources.UploadProjectRegistrationSucessful
