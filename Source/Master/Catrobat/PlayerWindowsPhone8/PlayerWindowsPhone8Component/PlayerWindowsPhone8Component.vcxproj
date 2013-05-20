@@ -150,6 +150,7 @@
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="BasicTimer.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="BroadcastBrick.h" />
     <ClInclude Include="BroadcastScript.h" />
     <ClInclude Include="ChangeSizeByBrick.h" />
     <ClInclude Include="ChangeXByBrick.h" />
@@ -196,6 +197,7 @@
   <ItemGroup>
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="BroadcastBrick.cpp" />
     <ClCompile Include="BroadcastScript.cpp" />
     <ClCompile Include="ChangeSizeByBrick.cpp" />
     <ClCompile Include="ChangeXByBrick.cpp" />

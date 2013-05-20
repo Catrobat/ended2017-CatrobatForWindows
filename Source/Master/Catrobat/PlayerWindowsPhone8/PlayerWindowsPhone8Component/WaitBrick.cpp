@@ -3,8 +3,8 @@
 #include <windows.h>
 #include <ppltasks.h>
 
-WaitBrick::WaitBrick(string spriteReference, int timeToWaitInMilliSeconds, Script *parent) :
-	Brick(TypeOfBrick::WaitBrick, spriteReference, parent), m_timeToWaitInSeconds(timeToWaitInMilliSeconds)
+WaitBrick::WaitBrick(string objectReference, int timeToWaitInMilliSeconds, Script *parent) :
+	Brick(TypeOfBrick::WaitBrick, objectReference, parent), m_timeToWaitInSeconds(timeToWaitInMilliSeconds)
 {
 }
 
