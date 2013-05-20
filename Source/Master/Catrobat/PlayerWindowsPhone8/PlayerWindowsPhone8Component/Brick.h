@@ -29,7 +29,8 @@ public:
 		ChangeXByBrick,
 		ChangeYByBrick,
 		GlideToBrick,
-		PointToBrick
+		PointToBrick,
+		BroadcastBrick
 	};
 
 	Script *Parent();
@@ -39,9 +40,9 @@ public:
 	TypeOfBrick BrickType();
 
 protected:
-	Brick(TypeOfBrick brickType, string spriteReference, Script *parent);
+	Brick(TypeOfBrick brickType, string objectReference, Script *parent);
 	Script *m_parent;
 private:
 	TypeOfBrick m_brickType;
-	string m_spriteReference;
+	string m_objectReference;
 };

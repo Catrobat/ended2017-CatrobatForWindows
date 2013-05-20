@@ -48,6 +48,7 @@ Brick *Script::GetBrick(int index)
 
 void Script::Execute()
 {
+	int x = m_scriptType;
 	auto WorkItem = ref new WorkItemHandler(
 		[this](IAsyncAction^ workItem)
 	{

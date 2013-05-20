@@ -45,6 +45,7 @@ private:
 	Brick*						parseSetGhostEffectBrick	(xml_node<> *baseNode, Script *script);
 	Brick*						parsePlaySoundBrick			(xml_node<> *baseNode, Script *script);
 	Brick*						parseTurnLeftBrick			(xml_node<> *baseNode, Script *script);
+	Brick*						parseBroadcastBrick			(xml_node<> *baseNode, Script *script);
 
 	// Parser Helper Methods
 	bool						parseBoolean				(std::string input);

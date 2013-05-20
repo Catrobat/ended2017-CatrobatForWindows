@@ -130,6 +130,9 @@
     <ClCompile Include="Look.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="BroadcastBrick.cpp">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -266,6 +269,9 @@
     </ClInclude>
     <ClInclude Include="Look.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BroadcastBrick.h">
+      <Filter>Objects\Bricks\Control</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

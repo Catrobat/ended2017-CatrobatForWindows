@@ -10,6 +10,7 @@
 #include "PlaySoundBrick.h"
 #include "TurnLeftBrick.h"
 #include "GlideToBrick.h"
+#include "BroadcastBrick.h"
 #include "rapidxml\rapidxml_print.hpp"
 
 #include <time.h>
@@ -410,6 +411,10 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 		{
 			script->addBrick(parseTurnLeftBrick(node, script));
 		}
+		else if(strcmp(node->name(), "broadcastBrick") == 0)
+		{
+			script->addBrick(parseBroadcastBrick(node, script));
+		}
 		node = node->next_sibling();
 	}
 }
@@ -558,6 +563,25 @@ Brick *XMLParser::parseTurnLeftBrick(xml_node<> *baseNode, Script *script)
 
 	string objectReference = objectReferenceAttribute->value();
 	return new TurnLeftBrick(objectReference, rotation, script);
+}
+
+Brick *XMLParser::parseBroadcastBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("broadcastMessage");
+	if (!node)
+		return NULL;
+	string broadcastMessage = node->value();
+
+	node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	return new BroadcastBrick(objectReference, broadcastMessage, script);
 }
 
 Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script *script)
