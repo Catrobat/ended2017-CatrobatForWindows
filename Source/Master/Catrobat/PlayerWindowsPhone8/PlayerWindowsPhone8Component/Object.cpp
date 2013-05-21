@@ -111,7 +111,6 @@ Bounds Object::getBounds()
 
 void Object::StartUp()
 {
-	SetLook(0);
 	for (int i = 0; i < ScriptListSize(); i++)
 	{
 		Script *script = getScript(i);
