@@ -142,6 +142,9 @@
     <ClCompile Include="BroadcastMessageDaemon.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="FormulaTree.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -290,6 +293,9 @@
     </ClInclude>
     <ClInclude Include="BroadcastMessageDaemon.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="FormulaTree.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

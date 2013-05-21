@@ -8,6 +8,7 @@
 #include "Object.h"
 #include "Look.h"
 #include "Brick.h"
+#include "FormulaTree.h"
 
 using namespace std;
 using namespace rapidxml;
@@ -46,6 +47,8 @@ private:
 	Brick*						parsePlaySoundBrick			(xml_node<> *baseNode, Script *script);
 	Brick*						parseTurnLeftBrick			(xml_node<> *baseNode, Script *script);
 	Brick*						parseBroadcastBrick			(xml_node<> *baseNode, Script *script);
+
+	FormulaTree*				parseFormulaTree			(xml_node<> *baseNode);
 
 	// Parser Helper Methods
 	bool						parseBoolean				(std::string input);
