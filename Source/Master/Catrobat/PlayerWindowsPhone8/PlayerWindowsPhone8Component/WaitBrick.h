@@ -1,11 +1,13 @@
 #pragma once
 #include "brick.h"
+#include "FormulaTree.h"
+
 class WaitBrick :
 	public Brick
 {
 public:
-	WaitBrick(string objectReference, int timeToWaitInSeconds, Script *parent);
+	WaitBrick(string objectReference, FormulaTree *timeToWaitInSeconds, Script *parent);
 	void Execute();
 private:
-	int m_timeToWaitInSeconds;
+	FormulaTree *m_timeToWaitInSeconds;
 };

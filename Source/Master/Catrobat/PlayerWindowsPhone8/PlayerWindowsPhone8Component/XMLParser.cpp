@@ -460,7 +460,10 @@ Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script *script)
 	if (!node)
 		return NULL;
 
-	int time = atoi(node->value());
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *time = NULL;
+	if (formulaTreeNode)
+		time = parseFormulaTree(formulaTreeNode);
 
 	node = baseNode->first_node("object");
 	if (!node)
@@ -610,6 +613,31 @@ Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script *script)
 
 	string objectReference = objectReferenceAttribute->value();
 	return new PlaySoundBrick(objectReference, filename, name, script);
+}
+
+FormulaTree *XMLParser::parseFormulaTree(xml_node<> *baseNode)
+{
+	xml_node<> *node = baseNode->first_node("type");
+	if (!node)
+		return NULL;
+	string type = node->value();
+
+	node = baseNode->first_node("value");
+	if (!node)
+		return NULL;
+	string value = node->value();
+
+	FormulaTree *formulaTree = new FormulaTree(type, value);
+
+	node = baseNode->first_node("leftChild");
+	if (node)
+		formulaTree->SetLeftChild(parseFormulaTree(node));
+
+	node = baseNode->first_node("rightChild");
+	if (node)
+		formulaTree->SetRightChild(parseFormulaTree(node));
+
+	return formulaTree;
 }
 
 bool XMLParser::parseBoolean(string input)

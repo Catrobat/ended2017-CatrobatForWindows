@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BaseObject.h"
+#include "FormulaTree.h"
 
 #include <string>
 
@@ -42,6 +43,7 @@ public:
 protected:
 	Brick(TypeOfBrick brickType, string objectReference, Script *parent);
 	Script *m_parent;
+
 private:
 	TypeOfBrick m_brickType;
 	string m_objectReference;

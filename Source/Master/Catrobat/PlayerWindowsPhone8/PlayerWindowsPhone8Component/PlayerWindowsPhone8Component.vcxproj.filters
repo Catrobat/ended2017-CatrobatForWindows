@@ -133,6 +133,18 @@
     <ClCompile Include="BroadcastBrick.cpp">
       <Filter>Objects\Bricks\Control</Filter>
     </ClCompile>
+    <ClCompile Include="BroadcastMessageSender.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="BroadcastMessageListener.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="BroadcastMessageDaemon.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="FormulaTree.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -272,6 +284,18 @@
     </ClInclude>
     <ClInclude Include="BroadcastBrick.h">
       <Filter>Objects\Bricks\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="BroadcastMessageListener.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="BroadcastMessageSender.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="BroadcastMessageDaemon.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="FormulaTree.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

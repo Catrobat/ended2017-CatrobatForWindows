@@ -3,12 +3,12 @@
 #include <windows.h>
 #include <ppltasks.h>
 
-WaitBrick::WaitBrick(string objectReference, int timeToWaitInMilliSeconds, Script *parent) :
-	Brick(TypeOfBrick::WaitBrick, objectReference, parent), m_timeToWaitInSeconds(timeToWaitInMilliSeconds)
+WaitBrick::WaitBrick(string objectReference, FormulaTree *timeToWaitInSeconds, Script *parent) :
+	Brick(TypeOfBrick::WaitBrick, objectReference, parent), m_timeToWaitInSeconds(timeToWaitInSeconds)
 {
 }
 
 void WaitBrick::Execute()
 {
-	Concurrency::wait(m_timeToWaitInSeconds * 1000);
+	Concurrency::wait(1000);
 }
