@@ -145,7 +145,9 @@
     <ClCompile Include="FormulaTree.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Interpreter.cpp" />
+    <ClCompile Include="Interpreter.cpp">
+      <Filter>Formula</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -298,7 +300,9 @@
     <ClInclude Include="FormulaTree.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Interpreter.h" />
+    <ClInclude Include="Interpreter.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
