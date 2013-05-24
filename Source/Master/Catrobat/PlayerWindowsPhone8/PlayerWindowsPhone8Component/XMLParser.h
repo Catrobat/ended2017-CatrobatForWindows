@@ -13,6 +13,7 @@
 using namespace std;
 using namespace rapidxml;
 
+class IfBrick;
 class XMLParser
 {
 public:
@@ -27,6 +28,8 @@ private:
 	Project*					m_project;
 
 	// Parser
+	std::vector<IfBrick*>*		ifStack;					
+
 	void						parseXML					(string xml);
 	Project*					parseProjectHeader			(xml_document<> *doc);
 
@@ -49,6 +52,9 @@ private:
 	Brick*						parseBroadcastBrick			(xml_node<> *baseNode, Script *script);
 	Brick*						parseHideBrick              (xml_node<> *baseNode, Script *script);
 	Brick*						parseShowBrick				(xml_node<> *baseNode, Script *script);
+	Brick*						parseIfLogicBeginBrick		(xml_node<> *baseNode, Script *script);
+	void						parseIfLogicElseBrick		(xml_node<> *baseNode, Script *script);
+	void						parseIfLogicEndBrick		(xml_node<> *baseNode, Script *script);
 
 	FormulaTree*				parseFormulaTree			(xml_node<> *baseNode);
 

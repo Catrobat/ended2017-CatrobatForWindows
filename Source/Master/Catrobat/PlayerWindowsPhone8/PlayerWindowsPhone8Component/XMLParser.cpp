@@ -14,6 +14,7 @@
 #include "HideBrick.h"
 #include "ShowBrick.h"
 #include "rapidxml\rapidxml_print.hpp"
+#include "IfBrick.h"
 
 #include <time.h>
 #include <iostream>
@@ -24,6 +25,12 @@ using namespace rapidxml;
 
 XMLParser::XMLParser()
 {
+	ifStack = new std::vector<IfBrick*>();
+}
+
+XMLParser::~XMLParser()
+{
+	delete ifStack;
 }
 
 void XMLParser::loadXML(string fileName)
@@ -385,46 +392,69 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 	xml_node<> *node = brickListNode->first_node();
 	while(node)
 	{
+		Brick *current = NULL;
+		bool isIfBrick = false;
+
 		if (strcmp(node->name(), "setLookBrick") == 0)
 		{
-			script->addBrick(parseLookBrick(node, script));
+			current = parseLookBrick(node, script);
 		}
 		else if(strcmp(node->name(), "waitBrick") == 0)
 		{
-			script->addBrick(parseWaitBrick(node, script));
+			current = parseWaitBrick(node, script);
 		}
 		else if(strcmp(node->name(), "placeAtBrick") == 0)
 		{
-			script->addBrick(parsePlaceAtBrick(node, script));
+			current = parsePlaceAtBrick(node, script);
 		}
 		else if(strcmp(node->name(), "setGhostEffectBrick") == 0)
 		{
-			script->addBrick(parseSetGhostEffectBrick(node, script));
+			current = parseSetGhostEffectBrick(node, script);
 		}
 		else if(strcmp(node->name(), "playSoundBrick") == 0)
 		{
-			script->addBrick(parsePlaySoundBrick(node, script));
+			current = parsePlaySoundBrick(node, script);
 		}
 		else if(strcmp(node->name(), "glideToBrick") == 0)
 		{
-			script->addBrick(parseGlideToBrick(node, script));
+			current = parseGlideToBrick(node, script);
 		}
 		else if(strcmp(node->name(), "turnLeftBrick") == 0)
 		{
-			script->addBrick(parseTurnLeftBrick(node, script));
+			current = parseTurnLeftBrick(node, script);
 		}
 		else if(strcmp(node->name(), "broadcastBrick") == 0)
 		{
-			script->addBrick(parseBroadcastBrick(node, script));
+			current = parseBroadcastBrick(node, script);
 		}
 		else if(strcmp(node->name(), "hideBrick") == 0)
 		{
-			script->addBrick(parseHideBrick(node, script));
+			current = parseHideBrick(node, script);
 		}
 		else if(strcmp(node->name(), "showBrick") == 0)
 		{
-			script->addBrick(parseShowBrick(node, script));
+			current = parseShowBrick(node, script);
 		}
+		else if(strcmp(node->name(), "ifLogicBeginBrick") == 0)
+		{
+			current = parseShowBrick(node, script);
+			isIfBrick = true;
+		}
+
+		if (current != NULL)
+		{
+			if (ifStack->size() == 0 || isIfBrick)
+			{
+				// Add to script
+				script->addBrick(current);
+			}
+			else
+			{
+				// Add to If-Brick
+				(*ifStack->end())->addBrick(current);
+			}
+		}
+
 		node = node->next_sibling();
 	}
 }
@@ -492,6 +522,73 @@ Brick *XMLParser::parseShowBrick(xml_node<> *baseNode, Script *script)
 	string objectReference = objectRef->value();
 
 	return new ShowBrick(objectReference, script);
+}
+
+Brick *XMLParser::parseIfLogicBeginBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *objectNode = baseNode->first_node("object");
+	if (!objectNode)
+		return NULL;
+
+	xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+	if (!objectRef)
+		return NULL;
+
+	string objectReference = objectRef->value();
+
+	xml_node<> *node = baseNode->first_node("ifCondition");
+	if (!node)
+		return NULL;
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *condition = NULL;
+	if (formulaTreeNode)
+		condition = parseFormulaTree(formulaTreeNode);
+
+	IfBrick *brick = new IfBrick(objectReference, condition, script);
+
+	// Add to stack
+	ifStack->push_back(brick);
+
+	return brick;
+}
+
+void XMLParser::parseIfLogicElseBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *objectNode = baseNode->first_node("object");
+	if (!objectNode)
+		return; // TODO: Error.
+
+	xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+	if (!objectRef)
+		return; // TODO: Error.
+
+	string objectReference = objectRef->value();
+
+	if (ifStack->size() > 0)
+	{
+		// Change mode
+		(*ifStack->end())->setCurrentAddMode(IfBranchType::Else);
+	}
+}
+
+void XMLParser::parseIfLogicEndBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *objectNode = baseNode->first_node("object");
+	if (!objectNode)
+		return; // TODO: Error.
+
+	xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+	if (!objectRef)
+		return; // TODO: Error.
+
+	string objectReference = objectRef->value();
+
+	if (ifStack->size() > 0)
+	{
+		// Remove IfBrick from stack
+		ifStack->pop_back();
+	}
 }
 
 Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script *script)

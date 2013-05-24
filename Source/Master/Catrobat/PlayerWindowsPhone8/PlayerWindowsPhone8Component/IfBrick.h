@@ -4,6 +4,12 @@
 #include "BaseObject.h"
 #include <list>
 
+enum IfBranchType
+{
+	If,
+	Else
+};
+
 class IfBrick :
 	public Brick
 {
@@ -14,10 +20,13 @@ public:
 	void Execute();
 	void addIfBrick(Brick *brick);
 	void addElseBrick(Brick *brick);
+	void addBrick(Brick *brick);
+	void setCurrentAddMode(IfBranchType mode);
 private:
 	list<Brick*> *m_ifList;
 	list<Brick*> *m_elseList;
 	FormulaTree *m_condition;
+	IfBranchType currentAddMode;
 
 	Brick *GetIfBrick(int index);
 	Brick *GetElseBrick(int index);

@@ -7,6 +7,8 @@ IfBrick::IfBrick(string spriteReference, FormulaTree *condition, Script *parent)
 {
 	m_ifList = new list<Brick*>();
 	m_elseList = new list<Brick*>();
+
+	currentAddMode = IfBranchType::If;
 }
 
 
@@ -35,6 +37,23 @@ void IfBrick::Execute()
 			GetElseBrick(i)->Execute();
 		}
 	}
+}
+
+void IfBrick::addBrick(Brick *brick)
+{
+	if (currentAddMode == IfBranchType::If)
+	{
+		addIfBrick(brick);
+	}
+	else
+	{
+		addElseBrick(brick);
+	}
+}
+
+void IfBrick::setCurrentAddMode(IfBranchType mode)
+{
+	currentAddMode = mode;
 }
 
 void IfBrick::addIfBrick(Brick *brick)
