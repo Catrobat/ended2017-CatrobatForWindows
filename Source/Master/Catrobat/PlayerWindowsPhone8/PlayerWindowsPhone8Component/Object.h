@@ -33,6 +33,8 @@ public:
 
 	int ScriptListSize();
 	Script *getScript(int index);
+	void addObjectVariable(std::string name, std::string value);
+	std::string ObjectVariable(std::string name);
 	string getName();
 
 	int LookDataListSize();
@@ -56,6 +58,7 @@ private:
 	list<Look*> *m_lookList;
 	list<Script*> *m_scripts;
 	list<SoundInfo*> *m_soundInfos;
+	std::map<std::string, std::string> *m_objectVariableList;
 	string m_name;
 	float m_opacity;
 	float m_rotation;
