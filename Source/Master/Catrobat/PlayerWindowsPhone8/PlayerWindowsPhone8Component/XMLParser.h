@@ -13,6 +13,7 @@
 using namespace std;
 using namespace rapidxml;
 
+class ContainerBrick;
 class XMLParser
 {
 public:
@@ -27,6 +28,8 @@ private:
 	Project*					m_project;
 
 	// Parser
+	vector<ContainerBrick*>*	containerStack;					
+
 	void						parseXML					(string xml);
 	Project*					parseProjectHeader			(xml_document<> *doc);
 
@@ -47,6 +50,15 @@ private:
 	Brick*						parsePlaySoundBrick			(xml_node<> *baseNode, Script *script);
 	Brick*						parseTurnLeftBrick			(xml_node<> *baseNode, Script *script);
 	Brick*						parseBroadcastBrick			(xml_node<> *baseNode, Script *script);
+	Brick*						parseHideBrick              (xml_node<> *baseNode, Script *script);
+	Brick*						parseShowBrick				(xml_node<> *baseNode, Script *script);
+	Brick*						parseIfLogicBeginBrick		(xml_node<> *baseNode, Script *script);
+	void						parseIfLogicElseBrick		(xml_node<> *baseNode, Script *script);
+	void						parseIfLogicEndBrick		(xml_node<> *baseNode, Script *script);
+	Brick*						parseForeverBrick			(xml_node<> *baseNode, Script *script);
+	void						parseForeverEndBrick		(xml_node<> *baseNode, Script *script);
+	Brick*						parseRepeatBrick			(xml_node<> *baseNode, Script *script);
+	void						parseRepeatEndBrick			(xml_node<> *baseNode, Script *script);
 
 	FormulaTree*				parseFormulaTree			(xml_node<> *baseNode);
 

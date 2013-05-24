@@ -145,6 +145,27 @@
     <ClCompile Include="FormulaTree.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Interpreter.cpp">
+      <Filter>Formula</Filter>
+    </ClCompile>
+    <ClCompile Include="IfBrick.cpp">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="ForeverBrick.cpp">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="ContainerBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="RepeatBrick.cpp">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeGhostEffectByBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="NextLookBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -297,6 +318,27 @@
     <ClInclude Include="FormulaTree.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Interpreter.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="IfBrick.h">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="ForeverBrick.h">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="ContainerBrick.h">
+      <Filter>Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="RepeatBrick.h">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeGhostEffectByBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="NextLookBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -331,6 +373,9 @@
     </Filter>
     <Filter Include="Objects\Bricks\Sound">
       <UniqueIdentifier>{957c57fe-65b2-4513-baec-b65f2e0acead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Formula">
+      <UniqueIdentifier>{cc53f5b0-deef-42a6-a1d5-a73350ccbcfa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

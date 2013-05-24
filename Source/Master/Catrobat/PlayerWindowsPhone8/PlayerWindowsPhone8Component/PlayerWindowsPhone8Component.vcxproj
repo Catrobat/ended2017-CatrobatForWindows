@@ -153,19 +153,25 @@
     <ClInclude Include="BroadcastBrick.h" />
     <ClInclude Include="BroadcastMessageDaemon.h" />
     <ClInclude Include="BroadcastScript.h" />
+    <ClInclude Include="ChangeGhostEffectByBrick.h" />
     <ClInclude Include="ChangeSizeByBrick.h" />
     <ClInclude Include="ChangeXByBrick.h" />
     <ClInclude Include="ChangeYByBrick.h" />
+    <ClInclude Include="ContainerBrick.h" />
     <ClInclude Include="CostumeBrick.h" />
     <ClInclude Include="DDSLoader.h" />
     <ClInclude Include="BroadcastMessageSender.h" />
     <ClInclude Include="BroadcastMessageListener.h" />
+    <ClInclude Include="ForeverBrick.h" />
     <ClInclude Include="FormulaTree.h" />
     <ClInclude Include="GlideToBrick.h" />
     <ClInclude Include="HideBrick.h" />
+    <ClInclude Include="IfBrick.h" />
+    <ClInclude Include="Interpreter.h" />
     <ClInclude Include="lodepng.h" />
     <ClInclude Include="lodepng_util.h" />
     <ClInclude Include="Look.h" />
+    <ClInclude Include="NextLookBrick.h" />
     <ClInclude Include="PlaceAtBrick.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
     <ClInclude Include="PlaySoundBrick.h" />
@@ -178,6 +184,7 @@
     <ClInclude Include="Direct3DBase.h" />
     <ClInclude Include="Direct3DContentProvider.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="RepeatBrick.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptHandler.h" />
     <ClInclude Include="SetGhostEffectBrick.h" />
@@ -204,19 +211,25 @@
     <ClCompile Include="BroadcastBrick.cpp" />
     <ClCompile Include="BroadcastMessageDaemon.cpp" />
     <ClCompile Include="BroadcastScript.cpp" />
+    <ClCompile Include="ChangeGhostEffectByBrick.cpp" />
     <ClCompile Include="ChangeSizeByBrick.cpp" />
     <ClCompile Include="ChangeXByBrick.cpp" />
     <ClCompile Include="ChangeYByBrick.cpp" />
+    <ClCompile Include="ContainerBrick.cpp" />
     <ClCompile Include="CostumeBrick.cpp" />
     <ClCompile Include="DDSLoader.cpp" />
     <ClCompile Include="BroadcastMessageSender.cpp" />
     <ClCompile Include="BroadcastMessageListener.cpp" />
+    <ClCompile Include="ForeverBrick.cpp" />
     <ClCompile Include="FormulaTree.cpp" />
     <ClCompile Include="GlideToBrick.cpp" />
     <ClCompile Include="HideBrick.cpp" />
+    <ClCompile Include="IfBrick.cpp" />
+    <ClCompile Include="Interpreter.cpp" />
     <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="lodepng_util.cpp" />
     <ClCompile Include="Look.cpp" />
+    <ClCompile Include="NextLookBrick.cpp" />
     <ClCompile Include="PlaceAtBrick.cpp" />
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
     <ClCompile Include="PlaySoundBrick.cpp" />
@@ -230,6 +243,7 @@
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RepeatBrick.cpp" />
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptHandler.cpp" />
     <ClCompile Include="SetGhostEffectBrick.cpp" />

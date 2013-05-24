@@ -94,6 +94,31 @@ void Object::SetLook(int index)
 	m_look = getLook(index);
 }
 
+int Object::GetLook()
+{
+	int i = 0;
+	list<Look*>::iterator it = m_lookList->begin();
+	while ((*it) != m_look)
+	{
+		it++;
+		i++;
+	}
+
+	if (it != m_lookList->end())
+	{
+		return i;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+int Object::GetLookCount()
+{
+	return m_lookList->size();
+}
+
 Look* Object::GetCurrentLook()
 {
 	return m_look;
@@ -133,7 +158,26 @@ void Object::GetPosition(float &x, float &y)
 
 void Object::SetTransparency(float transparency)
 {
-	m_opacity = 1.0f - transparency;
+	if ((1.0f - transparency) > 0)
+	{
+		if ((1.0f - transparency) < 1.0f)
+		{
+			m_opacity = 1.0f - transparency;
+		}
+		else
+		{
+			m_opacity = 1.0f;
+		}
+	}
+	else
+	{
+		m_opacity = 0.0f;
+	}
+}
+
+float Object::GetTransparency()
+{
+	return 1.0f - m_opacity;
 }
 
 void Object::SetRotation(float rotation)
@@ -154,4 +198,15 @@ void Object::SetScale(float scale)
 float Object::GetScale()
 {
 	return m_objectScale.x;
+}
+
+void Object::addObjectVariable(string name, string value)
+{
+	m_objectVariableList->insert(pair<string, string>(name, value));
+}
+
+string Object::ObjectVariable(string name)
+{
+	map<string, string>::iterator searchItem = m_objectVariableList->find(name);
+	return searchItem->second;
 }

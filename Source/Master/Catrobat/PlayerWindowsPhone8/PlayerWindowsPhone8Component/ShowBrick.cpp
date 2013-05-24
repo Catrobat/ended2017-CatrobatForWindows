@@ -10,5 +10,5 @@ ShowBrick::ShowBrick(string spriteReference, Script *parent) :
 
 void ShowBrick::Execute()
 {
-	m_parent->Parent()->SetTransparency(1.0f);
+	m_parent->Parent()->SetTransparency(0.0f);
 }

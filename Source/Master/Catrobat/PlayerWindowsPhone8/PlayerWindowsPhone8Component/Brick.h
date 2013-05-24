@@ -31,7 +31,11 @@ public:
 		ChangeYByBrick,
 		GlideToBrick,
 		PointToBrick,
-		BroadcastBrick
+		BroadcastBrick,
+		IfBrick,
+		ContainerBrick,
+		ChangeGhostEffectByBrick,
+		NextlookBrick
 	};
 
 	Script *Parent();

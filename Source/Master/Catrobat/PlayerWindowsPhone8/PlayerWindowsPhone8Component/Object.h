@@ -33,11 +33,15 @@ public:
 
 	int ScriptListSize();
 	Script *getScript(int index);
+	void addObjectVariable(std::string name, std::string value);
+	std::string ObjectVariable(std::string name);
 	string getName();
 
 	int LookDataListSize();
 	Look *getLook(int index);
 	void SetLook(int index);
+	int GetLook();
+	int GetLookCount();
 	Look* GetCurrentLook();
 
 	void SetPosition(float x, float y);
@@ -46,6 +50,7 @@ public:
 	Bounds getBounds();
 
 	void SetTransparency(float transparency);
+	float GetTransparency();
 	void SetRotation(float rotation);
 	float GetRotation();
 	void SetScale(float scale);
@@ -56,6 +61,7 @@ private:
 	list<Look*> *m_lookList;
 	list<Script*> *m_scripts;
 	list<SoundInfo*> *m_soundInfos;
+	std::map<std::string, std::string> *m_objectVariableList;
 	string m_name;
 	float m_opacity;
 	float m_rotation;
