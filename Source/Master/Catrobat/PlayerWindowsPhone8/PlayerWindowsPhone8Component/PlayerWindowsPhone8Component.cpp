@@ -140,7 +140,7 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 	ProjectDaemon::Instance()->SetupRenderer(device, m_projectRenderer);
 
 	// Load Project
-	ProjectDaemon::Instance()->OpenProject("looptest");
+	ProjectDaemon::Instance()->OpenProject("822");
 
 	// Restart timer after renderer has finished initializing.
 	m_timer->Reset();

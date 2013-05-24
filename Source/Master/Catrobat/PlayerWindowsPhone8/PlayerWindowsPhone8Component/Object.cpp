@@ -200,13 +200,13 @@ float Object::GetScale()
 	return m_objectScale.x;
 }
 
-void Object::addObjectVariable(string name, string value)
+void Object::addVariable(string name, string value)
 {
-	m_objectVariableList->insert(pair<string, string>(name, value));
+	m_variableList->insert(pair<string, string>(name, value));
 }
 
-string Object::ObjectVariable(string name)
+string Object::Variable(string name)
 {
-	map<string, string>::iterator searchItem = m_objectVariableList->find(name);
+	map<string, string>::iterator searchItem = m_variableList->find(name);
 	return searchItem->second;
 }
