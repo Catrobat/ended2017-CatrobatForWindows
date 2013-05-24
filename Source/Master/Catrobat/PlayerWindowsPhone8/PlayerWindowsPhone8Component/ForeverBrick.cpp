@@ -17,9 +17,15 @@ ForeverBrick::~ForeverBrick(void)
 void ForeverBrick::Execute()
 {
 	// Synchronously execute all subsequent blocks
-	for (int i = 0; i < m_brickList->size(); i++)
+	int i = 0;
+	while (true)
 	{
 		GetBrick(i)->Execute();
+		i++;
+		if (i >= m_brickList->size())
+		{
+			i = 0; // Reset counter
+		}
 	}
 }
 

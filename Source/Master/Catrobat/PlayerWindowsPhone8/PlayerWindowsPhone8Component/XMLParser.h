@@ -55,6 +55,8 @@ private:
 	Brick*						parseIfLogicBeginBrick		(xml_node<> *baseNode, Script *script);
 	void						parseIfLogicElseBrick		(xml_node<> *baseNode, Script *script);
 	void						parseIfLogicEndBrick		(xml_node<> *baseNode, Script *script);
+	Brick*						parseForeverBrick			(xml_node<> *baseNode, Script *script);
+	void						parseForeverEndBrick		(xml_node<> *baseNode, Script *script);
 
 	FormulaTree*				parseFormulaTree			(xml_node<> *baseNode);
 

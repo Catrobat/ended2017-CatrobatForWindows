@@ -15,6 +15,7 @@
 #include "ShowBrick.h"
 #include "rapidxml\rapidxml_print.hpp"
 #include "IfBrick.h"
+#include "ForeverBrick.h"
 
 #include <time.h>
 #include <iostream>
@@ -393,7 +394,7 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 	while(node)
 	{
 		Brick *current = NULL;
-		bool isIfBrick = false;
+		bool isContainerBrick = false;
 
 		if (strcmp(node->name(), "setLookBrick") == 0)
 		{
@@ -438,7 +439,7 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 		else if(strcmp(node->name(), "ifLogicBeginBrick") == 0)
 		{
 			current = parseIfLogicBeginBrick(node, script);
-			isIfBrick = true;
+			isContainerBrick = true;
 		}
 		else if(strcmp(node->name(), "ifLogicElseBrick") == 0)
 		{
@@ -448,10 +449,19 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 		{
 			parseIfLogicEndBrick(node, script);
 		}
+		else if(strcmp(node->name(), "foreverBrick") == 0)
+		{
+			current = parseForeverBrick(node, script);
+			isContainerBrick = true;
+		}
+		else if(strcmp(node->name(), "loopEndlessBrick") == 0)
+		{
+			parseForeverEndBrick(node, script);
+		}
 
 		if (current != NULL)
 		{
-			if (containerStack->size() == 0 || isIfBrick)
+			if (containerStack->size() == 0 || isContainerBrick)
 			{
 				// Add to script
 				script->addBrick(current);
@@ -559,6 +569,45 @@ Brick *XMLParser::parseIfLogicBeginBrick(xml_node<> *baseNode, Script *script)
 	containerStack->push_back(brick);
 
 	return brick;
+}
+
+Brick *XMLParser::parseForeverBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *objectNode = baseNode->first_node("object");
+	if (!objectNode)
+		return NULL;
+
+	xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+	if (!objectRef)
+		return NULL;
+
+	string objectReference = objectRef->value();
+
+	ForeverBrick *brick = new ForeverBrick(objectReference, script);
+
+	// Add to stack
+	containerStack->push_back(brick);
+
+	return brick;
+}
+
+void XMLParser::parseForeverEndBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *objectNode = baseNode->first_node("object");
+	if (!objectNode)
+		return; // TODO: Error.
+
+	xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+	if (!objectRef)
+		return; // TODO: Error.
+
+	string objectReference = objectRef->value();
+
+	if (containerStack->size() > 0)
+	{
+		// Remove ForeverBrick from stack
+		containerStack->pop_back(); // TODO: Maybe sanity-check?
+	}
 }
 
 void XMLParser::parseIfLogicElseBrick(xml_node<> *baseNode, Script *script)
