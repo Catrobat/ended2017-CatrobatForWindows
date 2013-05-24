@@ -1,7 +1,14 @@
 #include "pch.h"
 #include "Interpreter.h"
 
+Interpreter *Interpreter::__instance = NULL;
 
+Interpreter *Interpreter::Instance()
+{
+	if (!__instance)
+		__instance = new Interpreter();
+	return __instance;
+}
 Interpreter::Interpreter(void)
 {
 }
