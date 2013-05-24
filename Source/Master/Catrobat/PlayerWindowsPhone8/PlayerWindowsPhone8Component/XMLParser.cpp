@@ -16,6 +16,7 @@
 #include "rapidxml\rapidxml_print.hpp"
 #include "IfBrick.h"
 #include "ForeverBrick.h"
+#include "RepeatBrick.h"
 
 #include <time.h>
 #include <iostream>
@@ -458,6 +459,15 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 		{
 			parseForeverEndBrick(node, script);
 		}
+		else if(strcmp(node->name(), "repeatBrick") == 0)
+		{
+			current = parseRepeatBrick(node, script);
+			isContainerBrick = true;
+		}
+		else if(strcmp(node->name(), "loopEndBrick") == 0)
+		{
+			parseRepeatEndBrick(node, script);
+		}
 
 		if (current != NULL)
 		{
@@ -593,16 +603,44 @@ Brick *XMLParser::parseForeverBrick(xml_node<> *baseNode, Script *script)
 
 void XMLParser::parseForeverEndBrick(xml_node<> *baseNode, Script *script)
 {
+	if (containerStack->size() > 0)
+	{
+		// Remove ForeverBrick from stack
+		containerStack->pop_back(); // TODO: Maybe sanity-check?
+	}
+}
+
+Brick *XMLParser::parseRepeatBrick(xml_node<> *baseNode, Script *script)
+{
 	xml_node<> *objectNode = baseNode->first_node("object");
 	if (!objectNode)
-		return; // TODO: Error.
+		return NULL;
 
 	xml_attribute<> *objectRef = objectNode->first_attribute("reference");
 	if (!objectRef)
-		return; // TODO: Error.
+		return NULL;
 
 	string objectReference = objectRef->value();
 
+	xml_node<> *node = baseNode->first_node("timesToRepeat");
+	if (!node)
+		return NULL;
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *times = NULL;
+	if (formulaTreeNode)
+		times = parseFormulaTree(formulaTreeNode);
+
+	RepeatBrick *brick = new RepeatBrick(objectReference, times, script);
+
+	// Add to stack
+	containerStack->push_back(brick);
+
+	return brick;
+}
+
+void XMLParser::parseRepeatEndBrick(xml_node<> *baseNode, Script *script)
+{
 	if (containerStack->size() > 0)
 	{
 		// Remove ForeverBrick from stack
@@ -612,16 +650,6 @@ void XMLParser::parseForeverEndBrick(xml_node<> *baseNode, Script *script)
 
 void XMLParser::parseIfLogicElseBrick(xml_node<> *baseNode, Script *script)
 {
-	xml_node<> *objectNode = baseNode->first_node("object");
-	if (!objectNode)
-		return; // TODO: Error.
-
-	xml_attribute<> *objectRef = objectNode->first_attribute("reference");
-	if (!objectRef)
-		return; // TODO: Error.
-
-	string objectReference = objectRef->value();
-
 	if (containerStack->size() > 0)
 	{
 		// Change mode
@@ -631,16 +659,6 @@ void XMLParser::parseIfLogicElseBrick(xml_node<> *baseNode, Script *script)
 
 void XMLParser::parseIfLogicEndBrick(xml_node<> *baseNode, Script *script)
 {
-	xml_node<> *objectNode = baseNode->first_node("object");
-	if (!objectNode)
-		return; // TODO: Error.
-
-	xml_attribute<> *objectRef = objectNode->first_attribute("reference");
-	if (!objectRef)
-		return; // TODO: Error.
-
-	string objectReference = objectRef->value();
-
 	if (containerStack->size() > 0)
 	{
 		// Remove IfBrick from stack

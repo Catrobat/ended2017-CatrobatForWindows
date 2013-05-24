@@ -157,6 +157,9 @@
     <ClCompile Include="ContainerBrick.cpp">
       <Filter>Objects\Bricks</Filter>
     </ClCompile>
+    <ClCompile Include="RepeatBrick.cpp">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -320,6 +323,9 @@
     </ClInclude>
     <ClInclude Include="ContainerBrick.h">
       <Filter>Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="RepeatBrick.h">
+      <Filter>Objects\Bricks\Control</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
