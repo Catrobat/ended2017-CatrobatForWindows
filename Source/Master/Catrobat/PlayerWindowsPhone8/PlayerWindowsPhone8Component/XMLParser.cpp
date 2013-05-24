@@ -437,8 +437,16 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 		}
 		else if(strcmp(node->name(), "ifLogicBeginBrick") == 0)
 		{
-			current = parseShowBrick(node, script);
+			current = parseIfLogicBeginBrick(node, script);
 			isIfBrick = true;
+		}
+		else if(strcmp(node->name(), "ifLogicElseBrick") == 0)
+		{
+			parseIfLogicElseBrick(node, script);
+		}
+		else if(strcmp(node->name(), "ifLogicEndBrick") == 0)
+		{
+			parseIfLogicEndBrick(node, script);
 		}
 
 		if (current != NULL)
@@ -451,7 +459,7 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 			else
 			{
 				// Add to If-Brick
-				(*ifStack->end())->addBrick(current);
+				ifStack->back()->addBrick(current);
 			}
 		}
 
