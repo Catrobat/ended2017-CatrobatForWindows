@@ -33,7 +33,9 @@ public:
 		PointToBrick,
 		BroadcastBrick,
 		IfBrick,
-		ContainerBrick
+		ContainerBrick,
+		ChangeGhostEffectByBrick,
+		NextlookBrick
 	};
 
 	Script *Parent();

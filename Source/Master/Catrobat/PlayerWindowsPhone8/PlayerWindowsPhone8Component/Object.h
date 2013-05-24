@@ -40,6 +40,8 @@ public:
 	int LookDataListSize();
 	Look *getLook(int index);
 	void SetLook(int index);
+	int GetLook();
+	int GetLookCount();
 	Look* GetCurrentLook();
 
 	void SetPosition(float x, float y);
@@ -48,6 +50,7 @@ public:
 	Bounds getBounds();
 
 	void SetTransparency(float transparency);
+	float GetTransparency();
 	void SetRotation(float rotation);
 	float GetRotation();
 	void SetScale(float scale);

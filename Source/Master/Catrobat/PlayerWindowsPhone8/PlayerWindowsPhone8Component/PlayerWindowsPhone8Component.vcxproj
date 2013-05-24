@@ -153,6 +153,7 @@
     <ClInclude Include="BroadcastBrick.h" />
     <ClInclude Include="BroadcastMessageDaemon.h" />
     <ClInclude Include="BroadcastScript.h" />
+    <ClInclude Include="ChangeGhostEffectByBrick.h" />
     <ClInclude Include="ChangeSizeByBrick.h" />
     <ClInclude Include="ChangeXByBrick.h" />
     <ClInclude Include="ChangeYByBrick.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="lodepng.h" />
     <ClInclude Include="lodepng_util.h" />
     <ClInclude Include="Look.h" />
+    <ClInclude Include="NextLookBrick.h" />
     <ClInclude Include="PlaceAtBrick.h" />
     <ClInclude Include="PlayerWindowsPhone8Component.h" />
     <ClInclude Include="PlaySoundBrick.h" />
@@ -209,6 +211,7 @@
     <ClCompile Include="BroadcastBrick.cpp" />
     <ClCompile Include="BroadcastMessageDaemon.cpp" />
     <ClCompile Include="BroadcastScript.cpp" />
+    <ClCompile Include="ChangeGhostEffectByBrick.cpp" />
     <ClCompile Include="ChangeSizeByBrick.cpp" />
     <ClCompile Include="ChangeXByBrick.cpp" />
     <ClCompile Include="ChangeYByBrick.cpp" />
@@ -226,6 +229,7 @@
     <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="lodepng_util.cpp" />
     <ClCompile Include="Look.cpp" />
+    <ClCompile Include="NextLookBrick.cpp" />
     <ClCompile Include="PlaceAtBrick.cpp" />
     <ClCompile Include="PlayerWindowsPhone8Component.cpp" />
     <ClCompile Include="PlaySoundBrick.cpp" />

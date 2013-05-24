@@ -160,6 +160,12 @@
     <ClCompile Include="RepeatBrick.cpp">
       <Filter>Objects\Bricks\Control</Filter>
     </ClCompile>
+    <ClCompile Include="ChangeGhostEffectByBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="NextLookBrick.cpp">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -326,6 +332,12 @@
     </ClInclude>
     <ClInclude Include="RepeatBrick.h">
       <Filter>Objects\Bricks\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeGhostEffectByBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="NextLookBrick.h">
+      <Filter>Objects\Bricks\Look</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
