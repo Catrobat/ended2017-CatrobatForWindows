@@ -1,17 +1,21 @@
 #pragma once
 
-#include "Brick.h"
+#include "ContainerBrick.h"
+#include "BaseObject.h"
+#include <list>
 
-#include <string>
-
-class ForeverBrick : 
-	public Brick
+class ForeverBrick :
+	public ContainerBrick
 {
 public:
-	ForeverBrick(std::string spriteReference, Script *parent);
+	ForeverBrick(string spriteReference, Script *parent);
+	~ForeverBrick(void);
 
 	void Execute();
-
+	void addBrick(Brick *brick);
 private:
+	list<Brick*> *m_brickList;
+
+	Brick *GetBrick(int index);
 };
 

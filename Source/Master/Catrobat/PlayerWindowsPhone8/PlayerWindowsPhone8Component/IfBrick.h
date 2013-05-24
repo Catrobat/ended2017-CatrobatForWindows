@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Brick.h"
+#include "ContainerBrick.h"
 #include "BaseObject.h"
 #include <list>
 
@@ -11,7 +11,7 @@ enum IfBranchType
 };
 
 class IfBrick :
-	public Brick
+	public ContainerBrick
 {
 public:
 	IfBrick(string spriteReference, FormulaTree *condition, Script *parent);

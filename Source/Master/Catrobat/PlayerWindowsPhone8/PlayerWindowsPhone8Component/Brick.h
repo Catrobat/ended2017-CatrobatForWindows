@@ -32,7 +32,8 @@ public:
 		GlideToBrick,
 		PointToBrick,
 		BroadcastBrick,
-		IfBrick
+		IfBrick,
+		ContainerBrick
 	};
 
 	Script *Parent();

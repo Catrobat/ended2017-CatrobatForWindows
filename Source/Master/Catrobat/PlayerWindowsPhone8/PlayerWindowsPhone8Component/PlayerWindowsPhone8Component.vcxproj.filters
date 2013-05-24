@@ -148,7 +148,15 @@
     <ClCompile Include="Interpreter.cpp">
       <Filter>Formula</Filter>
     </ClCompile>
-    <ClCompile Include="IfBrick.cpp" />
+    <ClCompile Include="IfBrick.cpp">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="ForeverBrick.cpp">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="ContainerBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -304,7 +312,15 @@
     <ClInclude Include="Interpreter.h">
       <Filter>Formula</Filter>
     </ClInclude>
-    <ClInclude Include="IfBrick.h" />
+    <ClInclude Include="IfBrick.h">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="ForeverBrick.h">
+      <Filter>Objects\Bricks\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="ContainerBrick.h">
+      <Filter>Objects\Bricks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">

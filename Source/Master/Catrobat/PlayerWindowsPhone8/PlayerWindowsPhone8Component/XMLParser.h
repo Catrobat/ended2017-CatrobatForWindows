@@ -13,7 +13,7 @@
 using namespace std;
 using namespace rapidxml;
 
-class IfBrick;
+class ContainerBrick;
 class XMLParser
 {
 public:
@@ -28,7 +28,7 @@ private:
 	Project*					m_project;
 
 	// Parser
-	std::vector<IfBrick*>*		ifStack;					
+	vector<ContainerBrick*>*	containerStack;					
 
 	void						parseXML					(string xml);
 	Project*					parseProjectHeader			(xml_document<> *doc);

@@ -25,12 +25,12 @@ using namespace rapidxml;
 
 XMLParser::XMLParser()
 {
-	ifStack = new std::vector<IfBrick*>();
+	containerStack = new std::vector<ContainerBrick*>();
 }
 
 XMLParser::~XMLParser()
 {
-	delete ifStack;
+	delete containerStack;
 }
 
 void XMLParser::loadXML(string fileName)
@@ -451,7 +451,7 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 
 		if (current != NULL)
 		{
-			if (ifStack->size() == 0 || isIfBrick)
+			if (containerStack->size() == 0 || isIfBrick)
 			{
 				// Add to script
 				script->addBrick(current);
@@ -459,7 +459,7 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 			else
 			{
 				// Add to If-Brick
-				ifStack->back()->addBrick(current);
+				containerStack->back()->addBrick(current);
 			}
 		}
 
@@ -556,7 +556,7 @@ Brick *XMLParser::parseIfLogicBeginBrick(xml_node<> *baseNode, Script *script)
 	IfBrick *brick = new IfBrick(objectReference, condition, script);
 
 	// Add to stack
-	ifStack->push_back(brick);
+	containerStack->push_back(brick);
 
 	return brick;
 }
@@ -573,10 +573,10 @@ void XMLParser::parseIfLogicElseBrick(xml_node<> *baseNode, Script *script)
 
 	string objectReference = objectRef->value();
 
-	if (ifStack->size() > 0)
+	if (containerStack->size() > 0)
 	{
 		// Change mode
-		(*ifStack->end())->setCurrentAddMode(IfBranchType::Else);
+		((IfBrick*) (*containerStack->end()))->setCurrentAddMode(IfBranchType::Else);
 	}
 }
 
@@ -592,10 +592,10 @@ void XMLParser::parseIfLogicEndBrick(xml_node<> *baseNode, Script *script)
 
 	string objectReference = objectRef->value();
 
-	if (ifStack->size() > 0)
+	if (containerStack->size() > 0)
 	{
 		// Remove IfBrick from stack
-		ifStack->pop_back();
+		containerStack->pop_back();
 	}
 }
 

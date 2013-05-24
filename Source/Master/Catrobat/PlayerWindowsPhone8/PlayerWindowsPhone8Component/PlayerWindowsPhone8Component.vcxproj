@@ -156,10 +156,12 @@
     <ClInclude Include="ChangeSizeByBrick.h" />
     <ClInclude Include="ChangeXByBrick.h" />
     <ClInclude Include="ChangeYByBrick.h" />
+    <ClInclude Include="ContainerBrick.h" />
     <ClInclude Include="CostumeBrick.h" />
     <ClInclude Include="DDSLoader.h" />
     <ClInclude Include="BroadcastMessageSender.h" />
     <ClInclude Include="BroadcastMessageListener.h" />
+    <ClInclude Include="ForeverBrick.h" />
     <ClInclude Include="FormulaTree.h" />
     <ClInclude Include="GlideToBrick.h" />
     <ClInclude Include="HideBrick.h" />
@@ -209,10 +211,12 @@
     <ClCompile Include="ChangeSizeByBrick.cpp" />
     <ClCompile Include="ChangeXByBrick.cpp" />
     <ClCompile Include="ChangeYByBrick.cpp" />
+    <ClCompile Include="ContainerBrick.cpp" />
     <ClCompile Include="CostumeBrick.cpp" />
     <ClCompile Include="DDSLoader.cpp" />
     <ClCompile Include="BroadcastMessageSender.cpp" />
     <ClCompile Include="BroadcastMessageListener.cpp" />
+    <ClCompile Include="ForeverBrick.cpp" />
     <ClCompile Include="FormulaTree.cpp" />
     <ClCompile Include="GlideToBrick.cpp" />
     <ClCompile Include="HideBrick.cpp" />
