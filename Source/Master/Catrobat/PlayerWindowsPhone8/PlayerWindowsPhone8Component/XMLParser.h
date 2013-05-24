@@ -47,6 +47,8 @@ private:
 	Brick*						parsePlaySoundBrick			(xml_node<> *baseNode, Script *script);
 	Brick*						parseTurnLeftBrick			(xml_node<> *baseNode, Script *script);
 	Brick*						parseBroadcastBrick			(xml_node<> *baseNode, Script *script);
+	Brick*						parseHideBrick              (xml_node<> *baseNode, Script *script);
+	Brick*						parseShowBrick				(xml_node<> *baseNode, Script *script);
 
 	FormulaTree*				parseFormulaTree			(xml_node<> *baseNode);
 

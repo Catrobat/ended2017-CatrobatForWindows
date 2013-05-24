@@ -10,5 +10,5 @@ HideBrick::HideBrick(string spriteReference, Script *parent) :
 
 void HideBrick::Execute()
 {
-	m_parent->Parent()->SetTransparency(0.0f);
+	m_parent->Parent()->SetTransparency(1.0f);
 }

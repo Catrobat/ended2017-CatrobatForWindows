@@ -11,6 +11,8 @@
 #include "TurnLeftBrick.h"
 #include "GlideToBrick.h"
 #include "BroadcastBrick.h"
+#include "HideBrick.h"
+#include "ShowBrick.h"
 #include "rapidxml\rapidxml_print.hpp"
 
 #include <time.h>
@@ -415,6 +417,14 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 		{
 			script->addBrick(parseBroadcastBrick(node, script));
 		}
+		else if(strcmp(node->name(), "hideBrick") == 0)
+		{
+			script->addBrick(parseHideBrick(node, script));
+		}
+		else if(strcmp(node->name(), "showBrick") == 0)
+		{
+			script->addBrick(parseShowBrick(node, script));
+		}
 		node = node->next_sibling();
 	}
 }
@@ -452,6 +462,36 @@ Brick *XMLParser::parseLookBrick(xml_node<> *baseNode, Script *script)
 	}
 
 	return new CostumeBrick(objectReference, lookRef->value(), index, script);
+}
+
+Brick *XMLParser::parseHideBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *objectNode = baseNode->first_node("object");
+	if (!objectNode)
+		return NULL;
+
+	xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+	if (!objectRef)
+		return NULL;
+
+	string objectReference = objectRef->value();
+
+	return new HideBrick(objectReference, script);
+}
+
+Brick *XMLParser::parseShowBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *objectNode = baseNode->first_node("object");
+	if (!objectNode)
+		return NULL;
+
+	xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+	if (!objectRef)
+		return NULL;
+
+	string objectReference = objectRef->value();
+
+	return new ShowBrick(objectReference, script);
 }
 
 Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script *script)

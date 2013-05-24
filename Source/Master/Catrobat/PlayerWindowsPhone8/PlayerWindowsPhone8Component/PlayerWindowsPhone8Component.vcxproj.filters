@@ -145,6 +145,7 @@
     <ClCompile Include="FormulaTree.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Interpreter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -297,6 +298,7 @@
     <ClInclude Include="FormulaTree.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Interpreter.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -331,6 +333,9 @@
     </Filter>
     <Filter Include="Objects\Bricks\Sound">
       <UniqueIdentifier>{957c57fe-65b2-4513-baec-b65f2e0acead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Formula">
+      <UniqueIdentifier>{cc53f5b0-deef-42a6-a1d5-a73350ccbcfa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

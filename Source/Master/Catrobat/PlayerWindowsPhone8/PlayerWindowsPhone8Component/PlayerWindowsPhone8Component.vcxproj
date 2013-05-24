@@ -163,6 +163,7 @@
     <ClInclude Include="FormulaTree.h" />
     <ClInclude Include="GlideToBrick.h" />
     <ClInclude Include="HideBrick.h" />
+    <ClInclude Include="Interpreter.h" />
     <ClInclude Include="lodepng.h" />
     <ClInclude Include="lodepng_util.h" />
     <ClInclude Include="Look.h" />
@@ -214,6 +215,7 @@
     <ClCompile Include="FormulaTree.cpp" />
     <ClCompile Include="GlideToBrick.cpp" />
     <ClCompile Include="HideBrick.cpp" />
+    <ClCompile Include="Interpreter.cpp" />
     <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="lodepng_util.cpp" />
     <ClCompile Include="Look.cpp" />
