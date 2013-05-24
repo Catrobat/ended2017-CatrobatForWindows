@@ -31,7 +31,8 @@ public:
 		ChangeYByBrick,
 		GlideToBrick,
 		PointToBrick,
-		BroadcastBrick
+		BroadcastBrick,
+		IfBrick
 	};
 
 	Script *Parent();

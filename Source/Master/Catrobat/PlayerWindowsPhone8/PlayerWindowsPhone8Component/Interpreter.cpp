@@ -9,10 +9,10 @@ Interpreter *Interpreter::Instance()
 		__instance = new Interpreter();
 	return __instance;
 }
+
 Interpreter::Interpreter(void)
 {
 }
-
 
 Interpreter::~Interpreter(void)
 {
@@ -26,4 +26,9 @@ int Interpreter::EvaluateFormulaToInt(FormulaTree *tree)
 float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree)
 {
 	return 1.0f;
+}
+
+bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree)
+{
+	return true;
 }

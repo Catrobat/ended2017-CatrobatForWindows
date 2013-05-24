@@ -13,5 +13,6 @@ public:
 
 	int EvaluateFormulaToInt(FormulaTree *tree);
 	float EvaluateFormulaToFloat(FormulaTree *tree);
+	bool EvaluateFormulaToBool(FormulaTree *tree);
 };
 
