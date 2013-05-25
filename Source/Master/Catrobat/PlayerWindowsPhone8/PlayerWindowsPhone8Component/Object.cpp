@@ -12,6 +12,7 @@ Object::Object(string name) :
 	m_lookList = new list<Look*>();
 	m_scripts = new list<Script*>();
 	m_soundInfos = new list<SoundInfo*>();
+	m_variableList = new map<string, string>();
 }
 
 void Object::addLook(Look *lookData)
@@ -205,8 +206,17 @@ void Object::addVariable(string name, string value)
 	m_variableList->insert(pair<string, string>(name, value));
 }
 
+void Object::addVariable(pair<string, string> variable)
+{
+	m_variableList->insert(variable);
+}
+
 string Object::Variable(string name)
 {
 	map<string, string>::iterator searchItem = m_variableList->find(name);
-	return searchItem->second;
+	if (searchItem == m_variableList->end())
+		return ProjectDaemon::Instance()->getProject()->Variable(name);
+	if (searchItem != m_variableList->end())
+		return searchItem->second;
+	return "not found";
 }

@@ -90,7 +90,9 @@ void Project::StartUp()
 string Project::Variable(std::string name)
 {
 	map<string, string>::iterator searchItem = m_variableList->find(name);
-	return searchItem->second;
+	if (searchItem != m_variableList->end())
+		return searchItem->second;
+	return "not found";
 }
 
 void Project::addVariable(std::string name, std::string value)

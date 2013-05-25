@@ -34,6 +34,7 @@ public:
 	int ScriptListSize();
 	Script *getScript(int index);
 	void addVariable(std::string name, std::string value);
+	void addVariable(std::pair<std::string, std::string> variable);
 	std::string Variable(std::string name);
 	string getName();
 

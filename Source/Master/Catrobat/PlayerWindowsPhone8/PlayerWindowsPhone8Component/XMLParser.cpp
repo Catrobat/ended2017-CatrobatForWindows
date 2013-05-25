@@ -883,11 +883,40 @@ void XMLParser::parseVariableList(xml_document<> *doc, Project *project)
 	xml_node<> *node = variableListNode->first_node("entry");
 	while (node)
 	{
-		//m_project->addVariable(parseVariable(node));
+		xml_node<> *objectReferenceNode = node->first_node("object");	
+		if (!objectReferenceNode)
+			return;
+
+		xml_attribute<> *objectReferenceAttribute = objectReferenceNode->first_attribute("reference");
+		if (!objectReferenceAttribute)
+			return;
+
+		string reference = objectReferenceAttribute->value();
+		reference = reference + "/";
+		xml_node<> *objectNode = EvaluateString("/", reference, objectReferenceNode);
+		if (!objectNode)
+			return;
+
+		xml_node<> *nameNode = objectNode->first_node("name");
+		if (!nameNode)
+			return;
+		Object *object = project->getObjectList()->getObject(nameNode->value());
+
+		xml_node<> *listNode = node->first_node("list");
+		if (!listNode)
+			return;
+		listNode = listNode->first_node("userVariable");
+		while (listNode)
+		{
+			object->addVariable(parseUserVariable(listNode));
+			listNode = listNode->next_sibling("userVariable");
+		}
 		node = node->next_sibling("entry");
 	}
 
 	variableListNode = baseNode->first_node("programVariableList");
+	if (!variableListNode)
+		return;
 	node = variableListNode->first_node("userVariable");
 	while (node)
 	{
