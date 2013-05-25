@@ -189,6 +189,7 @@
     <ClInclude Include="ScriptHandler.h" />
     <ClInclude Include="SetGhostEffectBrick.h" />
     <ClInclude Include="SetSizeToBrick.h" />
+    <ClInclude Include="SetVariableBrick.h" />
     <ClInclude Include="SetXBrick.h" />
     <ClInclude Include="SetYBrick.h" />
     <ClInclude Include="ShowBrick.h" />
@@ -201,6 +202,7 @@
     <ClInclude Include="TurnLeftBrick.h" />
     <ClInclude Include="TextureDaemon.h" />
     <ClInclude Include="TurnRightBrick.h" />
+    <ClInclude Include="VariableManagementBrick.h" />
     <ClInclude Include="WaitBrick.h" />
     <ClInclude Include="WhenScript.h" />
     <ClInclude Include="XMLParser.h" />
@@ -248,6 +250,7 @@
     <ClCompile Include="ScriptHandler.cpp" />
     <ClCompile Include="SetGhostEffectBrick.cpp" />
     <ClCompile Include="SetSizeToBrick.cpp" />
+    <ClCompile Include="SetVariableBrick.cpp" />
     <ClCompile Include="SetXBrick.cpp" />
     <ClCompile Include="SetYBrick.cpp" />
     <ClCompile Include="ShowBrick.cpp" />
@@ -260,6 +263,7 @@
     <ClCompile Include="TurnLeftBrick.cpp" />
     <ClCompile Include="TextureDaemon.cpp" />
     <ClCompile Include="TurnRightBrick.cpp" />
+    <ClCompile Include="VariableManagementBrick.cpp" />
     <ClCompile Include="WaitBrick.cpp" />
     <ClCompile Include="WhenScript.cpp" />
     <ClCompile Include="XMLParser.cpp" />

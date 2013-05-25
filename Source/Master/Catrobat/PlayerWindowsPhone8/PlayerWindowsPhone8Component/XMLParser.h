@@ -9,6 +9,7 @@
 #include "Look.h"
 #include "Brick.h"
 #include "FormulaTree.h"
+#include "VariableManagementBrick.h"
 
 using namespace std;
 using namespace rapidxml;
@@ -28,7 +29,8 @@ private:
 	Project*					m_project;
 
 	// Parser
-	vector<ContainerBrick*>*	containerStack;					
+	vector<ContainerBrick*> *containerStack;	
+	vector<VariableManagementBrick*> *m_pendingVariables;
 
 	void						parseXML					(string xml);
 	Project*					parseProjectHeader			(xml_document<> *doc);
