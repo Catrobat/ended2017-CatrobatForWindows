@@ -45,6 +45,7 @@ Project::Project(
 	m_userHandle						(userHandle)
 {
 	m_objectList = new ObjectList();
+	m_variableList = new map<string, string>();
 }
 
 int Project::ScreenHeight()
@@ -84,4 +85,22 @@ void Project::StartUp()
 	{
 		m_objectList->getObject(i)->StartUp();
 	}
+}
+
+string Project::Variable(std::string name)
+{
+	map<string, string>::iterator searchItem = m_variableList->find(name);
+	if (searchItem != m_variableList->end())
+		return searchItem->second;
+	return "not found";
+}
+
+void Project::addVariable(std::string name, std::string value)
+{
+	m_variableList->insert(pair<string, string>(name, value));
+}
+
+void Project::addVariable(std::pair<string, string> variable)
+{
+	m_variableList->insert(variable);
 }

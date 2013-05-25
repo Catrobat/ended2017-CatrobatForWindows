@@ -15,6 +15,7 @@ public:
 	void addObject(Object *object);
 	int Size();
 	Object *getObject(int index);
+	Object *getObject(string name);
 
 private:
 	list<Object*> *m_objects;

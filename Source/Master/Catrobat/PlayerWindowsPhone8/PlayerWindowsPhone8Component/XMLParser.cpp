@@ -69,6 +69,7 @@ void XMLParser::parseXML(string xml)
 
 	m_project = parseProjectHeader(&doc);
 	parseObjectList(&doc, m_project->getObjectList());
+	parseVariableList(&doc, m_project);
 }
 
 Project* XMLParser::parseProjectHeader(xml_document<> *doc)
@@ -870,4 +871,115 @@ time_t XMLParser::parseDateTime(string input)
 	time_t now;
 	time(&now);
 	return now;
+}
+
+void XMLParser::parseVariableList(xml_document<> *doc, Project *project)
+{
+	xml_node<> *baseNode = doc->first_node()->first_node("variables");
+	if (!baseNode)
+		return;
+
+	xml_node<> *variableListNode = baseNode->first_node("objectVariableList");
+	xml_node<> *node = variableListNode->first_node("entry");
+	while (node)
+	{
+		xml_node<> *objectReferenceNode = node->first_node("object");	
+		if (!objectReferenceNode)
+			return;
+
+		xml_attribute<> *objectReferenceAttribute = objectReferenceNode->first_attribute("reference");
+		if (!objectReferenceAttribute)
+			return;
+
+		string reference = objectReferenceAttribute->value();
+		reference = reference + "/";
+		xml_node<> *objectNode = EvaluateString("/", reference, objectReferenceNode);
+		if (!objectNode)
+			return;
+
+		xml_node<> *nameNode = objectNode->first_node("name");
+		if (!nameNode)
+			return;
+		Object *object = project->getObjectList()->getObject(nameNode->value());
+
+		xml_node<> *listNode = node->first_node("list");
+		if (!listNode)
+			return;
+		listNode = listNode->first_node("userVariable");
+		while (listNode)
+		{
+			object->addVariable(parseUserVariable(listNode));
+			listNode = listNode->next_sibling("userVariable");
+		}
+		node = node->next_sibling("entry");
+	}
+
+	variableListNode = baseNode->first_node("programVariableList");
+	if (!variableListNode)
+		return;
+	node = variableListNode->first_node("userVariable");
+	while (node)
+	{
+		m_project->addVariable(parseUserVariable(node));
+		node = node->next_sibling("userVariable");
+	}
+
+
+}
+
+pair<string, string> XMLParser::parseUserVariable(xml_node<> *baseNode)
+{
+	xml_node<> *referencedNode = baseNode;
+	xml_attribute<> *referenceAttribute = baseNode->first_attribute("reference");
+	string reference = referenceAttribute->value();
+
+	xml_node<> *evaluatedReferenceNode = EvaluateString("/", reference, referencedNode);
+	evaluatedReferenceNode = evaluatedReferenceNode->first_node("userVariable");
+
+	xml_node<> *variableNode = evaluatedReferenceNode->first_node("name");
+	string name = variableNode->value();
+	variableNode = evaluatedReferenceNode->first_node("value");
+	string value = variableNode->value();
+
+	return pair<string, string>(name, value);
+}
+
+ xml_node<> *XMLParser::EvaluateString(string query, string input, xml_node<> *node)
+{
+	size_t characterPos = input.find(query);
+	while (characterPos != string::npos)
+	{
+		string result = input.substr(0, characterPos);
+		if (result == "..")
+			node = node->parent();
+		else
+		{
+			int value = EvaluateIndex(&result);
+			node = node->first_node(result.c_str());
+			for (int index = 0; index < value; index ++)
+			{
+				node = node->next_sibling(result.c_str());
+			}
+		}
+			
+		input.erase(0, characterPos + 1);
+		characterPos = input.find(query);
+	}
+	return node;
+}
+
+int XMLParser::EvaluateIndex(string *input)
+{
+	int result = 0;
+	size_t bracketPosBegin = input->find("[");
+	size_t bracketPosEnd = input->find("[");
+	if (bracketPosBegin != string::npos && bracketPosEnd != string::npos)
+	{
+		string index = input->substr(bracketPosBegin + 1, bracketPosEnd - 1);
+		input->erase(bracketPosBegin, bracketPosEnd);
+		result = atoi(index.c_str());
+		if (result > 0)
+			result--;
+	}
+	return result;
 }

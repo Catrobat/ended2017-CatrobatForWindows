@@ -22,3 +22,13 @@ Object *ObjectList::getObject(int index)
 	advance(it, index);
 	return *it;
 }
+
+Object *ObjectList::getObject(string name)
+{
+	list<Object*>::iterator it = m_objects->begin();
+	for (it = m_objects->begin(); it != m_objects->end(); it++)
+	{
+		if ((*it)->getName() == name)
+			return *it;
+	}
+}

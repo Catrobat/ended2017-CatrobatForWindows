@@ -62,6 +62,11 @@ private:
 
 	FormulaTree*				parseFormulaTree			(xml_node<> *baseNode);
 
+	void						parseVariableList			(xml_document<> *doc, Project *project);
+	std::pair<string, string>	parseUserVariable			(xml_node<> *baseNode);
+	xml_node<>*					EvaluateString				(string query, string input, xml_node<> *node);
+	int							EvaluateIndex				(string *input);
+
 	// Parser Helper Methods
 	bool						parseBoolean				(std::string input);
 	std::vector<std::string>*	parseVector					(std::string input);
