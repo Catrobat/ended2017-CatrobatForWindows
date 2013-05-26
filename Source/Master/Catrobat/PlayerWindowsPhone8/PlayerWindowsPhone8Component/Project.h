@@ -2,6 +2,7 @@
 
 #include "BaseObject.h"
 #include "ObjectList.h"
+#include "UserVariable.h"
 
 #include <vector>
 
@@ -42,9 +43,9 @@ public:
 	int									ScreenWidth();
 
 	ObjectList*							getObjectList();
-	std::string							Variable(std::string name);
-	void								addVariable(std::string name, std::string value);
-	void								addVariable(std::pair<string, string> variable);
+	UserVariable*						Variable(std::string name);
+	void								addVariable(std::string name, UserVariable *variable);
+	void								addVariable(std::pair<string, UserVariable*> variable);
 
 
 private:
@@ -72,6 +73,6 @@ private:
 	std::string							m_userHandle;
 
 	ObjectList*							m_objectList;
-	std::map<std::string, std::string>*	m_variableList;
+	std::map<std::string, UserVariable*>*	m_variableList;
 };
 

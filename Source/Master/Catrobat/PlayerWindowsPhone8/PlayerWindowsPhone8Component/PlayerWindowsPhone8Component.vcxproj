@@ -202,6 +202,7 @@
     <ClInclude Include="TurnLeftBrick.h" />
     <ClInclude Include="TextureDaemon.h" />
     <ClInclude Include="TurnRightBrick.h" />
+    <ClInclude Include="UserVariable.h" />
     <ClInclude Include="VariableManagementBrick.h" />
     <ClInclude Include="WaitBrick.h" />
     <ClInclude Include="WhenScript.h" />
@@ -263,6 +264,7 @@
     <ClCompile Include="TurnLeftBrick.cpp" />
     <ClCompile Include="TextureDaemon.cpp" />
     <ClCompile Include="TurnRightBrick.cpp" />
+    <ClCompile Include="UserVariable.cpp" />
     <ClCompile Include="VariableManagementBrick.cpp" />
     <ClCompile Include="WaitBrick.cpp" />
     <ClCompile Include="WhenScript.cpp" />

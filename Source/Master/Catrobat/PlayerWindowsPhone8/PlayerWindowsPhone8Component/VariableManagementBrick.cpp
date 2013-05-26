@@ -5,3 +5,9 @@ VariableManagementBrick::VariableManagementBrick(TypeOfBrick brickType, string o
 	Brick(brickType, objectReference, parent)
 {
 }
+
+void VariableManagementBrick::SetVariable(UserVariable *variable)
+{
+	if (variable != NULL)
+		m_variable = variable;
+}

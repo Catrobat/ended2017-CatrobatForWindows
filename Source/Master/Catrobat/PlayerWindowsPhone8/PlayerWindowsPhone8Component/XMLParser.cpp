@@ -17,6 +17,7 @@
 #include "IfBrick.h"
 #include "ForeverBrick.h"
 #include "RepeatBrick.h"
+#include "SetVariableBrick.h"
 
 #include <time.h>
 #include <iostream>
@@ -28,6 +29,7 @@ using namespace rapidxml;
 XMLParser::XMLParser()
 {
 	containerStack = new std::vector<ContainerBrick*>();
+	m_pendingVariables = new map<VariableManagementBrick*, string>();
 }
 
 XMLParser::~XMLParser()
@@ -70,6 +72,7 @@ void XMLParser::parseXML(string xml)
 	m_project = parseProjectHeader(&doc);
 	parseObjectList(&doc, m_project->getObjectList());
 	parseVariableList(&doc, m_project);
+	SetPendingVariables();
 }
 
 Project* XMLParser::parseProjectHeader(xml_document<> *doc)
@@ -469,6 +472,10 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 		{
 			parseRepeatEndBrick(node, script);
 		}
+		else if(strcmp(node->name(), "setVariableBrick") == 0)
+		{
+			current = parseSetVariableBrick(node, script);
+		}
 
 		if (current != NULL)
 		{
@@ -828,6 +835,44 @@ Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script *script)
 	return new PlaySoundBrick(objectReference, filename, name, script);
 }
 
+Brick *XMLParser::parseSetVariableBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("userVariable");
+	if (!node)
+		return NULL;
+
+	xml_node<> *variableNode = node->first_node("name");
+	string name;
+	if (variableNode)
+		name = variableNode->value();
+	else
+	{
+		xml_attribute<> *referenceAttribute = node->first_attribute("reference");
+		if (!referenceAttribute)
+			return NULL;
+		string reference = referenceAttribute->value();
+		reference = reference + "/";
+		xml_node<> *referencedNode = EvaluateString("/", reference, node); 
+		variableNode = referencedNode->first_node("name");
+		if (!variableNode)
+			return NULL;
+		name = variableNode->value();
+	}
+
+	node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	VariableManagementBrick *newBrick = new SetVariableBrick(objectReference, script);
+	m_pendingVariables->insert(pair<VariableManagementBrick*, string>(newBrick, name));
+	return newBrick;
+}
+
 FormulaTree *XMLParser::parseFormulaTree(xml_node<> *baseNode)
 {
 	xml_node<> *node = baseNode->first_node("type");
@@ -927,7 +972,7 @@ void XMLParser::parseVariableList(xml_document<> *doc, Project *project)
 
 }
 
-pair<string, string> XMLParser::parseUserVariable(xml_node<> *baseNode)
+pair<string, UserVariable*> XMLParser::parseUserVariable(xml_node<> *baseNode)
 {
 	xml_node<> *referencedNode = baseNode;
 	xml_attribute<> *referenceAttribute = baseNode->first_attribute("reference");
@@ -940,8 +985,9 @@ pair<string, string> XMLParser::parseUserVariable(xml_node<> *baseNode)
 	string name = variableNode->value();
 	variableNode = evaluatedReferenceNode->first_node("value");
 	string value = variableNode->value();
+	UserVariable *variable = new UserVariable(name, value);
 
-	return pair<string, string>(name, value);
+	return pair<string, UserVariable*>(name, variable);
 }
 
  xml_node<> *XMLParser::EvaluateString(string query, string input, xml_node<> *node)
@@ -982,4 +1028,14 @@ int XMLParser::EvaluateIndex(string *input)
 			result--;
 	}
 	return result;
+}
+
+void XMLParser::SetPendingVariables()
+{
+	for (map<VariableManagementBrick*, string>::iterator it = m_pendingVariables->begin(); it != m_pendingVariables->end(); it++)
+	{
+		
+		it->first->SetVariable(it->first->Parent()->Parent()->Variable(it->second));
+		it->first->SetVariable(m_project->Variable(it->second));
+	}
 }

@@ -7,5 +7,8 @@ class SetVariableBrick
 {
 public:
 	SetVariableBrick(string objectReference, Script *parent);
+	void Execute();
+
+	void SetVariable(UserVariable *variable);
 };
 
