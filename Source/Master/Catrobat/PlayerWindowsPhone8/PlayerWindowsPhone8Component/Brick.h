@@ -35,7 +35,8 @@ public:
 		IfBrick,
 		ContainerBrick,
 		ChangeGhostEffectByBrick,
-		NextlookBrick
+		NextlookBrick,
+		SetVariableBrick
 	};
 
 	Script *Parent();

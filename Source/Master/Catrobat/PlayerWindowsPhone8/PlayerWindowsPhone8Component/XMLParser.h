@@ -9,6 +9,8 @@
 #include "Look.h"
 #include "Brick.h"
 #include "FormulaTree.h"
+#include "VariableManagementBrick.h"
+#include "UserVariable.h"
 
 using namespace std;
 using namespace rapidxml;
@@ -28,7 +30,8 @@ private:
 	Project*					m_project;
 
 	// Parser
-	vector<ContainerBrick*>*	containerStack;					
+	vector<ContainerBrick*> *containerStack;	
+	map<VariableManagementBrick*, string> *m_pendingVariables;
 
 	void						parseXML					(string xml);
 	Project*					parseProjectHeader			(xml_document<> *doc);
@@ -59,13 +62,15 @@ private:
 	void						parseForeverEndBrick		(xml_node<> *baseNode, Script *script);
 	Brick*						parseRepeatBrick			(xml_node<> *baseNode, Script *script);
 	void						parseRepeatEndBrick			(xml_node<> *baseNode, Script *script);
+	Brick*						parseSetVariableBrick		(xml_node<> *baseNode, Script *script);
 
 	FormulaTree*				parseFormulaTree			(xml_node<> *baseNode);
 
 	void						parseVariableList			(xml_document<> *doc, Project *project);
-	std::pair<string, string>	parseUserVariable			(xml_node<> *baseNode);
+	pair<string, UserVariable*>	parseUserVariable			(xml_node<> *baseNode);
 	xml_node<>*					EvaluateString				(string query, string input, xml_node<> *node);
 	int							EvaluateIndex				(string *input);
+	void						SetPendingVariables			();
 
 	// Parser Helper Methods
 	bool						parseBoolean				(std::string input);

@@ -166,6 +166,15 @@
     <ClCompile Include="NextLookBrick.cpp">
       <Filter>Objects\Bricks\Look</Filter>
     </ClCompile>
+    <ClCompile Include="SetVariableBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="UserVariable.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableManagementBrick.cpp">
+      <Filter>Objects\Bricks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -338,6 +347,15 @@
     </ClInclude>
     <ClInclude Include="NextLookBrick.h">
       <Filter>Objects\Bricks\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVariableBrick.h">
+      <Filter>Objects\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="UserVariable.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableManagementBrick.h">
+      <Filter>Objects\Bricks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
