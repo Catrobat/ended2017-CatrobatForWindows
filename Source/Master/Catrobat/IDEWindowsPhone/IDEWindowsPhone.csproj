@@ -400,7 +400,6 @@
     <Content Include="Content\Resources\SampleProjects\pointTo.catroid" />
     <Content Include="Content\Resources\SampleProjects\speakBrick.catroid" />
     <Content Include="Content\Resources\SampleProjects\SwitchBackground.catroid" />
-    <None Include="IDEWindowsPhone_2013_05_28_19_44_41.sap" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">

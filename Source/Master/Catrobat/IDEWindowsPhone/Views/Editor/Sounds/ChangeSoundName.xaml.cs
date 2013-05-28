@@ -7,13 +7,16 @@ using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using System.ComponentModel;
 using Microsoft.Phone.Shell;
+using Catrobat.IDEWindowsPhone.ViewModel;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
   public partial class ChangeSoundName : PhoneApplicationPage
   {
+    private EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
+
     ApplicationBarIconButton btnSave;
-    public static Sound Sound{get; set;}
     
     public ChangeSoundName()
     {
@@ -24,7 +27,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
       Dispatcher.BeginInvoke(() =>
       {
-        txtName.Text = Sound.Name;
+        txtName.Text = _editorViewModel.SelectedSound.Name;
         txtName.Focus();
         txtName.SelectAll();
       });
@@ -52,13 +55,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
     private void btnSave_Click(object sender, EventArgs e)
     {
-      Sound.Name = txtName.Text;
+      _editorViewModel.SelectedSound.Name = txtName.Text;
       NavigationService.GoBack();
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
-      Sound = null;
+      _editorViewModel.SelectedSound.Name = null;
       NavigationService.GoBack();
     }
 

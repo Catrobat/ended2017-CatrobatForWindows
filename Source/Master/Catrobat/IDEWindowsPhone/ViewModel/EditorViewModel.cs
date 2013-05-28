@@ -307,6 +307,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       }
     }
 
+    public Costume EditCostume { get; set; }
+
+    public BrickCategory SelectedBrickCategory { get; set; }
+
+    public DataObject SelectedBrick { get; set; }
+
+    public Sound SelectedSound { get; set; }
+
     # endregion
 
     public EditorViewModel()

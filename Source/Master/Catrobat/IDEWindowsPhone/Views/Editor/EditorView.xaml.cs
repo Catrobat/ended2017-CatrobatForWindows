@@ -58,10 +58,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
       reorderListBoxSprites.SelectedItem = _editorViewModel.SelectedSprite;
 
       // TODO: do this somewhere else
-      if (AddNewBrick.SelectedBrick != null)
+      if (_editorViewModel.SelectedBrick != null)
       {
         Sprite selectedSprite = _editorViewModel.SelectedSprite;
-        DataObject newScriptBrick = AddNewBrick.SelectedBrick;
+        DataObject newScriptBrick = _editorViewModel.SelectedBrick;
 
         ((ScriptBrickCollection)reorderListBoxScriptBricks.ItemsSource).AddScriptBrick(newScriptBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex);
 
@@ -75,7 +75,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
         reorderListBoxScriptBricks.UpdateLayout();
         reorderListBoxScriptBricks.ScrollIntoView(reorderListBoxScriptBricks.ItemContainerGenerator.ContainerFromItem(newScriptBrick));
-        AddNewBrick.SelectedBrick = null;
+        _editorViewModel.SelectedBrick = null;
       }
     }
 
@@ -91,10 +91,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
     private void reorderListBoxScriptBricks_Loaded(object sender, RoutedEventArgs e)
     {
-      if (AddNewBrick.SelectedBrick != null)
+      if (_editorViewModel.SelectedBrick != null)
       {
-        reorderListBoxScriptBricks.ScrollIntoView(AddNewBrick.SelectedBrick);
-        AddNewBrick.SelectedBrick = null;
+        reorderListBoxScriptBricks.ScrollIntoView(_editorViewModel.SelectedBrick);
+        _editorViewModel.SelectedBrick = null;
       }
     }
 
@@ -216,7 +216,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
     private void btnEditSpriteName_Click(object sender, RoutedEventArgs e)
     {
-      ChangeSpriteName.Sprite = ((Button)sender).DataContext as Sprite;
+      _editorViewModel.SelectedSprite = ((Button)sender).DataContext as Sprite;
       NavigationService.Navigate(new Uri("/Views/Editor/Sprites/ChangeSpriteName.xaml", UriKind.Relative));
     }
 
@@ -242,7 +242,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
     private void btnEditSoundName_Click(object sender, RoutedEventArgs e)
     {
-      ChangeSoundName.Sound = ((Button)sender).DataContext as Sound;
+      _editorViewModel.SelectedSound = ((Button)sender).DataContext as Sound;
       NavigationService.Navigate(new Uri("/Views/Editor/Sounds/ChangeSoundName.xaml", UriKind.Relative));
     }
 
@@ -291,7 +291,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
     private void btnEditCostumeName_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      ChangeCostumeName.Costume = ((Button)sender).DataContext as Costume;
+      _editorViewModel.EditCostume = ((Button)sender).DataContext as Costume;
       NavigationService.Navigate(new Uri("/Views/Editor/Costumes/ChangeCostumeName.xaml", UriKind.Relative));
     }
 

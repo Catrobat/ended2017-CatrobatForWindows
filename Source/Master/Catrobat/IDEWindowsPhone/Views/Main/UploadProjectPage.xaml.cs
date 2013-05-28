@@ -16,8 +16,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     public UploadProjectPage()
     {
       InitializeComponent();
-
-      // Get ViewModel
       _viewModel = DataContext as UploadProjectViewModel;
     }
 
