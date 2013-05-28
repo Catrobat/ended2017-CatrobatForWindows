@@ -17,12 +17,15 @@ using Catrobat.Core.Misc.Helpers;
 using System.Globalization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.Core.Misc.ServerCommunication;
+using Catrobat.IDEWindowsPhone;
 
 
 namespace IDEWindowsPhone
 {
   public partial class App : Application
   {
+    public CatrobatContext Context;
+
     /// <summary>
     /// Provides easy access to the root frame of the Phone Application.
     /// </summary>
@@ -38,6 +41,7 @@ namespace IDEWindowsPhone
       ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryPhone());
       LanguageHelper.SetICulture(new CulturePhone());
       ServerCommunication.SetIServerCommunication(new ServerCommunicationPhone());
+      CatrobatContext.SetContextHolder(new ContextHolderWindowsPhone());
 
       // Global handler for uncaught exceptions.
       UnhandledException += Application_UnhandledException;
@@ -80,17 +84,17 @@ namespace IDEWindowsPhone
     // This code will not execute when the application is reactivated
     private void Application_Launching(object sender, LaunchingEventArgs e)
     {
-      if (CatrobatContext.Instance.LocalSettings.CurrentLanguageString == null)
-        CatrobatContext.Instance.LocalSettings.CurrentLanguageString = LanguageHelper.GetCurrentCultureLanguageCode();
+      if (CatrobatContext.GetContext().LocalSettings.CurrentLanguageString == null)
+        CatrobatContext.GetContext().LocalSettings.CurrentLanguageString = LanguageHelper.GetCurrentCultureLanguageCode();
 
 
-      if (CatrobatContext.Instance.LocalSettings.CurrentThemeIndex != -1)
-        (App.Current.Resources["ThemeChooser"] as ThemeChooser).SelectedThemeIndex = CatrobatContext.Instance.LocalSettings.CurrentThemeIndex;
+      if (CatrobatContext.GetContext().LocalSettings.CurrentThemeIndex != -1)
+        (App.Current.Resources["ThemeChooser"] as ThemeChooser).SelectedThemeIndex = CatrobatContext.GetContext().LocalSettings.CurrentThemeIndex;
 
-      if (CatrobatContext.Instance.LocalSettings.CurrentLanguageString != null)
-        (App.Current.Resources["Locator"] as ViewModelLocator).Main.CurrentCulture = new CultureInfo(CatrobatContext.Instance.LocalSettings.CurrentLanguageString);
+      if (CatrobatContext.GetContext().LocalSettings.CurrentLanguageString != null)
+        (App.Current.Resources["Locator"] as ViewModelLocator).Main.CurrentCulture = new CultureInfo(CatrobatContext.GetContext().LocalSettings.CurrentLanguageString);
 
-      CatrobatContext.Instance.ContextSaving += ContextSaving;
+      CatrobatContext.GetContext().ContextSaving += ContextSaving;
     }
 
     private void ContextSaving()
@@ -99,10 +103,10 @@ namespace IDEWindowsPhone
       MainViewModel mainViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Main;
 
       if (themeChooser.SelectedTheme != null)
-        CatrobatContext.Instance.LocalSettings.CurrentThemeIndex = themeChooser.SelectedThemeIndex;
+        CatrobatContext.GetContext().LocalSettings.CurrentThemeIndex = themeChooser.SelectedThemeIndex;
 
       if (mainViewModel.CurrentCulture != null)
-        CatrobatContext.Instance.LocalSettings.CurrentLanguageString = mainViewModel.CurrentCulture.Name;
+        CatrobatContext.GetContext().LocalSettings.CurrentLanguageString = mainViewModel.CurrentCulture.Name;
     }
 
     // Code to execute when the application is activated (brought to foreground)
@@ -115,7 +119,7 @@ namespace IDEWindowsPhone
     // This code will not execute when the application is closing
     private void Application_Deactivated(object sender, DeactivatedEventArgs e)
     {
-      CatrobatContext.Instance.Save();
+      CatrobatContext.GetContext().Save();
     }
 
     // Code to execute when the application is closing (eg, user hit Back)
@@ -123,7 +127,7 @@ namespace IDEWindowsPhone
     private void Application_Closing(object sender, ClosingEventArgs e)
     {
       ViewModelLocator.Cleanup();
-      CatrobatContext.Instance.Save();
+      CatrobatContext.GetContext().Save();
     }
 
     // Code to execute if a navigation fails

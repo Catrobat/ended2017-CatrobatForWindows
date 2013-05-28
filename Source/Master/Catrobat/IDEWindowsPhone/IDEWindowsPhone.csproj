@@ -103,6 +103,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ContextHolderWindowsPhone.cs" />
     <Compile Include="Controls\Bricks\MasterBrick.cs" />
     <Compile Include="Controls\Bricks\NormalBrick.cs" />
     <Compile Include="Controls\Buttons\SettingsButton.cs" />
@@ -399,6 +400,7 @@
     <Content Include="Content\Resources\SampleProjects\pointTo.catroid" />
     <Content Include="Content\Resources\SampleProjects\speakBrick.catroid" />
     <Content Include="Content\Resources\SampleProjects\SwitchBackground.catroid" />
+    <None Include="IDEWindowsPhone_2013_05_28_19_44_41.sap" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">

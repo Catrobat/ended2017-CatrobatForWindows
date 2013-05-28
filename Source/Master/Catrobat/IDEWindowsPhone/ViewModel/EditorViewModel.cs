@@ -131,14 +131,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       SoundList soundList = SelectedSprite.Sounds;
       soundList.Sounds.Remove(sound);
 
-      CatrobatContext.Instance.CleanUpSoundReferences(sound, sound.Sprite);
+      CatrobatContext.GetContext().CleanUpSoundReferences(sound, sound.Sprite);
     }
 
     private void DeleteSpriteAction(Sprite sprite)
     {
       sprite.Delete();
-      CatrobatContext.Instance.CurrentProject.SpriteList.Sprites.Remove(sprite);
-      CatrobatContext.Instance.CleanUpSpriteReferences(sprite);
+      CatrobatContext.GetContext().CurrentProject.SpriteList.Sprites.Remove(sprite);
+      CatrobatContext.GetContext().CleanUpSpriteReferences(sprite);
     }
 
     private void DeleteCostumeAction(Costume costume)
@@ -148,7 +148,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       CostumeList costumeList = SelectedSprite.Costumes;
       costumeList.Costumes.Remove(costume);
 
-      CatrobatContext.Instance.CleanUpCostumeReferences(costume, costume.Sprite);
+      CatrobatContext.GetContext().CleanUpCostumeReferences(costume, costume.Sprite);
     }
 
     private void CopyCostumeAction(Costume costume)
@@ -331,7 +331,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       }
       else
       {
-        _catrobatContext = CatrobatContext.Instance;
+        _catrobatContext = CatrobatContext.GetContext();
       }
 
       _scriptBricks = new ScriptBrickCollection();

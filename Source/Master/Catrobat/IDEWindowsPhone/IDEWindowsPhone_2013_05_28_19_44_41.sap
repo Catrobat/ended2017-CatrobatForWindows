@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProfilerSession Type="MemoryPerformanceAnalysis" Name="IDEWindowsPhone3867614393">
+  <TargetApplication Name="IDEWindowsPhone_Debug_AnyCPU" SourceProject="IDEWindowsPhone.csproj" Type="WindowsPhone">
+    <ApplicationBinary Path="Bin\Debug\IDEWindowsPhone_Debug_AnyCPU.xap" Timestamp="17.02.2013 12:36:44" />
+    <ApplicationIconPath Path="" />
+    <SymbolPaths>
+      <Path Value="Bin\Debug\" />
+    </SymbolPaths>
+  </TargetApplication>
+  <Settings>
+    <Probe Name="Visual">
+      <CollectElementLevelCosting Enabled="True" />
+      <CollectSnapshots Enabled="True" Interval="1000" Resampling="2" />
+      <CollectMediaEvents Enabled="False" />
+      <CollectCacheDetails Enabled="False" />
+    </Probe>
+    <Probe Name="Code">
+      <SampleCallStack Enabled="False" Depth="" Interval="1000" />
+      <CollectPerformanceCounters Enabled="False" />
+    </Probe>
+    <Probe Name="Memory">
+      <MemoryCallStack Enabled="True" Depth="8" />
+      <ObjectTree Enabled="True" Interval="5" />
+    </Probe>
+  </Settings>
+  <Data>
+    <Logs>
+      <File Type="NativeFormat" Path="PerfLogs\IDEWindowsPhone3867614393\tmp5714.spl" />
+    </Logs>
+  </Data>
+  <TargetDeviceSettings OSVersion="8.0.10211" AvailablePhysicalMemoryAtStartup="0" ProcessorArchitectureType="Arm" ProcessorInformation="Unknown" IsEmulator="False" />
+</ProfilerSession>

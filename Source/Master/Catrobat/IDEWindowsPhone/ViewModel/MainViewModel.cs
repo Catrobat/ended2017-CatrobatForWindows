@@ -29,6 +29,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     private readonly ICatrobatContext _catrobatContext;
     public new event PropertyChangedEventHandler PropertyChanged;
 
+    public CatrobatContext Context { get; set; }
+
     public CultureInfo CurrentCulture
     {
       get
@@ -139,7 +141,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
           RaisePropertyChanged("CurrentProjectScreenshot");
         }
 
-        CatrobatContext.Instance.CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
+        CatrobatContext.GetContext().CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
       }
     }
 
@@ -164,8 +166,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     public MainViewModel()
     {
-      CatrobatContext.Instance.PropertyChanged += CatrobatContextPropertyChanged;
-      CatrobatContext.Instance.CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
+      Context = new CatrobatContext();
+      Context.PropertyChanged += CatrobatContextPropertyChanged;
+      Context.CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
 
       var themeChooser = Application.Current.Resources["ThemeChooser"] as ThemeChooser;
       if (themeChooser != null)
@@ -180,7 +183,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       if (IsInDesignMode)
         _catrobatContext = new CatrobatContextDesign();
       else
-        _catrobatContext = CatrobatContext.Instance;
+        _catrobatContext = Context;
     }
 
     private void LoadOnlineProjectsCallback(List<OnlineProjectHeader> projects, bool append)
@@ -226,7 +229,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
       if (_dialogResult == MessageBoxResult.OK)
       {
-        CatrobatContext.Instance.DeleteProject(projectName);
+        CatrobatContext.GetContext().DeleteProject(projectName);
       }
     }
 
@@ -248,7 +251,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
       if (_dialogResult == MessageBoxResult.OK)
       {
-        CatrobatContext.Instance.CopyProject(projectName);
+        CatrobatContext.GetContext().CopyProject(projectName);
       }
     }
 
@@ -271,7 +274,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     private void SetCurrentProject(string projectName)
     {
-      CatrobatContext.Instance.SetCurrentProject(projectName);
+      CatrobatContext.GetContext().SetCurrentProject(projectName);
     }
 
     // This is a fix to the bug that the overwritten RaisePropertyChanged is not working properly

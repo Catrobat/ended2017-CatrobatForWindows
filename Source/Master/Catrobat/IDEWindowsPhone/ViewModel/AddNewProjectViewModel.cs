@@ -46,13 +46,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       if (IsInDesignMode)
         catrobatContext = new CatrobatContextDesign();
       else
-        catrobatContext = CatrobatContext.Instance;
+        catrobatContext = CatrobatContext.GetContext();
     }
 
     private void Save()
     {
-      CatrobatContext.Instance.CurrentProject.Save();
-      CatrobatContext.Instance.CreateNewProject(_projectName);
+      CatrobatContext.GetContext().CurrentProject.Save();
+      CatrobatContext.GetContext().CreateNewProject(_projectName);
 
       ProjectName = "";
     }

@@ -52,9 +52,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sprites
 
     private void btnSave_Click(object sender, EventArgs e)
     {
-      Sprite sprite = new Sprite(CatrobatContext.Instance.CurrentProject);
+      Sprite sprite = new Sprite(CatrobatContext.GetContext().CurrentProject);
       sprite.Name = txtName.Text;
-      CatrobatContext.Instance.CurrentProject.SpriteList.Sprites.Add(sprite);
+      CatrobatContext.GetContext().CurrentProject.SpriteList.Sprites.Add(sprite);
 
       NavigationService.GoBack();
     }

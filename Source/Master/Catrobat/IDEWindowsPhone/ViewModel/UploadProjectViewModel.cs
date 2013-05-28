@@ -73,7 +73,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       if (IsInDesignMode)
         catrobatContext = new CatrobatContextDesign();
       else
-        catrobatContext = CatrobatContext.Instance;
+        catrobatContext = CatrobatContext.GetContext();
 
       _projectName = catrobatContext.CurrentProject.ProjectName;
     }
@@ -83,9 +83,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       catrobatContext.CurrentProject.ProjectName = _projectName;
 
       ServerCommunication.UploadProject(_projectName, _projectDescription,
-        CatrobatContext.Instance.CurrentUserEmail,
+        CatrobatContext.GetContext().CurrentUserEmail,
         Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
-        CatrobatContext.Instance.CurrentToken, UploadCallback);
+        CatrobatContext.GetContext().CurrentToken, UploadCallback);
 
       Messenger.Default.Send(new DialogMessage(MainResources.UploadQueueMessage, null)
       {

@@ -227,7 +227,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
     private void btnSave_Click(object sender, EventArgs e)
     {
       Sound sound = new Sound(txtName.Text, editorViewModel.SelectedSprite);
-      string path = CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
+      string path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
 
 
       using (IStorage storage = StorageSystem.GetStorage())

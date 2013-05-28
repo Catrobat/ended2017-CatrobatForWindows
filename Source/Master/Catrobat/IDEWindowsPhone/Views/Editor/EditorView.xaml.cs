@@ -223,7 +223,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
     private void btnCopySprite_Click(object sender, RoutedEventArgs e)
     {
       Sprite newSprite = (((Button)sender).DataContext as Sprite).Copy() as Sprite;
-      CatrobatContext.Instance.CurrentProject.SpriteList.Sprites.Add(newSprite);
+      CatrobatContext.GetContext().CurrentProject.SpriteList.Sprites.Add(newSprite);
     }
 
 

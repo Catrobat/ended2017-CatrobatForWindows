@@ -87,7 +87,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     private void buttonUploadCurrentProject_Click(object sender, RoutedEventArgs e)
     {
       // Determine which page to open
-      ServerCommunication.CheckToken(CatrobatContext.Instance.CurrentToken, CheckTokenEvent);
+      ServerCommunication.CheckToken(CatrobatContext.GetContext().CurrentToken, CheckTokenEvent);
     }
 
     private void CheckTokenEvent(bool registered)
@@ -106,12 +106,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void ButtonCopyLocalProject_OnClick(object sender, RoutedEventArgs e)
     {
-      CatrobatContext.Instance.CopyProject(((sender as FrameworkElement).DataContext as Project).ProjectName);
+      CatrobatContext.GetContext().CopyProject(((sender as FrameworkElement).DataContext as Project).ProjectName);
     }
 
     private void ButtonDeleteLocalProject_OnClick(object sender, RoutedEventArgs e)
     {
-      CatrobatContext.Instance.DeleteProject(((sender as FrameworkElement).DataContext as Project).ProjectName);
+      CatrobatContext.GetContext().DeleteProject(((sender as FrameworkElement).DataContext as Project).ProjectName);
     }
   }
 }

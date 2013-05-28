@@ -21,7 +21,7 @@ namespace Catrobat.TestsCommon.Tests.Data
     {
       SampleLoader.LoadSampleProject("UltimateTest.catroid", "UltimateTest");
 
-      var project = CatrobatContext.Instance.CurrentProject;
+      var project = CatrobatContext.GetContext().CurrentProject;
 
       var sprite1 = project.SpriteList.Sprites[0];
       var sprite2 = project.SpriteList.Sprites[1];

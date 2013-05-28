@@ -24,13 +24,13 @@ namespace Catrobat.TestsCommon.Tests.Data
       // TODO: load sample priject
 
       // check if project has sucessfully loaded default project
-      Assert.AreEqual(CatrobatContext.Instance.LocalSettings.CurrentProjectName, "DefaultProject");
+      Assert.AreEqual(CatrobatContext.GetContext().LocalSettings.CurrentProjectName, "DefaultProject");
     }
 
     [TestMethod]
     public void StoreLocalSettingsTest()
     {
-      CatrobatContext.Instance.StoreLocalSettings();
+      CatrobatContext.GetContext().StoreLocalSettings();
 
       using (var storage = StorageSystem.GetStorage())
       {

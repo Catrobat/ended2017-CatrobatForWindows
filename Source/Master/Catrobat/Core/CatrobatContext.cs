@@ -28,7 +28,7 @@ namespace Catrobat.Core
     private ObservableCollection<ProjectHeader> _localProjects;
 
 
-    private CatrobatContext()
+    public CatrobatContext()
     {
       bool firstTimeUse = !RestoreLocalSettings();
 
@@ -50,12 +50,18 @@ namespace Catrobat.Core
       }
     }
 
-    public LocalSettings LocalSettings { get; set; }
-
-    public static CatrobatContext Instance
+    public static void SetContextHolder(IContextHolder holder)
     {
-      get { return Nested.instance; }
+      _holder = holder;
     }
+
+    private static IContextHolder _holder;
+    public static CatrobatContext GetContext()
+    {
+      return _holder.GetContext();
+    }
+
+    public LocalSettings LocalSettings { get; set; }
 
     public string CurrentToken
     {
@@ -205,7 +211,7 @@ namespace Catrobat.Core
 
     public void UpdateLocalProjects()
     {
-      if (Instance == null || Instance.CurrentProject == null)
+      if (CurrentProject == null)
         return;
 
       if (_localProjects == null)
@@ -219,7 +225,7 @@ namespace Catrobat.Core
 
         foreach (string projectName in projectNames)
         {
-          if (projectName != Instance.CurrentProject.ProjectName)
+          if (projectName != CurrentProject.ProjectName)
           {
             object projectScreenshot =  storage.LoadImage(ProjectsPath + "/" + projectName + "/" + Project.ScreenshotPath);
             var projectHeader = new ProjectHeader
@@ -331,20 +337,10 @@ namespace Catrobat.Core
               (brick as PointToBrick).UpdateReference();
     }
 
-
     private void OnPropertyChanged(string property)
     {
       if (PropertyChanged != null)
         PropertyChanged(this, new PropertyChangedEventArgs(property));
-    }
-
-    private class Nested
-    {
-      internal static readonly CatrobatContext instance = new CatrobatContext();
-
-      static Nested()
-      {
-      }
     }
   }
 }
