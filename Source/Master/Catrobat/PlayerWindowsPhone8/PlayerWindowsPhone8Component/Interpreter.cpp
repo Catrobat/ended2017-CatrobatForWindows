@@ -34,8 +34,6 @@ int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 		{
 			string varName = tree->Value();
 			UserVariable *var = object->Variable(varName);
-			if (!var)
-				var = ProjectDaemon::Instance()->getProject()->Variable(varName);
 			if (var)
 				return atoi(var->Value().c_str());
 		}
@@ -59,8 +57,6 @@ float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 		{
 			string varName = tree->Value();
 			UserVariable *var = object->Variable(varName);
-			if (!var)
-				var = ProjectDaemon::Instance()->getProject()->Variable(varName);
 			if (var)
 				return atof(var->Value().c_str());
 		}
