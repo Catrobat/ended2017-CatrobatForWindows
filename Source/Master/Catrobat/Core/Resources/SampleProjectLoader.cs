@@ -16,18 +16,16 @@ namespace Catrobat.Core.Resources
       {"HAL9000.catrobat", "HAL 9000"},
       {"Aquarium_v2.catrobat","Aquarium v2"},
       {"Fishy.catroid","Fishy"},
-      {"Egg_timer.catrobat","Egg Timer"},
-      {"speakBrick.catroid", "SpeakBrick"},
-      {"Broadcast_test.catroid", "BroadCastBricks"}, 
-      {"pointTo.catroid","PointBrick"},
-      {"LookBricks.catroid","LookBrick"},
-      {"MotionBrick.catroid","Motion"},
-      {"SwitchBackground.catroid", "BackgroundSwitching"},
-      {"glideTo.catroid", "GlideTo"},  
+      {"Egg_timer.catrobat","Egg Timer"}
     };
 
     public void LoadSampleProjects()
     {
+      using (var storage = StorageSystem.GetStorage())
+      {
+        storage.DeleteDirectory("");
+      }
+
       foreach (KeyValuePair<string, string> pair in _sampleProjectNames)
       {
         string projectFileName = pair.Key;
