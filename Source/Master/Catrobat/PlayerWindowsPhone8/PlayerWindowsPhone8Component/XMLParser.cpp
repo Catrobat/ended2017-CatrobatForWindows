@@ -723,7 +723,7 @@ void XMLParser::parseIfLogicElseBrick(xml_node<> *baseNode, Script *script)
 	if (containerStack->size() > 0)
 	{
 		// Change mode
-		((IfBrick*) (*containerStack->end()))->setCurrentAddMode(IfBranchType::Else);
+		((IfBrick*) (containerStack->back()))->setCurrentAddMode(IfBranchType::Else);
 	}
 }
 
