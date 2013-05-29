@@ -7,12 +7,16 @@ using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
+using Microsoft.Practices.ServiceLocation;
+using Catrobat.IDEWindowsPhone.ViewModel;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 {
   public partial class ChangeCostumeName : PhoneApplicationPage
   {
-    public static Costume Costume{get; set;}
+    EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
+
+    //public static Costume Costume{get; set;}
     ApplicationBarIconButton btnSave;
     
     public ChangeCostumeName()
@@ -24,7 +28,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 
       Dispatcher.BeginInvoke(() =>
       {
-        txtName.Text = Costume.Name;
+        txtName.Text = _editorViewModel.EditCostume.Name;
         txtName.Focus();
         txtName.SelectAll();
       });
@@ -52,13 +56,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 
     private void btnSave_Click(object sender, EventArgs e)
     {
-      Costume.Name = txtName.Text;
+      _editorViewModel.EditCostume.Name = txtName.Text;
       NavigationService.GoBack();
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
-      Costume = null;
+      _editorViewModel.EditCostume = null;
       NavigationService.GoBack();
     }
 

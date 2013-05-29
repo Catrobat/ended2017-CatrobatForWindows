@@ -4,8 +4,8 @@ class SetGhostEffectBrick :
 	public Brick
 {
 public:
-	SetGhostEffectBrick(string spriteReference, float transparency, Script *parent);
+	SetGhostEffectBrick(string spriteReference, FormulaTree *transparency, Script *parent);
 	void Execute();
 private:
-	float m_transparency;
+	FormulaTree *m_transparency;
 };

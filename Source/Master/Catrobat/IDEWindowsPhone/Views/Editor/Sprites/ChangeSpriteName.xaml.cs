@@ -7,12 +7,14 @@ using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
+using Catrobat.IDEWindowsPhone.ViewModel;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Sprites
 {
   public partial class ChangeSpriteName : PhoneApplicationPage
   {
-    public static Sprite Sprite { get; set; }
+    EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
     ApplicationBarIconButton btnSave;
 
     public ChangeSpriteName()
@@ -24,7 +26,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sprites
 
       Dispatcher.BeginInvoke(() =>
       {
-        txtName.Text = Sprite.Name;
+        txtName.Text = _editorViewModel.SelectedSprite.Name;
         txtName.Focus();
         txtName.SelectAll();
       });
@@ -52,13 +54,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sprites
 
     private void btnSave_Click(object sender, EventArgs e)
     {
-      Sprite.Name = txtName.Text;
+      _editorViewModel.SelectedSprite.Name = txtName.Text;
       NavigationService.GoBack();
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
-      Sprite = null;
+      _editorViewModel.SelectedSprite = null;
       NavigationService.GoBack();
     }
 

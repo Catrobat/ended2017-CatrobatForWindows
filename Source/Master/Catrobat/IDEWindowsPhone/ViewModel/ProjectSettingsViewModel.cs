@@ -33,7 +33,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       if (IsInDesignMode)
         catrobatContext = new CatrobatContextDesign();
       else
-        catrobatContext = CatrobatContext.Instance;
+        catrobatContext = CatrobatContext.GetContext();
 
       if(catrobatContext.CurrentProject.SpriteList.Sprites.Count > 0)
         selectedSprite = catrobatContext.CurrentProject.SpriteList.Sprites[0];

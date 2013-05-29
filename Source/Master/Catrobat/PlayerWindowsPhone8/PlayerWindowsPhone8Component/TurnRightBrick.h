@@ -4,8 +4,8 @@ class TurnRightBrick :
 	public Brick
 {
 public:
-	TurnRightBrick(string spriteReference, float rotation, Script *parent);
+	TurnRightBrick(string spriteReference, FormulaTree *rotation, Script *parent);
 	void Execute();
 private:
-	float m_rotation;
+	FormulaTree *m_rotation;
 };

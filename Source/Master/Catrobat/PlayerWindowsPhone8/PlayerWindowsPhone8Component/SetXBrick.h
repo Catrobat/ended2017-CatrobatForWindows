@@ -4,8 +4,8 @@ class SetXBrick :
 	public Brick
 {
 public:
-	SetXBrick(string spriteReference, float positionX, Script *parent);
+	SetXBrick(string spriteReference, FormulaTree *m_positionX, Script *parent);
 	void Execute();
 private:
-	float m_positionX;
+	FormulaTree *m_positionX;
 };

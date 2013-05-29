@@ -12,9 +12,9 @@ namespace Catrobat.IDEWindowsPhone.Converters
     {
       ProjectHeader header = value as ProjectHeader;
 
-      if (header.ProjectName == CatrobatContext.Instance.CurrentProject.ProjectName)
+      if (header.ProjectName == CatrobatContext.GetContext().CurrentProject.ProjectName)
       {
-        CatrobatContext.Instance.CurrentProject.Header = header;
+        CatrobatContext.GetContext().CurrentProject.Header = header;
         return Visibility.Visible;
       }
       else

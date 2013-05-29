@@ -166,14 +166,17 @@
     <ClCompile Include="NextLookBrick.cpp">
       <Filter>Objects\Bricks\Look</Filter>
     </ClCompile>
-    <ClCompile Include="SetVariableBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
-    </ClCompile>
     <ClCompile Include="UserVariable.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="SetVariableBrick.cpp">
+      <Filter>Objects\Bricks\Variables</Filter>
+    </ClCompile>
     <ClCompile Include="VariableManagementBrick.cpp">
-      <Filter>Objects\Bricks</Filter>
+      <Filter>Objects\Bricks\Variables</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeVariableBrick.cpp">
+      <Filter>Objects\Bricks\Variables</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -348,14 +351,17 @@
     <ClInclude Include="NextLookBrick.h">
       <Filter>Objects\Bricks\Look</Filter>
     </ClInclude>
-    <ClInclude Include="SetVariableBrick.h">
-      <Filter>Objects\Bricks</Filter>
-    </ClInclude>
     <ClInclude Include="UserVariable.h">
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="VariableManagementBrick.h">
-      <Filter>Objects\Bricks</Filter>
+      <Filter>Objects\Bricks\Variables</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVariableBrick.h">
+      <Filter>Objects\Bricks\Variables</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeVariableBrick.h">
+      <Filter>Objects\Bricks\Variables</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -394,6 +400,9 @@
     </Filter>
     <Filter Include="Formula">
       <UniqueIdentifier>{cc53f5b0-deef-42a6-a1d5-a73350ccbcfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bricks\Variables">
+      <UniqueIdentifier>{39097f0d-f5a5-4807-aa1d-b3b42e02948b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

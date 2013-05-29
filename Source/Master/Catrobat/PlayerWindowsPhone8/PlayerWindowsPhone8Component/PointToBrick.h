@@ -4,8 +4,8 @@ class PointToBrick :
 	public Brick
 {
 public:
-	PointToBrick(string spriteReference, float rotation, Script *parent);
+	PointToBrick(string spriteReference, FormulaTree *rotation, Script *parent);
 	void Execute();
 private:
-	float m_rotation;
+	FormulaTree *m_rotation;
 };

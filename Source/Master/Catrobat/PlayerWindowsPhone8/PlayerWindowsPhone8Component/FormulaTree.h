@@ -2,8 +2,6 @@
 #include <string>
 #include <map>
 
-class FormulaTree
-{
 enum Type
 {
 	OPERATOR,
@@ -11,12 +9,15 @@ enum Type
 	USER_VARIABLE
 };
 
+class FormulaTree
+{
 public:
 	FormulaTree(std::string type, std::string value);
 
 	void SetLeftChild(FormulaTree *leftChild);
 	void SetRightChild(FormulaTree *rightChild);
 	Type GetType();
+	std::string Value();
 
 private:
 	FormulaTree *m_rightChild;

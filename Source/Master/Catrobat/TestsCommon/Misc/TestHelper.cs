@@ -16,7 +16,7 @@ namespace Catrobat.TestsCommon.Misc
         storage.DeleteDirectory("");
       }
 
-      //CatrobatContext.Instance.CurrentProject = null;
+      //CatrobatContext.GetContext().CurrentProject = null;
     }
 
     public static void DeleteFolder(this IsolatedStorageFile iso, string path)

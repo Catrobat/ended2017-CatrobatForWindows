@@ -103,6 +103,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ContextHolderWindowsPhone.cs" />
     <Compile Include="Controls\Bricks\MasterBrick.cs" />
     <Compile Include="Controls\Bricks\NormalBrick.cs" />
     <Compile Include="Controls\Buttons\SettingsButton.cs" />

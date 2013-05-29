@@ -52,8 +52,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void downloadCallback(string filename)
     {
-      CatrobatContext.Instance.UpdateLocalProjects();
-      CatrobatContext.Instance.SetCurrentProject(filename);
+      CatrobatContext.GetContext().UpdateLocalProjects();
+      CatrobatContext.GetContext().SetCurrentProject(filename);
 
       Dispatcher.BeginInvoke(() =>
         {

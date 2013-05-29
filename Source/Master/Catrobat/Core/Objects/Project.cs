@@ -196,7 +196,7 @@ namespace Catrobat.Core.Objects
         {
           using (IStorage storage = StorageSystem.GetStorage())
           {
-            _projectScreenshot = storage.LoadImage(CatrobatContext.Instance.CurrentProject.BasePath + "/screenshot.png");
+            _projectScreenshot = storage.LoadImage(CatrobatContext.GetContext().CurrentProject.BasePath + "/screenshot.png");
           }
         }
 

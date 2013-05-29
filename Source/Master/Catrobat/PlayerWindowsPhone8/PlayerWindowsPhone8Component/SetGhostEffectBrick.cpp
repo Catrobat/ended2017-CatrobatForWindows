@@ -2,8 +2,9 @@
 #include "SetGhostEffectBrick.h"
 #include "Script.h"
 #include "Object.h"
+#include "Interpreter.h"
 
-SetGhostEffectBrick::SetGhostEffectBrick(string spriteReference, float transparency, Script *parent) :
+SetGhostEffectBrick::SetGhostEffectBrick(string spriteReference, FormulaTree *transparency, Script *parent) :
 	Brick(TypeOfBrick::SetGhostEffectBrick, spriteReference, parent),
 	m_transparency(transparency)
 {
@@ -11,5 +12,5 @@ SetGhostEffectBrick::SetGhostEffectBrick(string spriteReference, float transpare
 
 void SetGhostEffectBrick::Execute()
 {
-	m_parent->Parent()->SetTransparency(m_transparency / 100.0f);
+	m_parent->Parent()->SetTransparency(Interpreter::Instance()->EvaluateFormulaToFloat(m_transparency, m_parent->Parent()) / 100.0f);
 }

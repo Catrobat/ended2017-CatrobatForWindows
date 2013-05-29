@@ -22,12 +22,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
   public partial class RecorderLauncher : PhoneApplicationPage
   {
-    private EditorViewModel editorViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Editor;
+    private EditorViewModel _editorViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Editor;
     ApplicationBarIconButton btnSave;
 
     private DateTime _startTime;
-    TimeSpan _timeGoneBy;
-    Thread _playTime;
+    private TimeSpan _timeGoneBy;
+    private Thread _playTime;
     private bool _abort = false;
     private bool _songSelected = false;
 
@@ -226,8 +226,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
     private void btnSave_Click(object sender, EventArgs e)
     {
-      Sound sound = new Sound(txtName.Text, editorViewModel.SelectedSprite);
-      string path = CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
+      Sound sound = new Sound(txtName.Text, _editorViewModel.SelectedSprite);
+      string path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
 
 
       using (IStorage storage = StorageSystem.GetStorage())
@@ -244,7 +244,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
         }
       }
 
-      editorViewModel.SelectedSprite.Sounds.Sounds.Add(sound);
+      _editorViewModel.SelectedSprite.Sounds.Sounds.Add(sound);
       NavigationService.RemoveBackEntry();
       NavigationService.GoBack();
     }

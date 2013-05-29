@@ -114,7 +114,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
         return null;
 
       var costume = new Costume(name, _costumeSprite);
-      string absoluteFileName = CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ImagesPath + "/" + costume.FileName;
+      string absoluteFileName = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ImagesPath + "/" + costume.FileName;
 
       if (_encoding == ImageEncoding.Jpg)
       {

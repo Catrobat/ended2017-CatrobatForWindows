@@ -24,7 +24,12 @@ void FormulaTree::SetRightChild(FormulaTree *rightChild)
 	m_rightChild = rightChild;
 }
 
-FormulaTree::Type FormulaTree::GetType()
+Type FormulaTree::GetType()
 {
 	return m_type;
+}
+
+string FormulaTree::Value()
+{
+	return m_value;
 }

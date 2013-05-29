@@ -155,6 +155,7 @@
     <ClInclude Include="BroadcastScript.h" />
     <ClInclude Include="ChangeGhostEffectByBrick.h" />
     <ClInclude Include="ChangeSizeByBrick.h" />
+    <ClInclude Include="ChangeVariableBrick.h" />
     <ClInclude Include="ChangeXByBrick.h" />
     <ClInclude Include="ChangeYByBrick.h" />
     <ClInclude Include="ContainerBrick.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="BroadcastScript.cpp" />
     <ClCompile Include="ChangeGhostEffectByBrick.cpp" />
     <ClCompile Include="ChangeSizeByBrick.cpp" />
+    <ClCompile Include="ChangeVariableBrick.cpp" />
     <ClCompile Include="ChangeXByBrick.cpp" />
     <ClCompile Include="ChangeYByBrick.cpp" />
     <ClCompile Include="ContainerBrick.cpp" />

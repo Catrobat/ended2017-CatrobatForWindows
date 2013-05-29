@@ -9,6 +9,8 @@ public:
 	UserVariable(std::pair<std::string, std::string> variable);
 
 	std::string Value(std::string name);
+	std::string Value();
+	void SetValue(std::string value);
 
 private:
 	std::string m_name;

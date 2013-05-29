@@ -65,7 +65,7 @@ namespace Catrobat.Core.Objects.Costumes
           {
             using (var storage = StorageSystem.GetStorage())
             {
-              _thumbnail = storage.LoadImageThumbnail(CatrobatContext.Instance.CurrentProject.BasePath + "/images/" + _fileName);
+              _thumbnail = storage.LoadImageThumbnail(CatrobatContext.GetContext().CurrentProject.BasePath + "/images/" + _fileName);
             }
           }
           catch
@@ -124,7 +124,7 @@ namespace Catrobat.Core.Objects.Costumes
     {
       var newCostumeData = new Costume(_name, parent);
 
-      string path = CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ImagesPath + "/";
+      string path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ImagesPath + "/";
       string absoluteFileNameOld = path + _fileName;
       string absoluteFileNameNew = path + newCostumeData._fileName;
 
@@ -141,7 +141,7 @@ namespace Catrobat.Core.Objects.Costumes
 
     public void Delete()
     {
-      string path = CatrobatContext.Instance.CurrentProject.BasePath + "/" + Project.ImagesPath + "/" + _fileName;
+      string path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ImagesPath + "/" + _fileName;
       try
       {
         using (IStorage storage = StorageSystem.GetStorage())

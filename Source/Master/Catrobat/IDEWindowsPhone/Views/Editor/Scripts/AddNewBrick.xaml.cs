@@ -5,20 +5,19 @@ using Catrobat.Core.Objects.Bricks;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
   public partial class AddNewBrick : PhoneApplicationPage
   {
-    private EditorViewModel editorViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Editor;
-    public static BrickCategory BrickCategory { get; set; }
-    public static DataObject SelectedBrick { get; set; }
+    EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
 
     public AddNewBrick()
     {
       InitializeComponent();
       App app = (App)Application.Current;
-      switch (BrickCategory)
+      switch (_editorViewModel.SelectedBrickCategory)
       {
         case BrickCategory.Control:
           reorderListBoxScriptBricks.ItemsSource = app.Resources["ScriptBrickAddDataControl"] as BrickCollection;
@@ -43,10 +42,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
       DataObject dataObject = (((ListBox)sender).SelectedItem as DataObject);
 
       if (dataObject is Brick)
-        AddNewBrick.SelectedBrick = (dataObject as Brick).Copy(editorViewModel.SelectedSprite);
+        _editorViewModel.SelectedBrick = (dataObject as Brick).Copy(_editorViewModel.SelectedSprite);
 
       if (dataObject is Script)
-        AddNewBrick.SelectedBrick = (dataObject as Script).Copy(editorViewModel.SelectedSprite);
+        _editorViewModel.SelectedBrick = (dataObject as Script).Copy(_editorViewModel.SelectedSprite);
 
       NavigationService.RemoveBackEntry();
       NavigationService.GoBack();

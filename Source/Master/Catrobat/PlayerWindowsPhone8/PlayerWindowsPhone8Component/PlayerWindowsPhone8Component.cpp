@@ -8,6 +8,8 @@
 #include "lodepng.h"
 #include "lodepng_util.h"
 #include "DDSLoader.h"
+#include "Interpreter.h"
+
 #include <windows.system.threading.h>
 #include <windows.foundation.h>
 #include <thread>
@@ -154,7 +156,7 @@ void Direct3DBackground::Disconnect()
 	m_projectRenderer = nullptr;
 }
 
-static bool test = false;
+static bool init = false;
 HRESULT Direct3DBackground::PrepareResources(_In_ const LARGE_INTEGER* presentTargetTime, _Inout_ DrawingSurfaceSizeF* desiredRenderTargetSize)
 {
 	m_timer->Update();
@@ -162,19 +164,13 @@ HRESULT Direct3DBackground::PrepareResources(_In_ const LARGE_INTEGER* presentTa
 	m_projectRenderer->Update(m_timer->Total, m_timer->Delta);
 
 	// Save this for later
-	if (!test)
+	if (!init)
 	{
 		m_originalWindowsBounds.X = desiredRenderTargetSize->width;
 		m_originalWindowsBounds.Y = desiredRenderTargetSize->height;
 		ProjectDaemon::Instance()->SetDesiredRenderTargetSize(desiredRenderTargetSize);
-		test = true;
+		init = true;
 	}
-	
-	// This would set the desiredRenderTargetSize to the right values BUT we want the loading screen to be 
-	// handled with the Device Standard DRTS
-
-	//desiredRenderTargetSize->width = ProjectDaemon::Instance()->getProject()->getScreenWidth();
-	//desiredRenderTargetSize->height = ProjectDaemon::Instance()->getProject()->getScreenHeight();
 
 	return S_OK;
 }

@@ -114,7 +114,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       }
       else
       {
-        catrobatContext = CatrobatContext.Instance;
+        catrobatContext = CatrobatContext.GetContext();
       }
     }
 
@@ -172,7 +172,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     private void registerOrCheckTokenCallback(bool registered, string errorCode, string statusMessage)
     {
-      CatrobatContext.Instance.CurrentToken = Utils.calculateToken(_username, _password);
+      CatrobatContext.GetContext().CurrentToken = Utils.calculateToken(_username, _password);
 
       if (registered)
       {

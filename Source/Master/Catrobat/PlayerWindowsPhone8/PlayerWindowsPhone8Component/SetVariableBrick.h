@@ -6,9 +6,7 @@ class SetVariableBrick
 	: public VariableManagementBrick
 {
 public:
-	SetVariableBrick(string objectReference, Script *parent);
+	SetVariableBrick(string objectReference, FormulaTree *variableFormula, Script *parent);
 	void Execute();
-
-	void SetVariable(UserVariable *variable);
 };
 
