@@ -122,16 +122,18 @@ int Object::GetLookCount()
 
 Look* Object::GetCurrentLook()
 {
+	if (!m_look)
+		return getLook(0);
 	return m_look;
 }
 
 Bounds Object::getBounds()
 {
 	Bounds bounds;
-	bounds.x = m_position.x - m_look->Width() / 2;
-	bounds.y = m_position.y - m_look->Height() / 2;
-	bounds.width = (m_look != NULL) ? m_look->Width() : 0;
-	bounds.height = (m_look != NULL) ? m_look->Height() : 0;
+	bounds.x = m_position.x - GetCurrentLook()->Width() / 2;
+	bounds.y = m_position.y - GetCurrentLook()->Height() / 2;
+	bounds.width = (GetCurrentLook() != NULL) ? GetCurrentLook()->Width() : 0;
+	bounds.height = (GetCurrentLook() != NULL) ? GetCurrentLook()->Height() : 0;
 	return bounds;
 }
 

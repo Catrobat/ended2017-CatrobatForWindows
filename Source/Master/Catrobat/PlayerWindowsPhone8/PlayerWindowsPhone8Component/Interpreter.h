@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include "Object.h"
 
 class FormulaTree;
 
@@ -14,9 +15,9 @@ public:
 	~Interpreter(void);
 	static Interpreter *Instance();
 	
-	int EvaluateFormulaToInt(FormulaTree *tree);
-	float EvaluateFormulaToFloat(FormulaTree *tree);
-	bool EvaluateFormulaToBool(FormulaTree *tree);
+	int EvaluateFormulaToInt(FormulaTree *tree, Object *object);
+	float EvaluateFormulaToFloat(FormulaTree *tree, Object *object);
+	bool EvaluateFormulaToBool(FormulaTree *tree, Object *object);
 
 };
 

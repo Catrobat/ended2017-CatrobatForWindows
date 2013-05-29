@@ -17,3 +17,13 @@ string UserVariable::Value(string name)
 {
 	return m_value;
 }
+
+string UserVariable::Value()
+{
+	return m_value;
+}
+
+void UserVariable::SetValue(string value)
+{
+	m_value = value;
+}

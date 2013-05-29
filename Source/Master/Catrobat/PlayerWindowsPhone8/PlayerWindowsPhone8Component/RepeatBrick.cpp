@@ -19,7 +19,7 @@ void RepeatBrick::Execute()
 	// Synchronously execute all subsequent blocks
 	int i = 0;
 	int global = 0;
-	int times = Interpreter::Instance()->EvaluateFormulaToInt(m_timesToRepeat);
+	int times = Interpreter::Instance()->EvaluateFormulaToInt(m_timesToRepeat, Parent()->Parent());
 	while (global < times)
 	{
 		GetBrick(i)->Execute();

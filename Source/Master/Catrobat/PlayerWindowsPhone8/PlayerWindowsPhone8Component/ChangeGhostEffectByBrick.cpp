@@ -12,5 +12,5 @@ ChangeGhostEffectByBrick::ChangeGhostEffectByBrick(string spriteReference, Formu
 
 void ChangeGhostEffectByBrick::Execute()
 {
-	m_parent->Parent()->SetTransparency(m_parent->Parent()->GetTransparency() + (Interpreter::Instance()->EvaluateFormulaToFloat(m_transparency) / 100.0f));
+	m_parent->Parent()->SetTransparency(m_parent->Parent()->GetTransparency() + (Interpreter::Instance()->EvaluateFormulaToFloat(m_transparency, Parent()->Parent()) / 100.0f));
 }

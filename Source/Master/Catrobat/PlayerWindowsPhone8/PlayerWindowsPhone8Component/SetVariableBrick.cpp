@@ -9,5 +9,7 @@ SetVariableBrick::SetVariableBrick(string objectReference, FormulaTree *variable
 
 void SetVariableBrick::Execute()
 {
+	Type test = m_variableFormula->GetType();
+	m_variable->SetValue(m_variableFormula->Value());
 }
 
