@@ -70,6 +70,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     public Project CurrentProject { get { return _catrobatContext.CurrentProject; } }
 
+    public ProjectHeader CurrentProjectHeader { get { return _catrobatContext.CurrentProject.Header; } }
+
     public ImageSource CurrentProjectScreenshot
     {
       get

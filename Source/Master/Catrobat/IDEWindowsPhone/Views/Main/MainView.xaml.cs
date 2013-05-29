@@ -104,14 +104,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
       }
     }
 
-    private void ButtonCopyLocalProject_OnClick(object sender, RoutedEventArgs e)
+    private void LocalProjectControl_OnLocalProjectsBackPressed(object sender, EventArgs e)
     {
-      CatrobatContext.GetContext().CopyProject(((sender as FrameworkElement).DataContext as Project).ProjectName);
-    }
-
-    private void ButtonDeleteLocalProject_OnClick(object sender, RoutedEventArgs e)
-    {
-      CatrobatContext.GetContext().DeleteProject(((sender as FrameworkElement).DataContext as Project).ProjectName);
+      // TODO: use this solution to slide to CurrentProject panorama item:
+      // http://xme.im/slide-or-change-panorama-selected-item-programatically
     }
   }
 }

@@ -120,6 +120,9 @@
     <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
       <DependentUpon>ListPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Projects\LocalProjectControl.xaml.cs">
+      <DependentUpon>LocalProjectControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ReorderableListbox\NegativeValueConverter.cs" />
     <Compile Include="Controls\ReorderableListbox\PullDownToRefreshPanel.cs" />
     <Compile Include="Controls\ReorderableListbox\ReorderListBox.cs" />
@@ -129,6 +132,7 @@
     </Compile>
     <Compile Include="Converters\ActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\BytesImageConverter.cs" />
+    <Compile Include="Converters\InActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\VersionConverter.cs" />
     <Compile Include="Converters\DoubleStringConverter.cs" />
     <Compile Include="Converters\FloatStringConverter.cs" />
@@ -259,6 +263,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ListPicker\ListPickerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Projects\LocalProjectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

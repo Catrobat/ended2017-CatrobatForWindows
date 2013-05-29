@@ -229,10 +229,10 @@ namespace Catrobat.Core
           {
             object projectScreenshot =  storage.LoadImage(ProjectsPath + "/" + projectName + "/" + Project.ScreenshotPath);
             var projectHeader = new ProjectHeader
-                {
-                  ProjectName = projectName,
-                  Screenshot = projectScreenshot
-                };
+            {
+              ProjectName = projectName,
+              Screenshot = projectScreenshot
+            };
             _localProjects.Add(projectHeader);
           }
         }
