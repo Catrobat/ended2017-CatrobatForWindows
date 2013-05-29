@@ -19,6 +19,18 @@
 #include "RepeatBrick.h"
 #include "SetVariableBrick.h"
 #include "ChangeVariableBrick.h"
+#include "ChangeGhostEffectByBrick.h"
+#include "ChangeSizeByBrick.h"
+#include "NextLookBrick.h"
+#include "SetSizeToBrick.h"
+#include "ChangeXByBrick.h"
+#include "ChangeYByBrick.h"
+#include "PointToBrick.h"
+#include "SetXBrick.h"
+#include "SetYBrick.h"
+#include "TurnLeftBrick.h"
+#include "TurnRightBrick.h"
+#include "PlaySoundBrick.h"
 
 #include <time.h>
 #include <iostream>
@@ -414,6 +426,7 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 		{
 			current = parsePlaceAtBrick(node, script);
 		}
+
 		else if(strcmp(node->name(), "setGhostEffectBrick") == 0)
 		{
 			current = parseSetGhostEffectBrick(node, script);
@@ -480,6 +493,50 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 		else if(strcmp(node->name(), "changeVariableBrick") == 0)
 		{
 			current = parseChangeVariableBrick(node, script);
+		}
+		else if(strcmp(node->name(), "changeGhostEffectByNBrick") == 0)
+		{
+			current = parseChangeGhostEffectByNBrick(node, script);
+		}
+		else if(strcmp(node->name(), "setSizeToBrick") == 0)
+		{
+			current = parseSetSizeToBrick(node, script);
+		}
+		else if(strcmp(node->name(), "changeSizeByNBrick") == 0)
+		{
+			current = parseChangeSizeByNBrick(node, script);
+		}
+		else if(strcmp(node->name(), "nextLookBrick") == 0)
+		{
+			current = parseNextLookBrick(node, script);
+		}
+		else if(strcmp(node->name(), "setXBrick") == 0)
+		{
+			current = parseSetXBrick(node, script);
+		}
+		else if(strcmp(node->name(), "setYBrick") == 0)
+		{
+			current = parseSetYBrick(node, script);
+		}
+		else if(strcmp(node->name(), "changeXByNBrick") == 0)
+		{
+			current = parseChangeXByNBrick(node, script);
+		}
+		else if(strcmp(node->name(), "changeYByNBrick") == 0)
+		{
+			current = parseChangeYByNBrick(node, script);
+		}
+		else if(strcmp(node->name(), "pointInDirectionBrick") == 0)
+		{
+			current = parsePointInDirectionBrick(node, script);
+		}
+		else if(strcmp(node->name(), "turnLeftBrick") == 0)
+		{
+			current = parseTurnLeftBrick(node, script);
+		}
+		else if(strcmp(node->name(), "turnRightBrick") == 0)
+		{
+			current = parseTurnRightBrick(node, script);
 		}
 
 		if (current != NULL)
@@ -702,6 +759,250 @@ Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script *script)
 	return new WaitBrick(objectReference, time, script);
 }
 
+Brick *XMLParser::parseChangeGhostEffectByNBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("changeGhostEffect");
+	if (!node)
+		return NULL;
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *amount = NULL;
+	if (formulaTreeNode)
+		amount = parseFormulaTree(formulaTreeNode);
+
+	node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	return new ChangeGhostEffectByBrick(objectReference, amount, script);
+}
+
+Brick *XMLParser::parseSetSizeToBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("size");
+	if (!node)
+		return NULL;
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *size = NULL;
+	if (formulaTreeNode)
+		size = parseFormulaTree(formulaTreeNode);
+
+	node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	return new SetSizeToBrick(objectReference, size, script);
+}
+
+Brick *XMLParser::parseChangeSizeByNBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("size");
+	if (!node)
+		return NULL;
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *size = NULL;
+	if (formulaTreeNode)
+		size = parseFormulaTree(formulaTreeNode);
+
+	node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	return new ChangeSizeByBrick(objectReference, size, script);
+}
+
+Brick *XMLParser::parseNextLookBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	return new NextLookBrick(objectReference, script);
+}
+
+Brick *XMLParser::parseSetXBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("xPosition");
+	if (!node)
+		return NULL;
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *position = NULL;
+	if (formulaTreeNode)
+		position = parseFormulaTree(formulaTreeNode);
+
+	node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	return new SetXBrick(objectReference, position, script);
+}
+
+Brick *XMLParser::parseSetYBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("xPosition");
+	if (!node)
+		return NULL;
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *position = NULL;
+	if (formulaTreeNode)
+		position = parseFormulaTree(formulaTreeNode);
+
+	node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	return new SetYBrick(objectReference, position, script);
+}
+
+Brick *XMLParser::parseChangeXByNBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("xMovement");
+	if (!node)
+		return NULL;
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *movement = NULL;
+	if (formulaTreeNode)
+		movement = parseFormulaTree(formulaTreeNode);
+
+	node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	return new ChangeXByBrick(objectReference, movement, script);
+}
+
+Brick *XMLParser::parseChangeYByNBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("yMovement");
+	if (!node)
+		return NULL;
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *movement = NULL;
+	if (formulaTreeNode)
+		movement = parseFormulaTree(formulaTreeNode);
+
+	node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	return new ChangeYByBrick(objectReference, movement, script);
+}
+
+Brick *XMLParser::parsePointInDirectionBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("degrees");
+	if (!node)
+		return NULL;
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *degrees = NULL;
+	if (formulaTreeNode)
+		degrees = parseFormulaTree(formulaTreeNode);
+
+	node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	return new PointToBrick(objectReference, degrees, script);
+}
+
+Brick *XMLParser::parseTurnLeftBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("degrees");
+	if (!node)
+		return NULL;
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *degrees = NULL;
+	if (formulaTreeNode)
+		degrees = parseFormulaTree(formulaTreeNode);
+
+	node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	return new TurnLeftBrick(objectReference, degrees, script);
+}
+
+Brick *XMLParser::parseTurnRightBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("degrees");
+	if (!node)
+		return NULL;
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *degrees = NULL;
+	if (formulaTreeNode)
+		degrees = parseFormulaTree(formulaTreeNode);
+
+	node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	return new TurnRightBrick(objectReference, degrees, script);
+}
+
 Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode, Script *script)
 {
 	xml_node<> *node = baseNode->first_node("xPosition");
@@ -772,25 +1073,6 @@ Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
 
 	string objectReference = objectReferenceAttribute->value();
 	return new SetGhostEffectBrick(objectReference, transparency, script);
-}
-
-Brick *XMLParser::parseTurnLeftBrick(xml_node<> *baseNode, Script *script)
-{
-	xml_node<> *node = baseNode->first_node("degrees");
-	if (!node)
-		return NULL;
-	float rotation = atof(node->value());
-
-	node = baseNode->first_node("object");
-	if (!node)
-		return NULL;
-
-	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
-	if (!objectReferenceAttribute)
-		return NULL;
-
-	string objectReference = objectReferenceAttribute->value();
-	return new TurnLeftBrick(objectReference, rotation, script);
 }
 
 Brick *XMLParser::parseBroadcastBrick(xml_node<> *baseNode, Script *script)

@@ -2,8 +2,9 @@
 #include "PointToBrick.h"
 #include "Script.h"
 #include "Object.h"
+#include "Interpreter.h"
 
-PointToBrick::PointToBrick(string spriteReference, float rotation, Script *parent) :
+PointToBrick::PointToBrick(string spriteReference, FormulaTree *rotation, Script *parent) :
 	Brick(TypeOfBrick::PointToBrick, spriteReference, parent),
 	m_rotation(rotation)
 {
@@ -11,5 +12,5 @@ PointToBrick::PointToBrick(string spriteReference, float rotation, Script *paren
 
 void PointToBrick::Execute()
 {
-	m_parent->Parent()->SetRotation(m_rotation);
+	m_parent->Parent()->SetRotation(Interpreter::Instance()->EvaluateFormulaToFloat(m_rotation, m_parent->Parent()));
 }

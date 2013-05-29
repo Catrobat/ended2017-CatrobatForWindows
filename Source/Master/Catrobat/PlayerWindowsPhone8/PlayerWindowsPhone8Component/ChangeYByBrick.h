@@ -4,8 +4,8 @@ class ChangeYByBrick :
 	public Brick
 {
 public:
-	ChangeYByBrick(string spriteReference, float offsetY, Script *parent);
+	ChangeYByBrick(string spriteReference, FormulaTree *offsetY, Script *parent);
 	void Execute();
 private:
-	float m_offsetY;
+	FormulaTree *m_offsetY;
 };

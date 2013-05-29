@@ -2,8 +2,9 @@
 #include "SetSizeToBrick.h"
 #include "Script.h"
 #include "Object.h"
+#include "Interpreter.h"
 
-SetSizeToBrick::SetSizeToBrick(string spriteReference, float scale, Script *parent) :
+SetSizeToBrick::SetSizeToBrick(string spriteReference, FormulaTree *scale, Script *parent) :
 	Brick(TypeOfBrick::SetGhostEffectBrick, spriteReference, parent),
 	m_scale(scale)
 {
@@ -11,5 +12,5 @@ SetSizeToBrick::SetSizeToBrick(string spriteReference, float scale, Script *pare
 
 void SetSizeToBrick::Execute()
 {
-	m_parent->Parent()->SetScale(m_scale);
+	m_parent->Parent()->SetScale(Interpreter::Instance()->EvaluateFormulaToFloat(m_scale, m_parent->Parent()));
 }

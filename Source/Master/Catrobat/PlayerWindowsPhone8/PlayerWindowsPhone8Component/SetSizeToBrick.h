@@ -4,8 +4,8 @@ class SetSizeToBrick :
 	public Brick
 {
 public:
-	SetSizeToBrick(string spriteReference, float scale, Script *parent);
+	SetSizeToBrick(string spriteReference, FormulaTree *scale, Script *parent);
 	void Execute();
 private:
-	float m_scale;
+	FormulaTree *m_scale;
 };
