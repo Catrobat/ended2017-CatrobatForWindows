@@ -11,10 +11,3 @@ void SetVariableBrick::Execute()
 {
 }
 
-//void SetVariableBrick::SetVariable(UserVariable *variable)
-//{
-//	if (variable != NULL)
-//		m_variable = variable;
-//}
-
-

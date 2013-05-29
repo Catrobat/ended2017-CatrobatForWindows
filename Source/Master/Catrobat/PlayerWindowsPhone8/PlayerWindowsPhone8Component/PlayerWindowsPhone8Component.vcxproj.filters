@@ -175,7 +175,9 @@
     <ClCompile Include="VariableManagementBrick.cpp">
       <Filter>Objects\Bricks\Variables</Filter>
     </ClCompile>
-    <ClCompile Include="ChangeVariableBrick.cpp" />
+    <ClCompile Include="ChangeVariableBrick.cpp">
+      <Filter>Objects\Bricks\Variables</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -358,7 +360,9 @@
     <ClInclude Include="SetVariableBrick.h">
       <Filter>Objects\Bricks\Variables</Filter>
     </ClInclude>
-    <ClInclude Include="ChangeVariableBrick.h" />
+    <ClInclude Include="ChangeVariableBrick.h">
+      <Filter>Objects\Bricks\Variables</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
