@@ -872,8 +872,17 @@ Brick *XMLParser::parseSetVariableBrick(xml_node<> *baseNode, Script *script)
 	if (!objectReferenceAttribute)
 		return NULL;
 
+	FormulaTree *variableFormula = NULL;
+	node = baseNode->first_node("userVariable");
+	if (!node)
+		return NULL;
+	
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	if (formulaTreeNode)
+		variableFormula = parseFormulaTree(formulaTreeNode);
+
 	string objectReference = objectReferenceAttribute->value();
-	VariableManagementBrick *newBrick = new SetVariableBrick(objectReference, script);
+	VariableManagementBrick *newBrick = new SetVariableBrick(objectReference, variableFormula, script);
 	m_pendingVariables->insert(pair<VariableManagementBrick*, string>(newBrick, name));
 	return newBrick;
 }
@@ -903,8 +912,17 @@ Brick *XMLParser::parseChangeVariableBrick(xml_node<> *baseNode, Script *script)
 	if (!objectReferenceAttribute)
 		return NULL;
 
+	FormulaTree *variableFormula = NULL;
+	node = baseNode->first_node("userVariable");
+	if (!node)
+		return NULL;
+	
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	if (formulaTreeNode)
+		variableFormula = parseFormulaTree(formulaTreeNode);
+
 	string objectReference = objectReferenceAttribute->value();
-	VariableManagementBrick *newBrick = new ChangeVariableBrick(objectReference, script);
+	VariableManagementBrick *newBrick = new ChangeVariableBrick(objectReference, variableFormula, script);
 	m_pendingVariables->insert(pair<VariableManagementBrick*, string>(newBrick, name));
 	return newBrick;
 }

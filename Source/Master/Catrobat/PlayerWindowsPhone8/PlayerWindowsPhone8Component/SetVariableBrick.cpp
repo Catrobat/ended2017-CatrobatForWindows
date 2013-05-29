@@ -2,8 +2,8 @@
 #include "SetVariableBrick.h"
 
 
-SetVariableBrick::SetVariableBrick(string objectReference, Script *parent)
-	: VariableManagementBrick(TypeOfBrick::SetVariableBrick, objectReference, parent)
+SetVariableBrick::SetVariableBrick(string objectReference, FormulaTree *variableFormula, Script *parent)
+	: VariableManagementBrick(TypeOfBrick::SetVariableBrick, objectReference, variableFormula, parent)
 {
 }
 

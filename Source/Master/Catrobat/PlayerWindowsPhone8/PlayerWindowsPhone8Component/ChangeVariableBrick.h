@@ -6,7 +6,7 @@ class ChangeVariableBrick
 	: public VariableManagementBrick
 {
 public:
-	ChangeVariableBrick(string objectReference, Script *parent);
+	ChangeVariableBrick(string objectReference, FormulaTree *variableFormula, Script *parent);
 	void Execute();
 
 };
