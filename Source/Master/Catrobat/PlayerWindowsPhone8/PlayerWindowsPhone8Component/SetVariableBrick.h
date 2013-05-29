@@ -9,6 +9,6 @@ public:
 	SetVariableBrick(string objectReference, Script *parent);
 	void Execute();
 
-	void SetVariable(UserVariable *variable);
+	//void SetVariable(UserVariable *variable);
 };
 

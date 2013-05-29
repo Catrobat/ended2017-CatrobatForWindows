@@ -63,6 +63,7 @@ private:
 	Brick*						parseRepeatBrick			(xml_node<> *baseNode, Script *script);
 	void						parseRepeatEndBrick			(xml_node<> *baseNode, Script *script);
 	Brick*						parseSetVariableBrick		(xml_node<> *baseNode, Script *script);
+	Brick*						parseChangeVariableBrick	(xml_node<> *baseNode, Script *script);
 
 	FormulaTree*				parseFormulaTree			(xml_node<> *baseNode);
 

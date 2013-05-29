@@ -18,6 +18,7 @@
 #include "ForeverBrick.h"
 #include "RepeatBrick.h"
 #include "SetVariableBrick.h"
+#include "ChangeVariableBrick.h"
 
 #include <time.h>
 #include <iostream>
@@ -476,6 +477,10 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
 		{
 			current = parseSetVariableBrick(node, script);
 		}
+		else if(strcmp(node->name(), "changeVariableBrick") == 0)
+		{
+			current = parseChangeVariableBrick(node, script);
+		}
 
 		if (current != NULL)
 		{
@@ -869,6 +874,37 @@ Brick *XMLParser::parseSetVariableBrick(xml_node<> *baseNode, Script *script)
 
 	string objectReference = objectReferenceAttribute->value();
 	VariableManagementBrick *newBrick = new SetVariableBrick(objectReference, script);
+	m_pendingVariables->insert(pair<VariableManagementBrick*, string>(newBrick, name));
+	return newBrick;
+}
+
+Brick *XMLParser::parseChangeVariableBrick(xml_node<> *baseNode, Script *script)
+{
+	xml_node<> *node = baseNode->first_node("userVariable");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *referenceAttribute = node->first_attribute("reference");
+	if (!referenceAttribute)
+		return NULL;
+	string reference = referenceAttribute->value();
+	reference = reference + "/";
+	xml_node<> *referencedNode = EvaluateString("/", reference, node); 
+	xml_node<> *variableNode = referencedNode->first_node("name");
+	if (!variableNode)
+		return NULL;
+	string name = variableNode->value();
+
+	node = baseNode->first_node("object");
+	if (!node)
+		return NULL;
+
+	xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+	if (!objectReferenceAttribute)
+		return NULL;
+
+	string objectReference = objectReferenceAttribute->value();
+	VariableManagementBrick *newBrick = new ChangeVariableBrick(objectReference, script);
 	m_pendingVariables->insert(pair<VariableManagementBrick*, string>(newBrick, name));
 	return newBrick;
 }
