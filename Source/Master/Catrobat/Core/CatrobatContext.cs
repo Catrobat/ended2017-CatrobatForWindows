@@ -32,15 +32,15 @@ namespace Catrobat.Core
     {
       bool firstTimeUse = !RestoreLocalSettings();
 
-      if (Debugger.IsAttached)
-      {
-        var loader = new SampleProjectLoader();
-        loader.LoadSampleProjects();
-        UpdateLocalProjects();
-      }
-
       if (firstTimeUse)
       {
+        if (Debugger.IsAttached)
+        {
+          var loader = new SampleProjectLoader();
+          loader.LoadSampleProjects();
+          UpdateLocalProjects();
+        }
+
         RestoreDefaultProject(DefaultProjectName);
         LocalSettings = new LocalSettings {CurrentProjectName = CurrentProject.ProjectName};
       }
