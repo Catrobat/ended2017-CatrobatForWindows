@@ -2,10 +2,11 @@
 #include "GlideToBrick.h"
 #include "Script.h"
 #include "Object.h"
+#include "Interpreter.h"
 #include <windows.h>
 #include <ppltasks.h>
 
-GlideToBrick::GlideToBrick(string spriteReference, float xDestination, float yDestination, float duration, Script *parent) :
+GlideToBrick::GlideToBrick(string spriteReference, FormulaTree *xDestination, FormulaTree *yDestination, FormulaTree *duration, Script *parent) :
 	Brick(TypeOfBrick::GlideToBrick, spriteReference, parent),
 	m_xDestination(xDestination), m_yDestination(yDestination),
 	m_duration(duration)
@@ -14,10 +15,10 @@ GlideToBrick::GlideToBrick(string spriteReference, float xDestination, float yDe
 
 void GlideToBrick::Execute()
 {
-	float steps = m_duration / 20; // 50 Hz
+	float steps = Interpreter::Instance()->EvaluateFormulaToFloat(m_duration, m_parent->Parent()) / 20; // 50 Hz
 
-	float x_movement = m_xDestination / steps;
-	float y_movement = m_yDestination / steps;
+	float x_movement = Interpreter::Instance()->EvaluateFormulaToFloat(m_xDestination, m_parent->Parent()) / steps;
+	float y_movement = Interpreter::Instance()->EvaluateFormulaToFloat(m_yDestination, m_parent->Parent()) / steps;
 
 	for (int i = 0; i < steps; i++)
 	{

@@ -4,10 +4,10 @@ class GlideToBrick :
 	public Brick
 {
 public:
-	GlideToBrick(string spriteReference, float xDestination, float yDestination, float duration, Script *parent);
+	GlideToBrick(string spriteReference, FormulaTree *xDestination, FormulaTree *yDestination, FormulaTree *duration, Script *parent);
 	void Execute();
 private:
-	float m_xDestination;
-	float m_yDestination;
-	float m_duration;
+	FormulaTree *m_xDestination;
+	FormulaTree *m_yDestination;
+	FormulaTree *m_duration;
 };

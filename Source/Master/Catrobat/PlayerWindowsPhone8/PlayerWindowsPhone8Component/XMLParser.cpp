@@ -1008,12 +1008,20 @@ Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode, Script *script)
 	xml_node<> *node = baseNode->first_node("xPosition");
 	if (!node)
 		return NULL;
-	float postionX = atof(node->value());
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *postionX = NULL;
+	if (formulaTreeNode)
+		postionX = parseFormulaTree(formulaTreeNode);
 
 	node = baseNode->first_node("yPosition");
 	if (!node)
 		return NULL;
-	float postionY = atof(node->value());
+
+	formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *postionY = NULL;
+	if (formulaTreeNode)
+		postionY = parseFormulaTree(formulaTreeNode);
 
 	node = baseNode->first_node("object");
 	if (!node)
@@ -1032,17 +1040,38 @@ Brick *XMLParser::parseGlideToBrick(xml_node<> *baseNode, Script *script)
 	xml_node<> *node = baseNode->first_node("xDestination");
 	if (!node)
 		return NULL;
-	float destinationX = atof(node->value());
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *destinationX = NULL;
+	if (formulaTreeNode)
+		destinationX = parseFormulaTree(formulaTreeNode);
 
 	node = baseNode->first_node("yDestination");
 	if (!node)
 		return NULL;
-	float destinationY = atof(node->value());
+
+	formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *destinationY = NULL;
+	if (formulaTreeNode)
+		destinationY = parseFormulaTree(formulaTreeNode);
 
 	node = baseNode->first_node("durationInMilliSeconds");
 	if (!node)
 		return NULL;
-	float duration = atof(node->value());
+
+	formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *durationInMilliSeconds = NULL;
+	if (formulaTreeNode)
+		durationInMilliSeconds = parseFormulaTree(formulaTreeNode);
+
+	node = baseNode->first_node("durationInMilliSeconds");
+	if (!node)
+		return NULL;
+
+	formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *duration = NULL;
+	if (formulaTreeNode)
+		duration = parseFormulaTree(formulaTreeNode);
 
 	node = baseNode->first_node("object");
 	if (!node)
@@ -1061,7 +1090,11 @@ Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
 	xml_node<> *node = baseNode->first_node("transparency");
 	if (!node)
 		return NULL;
-	float transparency = atof(node->value());
+
+	xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+	FormulaTree *transparency = NULL;
+	if (formulaTreeNode)
+		transparency = parseFormulaTree(formulaTreeNode);
 
 	node = baseNode->first_node("object");
 	if (!node)
