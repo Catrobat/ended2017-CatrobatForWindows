@@ -23,30 +23,50 @@ Interpreter::Interpreter()
 
 int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 {
-	Type test = tree->GetType();
-	if (test == Type::USER_VARIABLE)
+	Type type = tree->GetType();
+	switch (type)
 	{
-		string varName = tree->Value();
-		UserVariable *var = object->Variable(varName);
-		if (!var)
-			var = ProjectDaemon::Instance()->getProject()->Variable(varName);
-		if (var)
-			return atoi(var->Value().c_str());
+	case OPERATOR:
+		break;
+	case NUMBER:
+		break;
+	case USER_VARIABLE:
+		{
+			string varName = tree->Value();
+			UserVariable *var = object->Variable(varName);
+			if (!var)
+				var = ProjectDaemon::Instance()->getProject()->Variable(varName);
+			if (var)
+				return atoi(var->Value().c_str());
+		}
+		break;
+	default:
+		break;
 	}
 	return 1;
 }
 
 float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 {
-	Type test = tree->GetType();
-	if (test == Type::USER_VARIABLE)
+	Type type = tree->GetType();
+	switch (type)
 	{
-		string varName = tree->Value();
-		UserVariable *var = object->Variable(varName);
-		if (!var)
-			var = ProjectDaemon::Instance()->getProject()->Variable(varName);
-		if (var)
-			return atof(var->Value().c_str());
+	case OPERATOR:
+		break;
+	case NUMBER:
+		break;
+	case USER_VARIABLE:
+		{
+			string varName = tree->Value();
+			UserVariable *var = object->Variable(varName);
+			if (!var)
+				var = ProjectDaemon::Instance()->getProject()->Variable(varName);
+			if (var)
+				return atof(var->Value().c_str());
+		}
+		break;
+	default:
+		break;
 	}
 	return 1.0f;
 }
