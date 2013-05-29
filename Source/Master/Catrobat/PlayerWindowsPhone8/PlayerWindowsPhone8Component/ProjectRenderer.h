@@ -26,11 +26,5 @@ public:
 private:
 	std::unique_ptr<SpriteBatch> m_spriteBatch;
 	std::unique_ptr<SpriteFont> m_spriteFont; 
-
-	// Sensors
-	Windows::Devices::Sensors::Accelerometer^ m_accelerometer;
-    Windows::Devices::Sensors::AccelerometerReading^ m_accReading;
-	Windows::Devices::Sensors::Gyrometer^ m_gyrometer;
-    Windows::Devices::Sensors::GyrometerReading^ m_gyroReading;
 };
 

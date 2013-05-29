@@ -4,10 +4,6 @@
 
 ProjectRenderer::ProjectRenderer()
 {
-	m_accelerometer = Windows::Devices::Sensors::Accelerometer::GetDefault();
-
-	// Only use this if you have it
-	//m_gyrometer = Windows::Devices::Sensors::Gyrometer::GetDefault();
 }
 
 void ProjectRenderer::CreateDeviceResources() 
@@ -68,41 +64,6 @@ void ProjectRenderer::Render()
 
 void ProjectRenderer::Update(float timeTotal, float timeDelta)
 {
-	// Reading Accelerometer Data
-	if (m_accelerometer != nullptr)
-    {
-		try
-		{
-			m_accReading = m_accelerometer->GetCurrentReading();
-			Platform::String ^acceleration = L"Acceleration: " + "X: " + m_accReading->AccelerationX + " Y: " + m_accReading->AccelerationY + " Z: " + m_accReading->AccelerationZ;	
-		}
-		catch(Platform::Exception^ e)
-		{
-			// there is a bug tracking this issue already
-			// we need to remove this try\catch once the bug # 158858 hits our branch
-			// For now, to make this App work, catching the exception
-			// The reverting is tracked by WP8 # 159660
-		}
-	}
-
-	// Reading Gyrometer Data
-	/*
-	if (m_gyrometer != nullptr)
-    {
-        try
-        {
-            m_gyroReading = m_gyrometer->GetCurrentReading();
-            Platform::String ^gyroAngularVel = L"Gyro angular velocity X: " + m_gyroReading->AngularVelocityX + " Y: " + m_gyroReading->AngularVelocityY + " Z: " + m_gyroReading->AngularVelocityZ;		
-        }
-		catch(Platform::Exception^ e)
-		{
-			// there is a bug tracking this issue already
-			// we need to remove this try\catch once the bug # 158858 hits our branch
-			// For now, to make this App work, catching the exception
-            // The reverting is tracked by WP8 # 159660
-        }
-    }
-	*/
 }
 
 void ProjectRenderer::StartUpTasks()

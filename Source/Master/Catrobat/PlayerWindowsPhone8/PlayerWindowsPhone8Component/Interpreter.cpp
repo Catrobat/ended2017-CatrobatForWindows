@@ -4,6 +4,7 @@
 #include "ProjectDaemon.h"
 
 using namespace std;
+using namespace Windows::Devices::Sensors;
 
 Interpreter *Interpreter::__instance = NULL;
 
@@ -14,13 +15,11 @@ Interpreter *Interpreter::Instance()
 	return __instance;
 }
 
-Interpreter::Interpreter(void)
+Interpreter::Interpreter()
 {
+	m_accelerometer = Windows::Devices::Sensors::Accelerometer::GetDefault();
 }
 
-Interpreter::~Interpreter(void)
-{
-}
 
 int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 {
@@ -55,4 +54,24 @@ float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object *object)
 {
 	return true;
+}
+
+void Interpreter::ReadAcceleration()
+{
+	// Reading Accelerometer Data
+	if (m_accelerometer != nullptr)
+    {
+		try
+		{
+			m_accReading = m_accelerometer->GetCurrentReading();
+			Platform::String ^acceleration = L"Acceleration: " + "X: " + m_accReading->AccelerationX + " Y: " + m_accReading->AccelerationY + " Z: " + m_accReading->AccelerationZ;
+		}
+		catch(Platform::Exception^ e)
+		{
+			// there is a bug tracking this issue already
+			// we need to remove this try\catch once the bug # 158858 hits our branch
+			// For now, to make this App work, catching the exception
+			// The reverting is tracked by WP8 # 159660
+		}
+	}	
 }

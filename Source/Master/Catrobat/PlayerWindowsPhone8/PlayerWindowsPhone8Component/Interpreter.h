@@ -19,5 +19,11 @@ public:
 	float EvaluateFormulaToFloat(FormulaTree *tree, Object *object);
 	bool EvaluateFormulaToBool(FormulaTree *tree, Object *object);
 
+	void ReadAcceleration();
+
+private:
+	// Sensors
+	Windows::Devices::Sensors::Accelerometer^ m_accelerometer;
+    Windows::Devices::Sensors::AccelerometerReading^ m_accReading;
 };
 
