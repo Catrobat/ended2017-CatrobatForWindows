@@ -873,7 +873,7 @@ Brick *XMLParser::parseSetVariableBrick(xml_node<> *baseNode, Script *script)
 		return NULL;
 
 	FormulaTree *variableFormula = NULL;
-	node = baseNode->first_node("userVariable");
+	node = baseNode->first_node("variableFormula");
 	if (!node)
 		return NULL;
 	
@@ -913,7 +913,7 @@ Brick *XMLParser::parseChangeVariableBrick(xml_node<> *baseNode, Script *script)
 		return NULL;
 
 	FormulaTree *variableFormula = NULL;
-	node = baseNode->first_node("userVariable");
+	node = baseNode->first_node("variableFormula");
 	if (!node)
 		return NULL;
 	
