@@ -94,6 +94,7 @@
         </Grid>
       </controls:PanoramaItem>
 
+      <!--Local Projects panorama item-->
       <controls:PanoramaItem Name="panoramaItemLocalProjects" Header="{Binding Path=Main.HeaderLocalProjects, Source={StaticResource LocalizedStrings}}">
         <Grid>
           <Grid.RowDefinitions>
@@ -130,10 +131,10 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                   </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Name="GridSelectedMessage" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                      <TextBlock Opacity="0.9" TextWrapping="Wrap" TextAlignment="Center" 
+                  <Grid Grid.Column="0" Name="GridSelectedMessage" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <TextBlock Opacity="0.9" TextWrapping="Wrap" TextAlignment="Center" 
                            VerticalAlignment="Center" HorizontalAlignment="Center">ACTIVE</TextBlock>
-                    </Grid>
+                  </Grid>
 
                   <imageButton:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="buttonCopyLocalProject" 
                         ImageName="copy"
@@ -178,8 +179,14 @@
             <RowDefinition Height="*" />
           </Grid.RowDefinitions>
           <toolkit:PhoneTextBox xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" Hint="{Binding Path=Main.FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" ActionIcon="../../Resources/Application/Search.png" x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilterTextBox_TextChanged" Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
-          <ListBox Grid.Row="1" ItemsSource="{Binding OnlineProjects}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tap="OnlineProject_Tap" SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}" x:Name="OnlineProjectListBox" Style="{StaticResource ContinuousListBox}">
-            <ListBox.ItemTemplate>
+          <phone:LongListSelector Name="LongListSelectorOnlineProjects" Grid.Row="1" 
+            ItemsSource="{Binding OnlineProjects}" 
+            VerticalAlignment="Stretch" 
+            HorizontalAlignment="Stretch" 
+            Tap="OnlineProject_Tap"
+            
+            SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}">
+            <phone:LongListSelector.ItemTemplate>
               <DataTemplate>
                 <Grid Margin="12 5 12 5" Width="412" Background="{StaticResource PhoneAccentBrush}">
                   <StackPanel Orientation="Horizontal">
@@ -191,25 +198,15 @@
                   </StackPanel>
                 </Grid>
               </DataTemplate>
-            </ListBox.ItemTemplate>
-          </ListBox>
+            </phone:LongListSelector.ItemTemplate>
+            <phone:LongListSelector.ListFooter>
+              <Grid Background="BlueViolet" Height="35">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Main.OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" />
+              </Grid>
+            </phone:LongListSelector.ListFooter>
+          </phone:LongListSelector>
         </Grid>
       </controls:PanoramaItem>
-
-      <!--Settings panorama item-->
-      <!--<controls:PanoramaItem Name="panoramaItemSettings" Header="{Binding Path=Main.HeaderSettings, Source={StaticResource LocalizedStrings}}">
-        <StackPanel>
-          <StackPanel Name="stackPanelSettingsLanguage" Margin="10 0 10 10" Tap="stackPanelSettingsLanguage_Tap">
-            <TextBlock Grid.Row="0" Margin="0 0 10 10" Text="{Binding Path=Main.ListLanguage, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}" />
-            <TextBlock Grid.Row="1" Margin="0 -5 10 10" Text="{Binding CurrentCultureName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-          </StackPanel>
-          <StackPanel Name="stackPanelSettingsDesign" Margin="10 0 0 10" Tap="stackPanelSettingsDesign_Tap">
-            <TextBlock Grid.Row="0" Margin="0 0 10 10" Text="{Binding Path=Main.ListDesign, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}" />
-            <Image Grid.Row="1" Name="imgDesign" Margin="0 -20 10 15" Source="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.CroppedBackground}" />
-          </StackPanel>
-          <CheckBox Name="checkBoxShowMemory" Content="{Binding Path=Main.DEBUGShowMemory, Source={StaticResource LocalizedStrings}}" Checked="checkBoxShowMemory_Checked" Unchecked="checkBoxShowMemory_Unchecked" />
-        </StackPanel>
-      </controls:PanoramaItem>-->
 
       <!--About panorama item-->
       <controls:PanoramaItem Name="panoramaItemHelp" Header="{Binding Path=Main.HeaderAbout, Source={StaticResource LocalizedStrings}}">

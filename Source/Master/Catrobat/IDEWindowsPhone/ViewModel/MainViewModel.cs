@@ -195,15 +195,23 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         _onlineProjects.Clear();
       }
 
+      _loadingOnlineProjects = false;
+
       foreach (OnlineProjectHeader header in projects)
       {
         _onlineProjects.Add(header);
       }
     }
 
+    private bool _loadingOnlineProjects = false;
     public void LoadOnlineProjects(bool append)
     {
-      ServerCommunication.LoadOnlineProjects(append, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
+      if (!_loadingOnlineProjects)
+      {
+        _loadingOnlineProjects = true;
+        ServerCommunication.LoadOnlineProjects(append, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
+      }
+      
     }
 
     private MessageBoxResult _dialogResult;

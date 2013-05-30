@@ -24,6 +24,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     {
       InitializeComponent();
 
+      LongListSelectorOnlineProjects.ItemRealized += LongListSelectorOnlineProjects_ItemRealized;
+      this.Loaded += new RoutedEventHandler(MainPage_Loaded);
+
       // Dirty but there is no way around this
       Messenger.Default.Register<DialogMessage>(
         this,
@@ -40,6 +43,29 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
               msg.ProcessCallback(result);
             }
           }));
+    }
+
+    private void MainPage_Loaded(object sender, RoutedEventArgs e)
+    {
+      //var progressIndicator = SystemTray.ProgressIndicator;
+      //if (progressIndicator != null)
+      //{
+      //  return;
+      //}
+
+      //progressIndicator = new ProgressIndicator();
+
+      //SystemTray.SetProgressIndicator(this, progressIndicator);
+
+      //Binding binding = new Binding("IsLoading") { Source = _viewModel };
+      //BindingOperations.SetBinding(
+      //    progressIndicator, ProgressIndicator.IsVisibleProperty, binding);
+
+      //binding = new Binding("IsLoading") { Source = _viewModel };
+      //BindingOperations.SetBinding(
+      //    progressIndicator, ProgressIndicator.IsIndeterminateProperty, binding);
+
+      //progressIndicator.Text = "Loading new tweets...";
     }
 
     private void buttonPlayCurrentProject_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -64,7 +90,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void OnlineProject_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
-      if (OnlineProjectListBox.SelectedItem != null)
+      if (LongListSelectorOnlineProjects.SelectedItem != null)
       {
         NavigationService.Navigate(new Uri("/Views/Main/OnlineProjectPage.xaml", UriKind.Relative));
       }
@@ -79,7 +105,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void panoramaMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-      if ((panoramaMain.SelectedItem == panoramaItemOnlineProjects) && (OnlineProjectListBox.Items.Count == 0))
+      if ((panoramaMain.SelectedItem == panoramaItemOnlineProjects)) //&& (LongListSelectorOnlineProjects.Items.Count == 0)
       {
         // Load Data - this has to stay in code-behind
         _mainViewModel.LoadOnlineProjects(false);
@@ -202,5 +228,22 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         sb2.Begin();
       };
     }
+
+    private int _offsetKnob = 5;
+    void LongListSelectorOnlineProjects_ItemRealized(object sender, ItemRealizationEventArgs e)
+    {
+      // !_viewModel.IsLoading &&
+      if ( LongListSelectorOnlineProjects.ItemsSource != null && LongListSelectorOnlineProjects.ItemsSource.Count >= _offsetKnob)
+      {
+        if (e.ItemKind == LongListSelectorItemKind.Item)
+        {
+          if ((e.Container.Content as OnlineProjectHeader).Equals(LongListSelectorOnlineProjects.ItemsSource[LongListSelectorOnlineProjects.ItemsSource.Count - _offsetKnob]))
+          {
+            _mainViewModel.LoadOnlineProjects(true);
+          }
+        }
+      }
+    }
+  
   }
 }
