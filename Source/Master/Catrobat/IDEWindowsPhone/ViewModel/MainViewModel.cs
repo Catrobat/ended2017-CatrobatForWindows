@@ -70,6 +70,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     public Project CurrentProject { get { return _catrobatContext.CurrentProject; } }
 
+    public ProjectHeader CurrentProjectHeader { get { return _catrobatContext.CurrentProject.Header; } }
+
     public ImageSource CurrentProjectScreenshot
     {
       get
@@ -212,25 +214,29 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       private set;
     }
 
-    private void DialogMessageCallback(MessageBoxResult result)
+    private void DeleteProductMessageCallback(MessageBoxResult result)
     {
       _dialogResult = result;
+
+      if (_dialogResult == MessageBoxResult.OK)
+      {
+        CatrobatContext.GetContext().DeleteProject(_deleteProductName);
+        _deleteProductName = null;
+      }
     }
 
+    private string _deleteProductName;
     private void DeleteLocalProject(string projectName)
     {
-      var message = new DialogMessage(String.Format(MainResources.MainDeleteProjectDialogMessage, projectName), DialogMessageCallback)
+      _deleteProductName = projectName;
+
+      var message = new DialogMessage(String.Format(MainResources.MainDeleteProjectDialogMessage, projectName), DeleteProductMessageCallback)
       {
         Button = MessageBoxButton.OKCancel,
         Caption = MainResources.MainDeleteProjectDialogTitle
       };
 
       Messenger.Default.Send(message);
-
-      if (_dialogResult == MessageBoxResult.OK)
-      {
-        CatrobatContext.GetContext().DeleteProject(projectName);
-      }
     }
 
     public RelayCommand<string> CopyLocalProjectCommand
@@ -239,20 +245,30 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       private set;
     }
 
+    private void CopyProductMessageCallback(MessageBoxResult result)
+    {
+
+      _dialogResult = result;
+
+      if (_dialogResult == MessageBoxResult.OK)
+      {
+        CatrobatContext.GetContext().CopyProject(_copyProductName);
+        _copyProductName = null;
+      }
+    }
+
+    private string _copyProductName;
     private void CopyLocalProject(string projectName)
     {
-      var message = new DialogMessage(String.Format(MainResources.MainCopyProjectDialogMessage, projectName), DialogMessageCallback)
+      _copyProductName = projectName;
+
+      var message = new DialogMessage(String.Format(MainResources.MainCopyProjectDialogMessage, projectName), CopyProductMessageCallback)
       {
         Button = MessageBoxButton.OKCancel,
         Caption = MainResources.MainCopyProjectDialogTitle
       };
 
       Messenger.Default.Send(message);
-
-      if (_dialogResult == MessageBoxResult.OK)
-      {
-        CatrobatContext.GetContext().CopyProject(projectName);
-      }
     }
 
     public RelayCommand LazyLoadOnlineProjectsCommand

@@ -32,15 +32,15 @@ namespace Catrobat.Core
     {
       bool firstTimeUse = !RestoreLocalSettings();
 
-      if (Debugger.IsAttached)
-      {
-        var loader = new SampleProjectLoader();
-        loader.LoadSampleProjects();
-        UpdateLocalProjects();
-      }
-
       if (firstTimeUse)
       {
+        if (Debugger.IsAttached)
+        {
+          var loader = new SampleProjectLoader();
+          loader.LoadSampleProjects();
+          UpdateLocalProjects();
+        }
+
         RestoreDefaultProject(DefaultProjectName);
         LocalSettings = new LocalSettings {CurrentProjectName = CurrentProject.ProjectName};
       }
@@ -229,10 +229,10 @@ namespace Catrobat.Core
           {
             object projectScreenshot =  storage.LoadImage(ProjectsPath + "/" + projectName + "/" + Project.ScreenshotPath);
             var projectHeader = new ProjectHeader
-                {
-                  ProjectName = projectName,
-                  Screenshot = projectScreenshot
-                };
+            {
+              ProjectName = projectName,
+              Screenshot = projectScreenshot
+            };
             _localProjects.Add(projectHeader);
           }
         }

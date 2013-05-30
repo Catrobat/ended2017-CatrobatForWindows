@@ -120,6 +120,9 @@
     <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
       <DependentUpon>ListPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Projects\LocalProjectControl.xaml.cs">
+      <DependentUpon>LocalProjectControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ReorderableListbox\NegativeValueConverter.cs" />
     <Compile Include="Controls\ReorderableListbox\PullDownToRefreshPanel.cs" />
     <Compile Include="Controls\ReorderableListbox\ReorderListBox.cs" />
@@ -129,6 +132,7 @@
     </Compile>
     <Compile Include="Converters\ActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\BytesImageConverter.cs" />
+    <Compile Include="Converters\InActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\VersionConverter.cs" />
     <Compile Include="Converters\DoubleStringConverter.cs" />
     <Compile Include="Converters\FloatStringConverter.cs" />
@@ -262,6 +266,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Projects\LocalProjectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SplashScreen\AnimatedSplashScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -387,19 +395,12 @@
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_1280.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_800.png" />
     <Content Include="Content\Resources\SampleProjects\Aquarium_v2.catrobat" />
-    <Content Include="Content\Resources\SampleProjects\Broadcast_test.catroid" />
     <Content Include="Content\Resources\SampleProjects\default.catroid" />
     <Content Include="Content\Resources\SampleProjects\Egg_timer.catrobat" />
     <Content Include="Content\Resources\SampleProjects\Fishy.catroid" />
-    <Content Include="Content\Resources\SampleProjects\glideTo.catroid" />
     <Content Include="Content\Resources\SampleProjects\HAL9000.catrobat" />
-    <Content Include="Content\Resources\SampleProjects\LookBricks.catroid" />
-    <Content Include="Content\Resources\SampleProjects\MotionBrick.catroid" />
     <Content Include="Content\Resources\SampleProjects\Pacman.catrobat" />
     <Content Include="Content\Resources\SampleProjects\Piano.catrobat" />
-    <Content Include="Content\Resources\SampleProjects\pointTo.catroid" />
-    <Content Include="Content\Resources\SampleProjects\speakBrick.catroid" />
-    <Content Include="Content\Resources\SampleProjects\SwitchBackground.catroid" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
