@@ -195,7 +195,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         _onlineProjects.Clear();
       }
 
-      _loadingOnlineProjects = false;
+      IsLoadingOnlineProjects = false;
 
       foreach (OnlineProjectHeader header in projects)
       {
@@ -203,12 +203,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       }
     }
 
-    private bool _loadingOnlineProjects = false;
+    public bool _isLoadingOnlineProjects = false;
+    public bool IsLoadingOnlineProjects 
+    {
+      get { return _isLoadingOnlineProjects; }
+      set { _isLoadingOnlineProjects = value; RaisePropertyChanged("IsLoadingOnlineProjects"); }
+    }
     public void LoadOnlineProjects(bool append)
     {
-      if (!_loadingOnlineProjects)
+      if (!IsLoadingOnlineProjects)
       {
-        _loadingOnlineProjects = true;
+        IsLoadingOnlineProjects = true;
         ServerCommunication.LoadOnlineProjects(append, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
       }
       

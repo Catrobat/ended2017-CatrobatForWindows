@@ -130,6 +130,9 @@
     <Compile Include="Controls\SplashScreen\AnimatedSplashScreen.xaml.cs">
       <DependentUpon>AnimatedSplashScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
+      <DependentUpon>ProcessIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\ActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\BytesImageConverter.cs" />
     <Compile Include="Converters\InActiveProjectVisibilityConverter.cs" />
@@ -278,6 +281,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\StatusIcons\ProcessIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -394,6 +401,7 @@
   <ItemGroup>
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_1280.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_800.png" />
+    <Content Include="Content\Images\Misc\InProcess.png" />
     <Content Include="Content\Resources\SampleProjects\Aquarium_v2.catrobat" />
     <Content Include="Content\Resources\SampleProjects\default.catroid" />
     <Content Include="Content\Resources\SampleProjects\Egg_timer.catrobat" />

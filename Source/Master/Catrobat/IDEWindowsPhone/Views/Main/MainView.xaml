@@ -11,6 +11,7 @@
   xmlns:imageButton="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
   xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
   xmlns:projectControls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Projects"
+  xmlns:statusIcons="clr-namespace:Catrobat.IDEWindowsPhone.Controls.StatusIcons"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
@@ -201,7 +202,10 @@
             </phone:LongListSelector.ItemTemplate>
             <phone:LongListSelector.ListFooter>
               <Grid Background="BlueViolet" Height="35">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Main.OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" />
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                  <statusIcons:ProcessIcon IsProcessing="{Binding IsLoadingOnlineProjects}" Margin="0 0 5 0" />
+                  <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Main.OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" />
+                </StackPanel>
               </Grid>
             </phone:LongListSelector.ListFooter>
           </phone:LongListSelector>
