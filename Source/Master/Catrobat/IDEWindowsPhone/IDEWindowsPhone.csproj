@@ -106,6 +106,7 @@
     <Compile Include="ContextHolderWindowsPhone.cs" />
     <Compile Include="Controls\Bricks\MasterBrick.cs" />
     <Compile Include="Controls\Bricks\NormalBrick.cs" />
+    <Compile Include="Controls\Buttons\BackButton.cs" />
     <Compile Include="Controls\Buttons\SettingsButton.cs" />
     <Compile Include="Controls\Buttons\ImageButton.cs" />
     <Compile Include="Controls\Buttons\PlayButton.xaml.cs">
@@ -129,6 +130,9 @@
     <Compile Include="Controls\ReorderableListbox\ReorderListBoxItem.cs" />
     <Compile Include="Controls\SplashScreen\AnimatedSplashScreen.xaml.cs">
       <DependentUpon>AnimatedSplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
+      <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\BytesImageConverter.cs" />
@@ -242,6 +246,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\Buttons\BackButtonTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Buttons\SettingsButtonTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -278,6 +286,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\StatusIcons\ProcessIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -394,6 +406,7 @@
   <ItemGroup>
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_1280.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_800.png" />
+    <Content Include="Content\Images\Misc\InProcess.png" />
     <Content Include="Content\Resources\SampleProjects\Aquarium_v2.catrobat" />
     <Content Include="Content\Resources\SampleProjects\default.catroid" />
     <Content Include="Content\Resources\SampleProjects\Egg_timer.catrobat" />

@@ -8,9 +8,11 @@
   xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
   xmlns:MvvmLightExtras="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
   xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
-  xmlns:imageButton="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
+  xmlns:buttons="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
   xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
   xmlns:projectControls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Projects"
+  xmlns:statusIcons="clr-namespace:Catrobat.IDEWindowsPhone.Controls.StatusIcons"
+  xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
@@ -69,22 +71,22 @@
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="{ Binding CurrentProject.ProjectName}" Margin="0 0 0 20" Style="{StaticResource PhoneTextLargeStyle}" />
             <Grid Height="400">
               <Image Name="imageCurrentProjectScreenshot" Source="{Binding CurrentProjectScreenshot}" />
-              <imageButton:ScreenshotButton VerticalAlignment="Center" x:Name="buttonPlayCurrentProject"          
+              <buttons:ScreenshotButton VerticalAlignment="Center" x:Name="buttonPlayCurrentProject"          
                 Template="{StaticResource ScreenshotButtonControlTemplate}"
                 Margin="0,0,0,0" Click="buttonPlayCurrentProject_Click" Width="130" />
             </Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-              <imageButton:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonCreateNewProject" 
+              <buttons:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonCreateNewProject" 
                           ImageName="add"
                           Text="{Binding Path=Main.ButtonCreate, Source={StaticResource LocalizedStrings}}"
                           Template="{StaticResource ImageButtonControlTemplate}"
                           Margin="10" Click="buttonCreateNewProject_Click" />
-              <imageButton:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonEditCurrentProject" 
+              <buttons:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonEditCurrentProject" 
                           ImageName="edit"
                           Text="{Binding Path=Main.ButtonEdit, Source={StaticResource LocalizedStrings}}"
                           Template="{StaticResource ImageButtonControlTemplate}"
                           Margin="10" Click="buttonEditCurrentProject_Click" />
-              <imageButton:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonUploadCurrentProject" 
+              <buttons:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonUploadCurrentProject" 
                           ImageName="upload"
                           Text="{Binding Path=Main.ButtonUpload, Source={StaticResource LocalizedStrings}}"
                           Template="{StaticResource ImageButtonControlTemplate}"
@@ -94,6 +96,7 @@
         </Grid>
       </controls:PanoramaItem>
 
+      <!--Local Projects panorama item-->
       <controls:PanoramaItem Name="panoramaItemLocalProjects" Header="{Binding Path=Main.HeaderLocalProjects, Source={StaticResource LocalizedStrings}}">
         <Grid>
           <Grid.RowDefinitions>
@@ -106,6 +109,12 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
               </Grid.ColumnDefinitions>
+              <toolkit:ContextMenuService.ContextMenu>
+                <toolkit:ContextMenu>
+                  <toolkit:MenuItem Header="COPY" Command="{Binding Main.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
+                  <toolkit:MenuItem Header="DELETE" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
+                </toolkit:ContextMenu>
+              </toolkit:ContextMenuService.ContextMenu>
 
               <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -118,9 +127,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
                   </Grid.ColumnDefinitions>
-
-                  <Button Name="ButtonNavigateToCurrentProject" Width="80" Height="80"
-                    Content="&lt;" Grid.Column="0" Click="LocalProjectControl_OnLocalProjectsBackPressed" ></Button>
+                  <buttons:BackButton Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Template="{StaticResource BackButtonControlTemplate}" Click="LocalProjectControl_OnLocalProjectsBackPressed"></buttons:BackButton>
                   <TextBlock Grid.Column="1" Margin="18,18,12,0" TextWrapping="NoWrap" Text="{Binding CurrentProject.ProjectName}" Style="{StaticResource PhoneTextLargeStyle}"/>
                 </Grid>
 
@@ -130,12 +137,12 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                   </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Name="GridSelectedMessage" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                      <TextBlock Opacity="0.9" TextWrapping="Wrap" TextAlignment="Center" 
+                  <Grid Grid.Column="0" Name="GridSelectedMessage" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <TextBlock Opacity="0.9" TextWrapping="Wrap" TextAlignment="Center" 
                            VerticalAlignment="Center" HorizontalAlignment="Center">ACTIVE</TextBlock>
-                    </Grid>
+                  </Grid>
 
-                  <imageButton:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="buttonCopyLocalProject" 
+                  <!--<imageButton:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="buttonCopyLocalProject" 
                         ImageName="copy"
                         Text="{Binding Path=Main.ButtonCopy, Source={StaticResource LocalizedStrings}}"
                         Template="{StaticResource ImageButtonControlTemplate}"
@@ -148,7 +155,7 @@
                         Template="{StaticResource ImageButtonControlTemplate}"
                         Margin="10" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
                         CommandParameter="{Binding CurrentProject.ProjectName}"
-                        IsAutoColor="False" IsDark="True"/>
+                        IsAutoColor="False" IsDark="True"/>-->
                 </Grid>
               </Grid>
               <Grid Grid.Column="1">
@@ -178,8 +185,14 @@
             <RowDefinition Height="*" />
           </Grid.RowDefinitions>
           <toolkit:PhoneTextBox xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" Hint="{Binding Path=Main.FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" ActionIcon="../../Resources/Application/Search.png" x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilterTextBox_TextChanged" Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
-          <ListBox Grid.Row="1" ItemsSource="{Binding OnlineProjects}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Tap="OnlineProject_Tap" SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}" x:Name="OnlineProjectListBox" Style="{StaticResource ContinuousListBox}">
-            <ListBox.ItemTemplate>
+          <phone:LongListSelector Name="LongListSelectorOnlineProjects" Grid.Row="1" 
+            ItemsSource="{Binding OnlineProjects}" 
+            VerticalAlignment="Stretch" 
+            HorizontalAlignment="Stretch" 
+            Tap="OnlineProject_Tap"
+            
+            SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}">
+            <phone:LongListSelector.ItemTemplate>
               <DataTemplate>
                 <Grid Margin="12 5 12 5" Width="412" Background="{StaticResource PhoneAccentBrush}">
                   <StackPanel Orientation="Horizontal">
@@ -191,25 +204,18 @@
                   </StackPanel>
                 </Grid>
               </DataTemplate>
-            </ListBox.ItemTemplate>
-          </ListBox>
+            </phone:LongListSelector.ItemTemplate>
+            <phone:LongListSelector.ListFooter>
+              <Grid Background="BlueViolet" Height="35">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                  <statusIcons:ProcessIcon IsProcessing="{Binding IsLoadingOnlineProjects}" Margin="0 0 5 0" />
+                  <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Main.OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" />
+                </StackPanel>
+              </Grid>
+            </phone:LongListSelector.ListFooter>
+          </phone:LongListSelector>
         </Grid>
       </controls:PanoramaItem>
-
-      <!--Settings panorama item-->
-      <!--<controls:PanoramaItem Name="panoramaItemSettings" Header="{Binding Path=Main.HeaderSettings, Source={StaticResource LocalizedStrings}}">
-        <StackPanel>
-          <StackPanel Name="stackPanelSettingsLanguage" Margin="10 0 10 10" Tap="stackPanelSettingsLanguage_Tap">
-            <TextBlock Grid.Row="0" Margin="0 0 10 10" Text="{Binding Path=Main.ListLanguage, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}" />
-            <TextBlock Grid.Row="1" Margin="0 -5 10 10" Text="{Binding CurrentCultureName}" Style="{StaticResource PhoneTextNormalStyle}"/>
-          </StackPanel>
-          <StackPanel Name="stackPanelSettingsDesign" Margin="10 0 0 10" Tap="stackPanelSettingsDesign_Tap">
-            <TextBlock Grid.Row="0" Margin="0 0 10 10" Text="{Binding Path=Main.ListDesign, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}" />
-            <Image Grid.Row="1" Name="imgDesign" Margin="0 -20 10 15" Source="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.CroppedBackground}" />
-          </StackPanel>
-          <CheckBox Name="checkBoxShowMemory" Content="{Binding Path=Main.DEBUGShowMemory, Source={StaticResource LocalizedStrings}}" Checked="checkBoxShowMemory_Checked" Unchecked="checkBoxShowMemory_Unchecked" />
-        </StackPanel>
-      </controls:PanoramaItem>-->
 
       <!--About panorama item-->
       <controls:PanoramaItem Name="panoramaItemHelp" Header="{Binding Path=Main.HeaderAbout, Source={StaticResource LocalizedStrings}}">
@@ -222,7 +228,7 @@
               <ColumnDefinition Width="130" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <imageButton:SettingsButton Grid.Column="0" VerticalAlignment="Center" x:Name="buttonSettings" 
+            <buttons:SettingsButton Grid.Column="0" VerticalAlignment="Center" x:Name="buttonSettings" 
               Template="{StaticResource SettingsButtonControlTemplate}" Click="buttonSettings_Click"/>
             <TextBlock Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Main.ApplicationNameAndVersion, Source={StaticResource LocalizedStrings}, Converter={StaticResource VersionConverter}}" Margin="30" TextWrapping="Wrap" />
           </Grid>
