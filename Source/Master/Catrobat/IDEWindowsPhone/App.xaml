@@ -6,28 +6,29 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:common="clr-namespace:Catrobat.IDECommon.Resources;assembly=Catrobat.IDECommon">
 
-    <!--Application Resources-->
-    <Application.Resources>
-      <ResourceDictionary>
-        <ResourceDictionary.MergedDictionaries>
+  <!--Application Resources-->
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Content/Resources/Resources.xaml"/>
-          <ResourceDictionary Source="ViewModel/Resources.xaml"/>
-          <ResourceDictionary Source="Themes/ThemeResources.xaml"/>
-          <ResourceDictionary Source="Views/Editor/Scripts/ScriptBrickTemplates.xaml"/>
-          <ResourceDictionary Source="Views/Editor/Scripts/ReorderableListBoxStyles.xaml"/>
-          <ResourceDictionary Source="Views/Editor/Scripts/ScriptBrickAddData.xaml"/>
-          <ResourceDictionary Source="Controls/Buttons/ImageButtonTemplates.xaml"/>
-          <ResourceDictionary Source="Controls/Buttons/ScreenshotButtonTemplates.xaml"/>
+        <ResourceDictionary Source="ViewModel/Resources.xaml"/>
+        <ResourceDictionary Source="Themes/ThemeResources.xaml"/>
+        <ResourceDictionary Source="Views/Editor/Scripts/ScriptBrickTemplates.xaml"/>
+        <ResourceDictionary Source="Views/Editor/Scripts/ReorderableListBoxStyles.xaml"/>
+        <ResourceDictionary Source="Views/Editor/Scripts/ScriptBrickAddData.xaml"/>
+        <ResourceDictionary Source="Controls/Buttons/ImageButtonTemplates.xaml"/>
+        <ResourceDictionary Source="Controls/Buttons/BackButtonTemplates.xaml"/>
+        <ResourceDictionary Source="Controls/Buttons/ScreenshotButtonTemplates.xaml"/>
         <ResourceDictionary Source="Controls/Buttons/SettingsButtonTemplates.xaml"/>
       </ResourceDictionary.MergedDictionaries>
-      </ResourceDictionary>
+    </ResourceDictionary>
   </Application.Resources>
 
-    <Application.ApplicationLifetimeObjects>
-        <!--Required object that handles lifetime events for the application-->
-        <shell:PhoneApplicationService
+  <Application.ApplicationLifetimeObjects>
+    <!--Required object that handles lifetime events for the application-->
+    <shell:PhoneApplicationService
             Launching="Application_Launching" Closing="Application_Closing"
             Activated="Application_Activated" Deactivated="Application_Deactivated"/>
-    </Application.ApplicationLifetimeObjects>
+  </Application.ApplicationLifetimeObjects>
 
 </Application>

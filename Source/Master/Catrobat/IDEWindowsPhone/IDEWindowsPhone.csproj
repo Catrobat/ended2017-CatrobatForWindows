@@ -106,6 +106,7 @@
     <Compile Include="ContextHolderWindowsPhone.cs" />
     <Compile Include="Controls\Bricks\MasterBrick.cs" />
     <Compile Include="Controls\Bricks\NormalBrick.cs" />
+    <Compile Include="Controls\Buttons\BackButton.cs" />
     <Compile Include="Controls\Buttons\SettingsButton.cs" />
     <Compile Include="Controls\Buttons\ImageButton.cs" />
     <Compile Include="Controls\Buttons\PlayButton.xaml.cs">
@@ -245,6 +246,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\Buttons\BackButtonTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Buttons\SettingsButtonTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
