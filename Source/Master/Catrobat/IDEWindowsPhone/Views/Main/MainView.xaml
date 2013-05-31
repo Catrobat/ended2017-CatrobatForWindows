@@ -12,6 +12,7 @@
   xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
   xmlns:projectControls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Projects"
   xmlns:statusIcons="clr-namespace:Catrobat.IDEWindowsPhone.Controls.StatusIcons"
+  xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
@@ -108,6 +109,12 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
               </Grid.ColumnDefinitions>
+              <toolkit:ContextMenuService.ContextMenu>
+                <toolkit:ContextMenu>
+                  <toolkit:MenuItem Header="COPY" Command="{Binding Main.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
+                  <toolkit:MenuItem Header="DELETE" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
+                </toolkit:ContextMenu>
+              </toolkit:ContextMenuService.ContextMenu>
 
               <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -137,7 +144,7 @@
                            VerticalAlignment="Center" HorizontalAlignment="Center">ACTIVE</TextBlock>
                   </Grid>
 
-                  <imageButton:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="buttonCopyLocalProject" 
+                  <!--<imageButton:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="buttonCopyLocalProject" 
                         ImageName="copy"
                         Text="{Binding Path=Main.ButtonCopy, Source={StaticResource LocalizedStrings}}"
                         Template="{StaticResource ImageButtonControlTemplate}"
@@ -150,7 +157,7 @@
                         Template="{StaticResource ImageButtonControlTemplate}"
                         Margin="10" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
                         CommandParameter="{Binding CurrentProject.ProjectName}"
-                        IsAutoColor="False" IsDark="True"/>
+                        IsAutoColor="False" IsDark="True"/>-->
                 </Grid>
               </Grid>
               <Grid Grid.Column="1">

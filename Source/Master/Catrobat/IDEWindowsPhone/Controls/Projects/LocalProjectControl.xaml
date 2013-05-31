@@ -7,19 +7,26 @@
   xmlns:imageButton="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
   xmlns:MvvmLightExtras="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
   xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
+  xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
   mc:Ignorable="d"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
   d:DesignHeight="280" d:DesignWidth="480">
-  
+
   <UserControl.Resources>
     <!--<converters:ActiveProjectVisibilityConverter x:Key="ActiveProjectVisibilityConverter" />
     <converters:InActiveProjectVisibilityConverter x:Key="InActiveProjectVisibilityConverter" />-->
     <converters:BytesImageConverter x:Key="BytesImageConverter" />
   </UserControl.Resources>
 
-      <Grid x:Name="LayoutRoot">
+  <Grid x:Name="LayoutRoot">
+    <toolkit:ContextMenuService.ContextMenu>
+      <toolkit:ContextMenu>
+        <toolkit:MenuItem Header="COPY" Command="{Binding Main.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
+        <toolkit:MenuItem Header="DELETE" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
+      </toolkit:ContextMenu>
+    </toolkit:ContextMenuService.ContextMenu>
     <Border BorderThickness="6" BorderBrush="{StaticResource PhoneForegroundBrush}" Margin="0 5" Width="412">
       <Grid Background="{StaticResource PhoneAccentBrush}">
         <Grid.ColumnDefinitions>
@@ -33,7 +40,7 @@
             <RowDefinition />
           </Grid.RowDefinitions>
 
-     
+
           <TextBlock Grid.Row="0" Margin="18,18,12,0" TextWrapping="NoWrap" Text="{Binding ProjectName}" Style="{StaticResource PhoneTextLargeStyle}"/>
 
 
@@ -44,7 +51,7 @@
               <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="0" Margin="4">
               <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Tap">
                   <MvvmLightExtras:EventToCommand Command="{Binding Main.SetCurrentProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
@@ -57,7 +64,7 @@
               </Grid>
             </Grid>
 
-            <imageButton:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="buttonCopyLocalProject" 
+            <!--<imageButton:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="buttonCopyLocalProject" 
                         ImageName="copy"
                         Text="{Binding Path=Main.ButtonCopy, Source={StaticResource LocalizedStrings}}"
                         Template="{StaticResource ImageButtonControlTemplate}"
@@ -71,7 +78,7 @@
                         Template="{StaticResource ImageButtonControlTemplate}"
                         Margin="10" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
                         CommandParameter="{Binding ProjectName}"
-                        IsAutoColor="False" IsDark="True"/>
+                        IsAutoColor="False" IsDark="True"/>-->
           </Grid>
         </Grid>
         <Grid Grid.Column="1">
