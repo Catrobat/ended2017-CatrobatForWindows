@@ -234,6 +234,9 @@
     <Compile Include="Views\Main\SettingsThemeChooser.xaml.cs">
       <DependentUpon>SettingsThemeChooser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Main\TileGeneratorView.xaml.cs">
+      <DependentUpon>TileGeneratorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\UploadProjectLoginPage.xaml.cs">
       <DependentUpon>UploadProjectLoginPage.xaml</DependentUpon>
     </Compile>
@@ -393,6 +396,10 @@
     <Page Include="Views\Main\SettingsThemeChooser.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\TileGeneratorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\UploadProjectLoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>

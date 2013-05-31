@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Windows.Interop;
+using System.Windows.Navigation;
 using Catrobat.Core;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
@@ -21,6 +22,7 @@ using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
 using IDEWindowsPhone;
 using System.Windows.Media;
+using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel
 {
@@ -71,6 +73,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     public Project CurrentProject { get { return _catrobatContext.CurrentProject; } }
 
     public ProjectHeader CurrentProjectHeader { get { return _catrobatContext.CurrentProject.Header; } }
+
+    public ProjectHeader PinProjectHeader { get; set; }
 
     public ImageSource CurrentProjectScreenshot
     {
@@ -179,6 +183,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       // Commands
       DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProject);
       CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProject);
+      PinLocalProjectCommand = new RelayCommand<ProjectHeader>(PinLocalProject);
       LazyLoadOnlineProjectsCommand = new RelayCommand(LazyLoadOnlineProjects);
       SetCurrentProjectCommand = new RelayCommand<string>(SetCurrentProject);
 
@@ -284,6 +289,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       Messenger.Default.Send(message);
     }
 
+    public RelayCommand<ProjectHeader> PinLocalProjectCommand
+    {
+      get;
+      private set;
+    }
+
+    private void PinLocalProject(ProjectHeader project)
+    {
+      PinProjectHeader = project;
+      NavigateTo("/Views/Main/TileGeneratorView.xaml");
+    }
+
+
     public RelayCommand LazyLoadOnlineProjectsCommand
     {
       get;
@@ -311,6 +329,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     {
       if(PropertyChanged != null)
         PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private void NavigateTo(string path)
+    {
+      ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri(path, UriKind.Relative));
     }
   }
 }
