@@ -104,17 +104,18 @@
             <RowDefinition />
           </Grid.RowDefinitions>
           <Border BorderThickness="6" BorderBrush="{StaticResource PhoneForegroundBrush}" Margin="-6 5 0 10" Width="412">
+            <toolkit:ContextMenuService.ContextMenu>
+              <toolkit:ContextMenu>
+                <toolkit:MenuItem Header="COPY" Command="{Binding Main.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
+                <toolkit:MenuItem Header="DELETE" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
+                <toolkit:MenuItem Header="PIN TO START" Command="{Binding Main.PinLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProjectHeader}" />
+              </toolkit:ContextMenu>
+            </toolkit:ContextMenuService.ContextMenu>
             <Grid Background="{StaticResource PhoneAccentBrush}">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
               </Grid.ColumnDefinitions>
-              <toolkit:ContextMenuService.ContextMenu>
-                <toolkit:ContextMenu>
-                  <toolkit:MenuItem Header="COPY" Command="{Binding Main.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
-                  <toolkit:MenuItem Header="DELETE" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
-                </toolkit:ContextMenu>
-              </toolkit:ContextMenuService.ContextMenu>
 
               <Grid Grid.Column="0">
                 <Grid.RowDefinitions>

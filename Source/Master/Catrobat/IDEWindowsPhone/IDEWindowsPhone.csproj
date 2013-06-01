@@ -156,6 +156,7 @@
     <Compile Include="Misc\Storage\ResourcesPhone7.cs" />
     <Compile Include="Misc\Storage\StorageFactoryPhone7.cs" />
     <Compile Include="Misc\Storage\StoragePhone7.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Themes\ColorChooser.cs" />
     <Compile Include="Themes\Theme.cs" />
@@ -233,6 +234,9 @@
     </Compile>
     <Compile Include="Views\Main\SettingsThemeChooser.xaml.cs">
       <DependentUpon>SettingsThemeChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\TileGeneratorView.xaml.cs">
+      <DependentUpon>TileGeneratorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\UploadProjectLoginPage.xaml.cs">
       <DependentUpon>UploadProjectLoginPage.xaml</DependentUpon>
@@ -393,6 +397,10 @@
     <Page Include="Views\Main\SettingsThemeChooser.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\TileGeneratorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\UploadProjectLoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>

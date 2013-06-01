@@ -244,6 +244,5 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         }
       }
     }
-  
   }
 }

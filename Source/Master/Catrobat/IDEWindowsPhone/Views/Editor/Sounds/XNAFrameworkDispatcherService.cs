@@ -5,15 +5,14 @@ using Microsoft.Xna.Framework;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
-  public class XNAFrameworkDispatcherService : IApplicationService
+  public class XnaFrameworkDispatcherService : IApplicationService
   {
-    private DispatcherTimer frameworkDispatcherTimer;
+    private readonly DispatcherTimer _frameworkDispatcherTimer;
 
-    public XNAFrameworkDispatcherService()
+    public XnaFrameworkDispatcherService()
     {
-      this.frameworkDispatcherTimer = new DispatcherTimer();
-      this.frameworkDispatcherTimer.Interval = TimeSpan.FromTicks(333333);
-      this.frameworkDispatcherTimer.Tick += frameworkDispatcherTimer_Tick;
+      _frameworkDispatcherTimer = new DispatcherTimer {Interval = TimeSpan.FromTicks(333333)};
+      _frameworkDispatcherTimer.Tick += frameworkDispatcherTimer_Tick;
       FrameworkDispatcher.Update();
     }
 
@@ -21,8 +20,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
     { FrameworkDispatcher.Update(); }
 
     void IApplicationService.StartService(ApplicationServiceContext context)
-    { this.frameworkDispatcherTimer.Start(); }
+    { _frameworkDispatcherTimer.Start(); }
 
-    void IApplicationService.StopService() { this.frameworkDispatcherTimer.Stop(); }
+    void IApplicationService.StopService() { _frameworkDispatcherTimer.Stop(); }
   }
 }

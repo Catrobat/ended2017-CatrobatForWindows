@@ -230,7 +230,32 @@ namespace Catrobat.Core.Objects
       }
     }
 
-    public ProjectHeader Header { get; set; }
+    private ProjectHeader _header;
+    public ProjectHeader Header
+    {
+      get 
+      {
+        if (_header != null)
+        {
+          return _header;
+        }
+        else
+        {
+          object image = null;
+
+          using (IStorage storage = StorageSystem.GetStorage())
+          {
+            image = storage.LoadImageThumbnail(BasePath + "/" + ScreenshotPath);
+          }
+
+          _header = new ProjectHeader{ProjectName = ProjectName, Screenshot = image };
+        }
+
+        return _header; 
+      }
+
+      set { _header = value; }
+    }
 
     public string BasePath
     {
@@ -308,7 +333,7 @@ namespace Catrobat.Core.Objects
 
     internal override XDocument CreateXML()
     {
-      document = new XDocument {Declaration = new XDeclaration("1.0", "UTF-8", "yes")};
+      document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
       var xProject = new XElement("project");
 
