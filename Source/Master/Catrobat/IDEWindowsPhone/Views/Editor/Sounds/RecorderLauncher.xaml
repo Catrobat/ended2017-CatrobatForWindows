@@ -83,7 +83,7 @@
       <Button Grid.Column="1" Name="btnCancel" Content="{Binding Path=Editor.ButtonCancel, Source={StaticResource LocalizedStrings}}" Click="btnCancel_Click" />
     </Grid>
 
-    <StackPanel Grid.Row="1" Visibility="Collapsed" Margin="10 0 0 15" Name="stackPanelChangeName">
+    <StackPanel Grid.Row="1" Margin="10 0 0 15" Name="stackPanelChangeName">
       <TextBlock Margin="0" Text="{Binding Path=Editor.SoundName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
       <TextBox Margin="-10 0 10 0" Name="txtName" HorizontalAlignment="Stretch" TextChanged="txtName_TextChanged" />
     </StackPanel>

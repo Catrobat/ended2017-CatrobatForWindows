@@ -50,6 +50,7 @@ namespace Catrobat.IDEWindowsPhone.Themes
     public SolidColorBrush AccentColor1 { get; set; }
     public SolidColorBrush AccentColor2 { get; set; }
     public SolidColorBrush AccentColor3 { get; set; }
+    public SolidColorBrush AppBarColor { get; set; }
 
     public Theme(string backgroundPath, string croppedPath)
     {
