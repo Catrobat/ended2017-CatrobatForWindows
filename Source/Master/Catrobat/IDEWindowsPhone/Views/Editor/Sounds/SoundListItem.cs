@@ -6,36 +6,36 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
   public class SoundListItem : INotifyPropertyChanged
   {
-    private Song song;
+    private Song _song;
     public Song Song
     {
       get
       {
-        return song;
+        return _song;
       }
       set
       {
-        if (this.song == value)
+        if (this._song == value)
           return;
 
-        this.song = value;
+        this._song = value;
         this.OnPropertyChanged(new PropertyChangedEventArgs("Song"));
       }
     }
 
-    private PlayButtonState state;
+    private PlayButtonState _state;
     public PlayButtonState State
     {
       get
       {
-        return state;
+        return _state;
       }
       set
       {
-        if (this.state == value)
+        if (this._state == value)
           return;
 
-        this.state = value;
+        this._state = value;
         this.OnPropertyChanged(new PropertyChangedEventArgs("State"));
       }
     }
