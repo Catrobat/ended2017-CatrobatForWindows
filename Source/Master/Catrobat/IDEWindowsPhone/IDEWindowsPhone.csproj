@@ -136,6 +136,7 @@
     </Compile>
     <Compile Include="Converters\ActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\BytesImageConverter.cs" />
+    <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\InActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\VersionConverter.cs" />
     <Compile Include="Converters\DoubleStringConverter.cs" />

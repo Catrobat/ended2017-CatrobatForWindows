@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
@@ -25,13 +26,20 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
       InitializeComponent();
       BuildApplicationBar();
       ((LocalizedStrings) Application.Current.Resources["LocalizedStrings"]).PropertyChanged += LanguageChanged;
+      _soundRecorderViewModel.PropertyChanged += SoundRecorderViewModel_OnPropertyChanged;
     }
 
-    protected override void OnNavigatedFrom(NavigationEventArgs e)
+    private void SoundRecorderViewModel_OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
     {
-      //TODO: cancel if navigation goes not to SoundNameChooser
-      //_soundRecorderViewModel.CancelEvent();
-      base.OnNavigatedFrom(e);
+      if (propertyChangedEventArgs.PropertyName == "IsPlaying")
+      {
+        PlayButton.State = _soundRecorderViewModel.IsPlaying ? PlayButtonState.Play : PlayButtonState.Pause;
+      }
+
+      if (propertyChangedEventArgs.PropertyName == "RecordingExists")
+      {
+        BuildApplicationBar();
+      }
     }
 
     private void PlayButton_OnClick(object sender, RoutedEventArgs e)
@@ -48,10 +56,15 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
     {
       ApplicationBar = new ApplicationBar();
 
-      var buttonSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.save.rest.png", UriKind.Relative));
-      buttonSave.Text = EditorResources.ButtonSave;
-      buttonSave.Click += (sender, args) => _soundRecorderViewModel.SaveEvent();// NavigationService.Navigate(new Uri("/Views/Editor/Sounds/SoundNameChooserView.xaml", UriKind.Relative));
-      ApplicationBar.Buttons.Add(buttonSave);
+      if (_soundRecorderViewModel.RecordingExists)
+      {
+        var buttonSave =
+          new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.save.rest.png",
+                                               UriKind.Relative));
+        buttonSave.Text = EditorResources.ButtonSave;
+        buttonSave.Click += (sender, args) => _soundRecorderViewModel.SaveEvent();
+        ApplicationBar.Buttons.Add(buttonSave);
+      }
 
       var buttonCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
       buttonCancel.Text = EditorResources.ButtonCancel;
