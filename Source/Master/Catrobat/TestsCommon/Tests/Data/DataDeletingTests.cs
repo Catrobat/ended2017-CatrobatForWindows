@@ -19,9 +19,10 @@ namespace Catrobat.TestsCommon.Tests.Data
     [TestMethod]
     public void DeleteSprite()
     {
-      SampleLoader.LoadSampleProject("UltimateTest.catroid", "UltimateTest");
+      var catrobatContext = SampleLoader.LoadSampleProject("UltimateTest.catroid", "UltimateTest");
+      CatrobatContext.SetContextHolder(new ContextHolderTests(catrobatContext));
 
-      var project = CatrobatContext.GetContext().CurrentProject;
+      var project = catrobatContext.CurrentProject;
 
       var sprite1 = project.SpriteList.Sprites[0];
       var sprite2 = project.SpriteList.Sprites[1];
@@ -40,6 +41,8 @@ namespace Catrobat.TestsCommon.Tests.Data
         Assert.AreEqual(storage.FileExists(pathCostumes + costume.FileName), false);
         Assert.AreEqual(storage.FileExists(pathSounds + soundInfo.FileName), false);
       }
+
+      CatrobatContext.SetContextHolder(null);
     }
   }
 }
