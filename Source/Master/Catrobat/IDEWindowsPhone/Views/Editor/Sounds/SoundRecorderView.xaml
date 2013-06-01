@@ -1,0 +1,104 @@
+﻿<phone:PhoneApplicationPage
+  x:Class="Catrobat.IDEWindowsPhone.Views.Editor.Sounds.SoundRecorderView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+  xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:c="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
+  xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
+  xmlns:system="clr-namespace:System;assembly=mscorlib"
+  FontFamily="{StaticResource PhoneFontFamilyNormal}"
+  FontSize="{StaticResource PhoneFontSizeNormal}"
+  Foreground="{StaticResource PhoneForegroundBrush}"
+  SupportedOrientations="Portrait" Orientation="Portrait"
+  mc:Ignorable="d"
+  DataContext="{Binding SoundRecorder, Source={StaticResource Locator}}"
+  shell:SystemTray.IsVisible="True">
+
+  <phone:PhoneApplicationPage.Resources>
+    <converters:DoubleStringConverter x:Key="DoubleStringConverter" />
+    <system:String x:Key="TimeFormat">0.##</system:String>
+  </phone:PhoneApplicationPage.Resources>
+
+  <!--LayoutRoot is the root grid where all page content is placed-->
+  <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Row="0" Margin="12,17,0,28">
+      <TextBlock Text="record sound" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+    </StackPanel>
+
+    <!--ContentPanel - place additional content here-->
+    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="1*"/>
+        <RowDefinition Height="3*"/>
+      </Grid.RowDefinitions>
+      <Grid Grid.Row="0">
+        <!--Add audio vizualizer here-->
+      </Grid>
+      <Grid Grid.Row="1">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+          <TextBlock Text="Recorded" Margin="0 0 5 0" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
+          <TextBlock Text="{Binding RecordingTime, Mode=OneWay, Converter={StaticResource DoubleStringConverter}, ConverterParameter={StaticResource TimeFormat}}" Margin="0 0 5 0" VerticalAlignment="Center" FontWeight="ExtraBold" Foreground="YellowGreen" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
+          <TextBlock Text="sec" Margin="0 0 10 0" VerticalAlignment="Center" FontWeight="ExtraBlack" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
+          <c:PlayButton Click="PlayButton_OnClick" VerticalAlignment="Center" HorizontalAlignment="Center" Height="60" Width="60" DataContext="{Binding}" />
+        </StackPanel>
+      </Grid>
+      <Grid Grid.Row="2">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Column="0" Width="220" Height="220" Name="ButtonRecord" 
+                Command="{Binding StartRecordingCommand}"
+                Background="{Binding Path=SelectedTheme.AccentColor2, Source={StaticResource ThemeChooser}}">
+          <Grid Width="170" Height="170" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Row="0">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+              </Grid.ColumnDefinitions>
+              <Ellipse Grid.Column="0" Fill="Red" StrokeThickness="4" Stroke="White" Width="60" Height="60" VerticalAlignment="Center" HorizontalAlignment="Center"></Ellipse>
+              <TextBlock Grid.Column="1" Text="{Binding RecordButtonHeader, Mode=OneWay}" VerticalAlignment="Center"  HorizontalAlignment="Left" Style="{StaticResource PhoneTextExtraLargeStyle}"></TextBlock>
+            </Grid>
+            <Grid Row="1">
+              <TextBlock Text="{Binding RecordButtonText, Mode=OneWay}" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="25 6 25 0"></TextBlock>
+            </Grid>
+          </Grid>
+        </Button>
+        <Button Grid.Column="1" Width="220" Height="220" Name="ButtonResetRecording" 
+                Command="{Binding ResetCommand}"
+                Background="{Binding Path=SelectedTheme.AccentColor1, Source={StaticResource ThemeChooser}}" >
+          <Grid Width="170" Height="170" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Row="0">
+              <!--<Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+              </Grid.ColumnDefinitions>-->
+              <!--TODO: add wastebin-->
+              <TextBlock Grid.Column="1"  Text="{Binding ResetButtonHeader, Mode=OneWay}" VerticalAlignment="Center"  HorizontalAlignment="Center" Style="{StaticResource PhoneTextExtraLargeStyle}"></TextBlock>
+            </Grid>
+            <Grid Row="1">
+              <TextBlock Text="{Binding ResetButtonText, Mode=OneWay}" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5 6 5 0"></TextBlock>
+            </Grid>
+          </Grid>
+        </Button>
+      </Grid>
+    </Grid>
+  </Grid>
+</phone:PhoneApplicationPage>
