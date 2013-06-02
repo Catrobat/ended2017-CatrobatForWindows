@@ -18,13 +18,6 @@ namespace Catrobat.TestsCommon.Tests.Storage
     public static void TestClassInitialize(TestContext testContext)
     {
       TestHelper.InitializeTests();
-
-      using (IStorage storage = new StorageTest())
-      {
-        var basePath = storage.BasePath;
-        if(Directory.Exists(basePath))
-          Directory.Delete(basePath,true);
-      }
     }
 
 
@@ -35,6 +28,8 @@ namespace Catrobat.TestsCommon.Tests.Storage
       {
         var basePath = storage.BasePath + "DeleteDirectoryTest/";
 
+        if (Directory.Exists(basePath))
+          Directory.Delete(basePath, true);
         Directory.CreateDirectory(basePath);
 
         Directory.CreateDirectory(basePath + "Folder1/F2/F3");
@@ -60,6 +55,8 @@ namespace Catrobat.TestsCommon.Tests.Storage
       using (IStorage storage = new StorageTest())
       {
         var basePath = storage.BasePath + "DeleteFileTest/";
+        if (Directory.Exists(basePath))
+          Directory.Delete(basePath, true);
 
         Directory.CreateDirectory(basePath);
 
@@ -84,6 +81,8 @@ namespace Catrobat.TestsCommon.Tests.Storage
       using (IStorage storage = new StorageTest())
       {
         var basePath = storage.BasePath + "CopyDirectoryTest/";
+        if (Directory.Exists(basePath))
+          Directory.Delete(basePath, true);
 
         Directory.CreateDirectory(basePath + "CopyDirectoryTestFolder1/f2/f3");
 
@@ -112,6 +111,8 @@ namespace Catrobat.TestsCommon.Tests.Storage
       using (IStorage storage = new StorageTest())
       {
         var basePath = storage.BasePath + "CopyFileTest/";
+        if (Directory.Exists(basePath))
+          Directory.Delete(basePath, true);
 
         Directory.CreateDirectory(basePath);
 
@@ -141,6 +142,8 @@ namespace Catrobat.TestsCommon.Tests.Storage
       using (IStorage storage = new StorageTest())
       {
         var basePath = storage.BasePath + "OpenFileTest/";
+        if (Directory.Exists(basePath))
+          Directory.Delete(basePath, true);
 
         Directory.CreateDirectory(basePath);
 
@@ -174,6 +177,8 @@ namespace Catrobat.TestsCommon.Tests.Storage
       using (IStorage storage = new StorageTest())
       {
         var basePath = storage.BasePath + "RenameDirectoryTest/";
+        if (Directory.Exists(basePath))
+          Directory.Delete(basePath, true);
 
         Directory.CreateDirectory(basePath);
 
@@ -202,6 +207,9 @@ namespace Catrobat.TestsCommon.Tests.Storage
       using (IStorage storage = new StorageTest())
       {
         var basePath = "LoadImageTest/";
+        if (Directory.Exists(basePath))
+          Directory.Delete(basePath, true);
+
         var sampleProjectsPath = BasePathHelper.GetSampleProjectsPath();
 
         Directory.CreateDirectory(storage.BasePath + basePath);
@@ -254,6 +262,8 @@ namespace Catrobat.TestsCommon.Tests.Storage
       using (IStorage storage = new StorageTest())
       {
         var basePath = storage.BasePath + "ReadWriteTextFileTest/";
+        if (Directory.Exists(basePath))
+          Directory.Delete(basePath, true);
 
         Directory.CreateDirectory(basePath);
 

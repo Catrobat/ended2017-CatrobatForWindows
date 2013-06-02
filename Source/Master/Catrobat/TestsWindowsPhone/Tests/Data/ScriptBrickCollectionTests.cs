@@ -4,12 +4,21 @@ using Catrobat.TestsWindowsPhone.SampleData;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Storage;
+using Catrobat.IDEWindowsPhone.Misc.Storage;
+using Catrobat.TestsWindowsPhone.Misc;
 
 namespace Catrobat.TestsWindowsPhone.Tests.Data
 {
   [TestClass]
   public class ScriptBrickCollectionTests
   {
+    [TestInitialize]
+    public void Initialize()
+    {
+      TestHelper.InitializeTests();
+    }
+
     [TestMethod]
     public void ScriptBrickEnumeratorTest()
     {
