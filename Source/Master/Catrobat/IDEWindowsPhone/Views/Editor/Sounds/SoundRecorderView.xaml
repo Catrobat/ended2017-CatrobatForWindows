@@ -35,18 +35,7 @@
         <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.5"></LinearDoubleKeyFrame>
         <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.6"></LinearDoubleKeyFrame>
         <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0.9"></LinearDoubleKeyFrame>
-        
       </DoubleAnimationUsingKeyFrames>
-      <!--<DoubleAnimation
-        Storyboard.TargetName="RecordingStatusElement"
-        Storyboard.TargetProperty="UIElement.Opacity"
-        From="0" To="1" Duration="0:0:0.3" 
-        RepeatBehavior="Forever" />
-      <DoubleAnimation
-        Storyboard.TargetName="RecordingStatusElement"
-        Storyboard.TargetProperty="UIElement.Opacity"
-        From="1" To="0" Duration="0:0:0.3" 
-        RepeatBehavior="Forever" />-->
     </Storyboard>
   </phone:PhoneApplicationPage.Resources>
 
@@ -57,7 +46,10 @@
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Path=Editor.TitleRecorder, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock Margin="0"  />
+    </StackPanel>
+    <StackPanel Grid.Row="0" Margin="12,17,0,28">
+      <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{Binding Path=Editor.TitleRecorder, Source={StaticResource LocalizedStrings}}" Name="Headline" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
     </StackPanel>
 
     <!--ContentPanel - place additional content here-->
