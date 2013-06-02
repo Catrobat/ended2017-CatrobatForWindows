@@ -44,9 +44,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
       var normalTilePath = TileSavePath + _mainViewModel.PinProjectHeader.ProjectName + "/NormalSmall.jpg";
       var wideTilePath = TileSavePath + _mainViewModel.PinProjectHeader.ProjectName + "/WideSmall.jpg";
 
-      SaveCanvas(CanvasSmallTile, 161, 161,  smallTilePath);
-      SaveCanvas(CanvasSmallTile, 336, 336, normalTilePath);
-      SaveCanvas(CanvasSmallTile, 672, 336, wideTilePath);
+      SaveCanvas(CanvasSmallTile, 159, 159,  smallTilePath);
+      SaveCanvas(CanvasNormalTile, 336, 336, normalTilePath);
+      SaveCanvas(CanvasWideTile, 672, 336, wideTilePath);
 
       AddTile(smallTilePath, normalTilePath, wideTilePath);
     }
@@ -54,7 +54,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     public static void SaveCanvas(Canvas canvas, int width, int height, string filename)
     {
       var writeableImage = new WriteableBitmap(width, height);
-      writeableImage.Render(canvas, canvas.RenderTransform);
+      writeableImage.Render(canvas, null);
 
       SaveImage(writeableImage, filename);
     }
@@ -64,7 +64,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
       using (var storage = StorageSystem.GetStorage())
       {
         var fileStream = storage.OpenFile(fileName, StorageFileMode.Create, StorageFileAccess.Write);
-        image.SaveJpeg(fileStream, image.PixelWidth, image.PixelHeight, 0, 85);
+        image.SaveJpeg(fileStream, image.PixelWidth, image.PixelHeight, 0, 100);
         fileStream.Close();
       }
     }
@@ -75,18 +75,20 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
       var tile = new FlipTileData
       {
-        Title = "",
+        Title = _mainViewModel.CurrentProjectHeader.ProjectName,
         Count = 0,
-        SmallBackgroundImage = new Uri(prefix + smallTilePath, UriKind.Absolute),
-        BackgroundImage = new Uri(prefix + normalTilePath, UriKind.Absolute),
-        WideBackgroundImage = new Uri(prefix + wideTilePath, UriKind.Absolute)
+        //SmallBackgroundImage = new Uri(prefix + smallTilePath, UriKind.Absolute),
+        //BackgroundImage = new Uri(prefix + normalTilePath, UriKind.Absolute),
+        //WideBackgroundImage = new Uri(prefix + wideTilePath, UriKind.Absolute)
       };
 
-      //var tiles = ShellTile.ActiveTiles.GetEnumerator();
-      //tiles.MoveNext();
-      //tiles.Current.Update(tile);
+      var path = "/Views/Main/MainView.xaml?ProjectName=" + _mainViewModel.PinProjectHeader.ProjectName;
 
-      ShellTile.Create(new Uri("/Views/Main/MainView.xaml", UriKind.Relative), tile, true);
+      path += "&Dummy=" + DateTime.UtcNow.Ticks;
+
+      // TODO: read at start like this: "NavigationContext.QueryString["XXXXX"].ToString();"
+
+      ShellTile.Create(new Uri(path, UriKind.Relative), tile, true);
       NavigationService.GoBack();
     }
 
