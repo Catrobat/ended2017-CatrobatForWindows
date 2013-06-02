@@ -70,6 +70,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 
     protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
     {
+      stackPanelChangeName.Visibility = Visibility.Collapsed;
       BuildApplicationBar(false);
     }
 
@@ -157,6 +158,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
     private void LoadCostumeFailed()
     {
       Dispatcher.BeginInvoke(() => MessageBox.Show(EditorResources.MessageBoxWrongImageFormatText, EditorResources.MessageBoxWrongImageFormatHeader, MessageBoxButton.OK));
+      NavigationService.RemoveBackEntry();
+      NavigationService.GoBack();
     }
 
     private void btnSave_Click(object sender, EventArgs e)
