@@ -47,8 +47,9 @@ namespace Catrobat.TestsCommon.SampleData
       return XDocument.Load(new StringReader(xml));
     }
 
-    public static void LoadSampleProject(string sampleName, string sampleProjectName)
+    public static CatrobatContext LoadSampleProject(string sampleName, string sampleProjectName)
     {
+      var catrobatContext = new CatrobatContext();
       using (var resourceLoader = ResourceLoader.CreateResourceLoader())
       {
         Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName);
@@ -56,8 +57,10 @@ namespace Catrobat.TestsCommon.SampleData
         stream.Close();
         stream.Dispose();
       }
-      CatrobatContext.GetContext().SetCurrentProject(sampleProjectName);
-      CatrobatContext.GetContext().CurrentProject.SetProjectName(sampleProjectName);
+      catrobatContext.SetCurrentProject(sampleProjectName);
+      catrobatContext.CurrentProject.SetProjectName(sampleProjectName);
+
+      return catrobatContext;
     }
   }
 }

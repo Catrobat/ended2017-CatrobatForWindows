@@ -51,21 +51,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
       });
     }
 
-    private void BuildApplicationBar()
-    {
-      ApplicationBar = new ApplicationBar();
-
-      btnSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.check.rest.png", UriKind.Relative));
-      btnSave.Text = EditorResources.ButtonSave;
-      btnSave.Click += btnSave_Click;
-      ApplicationBar.Buttons.Add(btnSave);
-
-      ApplicationBarIconButton btnCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
-      btnCancel.Text = EditorResources.ButtonCancel;
-      //btnCancel.Click += btnCancel_Click; // TODO Check if this is needed
-      ApplicationBar.Buttons.Add(btnCancel);
-    }
-
     private void LanguageChanged(object sender, PropertyChangedEventArgs e)
     {
       BuildApplicationBar();
@@ -255,5 +240,22 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
       else
         btnSave.IsEnabled = false;
     }
+
+    private void BuildApplicationBar()
+    {
+      ApplicationBar = new ApplicationBar();
+
+      btnSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.check.rest.png", UriKind.Relative));
+      btnSave.Text = EditorResources.ButtonSave;
+      btnSave.Click += btnSave_Click;
+      ApplicationBar.Buttons.Add(btnSave);
+
+      ApplicationBarIconButton iconButtonCancel;
+      iconButtonCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
+      iconButtonCancel.Text = EditorResources.ButtonCancel;
+      //btnCancel.Click += btnCancel_Click; // TODO Check if this is needed
+      ApplicationBar.Buttons.Add(iconButtonCancel);
+    }
+
   }
 }

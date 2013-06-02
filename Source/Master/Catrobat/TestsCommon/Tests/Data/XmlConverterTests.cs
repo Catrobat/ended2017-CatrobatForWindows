@@ -139,9 +139,9 @@ namespace Catrobat.TestsCommon.Tests.Data
 
       var brickList = new List<XElement>(sprite2.Element("scriptList").Element("Content.StartScript").Element("brickList").Elements());
 
-      Assert.AreEqual(brickList[0].Element("soundInfo").Attribute("reference").Value, "../../../../../soundList/soundInfo");
-      Assert.AreEqual(brickList[1].Element("soundInfo").Attribute("reference").Value, "../../../../../soundList/soundInfo");
-      Assert.AreEqual(brickList[2].Element("soundInfo").Attribute("reference").Value, "../../../../../soundList/soundInfo[2]");
+      Assert.AreEqual(brickList[0].Element("Sound").Attribute("reference").Value, "../../../../../soundList/soundInfo");
+      Assert.AreEqual(brickList[1].Element("Sound").Attribute("reference").Value, "../../../../../soundList/soundInfo");
+      Assert.AreEqual(brickList[2].Element("Sound").Attribute("reference").Value, "../../../../../soundList/soundInfo[2]");
 
       var soundList = new List<XElement>(sprite2.Element("soundList").Elements());
       Assert.AreEqual(soundList[0].Element("fileName").Value, "68223C25ABEFABA96FD2BEC8C44D5A12_Aufnahme.mp3");

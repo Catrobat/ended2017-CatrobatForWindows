@@ -136,6 +136,8 @@
     </Compile>
     <Compile Include="Converters\ActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\BytesImageConverter.cs" />
+    <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Converters\NegativeBoolVisibilityConverter.cs" />
     <Compile Include="Converters\InActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\VersionConverter.cs" />
     <Compile Include="Converters\DoubleStringConverter.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeChooser.cs" />
     <Compile Include="ViewModel\AddNewProjectViewModel.cs" />
+    <Compile Include="ViewModel\SoundRecorderViewModel.cs" />
     <Compile Include="ViewModel\EditorViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettingsViewModel.cs" />
@@ -201,11 +204,17 @@
     <Compile Include="Views\Editor\Sounds\ChangeSoundName.xaml.cs">
       <DependentUpon>ChangeSoundName.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Editor\Sounds\SoundNameChooserView.xaml.cs">
+      <DependentUpon>SoundNameChooserView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Editor\Sounds\Recorder.cs" />
-    <Compile Include="Views\Editor\Sounds\RecorderLauncher.xaml.cs">
-      <DependentUpon>RecorderLauncher.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Sounds\RecorderLauncher_Old.xaml.cs">
+      <DependentUpon>RecorderLauncher_Old.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Sounds\SoundListItem.cs" />
+    <Compile Include="Views\Editor\Sounds\SoundRecorderView.xaml.cs">
+      <DependentUpon>SoundRecorderView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Editor\Sounds\WaveHeaderWriter.cs" />
     <Compile Include="Views\Editor\Sounds\XNAFrameworkDispatcherService.cs" />
     <Compile Include="Views\Editor\Sprites\AddNewSprite.xaml.cs">
@@ -358,9 +367,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Sounds\RecorderLauncher.xaml">
+    <Page Include="Views\Editor\Sounds\SoundNameChooserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\RecorderLauncher_Old.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\SoundRecorderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Editor\Sprites\AddNewSprite.xaml">
       <Generator>MSBuild:Compile</Generator>

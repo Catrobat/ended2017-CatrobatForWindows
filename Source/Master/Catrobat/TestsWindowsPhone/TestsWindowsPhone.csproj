@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{20E6E39F-B78C-4BDE-A7BA-FD0AE95FFD78}</ProjectGuid>
+    <ProjectGuid>{45D87D93-B00E-403C-8D35-609186BA2376}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -77,24 +77,22 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LocalizedStrings.cs" />
-    <Compile Include="Misc\TestHelper.cs" />
-    <Compile Include="SampleData\SampleLoader.cs" />
-    <Compile Include="Tests\Data\ScriptBrickCollectionTests.cs" />
-    <Compile Include="Tests\IDE\ConverterTest.cs" />
-    <Compile Include="Tests\IDE\NullItemCollectionTests.cs" />
-    <Compile Include="Tests\Storage\ResourceLoaderPhoneTests.cs" />
-    <Compile Include="Tests\Storage\StoragePhoneTests.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Misc\TestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SampleData\SampleLoader.cs" />
+    <Compile Include="Tests\Data\ScriptBrickCollectionTests.cs" />
+    <Compile Include="Tests\IDE\ConverterTest.cs" />
+    <Compile Include="Tests\IDE\NullItemCollectionTests.cs" />
+    <Compile Include="Tests\Storage\ResourceLoaderPhoneTests.cs" />
+    <Compile Include="Tests\Storage\StoragePhoneTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

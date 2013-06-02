@@ -48,9 +48,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
       // NOTE to be filled in later
       stream.Write(BitConverter.GetBytes(0), 0, 4);
-
-      stream.Close();
-      stream.Dispose();
     }
   }
 }

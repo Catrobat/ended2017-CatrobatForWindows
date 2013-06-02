@@ -46,8 +46,9 @@ namespace Catrobat.TestsWindowsPhone.SampleData
       return XDocument.Load(new StringReader(xml));
     }
 
-    public static void LoadSampleProject(string sampleName, string sampleProjectName)
+    public static CatrobatContext LoadSampleProject(string sampleName, string sampleProjectName)
     {
+      var catrobatContext = new CatrobatContext();
       using (var resourceLoader = ResourceLoader.CreateResourceLoader())
       {
         Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestsPhone, path + sampleName + ".xml");
@@ -57,8 +58,10 @@ namespace Catrobat.TestsWindowsPhone.SampleData
         stream.Dispose();
       }
 
-      CatrobatContext.GetContext().SetCurrentProject(sampleProjectName);
-      CatrobatContext.GetContext().CurrentProject.SetProjectName(sampleProjectName);
+      catrobatContext.SetCurrentProject(sampleProjectName);
+      catrobatContext.CurrentProject.SetProjectName(sampleProjectName);
+
+      return catrobatContext;
     }
   }
 }

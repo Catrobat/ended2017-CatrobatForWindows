@@ -1,8 +1,15 @@
-﻿namespace Catrobat.Core.Objects
+﻿using System;
+
+namespace Catrobat.Core.Objects
 {
-    public class ProjectHeader
+  public class ProjectHeader : IComparable<ProjectHeader>
+  {
+    public string ProjectName { get; set; }
+    public object Screenshot { get; set; }
+
+    public int CompareTo(ProjectHeader other)
     {
-        public string ProjectName { get; set; }
-        public object Screenshot { get; set; }
+      return this.ProjectName.CompareTo(other.ProjectName);
     }
+  }
 }

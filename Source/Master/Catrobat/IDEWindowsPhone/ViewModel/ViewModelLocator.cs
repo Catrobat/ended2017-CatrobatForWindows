@@ -15,6 +15,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       SimpleIoc.Default.Register<AddNewProjectViewModel>();
       SimpleIoc.Default.Register<UploadProjectViewModel>();
       SimpleIoc.Default.Register<UploadProjectLoginViewModel>();
+      SimpleIoc.Default.Register<SoundRecorderViewModel>();
     }
 
 
@@ -81,6 +82,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       get
       {
         return ServiceLocator.Current.GetInstance<UploadProjectLoginViewModel>();
+      }
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+    "CA1822:MarkMembersAsStatic",
+    Justification = "This non-static member is needed for data binding purposes.")]
+    public SoundRecorderViewModel SoundRecorder
+    {
+      get
+      {
+        return ServiceLocator.Current.GetInstance<SoundRecorderViewModel>();
       }
     }
 

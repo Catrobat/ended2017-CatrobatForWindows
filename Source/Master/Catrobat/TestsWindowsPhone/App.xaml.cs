@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
@@ -7,7 +8,7 @@ using Catrobat.TestsWindowsPhone.Resources;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace Catrobat.TestsWindowsPhone
+namespace TestsWindowsPhone
 {
   public partial class App : Application
   {

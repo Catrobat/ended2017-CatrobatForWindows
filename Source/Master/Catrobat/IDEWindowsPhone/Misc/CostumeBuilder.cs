@@ -55,7 +55,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
       if (Decoders.GetAvailableDecoders().Count <= 0)
       {
-        //Decoders.AddDecoder<JpegDecoder>(); // TODO: handle jpeg with WP api
+        //Decoders.AddDecoder<JpegDecoder>(); // jpg handled with WP api
         Decoders.AddDecoder<GifDecoder>();
         Decoders.AddDecoder<BmpDecoder>();
         Decoders.AddDecoder<PngDecoder>();

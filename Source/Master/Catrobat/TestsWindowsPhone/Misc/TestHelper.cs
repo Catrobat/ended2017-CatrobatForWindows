@@ -15,8 +15,8 @@ namespace Catrobat.TestsWindowsPhone.Misc
       {
         storage.DeleteDirectory("");
       }
-
-      CatrobatContext.GetContext().CurrentProject = null;
+      var catrobatContext = new CatrobatContext();
+      catrobatContext.CurrentProject = null;
     }
 
     public static void DeleteFolder(this IsolatedStorageFile iso, string path)

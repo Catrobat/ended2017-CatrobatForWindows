@@ -20,17 +20,24 @@ namespace Catrobat.TestsCommon.Tests.Data
     public void InitializeCatrobatContextTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();
-      SampleLoader.LoadSampleProject("test.catroid", "DefaultProject");
+      var catrobatContext = SampleLoader.LoadSampleProject("test.catroid", "DefaultProject");
       // TODO: load sample priject
 
       // check if project has sucessfully loaded default project
-      Assert.AreEqual(CatrobatContext.GetContext().LocalSettings.CurrentProjectName, "DefaultProject");
+      Assert.AreEqual(catrobatContext.LocalSettings.CurrentProjectName, "DefaultProject");
     }
 
     [TestMethod]
     public void StoreLocalSettingsTest()
     {
-      CatrobatContext.GetContext().StoreLocalSettings();
+      var catrobatContext = new CatrobatContext();
+
+      using (var storage = StorageSystem.GetStorage())
+      {
+        storage.DeleteFile(CatrobatContext.LocalSettingsFilePath);
+      }
+
+      catrobatContext.StoreLocalSettings();
 
       using (var storage = StorageSystem.GetStorage())
       {
