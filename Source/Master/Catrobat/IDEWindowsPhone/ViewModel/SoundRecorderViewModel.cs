@@ -83,6 +83,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
           _recorder.StopRecording();
           _recorder.StopSound();
 
+          _recordTimeUpdateThread.Abort();
+
           RecordingExists = true;
         }
         else
