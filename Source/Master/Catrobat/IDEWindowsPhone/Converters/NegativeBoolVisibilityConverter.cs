@@ -6,16 +6,11 @@ using Catrobat.Core.Objects;
 
 namespace Catrobat.IDEWindowsPhone.Converters
 {
-  public class BoolVisibilityConverter : IValueConverter
+  public class NegativeBoolVisibilityConverter : IValueConverter
   {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
-      var visible = (bool) value;
-
-      if (parameter != null && (bool)parameter)
-      {
-        visible = !(bool)value;
-      }
+      var visible = !(bool) value;
 
       return visible ? Visibility.Visible : Visibility.Collapsed;
     }

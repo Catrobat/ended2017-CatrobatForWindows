@@ -14,9 +14,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
   public partial class ChangeSoundName : PhoneApplicationPage
   {
-    private EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
-
-    ApplicationBarIconButton btnSave;
+    private readonly EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
+    private ApplicationBarIconButton _buttonSave;
     
     public ChangeSoundName()
     {
@@ -37,10 +36,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
     {
       ApplicationBar = new ApplicationBar();
 
-      btnSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.check.rest.png", UriKind.Relative));
-      btnSave.Text = EditorResources.ButtonSave;
-      btnSave.Click += btnSave_Click;
-      ApplicationBar.Buttons.Add(btnSave);
+      _buttonSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.check.rest.png", UriKind.Relative));
+      _buttonSave.Text = EditorResources.ButtonSave;
+      _buttonSave.Click += btnSave_Click;
+      ApplicationBar.Buttons.Add(_buttonSave);
 
       ApplicationBarIconButton btnCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
       btnCancel.Text = EditorResources.ButtonCancel;
@@ -68,9 +67,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
     private void txtName_TextChanged(object sender, TextChangedEventArgs e)
     {
       if (txtName.Text != "")
-        btnSave.IsEnabled = true;
+        _buttonSave.IsEnabled = true;
       else
-        btnSave.IsEnabled = false;
+        _buttonSave.IsEnabled = false;
     }
   }
 }

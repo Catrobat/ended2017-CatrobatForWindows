@@ -76,13 +76,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     private void StartRecordingAction()
     {
-      lock(_recorder)
+      lock (_recorder)
       {
         if (IsRecording)
         {
           _recorder.StopRecording();
           _recorder.StopSound();
-          
+
           RecordingExists = true;
         }
         else
@@ -219,6 +219,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       }
 
       _editorViewModel.SelectedSprite.Sounds.Sounds.Add(sound);
+      Cleanup();
 
       RemoveNavigationBackEntry();
       RemoveNavigationBackEntry();
@@ -227,7 +228,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     private void CancelNameChosenAction()
     {
-      SoundName = "";
+      SoundName = null;
+      UpdateTextProperties();
       NavigateBack();
     }
 
@@ -301,7 +303,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     public double PlayingTime
     {
       get { return _playingTime; }
-      set {
+      set
+      {
         if (value.Equals(_playingTime)) return;
         _playingTime = value;
         RaisePropertyChanged("PlayingTime");
@@ -363,7 +366,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       }
     }
 
-
     public string SoundName
     {
       get { return _soundName; }
@@ -374,7 +376,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         _soundName = value;
         RaisePropertyChanged("SoundName");
         if (isSoundNameValidBefore != IsSoundNameValid)
-        RaisePropertyChanged("IsSoundNameValid");
+          RaisePropertyChanged("IsSoundNameValid");
       }
     }
 
@@ -409,20 +411,25 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     private void UpdateTextProperties()
     {
       //TODO: use Localize strings
-      string recordButtonHeader = EditorResources.RecorderRecord;
+      string recordButtonHeaderRecord = EditorResources.RecorderRecord;
+      string recordButtonHeaderStop = "stop"; // EditorResources.RecorderStop;
       string recordButtonTextRecord = "start recording"; // EditorResources.RecorderStart;
       string recordButtonTextStop = EditorResources.RecorderStop;
       string defaultSoundName = EditorResources.Recording;
 
-
-      RecordButtonHeader = recordButtonHeader;
-
       if (IsRecording)
+      {
+        RecordButtonHeader = recordButtonHeaderStop;
         RecordButtonText = recordButtonTextStop;
+      }
       else
+      {
+        RecordButtonHeader = recordButtonHeaderRecord;
         RecordButtonText = recordButtonTextRecord;
+      }
 
-      if(SoundName == null)
+
+      if (SoundName == null)
         SoundName = defaultSoundName;
     }
 
@@ -434,7 +441,25 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     public override void Cleanup()
     {
-      // Clean up if needed
+      SoundName = null;
+      IsPlaying = false;
+      IsRecording = false;
+      RecordingExists = false;
+      RecordingTime = 0;
+      PlayingTime = 0;
+
+      _recorder = new Recorder();
+      if (_recordTimeUpdateThread != null)
+        _recordTimeUpdateThread.Abort();
+      _recordTimeUpdateThread = null;
+      _recorderStartTime = new DateTime();
+      _recorderTimeGoneBy = new TimeSpan();
+
+      if (_playerTimeUpdateThread != null)
+        _playerTimeUpdateThread.Abort();
+      _playerTimeUpdateThread = null;
+      _playerStartTime = new DateTime();
+      _playerTimeGoneBy = new TimeSpan();
 
       base.Cleanup();
     }
@@ -451,7 +476,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     private void RemoveNavigationBackEntry()
     {
-      ((PhoneApplicationFrame) Application.Current.RootVisual).RemoveBackEntry();
+      ((PhoneApplicationFrame)Application.Current.RootVisual).RemoveBackEntry();
     }
   }
 }
