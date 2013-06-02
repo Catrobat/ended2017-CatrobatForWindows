@@ -147,6 +147,7 @@
     <Compile Include="Converters\IntStringConverter.cs" />
     <Compile Include="Converters\NullColorConverter.cs" />
     <Compile Include="Converters\SecondStringMillisecondConverter.cs" />
+    <Compile Include="Misc\AssociationUriMapper.cs" />
     <Compile Include="Misc\CostumeBuilder.cs" />
     <Compile Include="Misc\CulturePhone.cs" />
     <Compile Include="Misc\MemoryMonitor.cs" />
@@ -229,6 +230,9 @@
     </Compile>
     <Compile Include="Views\Main\PlayerLauncherView.xaml.cs">
       <DependentUpon>PlayerLauncherView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\ProjectImportView.xaml.cs">
+      <DependentUpon>ProjectImportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -399,6 +403,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Main\ProjectImportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Main\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -437,6 +445,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\FileTypeAssociation\large-176x176.png" />
+    <Content Include="Assets\FileTypeAssociation\medium-69x69.png" />
+    <Content Include="Assets\FileTypeAssociation\small-33x33.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_1280.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_800.png" />
     <Content Include="Content\Images\Misc\InProcess.png" />

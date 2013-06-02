@@ -15,10 +15,26 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 {
   public partial class PlayerLauncherView : PhoneApplicationPage
   {
+    public static bool IsNavigateBack = true;
+
     public PlayerLauncherView()
     {
       InitializeComponent();
       Loaded += OnLoaded;
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+      if (IsNavigateBack)
+        NavigationService.GoBack();
+
+      base.OnNavigatedTo(e);
+    }
+
+    protected override void OnNavigatedFrom(NavigationEventArgs e)
+    {
+      IsNavigateBack = true;
+      base.OnNavigatedFrom(e);
     }
 
     private async void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
