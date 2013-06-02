@@ -17,6 +17,7 @@ using GalaSoft.MvvmLight.Command;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
+using Catrobat.IDECommon.Resources.Editor;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel
 {
@@ -407,11 +408,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     private void UpdateTextProperties()
     {
-      // TODO: from localized strings
-      const string recordButtonHeader = "Rec";
-      const string recordButtonTextRecord = "Start recording";
-      const string recordButtonTextStop = "Stop recording";
-      const string defaultSoundName = "Sound";
+      //TODO: use Localize strings
+      string recordButtonHeader = EditorResources.RecorderRecord;
+      string recordButtonTextRecord = "start recording"; // EditorResources.RecorderStart;
+      string recordButtonTextStop = EditorResources.RecorderStop;
+      string defaultSoundName = EditorResources.Recording;
 
 
       RecordButtonHeader = recordButtonHeader;
@@ -421,7 +422,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       else
         RecordButtonText = recordButtonTextRecord;
 
-      if(SoundName == "")
+      if(SoundName == null)
         SoundName = defaultSoundName;
     }
 

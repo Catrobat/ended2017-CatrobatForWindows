@@ -27,6 +27,15 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
       _soundRecorderViewModel.PropertyChanged += SoundRecorderViewModel_OnPropertyChanged;
     }
 
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+      Dispatcher.BeginInvoke(() =>
+      {
+        TextBoxSoundName.Focus();
+        TextBoxSoundName.SelectAll();
+      });
+    }
+
     private void SoundRecorderViewModel_OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
     {
       if (propertyChangedEventArgs.PropertyName == "IsSoundNameValid")

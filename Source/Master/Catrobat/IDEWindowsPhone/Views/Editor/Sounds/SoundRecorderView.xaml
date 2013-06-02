@@ -29,8 +29,8 @@
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <StackPanel Grid.Row="0" Margin="12,17,0,28">
-      <TextBlock Text="record sound" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
+      <TextBlock Margin="0" Text="{Binding Path=Editor.TitleRecorder, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
     </StackPanel>
 
     <!--ContentPanel - place additional content here-->
@@ -81,11 +81,6 @@
         </Grid>
       </Grid>
       <Grid Grid.Row="2">
-        <!--<Grid.ColumnDefinitions>
-          <ColumnDefinition/>
-          <ColumnDefinition/>
-        </Grid.ColumnDefinitions>-->
-
         <Button Grid.Column="0" Width="220" Height="220" Name="ButtonRecord" 
                 Command="{Binding StartRecordingCommand}"
                 Background="{Binding Path=SelectedTheme.AccentColor2, Source={StaticResource ThemeChooser}}">
@@ -107,26 +102,6 @@
             </Grid>
           </Grid>
         </Button>
-        <!--<Button Grid.Column="1" Width="220" Height="220" Name="ButtonResetRecording" 
-                Command="{Binding ResetCommand}"
-                Background="{Binding Path=SelectedTheme.AccentColor1, Source={StaticResource ThemeChooser}}" >
-          <Grid Width="170" Height="170" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Grid.RowDefinitions>
-              <RowDefinition/>
-              <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid Row="0">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-              </Grid.ColumnDefinitions>
-              <TextBlock Grid.Column="1"  Text="{Binding ResetButtonHeader, Mode=OneWay}" VerticalAlignment="Center"  HorizontalAlignment="Center" Style="{StaticResource PhoneTextExtraLargeStyle}"></TextBlock>
-            </Grid>
-            <Grid Row="1">
-              <TextBlock Text="{Binding ResetButtonText, Mode=OneWay}" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5 6 5 0"></TextBlock>
-            </Grid>
-          </Grid>
-        </Button>-->
       </Grid>
     </Grid>
   </Grid>
