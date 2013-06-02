@@ -109,9 +109,9 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="SampleData\SampleProjects\default.catroid" />
-    <None Include="SampleData\SampleProjects\test.catroid" />
-    <None Include="SampleData\SampleProjects\UltimateTest.catroid" />
+    <Content Include="SampleData\SampleProjects\default.catroid" />
+    <Content Include="SampleData\SampleProjects\test.catroid" />
+    <Content Include="SampleData\SampleProjects\UltimateTest.catroid" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="MSTestFramework, Version=11.0" />

@@ -168,15 +168,17 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
     public void LoadImageTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();
-      IStorage storage = new StoragePhone();
 
       using (var resource = (new ResourceLoaderFactoryPhone()).CreateResoucreLoader())
       {
         var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
         CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
 
-        var image = storage.LoadImage("TestLoadImage/screenshot.png");
-        Assert.AreNotEqual(image, null);
+        using (IStorage storage = new StoragePhone())
+        {
+          var image = storage.LoadImage("TestLoadImage/screenshot.png");
+          Assert.AreNotEqual(image, null);
+        }
       }
     }
 
