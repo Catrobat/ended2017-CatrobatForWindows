@@ -11,6 +11,7 @@ using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Storage;
 using Catrobat.Core.ZIP;
+using System.Collections.Generic;
 
 namespace Catrobat.Core
 {
@@ -223,6 +224,8 @@ namespace Catrobat.Core
       {
         string[] projectNames = storage.GetDirectoryNames(ProjectsPath);
 
+        var projects = new List<ProjectHeader>();
+
         foreach (string projectName in projectNames)
         {
           if (projectName != CurrentProject.ProjectName)
@@ -233,10 +236,14 @@ namespace Catrobat.Core
               ProjectName = projectName,
               Screenshot = projectScreenshot
             };
-            _localProjects.Add(projectHeader);
+            projects.Add(projectHeader);
           }
         }
+        projects.Sort();
+        foreach (ProjectHeader header in projects)
+          _localProjects.Add(header);
       }
+
     }
 
     internal void StoreLocalSettings()
