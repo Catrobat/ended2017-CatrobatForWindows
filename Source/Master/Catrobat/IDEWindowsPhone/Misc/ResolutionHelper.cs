@@ -15,7 +15,14 @@ namespace Catrobat.IDEWindowsPhone.Misc
     {
       get
       {
-        return App.Current.Host.Content.ScaleFactor == 100;
+        try
+        {
+          return App.Current.Host.Content.ScaleFactor == 100;
+        }
+        catch
+        {
+          return true;
+        } 
       }
     }
 
@@ -23,7 +30,14 @@ namespace Catrobat.IDEWindowsPhone.Misc
     {
       get
       {
-        return App.Current.Host.Content.ScaleFactor == 160;
+        try
+        {
+          return App.Current.Host.Content.ScaleFactor == 160;
+        }
+        catch
+        {
+          return true;
+        }
       }
     }
 
@@ -31,7 +45,14 @@ namespace Catrobat.IDEWindowsPhone.Misc
     {
       get
       {
-        return App.Current.Host.Content.ScaleFactor == 150;
+        try
+        {
+          return App.Current.Host.Content.ScaleFactor == 150;
+        }
+        catch
+        {
+          return true;
+        }
       }
     }
 
