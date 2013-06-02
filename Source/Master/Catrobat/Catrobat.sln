@@ -31,9 +31,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDEWindowsPhone", "IDEWindo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingApp", "DrawingApp\DrawingApp.csproj", "{5447D6AA-07AD-4B2F-8106-992EE6F41CEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsWindowsPhone", "TestsWindowsPhone\TestsWindowsPhone.csproj", "{45D87D93-B00E-403C-8D35-609186BA2376}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
+		SccNumberOfProjects = 12
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -67,6 +69,9 @@ Global
 		SccProjectUniqueName10 = DrawingApp\\DrawingApp.csproj
 		SccProjectName10 = DrawingApp
 		SccLocalPath10 = DrawingApp
+		SccProjectUniqueName11 = TestsWindowsPhone\\TestsWindowsPhone.csproj
+		SccProjectName11 = TestsWindowsPhone
+		SccLocalPath11 = TestsWindowsPhone
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -336,6 +341,34 @@ Global
 		{5447D6AA-07AD-4B2F-8106-992EE6F41CEC}.Release|x86.ActiveCfg = Release|x86
 		{5447D6AA-07AD-4B2F-8106-992EE6F41CEC}.Release|x86.Build.0 = Release|x86
 		{5447D6AA-07AD-4B2F-8106-992EE6F41CEC}.Release|x86.Deploy.0 = Release|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|ARM.ActiveCfg = Debug|ARM
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|ARM.Build.0 = Debug|ARM
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|ARM.Deploy.0 = Debug|ARM
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|Win32.ActiveCfg = Debug|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|Win32.Build.0 = Debug|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|Win32.Deploy.0 = Debug|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|x64.ActiveCfg = Debug|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|x86.ActiveCfg = Debug|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|x86.Build.0 = Debug|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|x86.Deploy.0 = Debug|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|Any CPU.ActiveCfg = Release|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|ARM.ActiveCfg = Release|ARM
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|ARM.Build.0 = Release|ARM
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|ARM.Deploy.0 = Release|ARM
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|Mixed Platforms.Build.0 = Release|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|Mixed Platforms.Deploy.0 = Release|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|Win32.ActiveCfg = Release|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|Win32.Build.0 = Release|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|Win32.Deploy.0 = Release|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|x64.ActiveCfg = Release|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|x86.ActiveCfg = Release|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|x86.Build.0 = Release|x86
+		{45D87D93-B00E-403C-8D35-609186BA2376}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
