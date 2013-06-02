@@ -82,7 +82,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         //WideBackgroundImage = new Uri(prefix + wideTilePath, UriKind.Absolute)
       };
 
-      var path = "/Views/Main/MainView.xaml?ProjectName=" + _mainViewModel.PinProjectHeader.ProjectName;
+      var path = "/Views/Main/PlayerLauncherView.xaml?ProjectName=" + _mainViewModel.PinProjectHeader.ProjectName;
 
       path += "&Dummy=" + DateTime.UtcNow.Ticks;
 

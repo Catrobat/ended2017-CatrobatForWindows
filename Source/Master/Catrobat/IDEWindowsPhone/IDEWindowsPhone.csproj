@@ -150,6 +150,7 @@
     <Compile Include="Misc\CostumeBuilder.cs" />
     <Compile Include="Misc\CulturePhone.cs" />
     <Compile Include="Misc\MemoryMonitor.cs" />
+    <Compile Include="Misc\PlayerLauncher.cs" />
     <Compile Include="Misc\ResolutionHelper.cs" />
     <Compile Include="Misc\ServerCommunicationPhone.cs" />
     <Compile Include="Misc\SoundPlayer.cs" />
@@ -225,6 +226,9 @@
     </Compile>
     <Compile Include="Views\Main\AddNewProject.xaml.cs">
       <DependentUpon>AddNewProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\PlayerLauncherView.xaml.cs">
+      <DependentUpon>PlayerLauncherView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -390,6 +394,10 @@
     <Page Include="Views\Main\AddNewProject.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\PlayerLauncherView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
