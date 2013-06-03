@@ -19,6 +19,7 @@ namespace Catrobat.Core
 
   public sealed class CatrobatContext : ICatrobatContext, INotifyPropertyChanged
   {
+    public static string PlayerActiveProjectZipPath = "ActivePlayerProject/ActiveProject.catrobat";
     public static string LocalSettingsFilePath = "Settings/settings";
     public static string DefaultProjectPath = "default.catroid";
     public static string ProjectsPath = "Projects";

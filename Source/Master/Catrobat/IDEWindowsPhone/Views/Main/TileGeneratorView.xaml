@@ -43,8 +43,8 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
           </Grid.RowDefinitions>
-          <Border BorderThickness="4" Width="88" Height="88" BorderBrush="White">
-            <Canvas Name="CanvasSmallTile" Background="Teal"  Grid.Row="0">
+          <Border BorderThickness="4" Width="96" Height="96" BorderBrush="White">
+            <Canvas Name="CanvasSmallTile" Width="88" Height="88" Background="Teal"  Grid.Row="0">
               <Image Name="ImageSmallTile" Margin="0 -30"  Width="80" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Image.Clip>
                   <EllipseGeometry RadiusX="40" RadiusY="40" Center="40,70"/>
@@ -59,10 +59,12 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
           </Grid.RowDefinitions>
-          <Border BorderThickness="4" Width="168" Height="168" BorderBrush="White">
-            <Grid Name="GridNormalTile" Grid.Row="0">
-              <Image Name="ImageNormalTile"></Image>
-            </Grid>
+          <Border BorderThickness="4" Width="176" Height="176" BorderBrush="White">
+            <Canvas Name="CanvasNormalTile" Width="168" Height="168" Background="Teal"  Grid.Row="0">
+              <Grid Name="GridNormalTile" Grid.Row="0">
+                <Image Width="168" Height="168" Name="ImageNormalTile"></Image>
+              </Grid>
+            </Canvas>
           </Border>
           <TextBlock Grid.Row="1" Text="Normal tile" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
         </Grid>
@@ -72,10 +74,12 @@
           <RowDefinition Height="5*"/>
           <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Border BorderThickness="4"  Width="336" Height="168" BorderBrush="White">
-          <Grid Name="GridWideTile" Grid.Row="0">
-            <Image Name="ImageWideTile"></Image>
-          </Grid>
+        <Border BorderThickness="4" Width="344" Height="176" BorderBrush="White">
+          <Canvas Name="CanvasWideTile" Width="336" Height="168" Background="Teal"  Grid.Row="0">
+            <Grid Name="GridWideTile" Grid.Row="0">
+              <Image Width="336" Height="168" Name="ImageWideTile"></Image>
+            </Grid>
+          </Canvas>
         </Border>
         <TextBlock Grid.Row="1" Text="Wide tile" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
       </Grid>

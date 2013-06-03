@@ -70,7 +70,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void buttonPlayCurrentProject_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/MetroCatPlayer;component/GamePage.xaml", UriKind.Relative));
+      PlayerLauncherView.IsNavigateBack = false;
+      var navigationUri = "/Views/Main/PlayerLauncherView.xaml?ProjectName=" + _mainViewModel.CurrentProject.ProjectName;
+      NavigationService.Navigate(new Uri(navigationUri, UriKind.Relative));
     }
 
     private void buttonEditCurrentProject_Click(object sender, System.Windows.RoutedEventArgs e)
