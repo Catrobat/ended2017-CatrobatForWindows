@@ -389,10 +389,12 @@ namespace Catrobat.Core.Objects
       return document;
     }
 
-    public void Save()
+    public void Save(string path = null)
     {
       XDocument xDocument = CreateXML();
-      string path = BasePath + "/" + ProjectCodePath;
+
+      if(path == null)
+        path = BasePath + "/" + ProjectCodePath;
 
       using (IStorage storage = StorageSystem.GetStorage())
       {
@@ -402,7 +404,7 @@ namespace Catrobat.Core.Objects
           document.Save(writer, SaveOptions.None);
 
           string xml = writer.GetStringBuilder().ToString();
-          storage.WriteTextFile(BasePath + "/" + ProjectCodePath, xml);
+          storage.WriteTextFile(path, xml);
         }
         catch
         {

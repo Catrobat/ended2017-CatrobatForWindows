@@ -60,7 +60,8 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
     public void DeleteDirectory(string path)
     {
-      DeleteDirectory(path, _iso);
+      if(DirectoryExists(path))
+        DeleteDirectory(path, _iso);
     }
 
     private void DeleteDirectory(string path, IsolatedStorageFile iso)
@@ -95,6 +96,9 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
     public void CopyDirectory(string sourcePath, string destinationPath)
     {
+      if(DirectoryExists(destinationPath))
+        throw new Exception("Destination directory " + destinationPath + " does already exist.");
+
       CreateFoldersIfNotExist(destinationPath, false);
       CopyDirectory(sourcePath, destinationPath, _iso);
     }
@@ -103,6 +107,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
     {
       if (!iso.DirectoryExists(sourcePath))
         return;
+
 
       var folders = iso.GetDirectoryNames(sourcePath + "/" + "*.*");
 
@@ -115,12 +120,23 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
         CopyDirectory(sourceFolderPath, destinationFolderPath, iso);
       }
 
-      foreach (var file in iso.GetFileNames(sourcePath + "/" + "*.*"))
+      string sourceFilePath = "";
+      string destinationFilePath = "";
+      try
       {
-        string sourceFilePath = sourcePath + "/" + file;
-        string destinationFilePath = destinationPath + "/" + file;
+        foreach (var file in iso.GetFileNames(sourcePath + "/" + "*.*"))
+        {
+          if (file.StartsWith("."))
+            continue;
 
-        iso.CopyFile(sourceFilePath, destinationFilePath);
+          sourceFilePath = sourcePath + "/" + file;
+          destinationFilePath = destinationPath + "/" + file;
+          iso.CopyFile(sourceFilePath, destinationFilePath);
+        }
+      }
+      catch (Exception)
+      {
+        throw new Exception("Cannot coppy " + sourceFilePath + "  to " + destinationFilePath);
       }
     }
 

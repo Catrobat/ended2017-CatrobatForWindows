@@ -153,6 +153,7 @@
     <Compile Include="Misc\CulturePhone.cs" />
     <Compile Include="Misc\MemoryMonitor.cs" />
     <Compile Include="Misc\PlayerLauncher.cs" />
+    <Compile Include="Misc\ProjectImporter.cs" />
     <Compile Include="Misc\ResolutionHelper.cs" />
     <Compile Include="Misc\ServerCommunicationPhone.cs" />
     <Compile Include="Misc\SoundPlayer.cs" />

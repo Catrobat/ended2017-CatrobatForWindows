@@ -24,6 +24,8 @@ namespace Catrobat.Core
     public static string DefaultProjectPath = "default.catroid";
     public static string ProjectsPath = "Projects";
     public static string DefaultProjectName = "DefaultProject";
+    public static string TempProjectImportZipPath = "Temp/ImportProjectZip";
+    public static string TempProjectImportPath = "Temp/ImportProject";
 
     public ContextSaving ContextSaving;
     private Project _currentProject;

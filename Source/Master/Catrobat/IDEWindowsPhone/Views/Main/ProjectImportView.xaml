@@ -13,23 +13,43 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+  <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Import" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+    <StackPanel Grid.Row="0" Margin="12,17,0,28">
+      <TextBlock Text="Import" Style="{StaticResource PhoneTextNormalStyle}"/>
+      <TextBlock Name="TextBoxProjectName" Text="" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+    </StackPanel>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-          <!--TODO: add ui-->
-        </Grid>
+    <Grid x:Name="LoadingPanel" Grid.Row="1" Margin="12,0,12,170">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      <ProgressBar Grid.Row="0" Name="ProgressBarLoading" IsIndeterminate="True"></ProgressBar>
+      <TextBlock Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="Please wait while we try to load the new project. This can take some time."></TextBlock>
     </Grid>
+
+    <Grid x:Name="ContentPanel" Visibility="Collapsed" Grid.Row="1" Margin="12,0,12,0">
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <Image VerticalAlignment="Stretch" Grid.Row="0" Name="ImageProjectScreenshot"></Image>
+      <CheckBox Grid.Row="1" Name="CheckBoxMakeActive">Make new Project active</CheckBox>
+      <Grid Grid.Row="2" Margin="0 0 0 20">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Name="ButtonAdd" Content="Add" Width="200" Grid.Column="0" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Click="ButtonAdd_OnClick" />
+        <Button Name="ButtonCancel" Content="Dismiss" Width="200" Grid.Column="1" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Click="ButtonDismiss_OnClick"/>
+      </Grid>
+    </Grid>
+  </Grid>
 
 </phone:PhoneApplicationPage>
