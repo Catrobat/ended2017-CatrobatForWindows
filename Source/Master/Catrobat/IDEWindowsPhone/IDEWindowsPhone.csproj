@@ -139,6 +139,7 @@
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\NegativeBoolVisibilityConverter.cs" />
     <Compile Include="Converters\InActiveProjectVisibilityConverter.cs" />
+    <Compile Include="Converters\ScreenshotConverter.cs" />
     <Compile Include="Converters\VersionConverter.cs" />
     <Compile Include="Converters\DoubleStringConverter.cs" />
     <Compile Include="Converters\FloatStringConverter.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Misc\CulturePhone.cs" />
     <Compile Include="Misc\MemoryMonitor.cs" />
     <Compile Include="Misc\PlayerLauncher.cs" />
+    <Compile Include="Misc\ProjectImporter.cs" />
     <Compile Include="Misc\ResolutionHelper.cs" />
     <Compile Include="Misc\ServerCommunicationPhone.cs" />
     <Compile Include="Misc\SoundPlayer.cs" />
@@ -451,6 +453,7 @@
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_1280.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_800.png" />
     <Content Include="Content\Images\Misc\InProcess.png" />
+    <Content Include="Content\Images\Screenshot\NoScreenshot.png" />
     <Content Include="Content\Resources\SampleProjects\Aquarium_v2.catrobat" />
     <Content Include="Content\Resources\SampleProjects\default.catroid" />
     <Content Include="Content\Resources\SampleProjects\Egg_timer.catrobat" />

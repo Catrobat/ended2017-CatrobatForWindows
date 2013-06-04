@@ -60,7 +60,8 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
     public void DeleteDirectory(string path)
     {
-      DeleteDirectory(path, _iso);
+      if(DirectoryExists(path))
+        DeleteDirectory(path, _iso);
     }
 
     private void DeleteDirectory(string path, IsolatedStorageFile iso)
@@ -95,6 +96,9 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
     public void CopyDirectory(string sourcePath, string destinationPath)
     {
+      if(DirectoryExists(destinationPath))
+        throw new Exception("Destination directory " + destinationPath + " does already exist.");
+
       CreateFoldersIfNotExist(destinationPath, false);
       CopyDirectory(sourcePath, destinationPath, _iso);
     }
@@ -103,6 +107,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
     {
       if (!iso.DirectoryExists(sourcePath))
         return;
+
 
       var folders = iso.GetDirectoryNames(sourcePath + "/" + "*.*");
 
@@ -115,12 +120,23 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
         CopyDirectory(sourceFolderPath, destinationFolderPath, iso);
       }
 
-      foreach (var file in iso.GetFileNames(sourcePath + "/" + "*.*"))
+      string sourceFilePath = "";
+      string destinationFilePath = "";
+      try
       {
-        string sourceFilePath = sourcePath + "/" + file;
-        string destinationFilePath = destinationPath + "/" + file;
+        foreach (var file in iso.GetFileNames(sourcePath + "/" + "*.*"))
+        {
+          if (file.StartsWith("."))
+            continue;
 
-        iso.CopyFile(sourceFilePath, destinationFilePath);
+          sourceFilePath = sourcePath + "/" + file;
+          destinationFilePath = destinationPath + "/" + file;
+          iso.CopyFile(sourceFilePath, destinationFilePath);
+        }
+      }
+      catch (Exception)
+      {
+        throw new Exception("Cannot coppy " + sourceFilePath + "  to " + destinationFilePath);
       }
     }
 
@@ -312,25 +328,32 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
     public object LoadImageThumbnail(string pathToImage)
     {
-      var thumbnailPath = pathToImage + ThumbnailExtension;
-
-      if (this.FileExists(thumbnailPath))
+      try
       {
-        var imageBitmapThumbnail = LoadImageAsBitmapImage(thumbnailPath);
-        return imageBitmapThumbnail;
+        var thumbnailPath = pathToImage + ThumbnailExtension;
+
+        if (this.FileExists(thumbnailPath))
+        {
+          var imageBitmapThumbnail = LoadImageAsBitmapImage(thumbnailPath);
+          return imageBitmapThumbnail;
+        }
+
+        var fullSizeBitmapImage = LoadImageAsBitmapImage(pathToImage);
+        var fullSizeImage = new WriteableBitmap(fullSizeBitmapImage).ToImage();
+
+        var thumbnailImage = CreateThumbnailImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight);
+
+        var fileStream1 = OpenFile(pathToImage + ThumbnailExtension, StorageFileMode.Create, StorageFileAccess.Write);
+        thumbnailImage.WriteToStream(fileStream1, pathToImage + ThumbnailExtension);
+        fileStream1.Close();
+        fileStream1.Dispose();
+
+        return thumbnailImage.ToBitmap();
       }
-
-      var fullSizeBitmapImage = LoadImageAsBitmapImage(pathToImage);
-      var fullSizeImage = new WriteableBitmap(fullSizeBitmapImage).ToImage();
-
-      var thumbnailImage = CreateThumbnailImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight);
-
-      var fileStream1 = OpenFile(pathToImage + ThumbnailExtension, StorageFileMode.Create, StorageFileAccess.Write);
-      thumbnailImage.WriteToStream(fileStream1, pathToImage + ThumbnailExtension);
-      fileStream1.Close();
-      fileStream1.Dispose();
-
-      return thumbnailImage.ToBitmap();
+      catch
+      {
+        return null;
+      }
     }
 
     public static ExtendedImage CreateThumbnailImage(ExtendedImage image, int maxWidthHeight)
