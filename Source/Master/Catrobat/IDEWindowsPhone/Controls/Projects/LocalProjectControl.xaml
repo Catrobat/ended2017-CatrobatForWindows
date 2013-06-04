@@ -18,6 +18,7 @@
     <!--<converters:ActiveProjectVisibilityConverter x:Key="ActiveProjectVisibilityConverter" />
     <converters:InActiveProjectVisibilityConverter x:Key="InActiveProjectVisibilityConverter" />-->
     <converters:BytesImageConverter x:Key="BytesImageConverter" />
+    <converters:ScreenshotConverter x:Key="ScreenshotConverter" />
   </UserControl.Resources>
 
   <Grid x:Name="LayoutRoot">
@@ -91,7 +92,7 @@
           </i:Interaction.Triggers>
           <Border Grid.Column="3" BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="4 0 0 0">
             <Grid HorizontalAlignment="Right">
-              <Image HorizontalAlignment="Right" Source="{Binding Screenshot, Converter={StaticResource BytesImageConverter}}" MaxHeight="155" MaxWidth="160"/>
+              <Image HorizontalAlignment="Right" Source="{Binding Screenshot, Converter={StaticResource ScreenshotConverter}}" MaxHeight="155" MaxWidth="160"/>
             </Grid>
           </Border>
         </Grid>

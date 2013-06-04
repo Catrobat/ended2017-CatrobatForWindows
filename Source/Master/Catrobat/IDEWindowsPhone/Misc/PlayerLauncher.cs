@@ -14,7 +14,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
 {
   public class PlayerLauncher
   {
-    public async static Task<bool> LaunchePlayer(String projectName)
+    public async static Task<bool> LaunchPlayer(String projectName)
     {
       try
       {
@@ -33,7 +33,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
         var folder = await localFolder.GetFolderAsync(CatrobatContext.PlayerActiveProjectZipPath.Split('/')[0]);
 
         StorageFile catrobatZipFile = await folder.GetFileAsync(CatrobatContext.PlayerActiveProjectZipPath.Split('/')[1]);
-        Windows.System.Launcher.LaunchFileAsync(catrobatZipFile);
+        await Windows.System.Launcher.LaunchFileAsync(catrobatZipFile);
 
         return true;
       }

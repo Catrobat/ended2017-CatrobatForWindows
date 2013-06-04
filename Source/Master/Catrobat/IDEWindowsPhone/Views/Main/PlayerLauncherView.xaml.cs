@@ -42,7 +42,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
       var projectName = string.Empty;
       if (NavigationContext.QueryString.TryGetValue("ProjectName", out projectName))
       {
-        if (!await PlayerLauncher.LaunchePlayer(projectName))
+        if (!await PlayerLauncher.LaunchPlayer(projectName))
         {
           var message = new DialogMessage("No project with the name '" + projectName + "' was found.", ProjectNotFoundMessageResult)
           {

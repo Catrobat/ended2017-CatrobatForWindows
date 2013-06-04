@@ -28,6 +28,7 @@
     <converters:ActiveProjectVisibilityConverter x:Key="ActiveProjectVisibilityConverter" />
     <converters:BytesImageConverter x:Key="BytesImageConverter" />
     <converters:VersionConverter x:Key="VersionConverter"/>
+    <converters:ScreenshotConverter x:Key="ScreenshotConverter"/>
 
     <Style x:Key="ContinuousListBoxButtonStyle" TargetType="Button">
       <Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
@@ -70,8 +71,8 @@
           <StackPanel>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="{ Binding CurrentProject.ProjectName}" Margin="0 0 0 20" Style="{StaticResource PhoneTextLargeStyle}" />
             <Grid Height="400">
-              <Image Name="imageCurrentProjectScreenshot" Source="{Binding CurrentProjectScreenshot}" />
-              <buttons:ScreenshotButton VerticalAlignment="Center" x:Name="buttonPlayCurrentProject"          
+                <Image Name="imageCurrentProjectScreenshot" Source="{Binding CurrentProjectScreenshot, Converter={StaticResource ScreenshotConverter}}" />
+                <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="buttonPlayCurrentProject"          
                 Template="{StaticResource ScreenshotButtonControlTemplate}"
                 Margin="0,0,0,0" Click="buttonPlayCurrentProject_Click" Width="130" />
             </Grid>
@@ -162,7 +163,7 @@
               <Grid Grid.Column="1">
                 <Border Grid.Column="3" BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="4 0 0 0">
                   <Grid HorizontalAlignment="Right">
-                    <Image HorizontalAlignment="Right" Source="{Binding CurrentProjectScreenshot, Converter={StaticResource BytesImageConverter}}" MaxHeight="155" MaxWidth="160"/>
+                    <Image HorizontalAlignment="Right" Source="{Binding CurrentProjectScreenshot, Converter={StaticResource ScreenshotConverter}}" MaxHeight="155" MaxWidth="160"/>
                   </Grid>
                 </Border>
               </Grid>
