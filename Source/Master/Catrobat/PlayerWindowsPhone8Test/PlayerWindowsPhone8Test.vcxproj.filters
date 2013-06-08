@@ -204,6 +204,7 @@
     </ClCompile>
     <ClCompile Include="LookBricks.cpp" />
     <ClCompile Include="TestHelper.cpp" />
+    <ClCompile Include="MovementBricks.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
