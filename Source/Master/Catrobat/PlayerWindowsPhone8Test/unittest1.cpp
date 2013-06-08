@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
+#include "Object.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -8,10 +9,11 @@ namespace PlayerWindowsPhone8Test
     TEST_CLASS(UnitTest1)
     {
     public:
-        TEST_METHOD(TestMethod1)
+        TEST_METHOD(hallo)
         {
             // TODO: Your test code here
-			Assert::IsTrue(true);
+			Object *testObject = new Object("testobj");
+			Assert::IsNotNull(testObject);
         }
     };
 }
