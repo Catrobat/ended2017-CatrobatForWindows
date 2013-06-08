@@ -405,9 +405,4 @@
       <UniqueIdentifier>{39097f0d-f5a5-4807-aa1d-b3b42e02948b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="CatTexture.dds" />
-    <Image Include="script.dds" />
-    <Image Include="brick.dds" />
-  </ItemGroup>
 </Project>

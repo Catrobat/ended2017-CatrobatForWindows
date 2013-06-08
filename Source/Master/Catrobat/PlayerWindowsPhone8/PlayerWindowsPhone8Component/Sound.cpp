@@ -28,3 +28,4 @@ void Sound::Play()
 {
 	system->playSound(FMOD_CHANNEL_FREE, sound, false, &channel);
 }
+

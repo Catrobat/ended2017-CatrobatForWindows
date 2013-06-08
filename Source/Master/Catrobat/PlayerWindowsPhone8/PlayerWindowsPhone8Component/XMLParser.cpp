@@ -1129,7 +1129,7 @@ Brick *XMLParser::parseBroadcastBrick(xml_node<> *baseNode, Script *script)
 
 Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script *script)
 {
-	xml_node<> *soundInfoNode = baseNode->first_node("soundInfo");
+	xml_node<> *soundInfoNode = baseNode->first_node("sound");
 	if (!soundInfoNode)
 		return NULL;
 
