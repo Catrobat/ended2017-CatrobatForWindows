@@ -22,9 +22,6 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
         using (IStorage storage = StorageSystem.GetStorage())
         {
-          if(!storage.DirectoryExists(CatrobatContext.ProjectsPath))
-            Debugger.Break();
-
           var stream = storage.OpenFile(CatrobatContext.PlayerActiveProjectZipPath, StorageFileMode.Create, StorageFileAccess.Write);
           CatrobatZip.ZipCatrobatPackage(stream, projectFolder);
         }

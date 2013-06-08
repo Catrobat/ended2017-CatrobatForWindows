@@ -60,6 +60,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       private set;
     }
 
+    public ICommand EditCostumeCommand
+    {
+      get;
+      private set;
+    }
+
     public ICommand UndoCommand
     {
       get;
@@ -152,6 +158,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     }
 
     private void CopyCostumeAction(Costume costume)
+    {
+      Costume newCostume = costume.Copy(SelectedSprite) as Costume;
+
+      CostumeList costumeList = SelectedSprite.Costumes;
+      costumeList.Costumes.Add(newCostume);
+    }
+
+    private void EditCostumeAction(Costume costume)
     {
       Costume newCostume = costume.Copy(SelectedSprite) as Costume;
 
@@ -327,6 +341,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       this.DeleteSpriteCommand = new RelayCommand<Sprite>(this.DeleteSpriteAction);
       this.DeleteCostumeCommand = new RelayCommand<Costume>(this.DeleteCostumeAction);
       this.CopyCostumeCommand = new RelayCommand<Costume>(this.CopyCostumeAction);
+      this.EditCostumeCommand = new RelayCommand<Costume>(this.EditCostumeAction);
       this.UndoCommand = new RelayCommand(this.UndoAction);
       this.RedoCommand = new RelayCommand(this.RedoAction);
 
