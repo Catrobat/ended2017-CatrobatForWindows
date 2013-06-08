@@ -34,7 +34,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="unittest1.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseObject.cpp">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClCompile>
@@ -203,6 +202,8 @@
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParser.cpp">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClCompile>
+    <ClCompile Include="LookBricks.cpp" />
+    <ClCompile Include="TestHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -380,6 +381,7 @@
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParser.h">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TestApp.dll" />
