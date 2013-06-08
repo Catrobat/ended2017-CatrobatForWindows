@@ -87,7 +87,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void buttonSettings_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/Views/Main/SettingsPage.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Settings/SettingsView.xaml", UriKind.Relative));
     }
 
     private void OnlineProject_Tap(object sender, System.Windows.Input.GestureEventArgs e)

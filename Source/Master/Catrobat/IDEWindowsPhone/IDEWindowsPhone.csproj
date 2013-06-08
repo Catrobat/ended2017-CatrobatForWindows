@@ -135,6 +135,7 @@
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ActiveProjectVisibilityConverter.cs" />
+    <Compile Include="Converters\ActiveThemeBrushConverter.cs" />
     <Compile Include="Converters\BytesImageConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\NegativeBoolVisibilityConverter.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeChooser.cs" />
     <Compile Include="ViewModel\AddNewProjectViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\SoundRecorderViewModel.cs" />
     <Compile Include="ViewModel\EditorViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -237,23 +239,11 @@
     <Compile Include="Views\Main\ProjectImportView.xaml.cs">
       <DependentUpon>ProjectImportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\SettingsPage.xaml.cs">
-      <DependentUpon>SettingsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\OnlineProjectPage.xaml.cs">
       <DependentUpon>OnlineProjectPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Main\SettingsBrickCategories.xaml.cs">
-      <DependentUpon>SettingsBrickCategories.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Main\SettingsLanguageChooser.xaml.cs">
-      <DependentUpon>SettingsLanguageChooser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Main\SettingsThemeChooser.xaml.cs">
-      <DependentUpon>SettingsThemeChooser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\TileGeneratorView.xaml.cs">
       <DependentUpon>TileGeneratorView.xaml</DependentUpon>
@@ -263,6 +253,18 @@
     </Compile>
     <Compile Include="Views\Main\UploadProjectPage.xaml.cs">
       <DependentUpon>UploadProjectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsBrickView.xaml.cs">
+      <DependentUpon>SettingsBrickView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsLanguageView.xaml.cs">
+      <DependentUpon>SettingsLanguageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsThemeView.xaml.cs">
+      <DependentUpon>SettingsThemeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -322,7 +324,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ViewModel\Resources.xaml">
+    <Page Include="ViewModel\ViewModelLocatorResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -410,27 +412,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Main\SettingsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Main\OnlineProjectPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Main\SettingsBrickCategories.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Main\SettingsLanguageChooser.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Main\SettingsThemeChooser.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -443,6 +429,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Main\UploadProjectPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\SettingsBrickView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\SettingsLanguageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\SettingsThemeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\SettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

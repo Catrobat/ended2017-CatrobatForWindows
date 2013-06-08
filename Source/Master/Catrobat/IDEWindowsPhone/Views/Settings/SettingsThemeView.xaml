@@ -1,0 +1,74 @@
+﻿<phone:PhoneApplicationPage 
+  x:Class="Catrobat.IDEWindowsPhone.Views.Settings.SettingsThemeView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+  xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:Converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
+  FontFamily="{StaticResource PhoneFontFamilyNormal}"
+  FontSize="{StaticResource PhoneFontSizeNormal}"
+  Foreground="{StaticResource PhoneForegroundBrush}"
+  SupportedOrientations="Portrait" Orientation="Portrait"
+  mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+  DataContext="{Binding Settings, Source={StaticResource Locator}}"
+  shell:SystemTray.IsVisible="True">
+  <phone:PhoneApplicationPage.Resources>
+    <Converters:ActiveThemeBrushConverter x:Key="activeThemeBrushConverter"/>
+  </phone:PhoneApplicationPage.Resources>
+
+  <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 0 10">
+      <TextBlock x:Name="Headline" Margin="0 0 0 0" Text="{Binding Path=Main.TitleSettings, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock x:Name="PageTitle" Margin="0 -10 0 0" Text="{Binding Path=Main.HeaderDesign, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextTitle1Style}"/>
+    </StackPanel>
+
+    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10">
+      <ListBox Name="ListBoxDesings" Margin="0 0 0 15" ItemsSource="{Binding AvailableThemes}" 
+        SelectedItem="{Binding ActiveTheme, Mode=OneWay}" HorizontalAlignment="Stretch">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Grid Margin="0 0 0 40" Width="470" Tap="Item_Tap">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1.5*" />
+              </Grid.ColumnDefinitions>
+              <Image Grid.Column="0" Width="150" Height="150" x:Name="imgDesign" Margin="10" Source="{Binding CroppedBackground}" />
+              <Grid Grid.Column="1" Margin="22" Background="{Binding Converter={StaticResource activeThemeBrushConverter}}">
+                <Grid Margin="10">
+                  <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                  </Grid.ColumnDefinitions>
+                  <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding AccentColor1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
+                  <Grid Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding AccentColor2}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
+                  <Grid Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding AccentColor3}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </Grid>
+  </Grid>
+</phone:PhoneApplicationPage>

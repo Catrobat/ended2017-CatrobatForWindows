@@ -1,0 +1,204 @@
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Windows;
+using System.Windows.Navigation;
+using System.Windows.Threading;
+using Catrobat.Core;
+using Catrobat.Core.Objects;
+using Catrobat.Core.Objects.Sounds;
+using Catrobat.Core.Storage;
+using Catrobat.IDEWindowsPhone.Annotations;
+using Catrobat.IDEWindowsPhone.Themes;
+using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
+using GalaSoft.MvvmLight;
+using System.ComponentModel;
+using GalaSoft.MvvmLight.Command;
+using IDEWindowsPhone;
+using KBB.Mobile.Controls;
+using Microsoft.Phone.Controls;
+using Microsoft.Practices.ServiceLocation;
+using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.Core.Misc.Helpers;
+using Catrobat.IDECommon.Resources;
+
+namespace Catrobat.IDEWindowsPhone.ViewModel
+{
+  public class SettingsViewModel : ViewModelBase
+  {
+
+    #region Private Members
+
+    readonly ThemeChooser _themeChooser = (App.Current.Resources["ThemeChooser"] as ThemeChooser);
+    private readonly MemoryMonitor _memoryMonitor;
+
+    #endregion
+
+    #region Commands
+
+    public RelayCommand ShowDesignSettingsCommand
+    {
+      get;
+      private set;
+    }
+
+    public RelayCommand ShowBrickSettingsCommand
+    {
+      get;
+      private set;
+    }
+
+    public RelayCommand ShowLanguageSettingsCommand
+    {
+      get;
+      private set;
+    }
+
+    #endregion
+
+    #region Actions
+
+    private void ShowDesignSettingsAction()
+    {
+       NavigateTo("/Views/Settings/SettingsThemeView.xaml");
+    }
+
+    private void ShowBrickSettingsAction()
+    {
+      NavigateTo("/Views/Settings/SettingsBrickView.xaml");
+    }
+
+    private void ShowLanguageSettingsAction()
+    {
+      NavigateTo("/Views/Settings/SettingsLanguageView.xaml");
+    }
+
+    private void ActiveThemeChangedAction(Theme newTheme)
+    {
+      ActiveTheme = newTheme;
+      NavigateBack();
+    }
+
+    #endregion
+
+    #region Events
+
+    public void ActiveThemeChangedEvent(Theme newTheme)
+    {
+      ActiveThemeChangedAction(newTheme);
+    }
+
+    #endregion
+
+    #region Properties
+    public bool ShowMemoryMonitorOption
+    {
+      get
+      {
+        return Debugger.IsAttached;
+      }
+    }
+
+    public bool ShowMemoryMonitor
+    {
+      get { return _memoryMonitor.ShowVisualization; }
+      set
+      {
+        if (_memoryMonitor.ShowVisualization == value)
+          return;
+
+        _memoryMonitor.ShowVisualization = value;
+        RaisePropertyChanged("ShowMemoryMonitor");
+      }
+    }
+
+    public Theme ActiveTheme
+    {
+      get { return _themeChooser.SelectedTheme; }
+      set { _themeChooser.SelectedTheme = value; }
+    }
+
+    public ObservableCollection<Theme> AvailableThemes
+    {
+      get { return _themeChooser.Themes; }
+    }
+
+    public CultureInfo CurrentCulture
+    {
+      get
+      {
+        return Thread.CurrentThread.CurrentCulture;
+      }
+
+      set
+      {
+        if (Thread.CurrentThread.CurrentCulture.Equals(value))
+          return;
+
+        Thread.CurrentThread.CurrentCulture = value;
+        Thread.CurrentThread.CurrentUICulture = value;
+
+        ((LocalizedStrings)Application.Current.Resources["LocalizedStrings"]).Reset();
+        RaisePropertyChanged("CurrentCulture");
+        RaisePropertyChanged("CurrentCultureName");
+      }
+    }
+
+    public ObservableCollection<CultureInfo> AvailableCultures
+    {
+      get
+      {
+        return LanguageHelper.SupportedLanguages;
+      }
+    }
+
+    #endregion
+
+    public SettingsViewModel()
+    {
+      ShowDesignSettingsCommand = new RelayCommand(ShowDesignSettingsAction);
+      ShowBrickSettingsCommand = new RelayCommand(ShowBrickSettingsAction);
+      ShowLanguageSettingsCommand = new RelayCommand(ShowLanguageSettingsAction);
+
+      _themeChooser.PropertyChanged += ThemeChooserOnPropertyChanged;
+      _memoryMonitor = Debugger.IsAttached ? new MemoryMonitor(true, false) : new MemoryMonitor(false, false);
+    }
+
+    private void ThemeChooserOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+    {
+      if(propertyChangedEventArgs.PropertyName == "SelectedTheme")
+      {
+        RaisePropertyChanged("ActiveTheme");
+      }
+    }
+
+    public override void Cleanup()
+    {
+
+      base.Cleanup();
+    }
+
+    #region Navigation
+
+    private void NavigateTo(string path)
+    {
+      ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri(path, UriKind.Relative));
+    }
+
+    private void NavigateBack()
+    {
+      ((PhoneApplicationFrame)Application.Current.RootVisual).GoBack();
+    }
+
+    private void RemoveNavigationBackEntry()
+    {
+      ((PhoneApplicationFrame)Application.Current.RootVisual).RemoveBackEntry();
+    }
+
+    #endregion
+  }
+}
