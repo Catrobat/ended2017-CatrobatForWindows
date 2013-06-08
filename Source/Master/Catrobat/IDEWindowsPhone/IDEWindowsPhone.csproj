@@ -149,6 +149,7 @@
     <Compile Include="Converters\NullColorConverter.cs" />
     <Compile Include="Converters\SecondStringMillisecondConverter.cs" />
     <Compile Include="Misc\AssociationUriMapper.cs" />
+    <Compile Include="Misc\PaintLauncher.cs" />
     <Compile Include="Misc\CostumeBuilder.cs" />
     <Compile Include="Misc\CulturePhone.cs" />
     <Compile Include="Misc\MemoryMonitor.cs" />
@@ -178,8 +179,8 @@
     <Compile Include="Views\Editor\Costumes\AddNewCostume.xaml.cs">
       <DependentUpon>AddNewCostume.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Costumes\ChangeCostumeName.xaml.cs">
-      <DependentUpon>ChangeCostumeName.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Costumes\ChangeCostume.xaml.cs">
+      <DependentUpon>ChangeCostume.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\EditorView.xaml.cs">
       <DependentUpon>EditorView.xaml</DependentUpon>
@@ -329,7 +330,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Costumes\ChangeCostumeName.xaml">
+    <Page Include="Views\Editor\Costumes\ChangeCostume.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

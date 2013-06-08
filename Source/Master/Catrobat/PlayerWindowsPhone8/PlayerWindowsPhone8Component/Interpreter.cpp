@@ -29,7 +29,7 @@ int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 	case OPERATOR:
 		break;
 	case NUMBER:
-		break;
+		return atoi(tree->Value().c_str());
 	case USER_VARIABLE:
 		{
 			string varName = tree->Value();
@@ -52,7 +52,7 @@ float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 	case OPERATOR:
 		break;
 	case NUMBER:
-		break;
+		return atof(tree->Value().c_str());
 	case USER_VARIABLE:
 		{
 			string varName = tree->Value();

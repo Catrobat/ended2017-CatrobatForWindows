@@ -9,15 +9,19 @@ using Microsoft.Phone.Shell;
 using System.ComponentModel;
 using Microsoft.Practices.ServiceLocation;
 using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.Core;
+using Catrobat.Core.Objects;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 {
   public partial class ChangeCostumeName : PhoneApplicationPage
   {
-    EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
+    readonly EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
 
     //public static Costume Costume{get; set;}
-    ApplicationBarIconButton btnSave;
+    private ApplicationBarIconButton _buttonSave;
+    private bool _wasLaunchingPaintApp = false;
     
     public ChangeCostumeName()
     {
@@ -34,16 +38,27 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
       });
     }
 
+    protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+    {
+      if (_wasLaunchingPaintApp)
+      {
+        PaintLauncher.RecieveImageFromPaint();
+        _wasLaunchingPaintApp = false;
+      }
+
+      base.OnNavigatedTo(e);
+    }
+
     private void BuildApplicationBar()
     {
       ApplicationBar = new ApplicationBar();
 
-      btnSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.check.rest.png", UriKind.Relative));
-      btnSave.Text = EditorResources.ButtonSave;
-      btnSave.Click += btnSave_Click;
-      ApplicationBar.Buttons.Add(btnSave);
+      _buttonSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.check.rest.png", UriKind.Relative));
+      _buttonSave.Text = EditorResources.ButtonSave;
+      _buttonSave.Click += btnSave_Click;
+      ApplicationBar.Buttons.Add(_buttonSave);
 
-      ApplicationBarIconButton btnCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
+      var btnCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
       btnCancel.Text = EditorResources.ButtonCancel;
       btnCancel.Click += btnCancel_Click;
       ApplicationBar.Buttons.Add(btnCancel);
@@ -69,9 +84,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
     private void txtName_TextChanged(object sender, TextChangedEventArgs e)
     {
       if (txtName.Text != "")
-        btnSave.IsEnabled = true;
+        _buttonSave.IsEnabled = true;
       else
-        btnSave.IsEnabled = false;
+        _buttonSave.IsEnabled = false;
+    }
+
+    private void ButtonEditImage_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+      _wasLaunchingPaintApp = true;
+      PaintLauncher.LaunchPaint(CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ImagesPath + "/" +
+                                _editorViewModel.EditCostume.FileName);
     }
   }
 }

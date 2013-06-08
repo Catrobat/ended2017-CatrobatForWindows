@@ -38,7 +38,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
           case ".catrobat":
             return new Uri("/Views/Main/ProjectImportView.xaml?fileToken=" + fileID, UriKind.Relative);
           default:
-            return new Uri("Views/Main/MainView.xaml", UriKind.Relative);
+            return new Uri("/Views/Main/MainView.xaml", UriKind.Relative);
         }
       }
       // Otherwise perform normal launch.

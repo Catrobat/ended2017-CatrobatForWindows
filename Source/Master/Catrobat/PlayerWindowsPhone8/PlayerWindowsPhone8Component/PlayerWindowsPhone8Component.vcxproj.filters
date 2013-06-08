@@ -4,18 +4,6 @@
     <ClCompile Include="BaseObject.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Direct3DBase.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Direct3DContentProvider.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>Sounds</Filter>
     </ClCompile>
@@ -46,29 +34,17 @@
     <ClCompile Include="SoundInfo.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="ProjectDaemon.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="ScriptHandler.cpp">
       <Filter>Objects\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="lodepng.cpp">
-      <Filter>ddsConverter</Filter>
+      <Filter>Core\ddsConverter</Filter>
     </ClCompile>
     <ClCompile Include="lodepng_util.cpp">
-      <Filter>ddsConverter</Filter>
+      <Filter>Core\ddsConverter</Filter>
     </ClCompile>
     <ClCompile Include="DDSLoader.cpp">
-      <Filter>ddsConverter</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectRenderer.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureDaemon.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerWindowsPhone8Component.cpp">
-      <Filter>Core</Filter>
+      <Filter>Core\ddsConverter</Filter>
     </ClCompile>
     <ClCompile Include="CostumeBrick.cpp">
       <Filter>Objects\Bricks\Look</Filter>
@@ -133,15 +109,6 @@
     <ClCompile Include="BroadcastBrick.cpp">
       <Filter>Objects\Bricks\Control</Filter>
     </ClCompile>
-    <ClCompile Include="BroadcastMessageSender.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="BroadcastMessageListener.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="BroadcastMessageDaemon.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="FormulaTree.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
@@ -178,28 +145,43 @@
     <ClCompile Include="ChangeVariableBrick.cpp">
       <Filter>Objects\Bricks\Variables</Filter>
     </ClCompile>
+    <ClCompile Include="BroadcastMessageDaemon.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="BroadcastMessageListener.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="BroadcastMessageSender.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3DBase.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3DContentProvider.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerWindowsPhone8Component.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectDaemon.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectRenderer.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureDaemon.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
       <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicTimer.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Direct3DBase.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Direct3DContentProvider.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectXHelper.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Sounds</Filter>
@@ -231,29 +213,17 @@
     <ClInclude Include="SoundInfo.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="ProjectDaemon.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="ScriptHandler.h">
       <Filter>Objects\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="lodepng.h">
-      <Filter>ddsConverter</Filter>
+      <Filter>Core\ddsConverter</Filter>
     </ClInclude>
     <ClInclude Include="lodepng_util.h">
-      <Filter>ddsConverter</Filter>
+      <Filter>Core\ddsConverter</Filter>
     </ClInclude>
     <ClInclude Include="DDSLoader.h">
-      <Filter>ddsConverter</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjectRenderer.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureDaemon.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerWindowsPhone8Component.h">
-      <Filter>Core</Filter>
+      <Filter>Core\ddsConverter</Filter>
     </ClInclude>
     <ClInclude Include="CostumeBrick.h">
       <Filter>Objects\Bricks\Look</Filter>
@@ -318,15 +288,6 @@
     <ClInclude Include="BroadcastBrick.h">
       <Filter>Objects\Bricks\Control</Filter>
     </ClInclude>
-    <ClInclude Include="BroadcastMessageListener.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="BroadcastMessageSender.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="BroadcastMessageDaemon.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="FormulaTree.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -363,6 +324,45 @@
     <ClInclude Include="ChangeVariableBrick.h">
       <Filter>Objects\Bricks\Variables</Filter>
     </ClInclude>
+    <ClInclude Include="BasicTimer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="BroadcastMessageDaemon.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="BroadcastMessageListener.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="BroadcastMessageSender.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3DBase.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3DContentProvider.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXHelper.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerWindowsPhone8Component.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectDaemon.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectRenderer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureDaemon.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -383,9 +383,6 @@
     <Filter Include="Objects\Scripts">
       <UniqueIdentifier>{fda72b0d-ed6b-4c59-9473-4911f7bd4bc6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ddsConverter">
-      <UniqueIdentifier>{0b77d6dc-7fe8-43ee-aba1-51564a63deae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Objects\Bricks\Movement">
       <UniqueIdentifier>{8cc0696c-f9db-421b-8e06-575e0c8826a7}</UniqueIdentifier>
     </Filter>
@@ -404,10 +401,8 @@
     <Filter Include="Objects\Bricks\Variables">
       <UniqueIdentifier>{39097f0d-f5a5-4807-aa1d-b3b42e02948b}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="CatTexture.dds" />
-    <Image Include="script.dds" />
-    <Image Include="brick.dds" />
+    <Filter Include="Core\ddsConverter">
+      <UniqueIdentifier>{0b77d6dc-7fe8-43ee-aba1-51564a63deae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@ using Catrobat.Core.Objects;
 using Catrobat.Core.Storage;
 using Catrobat.Core.ZIP;
 using Windows.Storage;
+using Windows.System;
 
 namespace Catrobat.IDEWindowsPhone.Misc
 {
@@ -22,9 +23,6 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
         using (IStorage storage = StorageSystem.GetStorage())
         {
-          if(!storage.DirectoryExists(CatrobatContext.ProjectsPath))
-            Debugger.Break();
-
           var stream = storage.OpenFile(CatrobatContext.PlayerActiveProjectZipPath, StorageFileMode.Create, StorageFileAccess.Write);
           CatrobatZip.ZipCatrobatPackage(stream, projectFolder);
         }
@@ -34,6 +32,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
         StorageFile catrobatZipFile = await folder.GetFileAsync(CatrobatContext.PlayerActiveProjectZipPath.Split('/')[1]);
         await Windows.System.Launcher.LaunchFileAsync(catrobatZipFile);
+        Windows.System.Launcher.LaunchFileAsync(catrobatZipFile, new LauncherOptions {});
 
         return true;
       }

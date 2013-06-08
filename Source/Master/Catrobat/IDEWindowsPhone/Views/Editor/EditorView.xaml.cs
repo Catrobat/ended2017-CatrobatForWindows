@@ -292,7 +292,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
     private void btnEditCostumeName_Click(object sender, System.Windows.RoutedEventArgs e)
     {
       _editorViewModel.EditCostume = ((Button)sender).DataContext as Costume;
-      NavigationService.Navigate(new Uri("/Views/Editor/Costumes/ChangeCostumeName.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Editor/Costumes/ChangeCostume.xaml", UriKind.Relative));
     }
 
     private void btnCopyCostume_Click(object sender, RoutedEventArgs e)

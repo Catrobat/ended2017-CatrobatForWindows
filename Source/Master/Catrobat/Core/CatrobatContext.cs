@@ -26,6 +26,7 @@ namespace Catrobat.Core
     public static string DefaultProjectName = "DefaultProject";
     public static string TempProjectImportZipPath = "Temp/ImportProjectZip";
     public static string TempProjectImportPath = "Temp/ImportProject";
+    public static string TempPaintImagePath = "Temp/PaintImage";
 
     public ContextSaving ContextSaving;
     private Project _currentProject;
