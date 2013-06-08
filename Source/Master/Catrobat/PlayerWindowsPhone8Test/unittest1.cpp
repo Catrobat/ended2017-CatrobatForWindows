@@ -11,7 +11,7 @@ namespace PlayerWindowsPhone8Test
         TEST_METHOD(TestMethod1)
         {
             // TODO: Your test code here
-			assert(false);
+			Assert::IsTrue(false);
         }
     };
 }
