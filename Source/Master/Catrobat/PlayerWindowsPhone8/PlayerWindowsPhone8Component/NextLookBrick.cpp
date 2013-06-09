@@ -11,7 +11,7 @@ NextLookBrick::NextLookBrick(string spriteReference, Script *parent) :
 void NextLookBrick::Execute()
 {	
 	int next = m_parent->Parent()->GetLook() + 1;
-	if (next > m_parent->Parent()->GetLookCount())
+	if (next >= m_parent->Parent()->GetLookCount())
 	{
 		next = 0;
 	}

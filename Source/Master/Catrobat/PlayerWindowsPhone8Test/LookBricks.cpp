@@ -274,14 +274,97 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(LookBricks_HideBrick)
         {
-            // TODO: Your test code here
-			Assert::IsTrue(false);
+            string spriteReference = "";
+			Object *object = new Object("TestObject");
+			StartScript *script = new StartScript(spriteReference, object);
+			HideBrick *brick = new HideBrick(spriteReference, script);
+
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 1.0f));
         }
 
 		TEST_METHOD(LookBricks_NextLookBrick)
         {
-            // TODO: Your test code here
-			Assert::IsTrue(false);
+            string spriteReference = "";
+			string costumeDataReference = "";
+
+			Look *look1 = new Look("test1", "testName1");
+			Look *look2 = new Look("test2", "testName2");
+			Look *look3 = new Look("test3", "testName3");
+			Look *look4 = new Look("test4", "testName4");
+			Look *look5 = new Look("test5", "testName5");
+
+			Object *object = new Object("TestObject");
+			object->addLook(look1);
+			object->addLook(look2);
+			object->addLook(look3);
+			object->addLook(look4);
+			object->addLook(look5);
+
+			StartScript *script = new StartScript(spriteReference, object);
+
+			Assert::AreEqual(object->GetLookCount(), 5);
+
+			CostumeBrick *costumeBrick = new CostumeBrick(spriteReference, script);
+			costumeBrick->Execute();
+
+			Assert::AreEqual(object->GetLook(), 0);
+			Assert::IsTrue(object->GetCurrentLook() == look1);
+			Assert::IsFalse(object->GetCurrentLook() == look2);
+			Assert::IsFalse(object->GetCurrentLook() == look3);
+			Assert::IsFalse(object->GetCurrentLook() == look4);
+			Assert::IsFalse(object->GetCurrentLook() == look5);
+
+			NextLookBrick *brick = new NextLookBrick(spriteReference, script);
+			brick->Execute();
+
+			Assert::AreEqual(object->GetLook(), 1);
+			Assert::IsFalse(object->GetCurrentLook() == look1);
+			Assert::IsTrue(object->GetCurrentLook() == look2);
+			Assert::IsFalse(object->GetCurrentLook() == look3);
+			Assert::IsFalse(object->GetCurrentLook() == look4);
+			Assert::IsFalse(object->GetCurrentLook() == look5);
+
+			brick = new NextLookBrick(spriteReference, script);
+			brick->Execute();
+
+			Assert::AreEqual(object->GetLook(), 2);
+			Assert::IsFalse(object->GetCurrentLook() == look1);
+			Assert::IsFalse(object->GetCurrentLook() == look2);
+			Assert::IsTrue(object->GetCurrentLook() == look3);
+			Assert::IsFalse(object->GetCurrentLook() == look4);
+			Assert::IsFalse(object->GetCurrentLook() == look5);
+
+			brick = new NextLookBrick(spriteReference, script);
+			brick->Execute();
+
+			Assert::AreEqual(object->GetLook(), 3);
+			Assert::IsFalse(object->GetCurrentLook() == look1);
+			Assert::IsFalse(object->GetCurrentLook() == look2);
+			Assert::IsFalse(object->GetCurrentLook() == look3);
+			Assert::IsTrue(object->GetCurrentLook() == look4);
+			Assert::IsFalse(object->GetCurrentLook() == look5);
+
+			brick = new NextLookBrick(spriteReference, script);
+			brick->Execute();
+
+			Assert::AreEqual(object->GetLook(), 4);
+			Assert::IsFalse(object->GetCurrentLook() == look1);
+			Assert::IsFalse(object->GetCurrentLook() == look2);
+			Assert::IsFalse(object->GetCurrentLook() == look3);
+			Assert::IsFalse(object->GetCurrentLook() == look4);
+			Assert::IsTrue(object->GetCurrentLook() == look5);
+
+			brick = new NextLookBrick(spriteReference, script);
+			brick->Execute();
+
+			Assert::AreEqual(object->GetLook(), 0);
+			Assert::IsTrue(object->GetCurrentLook() == look1);
+			Assert::IsFalse(object->GetCurrentLook() == look2);
+			Assert::IsFalse(object->GetCurrentLook() == look3);
+			Assert::IsFalse(object->GetCurrentLook() == look4);
+			Assert::IsFalse(object->GetCurrentLook() == look5);
         }
 
 		TEST_METHOD(LookBricks_SetGhostEffectBrick)
