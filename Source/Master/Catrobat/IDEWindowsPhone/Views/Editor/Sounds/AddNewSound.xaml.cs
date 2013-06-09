@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Catrobat.IDEWindowsPhone.Misc;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
@@ -13,12 +14,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
     private void btnMediaLibrary_Click(object sender, RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/Views/Editor/Sounds/AudioLibrary.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(AudioLibrary));
     }
 
     private void btnRecorder_Click(object sender, RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/Views/Editor/Sounds/SoundRecorderView.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(SoundRecorderView));
     }
   }
 }

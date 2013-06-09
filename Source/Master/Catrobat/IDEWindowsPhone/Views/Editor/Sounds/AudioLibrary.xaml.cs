@@ -7,6 +7,7 @@ using Catrobat.Core.Storage;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.IDEWindowsPhone.Controls.Buttons;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using IDEWindowsPhone;
@@ -115,14 +116,14 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
       }
 
       editorViewModel.SelectedSprite.Sounds.Sounds.Add(sound);
-      NavigationService.RemoveBackEntry();
-      NavigationService.GoBack();
+      Navigation.RemoveBackEntry();
+      Navigation.NavigateBack();
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
-      NavigationService.RemoveBackEntry();
-      NavigationService.GoBack();
+      Navigation.RemoveBackEntry();
+      Navigation.NavigateBack();
     }
 
     private void txtName_TextChanged(object sender, TextChangedEventArgs e)

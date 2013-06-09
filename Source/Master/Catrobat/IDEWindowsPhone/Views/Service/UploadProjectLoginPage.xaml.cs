@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using Catrobat.IDECommon.Resources.Main;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -34,7 +35,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Service
 
     private void LoginRegister_Click(object sender, EventArgs e)
     {
-      NavigationService.RemoveBackEntry();
+      Navigation.RemoveBackEntry();
       _viewModel.LoginCommand.Execute(sender);
     }
 
@@ -51,7 +52,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Service
 
     private void navigationCallback()
     {
-      Action action = () => NavigationService.Navigate(new Uri("/Views/Service/UploadProjectPage.xaml", UriKind.Relative));
+      Action action = () => Navigation.NavigateTo(typeof(UploadProjectPage));
       Dispatcher.BeginInvoke(action);
     }
 

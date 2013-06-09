@@ -15,15 +15,14 @@ using Catrobat.Core.Objects;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 {
-  public partial class ChangeCostumeName : PhoneApplicationPage
+  public partial class ChangeCostume : PhoneApplicationPage
   {
     readonly EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
 
-    //public static Costume Costume{get; set;}
     private ApplicationBarIconButton _buttonSave;
     private bool _wasLaunchingPaintApp = false;
     
-    public ChangeCostumeName()
+    public ChangeCostume()
     {
       InitializeComponent();
       
@@ -72,13 +71,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
     private void btnSave_Click(object sender, EventArgs e)
     {
       _editorViewModel.EditCostume.Name = txtName.Text;
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
       _editorViewModel.EditCostume = null;
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void txtName_TextChanged(object sender, TextChangedEventArgs e)

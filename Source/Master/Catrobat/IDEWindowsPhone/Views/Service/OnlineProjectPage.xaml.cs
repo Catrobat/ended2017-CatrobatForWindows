@@ -4,6 +4,7 @@ using Catrobat.Core;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.IDECommon.Resources.Main;
+using Catrobat.IDEWindowsPhone.Misc;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
@@ -45,7 +46,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Service
       MessageBox.Show(MainResources.DownloadQueueMessage,
               MainResources.MessageBoxInformation, MessageBoxButton.OK);
 
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void DownloadCallback(string filename)

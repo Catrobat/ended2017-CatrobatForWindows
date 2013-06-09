@@ -10,6 +10,7 @@ using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Annotations;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using GalaSoft.MvvmLight;
 using System.ComponentModel;
@@ -190,7 +191,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     private void SaveAction()
     {
-      NavigateTo("/Views/Editor/Sounds/SoundNameChooserView.xaml");
+      Navigation.NavigateTo(typeof(SoundNameChooserView));
     }
 
     private void CancelAction()
@@ -198,12 +199,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       _recorder.StopSound();
       _recorder.StopRecording();
 
-      NavigateBack();
+      Navigation.NavigateBack();
     }
 
     private void SaveNameChosenAction()
     {
-      Sound sound = new Sound(SoundName, _editorViewModel.SelectedSprite);
+      var sound = new Sound(SoundName, _editorViewModel.SelectedSprite);
       string path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
 
       using (IStorage storage = StorageSystem.GetStorage())
@@ -223,16 +224,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       _editorViewModel.SelectedSprite.Sounds.Sounds.Add(sound);
       Cleanup();
 
-      RemoveNavigationBackEntry();
-      RemoveNavigationBackEntry();
-      NavigateBack();
+      Navigation.RemoveBackEntry();
+      Navigation.RemoveBackEntry();
+      Navigation.NavigateBack();
     }
 
     private void CancelNameChosenAction()
     {
       SoundName = null;
       UpdateTextProperties();
-      NavigateBack();
+      Navigation.NavigateBack();
     }
 
     #endregion
@@ -464,21 +465,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       _playerTimeGoneBy = new TimeSpan();
 
       base.Cleanup();
-    }
-
-    private void NavigateTo(string path)
-    {
-      ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri(path, UriKind.Relative));
-    }
-
-    private void NavigateBack()
-    {
-      ((PhoneApplicationFrame)Application.Current.RootVisual).GoBack();
-    }
-
-    private void RemoveNavigationBackEntry()
-    {
-      ((PhoneApplicationFrame)Application.Current.RootVisual).RemoveBackEntry();
     }
   }
 }

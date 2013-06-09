@@ -13,6 +13,7 @@ using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
+using Catrobat.IDEWindowsPhone.Views.Main;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -28,6 +29,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
   public partial class EditorView : PhoneApplicationPage
   {
     readonly EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
+    readonly MainViewModel _mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
 
     int _firstVisibleScriptBrickIndex;
     int _lastVisibleScriptBrickIndex;
@@ -191,15 +193,14 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
       reorderListBoxScriptBricks.SelectedIndex = -1;
     }
 
-
     private void menueMainMenue_Click(object sender, EventArgs e)
     {
-      NavigationService.Navigate(new Uri("/Views/Main/MainView.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(MainView));
     }
 
     private void menueProjectSettings_Click(object sender, EventArgs e)
     {
-      NavigationService.Navigate(new Uri("/Views/Editor/ProjectSettingsView.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(ProjectSettingsView));
     }
 
 
@@ -218,7 +219,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
     private void btnEditSpriteName_Click(object sender, RoutedEventArgs e)
     {
       _editorViewModel.SelectedSprite = ((Button)sender).DataContext as Sprite;
-      NavigationService.Navigate(new Uri("/Views/Editor/Sprites/ChangeSpriteName.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(ChangeSpriteName));
     }
 
     private void btnCopySprite_Click(object sender, RoutedEventArgs e)
@@ -244,7 +245,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
     private void btnEditSoundName_Click(object sender, RoutedEventArgs e)
     {
       _editorViewModel.SelectedSound = ((Button)sender).DataContext as Sound;
-      NavigationService.Navigate(new Uri("/Views/Editor/Sounds/ChangeSoundName.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(ChangeSoundName));
     }
 
     private void buttonSoundPlay_Click(object sender, RoutedEventArgs e)
@@ -293,7 +294,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
     private void btnEditCostumeName_Click(object sender, System.Windows.RoutedEventArgs e)
     {
       _editorViewModel.EditCostume = ((Button)sender).DataContext as Costume;
-      NavigationService.Navigate(new Uri("/Views/Editor/Costumes/ChangeCostume.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(ChangeCostume));
     }
 
     private void btnCopyCostume_Click(object sender, RoutedEventArgs e)
@@ -305,7 +306,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
     private void OnStartAddBroadcastMessage()
     {
-      NavigationService.Navigate(new Uri("/Views/Editor/Scripts/NewBroadcastMessage.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(NewBroadcastMessage));
     }
 
     #region Appbar
@@ -365,28 +366,28 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
     {
       if (pivotMain.SelectedItem == pivotSprites)
       {
-        NavigationService.Navigate(new Uri("/Views/Editor/Sprites/AddNewSprite.xaml", UriKind.Relative));
+        Navigation.NavigateTo(typeof(AddNewSprite));
       }
       else if (pivotMain.SelectedItem == pivotScripts)
       {
         _firstVisibleScriptBrickIndex = reorderListBoxScriptBricks.FirstVisibleItemIndex;
         _lastVisibleScriptBrickIndex = reorderListBoxScriptBricks.LastVisibleItemIndex;
 
-        NavigationService.Navigate(new Uri("/Views/Editor/Scripts/AddNewScript.xaml", UriKind.Relative));
+        Navigation.NavigateTo(typeof(AddNewScript));
       }
       else if (pivotMain.SelectedItem == pivotCostumes)
       {
-        NavigationService.Navigate(new Uri("/Views/Editor/Costumes/AddNewCostume.xaml", UriKind.Relative));
+        Navigation.NavigateTo(typeof(AddNewCostume));
       }
       else if (pivotMain.SelectedItem == pivotSounds)
       {
-        NavigationService.Navigate(new Uri("/Views/Editor/Sounds/AddNewSound.xaml", UriKind.Relative));
+        Navigation.NavigateTo(typeof(AddNewSound));
       }
     }
 
     private void appbarButtonPlay_Click(object sender, EventArgs e)
     {
-      NavigationService.Navigate(new Uri("/MetroCatPlayer;component/GamePage.xaml", UriKind.Relative));
+      PlayerLauncher.LaunchPlayer(_mainViewModel.CurrentProject.ProjectName);
     }
 
     private void appbarButtonUndo_Click(object sender, EventArgs e)

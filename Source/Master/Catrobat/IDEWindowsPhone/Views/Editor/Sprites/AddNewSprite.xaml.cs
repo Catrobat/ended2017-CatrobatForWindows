@@ -4,6 +4,7 @@ using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDEWindowsPhone.Misc;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -56,12 +57,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sprites
       sprite.Name = txtName.Text;
       CatrobatContext.GetContext().CurrentProject.SpriteList.Sprites.Add(sprite);
 
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void txtName_TextChanged(object sender, TextChangedEventArgs e)

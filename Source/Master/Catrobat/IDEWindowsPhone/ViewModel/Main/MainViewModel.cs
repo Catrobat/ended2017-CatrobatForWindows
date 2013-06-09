@@ -8,7 +8,9 @@ using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Main;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Themes;
+using Catrobat.IDEWindowsPhone.Views.Main;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
@@ -254,7 +256,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     private void PinLocalProject(ProjectHeader project)
     {
       PinProjectHeader = project;
-      NavigateTo("/Views/Main/TileGeneratorView.xaml");
+      Navigation.NavigateTo(typeof(TileGeneratorView));
     }
 
 
@@ -285,11 +287,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     {
       if(PropertyChanged != null)
         PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    private void NavigateTo(string path)
-    {
-      ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri(path, UriKind.Relative));
     }
   }
 }

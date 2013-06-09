@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
@@ -47,8 +48,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
       if (dataObject is Script)
         _editorViewModel.SelectedBrick = (dataObject as Script).Copy(_editorViewModel.SelectedSprite);
 
-      NavigationService.RemoveBackEntry();
-      NavigationService.GoBack();
+      Navigation.RemoveBackEntry();
+      Navigation.NavigateBack();
     }
   }
 }

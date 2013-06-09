@@ -80,7 +80,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void ProjectNotValidMessageResult(MessageBoxResult obj)
     {
-      NavigationService.Navigate(new Uri("/Views/Main/MainView.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(MainView));
     }
 
     private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
@@ -108,7 +108,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
           if (_importer != null)
             _importer.AcceptTempProject(setActive);
 
-          Dispatcher.BeginInvoke(() => NavigationService.Navigate(new Uri("/Views/Main/MainView.xaml", UriKind.Relative)));
+          Dispatcher.BeginInvoke(() => Navigation.NavigateTo(typeof(MainView)));
         }
         catch
         {
@@ -135,7 +135,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void ButtonDismiss_OnClick(object sender, RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/Views/Main/MainView.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(MainView));
     }
   }
 }

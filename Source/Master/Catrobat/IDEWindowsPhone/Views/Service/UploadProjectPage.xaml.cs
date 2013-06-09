@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using Catrobat.IDECommon.Resources.Main;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -36,12 +37,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Service
     {
       _viewModel.UploadCommand.Execute(sender);
       _uploadButton.IsEnabled = false;
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void Cancel_Click(object sender, EventArgs e)
     {
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
