@@ -367,10 +367,93 @@ namespace PlayerWindowsPhone8Test
 			Assert::IsFalse(object->GetCurrentLook() == look5);
         }
 
-		TEST_METHOD(LookBricks_SetGhostEffectBrick)
+		TEST_METHOD(LookBricks_SetGhostEffectBrick_CheckFor100Percent)
         {
-            // TODO: Your test code here
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+			StartScript *script = new StartScript(spriteReference, object);
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "100");
+			SetGhostEffectBrick *brick = new SetGhostEffectBrick(spriteReference, formulaTree, script);
+
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 1.0f));
+        }
+
+		TEST_METHOD(LookBricks_SetGhostEffectBrick_CheckForZeroPercent)
+        {
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+			StartScript *script = new StartScript(spriteReference, object);
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "0");
+			SetGhostEffectBrick *brick = new SetGhostEffectBrick(spriteReference, formulaTree, script);
+
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
 			Assert::IsTrue(false);
+        }
+
+		TEST_METHOD(LookBricks_SetGhostEffectBrick_CheckForOverflow)
+        {
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+			StartScript *script = new StartScript(spriteReference, object);
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "300");
+			SetGhostEffectBrick *brick = new SetGhostEffectBrick(spriteReference, formulaTree, script);
+
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 1.0f));
+        }
+
+		TEST_METHOD(LookBricks_SetGhostEffectBrick_CheckFor50Percent)
+        {
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+			StartScript *script = new StartScript(spriteReference, object);
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "50");
+			SetGhostEffectBrick *brick = new SetGhostEffectBrick(spriteReference, formulaTree, script);
+
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.5f));
+        }
+
+		TEST_METHOD(LookBricks_SetGhostEffectBrick_CheckForVariousChanges)
+        {
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+			StartScript *script = new StartScript(spriteReference, object);
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "30");
+			SetGhostEffectBrick *brick = new SetGhostEffectBrick(spriteReference, formulaTree, script);
+
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.3f));
+
+			formulaTree = new FormulaTree("NUMBER", "40");
+			brick = new SetGhostEffectBrick(spriteReference, formulaTree, script);
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.4f));
+
+			formulaTree = new FormulaTree("NUMBER", "-10");
+			brick = new SetGhostEffectBrick(spriteReference, formulaTree, script);
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+        }
+
+		TEST_METHOD(LookBricks_SetGhostEffectBrick_CheckForUnderflow)
+        {
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+			StartScript *script = new StartScript(spriteReference, object);
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "-300");
+			SetGhostEffectBrick *brick = new SetGhostEffectBrick(spriteReference, formulaTree, script);
+
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
         }
 
 		TEST_METHOD(LookBricks_SetSizeToBrick)
