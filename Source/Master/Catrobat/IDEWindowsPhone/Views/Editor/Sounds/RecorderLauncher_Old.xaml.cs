@@ -15,13 +15,14 @@ using System.IO;
 using System.Threading;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
+using Microsoft.Practices.ServiceLocation;
 
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
   public partial class RecorderLauncher : PhoneApplicationPage
   {
-    private EditorViewModel _editorViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Editor;
+    private EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
     ApplicationBarIconButton btnSave;
 
     private DateTime _startTime;

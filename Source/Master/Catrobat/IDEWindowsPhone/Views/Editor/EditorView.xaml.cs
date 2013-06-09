@@ -21,12 +21,13 @@ using System.Windows.Controls;
 using System.Windows;
 using System.ComponentModel;
 using SoundState = Microsoft.Xna.Framework.Audio.SoundState;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor
 {
   public partial class EditorView : PhoneApplicationPage
   {
-    readonly EditorViewModel _editorViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Editor;
+    readonly EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
 
     int _firstVisibleScriptBrickIndex;
     int _lastVisibleScriptBrickIndex;

@@ -1,9 +1,11 @@
 ﻿using System;
 using Catrobat.Core.Objects;
 using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using System.Collections.ObjectModel;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
@@ -12,7 +14,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 
   public partial class AddNewScript : PhoneApplicationPage
   {
-    private EditorViewModel _editorViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Editor;
+    private EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
 
     public AddNewScript()
     {
