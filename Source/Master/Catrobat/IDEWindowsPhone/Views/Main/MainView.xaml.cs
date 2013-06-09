@@ -94,7 +94,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     {
       if (LongListSelectorOnlineProjects.SelectedItem != null)
       {
-        NavigationService.Navigate(new Uri("/Views/Main/OnlineProjectPage.xaml", UriKind.Relative));
+        _mainViewModel.SelectedOnlineProject = LongListSelectorOnlineProjects.SelectedItem as OnlineProjectHeader;
+        NavigationService.Navigate(new Uri("/Views/Service/OnlineProjectPage.xaml", UriKind.Relative));
       }
     }
 
@@ -124,12 +125,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     {
       if (registered)
       {
-        Action action = () => NavigationService.Navigate(new Uri("/Views/Main/UploadProjectPage.xaml", UriKind.Relative));
+        Action action = () => NavigationService.Navigate(new Uri("/Views/Service/UploadProjectPage.xaml", UriKind.Relative));
         Dispatcher.BeginInvoke(action);
       }
       else
       {
-        Action action = () => NavigationService.Navigate(new Uri("/Views/Main/UploadProjectLoginPage.xaml", UriKind.Relative));
+        Action action = () => NavigationService.Navigate(new Uri("/Views/Service/UploadProjectLoginPage.xaml", UriKind.Relative));
         Dispatcher.BeginInvoke(action);
       }
     }

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Windows;
 using Catrobat.Core;
-using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
-using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Main;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -12,7 +10,7 @@ using Microsoft.Phone.Tasks;
 using System.Globalization;
 using Catrobat.Core.Resources;
 
-namespace Catrobat.IDEWindowsPhone.Views.Main
+namespace Catrobat.IDEWindowsPhone.Views.Service
 {
   public partial class OnlineProjectPage : PhoneApplicationPage
   {
@@ -42,7 +40,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     private void Download_Click(object sender, EventArgs e)
     {
       (sender as ApplicationBarIconButton).IsEnabled = false;
-      ServerCommunication.DownloadAndSaveProject(((OnlineProjectHeader)DataContext).DownloadUrl, downloadCallback);
+      ServerCommunication.DownloadAndSaveProject(((OnlineProjectHeader)DataContext).DownloadUrl, ((OnlineProjectHeader)DataContext).ProjectName, DownloadCallback);
 
       MessageBox.Show(MainResources.DownloadQueueMessage,
               MainResources.MessageBoxInformation, MessageBoxButton.OK);
@@ -50,17 +48,25 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
       NavigationService.GoBack();
     }
 
-    private void downloadCallback(string filename)
+    private void DownloadCallback(string filename)
     {
       CatrobatContext.GetContext().UpdateLocalProjects();
       CatrobatContext.GetContext().SetCurrentProject(filename);
 
       Dispatcher.BeginInvoke(() =>
         {
-          if (ServerCommunication.NoDownloadsPending())
+          if(filename == "")
           {
-            MessageBox.Show(MainResources.NoDownloadsPending,
-              MainResources.MessageBoxInformation, MessageBoxButton.OK);
+            // TODO: show error message
+
+          }
+          else
+          {
+            if (ServerCommunication.NoDownloadsPending())
+            {
+              MessageBox.Show(MainResources.NoDownloadsPending,
+                MainResources.MessageBoxInformation, MessageBoxButton.OK);
+            }
           }
         });
     }

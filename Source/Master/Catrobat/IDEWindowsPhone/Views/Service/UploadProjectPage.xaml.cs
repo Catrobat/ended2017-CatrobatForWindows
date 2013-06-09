@@ -6,7 +6,7 @@ using Catrobat.IDEWindowsPhone.ViewModel;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace Catrobat.IDEWindowsPhone.Views.Main
+namespace Catrobat.IDEWindowsPhone.Views.Service
 {
   public partial class UploadProjectPage : PhoneApplicationPage
   {

@@ -19,14 +19,16 @@ namespace Catrobat.Core
 
   public sealed class CatrobatContext : ICatrobatContext, INotifyPropertyChanged
   {
-    public static string PlayerActiveProjectZipPath = "ActivePlayerProject/ActiveProject.catrobat";
+    public static string PlayerActiveProjectZipPath = "ActivePlayerProject/ActiveProject.catrobat_from_ide";
     public static string LocalSettingsFilePath = "Settings/settings";
     public static string DefaultProjectPath = "default.catroid";
     public static string ProjectsPath = "Projects";
     public static string DefaultProjectName = "DefaultProject";
     public static string TempProjectImportZipPath = "Temp/ImportProjectZip";
     public static string TempProjectImportPath = "Temp/ImportProject";
+
     public static string TempPaintImagePath = "Temp/PaintImage";
+
 
     public ContextSaving ContextSaving;
     private Project _currentProject;
