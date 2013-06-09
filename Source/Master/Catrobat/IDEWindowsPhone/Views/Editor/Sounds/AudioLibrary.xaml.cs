@@ -8,11 +8,13 @@ using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using System.Collections.ObjectModel;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
 
@@ -20,7 +22,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
   public partial class AudioLibrary : PhoneApplicationPage
   {
-    private EditorViewModel editorViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Editor;
+    private EditorViewModel editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
     private Song SelectedSong;
     private ObservableCollection<SoundListItem> songs = new ObservableCollection<SoundListItem>();
     private bool _songSelected = false;

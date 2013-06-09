@@ -1,0 +1,66 @@
+﻿<phone:PhoneApplicationPage 
+  x:Class="Catrobat.IDEWindowsPhone.Views.Settings.SettingsView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+  xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  FontFamily="{StaticResource PhoneFontFamilyNormal}"
+  FontSize="{StaticResource PhoneFontSizeNormal}"
+  Foreground="{StaticResource PhoneForegroundBrush}"
+  SupportedOrientations="Portrait" Orientation="Portrait"
+  mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+  shell:SystemTray.IsVisible="True"
+  DataContext="{Binding Settings, Source={StaticResource Locator}}">
+
+  <Grid x:Name="LayoutRoot" Background="Transparent">
+    <StackPanel>
+      <Button Command="{Binding ShowLanguageSettingsCommand}">
+        <Button.Content>
+          <StackPanel Name="stackPanelSettingsLanguage" Margin="10 0 10 10" >
+            <TextBlock Grid.Row="0" Margin="0 0 10 10" Text="{Binding Path=Main.ListLanguage, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}" />
+            <TextBlock Grid.Row="1" Margin="0 -5 10 10" Text="{Binding CurrentCulture.NativeName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+          </StackPanel>
+        </Button.Content>
+      </Button>
+      <Button Command="{Binding ShowDesignSettingsCommand}">
+        <Button.Content>
+          <Grid Margin="0 0 0 0" Width="470">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="1*" />
+              <ColumnDefinition Width="1.5*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Width="150" Height="150" x:Name="imgDesign" Margin="10" Source="{Binding ActiveTheme.CroppedBackground}" />
+            <Grid Grid.Column="1" Margin="22">
+              <Grid Margin="10">
+                <Grid.RowDefinitions>
+                  <RowDefinition />
+                  <RowDefinition />
+                  <RowDefinition />
+                  <RowDefinition />
+                  <RowDefinition />
+                  <RowDefinition />
+                  <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition />
+                  <ColumnDefinition />
+                  <ColumnDefinition />
+                  <ColumnDefinition />
+                  <ColumnDefinition />
+                  <ColumnDefinition />
+                  <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding ActiveTheme.AccentColor1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
+                <Grid Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding ActiveTheme.AccentColor2}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
+                <Grid Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding ActiveTheme.AccentColor3}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Button.Content>
+      </Button>
+      <CheckBox Name="checkBoxShowMemory" Content="{Binding Path=Main.DEBUGShowMemory, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding ShowMemoryMonitor, Mode=TwoWay}" />
+    </StackPanel>
+  </Grid>
+</phone:PhoneApplicationPage>

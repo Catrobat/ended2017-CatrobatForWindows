@@ -33,43 +33,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
     public CatrobatContext Context { get; set; }
 
-    public CultureInfo CurrentCulture
-    {
-      get
-      {
-        return Thread.CurrentThread.CurrentCulture;
-      }
-
-      set
-      {
-        if (Thread.CurrentThread.CurrentCulture.Equals(value))
-          return;
-
-        Thread.CurrentThread.CurrentCulture = value;
-        Thread.CurrentThread.CurrentUICulture = value;
-
-        ((LocalizedStrings)Application.Current.Resources["LocalizedStrings"]).Reset();
-        RaisePropertyChanged("CurrentCulture");
-        RaisePropertyChanged("CurrentCultureName");
-      }
-    }
-
-    public string CurrentCultureName
-    {
-      get
-      {
-        return CurrentCulture.NativeName;
-      }
-    }
-
-    public ObservableCollection<CultureInfo> AvailableCultures
-    {
-      get
-      {
-        return LanguageHelper.SupportedLanguages;
-      }
-    }
-
     public Project CurrentProject { get { return _catrobatContext.CurrentProject; } }
 
     public ProjectHeader CurrentProjectHeader { get { return _catrobatContext.CurrentProject.Header; } }
@@ -81,13 +44,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       get
       {
         return CurrentProject.ProjectScreenshot as ImageSource;
-
-        //using (var memoryStream = new MemoryStream(CurrentProject.ProjectScreenshot, 0, CurrentProject.ProjectScreenshot.Length))
-        //{
-        //  var bitmapImage = new BitmapImage();
-        //  bitmapImage.SetSource(memoryStream);
-        //  return bitmapImage;
-        //}
       }
     }
 

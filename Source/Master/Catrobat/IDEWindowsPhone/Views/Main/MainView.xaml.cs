@@ -2,7 +2,9 @@
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.Views.Editor;
 using KBB.Mobile.Controls;
 using Microsoft.Phone.Controls;
 using System;
@@ -77,7 +79,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void buttonEditCurrentProject_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/Views/Editor/EditorView.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(EditorView));
     }
 
     private void buttonCreateNewProject_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -87,14 +89,15 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void buttonSettings_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/Views/Main/SettingsPage.xaml", UriKind.Relative));
+      NavigationService.Navigate(new Uri("/Views/Settings/SettingsView.xaml", UriKind.Relative));
     }
 
     private void OnlineProject_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       if (LongListSelectorOnlineProjects.SelectedItem != null)
       {
-        NavigationService.Navigate(new Uri("/Views/Main/OnlineProjectPage.xaml", UriKind.Relative));
+        _mainViewModel.SelectedOnlineProject = LongListSelectorOnlineProjects.SelectedItem as OnlineProjectHeader;
+        NavigationService.Navigate(new Uri("/Views/Service/OnlineProjectPage.xaml", UriKind.Relative));
       }
     }
 
@@ -124,12 +127,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     {
       if (registered)
       {
-        Action action = () => NavigationService.Navigate(new Uri("/Views/Main/UploadProjectPage.xaml", UriKind.Relative));
+        Action action = () => NavigationService.Navigate(new Uri("/Views/Service/UploadProjectPage.xaml", UriKind.Relative));
         Dispatcher.BeginInvoke(action);
       }
       else
       {
-        Action action = () => NavigationService.Navigate(new Uri("/Views/Main/UploadProjectLoginPage.xaml", UriKind.Relative));
+        Action action = () => NavigationService.Navigate(new Uri("/Views/Service/UploadProjectLoginPage.xaml", UriKind.Relative));
         Dispatcher.BeginInvoke(action);
       }
     }

@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Ioc;
+﻿using Catrobat.IDEWindowsPhone.ViewModel.Settings;
+using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel
@@ -16,6 +17,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       SimpleIoc.Default.Register<UploadProjectViewModel>();
       SimpleIoc.Default.Register<UploadProjectLoginViewModel>();
       SimpleIoc.Default.Register<SoundRecorderViewModel>();
+      SimpleIoc.Default.Register<SettingsViewModel>();
     }
 
 
@@ -93,6 +95,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       get
       {
         return ServiceLocator.Current.GetInstance<SoundRecorderViewModel>();
+      }
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+    "CA1822:MarkMembersAsStatic",
+    Justification = "This non-static member is needed for data binding purposes.")]
+    public SettingsViewModel Settings
+    {
+      get
+      {
+        return ServiceLocator.Current.GetInstance<SettingsViewModel>();
       }
     }
 

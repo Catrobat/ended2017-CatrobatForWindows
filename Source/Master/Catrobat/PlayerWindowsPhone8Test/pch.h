@@ -7,3 +7,5 @@
 #include <DirectXMath.h>
 #include <memory>
 #include <agile.h>
+
+#define EPSILON 0.001f

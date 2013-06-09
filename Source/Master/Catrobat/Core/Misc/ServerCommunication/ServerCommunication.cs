@@ -118,9 +118,9 @@ namespace Catrobat.Core.Misc.ServerCommunication
       _iServerCommunication.LoadOnlineProjects(append, filterText, offset, callback);
     }
 
-    public static void DownloadAndSaveProject(string downloadUrl, DownloadAndSaveProjectEvent callback)
+    public static void DownloadAndSaveProject(string downloadUrl, string projectName, DownloadAndSaveProjectEvent callback)
     {
-      _downloadCounter += _iServerCommunication.DownloadAndSaveProject(downloadUrl, callback);
+      _downloadCounter += _iServerCommunication.DownloadAndSaveProject(downloadUrl, projectName, callback);
     }
 
     public static void UploadProject(string projectName, string projectDescription, string userEmail,

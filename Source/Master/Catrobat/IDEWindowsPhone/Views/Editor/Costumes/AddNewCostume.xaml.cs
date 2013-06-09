@@ -12,12 +12,13 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 {
   public partial class AddNewCostume : PhoneApplicationPage
   {
-    private EditorViewModel editorViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Editor;
+    private EditorViewModel editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
     //private ApplicationBarIconButton btnSave;
     private CostumeBuilder builder;
     private bool isLoadComplete = false;

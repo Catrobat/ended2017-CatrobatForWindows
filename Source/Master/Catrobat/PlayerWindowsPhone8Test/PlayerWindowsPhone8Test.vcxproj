@@ -206,6 +206,7 @@
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\WhenScript.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParser.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="TestHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseObject.cpp" />
@@ -264,10 +265,12 @@
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\WaitBrick.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\WhenScript.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParser.cpp" />
-    <ClCompile Include="unittest1.cpp" />
+    <ClCompile Include="LookBricks.cpp" />
+	<ClCompile Include="MovementBricks.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TestHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="CppUnitTestFramework, Version=11.0" />

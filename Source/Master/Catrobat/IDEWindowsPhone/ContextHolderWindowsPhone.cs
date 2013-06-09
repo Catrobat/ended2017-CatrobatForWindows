@@ -1,11 +1,13 @@
 ﻿using Catrobat.Core;
 using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using IDEWindowsPhone;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone
 {
@@ -13,7 +15,7 @@ namespace Catrobat.IDEWindowsPhone
   {
     public CatrobatContext GetContext()
     {
-      MainViewModel mainViewModel = (App.Current.Resources["Locator"] as ViewModelLocator).Main;
+      MainViewModel mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
       return mainViewModel.Context;
     }
   }

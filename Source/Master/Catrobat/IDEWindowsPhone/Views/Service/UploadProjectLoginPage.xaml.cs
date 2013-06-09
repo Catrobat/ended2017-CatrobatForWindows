@@ -6,7 +6,7 @@ using Catrobat.IDEWindowsPhone.ViewModel;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace Catrobat.IDEWindowsPhone.Views.Main
+namespace Catrobat.IDEWindowsPhone.Views.Service
 {
   public partial class UploadProjectLoginPage : PhoneApplicationPage
   {
@@ -51,7 +51,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void navigationCallback()
     {
-      Action action = () => NavigationService.Navigate(new Uri("/Views/Main/UploadProjectPage.xaml", UriKind.Relative));
+      Action action = () => NavigationService.Navigate(new Uri("/Views/Service/UploadProjectPage.xaml", UriKind.Relative));
       Dispatcher.BeginInvoke(action);
     }
 

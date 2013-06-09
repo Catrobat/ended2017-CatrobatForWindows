@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-  x:Class="Catrobat.IDEWindowsPhone.Views.Main.SettingsLanguageChooser"
+  x:Class="Catrobat.IDEWindowsPhone.Views.Settings.SettingsLanguageView"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -12,7 +12,7 @@
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
   shell:SystemTray.IsVisible="True"
-  DataContext="{Binding Main, Source={StaticResource Locator}}">
+  DataContext="{Binding Settings, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <Grid.RowDefinitions>

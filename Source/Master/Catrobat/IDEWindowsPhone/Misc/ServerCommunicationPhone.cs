@@ -58,42 +58,57 @@ namespace Catrobat.IDEWindowsPhone.Misc
               callback(list, append);
             }
           });
-      
+
     }
 
-    public int DownloadAndSaveProject(string downloadUrl, ServerCommunication.DownloadAndSaveProjectEvent callback)
+    public int DownloadAndSaveProject(string downloadUrl, string projectName, ServerCommunication.DownloadAndSaveProjectEvent callback)
     {
-      int[] downloadCounterChange = {0};
+
+      int[] downloadCounterChange = { 0 };
 
       WebClient wc = new WebClient();
       wc.OpenReadCompleted += ((s, args) =>
       {
-        string filename = System.IO.Path.GetFileNameWithoutExtension(downloadUrl);
-        List<string> folders;
-        using (IStorage storeage = StorageSystem.GetStorage())
+        try
         {
-          folders = storeage.GetDirectoryNames(CatrobatContext.ProjectsPath + "/*").ToList<string>();
-        }
-        string countString = "";
-        int counter = 1;
-        while (folders.IndexOf(filename + countString) >= 0)
-        {
-          countString = " " + counter++.ToString();
-        }
-        filename = filename + countString;
-        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(args.Result, CatrobatContext.ProjectsPath + "/" + filename);
+          //string filename = System.IO.Path.GetFileNameWithoutExtension(downloadUrl);
+          List<string> folders;
+          using (IStorage storeage = StorageSystem.GetStorage())
+          {
+            folders = storeage.GetDirectoryNames(CatrobatContext.ProjectsPath).ToList<string>();
+          }
+          string countString = "";
+          int counter = 1;
+          while (folders.IndexOf(projectName + countString) >= 0)
+          {
+            countString = " " + counter++.ToString();
+          }
+          projectName = projectName + countString;
 
-        downloadCounterChange[0]--;
 
-        if (callback != null)
+          CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(args.Result, CatrobatContext.ProjectsPath + "/" + projectName);
+
+          downloadCounterChange[0]--;
+
+          if (callback != null)
+          {
+            callback(projectName);
+          }
+        }
+        catch (Exception)
         {
-          callback(filename);
+          if (callback != null)
+          {
+            callback("");
+          }
         }
       });
       downloadCounterChange[0]++;
       wc.OpenReadAsync(new System.Uri(downloadUrl, System.UriKind.RelativeOrAbsolute));
 
       return downloadCounterChange[0];
+
+
     }
   }
 }
