@@ -391,7 +391,6 @@ namespace PlayerWindowsPhone8Test
 			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
 			brick->Execute();
 			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
-			Assert::IsTrue(false);
         }
 
 		TEST_METHOD(LookBricks_SetGhostEffectBrick_CheckForOverflow)
