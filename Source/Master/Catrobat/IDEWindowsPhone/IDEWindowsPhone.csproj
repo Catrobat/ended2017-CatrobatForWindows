@@ -215,13 +215,13 @@
     <Compile Include="Views\Editor\Sounds\SoundNameChooserView.xaml.cs">
       <DependentUpon>SoundNameChooserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Sounds\Recorder.cs" />
-    <Compile Include="Views\Editor\Sounds\SoundListItem.cs" />
+    <Compile Include="Misc\Sounds\Recorder.cs" />
+    <Compile Include="Misc\Sounds\SoundListItem.cs" />
     <Compile Include="Views\Editor\Sounds\SoundRecorderView.xaml.cs">
       <DependentUpon>SoundRecorderView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Sounds\WaveHeaderWriter.cs" />
-    <Compile Include="Views\Editor\Sounds\XNAFrameworkDispatcherService.cs" />
+    <Compile Include="Misc\Sounds\WaveHeaderWriter.cs" />
+    <Compile Include="Misc\Sounds\XNAFrameworkDispatcherService.cs" />
     <Compile Include="Views\Editor\Sprites\AddNewSprite.xaml.cs">
       <DependentUpon>AddNewSprite.xaml</DependentUpon>
     </Compile>

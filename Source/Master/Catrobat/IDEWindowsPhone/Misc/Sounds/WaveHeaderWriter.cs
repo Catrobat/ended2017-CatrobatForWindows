@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
+namespace Catrobat.IDEWindowsPhone.Misc.Sounds
 {
   public class WaveHeaderWriter
   {

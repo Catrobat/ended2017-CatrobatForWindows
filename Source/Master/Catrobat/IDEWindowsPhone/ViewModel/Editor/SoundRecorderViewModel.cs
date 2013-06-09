@@ -11,6 +11,8 @@ using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Annotations;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Misc.Sound;
+using Catrobat.IDEWindowsPhone.Misc.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using GalaSoft.MvvmLight;
 using System.ComponentModel;

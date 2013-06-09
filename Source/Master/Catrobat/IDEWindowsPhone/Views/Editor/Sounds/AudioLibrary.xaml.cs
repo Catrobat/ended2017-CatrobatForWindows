@@ -8,6 +8,8 @@ using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Misc.Sound;
+using Catrobat.IDEWindowsPhone.Misc.Sounds;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using IDEWindowsPhone;
