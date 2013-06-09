@@ -2,7 +2,9 @@
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.Views.Editor;
 using KBB.Mobile.Controls;
 using Microsoft.Phone.Controls;
 using System;
@@ -77,7 +79,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void buttonEditCurrentProject_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/Views/Editor/EditorView.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(EditorView));
     }
 
     private void buttonCreateNewProject_Click(object sender, System.Windows.RoutedEventArgs e)

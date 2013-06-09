@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Ioc;
+﻿using Catrobat.IDEWindowsPhone.ViewModel.Settings;
+using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel

@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;

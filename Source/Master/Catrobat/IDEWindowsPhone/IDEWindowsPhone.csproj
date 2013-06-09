@@ -150,6 +150,7 @@
     <Compile Include="Converters\NullColorConverter.cs" />
     <Compile Include="Converters\SecondStringMillisecondConverter.cs" />
     <Compile Include="Misc\AssociationUriMapper.cs" />
+    <Compile Include="Misc\Navigation.cs" />
     <Compile Include="Misc\PaintLauncher.cs" />
     <Compile Include="Misc\CostumeBuilder.cs" />
     <Compile Include="Misc\CulturePhone.cs" />

@@ -2,31 +2,19 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
-using System.Windows.Navigation;
-using System.Windows.Threading;
-using Catrobat.Core;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Sounds;
-using Catrobat.Core.Storage;
-using Catrobat.IDEWindowsPhone.Annotations;
 using Catrobat.IDEWindowsPhone.Themes;
-using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using GalaSoft.MvvmLight;
 using System.ComponentModel;
 using GalaSoft.MvvmLight.Command;
 using IDEWindowsPhone;
 using KBB.Mobile.Controls;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
-using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.IDECommon.Resources;
 
-namespace Catrobat.IDEWindowsPhone.ViewModel
+namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
 {
   public class SettingsViewModel : ViewModelBase
   {
