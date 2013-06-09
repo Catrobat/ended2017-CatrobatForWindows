@@ -24,7 +24,6 @@ namespace PlayerWindowsPhone8Test
     public:
         TEST_METHOD(LookBricks_ChangeGhostEffectBrick_CheckFor100Percent)
         {
-            // TODO: Your test code here
 			string spriteReference = "";
 			Object *object = new Object("TestObject");
 			StartScript *script = new StartScript(spriteReference, object);
@@ -38,7 +37,6 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(LookBricks_ChangeGhostEffectBrick_CheckForZeroPercent)
         {
-            // TODO: Your test code here
 			string spriteReference = "";
 			Object *object = new Object("TestObject");
 			StartScript *script = new StartScript(spriteReference, object);
@@ -52,7 +50,6 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(LookBricks_ChangeGhostEffectBrick_CheckForOverflow)
         {
-            // TODO: Your test code here
 			string spriteReference = "";
 			Object *object = new Object("TestObject");
 			StartScript *script = new StartScript(spriteReference, object);
@@ -66,7 +63,6 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(LookBricks_ChangeGhostEffectBrick_CheckFor50Percent)
         {
-            // TODO: Your test code here
 			string spriteReference = "";
 			Object *object = new Object("TestObject");
 			StartScript *script = new StartScript(spriteReference, object);
@@ -80,7 +76,6 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(LookBricks_ChangeGhostEffectBrick_CheckForVariousChanges)
         {
-            // TODO: Your test code here
 			string spriteReference = "";
 			Object *object = new Object("TestObject");
 			StartScript *script = new StartScript(spriteReference, object);
@@ -104,7 +99,6 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(LookBricks_ChangeGhostEffectBrick_CheckForUnderflow)
         {
-            // TODO: Your test code here
 			string spriteReference = "";
 			Object *object = new Object("TestObject");
 			StartScript *script = new StartScript(spriteReference, object);
@@ -118,7 +112,6 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(LookBricks_ChangeSizeByBrickTest_CheckForZero)
         {
-            // TODO: Your test code here
 			string spriteReference = "";
 			Object *object = new Object("TestObject");
 			StartScript *script = new StartScript(spriteReference, object);
@@ -132,7 +125,6 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(LookBricks_ChangeSizeByBrickTest_CheckForUnderflow)
         {
-            // TODO: Your test code here
 			string spriteReference = "";
 			Object *object = new Object("TestObject");
 			StartScript *script = new StartScript(spriteReference, object);
@@ -146,7 +138,6 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(LookBricks_ChangeSizeByBrickTest_CheckFor8)
         {
-            // TODO: Your test code here
 			string spriteReference = "";
 			Object *object = new Object("TestObject");
 			StartScript *script = new StartScript(spriteReference, object);
@@ -160,7 +151,6 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(LookBricks_ChangeSizeByBrickTest_CheckFor03)
         {
-            // TODO: Your test code here
 			string spriteReference = "";
 			Object *object = new Object("TestObject");
 			StartScript *script = new StartScript(spriteReference, object);
@@ -174,7 +164,6 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(LookBricks_ChangeSizeByBrickTest_CheckForVariousChanges)
         {
-            // TODO: Your test code here
 			string spriteReference = "";
 			Object *object = new Object("TestObject");
 			StartScript *script = new StartScript(spriteReference, object);
@@ -208,8 +197,79 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(LookBricks_CostumeBrick)
         {
-            // TODO: Your test code here
-			Assert::IsTrue(false);
+			string spriteReference = "";
+			string costumeDataReference = "";
+
+			Look *look1 = new Look("test1", "testName1");
+			Look *look2 = new Look("test2", "testName2");
+			Look *look3 = new Look("test3", "testName3");
+			Look *look4 = new Look("test4", "testName4");
+			Look *look5 = new Look("test5", "testName5");
+
+			Object *object = new Object("TestObject");
+			object->addLook(look1);
+			object->addLook(look2);
+			object->addLook(look3);
+			object->addLook(look4);
+			object->addLook(look5);
+
+			StartScript *script = new StartScript(spriteReference, object);
+
+			Assert::AreEqual(object->GetLookCount(), 5);
+
+			CostumeBrick *brick = new CostumeBrick(spriteReference, script);
+			brick->Execute();
+			Assert::AreEqual(object->GetLook(), 0);
+			Assert::IsTrue(object->GetCurrentLook() == look1);
+			Assert::IsFalse(object->GetCurrentLook() == look2);
+			Assert::IsFalse(object->GetCurrentLook() == look3);
+			Assert::IsFalse(object->GetCurrentLook() == look4);
+			Assert::IsFalse(object->GetCurrentLook() == look5);
+
+			brick = new CostumeBrick(spriteReference, costumeDataReference, 0, script);
+			brick->Execute();
+			Assert::AreEqual(object->GetLook(), 0);
+			Assert::IsTrue(object->GetCurrentLook() == look1);
+			Assert::IsFalse(object->GetCurrentLook() == look2);
+			Assert::IsFalse(object->GetCurrentLook() == look3);
+			Assert::IsFalse(object->GetCurrentLook() == look4);
+			Assert::IsFalse(object->GetCurrentLook() == look5);
+
+			brick = new CostumeBrick(spriteReference, costumeDataReference, 1, script);
+			brick->Execute();
+			Assert::AreEqual(object->GetLook(), 1);
+			Assert::IsFalse(object->GetCurrentLook() == look1);
+			Assert::IsTrue(object->GetCurrentLook() == look2);
+			Assert::IsFalse(object->GetCurrentLook() == look3);
+			Assert::IsFalse(object->GetCurrentLook() == look4);
+			Assert::IsFalse(object->GetCurrentLook() == look5);
+
+			brick = new CostumeBrick(spriteReference, costumeDataReference, 2, script);
+			brick->Execute();
+			Assert::AreEqual(object->GetLook(), 2);
+			Assert::IsFalse(object->GetCurrentLook() == look1);
+			Assert::IsFalse(object->GetCurrentLook() == look2);
+			Assert::IsTrue(object->GetCurrentLook() == look3);
+			Assert::IsFalse(object->GetCurrentLook() == look4);
+			Assert::IsFalse(object->GetCurrentLook() == look5);
+
+			brick = new CostumeBrick(spriteReference, costumeDataReference, 3, script);
+			brick->Execute();
+			Assert::AreEqual(object->GetLook(), 3);
+			Assert::IsFalse(object->GetCurrentLook() == look1);
+			Assert::IsFalse(object->GetCurrentLook() == look2);
+			Assert::IsFalse(object->GetCurrentLook() == look3);
+			Assert::IsTrue(object->GetCurrentLook() == look4);
+			Assert::IsFalse(object->GetCurrentLook() == look5);
+
+			brick = new CostumeBrick(spriteReference, costumeDataReference, 4, script);
+			brick->Execute();
+			Assert::AreEqual(object->GetLook(), 4);
+			Assert::IsFalse(object->GetCurrentLook() == look1);
+			Assert::IsFalse(object->GetCurrentLook() == look2);
+			Assert::IsFalse(object->GetCurrentLook() == look3);
+			Assert::IsFalse(object->GetCurrentLook() == look4);
+			Assert::IsTrue(object->GetCurrentLook() == look5);
         }
 
 		TEST_METHOD(LookBricks_HideBrick)
