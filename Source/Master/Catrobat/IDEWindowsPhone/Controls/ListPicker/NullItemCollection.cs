@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Sounds;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDEWindowsPhone.Annotations;
 
 namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
 {
@@ -155,7 +157,16 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
 
     #region Implementation of INotifyPropertyChanged
 
+    #region PropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
+
+    [NotifyPropertyChangedInvocator]
+    protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+    {
+      PropertyChangedEventHandler handler = PropertyChanged;
+      if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+    }
+    #endregion
 
     #endregion
   }

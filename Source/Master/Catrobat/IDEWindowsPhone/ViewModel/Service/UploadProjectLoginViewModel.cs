@@ -10,7 +10,7 @@ using Catrobat.IDECommon.Resources.Main;
 using System.Windows;
 using System;
 
-namespace Catrobat.IDEWindowsPhone.ViewModel
+namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 {
   public class UploadProjectLoginViewModel : ViewModelBase, INotifyPropertyChanged
   {

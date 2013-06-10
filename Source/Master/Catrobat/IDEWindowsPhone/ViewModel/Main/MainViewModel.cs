@@ -1,32 +1,22 @@
-﻿using System.IO;
-using System.Windows.Interop;
-using System.Windows.Navigation;
-using Catrobat.Core;
-using Catrobat.Core.Misc;
+﻿using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
-using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Main;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
-using System.Windows.Media.Imaging;
 using System.ComponentModel;
 using System;
-using System.Threading;
-using System.Globalization;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
-using IDEWindowsPhone;
 using System.Windows.Media;
-using Microsoft.Phone.Controls;
 
-namespace Catrobat.IDEWindowsPhone.ViewModel
+namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 {
   public class MainViewModel : ViewModelBase, INotifyPropertyChanged
   {

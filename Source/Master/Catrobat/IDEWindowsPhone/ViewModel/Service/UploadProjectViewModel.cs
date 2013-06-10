@@ -1,5 +1,4 @@
 ﻿using Catrobat.Core;
-using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.IDECommon.Resources.Main;
 using GalaSoft.MvvmLight;
@@ -8,11 +7,11 @@ using System.Threading;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace Catrobat.IDEWindowsPhone.ViewModel
+namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 {
   public class UploadProjectViewModel : ViewModelBase, INotifyPropertyChanged
   {
-    private readonly ICatrobatContext catrobatContext;
+    private readonly ICatrobatContext _catrobatContext;
     public new event PropertyChangedEventHandler PropertyChanged;
 
     private string _projectName;
@@ -71,16 +70,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       UploadCommand = new RelayCommand(Upload);
 
       if (IsInDesignMode)
-        catrobatContext = new CatrobatContextDesign();
+        _catrobatContext = new CatrobatContextDesign();
       else
-        catrobatContext = CatrobatContext.GetContext();
+        _catrobatContext = CatrobatContext.GetContext();
 
-      _projectName = catrobatContext.CurrentProject.ProjectName;
+      _projectName = _catrobatContext.CurrentProject.ProjectName;
     }
 
     private void Upload()
     {
-      catrobatContext.CurrentProject.ProjectName = _projectName;
+      _catrobatContext.CurrentProject.ProjectName = _projectName;
 
       ServerCommunication.UploadProject(_projectName, _projectDescription,
         CatrobatContext.GetContext().CurrentUserEmail,

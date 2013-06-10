@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
+using Catrobat.IDEWindowsPhone.Annotations;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
@@ -61,8 +63,6 @@ namespace Catrobat.IDEWindowsPhone.Controls.StatusIcons
       });
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
-
     #region TransformationThread
 
     public void StartTransformationThread()
@@ -85,10 +85,15 @@ namespace Catrobat.IDEWindowsPhone.Controls.StatusIcons
 
     #endregion
 
-    protected virtual void OnPropertyChanged(string propertyName)
+    #region PropertyChanged
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    [NotifyPropertyChangedInvocator]
+    protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
     {
       PropertyChangedEventHandler handler = PropertyChanged;
       if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
     }
+    #endregion
   }
 }
