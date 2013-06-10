@@ -1,14 +1,15 @@
-﻿using Catrobat.Core;
+﻿using System.Runtime.CompilerServices;
+using Catrobat.Core;
+using Catrobat.IDEWindowsPhone.Annotations;
 using GalaSoft.MvvmLight;
 using System.ComponentModel;
 using GalaSoft.MvvmLight.Command;
 
-namespace Catrobat.IDEWindowsPhone.ViewModel
+namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 {
   public class AddNewProjectViewModel : ViewModelBase, INotifyPropertyChanged
   {
     private readonly ICatrobatContext catrobatContext;
-    public new event PropertyChangedEventHandler PropertyChanged;
 
     private string _projectName;
 
@@ -26,7 +27,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
           if (this.PropertyChanged != null)
           {
-            PropertyChanged(this, new PropertyChangedEventArgs("ProjectName"));
+            RaisePropertyChanged();
           }
         }
       }
@@ -56,5 +57,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
       ProjectName = "";
     }
+
+    #region PropertyChanged
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    [NotifyPropertyChangedInvocator]
+    protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+    {
+      PropertyChangedEventHandler handler = PropertyChanged;
+      if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+    }
+    #endregion
   }
 }

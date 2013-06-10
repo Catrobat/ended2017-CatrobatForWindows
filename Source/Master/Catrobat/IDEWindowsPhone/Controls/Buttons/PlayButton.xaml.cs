@@ -1,7 +1,9 @@
-﻿using System.Windows;
+﻿using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.ComponentModel;
+using Catrobat.IDEWindowsPhone.Annotations;
 
 namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 {
@@ -44,7 +46,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
       {
         this.SetValue(PlayButtonStateProperty, value);
 
-        this.OnPropertyChanged(new PropertyChangedEventArgs("State"));
+        this.RaisePropertyChanged();
       }
     }
 
@@ -87,11 +89,15 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
         Click.Invoke(this, new RoutedEventArgs());
     }
 
+    #region PropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged(PropertyChangedEventArgs e)
+    [NotifyPropertyChangedInvocator]
+
+    protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
     {
-      if (this.PropertyChanged != null)
-        this.PropertyChanged(this, e);
+      PropertyChangedEventHandler handler = PropertyChanged;
+      if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
     }
+    #endregion
   }
 }

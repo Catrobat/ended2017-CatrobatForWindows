@@ -4,7 +4,10 @@ using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Catrobat.IDEWindowsPhone.Views.Editor;
+using Catrobat.IDEWindowsPhone.Views.Service;
+using Catrobat.IDEWindowsPhone.Views.Settings;
 using KBB.Mobile.Controls;
 using Microsoft.Phone.Controls;
 using System;
@@ -84,12 +87,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void buttonCreateNewProject_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/Views/Main/AddNewProject.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(AddNewProject));
     }
 
     private void buttonSettings_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("/Views/Settings/SettingsView.xaml", UriKind.Relative));
+      Navigation.NavigateTo(typeof(SettingsView));
     }
 
     private void OnlineProject_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -97,7 +100,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
       if (LongListSelectorOnlineProjects.SelectedItem != null)
       {
         _mainViewModel.SelectedOnlineProject = LongListSelectorOnlineProjects.SelectedItem as OnlineProjectHeader;
-        NavigationService.Navigate(new Uri("/Views/Service/OnlineProjectPage.xaml", UriKind.Relative));
+        Navigation.NavigateTo(typeof(OnlineProjectPage));
       }
     }
 
@@ -127,12 +130,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     {
       if (registered)
       {
-        Action action = () => NavigationService.Navigate(new Uri("/Views/Service/UploadProjectPage.xaml", UriKind.Relative));
+        Action action = () => Navigation.NavigateTo(typeof(UploadProjectPage));
         Dispatcher.BeginInvoke(action);
       }
       else
       {
-        Action action = () => NavigationService.Navigate(new Uri("/Views/Service/UploadProjectLoginPage.xaml", UriKind.Relative));
+        Action action = () => Navigation.NavigateTo(typeof(UploadProjectLoginPage)); ;
+        
         Dispatcher.BeginInvoke(action);
       }
     }

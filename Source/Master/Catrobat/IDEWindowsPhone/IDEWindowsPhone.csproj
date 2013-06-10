@@ -215,16 +215,13 @@
     <Compile Include="Views\Editor\Sounds\SoundNameChooserView.xaml.cs">
       <DependentUpon>SoundNameChooserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Sounds\Recorder.cs" />
-    <Compile Include="Views\Editor\Sounds\RecorderLauncher_Old.xaml.cs">
-      <DependentUpon>RecorderLauncher_Old.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Editor\Sounds\SoundListItem.cs" />
+    <Compile Include="Misc\Sounds\Recorder.cs" />
+    <Compile Include="Misc\Sounds\SoundListItem.cs" />
     <Compile Include="Views\Editor\Sounds\SoundRecorderView.xaml.cs">
       <DependentUpon>SoundRecorderView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Sounds\WaveHeaderWriter.cs" />
-    <Compile Include="Views\Editor\Sounds\XNAFrameworkDispatcherService.cs" />
+    <Compile Include="Misc\Sounds\WaveHeaderWriter.cs" />
+    <Compile Include="Misc\Sounds\XNAFrameworkDispatcherService.cs" />
     <Compile Include="Views\Editor\Sprites\AddNewSprite.xaml.cs">
       <DependentUpon>AddNewSprite.xaml</DependentUpon>
     </Compile>
@@ -382,10 +379,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Editor\Sounds\SoundNameChooserView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Editor\Sounds\RecorderLauncher_Old.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -592,8 +585,6 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Editor\Sounds\Recordericons\rec.png" />
-    <Content Include="Views\Editor\Sounds\Recordericons\stop.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

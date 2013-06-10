@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Themes;
+using Catrobat.IDEWindowsPhone.Views.Settings;
 using GalaSoft.MvvmLight;
 using System.ComponentModel;
 using GalaSoft.MvvmLight.Command;
@@ -52,23 +54,23 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
 
     private void ShowDesignSettingsAction()
     {
-       NavigateTo("/Views/Settings/SettingsThemeView.xaml");
+      Navigation.NavigateTo(typeof(SettingsThemeView));
     }
 
     private void ShowBrickSettingsAction()
     {
-      NavigateTo("/Views/Settings/SettingsBrickView.xaml");
+      Navigation.NavigateTo(typeof(SettingsBrickView));
     }
 
     private void ShowLanguageSettingsAction()
     {
-      NavigateTo("/Views/Settings/SettingsLanguageView.xaml");
+      Navigation.NavigateTo(typeof(SettingsLanguageView));
     }
 
     private void ActiveThemeChangedAction(Theme newTheme)
     {
       ActiveTheme = newTheme;
-      NavigateBack();
+      Navigation.NavigateBack();
     }
 
     #endregion
@@ -158,7 +160,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
 
     private void ThemeChooserOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
     {
-      if(propertyChangedEventArgs.PropertyName == "SelectedTheme")
+      if (propertyChangedEventArgs.PropertyName == "SelectedTheme")
       {
         RaisePropertyChanged("ActiveTheme");
       }
@@ -169,24 +171,5 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
 
       base.Cleanup();
     }
-
-    #region Navigation
-
-    private void NavigateTo(string path)
-    {
-      ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri(path, UriKind.Relative));
-    }
-
-    private void NavigateBack()
-    {
-      ((PhoneApplicationFrame)Application.Current.RootVisual).GoBack();
-    }
-
-    private void RemoveNavigationBackEntry()
-    {
-      ((PhoneApplicationFrame)Application.Current.RootVisual).RemoveBackEntry();
-    }
-
-    #endregion
   }
 }

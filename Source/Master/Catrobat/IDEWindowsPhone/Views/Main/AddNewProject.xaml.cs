@@ -2,7 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using Catrobat.IDECommon.Resources.Main;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -31,12 +33,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     {
       _viewModel.SaveCommand.Execute(sender);
 
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void CancelButton_Click(object sender, EventArgs e)
     {
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)

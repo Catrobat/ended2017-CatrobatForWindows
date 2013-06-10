@@ -8,7 +8,9 @@ using System.Windows.Media;
 using System.Windows.Navigation;
 using Catrobat.Core.Storage;
 using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Practices.ServiceLocation;
@@ -89,7 +91,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
       // TODO: read at start like this: "NavigationContext.QueryString["XXXXX"].ToString();"
 
       ShellTile.Create(new Uri(path, UriKind.Relative), tile, true);
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void BuildApplicationBar()
@@ -103,7 +105,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
       var buttonCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
       buttonCancel.Text = EditorResources.ButtonCancel;
-      buttonCancel.Click += (sender, args) => NavigationService.GoBack();
+      buttonCancel.Click += (sender, args) => Navigation.NavigateBack();
       ApplicationBar.Buttons.Add(buttonCancel);
     }
   }

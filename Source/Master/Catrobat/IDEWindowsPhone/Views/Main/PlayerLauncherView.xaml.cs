@@ -26,7 +26,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
       if (IsNavigateBack)
-        NavigationService.GoBack();
+        Navigation.NavigateBack();
 
       base.OnNavigatedTo(e);
     }
@@ -57,7 +57,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void ProjectNotFoundMessageResult(MessageBoxResult result)
     {
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
   }
 }

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
-namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
+namespace Catrobat.IDEWindowsPhone.Misc.Sounds
 {
   class Recorder
   {

@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Xna.Framework;
 
-namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
+namespace Catrobat.IDEWindowsPhone.Misc.Sounds
 {
   public class XnaFrameworkDispatcherService : IApplicationService
   {

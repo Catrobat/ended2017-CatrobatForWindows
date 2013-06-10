@@ -159,8 +159,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
     private void LoadCostumeFailed()
     {
       Dispatcher.BeginInvoke(() => MessageBox.Show(EditorResources.MessageBoxWrongImageFormatText, EditorResources.MessageBoxWrongImageFormatHeader, MessageBoxButton.OK));
-      NavigationService.RemoveBackEntry();
-      NavigationService.GoBack();
+      Navigation.RemoveBackEntry();
+      Navigation.NavigateBack();
     }
 
     private void btnSave_Click(object sender, EventArgs e)
@@ -172,12 +172,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
     {
       Costume costume = builder.Save(txtName.Text);
       editorViewModel.SelectedSprite.Costumes.Costumes.Add(costume);
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void txtName_TextChanged(object sender, TextChangedEventArgs e)

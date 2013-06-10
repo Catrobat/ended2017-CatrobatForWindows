@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Media;
+using Catrobat.IDEWindowsPhone.Annotations;
 
 namespace Catrobat.IDEWindowsPhone.Themes
 {
@@ -30,7 +32,7 @@ namespace Catrobat.IDEWindowsPhone.Themes
 
         }
 
-        OnPropertyChanged("SelectedTheme");
+        RaisePropertyChanged();
       }
     }
 
@@ -59,13 +61,6 @@ namespace Catrobat.IDEWindowsPhone.Themes
         }
         catch { }
       }
-    }
-
-    public event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged(string property)
-    {
-      if (this.PropertyChanged != null)
-        this.PropertyChanged(this, new PropertyChangedEventArgs(property));
     }
 
     public ThemeChooser()
@@ -103,5 +98,16 @@ namespace Catrobat.IDEWindowsPhone.Themes
 
       _selectedTheme = themes[0];
     }
+
+    #region PropertyChanged
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    [NotifyPropertyChangedInvocator]
+    protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+    {
+      PropertyChangedEventHandler handler = PropertyChanged;
+      if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+    }
+    #endregion
   }
 }

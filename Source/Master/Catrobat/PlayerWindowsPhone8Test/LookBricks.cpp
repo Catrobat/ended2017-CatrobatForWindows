@@ -455,16 +455,105 @@ namespace PlayerWindowsPhone8Test
 			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
         }
 
-		TEST_METHOD(LookBricks_SetSizeToBrick)
+		TEST_METHOD(LookBricks_SetSizeToBrick_CheckForZero)
         {
-            // TODO: Your test code here
-			Assert::IsTrue(false);
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+			StartScript *script = new StartScript(spriteReference, object);
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "0");
+			SetSizeToBrick *brick = new SetSizeToBrick(spriteReference, formulaTree, script);
+
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 1.0f));
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 0.0f));
+        }
+
+		TEST_METHOD(LookBricks_SetSizeToBrick_CheckForUnderflow)
+        {
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+			StartScript *script = new StartScript(spriteReference, object);
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "-5");
+			SetSizeToBrick *brick = new SetSizeToBrick(spriteReference, formulaTree, script);
+
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 1.0f));
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 0.0f));
+        }
+
+		TEST_METHOD(LookBricks_SetSizeToBrick_CheckFor8)
+        {
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+			StartScript *script = new StartScript(spriteReference, object);
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "8");
+			SetSizeToBrick *brick = new SetSizeToBrick(spriteReference, formulaTree, script);
+
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 1.0f));
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 8.0f));
+        }
+
+		TEST_METHOD(LookBricks_SetSizeToBrick_CheckFor03)
+        {
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+			StartScript *script = new StartScript(spriteReference, object);
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "0.3");
+			SetSizeToBrick *brick = new SetSizeToBrick(spriteReference, formulaTree, script);
+
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 1.0f));
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 0.3f));
+        }
+
+		TEST_METHOD(LookBricks_SetSizeToBrick_CheckForVariousChanges)
+        {
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+			StartScript *script = new StartScript(spriteReference, object);
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "1");
+			SetSizeToBrick *brick = new SetSizeToBrick(spriteReference, formulaTree, script);
+
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 1.0f));
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 1.0f));
+
+			formulaTree = new FormulaTree("NUMBER", "-5");
+			brick = new SetSizeToBrick(spriteReference, formulaTree, script);
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 0.0f));
+
+			formulaTree = new FormulaTree("NUMBER", "3");
+			brick = new SetSizeToBrick(spriteReference, formulaTree, script);
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 3.0f));
+
+			formulaTree = new FormulaTree("NUMBER", "2.8");
+			brick = new SetSizeToBrick(spriteReference, formulaTree, script);
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 2.8f));
+
+			formulaTree = new FormulaTree("NUMBER", "1.9");
+			brick = new SetSizeToBrick(spriteReference, formulaTree, script);
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 1.9f));
         }
 
 		TEST_METHOD(LookBricks_ShowBrick)
         {
-            // TODO: Your test code here
-			Assert::IsTrue(false);
+            string spriteReference = "";
+			Object *object = new Object("TestObject");
+			StartScript *script = new StartScript(spriteReference, object);
+			HideBrick *hideBrick = new HideBrick(spriteReference, script);
+
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
+			hideBrick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 1.0f));
+
+			ShowBrick *brick = new ShowBrick(spriteReference, script);
+			brick->Execute();
+			Assert::IsTrue(TestHelper::isEqual(object->GetTransparency(), 0.0f));
         }
     };
 }

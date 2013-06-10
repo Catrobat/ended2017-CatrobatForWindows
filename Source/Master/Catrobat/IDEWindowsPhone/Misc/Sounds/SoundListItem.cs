@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Catrobat.IDEWindowsPhone.Annotations;
 using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Microsoft.Xna.Framework.Media;
 
-namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
+namespace Catrobat.IDEWindowsPhone.Misc.Sounds
 {
   public class SoundListItem : INotifyPropertyChanged
   {
@@ -19,7 +21,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
           return;
 
         this._song = value;
-        this.OnPropertyChanged(new PropertyChangedEventArgs("Song"));
+        this.RaisePropertyChanged();
       }
     }
 
@@ -36,15 +38,19 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
           return;
 
         this._state = value;
-        this.OnPropertyChanged(new PropertyChangedEventArgs("State"));
+        this.RaisePropertyChanged();
       }
     }
 
+    #region PropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged(PropertyChangedEventArgs e)
+    [NotifyPropertyChangedInvocator]
+
+    protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
     {
-      if (this.PropertyChanged != null)
-        this.PropertyChanged(this, e);
+      PropertyChangedEventHandler handler = PropertyChanged;
+      if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
     }
+    #endregion
   }
 }

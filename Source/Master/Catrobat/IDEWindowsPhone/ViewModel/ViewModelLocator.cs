@@ -1,4 +1,6 @@
-﻿using Catrobat.IDEWindowsPhone.ViewModel.Settings;
+﻿using Catrobat.IDEWindowsPhone.ViewModel.Main;
+using Catrobat.IDEWindowsPhone.ViewModel.Service;
+using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 

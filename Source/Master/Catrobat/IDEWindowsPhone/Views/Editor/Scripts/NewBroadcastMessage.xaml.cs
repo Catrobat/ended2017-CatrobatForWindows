@@ -4,6 +4,7 @@ using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
@@ -61,12 +62,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
       if (broadcastObject is BroadcastWaitBrick)
         (broadcastObject as BroadcastWaitBrick).BroadcastMessage = txtName.Text;
 
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
-      NavigationService.GoBack();
+      Navigation.NavigateBack();
     }
 
     private void txtName_TextChanged(object sender, TextChangedEventArgs e)
