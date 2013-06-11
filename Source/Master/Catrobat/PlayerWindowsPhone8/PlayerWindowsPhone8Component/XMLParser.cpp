@@ -250,7 +250,19 @@ void XMLParser::parseObjectList(xml_document<> *doc, ObjectList *objectList)
 	xml_node<> *node = objectListNode->first_node("object");
 	while (node)
 	{
-		objectList->addObject(parseObject(node));
+		xml_attribute<> *objectReference = node->first_attribute("reference");
+		if (objectReference)
+		{
+			string reference = objectReference->value();
+			reference = reference + "/";
+			xml_node<> *evaluatedReferenceNode = EvaluateString("/", reference, node);
+
+			xml_node<> *nameNode = evaluatedReferenceNode->first_node("name");
+			if (nameNode)
+				objectList->addObject(objectList->getObject(nameNode->value()));
+		}
+		else
+			objectList->addObject(parseObject(node));
 		node = node->next_sibling("object");
 	}
 }
