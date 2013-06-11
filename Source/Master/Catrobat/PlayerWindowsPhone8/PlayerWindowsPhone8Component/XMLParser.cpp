@@ -246,7 +246,6 @@ void XMLParser::parseObjectList(xml_document<> *doc, ObjectList *objectList)
 	xml_node<> *objectListNode = doc->first_node()->first_node("objectList");
 	if (!objectListNode)
 		return;
-
 	xml_node<> *node = objectListNode->first_node("object");
 	while (node)
 	{
@@ -320,7 +319,7 @@ Object *XMLParser::parseObject(xml_node<> *baseNode)
 			{
 				xml_attribute<> *soundInfoAttribute = soundListNode->first_attribute("reference");
 				if (!soundInfoAttribute)
-					continue;
+					break;
 				object->addSoundInfo(new SoundInfo(soundInfoAttribute->value()));
 				soundListNode = soundListNode->next_sibling();
 			}
@@ -1342,8 +1341,6 @@ void XMLParser::parseVariableList(xml_document<> *doc, Project *project)
 		m_project->addVariable(parseUserVariable(node));
 		node = node->next_sibling("userVariable");
 	}
-
-
 }
 
 pair<string, UserVariable*> XMLParser::parseUserVariable(xml_node<> *baseNode)
@@ -1357,9 +1354,9 @@ pair<string, UserVariable*> XMLParser::parseUserVariable(xml_node<> *baseNode)
 
 	xml_node<> *variableNode = evaluatedReferenceNode->first_node("name");
 	string name = variableNode->value();
-	variableNode = evaluatedReferenceNode->first_node("value");
-	string value = variableNode->value();
-	UserVariable *variable = new UserVariable(name, value);
+	//variableNode = evaluatedReferenceNode->first_node("value");
+	//string value = variableNode->value();
+	UserVariable *variable = new UserVariable(name, "");
 
 	return pair<string, UserVariable*>(name, variable);
 }
