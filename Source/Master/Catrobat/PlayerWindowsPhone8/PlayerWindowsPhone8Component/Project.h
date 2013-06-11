@@ -23,7 +23,6 @@ public:
 	int									platformVersion,
 	std::string							programLicense,
 	std::string							programName,
-	bool								programScreenshotManuallyTaken,
 	std::string							remixOf,
 	int									screenHeight,
 	int									screenWidth,
@@ -64,7 +63,6 @@ private:
 	int									m_platformVersion;
 	std::string							m_programLicense;
 	std::string							m_programName;
-	bool								m_programScreenshotManuallyTaken;
 	std::string							m_remixOf;
 	int									m_screenHeight;
 	int									m_screenWidth;

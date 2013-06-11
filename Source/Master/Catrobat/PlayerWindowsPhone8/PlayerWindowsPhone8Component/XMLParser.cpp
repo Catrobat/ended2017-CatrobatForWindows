@@ -112,7 +112,6 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 	int						platformVersion;
 	string					programLicense;
 	string					programName;
-	bool					programScreenshotManuallyTaken;
 	string					remixOf;
 	int						screenHeight;
 	int						screenWidth;
@@ -188,11 +187,6 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 		return NULL;
 	programName = projectInformationNode->value();
 
-	projectInformationNode = baseNode->first_node("programScreenshotManuallyTaken");
-	if (!projectInformationNode)
-		return NULL;
-	programScreenshotManuallyTaken = parseBoolean(projectInformationNode->value());
-
 	projectInformationNode = baseNode->first_node("remixOf");
 	if (!projectInformationNode)
 		return NULL;
@@ -238,7 +232,6 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 						platformVersion,
 						programLicense,
 						programName,
-						programScreenshotManuallyTaken,
 						remixOf,
 						screenHeight,
 						screenWidth, 
