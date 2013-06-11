@@ -112,7 +112,6 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 	int						platformVersion;
 	string					programLicense;
 	string					programName;
-	bool					programScreenshotManuallyTaken;
 	string					remixOf;
 	int						screenHeight;
 	int						screenWidth;
@@ -188,11 +187,6 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 		return NULL;
 	programName = projectInformationNode->value();
 
-	projectInformationNode = baseNode->first_node("programScreenshotManuallyTaken");
-	if (!projectInformationNode)
-		return NULL;
-	programScreenshotManuallyTaken = parseBoolean(projectInformationNode->value());
-
 	projectInformationNode = baseNode->first_node("remixOf");
 	if (!projectInformationNode)
 		return NULL;
@@ -238,7 +232,6 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 						platformVersion,
 						programLicense,
 						programName,
-						programScreenshotManuallyTaken,
 						remixOf,
 						screenHeight,
 						screenWidth, 
@@ -253,11 +246,22 @@ void XMLParser::parseObjectList(xml_document<> *doc, ObjectList *objectList)
 	xml_node<> *objectListNode = doc->first_node()->first_node("objectList");
 	if (!objectListNode)
 		return;
-
 	xml_node<> *node = objectListNode->first_node("object");
 	while (node)
 	{
-		objectList->addObject(parseObject(node));
+		xml_attribute<> *objectReference = node->first_attribute("reference");
+		if (objectReference)
+		{
+			string reference = objectReference->value();
+			reference = reference + "/";
+			xml_node<> *evaluatedReferenceNode = EvaluateString("/", reference, node);
+
+			xml_node<> *nameNode = evaluatedReferenceNode->first_node("name");
+			if (nameNode)
+				objectList->addObject(objectList->getObject(nameNode->value()));
+		}
+		else
+			objectList->addObject(parseObject(node));
 		node = node->next_sibling("object");
 	}
 }
@@ -315,7 +319,7 @@ Object *XMLParser::parseObject(xml_node<> *baseNode)
 			{
 				xml_attribute<> *soundInfoAttribute = soundListNode->first_attribute("reference");
 				if (!soundInfoAttribute)
-					continue;
+					break;
 				object->addSoundInfo(new SoundInfo(soundInfoAttribute->value()));
 				soundListNode = soundListNode->next_sibling();
 			}
@@ -1337,8 +1341,6 @@ void XMLParser::parseVariableList(xml_document<> *doc, Project *project)
 		m_project->addVariable(parseUserVariable(node));
 		node = node->next_sibling("userVariable");
 	}
-
-
 }
 
 pair<string, UserVariable*> XMLParser::parseUserVariable(xml_node<> *baseNode)
@@ -1352,9 +1354,9 @@ pair<string, UserVariable*> XMLParser::parseUserVariable(xml_node<> *baseNode)
 
 	xml_node<> *variableNode = evaluatedReferenceNode->first_node("name");
 	string name = variableNode->value();
-	variableNode = evaluatedReferenceNode->first_node("value");
-	string value = variableNode->value();
-	UserVariable *variable = new UserVariable(name, value);
+	//variableNode = evaluatedReferenceNode->first_node("value");
+	//string value = variableNode->value();
+	UserVariable *variable = new UserVariable(name, "");
 
 	return pair<string, UserVariable*>(name, variable);
 }
