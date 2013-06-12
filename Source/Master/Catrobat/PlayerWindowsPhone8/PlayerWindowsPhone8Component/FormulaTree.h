@@ -17,6 +17,8 @@ public:
 	void SetLeftChild(FormulaTree *leftChild);
 	void SetRightChild(FormulaTree *rightChild);
 	Type GetType();
+    FormulaTree *getLeftChild();
+    FormulaTree *getRightChild();
 	std::string Value();
 
 private:

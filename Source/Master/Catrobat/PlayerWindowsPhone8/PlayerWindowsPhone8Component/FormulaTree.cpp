@@ -24,6 +24,22 @@ void FormulaTree::SetRightChild(FormulaTree *rightChild)
 	m_rightChild = rightChild;
 }
 
+FormulaTree *FormulaTree::getLeftChild()
+{
+    if (this->m_leftChild != NULL)
+        return this->m_leftChild;
+    else
+        return NULL;
+}
+
+FormulaTree *FormulaTree::getRightChild()
+{
+    if (this->m_rightChild != NULL)
+        return this->m_rightChild;
+    else
+        return NULL;
+}
+
 Type FormulaTree::GetType()
 {
 	return m_type;

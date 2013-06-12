@@ -2,6 +2,7 @@
 #include "Interpreter.h"
 #include "FormulaTree.h"
 #include "ProjectDaemon.h"
+#include <string.h>
 
 using namespace std;
 using namespace Windows::Devices::Sensors;
@@ -20,14 +21,13 @@ Interpreter::Interpreter()
 	m_accelerometer = Windows::Devices::Sensors::Accelerometer::GetDefault();
 }
 
-
 int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 {
 	Type type = tree->GetType();
 	switch (type)
 	{
 	case OPERATOR:
-		break;
+        return interpretOperator(tree, object);
 	case NUMBER:
 		return atoi(tree->Value().c_str());
 	case USER_VARIABLE:
@@ -90,4 +90,19 @@ void Interpreter::ReadAcceleration()
 			// The reverting is tracked by WP8 # 159660
 		}
 	}	
+}
+
+int Interpreter::interpretOperator(FormulaTree *tree, Object *object)
+{
+    FormulaTree *leftChild = tree->getLeftChild();
+    int leftValue = this->EvaluateFormulaToInt(leftChild, object);
+    FormulaTree *rightChild = tree->getRightChild();
+    int rightValue = this->EvaluateFormulaToInt(rightChild, object);
+    int returnValue = -1;
+
+    std::string value = tree->Value();
+    if (value == "PLUS")
+        returnValue = leftValue + rightValue;
+    
+    return returnValue;
 }

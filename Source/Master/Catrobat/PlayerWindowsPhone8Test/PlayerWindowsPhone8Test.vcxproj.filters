@@ -8,6 +8,9 @@
     <Filter Include="PlayerWindowsPhone8Files">
       <UniqueIdentifier>{9d11dd5d-4f86-4563-8745-12d07ab6af83}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FormulaTests">
+      <UniqueIdentifier>{5892d712-3166-450c-a773-0663b96441d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\ApplicationIcon.png">
@@ -206,6 +209,9 @@
     <ClCompile Include="TestHelper.cpp" />
     <ClCompile Include="MovementBricks.cpp" />
     <ClCompile Include="ControlBricks.cpp" />
+    <ClCompile Include="BasicArithmeticalOperations.cpp">
+      <Filter>FormulaTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

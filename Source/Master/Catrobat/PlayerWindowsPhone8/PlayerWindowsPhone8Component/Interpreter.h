@@ -25,5 +25,8 @@ private:
 	// Sensors
 	Windows::Devices::Sensors::Accelerometer^ m_accelerometer;
     Windows::Devices::Sensors::AccelerometerReading^ m_accReading;
+
+    // HelperFunctions
+    int interpretOperator(FormulaTree *tree, Object *object);
 };
 
