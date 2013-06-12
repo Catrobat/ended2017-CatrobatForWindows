@@ -204,7 +204,7 @@ void Object::SetScale(float scale)
 {
 	if (scale < 0.0f)
 		scale = 0.0f;
-	m_objectScale.x = m_objectScale.y = scale;
+	m_objectScale.x = m_objectScale.y = scale / 100;
 }
 
 float Object::GetScale()
