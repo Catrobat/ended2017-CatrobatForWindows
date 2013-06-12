@@ -458,6 +458,9 @@
     <Content Include="Content\Resources\SampleProjects\HAL9000.catrobat" />
     <Content Include="Content\Resources\SampleProjects\Pacman.catrobat" />
     <Content Include="Content\Resources\SampleProjects\Piano.catrobat" />
+    <Content Include="fmodex_arm.dll" />
+    <Content Include="fmodex_x86.dll" />
+    <Content Include="italic.spritefont" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
@@ -594,6 +597,10 @@
     <ProjectReference Include="..\IDECommon\IDECommon.csproj">
       <Project>{73EDA75E-B249-40CB-A883-C2521A72B1C0}</Project>
       <Name>IDECommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlayerWindowsPhone8Component.vcxproj">
+      <Project>{A1D92942-96B3-455F-BDCC-5D32214804B6}</Project>
+      <Name>PlayerWindowsPhone8Component</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
