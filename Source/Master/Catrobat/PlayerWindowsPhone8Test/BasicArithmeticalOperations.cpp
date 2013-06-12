@@ -102,14 +102,14 @@ namespace PlayerWindowsPhone8Test
 			Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), expected);
 		}
 
-				TEST_METHOD(Formula_BasicArithmetical_Minus1_int)
+		TEST_METHOD(Formula_BasicArithmetical_Minus1_int)
 		{
 			int num1 = 10;
 			int num2 = 7;
 
 			FormulaTree *formula = new FormulaTree("OPERATOR", "MINUS");
-			formula->SetLeftChild(new FormulaTree("NUMBER", num1));
-			formula->SetRightChild(new FormulaTree("NUMBER", num2));
+			formula->SetLeftChild(new FormulaTree("NUMBER", "10"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "7"));
 			Object *object = new Object("TestObject");
 			Interpreter *interpreter = Interpreter::Instance();
 
@@ -124,8 +124,8 @@ namespace PlayerWindowsPhone8Test
 			int num2 = 10;
 
 			FormulaTree *formula = new FormulaTree("OPERATOR", "MINUS");
-			formula->SetLeftChild(new FormulaTree("NUMBER", num1));
-			formula->SetRightChild(new FormulaTree("NUMBER", num2));
+			formula->SetLeftChild(new FormulaTree("NUMBER", "7"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "10"));
 			Object *object = new Object("TestObject");
 			Interpreter *interpreter = Interpreter::Instance();
 
@@ -140,8 +140,8 @@ namespace PlayerWindowsPhone8Test
 			int num2 = 10;
 
 			FormulaTree *formula = new FormulaTree("OPERATOR", "MINUS");
-			formula->SetLeftChild(new FormulaTree("NUMBER", num1));
-			formula->SetRightChild(new FormulaTree("NUMBER", num2));
+			formula->SetLeftChild(new FormulaTree("NUMBER", "-7"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "10"));
 			Object *object = new Object("TestObject");
 			Interpreter *interpreter = Interpreter::Instance();
 
@@ -149,7 +149,6 @@ namespace PlayerWindowsPhone8Test
 
 			Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), expected);
 		}
-
 
         //5 + (10 - 6) * 2 = 13
         //Test without brackets, rules in Tree ??
