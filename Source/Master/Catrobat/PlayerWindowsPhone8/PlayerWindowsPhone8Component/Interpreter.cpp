@@ -100,9 +100,25 @@ int Interpreter::interpretOperator(FormulaTree *tree, Object *object)
     int rightValue = this->EvaluateFormulaToInt(rightChild, object);
     int returnValue = -1;
 
-    std::string value = tree->Value();
-    if (value == "PLUS")
+    switch (tree->getOperator())
+    {
+    case Operator::PLUS:
         returnValue = leftValue + rightValue;
+        break;
+    case Operator::MINUS:
+        returnValue = leftValue - rightValue;
+        break;
+    case Operator::MULT:
+        returnValue = leftValue * rightValue;
+        break;
+    case Operator::DIVIDE:
+        if (rightValue == 0)
+            return -1;
+        returnValue = leftValue / rightValue;
+        break;
+    default:
+        break;
+    }
     
     return returnValue;
 }

@@ -102,5 +102,24 @@ namespace PlayerWindowsPhone8Test
 			Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), expected);
 		}
 
+        //5 + (10 - 6) * 2 = 13
+        //Test without brackets, rules in Tree ??
+        TEST_METHOD(Formula_BasicArithmetical_mixed_int)
+		{
+			FormulaTree *formula = new FormulaTree("OPERATOR", "PLUS");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "5"));
+			formula->SetRightChild(new FormulaTree("OPERATOR", "MULT"));
+            formula->getRightChild()->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+            formula->getRightChild()->getLeftChild()->SetLeftChild(new FormulaTree("NUMBER", "10"));
+            formula->getRightChild()->getLeftChild()->SetRightChild(new FormulaTree("NUMBER", "6"));
+            formula->getRightChild()->SetRightChild(new FormulaTree("NUMBER", "2"));
+			Object *object = new Object("TestObject");
+			Interpreter *interpreter = Interpreter::Instance();
+
+			int expected = 13;
+
+			Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), expected);
+		}
+
 	};
 }
