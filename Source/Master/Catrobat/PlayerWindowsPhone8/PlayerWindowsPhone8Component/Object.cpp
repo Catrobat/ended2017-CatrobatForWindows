@@ -49,7 +49,9 @@ Look *Object::getLook(int index)
 {
 	list<Look*>::iterator it = m_lookList->begin();
 	advance(it, index);
-	return *it;
+	if (it != m_lookList->end())
+		return *it;
+	return NULL;
 }
 
 Script *Object::getScript(int index)
@@ -130,8 +132,13 @@ Look* Object::GetCurrentLook()
 Bounds Object::getBounds()
 {
 	Bounds bounds;
-	bounds.x = m_position.x - GetCurrentLook()->Width() / 2;
-	bounds.y = m_position.y - GetCurrentLook()->Height() / 2;
+	bounds.x = 0;
+	bounds.y = 0;
+	if (GetCurrentLook())
+	{
+		bounds.x = m_position.x - GetCurrentLook()->Width() / 2;
+		bounds.y = m_position.y - GetCurrentLook()->Height() / 2;
+	}
 	bounds.width = (GetCurrentLook() != NULL) ? GetCurrentLook()->Width() : 0;
 	bounds.height = (GetCurrentLook() != NULL) ? GetCurrentLook()->Height() : 0;
 	return bounds;
@@ -197,7 +204,7 @@ void Object::SetScale(float scale)
 {
 	if (scale < 0.0f)
 		scale = 0.0f;
-	m_objectScale.x = m_objectScale.y = scale;
+	m_objectScale.x = m_objectScale.y = scale / 100;
 }
 
 float Object::GetScale()

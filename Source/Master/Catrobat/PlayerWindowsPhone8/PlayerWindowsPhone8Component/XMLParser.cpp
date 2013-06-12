@@ -1254,9 +1254,9 @@ FormulaTree *XMLParser::parseFormulaTree(xml_node<> *baseNode)
 	string type = node->value();
 
 	node = baseNode->first_node("value");
-	if (!node)
-		return NULL;
-	string value = node->value();
+	string value = "";
+	if (node)
+		 value = node->value();
 
 	FormulaTree *formulaTree = new FormulaTree(type, value);
 
@@ -1354,8 +1354,10 @@ pair<string, UserVariable*> XMLParser::parseUserVariable(xml_node<> *baseNode)
 
 	xml_node<> *variableNode = evaluatedReferenceNode->first_node("name");
 	string name = variableNode->value();
-	//variableNode = evaluatedReferenceNode->first_node("value");
-	//string value = variableNode->value();
+	variableNode = evaluatedReferenceNode->first_node("value");
+	string value = "";
+	if (variableNode)
+		value = variableNode->value();
 	UserVariable *variable = new UserVariable(name, "");
 
 	return pair<string, UserVariable*>(name, variable);
