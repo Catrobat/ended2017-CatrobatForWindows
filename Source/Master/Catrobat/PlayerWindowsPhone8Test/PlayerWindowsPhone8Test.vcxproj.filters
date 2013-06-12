@@ -212,6 +212,9 @@
     <ClCompile Include="BasicArithmeticalOperations.cpp">
       <Filter>FormulaTests</Filter>
     </ClCompile>
+    <ClCompile Include="FormulaTreeTests.cpp">
+      <Filter>FormulaTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

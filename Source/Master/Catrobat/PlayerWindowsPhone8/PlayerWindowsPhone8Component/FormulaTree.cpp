@@ -12,6 +12,40 @@ FormulaTree::FormulaTree(string type, string value)
 		m_type = Type::OPERATOR;
 	else if (type == "USER_VARIABLE")
 		m_type = Type::USER_VARIABLE;
+
+    if (m_type == Type::OPERATOR)
+    {
+        if (m_value == "PLUS")
+            m_operator = Operator::PLUS;
+        else if (m_value == "MINUS")
+            m_operator = Operator::MINUS;
+        else if (m_value == "MULT")
+            m_operator = Operator::MULT;
+        else if (m_value == "DIVIDE")
+            m_operator = Operator::DIVIDE;
+        else if (m_value == "POW")
+            m_operator = Operator::POW;
+        else if (m_value == "EQUAL")
+            m_operator = Operator::EQUAL;
+        else if (m_value == "NOT_EQUAL")
+            m_operator = Operator::NOT_EQUAL;
+        else if (m_value == "GREATER_THAN")
+            m_operator = Operator::GREATER_THAN;
+        else if (m_value == "SMALLER_THAN")
+            m_operator = Operator::SMALLER_THAN;
+        else if (m_value == "SMALLER_OR_EQUAL")
+            m_operator = Operator::SMALLER_OR_EQUAL;
+        else if (m_value == "LOGICAL_AND")
+            m_operator = Operator::LOGICAL_AND;
+        else if (m_value == "LOGICAL_OR")
+            m_operator = Operator::LOGICAL_OR;
+        else if (m_value == "LOGICAL_NOT")
+            m_operator = Operator::LOGICAL_NOT;
+    }
+    else
+    {
+        m_operator = Operator::NO_OPERATOR;
+    }
 }
 
 void FormulaTree::SetLeftChild(FormulaTree *leftChild)
@@ -48,4 +82,9 @@ Type FormulaTree::GetType()
 string FormulaTree::Value()
 {
 	return m_value;
+}
+
+Operator FormulaTree::getOperator()
+{
+    return this->m_operator;
 }
