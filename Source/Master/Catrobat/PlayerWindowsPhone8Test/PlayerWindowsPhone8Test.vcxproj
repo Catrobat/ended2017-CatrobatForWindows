@@ -265,7 +265,9 @@
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\WaitBrick.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\WhenScript.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParser.cpp" />
+    <ClCompile Include="BasicArithmeticalOperations.cpp" />
     <ClCompile Include="ControlBricks.cpp" />
+    <ClCompile Include="FormulaTreeTests.cpp" />
     <ClCompile Include="LookBricks.cpp" />
     <ClCompile Include="MovementBricks.cpp" />
     <ClCompile Include="pch.cpp">
