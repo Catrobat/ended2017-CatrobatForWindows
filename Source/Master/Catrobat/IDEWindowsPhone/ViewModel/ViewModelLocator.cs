@@ -20,6 +20,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       SimpleIoc.Default.Register<UploadProjectLoginViewModel>();
       SimpleIoc.Default.Register<SoundRecorderViewModel>();
       SimpleIoc.Default.Register<SettingsViewModel>();
+      SimpleIoc.Default.Register<AddNewCostumeViewModel>();
     }
 
 
@@ -108,6 +109,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
       get
       {
         return ServiceLocator.Current.GetInstance<SettingsViewModel>();
+      }
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+    "CA1822:MarkMembersAsStatic",
+    Justification = "This non-static member is needed for data binding purposes.")]
+    public AddNewCostumeViewModel AddNewCostume
+    {
+      get
+      {
+        return ServiceLocator.Current.GetInstance<AddNewCostumeViewModel>();
       }
     }
 
