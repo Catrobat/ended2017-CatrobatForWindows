@@ -159,6 +159,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             CatrobatContext.GetContext().CleanUpSpriteReferences(sprite);
         }
 
+        private void AddNewCostumeAction()
+        {
+            GenericMessage<Sprite> message = new GenericMessage<Sprite>(_selectedSprite);
+            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.AddNewCostumeViewModel);
+
+            Navigation.NavigateTo(typeof(AddNewCostumeView));
+        }
+
         private void DeleteCostumeAction(Costume costume)
         {
             costume.Delete();
@@ -230,6 +238,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         public delegate void AddedBroadcastMessageEvent();
         public AddedBroadcastMessageEvent OnAddedBroadcastMessage;
+
+        public void AddNewCostumeEvent()
+        {
+            AddNewCostumeAction();
+        }
 
         # endregion
 
@@ -351,6 +364,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             this.RedoCommand = new RelayCommand(this.RedoAction);
 
             this.NothingItemHackCommand = new RelayCommand<object>(NothingItemHackAction);
+
 
             if (IsInDesignMode)
             {

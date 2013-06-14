@@ -27,8 +27,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 {
     public class ChangeCostumeViewModel : ViewModelBase
     {
-        private readonly EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
-
         #region Private Members
 
         private Costume _costume;
@@ -134,7 +132,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         public override void Cleanup()
         {
-            Costume = null;
+            _costume = null;
+            _costumeName = null;
 
             base.Cleanup();
         }

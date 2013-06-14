@@ -341,7 +341,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             //redoButton.Text = "wiederherstellen";
             //ApplicationBar.Buttons.Add(redoButton);
 
-            addButton.Click += new EventHandler(appbarButtonAdd_Click);
+            addButton.Click += (sender, args) => _editorViewModel.AddNewCostumeEvent();
             //undoButton.Click += new EventHandler(appbarButtonUndo_Click);
             playButton.Click += new EventHandler(appbarButtonPlay_Click);
             //redoButton.Click += new EventHandler(appbarButtonRedo_Click);

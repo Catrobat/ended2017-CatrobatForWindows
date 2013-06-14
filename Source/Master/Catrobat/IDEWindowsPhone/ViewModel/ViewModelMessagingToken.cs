@@ -8,6 +8,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 {
     public enum ViewModelMessagingToken
     {
-        ChangeCostumeNameViewModel
+        ChangeCostumeNameViewModel, AddNewCostumeViewModel
     }
 }

@@ -20,7 +20,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<UploadProjectLoginViewModel>();
             SimpleIoc.Default.Register<SoundRecorderViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
-            SimpleIoc.Default.Register<AddNewCostumeViewModel>();
+            SimpleIoc.Default.Register<AddNewCostumeViewModel>(true);
             SimpleIoc.Default.Register<ChangeCostumeViewModel>(true);
             
         }

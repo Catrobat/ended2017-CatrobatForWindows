@@ -22,6 +22,7 @@ using Microsoft.Phone.Tasks;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight.Messaging;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
+using Catrobat.Core.Objects.Costumes;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel
 {
@@ -33,6 +34,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private string _costumeName;
         private CostumeBuilder _builder;
+        private Sprite _selectedSprite;
 
         #endregion
 
@@ -79,7 +81,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         private void SaveAction()
         {
             var costume = _builder.Save(CostumeName);
-            _editorViewModel.SelectedSprite.Costumes.Costumes.Add(costume);
+            _selectedSprite.Costumes.Costumes.Add(costume);
+
             Cleanup();
             Navigation.RemoveBackEntry();
             Navigation.NavigateBack();
@@ -90,6 +93,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             Cleanup();
             Navigation.NavigateBack();
         }
+
+        private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
+        {
+            _selectedSprite = message.Content;
+        }
+
 
         #endregion
 
@@ -136,11 +145,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         {
             OpenGalleryCommand = new RelayCommand(OpenGalleryAction);
             OpenCameraCommand = new RelayCommand(OpenCameraAction);
+
+            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.AddNewCostumeViewModel, ReceiveSelectedSpriteMessageAction);
         }
 
         public override void Cleanup()
         {
-            CostumeName = null;
+            _costumeName = null;
+            _selectedSprite = null;
 
             if (_builder != null)
             {
@@ -162,7 +174,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 _builder.LoadCostumeSuccess += LoadCostumeSuccess;
                 _builder.LoadCostumeFailed += LoadCostumeFailed;
 
-                _builder.StartCreateCostumeAsync(_editorViewModel.SelectedSprite, e.ChosenPhoto);
+                _builder.StartCreateCostumeAsync(_selectedSprite, e.ChosenPhoto);
             }
         }
 
