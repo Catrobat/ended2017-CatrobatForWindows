@@ -171,6 +171,7 @@
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeChooser.cs" />
     <Compile Include="ViewModel\Editor\AddNewCostumeViewModel.cs" />
+    <Compile Include="ViewModel\Editor\ChangeCostumeViewModel.cs" />
     <Compile Include="ViewModel\Main\AddNewProjectViewModel.cs" />
     <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\SoundRecorderViewModel.cs" />
@@ -180,11 +181,12 @@
     <Compile Include="ViewModel\Service\UploadProjectLoginViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModel\ViewModelMessagingToken.cs" />
     <Compile Include="Views\Editor\Costumes\AddNewCostumeView.xaml.cs">
       <DependentUpon>AddNewCostumeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Costumes\ChangeCostume.xaml.cs">
-      <DependentUpon>ChangeCostume.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Costumes\ChangeCostumeView.xaml.cs">
+      <DependentUpon>ChangeCostumeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Costumes\CostumeNameChooserView.xaml.cs">
       <DependentUpon>CostumeNameChooserView.xaml</DependentUpon>
@@ -334,7 +336,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Costumes\ChangeCostume.xaml">
+    <Page Include="Views\Editor\Costumes\ChangeCostumeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

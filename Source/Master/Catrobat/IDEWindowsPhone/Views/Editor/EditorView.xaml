@@ -95,7 +95,7 @@
 
       <!--Pivot item costume-->
       <controls:PivotItem Name="pivotCostumes" Header="{Binding Path=Editor.PivotCostumes, Source={StaticResource LocalizedStrings}}">
-        <reorderableListbox:ReorderListBox
+        <reorderableListbox:ReorderListBox Grid.Row="0"
           x:Name="reorderListBoxCostumes"
           Margin="0 -25 0 0"
           VerticalAlignment="Stretch"
@@ -125,8 +125,8 @@
                       ImageName="edit"
                       Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"
-                      Margin="5 5 5 5" Click="btnEditCostumeName_Click" 
-                      IsAutoColor="False" IsDark="True"/>
+                      Margin="5 5 5 5" IsAutoColor="False" IsDark="True"
+                      Command="{Binding Editor.EditCostumeCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
                     <imageButton:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="btnCopyCostume" 
                       ImageName="copy"

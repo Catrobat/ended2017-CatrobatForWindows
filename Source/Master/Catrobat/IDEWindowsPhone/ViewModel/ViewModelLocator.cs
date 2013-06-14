@@ -6,125 +6,137 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel
 {
-  public class ViewModelLocator
-  {
-    static ViewModelLocator()
+    public class ViewModelLocator
     {
-      ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+        static ViewModelLocator()
+        {
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-      SimpleIoc.Default.Register<MainViewModel>();
-      SimpleIoc.Default.Register<EditorViewModel>();
-      SimpleIoc.Default.Register<ProjectSettingsViewModel>();
-      SimpleIoc.Default.Register<AddNewProjectViewModel>();
-      SimpleIoc.Default.Register<UploadProjectViewModel>();
-      SimpleIoc.Default.Register<UploadProjectLoginViewModel>();
-      SimpleIoc.Default.Register<SoundRecorderViewModel>();
-      SimpleIoc.Default.Register<SettingsViewModel>();
-      SimpleIoc.Default.Register<AddNewCostumeViewModel>();
-    }
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<EditorViewModel>();
+            SimpleIoc.Default.Register<ProjectSettingsViewModel>();
+            SimpleIoc.Default.Register<AddNewProjectViewModel>();
+            SimpleIoc.Default.Register<UploadProjectViewModel>();
+            SimpleIoc.Default.Register<UploadProjectLoginViewModel>();
+            SimpleIoc.Default.Register<SoundRecorderViewModel>();
+            SimpleIoc.Default.Register<SettingsViewModel>();
+            SimpleIoc.Default.Register<AddNewCostumeViewModel>();
+            SimpleIoc.Default.Register<ChangeCostumeViewModel>(true);
+            
+        }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public MainViewModel Main
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public AddNewProjectViewModel AddNewProject
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddNewProjectViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public EditorViewModel Editor
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EditorViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public ProjectSettingsViewModel ProjectSettings
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ProjectSettingsViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public UploadProjectViewModel UploadProject
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<UploadProjectViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public UploadProjectLoginViewModel UploadProjectLogin
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<UploadProjectLoginViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-    public MainViewModel Main
-    {
-      get
-      {
-        return ServiceLocator.Current.GetInstance<MainViewModel>();
-      }
-    }
+        public SoundRecorderViewModel SoundRecorder
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SoundRecorderViewModel>();
+            }
+        }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-    public AddNewProjectViewModel AddNewProject
-    {
-      get
-      {
-        return ServiceLocator.Current.GetInstance<AddNewProjectViewModel>();
-      }
-    }
+        public SettingsViewModel Settings
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SettingsViewModel>();
+            }
+        }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-    public EditorViewModel Editor
-    {
-      get
-      {
-        return ServiceLocator.Current.GetInstance<EditorViewModel>();
-      }
-    }
+        public AddNewCostumeViewModel AddNewCostume
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddNewCostumeViewModel>();
+            }
+        }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-    public ProjectSettingsViewModel ProjectSettings
-    {
-      get
-      {
-        return ServiceLocator.Current.GetInstance<ProjectSettingsViewModel>();
-      }
-    }
+        public ChangeCostumeViewModel ChangeCostume
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ChangeCostumeViewModel>();
+            }
+        }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-        "CA1822:MarkMembersAsStatic",
-        Justification = "This non-static member is needed for data binding purposes.")]
-    public UploadProjectViewModel UploadProject
-    {
-      get
-      {
-        return ServiceLocator.Current.GetInstance<UploadProjectViewModel>();
-      }
+        public static void Cleanup()
+        {
+        }
     }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-        "CA1822:MarkMembersAsStatic",
-        Justification = "This non-static member is needed for data binding purposes.")]
-    public UploadProjectLoginViewModel UploadProjectLogin
-    {
-      get
-      {
-        return ServiceLocator.Current.GetInstance<UploadProjectLoginViewModel>();
-      }
-    }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-    "CA1822:MarkMembersAsStatic",
-    Justification = "This non-static member is needed for data binding purposes.")]
-    public SoundRecorderViewModel SoundRecorder
-    {
-      get
-      {
-        return ServiceLocator.Current.GetInstance<SoundRecorderViewModel>();
-      }
-    }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-    "CA1822:MarkMembersAsStatic",
-    Justification = "This non-static member is needed for data binding purposes.")]
-    public SettingsViewModel Settings
-    {
-      get
-      {
-        return ServiceLocator.Current.GetInstance<SettingsViewModel>();
-      }
-    }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-    "CA1822:MarkMembersAsStatic",
-    Justification = "This non-static member is needed for data binding purposes.")]
-    public AddNewCostumeViewModel AddNewCostume
-    {
-      get
-      {
-        return ServiceLocator.Current.GetInstance<AddNewCostumeViewModel>();
-      }
-    }
-
-    public static void Cleanup()
-    {
-    }
-  }
 }

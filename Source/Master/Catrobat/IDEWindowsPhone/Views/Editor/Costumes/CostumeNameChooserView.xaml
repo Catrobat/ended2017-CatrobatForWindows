@@ -27,7 +27,7 @@
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
       <TextBlock Margin="0" Text="{Binding Path=Editor.CostumeName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
-      <TextBox Margin="-10 0 10 0" Name="TextBoxCostumeName" Text="{Binding CostumeName, Mode=TwoWay}" TextChanged="TextBoxCostumeName_OnTextChanged" HorizontalAlignment="Stretch" />
+      <TextBox Margin="-10 0 10 0" Name="TextBoxCostumeName" Text="{Binding CostumeName, Mode=TwoWay}" HorizontalAlignment="Stretch" TextChanged="TextBoxCostumeName_OnTextChanged" />
     </StackPanel>
   </Grid>
 </phone:PhoneApplicationPage>

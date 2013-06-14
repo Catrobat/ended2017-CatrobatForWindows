@@ -16,18 +16,13 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 {
-  public partial class AddNewCostumeView : PhoneApplicationPage
-  {
-    private readonly AddNewCostumeViewModel _addNewCostumeViewModel = ServiceLocator.Current.GetInstance<AddNewCostumeViewModel>();
-
-    public AddNewCostumeView()
+    public partial class AddNewCostumeView : PhoneApplicationPage
     {
-      InitializeComponent();
-    }
+        private readonly AddNewCostumeViewModel _addNewCostumeViewModel = ServiceLocator.Current.GetInstance<AddNewCostumeViewModel>();
 
-    protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
-    {
-      NavigationService.GoBack();
+        public AddNewCostumeView()
+        {
+            InitializeComponent();
+        }
     }
-  }
 }
