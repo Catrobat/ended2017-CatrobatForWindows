@@ -378,7 +378,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
       }
       else if (pivotMain.SelectedItem == pivotCostumes)
       {
-        Navigation.NavigateTo(typeof(AddNewCostume));
+        Navigation.NavigateTo(typeof(AddNewCostumeView));
       }
       else if (pivotMain.SelectedItem == pivotSounds)
       {

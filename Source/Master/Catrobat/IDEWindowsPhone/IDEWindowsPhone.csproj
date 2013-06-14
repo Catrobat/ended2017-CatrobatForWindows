@@ -170,6 +170,7 @@
     <Compile Include="Themes\ColorChooser.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeChooser.cs" />
+    <Compile Include="ViewModel\Editor\AddNewCostumeViewModel.cs" />
     <Compile Include="ViewModel\Main\AddNewProjectViewModel.cs" />
     <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\SoundRecorderViewModel.cs" />
@@ -179,11 +180,14 @@
     <Compile Include="ViewModel\Service\UploadProjectLoginViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="Views\Editor\Costumes\AddNewCostume.xaml.cs">
-      <DependentUpon>AddNewCostume.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Costumes\AddNewCostumeView.xaml.cs">
+      <DependentUpon>AddNewCostumeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Costumes\ChangeCostume.xaml.cs">
       <DependentUpon>ChangeCostume.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Costumes\CostumeNameChooserView.xaml.cs">
+      <DependentUpon>CostumeNameChooserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\EditorView.xaml.cs">
       <DependentUpon>EditorView.xaml</DependentUpon>
@@ -326,11 +330,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Costumes\AddNewCostume.xaml">
+    <Page Include="Views\Editor\Costumes\AddNewCostumeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Editor\Costumes\ChangeCostume.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\CostumeNameChooserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
