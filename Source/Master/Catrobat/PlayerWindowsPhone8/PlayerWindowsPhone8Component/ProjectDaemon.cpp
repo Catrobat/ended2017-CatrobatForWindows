@@ -122,7 +122,7 @@ void ProjectDaemon::OpenFolder(Platform::String^ folderName)
 void ProjectDaemon::OpenProject(Platform::String^ projectName)
 {
 	m_files = new vector<Platform::String^>();
-	auto getFolder = Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderAsync(projectName);
+    auto getFolder = Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderFromPathAsync(Windows::Storage::ApplicationData::Current->LocalFolder->Path + "/Projects/" + projectName);
 	getFolder->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFolder^>
 	(
 	[this](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFolder^>^ operation, Windows::Foundation::AsyncStatus status) 
