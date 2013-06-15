@@ -8,7 +8,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
 using Microsoft.Practices.ServiceLocation;
-using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 {
@@ -33,6 +33,11 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
             });
         }
 
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            //DON'T RESET VIEWMODEL
+        }
+
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             _btnSave.IsEnabled = _addNewCostumeViewModel.IsCostumeNameValid;
@@ -52,24 +57,38 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
             _addNewCostumeViewModel.CostumeName = TextBoxCostumeName.Text;
         }
 
+        #region Appbar
+
         private void BuildApplicationBar()
         {
             ApplicationBar = new ApplicationBar();
 
-            _btnSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.check.rest.png", UriKind.Relative));
+            _btnSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.save.rest.png", UriKind.Relative));
             _btnSave.Text = EditorResources.ButtonSave;
-            _btnSave.Click += (sender, args) => _addNewCostumeViewModel.SaveEvent();
+            _btnSave.Click += ButtonSave_Click;
             ApplicationBar.Buttons.Add(_btnSave);
 
             ApplicationBarIconButton btnCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
             btnCancel.Text = EditorResources.ButtonCancel;
-            btnCancel.Click += (sender, args) => _addNewCostumeViewModel.CancelEvent();
+            btnCancel.Click += ButtonCancel_Click;
             ApplicationBar.Buttons.Add(btnCancel);
+        }
+
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            _addNewCostumeViewModel.SaveCommand.Execute(null);
+        }
+
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            _addNewCostumeViewModel.CancelCommand.Execute(null);
         }
 
         private void LanguageChanged(object sender, PropertyChangedEventArgs e)
         {
             BuildApplicationBar();
         }
+
+        #endregion
     }
 }

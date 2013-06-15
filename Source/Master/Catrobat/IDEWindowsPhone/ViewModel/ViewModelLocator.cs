@@ -1,4 +1,7 @@
-﻿using Catrobat.IDEWindowsPhone.ViewModel.Main;
+﻿using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
+using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Catrobat.IDEWindowsPhone.ViewModel.Service;
 using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using GalaSoft.MvvmLight.Ioc;
@@ -18,11 +21,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<AddNewProjectViewModel>();
             SimpleIoc.Default.Register<UploadProjectViewModel>();
             SimpleIoc.Default.Register<UploadProjectLoginViewModel>();
-            SimpleIoc.Default.Register<SoundRecorderViewModel>();
+            SimpleIoc.Default.Register<SoundRecorderViewModel>(true);
             SimpleIoc.Default.Register<SettingsViewModel>();
             SimpleIoc.Default.Register<AddNewCostumeViewModel>(true);
             SimpleIoc.Default.Register<ChangeCostumeViewModel>(true);
-            
+            SimpleIoc.Default.Register<AddNewSoundViewModel>(true);
+            SimpleIoc.Default.Register<ChangeSoundViewModel>(true);
+            SimpleIoc.Default.Register<AddNewSpriteViewModel>(true);
+            SimpleIoc.Default.Register<ChangeSpriteViewModel>(true);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -132,6 +138,50 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<ChangeCostumeViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public ChangeSoundViewModel ChangeSound
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ChangeSoundViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public AddNewSoundViewModel AddNewSound
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddNewSoundViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public ChangeSpriteViewModel ChangeSprite
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ChangeSpriteViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public AddNewSpriteViewModel AddNewSprite
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddNewSpriteViewModel>();
             }
         }
 

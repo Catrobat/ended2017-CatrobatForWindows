@@ -24,17 +24,39 @@ using GalaSoft.MvvmLight.Messaging;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using Catrobat.Core.Objects.Costumes;
 
-namespace Catrobat.IDEWindowsPhone.ViewModel
+namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 {
     public class AddNewCostumeViewModel : ViewModelBase
     {
-        private readonly EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
-
         #region Private Members
 
         private string _costumeName;
         private CostumeBuilder _builder;
-        private Sprite _selectedSprite;
+        private Sprite _receivedSelectedSprite;
+
+        #endregion
+
+        #region Properties
+
+        public string CostumeName
+        {
+            get { return _costumeName; }
+            set
+            {
+                if (value == _costumeName) return;
+                _costumeName = value;
+                RaisePropertyChanged("CostumeName");
+                RaisePropertyChanged("IsCostumeNameValid");
+            }
+        }
+
+        public bool IsCostumeNameValid
+        {
+            get
+            {
+                return CostumeName != null && CostumeName.Length >= 2;
+            }
+        }
 
         #endregion
 
@@ -47,6 +69,18 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         }
 
         public RelayCommand OpenCameraCommand
+        {
+            get;
+            private set;
+        }
+
+        public RelayCommand SaveCommand
+        {
+            get;
+            private set;
+        }
+
+        public RelayCommand CancelCommand
         {
             get;
             private set;
@@ -81,87 +115,35 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         private void SaveAction()
         {
             var costume = _builder.Save(CostumeName);
-            _selectedSprite.Costumes.Costumes.Add(costume);
+            _receivedSelectedSprite.Costumes.Costumes.Add(costume);
 
-            Cleanup();
+            ResetViewModel();
             Navigation.RemoveBackEntry();
             Navigation.NavigateBack();
         }
 
         private void CancelAction()
         {
-            Cleanup();
             Navigation.NavigateBack();
         }
 
         private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
         {
-            _selectedSprite = message.Content;
+            _receivedSelectedSprite = message.Content;
         }
 
 
         #endregion
 
-        #region Events
-
-        public void SaveEvent()
-        {
-            SaveAction();
-        }
-
-        public void CancelEvent()
-        {
-            CancelAction();
-        }
-
-
-        #endregion
-
-        #region Properties
-
-        public string CostumeName
-        {
-            get { return _costumeName; }
-            set
-            {
-                if (value == _costumeName) return;
-                _costumeName = value;
-                RaisePropertyChanged("CostumeName");
-                RaisePropertyChanged("IsCostumeNameValid");
-            }
-        }
-
-        public bool IsCostumeNameValid
-        {
-            get
-            {
-                return CostumeName != null && CostumeName.Length >= 2;
-            }
-        }
-
-        #endregion
 
         public AddNewCostumeViewModel()
         {
             OpenGalleryCommand = new RelayCommand(OpenGalleryAction);
             OpenCameraCommand = new RelayCommand(OpenCameraAction);
+            SaveCommand = new RelayCommand(SaveAction);
+            CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.AddNewCostumeViewModel, ReceiveSelectedSpriteMessageAction);
-        }
-
-        public override void Cleanup()
-        {
-            _costumeName = null;
-            _selectedSprite = null;
-
-            if (_builder != null)
-            {
-                _builder.LoadCostumeSuccess -= LoadCostumeSuccess;
-                _builder.LoadCostumeFailed -= LoadCostumeFailed;
-                _builder = null;
-            }
-
-            base.Cleanup();
+            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
         }
 
         private void Task_Completed(object sender, PhotoResult e)
@@ -174,7 +156,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 _builder.LoadCostumeSuccess += LoadCostumeSuccess;
                 _builder.LoadCostumeFailed += LoadCostumeFailed;
 
-                _builder.StartCreateCostumeAsync(_selectedSprite, e.ChosenPhoto);
+                _builder.StartCreateCostumeAsync(_receivedSelectedSprite, e.ChosenPhoto);
             }
         }
 
@@ -199,6 +181,23 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         private void WrongImageFormatResult(MessageBoxResult result)
         {
             Navigation.NavigateBack();
+        }
+        
+        public void ResetViewModel()
+        {
+            CostumeName = null;
+
+            if (_builder != null)
+            {
+                _builder.LoadCostumeSuccess -= LoadCostumeSuccess;
+                _builder.LoadCostumeFailed -= LoadCostumeFailed;
+                _builder = null;
+            }
+        }
+
+        public override void Cleanup()
+        {
+            base.Cleanup();
         }
     }
 }

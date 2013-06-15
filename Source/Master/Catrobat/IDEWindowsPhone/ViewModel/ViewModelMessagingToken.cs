@@ -8,6 +8,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 {
     public enum ViewModelMessagingToken
     {
-        ChangeCostumeNameViewModel, AddNewCostumeViewModel
+        CostumeNameListener,
+        SoundNameListener,
+        SelectedSpriteListener,
+        SpriteNameListener,
+        SpriteListListener
     }
 }

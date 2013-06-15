@@ -51,23 +51,25 @@
                   ImageName="edit"
                   Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
                   Template="{StaticResource ImageButtonControlTemplate}" 
-                  Margin="5 5 5 5" Click="btnEditSpriteName_Click"
-                  IsAutoColor="False" IsDark="True"/>
+                  Margin="5 5 5 5"
+                  IsAutoColor="False" IsDark="True"
+                  Command="{Binding Editor.EditSpriteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
                 <imageButton:ImageButton Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" x:Name="btnCopySprite" 
                   ImageName="copy"
                   Text="{Binding Path=Editor.ButtonCopy, Source={StaticResource LocalizedStrings}}"
                   Template="{StaticResource ImageButtonControlTemplate}" 
-                  Margin="5 5 5 5" Click="btnCopySprite_Click" 
-                  IsAutoColor="False" IsDark="True"/>
+                  Margin="5 5 5 5" 
+                  IsAutoColor="False" IsDark="True"
+                  Command="{Binding Editor.CopySpriteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
                 <imageButton:ImageButton Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" x:Name="btnDeleteSprite" 
                   ImageName="delete"
                   Text="{Binding Path=Editor.ButtonDelete, Source={StaticResource LocalizedStrings}}"
                   Template="{StaticResource ImageButtonControlTemplate}" 
                   Margin="5 5 5 5"
-                  Click="btnDeleteSprite_Click"
-                  IsAutoColor="False" IsDark="True"/>
+                  IsAutoColor="False" IsDark="True"
+                  Command="{Binding Editor.DeleteSpriteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
               </Grid>
             </DataTemplate>
           </reorderableListbox:ReorderListBox.ItemTemplate>
@@ -132,16 +134,17 @@
                       ImageName="copy"
                       Text="{Binding Path=Editor.ButtonCopy, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}" 
-                      Margin="5 5 5 5" Click="btnCopyCostume_Click"
-                      IsAutoColor="False" IsDark="True"/>
+                      Margin="5 5 5 5"
+                      IsAutoColor="False" IsDark="True"
+                      Command="{Binding Editor.CopyCostumeCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
                     <imageButton:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="btnDeleteCostume" 
                       ImageName="delete"
                       Text="{Binding Path=Editor.ButtonDelete, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"
                       Margin="5 5 5 5"
-                      Click="btnDeleteCostume_Click"
-                      IsAutoColor="False" IsDark="True"/>
+                      IsAutoColor="False" IsDark="True"
+                      Command="{Binding Editor.DeleteCostumeCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
                   </StackPanel>
                 </Grid>
               </Grid>
@@ -181,8 +184,9 @@
                       ImageName="edit"
                       Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"
-                      Margin="5 5 5 5" Click="btnEditSoundName_Click" 
-                      IsAutoColor="False" IsDark="True"/>
+                      Margin="5 5 5 5" 
+                      IsAutoColor="False" IsDark="True"
+                      Command="{Binding Editor.EditSoundCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
                     <!--<c:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="btnCopySound" 
                       ImageName="copy"
@@ -195,8 +199,8 @@
                       Text="{Binding Path=Editor.ButtonDelete, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"
                       Margin="5 5 5 5"
-                      Click="btnDeleteSound_Click"
-                      IsAutoColor="False" IsDark="True"/>
+                      IsAutoColor="False" IsDark="True"
+                      Command="{Binding Editor.DeleteSoundCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
                   </StackPanel>
                 </Grid>
               </Grid>

@@ -217,37 +217,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
                 _editorViewModel.DeleteSpriteCommand.Execute(sprite);
         }
 
-        private void btnEditSpriteName_Click(object sender, RoutedEventArgs e)
-        {
-            _editorViewModel.SelectedSprite = ((Button)sender).DataContext as Sprite;
-            Navigation.NavigateTo(typeof(ChangeSpriteName));
-        }
-
-        private void btnCopySprite_Click(object sender, RoutedEventArgs e)
-        {
-            Sprite newSprite = (((Button)sender).DataContext as Sprite).Copy() as Sprite;
-            CatrobatContext.GetContext().CurrentProject.SpriteList.Sprites.Add(newSprite);
-        }
-
-
-        private void btnDeleteSound_Click(object sender, RoutedEventArgs e)
-        {
-            Sound sound = ((Button)sender).DataContext as Sound;
-            string name = sound.Name;
-
-            MessageBoxResult result = MessageBox.Show(EditorResources.MessageBoxDeleteSoundText1 + name + EditorResources.MessageBoxDeleteSoundText2,
-              EditorResources.MessageBoxDeleteSoundHeader, MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.OK)
-            {
-                _editorViewModel.DeleteSoundCommand.Execute(sound);
-            }
-        }
-
-        private void btnEditSoundName_Click(object sender, RoutedEventArgs e)
-        {
-            _editorViewModel.SelectedSound = ((Button)sender).DataContext as Sound;
-            Navigation.NavigateTo(typeof(ChangeSoundName));
-        }
 
         private void buttonSoundPlay_Click(object sender, RoutedEventArgs e)
         {
@@ -278,26 +247,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
                     reorderListBoxSounds.ItemsSource = _editorViewModel.Sounds;
                 });
         }
-
-
-        private void btnDeleteCostume_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Costume costume = ((Button)sender).DataContext as Costume;
-            string name = costume.Name;
-
-            MessageBoxResult result = MessageBox.Show(EditorResources.MessageBoxDeleteCostumeText1 + name + EditorResources.MessageBoxDeleteCostumeText2,
-              EditorResources.MessageBoxDeleteCostumeHeader, MessageBoxButton.OKCancel);
-
-            if (result == MessageBoxResult.OK)
-                _editorViewModel.DeleteCostumeCommand.Execute(costume);
-        }
-
-        private void btnCopyCostume_Click(object sender, RoutedEventArgs e)
-        {
-            Costume costume = ((Button)sender).DataContext as Costume;
-            _editorViewModel.CopyCostumeCommand.Execute(costume);
-        }
-
 
         private void OnStartAddBroadcastMessage()
         {
@@ -341,7 +290,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             //redoButton.Text = "wiederherstellen";
             //ApplicationBar.Buttons.Add(redoButton);
 
-            addButton.Click += (sender, args) => _editorViewModel.AddNewCostumeEvent();
+            addButton.Click += appbarButtonAdd_Click;
             //undoButton.Click += new EventHandler(appbarButtonUndo_Click);
             playButton.Click += new EventHandler(appbarButtonPlay_Click);
             //redoButton.Click += new EventHandler(appbarButtonRedo_Click);
@@ -361,7 +310,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         {
             if (pivotMain.SelectedItem == pivotSprites)
             {
-                Navigation.NavigateTo(typeof(AddNewSprite));
+                _editorViewModel.AddNewSpriteCommand.Execute(null);
             }
             else if (pivotMain.SelectedItem == pivotScripts)
             {
@@ -372,11 +321,11 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             }
             else if (pivotMain.SelectedItem == pivotCostumes)
             {
-                Navigation.NavigateTo(typeof(AddNewCostumeView));
+                _editorViewModel.AddNewCostumeCommand.Execute(null);
             }
             else if (pivotMain.SelectedItem == pivotSounds)
             {
-                Navigation.NavigateTo(typeof(AddNewSound));
+                _editorViewModel.AddNewSoundCommand.Execute(null);
             }
         }
 
