@@ -23,9 +23,11 @@
     <converters:BytesImageConverter x:Key="BytesImageConverter" />
   </phone:PhoneApplicationPage.Resources>
 
+  
   <Grid x:Name="LayoutRoot">
     <controls:Pivot Name="pivotMain" Title="{ Binding CurrentProject.ProjectName }" SelectionChanged="pivotMain_SelectionChanged">
       <controls:PivotItem Name="pivotSprites" Header="{Binding Path=Editor.PivotObjects, Source={StaticResource LocalizedStrings}}">
+        <!--Pivot item sprites-->
         <reorderableListbox:ReorderListBox
           x:Name="reorderListBoxSprites"
           Margin="0 -25 0 0"
@@ -51,23 +53,25 @@
                   ImageName="edit"
                   Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
                   Template="{StaticResource ImageButtonControlTemplate}" 
-                  Margin="5 5 5 5" Click="btnEditSpriteName_Click"
-                  IsAutoColor="False" IsDark="True"/>
+                  Margin="5 5 5 5"
+                  IsAutoColor="False" IsDark="True"
+                  Command="{Binding Editor.EditSpriteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
                 <imageButton:ImageButton Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" x:Name="btnCopySprite" 
                   ImageName="copy"
                   Text="{Binding Path=Editor.ButtonCopy, Source={StaticResource LocalizedStrings}}"
                   Template="{StaticResource ImageButtonControlTemplate}" 
-                  Margin="5 5 5 5" Click="btnCopySprite_Click" 
-                  IsAutoColor="False" IsDark="True"/>
+                  Margin="5 5 5 5" 
+                  IsAutoColor="False" IsDark="True"
+                  Command="{Binding Editor.CopySpriteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
                 <imageButton:ImageButton Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" x:Name="btnDeleteSprite" 
                   ImageName="delete"
                   Text="{Binding Path=Editor.ButtonDelete, Source={StaticResource LocalizedStrings}}"
                   Template="{StaticResource ImageButtonControlTemplate}" 
                   Margin="5 5 5 5"
-                  Click="btnDeleteSprite_Click"
-                  IsAutoColor="False" IsDark="True"/>
+                  IsAutoColor="False" IsDark="True"
+                  Command="{Binding Editor.DeleteSpriteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
               </Grid>
             </DataTemplate>
           </reorderableListbox:ReorderListBox.ItemTemplate>
@@ -95,7 +99,7 @@
 
       <!--Pivot item costume-->
       <controls:PivotItem Name="pivotCostumes" Header="{Binding Path=Editor.PivotCostumes, Source={StaticResource LocalizedStrings}}">
-        <reorderableListbox:ReorderListBox
+        <reorderableListbox:ReorderListBox Grid.Row="0"
           x:Name="reorderListBoxCostumes"
           Margin="0 -25 0 0"
           VerticalAlignment="Stretch"
@@ -125,23 +129,24 @@
                       ImageName="edit"
                       Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"
-                      Margin="5 5 5 5" Click="btnEditCostumeName_Click" 
-                      IsAutoColor="False" IsDark="True"/>
+                      Margin="5 5 5 5" IsAutoColor="False" IsDark="True"
+                      Command="{Binding Editor.EditCostumeCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
                     <imageButton:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="btnCopyCostume" 
                       ImageName="copy"
                       Text="{Binding Path=Editor.ButtonCopy, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}" 
-                      Margin="5 5 5 5" Click="btnCopyCostume_Click"
-                      IsAutoColor="False" IsDark="True"/>
+                      Margin="5 5 5 5"
+                      IsAutoColor="False" IsDark="True"
+                      Command="{Binding Editor.CopyCostumeCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
                     <imageButton:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="btnDeleteCostume" 
                       ImageName="delete"
                       Text="{Binding Path=Editor.ButtonDelete, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"
                       Margin="5 5 5 5"
-                      Click="btnDeleteCostume_Click"
-                      IsAutoColor="False" IsDark="True"/>
+                      IsAutoColor="False" IsDark="True"
+                      Command="{Binding Editor.DeleteCostumeCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
                   </StackPanel>
                 </Grid>
               </Grid>
@@ -181,8 +186,9 @@
                       ImageName="edit"
                       Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"
-                      Margin="5 5 5 5" Click="btnEditSoundName_Click" 
-                      IsAutoColor="False" IsDark="True"/>
+                      Margin="5 5 5 5" 
+                      IsAutoColor="False" IsDark="True"
+                      Command="{Binding Editor.EditSoundCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
                     <!--<c:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="btnCopySound" 
                       ImageName="copy"
@@ -195,8 +201,8 @@
                       Text="{Binding Path=Editor.ButtonDelete, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"
                       Margin="5 5 5 5"
-                      Click="btnDeleteSound_Click"
-                      IsAutoColor="False" IsDark="True"/>
+                      IsAutoColor="False" IsDark="True"
+                      Command="{Binding Editor.DeleteSoundCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
                   </StackPanel>
                 </Grid>
               </Grid>

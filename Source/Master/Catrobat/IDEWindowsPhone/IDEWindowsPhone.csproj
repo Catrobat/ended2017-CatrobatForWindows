@@ -170,21 +170,27 @@
     <Compile Include="Themes\ColorChooser.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeChooser.cs" />
-    <Compile Include="ViewModel\Editor\AddNewCostumeViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Costumes\AddNewCostumeViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Costumes\ChangeCostumeViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sounds\AddNewSoundViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sounds\ChangeSoundViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sprites\AddNewSpriteViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sprites\ChangeSpriteViewModel.cs" />
     <Compile Include="ViewModel\Main\AddNewProjectViewModel.cs" />
     <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
-    <Compile Include="ViewModel\Editor\SoundRecorderViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sounds\SoundRecorderViewModel.cs" />
     <Compile Include="ViewModel\Editor\EditorViewModel.cs" />
     <Compile Include="ViewModel\Main\MainViewModel.cs" />
     <Compile Include="ViewModel\Main\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectLoginViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModel\ViewModelMessagingToken.cs" />
     <Compile Include="Views\Editor\Costumes\AddNewCostumeView.xaml.cs">
       <DependentUpon>AddNewCostumeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Costumes\ChangeCostume.xaml.cs">
-      <DependentUpon>ChangeCostume.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Costumes\ChangeCostumeView.xaml.cs">
+      <DependentUpon>ChangeCostumeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Costumes\CostumeNameChooserView.xaml.cs">
       <DependentUpon>CostumeNameChooserView.xaml</DependentUpon>
@@ -207,14 +213,14 @@
     <Compile Include="Views\Editor\Scripts\ScriptBrickCollection.cs" />
     <Compile Include="Views\Editor\Scripts\ScriptBrickContentTemplateSelector.cs" />
     <Compile Include="Views\Editor\Scripts\ScriptBrickIterator.cs" />
-    <Compile Include="Views\Editor\Sounds\AddNewSound.xaml.cs">
-      <DependentUpon>AddNewSound.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Sounds\AddNewSoundView.xaml.cs">
+      <DependentUpon>AddNewSoundView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Sounds\AudioLibrary.xaml.cs">
       <DependentUpon>AudioLibrary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Sounds\ChangeSoundName.xaml.cs">
-      <DependentUpon>ChangeSoundName.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Sounds\ChangeSoundView.xaml.cs">
+      <DependentUpon>ChangeSoundView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Sounds\SoundNameChooserView.xaml.cs">
       <DependentUpon>SoundNameChooserView.xaml</DependentUpon>
@@ -226,11 +232,11 @@
     </Compile>
     <Compile Include="Misc\Sounds\WaveHeaderWriter.cs" />
     <Compile Include="Misc\Sounds\XNAFrameworkDispatcherService.cs" />
-    <Compile Include="Views\Editor\Sprites\AddNewSprite.xaml.cs">
-      <DependentUpon>AddNewSprite.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Sprites\AddNewSpriteView.xaml.cs">
+      <DependentUpon>AddNewSpriteView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Sprites\ChangeSpriteName.xaml.cs">
-      <DependentUpon>ChangeSpriteName.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Sprites\ChangeSpriteView.xaml.cs">
+      <DependentUpon>ChangeSpriteView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\AddNewProject.xaml.cs">
       <DependentUpon>AddNewProject.xaml</DependentUpon>
@@ -334,7 +340,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Costumes\ChangeCostume.xaml">
+    <Page Include="Views\Editor\Costumes\ChangeCostumeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -374,7 +380,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Sounds\AddNewSound.xaml">
+    <Page Include="Views\Editor\Sounds\AddNewSoundView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -382,7 +388,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Sounds\ChangeSoundName.xaml">
+    <Page Include="Views\Editor\Sounds\ChangeSoundView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -394,11 +400,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Editor\Sprites\AddNewSprite.xaml">
+    <Page Include="Views\Editor\Sprites\AddNewSpriteView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Sprites\ChangeSpriteName.xaml">
+    <Page Include="Views\Editor\Sprites\ChangeSpriteView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -8,39 +8,42 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.ComponentModel;
 using Microsoft.Practices.ServiceLocation;
+using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.Core;
+using Catrobat.Core.Objects;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 {
-    public partial class CostumeNameChooserView : PhoneApplicationPage
+    public partial class ChangeCostumeView : PhoneApplicationPage
     {
-        private readonly AddNewCostumeViewModel _addNewCostumeViewModel = ServiceLocator.Current.GetInstance<AddNewCostumeViewModel>();
+        private readonly ChangeCostumeViewModel _changeCostumeViewModel = ServiceLocator.Current.GetInstance<ChangeCostumeViewModel>();
 
         ApplicationBarIconButton _btnSave;
 
-        public CostumeNameChooserView()
+        public ChangeCostumeView()
         {
             InitializeComponent();
 
             BuildApplicationBar();
             (App.Current.Resources["LocalizedStrings"] as LocalizedStrings).PropertyChanged += LanguageChanged;
-            _addNewCostumeViewModel.PropertyChanged += AddNewCostumeViewModel_OnPropertyChanged;
+            _changeCostumeViewModel.PropertyChanged += AddNewCostumeViewModel_OnPropertyChanged;
+        }
 
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            _changeCostumeViewModel.ResetViewModel();
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
             Dispatcher.BeginInvoke(() =>
             {
                 TextBoxCostumeName.Focus();
                 TextBoxCostumeName.SelectAll();
             });
-        }
 
-        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
-        {
-            //DON'T RESET VIEWMODEL
-        }
-
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            _btnSave.IsEnabled = _addNewCostumeViewModel.IsCostumeNameValid;
+            _btnSave.IsEnabled = _changeCostumeViewModel.IsCostumeNameValid;
             base.OnNavigatedTo(e);
         }
 
@@ -48,16 +51,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
         {
             if (propertyChangedEventArgs.PropertyName == "IsCostumeNameValid" && _btnSave != null)
             {
-                _btnSave.IsEnabled = _addNewCostumeViewModel.IsCostumeNameValid;
+                _btnSave.IsEnabled = _changeCostumeViewModel.IsCostumeNameValid;
             }
         }
 
         private void TextBoxCostumeName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            _addNewCostumeViewModel.CostumeName = TextBoxCostumeName.Text;
+            _changeCostumeViewModel.CostumeName = TextBoxCostumeName.Text;
         }
 
-        #region Appbar
+        #region AppBar
 
         private void BuildApplicationBar()
         {
@@ -76,12 +79,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            _addNewCostumeViewModel.SaveCommand.Execute(null);
+            _changeCostumeViewModel.SaveCommand.Execute(null);
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
-            _addNewCostumeViewModel.CancelCommand.Execute(null);
+            _changeCostumeViewModel.CancelCommand.Execute(null);
         }
 
         private void LanguageChanged(object sender, PropertyChangedEventArgs e)
