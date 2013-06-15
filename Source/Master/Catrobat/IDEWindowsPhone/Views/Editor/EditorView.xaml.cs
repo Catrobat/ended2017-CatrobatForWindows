@@ -24,19 +24,17 @@ using System.Windows;
 using System.ComponentModel;
 using SoundState = Microsoft.Xna.Framework.Audio.SoundState;
 using Microsoft.Practices.ServiceLocation;
+using System.Collections.Generic;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor
 {
     public partial class EditorView : PhoneApplicationPage
     {
         readonly EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
-        readonly MainViewModel _mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
 
         int _firstVisibleScriptBrickIndex;
         int _lastVisibleScriptBrickIndex;
-        private readonly SoundPlayer _soundPlayer;
-        private Sound _sound;
-        private bool _updatePivote = true;
+        private bool _updatePivot = true;
         private bool _isSpriteDragging = false;
 
         public EditorView()
@@ -44,16 +42,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             InitializeComponent();
             LockPivotIfNoSpriteSelected();
             _editorViewModel.OnAddedBroadcastMessage += OnStartAddBroadcastMessage;
-            _soundPlayer = new SoundPlayer();
-            _soundPlayer.SoundStateChanged += SoundPlayerStateChanged;
 
             (App.Current.Resources["LocalizedStrings"] as LocalizedStrings).PropertyChanged += LanguageChanged;
         }
 
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
         {
-            _soundPlayer.Stop();
+            _editorViewModel.ResetViewModel();
         }
+
+        #region improve?
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
@@ -83,16 +81,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             }
         }
 
-        private void LanguageChanged(object sender, PropertyChangedEventArgs e)
-        {
-            changeAppbar();
-        }
-
-        private void pivotMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            changeAppbar();
-        }
-
         private void reorderListBoxScriptBricks_Loaded(object sender, RoutedEventArgs e)
         {
             if (_editorViewModel.SelectedBrick != null)
@@ -118,7 +106,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             {
                 if (pivotMain.Items.Contains(pivotScripts))
                 {
-                    if (_updatePivote)
+                    if (_updatePivot)
                     {
                         pivotMain.Items.Remove(pivotScripts);
                         pivotMain.Items.Remove(pivotCostumes);
@@ -126,7 +114,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
                     }
                     else
                     {
-                        _updatePivote = false;
+                        _updatePivot = false;
                     }
                 }
             }
@@ -173,7 +161,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
         private void reorderListBoxSprites_ManipulationDelta(object sender, System.Windows.Input.ManipulationDeltaEventArgs e)
         {
-            _updatePivote = false;
+            _updatePivot = false;
         }
 
         private void reorderListBoxCostumes_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -194,64 +182,35 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             reorderListBoxScriptBricks.SelectedIndex = -1;
         }
 
+        private void OnStartAddBroadcastMessage()
+        {
+
+            Navigation.NavigateTo(typeof(NewBroadcastMessage));
+        }
+
+        #endregion
+
         private void menueMainMenue_Click(object sender, EventArgs e)
         {
-            Navigation.NavigateTo(typeof(MainView));
+            _editorViewModel.GoToMainMenueCommand.Execute(null);
         }
 
         private void menueProjectSettings_Click(object sender, EventArgs e)
         {
-            Navigation.NavigateTo(typeof(ProjectSettingsView));
+            _editorViewModel.ProjectSettingsCommand.Execute(null);
         }
-
-
-        private void btnDeleteSprite_Click(object sender, RoutedEventArgs e)
-        {
-            Sprite sprite = ((Button)sender).DataContext as Sprite;
-            string name = sprite.Name;
-
-            MessageBoxResult result = MessageBox.Show(EditorResources.MessageBoxDeleteSpriteText1 + name + EditorResources.MessageBoxDeleteSpriteText2,
-              EditorResources.MessageBoxDeleteSpriteHeader, MessageBoxButton.OKCancel);
-
-            if (result == MessageBoxResult.OK)
-                _editorViewModel.DeleteSpriteCommand.Execute(sprite);
-        }
-
 
         private void buttonSoundPlay_Click(object sender, RoutedEventArgs e)
         {
             PlayButton btnPlay = sender as PlayButton;
 
+            var parameter = new List<Object>();
+            parameter.Add(btnPlay.State);
+            parameter.Add(btnPlay.DataContext as Sound);
 
-            if (btnPlay.State == PlayButtonState.Play)
-            {
-                if (_sound != btnPlay.DataContext as Sound)
-                {
-                    _sound = btnPlay.DataContext as Sound;
-                    _soundPlayer.SetSound(_sound);
-                }
-                _soundPlayer.Play();
-            }
-            else
-            {
-                _soundPlayer.Pause();
-            }
+            _editorViewModel.PlaySoundCommand.Execute(parameter);
         }
 
-        private void SoundPlayerStateChanged(Misc.SoundState soundState, Misc.SoundState newState)
-        {
-            if (newState == Misc.SoundState.Stopped)
-                Dispatcher.BeginInvoke(() =>
-                {
-                    reorderListBoxSounds.ItemsSource = null;
-                    reorderListBoxSounds.ItemsSource = _editorViewModel.Sounds;
-                });
-        }
-
-        private void OnStartAddBroadcastMessage()
-        {
-            Navigation.NavigateTo(typeof(NewBroadcastMessage));
-        }
 
         #region Appbar
 
@@ -317,7 +276,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
                 _firstVisibleScriptBrickIndex = reorderListBoxScriptBricks.FirstVisibleItemIndex;
                 _lastVisibleScriptBrickIndex = reorderListBoxScriptBricks.LastVisibleItemIndex;
 
-                Navigation.NavigateTo(typeof(AddNewScript));
+                _editorViewModel.AddNewScriptBrickCommand.Execute(null);
             }
             else if (pivotMain.SelectedItem == pivotCostumes)
             {
@@ -329,9 +288,19 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             }
         }
 
+        private void LanguageChanged(object sender, PropertyChangedEventArgs e)
+        {
+            changeAppbar();
+        }
+
+        private void pivotMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            changeAppbar();
+        }
+
         private void appbarButtonPlay_Click(object sender, EventArgs e)
         {
-            PlayerLauncher.LaunchPlayer(_mainViewModel.CurrentProject.ProjectName);
+            _editorViewModel.StartPlayerCommand.Execute(null);
         }
 
         private void appbarButtonUndo_Click(object sender, EventArgs e)

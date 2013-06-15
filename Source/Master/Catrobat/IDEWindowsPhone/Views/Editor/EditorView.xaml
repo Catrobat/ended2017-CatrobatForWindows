@@ -23,9 +23,11 @@
     <converters:BytesImageConverter x:Key="BytesImageConverter" />
   </phone:PhoneApplicationPage.Resources>
 
+  
   <Grid x:Name="LayoutRoot">
     <controls:Pivot Name="pivotMain" Title="{ Binding CurrentProject.ProjectName }" SelectionChanged="pivotMain_SelectionChanged">
       <controls:PivotItem Name="pivotSprites" Header="{Binding Path=Editor.PivotObjects, Source={StaticResource LocalizedStrings}}">
+        <!--Pivot item sprites-->
         <reorderableListbox:ReorderListBox
           x:Name="reorderListBoxSprites"
           Margin="0 -25 0 0"

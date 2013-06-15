@@ -18,6 +18,11 @@ using Catrobat.IDECommon.Resources.Editor;
 using System.Windows;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
+using Catrobat.IDEWindowsPhone.Views.Main;
+using Catrobat.IDEWindowsPhone.Views.Editor;
+using Catrobat.IDEWindowsPhone.Controls.Buttons;
+using System.Collections.Generic;
+using System;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel
 {
@@ -32,6 +37,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         private Costume _messageBoxCostume;
         private Sound _messageBoxSound;
         private Sprite _messageBoxSprite;
+        private SoundPlayer _soundPlayer;
+        private Sound _sound;
 
         #endregion
 
@@ -73,6 +80,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 RaisePropertyChanged("SelectedSprite");
                 RaisePropertyChanged("Sounds");
                 RaisePropertyChanged("Costumes");
+                RaisePropertyChanged("ScriptBricks");
             }
         }
 
@@ -92,6 +100,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                     return _selectedSprite.Sounds.Sounds;
                 else
                     return null;
+            }
+            set
+            {
+                if (value == _selectedSprite.Sounds.Sounds) return;
+                _selectedSprite.Sounds.Sounds = value;
+                
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    RaisePropertyChanged("Sounds");
+                });
             }
         }
 
@@ -140,7 +158,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         #region Commands
 
-        public ICommand DeleteScriptBrickCommand
+        public ICommand AddNewScriptBrickCommand
         {
             get;
             private set;
@@ -151,6 +169,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             get;
             private set;
         }
+
+        public ICommand DeleteScriptBrickCommand
+        {
+            get;
+            private set;
+        }
+
 
         public ICommand StartAddBroadcastMessageCommand
         {
@@ -227,6 +252,37 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             private set;
         }
 
+
+        public ICommand PlaySoundCommand
+        {
+            get;
+            private set;
+        }
+
+        public ICommand StopSoundCommand
+        {
+            get;
+            private set;
+        }
+        
+        public ICommand StartPlayerCommand
+        {
+            get;
+            private set;
+        }
+
+        public ICommand GoToMainMenueCommand
+        {
+            get;
+            private set;
+        }
+
+        public ICommand ProjectSettingsCommand
+        {
+            get;
+            private set;
+        }
+
         public ICommand UndoCommand
         {
             get;
@@ -249,10 +305,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         #region Actions
 
-        private void DeleteScriptBrickAction(DataObject scriptBrick)
+        private void AddNewScriptBrickAction()
         {
-            if (scriptBrick != null)
-                ScriptBricks.Remove(scriptBrick);
+            Navigation.NavigateTo(typeof(AddNewScript));
         }
 
         private void CopyScriptBrickAction(DataObject scriptBrick)
@@ -273,6 +328,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             }
         }
 
+        private void DeleteScriptBrickAction(DataObject scriptBrick)
+        {
+            if (scriptBrick != null)
+                ScriptBricks.Remove(scriptBrick);
+        }
+        
+
         private void AddBroadcastMessageAction(DataObject broadcastObject)
         {
             // TODO: change this
@@ -290,6 +352,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 RaisePropertyChanged("BroadcastMessages");
             }
         }
+
 
         private void AddNewSpriteAction()
         {
@@ -396,6 +459,58 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         }
 
 
+        private void PlaySoundAction(List<Object> parameter)
+        {
+            StopSoundCommand.Execute(null);
+
+            if (_soundPlayer == null)
+            {
+                _soundPlayer = new SoundPlayer();
+                _soundPlayer.SoundStateChanged += SoundPlayerStateChanged;
+            }
+
+            var state = (PlayButtonState)parameter[0];
+            var sound = (Sound)parameter[1];
+
+            if (state == PlayButtonState.Play)
+            {
+                if (_sound != sound)
+                {
+                    _sound = sound;
+                    _soundPlayer.SetSound(_sound);
+                }
+                _soundPlayer.Play();
+            }
+            else
+            {
+                _soundPlayer.Pause();
+            }
+        }
+
+        private void StopSoundAction()
+        {
+            if (_soundPlayer != null)
+            {
+                _soundPlayer.Pause();
+            }
+        }
+
+        private async void StartPlayerAction()
+        {
+            await PlayerLauncher.LaunchPlayer(CurrentProject.ProjectName);
+        }
+
+        private void GoToMainMenueAction()
+        {
+            Navigation.NavigateTo(typeof(MainView));
+        }
+
+        private void ProjectSettingsAction()
+        {
+            Navigation.NavigateTo(typeof(ProjectSettingsView));
+        }
+
+
         private void UndoAction()
         {
             CurrentProject.Undo();
@@ -447,8 +562,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         
         public EditorViewModel()
         {
-            DeleteScriptBrickCommand = new RelayCommand<DataObject>(DeleteScriptBrickAction);
+            AddNewScriptBrickCommand = new RelayCommand(AddNewScriptBrickAction);
             CopyScriptBrickCommand = new RelayCommand<DataObject>(CopyScriptBrickAction);
+            DeleteScriptBrickCommand = new RelayCommand<DataObject>(DeleteScriptBrickAction);
+            
             StartAddBroadcastMessageCommand = new RelayCommand<DataObject>(AddBroadcastMessageAction);
 
             AddNewSpriteCommand = new RelayCommand(AddNewSpriteAction);
@@ -464,7 +581,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             EditCostumeCommand = new RelayCommand<Costume>(EditCostumeAction);
             CopyCostumeCommand = new RelayCommand<Costume>(CopyCostumeAction);
             DeleteCostumeCommand = new RelayCommand<Costume>(DeleteCostumeAction);
-            
+
+            PlaySoundCommand = new RelayCommand<List<Object>>(PlaySoundAction);
+            StopSoundCommand = new RelayCommand(StopSoundAction);
+            StartPlayerCommand = new RelayCommand(StartPlayerAction);
+            GoToMainMenueCommand = new RelayCommand(GoToMainMenueAction);
+            ProjectSettingsCommand = new RelayCommand(ProjectSettingsAction);
+
             UndoCommand = new RelayCommand(UndoAction);
             RedoCommand = new RelayCommand(RedoAction);
 
@@ -518,6 +641,23 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         #endregion
 
+
+        private void SoundPlayerStateChanged(Misc.SoundState soundState, Misc.SoundState newState)
+        {
+            if (newState == Misc.SoundState.Stopped)
+            {
+                if (Sounds != null)
+                {
+                    var tempSounds = new ObservableCollection<Sound>();
+                    foreach (Sound sound in Sounds)
+                        tempSounds.Add(sound);
+
+                    Sounds = null;
+                    Sounds = tempSounds;
+                }
+            }
+        }
+
         public void ResetViewModel()
         {
             _broadcastObject = null;
@@ -527,6 +667,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SelectedBrickCategory = BrickCategory.Control;
             SelectedBrick = null;
             SelectedSound = null;
+
+            if (_soundPlayer != null)
+            {
+                _soundPlayer.Stop();
+                _soundPlayer.SoundStateChanged -= SoundPlayerStateChanged;
+            }
+            _soundPlayer = null;
+            _sound = null;
         }
 
         public override void Cleanup()
