@@ -220,6 +220,14 @@ void ProjectDaemon::SetError(ProjectDaemon::Error error)
 	}
 }
 
+void ProjectDaemon::AddDebug(Platform::String^ info)
+{
+    std::wstring fooW(info->Begin());
+    std::string fooA(fooW.begin(), fooW.end());
+	m_errorList->push_back(fooA);
+
+}
+
 std::vector<std::string> *ProjectDaemon::ErrorList()
 {
 	return m_errorList;

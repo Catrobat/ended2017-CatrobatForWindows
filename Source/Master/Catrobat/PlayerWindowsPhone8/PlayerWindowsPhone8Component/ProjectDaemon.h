@@ -35,6 +35,7 @@ public:
 	void ApplyDesiredRenderTargetSizeFromProject();
 
 	void SetError(Error error);
+    void AddDebug(Platform::String^ info);
 	std::vector<std::string> *ErrorList();
 
 private:
