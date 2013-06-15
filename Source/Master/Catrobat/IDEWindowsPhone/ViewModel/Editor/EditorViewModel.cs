@@ -507,6 +507,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private void ProjectSettingsAction()
         {
+            GenericMessage<Project> message = new GenericMessage<Project>(CurrentProject);
+            Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.ProjectNameListener);
+
             Navigation.NavigateTo(typeof(ProjectSettingsView));
         }
 

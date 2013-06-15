@@ -259,10 +259,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             ApplicationBar.MenuItems.Add(menuItemMainMenue);
             menuItemMainMenue.Click += new EventHandler(menueMainMenue_Click);
 
-            ApplicationBarMenuItem menuItemProjectSettingds = new ApplicationBarMenuItem();
-            menuItemProjectSettingds.Text = EditorResources.MenuProjectSettings;
-            ApplicationBar.MenuItems.Add(menuItemProjectSettingds);
-            menuItemProjectSettingds.Click += new EventHandler(menueProjectSettings_Click);
+            ApplicationBarMenuItem menuItemProjectSettings = new ApplicationBarMenuItem();
+            menuItemProjectSettings.Text = EditorResources.MenuProjectSettings;
+            ApplicationBar.MenuItems.Add(menuItemProjectSettings);
+            menuItemProjectSettings.Click += new EventHandler(menueProjectSettings_Click);
         }
 
         private void appbarButtonAdd_Click(object sender, EventArgs e)

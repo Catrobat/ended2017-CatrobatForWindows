@@ -25,7 +25,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
             BuildApplicationBar();
             (App.Current.Resources["LocalizedStrings"] as LocalizedStrings).PropertyChanged += LanguageChanged;
-            _changeSoundViewModel.PropertyChanged += AddNewSoundViewModel_OnPropertyChanged;
+            _changeSoundViewModel.PropertyChanged += ChangeSoundViewModel_OnPropertyChanged;
         }
 
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
@@ -45,7 +45,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
             base.OnNavigatedTo(e);
         }
 
-        private void AddNewSoundViewModel_OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        private void ChangeSoundViewModel_OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == "IsSoundNameValid" && _btnSave != null)
             {

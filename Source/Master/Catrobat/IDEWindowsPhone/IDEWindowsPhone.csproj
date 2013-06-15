@@ -170,6 +170,7 @@
     <Compile Include="Themes\ColorChooser.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeChooser.cs" />
+    <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\AddNewCostumeViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\ChangeCostumeViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sounds\AddNewSoundViewModel.cs" />
@@ -181,7 +182,6 @@
     <Compile Include="ViewModel\Editor\Sounds\SoundRecorderViewModel.cs" />
     <Compile Include="ViewModel\Editor\EditorViewModel.cs" />
     <Compile Include="ViewModel\Main\MainViewModel.cs" />
-    <Compile Include="ViewModel\Main\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectLoginViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
