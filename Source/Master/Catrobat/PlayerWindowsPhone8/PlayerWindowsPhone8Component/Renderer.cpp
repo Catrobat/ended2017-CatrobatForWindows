@@ -64,8 +64,8 @@ void Renderer::Render()
 	// ---------------------------------------------------------------------->
 	m_spriteBatch->Begin();
 	{
-		string loadingScreen("This will be the loading screen :)");
-		std::wstring loadingScreenWidestr = std::wstring(loadingScreen.begin(), loadingScreen.end());
+		Platform::String^ loadingScreen = L"";//CPPBridgeNameSpace::CPPBridge::Instance()->ProjectName();
+		std::wstring loadingScreenWidestr(loadingScreen->Begin());
 		const wchar_t* lScreen = loadingScreenWidestr.c_str();
 
 		m_spriteFont->DrawString(m_spriteBatch.get(), lScreen, XMFLOAT2(100, 100), Colors::Black);

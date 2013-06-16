@@ -84,6 +84,7 @@ void XMLParser::parseXML(string xml)
 
 	m_project = parseProjectHeader(&doc);
 	parseObjectList(&doc, m_project->getObjectList());
+	
 	parseVariableList(&doc, m_project);
 	SetPendingVariables();
 }
@@ -249,6 +250,7 @@ void XMLParser::parseObjectList(xml_document<> *doc, ObjectList *objectList)
 	xml_node<> *node = objectListNode->first_node("object");
 	while (node)
 	{
+
 		xml_attribute<> *objectReference = node->first_attribute("reference");
 		if (objectReference)
 		{

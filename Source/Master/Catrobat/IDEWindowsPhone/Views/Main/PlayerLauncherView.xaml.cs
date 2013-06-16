@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using PhoneDirect3DXamlAppComponent;
+using System.Runtime.InteropServices;
 
 namespace Catrobat.IDEWindowsPhone.Views.Main
 {
@@ -54,7 +55,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         }
 
         private void DrawingSurfaceBackground_Loaded(object sender, RoutedEventArgs e)
-        {
+        {  
             // Set window bounds in dips
             m_d3dBackground.WindowBounds = new Windows.Foundation.Size(
                 (float)Application.Current.Host.Content.ActualWidth,
@@ -69,6 +70,11 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
             // Set render resolution to the full native resolution
             m_d3dBackground.RenderResolution = m_d3dBackground.NativeResolution;
+
+            // Set ProjectName to load
+            var projectName = string.Empty;
+            if (NavigationContext.QueryString.TryGetValue("ProjectName", out projectName))
+            m_d3dBackground.ProjectName = projectName;
 
             // Hook-up native component to DrawingSurfaceBackgroundGrid
             DrawingSurfaceBackground.SetBackgroundContentProvider(m_d3dBackground.CreateContentProvider());

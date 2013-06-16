@@ -1,4 +1,5 @@
-﻿using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
+﻿using Catrobat.IDEWindowsPhone.ViewModel.Editor;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
@@ -17,7 +18,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<EditorViewModel>();
-            SimpleIoc.Default.Register<ProjectSettingsViewModel>();
             SimpleIoc.Default.Register<AddNewProjectViewModel>();
             SimpleIoc.Default.Register<UploadProjectViewModel>();
             SimpleIoc.Default.Register<UploadProjectLoginViewModel>();
@@ -29,6 +29,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<ChangeSoundViewModel>(true);
             SimpleIoc.Default.Register<AddNewSpriteViewModel>(true);
             SimpleIoc.Default.Register<ChangeSpriteViewModel>(true);
+            SimpleIoc.Default.Register<ProjectSettingsViewModel>(true);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
