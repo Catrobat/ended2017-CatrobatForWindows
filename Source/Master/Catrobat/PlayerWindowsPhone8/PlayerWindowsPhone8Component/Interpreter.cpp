@@ -8,20 +8,6 @@
 using namespace std;
 using namespace Windows::Devices::Sensors;
 
-template<typename T>
-   T StringToNumber(const std::string& numberAsString)
-   {
-      T valor;
-
-      std::stringstream stream(numberAsString);
-      stream >> valor;
-      if (stream.fail()) {
-         std::runtime_error e(numberAsString);
-         throw e;
-      }
-      return valor;
-   }
-
 Interpreter *Interpreter::__instance = NULL;
 
 Interpreter *Interpreter::Instance()
@@ -110,7 +96,9 @@ void Interpreter::ReadAcceleration()
 int Interpreter::interpretOperator(FormulaTree *tree, Object *object)
 {
     FormulaTree *leftChild = tree->getLeftChild();
-    int leftValue = this->EvaluateFormulaToInt(leftChild, object);
+    int leftValue = 0;
+    if (tree->getLeftChild() != NULL)
+        leftValue = this->EvaluateFormulaToInt(leftChild, object);
     FormulaTree *rightChild = tree->getRightChild();
     int rightValue = this->EvaluateFormulaToInt(rightChild, object);
     int returnValue = -1;

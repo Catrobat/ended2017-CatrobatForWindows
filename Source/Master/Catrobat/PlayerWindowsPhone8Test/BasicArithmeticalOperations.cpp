@@ -169,6 +169,36 @@ namespace PlayerWindowsPhone8Test
 			Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), expected);
 		}
 
+        TEST_METHOD(Formula_BasicArithmetical_NegativeNumber_int)
+		{
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //-18
+			FormulaTree *formula = new FormulaTree("OPERATOR", "MINUS");
+			formula->SetRightChild(new FormulaTree("NUMBER", "18"));
+			int expected = -18;
+            int actual = interpreter->EvaluateFormulaToInt(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+        TEST_METHOD(Formula_BasicArithmetical_NegativeNumberMixed_int)
+		{
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //-2 * 12 / 4 = -6
+			FormulaTree *formula = new FormulaTree("OPERATOR", "MULT");
+            formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+            formula->getLeftChild()->SetRightChild(new FormulaTree("NUMBER", "2"));
+			formula->SetRightChild(new FormulaTree("OPERATOR", "DIVIDE"));
+            formula->getRightChild()->SetLeftChild(new FormulaTree("NUMBER", "12"));
+            formula->getRightChild()->SetRightChild(new FormulaTree("NUMBER", "4"));
+			int expected = -6;
+            int actual = interpreter->EvaluateFormulaToInt(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
         TEST_METHOD(Formula_Basic_PLUS_float)
         {
             Interpreter *interpreter = Interpreter::Instance();
