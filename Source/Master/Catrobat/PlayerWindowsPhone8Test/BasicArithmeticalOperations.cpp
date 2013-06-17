@@ -169,5 +169,188 @@ namespace PlayerWindowsPhone8Test
 			Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), expected);
 		}
 
+        TEST_METHOD(Formula_Basic_PLUS_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //7.2 + 1.0 + 3.5 = 11.7
+            FormulaTree *tree = new FormulaTree("OPERATOR", "PLUS");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "7.2"));
+            tree->SetRightChild(new FormulaTree("OPERATOR", "PLUS"));
+            tree->getRightChild()->SetLeftChild(new FormulaTree("NUMBER", "1.0"));
+            tree->getRightChild()->SetRightChild(new FormulaTree("NUMBER", "3.5"));
+            float expected = 11.7f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(Formula_Basic_PLUSwithMINUS_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //7.2 + 1.0 + 3.5 + -1.0 = 10.7
+            FormulaTree *tree = new FormulaTree("OPERATOR", "PLUS");
+            tree->SetLeftChild(new FormulaTree("OPERATOR", "PLUS"));
+            tree->getLeftChild()->SetLeftChild(new FormulaTree("OPERATOR", "PLUS"));
+            tree->getLeftChild()->getLeftChild()->SetLeftChild(new FormulaTree("NUMBER", "7.2"));
+            tree->getLeftChild()->getLeftChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+            tree->getLeftChild()->SetRightChild(new FormulaTree("NUMBER", "3.5"));
+            tree->SetRightChild(new FormulaTree("OPERATOR", "MINUS"));  
+            tree->getRightChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+            float expected = 10.7f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(Formula_Basic_MINUS_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //7.2 - 1.0 - 3.5 = 2.7   FAIL!!!
+            //        MINUS
+            //        /   \
+            //      7,2  MINUS
+            //           /   \
+            //         1,0   3,5
+            // --> 7,2 - (1,0 - 3,5) = 9,7
+            FormulaTree *tree = new FormulaTree("OPERATOR", "MINUS");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "7.2"));
+            tree->SetRightChild(new FormulaTree("OPERATOR", "MINUS"));
+            tree->getRightChild()->SetLeftChild(new FormulaTree("NUMBER", "1.0"));
+            tree->getRightChild()->SetRightChild(new FormulaTree("NUMBER", "3.5"));
+            float expected = 2.7f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsFalse(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(Formula_Basic_MINUS2_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //7.2 - 1.0 - 3.5 = 2.7
+            FormulaTree *tree = new FormulaTree("OPERATOR", "MINUS");
+            tree->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+            tree->getLeftChild()->SetLeftChild(new FormulaTree("NUMBER", "7.2"));
+            tree->getLeftChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+            tree->SetRightChild(new FormulaTree("NUMBER", "3.5"));
+            float expected = 2.7f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(Formula_Basic_MINUSsimple_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //7.2 - 1.5 = 5.7
+            FormulaTree *tree = new FormulaTree("OPERATOR", "MINUS");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "7.2"));
+            tree->SetRightChild(new FormulaTree("NUMBER", "1.5"));
+            float expected = 5.7f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(Formula_Basic_MINUSsimple2_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //7.2 - 10.5 = -3.3
+            FormulaTree *tree = new FormulaTree("OPERATOR", "MINUS");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "7.2"));
+            tree->SetRightChild(new FormulaTree("NUMBER", "10.5"));
+            float expected = -3.3f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(Formula_Basic_MINUSwithMINUS_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //7.2 - 1.0 - 3.5 - -1.0= 3.7
+            FormulaTree *tree = new FormulaTree("OPERATOR", "MINUS");
+            tree->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+            tree->getLeftChild()->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+            tree->getLeftChild()->getLeftChild()->SetLeftChild(new FormulaTree("NUMBER", "7.2"));
+            tree->getLeftChild()->getLeftChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+            tree->getLeftChild()->SetRightChild(new FormulaTree("NUMBER", "3.5"));
+            tree->SetRightChild(new FormulaTree("OPERATOR", "MINUS"));  
+            tree->getRightChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));   
+            float expected = 3.7f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(Formula_Basic_MULT_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //7.2 * 1.0 * 3.5 = 25.2
+            FormulaTree *tree = new FormulaTree("OPERATOR", "MULT");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "7.2"));
+            tree->SetRightChild(new FormulaTree("OPERATOR", "MULT"));
+            tree->getRightChild()->SetLeftChild(new FormulaTree("NUMBER", "1.0"));
+            tree->getRightChild()->SetRightChild(new FormulaTree("NUMBER", "3.5"));
+            float expected = 25.2f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));   
+        }
+
+        TEST_METHOD(Formula_Basic_MULTsimple_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //7.2 * 3.4 = 24.48
+            FormulaTree *tree = new FormulaTree("OPERATOR", "MULT");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "7.2"));
+            tree->SetRightChild(new FormulaTree("NUMBER", "3.4"));
+            float expected = 24.48f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));  
+        }
+
+        TEST_METHOD(Formula_Basic_MULTwithMINUS_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //7.2 * 1.0 * 3.5 * -1.0 = -25.2
+            FormulaTree *tree = new FormulaTree("OPERATOR", "MULT");
+            tree->SetLeftChild(new FormulaTree("OPERATOR", "MULT"));
+            tree->getLeftChild()->SetLeftChild(new FormulaTree("OPERATOR", "MULT"));
+            tree->getLeftChild()->getLeftChild()->SetLeftChild(new FormulaTree("NUMBER", "7.2"));
+            tree->getLeftChild()->getLeftChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+            tree->getLeftChild()->SetRightChild(new FormulaTree("NUMBER", "3.5"));
+            tree->SetRightChild(new FormulaTree("OPERATOR", "MINUS"));  
+            tree->getRightChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));   
+            float expected = -25.2f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(Formula_Basic_DIVIDE_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //7.2 / 2.0 = 3.6
+            FormulaTree *tree = new FormulaTree("OPERATOR", "DIVIDE");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "7.2"));
+            tree->SetRightChild(new FormulaTree("NUMBER", "2.0"));
+            float expected = 3.6f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
 	};
 }
