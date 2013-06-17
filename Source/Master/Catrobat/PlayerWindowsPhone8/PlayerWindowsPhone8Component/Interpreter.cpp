@@ -119,6 +119,8 @@ int Interpreter::interpretOperator(FormulaTree *tree, Object *object)
             return -1;
         returnValue = leftValue / rightValue;
         break;
+    case Operator::POW:
+        returnValue = pow(leftValue, rightValue);
     default:
         break;
     }
@@ -153,6 +155,8 @@ float Interpreter::interpretOperatorFloat(FormulaTree *tree, Object *object)
             return 0.0f;
         returnValue = leftValue / rightValue;
         break;
+    case Operator::POW:
+        returnValue = pow(leftValue, rightValue);
     default:
         break;
     }

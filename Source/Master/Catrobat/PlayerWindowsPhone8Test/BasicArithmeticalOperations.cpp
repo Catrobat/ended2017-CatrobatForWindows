@@ -382,5 +382,103 @@ namespace PlayerWindowsPhone8Test
             Assert::IsTrue(TestHelper::isEqual(expected, actual));
         }
 
+        TEST_METHOD(Formula_Basic_POW_int)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //2 ^ 3 = 8;
+            FormulaTree *tree = new FormulaTree("OPERATOR", "POW");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "2"));
+            tree->SetRightChild(new FormulaTree("NUMBER", "3"));
+            int expected = 8;
+            int actual = interpreter->EvaluateFormulaToInt(tree, object);
+            Assert::AreEqual(expected, actual);
+        }
+
+        TEST_METHOD(Formula_Basic_POW2_int)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //2 ^ 0 = 1;
+            FormulaTree *tree = new FormulaTree("OPERATOR", "POW");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "2"));
+            tree->SetRightChild(new FormulaTree("NUMBER", "0"));
+            int expected = 1;
+            int actual = interpreter->EvaluateFormulaToInt(tree, object);
+            Assert::AreEqual(expected, actual);
+        }
+
+        TEST_METHOD(Formula_Basic_POW3_int)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //0 ^ 3 = 8;
+            FormulaTree *tree = new FormulaTree("OPERATOR", "POW");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "0"));
+            tree->SetRightChild(new FormulaTree("NUMBER", "3"));
+            int expected = 0;
+            int actual = interpreter->EvaluateFormulaToInt(tree, object);
+            Assert::AreEqual(expected, actual);
+        }
+
+        TEST_METHOD(Formula_Basic_POW_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //2.1 ^ 3 = 9.261;
+            FormulaTree *tree = new FormulaTree("OPERATOR", "POW");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "2.1"));
+            tree->SetRightChild(new FormulaTree("NUMBER", "3.0"));
+            float expected = 9.261f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(Formula_Basic_POW2_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //2.3 ^ 0 = 1;
+            FormulaTree *tree = new FormulaTree("OPERATOR", "POW");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "2.3"));
+            tree->SetRightChild(new FormulaTree("NUMBER", "0.0"));
+            float expected = 1.0f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(Formula_Basic_POW3_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //0 ^ 3.4 = 8;
+            FormulaTree *tree = new FormulaTree("OPERATOR", "POW");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "0.0"));
+            tree->SetRightChild(new FormulaTree("NUMBER", "3.4"));
+            float expected = 0.0f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(Formula_Basic_POW4_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //4.1 ^ 3.4 = 121.18953325391327628525330849374;
+            FormulaTree *tree = new FormulaTree("OPERATOR", "POW");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "4.1"));
+            tree->SetRightChild(new FormulaTree("NUMBER", "3.4"));
+            float expected = 121.18953325391327628525330849374f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
 	};
 }
