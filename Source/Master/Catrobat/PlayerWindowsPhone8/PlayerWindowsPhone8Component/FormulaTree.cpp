@@ -12,6 +12,8 @@ FormulaTree::FormulaTree(string type, string value)
 		m_type = Type::OPERATOR;
 	else if (type == "USER_VARIABLE")
 		m_type = Type::USER_VARIABLE;
+    else if (type == "BRACKET")
+        m_type = Type::BRACKET;
 
     if (m_type == Type::OPERATOR)
     {

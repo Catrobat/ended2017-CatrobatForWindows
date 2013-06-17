@@ -480,5 +480,58 @@ namespace PlayerWindowsPhone8Test
             Assert::IsTrue(TestHelper::isEqual(expected, actual));
         }
 
+        TEST_METHOD(Formula_Basic_BRACKET_int)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //2 * (3 - 1) = 4
+            FormulaTree *tree = new FormulaTree("OPERATOR", "MULT");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "2"));
+            tree->SetRightChild(new FormulaTree("BRACKET", ""));
+            tree->getRightChild()->SetRightChild(new FormulaTree("OPERATOR", "MINUS"));
+            tree->getRightChild()->getRightChild()->SetLeftChild(new FormulaTree("NUMBER", "3"));
+            tree->getRightChild()->getRightChild()->SetRightChild(new FormulaTree("NUMBER", "1"));
+            int expected = 4;
+            int actual = interpreter->EvaluateFormulaToInt(tree, object);
+            Assert::AreEqual(expected, actual);
+        }
+
+        TEST_METHOD(Formula_Basic_BRACKET_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //2.0 * (3.0 - 1.0) = 4.0
+            FormulaTree *tree = new FormulaTree("OPERATOR", "MULT");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "2.0"));
+            tree->SetRightChild(new FormulaTree("BRACKET", ""));
+            tree->getRightChild()->SetRightChild(new FormulaTree("OPERATOR", "MINUS"));
+            tree->getRightChild()->getRightChild()->SetLeftChild(new FormulaTree("NUMBER", "3.0"));
+            tree->getRightChild()->getRightChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+            float expected = 4.0;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(Formula_Basic_MIXEDwithBracket_float)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            //10 + (7 - 3 * 2) = 11
+            FormulaTree *tree = new FormulaTree("OPERATOR", "PLUS");
+            tree->SetLeftChild(new FormulaTree("NUMBER", "10"));
+            tree->SetRightChild(new FormulaTree("BRACKET", ""));
+            tree->getRightChild()->SetRightChild(new FormulaTree("OPERATOR", "MINUS"));
+            tree->getRightChild()->getRightChild()->SetLeftChild(new FormulaTree("NUMBER", "7"));
+            tree->getRightChild()->getRightChild()->SetRightChild(new FormulaTree("OPERATOR", "MULT"));
+            tree->getRightChild()->getRightChild()->getRightChild()->SetLeftChild(new FormulaTree("NUMBER", "3"));
+            tree->getRightChild()->getRightChild()->getRightChild()->SetRightChild(new FormulaTree("NUMBER", "2"));
+            float expected = 11.0f;
+            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
 	};
 }

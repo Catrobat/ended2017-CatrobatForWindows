@@ -39,6 +39,8 @@ int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 				return atoi(var->Value().c_str());
 		}
 		break;
+    case BRACKET:
+        return this->EvaluateFormulaToInt(tree->getRightChild(), object);
 	default:
 		break;
 	}
@@ -62,6 +64,8 @@ float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 				return (float)atof(var->Value().c_str());
 		}
 		break;
+    case BRACKET:
+        return this->EvaluateFormulaToFloat(tree->getRightChild(), object);
 	default:
 		break;
 	}
