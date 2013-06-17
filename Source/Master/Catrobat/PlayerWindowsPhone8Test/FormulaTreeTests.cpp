@@ -58,5 +58,17 @@ namespace PlayerWindowsPhone8Test
             Assert::IsTrue(tree->getOperator() == Operator::POW);
 		}
 
+        TEST_METHOD(FormulaTree_Bracket)
+        {
+            FormulaTree *tree = new FormulaTree("BRACKET", "");
+            tree->SetRightChild(new FormulaTree("OPERATOR", "PLUS"));
+            tree->getRightChild()->SetLeftChild(new FormulaTree("NUMBER", "1"));
+            tree->getRightChild()->SetRightChild(new FormulaTree("NUMBER", "2"));
+
+            Assert::IsTrue(tree->GetType() == Type::BRACKET);
+            Assert::IsTrue(tree->getOperator() == Operator::NO_OPERATOR);
+            Assert::IsTrue(tree->getLeftChild() == NULL);
+        }
+
 	};
 }

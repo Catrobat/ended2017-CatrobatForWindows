@@ -28,5 +28,6 @@ private:
 
     // HelperFunctions
     int interpretOperator(FormulaTree *tree, Object *object);
+    float interpretOperatorFloat(FormulaTree *tree, Object *object);
 };
 

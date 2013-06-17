@@ -3,6 +3,7 @@
 #include "FormulaTree.h"
 #include "ProjectDaemon.h"
 #include <string.h>
+#include <sstream>
 
 using namespace std;
 using namespace Windows::Devices::Sensors;
@@ -38,6 +39,8 @@ int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 				return atoi(var->Value().c_str());
 		}
 		break;
+    case BRACKET:
+        return this->EvaluateFormulaToInt(tree->getRightChild(), object);
 	default:
 		break;
 	}
@@ -50,17 +53,19 @@ float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 	switch (type)
 	{
 	case OPERATOR:
-		break;
+        return interpretOperatorFloat(tree, object);
 	case NUMBER:
-		return atof(tree->Value().c_str());
+        return (float)atof(tree->Value().c_str());
 	case USER_VARIABLE:
 		{
 			string varName = tree->Value();
 			UserVariable *var = object->Variable(varName);
 			if (var)
-				return atof(var->Value().c_str());
+				return (float)atof(var->Value().c_str());
 		}
 		break;
+    case BRACKET:
+        return this->EvaluateFormulaToFloat(tree->getRightChild(), object);
 	default:
 		break;
 	}
@@ -95,7 +100,9 @@ void Interpreter::ReadAcceleration()
 int Interpreter::interpretOperator(FormulaTree *tree, Object *object)
 {
     FormulaTree *leftChild = tree->getLeftChild();
-    int leftValue = this->EvaluateFormulaToInt(leftChild, object);
+    int leftValue = 0;
+    if (tree->getLeftChild() != NULL)
+        leftValue = this->EvaluateFormulaToInt(leftChild, object);
     FormulaTree *rightChild = tree->getRightChild();
     int rightValue = this->EvaluateFormulaToInt(rightChild, object);
     int returnValue = -1;
@@ -116,9 +123,47 @@ int Interpreter::interpretOperator(FormulaTree *tree, Object *object)
             return -1;
         returnValue = leftValue / rightValue;
         break;
+    case Operator::POW:
+        returnValue = pow(leftValue, rightValue);
     default:
         break;
     }
     
     return returnValue;
+}
+
+float Interpreter::interpretOperatorFloat(FormulaTree *tree, Object *object)
+{
+    FormulaTree *leftChild = tree->getLeftChild();
+    float leftValue = 0.0f;
+    if (tree->getLeftChild() != NULL)
+        leftValue = this->EvaluateFormulaToFloat(leftChild, object);
+    FormulaTree *rightChild = tree->getRightChild();
+    float rightValue = this->EvaluateFormulaToFloat(rightChild, object);
+
+    float returnValue = 0.0f;
+
+    switch (tree->getOperator())
+    {
+    case Operator::PLUS:
+        returnValue = leftValue + rightValue;
+        break;
+    case Operator::MINUS:
+        returnValue = leftValue - rightValue;
+        break;
+    case Operator::MULT:
+        returnValue = leftValue * rightValue;
+        break;
+    case Operator::DIVIDE:
+        if (rightValue == 0)
+            return 0.0f;
+        returnValue = leftValue / rightValue;
+        break;
+    case Operator::POW:
+        returnValue = pow(leftValue, rightValue);
+    default:
+        break;
+    }
+
+    return (float)returnValue;
 }

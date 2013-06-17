@@ -6,7 +6,8 @@ enum Type
 {
 	OPERATOR,
 	NUMBER,
-	USER_VARIABLE
+	USER_VARIABLE, 
+    BRACKET
 };
 
 enum Operator
