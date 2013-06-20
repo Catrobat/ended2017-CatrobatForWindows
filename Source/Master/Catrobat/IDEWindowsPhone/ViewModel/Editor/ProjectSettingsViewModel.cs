@@ -90,14 +90,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         private void SaveAction()
         {
             ReceivedProject.ProjectName = ProjectName;
-
-            ResetViewModel();
             Navigation.NavigateBack();
         }
 
         private void CancelAction()
         {
-            ResetViewModel();
             Navigation.NavigateBack();
         }
 

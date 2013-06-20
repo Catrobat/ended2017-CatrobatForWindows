@@ -25,12 +25,13 @@ using System.ComponentModel;
 using SoundState = Microsoft.Xna.Framework.Audio.SoundState;
 using Microsoft.Practices.ServiceLocation;
 using System.Collections.Generic;
+using System.Windows.Navigation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor
 {
     public partial class EditorView : PhoneApplicationPage
     {
-        readonly EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
+        readonly EditorViewModel _viewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
 
         int _firstVisibleScriptBrickIndex;
         int _lastVisibleScriptBrickIndex;
@@ -41,29 +42,30 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         {
             InitializeComponent();
             LockPivotIfNoSpriteSelected();
-            _editorViewModel.OnAddedBroadcastMessage += OnStartAddBroadcastMessage;
+            _viewModel.OnAddedBroadcastMessage += OnStartAddBroadcastMessage;
 
             (App.Current.Resources["LocalizedStrings"] as LocalizedStrings).PropertyChanged += LanguageChanged;
         }
 
-        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            _editorViewModel.ResetViewModel();
+            _viewModel.ResetViewModel();
+            base.OnNavigatedFrom(e);
         }
 
         #region improve?
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // TODO: maybe remove this 2 lines
-            reorderListBoxSprites.ItemsSource = _editorViewModel.Sprites;
-            reorderListBoxSprites.SelectedItem = _editorViewModel.SelectedSprite;
+            reorderListBoxSprites.ItemsSource = _viewModel.Sprites;
+            reorderListBoxSprites.SelectedItem = _viewModel.SelectedSprite;
 
             // TODO: do this somewhere else
-            if (_editorViewModel.SelectedBrick != null)
+            if (_viewModel.SelectedBrick != null)
             {
-                Sprite selectedSprite = _editorViewModel.SelectedSprite;
-                DataObject newScriptBrick = _editorViewModel.SelectedBrick;
+                Sprite selectedSprite = _viewModel.SelectedSprite;
+                DataObject newScriptBrick = _viewModel.SelectedBrick;
 
                 ((ScriptBrickCollection)reorderListBoxScriptBricks.ItemsSource).AddScriptBrick(newScriptBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex);
 
@@ -77,16 +79,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
                 reorderListBoxScriptBricks.UpdateLayout();
                 reorderListBoxScriptBricks.ScrollIntoView(reorderListBoxScriptBricks.ItemContainerGenerator.ContainerFromItem(newScriptBrick));
-                _editorViewModel.SelectedBrick = null;
+                _viewModel.SelectedBrick = null;
             }
         }
 
         private void reorderListBoxScriptBricks_Loaded(object sender, RoutedEventArgs e)
         {
-            if (_editorViewModel.SelectedBrick != null)
+            if (_viewModel.SelectedBrick != null)
             {
-                reorderListBoxScriptBricks.ScrollIntoView(_editorViewModel.SelectedBrick);
-                _editorViewModel.SelectedBrick = null;
+                reorderListBoxScriptBricks.ScrollIntoView(_viewModel.SelectedBrick);
+                _viewModel.SelectedBrick = null;
             }
         }
 
@@ -100,7 +102,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
         private void LockPivotIfNoSpriteSelected()
         {
-            Sprite selectedSprite = _editorViewModel.SelectedSprite;
+            Sprite selectedSprite = _viewModel.SelectedSprite;
 
             if (selectedSprite == null)
             {
@@ -153,7 +155,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
                 }
                 else
                 {
-                    _editorViewModel.SelectedSprite = selectedSprite;
+                    _viewModel.SelectedSprite = selectedSprite;
                     LockPivotIfNoSpriteSelected();
                 }
             }
@@ -192,12 +194,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
         private void menueMainMenue_Click(object sender, EventArgs e)
         {
-            _editorViewModel.GoToMainMenueCommand.Execute(null);
+            _viewModel.GoToMainMenueCommand.Execute(null);
         }
 
         private void menueProjectSettings_Click(object sender, EventArgs e)
         {
-            _editorViewModel.ProjectSettingsCommand.Execute(null);
+            _viewModel.ProjectSettingsCommand.Execute(null);
         }
 
         private void buttonSoundPlay_Click(object sender, RoutedEventArgs e)
@@ -208,7 +210,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             parameter.Add(btnPlay.State);
             parameter.Add(btnPlay.DataContext as Sound);
 
-            _editorViewModel.PlaySoundCommand.Execute(parameter);
+            _viewModel.PlaySoundCommand.Execute(parameter);
         }
 
 
@@ -269,22 +271,22 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         {
             if (pivotMain.SelectedItem == pivotSprites)
             {
-                _editorViewModel.AddNewSpriteCommand.Execute(null);
+                _viewModel.AddNewSpriteCommand.Execute(null);
             }
             else if (pivotMain.SelectedItem == pivotScripts)
             {
                 _firstVisibleScriptBrickIndex = reorderListBoxScriptBricks.FirstVisibleItemIndex;
                 _lastVisibleScriptBrickIndex = reorderListBoxScriptBricks.LastVisibleItemIndex;
 
-                _editorViewModel.AddNewScriptBrickCommand.Execute(null);
+                _viewModel.AddNewScriptBrickCommand.Execute(null);
             }
             else if (pivotMain.SelectedItem == pivotCostumes)
             {
-                _editorViewModel.AddNewCostumeCommand.Execute(null);
+                _viewModel.AddNewCostumeCommand.Execute(null);
             }
             else if (pivotMain.SelectedItem == pivotSounds)
             {
-                _editorViewModel.AddNewSoundCommand.Execute(null);
+                _viewModel.AddNewSoundCommand.Execute(null);
             }
         }
 
@@ -300,17 +302,17 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
         private void appbarButtonPlay_Click(object sender, EventArgs e)
         {
-            _editorViewModel.StartPlayerCommand.Execute(null);
+            _viewModel.StartPlayerCommand.Execute(null);
         }
 
         private void appbarButtonUndo_Click(object sender, EventArgs e)
         {
-            _editorViewModel.UndoCommand.Execute(null);
+            _viewModel.UndoCommand.Execute(null);
         }
 
         private void appbarButtonRedo_Click(object sender, EventArgs e)
         {
-            _editorViewModel.RedoCommand.Execute(null);
+            _viewModel.RedoCommand.Execute(null);
         }
 
         #endregion

@@ -31,6 +31,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<ChangeSpriteViewModel>(true);
             SimpleIoc.Default.Register<ProjectSettingsViewModel>(true);
             SimpleIoc.Default.Register<ProjectImportViewModel>();
+            SimpleIoc.Default.Register<OnlineProjectViewModel>();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -195,6 +196,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<ProjectImportViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public OnlineProjectViewModel OnlineProject
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<OnlineProjectViewModel>();
             }
         }
 

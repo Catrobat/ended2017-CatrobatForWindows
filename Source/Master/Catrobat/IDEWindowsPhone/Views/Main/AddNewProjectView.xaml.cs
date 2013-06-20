@@ -12,13 +12,14 @@ using IDEWindowsPhone;
 using Catrobat.IDECommon.Resources;
 using System.ComponentModel;
 using Catrobat.IDECommon.Resources.Editor;
+using System.Windows.Navigation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Main
 {
     public partial class AddNewProjectView : PhoneApplicationPage
     {
-        ApplicationBarIconButton _btnSave;
-        AddNewProjectViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewProjectViewModel>();
+        private ApplicationBarIconButton _btnSave;
+        private readonly AddNewProjectViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewProjectViewModel>();
 
         public AddNewProjectView()
         {
@@ -29,12 +30,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
             _viewModel.PropertyChanged += AddNewProjectViewModel_OnPropertyChanged;
         }
 
-        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             _viewModel.ResetViewModel();
+            base.OnNavigatedFrom(e);
         }
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Dispatcher.BeginInvoke(() =>
             {

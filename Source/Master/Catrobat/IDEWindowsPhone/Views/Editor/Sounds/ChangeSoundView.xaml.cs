@@ -15,7 +15,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
     public partial class ChangeSoundView : PhoneApplicationPage
     {
-        private readonly ChangeSoundViewModel _changeSoundViewModel = ServiceLocator.Current.GetInstance<ChangeSoundViewModel>();
+        private readonly ChangeSoundViewModel _viewModel = ServiceLocator.Current.GetInstance<ChangeSoundViewModel>();
 
         private ApplicationBarIconButton _btnSave;
 
@@ -25,12 +25,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
             BuildApplicationBar();
             (App.Current.Resources["LocalizedStrings"] as LocalizedStrings).PropertyChanged += LanguageChanged;
-            _changeSoundViewModel.PropertyChanged += ChangeSoundViewModel_OnPropertyChanged;
+            _viewModel.PropertyChanged += ChangeSoundViewModel_OnPropertyChanged;
         }
 
-        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
         {
-            _changeSoundViewModel.ResetViewModel();
+            _viewModel.ResetViewModel();
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -41,7 +41,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
                 TextBoxSoundName.SelectAll();
             });
 
-            _btnSave.IsEnabled = _changeSoundViewModel.IsSoundNameValid;
+            _btnSave.IsEnabled = _viewModel.IsSoundNameValid;
             base.OnNavigatedTo(e);
         }
 
@@ -49,13 +49,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
         {
             if (propertyChangedEventArgs.PropertyName == "IsSoundNameValid" && _btnSave != null)
             {
-                _btnSave.IsEnabled = _changeSoundViewModel.IsSoundNameValid;
+                _btnSave.IsEnabled = _viewModel.IsSoundNameValid;
             }
         }
 
         private void TextBoxSoundName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            _changeSoundViewModel.SoundName = TextBoxSoundName.Text;
+            _viewModel.SoundName = TextBoxSoundName.Text;
         }
 
         #region Appbar
@@ -82,12 +82,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            _changeSoundViewModel.SaveCommand.Execute(null);
+            _viewModel.SaveCommand.Execute(null);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            _changeSoundViewModel.CancelCommand.Execute(null);
+            _viewModel.CancelCommand.Execute(null);
         }
 
         #endregion

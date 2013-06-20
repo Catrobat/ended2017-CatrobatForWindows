@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="Catrobat.IDEWindowsPhone.Views.Service.UploadProjectPage"
+    x:Class="Catrobat.IDEWindowsPhone.Views.Service.UploadProjectView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -38,7 +38,7 @@
 
   <phone:PhoneApplicationPage.ApplicationBar>
     <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-      <shell:ApplicationBarIconButton IconUri="/Content/Images/ApplicationBar/dark/appbar.upload.rest.png" Text="*" Click="Upload_Click" />
+      <shell:ApplicationBarIconButton IconUri="/Content/Images/ApplicationBar/dark/appbar.upload.rest.png" Text="*" IsEnabled="{Binding ButtonUploadIsEnabled}" Click="Upload_Click" />
       <shell:ApplicationBarIconButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" Text="*" Click="Cancel_Click" />
     </shell:ApplicationBar>
   </phone:PhoneApplicationPage.ApplicationBar>

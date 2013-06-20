@@ -12,208 +12,232 @@ using System;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 {
-  public class UploadProjectLoginViewModel : ViewModelBase, INotifyPropertyChanged
-  {
-    private readonly ICatrobatContext catrobatContext;
-    public new event PropertyChangedEventHandler PropertyChanged;
-    public delegate void NavigationCallbackEvent();
-
-    private MessageBoxResult _missingLoginDataCallbackResult;
-    private MessageBoxResult _wrongLoginDataCallbackResult;
-    private MessageBoxResult _registrationSuccessfulCallbackResult;
-    
-    public NavigationCallbackEvent NavigationCallback { get; set; }
-
-    private string _username;
-
-    public string Username
+    public class UploadProjectLoginViewModel : ViewModelBase, INotifyPropertyChanged
     {
-      get
-      {
-        return _username;
-      }
-      set
-      {
-        if (_username != value)
-        {
-          _username = value;
 
-          if (this.PropertyChanged != null)
-          {
-            PropertyChanged(this, new PropertyChangedEventArgs("Username"));
-          }
+        public new event PropertyChangedEventHandler PropertyChanged;
+        public delegate void NavigationCallbackEvent();
+
+        #region private Members
+
+        private readonly ICatrobatContext catrobatContext;
+        private MessageBoxResult _missingLoginDataCallbackResult;
+        private MessageBoxResult _wrongLoginDataCallbackResult;
+        private MessageBoxResult _registrationSuccessfulCallbackResult;
+        private string _username;
+        private string _password;
+        private string _email;
+
+        #endregion
+
+        #region Properties
+
+        public NavigationCallbackEvent NavigationCallback { get; set; }
+
+        public string Username
+        {
+            get
+            {
+                return _username;
+            }
+            set
+            {
+                if (_username != value)
+                {
+                    _username = value;
+
+                    if (this.PropertyChanged != null)
+                    {
+                        PropertyChanged(this, new PropertyChangedEventArgs("Username"));
+                    }
+                }
+            }
         }
-      }
-    }
 
-    private string _password;
 
-    public string Password
-    {
-      get
-      {
-        return _password;
-      }
-      set
-      {
-        if (_password != value)
+        public string Password
         {
-          _password = value;
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                if (_password != value)
+                {
+                    _password = value;
 
-          if (this.PropertyChanged != null)
-          {
-            PropertyChanged(this, new PropertyChangedEventArgs("Password"));
-          }
+                    if (this.PropertyChanged != null)
+                    {
+                        PropertyChanged(this, new PropertyChangedEventArgs("Password"));
+                    }
+                }
+            }
         }
-      }
-    }
 
-    private string _email;
 
-    public string Email
-    {
-      get
-      {
-        return _email;
-      }
-      set
-      {
-        if (_email != value)
+        public string Email
         {
-          _email = value;
+            get
+            {
+                return _email;
+            }
+            set
+            {
+                if (_email != value)
+                {
+                    _email = value;
 
-          if (this.PropertyChanged != null)
-          {
-            PropertyChanged(this, new PropertyChangedEventArgs("Email"));
-          }
+                    if (this.PropertyChanged != null)
+                    {
+                        PropertyChanged(this, new PropertyChangedEventArgs("Email"));
+                    }
+                }
+            }
         }
-      }
-    }
 
-    public RelayCommand LoginCommand
-    {
-      get;
-      private set;
-    }
+        #endregion
 
-    public RelayCommand ForgottenCommand
-    {
-      get;
-      private set;
-    }
+        #region Commands
 
-    public UploadProjectLoginViewModel()
-    {
-      // Commands
-      LoginCommand = new RelayCommand(Login);
-      ForgottenCommand = new RelayCommand(Forgotten);
-
-      if (IsInDesignMode)
-      {
-        catrobatContext = new CatrobatContextDesign();
-      }
-      else
-      {
-        catrobatContext = CatrobatContext.GetContext();
-      }
-    }
-
-    private void MissingLoginDataCallback(MessageBoxResult result)
-    {
-      _missingLoginDataCallbackResult = result;
-    }
-
-    private void Login()
-    {
-      if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_email))
-      {
-        var message = new DialogMessage(MainResources.UploadProjectMissingLoginData, MissingLoginDataCallback)
+        public RelayCommand LoginCommand
         {
-          Button = MessageBoxButton.OK,
-          Caption = MainResources.UploadProjectLoginErrorCaption
-        };
-
-        Messenger.Default.Send(message);
-      }
-      else
-      {
-        ServerCommunication.RegisterOrCheckToken(_username,
-                                                 _password,
-                                                 _email,
-                                                 Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
-                                                 System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName,
-                                                 Utils.calculateToken(_username, _password),
-                                                 registerOrCheckTokenCallback);
-      }
-    }
-
-    private void WrongLoginDataCallback(MessageBoxResult result)
-    {
-      _wrongLoginDataCallbackResult = result;
-    }
-
-    private void RegistrationSuccessfulCallback(MessageBoxResult result)
-    {
-      _registrationSuccessfulCallbackResult = result;
-
-      if (result == MessageBoxResult.OK)
-      {
-        if (NavigationCallback != null)
-        {
-          NavigationCallback();
+            get;
+            private set;
         }
-        else
+
+        public RelayCommand ForgottenCommand
         {
-          //TODO: Throw error because of navigation callback shouldn't be null
-          throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
+            get;
+            private set;
         }
-      }
-    }
 
-    private void registerOrCheckTokenCallback(bool registered, string errorCode, string statusMessage)
-    {
-      CatrobatContext.GetContext().CurrentToken = Utils.calculateToken(_username, _password);
+        #endregion
 
-      if (registered)
-      {
-        var message = new DialogMessage(string.Format(MainResources.UploadProjectWelcome, _username), RegistrationSuccessfulCallback)
+        #region Actions
+
+        private void LoginAction()
         {
-          Button = MessageBoxButton.OK,
-          Caption = MainResources.UploadProjectRegistrationSucessful
-        };
+            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_email))
+            {
+                var message = new DialogMessage(MainResources.UploadProjectMissingLoginData, MissingLoginDataCallback)
+                {
+                    Button = MessageBoxButton.OK,
+                    Caption = MainResources.UploadProjectLoginErrorCaption
+                };
 
-        Messenger.Default.Send(message);
-      }
-      else if (errorCode == Catrobat.Core.Misc.JSON.StatusCodes.SERVER_RESPONSE_TOKEN_OK.ToString())
-      {
-        if (NavigationCallback != null)
-        {
-          NavigationCallback();
+                Messenger.Default.Send(message);
+            }
+            else
+            {
+                ServerCommunication.RegisterOrCheckToken(_username,
+                                                         _password,
+                                                         _email,
+                                                         Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
+                                                         System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName,
+                                                         Utils.calculateToken(_username, _password),
+                                                         registerOrCheckTokenCallback);
+            }
         }
-        else
+
+        private void ForgottenAction()
         {
-          //TODO: Throw error because of navigation callback shouldn't be null
-          throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
+            // TODO: Implement.
         }
-      }
-      else //Unknown error
-      {
-        var messageString = string.IsNullOrEmpty(statusMessage) ? string.Format(MainResources.UploadProjectUndefinedError, errorCode) :
-                                                                  string.Format(MainResources.UploadProjectLoginError, statusMessage);
 
-        var message = new DialogMessage(messageString, WrongLoginDataCallback)
+        #endregion
+
+        public UploadProjectLoginViewModel()
         {
-          Button = MessageBoxButton.OK,
-          Caption = MainResources.UploadProjectLoginErrorCaption
-        };
+            // Commands
+            LoginCommand = new RelayCommand(LoginAction);
+            ForgottenCommand = new RelayCommand(ForgottenAction);
 
-        Messenger.Default.Send(message);
-      }
-    }
+            if (IsInDesignMode)
+                catrobatContext = new CatrobatContextDesign();
+            else
+                catrobatContext = CatrobatContext.GetContext();
+        }
 
-    private void Forgotten()
-    {
-      // TODO: Implement.
+        #region Callbacks
+
+        private void MissingLoginDataCallback(MessageBoxResult result)
+        {
+            _missingLoginDataCallbackResult = result;
+        }
+
+        private void WrongLoginDataCallback(MessageBoxResult result)
+        {
+            _wrongLoginDataCallbackResult = result;
+        }
+
+        private void RegistrationSuccessfulCallback(MessageBoxResult result)
+        {
+            _registrationSuccessfulCallbackResult = result;
+
+            if (result == MessageBoxResult.OK)
+            {
+                if (NavigationCallback != null)
+                {
+                    NavigationCallback();
+                }
+                else
+                {
+                    //TODO: Throw error because of navigation callback shouldn't be null
+                    throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
+                }
+            }
+        }
+
+        private void registerOrCheckTokenCallback(bool registered, string errorCode, string statusMessage)
+        {
+            CatrobatContext.GetContext().CurrentToken = Utils.calculateToken(_username, _password);
+
+            if (registered)
+            {
+                var message = new DialogMessage(string.Format(MainResources.UploadProjectWelcome, _username), RegistrationSuccessfulCallback)
+                {
+                    Button = MessageBoxButton.OK,
+                    Caption = MainResources.UploadProjectRegistrationSucessful
+                };
+
+                Messenger.Default.Send(message);
+            }
+            else if (errorCode == Catrobat.Core.Misc.JSON.StatusCodes.SERVER_RESPONSE_TOKEN_OK.ToString())
+            {
+                if (NavigationCallback != null)
+                {
+                    NavigationCallback();
+                }
+                else
+                {
+                    //TODO: Throw error because of navigation callback shouldn't be null
+                    throw new Exception("This error shouldn't be thrown. The navigation callback must not be null.");
+                }
+            }
+            else //Unknown error
+            {
+                var messageString = string.IsNullOrEmpty(statusMessage) ? string.Format(MainResources.UploadProjectUndefinedError, errorCode) :
+                                                                          string.Format(MainResources.UploadProjectLoginError, statusMessage);
+
+                var message = new DialogMessage(messageString, WrongLoginDataCallback)
+                {
+                    Button = MessageBoxButton.OK,
+                    Caption = MainResources.UploadProjectLoginErrorCaption
+                };
+
+                Messenger.Default.Send(message);
+            }
+        }
+
+        #endregion
+
+        public void ResetViewModel()
+        {
+            Username = "";
+            Password = "";
+            Email = "";
+        }
+
     }
-  }
 }

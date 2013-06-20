@@ -96,14 +96,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
         private void SaveAction()
         {
             ReceivedSound.Name = SoundName;
-
-            ResetViewModel();
             Navigation.NavigateBack();
         }
 
         private void CancelAction()
         {
-            ResetViewModel();
             Navigation.NavigateBack();
         }
 

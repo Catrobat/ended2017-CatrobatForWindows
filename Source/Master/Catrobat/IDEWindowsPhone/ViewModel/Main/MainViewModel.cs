@@ -240,7 +240,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private void OnlineProjectTapAction(OnlineProjectHeader project)
         {
             SelectedOnlineProject = project;
-            Navigation.NavigateTo(typeof(OnlineProjectPage));
+            Navigation.NavigateTo(typeof(OnlineProjectView));
         }
 
         private void PlayCurrentProjectAction()
@@ -348,12 +348,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             if (registered)
             {
-                Action action = () => Navigation.NavigateTo(typeof(UploadProjectPage));
+                Action action = () => Navigation.NavigateTo(typeof(UploadProjectView));
                 Deployment.Current.Dispatcher.BeginInvoke(action);
             }
             else
             {
-                Action action = () => Navigation.NavigateTo(typeof(UploadProjectLoginPage)); ;
+                Action action = () => Navigation.NavigateTo(typeof(UploadProjectLoginView)); ;
 
                 Deployment.Current.Dispatcher.BeginInvoke(action);
             }
