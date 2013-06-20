@@ -4,69 +4,98 @@ using Catrobat.IDEWindowsPhone.Annotations;
 using GalaSoft.MvvmLight;
 using System.ComponentModel;
 using GalaSoft.MvvmLight.Command;
+using Catrobat.IDEWindowsPhone.Misc;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 {
-  public class AddNewProjectViewModel : ViewModelBase, INotifyPropertyChanged
-  {
-    private readonly ICatrobatContext catrobatContext;
-
-    private string _projectName;
-
-    public string ProjectName
+    public class AddNewProjectViewModel : ViewModelBase, INotifyPropertyChanged
     {
-      get
-      {
-        return _projectName;
-      }
-      set
-      {
-        if (_projectName != value)
+        #region private Members
+
+        private readonly ICatrobatContext _catrobatContext;
+        private string _projectName;
+
+        #endregion
+
+        #region Properties
+
+        public string ProjectName
         {
-          _projectName = value;
+            get
+            {
+                return _projectName;
+            }
+            set
+            {
+                if (_projectName != value)
+                {
+                    _projectName = value;
 
-          if (this.PropertyChanged != null)
-          {
-            RaisePropertyChanged();
-          }
+                    RaisePropertyChanged("ProjectName");
+                    RaisePropertyChanged("IsProjectNameValid");
+                }
+            }
         }
-      }
+
+        public bool IsProjectNameValid
+        {
+            get
+            {
+                return ProjectName != null && ProjectName.Length >= 2;
+            }
+        }
+
+        #endregion
+
+        #region Commands
+
+        public RelayCommand SaveCommand
+        {
+            get;
+            private set;
+        }
+
+        public RelayCommand CancelCommand
+        {
+            get;
+            private set;
+        }
+
+        #endregion
+
+        #region Actions
+
+        private void SaveAction()
+        {
+            _catrobatContext.CurrentProject.Save();
+            CatrobatContext.GetContext().CreateNewProject(_projectName); //TODO change to _catrobatContext
+
+            Navigation.NavigateBack();
+        }
+
+        private void CancelAction()
+        {
+            Navigation.NavigateBack();
+        }
+
+        #endregion
+
+
+        public AddNewProjectViewModel()
+        {
+            // Commands
+            SaveCommand = new RelayCommand(SaveAction);
+            CancelCommand = new RelayCommand(CancelAction);
+
+            if (IsInDesignMode)
+                _catrobatContext = new CatrobatContextDesign();
+            else
+                _catrobatContext = CatrobatContext.GetContext();
+        }
+
+        public void ResetViewModel()
+        {
+            ProjectName = "";
+        }
     }
-
-    public RelayCommand SaveCommand
-    {
-      get;
-      private set;
-    }
-
-    public AddNewProjectViewModel()
-    {
-      // Commands
-      SaveCommand = new RelayCommand(Save);
-
-      if (IsInDesignMode)
-        catrobatContext = new CatrobatContextDesign();
-      else
-        catrobatContext = CatrobatContext.GetContext();
-    }
-
-    private void Save()
-    {
-      CatrobatContext.GetContext().CurrentProject.Save();
-      CatrobatContext.GetContext().CreateNewProject(_projectName);
-
-      ProjectName = "";
-    }
-
-    #region PropertyChanged
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    [NotifyPropertyChangedInvocator]
-    protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-    {
-      PropertyChangedEventHandler handler = PropertyChanged;
-      if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-    }
-    #endregion
-  }
 }

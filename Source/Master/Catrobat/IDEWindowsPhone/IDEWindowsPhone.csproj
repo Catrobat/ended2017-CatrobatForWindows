@@ -178,6 +178,7 @@
     <Compile Include="ViewModel\Editor\Sprites\AddNewSpriteViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sprites\ChangeSpriteViewModel.cs" />
     <Compile Include="ViewModel\Main\AddNewProjectViewModel.cs" />
+    <Compile Include="ViewModel\Main\ProjectImportViewModel.cs" />
     <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sounds\SoundRecorderViewModel.cs" />
     <Compile Include="ViewModel\Editor\EditorViewModel.cs" />
@@ -238,8 +239,8 @@
     <Compile Include="Views\Editor\Sprites\ChangeSpriteView.xaml.cs">
       <DependentUpon>ChangeSpriteView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\AddNewProject.xaml.cs">
-      <DependentUpon>AddNewProject.xaml</DependentUpon>
+    <Compile Include="Views\Main\AddNewProjectView.xaml.cs">
+      <DependentUpon>AddNewProjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\PlayerLauncherView.xaml.cs">
       <DependentUpon>PlayerLauncherView.xaml</DependentUpon>
@@ -408,7 +409,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Main\AddNewProject.xaml">
+    <Page Include="Views\Main\AddNewProjectView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
