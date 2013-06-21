@@ -9,12 +9,13 @@ using System;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Microsoft.Practices.ServiceLocation;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor
 {
     public partial class ProjectSettingsView : PhoneApplicationPage
     {
-        private readonly ProjectSettingsViewModel _projectSettingsViewModel = ServiceLocator.Current.GetInstance<ProjectSettingsViewModel>();
+        private readonly ProjectSettingsViewModel _viewModel = ServiceLocator.Current.GetInstance<ProjectSettingsViewModel>();
 
         private ApplicationBarIconButton _btnSave;
 
@@ -24,15 +25,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
             BuildApplicationBar();
             (App.Current.Resources["LocalizedStrings"] as LocalizedStrings).PropertyChanged += LanguageChanged;
-            _projectSettingsViewModel.PropertyChanged += ProjectSettingsViewModel_OnPropertyChanged;
+            _viewModel.PropertyChanged += ProjectSettingsViewModel_OnPropertyChanged;
         }
 
-        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            _projectSettingsViewModel.ResetViewModel();
+            _viewModel.ResetViewModel();
+            base.OnNavigatedFrom(e);
         }
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Dispatcher.BeginInvoke(() =>
             {
@@ -40,7 +42,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
                 TextBoxProjectName.SelectAll();
             });
 
-            _btnSave.IsEnabled = _projectSettingsViewModel.IsProjectNameValid;
+            _btnSave.IsEnabled = _viewModel.IsProjectNameValid;
             base.OnNavigatedTo(e);
         }
 
@@ -48,13 +50,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         {
             if (propertyChangedEventArgs.PropertyName == "IsProjectNameValid" && _btnSave != null)
             {
-                _btnSave.IsEnabled = _projectSettingsViewModel.IsProjectNameValid;
+                _btnSave.IsEnabled = _viewModel.IsProjectNameValid;
             }
         }
 
         private void TextBoxProjectName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            _projectSettingsViewModel.ProjectName = TextBoxProjectName.Text;
+            _viewModel.ProjectName = TextBoxProjectName.Text;
         }
 
         #region Appbar
@@ -81,12 +83,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            _projectSettingsViewModel.SaveCommand.Execute(null);
+            _viewModel.SaveCommand.Execute(null);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            _projectSettingsViewModel.CancelCommand.Execute(null);
+            _viewModel.CancelCommand.Execute(null);
         }
 
         #endregion

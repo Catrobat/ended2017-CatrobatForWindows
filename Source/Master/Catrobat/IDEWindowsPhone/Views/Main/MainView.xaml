@@ -74,24 +74,24 @@
                 <Image Name="imageCurrentProjectScreenshot" Source="{Binding CurrentProjectScreenshot, Converter={StaticResource ScreenshotConverter}}" />
                 <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="buttonPlayCurrentProject"          
                 Template="{StaticResource ScreenshotButtonControlTemplate}"
-                Margin="0,0,0,0" Click="buttonPlayCurrentProject_Click" Width="130" />
+                Margin="0,0,0,0" Command="{Binding PlayCurrentProjectCommand}" Width="130" />
             </Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
               <buttons:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonCreateNewProject" 
                           ImageName="add"
                           Text="{Binding Path=Main.ButtonCreate, Source={StaticResource LocalizedStrings}}"
                           Template="{StaticResource ImageButtonControlTemplate}"
-                          Margin="10" Click="buttonCreateNewProject_Click" />
+                          Margin="10" Command="{Binding CreateNewProjectCommand}" />
               <buttons:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonEditCurrentProject" 
                           ImageName="edit"
                           Text="{Binding Path=Main.ButtonEdit, Source={StaticResource LocalizedStrings}}"
                           Template="{StaticResource ImageButtonControlTemplate}"
-                          Margin="10" Click="buttonEditCurrentProject_Click" />
+                          Margin="10" Command="{Binding EditCurrentProjectCommand}" />
               <buttons:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonUploadCurrentProject" 
                           ImageName="upload"
                           Text="{Binding Path=Main.ButtonUpload, Source={StaticResource LocalizedStrings}}"
                           Template="{StaticResource ImageButtonControlTemplate}"
-                          Margin="10" Click="buttonUploadCurrentProject_Click" />
+                          Margin="10" Command="{Binding UploadCurrentProjectCommand}" />
             </StackPanel>
           </StackPanel>
         </Grid>
@@ -231,7 +231,7 @@
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <buttons:SettingsButton Grid.Column="0" VerticalAlignment="Center" x:Name="buttonSettings" 
-              Template="{StaticResource SettingsButtonControlTemplate}" Click="buttonSettings_Click"/>
+              Template="{StaticResource SettingsButtonControlTemplate}" Command="{Binding SettingsCommand}" />
             <TextBlock Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Main.ApplicationNameAndVersion, Source={StaticResource LocalizedStrings}, Converter={StaticResource VersionConverter}}" Margin="30" TextWrapping="Wrap" />
           </Grid>
         </StackPanel>

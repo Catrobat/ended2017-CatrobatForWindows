@@ -24,7 +24,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Settings
       if (frameworkElement != null)
       {
         var theme = frameworkElement.DataContext as Theme;
-        _settingsViewModel.ActiveThemeChangedEvent(theme);
+        _settingsViewModel.ActiveThemeChangedCommand.Execute(theme);
       }
 
     }

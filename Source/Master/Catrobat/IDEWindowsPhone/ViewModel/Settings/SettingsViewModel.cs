@@ -15,6 +15,7 @@ using KBB.Mobile.Controls;
 using Microsoft.Phone.Controls;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.IDECommon.Resources;
+using System.Windows.Input;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
 {
@@ -25,6 +26,70 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
 
     readonly ThemeChooser _themeChooser = (App.Current.Resources["ThemeChooser"] as ThemeChooser);
     private readonly MemoryMonitor _memoryMonitor;
+
+    #endregion
+
+    #region Properties
+    public bool ShowMemoryMonitorOption
+    {
+        get
+        {
+            return Debugger.IsAttached;
+        }
+    }
+
+    public bool ShowMemoryMonitor
+    {
+        get { return _memoryMonitor.ShowVisualization; }
+        set
+        {
+            if (_memoryMonitor.ShowVisualization == value)
+                return;
+
+            _memoryMonitor.ShowVisualization = value;
+            RaisePropertyChanged("ShowMemoryMonitor");
+        }
+    }
+
+    public Theme ActiveTheme
+    {
+        get { return _themeChooser.SelectedTheme; }
+        set { _themeChooser.SelectedTheme = value; }
+    }
+
+    public ObservableCollection<Theme> AvailableThemes
+    {
+        get { return _themeChooser.Themes; }
+    }
+
+    public CultureInfo CurrentCulture
+    {
+        get
+        {
+            return Thread.CurrentThread.CurrentCulture;
+        }
+
+        set
+        {
+            if (Thread.CurrentThread.CurrentCulture.Equals(value))
+                return;
+
+            Thread.CurrentThread.CurrentCulture = value;
+            Thread.CurrentThread.CurrentUICulture = value;
+
+            ((LocalizedStrings)Application.Current.Resources["LocalizedStrings"]).Reset();
+            RaisePropertyChanged("CurrentCulture");
+            RaisePropertyChanged("CurrentCultureName");
+        }
+    }
+
+    public ObservableCollection<CultureInfo> AvailableCultures
+    {
+        get
+        {
+            return LanguageHelper.SupportedLanguages;
+        }
+    }
 
     #endregion
 
@@ -46,6 +111,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
     {
       get;
       private set;
+    }
+
+    public ICommand ActiveThemeChangedCommand
+    {
+        get;
+        private set;
     }
 
     #endregion
@@ -75,84 +146,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
 
     #endregion
 
-    #region Events
-
-    public void ActiveThemeChangedEvent(Theme newTheme)
-    {
-      ActiveThemeChangedAction(newTheme);
-    }
-
-    #endregion
-
-    #region Properties
-    public bool ShowMemoryMonitorOption
-    {
-      get
-      {
-        return Debugger.IsAttached;
-      }
-    }
-
-    public bool ShowMemoryMonitor
-    {
-      get { return _memoryMonitor.ShowVisualization; }
-      set
-      {
-        if (_memoryMonitor.ShowVisualization == value)
-          return;
-
-        _memoryMonitor.ShowVisualization = value;
-        RaisePropertyChanged("ShowMemoryMonitor");
-      }
-    }
-
-    public Theme ActiveTheme
-    {
-      get { return _themeChooser.SelectedTheme; }
-      set { _themeChooser.SelectedTheme = value; }
-    }
-
-    public ObservableCollection<Theme> AvailableThemes
-    {
-      get { return _themeChooser.Themes; }
-    }
-
-    public CultureInfo CurrentCulture
-    {
-      get
-      {
-        return Thread.CurrentThread.CurrentCulture;
-      }
-
-      set
-      {
-        if (Thread.CurrentThread.CurrentCulture.Equals(value))
-          return;
-
-        Thread.CurrentThread.CurrentCulture = value;
-        Thread.CurrentThread.CurrentUICulture = value;
-
-        ((LocalizedStrings)Application.Current.Resources["LocalizedStrings"]).Reset();
-        RaisePropertyChanged("CurrentCulture");
-        RaisePropertyChanged("CurrentCultureName");
-      }
-    }
-
-    public ObservableCollection<CultureInfo> AvailableCultures
-    {
-      get
-      {
-        return LanguageHelper.SupportedLanguages;
-      }
-    }
-
-    #endregion
 
     public SettingsViewModel()
     {
       ShowDesignSettingsCommand = new RelayCommand(ShowDesignSettingsAction);
       ShowBrickSettingsCommand = new RelayCommand(ShowBrickSettingsAction);
       ShowLanguageSettingsCommand = new RelayCommand(ShowLanguageSettingsAction);
+      ActiveThemeChangedCommand = new RelayCommand<Theme>(ActiveThemeChangedAction);
 
       _themeChooser.PropertyChanged += ThemeChooserOnPropertyChanged;
       _memoryMonitor = Debugger.IsAttached ? new MemoryMonitor(true, false) : new MemoryMonitor(false, false);

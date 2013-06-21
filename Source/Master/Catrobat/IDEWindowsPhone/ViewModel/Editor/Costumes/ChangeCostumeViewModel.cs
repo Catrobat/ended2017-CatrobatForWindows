@@ -96,14 +96,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         private void SaveAction()
         {
             ReceivedCostume.Name = CostumeName;
-
-            ResetViewModel();
             Navigation.NavigateBack();
         }
 
         private void CancelAction()
         {
-            ResetViewModel();
             Navigation.NavigateBack();
         }
 

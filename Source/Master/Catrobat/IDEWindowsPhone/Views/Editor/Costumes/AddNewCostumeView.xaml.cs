@@ -13,21 +13,23 @@ using Microsoft.Phone.Shell;
 using System.ComponentModel;
 using Microsoft.Practices.ServiceLocation;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
+using System.Windows.Navigation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 {
     public partial class AddNewCostumeView : PhoneApplicationPage
     {
-        private readonly AddNewCostumeViewModel _addNewCostumeViewModel = ServiceLocator.Current.GetInstance<AddNewCostumeViewModel>();
+        private readonly AddNewCostumeViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewCostumeViewModel>();
 
         public AddNewCostumeView()
         {
             InitializeComponent();
         }
 
-        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            _addNewCostumeViewModel.ResetViewModel();
+            _viewModel.ResetViewModel();
+            base.OnNavigatedFrom(e);
         }
     }
 }

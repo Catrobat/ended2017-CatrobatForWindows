@@ -1,61 +1,64 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
-using Catrobat.Core.Objects.Sounds;
-using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDECommon.Resources.Main;
 using Catrobat.IDEWindowsPhone.Misc;
-using IDEWindowsPhone;
+using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Microsoft.Phone.Controls;
-using System.ComponentModel;
 using Microsoft.Phone.Shell;
 using Microsoft.Practices.ServiceLocation;
-using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds;
+using IDEWindowsPhone;
+using Catrobat.IDECommon.Resources;
+using System.ComponentModel;
+using Catrobat.IDECommon.Resources.Editor;
+using System.Windows.Navigation;
 
-namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
+namespace Catrobat.IDEWindowsPhone.Views.Main
 {
-    public partial class ChangeSoundView : PhoneApplicationPage
+    public partial class AddNewProjectView : PhoneApplicationPage
     {
-        private readonly ChangeSoundViewModel _viewModel = ServiceLocator.Current.GetInstance<ChangeSoundViewModel>();
-
         private ApplicationBarIconButton _btnSave;
+        private readonly AddNewProjectViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewProjectViewModel>();
 
-        public ChangeSoundView()
+        public AddNewProjectView()
         {
             InitializeComponent();
 
             BuildApplicationBar();
             (App.Current.Resources["LocalizedStrings"] as LocalizedStrings).PropertyChanged += LanguageChanged;
-            _viewModel.PropertyChanged += ChangeSoundViewModel_OnPropertyChanged;
+            _viewModel.PropertyChanged += AddNewProjectViewModel_OnPropertyChanged;
         }
 
-        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             _viewModel.ResetViewModel();
+            base.OnNavigatedFrom(e);
         }
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Dispatcher.BeginInvoke(() =>
             {
-                TextBoxSoundName.Focus();
-                TextBoxSoundName.SelectAll();
+                TextBoxProjectName.Focus();
+                TextBoxProjectName.SelectAll();
             });
 
-            _btnSave.IsEnabled = _viewModel.IsSoundNameValid;
+            _btnSave.IsEnabled = _viewModel.IsProjectNameValid;
             base.OnNavigatedTo(e);
         }
 
-        private void ChangeSoundViewModel_OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        private void AddNewProjectViewModel_OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            if (propertyChangedEventArgs.PropertyName == "IsSoundNameValid" && _btnSave != null)
+            if (propertyChangedEventArgs.PropertyName == "IsProjectNameValid" && _btnSave != null)
             {
-                _btnSave.IsEnabled = _viewModel.IsSoundNameValid;
+                _btnSave.IsEnabled = _viewModel.IsProjectNameValid;
             }
         }
 
-        private void TextBoxSoundName_OnTextChanged(object sender, TextChangedEventArgs e)
+        private void TextBoxProjectName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            _viewModel.SoundName = TextBoxSoundName.Text;
+            _viewModel.ProjectName = TextBoxProjectName.Text;
         }
 
         #region Appbar

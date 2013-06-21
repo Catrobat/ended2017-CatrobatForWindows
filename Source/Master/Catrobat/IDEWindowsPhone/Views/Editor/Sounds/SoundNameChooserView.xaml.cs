@@ -29,7 +29,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
             _soundRecorderViewModel.PropertyChanged += SoundRecorderViewModel_OnPropertyChanged;
         }
 
-        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             //DON'T RESET VIEWMODEL
         }

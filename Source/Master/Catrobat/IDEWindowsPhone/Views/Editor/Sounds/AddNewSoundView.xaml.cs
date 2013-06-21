@@ -9,16 +9,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
     public partial class AddNewSoundView : PhoneApplicationPage
     {
-        private readonly AddNewSoundViewModel _addNewSoundViewModel = ServiceLocator.Current.GetInstance<AddNewSoundViewModel>();
+        private readonly AddNewSoundViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewSoundViewModel>();
 
         public AddNewSoundView()
         {
             InitializeComponent();
         }
 
-        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
         {
-            _addNewSoundViewModel.ResetViewModel();
+            _viewModel.ResetViewModel();
         }
     }
 }

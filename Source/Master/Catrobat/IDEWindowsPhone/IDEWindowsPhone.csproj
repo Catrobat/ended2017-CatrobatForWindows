@@ -178,6 +178,8 @@
     <Compile Include="ViewModel\Editor\Sprites\AddNewSpriteViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sprites\ChangeSpriteViewModel.cs" />
     <Compile Include="ViewModel\Main\AddNewProjectViewModel.cs" />
+    <Compile Include="ViewModel\Main\ProjectImportViewModel.cs" />
+    <Compile Include="ViewModel\Service\OnlineProjectViewModel.cs" />
     <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sounds\SoundRecorderViewModel.cs" />
     <Compile Include="ViewModel\Editor\EditorViewModel.cs" />
@@ -238,8 +240,8 @@
     <Compile Include="Views\Editor\Sprites\ChangeSpriteView.xaml.cs">
       <DependentUpon>ChangeSpriteView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\AddNewProject.xaml.cs">
-      <DependentUpon>AddNewProject.xaml</DependentUpon>
+    <Compile Include="Views\Main\AddNewProjectView.xaml.cs">
+      <DependentUpon>AddNewProjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\PlayerLauncherView.xaml.cs">
       <DependentUpon>PlayerLauncherView.xaml</DependentUpon>
@@ -250,17 +252,17 @@
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service\OnlineProjectPage.xaml.cs">
-      <DependentUpon>OnlineProjectPage.xaml</DependentUpon>
+    <Compile Include="Views\Service\OnlineProjectView.xaml.cs">
+      <DependentUpon>OnlineProjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\TileGeneratorView.xaml.cs">
       <DependentUpon>TileGeneratorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service\UploadProjectLoginPage.xaml.cs">
-      <DependentUpon>UploadProjectLoginPage.xaml</DependentUpon>
+    <Compile Include="Views\Service\UploadProjectLoginView.xaml.cs">
+      <DependentUpon>UploadProjectLoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service\UploadProjectPage.xaml.cs">
-      <DependentUpon>UploadProjectPage.xaml</DependentUpon>
+    <Compile Include="Views\Service\UploadProjectView.xaml.cs">
+      <DependentUpon>UploadProjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\SettingsBrickView.xaml.cs">
       <DependentUpon>SettingsBrickView.xaml</DependentUpon>
@@ -408,7 +410,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Main\AddNewProject.xaml">
+    <Page Include="Views\Main\AddNewProjectView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -424,7 +426,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Service\OnlineProjectPage.xaml">
+    <Page Include="Views\Service\OnlineProjectView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -432,11 +434,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Service\UploadProjectLoginPage.xaml">
+    <Page Include="Views\Service\UploadProjectLoginView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Service\UploadProjectPage.xaml">
+    <Page Include="Views\Service\UploadProjectView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
