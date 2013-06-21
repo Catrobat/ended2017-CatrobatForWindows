@@ -9,6 +9,8 @@ using GalaSoft.MvvmLight.Messaging;
 using Catrobat.IDECommon.Resources.Main;
 using System.Windows;
 using System;
+using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Views.Service;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 {
@@ -54,7 +56,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             }
         }
 
-
         public string Password
         {
             get
@@ -74,7 +75,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                 }
             }
         }
-
 
         public string Email
         {
@@ -112,12 +112,20 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             private set;
         }
 
+        public RelayCommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
         #region Actions
 
         private void LoginAction()
         {
+            Navigation.RemoveBackEntry();
+
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_email))
             {
                 var message = new DialogMessage(MainResources.UploadProjectMissingLoginData, MissingLoginDataCallback)
@@ -130,9 +138,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             }
             else
             {
-                ServerCommunication.RegisterOrCheckToken(_username,
-                                                         _password,
-                                                         _email,
+                ServerCommunication.RegisterOrCheckToken(_username, _password, _email,
                                                          Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
                                                          System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName,
                                                          Utils.calculateToken(_username, _password),
@@ -145,6 +151,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             // TODO: Implement.
         }
 
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
+        }
+
         #endregion
 
         public UploadProjectLoginViewModel()
@@ -152,14 +163,22 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             // Commands
             LoginCommand = new RelayCommand(LoginAction);
             ForgottenCommand = new RelayCommand(ForgottenAction);
+            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             if (IsInDesignMode)
                 catrobatContext = new CatrobatContextDesign();
             else
                 catrobatContext = CatrobatContext.GetContext();
+
+            NavigationCallback = navigationCallback;
         }
 
         #region Callbacks
+
+        private void navigationCallback()
+        {
+            Navigation.NavigateTo(typeof(UploadProjectView));
+        }
 
         private void MissingLoginDataCallback(MessageBoxResult result)
         {
@@ -232,7 +251,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         #endregion
 
-        public void ResetViewModel()
+        private void ResetViewModel()
         {
             Username = "";
             Password = "";

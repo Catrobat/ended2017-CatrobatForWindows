@@ -15,7 +15,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Service
     public partial class UploadProjectView : PhoneApplicationPage
     {
         private readonly UploadProjectViewModel _viewModel = ServiceLocator.Current.GetInstance<UploadProjectViewModel>();
-        private ApplicationBarIconButton _uploadButton;
 
         public UploadProjectView()
         {
@@ -24,38 +23,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Service
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            _viewModel.ResetViewModel();
+            _viewModel.ResetViewModelCommand.Execute(null);
             base.OnNavigatedFrom(e);
-        }
-
-        private void LocalizeApplicationBar()
-        {
-            _uploadButton = (ApplicationBarIconButton)ApplicationBar.Buttons[0];
-            _uploadButton.Text = MainResources.ButtonUpload;
-            ((ApplicationBarIconButton)ApplicationBar.Buttons[1]).Text = MainResources.ButtonCancel;
-        }
-
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            LocalizeApplicationBar();
-        }
-
-        private void Upload_Click(object sender, EventArgs e)
-        {
-            _viewModel.UploadCommand.Execute(sender);
-        }
-
-        private void Cancel_Click(object sender, EventArgs e)
-        {
-            Navigation.NavigateBack();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Cannot be implemented using MVVM - the Appbar is not XAML compatible.
-            _uploadButton.IsEnabled = (sender as TextBox).Text != "";
-
-            // Hack for Windows Phone 7
+            // otherwise bound properties won't get set
             (sender as TextBox).GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
     }

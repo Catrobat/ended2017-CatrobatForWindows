@@ -55,15 +55,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                 if (value == _soundName) return;
                 _soundName = value;
                 RaisePropertyChanged("SoundName");
-                RaisePropertyChanged("IsSoundNameValid");
-            }
-        }
-
-        public bool IsSoundNameValid
-        {
-            get
-            {
-                return SoundName != null && SoundName.Length >= 2;
+                SaveCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -87,6 +79,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
         {
             get;
             private set;
+        }
+
+        public RelayCommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
+        #endregion
+
+        #region CommandCanExecute
+
+        private bool SaveCommand_CanExecute()
+        {
+            return SoundName != null && SoundName.Length >= 2;
         }
 
         #endregion
@@ -115,19 +122,25 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             SoundName = ReceivedSound.Name;
         }
 
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
+        }
+
         #endregion
 
 
         public ChangeSoundViewModel()
         {
             EditSoundCommand = new RelayCommand(EditSoundAction);
-            SaveCommand = new RelayCommand(SaveAction);
+            SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
+            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sound>>(this, ViewModelMessagingToken.SoundNameListener, ChangeSoundNameMessageAction);
         }
 
-        public void ResetViewModel()
+        private void ResetViewModel()
         {
             SoundName = "";
         }

@@ -55,15 +55,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 if (value == _projectName) return;
                 _projectName = value;
                 RaisePropertyChanged("ProjectName");
-                RaisePropertyChanged("IsProjectNameValid");
-            }
-        }
-
-        public bool IsProjectNameValid
-        {
-            get
-            {
-                return ProjectName != null && ProjectName.Length >= 2;
+                SaveCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -81,6 +73,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         {
             get;
             private set;
+        }
+
+        public RelayCommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
+        #endregion
+
+        #region CommandCanExecute
+
+        private bool SaveCommand_CanExecute()
+        {
+            return ProjectName != null && ProjectName.Length >= 2;
         }
 
         #endregion
@@ -104,18 +111,24 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             ProjectName = ReceivedProject.ProjectName;
         }
 
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
+        }
+
         #endregion
 
 
         public ProjectSettingsViewModel()
         {
-            SaveCommand = new RelayCommand(SaveAction);
+            SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
+            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.ProjectNameListener, ChangeProjectNameMessageAction);
         }
 
-        public void ResetViewModel()
+        private void ResetViewModel()
         {
             ProjectName = "";
         }

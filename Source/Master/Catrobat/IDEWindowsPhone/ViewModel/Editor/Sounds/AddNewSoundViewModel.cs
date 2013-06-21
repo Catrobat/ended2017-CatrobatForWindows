@@ -39,6 +39,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             private set;
         }
 
+        public RelayCommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
         #region Actions
@@ -64,6 +70,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             _receivedSelectedSprite = message.Content;
         }
 
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
+        }
+
         #endregion
 
 
@@ -71,11 +82,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
         {
             AudioLibraryCommand  = new RelayCommand(AudioLibraryAction);
             RecorderCommand = new RelayCommand(RecorderAction);
+            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
         }
 
-        public void ResetViewModel()
+        private void ResetViewModel()
         {
             
         }

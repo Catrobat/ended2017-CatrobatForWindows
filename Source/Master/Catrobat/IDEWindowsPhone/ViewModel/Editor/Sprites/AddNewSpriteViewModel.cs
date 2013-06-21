@@ -46,15 +46,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
                 if (value == _spriteName) return;
                 _spriteName = value;
                 RaisePropertyChanged("SpriteName");
-                RaisePropertyChanged("IsSpriteNameValid");
-            }
-        }
-
-        public bool IsSpriteNameValid
-        {
-            get
-            {
-                return SpriteName != null && SpriteName.Length >= 2;
+                SaveCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -72,6 +64,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
         {
             get;
             private set;
+        }
+
+        public RelayCommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
+        #endregion
+
+        #region CommandCanExecute
+
+        private bool SaveCommand_CanExecute()
+        {
+            return SpriteName != null && SpriteName.Length >= 2;
         }
 
         #endregion
@@ -99,18 +106,24 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             _receivedSprites = message.Content;
         }
 
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
+        }
+
         #endregion
 
 
         public AddNewSpriteViewModel()
         {
-            SaveCommand = new RelayCommand(SaveAction);
+            SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
+            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<ObservableCollection<Sprite>>>(this, ViewModelMessagingToken.SpriteListListener, ReceiveSpriteListMessageAction);
         }
 
-        public void ResetViewModel()
+        private void ResetViewModel()
         {
             SpriteName = null;
         }

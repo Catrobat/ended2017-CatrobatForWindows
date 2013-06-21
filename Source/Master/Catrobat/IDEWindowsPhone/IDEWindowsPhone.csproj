@@ -138,6 +138,7 @@
     <Compile Include="Converters\ActiveThemeBrushConverter.cs" />
     <Compile Include="Converters\BytesImageConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="Converters\NegativeBoolVisibilityConverter.cs" />
     <Compile Include="Converters\InActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\ScreenshotConverter.cs" />
@@ -623,6 +624,9 @@
     <Folder Include="Content\Theme\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AppBarUtils">
+      <HintPath>..\packages\AppBarUtils.2.4\lib\windowsphone8\AppBarUtils.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight.Extras.WP8">
       <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\GalaSoft.MvvmLight.Extras.WP8.dll</HintPath>
     </Reference>

@@ -6,12 +6,14 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded"
+    shell:SystemTray.IsVisible="True"
     DataContext="{Binding UploadProject, Source={StaticResource Locator}}">
 
   <!--LayoutRoot is the root grid where all page content is placed-->
@@ -36,11 +38,19 @@
     </StackPanel>
   </Grid>
 
-  <phone:PhoneApplicationPage.ApplicationBar>
-    <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-      <shell:ApplicationBarIconButton IconUri="/Content/Images/ApplicationBar/dark/appbar.upload.rest.png" Text="*" IsEnabled="{Binding ButtonUploadIsEnabled}" Click="Upload_Click" />
-      <shell:ApplicationBarIconButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" Text="*" Click="Cancel_Click" />
-    </shell:ApplicationBar>
-  </phone:PhoneApplicationPage.ApplicationBar>
+  <i:Interaction.Triggers>
+    <abu:StateChangedTrigger State="false">
+      <abu:SwitchAppBarAction>
+        <abu:AppBar Id="0">
+          <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.upload.rest.png" 
+                              Text="{Binding Path=Main.ButtonUpload, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding UploadCommand}" />
+          <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" 
+                              Text="{Binding Path=Main.ButtonCancel, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding CancelCommand}"/>
+        </abu:AppBar>
+      </abu:SwitchAppBarAction>
+    </abu:StateChangedTrigger>
+  </i:Interaction.Triggers>
 
 </phone:PhoneApplicationPage>

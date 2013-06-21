@@ -26,10 +26,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
             InitializeComponent();
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            _viewModel.ResetViewModel();
-            base.OnNavigatedFrom(e);
+            _viewModel.ResetViewModelCommand.Execute(null);
+            base.OnBackKeyPress(e);
         }
     }
 }

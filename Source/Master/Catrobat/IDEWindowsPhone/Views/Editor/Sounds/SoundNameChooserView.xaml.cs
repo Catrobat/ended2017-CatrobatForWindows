@@ -19,14 +19,15 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
     {
         private readonly SoundRecorderViewModel _soundRecorderViewModel = ServiceLocator.Current.GetInstance<SoundRecorderViewModel>();
 
-        private ApplicationBarIconButton _buttonSave;
-
         public SoundNameChooserView()
         {
             InitializeComponent();
-            BuildApplicationBar();
-            ((LocalizedStrings)Application.Current.Resources["LocalizedStrings"]).PropertyChanged += LanguageChanged;
-            _soundRecorderViewModel.PropertyChanged += SoundRecorderViewModel_OnPropertyChanged;
+
+            Dispatcher.BeginInvoke(() =>
+            {
+                TextBoxSoundName.Focus();
+                TextBoxSoundName.SelectAll();
+            });
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -34,64 +35,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
             //DON'T RESET VIEWMODEL
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            Dispatcher.BeginInvoke(() =>
-            {
-                TextBoxSoundName.Focus();
-                TextBoxSoundName.SelectAll();
-            });
-
-            _buttonSave.IsEnabled = _soundRecorderViewModel.IsSoundNameValid;
-            base.OnNavigatedTo(e);
-        }
-
-        private void SoundRecorderViewModel_OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            if (propertyChangedEventArgs.PropertyName == "IsSoundNameValid" && _buttonSave != null)
-            {
-                _buttonSave.IsEnabled = _soundRecorderViewModel.IsSoundNameValid;
-            }
-        }
-
         private void TextBoxSoundName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _soundRecorderViewModel.SoundName = TextBoxSoundName.Text;
         }
-
-        #region Appbar
-
-        private void BuildApplicationBar()
-        {
-            ApplicationBar = new ApplicationBar();
-
-            _buttonSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.save.rest.png", UriKind.Relative));
-            _buttonSave.Text = EditorResources.ButtonSave;
-            _buttonSave.IsEnabled = _soundRecorderViewModel.IsSoundNameValid;
-            _buttonSave.Click += buttonSave_Click;
-            ApplicationBar.Buttons.Add(_buttonSave);
-
-            var buttonCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
-            buttonCancel.Text = EditorResources.ButtonCancel;
-            buttonCancel.Click += buttonCancel_Click;
-            ApplicationBar.Buttons.Add(buttonCancel);
-        }
-
-        private void buttonSave_Click(object sender, EventArgs e)
-        {
-            _soundRecorderViewModel.SaveNameChosenCommand.Execute(null);
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            _soundRecorderViewModel.CancelNameChosenCommand.Execute(null);
-        }
-
-        private void LanguageChanged(object sender, PropertyChangedEventArgs e)
-        {
-            BuildApplicationBar();
-        }
-
-        #endregion
     }
 }

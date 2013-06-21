@@ -19,7 +19,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private string _projectName;
         private string _projectDescription;
-        private bool _buttonUploadIsEnabled = true;
 
         #endregion
 
@@ -36,11 +35,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                 if (_projectName != value)
                 {
                     _projectName = value;
-
-                    if (this.PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("ProjectName"));
-                    }
+                    RaisePropertyChanged("ProjectName");
+                    UploadCommand.RaiseCanExecuteChanged();
                 }
             }
         }
@@ -56,36 +52,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                 if (_projectDescription != value)
                 {
                     _projectDescription = value;
-
-                    if (this.PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("ProjectDescription"));
-                    }
+                    RaisePropertyChanged("ProjectDescription");
                 }
             }
         }
-
-        public bool ButtonUploadIsEnabled
-        {
-            get
-            {
-                return _buttonUploadIsEnabled;
-            }
-            set
-            {
-                if (_buttonUploadIsEnabled != value)
-                {
-                    _buttonUploadIsEnabled = value;
-
-                    if (this.PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("ButtonUploadIsEnabled"));
-                    }
-                }
-            }
-        }
-
-
 
         #endregion
 
@@ -97,7 +67,29 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             private set;
         }
 
+        public RelayCommand CancelCommand
+        {
+            get;
+            private set;
+        }
+
+        public RelayCommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
         #endregion
+
+        #region CommandCanExecute
+
+        private bool UploadCommand_CanExecute()
+        {
+            return ProjectName != null && ProjectName.Length >= 2;
+        }
+
+        #endregion
+
 
         #region Actions
 
@@ -116,8 +108,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                 Button = System.Windows.MessageBoxButton.OK,
             });
 
-            ButtonUploadIsEnabled = false;
+            Navigation.RemoveBackEntry();
             Navigation.NavigateBack();
+        }
+
+        private void CancelAction()
+        {
+            Navigation.RemoveBackEntry();
+            Navigation.NavigateBack();
+        }
+
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
         }
 
         #endregion
@@ -125,7 +128,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
         public UploadProjectViewModel()
         {
             // Commands
-            UploadCommand = new RelayCommand(UploadAction);
+            UploadCommand = new RelayCommand(UploadAction, UploadCommand_CanExecute);
+            CancelCommand = new RelayCommand(CancelAction);
+            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             if (IsInDesignMode)
                 _catrobatContext = new CatrobatContextDesign();
@@ -152,7 +157,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
         {
             ProjectName = "";
             ProjectDescription = "";
-            ButtonUploadIsEnabled = true;
         }
     }
 }

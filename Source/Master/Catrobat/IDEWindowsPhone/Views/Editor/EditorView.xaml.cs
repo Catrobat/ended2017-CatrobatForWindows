@@ -47,10 +47,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             (App.Current.Resources["LocalizedStrings"] as LocalizedStrings).PropertyChanged += LanguageChanged;
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected override void OnBackKeyPress(CancelEventArgs e)
         {
             _viewModel.ResetViewModel();
-            base.OnNavigatedFrom(e);
+            base.OnBackKeyPress(e);
         }
 
         #region improve?

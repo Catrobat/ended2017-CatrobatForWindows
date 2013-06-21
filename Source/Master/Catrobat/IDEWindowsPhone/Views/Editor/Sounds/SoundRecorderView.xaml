@@ -8,6 +8,8 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:c="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
   xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
+  xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+  xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
   xmlns:system="clr-namespace:System;assembly=mscorlib"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -21,6 +23,7 @@
     <converters:DoubleStringConverter x:Key="DoubleStringConverter" />
     <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
     <converters:NegativeBoolVisibilityConverter x:Key="NegativeBoolVisibilityConverter" />
+    <converters:BoolPlayButtonStateConverter x:Key="BoolPlayButtonStateConverter" />
     <system:String x:Key="TimeFormat">0.0</system:String>
 
     <Storyboard x:Name="RecordingAnimation">
@@ -102,7 +105,7 @@
           </Grid>
 
           <TextBlock Grid.Column="3" Text="sec" Margin="0 0 10 0" VerticalAlignment="Top" FontWeight="ExtraBlack" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
-          <c:PlayButton Grid.Column="4" x:Name="PlayButton" Click="PlayButton_OnClick" 
+          <c:PlayButton Grid.Column="4" x:Name="PlayButton" State="{Binding IsPlaying, Mode=OneWay, Converter={StaticResource BoolPlayButtonStateConverter}}" Click="PlayButton_OnClick" 
                         Visibility="{Binding RecordingExists, Converter={StaticResource BoolVisibilityConverter}}"
                         VerticalAlignment="Top" HorizontalAlignment="Center" 
                         Height="60" Width="60" DataContext="{Binding}" />
@@ -139,5 +142,21 @@
         </Button>
       </Grid>
     </Grid>
+
+    <i:Interaction.Triggers>
+      <abu:StateChangedTrigger State="false">
+        <abu:SwitchAppBarAction>
+          <abu:AppBar Id="0">
+            <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.save.rest.png" 
+                              Text="{Binding Path=Editor.ButtonSave, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding SaveCommand}" />
+            <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" 
+                              Text="{Binding Path=Editor.ButtonCancel, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding CancelCommand}"/>
+          </abu:AppBar>
+        </abu:SwitchAppBarAction>
+      </abu:StateChangedTrigger>
+    </i:Interaction.Triggers>
+
   </Grid>
 </phone:PhoneApplicationPage>

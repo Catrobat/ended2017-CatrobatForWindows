@@ -55,15 +55,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                 if (value == _costumeName) return;
                 _costumeName = value;
                 RaisePropertyChanged("CostumeName");
-                RaisePropertyChanged("IsCostumeNameValid");
-            }
-        }
-
-        public bool IsCostumeNameValid
-        {
-            get
-            {
-                return CostumeName != null && CostumeName.Length >= 2;
+                SaveCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -87,6 +79,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         {
             get;
             private set;
+        }
+
+        public RelayCommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
+        #endregion
+
+        #region CommandCanExecute
+
+        private bool SaveCommand_CanExecute()
+        {
+            return CostumeName != null && CostumeName.Length >= 2;
         }
 
         #endregion
@@ -115,19 +122,25 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             CostumeName = ReceivedCostume.Name;
         }
 
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
+        }
+
         #endregion
 
 
         public ChangeCostumeViewModel()
         {
             EditCostumeCommand = new RelayCommand(EditCostumeAction);
-            SaveCommand = new RelayCommand(SaveAction);
+            SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
+            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Costume>>(this, ViewModelMessagingToken.CostumeNameListener, ChangeCostumeNameMessageAction);
         }
 
-        public void ResetViewModel()
+        private void ResetViewModel()
         {
             CostumeName = "";
         }

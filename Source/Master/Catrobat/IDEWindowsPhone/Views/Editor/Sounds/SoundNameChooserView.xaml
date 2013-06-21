@@ -6,6 +6,8 @@
   xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+  xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
@@ -31,6 +33,22 @@
         <TextBox Name="TextBoxSoundName" MaxLength="100" Text="{Binding SoundName, Mode=TwoWay}" TextChanged="TextBoxSoundName_OnTextChanged" Margin="-10 0 10 0" HorizontalAlignment="Stretch" />
       </StackPanel>
     </Grid>
+
+    <i:Interaction.Triggers>
+      <abu:StateChangedTrigger State="false">
+        <abu:SwitchAppBarAction>
+          <abu:AppBar Id="0">
+            <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.save.rest.png" 
+                              Text="{Binding Path=Editor.ButtonSave, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding SaveNameChosenCommand}" />
+            <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" 
+                              Text="{Binding Path=Editor.ButtonCancel, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding CancelNameChosenCommand}"/>
+          </abu:AppBar>
+        </abu:SwitchAppBarAction>
+      </abu:StateChangedTrigger>
+    </i:Interaction.Triggers>
+
   </Grid>
 
 </phone:PhoneApplicationPage>
