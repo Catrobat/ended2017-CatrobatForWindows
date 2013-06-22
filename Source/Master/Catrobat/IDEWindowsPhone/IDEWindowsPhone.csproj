@@ -469,6 +469,7 @@
     <Content Include="Assets\FileTypeAssociation\small-33x33.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_1280.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_800.png" />
+    <Content Include="Content\Images\Misc\EditImage.png" />
     <Content Include="Content\Images\Misc\InProcess.png" />
     <Content Include="Content\Images\Screenshot\NoScreenshot.png" />
     <Content Include="Content\Resources\SampleProjects\Aquarium_v2.catrobat" />

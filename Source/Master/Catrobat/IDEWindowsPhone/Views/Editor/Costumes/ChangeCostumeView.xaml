@@ -40,12 +40,13 @@
               <ColumnDefinition Width="Auto"/>
               <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <!--<Image Source="/Content/Images/Misc/EditImage.png" Margin="30 15 15 15"></Image>-->
+            <Image Source="/Content/Images/Misc/EditImage.png" Margin="30 15 15 15"></Image>
             <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Edit" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
           </Grid>
         </ControlTemplate>
       </Button.Template>
     </Button>
+    
 
     <i:Interaction.Triggers>
       <abu:StateChangedTrigger State="false">
