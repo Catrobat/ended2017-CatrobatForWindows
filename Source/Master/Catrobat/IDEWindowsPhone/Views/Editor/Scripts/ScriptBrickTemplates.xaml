@@ -173,7 +173,7 @@
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" Margin="10" Text="{Binding Path=Bricks.WhenIReceive, Source={StaticResource LocalizedStrings}}" />
                 <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" ItemTemplate="{StaticResource ListBoxBroadcastItem}" PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" ItemsSource="{Binding Editor.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding ReceivedMessage, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
-                <Button Grid.Row="1" Grid.Column="1" Width="150" Content="{Binding Path=Bricks.ButtonNew, Source={StaticResource LocalizedStrings}}" Command="{Binding Editor.StartAddBroadcastMessageCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" IsEnabled="{Binding IsRealObject}" />
+                <Button Grid.Row="1" Grid.Column="1" Width="150" Content="{Binding Path=Bricks.ButtonNew, Source={StaticResource LocalizedStrings}}" Command="{Binding Editor.AddBroadcastMessageCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" IsEnabled="{Binding IsRealObject}" />
               </Grid>
             </rlb:MasterBrick>
           </Grid>
@@ -796,7 +796,7 @@
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" Margin="10" Text="{Binding Path=Bricks.Broadcast, Source={StaticResource LocalizedStrings}}" />
                 <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" ItemTemplate="{StaticResource ListBoxBroadcastItem}" PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" ItemsSource="{Binding Editor.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding BroadcastMessage, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
-                <Button Grid.Row="1" Grid.Column="1" Width="150" Content="{Binding Path=Bricks.ButtonNew, Source={StaticResource LocalizedStrings}}" Command="{Binding Editor.StartAddBroadcastMessageCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" IsEnabled="{Binding IsRealObject}" />
+                <Button Grid.Row="1" Grid.Column="1" Width="150" Content="{Binding Path=Bricks.ButtonNew, Source={StaticResource LocalizedStrings}}" Command="{Binding Editor.AddBroadcastMessageCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" IsEnabled="{Binding IsRealObject}" />
               </Grid>
             </rlb:NormalBrick>
           </Grid>
@@ -819,7 +819,7 @@
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" Margin="10" Text="{Binding Path=Bricks.BroadcastWait, Source={StaticResource LocalizedStrings}}" />
                 <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" ItemTemplate="{StaticResource ListBoxBroadcastItem}" PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" ItemsSource="{Binding Editor.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" SelectedItem="{Binding BroadcastMessage, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" Margin="10" />
-                <Button Grid.Row="1" Grid.Column="1" Width="150" Content="{Binding Path=Bricks.ButtonNew, Source={StaticResource LocalizedStrings}}" Command="{Binding Editor.StartAddBroadcastMessageCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" IsEnabled="{Binding IsRealObject}" />
+                <Button Grid.Row="1" Grid.Column="1" Width="150" Content="{Binding Path=Bricks.ButtonNew, Source={StaticResource LocalizedStrings}}" Command="{Binding Editor.AddBroadcastMessageCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" IsEnabled="{Binding IsRealObject}" />
               </Grid>
             </rlb:NormalBrick>
           </Grid>

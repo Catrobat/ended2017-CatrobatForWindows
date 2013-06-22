@@ -176,6 +176,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             private set;
         }
 
+        public RelayCommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
         # region Actions
@@ -256,6 +262,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             ServerCommunication.CheckToken(CatrobatContext.GetContext().CurrentToken, CheckTokenEvent);
         }
 
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
+        }
+
         #endregion
 
         
@@ -273,7 +284,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             EditCurrentProjectCommand = new RelayCommand(EditCurrentProjectAction);
             PlayCurrentProjectCommand = new RelayCommand(PlayCurrentProjectAction);
             UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction);
-
+            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Context = new CatrobatContext();
             Context.PropertyChanged += CatrobatContextPropertyChanged;
@@ -402,5 +413,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         }
 
         #endregion
+
+        private void ResetViewModel()
+        {
+        }
     }
 }

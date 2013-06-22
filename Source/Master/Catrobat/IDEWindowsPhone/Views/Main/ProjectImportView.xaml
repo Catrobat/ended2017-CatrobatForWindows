@@ -7,6 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
+    xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -17,6 +19,7 @@
 
   <phone:PhoneApplicationPage.Resources>
     <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
+    <converters:ScreenshotConverter x:Key="ScreenshotConverter" />
   </phone:PhoneApplicationPage.Resources>
   
   <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -26,8 +29,8 @@
     </Grid.RowDefinitions>
 
     <StackPanel Grid.Row="0" Margin="12,17,0,28">
-      <TextBlock Text="Import" Style="{StaticResource PhoneTextNormalStyle}"/>
-      <TextBlock Name="TextBoxProjectName" Text="" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+      <TextBlock Text="IMPORT" Style="{StaticResource PhoneTextNormalStyle}"/>
+      <TextBlock Text="{Binding ProjectName}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
     </StackPanel>
 
     <Grid x:Name="LoadingPanel" Visibility="{Binding LoadingPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Grid.Row="1" Margin="12,0,12,170">
@@ -35,7 +38,7 @@
         <RowDefinition Height="Auto"/>
         <RowDefinition/>
       </Grid.RowDefinitions>
-      <ProgressBar Grid.Row="0" Name="ProgressBarLoading" IsIndeterminate="{Binding ProgressBarLoading.IsIndeterminate}"></ProgressBar>
+      <ProgressBar Grid.Row="0" Name="ProgressBarLoading" IsIndeterminate="{Binding ProgressBarLoadingIsIndeterminate}"></ProgressBar>
       <TextBlock Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="Please wait while we try to load the new project. This can take some time."></TextBlock>
     </Grid>
 
@@ -45,17 +48,25 @@
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
-      <Image VerticalAlignment="Stretch" Grid.Row="0" Name="ImageProjectScreenshot" Source="{Binding ImageProjectScreenshotSource}"></Image>
+      <Image VerticalAlignment="Stretch" Grid.Row="0" Name="ImageProjectScreenshot" Source="{Binding ScreenshotImageSource, Converter={StaticResource ScreenshotConverter}}"></Image>
       <CheckBox Grid.Row="1" Name="CheckBoxMakeActive" IsChecked="{Binding CheckBoxMakeActiveIsChecked}">Make new Project active</CheckBox>
-      <Grid Grid.Row="2" Margin="0 0 0 20">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition/>
-          <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Button Name="ButtonAdd" IsEnabled="{Binding ButtonAddIsEnabled}" Content="Add" Width="200" Grid.Column="0" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Command="{Binding AddCommand}" />
-        <Button Name="ButtonCancel" IsEnabled="{Binding ButtonCancelIsEnabled}" Content="Dismiss" Width="200" Grid.Column="1" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Command="{Binding DismissCommand}" />
-      </Grid>
     </Grid>
+
+    <i:Interaction.Triggers>
+      <abu:StateChangedTrigger State="false">
+        <abu:SwitchAppBarAction>
+          <abu:AppBar Id="0">
+            <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png" 
+                              Text="{Binding Path=Editor.ButtonSave, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding AddCommand}" />
+            <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" 
+                              Text="{Binding Path=Editor.ButtonCancel, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding CancelCommand}"/>
+          </abu:AppBar>
+        </abu:SwitchAppBarAction>
+      </abu:StateChangedTrigger>
+    </i:Interaction.Triggers>
+
   </Grid>
 
 </phone:PhoneApplicationPage>

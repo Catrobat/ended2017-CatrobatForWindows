@@ -58,7 +58,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             get { return _isRecording; }
             set
             {
-                if (value.Equals(_isRecording)) return;
+                if (value == _isRecording) return;
                 _isRecording = value;
                 UpdateTextProperties();
                 RaisePropertyChanged("IsRecording");
@@ -70,7 +70,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             get { return _isPlaying; }
             set
             {
-                if (value.Equals(_isPlaying)) return;
+                if (value == _isPlaying) return;
                 _isPlaying = value;
                 RaisePropertyChanged("IsPlaying");
             }
@@ -81,7 +81,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             get { return _recordingTime; }
             set
             {
-                if (value.Equals(_recordingTime)) return;
+                if (value == _recordingTime) return;
                 _recordingTime = value;
                 RaisePropertyChanged("RecordingTime");
             }
@@ -92,7 +92,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             get { return _playingTime; }
             set
             {
-                if (value.Equals(_playingTime)) return;
+                if (value == _playingTime) return;
                 _playingTime = value;
                 RaisePropertyChanged("PlayingTime");
             }
@@ -103,7 +103,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             get { return _recordingExists; }
             set
             {
-                if (value.Equals(_recordingExists)) return;
+                if (value ==_recordingExists) return;
                 _recordingExists = value;
                 RaisePropertyChanged("RecordingExists");
                 SaveCommand.RaiseCanExecuteChanged();

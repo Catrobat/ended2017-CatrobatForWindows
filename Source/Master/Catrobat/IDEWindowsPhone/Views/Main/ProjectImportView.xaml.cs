@@ -30,7 +30,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            _viewModel.ResetViewModel();
+            _viewModel.ResetViewModelCommand.Execute(null);
             base.OnNavigatedFrom(e);
         }
 
