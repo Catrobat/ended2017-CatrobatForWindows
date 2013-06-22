@@ -125,25 +125,25 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
         private void MovementAction()
         {
             _selectedBrickCategory = BrickCategory.Motion;
-            Navigation.NavigateTo(typeof(AddNewBrick));
+            Navigation.NavigateTo(typeof(AddNewBrickView));
         }
 
         private void LooksAction()
         {
             _selectedBrickCategory = BrickCategory.Looks;
-            Navigation.NavigateTo(typeof(AddNewBrick));
+            Navigation.NavigateTo(typeof(AddNewBrickView));
         }
 
         private void SoundAction()
         {
             _selectedBrickCategory = BrickCategory.Sounds;
-            Navigation.NavigateTo(typeof(AddNewBrick));
+            Navigation.NavigateTo(typeof(AddNewBrickView));
         }
 
         private void ControlAction()
         {
             _selectedBrickCategory = BrickCategory.Control;
-            Navigation.NavigateTo(typeof(AddNewBrick));
+            Navigation.NavigateTo(typeof(AddNewBrickView));
         }
 
         private void OnLoadBrickViewAction()

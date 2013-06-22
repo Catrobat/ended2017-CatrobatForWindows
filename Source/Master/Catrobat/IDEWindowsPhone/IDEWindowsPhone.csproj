@@ -207,8 +207,8 @@
     <Compile Include="Views\Editor\ProjectSettingsView.xaml.cs">
       <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Scripts\AddNewBrick.xaml.cs">
-      <DependentUpon>AddNewBrick.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Scripts\AddNewBrickView.xaml.cs">
+      <DependentUpon>AddNewBrickView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Scripts\AddNewScriptView.xaml.cs">
       <DependentUpon>AddNewScriptView.xaml</DependentUpon>
@@ -362,7 +362,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Scripts\AddNewBrick.xaml">
+    <Page Include="Views\Editor\Scripts\AddNewBrickView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
