@@ -23,11 +23,13 @@ namespace Catrobat.Core.Objects
             get { return true; }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+
         internal abstract void LoadFromXML(XElement xRoot);
 
         internal abstract XElement CreateXML();
 
+
+        public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)

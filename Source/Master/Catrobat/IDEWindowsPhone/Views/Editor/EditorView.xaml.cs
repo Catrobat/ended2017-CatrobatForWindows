@@ -48,39 +48,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             base.OnBackKeyPress(e);
         }
 
-        #region improve?
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            //// TODO: maybe remove this 2 lines
-            //reorderListBoxSprites.ItemsSource = _viewModel.Sprites;
-            //reorderListBoxSprites.SelectedItem = _viewModel.SelectedSprite;
-
-            //// TODO: do this somewhere else
-            //if (_viewModel.SelectedBrick != null)
-            //{
-            //    Sprite selectedSprite = _viewModel.SelectedSprite;
-            //    DataObject newScriptBrick = _viewModel.SelectedBrick;
-
-            //    _firstVisibleScriptBrickIndex = reorderListBoxScriptBricks.FirstVisibleItemIndex;
-            //    _lastVisibleScriptBrickIndex = reorderListBoxScriptBricks.LastVisibleItemIndex;
-
-            //    ((ScriptBrickCollection)reorderListBoxScriptBricks.ItemsSource).AddScriptBrick(newScriptBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex);
-
-            //    if (newScriptBrick is LoopBeginBrick)
-            //    {
-            //        LoopEndBrick brick = new LoopEndBrick(((LoopBeginBrick)newScriptBrick).Sprite);
-            //        brick.LoopBeginBrick = (LoopBeginBrick)newScriptBrick;
-            //        ((LoopBeginBrick)newScriptBrick).LoopEndBrick = brick;
-            //        ((ScriptBrickCollection)reorderListBoxScriptBricks.ItemsSource).AddScriptBrick(brick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
-            //    }
-
-            //    reorderListBoxScriptBricks.UpdateLayout();
-            //    reorderListBoxScriptBricks.ScrollIntoView(reorderListBoxScriptBricks.ItemContainerGenerator.ContainerFromItem(newScriptBrick));
-            //    _viewModel.SelectedBrick = null;
-            //}
-        }
-
         private void reorderListBoxScriptBricks_Loaded(object sender, RoutedEventArgs e)
         {
             if (_viewModel.SelectedBrick != null)
@@ -88,14 +55,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
                 reorderListBoxScriptBricks.ScrollIntoView(_viewModel.SelectedBrick);
                 _viewModel.SelectedBrick = null;
             }
-        }
-
-        private void reorderListBoxScriptBricks_ManipulationStarted(object sender, System.Windows.Input.ManipulationStartedEventArgs e)
-        {
-            object dragItem = ((ReorderListBox)sender).DragItem;
-
-            if (dragItem is Script)
-                e.Complete();
         }
 
         private void LockPivotIfNoSpriteSelected()
@@ -159,11 +118,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             }
         }
 
-        private void reorderListBoxSprites_ManipulationDelta(object sender, System.Windows.Input.ManipulationDeltaEventArgs e)
-        {
-            _updatePivot = false;
-        }
-
         private void reorderListBoxCostumes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Preventing selection
@@ -181,8 +135,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             // Preventing selection
             reorderListBoxScriptBricks.SelectedIndex = -1;
         }
-
-        #endregion
+        
 
         private void buttonSoundPlay_Click(object sender, RoutedEventArgs e)
         {
