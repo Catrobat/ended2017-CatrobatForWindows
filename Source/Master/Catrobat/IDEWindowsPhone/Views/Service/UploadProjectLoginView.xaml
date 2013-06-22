@@ -6,12 +6,14 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded"
+    shell:SystemTray.IsVisible="True"
     DataContext="{Binding UploadProjectLogin, Source={StaticResource Locator}}">
 
   <!--LayoutRoot is the root grid where all page content is placed-->
@@ -39,11 +41,19 @@
     </StackPanel>
   </Grid>
 
-  <phone:PhoneApplicationPage.ApplicationBar>
-    <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-      <shell:ApplicationBarIconButton IconUri="/Content/Images/ApplicationBar/dark/appbar.check.rest.png" Text="*" Click="LoginRegister_Click" />
-      <shell:ApplicationBarIconButton IconUri="/Content/Images/ApplicationBar/dark/appbar.questionmark.rest.png" Text="*" Click="Forgotten_Click" />
-    </shell:ApplicationBar>
-  </phone:PhoneApplicationPage.ApplicationBar>
+  <i:Interaction.Triggers>
+    <abu:StateChangedTrigger State="false">
+      <abu:SwitchAppBarAction>
+        <abu:AppBar Id="0">
+          <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.check.rest.png" 
+                              Text="{Binding Path=Main.ButtonLoginRegister, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding LoginCommand}" />
+          <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.questionmark.rest.png" 
+                              Text="{Binding Path=Main.ButtonPasswordForgotten, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding ForgottenCommand}" />
+        </abu:AppBar>
+      </abu:SwitchAppBarAction>
+    </abu:StateChangedTrigger>
+  </i:Interaction.Triggers>
 
 </phone:PhoneApplicationPage>

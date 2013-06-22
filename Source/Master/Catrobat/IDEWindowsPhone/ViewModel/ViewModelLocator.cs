@@ -3,6 +3,7 @@ using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
+using Catrobat.IDEWindowsPhone.ViewModel.Scripts;
 using Catrobat.IDEWindowsPhone.ViewModel.Service;
 using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using GalaSoft.MvvmLight.Ioc;
@@ -32,6 +33,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<ProjectSettingsViewModel>(true);
             SimpleIoc.Default.Register<ProjectImportViewModel>();
             SimpleIoc.Default.Register<OnlineProjectViewModel>();
+            SimpleIoc.Default.Register<NewBroadcastMessageViewModel>(true);
+            SimpleIoc.Default.Register<AddNewScriptBrickViewModel>(true);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -207,6 +210,28 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<OnlineProjectViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public NewBroadcastMessageViewModel NewBroadcastMessage
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<NewBroadcastMessageViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public AddNewScriptBrickViewModel AddNewScriptBrick
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddNewScriptBrickViewModel>();
             }
         }
 

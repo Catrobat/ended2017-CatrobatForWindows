@@ -19,53 +19,23 @@ namespace Catrobat.IDEWindowsPhone.Views.Service
         public UploadProjectLoginView()
         {
             InitializeComponent();
-
-            _viewModel.NavigationCallback = navigationCallback;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            _viewModel.ResetViewModel();
+            _viewModel.ResetViewModelCommand.Execute(null);
             base.OnNavigatedFrom(e);
-        }
-
-        private void LocalizeApplicationBar()
-        {
-            ((ApplicationBarIconButton)ApplicationBar.Buttons[0]).Text = MainResources.ButtonLoginRegister;
-            ((ApplicationBarIconButton)ApplicationBar.Buttons[1]).Text = MainResources.ButtonPasswordForgotten;
-        }
-
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            LocalizeApplicationBar();
-        }
-
-        private void LoginRegister_Click(object sender, EventArgs e)
-        {
-            Navigation.RemoveBackEntry();
-            _viewModel.LoginCommand.Execute(sender);
-        }
-
-        private void Forgotten_Click(object sender, EventArgs e)
-        {
-            _viewModel.ForgottenCommand.Execute(sender);
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Hack for Windows Phone 7
+            // otherwise bound properties won't get set
             (sender as TextBox).GetBindingExpression(TextBox.TextProperty).UpdateSource();
-        }
-
-        private void navigationCallback()
-        {
-            Action action = () => Navigation.NavigateTo(typeof(UploadProjectView));
-            Dispatcher.BeginInvoke(action);
         }
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            // Hack for Windows Phone 7
+            // otherwise bound properties won't get set
             (sender as PasswordBox).GetBindingExpression(PasswordBox.PasswordProperty).UpdateSource();
         }
     }

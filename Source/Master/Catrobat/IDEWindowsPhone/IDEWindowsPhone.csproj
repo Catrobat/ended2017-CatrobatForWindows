@@ -138,6 +138,7 @@
     <Compile Include="Converters\ActiveThemeBrushConverter.cs" />
     <Compile Include="Converters\BytesImageConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="Converters\NegativeBoolVisibilityConverter.cs" />
     <Compile Include="Converters\InActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\ScreenshotConverter.cs" />
@@ -179,6 +180,8 @@
     <Compile Include="ViewModel\Editor\Sprites\ChangeSpriteViewModel.cs" />
     <Compile Include="ViewModel\Main\AddNewProjectViewModel.cs" />
     <Compile Include="ViewModel\Main\ProjectImportViewModel.cs" />
+    <Compile Include="ViewModel\Scripts\AddNewScriptBrickViewModel.cs" />
+    <Compile Include="ViewModel\Scripts\NewBroadcastMessageViewModel.cs" />
     <Compile Include="ViewModel\Service\OnlineProjectViewModel.cs" />
     <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sounds\SoundRecorderViewModel.cs" />
@@ -206,11 +209,11 @@
     <Compile Include="Views\Editor\Scripts\AddNewBrick.xaml.cs">
       <DependentUpon>AddNewBrick.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Scripts\AddNewScript.xaml.cs">
-      <DependentUpon>AddNewScript.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Scripts\AddNewScriptView.xaml.cs">
+      <DependentUpon>AddNewScriptView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Scripts\NewBroadcastMessage.xaml.cs">
-      <DependentUpon>NewBroadcastMessage.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Scripts\NewBroadcastMessageView.xaml.cs">
+      <DependentUpon>NewBroadcastMessageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Scripts\ScriptBrickCollection.cs" />
     <Compile Include="Views\Editor\Scripts\ScriptBrickContentTemplateSelector.cs" />
@@ -362,11 +365,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Scripts\AddNewScript.xaml">
+    <Page Include="Views\Editor\Scripts\AddNewScriptView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Scripts\NewBroadcastMessage.xaml">
+    <Page Include="Views\Editor\Scripts\NewBroadcastMessageView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -623,6 +626,9 @@
     <Folder Include="Content\Theme\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AppBarUtils">
+      <HintPath>..\packages\AppBarUtils.2.4\lib\windowsphone8\AppBarUtils.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight.Extras.WP8">
       <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\GalaSoft.MvvmLight.Extras.WP8.dll</HintPath>
     </Reference>

@@ -30,7 +30,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
     {
         #region Private Members
         
-        private DataObject _broadcastObject;
         private readonly ICatrobatContext _catrobatContext;
         private Sprite _selectedSprite;
         private readonly ScriptBrickCollection _scriptBricks;
@@ -43,11 +42,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         #endregion
 
         # region Properties
-
-        public DataObject BroadcastObject
-        {
-            get { return _broadcastObject; }
-        }
 
         public Project CurrentProject
         {
@@ -148,6 +142,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             }
         }
 
+        public int FirstVisibleScriptBrickIndex { get; set; }
+
+        public int LastVisibleScriptBrickIndex { get; set; }
+
         public BrickCategory SelectedBrickCategory { get; set; }
 
         public DataObject SelectedBrick { get; set; }
@@ -157,32 +155,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         # endregion
 
         #region Commands
-
-        public ICommand AddNewScriptBrickCommand
-        {
-            get;
-            private set;
-        }
-
-        public ICommand CopyScriptBrickCommand
-        {
-            get;
-            private set;
-        }
-
-        public ICommand DeleteScriptBrickCommand
-        {
-            get;
-            private set;
-        }
-
-
-        public ICommand StartAddBroadcastMessageCommand
-        {
-            get;
-            private set;
-        }
-
 
         public ICommand AddNewSpriteCommand
         {
@@ -209,19 +181,26 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         }
 
 
-        public ICommand AddNewSoundCommand
+        public ICommand AddBroadcastMessageCommand
         {
             get;
             private set;
         }
 
-        public ICommand EditSoundCommand
+
+        public ICommand AddNewScriptBrickCommand
         {
             get;
             private set;
         }
 
-        public ICommand DeleteSoundCommand
+        public ICommand CopyScriptBrickCommand
+        {
+            get;
+            private set;
+        }
+
+        public ICommand DeleteScriptBrickCommand
         {
             get;
             private set;
@@ -253,6 +232,25 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         }
 
 
+        public ICommand AddNewSoundCommand
+        {
+            get;
+            private set;
+        }
+
+        public ICommand EditSoundCommand
+        {
+            get;
+            private set;
+        }
+
+        public ICommand DeleteSoundCommand
+        {
+            get;
+            private set;
+        }
+
+
         public ICommand PlaySoundCommand
         {
             get;
@@ -264,14 +262,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             get;
             private set;
         }
-        
+
+
         public ICommand StartPlayerCommand
         {
             get;
             private set;
         }
 
-        public ICommand GoToMainMenueCommand
+        public ICommand GoToMainViewCommand
         {
             get;
             private set;
@@ -282,6 +281,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             get;
             private set;
         }
+
 
         public ICommand UndoCommand
         {
@@ -301,13 +301,27 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             private set;
         }
 
+        public RelayCommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
         # endregion
 
         #region Actions
 
         private void AddNewScriptBrickAction()
         {
-            Navigation.NavigateTo(typeof(AddNewScript));
+            GenericMessage<Sprite> message1 = new GenericMessage<Sprite>(SelectedSprite);
+            Messenger.Default.Send<GenericMessage<Sprite>>(message1, ViewModelMessagingToken.SelectedSpriteListener);
+
+            List<Object> objects = new List<object>{ScriptBricks, FirstVisibleScriptBrickIndex, LastVisibleScriptBrickIndex};
+
+            GenericMessage<List<Object>> message2 = new GenericMessage<List<Object>>(objects);
+            Messenger.Default.Send<GenericMessage<List<Object>>>(message2, ViewModelMessagingToken.ScriptBrickCollectionListener);
+
+            Navigation.NavigateTo(typeof(AddNewScriptView));
         }
 
         private void CopyScriptBrickAction(DataObject scriptBrick)
@@ -337,18 +351,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private void AddBroadcastMessageAction(DataObject broadcastObject)
         {
-            // TODO: change this
-            this._broadcastObject = broadcastObject;
+            GenericMessage<DataObject> message = new GenericMessage<DataObject>(broadcastObject);
+            Messenger.Default.Send<GenericMessage<DataObject>>(message, ViewModelMessagingToken.BroadcastObjectListener);
 
-            if (OnAddedBroadcastMessage != null)
-                OnAddedBroadcastMessage.Invoke();
+            Navigation.NavigateTo(typeof(NewBroadcastMessageView));
         }
 
-        public void AddBroadcastMessageAction(string message)
+        private void ReceiveNewBroadcastMessageAction(GenericMessage<string> message)
         {
-            if (!_catrobatContext.CurrentProject.BroadcastMessages.Contains(message))
+            if (!CurrentProject.BroadcastMessages.Contains(message.Content))
             {
-                _catrobatContext.CurrentProject.BroadcastMessages.Add(message);
+                CurrentProject.BroadcastMessages.Add(message.Content);
                 RaisePropertyChanged("BroadcastMessages");
             }
         }
@@ -500,8 +513,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             await PlayerLauncher.LaunchPlayer(CurrentProject.ProjectName);
         }
 
-        private void GoToMainMenueAction()
+        private void GoToMainViewAction()
         {
+            ResetViewModel();
             Navigation.NavigateTo(typeof(MainView));
         }
 
@@ -553,15 +567,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             }
         }
 
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
+        }
+
         #endregion
-
-        # region Events
-
-        public delegate void AddedBroadcastMessageEvent();
-        public AddedBroadcastMessageEvent OnAddedBroadcastMessage;
-
-        # endregion
-
         
         public EditorViewModel()
         {
@@ -569,7 +580,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             CopyScriptBrickCommand = new RelayCommand<DataObject>(CopyScriptBrickAction);
             DeleteScriptBrickCommand = new RelayCommand<DataObject>(DeleteScriptBrickAction);
             
-            StartAddBroadcastMessageCommand = new RelayCommand<DataObject>(AddBroadcastMessageAction);
+            AddBroadcastMessageCommand = new RelayCommand<DataObject>(AddBroadcastMessageAction);
 
             AddNewSpriteCommand = new RelayCommand(AddNewSpriteAction);
             EditSpriteCommand = new RelayCommand<Sprite>(EditSpriteAction);
@@ -588,13 +599,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             PlaySoundCommand = new RelayCommand<List<Object>>(PlaySoundAction);
             StopSoundCommand = new RelayCommand(StopSoundAction);
             StartPlayerCommand = new RelayCommand(StartPlayerAction);
-            GoToMainMenueCommand = new RelayCommand(GoToMainMenueAction);
+            GoToMainViewCommand = new RelayCommand(GoToMainViewAction);
             ProjectSettingsCommand = new RelayCommand(ProjectSettingsAction);
 
             UndoCommand = new RelayCommand(UndoAction);
             RedoCommand = new RelayCommand(RedoAction);
 
             NothingItemHackCommand = new RelayCommand<object>(NothingItemHackAction);
+
+            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
 
             if (IsInDesignMode)
@@ -608,6 +621,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             }
 
             _scriptBricks = new ScriptBrickCollection();
+
+            Messenger.Default.Register<GenericMessage<string>>(this, ViewModelMessagingToken.BroadcastMessageListener, ReceiveNewBroadcastMessageAction);
         }
 
         #region MessageBoxResult
@@ -661,9 +676,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             }
         }
 
-        public void ResetViewModel()
+        private void ResetViewModel()
         {
-            _broadcastObject = null;
             _messageBoxCostume = null;
 
             SelectedSprite = null;

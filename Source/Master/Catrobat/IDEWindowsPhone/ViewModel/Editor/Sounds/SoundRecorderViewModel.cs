@@ -58,7 +58,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             get { return _isRecording; }
             set
             {
-                if (value.Equals(_isRecording)) return;
+                if (value == _isRecording) return;
                 _isRecording = value;
                 UpdateTextProperties();
                 RaisePropertyChanged("IsRecording");
@@ -70,7 +70,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             get { return _isPlaying; }
             set
             {
-                if (value.Equals(_isPlaying)) return;
+                if (value == _isPlaying) return;
                 _isPlaying = value;
                 RaisePropertyChanged("IsPlaying");
             }
@@ -81,7 +81,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             get { return _recordingTime; }
             set
             {
-                if (value.Equals(_recordingTime)) return;
+                if (value == _recordingTime) return;
                 _recordingTime = value;
                 RaisePropertyChanged("RecordingTime");
             }
@@ -92,7 +92,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             get { return _playingTime; }
             set
             {
-                if (value.Equals(_playingTime)) return;
+                if (value == _playingTime) return;
                 _playingTime = value;
                 RaisePropertyChanged("PlayingTime");
             }
@@ -103,9 +103,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             get { return _recordingExists; }
             set
             {
-                if (value.Equals(_recordingExists)) return;
+                if (value ==_recordingExists) return;
                 _recordingExists = value;
                 RaisePropertyChanged("RecordingExists");
+                SaveCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -155,32 +156,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         public string SoundName
         {
-            get
-            {
-                if (_soundName == "" || _soundName == null)
-                    return EditorResources.Recording;
-                else
-                    return _soundName;
-            }
+            get { return _soundName; }
             set
             {
-                bool isSoundNameValidBefore = IsSoundNameValid;
                 if (value == _soundName) return;
                 _soundName = value;
                 RaisePropertyChanged("SoundName");
-                if (isSoundNameValidBefore != IsSoundNameValid)
-                    RaisePropertyChanged("IsSoundNameValid");
+                SaveNameChosenCommand.RaiseCanExecuteChanged();
             }
         }
-
-        public bool IsSoundNameValid
-        {
-            get
-            {
-                return SoundName != null && SoundName.Length >= 2;
-            }
-        }
-
 
         #endregion
 
@@ -226,6 +210,26 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
         {
             get;
             private set;
+        }
+
+        public RelayCommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
+        #endregion
+
+        #region CommandCanExecute
+
+        private bool SaveCommand_CanExecute()
+        {
+            return RecordingExists;
+        }
+
+        private bool SaveNameChosenCommand_CanExecute()
+        {
+            return SoundName != null && SoundName.Length >= 2;
         }
 
         #endregion
@@ -332,6 +336,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
                                 Thread.Sleep(45);
                             }
+                            IsPlaying = false;
                         }
                         catch
                         {
@@ -348,6 +353,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         private void SaveAction()
         {
+            SoundName = EditorResources.Recording;
             Navigation.NavigateTo(typeof(SoundNameChooserView));
         }
 
@@ -400,6 +406,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             _receivedSelectedSprite = message.Content;
         }
 
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
+        }
+
         #endregion  
 
         public SoundRecorderViewModel()
@@ -407,10 +418,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             StartRecordingCommand = new RelayCommand(StartRecordingAction);
             ResetCommand = new RelayCommand(ResetAction);
             PlayPauseCommand = new RelayCommand(PlayPauseAction);
-            SaveCommand = new RelayCommand(SaveAction);
+            SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
-            SaveNameChosenCommand = new RelayCommand(SaveNameChosenAction);
+            SaveNameChosenCommand = new RelayCommand(SaveNameChosenAction, SaveNameChosenCommand_CanExecute);
             CancelNameChosenCommand = new RelayCommand(CancelNameChosenAction);
+            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
 
@@ -451,7 +463,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             PlayingTime = 6.23;
         }
 
-        public void ResetViewModel()
+        private void ResetViewModel()
         {
             SoundName = null;
             IsPlaying = false;

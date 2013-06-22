@@ -6,6 +6,8 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -41,24 +43,33 @@
         <TextBlock Text="{Binding Path=Main.OnlineProjectDescription, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0 10 0 0" />
         <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
         <TextBlock Text="{Binding Path=Main.OnlineProjectUploaded, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0 10 0 0" />
-        <TextBlock TextWrapping="Wrap" x:Name="UploadedLabel" />
+        <TextBlock TextWrapping="Wrap" x:Name="UploadedLabel" Text="{Binding OnlineProject.UploadedLabelText, Source={StaticResource Locator}}" />
         <TextBlock FontWeight="Bold" Text="{Binding Author}" TextWrapping="Wrap" />
-        <TextBlock TextWrapping="Wrap" x:Name="VersionLabel" />
+        <TextBlock TextWrapping="Wrap" x:Name="VersionLabel" Text="{Binding OnlineProject.VersionLabelText, Source={StaticResource Locator}}" />
         <TextBlock Text="{Binding Path=Main.OnlineProjectStatistics, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0 10 0 0" />
-        <TextBlock TextWrapping="Wrap" x:Name="ViewsLabel" />
-        <TextBlock TextWrapping="Wrap" x:Name="DownloadsLabel" />
+        <TextBlock TextWrapping="Wrap" x:Name="ViewsLabel" Text="{Binding OnlineProject.ViewsLabelText, Source={StaticResource Locator}}" />
+        <TextBlock TextWrapping="Wrap" x:Name="DownloadsLabel" Text="{Binding OnlineProject.DownloadsLabelText, Source={StaticResource Locator}}" />
       </StackPanel>
     </Grid>
+
+    <i:Interaction.Triggers>
+      <abu:StateChangedTrigger State="false">
+        <abu:SwitchAppBarAction>
+          <abu:AppBar Id="0">
+            <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.download.rest.png" 
+                              Text="{Binding Path=Main.OnlineProjectDownloadButton, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding OnlineProject.DownloadCommand, Source={StaticResource Locator}}"
+                              CommandParameter="{Binding}"/>
+            <abu:AppBar.MenuItems>
+              <abu:AppBarMenuItem Text="{Binding Path=Main.OnlineProjectReportButton, Source={StaticResource LocalizedStrings}}" 
+                                  Command="{Binding OnlineProject.ReportCommand, Source={StaticResource Locator}}" />
+              <abu:AppBarMenuItem Text="{Binding Path=Main.OnlineProjectLicenseButton, Source={StaticResource LocalizedStrings}}" 
+                                  Command="{Binding OnlineProject.LicenseCommand, Source={StaticResource Locator}}" />
+            </abu:AppBar.MenuItems>
+          </abu:AppBar>
+        </abu:SwitchAppBarAction>
+      </abu:StateChangedTrigger>
+    </i:Interaction.Triggers>
+
   </Grid>
-
-  <phone:PhoneApplicationPage.ApplicationBar>
-    <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-      <shell:ApplicationBarIconButton IconUri="/Content/Images/ApplicationBar/dark/appbar.download.rest.png" Text="*" IsEnabled="{Binding Source={StaticResource Locator}, Path=OnlineProject.ButtonDownloadIsEnabled}" Click="Download_Click" />
-      <shell:ApplicationBar.MenuItems>
-        <shell:ApplicationBarMenuItem Text="*" Click="Report_Click" />
-        <shell:ApplicationBarMenuItem Text="*" Click="License_Click" />
-      </shell:ApplicationBar.MenuItems>
-    </shell:ApplicationBar>
-  </phone:PhoneApplicationPage.ApplicationBar>
-
 </phone:PhoneApplicationPage>

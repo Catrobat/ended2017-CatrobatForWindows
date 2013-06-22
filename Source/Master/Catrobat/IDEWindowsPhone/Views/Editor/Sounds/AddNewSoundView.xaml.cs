@@ -18,7 +18,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
         {
-            _viewModel.ResetViewModel();
+            _viewModel.ResetViewModelCommand.Execute(null);
         }
     }
 }

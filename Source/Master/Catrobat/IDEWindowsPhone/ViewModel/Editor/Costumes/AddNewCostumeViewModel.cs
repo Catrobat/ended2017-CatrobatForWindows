@@ -46,18 +46,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                 if (value == _costumeName) return;
                 _costumeName = value;
                 RaisePropertyChanged("CostumeName");
-                RaisePropertyChanged("IsCostumeNameValid");
+                SaveCommand.RaiseCanExecuteChanged();
             }
         }
-
-        public bool IsCostumeNameValid
-        {
-            get
-            {
-                return CostumeName != null && CostumeName.Length >= 2;
-            }
-        }
-
+   
         #endregion
 
         #region Commands
@@ -84,6 +76,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         {
             get;
             private set;
+        }
+
+        public RelayCommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
+        #endregion
+
+        #region CommandCanExecute
+
+        private bool SaveCommand_CanExecute()
+        {
+            return CostumeName != null && CostumeName.Length >= 2;
         }
 
         #endregion
@@ -117,7 +124,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             var costume = _builder.Save(CostumeName);
             _receivedSelectedSprite.Costumes.Costumes.Add(costume);
 
-            ResetViewModel();
             Navigation.RemoveBackEntry();
             Navigation.NavigateBack();
         }
@@ -132,6 +138,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             _receivedSelectedSprite = message.Content;
         }
 
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
+        }
 
         #endregion
 
@@ -140,8 +150,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         {
             OpenGalleryCommand = new RelayCommand(OpenGalleryAction);
             OpenCameraCommand = new RelayCommand(OpenCameraAction);
-            SaveCommand = new RelayCommand(SaveAction);
+            SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
+            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
         }
@@ -182,8 +193,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         {
             Navigation.NavigateBack();
         }
-        
-        public void ResetViewModel()
+
+        private void ResetViewModel()
         {
             CostumeName = null;
 

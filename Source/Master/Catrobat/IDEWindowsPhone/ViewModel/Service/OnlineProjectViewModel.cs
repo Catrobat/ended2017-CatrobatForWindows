@@ -20,15 +20,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 {
     public class OnlineProjectViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        private readonly ICatrobatContext _catrobatContext;
         public new event PropertyChangedEventHandler PropertyChanged;
 
         #region private Members
 
         private bool _buttonDownloadIsEnabled = true;
-        private string _buttonDownloadText = "";
-        private string _menueReportText = "";
-        private string _menueLicenseText = "";
         private string _uploadedLabelText = "";
         private string _versionLabelText = "";
         private string _viewsLabelText = "";
@@ -54,66 +50,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                     if (this.PropertyChanged != null)
                     {
                         PropertyChanged(this, new PropertyChangedEventArgs("ButtonDownloadIsEnabled"));
-                    }
-                }
-            }
-        }
-
-        public string ButtonDownloadText
-        {
-            get
-            {
-                return _buttonDownloadText;
-            }
-            set
-            {
-                if (_buttonDownloadText != value)
-                {
-                    _buttonDownloadText = value;
-
-                    if (this.PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("ButtonDownloadText"));
-                    }
-                }
-            }
-        }
-
-        public string MenueReportText
-        {
-            get
-            {
-                return _menueReportText;
-            }
-            set
-            {
-                if (_menueReportText != value)
-                {
-                    _menueReportText = value;
-
-                    if (this.PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("MenueReportText"));
-                    }
-                }
-            }
-        }
-
-        public string MenueLicenseText
-        {
-            get
-            {
-                return _menueLicenseText;
-            }
-            set
-            {
-                if (_menueLicenseText != value)
-                {
-                    _menueLicenseText = value;
-
-                    if (this.PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("MenueLicenseText"));
+                        DownloadCommand.RaiseCanExecuteChanged();
                     }
                 }
             }
@@ -209,7 +146,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             private set;
         }
 
-        public ICommand DownloadCommand
+        public RelayCommand<OnlineProjectHeader> DownloadCommand
         {
             get;
             private set;
@@ -227,14 +164,27 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             private set;
         }
 
+        public RelayCommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
+        #endregion
+
+        #region CommandCanExecute
+
+        private bool DownloadCommand_CanExecute(OnlineProjectHeader dataContext)
+        {
+            return ButtonDownloadIsEnabled;
+        }
+
         #endregion
 
         #region Actions
 
         private void OnLoadAction(OnlineProjectHeader dataContext)
         {
-            LocalizeApplicationBar();
-
             UploadedLabelText = String.Format(CultureInfo.InvariantCulture, MainResources.OnlineProjectUploadedBy, dataContext.Uploaded);
             VersionLabelText = String.Format(CultureInfo.InvariantCulture, MainResources.OnlineProjectVersion, dataContext.Version);
             ViewsLabelText = String.Format(CultureInfo.InvariantCulture, MainResources.OnlineProjectViews, dataContext.Views);
@@ -269,22 +219,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             browser.Show();
         }
 
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
+        }
+
         #endregion
 
         public OnlineProjectViewModel()
         {
             // Commands
             OnLoadCommand = new RelayCommand<OnlineProjectHeader>(OnLoadAction);
-            DownloadCommand = new RelayCommand<OnlineProjectHeader>(DownloadAction);
+            DownloadCommand = new RelayCommand<OnlineProjectHeader>(DownloadAction, DownloadCommand_CanExecute);
             ReportCommand = new RelayCommand(ReportAction);
             LicenseCommand = new RelayCommand(LicenseAction);
-        }
-
-        private void LocalizeApplicationBar()
-        {
-            ButtonDownloadText = MainResources.OnlineProjectDownloadButton;
-            MenueReportText = MainResources.OnlineProjectReportButton;
-            MenueLicenseText = MainResources.OnlineProjectLicenseButton;
+            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
         }
 
         private void DownloadProjectMessageBoxResult(MessageBoxResult result)
@@ -315,12 +264,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
         }
 
 
-        public void ResetViewModel()
+        private void ResetViewModel()
         {
             ButtonDownloadIsEnabled = true;
-            ButtonDownloadText = "";
-            MenueReportText = "";
-            MenueLicenseText = "";
             UploadedLabelText = "";
             VersionLabelText = "";
             ViewsLabelText = "";

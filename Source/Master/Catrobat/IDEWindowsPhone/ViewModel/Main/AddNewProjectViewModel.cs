@@ -8,7 +8,7 @@ using Catrobat.IDEWindowsPhone.Misc;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 {
-    public class AddNewProjectViewModel : ViewModelBase, INotifyPropertyChanged
+    public class AddNewProjectViewModel : ViewModelBase
     {
         #region private Members
 
@@ -32,16 +32,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     _projectName = value;
 
                     RaisePropertyChanged("ProjectName");
-                    RaisePropertyChanged("IsProjectNameValid");
+                    SaveCommand.RaiseCanExecuteChanged();
                 }
-            }
-        }
-
-        public bool IsProjectNameValid
-        {
-            get
-            {
-                return ProjectName != null && ProjectName.Length >= 2;
             }
         }
 
@@ -61,6 +53,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             private set;
         }
 
+        public RelayCommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
+        #endregion
+
+        #region CommandCanExecute
+
+        private bool SaveCommand_CanExecute()
+        {
+            return ProjectName != null && ProjectName.Length >= 2;
+        }
+
         #endregion
 
         #region Actions
@@ -78,14 +85,20 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             Navigation.NavigateBack();
         }
 
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
+        }
+
         #endregion
 
 
         public AddNewProjectViewModel()
         {
             // Commands
-            SaveCommand = new RelayCommand(SaveAction);
+            SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
+            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             if (IsInDesignMode)
                 _catrobatContext = new CatrobatContextDesign();
@@ -93,7 +106,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 _catrobatContext = CatrobatContext.GetContext();
         }
 
-        public void ResetViewModel()
+        private void ResetViewModel()
         {
             ProjectName = "";
         }

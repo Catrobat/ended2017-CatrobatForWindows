@@ -13,6 +13,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         SelectedSpriteListener,
         SpriteNameListener,
         SpriteListListener,
-        ProjectNameListener
+        ProjectNameListener,
+        BroadcastObjectListener,
+        BroadcastMessageListener,
+        ScriptBrickCollectionListener
     }
 }

@@ -18,12 +18,13 @@ using GalaSoft.MvvmLight.Messaging;
 using System.Diagnostics;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.ComponentModel;
 
 namespace Catrobat.IDEWindowsPhone.Views.Main
 {
     public partial class MainView : PhoneApplicationPage
     {
-        private readonly MainViewModel _mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+        private readonly MainViewModel _viewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
         private int _offsetKnob = 5;
 
         public MainView()
@@ -49,6 +50,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
                         msg.ProcessCallback(result);
                     }
                 }));
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            _viewModel.ResetViewModelCommand.Execute(null);
+            base.OnBackKeyPress(e);
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -77,7 +84,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         private void OnlineProject_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             if (LongListSelectorOnlineProjects.SelectedItem != null)
-                _mainViewModel.OnlineProjectTapCommand.Execute(LongListSelectorOnlineProjects.SelectedItem as OnlineProjectHeader);
+                _viewModel.OnlineProjectTapCommand.Execute(LongListSelectorOnlineProjects.SelectedItem as OnlineProjectHeader);
         }
 
         private void FilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -92,7 +99,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
             if ((panoramaMain.SelectedItem == panoramaItemOnlineProjects)) //&& (LongListSelectorOnlineProjects.Items.Count == 0)
             {
                 // Load Data - this has to stay in code-behind
-                _mainViewModel.LoadOnlineProjects(false);
+                _viewModel.LoadOnlineProjects(false);
             }
         }
 
@@ -203,7 +210,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
                 {
                     if ((e.Container.Content as OnlineProjectHeader).Equals(LongListSelectorOnlineProjects.ItemsSource[LongListSelectorOnlineProjects.ItemsSource.Count - _offsetKnob]))
                     {
-                        _mainViewModel.LoadOnlineProjects(true);
+                        _viewModel.LoadOnlineProjects(true);
                     }
                 }
             }

@@ -7,49 +7,34 @@ using Catrobat.IDEWindowsPhone.ViewModel;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
+using Catrobat.IDEWindowsPhone.ViewModel.Scripts;
+using System.Windows.Navigation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
-  public partial class AddNewBrick : PhoneApplicationPage
-  {
-    EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
-
-    public AddNewBrick()
+    public partial class AddNewBrick : PhoneApplicationPage
     {
-      InitializeComponent();
-      App app = (App)Application.Current;
-      switch (_editorViewModel.SelectedBrickCategory)
-      {
-        case BrickCategory.Control:
-          reorderListBoxScriptBricks.ItemsSource = app.Resources["ScriptBrickAddDataControl"] as BrickCollection;
-          break;
+        private readonly AddNewScriptBrickViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewScriptBrickViewModel>();
 
-        case BrickCategory.Looks:
-          reorderListBoxScriptBricks.ItemsSource = app.Resources["ScriptBrickAddDataLook"] as BrickCollection;
-          break;
+        public AddNewBrick()
+        {
+            InitializeComponent();
+        }
 
-        case BrickCategory.Motion:
-          reorderListBoxScriptBricks.ItemsSource = app.Resources["ScriptBrickAddDataMovement"] as BrickCollection;
-          break;
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            _viewModel.ResetViewModelCommand.Execute(null);
+            base.OnNavigatedFrom(e);
+        }
 
-        case BrickCategory.Sounds:
-          reorderListBoxScriptBricks.ItemsSource = app.Resources["ScriptBrickAddDataSound"] as BrickCollection;
-          break;
-      }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            _viewModel.OnLoadBrickViewCommand.Execute(NavigationContext);
+        }
+
+        private void reorderListBoxScriptBricks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _viewModel.AddNewScriptBrickCommand.Execute(((ListBox)sender).SelectedItem as DataObject);
+        }
     }
-
-    private void reorderListBoxScriptBricks_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-      DataObject dataObject = (((ListBox)sender).SelectedItem as DataObject);
-
-      if (dataObject is Brick)
-        _editorViewModel.SelectedBrick = (dataObject as Brick).Copy(_editorViewModel.SelectedSprite);
-
-      if (dataObject is Script)
-        _editorViewModel.SelectedBrick = (dataObject as Script).Copy(_editorViewModel.SelectedSprite);
-
-      Navigation.RemoveBackEntry();
-      Navigation.NavigateBack();
-    }
-  }
 }

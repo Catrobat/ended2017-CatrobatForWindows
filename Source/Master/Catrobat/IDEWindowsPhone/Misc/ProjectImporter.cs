@@ -12,6 +12,7 @@ using Windows.Phone.Storage.SharedAccess;
 using Windows.Storage;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Catrobat.IDEWindowsPhone.Misc
 {
