@@ -23,6 +23,7 @@ using Catrobat.IDEWindowsPhone.Views.Editor;
 using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using System.Collections.Generic;
 using System;
+using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel
 {
@@ -38,6 +39,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         private Sprite _messageBoxSprite;
         private SoundPlayer _soundPlayer;
         private Sound _sound;
+        private ListBoxViewPort _listBoxViewPort;
 
         #endregion
 
@@ -69,7 +71,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             {
                 _selectedSprite = value;
 
+                if (_scriptBricks != null && _scriptBricks.Count == 0 && _listBoxViewPort == null)
+                    ListBoxViewPort = new ListBoxViewPort(0, 0);
+
                 _scriptBricks.Update(_selectedSprite);
+
+                if(_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 && ListBoxViewPort.LastVisibleIndex == 0)
+                    ListBoxViewPort = new ListBoxViewPort(1, 2);
 
                 RaisePropertyChanged("SelectedSprite");
                 RaisePropertyChanged("Sounds");
@@ -118,39 +126,18 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             }
         }
 
-        public ObservableCollection<string> BroadcastMessages
+        public ListBoxViewPort ListBoxViewPort
         {
-            get
+            get { return _listBoxViewPort; }
+            set
             {
-                return _catrobatContext.CurrentProject.BroadcastMessages;
+                if (value == _listBoxViewPort) return;
+                _listBoxViewPort = value;
+                RaisePropertyChanged("ListBoxViewPort");
             }
         }
-
-        public ImageSource CurrentProjectScreenshot
-        {
-            get
-            {
-                return CurrentProject.ProjectScreenshot as ImageSource;
-
-                //using (var memoryStream = new MemoryStream(CurrentProject.ProjectScreenshot,
-                //  0, CurrentProject.ProjectScreenshot.Length))
-                //{
-                //  var bitmapImage = new BitmapImage();
-                //  bitmapImage.SetSource(memoryStream);
-                //  return bitmapImage;
-                //}
-            }
-        }
-
-        public int FirstVisibleScriptBrickIndex { get; set; }
-
-        public int LastVisibleScriptBrickIndex { get; set; }
-
-        public BrickCategory SelectedBrickCategory { get; set; }
 
         public DataObject SelectedBrick { get; set; }
-
-        public Sound SelectedSound { get; set; }
 
         # endregion
 
@@ -316,7 +303,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             GenericMessage<Sprite> message1 = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message1, ViewModelMessagingToken.SelectedSpriteListener);
 
-            List<Object> objects = new List<object>{ScriptBricks, FirstVisibleScriptBrickIndex, LastVisibleScriptBrickIndex};
+            List<Object> objects = new List<object>{ScriptBricks, ListBoxViewPort};
 
             GenericMessage<List<Object>> message2 = new GenericMessage<List<Object>>(objects);
             Messenger.Default.Send<GenericMessage<List<Object>>>(message2, ViewModelMessagingToken.ScriptBrickCollectionListener);
@@ -346,6 +333,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         {
             if (scriptBrick != null)
                 ScriptBricks.Remove(scriptBrick);
+        }
+
+        private void ReceiveSelectedBrickMessageAction(GenericMessage<DataObject> message)
+        {
+            SelectedBrick = message.Content;
+            RaisePropertyChanged("SelectedBrick");
         }
         
 
@@ -623,7 +616,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             _scriptBricks = new ScriptBrickCollection();
 
             Messenger.Default.Register<GenericMessage<string>>(this, ViewModelMessagingToken.BroadcastMessageListener, ReceiveNewBroadcastMessageAction);
+            Messenger.Default.Register<GenericMessage<DataObject>>(this, ViewModelMessagingToken.SelectedBrickListener, ReceiveSelectedBrickMessageAction);
         }
+
 
         #region MessageBoxResult
 
@@ -681,9 +676,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             _messageBoxCostume = null;
 
             SelectedSprite = null;
-            SelectedBrickCategory = BrickCategory.Control;
             SelectedBrick = null;
-            SelectedSound = null;
+            ListBoxViewPort = null;
 
             if (_soundPlayer != null)
             {

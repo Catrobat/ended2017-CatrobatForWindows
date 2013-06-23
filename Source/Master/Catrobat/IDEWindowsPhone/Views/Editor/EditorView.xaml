@@ -39,8 +39,7 @@
           d:DataContext="{Binding}"
           SelectionChanged="reorderListBoxSprites_SelectionChanged"
           ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleNormal}"
-          Foreground="White"
-          >
+          Foreground="White" >
           <reorderableListbox:ReorderListBox.ItemTemplate>
             <DataTemplate>
               <Grid Background="{StaticResource ObjectsBrush}" Margin="0 5 0 5" Height="90">
@@ -50,8 +49,12 @@
                   <ColumnDefinition Width="1*"></ColumnDefinition>
                   <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                
                 <TextBlock FontSize="28" Margin="15 20 5 5" Text="{Binding Name}" />
-                <imageButton:ImageButton Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" x:Name="btnEditSpriteName" 
+                <imageButton:ImageButton
+                  Grid.Column="1"
+                  VerticalAlignment="Center"
+                  x:Name="btnEditSpriteName" 
                   ImageName="edit"
                   Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
                   Template="{StaticResource ImageButtonControlTemplate}" 
@@ -59,7 +62,10 @@
                   IsAutoColor="False" IsDark="True"
                   Command="{Binding Editor.EditSpriteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
-                <imageButton:ImageButton Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" x:Name="btnCopySprite" 
+                <imageButton:ImageButton
+                  Grid.Column="2"
+                  VerticalAlignment="Center"
+                  x:Name="btnCopySprite" 
                   ImageName="copy"
                   Text="{Binding Path=Editor.ButtonCopy, Source={StaticResource LocalizedStrings}}"
                   Template="{StaticResource ImageButtonControlTemplate}" 
@@ -67,7 +73,10 @@
                   IsAutoColor="False" IsDark="True"
                   Command="{Binding Editor.CopySpriteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
-                <imageButton:ImageButton Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" x:Name="btnDeleteSprite" 
+                <imageButton:ImageButton 
+                  Grid.Column="3" 
+                  VerticalAlignment="Center" 
+                  x:Name="btnDeleteSprite" 
                   ImageName="delete"
                   Text="{Binding Path=Editor.ButtonDelete, Source={StaticResource LocalizedStrings}}"
                   Template="{StaticResource ImageButtonControlTemplate}" 
@@ -90,18 +99,16 @@
           IsReorderEnabled="True"
           ItemsSource="{Binding ScriptBricks}"
           ItemTemplate="{StaticResource ScriptsBrickTemplate}"
+          ListBoxViewPort="{Binding ListBoxViewPort}"
           SelectionChanged="reorderListBoxScriptBricks_SelectionChanged"
           Loaded="reorderListBoxScriptBricks_Loaded"
           ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
-          Foreground="White"
-          />
-        <!--ManipulationStarted="reorderListBoxScriptBricks_ManipulationStarted"-->
-
+          Foreground="White" />
       </controls:PivotItem>
 
       <!--Pivot item costume-->
       <controls:PivotItem Name="pivotCostumes" Header="{Binding Path=Editor.PivotCostumes, Source={StaticResource LocalizedStrings}}">
-        <reorderableListbox:ReorderListBox Grid.Row="0"
+        <reorderableListbox:ReorderListBox
           x:Name="reorderListBoxCostumes"
           Margin="0 -25 0 0"
           VerticalAlignment="Stretch"
@@ -109,7 +116,7 @@
           ItemsSource="{Binding Costumes}"
           SelectionChanged="reorderListBoxCostumes_SelectionChanged"
           ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleNormal}"
-          Foreground="White">
+          Foreground="White" >
           <reorderableListbox:ReorderListBox.ItemTemplate>
             <DataTemplate>
               <Grid Background="{StaticResource CostumesBrush}" Margin="0 5 0 5">
@@ -127,14 +134,14 @@
                   <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" VerticalAlignment="Center" />
 
                   <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 15 0" >
-                    <imageButton:ImageButton Grid.Column="0" VerticalAlignment="Center" x:Name="btnEditCostumeName" 
+                    <imageButton:ImageButton VerticalAlignment="Center" x:Name="btnEditCostumeName" 
                       ImageName="edit"
                       Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"
                       Margin="5 5 5 5" IsAutoColor="False" IsDark="True"
                       Command="{Binding Editor.EditCostumeCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
-                    <imageButton:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="btnCopyCostume" 
+                    <imageButton:ImageButton VerticalAlignment="Center" x:Name="btnCopyCostume" 
                       ImageName="copy"
                       Text="{Binding Path=Editor.ButtonCopy, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}" 
@@ -142,7 +149,7 @@
                       IsAutoColor="False" IsDark="True"
                       Command="{Binding Editor.CopyCostumeCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
-                    <imageButton:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="btnDeleteCostume" 
+                    <imageButton:ImageButton VerticalAlignment="Center" x:Name="btnDeleteCostume" 
                       ImageName="delete"
                       Text="{Binding Path=Editor.ButtonDelete, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"
@@ -184,7 +191,8 @@
                   <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" VerticalAlignment="Center" />
 
                   <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 15 0" >
-                    <imageButton:ImageButton Grid.Column="0" VerticalAlignment="Center"
+                    <imageButton:ImageButton 
+                      VerticalAlignment="Center"
                       ImageName="edit"
                       Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"
@@ -192,13 +200,17 @@
                       IsAutoColor="False" IsDark="True"
                       Command="{Binding Editor.EditSoundCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
-                    <!--<c:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="btnCopySound" 
+                    <!--<c:ImageButton
+                      VerticalAlignment="Center"
+                      x:Name="btnCopySound" 
                       ImageName="copy"
                       Text="{Binding Path=Editor.ButtonCopy, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}" 
                       Margin="5 5 5 5" Click=""/>-->
 
-                    <imageButton:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="btnDeleteSound" 
+                    <imageButton:ImageButton
+                      VerticalAlignment="Center"
+                      x:Name="btnDeleteSound" 
                       ImageName="delete"
                       Text="{Binding Path=Editor.ButtonDelete, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"

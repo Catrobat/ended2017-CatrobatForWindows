@@ -22,6 +22,8 @@ using Catrobat.Core.Objects.Bricks;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
+using System.Windows.Controls.Primitives;
+using System.ComponentModel;
 
 namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
 {
@@ -32,7 +34,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
     [TemplatePart(Name = ReorderListBox.DragIndicatorPart, Type = typeof(Image))]
     [TemplatePart(Name = ReorderListBox.DragInterceptorPart, Type = typeof(Canvas))]
     [TemplatePart(Name = ReorderListBox.RearrangeCanvasPart, Type = typeof(Canvas))]
-    public class ReorderListBox : ListBox
+    public class ReorderListBox : ListBox//, INotifyPropertyChanged
     {
         #region Template part name constants
 
@@ -75,15 +77,6 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
             this.DefaultStyleKey = typeof(ReorderListBox);
         }
 
-        private void scrollViewer_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
-        {
-            int viewFirstIndex, viewLastIndex;
-            this.GetViewIndexRange(true, out viewFirstIndex, out viewLastIndex);
-
-            this.SetValue(FirstVisibleItemIndexProperty, viewFirstIndex);
-            this.SetValue(LastVisibleItemIndexProperty, viewLastIndex);
-        }
-
         #region IsReorderEnabled DependencyProperty
 
         public static readonly DependencyProperty IsReorderEnabledProperty = DependencyProperty.Register(
@@ -124,38 +117,18 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
             }
         }
 
-        /// <summary>
-        /// Gets the index of the first item visible.
-        /// </summary>
-        public int FirstVisibleItemIndex
+        public ListBoxViewPort ListBoxViewPort
         {
-            get { return (int)GetValue(FirstVisibleItemIndexProperty); }
-            set { SetValue(FirstVisibleItemIndexProperty, value); }
+            get { return (ListBoxViewPort)GetValue(ListBoxViewPortProperty); }
+            set { SetValue(ListBoxViewPortProperty, value); }
         }
 
-        public static readonly DependencyProperty FirstVisibleItemIndexProperty = DependencyProperty.Register("FirstVisibleItemIndex", typeof(int), typeof(ReorderListBox), new PropertyMetadata(0, FirstVisibleItemIndexChanged));
+        public static readonly DependencyProperty ListBoxViewPortProperty = DependencyProperty.Register("ListBoxViewPort", typeof(ListBoxViewPort), typeof(ReorderListBox), new PropertyMetadata(ListBoxViewPortChanged));
 
-        private static void FirstVisibleItemIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void ListBoxViewPortChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             // Code for dealing with your property changes
         }
-
-        /// <summary>
-        /// Gets the index of the last item visible.
-        /// </summary>
-        public int LastVisibleItemIndex
-        {
-            get { return (int)GetValue(LastVisibleItemIndexProperty); }
-            set { SetValue(LastVisibleItemIndexProperty, value); }
-        }
-
-        public static readonly DependencyProperty LastVisibleItemIndexProperty = DependencyProperty.Register("LastVisibleItemIndex", typeof(int), typeof(ReorderListBox), new PropertyMetadata(0, LastVisibleItemIndexChanged));
-
-        private static void LastVisibleItemIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            // Code for dealing with your property changes
-        }
-
 
         /// <summary>
         /// Gets or sets a value indicating whether reordering is enabled in the listbox.
@@ -233,7 +206,25 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
 
             AddMarginToLastItem();
 
-            this.scrollViewer.ManipulationDelta += scrollViewer_ManipulationDelta;
+            scrollViewer.Loaded += scrollViewer_Loaded;
+        }
+
+        private void scrollViewer_Loaded(object sender, RoutedEventArgs e)
+        {
+            ScrollBar verticalScrollBar = ((FrameworkElement)VisualTreeHelper.GetChild(scrollViewer, 0)).FindName("VerticalScrollBar") as ScrollBar;
+            verticalScrollBar.ValueChanged += ScrollViewer_ScrollStateChanged;
+        }
+
+        private void ScrollViewer_ScrollStateChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            int viewFirstIndex, viewLastIndex;
+            this.GetViewIndexRange(true, out viewFirstIndex, out viewLastIndex);
+
+            if (ListBoxViewPort != null)
+            {
+                ListBoxViewPort.FirstVisibleIndex = viewFirstIndex;
+                ListBoxViewPort.LastVisibleIndex = viewLastIndex;
+            }
         }
 
         protected override DependencyObject GetContainerForItemOverride()
@@ -1300,5 +1291,13 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         }
 
         #endregion
+
+
+        //public new event PropertyChangedEventHandler PropertyChanged;
+        //protected new void RaisePropertyChanged(PropertyChangedEventArgs e)
+        //{
+        //    if (PropertyChanged != null)
+        //        PropertyChanged(this, e);
+        //}
     }
 }

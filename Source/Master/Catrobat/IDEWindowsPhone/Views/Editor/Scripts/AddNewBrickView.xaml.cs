@@ -12,11 +12,11 @@ using System.Windows.Navigation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
-    public partial class AddNewBrick : PhoneApplicationPage
+    public partial class AddNewBrickView : PhoneApplicationPage
     {
         private readonly AddNewScriptBrickViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewScriptBrickViewModel>();
 
-        public AddNewBrick()
+        public AddNewBrickView()
         {
             InitializeComponent();
         }
