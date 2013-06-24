@@ -154,8 +154,35 @@ namespace PlayerWindowsPhone8Test
 
 		TEST_METHOD(ControlBricks_ForeverBrick)
 		{
-			// TODO: Your test code here
-			Assert::IsTrue(false);
+            FormulaTree *formulaTree = new FormulaTree("NUMBER", "50");
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+            StartScript *script = new StartScript(spriteReference, object);
+
+            ForeverBrick *brick = new ForeverBrick(spriteReference, script);
+            script->addBrick(brick);
+            SetSizeToBrick *setSizeBrick = new SetSizeToBrick(spriteReference, formulaTree, script);
+            brick->addBrick(setSizeBrick);
+
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 50.0f));
+            script->Execute();
+            Concurrency::wait(100);
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 50.0f));
+
+            formulaTree = new FormulaTree("NUMBER", "30");
+            SetSizeToBrick *setSizeBrick2 = new SetSizeToBrick(spriteReference, formulaTree, script);
+            setSizeBrick2->Execute();
+            Concurrency::wait(100);
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 50.0f));
+			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 30.0f));
+
+            formulaTree = new FormulaTree("NUMBER", "80");
+            SetSizeToBrick *setSizeBrick3 = new SetSizeToBrick(spriteReference, formulaTree, script);
+            setSizeBrick3->Execute();
+            Concurrency::wait(100);
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 50.0f));
+			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 80.0f));
 		}
 
 		TEST_METHOD(ControlBricks_IfBrick)
