@@ -209,7 +209,7 @@ void Object::SetScale(float scale)
 
 float Object::GetScale()
 {
-	return m_objectScale.x;
+	return m_objectScale.x * 100;
 }
 
 void Object::addVariable(string name, UserVariable* variable)
