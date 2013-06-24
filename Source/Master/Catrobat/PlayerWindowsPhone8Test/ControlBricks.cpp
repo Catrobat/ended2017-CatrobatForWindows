@@ -15,6 +15,7 @@
 #include "WaitBrick.h"
 
 #include "SetSizeToBrick.h"
+#include "ChangeSizeByBrick.h"
 
 #include <ppltasks.h>
 
@@ -191,10 +192,133 @@ namespace PlayerWindowsPhone8Test
 			Assert::IsTrue(false);
 		}
 
-		TEST_METHOD(ControlBricks_RepeatBrick)
+		TEST_METHOD(ControlBricks_RepeatBrick_NormalCheck)
 		{
-			// TODO: Your test code here
-			Assert::IsTrue(false);
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "5");
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+            StartScript *script = new StartScript(spriteReference, object);
+
+            RepeatBrick *brick = new RepeatBrick(spriteReference, formulaTree, script);
+            formulaTree = new FormulaTree("NUMBER", "10");
+            ChangeSizeByBrick *changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
+            brick->addBrick(changeSizeBrick);
+
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+            brick->Execute();
+            Concurrency::wait(100);
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 100.0f));
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 150.0f));
+            Concurrency::wait(100);
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 100.0f));
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 150.0f));
+		}
+
+        TEST_METHOD(ControlBricks_RepeatBrick_UnderflowCheck)
+		{
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "-5");
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+            StartScript *script = new StartScript(spriteReference, object);
+
+            RepeatBrick *brick = new RepeatBrick(spriteReference, formulaTree, script);
+            formulaTree = new FormulaTree("NUMBER", "10");
+            ChangeSizeByBrick *changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
+            brick->addBrick(changeSizeBrick);
+
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+            brick->Execute();
+            Concurrency::wait(100);
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 150.0f));
+            Concurrency::wait(100);
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 150.0f));
+		}
+
+        TEST_METHOD(ControlBricks_RepeatBrick_0Check)
+		{
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "0");
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+            StartScript *script = new StartScript(spriteReference, object);
+
+            RepeatBrick *brick = new RepeatBrick(spriteReference, formulaTree, script);
+            formulaTree = new FormulaTree("NUMBER", "10");
+            ChangeSizeByBrick *changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
+            brick->addBrick(changeSizeBrick);
+
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+            brick->Execute();
+            Concurrency::wait(100);
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 150.0f));
+            Concurrency::wait(100);
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 150.0f));
+		}
+
+        TEST_METHOD(ControlBricks_RepeatBrick_VariousChecks)
+		{
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "1");
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+            StartScript *script = new StartScript(spriteReference, object);
+
+            RepeatBrick *brick = new RepeatBrick(spriteReference, formulaTree, script);
+            formulaTree = new FormulaTree("NUMBER", "10");
+            ChangeSizeByBrick *changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
+            brick->addBrick(changeSizeBrick);
+
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+            brick->Execute();
+            Concurrency::wait(100);
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 100.0f));
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 110.0f));
+            Concurrency::wait(100);
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 100.0f));
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 110.0f));
+
+            formulaTree = new FormulaTree("NUMBER", "3");
+            brick = new RepeatBrick(spriteReference, formulaTree, script);
+            formulaTree = new FormulaTree("NUMBER", "10");
+            changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
+            brick->addBrick(changeSizeBrick);
+
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 110.0f));
+            brick->Execute();
+            Concurrency::wait(100);
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 110.0f));
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 140.0f));
+            Concurrency::wait(100);
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 110.0f));
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 140.0f));
+
+            formulaTree = new FormulaTree("NUMBER", "0");
+            brick = new RepeatBrick(spriteReference, formulaTree, script);
+            formulaTree = new FormulaTree("NUMBER", "10");
+            changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
+            brick->addBrick(changeSizeBrick);
+
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 140.0f));
+            brick->Execute();
+            Concurrency::wait(100);
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 140.0f));
+            Concurrency::wait(100);
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 140.0f));
+
+            formulaTree = new FormulaTree("NUMBER", "-1");
+            brick = new RepeatBrick(spriteReference, formulaTree, script);
+            formulaTree = new FormulaTree("NUMBER", "10");
+            changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
+            brick->addBrick(changeSizeBrick);
+
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 140.0f));
+            brick->Execute();
+            Concurrency::wait(100);
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 140.0f));
+            Concurrency::wait(100);
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 140.0f));
 		}
 
 		TEST_METHOD(ControlBricks_WaitBrick)
