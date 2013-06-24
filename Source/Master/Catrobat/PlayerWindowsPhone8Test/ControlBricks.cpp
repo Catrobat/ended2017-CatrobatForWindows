@@ -39,10 +39,10 @@ namespace PlayerWindowsPhone8Test
 
 			BroadcastBrick *brick = new BroadcastBrick(spriteReference, broadcastMessage, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 1));
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
 			brick->Execute();
 			Concurrency::wait(100);
-			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 9));
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 9.0f));
 		}
 
 		TEST_METHOD(ControlBricks_BroadcastBrick_InSameObjectWithWrongMessage)
@@ -59,11 +59,11 @@ namespace PlayerWindowsPhone8Test
 
 			BroadcastBrick *brick = new BroadcastBrick(spriteReference, broadcastMessage, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 1));
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
 			brick->Execute();
 			Concurrency::wait(100);
-			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 1));
-			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 9));
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 9.0f));
 		}
 
 		TEST_METHOD(ControlBricks_BroadcastBrick_InDifferentObjectWithValidMessage)
@@ -80,10 +80,10 @@ namespace PlayerWindowsPhone8Test
 
 			BroadcastBrick *brick = new BroadcastBrick(spriteReference, broadcastMessage, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 1));
+			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 100.0f));
 			brick->Execute();
 			Concurrency::wait(100);
-			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 9));
+			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 9.0f));
 		}
 
 		TEST_METHOD(ControlBricks_BroadcastBrick_InDifferentObjectWithWrongMessage)
@@ -101,11 +101,11 @@ namespace PlayerWindowsPhone8Test
 
 			BroadcastBrick *brick = new BroadcastBrick(spriteReference, broadcastMessage, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 1));
+			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 100.0f));
 			brick->Execute();
 			Concurrency::wait(100);
-			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 1));
-			Assert::IsFalse(TestHelper::isEqual(object2->GetScale(), 9));
+			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 100.0f));
+			Assert::IsFalse(TestHelper::isEqual(object2->GetScale(), 9.0f));
 		}
 
 		TEST_METHOD(ControlBricks_BroadcastBrick_VariousTests)
@@ -125,19 +125,19 @@ namespace PlayerWindowsPhone8Test
 
 			BroadcastBrick *brick = new BroadcastBrick(spriteReference, broadcastMessageFalse, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 1));
+			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 100.0f));
 			brick->Execute();
 			Concurrency::wait(100);
-			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 1));
-			Assert::IsFalse(TestHelper::isEqual(object2->GetScale(), 9));
+			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 100.0f));
+			Assert::IsFalse(TestHelper::isEqual(object2->GetScale(), 9.0f));
 
 			brick = new BroadcastBrick(spriteReference, broadcastMessageValid, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 1));
+			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 100.0f));
 			brick->Execute();
 			Concurrency::wait(100);
-			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 1));
-			Assert::IsFalse(TestHelper::isEqual(object2->GetScale(), 9));
+			Assert::IsTrue(TestHelper::isEqual(object2->GetScale(), 100.0f));
+			Assert::IsFalse(TestHelper::isEqual(object2->GetScale(), 9.0f));
 
 			formulaTree = new FormulaTree("NUMBER", "8");
 			BroadcastScript *broadcastScript2 = new BroadcastScript(expectedMessage2, spriteReference, object1);
@@ -145,11 +145,11 @@ namespace PlayerWindowsPhone8Test
 
 			brick = new BroadcastBrick(spriteReference, broadcastMessageValid, script);
 
-			Assert::IsTrue(TestHelper::isEqual(object1->GetScale(), 1));
+			Assert::IsTrue(TestHelper::isEqual(object1->GetScale(), 100.0f));
 			brick->Execute();
 			Concurrency::wait(100);
-			Assert::IsTrue(TestHelper::isEqual(object1->GetScale(), 1));
-			Assert::IsFalse(TestHelper::isEqual(object1->GetScale(), 8));
+			Assert::IsTrue(TestHelper::isEqual(object1->GetScale(), 100.0f));
+			Assert::IsFalse(TestHelper::isEqual(object1->GetScale(), 8.0f));
 		}
 
 		TEST_METHOD(ControlBricks_ForeverBrick)
