@@ -146,7 +146,7 @@ namespace PlayerWindowsPhone8Test
 
 			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 1.0f));
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 8.0f));
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 1.8f));
         }
 
 		TEST_METHOD(LookBricks_ChangeSizeByBrickTest_CheckFor03)
@@ -159,7 +159,7 @@ namespace PlayerWindowsPhone8Test
 
 			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 1.0f));
 			brick->Execute();
-			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 0.3f));
+			Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 0.003f));
         }
 
 		TEST_METHOD(LookBricks_ChangeSizeByBrickTest_CheckForVariousChanges)
