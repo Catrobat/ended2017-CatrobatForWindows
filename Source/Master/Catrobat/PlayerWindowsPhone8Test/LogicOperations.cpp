@@ -24,8 +24,33 @@ namespace PlayerWindowsPhone8Test
 	{
 	public:
 
+		TEST_METHOD(Formula_Logic_TRUE_AND_TRUE)
+		{
+			FormulaTree *formula = new FormulaTree(OP, L_AND);
+			formula->SetLeftChild(new FormulaTree(FUN,L_TRUE));
+			formula->SetRightChild(new FormulaTree(FUN, L_TRUE));
 
-		TEST_METHOD(Formula_Logic_AND)
+			Object *object = new Object("TestObject");
+			Interpreter *interpreter = Interpreter::Instance();
+
+			Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), TRUE);
+		}
+
+	    TEST_METHOD(Formula_Logic_TRUE_OR_FALSE)
+		{
+			FormulaTree *formula = new FormulaTree(OP, L_AND);
+			formula->SetLeftChild(new FormulaTree(FUN,L_OR));
+			formula->SetRightChild(new FormulaTree(FUN, L_FALSE));
+
+			Object *object = new Object("TestObject");
+			Interpreter *interpreter = Interpreter::Instance();
+
+			Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), TRUE);
+		}
+
+
+
+		TEST_METHOD(Formula_Logic_More_Complex)
 		{
 			FormulaTree *formula = new FormulaTree(OP, L_AND);
 			formula->SetLeftChild(new FormulaTree(FUN,L_TRUE));
