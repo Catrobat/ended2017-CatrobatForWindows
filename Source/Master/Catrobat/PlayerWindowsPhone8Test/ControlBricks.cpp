@@ -465,5 +465,26 @@ namespace PlayerWindowsPhone8Test
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 40.0f));
             Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 100.0f));
 		}
+
+        TEST_METHOD(ControlBricks_WaitBrick_UnderflowCheck)
+		{
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "-10");
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+            StartScript *script = new StartScript(spriteReference, object);
+
+            WaitBrick *brick = new WaitBrick(spriteReference, formulaTree, script);
+            script->addBrick(brick);
+
+            formulaTree = new FormulaTree("NUMBER", "40");
+            SetSizeToBrick *setSizeBrick = new SetSizeToBrick(spriteReference, formulaTree, script);
+            script->addBrick(setSizeBrick);
+            
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+            script->Execute();
+            Concurrency::wait(100);
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 40.0f));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 100.0f));
+		}
 	};
 }
