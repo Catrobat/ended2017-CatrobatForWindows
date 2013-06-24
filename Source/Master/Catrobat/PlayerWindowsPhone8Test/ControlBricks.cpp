@@ -186,10 +186,126 @@ namespace PlayerWindowsPhone8Test
 			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 80.0f));
 		}
 
-		TEST_METHOD(ControlBricks_IfBrick)
+		TEST_METHOD(ControlBricks_IfBrick_SimpleTrueCheck)
 		{
-			// TODO: Your test code here
-			Assert::IsTrue(false);
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "1");
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+
+			StartScript *script = new StartScript(spriteReference, object);
+            IfBrick *brick = new IfBrick(spriteReference, formulaTree, script);
+
+            formulaTree = new FormulaTree("NUMBER", "50");
+            SetSizeToBrick *setSizeBrick = new SetSizeToBrick(spriteReference, formulaTree, script);
+            brick->addBrick(setSizeBrick);
+
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 50.0f));
+            brick->Execute();
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 50.0f));
+		}
+
+        TEST_METHOD(ControlBricks_IfBrick_SimpleFalseCheck)
+		{
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "0");
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+
+			StartScript *script = new StartScript(spriteReference, object);
+            IfBrick *brick = new IfBrick(spriteReference, formulaTree, script);
+
+            formulaTree = new FormulaTree("NUMBER", "50");
+            SetSizeToBrick *setSizeBrick = new SetSizeToBrick(spriteReference, formulaTree, script);
+            brick->addBrick(setSizeBrick);
+
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 50.0f));
+            brick->Execute();
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 50.0f));
+		}
+
+        TEST_METHOD(ControlBricks_IfBrick_ElseCheckTrue)
+		{
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "0");
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+
+			StartScript *script = new StartScript(spriteReference, object);
+            IfBrick *brick = new IfBrick(spriteReference, formulaTree, script);
+
+            formulaTree = new FormulaTree("NUMBER", "80");
+            SetSizeToBrick *setSizeBrick1 = new SetSizeToBrick(spriteReference, formulaTree, script);
+            brick->addBrick(setSizeBrick1);
+
+            formulaTree = new FormulaTree("NUMBER", "40");
+            SetSizeToBrick *setSizeBrick2 = new SetSizeToBrick(spriteReference, formulaTree, script);
+            brick->addBrick(setSizeBrick2);
+            brick->addElseBrick(setSizeBrick2);
+
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 80.0f));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 40.0f));
+            brick->Execute();
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 40));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 80.0f));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 100.0f));
+		}
+
+        TEST_METHOD(ControlBricks_IfBrick_ElseCheckFalse)
+		{
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "1");
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+
+			StartScript *script = new StartScript(spriteReference, object);
+            IfBrick *brick = new IfBrick(spriteReference, formulaTree, script);
+
+            formulaTree = new FormulaTree("NUMBER", "80");
+            SetSizeToBrick *setSizeBrick1 = new SetSizeToBrick(spriteReference, formulaTree, script);
+            brick->addBrick(setSizeBrick1);
+
+            formulaTree = new FormulaTree("NUMBER", "40");
+            SetSizeToBrick *setSizeBrick2 = new SetSizeToBrick(spriteReference, formulaTree, script);
+            brick->addElseBrick(setSizeBrick2);
+
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 80.0f));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 40.0f));
+            brick->Execute();
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 40));
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 80.0f));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 100.0f));
+		}
+
+        TEST_METHOD(ControlBricks_IfBrick_RecursiveElseIfCheck)
+		{
+			FormulaTree *formulaTree = new FormulaTree("NUMBER", "0");
+			string spriteReference = "";
+			Object *object = new Object("TestObject");
+
+			StartScript *script = new StartScript(spriteReference, object);
+            IfBrick *brick = new IfBrick(spriteReference, formulaTree, script);
+
+            formulaTree = new FormulaTree("NUMBER", "80");
+            SetSizeToBrick *setSizeBrick1 = new SetSizeToBrick(spriteReference, formulaTree, script);
+            brick->addBrick(setSizeBrick1);
+
+            formulaTree = new FormulaTree("NUMBER", "1");
+            IfBrick *elseifBrick = new IfBrick(spriteReference, formulaTree, script);
+            brick->addElseBrick(elseifBrick);
+
+            formulaTree = new FormulaTree("NUMBER", "40");
+            SetSizeToBrick *setSizeBrick2 = new SetSizeToBrick(spriteReference, formulaTree, script);
+            elseifBrick->addBrick(setSizeBrick2);
+
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
+			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 80.0f));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 40.0f));
+            brick->Execute();
+            Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 40));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 80.0f));
+            Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 100.0f));
 		}
 
 		TEST_METHOD(ControlBricks_RepeatBrick_NormalCheck)

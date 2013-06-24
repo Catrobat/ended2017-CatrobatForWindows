@@ -74,7 +74,9 @@ float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 
 bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object *object)
 {
-	return true;
+    if (atoi(tree->Value().c_str()) == 1)
+	    return true;
+    return false;
 }
 
 void Interpreter::ReadAcceleration()
