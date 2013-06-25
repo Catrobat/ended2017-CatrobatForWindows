@@ -23,6 +23,8 @@ namespace Catrobat.IDEWindowsPhone.Misc
         private Thread checkSoundThread;
         private SoundState previousState;
 
+        private bool _aborted = false;
+
         public void SetSound(Sound sound)
         {
             if (soundEffect != null)
@@ -54,19 +56,21 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
             do
             {
-                Thread.Sleep(50);
                 previousState = newState;
                 newState = GetSoundState(soundEffect.State);
+                Thread.Sleep(50);
             } while (newState == previousState);
 
             Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                if(SoundFinished != null)
-                    SoundFinished.Invoke();
+                {
+                    if (SoundFinished != null && !_aborted)
+                        SoundFinished.Invoke();
 
-                if (SoundStateChanged != null)
-                    SoundStateChanged.Invoke(previousStateTemp, newState);
-            }); 
+                    _aborted = false;
+
+                    if (SoundStateChanged != null)
+                        SoundStateChanged.Invoke(previousStateTemp, newState);
+                });
 
         }
 
@@ -106,6 +110,8 @@ namespace Catrobat.IDEWindowsPhone.Misc
         {
             if (soundEffect != null)
             {
+                _aborted = true;
+
                 soundEffect.Pause();
                 SoundState previousStateTemp = previousState;
                 previousState = SoundState.Paused;
@@ -118,6 +124,8 @@ namespace Catrobat.IDEWindowsPhone.Misc
         {
             if (soundEffect != null)
             {
+                _aborted = true;
+
                 soundEffect.Stop();
                 SoundState previousStateTemp = previousState;
                 previousState = SoundState.Stopped;
