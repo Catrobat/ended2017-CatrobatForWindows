@@ -13,9 +13,9 @@ UserVariable::UserVariable(pair<string, string> variable)
 {
 }
 
-string UserVariable::Value(string name)
+string UserVariable::Name()
 {
-	return m_value;
+	return m_name;
 }
 
 string UserVariable::Value()

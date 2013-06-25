@@ -9,4 +9,6 @@ ChangeVariableBrick::ChangeVariableBrick(string objectReference, FormulaTree *va
 
 void ChangeVariableBrick::Execute()
 {
+    // TODO: typecheck and logic
+    m_variable->SetValue(m_variable->Value() + m_variableFormula->Value());
 }
