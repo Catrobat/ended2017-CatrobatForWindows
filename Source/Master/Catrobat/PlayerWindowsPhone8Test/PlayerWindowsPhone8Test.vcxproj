@@ -276,6 +276,7 @@
     <ClCompile Include="TestHelper.cpp" />
     <ClCompile Include="VariableBricks.cpp" />
     <ClCompile Include="Variables.cpp" />
+    <ClCompile Include="XMLParserTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="CppUnitTestFramework, Version=11.0" />
