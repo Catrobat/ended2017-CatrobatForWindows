@@ -215,6 +215,8 @@
     <ClCompile Include="FormulaTreeTests.cpp">
       <Filter>FormulaTests</Filter>
     </ClCompile>
+    <ClCompile Include="VariableBricks.cpp" />
+    <ClCompile Include="Variables.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

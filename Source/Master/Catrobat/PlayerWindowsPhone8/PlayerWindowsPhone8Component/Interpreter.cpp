@@ -37,6 +37,12 @@ int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 			UserVariable *var = object->Variable(varName);
 			if (var)
 				return atoi(var->Value().c_str());
+            var = ProjectDaemon::Instance()->getProject()->Variable(varName);
+			if (var)
+				return atoi(var->Value().c_str());
+
+            // TODO: Check logic here (What should we do when variable is not found)
+            return 0;
 		}
 		break;
     case BRACKET:
@@ -44,6 +50,8 @@ int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 	default:
 		break;
 	}
+
+    // TODO: What should we do when we get a invalid tree here?
 	return 1;
 }
 
@@ -62,6 +70,12 @@ float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 			UserVariable *var = object->Variable(varName);
 			if (var)
 				return (float)atof(var->Value().c_str());
+            var = ProjectDaemon::Instance()->getProject()->Variable(varName);
+            if (var)
+                return (float)atof(var->Value().c_str());
+
+            // TODO: Check logic here (What should we do when variable is not found)
+            return 0.0f;
 		}
 		break;
     case BRACKET:
@@ -69,6 +83,8 @@ float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 	default:
 		break;
 	}
+
+    // TODO: What should we do when we get a invalid tree here?
 	return 1.0f;
 }
 

@@ -274,6 +274,8 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TestHelper.cpp" />
+    <ClCompile Include="VariableBricks.cpp" />
+    <ClCompile Include="Variables.cpp" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="CppUnitTestFramework, Version=11.0" />
