@@ -218,6 +218,9 @@
     <ClCompile Include="VariableBricks.cpp" />
     <ClCompile Include="Variables.cpp" />
     <ClCompile Include="XMLParserTests.cpp" />
+    <ClCompile Include="LogicOperations.cpp">
+      <Filter>FormulaTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

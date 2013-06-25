@@ -268,6 +268,7 @@
     <ClCompile Include="BasicArithmeticalOperations.cpp" />
     <ClCompile Include="ControlBricks.cpp" />
     <ClCompile Include="FormulaTreeTests.cpp" />
+    <ClCompile Include="LogicOperations.cpp" />
     <ClCompile Include="LookBricks.cpp" />
     <ClCompile Include="MovementBricks.cpp" />
     <ClCompile Include="pch.cpp">

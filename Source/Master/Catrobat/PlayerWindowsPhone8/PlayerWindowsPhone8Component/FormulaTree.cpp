@@ -14,6 +14,8 @@ FormulaTree::FormulaTree(string type, string value)
 		m_type = Type::USER_VARIABLE;
     else if (type == "BRACKET")
         m_type = Type::BRACKET;
+	else if (type == "FUNCTION")
+		m_type = Type::FUNCTION;
 
     if (m_type == Type::OPERATOR)
     {
@@ -48,6 +50,18 @@ FormulaTree::FormulaTree(string type, string value)
     {
         m_operator = Operator::NO_OPERATOR;
     }
+
+	if (m_type == Type::FUNCTION)
+	{
+		if (m_value == "TRUE")
+			m_function = Function::L_TRUE;
+		else if (m_value == "FALSE")
+			m_function = Function::L_FALSE;
+	}
+	else
+	{
+		m_function = Function::NO_FUNCTION;
+	}
 }
 
 void FormulaTree::SetLeftChild(FormulaTree *leftChild)
@@ -89,4 +103,9 @@ string FormulaTree::Value()
 Operator FormulaTree::getOperator()
 {
     return this->m_operator;
+}
+
+Function FormulaTree::getFunction()
+{
+	return this->m_function;
 }

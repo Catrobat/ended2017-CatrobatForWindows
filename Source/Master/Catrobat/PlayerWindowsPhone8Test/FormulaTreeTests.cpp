@@ -70,5 +70,29 @@ namespace PlayerWindowsPhone8Test
             Assert::IsTrue(tree->getLeftChild() == NULL);
         }
 
+		TEST_METHOD(FormulaTree_Function)
+		{
+			FormulaTree *tree = new FormulaTree("FUNCTION", "TRUE");
+
+			Assert::IsTrue(tree->GetType() == Type::FUNCTION);
+			Assert::IsTrue(tree->getFunction() == Function::L_TRUE);
+			Assert::IsTrue(tree->getLeftChild() == NULL);
+			Assert::IsTrue(tree->getRightChild() == NULL);
+
+			tree = new FormulaTree("FUNCTION", "FALSE");
+
+			Assert::IsTrue(tree->GetType() == Type::FUNCTION);
+			Assert::IsTrue(tree->getFunction() == Function::L_FALSE);
+			Assert::IsTrue(tree->getLeftChild() == NULL);
+			Assert::IsTrue(tree->getRightChild() == NULL);
+
+			tree = new FormulaTree("NUMBER", "1");
+
+			Assert::IsFalse(tree->GetType() == Type::FUNCTION);
+			Assert::IsTrue(tree->getFunction() == Function::NO_FUNCTION);
+			Assert::IsTrue(tree->getLeftChild() == NULL);
+			Assert::IsTrue(tree->getRightChild() == NULL);
+		}
+
 	};
 }

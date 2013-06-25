@@ -7,7 +7,8 @@ enum Type
 	OPERATOR,
 	NUMBER,
 	USER_VARIABLE, 
-    BRACKET
+    BRACKET, 
+	FUNCTION
 };
 
 enum Operator
@@ -33,6 +34,14 @@ enum Operator
     NO_OPERATOR
 };
 
+enum Function
+{
+	L_TRUE, 
+	L_FALSE, 
+
+	NO_FUNCTION
+};
+
 class FormulaTree
 {
 public:
@@ -45,8 +54,11 @@ public:
     FormulaTree *getRightChild();
 	std::string Value();
 
-    //returns Operator if m_type is set to OPERATOR, NO_OPERATOR
+    //returns Operator if m_type is set to OPERATOR, instead NO_OPERATOR
     Operator getOperator();
+
+	//returns Function if m_type is set to FUNCTION, instead NO_FUNCTION
+	Function getFunction();
 
 private:
 	FormulaTree *m_rightChild;
@@ -54,5 +66,6 @@ private:
 	Type m_type;
 	std::string m_value;
     Operator m_operator;
+	Function m_function;
 };
 
