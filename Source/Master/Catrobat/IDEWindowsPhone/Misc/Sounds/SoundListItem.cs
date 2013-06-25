@@ -25,22 +25,22 @@ namespace Catrobat.IDEWindowsPhone.Misc.Sounds
       }
     }
 
-    private PlayButtonState _state;
-    public PlayButtonState State
-    {
-      get
-      {
-        return _state;
-      }
-      set
-      {
-        if (this._state == value)
-          return;
+    //private PlayButtonState _state;
+    //public PlayButtonState State
+    //{
+    //  get
+    //  {
+    //    return _state;
+    //  }
+    //  set
+    //  {
+    //    if (this._state == value)
+    //      return;
 
-        this._state = value;
-        this.RaisePropertyChanged();
-      }
-    }
+    //    this._state = value;
+    //    this.RaisePropertyChanged();
+    //  }
+    //}
 
     #region PropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;

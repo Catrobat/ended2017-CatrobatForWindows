@@ -10,6 +10,7 @@ using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Misc.Sounds;
 using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
@@ -98,7 +99,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
     {
       MediaLibrary library = new MediaLibrary();
       foreach (Song song in library.Songs)
-        lbxSongs.Items.Add(new SoundListItem { Song = song, State = PlayButtonState.Pause });
+        lbxSongs.Items.Add(new SoundListItem { Song = song });
     }
 
     //TODO: Write UI Test
@@ -159,27 +160,27 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
     private void btnPlay_Click(object sender, RoutedEventArgs e)
     {
-      SoundListItem sound = (sender as PlayButton).DataContext as SoundListItem;
+      //SoundListItem sound = (sender as PlayButton).DataContext as SoundListItem;
 
-      if (sound.State == PlayButtonState.Play)
-      {
-        foreach (SoundListItem soundItem in lbxSongs.Items)
-          if (soundItem.State == PlayButtonState.Play)
-          {
-            MediaPlayer.Pause();
-            soundItem.State = PlayButtonState.Pause;
-            FrameworkDispatcher.Update();
-          }
-        sound.State = PlayButtonState.Play;
-        MediaPlayer.Play(sound.Song);
-        FrameworkDispatcher.Update();
-      }
-      else
-      {
-        sound.State = PlayButtonState.Pause;
-        MediaPlayer.Pause();
-        FrameworkDispatcher.Update();
-      }
+      //if (sound.State == PlayButtonState.Play)
+      //{
+      //  foreach (SoundListItem soundItem in lbxSongs.Items)
+      //    if (soundItem.State == PlayButtonState.Play)
+      //    {
+      //      MediaPlayer.Pause();
+      //      soundItem.State = PlayButtonState.Pause;
+      //      FrameworkDispatcher.Update();
+      //    }
+      //  sound.State = PlayButtonState.Play;
+      //  MediaPlayer.Play(sound.Song);
+      //  FrameworkDispatcher.Update();
+      //}
+      //else
+      //{
+      //  sound.State = PlayButtonState.Pause;
+      //  MediaPlayer.Pause();
+      //  FrameworkDispatcher.Update();
+      //}
     }
   }
 }

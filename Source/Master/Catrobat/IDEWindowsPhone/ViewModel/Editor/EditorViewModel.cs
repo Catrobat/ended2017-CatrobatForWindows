@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Windows.Media;
-using Catrobat.Core;
+﻿using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
@@ -8,7 +6,6 @@ using Catrobat.Core.Objects.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
-using System.Windows.Media.Imaging;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -25,12 +22,12 @@ using System.Collections.Generic;
 using System;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 
-namespace Catrobat.IDEWindowsPhone.ViewModel
+namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 {
     public class EditorViewModel : ViewModelBase
     {
         #region Private Members
-        
+
         private readonly ICatrobatContext _catrobatContext;
         private Sprite _selectedSprite;
         private readonly ScriptBrickCollection _scriptBricks;
@@ -76,7 +73,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
                 _scriptBricks.Update(_selectedSprite);
 
-                if(_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 && ListBoxViewPort.LastVisibleIndex == 0)
+                if (_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 && ListBoxViewPort.LastVisibleIndex == 0)
                     ListBoxViewPort = new ListBoxViewPort(1, 2);
 
                 RaisePropertyChanged("SelectedSprite");
@@ -107,7 +104,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             {
                 if (value == _selectedSprite.Sounds.Sounds) return;
                 _selectedSprite.Sounds.Sounds = value;
-                
+
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
                     RaisePropertyChanged("Sounds");
@@ -288,7 +285,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             private set;
         }
 
-        public RelayCommand ResetViewModelCommand
+        public ICommand ResetViewModelCommand
+        {
+            get;
+            private set;
+        }
+
+        public ICommand SoundsPlayStateChangedCommand
         {
             get;
             private set;
@@ -300,12 +303,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private void AddNewScriptBrickAction()
         {
-            GenericMessage<Sprite> message1 = new GenericMessage<Sprite>(SelectedSprite);
+            var message1 = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message1, ViewModelMessagingToken.SelectedSpriteListener);
 
-            List<Object> objects = new List<object>{ScriptBricks, ListBoxViewPort};
+            var objects = new List<object> { ScriptBricks, ListBoxViewPort };
 
-            GenericMessage<List<Object>> message2 = new GenericMessage<List<Object>>(objects);
+            var message2 = new GenericMessage<List<Object>>(objects);
             Messenger.Default.Send<GenericMessage<List<Object>>>(message2, ViewModelMessagingToken.ScriptBrickCollectionListener);
 
             Navigation.NavigateTo(typeof(AddNewScriptView));
@@ -340,11 +343,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SelectedBrick = message.Content;
             RaisePropertyChanged("SelectedBrick");
         }
-        
+
 
         private void AddBroadcastMessageAction(DataObject broadcastObject)
         {
-            GenericMessage<DataObject> message = new GenericMessage<DataObject>(broadcastObject);
+            var message = new GenericMessage<DataObject>(broadcastObject);
             Messenger.Default.Send<GenericMessage<DataObject>>(message, ViewModelMessagingToken.BroadcastObjectListener);
 
             Navigation.NavigateTo(typeof(NewBroadcastMessageView));
@@ -362,7 +365,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private void AddNewSpriteAction()
         {
-            GenericMessage<ObservableCollection<Sprite>> message = new GenericMessage<ObservableCollection<Sprite>>(Sprites);
+            var message = new GenericMessage<ObservableCollection<Sprite>>(Sprites);
             Messenger.Default.Send<GenericMessage<ObservableCollection<Sprite>>>(message, ViewModelMessagingToken.SpriteListListener);
 
             Navigation.NavigateTo(typeof(AddNewSpriteView));
@@ -370,7 +373,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private void EditSpriteAction(Sprite sprite)
         {
-            GenericMessage<Sprite> message = new GenericMessage<Sprite>(sprite);
+            var message = new GenericMessage<Sprite>(sprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SpriteNameListener);
 
             Navigation.NavigateTo(typeof(ChangeSpriteView));
@@ -378,7 +381,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private void CopySpriteAction(Sprite sprite)
         {
-            Sprite newSprite = sprite.Copy() as Sprite;
+            var newSprite = sprite.Copy() as Sprite;
             Sprites.Add(newSprite);
         }
 
@@ -399,7 +402,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private void AddNewSoundAction()
         {
-            GenericMessage<Sprite> message = new GenericMessage<Sprite>(SelectedSprite);
+            var message = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SelectedSpriteListener);
 
             Navigation.NavigateTo(typeof(AddNewSoundView));
@@ -407,7 +410,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private void EditSoundAction(Sound sound)
         {
-            GenericMessage<Sound> message = new GenericMessage<Sound>(sound);
+            var message = new GenericMessage<Sound>(sound);
             Messenger.Default.Send<GenericMessage<Sound>>(message, ViewModelMessagingToken.SoundNameListener);
 
             Navigation.NavigateTo(typeof(ChangeSoundView));
@@ -426,11 +429,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             };
             Messenger.Default.Send(message);
         }
-        
+
 
         private void AddNewCostumeAction()
         {
-            GenericMessage<Sprite> message = new GenericMessage<Sprite>(SelectedSprite);
+            var message = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SelectedSpriteListener);
 
             Navigation.NavigateTo(typeof(AddNewCostumeView));
@@ -438,7 +441,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private void EditCostumeAction(Costume costume)
         {
-            GenericMessage<Costume> message = new GenericMessage<Costume>(costume);
+            var message = new GenericMessage<Costume>(costume);
             Messenger.Default.Send<GenericMessage<Costume>>(message, ViewModelMessagingToken.CostumeNameListener);
 
             Navigation.NavigateTo(typeof(ChangeCostumeView));
@@ -446,7 +449,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private void CopyCostumeAction(Costume costume)
         {
-            Costume newCostume = costume.Copy(SelectedSprite) as Costume;
+            var newCostume = costume.Copy(SelectedSprite) as Costume;
             Costumes.Add(newCostume);
         }
 
@@ -467,30 +470,30 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private void PlaySoundAction(List<Object> parameter)
         {
-            StopSoundCommand.Execute(null);
+            //StopSoundCommand.Execute(null);
 
-            if (_soundPlayer == null)
-            {
-                _soundPlayer = new SoundPlayer();
-                _soundPlayer.SoundStateChanged += SoundPlayerStateChanged;
-            }
+            //if (_soundPlayer == null)
+            //{
+            //    _soundPlayer = new SoundPlayer();
+            //    _soundPlayer.SoundStateChanged += SoundPlayerStateChanged;
+            //}
 
-            var state = (PlayButtonState)parameter[0];
-            var sound = (Sound)parameter[1];
+            //var state = (PlayButtonState)parameter[0];
+            //var sound = (Sound)parameter[1];
 
-            if (state == PlayButtonState.Play)
-            {
-                if (_sound != sound)
-                {
-                    _sound = sound;
-                    _soundPlayer.SetSound(_sound);
-                }
-                _soundPlayer.Play();
-            }
-            else
-            {
-                _soundPlayer.Pause();
-            }
+            //if (state == PlayButtonState.Play)
+            //{
+            //    if (_sound != sound)
+            //    {
+            //        _sound = sound;
+            //        _soundPlayer.SetSound(_sound);
+            //    }
+            //    _soundPlayer.Play();
+            //}
+            //else
+            //{
+            //    _soundPlayer.Pause();
+            //}
         }
 
         private void StopSoundAction()
@@ -514,7 +517,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private void ProjectSettingsAction()
         {
-            GenericMessage<Project> message = new GenericMessage<Project>(CurrentProject);
+            var message = new GenericMessage<Project>(CurrentProject);
             Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.ProjectNameListener);
 
             Navigation.NavigateTo(typeof(ProjectSettingsView));
@@ -565,14 +568,45 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             ResetViewModel();
         }
 
+
+        private void SoundsPlayStateChangedAction(PlayPauseCommandArguments args)
+        {
+            var playedSound = args.ChangedToPlayObject as Sound;
+            var pausedSound = args.ChangedToPausedObject as Sound;
+
+            if (_soundPlayer == null)
+            {
+                _soundPlayer = new SoundPlayer();
+            }
+
+            _soundPlayer.Clear();
+            _soundPlayer.SoundFinished += delegate()
+            {
+                args.CurrentButton.State = PlayPauseButtonState.Pause;
+            };
+
+            if (pausedSound != null)
+                _soundPlayer.Pause();
+
+            if (playedSound != null)
+            {
+                if (_sound != playedSound)
+                {
+                    _sound = playedSound;
+                    _soundPlayer.SetSound(_sound);
+                }
+                _soundPlayer.Play();
+            }
+        }
+
         #endregion
-        
+
         public EditorViewModel()
         {
             AddNewScriptBrickCommand = new RelayCommand(AddNewScriptBrickAction);
             CopyScriptBrickCommand = new RelayCommand<DataObject>(CopyScriptBrickAction);
             DeleteScriptBrickCommand = new RelayCommand<DataObject>(DeleteScriptBrickAction);
-            
+
             AddBroadcastMessageCommand = new RelayCommand<DataObject>(AddBroadcastMessageAction);
 
             AddNewSpriteCommand = new RelayCommand(AddNewSpriteAction);
@@ -602,6 +636,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
+            SoundsPlayStateChangedCommand = new RelayCommand<PlayPauseCommandArguments>(SoundsPlayStateChangedAction);
+
 
             if (IsInDesignMode)
             {
@@ -618,7 +654,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             Messenger.Default.Register<GenericMessage<string>>(this, ViewModelMessagingToken.BroadcastMessageListener, ReceiveNewBroadcastMessageAction);
             Messenger.Default.Register<GenericMessage<DataObject>>(this, ViewModelMessagingToken.SelectedBrickListener, ReceiveSelectedBrickMessageAction);
         }
-
 
         #region MessageBoxResult
 
@@ -655,21 +690,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         #endregion
 
 
-        private void SoundPlayerStateChanged(Misc.SoundState soundState, Misc.SoundState newState)
-        {
-            if (newState == Misc.SoundState.Stopped)
-            {
-                if (Sounds != null)
-                {
-                    var tempSounds = new ObservableCollection<Sound>();
-                    foreach (Sound sound in Sounds)
-                        tempSounds.Add(sound);
+        //private void SoundPlayerStateChanged(Misc.SoundState soundState, Misc.SoundState newState)
+        //{
+        //    if (newState == Misc.SoundState.Stopped)
+        //    {
+        //        if (Sounds != null)
+        //        {
+        //            var tempSounds = new ObservableCollection<Sound>();
+        //            foreach (Sound sound in Sounds)
+        //                tempSounds.Add(sound);
 
-                    Sounds = null;
-                    Sounds = tempSounds;
-                }
-            }
-        }
+        //            Sounds = null;
+        //            Sounds = tempSounds;
+        //        }
+        //    }
+        //}
 
         private void ResetViewModel()
         {
@@ -681,8 +716,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
             if (_soundPlayer != null)
             {
-                _soundPlayer.Stop();
-                _soundPlayer.SoundStateChanged -= SoundPlayerStateChanged;
+                _soundPlayer.Clear();
             }
             _soundPlayer = null;
             _sound = null;

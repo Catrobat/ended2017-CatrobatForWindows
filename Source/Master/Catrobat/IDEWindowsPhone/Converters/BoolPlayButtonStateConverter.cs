@@ -11,9 +11,11 @@ namespace Catrobat.IDEWindowsPhone.Converters
   {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
-        var isPlaying = (bool)value;
+        //var isPlaying = (bool)value;
 
-        return isPlaying ? PlayButtonState.Play : PlayButtonState.Pause;
+        //return isPlaying ? PlayButtonState.Play : PlayButtonState.Pause;
+
+        return null;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
