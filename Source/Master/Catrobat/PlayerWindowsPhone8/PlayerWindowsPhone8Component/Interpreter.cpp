@@ -90,9 +90,21 @@ float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 
 bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object *object)
 {
-    if (atoi(tree->Value().c_str()) == 1)
-	    return true;
-    return false;
+	Type type = tree->GetType();
+	switch (type)
+	{
+	case OPERATOR:
+		return interpretOperatorBool(tree, object);
+	case NUMBER:
+		return (bool)atof(tree->Value().c_str());
+	case FUNCTION:
+		return interpretFunctionBool(tree, object);
+	default:
+		break;
+	}
+
+	// TODO: What should we do when we get a invalid tree here?
+	return false;
 }
 
 void Interpreter::ReadAcceleration()
@@ -184,4 +196,58 @@ float Interpreter::interpretOperatorFloat(FormulaTree *tree, Object *object)
     }
 
     return (float)returnValue;
+}
+
+bool Interpreter::interpretOperatorBool(FormulaTree *tree, Object *object)
+{
+	FormulaTree *leftChild = tree->getLeftChild();
+    bool leftValue = false;
+    if (tree->getLeftChild() != NULL)
+        leftValue = this->EvaluateFormulaToBool(leftChild, object);
+    FormulaTree *rightChild = tree->getRightChild();
+    bool rightValue = false;
+	if (tree->getRightChild() != NULL)
+		rightValue = this->EvaluateFormulaToBool(rightChild, object);
+
+	bool returnValue = false;
+
+	switch (tree->getOperator())
+	{
+	case Operator::LOGICAL_AND:
+		returnValue = leftValue && rightValue;
+		break;
+	default: 
+		returnValue = (bool)interpretOperatorFloat(tree, object);
+		break;
+	}
+
+	return returnValue;
+}
+
+bool Interpreter::interpretFunctionBool(FormulaTree *tree, Object *object)
+{
+	FormulaTree *leftChild = tree->getLeftChild();
+    bool leftValue = false;
+    if (tree->getLeftChild() != NULL)
+        leftValue = this->EvaluateFormulaToBool(leftChild, object);
+    FormulaTree *rightChild = tree->getRightChild();
+    bool rightValue = false;
+	if (tree->getRightChild() != NULL)
+		rightValue = this->EvaluateFormulaToBool(rightChild, object);
+
+	bool returnValue = false;
+
+	switch (tree->getFunction())
+	{
+	case Function::L_TRUE:
+		returnValue = true;
+		break;
+	case Function::L_FALSE:
+		returnValue = false;
+		break;
+	default:
+		break;
+	}
+
+	return returnValue;
 }

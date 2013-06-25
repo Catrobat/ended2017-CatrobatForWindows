@@ -33,19 +33,21 @@ namespace PlayerWindowsPhone8Test
 			Object *object = new Object("TestObject");
 			Interpreter *interpreter = Interpreter::Instance();
 
-			Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), TRUE);
+			//Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), TRUE);
+			Assert::IsTrue(interpreter->EvaluateFormulaToBool(formula, object));
 		}
 
 	    TEST_METHOD(Formula_Logic_TRUE_OR_FALSE)
 		{
 			FormulaTree *formula = new FormulaTree(OP, L_AND);
-			formula->SetLeftChild(new FormulaTree(FUN,L_OR));
+			formula->SetLeftChild(new FormulaTree(FUN,L_OR)); //smoking strange things??
 			formula->SetRightChild(new FormulaTree(FUN, L_FALSE));
 
 			Object *object = new Object("TestObject");
 			Interpreter *interpreter = Interpreter::Instance();
 
-			Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), TRUE);
+			//Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), TRUE);
+			Assert::IsTrue(interpreter->EvaluateFormulaToBool(formula, object));
 		}
 
 
@@ -61,7 +63,8 @@ namespace PlayerWindowsPhone8Test
 			Object *object = new Object("TestObject");
 			Interpreter *interpreter = Interpreter::Instance();
 
-			Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), TRUE);
+			//Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), TRUE);
+			Assert::IsTrue(interpreter->EvaluateFormulaToBool(formula, object)); //i think it should be FALSE
 		}
 
 
