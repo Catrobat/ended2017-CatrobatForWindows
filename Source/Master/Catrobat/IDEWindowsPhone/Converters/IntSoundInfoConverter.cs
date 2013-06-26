@@ -2,6 +2,7 @@
 using System.Windows.Data;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Converters

@@ -7,7 +7,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:reorderableListbox="clr-namespace:Catrobat.IDEWindowsPhone.Controls.ReorderableListbox"
   xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
-  xmlns:imageButton="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
+  xmlns:buttons="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
   xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters" mc:Ignorable="d"
   xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
   xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
@@ -23,6 +23,7 @@
 
   <phone:PhoneApplicationPage.Resources>
     <converters:BytesImageConverter x:Key="BytesImageConverter" />
+    <buttons:PlayPauseButtonGroup x:Key="PlayPauseButtonGroupSounds" Command="{Binding SoundsPlayStateChangedCommand}" />
   </phone:PhoneApplicationPage.Resources>
 
 
@@ -51,7 +52,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <TextBlock FontSize="28" Margin="15 20 5 5" Text="{Binding Name}" />
-                <imageButton:ImageButton
+                <buttons:ImageButton
                   Grid.Column="1"
                   VerticalAlignment="Center"
                   x:Name="btnEditSpriteName" 
@@ -62,7 +63,7 @@
                   IsAutoColor="False" IsDark="True"
                   Command="{Binding Editor.EditSpriteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
-                <imageButton:ImageButton
+                <buttons:ImageButton
                   Grid.Column="2"
                   VerticalAlignment="Center"
                   x:Name="btnCopySprite" 
@@ -73,7 +74,7 @@
                   IsAutoColor="False" IsDark="True"
                   Command="{Binding Editor.CopySpriteCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
-                <imageButton:ImageButton 
+                <buttons:ImageButton 
                   Grid.Column="3" 
                   VerticalAlignment="Center" 
                   x:Name="btnDeleteSprite" 
@@ -134,14 +135,14 @@
                   <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" VerticalAlignment="Center" />
 
                   <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 15 0" >
-                    <imageButton:ImageButton VerticalAlignment="Center" x:Name="btnEditCostumeName" 
+                    <buttons:ImageButton VerticalAlignment="Center" x:Name="btnEditCostumeName" 
                       ImageName="edit"
                       Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"
                       Margin="5 5 5 5" IsAutoColor="False" IsDark="True"
                       Command="{Binding Editor.EditCostumeCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
-                    <imageButton:ImageButton VerticalAlignment="Center" x:Name="btnCopyCostume" 
+                    <buttons:ImageButton VerticalAlignment="Center" x:Name="btnCopyCostume" 
                       ImageName="copy"
                       Text="{Binding Path=Editor.ButtonCopy, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}" 
@@ -149,7 +150,7 @@
                       IsAutoColor="False" IsDark="True"
                       Command="{Binding Editor.CopyCostumeCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
 
-                    <imageButton:ImageButton VerticalAlignment="Center" x:Name="btnDeleteCostume" 
+                    <buttons:ImageButton VerticalAlignment="Center" x:Name="btnDeleteCostume" 
                       ImageName="delete"
                       Text="{Binding Path=Editor.ButtonDelete, Source={StaticResource LocalizedStrings}}"
                       Template="{StaticResource ImageButtonControlTemplate}"
@@ -182,7 +183,7 @@
                   <ColumnDefinition Width="1*" />
                   <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
-                <imageButton:PlayButton Grid.Column="0" Height="80" Width="80" Click="buttonSoundPlay_Click" />
+                <buttons:PlayPauseButton Group="{StaticResource PlayPauseButtonGroupSounds}" Grid.Column="0" Height="80" Width="80" Click="buttonSoundPlay_Click" />
                 <Grid Grid.Column="1" Margin="5">
                   <Grid.RowDefinitions>
                     <RowDefinition />
@@ -191,7 +192,7 @@
                   <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" VerticalAlignment="Center" />
 
                   <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 15 0" >
-                    <imageButton:ImageButton 
+                    <buttons:ImageButton 
                       VerticalAlignment="Center"
                       ImageName="edit"
                       Text="{Binding Path=Editor.ButtonChange, Source={StaticResource LocalizedStrings}}"
@@ -208,7 +209,7 @@
                       Template="{StaticResource ImageButtonControlTemplate}" 
                       Margin="5 5 5 5" Click=""/>-->
 
-                    <imageButton:ImageButton
+                    <buttons:ImageButton
                       VerticalAlignment="Center"
                       x:Name="btnDeleteSound" 
                       ImageName="delete"

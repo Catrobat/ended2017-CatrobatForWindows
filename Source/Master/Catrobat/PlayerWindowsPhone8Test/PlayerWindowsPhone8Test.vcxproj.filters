@@ -11,6 +11,9 @@
     <Filter Include="FormulaTests">
       <UniqueIdentifier>{5892d712-3166-450c-a773-0663b96441d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TestFiles">
+      <UniqueIdentifier>{20839112-92e5-4528-8e5c-6af2326ae07d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\ApplicationIcon.png">
@@ -218,6 +221,12 @@
     <ClCompile Include="VariableBricks.cpp" />
     <ClCompile Include="Variables.cpp" />
     <ClCompile Include="XMLParserTests.cpp" />
+    <ClCompile Include="LogicOperations.cpp">
+      <Filter>FormulaTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -396,6 +405,9 @@
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClInclude>
     <ClInclude Include="TestHelper.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="TestApp.dll" />
@@ -403,5 +415,8 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="WMAppManifest.xml" />
+    <Xml Include="TestFiles\headerTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

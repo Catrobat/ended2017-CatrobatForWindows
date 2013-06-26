@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+  <header>
+    <applicationBuildName/>
+    <applicationBuildNumber>0</applicationBuildNumber>
+    <applicationName>Catroid</applicationName>
+    <applicationVersion>0.7.3beta</applicationVersion>
+    <dateTimeUpload/>
+    <description/>
+    <deviceName>Nexus 4</deviceName>
+    <mediaLicense>http://developer.catrobat.org/ccbysa_v3</mediaLicense>
+    <platform>Android</platform>
+    <platformVersion>17</platformVersion>
+    <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
+    <programName>SimonSays</programName>
+    <remixOf>https://pocketcode.org/details/732</remixOf>
+    <screenHeight>1184</screenHeight>
+    <screenWidth>768</screenWidth>
+    <tags/>
+    <url>http://pocketcode.org/details/732</url>
+    <userHandle>Felly</userHandle>
+  </header>
+</program>

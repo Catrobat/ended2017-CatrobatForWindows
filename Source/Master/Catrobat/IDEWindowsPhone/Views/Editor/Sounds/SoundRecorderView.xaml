@@ -105,7 +105,7 @@
           </Grid>
 
           <TextBlock Grid.Column="3" Text="sec" Margin="0 0 10 0" VerticalAlignment="Top" FontWeight="ExtraBlack" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
-          <c:PlayButton Grid.Column="4" x:Name="PlayButton" State="{Binding IsPlaying, Mode=OneWay, Converter={StaticResource BoolPlayButtonStateConverter}}" Click="PlayButton_OnClick" 
+          <c:PlayPauseButton Grid.Column="4" x:Name="PlayButton" State="{Binding IsPlaying, Mode=OneWay, Converter={StaticResource BoolPlayButtonStateConverter}}" Click="PlayButton_OnClick" 
                         Visibility="{Binding RecordingExists, Converter={StaticResource BoolVisibilityConverter}}"
                         VerticalAlignment="Top" HorizontalAlignment="Center" 
                         Height="60" Width="60" DataContext="{Binding}" />

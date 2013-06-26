@@ -31,10 +31,12 @@
 #include "TurnLeftBrick.h"
 #include "TurnRightBrick.h"
 #include "PlaySoundBrick.h"
+#include "XMLParserException.h"
 
 #include <time.h>
 #include <iostream>
 #include <fstream>
+#include <exception>
 
 using namespace std;
 using namespace rapidxml;
@@ -63,7 +65,16 @@ void XMLParser::loadXML(string fileName)
 		text += line;
 	}
 
-	parseXML(text);
+	try
+    {
+        parseXML(text);
+    }
+    catch(XMLParserException exception)
+    {
+        if (exception.Level() == SeverityLevel::Severity::SEVERE)
+            int doSomethingUseful = 1;
+    }
+
 
 	inputFile.close();
 }
@@ -83,6 +94,8 @@ void XMLParser::parseXML(string xml)
 	char *str = doc.first_node()->name();
 
 	m_project = parseProjectHeader(&doc);
+    if (!m_project)
+        throw XMLParserException("Invalid ProjectHeader", SeverityLevel::Severity::SEVERE);
 	parseObjectList(&doc, m_project->getObjectList());
 	
 	parseVariableList(&doc, m_project);

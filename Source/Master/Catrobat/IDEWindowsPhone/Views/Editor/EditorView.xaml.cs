@@ -9,6 +9,7 @@ using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
@@ -139,13 +140,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
         private void buttonSoundPlay_Click(object sender, RoutedEventArgs e)
         {
-            PlayButton btnPlay = sender as PlayButton;
+            //PlayButton btnPlay = sender as PlayButton;
 
-            var parameter = new List<Object>();
-            parameter.Add(btnPlay.State);
-            parameter.Add(btnPlay.DataContext as Sound);
+            //var parameter = new List<Object>();
+            //parameter.Add(btnPlay.State);
+            //parameter.Add(btnPlay.DataContext as Sound);
 
-            _viewModel.PlaySoundCommand.Execute(parameter);
+            //_viewModel.PlaySoundCommand.Execute(parameter);
         }
     }
 }
