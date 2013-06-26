@@ -12,11 +12,21 @@ namespace PlayerWindowsPhone8Test
 	{
 	public:
 		
-		TEST_METHOD(XMLParserTests_SampleTest)
+        TEST_METHOD(XMLParserTests_FileNotFound)
 		{
-			// TODO: Your test code here
             XMLParser *parser = new XMLParser();
+            parser->loadXML("nonExistingProject.xml");
             Assert::IsTrue(false);
+		}
+
+		TEST_METHOD(XMLParserTests_Header)
+		{
+            XMLParser *parser = new XMLParser();
+            parser->loadXML("TestFiles/headerTest.xml");
+
+            Project *project = parser->getProject();
+            Assert::AreEqual(project->ScreenHeight(), 1184);
+            Assert::AreEqual(project->ScreenWidth(), 768);
 		}
 	};
 }

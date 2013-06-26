@@ -404,5 +404,8 @@
     <Filter Include="Core\ddsConverter">
       <UniqueIdentifier>{0b77d6dc-7fe8-43ee-aba1-51564a63deae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Exceptions">
+      <UniqueIdentifier>{8c6cfa58-d9c9-4dbd-8681-ebb9e25b43c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
