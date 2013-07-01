@@ -10,7 +10,8 @@
     <deviceName>Nexus 4</deviceName>
     <mediaLicense>http://developer.catrobat.org/ccbysa_v3</mediaLicense>
     <platform>Android</platform>
-    <platformVersion>17</platformVersion>
+    <platformVersion>1</platformVersion>
+    <catrobatLanguageVersion>1.0</catrobatLanguageVersion>
     <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
     <programName>SimonSays</programName>
     <remixOf>https://pocketcode.org/details/732</remixOf>
@@ -18,6 +19,6 @@
     <screenWidth>768</screenWidth>
     <tags/>
     <url>http://pocketcode.org/details/732</url>
-    <userHandle>Felly</userHandle>
+    <userHandle>test</userHandle>
   </header>
 </program>
