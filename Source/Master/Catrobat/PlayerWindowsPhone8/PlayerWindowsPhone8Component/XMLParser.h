@@ -24,7 +24,7 @@ public:
 
 	Project*					getProject();
 
-	void						loadXML(string fileName);
+	bool						loadXML(string fileName);
 
 private:
 	Project*					m_project;

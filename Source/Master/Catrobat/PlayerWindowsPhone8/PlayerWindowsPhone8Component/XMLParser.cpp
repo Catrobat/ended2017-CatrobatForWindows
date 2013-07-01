@@ -52,10 +52,12 @@ XMLParser::~XMLParser()
 	delete containerStack;
 }
 
-void XMLParser::loadXML(string fileName)
+bool XMLParser::loadXML(string fileName)
 {
 	ifstream inputFile;
 	inputFile.open(fileName);
+	if (!inputFile) 
+		return false;
 
 	string text;
 	while(!inputFile.eof())
@@ -72,11 +74,12 @@ void XMLParser::loadXML(string fileName)
     catch(XMLParserException exception)
     {
         if (exception.Level() == SeverityLevel::Severity::SEVERE)
-            int doSomethingUseful = 1;
+			return false;
     }
 
 
 	inputFile.close();
+	return true;
 }
 
 Project *XMLParser::getProject()
