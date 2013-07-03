@@ -20,10 +20,10 @@ private:
 
 	std::map<std::string, Sound*> *m_sounds;
 
-	FMOD::System     *system;
-    FMOD::Channel    *channel;
-    FMOD_RESULT       status;
-    unsigned int      version;
-    void             *extradriverdata;
+	FMOD::System     *m_system;
+    FMOD::Channel    *m_channel;
+    FMOD_RESULT       m_status;
+    unsigned int      m_version;
+    void             *m_extradriverdata;
 };
 

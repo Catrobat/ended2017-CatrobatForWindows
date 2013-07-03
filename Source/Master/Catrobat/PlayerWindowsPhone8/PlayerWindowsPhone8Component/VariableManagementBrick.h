@@ -1,5 +1,5 @@
 #pragma once
-#include "brick.h"
+#include "Brick.h"
 #include "UserVariable.h"
 #include "FormulaTree.h"
 

@@ -96,7 +96,7 @@ bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object *object)
 	case OPERATOR:
 		return interpretOperatorBool(tree, object);
 	case NUMBER:
-		return (bool)atof(tree->Value().c_str());
+		return atof(tree->Value().c_str()) > 0.0f;
 	case FUNCTION:
 		return interpretFunctionBool(tree, object);
 	default:
@@ -154,7 +154,7 @@ int Interpreter::interpretOperator(FormulaTree *tree, Object *object)
         returnValue = leftValue / rightValue;
         break;
     case Operator::POW:
-        returnValue = pow(leftValue, rightValue);
+        returnValue = (int) pow(leftValue, rightValue);
     default:
         break;
     }
@@ -217,7 +217,7 @@ bool Interpreter::interpretOperatorBool(FormulaTree *tree, Object *object)
 		returnValue = leftValue && rightValue;
 		break;
 	default: 
-		returnValue = (bool)interpretOperatorFloat(tree, object);
+		returnValue = interpretOperatorFloat(tree, object) > 0.0f;
 		break;
 	}
 

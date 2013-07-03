@@ -12,7 +12,7 @@ public:
 	~RepeatBrick(void);
 
 	void Execute();
-	void addBrick(Brick *brick);
+	void AddBrick(Brick *brick);
 private:
 	list<Brick*> *m_brickList;
 

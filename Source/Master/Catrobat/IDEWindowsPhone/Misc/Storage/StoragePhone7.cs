@@ -280,8 +280,6 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
       {
         var bitmapImage = new BitmapImage();
 
-        byte[] myByteArray = null;
-
         using (IsolatedStorageFileStream storageFileStream = _iso.OpenFile(pathToImage, FileMode.Open, FileAccess.Read))
         {
           bitmapImage.SetSource(storageFileStream);

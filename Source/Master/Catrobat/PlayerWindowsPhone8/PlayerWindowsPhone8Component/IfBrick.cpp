@@ -8,7 +8,7 @@ IfBrick::IfBrick(string spriteReference, FormulaTree *condition, Script *parent)
 	m_ifList = new list<Brick*>();
 	m_elseList = new list<Brick*>();
 
-	currentAddMode = IfBranchType::If;
+	m_currentAddMode = IfBranchType::If;
 }
 
 
@@ -25,43 +25,43 @@ void IfBrick::Execute()
 	// Synchronously execute all subsequent blocks
 	if (Interpreter::Instance()->EvaluateFormulaToBool(m_condition, Parent()->Parent()))
 	{
-		for (int i = 0; i < m_ifList->size(); i++)
+		for (unsigned int i = 0; i < m_ifList->size(); i++)
 		{
 			GetIfBrick(i)->Execute();
 		}
 	}
 	else
 	{
-		for (int i = 0; i < m_elseList->size(); i++)
+		for (unsigned int i = 0; i < m_elseList->size(); i++)
 		{
 			GetElseBrick(i)->Execute();
 		}
 	}
 }
 
-void IfBrick::addBrick(Brick *brick)
+void IfBrick::AddBrick(Brick *brick)
 {
-	if (currentAddMode == IfBranchType::If)
+	if (m_currentAddMode == IfBranchType::If)
 	{
-		addIfBrick(brick);
+		AddIfBrick(brick);
 	}
 	else
 	{
-		addElseBrick(brick);
+		AddElseBrick(brick);
 	}
 }
 
-void IfBrick::setCurrentAddMode(IfBranchType mode)
+void IfBrick::SetCurrentAddMode(IfBranchType mode)
 {
-	currentAddMode = mode;
+	m_currentAddMode = mode;
 }
 
-void IfBrick::addIfBrick(Brick *brick)
+void IfBrick::AddIfBrick(Brick *brick)
 {
 	m_ifList->push_back(brick);
 }
 
-void IfBrick::addElseBrick(Brick *brick)
+void IfBrick::AddElseBrick(Brick *brick)
 {
 	m_elseList->push_back(brick);
 }

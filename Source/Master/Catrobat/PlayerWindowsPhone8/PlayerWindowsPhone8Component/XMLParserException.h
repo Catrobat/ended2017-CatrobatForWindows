@@ -1,26 +1,11 @@
 #pragma once
 
 #include "string"
-namespace SeverityLevel
-{
-    public enum class Severity
-    {
-        SEVERE, 
-        WARNING
-    };
-};
+#include "BaseException.h"
 
-class XMLParserException
+class XMLParserException : public BaseException
 {
 public:
-    XMLParserException(std::string errorMessage, SeverityLevel::Severity severity);
-    XMLParserException();
-
-    std::string ErrorMessage(); 
-    SeverityLevel::Severity Level();
-
-private:
-    std::string m_errorMessage;
-    SeverityLevel::Severity m_severity;
+    XMLParserException(std::string errorMessage);
 };
 

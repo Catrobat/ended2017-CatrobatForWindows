@@ -163,7 +163,7 @@ namespace PlayerWindowsPhone8Test
             ForeverBrick *brick = new ForeverBrick(spriteReference, script);
             script->addBrick(brick);
             SetSizeToBrick *setSizeBrick = new SetSizeToBrick(spriteReference, formulaTree, script);
-            brick->addBrick(setSizeBrick);
+            brick->AddBrick(setSizeBrick);
 
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
 			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 50.0f));
@@ -197,7 +197,7 @@ namespace PlayerWindowsPhone8Test
 
             formulaTree = new FormulaTree("NUMBER", "50");
             SetSizeToBrick *setSizeBrick = new SetSizeToBrick(spriteReference, formulaTree, script);
-            brick->addBrick(setSizeBrick);
+            brick->AddBrick(setSizeBrick);
 
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
 			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 50.0f));
@@ -216,7 +216,7 @@ namespace PlayerWindowsPhone8Test
 
             formulaTree = new FormulaTree("NUMBER", "50");
             SetSizeToBrick *setSizeBrick = new SetSizeToBrick(spriteReference, formulaTree, script);
-            brick->addBrick(setSizeBrick);
+            brick->AddBrick(setSizeBrick);
 
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
 			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 50.0f));
@@ -236,12 +236,12 @@ namespace PlayerWindowsPhone8Test
 
             formulaTree = new FormulaTree("NUMBER", "80");
             SetSizeToBrick *setSizeBrick1 = new SetSizeToBrick(spriteReference, formulaTree, script);
-            brick->addBrick(setSizeBrick1);
+            brick->AddBrick(setSizeBrick1);
 
             formulaTree = new FormulaTree("NUMBER", "40");
             SetSizeToBrick *setSizeBrick2 = new SetSizeToBrick(spriteReference, formulaTree, script);
-            brick->addBrick(setSizeBrick2);
-            brick->addElseBrick(setSizeBrick2);
+            brick->AddBrick(setSizeBrick2);
+            brick->AddElseBrick(setSizeBrick2);
 
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
 			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 80.0f));
@@ -263,11 +263,11 @@ namespace PlayerWindowsPhone8Test
 
             formulaTree = new FormulaTree("NUMBER", "80");
             SetSizeToBrick *setSizeBrick1 = new SetSizeToBrick(spriteReference, formulaTree, script);
-            brick->addBrick(setSizeBrick1);
+            brick->AddBrick(setSizeBrick1);
 
             formulaTree = new FormulaTree("NUMBER", "40");
             SetSizeToBrick *setSizeBrick2 = new SetSizeToBrick(spriteReference, formulaTree, script);
-            brick->addElseBrick(setSizeBrick2);
+            brick->AddElseBrick(setSizeBrick2);
 
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
 			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 80.0f));
@@ -289,15 +289,15 @@ namespace PlayerWindowsPhone8Test
 
             formulaTree = new FormulaTree("NUMBER", "80");
             SetSizeToBrick *setSizeBrick1 = new SetSizeToBrick(spriteReference, formulaTree, script);
-            brick->addBrick(setSizeBrick1);
+            brick->AddBrick(setSizeBrick1);
 
             formulaTree = new FormulaTree("NUMBER", "1");
             IfBrick *elseifBrick = new IfBrick(spriteReference, formulaTree, script);
-            brick->addElseBrick(elseifBrick);
+            brick->AddElseBrick(elseifBrick);
 
             formulaTree = new FormulaTree("NUMBER", "40");
             SetSizeToBrick *setSizeBrick2 = new SetSizeToBrick(spriteReference, formulaTree, script);
-            elseifBrick->addBrick(setSizeBrick2);
+            elseifBrick->AddBrick(setSizeBrick2);
 
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
 			Assert::IsFalse(TestHelper::isEqual(object->GetScale(), 80.0f));
@@ -318,7 +318,7 @@ namespace PlayerWindowsPhone8Test
             RepeatBrick *brick = new RepeatBrick(spriteReference, formulaTree, script);
             formulaTree = new FormulaTree("NUMBER", "10");
             ChangeSizeByBrick *changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
-            brick->addBrick(changeSizeBrick);
+            brick->AddBrick(changeSizeBrick);
 
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
             brick->Execute();
@@ -340,7 +340,7 @@ namespace PlayerWindowsPhone8Test
             RepeatBrick *brick = new RepeatBrick(spriteReference, formulaTree, script);
             formulaTree = new FormulaTree("NUMBER", "10");
             ChangeSizeByBrick *changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
-            brick->addBrick(changeSizeBrick);
+            brick->AddBrick(changeSizeBrick);
 
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
             brick->Execute();
@@ -362,7 +362,7 @@ namespace PlayerWindowsPhone8Test
             RepeatBrick *brick = new RepeatBrick(spriteReference, formulaTree, script);
             formulaTree = new FormulaTree("NUMBER", "10");
             ChangeSizeByBrick *changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
-            brick->addBrick(changeSizeBrick);
+            brick->AddBrick(changeSizeBrick);
 
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
             brick->Execute();
@@ -384,7 +384,7 @@ namespace PlayerWindowsPhone8Test
             RepeatBrick *brick = new RepeatBrick(spriteReference, formulaTree, script);
             formulaTree = new FormulaTree("NUMBER", "10");
             ChangeSizeByBrick *changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
-            brick->addBrick(changeSizeBrick);
+            brick->AddBrick(changeSizeBrick);
 
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
             brick->Execute();
@@ -399,7 +399,7 @@ namespace PlayerWindowsPhone8Test
             brick = new RepeatBrick(spriteReference, formulaTree, script);
             formulaTree = new FormulaTree("NUMBER", "10");
             changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
-            brick->addBrick(changeSizeBrick);
+            brick->AddBrick(changeSizeBrick);
 
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 110.0f));
             brick->Execute();
@@ -414,7 +414,7 @@ namespace PlayerWindowsPhone8Test
             brick = new RepeatBrick(spriteReference, formulaTree, script);
             formulaTree = new FormulaTree("NUMBER", "10");
             changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
-            brick->addBrick(changeSizeBrick);
+            brick->AddBrick(changeSizeBrick);
 
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 140.0f));
             brick->Execute();
@@ -427,7 +427,7 @@ namespace PlayerWindowsPhone8Test
             brick = new RepeatBrick(spriteReference, formulaTree, script);
             formulaTree = new FormulaTree("NUMBER", "10");
             changeSizeBrick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
-            brick->addBrick(changeSizeBrick);
+            brick->AddBrick(changeSizeBrick);
 
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 140.0f));
             brick->Execute();

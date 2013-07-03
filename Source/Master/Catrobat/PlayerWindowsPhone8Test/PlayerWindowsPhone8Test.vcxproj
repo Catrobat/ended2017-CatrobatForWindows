@@ -136,7 +136,10 @@
     <Image Include="Assets\Tiles\IconicTileSmall.png" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="TestFiles\headerTest.xml" />
+    <Xml Include="testFiles\BroadcastTest.xml" />
+    <Xml Include="testFiles\HeaderTest.xml" />
+    <Xml Include="testFiles\ObjectListTest1.xml" />
+    <Xml Include="testFiles\ObjectListTest2.xml" />
     <Xml Include="WMAppManifest.xml">
       <SubType>Designer</SubType>
     </Xml>
@@ -148,6 +151,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseException.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseObject.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BasicTimer.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Brick.h" />
@@ -211,6 +215,7 @@
     <ClInclude Include="TestHelper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseException.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseObject.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Brick.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BroadcastBrick.cpp" />

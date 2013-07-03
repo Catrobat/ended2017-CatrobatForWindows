@@ -36,7 +36,6 @@ namespace Catrobat.IDEWindowsPhone.Themes
       }
     }
 
-    private int _selectedThemeIndex;
     public int SelectedThemeIndex
     {
       get
@@ -55,11 +54,7 @@ namespace Catrobat.IDEWindowsPhone.Themes
       }
       set
       {
-        try
-        {
-          SelectedTheme = themes[value];
-        }
-        catch { }
+        SelectedTheme = themes[value];
       }
     }
 

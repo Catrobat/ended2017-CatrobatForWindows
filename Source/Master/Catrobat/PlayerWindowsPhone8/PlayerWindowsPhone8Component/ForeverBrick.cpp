@@ -17,7 +17,7 @@ ForeverBrick::~ForeverBrick(void)
 void ForeverBrick::Execute()
 {
 	// Synchronously execute all subsequent blocks
-	int i = 0;
+	unsigned int i = 0;
 	while (true)
 	{
 		GetBrick(i)->Execute();
@@ -29,7 +29,7 @@ void ForeverBrick::Execute()
 	}
 }
 
-void ForeverBrick::addBrick(Brick *brick)
+void ForeverBrick::AddBrick(Brick *brick)
 {
 	m_brickList->push_back(brick);
 }

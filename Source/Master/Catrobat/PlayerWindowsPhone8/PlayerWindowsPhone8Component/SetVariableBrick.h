@@ -1,5 +1,4 @@
 #pragma once
-
 #include "VariableManagementBrick.h"
 
 class SetVariableBrick

@@ -1,5 +1,5 @@
 #pragma once
-static class TestHelper
+class TestHelper
 {
 public:
 	static bool isEqual(float x, float y);

@@ -1,10 +1,10 @@
 #pragma once
-#include "brick.h"
+#include "Brick.h"
 class SetYBrick :
 	public Brick
 {
 public:
-	SetYBrick(string spriteReference, FormulaTree *m_positionY, Script *parent);
+	SetYBrick(string spriteReference, FormulaTree *positionY, Script *parent);
 	void Execute();
 private:
 	FormulaTree *m_positionY;

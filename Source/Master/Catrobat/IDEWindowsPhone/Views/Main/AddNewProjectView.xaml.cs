@@ -18,7 +18,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 {
     public partial class AddNewProjectView : PhoneApplicationPage
     {
-        private ApplicationBarIconButton _btnSave;
         private readonly AddNewProjectViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewProjectViewModel>();
 
         public AddNewProjectView()

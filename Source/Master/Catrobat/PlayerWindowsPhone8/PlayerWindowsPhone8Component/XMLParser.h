@@ -11,6 +11,7 @@
 #include "FormulaTree.h"
 #include "VariableManagementBrick.h"
 #include "UserVariable.h"
+#include "XMLParserException.h"
 
 using namespace std;
 using namespace rapidxml;
@@ -23,7 +24,6 @@ public:
 	~XMLParser();
 
 	Project*					getProject();
-
 	bool						loadXML(string fileName);
 
 private:
