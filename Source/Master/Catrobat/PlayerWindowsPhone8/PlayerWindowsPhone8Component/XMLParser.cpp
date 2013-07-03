@@ -31,6 +31,7 @@
 #include "TurnLeftBrick.h"
 #include "TurnRightBrick.h"
 #include "PlaySoundBrick.h"
+#include "ExceptionLogger.h"
 
 #include <time.h>
 #include <iostream>
@@ -53,6 +54,7 @@ XMLParser::~XMLParser()
 
 bool XMLParser::loadXML(string fileName)
 {
+    ExceptionLogger::Instance()->LogException(new BaseException("boom"));
     ifstream inputFile;
     inputFile.open(fileName);
     if (!inputFile) 

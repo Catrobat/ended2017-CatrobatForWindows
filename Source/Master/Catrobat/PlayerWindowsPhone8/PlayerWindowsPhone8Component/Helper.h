@@ -2,10 +2,12 @@
 #include <string>
 
 using namespace std;
+using namespace Platform;
 
 class Helper
 {
 public:
-    static string ConvertPlatformStringToString(Platform::String^ input);
+    static string ConvertPlatformStringToString(String^ input);
+    static String^ ConvertStringToPlatformString(string input);
 };
 
