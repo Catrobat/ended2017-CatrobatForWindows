@@ -85,8 +85,8 @@ void Object::Draw(SpriteBatch *spriteBatch)
 	}
 
 	XMFLOAT2 position;
-	position.x = ProjectDaemon::Instance()->getProject()->ScreenWidth() / 2 + m_position.x;
-	position.y = ProjectDaemon::Instance()->getProject()->ScreenHeight() / 2 + m_position.y;
+	position.x = ProjectDaemon::Instance()->GetProject()->ScreenWidth() / 2 + m_position.x;
+	position.y = ProjectDaemon::Instance()->GetProject()->ScreenHeight() / 2 + m_position.y;
 
 	if (m_look != NULL)
 		spriteBatch->Draw(m_look->Texture(), position, nullptr, Colors::White * m_opacity, (float) radians(m_rotation), XMFLOAT2(((float) m_look->Width()) / 2.0f, ((float) m_look->Height()) / 2.0f), m_objectScale, SpriteEffects_None, 0.0f);

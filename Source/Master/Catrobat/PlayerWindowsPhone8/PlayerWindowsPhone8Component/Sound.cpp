@@ -19,7 +19,7 @@ void Sound::Load(std::string filename)
 {
 #ifndef UNITTEST
 	// Currently loads the same file every time.
-	m_system->createSound((ProjectDaemon::Instance()->ProjectPath() + "/sounds/" + filename).c_str(), FMOD_HARDWARE, 0, &m_sound);
+	m_system->createSound((ProjectDaemon::Instance()->GetProjectPath() + "/sounds/" + filename).c_str(), FMOD_HARDWARE, 0, &m_sound);
 #endif
 }
 

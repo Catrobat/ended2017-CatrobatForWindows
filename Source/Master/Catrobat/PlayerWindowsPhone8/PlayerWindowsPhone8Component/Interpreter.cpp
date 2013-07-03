@@ -37,7 +37,7 @@ int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 			UserVariable *var = object->Variable(varName);
 			if (var)
 				return atoi(var->Value().c_str());
-            var = ProjectDaemon::Instance()->getProject()->Variable(varName);
+            var = ProjectDaemon::Instance()->GetProject()->Variable(varName);
 			if (var)
 				return atoi(var->Value().c_str());
 
@@ -70,7 +70,7 @@ float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 			UserVariable *var = object->Variable(varName);
 			if (var)
 				return (float)atof(var->Value().c_str());
-            var = ProjectDaemon::Instance()->getProject()->Variable(varName);
+            var = ProjectDaemon::Instance()->GetProject()->Variable(varName);
             if (var)
                 return (float)atof(var->Value().c_str());
 

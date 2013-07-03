@@ -55,7 +55,7 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 	// Insert your code here.
 	if (!ProjectDaemon::Instance()->FinishedLoading())
 		return;
-	Project* project = ProjectDaemon::Instance()->getProject();
+	Project* project = ProjectDaemon::Instance()->GetProject();
 	ObjectList* objects = project->getObjectList();
 	for (int i = objects->Size() - 1; i >= 0; i--)
 	{
@@ -63,8 +63,8 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 		data.ViewDimension.Value*/
 
 		Bounds bounds = objects->getObject(i)->getBounds();
-		bounds.x += ProjectDaemon::Instance()->getProject()->ScreenWidth() / 2;
-		bounds.y += ProjectDaemon::Instance()->getProject()->ScreenHeight() / 2;
+		bounds.x += ProjectDaemon::Instance()->GetProject()->ScreenWidth() / 2;
+		bounds.y += ProjectDaemon::Instance()->GetProject()->ScreenHeight() / 2;
 		//if (args->CurrentPoint GetIntermediatePoints()->Size > 0)
 		{
 			float resolutionScaleFactor;
@@ -83,8 +83,8 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 			float actualX = args->CurrentPoint->Position.X;
 			float actualY = args->CurrentPoint->Position.Y;
 
-			double factorX = abs(ProjectDaemon::Instance()->getProject()->ScreenWidth() / (m_originalWindowsBounds.X / resolutionScaleFactor));
-			double factorY = abs(ProjectDaemon::Instance()->getProject()->ScreenHeight() / (m_originalWindowsBounds.Y / resolutionScaleFactor));
+			double factorX = abs(ProjectDaemon::Instance()->GetProject()->ScreenWidth() / (m_originalWindowsBounds.X / resolutionScaleFactor));
+			double factorY = abs(ProjectDaemon::Instance()->GetProject()->ScreenHeight() / (m_originalWindowsBounds.Y / resolutionScaleFactor));
 
 			double normalizedX = factorX * actualX;
 			double normalizedY = factorY * actualY;		

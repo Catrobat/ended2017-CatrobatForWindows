@@ -31,17 +31,17 @@ ProjectDaemon::ProjectDaemon()
 	m_errorList = new vector<std::string>();
 }
 
-void ProjectDaemon::setProject(Project *project)
+void ProjectDaemon::SetProject(Project *project)
 {
 	m_project = project;
 }
 
-string ProjectDaemon::ProjectPath()
+string ProjectDaemon::GetProjectPath()
 {
 	return m_projectPath;
 }
 
-Project *ProjectDaemon::getProject()
+Project *ProjectDaemon::GetProject()
 {
 	return m_project;
 }
@@ -76,7 +76,7 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 							xml->loadXML(pathString);
 
 							// Set Project to be accessed from everywhere
-							setProject(xml->getProject());
+							SetProject(xml->getProject());
 
 							// Initialize Renderer and enable rendering to be started
 							m_renderer->Initialize(m_device);
@@ -98,12 +98,12 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 	);
 }
 
-vector<Platform::String^> *ProjectDaemon::ProjectList()
+vector<Platform::String^> *ProjectDaemon::GetProjectList()
 {
 	return m_projectList;
 }
 
-vector<Platform::String^> *ProjectDaemon::FileList()
+vector<Platform::String^> *ProjectDaemon::GetFileList()
 {
 	return m_files;
 }
@@ -148,7 +148,7 @@ void ProjectDaemon::AddDebug(Platform::String^ info)
     m_errorList->push_back(Helper::ConvertPlatformStringToString(info));
 }
 
-std::vector<std::string> *ProjectDaemon::ErrorList()
+std::vector<std::string> *ProjectDaemon::GetErrorList()
 {
 	return m_errorList;
 }

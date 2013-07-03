@@ -107,7 +107,7 @@ namespace PlayerWindowsPhone8Test
 						                    userHandle
 					                      );
 
-            ProjectDaemon::Instance()->setProject(project);
+            ProjectDaemon::Instance()->SetProject(project);
 			string variableName = "testVariable";
             UserVariable *variable = new UserVariable(variableName, "10");
             FormulaTree *formulaTree = new FormulaTree("USER_VARIABLE", variableName);
@@ -176,7 +176,7 @@ namespace PlayerWindowsPhone8Test
 						                    userHandle
 					                      );
 
-            ProjectDaemon::Instance()->setProject(project);
+            ProjectDaemon::Instance()->SetProject(project);
 			string variableName = "testVariable";
             string inValidVariableName = "invalidTestVariableName";
             UserVariable *variable = new UserVariable(variableName, "10");

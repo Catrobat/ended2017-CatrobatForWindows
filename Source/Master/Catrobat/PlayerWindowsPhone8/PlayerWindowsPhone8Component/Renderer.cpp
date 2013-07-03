@@ -70,7 +70,7 @@ void Renderer::Render()
 
 		m_spriteFont->DrawString(m_spriteBatch.get(), lScreen, XMFLOAT2(100, 100), Colors::Black);
 
-		vector<string> *errors = ProjectDaemon::Instance()->ErrorList();
+		vector<string> *errors = ProjectDaemon::Instance()->GetErrorList();
 		float offset = 100;
 		for (unsigned int index = 0; index < errors->size(); index++)
 		{

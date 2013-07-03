@@ -19,11 +19,11 @@ public:
 
 	static ProjectDaemon *Instance();
 
-	void setProject(Project *project);
-	Project *getProject();
-	string ProjectPath();
-	std::vector<Platform::String ^> *ProjectList();
-	std::vector<Platform::String ^> *FileList();
+	void SetProject(Project *project);
+	Project *GetProject();
+	string GetProjectPath();
+	std::vector<Platform::String ^> *GetProjectList();
+	std::vector<Platform::String ^> *GetFileList();
 
 	void OpenProject(Platform::String^ projectName);
 	bool FinishedLoading();
@@ -34,7 +34,7 @@ public:
 
 	void SetError(Error error);
     void AddDebug(Platform::String^ info);
-	std::vector<std::string> *ErrorList();
+	std::vector<std::string> *GetErrorList();
 
 private:
 	ProjectDaemon();

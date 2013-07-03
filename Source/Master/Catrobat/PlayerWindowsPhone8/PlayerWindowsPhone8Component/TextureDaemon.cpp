@@ -32,7 +32,7 @@ void TextureDaemon::LoadTexture(ID3D11Device *d3dDevice, CatrobatTexture **textu
 	if (currentTexture == m_textures->end())
 	{
 		CatrobatTexture *newTexture = new CatrobatTexture();
-		string path = ProjectDaemon::Instance()->ProjectPath() + "/images/" + textureKey;
+		string path = ProjectDaemon::Instance()->GetProjectPath() + "/images/" + textureKey;
 		DDSLoader::LoadTexture(d3dDevice, path, &(newTexture->texture), &(newTexture->width), &(newTexture->height));
 
 		m_textures->insert(pair<string, CatrobatTexture*>(textureKey, newTexture));
