@@ -13,5 +13,6 @@ public:
 private:
     static ExceptionLogger *__instance;
     ExceptionLogger();
+    Platform::String^ CalculateDate(unsigned int input);
 };
 
