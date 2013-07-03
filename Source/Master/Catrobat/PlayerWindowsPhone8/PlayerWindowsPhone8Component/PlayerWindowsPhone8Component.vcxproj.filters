@@ -190,6 +190,9 @@
     <ClCompile Include="XMLParserWarningException.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
+    <ClCompile Include="ExceptionLogger.cpp">
+      <Filter>Exceptions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -385,6 +388,9 @@
       <Filter>Exceptions</Filter>
     </ClInclude>
     <ClInclude Include="XMLParserWarningException.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="ExceptionLogger.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
