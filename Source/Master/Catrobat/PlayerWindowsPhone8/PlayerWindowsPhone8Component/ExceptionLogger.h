@@ -2,6 +2,8 @@
 
 #include "BaseException.h"
 
+#define LOGFILE "logfile.txt"
+
 class ExceptionLogger
 {
 public:

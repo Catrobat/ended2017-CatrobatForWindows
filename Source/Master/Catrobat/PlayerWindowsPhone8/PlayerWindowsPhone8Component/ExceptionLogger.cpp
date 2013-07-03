@@ -30,8 +30,7 @@ ExceptionLogger::ExceptionLogger()
 
 void ExceptionLogger::LogException(BaseException *exception)
 {
-    PCWSTR SaveStateFile = L"logfile.txt";
-    task<StorageFile^> getFileTask(ApplicationData::Current->LocalFolder->CreateFileAsync(ref new Platform::String(SaveStateFile), CreationCollisionOption::OpenIfExists));
+    task<StorageFile^> getFileTask(ApplicationData::Current->LocalFolder->CreateFileAsync(Helper::ConvertStringToPlatformString(LOGFILE), CreationCollisionOption::OpenIfExists));
 
     auto writer = std::make_shared<Streams::DataWriter^>(nullptr);
 
