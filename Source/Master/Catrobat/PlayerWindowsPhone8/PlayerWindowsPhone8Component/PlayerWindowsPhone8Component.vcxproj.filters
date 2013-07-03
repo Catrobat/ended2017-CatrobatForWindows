@@ -184,6 +184,12 @@
     <ClCompile Include="XMLParserException.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
+    <ClCompile Include="XMLParserSevereException.cpp">
+      <Filter>Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLParserWarningException.cpp">
+      <Filter>Exceptions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -373,6 +379,12 @@
       <Filter>Exceptions</Filter>
     </ClInclude>
     <ClInclude Include="XMLParserException.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLParserSevereException.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLParserWarningException.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
   </ItemGroup>

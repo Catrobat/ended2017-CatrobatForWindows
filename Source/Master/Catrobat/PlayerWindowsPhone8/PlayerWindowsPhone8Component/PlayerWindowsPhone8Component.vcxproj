@@ -210,6 +210,8 @@
     <ClInclude Include="WhenScript.h" />
     <ClInclude Include="XMLParser.h" />
     <ClInclude Include="XMLParserException.h" />
+    <ClInclude Include="XMLParserSevereException.h" />
+    <ClInclude Include="XMLParserWarningException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseException.cpp" />
@@ -275,6 +277,8 @@
     <ClCompile Include="WhenScript.cpp" />
     <ClCompile Include="XMLParser.cpp" />
     <ClCompile Include="XMLParserException.cpp" />
+    <ClCompile Include="XMLParserSevereException.cpp" />
+    <ClCompile Include="XMLParserWarningException.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DirectXTK\DirectXTK_WindowsPhone8.vcxproj">
