@@ -30,10 +30,9 @@ ExceptionLogger::ExceptionLogger()
 
 void ExceptionLogger::LogException(BaseException *exception)
 {
-    task<StorageFile^> getFileTask(ApplicationData::Current->LocalFolder->CreateFileAsync(Helper::ConvertStringToPlatformString(LOGFILE), CreationCollisionOption::OpenIfExists));
-
+    task<StorageFile^> getFileTask(ApplicationData::Current->LocalFolder->CreateFileAsync(
+        Helper::ConvertStringToPlatformString(LOGFILE), CreationCollisionOption::OpenIfExists));
     auto writer = std::make_shared<Streams::DataWriter^>(nullptr);
-
     getFileTask.then([](StorageFile^ file)
     {
         return file->OpenAsync(FileAccessMode::ReadWrite);
