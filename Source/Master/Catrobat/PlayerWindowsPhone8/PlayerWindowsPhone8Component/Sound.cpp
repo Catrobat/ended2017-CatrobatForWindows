@@ -6,8 +6,8 @@
 Sound::Sound(FMOD::System *system, FMOD::Channel *channel)
 {
 #ifndef UNITTEST
-	this->system = system;
-	this->channel = channel;
+	m_system = system;
+	m_channel = channel;
 #endif
 }
 
@@ -19,21 +19,21 @@ void Sound::Load(std::string filename)
 {
 #ifndef UNITTEST
 	// Currently loads the same file every time.
-	system->createSound((ProjectDaemon::Instance()->ProjectPath() + "/sounds/" + filename).c_str(), FMOD_HARDWARE, 0, &sound);
+	m_system->createSound((ProjectDaemon::Instance()->ProjectPath() + "/sounds/" + filename).c_str(), FMOD_HARDWARE, 0, &m_sound);
 #endif
 }
 
 void Sound::Release()
 {
 #ifndef UNITTEST
-	sound->release();
+	m_sound->release();
 #endif
 }
 
 void Sound::Play()
 {
 #ifndef UNITTEST
-	system->playSound(FMOD_CHANNEL_FREE, sound, false, &channel);
+	m_system->playSound(FMOD_CHANNEL_FREE, m_sound, false, &m_channel);
 #endif
 }
 
