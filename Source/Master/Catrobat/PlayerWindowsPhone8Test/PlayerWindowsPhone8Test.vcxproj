@@ -136,7 +136,10 @@
     <Image Include="Assets\Tiles\IconicTileSmall.png" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="TestFiles\headerTest.xml" />
+    <Xml Include="testFiles\BroadcastTest.xml" />
+    <Xml Include="testFiles\HeaderTest.xml" />
+    <Xml Include="testFiles\ObjectListTest1.xml" />
+    <Xml Include="testFiles\ObjectListTest2.xml" />
     <Xml Include="WMAppManifest.xml">
       <SubType>Designer</SubType>
     </Xml>

@@ -96,9 +96,16 @@ void XMLParser::parseXML(string xml)
 	doc.parse<0>(test);
 	char *str = doc.first_node()->name();
 
-	m_project = parseProjectHeader(&doc);
-    if (!m_project)
-        throw XMLParserException("Invalid ProjectHeader", SeverityLevel::Severity::SEVERE);
+	try
+	{
+		m_project = parseProjectHeader(&doc);
+	}
+	catch (XMLParserException exception)
+	{
+		if (exception.Level() == SeverityLevel::Severity::SEVERE)
+			throw XMLParserException("Invalid Project Header / " + exception.ErrorMessage(), SeverityLevel::Severity::SEVERE);
+	}
+
 	parseObjectList(&doc, m_project->getObjectList());
 	
 	parseVariableList(&doc, m_project);
@@ -141,7 +148,7 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 #pragma region Project Header Nodes
 	xml_node<> *projectInformationNode = baseNode->first_node("applicationBuildName");
 	if (!projectInformationNode)
-		return NULL;
+		throw XMLParserException ("ApplicationBuildName missing", SeverityLevel::Severity::SEVERE);
 	applicationBuildName = projectInformationNode->value();
 
 	projectInformationNode = baseNode->first_node("applicationBuildNumber");
@@ -1429,4 +1436,14 @@ void XMLParser::SetPendingVariables()
 		it->first->SetVariable(it->first->Parent()->Parent()->Variable(it->second));
 		it->first->SetVariable(m_project->Variable(it->second));
 	}
+}
+
+string XMLParser::Log()
+{
+	return "";
+}
+
+void XMLParser::Error(string message, SeverityLevel::Severity severity)
+{
+
 }

@@ -208,6 +208,7 @@
     <ClInclude Include="WaitBrick.h" />
     <ClInclude Include="WhenScript.h" />
     <ClInclude Include="XMLParser.h" />
+    <ClInclude Include="XMLParserException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseObject.cpp" />
@@ -271,6 +272,7 @@
     <ClCompile Include="WaitBrick.cpp" />
     <ClCompile Include="WhenScript.cpp" />
     <ClCompile Include="XMLParser.cpp" />
+    <ClCompile Include="XMLParserException.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DirectXTK\DirectXTK_WindowsPhone8.vcxproj">

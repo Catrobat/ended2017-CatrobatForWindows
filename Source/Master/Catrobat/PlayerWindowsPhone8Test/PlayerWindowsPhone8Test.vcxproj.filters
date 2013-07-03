@@ -415,7 +415,16 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="WMAppManifest.xml" />
-    <Xml Include="TestFiles\headerTest.xml">
+    <Xml Include="testFiles\HeaderTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\BroadcastTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\ObjectListTest2.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\ObjectListTest1.xml">
       <Filter>TestFiles</Filter>
     </Xml>
   </ItemGroup>
