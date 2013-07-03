@@ -6,6 +6,4 @@ class ScriptHandler
 {
 public:
 	ScriptHandler();
-
-
 };

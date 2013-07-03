@@ -13,6 +13,6 @@ SetYBrick::SetYBrick(string spriteReference, FormulaTree *positionY, Script *par
 void SetYBrick::Execute()
 {
 	float currentX, currentY;
-	m_parent->Parent()->GetPosition(currentX, currentY);
-	m_parent->Parent()->SetPosition(currentX, Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY, m_parent->Parent()));
+	m_parent->GetParent()->GetPosition(currentX, currentY);
+	m_parent->GetParent()->SetPosition(currentX, Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY, m_parent->GetParent()));
 }

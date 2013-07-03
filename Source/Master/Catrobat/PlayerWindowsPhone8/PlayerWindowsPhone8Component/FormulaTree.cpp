@@ -74,7 +74,7 @@ void FormulaTree::SetRightChild(FormulaTree *rightChild)
 	m_rightChild = rightChild;
 }
 
-FormulaTree *FormulaTree::getLeftChild()
+FormulaTree *FormulaTree::GetLeftChild()
 {
     if (this->m_leftChild != NULL)
         return this->m_leftChild;
@@ -82,7 +82,7 @@ FormulaTree *FormulaTree::getLeftChild()
         return NULL;
 }
 
-FormulaTree *FormulaTree::getRightChild()
+FormulaTree *FormulaTree::GetRightChild()
 {
     if (this->m_rightChild != NULL)
         return this->m_rightChild;
@@ -100,12 +100,12 @@ string FormulaTree::Value()
 	return m_value;
 }
 
-Operator FormulaTree::getOperator()
+Operator FormulaTree::GetOperator()
 {
     return this->m_operator;
 }
 
-Function FormulaTree::getFunction()
+Function FormulaTree::GetFunction()
 {
 	return this->m_function;
 }

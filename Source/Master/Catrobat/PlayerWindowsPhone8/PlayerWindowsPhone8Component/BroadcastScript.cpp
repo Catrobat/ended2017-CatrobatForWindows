@@ -10,7 +10,7 @@ BroadcastScript::BroadcastScript(string receivedMessage, string spriteReference,
 	BroadcastMessageDaemon::Instance()->Register(m_broadcastMessageListener);
 }
 
-string BroadcastScript::ReceivedMessage()
+string BroadcastScript::GetReceivedMessage()
 {
 	return m_receivedMessage;
 }

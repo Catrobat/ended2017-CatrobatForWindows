@@ -11,7 +11,7 @@ public:
 
 	void EvaluateMessage(Platform::String ^message);
 
-	string ReceivedMessage();
+	string GetReceivedMessage();
 
 private:
 	string m_receivedMessage;

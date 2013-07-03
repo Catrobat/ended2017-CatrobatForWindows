@@ -36,7 +36,7 @@ namespace PlayerWindowsPhone8Test
 
 			StartScript *script = new StartScript(spriteReference, object);
 			BroadcastScript *broadcastScript = new BroadcastScript(broadcastMessage, spriteReference, object);
-			broadcastScript->addBrick(new SetSizeToBrick(spriteReference, formulaTree, broadcastScript));
+			broadcastScript->AddBrick(new SetSizeToBrick(spriteReference, formulaTree, broadcastScript));
 
 			BroadcastBrick *brick = new BroadcastBrick(spriteReference, broadcastMessage, script);
 
@@ -56,7 +56,7 @@ namespace PlayerWindowsPhone8Test
 
 			StartScript *script = new StartScript(spriteReference, object);
 			BroadcastScript *broadcastScript = new BroadcastScript(expectedMessage, spriteReference, object);
-			broadcastScript->addBrick(new SetSizeToBrick(spriteReference, formulaTree, broadcastScript));
+			broadcastScript->AddBrick(new SetSizeToBrick(spriteReference, formulaTree, broadcastScript));
 
 			BroadcastBrick *brick = new BroadcastBrick(spriteReference, broadcastMessage, script);
 
@@ -77,7 +77,7 @@ namespace PlayerWindowsPhone8Test
 
 			StartScript *script = new StartScript(spriteReference, object1);
 			BroadcastScript *broadcastScript = new BroadcastScript(broadcastMessage, spriteReference, object2);
-			broadcastScript->addBrick(new SetSizeToBrick(spriteReference, formulaTree, broadcastScript));
+			broadcastScript->AddBrick(new SetSizeToBrick(spriteReference, formulaTree, broadcastScript));
 
 			BroadcastBrick *brick = new BroadcastBrick(spriteReference, broadcastMessage, script);
 
@@ -98,7 +98,7 @@ namespace PlayerWindowsPhone8Test
 
 			StartScript *script = new StartScript(spriteReference, object1);
 			BroadcastScript *broadcastScript = new BroadcastScript(expectedMessage, spriteReference, object2);
-			broadcastScript->addBrick(new SetSizeToBrick(spriteReference, formulaTree, broadcastScript));
+			broadcastScript->AddBrick(new SetSizeToBrick(spriteReference, formulaTree, broadcastScript));
 
 			BroadcastBrick *brick = new BroadcastBrick(spriteReference, broadcastMessage, script);
 
@@ -122,7 +122,7 @@ namespace PlayerWindowsPhone8Test
 
 			StartScript *script = new StartScript(spriteReference, object1);
 			BroadcastScript *broadcastScript = new BroadcastScript(expectedMessage, spriteReference, object2);
-			broadcastScript->addBrick(new SetSizeToBrick(spriteReference, formulaTree, broadcastScript));
+			broadcastScript->AddBrick(new SetSizeToBrick(spriteReference, formulaTree, broadcastScript));
 
 			BroadcastBrick *brick = new BroadcastBrick(spriteReference, broadcastMessageFalse, script);
 
@@ -142,7 +142,7 @@ namespace PlayerWindowsPhone8Test
 
 			formulaTree = new FormulaTree("NUMBER", "8");
 			BroadcastScript *broadcastScript2 = new BroadcastScript(expectedMessage2, spriteReference, object1);
-			broadcastScript2->addBrick(new SetSizeToBrick(spriteReference, formulaTree, broadcastScript));
+			broadcastScript2->AddBrick(new SetSizeToBrick(spriteReference, formulaTree, broadcastScript));
 
 			brick = new BroadcastBrick(spriteReference, broadcastMessageValid, script);
 
@@ -161,7 +161,7 @@ namespace PlayerWindowsPhone8Test
             StartScript *script = new StartScript(spriteReference, object);
 
             ForeverBrick *brick = new ForeverBrick(spriteReference, script);
-            script->addBrick(brick);
+            script->AddBrick(brick);
             SetSizeToBrick *setSizeBrick = new SetSizeToBrick(spriteReference, formulaTree, script);
             brick->AddBrick(setSizeBrick);
 
@@ -445,11 +445,11 @@ namespace PlayerWindowsPhone8Test
             StartScript *script = new StartScript(spriteReference, object);
 
             WaitBrick *brick = new WaitBrick(spriteReference, formulaTree, script);
-            script->addBrick(brick);
+            script->AddBrick(brick);
 
             formulaTree = new FormulaTree("NUMBER", "40");
             SetSizeToBrick *setSizeBrick = new SetSizeToBrick(spriteReference, formulaTree, script);
-            script->addBrick(setSizeBrick);
+            script->AddBrick(setSizeBrick);
             
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
             script->Execute();
@@ -474,11 +474,11 @@ namespace PlayerWindowsPhone8Test
             StartScript *script = new StartScript(spriteReference, object);
 
             WaitBrick *brick = new WaitBrick(spriteReference, formulaTree, script);
-            script->addBrick(brick);
+            script->AddBrick(brick);
 
             formulaTree = new FormulaTree("NUMBER", "40");
             SetSizeToBrick *setSizeBrick = new SetSizeToBrick(spriteReference, formulaTree, script);
-            script->addBrick(setSizeBrick);
+            script->AddBrick(setSizeBrick);
             
             Assert::IsTrue(TestHelper::isEqual(object->GetScale(), 100.0f));
             script->Execute();

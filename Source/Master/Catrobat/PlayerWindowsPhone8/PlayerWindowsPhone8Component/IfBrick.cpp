@@ -23,7 +23,7 @@ IfBrick::~IfBrick(void)
 void IfBrick::Execute()
 {
 	// Synchronously execute all subsequent blocks
-	if (Interpreter::Instance()->EvaluateFormulaToBool(m_condition, Parent()->Parent()))
+	if (Interpreter::Instance()->EvaluateFormulaToBool(m_condition, GetParent()->GetParent()))
 	{
 		for (unsigned int i = 0; i < m_ifList->size(); i++)
 		{

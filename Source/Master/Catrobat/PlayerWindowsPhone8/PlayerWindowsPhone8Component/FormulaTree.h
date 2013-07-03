@@ -50,15 +50,15 @@ public:
 	void SetLeftChild(FormulaTree *leftChild);
 	void SetRightChild(FormulaTree *rightChild);
 	Type GetType();
-    FormulaTree *getLeftChild();
-    FormulaTree *getRightChild();
+    FormulaTree *GetLeftChild();
+    FormulaTree *GetRightChild();
 	std::string Value();
 
     //returns Operator if m_type is set to OPERATOR, instead NO_OPERATOR
-    Operator getOperator();
+    Operator GetOperator();
 
 	//returns Function if m_type is set to FUNCTION, instead NO_FUNCTION
-	Function getFunction();
+	Function GetFunction();
 
 private:
 	FormulaTree *m_rightChild;

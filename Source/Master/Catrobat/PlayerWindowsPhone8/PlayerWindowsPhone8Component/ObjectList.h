@@ -12,10 +12,10 @@ public:
 	ObjectList();
 	~ObjectList();
 
-	void addObject(Object *object);
-	int Size();
-	Object *getObject(int index);
-	Object *getObject(string name);
+	void AddObject(Object *object);
+	int GetSize();
+	Object *GetObject(int index);
+	Object *GetObject(string name);
 
 private:
 	list<Object*> *m_objects;

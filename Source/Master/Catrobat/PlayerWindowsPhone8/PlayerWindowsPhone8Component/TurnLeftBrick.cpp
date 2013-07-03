@@ -12,5 +12,5 @@ TurnLeftBrick::TurnLeftBrick(string spriteReference, FormulaTree *rotation, Scri
 
 void TurnLeftBrick::Execute()
 {
-	m_parent->Parent()->SetRotation(m_parent->Parent()->GetRotation() - Interpreter::Instance()->EvaluateFormulaToFloat(m_rotation, m_parent->Parent()));
+	m_parent->GetParent()->SetRotation(m_parent->GetParent()->GetRotation() - Interpreter::Instance()->EvaluateFormulaToFloat(m_rotation, m_parent->GetParent()));
 }

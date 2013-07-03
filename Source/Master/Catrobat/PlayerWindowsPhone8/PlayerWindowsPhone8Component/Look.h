@@ -15,13 +15,13 @@ public:
 	~Look();
 
 	void LoadTexture(ID3D11Device* d3dDevice);
-	ID3D11ShaderResourceView *Texture();
+	ID3D11ShaderResourceView *GetTexture();
 
-	string FileName();
-	string Name();
+	string GetFileName();
+	string GetName();
 
-	unsigned int Width();
-	unsigned int Height();
+	unsigned int GetWidth();
+	unsigned int GetHeight();
 
 private:
 	CatrobatTexture *m_texture;

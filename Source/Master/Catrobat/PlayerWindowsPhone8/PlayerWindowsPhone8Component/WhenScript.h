@@ -8,10 +8,10 @@ public:
 	{
 		Tapped
 	};
+
 	WhenScript(string action, string spriteReference, Object *parent);
 	~WhenScript();
-
-	int getAction();
+	int GetAction();
 
 private:
 	int m_action;

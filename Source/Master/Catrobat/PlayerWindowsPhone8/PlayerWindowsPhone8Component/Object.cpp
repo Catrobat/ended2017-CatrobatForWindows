@@ -15,37 +15,37 @@ Object::Object(string name) :
 	m_variableList = new map<string, UserVariable*>();
 }
 
-void Object::addLook(Look *lookData)
+void Object::AddLook(Look *lookData)
 {
 	m_lookList->push_back(lookData);
 }
 
-void Object::addScript(Script *script)
+void Object::AddScript(Script *script)
 {
 	m_scripts->push_back(script);
 }
 
-void Object::addSoundInfo(SoundInfo *soundInfo)
+void Object::AddSoundInfo(SoundInfo *soundInfo)
 {
 	m_soundInfos->push_back(soundInfo);
 }
 
-string Object::getName()
+string Object::GetName()
 {
 	return m_name;
 }
 
-int Object::ScriptListSize()
+int Object::GetScriptListSize()
 {
 	return m_scripts->size();
 }
 
-int Object::LookDataListSize()
+int Object::GetLookDataListSize()
 {
 	return m_lookList->size();
 }
 
-Look *Object::getLook(int index)
+Look *Object::GetLook(int index)
 {
 	list<Look*>::iterator it = m_lookList->begin();
 	advance(it, index);
@@ -54,7 +54,7 @@ Look *Object::getLook(int index)
 	return NULL;
 }
 
-Script *Object::getScript(int index)
+Script *Object::GetScript(int index)
 {
 	list<Script*>::iterator it = m_scripts->begin();
 	advance(it, index);
@@ -66,9 +66,9 @@ void Object::LoadTextures(ID3D11Device* d3dDevice)
 	m_position.x = 0;
 	m_position.y = 0;
 
-	for (int i = 0; i < LookDataListSize(); i++)
+	for (int i = 0; i < GetLookDataListSize(); i++)
 	{
-		getLook(i)->LoadTexture(d3dDevice);
+		GetLook(i)->LoadTexture(d3dDevice);
 	}
 }
 
@@ -85,16 +85,16 @@ void Object::Draw(SpriteBatch *spriteBatch)
 	}
 
 	XMFLOAT2 position;
-	position.x = ProjectDaemon::Instance()->GetProject()->ScreenWidth() / 2 + m_position.x;
-	position.y = ProjectDaemon::Instance()->GetProject()->ScreenHeight() / 2 + m_position.y;
+	position.x = ProjectDaemon::Instance()->GetProject()->GetScreenWidth() / 2 + m_position.x;
+	position.y = ProjectDaemon::Instance()->GetProject()->GetScreenHeight() / 2 + m_position.y;
 
 	if (m_look != NULL)
-		spriteBatch->Draw(m_look->Texture(), position, nullptr, Colors::White * m_opacity, (float) radians(m_rotation), XMFLOAT2(((float) m_look->Width()) / 2.0f, ((float) m_look->Height()) / 2.0f), m_objectScale, SpriteEffects_None, 0.0f);
+		spriteBatch->Draw(m_look->GetTexture(), position, nullptr, Colors::White * m_opacity, (float) radians(m_rotation), XMFLOAT2(((float) m_look->GetWidth()) / 2.0f, ((float) m_look->GetHeight()) / 2.0f), m_objectScale, SpriteEffects_None, 0.0f);
 }
 
 void Object::SetLook(int index)
 {
-	m_look = getLook(index);
+	m_look = GetLook(index);
 }
 
 int Object::GetLook()
@@ -125,31 +125,31 @@ int Object::GetLookCount()
 Look* Object::GetCurrentLook()
 {
 	if (!m_look)
-		return getLook(0);
+		return GetLook(0);
 	return m_look;
 }
 
-Bounds Object::getBounds()
+Bounds Object::GetBounds()
 {
 	Bounds bounds;
 	bounds.x = 0;
 	bounds.y = 0;
 	if (GetCurrentLook())
 	{
-		bounds.x = m_position.x - GetCurrentLook()->Width() / 2;
-		bounds.y = m_position.y - GetCurrentLook()->Height() / 2;
+		bounds.x = m_position.x - GetCurrentLook()->GetWidth() / 2;
+		bounds.y = m_position.y - GetCurrentLook()->GetHeight() / 2;
 	}
-	bounds.width = (GetCurrentLook() != NULL) ? (float) GetCurrentLook()->Width() : 0.0f;
-	bounds.height = (GetCurrentLook() != NULL) ? (float) GetCurrentLook()->Height() : 0.0f;
+	bounds.width = (GetCurrentLook() != NULL) ? (float) GetCurrentLook()->GetWidth() : 0.0f;
+	bounds.height = (GetCurrentLook() != NULL) ? (float) GetCurrentLook()->GetHeight() : 0.0f;
 	return bounds;
 }
 
 void Object::StartUp()
 {
-	for (int i = 0; i < ScriptListSize(); i++)
+	for (int i = 0; i < GetScriptListSize(); i++)
 	{
-		Script *script = getScript(i);
-		if (script->getType() == Script::TypeOfScript::StartScript)
+		Script *script = GetScript(i);
+		if (script->GetType() == Script::TypeOfScript::StartScript)
 			script->Execute();
 	}
 }
@@ -212,17 +212,17 @@ float Object::GetScale()
 	return m_objectScale.x * 100;
 }
 
-void Object::addVariable(string name, UserVariable* variable)
+void Object::AddVariable(string name, UserVariable* variable)
 {
 	m_variableList->insert(pair<string, UserVariable*>(name, variable));
 }
 
-void Object::addVariable(pair<string, UserVariable*> variable)
+void Object::AddVariable(pair<string, UserVariable*> variable)
 {
 	m_variableList->insert(variable);
 }
 
-UserVariable* Object::Variable(string name)
+UserVariable* Object::GetVariable(string name)
 {
 	map<string, UserVariable*>::iterator searchItem = m_variableList->find(name);
 	if (searchItem != m_variableList->end())

@@ -8,8 +8,8 @@ public:
 	UserVariable(std::string name, std::string value);
 	UserVariable(std::pair<std::string, std::string> variable);
 
-	std::string Name();
-	std::string Value();
+	std::string GetName();
+	std::string GetValue();
 	void SetValue(std::string value);
 
 private:

@@ -31,9 +31,9 @@ namespace PlayerWindowsPhone8Test
             SetVariableBrick *brick = new SetVariableBrick(spriteReference, formulaTree, script);
             brick->SetVariable(variable);
 
-            Assert::AreEqual(atoi(variable->Value().c_str()), 5);
+            Assert::AreEqual(atoi(variable->GetValue().c_str()), 5);
             brick->Execute();
-            Assert::AreEqual(atoi(variable->Value().c_str()), 10);
+            Assert::AreEqual(atoi(variable->GetValue().c_str()), 10);
 		}
 
         TEST_METHOD(VariableBricks_SetVariableBrick_NegativCheck)
@@ -49,9 +49,9 @@ namespace PlayerWindowsPhone8Test
             SetVariableBrick *brick = new SetVariableBrick(spriteReference, formulaTree, script);
             brick->SetVariable(variable);
 
-            Assert::AreEqual(atoi(variable->Value().c_str()), 5);
+            Assert::AreEqual(atoi(variable->GetValue().c_str()), 5);
             brick->Execute();
-            Assert::AreEqual(atoi(variable->Value().c_str()), -20);
+            Assert::AreEqual(atoi(variable->GetValue().c_str()), -20);
 		}
 
         TEST_METHOD(VariableBricks_ChangeVariableBrick_SimpleCheck)
@@ -67,9 +67,9 @@ namespace PlayerWindowsPhone8Test
             ChangeVariableBrick *brick = new ChangeVariableBrick(spriteReference, formulaTree, script);
             brick->SetVariable(variable);
 
-            Assert::AreEqual(atoi(variable->Value().c_str()), 5);
+            Assert::AreEqual(atoi(variable->GetValue().c_str()), 5);
             brick->Execute();
-            Assert::AreEqual(atoi(variable->Value().c_str()), 15);
+            Assert::AreEqual(atoi(variable->GetValue().c_str()), 15);
 		}
 
         TEST_METHOD(VariableBricks_ChangeVariableBrick_NegativCheck)
@@ -85,9 +85,9 @@ namespace PlayerWindowsPhone8Test
             ChangeVariableBrick *brick = new ChangeVariableBrick(spriteReference, formulaTree, script);
             brick->SetVariable(variable);
 
-            Assert::AreEqual(atoi(variable->Value().c_str()), 5);
+            Assert::AreEqual(atoi(variable->GetValue().c_str()), 5);
             brick->Execute();
-            Assert::AreEqual(atoi(variable->Value().c_str()), -15);
+            Assert::AreEqual(atoi(variable->GetValue().c_str()), -15);
 		}
 	};
 }

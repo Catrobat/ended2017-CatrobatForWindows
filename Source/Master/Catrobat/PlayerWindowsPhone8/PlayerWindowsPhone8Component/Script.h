@@ -18,19 +18,19 @@ public:
 		WhenScript
 	};
 
-	Object *Parent();
+	Object *GetParent();
 
-	void addBrick(Brick *brick);
-	void addSpriteReference(string spriteReference);
+	void AddBrick(Brick *brick);
+	void AddSpriteReference(string spriteReference);
 
 	void Execute();
 
-	string SpriteReference();
+	string GetSpriteReference();
 
-	int BrickListSize();
+	int GetBrickListSize();
 	Brick *GetBrick(int index);
 
-	TypeOfScript getType();
+	TypeOfScript GetType();
 
 protected:
 	Script(TypeOfScript scriptType, string spriteReference, Object *parent);

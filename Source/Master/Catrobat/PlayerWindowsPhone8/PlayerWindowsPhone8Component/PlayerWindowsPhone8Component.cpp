@@ -56,15 +56,15 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 	if (!ProjectDaemon::Instance()->FinishedLoading())
 		return;
 	Project* project = ProjectDaemon::Instance()->GetProject();
-	ObjectList* objects = project->getObjectList();
-	for (int i = objects->Size() - 1; i >= 0; i--)
+	ObjectList* objects = project->GetObjectList();
+	for (int i = objects->GetSize() - 1; i >= 0; i--)
 	{
 		/*sprites->getSprite(i)->GetCurrentLookData()->Texture()->GetDesc(&data);
 		data.ViewDimension.Value*/
 
-		Bounds bounds = objects->getObject(i)->getBounds();
-		bounds.x += ProjectDaemon::Instance()->GetProject()->ScreenWidth() / 2;
-		bounds.y += ProjectDaemon::Instance()->GetProject()->ScreenHeight() / 2;
+		Bounds bounds = objects->GetObject(i)->GetBounds();
+		bounds.x += ProjectDaemon::Instance()->GetProject()->GetScreenWidth() / 2;
+		bounds.y += ProjectDaemon::Instance()->GetProject()->GetScreenHeight() / 2;
 		//if (args->CurrentPoint GetIntermediatePoints()->Size > 0)
 		{
 			float resolutionScaleFactor;
@@ -83,21 +83,21 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 			float actualX = args->CurrentPoint->Position.X;
 			float actualY = args->CurrentPoint->Position.Y;
 
-			double factorX = abs(ProjectDaemon::Instance()->GetProject()->ScreenWidth() / (m_originalWindowsBounds.X / resolutionScaleFactor));
-			double factorY = abs(ProjectDaemon::Instance()->GetProject()->ScreenHeight() / (m_originalWindowsBounds.Y / resolutionScaleFactor));
+			double factorX = abs(ProjectDaemon::Instance()->GetProject()->GetScreenWidth() / (m_originalWindowsBounds.X / resolutionScaleFactor));
+			double factorY = abs(ProjectDaemon::Instance()->GetProject()->GetScreenHeight() / (m_originalWindowsBounds.Y / resolutionScaleFactor));
 
 			double normalizedX = factorX * actualX;
 			double normalizedY = factorY * actualY;		
 
 			if (bounds.x <= normalizedX && bounds.y <= normalizedY && (bounds.x + bounds.width) >= normalizedX && (bounds.y + bounds.height) >= normalizedY)
 			{
-				for (int j = 0; j < objects->getObject(i)->ScriptListSize(); j++)
+				for (int j = 0; j < objects->GetObject(i)->GetScriptListSize(); j++)
 				{
-					Script *script = objects->getObject(i)->getScript(j);
-					if (script->getType() == Script::TypeOfScript::WhenScript)
+					Script *script = objects->GetObject(i)->GetScript(j);
+					if (script->GetType() == Script::TypeOfScript::WhenScript)
 					{
 						WhenScript *wScript = (WhenScript *) script; 
-						if (wScript->getAction() == WhenScript::Action::Tapped)
+						if (wScript->GetAction() == WhenScript::Action::Tapped)
 						{
 							wScript->Execute();
 						}

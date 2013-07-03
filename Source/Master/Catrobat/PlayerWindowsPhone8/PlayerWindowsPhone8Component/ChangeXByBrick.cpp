@@ -13,6 +13,6 @@ ChangeXByBrick::ChangeXByBrick(string spriteReference, FormulaTree *offsetX, Scr
 void ChangeXByBrick::Execute()
 {
 	float currentX, currentY;
-	m_parent->Parent()->GetPosition(currentX, currentY);
-	m_parent->Parent()->SetPosition(currentX + Interpreter::Instance()->EvaluateFormulaToFloat(m_offsetX, m_parent->Parent()), currentY);
+	m_parent->GetParent()->GetPosition(currentX, currentY);
+	m_parent->GetParent()->SetPosition(currentX + Interpreter::Instance()->EvaluateFormulaToFloat(m_offsetX, m_parent->GetParent()), currentY);
 }

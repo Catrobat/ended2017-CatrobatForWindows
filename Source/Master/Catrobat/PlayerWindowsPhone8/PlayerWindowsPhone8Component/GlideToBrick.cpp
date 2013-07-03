@@ -15,16 +15,16 @@ GlideToBrick::GlideToBrick(string spriteReference, FormulaTree *xDestination, Fo
 
 void GlideToBrick::Execute()
 {
-	float steps = Interpreter::Instance()->EvaluateFormulaToFloat(m_duration, m_parent->Parent()) / 20; // 50 Hz
+	float steps = Interpreter::Instance()->EvaluateFormulaToFloat(m_duration, m_parent->GetParent()) / 20; // 50 Hz
 
-	float x_movement = Interpreter::Instance()->EvaluateFormulaToFloat(m_xDestination, m_parent->Parent()) / steps;
-	float y_movement = Interpreter::Instance()->EvaluateFormulaToFloat(m_yDestination, m_parent->Parent()) / steps;
+	float x_movement = Interpreter::Instance()->EvaluateFormulaToFloat(m_xDestination, m_parent->GetParent()) / steps;
+	float y_movement = Interpreter::Instance()->EvaluateFormulaToFloat(m_yDestination, m_parent->GetParent()) / steps;
 
 	for (int i = 0; i < steps; i++)
 	{
 		float currentX, currentY;
-		m_parent->Parent()->GetPosition(currentX, currentY);
-		m_parent->Parent()->SetPosition(currentX + x_movement, currentY + y_movement);
+		m_parent->GetParent()->GetPosition(currentX, currentY);
+		m_parent->GetParent()->SetPosition(currentX + x_movement, currentY + y_movement);
 
 		Concurrency::wait(20); // 50 Hz
 	}

@@ -12,5 +12,5 @@ PointToBrick::PointToBrick(string spriteReference, FormulaTree *rotation, Script
 
 void PointToBrick::Execute()
 {
-	m_parent->Parent()->SetRotation(Interpreter::Instance()->EvaluateFormulaToFloat(m_rotation, m_parent->Parent()));
+	m_parent->GetParent()->SetRotation(Interpreter::Instance()->EvaluateFormulaToFloat(m_rotation, m_parent->GetParent()));
 }

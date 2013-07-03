@@ -104,7 +104,7 @@ void XMLParser::parseXML(string xml)
         throw XMLParserException("Invalid Project Header");
     }
 
-    parseObjectList(&doc, m_project->getObjectList());
+    parseObjectList(&doc, m_project->GetObjectList());
 
     parseVariableList(&doc, m_project);
     SetPendingVariables();
@@ -283,10 +283,10 @@ void XMLParser::parseObjectList(xml_document<> *doc, ObjectList *objectList)
 
             xml_node<> *nameNode = evaluatedReferenceNode->first_node("name");
             if (nameNode)
-                objectList->addObject(objectList->getObject(nameNode->value()));
+                objectList->AddObject(objectList->GetObject(nameNode->value()));
         }
         else
-            objectList->addObject(parseObject(node));
+            objectList->AddObject(parseObject(node));
         node = node->next_sibling("object");
     }
 }
@@ -308,7 +308,7 @@ Object *XMLParser::parseObject(xml_node<> *baseNode)
             xml_node<> *lookNode = node->first_node("look");
             while (lookNode)
             {
-                object->addLook(parseLook(lookNode));
+                object->AddLook(parseLook(lookNode));
                 lookNode = lookNode->next_sibling("look");
             }
 #pragma endregion
@@ -321,15 +321,15 @@ Object *XMLParser::parseObject(xml_node<> *baseNode)
             {
                 if (strcmp(scriptListNode->name(), "startScript") == 0)
                 {
-                    object->addScript(parseStartScript(scriptListNode, object));
+                    object->AddScript(parseStartScript(scriptListNode, object));
                 }
                 else if (strcmp(scriptListNode->name(), "broadcastScript") == 0)
                 {
-                    object->addScript(parseBroadcastScript(scriptListNode, object));
+                    object->AddScript(parseBroadcastScript(scriptListNode, object));
                 }
                 else if (strcmp(scriptListNode->name(), "whenScript") == 0)
                 {
-                    object->addScript(parseWhenScript(scriptListNode, object));
+                    object->AddScript(parseWhenScript(scriptListNode, object));
                 }
 
                 scriptListNode = scriptListNode->next_sibling();
@@ -346,7 +346,7 @@ Object *XMLParser::parseObject(xml_node<> *baseNode)
                 xml_attribute<> *soundInfoAttribute = soundListNode->first_attribute("reference");
                 if (!soundInfoAttribute)
                     break;
-                object->addSoundInfo(new SoundInfo(soundInfoAttribute->value()));
+                object->AddSoundInfo(new SoundInfo(soundInfoAttribute->value()));
                 soundListNode = soundListNode->next_sibling();
             }
 #pragma endregion
@@ -574,7 +574,7 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
             if (containerStack->size() == 0 || isContainerBrick)
             {
                 // Add to script
-                script->addBrick(current);
+                script->AddBrick(current);
             }
             else
             {
@@ -1344,7 +1344,7 @@ void XMLParser::parseVariableList(xml_document<> *doc, Project *project)
         xml_node<> *nameNode = objectNode->first_node("name");
         if (!nameNode)
             return;
-        Object *object = project->getObjectList()->getObject(nameNode->value());
+        Object *object = project->GetObjectList()->GetObject(nameNode->value());
 
         xml_node<> *listNode = node->first_node("list");
         if (!listNode)
@@ -1352,7 +1352,7 @@ void XMLParser::parseVariableList(xml_document<> *doc, Project *project)
         listNode = listNode->first_node("userVariable");
         while (listNode)
         {
-            object->addVariable(parseUserVariable(listNode));
+            object->AddVariable(parseUserVariable(listNode));
             listNode = listNode->next_sibling("userVariable");
         }
         node = node->next_sibling("entry");
@@ -1364,7 +1364,7 @@ void XMLParser::parseVariableList(xml_document<> *doc, Project *project)
     node = variableListNode->first_node("userVariable");
     while (node)
     {
-        m_project->addVariable(parseUserVariable(node));
+        m_project->AddVariable(parseUserVariable(node));
         node = node->next_sibling("userVariable");
     }
 }
@@ -1433,7 +1433,7 @@ void XMLParser::SetPendingVariables()
 {
     for (map<VariableManagementBrick*, string>::iterator it = m_pendingVariables->begin(); it != m_pendingVariables->end(); it++)
     {
-        it->first->SetVariable(it->first->Parent()->Parent()->Variable(it->second));
-        it->first->SetVariable(m_project->Variable(it->second));
+        it->first->SetVariable(it->first->GetParent()->GetParent()->GetVariable(it->second));
+        it->first->SetVariable(m_project->GetVariable(it->second));
     }
 }

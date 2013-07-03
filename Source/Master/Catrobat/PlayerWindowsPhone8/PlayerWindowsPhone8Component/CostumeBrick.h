@@ -8,7 +8,7 @@ public:
 	CostumeBrick(string spriteReference, Script *parent);
 
 	void Execute();
-	int Index();
+	int GetIndex();
 private:
 	string m_costumeDataReference;
 	int m_index;
