@@ -18,15 +18,15 @@ public:
 	~IfBrick(void);
 
 	void Execute();
-	void addIfBrick(Brick *brick);
-	void addElseBrick(Brick *brick);
-	void addBrick(Brick *brick);
-	void setCurrentAddMode(IfBranchType mode);
+	void AddIfBrick(Brick *brick);
+	void AddElseBrick(Brick *brick);
+	void AddBrick(Brick *brick);
+	void SetCurrentAddMode(IfBranchType mode);
 private:
 	list<Brick*> *m_ifList;
 	list<Brick*> *m_elseList;
 	FormulaTree *m_condition;
-	IfBranchType currentAddMode;
+	IfBranchType m_currentAddMode;
 
 	Brick *GetIfBrick(int index);
 	Brick *GetElseBrick(int index);

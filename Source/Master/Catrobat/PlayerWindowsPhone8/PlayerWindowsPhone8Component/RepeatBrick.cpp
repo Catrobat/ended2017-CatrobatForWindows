@@ -32,7 +32,7 @@ void RepeatBrick::Execute()
 	}
 }
 
-void RepeatBrick::addBrick(Brick *brick)
+void RepeatBrick::AddBrick(Brick *brick)
 {
 	m_brickList->push_back(brick);
 }

@@ -577,7 +577,7 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
             else
             {
                 // Add to If-Brick
-                containerStack->back()->addBrick(current);
+                containerStack->back()->AddBrick(current);
             }
         }
 
@@ -751,7 +751,7 @@ void XMLParser::parseIfLogicElseBrick(xml_node<> *baseNode, Script *script)
     if (containerStack->size() > 0)
     {
         // Change mode
-        ((IfBrick*) (containerStack->back()))->setCurrentAddMode(IfBranchType::Else);
+        ((IfBrick*) (containerStack->back()))->SetCurrentAddMode(IfBranchType::Else);
     }
 }
 

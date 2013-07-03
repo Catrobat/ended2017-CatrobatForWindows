@@ -1,5 +1,5 @@
 #pragma once
-#include "brick.h"
+#include "Brick.h"
 class ShowBrick :
 	public Brick
 {

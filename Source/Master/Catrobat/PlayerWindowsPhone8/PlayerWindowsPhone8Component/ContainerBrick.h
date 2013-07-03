@@ -11,7 +11,7 @@ public:
 	ContainerBrick(TypeOfBrick brickType, string objectReference, Script *parent);
 
 	virtual void Execute() = 0;
-	virtual void addBrick(Brick *brick) = 0;
+	virtual void AddBrick(Brick *brick) = 0;
 private:
 };
 

@@ -1,6 +1,5 @@
 #pragma once
-
-#include "variablemanagementbrick.h"
+#include "VariableManagementBrick.h"
 
 class ChangeVariableBrick
 	: public VariableManagementBrick
@@ -8,6 +7,5 @@ class ChangeVariableBrick
 public:
 	ChangeVariableBrick(string objectReference, FormulaTree *variableFormula, Script *parent);
 	void Execute();
-
 };
 

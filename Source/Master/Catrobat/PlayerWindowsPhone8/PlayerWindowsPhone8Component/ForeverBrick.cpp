@@ -29,7 +29,7 @@ void ForeverBrick::Execute()
 	}
 }
 
-void ForeverBrick::addBrick(Brick *brick)
+void ForeverBrick::AddBrick(Brick *brick)
 {
 	m_brickList->push_back(brick);
 }
