@@ -168,6 +168,7 @@
     <ClInclude Include="ForeverBrick.h" />
     <ClInclude Include="FormulaTree.h" />
     <ClInclude Include="GlideToBrick.h" />
+    <ClInclude Include="Helper.h" />
     <ClInclude Include="HideBrick.h" />
     <ClInclude Include="IfBrick.h" />
     <ClInclude Include="Interpreter.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="ForeverBrick.cpp" />
     <ClCompile Include="FormulaTree.cpp" />
     <ClCompile Include="GlideToBrick.cpp" />
+    <ClCompile Include="Helper.cpp" />
     <ClCompile Include="HideBrick.cpp" />
     <ClCompile Include="IfBrick.cpp" />
     <ClCompile Include="Interpreter.cpp" />

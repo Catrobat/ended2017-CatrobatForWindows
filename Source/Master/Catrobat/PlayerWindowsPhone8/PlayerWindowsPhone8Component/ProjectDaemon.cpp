@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ProjectDaemon.h"
 #include "XMLParser.h"
+#include "Helper.h"
 
 #include <ppltasks.h>
 
@@ -92,10 +93,7 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 			{
 				auto folderContent = operation->GetResults();
                 // TODO: Check safety
-				Platform::String^ path = folderContent->Path;
-				wstring tempPath(path->Begin());
-				string pathString(tempPath.begin(), tempPath.end());
-				m_projectPath = pathString;
+                m_projectPath = Helper::ConvertPlatformStringToString(folderContent->Path);
 
 				IAsyncOperation<Windows::Storage::StorageFile^>^ getFiles = folderContent->GetFileAsync("code.xml");
 				getFiles->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFile^>
@@ -106,9 +104,7 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 						{
 							// Get the Path 
 							auto projectCode = operation->GetResults();
-							Platform::String^ path = projectCode->Path;
-							wstring tempPath(path->Begin());
-							string pathString(tempPath.begin(), tempPath.end());
+                            string pathString = Helper::ConvertPlatformStringToString(projectCode->Path);
 
 							// Create and load XML
 							XMLParser *xml = new XMLParser();
@@ -184,10 +180,7 @@ void ProjectDaemon::SetError(ProjectDaemon::Error error)
 
 void ProjectDaemon::AddDebug(Platform::String^ info)
 {
-    std::wstring fooW(info->Begin());
-    std::string fooA(fooW.begin(), fooW.end());
-	m_errorList->push_back(fooA);
-
+    m_errorList->push_back(Helper::ConvertPlatformStringToString(info));
 }
 
 std::vector<std::string> *ProjectDaemon::ErrorList()

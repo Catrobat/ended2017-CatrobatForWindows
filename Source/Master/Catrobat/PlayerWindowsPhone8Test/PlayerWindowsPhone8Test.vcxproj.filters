@@ -230,6 +230,7 @@
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserException.cpp">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Helper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -414,6 +415,7 @@
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserException.h">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Helper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TestApp.dll" />
