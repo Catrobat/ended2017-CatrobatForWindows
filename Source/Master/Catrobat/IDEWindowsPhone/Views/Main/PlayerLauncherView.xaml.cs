@@ -72,7 +72,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
             m_d3dBackground.RenderResolution = m_d3dBackground.NativeResolution;
 
             // Set ProjectName to load
-            var projectName = string.Empty;
+            var projectName = "";
             if (NavigationContext.QueryString.TryGetValue("ProjectName", out projectName))
             m_d3dBackground.ProjectName = projectName;
 

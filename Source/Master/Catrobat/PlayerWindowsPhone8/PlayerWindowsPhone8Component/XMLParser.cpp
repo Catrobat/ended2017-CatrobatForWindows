@@ -31,7 +31,6 @@
 #include "TurnLeftBrick.h"
 #include "TurnRightBrick.h"
 #include "PlaySoundBrick.h"
-#include "XMLParserException.h"
 
 #include <time.h>
 #include <iostream>
@@ -91,9 +90,8 @@ void XMLParser::parseXML(string xml)
     // TODO: WE NEED ERROR HANDLING!
 
     xml_document<> doc;
-    char *test = (char*) xml.c_str();
-    doc.parse<0>(test);
-    char *str = doc.first_node()->name();
+    char *temp = (char*) xml.c_str();
+    doc.parse<0>(temp);
 
     try
     {
@@ -241,7 +239,8 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 
 #pragma endregion
 
-    return new Project(	applicationBuildName, 
+    return new Project(
+        applicationBuildName, 
         applicationBuildNumber, 
         applicationName, 
         applicationVersion, 
@@ -271,6 +270,7 @@ void XMLParser::parseObjectList(xml_document<> *doc, ObjectList *objectList)
     xml_node<> *node = objectListNode->first_node("object");
     while (node)
     {
+        // TODO: Check if necessary
 
         xml_attribute<> *objectReference = node->first_attribute("reference");
         if (objectReference)
@@ -337,6 +337,7 @@ Object *XMLParser::parseObject(xml_node<> *baseNode)
         else if (strcmp(node->name(), "soundList") == 0)
         {
 #pragma region soundList
+            // TODO : Check if right
             xml_node<> *soundListNode = node->first_node();
             while (soundListNode)
             {
@@ -1430,7 +1431,6 @@ void XMLParser::SetPendingVariables()
 {
     for (map<VariableManagementBrick*, string>::iterator it = m_pendingVariables->begin(); it != m_pendingVariables->end(); it++)
     {
-
         it->first->SetVariable(it->first->Parent()->Parent()->Variable(it->second));
         it->first->SetVariable(m_project->Variable(it->second));
     }

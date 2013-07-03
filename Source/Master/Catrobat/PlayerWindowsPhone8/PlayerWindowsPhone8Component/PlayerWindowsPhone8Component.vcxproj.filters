@@ -178,10 +178,10 @@
     <ClCompile Include="TextureDaemon.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="XMLParserException.cpp">
+    <ClCompile Include="BaseException.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
-    <ClCompile Include="BaseException.cpp">
+    <ClCompile Include="XMLParserException.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -369,10 +369,10 @@
     <ClInclude Include="TextureDaemon.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="XMLParserException.h">
+    <ClInclude Include="BaseException.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
-    <ClInclude Include="BaseException.h">
+    <ClInclude Include="XMLParserException.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
   </ItemGroup>

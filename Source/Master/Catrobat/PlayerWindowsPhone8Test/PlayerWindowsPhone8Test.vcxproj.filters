@@ -224,6 +224,9 @@
     <ClCompile Include="LogicOperations.cpp">
       <Filter>FormulaTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserException.cpp">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClCompile>
@@ -405,6 +408,9 @@
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClInclude>
     <ClInclude Include="TestHelper.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserException.h">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClInclude>
