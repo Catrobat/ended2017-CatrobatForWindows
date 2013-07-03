@@ -25,11 +25,9 @@ public:
 
 	Project*					getProject();
 	bool						loadXML(string fileName);
-	std::string					Log();
 
 private:
 	Project*					m_project;
-	std::string					m_log;
 
 	// Parser
 	vector<ContainerBrick*> *containerStack;	
@@ -89,5 +87,4 @@ private:
 	bool						parseBoolean					(std::string input);
 	std::vector<std::string>*	parseVector						(std::string input);
 	time_t						parseDateTime					(std::string input);
-	void						Error							(std::string message, SeverityLevel::Severity severity);
 };

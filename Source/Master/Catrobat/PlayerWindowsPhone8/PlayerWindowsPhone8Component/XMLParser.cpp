@@ -73,8 +73,7 @@ bool XMLParser::loadXML(string fileName)
     }
     catch(XMLParserException exception)
     {
-        if (exception.Level() == SeverityLevel::Severity::SEVERE)
-			return false;
+		return false;
     }
 
 
@@ -102,8 +101,7 @@ void XMLParser::parseXML(string xml)
 	}
 	catch (XMLParserException exception)
 	{
-		if (exception.Level() == SeverityLevel::Severity::SEVERE)
-			throw XMLParserException("Invalid Project Header / " + exception.ErrorMessage(), SeverityLevel::Severity::SEVERE);
+		throw XMLParserException("Invalid Project Header");
 	}
 
 	parseObjectList(&doc, m_project->getObjectList());
@@ -148,7 +146,7 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 #pragma region Project Header Nodes
 	xml_node<> *projectInformationNode = baseNode->first_node("applicationBuildName");
 	if (!projectInformationNode)
-		throw XMLParserException ("ApplicationBuildName missing", SeverityLevel::Severity::SEVERE);
+		throw XMLParserException ("ApplicationBuildName missing");
 	applicationBuildName = projectInformationNode->value();
 
 	projectInformationNode = baseNode->first_node("applicationBuildNumber");
@@ -1436,14 +1434,4 @@ void XMLParser::SetPendingVariables()
 		it->first->SetVariable(it->first->Parent()->Parent()->Variable(it->second));
 		it->first->SetVariable(m_project->Variable(it->second));
 	}
-}
-
-string XMLParser::Log()
-{
-	return "";
-}
-
-void XMLParser::Error(string message, SeverityLevel::Severity severity)
-{
-
 }

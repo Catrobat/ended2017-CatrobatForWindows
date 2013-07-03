@@ -147,6 +147,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseException.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="BasicTimer.h" />
     <ClInclude Include="Brick.h" />
@@ -211,6 +212,7 @@
     <ClInclude Include="XMLParserException.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseException.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="BroadcastBrick.cpp" />
