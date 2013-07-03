@@ -46,41 +46,6 @@ Project *ProjectDaemon::getProject()
 	return m_project;
 }
 
-// For Debug only
-void ProjectDaemon::InitializeProjectList()
-{
-	//m_projectList = new vector<Platform::String^>();
-	//auto getRootFolder = Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderFromPathAsync(Windows::Storage::ApplicationData::Current->LocalFolder->Path);
-	//getRootFolder->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFolder^>
-	//( 
-	//	[this](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFolder^>^ operation, Windows::Foundation::AsyncStatus status) 
-	//	{    
-	//		if(status == Windows::Foundation::AsyncStatus::Completed) 
-	//		{        
-	//			auto rootFolderContent = operation->GetResults();        
-	//			IAsyncOperation<Windows::Foundation::Collections::IVectorView< Windows::Storage::StorageFolder^>^>^ getRootFolderContent = rootFolderContent->GetFoldersAsync();        
-	//			getRootFolderContent->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFolder^>^>
-	//			(         
-	//				[this](Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFolder^>^>^ operation, Windows::Foundation::AsyncStatus status) 
-	//				{            
-	//					if( status == Windows::Foundation::AsyncStatus::Completed ) 
-	//					{                
-	//						auto folderList = operation->GetResults();                
-	//						for(unsigned int index = 0; index < folderList->Size; ++index) 
-	//						{                    
-	//							Platform::String^ folderName = folderList->GetAt(index)->Name; 
-	//							wstring tempName(folderName->Begin());
-	//							string folderNameString(tempName.begin(), tempName.end());
-	//							m_projectList->push_back(folderName);
-	//						}            
-	//					}        
-	//				}
-	//			);    
-	//		}
-	//	}
-	//);
-}
-
 void ProjectDaemon::OpenProject(Platform::String^ projectName)
 {
 	m_files = new vector<Platform::String^>();

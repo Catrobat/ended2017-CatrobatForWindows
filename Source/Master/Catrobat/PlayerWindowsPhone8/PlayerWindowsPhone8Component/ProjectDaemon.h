@@ -25,7 +25,6 @@ public:
 	std::vector<Platform::String ^> *ProjectList();
 	std::vector<Platform::String ^> *FileList();
 
-	void InitializeProjectList();
 	void OpenProject(Platform::String^ projectName);
 	bool FinishedLoading();
 
