@@ -59,8 +59,6 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 	ObjectList* objects = project->getObjectList();
 	for (int i = objects->Size() - 1; i >= 0; i--)
 	{
-		D3D11_SHADER_RESOURCE_VIEW_DESC data;
-
 		/*sprites->getSprite(i)->GetCurrentLookData()->Texture()->GetDesc(&data);
 		data.ViewDimension.Value*/
 
@@ -82,14 +80,14 @@ void Direct3DBackground::OnPointerPressed(DrawingSurfaceManipulationHost^ sender
 					break;
 			}
 
-			int actualX = args->CurrentPoint->Position.X;
-			int actualY = args->CurrentPoint->Position.Y;
+			float actualX = args->CurrentPoint->Position.X;
+			float actualY = args->CurrentPoint->Position.Y;
 
 			double factorX = abs(ProjectDaemon::Instance()->getProject()->ScreenWidth() / (m_originalWindowsBounds.X / resolutionScaleFactor));
 			double factorY = abs(ProjectDaemon::Instance()->getProject()->ScreenHeight() / (m_originalWindowsBounds.Y / resolutionScaleFactor));
 
-			int normalizedX = factorX * actualX;
-			int normalizedY = factorY * actualY;		
+			double normalizedX = factorX * actualX;
+			double normalizedY = factorY * actualY;		
 
 			if (bounds.x <= normalizedX && bounds.y <= normalizedY && (bounds.x + bounds.width) >= normalizedX && (bounds.y + bounds.height) >= normalizedY)
 			{

@@ -89,7 +89,7 @@ void Object::Draw(SpriteBatch *spriteBatch)
 	position.y = ProjectDaemon::Instance()->getProject()->ScreenHeight() / 2 + m_position.y;
 
 	if (m_look != NULL)
-		spriteBatch->Draw(m_look->Texture(), position, nullptr, Colors::White * m_opacity, radians(m_rotation), XMFLOAT2(m_look->Width() / 2, m_look->Height() / 2), m_objectScale, SpriteEffects_None, 0.0f);
+		spriteBatch->Draw(m_look->Texture(), position, nullptr, Colors::White * m_opacity, (float) radians(m_rotation), XMFLOAT2(((float) m_look->Width()) / 2.0f, ((float) m_look->Height()) / 2.0f), m_objectScale, SpriteEffects_None, 0.0f);
 }
 
 void Object::SetLook(int index)
@@ -139,8 +139,8 @@ Bounds Object::getBounds()
 		bounds.x = m_position.x - GetCurrentLook()->Width() / 2;
 		bounds.y = m_position.y - GetCurrentLook()->Height() / 2;
 	}
-	bounds.width = (GetCurrentLook() != NULL) ? GetCurrentLook()->Width() : 0;
-	bounds.height = (GetCurrentLook() != NULL) ? GetCurrentLook()->Height() : 0;
+	bounds.width = (GetCurrentLook() != NULL) ? (float) GetCurrentLook()->Width() : 0.0f;
+	bounds.height = (GetCurrentLook() != NULL) ? (float) GetCurrentLook()->Height() : 0.0f;
 	return bounds;
 }
 

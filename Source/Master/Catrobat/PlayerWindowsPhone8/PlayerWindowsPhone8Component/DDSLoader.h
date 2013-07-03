@@ -22,7 +22,7 @@
 #define DDPF_GMASK     0x0000FF00
 #define DDPF_BMASK     0x000000FF
 
-static class DDSLoader
+class DDSLoader
 {
 public:
 

@@ -155,8 +155,8 @@ void ProjectDaemon::SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRende
 
 void ProjectDaemon::ApplyDesiredRenderTargetSizeFromProject()
 {
-	m_desiredRenderTargetSize->width = m_project->ScreenWidth();
-	m_desiredRenderTargetSize->height = m_project->ScreenHeight();
+	m_desiredRenderTargetSize->width = (float) m_project->ScreenWidth();
+	m_desiredRenderTargetSize->height = (float) m_project->ScreenHeight();
 }
 
 void ProjectDaemon::SetupRenderer(ID3D11Device1 *device, ProjectRenderer^ renderer)

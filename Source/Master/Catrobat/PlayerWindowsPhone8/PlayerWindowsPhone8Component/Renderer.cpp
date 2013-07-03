@@ -32,12 +32,12 @@ void Renderer::Update(float timeTotal, float timeDelta)
 
 void Renderer::Render()
 {
-	static bool init_hack = false;
-	if (!init_hack)
+	static bool __init_hack = false;
+	if (!__init_hack)
 	{
 		m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_d3dContext.Get()));
 		m_spriteFont = unique_ptr<SpriteFont>(new SpriteFont(m_d3dDevice.Get(), L"italic.spritefont"));
-		init_hack = true;
+		__init_hack = true;
 	}
 
 	// This code is Generating a Midnightblue Background on our screen
@@ -71,8 +71,8 @@ void Renderer::Render()
 		m_spriteFont->DrawString(m_spriteBatch.get(), lScreen, XMFLOAT2(100, 100), Colors::Black);
 
 		vector<string> *errors = ProjectDaemon::Instance()->ErrorList();
-		int offset = 100;
-		for (int index = 0; index < errors->size(); index++)
+		float offset = 100;
+		for (unsigned int index = 0; index < errors->size(); index++)
 		{
 			string error = errors->at(index);
 			std::wstring errorString = std::wstring(error.begin(), error.end());

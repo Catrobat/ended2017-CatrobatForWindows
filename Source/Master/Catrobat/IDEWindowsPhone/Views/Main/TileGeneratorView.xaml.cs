@@ -73,8 +73,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
     private void AddTile(string smallTilePath, string normalTilePath, string wideTilePath)
     {
-      var prefix = "isostore:";
-
       var tile = new FlipTileData
       {
         Title = _mainViewModel.CurrentProjectHeader.ProjectName,

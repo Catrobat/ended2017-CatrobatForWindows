@@ -13,7 +13,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
     public class UploadProjectViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private readonly ICatrobatContext _catrobatContext;
-        public new event PropertyChangedEventHandler PropertyChanged;
 
         #region private Members
 

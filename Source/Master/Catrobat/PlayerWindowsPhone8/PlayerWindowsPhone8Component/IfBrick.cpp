@@ -25,14 +25,14 @@ void IfBrick::Execute()
 	// Synchronously execute all subsequent blocks
 	if (Interpreter::Instance()->EvaluateFormulaToBool(m_condition, Parent()->Parent()))
 	{
-		for (int i = 0; i < m_ifList->size(); i++)
+		for (unsigned int i = 0; i < m_ifList->size(); i++)
 		{
 			GetIfBrick(i)->Execute();
 		}
 	}
 	else
 	{
-		for (int i = 0; i < m_elseList->size(); i++)
+		for (unsigned int i = 0; i < m_elseList->size(); i++)
 		{
 			GetElseBrick(i)->Execute();
 		}

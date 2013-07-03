@@ -55,7 +55,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
       }
     }
 
-    public async static Task<bool> RecieveImageFromPaint()
+    public static bool RecieveImageFromPaint()
     {
       try
       {

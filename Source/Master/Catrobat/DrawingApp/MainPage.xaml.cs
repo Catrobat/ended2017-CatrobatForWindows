@@ -26,8 +26,15 @@ namespace DrawingApp
         private void ContentPanelCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             currentPoint = e.GetPosition(this.ContentPanelCanvas);
-            Line line = new Line() { X1 = currentPoint.X, Y1 = currentPoint.Y, X2 = oldPoint.X, Y2 = oldPoint.Y };            
-            line.Stroke = new SolidColorBrush( (App.Current as App).ColorValue != null ?  (App.Current as App).ColorValue : Colors.Orange);
+            Line line = new Line() { X1 = currentPoint.X, Y1 = currentPoint.Y, X2 = oldPoint.X, Y2 = oldPoint.Y };
+
+            Color color = Colors.Orange;
+            if ((App.Current as App).ColorValue != null)
+            {
+                color = (App.Current as App).ColorValue;
+            }
+            line.Stroke = new SolidColorBrush(color);
+
             line.StrokeThickness = linethikness;
 //            Rectangle rec = new Rectangle();
 //            rec.Height = linethikness;

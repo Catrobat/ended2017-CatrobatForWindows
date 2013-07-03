@@ -15,7 +15,7 @@ namespace Catrobat.IDEWindowsPhone.Converters
       {
         return ServiceLocator.Current.GetInstance<EditorViewModel>().Costumes.IndexOf((Costume)value);
       }
-      catch (Exception e)
+      catch
       {
         return 0;
       }
@@ -27,7 +27,7 @@ namespace Catrobat.IDEWindowsPhone.Converters
       {
         return ServiceLocator.Current.GetInstance<EditorViewModel>().Costumes[(int)value];
       }
-      catch (Exception e)
+      catch
       {
         return null;
       }

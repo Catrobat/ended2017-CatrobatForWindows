@@ -17,7 +17,7 @@ ForeverBrick::~ForeverBrick(void)
 void ForeverBrick::Execute()
 {
 	// Synchronously execute all subsequent blocks
-	int i = 0;
+	unsigned int i = 0;
 	while (true)
 	{
 		GetBrick(i)->Execute();

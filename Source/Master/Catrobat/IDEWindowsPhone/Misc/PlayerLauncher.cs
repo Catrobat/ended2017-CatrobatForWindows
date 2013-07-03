@@ -32,7 +32,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
         StorageFile catrobatZipFile = await folder.GetFileAsync(CatrobatContext.PlayerActiveProjectZipPath.Split('/')[1]);
         await Windows.System.Launcher.LaunchFileAsync(catrobatZipFile);
-        Windows.System.Launcher.LaunchFileAsync(catrobatZipFile);
+        await Windows.System.Launcher.LaunchFileAsync(catrobatZipFile);
 
         return true;
       }

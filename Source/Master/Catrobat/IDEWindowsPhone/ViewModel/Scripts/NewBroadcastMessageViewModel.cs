@@ -18,7 +18,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
 
         private string _broadcastMessage;
         private DataObject _broadcastObject;
-        private Project _currentProject;
 
         #endregion
 

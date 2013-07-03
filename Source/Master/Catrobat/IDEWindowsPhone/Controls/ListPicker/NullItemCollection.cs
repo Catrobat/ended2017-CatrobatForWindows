@@ -16,7 +16,7 @@ using Catrobat.IDEWindowsPhone.Annotations;
 
 namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
 {
-  public class NullItemCollection : IList, INotifyCollectionChanged, INotifyPropertyChanged
+  public class NullItemCollection : IList
   {
     public object NullObject { get; set; }
 
@@ -146,12 +146,6 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
           SourceCollection[index - 1] = value;
       }
     }
-
-    #endregion
-
-    #region Implementation of INotifyCollectionChanged
-
-    public event NotifyCollectionChangedEventHandler CollectionChanged;
 
     #endregion
 

@@ -11,5 +11,5 @@ WaitBrick::WaitBrick(string objectReference, FormulaTree *timeToWaitInSeconds, S
 
 void WaitBrick::Execute()
 {
-	Concurrency::wait(1000 * Interpreter::Instance()->EvaluateFormulaToFloat(m_timeToWaitInSeconds, Parent()->Parent()));
+	Concurrency::wait(1000 * Interpreter::Instance()->EvaluateFormulaToInt(m_timeToWaitInSeconds, Parent()->Parent()));
 }
