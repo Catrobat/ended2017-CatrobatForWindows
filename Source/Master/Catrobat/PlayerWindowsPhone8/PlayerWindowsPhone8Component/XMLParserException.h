@@ -7,6 +7,5 @@ class XMLParserException : public BaseException
 {
 public:
     XMLParserException(std::string errorMessage);
-    XMLParserException();
 };
 

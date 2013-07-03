@@ -2,12 +2,7 @@
 #include "BaseException.h"
 
 
-BaseException::BaseException(std::string errorMessage, ExceptionTypes::ExceptionType exceptionType)
-    : m_exceptionType(exceptionType), m_errorMessage(errorMessage)
-{
-}
-
-
-BaseException::~BaseException()
+BaseException::BaseException(std::string errorMessage)
+    : m_errorMessage(errorMessage)
 {
 }

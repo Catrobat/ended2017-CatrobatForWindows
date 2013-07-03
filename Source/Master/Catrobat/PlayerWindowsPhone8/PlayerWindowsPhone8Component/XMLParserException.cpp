@@ -4,6 +4,6 @@
 using namespace std;
 
 XMLParserException::XMLParserException(string errorMessage)
-    : BaseException(errorMessage, ExceptionTypes::ExceptionType::XMLParserException)
+    : BaseException(errorMessage)
 {
 }
