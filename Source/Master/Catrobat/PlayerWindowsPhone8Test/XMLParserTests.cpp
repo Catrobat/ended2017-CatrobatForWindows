@@ -3,6 +3,7 @@
 #include "TestHelper.h"
 
 #include "XMLParser.h"
+#include <ppltasks.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -23,6 +24,7 @@ namespace PlayerWindowsPhone8Test
 		{
             XMLParser *parser = new XMLParser();
             bool success = parser->loadXML("TestFiles/HeaderTest.xml");
+            Concurrency::wait(1000);
 			Assert::IsTrue(success);
 
             Project *project = parser->getProject();

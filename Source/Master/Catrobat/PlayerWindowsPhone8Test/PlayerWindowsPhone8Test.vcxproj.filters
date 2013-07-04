@@ -231,6 +231,12 @@
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClCompile>
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Helper.cpp" />
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ExceptionLogger.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -416,6 +422,15 @@
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClInclude>
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Helper.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ExceptionLogger.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Constants.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="TestApp.dll" />

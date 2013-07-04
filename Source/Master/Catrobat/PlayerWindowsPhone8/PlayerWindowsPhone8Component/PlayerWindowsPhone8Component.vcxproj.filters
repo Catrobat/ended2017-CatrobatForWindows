@@ -399,6 +399,9 @@
     <ClInclude Include="Helper.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Constants</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -445,6 +448,9 @@
     </Filter>
     <Filter Include="Helpers">
       <UniqueIdentifier>{0bfdaef7-4aaa-4dee-8283-6fd7555f9efd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Constants">
+      <UniqueIdentifier>{ce7b0719-c9ad-4ada-af45-01f6a36733a3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

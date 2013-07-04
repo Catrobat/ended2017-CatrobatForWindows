@@ -34,6 +34,7 @@
 #include "ExceptionLogger.h"
 #include "XMLParserSevereException.h"
 #include "XMLParserWarningException.h"
+#include "Constants.h"
 
 #include <time.h>
 #include <iostream>
@@ -56,7 +57,8 @@ XMLParser::~XMLParser()
 
 bool XMLParser::loadXML(string fileName)
 {
-    ExceptionLogger::Instance()->LogException(new XMLParserSevereException("boom"));
+
+    
     ifstream inputFile;
     inputFile.open(fileName);
     if (!inputFile) 
@@ -70,9 +72,16 @@ bool XMLParser::loadXML(string fileName)
         text += line;
     }
 
-    parseXML(text);
-
-
+    try 
+    {
+        parseXML(text);
+    }
+    catch (BaseException *e)
+    {
+        ExceptionLogger::Instance()->Log(e);
+        return false;
+    }
+    
     inputFile.close();
     return true;
 }
@@ -101,10 +110,10 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 {
     xml_node<> *baseNode = doc->first_node("program");
     if (!baseNode)
-        return NULL;
+        throw new XMLParserSevereException ("Program Node missing");
     baseNode = baseNode->first_node("header");
     if (!baseNode)
-        return NULL;
+        throw new XMLParserSevereException ("Header Node missing");
 
 #pragma region Local Variables Delcaration
 
@@ -131,99 +140,99 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 #pragma endregion
 
 #pragma region Project Header Nodes
-    xml_node<> *projectInformationNode = baseNode->first_node("applicationBuildName");
+    xml_node<> *projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ApplicationBuildName.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ApplicationBuildName + Constants::ErrorMessage::Missing);
     applicationBuildName = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("applicationBuildNumber");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ApplicationBuildNumber.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ApplicationBuildNumber + Constants::ErrorMessage::Missing);
     applicationBuildNumber = atoi(projectInformationNode->value());
 
-    projectInformationNode = baseNode->first_node("applicationName");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ApplicationName.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ApplicationName + Constants::ErrorMessage::Missing);
     applicationName = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("applicationVersion");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ApplicationVersion.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ApplicationVersion + Constants::ErrorMessage::Missing);
     applicationVersion = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("catrobatLanguageVersion");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::CatrobatLanguageVersion.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::CatrobatLanguageVersion + Constants::ErrorMessage::Missing);
     catrobatLanguageVersion = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("dateTimeUpload");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::DateTimeUpload.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::DateTimeUpload + Constants::ErrorMessage::Missing);
     dateTimeUpload = parseDateTime(projectInformationNode->value());
 
-    projectInformationNode = baseNode->first_node("description");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::Description.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::Description + Constants::ErrorMessage::Missing);
     description = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("deviceName");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::DeviceName.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::DeviceName + Constants::ErrorMessage::Missing);
     deviceName = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("mediaLicense");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::MediaLicense.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::MediaLicense + Constants::ErrorMessage::Missing);
     mediaLicense = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("platform");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::Platform.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::Platform + Constants::ErrorMessage::Missing);
     platform = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("platformVersion");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::PlatformVersion.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::PlatformVersion + Constants::ErrorMessage::Missing);
     platformVersion = atoi(projectInformationNode->value());
 
-    projectInformationNode = baseNode->first_node("programLicense");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::PlatformVersion.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::PlatformVersion + Constants::ErrorMessage::Missing);
     programLicense = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("programName");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ProgramName.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ProgramName + Constants::ErrorMessage::Missing);
     programName = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("remixOf");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::RemixOf.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::RemixOf + Constants::ErrorMessage::Missing);
     remixOf = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("screenHeight");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ScreenHeight.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ScreenHeight + Constants::ErrorMessage::Missing);
     screenHeight = atoi(projectInformationNode->value());
 
-    projectInformationNode = baseNode->first_node("screenWidth");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ScreenWidth.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ScreenWidth + Constants::ErrorMessage::Missing);
     screenWidth = atoi(projectInformationNode->value());
 
-    projectInformationNode = baseNode->first_node("tags");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::Tags.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::Tags + Constants::ErrorMessage::Missing);
     tags = parseVector(projectInformationNode->value());
 
-    projectInformationNode = baseNode->first_node("url");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::Url.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::Url + Constants::ErrorMessage::Missing);
     url = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("userHandle");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::UserHandle.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::UserHandle + Constants::ErrorMessage::Missing);
     userHandle = projectInformationNode->value();
 
 #pragma endregion

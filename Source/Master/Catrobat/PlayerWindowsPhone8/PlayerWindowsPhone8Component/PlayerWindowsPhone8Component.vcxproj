@@ -159,6 +159,7 @@
     <ClInclude Include="ChangeVariableBrick.h" />
     <ClInclude Include="ChangeXByBrick.h" />
     <ClInclude Include="ChangeYByBrick.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="ContainerBrick.h" />
     <ClInclude Include="CostumeBrick.h" />
     <ClInclude Include="DDSLoader.h" />
