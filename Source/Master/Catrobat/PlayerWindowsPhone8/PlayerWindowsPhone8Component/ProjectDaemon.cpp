@@ -88,8 +88,8 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
                             }
                             catch (BaseException *e)
                             {
-                                //ExceptionLogger::Instance()->Log(e);
-                                //ExceptionLogger::Instance()->Log(INFORMATION, "Problem opening Project! Aborting...");
+                                ExceptionLogger::Instance()->Log(e);
+                                ExceptionLogger::Instance()->Log(INFORMATION, "Problem opening Project! Aborting...");
                                 ProjectDaemon::Instance()->AddDebug("Problem opening Project. Check Logfile");
                                 m_finishedLoading = false;
                             }

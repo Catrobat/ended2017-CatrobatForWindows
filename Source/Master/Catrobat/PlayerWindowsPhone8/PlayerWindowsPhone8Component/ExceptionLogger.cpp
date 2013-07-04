@@ -17,11 +17,14 @@ using namespace Platform::Collections;
 
 
 ExceptionLogger *ExceptionLogger::__instance = NULL;
+CritSection ExceptionLogger::__crit_section;
 
 ExceptionLogger *ExceptionLogger::Instance()
 {
+    EnterCriticalSection(&__crit_section);
     if (!__instance)
         __instance = new ExceptionLogger();
+    LeaveCriticalSection(&__crit_section);
     return __instance;
 }
 
@@ -33,9 +36,11 @@ void ExceptionLogger::Log(BaseException *exception)
 {
     task<StorageFile^> getFileTask(ApplicationData::Current->LocalFolder->CreateFileAsync(
         Helper::ConvertStringToPlatformString(LOGFILE), CreationCollisionOption::OpenIfExists));
+
     auto writer = std::make_shared<Streams::DataWriter^>(nullptr);
     getFileTask.then([](StorageFile^ file)
     {
+        EnterCriticalSection(&__crit_section);
         return file->OpenAsync(FileAccessMode::ReadWrite);
     }).then([this, exception, writer](Streams::IRandomAccessStream^ stream)
     {
@@ -60,6 +65,7 @@ void ExceptionLogger::Log(BaseException *exception)
     }).then([this, writer](bool flushed)
     {
         delete (*writer);
+        LeaveCriticalSection(&__crit_section);
     });
 }
 
@@ -70,6 +76,7 @@ void ExceptionLogger::Log(int severity, std::string warning)
     auto writer = std::make_shared<Streams::DataWriter^>(nullptr);
     getFileTask.then([](StorageFile^ file)
     {
+        EnterCriticalSection(&__crit_section);
         return file->OpenAsync(FileAccessMode::ReadWrite);
     }).then([this, severity, warning, writer](Streams::IRandomAccessStream^ stream)
     {
@@ -107,6 +114,7 @@ void ExceptionLogger::Log(int severity, std::string warning)
     }).then([this, writer](bool flushed)
     {
         delete (*writer);
+        LeaveCriticalSection(&__crit_section);
     });
 }
 
