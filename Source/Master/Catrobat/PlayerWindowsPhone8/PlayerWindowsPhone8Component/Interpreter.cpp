@@ -28,25 +28,25 @@ int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 	switch (type)
 	{
 	case OPERATOR:
-        return interpretOperator(tree, object);
+        return InterpretOperator(tree, object);
 	case NUMBER:
 		return atoi(tree->Value().c_str());
 	case USER_VARIABLE:
 		{
 			string varName = tree->Value();
-			UserVariable *var = object->Variable(varName);
+			UserVariable *var = object->GetVariable(varName);
 			if (var)
-				return atoi(var->Value().c_str());
-            var = ProjectDaemon::Instance()->getProject()->Variable(varName);
+				return atoi(var->GetValue().c_str());
+            var = ProjectDaemon::Instance()->GetProject()->GetVariable(varName);
 			if (var)
-				return atoi(var->Value().c_str());
+				return atoi(var->GetValue().c_str());
 
             // TODO: Check logic here (What should we do when variable is not found)
             return 0;
 		}
 		break;
     case BRACKET:
-        return this->EvaluateFormulaToInt(tree->getRightChild(), object);
+        return this->EvaluateFormulaToInt(tree->GetRightChild(), object);
 	default:
 		break;
 	}
@@ -61,25 +61,25 @@ float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 	switch (type)
 	{
 	case OPERATOR:
-        return interpretOperatorFloat(tree, object);
+        return InterpretOperatorFloat(tree, object);
 	case NUMBER:
         return (float)atof(tree->Value().c_str());
 	case USER_VARIABLE:
 		{
 			string varName = tree->Value();
-			UserVariable *var = object->Variable(varName);
+			UserVariable *var = object->GetVariable(varName);
 			if (var)
-				return (float)atof(var->Value().c_str());
-            var = ProjectDaemon::Instance()->getProject()->Variable(varName);
+				return (float)atof(var->GetValue().c_str());
+            var = ProjectDaemon::Instance()->GetProject()->GetVariable(varName);
             if (var)
-                return (float)atof(var->Value().c_str());
+                return (float)atof(var->GetValue().c_str());
 
             // TODO: Check logic here (What should we do when variable is not found)
             return 0.0f;
 		}
 		break;
     case BRACKET:
-        return this->EvaluateFormulaToFloat(tree->getRightChild(), object);
+        return this->EvaluateFormulaToFloat(tree->GetRightChild(), object);
 	default:
 		break;
 	}
@@ -94,11 +94,11 @@ bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object *object)
 	switch (type)
 	{
 	case OPERATOR:
-		return interpretOperatorBool(tree, object);
+		return InterpretOperatorBool(tree, object);
 	case NUMBER:
 		return atof(tree->Value().c_str()) > 0.0f;
 	case FUNCTION:
-		return interpretFunctionBool(tree, object);
+		return InterpretFunctionBool(tree, object);
 	default:
 		break;
 	}
@@ -127,17 +127,17 @@ void Interpreter::ReadAcceleration()
 	}	
 }
 
-int Interpreter::interpretOperator(FormulaTree *tree, Object *object)
+int Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
 {
-    FormulaTree *leftChild = tree->getLeftChild();
+    FormulaTree *leftChild = tree->GetLeftChild();
     int leftValue = 0;
-    if (tree->getLeftChild() != NULL)
+    if (tree->GetLeftChild() != NULL)
         leftValue = this->EvaluateFormulaToInt(leftChild, object);
-    FormulaTree *rightChild = tree->getRightChild();
+    FormulaTree *rightChild = tree->GetRightChild();
     int rightValue = this->EvaluateFormulaToInt(rightChild, object);
     int returnValue = -1;
 
-    switch (tree->getOperator())
+    switch (tree->GetOperator())
     {
     case Operator::PLUS:
         returnValue = leftValue + rightValue;
@@ -162,18 +162,18 @@ int Interpreter::interpretOperator(FormulaTree *tree, Object *object)
     return returnValue;
 }
 
-float Interpreter::interpretOperatorFloat(FormulaTree *tree, Object *object)
+float Interpreter::InterpretOperatorFloat(FormulaTree *tree, Object *object)
 {
-    FormulaTree *leftChild = tree->getLeftChild();
+    FormulaTree *leftChild = tree->GetLeftChild();
     float leftValue = 0.0f;
-    if (tree->getLeftChild() != NULL)
+    if (tree->GetLeftChild() != NULL)
         leftValue = this->EvaluateFormulaToFloat(leftChild, object);
-    FormulaTree *rightChild = tree->getRightChild();
+    FormulaTree *rightChild = tree->GetRightChild();
     float rightValue = this->EvaluateFormulaToFloat(rightChild, object);
 
     float returnValue = 0.0f;
 
-    switch (tree->getOperator())
+    switch (tree->GetOperator())
     {
     case Operator::PLUS:
         returnValue = leftValue + rightValue;
@@ -198,46 +198,46 @@ float Interpreter::interpretOperatorFloat(FormulaTree *tree, Object *object)
     return (float)returnValue;
 }
 
-bool Interpreter::interpretOperatorBool(FormulaTree *tree, Object *object)
+bool Interpreter::InterpretOperatorBool(FormulaTree *tree, Object *object)
 {
-	FormulaTree *leftChild = tree->getLeftChild();
+	FormulaTree *leftChild = tree->GetLeftChild();
     bool leftValue = false;
-    if (tree->getLeftChild() != NULL)
+    if (tree->GetLeftChild() != NULL)
         leftValue = this->EvaluateFormulaToBool(leftChild, object);
-    FormulaTree *rightChild = tree->getRightChild();
+    FormulaTree *rightChild = tree->GetRightChild();
     bool rightValue = false;
-	if (tree->getRightChild() != NULL)
+	if (tree->GetRightChild() != NULL)
 		rightValue = this->EvaluateFormulaToBool(rightChild, object);
 
 	bool returnValue = false;
 
-	switch (tree->getOperator())
+	switch (tree->GetOperator())
 	{
 	case Operator::LOGICAL_AND:
 		returnValue = leftValue && rightValue;
 		break;
 	default: 
-		returnValue = interpretOperatorFloat(tree, object) > 0.0f;
+		returnValue = InterpretOperatorFloat(tree, object) > 0.0f;
 		break;
 	}
 
 	return returnValue;
 }
 
-bool Interpreter::interpretFunctionBool(FormulaTree *tree, Object *object)
+bool Interpreter::InterpretFunctionBool(FormulaTree *tree, Object *object)
 {
-	FormulaTree *leftChild = tree->getLeftChild();
+	FormulaTree *leftChild = tree->GetLeftChild();
     bool leftValue = false;
-    if (tree->getLeftChild() != NULL)
+    if (tree->GetLeftChild() != NULL)
         leftValue = this->EvaluateFormulaToBool(leftChild, object);
-    FormulaTree *rightChild = tree->getRightChild();
+    FormulaTree *rightChild = tree->GetRightChild();
     bool rightValue = false;
-	if (tree->getRightChild() != NULL)
+	if (tree->GetRightChild() != NULL)
 		rightValue = this->EvaluateFormulaToBool(rightChild, object);
 
 	bool returnValue = false;
 
-	switch (tree->getFunction())
+	switch (tree->GetFunction())
 	{
 	case Function::L_TRUE:
 		returnValue = true;

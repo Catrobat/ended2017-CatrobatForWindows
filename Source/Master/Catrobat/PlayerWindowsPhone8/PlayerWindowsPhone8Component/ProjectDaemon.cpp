@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "ProjectDaemon.h"
 #include "XMLParser.h"
+#include "Helper.h"
+#include "ExceptionLogger.h"
 
 #include <ppltasks.h>
 
@@ -30,54 +32,19 @@ ProjectDaemon::ProjectDaemon()
 	m_errorList = new vector<std::string>();
 }
 
-void ProjectDaemon::setProject(Project *project)
+void ProjectDaemon::SetProject(Project *project)
 {
 	m_project = project;
 }
 
-string ProjectDaemon::ProjectPath()
+string ProjectDaemon::GetProjectPath()
 {
 	return m_projectPath;
 }
 
-Project *ProjectDaemon::getProject()
+Project *ProjectDaemon::GetProject()
 {
 	return m_project;
-}
-
-// For Debug only
-void ProjectDaemon::InitializeProjectList()
-{
-	//m_projectList = new vector<Platform::String^>();
-	//auto getRootFolder = Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderFromPathAsync(Windows::Storage::ApplicationData::Current->LocalFolder->Path);
-	//getRootFolder->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFolder^>
-	//( 
-	//	[this](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFolder^>^ operation, Windows::Foundation::AsyncStatus status) 
-	//	{    
-	//		if(status == Windows::Foundation::AsyncStatus::Completed) 
-	//		{        
-	//			auto rootFolderContent = operation->GetResults();        
-	//			IAsyncOperation<Windows::Foundation::Collections::IVectorView< Windows::Storage::StorageFolder^>^>^ getRootFolderContent = rootFolderContent->GetFoldersAsync();        
-	//			getRootFolderContent->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFolder^>^>
-	//			(         
-	//				[this](Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Storage::StorageFolder^>^>^ operation, Windows::Foundation::AsyncStatus status) 
-	//				{            
-	//					if( status == Windows::Foundation::AsyncStatus::Completed ) 
-	//					{                
-	//						auto folderList = operation->GetResults();                
-	//						for(unsigned int index = 0; index < folderList->Size; ++index) 
-	//						{                    
-	//							Platform::String^ folderName = folderList->GetAt(index)->Name; 
-	//							wstring tempName(folderName->Begin());
-	//							string folderNameString(tempName.begin(), tempName.end());
-	//							m_projectList->push_back(folderName);
-	//						}            
-	//					}        
-	//				}
-	//			);    
-	//		}
-	//	}
-	//);
 }
 
 void ProjectDaemon::OpenProject(Platform::String^ projectName)
@@ -92,10 +59,7 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 			{
 				auto folderContent = operation->GetResults();
                 // TODO: Check safety
-				Platform::String^ path = folderContent->Path;
-				wstring tempPath(path->Begin());
-				string pathString(tempPath.begin(), tempPath.end());
-				m_projectPath = pathString;
+                m_projectPath = Helper::ConvertPlatformStringToString(folderContent->Path);
 
 				IAsyncOperation<Windows::Storage::StorageFile^>^ getFiles = folderContent->GetFileAsync("code.xml");
 				getFiles->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFile^>
@@ -106,43 +70,51 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 						{
 							// Get the Path 
 							auto projectCode = operation->GetResults();
-							Platform::String^ path = projectCode->Path;
-							wstring tempPath(path->Begin());
-							string pathString(tempPath.begin(), tempPath.end());
+                            string pathString = Helper::ConvertPlatformStringToString(projectCode->Path);
 
 							// Create and load XML
 							XMLParser *xml = new XMLParser();
-							xml->loadXML(pathString);
+                            try
+                            {
+							    xml->LoadXML(pathString);
 
-							// Set Project to be accessed from everywhere
-							setProject(xml->getProject());
+                                // Set Project to be accessed from everywhere
+							    SetProject(xml->GetProject());
 
-							// Initialize Renderer and enable rendering to be started
-							m_renderer->Initialize(m_device);
-							m_finishedLoading = true;
-							free(xml);
+							    // Initialize Renderer and enable rendering to be started
+							    m_renderer->Initialize(m_device);
+							    m_finishedLoading = true;
+							    free(xml);
+                            }
+                            catch (BaseException *e)
+                            {
+                                ExceptionLogger::Instance()->Log(e);
+                                ExceptionLogger::Instance()->Log(INFORMATION, "Problem opening Project! Aborting...");
+                                ProjectDaemon::Instance()->AddDebug("Problem opening Project. Check Logfile");
+                                m_finishedLoading = false;
+                            }
 						}
 						else if (status == Windows::Foundation::AsyncStatus::Error)
 						{
-							SetError(ProjectDaemon::Error::FILE_NOT_FOUND);
+                            //ExceptionLogger::Instance()->Log(CRITICALWARNING, "ProjectFolder not found!");
 						}
 					}
 				);
 			}
             else if (status == Windows::Foundation::AsyncStatus::Error)
 			{
-				SetError(ProjectDaemon::Error::FILE_NOT_FOUND);
+                //ExceptionLogger::Instance()->Log(CRITICALWARNING, "code.xml not found!");
 			}
 		}
 	);
 }
 
-vector<Platform::String^> *ProjectDaemon::ProjectList()
+vector<Platform::String^> *ProjectDaemon::GetProjectList()
 {
 	return m_projectList;
 }
 
-vector<Platform::String^> *ProjectDaemon::FileList()
+vector<Platform::String^> *ProjectDaemon::GetFileList()
 {
 	return m_files;
 }
@@ -155,8 +127,8 @@ void ProjectDaemon::SetDesiredRenderTargetSize(DrawingSurfaceSizeF *desiredRende
 
 void ProjectDaemon::ApplyDesiredRenderTargetSizeFromProject()
 {
-	m_desiredRenderTargetSize->width = (float) m_project->ScreenWidth();
-	m_desiredRenderTargetSize->height = (float) m_project->ScreenHeight();
+	m_desiredRenderTargetSize->width = (float) m_project->GetScreenWidth();
+	m_desiredRenderTargetSize->height = (float) m_project->GetScreenHeight();
 }
 
 void ProjectDaemon::SetupRenderer(ID3D11Device1 *device, ProjectRenderer^ renderer)
@@ -184,13 +156,10 @@ void ProjectDaemon::SetError(ProjectDaemon::Error error)
 
 void ProjectDaemon::AddDebug(Platform::String^ info)
 {
-    std::wstring fooW(info->Begin());
-    std::string fooA(fooW.begin(), fooW.end());
-	m_errorList->push_back(fooA);
-
+    m_errorList->push_back(Helper::ConvertPlatformStringToString(info));
 }
 
-std::vector<std::string> *ProjectDaemon::ErrorList()
+std::vector<std::string> *ProjectDaemon::GetErrorList()
 {
 	return m_errorList;
 }

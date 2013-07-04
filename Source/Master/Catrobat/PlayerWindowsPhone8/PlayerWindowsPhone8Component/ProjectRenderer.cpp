@@ -9,8 +9,8 @@ ProjectRenderer::ProjectRenderer()
 void ProjectRenderer::CreateDeviceResources() 
 {	
 	Direct3DBase::CreateDeviceResources();
-	UpdateForWindowSizeChange((float) ProjectDaemon::Instance()->getProject()->ScreenWidth(), (float) ProjectDaemon::Instance()->getProject()->ScreenHeight());
-	ProjectDaemon::Instance()->getProject()->LoadTextures(m_d3dDevice.Get());
+	UpdateForWindowSizeChange((float) ProjectDaemon::Instance()->GetProject()->GetScreenWidth(), (float) ProjectDaemon::Instance()->GetProject()->GetScreenHeight());
+	ProjectDaemon::Instance()->GetProject()->LoadTextures(m_d3dDevice.Get());
 }
 
 void ProjectRenderer::CreateWindowSizeDependentResources()
@@ -55,7 +55,7 @@ void ProjectRenderer::Render()
 	// ---------------------------------------------------------------------->
 	m_spriteBatch->Begin();
 	{
-		ProjectDaemon::Instance()->getProject()->Render(m_spriteBatch.get());
+		ProjectDaemon::Instance()->GetProject()->Render(m_spriteBatch.get());
 	}
 	m_spriteBatch->End();
 	
@@ -68,5 +68,5 @@ void ProjectRenderer::Update(float timeTotal, float timeDelta)
 
 void ProjectRenderer::StartUpTasks()
 {
-	ProjectDaemon::Instance()->getProject()->StartUp();
+	ProjectDaemon::Instance()->GetProject()->StartUp();
 }

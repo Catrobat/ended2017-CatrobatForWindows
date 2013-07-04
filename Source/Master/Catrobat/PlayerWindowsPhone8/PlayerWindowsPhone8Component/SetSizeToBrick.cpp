@@ -12,5 +12,5 @@ SetSizeToBrick::SetSizeToBrick(string spriteReference, FormulaTree *scale, Scrip
 
 void SetSizeToBrick::Execute()
 {
-	m_parent->Parent()->SetScale(Interpreter::Instance()->EvaluateFormulaToFloat(m_scale, m_parent->Parent()));
+	m_parent->GetParent()->SetScale(Interpreter::Instance()->EvaluateFormulaToFloat(m_scale, m_parent->GetParent()));
 }

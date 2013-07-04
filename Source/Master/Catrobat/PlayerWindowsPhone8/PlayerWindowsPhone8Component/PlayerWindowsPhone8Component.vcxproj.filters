@@ -193,6 +193,9 @@
     <ClCompile Include="ExceptionLogger.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
+    <ClCompile Include="Helper.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -393,6 +396,12 @@
     <ClInclude Include="ExceptionLogger.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
+    <ClInclude Include="Helper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Constants</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -436,6 +445,12 @@
     </Filter>
     <Filter Include="Exceptions">
       <UniqueIdentifier>{8c6cfa58-d9c9-4dbd-8681-ebb9e25b43c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{0bfdaef7-4aaa-4dee-8283-6fd7555f9efd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Constants">
+      <UniqueIdentifier>{ce7b0719-c9ad-4ada-af45-01f6a36733a3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

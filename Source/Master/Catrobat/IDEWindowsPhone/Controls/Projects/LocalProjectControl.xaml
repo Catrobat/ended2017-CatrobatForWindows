@@ -29,8 +29,8 @@
         <toolkit:MenuItem Header="PIN TO START" Command="{Binding Main.PinLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
       </toolkit:ContextMenu>
     </toolkit:ContextMenuService.ContextMenu>
-    <Border BorderThickness="6" BorderBrush="{StaticResource PhoneForegroundBrush}" Margin="0 5" Width="412">
-      <Grid Background="{StaticResource PhoneAccentBrush}">
+    <Border Margin="0 5" Width="412">
+      <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition/>
           <ColumnDefinition Width="Auto"/>
@@ -65,22 +65,6 @@
                            VerticalAlignment="Center" HorizontalAlignment="Center">CLICK TO SELECT PROJECT</TextBlock>
               </Grid>
             </Grid>
-
-            <!--<imageButton:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="buttonCopyLocalProject" 
-                        ImageName="copy"
-                        Text="{Binding Path=Main.ButtonCopy, Source={StaticResource LocalizedStrings}}"
-                        Template="{StaticResource ImageButtonControlTemplate}"
-                        Margin="10" Command="{Binding Main.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
-                        CommandParameter="{Binding ProjectName}"
-                        IsAutoColor="False" IsDark="True"/>
-
-            <imageButton:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonDeleteLocalProject" 
-                        ImageName="delete"
-                        Text="{Binding Path=Main.ButtonDelete, Source={StaticResource LocalizedStrings}}"
-                        Template="{StaticResource ImageButtonControlTemplate}"
-                        Margin="10" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
-                        CommandParameter="{Binding ProjectName}"
-                        IsAutoColor="False" IsDark="True"/>-->
           </Grid>
         </Grid>
         <Grid Grid.Column="1">
@@ -90,7 +74,7 @@
                                                           CommandParameter="{Binding ProjectName, Mode=OneWay}" />
             </i:EventTrigger>
           </i:Interaction.Triggers>
-          <Border Grid.Column="3" BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="4 0 0 0">
+          <Border Grid.Column="3" BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="2">
             <Grid HorizontalAlignment="Right">
               <Image HorizontalAlignment="Right" Source="{Binding Screenshot, Converter={StaticResource ScreenshotConverter}}" MaxHeight="155" MaxWidth="160"/>
             </Grid>

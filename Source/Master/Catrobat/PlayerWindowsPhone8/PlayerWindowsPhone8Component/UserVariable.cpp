@@ -13,12 +13,12 @@ UserVariable::UserVariable(pair<string, string> variable)
 {
 }
 
-string UserVariable::Name()
+string UserVariable::GetName()
 {
 	return m_name;
 }
 
-string UserVariable::Value()
+string UserVariable::GetValue()
 {
 	return m_value;
 }

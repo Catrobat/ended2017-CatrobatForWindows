@@ -1,4 +1,7 @@
-﻿using Catrobat.Core;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Threading;
+using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
@@ -104,6 +107,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             get { return _isLoadingOnlineProjects; }
             set { _isLoadingOnlineProjects = value; RaisePropertyChanged("IsLoadingOnlineProjects"); }
+        }
+
+        public bool IsActiveatingLocalProject
+        {
+            get
+            {
+                return _isLoadingOnlineProjects;
+            }
+            set
+            {
+                _isLoadingOnlineProjects = value;
+                RaisePropertyChanged("IsActiveatingLocalProject");
+            }
         }
 
         #endregion
@@ -225,7 +241,25 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void SetCurrentProjectAction(string projectName)
         {
-            CatrobatContext.GetContext().SetCurrentProject(projectName);
+            var minLoadingTime = new TimeSpan(0, 0, 0, 0, 800);
+            DateTime startTime = DateTime.UtcNow;
+            IsActiveatingLocalProject = true;
+
+            var setActiveTask = Task.Run(() =>
+            {
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    CatrobatContext.GetContext().SetCurrentProject(projectName);
+                    var minWaitindTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
+
+                    if (minWaitindTimeRemaining >= new TimeSpan(0))
+                        Thread.Sleep(minWaitindTimeRemaining);
+
+                    IsActiveatingLocalProject = false;
+                });
+
+            });
+
         }
 
         private void CreateNewProjectAction()
@@ -269,7 +303,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         #endregion
 
-        
+
         public MainViewModel()
         {
             // Commands
@@ -318,7 +352,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 _onlineProjects.Add(header);
             }
         }
-        
+
         private void DeleteProductMessageCallback(MessageBoxResult result)
         {
             _dialogResult = result;

@@ -27,7 +27,7 @@ namespace PlayerWindowsPhone8Test
             FormulaTree *formulaTree = new FormulaTree("USER_VARIABLE", variableName);
 			string spriteReference = "";
 			Object *object = new Object("TestObject"); 
-            object->addVariable(variable->Name(), variable);
+            object->AddVariable(variable->GetName(), variable);
 
 			StartScript *script = new StartScript(spriteReference, object);
             ChangeSizeByBrick *brick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
@@ -45,7 +45,7 @@ namespace PlayerWindowsPhone8Test
             FormulaTree *formulaTree = new FormulaTree("USER_VARIABLE", inValidVariableName);
 			string spriteReference = "";
 			Object *object = new Object("TestObject"); 
-            object->addVariable(variable->Name(), variable);
+            object->AddVariable(variable->GetName(), variable);
 
 			StartScript *script = new StartScript(spriteReference, object);
             ChangeSizeByBrick *brick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
@@ -107,15 +107,15 @@ namespace PlayerWindowsPhone8Test
 						                    userHandle
 					                      );
 
-            ProjectDaemon::Instance()->setProject(project);
+            ProjectDaemon::Instance()->SetProject(project);
 			string variableName = "testVariable";
             UserVariable *variable = new UserVariable(variableName, "10");
             FormulaTree *formulaTree = new FormulaTree("USER_VARIABLE", variableName);
 			string spriteReference = "";
 			Object *object = new Object("TestObject"); 
 
-            project->getObjectList()->addObject(object);
-            project->addVariable(variable->Name(), variable);
+            project->GetObjectList()->AddObject(object);
+            project->AddVariable(variable->GetName(), variable);
 
 			StartScript *script = new StartScript(spriteReference, object);
             ChangeSizeByBrick *brick = new ChangeSizeByBrick(spriteReference, formulaTree, script);
@@ -176,7 +176,7 @@ namespace PlayerWindowsPhone8Test
 						                    userHandle
 					                      );
 
-            ProjectDaemon::Instance()->setProject(project);
+            ProjectDaemon::Instance()->SetProject(project);
 			string variableName = "testVariable";
             string inValidVariableName = "invalidTestVariableName";
             UserVariable *variable = new UserVariable(variableName, "10");
@@ -184,8 +184,8 @@ namespace PlayerWindowsPhone8Test
 			string spriteReference = "";
 			Object *object = new Object("TestObject"); 
 
-            project->getObjectList()->addObject(object);
-            project->addVariable(variable->Name(), variable);
+            project->GetObjectList()->AddObject(object);
+            project->AddVariable(variable->GetName(), variable);
 
 			StartScript *script = new StartScript(spriteReference, object);
             ChangeSizeByBrick *brick = new ChangeSizeByBrick(spriteReference, formulaTree, script);

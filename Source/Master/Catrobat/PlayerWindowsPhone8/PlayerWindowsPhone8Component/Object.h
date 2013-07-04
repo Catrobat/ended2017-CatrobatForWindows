@@ -24,23 +24,23 @@ public:
 	Object(string name);
 	~Object();
 
-	void addLook(Look *lookData);
-	void addScript(Script *script);
-	void addSoundInfo(SoundInfo *soundInfo);
+	void AddLook(Look *lookData);
+	void AddScript(Script *script);
+	void AddSoundInfo(SoundInfo *soundInfo);
 
 	void LoadTextures(ID3D11Device* d3dDevice);
 	void Draw(SpriteBatch *spriteBatch);
 	void StartUp();
 
-	int ScriptListSize();
-	Script *getScript(int index);
-	void addVariable(std::string name, UserVariable *variable);
-	void addVariable(std::pair<std::string, UserVariable*> variable);
-	UserVariable *Variable(std::string name);
-	string getName();
+	int GetScriptListSize();
+	Script *GetScript(int index);
+	void AddVariable(std::string name, UserVariable *variable);
+	void AddVariable(std::pair<std::string, UserVariable*> variable);
+	UserVariable *GetVariable(std::string name);
+	string GetName();
 
-	int LookDataListSize();
-	Look *getLook(int index);
+	int GetLookDataListSize();
+	Look *GetLook(int index);
 	void SetLook(int index);
 	int GetLook();
 	int GetLookCount();
@@ -49,7 +49,7 @@ public:
 	void SetPosition(float x, float y);
 	void GetPosition(float &x, float &y);
 
-	Bounds getBounds();
+	Bounds GetBounds();
 
 	void SetTransparency(float transparency);
 	float GetTransparency();

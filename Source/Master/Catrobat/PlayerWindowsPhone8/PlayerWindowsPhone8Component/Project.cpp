@@ -46,46 +46,46 @@ Project::Project(
 	m_variableList = new map<string, UserVariable*>();
 }
 
-int Project::ScreenHeight()
+int Project::GetScreenHeight()
 {
 	return m_screenHeight;
 }
 
-int	Project::ScreenWidth()
+int	Project::GetScreenWidth()
 {
 	return m_screenWidth;
 }
 
-ObjectList *Project::getObjectList()
+ObjectList *Project::GetObjectList()
 {
 	return m_objectList;
 }
 
 void Project::Render(SpriteBatch *spriteBatch)
 {
-	for (int i = 0; i < m_objectList->Size(); i++)
+	for (int i = 0; i < m_objectList->GetSize(); i++)
 	{
-		m_objectList->getObject(i)->Draw(spriteBatch);
+		m_objectList->GetObject(i)->Draw(spriteBatch);
 	}
 }
 
 void Project::LoadTextures(ID3D11Device* d3dDevice)
 {
-	for (int i = 0; i < m_objectList->Size(); i++)
+	for (int i = 0; i < m_objectList->GetSize(); i++)
 	{
-		m_objectList->getObject(i)->LoadTextures(d3dDevice);
+		m_objectList->GetObject(i)->LoadTextures(d3dDevice);
 	}
 }
 
 void Project::StartUp()
 {	
-	for (int i = 0; i < m_objectList->Size(); i++)
+	for (int i = 0; i < m_objectList->GetSize(); i++)
 	{
-		m_objectList->getObject(i)->StartUp();
+		m_objectList->GetObject(i)->StartUp();
 	}
 }
 
-UserVariable *Project::Variable(std::string name)
+UserVariable *Project::GetVariable(std::string name)
 {
 	map<string, UserVariable*>::iterator searchItem = m_variableList->find(name);
 	if (searchItem != m_variableList->end())
@@ -93,12 +93,12 @@ UserVariable *Project::Variable(std::string name)
 	return NULL;
 }
 
-void Project::addVariable(std::string name, UserVariable *variable)
+void Project::AddVariable(std::string name, UserVariable *variable)
 {
 	m_variableList->insert(pair<string, UserVariable*>(name, variable));
 }
 
-void Project::addVariable(std::pair<string, UserVariable*> variable)
+void Project::AddVariable(std::pair<string, UserVariable*> variable)
 {
 	m_variableList->insert(variable);
 }

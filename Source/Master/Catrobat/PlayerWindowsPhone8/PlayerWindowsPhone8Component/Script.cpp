@@ -14,27 +14,27 @@ Script::Script(TypeOfScript scriptType, string spriteReference, Object *parent) 
 	m_brickList = new list<Brick*>();
 }
 
-void Script::addBrick(Brick *brick)
+void Script::AddBrick(Brick *brick)
 {
 	m_brickList->push_back(brick);
 }
 
-void Script::addSpriteReference(string spriteReference)
+void Script::AddSpriteReference(string spriteReference)
 {
 	m_spriteReference = spriteReference;
 }
 
-Script::TypeOfScript Script::getType()
+Script::TypeOfScript Script::GetType()
 {
 	return m_scriptType;
 }
 
-string Script::SpriteReference()
+string Script::GetSpriteReference()
 {
 	return m_spriteReference;
 }
 
-int Script::BrickListSize()
+int Script::GetBrickListSize()
 {
 	return m_brickList->size();
 }
@@ -51,7 +51,7 @@ void Script::Execute()
 	auto WorkItem = ref new WorkItemHandler(
 		[this](IAsyncAction^ workItem)
 	{
-		for (int i = 0; i < BrickListSize(); i++)
+		for (int i = 0; i < GetBrickListSize(); i++)
 		{
 			GetBrick(i)->Execute();
 		}
@@ -62,7 +62,7 @@ void Script::Execute()
 	IAsyncAction^ ThreadPoolWorkItem = ThreadPool::RunAsync(WorkItem);
 }
 
-Object *Script::Parent()
+Object *Script::GetParent()
 {
 	return m_parent;
 }

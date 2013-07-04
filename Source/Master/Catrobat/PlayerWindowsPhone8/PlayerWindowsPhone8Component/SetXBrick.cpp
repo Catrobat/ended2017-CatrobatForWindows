@@ -13,6 +13,6 @@ SetXBrick::SetXBrick(string spriteReference, FormulaTree *positionX, Script *par
 void SetXBrick::Execute()
 {
 	float currentX, currentY;
-	m_parent->Parent()->GetPosition(currentX, currentY);
-	m_parent->Parent()->SetPosition(Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX, m_parent->Parent()), currentY);
+	m_parent->GetParent()->GetPosition(currentX, currentY);
+	m_parent->GetParent()->SetPosition(Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX, m_parent->GetParent()), currentY);
 }

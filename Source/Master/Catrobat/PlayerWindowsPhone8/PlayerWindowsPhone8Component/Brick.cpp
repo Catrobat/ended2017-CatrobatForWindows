@@ -15,12 +15,12 @@ Brick::Brick(TypeOfBrick brickType, string objectReference, Script *parent) :
 {
 }
 
-Brick::TypeOfBrick Brick::BrickType()
+Brick::TypeOfBrick Brick::GetBrickType()
 {
 	return m_brickType;
 }
 
-Script *Brick::Parent()
+Script *Brick::GetParent()
 {
 	return m_parent;
 }

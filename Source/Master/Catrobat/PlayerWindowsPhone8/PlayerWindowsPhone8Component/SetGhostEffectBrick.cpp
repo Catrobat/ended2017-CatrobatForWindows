@@ -12,5 +12,5 @@ SetGhostEffectBrick::SetGhostEffectBrick(string spriteReference, FormulaTree *tr
 
 void SetGhostEffectBrick::Execute()
 {
-	m_parent->Parent()->SetTransparency((Interpreter::Instance()->EvaluateFormulaToFloat(m_transparency, Parent()->Parent()) / 100.0f));
+	m_parent->GetParent()->SetTransparency((Interpreter::Instance()->EvaluateFormulaToFloat(m_transparency, GetParent()->GetParent()) / 100.0f));
 }

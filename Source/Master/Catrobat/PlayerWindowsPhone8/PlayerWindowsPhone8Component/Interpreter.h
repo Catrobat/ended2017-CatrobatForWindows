@@ -27,9 +27,9 @@ private:
     Windows::Devices::Sensors::AccelerometerReading^ m_accReading;
 
     // HelperFunctions
-    int interpretOperator(FormulaTree *tree, Object *object);
-    float interpretOperatorFloat(FormulaTree *tree, Object *object);
-	bool interpretOperatorBool(FormulaTree *tree, Object *object);
-	bool interpretFunctionBool(FormulaTree *tree, Object *object);
+    int InterpretOperator(FormulaTree *tree, Object *object);
+    float InterpretOperatorFloat(FormulaTree *tree, Object *object);
+	bool InterpretOperatorBool(FormulaTree *tree, Object *object);
+	bool InterpretFunctionBool(FormulaTree *tree, Object *object);
 };
 

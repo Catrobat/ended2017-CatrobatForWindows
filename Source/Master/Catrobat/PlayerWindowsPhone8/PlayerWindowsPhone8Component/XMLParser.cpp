@@ -31,6 +31,10 @@
 #include "TurnLeftBrick.h"
 #include "TurnRightBrick.h"
 #include "PlaySoundBrick.h"
+#include "ExceptionLogger.h"
+#include "XMLParserSevereException.h"
+#include "XMLParserWarningException.h"
+#include "Constants.h"
 
 #include <time.h>
 #include <iostream>
@@ -42,17 +46,19 @@ using namespace rapidxml;
 
 XMLParser::XMLParser()
 {
-    containerStack = new std::vector<ContainerBrick*>();
+    m_containerStack = new std::vector<ContainerBrick*>();
     m_pendingVariables = new map<VariableManagementBrick*, string>();
 }
 
 XMLParser::~XMLParser()
 {
-    delete containerStack;
+    delete m_containerStack;
 }
 
-bool XMLParser::loadXML(string fileName)
+bool XMLParser::LoadXML(string fileName)
 {
+
+    
     ifstream inputFile;
     inputFile.open(fileName);
     if (!inputFile) 
@@ -66,26 +72,29 @@ bool XMLParser::loadXML(string fileName)
         text += line;
     }
 
-    try
+    try 
     {
-        parseXML(text);
+        ParseXML(text);
     }
-    catch(XMLParserException exception)
+    catch (BaseException *e)
     {
-        return false;
+        if (dynamic_cast<XMLParserSevereException *>(e))
+        {
+            inputFile.close();
+            throw e;
+        }
     }
-
-
+    
     inputFile.close();
     return true;
 }
 
-Project *XMLParser::getProject()
+Project *XMLParser::GetProject()
 {
     return m_project;
 }
 
-void XMLParser::parseXML(string xml)
+void XMLParser::ParseXML(string xml)
 {
     // TODO: WE NEED ERROR HANDLING!
 
@@ -93,29 +102,21 @@ void XMLParser::parseXML(string xml)
     char *temp = (char*) xml.c_str();
     doc.parse<0>(temp);
 
-    try
-    {
-        m_project = parseProjectHeader(&doc);
-    }
-    catch (XMLParserException exception)
-    {
-        throw XMLParserException("Invalid Project Header");
-    }
+    m_project = ParseProjectHeader(&doc);
+    ParseObjectList(&doc, m_project->GetObjectList());
 
-    parseObjectList(&doc, m_project->getObjectList());
-
-    parseVariableList(&doc, m_project);
+    ParseVariableList(&doc, m_project);
     SetPendingVariables();
 }
 
-Project* XMLParser::parseProjectHeader(xml_document<> *doc)
+Project* XMLParser::ParseProjectHeader(xml_document<> *doc)
 {
-    xml_node<> *baseNode = doc->first_node("program");
+    xml_node<> *baseNode = doc->first_node(Constants::XMLParser::Header::Program.c_str());
     if (!baseNode)
-        return NULL;
-    baseNode = baseNode->first_node("header");
+        throw new XMLParserSevereException (Constants::XMLParser::Header::Program + Constants::ErrorMessage::Missing);
+    baseNode = baseNode->first_node(Constants::XMLParser::Header::Header.c_str());
     if (!baseNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::Header + Constants::ErrorMessage::Missing);
 
 #pragma region Local Variables Delcaration
 
@@ -142,99 +143,99 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 #pragma endregion
 
 #pragma region Project Header Nodes
-    xml_node<> *projectInformationNode = baseNode->first_node("applicationBuildName");
+    xml_node<> *projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ApplicationBuildName.c_str());
     if (!projectInformationNode)
-        throw XMLParserException ("ApplicationBuildName missing");
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ApplicationBuildName + Constants::ErrorMessage::Missing);
     applicationBuildName = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("applicationBuildNumber");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ApplicationBuildNumber.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ApplicationBuildNumber + Constants::ErrorMessage::Missing);
     applicationBuildNumber = atoi(projectInformationNode->value());
 
-    projectInformationNode = baseNode->first_node("applicationName");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ApplicationName.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ApplicationName + Constants::ErrorMessage::Missing);
     applicationName = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("applicationVersion");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ApplicationVersion.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ApplicationVersion + Constants::ErrorMessage::Missing);
     applicationVersion = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("catrobatLanguageVersion");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::CatrobatLanguageVersion.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::CatrobatLanguageVersion + Constants::ErrorMessage::Missing);
     catrobatLanguageVersion = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("dateTimeUpload");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::DateTimeUpload.c_str());
     if (!projectInformationNode)
-        return NULL;
-    dateTimeUpload = parseDateTime(projectInformationNode->value());
+        throw new XMLParserSevereException (Constants::XMLParser::Header::DateTimeUpload + Constants::ErrorMessage::Missing);
+    dateTimeUpload = ParseDateTime(projectInformationNode->value());
 
-    projectInformationNode = baseNode->first_node("description");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::Description.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::Description + Constants::ErrorMessage::Missing);
     description = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("deviceName");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::DeviceName.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::DeviceName + Constants::ErrorMessage::Missing);
     deviceName = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("mediaLicense");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::MediaLicense.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::MediaLicense + Constants::ErrorMessage::Missing);
     mediaLicense = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("platform");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::Platform.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::Platform + Constants::ErrorMessage::Missing);
     platform = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("platformVersion");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::PlatformVersion.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::PlatformVersion + Constants::ErrorMessage::Missing);
     platformVersion = atoi(projectInformationNode->value());
 
-    projectInformationNode = baseNode->first_node("programLicense");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::PlatformVersion.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::PlatformVersion + Constants::ErrorMessage::Missing);
     programLicense = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("programName");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ProgramName.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ProgramName + Constants::ErrorMessage::Missing);
     programName = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("remixOf");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::RemixOf.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::RemixOf + Constants::ErrorMessage::Missing);
     remixOf = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("screenHeight");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ScreenHeight.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ScreenHeight + Constants::ErrorMessage::Missing);
     screenHeight = atoi(projectInformationNode->value());
 
-    projectInformationNode = baseNode->first_node("screenWidth");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ScreenWidth.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::ScreenWidth + Constants::ErrorMessage::Missing);
     screenWidth = atoi(projectInformationNode->value());
 
-    projectInformationNode = baseNode->first_node("tags");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::Tags.c_str());
     if (!projectInformationNode)
-        return NULL;
-    tags = parseVector(projectInformationNode->value());
+        throw new XMLParserSevereException (Constants::XMLParser::Header::Tags + Constants::ErrorMessage::Missing);
+    tags = ParseVector(projectInformationNode->value());
 
-    projectInformationNode = baseNode->first_node("url");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::Url.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::Url + Constants::ErrorMessage::Missing);
     url = projectInformationNode->value();
 
-    projectInformationNode = baseNode->first_node("userHandle");
+    projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::UserHandle.c_str());
     if (!projectInformationNode)
-        return NULL;
+        throw new XMLParserSevereException (Constants::XMLParser::Header::UserHandle + Constants::ErrorMessage::Missing);
     userHandle = projectInformationNode->value();
 
 #pragma endregion
@@ -262,36 +263,36 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
         );
 }
 
-void XMLParser::parseObjectList(xml_document<> *doc, ObjectList *objectList)
+void XMLParser::ParseObjectList(xml_document<> *doc, ObjectList *objectList)
 {
-    xml_node<> *objectListNode = doc->first_node()->first_node("objectList");
+    xml_node<> *objectListNode = doc->first_node()->first_node(Constants::XMLParser::Object::ObjectList.c_str());
     if (!objectListNode)
         return;
-    xml_node<> *node = objectListNode->first_node("object");
+    xml_node<> *node = objectListNode->first_node(Constants::XMLParser::Object::Object.c_str());
     while (node)
     {
         // TODO: Check if necessary
 
-        xml_attribute<> *objectReference = node->first_attribute("reference");
+        xml_attribute<> *objectReference = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
         if (objectReference)
         {
             string reference = objectReference->value();
             reference = reference + "/";
             xml_node<> *evaluatedReferenceNode = EvaluateString("/", reference, node);
 
-            xml_node<> *nameNode = evaluatedReferenceNode->first_node("name");
+            xml_node<> *nameNode = evaluatedReferenceNode->first_node(Constants::XMLParser::Object::Name.c_str());
             if (nameNode)
-                objectList->addObject(objectList->getObject(nameNode->value()));
+                objectList->AddObject(objectList->GetObject(nameNode->value()));
         }
         else
-            objectList->addObject(parseObject(node));
-        node = node->next_sibling("object");
+            objectList->AddObject(ParseObject(node));
+        node = node->next_sibling(Constants::XMLParser::Object::Object.c_str());
     }
 }
 
-Object *XMLParser::parseObject(xml_node<> *baseNode)
+Object *XMLParser::ParseObject(xml_node<> *baseNode)
 {
-    xml_node<> *node = baseNode->first_node("name");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Object::Name.c_str());
     if (!node)
         return NULL;
 
@@ -300,51 +301,51 @@ Object *XMLParser::parseObject(xml_node<> *baseNode)
     node = baseNode->first_node();
     while (node)
     {
-        if (strcmp(node->name(), "lookList") == 0)
+        if (strcmp(node->name(), Constants::XMLParser::Object::LookList.c_str()) == 0)
         {
 #pragma region lookList
-            xml_node<> *lookNode = node->first_node("look");
+            xml_node<> *lookNode = node->first_node(Constants::XMLParser::Object::Look.c_str());
             while (lookNode)
             {
-                object->addLook(parseLook(lookNode));
-                lookNode = lookNode->next_sibling("look");
+                object->AddLook(ParseLook(lookNode));
+                lookNode = lookNode->next_sibling(Constants::XMLParser::Object::Look.c_str());
             }
 #pragma endregion
         }
-        else if (strcmp(node->name(), "scriptList") == 0)
+        else if (strcmp(node->name(), Constants::XMLParser::Object::ScriptList.c_str()) == 0)
         {
 #pragma region scriptList
             xml_node<> *scriptListNode = node->first_node();
             while (scriptListNode)
             {
-                if (strcmp(scriptListNode->name(), "startScript") == 0)
+                if (strcmp(scriptListNode->name(), Constants::XMLParser::Script::StartScript.c_str()) == 0)
                 {
-                    object->addScript(parseStartScript(scriptListNode, object));
+                    object->AddScript(ParseStartScript(scriptListNode, object));
                 }
-                else if (strcmp(scriptListNode->name(), "broadcastScript") == 0)
+                else if (strcmp(scriptListNode->name(), Constants::XMLParser::Script::BroadcastScript.c_str()) == 0)
                 {
-                    object->addScript(parseBroadcastScript(scriptListNode, object));
+                    object->AddScript(ParseBroadcastScript(scriptListNode, object));
                 }
-                else if (strcmp(scriptListNode->name(), "whenScript") == 0)
+                else if (strcmp(scriptListNode->name(), Constants::XMLParser::Script::WhenScript.c_str()) == 0)
                 {
-                    object->addScript(parseWhenScript(scriptListNode, object));
+                    object->AddScript(ParseWhenScript(scriptListNode, object));
                 }
 
                 scriptListNode = scriptListNode->next_sibling();
             }
 #pragma endregion
         }
-        else if (strcmp(node->name(), "soundList") == 0)
+        else if (strcmp(node->name(), Constants::XMLParser::Object::SoundList.c_str()) == 0)
         {
 #pragma region soundList
             // TODO : Check if right
             xml_node<> *soundListNode = node->first_node();
             while (soundListNode)
             {
-                xml_attribute<> *soundInfoAttribute = soundListNode->first_attribute("reference");
+                xml_attribute<> *soundInfoAttribute = soundListNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
                 if (!soundInfoAttribute)
                     break;
-                object->addSoundInfo(new SoundInfo(soundInfoAttribute->value()));
+                object->AddSoundInfo(new SoundInfo(soundInfoAttribute->value()));
                 soundListNode = soundListNode->next_sibling();
             }
 #pragma endregion
@@ -355,17 +356,17 @@ Object *XMLParser::parseObject(xml_node<> *baseNode)
     return object;
 }
 
-Look *XMLParser::parseLook(xml_node<> *baseNode)
+Look *XMLParser::ParseLook(xml_node<> *baseNode)
 {
     string filename, name;
     xml_node<> *node;
 
-    node = baseNode->first_node("fileName");
+    node = baseNode->first_node(Constants::XMLParser::Look::FileName.c_str());
     if (!node)
         return NULL;
     filename = node->value();
 
-    node = baseNode->first_node("name");
+    node = baseNode->first_node(Constants::XMLParser::Look::Name.c_str());
     if (!node)
         return NULL;
     name = node->value();
@@ -374,65 +375,65 @@ Look *XMLParser::parseLook(xml_node<> *baseNode)
     return look;
 }
 
-Script *XMLParser::parseStartScript(xml_node<> *baseNode, Object *object)
+Script *XMLParser::ParseStartScript(xml_node<> *baseNode, Object *object)
 {
-    xml_node<> *spriteReferenceNode = baseNode->first_node("object");
+    xml_node<> *spriteReferenceNode = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!spriteReferenceNode)
         return NULL;
 
-    xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute("reference");
+    xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
 
     if (!spriteReferenceAttribute)
         return NULL;
 
     StartScript *script = new StartScript(spriteReferenceAttribute->value(), object);
-    parseBrickList(baseNode, script);
+    ParseBrickList(baseNode, script);
     return script;
 }
 
-Script *XMLParser::parseBroadcastScript(xml_node<> *baseNode, Object *object)
+Script *XMLParser::ParseBroadcastScript(xml_node<> *baseNode, Object *object)
 {
-    xml_node<> *spriteReferenceNode = baseNode->first_node("object");
+    xml_node<> *spriteReferenceNode = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!spriteReferenceNode)
         return NULL;
 
-    xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute("reference");
+    xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
 
     if (!spriteReferenceAttribute)
         return NULL;
 
-    xml_node<> *messageNode = baseNode->first_node("receivedMessage");
+    xml_node<> *messageNode = baseNode->first_node(Constants::XMLParser::Script::ReceivedMessage.c_str());
     if (!messageNode)
         return NULL;
 
     BroadcastScript *script = new BroadcastScript(messageNode->value(), spriteReferenceAttribute->value(), object);
-    parseBrickList(baseNode, script);
+    ParseBrickList(baseNode, script);
     return script;
 }
 
-Script *XMLParser::parseWhenScript(xml_node<> *baseNode, Object *object)
+Script *XMLParser::ParseWhenScript(xml_node<> *baseNode, Object *object)
 {
-    xml_node<> *spriteReferenceNode = baseNode->first_node("object");
+    xml_node<> *spriteReferenceNode = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!spriteReferenceNode)
         return NULL;
 
-    xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute("reference");
+    xml_attribute<> *spriteReferenceAttribute = spriteReferenceNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
 
     if (!spriteReferenceAttribute)
         return NULL;
 
-    xml_node<> *actionNode = baseNode->first_node("action");
+    xml_node<> *actionNode = baseNode->first_node(Constants::XMLParser::Object::Action.c_str());
     if (!actionNode)
         return NULL;
 
     WhenScript *script = new WhenScript(actionNode->value(), spriteReferenceAttribute->value(), object);
-    parseBrickList(baseNode, script);
+    ParseBrickList(baseNode, script);
     return script;
 }
 
-void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
+void XMLParser::ParseBrickList(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *brickListNode = baseNode->first_node("brickList");
+    xml_node<> *brickListNode = baseNode->first_node(Constants::XMLParser::Object::BrickList.c_str());
     if (!brickListNode)
         return;
 
@@ -442,142 +443,142 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
         Brick *current = NULL;
         bool isContainerBrick = false;
 
-        if (strcmp(node->name(), "setLookBrick") == 0)
+        if (strcmp(node->name(), Constants::XMLParser::Brick::SetLookBrick.c_str()) == 0)
         {
-            current = parseLookBrick(node, script);
+            current = ParseLookBrick(node, script);
         }
-        else if(strcmp(node->name(), "waitBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::WaitBrick.c_str()) == 0)
         {
-            current = parseWaitBrick(node, script);
+            current = ParseWaitBrick(node, script);
         }
-        else if(strcmp(node->name(), "placeAtBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::PlaceAtBrick.c_str()) == 0)
         {
-            current = parsePlaceAtBrick(node, script);
+            current = ParsePlaceAtBrick(node, script);
         }
 
-        else if(strcmp(node->name(), "setGhostEffectBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::SetGhostEffectBrick.c_str()) == 0)
         {
-            current = parseSetGhostEffectBrick(node, script);
+            current = ParseSetGhostEffectBrick(node, script);
         }
-        else if(strcmp(node->name(), "playSoundBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::PlaySoundBrick.c_str()) == 0)
         {
-            current = parsePlaySoundBrick(node, script);
+            current = ParsePlaySoundBrick(node, script);
         }
-        else if(strcmp(node->name(), "glideToBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::GlideToBrick.c_str()) == 0)
         {
-            current = parseGlideToBrick(node, script);
+            current = ParseGlideToBrick(node, script);
         }
-        else if(strcmp(node->name(), "turnLeftBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::TurnLeftBrick.c_str()) == 0)
         {
-            current = parseTurnLeftBrick(node, script);
+            current = ParseTurnLeftBrick(node, script);
         }
-        else if(strcmp(node->name(), "broadcastBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::BroadcastBrick.c_str()) == 0)
         {
-            current = parseBroadcastBrick(node, script);
+            current = ParseBroadcastBrick(node, script);
         }
-        else if(strcmp(node->name(), "hideBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::HideBrick.c_str()) == 0)
         {
-            current = parseHideBrick(node, script);
+            current = ParseHideBrick(node, script);
         }
-        else if(strcmp(node->name(), "showBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::ShowBrick.c_str()) == 0)
         {
-            current = parseShowBrick(node, script);
+            current = ParseShowBrick(node, script);
         }
-        else if(strcmp(node->name(), "ifLogicBeginBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::IfLogicBeginBrick.c_str()) == 0)
         {
-            current = parseIfLogicBeginBrick(node, script);
+            current = ParseIfLogicBeginBrick(node, script);
             isContainerBrick = true;
         }
-        else if(strcmp(node->name(), "ifLogicElseBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::IfLogicElseBrick.c_str()) == 0)
         {
-            parseIfLogicElseBrick(node, script);
+            ParseIfLogicElseBrick(node, script);
         }
-        else if(strcmp(node->name(), "ifLogicEndBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::IfLogicEndBrick.c_str()) == 0)
         {
-            parseIfLogicEndBrick(node, script);
+            ParseIfLogicEndBrick(node, script);
         }
-        else if(strcmp(node->name(), "foreverBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::ForeverBrick.c_str()) == 0)
         {
-            current = parseForeverBrick(node, script);
+            current = ParseForeverBrick(node, script);
             isContainerBrick = true;
         }
-        else if(strcmp(node->name(), "loopEndlessBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::LoopEndlessBrick.c_str()) == 0)
         {
-            parseForeverEndBrick(node, script);
+            ParseForeverEndBrick(node, script);
         }
-        else if(strcmp(node->name(), "repeatBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::RepeatBrick.c_str()) == 0)
         {
-            current = parseRepeatBrick(node, script);
+            current = ParseRepeatBrick(node, script);
             isContainerBrick = true;
         }
-        else if(strcmp(node->name(), "loopEndBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::LoopEndBrick.c_str()) == 0)
         {
-            parseRepeatEndBrick(node, script);
+            ParseRepeatEndBrick(node, script);
         }
-        else if(strcmp(node->name(), "setVariableBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::SetVariableBrick.c_str()) == 0)
         {
-            current = parseSetVariableBrick(node, script);
+            current = ParseSetVariableBrick(node, script);
         }
-        else if(strcmp(node->name(), "changeVariableBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::ChangeVariableBrick.c_str()) == 0)
         {
-            current = parseChangeVariableBrick(node, script);
+            current = ParseChangeVariableBrick(node, script);
         }
-        else if(strcmp(node->name(), "changeGhostEffectByNBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::ChangeGhostEffectByNBrick.c_str()) == 0)
         {
-            current = parseChangeGhostEffectByNBrick(node, script);
+            current = ParseChangeGhostEffectByNBrick(node, script);
         }
-        else if(strcmp(node->name(), "setSizeToBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::SetSizeToBrick.c_str()) == 0)
         {
-            current = parseSetSizeToBrick(node, script);
+            current = ParseSetSizeToBrick(node, script);
         }
-        else if(strcmp(node->name(), "changeSizeByNBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::ChangeSizeByNBrick.c_str()) == 0)
         {
-            current = parseChangeSizeByNBrick(node, script);
+            current = ParseChangeSizeByNBrick(node, script);
         }
-        else if(strcmp(node->name(), "nextLookBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::NextLookBrick.c_str()) == 0)
         {
-            current = parseNextLookBrick(node, script);
+            current = ParseNextLookBrick(node, script);
         }
-        else if(strcmp(node->name(), "setXBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::SetXBrick.c_str()) == 0)
         {
-            current = parseSetXBrick(node, script);
+            current = ParseSetXBrick(node, script);
         }
-        else if(strcmp(node->name(), "setYBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::SetYBrick.c_str()) == 0)
         {
-            current = parseSetYBrick(node, script);
+            current = ParseSetYBrick(node, script);
         }
-        else if(strcmp(node->name(), "changeXByNBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::ChangeXByNBrick.c_str()) == 0)
         {
-            current = parseChangeXByNBrick(node, script);
+            current = ParseChangeXByNBrick(node, script);
         }
-        else if(strcmp(node->name(), "changeYByNBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::ChangeYByNBrick.c_str()) == 0)
         {
-            current = parseChangeYByNBrick(node, script);
+            current = ParseChangeYByNBrick(node, script);
         }
-        else if(strcmp(node->name(), "pointInDirectionBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::PointInDirectionBrick.c_str()) == 0)
         {
-            current = parsePointInDirectionBrick(node, script);
+            current = ParsePointInDirectionBrick(node, script);
         }
-        else if(strcmp(node->name(), "turnLeftBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::TurnLeftBrick.c_str()) == 0)
         {
-            current = parseTurnLeftBrick(node, script);
+            current = ParseTurnLeftBrick(node, script);
         }
-        else if(strcmp(node->name(), "turnRightBrick") == 0)
+        else if(strcmp(node->name(), Constants::XMLParser::Brick::TurnRightBrick.c_str()) == 0)
         {
-            current = parseTurnRightBrick(node, script);
+            current = ParseTurnRightBrick(node, script);
         }
 
         if (current != NULL)
         {
-            if (containerStack->size() == 0 || isContainerBrick)
+            if (m_containerStack->size() == 0 || isContainerBrick)
             {
                 // Add to script
-                script->addBrick(current);
+                script->AddBrick(current);
             }
             else
             {
                 // Add to If-Brick
-                containerStack->back()->AddBrick(current);
+                m_containerStack->back()->AddBrick(current);
             }
         }
 
@@ -585,23 +586,23 @@ void XMLParser::parseBrickList(xml_node<> *baseNode, Script *script)
     }
 }
 
-Brick *XMLParser::parseLookBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseLookBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *objectNode = baseNode->first_node("object");
+    xml_node<> *objectNode = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!objectNode)
         return NULL;
 
-    xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+    xml_attribute<> *objectRef = objectNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectRef)
         return NULL;
 
     string objectReference = objectRef->value();
 
-    xml_node<> *lookNode =  baseNode->first_node("look");
+    xml_node<> *lookNode =  baseNode->first_node(Constants::XMLParser::Object::Look.c_str());
     if (!lookNode)
         return new CostumeBrick(objectReference, script);
 
-    xml_attribute<> *lookRef = lookNode->first_attribute("reference");
+    xml_attribute<> *lookRef = lookNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!lookRef)
         return NULL;
 
@@ -620,13 +621,13 @@ Brick *XMLParser::parseLookBrick(xml_node<> *baseNode, Script *script)
     return new CostumeBrick(objectReference, lookRef->value(), index, script);
 }
 
-Brick *XMLParser::parseHideBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseHideBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *objectNode = baseNode->first_node("object");
+    xml_node<> *objectNode = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!objectNode)
         return NULL;
 
-    xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+    xml_attribute<> *objectRef = objectNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectRef)
         return NULL;
 
@@ -635,13 +636,13 @@ Brick *XMLParser::parseHideBrick(xml_node<> *baseNode, Script *script)
     return new HideBrick(objectReference, script);
 }
 
-Brick *XMLParser::parseShowBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseShowBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *objectNode = baseNode->first_node("object");
+    xml_node<> *objectNode = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!objectNode)
         return NULL;
 
-    xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+    xml_attribute<> *objectRef = objectNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectRef)
         return NULL;
 
@@ -650,42 +651,42 @@ Brick *XMLParser::parseShowBrick(xml_node<> *baseNode, Script *script)
     return new ShowBrick(objectReference, script);
 }
 
-Brick *XMLParser::parseIfLogicBeginBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseIfLogicBeginBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *objectNode = baseNode->first_node("object");
+    xml_node<> *objectNode = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!objectNode)
         return NULL;
 
-    xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+    xml_attribute<> *objectRef = objectNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectRef)
         return NULL;
 
     string objectReference = objectRef->value();
 
-    xml_node<> *node = baseNode->first_node("ifCondition");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::IfCondition.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *condition = NULL;
     if (formulaTreeNode)
-        condition = parseFormulaTree(formulaTreeNode);
+        condition = ParseFormulaTree(formulaTreeNode);
 
     IfBrick *brick = new IfBrick(objectReference, condition, script);
 
     // Add to stack
-    containerStack->push_back(brick);
+    m_containerStack->push_back(brick);
 
     return brick;
 }
 
-Brick *XMLParser::parseForeverBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseForeverBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *objectNode = baseNode->first_node("object");
+    xml_node<> *objectNode = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!objectNode)
         return NULL;
 
-    xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+    xml_attribute<> *objectRef = objectNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectRef)
         return NULL;
 
@@ -694,92 +695,92 @@ Brick *XMLParser::parseForeverBrick(xml_node<> *baseNode, Script *script)
     ForeverBrick *brick = new ForeverBrick(objectReference, script);
 
     // Add to stack
-    containerStack->push_back(brick);
+    m_containerStack->push_back(brick);
 
     return brick;
 }
 
-void XMLParser::parseForeverEndBrick(xml_node<> *baseNode, Script *script)
+void XMLParser::ParseForeverEndBrick(xml_node<> *baseNode, Script *script)
 {
-    if (containerStack->size() > 0)
+    if (m_containerStack->size() > 0)
     {
         // Remove ForeverBrick from stack
-        containerStack->pop_back(); // TODO: Maybe sanity-check?
+        m_containerStack->pop_back(); // TODO: Maybe sanity-check?
     }
 }
 
-Brick *XMLParser::parseRepeatBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseRepeatBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *objectNode = baseNode->first_node("object");
+    xml_node<> *objectNode = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!objectNode)
         return NULL;
 
-    xml_attribute<> *objectRef = objectNode->first_attribute("reference");
+    xml_attribute<> *objectRef = objectNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectRef)
         return NULL;
 
     string objectReference = objectRef->value();
 
-    xml_node<> *node = baseNode->first_node("timesToRepeat");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::TimesToRepeat.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *times = NULL;
     if (formulaTreeNode)
-        times = parseFormulaTree(formulaTreeNode);
+        times = ParseFormulaTree(formulaTreeNode);
 
     RepeatBrick *brick = new RepeatBrick(objectReference, times, script);
 
     // Add to stack
-    containerStack->push_back(brick);
+    m_containerStack->push_back(brick);
 
     return brick;
 }
 
-void XMLParser::parseRepeatEndBrick(xml_node<> *baseNode, Script *script)
+void XMLParser::ParseRepeatEndBrick(xml_node<> *baseNode, Script *script)
 {
-    if (containerStack->size() > 0)
+    if (m_containerStack->size() > 0)
     {
         // Remove ForeverBrick from stack
-        containerStack->pop_back(); // TODO: Maybe sanity-check?
+        m_containerStack->pop_back(); // TODO: Maybe sanity-check?
     }
 }
 
-void XMLParser::parseIfLogicElseBrick(xml_node<> *baseNode, Script *script)
+void XMLParser::ParseIfLogicElseBrick(xml_node<> *baseNode, Script *script)
 {
-    if (containerStack->size() > 0)
+    if (m_containerStack->size() > 0)
     {
         // Change mode
-        ((IfBrick*) (containerStack->back()))->SetCurrentAddMode(IfBranchType::Else);
+        ((IfBrick*) (m_containerStack->back()))->SetCurrentAddMode(IfBranchType::Else);
     }
 }
 
-void XMLParser::parseIfLogicEndBrick(xml_node<> *baseNode, Script *script)
+void XMLParser::ParseIfLogicEndBrick(xml_node<> *baseNode, Script *script)
 {
-    if (containerStack->size() > 0)
+    if (m_containerStack->size() > 0)
     {
         // Remove IfBrick from stack
-        containerStack->pop_back();
+        m_containerStack->pop_back();
     }
 }
 
-Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseWaitBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("timeToWaitInSeconds");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::TimeToWaitInSeconds.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *time = NULL;
     if (formulaTreeNode)
-        time = parseFormulaTree(formulaTreeNode);
+        time = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -787,22 +788,22 @@ Brick *XMLParser::parseWaitBrick(xml_node<> *baseNode, Script *script)
     return new WaitBrick(objectReference, time, script);
 }
 
-Brick *XMLParser::parseChangeGhostEffectByNBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseChangeGhostEffectByNBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("changeGhostEffect");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::ChangeGhostEffect.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *amount = NULL;
     if (formulaTreeNode)
-        amount = parseFormulaTree(formulaTreeNode);
+        amount = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -810,22 +811,22 @@ Brick *XMLParser::parseChangeGhostEffectByNBrick(xml_node<> *baseNode, Script *s
     return new ChangeGhostEffectByBrick(objectReference, amount, script);
 }
 
-Brick *XMLParser::parseSetSizeToBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseSetSizeToBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("size");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Size.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *size = NULL;
     if (formulaTreeNode)
-        size = parseFormulaTree(formulaTreeNode);
+        size = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -833,22 +834,22 @@ Brick *XMLParser::parseSetSizeToBrick(xml_node<> *baseNode, Script *script)
     return new SetSizeToBrick(objectReference, size, script);
 }
 
-Brick *XMLParser::parseChangeSizeByNBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseChangeSizeByNBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("size");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Size.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *size = NULL;
     if (formulaTreeNode)
-        size = parseFormulaTree(formulaTreeNode);
+        size = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -856,13 +857,13 @@ Brick *XMLParser::parseChangeSizeByNBrick(xml_node<> *baseNode, Script *script)
     return new ChangeSizeByBrick(objectReference, size, script);
 }
 
-Brick *XMLParser::parseNextLookBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseNextLookBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("object");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -870,22 +871,22 @@ Brick *XMLParser::parseNextLookBrick(xml_node<> *baseNode, Script *script)
     return new NextLookBrick(objectReference, script);
 }
 
-Brick *XMLParser::parseSetXBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseSetXBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("xPosition");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::XPosition.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *position = NULL;
     if (formulaTreeNode)
-        position = parseFormulaTree(formulaTreeNode);
+        position = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -893,22 +894,22 @@ Brick *XMLParser::parseSetXBrick(xml_node<> *baseNode, Script *script)
     return new SetXBrick(objectReference, position, script);
 }
 
-Brick *XMLParser::parseSetYBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseSetYBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("xPosition");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::YPosition.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *position = NULL;
     if (formulaTreeNode)
-        position = parseFormulaTree(formulaTreeNode);
+        position = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -916,22 +917,22 @@ Brick *XMLParser::parseSetYBrick(xml_node<> *baseNode, Script *script)
     return new SetYBrick(objectReference, position, script);
 }
 
-Brick *XMLParser::parseChangeXByNBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseChangeXByNBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("xMovement");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::XMovement.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *movement = NULL;
     if (formulaTreeNode)
-        movement = parseFormulaTree(formulaTreeNode);
+        movement = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -939,22 +940,22 @@ Brick *XMLParser::parseChangeXByNBrick(xml_node<> *baseNode, Script *script)
     return new ChangeXByBrick(objectReference, movement, script);
 }
 
-Brick *XMLParser::parseChangeYByNBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseChangeYByNBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("yMovement");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::YMovement.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *movement = NULL;
     if (formulaTreeNode)
-        movement = parseFormulaTree(formulaTreeNode);
+        movement = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -962,22 +963,22 @@ Brick *XMLParser::parseChangeYByNBrick(xml_node<> *baseNode, Script *script)
     return new ChangeYByBrick(objectReference, movement, script);
 }
 
-Brick *XMLParser::parsePointInDirectionBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParsePointInDirectionBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("degrees");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Degrees.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *degrees = NULL;
     if (formulaTreeNode)
-        degrees = parseFormulaTree(formulaTreeNode);
+        degrees = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -985,22 +986,22 @@ Brick *XMLParser::parsePointInDirectionBrick(xml_node<> *baseNode, Script *scrip
     return new PointToBrick(objectReference, degrees, script);
 }
 
-Brick *XMLParser::parseTurnLeftBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseTurnLeftBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("degrees");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Degrees.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *degrees = NULL;
     if (formulaTreeNode)
-        degrees = parseFormulaTree(formulaTreeNode);
+        degrees = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -1008,22 +1009,22 @@ Brick *XMLParser::parseTurnLeftBrick(xml_node<> *baseNode, Script *script)
     return new TurnLeftBrick(objectReference, degrees, script);
 }
 
-Brick *XMLParser::parseTurnRightBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseTurnRightBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("degrees");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Degrees.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *degrees = NULL;
     if (formulaTreeNode)
-        degrees = parseFormulaTree(formulaTreeNode);
+        degrees = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -1031,31 +1032,31 @@ Brick *XMLParser::parseTurnRightBrick(xml_node<> *baseNode, Script *script)
     return new TurnRightBrick(objectReference, degrees, script);
 }
 
-Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParsePlaceAtBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("xPosition");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::XPosition.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *postionX = NULL;
     if (formulaTreeNode)
-        postionX = parseFormulaTree(formulaTreeNode);
+        postionX = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("yPosition");
+    node = baseNode->first_node(Constants::XMLParser::Brick::YPosition.c_str());
     if (!node)
         return NULL;
 
-    formulaTreeNode = node->first_node("formulaTree");
+    formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *postionY = NULL;
     if (formulaTreeNode)
-        postionY = parseFormulaTree(formulaTreeNode);
+        postionY = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -1063,49 +1064,49 @@ Brick *XMLParser::parsePlaceAtBrick(xml_node<> *baseNode, Script *script)
     return new PlaceAtBrick(objectReference, postionX, postionY, script);
 }
 
-Brick *XMLParser::parseGlideToBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseGlideToBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("xDestination");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::XDestination.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *destinationX = NULL;
     if (formulaTreeNode)
-        destinationX = parseFormulaTree(formulaTreeNode);
+        destinationX = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("yDestination");
+    node = baseNode->first_node(Constants::XMLParser::Brick::YDestination.c_str());
     if (!node)
         return NULL;
 
-    formulaTreeNode = node->first_node("formulaTree");
+    formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *destinationY = NULL;
     if (formulaTreeNode)
-        destinationY = parseFormulaTree(formulaTreeNode);
+        destinationY = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("durationInMilliSeconds");
+    node = baseNode->first_node(Constants::XMLParser::Brick::DurationInMilliSeconds.c_str());
     if (!node)
         return NULL;
 
-    formulaTreeNode = node->first_node("formulaTree");
+    formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *durationInMilliSeconds = NULL;
     if (formulaTreeNode)
-        durationInMilliSeconds = parseFormulaTree(formulaTreeNode);
+        durationInMilliSeconds = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("durationInMilliSeconds");
+    node = baseNode->first_node(Constants::XMLParser::Brick::DurationInMilliSeconds.c_str());
     if (!node)
         return NULL;
 
-    formulaTreeNode = node->first_node("formulaTree");
+    formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *duration = NULL;
     if (formulaTreeNode)
-        duration = parseFormulaTree(formulaTreeNode);
+        duration = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -1113,22 +1114,22 @@ Brick *XMLParser::parseGlideToBrick(xml_node<> *baseNode, Script *script)
     return new GlideToBrick(objectReference, destinationX, destinationY, duration, script);
 }
 
-Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("transparency");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Transparency.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *transparency = NULL;
     if (formulaTreeNode)
-        transparency = parseFormulaTree(formulaTreeNode);
+        transparency = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -1136,18 +1137,18 @@ Brick *XMLParser::parseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
     return new SetGhostEffectBrick(objectReference, transparency, script);
 }
 
-Brick *XMLParser::parseBroadcastBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseBroadcastBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("broadcastMessage");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::BroadcastMessage.c_str());
     if (!node)
         return NULL;
     string broadcastMessage = node->value();
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -1155,27 +1156,27 @@ Brick *XMLParser::parseBroadcastBrick(xml_node<> *baseNode, Script *script)
     return new BroadcastBrick(objectReference, broadcastMessage, script);
 }
 
-Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParsePlaySoundBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *soundInfoNode = baseNode->first_node("sound");
+    xml_node<> *soundInfoNode = baseNode->first_node(Constants::XMLParser::Brick::Sound.c_str());
     if (!soundInfoNode)
         return NULL;
 
-    xml_node<> *node = soundInfoNode->first_node("fileName");
+    xml_node<> *node = soundInfoNode->first_node(Constants::XMLParser::Brick::FileName.c_str());
     if (!node)
         return NULL;
     string filename = node->value();
 
-    node = soundInfoNode->first_node("name");
+    node = soundInfoNode->first_node(Constants::XMLParser::Brick::Name.c_str());
     if (!node)
         return NULL;
     string name = node->value();
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
@@ -1183,46 +1184,46 @@ Brick *XMLParser::parsePlaySoundBrick(xml_node<> *baseNode, Script *script)
     return new PlaySoundBrick(objectReference, filename, name, script);
 }
 
-Brick *XMLParser::parseSetVariableBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseSetVariableBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("userVariable");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *variableNode = node->first_node("name");
+    xml_node<> *variableNode = node->first_node(Constants::XMLParser::Formula::Name.c_str());
     string name;
     if (variableNode)
         name = variableNode->value();
     else
     {
-        xml_attribute<> *referenceAttribute = node->first_attribute("reference");
+        xml_attribute<> *referenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
         if (!referenceAttribute)
             return NULL;
         string reference = referenceAttribute->value();
         reference = reference + "/";
         xml_node<> *referencedNode = EvaluateString("/", reference, node); 
-        variableNode = referencedNode->first_node("name");
+        variableNode = referencedNode->first_node(Constants::XMLParser::Formula::Name.c_str());
         if (!variableNode)
             return NULL;
         name = variableNode->value();
     }
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
     FormulaTree *variableFormula = NULL;
-    node = baseNode->first_node("variableFormula");
+    node = baseNode->first_node(Constants::XMLParser::Formula::VariableFormula.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     if (formulaTreeNode)
-        variableFormula = parseFormulaTree(formulaTreeNode);
+        variableFormula = ParseFormulaTree(formulaTreeNode);
 
     string objectReference = objectReferenceAttribute->value();
     VariableManagementBrick *newBrick = new SetVariableBrick(objectReference, variableFormula, script);
@@ -1230,39 +1231,39 @@ Brick *XMLParser::parseSetVariableBrick(xml_node<> *baseNode, Script *script)
     return newBrick;
 }
 
-Brick *XMLParser::parseChangeVariableBrick(xml_node<> *baseNode, Script *script)
+Brick *XMLParser::ParseChangeVariableBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node("userVariable");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *referenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *referenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!referenceAttribute)
         return NULL;
     string reference = referenceAttribute->value();
     reference = reference + "/";
     xml_node<> *referencedNode = EvaluateString("/", reference, node); 
-    xml_node<> *variableNode = referencedNode->first_node("name");
+    xml_node<> *variableNode = referencedNode->first_node(Constants::XMLParser::Formula::Name.c_str());
     if (!variableNode)
         return NULL;
     string name = variableNode->value();
 
-    node = baseNode->first_node("object");
+    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
         return NULL;
 
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute("reference");
+    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     if (!objectReferenceAttribute)
         return NULL;
 
     FormulaTree *variableFormula = NULL;
-    node = baseNode->first_node("variableFormula");
+    node = baseNode->first_node(Constants::XMLParser::Formula::VariableFormula.c_str());
     if (!node)
         return NULL;
 
-    xml_node<> *formulaTreeNode = node->first_node("formulaTree");
+    xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     if (formulaTreeNode)
-        variableFormula = parseFormulaTree(formulaTreeNode);
+        variableFormula = ParseFormulaTree(formulaTreeNode);
 
     string objectReference = objectReferenceAttribute->value();
     VariableManagementBrick *newBrick = new ChangeVariableBrick(objectReference, variableFormula, script);
@@ -1270,66 +1271,66 @@ Brick *XMLParser::parseChangeVariableBrick(xml_node<> *baseNode, Script *script)
     return newBrick;
 }
 
-FormulaTree *XMLParser::parseFormulaTree(xml_node<> *baseNode)
+FormulaTree *XMLParser::ParseFormulaTree(xml_node<> *baseNode)
 {
-    xml_node<> *node = baseNode->first_node("type");
+    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Formula::Type.c_str());
     if (!node)
         return NULL;
     string type = node->value();
 
-    node = baseNode->first_node("value");
+    node = baseNode->first_node(Constants::XMLParser::Formula::Value.c_str());
     string value = "";
     if (node)
         value = node->value();
 
     FormulaTree *formulaTree = new FormulaTree(type, value);
 
-    node = baseNode->first_node("leftChild");
+    node = baseNode->first_node(Constants::XMLParser::Formula::LeftChild.c_str());
     if (node)
-        formulaTree->SetLeftChild(parseFormulaTree(node));
+        formulaTree->SetLeftChild(ParseFormulaTree(node));
 
-    node = baseNode->first_node("rightChild");
+    node = baseNode->first_node(Constants::XMLParser::Formula::RightChild.c_str());
     if (node)
-        formulaTree->SetRightChild(parseFormulaTree(node));
+        formulaTree->SetRightChild(ParseFormulaTree(node));
 
     return formulaTree;
 }
 
-bool XMLParser::parseBoolean(string input)
+bool XMLParser::ParseBoolean(string input)
 {
-    if (input.compare("true") == 0)
+    if (input.compare(Constants::XMLParser::Formula::True) == 0)
         return true;
     else
         return false;
 }
 
-vector<string> *XMLParser::parseVector(string input)
+vector<string> *XMLParser::ParseVector(string input)
 {
     return new vector<string>();
 }
 
-time_t XMLParser::parseDateTime(string input)
+time_t XMLParser::ParseDateTime(string input)
 {
     time_t now;
     time(&now);
     return now;
 }
 
-void XMLParser::parseVariableList(xml_document<> *doc, Project *project)
+void XMLParser::ParseVariableList(xml_document<> *doc, Project *project)
 {
-    xml_node<> *baseNode = doc->first_node()->first_node("variables");
+    xml_node<> *baseNode = doc->first_node()->first_node(Constants::XMLParser::Formula::Variables.c_str());
     if (!baseNode)
         return;
 
-    xml_node<> *variableListNode = baseNode->first_node("objectVariableList");
-    xml_node<> *node = variableListNode->first_node("entry");
+    xml_node<> *variableListNode = baseNode->first_node(Constants::XMLParser::Formula::ObjectVariableList.c_str());
+    xml_node<> *node = variableListNode->first_node(Constants::XMLParser::Formula::Entry.c_str());
     while (node)
     {
-        xml_node<> *objectReferenceNode = node->first_node("object");	
+        xml_node<> *objectReferenceNode = node->first_node(Constants::XMLParser::Object::Object.c_str());	
         if (!objectReferenceNode)
             return;
 
-        xml_attribute<> *objectReferenceAttribute = objectReferenceNode->first_attribute("reference");
+        xml_attribute<> *objectReferenceAttribute = objectReferenceNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
         if (!objectReferenceAttribute)
             return;
 
@@ -1339,46 +1340,46 @@ void XMLParser::parseVariableList(xml_document<> *doc, Project *project)
         if (!objectNode)
             return;
 
-        xml_node<> *nameNode = objectNode->first_node("name");
+        xml_node<> *nameNode = objectNode->first_node(Constants::XMLParser::Formula::Name.c_str());
         if (!nameNode)
             return;
-        Object *object = project->getObjectList()->getObject(nameNode->value());
+        Object *object = project->GetObjectList()->GetObject(nameNode->value());
 
-        xml_node<> *listNode = node->first_node("list");
+        xml_node<> *listNode = node->first_node(Constants::XMLParser::Formula::List.c_str());
         if (!listNode)
             return;
-        listNode = listNode->first_node("userVariable");
+        listNode = listNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
         while (listNode)
         {
-            object->addVariable(parseUserVariable(listNode));
-            listNode = listNode->next_sibling("userVariable");
+            object->AddVariable(ParseUserVariable(listNode));
+            listNode = listNode->next_sibling(Constants::XMLParser::Formula::UserVariable.c_str());
         }
-        node = node->next_sibling("entry");
+        node = node->next_sibling(Constants::XMLParser::Formula::Entry.c_str());
     }
 
-    variableListNode = baseNode->first_node("programVariableList");
+    variableListNode = baseNode->first_node(Constants::XMLParser::Formula::ProgramVariableList.c_str());
     if (!variableListNode)
         return;
-    node = variableListNode->first_node("userVariable");
+    node = variableListNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
     while (node)
     {
-        m_project->addVariable(parseUserVariable(node));
-        node = node->next_sibling("userVariable");
+        m_project->AddVariable(ParseUserVariable(node));
+        node = node->next_sibling(Constants::XMLParser::Formula::UserVariable.c_str());
     }
 }
 
-pair<string, UserVariable*> XMLParser::parseUserVariable(xml_node<> *baseNode)
+pair<string, UserVariable*> XMLParser::ParseUserVariable(xml_node<> *baseNode)
 {
     xml_node<> *referencedNode = baseNode;
-    xml_attribute<> *referenceAttribute = baseNode->first_attribute("reference");
+    xml_attribute<> *referenceAttribute = baseNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
     string reference = referenceAttribute->value();
 
     xml_node<> *evaluatedReferenceNode = EvaluateString("/", reference, referencedNode);
-    evaluatedReferenceNode = evaluatedReferenceNode->first_node("userVariable");
+    evaluatedReferenceNode = evaluatedReferenceNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
 
-    xml_node<> *variableNode = evaluatedReferenceNode->first_node("name");
+    xml_node<> *variableNode = evaluatedReferenceNode->first_node(Constants::XMLParser::Formula::Name.c_str());
     string name = variableNode->value();
-    variableNode = evaluatedReferenceNode->first_node("value");
+    variableNode = evaluatedReferenceNode->first_node(Constants::XMLParser::Formula::Value.c_str());
     string value = "";
     if (variableNode)
         value = variableNode->value();
@@ -1431,7 +1432,7 @@ void XMLParser::SetPendingVariables()
 {
     for (map<VariableManagementBrick*, string>::iterator it = m_pendingVariables->begin(); it != m_pendingVariables->end(); it++)
     {
-        it->first->SetVariable(it->first->Parent()->Parent()->Variable(it->second));
-        it->first->SetVariable(m_project->Variable(it->second));
+        it->first->SetVariable(it->first->GetParent()->GetParent()->GetVariable(it->second));
+        it->first->SetVariable(m_project->GetVariable(it->second));
     }
 }

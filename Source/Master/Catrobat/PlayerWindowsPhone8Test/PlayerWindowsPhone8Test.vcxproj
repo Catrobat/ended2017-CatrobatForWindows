@@ -165,14 +165,17 @@
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ChangeVariableBrick.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ChangeXByBrick.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ChangeYByBrick.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Constants.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ContainerBrick.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\CostumeBrick.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\DDSLoader.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Direct3DBase.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\DirectXHelper.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ExceptionLogger.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ForeverBrick.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTree.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\GlideToBrick.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Helper.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\HideBrick.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\IfBrick.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Interpreter.h" />
@@ -211,6 +214,7 @@
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\WhenScript.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParser.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserException.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="TestHelper.h" />
   </ItemGroup>
@@ -232,9 +236,11 @@
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\CostumeBrick.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\DDSLoader.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Direct3DBase.cpp" />
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ExceptionLogger.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ForeverBrick.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTree.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\GlideToBrick.cpp" />
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Helper.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\HideBrick.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\IfBrick.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Interpreter.cpp" />
@@ -273,6 +279,7 @@
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\WhenScript.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParser.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserException.cpp" />
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.cpp" />
     <ClCompile Include="BasicArithmeticalOperations.cpp" />
     <ClCompile Include="ControlBricks.cpp" />
     <ClCompile Include="FormulaTreeTests.cpp" />

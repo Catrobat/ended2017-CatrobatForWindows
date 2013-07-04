@@ -57,8 +57,8 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formula = new FormulaTree(OP, L_AND);
 			formula->SetLeftChild(new FormulaTree(FUN,L_TRUE));
 			formula->SetRightChild(new FormulaTree(OP, EQUAL));
-			formula->getRightChild()->SetLeftChild(new FormulaTree(FUN, L_FALSE));
-			formula->getRightChild()->SetRightChild(new FormulaTree(FUN, L_TRUE));
+			formula->GetRightChild()->SetLeftChild(new FormulaTree(FUN, L_FALSE));
+			formula->GetRightChild()->SetRightChild(new FormulaTree(FUN, L_TRUE));
 
 			Object *object = new Object("TestObject");
 			Interpreter *interpreter = Interpreter::Instance();

@@ -39,11 +39,11 @@ public:
 		SetVariableBrick
 	};
 
-	Script *Parent();
+	Script *GetParent();
 
 	virtual void Execute() = 0;
 
-	TypeOfBrick BrickType();
+	TypeOfBrick GetBrickType();
 
 protected:
 	Brick(TypeOfBrick brickType, string objectReference, Script *parent);

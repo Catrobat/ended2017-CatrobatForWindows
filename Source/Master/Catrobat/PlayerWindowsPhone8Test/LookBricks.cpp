@@ -207,11 +207,11 @@ namespace PlayerWindowsPhone8Test
 			Look *look5 = new Look("test5", "testName5");
 
 			Object *object = new Object("TestObject");
-			object->addLook(look1);
-			object->addLook(look2);
-			object->addLook(look3);
-			object->addLook(look4);
-			object->addLook(look5);
+			object->AddLook(look1);
+			object->AddLook(look2);
+			object->AddLook(look3);
+			object->AddLook(look4);
+			object->AddLook(look5);
 
 			StartScript *script = new StartScript(spriteReference, object);
 
@@ -296,11 +296,11 @@ namespace PlayerWindowsPhone8Test
 			Look *look5 = new Look("test5", "testName5");
 
 			Object *object = new Object("TestObject");
-			object->addLook(look1);
-			object->addLook(look2);
-			object->addLook(look3);
-			object->addLook(look4);
-			object->addLook(look5);
+			object->AddLook(look1);
+			object->AddLook(look2);
+			object->AddLook(look3);
+			object->AddLook(look4);
+			object->AddLook(look5);
 
 			StartScript *script = new StartScript(spriteReference, object);
 

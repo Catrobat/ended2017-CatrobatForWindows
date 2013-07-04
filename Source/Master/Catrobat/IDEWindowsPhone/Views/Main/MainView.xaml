@@ -29,6 +29,8 @@
     <converters:BytesImageConverter x:Key="BytesImageConverter" />
     <converters:VersionConverter x:Key="VersionConverter"/>
     <converters:ScreenshotConverter x:Key="ScreenshotConverter"/>
+    <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+    <converters:BoolVisibilityNegativeConverter x:Key="BoolVisibilityNegativeConverter"/>
 
     <Style x:Key="ContinuousListBoxButtonStyle" TargetType="Button">
       <Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
@@ -60,34 +62,34 @@
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <!--Panorama control-->
-    <controls:Panorama Name="panoramaMain" SelectionChanged="panoramaMain_SelectionChanged">
+    <controls:Panorama Name="PanoramaMain" SelectionChanged="panoramaMain_SelectionChanged">
       <controls:Panorama.Background>
         <ImageBrush ImageSource="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.Background}" />
       </controls:Panorama.Background>
 
       <!--My Projects panorama item-->
-      <controls:PanoramaItem Name="panoramaItemCurrentProject" HorizontalAlignment="Left" Header="{Binding Path=Main.HeaderCurrentProject, Source={StaticResource LocalizedStrings}}">
+      <controls:PanoramaItem Name="PanoramaItemCurrentProject" HorizontalAlignment="Left" Header="{Binding Path=Main.HeaderCurrentProject, Source={StaticResource LocalizedStrings}}">
         <Grid>
           <StackPanel>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="{ Binding CurrentProject.ProjectName}" Margin="0 0 0 20" Style="{StaticResource PhoneTextLargeStyle}" />
             <Grid Height="400">
-                <Image Name="imageCurrentProjectScreenshot" Source="{Binding CurrentProjectScreenshot, Converter={StaticResource ScreenshotConverter}}" />
-                <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="buttonPlayCurrentProject"          
+              <Image Name="ImageCurrentProjectScreenshot" Source="{Binding CurrentProjectScreenshot, Converter={StaticResource ScreenshotConverter}}" />
+              <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="ButtonPlayCurrentProject"          
                 Template="{StaticResource ScreenshotButtonControlTemplate}"
                 Margin="0,0,0,0" Command="{Binding PlayCurrentProjectCommand}" Width="130" />
             </Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-              <buttons:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonCreateNewProject" 
+              <buttons:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="ButtonCreateNewProject" 
                           ImageName="add"
                           Text="{Binding Path=Main.ButtonCreate, Source={StaticResource LocalizedStrings}}"
                           Template="{StaticResource ImageButtonControlTemplate}"
                           Margin="10" Command="{Binding CreateNewProjectCommand}" />
-              <buttons:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonEditCurrentProject" 
+              <buttons:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="ButtonEditCurrentProject" 
                           ImageName="edit"
                           Text="{Binding Path=Main.ButtonEdit, Source={StaticResource LocalizedStrings}}"
                           Template="{StaticResource ImageButtonControlTemplate}"
                           Margin="10" Command="{Binding EditCurrentProjectCommand}" />
-              <buttons:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonUploadCurrentProject" 
+              <buttons:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="ButtonUploadCurrentProject" 
                           ImageName="upload"
                           Text="{Binding Path=Main.ButtonUpload, Source={StaticResource LocalizedStrings}}"
                           Template="{StaticResource ImageButtonControlTemplate}"
@@ -98,7 +100,7 @@
       </controls:PanoramaItem>
 
       <!--Local Projects panorama item-->
-      <controls:PanoramaItem Name="panoramaItemLocalProjects" Header="{Binding Path=Main.HeaderLocalProjects, Source={StaticResource LocalizedStrings}}">
+      <controls:PanoramaItem Name="PanoramaItemLocalProjects" Header="{Binding Path=Main.HeaderLocalProjects, Source={StaticResource LocalizedStrings}}">
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -134,34 +136,30 @@
                 </Grid>
 
                 <Grid Grid.Row="1">
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                  </Grid.ColumnDefinitions>
-                  <Grid Grid.Column="0" Name="GridSelectedMessage" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <TextBlock Opacity="0.9" TextWrapping="Wrap" TextAlignment="Center" 
-                           VerticalAlignment="Center" HorizontalAlignment="Center">ACTIVE</TextBlock>
+                  <Grid
+                    Visibility="{Binding IsActiveatingLocalProject, 
+                    Converter={StaticResource BoolVisibilityConverter}}"
+                    Margin="0 0 70 0">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <statusIcons:ProcessIcon Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                             Width="30" Height="30" Margin="5" IsProcessing="True" />
+                    <TextBlock Opacity="0.5" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" 
+                               VerticalAlignment="Center" Grid.Column="1"> 
+                      Please wait while the project being activated 
+                    </TextBlock>
                   </Grid>
 
-                  <!--<imageButton:ImageButton Grid.Column="1" VerticalAlignment="Center" x:Name="buttonCopyLocalProject" 
-                        ImageName="copy"
-                        Text="{Binding Path=Main.ButtonCopy, Source={StaticResource LocalizedStrings}}"
-                        Template="{StaticResource ImageButtonControlTemplate}"
-                        Margin="10" Command="{Binding Main.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
-                        CommandParameter="{Binding CurrentProject.ProjectName}"
-                        IsAutoColor="False" IsDark="True"/>
-                  <imageButton:ImageButton Grid.Column="2" VerticalAlignment="Center" x:Name="buttonDeleteLocalProject" 
-                        ImageName="delete"
-                        Text="{Binding Path=Main.ButtonDelete, Source={StaticResource LocalizedStrings}}"
-                        Template="{StaticResource ImageButtonControlTemplate}"
-                        Margin="10" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
-                        CommandParameter="{Binding CurrentProject.ProjectName}"
-                        IsAutoColor="False" IsDark="True"/>-->
+                  <TextBlock Grid.Column="0" Opacity="0.9" Margin="10 0 10 0" TextWrapping="Wrap" TextAlignment="Center" 
+                             Visibility="{Binding IsActiveatingLocalProject, 
+                              Converter={StaticResource BoolVisibilityNegativeConverter}}"
+                             VerticalAlignment="Center" HorizontalAlignment="Left">ACTIVE</TextBlock>
                 </Grid>
               </Grid>
               <Grid Grid.Column="1">
-                <Border Grid.Column="3" BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="4 0 0 0">
+                <Border BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="4 0 0 0">
                   <Grid HorizontalAlignment="Right">
                     <Image HorizontalAlignment="Right" Source="{Binding CurrentProjectScreenshot, Converter={StaticResource ScreenshotConverter}}" MaxHeight="155" MaxWidth="160"/>
                   </Grid>
@@ -169,7 +167,7 @@
               </Grid>
             </Grid>
           </Border>
-          <ListBox Grid.Row="1" Name="listBoxLocalProjects" ItemsSource="{Binding LocalProjects}" SelectedItem="{Binding CurrentProject}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+          <ListBox Grid.Row="1" Name="ListBoxLocalProjects" ItemsSource="{Binding LocalProjects}" SelectedItem="{Binding CurrentProject}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <ListBox.ItemTemplate>
               <DataTemplate>
                 <projectControls:LocalProjectControl Project="{Binding}" />
@@ -180,7 +178,7 @@
       </controls:PanoramaItem>
 
       <!--Online Projects panorama item-->
-      <controls:PanoramaItem Name="panoramaItemOnlineProjects" Header="{Binding Path=Main.HeaderOnlineProjects, Source={StaticResource LocalizedStrings}}">
+      <controls:PanoramaItem Name="PanoramaItemOnlineProjects" Header="{Binding Path=Main.HeaderOnlineProjects, Source={StaticResource LocalizedStrings}}">
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -220,7 +218,7 @@
       </controls:PanoramaItem>
 
       <!--About panorama item-->
-      <controls:PanoramaItem Name="panoramaItemHelp" Header="{Binding Path=Main.HeaderAbout, Source={StaticResource LocalizedStrings}}">
+      <controls:PanoramaItem Name="PanoramaItemHelp" Header="{Binding Path=Main.HeaderAbout, Source={StaticResource LocalizedStrings}}">
         <StackPanel>
           <TextBlock FontSize="26" TextWrapping="Wrap" Text="{Binding Path=Main.AboutText, Source={StaticResource LocalizedStrings}}" Margin="10 0 0 15" />
           <!-- StackPanel vs. Grid: 
@@ -230,9 +228,12 @@
               <ColumnDefinition Width="130" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <buttons:SettingsButton Grid.Column="0" VerticalAlignment="Center" x:Name="buttonSettings" 
+            <buttons:SettingsButton Grid.Column="0" VerticalAlignment="Center" x:Name="ButtonSettings" 
               Template="{StaticResource SettingsButtonControlTemplate}" Command="{Binding SettingsCommand}" />
-            <TextBlock Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Main.ApplicationNameAndVersion, Source={StaticResource LocalizedStrings}, Converter={StaticResource VersionConverter}}" Margin="30" TextWrapping="Wrap" />
+            <TextBlock Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}" 
+                       Text="{Binding Main.ApplicationNameAndVersion, Source={StaticResource LocalizedStrings}, 
+                         Converter={StaticResource VersionConverter}}" 
+                       Margin="30" TextWrapping="Wrap" />
           </Grid>
         </StackPanel>
       </controls:PanoramaItem>

@@ -13,7 +13,7 @@ CostumeBrick::CostumeBrick(string spriteReference, Script *parent) :
 {
 }
 
-int CostumeBrick::Index()
+int CostumeBrick::GetIndex()
 {
 	if (m_index > 0)
 		return m_index - 1;
@@ -22,5 +22,5 @@ int CostumeBrick::Index()
 
 void CostumeBrick::Execute()
 {	
-	m_parent->Parent()->SetLook(m_index);
+	m_parent->GetParent()->SetLook(m_index);
 }

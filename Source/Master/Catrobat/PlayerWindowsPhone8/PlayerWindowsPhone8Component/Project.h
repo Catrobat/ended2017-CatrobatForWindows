@@ -38,13 +38,13 @@ public:
 	void								StartUp();
 
 	// Getters for Project Header
-	int									ScreenHeight();
-	int									ScreenWidth();
+	int									GetScreenHeight();
+	int									GetScreenWidth();
 
-	ObjectList*							getObjectList();
-	UserVariable*						Variable(std::string name);
-	void								addVariable(std::string name, UserVariable *variable);
-	void								addVariable(std::pair<string, UserVariable*> variable);
+	ObjectList*							GetObjectList();
+	UserVariable*						GetVariable(std::string name);
+	void								AddVariable(std::string name, UserVariable *variable);
+	void								AddVariable(std::pair<string, UserVariable*> variable);
 
 
 private:

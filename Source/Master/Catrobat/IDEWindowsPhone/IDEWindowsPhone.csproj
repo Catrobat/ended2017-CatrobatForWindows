@@ -142,7 +142,7 @@
     <Compile Include="Converters\BytesImageConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
-    <Compile Include="Converters\NegativeBoolVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
     <Compile Include="Converters\InActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\ScreenshotConverter.cs" />
     <Compile Include="Converters\VersionConverter.cs" />
@@ -166,9 +166,9 @@
     <Compile Include="Misc\SoundPlayer.cs" />
     <Compile Include="Misc\Storage\ImageFormatHelper.cs" />
     <Compile Include="Misc\Storage\ResourceLoaderFactoryPhone.cs" />
-    <Compile Include="Misc\Storage\ResourcesPhone7.cs" />
-    <Compile Include="Misc\Storage\StorageFactoryPhone7.cs" />
-    <Compile Include="Misc\Storage\StoragePhone7.cs" />
+    <Compile Include="Misc\Storage\ResourcesPhone.cs" />
+    <Compile Include="Misc\Storage\StorageFactoryPhone.cs" />
+    <Compile Include="Misc\Storage\StoragePhone.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Themes\ColorChooser.cs" />

@@ -13,6 +13,6 @@ ChangeYByBrick::ChangeYByBrick(string spriteReference, FormulaTree *offsetY, Scr
 void ChangeYByBrick::Execute()
 {
 	float currentX, currentY;
-	m_parent->Parent()->GetPosition(currentX, currentY);
-	m_parent->Parent()->SetPosition(currentX, currentY + Interpreter::Instance()->EvaluateFormulaToFloat(m_offsetY, m_parent->Parent()));
+	m_parent->GetParent()->GetPosition(currentX, currentY);
+	m_parent->GetParent()->SetPosition(currentX, currentY + Interpreter::Instance()->EvaluateFormulaToFloat(m_offsetY, m_parent->GetParent()));
 }

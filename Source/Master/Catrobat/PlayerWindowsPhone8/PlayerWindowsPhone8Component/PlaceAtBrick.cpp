@@ -12,5 +12,5 @@ PlaceAtBrick::PlaceAtBrick(string spriteReference, FormulaTree *positionX, Formu
 
 void PlaceAtBrick::Execute()
 {
-	m_parent->Parent()->SetPosition(Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX, m_parent->Parent()), Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY, m_parent->Parent()));
+	m_parent->GetParent()->SetPosition(Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX, m_parent->GetParent()), Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY, m_parent->GetParent()));
 }
