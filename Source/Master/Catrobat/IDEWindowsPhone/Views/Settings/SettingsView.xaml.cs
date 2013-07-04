@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using KBB.Mobile.Controls;
 using Microsoft.Phone.Controls;
 using System.Diagnostics;
 

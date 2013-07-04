@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Net;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 using System.Windows.Threading;
-using System.ComponentModel;
 using Microsoft.Phone.Info;
-using System.Diagnostics;
 
-namespace KBB.Mobile.Controls
-{    /// <summary>
+namespace Catrobat.IDEWindowsPhone.Misc
+{
+    /// <summary>
     /// This is a tool that will monitor the memory usage of your application. It provides
     /// various functionality that helps you identify memory threshholds, including
     /// tracking of current and peak usage, properties that let you inspect memory usage
@@ -27,137 +22,167 @@ namespace KBB.Mobile.Controls
     public sealed class MemoryMonitor : IDisposable
     {
         #region Private members
+
         private bool _isEnabled;
         private bool _showVisualization;
         private bool _isInitialized;
         private bool _currentWarningExceeded;
         private bool _currentCriticalExceeded;
         private DispatcherTimer _timer;
-        private Popup _popup = new Popup();
-        private TextBlock _txtAppCurrent = new TextBlock();
-        private TextBlock _txtTotalMemory = new TextBlock();
-        private TextBlock _txtAppPeak = new TextBlock();
+        private readonly Popup _popup = new Popup();
+        private readonly TextBlock _txtAppCurrent = new TextBlock();
+        private readonly TextBlock _txtTotalMemory = new TextBlock();
+        private readonly TextBlock _txtAppPeak = new TextBlock();
+
         #endregion
 
         #region Public properties
+
         /// <summary>
         /// How much memory is available on the device. Make decisions based
         /// on whether the device meets or exceeds minimum requirements.
         /// </summary>
         public long TotalMemory { get; private set; }
+
         /// <summary>
         /// How much memory your application is currently using.
         /// </summary>
         public long CurrentMemory { get; private set; }
+
         /// <summary>
         /// The most memory your application has used.
         /// </summary>
         public long PeakMemory { get; private set; }
+
         /// <summary>
         /// How much memory the application can use before it starts to become a problem. 
         /// Recommended value is 60MB.
         /// </summary>
         public long WarningMemoryThreshold { get; set; }
+
         /// <summary>
         /// How much memory the application can use before it is in danger of being closed by the system. 
         /// Recommended value is 80MB, actual is somewhere around 90MB, more depending on the device total memory.
         /// </summary>
         public long CriticalMemoryThreshold { get; set; }
+
         /// <summary>
         /// Indicates whether or not an alert will be presented when the memory warning threshold has been exceeded.
         /// </summary>
         public bool AlertWhenWarningThresholdsExceeded { get; set; }
+
         /// <summary>
         /// Indicates whether or not an alert will be presented when the max memory threshold has been exceeded.
         /// </summary>
         public bool AlertWhenCriticalThresholdsExceeded { get; set; }
+
         /// <summary>
         /// Indicates whether or not the peak memory usage of the application has exceeded the warning threshold value.
         /// </summary>
         public bool PeakWarningExceeded { get; private set; }
+
         /// <summary>
         /// Indicates whether or not the current memory usage of the application has exceeded the warning threshold value.
         /// </summary>
         public bool CurrentWarningExceeded
         {
-            get { return this._currentWarningExceeded; }
+            get { return _currentWarningExceeded; }
             private set
             {
-                if (this._currentWarningExceeded != value)
+                if (_currentWarningExceeded != value)
                 {
-                    this._currentWarningExceeded = value;
-                    this.OnWarningMemoryThresholdExceeded();
+                    _currentWarningExceeded = value;
+                    OnWarningMemoryThresholdExceeded();
                 }
             }
         }
+
         /// <summary>
         /// Indicates whether or not the peak memory usage of the application has exceeded the critical threshold value.
         /// </summary>
         public bool PeakCriticalExceeded { get; private set; }
+
         /// <summary>
         /// Indicates whether or not the current memory usage of the application has exceeded the critical threshold value.
         /// </summary>
         public bool CurrentCriticalExceeded
         {
-            get { return this._currentCriticalExceeded; }
+            get { return _currentCriticalExceeded; }
             private set
             {
-                if (this._currentCriticalExceeded != value)
+                if (_currentCriticalExceeded != value)
                 {
-                    this._currentCriticalExceeded = value;
-                    this.OnCriticalMemoryThresholdExceeded();
+                    _currentCriticalExceeded = value;
+                    OnCriticalMemoryThresholdExceeded();
                 }
             }
         }
+
         /// <summary>
         /// Indicates whether or not the <see cref="MemoryMonitor"/> will monitor memory usage of the application.
         /// </summary>
         public bool IsEnabled
         {
-            get { return this._isEnabled; }
+            get { return _isEnabled; }
             set
             {
-                if (this._isEnabled != value)
+                if (_isEnabled != value)
                 {
-                    this._isEnabled = value;
-                    if (this._isEnabled)
-                        this.startTimer();
+                    _isEnabled = value;
+                    if (_isEnabled)
+                    {
+                        StartTimer();
+                    }
                     else
-                        this.stopTimer();
+                    {
+                        StopTimer();
+                    }
                 }
             }
         }
+
         /// <summary>
         /// Indicates whether or not the <see cref="MemoryMonitor"/> will display a visualization of memory usage of the application.
         /// </summary>
         public bool ShowVisualization
         {
-            get { return this._showVisualization; }
+            get { return _showVisualization; }
             set
             {
-                if (this._showVisualization != value)
+                if (_showVisualization != value)
                 {
-                    this._showVisualization = value;
-                    if (this._showVisualization)
-                        this.show();
+                    _showVisualization = value;
+                    if (_showVisualization)
+                    {
+                        Show();
+                    }
                     else
-                        this.hide();
+                    {
+                        Hide();
+                    }
                 }
             }
         }
+
         #endregion
 
         #region Constructors
+
         private MemoryMonitor()
         {
-            this.WarningMemoryThreshold = 60;
-            this.CriticalMemoryThreshold = 80;
+            WarningMemoryThreshold = 60;
+            CriticalMemoryThreshold = 80;
 
-            if (this.IsEnabled)
-                this.startTimer();
-            if (this.ShowVisualization)
-                this.show();
+            if (IsEnabled)
+            {
+                StartTimer();
+            }
+            if (ShowVisualization)
+            {
+                Show();
+            }
         }
+
         /// <summary>
         /// Create a new <see cref="MemoryMonitor"/> instance with the specified initial values.
         /// </summary>
@@ -166,142 +191,178 @@ namespace KBB.Mobile.Controls
         public MemoryMonitor(bool isEnabled, bool showVisualization)
             : this()
         {
-            this.IsEnabled = isEnabled;
-            this.ShowVisualization = showVisualization;
+            IsEnabled = isEnabled;
+            ShowVisualization = showVisualization;
         }
+
         #endregion
 
         #region Events
+
         /// <summary>
         /// This event is raised when the current memory usage of the application exceeds the critical threshold.
         /// </summary>
         public event EventHandler CriticalMemoryThresholdExceeded;
+
         private void OnCriticalMemoryThresholdExceeded()
         {
-            if (this.CriticalMemoryThresholdExceeded != null)
-                this.CriticalMemoryThresholdExceeded(this, EventArgs.Empty);
+            if (CriticalMemoryThresholdExceeded != null)
+            {
+                CriticalMemoryThresholdExceeded(this, EventArgs.Empty);
+            }
         }
+
         /// <summary>
         /// This event is raised when the current memory usage of the application exceeds the warning threshold.
         /// </summary>
         public event EventHandler WarningMemoryThresholdExceeded;
+
         private void OnWarningMemoryThresholdExceeded()
         {
-            if (this.WarningMemoryThresholdExceeded != null)
-                this.WarningMemoryThresholdExceeded(this, EventArgs.Empty);
+            if (WarningMemoryThresholdExceeded != null)
+            {
+                WarningMemoryThresholdExceeded(this, EventArgs.Empty);
+            }
         }
+
         #endregion
 
         #region Private methods
+
         private void _timer_Tick(object sender, EventArgs e)
         {
-            BackgroundWorker bw = new BackgroundWorker();
+            var bw = new BackgroundWorker();
             bw.DoWork += new DoWorkEventHandler(bw_DoWork);
             bw.RunWorkerAsync();
         }
+
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            long deviceTotalMemory = (long)DeviceExtendedProperties.GetValue("DeviceTotalMemory");
-            long applicationCurrentMemoryUsage = (long)DeviceExtendedProperties.GetValue("ApplicationCurrentMemoryUsage");
-            long applicationPeakMemoryUsage = (long)DeviceExtendedProperties.GetValue("ApplicationPeakMemoryUsage");
+            var deviceTotalMemory = (long) DeviceExtendedProperties.GetValue("DeviceTotalMemory");
+            var applicationCurrentMemoryUsage = (long) DeviceExtendedProperties.GetValue("ApplicationCurrentMemoryUsage");
+            var applicationPeakMemoryUsage = (long) DeviceExtendedProperties.GetValue("ApplicationPeakMemoryUsage");
 
             Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                this.TotalMemory = deviceTotalMemory / 1024 / 1024;
-                this.CurrentMemory = applicationCurrentMemoryUsage / 1024 / 1024;
-                this.PeakMemory = applicationPeakMemoryUsage / 1024 / 1024;
-
-                this._txtAppCurrent.Text = this.CurrentMemory.ToString("N2");
-                this._txtTotalMemory.Text = this.TotalMemory.ToString("N2");
-                this._txtAppPeak.Text = this.PeakMemory.ToString("N2");
-
-                if (this.CurrentMemory > this.CriticalMemoryThreshold)
                 {
-                    this._txtAppCurrent.Foreground = new SolidColorBrush(Colors.Red);
-                    if (!this.CurrentCriticalExceeded)
+                    TotalMemory = deviceTotalMemory/1024/1024;
+                    CurrentMemory = applicationCurrentMemoryUsage/1024/1024;
+                    PeakMemory = applicationPeakMemoryUsage/1024/1024;
+
+                    _txtAppCurrent.Text = CurrentMemory.ToString("N2");
+                    _txtTotalMemory.Text = TotalMemory.ToString("N2");
+                    _txtAppPeak.Text = PeakMemory.ToString("N2");
+
+                    if (CurrentMemory > CriticalMemoryThreshold)
                     {
-                        this.CurrentCriticalExceeded = true;
-                        if (this.AlertWhenCriticalThresholdsExceeded)
-                            MessageBox.Show(String.Format("Current memory usage threshold for this application has exceeded the critical threshold of {0} MB.", this.CriticalMemoryThreshold));
+                        _txtAppCurrent.Foreground = new SolidColorBrush(Colors.Red);
+                        if (!CurrentCriticalExceeded)
+                        {
+                            CurrentCriticalExceeded = true;
+                            if (AlertWhenCriticalThresholdsExceeded)
+                            {
+                                MessageBox.Show(
+                                    String.Format(
+                                        "Current memory usage threshold for this application has exceeded the critical threshold of {0} MB.",
+                                        CriticalMemoryThreshold));
+                            }
+                        }
                     }
-                }
-                else
-                {
-                    this.CurrentCriticalExceeded = false;
-                    this._txtAppCurrent.Foreground = new SolidColorBrush(Colors.White);
-                }
-
-                if (this.CurrentMemory > this.WarningMemoryThreshold)
-                {
-                    if (!this.CurrentCriticalExceeded)
-                        this._txtAppCurrent.Foreground = new SolidColorBrush(Colors.Yellow);
-
-                    if (!this.CurrentWarningExceeded)
+                    else
                     {
-                        this.CurrentWarningExceeded = true;
-                        if (this.AlertWhenWarningThresholdsExceeded)
-                            MessageBox.Show(String.Format("Current memory usage threshold for this application has exceeded the warning threshold of {0} MB.", this.WarningMemoryThreshold));
+                        CurrentCriticalExceeded = false;
+                        _txtAppCurrent.Foreground = new SolidColorBrush(Colors.White);
                     }
-                }
-                else
-                {
-                    this.CurrentWarningExceeded = false;
-                    this._txtAppCurrent.Foreground = new SolidColorBrush(Colors.White);
-                }
 
-                if (this.PeakMemory > this.CriticalMemoryThreshold)
-                {
-                    this._txtAppPeak.Foreground = new SolidColorBrush(Colors.Red);
-                    if (!this.PeakCriticalExceeded)
+                    if (CurrentMemory > WarningMemoryThreshold)
                     {
-                        this.PeakCriticalExceeded = true;
-                        if (this.AlertWhenCriticalThresholdsExceeded)
-                            MessageBox.Show(String.Format("Peak memory usage threshold for this application has exceeded the critical threshold of {0} MB.", this.CriticalMemoryThreshold));
-                    }
-                }
-                else
-                {
-                    this.PeakCriticalExceeded = false;
-                    this._txtAppPeak.Foreground = new SolidColorBrush(Colors.White);
-                }
+                        if (!CurrentCriticalExceeded)
+                        {
+                            _txtAppCurrent.Foreground = new SolidColorBrush(Colors.Yellow);
+                        }
 
-                if (this.PeakMemory > this.WarningMemoryThreshold)
-                {
-                    if (!this.PeakCriticalExceeded)
-                        this._txtAppPeak.Foreground = new SolidColorBrush(Colors.Yellow);
-                    if (!this.PeakWarningExceeded)
-                    {
-                        this.PeakWarningExceeded = true;
-                        if (this.AlertWhenWarningThresholdsExceeded)
-                            MessageBox.Show(String.Format("Peak memory usage threshold for this application has exceeded the warning threshold of {0} MB.", this.WarningMemoryThreshold));
+                        if (!CurrentWarningExceeded)
+                        {
+                            CurrentWarningExceeded = true;
+                            if (AlertWhenWarningThresholdsExceeded)
+                            {
+                                MessageBox.Show(
+                                    String.Format(
+                                        "Current memory usage threshold for this application has exceeded the warning threshold of {0} MB.",
+                                        WarningMemoryThreshold));
+                            }
+                        }
                     }
-                }
-                else
-                {
-                    this.PeakWarningExceeded = false;
-                    this._txtAppPeak.Foreground = new SolidColorBrush(Colors.White);
-                }
-            });
+                    else
+                    {
+                        CurrentWarningExceeded = false;
+                        _txtAppCurrent.Foreground = new SolidColorBrush(Colors.White);
+                    }
+
+                    if (PeakMemory > CriticalMemoryThreshold)
+                    {
+                        _txtAppPeak.Foreground = new SolidColorBrush(Colors.Red);
+                        if (!PeakCriticalExceeded)
+                        {
+                            PeakCriticalExceeded = true;
+                            if (AlertWhenCriticalThresholdsExceeded)
+                            {
+                                MessageBox.Show(
+                                    String.Format(
+                                        "Peak memory usage threshold for this application has exceeded the critical threshold of {0} MB.",
+                                        CriticalMemoryThreshold));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        PeakCriticalExceeded = false;
+                        _txtAppPeak.Foreground = new SolidColorBrush(Colors.White);
+                    }
+
+                    if (PeakMemory > WarningMemoryThreshold)
+                    {
+                        if (!PeakCriticalExceeded)
+                        {
+                            _txtAppPeak.Foreground = new SolidColorBrush(Colors.Yellow);
+                        }
+                        if (!PeakWarningExceeded)
+                        {
+                            PeakWarningExceeded = true;
+                            if (AlertWhenWarningThresholdsExceeded)
+                            {
+                                MessageBox.Show(
+                                    String.Format(
+                                        "Peak memory usage threshold for this application has exceeded the warning threshold of {0} MB.",
+                                        WarningMemoryThreshold));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        PeakWarningExceeded = false;
+                        _txtAppPeak.Foreground = new SolidColorBrush(Colors.White);
+                    }
+                });
         }
 
-        private void initializeVisualization()
+        private void InitializeVisualization()
         {
             try
             {
-                Border child = new Border();
+                var child = new Border();
                 child.Width = 480;
                 child.Background = new SolidColorBrush(Color.FromArgb(200, 50, 50, 50));
                 child.IsHitTestVisible = false;
 
-                StackPanel childPanel = new StackPanel();
+                var childPanel = new StackPanel();
                 childPanel.Margin = new Thickness(0, 30, 0, 0);
                 childPanel.Orientation = Orientation.Horizontal;
                 child.Child = childPanel;
                 childPanel.IsHitTestVisible = false;
 
-                SolidColorBrush white = new SolidColorBrush(Colors.White);
+                var white = new SolidColorBrush(Colors.White);
 
-                TextBlock lblTotalMemory = new TextBlock();
+                var lblTotalMemory = new TextBlock();
                 childPanel.Children.Add(lblTotalMemory);
                 lblTotalMemory.Text = "Device: ";
                 lblTotalMemory.SetValue(Grid.ColumnProperty, 0);
@@ -311,7 +372,7 @@ namespace KBB.Mobile.Controls
                 lblTotalMemory.IsHitTestVisible = false;
 
                 childPanel.Children.Add(_txtTotalMemory);
-                _txtTotalMemory.Text = this.TotalMemory.ToString();
+                _txtTotalMemory.Text = TotalMemory.ToString();
                 _txtTotalMemory.SetValue(Grid.ColumnProperty, 1);
                 _txtTotalMemory.SetValue(Grid.RowProperty, 0);
                 _txtTotalMemory.FontSize = 17;
@@ -320,7 +381,7 @@ namespace KBB.Mobile.Controls
                 _txtTotalMemory.Margin = new Thickness(0, 0, 20, 0);
                 _txtTotalMemory.IsHitTestVisible = false;
 
-                TextBlock lblAppCurrent = new TextBlock();
+                var lblAppCurrent = new TextBlock();
                 childPanel.Children.Add(lblAppCurrent);
                 lblAppCurrent.Text = "Current: ";
                 lblAppCurrent.SetValue(Grid.ColumnProperty, 0);
@@ -330,7 +391,7 @@ namespace KBB.Mobile.Controls
                 lblAppCurrent.IsHitTestVisible = false;
 
                 childPanel.Children.Add(_txtAppCurrent);
-                _txtAppCurrent.Text = this.CurrentMemory.ToString();
+                _txtAppCurrent.Text = CurrentMemory.ToString();
                 _txtAppCurrent.SetValue(Grid.ColumnProperty, 1);
                 _txtAppCurrent.SetValue(Grid.RowProperty, 1);
                 _txtAppCurrent.FontSize = 17;
@@ -339,7 +400,7 @@ namespace KBB.Mobile.Controls
                 _txtAppCurrent.Margin = new Thickness(0, 0, 20, 0);
                 _txtAppCurrent.IsHitTestVisible = false;
 
-                TextBlock lblAppPeak = new TextBlock();
+                var lblAppPeak = new TextBlock();
                 childPanel.Children.Add(lblAppPeak);
                 lblAppPeak.Text = "Peak: ";
                 lblAppPeak.SetValue(Grid.ColumnProperty, 0);
@@ -349,7 +410,7 @@ namespace KBB.Mobile.Controls
                 lblAppPeak.IsHitTestVisible = false;
 
                 childPanel.Children.Add(_txtAppPeak);
-                _txtAppPeak.Text = this.PeakMemory.ToString();
+                _txtAppPeak.Text = PeakMemory.ToString();
                 _txtAppPeak.SetValue(Grid.ColumnProperty, 1);
                 _txtAppPeak.SetValue(Grid.RowProperty, 2);
                 _txtAppPeak.FontSize = 17;
@@ -360,7 +421,7 @@ namespace KBB.Mobile.Controls
 
                 _popup.Child = child;
                 _popup.IsHitTestVisible = false;
-                this._isInitialized = true;
+                _isInitialized = true;
             }
             catch (Exception exc)
             {
@@ -368,57 +429,67 @@ namespace KBB.Mobile.Controls
             }
         }
 
-        private void startTimer()
+        private void StartTimer()
         {
             try
             {
-                this._timer = new DispatcherTimer();
-                this._timer.Interval = TimeSpan.FromSeconds(2);
-                this._timer.Tick += new EventHandler(_timer_Tick);
-                this._timer.Start();
+                _timer = new DispatcherTimer();
+                _timer.Interval = TimeSpan.FromSeconds(2);
+                _timer.Tick += new EventHandler(_timer_Tick);
+                _timer.Start();
             }
             catch (Exception exc)
             {
                 Console.WriteLine(exc);
             }
         }
-        private void stopTimer()
+
+        private void StopTimer()
         {
-            if (this._timer != null)
+            if (_timer != null)
             {
-                if (this._timer.IsEnabled)
-                    this._timer.Stop();
-                this._timer = null;
+                if (_timer.IsEnabled)
+                {
+                    _timer.Stop();
+                }
+                _timer = null;
             }
         }
 
-        private void show()
+        private void Show()
         {
-            if (!this._isInitialized)
-                this.initializeVisualization();
-            this._popup.IsOpen = true;
+            if (!_isInitialized)
+            {
+                InitializeVisualization();
+            }
+            _popup.IsOpen = true;
         }
-        private void hide()
+
+        private void Hide()
         {
-            this._popup.IsOpen = false;
+            _popup.IsOpen = false;
         }
+
         #endregion
 
         #region IDisposable implementation
+
         /// <summary>
         /// IDisposable implementation.
         /// </summary>
         public void Dispose()
         {
-            dispose(true);
+            Dispose(true);
         }
-        private void dispose(bool disposing)
+
+        private void Dispose(bool disposing)
         {
             if (disposing)
             {
-                this.stopTimer();
+                StopTimer();
             }
         }
+
         #endregion
     }
 }

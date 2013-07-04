@@ -44,7 +44,7 @@ namespace Catrobat.Core.Misc.Helpers
 
     public static string GetCurrentCultureLanguageCode()
     {
-      return _culture.Get2LetterCultureColde();
+      return _culture.GetToLetterCultureColde();
     }
   }
 }

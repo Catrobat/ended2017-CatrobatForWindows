@@ -8,6 +8,6 @@ namespace Catrobat.Core.Misc.Helpers
 {
   public interface ICulture
   {
-    string Get2LetterCultureColde();
+    string GetToLetterCultureColde();
   }
 }

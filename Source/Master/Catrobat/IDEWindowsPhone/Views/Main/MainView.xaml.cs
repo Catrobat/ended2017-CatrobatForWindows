@@ -8,7 +8,6 @@ using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Catrobat.IDEWindowsPhone.Views.Editor;
 using Catrobat.IDEWindowsPhone.Views.Service;
 using Catrobat.IDEWindowsPhone.Views.Settings;
-using KBB.Mobile.Controls;
 using Microsoft.Phone.Controls;
 using System;
 using System.Windows.Controls;
