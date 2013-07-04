@@ -96,7 +96,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         private void panoramaMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((panoramaMain.SelectedItem == panoramaItemOnlineProjects)) //&& (LongListSelectorOnlineProjects.Items.Count == 0)
+            if ((PanoramaMain.SelectedItem == PanoramaItemOnlineProjects)) //&& (LongListSelectorOnlineProjects.Items.Count == 0)
             {
                 // Load Data - this has to stay in code-behind
                 _viewModel.LoadOnlineProjects(false);
@@ -109,12 +109,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
             var newIndex = 2;
             var curIndex = 1;
 
-            panoramaMain.SetValue(Panorama.SelectedItemProperty, panoramaMain.Items[newIndex]);
+            PanoramaMain.SetValue(Panorama.SelectedItemProperty, PanoramaMain.Items[newIndex]);
 
-            (panoramaMain.Items[curIndex] as PanoramaItem).Visibility = Visibility.Collapsed;
-            panoramaMain.SetValue(Panorama.SelectedItemProperty, panoramaMain.Items[(curIndex - 1) % panoramaMain.Items.Count]);
-            panoramaMain.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-            (panoramaMain.Items[curIndex] as PanoramaItem).Visibility = Visibility.Visible;
+            (PanoramaMain.Items[curIndex] as PanoramaItem).Visibility = Visibility.Collapsed;
+            PanoramaMain.SetValue(Panorama.SelectedItemProperty, PanoramaMain.Items[(curIndex - 1) % PanoramaMain.Items.Count]);
+            PanoramaMain.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            (PanoramaMain.Items[curIndex] as PanoramaItem).Visibility = Visibility.Visible;
 
             //SlidePanorama(panoramaMain);
         }

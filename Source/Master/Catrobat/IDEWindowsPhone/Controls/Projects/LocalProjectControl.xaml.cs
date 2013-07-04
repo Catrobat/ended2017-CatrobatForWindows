@@ -31,8 +31,6 @@ namespace Catrobat.IDEWindowsPhone.Controls.Projects
 
     #endregion
 
-
-
     public LocalProjectControl()
     {
       InitializeComponent();

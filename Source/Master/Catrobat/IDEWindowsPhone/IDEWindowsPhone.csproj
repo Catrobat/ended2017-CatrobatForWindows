@@ -142,7 +142,7 @@
     <Compile Include="Converters\BytesImageConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
-    <Compile Include="Converters\NegativeBoolVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
     <Compile Include="Converters\InActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\ScreenshotConverter.cs" />
     <Compile Include="Converters\VersionConverter.cs" />
