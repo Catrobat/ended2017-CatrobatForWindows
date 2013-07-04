@@ -28,7 +28,7 @@ int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 	switch (type)
 	{
 	case OPERATOR:
-        return interpretOperator(tree, object);
+        return InterpretOperator(tree, object);
 	case NUMBER:
 		return atoi(tree->Value().c_str());
 	case USER_VARIABLE:
@@ -61,7 +61,7 @@ float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 	switch (type)
 	{
 	case OPERATOR:
-        return interpretOperatorFloat(tree, object);
+        return InterpretOperatorFloat(tree, object);
 	case NUMBER:
         return (float)atof(tree->Value().c_str());
 	case USER_VARIABLE:
@@ -94,11 +94,11 @@ bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object *object)
 	switch (type)
 	{
 	case OPERATOR:
-		return interpretOperatorBool(tree, object);
+		return InterpretOperatorBool(tree, object);
 	case NUMBER:
 		return atof(tree->Value().c_str()) > 0.0f;
 	case FUNCTION:
-		return interpretFunctionBool(tree, object);
+		return InterpretFunctionBool(tree, object);
 	default:
 		break;
 	}
@@ -127,7 +127,7 @@ void Interpreter::ReadAcceleration()
 	}	
 }
 
-int Interpreter::interpretOperator(FormulaTree *tree, Object *object)
+int Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
 {
     FormulaTree *leftChild = tree->GetLeftChild();
     int leftValue = 0;
@@ -162,7 +162,7 @@ int Interpreter::interpretOperator(FormulaTree *tree, Object *object)
     return returnValue;
 }
 
-float Interpreter::interpretOperatorFloat(FormulaTree *tree, Object *object)
+float Interpreter::InterpretOperatorFloat(FormulaTree *tree, Object *object)
 {
     FormulaTree *leftChild = tree->GetLeftChild();
     float leftValue = 0.0f;
@@ -198,7 +198,7 @@ float Interpreter::interpretOperatorFloat(FormulaTree *tree, Object *object)
     return (float)returnValue;
 }
 
-bool Interpreter::interpretOperatorBool(FormulaTree *tree, Object *object)
+bool Interpreter::InterpretOperatorBool(FormulaTree *tree, Object *object)
 {
 	FormulaTree *leftChild = tree->GetLeftChild();
     bool leftValue = false;
@@ -217,14 +217,14 @@ bool Interpreter::interpretOperatorBool(FormulaTree *tree, Object *object)
 		returnValue = leftValue && rightValue;
 		break;
 	default: 
-		returnValue = interpretOperatorFloat(tree, object) > 0.0f;
+		returnValue = InterpretOperatorFloat(tree, object) > 0.0f;
 		break;
 	}
 
 	return returnValue;
 }
 
-bool Interpreter::interpretFunctionBool(FormulaTree *tree, Object *object)
+bool Interpreter::InterpretFunctionBool(FormulaTree *tree, Object *object)
 {
 	FormulaTree *leftChild = tree->GetLeftChild();
     bool leftValue = false;

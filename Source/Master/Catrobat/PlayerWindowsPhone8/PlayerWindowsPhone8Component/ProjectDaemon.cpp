@@ -73,10 +73,10 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 
 							// Create and load XML
 							XMLParser *xml = new XMLParser();
-							xml->loadXML(pathString);
+							xml->LoadXML(pathString);
 
 							// Set Project to be accessed from everywhere
-							SetProject(xml->getProject());
+							SetProject(xml->GetProject());
 
 							// Initialize Renderer and enable rendering to be started
 							m_renderer->Initialize(m_device);
