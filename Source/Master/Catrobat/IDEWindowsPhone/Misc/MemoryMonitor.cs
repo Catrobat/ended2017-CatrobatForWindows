@@ -29,10 +29,10 @@ namespace Catrobat.IDEWindowsPhone.Misc
         private bool _currentWarningExceeded;
         private bool _currentCriticalExceeded;
         private DispatcherTimer _timer;
-        private readonly Popup _popup = new Popup();
-        private readonly TextBlock _txtAppCurrent = new TextBlock();
-        private readonly TextBlock _txtTotalMemory = new TextBlock();
-        private readonly TextBlock _txtAppPeak = new TextBlock();
+        private Popup _popup = new Popup();
+        private TextBlock _txtAppCurrent = new TextBlock();
+        private TextBlock _txtTotalMemory = new TextBlock();
+        private TextBlock _txtAppPeak = new TextBlock();
 
         #endregion
 

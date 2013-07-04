@@ -316,70 +316,66 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
         private void DeleteDirectory(string path, IsolatedStorageFile iso)
         {
-            if (!iso.DirectoryExists(path))
+            if (iso.DirectoryExists(path))
             {
-                return;
-            }
+                var directory = Path.Combine(path, "*.*");
+                var folders = iso.GetDirectoryNames(directory);
 
-            var directory = Path.Combine(path, "*.*");
-            var folders = iso.GetDirectoryNames(directory);
+                foreach (string folder in folders)
+                {
+                    var folderPath = Path.Combine(path, folder);
+                    DeleteDirectory(folderPath, iso);
+                }
 
-            foreach (string folder in folders)
-            {
-                var folderPath = Path.Combine(path, folder);
-                DeleteDirectory(folderPath, iso);
-            }
+                foreach (string file in iso.GetFileNames(directory))
+                {
+                    iso.DeleteFile(Path.Combine(path, file));
+                }
 
-            foreach (string file in iso.GetFileNames(directory))
-            {
-                iso.DeleteFile(Path.Combine(path, file));
-            }
-
-            if (!string.IsNullOrEmpty(path))
-            {
-                iso.DeleteDirectory(path);
+                if (!string.IsNullOrEmpty(path))
+                {
+                    iso.DeleteDirectory(path);
+                }
             }
         }
 
         public void CopyDirectory(string sourcePath, string destinationPath, IsolatedStorageFile iso)
         {
-            if (!iso.DirectoryExists(sourcePath))
+            if (iso.DirectoryExists(sourcePath))
             {
-                return;
-            }
+                var directory = Path.Combine(sourcePath, "*.*");
+                var folders = iso.GetDirectoryNames(directory);
 
-            var directory = Path.Combine(sourcePath, "*.*");
-            var folders = iso.GetDirectoryNames(directory);
-
-            foreach (string folder in folders)
-            {
-                var sourceFolderPath = Path.Combine(sourcePath, folder);
-                var destinationFolderPath = Path.Combine(destinationPath, folder);
-
-                iso.CreateDirectory(destinationFolderPath);
-                CopyDirectory(sourceFolderPath, destinationFolderPath, iso);
-            }
-
-            var sourceDirectory = "";
-            var destinationDirectory = "";
-
-            try
-            {
-                foreach (string file in iso.GetFileNames(directory))
+                foreach (string folder in folders)
                 {
-                    if (file.StartsWith("."))
-                    {
-                        continue;
-                    }
+                    var sourceFolderPath = Path.Combine(sourcePath, folder);
+                    var destinationFolderPath = Path.Combine(destinationPath, folder);
 
-                    sourceDirectory = Path.Combine(sourceDirectory, file);
-                    destinationDirectory = Path.Combine(destinationDirectory, file);
-                    iso.CopyFile(sourceDirectory, destinationDirectory);
+                    iso.CreateDirectory(destinationFolderPath);
+                    CopyDirectory(sourceFolderPath, destinationFolderPath, iso);
                 }
-            }
-            catch (Exception)
-            {
-                throw new Exception(string.Format("Cannot coppy {0} to {1}", sourceDirectory, destinationDirectory));
+
+                var sourceDirectory = "";
+                var destinationDirectory = "";
+
+                try
+                {
+                    foreach (string file in iso.GetFileNames(directory))
+                    {
+                        if (file.StartsWith("."))
+                        {
+                            continue;
+                        }
+
+                        sourceDirectory = Path.Combine(sourceDirectory, file);
+                        destinationDirectory = Path.Combine(destinationDirectory, file);
+                        iso.CopyFile(sourceDirectory, destinationDirectory);
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception(string.Format("Cannot coppy {0} to {1}", sourceDirectory, destinationDirectory));
+                }
             }
         }
 

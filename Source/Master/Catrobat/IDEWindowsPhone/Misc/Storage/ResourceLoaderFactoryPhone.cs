@@ -2,11 +2,11 @@
 
 namespace Catrobat.IDEWindowsPhone.Misc.Storage
 {
-  public class ResourceLoaderFactoryPhone : IResourceLoaderFactory
-  {
-    public IResources CreateResoucreLoader()
+    public class ResourceLoaderFactoryPhone : IResourceLoaderFactory
     {
-      return new ResourcesPhone();
+        public IResources CreateResoucreLoader()
+        {
+            return new ResourcesPhone();
+        }
     }
-  }
 }
