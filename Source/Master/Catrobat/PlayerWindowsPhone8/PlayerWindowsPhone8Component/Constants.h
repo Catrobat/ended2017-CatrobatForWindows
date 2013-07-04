@@ -75,8 +75,8 @@ namespace Constants
         {
             static const string ReceivedMessage             =       "receivedMessage";            
             static const string StartScript                 =       "startScript";
-            static const string WhenScript                  =       "broadcastScript";
-            static const string BroadcastScript             =       "whenScript";
+            static const string WhenScript                  =       "whenScript";
+            static const string BroadcastScript             =       "broadcastScript";
         }
 
         namespace Brick
