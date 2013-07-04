@@ -9,5 +9,6 @@ class Helper
 public:
     static string ConvertPlatformStringToString(String^ input);
     static String^ ConvertStringToPlatformString(string input);
+    static string RetrieveClassName(string input);
 };
 

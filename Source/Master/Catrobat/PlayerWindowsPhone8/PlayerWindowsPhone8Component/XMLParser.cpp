@@ -32,6 +32,8 @@
 #include "TurnRightBrick.h"
 #include "PlaySoundBrick.h"
 #include "ExceptionLogger.h"
+#include "XMLParserSevereException.h"
+#include "XMLParserWarningException.h"
 
 #include <time.h>
 #include <iostream>
@@ -54,7 +56,7 @@ XMLParser::~XMLParser()
 
 bool XMLParser::loadXML(string fileName)
 {
-    ExceptionLogger::Instance()->LogException(new BaseException("boom"));
+    ExceptionLogger::Instance()->LogException(new XMLParserSevereException("boom"));
     ifstream inputFile;
     inputFile.open(fileName);
     if (!inputFile) 
@@ -68,14 +70,7 @@ bool XMLParser::loadXML(string fileName)
         text += line;
     }
 
-    try
-    {
-        parseXML(text);
-    }
-    catch(XMLParserException exception)
-    {
-        return false;
-    }
+    parseXML(text);
 
 
     inputFile.close();
@@ -95,15 +90,7 @@ void XMLParser::parseXML(string xml)
     char *temp = (char*) xml.c_str();
     doc.parse<0>(temp);
 
-    try
-    {
-        m_project = parseProjectHeader(&doc);
-    }
-    catch (XMLParserException exception)
-    {
-        throw XMLParserException("Invalid Project Header");
-    }
-
+    m_project = parseProjectHeader(&doc);
     parseObjectList(&doc, m_project->GetObjectList());
 
     parseVariableList(&doc, m_project);
@@ -146,7 +133,7 @@ Project* XMLParser::parseProjectHeader(xml_document<> *doc)
 #pragma region Project Header Nodes
     xml_node<> *projectInformationNode = baseNode->first_node("applicationBuildName");
     if (!projectInformationNode)
-        throw XMLParserException ("ApplicationBuildName missing");
+        return NULL;
     applicationBuildName = projectInformationNode->value();
 
     projectInformationNode = baseNode->first_node("applicationBuildNumber");

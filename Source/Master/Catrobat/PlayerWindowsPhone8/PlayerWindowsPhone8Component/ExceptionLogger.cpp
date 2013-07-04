@@ -50,6 +50,7 @@ void ExceptionLogger::LogException(BaseException *exception)
         state->WriteString(CalculateDate(timeStamp.tm_hour) + L":");
         state->WriteString(CalculateDate(timeStamp.tm_min) + L":");
         state->WriteString(CalculateDate(timeStamp.tm_sec) + L"] ");
+        state->WriteString(Helper::ConvertStringToPlatformString(exception->GetName()) + L": ");
         state->WriteString(Helper::ConvertStringToPlatformString(exception->GetErrorMessage()) + L"\n");
 
         return state->StoreAsync();

@@ -8,4 +8,5 @@ class XMLParserSevereException : public XMLParserException
 {
 public:
     XMLParserSevereException(std::string errorMessage);
+    std::string GetName();
 };

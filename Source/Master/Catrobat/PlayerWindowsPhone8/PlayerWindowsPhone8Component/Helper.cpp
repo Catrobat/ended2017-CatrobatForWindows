@@ -15,3 +15,9 @@ String^ Helper::ConvertStringToPlatformString(string input)
     const wchar_t* w_char = wid_str.c_str();
     return ref new Platform::String(w_char);
 }
+
+string Helper::RetrieveClassName(string input)
+{
+    string className = input.erase(0, input.find(" "));
+    return className;
+}
