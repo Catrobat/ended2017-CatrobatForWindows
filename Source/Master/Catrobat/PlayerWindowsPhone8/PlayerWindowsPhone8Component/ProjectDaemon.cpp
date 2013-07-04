@@ -2,6 +2,7 @@
 #include "ProjectDaemon.h"
 #include "XMLParser.h"
 #include "Helper.h"
+#include "ExceptionLogger.h"
 
 #include <ppltasks.h>
 
@@ -73,26 +74,36 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 
 							// Create and load XML
 							XMLParser *xml = new XMLParser();
-							xml->LoadXML(pathString);
+                            try
+                            {
+							    xml->loadXML(pathString);
 
-							// Set Project to be accessed from everywhere
-							SetProject(xml->GetProject());
+                                // Set Project to be accessed from everywhere
+							    SetProject(xml->getProject());
 
-							// Initialize Renderer and enable rendering to be started
-							m_renderer->Initialize(m_device);
-							m_finishedLoading = true;
-							free(xml);
+							    // Initialize Renderer and enable rendering to be started
+							    m_renderer->Initialize(m_device);
+							    m_finishedLoading = true;
+							    free(xml);
+                            }
+                            catch (BaseException *e)
+                            {
+                                //ExceptionLogger::Instance()->Log(e);
+                                //ExceptionLogger::Instance()->Log(INFORMATION, "Problem opening Project! Aborting...");
+                                ProjectDaemon::Instance()->AddDebug("Problem opening Project. Check Logfile");
+                                m_finishedLoading = false;
+                            }
 						}
 						else if (status == Windows::Foundation::AsyncStatus::Error)
 						{
-							SetError(ProjectDaemon::Error::FILE_NOT_FOUND);
+                            //ExceptionLogger::Instance()->Log(CRITICALWARNING, "ProjectFolder not found!");
 						}
 					}
 				);
 			}
             else if (status == Windows::Foundation::AsyncStatus::Error)
 			{
-				SetError(ProjectDaemon::Error::FILE_NOT_FOUND);
+                //ExceptionLogger::Instance()->Log(CRITICALWARNING, "code.xml not found!");
 			}
 		}
 	);

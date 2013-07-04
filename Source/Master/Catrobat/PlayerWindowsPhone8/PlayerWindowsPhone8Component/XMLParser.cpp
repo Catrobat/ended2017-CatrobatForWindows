@@ -78,8 +78,11 @@ bool XMLParser::LoadXML(string fileName)
     }
     catch (BaseException *e)
     {
-        ExceptionLogger::Instance()->Log(e);
-        return false;
+        if (dynamic_cast<XMLParserSevereException *>(e))
+        {
+            inputFile.close();
+            throw e;
+        }
     }
     
     inputFile.close();

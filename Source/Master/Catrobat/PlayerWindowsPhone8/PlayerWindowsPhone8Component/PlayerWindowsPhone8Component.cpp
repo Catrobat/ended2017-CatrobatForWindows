@@ -8,7 +8,9 @@
 #include "lodepng.h"
 #include "lodepng_util.h"
 #include "DDSLoader.h"
+#include "XMLParserSevereException.h"
 #include "Interpreter.h"
+#include "ExceptionLogger.h"
 
 #include <windows.system.threading.h>
 #include <windows.foundation.h>
@@ -141,7 +143,6 @@ HRESULT Direct3DBackground::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host,
 
 	// Load Project
 	ProjectDaemon::Instance()->OpenProject("732");
-    ProjectDaemon::Instance()->AddDebug(ProjectName);
 
 	// Restart timer after renderer has finished initializing.
 	m_timer->Reset();
