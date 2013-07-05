@@ -6,59 +6,62 @@ namespace Catrobat.Core.Objects.Costumes
 {
     public class CostumeReference : DataObject
     {
-        private readonly Sprite sprite;
-
-        private Costumes.Costume costume;
-        private string reference;
+        private readonly Sprite _sprite;
+        private Costume _costume;
+        private string _reference;
 
         public CostumeReference(Sprite parent)
         {
-            sprite = parent;
+            _sprite = parent;
         }
 
         public CostumeReference(XElement xElement, Sprite parent)
         {
-            sprite = parent;
+            _sprite = parent;
             LoadFromXML(xElement);
         }
 
         public string Reference
         {
-            get { return reference; }
+            get { return _reference; }
             set
             {
-                if (reference == value)
+                if (_reference == value)
+                {
                     return;
+                }
 
-                reference = value;
+                _reference = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Reference"));
             }
         }
 
-        public Costumes.Costume Costume
+        public Costume Costume
         {
-            get { return costume; }
+            get { return _costume; }
             set
             {
-                if (costume == value)
+                if (_costume == value)
+                {
                     return;
+                }
 
-                costume = value;
+                _costume = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Costume"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            reference = xRoot.Attribute("reference").Value;
-            costume = XPathHelper.getElement(reference, sprite) as Costumes.Costume;
+            _reference = xRoot.Attribute("reference").Value;
+            _costume = XPathHelper.getElement(_reference, _sprite) as Costume;
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("costumeData");
 
-            xRoot.Add(new XAttribute("reference", XPathHelper.getReference(costume, sprite)));
+            xRoot.Add(new XAttribute("reference", XPathHelper.getReference(_costume, _sprite)));
 
             return xRoot;
         }
@@ -66,8 +69,8 @@ namespace Catrobat.Core.Objects.Costumes
         public DataObject Copy(Sprite parent)
         {
             var newCostumeRef = new CostumeReference(parent);
-            newCostumeRef.reference = reference;
-            newCostumeRef.costume = XPathHelper.getElement(reference, parent) as Costumes.Costume;
+            newCostumeRef._reference = _reference;
+            newCostumeRef._costume = XPathHelper.getElement(_reference, parent) as Costume;
 
             return newCostumeRef;
         }

@@ -6,48 +6,54 @@ namespace Catrobat.Core.Objects.Costumes
 {
     public class CostumeList : DataObject
     {
-        private Sprite sprite;
+        private Sprite _sprite;
 
         public CostumeList(Sprite parent)
         {
-            Costumes = new ObservableCollection<Costumes.Costume>();
-            sprite = parent;
+            Costumes = new ObservableCollection<Costume>();
+            _sprite = parent;
         }
 
         public CostumeList(XElement xElement, Sprite parent)
         {
-            sprite = parent;
+            _sprite = parent;
             LoadFromXML(xElement);
         }
 
-        public ObservableCollection<Costumes.Costume> Costumes { get; set; }
+        public ObservableCollection<Costume> Costumes { get; set; }
 
         public Sprite Sprite
         {
-            get { return sprite; }
+            get { return _sprite; }
             set
             {
-                if (sprite == value)
+                if (_sprite == value)
+                {
                     return;
+                }
 
-                sprite = value;
+                _sprite = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            Costumes = new ObservableCollection<Costumes.Costume>();
+            Costumes = new ObservableCollection<Costume>();
             foreach (XElement element in xRoot.Elements("costumeData"))
-                Costumes.Add(new Costumes.Costume(element, sprite));
+            {
+                Costumes.Add(new Costume(element, _sprite));
+            }
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("costumeDataList");
 
-            foreach (Costumes.Costume costume in Costumes)
+            foreach (Costume costume in Costumes)
+            {
                 xRoot.Add(costume.CreateXML());
+            }
 
             return xRoot;
         }
@@ -55,16 +61,20 @@ namespace Catrobat.Core.Objects.Costumes
         public DataObject Copy(Sprite parent)
         {
             var newCostumeDataList = new CostumeList(parent);
-            foreach (Costumes.Costume costume in Costumes)
-                newCostumeDataList.Costumes.Add(costume.Copy(parent) as Costumes.Costume);
+            foreach (Costume costume in Costumes)
+            {
+                newCostumeDataList.Costumes.Add(costume.Copy(parent) as Costume);
+            }
 
             return newCostumeDataList;
         }
 
         public void Delete()
         {
-            foreach (Costumes.Costume costume in Costumes)
+            foreach (Costume costume in Costumes)
+            {
                 costume.Delete();
+            }
         }
     }
 }

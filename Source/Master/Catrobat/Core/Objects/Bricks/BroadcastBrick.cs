@@ -5,29 +5,25 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class BroadcastBrick : Brick
     {
-        protected string broadcastMessage;
+        protected string _broadcastMessage;
 
-        public BroadcastBrick()
-        {
-        }
+        public BroadcastBrick() {}
 
-        public BroadcastBrick(Sprite parent) : base(parent)
-        {
-        }
+        public BroadcastBrick(Sprite parent) : base(parent) {}
 
-        public BroadcastBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public BroadcastBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public string BroadcastMessage
         {
-            get { return broadcastMessage; }
+            get { return _broadcastMessage; }
             set
             {
-                if (broadcastMessage == value)
+                if (_broadcastMessage == value)
+                {
                     return;
+                }
 
-                broadcastMessage = value;
+                _broadcastMessage = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("BroadcastMessage"));
             }
         }
@@ -35,19 +31,21 @@ namespace Catrobat.Core.Objects.Bricks
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("broadcastMessage") != null)
-                broadcastMessage = xRoot.Element("broadcastMessage").Value;
+            {
+                _broadcastMessage = xRoot.Element("broadcastMessage").Value;
+            }
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("broadcastBrick");
 
-            if (broadcastMessage != null)
+            if (_broadcastMessage != null)
             {
                 xRoot.Add(new XElement("broadcastMessage")
-                    {
-                        Value = broadcastMessage
-                    });
+                {
+                    Value = _broadcastMessage
+                });
             }
 
             //CreateCommonXML(xRoot);
@@ -58,7 +56,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new BroadcastBrick(parent);
-            newBrick.broadcastMessage = broadcastMessage;
+            newBrick._broadcastMessage = _broadcastMessage;
 
             return newBrick;
         }

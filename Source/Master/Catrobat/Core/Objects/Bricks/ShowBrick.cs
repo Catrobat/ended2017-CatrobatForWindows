@@ -4,21 +4,13 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class ShowBrick : Brick
     {
-        public ShowBrick()
-        {
-        }
+        public ShowBrick() {}
 
-        public ShowBrick(Sprite parent) : base(parent)
-        {
-        }
+        public ShowBrick(Sprite parent) : base(parent) {}
 
-        public ShowBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public ShowBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
-        internal override void LoadFromXML(XElement xRoot)
-        {
-        }
+        internal override void LoadFromXML(XElement xRoot) {}
 
         internal override XElement CreateXML()
         {

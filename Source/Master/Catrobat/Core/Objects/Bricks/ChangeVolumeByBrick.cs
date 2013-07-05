@@ -6,33 +6,27 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class ChangeVolumeByBrick : Brick
     {
-        protected double volume = 25.0f;
+        protected double _volume = 25.0f;
 
-        public ChangeVolumeByBrick()
-        {
-        }
+        public ChangeVolumeByBrick() {}
 
-        public ChangeVolumeByBrick(Sprite parent) : base(parent)
-        {
-        }
+        public ChangeVolumeByBrick(Sprite parent) : base(parent) {}
 
-        public ChangeVolumeByBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public ChangeVolumeByBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public double Volume
         {
-            get { return volume; }
+            get { return _volume; }
             set
             {
-                volume = value;
+                _volume = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Volume"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            volume = double.Parse(xRoot.Element("volume").Value, CultureInfo.InvariantCulture);
+            _volume = double.Parse(xRoot.Element("volume").Value, CultureInfo.InvariantCulture);
         }
 
         internal override XElement CreateXML()
@@ -40,9 +34,9 @@ namespace Catrobat.Core.Objects.Bricks
             var xRoot = new XElement("changeVolumeByBrick");
 
             xRoot.Add(new XElement("volume")
-                {
-                    Value = volume.ToString()
-                });
+            {
+                Value = _volume.ToString()
+            });
 
             //CreateCommonXML(xRoot);
 
@@ -52,7 +46,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new ChangeVolumeByBrick(parent);
-            newBrick.volume = volume;
+            newBrick._volume = _volume;
 
             return newBrick;
         }

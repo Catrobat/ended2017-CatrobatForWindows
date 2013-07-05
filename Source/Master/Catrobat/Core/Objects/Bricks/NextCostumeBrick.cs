@@ -4,21 +4,13 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class NextCostumeBrick : Brick
     {
-        public NextCostumeBrick()
-        {
-        }
+        public NextCostumeBrick() {}
 
-        public NextCostumeBrick(Sprite parent) : base(parent)
-        {
-        }
+        public NextCostumeBrick(Sprite parent) : base(parent) {}
 
-        public NextCostumeBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public NextCostumeBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
-        internal override void LoadFromXML(XElement xRoot)
-        {
-        }
+        internal override void LoadFromXML(XElement xRoot) {}
 
         internal override XElement CreateXML()
         {

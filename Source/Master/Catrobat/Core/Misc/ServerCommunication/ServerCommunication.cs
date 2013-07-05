@@ -1,170 +1,174 @@
 ﻿using System;
-using System.Net;
+using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.JSON;
 using Catrobat.Core.Objects;
-using System.Collections.Generic;
 using Catrobat.Core.Resources;
 using Catrobat.Core.ZIP;
 
 namespace Catrobat.Core.Misc.ServerCommunication
 {
-  public class ServerCommunication
-  {
-    public delegate void RegisterOrCheckTokenEvent(bool registered, string errorCode, string statusMessage);
-    public delegate void CheckTokenEvent(bool registered);
-    public delegate void LoadOnlineProjectsEvent(List<OnlineProjectHeader> projects, bool append);
-    public delegate void DownloadAndSaveProjectEvent(string filename);
-    public delegate void UploadProjectEvent(bool successful);
-
-    private static int _uploadCounter = 0;
-    private static int _downloadCounter = 0;
-
-    private static IServerCommunication _iServerCommunication;
-
-    public static void SetIServerCommunication(IServerCommunication iServerCommunication)
+    public class ServerCommunication
     {
-      _iServerCommunication = iServerCommunication;
-    }
+        public delegate void RegisterOrCheckTokenEvent(bool registered, string errorCode, string statusMessage);
 
-    public static bool NoUploadsPending()
-    {
-      return _uploadCounter == 0;
-    }
+        public delegate void CheckTokenEvent(bool registered);
 
-    public static bool NoDownloadsPending()
-    {
-      return _downloadCounter == 0;
-    }
+        public delegate void LoadOnlineProjectsEvent(List<OnlineProjectHeader> projects, bool append);
 
-    public static void RegisterOrCheckToken(string username, 
-                                            string password, 
-                                            string userEmail, 
-                                            string language, 
-                                            string country,
-                                            string token,
-                                            RegisterOrCheckTokenEvent callback)
-    {
-      // Generate post objects
-      var postParameters = new Dictionary<string, object>
+        public delegate void DownloadAndSaveProjectEvent(string filename);
+
+        public delegate void UploadProjectEvent(bool successful);
+
+        private static int _uploadCounter = 0;
+        private static int _downloadCounter = 0;
+
+        private static IServerCommunication _iServerCommunication;
+
+        public static void SetIServerCommunication(IServerCommunication iServerCommunication)
         {
-          {ApplicationResources.REG_USER_NAME, username},
-          {ApplicationResources.REG_USER_PASSWORD, password},
-          {ApplicationResources.REG_USER_EMAIL, userEmail},
-          {ApplicationResources.TOKEN, token}
-        };
+            _iServerCommunication = iServerCommunication;
+        }
 
-      if (country != null)
-      {
-        postParameters.Add(ApplicationResources.REG_USER_COUNTRY, country);
-      }
+        public static bool NoUploadsPending()
+        {
+            return _uploadCounter == 0;
+        }
 
-      if (language != null)
-      {
-        postParameters.Add(ApplicationResources.REG_USER_LANGUAGE, language);
-      }
+        public static bool NoDownloadsPending()
+        {
+            return _downloadCounter == 0;
+        }
 
-      WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.CheckTokenOrRegisterUrl,
-                                                            ApplicationResources.UserAgent,
-                                                            postParameters,
-                                                            (string a) =>
+        public static void RegisterOrCheckToken(string username,
+                                                string password,
+                                                string userEmail,
+                                                string language,
+                                                string country,
+                                                string token,
+                                                RegisterOrCheckTokenEvent callback)
+        {
+            // Generate post objects
+            var postParameters = new Dictionary<string, object>
+            {
+                {ApplicationResources.REG_USER_NAME, username},
+                {ApplicationResources.REG_USER_PASSWORD, password},
+                {ApplicationResources.REG_USER_EMAIL, userEmail},
+                {ApplicationResources.TOKEN, token}
+            };
+
+            if (country != null)
+            {
+                postParameters.Add(ApplicationResources.REG_USER_COUNTRY, country);
+            }
+
+            if (language != null)
+            {
+                postParameters.Add(ApplicationResources.REG_USER_LANGUAGE, language);
+            }
+
+            WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.CheckTokenOrRegisterUrl,
+                                                                  ApplicationResources.UserAgent,
+                                                                  postParameters,
+                                                                  (string a) =>
+                                                                      {
+                                                                          if (callback != null)
                                                                           {
-                                                                            if (callback != null)
-                                                                            {
                                                                               var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
                                                                               if (response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK)
                                                                               {
-                                                                                callback(false, response.StatusCode.ToString(), response.StatusMessage);
+                                                                                  callback(false, response.StatusCode.ToString(), response.StatusMessage);
                                                                               }
                                                                               else if (response.StatusCode == StatusCodes.SERVER_RESPONSE_REGISTER_OK)
                                                                               {
-                                                                                callback(true, response.StatusCode.ToString(), response.StatusMessage);
+                                                                                  callback(true, response.StatusCode.ToString(), response.StatusMessage);
                                                                               }
                                                                               else
                                                                               {
-                                                                                callback(false, response.StatusCode.ToString(), response.StatusMessage);
+                                                                                  callback(false, response.StatusCode.ToString(), response.StatusMessage);
                                                                               }
-                                                                            }
-                                                                          });
-    }
-
-    public static void CheckToken(string token, CheckTokenEvent callback)
-    {
-      // Generate post objects
-      var postParameters = new Dictionary<string, object> {{ApplicationResources.TOKEN, token}};
-
-      WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.CheckTokenUrl,
-                                                            ApplicationResources.UserAgent, 
-                                                            postParameters, 
-                                                            (string a) =>
-                                                                          {
-                                                                            if (callback != null)
-                                                                            {
-                                                                              var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
-                                                                              callback(response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK);
-                                                                            }
-                                                                          });
-    }
-
-    public static DateTime ConvertUnixTimeStamp(double timestamp)
-    {
-      var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-      return origin.AddSeconds(timestamp);
-    }
-
-    public static void LoadOnlineProjects(  bool append, string filterText, int offset, LoadOnlineProjectsEvent callback)
-    {
-      _iServerCommunication.LoadOnlineProjects(append, filterText, offset, callback);
-    }
-
-    public static void DownloadAndSaveProject(string downloadUrl, string projectName, DownloadAndSaveProjectEvent callback)
-    {
-      _downloadCounter += _iServerCommunication.DownloadAndSaveProject(downloadUrl, projectName, callback);
-    }
-
-    public static void UploadProject(string projectName, string projectDescription, string userEmail,
-      string language, string token, UploadProjectEvent callback)
-    {
-      // Generate post objects
-      var postParameters = new Dictionary<string, object>
-        {
-          {ApplicationResources.PROJECT_NAME_TAG, projectName},
-          {ApplicationResources.PROJECT_DESCRIPTION_TAG, projectDescription},
-          {ApplicationResources.USER_EMAIL, userEmail},
-          {ApplicationResources.TOKEN, token}
-        };
-
-      using (var stream = new MemoryStream())
-      {
-        CatrobatZip.ZipCatrobatPackage(stream, CatrobatContext.ProjectsPath + "/" + projectName);
-        byte[] data = stream.ToArray();
-
-        postParameters.Add(ApplicationResources.PROJECT_CHECKSUM_TAG, Utils.toHex(MD5Core.GetHash(data)));
-
-        if (language != null)
-        {
-          postParameters.Add(ApplicationResources.USER_LANGUAGE, language);
+                                                                          }
+                                                                      });
         }
 
-        postParameters.Add(ApplicationResources.FILE_UPLOAD_TAG,
-          new FormUpload.FileParameter(data,
-            projectName + ApplicationResources.EXTENSION, ApplicationResources.MIMETYPE));
+        public static void CheckToken(string token, CheckTokenEvent callback)
+        {
+            // Generate post objects
+            var postParameters = new Dictionary<string, object> {{ApplicationResources.TOKEN, token}};
 
-        _uploadCounter++;
+            WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.CheckTokenUrl,
+                                                                  ApplicationResources.UserAgent,
+                                                                  postParameters,
+                                                                  (string a) =>
+                                                                      {
+                                                                          if (callback != null)
+                                                                          {
+                                                                              var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
+                                                                              callback(response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK);
+                                                                          }
+                                                                      });
+        }
 
-        WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.UploadFileUrl,
-          ApplicationResources.UserAgent, postParameters, (string a) =>
-          {
-            _uploadCounter--;
+        public static DateTime ConvertUnixTimeStamp(double timestamp)
+        {
+            var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return origin.AddSeconds(timestamp);
+        }
 
-            if (callback != null)
+        public static void LoadOnlineProjects(bool append, string filterText, int offset, LoadOnlineProjectsEvent callback)
+        {
+            _iServerCommunication.LoadOnlineProjects(append, filterText, offset, callback);
+        }
+
+        public static void DownloadAndSaveProject(string downloadUrl, string projectName, DownloadAndSaveProjectEvent callback)
+        {
+            _downloadCounter += _iServerCommunication.DownloadAndSaveProject(downloadUrl, projectName, callback);
+        }
+
+        public static void UploadProject(string projectName, string projectDescription, string userEmail,
+                                         string language, string token, UploadProjectEvent callback)
+        {
+            // Generate post objects
+            var postParameters = new Dictionary<string, object>
             {
-              var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
-              callback(response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK);
+                {ApplicationResources.PROJECT_NAME_TAG, projectName},
+                {ApplicationResources.PROJECT_DESCRIPTION_TAG, projectDescription},
+                {ApplicationResources.USER_EMAIL, userEmail},
+                {ApplicationResources.TOKEN, token}
+            };
+
+            using (var stream = new MemoryStream())
+            {
+                CatrobatZip.ZipCatrobatPackage(stream, CatrobatContext.ProjectsPath + "/" + projectName);
+                var data = stream.ToArray();
+
+                postParameters.Add(ApplicationResources.PROJECT_CHECKSUM_TAG, Utils.ToHex(MD5Core.GetHash(data)));
+
+                if (language != null)
+                {
+                    postParameters.Add(ApplicationResources.USER_LANGUAGE, language);
+                }
+
+                postParameters.Add(ApplicationResources.FILE_UPLOAD_TAG,
+                                   new FormUpload.FileParameter(data,
+                                                                projectName + ApplicationResources.EXTENSION, ApplicationResources.MIMETYPE));
+
+                _uploadCounter++;
+
+                WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.UploadFileUrl,
+                                                                      ApplicationResources.UserAgent, postParameters, (string a) =>
+                                                                          {
+                                                                              _uploadCounter--;
+
+                                                                              if (callback != null)
+                                                                              {
+                                                                                  var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
+                                                                                  callback(response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK);
+                                                                              }
+                                                                          });
             }
-          });
-      }
+        }
     }
-  }
 }

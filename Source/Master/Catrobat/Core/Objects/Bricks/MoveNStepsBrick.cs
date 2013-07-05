@@ -6,33 +6,27 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class MoveNStepsBrick : Brick
     {
-        protected double steps = 10.0f;
+        protected double _steps = 10.0f;
 
-        public MoveNStepsBrick()
-        {
-        }
+        public MoveNStepsBrick() {}
 
-        public MoveNStepsBrick(Sprite parent) : base(parent)
-        {
-        }
+        public MoveNStepsBrick(Sprite parent) : base(parent) {}
 
-        public MoveNStepsBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public MoveNStepsBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public double Steps
         {
-            get { return steps; }
+            get { return _steps; }
             set
             {
-                steps = value;
+                _steps = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Steps"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            steps = double.Parse(xRoot.Element("steps").Value, CultureInfo.InvariantCulture);
+            _steps = double.Parse(xRoot.Element("steps").Value, CultureInfo.InvariantCulture);
         }
 
         internal override XElement CreateXML()
@@ -40,9 +34,9 @@ namespace Catrobat.Core.Objects.Bricks
             var xRoot = new XElement("moveNStepsBrick");
 
             xRoot.Add(new XElement("steps")
-                {
-                    Value = steps.ToString()
-                });
+            {
+                Value = _steps.ToString()
+            });
 
             //CreateCommonXML(xRoot);
 
@@ -52,7 +46,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new MoveNStepsBrick(parent);
-            newBrick.steps = steps;
+            newBrick._steps = _steps;
 
             return newBrick;
         }

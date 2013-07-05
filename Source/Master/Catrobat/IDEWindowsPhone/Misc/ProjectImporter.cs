@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using Catrobat.Core;
+using Catrobat.Core.ExtensionMethods;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Storage;
 using Catrobat.Core.ZIP;

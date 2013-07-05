@@ -7,23 +7,19 @@ namespace Catrobat.Core.Objects
 {
     public class Sprite : DataObject
     {
-        private CostumeList costumes;
-        private string name;
+        private CostumeList _costumes;
+        private string _name;
+        private ScriptList _scripts;
+        private SoundList _sounds;
 
-        private ScriptList scripts;
-
-        private SoundList sounds;
-
-        public Sprite()
-        {
-        }
+        public Sprite() {}
 
         public Sprite(Project project)
         {
             Project = project;
-            scripts = new ScriptList(this);
-            costumes = new CostumeList(this);
-            sounds = new SoundList(this);
+            _scripts = new ScriptList(this);
+            _costumes = new CostumeList(this);
+            _sounds = new SoundList(this);
         }
 
         public Sprite(XElement xElement, Project project)
@@ -36,52 +32,60 @@ namespace Catrobat.Core.Objects
 
         public string Name
         {
-            get { return name; }
+            get { return _name; }
             set
             {
-                if (name == value)
+                if (_name == value)
+                {
                     return;
+                }
 
-                name = value;
+                _name = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Name"));
             }
         }
 
         public ScriptList Scripts
         {
-            get { return scripts; }
+            get { return _scripts; }
             set
             {
-                if (scripts == value)
+                if (_scripts == value)
+                {
                     return;
+                }
 
-                scripts = value;
+                _scripts = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Sprites"));
             }
         }
 
         public CostumeList Costumes
         {
-            get { return costumes; }
+            get { return _costumes; }
             set
             {
-                if (costumes == value)
+                if (_costumes == value)
+                {
                     return;
+                }
 
-                costumes = value;
+                _costumes = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Costumes"));
             }
         }
 
         public SoundList Sounds
         {
-            get { return sounds; }
+            get { return _sounds; }
             set
             {
-                if (sounds == value)
+                if (_sounds == value)
+                {
                     return;
+                }
 
-                sounds = value;
+                _sounds = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Sounds"));
             }
         }
@@ -89,33 +93,45 @@ namespace Catrobat.Core.Objects
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("costumeDataList") != null)
-                costumes = new CostumeList(xRoot.Element("costumeDataList"), this);
+            {
+                _costumes = new CostumeList(xRoot.Element("costumeDataList"), this);
+            }
 
-            name = xRoot.Element("name").Value;
+            _name = xRoot.Element("name").Value;
 
             if (xRoot.Element("soundList") != null)
-                sounds = new SoundList(xRoot.Element("soundList"), this);
+            {
+                _sounds = new SoundList(xRoot.Element("soundList"), this);
+            }
             if (xRoot.Element("scriptList") != null)
-                scripts = new ScriptList(xRoot.Element("scriptList"), this);
+            {
+                _scripts = new ScriptList(xRoot.Element("scriptList"), this);
+            }
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("sprite");
 
-            if (costumes != null)
-                xRoot.Add(costumes.CreateXML());
+            if (_costumes != null)
+            {
+                xRoot.Add(_costumes.CreateXML());
+            }
 
             xRoot.Add(new XElement("name")
-                {
-                    Value = name
-                });
+            {
+                Value = _name
+            });
 
-            if (scripts != null)
-                xRoot.Add(scripts.CreateXML());
+            if (_scripts != null)
+            {
+                xRoot.Add(_scripts.CreateXML());
+            }
 
-            if (sounds != null)
-                xRoot.Add(sounds.CreateXML());
+            if (_sounds != null)
+            {
+                xRoot.Add(_sounds.CreateXML());
+            }
 
             return xRoot;
         }
@@ -123,24 +139,32 @@ namespace Catrobat.Core.Objects
         public DataObject Copy()
         {
             var newSprite = new Sprite(Project);
-            newSprite.name = name;
-            if (costumes != null)
-                newSprite.costumes = costumes.Copy(newSprite) as CostumeList;
-            if (sounds != null)
-                newSprite.sounds = sounds.Copy(newSprite) as SoundList;
-            if (scripts != null)
-                newSprite.scripts = scripts.Copy(newSprite) as ScriptList;
+            newSprite._name = _name;
+            if (_costumes != null)
+            {
+                newSprite._costumes = _costumes.Copy(newSprite) as CostumeList;
+            }
+            if (_sounds != null)
+            {
+                newSprite._sounds = _sounds.Copy(newSprite) as SoundList;
+            }
+            if (_scripts != null)
+            {
+                newSprite._scripts = _scripts.Copy(newSprite) as ScriptList;
+            }
 
-            if (scripts != null)
-                newSprite.scripts.CopyReference(this, newSprite);
+            if (_scripts != null)
+            {
+                newSprite._scripts.CopyReference(this, newSprite);
+            }
 
             return newSprite;
         }
 
         public void Delete()
         {
-            costumes.Delete();
-            sounds.Delete();
+            _costumes.Delete();
+            _sounds.Delete();
         }
     }
 }

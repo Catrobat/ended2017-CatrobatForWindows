@@ -4,17 +4,11 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class ForeverBrick : LoopBeginBrick
     {
-        public ForeverBrick()
-        {
-        }
+        public ForeverBrick() {}
 
-        public ForeverBrick(Sprite parent) : base(parent)
-        {
-        }
+        public ForeverBrick(Sprite parent) : base(parent) {}
 
-        public ForeverBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public ForeverBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

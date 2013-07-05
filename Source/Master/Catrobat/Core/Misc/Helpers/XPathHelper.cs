@@ -13,22 +13,32 @@ namespace Catrobat.Core.Misc.Helpers
             reference = reference.ToLower();
 
             if (reference.Contains("costume"))
+            {
                 return getCostume(reference, sprite);
+            }
             else if (reference.Contains("sound"))
+            {
                 return getSoundInfo(reference, sprite);
+            }
             else if (reference.Contains("forever") || reference.Contains("repeat"))
+            {
                 return getLoopBeginBrick(reference);
+            }
             else if (reference.Contains("loopend"))
+            {
                 return getLoopEndBrick(reference);
+            }
             else
+            {
                 return getSprite(reference, sprite);
+            }
         }
 
         public static string getReference(DataObject dataObject, Sprite spriteContainingDataObject)
         {
-            string reference = "";
-            int pos = 0;
-            bool found = false;
+            var reference = "";
+            var pos = 0;
+            var found = false;
 
             if (dataObject is Sound)
             {
@@ -43,7 +53,9 @@ namespace Catrobat.Core.Misc.Helpers
                     }
                 }
                 if (pos > 1)
+                {
                     reference += "[" + pos + "]";
+                }
             }
             else if (dataObject is Costume)
             {
@@ -58,7 +70,9 @@ namespace Catrobat.Core.Misc.Helpers
                     }
                 }
                 if (pos > 1)
+                {
                     reference += "[" + pos + "]";
+                }
             }
             else if (dataObject is Sprite)
             {
@@ -73,7 +87,9 @@ namespace Catrobat.Core.Misc.Helpers
                     }
                 }
                 if (pos > 1)
+                {
                     reference += "[" + pos + "]";
+                }
             }
             else if (dataObject is ForeverBrick)
             {
@@ -94,10 +110,14 @@ namespace Catrobat.Core.Misc.Helpers
                         }
                     }
                     if (found)
+                    {
                         break;
+                    }
                 }
                 if (pos > 1)
+                {
                     reference += "[" + pos + "]";
+                }
             }
             else if (dataObject is RepeatBrick)
             {
@@ -118,10 +138,14 @@ namespace Catrobat.Core.Misc.Helpers
                         }
                     }
                     if (found)
+                    {
                         break;
+                    }
                 }
                 if (pos > 1)
+                {
                     reference += "[" + pos + "]";
+                }
             }
             else if (dataObject is LoopEndBrick)
             {
@@ -142,21 +166,27 @@ namespace Catrobat.Core.Misc.Helpers
                         }
                     }
                     if (found)
+                    {
                         break;
+                    }
                 }
                 if (pos > 1)
+                {
                     reference += "[" + pos + "]";
+                }
             }
 
             if (!found)
+            {
                 return "";
+            }
 
             return reference;
         }
 
         private static Costume getCostume(string xPath, Sprite sprite)
         {
-            int pos = 0;
+            var pos = 0;
 
             if (xPath.Contains("["))
             {
@@ -170,7 +200,7 @@ namespace Catrobat.Core.Misc.Helpers
 
         private static Sound getSoundInfo(string xPath, Sprite sprite)
         {
-            int pos = 0;
+            var pos = 0;
 
             if (xPath.Contains("["))
             {
@@ -184,7 +214,7 @@ namespace Catrobat.Core.Misc.Helpers
 
         private static Sprite getSprite(string xPath, Sprite sprite)
         {
-            int pos = 0;
+            var pos = 0;
 
             if (xPath.Contains("["))
             {
@@ -198,33 +228,41 @@ namespace Catrobat.Core.Misc.Helpers
 
         private static LoopBeginBrick getLoopBeginBrick(string xPath)
         {
-            int pos = 0;
-            int id = 0;
+            var pos = 0;
+            var id = 0;
             if (xPath.EndsWith("]"))
             {
-                int start = xPath.LastIndexOf('[') + 1;
+                var start = xPath.LastIndexOf('[') + 1;
                 pos = Int32.Parse(xPath.Substring(start, xPath.Length - start - 1)) - 1;
             }
 
             if (xPath.Contains("forever"))
             {
-                foreach (Brick brick in ReadHelper.currentBrickList.Bricks)
+                foreach (Brick brick in ReadHelper.CurrentBrickList.Bricks)
+                {
                     if (brick is ForeverBrick)
                     {
                         if (id == pos)
+                        {
                             return brick as LoopBeginBrick;
+                        }
                         id++;
                     }
+                }
             }
             else if (xPath.Contains("repeat"))
             {
-                foreach (Brick brick in ReadHelper.currentBrickList.Bricks)
+                foreach (Brick brick in ReadHelper.CurrentBrickList.Bricks)
+                {
                     if (brick is RepeatBrick)
                     {
                         if (id == pos)
+                        {
                             return brick as LoopBeginBrick;
+                        }
                         id++;
                     }
+                }
             }
 
             return null;
@@ -232,21 +270,25 @@ namespace Catrobat.Core.Misc.Helpers
 
         private static LoopEndBrick getLoopEndBrick(string xPath)
         {
-            int pos = 0;
-            int id = 0;
+            var pos = 0;
+            var id = 0;
             if (xPath.EndsWith("]"))
             {
-                int start = xPath.LastIndexOf('[') + 1;
+                var start = xPath.LastIndexOf('[') + 1;
                 pos = Int32.Parse(xPath.Substring(start, xPath.Length - start - 1)) - 1;
             }
 
-            foreach (Brick brick in ReadHelper.currentBrickList.Bricks)
+            foreach (Brick brick in ReadHelper.CurrentBrickList.Bricks)
+            {
                 if (brick is LoopEndBrick)
                 {
                     if (id == pos)
+                    {
                         return brick as LoopEndBrick;
+                    }
                     id++;
                 }
+            }
 
             return null;
         }

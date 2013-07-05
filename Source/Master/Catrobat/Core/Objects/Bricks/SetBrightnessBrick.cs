@@ -6,33 +6,27 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class SetBrightnessBrick : Brick
     {
-        protected double brightness = 0.0f;
+        protected double _brightness = 0.0f;
 
-        public SetBrightnessBrick()
-        {
-        }
+        public SetBrightnessBrick() {}
 
-        public SetBrightnessBrick(Sprite parent) : base(parent)
-        {
-        }
+        public SetBrightnessBrick(Sprite parent) : base(parent) {}
 
-        public SetBrightnessBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public SetBrightnessBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public double Brightness
         {
-            get { return brightness; }
+            get { return _brightness; }
             set
             {
-                brightness = value;
+                _brightness = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Brightness"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            brightness = double.Parse(xRoot.Element("brightness").Value, CultureInfo.InvariantCulture);
+            _brightness = double.Parse(xRoot.Element("brightness").Value, CultureInfo.InvariantCulture);
         }
 
         internal override XElement CreateXML()
@@ -40,9 +34,9 @@ namespace Catrobat.Core.Objects.Bricks
             var xRoot = new XElement("setBrightnessBrick");
 
             xRoot.Add(new XElement("brightness")
-                {
-                    Value = brightness.ToString()
-                });
+            {
+                Value = _brightness.ToString()
+            });
 
             //CreateCommonXML(xRoot);
 
@@ -52,7 +46,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new SetBrightnessBrick(parent);
-            newBrick.brightness = brightness;
+            newBrick._brightness = _brightness;
 
             return newBrick;
         }

@@ -1,50 +1,49 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Threading;
 
 namespace Catrobat.Core.Misc.Helpers
 {
-  public class LanguageHelper
-  {
-    private static ICulture _culture;
-
-    public static void SetICulture(ICulture culture)
+    public class LanguageHelper
     {
-      _culture = culture;
-    }
+        private static ICulture _culture;
 
-    private static string[] supportedLanguageCodes = 
-    { 
-      "DE","EN"
-    };
-
-    private static ObservableCollection<CultureInfo> supportedLanguages;
-    public static ObservableCollection<CultureInfo> SupportedLanguages
-    {
-      get
-      {
-        if (supportedLanguages == null)
+        public static void SetICulture(ICulture culture)
         {
-          supportedLanguages = new ObservableCollection<CultureInfo>();
-
-          foreach(string languageCode in supportedLanguageCodes)
-          {
-            CultureInfo culture = new CultureInfo(languageCode);
-            if (culture.IsNeutralCulture)
-            {
-              supportedLanguages.Add(culture);
-            }
-          }
+            _culture = culture;
         }
 
-        return supportedLanguages;
-      }
-    }
+        private static readonly string[] supportedLanguageCodes =
+        {
+            "DE", "EN"
+        };
 
-    public static string GetCurrentCultureLanguageCode()
-    {
-      return _culture.GetToLetterCultureColde();
+        private static ObservableCollection<CultureInfo> _supportedLanguages;
+
+        public static ObservableCollection<CultureInfo> SupportedLanguages
+        {
+            get
+            {
+                if (_supportedLanguages == null)
+                {
+                    _supportedLanguages = new ObservableCollection<CultureInfo>();
+
+                    foreach (string languageCode in supportedLanguageCodes)
+                    {
+                        var culture = new CultureInfo(languageCode);
+                        if (culture.IsNeutralCulture)
+                        {
+                            _supportedLanguages.Add(culture);
+                        }
+                    }
+                }
+
+                return _supportedLanguages;
+            }
+        }
+
+        public static string GetCurrentCultureLanguageCode()
+        {
+            return _culture.GetToLetterCultureColde();
+        }
     }
-  }
 }

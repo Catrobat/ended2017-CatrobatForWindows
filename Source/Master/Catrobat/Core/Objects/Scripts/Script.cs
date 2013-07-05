@@ -7,7 +7,6 @@ namespace Catrobat.Core.Objects
     public abstract class Script : DataObject
     {
         protected BrickList bricks;
-
         protected Sprite sprite;
 
         public Script()
@@ -36,7 +35,9 @@ namespace Catrobat.Core.Objects
             set
             {
                 if (bricks == value)
+                {
                     return;
+                }
 
                 bricks = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Bricks"));
@@ -49,7 +50,9 @@ namespace Catrobat.Core.Objects
             set
             {
                 if (sprite == value)
+                {
                     return;
+                }
 
                 sprite = value;
                 bricks.Sprite = value;
@@ -63,7 +66,9 @@ namespace Catrobat.Core.Objects
         private void LoadFromCommonXML(XElement xRoot)
         {
             if (xRoot.Element("brickList") != null)
+            {
                 bricks = new BrickList(xRoot.Element("brickList"), sprite);
+            }
         }
 
         internal abstract override XElement CreateXML();
@@ -71,7 +76,9 @@ namespace Catrobat.Core.Objects
         protected void CreateCommonXML(XElement xRoot)
         {
             if (bricks != null)
+            {
                 xRoot.Add(bricks.CreateXML());
+            }
         }
 
         public abstract DataObject Copy(Sprite parent);
@@ -79,7 +86,9 @@ namespace Catrobat.Core.Objects
         public void CopyReference(Script copiedFrom, Sprite parent)
         {
             if (copiedFrom.Bricks != null)
+            {
                 bricks.CopyReference(copiedFrom.Bricks, parent);
+            }
         }
     }
 }

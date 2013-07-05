@@ -5,7 +5,7 @@ using System.IO.IsolatedStorage;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Windows.Media.Imaging;
-using Catrobat.Core;
+using Catrobat.Core.ExtensionMethods;
 using Catrobat.Core.Storage;
 using ImageTools;
 using ImageTools.Filtering;
@@ -31,12 +31,12 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
         public string[] GetDirectoryNames(string path)
         {
-            return _iso.GetDirectoryNames(StringExtensions.Concat(path, "/*"));
+            return _iso.GetDirectoryNames(path + "/*");
         }
 
         public string[] GetFileNames(string path)
         {
-            return _iso.GetFileNames(StringExtensions.Concat(path, "/*.*"));
+            return _iso.GetFileNames(path + "/*.*");
         }
 
         public void DeleteDirectory(string path)
@@ -144,7 +144,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
             _iso.CreateDirectory(newDirectoryPath);
 
-            var folders = _iso.GetDirectoryNames(StringExtensions.Concat(directoryPath, "/*"));
+            var folders = _iso.GetDirectoryNames(directoryPath + "/*");
 
             foreach (string folder in folders)
             {
@@ -153,7 +153,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
                 _iso.MoveDirectory(tempFrom, tempTo);
             }
 
-            foreach (string file in _iso.GetFileNames(StringExtensions.Concat(directoryPath, "/*")))
+            foreach (string file in _iso.GetFileNames(directoryPath + "/*"))
             {
                 var source = Path.Combine(directoryPath, file);
 

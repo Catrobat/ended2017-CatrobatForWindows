@@ -9,9 +9,7 @@ namespace Catrobat.Core.Objects
         protected XDocument document;
         protected XElement root;
 
-        public DataRootObject()
-        {
-        }
+        public DataRootObject() {}
 
         public DataRootObject(String xml)
         {
@@ -27,7 +25,9 @@ namespace Catrobat.Core.Objects
         protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, e);
+            }
         }
     }
 }

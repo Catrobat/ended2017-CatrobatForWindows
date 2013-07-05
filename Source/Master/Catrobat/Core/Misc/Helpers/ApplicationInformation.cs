@@ -11,7 +11,7 @@
         {
             get
             {
-                //String appVersion = System.Reflection.Assembly.GetExecutingAssembly().FullName.Split('=')[1].Split(',')[0];
+                //string appVersion = System.Reflection.Assembly.GetExecutingAssembly().FullName.Split('=')[1].Split(',')[0];
                 return 0.1;
             }
         }

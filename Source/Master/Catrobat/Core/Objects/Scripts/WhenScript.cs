@@ -14,41 +14,37 @@ namespace Catrobat.Core.Objects
 
         private static readonly Dictionary<WhenScriptAction, string> ActionStringDictionary = new Dictionary
             <WhenScriptAction, string>
-            {
-                {WhenScriptAction.Tapped, "Tapped"}
-            };
+        {
+            {WhenScriptAction.Tapped, "Tapped"}
+        };
 
         private static readonly Dictionary<string, WhenScriptAction> StringActionDictionary = new Dictionary
             <string, WhenScriptAction>
-            {
-                {"Tapped", WhenScriptAction.Tapped}
-            };
-
-        private string action;
-
-        public WhenScript()
         {
-        }
+            {"Tapped", WhenScriptAction.Tapped}
+        };
 
-        public WhenScript(Sprite parent) : base(parent)
-        {
-        }
+        private string _action;
 
-        public WhenScript(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public WhenScript() {}
+
+        public WhenScript(Sprite parent) : base(parent) {}
+
+        public WhenScript(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public WhenScriptAction Action
         {
-            get { return StringActionDictionary[action]; }
+            get { return StringActionDictionary[_action]; }
             set
             {
-                string stringValue = ActionStringDictionary[value];
+                var stringValue = ActionStringDictionary[value];
 
-                if (action == stringValue)
+                if (_action == stringValue)
+                {
                     return;
+                }
 
-                action = stringValue;
+                _action = stringValue;
                 OnPropertyChanged(new PropertyChangedEventArgs("Action"));
             }
         }
@@ -56,7 +52,9 @@ namespace Catrobat.Core.Objects
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("action") != null)
-                action = xRoot.Element("action").Value;
+            {
+                _action = xRoot.Element("action").Value;
+            }
         }
 
         internal override XElement CreateXML()
@@ -65,12 +63,12 @@ namespace Catrobat.Core.Objects
 
             CreateCommonXML(xRoot);
 
-            if (action != null)
+            if (_action != null)
             {
                 xRoot.Add(new XElement("action")
-                    {
-                        Value = action
-                    });
+                {
+                    Value = _action
+                });
             }
 
             return xRoot;
@@ -79,9 +77,11 @@ namespace Catrobat.Core.Objects
         public override DataObject Copy(Sprite parent)
         {
             var newWhenScript = new WhenScript(parent);
-            newWhenScript.action = action;
+            newWhenScript._action = _action;
             if (bricks != null)
+            {
                 newWhenScript.bricks = bricks.Copy(parent) as BrickList;
+            }
 
             return newWhenScript;
         }

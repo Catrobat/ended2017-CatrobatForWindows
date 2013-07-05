@@ -6,75 +6,81 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class LoopBeginBrickRef : DataObject
     {
-        private readonly Sprite sprite;
+        private readonly Sprite _sprite;
 
-        protected string classField;
+        protected string _classField;
 
-        private LoopBeginBrick loopBeginBrick;
-        protected string reference;
+        private LoopBeginBrick _loopBeginBrick;
+        protected string _reference;
 
         public LoopBeginBrickRef(Sprite parent)
         {
-            sprite = parent;
+            _sprite = parent;
         }
 
         public LoopBeginBrickRef(XElement xElement, Sprite parent)
         {
-            sprite = parent;
+            _sprite = parent;
             LoadFromXML(xElement);
         }
 
         public string Class
         {
-            get { return classField; }
+            get { return _classField; }
             set
             {
-                if (classField == value)
+                if (_classField == value)
+                {
                     return;
+                }
 
-                classField = value;
+                _classField = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Class"));
             }
         }
 
         public string Reference
         {
-            get { return reference; }
+            get { return _reference; }
             set
             {
-                if (reference == value)
+                if (_reference == value)
+                {
                     return;
+                }
 
-                reference = value;
+                _reference = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Reference"));
             }
         }
 
         public LoopBeginBrick LoopBeginBrick
         {
-            get { return loopBeginBrick; }
+            get { return _loopBeginBrick; }
             set
             {
-                if (loopBeginBrick == value)
+                if (_loopBeginBrick == value)
+                {
                     return;
+                }
 
-                loopBeginBrick = value;
+                _loopBeginBrick = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("LoopBeginBrick"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            classField = xRoot.Attribute("class").Value;
-            reference = xRoot.Attribute("reference").Value;
-            loopBeginBrick = XPathHelper.getElement(reference, sprite) as LoopBeginBrick;
+            _classField = xRoot.Attribute("class").Value;
+            _reference = xRoot.Attribute("reference").Value;
+            _loopBeginBrick = XPathHelper.getElement(_reference, _sprite) as LoopBeginBrick;
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("loopBeginBrick");
-            xRoot.Add(new XAttribute("class", classField));
-            xRoot.Add(new XAttribute("reference", XPathHelper.getReference(loopBeginBrick, sprite)));
+            xRoot.Add(new XAttribute("class", _classField));
+            xRoot.Add(new XAttribute("reference", XPathHelper.getReference(_loopBeginBrick, _sprite)));
 
             return xRoot;
         }
@@ -82,9 +88,9 @@ namespace Catrobat.Core.Objects.Bricks
         public DataObject Copy(Sprite parent)
         {
             var newLoopBeginBrickRef = new LoopBeginBrickRef(parent);
-            newLoopBeginBrickRef.classField = classField;
-            newLoopBeginBrickRef.reference = reference;
-            newLoopBeginBrickRef.loopBeginBrick = XPathHelper.getElement(reference, sprite) as LoopBeginBrick;
+            newLoopBeginBrickRef._classField = _classField;
+            newLoopBeginBrickRef._reference = _reference;
+            newLoopBeginBrickRef._loopBeginBrick = XPathHelper.getElement(_reference, _sprite) as LoopBeginBrick;
 
             return newLoopBeginBrickRef;
         }

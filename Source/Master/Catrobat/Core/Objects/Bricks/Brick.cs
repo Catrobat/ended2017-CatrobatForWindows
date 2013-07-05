@@ -5,20 +5,18 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public abstract class Brick : DataObject
     {
-        protected Sprite sprite;
+        protected Sprite _sprite;
 
-        public Brick()
-        {
-        }
+        public Brick() {}
 
         public Brick(Sprite parent)
         {
-            sprite = parent;
+            _sprite = parent;
         }
 
         public Brick(XElement xElement, Sprite parent)
         {
-            sprite = parent;
+            _sprite = parent;
             LoadFromXML(xElement);
 
             //LoadFromCommonXML(xElement); 
@@ -26,13 +24,15 @@ namespace Catrobat.Core.Objects.Bricks
 
         public Sprite Sprite
         {
-            get { return sprite; }
+            get { return _sprite; }
             set
             {
-                if (sprite == value)
+                if (_sprite == value)
+                {
                     return;
+                }
 
-                sprite = value;
+                _sprite = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
             }
         }

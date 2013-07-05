@@ -6,69 +6,69 @@ using SharpCompress.Reader;
 
 namespace Catrobat.Core.ZIP
 {
-  public class CatrobatZip
-  {
-    public static void UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
+    public class CatrobatZip
     {
-      IReader reader = ReaderFactory.Open(zipStream);
-
-      using (IStorage storage = StorageSystem.GetStorage())
-      {
-        while (reader.MoveToNextEntry())
+        public static void UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
         {
-          string absolutPath = localStoragePath + "/" + reader.Entry.FilePath;
+            var reader = ReaderFactory.Open(zipStream);
 
-          if (!reader.Entry.IsDirectory)
-          {
-            if (storage.FileExists(absolutPath))
+            using (var storage = StorageSystem.GetStorage())
             {
-              storage.DeleteFile(absolutPath);
+                while (reader.MoveToNextEntry())
+                {
+                    var absolutPath = localStoragePath + "/" + reader.Entry.FilePath;
+
+                    if (!reader.Entry.IsDirectory)
+                    {
+                        if (storage.FileExists(absolutPath))
+                        {
+                            storage.DeleteFile(absolutPath);
+                        }
+
+                        var writer = new StringWriter();
+
+                        var fileStream = storage.OpenFile(absolutPath,
+                                                          StorageFileMode.Create,
+                                                          StorageFileAccess.Write);
+                        reader.WriteEntryTo(fileStream);
+                        fileStream.Dispose();
+                    }
+                }
             }
 
-            var writer = new StringWriter();
-
-            Stream fileStream = storage.OpenFile(absolutPath, 
-                                                 StorageFileMode.Create,
-                                                 StorageFileAccess.Write);
-            reader.WriteEntryTo(fileStream);
-            fileStream.Dispose();
-          }
+            reader.Dispose();
         }
-      }
-
-      reader.Dispose();
-    }
 
 
-    public static void ZipCatrobatPackage(Stream zipStream, string localStoragePath)
-    {
-      using (IStorage storage = StorageSystem.GetStorage())
-      {
-        using (ZipArchive archive = ZipArchive.Create())
+        public static void ZipCatrobatPackage(Stream zipStream, string localStoragePath)
         {
-          WriteFilesRecursiveToZip(archive, storage, localStoragePath);
-          archive.SaveTo(zipStream, CompressionType.None);
+            using (var storage = StorageSystem.GetStorage())
+            {
+                using (var archive = ZipArchive.Create())
+                {
+                    WriteFilesRecursiveToZip(archive, storage, localStoragePath);
+                    archive.SaveTo(zipStream, CompressionType.None);
+                }
+            }
         }
-      }
+
+        private static void WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage, string basePath)
+        {
+            var searchPattern = basePath;
+            var fileNames = storage.GetFileNames(searchPattern);
+
+            foreach (string fileName in fileNames)
+            {
+                var fileStream = storage.OpenFile(basePath + "/" + fileName, StorageFileMode.Open,
+                                                  StorageFileAccess.Read);
+                archive.AddEntry(fileName, fileStream);
+            }
+
+            var directrryNames = storage.GetDirectoryNames(searchPattern);
+            foreach (string directoryName in directrryNames)
+            {
+                WriteFilesRecursiveToZip(archive, storage, basePath + "/" + directoryName);
+            }
+        }
     }
-
-    private static void WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage, string basePath)
-    {
-      string searchPattern = basePath;
-      string[] fileNames = storage.GetFileNames(searchPattern);
-
-      foreach (string fileName in fileNames)
-      {
-        Stream fileStream = storage.OpenFile(basePath + "/" + fileName, StorageFileMode.Open,
-                                             StorageFileAccess.Read);
-        archive.AddEntry(fileName, fileStream);
-      }
-
-      string[] directrryNames = storage.GetDirectoryNames(searchPattern);
-      foreach (string directoryName in directrryNames)
-      {
-        WriteFilesRecursiveToZip(archive, storage, basePath + "/" + directoryName);
-      }
-    }
-  }
 }
