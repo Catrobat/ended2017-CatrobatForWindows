@@ -1,15 +1,7 @@
-﻿using System;
-using System.Windows.Controls;
-using Catrobat.Core;
-using Catrobat.Core.Objects;
-using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.Editor;
-using Catrobat.IDEWindowsPhone.Misc;
-using IDEWindowsPhone;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using System.ComponentModel;
+﻿using System.Windows.Controls;
+using System.Windows.Navigation;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
+using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Sprites
@@ -23,13 +15,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sprites
             InitializeComponent();
 
             Dispatcher.BeginInvoke(() =>
-            {
-                TextBoxSpriteName.Focus();
-                TextBoxSpriteName.SelectAll();
-            });
+                {
+                    TextBoxSpriteName.Focus();
+                    TextBoxSpriteName.SelectAll();
+                });
         }
 
-        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             _viewModel.ResetViewModelCommand.Execute(null);
             base.OnNavigatedFrom(e);

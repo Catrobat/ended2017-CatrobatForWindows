@@ -1,12 +1,13 @@
-﻿using Catrobat.Core;
+﻿using System.ComponentModel;
+using System.Threading;
+using System.Windows;
+using Catrobat.Core;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.IDECommon.Resources.Main;
+using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
-using System.ComponentModel;
-using System.Threading;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Catrobat.IDEWindowsPhone.Misc;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 {
@@ -25,10 +26,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         public string ProjectName
         {
-            get
-            {
-                return _projectName;
-            }
+            get { return _projectName; }
             set
             {
                 if (_projectName != value)
@@ -42,10 +40,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         public string ProjectDescription
         {
-            get
-            {
-                return _projectDescription;
-            }
+            get { return _projectDescription; }
             set
             {
                 if (_projectDescription != value)
@@ -60,23 +55,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         #region Commands
 
-        public RelayCommand UploadCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand UploadCommand { get; private set; }
 
-        public RelayCommand CancelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -89,7 +72,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         #endregion
 
-
         #region Actions
 
         private void UploadAction()
@@ -97,14 +79,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             _catrobatContext.CurrentProject.ProjectName = _projectName;
 
             ServerCommunication.UploadProject(_projectName, _projectDescription,
-              CatrobatContext.GetContext().CurrentUserEmail,
-              Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
-              CatrobatContext.GetContext().CurrentToken, UploadCallback);
+                                              CatrobatContext.GetContext().CurrentUserEmail,
+                                              Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
+                                              CatrobatContext.GetContext().CurrentToken, UploadCallback);
 
             Messenger.Default.Send(new DialogMessage(MainResources.UploadQueueMessage, null)
             {
                 Caption = MainResources.MessageBoxInformation,
-                Button = System.Windows.MessageBoxButton.OK,
+                Button = MessageBoxButton.OK,
             });
 
             Navigation.RemoveBackEntry();
@@ -132,9 +114,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             if (IsInDesignMode)
+            {
                 _catrobatContext = new CatrobatContextDesign();
+            }
             else
+            {
                 _catrobatContext = CatrobatContext.GetContext();
+            }
 
             _projectName = _catrobatContext.CurrentProject.ProjectName;
         }
@@ -147,7 +133,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                 Messenger.Default.Send(new DialogMessage(MainResources.NoUploadsPending, null)
                 {
                     Caption = MainResources.MessageBoxInformation,
-                    Button = System.Windows.MessageBoxButton.OK,
+                    Button = MessageBoxButton.OK,
                 });
             }
         }

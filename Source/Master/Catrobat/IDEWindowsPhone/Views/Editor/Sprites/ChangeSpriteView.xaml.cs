@@ -1,42 +1,35 @@
-﻿using System;
-using System.Windows.Controls;
-using Catrobat.Core.Objects;
-using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.Editor;
-using Catrobat.IDEWindowsPhone.Misc;
-using IDEWindowsPhone;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using System.ComponentModel;
-using Microsoft.Practices.ServiceLocation;
+﻿using System.Windows.Controls;
+using System.Windows.Navigation;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
+using Microsoft.Phone.Controls;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Sprites
 {
-  public partial class ChangeSpriteView : PhoneApplicationPage
-  {
-      private readonly ChangeSpriteViewModel _viewModel = ServiceLocator.Current.GetInstance<ChangeSpriteViewModel>();
-
-    public ChangeSpriteView()
+    public partial class ChangeSpriteView : PhoneApplicationPage
     {
-      InitializeComponent();
+        private readonly ChangeSpriteViewModel _viewModel = ServiceLocator.Current.GetInstance<ChangeSpriteViewModel>();
 
-      Dispatcher.BeginInvoke(() =>
-      {
-          TextBoxSpriteName.Focus();
-          TextBoxSpriteName.SelectAll();
-      });
-    }
+        public ChangeSpriteView()
+        {
+            InitializeComponent();
 
-    protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
-    {
-        _viewModel.ResetViewModelCommand.Execute(null);
-        base.OnNavigatedFrom(e);
-    }
+            Dispatcher.BeginInvoke(() =>
+                {
+                    TextBoxSpriteName.Focus();
+                    TextBoxSpriteName.SelectAll();
+                });
+        }
 
-    private void TextBoxSpriteName_OnTextChanged(object sender, TextChangedEventArgs e)
-    {
-        _viewModel.SpriteName = TextBoxSpriteName.Text;
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            _viewModel.ResetViewModelCommand.Execute(null);
+            base.OnNavigatedFrom(e);
+        }
+
+        private void TextBoxSpriteName_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _viewModel.SpriteName = TextBoxSpriteName.Text;
+        }
     }
-  }
 }

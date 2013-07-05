@@ -1,19 +1,22 @@
-﻿using System;
-using Catrobat.Core.Objects;
-using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.ViewModel;
-using Catrobat.IDEWindowsPhone.ViewModel.Settings;
-using IDEWindowsPhone;
-using Microsoft.Phone.Controls;
-using System.Collections.ObjectModel;
-using Microsoft.Practices.ServiceLocation;
-using Catrobat.IDEWindowsPhone.ViewModel.Scripts;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Navigation;
+using Catrobat.Core.Objects;
+using Catrobat.IDEWindowsPhone.ViewModel.Scripts;
+using Microsoft.Phone.Controls;
+using Microsoft.Practices.ServiceLocation;
+using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
-    public class BrickCollection : ObservableCollection<DataObject> { }
-    public enum BrickCategory { Motion, Looks, Sounds, Control }
+    public class BrickCollection : ObservableCollection<DataObject> {}
+
+    public enum BrickCategory
+    {
+        Motion,
+        Looks,
+        Sounds,
+        Control
+    }
 
     public partial class AddNewScriptView : PhoneApplicationPage
     {
@@ -31,22 +34,22 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
         }
 
 
-        private void Movement_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void Movement_Tap(object sender, GestureEventArgs e)
         {
             _viewModel.MovementCommand.Execute(null);
         }
 
-        private void Looks_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void Looks_Tap(object sender, GestureEventArgs e)
         {
             _viewModel.LooksCommand.Execute(null);
         }
 
-        private void Sound_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void Sound_Tap(object sender, GestureEventArgs e)
         {
             _viewModel.SoundCommand.Execute(null);
         }
 
-        private void Control_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void Control_Tap(object sender, GestureEventArgs e)
         {
             _viewModel.ControlCommand.Execute(null);
         }

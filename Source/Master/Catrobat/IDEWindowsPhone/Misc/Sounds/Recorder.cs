@@ -7,127 +7,131 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace Catrobat.IDEWindowsPhone.Misc.Sounds
 {
-  class Recorder
-  {
-    private Microphone _microphone;
-    private byte[] _audioBuffer;
-    private int _sampleRate;
-    private MemoryStream _recordingStream;
-    
-    public bool StopRequested { get; set; }
-    public int SampleRate { get { return _sampleRate; }}
-
-    private SoundEffectInstance _sound;
-    public SoundEffectInstance Sound
+    internal class Recorder
     {
-      get { return _sound; }
-      set { _sound = value; }
-    }
-    public void InitializeSound()
-    {
-      if (_sound == null)
-        _sound = new SoundEffect(_recordingStream.ToArray(), _sampleRate, AudioChannels.Mono).CreateInstance();
-    }
+        private Microphone _microphone;
+        private byte[] _audioBuffer;
+        private int _sampleRate;
+        private MemoryStream _recordingStream;
 
-    public Recorder()
-    {
-      StopRequested = false;
-      _sound = null;
+        public bool StopRequested { get; private set; }
 
-      InitializeMicrophone();
-    }
+        public int SampleRate
+        {
+            get { return _sampleRate; }
+        }
 
-    private void InitializeMicrophone()
-    {
-      if (_microphone == null)
-      {
-        _microphone = Microphone.Default;
-        _microphone.BufferDuration = TimeSpan.FromMilliseconds(300);
-        _microphone.BufferReady += currentMicrophone_BufferReady;
-        _audioBuffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
-        _sampleRate = _microphone.SampleRate;
-      }
+        public SoundEffectInstance Sound { get; set; }
 
-      _recordingStream = new MemoryStream(1048576);
-      StopRequested = false;
-    }
+        public void InitializeSound()
+        {
+            if (Sound == null)
+            {
+                Sound = new SoundEffect(_recordingStream.ToArray(), _sampleRate, AudioChannels.Mono).CreateInstance();
+            }
+        }
 
-    private void DeleteMicrophone()
-    {
-      if (_microphone != null)
-      {
-        _microphone.Stop();
-        _microphone.BufferReady -= currentMicrophone_BufferReady;
-        _microphone = null;
-      }
-      StopRequested = false;
-    }
+        public Recorder()
+        {
+            StopRequested = false;
+            Sound = null;
 
-    public void StartRecording()
-    {
-      InitializeMicrophone();
-      _microphone.Start();
-    }
+            InitializeMicrophone();
+        }
 
-    public void StopRecording()
-    {
-      StopRequested = true;
-    }
+        private void InitializeMicrophone()
+        {
+            if (_microphone == null)
+            {
+                _microphone = Microphone.Default;
+                _microphone.BufferDuration = TimeSpan.FromMilliseconds(300);
+                _microphone.BufferReady += currentMicrophone_BufferReady;
+                _audioBuffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
+                _sampleRate = _microphone.SampleRate;
+            }
 
-    private void currentMicrophone_BufferReady(object sender, EventArgs e)
-    {
-        _microphone.GetData(_audioBuffer);
-        _recordingStream.Write(_audioBuffer, 0, _audioBuffer.Length);
-        if (!StopRequested)
-          return;
+            _recordingStream = new MemoryStream(1048576);
+            StopRequested = false;
+        }
 
-        DeleteMicrophone();
-    }
+        private void DeleteMicrophone()
+        {
+            if (_microphone != null)
+            {
+                _microphone.Stop();
+                _microphone.BufferReady -= currentMicrophone_BufferReady;
+                _microphone = null;
+            }
+            StopRequested = false;
+        }
 
-    public void PlaySound()
-    {
-      Sound.Play();
-    }
+        public void StartRecording()
+        {
+            InitializeMicrophone();
+            _microphone.Start();
+        }
 
-    public void StopSound()
-    {
-      if (_sound != null)
-      {
-        _sound.Stop();
-      }
-    }
+        public void StopRecording()
+        {
+            StopRequested = true;
+        }
 
-    public MemoryStream GetSoundAsStream()
-    {
-      return _recordingStream;
-    }
+        private void currentMicrophone_BufferReady(object sender, EventArgs e)
+        {
+            _microphone.GetData(_audioBuffer);
+            _recordingStream.Write(_audioBuffer, 0, _audioBuffer.Length);
+            if (!StopRequested)
+            {
+                return;
+            }
 
-  }
+            DeleteMicrophone();
+        }
 
-  public class RecorderDispatcher : IApplicationService
-  {
-    private DispatcherTimer _frameworkDispatcherTimer;
-    public RecorderDispatcher(TimeSpan dispatchInterval)
-    {
-      FrameworkDispatcher.Update();
-      this._frameworkDispatcherTimer = new DispatcherTimer();
-      this._frameworkDispatcherTimer.Tick += new EventHandler(frameworkDispatcherTimer_Tick);
-      this._frameworkDispatcherTimer.Interval = dispatchInterval;
-    }
-    void IApplicationService.StartService(ApplicationServiceContext context)
-    {
-      this._frameworkDispatcherTimer.Start();
+        public void PlaySound()
+        {
+            Sound.Play();
+        }
+
+        public void StopSound()
+        {
+            if (Sound != null)
+            {
+                Sound.Stop();
+            }
+        }
+
+        public MemoryStream GetSoundAsStream()
+        {
+            return _recordingStream;
+        }
     }
 
-    void IApplicationService.StopService()
+    public class RecorderDispatcher : IApplicationService
     {
-      this._frameworkDispatcherTimer.Stop();
-    }
+        private readonly DispatcherTimer _frameworkDispatcherTimer;
 
-    void frameworkDispatcherTimer_Tick(object sender, EventArgs e)
-    {
-      FrameworkDispatcher.Update();
-    }
-  }
+        public RecorderDispatcher(TimeSpan dispatchInterval)
+        {
+            FrameworkDispatcher.Update();
+            _frameworkDispatcherTimer = new DispatcherTimer();
+            _frameworkDispatcherTimer.Tick += new EventHandler(frameworkDispatcherTimer_Tick);
+            _frameworkDispatcherTimer.Interval = dispatchInterval;
+        }
 
+        void IApplicationService.StartService(ApplicationServiceContext context)
+        {
+            _frameworkDispatcherTimer.Start();
+        }
+
+        void IApplicationService.StopService()
+        {
+            _frameworkDispatcherTimer.Stop();
+        }
+
+        private void frameworkDispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            FrameworkDispatcher.Update();
+        }
+    }
 }

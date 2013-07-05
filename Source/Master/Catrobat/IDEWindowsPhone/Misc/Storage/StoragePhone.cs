@@ -237,7 +237,8 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
         public object LoadImageThumbnail(string pathToImage)
         {
             object retVal = null;
-            var thumbnailPath = Path.Combine(pathToImage, ThumbnailExtension);
+            var withoutExtension = Path.GetFileNameWithoutExtension(pathToImage);
+            var thumbnailPath = string.Format("{0}{1}",withoutExtension, ThumbnailExtension);
 
             if (FileExists(thumbnailPath))
             {

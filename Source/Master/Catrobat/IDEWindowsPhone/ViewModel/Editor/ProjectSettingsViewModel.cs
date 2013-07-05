@@ -1,27 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Windows;
-using System.Windows.Navigation;
-using System.Windows.Threading;
-using Catrobat.Core;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Sounds;
-using Catrobat.Core.Storage;
-using Catrobat.IDEWindowsPhone.Annotations;
-using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
-using GalaSoft.MvvmLight;
-using System.ComponentModel;
-using GalaSoft.MvvmLight.Command;
-using IDEWindowsPhone;
-using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
-using Catrobat.IDECommon.Resources.Editor;
-using Microsoft.Phone.Tasks;
+﻿using Catrobat.Core.Objects;
 using Catrobat.IDEWindowsPhone.Misc;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Catrobat.Core.Objects.Costumes;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 {
@@ -41,7 +22,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             get { return _receivedProject; }
             set
             {
-                if (value == _receivedProject) return;
+                if (value == _receivedProject)
+                {
+                    return;
+                }
                 _receivedProject = value;
                 RaisePropertyChanged("ReceivedProject");
             }
@@ -52,7 +36,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             get { return _projectName; }
             set
             {
-                if (value == _projectName) return;
+                if (value == _projectName)
+                {
+                    return;
+                }
                 _projectName = value;
                 RaisePropertyChanged("ProjectName");
                 SaveCommand.RaiseCanExecuteChanged();
@@ -63,23 +50,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         #region Commands
 
-        public RelayCommand SaveCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand SaveCommand { get; private set; }
 
-        public RelayCommand CancelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -118,7 +93,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         #endregion
 
-
         public ProjectSettingsViewModel()
         {
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
@@ -131,11 +105,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         private void ResetViewModel()
         {
             ProjectName = "";
-        }
-
-        public override void Cleanup()
-        {
-            base.Cleanup();
         }
     }
 }

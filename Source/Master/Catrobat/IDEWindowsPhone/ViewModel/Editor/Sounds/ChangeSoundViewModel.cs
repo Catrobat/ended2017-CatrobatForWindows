@@ -1,27 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Windows;
-using System.Windows.Navigation;
-using System.Windows.Threading;
-using Catrobat.Core;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Sounds;
-using Catrobat.Core.Storage;
-using Catrobat.IDEWindowsPhone.Annotations;
-using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
-using GalaSoft.MvvmLight;
-using System.ComponentModel;
-using GalaSoft.MvvmLight.Command;
-using IDEWindowsPhone;
-using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
-using Catrobat.IDECommon.Resources.Editor;
-using Microsoft.Phone.Tasks;
+﻿using Catrobat.Core.Objects.Sounds;
 using Catrobat.IDEWindowsPhone.Misc;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Catrobat.Core.Objects.Costumes;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 {
@@ -41,7 +22,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             get { return _receivedSound; }
             set
             {
-                if (value == _receivedSound) return;
+                if (value == _receivedSound)
+                {
+                    return;
+                }
                 _receivedSound = value;
                 RaisePropertyChanged("ReceivedSound");
             }
@@ -52,7 +36,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             get { return _soundName; }
             set
             {
-                if (value == _soundName) return;
+                if (value == _soundName)
+                {
+                    return;
+                }
                 _soundName = value;
                 RaisePropertyChanged("SoundName");
                 SaveCommand.RaiseCanExecuteChanged();
@@ -63,29 +50,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         #region Commands
 
-        public RelayCommand EditSoundCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand EditSoundCommand { get; private set; }
 
-        public RelayCommand SaveCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand SaveCommand { get; private set; }
 
-        public RelayCommand CancelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -129,7 +100,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         #endregion
 
-
         public ChangeSoundViewModel()
         {
             EditSoundCommand = new RelayCommand(EditSoundAction);
@@ -143,11 +113,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
         private void ResetViewModel()
         {
             SoundName = "";
-        }
-
-        public override void Cleanup()
-        {
-            base.Cleanup();
         }
     }
 }

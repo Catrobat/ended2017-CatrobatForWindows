@@ -1,14 +1,9 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using System.Windows.Navigation;
 using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Bricks;
-using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.ViewModel;
-using IDEWindowsPhone;
+using Catrobat.IDEWindowsPhone.ViewModel.Scripts;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
-using Catrobat.IDEWindowsPhone.ViewModel.Scripts;
-using System.Windows.Navigation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
@@ -34,7 +29,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 
         private void reorderListBoxScriptBricks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _viewModel.AddNewScriptBrickCommand.Execute(((ListBox)sender).SelectedItem as DataObject);
+            _viewModel.AddNewScriptBrickCommand.Execute(((ListBox) sender).SelectedItem as DataObject);
         }
     }
 }

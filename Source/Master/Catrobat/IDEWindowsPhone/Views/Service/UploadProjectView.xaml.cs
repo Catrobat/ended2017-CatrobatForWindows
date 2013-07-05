@@ -1,14 +1,8 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using Catrobat.IDECommon.Resources.Main;
-using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.ViewModel;
+﻿using System.Windows.Controls;
+using System.Windows.Navigation;
 using Catrobat.IDEWindowsPhone.ViewModel.Service;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using Microsoft.Practices.ServiceLocation;
-using System.Windows.Navigation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Service
 {
