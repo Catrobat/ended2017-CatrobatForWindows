@@ -1,11 +1,35 @@
-﻿using System.ComponentModel;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using Catrobat.Core;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Objects.Bricks;
+using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Objects.Sounds;
+using Catrobat.IDECommon.Resources;
+using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
+using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.ViewModel;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
+using Catrobat.IDEWindowsPhone.ViewModel.Main;
+using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
+using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
+using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
+using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
+using Catrobat.IDEWindowsPhone.Views.Main;
+using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using System;
+using System.Windows.Controls;
+using System.Windows;
+using System.ComponentModel;
+using SoundState = Microsoft.Xna.Framework.Audio.SoundState;
 using Microsoft.Practices.ServiceLocation;
+using System.Collections.Generic;
+using System.Windows.Navigation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor
 {
@@ -20,6 +44,19 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         {
             InitializeComponent();
             LockPivotIfNoSpriteSelected();
+
+            _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
+        }
+
+        private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (propertyChangedEventArgs.PropertyName == "SelectedSprite")
+                ReorderListBoxSprites.SelectedItem = _viewModel.SelectedSprite;
+        }
+
+        private void RegisterCollectionsChangedHandlers()
+        {
+            
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)
@@ -32,24 +69,24 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         {
             if (_viewModel.SelectedBrick != null)
             {
-                reorderListBoxScriptBricks.ScrollIntoView(_viewModel.SelectedBrick);
+                ReorderListBoxScriptBricks.ScrollIntoView(_viewModel.SelectedBrick);
                 _viewModel.SelectedBrick = null;
             }
         }
 
         private void LockPivotIfNoSpriteSelected()
         {
-            var selectedSprite = _viewModel.SelectedSprite;
+            Sprite selectedSprite = _viewModel.SelectedSprite;
 
             if (selectedSprite == null)
             {
-                if (pivotMain.Items.Contains(pivotScripts))
+                if (PivotMain.Items.Contains(PivotScripts))
                 {
                     if (_updatePivot)
                     {
-                        pivotMain.Items.Remove(pivotScripts);
-                        pivotMain.Items.Remove(pivotCostumes);
-                        pivotMain.Items.Remove(pivotSounds);
+                        PivotMain.Items.Remove(PivotScripts);
+                        PivotMain.Items.Remove(PivotCostumes);
+                        PivotMain.Items.Remove(PivotSounds);
                     }
                     else
                     {
@@ -59,15 +96,17 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             }
             else
             {
-                if (!pivotMain.Items.Contains(pivotScripts))
+                if (!PivotMain.Items.Contains(PivotScripts))
                 {
                     try
                     {
-                        pivotMain.Items.Add(pivotScripts);
-                        pivotMain.Items.Add(pivotCostumes);
-                        pivotMain.Items.Add(pivotSounds);
+                        PivotMain.Items.Add(PivotScripts);
+                        PivotMain.Items.Add(PivotCostumes);
+                        PivotMain.Items.Add(PivotSounds);
                     }
-                    catch {}
+                    catch
+                    {
+                    }
                 }
             }
         }
@@ -90,28 +129,58 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
                 }
                 else
                 {
-                    _viewModel.SelectedSprite = selectedSprite;
+                    if (selectedSprite != _viewModel.SelectedSprite)
+                        _viewModel.SelectedSprite = selectedSprite;
+
                     LockPivotIfNoSpriteSelected();
                 }
             }
         }
 
+
+        private void reorderListBoxScriptBricks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var list = new ObservableCollection<DataObject>();
+            var listBox = sender as ListBox;
+
+            // ReSharper disable once PossibleNullReferenceException
+            foreach (var item in listBox.SelectedItems)
+            {
+                // ReSharper disable once AssignNullToNotNullAttribute
+                list.Add(item as Script);
+            }
+
+            _viewModel.SelectedScripts = list;
+        }
+
         private void reorderListBoxCostumes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Preventing selection
-            reorderListBoxCostumes.SelectedIndex = -1;
+            var list = new ObservableCollection<Costume>();
+            var listBox = sender as ListBox;
+
+            // ReSharper disable once PossibleNullReferenceException
+            foreach (var item in listBox.SelectedItems)
+            {
+                // ReSharper disable once AssignNullToNotNullAttribute
+                list.Add(item as Costume);
+            }
+
+            _viewModel.SelectedCostumes = list;
         }
 
         private void reorderListBoxSounds_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Preventing selection
-            reorderListBoxSounds.SelectedIndex = -1;
-        }
+            var list = new ObservableCollection<Sound>();
+            var listBox = sender as ListBox;
 
-        private void reorderListBoxScriptBricks_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Preventing selection
-            reorderListBoxScriptBricks.SelectedIndex = -1;
+            // ReSharper disable once PossibleNullReferenceException
+            foreach (var item in listBox.SelectedItems)
+            {
+                // ReSharper disable once AssignNullToNotNullAttribute
+                list.Add(item as Sound);
+            }
+
+            _viewModel.SelectedSounds = list;
         }
 
 

@@ -9,6 +9,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -75,6 +76,9 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         public ReorderListBox()
         {
             this.DefaultStyleKey = typeof(ReorderListBox);
+
+            // For fixing SelectedItems binding
+            SelectionChanged += new SelectionChangedEventHandler(BaseListBoxSelectionChanged);
         }
 
         #region IsReorderEnabled DependencyProperty
@@ -1299,5 +1303,88 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         //    if (PropertyChanged != null)
         //        PropertyChanged(this, e);
         //}
+
+        #region This fixes ´TwoWay binding to selectedItems 
+
+    public static readonly DependencyProperty SmartSelectedItemsProperty =
+      DependencyProperty.Register("SmartSelectedItems", typeof(INotifyCollectionChanged), typeof(ReorderListBox), new PropertyMetadata(OnSmartSelectedItemsPropertyChanged));
+
+    public INotifyCollectionChanged SmartSelectedItems
+    {
+      get { return (INotifyCollectionChanged)GetValue(SmartSelectedItemsProperty); }
+      set { SetValue(SmartSelectedItemsProperty, value); }
+    }
+
+    private static void OnSmartSelectedItemsPropertyChanged(DependencyObject target, DependencyPropertyChangedEventArgs args)
+    {
+      var collection = args.NewValue as INotifyCollectionChanged;
+      if (collection != null)
+      {
+        // unsubscribe, before subscribe to make sure not to have multiple subscription
+        collection.CollectionChanged -= ((ReorderListBox)target).SmartSelectedItemsCollectionChanged;
+        collection.CollectionChanged += ((ReorderListBox)target).SmartSelectedItemsCollectionChanged;
+      }
+    }
+
+    void SmartSelectedItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
+      //Need to unsubscribe from the events so we don't override the transfer
+      UnsubscribeFromEvents();
+
+      //Move items from the selected items list to the list box selection
+      Transfer(SmartSelectedItems as IList, base.SelectedItems);
+
+      //subscribe to the events again so we know when changes are made
+      SubscribeToEvents();
+    }
+
+    void BaseListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+      //Need to unsubscribe from the events so we don't override the transfer
+      UnsubscribeFromEvents();
+
+      //Move items from the selected items list to the list box selection
+      Transfer(base.SelectedItems, SmartSelectedItems as IList);
+
+      //subscribe to the events again so we know when changes are made
+      SubscribeToEvents();
+    }
+
+    private void SubscribeToEvents()
+    {
+      SelectionChanged += BaseListBoxSelectionChanged;
+
+      if (SmartSelectedItems != null)
+      {
+        SmartSelectedItems.CollectionChanged += SmartSelectedItemsCollectionChanged;
+      }
+    }
+
+    private void Transfer(System.Collections.IList source, IList target)
+    {
+      if (source == null || target == null)
+      {
+        return;
+      }
+
+      target.Clear();
+
+      foreach (var o in source)
+      {
+        target.Add(o);
+      }
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+      SelectionChanged -= BaseListBoxSelectionChanged;
+
+      if (SmartSelectedItems != null)
+      {
+        SmartSelectedItems.CollectionChanged -= SmartSelectedItemsCollectionChanged;
+      }
+    }
+
+   #endregion
     }
 }
