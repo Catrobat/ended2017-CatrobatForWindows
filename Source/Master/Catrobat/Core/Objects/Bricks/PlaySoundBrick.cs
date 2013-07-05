@@ -1,94 +1,109 @@
-﻿using System.Xml.Linq;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.Xml.Linq;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects.Sounds;
 
 namespace Catrobat.Core.Objects.Bricks
 {
-  public class PlaySoundBrick : Brick
-  {
-    private SoundReference soundReference;
-    internal SoundReference SoundReference
+    public class PlaySoundBrick : Brick
     {
-      get
-      {
-        return soundReference;
-      }
-      set
-      {
-        if (this.soundReference == value)
-          return;
+        private SoundReference _soundReference;
 
-        this.soundReference = value;
-        this.OnPropertyChanged(new PropertyChangedEventArgs("SoundReference"));
-      }
-    }
-    public Sound Sound
-    {
-      get
-      {
-        if (soundReference == null)
-          return null;
-
-        return soundReference.Sound;
-      }
-      set
-      {
-        if (this.soundReference == null)
+        internal SoundReference SoundReference
         {
-          soundReference = new SoundReference(sprite);
-          soundReference.Reference = XPathHelper.getReference(value, sprite);
+            get { return _soundReference; }
+            set
+            {
+                if (_soundReference == value)
+                {
+                    return;
+                }
+
+                _soundReference = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("SoundReference"));
+            }
         }
 
-        if (this.soundReference.Sound == value)
-          return;
+        public Sound Sound
+        {
+            get
+            {
+                if (_soundReference == null)
+                {
+                    return null;
+                }
 
-        this.soundReference.Sound = value;
+                return _soundReference.Sound;
+            }
+            set
+            {
+                if (_soundReference == null)
+                {
+                    _soundReference = new SoundReference(_sprite);
+                    _soundReference.Reference = XPathHelper.getReference(value, _sprite);
+                }
 
-        if (value == null)
-          this.soundReference = null;
+                if (_soundReference.Sound == value)
+                {
+                    return;
+                }
 
-        this.OnPropertyChanged(new PropertyChangedEventArgs("SoundInfo"));
-      }
+                _soundReference.Sound = value;
+
+                if (value == null)
+                {
+                    _soundReference = null;
+                }
+
+                OnPropertyChanged(new PropertyChangedEventArgs("SoundInfo"));
+            }
+        }
+
+        public PlaySoundBrick() {}
+
+        public PlaySoundBrick(Sprite parent) : base(parent) {}
+
+        public PlaySoundBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+
+        internal override void LoadFromXML(XElement xRoot)
+        {
+            if (xRoot.Element("soundInfo") != null)
+            {
+                _soundReference = new SoundReference(xRoot.Element("soundInfo"), _sprite);
+            }
+        }
+
+        internal override XElement CreateXML()
+        {
+            var xRoot = new XElement("playSoundBrick");
+
+            if (_soundReference != null)
+            {
+                xRoot.Add(_soundReference.CreateXML());
+            }
+
+            ////CreateCommonXML(xRoot);
+
+            return xRoot;
+        }
+
+        public override DataObject Copy(Sprite parent)
+        {
+            var newBrick = new PlaySoundBrick(parent);
+            if (_soundReference != null)
+            {
+                newBrick._soundReference = _soundReference.Copy(parent) as SoundReference;
+            }
+
+            return newBrick;
+        }
+
+        public void UpdateReference()
+        {
+            if (_soundReference != null)
+            {
+                _soundReference.Reference = XPathHelper.getReference(_soundReference.Sound, _sprite);
+            }
+        }
     }
-
-    public PlaySoundBrick() { }
-
-    public PlaySoundBrick(Sprite parent) : base(parent) { }
-
-    public PlaySoundBrick(XElement xElement, Sprite parent) : base(xElement, parent) { }
-
-    internal override void LoadFromXML(XElement xRoot)
-    {
-      if (xRoot.Element("soundInfo") != null)
-        soundReference = new SoundReference(xRoot.Element("soundInfo"), sprite);
-    }
-
-    internal override XElement CreateXML()
-    {
-      XElement xRoot = new XElement("playSoundBrick");
-
-      if (soundReference != null)
-        xRoot.Add(soundReference.CreateXML());
-
-      ////CreateCommonXML(xRoot);
-
-      return xRoot;
-    }
-
-    public override DataObject Copy(Sprite parent)
-    {
-      PlaySoundBrick newBrick = new PlaySoundBrick(parent);
-      if (soundReference != null)
-        newBrick.soundReference = soundReference.Copy(parent) as SoundReference;
-
-      return newBrick;
-    }
-
-    public void UpdateReference()
-    {
-      if (soundReference != null)
-        soundReference.Reference = XPathHelper.getReference(soundReference.Sound, sprite);
-    }
-  }
 }

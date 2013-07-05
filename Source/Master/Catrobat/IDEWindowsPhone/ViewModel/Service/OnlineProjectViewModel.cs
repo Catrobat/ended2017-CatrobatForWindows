@@ -1,20 +1,18 @@
-﻿using Catrobat.Core;
-using Catrobat.Core.Misc.ServerCommunication;
-using Catrobat.IDECommon.Resources.Main;
-using GalaSoft.MvvmLight;
+﻿using System;
 using System.ComponentModel;
-using System.Threading;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Input;
+using Catrobat.Core;
+using Catrobat.Core.Misc.ServerCommunication;
+using Catrobat.Core.Objects;
+using Catrobat.Core.Resources;
+using Catrobat.IDECommon.Resources.Main;
+using Catrobat.IDEWindowsPhone.Misc;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Catrobat.IDEWindowsPhone.Misc;
-using System.Globalization;
-using Catrobat.Core.Objects;
-using System.Data.Linq;
-using System.Windows.Input;
-using System;
-using System.Windows;
 using Microsoft.Phone.Tasks;
-using Catrobat.Core.Resources;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 {
@@ -30,24 +28,20 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
         private string _viewsLabelText = "";
         private string _downloadsLabelText = "";
 
-
         #endregion
 
         #region Properties
 
         public bool ButtonDownloadIsEnabled
         {
-            get
-            {
-                return _buttonDownloadIsEnabled;
-            }
+            get { return _buttonDownloadIsEnabled; }
             set
             {
                 if (_buttonDownloadIsEnabled != value)
                 {
                     _buttonDownloadIsEnabled = value;
 
-                    if (this.PropertyChanged != null)
+                    if (PropertyChanged != null)
                     {
                         PropertyChanged(this, new PropertyChangedEventArgs("ButtonDownloadIsEnabled"));
                         DownloadCommand.RaiseCanExecuteChanged();
@@ -58,17 +52,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         public string UploadedLabelText
         {
-            get
-            {
-                return _uploadedLabelText;
-            }
+            get { return _uploadedLabelText; }
             set
             {
                 if (_uploadedLabelText != value)
                 {
                     _uploadedLabelText = value;
 
-                    if (this.PropertyChanged != null)
+                    if (PropertyChanged != null)
                     {
                         PropertyChanged(this, new PropertyChangedEventArgs("UploadedLabelText"));
                     }
@@ -78,17 +69,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         public string VersionLabelText
         {
-            get
-            {
-                return _versionLabelText;
-            }
+            get { return _versionLabelText; }
             set
             {
                 if (_versionLabelText != value)
                 {
                     _versionLabelText = value;
 
-                    if (this.PropertyChanged != null)
+                    if (PropertyChanged != null)
                     {
                         PropertyChanged(this, new PropertyChangedEventArgs("VersionLabelText"));
                     }
@@ -98,17 +86,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         public string ViewsLabelText
         {
-            get
-            {
-                return _viewsLabelText;
-            }
+            get { return _viewsLabelText; }
             set
             {
                 if (_viewsLabelText != value)
                 {
                     _viewsLabelText = value;
 
-                    if (this.PropertyChanged != null)
+                    if (PropertyChanged != null)
                     {
                         PropertyChanged(this, new PropertyChangedEventArgs("ViewsLabelText"));
                     }
@@ -118,17 +103,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         public string DownloadsLabelText
         {
-            get
-            {
-                return _downloadsLabelText;
-            }
+            get { return _downloadsLabelText; }
             set
             {
                 if (_downloadsLabelText != value)
                 {
                     _downloadsLabelText = value;
 
-                    if (this.PropertyChanged != null)
+                    if (PropertyChanged != null)
                     {
                         PropertyChanged(this, new PropertyChangedEventArgs("DownloadsLabelText"));
                     }
@@ -140,35 +122,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         #region Commands
 
-        public ICommand OnLoadCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand OnLoadCommand { get; private set; }
 
-        public RelayCommand<OnlineProjectHeader> DownloadCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand<OnlineProjectHeader> DownloadCommand { get; private set; }
 
-        public ICommand ReportCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand ReportCommand { get; private set; }
 
-        public ICommand LicenseCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand LicenseCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -214,7 +176,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void LicenseAction()
         {
-            WebBrowserTask browser = new WebBrowserTask();
+            var browser = new WebBrowserTask();
             browser.Uri = new Uri(ApplicationResources.ProjectLicenseUrl);
             browser.Show();
         }
@@ -236,9 +198,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
         }
 
-        private void DownloadProjectMessageBoxResult(MessageBoxResult result)
-        {
-        }
+        private void DownloadProjectMessageBoxResult(MessageBoxResult result) {}
 
         private void DownloadCallback(string filename)
         {
@@ -246,21 +206,20 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             CatrobatContext.GetContext().SetCurrentProject(filename);
 
             Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                if (filename == "")
                 {
-                    // TODO: show error message
-
-                }
-                else
-                {
-                    if (ServerCommunication.NoDownloadsPending())
+                    if (filename == "")
                     {
-                        MessageBox.Show(MainResources.NoDownloadsPending,
-                          MainResources.MessageBoxInformation, MessageBoxButton.OK);
+                        // TODO: show error message
                     }
-                }
-            });
+                    else
+                    {
+                        if (ServerCommunication.NoDownloadsPending())
+                        {
+                            MessageBox.Show(MainResources.NoDownloadsPending,
+                                            MainResources.MessageBoxInformation, MessageBoxButton.OK);
+                        }
+                    }
+                });
         }
 
 

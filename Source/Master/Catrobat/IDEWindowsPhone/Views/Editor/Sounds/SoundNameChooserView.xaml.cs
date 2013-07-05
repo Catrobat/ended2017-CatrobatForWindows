@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Navigation;
-using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.Editor;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using Microsoft.Practices.ServiceLocation;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds;
+using Microsoft.Phone.Controls;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
@@ -24,10 +15,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
             InitializeComponent();
 
             Dispatcher.BeginInvoke(() =>
-            {
-                TextBoxSoundName.Focus();
-                TextBoxSoundName.SelectAll();
-            });
+                {
+                    TextBoxSoundName.Focus();
+                    TextBoxSoundName.SelectAll();
+                });
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

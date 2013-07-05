@@ -1,18 +1,8 @@
-﻿using System;
-using System.Windows.Controls;
-using Catrobat.Core.Objects.Costumes;
-using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.Editor;
-using IDEWindowsPhone;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using System.ComponentModel;
-using Microsoft.Practices.ServiceLocation;
-using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.Core;
-using Catrobat.Core.Objects;
-using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
+﻿using System.Windows.Controls;
 using System.Windows.Navigation;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
+using Microsoft.Phone.Controls;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 {
@@ -25,10 +15,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
             InitializeComponent();
 
             Dispatcher.BeginInvoke(() =>
-            {
-                TextBoxCostumeName.Focus();
-                TextBoxCostumeName.SelectAll();
-            });
+                {
+                    TextBoxCostumeName.Focus();
+                    TextBoxCostumeName.SelectAll();
+                });
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

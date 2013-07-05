@@ -6,33 +6,27 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class ChangeGhostEffectBrick : Brick
     {
-        protected double changeGhostEffect = 25.0f;
+        protected double _changeGhostEffect = 25.0f;
 
-        public ChangeGhostEffectBrick()
-        {
-        }
+        public ChangeGhostEffectBrick() {}
 
-        public ChangeGhostEffectBrick(Sprite parent) : base(parent)
-        {
-        }
+        public ChangeGhostEffectBrick(Sprite parent) : base(parent) {}
 
-        public ChangeGhostEffectBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public ChangeGhostEffectBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public double ChangeGhostEffect
         {
-            get { return changeGhostEffect; }
+            get { return _changeGhostEffect; }
             set
             {
-                changeGhostEffect = value;
+                _changeGhostEffect = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("ChangeGhostEffect"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            changeGhostEffect = double.Parse(xRoot.Element("changeGhostEffect").Value, CultureInfo.InvariantCulture);
+            _changeGhostEffect = double.Parse(xRoot.Element("changeGhostEffect").Value, CultureInfo.InvariantCulture);
         }
 
         internal override XElement CreateXML()
@@ -40,9 +34,9 @@ namespace Catrobat.Core.Objects.Bricks
             var xRoot = new XElement("changeGhostEffectBrick");
 
             xRoot.Add(new XElement("changeGhostEffect")
-                {
-                    Value = changeGhostEffect.ToString()
-                });
+            {
+                Value = _changeGhostEffect.ToString()
+            });
 
             //CreateCommonXML(xRoot);
 
@@ -52,7 +46,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new ChangeGhostEffectBrick(parent);
-            newBrick.changeGhostEffect = changeGhostEffect;
+            newBrick._changeGhostEffect = _changeGhostEffect;
 
             return newBrick;
         }

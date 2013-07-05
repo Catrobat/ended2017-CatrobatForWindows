@@ -5,36 +5,32 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class RepeatBrick : LoopBeginBrick
     {
-        protected int timesToRepeat;
+        protected int _timesToRepeat;
 
-        public RepeatBrick()
-        {
-        }
+        public RepeatBrick() {}
 
-        public RepeatBrick(Sprite parent) : base(parent)
-        {
-        }
+        public RepeatBrick(Sprite parent) : base(parent) {}
 
-        public RepeatBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public RepeatBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public int TimesToRepeat
         {
-            get { return timesToRepeat; }
+            get { return _timesToRepeat; }
             set
             {
-                if (timesToRepeat == value)
+                if (_timesToRepeat == value)
+                {
                     return;
+                }
 
-                timesToRepeat = value;
+                _timesToRepeat = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("TimesToRepeat"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            timesToRepeat = int.Parse(xRoot.Element("timesToRepeat").Value);
+            _timesToRepeat = int.Parse(xRoot.Element("timesToRepeat").Value);
             base.LoadFromCommonXML(xRoot);
         }
 
@@ -44,9 +40,9 @@ namespace Catrobat.Core.Objects.Bricks
             base.CreateCommonXML(xRoot);
 
             xRoot.Add(new XElement("timesToRepeat")
-                {
-                    Value = timesToRepeat.ToString()
-                });
+            {
+                Value = _timesToRepeat.ToString()
+            });
 
             return xRoot;
         }
@@ -54,7 +50,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new RepeatBrick(parent);
-            newBrick.timesToRepeat = timesToRepeat;
+            newBrick._timesToRepeat = _timesToRepeat;
 
             return newBrick;
         }

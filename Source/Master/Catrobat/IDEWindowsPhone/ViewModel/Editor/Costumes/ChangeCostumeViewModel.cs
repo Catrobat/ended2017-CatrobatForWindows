@@ -1,27 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Windows;
-using System.Windows.Navigation;
-using System.Windows.Threading;
-using Catrobat.Core;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Sounds;
-using Catrobat.Core.Storage;
-using Catrobat.IDEWindowsPhone.Annotations;
-using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
-using GalaSoft.MvvmLight;
-using System.ComponentModel;
-using GalaSoft.MvvmLight.Command;
-using IDEWindowsPhone;
-using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
-using Catrobat.IDECommon.Resources.Editor;
-using Microsoft.Phone.Tasks;
+﻿using Catrobat.Core.Objects.Costumes;
 using Catrobat.IDEWindowsPhone.Misc;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Catrobat.Core.Objects.Costumes;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 {
@@ -41,7 +22,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             get { return _receivedCostume; }
             set
             {
-                if (value == _receivedCostume) return;
+                if (value == _receivedCostume)
+                {
+                    return;
+                }
                 _receivedCostume = value;
                 RaisePropertyChanged("ReceivedCostume");
             }
@@ -52,7 +36,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             get { return _costumeName; }
             set
             {
-                if (value == _costumeName) return;
+                if (value == _costumeName)
+                {
+                    return;
+                }
                 _costumeName = value;
                 RaisePropertyChanged("CostumeName");
                 SaveCommand.RaiseCanExecuteChanged();
@@ -63,29 +50,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         #region Commands
 
-        public RelayCommand EditCostumeCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand EditCostumeCommand { get; private set; }
 
-        public RelayCommand SaveCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand SaveCommand { get; private set; }
 
-        public RelayCommand CancelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -129,7 +100,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         #endregion
 
-
         public ChangeCostumeViewModel()
         {
             EditCostumeCommand = new RelayCommand(EditCostumeAction);
@@ -143,11 +113,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         private void ResetViewModel()
         {
             CostumeName = "";
-        }
-
-        public override void Cleanup()
-        {
-            base.Cleanup();
         }
     }
 }

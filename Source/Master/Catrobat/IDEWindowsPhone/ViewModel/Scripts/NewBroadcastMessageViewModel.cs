@@ -4,11 +4,6 @@ using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
 {
@@ -25,10 +20,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
 
         public string BroadcastMessage
         {
-            get
-            {
-                return _broadcastMessage;
-            }
+            get { return _broadcastMessage; }
             set
             {
                 if (_broadcastMessage != value)
@@ -45,23 +37,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
 
         #region Commands
 
-        public RelayCommand SaveCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand SaveCommand { get; private set; }
 
-        public RelayCommand CancelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -78,15 +58,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
 
         private void SaveAction()
         {
-            GenericMessage<string> message = new GenericMessage<string>(BroadcastMessage);
+            var message = new GenericMessage<string>(BroadcastMessage);
             Messenger.Default.Send<GenericMessage<string>>(message, ViewModelMessagingToken.BroadcastMessageListener);
 
             if (_broadcastObject is BroadcastScript)
+            {
                 (_broadcastObject as BroadcastScript).ReceivedMessage = BroadcastMessage;
+            }
             if (_broadcastObject is BroadcastBrick)
+            {
                 (_broadcastObject as BroadcastBrick).BroadcastMessage = BroadcastMessage;
+            }
             if (_broadcastObject is BroadcastWaitBrick)
+            {
                 (_broadcastObject as BroadcastWaitBrick).BroadcastMessage = BroadcastMessage;
+            }
 
             Navigation.NavigateBack();
         }
@@ -107,7 +93,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
         }
 
         #endregion
-
 
         public NewBroadcastMessageViewModel()
         {

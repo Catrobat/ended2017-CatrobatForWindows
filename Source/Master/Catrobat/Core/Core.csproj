@@ -48,6 +48,7 @@
     <Compile Include="Converter\Converter.cs" />
     <Compile Include="Converter\EditXML.cs" />
     <Compile Include="Converter\PathHelper.cs" />
+    <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="IContextHolder.cs" />
     <Compile Include="Misc\Helpers\FormatHelper.cs" />
     <Compile Include="Misc\Helpers\ApplicationInformation.cs" />

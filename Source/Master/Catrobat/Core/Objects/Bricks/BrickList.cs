@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Xml.Linq;
 using Catrobat.Core.Misc.Helpers;
@@ -8,213 +7,217 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class BrickList : DataObject
     {
-        private Sprite sprite;
+        private Sprite _sprite;
 
         public BrickList(Sprite parent)
         {
             Bricks = new ObservableCollection<Brick>();
-            sprite = parent;
+            _sprite = parent;
         }
 
         public BrickList(XElement xElement, Sprite parent)
         {
-            sprite = parent;
+            _sprite = parent;
             LoadFromXML(xElement);
         }
 
-        public ObservableCollection<Brick> Bricks { get; set; }
+        public ObservableCollection<Brick> Bricks { get; private set; }
 
         public Sprite Sprite
         {
-            get { return sprite; }
+            get { return _sprite; }
             set
             {
-                if (sprite == value)
+                if (_sprite == value)
+                {
                     return;
+                }
 
-                sprite = value;
+                _sprite = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            ReadHelper.currentBrickList = this;
+            ReadHelper.CurrentBrickList = this;
 
             Bricks = new ObservableCollection<Brick>();
             foreach (XElement element in xRoot.Elements())
+            {
                 switch (element.Name.LocalName)
                 {
                     case "broadcastBrick":
-                        Bricks.Add(new BroadcastBrick(sprite));
+                        Bricks.Add(new BroadcastBrick(_sprite));
                         break;
 
                     case "broadcastWaitBrick":
-                        Bricks.Add(new BroadcastWaitBrick(sprite));
+                        Bricks.Add(new BroadcastWaitBrick(_sprite));
                         break;
 
                     case "changeBrightnessBrick":
-                        Bricks.Add(new ChangeBrightnessBrick(sprite));
+                        Bricks.Add(new ChangeBrightnessBrick(_sprite));
                         break;
 
                     case "changeGhostEffectBrick":
-                        Bricks.Add(new ChangeGhostEffectBrick(sprite));
+                        Bricks.Add(new ChangeGhostEffectBrick(_sprite));
                         break;
 
                     case "changeSizeByNBrick":
-                        Bricks.Add(new ChangeSizeByNBrick(sprite));
+                        Bricks.Add(new ChangeSizeByNBrick(_sprite));
                         break;
 
                     case "changeVolumeByBrick":
-                        Bricks.Add(new ChangeVolumeByBrick(sprite));
+                        Bricks.Add(new ChangeVolumeByBrick(_sprite));
                         break;
 
                     case "changeXByBrick":
-                        Bricks.Add(new ChangeXByBrick(sprite));
+                        Bricks.Add(new ChangeXByBrick(_sprite));
                         break;
 
                     case "changeYByBrick":
-                        Bricks.Add(new ChangeYByBrick(sprite));
+                        Bricks.Add(new ChangeYByBrick(_sprite));
                         break;
 
                     case "clearGraphicEffectBrick":
-                        Bricks.Add(new ClearGraphicEffectBrick(sprite));
+                        Bricks.Add(new ClearGraphicEffectBrick(_sprite));
                         break;
 
                     case "comeToFrontBrick":
-                        Bricks.Add(new ComeToFrontBrick(sprite));
+                        Bricks.Add(new ComeToFrontBrick(_sprite));
                         break;
 
                     case "foreverBrick":
-                        Bricks.Add(new ForeverBrick(sprite));
+                        Bricks.Add(new ForeverBrick(_sprite));
                         break;
 
                     case "glideToBrick":
-                        Bricks.Add(new GlideToBrick(sprite));
+                        Bricks.Add(new GlideToBrick(_sprite));
                         break;
 
                     case "goNStepsBackBrick":
-                        Bricks.Add(new GoNStepsBackBrick(sprite));
+                        Bricks.Add(new GoNStepsBackBrick(_sprite));
                         break;
 
                     case "hideBrick":
-                        Bricks.Add(new HideBrick(sprite));
+                        Bricks.Add(new HideBrick(_sprite));
                         break;
 
                     case "ifOnEdgeBounceBrick":
-                        Bricks.Add(new IfOnEdgeBounceBrick(sprite));
+                        Bricks.Add(new IfOnEdgeBounceBrick(_sprite));
                         break;
 
                     case "loopEndBrick":
-                        Bricks.Add(new LoopEndBrick(sprite));
+                        Bricks.Add(new LoopEndBrick(_sprite));
                         break;
 
                     case "moveNStepsBrick":
-                        Bricks.Add(new MoveNStepsBrick(sprite));
+                        Bricks.Add(new MoveNStepsBrick(_sprite));
                         break;
 
                     case "nextCostumeBrick":
-                        Bricks.Add(new NextCostumeBrick(sprite));
+                        Bricks.Add(new NextCostumeBrick(_sprite));
                         break;
 
                     case "noteBrick":
-                        Bricks.Add(new NoteBrick(sprite));
+                        Bricks.Add(new NoteBrick(_sprite));
                         break;
 
                     case "nxtMotorActionBrick":
-                        Bricks.Add(new NxtMotorActionBrick(sprite));
+                        Bricks.Add(new NxtMotorActionBrick(_sprite));
                         break;
 
                     case "nxtMotorStopBrick":
-                        Bricks.Add(new NxtMotorStopBrick(sprite));
+                        Bricks.Add(new NxtMotorStopBrick(_sprite));
                         break;
 
                     case "nxtMotorTurnAngleBrick":
-                        Bricks.Add(new NxtMotorTurnAngleBrick(sprite));
+                        Bricks.Add(new NxtMotorTurnAngleBrick(_sprite));
                         break;
 
                     case "nxtPlayToneBrick":
-                        Bricks.Add(new NxtPlayToneBrick(sprite));
+                        Bricks.Add(new NxtPlayToneBrick(_sprite));
                         break;
 
                     case "placeAtBrick":
-                        Bricks.Add(new PlaceAtBrick(sprite));
+                        Bricks.Add(new PlaceAtBrick(_sprite));
                         break;
 
                     case "playSoundBrick":
-                        Bricks.Add(new PlaySoundBrick(sprite));
+                        Bricks.Add(new PlaySoundBrick(_sprite));
                         break;
 
                     case "pointInDirectionBrick":
-                        Bricks.Add(new PointInDirectionBrick(sprite));
+                        Bricks.Add(new PointInDirectionBrick(_sprite));
                         break;
 
                     case "pointToBrick":
-                        Bricks.Add(new PointToBrick(sprite));
+                        Bricks.Add(new PointToBrick(_sprite));
                         break;
 
                     case "repeatBrick":
-                        Bricks.Add(new RepeatBrick(sprite));
+                        Bricks.Add(new RepeatBrick(_sprite));
                         break;
 
                     case "setBrightnessBrick":
-                        Bricks.Add(new SetBrightnessBrick(sprite));
+                        Bricks.Add(new SetBrightnessBrick(_sprite));
                         break;
 
                     case "setCostumeBrick":
-                        Bricks.Add(new SetCostumeBrick(sprite));
+                        Bricks.Add(new SetCostumeBrick(_sprite));
                         break;
 
                     case "setGhostEffectBrick":
-                        Bricks.Add(new SetGhostEffectBrick(sprite));
+                        Bricks.Add(new SetGhostEffectBrick(_sprite));
                         break;
 
                     case "setSizeToBrick":
-                        Bricks.Add(new SetSizeToBrick(sprite));
+                        Bricks.Add(new SetSizeToBrick(_sprite));
                         break;
 
                     case "setVolumeToBrick":
-                        Bricks.Add(new SetVolumeToBrick(sprite));
+                        Bricks.Add(new SetVolumeToBrick(_sprite));
                         break;
 
                     case "setXBrick":
-                        Bricks.Add(new SetXBrick(sprite));
+                        Bricks.Add(new SetXBrick(_sprite));
                         break;
 
                     case "setYBrick":
-                        Bricks.Add(new SetYBrick(sprite));
+                        Bricks.Add(new SetYBrick(_sprite));
                         break;
 
                     case "showBrick":
-                        Bricks.Add(new ShowBrick(sprite));
+                        Bricks.Add(new ShowBrick(_sprite));
                         break;
 
                     case "speakBrick":
-                        Bricks.Add(new SpeakBrick(sprite));
+                        Bricks.Add(new SpeakBrick(_sprite));
                         break;
 
                     case "stopAllSoundsBrick":
-                        Bricks.Add(new StopAllSoundsBrick(sprite));
+                        Bricks.Add(new StopAllSoundsBrick(_sprite));
                         break;
 
                     case "turnLeftBrick":
-                        Bricks.Add(new TurnLeftBrick(sprite));
+                        Bricks.Add(new TurnLeftBrick(_sprite));
                         break;
 
                     case "turnRightBrick":
-                        Bricks.Add(new TurnRightBrick(sprite));
+                        Bricks.Add(new TurnRightBrick(_sprite));
                         break;
 
                     case "waitBrick":
-                        Bricks.Add(new WaitBrick(sprite));
+                        Bricks.Add(new WaitBrick(_sprite));
                         break;
 
                     default:
                         // Unknown brick
                         break;
                 }
+            }
 
-            IEnumerator<Brick> enumerator = Bricks.GetEnumerator();
+            var enumerator = Bricks.GetEnumerator();
             foreach (XElement element in xRoot.Elements())
             {
                 enumerator.MoveNext();
@@ -227,7 +230,9 @@ namespace Catrobat.Core.Objects.Bricks
             var xRoot = new XElement("brickList");
 
             foreach (Brick brick in Bricks)
+            {
                 xRoot.Add(brick.CreateXML());
+            }
 
             return xRoot;
         }
@@ -235,18 +240,20 @@ namespace Catrobat.Core.Objects.Bricks
         public DataObject Copy(Sprite parent)
         {
             var newBrickList = new BrickList(parent);
-            ReadHelper.currentBrickList = newBrickList;
+            ReadHelper.CurrentBrickList = newBrickList;
 
             foreach (Brick brick in Bricks)
+            {
                 newBrickList.Bricks.Add(brick.Copy(parent) as Brick);
+            }
 
             return newBrickList;
         }
 
         public void CopyReference(BrickList copiedFrom, Sprite parent)
         {
-            int pos = 0;
-            ReadHelper.currentBrickList = this;
+            var pos = 0;
+            ReadHelper.CurrentBrickList = this;
 
             foreach (Brick brick in Bricks)
             {

@@ -1,18 +1,15 @@
-﻿using System.Runtime.CompilerServices;
-using Catrobat.Core;
-using Catrobat.IDEWindowsPhone.Annotations;
-using GalaSoft.MvvmLight;
-using System.ComponentModel;
-using GalaSoft.MvvmLight.Command;
+﻿using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Main;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using System.Windows;
-using System.Windows.Navigation;
-using System.Windows.Media;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 {
@@ -41,7 +38,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get { return _projectName; }
             set
             {
-                if (value == _projectName) return;
+                if (value == _projectName)
+                {
+                    return;
+                }
                 _projectName = value;
                 RaisePropertyChanged("ProjectName");
             }
@@ -52,7 +52,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get { return _screenshotImageSource; }
             set
             {
-                if (_screenshotImageSource == value) return;
+                if (_screenshotImageSource == value)
+                {
+                    return;
+                }
                 _screenshotImageSource = value;
                 RaisePropertyChanged("ScreenshotImageSource");
             }
@@ -63,7 +66,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get { return _contentPanelVisibility; }
             set
             {
-                if (value == _contentPanelVisibility) return;
+                if (value == _contentPanelVisibility)
+                {
+                    return;
+                }
                 _contentPanelVisibility = value;
                 RaisePropertyChanged("ContentPanelVisibility");
             }
@@ -74,7 +80,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get { return _loadingPanelVisibility; }
             set
             {
-                if (value == _loadingPanelVisibility) return;
+                if (value == _loadingPanelVisibility)
+                {
+                    return;
+                }
                 _loadingPanelVisibility = value;
                 RaisePropertyChanged("LoadingPanelVisibility");
             }
@@ -85,7 +94,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get { return _progressBarLoadingIsIndeterminate; }
             set
             {
-                if (value == _progressBarLoadingIsIndeterminate) return;
+                if (value == _progressBarLoadingIsIndeterminate)
+                {
+                    return;
+                }
                 _progressBarLoadingIsIndeterminate = value;
                 RaisePropertyChanged("ProgressBarLoadingIsIndeterminate");
             }
@@ -96,7 +108,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get { return _checkBoxMakeActiveIsChecked; }
             set
             {
-                if (value == _checkBoxMakeActiveIsChecked) return;
+                if (value == _checkBoxMakeActiveIsChecked)
+                {
+                    return;
+                }
                 _checkBoxMakeActiveIsChecked = value;
                 RaisePropertyChanged("CheckBoxMakeActiveIsChecked");
             }
@@ -107,7 +122,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get { return _buttonAddIsEnabled; }
             set
             {
-                if (value == _buttonAddIsEnabled) return;
+                if (value == _buttonAddIsEnabled)
+                {
+                    return;
+                }
                 _buttonAddIsEnabled = value;
                 RaisePropertyChanged("ButtonAddIsEnabled");
                 AddCommand.RaiseCanExecuteChanged();
@@ -119,7 +137,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get { return _buttonCancelIsEnabled; }
             set
             {
-                if (value == _buttonCancelIsEnabled) return;
+                if (value == _buttonCancelIsEnabled)
+                {
+                    return;
+                }
                 _buttonCancelIsEnabled = value;
                 RaisePropertyChanged("ButtonCancelIsEnabled");
                 CancelCommand.RaiseCanExecuteChanged();
@@ -130,29 +151,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         #region Commands
 
-        public RelayCommand AddCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand AddCommand { get; private set; }
 
-        public RelayCommand CancelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand CancelCommand { get; private set; }
 
-        public ICommand OnLoadCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand OnLoadCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -175,7 +180,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private void AddAction()
         {
             if (_isWorking)
+            {
                 return;
+            }
 
             _isWorking = true;
 
@@ -186,29 +193,28 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             ProgressBarLoadingIsIndeterminate = true;
 
             var task = Task.Run(() =>
-            {
-                try
                 {
-                    if (_importer != null)
-                        _importer.AcceptTempProject(CheckBoxMakeActiveIsChecked);
-
-                    Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    try
                     {
-                        Navigation.NavigateTo(typeof(MainView));
-                    });  
-                }
-                catch
-                {
-                    ShowErrorMessage();
-                }
-            });
+                        if (_importer != null)
+                        {
+                            _importer.AcceptTempProject(CheckBoxMakeActiveIsChecked);
+                        }
+
+                        Deployment.Current.Dispatcher.BeginInvoke(() => { Navigation.NavigateTo(typeof (MainView)); });
+                    }
+                    catch
+                    {
+                        ShowErrorMessage();
+                    }
+                });
 
             _isWorking = false;
         }
 
         private void CancelAction()
         {
-            Navigation.NavigateTo(typeof(MainView));
+            Navigation.NavigateTo(typeof (MainView));
         }
 
         private async void OnLoadAction(NavigationContext navigationContext)
@@ -244,7 +250,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         #endregion
 
-
         public ProjectImportViewModel()
         {
             // Commands
@@ -266,7 +271,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void ProjectNotValidMessageResult(MessageBoxResult obj)
         {
-            Navigation.NavigateTo(typeof(MainView));
+            Navigation.NavigateTo(typeof (MainView));
         }
 
         private void ResetViewModel()

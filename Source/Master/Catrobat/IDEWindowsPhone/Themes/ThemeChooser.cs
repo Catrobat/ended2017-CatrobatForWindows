@@ -6,103 +6,102 @@ using Catrobat.IDEWindowsPhone.Annotations;
 
 namespace Catrobat.IDEWindowsPhone.Themes
 {
-  public class ThemeChooser : INotifyPropertyChanged
-  {
-    private readonly ObservableCollection<Theme> themes;
-    public ObservableCollection<Theme> Themes
+    public class ThemeChooser : INotifyPropertyChanged
     {
-      get
-      {
-        return themes;
-      }
-    }
+        private readonly ObservableCollection<Theme> _themes;
 
-    private Theme _selectedTheme;
-    public Theme SelectedTheme
-    {
-      get
-      {
-        return _selectedTheme;
-      }
-      set
-      {
-        if (_selectedTheme != value && value != null)
+        public ObservableCollection<Theme> Themes
         {
-          _selectedTheme = value;
-
+            get { return _themes; }
         }
 
-        RaisePropertyChanged();
-      }
-    }
+        private Theme _selectedTheme;
 
-    public int SelectedThemeIndex
-    {
-      get
-      {
-        int index = 0;
-
-        foreach (Theme theme in themes)
+        public Theme SelectedTheme
         {
-          if (theme == SelectedTheme)
-            return index;
+            get { return _selectedTheme; }
+            set
+            {
+                if (_selectedTheme != value && value != null)
+                {
+                    _selectedTheme = value;
+                }
 
-          index++;
+                RaisePropertyChanged();
+            }
         }
 
-        return -1;
-      }
-      set
-      {
-        SelectedTheme = themes[value];
-      }
-    }
-
-    public ThemeChooser()
-    {
-      var theme1 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_strings",
-                  "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/MainViewPanorama_strings_small.png")
+        public int SelectedThemeIndex
         {
-          AccentColor1 = new SolidColorBrush(Colors.Purple),
-          AccentColor2 = new SolidColorBrush(Colors.Green),
-          AccentColor3 = new SolidColorBrush(Colors.Orange),
-          AppBarColor = new SolidColorBrush(Colors.Red)
-        };
+            get
+            {
+                var index = 0;
 
+                foreach (Theme theme in _themes)
+                {
+                    if (theme == SelectedTheme)
+                    {
+                        return index;
+                    }
 
-      var theme2 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_blue",
-                  "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/MainViewPanorama_cats_blue_small.png")
+                    index++;
+                }
+
+                return -1;
+            }
+            set { SelectedTheme = _themes[value]; }
+        }
+
+        public ThemeChooser()
         {
-          AccentColor1 = new SolidColorBrush(Colors.Purple),
-          AccentColor2 = new SolidColorBrush(Colors.Green),
-          AccentColor3 = new SolidColorBrush(Colors.Orange),
-          AppBarColor = new SolidColorBrush(Colors.Red)
-        };
+            var theme1 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_strings",
+                                   "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/MainViewPanorama_strings_small.png")
+            {
+                AccentColor1 = new SolidColorBrush(Colors.Purple),
+                AccentColor2 = new SolidColorBrush(Colors.Green),
+                AccentColor3 = new SolidColorBrush(Colors.Orange),
+                AppBarColor = new SolidColorBrush(Colors.Red)
+            };
 
-      var theme3 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_pink",
-                             "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/MainViewPanorama_cats_pink_small.png")
+
+            var theme2 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_blue",
+                                   "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/MainViewPanorama_cats_blue_small.png")
+            {
+                AccentColor1 = new SolidColorBrush(Colors.Purple),
+                AccentColor2 = new SolidColorBrush(Colors.Green),
+                AccentColor3 = new SolidColorBrush(Colors.Orange),
+                AppBarColor = new SolidColorBrush(Colors.Red)
+            };
+
+            var theme3 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_pink",
+                                   "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/MainViewPanorama_cats_pink_small.png")
+            {
+                AccentColor1 = new SolidColorBrush(Colors.Purple),
+                AccentColor2 = new SolidColorBrush(Colors.Green),
+                AccentColor3 = new SolidColorBrush(Colors.Orange),
+                AppBarColor = new SolidColorBrush(Colors.Red)
+            };
+
+
+            _themes = new ObservableCollection<Theme>() {theme1, theme2, theme3};
+
+            _selectedTheme = _themes[0];
+        }
+
+        #region PropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
-          AccentColor1 = new SolidColorBrush(Colors.Purple),
-          AccentColor2 = new SolidColorBrush(Colors.Green),
-          AccentColor3 = new SolidColorBrush(Colors.Orange),
-          AppBarColor = new SolidColorBrush(Colors.Red)
-        };
+            var handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
-
-      themes = new ObservableCollection<Theme>() { theme1, theme2, theme3 };
-
-      _selectedTheme = themes[0];
+        #endregion
     }
-
-    #region PropertyChanged
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    [NotifyPropertyChangedInvocator]
-    protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-    {
-      PropertyChangedEventHandler handler = PropertyChanged;
-      if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-    }
-    #endregion
-  }
 }

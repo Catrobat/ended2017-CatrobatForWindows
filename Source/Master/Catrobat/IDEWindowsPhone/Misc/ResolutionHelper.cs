@@ -1,70 +1,83 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using IDEWindowsPhone;
 
 namespace Catrobat.IDEWindowsPhone.Misc
 {
-  public enum Resolutions { WVGA, WXGA, HD720p };
-
-  public static class ResolutionHelper
-  {
-    private static bool IsWvga
+    public enum Resolutions
     {
-      get
-      {
-        try
-        {
-          return App.Current.Host.Content.ScaleFactor == 100;
-        }
-        catch
-        {
-          return true;
-        } 
-      }
-    }
+        WVGA,
+        WXGA,
+        HD720p
+    };
 
-    private static bool IsWxga
+    public static class ResolutionHelper
     {
-      get
-      {
-        try
+        private static bool IsWvga
         {
-          return App.Current.Host.Content.ScaleFactor == 160;
+            get
+            {
+                try
+                {
+                    return App.Current.Host.Content.ScaleFactor == 100;
+                }
+                catch
+                {
+                    return true;
+                }
+            }
         }
-        catch
-        {
-          return true;
-        }
-      }
-    }
 
-    private static bool Is720p
-    {
-      get
-      {
-        try
+        private static bool IsWxga
         {
-          return App.Current.Host.Content.ScaleFactor == 150;
+            get
+            {
+                try
+                {
+                    return App.Current.Host.Content.ScaleFactor == 160;
+                }
+                catch
+                {
+                    return true;
+                }
+            }
         }
-        catch
-        {
-          return true;
-        }
-      }
-    }
 
-    public static Resolutions CurrentResolution
-    {
-      get
-      {
-        if (IsWvga) return Resolutions.WVGA;
-        else if (IsWxga) return Resolutions.WXGA;
-        else if (Is720p) return Resolutions.HD720p;
-        else throw new InvalidOperationException("Unknown resolution");
-      }
+        private static bool Is720p
+        {
+            get
+            {
+                try
+                {
+                    return App.Current.Host.Content.ScaleFactor == 150;
+                }
+                catch
+                {
+                    return true;
+                }
+            }
+        }
+
+        public static Resolutions CurrentResolution
+        {
+            get
+            {
+                if (IsWvga)
+                {
+                    return Resolutions.WVGA;
+                }
+                else if (IsWxga)
+                {
+                    return Resolutions.WXGA;
+                }
+                else if (Is720p)
+                {
+                    return Resolutions.HD720p;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Unknown resolution");
+                }
+            }
+        }
     }
-  }
 }

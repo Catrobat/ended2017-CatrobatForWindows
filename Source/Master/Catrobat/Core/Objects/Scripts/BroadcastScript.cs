@@ -7,30 +7,25 @@ namespace Catrobat.Core.Objects
 {
     public class BroadcastScript : Script
     {
-        private string receivedMessage;
+        public BroadcastScript() {}
 
-        public BroadcastScript()
-        {
-        }
+        public BroadcastScript(Sprite parent) : base(parent) {}
 
-        public BroadcastScript(Sprite parent) : base(parent)
-        {
-        }
+        public BroadcastScript(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
-        public BroadcastScript(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
-
+        private string _receivedMessage;
         public string ReceivedMessage
         {
-            get { return receivedMessage; }
+            get { return _receivedMessage; }
             set
             {
-                if (receivedMessage == value)
+                if (_receivedMessage == value)
+                {
                     return;
+                }
 
                 // TODO: update available UIReceivedMessages from Project
-                receivedMessage = value;
+                _receivedMessage = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("ReceivedMessage"));
             }
         }
@@ -47,7 +42,9 @@ namespace Catrobat.Core.Objects
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("receivedMessage") != null)
-                receivedMessage = xRoot.Element("receivedMessage").Value;
+            {
+                _receivedMessage = xRoot.Element("receivedMessage").Value;
+            }
         }
 
         internal override XElement CreateXML()
@@ -56,12 +53,12 @@ namespace Catrobat.Core.Objects
 
             CreateCommonXML(xRoot);
 
-            if (receivedMessage != null)
+            if (_receivedMessage != null)
             {
                 xRoot.Add(new XElement("receivedMessage")
-                    {
-                        Value = receivedMessage
-                    });
+                {
+                    Value = _receivedMessage
+                });
             }
 
             return xRoot;
@@ -70,9 +67,11 @@ namespace Catrobat.Core.Objects
         public override DataObject Copy(Sprite parent)
         {
             var newBroadcastScript = new BroadcastScript(parent);
-            newBroadcastScript.receivedMessage = receivedMessage;
+            newBroadcastScript._receivedMessage = _receivedMessage;
             if (bricks != null)
+            {
                 newBroadcastScript.bricks = bricks.Copy(parent) as BrickList;
+            }
 
             return newBroadcastScript;
         }

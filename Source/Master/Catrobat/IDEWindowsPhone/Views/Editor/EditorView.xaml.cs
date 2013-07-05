@@ -1,38 +1,17 @@
-﻿using Catrobat.Core;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Bricks;
-using Catrobat.Core.Objects.Costumes;
-using Catrobat.Core.Objects.Sounds;
-using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.Editor;
-using Catrobat.IDEWindowsPhone.Controls.Buttons;
-using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
-using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.ViewModel;
-using Catrobat.IDEWindowsPhone.ViewModel.Editor;
-using Catrobat.IDEWindowsPhone.ViewModel.Main;
-using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
-using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
-using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
-using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
-using Catrobat.IDEWindowsPhone.Views.Main;
-using IDEWindowsPhone;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using System;
-using System.Windows.Controls;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.ComponentModel;
-using SoundState = Microsoft.Xna.Framework.Audio.SoundState;
+using System.Windows.Controls;
+using Catrobat.Core.Objects;
+using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor;
+using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
-using System.Collections.Generic;
-using System.Windows.Navigation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor
 {
     public partial class EditorView : PhoneApplicationPage
     {
-        readonly EditorViewModel _viewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
+        private readonly EditorViewModel _viewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
 
         private bool _updatePivot = true;
         private bool _isSpriteDragging = false;
@@ -60,7 +39,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
         private void LockPivotIfNoSpriteSelected()
         {
-            Sprite selectedSprite = _viewModel.SelectedSprite;
+            var selectedSprite = _viewModel.SelectedSprite;
 
             if (selectedSprite == null)
             {
@@ -88,17 +67,15 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
                         pivotMain.Items.Add(pivotCostumes);
                         pivotMain.Items.Add(pivotSounds);
                     }
-                    catch
-                    {
-                    }
+                    catch {}
                 }
             }
         }
 
         private void reorderListBoxSprites_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ReorderListBox reorderableListbox = (sender as ReorderListBox);
-            Sprite selectedSprite = reorderableListbox.SelectedItem as Sprite;
+            var reorderableListbox = (sender as ReorderListBox);
+            var selectedSprite = reorderableListbox.SelectedItem as Sprite;
 
             if (reorderableListbox.IsDraging)
             {
@@ -136,7 +113,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             // Preventing selection
             reorderListBoxScriptBricks.SelectedIndex = -1;
         }
-        
+
 
         private void buttonSoundPlay_Click(object sender, RoutedEventArgs e)
         {

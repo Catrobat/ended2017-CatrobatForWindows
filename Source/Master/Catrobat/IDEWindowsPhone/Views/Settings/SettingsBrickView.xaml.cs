@@ -2,11 +2,11 @@
 
 namespace Catrobat.IDEWindowsPhone.Views.Settings
 {
-  public partial class SettingsBrickView : PhoneApplicationPage
-  {
-    public SettingsBrickView()
+    public partial class SettingsBrickView : PhoneApplicationPage
     {
-      InitializeComponent();
+        public SettingsBrickView()
+        {
+            InitializeComponent();
+        }
     }
-  }
 }

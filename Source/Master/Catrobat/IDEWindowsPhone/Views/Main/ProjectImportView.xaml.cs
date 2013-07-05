@@ -1,20 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Navigation;
-using Catrobat.Core;
-using Catrobat.IDEWindowsPhone.Misc;
-using GalaSoft.MvvmLight.Messaging;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using Windows.Phone.Storage.SharedAccess;
-using Windows.Storage;
+﻿using System.Windows.Navigation;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
+using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Main

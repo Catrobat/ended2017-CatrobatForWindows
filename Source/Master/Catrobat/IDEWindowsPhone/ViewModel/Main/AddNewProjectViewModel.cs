@@ -1,10 +1,7 @@
-﻿using System.Runtime.CompilerServices;
-using Catrobat.Core;
-using Catrobat.IDEWindowsPhone.Annotations;
-using GalaSoft.MvvmLight;
-using System.ComponentModel;
-using GalaSoft.MvvmLight.Command;
+﻿using Catrobat.Core;
 using Catrobat.IDEWindowsPhone.Misc;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 {
@@ -21,10 +18,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public string ProjectName
         {
-            get
-            {
-                return _projectName;
-            }
+            get { return _projectName; }
             set
             {
                 if (_projectName != value)
@@ -41,23 +35,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         #region Commands
 
-        public RelayCommand SaveCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand SaveCommand { get; private set; }
 
-        public RelayCommand CancelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -92,7 +74,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         #endregion
 
-
         public AddNewProjectViewModel()
         {
             // Commands
@@ -101,9 +82,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             if (IsInDesignMode)
+            {
                 _catrobatContext = new CatrobatContextDesign();
+            }
             else
+            {
                 _catrobatContext = CatrobatContext.GetContext();
+            }
         }
 
         private void ResetViewModel()

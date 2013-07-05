@@ -2,11 +2,11 @@
 
 namespace Catrobat.IDEWindowsPhone.Views.Settings
 {
-  public partial class SettingsLanguageView : PhoneApplicationPage
-  {
-    public SettingsLanguageView()
+    public partial class SettingsLanguageView : PhoneApplicationPage
     {
-      InitializeComponent();
+        public SettingsLanguageView()
+        {
+            InitializeComponent();
+        }
     }
-  }
 }

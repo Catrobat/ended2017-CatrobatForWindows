@@ -6,17 +6,17 @@ namespace Catrobat.Core.Objects.Sounds
 {
     public class SoundList : DataObject
     {
-        private Sprite sprite;
+        private Sprite _sprite;
 
         public SoundList(Sprite parent)
         {
             Sounds = new ObservableCollection<Sound>();
-            sprite = parent;
+            _sprite = parent;
         }
 
         public SoundList(XElement xElement, Sprite parent)
         {
-            sprite = parent;
+            _sprite = parent;
             LoadFromXML(xElement);
         }
 
@@ -24,13 +24,15 @@ namespace Catrobat.Core.Objects.Sounds
 
         public Sprite Sprite
         {
-            get { return sprite; }
+            get { return _sprite; }
             set
             {
-                if (sprite == value)
+                if (_sprite == value)
+                {
                     return;
+                }
 
-                sprite = value;
+                _sprite = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
             }
         }
@@ -39,7 +41,9 @@ namespace Catrobat.Core.Objects.Sounds
         {
             Sounds = new ObservableCollection<Sound>();
             foreach (XElement element in xRoot.Elements())
-                Sounds.Add(new Sound(element, sprite));
+            {
+                Sounds.Add(new Sound(element, _sprite));
+            }
         }
 
         internal override XElement CreateXML()
@@ -47,7 +51,9 @@ namespace Catrobat.Core.Objects.Sounds
             var xRoot = new XElement("soundList");
 
             foreach (Sound sound in Sounds)
+            {
                 xRoot.Add(sound.CreateXML());
+            }
 
             return xRoot;
         }
@@ -56,7 +62,9 @@ namespace Catrobat.Core.Objects.Sounds
         {
             var newSoundList = new SoundList(parent);
             foreach (Sound info in Sounds)
+            {
                 newSoundList.Sounds.Add(info.Copy(parent) as Sound);
+            }
 
             return newSoundList;
         }
@@ -64,7 +72,9 @@ namespace Catrobat.Core.Objects.Sounds
         public void Delete()
         {
             foreach (Sound sound in Sounds)
+            {
                 sound.Delete();
+            }
         }
     }
 }

@@ -5,52 +5,50 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class NxtPlayToneBrick : Brick
     {
-        protected int durationInMs;
+        protected int _durationInMs;
 
-        protected int hertz;
+        protected int _hertz;
 
-        public NxtPlayToneBrick()
-        {
-        }
+        public NxtPlayToneBrick() {}
 
-        public NxtPlayToneBrick(Sprite parent) : base(parent)
-        {
-        }
+        public NxtPlayToneBrick(Sprite parent) : base(parent) {}
 
-        public NxtPlayToneBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public NxtPlayToneBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public int DurationInMs
         {
-            get { return durationInMs; }
+            get { return _durationInMs; }
             set
             {
-                if (durationInMs == value)
+                if (_durationInMs == value)
+                {
                     return;
+                }
 
-                durationInMs = value;
+                _durationInMs = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("DurationInMs"));
             }
         }
 
         public int Hertz
         {
-            get { return hertz; }
+            get { return _hertz; }
             set
             {
-                if (hertz == value)
+                if (_hertz == value)
+                {
                     return;
+                }
 
-                hertz = value;
+                _hertz = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Hertz"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            durationInMs = int.Parse(xRoot.Element("durationInMs").Value);
-            hertz = int.Parse(xRoot.Element("hertz").Value);
+            _durationInMs = int.Parse(xRoot.Element("durationInMs").Value);
+            _hertz = int.Parse(xRoot.Element("hertz").Value);
         }
 
         internal override XElement CreateXML()
@@ -58,14 +56,14 @@ namespace Catrobat.Core.Objects.Bricks
             var xRoot = new XElement("nxtPlayToneBrick");
 
             xRoot.Add(new XElement("durationInMs")
-                {
-                    Value = durationInMs.ToString()
-                });
+            {
+                Value = _durationInMs.ToString()
+            });
 
             xRoot.Add(new XElement("hertz")
-                {
-                    Value = hertz.ToString()
-                });
+            {
+                Value = _hertz.ToString()
+            });
 
             //CreateCommonXML(xRoot);
 
@@ -75,8 +73,8 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new NxtPlayToneBrick(parent);
-            newBrick.durationInMs = durationInMs;
-            newBrick.hertz = hertz;
+            newBrick._durationInMs = _durationInMs;
+            newBrick._hertz = _hertz;
 
             return newBrick;
         }

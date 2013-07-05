@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
-using Catrobat.IDECommon.Resources.Main;
 using Catrobat.IDEWindowsPhone.Misc;
-using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using PhoneDirect3DXamlAppComponent;
-using System.Runtime.InteropServices;
+using Size = Windows.Foundation.Size;
 
 namespace Catrobat.IDEWindowsPhone.Views.Main
 {
@@ -28,7 +21,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (IsNavigateBack)
+            {
                 Navigation.NavigateBack();
+            }
 
             base.OnNavigatedTo(e);
         }
@@ -40,7 +35,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         }
 
 
-        private Direct3DBackground m_d3dBackground = new Direct3DBackground();
+        private readonly Direct3DBackground m_d3dBackground = new Direct3DBackground();
         //private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         //{
         //    //var projectName = string.Empty;
@@ -55,17 +50,17 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         }
 
         private void DrawingSurfaceBackground_Loaded(object sender, RoutedEventArgs e)
-        {  
+        {
             // Set window bounds in dips
-            m_d3dBackground.WindowBounds = new Windows.Foundation.Size(
-                (float)Application.Current.Host.Content.ActualWidth,
-                (float)Application.Current.Host.Content.ActualHeight
+            m_d3dBackground.WindowBounds = new Size(
+                (float) Application.Current.Host.Content.ActualWidth,
+                (float) Application.Current.Host.Content.ActualHeight
                 );
 
             // Set native resolution in pixels
-            m_d3dBackground.NativeResolution = new Windows.Foundation.Size(
-                (float)Math.Floor(Application.Current.Host.Content.ActualWidth * Application.Current.Host.Content.ScaleFactor / 100.0f + 0.5f),
-                (float)Math.Floor(Application.Current.Host.Content.ActualHeight * Application.Current.Host.Content.ScaleFactor / 100.0f + 0.5f)
+            m_d3dBackground.NativeResolution = new Size(
+                (float) Math.Floor(Application.Current.Host.Content.ActualWidth*Application.Current.Host.Content.ScaleFactor/100.0f + 0.5f),
+                (float) Math.Floor(Application.Current.Host.Content.ActualHeight*Application.Current.Host.Content.ScaleFactor/100.0f + 0.5f)
                 );
 
             // Set render resolution to the full native resolution
@@ -74,12 +69,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
             // Set ProjectName to load
             var projectName = "";
             if (NavigationContext.QueryString.TryGetValue("ProjectName", out projectName))
-            m_d3dBackground.ProjectName = projectName;
+            {
+                m_d3dBackground.ProjectName = projectName;
+            }
 
             // Hook-up native component to DrawingSurfaceBackgroundGrid
             DrawingSurfaceBackground.SetBackgroundContentProvider(m_d3dBackground.CreateContentProvider());
             DrawingSurfaceBackground.SetBackgroundManipulationHandler(m_d3dBackground);
         }
     }
-
 }

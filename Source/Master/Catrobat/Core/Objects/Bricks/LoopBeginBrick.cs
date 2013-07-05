@@ -6,48 +6,46 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public abstract class LoopBeginBrick : Brick
     {
-        protected LoopEndBrickRef loopEndBrickReference;
+        protected LoopEndBrickRef _loopEndBrickReference;
 
-        public LoopBeginBrick()
-        {
-        }
+        public LoopBeginBrick() {}
 
-        public LoopBeginBrick(Sprite parent) : base(parent)
-        {
-        }
+        public LoopBeginBrick(Sprite parent) : base(parent) {}
 
-        public LoopBeginBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public LoopBeginBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public LoopEndBrickRef LoopEndBrickReference
         {
-            get { return loopEndBrickReference; }
+            get { return _loopEndBrickReference; }
             set
             {
-                if (loopEndBrickReference == value)
+                if (_loopEndBrickReference == value)
+                {
                     return;
+                }
 
-                loopEndBrickReference = value;
+                _loopEndBrickReference = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("LoopEndBrickReference"));
             }
         }
 
         public LoopEndBrick LoopEndBrick
         {
-            get { return loopEndBrickReference.LoopEndBrick; }
+            get { return _loopEndBrickReference.LoopEndBrick; }
             set
             {
-                if (loopEndBrickReference == null)
+                if (_loopEndBrickReference == null)
                 {
-                    loopEndBrickReference = new LoopEndBrickRef(sprite);
-                    loopEndBrickReference.Reference = XPathHelper.getReference(value, sprite);
+                    _loopEndBrickReference = new LoopEndBrickRef(_sprite);
+                    _loopEndBrickReference.Reference = XPathHelper.getReference(value, _sprite);
                 }
 
-                if (loopEndBrickReference.LoopEndBrick == value)
+                if (_loopEndBrickReference.LoopEndBrick == value)
+                {
                     return;
+                }
 
-                loopEndBrickReference.LoopEndBrick = value;
+                _loopEndBrickReference.LoopEndBrick = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("LoopEndBrick"));
             }
         }
@@ -59,20 +57,24 @@ namespace Catrobat.Core.Objects.Bricks
         protected override void LoadFromCommonXML(XElement xRoot)
         {
             if (xRoot.Element("loopEndBrick") != null)
-                loopEndBrickReference = new LoopEndBrickRef(xRoot.Element("loopEndBrick"), sprite);
+            {
+                _loopEndBrickReference = new LoopEndBrickRef(xRoot.Element("loopEndBrick"), _sprite);
+            }
         }
 
         protected override void CreateCommonXML(XElement xRoot)
         {
-            xRoot.Add(loopEndBrickReference.CreateXML());
+            xRoot.Add(_loopEndBrickReference.CreateXML());
         }
 
         public abstract override DataObject Copy(Sprite parent);
 
         public void CopyReference(LoopBeginBrick copiedFrom, Sprite parent)
         {
-            if (copiedFrom.loopEndBrickReference != null)
-                loopEndBrickReference = copiedFrom.loopEndBrickReference.Copy(parent) as LoopEndBrickRef;
+            if (copiedFrom._loopEndBrickReference != null)
+            {
+                _loopEndBrickReference = copiedFrom._loopEndBrickReference.Copy(parent) as LoopEndBrickRef;
+            }
         }
     }
 }

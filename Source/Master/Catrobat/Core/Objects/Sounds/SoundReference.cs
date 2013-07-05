@@ -6,60 +6,62 @@ namespace Catrobat.Core.Objects.Sounds
 {
     public class SoundReference : DataObject
     {
-        private readonly Sprite sprite;
-
-        private string reference;
-
-        private Sound sound;
+        private readonly Sprite _sprite;
+        private string _reference;
+        private Sound _sound;
 
         public SoundReference(Sprite parent)
         {
-            sprite = parent;
+            _sprite = parent;
         }
 
         public SoundReference(XElement xElement, Sprite parent)
         {
-            sprite = parent;
+            _sprite = parent;
             LoadFromXML(xElement);
         }
 
         public string Reference
         {
-            get { return reference; }
+            get { return _reference; }
             set
             {
-                if (reference == value)
+                if (_reference == value)
+                {
                     return;
+                }
 
-                reference = value;
+                _reference = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Reference"));
             }
         }
 
         public Sound Sound
         {
-            get { return sound; }
+            get { return _sound; }
             set
             {
-                if (sound == value)
+                if (_sound == value)
+                {
                     return;
+                }
 
-                sound = value;
+                _sound = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Sound"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            reference = xRoot.Attribute("reference").Value;
-            Sound = XPathHelper.getElement(reference, sprite) as Sound;
+            _reference = xRoot.Attribute("reference").Value;
+            Sound = XPathHelper.getElement(_reference, _sprite) as Sound;
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("soundInfo");
 
-            xRoot.Add(new XAttribute("reference", XPathHelper.getReference(Sound, sprite)));
+            xRoot.Add(new XAttribute("reference", XPathHelper.getReference(Sound, _sprite)));
 
             return xRoot;
         }
@@ -67,8 +69,8 @@ namespace Catrobat.Core.Objects.Sounds
         public DataObject Copy(Sprite parent)
         {
             var newSoundInfoRef = new SoundReference(parent);
-            newSoundInfoRef.reference = reference;
-            newSoundInfoRef.Sound = XPathHelper.getElement(reference, parent) as Sound;
+            newSoundInfoRef._reference = _reference;
+            newSoundInfoRef.Sound = XPathHelper.getElement(_reference, parent) as Sound;
 
             return newSoundInfoRef;
         }

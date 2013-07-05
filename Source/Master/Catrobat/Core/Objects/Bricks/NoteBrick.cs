@@ -5,29 +5,25 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class NoteBrick : Brick
     {
-        protected string note;
+        protected string _note;
 
-        public NoteBrick()
-        {
-        }
+        public NoteBrick() {}
 
-        public NoteBrick(Sprite parent) : base(parent)
-        {
-        }
+        public NoteBrick(Sprite parent) : base(parent) {}
 
-        public NoteBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public NoteBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public string Note
         {
-            get { return note; }
+            get { return _note; }
             set
             {
-                if (note == value)
+                if (_note == value)
+                {
                     return;
+                }
 
-                note = value;
+                _note = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Note"));
             }
         }
@@ -35,19 +31,21 @@ namespace Catrobat.Core.Objects.Bricks
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("note") != null)
-                note = xRoot.Element("note").Value;
+            {
+                _note = xRoot.Element("note").Value;
+            }
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("noteBrick");
 
-            if (note != null)
+            if (_note != null)
             {
                 xRoot.Add(new XElement("note")
-                    {
-                        Value = note
-                    });
+                {
+                    Value = _note
+                });
             }
             //CreateCommonXML(xRoot);
 
@@ -57,7 +55,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new NoteBrick(parent);
-            newBrick.note = note;
+            newBrick._note = _note;
 
             return newBrick;
         }

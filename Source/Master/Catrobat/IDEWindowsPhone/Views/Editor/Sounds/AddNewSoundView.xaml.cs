@@ -1,8 +1,6 @@
-﻿using System;
-using System.Windows;
-using Catrobat.IDEWindowsPhone.Misc;
-using Microsoft.Phone.Controls;
+﻿using System.Windows.Navigation;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds;
+using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
@@ -16,7 +14,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
             InitializeComponent();
         }
 
-        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             _viewModel.ResetViewModelCommand.Execute(null);
         }

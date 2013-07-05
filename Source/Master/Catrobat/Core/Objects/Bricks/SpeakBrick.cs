@@ -5,29 +5,25 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class SpeakBrick : Brick
     {
-        protected string text;
+        protected string _text;
 
-        public SpeakBrick()
-        {
-        }
+        public SpeakBrick() {}
 
-        public SpeakBrick(Sprite parent) : base(parent)
-        {
-        }
+        public SpeakBrick(Sprite parent) : base(parent) {}
 
-        public SpeakBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public SpeakBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public string Text
         {
-            get { return text; }
+            get { return _text; }
             set
             {
-                if (text == value)
+                if (_text == value)
+                {
                     return;
+                }
 
-                text = value;
+                _text = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Text"));
             }
         }
@@ -35,18 +31,22 @@ namespace Catrobat.Core.Objects.Bricks
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("text") != null)
-                text = xRoot.Element("text").Value;
+            {
+                _text = xRoot.Element("text").Value;
+            }
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("speakBrick");
 
-            if (text != null)
+            if (_text != null)
+            {
                 xRoot.Add(new XElement("text")
-                    {
-                        Value = text
-                    });
+                {
+                    Value = _text
+                });
+            }
 
             //CreateCommonXML(xRoot);
 
@@ -56,7 +56,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new SpeakBrick(parent);
-            newBrick.text = text;
+            newBrick._text = _text;
 
             return newBrick;
         }

@@ -1,76 +1,89 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
-using System.Collections.ObjectModel;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
     public class ScriptBrickIterator : IEnumerator<DataObject>
     {
-        ObservableCollection<Script> scripts;
-        IEnumerator<Script> scriptEnumerator;
-        IEnumerator<Brick> brickEnumerator;
+        private ObservableCollection<Script> _scripts;
+        private readonly IEnumerator<Script> _scriptEnumerator;
+        private IEnumerator<Brick> _brickEnumerator;
 
         public ScriptBrickIterator(ObservableCollection<Script> scripts)
         {
             // TODO: check synchronization
-            this.scripts = scripts;
-            scriptEnumerator = scripts.GetEnumerator();
+            this._scripts = scripts;
+            _scriptEnumerator = scripts.GetEnumerator();
         }
 
         public DataObject Current
         {
             get
             {
-                if (brickEnumerator != null && brickEnumerator.Current != null)
-                    return brickEnumerator.Current;
+                if (_brickEnumerator != null && _brickEnumerator.Current != null)
+                {
+                    return _brickEnumerator.Current;
+                }
                 else
-                    return scriptEnumerator.Current;
+                {
+                    return _scriptEnumerator.Current;
+                }
             }
         }
 
         public void Dispose()
         {
-            scriptEnumerator.Dispose();
-            brickEnumerator.Dispose();
+            _scriptEnumerator.Dispose();
+            _brickEnumerator.Dispose();
         }
 
-        object System.Collections.IEnumerator.Current
+        object IEnumerator.Current
         {
             get
             {
-                if (brickEnumerator != null && brickEnumerator.Current != null)
-                    return brickEnumerator.Current;
+                if (_brickEnumerator != null && _brickEnumerator.Current != null)
+                {
+                    return _brickEnumerator.Current;
+                }
                 else
-                    return scriptEnumerator.Current;
+                {
+                    return _scriptEnumerator.Current;
+                }
             }
         }
 
         public bool MoveNext()
         {
-            if (brickEnumerator != null)
+            if (_brickEnumerator != null)
             {
-                brickEnumerator.MoveNext();
+                _brickEnumerator.MoveNext();
 
-                if (brickEnumerator.Current == null)
+                if (_brickEnumerator.Current == null)
                 {
-                    brickEnumerator.Dispose();
-                    brickEnumerator = scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
-                    scriptEnumerator.MoveNext();
+                    _brickEnumerator.Dispose();
+                    _brickEnumerator = _scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
+                    _scriptEnumerator.MoveNext();
 
-                    if (scriptEnumerator.Current == null)
+                    if (_scriptEnumerator.Current == null)
+                    {
                         return false;
+                    }
                     else
-                        brickEnumerator = scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
+                    {
+                        _brickEnumerator = _scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
+                    }
                 }
             }
             else
             {
-                scriptEnumerator.MoveNext();
+                _scriptEnumerator.MoveNext();
 
-                if (scriptEnumerator.Current != null)
+                if (_scriptEnumerator.Current != null)
                 {
-                    brickEnumerator = scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
+                    _brickEnumerator = _scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
                 }
             }
 
@@ -79,9 +92,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 
         public void Reset()
         {
-            scriptEnumerator.Reset();
-            brickEnumerator.Dispose();
-            brickEnumerator = null;
+            _scriptEnumerator.Reset();
+            _brickEnumerator.Dispose();
+            _brickEnumerator = null;
         }
     }
 }

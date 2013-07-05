@@ -1,28 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Windows;
-using System.Windows.Navigation;
-using System.Windows.Threading;
-using Catrobat.Core;
+﻿using System.Windows;
 using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Sounds;
-using Catrobat.Core.Storage;
-using Catrobat.IDEWindowsPhone.Annotations;
-using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
-using GalaSoft.MvvmLight;
-using System.ComponentModel;
-using GalaSoft.MvvmLight.Command;
-using IDEWindowsPhone;
-using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 using Catrobat.IDECommon.Resources.Editor;
-using Microsoft.Phone.Tasks;
 using Catrobat.IDEWindowsPhone.Misc;
-using GalaSoft.MvvmLight.Messaging;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
-using Catrobat.Core.Objects.Costumes;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Phone.Tasks;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 {
@@ -43,46 +27,29 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             get { return _costumeName; }
             set
             {
-                if (value == _costumeName) return;
+                if (value == _costumeName)
+                {
+                    return;
+                }
                 _costumeName = value;
                 RaisePropertyChanged("CostumeName");
                 SaveCommand.RaiseCanExecuteChanged();
             }
         }
-   
+
         #endregion
 
         #region Commands
 
-        public RelayCommand OpenGalleryCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand OpenGalleryCommand { get; private set; }
 
-        public RelayCommand OpenCameraCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand OpenCameraCommand { get; private set; }
 
-        public RelayCommand SaveCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand SaveCommand { get; private set; }
 
-        public RelayCommand CancelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -145,7 +112,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         #endregion
 
-
         public AddNewCostumeViewModel()
         {
             OpenGalleryCommand = new RelayCommand(OpenGalleryAction);
@@ -173,10 +139,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private void LoadCostumeSuccess()
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                Navigation.NavigateTo(typeof(CostumeNameChooserView));
-            });
+            Deployment.Current.Dispatcher.BeginInvoke(() => { Navigation.NavigateTo(typeof (CostumeNameChooserView)); });
         }
 
         private void LoadCostumeFailed()

@@ -3,65 +3,69 @@ using System.Windows.Media.Imaging;
 
 namespace Catrobat.IDEWindowsPhone.Misc.Storage
 {
-  public class ImageFormatHelper
-  {
-    public static BitmapImage ConvertByteToImage(byte[] image)
+    public class ImageFormatHelper
     {
-      if (image == null)
-        return null;
-
-      using (var ms = new MemoryStream(image))
-      {
-        var bi = new BitmapImage
+        public static BitmapImage ConvertByteToImage(byte[] image)
         {
-          CreateOptions = BitmapCreateOptions.None
-        };
+            if (image == null)
+            {
+                return null;
+            }
 
-        bi.SetSource(ms);
+            using (var ms = new MemoryStream(image))
+            {
+                var bi = new BitmapImage
+                {
+                    CreateOptions = BitmapCreateOptions.None
+                };
 
-        return bi;
-      }
-    }
+                bi.SetSource(ms);
 
-    public static byte[] ConvertImageToBytes(BitmapImage image)
-    {
-      using (var ms = new MemoryStream())
-      {
-        var btmMap = new WriteableBitmap(image);
+                return bi;
+            }
+        }
 
-        btmMap.SaveJpeg(ms, image.PixelWidth, image.PixelHeight, 0, 85);
-
-        return ms.ToArray();
-      }
-    }
-
-    public static WriteableBitmap ConvertByteToWriteableImage(byte[] image)
-    {
-      if (image == null)
-        return null;
-
-      using (var ms = new MemoryStream(image))
-      {
-        var bi = new BitmapImage
+        public static byte[] ConvertImageToBytes(BitmapImage image)
         {
-          CreateOptions = BitmapCreateOptions.None
-        };
+            using (var ms = new MemoryStream())
+            {
+                var btmMap = new WriteableBitmap(image);
 
-        bi.SetSource(ms);
-        var wb = new WriteableBitmap(bi);
+                btmMap.SaveJpeg(ms, image.PixelWidth, image.PixelHeight, 0, 85);
 
-        return wb;
-      }
+                return ms.ToArray();
+            }
+        }
+
+        public static WriteableBitmap ConvertByteToWriteableImage(byte[] image)
+        {
+            if (image == null)
+            {
+                return null;
+            }
+
+            using (var ms = new MemoryStream(image))
+            {
+                var bi = new BitmapImage
+                {
+                    CreateOptions = BitmapCreateOptions.None
+                };
+
+                bi.SetSource(ms);
+                var wb = new WriteableBitmap(bi);
+
+                return wb;
+            }
+        }
+
+        public static byte[] ConvertWriteableImageToBytes(WriteableBitmap image)
+        {
+            using (var ms = new MemoryStream())
+            {
+                image.SaveJpeg(ms, image.PixelWidth, image.PixelHeight, 0, 85);
+
+                return ms.ToArray();
+            }
+        }
     }
-
-    public static byte[] ConvertWriteableImageToBytes(WriteableBitmap image)
-    {
-      using (var ms = new MemoryStream())
-      {
-        image.SaveJpeg(ms, image.PixelWidth, image.PixelHeight, 0, 85);
-
-        return ms.ToArray();
-      }
-    }
-  }
 }

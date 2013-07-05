@@ -5,33 +5,27 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class SetYBrick : Brick
     {
-        protected int yPosition = 0;
+        protected int _yPosition = 0;
 
-        public SetYBrick()
-        {
-        }
+        public SetYBrick() {}
 
-        public SetYBrick(Sprite parent) : base(parent)
-        {
-        }
+        public SetYBrick(Sprite parent) : base(parent) {}
 
-        public SetYBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public SetYBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public int YPosition
         {
-            get { return yPosition; }
+            get { return _yPosition; }
             set
             {
-                yPosition = value;
+                _yPosition = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("YPosition"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            yPosition = int.Parse(xRoot.Element("yPosition").Value);
+            _yPosition = int.Parse(xRoot.Element("yPosition").Value);
         }
 
         internal override XElement CreateXML()
@@ -39,9 +33,9 @@ namespace Catrobat.Core.Objects.Bricks
             var xRoot = new XElement("setYBrick");
 
             xRoot.Add(new XElement("yPosition")
-                {
-                    Value = yPosition.ToString()
-                });
+            {
+                Value = _yPosition.ToString()
+            });
 
             //CreateCommonXML(xRoot);
 
@@ -51,7 +45,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new SetYBrick(parent);
-            newBrick.yPosition = yPosition;
+            newBrick._yPosition = _yPosition;
 
             return newBrick;
         }

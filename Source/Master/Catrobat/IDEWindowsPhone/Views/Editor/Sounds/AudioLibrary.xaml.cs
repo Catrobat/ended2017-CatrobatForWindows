@@ -1,186 +1,195 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 using Catrobat.Core;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Storage;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
-using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Misc.Sounds;
-using Catrobat.IDEWindowsPhone.ViewModel;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
-using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
-using System.Collections.ObjectModel;
 using Microsoft.Phone.Shell;
-using System.ComponentModel;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
-  public partial class AudioLibrary : PhoneApplicationPage
-  {
-    private EditorViewModel editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
-    private Song SelectedSong;
-    private ObservableCollection<SoundListItem> songs = new ObservableCollection<SoundListItem>();
-    private bool _songSelected = false;
-    private ApplicationBarIconButton btnSave;
-
-    public AudioLibrary()
+    public partial class AudioLibrary : PhoneApplicationPage
     {
-      InitializeComponent();
-      
-      BuildApplicationBar();
-      (App.Current.Resources["LocalizedStrings"] as LocalizedStrings).PropertyChanged += LanguageChanged;
+        private readonly EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
+        private Song _selectedSong;
+        private ObservableCollection<SoundListItem> _songs = new ObservableCollection<SoundListItem>();
+        private bool _songSelected = false;
+        private ApplicationBarIconButton _btnSave;
 
-      Dispatcher.BeginInvoke(() =>
-      {
-        txtName.Focus();
-        txtName.SelectAll();
-        btnSave.IsEnabled = false;
-
-        stackPanelChangeName.Visibility = Visibility.Collapsed;
-        ApplicationBar.IsVisible = false;
-      });
-      
-      loadSongs();
-    }
-
-    private void BuildApplicationBar()
-    {
-      ApplicationBar = new ApplicationBar();
-
-      btnSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.check.rest.png", UriKind.Relative));
-      btnSave.Text = EditorResources.ButtonSave;
-      btnSave.Click += btnSave_Click;
-      ApplicationBar.Buttons.Add(btnSave);
-
-      ApplicationBarIconButton btnCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
-      btnCancel.Text = EditorResources.ButtonCancel;
-      btnCancel.Click += btnCancel_Click;
-      ApplicationBar.Buttons.Add(btnCancel);
-    }
-
-    private void LanguageChanged(object sender, PropertyChangedEventArgs e)
-    {
-      BuildApplicationBar();
-    }
-
-    protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
-    {
-      _songSelected = false;
-      MediaPlayer.Pause();
-      FrameworkDispatcher.Update();
-    }
-
-    protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
-    {
-      if (_songSelected)
-      {
-        _songSelected = false;
-        Dispatcher.BeginInvoke(() =>
+        public AudioLibrary()
         {
-          stackPanelMediaLibrary.Visibility = Visibility.Visible;
-          stackPanelChangeName.Visibility = Visibility.Collapsed;
-          ApplicationBar.IsVisible = false;
-          Headline.Text = EditorResources.TitleChooseSound;
-          txtName.Text = "";
-        });
-        e.Cancel = true;
-      }
-    }
+            InitializeComponent();
 
-    private void loadSongs()
-    {
-      MediaLibrary library = new MediaLibrary();
-      foreach (Song song in library.Songs)
-        lbxSongs.Items.Add(new SoundListItem { Song = song });
-    }
+            BuildApplicationBar();
+            (App.Current.Resources["LocalizedStrings"] as LocalizedStrings).PropertyChanged += LanguageChanged;
 
-    //TODO: Write UI Test
-    private void btnSave_Click(object sender, EventArgs e)
-    {
-      Sound sound = new Sound(txtName.Text, editorViewModel.SelectedSprite);
+            Dispatcher.BeginInvoke(() =>
+                {
+                    txtName.Focus();
+                    txtName.SelectAll();
+                    _btnSave.IsEnabled = false;
 
-      string absoluteFileName = CatrobatContext.GetContext().CurrentProject.BasePath + "/sounds/" + sound.FileName;
+                    stackPanelChangeName.Visibility = Visibility.Collapsed;
+                    ApplicationBar.IsVisible = false;
+                });
 
-      using (IStorage storage = StorageSystem.GetStorage())
-      {
-        using (var stream = storage.OpenFile(absoluteFileName, StorageFileMode.Create, StorageFileAccess.Write))
-        {
-          //TODO: write song to isolated storage
+            loadSongs();
         }
-      }
 
-      editorViewModel.SelectedSprite.Sounds.Sounds.Add(sound);
-      Navigation.RemoveBackEntry();
-      Navigation.NavigateBack();
+        private void BuildApplicationBar()
+        {
+            ApplicationBar = new ApplicationBar();
+
+            _btnSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.check.rest.png", UriKind.Relative));
+            _btnSave.Text = EditorResources.ButtonSave;
+            _btnSave.Click += btnSave_Click;
+            ApplicationBar.Buttons.Add(_btnSave);
+
+            var btnCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
+            btnCancel.Text = EditorResources.ButtonCancel;
+            btnCancel.Click += btnCancel_Click;
+            ApplicationBar.Buttons.Add(btnCancel);
+        }
+
+        private void LanguageChanged(object sender, PropertyChangedEventArgs e)
+        {
+            BuildApplicationBar();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            _songSelected = false;
+            MediaPlayer.Pause();
+            FrameworkDispatcher.Update();
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            if (_songSelected)
+            {
+                _songSelected = false;
+                Dispatcher.BeginInvoke(() =>
+                    {
+                        stackPanelMediaLibrary.Visibility = Visibility.Visible;
+                        stackPanelChangeName.Visibility = Visibility.Collapsed;
+                        ApplicationBar.IsVisible = false;
+                        Headline.Text = EditorResources.TitleChooseSound;
+                        txtName.Text = "";
+                    });
+                e.Cancel = true;
+            }
+        }
+
+        private void loadSongs()
+        {
+            var library = new MediaLibrary();
+            foreach (Song song in library.Songs)
+            {
+                lbxSongs.Items.Add(new SoundListItem {Song = song});
+            }
+        }
+
+        //TODO: Write UI Test
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            var sound = new Sound(txtName.Text, _editorViewModel.SelectedSprite);
+
+            var absoluteFileName = Path.Combine(CatrobatContext.GetContext().CurrentProject.BasePath, "sounds", sound.FileName);
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                using (var stream = storage.OpenFile(absoluteFileName, StorageFileMode.Create, StorageFileAccess.Write))
+                {
+                    //TODO: write song to isolated storage
+                }
+            }
+
+            _editorViewModel.SelectedSprite.Sounds.Sounds.Add(sound);
+            Navigation.RemoveBackEntry();
+            Navigation.NavigateBack();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Navigation.RemoveBackEntry();
+            Navigation.NavigateBack();
+        }
+
+        private void txtName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtName.Text))
+            {
+                _btnSave.IsEnabled = true;
+            }
+            else
+            {
+                _btnSave.IsEnabled = false;
+            }
+        }
+
+        private void lbxSongs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _songSelected = true;
+
+            MediaPlayer.Pause();
+            FrameworkDispatcher.Update();
+
+            var soundListItem = lbxSongs.SelectedItem as SoundListItem;
+            if (soundListItem != null)
+            {
+                _selectedSong = soundListItem.Song;
+
+                Dispatcher.BeginInvoke(() =>
+                    {
+                        stackPanelMediaLibrary.Visibility = Visibility.Collapsed;
+                        stackPanelChangeName.Visibility = Visibility.Visible;
+                        ApplicationBar.IsVisible = true;
+
+                        Headline.Text = EditorResources.TitleChooseSoundName;
+                        txtName.Text = _selectedSong.Name;
+                        txtName.Focus();
+                        txtName.SelectAll();
+                    });
+            }
+        }
+
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            //SoundListItem sound = (sender as PlayButton).DataContext as SoundListItem;
+
+            //if (sound.State == PlayButtonState.Play)
+            //{
+            //  foreach (SoundListItem soundItem in lbxSongs.Items)
+            //    if (soundItem.State == PlayButtonState.Play)
+            //    {
+            //      MediaPlayer.Pause();
+            //      soundItem.State = PlayButtonState.Pause;
+            //      FrameworkDispatcher.Update();
+            //    }
+            //  sound.State = PlayButtonState.Play;
+            //  MediaPlayer.Play(sound.Song);
+            //  FrameworkDispatcher.Update();
+            //}
+            //else
+            //{
+            //  sound.State = PlayButtonState.Pause;
+            //  MediaPlayer.Pause();
+            //  FrameworkDispatcher.Update();
+            //}
+        }
     }
-
-    private void btnCancel_Click(object sender, EventArgs e)
-    {
-      Navigation.RemoveBackEntry();
-      Navigation.NavigateBack();
-    }
-
-    private void txtName_TextChanged(object sender, TextChangedEventArgs e)
-    {
-      if (txtName.Text != "")
-        btnSave.IsEnabled = true;
-      else
-        btnSave.IsEnabled = false;
-    }
-
-    private void lbxSongs_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-      _songSelected = true;
-
-      MediaPlayer.Pause();
-      FrameworkDispatcher.Update();
-
-      SelectedSong = (lbxSongs.SelectedItem as SoundListItem).Song;
-      
-      Dispatcher.BeginInvoke(() =>
-      {
-        stackPanelMediaLibrary.Visibility = Visibility.Collapsed;
-        stackPanelChangeName.Visibility = Visibility.Visible;
-        ApplicationBar.IsVisible = true;
-
-        Headline.Text = EditorResources.TitleChooseSoundName;
-        txtName.Text = SelectedSong.Name;
-        txtName.Focus();
-        txtName.SelectAll();
-      });
-    }
-
-    private void btnPlay_Click(object sender, RoutedEventArgs e)
-    {
-      //SoundListItem sound = (sender as PlayButton).DataContext as SoundListItem;
-
-      //if (sound.State == PlayButtonState.Play)
-      //{
-      //  foreach (SoundListItem soundItem in lbxSongs.Items)
-      //    if (soundItem.State == PlayButtonState.Play)
-      //    {
-      //      MediaPlayer.Pause();
-      //      soundItem.State = PlayButtonState.Pause;
-      //      FrameworkDispatcher.Update();
-      //    }
-      //  sound.State = PlayButtonState.Play;
-      //  MediaPlayer.Play(sound.Song);
-      //  FrameworkDispatcher.Update();
-      //}
-      //else
-      //{
-      //  sound.State = PlayButtonState.Pause;
-      //  MediaPlayer.Pause();
-      //  FrameworkDispatcher.Update();
-      //}
-    }
-  }
 }

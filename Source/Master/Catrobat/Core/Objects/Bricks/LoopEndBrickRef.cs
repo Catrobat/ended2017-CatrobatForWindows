@@ -6,58 +6,62 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class LoopEndBrickRef : DataObject
     {
-        private readonly Sprite sprite;
+        private readonly Sprite _sprite;
 
-        private LoopEndBrick loopEndBrick;
-        protected string reference;
+        private LoopEndBrick _loopEndBrick;
+        protected string _reference;
 
         public LoopEndBrickRef(Sprite parent)
         {
-            sprite = parent;
+            _sprite = parent;
         }
 
         public LoopEndBrickRef(XElement xElement, Sprite parent)
         {
-            sprite = parent;
+            _sprite = parent;
             LoadFromXML(xElement);
         }
 
         public string Reference
         {
-            get { return reference; }
+            get { return _reference; }
             set
             {
-                if (reference == value)
+                if (_reference == value)
+                {
                     return;
+                }
 
-                reference = value;
+                _reference = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Reference"));
             }
         }
 
         public LoopEndBrick LoopEndBrick
         {
-            get { return loopEndBrick; }
+            get { return _loopEndBrick; }
             set
             {
-                if (loopEndBrick == value)
+                if (_loopEndBrick == value)
+                {
                     return;
+                }
 
-                loopEndBrick = value;
+                _loopEndBrick = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("LoopEndBrick"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            reference = xRoot.Attribute("reference").Value;
-            loopEndBrick = XPathHelper.getElement(reference, sprite) as LoopEndBrick;
+            _reference = xRoot.Attribute("reference").Value;
+            _loopEndBrick = XPathHelper.getElement(_reference, _sprite) as LoopEndBrick;
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("loopEndBrick");
-            xRoot.Add(new XAttribute("reference", XPathHelper.getReference(loopEndBrick, sprite)));
+            xRoot.Add(new XAttribute("reference", XPathHelper.getReference(_loopEndBrick, _sprite)));
 
             return xRoot;
         }
@@ -65,8 +69,8 @@ namespace Catrobat.Core.Objects.Bricks
         public DataObject Copy(Sprite parent)
         {
             var newLoopEndBrickRef = new LoopEndBrickRef(parent);
-            newLoopEndBrickRef.reference = reference;
-            newLoopEndBrickRef.loopEndBrick = XPathHelper.getElement(reference, parent) as LoopEndBrick;
+            newLoopEndBrickRef._reference = _reference;
+            newLoopEndBrickRef._loopEndBrick = XPathHelper.getElement(_reference, parent) as LoopEndBrick;
 
             return newLoopEndBrickRef;
         }

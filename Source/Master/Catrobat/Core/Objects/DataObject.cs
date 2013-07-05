@@ -30,10 +30,13 @@ namespace Catrobat.Core.Objects
 
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, e);
+            }
         }
 
         protected int ParseInt(string target)

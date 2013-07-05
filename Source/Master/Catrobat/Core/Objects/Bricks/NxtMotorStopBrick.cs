@@ -5,36 +5,32 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class NxtMotorStopBrick : Brick
     {
-        protected string motor;
+        protected string _motor;
 
-        public NxtMotorStopBrick()
-        {
-        }
+        public NxtMotorStopBrick() {}
 
-        public NxtMotorStopBrick(Sprite parent) : base(parent)
-        {
-        }
+        public NxtMotorStopBrick(Sprite parent) : base(parent) {}
 
-        public NxtMotorStopBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public NxtMotorStopBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public string Motor
         {
-            get { return motor; }
+            get { return _motor; }
             set
             {
-                if (motor == value)
+                if (_motor == value)
+                {
                     return;
+                }
 
-                motor = value;
+                _motor = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Motor"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            motor = xRoot.Element("motor").Value;
+            _motor = xRoot.Element("motor").Value;
         }
 
         internal override XElement CreateXML()
@@ -42,9 +38,9 @@ namespace Catrobat.Core.Objects.Bricks
             var xRoot = new XElement("nxtMotorStopBrick");
 
             xRoot.Add(new XElement("motor")
-                {
-                    Value = motor
-                });
+            {
+                Value = _motor
+            });
 
             //CreateCommonXML(xRoot);
 
@@ -54,7 +50,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new NxtMotorStopBrick(parent);
-            newBrick.motor = motor;
+            newBrick._motor = _motor;
 
             return newBrick;
         }

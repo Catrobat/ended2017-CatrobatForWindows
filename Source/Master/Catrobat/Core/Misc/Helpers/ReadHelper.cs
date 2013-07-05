@@ -4,6 +4,6 @@ namespace Catrobat.Core.Misc.Helpers
 {
     public class ReadHelper
     {
-        public static BrickList currentBrickList;
+        public static BrickList CurrentBrickList;
     }
 }

@@ -4,21 +4,13 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class IfOnEdgeBounceBrick : Brick
     {
-        public IfOnEdgeBounceBrick()
-        {
-        }
+        public IfOnEdgeBounceBrick() {}
 
-        public IfOnEdgeBounceBrick(Sprite parent) : base(parent)
-        {
-        }
+        public IfOnEdgeBounceBrick(Sprite parent) : base(parent) {}
 
-        public IfOnEdgeBounceBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public IfOnEdgeBounceBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
-        internal override void LoadFromXML(XElement xRoot)
-        {
-        }
+        internal override void LoadFromXML(XElement xRoot) {}
 
         internal override XElement CreateXML()
         {

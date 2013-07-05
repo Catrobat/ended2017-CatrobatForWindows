@@ -6,33 +6,27 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class SetSizeToBrick : Brick
     {
-        protected double size = 100.0f;
+        protected double _size = 100.0f;
 
-        public SetSizeToBrick()
-        {
-        }
+        public SetSizeToBrick() {}
 
-        public SetSizeToBrick(Sprite parent) : base(parent)
-        {
-        }
+        public SetSizeToBrick(Sprite parent) : base(parent) {}
 
-        public SetSizeToBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public SetSizeToBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public double Size
         {
-            get { return size; }
+            get { return _size; }
             set
             {
-                size = value;
+                _size = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Size"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            size = double.Parse(xRoot.Element("size").Value, CultureInfo.InvariantCulture);
+            _size = double.Parse(xRoot.Element("size").Value, CultureInfo.InvariantCulture);
         }
 
         internal override XElement CreateXML()
@@ -40,9 +34,9 @@ namespace Catrobat.Core.Objects.Bricks
             var xRoot = new XElement("setSizeToBrick");
 
             xRoot.Add(new XElement("size")
-                {
-                    Value = size.ToString()
-                });
+            {
+                Value = _size.ToString()
+            });
 
             //CreateCommonXML(xRoot);
 
@@ -52,7 +46,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new SetSizeToBrick(parent);
-            newBrick.size = size;
+            newBrick._size = _size;
 
             return newBrick;
         }

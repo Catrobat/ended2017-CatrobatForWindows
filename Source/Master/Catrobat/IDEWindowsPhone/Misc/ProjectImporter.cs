@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using Catrobat.Core;
+using Catrobat.Core.ExtensionMethods;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Storage;
 using Catrobat.Core.ZIP;
@@ -28,35 +29,28 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
                 const string tempProjectZipName = "temp_project.catrobat";
 
-                var localFolder = ApplicationData.Current.LocalFolder;
-                var tempFolder =
-                    await localFolder.CreateFolderAsync(CatrobatContext.TempProjectImportPath.Split('/')[0],
-                                                        CreationCollisionOption.OpenIfExists);
-                var projectTempFolder =
-                    await tempFolder.CreateFolderAsync(CatrobatContext.TempProjectImportPath.Split('/')[1],
-                                                       CreationCollisionOption.OpenIfExists);
-                var projectTempZipFolder =
-                    await tempFolder.CreateFolderAsync(CatrobatContext.TempProjectImportZipPath.Split('/')[1],
-                                                       CreationCollisionOption.OpenIfExists);
+                var tempSplitList = CatrobatContext.TempProjectImportPath.Split('/');
+                var tempZipSplitList = CatrobatContext.TempProjectImportZipPath.Split('/');
 
-                await SharedStorageAccessManager.CopySharedFileAsync(projectTempZipFolder, tempProjectZipName,
-                                                                     NameCollisionOption.ReplaceExisting, fileToken);
+                var localFolder = ApplicationData.Current.LocalFolder;
+                var tempFolder = await localFolder.CreateFolderAsync(tempSplitList[0], CreationCollisionOption.OpenIfExists);
+                var projectTempFolder = await tempFolder.CreateFolderAsync(tempSplitList[1], CreationCollisionOption.OpenIfExists);
+                var projectTempZipFolder = await tempFolder.CreateFolderAsync(tempZipSplitList[1], CreationCollisionOption.OpenIfExists);
+
+                await SharedStorageAccessManager.CopySharedFileAsync(projectTempZipFolder, tempProjectZipName, NameCollisionOption.ReplaceExisting, fileToken);
 
                 var projectZipFile = await projectTempZipFolder.GetFileAsync(tempProjectZipName);
                 var projectZipStream = await projectZipFile.OpenStreamForReadAsync();
 
-                CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream,
-                                                                    CatrobatContext.TempProjectImportPath);
+                CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream, CatrobatContext.TempProjectImportPath);
 
                 object projectScreenshot = null;
-                string projectCode = null;
+                string projectCode = "";
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    projectScreenshot =
-                        storage.LoadImage(CatrobatContext.TempProjectImportPath + "/" + Project.ScreenshotPath);
-                    projectCode =
-                        storage.ReadTextFile(CatrobatContext.TempProjectImportPath + "/" + Project.ProjectCodePath);
+                    projectScreenshot = storage.LoadImage(Path.Combine(CatrobatContext.TempProjectImportPath, Project.ScreenshotPath));
+                    projectCode = storage.ReadTextFile(Path.Combine(CatrobatContext.TempProjectImportPath, Project.ProjectCodePath));
                 }
 
                 _project = new Project(projectCode);
@@ -77,7 +71,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
                     }
                 }
 
-                return null;
+                _tempProjectHeader = null;
             }
             finally
             {
@@ -99,15 +93,14 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var projectPath = "";
                 var counter = 0;
                 while (true)
                 {
-                    projectPath = CatrobatContext.ProjectsPath + "/" + _tempProjectHeader.ProjectName;
+                    var projectPath = Path.Combine(CatrobatContext.ProjectsPath, _tempProjectHeader.ProjectName);
 
                     if (counter != 0)
                     {
-                        projectPath = CatrobatContext.ProjectsPath + "/" + _tempProjectHeader.ProjectName + counter;
+                        projectPath = Path.Combine(CatrobatContext.ProjectsPath, StringExtensions.Concat(_tempProjectHeader.ProjectName, counter.ToString()));
                     }
 
                     if (!storage.DirectoryExists(projectPath))
@@ -124,15 +117,15 @@ namespace Catrobat.IDEWindowsPhone.Misc
                 {
                     newProjectName = _tempProjectHeader.ProjectName + counter;
                     _project.SetProjectName(newProjectName);
-
-                    _project.Save(CatrobatContext.TempProjectImportPath + "/" + Project.ProjectCodePath);
+                    var saveToPath = Path.Combine(CatrobatContext.TempProjectImportPath, Project.ProjectCodePath);
+                    _project.Save(saveToPath);
                 }
             }
 
             using (var storage = StorageSystem.GetStorage())
             {
-                storage.CopyDirectory(CatrobatContext.TempProjectImportPath,
-                                      CatrobatContext.ProjectsPath + "/" + _project.ProjectName);
+                var tempPath = Path.Combine(CatrobatContext.ProjectsPath, _project.ProjectName);
+                storage.CopyDirectory(CatrobatContext.TempProjectImportPath, tempPath);
             }
 
             using (var storage = StorageSystem.GetStorage())

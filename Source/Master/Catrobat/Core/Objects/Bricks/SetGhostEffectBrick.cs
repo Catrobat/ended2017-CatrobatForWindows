@@ -6,33 +6,27 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class SetGhostEffectBrick : Brick
     {
-        protected double transparency = 0.0f;
+        protected double _transparency = 0.0f;
 
-        public SetGhostEffectBrick()
-        {
-        }
+        public SetGhostEffectBrick() {}
 
-        public SetGhostEffectBrick(Sprite parent) : base(parent)
-        {
-        }
+        public SetGhostEffectBrick(Sprite parent) : base(parent) {}
 
-        public SetGhostEffectBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public SetGhostEffectBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public double Transparency
         {
-            get { return transparency; }
+            get { return _transparency; }
             set
             {
-                transparency = value;
+                _transparency = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Transparency"));
             }
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            transparency = double.Parse(xRoot.Element("transparency").Value, CultureInfo.InvariantCulture);
+            _transparency = double.Parse(xRoot.Element("transparency").Value, CultureInfo.InvariantCulture);
         }
 
         internal override XElement CreateXML()
@@ -40,9 +34,9 @@ namespace Catrobat.Core.Objects.Bricks
             var xRoot = new XElement("setGhostEffectBrick");
 
             xRoot.Add(new XElement("transparency")
-                {
-                    Value = transparency.ToString()
-                });
+            {
+                Value = _transparency.ToString()
+            });
 
             //CreateCommonXML(xRoot);
 
@@ -52,7 +46,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new SetGhostEffectBrick(parent);
-            newBrick.transparency = transparency;
+            newBrick._transparency = _transparency;
 
             return newBrick;
         }

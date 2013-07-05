@@ -1,16 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Xml.Linq;
 
 namespace Catrobat.Core.Objects
 {
     public class SpriteList : DataObject
     {
-        private readonly Project project;
+        private readonly Project _project;
 
         public SpriteList(Project project)
         {
-            this.project = project;
+            this._project = project;
             Sprites = new ObservableCollection<Sprite>();
         }
 
@@ -27,9 +26,11 @@ namespace Catrobat.Core.Objects
             Sprites = new ObservableCollection<Sprite>();
 
             foreach (XElement xSprite in xRoot.Elements("sprite"))
-                Sprites.Add(new Sprite(project));
+            {
+                Sprites.Add(new Sprite(_project));
+            }
 
-            IEnumerator<Sprite> enumerator = Sprites.GetEnumerator();
+            var enumerator = Sprites.GetEnumerator();
             foreach (XElement xSprite in xRoot.Elements("sprite"))
             {
                 enumerator.MoveNext();
@@ -42,7 +43,9 @@ namespace Catrobat.Core.Objects
             var xRoot = new XElement("spriteList");
 
             foreach (Sprite sprite in Sprites)
+            {
                 xRoot.Add(sprite.CreateXML());
+            }
 
             return xRoot;
         }

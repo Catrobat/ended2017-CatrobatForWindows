@@ -1,23 +1,25 @@
-﻿using Catrobat.Core;
-using Catrobat.Core.Misc;
-using Catrobat.Core.Misc.ServerCommunication;
-using GalaSoft.MvvmLight;
+﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Threading;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
-using Catrobat.IDECommon.Resources.Main;
 using System.Windows;
-using System;
+using Catrobat.Core;
+using Catrobat.Core.Misc;
+using Catrobat.Core.Misc.JSON;
+using Catrobat.Core.Misc.ServerCommunication;
+using Catrobat.IDECommon.Resources.Main;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Service;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 {
     public class UploadProjectLoginViewModel : ViewModelBase, INotifyPropertyChanged
     {
-
         public new event PropertyChangedEventHandler PropertyChanged;
+
         public delegate void NavigationCallbackEvent();
 
         #region private Members
@@ -38,17 +40,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         public string Username
         {
-            get
-            {
-                return _username;
-            }
+            get { return _username; }
             set
             {
                 if (_username != value)
                 {
                     _username = value;
 
-                    if (this.PropertyChanged != null)
+                    if (PropertyChanged != null)
                     {
                         PropertyChanged(this, new PropertyChangedEventArgs("Username"));
                     }
@@ -58,17 +57,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         public string Password
         {
-            get
-            {
-                return _password;
-            }
+            get { return _password; }
             set
             {
                 if (_password != value)
                 {
                     _password = value;
 
-                    if (this.PropertyChanged != null)
+                    if (PropertyChanged != null)
                     {
                         PropertyChanged(this, new PropertyChangedEventArgs("Password"));
                     }
@@ -78,17 +74,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         public string Email
         {
-            get
-            {
-                return _email;
-            }
+            get { return _email; }
             set
             {
                 if (_email != value)
                 {
                     _email = value;
 
-                    if (this.PropertyChanged != null)
+                    if (PropertyChanged != null)
                     {
                         PropertyChanged(this, new PropertyChangedEventArgs("Email"));
                     }
@@ -100,23 +93,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         #region Commands
 
-        public RelayCommand LoginCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand LoginCommand { get; private set; }
 
-        public RelayCommand ForgottenCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand ForgottenCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -140,8 +121,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             {
                 ServerCommunication.RegisterOrCheckToken(_username, _password, _email,
                                                          Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
-                                                         System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName,
-                                                         Utils.calculateToken(_username, _password),
+                                                         RegionInfo.CurrentRegion.TwoLetterISORegionName,
+                                                         Utils.CalculateToken(_username, _password),
                                                          registerOrCheckTokenCallback);
             }
         }
@@ -166,9 +147,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             if (IsInDesignMode)
+            {
                 catrobatContext = new CatrobatContextDesign();
+            }
             else
+            {
                 catrobatContext = CatrobatContext.GetContext();
+            }
 
             NavigationCallback = navigationCallback;
         }
@@ -177,7 +162,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void navigationCallback()
         {
-            Navigation.NavigateTo(typeof(UploadProjectView));
+            Navigation.NavigateTo(typeof (UploadProjectView));
         }
 
         private void MissingLoginDataCallback(MessageBoxResult result)
@@ -210,7 +195,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void registerOrCheckTokenCallback(bool registered, string errorCode, string statusMessage)
         {
-            CatrobatContext.GetContext().CurrentToken = Utils.calculateToken(_username, _password);
+            CatrobatContext.GetContext().CurrentToken = Utils.CalculateToken(_username, _password);
 
             if (registered)
             {
@@ -222,7 +207,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
                 Messenger.Default.Send(message);
             }
-            else if (errorCode == Catrobat.Core.Misc.JSON.StatusCodes.SERVER_RESPONSE_TOKEN_OK.ToString())
+            else if (errorCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK.ToString())
             {
                 if (NavigationCallback != null)
                 {
@@ -237,7 +222,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             else //Unknown error
             {
                 var messageString = string.IsNullOrEmpty(statusMessage) ? string.Format(MainResources.UploadProjectUndefinedError, errorCode) :
-                                                                          string.Format(MainResources.UploadProjectLoginError, statusMessage);
+                                        string.Format(MainResources.UploadProjectLoginError, statusMessage);
 
                 var message = new DialogMessage(messageString, WrongLoginDataCallback)
                 {
@@ -257,6 +242,5 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             Password = "";
             Email = "";
         }
-
     }
 }

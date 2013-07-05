@@ -4,21 +4,13 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class StopAllSoundsBrick : Brick
     {
-        public StopAllSoundsBrick()
-        {
-        }
+        public StopAllSoundsBrick() {}
 
-        public StopAllSoundsBrick(Sprite parent) : base(parent)
-        {
-        }
+        public StopAllSoundsBrick(Sprite parent) : base(parent) {}
 
-        public StopAllSoundsBrick(XElement xElement, Sprite parent) : base(xElement, parent)
-        {
-        }
+        public StopAllSoundsBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
-        internal override void LoadFromXML(XElement xRoot)
-        {
-        }
+        internal override void LoadFromXML(XElement xRoot) {}
 
         internal override XElement CreateXML()
         {

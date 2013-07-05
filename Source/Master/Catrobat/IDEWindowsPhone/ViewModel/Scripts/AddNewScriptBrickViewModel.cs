@@ -1,4 +1,8 @@
-﻿using Catrobat.Core.Objects;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Input;
+using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -7,13 +11,6 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using IDEWindowsPhone;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
 {
@@ -26,7 +23,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
         private BrickCategory _selectedBrickCategory;
         private BrickCollection _brickCollection;
         private int _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex;
-        DataObject _selectedBrick;
+        private DataObject _selectedBrick;
 
         #endregion
 
@@ -37,7 +34,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
             get { return _brickCollection; }
             set
             {
-                if (value == _brickCollection) return;
+                if (value == _brickCollection)
+                {
+                    return;
+                }
                 _brickCollection = value;
                 RaisePropertyChanged("BrickCollection");
             }
@@ -47,47 +47,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
 
         #region Commands
 
-        public ICommand AddNewScriptBrickCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand AddNewScriptBrickCommand { get; private set; }
 
-        public RelayCommand MovementCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand MovementCommand { get; private set; }
 
-        public RelayCommand LooksCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand LooksCommand { get; private set; }
 
-        public RelayCommand SoundCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand SoundCommand { get; private set; }
 
-        public RelayCommand ControlCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand ControlCommand { get; private set; }
 
-        public RelayCommand OnLoadBrickViewCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand OnLoadBrickViewCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
+        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -96,25 +68,31 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
         private void AddNewScriptBrickAction(DataObject dataObject)
         {
             if (dataObject == null)
+            {
                 return;
+            }
 
             if (dataObject is Brick)
+            {
                 _selectedBrick = (dataObject as Brick).Copy(_receivedSelectedSprite);
+            }
             else if (dataObject is Script)
+            {
                 _selectedBrick = (dataObject as Script).Copy(_receivedSelectedSprite);
+            }
 
 
             _receivedScriptBrickCollection.AddScriptBrick(_selectedBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex);
 
             if (_selectedBrick is LoopBeginBrick)
             {
-                LoopEndBrick brick = new LoopEndBrick(((LoopBeginBrick)_selectedBrick).Sprite);
-                brick.LoopBeginBrick = (LoopBeginBrick)_selectedBrick;
-                ((LoopBeginBrick)_selectedBrick).LoopEndBrick = brick;
+                var brick = new LoopEndBrick(((LoopBeginBrick) _selectedBrick).Sprite);
+                brick.LoopBeginBrick = (LoopBeginBrick) _selectedBrick;
+                ((LoopBeginBrick) _selectedBrick).LoopEndBrick = brick;
                 _receivedScriptBrickCollection.AddScriptBrick(brick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
             }
 
-            GenericMessage<DataObject> message = new GenericMessage<DataObject>(_selectedBrick);
+            var message = new GenericMessage<DataObject>(_selectedBrick);
             Messenger.Default.Send<GenericMessage<DataObject>>(message, ViewModelMessagingToken.SelectedBrickListener);
 
 
@@ -125,30 +103,30 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
         private void MovementAction()
         {
             _selectedBrickCategory = BrickCategory.Motion;
-            Navigation.NavigateTo(typeof(AddNewBrickView));
+            Navigation.NavigateTo(typeof (AddNewBrickView));
         }
 
         private void LooksAction()
         {
             _selectedBrickCategory = BrickCategory.Looks;
-            Navigation.NavigateTo(typeof(AddNewBrickView));
+            Navigation.NavigateTo(typeof (AddNewBrickView));
         }
 
         private void SoundAction()
         {
             _selectedBrickCategory = BrickCategory.Sounds;
-            Navigation.NavigateTo(typeof(AddNewBrickView));
+            Navigation.NavigateTo(typeof (AddNewBrickView));
         }
 
         private void ControlAction()
         {
             _selectedBrickCategory = BrickCategory.Control;
-            Navigation.NavigateTo(typeof(AddNewBrickView));
+            Navigation.NavigateTo(typeof (AddNewBrickView));
         }
 
         private void OnLoadBrickViewAction()
         {
-            App app = (App)Application.Current;
+            var app = (App) Application.Current;
             switch (_selectedBrickCategory)
             {
                 case BrickCategory.Control:
@@ -177,8 +155,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
         private void ReceiveScriptBrickCollectionAction(GenericMessage<List<Object>> message)
         {
             _receivedScriptBrickCollection = message.Content[0] as ScriptBrickCollection;
-            _firstVisibleScriptBrickIndex = ((ListBoxViewPort)message.Content[1]).FirstVisibleIndex;
-            _lastVisibleScriptBrickIndex = ((ListBoxViewPort)message.Content[1]).LastVisibleIndex;
+            _firstVisibleScriptBrickIndex = ((ListBoxViewPort) message.Content[1]).FirstVisibleIndex;
+            _lastVisibleScriptBrickIndex = ((ListBoxViewPort) message.Content[1]).LastVisibleIndex;
         }
 
 
@@ -188,7 +166,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
         }
 
         #endregion
-
 
         public AddNewScriptBrickViewModel()
         {
