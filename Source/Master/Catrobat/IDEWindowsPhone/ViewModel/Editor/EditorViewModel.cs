@@ -154,8 +154,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             set
             {
                 if (value == _selectedPivotIndex) return;
+
                 _selectedPivotIndex = value;
+
+                if (_selectedPivotIndex == -1)
+                    _selectedPivotIndex = 0;
+
                 RaisePropertyChanged("SelectedPivotIndex");
+
+
                 RaisePropertyChanged("IsVisibleObjects");
                 RaisePropertyChanged("IsVisibleScripts");
                 RaisePropertyChanged("IsVisibleCostumes");
