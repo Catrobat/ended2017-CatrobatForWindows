@@ -27,6 +27,7 @@ namespace IDEWindowsPhone
     {
         public CatrobatContext Context;
 
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>

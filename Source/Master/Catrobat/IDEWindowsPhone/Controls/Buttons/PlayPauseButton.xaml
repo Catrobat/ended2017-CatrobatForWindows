@@ -131,35 +131,6 @@
                 </Grid>
               </Grid>
             </Grid>
-            <!--<Grid Name="gridMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-              <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Grid.RowDefinitions>
-                  <RowDefinition Height="0.5*"/>
-                  <RowDefinition Height="9*"/>
-                  <RowDefinition Height="0.5*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="0.5*"/>
-                  <ColumnDefinition Width="9*"/>
-                  <ColumnDefinition Width="0.5*"/>
-                </Grid.ColumnDefinitions>
-                <Ellipse Grid.Row="1" Grid.Column="1" Fill="#00F4F4F5" Stroke="White" StrokeThickness="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-              </Grid>
-              <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Grid.RowDefinitions>
-                  <RowDefinition Height="1*"/>
-                  <RowDefinition Height="2*"/>
-                  <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="1.5*"/>
-                  <ColumnDefinition Width="2*"/>
-                  <ColumnDefinition Width="1.5*"/>
-                </Grid.ColumnDefinitions>
-                <Rectangle Grid.Row="1" Grid.Column="1" Width="7" StrokeThickness="0" HorizontalAlignment="Right" Fill="White"/>
-                <Rectangle Grid.Row="1" Grid.Column="1" Width="7" Stroke="#FFDE0F0F" StrokeThickness="0" HorizontalAlignment="Left"  Fill="White"/>
-              </Grid>
-            </Grid>-->
           </Grid>
         </ControlTemplate>
       </Button.Template>

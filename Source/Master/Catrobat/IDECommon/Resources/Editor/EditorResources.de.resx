@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActionPlural" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="ActionSingular" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
   <data name="BroadcastMessage" xml:space="preserve">
     <value>Nachricht</value>
   </data>
@@ -159,8 +165,17 @@
   <data name="Camera" xml:space="preserve">
     <value>Kamera</value>
   </data>
+  <data name="ClearSelection" xml:space="preserve">
+    <value>clear selection</value>
+  </data>
   <data name="CostumeName" xml:space="preserve">
     <value>Kostümname</value>
+  </data>
+  <data name="CostumePlural" xml:space="preserve">
+    <value>Kostüme</value>
+  </data>
+  <data name="CostumeSingular" xml:space="preserve">
+    <value>Kostüm</value>
   </data>
   <data name="Image" xml:space="preserve">
     <value>Bild</value>
@@ -237,6 +252,12 @@
   <data name="NothingItem" xml:space="preserve">
     <value>Nichts...</value>
   </data>
+  <data name="ObjectPlural" xml:space="preserve">
+    <value>Objekte</value>
+  </data>
+  <data name="ObjectSingular" xml:space="preserve">
+    <value>Objekt</value>
+  </data>
   <data name="PivotActions" xml:space="preserve">
     <value>Aktionen</value>
   </data>
@@ -267,8 +288,17 @@
   <data name="Recording" xml:space="preserve">
     <value>Aufnahme</value>
   </data>
+  <data name="Selected" xml:space="preserve">
+    <value>ausgewählt</value>
+  </data>
   <data name="SoundName" xml:space="preserve">
     <value>Klangname</value>
+  </data>
+  <data name="SoundPlural" xml:space="preserve">
+    <value>Klänge</value>
+  </data>
+  <data name="SoundSingular" xml:space="preserve">
+    <value>Klang</value>
   </data>
   <data name="SpriteName" xml:space="preserve">
     <value>Objektname</value>
