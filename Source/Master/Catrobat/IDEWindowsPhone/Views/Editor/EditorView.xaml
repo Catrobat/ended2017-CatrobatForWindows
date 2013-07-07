@@ -73,25 +73,23 @@
                   </StackPanel>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <!--<TextBlock Grid.Row="0" Margin="10 5 10 5" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                             FontSize="14" Text="preview" />-->
-                    <Grid Grid.Row="1" Margin="0 0 0 5" HorizontalAlignment="Right" >
-                      <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                      </Grid.ColumnDefinitions>
-                      <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                  </Grid.RowDefinitions>
+                  <Grid Grid.Row="1" Margin="0 0 0 5" HorizontalAlignment="Right" >
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
                          Source="{Binding Costumes.Costumes[0].Image}" />
-                      <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                    <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
                          Source="{Binding Costumes.Costumes[1].Image}" />
-                      <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                    <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
                          Source="{Binding Costumes.Costumes[2].Image}" />
-                    </Grid>
+                  </Grid>
 
                 </Grid>
               </Grid>
@@ -132,7 +130,7 @@
           Foreground="White" >
           <reorderableListbox:ReorderListBox.ItemTemplate>
             <DataTemplate>
-              <Grid Background="{StaticResource CostumesBrush}" Margin="0 5 0 5">
+              <Grid Background="{StaticResource CostumesBrush}" Margin="0 5 0 5" Height="90">
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="1*" />
                   <ColumnDefinition Width="3*" />
