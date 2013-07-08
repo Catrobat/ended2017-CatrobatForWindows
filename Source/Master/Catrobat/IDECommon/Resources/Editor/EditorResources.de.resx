@@ -192,32 +192,8 @@
   <data name="MenuStartSite" xml:space="preserve">
     <value>Startseite</value>
   </data>
-  <data name="MessageBoxDeleteCostumeHeader" xml:space="preserve">
-    <value>Löschen des Kostüms</value>
-  </data>
-  <data name="MessageBoxDeleteCostumeText1" xml:space="preserve">
-    <value>Sind Sie sicher, dass sie das Kostüm: </value>
-  </data>
-  <data name="MessageBoxDeleteCostumeText2" xml:space="preserve">
-    <value>löschen wollen?</value>
-  </data>
-  <data name="MessageBoxDeleteSoundHeader" xml:space="preserve">
-    <value>Löschen des Sounds </value>
-  </data>
-  <data name="MessageBoxDeleteSoundText1" xml:space="preserve">
-    <value>Sind Sie sicher, dass Sie den Klang: </value>
-  </data>
-  <data name="MessageBoxDeleteSoundText2" xml:space="preserve">
-    <value> löschen wollen?</value>
-  </data>
-  <data name="MessageBoxDeleteSpriteHeader" xml:space="preserve">
-    <value>Löschen des Objekts</value>
-  </data>
-  <data name="MessageBoxDeleteSpriteText1" xml:space="preserve">
-    <value>Sind Sie sicher, dass Sie das Objekt: </value>
-  </data>
-  <data name="MessageBoxDeleteSpriteText2" xml:space="preserve">
-    <value> löschen wollen?</value>
+  <data name="MessageBoxDeleteHeader" xml:space="preserve">
+    <value>Lösche {0}</value>
   </data>
   <data name="MessageBoxNotEnoughSpaceImageHeader" xml:space="preserve">
     <value>Zu wenig Speicherplatz</value>

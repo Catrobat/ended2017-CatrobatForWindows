@@ -192,32 +192,11 @@
   <data name="MenuStartSite" xml:space="preserve">
     <value>Start site</value>
   </data>
-  <data name="MessageBoxDeleteCostumeHeader" xml:space="preserve">
-    <value>Delete costume</value>
+  <data name="MessageBoxDeleteHeader" xml:space="preserve">
+    <value>Delete {0}</value>
   </data>
-  <data name="MessageBoxDeleteCostumeText1" xml:space="preserve">
-    <value>Do you really want to delete the costume: </value>
-  </data>
-  <data name="MessageBoxDeleteCostumeText2" xml:space="preserve">
-    <value>?</value>
-  </data>
-  <data name="MessageBoxDeleteSoundHeader" xml:space="preserve">
-    <value>Delete sound</value>
-  </data>
-  <data name="MessageBoxDeleteSoundText1" xml:space="preserve">
-    <value>Do you really want to delete the sound</value>
-  </data>
-  <data name="MessageBoxDeleteSoundText2" xml:space="preserve">
-    <value>?</value>
-  </data>
-  <data name="MessageBoxDeleteSpriteHeader" xml:space="preserve">
-    <value>Delete object</value>
-  </data>
-  <data name="MessageBoxDeleteSpriteText1" xml:space="preserve">
-    <value>Do you really want to delete the object </value>
-  </data>
-  <data name="MessageBoxDeleteSpriteText2" xml:space="preserve">
-    <value>?</value>
+  <data name="MessageBoxDeleteText" xml:space="preserve">
+    <value>Delete {0} selected {1}.</value>
   </data>
   <data name="MessageBoxNotEnoughSpaceImageHeader" xml:space="preserve">
     <value>Not enough space</value>

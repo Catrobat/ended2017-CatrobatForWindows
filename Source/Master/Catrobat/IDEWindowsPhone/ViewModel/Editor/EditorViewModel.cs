@@ -116,10 +116,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 if (value == _selectedSprite.Sounds.Sounds) return;
                 _selectedSprite.Sounds.Sounds = value;
 
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    RaisePropertyChanged("Sounds");
-                });
+                Deployment.Current.Dispatcher.BeginInvoke(() => RaisePropertyChanged("Sounds"));
             }
         }
 
@@ -586,15 +583,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void DeleteSpriteAction()
         {
-            _messageBoxSprite = SelectedSprite;
-            string name = _messageBoxSprite.Name;
+            var sprite = EditorResources.ObjectSingular;
+            var messageContent = String.Format(EditorResources.MessageBoxDeleteText, "1", sprite);
+            var messageHeader = String.Format(EditorResources.MessageBoxDeleteHeader, sprite);
 
-            var message = new DialogMessage(EditorResources.MessageBoxDeleteSpriteText1 + name + EditorResources.MessageBoxDeleteSpriteText2,
-                DeleteSpriteMessageBoxResult)
-            {
-                Button = MessageBoxButton.OKCancel,
-                Caption = EditorResources.MessageBoxDeleteSpriteHeader
-            };
+            var message =
+                new DialogMessage(messageContent, DeleteSpriteMessageBoxResult)
+                {
+                    Button = MessageBoxButton.OKCancel,
+                    Caption = messageHeader
+                };
             Messenger.Default.Send(message);
         }
 
@@ -620,13 +618,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void DeleteSoundAction()
         {
+            var sound = SelectedSounds.Count == 1 ? EditorResources.SoundSingular : EditorResources.SoundPlural;
+            var messageContent = String.Format(EditorResources.MessageBoxDeleteText, SelectedSounds.Count, sound);
+            var messageHeader = String.Format(EditorResources.MessageBoxDeleteHeader, sound);
+
             var message =
-                new DialogMessage(
-                    EditorResources.MessageBoxDeleteSoundText1 + " " + SelectedSounds.Count + " " + EditorResources.SoundName + EditorResources.MessageBoxDeleteSoundText2,
-                    DeleteSoundMessageBoxResult)
+                new DialogMessage(messageContent, DeleteSoundMessageBoxResult)
                 {
                     Button = MessageBoxButton.OKCancel,
-                    Caption = EditorResources.MessageBoxDeleteSoundHeader
+                    Caption = messageHeader
                 };
             Messenger.Default.Send(message);
         }
@@ -662,14 +662,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void DeleteCostumeAction()
         {
+            var costume = SelectedCostumes.Count == 1 ? EditorResources.CostumeSingular : EditorResources.CostumePlural;
+            var messageContent = String.Format(EditorResources.MessageBoxDeleteText, SelectedCostumes.Count, costume);
+            var messageHeader = String.Format(EditorResources.MessageBoxDeleteHeader, costume);
+
             var message =
-                new DialogMessage(
-                    EditorResources.MessageBoxDeleteCostumeText1 + " " + SelectedCostumes.Count + " " + EditorResources.CostumeName +
-                    EditorResources.MessageBoxDeleteCostumeText2,
-                    DeleteCostumeMessageBoxResult)
+                new DialogMessage(messageContent, DeleteCostumeMessageBoxResult)
                 {
                     Button = MessageBoxButton.OKCancel,
-                    Caption = EditorResources.MessageBoxDeleteCostumeHeader
+                    Caption = messageHeader
                 };
             Messenger.Default.Send(message);
         }
