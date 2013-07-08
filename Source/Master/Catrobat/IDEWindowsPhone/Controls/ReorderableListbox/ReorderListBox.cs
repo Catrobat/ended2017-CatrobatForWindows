@@ -564,24 +564,23 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         private void AddMarginToLastItem()
         {
             var list = ItemsSource as IList;
-            if (list != null)
+            if(list.Count <= 0) return;
+
+            foreach (var item in list)
             {
-                foreach (var item in list)
-                {
-                    var container = this.ItemContainerGenerator.ContainerFromItem(item);
+                var container = this.ItemContainerGenerator.ContainerFromItem(item);
 
-                    var frameworkElement = container as FrameworkElement;
-                    if (frameworkElement != null) frameworkElement.Margin = new Thickness(0, 0, 0, 0);
-                }
+                var frameworkElement = container as FrameworkElement;
+                if (frameworkElement != null) frameworkElement.Margin = new Thickness(0, 0, 0, 0);
+            }
 
-                if (list.Count > 0)
-                {
-                    var container = this.ItemContainerGenerator.ContainerFromItem(list[list.Count - 1]);
+            if (list.Count > 0)
+            {
+                var container = this.ItemContainerGenerator.ContainerFromItem(list[list.Count - 1]);
 
-                    var frameworkElement = container as FrameworkElement;
-                    if (frameworkElement != null)
-                        frameworkElement.Margin = new Thickness(0, 0, 0, 50);
-                }
+                var frameworkElement = container as FrameworkElement;
+                if (frameworkElement != null)
+                    frameworkElement.Margin = new Thickness(0, 0, 0, 50);
             }
         }
 
