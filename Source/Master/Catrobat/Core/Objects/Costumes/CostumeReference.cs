@@ -54,14 +54,14 @@ namespace Catrobat.Core.Objects.Costumes
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
-            _costume = XPathHelper.getElement(_reference, _sprite) as Costume;
+            _costume = XPathHelper.GetElement(_reference, _sprite) as Costume;
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("costumeData");
 
-            xRoot.Add(new XAttribute("reference", XPathHelper.getReference(_costume, _sprite)));
+            xRoot.Add(new XAttribute("reference", XPathHelper.GetReference(_costume, _sprite)));
 
             return xRoot;
         }
@@ -70,7 +70,7 @@ namespace Catrobat.Core.Objects.Costumes
         {
             var newCostumeRef = new CostumeReference(parent);
             newCostumeRef._reference = _reference;
-            newCostumeRef._costume = XPathHelper.getElement(_reference, parent) as Costume;
+            newCostumeRef._costume = XPathHelper.GetElement(_reference, parent) as Costume;
 
             return newCostumeRef;
         }

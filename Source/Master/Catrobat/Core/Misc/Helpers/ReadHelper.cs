@@ -2,7 +2,7 @@
 
 namespace Catrobat.Core.Misc.Helpers
 {
-    public class ReadHelper
+    public static class ReadHelper
     {
         public static BrickList CurrentBrickList;
     }

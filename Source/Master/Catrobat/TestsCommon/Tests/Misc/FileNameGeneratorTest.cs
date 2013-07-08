@@ -15,7 +15,7 @@ namespace Catrobat.TestsCommon.Tests
     [TestMethod]
     public void GenerateValidFileName()
     {
-      string fileName = FileNameGenerator.generate();
+      string fileName = FileNameGenerator.Generate();
 
       Assert.IsTrue(fileName.EndsWith("_"));
       Assert.IsTrue(fileName.Length >= 33); //32 x Hexzahl + 1 x "_"

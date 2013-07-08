@@ -269,7 +269,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void EditCurrentProjectAction()
         {
-            Navigation.NavigateTo(typeof(EditorView));
+            Navigation.NavigateTo(typeof(EditorLoadingView));
         }
 
         private void SettingsAction()

@@ -40,7 +40,7 @@ namespace Catrobat.Core.Objects.Bricks
                 if (_costumeReference == null)
                 {
                     _costumeReference = new CostumeReference(_sprite);
-                    _costumeReference.Reference = XPathHelper.getReference(value, _sprite);
+                    _costumeReference.Reference = XPathHelper.GetReference(value, _sprite);
                 }
 
                 if (_costumeReference.Costume == value)
@@ -102,7 +102,7 @@ namespace Catrobat.Core.Objects.Bricks
         {
             if (_costumeReference != null)
             {
-                _costumeReference.Reference = XPathHelper.getReference(_costumeReference.Costume, _sprite);
+                _costumeReference.Reference = XPathHelper.GetReference(_costumeReference.Costume, _sprite);
             }
         }
     }

@@ -22,10 +22,9 @@ internal struct ABCDStruct
     public uint D;
 }
 
-public sealed class MD5Core
+public static class MD5Core
 {
     //Prevent CSC from adding a default public constructor
-    private MD5Core() {}
 
     public static byte[] GetHash(string input, Encoding encoding)
     {
@@ -228,7 +227,6 @@ public sealed class MD5Core
         ABCDValue.B = unchecked(b + ABCDValue.B);
         ABCDValue.C = unchecked(c + ABCDValue.C);
         ABCDValue.D = unchecked(d + ABCDValue.D);
-        return;
     }
 
     //Manually unrolling these equations nets us a 20% performance improvement

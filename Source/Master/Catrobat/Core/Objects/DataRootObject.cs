@@ -6,8 +6,8 @@ namespace Catrobat.Core.Objects
 {
     public abstract class DataRootObject : INotifyPropertyChanged
     {
-        protected XDocument document;
-        protected XElement root;
+        protected XDocument _document;
+        protected XElement _root;
 
         public DataRootObject() {}
 

@@ -5,27 +5,27 @@ namespace Catrobat.Core
 {
     public class XmlStringWriter : StringWriter
     {
-        private readonly Encoding encoding;
+        private readonly Encoding _encoding;
 
         public XmlStringWriter(StringBuilder builder, Encoding encoding)
             : base(builder)
         {
-            this.encoding = encoding;
+            _encoding = encoding;
         }
 
         public XmlStringWriter(Encoding encoding)
         {
-            this.encoding = encoding;
+            _encoding = encoding;
         }
 
         public XmlStringWriter()
         {
-            encoding = Encoding.UTF8;
+            _encoding = Encoding.UTF8;
         }
 
         public override Encoding Encoding
         {
-            get { return encoding; }
+            get { return _encoding; }
         }
     }
 }

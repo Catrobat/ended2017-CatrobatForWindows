@@ -54,14 +54,14 @@ namespace Catrobat.Core.Objects.Sounds
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
-            Sound = XPathHelper.getElement(_reference, _sprite) as Sound;
+            Sound = XPathHelper.GetElement(_reference, _sprite) as Sound;
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("soundInfo");
 
-            xRoot.Add(new XAttribute("reference", XPathHelper.getReference(Sound, _sprite)));
+            xRoot.Add(new XAttribute("reference", XPathHelper.GetReference(Sound, _sprite)));
 
             return xRoot;
         }
@@ -70,7 +70,7 @@ namespace Catrobat.Core.Objects.Sounds
         {
             var newSoundInfoRef = new SoundReference(parent);
             newSoundInfoRef._reference = _reference;
-            newSoundInfoRef.Sound = XPathHelper.getElement(_reference, parent) as Sound;
+            newSoundInfoRef.Sound = XPathHelper.GetElement(_reference, parent) as Sound;
 
             return newSoundInfoRef;
         }

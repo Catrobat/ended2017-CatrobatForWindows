@@ -40,7 +40,7 @@ namespace Catrobat.Core.Objects.Bricks
                 if (_soundReference == null)
                 {
                     _soundReference = new SoundReference(_sprite);
-                    _soundReference.Reference = XPathHelper.getReference(value, _sprite);
+                    _soundReference.Reference = XPathHelper.GetReference(value, _sprite);
                 }
 
                 if (_soundReference.Sound == value)
@@ -102,7 +102,7 @@ namespace Catrobat.Core.Objects.Bricks
         {
             if (_soundReference != null)
             {
-                _soundReference.Reference = XPathHelper.getReference(_soundReference.Sound, _sprite);
+                _soundReference.Reference = XPathHelper.GetReference(_soundReference.Sound, _sprite);
             }
         }
     }

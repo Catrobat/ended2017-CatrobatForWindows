@@ -2,15 +2,19 @@
 
 namespace Catrobat.Core.Converter
 {
-    public class Converter
+    public static class Converter
     {
         public static void Convert(XDocument doc)
         {
             if (doc == null)
+            {
                 return;
+            }
 
             if (doc.Root.Element("applicationXmlVersion") != null)
+            {
                 return;
+            }
 
             EditXML.RemoveSpriteReferences(doc);
             EditXML.HandleProjectElements(doc);

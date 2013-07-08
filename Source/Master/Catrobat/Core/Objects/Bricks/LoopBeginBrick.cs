@@ -37,7 +37,7 @@ namespace Catrobat.Core.Objects.Bricks
                 if (_loopEndBrickReference == null)
                 {
                     _loopEndBrickReference = new LoopEndBrickRef(_sprite);
-                    _loopEndBrickReference.Reference = XPathHelper.getReference(value, _sprite);
+                    _loopEndBrickReference.Reference = XPathHelper.GetReference(value, _sprite);
                 }
 
                 if (_loopEndBrickReference.LoopEndBrick == value)

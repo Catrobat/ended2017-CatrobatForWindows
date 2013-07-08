@@ -45,7 +45,7 @@ namespace Catrobat.Core.Objects.Bricks
                     {
                         _loopBeginBrickReference.Class = "ForeverBrick";
                     }
-                    _loopBeginBrickReference.Reference = XPathHelper.getReference(value, _sprite);
+                    _loopBeginBrickReference.Reference = XPathHelper.GetReference(value, _sprite);
                 }
 
                 if (_loopBeginBrickReference.LoopBeginBrick == value)

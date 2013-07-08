@@ -55,13 +55,13 @@ namespace Catrobat.Core.Objects.Bricks
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
-            _loopEndBrick = XPathHelper.getElement(_reference, _sprite) as LoopEndBrick;
+            _loopEndBrick = XPathHelper.GetElement(_reference, _sprite) as LoopEndBrick;
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("loopEndBrick");
-            xRoot.Add(new XAttribute("reference", XPathHelper.getReference(_loopEndBrick, _sprite)));
+            xRoot.Add(new XAttribute("reference", XPathHelper.GetReference(_loopEndBrick, _sprite)));
 
             return xRoot;
         }
@@ -70,7 +70,7 @@ namespace Catrobat.Core.Objects.Bricks
         {
             var newLoopEndBrickRef = new LoopEndBrickRef(parent);
             newLoopEndBrickRef._reference = _reference;
-            newLoopEndBrickRef._loopEndBrick = XPathHelper.getElement(_reference, parent) as LoopEndBrick;
+            newLoopEndBrickRef._loopEndBrick = XPathHelper.GetElement(_reference, parent) as LoopEndBrick;
 
             return newLoopEndBrickRef;
         }
