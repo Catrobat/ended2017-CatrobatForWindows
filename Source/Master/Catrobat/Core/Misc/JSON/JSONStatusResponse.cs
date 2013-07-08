@@ -9,7 +9,9 @@ namespace Catrobat.Core.Misc.JSON
     };
 
     [DataContract]
+// ReSharper disable ClassNeverInstantiated.Global
     public class JSONStatusResponse
+// ReSharper restore ClassNeverInstantiated.Global
     {
         [DataMember(Name = "statusCode")]
         public StatusCodes StatusCode { get; set; }

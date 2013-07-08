@@ -13,7 +13,6 @@ namespace Catrobat.Core.Converter
             {
                 if (sprite.Attribute("reference") != null)
                 {
-                    var parent = sprite.Parent;
                     elementsToRemove.Add(sprite);
                 }
             }

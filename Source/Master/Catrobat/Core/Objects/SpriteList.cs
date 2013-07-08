@@ -9,7 +9,7 @@ namespace Catrobat.Core.Objects
 
         public SpriteList(Project project)
         {
-            this._project = project;
+            _project = project;
             Sprites = new ObservableCollection<Sprite>();
         }
 

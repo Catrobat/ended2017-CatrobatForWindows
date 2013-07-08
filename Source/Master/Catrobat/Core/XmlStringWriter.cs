@@ -10,12 +10,12 @@ namespace Catrobat.Core
         public XmlStringWriter(StringBuilder builder, Encoding encoding)
             : base(builder)
         {
-            this._encoding = encoding;
+            _encoding = encoding;
         }
 
         public XmlStringWriter(Encoding encoding)
         {
-            this._encoding = encoding;
+            _encoding = encoding;
         }
 
         public XmlStringWriter()

@@ -86,9 +86,10 @@ namespace Catrobat.Core.Misc.Helpers
 
                 needsClrf = true;
 
-                if (param.Value is FileParameter)
+                var value = param.Value as FileParameter;
+                if (value != null)
                 {
-                    var fileToUpload = (FileParameter) param.Value;
+                    var fileToUpload = value;
 
                     // Add just the first part of this param, since we will write the file data directly to the Stream
                     var header = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\";\r\nContent-Type: {3}\r\n\r\n",

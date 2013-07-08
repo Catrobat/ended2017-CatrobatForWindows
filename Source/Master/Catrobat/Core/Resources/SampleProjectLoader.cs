@@ -69,7 +69,6 @@ namespace Catrobat.Core.Resources
                 catch (Exception)
                 {
                     Debugger.Break(); // sample project does not exist: please remove from _sampleProjectNames or add to Core/Resources/SampleProjects
-                    continue;
                 }
                 finally
                 {

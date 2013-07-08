@@ -10,28 +10,31 @@ namespace Catrobat.Core.Misc.Helpers
     {
         public static DataObject GetElement(string reference, Sprite sprite)
         {
+            DataObject retVal = null;
             reference = reference.ToLower();
 
             if (reference.Contains("costume"))
             {
-                return GetCostume(reference, sprite);
+                retVal = GetCostume(reference, sprite);
             }
             else if (reference.Contains("sound"))
             {
-                return GetSoundInfo(reference, sprite);
+                retVal = GetSoundInfo(reference, sprite);
             }
             else if (reference.Contains("forever") || reference.Contains("repeat"))
             {
-                return GetLoopBeginBrick(reference);
+                retVal = GetLoopBeginBrick(reference);
             }
             else if (reference.Contains("loopend"))
             {
-                return GetLoopEndBrick(reference);
+                retVal = GetLoopEndBrick(reference);
             }
             else
             {
-                return GetSprite(reference, sprite);
+                retVal = GetSprite(reference, sprite);
             }
+
+            return retVal;
         }
 
         public static string GetReference(DataObject dataObject, Sprite spriteContainingDataObject)

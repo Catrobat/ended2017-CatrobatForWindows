@@ -72,7 +72,7 @@ namespace Catrobat.Core.Misc.ServerCommunication
             WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.CheckTokenOrRegisterUrl,
                                                                   ApplicationResources.UserAgent,
                                                                   postParameters,
-                                                                  (string a) =>
+                                                                  a =>
                                                                       {
                                                                           if (callback != null)
                                                                           {
@@ -101,7 +101,7 @@ namespace Catrobat.Core.Misc.ServerCommunication
             WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.CheckTokenUrl,
                                                                   ApplicationResources.UserAgent,
                                                                   postParameters,
-                                                                  (string a) =>
+                                                                  a =>
                                                                       {
                                                                           if (callback != null)
                                                                           {
@@ -158,7 +158,8 @@ namespace Catrobat.Core.Misc.ServerCommunication
                 _uploadCounter++;
 
                 WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.UploadFileUrl,
-                                                                      ApplicationResources.UserAgent, postParameters, (string a) =>
+                                                                      ApplicationResources.UserAgent, postParameters, 
+                                                                      a =>
                                                                           {
                                                                               _uploadCounter--;
 
