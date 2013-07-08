@@ -6,7 +6,7 @@ using SharpCompress.Reader;
 
 namespace Catrobat.Core.ZIP
 {
-    public class CatrobatZip
+    public static class CatrobatZip
     {
         public static void UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
         {
@@ -16,7 +16,7 @@ namespace Catrobat.Core.ZIP
             {
                 while (reader.MoveToNextEntry())
                 {
-                    var absolutPath = localStoragePath + "/" + reader.Entry.FilePath;
+                    var absolutPath = Path.Combine(localStoragePath, reader.Entry.FilePath);
 
                     if (!reader.Entry.IsDirectory)
                     {
@@ -24,8 +24,6 @@ namespace Catrobat.Core.ZIP
                         {
                             storage.DeleteFile(absolutPath);
                         }
-
-                        var writer = new StringWriter();
 
                         var fileStream = storage.OpenFile(absolutPath,
                                                           StorageFileMode.Create,
@@ -59,15 +57,16 @@ namespace Catrobat.Core.ZIP
 
             foreach (string fileName in fileNames)
             {
-                var fileStream = storage.OpenFile(basePath + "/" + fileName, StorageFileMode.Open,
-                                                  StorageFileAccess.Read);
+                var tempPath = Path.Combine(basePath, fileName);
+                var fileStream = storage.OpenFile(tempPath, StorageFileMode.Open, StorageFileAccess.Read);
                 archive.AddEntry(fileName, fileStream);
             }
 
             var directrryNames = storage.GetDirectoryNames(searchPattern);
             foreach (string directoryName in directrryNames)
             {
-                WriteFilesRecursiveToZip(archive, storage, basePath + "/" + directoryName);
+                var tempZipPath = Path.Combine(basePath, directoryName);
+                WriteFilesRecursiveToZip(archive, storage, tempZipPath);
             }
         }
     }

@@ -8,49 +8,32 @@ namespace Catrobat.Core
 {
     public sealed class CatrobatContextDesign : ICatrobatContext
     {
-        public Project currentProject;
-        public ObservableCollection<ProjectHeader> localProjects;
-        public ObservableCollection<OnlineProjectHeader> onlineProjects;
-
         public CatrobatContextDesign()
         {
-            initCurrentProject();
-            initLocalProjects();
-            initOnlineProjects();
+            InitCurrentProject();
+            InitLocalProjects();
+            InitOnlineProjects();
         }
 
-        public ObservableCollection<OnlineProjectHeader> OnlineProjects
-        {
-            get { return onlineProjects; }
-        }
+        public ObservableCollection<OnlineProjectHeader> OnlineProjects { get; private set; }
 
-        public Project CurrentProject
-        {
-            get { return currentProject; }
-            set
-            {
-                /*unused*/
-            }
-        }
+        public Project CurrentProject { get; set; }
 
-        public ObservableCollection<ProjectHeader> LocalProjects
-        {
-            get { return localProjects; }
-        }
+        public ObservableCollection<ProjectHeader> LocalProjects { get; private set; }
 
-        private void initCurrentProject()
+        private void InitCurrentProject()
         {
             var project = new Project
-                {
-                    ApplicationVersionCode = 1,
-                    ApplicationVersionName = "Version 1",
-                    DeviceName = "Device1",
-                    ProjectName = "Project1",
-                    ScreenHeight = 800,
-                    ScreenWidth = 480,
-                    PlatformVersion = "7.1.1",
-                    Platform = "Windows Phone 7.5"
-                };
+            {
+                ApplicationVersionCode = 1,
+                ApplicationVersionName = "Version 1",
+                DeviceName = "Device1",
+                ProjectName = "Project1",
+                ScreenHeight = 800,
+                ScreenWidth = 480,
+                PlatformVersion = "7.1.1", //TODO: Real version
+                Platform = "Windows Phone 7.5" //TODO
+            };
 
             // TODO: implement other design data here
 
@@ -82,56 +65,56 @@ namespace Catrobat.Core
 
             sprites.Sprites.Add(sprite);
 
-            currentProject = project;
+            CurrentProject = project;
         }
 
-        private void initLocalProjects()
+        private void InitLocalProjects()
         {
-            localProjects = new ObservableCollection<ProjectHeader>();
+            LocalProjects = new ObservableCollection<ProjectHeader>();
 
             var project1 = new ProjectHeader
-                {
-                    ProjectName = "Local Project 1"
-                };
+            {
+                ProjectName = "Local Project 1"
+            };
 
             var project2 = new ProjectHeader
-                {
-                    ProjectName = "Local Project 2"
-                };
+            {
+                ProjectName = "Local Project 2"
+            };
 
             var project3 = new ProjectHeader
-                {
-                    ProjectName = "Local Project 3"
-                };
+            {
+                ProjectName = "Local Project 3"
+            };
 
 
-            localProjects.Add(project1);
-            localProjects.Add(project2);
-            localProjects.Add(project3);
+            LocalProjects.Add(project1);
+            LocalProjects.Add(project2);
+            LocalProjects.Add(project3);
         }
 
-        private void initOnlineProjects()
+        private void InitOnlineProjects()
         {
-            onlineProjects = new ObservableCollection<OnlineProjectHeader>();
+            OnlineProjects = new ObservableCollection<OnlineProjectHeader>();
 
             var project1 = new OnlineProjectHeader
-                {
-                    ProjectName = "Online Project 1"
-                };
+            {
+                ProjectName = "Online Project 1"
+            };
 
             var project2 = new OnlineProjectHeader
-                {
-                    ProjectName = "Online Project 2"
-                };
+            {
+                ProjectName = "Online Project 2"
+            };
 
             var project3 = new OnlineProjectHeader
-                {
-                    ProjectName = "Online Project 3"
-                };
+            {
+                ProjectName = "Online Project 3"
+            };
 
-            onlineProjects.Add(project1);
-            onlineProjects.Add(project2);
-            onlineProjects.Add(project3);
+            OnlineProjects.Add(project1);
+            OnlineProjects.Add(project2);
+            OnlineProjects.Add(project3);
         }
     }
 }

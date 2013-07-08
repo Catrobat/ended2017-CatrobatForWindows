@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -11,7 +12,6 @@ using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Storage;
 using Catrobat.Core.ZIP;
-using System.Collections.Generic;
 
 namespace Catrobat.Core
 {
@@ -19,15 +19,15 @@ namespace Catrobat.Core
 
     public sealed class CatrobatContext : ICatrobatContext, INotifyPropertyChanged
     {
-        public static string PlayerActiveProjectZipPath = "ActivePlayerProject/ActiveProject.catrobat_from_ide";
-        public static string LocalSettingsFilePath = "Settings/settings";
-        public static string DefaultProjectPath = "default.catroid";
-        public static string ProjectsPath = "Projects";
-        public static string DefaultProjectName = "DefaultProject";
-        public static string TempProjectImportZipPath = "Temp/ImportProjectZip";
-        public static string TempProjectImportPath = "Temp/ImportProject";
+        public const string PlayerActiveProjectZipPath = "ActivePlayerProject/ActiveProject.catrobat_from_ide";
+        public const string LocalSettingsFilePath = "Settings/settings";
+        public const string DefaultProjectPath = "default.catroid";
+        public const string ProjectsPath = "Projects";
+        public const string DefaultProjectName = "DefaultProject";
+        public const string TempProjectImportZipPath = "Temp/ImportProjectZip";
+        public const string TempProjectImportPath = "Temp/ImportProject";
 
-        public static string TempPaintImagePath = "Temp/PaintImage";
+        public const string TempPaintImagePath = "Temp/PaintImage";
 
 
         public ContextSaving ContextSaving;
@@ -37,7 +37,7 @@ namespace Catrobat.Core
 
         public CatrobatContext()
         {
-            bool firstTimeUse = !RestoreLocalSettings();
+            var firstTimeUse = !RestoreLocalSettings();
 
             if (firstTimeUse)
             {
@@ -49,7 +49,7 @@ namespace Catrobat.Core
                 }
 
                 RestoreDefaultProject(DefaultProjectName);
-                LocalSettings = new LocalSettings { CurrentProjectName = CurrentProject.ProjectName };
+                LocalSettings = new LocalSettings {CurrentProjectName = CurrentProject.ProjectName};
             }
             else
             {
@@ -63,44 +63,43 @@ namespace Catrobat.Core
         }
 
         private static IContextHolder _holder;
+
         public static CatrobatContext GetContext()
         {
             return _holder.GetContext();
         }
 
-        public LocalSettings LocalSettings { get; set; }
+        public LocalSettings LocalSettings { get; private set; }
 
         public string CurrentToken
         {
-            get
-            {
-                return LocalSettings.CurrentToken;
-            }
+            get { return LocalSettings.CurrentToken; }
 
             set
             {
                 if (LocalSettings.CurrentToken == value)
+                {
                     return;
+                }
 
                 LocalSettings.CurrentToken = value;
-                this.OnPropertyChanged("CurrentToken");
+                OnPropertyChanged("CurrentToken");
             }
         }
 
         public string CurrentUserEmail
         {
-            get
-            {
-                return LocalSettings.CurrentUserEmail;
-            }
+            get { return LocalSettings.CurrentUserEmail; }
 
             set
             {
                 if (LocalSettings.CurrentUserEmail == value)
+                {
                     return;
+                }
 
                 LocalSettings.CurrentUserEmail = value;
-                this.OnPropertyChanged("CurrentUserEmail");
+                OnPropertyChanged("CurrentUserEmail");
             }
         }
 
@@ -110,7 +109,9 @@ namespace Catrobat.Core
             set
             {
                 if (_currentProject == value)
+                {
                     return;
+                }
 
                 _currentProject = value;
                 OnPropertyChanged("CurrentProject");
@@ -124,7 +125,9 @@ namespace Catrobat.Core
             get
             {
                 if (_localProjects == null)
+                {
                     UpdateLocalProjects();
+                }
 
                 return _localProjects;
             }
@@ -135,25 +138,30 @@ namespace Catrobat.Core
         public void SetCurrentProject(string projectName)
         {
             if (_currentProject != null && _currentProject.ProjectName == projectName)
+            {
                 return;
+            }
 
             if (_currentProject != null)
+            {
                 _currentProject.Save();
+            }
 
-            string projectCodeFile = ProjectsPath + "/" + projectName;
+            var projectCodeFile = Path.Combine(ProjectsPath, projectName);
 
             try
             {
-                using (IStorage storage = StorageSystem.GetStorage())
+                using (var storage = StorageSystem.GetStorage())
                 {
-                    string xml = storage.ReadTextFile(projectCodeFile + "/" + Project.ProjectCodePath);
+                    var tempPath = Path.Combine(projectCodeFile, Project.ProjectCodePath);
+                    var xml = storage.ReadTextFile(tempPath);
                     var newProject = new Project(xml);
                     CurrentProject = newProject;
                 }
             }
             catch
             {
-                throw new Exception("Project not exists");
+                throw new Exception("Project does not exist");
             }
         }
 
@@ -162,6 +170,7 @@ namespace Catrobat.Core
             RestoreDefaultProject(projectName);
 
             _currentProject.DeviceName = DeviceInformationHelper.DeviceName;
+            //_currentProject.Platform = Environment.OSVersion; //TODO: this should work. Find out why it doesn't.
             _currentProject.Platform = "Windows Phone 7.5"; //TODO: get phone version
             _currentProject.PlatformVersion = "7.1.1"; // TODO: ?
             _currentProject.ApplicationVersionCode = 0; // TODO: ?
@@ -177,7 +186,7 @@ namespace Catrobat.Core
 
         public void DeleteProject(string projectName)
         {
-            using (IStorage storage = StorageSystem.GetStorage())
+            using (var storage = StorageSystem.GetStorage())
             {
                 storage.DeleteDirectory(ProjectsPath + "/" + projectName);
             }
@@ -192,23 +201,24 @@ namespace Catrobat.Core
 
         public void CopyProject(string projectName)
         {
-            using (IStorage storage = StorageSystem.GetStorage())
+            using (var storage = StorageSystem.GetStorage())
             {
-                string sourcePath = ProjectsPath + "/" + projectName;
-                string newProjectName = projectName;
-                string destinationPath = ProjectsPath + "/" + newProjectName;
+                var sourcePath = Path.Combine(ProjectsPath, projectName);
+                var newProjectName = projectName;
+                var destinationPath = Path.Combine(ProjectsPath, newProjectName);
 
-                int counter = 1;
+                var counter = 1;
                 while (storage.DirectoryExists(destinationPath))
                 {
                     newProjectName = projectName + counter;
-                    destinationPath = ProjectsPath + "/" + newProjectName;
+                    destinationPath = Path.Combine(ProjectsPath, newProjectName);
                     counter++;
                 }
 
                 storage.CopyDirectory(sourcePath, destinationPath);
 
-                string xml = storage.ReadTextFile(destinationPath + "/" + Project.ProjectCodePath);
+                var tempXmlPath = Path.Combine(destinationPath, Project.ProjectCodePath);
+                var xml = storage.ReadTextFile(tempXmlPath);
                 var newProject = new Project(xml);
                 newProject.SetProjectName(newProjectName);
                 newProject.Save();
@@ -220,16 +230,20 @@ namespace Catrobat.Core
         public void UpdateLocalProjects()
         {
             if (CurrentProject == null)
+            {
                 return;
+            }
 
             if (_localProjects == null)
+            {
                 _localProjects = new ObservableCollection<ProjectHeader>();
+            }
 
             _localProjects.Clear();
 
-            using (IStorage storage = StorageSystem.GetStorage())
+            using (var storage = StorageSystem.GetStorage())
             {
-                string[] projectNames = storage.GetDirectoryNames(ProjectsPath);
+                var projectNames = storage.GetDirectoryNames(ProjectsPath);
 
                 var projects = new List<ProjectHeader>();
 
@@ -237,7 +251,8 @@ namespace Catrobat.Core
                 {
                     if (projectName != CurrentProject.ProjectName)
                     {
-                        object projectScreenshot = storage.LoadImage(ProjectsPath + "/" + projectName + "/" + Project.ScreenshotPath);
+                        var screenshotPath = Path.Combine(ProjectsPath, projectName, Project.ScreenshotPath);
+                        var projectScreenshot = storage.LoadImage(screenshotPath);
                         var projectHeader = new ProjectHeader
                         {
                             ProjectName = projectName,
@@ -248,9 +263,10 @@ namespace Catrobat.Core
                 }
                 projects.Sort();
                 foreach (ProjectHeader header in projects)
+                {
                     _localProjects.Add(header);
+                }
             }
-
         }
 
         internal void StoreLocalSettings()
@@ -258,9 +274,11 @@ namespace Catrobat.Core
             LocalSettings.CurrentProjectName = _currentProject.ProjectName;
 
             if (ContextSaving != null)
+            {
                 ContextSaving.Invoke();
+            }
 
-            using (IStorage storage = StorageSystem.GetStorage())
+            using (var storage = StorageSystem.GetStorage())
             {
                 storage.WriteSerializableObject(LocalSettingsFilePath, LocalSettings);
             }
@@ -270,11 +288,11 @@ namespace Catrobat.Core
         {
             try
             {
-                using (IStorage storage = StorageSystem.GetStorage())
+                using (var storage = StorageSystem.GetStorage())
                 {
                     if (storage.FileExists(LocalSettingsFilePath))
                     {
-                        LocalSettings = storage.ReadSerializableObject(LocalSettingsFilePath, typeof(LocalSettings)) as LocalSettings;
+                        LocalSettings = storage.ReadSerializableObject(LocalSettingsFilePath, typeof (LocalSettings)) as LocalSettings;
                     }
                     else
                     {
@@ -293,7 +311,9 @@ namespace Catrobat.Core
         public void Save()
         {
             if (_currentProject != null)
+            {
                 _currentProject.Save();
+            }
 
             StoreLocalSettings();
         }
@@ -305,21 +325,22 @@ namespace Catrobat.Core
 
         internal void RestoreDefaultProject(string projectName)
         {
-            using (IStorage storage = StorageSystem.GetStorage())
+            using (var storage = StorageSystem.GetStorage())
             {
-                string projectCodeFile = ProjectsPath + "/" + projectName;
+                var projectCodeFile = Path.Combine(ProjectsPath, projectName);
 
                 if (!storage.FileExists(projectCodeFile))
                 {
                     using (var resourceLoader = ResourceLoader.CreateResourceLoader())
                     {
-                        Stream stream = resourceLoader.OpenResourceStream(ResourceScope.Resources, DefaultProjectPath);
+                        var stream = resourceLoader.OpenResourceStream(ResourceScope.Resources, DefaultProjectPath);
                         CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectCodeFile);
                         stream.Dispose();
                     }
                 }
 
-                string xml = storage.ReadTextFile(projectCodeFile + "/" + Project.ProjectCodePath);
+                var tempXmlPath = Path.Combine(projectCodeFile, Project.ProjectCodePath);
+                var xml = storage.ReadTextFile(tempXmlPath);
                 CurrentProject = new Project(xml);
 
                 CurrentProject.SetProjectName(projectName);
@@ -329,32 +350,54 @@ namespace Catrobat.Core
         public void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
         {
             foreach (Script script in selectedSprite.Scripts.Scripts)
+            {
                 foreach (Brick brick in script.Bricks.Bricks)
+                {
                     if (brick is SetCostumeBrick)
+                    {
                         (brick as SetCostumeBrick).UpdateReference();
+                    }
+                }
+            }
         }
 
         public void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite)
         {
             foreach (Script script in selectedSprite.Scripts.Scripts)
+            {
                 foreach (Brick brick in script.Bricks.Bricks)
+                {
                     if (brick is PlaySoundBrick)
+                    {
                         (brick as PlaySoundBrick).UpdateReference();
+                    }
+                }
+            }
         }
 
         public void CleanUpSpriteReferences(Sprite deletedSprite)
         {
             foreach (Sprite sprite in _currentProject.SpriteList.Sprites)
+            {
                 foreach (Script script in sprite.Scripts.Scripts)
+                {
                     foreach (Brick brick in script.Bricks.Bricks)
+                    {
                         if (brick is PointToBrick)
+                        {
                             (brick as PointToBrick).UpdateReference();
+                        }
+                    }
+                }
+            }
         }
 
         private void OnPropertyChanged(string property)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
         }
     }
 }
