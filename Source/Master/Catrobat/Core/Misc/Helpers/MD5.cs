@@ -22,10 +22,9 @@ internal struct ABCDStruct
     public uint D;
 }
 
-public sealed class MD5Core
+public static class MD5Core
 {
     //Prevent CSC from adding a default public constructor
-    private MD5Core() {}
 
     public static byte[] GetHash(string input, Encoding encoding)
     {

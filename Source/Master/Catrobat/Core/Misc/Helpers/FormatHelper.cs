@@ -2,7 +2,7 @@
 
 namespace Catrobat.Core.Misc.Helpers
 {
-    public class FormatHelper
+    public static class FormatHelper
     {
         public static int ParseInt(string value)
         {

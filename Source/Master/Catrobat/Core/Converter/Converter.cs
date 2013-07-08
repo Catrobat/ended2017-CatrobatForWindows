@@ -2,7 +2,7 @@
 
 namespace Catrobat.Core.Converter
 {
-    public class Converter
+    public static class Converter
     {
         public static void Convert(XDocument doc)
         {

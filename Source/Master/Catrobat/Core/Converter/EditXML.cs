@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace Catrobat.Core.Converter
 {
-    internal class EditXML
+    internal static class EditXML
     {
         public static void RemoveSpriteReferences(XDocument doc)
         {

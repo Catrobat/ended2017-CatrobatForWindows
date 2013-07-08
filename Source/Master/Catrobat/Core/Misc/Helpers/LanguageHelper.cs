@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace Catrobat.Core.Misc.Helpers
 {
-    public class LanguageHelper
+    public static class LanguageHelper
     {
         private static ICulture _culture;
 
@@ -12,7 +12,7 @@ namespace Catrobat.Core.Misc.Helpers
             _culture = culture;
         }
 
-        private static readonly string[] supportedLanguageCodes =
+        private static readonly string[] SupportedLanguageCodes =
         {
             "DE", "EN"
         };
@@ -27,7 +27,7 @@ namespace Catrobat.Core.Misc.Helpers
                 {
                     _supportedLanguages = new ObservableCollection<CultureInfo>();
 
-                    foreach (string languageCode in supportedLanguageCodes)
+                    foreach (string languageCode in SupportedLanguageCodes)
                     {
                         var culture = new CultureInfo(languageCode);
                         if (culture.IsNeutralCulture)

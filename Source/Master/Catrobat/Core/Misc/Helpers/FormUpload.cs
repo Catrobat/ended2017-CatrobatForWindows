@@ -12,11 +12,11 @@ namespace Catrobat.Core.Misc.Helpers
     {
         public delegate void FinishedCallback(string result);
 
-        private static readonly Encoding encoding = Encoding.UTF8;
+        private static readonly Encoding _encoding = Encoding.UTF8;
 
         public static HttpWebRequest MultipartFormDataPost(string postUrl, string userAgent, Dictionary<string, object> postParameters, FinishedCallback callback)
         {
-            var formDataBoundary = String.Format("----------{0:N}", Guid.NewGuid());
+            var formDataBoundary = string.Format("----------{0:N}", Guid.NewGuid());
             var contentType = "multipart/form-data; boundary=" + formDataBoundary;
 
             var formData = GetMultipartFormData(postParameters, formDataBoundary);
@@ -73,18 +73,18 @@ namespace Catrobat.Core.Misc.Helpers
         private static byte[] GetMultipartFormData(Dictionary<string, object> postParameters, string boundary)
         {
             Stream formDataStream = new MemoryStream();
-            var needsCLRF = false;
+            var needsClrf = false;
 
             foreach (var param in postParameters)
             {
                 // Thanks to feedback from commenters, add a CRLF to allow multiple parameters to be added.
                 // Skip it on the first parameter, add it to subsequent parameters.
-                if (needsCLRF)
+                if (needsClrf)
                 {
-                    formDataStream.Write(encoding.GetBytes("\r\n"), 0, encoding.GetByteCount("\r\n"));
+                    formDataStream.Write(_encoding.GetBytes("\r\n"), 0, _encoding.GetByteCount("\r\n"));
                 }
 
-                needsCLRF = true;
+                needsClrf = true;
 
                 if (param.Value is FileParameter)
                 {
@@ -97,7 +97,7 @@ namespace Catrobat.Core.Misc.Helpers
                                                fileToUpload.FileName ?? param.Key,
                                                fileToUpload.ContentType ?? "application/octet-stream");
 
-                    formDataStream.Write(encoding.GetBytes(header), 0, encoding.GetByteCount(header));
+                    formDataStream.Write(_encoding.GetBytes(header), 0, _encoding.GetByteCount(header));
 
                     // Write the file data directly to the Stream, rather than serializing it to a string.
                     formDataStream.Write(fileToUpload.File, 0, fileToUpload.File.Length);
@@ -108,13 +108,13 @@ namespace Catrobat.Core.Misc.Helpers
                                                  boundary,
                                                  param.Key,
                                                  param.Value);
-                    formDataStream.Write(encoding.GetBytes(postData), 0, encoding.GetByteCount(postData));
+                    formDataStream.Write(_encoding.GetBytes(postData), 0, _encoding.GetByteCount(postData));
                 }
             }
 
             // Add the end of the request.  Start with a newline
-            var footer = "\r\n--" + boundary + "--\r\n";
-            formDataStream.Write(encoding.GetBytes(footer), 0, encoding.GetByteCount(footer));
+            var footer = string.Format("\r\n--{0}--\r\n", boundary);
+            formDataStream.Write(_encoding.GetBytes(footer), 0, _encoding.GetByteCount(footer));
 
             // Dump the Stream into a byte[]
             formDataStream.Position = 0;
@@ -128,9 +128,9 @@ namespace Catrobat.Core.Misc.Helpers
 
         public class FileParameter
         {
-            public byte[] File { get; set; }
-            public string FileName { get; set; }
-            public string ContentType { get; set; }
+            public byte[] File { get; private set; }
+            public string FileName { get; private set; }
+            public string ContentType { get; private set; }
             public FileParameter(byte[] file) : this(file, null) {}
             public FileParameter(byte[] file, string filename) : this(file, filename, null) {}
 

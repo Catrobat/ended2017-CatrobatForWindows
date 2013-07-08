@@ -10,7 +10,7 @@ using Catrobat.Core.ZIP;
 
 namespace Catrobat.Core.Misc.ServerCommunication
 {
-    public class ServerCommunication
+    public static class ServerCommunication
     {
         public delegate void RegisterOrCheckTokenEvent(bool registered, string errorCode, string statusMessage);
 

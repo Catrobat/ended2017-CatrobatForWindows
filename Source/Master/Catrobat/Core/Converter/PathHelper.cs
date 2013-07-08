@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace Catrobat.Core.Converter
 {
-    public class PathHelper
+    public static class PathHelper
     {
         public static XElement GetElement(XElement elementRef)
         {

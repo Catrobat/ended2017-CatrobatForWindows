@@ -6,35 +6,35 @@ using Catrobat.Core.Objects.Sounds;
 
 namespace Catrobat.Core.Misc.Helpers
 {
-    public class XPathHelper
+    public static class XPathHelper
     {
-        public static DataObject getElement(string reference, Sprite sprite)
+        public static DataObject GetElement(string reference, Sprite sprite)
         {
             reference = reference.ToLower();
 
             if (reference.Contains("costume"))
             {
-                return getCostume(reference, sprite);
+                return GetCostume(reference, sprite);
             }
             else if (reference.Contains("sound"))
             {
-                return getSoundInfo(reference, sprite);
+                return GetSoundInfo(reference, sprite);
             }
             else if (reference.Contains("forever") || reference.Contains("repeat"))
             {
-                return getLoopBeginBrick(reference);
+                return GetLoopBeginBrick(reference);
             }
             else if (reference.Contains("loopend"))
             {
-                return getLoopEndBrick(reference);
+                return GetLoopEndBrick(reference);
             }
             else
             {
-                return getSprite(reference, sprite);
+                return GetSprite(reference, sprite);
             }
         }
 
-        public static string getReference(DataObject dataObject, Sprite spriteContainingDataObject)
+        public static string GetReference(DataObject dataObject, Sprite spriteContainingDataObject)
         {
             var reference = "";
             var pos = 0;
@@ -43,10 +43,10 @@ namespace Catrobat.Core.Misc.Helpers
             if (dataObject is Sound)
             {
                 reference = "../../../../../soundList/soundInfo";
-                foreach (Sound Sound in spriteContainingDataObject.Sounds.Sounds)
+                foreach (Sound sound in spriteContainingDataObject.Sounds.Sounds)
                 {
                     pos++;
-                    if (Sound == dataObject)
+                    if (sound == dataObject)
                     {
                         found = true;
                         break;
@@ -184,7 +184,7 @@ namespace Catrobat.Core.Misc.Helpers
             return reference;
         }
 
-        private static Costume getCostume(string xPath, Sprite sprite)
+        private static Costume GetCostume(string xPath, Sprite sprite)
         {
             var pos = 0;
 
@@ -198,7 +198,7 @@ namespace Catrobat.Core.Misc.Helpers
             return sprite.Costumes.Costumes[pos];
         }
 
-        private static Sound getSoundInfo(string xPath, Sprite sprite)
+        private static Sound GetSoundInfo(string xPath, Sprite sprite)
         {
             var pos = 0;
 
@@ -212,7 +212,7 @@ namespace Catrobat.Core.Misc.Helpers
             return sprite.Sounds.Sounds[pos];
         }
 
-        private static Sprite getSprite(string xPath, Sprite sprite)
+        private static Sprite GetSprite(string xPath, Sprite sprite)
         {
             var pos = 0;
 
@@ -226,7 +226,7 @@ namespace Catrobat.Core.Misc.Helpers
             return sprite.Project.SpriteList.Sprites[pos];
         }
 
-        private static LoopBeginBrick getLoopBeginBrick(string xPath)
+        private static LoopBeginBrick GetLoopBeginBrick(string xPath)
         {
             var pos = 0;
             var id = 0;
@@ -268,7 +268,7 @@ namespace Catrobat.Core.Misc.Helpers
             return null;
         }
 
-        private static LoopEndBrick getLoopEndBrick(string xPath)
+        private static LoopEndBrick GetLoopEndBrick(string xPath)
         {
             var pos = 0;
             var id = 0;

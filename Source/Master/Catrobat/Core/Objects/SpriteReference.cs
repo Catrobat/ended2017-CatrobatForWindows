@@ -54,14 +54,14 @@ namespace Catrobat.Core.Objects
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
-            _sprite = XPathHelper.getElement(_reference, _parentSprite) as Sprite;
+            _sprite = XPathHelper.GetElement(_reference, _parentSprite) as Sprite;
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("pointedSprite");
 
-            xRoot.Add(new XAttribute("reference", XPathHelper.getReference(_sprite, _parentSprite)));
+            xRoot.Add(new XAttribute("reference", XPathHelper.GetReference(_sprite, _parentSprite)));
 
             return xRoot;
         }
@@ -70,7 +70,7 @@ namespace Catrobat.Core.Objects
         {
             var newSpriteRef = new SpriteReference(parent);
             newSpriteRef._reference = _reference;
-            newSpriteRef._sprite = XPathHelper.getElement(_reference, parent) as Sprite;
+            newSpriteRef._sprite = XPathHelper.GetElement(_reference, parent) as Sprite;
 
             return newSpriteRef;
         }

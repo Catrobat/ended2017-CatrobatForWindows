@@ -2,7 +2,7 @@
 
 namespace Catrobat.Core.Misc.Helpers
 {
-    public class FileNameGenerator
+    public static class FileNameGenerator
     {
         public static string Generate()
         {
