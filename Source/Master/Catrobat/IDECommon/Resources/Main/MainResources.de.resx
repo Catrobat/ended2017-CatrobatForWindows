@@ -257,6 +257,9 @@ Dieses Programm steht unter der MS-RL Lizenz.</value>
   <data name="SettingsEnableNXTBricks" xml:space="preserve">
     <value>NXT Bausteine einschalten</value>
   </data>
+  <data name="SettingsTheme" xml:space="preserve">
+    <value>Design</value>
+  </data>
   <data name="TitleNewProject" xml:space="preserve">
     <value>NEUES PROJEKT</value>
   </data>
