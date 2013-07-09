@@ -108,7 +108,7 @@
           <c:PlayPauseButton Grid.Column="4" x:Name="PlayButton" State="{Binding IsPlaying, Mode=OneWay, Converter={StaticResource BoolPlayButtonStateConverter}}" Click="PlayButton_OnClick" 
                         Visibility="{Binding RecordingExists, Converter={StaticResource BoolVisibilityConverter}}"
                         VerticalAlignment="Top" HorizontalAlignment="Center" 
-                        Height="60" Width="60" DataContext="{Binding}" />
+                        Height="60" Width="60" RoundBorderThickness="4" DataContext="{Binding}" />
         </Grid>
       </Grid>
       <Grid Grid.Row="2">

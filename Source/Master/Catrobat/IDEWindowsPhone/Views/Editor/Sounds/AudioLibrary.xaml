@@ -26,8 +26,8 @@
     </StackPanel>
 
 
-    <StackPanel Grid.Row="1" Margin="10 0 0 15" Name="stackPanelMediaLibrary">
-      <ListBox Margin="0 0 0 15" Name="lbxSongs" SelectionChanged="lbxSongs_SelectionChanged">
+    <StackPanel Grid.Row="1" Margin="10 0 0 15" Name="StackPanelMediaLibrary">
+      <ListBox Margin="0 0 0 15" Name="LbxSongs" SelectionChanged="lbxSongs_SelectionChanged">
         <ListBox.ItemTemplate>
           <DataTemplate>
             <Grid>
@@ -36,16 +36,16 @@
                 <ColumnDefinition Width="1*"/>
               </Grid.ColumnDefinitions>
               <TextBlock Margin="0" Grid.Column="0" Text="{Binding Song.Name}" Style="{StaticResource PhoneTextLargeStyle}" />
-              <c:PlayPauseButton Margin="0 0 10 0" Grid.Column="1" x:Name="btnPlay" Click="btnPlay_Click" Height="30" Width="30" DataContext="{Binding}"  State="{Binding State, Mode=TwoWay}" />
+              <c:PlayPauseButton Margin="0 0 10 0" RoundBorderThickness="5" Grid.Column="1" x:Name="btnPlay" Click="btnPlay_Click" Height="30" Width="30" DataContext="{Binding}"  State="{Binding State, Mode=TwoWay}" />
             </Grid>
           </DataTemplate>
         </ListBox.ItemTemplate>
       </ListBox>
     </StackPanel>
 
-    <StackPanel Grid.Row="1" Margin="10 0 0 15" Name="stackPanelChangeName">
+    <StackPanel Grid.Row="1" Margin="10 0 0 15" Name="StackPanelChangeName">
       <TextBlock Margin="0" Text="{Binding Path=Editor.SoundName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
-      <TextBox Margin="-10 0 10 0" Name="txtName" HorizontalAlignment="Stretch" TextChanged="txtName_TextChanged" />
+      <TextBox Margin="-10 0 10 0" Name="TxtName" HorizontalAlignment="Stretch" TextChanged="txtName_TextChanged" />
     </StackPanel>
   </Grid>
 </phone:PhoneApplicationPage>

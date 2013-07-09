@@ -39,11 +39,11 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
             Dispatcher.BeginInvoke(() =>
                 {
-                    txtName.Focus();
-                    txtName.SelectAll();
+                    TxtName.Focus();
+                    TxtName.SelectAll();
                     _btnSave.IsEnabled = false;
 
-                    stackPanelChangeName.Visibility = Visibility.Collapsed;
+                    StackPanelChangeName.Visibility = Visibility.Collapsed;
                     ApplicationBar.IsVisible = false;
                 });
 
@@ -84,11 +84,11 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
                 _songSelected = false;
                 Dispatcher.BeginInvoke(() =>
                     {
-                        stackPanelMediaLibrary.Visibility = Visibility.Visible;
-                        stackPanelChangeName.Visibility = Visibility.Collapsed;
+                        StackPanelMediaLibrary.Visibility = Visibility.Visible;
+                        StackPanelChangeName.Visibility = Visibility.Collapsed;
                         ApplicationBar.IsVisible = false;
                         Headline.Text = EditorResources.TitleChooseSound;
-                        txtName.Text = "";
+                        TxtName.Text = "";
                     });
                 e.Cancel = true;
             }
@@ -99,14 +99,14 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
             var library = new MediaLibrary();
             foreach (Song song in library.Songs)
             {
-                lbxSongs.Items.Add(new SoundListItem {Song = song});
+                LbxSongs.Items.Add(new SoundListItem {Song = song});
             }
         }
 
         //TODO: Write UI Test
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var sound = new Sound(txtName.Text, _editorViewModel.SelectedSprite);
+            var sound = new Sound(TxtName.Text, _editorViewModel.SelectedSprite);
 
             var absoluteFileName = Path.Combine(CatrobatContext.GetContext().CurrentProject.BasePath, "sounds", sound.FileName);
 
@@ -131,7 +131,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
         private void txtName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtName.Text))
+            if (!string.IsNullOrEmpty(TxtName.Text))
             {
                 _btnSave.IsEnabled = true;
             }
@@ -148,21 +148,21 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
             MediaPlayer.Pause();
             FrameworkDispatcher.Update();
 
-            var soundListItem = lbxSongs.SelectedItem as SoundListItem;
+            var soundListItem = LbxSongs.SelectedItem as SoundListItem;
             if (soundListItem != null)
             {
                 _selectedSong = soundListItem.Song;
 
                 Dispatcher.BeginInvoke(() =>
                     {
-                        stackPanelMediaLibrary.Visibility = Visibility.Collapsed;
-                        stackPanelChangeName.Visibility = Visibility.Visible;
+                        StackPanelMediaLibrary.Visibility = Visibility.Collapsed;
+                        StackPanelChangeName.Visibility = Visibility.Visible;
                         ApplicationBar.IsVisible = true;
 
                         Headline.Text = EditorResources.TitleChooseSoundName;
-                        txtName.Text = _selectedSong.Name;
-                        txtName.Focus();
-                        txtName.SelectAll();
+                        TxtName.Text = _selectedSong.Name;
+                        TxtName.Focus();
+                        TxtName.SelectAll();
                     });
             }
         }
