@@ -23,7 +23,6 @@
   DataContext="{Binding Editor, Source={StaticResource Locator}}">
 
   <phone:PhoneApplicationPage.Resources>
-    <converters:BytesImageConverter x:Key="BytesImageConverter" />
     <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
     <converters:NullIntCountConverter x:Key="NullIntCountConverter"/>
     <buttons:PlayPauseButtonGroup x:Key="PlayPauseButtonGroupSounds" Command="{Binding SoundsPlayStateChangedCommand}" />
@@ -135,7 +134,7 @@
                   <ColumnDefinition Width="1*" />
                   <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="{Binding Image, Converter={StaticResource BytesImageConverter}}" 
+                <Image Grid.Column="0" Source="{Binding Image}" 
                        MaxWidth="120" MaxHeight="120" Margin="10 10 5 10" VerticalAlignment="Stretch" />
                 <Grid Grid.Column="1" Margin="5">
                   <Grid.RowDefinitions>

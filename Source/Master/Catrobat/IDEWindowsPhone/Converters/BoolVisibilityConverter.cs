@@ -9,6 +9,9 @@ namespace Catrobat.IDEWindowsPhone.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null || !(value is bool))
+                return Visibility.Collapsed;
+
             var visible = (bool) value;
 
             if (parameter != null && (bool) parameter)

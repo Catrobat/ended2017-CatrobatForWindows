@@ -6,7 +6,7 @@ using Catrobat.Core.Storage;
 
 namespace Catrobat.IDEWindowsPhone.Converters
 {
-    public class ScreenshotConverter : IValueConverter
+    public class NoScreenshotConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

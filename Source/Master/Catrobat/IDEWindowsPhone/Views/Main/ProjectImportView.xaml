@@ -19,7 +19,7 @@
 
   <phone:PhoneApplicationPage.Resources>
     <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
-    <converters:ScreenshotConverter x:Key="ScreenshotConverter" />
+    <converters:NoScreenshotConverter x:Key="ScreenshotConverter" />
   </phone:PhoneApplicationPage.Resources>
   
   <Grid x:Name="LayoutRoot" Background="Transparent">

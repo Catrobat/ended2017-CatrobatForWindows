@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.ViewModel.Settings;
@@ -17,7 +18,7 @@ namespace Catrobat.IDEWindowsPhone.Converters
 
             if (theme != null && settingsViewModel.ActiveTheme == value)
             {
-                return App.Current.Resources["PhoneAccentBrush"];
+                return Application.Current.Resources["PhoneAccentBrush"];
             }
             else
             {

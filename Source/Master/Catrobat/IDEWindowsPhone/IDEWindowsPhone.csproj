@@ -140,20 +140,15 @@
     <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\ActiveProjectVisibilityConverter.cs" />
     <Compile Include="Converters\ActiveThemeBrushConverter.cs" />
-    <Compile Include="Converters\BytesImageConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
     <Compile Include="Converters\NullIntCountConverter.cs" />
-    <Compile Include="Converters\InActiveProjectVisibilityConverter.cs" />
-    <Compile Include="Converters\ScreenshotConverter.cs" />
+    <Compile Include="Converters\NoScreenshotConverter.cs" />
     <Compile Include="Converters\VersionConverter.cs" />
     <Compile Include="Converters\DoubleStringConverter.cs" />
     <Compile Include="Converters\FloatStringConverter.cs" />
-    <Compile Include="Converters\IntCostumeReferenceConverter.cs" />
-    <Compile Include="Converters\IntSoundInfoConverter.cs" />
     <Compile Include="Converters\IntStringConverter.cs" />
     <Compile Include="Converters\NullColorConverter.cs" />
     <Compile Include="Converters\SecondStringMillisecondConverter.cs" />

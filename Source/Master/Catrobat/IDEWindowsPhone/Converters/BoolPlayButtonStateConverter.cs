@@ -9,6 +9,9 @@ namespace Catrobat.IDEWindowsPhone.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!(value is bool))
+                return PlayPauseButtonState.Pause;
+
             var isPlaying = (bool)value;
 
             return isPlaying ? PlayPauseButtonState.Play : PlayPauseButtonState.Pause;
@@ -16,6 +19,9 @@ namespace Catrobat.IDEWindowsPhone.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!(value is PlayPauseButtonState))
+                return false;
+
             var playState = (PlayPauseButtonState)value;
 
             return playState == PlayPauseButtonState.Play;
