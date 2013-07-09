@@ -287,83 +287,20 @@ namespace Catrobat.IDECommon.Resources.Editor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete costume.
+        ///   Looks up a localized string similar to Delete {0}.
         /// </summary>
-        public static string MessageBoxDeleteCostumeHeader {
+        public static string MessageBoxDeleteHeader {
             get {
-                return ResourceManager.GetString("MessageBoxDeleteCostumeHeader", resourceCulture);
+                return ResourceManager.GetString("MessageBoxDeleteHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you really want to delete the costume: .
+        ///   Looks up a localized string similar to Delete {0} selected {1}..
         /// </summary>
-        public static string MessageBoxDeleteCostumeText1 {
+        public static string MessageBoxDeleteText {
             get {
-                return ResourceManager.GetString("MessageBoxDeleteCostumeText1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ?.
-        /// </summary>
-        public static string MessageBoxDeleteCostumeText2 {
-            get {
-                return ResourceManager.GetString("MessageBoxDeleteCostumeText2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete sound.
-        /// </summary>
-        public static string MessageBoxDeleteSoundHeader {
-            get {
-                return ResourceManager.GetString("MessageBoxDeleteSoundHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Do you really want to delete the sound.
-        /// </summary>
-        public static string MessageBoxDeleteSoundText1 {
-            get {
-                return ResourceManager.GetString("MessageBoxDeleteSoundText1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ?.
-        /// </summary>
-        public static string MessageBoxDeleteSoundText2 {
-            get {
-                return ResourceManager.GetString("MessageBoxDeleteSoundText2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete object.
-        /// </summary>
-        public static string MessageBoxDeleteSpriteHeader {
-            get {
-                return ResourceManager.GetString("MessageBoxDeleteSpriteHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Do you really want to delete the object .
-        /// </summary>
-        public static string MessageBoxDeleteSpriteText1 {
-            get {
-                return ResourceManager.GetString("MessageBoxDeleteSpriteText1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ?.
-        /// </summary>
-        public static string MessageBoxDeleteSpriteText2 {
-            get {
-                return ResourceManager.GetString("MessageBoxDeleteSpriteText2", resourceCulture);
+                return ResourceManager.GetString("MessageBoxDeleteText", resourceCulture);
             }
         }
         

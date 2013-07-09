@@ -257,6 +257,9 @@ The program is licensed under the MS-RL Lizenz.</value>
   <data name="SettingsEnableNXTBricks" xml:space="preserve">
     <value>Enable Mindstorm bricks</value>
   </data>
+  <data name="SettingsTheme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
   <data name="TitleNewProject" xml:space="preserve">
     <value>NEW PROJECT</value>
   </data>

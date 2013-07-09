@@ -34,7 +34,7 @@
         SelectedItem="{Binding ActiveTheme, Mode=OneWay}" HorizontalAlignment="Stretch">
         <ListBox.ItemTemplate>
           <DataTemplate>
-            <Grid Margin="0 0 0 40" Width="470" Tap="Item_Tap">
+            <Grid Margin="0 0 0 40" Width="470" Background="Transparent" Tap="Item_Tap">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1.5*" />

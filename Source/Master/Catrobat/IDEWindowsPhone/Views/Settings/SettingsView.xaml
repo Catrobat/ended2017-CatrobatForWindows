@@ -16,51 +16,85 @@
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <StackPanel>
-      <Button Command="{Binding ShowLanguageSettingsCommand}">
+      <Button Command="{Binding ShowLanguageSettingsCommand}" BorderThickness="0">
         <Button.Content>
-          <StackPanel Name="stackPanelSettingsLanguage" Margin="10 0 10 10" >
-            <TextBlock Grid.Row="0" Margin="0 0 10 10" Text="{Binding Path=Main.ListLanguage, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextLargeStyle}" />
-            <TextBlock Grid.Row="1" Margin="0 -5 10 10" Text="{Binding CurrentCulture.NativeName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+          <StackPanel Name="StackPanelSettingsLanguage" Margin="10 0 10 10" >
+            <TextBlock Grid.Row="0" Margin="0 0 10 10"
+                       Text="{Binding Path=Main.ListLanguage, 
+                       Source={StaticResource LocalizedStrings}}" 
+                       Style="{StaticResource PhoneTextLargeStyle}" />
+            <TextBlock Grid.Row="1" Margin="0 -5 10 10" 
+                       Text="{Binding CurrentCulture.NativeName}" 
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
           </StackPanel>
         </Button.Content>
       </Button>
-      <Button Command="{Binding ShowDesignSettingsCommand}">
+      <Button Command="{Binding ShowDesignSettingsCommand}" BorderThickness="0">
         <Button.Content>
-          <Grid Margin="0 0 0 0" Width="470">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="1.5*" />
-            </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Width="150" Height="150" x:Name="imgDesign" Margin="10" Source="{Binding ActiveTheme.CroppedBackground}" />
-            <Grid Grid.Column="1" Margin="22">
-              <Grid Margin="10">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid>
+              
+            </Grid>
+            <Grid Grid.Row="1" Margin="0 0 0 0" Width="470">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1.5*" />
+              </Grid.ColumnDefinitions>
+              <Image Grid.Column="0" Width="150" Height="150" x:Name="ImgDesign" Margin="10" Source="{Binding ActiveTheme.CroppedBackground}" />
+              <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                  <RowDefinition />
-                  <RowDefinition />
-                  <RowDefinition />
-                  <RowDefinition />
-                  <RowDefinition />
-                  <RowDefinition />
-                  <RowDefinition />
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition />
-                  <ColumnDefinition />
-                  <ColumnDefinition />
-                  <ColumnDefinition />
-                  <ColumnDefinition />
-                  <ColumnDefinition />
-                  <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding ActiveTheme.AccentColor1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
-                <Grid Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding ActiveTheme.AccentColor2}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
-                <Grid Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding ActiveTheme.AccentColor3}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
+
+                <TextBlock Margin="10 0 0 0" Grid.Row="0" Text="{ Binding Source={StaticResource LocalizedStrings}, 
+                Path=Main.SettingsTheme}" />
+
+                <Grid Grid.Row="1" Margin="10">
+                  <Grid Margin="0">
+                    <Grid.RowDefinitions>
+                      <RowDefinition />
+                      <RowDefinition />
+                      <RowDefinition />
+                      <RowDefinition />
+                      <RowDefinition />
+                      <RowDefinition />
+                      <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition />
+                      <ColumnDefinition />
+                      <ColumnDefinition />
+                      <ColumnDefinition />
+                      <ColumnDefinition />
+                      <ColumnDefinition />
+                      <ColumnDefinition />
+                      <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                        Background="{Binding ActiveTheme.AccentColor1}" 
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    <Grid Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                        Background="{Binding ActiveTheme.AccentColor2}" 
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    <Grid Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                        Background="{Binding ActiveTheme.AccentColor3}" 
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
+
         </Button.Content>
       </Button>
-      <CheckBox Name="checkBoxShowMemory" Content="{Binding Path=Main.DEBUGShowMemory, Source={StaticResource LocalizedStrings}}" IsChecked="{Binding ShowMemoryMonitor, Mode=TwoWay}" />
+      <CheckBox Name="CheckBoxShowMemory" Content="{Binding Path=Main.DEBUGShowMemory, 
+        Source={StaticResource LocalizedStrings}}" 
+                IsChecked="{Binding ShowMemoryMonitor, Mode=TwoWay}" />
     </StackPanel>
   </Grid>
 </phone:PhoneApplicationPage>

@@ -7,12 +7,14 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="50" d:DesignWidth="50" Width="200" Height="200">
-
+    d:DesignHeight="50" d:DesignWidth="50" 
+    Width="200" Height="200">
+  
   <Grid x:Name="LayoutRoot" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    <Button Name="buttonPlay" Visibility="Visible" Margin="0" BorderBrush="Transparent" BorderThickness="0" Padding="0" Click="buttonPlay_Click">
+    <Button Name="ButtonPlay" Visibility="Visible" Margin="0" BorderBrush="Transparent" 
+            BorderThickness="0" Padding="0" Click="ButtonPlay_Click">
       <Button.Template>
-        <ControlTemplate>
+        <ControlTemplate TargetType="Button">
           <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <VisualStateManager.VisualStateGroups>
               <VisualStateGroup x:Name="CommonStates">
@@ -20,14 +22,16 @@
                 <VisualState x:Name="MouseOver"/>
                 <VisualState x:Name="Pressed">
                   <Storyboard >
-                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gridMain" Storyboard.TargetProperty="Opacity" Duration="0">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GridMain" 
+                                                   Storyboard.TargetProperty="Opacity" Duration="0">
                       <DiscreteDoubleKeyFrame KeyTime="0:00:00" Value="1.0"/>
                     </DoubleAnimationUsingKeyFrames>
                   </Storyboard>
                 </VisualState>
                 <VisualState x:Name="Disabled">
                   <Storyboard>
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridPlay">
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" 
+                                                   Storyboard.TargetName="gridPlay">
                       <DiscreteObjectKeyFrame KeyTime="0">
                         <DiscreteObjectKeyFrame.Value>
                           <Visibility>Collapsed</Visibility>
@@ -38,7 +42,7 @@
                 </VisualState>
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Grid Name="gridMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid Name="GridMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
               <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                   <RowDefinition Height="0.5*"/>
@@ -50,7 +54,11 @@
                   <ColumnDefinition Width="9*"/>
                   <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
-                <Ellipse Grid.Row="1" Grid.Column="1" Fill="#00F4F4F5" Stroke="White" StrokeThickness="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Ellipse Name="EllipsePlay"  Grid.Row="1" Grid.Column="1" 
+                         Fill="#00F4F4F5" Stroke="White" 
+                         StrokeThickness="{Binding RelativeSource={RelativeSource TemplatedParent},
+                         Path=BorderThickness.Left}" 
+                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
               </Grid>
               <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
@@ -63,8 +71,12 @@
                   <ColumnDefinition Width="2*"/>
                   <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                  <Path  Data="M211,328 L254,359.5 L211,392 z"  Fill="#FFF4F4F5" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" VerticalAlignment="Center" HorizontalAlignment="Center" StrokeThickness="0" />
+                <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Stretch">
+                  <Path  Data="M211,328 L254,359.5 L211,392 z"  Fill="#FFF4F4F5" 
+                         Stretch="Fill" Stroke="Black" UseLayoutRounding="False" 
+                         VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         StrokeThickness="0" />
                 </Grid>
               </Grid>
             </Grid>
@@ -72,9 +84,11 @@
         </ControlTemplate>
       </Button.Template>
     </Button>
-    <Button Name="buttonPause" Visibility="Collapsed"  Margin="0" BorderBrush="Transparent" BorderThickness="0" Padding="0" Click="buttonPause_Click">
+    <Button Name="ButtonPause" Visibility="Collapsed"  Margin="0" 
+            BorderBrush="Transparent" BorderThickness="0" Padding="0" 
+            Click="ButtonPause_Click">
       <Button.Template>
-        <ControlTemplate>
+        <ControlTemplate TargetType="Button">
           <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
             <VisualStateManager.VisualStateGroups>
               <VisualStateGroup x:Name="CommonStates">
@@ -82,14 +96,17 @@
                 <VisualState x:Name="MouseOver"/>
                 <VisualState x:Name="Pressed">
                   <Storyboard >
-                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gridMain" Storyboard.TargetProperty="Opacity" Duration="0">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GridMain" 
+                                                   Storyboard.TargetProperty="Opacity" 
+                                                   Duration="0">
                       <DiscreteDoubleKeyFrame KeyTime="0:00:00" Value="1.0"/>
                     </DoubleAnimationUsingKeyFrames>
                   </Storyboard>
                 </VisualState>
                 <VisualState x:Name="Disabled">
                   <Storyboard>
-                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridPlay">
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" 
+                                                   Storyboard.TargetName="gridPlay">
                       <DiscreteObjectKeyFrame KeyTime="0">
                         <DiscreteObjectKeyFrame.Value>
                           <Visibility>Collapsed</Visibility>
@@ -100,7 +117,8 @@
                 </VisualState>
               </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Grid Name="gridMain" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid Name="GridMain" HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch">
               <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                   <RowDefinition Height="0.5*"/>
@@ -112,7 +130,11 @@
                   <ColumnDefinition Width="9*"/>
                   <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
-                <Ellipse Grid.Row="1" Grid.Column="1" Fill="#00F4F4F5" Stroke="White" StrokeThickness="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Ellipse Name="EllipsePause" Grid.Row="1" Grid.Column="1" 
+                         Fill="#00F4F4F5" Stroke="White" 
+                         StrokeThickness="{Binding RelativeSource={RelativeSource TemplatedParent},
+                         Path=BorderThickness.Left}" 
+                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
               </Grid>
               <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
@@ -127,7 +149,8 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                   <Rectangle Width="10" StrokeThickness="0" HorizontalAlignment="Right" Fill="White"/>
-                  <Rectangle Width="10" Stroke="#FFDE0F0F"  StrokeThickness="0" HorizontalAlignment="Left"  Fill="White"/>
+                  <Rectangle Width="10" Stroke="#FFDE0F0F"  StrokeThickness="0" 
+                             HorizontalAlignment="Left"  Fill="White"/>
                 </Grid>
               </Grid>
             </Grid>

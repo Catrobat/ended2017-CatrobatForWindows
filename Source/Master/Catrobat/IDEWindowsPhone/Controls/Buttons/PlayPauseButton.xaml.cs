@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -6,7 +8,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 {
     public delegate void PlayStateChanged(object sender, PlayPauseButtonState state);
 
-    public partial class PlayPauseButton : UserControl
+    public partial class PlayPauseButton : UserControl, INotifyPropertyChanged
     {
         public event PlayStateChanged PlayStateChanged;
         public event RoutedEventHandler Click;
@@ -24,21 +26,34 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 
             if (value == PlayPauseButtonState.Play)
             {
-                playButton.buttonPause.Visibility = System.Windows.Visibility.Visible;
-                playButton.buttonPlay.Visibility = System.Windows.Visibility.Collapsed;
+                playButton.ButtonPause.Visibility = System.Windows.Visibility.Visible;
+                playButton.ButtonPlay.Visibility = System.Windows.Visibility.Collapsed;
             }
             else
             {
-                playButton.buttonPause.Visibility = System.Windows.Visibility.Collapsed;
-                playButton.buttonPlay.Visibility = System.Windows.Visibility.Visible;
+                playButton.ButtonPause.Visibility = System.Windows.Visibility.Collapsed;
+                playButton.ButtonPlay.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
         public PlayPauseButtonState State
         {
             get { return (PlayPauseButtonState)(this.GetValue(PlayButtonStateProperty)); }
-
             set { this.SetValue(PlayButtonStateProperty, value); }
+        }
+
+        public Thickness RoundBorderThickness
+        {
+            get { return (Thickness)GetValue(RoundBorderThicknessProperty); }
+            set { SetValue(RoundBorderThicknessProperty, value); }
+        }
+
+        public static readonly DependencyProperty RoundBorderThicknessProperty = DependencyProperty.Register("RoundBorderThickness", typeof(Thickness), typeof(PlayPauseButton), new PropertyMetadata(new Thickness(5), RoundBorderThicknessChanged));
+
+        private static void RoundBorderThicknessChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((PlayPauseButton) d).ButtonPlay.BorderThickness = (Thickness) e.NewValue;
+            ((PlayPauseButton)d).ButtonPause.BorderThickness = (Thickness) e.NewValue;
         }
 
         public PlayPauseButtonGroup Group
@@ -54,7 +69,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
             var oldGroup = e.OldValue as PlayPauseButtonGroup;
             var newGroup = e.NewValue as PlayPauseButtonGroup;
 
-            if(oldGroup != null)
+            if (oldGroup != null)
                 oldGroup.UnRegister(d as PlayPauseButton);
 
             if (newGroup != null)
@@ -66,6 +81,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
         public PlayPauseButton()
         {
             InitializeComponent();
+            this.ButtonPlay.DataContext = this;
+            this.ButtonPause.DataContext = this;
         }
 
         private void RaisePlayStateChanged()
@@ -76,11 +93,10 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 
         public ImageSource PressedImage
         {
-
             set { this.SetValue(PlayButtonStateProperty, value); }
         }
 
-        private void buttonPause_Click(object sender, RoutedEventArgs e)
+        private void ButtonPause_Click(object sender, RoutedEventArgs e)
         {
             State = PlayPauseButtonState.Pause;
 
@@ -91,7 +107,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
                 Click.Invoke(this, new RoutedEventArgs());
         }
 
-        private void buttonPlay_Click(object sender, RoutedEventArgs e)
+        private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
             State = PlayPauseButtonState.Play;
 
@@ -99,6 +115,14 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 
             if (Click != null)
                 Click.Invoke(this, new RoutedEventArgs());
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
