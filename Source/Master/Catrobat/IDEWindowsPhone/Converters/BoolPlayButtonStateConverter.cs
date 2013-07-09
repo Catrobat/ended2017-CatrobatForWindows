@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using Catrobat.IDEWindowsPhone.Controls.Buttons;
 
 namespace Catrobat.IDEWindowsPhone.Converters
 {
@@ -8,17 +9,16 @@ namespace Catrobat.IDEWindowsPhone.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            //var isPlaying = (bool)value;
+            var isPlaying = (bool)value;
 
-            //return isPlaying ? PlayButtonState.Play : PlayButtonState.Pause;
-
-            return null;
+            return isPlaying ? PlayPauseButtonState.Play : PlayPauseButtonState.Pause;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // Not Needed.
-            return null;
+            var playState = (PlayPauseButtonState)value;
+
+            return playState == PlayPauseButtonState.Play;
         }
     }
 }
