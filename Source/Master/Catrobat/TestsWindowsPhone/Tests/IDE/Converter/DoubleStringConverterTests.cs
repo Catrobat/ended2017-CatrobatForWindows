@@ -10,7 +10,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
         public void TestStringToDoubleConversion()
         {
             var conv = new DoubleStringConverter();
-            object output = conv.Convert((object)"4.2", null, null, null);
+            object output = conv.ConvertBack((object)"4.2", null, null, null);
             Assert.IsNotNull(output);
             Assert.IsTrue(output is double);
             Assert.AreEqual((double)output, 4.2d);
@@ -20,7 +20,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
         public void TestDoubleToStringConversion()
         {
             var conv = new DoubleStringConverter();
-            object output = conv.ConvertBack((object)4.2d, null, null, null);
+            object output = conv.Convert((object)4.2d, null, null, null);
             Assert.IsNotNull(output);
             Assert.IsTrue(output is string);
             Assert.AreEqual((string)output, "4.2");
@@ -30,7 +30,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
         public void TestFaultyStringToDoubleConversion()
         {
             var conv = new DoubleStringConverter();
-            object output = conv.Convert((object)"4d2", null, 42d, null);
+            object output = conv.ConvertBack((object)"4d2", null, 42d, null);
             Assert.IsNotNull(output);
             Assert.IsTrue(output is double);
             Assert.AreEqual((double)output, 42d);

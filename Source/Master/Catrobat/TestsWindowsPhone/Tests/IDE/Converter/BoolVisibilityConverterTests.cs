@@ -24,8 +24,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
         {
             var conv = new BoolVisibilityConverter();
             object output = conv.ConvertBack(Visibility.Visible, null, null, null);
-            Assert.IsNotNull(output);
-            Assert.AreEqual(true, output);
+            Assert.AreEqual(null, output);
         }
 
         [TestMethod]

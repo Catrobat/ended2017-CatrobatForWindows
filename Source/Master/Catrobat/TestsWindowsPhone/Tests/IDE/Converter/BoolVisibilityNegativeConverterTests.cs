@@ -15,7 +15,6 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
         {
             var conv = new BoolVisibilityNegativeConverter();
             object output = conv.Convert(false, null, null, null);
-            Assert.IsNotNull(output);
             Assert.AreEqual(Visibility.Visible, output);
         }
 
@@ -24,8 +23,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
         {
             var conv = new BoolVisibilityNegativeConverter();
             object output = conv.ConvertBack(Visibility.Collapsed, null, null, null);
-            Assert.IsNotNull(output);
-            Assert.AreEqual(true, output);
+            Assert.AreEqual(null, output);
         }
 
         [TestMethod]
@@ -33,7 +31,6 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
         {
             var conv = new BoolVisibilityNegativeConverter();
             object output = conv.Convert("NotValid", null, null, null);
-            Assert.IsNotNull(output);
             Assert.AreEqual(Visibility.Collapsed, output);
         }
     }

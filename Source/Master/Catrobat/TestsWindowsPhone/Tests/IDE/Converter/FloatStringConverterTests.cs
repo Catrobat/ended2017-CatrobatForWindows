@@ -10,7 +10,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
         public void TestStringToFloatConversion()
         {
             var conv = new FloatStringConverter();
-            object output = conv.Convert((object)"4.2", null, null, null);
+            object output = conv.ConvertBack((object)"4.2", null, null, null);
             Assert.IsNotNull(output);
             Assert.IsTrue(output is float);
             Assert.AreEqual((float)output, 4.2f);
@@ -20,7 +20,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
         public void TestFloatToStringConversion()
         {
             var conv = new FloatStringConverter();
-            object output = conv.ConvertBack((object)4.2f, null, null, null);
+            object output = conv.Convert((object)4.2f, null, null, null);
             Assert.IsNotNull(output);
             Assert.IsTrue(output is string);
             Assert.AreEqual((string)output, "4.2");
@@ -30,7 +30,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
         public void TestFaultyStringToFloatConversion()
         {
             var conv = new FloatStringConverter();
-            object output = conv.Convert((object)"4d2", null, 42f, null);
+            object output = conv.ConvertBack((object)"4d2", null, 42f, null);
             Assert.IsNotNull(output);
             Assert.IsTrue(output is float);
             Assert.AreEqual((float)output, 42);

@@ -33,7 +33,6 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
         {
             var conv = new NullIntCountConverter();
             object output = conv.ConvertBack(0, null, null, null);
-            Assert.IsNotNull(output);
             Assert.AreEqual(null, output);
         }
     }
