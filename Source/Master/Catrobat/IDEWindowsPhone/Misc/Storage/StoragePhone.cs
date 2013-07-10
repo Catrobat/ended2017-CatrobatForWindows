@@ -66,10 +66,27 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
             CopyDirectory(sourcePath, destinationPath, _iso);
         }
 
+        public void MoveDirectory(string sourcePath, string destinationPath)
+        {
+            if (DirectoryExists(destinationPath))
+            {
+                throw new Exception(string.Format("Destination directory {0} already exists.", destinationPath));
+            }
+
+            CreateFoldersIfNotExist(destinationPath, false);
+            MoveDirectory(sourcePath, destinationPath, _iso);
+        }
+
         public void CopyFile(string sourcePath, string destinationPath)
         {
             CreateFoldersIfNotExist(destinationPath, true);
             _iso.CopyFile(sourcePath, destinationPath);
+        }
+
+        public void MoveFile(string sourcePath, string destinationPath)
+        {
+            CreateFoldersIfNotExist(destinationPath, true);
+            _iso.MoveFile(sourcePath, destinationPath);
         }
 
         public Stream OpenFile(string path, StorageFileMode mode, StorageFileAccess access)
@@ -368,8 +385,8 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
                             continue;
                         }
 
-                        sourceDirectory = Path.Combine(sourceDirectory, file);
-                        destinationDirectory = Path.Combine(destinationDirectory, file);
+                        sourceDirectory = Path.Combine(sourcePath, file);
+                        destinationDirectory = Path.Combine(destinationPath, file);
                         iso.CopyFile(sourceDirectory, destinationDirectory);
                     }
                 }
@@ -377,6 +394,14 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
                 {
                     throw new Exception(string.Format("Cannot coppy {0} to {1}", sourceDirectory, destinationDirectory));
                 }
+            }
+        }
+
+        public void MoveDirectory(string sourcePath, string destinationPath, IsolatedStorageFile iso)
+        {
+            if (iso.DirectoryExists(sourcePath))
+            {
+                iso.MoveDirectory(sourcePath, destinationPath);
             }
         }
 

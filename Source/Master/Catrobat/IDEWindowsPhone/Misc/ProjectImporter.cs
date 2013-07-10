@@ -125,12 +125,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
             using (var storage = StorageSystem.GetStorage())
             {
                 var tempPath = Path.Combine(CatrobatContext.ProjectsPath, _project.ProjectName);
-                storage.CopyDirectory(CatrobatContext.TempProjectImportPath, tempPath);
-            }
-
-            using (var storage = StorageSystem.GetStorage())
-            {
-                storage.DeleteDirectory(CatrobatContext.TempProjectImportPath);
+                storage.MoveDirectory(CatrobatContext.TempProjectImportPath, tempPath);
             }
 
             Deployment.Current.Dispatcher.BeginInvoke(() =>

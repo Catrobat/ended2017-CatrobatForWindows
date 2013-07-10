@@ -216,6 +216,15 @@ bool Interpreter::InterpretOperatorBool(FormulaTree *tree, Object *object)
 	case Operator::LOGICAL_AND:
 		returnValue = leftValue && rightValue;
 		break;
+	case Operator::LOGICAL_OR:
+		returnValue = leftValue || rightValue;
+		break;
+	case Operator::EQUAL:
+		returnValue = leftValue == rightValue;
+		break;
+	case Operator::NOT_EQUAL:
+		returnValue = leftValue != rightValue;
+		break;
 	default: 
 		returnValue = InterpretOperatorFloat(tree, object) > 0.0f;
 		break;

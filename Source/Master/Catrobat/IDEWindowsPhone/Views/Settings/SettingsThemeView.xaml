@@ -15,7 +15,7 @@
   DataContext="{Binding Settings, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="True">
   <phone:PhoneApplicationPage.Resources>
-    <Converters:ActiveThemeBrushConverter x:Key="activeThemeBrushConverter"/>
+    <Converters:ActiveThemeBrushConverter x:Key="ActiveThemeBrushConverter"/>
   </phone:PhoneApplicationPage.Resources>
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -40,7 +40,7 @@
                 <ColumnDefinition Width="1.5*" />
               </Grid.ColumnDefinitions>
               <Image Grid.Column="0" Width="150" Height="150" x:Name="imgDesign" Margin="10" Source="{Binding CroppedBackground}" />
-              <Grid Grid.Column="1" Margin="22" Background="{Binding Converter={StaticResource activeThemeBrushConverter}}">
+              <Grid Grid.Column="1" Margin="22" Background="{Binding Converter={StaticResource ActiveThemeBrushConverter}}">
                 <Grid Margin="10">
                   <Grid.RowDefinitions>
                     <RowDefinition />

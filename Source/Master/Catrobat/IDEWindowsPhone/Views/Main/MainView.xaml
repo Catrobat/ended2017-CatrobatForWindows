@@ -25,10 +25,8 @@
   DataContext="{Binding Main, Source={StaticResource Locator}}">
 
   <phone:PhoneApplicationPage.Resources>
-    <converters:ActiveProjectVisibilityConverter x:Key="ActiveProjectVisibilityConverter" />
-    <converters:BytesImageConverter x:Key="BytesImageConverter" />
     <converters:VersionConverter x:Key="VersionConverter"/>
-    <converters:ScreenshotConverter x:Key="ScreenshotConverter"/>
+    <converters:NoScreenshotConverter x:Key="ScreenshotConverter"/>
     <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
     <converters:BoolVisibilityNegativeConverter x:Key="BoolVisibilityNegativeConverter"/>
 

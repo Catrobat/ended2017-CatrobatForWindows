@@ -17,8 +17,7 @@
   <UserControl.Resources>
     <!--<converters:ActiveProjectVisibilityConverter x:Key="ActiveProjectVisibilityConverter" />
     <converters:InActiveProjectVisibilityConverter x:Key="InActiveProjectVisibilityConverter" />-->
-    <converters:BytesImageConverter x:Key="BytesImageConverter" />
-    <converters:ScreenshotConverter x:Key="ScreenshotConverter" />
+    <converters:NoScreenshotConverter x:Key="ScreenshotConverter" />
   </UserControl.Resources>
 
   <Grid x:Name="LayoutRoot">

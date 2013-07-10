@@ -305,5 +305,16 @@ namespace Catrobat.TestsCommon.Misc.Storage
     {
       throw new NotImplementedException();
     }
+
+
+    public void MoveDirectory(string sourcePath, string destinationPath)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void MoveFile(string sourcePath, string destinationPath)
+    {
+        throw new NotImplementedException();
+    }
   }
 }

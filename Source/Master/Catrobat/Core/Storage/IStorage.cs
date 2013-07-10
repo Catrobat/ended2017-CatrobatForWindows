@@ -36,7 +36,11 @@ namespace Catrobat.Core.Storage
 
         void CopyDirectory(string sourcePath, string destinationPath);
 
+        void MoveDirectory(string sourcePath, string destinationPath);
+
         void CopyFile(string sourcePath, string destinationPath);
+
+        void MoveFile(string sourcePath, string destinationPath);
 
         Stream OpenFile(string path, StorageFileMode mode, StorageFileAccess access);
 

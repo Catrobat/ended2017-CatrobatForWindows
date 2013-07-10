@@ -98,7 +98,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 
         private void ButtonPause_Click(object sender, RoutedEventArgs e)
         {
-            State = PlayPauseButtonState.Pause;
+            if(Group != null)
+                State = PlayPauseButtonState.Pause;
 
             if (PlayStateChanged != null)
                 PlayStateChanged.Invoke(this, State);
@@ -109,7 +110,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 
         private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
-            State = PlayPauseButtonState.Play;
+            if (Group != null)
+                State = PlayPauseButtonState.Play;
 
             RaisePlayStateChanged();
 

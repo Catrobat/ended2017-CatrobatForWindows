@@ -801,12 +801,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             var playedSound = args.ChangedToPlayObject as Sound;
             var pausedSound = args.ChangedToPausedObject as Sound;
 
-            if (_soundPlayer == null)
-            {
-                _soundPlayer = new SoundPlayer();
-            }
+            if(_soundPlayer != null)
+                _soundPlayer.Clear();
 
-            _soundPlayer.Clear();
+            _soundPlayer = new SoundPlayer();
+
             _soundPlayer.SoundFinished += delegate()
             {
                 args.CurrentButton.State = PlayPauseButtonState.Pause;

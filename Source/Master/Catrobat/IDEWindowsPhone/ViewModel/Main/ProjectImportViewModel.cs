@@ -201,7 +201,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                             _importer.AcceptTempProject(CheckBoxMakeActiveIsChecked);
                         }
 
-                        Deployment.Current.Dispatcher.BeginInvoke(() => { Navigation.NavigateTo(typeof (MainView)); });
+                        Deployment.Current.Dispatcher.BeginInvoke(() => Navigation.NavigateTo(typeof (MainView)));
                     }
                     catch
                     {
@@ -220,7 +220,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private async void OnLoadAction(NavigationContext navigationContext)
         {
             _isWorking = true;
-            var fileToken = string.Empty;
+            string fileToken;
             if (navigationContext.QueryString.TryGetValue("fileToken", out fileToken))
             {
                 _importer = new ProjectImporter();
