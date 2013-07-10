@@ -24,7 +24,7 @@ namespace Catrobat.TestsCommon.Tests.Data
       // TODO: load sample priject
 
       // check if project has sucessfully loaded default project
-      Assert.AreEqual(catrobatContext.LocalSettings.CurrentProjectName, "DefaultProject");
+      Assert.AreEqual("DefaultProject", catrobatContext.LocalSettings.CurrentProjectName);
     }
 
     [TestMethod]
@@ -41,7 +41,7 @@ namespace Catrobat.TestsCommon.Tests.Data
 
       using (var storage = StorageSystem.GetStorage())
       {
-        Assert.AreEqual(storage.FileExists(CatrobatContext.LocalSettingsFilePath), true);
+        Assert.IsTrue(storage.FileExists(CatrobatContext.LocalSettingsFilePath));
       }
     }
   }
