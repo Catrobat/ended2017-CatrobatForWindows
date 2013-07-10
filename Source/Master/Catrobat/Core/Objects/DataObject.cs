@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
+using Catrobat.Core.Annotations;
 
 namespace Catrobat.Core.Objects
 {
@@ -29,15 +31,7 @@ namespace Catrobat.Core.Objects
         internal abstract XElement CreateXML();
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, e);
-            }
-        }
 
         protected int ParseInt(string target)
         {
@@ -58,5 +52,23 @@ namespace Catrobat.Core.Objects
         {
             return target.ToString();
         }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, e);
+            }
+        }
+
+        //[NotifyPropertyChangedInvocator]
+        //protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        //{
+        //    PropertyChangedEventHandler handler = PropertyChanged;
+        //    if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        //}
     }
 }
