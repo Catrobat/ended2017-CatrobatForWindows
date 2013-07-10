@@ -7,13 +7,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class MoveNStepsBrick : Brick
     {
         protected double _steps = 10.0f;
-
-        public MoveNStepsBrick() {}
-
-        public MoveNStepsBrick(Sprite parent) : base(parent) {}
-
-        public MoveNStepsBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public double Steps
         {
             get { return _steps; }
@@ -23,6 +16,13 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+
+        public MoveNStepsBrick() {}
+
+        public MoveNStepsBrick(Sprite parent) : base(parent) {}
+
+        public MoveNStepsBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

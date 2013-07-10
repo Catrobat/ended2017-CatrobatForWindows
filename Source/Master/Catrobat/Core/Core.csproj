@@ -81,6 +81,8 @@
     <Compile Include="Objects\Bricks\ChangeYByBrick.cs" />
     <Compile Include="Objects\Bricks\ClearGraphicEffectBrick.cs" />
     <Compile Include="Objects\Bricks\ComeToFrontBrick.cs" />
+    <Compile Include="Objects\Bricks\ChangeVariableBrick.cs" />
+    <Compile Include="Objects\Bricks\SetVariableBrick.cs" />
     <Compile Include="Objects\Bricks\ForeverBrick.cs" />
     <Compile Include="Objects\Bricks\GlideToBrick.cs" />
     <Compile Include="Objects\Bricks\GoNStepsBackBrick.cs" />

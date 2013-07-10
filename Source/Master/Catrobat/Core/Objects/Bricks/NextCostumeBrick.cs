@@ -14,7 +14,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("nextCostumeBrick");
+            var xRoot = new XElement("nextLookBrick");
 
             //CreateCommonXML(xRoot);
 

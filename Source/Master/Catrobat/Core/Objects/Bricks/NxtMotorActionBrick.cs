@@ -6,15 +6,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class NxtMotorActionBrick : Brick
     {
         protected string _motor;
-
-        protected int _speed;
-
-        public NxtMotorActionBrick() {}
-
-        public NxtMotorActionBrick(Sprite parent) : base(parent) {}
-
-        public NxtMotorActionBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public string Motor
         {
             get { return _motor; }
@@ -30,6 +21,7 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
+        protected int _speed;
         public int Speed
         {
             get { return _speed; }
@@ -45,6 +37,13 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
+
+        public NxtMotorActionBrick() {}
+
+        public NxtMotorActionBrick(Sprite parent) : base(parent) {}
+
+        public NxtMotorActionBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+
         internal override void LoadFromXML(XElement xRoot)
         {
             _motor = xRoot.Element("motor").Value;
@@ -53,7 +52,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("nxtMotorActionBrick");
+            var xRoot = new XElement("legoNxtMotorActionBrick");
 
             xRoot.Add(new XElement("motor")
             {

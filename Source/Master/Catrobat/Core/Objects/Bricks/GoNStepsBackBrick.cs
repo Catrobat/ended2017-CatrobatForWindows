@@ -6,13 +6,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class GoNStepsBackBrick : Brick
     {
         protected int _steps = 10;
-
-        public GoNStepsBackBrick() {}
-
-        public GoNStepsBackBrick(Sprite parent) : base(parent) {}
-
-        public GoNStepsBackBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public int Steps
         {
             get { return _steps; }
@@ -22,6 +15,12 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+        public GoNStepsBackBrick() {}
+
+        public GoNStepsBackBrick(Sprite parent) : base(parent) {}
+
+        public GoNStepsBackBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

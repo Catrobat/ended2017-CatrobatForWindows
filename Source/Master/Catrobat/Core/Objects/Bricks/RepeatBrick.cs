@@ -6,13 +6,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class RepeatBrick : LoopBeginBrick
     {
         protected int _timesToRepeat;
-
-        public RepeatBrick() {}
-
-        public RepeatBrick(Sprite parent) : base(parent) {}
-
-        public RepeatBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public int TimesToRepeat
         {
             get { return _timesToRepeat; }
@@ -27,6 +20,13 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+
+        public RepeatBrick() {}
+
+        public RepeatBrick(Sprite parent) : base(parent) {}
+
+        public RepeatBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

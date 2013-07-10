@@ -9,19 +9,22 @@ namespace Catrobat.Core.Objects.Bricks
         private readonly Sprite _sprite;
 
         private LoopEndBrick _loopEndBrick;
+        public LoopEndBrick LoopEndBrick
+        {
+            get { return _loopEndBrick; }
+            set
+            {
+                if (_loopEndBrick == value)
+                {
+                    return;
+                }
+
+                _loopEndBrick = value;
+                RaisePropertyChanged();
+            }
+        }
+
         protected string _reference;
-
-        public LoopEndBrickRef(Sprite parent)
-        {
-            _sprite = parent;
-        }
-
-        public LoopEndBrickRef(XElement xElement, Sprite parent)
-        {
-            _sprite = parent;
-            LoadFromXML(xElement);
-        }
-
         public string Reference
         {
             get { return _reference; }
@@ -37,19 +40,16 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
-        public LoopEndBrick LoopEndBrick
-        {
-            get { return _loopEndBrick; }
-            set
-            {
-                if (_loopEndBrick == value)
-                {
-                    return;
-                }
 
-                _loopEndBrick = value;
-                RaisePropertyChanged();
-            }
+        public LoopEndBrickRef(Sprite parent)
+        {
+            _sprite = parent;
+        }
+
+        public LoopEndBrickRef(XElement xElement, Sprite parent)
+        {
+            _sprite = parent;
+            LoadFromXML(xElement);
         }
 
         internal override void LoadFromXML(XElement xRoot)

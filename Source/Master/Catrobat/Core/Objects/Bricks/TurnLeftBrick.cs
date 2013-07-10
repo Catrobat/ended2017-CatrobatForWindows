@@ -7,13 +7,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class TurnLeftBrick : Brick
     {
         protected double _degrees = 15.0f;
-
-        public TurnLeftBrick() {}
-
-        public TurnLeftBrick(Sprite parent) : base(parent) {}
-
-        public TurnLeftBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public double Degrees
         {
             get { return _degrees; }
@@ -23,6 +16,13 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+
+        public TurnLeftBrick() {}
+
+        public TurnLeftBrick(Sprite parent) : base(parent) {}
+
+        public TurnLeftBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

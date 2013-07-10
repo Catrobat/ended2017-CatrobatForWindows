@@ -1,73 +1,72 @@
-﻿using System.ComponentModel;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Catrobat.Core.Objects.Bricks;
 
-namespace Catrobat.Core.Objects
+namespace Catrobat.Core.Objects.Scripts
 {
     public abstract class Script : DataObject
     {
-        protected BrickList bricks;
-        protected Sprite sprite;
+        protected BrickList _bricks;
+        public BrickList Bricks
+        {
+            get { return _bricks; }
+            set
+            {
+                if (_bricks == value)
+                {
+                    return;
+                }
 
-        public Script()
+                _bricks = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        protected Sprite _sprite;
+        public Sprite Sprite
+        {
+            get { return _sprite; }
+            set
+            {
+                if (_sprite == value)
+                {
+                    return;
+                }
+
+                _sprite = value;
+                _bricks.Sprite = value;
+
+                RaisePropertyChanged();
+            }
+        }
+
+        protected Script()
         {
             Bricks = new BrickList(null);
         }
 
-        public Script(Sprite parent)
+        protected Script(Sprite parent)
         {
             Bricks = new BrickList(parent);
-            sprite = parent;
+            _sprite = parent;
         }
 
-        public Script(XElement xElement, Sprite parent)
+        protected Script(XElement xElement, Sprite parent)
         {
             Bricks = new BrickList(parent);
-            sprite = parent;
+            _sprite = parent;
 
             LoadFromCommonXML(xElement);
             LoadFromXML(xElement);
         }
 
-        public BrickList Bricks
-        {
-            get { return bricks; }
-            set
-            {
-                if (bricks == value)
-                {
-                    return;
-                }
-
-                bricks = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Sprite Sprite
-        {
-            get { return sprite; }
-            set
-            {
-                if (sprite == value)
-                {
-                    return;
-                }
-
-                sprite = value;
-                bricks.Sprite = value;
-
-                RaisePropertyChanged();
-            }
-        }
-
+        
         internal abstract override void LoadFromXML(XElement xRoot);
 
         private void LoadFromCommonXML(XElement xRoot)
         {
             if (xRoot.Element("brickList") != null)
             {
-                bricks = new BrickList(xRoot.Element("brickList"), sprite);
+                _bricks = new BrickList(xRoot.Element("brickList"), _sprite);
             }
         }
 
@@ -75,9 +74,9 @@ namespace Catrobat.Core.Objects
 
         protected void CreateCommonXML(XElement xRoot)
         {
-            if (bricks != null)
+            if (_bricks != null)
             {
-                xRoot.Add(bricks.CreateXML());
+                xRoot.Add(_bricks.CreateXML());
             }
         }
 
@@ -87,7 +86,7 @@ namespace Catrobat.Core.Objects
         {
             if (copiedFrom.Bricks != null)
             {
-                bricks.CopyReference(copiedFrom.Bricks, parent);
+                _bricks.CopyReference(copiedFrom.Bricks, parent);
             }
         }
     }

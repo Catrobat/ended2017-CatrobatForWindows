@@ -7,13 +7,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class ChangeGhostEffectBrick : Brick
     {
         protected double _changeGhostEffect = 25.0f;
-
-        public ChangeGhostEffectBrick() {}
-
-        public ChangeGhostEffectBrick(Sprite parent) : base(parent) {}
-
-        public ChangeGhostEffectBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public double ChangeGhostEffect
         {
             get { return _changeGhostEffect; }
@@ -24,6 +17,13 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
+        
+        public ChangeGhostEffectBrick() {}
+
+        public ChangeGhostEffectBrick(Sprite parent) : base(parent) {}
+
+        public ChangeGhostEffectBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+
         internal override void LoadFromXML(XElement xRoot)
         {
             _changeGhostEffect = double.Parse(xRoot.Element("changeGhostEffect").Value, CultureInfo.InvariantCulture);
@@ -31,7 +31,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("changeGhostEffectBrick");
+            var xRoot = new XElement("changeGhostEffectByNBrick");
 
             xRoot.Add(new XElement("changeGhostEffect")
             {

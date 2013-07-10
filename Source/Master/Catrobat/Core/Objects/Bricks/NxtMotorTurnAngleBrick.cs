@@ -7,29 +7,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class NxtMotorTurnAngleBrick : Brick
     {
         protected int _degrees;
-        protected string _motor;
-
-        public NxtMotorTurnAngleBrick() {}
-
-        public NxtMotorTurnAngleBrick(Sprite parent) : base(parent) {}
-
-        public NxtMotorTurnAngleBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
-        public string Motor
-        {
-            get { return _motor; }
-            set
-            {
-                if (_motor == value)
-                {
-                    return;
-                }
-
-                _motor = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public int Degrees
         {
             get { return _degrees; }
@@ -45,15 +22,38 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
+        protected string _motor;
+        public string Motor
+        {
+            get { return _motor; }
+            set
+            {
+                if (_motor == value)
+                {
+                    return;
+                }
+
+                _motor = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+        public NxtMotorTurnAngleBrick() {}
+
+        public NxtMotorTurnAngleBrick(Sprite parent) : base(parent) {}
+
+        public NxtMotorTurnAngleBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+
         internal override void LoadFromXML(XElement xRoot)
         {
-            _motor = xRoot.Element("motor").Value;
             _degrees = Int32.Parse(xRoot.Element("degrees").Value);
+            _motor = xRoot.Element("motor").Value;
         }
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("nxtMotorTurnAngleBrick");
+            var xRoot = new XElement("legoNxtMotorTurnAngleBrick");
 
             xRoot.Add(new XElement("degrees")
             {

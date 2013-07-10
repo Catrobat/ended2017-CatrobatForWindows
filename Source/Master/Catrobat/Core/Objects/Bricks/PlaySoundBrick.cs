@@ -8,7 +8,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class PlaySoundBrick : Brick
     {
         private SoundReference _soundReference;
-
         internal SoundReference SoundReference
         {
             get { return _soundReference; }
@@ -59,6 +58,7 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
+
         public PlaySoundBrick() {}
 
         public PlaySoundBrick(Sprite parent) : base(parent) {}
@@ -67,9 +67,9 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            if (xRoot.Element("soundInfo") != null)
+            if (xRoot.Element("sound") != null)
             {
-                _soundReference = new SoundReference(xRoot.Element("soundInfo"), _sprite);
+                _soundReference = new SoundReference(xRoot.Element("sound"), _sprite);
             }
         }
 

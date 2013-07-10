@@ -7,7 +7,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class PointToBrick : Brick
     {
         private SpriteReference _pointedSpriteReference;
-
         public SpriteReference PointedSpriteReference
         {
             get
@@ -66,6 +65,7 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
+
         public PointToBrick() {}
 
         public PointToBrick(Sprite parent) : base(parent) {}
@@ -74,9 +74,9 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            if (xRoot.Element("pointedSprite") != null)
+            if (xRoot.Element("pointedObject") != null)
             {
-                _pointedSpriteReference = new SpriteReference(xRoot.Element("pointedSprite"), _sprite);
+                _pointedSpriteReference = new SpriteReference(xRoot.Element("pointedObject"), _sprite);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -30,9 +31,9 @@ namespace Catrobat.TestsCommon.Tests.Data
             //Assert.AreEqual(project.ScreenHeight, 320);
             //Assert.AreEqual(project.ScreenWidth, 240);
 
-            Assert.AreEqual(project.ObjectList.Sprites.Count, 2);
+            Assert.AreEqual(project.SpriteList.Sprites.Count, 2);
             {
-                var sprite1 = project.ObjectList.Sprites[0];
+                var sprite1 = project.SpriteList.Sprites[0];
                 Assert.AreEqual(sprite1.Costumes.Costumes.Count, 1);
                 Assert.AreEqual(sprite1.Name, "Background");
 
@@ -51,7 +52,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             }
 
             {
-                var sprite2 = project.ObjectList.Sprites[1];
+                var sprite2 = project.SpriteList.Sprites[1];
                 var costumeList = sprite2.Costumes;
                 Assert.AreEqual(costumeList.Costumes.Count, 3);
                 var costume1 = costumeList.Costumes[0];
@@ -82,14 +83,14 @@ namespace Catrobat.TestsCommon.Tests.Data
                 Assert.AreEqual(brick2.Costume, costume2);
 
                 var brick3 = whenScript.Bricks.Bricks[1] as WaitBrick;
-                Assert.AreEqual(brick3.TimeToWaitInMilliSeconds, 500);
+                Assert.AreEqual(brick3.TimeToWaitInSeconds, 500);
 
                 var brick4 = whenScript.Bricks.Bricks[2] as SetCostumeBrick;
                 Assert.AreEqual(brick4.CostumeReference.Reference, "../../../../../costumeDataList/costumeData[3]");
                 Assert.AreEqual(brick4.Costume, costume3);
 
                 var brick5 = whenScript.Bricks.Bricks[3] as WaitBrick;
-                Assert.AreEqual(brick5.TimeToWaitInMilliSeconds, 500);
+                Assert.AreEqual(brick5.TimeToWaitInSeconds, 500);
 
                 var brick6 = whenScript.Bricks.Bricks[4] as SetCostumeBrick;
                 Assert.AreEqual(brick6.CostumeReference.Reference, "../../../../../costumeDataList/costumeData");
@@ -114,11 +115,11 @@ namespace Catrobat.TestsCommon.Tests.Data
             //Assert.AreEqual(project.ScreenHeight, 800);
             //Assert.AreEqual(project.ScreenWidth, 480);
 
-            Assert.AreEqual(project.ObjectList.Sprites.Count, 3);
+            Assert.AreEqual(project.SpriteList.Sprites.Count, 3);
 
-            var sprite1 = project.ObjectList.Sprites[0];
-            var sprite2 = project.ObjectList.Sprites[1];
-            var sprite3 = project.ObjectList.Sprites[2];
+            var sprite1 = project.SpriteList.Sprites[0];
+            var sprite2 = project.SpriteList.Sprites[1];
+            var sprite3 = project.SpriteList.Sprites[2];
 
             {
                 Assert.AreEqual(sprite1.Costumes.Costumes.Count, 1);
@@ -167,7 +168,7 @@ namespace Catrobat.TestsCommon.Tests.Data
                 Assert.AreEqual(brick11.PointedSprite, sprite2);
 
                 var brick12 = startScript.Bricks.Bricks[11] as GlideToBrick;
-                Assert.AreEqual(brick12.DurationInMilliSeconds, 1000);
+                Assert.AreEqual(brick12.DurationInSeconds, 1000);
                 Assert.AreEqual(brick12.XDestination, 800);
                 Assert.AreEqual(brick12.YDestination, 0);
 
@@ -247,7 +248,7 @@ namespace Catrobat.TestsCommon.Tests.Data
                 var brick7 = whenScript.Bricks.Bricks[3] as StopAllSoundsBrick;
 
                 var brick8 = whenScript.Bricks.Bricks[4] as WaitBrick;
-                Assert.AreEqual(brick8.TimeToWaitInMilliSeconds, 1000);
+                Assert.AreEqual(brick8.TimeToWaitInSeconds, 1000);
 
                 var brick9 = whenScript.Bricks.Bricks[5] as NoteBrick;
                 Assert.AreEqual(brick9.Note, "Notiz");
@@ -328,8 +329,8 @@ namespace Catrobat.TestsCommon.Tests.Data
                 Assert.AreEqual(brick4.Speed, 3);
 
                 var brick5 = startScript.Bricks.Bricks[4] as NxtPlayToneBrick;
-                Assert.AreEqual(brick5.DurationInMs, 1000);
-                Assert.AreEqual(brick5.Hertz, 2800);
+                Assert.AreEqual(brick5.DurationInSeconds, 1000);
+                Assert.AreEqual(brick5.Frequency, 2800);
 
                 Assert.AreEqual(sprite3.Sounds.Sounds.Count, 0);
             }

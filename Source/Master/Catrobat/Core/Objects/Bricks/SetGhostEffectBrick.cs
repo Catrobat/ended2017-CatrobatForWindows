@@ -7,13 +7,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class SetGhostEffectBrick : Brick
     {
         protected double _transparency = 0.0f;
-
-        public SetGhostEffectBrick() {}
-
-        public SetGhostEffectBrick(Sprite parent) : base(parent) {}
-
-        public SetGhostEffectBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public double Transparency
         {
             get { return _transparency; }
@@ -23,6 +16,13 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+
+        public SetGhostEffectBrick() {}
+
+        public SetGhostEffectBrick(Sprite parent) : base(parent) {}
+
+        public SetGhostEffectBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

@@ -5,7 +5,17 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class WaitBrick : Brick
     {
-        protected int _timeToWaitInMilliSeconds;
+        protected int _timeToWaitInSeconds;
+        public int TimeToWaitInSeconds
+        {
+            get { return _timeToWaitInSeconds; }
+            set
+            {
+                _timeToWaitInSeconds = value;
+                RaisePropertyChanged();
+            }
+        }
+
 
         public WaitBrick() {}
 
@@ -13,28 +23,20 @@ namespace Catrobat.Core.Objects.Bricks
 
         public WaitBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
-        public int TimeToWaitInMilliSeconds
-        {
-            get { return _timeToWaitInMilliSeconds; }
-            set
-            {
-                _timeToWaitInMilliSeconds = value;
-                RaisePropertyChanged();
-            }
-        }
+        
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _timeToWaitInMilliSeconds = int.Parse(xRoot.Element("timeToWaitInMilliSeconds").Value);
+            _timeToWaitInSeconds = int.Parse(xRoot.Element("timeToWaitInSeconds").Value);
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("waitBrick");
 
-            xRoot.Add(new XElement("timeToWaitInMilliSeconds")
+            xRoot.Add(new XElement("timeToWaitInSeconds")
             {
-                Value = _timeToWaitInMilliSeconds.ToString()
+                Value = _timeToWaitInSeconds.ToString()
             });
 
             //CreateCommonXML(xRoot);
@@ -45,7 +47,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new WaitBrick(parent);
-            newBrick._timeToWaitInMilliSeconds = _timeToWaitInMilliSeconds;
+            newBrick._timeToWaitInSeconds = _timeToWaitInSeconds;
 
             return newBrick;
         }

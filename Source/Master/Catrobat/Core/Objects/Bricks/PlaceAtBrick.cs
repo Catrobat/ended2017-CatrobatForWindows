@@ -6,15 +6,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class PlaceAtBrick : Brick
     {
         protected int _xPosition = 0;
-
-        protected int _yPosition = 0;
-
-        public PlaceAtBrick() {}
-
-        public PlaceAtBrick(Sprite parent) : base(parent) {}
-
-        public PlaceAtBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public int XPosition
         {
             get { return _xPosition; }
@@ -25,6 +16,7 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
+        protected int _yPosition = 0;
         public int YPosition
         {
             get { return _yPosition; }
@@ -34,6 +26,13 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+
+        public PlaceAtBrick() {}
+
+        public PlaceAtBrick(Sprite parent) : base(parent) {}
+
+        public PlaceAtBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

@@ -2,6 +2,7 @@
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 
 namespace Catrobat.Core
@@ -76,7 +77,7 @@ namespace Catrobat.Core
             //TODO: Add more Bricks if you need them
 
             sprites.Sprites.Add(sprite);
-            project.ObjectList = sprites;
+            project.SpriteList = sprites;
 
             CurrentProject = project;
         }

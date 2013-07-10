@@ -6,13 +6,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class SetXBrick : Brick
     {
         protected int _xPosition = 0;
-
-        public SetXBrick() {}
-
-        public SetXBrick(Sprite parent) : base(parent) {}
-
-        public SetXBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public int XPosition
         {
             get { return _xPosition; }
@@ -22,6 +15,13 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+
+        public SetXBrick() {}
+
+        public SetXBrick(Sprite parent) : base(parent) {}
+
+        public SetXBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

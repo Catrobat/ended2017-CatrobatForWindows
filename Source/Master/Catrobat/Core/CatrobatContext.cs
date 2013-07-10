@@ -8,6 +8,7 @@ using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Storage;
@@ -174,14 +175,14 @@ namespace Catrobat.Core
                 ApplicationBuildName = "",
                 ApplicationBuildNumber = 0,
                 ApplicationName = "Pocket Code",
-                ApplicationVersion = "0.0.0",
+                ApplicationVersion = "0.0.1",
                 CatrobatLanguageVersion = (float)0.8,
                 DateTimeUpload = "",
                 Description = "",
                 DeviceName = DeviceInformationHelper.DeviceName,
                 MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
-                Platform = "", //TODO: get phone version,
-                PlatformVersion = "8.0", //TODO: get phone version
+                Platform = PlatformInformationHelper.GetPlatformName(),
+                PlatformVersion = PlatformInformationHelper.GetPlatformVersion(),
                 ProgramLicense = "http://developer.catrobat.org/agpl_v3",
                 ProgramName = "",
                 RemixOf = "",
@@ -389,7 +390,7 @@ namespace Catrobat.Core
 
         public void CleanUpSpriteReferences(Sprite deletedSprite)
         {
-            foreach (Sprite sprite in _currentProject.ObjectList.Sprites)
+            foreach (Sprite sprite in _currentProject.SpriteList.Sprites)
             {
                 foreach (Script script in sprite.Scripts.Scripts)
                 {

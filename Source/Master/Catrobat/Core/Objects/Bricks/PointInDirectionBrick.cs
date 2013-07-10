@@ -7,13 +7,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class PointInDirectionBrick : Brick
     {
         protected double _degrees;
-
-        public PointInDirectionBrick() {}
-
-        public PointInDirectionBrick(Sprite parent) : base(parent) {}
-
-        public PointInDirectionBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public double Degrees
         {
             get { return _degrees; }
@@ -28,6 +21,13 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+
+        public PointInDirectionBrick() {}
+
+        public PointInDirectionBrick(Sprite parent) : base(parent) {}
+
+        public PointInDirectionBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

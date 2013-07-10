@@ -6,13 +6,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class BroadcastBrick : Brick
     {
         protected string _broadcastMessage;
-
-        public BroadcastBrick() {}
-
-        public BroadcastBrick(Sprite parent) : base(parent) {}
-
-        public BroadcastBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public string BroadcastMessage
         {
             get { return _broadcastMessage; }
@@ -27,6 +20,13 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+
+        public BroadcastBrick() {}
+
+        public BroadcastBrick(Sprite parent) : base(parent) {}
+
+        public BroadcastBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

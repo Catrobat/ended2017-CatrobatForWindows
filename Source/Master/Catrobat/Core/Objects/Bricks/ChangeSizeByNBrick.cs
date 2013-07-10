@@ -7,13 +7,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class ChangeSizeByNBrick : Brick
     {
         protected double _size = 20.0f;
-
-        public ChangeSizeByNBrick() {}
-
-        public ChangeSizeByNBrick(Sprite parent) : base(parent) {}
-
-        public ChangeSizeByNBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public double Size
         {
             get { return _size; }
@@ -23,6 +16,13 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+
+        public ChangeSizeByNBrick() {}
+
+        public ChangeSizeByNBrick(Sprite parent) : base(parent) {}
+
+        public ChangeSizeByNBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

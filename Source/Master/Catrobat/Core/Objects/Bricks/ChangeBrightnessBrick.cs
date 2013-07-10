@@ -7,13 +7,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class ChangeBrightnessBrick : Brick
     {
         protected double _changeBrightness = 25.0f;
-
-        public ChangeBrightnessBrick() {}
-
-        public ChangeBrightnessBrick(Sprite parent) : base(parent) {}
-
-        public ChangeBrightnessBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public double ChangeBrightness
         {
             get { return _changeBrightness; }
@@ -24,6 +17,13 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
+
+        public ChangeBrightnessBrick() { }
+
+        public ChangeBrightnessBrick(Sprite parent) : base(parent) { }
+
+        public ChangeBrightnessBrick(XElement xElement, Sprite parent) : base(xElement, parent) { }
+
         internal override void LoadFromXML(XElement xRoot)
         {
             _changeBrightness = double.Parse(xRoot.Element("changeBrightness").Value, CultureInfo.InvariantCulture);
@@ -31,7 +31,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("changeBrightnessBrick");
+            var xRoot = new XElement("changeBrightnessByNBrick");
 
             xRoot.Add(new XElement("changeBrightness")
             {

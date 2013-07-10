@@ -2,6 +2,7 @@
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 
 namespace Catrobat.Core.Misc.Helpers
@@ -80,7 +81,7 @@ namespace Catrobat.Core.Misc.Helpers
             else if (dataObject is Sprite)
             {
                 reference = "../../../../../../sprite";
-                foreach (Sprite pointedSprite in spriteContainingDataObject.Project.ObjectList.Sprites)
+                foreach (Sprite pointedSprite in spriteContainingDataObject.Project.SpriteList.Sprites)
                 {
                     pos++;
                     if (pointedSprite == dataObject)
@@ -226,7 +227,7 @@ namespace Catrobat.Core.Misc.Helpers
                 pos = Int32.Parse(xPath) - 1;
             }
 
-            return sprite.Project.ObjectList.Sprites[pos];
+            return sprite.Project.SpriteList.Sprites[pos];
         }
 
         private static LoopBeginBrick GetLoopBeginBrick(string xPath)

@@ -3,6 +3,7 @@ using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using GalaSoft.MvvmLight;
@@ -61,7 +62,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         {
             get
             {
-                return CurrentProject.ObjectList.Sprites;
+                return CurrentProject.SpriteList.Sprites;
             }
         }
 
@@ -880,7 +881,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             if (IsInDesignMode)
             {
                 _catrobatContext = new CatrobatContextDesign();
-                _selectedSprite = _catrobatContext.CurrentProject.ObjectList.Sprites[0];
+                _selectedSprite = _catrobatContext.CurrentProject.SpriteList.Sprites[0];
             }
             else
             {

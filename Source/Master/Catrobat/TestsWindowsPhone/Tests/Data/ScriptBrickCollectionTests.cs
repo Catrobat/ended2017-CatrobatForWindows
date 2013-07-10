@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using Catrobat.TestsWindowsPhone.SampleData;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
@@ -25,7 +26,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
       var project = SampleLoader.LoadSampleXML("simple");
 
       {
-        Sprite sprite = project.ObjectList.Sprites[0];
+        Sprite sprite = project.SpriteList.Sprites[0];
         ScriptBrickCollection collection = new ScriptBrickCollection();
         collection.Update(sprite);
         IEnumerator enumerator = collection.GetEnumerator();
@@ -37,7 +38,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
       }
 
       {
-        Sprite sprite = project.ObjectList.Sprites[1];
+        Sprite sprite = project.SpriteList.Sprites[1];
         ScriptBrickCollection collection = new ScriptBrickCollection();
         collection.Update(sprite);
         IEnumerator enumerator = collection.GetEnumerator();
@@ -67,7 +68,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
     {
       var project = SampleLoader.LoadSampleXML("simple");
 
-      Sprite sprite = project.ObjectList.Sprites[1];
+      Sprite sprite = project.SpriteList.Sprites[1];
       ScriptBrickCollection collection = new ScriptBrickCollection();
       collection.Update(sprite);
       IEnumerator enumerator = collection.GetEnumerator();
@@ -117,7 +118,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
     {
       var project = SampleLoader.LoadSampleXML("simple");
 
-      Sprite sprite = project.ObjectList.Sprites[1];
+      Sprite sprite = project.SpriteList.Sprites[1];
       ScriptBrickCollection collection = new ScriptBrickCollection();
       collection.Update(sprite);
       IEnumerator enumerator = collection.GetEnumerator();
@@ -160,7 +161,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
     {
       var project = SampleLoader.LoadSampleXML("simple");
 
-      Sprite sprite = project.ObjectList.Sprites[1];
+      Sprite sprite = project.SpriteList.Sprites[1];
       ScriptBrickCollection collection = new ScriptBrickCollection();
       collection.Update(sprite);
 
@@ -212,7 +213,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
     {
       var project = SampleLoader.LoadSampleXML("simple");
 
-      Sprite sprite = project.ObjectList.Sprites[1];
+      Sprite sprite = project.SpriteList.Sprites[1];
       ScriptBrickCollection collection = new ScriptBrickCollection();
       collection.Update(sprite);
       IEnumerator enumerator = collection.GetEnumerator();
@@ -232,7 +233,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
     {
       var project = SampleLoader.LoadSampleXML("simple");
 
-      Sprite sprite = project.ObjectList.Sprites[1];
+      Sprite sprite = project.SpriteList.Sprites[1];
       ScriptBrickCollection collection = new ScriptBrickCollection();
       collection.Update(sprite);
       IEnumerator enumerator = collection.GetEnumerator();
@@ -256,7 +257,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
     {
       var project = SampleLoader.LoadSampleXML("simple");
 
-      Sprite sprite = project.ObjectList.Sprites[1];
+      Sprite sprite = project.SpriteList.Sprites[1];
       ScriptBrickCollection collection = new ScriptBrickCollection();
       collection.Update(sprite);
 

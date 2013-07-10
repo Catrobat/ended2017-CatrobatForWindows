@@ -6,6 +6,7 @@ using System.IO;
 using System.Xml.Linq;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Storage;
 
 namespace Catrobat.Core.Objects
@@ -73,18 +74,18 @@ namespace Catrobat.Core.Objects
         private ProjectHeader _projectHeader;
         public ProjectHeader ProjectHeader { get; set; }
 
-        private SpriteList _objectList;
-        public SpriteList ObjectList
+        private SpriteList _spriteList;
+        public SpriteList SpriteList
         {
-            get { return _objectList; }
+            get { return _spriteList; }
             set
             {
-                if (_objectList == value)
+                if (_spriteList == value)
                 {
                     return;
                 }
 
-                _objectList = value;
+                _spriteList = value;
                 RaisePropertyChanged();
             }
         }
@@ -150,8 +151,8 @@ namespace Catrobat.Core.Objects
 
             var project = _document.Element("program");
             _projectHeader = new ProjectHeader(project.Element("header"));
-            _objectList = new SpriteList(this);
-            _objectList.LoadFromXML(project.Element("objectList"));
+            _spriteList = new SpriteList(this);
+            _spriteList.LoadFromXML(project.Element("objectList"));
             //_variables = new Variables(project.Element("variables"));
         }
 
@@ -163,7 +164,7 @@ namespace Catrobat.Core.Objects
 
             xProject.Add(_projectHeader.CreateXML());
 
-            xProject.Add(_objectList.CreateXML());
+            xProject.Add(_spriteList.CreateXML());
 
             //xProject.Add(_variables.CreateXML());
 
@@ -174,7 +175,7 @@ namespace Catrobat.Core.Objects
 
         private void LoadBroadcastMessages()
         {
-            foreach (Sprite sprite in _objectList.Sprites)
+            foreach (Sprite sprite in _spriteList.Sprites)
             {
                 foreach (Script script in sprite.Scripts.Scripts)
                 {
@@ -212,7 +213,7 @@ namespace Catrobat.Core.Objects
 
         private void PreloadImages()
         {
-            foreach (Sprite sprite in _objectList.Sprites)
+            foreach (Sprite sprite in _spriteList.Sprites)
             {
                 foreach (Costume costume in sprite.Costumes.Costumes)
                 {

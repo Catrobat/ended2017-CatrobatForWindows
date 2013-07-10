@@ -7,35 +7,8 @@ namespace Catrobat.Core.Objects.Costumes
     public class CostumeReference : DataObject
     {
         private readonly Sprite _sprite;
+
         private Costume _costume;
-        private string _reference;
-
-        public CostumeReference(Sprite parent)
-        {
-            _sprite = parent;
-        }
-
-        public CostumeReference(XElement xElement, Sprite parent)
-        {
-            _sprite = parent;
-            LoadFromXML(xElement);
-        }
-
-        public string Reference
-        {
-            get { return _reference; }
-            set
-            {
-                if (_reference == value)
-                {
-                    return;
-                }
-
-                _reference = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public Costume Costume
         {
             get { return _costume; }
@@ -51,6 +24,33 @@ namespace Catrobat.Core.Objects.Costumes
             }
         }
 
+        private string _reference;
+        public string Reference
+        {
+            get { return _reference; }
+            set
+            {
+                if (_reference == value)
+                {
+                    return;
+                }
+
+                _reference = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public CostumeReference(Sprite parent)
+        {
+            _sprite = parent;
+        }
+
+        public CostumeReference(XElement xElement, Sprite parent)
+        {
+            _sprite = parent;
+            LoadFromXML(xElement);
+        }
+
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
@@ -59,7 +59,7 @@ namespace Catrobat.Core.Objects.Costumes
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("costumeData");
+            var xRoot = new XElement("look");
 
             xRoot.Add(new XAttribute("reference", XPathHelper.GetReference(_costume, _sprite)));
 

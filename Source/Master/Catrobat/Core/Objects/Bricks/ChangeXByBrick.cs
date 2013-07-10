@@ -6,13 +6,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class ChangeXByBrick : Brick
     {
         protected int _xMovement = 100;
-
-        public ChangeXByBrick() {}
-
-        public ChangeXByBrick(Sprite parent) : base(parent) {}
-
-        public ChangeXByBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public int XMovement
         {
             get { return _xMovement; }
@@ -23,6 +16,13 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
+
+        public ChangeXByBrick() {}
+
+        public ChangeXByBrick(Sprite parent) : base(parent) {}
+
+        public ChangeXByBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+
         internal override void LoadFromXML(XElement xRoot)
         {
             _xMovement = int.Parse(xRoot.Element("xMovement").Value);
@@ -30,7 +30,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("changeXByBrick");
+            var xRoot = new XElement("changeXByNBrick");
 
             xRoot.Add(new XElement("xMovement")
             {

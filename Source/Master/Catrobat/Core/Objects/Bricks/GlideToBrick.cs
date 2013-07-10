@@ -5,33 +5,23 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class GlideToBrick : Brick
     {
-        protected int _durationInMilliSeconds;
-
-        protected int _xDestination;
-
-        protected int _yDestination;
-
-        public GlideToBrick() {}
-
-        public GlideToBrick(Sprite parent) : base(parent) {}
-
-        public GlideToBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
-        public int DurationInMilliSeconds
+        protected int _durationInSeconds;
+        public int DurationInSeconds
         {
-            get { return _durationInMilliSeconds; }
+            get { return _durationInSeconds; }
             set
             {
-                if (_durationInMilliSeconds == value)
+                if (_durationInSeconds == value)
                 {
                     return;
                 }
 
-                _durationInMilliSeconds = value;
+                _durationInSeconds = value;
                 RaisePropertyChanged();
             }
         }
 
+        protected int _xDestination;
         public int XDestination
         {
             get { return _xDestination; }
@@ -47,6 +37,7 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
+        protected int _yDestination;
         public int YDestination
         {
             get { return _yDestination; }
@@ -62,9 +53,16 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
+
+        public GlideToBrick() {}
+
+        public GlideToBrick(Sprite parent) : base(parent) {}
+
+        public GlideToBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+
         internal override void LoadFromXML(XElement xRoot)
         {
-            _durationInMilliSeconds = int.Parse(xRoot.Element("durationInMilliSeconds").Value);
+            _durationInSeconds = int.Parse(xRoot.Element("durationInSeconds").Value);
             _xDestination = int.Parse(xRoot.Element("xDestination").Value);
             _yDestination = int.Parse(xRoot.Element("yDestination").Value);
         }
@@ -73,9 +71,9 @@ namespace Catrobat.Core.Objects.Bricks
         {
             var xRoot = new XElement("glideToBrick");
 
-            xRoot.Add(new XElement("durationInMilliSeconds")
+            xRoot.Add(new XElement("durationInSeconds")
             {
-                Value = _durationInMilliSeconds.ToString()
+                Value = _durationInSeconds.ToString()
             });
 
             xRoot.Add(new XElement("xDestination")
@@ -96,7 +94,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new GlideToBrick(parent);
-            newBrick._durationInMilliSeconds = _durationInMilliSeconds;
+            newBrick._durationInSeconds = _durationInSeconds;
             newBrick._xDestination = _xDestination;
             newBrick._yDestination = _yDestination;
 

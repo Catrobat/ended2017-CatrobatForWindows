@@ -7,13 +7,6 @@ namespace Catrobat.Core.Objects.Bricks
     public abstract class LoopBeginBrick : Brick
     {
         protected LoopEndBrickRef _loopEndBrickReference;
-
-        public LoopBeginBrick() {}
-
-        public LoopBeginBrick(Sprite parent) : base(parent) {}
-
-        public LoopBeginBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public LoopEndBrickRef LoopEndBrickReference
         {
             get { return _loopEndBrickReference; }
@@ -28,6 +21,13 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+
+        protected LoopBeginBrick() {}
+
+        protected LoopBeginBrick(Sprite parent) : base(parent) {}
+
+        protected LoopBeginBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         public LoopEndBrick LoopEndBrick
         {

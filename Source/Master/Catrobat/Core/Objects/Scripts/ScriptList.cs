@@ -1,11 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using System.Xml.Linq;
 
-namespace Catrobat.Core.Objects
+namespace Catrobat.Core.Objects.Scripts
 {
     public class ScriptList : DataObject
     {
+        public ObservableCollection<Script> Scripts { get; set; }
         private readonly Sprite _parentSprite;
+
 
         public ScriptList(Sprite parent)
         {
@@ -18,8 +20,6 @@ namespace Catrobat.Core.Objects
             _parentSprite = parent;
             LoadFromXML(xElement);
         }
-
-        public ObservableCollection<Script> Scripts { get; set; }
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -36,8 +36,6 @@ namespace Catrobat.Core.Objects
                         break;
                     case "broadcastScript":
                         Scripts.Add(new BroadcastScript(element, _parentSprite));
-                        break;
-                    default:
                         break;
                 }
             }

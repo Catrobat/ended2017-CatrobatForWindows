@@ -6,22 +6,9 @@ namespace Catrobat.Core.Objects.Sounds
 {
     public class SoundList : DataObject
     {
-        private Sprite _sprite;
-
-        public SoundList(Sprite parent)
-        {
-            Sounds = new ObservableCollection<Sound>();
-            _sprite = parent;
-        }
-
-        public SoundList(XElement xElement, Sprite parent)
-        {
-            _sprite = parent;
-            LoadFromXML(xElement);
-        }
-
         public ObservableCollection<Sound> Sounds { get; set; }
 
+        private Sprite _sprite;
         public Sprite Sprite
         {
             get { return _sprite; }
@@ -35,6 +22,19 @@ namespace Catrobat.Core.Objects.Sounds
                 _sprite = value;
                 RaisePropertyChanged();
             }
+        }
+
+
+        public SoundList(Sprite parent)
+        {
+            Sounds = new ObservableCollection<Sound>();
+            _sprite = parent;
+        }
+
+        public SoundList(XElement xElement, Sprite parent)
+        {
+            _sprite = parent;
+            LoadFromXML(xElement);
         }
 
         internal override void LoadFromXML(XElement xRoot)

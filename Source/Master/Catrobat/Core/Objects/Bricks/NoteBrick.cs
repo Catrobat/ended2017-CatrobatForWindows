@@ -6,13 +6,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class NoteBrick : Brick
     {
         protected string _note;
-
-        public NoteBrick() {}
-
-        public NoteBrick(Sprite parent) : base(parent) {}
-
-        public NoteBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public string Note
         {
             get { return _note; }
@@ -27,6 +20,12 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+        public NoteBrick() {}
+
+        public NoteBrick(Sprite parent) : base(parent) {}
+
+        public NoteBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;

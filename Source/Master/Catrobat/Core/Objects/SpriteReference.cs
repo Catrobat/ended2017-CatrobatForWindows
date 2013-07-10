@@ -7,20 +7,8 @@ namespace Catrobat.Core.Objects
     public class SpriteReference : DataObject
     {
         private readonly Sprite _parentSprite;
+
         private string _reference;
-        private Sprite _sprite;
-
-        public SpriteReference(Sprite parent)
-        {
-            _parentSprite = parent;
-        }
-
-        public SpriteReference(XElement xElement, Sprite parent)
-        {
-            _parentSprite = parent;
-            LoadFromXML(xElement);
-        }
-
         public string Reference
         {
             get { return _reference; }
@@ -36,6 +24,7 @@ namespace Catrobat.Core.Objects
             }
         }
 
+        private Sprite _sprite;
         public Sprite Sprite
         {
             get { return _sprite; }
@@ -51,6 +40,17 @@ namespace Catrobat.Core.Objects
             }
         }
 
+        public SpriteReference(Sprite parent)
+        {
+            _parentSprite = parent;
+        }
+
+        public SpriteReference(XElement xElement, Sprite parent)
+        {
+            _parentSprite = parent;
+            LoadFromXML(xElement);
+        }
+
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
@@ -59,7 +59,7 @@ namespace Catrobat.Core.Objects
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("pointedSprite");
+            var xRoot = new XElement("object");
 
             xRoot.Add(new XAttribute("reference", XPathHelper.GetReference(_sprite, _parentSprite)));
 

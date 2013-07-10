@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using Catrobat.Core.Objects.Bricks;
 
-namespace Catrobat.Core.Objects
+namespace Catrobat.Core.Objects.Scripts
 {
     public class StartScript : Script
     {
@@ -25,9 +25,9 @@ namespace Catrobat.Core.Objects
         public override DataObject Copy(Sprite parent)
         {
             var newStartScript = new StartScript(parent);
-            if (bricks != null)
+            if (_bricks != null)
             {
-                newStartScript.bricks = bricks.Copy(parent) as BrickList;
+                newStartScript._bricks = _bricks.Copy(parent) as BrickList;
             }
 
             return newStartScript;

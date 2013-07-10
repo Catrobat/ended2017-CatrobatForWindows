@@ -7,13 +7,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class SetVolumeToBrick : Brick
     {
         protected double _volume = 100.0f;
-
-        public SetVolumeToBrick() {}
-
-        public SetVolumeToBrick(Sprite parent) : base(parent) {}
-
-        public SetVolumeToBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public double Volume
         {
             get { return _volume; }
@@ -23,6 +16,13 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+
+        public SetVolumeToBrick() {}
+
+        public SetVolumeToBrick(Sprite parent) : base(parent) {}
+
+        public SetVolumeToBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

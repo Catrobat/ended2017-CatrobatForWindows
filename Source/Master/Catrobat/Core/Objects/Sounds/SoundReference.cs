@@ -7,20 +7,8 @@ namespace Catrobat.Core.Objects.Sounds
     public class SoundReference : DataObject
     {
         private readonly Sprite _sprite;
+
         private string _reference;
-        private Sound _sound;
-
-        public SoundReference(Sprite parent)
-        {
-            _sprite = parent;
-        }
-
-        public SoundReference(XElement xElement, Sprite parent)
-        {
-            _sprite = parent;
-            LoadFromXML(xElement);
-        }
-
         public string Reference
         {
             get { return _reference; }
@@ -36,6 +24,7 @@ namespace Catrobat.Core.Objects.Sounds
             }
         }
 
+        private Sound _sound;
         public Sound Sound
         {
             get { return _sound; }
@@ -51,6 +40,17 @@ namespace Catrobat.Core.Objects.Sounds
             }
         }
 
+        public SoundReference(Sprite parent)
+        {
+            _sprite = parent;
+        }
+
+        public SoundReference(XElement xElement, Sprite parent)
+        {
+            _sprite = parent;
+            LoadFromXML(xElement);
+        }
+
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
@@ -59,7 +59,7 @@ namespace Catrobat.Core.Objects.Sounds
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("soundInfo");
+            var xRoot = new XElement("sound");
 
             xRoot.Add(new XAttribute("reference", XPathHelper.GetReference(Sound, _sprite)));
 

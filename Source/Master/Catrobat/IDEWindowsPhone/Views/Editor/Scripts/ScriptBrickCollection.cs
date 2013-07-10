@@ -6,6 +6,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
+using Catrobat.Core.Objects.Scripts;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {

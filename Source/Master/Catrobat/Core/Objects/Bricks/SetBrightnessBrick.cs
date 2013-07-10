@@ -7,13 +7,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class SetBrightnessBrick : Brick
     {
         protected double _brightness = 0.0f;
-
-        public SetBrightnessBrick() {}
-
-        public SetBrightnessBrick(Sprite parent) : base(parent) {}
-
-        public SetBrightnessBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public double Brightness
         {
             get { return _brightness; }
@@ -23,6 +16,13 @@ namespace Catrobat.Core.Objects.Bricks
                 RaisePropertyChanged();
             }
         }
+
+
+        public SetBrightnessBrick() {}
+
+        public SetBrightnessBrick(Sprite parent) : base(parent) {}
+
+        public SetBrightnessBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
