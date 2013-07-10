@@ -23,6 +23,8 @@ namespace Catrobat.TestsCommon.Tests.Data
         public void WriteReadTest1()
         {
             var bricks = ReflectionHelper.GetInstances<Brick>();
+
+            // TODO: finish this
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
 
@@ -7,11 +8,40 @@ namespace Catrobat.TestsCommon.Misc
 {
     internal class ReflectionHelper
     {
-        public static List<T> GetInstances<T>()
+        public static IList<T> GetInstances<T>()
         {
-            return (from t in Assembly.GetExecutingAssembly().GetTypes()
-                    where t.GetInterfaces().Contains(typeof(T)) && t.GetConstructor(Type.EmptyTypes) != null
-                    select (T)Activator.CreateInstance(t)).ToList();
+            var instances = new List<T>();
+            var assemblie = GetAssembly(typeof(T));
+
+            foreach (var type in assemblie.GetTypes())
+            {
+                if (!type.IsAbstract && type.IsSubclassOf(typeof(T)))
+                {
+                    try
+                    {
+                        instances.Add((T)Activator.CreateInstance(type));
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+            }
+
+            return instances;
+        }
+
+        private static Assembly GetAssembly(Type type)
+        {
+            if (type == null)
+                throw new ArgumentNullException("type");
+
+            Contract.EndContractBlock();
+
+            Module m = type.Module;
+            if (m == null)
+                return null;
+            else
+                return m.Assembly;
         }
     }
 }
