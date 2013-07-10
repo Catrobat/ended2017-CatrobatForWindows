@@ -50,6 +50,7 @@
     <Compile Include="Converter\PathHelper.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="IContextHolder.cs" />
+    <Compile Include="Misc\Helpers\PlatformInformationHelper.cs" />
     <Compile Include="Misc\Helpers\FormatHelper.cs" />
     <Compile Include="Misc\Helpers\ApplicationInformation.cs" />
     <Compile Include="Misc\Helpers\DeviceInformationHelper.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Misc\Helpers\ICulture.cs" />
     <Compile Include="Misc\Helpers\LanguageHelper.cs" />
     <Compile Include="Misc\Helpers\MD5.cs" />
+    <Compile Include="Misc\Helpers\IPlatformInformationHelper.cs" />
     <Compile Include="Misc\Helpers\ReadHelper.cs" />
     <Compile Include="Misc\Helpers\XPathHelper.cs" />
     <Compile Include="ICatrobatContext.cs" />
