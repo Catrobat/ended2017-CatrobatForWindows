@@ -1,6 +1,7 @@
 ﻿using System.Runtime;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,9 +32,9 @@ namespace Catrobat.TestsCommon.Tests.Data
             //Assert.AreEqual(320, project.ScreenHeight);
             //Assert.AreEqual(240, project.ScreenWidth);
 
-            Assert.AreEqual(2, project.ObjectList.Sprites.Count);
+            Assert.AreEqual(2, project.SpriteList.Sprites.Count);
             {
-                var sprite1 = project.ObjectList.Sprites[0];
+                var sprite1 = project.SpriteList.Sprites[0];
                 Assert.AreEqual(1, sprite1.Costumes.Costumes.Count);
                 Assert.AreEqual("Background", sprite1.Name);
 
@@ -54,7 +55,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             }
 
             {
-                var sprite2 = project.ObjectList.Sprites[1];
+                var sprite2 = project.SpriteList.Sprites[1];
                 var costumeList = sprite2.Costumes;
                 Assert.AreEqual(3, costumeList.Costumes.Count);
                 var costume1 = costumeList.Costumes[0];
@@ -125,11 +126,11 @@ namespace Catrobat.TestsCommon.Tests.Data
             //Assert.AreEqual(800, project.ScreenHeight);
             //Assert.AreEqual(480, project.ScreenWidth);
 
-            Assert.AreEqual(3, project.ObjectList.Sprites.Count);
+            Assert.AreEqual(3, project.SpriteList.Sprites.Count);
 
-            var sprite1 = project.ObjectList.Sprites[0];
-            var sprite2 = project.ObjectList.Sprites[1];
-            var sprite3 = project.ObjectList.Sprites[2];
+            var sprite1 = project.SpriteList.Sprites[0];
+            var sprite2 = project.SpriteList.Sprites[1];
+            var sprite3 = project.SpriteList.Sprites[2];
 
             {
                 Assert.AreEqual(1, sprite1.Costumes.Costumes.Count);
@@ -382,8 +383,8 @@ namespace Catrobat.TestsCommon.Tests.Data
 
                 var brick5 = startScript.Bricks.Bricks[4] as NxtPlayToneBrick;
                 Assert.IsNotNull(brick5);
-                Assert.AreEqual(1000, brick5.DurationInMs);
-                Assert.AreEqual(2800, brick5.Hertz);
+                Assert.AreEqual(1000, brick5.DurationInSeconds);
+                Assert.AreEqual(2800, brick5.Frequency);
 
                 Assert.AreEqual(0, sprite3.Sounds.Sounds.Count);
             }

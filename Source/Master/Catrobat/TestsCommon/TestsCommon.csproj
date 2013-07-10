@@ -70,7 +70,9 @@
     <Compile Include="Tests\Data\CopyTests.cs" />
     <Compile Include="Tests\Data\DataDeletingTests.cs" />
     <Compile Include="Tests\Data\DataReadingTests.cs" />
+    <Compile Include="Tests\Data\DataReflactionTests.cs" />
     <Compile Include="Tests\Data\DataWritingTests.cs" />
+    <Compile Include="Misc\ReflectionHelper.cs" />
     <Compile Include="Tests\Misc\FileNameGeneratorTest.cs" />
     <Compile Include="Tests\Data\ProjectTests.cs" />
     <Compile Include="Tests\Storage\StorageTests.cs" />
