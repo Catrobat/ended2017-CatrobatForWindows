@@ -49,9 +49,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public Project CurrentProject { get { return _catrobatContext.CurrentProject; } }
 
-        public ProjectHeader CurrentProjectHeader { get { return _catrobatContext.CurrentProject.Header; } }
+        public ProjectDummyHeader CurrentProjectHeader { get { return _catrobatContext.CurrentProject.ProjectDummyHeader; } }
 
-        public ProjectHeader PinProjectHeader { get; set; }
+        public ProjectDummyHeader PinProjectHeader { get; set; }
 
         public ImageSource CurrentProjectScreenshot
         {
@@ -61,7 +61,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             }
         }
 
-        public ObservableCollection<ProjectHeader> LocalProjects { get { return _catrobatContext.LocalProjects; } }
+        public ObservableCollection<ProjectDummyHeader> LocalProjects { get { return _catrobatContext.LocalProjects; } }
 
         public OnlineProjectHeader SelectedOnlineProject { get; set; }
 
@@ -228,7 +228,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             Messenger.Default.Send(message);
         }
 
-        private void PinLocalProjectAction(ProjectHeader project)
+        private void PinLocalProjectAction(ProjectDummyHeader project)
         {
             PinProjectHeader = project;
             Navigation.NavigateTo(typeof(TileGeneratorView));
@@ -285,7 +285,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void PlayCurrentProjectAction()
         {
-            PlayerLauncher.LaunchPlayer(CurrentProject.ProjectName);
+            PlayerLauncher.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
         }
 
         private void UploadCurrentProjectAction()
@@ -307,7 +307,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             // Commands
             DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
             CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
-            PinLocalProjectCommand = new RelayCommand<ProjectHeader>(PinLocalProjectAction);
+            PinLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(PinLocalProjectAction);
             LazyLoadOnlineProjectsCommand = new RelayCommand(LazyLoadOnlineProjectsAction);
             SetCurrentProjectCommand = new RelayCommand<string>(SetCurrentProjectAction);
             OnlineProjectTapCommand = new RelayCommand<OnlineProjectHeader>(OnlineProjectTapAction);

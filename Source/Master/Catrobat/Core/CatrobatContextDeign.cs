@@ -19,21 +19,34 @@ namespace Catrobat.Core
 
         public Project CurrentProject { get; set; }
 
-        public ObservableCollection<ProjectHeader> LocalProjects { get; private set; }
+        public ObservableCollection<ProjectDummyHeader> LocalProjects { get; private set; }
 
         private void InitCurrentProject()
         {
-            var project = new Project
-            {
-                ApplicationVersionCode = 1,
-                ApplicationVersionName = "Version 1",
-                DeviceName = "Device1",
-                ProjectName = "Project1",
-                ScreenHeight = 800,
-                ScreenWidth = 480,
-                PlatformVersion = "7.1.1", //TODO: Real version
-                Platform = "Windows Phone 7.5" //TODO
-            };
+            var project = new Project();
+
+            project.ProjectHeader = new ProjectHeader
+                {
+                    ApplicationBuildName = "",
+                    ApplicationBuildNumber = 0,
+                    ApplicationName = "Pocket Code",
+                    ApplicationVersion = "0.8.2",
+                    CatrobatLanguageVersion = (float)0.8,
+                    DateTimeUpload = "",
+                    Description = "Dies ist eine Test Anwendung.",
+                    DeviceName = "Device 1",
+                    MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
+                    Platform = "Windows Phone",
+                    PlatformVersion = "8.0",
+                    ProgramLicense = "http://developer.catrobat.org/agpl_v3",
+                    ProgramName = "Program Name",
+                    RemixOf = "",
+                    ScreenHeight = 1280,
+                    ScreenWidth = 720,
+                    Tags = "",
+                    Url = "http://pocketcode.org/details/871",
+                    UserHandle = "Username"
+                };
 
             // TODO: implement other design data here
 
@@ -62,27 +75,27 @@ namespace Catrobat.Core
 
             //TODO: Add more Bricks if you need them
 
-
             sprites.Sprites.Add(sprite);
+            project.ObjectList = sprites;
 
             CurrentProject = project;
         }
 
         private void InitLocalProjects()
         {
-            LocalProjects = new ObservableCollection<ProjectHeader>();
+            LocalProjects = new ObservableCollection<ProjectDummyHeader>();
 
-            var project1 = new ProjectHeader
+            var project1 = new ProjectDummyHeader
             {
                 ProjectName = "Local Project 1"
             };
 
-            var project2 = new ProjectHeader
+            var project2 = new ProjectDummyHeader
             {
                 ProjectName = "Local Project 2"
             };
 
-            var project3 = new ProjectHeader
+            var project3 = new ProjectDummyHeader
             {
                 ProjectName = "Local Project 3"
             };

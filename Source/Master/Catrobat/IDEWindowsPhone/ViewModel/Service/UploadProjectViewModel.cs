@@ -76,7 +76,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void UploadAction()
         {
-            _catrobatContext.CurrentProject.ProjectName = _projectName;
+            _catrobatContext.CurrentProject.ProjectHeader.ProgramName = _projectName;
 
             ServerCommunication.UploadProject(_projectName, _projectDescription,
                                               CatrobatContext.GetContext().CurrentUserEmail,
@@ -122,7 +122,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                 _catrobatContext = CatrobatContext.GetContext();
             }
 
-            _projectName = _catrobatContext.CurrentProject.ProjectName;
+            _projectName = _catrobatContext.CurrentProject.ProjectHeader.ProgramName;
         }
 
 

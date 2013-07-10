@@ -24,7 +24,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _motor = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Motor"));
+                RaisePropertyChanged();
             }
         }
 

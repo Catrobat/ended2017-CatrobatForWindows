@@ -20,7 +20,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 _volume = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Volume"));
+                RaisePropertyChanged();
             }
         }
 

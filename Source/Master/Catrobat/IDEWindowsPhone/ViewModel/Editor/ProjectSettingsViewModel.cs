@@ -71,7 +71,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void SaveAction()
         {
-            ReceivedProject.ProjectName = ProjectName;
+            ReceivedProject.ProjectHeader.ProgramName = ProjectName;
             Navigation.NavigateBack();
         }
 
@@ -83,7 +83,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         private void ChangeProjectNameMessageAction(GenericMessage<Project> message)
         {
             ReceivedProject = message.Content;
-            ProjectName = ReceivedProject.ProjectName;
+            ProjectName = ReceivedProject.ProjectHeader.ProgramName;
         }
 
         private void ResetViewModelAction()

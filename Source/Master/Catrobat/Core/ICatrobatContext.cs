@@ -7,6 +7,6 @@ namespace Catrobat.Core
     {
         Project CurrentProject { get; set; }
 
-        ObservableCollection<ProjectHeader> LocalProjects { get; }
+        ObservableCollection<ProjectDummyHeader> LocalProjects { get; }
     }
 }

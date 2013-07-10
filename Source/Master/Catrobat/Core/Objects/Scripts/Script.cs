@@ -40,7 +40,7 @@ namespace Catrobat.Core.Objects
                 }
 
                 bricks = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Bricks"));
+                RaisePropertyChanged();
             }
         }
 
@@ -57,7 +57,7 @@ namespace Catrobat.Core.Objects
                 sprite = value;
                 bricks.Sprite = value;
 
-                OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
+                RaisePropertyChanged();
             }
         }
 

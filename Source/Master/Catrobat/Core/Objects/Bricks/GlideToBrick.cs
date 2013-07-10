@@ -28,7 +28,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _durationInMilliSeconds = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("DurationInMilliSeconds"));
+                RaisePropertyChanged();
             }
         }
 
@@ -43,7 +43,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _xDestination = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("XDestination"));
+                RaisePropertyChanged();
             }
         }
 
@@ -58,7 +58,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _yDestination = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("YDestination"));
+                RaisePropertyChanged();
             }
         }
 

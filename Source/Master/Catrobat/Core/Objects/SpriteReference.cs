@@ -32,7 +32,7 @@ namespace Catrobat.Core.Objects
                 }
 
                 _reference = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Reference"));
+                RaisePropertyChanged();
             }
         }
 
@@ -47,7 +47,7 @@ namespace Catrobat.Core.Objects
                 }
 
                 _sprite = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
+                RaisePropertyChanged();
             }
         }
 

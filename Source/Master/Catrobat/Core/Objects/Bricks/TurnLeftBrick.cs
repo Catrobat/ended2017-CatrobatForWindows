@@ -20,7 +20,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 _degrees = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Degrees"));
+                RaisePropertyChanged();
             }
         }
 

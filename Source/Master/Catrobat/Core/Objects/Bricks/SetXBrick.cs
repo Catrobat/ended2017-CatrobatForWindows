@@ -19,7 +19,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 _xPosition = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("XPosition"));
+                RaisePropertyChanged();
             }
         }
 

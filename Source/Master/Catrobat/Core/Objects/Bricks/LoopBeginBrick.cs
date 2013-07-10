@@ -25,7 +25,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _loopEndBrickReference = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("LoopEndBrickReference"));
+                RaisePropertyChanged();
             }
         }
 
@@ -46,7 +46,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _loopEndBrickReference.LoopEndBrick = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("LoopEndBrick"));
+                RaisePropertyChanged();
             }
         }
 

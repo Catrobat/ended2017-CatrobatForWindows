@@ -45,7 +45,7 @@ namespace Catrobat.Core.Objects
                 }
 
                 _action = stringValue;
-                OnPropertyChanged(new PropertyChangedEventArgs("Action"));
+                RaisePropertyChanged();
             }
         }
 

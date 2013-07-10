@@ -38,7 +38,7 @@ namespace Catrobat.Core.Objects.Costumes
                 }
 
                 _name = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Name"));
+                RaisePropertyChanged();
             }
         }
 
@@ -53,7 +53,7 @@ namespace Catrobat.Core.Objects.Costumes
                 }
 
                 _fileName = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("FileName"));
+                RaisePropertyChanged();
             }
         }
 
@@ -101,7 +101,7 @@ namespace Catrobat.Core.Objects.Costumes
                 }
 
                 _sprite = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
+                RaisePropertyChanged();
             }
         }
 

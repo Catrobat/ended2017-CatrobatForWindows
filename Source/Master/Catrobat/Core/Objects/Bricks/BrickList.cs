@@ -34,7 +34,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _sprite = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
+                RaisePropertyChanged();
             }
         }
 

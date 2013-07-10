@@ -41,7 +41,7 @@ namespace Catrobat.Core.Objects
                 }
 
                 _name = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Name"));
+                RaisePropertyChanged();
             }
         }
 
@@ -56,7 +56,7 @@ namespace Catrobat.Core.Objects
                 }
 
                 _scripts = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sprites"));
+                RaisePropertyChanged();
             }
         }
 
@@ -71,7 +71,7 @@ namespace Catrobat.Core.Objects
                 }
 
                 _costumes = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Costumes"));
+                RaisePropertyChanged();
             }
         }
 
@@ -86,7 +86,7 @@ namespace Catrobat.Core.Objects
                 }
 
                 _sounds = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sounds"));
+                RaisePropertyChanged();
             }
         }
 

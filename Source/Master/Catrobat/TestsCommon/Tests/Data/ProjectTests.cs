@@ -46,7 +46,7 @@ namespace Catrobat.TestsCommon.Tests.Data
       SampleLoader.LoadSampleProject("test.catroid", "DefaultProject1");
       var catrobatContext = SampleLoader.LoadSampleProject("test.catroid", "DefaultProject2");
 
-      Assert.AreEqual(catrobatContext.CurrentProject.ProjectName, "DefaultProject2");
+      Assert.AreEqual(catrobatContext.CurrentProject.ProjectHeader.ProgramName, "DefaultProject2");
 
       using (IStorage storage = StorageSystem.GetStorage())
       {
@@ -72,7 +72,7 @@ namespace Catrobat.TestsCommon.Tests.Data
       SampleLoader.LoadSampleProject("test.catroid", "DefaultProject1");
       var catrobatContext = SampleLoader.LoadSampleProject("test.catroid", "DefaultProject2");
 
-      Assert.AreEqual(catrobatContext.CurrentProject.ProjectName, "DefaultProject2");
+      Assert.AreEqual(catrobatContext.CurrentProject.ProjectHeader.ProgramName, "DefaultProject2");
 
       using (IStorage storage = StorageSystem.GetStorage())
       {
@@ -88,7 +88,7 @@ namespace Catrobat.TestsCommon.Tests.Data
         Assert.IsFalse(storage.DirectoryExists(CatrobatContext.ProjectsPath + "/" + "DefaultProject2"));
       }
 
-      Assert.IsTrue(catrobatContext.CurrentProject.ProjectName == CatrobatContext.DefaultProjectName);
+      Assert.IsTrue(catrobatContext.CurrentProject.ProjectHeader.ProgramName == CatrobatContext.DefaultProjectName);
     }
 
     [TestMethod]
@@ -104,7 +104,7 @@ namespace Catrobat.TestsCommon.Tests.Data
 
       catrobatContext.SetCurrentProject(oldProjectName);
 
-      Assert.AreEqual(catrobatContext.CurrentProject.ProjectName, oldProjectName);
+      Assert.AreEqual(catrobatContext.CurrentProject.ProjectHeader.ProgramName, oldProjectName);
     }
 
     [TestMethod]
@@ -114,7 +114,7 @@ namespace Catrobat.TestsCommon.Tests.Data
 
       var catrobatContext = SampleLoader.LoadSampleProject("test.catroid", "test");
 
-      catrobatContext.CurrentProject.ProjectName = "RenamedProject";
+      catrobatContext.CurrentProject.ProjectHeader.ProgramName = "RenamedProject";
 
       using (IStorage storage = StorageSystem.GetStorage())
       {
@@ -143,7 +143,7 @@ namespace Catrobat.TestsCommon.Tests.Data
 
       bool found1 = false;
       bool found2 = false;
-      foreach (ProjectHeader header in loaclProjects)
+      foreach (ProjectDummyHeader header in loaclProjects)
       {
         if (header.ProjectName == newProjectName1)
           found1 = true;
@@ -173,11 +173,11 @@ namespace Catrobat.TestsCommon.Tests.Data
 
       catrobatContext.CopyProject(newProjectName1);
       catrobatContext.SetCurrentProject(copyToTest1);
-      Assert.IsTrue(catrobatContext.CurrentProject.ProjectName == copyToTest1);
+      Assert.IsTrue(catrobatContext.CurrentProject.ProjectHeader.ProgramName == copyToTest1);
 
       catrobatContext.CopyProject(newProjectName1);
       catrobatContext.SetCurrentProject(copyToTest2);
-      Assert.IsTrue(catrobatContext.CurrentProject.ProjectName == copyToTest2);
+      Assert.IsTrue(catrobatContext.CurrentProject.ProjectHeader.ProgramName == copyToTest2);
     }
   }
 }

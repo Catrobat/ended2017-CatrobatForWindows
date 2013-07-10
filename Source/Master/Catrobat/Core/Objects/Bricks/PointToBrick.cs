@@ -27,7 +27,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _pointedSpriteReference = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("PointedSpriteReference"));
+                RaisePropertyChanged();
             }
         }
 
@@ -62,7 +62,7 @@ namespace Catrobat.Core.Objects.Bricks
                     _pointedSpriteReference = null;
                 }
 
-                OnPropertyChanged(new PropertyChangedEventArgs("PointedSprite"));
+                RaisePropertyChanged();
             }
         }
 

@@ -20,7 +20,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _costumeReference = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("CostumeReference"));
+                RaisePropertyChanged();
             }
         }
 
@@ -55,7 +55,7 @@ namespace Catrobat.Core.Objects.Bricks
                     _costumeReference = null;
                 }
 
-                OnPropertyChanged(new PropertyChangedEventArgs("Costume"));
+                RaisePropertyChanged();
             }
         }
 

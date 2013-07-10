@@ -17,197 +17,10 @@ namespace Catrobat.Core.Objects
         public const string ImagesPath = "images";
         public const string SoundsPath = "sounds";
 
-        private int _applicationVersionCode;
-
-        private string _applicationVersionName;
-
-        private double _applicationXmlVersion;
         private ObservableCollection<string> _broadcastMessages;
 
-        private string _deviceName;
 
-        private string _platform;
-
-        private string _platformVersion;
-
-        private string _projectName;
         private object _projectScreenshot;
-
-        private int _screenHeight;
-
-        private int _screenWidth;
-
-        private SpriteList _spriteList;
-
-        public Project()
-        {
-            _broadcastMessages = new ObservableCollection<string>();
-        }
-
-        public Project(String xmlSource)
-            : base(xmlSource)
-        {
-            _broadcastMessages = new ObservableCollection<string>();
-            LoadBroadcastMessages();
-            PreloadImages();
-        }
-
-        public int ApplicationVersionCode
-        {
-            get { return _applicationVersionCode; }
-            set
-            {
-                if (_applicationVersionCode == value)
-                {
-                    return;
-                }
-
-                _applicationVersionCode = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("ApplicationVersionCode"));
-            }
-        }
-
-        public string ApplicationVersionName
-        {
-            get { return _applicationVersionName; }
-            set
-            {
-                if (_applicationVersionName == value)
-                {
-                    return;
-                }
-
-                _applicationVersionName = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("ApplicationVersionName"));
-            }
-        }
-
-        public double ApplicationXmlVersion
-        {
-            get { return _applicationXmlVersion; }
-            set
-            {
-                if (Math.Abs(_applicationXmlVersion - value) < 0.0001)
-                {
-                    return;
-                }
-
-                _applicationXmlVersion = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("ApplicationXMLVersion"));
-            }
-        }
-
-        public string DeviceName
-        {
-            get { return _deviceName; }
-            set
-            {
-                if (_deviceName == value)
-                {
-                    return;
-                }
-
-                _deviceName = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("DeviceName"));
-            }
-        }
-
-        public string Platform
-        {
-            get { return _platform; }
-            set
-            {
-                if (_platform == value)
-                {
-                    return;
-                }
-
-                _platform = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Platform"));
-            }
-        }
-
-        public string PlatformVersion
-        {
-            get { return _platformVersion; }
-            set
-            {
-                if (_platformVersion == value)
-                {
-                    return;
-                }
-
-                _platformVersion = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("PlatformVersion"));
-            }
-        }
-
-        public string ProjectName
-        {
-            get { return _projectName; }
-            set
-            {
-                if (_projectName == value)
-                {
-                    return;
-                }
-
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    storage.RenameDirectory(BasePath, value);
-                }
-
-                _projectName = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("ProjectName"));
-            }
-        }
-
-        public int ScreenHeight
-        {
-            get { return _screenHeight; }
-            set
-            {
-                if (_screenHeight == value)
-                {
-                    return;
-                }
-
-                _screenHeight = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("ScreenHeight"));
-            }
-        }
-
-        public int ScreenWidth
-        {
-            get { return _screenWidth; }
-            set
-            {
-                if (_screenWidth == value)
-                {
-                    return;
-                }
-
-                _screenWidth = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("ScreenWidth"));
-            }
-        }
-
-        public SpriteList SpriteList
-        {
-            get { return _spriteList; }
-            set
-            {
-                if (_spriteList == value)
-                {
-                    return;
-                }
-
-                _spriteList = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("SpriteList"));
-            }
-        }
-
-
         public object ProjectScreenshot
         {
             get
@@ -221,9 +34,9 @@ namespace Catrobat.Core.Objects
                     }
                 }
 
-                if (Header != null)
+                if (ProjectDummyHeader != null)
                 {
-                    Header.Screenshot = _projectScreenshot;
+                    ProjectDummyHeader.Screenshot = _projectScreenshot;
                 }
 
                 return _projectScreenshot;
@@ -241,7 +54,7 @@ namespace Catrobat.Core.Objects
                     storage.SaveImage(ScreenshotPath, value);
                 }
 
-                OnPropertyChanged(new PropertyChangedEventArgs("ProjectScreenshot"));
+                RaisePropertyChanged();
             }
         }
 
@@ -257,15 +70,33 @@ namespace Catrobat.Core.Objects
             }
         }
 
-        private ProjectHeader _header;
+        private ProjectHeader _projectHeader;
+        public ProjectHeader ProjectHeader { get; set; }
 
-        public ProjectHeader Header
+        private SpriteList _objectList;
+        public SpriteList ObjectList
+        {
+            get { return _objectList; }
+            set
+            {
+                if (_objectList == value)
+                {
+                    return;
+                }
+
+                _objectList = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private ProjectDummyHeader _projectDummyHeader;
+        public ProjectDummyHeader ProjectDummyHeader
         {
             get
             {
-                if (_header != null)
+                if (_projectDummyHeader != null)
                 {
-                    return _header;
+                    return _projectDummyHeader;
                 }
                 else
                 {
@@ -276,24 +107,38 @@ namespace Catrobat.Core.Objects
                         image = storage.LoadImageThumbnail(BasePath + "/" + ScreenshotPath);
                     }
 
-                    _header = new ProjectHeader {ProjectName = ProjectName, Screenshot = image};
+                    _projectDummyHeader = new ProjectDummyHeader { ProjectName = ProjectHeader.ProgramName, Screenshot = image };
                 }
 
-                return _header;
+                return _projectDummyHeader;
             }
 
-            set { _header = value; }
+            set { _projectDummyHeader = value; }
         }
 
         public string BasePath
         {
-            get { return "Projects/" + _projectName; }
+            get { return "Projects/" + ProjectHeader.ProgramName; }
         }
 
-        public void SetProjectName(string newProjectName)
+
+        public Project()
         {
-            _projectName = newProjectName;
-            OnPropertyChanged(new PropertyChangedEventArgs("ProjectName"));
+            _broadcastMessages = new ObservableCollection<string>();
+        }
+
+        public Project(String xmlSource)
+            : base(xmlSource)
+        {
+            _broadcastMessages = new ObservableCollection<string>();
+            LoadBroadcastMessages();
+            PreloadImages();
+        }
+
+
+        public void SetSetProgramName(string newProgramName)
+        {
+            ProjectHeader.SetProgramName(newProgramName);
         }
 
         protected override void LoadFromXML(String xml)
@@ -301,30 +146,35 @@ namespace Catrobat.Core.Objects
             _document = XDocument.Load(new StringReader(xml));
             _document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
-            Converter.Converter.Convert(_document);
+            //Converter.Converter.Convert(_document);
 
-            var project = _document.Element("project");
-            _applicationVersionCode = int.Parse(project.Element("applicationVersionCode").Value);
-            _applicationVersionName = project.Element("applicationVersionName").Value;
-            if (project.Element("applicationXmlVersion") != null)
-            {
-                _applicationXmlVersion = double.Parse(project.Element("applicationXmlVersion").Value,
-                                                      CultureInfo.InvariantCulture);
-            }
-            _deviceName = project.Element("deviceName").Value;
-            _platform = project.Element("platform").Value;
-            _platformVersion = project.Element("platformVersion").Value;
-            _projectName = project.Element("projectName").Value;
-            _screenHeight = int.Parse(project.Element("screenHeight").Value);
-            _screenWidth = int.Parse(project.Element("screenWidth").Value);
+            var project = _document.Element("program");
+            _projectHeader = new ProjectHeader(project.Element("header"));
+            _objectList = new SpriteList(this);
+            _objectList.LoadFromXML(project.Element("objectList"));
+            //_variables = new Variables(project.Element("variables"));
+        }
 
-            _spriteList = new SpriteList(this);
-            _spriteList.LoadFromXML(project.Element("spriteList"));
+        internal override XDocument CreateXML()
+        {
+            _document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
+
+            var xProject = new XElement("project");
+
+            xProject.Add(_projectHeader.CreateXML());
+
+            xProject.Add(_objectList.CreateXML());
+
+            //xProject.Add(_variables.CreateXML());
+
+            _document.Add(xProject);
+
+            return _document;
         }
 
         private void LoadBroadcastMessages()
         {
-            foreach (Sprite sprite in _spriteList.Sprites)
+            foreach (Sprite sprite in _objectList.Sprites)
             {
                 foreach (Script script in sprite.Scripts.Scripts)
                 {
@@ -362,7 +212,7 @@ namespace Catrobat.Core.Objects
 
         private void PreloadImages()
         {
-            foreach (Sprite sprite in _spriteList.Sprites)
+            foreach (Sprite sprite in _objectList.Sprites)
             {
                 foreach (Costume costume in sprite.Costumes.Costumes)
                 {
@@ -371,63 +221,7 @@ namespace Catrobat.Core.Objects
             }
         }
 
-        internal override XDocument CreateXML()
-        {
-            _document = new XDocument {Declaration = new XDeclaration("1.0", "UTF-8", "yes")};
 
-            var xProject = new XElement("project");
-
-            xProject.Add(new XElement("applicationVersionCode")
-            {
-                Value = _applicationVersionCode.ToString()
-            });
-
-            xProject.Add(new XElement("applicationVersionName")
-            {
-                Value = _applicationVersionName
-            });
-
-            xProject.Add(new XElement("applicationXmlVersion")
-            {
-                Value = _applicationXmlVersion.ToString()
-            });
-
-            xProject.Add(new XElement("deviceName")
-            {
-                Value = _deviceName
-            });
-
-            xProject.Add(new XElement("platform")
-            {
-                Value = _platform
-            });
-
-            xProject.Add(new XElement("platformVersion")
-            {
-                Value = _platformVersion
-            });
-
-            xProject.Add(new XElement("projectName")
-            {
-                Value = _projectName
-            });
-
-            xProject.Add(new XElement("screenHeight")
-            {
-                Value = _screenHeight.ToString()
-            });
-
-            xProject.Add(new XElement("screenWidth")
-            {
-                Value = _screenWidth.ToString()
-            });
-
-            xProject.Add(_spriteList.CreateXML());
-
-            _document.Add(xProject);
-
-            return _document;
-        }
 
         public void Save(string path = null)
         {

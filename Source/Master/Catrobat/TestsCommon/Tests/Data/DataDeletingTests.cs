@@ -24,8 +24,8 @@ namespace Catrobat.TestsCommon.Tests.Data
 
       var project = catrobatContext.CurrentProject;
 
-      var sprite1 = project.SpriteList.Sprites[0];
-      var sprite2 = project.SpriteList.Sprites[1];
+      var sprite1 = project.ObjectList.Sprites[0];
+      var sprite2 = project.ObjectList.Sprites[1];
 
       var costume = sprite1.Costumes.Costumes[0];
       var soundInfo = sprite2.Sounds.Sounds[0];

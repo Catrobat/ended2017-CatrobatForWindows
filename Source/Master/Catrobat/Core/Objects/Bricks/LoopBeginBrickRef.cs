@@ -35,7 +35,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _classField = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Class"));
+                RaisePropertyChanged();
             }
         }
 
@@ -50,7 +50,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _reference = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Reference"));
+                RaisePropertyChanged();
             }
         }
 
@@ -65,7 +65,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _loopBeginBrick = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("LoopBeginBrick"));
+                RaisePropertyChanged();
             }
         }
 

@@ -20,7 +20,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 _transparency = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Transparency"));
+                RaisePropertyChanged();
             }
         }
 

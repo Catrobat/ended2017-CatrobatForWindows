@@ -25,9 +25,9 @@ namespace Catrobat.TestsCommon.Tests.Data
 
       var project = catrobatContext.CurrentProject;
 
-      var sprite1 = project.SpriteList.Sprites[0];
-      var sprite2 = project.SpriteList.Sprites[1];
-      var sprite3 = project.SpriteList.Sprites[2];
+      var sprite1 = project.ObjectList.Sprites[0];
+      var sprite2 = project.ObjectList.Sprites[1];
+      var sprite3 = project.ObjectList.Sprites[2];
 
       var newSprite1 = sprite1.Copy() as Sprite;
       var newSprite2 = sprite2.Copy() as Sprite;

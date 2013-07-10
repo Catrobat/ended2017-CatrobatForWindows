@@ -21,7 +21,7 @@ namespace Catrobat.TestsCommon.Tests.Data
         {
             var project = SampleLoader.LoadSampleXML("ultimateTest");
 
-            var sprite1 = project.SpriteList.Sprites[0] as Sprite;
+            var sprite1 = project.ObjectList.Sprites[0] as Sprite;
 
             var setCostumeBrick1 = sprite1.Scripts.Scripts[0].Bricks.Bricks[12] as SetCostumeBrick;
             Assert.AreEqual(XPathHelper.GetElement(setCostumeBrick1.CostumeReference.Reference, sprite1), sprite1.Costumes.Costumes[0]);
@@ -32,7 +32,7 @@ namespace Catrobat.TestsCommon.Tests.Data
         {
             var project = SampleLoader.LoadSampleXML("ultimateTest");
 
-            var sprite2 = project.SpriteList.Sprites[1] as Sprite;
+            var sprite2 = project.ObjectList.Sprites[1] as Sprite;
 
             var playSoundBrick1 = sprite2.Scripts.Scripts[0].Bricks.Bricks[0] as PlaySoundBrick;
             Assert.AreEqual(XPathHelper.GetElement(playSoundBrick1.SoundReference.Reference, sprite2), sprite2.Sounds.Sounds[0]);
@@ -49,9 +49,9 @@ namespace Catrobat.TestsCommon.Tests.Data
         {
             var project = SampleLoader.LoadSampleXML("ultimateTest");
 
-            var sprite1 = project.SpriteList.Sprites[0] as Sprite;
-            var sprite2 = project.SpriteList.Sprites[1] as Sprite;
-            var sprite3 = project.SpriteList.Sprites[2] as Sprite;
+            var sprite1 = project.ObjectList.Sprites[0] as Sprite;
+            var sprite2 = project.ObjectList.Sprites[1] as Sprite;
+            var sprite3 = project.ObjectList.Sprites[2] as Sprite;
 
             var pointToBrick1 = sprite1.Scripts.Scripts[0].Bricks.Bricks[10] as PointToBrick;
             Assert.AreEqual(XPathHelper.GetElement(pointToBrick1.PointedSpriteReference.Reference, sprite1), sprite2);
@@ -68,7 +68,7 @@ namespace Catrobat.TestsCommon.Tests.Data
         {
             var project = SampleLoader.LoadSampleXML("ultimateTest");
 
-            var sprite2 = project.SpriteList.Sprites[1] as Sprite;
+            var sprite2 = project.ObjectList.Sprites[1] as Sprite;
             ReadHelper.CurrentBrickList = sprite2.Scripts.Scripts[2].Bricks;
 
             var foreverBrick = sprite2.Scripts.Scripts[2].Bricks.Bricks[0] as ForeverBrick;
@@ -83,7 +83,7 @@ namespace Catrobat.TestsCommon.Tests.Data
         {
             var project = SampleLoader.LoadSampleXML("ultimateTest");
 
-            var sprite2 = project.SpriteList.Sprites[1] as Sprite;
+            var sprite2 = project.ObjectList.Sprites[1] as Sprite;
             ReadHelper.CurrentBrickList = sprite2.Scripts.Scripts[2].Bricks;
 
             var loopEndBrick1 = sprite2.Scripts.Scripts[2].Bricks.Bricks[3] as LoopEndBrick;
@@ -98,9 +98,9 @@ namespace Catrobat.TestsCommon.Tests.Data
         {
             var project = SampleLoader.LoadSampleXML("ultimateTest");
 
-            var sprite1 = project.SpriteList.Sprites[0] as Sprite;
-            var sprite2 = project.SpriteList.Sprites[1] as Sprite;
-            var sprite3 = project.SpriteList.Sprites[2] as Sprite;
+            var sprite1 = project.ObjectList.Sprites[0] as Sprite;
+            var sprite2 = project.ObjectList.Sprites[1] as Sprite;
+            var sprite3 = project.ObjectList.Sprites[2] as Sprite;
 
             var costume = (sprite1.Scripts.Scripts[0].Bricks.Bricks[12] as SetCostumeBrick).Costume;
             Assert.AreEqual(XPathHelper.GetReference(costume, sprite1), "../../../../../costumeDataList/costumeData");

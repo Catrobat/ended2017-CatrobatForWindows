@@ -37,7 +37,7 @@ namespace Catrobat.Core.Objects.Sounds
                 }
 
                 _name = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Name"));
+                RaisePropertyChanged();
             }
         }
 
@@ -52,7 +52,7 @@ namespace Catrobat.Core.Objects.Sounds
                 }
 
                 _fileName = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("FileName"));
+                RaisePropertyChanged();
             }
         }
 
@@ -67,7 +67,7 @@ namespace Catrobat.Core.Objects.Sounds
                 }
 
                 _sprite = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
+                RaisePropertyChanged();
             }
         }
 

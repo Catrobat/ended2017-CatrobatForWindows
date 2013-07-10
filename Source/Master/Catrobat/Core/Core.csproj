@@ -120,6 +120,7 @@
     <Compile Include="Objects\DataRootObject.cs" />
     <Compile Include="Objects\OnlineProjectHeader.cs" />
     <Compile Include="Objects\Project.cs" />
+    <Compile Include="Objects\ProjectDummyHeader.cs" />
     <Compile Include="Objects\ProjectHeader.cs" />
     <Compile Include="Objects\Scripts\BroadcastScript.cs" />
     <Compile Include="Objects\Scripts\Script.cs" />

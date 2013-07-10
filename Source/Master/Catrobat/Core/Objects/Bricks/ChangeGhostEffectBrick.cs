@@ -20,7 +20,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 _changeGhostEffect = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("ChangeGhostEffect"));
+                RaisePropertyChanged();
             }
         }
 

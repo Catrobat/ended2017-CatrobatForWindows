@@ -33,7 +33,7 @@ namespace Catrobat.Core.Objects.Sounds
                 }
 
                 _sprite = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
+                RaisePropertyChanged();
             }
         }
 

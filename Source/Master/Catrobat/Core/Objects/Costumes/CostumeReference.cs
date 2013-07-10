@@ -32,7 +32,7 @@ namespace Catrobat.Core.Objects.Costumes
                 }
 
                 _reference = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Reference"));
+                RaisePropertyChanged();
             }
         }
 
@@ -47,7 +47,7 @@ namespace Catrobat.Core.Objects.Costumes
                 }
 
                 _costume = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Costume"));
+                RaisePropertyChanged();
             }
         }
 

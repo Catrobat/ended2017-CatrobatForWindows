@@ -24,7 +24,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _text = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Text"));
+                RaisePropertyChanged();
             }
         }
 

@@ -19,7 +19,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 _xMovement = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("XMovement"));
+                RaisePropertyChanged();
             }
         }
 

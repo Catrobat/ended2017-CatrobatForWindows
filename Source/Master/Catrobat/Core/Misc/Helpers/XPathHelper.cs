@@ -80,7 +80,7 @@ namespace Catrobat.Core.Misc.Helpers
             else if (dataObject is Sprite)
             {
                 reference = "../../../../../../sprite";
-                foreach (Sprite pointedSprite in spriteContainingDataObject.Project.SpriteList.Sprites)
+                foreach (Sprite pointedSprite in spriteContainingDataObject.Project.ObjectList.Sprites)
                 {
                     pos++;
                     if (pointedSprite == dataObject)
@@ -226,7 +226,7 @@ namespace Catrobat.Core.Misc.Helpers
                 pos = Int32.Parse(xPath) - 1;
             }
 
-            return sprite.Project.SpriteList.Sprites[pos];
+            return sprite.Project.ObjectList.Sprites[pos];
         }
 
         private static LoopBeginBrick GetLoopBeginBrick(string xPath)

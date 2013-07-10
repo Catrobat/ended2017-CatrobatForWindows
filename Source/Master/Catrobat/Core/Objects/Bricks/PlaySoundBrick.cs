@@ -20,7 +20,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _soundReference = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("SoundReference"));
+                RaisePropertyChanged();
             }
         }
 
@@ -55,7 +55,7 @@ namespace Catrobat.Core.Objects.Bricks
                     _soundReference = null;
                 }
 
-                OnPropertyChanged(new PropertyChangedEventArgs("SoundInfo"));
+                RaisePropertyChanged();
             }
         }
 

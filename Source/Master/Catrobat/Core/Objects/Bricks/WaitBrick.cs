@@ -19,7 +19,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 _timeToWaitInMilliSeconds = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("TimeToWaitInMilliSeconds"));
+                RaisePropertyChanged();
             }
         }
 

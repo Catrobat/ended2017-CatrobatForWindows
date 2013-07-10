@@ -26,7 +26,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _durationInMs = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("DurationInMs"));
+                RaisePropertyChanged();
             }
         }
 
@@ -41,7 +41,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _hertz = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Hertz"));
+                RaisePropertyChanged();
             }
         }
 

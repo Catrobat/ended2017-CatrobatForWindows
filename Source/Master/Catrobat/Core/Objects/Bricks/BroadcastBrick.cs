@@ -24,7 +24,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _broadcastMessage = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("BroadcastMessage"));
+                RaisePropertyChanged();
             }
         }
 

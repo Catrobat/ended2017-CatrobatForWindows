@@ -26,7 +26,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _motor = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Motor"));
+                RaisePropertyChanged();
             }
         }
 
@@ -41,7 +41,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _degrees = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Degrees"));
+                RaisePropertyChanged();
             }
         }
 

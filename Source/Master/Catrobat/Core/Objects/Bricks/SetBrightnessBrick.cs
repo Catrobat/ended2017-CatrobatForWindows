@@ -20,7 +20,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 _brightness = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Brightness"));
+                RaisePropertyChanged();
             }
         }
 

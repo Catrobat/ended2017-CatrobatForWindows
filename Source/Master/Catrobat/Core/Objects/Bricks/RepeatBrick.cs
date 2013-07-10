@@ -24,7 +24,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _timesToRepeat = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("TimesToRepeat"));
+                RaisePropertyChanged();
             }
         }
 

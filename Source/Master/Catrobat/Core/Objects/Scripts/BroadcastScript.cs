@@ -26,7 +26,7 @@ namespace Catrobat.Core.Objects
 
                 // TODO: update available UIReceivedMessages from Project
                 _receivedMessage = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("ReceivedMessage"));
+                RaisePropertyChanged();
             }
         }
 

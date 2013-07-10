@@ -21,7 +21,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 _xPosition = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("XPosition"));
+                RaisePropertyChanged();
             }
         }
 
@@ -31,7 +31,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 _yPosition = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("YPosition"));
+                RaisePropertyChanged();
             }
         }
 

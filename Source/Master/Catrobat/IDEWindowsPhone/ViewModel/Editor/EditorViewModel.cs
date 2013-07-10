@@ -61,7 +61,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         {
             get
             {
-                return CurrentProject.SpriteList.Sprites;
+                return CurrentProject.ObjectList.Sprites;
             }
         }
 
@@ -733,7 +733,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private async void StartPlayerAction()
         {
-            PlayerLauncher.LaunchPlayer(CurrentProject.ProjectName);
+            PlayerLauncher.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
         }
 
         private void GoToMainViewAction()
@@ -880,7 +880,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             if (IsInDesignMode)
             {
                 _catrobatContext = new CatrobatContextDesign();
-                _selectedSprite = _catrobatContext.CurrentProject.SpriteList.Sprites[0];
+                _selectedSprite = _catrobatContext.CurrentProject.ObjectList.Sprites[0];
             }
             else
             {
