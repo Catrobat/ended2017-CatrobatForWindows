@@ -1,13 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class NxtMotorTurnAngleBrick : Brick
     {
-        protected int _degrees;
-        public int Degrees
+        protected Formula _degrees;
+        public Formula Degrees
         {
             get { return _degrees; }
             set
@@ -47,7 +48,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _degrees = Int32.Parse(xRoot.Element("degrees").Value);
+            _degrees = new Formula(xRoot.Element("degrees"));
             _motor = xRoot.Element("motor").Value;
         }
 
@@ -55,17 +56,14 @@ namespace Catrobat.Core.Objects.Bricks
         {
             var xRoot = new XElement("legoNxtMotorTurnAngleBrick");
 
-            xRoot.Add(new XElement("degrees")
-            {
-                Value = _degrees.ToString()
-            });
-
-            xRoot.Add(new XElement("motor")
+             xRoot.Add(new XElement("motor")
             {
                 Value = _motor
             });
 
-            //CreateCommonXML(xRoot);
+             var xVariable = new XElement("degrees");
+             xVariable.Add(_degrees.CreateXML());
+            xRoot.Add(xVariable);
 
             return xRoot;
         }
@@ -73,7 +71,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new NxtMotorTurnAngleBrick(parent);
-            newBrick._degrees = _degrees;
+            newBrick._degrees = _degrees.Copy(parent) as Formula;
             newBrick._motor = _motor;
 
             return newBrick;

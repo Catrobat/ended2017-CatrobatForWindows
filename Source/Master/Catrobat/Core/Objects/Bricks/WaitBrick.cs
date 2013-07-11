@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class WaitBrick : Brick
     {
-        protected int _timeToWaitInSeconds;
-        public int TimeToWaitInSeconds
+        protected Formula _timeToWaitInSeconds;
+        public Formula TimeToWaitInSeconds
         {
             get { return _timeToWaitInSeconds; }
             set
@@ -27,19 +28,16 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _timeToWaitInSeconds = int.Parse(xRoot.Element("timeToWaitInSeconds").Value);
+            _timeToWaitInSeconds = new Formula(xRoot.Element("timeToWaitInSeconds"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("waitBrick");
 
-            xRoot.Add(new XElement("timeToWaitInSeconds")
-            {
-                Value = _timeToWaitInSeconds.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable = new XElement("timeToWaitInSeconds");
+            xVariable.Add(_timeToWaitInSeconds.CreateXML());
+            xRoot.Add(xVariable);
 
             return xRoot;
         }
@@ -47,7 +45,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new WaitBrick(parent);
-            newBrick._timeToWaitInSeconds = _timeToWaitInSeconds;
+            newBrick._timeToWaitInSeconds = _timeToWaitInSeconds.Copy(parent) as Formula;
 
             return newBrick;
         }

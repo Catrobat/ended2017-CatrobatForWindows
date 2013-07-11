@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class MoveNStepsBrick : Brick
     {
-        protected double _steps = 10.0f;
-        public double Steps
+        protected Formula _steps;
+        public Formula Steps
         {
             get { return _steps; }
             set
@@ -26,19 +27,16 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _steps = double.Parse(xRoot.Element("steps").Value, CultureInfo.InvariantCulture);
+            _steps = new Formula(xRoot.Element("steps"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("moveNStepsBrick");
 
-            xRoot.Add(new XElement("steps")
-            {
-                Value = _steps.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable = new XElement("steps");
+            xVariable.Add(_steps.CreateXML());
+            xRoot.Add(xVariable);
 
             return xRoot;
         }
@@ -46,7 +44,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new MoveNStepsBrick(parent);
-            newBrick._steps = _steps;
+            newBrick._steps = _steps.Copy(parent) as Formula;
 
             return newBrick;
         }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Catrobat.Core.Objects.Formulas;
+using Catrobat.Core.Objects.Variables;
+using System.ComponentModel;
 using System.Globalization;
 using System.Xml.Linq;
 
@@ -6,8 +8,8 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class SetVariableBrick : Brick
     {
-        protected double _userVariable; //TODO: correct type to userVariable
-        public double UserVariable
+        protected UserVariableReference _userVariable;
+        public UserVariableReference UserVariable
         {
             get { return _userVariable; }
             set
@@ -17,8 +19,8 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
-        protected double _variableFormula;//TODO: correct type to formula
-        public double VariableFormula
+        protected Formula _variableFormula;
+        public Formula VariableFormula
         {
             get { return _variableFormula; }
             set
@@ -38,25 +40,21 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _userVariable = double.Parse(xRoot.Element("userVariable").Value, CultureInfo.InvariantCulture);
-            _variableFormula = double.Parse(xRoot.Element("variableFormula").Value, CultureInfo.InvariantCulture);
+            _userVariable = new UserVariableReference(xRoot.Element("userVariable"), _sprite);
+            _variableFormula = new Formula(xRoot.Element("variableFormula"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("setVariableBrick");
 
-            xRoot.Add(new XElement("userVariable")
-            {
-                Value = _userVariable.ToString()
-            });
+            var xVariable1 = new XElement("userVariable");
+            xVariable1.Add(_userVariable.CreateXML());
+            xRoot.Add(xVariable1);
 
-            xRoot.Add(new XElement("variableFormula")
-            {
-                Value = _variableFormula.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable2 = new XElement("variableFormula");
+            xVariable2.Add(_variableFormula.CreateXML());
+            xRoot.Add(xVariable2);
 
             return xRoot;
         }
@@ -64,8 +62,8 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new SetVariableBrick(parent);
-            newBrick._userVariable = _userVariable;
-            newBrick._variableFormula = _variableFormula;
+            newBrick._userVariable = _userVariable.Copy(parent) as UserVariableReference;
+            newBrick._variableFormula = _variableFormula.Copy(parent) as Formula;
 
             return newBrick;
         }

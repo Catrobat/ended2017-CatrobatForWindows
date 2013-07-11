@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class ChangeYByBrick : Brick
     {
-        protected int _yMovement = 100;
-        public int YMovement
+        protected Formula _yMovement;
+        public Formula YMovement
         {
             get { return _yMovement; }
             set
@@ -25,19 +26,16 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _yMovement = int.Parse(xRoot.Element("yMovement").Value);
+            _yMovement = new Formula(xRoot.Element("yMovement"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("changeYByNBrick");
 
-            xRoot.Add(new XElement("yMovement")
-            {
-                Value = _yMovement.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable = new XElement("yMovement");
+            xVariable.Add(_yMovement.CreateXML());
+            xRoot.Add(xVariable);
 
             return xRoot;
         }
@@ -45,7 +43,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new ChangeYByBrick(parent);
-            newBrick._yMovement = _yMovement;
+            newBrick._yMovement = _yMovement.Copy(parent) as Formula;
 
             return newBrick;
         }

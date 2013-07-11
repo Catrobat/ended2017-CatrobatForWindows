@@ -122,6 +122,8 @@
     <Compile Include="Objects\Costumes\CostumeReference.cs" />
     <Compile Include="Objects\DataObject.cs" />
     <Compile Include="Objects\DataRootObject.cs" />
+    <Compile Include="Objects\Formulas\Formula.cs" />
+    <Compile Include="Objects\Formulas\FormulaTree.cs" />
     <Compile Include="Objects\OnlineProjectHeader.cs" />
     <Compile Include="Objects\Project.cs" />
     <Compile Include="Objects\ProjectDummyHeader.cs" />
@@ -137,6 +139,13 @@
     <Compile Include="Objects\Sprite.cs" />
     <Compile Include="Objects\SpriteList.cs" />
     <Compile Include="Objects\SpriteReference.cs" />
+    <Compile Include="Objects\Variables\ProgramVariableList.cs" />
+    <Compile Include="Objects\Variables\ObjectVariableList.cs" />
+    <Compile Include="Objects\Variables\ObjectVariableEntry.cs" />
+    <Compile Include="Objects\Variables\UserVariable.cs" />
+    <Compile Include="Objects\Variables\UserVariableReference.cs" />
+    <Compile Include="Objects\Variables\UserVariableList.cs" />
+    <Compile Include="Objects\Variables\Variables.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ApplicationResources.Designer.cs">

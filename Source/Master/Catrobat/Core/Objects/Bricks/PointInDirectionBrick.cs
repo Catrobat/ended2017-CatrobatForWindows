@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class PointInDirectionBrick : Brick
     {
-        protected double _degrees;
-        public double Degrees
+        protected Formula _degrees;
+        public Formula Degrees
         {
             get { return _degrees; }
             set
@@ -31,19 +32,16 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _degrees = double.Parse(xRoot.Element("degrees").Value, CultureInfo.InvariantCulture);
+            _degrees = new Formula(xRoot.Element("degrees"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("pointInDirectionBrick");
 
-            xRoot.Add(new XElement("degrees")
-            {
-                Value = _degrees.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable = new XElement("degrees");
+            xVariable.Add(_degrees.CreateXML());
+            xRoot.Add(xVariable);
 
             return xRoot;
         }
@@ -51,7 +49,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new PointInDirectionBrick(parent);
-            newBrick._degrees = _degrees;
+            newBrick._degrees = _degrees.Copy(parent) as Formula;
 
             return newBrick;
         }

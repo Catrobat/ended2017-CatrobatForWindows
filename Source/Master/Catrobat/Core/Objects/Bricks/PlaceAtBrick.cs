@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class PlaceAtBrick : Brick
     {
-        protected int _xPosition = 0;
-        public int XPosition
+        protected Formula _xPosition;
+        public Formula XPosition
         {
             get { return _xPosition; }
             set
@@ -16,8 +17,8 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
-        protected int _yPosition = 0;
-        public int YPosition
+        protected Formula _yPosition;
+        public Formula YPosition
         {
             get { return _yPosition; }
             set
@@ -36,25 +37,21 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _xPosition = int.Parse(xRoot.Element("xPosition").Value);
-            _yPosition = int.Parse(xRoot.Element("yPosition").Value);
+            _xPosition = new Formula(xRoot.Element("xPosition"));
+            _yPosition = new Formula(xRoot.Element("yPosition"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("placeAtBrick");
 
-            xRoot.Add(new XElement("xPosition")
-            {
-                Value = _xPosition.ToString()
-            });
+            var xVariable1 = new XElement("xPosition");
+            xVariable1.Add(_xPosition.CreateXML());
+            xRoot.Add(xVariable1);
 
-            xRoot.Add(new XElement("yPosition")
-            {
-                Value = _yPosition.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable2 = new XElement("yPosition");
+            xVariable2.Add(_yPosition.CreateXML());
+            xRoot.Add(xVariable2);
 
             return xRoot;
         }
@@ -62,8 +59,8 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new PlaceAtBrick(parent);
-            newBrick._xPosition = _xPosition;
-            newBrick._yPosition = _yPosition;
+            newBrick._xPosition = _xPosition.Copy(parent) as Formula;
+            newBrick._yPosition = _yPosition.Copy(parent) as Formula;
 
             return newBrick;
         }

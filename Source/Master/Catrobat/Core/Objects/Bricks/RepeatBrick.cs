@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class RepeatBrick : LoopBeginBrick
     {
-        protected int _timesToRepeat;
-        public int TimesToRepeat
+        protected Formula _timesToRepeat;
+        public Formula TimesToRepeat
         {
             get { return _timesToRepeat; }
             set
@@ -30,7 +31,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _timesToRepeat = int.Parse(xRoot.Element("timesToRepeat").Value);
+            _timesToRepeat = new Formula(xRoot.Element("timesToRepeat"));
             base.LoadFromCommonXML(xRoot);
         }
 
@@ -39,10 +40,9 @@ namespace Catrobat.Core.Objects.Bricks
             var xRoot = new XElement("repeatBrick");
             base.CreateCommonXML(xRoot);
 
-            xRoot.Add(new XElement("timesToRepeat")
-            {
-                Value = _timesToRepeat.ToString()
-            });
+            var xVariable = new XElement("timesToRepeat");
+            xVariable.Add(_timesToRepeat.CreateXML());
+            xRoot.Add(xVariable);
 
             return xRoot;
         }
@@ -50,7 +50,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new RepeatBrick(parent);
-            newBrick._timesToRepeat = _timesToRepeat;
+            newBrick._timesToRepeat = _timesToRepeat.Copy(parent) as Formula;
 
             return newBrick;
         }

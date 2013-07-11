@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class NxtPlayToneBrick : Brick
     {
-        protected int _durationInSeconds;
-        public int DurationInSeconds
+        protected Formula _durationInSeconds;
+        public Formula DurationInSeconds
         {
             get { return _durationInSeconds; }
             set
@@ -21,8 +22,8 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
-        protected int _frequency;
-        public int Frequency
+        protected Formula _frequency;
+        public Formula Frequency
         {
             get { return _frequency; }
             set
@@ -46,25 +47,21 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _durationInSeconds = int.Parse(xRoot.Element("durationInSeconds").Value);
-            _frequency = int.Parse(xRoot.Element("frequency").Value);
+            _durationInSeconds = new Formula(xRoot.Element("durationInSeconds"));
+            _frequency = new Formula(xRoot.Element("frequency"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("legoNxtPlayToneBrick");
 
-            xRoot.Add(new XElement("durationInSeconds")
-            {
-                Value = _durationInSeconds.ToString()
-            });
+            var xVariable1 = new XElement("durationInSeconds");
+            xVariable1.Add(_durationInSeconds.CreateXML());
+            xRoot.Add(xVariable1);
 
-            xRoot.Add(new XElement("frequency")
-            {
-                Value = _frequency.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable2 = new XElement("frequency");
+            xVariable2.Add(_frequency.CreateXML());
+            xRoot.Add(xVariable2);
 
             return xRoot;
         }
@@ -72,8 +69,8 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new NxtPlayToneBrick(parent);
-            newBrick._durationInSeconds = _durationInSeconds;
-            newBrick._frequency = _frequency;
+            newBrick._durationInSeconds = _durationInSeconds.Copy(parent) as Formula;
+            newBrick._frequency = _frequency.Copy(parent) as Formula;
 
             return newBrick;
         }

@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class SetGhostEffectBrick : Brick
     {
-        protected double _transparency = 0.0f;
-        public double Transparency
+        protected Formula _transparency;
+        public Formula Transparency
         {
             get { return _transparency; }
             set
@@ -26,19 +27,16 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _transparency = double.Parse(xRoot.Element("transparency").Value, CultureInfo.InvariantCulture);
+            _transparency = new Formula(xRoot.Element("transparency"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("setGhostEffectBrick");
 
-            xRoot.Add(new XElement("transparency")
-            {
-                Value = _transparency.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable = new XElement("transparency");
+            xVariable.Add(_transparency.CreateXML());
+            xRoot.Add(xVariable);
 
             return xRoot;
         }
@@ -46,7 +44,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new SetGhostEffectBrick(parent);
-            newBrick._transparency = _transparency;
+            newBrick._transparency = _transparency.Copy(parent) as Formula;
 
             return newBrick;
         }
