@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,6 +63,23 @@ namespace Catrobat.Core.VersionConverter
                     Converters[pair].Convert(document);
                 }
             }
+        }
+
+        public static string Convert(string projectCode)
+        {
+            var document = XDocument.Load(new StringReader(projectCode));
+            document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
+
+            var inputVersion = document.Element("program").Element("catrobatLanguageVersion").Value;
+            var outputVersion = VersionConfig.TargetOutputversion;
+
+            Convert(inputVersion, outputVersion, document);
+
+            var writer = new XmlStringWriter();
+            document.Save(writer, SaveOptions.None);
+
+            var xml = writer.GetStringBuilder().ToString();
+            return xml;
         }
     }
 }

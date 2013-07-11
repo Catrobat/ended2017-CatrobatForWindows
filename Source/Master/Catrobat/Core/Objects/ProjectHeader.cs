@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -309,10 +310,10 @@ namespace Catrobat.Core.Objects
         internal override void LoadFromXML(XElement xRoot)
         {
             _applicationBuildName = xRoot.Element("applicationBuildName").Value;
-            _applicationBuildNumber = int.Parse(xRoot.Element("applicationBuildNumber").Value);
+            _applicationBuildNumber = int.Parse(xRoot.Element("applicationBuildNumber").Value, CultureInfo.InvariantCulture);
             _applicationName = xRoot.Element("applicationName").Value;
             _applicationVersion = xRoot.Element("applicationVersion").Value;
-            _catrobatLanguageVersion = float.Parse(xRoot.Element("catrobatLanguageVersion").Value);
+            _catrobatLanguageVersion = float.Parse(xRoot.Element("catrobatLanguageVersion").Value, CultureInfo.InvariantCulture);
             _dateTimeUpload = xRoot.Element("dateTimeUpload").Value;
             _description = xRoot.Element("description").Value;
             _deviceName = xRoot.Element("deviceName").Value;
@@ -322,8 +323,8 @@ namespace Catrobat.Core.Objects
             _programLicense = xRoot.Element("programLicense").Value;
             _programName = xRoot.Element("programName").Value;
             _remixOf = xRoot.Element("remixOf").Value;
-            _screenHeight = int.Parse(xRoot.Element("screenHeight").Value);
-            _screenWidth = int.Parse(xRoot.Element("screenWidth").Value);
+            _screenHeight = int.Parse(xRoot.Element("screenHeight").Value, CultureInfo.InvariantCulture);
+            _screenWidth = int.Parse(xRoot.Element("screenWidth").Value, CultureInfo.InvariantCulture);
             _tags = xRoot.Element("tags").Value;
             _url = xRoot.Element("url").Value;
             _userHandle = xRoot.Element("userHandle").Value;
