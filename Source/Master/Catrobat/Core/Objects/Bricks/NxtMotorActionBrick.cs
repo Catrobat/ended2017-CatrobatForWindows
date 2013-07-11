@@ -1,20 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class NxtMotorActionBrick : Brick
     {
         protected string _motor;
-
-        protected int _speed;
-
-        public NxtMotorActionBrick() {}
-
-        public NxtMotorActionBrick(Sprite parent) : base(parent) {}
-
-        public NxtMotorActionBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public string Motor
         {
             get { return _motor; }
@@ -26,11 +18,12 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _motor = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Motor"));
+                RaisePropertyChanged();
             }
         }
 
-        public int Speed
+        protected Formula _speed;
+        public Formula Speed
         {
             get { return _speed; }
             set
@@ -41,31 +34,35 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _speed = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Speed"));
+                RaisePropertyChanged();
             }
         }
+
+
+        public NxtMotorActionBrick() {}
+
+        public NxtMotorActionBrick(Sprite parent) : base(parent) {}
+
+        public NxtMotorActionBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
             _motor = xRoot.Element("motor").Value;
-            _speed = int.Parse(xRoot.Element("speed").Value);
+            _speed = new Formula(xRoot.Element("speed"));
         }
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("nxtMotorActionBrick");
+            var xRoot = new XElement("legoNxtMotorActionBrick");
 
             xRoot.Add(new XElement("motor")
             {
                 Value = _motor
             });
 
-            xRoot.Add(new XElement("speed")
-            {
-                Value = _speed.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable = new XElement("speed");
+            xVariable.Add(_speed.CreateXML());
+            xRoot.Add(xVariable);
 
             return xRoot;
         }
@@ -74,7 +71,7 @@ namespace Catrobat.Core.Objects.Bricks
         {
             var newBrick = new NxtMotorActionBrick(parent);
             newBrick._motor = _motor;
-            newBrick._speed = _speed;
+            newBrick._speed = _speed.Copy(parent) as Formula;
 
             return newBrick;
         }

@@ -7,22 +7,9 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class BrickList : DataObject
     {
-        private Sprite _sprite;
-
-        public BrickList(Sprite parent)
-        {
-            Bricks = new ObservableCollection<Brick>();
-            _sprite = parent;
-        }
-
-        public BrickList(XElement xElement, Sprite parent)
-        {
-            _sprite = parent;
-            LoadFromXML(xElement);
-        }
-
         public ObservableCollection<Brick> Bricks { get; private set; }
 
+        private Sprite _sprite;
         public Sprite Sprite
         {
             get { return _sprite; }
@@ -34,8 +21,21 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _sprite = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
+                RaisePropertyChanged();
             }
+        }
+
+
+        public BrickList(Sprite parent)
+        {
+            Bricks = new ObservableCollection<Brick>();
+            _sprite = parent;
+        }
+
+        public BrickList(XElement xElement, Sprite parent)
+        {
+            _sprite = parent;
+            LoadFromXML(xElement);
         }
 
         internal override void LoadFromXML(XElement xRoot)
@@ -55,11 +55,11 @@ namespace Catrobat.Core.Objects.Bricks
                         Bricks.Add(new BroadcastWaitBrick(_sprite));
                         break;
 
-                    case "changeBrightnessBrick":
+                    case "changeBrightnessByNBrick":
                         Bricks.Add(new ChangeBrightnessBrick(_sprite));
                         break;
 
-                    case "changeGhostEffectBrick":
+                    case "changeGhostEffectByNBrick":
                         Bricks.Add(new ChangeGhostEffectBrick(_sprite));
                         break;
 
@@ -67,15 +67,19 @@ namespace Catrobat.Core.Objects.Bricks
                         Bricks.Add(new ChangeSizeByNBrick(_sprite));
                         break;
 
-                    case "changeVolumeByBrick":
+                    case "changeVariableBrick":
+                        Bricks.Add(new ChangeVariableBrick(_sprite));
+                        break;
+
+                    case "changeVolumeByNBrick":
                         Bricks.Add(new ChangeVolumeByBrick(_sprite));
                         break;
 
-                    case "changeXByBrick":
+                    case "changeXByNBrick":
                         Bricks.Add(new ChangeXByBrick(_sprite));
                         break;
 
-                    case "changeYByBrick":
+                    case "changeYByNBrick":
                         Bricks.Add(new ChangeYByBrick(_sprite));
                         break;
 
@@ -103,8 +107,36 @@ namespace Catrobat.Core.Objects.Bricks
                         Bricks.Add(new HideBrick(_sprite));
                         break;
 
+                    case "ifLogicBeginBrick":
+                        Bricks.Add(new HideBrick(_sprite));
+                        break;
+
+                    case "ifLogicElseBrick":
+                        Bricks.Add(new HideBrick(_sprite));
+                        break;
+
+                    case "ifLogicEndBrick":
+                        Bricks.Add(new HideBrick(_sprite));
+                        break;
+
                     case "ifOnEdgeBounceBrick":
                         Bricks.Add(new IfOnEdgeBounceBrick(_sprite));
+                        break;
+
+                    case "legoNxtMotorActionBrick":
+                        Bricks.Add(new NxtMotorActionBrick(_sprite));
+                        break;
+
+                    case "legoNxtMotorStopBrick":
+                        Bricks.Add(new NxtMotorStopBrick(_sprite));
+                        break;
+
+                    case "legoNxtMotorTurnAngleBrick":
+                        Bricks.Add(new NxtMotorTurnAngleBrick(_sprite));
+                        break;
+
+                    case "legoNxtPlayToneBrick":
+                        Bricks.Add(new NxtPlayToneBrick(_sprite));
                         break;
 
                     case "loopEndBrick":
@@ -115,28 +147,12 @@ namespace Catrobat.Core.Objects.Bricks
                         Bricks.Add(new MoveNStepsBrick(_sprite));
                         break;
 
-                    case "nextCostumeBrick":
+                    case "nextLookBrick":
                         Bricks.Add(new NextCostumeBrick(_sprite));
                         break;
 
                     case "noteBrick":
                         Bricks.Add(new NoteBrick(_sprite));
-                        break;
-
-                    case "nxtMotorActionBrick":
-                        Bricks.Add(new NxtMotorActionBrick(_sprite));
-                        break;
-
-                    case "nxtMotorStopBrick":
-                        Bricks.Add(new NxtMotorStopBrick(_sprite));
-                        break;
-
-                    case "nxtMotorTurnAngleBrick":
-                        Bricks.Add(new NxtMotorTurnAngleBrick(_sprite));
-                        break;
-
-                    case "nxtPlayToneBrick":
-                        Bricks.Add(new NxtPlayToneBrick(_sprite));
                         break;
 
                     case "placeAtBrick":
@@ -163,7 +179,7 @@ namespace Catrobat.Core.Objects.Bricks
                         Bricks.Add(new SetBrightnessBrick(_sprite));
                         break;
 
-                    case "setCostumeBrick":
+                    case "setLookBrick":
                         Bricks.Add(new SetCostumeBrick(_sprite));
                         break;
 
@@ -173,6 +189,10 @@ namespace Catrobat.Core.Objects.Bricks
 
                     case "setSizeToBrick":
                         Bricks.Add(new SetSizeToBrick(_sprite));
+                        break;
+
+                    case "setVariableBrick":
+                        Bricks.Add(new SetVariableBrick(_sprite));
                         break;
 
                     case "setVolumeToBrick":

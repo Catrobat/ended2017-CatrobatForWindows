@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20617.1 PREVIEW
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{A4E10BED-8F56-46A6-B78D-BFEF1363B195}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDECommon", "IDECommon\IDECommon.csproj", "{73EDA75E-B249-40CB-A883-C2521A72B1C0}"
@@ -267,6 +269,7 @@ Global
 		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|Win32.Build.0 = Debug|Any CPU
 		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,11 +1,21 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class GoNStepsBackBrick : Brick
     {
-        protected int _steps = 10;
+        protected Formula _steps;
+        public Formula Steps
+        {
+            get { return _steps; }
+            set
+            {
+                _steps = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public GoNStepsBackBrick() {}
 
@@ -13,31 +23,18 @@ namespace Catrobat.Core.Objects.Bricks
 
         public GoNStepsBackBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
-        public int Steps
-        {
-            get { return _steps; }
-            set
-            {
-                _steps = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Steps"));
-            }
-        }
-
         internal override void LoadFromXML(XElement xRoot)
         {
-            _steps = int.Parse(xRoot.Element("steps").Value);
+            _steps = new Formula(xRoot.Element("steps"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("goNStepsBackBrick");
 
-            xRoot.Add(new XElement("steps")
-            {
-                Value = _steps.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable = new XElement("steps");
+            xVariable.Add(_steps.CreateXML());
+            xRoot.Add(xVariable);
 
             return xRoot;
         }
@@ -45,7 +42,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new GoNStepsBackBrick(parent);
-            newBrick._steps = _steps;
+            newBrick._steps = _steps.Copy(parent) as Formula;
 
             return newBrick;
         }

@@ -6,22 +6,9 @@ namespace Catrobat.Core.Objects.Costumes
 {
     public class CostumeList : DataObject
     {
-        private Sprite _sprite;
-
-        public CostumeList(Sprite parent)
-        {
-            Costumes = new ObservableCollection<Costume>();
-            _sprite = parent;
-        }
-
-        public CostumeList(XElement xElement, Sprite parent)
-        {
-            _sprite = parent;
-            LoadFromXML(xElement);
-        }
-
         public ObservableCollection<Costume> Costumes { get; set; }
 
+        private Sprite _sprite;
         public Sprite Sprite
         {
             get { return _sprite; }
@@ -33,14 +20,26 @@ namespace Catrobat.Core.Objects.Costumes
                 }
 
                 _sprite = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
+                RaisePropertyChanged();
             }
         }
+
+        public CostumeList(Sprite parent)
+        {
+            Costumes = new ObservableCollection<Costume>();
+            _sprite = parent;
+        }
+
+        public CostumeList(XElement xElement, Sprite parent)
+        {
+            _sprite = parent;
+            LoadFromXML(xElement);
+        } 
 
         internal override void LoadFromXML(XElement xRoot)
         {
             Costumes = new ObservableCollection<Costume>();
-            foreach (XElement element in xRoot.Elements("costumeData"))
+            foreach (XElement element in xRoot.Elements("look"))
             {
                 Costumes.Add(new Costume(element, _sprite));
             }
@@ -48,7 +47,7 @@ namespace Catrobat.Core.Objects.Costumes
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("costumeDataList");
+            var xRoot = new XElement("lookList");
 
             foreach (Costume costume in Costumes)
             {

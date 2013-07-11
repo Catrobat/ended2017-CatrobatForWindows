@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Xml.Linq;
 using Catrobat.Core.Objects.Bricks;
 
-namespace Catrobat.Core.Objects
+namespace Catrobat.Core.Objects.Scripts
 {
     public class WhenScript : Script
     {
@@ -25,13 +24,6 @@ namespace Catrobat.Core.Objects
         };
 
         private string _action;
-
-        public WhenScript() {}
-
-        public WhenScript(Sprite parent) : base(parent) {}
-
-        public WhenScript(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public WhenScriptAction Action
         {
             get { return StringActionDictionary[_action]; }
@@ -45,9 +37,16 @@ namespace Catrobat.Core.Objects
                 }
 
                 _action = stringValue;
-                OnPropertyChanged(new PropertyChangedEventArgs("Action"));
+                RaisePropertyChanged();
             }
         }
+
+
+        public WhenScript() {}
+
+        public WhenScript(Sprite parent) : base(parent) {}
+
+        public WhenScript(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -78,9 +77,9 @@ namespace Catrobat.Core.Objects
         {
             var newWhenScript = new WhenScript(parent);
             newWhenScript._action = _action;
-            if (bricks != null)
+            if (_bricks != null)
             {
-                newWhenScript.bricks = bricks.Copy(parent) as BrickList;
+                newWhenScript._bricks = _bricks.Copy(parent) as BrickList;
             }
 
             return newWhenScript;

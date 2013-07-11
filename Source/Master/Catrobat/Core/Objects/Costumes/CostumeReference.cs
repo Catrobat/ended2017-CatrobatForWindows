@@ -7,8 +7,38 @@ namespace Catrobat.Core.Objects.Costumes
     public class CostumeReference : DataObject
     {
         private readonly Sprite _sprite;
+
         private Costume _costume;
+        public Costume Costume
+        {
+            get { return _costume; }
+            set
+            {
+                if (_costume == value)
+                {
+                    return;
+                }
+
+                _costume = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private string _reference;
+        public string Reference
+        {
+            get { return _reference; }
+            set
+            {
+                if (_reference == value)
+                {
+                    return;
+                }
+
+                _reference = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public CostumeReference(Sprite parent)
         {
@@ -21,36 +51,6 @@ namespace Catrobat.Core.Objects.Costumes
             LoadFromXML(xElement);
         }
 
-        public string Reference
-        {
-            get { return _reference; }
-            set
-            {
-                if (_reference == value)
-                {
-                    return;
-                }
-
-                _reference = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Reference"));
-            }
-        }
-
-        public Costume Costume
-        {
-            get { return _costume; }
-            set
-            {
-                if (_costume == value)
-                {
-                    return;
-                }
-
-                _costume = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Costume"));
-            }
-        }
-
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
@@ -59,7 +59,7 @@ namespace Catrobat.Core.Objects.Costumes
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("costumeData");
+            var xRoot = new XElement("look");
 
             xRoot.Add(new XAttribute("reference", XPathHelper.GetReference(_costume, _sprite)));
 

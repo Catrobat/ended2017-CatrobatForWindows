@@ -1,12 +1,23 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class ChangeSizeByNBrick : Brick
     {
-        protected double _size = 20.0f;
+        protected Formula _size;
+        public Formula Size
+        {
+            get { return _size; }
+            set
+            {
+                _size = value;
+                RaisePropertyChanged();
+            }
+        }
+
 
         public ChangeSizeByNBrick() {}
 
@@ -14,31 +25,18 @@ namespace Catrobat.Core.Objects.Bricks
 
         public ChangeSizeByNBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
-        public double Size
-        {
-            get { return _size; }
-            set
-            {
-                _size = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Size"));
-            }
-        }
-
         internal override void LoadFromXML(XElement xRoot)
         {
-            _size = double.Parse(xRoot.Element("size").Value, CultureInfo.InvariantCulture);
+            _size = new Formula(xRoot.Element("size"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("changeSizeByNBrick");
 
-            xRoot.Add(new XElement("size")
-            {
-                Value = _size.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable = new XElement("size");
+            xVariable.Add(_size.CreateXML());
+            xRoot.Add(xVariable);
 
             return xRoot;
         }
@@ -46,7 +44,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new ChangeSizeByNBrick(parent);
-            newBrick._size = _size;
+            newBrick._size = _size.Copy(parent) as Formula;
 
             return newBrick;
         }

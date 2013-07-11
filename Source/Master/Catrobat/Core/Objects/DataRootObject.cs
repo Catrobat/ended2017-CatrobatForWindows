@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
+using Catrobat.Core.Annotations;
 
 namespace Catrobat.Core.Objects
 {
@@ -16,18 +18,20 @@ namespace Catrobat.Core.Objects
             LoadFromXML(xml);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         protected abstract void LoadFromXML(String xmlSource);
 
         internal abstract XDocument CreateXML();
 
-        protected void OnPropertyChanged(PropertyChangedEventArgs e)
+        #region PropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        [NotifyPropertyChangedInvocator]
+
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, e);
-            }
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
+
     }
 }

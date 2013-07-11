@@ -16,13 +16,13 @@ namespace Catrobat.IDEWindowsPhone.Controls.Projects
   {
     #region Dependancy properties
 
-    public ProjectHeader Project
+    public ProjectDummyHeader Project
     {
-      get { return (ProjectHeader)GetValue(ProjectProperty); }
+      get { return (ProjectDummyHeader)GetValue(ProjectProperty); }
       set { SetValue(ProjectProperty, value); }
     }
 
-    public static readonly DependencyProperty ProjectProperty = DependencyProperty.Register("Project", typeof(ProjectHeader), typeof(LocalProjectControl), new PropertyMetadata(ProjectChanged));
+    public static readonly DependencyProperty ProjectProperty = DependencyProperty.Register("Project", typeof(ProjectDummyHeader), typeof(LocalProjectControl), new PropertyMetadata(ProjectChanged));
 
     private static void ProjectChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {

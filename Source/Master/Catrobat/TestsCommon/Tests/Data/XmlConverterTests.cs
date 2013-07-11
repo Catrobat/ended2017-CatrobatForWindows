@@ -26,7 +26,7 @@ namespace Catrobat.TestsCommon.Tests.Data
       EditXML.RemoveSpriteReferences(doc);
 
       var referenceList = new List<XElement>(doc.Descendants("sprite"));
-      Assert.AreEqual(referenceList.Count, 0);
+      Assert.AreEqual(0, referenceList.Count);
     }
 
     [TestMethod]
@@ -38,8 +38,8 @@ namespace Catrobat.TestsCommon.Tests.Data
 
       var project = doc.Element("Content.Project");
 
-      Assert.AreEqual(project.Element("catroidVersionCode"), null);
-      Assert.AreNotEqual(project.Element("applicationVersionCode"), null);
+      Assert.IsNull(project.Element("catroidVersionCode"));
+      Assert.IsNotNull(project.Element("applicationVersionCode"));
       Assert.AreEqual(Int32.Parse(project.Element("applicationVersionCode").Value), 10);
       Assert.AreEqual(project.FirstNode, project.Element("applicationVersionCode"));
       Assert.AreEqual(project.Element("applicationVersionCode").IsBefore(project.Element("applicationVersionName")), true);

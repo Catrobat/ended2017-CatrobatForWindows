@@ -14,10 +14,10 @@ namespace Catrobat.IDEWindowsPhone.Misc
 {
     public class ProjectImporter
     {
-        private ProjectHeader _tempProjectHeader;
+        private ProjectDummyHeader _tempProjectHeader;
         private Project _project;
 
-        public async Task<ProjectHeader> ImportProjects(String fileToken)
+        public async Task<ProjectDummyHeader> ImportProjects(String fileToken)
         {
             try
             {
@@ -55,10 +55,10 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
                 _project = new Project(projectCode);
 
-                _tempProjectHeader = new ProjectHeader
+                _tempProjectHeader = new ProjectDummyHeader
                 {
                     Screenshot = projectScreenshot,
-                    ProjectName = _project.ProjectName
+                    ProjectName = _project.ProjectHeader.ProgramName
                 };
             }
             catch (Exception)
@@ -116,7 +116,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
                 if (counter != 0)
                 {
                     newProjectName = _tempProjectHeader.ProjectName + counter;
-                    _project.SetProjectName(newProjectName);
+                    _project.SetSetProgramName(newProjectName);
                     var saveToPath = Path.Combine(CatrobatContext.TempProjectImportPath, Project.ProjectCodePath);
                     _project.Save(saveToPath);
                 }
@@ -124,7 +124,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var tempPath = Path.Combine(CatrobatContext.ProjectsPath, _project.ProjectName);
+                var tempPath = Path.Combine(CatrobatContext.ProjectsPath, _project.ProjectHeader.ProgramName);
                 storage.MoveDirectory(CatrobatContext.TempProjectImportPath, tempPath);
             }
 

@@ -8,6 +8,7 @@ using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Storage;
@@ -32,7 +33,7 @@ namespace Catrobat.Core
 
         public ContextSaving ContextSaving;
         private Project _currentProject;
-        private ObservableCollection<ProjectHeader> _localProjects;
+        private ObservableCollection<ProjectDummyHeader> _localProjects;
 
 
         public CatrobatContext()
@@ -49,7 +50,7 @@ namespace Catrobat.Core
                 }
 
                 RestoreDefaultProject(DefaultProjectName);
-                LocalSettings = new LocalSettings {CurrentProjectName = CurrentProject.ProjectName};
+                LocalSettings = new LocalSettings {CurrentProjectName = CurrentProject.ProjectHeader.ProgramName};
             }
             else
             {
@@ -120,7 +121,7 @@ namespace Catrobat.Core
             }
         }
 
-        public ObservableCollection<ProjectHeader> LocalProjects
+        public ObservableCollection<ProjectDummyHeader> LocalProjects
         {
             get
             {
@@ -137,7 +138,7 @@ namespace Catrobat.Core
 
         public void SetCurrentProject(string projectName)
         {
-            if (_currentProject != null && _currentProject.ProjectName == projectName)
+            if (_currentProject != null && _currentProject.ProjectHeader.ProgramName == projectName)
             {
                 return;
             }
@@ -169,17 +170,29 @@ namespace Catrobat.Core
         {
             RestoreDefaultProject(projectName);
 
-            _currentProject.DeviceName = DeviceInformationHelper.DeviceName;
-            //_currentProject.Platform = Environment.OSVersion; //TODO: this should work. Find out why it doesn't.
-            _currentProject.Platform = "Windows Phone 7.5"; //TODO: get phone version
-            _currentProject.PlatformVersion = "7.1.1"; // TODO: ?
-            _currentProject.ApplicationVersionCode = 0; // TODO: ?
-            _currentProject.ApplicationVersionName = StaticApplicationSettings.CurrentApplicationVersionName;
-            _currentProject.ScreenHeight = DeviceInformationHelper.ScreenWidth;
-            _currentProject.ScreenHeight = DeviceInformationHelper.ScreenHeight;
+            var projectHeader = new ProjectHeader
+            {
+                ApplicationBuildName = "",
+                ApplicationBuildNumber = 0,
+                ApplicationName = "Pocket Code",
+                ApplicationVersion = "0.0.1",
+                CatrobatLanguageVersion = (float)0.8,
+                DateTimeUpload = "",
+                Description = "",
+                DeviceName = DeviceInformationHelper.DeviceName,
+                MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
+                Platform = PlatformInformationHelper.GetPlatformName(),
+                PlatformVersion = PlatformInformationHelper.GetPlatformVersion(),
+                ProgramLicense = "http://developer.catrobat.org/agpl_v3",
+                ProgramName = "",
+                RemixOf = "",
+                ScreenHeight = DeviceInformationHelper.ScreenHeight,
+                ScreenWidth = DeviceInformationHelper.ScreenWidth,
+                Tags = "",
+                Url = "http://pocketcode.org/details/871",
+                UserHandle = ""
+            };
 
-
-            // TODO: set other project properties here
             CurrentProject.Save();
             UpdateLocalProjects();
         }
@@ -191,7 +204,7 @@ namespace Catrobat.Core
                 storage.DeleteDirectory(ProjectsPath + "/" + projectName);
             }
 
-            if (_currentProject.ProjectName == projectName)
+            if (_currentProject.ProjectHeader.ProgramName == projectName)
             {
                 RestoreDefaultProject(DefaultProjectName);
             }
@@ -220,7 +233,7 @@ namespace Catrobat.Core
                 var tempXmlPath = Path.Combine(destinationPath, Project.ProjectCodePath);
                 var xml = storage.ReadTextFile(tempXmlPath);
                 var newProject = new Project(xml);
-                newProject.SetProjectName(newProjectName);
+                newProject.SetSetProgramName(newProjectName);
                 newProject.Save();
             }
 
@@ -236,7 +249,7 @@ namespace Catrobat.Core
 
             if (_localProjects == null)
             {
-                _localProjects = new ObservableCollection<ProjectHeader>();
+                _localProjects = new ObservableCollection<ProjectDummyHeader>();
             }
 
             _localProjects.Clear();
@@ -245,15 +258,15 @@ namespace Catrobat.Core
             {
                 var projectNames = storage.GetDirectoryNames(ProjectsPath);
 
-                var projects = new List<ProjectHeader>();
+                var projects = new List<ProjectDummyHeader>();
 
                 foreach (string projectName in projectNames)
                 {
-                    if (projectName != CurrentProject.ProjectName)
+                    if (projectName != CurrentProject.ProjectHeader.ProgramName)
                     {
                         var screenshotPath = Path.Combine(ProjectsPath, projectName, Project.ScreenshotPath);
                         var projectScreenshot = storage.LoadImage(screenshotPath);
-                        var projectHeader = new ProjectHeader
+                        var projectHeader = new ProjectDummyHeader
                         {
                             ProjectName = projectName,
                             Screenshot = projectScreenshot
@@ -262,7 +275,7 @@ namespace Catrobat.Core
                     }
                 }
                 projects.Sort();
-                foreach (ProjectHeader header in projects)
+                foreach (ProjectDummyHeader header in projects)
                 {
                     _localProjects.Add(header);
                 }
@@ -271,7 +284,7 @@ namespace Catrobat.Core
 
         internal void StoreLocalSettings()
         {
-            LocalSettings.CurrentProjectName = _currentProject.ProjectName;
+            LocalSettings.CurrentProjectName = _currentProject.ProjectHeader.ProgramName;
 
             if (ContextSaving != null)
             {
@@ -343,7 +356,7 @@ namespace Catrobat.Core
                 var xml = storage.ReadTextFile(tempXmlPath);
                 CurrentProject = new Project(xml);
 
-                CurrentProject.SetProjectName(projectName);
+                CurrentProject.SetSetProgramName(projectName);
             }
         }
 

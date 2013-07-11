@@ -1,11 +1,22 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class SetXBrick : Brick
     {
-        protected int _xPosition = 0;
+        protected Formula _xPosition;
+        public Formula XPosition
+        {
+            get { return _xPosition; }
+            set
+            {
+                _xPosition = value;
+                RaisePropertyChanged();
+            }
+        }
+
 
         public SetXBrick() {}
 
@@ -13,31 +24,18 @@ namespace Catrobat.Core.Objects.Bricks
 
         public SetXBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
-        public int XPosition
-        {
-            get { return _xPosition; }
-            set
-            {
-                _xPosition = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("XPosition"));
-            }
-        }
-
         internal override void LoadFromXML(XElement xRoot)
         {
-            _xPosition = int.Parse(xRoot.Element("xPosition").Value);
+            _xPosition = new Formula(xRoot.Element("xPosition"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("setXBrick");
 
-            xRoot.Add(new XElement("xPosition")
-            {
-                Value = _xPosition.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable = new XElement("xPosition");
+            xVariable.Add(_xPosition.CreateXML());
+            xRoot.Add(xVariable);
 
             return xRoot;
         }
@@ -45,7 +43,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new SetXBrick(parent);
-            newBrick._xPosition = _xPosition;
+            newBrick._xPosition = _xPosition.Copy(parent) as Formula;
 
             return newBrick;
         }

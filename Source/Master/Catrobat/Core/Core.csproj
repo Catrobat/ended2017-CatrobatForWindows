@@ -50,6 +50,7 @@
     <Compile Include="Converter\PathHelper.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="IContextHolder.cs" />
+    <Compile Include="Misc\Helpers\PlatformInformationHelper.cs" />
     <Compile Include="Misc\Helpers\FormatHelper.cs" />
     <Compile Include="Misc\Helpers\ApplicationInformation.cs" />
     <Compile Include="Misc\Helpers\DeviceInformationHelper.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Misc\Helpers\ICulture.cs" />
     <Compile Include="Misc\Helpers\LanguageHelper.cs" />
     <Compile Include="Misc\Helpers\MD5.cs" />
+    <Compile Include="Misc\Helpers\IPlatformInformationHelper.cs" />
     <Compile Include="Misc\Helpers\ReadHelper.cs" />
     <Compile Include="Misc\Helpers\XPathHelper.cs" />
     <Compile Include="ICatrobatContext.cs" />
@@ -79,6 +81,8 @@
     <Compile Include="Objects\Bricks\ChangeYByBrick.cs" />
     <Compile Include="Objects\Bricks\ClearGraphicEffectBrick.cs" />
     <Compile Include="Objects\Bricks\ComeToFrontBrick.cs" />
+    <Compile Include="Objects\Bricks\ChangeVariableBrick.cs" />
+    <Compile Include="Objects\Bricks\SetVariableBrick.cs" />
     <Compile Include="Objects\Bricks\ForeverBrick.cs" />
     <Compile Include="Objects\Bricks\GlideToBrick.cs" />
     <Compile Include="Objects\Bricks\GoNStepsBackBrick.cs" />
@@ -118,8 +122,11 @@
     <Compile Include="Objects\Costumes\CostumeReference.cs" />
     <Compile Include="Objects\DataObject.cs" />
     <Compile Include="Objects\DataRootObject.cs" />
+    <Compile Include="Objects\Formulas\Formula.cs" />
+    <Compile Include="Objects\Formulas\FormulaTree.cs" />
     <Compile Include="Objects\OnlineProjectHeader.cs" />
     <Compile Include="Objects\Project.cs" />
+    <Compile Include="Objects\ProjectDummyHeader.cs" />
     <Compile Include="Objects\ProjectHeader.cs" />
     <Compile Include="Objects\Scripts\BroadcastScript.cs" />
     <Compile Include="Objects\Scripts\Script.cs" />
@@ -132,6 +139,13 @@
     <Compile Include="Objects\Sprite.cs" />
     <Compile Include="Objects\SpriteList.cs" />
     <Compile Include="Objects\SpriteReference.cs" />
+    <Compile Include="Objects\Variables\ProgramVariableList.cs" />
+    <Compile Include="Objects\Variables\ObjectVariableList.cs" />
+    <Compile Include="Objects\Variables\ObjectVariableEntry.cs" />
+    <Compile Include="Objects\Variables\UserVariable.cs" />
+    <Compile Include="Objects\Variables\UserVariableReference.cs" />
+    <Compile Include="Objects\Variables\UserVariableList.cs" />
+    <Compile Include="Objects\Variables\Variables.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ApplicationResources.Designer.cs">

@@ -1,13 +1,43 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class NxtPlayToneBrick : Brick
     {
-        protected int _durationInMs;
+        protected Formula _durationInSeconds;
+        public Formula DurationInSeconds
+        {
+            get { return _durationInSeconds; }
+            set
+            {
+                if (_durationInSeconds == value)
+                {
+                    return;
+                }
 
-        protected int _hertz;
+                _durationInSeconds = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        protected Formula _frequency;
+        public Formula Frequency
+        {
+            get { return _frequency; }
+            set
+            {
+                if (_frequency == value)
+                {
+                    return;
+                }
+
+                _frequency = value;
+                RaisePropertyChanged();
+            }
+        }
+
 
         public NxtPlayToneBrick() {}
 
@@ -15,57 +45,23 @@ namespace Catrobat.Core.Objects.Bricks
 
         public NxtPlayToneBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
-        public int DurationInMs
-        {
-            get { return _durationInMs; }
-            set
-            {
-                if (_durationInMs == value)
-                {
-                    return;
-                }
-
-                _durationInMs = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("DurationInMs"));
-            }
-        }
-
-        public int Hertz
-        {
-            get { return _hertz; }
-            set
-            {
-                if (_hertz == value)
-                {
-                    return;
-                }
-
-                _hertz = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Hertz"));
-            }
-        }
-
         internal override void LoadFromXML(XElement xRoot)
         {
-            _durationInMs = int.Parse(xRoot.Element("durationInMs").Value);
-            _hertz = int.Parse(xRoot.Element("hertz").Value);
+            _durationInSeconds = new Formula(xRoot.Element("durationInSeconds"));
+            _frequency = new Formula(xRoot.Element("frequency"));
         }
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("nxtPlayToneBrick");
+            var xRoot = new XElement("legoNxtPlayToneBrick");
 
-            xRoot.Add(new XElement("durationInMs")
-            {
-                Value = _durationInMs.ToString()
-            });
+            var xVariable1 = new XElement("durationInSeconds");
+            xVariable1.Add(_durationInSeconds.CreateXML());
+            xRoot.Add(xVariable1);
 
-            xRoot.Add(new XElement("hertz")
-            {
-                Value = _hertz.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable2 = new XElement("frequency");
+            xVariable2.Add(_frequency.CreateXML());
+            xRoot.Add(xVariable2);
 
             return xRoot;
         }
@@ -73,8 +69,8 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new NxtPlayToneBrick(parent);
-            newBrick._durationInMs = _durationInMs;
-            newBrick._hertz = _hertz;
+            newBrick._durationInSeconds = _durationInSeconds.Copy(parent) as Formula;
+            newBrick._frequency = _frequency.Copy(parent) as Formula;
 
             return newBrick;
         }

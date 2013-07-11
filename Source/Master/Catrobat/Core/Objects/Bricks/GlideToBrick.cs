@@ -1,38 +1,29 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class GlideToBrick : Brick
     {
-        protected int _durationInMilliSeconds;
-
-        protected int _xDestination;
-
-        protected int _yDestination;
-
-        public GlideToBrick() {}
-
-        public GlideToBrick(Sprite parent) : base(parent) {}
-
-        public GlideToBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
-        public int DurationInMilliSeconds
+        protected Formula _durationInSeconds;
+        public Formula DurationInSeconds
         {
-            get { return _durationInMilliSeconds; }
+            get { return _durationInSeconds; }
             set
             {
-                if (_durationInMilliSeconds == value)
+                if (_durationInSeconds == value)
                 {
                     return;
                 }
 
-                _durationInMilliSeconds = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("DurationInMilliSeconds"));
+                _durationInSeconds = value;
+                RaisePropertyChanged();
             }
         }
 
-        public int XDestination
+        protected Formula _xDestination;
+        public Formula XDestination
         {
             get { return _xDestination; }
             set
@@ -43,11 +34,12 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _xDestination = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("XDestination"));
+                RaisePropertyChanged();
             }
         }
 
-        public int YDestination
+        protected Formula _yDestination;
+        public Formula YDestination
         {
             get { return _yDestination; }
             set
@@ -58,37 +50,39 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _yDestination = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("YDestination"));
+                RaisePropertyChanged();
             }
         }
 
+
+        public GlideToBrick() {}
+
+        public GlideToBrick(Sprite parent) : base(parent) {}
+
+        public GlideToBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+
         internal override void LoadFromXML(XElement xRoot)
         {
-            _durationInMilliSeconds = int.Parse(xRoot.Element("durationInMilliSeconds").Value);
-            _xDestination = int.Parse(xRoot.Element("xDestination").Value);
-            _yDestination = int.Parse(xRoot.Element("yDestination").Value);
+            _durationInSeconds = new Formula(xRoot.Element("durationInSeconds"));
+            _xDestination = new Formula(xRoot.Element("xDestination"));
+            _yDestination = new Formula(xRoot.Element("yDestination"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("glideToBrick");
 
-            xRoot.Add(new XElement("durationInMilliSeconds")
-            {
-                Value = _durationInMilliSeconds.ToString()
-            });
+            var xVariable1 = new XElement("durationInSeconds");
+            xVariable1.Add(_durationInSeconds.CreateXML());
+            xRoot.Add(xVariable1);
 
-            xRoot.Add(new XElement("xDestination")
-            {
-                Value = _xDestination.ToString()
-            });
+            var xVariable2 = new XElement("xDestination");
+            xVariable2.Add(_xDestination.CreateXML());
+            xRoot.Add(xVariable2);
 
-            xRoot.Add(new XElement("yDestination")
-            {
-                Value = _yDestination.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable3 = new XElement("yDestination");
+            xVariable3.Add(_yDestination.CreateXML());
+            xRoot.Add(xVariable3);
 
             return xRoot;
         }
@@ -96,9 +90,9 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new GlideToBrick(parent);
-            newBrick._durationInMilliSeconds = _durationInMilliSeconds;
-            newBrick._xDestination = _xDestination;
-            newBrick._yDestination = _yDestination;
+            newBrick._durationInSeconds = _durationInSeconds.Copy(parent) as Formula;
+            newBrick._xDestination = _xDestination.Copy(parent) as Formula;
+            newBrick._yDestination = _yDestination.Copy(parent) as Formula;
 
             return newBrick;
         }

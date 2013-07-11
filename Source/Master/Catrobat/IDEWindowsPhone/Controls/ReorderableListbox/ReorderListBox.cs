@@ -20,6 +20,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;

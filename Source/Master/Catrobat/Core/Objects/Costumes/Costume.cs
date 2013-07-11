@@ -7,41 +7,9 @@ namespace Catrobat.Core.Objects.Costumes
 {
     public class Costume : DataObject
     {
-        private string _fileName;
-        private string _name;
-        private Sprite _sprite;
         private object _thumbnail;
 
-        public Costume() {}
-
-        public Costume(string name, Sprite parent)
-        {
-            _name = name;
-            _fileName = FileNameGenerator.Generate() + _name;
-            _sprite = parent;
-        }
-
-        internal Costume(XElement xElement, Sprite parent)
-        {
-            _sprite = parent;
-            LoadFromXML(xElement);
-        }
-
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (_name == value)
-                {
-                    return;
-                }
-
-                _name = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Name"));
-            }
-        }
-
+        private string _fileName;
         public string FileName
         {
             get { return _fileName; }
@@ -53,7 +21,39 @@ namespace Catrobat.Core.Objects.Costumes
                 }
 
                 _fileName = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("FileName"));
+                RaisePropertyChanged();
+            }
+        }
+
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (_name == value)
+                {
+                    return;
+                }
+
+                _name = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private Sprite _sprite;
+        public Sprite Sprite
+        {
+            get { return _sprite; }
+            set
+            {
+                if (_sprite == value)
+                {
+                    return;
+                }
+
+                _sprite = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -70,7 +70,7 @@ namespace Catrobat.Core.Objects.Costumes
                             _thumbnail = storage.LoadImageThumbnail(CatrobatContext.GetContext().CurrentProject.BasePath + "/images/" + _fileName);
                         }
                     }
-                    catch {}
+                    catch { }
                 }
 
                 return _thumbnail;
@@ -89,20 +89,21 @@ namespace Catrobat.Core.Objects.Costumes
         //    return _thumbnail;
         //  }
         //}
+        
 
-        public Sprite Sprite
+        public Costume() {}
+
+        public Costume(string name, Sprite parent)
         {
-            get { return _sprite; }
-            set
-            {
-                if (_sprite == value)
-                {
-                    return;
-                }
+            _name = name;
+            _fileName = FileNameGenerator.Generate() + _name;
+            _sprite = parent;
+        }
 
-                _sprite = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
-            }
+        internal Costume(XElement xElement, Sprite parent)
+        {
+            _sprite = parent;
+            LoadFromXML(xElement);
         }
 
         internal override void LoadFromXML(XElement xRoot)
@@ -113,7 +114,7 @@ namespace Catrobat.Core.Objects.Costumes
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("costumeData");
+            var xRoot = new XElement("look");
 
             xRoot.Add(new XElement("fileName", _fileName));
 

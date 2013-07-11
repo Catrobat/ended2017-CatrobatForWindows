@@ -8,7 +8,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class SetCostumeBrick : Brick
     {
         private CostumeReference _costumeReference;
-
         internal CostumeReference CostumeReference
         {
             get { return _costumeReference; }
@@ -20,7 +19,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _costumeReference = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("CostumeReference"));
+                RaisePropertyChanged();
             }
         }
 
@@ -55,9 +54,10 @@ namespace Catrobat.Core.Objects.Bricks
                     _costumeReference = null;
                 }
 
-                OnPropertyChanged(new PropertyChangedEventArgs("Costume"));
+                RaisePropertyChanged();
             }
         }
+
 
         public SetCostumeBrick() {}
 
@@ -67,15 +67,15 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            if (xRoot.Element("costumeData") != null)
+            if (xRoot.Element("look") != null)
             {
-                _costumeReference = new CostumeReference(xRoot.Element("costumeData"), _sprite);
+                _costumeReference = new CostumeReference(xRoot.Element("look"), _sprite);
             }
         }
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("setCostumeBrick");
+            var xRoot = new XElement("setLookBrick");
 
             if (_costumeReference != null)
             {

@@ -44,6 +44,7 @@ namespace IDEWindowsPhone
             LanguageHelper.SetICulture(new CulturePhone());
             ServerCommunication.SetIServerCommunication(new ServerCommunicationPhone());
             CatrobatContext.SetContextHolder(new ContextHolderWindowsPhone());
+            PlatformInformationHelper.SetInterface(new PlatformInformationHelperPhone());
 
             // Global handler for uncaught exceptions.
             UnhandledException += Application_UnhandledException;

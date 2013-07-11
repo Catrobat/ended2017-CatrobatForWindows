@@ -3,7 +3,8 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:s="clr-namespace:Catrobat.IDEWindowsPhone.Views.Editor.Scripts"
   xmlns:d="clr-namespace:Catrobat.Core.Objects.Bricks;assembly=Catrobat.Core"
-  xmlns:objects="clr-namespace:Catrobat.Core.Objects;assembly=Catrobat.Core">
+  xmlns:objects="clr-namespace:Catrobat.Core.Objects;assembly=Catrobat.Core"
+  xmlns:scripts="clr-namespace:Catrobat.Core.Objects.Scripts;assembly=Catrobat.Core">
 
   <s:BrickCollection x:Key="ScriptBrickAddDataMovement">
     <d:PlaceAtBrick XPosition="0" YPosition="0" IsRealObject="False"></d:PlaceAtBrick>
@@ -17,7 +18,7 @@
     <d:TurnRightBrick Degrees="15" IsRealObject="False"></d:TurnRightBrick>
     <d:PointInDirectionBrick Degrees="90" IsRealObject="False"></d:PointInDirectionBrick>
     <d:PointToBrick IsRealObject="False"></d:PointToBrick>
-    <d:GlideToBrick DurationInMilliSeconds="3" XDestination="0" YDestination="0" IsRealObject="False"></d:GlideToBrick>
+    <d:GlideToBrick DurationInSeconds="3" XDestination="0" YDestination="0" IsRealObject="False"></d:GlideToBrick>
     <d:GoNStepsBackBrick IsRealObject="False"></d:GoNStepsBackBrick>
     <d:ComeToFrontBrick IsRealObject="False"></d:ComeToFrontBrick>
   </s:BrickCollection>
@@ -45,10 +46,10 @@
   </s:BrickCollection>
 
   <s:BrickCollection x:Key="ScriptBrickAddDataControl">
-    <objects:StartScript IsRealObject="False"></objects:StartScript>
-    <objects:WhenScript Action="Tapped" IsRealObject="False"></objects:WhenScript>
-    <d:WaitBrick TimeToWaitInMilliSeconds="1" IsRealObject="False"></d:WaitBrick>
-    <objects:BroadcastScript IsRealObject="False"></objects:BroadcastScript>
+    <scripts:StartScript IsRealObject="False"></scripts:StartScript>
+    <scripts:WhenScript Action="Tapped" IsRealObject="False"></scripts:WhenScript>
+    <d:WaitBrick TimeToWaitInSeconds="1" IsRealObject="False"></d:WaitBrick>
+    <scripts:BroadcastScript IsRealObject="False"></scripts:BroadcastScript>
     <d:BroadcastBrick IsRealObject="False"></d:BroadcastBrick>
     <d:BroadcastWaitBrick IsRealObject="False"></d:BroadcastWaitBrick>
     <d:NoteBrick Note="" IsRealObject="False"></d:NoteBrick>

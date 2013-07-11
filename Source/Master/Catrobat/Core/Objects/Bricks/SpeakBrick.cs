@@ -6,13 +6,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class SpeakBrick : Brick
     {
         protected string _text;
-
-        public SpeakBrick() {}
-
-        public SpeakBrick(Sprite parent) : base(parent) {}
-
-        public SpeakBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public string Text
         {
             get { return _text; }
@@ -24,9 +17,16 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _text = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Text"));
+                RaisePropertyChanged();
             }
         }
+
+
+        public SpeakBrick() {}
+
+        public SpeakBrick(Sprite parent) : base(parent) {}
+
+        public SpeakBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

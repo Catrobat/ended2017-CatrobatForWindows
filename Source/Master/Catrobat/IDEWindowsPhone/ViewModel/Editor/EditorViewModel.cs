@@ -3,6 +3,7 @@ using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using GalaSoft.MvvmLight;
@@ -733,7 +734,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private async void StartPlayerAction()
         {
-            PlayerLauncher.LaunchPlayer(CurrentProject.ProjectName);
+            PlayerLauncher.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
         }
 
         private void GoToMainViewAction()

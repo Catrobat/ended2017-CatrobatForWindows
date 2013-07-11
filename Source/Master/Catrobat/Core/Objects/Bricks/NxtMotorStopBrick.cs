@@ -6,13 +6,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class NxtMotorStopBrick : Brick
     {
         protected string _motor;
-
-        public NxtMotorStopBrick() {}
-
-        public NxtMotorStopBrick(Sprite parent) : base(parent) {}
-
-        public NxtMotorStopBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public string Motor
         {
             get { return _motor; }
@@ -24,9 +17,16 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _motor = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Motor"));
+                RaisePropertyChanged();
             }
         }
+
+
+        public NxtMotorStopBrick() {}
+
+        public NxtMotorStopBrick(Sprite parent) : base(parent) {}
+
+        public NxtMotorStopBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -35,7 +35,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("nxtMotorStopBrick");
+            var xRoot = new XElement("legoNxtMotorStopBrick");
 
             xRoot.Add(new XElement("motor")
             {

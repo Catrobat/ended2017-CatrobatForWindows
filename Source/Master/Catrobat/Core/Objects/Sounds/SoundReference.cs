@@ -7,8 +7,38 @@ namespace Catrobat.Core.Objects.Sounds
     public class SoundReference : DataObject
     {
         private readonly Sprite _sprite;
+
         private string _reference;
+        public string Reference
+        {
+            get { return _reference; }
+            set
+            {
+                if (_reference == value)
+                {
+                    return;
+                }
+
+                _reference = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private Sound _sound;
+        public Sound Sound
+        {
+            get { return _sound; }
+            set
+            {
+                if (_sound == value)
+                {
+                    return;
+                }
+
+                _sound = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public SoundReference(Sprite parent)
         {
@@ -21,36 +51,6 @@ namespace Catrobat.Core.Objects.Sounds
             LoadFromXML(xElement);
         }
 
-        public string Reference
-        {
-            get { return _reference; }
-            set
-            {
-                if (_reference == value)
-                {
-                    return;
-                }
-
-                _reference = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Reference"));
-            }
-        }
-
-        public Sound Sound
-        {
-            get { return _sound; }
-            set
-            {
-                if (_sound == value)
-                {
-                    return;
-                }
-
-                _sound = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sound"));
-            }
-        }
-
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
@@ -59,7 +59,7 @@ namespace Catrobat.Core.Objects.Sounds
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("soundInfo");
+            var xRoot = new XElement("sound");
 
             xRoot.Add(new XAttribute("reference", XPathHelper.GetReference(Sound, _sprite)));
 

@@ -1,11 +1,22 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class WaitBrick : Brick
     {
-        protected int _timeToWaitInMilliSeconds;
+        protected Formula _timeToWaitInSeconds;
+        public Formula TimeToWaitInSeconds
+        {
+            get { return _timeToWaitInSeconds; }
+            set
+            {
+                _timeToWaitInSeconds = value;
+                RaisePropertyChanged();
+            }
+        }
+
 
         public WaitBrick() {}
 
@@ -13,31 +24,20 @@ namespace Catrobat.Core.Objects.Bricks
 
         public WaitBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
-        public int TimeToWaitInMilliSeconds
-        {
-            get { return _timeToWaitInMilliSeconds; }
-            set
-            {
-                _timeToWaitInMilliSeconds = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("TimeToWaitInMilliSeconds"));
-            }
-        }
+        
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _timeToWaitInMilliSeconds = int.Parse(xRoot.Element("timeToWaitInMilliSeconds").Value);
+            _timeToWaitInSeconds = new Formula(xRoot.Element("timeToWaitInSeconds"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("waitBrick");
 
-            xRoot.Add(new XElement("timeToWaitInMilliSeconds")
-            {
-                Value = _timeToWaitInMilliSeconds.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable = new XElement("timeToWaitInSeconds");
+            xVariable.Add(_timeToWaitInSeconds.CreateXML());
+            xRoot.Add(xVariable);
 
             return xRoot;
         }
@@ -45,7 +45,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new WaitBrick(parent);
-            newBrick._timeToWaitInMilliSeconds = _timeToWaitInMilliSeconds;
+            newBrick._timeToWaitInSeconds = _timeToWaitInSeconds.Copy(parent) as Formula;
 
             return newBrick;
         }

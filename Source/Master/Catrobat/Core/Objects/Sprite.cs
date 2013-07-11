@@ -1,16 +1,78 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
 using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 
 namespace Catrobat.Core.Objects
 {
     public class Sprite : DataObject
     {
+        public Project Project { get; set; }
+
         private CostumeList _costumes;
+        public CostumeList Costumes
+        {
+            get { return _costumes; }
+            set
+            {
+                if (_costumes == value)
+                {
+                    return;
+                }
+
+                _costumes = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (_name == value)
+                {
+                    return;
+                }
+
+                _name = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private ScriptList _scripts;
+        public ScriptList Scripts
+        {
+            get { return _scripts; }
+            set
+            {
+                if (_scripts == value)
+                {
+                    return;
+                }
+
+                _scripts = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private SoundList _sounds;
+        public SoundList Sounds
+        {
+            get { return _sounds; }
+            set
+            {
+                if (_sounds == value)
+                {
+                    return;
+                }
+
+                _sounds = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public Sprite() {}
 
@@ -28,73 +90,11 @@ namespace Catrobat.Core.Objects
             LoadFromXML(xElement);
         }
 
-        public Project Project { get; set; }
-
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (_name == value)
-                {
-                    return;
-                }
-
-                _name = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Name"));
-            }
-        }
-
-        public ScriptList Scripts
-        {
-            get { return _scripts; }
-            set
-            {
-                if (_scripts == value)
-                {
-                    return;
-                }
-
-                _scripts = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sprites"));
-            }
-        }
-
-        public CostumeList Costumes
-        {
-            get { return _costumes; }
-            set
-            {
-                if (_costumes == value)
-                {
-                    return;
-                }
-
-                _costumes = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Costumes"));
-            }
-        }
-
-        public SoundList Sounds
-        {
-            get { return _sounds; }
-            set
-            {
-                if (_sounds == value)
-                {
-                    return;
-                }
-
-                _sounds = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sounds"));
-            }
-        }
-
         internal override void LoadFromXML(XElement xRoot)
         {
-            if (xRoot.Element("costumeDataList") != null)
+            if (xRoot.Element("lookList") != null)
             {
-                _costumes = new CostumeList(xRoot.Element("costumeDataList"), this);
+                _costumes = new CostumeList(xRoot.Element("lookList"), this);
             }
 
             _name = xRoot.Element("name").Value;
@@ -103,15 +103,15 @@ namespace Catrobat.Core.Objects
             {
                 _sounds = new SoundList(xRoot.Element("soundList"), this);
             }
-            if (xRoot.Element("scriptList") != null)
+            if (xRoot.Element("objectList") != null)
             {
-                _scripts = new ScriptList(xRoot.Element("scriptList"), this);
+                _scripts = new ScriptList(xRoot.Element("objectList"), this);
             }
         }
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("sprite");
+            var xRoot = new XElement("object");
 
             if (_costumes != null)
             {

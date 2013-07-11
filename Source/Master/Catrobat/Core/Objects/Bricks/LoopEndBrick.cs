@@ -7,13 +7,6 @@ namespace Catrobat.Core.Objects.Bricks
     public class LoopEndBrick : Brick
     {
         protected LoopBeginBrickRef _loopBeginBrickReference;
-
-        public LoopEndBrick() {}
-
-        public LoopEndBrick(Sprite parent) : base(parent) {}
-
-        public LoopEndBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         internal LoopBeginBrickRef LoopBeginBrickReference
         {
             get { return _loopBeginBrickReference; }
@@ -25,7 +18,7 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _loopBeginBrickReference = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("LoopBeginBrickReference"));
+                RaisePropertyChanged();
             }
         }
 
@@ -54,9 +47,16 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _loopBeginBrickReference.LoopBeginBrick = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("LoopBeginBrick"));
+                RaisePropertyChanged();
             }
         }
+
+
+        public LoopEndBrick() {}
+
+        public LoopEndBrick(Sprite parent) : base(parent) {}
+
+        public LoopEndBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {

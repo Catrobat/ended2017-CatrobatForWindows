@@ -8,8 +8,52 @@ namespace Catrobat.Core.Objects.Sounds
     public class Sound : DataObject
     {
         private string _fileName;
+        public string FileName
+        {
+            get { return _fileName; }
+            set
+            {
+                if (_fileName == value)
+                {
+                    return;
+                }
+
+                _fileName = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (_name == value)
+                {
+                    return;
+                }
+
+                _name = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private Sprite _sprite;
+        public Sprite Sprite
+        {
+            get { return _sprite; }
+            set
+            {
+                if (_sprite == value)
+                {
+                    return;
+                }
+
+                _sprite = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public Sound() {}
 
@@ -26,51 +70,6 @@ namespace Catrobat.Core.Objects.Sounds
             LoadFromXML(xElement);
         }
 
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (_name == value)
-                {
-                    return;
-                }
-
-                _name = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Name"));
-            }
-        }
-
-        public string FileName
-        {
-            get { return _fileName; }
-            set
-            {
-                if (_fileName == value)
-                {
-                    return;
-                }
-
-                _fileName = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("FileName"));
-            }
-        }
-
-        public Sprite Sprite
-        {
-            get { return _sprite; }
-            set
-            {
-                if (_sprite == value)
-                {
-                    return;
-                }
-
-                _sprite = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Sprite"));
-            }
-        }
-
         internal override void LoadFromXML(XElement xRoot)
         {
             _fileName = xRoot.Element("fileName").Value;
@@ -79,7 +78,7 @@ namespace Catrobat.Core.Objects.Sounds
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("soundInfo");
+            var xRoot = new XElement("sound");
 
             xRoot.Add(new XElement("fileName", _fileName));
 

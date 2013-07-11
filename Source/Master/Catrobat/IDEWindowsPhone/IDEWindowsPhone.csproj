@@ -158,6 +158,7 @@
     <Compile Include="Misc\CostumeBuilder.cs" />
     <Compile Include="Misc\CulturePhone.cs" />
     <Compile Include="Misc\MemoryMonitor.cs" />
+    <Compile Include="Misc\PlatformInformationHelperPhone.cs" />
     <Compile Include="Misc\PlayerLauncher.cs" />
     <Compile Include="Misc\ProjectImporter.cs" />
     <Compile Include="Misc\ResolutionHelper.cs" />

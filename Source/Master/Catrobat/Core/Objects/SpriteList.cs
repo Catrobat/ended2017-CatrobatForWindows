@@ -25,13 +25,13 @@ namespace Catrobat.Core.Objects
         {
             Sprites = new ObservableCollection<Sprite>();
 
-            foreach (XElement xSprite in xRoot.Elements("sprite"))
+            foreach (XElement xSprite in xRoot.Elements("object"))
             {
                 Sprites.Add(new Sprite(_project));
             }
 
             var enumerator = Sprites.GetEnumerator();
-            foreach (XElement xSprite in xRoot.Elements("sprite"))
+            foreach (XElement xSprite in xRoot.Elements("object"))
             {
                 enumerator.MoveNext();
                 enumerator.Current.LoadFromXML(xSprite);
@@ -40,7 +40,7 @@ namespace Catrobat.Core.Objects
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("spriteList");
+            var xRoot = new XElement("objectList");
 
             foreach (Sprite sprite in Sprites)
             {

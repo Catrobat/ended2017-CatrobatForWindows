@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Catrobat.Core.Objects.Scripts;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using Catrobat.TestsWindowsPhone.SampleData;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;

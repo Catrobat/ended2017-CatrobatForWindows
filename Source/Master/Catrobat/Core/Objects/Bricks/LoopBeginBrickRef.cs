@@ -9,21 +9,6 @@ namespace Catrobat.Core.Objects.Bricks
         private readonly Sprite _sprite;
 
         protected string _classField;
-
-        private LoopBeginBrick _loopBeginBrick;
-        protected string _reference;
-
-        public LoopBeginBrickRef(Sprite parent)
-        {
-            _sprite = parent;
-        }
-
-        public LoopBeginBrickRef(XElement xElement, Sprite parent)
-        {
-            _sprite = parent;
-            LoadFromXML(xElement);
-        }
-
         public string Class
         {
             get { return _classField; }
@@ -35,25 +20,11 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _classField = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Class"));
+                RaisePropertyChanged();
             }
         }
 
-        public string Reference
-        {
-            get { return _reference; }
-            set
-            {
-                if (_reference == value)
-                {
-                    return;
-                }
-
-                _reference = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Reference"));
-            }
-        }
-
+        private LoopBeginBrick _loopBeginBrick;
         public LoopBeginBrick LoopBeginBrick
         {
             get { return _loopBeginBrick; }
@@ -65,8 +36,36 @@ namespace Catrobat.Core.Objects.Bricks
                 }
 
                 _loopBeginBrick = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("LoopBeginBrick"));
+                RaisePropertyChanged();
             }
+        }
+
+        protected string _reference;
+        public string Reference
+        {
+            get { return _reference; }
+            set
+            {
+                if (_reference == value)
+                {
+                    return;
+                }
+
+                _reference = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+        public LoopBeginBrickRef(Sprite parent)
+        {
+            _sprite = parent;
+        }
+
+        public LoopBeginBrickRef(XElement xElement, Sprite parent)
+        {
+            _sprite = parent;
+            LoadFromXML(xElement);
         }
 
         internal override void LoadFromXML(XElement xRoot)

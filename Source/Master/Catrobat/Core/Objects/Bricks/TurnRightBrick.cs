@@ -1,12 +1,23 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
 using System.Xml.Linq;
+using Catrobat.Core.Objects.Formulas;
 
 namespace Catrobat.Core.Objects.Bricks
 {
     public class TurnRightBrick : Brick
     {
-        protected double _degrees = 15.0f;
+        protected Formula _degrees;
+        public Formula Degrees
+        {
+            get { return _degrees; }
+            set
+            {
+                _degrees = value;
+                RaisePropertyChanged();
+            }
+        }
+
 
         public TurnRightBrick() {}
 
@@ -14,31 +25,18 @@ namespace Catrobat.Core.Objects.Bricks
 
         public TurnRightBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
-        public double Degrees
-        {
-            get { return _degrees; }
-            set
-            {
-                _degrees = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Degrees"));
-            }
-        }
-
         internal override void LoadFromXML(XElement xRoot)
         {
-            _degrees = double.Parse(xRoot.Element("degrees").Value, CultureInfo.InvariantCulture);
+            _degrees = new Formula(xRoot.Element("degrees"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("turnRightBrick");
 
-            xRoot.Add(new XElement("degrees")
-            {
-                Value = _degrees.ToString()
-            });
-
-            //CreateCommonXML(xRoot);
+            var xVariable = new XElement("degrees");
+            xVariable.Add(_degrees.CreateXML());
+            xRoot.Add(xVariable);
 
             return xRoot;
         }
@@ -46,7 +44,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new TurnRightBrick(parent);
-            newBrick._degrees = _degrees;
+            newBrick._degrees = _degrees.Copy(parent) as Formula;
 
             return newBrick;
         }

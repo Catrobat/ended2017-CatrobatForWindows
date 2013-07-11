@@ -1,17 +1,19 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Xml.Linq;
 using Catrobat.Core.Objects.Bricks;
 
-namespace Catrobat.Core.Objects
+namespace Catrobat.Core.Objects.Scripts
 {
     public class BroadcastScript : Script
     {
-        public BroadcastScript() {}
-
-        public BroadcastScript(Sprite parent) : base(parent) {}
-
-        public BroadcastScript(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public ObservableCollection<string> UIReceivedMessages
+        {
+            get
+            {
+                // TODO: return available UIReceivedMessages from Project
+                return new ObservableCollection<string>();
+            }
+        }
 
         private string _receivedMessage;
         public string ReceivedMessage
@@ -26,18 +28,16 @@ namespace Catrobat.Core.Objects
 
                 // TODO: update available UIReceivedMessages from Project
                 _receivedMessage = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("ReceivedMessage"));
+                RaisePropertyChanged();
             }
         }
 
-        public ObservableCollection<string> UIReceivedMessages
-        {
-            get
-            {
-                // TODO: return available UIReceivedMessages from Project
-                return new ObservableCollection<string>();
-            }
-        }
+
+        public BroadcastScript() {}
+
+        public BroadcastScript(Sprite parent) : base(parent) {}
+
+        public BroadcastScript(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -68,9 +68,9 @@ namespace Catrobat.Core.Objects
         {
             var newBroadcastScript = new BroadcastScript(parent);
             newBroadcastScript._receivedMessage = _receivedMessage;
-            if (bricks != null)
+            if (_bricks != null)
             {
-                newBroadcastScript.bricks = bricks.Copy(parent) as BrickList;
+                newBroadcastScript._bricks = _bricks.Copy(parent) as BrickList;
             }
 
             return newBroadcastScript;

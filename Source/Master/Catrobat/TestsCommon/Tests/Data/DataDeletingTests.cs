@@ -38,8 +38,8 @@ namespace Catrobat.TestsCommon.Tests.Data
 
       using (IStorage storage = StorageSystem.GetStorage())
       {
-        Assert.AreEqual(storage.FileExists(pathCostumes + costume.FileName), false);
-        Assert.AreEqual(storage.FileExists(pathSounds + soundInfo.FileName), false);
+        Assert.IsFalse(storage.FileExists(pathCostumes + costume.FileName));
+        Assert.IsFalse(storage.FileExists(pathSounds + soundInfo.FileName));
       }
 
       CatrobatContext.SetContextHolder(null);
