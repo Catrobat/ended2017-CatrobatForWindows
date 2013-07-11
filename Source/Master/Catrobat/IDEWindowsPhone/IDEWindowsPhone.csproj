@@ -485,16 +485,10 @@
     <Content Include="Content\Images\Misc\EditImage.png" />
     <Content Include="Content\Images\Misc\InProcess.png" />
     <Content Include="Content\Images\Screenshot\NoScreenshot.png" />
-    <Content Include="Content\Resources\SampleProjects\Aquarium_v2.catrobat" />
-    <Content Include="Content\Resources\SampleProjects\default.catroid" />
-    <Content Include="Content\Resources\SampleProjects\Egg_timer.catrobat" />
-    <Content Include="Content\Resources\SampleProjects\Fishy.catroid" />
-    <Content Include="Content\Resources\SampleProjects\HAL9000.catrobat" />
-    <Content Include="Content\Resources\SampleProjects\Pacman.catrobat" />
-    <Content Include="Content\Resources\SampleProjects\Piano.catrobat" />
     <Content Include="fmodex_arm.dll" />
     <Content Include="fmodex_x86.dll" />
     <Content Include="italic.spritefont" />
+    <None Include="Content\Resources\SampleProjects\default.catroid" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">

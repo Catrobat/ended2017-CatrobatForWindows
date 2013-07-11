@@ -41,7 +41,10 @@ namespace Catrobat.Core.Objects.Formulas
 
         public DataObject Copy(Sprite parent)
         {
-            throw new NotImplementedException();
+            var newFormula = new Formula();
+            newFormula._formulaTree = _formulaTree.Copy(parent) as FormulaTree;
+
+            return newFormula;
         }
     }
 }

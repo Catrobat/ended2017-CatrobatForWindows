@@ -21,6 +21,11 @@ namespace Catrobat.Core.Objects.Variables
 
         internal override void LoadFromXML(XElement xRoot)
         {
+            if (xRoot == null)
+            {
+                UserVariables = new ObservableCollection<UserVariable>();
+                return;
+            }
             UserVariables = new ObservableCollection<UserVariable>();
             foreach (XElement element in xRoot.Elements())
             {

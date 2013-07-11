@@ -145,7 +145,7 @@
     <Compile Include="Objects\Variables\UserVariable.cs" />
     <Compile Include="Objects\Variables\UserVariableReference.cs" />
     <Compile Include="Objects\Variables\UserVariableList.cs" />
-    <Compile Include="Objects\Variables\Variables.cs" />
+    <Compile Include="Objects\Variables\VariableList.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ApplicationResources.Designer.cs">
