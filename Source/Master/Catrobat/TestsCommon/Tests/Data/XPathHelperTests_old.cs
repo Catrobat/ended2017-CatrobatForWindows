@@ -8,7 +8,7 @@ using Catrobat.TestsCommon.SampleData;
 namespace Catrobat.TestsCommon.Tests.Data
 {
     [TestClass]
-    public class XPathHelperTests
+    public class XPathHelperTests_old
     {
       [ClassInitialize()]
       public static void TestClassInitialize(TestContext testContext)
