@@ -160,6 +160,14 @@
     <Compile Include="Storage\IStorageFactory.cs" />
     <Compile Include="Storage\ResourceLoader.cs" />
     <Compile Include="Storage\StorageSystem.cs" />
+    <Compile Include="VersionConverter\CatrobatVersion.cs" />
+    <Compile Include="VersionConverter\CatrobatVersionElementRenameEntry.cs" />
+    <Compile Include="VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
+    <Compile Include="VersionConverter\CatrobatVersionPair.cs" />
+    <Compile Include="VersionConverter\VersionConfig.cs" />
+    <Compile Include="VersionConverter\VersionConverter.cs" />
+    <Compile Include="VersionConverter\Versions\CatrobatVersion10.cs" />
+    <Compile Include="Misc\XPathHelper.cs" />
     <Compile Include="XmlStringWriter.cs" />
     <Compile Include="ZIP\CatrobatZip.cs" />
   </ItemGroup>
@@ -184,6 +192,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
