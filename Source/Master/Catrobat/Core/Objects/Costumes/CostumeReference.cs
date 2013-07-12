@@ -7,6 +7,7 @@ namespace Catrobat.Core.Objects.Costumes
     public class CostumeReference : DataObject
     {
         private readonly Sprite _sprite;
+        private string _reference;
 
         private Costume _costume;
         public Costume Costume
@@ -24,21 +25,6 @@ namespace Catrobat.Core.Objects.Costumes
             }
         }
 
-        private string _reference;
-        public string Reference
-        {
-            get { return _reference; }
-            set
-            {
-                if (_reference == value)
-                {
-                    return;
-                }
-
-                _reference = value;
-                RaisePropertyChanged();
-            }
-        }
 
         public CostumeReference(Sprite parent)
         {
@@ -54,14 +40,14 @@ namespace Catrobat.Core.Objects.Costumes
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
-            _costume = XPathHelper.GetElement(_reference, _sprite) as Costume;
+            Costume = ReferenceHelper.GetReferenceObject(this, _reference) as Costume;
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("look");
 
-            xRoot.Add(new XAttribute("reference", XPathHelper.GetReference(_costume, _sprite)));
+            xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
 
             return xRoot;
         }
@@ -69,10 +55,14 @@ namespace Catrobat.Core.Objects.Costumes
         public DataObject Copy(Sprite parent)
         {
             var newCostumeRef = new CostumeReference(parent);
-            newCostumeRef._reference = _reference;
-            newCostumeRef._costume = XPathHelper.GetElement(_reference, parent) as Costume;
+            newCostumeRef.Costume = _costume;
 
             return newCostumeRef;
+        }
+
+        public void UpdateReferenceObject()
+        {
+            Costume = ReferenceHelper.GetReferenceObject(this, _reference) as Costume;
         }
     }
 }

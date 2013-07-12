@@ -1,4 +1,6 @@
-﻿using Catrobat.Core.Misc.Helpers;
+﻿using System.Linq;
+using System.Xml.Linq;
+using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,125 +12,66 @@ namespace Catrobat.TestsCommon.Tests.Data
     [TestClass]
     public class XPathHelperTests
     {
-      [ClassInitialize()]
-      public static void TestClassInitialize(TestContext testContext)
-      {
-        TestHelper.InitializeTests();
-      }
-
-        [TestMethod]
-        public void GetCostumeTest()
+        [ClassInitialize()]
+        public static void TestClassInitialize(TestContext testContext)
         {
-            var project = SampleLoader.LoadSampleXML("ultimateTest");
-
-            var sprite1 = project.SpriteList.Sprites[0] as Sprite;
-
-            var setCostumeBrick1 = sprite1.Scripts.Scripts[0].Bricks.Bricks[12] as SetCostumeBrick;
-            Assert.AreEqual(XPathHelper.GetElement(setCostumeBrick1.CostumeReference.Reference, sprite1), sprite1.Costumes.Costumes[0]);
+            TestHelper.InitializeTests();
         }
 
         [TestMethod]
-        public void GetSoundInfoTest()
+        public void GetElementTest()
         {
-            var project = SampleLoader.LoadSampleXML("ultimateTest");
+            XDocument document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");
 
-            var sprite2 = project.SpriteList.Sprites[1] as Sprite;
+            const string path1 = "../../../element1/element11[2]";
 
-            var playSoundBrick1 = sprite2.Scripts.Scripts[0].Bricks.Bricks[0] as PlaySoundBrick;
-            Assert.AreEqual(XPathHelper.GetElement(playSoundBrick1.SoundReference.Reference, sprite2), sprite2.Sounds.Sounds[0]);
+            var start1 = (from a in document.Descendants()
+                          where a.Attribute("start") != null && a.Attribute("start").Value == "1"
+                          select a).Single();
 
-            var playSoundBrick2 = sprite2.Scripts.Scripts[0].Bricks.Bricks[1] as PlaySoundBrick;
-            Assert.AreEqual(XPathHelper.GetElement(playSoundBrick2.SoundReference.Reference, sprite2), sprite2.Sounds.Sounds[0]);
+            var destination1 = (from a in document.Descendants()
+                                where a.Attribute("destination") != null && a.Attribute("destination").Value == "1"
+                                select a).Single();
 
-            var playSoundBrick3 = sprite2.Scripts.Scripts[0].Bricks.Bricks[2] as PlaySoundBrick;
-            Assert.AreEqual(XPathHelper.GetElement(playSoundBrick3.SoundReference.Reference, sprite2), sprite2.Sounds.Sounds[1]);
+
+            var foundElement = Catrobat.Core.Misc.XPathHelper.GetElement(start1, path1);
+            Assert.AreEqual(destination1, foundElement);
         }
 
         [TestMethod]
-        public void GetSpriteTest()
+        public void GetXPathTest()
         {
-            var project = SampleLoader.LoadSampleXML("ultimateTest");
+            XDocument document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");
 
-            var sprite1 = project.SpriteList.Sprites[0] as Sprite;
-            var sprite2 = project.SpriteList.Sprites[1] as Sprite;
-            var sprite3 = project.SpriteList.Sprites[2] as Sprite;
+            const string path1 = "../../../element1/element11[2]";
 
-            var pointToBrick1 = sprite1.Scripts.Scripts[0].Bricks.Bricks[10] as PointToBrick;
-            Assert.AreEqual(XPathHelper.GetElement(pointToBrick1.PointedSpriteReference.Reference, sprite1), sprite2);
+            var start1 = (from a in document.Descendants()
+                          where a.Attribute("start") != null && a.Attribute("start").Value == "1"
+                          select a).Single();
 
-            var pointToBrick2 = sprite2.Scripts.Scripts[1].Bricks.Bricks[1] as PointToBrick;
-            Assert.AreEqual(XPathHelper.GetElement(pointToBrick2.PointedSpriteReference.Reference, sprite2), sprite1);
+            var destination1 = (from a in document.Descendants()
+                                where a.Attribute("destination") != null && a.Attribute("destination").Value == "1"
+                                select a).Single();
 
-            var pointToBrick3 = sprite3.Scripts.Scripts[0].Bricks.Bricks[1] as PointToBrick;
-            Assert.AreEqual(XPathHelper.GetElement(pointToBrick3.PointedSpriteReference.Reference, sprite3), sprite2);
+
+            var foundPath = Catrobat.Core.Misc.XPathHelper.GetXPath(start1, destination1);
+            Assert.AreEqual(path1, foundPath);
         }
 
-        [TestMethod]
-        public void GetLoopBeginTest()
+        public void XPathEqualsTest1()
         {
-            var project = SampleLoader.LoadSampleXML("ultimateTest");
+            const string path1 = "../../../element1[1]/element11[2]";
+            const string path2 = "../../../element1[1]/element11[2]";
 
-            var sprite2 = project.SpriteList.Sprites[1] as Sprite;
-            ReadHelper.CurrentBrickList = sprite2.Scripts.Scripts[2].Bricks;
-
-            var foreverBrick = sprite2.Scripts.Scripts[2].Bricks.Bricks[0] as ForeverBrick;
-            Assert.AreEqual(XPathHelper.GetElement(foreverBrick.LoopEndBrickReference.Reference, sprite2), sprite2.Scripts.Scripts[2].Bricks.Bricks[3]);
-
-            var repeatBrick = sprite2.Scripts.Scripts[2].Bricks.Bricks[1] as RepeatBrick;
-            Assert.AreEqual(XPathHelper.GetElement(repeatBrick.LoopEndBrickReference.Reference, sprite2), sprite2.Scripts.Scripts[2].Bricks.Bricks[5]);
+            Assert.IsTrue(Catrobat.Core.Misc.XPathHelper.XPathEquals(path1, path2));
         }
 
-        [TestMethod]
-        public void GetLoopEndTest()
+        public void XPathEqualsTest2()
         {
-            var project = SampleLoader.LoadSampleXML("ultimateTest");
+            const string path1 = "../../../element2[1]/element11[2]";
+            const string path2 = "../../../element1[1]/element11[2]";
 
-            var sprite2 = project.SpriteList.Sprites[1] as Sprite;
-            ReadHelper.CurrentBrickList = sprite2.Scripts.Scripts[2].Bricks;
-
-            var loopEndBrick1 = sprite2.Scripts.Scripts[2].Bricks.Bricks[3] as LoopEndBrick;
-            Assert.AreEqual(XPathHelper.GetElement(loopEndBrick1.LoopBeginBrickReference.Reference, sprite2), sprite2.Scripts.Scripts[2].Bricks.Bricks[0]);
-
-            var loopEndBrick2 = sprite2.Scripts.Scripts[2].Bricks.Bricks[5] as LoopEndBrick;
-            Assert.AreEqual(XPathHelper.GetElement(loopEndBrick2.LoopBeginBrickReference.Reference, sprite2), sprite2.Scripts.Scripts[2].Bricks.Bricks[1]);
-        }
-
-        [TestMethod]
-        public void GetReferenceTest()
-        {
-            var project = SampleLoader.LoadSampleXML("ultimateTest");
-
-            var sprite1 = project.SpriteList.Sprites[0] as Sprite;
-            var sprite2 = project.SpriteList.Sprites[1] as Sprite;
-            var sprite3 = project.SpriteList.Sprites[2] as Sprite;
-
-            var costume = (sprite1.Scripts.Scripts[0].Bricks.Bricks[12] as SetCostumeBrick).Costume;
-            Assert.AreEqual(XPathHelper.GetReference(costume, sprite1), "../../../../../costumeDataList/costumeData");
-
-            var soundInfo1 = (sprite2.Scripts.Scripts[0].Bricks.Bricks[0] as PlaySoundBrick).Sound;
-            Assert.AreEqual(XPathHelper.GetReference(soundInfo1, sprite2), "../../../../../soundList/soundInfo");
-
-            var soundInfo2 = (sprite2.Scripts.Scripts[0].Bricks.Bricks[2] as PlaySoundBrick).Sound;
-            Assert.AreEqual(XPathHelper.GetReference(soundInfo2, sprite2), "../../../../../soundList/soundInfo[2]");
-
-
-            Assert.AreEqual(XPathHelper.GetReference(sprite2, sprite1), "../../../../../../sprite[2]");
-
-            Assert.AreEqual(XPathHelper.GetReference(sprite1, sprite2), "../../../../../../sprite");
-
-            Assert.AreEqual(XPathHelper.GetReference(sprite2, sprite3), "../../../../../../sprite[2]");
-
-            var loopEndBrick1 = (sprite2.Scripts.Scripts[2].Bricks.Bricks[0] as ForeverBrick).LoopEndBrick as LoopEndBrick;
-            Assert.AreEqual(XPathHelper.GetReference(loopEndBrick1, sprite2), "../../loopEndBrick");
-
-            var loopEndBrick2 = (sprite2.Scripts.Scripts[2].Bricks.Bricks[1] as RepeatBrick).LoopEndBrick as LoopEndBrick;
-            Assert.AreEqual(XPathHelper.GetReference(loopEndBrick2, sprite2), "../../loopEndBrick[2]");
-
-            var loopBeginBrick1 = (sprite2.Scripts.Scripts[2].Bricks.Bricks[3] as LoopEndBrick).LoopBeginBrick as LoopBeginBrick;
-            Assert.AreEqual(XPathHelper.GetReference(loopBeginBrick1, sprite2), "../../foreverBrick");
-
-            var loopBeginBrick2 = (sprite2.Scripts.Scripts[2].Bricks.Bricks[5] as LoopEndBrick).LoopBeginBrick as LoopBeginBrick;
-            Assert.AreEqual(XPathHelper.GetReference(loopBeginBrick2, sprite2), "../../repeatBrick");
+            Assert.IsFalse(Catrobat.Core.Misc.XPathHelper.XPathEquals(path1, path2));
         }
     }
 }

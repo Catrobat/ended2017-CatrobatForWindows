@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
+using Catrobat.Core.Objects.Variables;
 using Catrobat.Core.Storage;
 
 namespace Catrobat.Core.Objects
@@ -72,7 +73,20 @@ namespace Catrobat.Core.Objects
         }
 
         private ProjectHeader _projectHeader;
-        public ProjectHeader ProjectHeader { get; set; }
+        public ProjectHeader ProjectHeader
+        {
+            get { return _projectHeader; }
+            set
+            {
+                if (_projectHeader == value)
+                {
+                    return;
+                }
+
+                _projectHeader = value;
+                RaisePropertyChanged();
+            }
+        }
 
         private SpriteList _spriteList;
         public SpriteList SpriteList
@@ -117,6 +131,22 @@ namespace Catrobat.Core.Objects
             set { _projectDummyHeader = value; }
         }
 
+        private VariableList _variableList;
+        public VariableList VariableList
+        {
+            get { return _variableList; }
+            set
+            {
+                if (_variableList == value)
+                {
+                    return;
+                }
+
+                _variableList = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public string BasePath
         {
             get { return "Projects/" + ProjectHeader.ProgramName; }
@@ -153,7 +183,7 @@ namespace Catrobat.Core.Objects
             _projectHeader = new ProjectHeader(project.Element("header"));
             _spriteList = new SpriteList(this);
             _spriteList.LoadFromXML(project.Element("objectList"));
-            //_variables = new Variables(project.Element("variables"));
+            _variableList = new VariableList(project.Element("variables"));
         }
 
         internal override XDocument CreateXML()
@@ -166,7 +196,7 @@ namespace Catrobat.Core.Objects
 
             xProject.Add(_spriteList.CreateXML());
 
-            //xProject.Add(_variables.CreateXML());
+            xProject.Add(_variableList.CreateXML());
 
             _document.Add(xProject);
 

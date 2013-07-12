@@ -37,14 +37,18 @@ namespace Catrobat.Core.Objects.Variables
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            throw new NotImplementedException();
-            //SpriteReference = new SpriteReference(xRoot.Element("object"));
-            //VariableList = new UserVariableList(xRoot.Element("list"));
+            SpriteReference = new SpriteReference(xRoot.Element("object"), this);
+            VariableList = new UserVariableList(xRoot.Element("list"));
         }
 
         internal override XElement CreateXML()
         {
-            throw new NotImplementedException();
+            var xRoot = new XElement("entry");
+
+            xRoot.Add(_spriteReference.CreateXML());
+            xRoot.Add(VariableList.CreateXML());
+
+            return xRoot;
         }
     }
 }

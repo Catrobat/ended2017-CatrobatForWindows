@@ -6,23 +6,8 @@ namespace Catrobat.Core.Objects
 {
     public class SpriteReference : DataObject
     {
-        private readonly Sprite _parentSprite;
-
+        private readonly DataObject _parent;
         private string _reference;
-        public string Reference
-        {
-            get { return _reference; }
-            set
-            {
-                if (_reference == value)
-                {
-                    return;
-                }
-
-                _reference = value;
-                RaisePropertyChanged();
-            }
-        }
 
         private Sprite _sprite;
         public Sprite Sprite
@@ -40,28 +25,28 @@ namespace Catrobat.Core.Objects
             }
         }
 
-        public SpriteReference(Sprite parent)
+        public SpriteReference(DataObject parent)
         {
-            _parentSprite = parent;
+            _parent = parent;
         }
 
-        public SpriteReference(XElement xElement, Sprite parent)
+        public SpriteReference(XElement xElement, DataObject parent)
         {
-            _parentSprite = parent;
+            _parent = parent;
             LoadFromXML(xElement);
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
-            _sprite = XPathHelper.GetElement(_reference, _parentSprite) as Sprite;
+            Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as Sprite;
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("object");
 
-            xRoot.Add(new XAttribute("reference", XPathHelper.GetReference(_sprite, _parentSprite)));
+            xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
 
             return xRoot;
         }
@@ -69,10 +54,14 @@ namespace Catrobat.Core.Objects
         public DataObject Copy(Sprite parent)
         {
             var newSpriteRef = new SpriteReference(parent);
-            newSpriteRef._reference = _reference;
-            newSpriteRef._sprite = XPathHelper.GetElement(_reference, parent) as Sprite;
+            newSpriteRef.Sprite = _sprite;
 
             return newSpriteRef;
+        }
+
+        public void UpdateReferenceObject()
+        {
+            Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as Sprite;
         }
     }
 }

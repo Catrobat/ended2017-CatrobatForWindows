@@ -13,9 +13,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 if (_loopBeginBrickReference == value)
-                {
                     return;
-                }
 
                 _loopBeginBrickReference = value;
                 RaisePropertyChanged();
@@ -31,22 +29,19 @@ namespace Catrobat.Core.Objects.Bricks
                 {
                     _loopBeginBrickReference = new LoopBeginBrickRef(_sprite);
                     if (value is RepeatBrick)
-                    {
                         _loopBeginBrickReference.Class = "RepeatBrick";
-                    }
                     else if (value is ForeverBrick)
-                    {
                         _loopBeginBrickReference.Class = "ForeverBrick";
-                    }
-                    _loopBeginBrickReference.Reference = XPathHelper.GetReference(value, _sprite);
                 }
 
                 if (_loopBeginBrickReference.LoopBeginBrick == value)
-                {
                     return;
-                }
 
                 _loopBeginBrickReference.LoopBeginBrick = value;
+
+                if (value == null)
+                    _loopBeginBrickReference = null;
+
                 RaisePropertyChanged();
             }
         }

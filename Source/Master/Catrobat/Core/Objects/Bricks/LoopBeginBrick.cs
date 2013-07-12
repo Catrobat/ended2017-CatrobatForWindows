@@ -22,33 +22,32 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
-
-        protected LoopBeginBrick() {}
-
-        protected LoopBeginBrick(Sprite parent) : base(parent) {}
-
-        protected LoopBeginBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
-
         public LoopEndBrick LoopEndBrick
         {
             get { return _loopEndBrickReference.LoopEndBrick; }
             set
             {
                 if (_loopEndBrickReference == null)
-                {
                     _loopEndBrickReference = new LoopEndBrickRef(_sprite);
-                    _loopEndBrickReference.Reference = XPathHelper.GetReference(value, _sprite);
-                }
 
                 if (_loopEndBrickReference.LoopEndBrick == value)
-                {
                     return;
-                }
 
                 _loopEndBrickReference.LoopEndBrick = value;
+
+                if (value == null)
+                    _loopEndBrickReference = null;
+
                 RaisePropertyChanged();
             }
         }
+
+
+        protected LoopBeginBrick() {}
+
+        protected LoopBeginBrick(Sprite parent) : base(parent) {}
+
+        protected LoopBeginBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
 
         internal abstract override void LoadFromXML(XElement xRoot);
 

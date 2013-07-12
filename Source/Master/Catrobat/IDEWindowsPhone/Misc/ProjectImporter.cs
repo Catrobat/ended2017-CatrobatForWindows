@@ -6,6 +6,7 @@ using Catrobat.Core;
 using Catrobat.Core.ExtensionMethods;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Storage;
+using Catrobat.Core.VersionConverter;
 using Catrobat.Core.ZIP;
 using Windows.Phone.Storage.SharedAccess;
 using Windows.Storage;
@@ -52,6 +53,8 @@ namespace Catrobat.IDEWindowsPhone.Misc
                     projectScreenshot = storage.LoadImage(Path.Combine(CatrobatContext.TempProjectImportPath, Project.ScreenshotPath));
                     projectCode = storage.ReadTextFile(Path.Combine(CatrobatContext.TempProjectImportPath, Project.ProjectCodePath));
                 }
+
+                VersionConverter.Convert(projectCode);
 
                 _project = new Project(projectCode);
 
