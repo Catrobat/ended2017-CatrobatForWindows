@@ -368,7 +368,7 @@ namespace Catrobat.Core
                 {
                     if (brick is SetCostumeBrick)
                     {
-                        (brick as SetCostumeBrick).UpdateReference();
+                        (brick as SetCostumeBrick).UpdateReferenceObject();
                     }
                 }
             }
@@ -382,7 +382,7 @@ namespace Catrobat.Core
                 {
                     if (brick is PlaySoundBrick)
                     {
-                        (brick as PlaySoundBrick).UpdateReference();
+                        (brick as PlaySoundBrick).UpdateReferenceObject();
                     }
                 }
             }
@@ -398,7 +398,7 @@ namespace Catrobat.Core
                     {
                         if (brick is PointToBrick)
                         {
-                            (brick as PointToBrick).UpdateReference();
+                            (brick as PointToBrick).UpdateReferenceObject();
                         }
                     }
                 }

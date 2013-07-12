@@ -37,22 +37,15 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 if (_soundReference == null)
-                {
                     _soundReference = new SoundReference(_sprite);
-                    _soundReference.Reference = XPathHelper.GetReference(value, _sprite);
-                }
 
                 if (_soundReference.Sound == value)
-                {
                     return;
-                }
 
                 _soundReference.Sound = value;
 
                 if (value == null)
-                {
                     _soundReference = null;
-                }
 
                 RaisePropertyChanged();
             }
@@ -98,12 +91,10 @@ namespace Catrobat.Core.Objects.Bricks
             return newBrick;
         }
 
-        public void UpdateReference()
+        public void UpdateReferenceObject()
         {
             if (_soundReference != null)
-            {
-                _soundReference.Reference = XPathHelper.GetReference(_soundReference.Sound, _sprite);
-            }
+                _soundReference.UpdateReferenceObject();
         }
     }
 }

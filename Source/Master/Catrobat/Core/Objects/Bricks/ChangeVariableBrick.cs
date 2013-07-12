@@ -8,13 +8,13 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class ChangeVariableBrick : Brick
     {
-        protected UserVariableReference _userVariable;
-        public UserVariableReference UserVariable
+        protected UserVariableReference _userVariableReference;
+        public UserVariableReference UserVariableReference
         {
-            get { return _userVariable; }
+            get { return _userVariableReference; }
             set
             {
-                _userVariable = value;
+                _userVariableReference = value;
                 RaisePropertyChanged();
             }
         }
@@ -40,7 +40,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _userVariable = new UserVariableReference(xRoot.Element("userVariable"), _sprite);
+            _userVariableReference = new UserVariableReference(xRoot.Element("userVariable"), _sprite);
             _variableFormula = new Formula(xRoot.Element("variableFormula"));
         }
 
@@ -49,7 +49,7 @@ namespace Catrobat.Core.Objects.Bricks
             var xRoot = new XElement("changeVariableBrick");
 
             var xVariable1 = new XElement("userVariable");
-            xVariable1.Add(_userVariable.CreateXML());
+            xVariable1.Add(_userVariableReference.CreateXML());
             xRoot.Add(xVariable1);
 
             var xVariable2 = new XElement("variableFormula");
@@ -62,7 +62,7 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new ChangeVariableBrick(parent);
-            newBrick._userVariable = _userVariable.Copy(parent) as UserVariableReference;
+            newBrick._userVariableReference = _userVariableReference.Copy(parent) as UserVariableReference;
             newBrick._variableFormula = _variableFormula.Copy(parent) as Formula;
 
             return newBrick;

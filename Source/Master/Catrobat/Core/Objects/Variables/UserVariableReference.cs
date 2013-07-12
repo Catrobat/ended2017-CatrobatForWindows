@@ -12,22 +12,6 @@ namespace Catrobat.Core.Objects.Variables
     {
         private readonly Sprite _sprite;
 
-        private string _reference;
-        public string Reference
-        {
-            get { return _reference; }
-            set
-            {
-                if (_reference == value)
-                {
-                    return;
-                }
-
-                _reference = value;
-                RaisePropertyChanged();
-            }
-        }
-
         private UserVariable _userVariable;
         public UserVariable UserVariable
         {
@@ -44,6 +28,7 @@ namespace Catrobat.Core.Objects.Variables
             }
         }
 
+
         public UserVariableReference(Sprite parent)
         {
             _sprite = parent;
@@ -57,26 +42,22 @@ namespace Catrobat.Core.Objects.Variables
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _reference = xRoot.Attribute("reference").Value;
-            UserVariable = XPathHelper.GetElement(_reference, _sprite) as UserVariable;
+            UserVariable = ReferenceHelper.GetReferenceObject(this, xRoot.Attribute("reference").Value) as UserVariable;
         }
 
         internal override XElement CreateXML()
         {
-            throw new NotImplementedException();
+            var xRoot = new XElement("userVariableRef");
 
-            //var xRoot = new XElement("userVariable");
+            xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
 
-            //xRoot.Add(new XAttribute("reference", XPathHelper.GetReference(UserVariable)));
-
-            //return xRoot;
+            return xRoot;
         }
 
         public DataObject Copy(Sprite parent)
         {
             var newUserVariableRef = new UserVariableReference(parent);
-            newUserVariableRef._reference = _reference;
-            newUserVariableRef.UserVariable = XPathHelper.GetElement(_reference, parent) as UserVariable;
+            newUserVariableRef.UserVariable = _userVariable;
 
             return newUserVariableRef;
         }

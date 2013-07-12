@@ -61,6 +61,7 @@
     <Compile Include="Misc\Helpers\MD5.cs" />
     <Compile Include="Misc\Helpers\IPlatformInformationHelper.cs" />
     <Compile Include="Misc\Helpers\ReadHelper.cs" />
+    <Compile Include="Misc\Helpers\ReferenceHelper.cs" />
     <Compile Include="Misc\Helpers\XPathHelper.cs" />
     <Compile Include="ICatrobatContext.cs" />
     <Compile Include="LocalSettings.cs" />

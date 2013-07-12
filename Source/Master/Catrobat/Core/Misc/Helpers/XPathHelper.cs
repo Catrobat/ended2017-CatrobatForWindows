@@ -1,26 +1,32 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
+using Catrobat.Core.Objects.Variables;
 
 namespace Catrobat.Core.Misc.Helpers
 {
     public static class XPathHelper
     {
-        public static DataObject GetElement(string reference, Sprite sprite)
+        public static DataObject GetElement(string reference, DataObject parent)
         {
             DataObject retVal = null;
             reference = reference.ToLower();
 
             if (reference.Contains("costume"))
             {
-                retVal = GetCostume(reference, sprite);
+                retVal = GetCostume(reference, parent as Sprite);
             }
             else if (reference.Contains("sound"))
             {
-                retVal = GetSoundInfo(reference, sprite);
+                retVal = GetSoundInfo(reference, parent as Sprite);
+            }
+            else if (reference.Contains("userVariable"))
+            {
+                retVal = GetUserVariable(reference, parent as Sprite);
             }
             else if (reference.Contains("forever") || reference.Contains("repeat"))
             {
@@ -32,157 +38,201 @@ namespace Catrobat.Core.Misc.Helpers
             }
             else
             {
-                retVal = GetSprite(reference, sprite);
+                retVal = GetSprite(reference, parent);
             }
 
             return retVal;
         }
 
-        public static string GetReference(DataObject dataObject, Sprite spriteContainingDataObject)
+        public static string GetReference(DataObject dataObject, DataObject parent)
         {
             var reference = "";
             var pos = 0;
             var found = false;
 
-            if (dataObject is Sound)
+            if (parent is Sprite)
             {
-                reference = "../../../../../soundList/soundInfo";
-                foreach (Sound sound in spriteContainingDataObject.Sounds.Sounds)
+                if (dataObject is Sound)
                 {
-                    pos++;
-                    if (sound == dataObject)
+                    reference = "../../../../../soundList/sound";
+                    foreach (Sound sound in (parent as Sprite).Sounds.Sounds)
                     {
-                        found = true;
-                        break;
+                        pos++;
+                        if (sound == dataObject)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (pos > 1)
+                    {
+                        reference += "[" + pos + "]";
                     }
                 }
-                if (pos > 1)
+                else if (dataObject is Costume)
                 {
-                    reference += "[" + pos + "]";
-                }
-            }
-            else if (dataObject is Costume)
-            {
-                reference = "../../../../../costumeDataList/costumeData";
-                foreach (Costume costume in spriteContainingDataObject.Costumes.Costumes)
-                {
-                    pos++;
-                    if (costume == dataObject)
+                    reference = "../../../../../lookList/look";
+                    foreach (Costume costume in (parent as Sprite).Costumes.Costumes)
                     {
-                        found = true;
-                        break;
+                        pos++;
+                        if (costume == dataObject)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (pos > 1)
+                    {
+                        reference += "[" + pos + "]";
                     }
                 }
-                if (pos > 1)
+                else if (dataObject is Sprite)
                 {
-                    reference += "[" + pos + "]";
-                }
-            }
-            else if (dataObject is Sprite)
-            {
-                reference = "../../../../../../sprite";
-                foreach (Sprite pointedSprite in spriteContainingDataObject.Project.SpriteList.Sprites)
-                {
-                    pos++;
-                    if (pointedSprite == dataObject)
+                    reference = "../../../../../../object";
+                    foreach (Sprite pointedSprite in (parent as Sprite).Project.SpriteList.Sprites)
                     {
-                        found = true;
-                        break;
+                        pos++;
+                        if (pointedSprite == dataObject)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (pos > 1)
+                    {
+                        reference += "[" + pos + "]";
                     }
                 }
-                if (pos > 1)
+                else if (dataObject is UserVariable)
                 {
-                    reference += "[" + pos + "]";
-                }
-            }
-            else if (dataObject is ForeverBrick)
-            {
-                reference = "../../foreverBrick";
-                foreach (Script script in spriteContainingDataObject.Scripts.Scripts)
-                {
-                    pos = 0;
-                    foreach (DataObject brick in script.Bricks.Bricks)
+                    reference = "../../../../../../../variables/";
+                    var objectVariableList = (parent as Sprite).Project.VariableList.ObjectVariableList;
+                    foreach (var entry in objectVariableList.ObjectVariableEntries)
                     {
-                        if (brick is ForeverBrick)
+                        if (entry.SpriteReference.Sprite == parent)
+                        {
+                            var variables = entry.VariableList;
+                            foreach (var variable in variables.UserVariables)
+                            {
+                                pos++;
+                                if (variable == dataObject)
+                                {
+                                    reference += "objectVariableList/entry/list/userVariable[" + pos + "]";
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (!found)
+                    {
+                        pos = 0;
+                        var programVariableList = (parent as Sprite).Project.VariableList.ProgramVariableList;
+                        foreach (var variable in programVariableList.UserVariables)
                         {
                             pos++;
-                            if (brick == dataObject)
+                            if (variable == dataObject)
                             {
+                                reference += "programVariableList/userVariable[" + pos + "]";
                                 found = true;
                                 break;
                             }
                         }
                     }
-                    if (found)
-                    {
-                        break;
-                    }
                 }
-                if (pos > 1)
+                else if (dataObject is ForeverBrick)
                 {
-                    reference += "[" + pos + "]";
-                }
-            }
-            else if (dataObject is RepeatBrick)
-            {
-                reference = "../../repeatBrick";
-                foreach (Script script in spriteContainingDataObject.Scripts.Scripts)
-                {
-                    pos = 0;
-                    foreach (DataObject brick in script.Bricks.Bricks)
+                    reference = "../../foreverBrick";
+                    foreach (Script script in (parent as Sprite).Scripts.Scripts)
                     {
-                        if (brick is RepeatBrick)
+                        pos = 0;
+                        foreach (DataObject brick in script.Bricks.Bricks)
                         {
-                            pos++;
-                            if (brick == dataObject)
+                            if (brick is ForeverBrick)
                             {
-                                found = true;
-                                break;
+                                pos++;
+                                if (brick == dataObject)
+                                {
+                                    found = true;
+                                    break;
+                                }
                             }
                         }
-                    }
-                    if (found)
-                    {
-                        break;
-                    }
-                }
-                if (pos > 1)
-                {
-                    reference += "[" + pos + "]";
-                }
-            }
-            else if (dataObject is LoopEndBrick)
-            {
-                reference = "../../loopEndBrick";
-                foreach (Script script in spriteContainingDataObject.Scripts.Scripts)
-                {
-                    pos = 0;
-                    foreach (DataObject brick in script.Bricks.Bricks)
-                    {
-                        if (brick is LoopEndBrick)
+                        if (found)
                         {
-                            pos++;
-                            if (brick == dataObject)
-                            {
-                                found = true;
-                                break;
-                            }
+                            break;
                         }
                     }
-                    if (found)
+                    if (pos > 1)
                     {
-                        break;
+                        reference += "[" + pos + "]";
                     }
                 }
-                if (pos > 1)
+                else if (dataObject is RepeatBrick)
                 {
-                    reference += "[" + pos + "]";
+                    reference = "../../repeatBrick";
+                    foreach (Script script in (parent as Sprite).Scripts.Scripts)
+                    {
+                        pos = 0;
+                        foreach (DataObject brick in script.Bricks.Bricks)
+                        {
+                            if (brick is RepeatBrick)
+                            {
+                                pos++;
+                                if (brick == dataObject)
+                                {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (found)
+                        {
+                            break;
+                        }
+                    }
+                    if (pos > 1)
+                    {
+                        reference += "[" + pos + "]";
+                    }
                 }
-            }
+                else if (dataObject is LoopEndBrick)
+                {
+                    reference = "../../loopEndBrick";
+                    foreach (Script script in (parent as Sprite).Scripts.Scripts)
+                    {
+                        pos = 0;
+                        foreach (DataObject brick in script.Bricks.Bricks)
+                        {
+                            if (brick is LoopEndBrick)
+                            {
+                                pos++;
+                                if (brick == dataObject)
+                                {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (found)
+                        {
+                            break;
+                        }
+                    }
+                    if (pos > 1)
+                    {
+                        reference += "[" + pos + "]";
+                    }
+                }
 
-            if (!found)
+                if (!found)
+                {
+                    return "";
+                }
+            }
+            else
             {
-                return "";
+                //TODO: implement if uservariableentry
             }
 
             return reference;
@@ -216,18 +266,61 @@ namespace Catrobat.Core.Misc.Helpers
             return sprite.Sounds.Sounds[pos];
         }
 
-        private static Sprite GetSprite(string xPath, Sprite sprite)
+        private static Sprite GetSprite(string xPath, DataObject parent)
         {
-            var pos = 0;
-
-            if (xPath.Contains("["))
+            if (parent is Sprite)
             {
-                xPath = xPath.Split('[')[1];
-                xPath = xPath.Split(']')[0];
-                pos = Int32.Parse(xPath) - 1;
+                var pos = 0;
+
+                if (xPath.Contains("["))
+                {
+                    xPath = xPath.Split('[')[1];
+                    xPath = xPath.Split(']')[0];
+                    pos = Int32.Parse(xPath) - 1;
+                }
+
+                return (parent as Sprite).Project.SpriteList.Sprites[pos];
+            }
+            else
+            {
+                //TODO: implement if uservariableentry
+            }
+            return null;
+        }
+
+        private static UserVariable GetUserVariable(string xPath, Sprite sprite)
+        {
+            var variableList = new ObservableCollection<UserVariable>();
+            if(xPath.Contains("objectVariableList"))
+            {
+                var entries = sprite.Project.VariableList.ObjectVariableList.ObjectVariableEntries;
+                foreach (var entry in entries)
+                {
+                    if (entry.SpriteReference.Sprite == sprite)
+                        variableList = entry.VariableList.UserVariables;
+                }
+            }
+            else if (xPath.Contains("programVariableList"))
+            {
+                variableList = sprite.Project.VariableList.ProgramVariableList.UserVariables;
             }
 
-            return sprite.Project.SpriteList.Sprites[pos];
+            if (!xPath.Contains("["))
+            {
+                return variableList[0];
+            }
+            else
+            {
+                var pos = 0;
+                foreach (var variable in variableList)
+                {
+                    pos++;
+                    if (xPath.Contains(pos.ToString()))
+                        return variable;
+                }
+            }
+
+            return null;
         }
 
         private static LoopBeginBrick GetLoopBeginBrick(string xPath)

@@ -37,22 +37,15 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 if (_costumeReference == null)
-                {
                     _costumeReference = new CostumeReference(_sprite);
-                    _costumeReference.Reference = XPathHelper.GetReference(value, _sprite);
-                }
 
                 if (_costumeReference.Costume == value)
-                {
                     return;
-                }
 
                 _costumeReference.Costume = value;
 
                 if (value == null)
-                {
                     _costumeReference = null;
-                }
 
                 RaisePropertyChanged();
             }
@@ -98,12 +91,10 @@ namespace Catrobat.Core.Objects.Bricks
             return newBrick;
         }
 
-        public void UpdateReference()
+        public void UpdateReferenceObject()
         {
             if (_costumeReference != null)
-            {
-                _costumeReference.Reference = XPathHelper.GetReference(_costumeReference.Costume, _sprite);
-            }
+                _costumeReference.UpdateReferenceObject();
         }
     }
 }

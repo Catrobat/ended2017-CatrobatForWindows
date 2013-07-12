@@ -7,6 +7,7 @@ namespace Catrobat.Core.Objects.Bricks
     public class LoopBeginBrickRef : DataObject
     {
         private readonly Sprite _sprite;
+        private string _reference;
 
         protected string _classField;
         public string Class
@@ -31,27 +32,9 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 if (_loopBeginBrick == value)
-                {
                     return;
-                }
 
                 _loopBeginBrick = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        protected string _reference;
-        public string Reference
-        {
-            get { return _reference; }
-            set
-            {
-                if (_reference == value)
-                {
-                    return;
-                }
-
-                _reference = value;
                 RaisePropertyChanged();
             }
         }
@@ -72,14 +55,14 @@ namespace Catrobat.Core.Objects.Bricks
         {
             _classField = xRoot.Attribute("class").Value;
             _reference = xRoot.Attribute("reference").Value;
-            _loopBeginBrick = XPathHelper.GetElement(_reference, _sprite) as LoopBeginBrick;
+            _loopBeginBrick = ReferenceHelper.GetReferenceObject(this, _reference) as LoopBeginBrick;
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("loopBeginBrick");
             xRoot.Add(new XAttribute("class", _classField));
-            xRoot.Add(new XAttribute("reference", XPathHelper.GetReference(_loopBeginBrick, _sprite)));
+            xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
 
             return xRoot;
         }
@@ -88,8 +71,7 @@ namespace Catrobat.Core.Objects.Bricks
         {
             var newLoopBeginBrickRef = new LoopBeginBrickRef(parent);
             newLoopBeginBrickRef._classField = _classField;
-            newLoopBeginBrickRef._reference = _reference;
-            newLoopBeginBrickRef._loopBeginBrick = XPathHelper.GetElement(_reference, _sprite) as LoopBeginBrick;
+            newLoopBeginBrickRef._loopBeginBrick = _loopBeginBrick;
 
             return newLoopBeginBrickRef;
         }

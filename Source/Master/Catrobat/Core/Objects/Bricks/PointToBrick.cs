@@ -44,22 +44,15 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 if (_pointedSpriteReference == null)
-                {
                     _pointedSpriteReference = new SpriteReference(_sprite);
-                    _pointedSpriteReference.Reference = XPathHelper.GetReference(value, _sprite);
-                }
 
                 if (_pointedSpriteReference.Sprite == value)
-                {
                     return;
-                }
 
                 _pointedSpriteReference.Sprite = value;
 
                 if (value == null)
-                {
                     _pointedSpriteReference = null;
-                }
 
                 RaisePropertyChanged();
             }
@@ -75,9 +68,7 @@ namespace Catrobat.Core.Objects.Bricks
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("pointedObject") != null)
-            {
                 _pointedSpriteReference = new SpriteReference(xRoot.Element("pointedObject"), _sprite);
-            }
         }
 
         internal override XElement CreateXML()
@@ -109,12 +100,10 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
-        public void UpdateReference()
+        public void UpdateReferenceObject()
         {
             if (_pointedSpriteReference != null)
-            {
-                _pointedSpriteReference.Reference = XPathHelper.GetReference(_pointedSpriteReference.Sprite, _sprite);
-            }
+                _pointedSpriteReference.UpdateReferenceObject();
         }
     }
 }
