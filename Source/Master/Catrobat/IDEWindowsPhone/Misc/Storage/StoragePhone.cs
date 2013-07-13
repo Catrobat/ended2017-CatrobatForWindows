@@ -268,7 +268,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
                 if (fullSizeBitmapImage != null)
                 {
                     var fullSizeImage = new WriteableBitmap(fullSizeBitmapImage).ToImage();
-                    var thumbnailImage = CreateThumbnailImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight);
+                    var thumbnailImage = ImageResizer.CreateThumbnailImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight, _imageThumbnailDefaultMaxWidthHeight);
 
                     try
                     {
@@ -408,26 +408,6 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
         public void SetImageMaxThumbnailWidthHeight(int maxWidthHeight)
         {
             _imageThumbnailDefaultMaxWidthHeight = maxWidthHeight;
-        }
-
-        private static ExtendedImage CreateThumbnailImage(ExtendedImage image, int maxWidthHeight)
-        {
-            int width, height;
-
-            if (image.PixelWidth > image.PixelHeight)
-            {
-                width = maxWidthHeight;
-                height = (int) ((image.PixelHeight/(double) image.PixelWidth)*maxWidthHeight);
-            }
-            else
-            {
-                height = maxWidthHeight;
-                width = (int) ((image.PixelWidth/(double) image.PixelHeight)*maxWidthHeight);
-            }
-
-            var resizedImage = ExtendedImage.Resize(image, width, height, new NearestNeighborResizer());
-
-            return resizedImage;
         }
 
         public void SaveBitmapImage(string path, BitmapImage image)

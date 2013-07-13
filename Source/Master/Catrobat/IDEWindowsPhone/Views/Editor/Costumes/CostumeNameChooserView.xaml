@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
+    xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -16,22 +17,60 @@
     DataContext="{Binding AddNewCostume, Source={StaticResource Locator}}"
     shell:SystemTray.IsVisible="True">
 
+  <phone:PhoneApplicationPage.Resources>
+    <converters:ImageSizeWidthConverter x:Key="ImageSizeWidthConverter"/>
+    <converters:ImageSizeHeightConverter x:Key="ImageSizeHeightConverter"/>
+  </phone:PhoneApplicationPage.Resources>
 
   <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="Auto" />
-        <RowDefinition Height="*" />
-      </Grid.RowDefinitions>
-      
+  <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Path=Editor.TitleChooseCostumeName, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock Margin="0" Text="{Binding Path=Editor.TitleChooseCostumeName, 
+        Source={StaticResource LocalizedStrings}}" 
+                 Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10,0,0,15">
-      <TextBlock Margin="0" Text="{Binding Path=Editor.CostumeName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
-      <TextBox Margin="-10 0 10 0" Name="TextBoxCostumeName" Text="{Binding CostumeName, Mode=TwoWay}" HorizontalAlignment="Stretch" TextChanged="TextBoxCostumeName_OnTextChanged" />
+      <TextBlock Margin="0" Text="{Binding Path=Editor.CostumeName, 
+        Source={StaticResource LocalizedStrings}}" 
+                 Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBox Margin="-10 0 10 0" Name="TextBoxCostumeName" Text="{Binding CostumeName, Mode=TwoWay}" 
+               HorizontalAlignment="Stretch" 
+               TextChanged="TextBoxCostumeName_OnTextChanged" />
     </StackPanel>
+
+    <Grid Grid.Row="2" Margin="10,0,0,15">
+      <ListBox ItemsSource="{Binding ImageSizes}" SelectedItem="{Binding SelectedSize}">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+              </Grid.ColumnDefinitions>
+              <TextBlock Grid.Column="0" Text="{Binding SizeName}" Margin="5 0 5 0"/>
+              <!--<TextBlock Grid.Column="1" Text="{Binding Size, 
+                Converter={StaticResource ImageSizeWidthConverter}, 
+                ConverterParameter={Binding Source={StaticResource Locator}, 
+                Path=AddNewCostume.Dimention}}" Margin="5 0 5 0" />
+              <TextBlock Grid.Column="2" Text="{Binding Size, 
+                Converter={StaticResource ImageSizeWidthConverter}, 
+                ConverterParameter={Binding Source={StaticResource Locator}, 
+                Path=AddNewCostume.Dimention}}" Margin="5 0 5 0"/>-->
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </Grid>
+
 
     <i:Interaction.Triggers>
       <abu:StateChangedTrigger State="false">

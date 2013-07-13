@@ -144,6 +144,8 @@
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
+    <Compile Include="Converters\ImageSizeHeightConverter.cs" />
+    <Compile Include="Converters\ImageSizeWidthConverter.cs" />
     <Compile Include="Converters\NullIntCountConverter.cs" />
     <Compile Include="Converters\NoScreenshotConverter.cs" />
     <Compile Include="Converters\VersionConverter.cs" />
@@ -153,6 +155,8 @@
     <Compile Include="Converters\NullColorConverter.cs" />
     <Compile Include="Converters\SecondStringMillisecondConverter.cs" />
     <Compile Include="Misc\AssociationUriMapper.cs" />
+    <Compile Include="Misc\ImageDimention.cs" />
+    <Compile Include="Misc\ImageResizer.cs" />
     <Compile Include="Misc\Navigation.cs" />
     <Compile Include="Misc\PaintLauncher.cs" />
     <Compile Include="Misc\CostumeBuilder.cs" />
@@ -174,6 +178,7 @@
     <Compile Include="Themes\ColorChooser.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeChooser.cs" />
+    <Compile Include="ViewModel\Editor\Costumes\ImageSizeEntry.cs" />
     <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\AddNewCostumeViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\ChangeCostumeViewModel.cs" />

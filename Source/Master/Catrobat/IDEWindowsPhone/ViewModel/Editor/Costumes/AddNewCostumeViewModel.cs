@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
 using Catrobat.Core.Objects;
 using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -17,6 +19,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         private string _costumeName;
         private CostumeBuilder _builder;
         private Sprite _receivedSelectedSprite;
+        private ImageDimention _dimention;
+        private ImageSizeEntry _selectedSize;
 
         #endregion
 
@@ -36,6 +40,28 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                 SaveCommand.RaiseCanExecuteChanged();
             }
         }
+
+        public ImageDimention Dimention
+        {
+            get { return _dimention; }
+            set
+            {
+                _dimention = value;
+                RaisePropertyChanged("Dimention");
+            }
+        }
+
+        public ImageSizeEntry SelectedSize
+        {
+            get { return _selectedSize; }
+            set
+            {
+                _selectedSize = value;
+                RaisePropertyChanged("SelectedSize");
+            }
+        }
+
+        public ObservableCollection<ImageSizeEntry> ImageSizes { get; set; }
 
         #endregion
 
@@ -88,7 +114,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private void SaveAction()
         {
-            var costume = _builder.Save(CostumeName);
+            var costume = _builder.Save(CostumeName, Dimention);
             _receivedSelectedSprite.Costumes.Costumes.Add(costume);
 
             Navigation.RemoveBackEntry();
@@ -121,6 +147,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
+
+            InitImageSizes();
+            if (IsInDesignMode)
+                InitDesignData();
+        }
+
+        private void InitDesignData()
+        {
+            _dimention = new ImageDimention { Width = 500, Height = 500 };
+            _selectedSize = ImageSizes[1];
         }
 
         private void Task_Completed(object sender, PhotoResult e)
@@ -137,9 +173,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             }
         }
 
-        private void LoadCostumeSuccess()
+        private void LoadCostumeSuccess(ImageDimention dimention)
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() => { Navigation.NavigateTo(typeof (CostumeNameChooserView)); });
+            this.Dimention = dimention;
+            Deployment.Current.Dispatcher.BeginInvoke(() => Navigation.NavigateTo(typeof(CostumeNameChooserView)));
         }
 
         private void LoadCostumeFailed()
@@ -157,9 +194,24 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             Navigation.NavigateBack();
         }
 
+        private void InitImageSizes()
+        {
+            ImageSizes = new ObservableCollection<ImageSizeEntry>
+            {
+                new ImageSizeEntry {Size = ImageSize.Small},
+                new ImageSizeEntry {Size = ImageSize.Medium},
+                new ImageSizeEntry {Size = ImageSize.Large},
+                new ImageSizeEntry {Size = ImageSize.FullSize}
+            };
+
+            SelectedSize = ImageSizes[1];
+        }
+
         private void ResetViewModel()
         {
             CostumeName = null;
+
+            InitImageSizes();
 
             if (_builder != null)
             {

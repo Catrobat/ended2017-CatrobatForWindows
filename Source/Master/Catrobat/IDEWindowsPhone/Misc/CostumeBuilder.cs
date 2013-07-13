@@ -17,7 +17,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
     #region Delegates
 
-    public delegate void LoadCostumeSuccess();
+    public delegate void LoadCostumeSuccess(ImageDimention dimention);
 
     public delegate void LoadCostumeFailed();
 
@@ -52,7 +52,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
         public void StartCreateCostumeAsync(Sprite sprite, Stream imageStream)
         {
             var buffer = new byte[imageStream.Length];
-            imageStream.Read(buffer, 0, (int) imageStream.Length);
+            imageStream.Read(buffer, 0, (int)imageStream.Length);
             _imageMemoryStream = new MemoryStream(buffer);
             //_imageStream.Write(buffer, 0, buffer.Length);
 
@@ -69,14 +69,14 @@ namespace Catrobat.IDEWindowsPhone.Misc
             }
 
             _image = new ExtendedImage();
-            _image.LoadingFailed -= image_LoadingFailed;
-            _image.LoadingFailed += image_LoadingFailed;
-            _image.LoadingCompleted -= image_LoadingCompleted;
-            _image.LoadingCompleted += image_LoadingCompleted;
+            _image.LoadingFailed -= Image_LoadingFailed;
+            _image.LoadingFailed += Image_LoadingFailed;
+            _image.LoadingCompleted -= Image_LoadingCompleted;
+            _image.LoadingCompleted += Image_LoadingCompleted;
             _image.SetSource(imageStream);
         }
 
-        private void image_LoadingFailed(object sender, UnhandledExceptionEventArgs e)
+        private void Image_LoadingFailed(object sender, UnhandledExceptionEventArgs e)
         {
             try
             {
@@ -84,7 +84,12 @@ namespace Catrobat.IDEWindowsPhone.Misc
                 _loadedSuccess = true;
                 if (LoadCostumeSuccess != null)
                 {
-                    LoadCostumeSuccess.Invoke();
+                    LoadCostumeSuccess.Invoke(
+                    new ImageDimention
+                    {
+                        Width = _image.PixelWidth,
+                        Height = _image.PixelHeight
+                    });
                 }
             }
             catch (Exception)
@@ -114,16 +119,21 @@ namespace Catrobat.IDEWindowsPhone.Misc
         }
 
 
-        private void image_LoadingCompleted(object sender, EventArgs e)
+        private void Image_LoadingCompleted(object sender, EventArgs e)
         {
             _loadedSuccess = true;
             if (LoadCostumeSuccess != null)
             {
-                LoadCostumeSuccess.Invoke();
+                LoadCostumeSuccess.Invoke(
+                    new ImageDimention
+                    {
+                        Width = _image.PixelWidth,
+                        Height = _image.PixelHeight
+                    });
             }
         }
 
-        public Costume Save(string name)
+        public Costume Save(string name, ImageDimention dimention)
         {
             if (!_loadedSuccess)
             {
@@ -139,6 +149,9 @@ namespace Catrobat.IDEWindowsPhone.Misc
                 {
                     var fileStream = storage.OpenFile(absoluteFileName, StorageFileMode.Create, StorageFileAccess.Write);
                     var wb = new WriteableBitmap(_bitmapImage);
+
+                    // TODO: resize image
+
                     wb.SaveJpeg(fileStream, wb.PixelWidth, wb.PixelHeight, 0, 85);
                     fileStream.Close();
                 }
@@ -147,9 +160,11 @@ namespace Catrobat.IDEWindowsPhone.Misc
             {
                 var encoder = new PngEncoder();
 
+                ImageResizer.CreateThumbnailImage(_image, dimention.Width, dimention.Height);
+
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    using (var stream = storage.OpenFile(absoluteFileName, StorageFileMode.OpenOrCreate,StorageFileAccess.Write))
+                    using (var stream = storage.OpenFile(absoluteFileName, StorageFileMode.OpenOrCreate, StorageFileAccess.Write))
                     {
                         encoder.Encode(_image, stream);
                     }

@@ -260,6 +260,42 @@ namespace Catrobat.IDECommon.Resources.Editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to full size.
+        /// </summary>
+        public static string ImageSizeFullSize {
+            get {
+                return ResourceManager.GetString("ImageSizeFullSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to large.
+        /// </summary>
+        public static string ImageSizeLarge {
+            get {
+                return ResourceManager.GetString("ImageSizeLarge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to medium.
+        /// </summary>
+        public static string ImageSizeMedium {
+            get {
+                return ResourceManager.GetString("ImageSizeMedium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to small.
+        /// </summary>
+        public static string ImageSizeSmall {
+            get {
+                return ResourceManager.GetString("ImageSizeSmall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Media Library.
         /// </summary>
         public static string MediaLibrary {
