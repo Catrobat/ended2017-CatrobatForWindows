@@ -54,7 +54,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
                     projectCode = storage.ReadTextFile(Path.Combine(CatrobatContext.TempProjectImportPath, Project.ProjectCodePath));
                 }
 
-                projectCode = VersionConverter.Convert(projectCode);
+                projectCode = CatrobatVersionConverter.Convert(projectCode);
 
                 _project = new Project(projectCode);
 

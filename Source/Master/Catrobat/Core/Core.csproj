@@ -165,9 +165,9 @@
     <Compile Include="VersionConverter\CatrobatVersionElementRenameEntry.cs" />
     <Compile Include="VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
     <Compile Include="VersionConverter\CatrobatVersionPair.cs" />
-    <Compile Include="VersionConverter\VersionConfig.cs" />
-    <Compile Include="VersionConverter\VersionConverter.cs" />
-    <Compile Include="VersionConverter\Versions\CatrobatVersion10.cs" />
+    <Compile Include="VersionConverter\CatrobatVersionConfig.cs" />
+    <Compile Include="VersionConverter\CatrobatVersionConverter.cs" />
+    <Compile Include="VersionConverter\Versions\CatrobatVersion08.cs" />
     <Compile Include="Misc\XPathHelper.cs" />
     <Compile Include="XmlStringWriter.cs" />
     <Compile Include="ZIP\CatrobatZip.cs" />
