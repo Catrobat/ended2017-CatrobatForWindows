@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using ImageTools;
-using ImageTools.Filtering;
 
 namespace Catrobat.IDEWindowsPhone.Misc
 {
     public class ImageResizer
     {
-        public static ExtendedImage CreateThumbnailImage(ExtendedImage image, int maxWidth, int maxHeight)
+        public static WriteableBitmap ResizeImage(WriteableBitmap image, int maxWidthHeight)
         {
+            int maxWidth = maxWidthHeight;
+            int maxHeight = maxWidthHeight;
             int width, height;
 
             if (image.PixelWidth > image.PixelHeight)
@@ -26,9 +26,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
                 width = (int)((image.PixelWidth / (double)image.PixelHeight) * maxHeight);
             }
 
-            var resizedImage = ExtendedImage.Resize(image, width, height, new NearestNeighborResizer());
-
-            return resizedImage;
+            return image.Resize(width, height, WriteableBitmapExtensions.Interpolation.Bilinear);
         }
     }
 }

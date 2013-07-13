@@ -1,6 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using Catrobat.Core.Objects;
 using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -163,23 +165,28 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         {
             if (e.TaskResult == TaskResult.OK)
             {
-                CostumeName = EditorResources.Image;
+                try
+                {
+                    CostumeName = EditorResources.Image;
 
-                _builder = new CostumeBuilder();
-                _builder.LoadCostumeSuccess += LoadCostumeSuccess;
-                _builder.LoadCostumeFailed += LoadCostumeFailed;
+                    _builder = new CostumeBuilder();
 
-                _builder.StartCreateCostumeAsync(_receivedSelectedSprite, e.ChosenPhoto);
+                    var image = new BitmapImage();
+                    image.SetSource(e.ChosenPhoto);
+                    this.Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
+
+                    _builder.StartCreateCostumeAsync(_receivedSelectedSprite, image);
+
+                    Deployment.Current.Dispatcher.BeginInvoke(() => Navigation.NavigateTo(typeof(CostumeNameChooserView)));
+                }
+                catch (Exception)
+                {
+                    ShowLoadingImageFailure();
+                }
             }
         }
 
-        private void LoadCostumeSuccess(ImageDimention dimention)
-        {
-            this.Dimention = dimention;
-            Deployment.Current.Dispatcher.BeginInvoke(() => Navigation.NavigateTo(typeof(CostumeNameChooserView)));
-        }
-
-        private void LoadCostumeFailed()
+        private void ShowLoadingImageFailure()
         {
             var message = new DialogMessage(EditorResources.MessageBoxWrongImageFormatText, WrongImageFormatResult)
             {
@@ -215,8 +222,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
             if (_builder != null)
             {
-                _builder.LoadCostumeSuccess -= LoadCostumeSuccess;
-                _builder.LoadCostumeFailed -= LoadCostumeFailed;
+                //_builder.LoadCostumeSuccess -= LoadCostumeSuccess;
+                //_builder.LoadCostumeFailed -= LoadCostumeFailed;
                 _builder = null;
             }
         }

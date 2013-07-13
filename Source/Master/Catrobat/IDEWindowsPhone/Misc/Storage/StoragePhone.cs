@@ -7,8 +7,7 @@ using System.Text;
 using System.Windows.Media.Imaging;
 using Catrobat.Core.ExtensionMethods;
 using Catrobat.Core.Storage;
-using ImageTools;
-using ImageTools.Filtering;
+using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDEWindowsPhone.Misc.Storage
 {
@@ -267,18 +266,14 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
                 if (fullSizeBitmapImage != null)
                 {
-                    var fullSizeImage = new WriteableBitmap(fullSizeBitmapImage).ToImage();
-                    var thumbnailImage = ImageResizer.CreateThumbnailImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight, _imageThumbnailDefaultMaxWidthHeight);
+                    var fullSizeImage = new WriteableBitmap(fullSizeBitmapImage);
 
+                    var thumbnailImage =  ImageResizer.ResizeImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight);
+                    retVal = thumbnailImage;
                     try
                     {
                         var fileStream = OpenFile(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
-
-                        thumbnailImage.WriteToStream(fileStream, thumbnailPath);
-                        fileStream.Close();
-                        fileStream.Dispose();
-
-                        retVal = thumbnailImage.ToBitmap();
+                        PNGWriter.WritePNG(thumbnailImage, fileStream, 90);
                     }
 
                     catch
