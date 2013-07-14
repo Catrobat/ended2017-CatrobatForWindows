@@ -183,6 +183,18 @@
   <data name="ImageGallery" xml:space="preserve">
     <value>Bildergalerie</value>
   </data>
+  <data name="ImageSizeFullSize" xml:space="preserve">
+    <value>volle größe</value>
+  </data>
+  <data name="ImageSizeLarge" xml:space="preserve">
+    <value>groß</value>
+  </data>
+  <data name="ImageSizeMedium" xml:space="preserve">
+    <value>mittel</value>
+  </data>
+  <data name="ImageSizeSmall" xml:space="preserve">
+    <value>klein</value>
+  </data>
   <data name="MediaLibrary" xml:space="preserve">
     <value>Medienbibliothek</value>
   </data>

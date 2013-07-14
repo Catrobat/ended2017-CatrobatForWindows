@@ -27,7 +27,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/VersionConverterTest1Input");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/VersionConverterTest1Output");
 
-            VersionConverter.Convert("1.0", "Win1.0", actualDocument);
+            CatrobatVersionConverter.Convert("1.0", "Win1.0", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
@@ -37,7 +37,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/VersionConverterTest1Output");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/VersionConverterTest1Input");
 
-            VersionConverter.Convert("Win1.0", "1.0", actualDocument);
+            CatrobatVersionConverter.Convert("Win1.0", "1.0", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
     }

@@ -9,7 +9,7 @@ using Catrobat.Core.VersionConverter.Versions;
 
 namespace Catrobat.Core.VersionConverter
 {
-    public static class VersionConverter
+    public static class CatrobatVersionConverter
     {
         private static Dictionary<CatrobatVersionPair, CatrobatVersion> Converters
         {
@@ -17,7 +17,7 @@ namespace Catrobat.Core.VersionConverter
             {
                 return new Dictionary<CatrobatVersionPair, CatrobatVersion>(new CatrobatVersionPair.EqualityComparer())
                 {
-                    {new CatrobatVersionPair {InputVersion = "1.0", OutputVersion = "Win1.0"}, new CatrobatVersion10()}
+                    {new CatrobatVersionPair {InputVersion = "0.8", OutputVersion = "Win0.8"}, new CatrobatVersion08()}
                 };
             }
         }
@@ -29,19 +29,19 @@ namespace Catrobat.Core.VersionConverter
                 return new Dictionary<CatrobatVersionPair, List<CatrobatVersionPair>>(new CatrobatVersionPair.EqualityComparer())
                 {
                     {
-                        new CatrobatVersionPair {InputVersion = "1.0", OutputVersion = "Win1.0"},
+                        new CatrobatVersionPair {InputVersion = "0.8", OutputVersion = "Win0.8"},
 
                         new List<CatrobatVersionPair>
                         {
-                            new CatrobatVersionPair {InputVersion = "1.0", OutputVersion = "Win1.0", IsInverse = false}
+                            new CatrobatVersionPair {InputVersion = "0.8", OutputVersion = "Win0.8", IsInverse = false}
                         }
                     },
                     {
-                        new CatrobatVersionPair {InputVersion = "Win1.0", OutputVersion = "1.0"},
+                        new CatrobatVersionPair {InputVersion = "Win0.8", OutputVersion = "0.8"},
 
                         new List<CatrobatVersionPair>
                         {
-                            new CatrobatVersionPair {InputVersion = "1.0", OutputVersion = "Win1.0", IsInverse = true}
+                            new CatrobatVersionPair {InputVersion = "0.8", OutputVersion = "Win0.8", IsInverse = true}
                         }
                     }
                 };
@@ -71,7 +71,7 @@ namespace Catrobat.Core.VersionConverter
             document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
             var inputVersion = document.Element("program").Element("catrobatLanguageVersion").Value;
-            var outputVersion = VersionConfig.TargetOutputversion;
+            var outputVersion = CatrobatVersionConfig.TargetOutputversion;
 
             Convert(inputVersion, outputVersion, document);
 
