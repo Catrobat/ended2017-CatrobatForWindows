@@ -86,11 +86,9 @@
     <Compile Include="Tests\Misc\ZipTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SampleData\SampleProjects\Converter\VersionConverterTest_08_to_Win08_ObjectReferences_Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\XPathHelperTestInput.xml" />
-    <Content Include="SampleData\SampleProjects\Converter\VersionConverterTest1Input.xml" />
-    <Content Include="SampleData\SampleProjects\Converter\VersionConverterTest1Output.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="SampleData\SampleProjects\Converter\VersionConverterTest_08_to_Win08_ObjectReferences_Output.xml" />
     <Content Include="SampleData\SampleProjects\projectcode.xml" />
     <Content Include="SampleData\SampleProjects\simple.xml" />
     <Content Include="SampleData\SampleProjects\ultimateTest.xml" />

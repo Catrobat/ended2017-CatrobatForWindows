@@ -48,7 +48,7 @@ namespace Catrobat.Core.Misc
             var absolutToPath = GetAbsolutPath(toElement);
 
             int commonPath = 0;
-            while (absolutFromPath[commonPath] == absolutToPath[commonPath])
+            while (commonPath < absolutFromPath.Count && commonPath < absolutToPath.Count && absolutFromPath[commonPath] == absolutToPath[commonPath])
                 commonPath++;
 
             for (int i = 0; i < absolutFromPath.Count - commonPath + 1; i++)

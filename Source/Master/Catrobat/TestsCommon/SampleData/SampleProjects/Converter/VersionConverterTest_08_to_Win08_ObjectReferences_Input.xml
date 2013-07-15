@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<program>
+  <header>
+    <applicationBuildName></applicationBuildName>
+    <applicationBuildNumber>0</applicationBuildNumber>
+    <applicationName>Pocket Code</applicationName>
+    <applicationVersion>0.8.4-1691-debug</applicationVersion>
+    <catrobatLanguageVersion>0.8</catrobatLanguageVersion>
+    <dateTimeUpload></dateTimeUpload>
+    <description></description>
+    <deviceName>HTC Desire</deviceName>
+    <mediaLicense></mediaLicense>
+    <platform>Android</platform>
+    <platformVersion>10</platformVersion>
+    <programLicense></programLicense>
+    <programName>My first program</programName>
+    <remixOf></remixOf>
+    <screenHeight>800</screenHeight>
+    <screenWidth>480</screenWidth>
+    <tags></tags>
+    <url></url>
+    <userHandle></userHandle>
+  </header>
+  <objectList>
+    <object>
+      <lookList/>
+      <name>object1</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <pointToBrick>
+              <object reference="../../../../.."/>
+              <pointedObject>
+                <lookList/>
+                <name>object2</name>
+                <scriptList/>
+                <soundList/>
+              </pointedObject>
+            </pointToBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object reference="../object[2]/scriptList/startScript/brickList/pointToBrick/pointedObject"/>
+  </objectList>
+  <variables />
+</program>
