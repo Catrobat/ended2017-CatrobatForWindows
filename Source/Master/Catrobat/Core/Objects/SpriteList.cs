@@ -36,6 +36,8 @@ namespace Catrobat.Core.Objects
                 enumerator.MoveNext();
                 enumerator.Current.LoadFromXML(xSprite);
             }
+
+            LoadReference();
         }
 
         internal override XElement CreateXML()
@@ -48,6 +50,12 @@ namespace Catrobat.Core.Objects
             }
 
             return xRoot;
+        }
+
+        internal override void LoadReference()
+        {
+            foreach (var sprite in Sprites)
+                sprite.LoadReference();
         }
     }
 }

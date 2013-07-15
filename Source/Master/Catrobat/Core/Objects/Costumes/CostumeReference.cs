@@ -40,7 +40,7 @@ namespace Catrobat.Core.Objects.Costumes
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
-            Costume = ReferenceHelper.GetReferenceObject(this, _reference) as Costume;
+            //Costume = ReferenceHelper.GetReferenceObject(this, _reference) as Costume;
         }
 
         internal override XElement CreateXML()
@@ -61,6 +61,11 @@ namespace Catrobat.Core.Objects.Costumes
         }
 
         public void UpdateReferenceObject()
+        {
+            Costume = ReferenceHelper.GetReferenceObject(this, _reference) as Costume;
+        }
+
+        internal override void LoadReference()
         {
             Costume = ReferenceHelper.GetReferenceObject(this, _reference) as Costume;
         }

@@ -39,6 +39,24 @@ enum Function
 	L_TRUE, 
 	L_FALSE, 
 
+	SIN, 
+	COS, 
+	TAN, 
+	LN, 
+	LOG, 
+	SQRT, 
+	RAND, 
+	ABS, 
+	ROUND, 
+	PI, 
+	MOD, 
+	ARCSIN, 
+	ARCCOS, 
+	ARCTAN, 
+	EXP, 
+	MAX, 
+	MIN, 
+
 	NO_FUNCTION
 };
 

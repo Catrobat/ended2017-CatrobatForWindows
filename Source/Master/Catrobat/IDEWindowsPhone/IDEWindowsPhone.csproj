@@ -30,6 +30,7 @@
     <SccProvider>SAK</SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <ExpressionBlendVersion>12.0.40612.10</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -126,6 +127,9 @@
     <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
       <DependentUpon>ListPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Misc\ImageSizeIcon.xaml.cs">
+      <DependentUpon>ImageSizeIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Projects\LocalProjectControl.xaml.cs">
       <DependentUpon>LocalProjectControl.xaml</DependentUpon>
     </Compile>
@@ -144,6 +148,7 @@
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
+    <Compile Include="Converters\IntPixelConverter.cs" />
     <Compile Include="Converters\ImageSizeHeightConverter.cs" />
     <Compile Include="Converters\ImageSizeWidthConverter.cs" />
     <Compile Include="Converters\NullIntCountConverter.cs" />
@@ -181,6 +186,7 @@
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeChooser.cs" />
     <Compile Include="ViewModel\Editor\Costumes\ImageSizeEntry.cs" />
+    <Compile Include="ViewModel\Editor\Costumes\ImageSizeEntryCollection.cs" />
     <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\AddNewCostumeViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\ChangeCostumeViewModel.cs" />
@@ -327,6 +333,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ListPicker\ListPickerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Misc\ImageSizeIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -654,6 +664,7 @@
     <Reference Include="GalaSoft.MvvmLight.WP8">
       <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\GalaSoft.MvvmLight.WP8.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Expression.Drawing" />
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
       <HintPath>..\packages\WPtoolkit.4.2012.10.30\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>

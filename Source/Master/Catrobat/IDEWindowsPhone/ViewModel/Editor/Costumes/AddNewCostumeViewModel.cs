@@ -49,6 +49,31 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             set
             {
                 _dimention = value;
+
+                int visibleCounter = 0;
+                foreach (var size in ImageSizes)
+                {
+                    size.Dimention = Dimention;
+                    if(size.IsVisible)
+                        visibleCounter++;
+                }
+
+                switch (visibleCounter)
+                {
+                    case 1:
+                        SelectedSize = ImageSizes[3];
+                        break;
+                    case 2:
+                        SelectedSize = ImageSizes[3];
+                        break;
+                    case 3:
+                        SelectedSize = ImageSizes[1];
+                        break;
+                    case 4:
+                        SelectedSize = ImageSizes[1];
+                        break;
+                }
+
                 RaisePropertyChanged("Dimention");
             }
         }
@@ -157,7 +182,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private void InitDesignData()
         {
-            _dimention = new ImageDimention { Width = 500, Height = 500 };
+            Dimention = new ImageDimention { Width = 500, Height = 500 };
             _selectedSize = ImageSizes[1];
         }
 
@@ -211,7 +236,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                 new ImageSizeEntry {Size = ImageSize.FullSize}
             };
 
-            SelectedSize = ImageSizes[1];
+            Dimention = new ImageDimention { Width = 0, Height = 0 };
         }
 
         private void ResetViewModel()

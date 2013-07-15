@@ -12,12 +12,12 @@ namespace Catrobat.Core.Resources
     {
         private readonly Dictionary<string, string> _sampleProjectNames = new Dictionary<string, string>
         {
-            {"Piano.catrobat", "Piano"},
-            {"Pacman.catrobat", "Pacman"},
-            {"HAL9000.catrobat", "HAL 9000"},
-            {"Aquarium_v2.catrobat", "Aquarium v2"},
-            {"Fishy.catroid", "Fishy"},
-            {"Egg_timer.catrobat", "Egg Timer"}
+            //{"Piano.catrobat", "Piano"},
+            //{"Pacman.catrobat", "Pacman"},
+            //{"HAL9000.catrobat", "HAL 9000"},
+            //{"Aquarium_v2.catrobat", "Aquarium v2"},
+            //{"Fishy.catroid", "Fishy"},
+            //{"Egg_timer.catrobat", "Egg Timer"}
         };
 
         public void LoadSampleProjects()

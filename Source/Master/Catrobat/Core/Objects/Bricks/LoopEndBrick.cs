@@ -73,6 +73,11 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
+        internal override void LoadReference()
+        {
+            _loopBeginBrickReference.LoadReference();
+        }
+
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new LoopEndBrick(parent);

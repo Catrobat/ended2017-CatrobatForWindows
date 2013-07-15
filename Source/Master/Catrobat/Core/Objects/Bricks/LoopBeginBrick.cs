@@ -66,6 +66,11 @@ namespace Catrobat.Core.Objects.Bricks
             xRoot.Add(_loopEndBrickReference.CreateXML());
         }
 
+        internal override void LoadReference()
+        {
+            _loopEndBrickReference.LoadReference();
+        }
+
         public abstract override DataObject Copy(Sprite parent);
 
         public void CopyReference(LoopBeginBrick copiedFrom, Sprite parent)

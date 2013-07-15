@@ -30,6 +30,9 @@ namespace Catrobat.Core.Objects
 
         internal abstract XElement CreateXML();
 
+        internal virtual void LoadReference()
+        {
+        }
 
 
 

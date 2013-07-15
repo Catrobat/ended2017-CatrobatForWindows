@@ -22,6 +22,42 @@ Interpreter::Interpreter()
 	m_accelerometer = Windows::Devices::Sensors::Accelerometer::GetDefault();
 }
 
+double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
+{
+	Type type = tree->GetType();
+	switch (type)
+	{
+	case OPERATOR:
+        return InterpretOperator(tree, object);
+	case NUMBER:
+		return atoi(tree->Value().c_str());
+	case USER_VARIABLE:
+		{
+			string varName = tree->Value();
+			UserVariable *var = object->GetVariable(varName);
+			if (var)
+				return atoi(var->GetValue().c_str());
+            var = ProjectDaemon::Instance()->GetProject()->GetVariable(varName);
+			if (var)
+				return atoi(var->GetValue().c_str());
+
+            // TODO: Check logic here (What should we do when variable is not found)
+            return 0;
+		}
+		break;
+    case BRACKET:
+        return this->EvaluateFormula(tree->GetRightChild(), object);
+    case FUNCTION:
+		return InterpretFunctionBool(tree, object);
+	default:
+		break;
+	}
+
+    // TODO: What should we do when we get a invalid tree here?
+	return 1;
+}
+
+
 int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 {
 	Type type = tree->GetType();
