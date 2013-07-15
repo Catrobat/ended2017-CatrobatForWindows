@@ -14,7 +14,9 @@ public:
 	Interpreter(void);
 	~Interpreter(void);
 	static Interpreter *Instance();
-	
+
+	double EvaluateFormula(FormulaTree *tree, Object *object);
+
 	int EvaluateFormulaToInt(FormulaTree *tree, Object *object);
 	float EvaluateFormulaToFloat(FormulaTree *tree, Object *object);
 	bool EvaluateFormulaToBool(FormulaTree *tree, Object *object);
