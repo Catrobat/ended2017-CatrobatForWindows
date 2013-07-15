@@ -57,6 +57,40 @@ FormulaTree::FormulaTree(string type, string value)
 			m_function = Function::L_TRUE;
 		else if (m_value == "FALSE")
 			m_function = Function::L_FALSE;
+		else if (m_value == "SIN")
+			m_function = Function::SIN;
+		else if (m_value == "COS")
+			m_function = Function::COS;
+		else if (m_value == "TAN")
+			m_function = Function::TAN;
+		else if (m_value == "LN")
+			m_function = Function::LN;
+		else if (m_value == "LOG")
+			m_function = Function::LOG;
+		else if (m_value == "SQRT")
+			m_function = Function::SQRT;
+		else if (m_value == "RAND")
+			m_function = Function::RAND;
+		else if (m_value == "ABS")
+			m_function = Function::ABS;
+		else if (m_value == "ROUND")
+			m_function = Function::ROUND;
+		else if (m_value == "PI")
+			m_function = Function::PI;
+		else if (m_value == "MOD")
+			m_function = Function::MOD;
+		else if (m_value == "ARCSIN")
+			m_function = Function::ARCSIN;
+		else if (m_value == "ARCCOS")
+			m_function = Function::ARCCOS;
+		else if (m_value == "ARCTAN")
+			m_function = Function::ARCTAN;
+		else if (m_value == "EXP")
+			m_function = Function::EXP;
+		else if (m_value == "MAX")
+			m_function = Function::MAX;
+		else if (m_value == "MIN")
+			m_function = Function::MIN;
 	}
 	else
 	{
