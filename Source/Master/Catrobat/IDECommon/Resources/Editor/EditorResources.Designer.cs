@@ -395,6 +395,51 @@ namespace Catrobat.IDECommon.Resources.Editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to new {0}.
+        /// </summary>
+        public static string New {
+            get {
+                return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new action.
+        /// </summary>
+        public static string NewAction {
+            get {
+                return ResourceManager.GetString("NewAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new costume.
+        /// </summary>
+        public static string NewCostume {
+            get {
+                return ResourceManager.GetString("NewCostume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new object.
+        /// </summary>
+        public static string NewObject {
+            get {
+                return ResourceManager.GetString("NewObject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new sound.
+        /// </summary>
+        public static string NewSound {
+            get {
+                return ResourceManager.GetString("NewSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No costume selected.
         /// </summary>
         public static string NoCostumeSelected {
@@ -661,6 +706,15 @@ namespace Catrobat.IDECommon.Resources.Editor {
         public static string TitleChooseSoundName {
             get {
                 return ResourceManager.GetString("TitleChooseSoundName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new action.
+        /// </summary>
+        public static string TitleNewAction {
+            get {
+                return ResourceManager.GetString("TitleNewAction", resourceCulture);
             }
         }
         

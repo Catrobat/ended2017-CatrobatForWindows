@@ -225,6 +225,21 @@
   <data name="MessageBoxWrongImageFormatText" xml:space="preserve">
     <value>Das gewählte Bild hat leider ein nicht unterstütztes Format.</value>
   </data>
+  <data name="New" xml:space="preserve">
+    <value>neues {0}</value>
+  </data>
+  <data name="NewAction" xml:space="preserve">
+    <value>neue Aktion</value>
+  </data>
+  <data name="NewCostume" xml:space="preserve">
+    <value>neues Aussehen</value>
+  </data>
+  <data name="NewObject" xml:space="preserve">
+    <value>neues Objekt</value>
+  </data>
+  <data name="NewSound" xml:space="preserve">
+    <value>neuen Sound</value>
+  </data>
   <data name="NoCostumeSelected" xml:space="preserve">
     <value>Kein Kostüm ausgewählt</value>
   </data>

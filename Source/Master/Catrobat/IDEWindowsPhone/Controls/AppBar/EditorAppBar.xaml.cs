@@ -11,6 +11,7 @@ using System.Windows.Navigation;
 using Catrobat.IDECommon.Resources;
 using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.IDECommon.Resources.Main;
+using Catrobat.IDEWindowsPhone.Views.Editor;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -67,6 +68,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.AppBar
                     break;
             }
 
+            that.UpdateAddText((AppBarTargetType)e.NewValue);
             that.UpdateSelectedItemsNumberUI((AppBarTargetType)e.NewValue);
         }
 
@@ -168,6 +170,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.AppBar
         public EditorAppBar()
         {
             InitializeComponent();
+            UpdateAddText(TargetType);
             UpdateSelectedItemsNumberUI(TargetType);
         }
 
@@ -195,6 +198,32 @@ namespace Catrobat.IDEWindowsPhone.Controls.AppBar
                     TextBlockNumberOfSelectedItemsText.Text = usePlural ? EditorResources.SoundPlural : EditorResources.SoundSingular;
                     break;
             }
+        }
+
+        private void UpdateAddText(AppBarTargetType targetType)
+        {
+            var text = "";
+
+            switch (targetType)
+            {
+                case AppBarTargetType.Object:
+                    text = EditorResources.NewObject;
+                    break;
+
+                case AppBarTargetType.Script:
+                    text = EditorResources.NewAction;
+                    break;
+
+                case AppBarTargetType.Costume:
+                    text = EditorResources.NewCostume;
+                    break;
+
+                case AppBarTargetType.Sound:
+                    text = EditorResources.NewSound;
+                    break;
+            }
+
+            TextBlockAdd.Text =  text;
         }
     }
 }
