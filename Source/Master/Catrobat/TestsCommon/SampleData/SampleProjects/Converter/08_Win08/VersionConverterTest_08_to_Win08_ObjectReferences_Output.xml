@@ -29,11 +29,9 @@
         <startScript>
           <brickList>
             <pointToBrick>
-              <object reference="../../../../.."/>
               <pointedObject reference="../../../../../../object[2]" />
             </pointToBrick>
           </brickList>
-          <object reference="../../.."/>
         </startScript>
       </scriptList>
       <soundList/>

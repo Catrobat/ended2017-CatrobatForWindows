@@ -13,7 +13,7 @@ using Catrobat.TestsCommon.SampleData;
 namespace Catrobat.TestsCommon.Tests.Data
 {
     [TestClass]
-    public class VersionConverterTests
+    public class VersionConverter08ToWin08Tests
     {
         [ClassInitialize()]
         public static void TestClassInitialize(TestContext testContext)
@@ -24,8 +24,8 @@ namespace Catrobat.TestsCommon.Tests.Data
         [TestMethod]
         public void CatrobatVersionConverterTest_Convert_ObjectReferences()
         {
-            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/VersionConverterTest_08_to_Win08_ObjectReferences_Input");
-            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/VersionConverterTest_08_to_Win08_ObjectReferences_Output");
+            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_ObjectReferences_Input");
+            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_ObjectReferences_Output");
 
             CatrobatVersionConverter.Convert("0.8", "Win0.8", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
@@ -34,8 +34,8 @@ namespace Catrobat.TestsCommon.Tests.Data
         [TestMethod]
         public void CatrobatVersionConverterTest_ConvertBack_ObjectReferences()
         {
-            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/VersionConverterTest_08_to_Win08_ObjectReferences_Output");
-            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/VersionConverterTest_08_to_Win08_ObjectReferences_Input");
+            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_ObjectReferences_Output");
+            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_ObjectReferences_Input");
 
             CatrobatVersionConverter.Convert("Win0.8", "0.8", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
