@@ -80,6 +80,11 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
+        internal override void LoadReference()
+        {
+            _soundReference.LoadReference();
+        }
+
         public override DataObject Copy(Sprite parent)
         {
             var newBrick = new PlaySoundBrick(parent);

@@ -39,7 +39,7 @@ namespace Catrobat.Core.Objects
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
-            Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as Sprite;
+            //Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as Sprite;
         }
 
         internal override XElement CreateXML()
@@ -60,6 +60,11 @@ namespace Catrobat.Core.Objects
         }
 
         public void UpdateReferenceObject()
+        {
+            Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as Sprite;
+        }
+
+        internal override void LoadReference()
         {
             Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as Sprite;
         }

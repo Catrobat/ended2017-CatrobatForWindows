@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Xml.Linq;
+using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
@@ -174,6 +175,8 @@ namespace Catrobat.Core.Objects
 
         protected override void LoadFromXML(String xml)
         {
+            ReferenceHelper.Project = this;
+
             _document = XDocument.Load(new StringReader(xml));
             _document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
@@ -184,10 +187,14 @@ namespace Catrobat.Core.Objects
             _spriteList = new SpriteList(this);
             _spriteList.LoadFromXML(project.Element("objectList"));
             _variableList = new VariableList(project.Element("variables"));
+
+            ReferenceHelper.Project = null;
         }
 
         internal override XDocument CreateXML()
         {
+            ReferenceHelper.Project = this;
+
             _document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
             var xProject = new XElement("project");
@@ -199,6 +206,8 @@ namespace Catrobat.Core.Objects
             xProject.Add(_variableList.CreateXML());
 
             _document.Add(xProject);
+
+            ReferenceHelper.Project = null;
 
             return _document;
         }

@@ -39,7 +39,7 @@ namespace Catrobat.Core.Objects.Sounds
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
-            Sound = ReferenceHelper.GetReferenceObject(this, _reference) as Sound;
+            //Sound = ReferenceHelper.GetReferenceObject(this, _reference) as Sound;
         }
 
         internal override XElement CreateXML()
@@ -60,6 +60,11 @@ namespace Catrobat.Core.Objects.Sounds
         }
 
         public void UpdateReferenceObject()
+        {
+            Sound = ReferenceHelper.GetReferenceObject(this, _reference) as Sound;
+        }
+
+        internal override void LoadReference()
         {
             Sound = ReferenceHelper.GetReferenceObject(this, _reference) as Sound;
         }

@@ -55,7 +55,7 @@ namespace Catrobat.Core.Objects.Bricks
         {
             _classField = xRoot.Attribute("class").Value;
             _reference = xRoot.Attribute("reference").Value;
-            _loopBeginBrick = ReferenceHelper.GetReferenceObject(this, _reference) as LoopBeginBrick;
+            
         }
 
         internal override XElement CreateXML()
@@ -65,6 +65,11 @@ namespace Catrobat.Core.Objects.Bricks
             xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
 
             return xRoot;
+        }
+
+        internal override void LoadReference()
+        {
+            LoopBeginBrick = ReferenceHelper.GetReferenceObject(this, _reference) as LoopBeginBrick;
         }
 
         public DataObject Copy(Sprite parent)

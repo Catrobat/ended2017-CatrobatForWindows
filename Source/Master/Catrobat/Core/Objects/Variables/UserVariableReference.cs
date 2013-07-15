@@ -11,6 +11,7 @@ namespace Catrobat.Core.Objects.Variables
     public class UserVariableReference : DataObject
     {
         private readonly Sprite _sprite;
+        private string _reference;
 
         private UserVariable _userVariable;
         public UserVariable UserVariable
@@ -42,7 +43,7 @@ namespace Catrobat.Core.Objects.Variables
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            UserVariable = ReferenceHelper.GetReferenceObject(this, xRoot.Attribute("reference").Value) as UserVariable;
+            _reference = xRoot.Attribute("reference").Value;
         }
 
         internal override XElement CreateXML()
@@ -60,6 +61,11 @@ namespace Catrobat.Core.Objects.Variables
             newUserVariableRef.UserVariable = _userVariable;
 
             return newUserVariableRef;
+        }
+
+        internal override void LoadReference()
+        {
+            UserVariable = ReferenceHelper.GetReferenceObject(this, _reference) as UserVariable;
         }
     }
 }

@@ -103,9 +103,9 @@ namespace Catrobat.Core.Objects
             {
                 _sounds = new SoundList(xRoot.Element("soundList"), this);
             }
-            if (xRoot.Element("objectList") != null)
+            if (xRoot.Element("scriptList") != null)
             {
-                _scripts = new ScriptList(xRoot.Element("objectList"), this);
+                _scripts = new ScriptList(xRoot.Element("scriptList"), this);
             }
         }
 
@@ -134,6 +134,12 @@ namespace Catrobat.Core.Objects
             }
 
             return xRoot;
+        }
+
+        internal override void LoadReference()
+        {
+            foreach (var script in Scripts.Scripts)
+                script.LoadReference();
         }
 
         public DataObject Copy()
