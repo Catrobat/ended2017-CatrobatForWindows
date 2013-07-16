@@ -20,8 +20,8 @@
     <Grid Grid.Column="0">
       <StackPanel  Grid.Column="0" Margin="0 15 0 0" Grid.RowSpan="2">
         <coding4FunControls:RoundButton Name="ButtonNew" Margin="0 0 0 -13" 
-          ImageSource="/Content\Images\ApplicationBar\dark\appbar.new.rest.png"/>
-        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
+          ImageSource="/Content/Images/ApplicationBar/dark/appbar.new.rest.png"/>
+        <TextBlock Name="TextBlockAdd" HorizontalAlignment="Center" TextAlignment="Center" 
           TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}">new costume</TextBlock>
       </StackPanel>
     </Grid>
@@ -63,21 +63,21 @@
 
           <StackPanel Grid.Column="0" Name="StackPanelCopy">
             <coding4FunControls:RoundButton Name="ButtonCopy" Margin="0 0 0 -13" 
-                                            ImageSource="/Content\Images\ApplicationBar\dark\appbar.close.rest.png"/>
+                                            ImageSource="/Content/Images/ApplicationBar/dark/appbar.copy.rest.png"/>
             <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
                        TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}">copy</TextBlock>
           </StackPanel>
 
           <StackPanel Grid.Column="1" Name="StackPanelEdit">
             <coding4FunControls:RoundButton Name="ButtonEdit" Margin="0 0 0 -13" 
-                                            ImageSource="/Content\Images\ApplicationBar\dark\appbar.edit.rest.png"/>
+                                            ImageSource="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"/>
             <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
                        TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}">edit</TextBlock>
           </StackPanel>
 
           <StackPanel Grid.Column="2" Name="StackPanelDelete">
             <coding4FunControls:RoundButton Name="ButtonDelete" Margin="0 0 0 -13" 
-                                            ImageSource="/Content\Images\ApplicationBar\dark\appbar.delete.rest.png"/>
+                                            ImageSource="/Content/Images/ApplicationBar/dark/appbar.delete.rest.png"/>
             <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
                        TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}">delete</TextBlock>
           </StackPanel>

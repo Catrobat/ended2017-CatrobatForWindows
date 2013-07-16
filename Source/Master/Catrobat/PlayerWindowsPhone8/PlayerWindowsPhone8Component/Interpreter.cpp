@@ -28,7 +28,7 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
 	switch (type)
 	{
 	case OPERATOR:
-        return InterpretOperator(tree, object);
+		return InterpretOperator(tree, object);
 	case NUMBER:
 		return atoi(tree->Value().c_str());
 	case USER_VARIABLE:
@@ -52,95 +52,29 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
 	default:
 		break;
 	}
-
     // TODO: What should we do when we get a invalid tree here?
-	return 1;
+	throw "Exception in Interpreter.cpp: No such type available";
 }
 
 
 int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 {
-	Type type = tree->GetType();
-	switch (type)
-	{
-	case OPERATOR:
-        return InterpretOperator(tree, object);
-	case NUMBER:
-		return atoi(tree->Value().c_str());
-	case USER_VARIABLE:
-		{
-			string varName = tree->Value();
-			UserVariable *var = object->GetVariable(varName);
-			if (var)
-				return atoi(var->GetValue().c_str());
-            var = ProjectDaemon::Instance()->GetProject()->GetVariable(varName);
-			if (var)
-				return atoi(var->GetValue().c_str());
-
-            // TODO: Check logic here (What should we do when variable is not found)
-            return 0;
-		}
-		break;
-    case BRACKET:
-        return this->EvaluateFormulaToInt(tree->GetRightChild(), object);
-	default:
-		break;
-	}
-
-    // TODO: What should we do when we get a invalid tree here?
-	return 1;
+	return (int) (this->EvaluateFormula(tree, object));
 }
 
 float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 {
-	Type type = tree->GetType();
-	switch (type)
-	{
-	case OPERATOR:
-        return InterpretOperatorFloat(tree, object);
-	case NUMBER:
-        return (float)atof(tree->Value().c_str());
-	case USER_VARIABLE:
-		{
-			string varName = tree->Value();
-			UserVariable *var = object->GetVariable(varName);
-			if (var)
-				return (float)atof(var->GetValue().c_str());
-            var = ProjectDaemon::Instance()->GetProject()->GetVariable(varName);
-            if (var)
-                return (float)atof(var->GetValue().c_str());
-
-            // TODO: Check logic here (What should we do when variable is not found)
-            return 0.0f;
-		}
-		break;
-    case BRACKET:
-        return this->EvaluateFormulaToFloat(tree->GetRightChild(), object);
-	default:
-		break;
-	}
-
-    // TODO: What should we do when we get a invalid tree here?
-	return 1.0f;
+	return (float) (this->EvaluateFormula(tree, object));
 }
 
 bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object *object)
 {
-	Type type = tree->GetType();
-	switch (type)
-	{
-	case OPERATOR:
-		return InterpretOperatorBool(tree, object);
-	case NUMBER:
-		return atof(tree->Value().c_str()) > 0.0f;
-	case FUNCTION:
-		return InterpretFunctionBool(tree, object);
-	default:
-		break;
-	}
+	double result = this->EvaluateFormula(tree, object);
 
-	// TODO: What should we do when we get a invalid tree here?
-	return false;
+	if (result != 0)
+		return true;
+	else
+		return false;
 }
 
 void Interpreter::ReadAcceleration()

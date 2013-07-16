@@ -228,6 +228,21 @@
   <data name="MessageBoxWrongImageFormatText" xml:space="preserve">
     <value>Unfortunately the image has a not supported format.</value>
   </data>
+  <data name="New" xml:space="preserve">
+    <value>new {0}</value>
+  </data>
+  <data name="NewAction" xml:space="preserve">
+    <value>new action</value>
+  </data>
+  <data name="NewCostume" xml:space="preserve">
+    <value>new costume</value>
+  </data>
+  <data name="NewObject" xml:space="preserve">
+    <value>new object</value>
+  </data>
+  <data name="NewSound" xml:space="preserve">
+    <value>new sound</value>
+  </data>
   <data name="NoCostumeSelected" xml:space="preserve">
     <value>No costume selected</value>
   </data>
@@ -317,6 +332,9 @@
   </data>
   <data name="TitleChooseSoundName" xml:space="preserve">
     <value>CHOOSE SOUND NAME</value>
+  </data>
+  <data name="TitleNewAction" xml:space="preserve">
+    <value>new action</value>
   </data>
   <data name="TitleNewBroadcastMessage" xml:space="preserve">
     <value>NEW BROADCAST MESSAGE</value>

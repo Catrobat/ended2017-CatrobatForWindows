@@ -41,9 +41,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             if (maxWidthHeight < desiredMaxWidthHeight)
                 return width;
 
-            double scale = maxWidthHeight / (double) desiredMaxWidthHeight;
+            double scale = desiredMaxWidthHeight / (double)maxWidthHeight;
 
-            int newWidth = (int) (width / scale);
+            int newWidth = (int) (width * scale);
 
             return newWidth;
         }
@@ -56,9 +56,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             if (maxWidthHeight < desiredMaxWidthHeight)
                 return height;
 
-            double scale = maxWidthHeight / (double) desiredMaxWidthHeight;
+            double scale = desiredMaxWidthHeight / (double)maxWidthHeight;
 
-            int newHeight = (int) (height / scale);
+            int newHeight = (int) (height * scale);
 
             return newHeight;
         }

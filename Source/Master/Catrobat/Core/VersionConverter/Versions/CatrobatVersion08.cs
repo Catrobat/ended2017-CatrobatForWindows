@@ -66,19 +66,29 @@ namespace Catrobat.Core.VersionConverter.Versions
             UnifyVariableReferences(document);
         }
 
+
+        private static readonly List<string> PossibleObjectNames = new List<string> {"object", "pointedObject"};
         protected void UnifyObjectReferences(XDocument document)
         {
             var objectElementList = document.Descendants("objectList").ToArray()[0];
-            var objectElements = document.Descendants("object");
+            //var objectElements = select a document.Descendants();
 
-            foreach (var oldElement in objectElements)
+            var objectElements = from a in document.Descendants()
+                          where PossibleObjectNames.Contains(a.Name.LocalName)
+                          select a;
+            //var possibleElements = from a in document.Descendants()
+            //                       where PossibleObjectNames.Contains(a.Name.LocalName)
+            //                       select a;
+
+            var elementsToDelete = new List<XElement>();
+
+            var possibleElements = objectElements.ToArray();
+            foreach (var oldElement in possibleElements)
             {
                 if (oldElement.Parent.Name != "objectList" && oldElement.Attribute("reference") == null)
                 {
                     var newElement = new XElement(oldElement);
                     objectElementList.Add(newElement);
-
-                    var possibleElements = document.Descendants("object");
 
                     foreach (var possibleElement in possibleElements)
                     {
@@ -91,8 +101,18 @@ namespace Catrobat.Core.VersionConverter.Versions
                         }
                     }
 
-                    oldElement.Remove();
+                    var updatedPath = XPathHelper.GetXPath(oldElement, newElement);
+                    oldElement.RemoveAttributes();
+                    oldElement.Descendants().Remove();
+                    oldElement.SetAttributeValue("reference", updatedPath);
+
+                    elementsToDelete.Add(oldElement);
                 }
+            }
+
+            foreach (var objectToRename in objectElementList.Elements().ToArray())
+            {
+                // TODO: rename objectToRename to "object"
             }
         }
 
