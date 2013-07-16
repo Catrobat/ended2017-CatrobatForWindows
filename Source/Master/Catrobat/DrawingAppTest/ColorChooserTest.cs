@@ -11,7 +11,7 @@ namespace DrawingAppTest
         [Description("A first unit test.")]
         public void ColorSelected()
         {
-            Assert.IsTrue(false);
+            Assert.IsTrue(false); 
         }
     }
 }
