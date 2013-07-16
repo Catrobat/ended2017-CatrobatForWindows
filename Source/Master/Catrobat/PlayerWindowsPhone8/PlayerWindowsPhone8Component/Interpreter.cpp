@@ -28,7 +28,7 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
 	switch (type)
 	{
 	case OPERATOR:
-        return InterpretOperator(tree, object);
+		return InterpretOperator(tree, object);
 	case NUMBER:
 		return atoi(tree->Value().c_str());
 	case USER_VARIABLE:
@@ -52,7 +52,6 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
 	default:
 		break;
 	}
-
     // TODO: What should we do when we get a invalid tree here?
 	throw "Exception in Interpreter.cpp: No such type available";
 }
@@ -60,26 +59,22 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
 
 int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 {
-	return (int) this->EvaluateFormula(tree, object);
-
+	return (int) (this->EvaluateFormula(tree, object));
 }
 
 float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 {
-	return (float) this->EvaluateFormula(tree, object);
-
+	return (float) (this->EvaluateFormula(tree, object));
 }
 
 bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object *object)
 {
-	
-	
 	double result = this->EvaluateFormula(tree, object);
 
-	if (result == 0)
-		return false;
-	else
+	if (result != 0)
 		return true;
+	else
+		return false;
 }
 
 void Interpreter::ReadAcceleration()
