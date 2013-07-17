@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.20617.1 PREVIEW
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{A4E10BED-8F56-46A6-B78D-BFEF1363B195}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDECommon", "IDECommon\IDECommon.csproj", "{73EDA75E-B249-40CB-A883-C2521A72B1C0}"
@@ -37,9 +35,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsWindowsPhone", "TestsW
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlayerWindowsPhone8Test", "PlayerWindowsPhone8Test\PlayerWindowsPhone8Test.vcxproj", "{C0CED763-9E71-4CA7-9DEF-CE037453AD52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingAppTest", "DrawingAppTest\DrawingAppTest.csproj", "{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 13
+		SccNumberOfProjects = 14
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -79,6 +79,9 @@ Global
 		SccProjectUniqueName12 = PlayerWindowsPhone8Test\\PlayerWindowsPhone8Test.vcxproj
 		SccProjectName12 = PlayerWindowsPhone8Test
 		SccLocalPath12 = PlayerWindowsPhone8Test
+		SccProjectUniqueName13 = DrawingAppTest\\DrawingAppTest.csproj
+		SccProjectName13 = DrawingAppTest
+		SccLocalPath13 = DrawingAppTest
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -321,6 +324,7 @@ Global
 		{5447D6AA-07AD-4B2F-8106-992EE6F41CEC}.Debug|ARM.Deploy.0 = Debug|ARM
 		{5447D6AA-07AD-4B2F-8106-992EE6F41CEC}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{5447D6AA-07AD-4B2F-8106-992EE6F41CEC}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{5447D6AA-07AD-4B2F-8106-992EE6F41CEC}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
 		{5447D6AA-07AD-4B2F-8106-992EE6F41CEC}.Debug|Win32.ActiveCfg = Debug|x86
 		{5447D6AA-07AD-4B2F-8106-992EE6F41CEC}.Debug|Win32.Build.0 = Debug|x86
 		{5447D6AA-07AD-4B2F-8106-992EE6F41CEC}.Debug|Win32.Deploy.0 = Debug|x86
@@ -394,6 +398,34 @@ Global
 		{C0CED763-9E71-4CA7-9DEF-CE037453AD52}.Release|x64.ActiveCfg = Release|Win32
 		{C0CED763-9E71-4CA7-9DEF-CE037453AD52}.Release|x86.ActiveCfg = Release|Win32
 		{C0CED763-9E71-4CA7-9DEF-CE037453AD52}.Release|x86.Build.0 = Release|Win32
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|ARM.Build.0 = Debug|ARM
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|ARM.Deploy.0 = Debug|ARM
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Win32.ActiveCfg = Debug|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Win32.Build.0 = Debug|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Win32.Deploy.0 = Debug|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|x64.ActiveCfg = Debug|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|x86.ActiveCfg = Debug|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|x86.Build.0 = Debug|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|x86.Deploy.0 = Debug|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Any CPU.ActiveCfg = Release|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|ARM.ActiveCfg = Release|ARM
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|ARM.Build.0 = Release|ARM
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|ARM.Deploy.0 = Release|ARM
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Mixed Platforms.Deploy.0 = Release|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Win32.ActiveCfg = Release|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Win32.Build.0 = Release|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Win32.Deploy.0 = Release|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|x64.ActiveCfg = Release|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|x86.ActiveCfg = Release|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|x86.Build.0 = Release|x86
+		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

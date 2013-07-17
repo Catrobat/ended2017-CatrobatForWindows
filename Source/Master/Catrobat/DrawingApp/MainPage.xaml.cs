@@ -36,20 +36,20 @@ namespace DrawingApp
             line.Stroke = new SolidColorBrush(color);
 
             line.StrokeThickness = linethikness;
-//            Rectangle rec = new Rectangle();
-//            rec.Height = linethikness;
-//            rec.Width = linethikness;            
-//            rec.Fill = new SolidColorBrush((App.Current as App).ColorValue);
-//            Canvas.SetTop(rec, currentPoint.Y - linethikness/2);
-//            Canvas.SetLeft(rec, currentPoint.X - linethikness/2);
-      //      line.Opacity = 0.1;
+            //            Rectangle rec = new Rectangle();
+            //            rec.Height = linethikness;
+            //            rec.Width = linethikness;            
+            //            rec.Fill = new SolidColorBrush((App.Current as App).ColorValue);
+            //            Canvas.SetTop(rec, currentPoint.Y - linethikness/2);
+            //            Canvas.SetLeft(rec, currentPoint.X - linethikness/2);
+            //      line.Opacity = 0.1;
             Ellipse elli = new Ellipse();
             elli.Height = linethikness;
             elli.Width = linethikness;
             elli.Fill = new SolidColorBrush((App.Current as App).ColorValue);
-        //    elli.Opacity = 0.3;
+            //    elli.Opacity = 0.3;
             Canvas.SetTop(elli, currentPoint.Y - linethikness / 2);
-            Canvas.SetLeft(elli, currentPoint.X - linethikness/2);
+            Canvas.SetLeft(elli, currentPoint.X - linethikness / 2);
 
             this.ContentPanelCanvas.Children.Add(line);
             this.ContentPanelCanvas.Children.Add(elli);
@@ -67,7 +67,8 @@ namespace DrawingApp
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {if (slider_thickness.Visibility == Visibility.Visible)
+        {
+            if (slider_thickness.Visibility == Visibility.Visible)
                 slider_thickness.Visibility = Visibility.Collapsed;
             else
                 slider_thickness.Visibility = Visibility.Visible;
@@ -77,7 +78,12 @@ namespace DrawingApp
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/ColorChooser.xaml", UriKind.Relative));
-           
+
+        }
+
+        private void MAX_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/DrawingSurface.xaml", UriKind.Relative));
         }
     }
 }
