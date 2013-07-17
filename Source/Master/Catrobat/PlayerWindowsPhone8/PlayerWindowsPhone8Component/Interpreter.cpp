@@ -37,10 +37,10 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
 			string varName = tree->Value();
 			UserVariable *var = object->GetVariable(varName);
 			if (var)
-				return atof(tree->Value().c_str());
+				return atof(var->GetValue().c_str());
             var = ProjectDaemon::Instance()->GetProject()->GetVariable(varName);
 			if (var)
-				return atof(tree->Value().c_str());
+				return atof(var->GetValue().c_str());
 
             // TODO: Check logic here (What should we do when variable is not found)
             return 0;
