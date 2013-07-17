@@ -267,9 +267,10 @@ namespace PlayerWindowsPhone8Test
             tree->GetLeftChild()->SetLeftChild(new FormulaTree("NUMBER", "7.2"));
             tree->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
             tree->SetRightChild(new FormulaTree("NUMBER", "3.5"));
-            float expected = 2.7f;
-            float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            double expected = 2.7;
+            double actual = interpreter->EvaluateFormula(tree, object);
+            //Assert::IsTrue(TestHelper::isEqual(expected, actual));
+			Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(Formula_Basic_MINUSsimple_float)
@@ -379,7 +380,8 @@ namespace PlayerWindowsPhone8Test
             tree->SetRightChild(new FormulaTree("NUMBER", "2.0"));
             float expected = 3.6f;
             float actual = interpreter->EvaluateFormulaToFloat(tree, object);
-            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+            //Assert::IsTrue(TestHelper::isEqual(expected, actual));
+			Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(Formula_Basic_POW_int)
