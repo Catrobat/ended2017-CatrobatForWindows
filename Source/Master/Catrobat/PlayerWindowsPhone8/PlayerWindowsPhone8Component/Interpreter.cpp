@@ -4,6 +4,7 @@
 #include "ProjectDaemon.h"
 #include <string.h>
 #include <sstream>
+#include <cmath>
 
 using namespace std;
 using namespace Windows::Devices::Sensors;
@@ -30,16 +31,16 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
 	case OPERATOR:
 		return InterpretOperator(tree, object);
 	case NUMBER:
-		return atoi(tree->Value().c_str());
+		return atof(tree->Value().c_str());
 	case USER_VARIABLE:
 		{
 			string varName = tree->Value();
 			UserVariable *var = object->GetVariable(varName);
 			if (var)
-				return atoi(var->GetValue().c_str());
+				return atof(var->GetValue().c_str());
             var = ProjectDaemon::Instance()->GetProject()->GetVariable(varName);
 			if (var)
-				return atoi(var->GetValue().c_str());
+				return atof(var->GetValue().c_str());
 
             // TODO: Check logic here (What should we do when variable is not found)
             return 0;
@@ -48,14 +49,13 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
     case BRACKET:
         return this->EvaluateFormula(tree->GetRightChild(), object);
     case FUNCTION:
-		return InterpretFunctionBool(tree, object);
+		return InterpretFunction(tree, object);
 	default:
 		break;
 	}
     // TODO: What should we do when we get a invalid tree here?
 	throw "Exception in Interpreter.cpp: No such type available";
 }
-
 
 int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 {
@@ -97,51 +97,16 @@ void Interpreter::ReadAcceleration()
 	}	
 }
 
-int Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
+double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
 {
     FormulaTree *leftChild = tree->GetLeftChild();
-    int leftValue = 0;
+    double leftValue = 0.0;
     if (tree->GetLeftChild() != NULL)
-        leftValue = this->EvaluateFormulaToInt(leftChild, object);
+        leftValue = this->EvaluateFormula(leftChild, object);
     FormulaTree *rightChild = tree->GetRightChild();
-    int rightValue = this->EvaluateFormulaToInt(rightChild, object);
-    int returnValue = -1;
+    double rightValue = this->EvaluateFormula(rightChild, object);
 
-    switch (tree->GetOperator())
-    {
-    case Operator::PLUS:
-        returnValue = leftValue + rightValue;
-        break;
-    case Operator::MINUS:
-        returnValue = leftValue - rightValue;
-        break;
-    case Operator::MULT:
-        returnValue = leftValue * rightValue;
-        break;
-    case Operator::DIVIDE:
-        if (rightValue == 0)
-            return -1;
-        returnValue = leftValue / rightValue;
-        break;
-    case Operator::POW:
-        returnValue = (int) pow(leftValue, rightValue);
-    default:
-        break;
-    }
-    
-    return returnValue;
-}
-
-float Interpreter::InterpretOperatorFloat(FormulaTree *tree, Object *object)
-{
-    FormulaTree *leftChild = tree->GetLeftChild();
-    float leftValue = 0.0f;
-    if (tree->GetLeftChild() != NULL)
-        leftValue = this->EvaluateFormulaToFloat(leftChild, object);
-    FormulaTree *rightChild = tree->GetRightChild();
-    float rightValue = this->EvaluateFormulaToFloat(rightChild, object);
-
-    float returnValue = 0.0f;
+    double returnValue = 0.0;
 
     switch (tree->GetOperator())
     {
@@ -161,28 +126,7 @@ float Interpreter::InterpretOperatorFloat(FormulaTree *tree, Object *object)
         break;
     case Operator::POW:
         returnValue = pow(leftValue, rightValue);
-    default:
-        break;
-    }
-
-    return (float)returnValue;
-}
-
-bool Interpreter::InterpretOperatorBool(FormulaTree *tree, Object *object)
-{
-	FormulaTree *leftChild = tree->GetLeftChild();
-    bool leftValue = false;
-    if (tree->GetLeftChild() != NULL)
-        leftValue = this->EvaluateFormulaToBool(leftChild, object);
-    FormulaTree *rightChild = tree->GetRightChild();
-    bool rightValue = false;
-	if (tree->GetRightChild() != NULL)
-		rightValue = this->EvaluateFormulaToBool(rightChild, object);
-
-	bool returnValue = false;
-
-	switch (tree->GetOperator())
-	{
+		break;
 	case Operator::LOGICAL_AND:
 		returnValue = leftValue && rightValue;
 		break;
@@ -195,34 +139,72 @@ bool Interpreter::InterpretOperatorBool(FormulaTree *tree, Object *object)
 	case Operator::NOT_EQUAL:
 		returnValue = leftValue != rightValue;
 		break;
-	default: 
-		returnValue = InterpretOperatorFloat(tree, object) > 0.0f;
-		break;
-	}
+    default:
+        break;
+    }
 
-	return returnValue;
+    return returnValue;
 }
 
-bool Interpreter::InterpretFunctionBool(FormulaTree *tree, Object *object)
+double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
 {
+	double returnValue = 0.0;
 	FormulaTree *leftChild = tree->GetLeftChild();
-    bool leftValue = false;
-    if (tree->GetLeftChild() != NULL)
-        leftValue = this->EvaluateFormulaToBool(leftChild, object);
-    FormulaTree *rightChild = tree->GetRightChild();
-    bool rightValue = false;
-	if (tree->GetRightChild() != NULL)
-		rightValue = this->EvaluateFormulaToBool(rightChild, object);
+	FormulaTree *rightChild = tree->GetRightChild();
 
-	bool returnValue = false;
+	double leftValue = 0.0;
+	if (leftChild != NULL)
+		leftValue = this->EvaluateFormula(leftChild, object);
+	double rightValue = 0.0;
+	if (rightChild != NULL)
+		rightValue = this->EvaluateFormula(rightChild, object);
 
 	switch (tree->GetFunction())
 	{
 	case Function::L_TRUE:
-		returnValue = true;
+		returnValue = 1.0;
 		break;
-	case Function::L_FALSE:
-		returnValue = false;
+	case Function::L_FALSE: 
+		returnValue = 0.0;
+		break;
+	case Function::SIN:
+		returnValue = sin(leftValue);
+		break;
+	case Function::COS: 
+		returnValue = cos(leftValue);
+		break;
+	case Function::TAN: 
+		returnValue = tan(leftValue);
+		break;
+	case Function::LN: 
+	case Function::LOG:
+		returnValue = log(leftValue);
+		break;
+	case Function::SQRT:
+		returnValue = sqrt(leftValue);
+		break;
+	case Function::RAND: 
+		break;
+	case Function::ABS: 
+		returnValue = abs(leftValue);
+		break;
+	case Function::ROUND: 
+		break;
+	case Function::PI: 
+		break;
+	case Function::MOD: 
+		break;
+	case Function::ARCSIN: 
+		break;
+	case Function::ARCCOS: 
+		break;
+	case Function::ARCTAN: 
+		break;
+	case Function::EXP: 
+		break;
+	case Function::MAX: 
+		break;
+	case Function::MIN: 
 		break;
 	default:
 		break;

@@ -34,6 +34,7 @@ namespace PlayerWindowsPhone8Test
 			Interpreter *interpreter = Interpreter::Instance();
 
 			//Assert::AreEqual(interpreter->EvaluateFormulaToInt(formula, object), TRUE);
+			//Assert::IsTrue(interpreter->EvaluateFormulaToBool(formula, object));
 			Assert::IsTrue(interpreter->EvaluateFormulaToBool(formula, object));
 		}
 
