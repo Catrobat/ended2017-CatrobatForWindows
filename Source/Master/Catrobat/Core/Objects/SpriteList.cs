@@ -5,21 +5,13 @@ namespace Catrobat.Core.Objects
 {
     public class SpriteList : DataObject
     {
-        private readonly Project _project;
-
-        public SpriteList(Project project)
-        {
-            _project = project;
-            Sprites = new ObservableCollection<Sprite>();
-        }
-
         public ObservableCollection<Sprite> Sprites { get; set; }
 
-        //public SpriteList(XElement xElement, Project project)
-        //{ 
-        //  this.project = project;
-        //  LoadFromXML(xElement);
-        //}
+
+        public SpriteList()
+        {
+            Sprites = new ObservableCollection<Sprite>();
+        }
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -27,7 +19,7 @@ namespace Catrobat.Core.Objects
 
             foreach (XElement xSprite in xRoot.Elements("object"))
             {
-                Sprites.Add(new Sprite(_project));
+                Sprites.Add(new Sprite());
             }
 
             var enumerator = Sprites.GetEnumerator();

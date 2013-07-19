@@ -59,7 +59,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
 
         private void SaveAction()
         {
-            var sprite = new Sprite(CatrobatContext.GetContext().CurrentProject);
+            var sprite = new Sprite();
             sprite.Name = SpriteName;
             _receivedSprites.Add(sprite);
 

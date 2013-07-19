@@ -21,9 +21,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         public ChangeSizeByNBrick() {}
 
-        public ChangeSizeByNBrick(Sprite parent) : base(parent) {}
-
-        public ChangeSizeByNBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public ChangeSizeByNBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -41,10 +39,10 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new ChangeSizeByNBrick(parent);
-            newBrick._size = _size.Copy(parent) as Formula;
+            var newBrick = new ChangeSizeByNBrick();
+            newBrick._size = _size.Copy() as Formula;
 
             return newBrick;
         }

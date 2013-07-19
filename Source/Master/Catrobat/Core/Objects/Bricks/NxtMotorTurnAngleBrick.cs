@@ -42,9 +42,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         public NxtMotorTurnAngleBrick() {}
 
-        public NxtMotorTurnAngleBrick(Sprite parent) : base(parent) {}
-
-        public NxtMotorTurnAngleBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public NxtMotorTurnAngleBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -68,10 +66,10 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new NxtMotorTurnAngleBrick(parent);
-            newBrick._degrees = _degrees.Copy(parent) as Formula;
+            var newBrick = new NxtMotorTurnAngleBrick();
+            newBrick._degrees = _degrees.Copy() as Formula;
             newBrick._motor = _motor;
 
             return newBrick;

@@ -74,19 +74,16 @@ namespace Catrobat.Core.Objects
             }
         }
 
-        public Sprite() {}
 
-        public Sprite(Project project)
+        public Sprite()
         {
-            Project = project;
-            _scripts = new ScriptList(this);
-            _costumes = new CostumeList(this);
-            _sounds = new SoundList(this);
+            _scripts = new ScriptList();
+            _costumes = new CostumeList();
+            _sounds = new SoundList();
         }
 
-        public Sprite(XElement xElement, Project project)
+        public Sprite(XElement xElement)
         {
-            Project = project;
             LoadFromXML(xElement);
         }
 
@@ -94,18 +91,18 @@ namespace Catrobat.Core.Objects
         {
             if (xRoot.Element("lookList") != null)
             {
-                _costumes = new CostumeList(xRoot.Element("lookList"), this);
+                _costumes = new CostumeList(xRoot.Element("lookList"));
             }
 
             _name = xRoot.Element("name").Value;
 
             if (xRoot.Element("soundList") != null)
             {
-                _sounds = new SoundList(xRoot.Element("soundList"), this);
+                _sounds = new SoundList(xRoot.Element("soundList"));
             }
             if (xRoot.Element("scriptList") != null)
             {
-                _scripts = new ScriptList(xRoot.Element("scriptList"), this);
+                _scripts = new ScriptList(xRoot.Element("scriptList"));
             }
         }
 
@@ -144,24 +141,24 @@ namespace Catrobat.Core.Objects
 
         public DataObject Copy()
         {
-            var newSprite = new Sprite(Project);
+            var newSprite = new Sprite();
             newSprite._name = _name;
             if (_costumes != null)
             {
-                newSprite._costumes = _costumes.Copy(newSprite) as CostumeList;
+                newSprite._costumes = _costumes.Copy() as CostumeList;
             }
             if (_sounds != null)
             {
-                newSprite._sounds = _sounds.Copy(newSprite) as SoundList;
+                newSprite._sounds = _sounds.Copy() as SoundList;
             }
             if (_scripts != null)
             {
-                newSprite._scripts = _scripts.Copy(newSprite) as ScriptList;
+                newSprite._scripts = _scripts.Copy() as ScriptList;
             }
 
             if (_scripts != null)
             {
-                newSprite._scripts.CopyReference(this, newSprite);
+                newSprite._scripts.CopyReference(this);
             }
 
             return newSprite;

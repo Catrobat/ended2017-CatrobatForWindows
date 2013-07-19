@@ -44,7 +44,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 if (_pointedSpriteReference == null)
-                    _pointedSpriteReference = new SpriteReference(_sprite);
+                    _pointedSpriteReference = new SpriteReference();
 
                 if (_pointedSpriteReference.Sprite == value)
                     return;
@@ -61,14 +61,12 @@ namespace Catrobat.Core.Objects.Bricks
 
         public PointToBrick() {}
 
-        public PointToBrick(Sprite parent) : base(parent) {}
-
-        public PointToBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public PointToBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("pointedObject") != null)
-                _pointedSpriteReference = new SpriteReference(xRoot.Element("pointedObject"), _sprite);
+                _pointedSpriteReference = new SpriteReference(xRoot.Element("pointedObject"));
         }
 
         internal override XElement CreateXML()
@@ -90,25 +88,19 @@ namespace Catrobat.Core.Objects.Bricks
             _pointedSpriteReference.LoadReference();
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new PointToBrick(parent);
+            var newBrick = new PointToBrick();
 
             return newBrick;
         }
 
-        public void CopyReference(PointToBrick copiedFrom, Sprite parent)
+        public void CopyReference(PointToBrick copiedFrom)
         {
             if (copiedFrom._pointedSpriteReference != null)
             {
-                _pointedSpriteReference = copiedFrom._pointedSpriteReference.Copy(parent) as SpriteReference;
+                _pointedSpriteReference = copiedFrom._pointedSpriteReference.Copy() as SpriteReference;
             }
-        }
-
-        public void UpdateReferenceObject()
-        {
-            if (_pointedSpriteReference != null)
-                _pointedSpriteReference.UpdateReferenceObject();
         }
     }
 }

@@ -75,11 +75,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
 
             if (dataObject is Brick)
             {
-                _selectedBrick = (dataObject as Brick).Copy(_receivedSelectedSprite);
+                _selectedBrick = (dataObject as Brick).Copy();
             }
             else if (dataObject is Script)
             {
-                _selectedBrick = (dataObject as Script).Copy(_receivedSelectedSprite);
+                _selectedBrick = (dataObject as Script).Copy();
             }
 
 
@@ -87,7 +87,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
 
             if (_selectedBrick is LoopBeginBrick)
             {
-                var brick = new LoopEndBrick(((LoopBeginBrick) _selectedBrick).Sprite);
+                var brick = new LoopEndBrick((LoopBeginBrick) _selectedBrick);
                 brick.LoopBeginBrick = (LoopBeginBrick) _selectedBrick;
                 ((LoopBeginBrick) _selectedBrick).LoopEndBrick = brick;
                 _receivedScriptBrickCollection.AddScriptBrick(brick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);

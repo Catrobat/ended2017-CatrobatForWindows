@@ -27,7 +27,7 @@ namespace Catrobat.Core.Objects.Bricks
             {
                 if (_loopBeginBrickReference == null)
                 {
-                    _loopBeginBrickReference = new LoopBeginBrickRef(_sprite);
+                    _loopBeginBrickReference = new LoopBeginBrickRef();
                     if (value is RepeatBrick)
                         _loopBeginBrickReference.Class = "RepeatBrick";
                     else if (value is ForeverBrick)
@@ -46,18 +46,20 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
-
         public LoopEndBrick() {}
 
-        public LoopEndBrick(Sprite parent) : base(parent) {}
+        public LoopEndBrick(LoopBeginBrick loopBeginBrick)
+        {
+            LoopBeginBrickReference.LoopBeginBrick = loopBeginBrick;
+        }
 
-        public LoopEndBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public LoopEndBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("loopBeginBrick") != null)
             {
-                _loopBeginBrickReference = new LoopBeginBrickRef(xRoot.Element("loopBeginBrick"), _sprite);
+                _loopBeginBrickReference = new LoopBeginBrickRef(xRoot.Element("loopBeginBrick"));
             }
         }
 
@@ -78,19 +80,17 @@ namespace Catrobat.Core.Objects.Bricks
             _loopBeginBrickReference.LoadReference();
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new LoopEndBrick(parent);
+            var newBrick = new LoopEndBrick();
 
             return newBrick;
         }
 
-        public void CopyReference(LoopEndBrick copiedFrom, Sprite parent)
+        public void CopyReference(LoopEndBrick copiedFrom)
         {
             if (copiedFrom._loopBeginBrickReference != null)
-            {
-                _loopBeginBrickReference = copiedFrom._loopBeginBrickReference.Copy(parent) as LoopBeginBrickRef;
-            }
+                _loopBeginBrickReference = copiedFrom._loopBeginBrickReference.Copy() as LoopBeginBrickRef;
         }
     }
 }

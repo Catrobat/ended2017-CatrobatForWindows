@@ -41,22 +41,6 @@ namespace Catrobat.Core.Objects.Costumes
             }
         }
 
-        private Sprite _sprite;
-        public Sprite Sprite
-        {
-            get { return _sprite; }
-            set
-            {
-                if (_sprite == value)
-                {
-                    return;
-                }
-
-                _sprite = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public object Image
         {
             get
@@ -93,16 +77,14 @@ namespace Catrobat.Core.Objects.Costumes
 
         public Costume() {}
 
-        public Costume(string name, Sprite parent)
+        public Costume(string name)
         {
             _name = name;
             _fileName = FileNameGenerator.Generate() + _name;
-            _sprite = parent;
         }
 
-        internal Costume(XElement xElement, Sprite parent)
+        internal Costume(XElement xElement)
         {
-            _sprite = parent;
             LoadFromXML(xElement);
         }
 
@@ -123,9 +105,9 @@ namespace Catrobat.Core.Objects.Costumes
             return xRoot;
         }
 
-        public DataObject Copy(Sprite parent)
+        public DataObject Copy()
         {
-            var newCostumeData = new Costume(_name, parent);
+            var newCostumeData = new Costume(_name);
 
             var path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ImagesPath + "/";
             var absoluteFileNameOld = path + _fileName;

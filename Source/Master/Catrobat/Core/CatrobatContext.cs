@@ -362,16 +362,20 @@ namespace Catrobat.Core
 
         public void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
         {
+            ReferenceHelper.Project = CurrentProject;
+
             foreach (Script script in selectedSprite.Scripts.Scripts)
             {
                 foreach (Brick brick in script.Bricks.Bricks)
                 {
                     if (brick is SetCostumeBrick)
                     {
-                        (brick as SetCostumeBrick).UpdateReferenceObject();
+                        (brick as SetCostumeBrick).CostumeReference = null;
                     }
                 }
             }
+
+            ReferenceHelper.Project = null;
         }
 
         public void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite)
@@ -382,7 +386,7 @@ namespace Catrobat.Core
                 {
                     if (brick is PlaySoundBrick)
                     {
-                        (brick as PlaySoundBrick).UpdateReferenceObject();
+                        (brick as PlaySoundBrick).SoundReference = null;
                     }
                 }
             }
@@ -398,7 +402,7 @@ namespace Catrobat.Core
                     {
                         if (brick is PointToBrick)
                         {
-                            (brick as PointToBrick).UpdateReferenceObject();
+                            (brick as PointToBrick).PointedSpriteReference = null;
                         }
                     }
                 }

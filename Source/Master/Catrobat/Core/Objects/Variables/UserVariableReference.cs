@@ -10,7 +10,6 @@ namespace Catrobat.Core.Objects.Variables
 {
     public class UserVariableReference : DataObject
     {
-        private readonly Sprite _sprite;
         private string _reference;
 
         private UserVariable _userVariable;
@@ -30,14 +29,12 @@ namespace Catrobat.Core.Objects.Variables
         }
 
 
-        public UserVariableReference(Sprite parent)
+        public UserVariableReference()
         {
-            _sprite = parent;
         }
 
-        public UserVariableReference(XElement xElement, Sprite parent)
+        public UserVariableReference(XElement xElement)
         {
-            _sprite = parent;
             LoadFromXML(xElement);
         }
 
@@ -55,9 +52,9 @@ namespace Catrobat.Core.Objects.Variables
             return xRoot;
         }
 
-        public DataObject Copy(Sprite parent)
+        public DataObject Copy()
         {
-            var newUserVariableRef = new UserVariableReference(parent);
+            var newUserVariableRef = new UserVariableReference();
             newUserVariableRef.UserVariable = _userVariable;
 
             return newUserVariableRef;

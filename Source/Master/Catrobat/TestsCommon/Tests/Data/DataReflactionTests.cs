@@ -67,7 +67,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             project1.ProjectHeader.SetProgramName("project1");
 
 
-            project1.SpriteList = new SpriteList(project1);
+            project1.SpriteList = new SpriteList();
             var sprites = new ObservableCollection<Sprite>();
 
             project1.SpriteList.Sprites = sprites;
@@ -79,32 +79,30 @@ namespace Catrobat.TestsCommon.Tests.Data
                     Name= "Object" + i,
                 };
 
-                sprite.Costumes = new CostumeList(sprite);
-                sprite.Sounds = new SoundList(sprite);
+                sprite.Costumes = new CostumeList();
+                sprite.Sounds = new SoundList();
                 sprites.Add(sprite);
             }
 
             for (int i = 0; i < 6; i++)
             {
                 var sprite = sprites[i % 2];
-                sprite.Costumes = new CostumeList(sprite);
+                sprite.Costumes = new CostumeList();
                 sprite.Costumes.Costumes.Add(new Costume
                 {
                     FileName = "FileName" + i,
                     Name= "Look" + i,
-                    Sprite = sprite
                 });
             }
 
             for (int i = 0; i < 6; i++)
             {
                 var sprite = sprites[i % 2];
-                sprite.Sounds = new SoundList(sprite);
+                sprite.Sounds = new SoundList();
                 sprite.Sounds.Sounds.Add(new Sound
                 {
                     FileName = "FileName" + i,
                     Name = "Sound" + i,
-                    Sprite = sprite
                 });
             }
 
@@ -114,7 +112,7 @@ namespace Catrobat.TestsCommon.Tests.Data
 
                 foreach (var script in scripts)
                 {
-                    sprite.Scripts = new ScriptList(sprite);
+                    sprite.Scripts = new ScriptList();
                     sprite.Scripts.Scripts.Add(script);
 
                     var bricks = ReflectionHelper.GetInstances<Brick>();
@@ -245,17 +243,17 @@ namespace Catrobat.TestsCommon.Tests.Data
             {
                 int spriteIndex = _rand.Next(project.SpriteList.Sprites.Count - 1);
                 var sprite = project.SpriteList.Sprites[spriteIndex];
-                return new UserVariableReference(sprite);
+                return new UserVariableReference();
             }
 
             if (type == typeof(LoopBeginBrickRef))
             {
                 int spriteIndex = _rand.Next(project.SpriteList.Sprites.Count - 1);
                 var sprite = project.SpriteList.Sprites[spriteIndex];
-                return new LoopBeginBrickRef(sprite)
+                return new LoopBeginBrickRef()
                 {
                     Class = "Forever",
-                    LoopBeginBrick = new ForeverBrick(sprite)
+                    LoopBeginBrick = new ForeverBrick()
                 };
             }
 
@@ -263,9 +261,9 @@ namespace Catrobat.TestsCommon.Tests.Data
             {
                 int spriteIndex = _rand.Next(project.SpriteList.Sprites.Count - 1);
                 var sprite = project.SpriteList.Sprites[spriteIndex];
-                return new LoopEndBrickRef(sprite)
+                return new LoopEndBrickRef()
                 {
-                    LoopEndBrick = new LoopEndBrick(sprite)
+                    LoopEndBrick = new LoopEndBrick()
                 };
             }
 

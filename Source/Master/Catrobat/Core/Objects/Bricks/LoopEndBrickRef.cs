@@ -6,7 +6,6 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class LoopEndBrickRef : DataObject
     {
-        private readonly Sprite _sprite;
         private string _reference;
 
         private LoopEndBrick _loopEndBrick;
@@ -26,14 +25,12 @@ namespace Catrobat.Core.Objects.Bricks
         }
 
 
-        public LoopEndBrickRef(Sprite parent)
+        public LoopEndBrickRef()
         {
-            _sprite = parent;
         }
 
-        public LoopEndBrickRef(XElement xElement, Sprite parent)
+        public LoopEndBrickRef(XElement xElement)
         {
-            _sprite = parent;
             LoadFromXML(xElement);
         }
 
@@ -55,9 +52,9 @@ namespace Catrobat.Core.Objects.Bricks
             _loopEndBrick = ReferenceHelper.GetReferenceObject(this, _reference) as LoopEndBrick;
         }
 
-        public DataObject Copy(Sprite parent)
+        public DataObject Copy()
         {
-            var newLoopEndBrickRef = new LoopEndBrickRef(parent);
+            var newLoopEndBrickRef = new LoopEndBrickRef();
             newLoopEndBrickRef._loopEndBrick = _loopEndBrick;
 
             return newLoopEndBrickRef;

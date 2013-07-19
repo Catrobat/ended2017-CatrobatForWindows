@@ -44,9 +44,7 @@ namespace Catrobat.Core.Objects.Scripts
 
         public WhenScript() {}
 
-        public WhenScript(Sprite parent) : base(parent) {}
-
-        public WhenScript(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public WhenScript(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -73,13 +71,13 @@ namespace Catrobat.Core.Objects.Scripts
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newWhenScript = new WhenScript(parent);
+            var newWhenScript = new WhenScript();
             newWhenScript._action = _action;
             if (_bricks != null)
             {
-                newWhenScript._bricks = _bricks.Copy(parent) as BrickList;
+                newWhenScript._bricks = _bricks.Copy() as BrickList;
             }
 
             return newWhenScript;

@@ -24,9 +24,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         public SpeakBrick() {}
 
-        public SpeakBrick(Sprite parent) : base(parent) {}
-
-        public SpeakBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public SpeakBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -53,9 +51,9 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new SpeakBrick(parent);
+            var newBrick = new SpeakBrick();
             newBrick._text = _text;
 
             return newBrick;

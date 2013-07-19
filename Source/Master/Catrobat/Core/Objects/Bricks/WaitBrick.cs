@@ -20,9 +20,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         public WaitBrick() {}
 
-        public WaitBrick(Sprite parent) : base(parent) {}
-
-        public WaitBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public WaitBrick(XElement xElement) : base(xElement) {}
 
         
 
@@ -42,10 +40,10 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new WaitBrick(parent);
-            newBrick._timeToWaitInSeconds = _timeToWaitInSeconds.Copy(parent) as Formula;
+            var newBrick = new WaitBrick();
+            newBrick._timeToWaitInSeconds = _timeToWaitInSeconds.Copy() as Formula;
 
             return newBrick;
         }

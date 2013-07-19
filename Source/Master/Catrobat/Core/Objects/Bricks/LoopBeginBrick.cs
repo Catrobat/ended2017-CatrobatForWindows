@@ -28,7 +28,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 if (_loopEndBrickReference == null)
-                    _loopEndBrickReference = new LoopEndBrickRef(_sprite);
+                    _loopEndBrickReference = new LoopEndBrickRef();
 
                 if (_loopEndBrickReference.LoopEndBrick == value)
                     return;
@@ -45,9 +45,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         protected LoopBeginBrick() {}
 
-        protected LoopBeginBrick(Sprite parent) : base(parent) {}
-
-        protected LoopBeginBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        protected LoopBeginBrick(XElement xElement) : base(xElement) {}
 
         internal abstract override void LoadFromXML(XElement xRoot);
 
@@ -57,7 +55,7 @@ namespace Catrobat.Core.Objects.Bricks
         {
             if (xRoot.Element("loopEndBrick") != null)
             {
-                _loopEndBrickReference = new LoopEndBrickRef(xRoot.Element("loopEndBrick"), _sprite);
+                _loopEndBrickReference = new LoopEndBrickRef(xRoot.Element("loopEndBrick"));
             }
         }
 
@@ -71,14 +69,12 @@ namespace Catrobat.Core.Objects.Bricks
             _loopEndBrickReference.LoadReference();
         }
 
-        public abstract override DataObject Copy(Sprite parent);
+        public abstract override DataObject Copy();
 
-        public void CopyReference(LoopBeginBrick copiedFrom, Sprite parent)
+        public void CopyReference(LoopBeginBrick copiedFrom)
         {
             if (copiedFrom._loopEndBrickReference != null)
-            {
-                _loopEndBrickReference = copiedFrom._loopEndBrickReference.Copy(parent) as LoopEndBrickRef;
-            }
+                _loopEndBrickReference = copiedFrom._loopEndBrickReference.Copy() as LoopEndBrickRef;
         }
     }
 }

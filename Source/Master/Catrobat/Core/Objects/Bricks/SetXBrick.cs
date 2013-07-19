@@ -20,9 +20,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         public SetXBrick() {}
 
-        public SetXBrick(Sprite parent) : base(parent) {}
-
-        public SetXBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public SetXBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -40,10 +38,10 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new SetXBrick(parent);
-            newBrick._xPosition = _xPosition.Copy(parent) as Formula;
+            var newBrick = new SetXBrick();
+            newBrick._xPosition = _xPosition.Copy() as Formula;
 
             return newBrick;
         }

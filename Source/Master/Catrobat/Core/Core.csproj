@@ -62,7 +62,6 @@
     <Compile Include="Misc\Helpers\IPlatformInformationHelper.cs" />
     <Compile Include="Misc\Helpers\ReadHelper.cs" />
     <Compile Include="Misc\Helpers\ReferenceHelper.cs" />
-    <Compile Include="Misc\Helpers\XPathHelper.cs" />
     <Compile Include="ICatrobatContext.cs" />
     <Compile Include="LocalSettings.cs" />
     <Compile Include="Misc\JSON\JSONClassDeserializer.cs" />

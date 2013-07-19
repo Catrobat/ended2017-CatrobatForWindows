@@ -51,26 +51,26 @@ namespace Catrobat.Core
 
             // TODO: implement other design data here
 
-            var sprites = new SpriteList(project);
-            var sprite = new Sprite(project);
+            var sprites = new SpriteList();
+            var sprite = new Sprite();
             sprite.Name = "Object 1";
 
-            sprite.Costumes = new CostumeList(sprite);
-            var costume = new Costume("Cat", sprite);
+            sprite.Costumes = new CostumeList();
+            var costume = new Costume("Cat");
             var image = new byte[0]; //new BitmapImage(new Uri(costume.FileName, UriKind.Relative)); // TODO: fix me
             //costume.Image = image;
             sprite.Costumes.Costumes.Add(costume);
 
-            sprite.Sounds = new SoundList(sprite);
-            var sound = new Sound("Miau_Sound", sprite);
+            sprite.Sounds = new SoundList();
+            var sound = new Sound("Miau_Sound");
             sprite.Sounds.Sounds.Add(sound);
 
-            sprite.Scripts = new ScriptList(sprite);
-            Script startScript = new StartScript(sprite);
+            sprite.Scripts = new ScriptList();
+            Script startScript = new StartScript();
 
-            startScript.Bricks = new BrickList(sprite);
-            var setCostumeBrick = new SetCostumeBrick(sprite);
-            var costumeRef = new CostumeReference(sprite);
+            startScript.Bricks = new BrickList();
+            var setCostumeBrick = new SetCostumeBrick();
+            var costumeRef = new CostumeReference();
             costumeRef.Costume = costume;
             //setCostumeBrick.Costume = costumeRef;
 

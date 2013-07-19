@@ -25,9 +25,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         public RepeatBrick() {}
 
-        public RepeatBrick(Sprite parent) : base(parent) {}
-
-        public RepeatBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public RepeatBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -47,10 +45,10 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new RepeatBrick(parent);
-            newBrick._timesToRepeat = _timesToRepeat.Copy(parent) as Formula;
+            var newBrick = new RepeatBrick();
+            newBrick._timesToRepeat = _timesToRepeat.Copy() as Formula;
 
             return newBrick;
         }

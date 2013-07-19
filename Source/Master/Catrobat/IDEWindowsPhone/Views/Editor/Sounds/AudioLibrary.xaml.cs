@@ -106,7 +106,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
         //TODO: Write UI Test
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var sound = new Sound(TxtName.Text, _editorViewModel.SelectedSprite);
+            var sound = new Sound(TxtName.Text);
 
             var absoluteFileName = Path.Combine(CatrobatContext.GetContext().CurrentProject.BasePath, "sounds", sound.FileName);
 

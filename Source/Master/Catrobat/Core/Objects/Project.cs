@@ -184,7 +184,7 @@ namespace Catrobat.Core.Objects
 
             var project = _document.Element("program");
             _projectHeader = new ProjectHeader(project.Element("header"));
-            _spriteList = new SpriteList(this);
+            _spriteList = new SpriteList();
             _spriteList.LoadFromXML(project.Element("objectList"));
             _variableList = new VariableList(project.Element("variables"));
 

@@ -21,9 +21,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         public SetBrightnessBrick() {}
 
-        public SetBrightnessBrick(Sprite parent) : base(parent) {}
-
-        public SetBrightnessBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public SetBrightnessBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -41,10 +39,10 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new SetBrightnessBrick(parent);
-            newBrick._brightness = _brightness.Copy(parent) as Formula;
+            var newBrick = new SetBrightnessBrick();
+            newBrick._brightness = _brightness.Copy() as Formula;
 
             return newBrick;
         }

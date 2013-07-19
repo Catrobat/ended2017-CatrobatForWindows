@@ -6,9 +6,7 @@ namespace Catrobat.Core.Objects.Bricks
     {
         public ForeverBrick() {}
 
-        public ForeverBrick(Sprite parent) : base(parent) {}
-
-        public ForeverBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public ForeverBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -23,9 +21,9 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new ForeverBrick(parent);
+            var newBrick = new ForeverBrick();
 
             return newBrick;
         }

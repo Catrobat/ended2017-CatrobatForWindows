@@ -41,9 +41,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         public NxtPlayToneBrick() {}
 
-        public NxtPlayToneBrick(Sprite parent) : base(parent) {}
-
-        public NxtPlayToneBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public NxtPlayToneBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -66,11 +64,11 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new NxtPlayToneBrick(parent);
-            newBrick._durationInSeconds = _durationInSeconds.Copy(parent) as Formula;
-            newBrick._frequency = _frequency.Copy(parent) as Formula;
+            var newBrick = new NxtPlayToneBrick();
+            newBrick._durationInSeconds = _durationInSeconds.Copy() as Formula;
+            newBrick._frequency = _frequency.Copy() as Formula;
 
             return newBrick;
         }

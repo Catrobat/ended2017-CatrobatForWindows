@@ -69,7 +69,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 
                 if (lastFullScript == null)
                 {
-                    var startScript = new StartScript(_selectedSprite);
+                    var startScript = new StartScript();
                     Scripts.Add(startScript);
                     lastFullScript = startScript;
 

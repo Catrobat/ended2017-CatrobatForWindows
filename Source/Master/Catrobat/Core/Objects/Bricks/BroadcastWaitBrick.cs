@@ -21,12 +21,9 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
-
         public BroadcastWaitBrick() {}
 
-        public BroadcastWaitBrick(Sprite parent) : base(parent) {}
-
-        public BroadcastWaitBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public BroadcastWaitBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -53,9 +50,9 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new BroadcastWaitBrick(parent);
+            var newBrick = new BroadcastWaitBrick();
             newBrick._broadcastMessage = _broadcastMessage;
 
             return newBrick;

@@ -8,31 +8,13 @@ namespace Catrobat.Core.Objects.Costumes
     {
         public ObservableCollection<Costume> Costumes { get; set; }
 
-        private Sprite _sprite;
-        public Sprite Sprite
-        {
-            get { return _sprite; }
-            set
-            {
-                if (_sprite == value)
-                {
-                    return;
-                }
-
-                _sprite = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public CostumeList(Sprite parent)
+        public CostumeList()
         {
             Costumes = new ObservableCollection<Costume>();
-            _sprite = parent;
         }
 
-        public CostumeList(XElement xElement, Sprite parent)
+        public CostumeList(XElement xElement)
         {
-            _sprite = parent;
             LoadFromXML(xElement);
         } 
 
@@ -41,7 +23,7 @@ namespace Catrobat.Core.Objects.Costumes
             Costumes = new ObservableCollection<Costume>();
             foreach (XElement element in xRoot.Elements("look"))
             {
-                Costumes.Add(new Costume(element, _sprite));
+                Costumes.Add(new Costume(element));
             }
         }
 
@@ -57,12 +39,12 @@ namespace Catrobat.Core.Objects.Costumes
             return xRoot;
         }
 
-        public DataObject Copy(Sprite parent)
+        public DataObject Copy()
         {
-            var newCostumeDataList = new CostumeList(parent);
+            var newCostumeDataList = new CostumeList();
             foreach (Costume costume in Costumes)
             {
-                newCostumeDataList.Costumes.Add(costume.Copy(parent) as Costume);
+                newCostumeDataList.Costumes.Add(costume.Copy() as Costume);
             }
 
             return newCostumeDataList;

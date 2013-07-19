@@ -86,7 +86,6 @@
     <Compile Include="Tests\Storage\StorageTests.cs" />
     <Compile Include="Tests\Data\XmlConverterTests.cs" />
     <Compile Include="Tests\Data\XmlPathHelperTests.cs" />
-    <Compile Include="Tests\Data\XPathHelperTests_old.cs" />
     <Compile Include="Tests\Misc\ZipTests.cs" />
   </ItemGroup>
   <ItemGroup>

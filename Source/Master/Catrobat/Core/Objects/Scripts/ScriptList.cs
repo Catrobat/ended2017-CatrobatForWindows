@@ -6,18 +6,15 @@ namespace Catrobat.Core.Objects.Scripts
     public class ScriptList : DataObject
     {
         public ObservableCollection<Script> Scripts { get; set; }
-        private readonly Sprite _parentSprite;
 
 
-        public ScriptList(Sprite parent)
+        public ScriptList()
         {
             Scripts = new ObservableCollection<Script>();
-            _parentSprite = parent;
         }
 
-        public ScriptList(XElement xElement, Sprite parent)
+        public ScriptList(XElement xElement)
         {
-            _parentSprite = parent;
             LoadFromXML(xElement);
         }
 
@@ -29,13 +26,13 @@ namespace Catrobat.Core.Objects.Scripts
                 switch (element.Name.LocalName)
                 {
                     case "startScript":
-                        Scripts.Add(new StartScript(element, _parentSprite));
+                        Scripts.Add(new StartScript(element));
                         break;
                     case "whenScript":
-                        Scripts.Add(new WhenScript(element, _parentSprite));
+                        Scripts.Add(new WhenScript(element));
                         break;
                     case "broadcastScript":
-                        Scripts.Add(new BroadcastScript(element, _parentSprite));
+                        Scripts.Add(new BroadcastScript(element));
                         break;
                 }
             }
@@ -53,23 +50,23 @@ namespace Catrobat.Core.Objects.Scripts
             return xRoot;
         }
 
-        public DataObject Copy(Sprite parent)
+        public DataObject Copy()
         {
-            var newScriptList = new ScriptList(parent);
+            var newScriptList = new ScriptList();
             foreach (Script script in Scripts)
             {
-                newScriptList.Scripts.Add(script.Copy(parent) as Script);
+                newScriptList.Scripts.Add(script.Copy() as Script);
             }
 
             return newScriptList;
         }
 
-        public void CopyReference(Sprite copiedFrom, Sprite parent)
+        public void CopyReference(Sprite copiedFrom)
         {
             var pos = 0;
             foreach (Script script in Scripts)
             {
-                script.CopyReference(copiedFrom.Scripts.Scripts[pos], parent);
+                script.CopyReference(copiedFrom.Scripts.Scripts[pos]);
                 pos++;
             }
         }

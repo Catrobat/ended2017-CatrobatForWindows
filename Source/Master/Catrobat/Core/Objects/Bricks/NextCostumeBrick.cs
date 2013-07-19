@@ -6,9 +6,7 @@ namespace Catrobat.Core.Objects.Bricks
     {
         public NextCostumeBrick() {}
 
-        public NextCostumeBrick(Sprite parent) : base(parent) {}
-
-        public NextCostumeBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public NextCostumeBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot) {}
 
@@ -21,9 +19,9 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new NextCostumeBrick(parent);
+            var newBrick = new NextCostumeBrick();
 
             return newBrick;
         }

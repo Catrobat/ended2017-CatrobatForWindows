@@ -57,9 +57,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         public GlideToBrick() {}
 
-        public GlideToBrick(Sprite parent) : base(parent) {}
-
-        public GlideToBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public GlideToBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -87,12 +85,12 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new GlideToBrick(parent);
-            newBrick._durationInSeconds = _durationInSeconds.Copy(parent) as Formula;
-            newBrick._xDestination = _xDestination.Copy(parent) as Formula;
-            newBrick._yDestination = _yDestination.Copy(parent) as Formula;
+            var newBrick = new GlideToBrick();
+            newBrick._durationInSeconds = _durationInSeconds.Copy() as Formula;
+            newBrick._xDestination = _xDestination.Copy() as Formula;
+            newBrick._yDestination = _yDestination.Copy() as Formula;
 
             return newBrick;
         }

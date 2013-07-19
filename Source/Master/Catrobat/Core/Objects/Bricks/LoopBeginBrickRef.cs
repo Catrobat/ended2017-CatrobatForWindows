@@ -40,14 +40,13 @@ namespace Catrobat.Core.Objects.Bricks
         }
 
 
-        public LoopBeginBrickRef(Sprite parent)
+        public LoopBeginBrickRef() 
         {
-            _sprite = parent;
         }
 
-        public LoopBeginBrickRef(XElement xElement, Sprite parent)
+
+        public LoopBeginBrickRef(XElement xElement)
         {
-            _sprite = parent;
             LoadFromXML(xElement);
         }
 
@@ -72,9 +71,9 @@ namespace Catrobat.Core.Objects.Bricks
             LoopBeginBrick = ReferenceHelper.GetReferenceObject(this, _reference) as LoopBeginBrick;
         }
 
-        public DataObject Copy(Sprite parent)
+        public DataObject Copy()
         {
-            var newLoopBeginBrickRef = new LoopBeginBrickRef(parent);
+            var newLoopBeginBrickRef = new LoopBeginBrickRef();
             newLoopBeginBrickRef._classField = _classField;
             newLoopBeginBrickRef._loopBeginBrick = _loopBeginBrick;
 

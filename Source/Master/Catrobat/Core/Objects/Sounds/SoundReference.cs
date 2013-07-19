@@ -6,7 +6,6 @@ namespace Catrobat.Core.Objects.Sounds
 {
     public class SoundReference : DataObject
     {
-        private readonly Sprite _sprite;
         private string _reference;
 
         private Sound _sound;
@@ -25,14 +24,12 @@ namespace Catrobat.Core.Objects.Sounds
             }
         }
 
-        public SoundReference(Sprite parent)
+        public SoundReference()
         {
-            _sprite = parent;
         }
 
-        public SoundReference(XElement xElement, Sprite parent)
+        public SoundReference(XElement xElement)
         {
-            _sprite = parent;
             LoadFromXML(xElement);
         }
 
@@ -51,22 +48,17 @@ namespace Catrobat.Core.Objects.Sounds
             return xRoot;
         }
 
-        public DataObject Copy(Sprite parent)
-        {
-            var newSoundInfoRef = new SoundReference(parent);
-            newSoundInfoRef.Sound = _sound;
-
-            return newSoundInfoRef;
-        }
-
-        public void UpdateReferenceObject()
-        {
-            Sound = ReferenceHelper.GetReferenceObject(this, _reference) as Sound;
-        }
-
         internal override void LoadReference()
         {
             Sound = ReferenceHelper.GetReferenceObject(this, _reference) as Sound;
+        }
+
+        public DataObject Copy()
+        {
+            var newSoundInfoRef = new SoundReference();
+            newSoundInfoRef.Sound = _sound;
+
+            return newSoundInfoRef;
         }
     }
 }
