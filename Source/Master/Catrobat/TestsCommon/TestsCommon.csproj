@@ -86,8 +86,10 @@
     <Compile Include="Tests\Misc\ZipTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_VariableReferences_Output.xml" />
-    <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_VariableReferences_Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_LocalVariableReferences_Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_LocalVariableReferences_Output.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_GlobalVariableReferences_Output.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_GlobalVariableReferences_Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_LookReferences_Output.xml" />
     <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_SoundReferences_Output.xml" />
     <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_LookReferences_Input.xml" />
