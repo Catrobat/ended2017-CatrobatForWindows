@@ -197,7 +197,7 @@ namespace Catrobat.Core.Objects
 
             _document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
-            var xProject = new XElement("project");
+            var xProject = new XElement("program");
 
             xProject.Add(_projectHeader.CreateXML());
 
