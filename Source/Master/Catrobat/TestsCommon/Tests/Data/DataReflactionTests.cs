@@ -25,7 +25,14 @@ namespace Catrobat.TestsCommon.Tests.Data
     [TestClass]
     public class DataReflactionTests
     {
-        private static Dictionary<Type, object> DefaultBrickTestValues;
+        // Bricks that must be tested manually
+        public List<Type> ExcludedBricks = new List<Type>
+        {
+            typeof(LoopBeginBrick),
+            typeof(LoopEndBrick),
+            typeof(ForeverBrick),
+            typeof(RepeatBrick)
+        };
 
         [ClassInitialize()]
         public static void TestClassInitialize(TestContext testContext)
@@ -115,7 +122,7 @@ namespace Catrobat.TestsCommon.Tests.Data
                     sprite.Scripts = new ScriptList();
                     sprite.Scripts.Scripts.Add(script);
 
-                    var bricks = ReflectionHelper.GetInstances<Brick>();
+                    var bricks = ReflectionHelper.GetInstances<Brick>(ExcludedBricks);
                     foreach (var brick in bricks)
                     {
                         FillDummyValues(brick, project1);
