@@ -57,7 +57,7 @@
         <RowDefinition/>
       </Grid.RowDefinitions>
       <TextBlock Grid.Row="0" Margin="10 0 10 0" Text="resize image"></TextBlock>
-      <ListBox Grid.Row="1"  Margin="30 0 30 0" ItemsSource="{Binding ImageSizes}" SelectedItem="{Binding SelectedSize}">
+      <ListBox Grid.Row="1"  Margin="30 0 30 0" ItemsSource="{Binding ImageSizes}" SelectedItem="{Binding SelectedSize, Mode=TwoWay}">
         <ListBox.ItemsPanel>
           <ItemsPanelTemplate>
             <toolkit:WrapPanel>

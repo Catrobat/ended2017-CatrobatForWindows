@@ -1,5 +1,8 @@
-﻿using Catrobat.Core.Objects.Costumes;
+﻿using System;
+using System.Windows.Media.Imaging;
+using Catrobat.Core.Objects.Costumes;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.Paint;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -84,7 +87,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private void EditCostumeAction()
         {
-            //TODO: navigate to Paintapp
+            PaintLauncher.CurrentImage = ReceivedCostume.Image as BitmapImage;
+            PaintLauncher.Launche();
         }
 
         private void ChangeCostumeNameMessageAction(GenericMessage<Costume> message)
