@@ -52,7 +52,15 @@ namespace Catrobat.TestsCommon.Tests.Data
         }
 
 
+        [TestMethod]
+        public void CatrobatVersionConverterTest_Convert_VariableReferences()
+        {
+            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_VariableReferences_Input");
+            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_VariableReferences_Output");
 
+            CatrobatVersionConverter.Convert("0.8", "Win0.8", actualDocument);
+            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+        }
 
 
 

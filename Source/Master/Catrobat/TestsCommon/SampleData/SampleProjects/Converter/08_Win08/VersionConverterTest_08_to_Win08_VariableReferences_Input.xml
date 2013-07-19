@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<program>
+  <header />
+  <objectList>
+    <object>
+      <lookList/>
+      <name>object1</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setVariableBrick>
+              <userVariable>
+                <name>a</name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>42</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+            <changeVariableBrick>
+              <userVariable reference="../../setVariableBrick/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>10</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+            <changeVariableBrick>
+              <userVariable>
+                <name>global</name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.0</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+          </brickList>
+        </startScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList/>
+      <name>object2</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setXBrick>
+              <xPosition>
+                <formulaTree>
+                  <type>USER_VARIABLE</type>
+                  <value>a</value>
+                </formulaTree>
+              </xPosition>
+            </setXBrick>
+            <changeVariableBrick>
+              <userVariable reference="../../../../../../object[1]/scriptList/startScript/brickList/changeVariableBrick[2]/userVariable"/>
+              <variableFormula>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.0</value>
+                </formulaTree>
+              </variableFormula>
+            </changeVariableBrick>
+          </brickList>
+        </startScript>
+      </scriptList>
+      <soundList/>
+    </object>
+  </objectList>
+  <variables>
+    <objectVariableList>
+      <entry>
+        <object reference="../../../../objectList/object[1]"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[2]"/>
+        <list/>
+      </entry>
+    </objectVariableList>
+    <programVariableList>
+      <userVariable reference="../../../objectList/object[1]/scriptList/startScript/brickList/setVariableBrick/userVariable"/>
+      <userVariable reference="../../../objectList/object[1]/scriptList/startScript/brickList/changeVariableBrick[2]/userVariable"/>
+    </programVariableList>
+  </variables>
+</program>
