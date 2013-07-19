@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Catrobat.Core.Objects;
 using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -54,7 +56,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                 foreach (var size in ImageSizes)
                 {
                     size.Dimention = Dimention;
-                    if(size.IsVisible)
+                    if (size.IsVisible)
                         visibleCounter++;
                 }
 
@@ -139,13 +141,25 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             }
         }
 
-        private void SaveAction()
+        private async void SaveAction()
         {
-            var costume = _builder.Save(CostumeName, Dimention);
-            _receivedSelectedSprite.Costumes.Costumes.Add(costume);
+            await Task.Run(() =>
+            {
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    var newDimention = new ImageDimention
+                    {
+                        Height = SelectedSize.NewHeight,
+                        Width = SelectedSize.NewWidth
+                    };
+                    var costume = _builder.Save(CostumeName, newDimention);
+                    _receivedSelectedSprite.Costumes.Costumes.Add(costume);
 
-            Navigation.RemoveBackEntry();
-            Navigation.NavigateBack();
+                    Navigation.RemoveBackEntry();
+                    Navigation.NavigateBack();
+                });
+            });
+
         }
 
         private void CancelAction()
