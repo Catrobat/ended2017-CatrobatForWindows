@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Catrobat.Core.Objects;
+using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
@@ -45,6 +46,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
+            while(NavigationService.CanGoBack)
+                Navigation.RemoveBackEntry();
+
             _viewModel.ResetViewModelCommand.Execute(null);
             base.OnBackKeyPress(e);
         }

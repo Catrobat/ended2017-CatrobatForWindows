@@ -194,6 +194,7 @@
     <Compile Include="ViewModel\Editor\Sprites\AddNewSpriteViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sprites\ChangeSpriteViewModel.cs" />
     <Compile Include="ViewModel\Main\AddNewProjectViewModel.cs" />
+    <Compile Include="ViewModel\Main\ProjectNotValidViewModel.cs" />
     <Compile Include="ViewModel\Main\ProjectImportViewModel.cs" />
     <Compile Include="ViewModel\Scripts\AddNewScriptBrickViewModel.cs" />
     <Compile Include="ViewModel\Scripts\NewBroadcastMessageViewModel.cs" />
@@ -272,6 +273,9 @@
     </Compile>
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\ProjectNotValidView.xaml.cs">
+      <DependentUpon>ProjectNotValidView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Service\OnlineProjectView.xaml.cs">
       <DependentUpon>OnlineProjectView.xaml</DependentUpon>
@@ -458,6 +462,10 @@
     <Page Include="Views\Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\ProjectNotValidView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Service\OnlineProjectView.xaml">
       <Generator>MSBuild:Compile</Generator>

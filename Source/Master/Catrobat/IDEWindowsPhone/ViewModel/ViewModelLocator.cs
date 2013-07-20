@@ -35,6 +35,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<OnlineProjectViewModel>();
             SimpleIoc.Default.Register<NewBroadcastMessageViewModel>(true);
             SimpleIoc.Default.Register<AddNewScriptBrickViewModel>(true);
+            SimpleIoc.Default.Register<ProjectNotValidViewModel>(true);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -232,6 +233,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<AddNewScriptBrickViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public ProjectNotValidViewModel ProjectNotValid
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ProjectNotValidViewModel>();
             }
         }
 
