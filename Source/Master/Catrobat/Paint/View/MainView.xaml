@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Catrobat.Paint.ViewModel"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -13,8 +14,28 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
+
+
+    <phone:PhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <vm:ViewModelLocator x:Key="Locator" />
+        </ResourceDictionary>
+    </phone:PhoneApplicationPage.Resources>
+
+
+    <phone:PhoneApplicationPage.DataContext>
+        <Binding Source="{StaticResource Locator}" Path="Main" />
+    </phone:PhoneApplicationPage.DataContext>
+
+
     <!--LayoutRoot is the root grid where all page content is placed-->
   <Grid x:Name="LayoutRoot" Background="Transparent">
-
-  </Grid>
+        <TextBlock Grid.Row="1"
+                   Grid.Column="1"
+                   MinWidth="50"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="{Binding ExampleValue}"
+                   TextAlignment="Center" />
+    </Grid>
 </phone:PhoneApplicationPage>

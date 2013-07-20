@@ -29,6 +29,24 @@ namespace Catrobat.Paint.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
+            ExampleValue = 0;
         }
+
+
+        int _exampleValue;
+
+        public int ExampleValue
+        {
+            get
+            {
+                return _exampleValue;
+            }
+            set
+            {
+                _exampleValue = value;
+                RaisePropertyChanged("ExampleValue");
+            }
+        }
+
     }
 }
