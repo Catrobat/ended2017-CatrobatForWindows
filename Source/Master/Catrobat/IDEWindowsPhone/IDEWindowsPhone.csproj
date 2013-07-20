@@ -513,6 +513,7 @@
     <Content Include="fmodex_arm.dll" />
     <Content Include="fmodex_x86.dll" />
     <Content Include="italic.spritefont" />
+    <Content Include="Content\Resources\default.catrobat" />
     <None Include="Content\Resources\SampleProjects\default.catroid" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
@@ -619,7 +620,6 @@
     <Content Include="Content\Images\Misc\AudioRecorder.png" />
     <Content Include="Content\Images\Misc\Camera.png" />
     <Content Include="Content\Images\Misc\Gallery.png" />
-    <Content Include="Content\Resources\default.catroid" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />

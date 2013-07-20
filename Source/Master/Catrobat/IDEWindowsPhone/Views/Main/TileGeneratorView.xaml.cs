@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Dynamic;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Catrobat.Core.Storage;
@@ -15,6 +18,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     public partial class TileGeneratorView : PhoneApplicationPage
     {
         private const string TileSavePath = "/Shared/ShellContent/";
+        private const string TileAbsolutSavePathPrefix = "isostore:";
 
         private readonly MainViewModel _mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
 
@@ -50,7 +54,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         public static void SaveCanvas(Canvas canvas, int width, int height, string filename)
         {
             var writeableImage = new WriteableBitmap(width, height);
-            writeableImage.Render(canvas, null);
+            Transform transform = new ScaleTransform
+            {
+                CenterX = 0,
+                CenterY = 0,
+                ScaleX = width / canvas.RenderSize.Width,
+                ScaleY = height / canvas.RenderSize.Height
+            };
+            
+            writeableImage.Render(canvas, transform);
+            writeableImage.Invalidate();
 
             SaveImage(writeableImage, filename);
         }
@@ -71,16 +84,14 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
             {
                 Title = _mainViewModel.CurrentProjectHeader.ProjectName,
                 Count = 0,
-                //SmallBackgroundImage = new Uri(prefix + smallTilePath, UriKind.Absolute),
-                //BackgroundImage = new Uri(prefix + normalTilePath, UriKind.Absolute),
-                //WideBackgroundImage = new Uri(prefix + wideTilePath, UriKind.Absolute)
+                SmallBackgroundImage = new Uri(TileAbsolutSavePathPrefix + smallTilePath, UriKind.Absolute),
+                BackgroundImage = new Uri(TileAbsolutSavePathPrefix + normalTilePath, UriKind.Absolute),
+                WideBackgroundImage = new Uri(TileAbsolutSavePathPrefix + wideTilePath, UriKind.Absolute)
             };
 
             var path = "/Views/Main/PlayerLauncherView.xaml?ProjectName=" + _mainViewModel.PinProjectHeader.ProjectName;
 
             path += "&Dummy=" + DateTime.UtcNow.Ticks;
-
-            // TODO: read at start like this: "NavigationContext.QueryString["XXXXX"].ToString();"
 
             ShellTile.Create(new Uri(path, UriKind.Relative), tile, true);
             Navigation.NavigateBack();

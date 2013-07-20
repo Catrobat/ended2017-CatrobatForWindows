@@ -25,7 +25,7 @@ namespace Catrobat.Core
     {
         public const string PlayerActiveProjectZipPath = "ActivePlayerProject/ActiveProject.catrobat_from_ide";
         public const string LocalSettingsFilePath = "Settings/settings";
-        public const string DefaultProjectPath = "default.catroid";
+        public const string DefaultProjectPath = "default.catrobat";
         public const string ProjectsPath = "Projects";
         public const string DefaultProjectName = "DefaultProject";
         public const string TempProjectImportZipPath = "Temp/ImportProjectZip";
