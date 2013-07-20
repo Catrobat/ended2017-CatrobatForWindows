@@ -106,7 +106,7 @@ namespace Catrobat.Core.Objects.Formulas
             return xRoot;
         }
 
-        public DataObject Copy(Sprite parent)
+        public DataObject Copy()
         {
             throw new NotImplementedException();
         }

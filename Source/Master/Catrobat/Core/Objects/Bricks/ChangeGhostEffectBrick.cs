@@ -18,12 +18,10 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
-        
+
         public ChangeGhostEffectBrick() {}
 
-        public ChangeGhostEffectBrick(Sprite parent) : base(parent) {}
-
-        public ChangeGhostEffectBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public ChangeGhostEffectBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -41,10 +39,10 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new ChangeGhostEffectBrick(parent);
-            newBrick._changeGhostEffect = _changeGhostEffect.Copy(parent) as Formula;
+            var newBrick = new ChangeGhostEffectBrick();
+            newBrick._changeGhostEffect = _changeGhostEffect.Copy() as Formula;
 
             return newBrick;
         }

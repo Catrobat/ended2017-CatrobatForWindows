@@ -37,7 +37,7 @@ namespace Catrobat.Core.Objects.Variables
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            SpriteReference = new SpriteReference(xRoot.Element("object"), this);
+            SpriteReference = new SpriteReference(xRoot.Element("object"));
             VariableList = new UserVariableList(xRoot.Element("list"));
         }
 

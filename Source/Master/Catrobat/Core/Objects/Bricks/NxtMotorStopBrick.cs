@@ -24,9 +24,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         public NxtMotorStopBrick() {}
 
-        public NxtMotorStopBrick(Sprite parent) : base(parent) {}
-
-        public NxtMotorStopBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public NxtMotorStopBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -47,9 +45,9 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new NxtMotorStopBrick(parent);
+            var newBrick = new NxtMotorStopBrick();
             newBrick._motor = _motor;
 
             return newBrick;

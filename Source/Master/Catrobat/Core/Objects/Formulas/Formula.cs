@@ -39,10 +39,10 @@ namespace Catrobat.Core.Objects.Formulas
             return _formulaTree.CreateXML();
         }
 
-        public DataObject Copy(Sprite parent)
+        public DataObject Copy()
         {
             var newFormula = new Formula();
-            newFormula._formulaTree = _formulaTree.Copy(parent) as FormulaTree;
+            newFormula._formulaTree = _formulaTree.Copy() as FormulaTree;
 
             return newFormula;
         }

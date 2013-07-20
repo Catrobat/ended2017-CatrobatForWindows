@@ -8,32 +8,14 @@ namespace Catrobat.Core.Objects.Sounds
     {
         public ObservableCollection<Sound> Sounds { get; set; }
 
-        private Sprite _sprite;
-        public Sprite Sprite
-        {
-            get { return _sprite; }
-            set
-            {
-                if (_sprite == value)
-                {
-                    return;
-                }
 
-                _sprite = value;
-                RaisePropertyChanged();
-            }
-        }
-
-
-        public SoundList(Sprite parent)
+        public SoundList()
         {
             Sounds = new ObservableCollection<Sound>();
-            _sprite = parent;
         }
 
-        public SoundList(XElement xElement, Sprite parent)
+        public SoundList(XElement xElement)
         {
-            _sprite = parent;
             LoadFromXML(xElement);
         }
 
@@ -42,7 +24,7 @@ namespace Catrobat.Core.Objects.Sounds
             Sounds = new ObservableCollection<Sound>();
             foreach (XElement element in xRoot.Elements())
             {
-                Sounds.Add(new Sound(element, _sprite));
+                Sounds.Add(new Sound(element));
             }
         }
 
@@ -58,13 +40,11 @@ namespace Catrobat.Core.Objects.Sounds
             return xRoot;
         }
 
-        public DataObject Copy(Sprite parent)
+        public DataObject Copy()
         {
-            var newSoundList = new SoundList(parent);
+            var newSoundList = new SoundList();
             foreach (Sound info in Sounds)
-            {
-                newSoundList.Sounds.Add(info.Copy(parent) as Sound);
-            }
+                newSoundList.Sounds.Add(info.Copy() as Sound);
 
             return newSoundList;
         }
@@ -72,9 +52,7 @@ namespace Catrobat.Core.Objects.Sounds
         public void Delete()
         {
             foreach (Sound sound in Sounds)
-            {
                 sound.Delete();
-            }
         }
     }
 }

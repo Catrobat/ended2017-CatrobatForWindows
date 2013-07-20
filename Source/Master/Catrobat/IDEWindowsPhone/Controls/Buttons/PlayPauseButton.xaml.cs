@@ -1,14 +1,16 @@
 ﻿using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Catrobat.IDEWindowsPhone.Annotations;
 
 namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 {
     public delegate void PlayStateChanged(object sender, PlayPauseButtonState state);
 
-    public partial class PlayPauseButton : UserControl, INotifyPropertyChanged
+    public partial class PlayPauseButton : INotifyPropertyChanged
     {
         public event PlayStateChanged PlayStateChanged;
         public event RoutedEventHandler Click;
@@ -26,20 +28,20 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 
             if (value == PlayPauseButtonState.Play)
             {
-                playButton.ButtonPause.Visibility = System.Windows.Visibility.Visible;
-                playButton.ButtonPlay.Visibility = System.Windows.Visibility.Collapsed;
+                playButton.ButtonPause.Visibility = Visibility.Visible;
+                playButton.ButtonPlay.Visibility = Visibility.Collapsed;
             }
             else
             {
-                playButton.ButtonPause.Visibility = System.Windows.Visibility.Collapsed;
-                playButton.ButtonPlay.Visibility = System.Windows.Visibility.Visible;
+                playButton.ButtonPause.Visibility = Visibility.Collapsed;
+                playButton.ButtonPlay.Visibility = Visibility.Visible;
             }
         }
 
         public PlayPauseButtonState State
         {
-            get { return (PlayPauseButtonState)(this.GetValue(PlayButtonStateProperty)); }
-            set { this.SetValue(PlayButtonStateProperty, value); }
+            get { return (PlayPauseButtonState)(GetValue(PlayButtonStateProperty)); }
+            set { SetValue(PlayButtonStateProperty, value); }
         }
 
         public Thickness RoundBorderThickness
@@ -81,8 +83,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
         public PlayPauseButton()
         {
             InitializeComponent();
-            this.ButtonPlay.DataContext = this;
-            this.ButtonPause.DataContext = this;
+            ButtonPlay.DataContext = this;
+            ButtonPause.DataContext = this;
         }
 
         private void RaisePlayStateChanged()
@@ -93,7 +95,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 
         public ImageSource PressedImage
         {
-            set { this.SetValue(PlayButtonStateProperty, value); }
+            set { SetValue(PlayButtonStateProperty, value); }
         }
 
         private void ButtonPause_Click(object sender, RoutedEventArgs e)
@@ -119,12 +121,17 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
                 Click.Invoke(this, new RoutedEventArgs());
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        private void RaisePropertyChanged(string propertyName)
+        #region PropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        [NotifyPropertyChangedInvocator]
+
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null)
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
+
     }
 }

@@ -7,9 +7,7 @@ namespace Catrobat.Core.Objects.Scripts
     {
         public StartScript() {}
 
-        public StartScript(Sprite parent) : base(parent) {}
-
-        public StartScript(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public StartScript(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot) {}
 
@@ -22,12 +20,12 @@ namespace Catrobat.Core.Objects.Scripts
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newStartScript = new StartScript(parent);
+            var newStartScript = new StartScript();
             if (_bricks != null)
             {
-                newStartScript._bricks = _bricks.Copy(parent) as BrickList;
+                newStartScript._bricks = _bricks.Copy() as BrickList;
             }
 
             return newStartScript;

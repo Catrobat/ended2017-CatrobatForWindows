@@ -21,9 +21,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         public SetVolumeToBrick() {}
 
-        public SetVolumeToBrick(Sprite parent) : base(parent) {}
-
-        public SetVolumeToBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public SetVolumeToBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -41,10 +39,10 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new SetVolumeToBrick(parent);
-            newBrick._volume = _volume.Copy(parent) as Formula;
+            var newBrick = new SetVolumeToBrick();
+            newBrick._volume = _volume.Copy() as Formula;
 
             return newBrick;
         }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Storage;
 
 namespace Catrobat.Core.Objects
@@ -300,6 +301,25 @@ namespace Catrobat.Core.Objects
 
         public ProjectHeader()
         {
+            ApplicationBuildName = "";
+            ApplicationBuildNumber = 0;
+            ApplicationName = "Pocket Code";
+            ApplicationVersion = "0.0.1";
+            CatrobatLanguageVersion = (float) 0.8;
+            DateTimeUpload = "";
+            Description = "";
+            DeviceName = DeviceInformationHelper.DeviceName;
+            MediaLicense = "http://developer.catrobat.org/ccbysa_v3";
+            Platform = PlatformInformationHelper.GetPlatformName();
+            PlatformVersion = PlatformInformationHelper.GetPlatformVersion();
+            ProgramLicense = "http://developer.catrobat.org/agpl_v3";
+            ProgramName = "";
+            RemixOf = "";
+            ScreenHeight = DeviceInformationHelper.ScreenHeight;
+            ScreenWidth = DeviceInformationHelper.ScreenWidth;
+            Tags = "";
+            Url = "http://pocketcode.org/details/871";
+            UserHandle = "";
         }
 
         public ProjectHeader(XElement xElement)

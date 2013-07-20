@@ -19,9 +19,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         public GoNStepsBackBrick() {}
 
-        public GoNStepsBackBrick(Sprite parent) : base(parent) {}
-
-        public GoNStepsBackBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public GoNStepsBackBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -39,10 +37,10 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new GoNStepsBackBrick(parent);
-            newBrick._steps = _steps.Copy(parent) as Formula;
+            var newBrick = new GoNStepsBackBrick();
+            newBrick._steps = _steps.Copy() as Formula;
 
             return newBrick;
         }

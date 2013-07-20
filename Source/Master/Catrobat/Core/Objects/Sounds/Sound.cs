@@ -39,34 +39,17 @@ namespace Catrobat.Core.Objects.Sounds
             }
         }
 
-        private Sprite _sprite;
-        public Sprite Sprite
-        {
-            get { return _sprite; }
-            set
-            {
-                if (_sprite == value)
-                {
-                    return;
-                }
-
-                _sprite = value;
-                RaisePropertyChanged();
-            }
-        }
 
         public Sound() {}
 
-        public Sound(string name, Sprite parent)
+        public Sound(string name)
         {
             _name = name;
             _fileName = FileNameGenerator.Generate() + _name;
-            _sprite = parent;
         }
 
-        internal Sound(XElement xElement, Sprite parent)
+        internal Sound(XElement xElement)
         {
-            _sprite = parent;
             LoadFromXML(xElement);
         }
 
@@ -87,9 +70,9 @@ namespace Catrobat.Core.Objects.Sounds
             return xRoot;
         }
 
-        public DataObject Copy(Sprite parent)
+        public DataObject Copy()
         {
-            var newSoundInfo = new Sound(_name, parent);
+            var newSoundInfo = new Sound(_name);
 
             var path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/";
             var absoluteFileNameOld = path + _fileName;

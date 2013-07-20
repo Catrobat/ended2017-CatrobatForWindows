@@ -33,7 +33,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         private readonly ICatrobatContext _catrobatContext;
         private Sprite _selectedSprite;
         private readonly ScriptBrickCollection _scriptBricks;
-        private Sprite _messageBoxSprite;
         private SoundPlayer _soundPlayer;
         private Sound _sound;
         private ListBoxViewPort _listBoxViewPort;
@@ -503,13 +502,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 {
                     if (scriptBrick is Script)
                     {
-                        DataObject copy = (scriptBrick as Script).Copy((scriptBrick as Script).Sprite);
+                        DataObject copy = (scriptBrick as Script).Copy();
                         ScriptBricks.Insert(ScriptBricks.ScriptIndexOf((Script)scriptBrick), copy);
                     }
 
                     if (scriptBrick is Brick)
                     {
-                        DataObject copy = (scriptBrick as Brick).Copy((scriptBrick as Brick).Sprite);
+                        DataObject copy = (scriptBrick as Brick).Copy();
                         ScriptBricks.Insert(ScriptBricks.IndexOf(scriptBrick), copy);
                     }
                 }
@@ -523,16 +522,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             var scriptBricksToRemove = new List<DataObject>(SelectedScripts);
 
             foreach (var scriptBrick in scriptBricksToRemove)
-            {
-                if (scriptBrick != null && scriptBrick is Brick)
+                if (scriptBrick is Brick)
                     ScriptBricks.Remove(scriptBrick);
-            }
 
             foreach (var scriptBrick in scriptBricksToRemove)
-            {
-                if (scriptBrick != null && scriptBrick is Script)
+                if (scriptBrick is Script)
                     ScriptBricks.Remove(scriptBrick);
-            }
         }
 
         private void ReceiveSelectedBrickMessageAction(GenericMessage<DataObject> message)
@@ -656,7 +651,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         {
             foreach (var costume in SelectedCostumes)
             {
-                var newCostume = costume.Copy(SelectedSprite) as Costume;
+                var newCostume = costume.Copy() as Costume;
                 Costumes.Add(newCostume);
             }
         }
@@ -924,7 +919,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 {
                     costume.Delete();
                     Costumes.Remove(costume);
-                    CatrobatContext.GetContext().CleanUpCostumeReferences(costume, costume.Sprite);
+                    CatrobatContext.GetContext().CleanUpCostumeReferences(costume, SelectedSprite);
                 }
             }
         }
@@ -939,7 +934,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 {
                     sound.Delete();
                     Sounds.Remove(sound);
-                    CatrobatContext.GetContext().CleanUpSoundReferences(sound, sound.Sprite);
+                    CatrobatContext.GetContext().CleanUpSoundReferences(sound, SelectedSprite);
                 }
             }
         }
@@ -948,9 +943,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         {
             if (result == MessageBoxResult.OK)
             {
-                _messageBoxSprite.Delete();
-                Sprites.Remove(_messageBoxSprite);
-                CatrobatContext.GetContext().CleanUpSpriteReferences(_messageBoxSprite);
+                SelectedSprite.Delete();
+                Sprites.Remove(SelectedSprite);
+                CatrobatContext.GetContext().CleanUpSpriteReferences(SelectedSprite);
             }
         }
 

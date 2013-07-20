@@ -21,39 +21,15 @@ namespace Catrobat.Core.Objects.Scripts
             }
         }
 
-        protected Sprite _sprite;
-        public Sprite Sprite
-        {
-            get { return _sprite; }
-            set
-            {
-                if (_sprite == value)
-                {
-                    return;
-                }
-
-                _sprite = value;
-                _bricks.Sprite = value;
-
-                RaisePropertyChanged();
-            }
-        }
 
         protected Script()
         {
-            Bricks = new BrickList(null);
+            Bricks = new BrickList();
         }
 
-        protected Script(Sprite parent)
+        protected Script(XElement xElement)
         {
-            Bricks = new BrickList(parent);
-            _sprite = parent;
-        }
-
-        protected Script(XElement xElement, Sprite parent)
-        {
-            Bricks = new BrickList(parent);
-            _sprite = parent;
+            Bricks = new BrickList();
 
             LoadFromCommonXML(xElement);
             LoadFromXML(xElement);
@@ -66,7 +42,7 @@ namespace Catrobat.Core.Objects.Scripts
         {
             if (xRoot.Element("brickList") != null)
             {
-                _bricks = new BrickList(xRoot.Element("brickList"), _sprite);
+                _bricks = new BrickList(xRoot.Element("brickList"));
             }
         }
 
@@ -86,14 +62,12 @@ namespace Catrobat.Core.Objects.Scripts
                 brick.LoadReference();
         }
 
-        public abstract DataObject Copy(Sprite parent);
+        public abstract DataObject Copy();
 
-        public void CopyReference(Script copiedFrom, Sprite parent)
+        public void CopyReference(Script copiedFrom)
         {
             if (copiedFrom.Bricks != null)
-            {
-                _bricks.CopyReference(copiedFrom.Bricks, parent);
-            }
+                _bricks.CopyReference(copiedFrom.Bricks);
         }
     }
 }

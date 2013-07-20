@@ -20,9 +20,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         public ChangeYByBrick() {}
 
-        public ChangeYByBrick(Sprite parent) : base(parent) {}
-
-        public ChangeYByBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public ChangeYByBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -40,10 +38,10 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new ChangeYByBrick(parent);
-            newBrick._yMovement = _yMovement.Copy(parent) as Formula;
+            var newBrick = new ChangeYByBrick();
+            newBrick._yMovement = _yMovement.Copy() as Formula;
 
             return newBrick;
         }

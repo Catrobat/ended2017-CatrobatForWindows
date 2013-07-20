@@ -184,7 +184,7 @@ namespace Catrobat.Core.Objects
 
             var project = _document.Element("program");
             _projectHeader = new ProjectHeader(project.Element("header"));
-            _spriteList = new SpriteList(this);
+            _spriteList = new SpriteList();
             _spriteList.LoadFromXML(project.Element("objectList"));
             _variableList = new VariableList(project.Element("variables"));
 
@@ -197,7 +197,7 @@ namespace Catrobat.Core.Objects
 
             _document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
-            var xProject = new XElement("project");
+            var xProject = new XElement("program");
 
             xProject.Add(_projectHeader.CreateXML());
 

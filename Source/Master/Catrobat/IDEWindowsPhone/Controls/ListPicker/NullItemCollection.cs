@@ -149,19 +149,16 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
 
     #endregion
 
-    #region Implementation of INotifyPropertyChanged
-
     #region PropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
-
     [NotifyPropertyChangedInvocator]
+
     protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
     {
-      PropertyChangedEventHandler handler = PropertyChanged;
-      if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        PropertyChangedEventHandler handler = PropertyChanged;
+        if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
     }
     #endregion
 
-    #endregion
   }
 }

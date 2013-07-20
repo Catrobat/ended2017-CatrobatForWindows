@@ -6,7 +6,6 @@ namespace Catrobat.Core.Objects
 {
     public class SpriteReference : DataObject
     {
-        private readonly DataObject _parent;
         private string _reference;
 
         private Sprite _sprite;
@@ -25,14 +24,12 @@ namespace Catrobat.Core.Objects
             }
         }
 
-        public SpriteReference(DataObject parent)
+        public SpriteReference()
         {
-            _parent = parent;
         }
 
-        public SpriteReference(XElement xElement, DataObject parent)
+        public SpriteReference(XElement xElement)
         {
-            _parent = parent;
             LoadFromXML(xElement);
         }
 
@@ -51,22 +48,17 @@ namespace Catrobat.Core.Objects
             return xRoot;
         }
 
-        public DataObject Copy(Sprite parent)
-        {
-            var newSpriteRef = new SpriteReference(parent);
-            newSpriteRef.Sprite = _sprite;
-
-            return newSpriteRef;
-        }
-
-        public void UpdateReferenceObject()
-        {
-            Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as Sprite;
-        }
-
         internal override void LoadReference()
         {
             Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as Sprite;
+        }
+
+        public DataObject Copy()
+        {
+            var newSpriteRef = new SpriteReference();
+            newSpriteRef.Sprite = _sprite;
+
+            return newSpriteRef;
         }
     }
 }

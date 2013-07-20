@@ -37,7 +37,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 if (_soundReference == null)
-                    _soundReference = new SoundReference(_sprite);
+                    _soundReference = new SoundReference();
 
                 if (_soundReference.Sound == value)
                     return;
@@ -54,15 +54,13 @@ namespace Catrobat.Core.Objects.Bricks
 
         public PlaySoundBrick() {}
 
-        public PlaySoundBrick(Sprite parent) : base(parent) {}
-
-        public PlaySoundBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public PlaySoundBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("sound") != null)
             {
-                _soundReference = new SoundReference(xRoot.Element("sound"), _sprite);
+                _soundReference = new SoundReference(xRoot.Element("sound"));
             }
         }
 
@@ -85,21 +83,15 @@ namespace Catrobat.Core.Objects.Bricks
             _soundReference.LoadReference();
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new PlaySoundBrick(parent);
+            var newBrick = new PlaySoundBrick();
             if (_soundReference != null)
             {
-                newBrick._soundReference = _soundReference.Copy(parent) as SoundReference;
+                newBrick._soundReference = _soundReference.Copy() as SoundReference;
             }
 
             return newBrick;
-        }
-
-        public void UpdateReferenceObject()
-        {
-            if (_soundReference != null)
-                _soundReference.UpdateReferenceObject();
         }
     }
 }

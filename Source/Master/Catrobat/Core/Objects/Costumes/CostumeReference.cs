@@ -6,7 +6,6 @@ namespace Catrobat.Core.Objects.Costumes
 {
     public class CostumeReference : DataObject
     {
-        private readonly Sprite _sprite;
         private string _reference;
 
         private Costume _costume;
@@ -26,14 +25,12 @@ namespace Catrobat.Core.Objects.Costumes
         }
 
 
-        public CostumeReference(Sprite parent)
+        public CostumeReference()
         {
-            _sprite = parent;
         }
 
-        public CostumeReference(XElement xElement, Sprite parent)
+        public CostumeReference(XElement xElement)
         {
-            _sprite = parent;
             LoadFromXML(xElement);
         }
 
@@ -52,22 +49,17 @@ namespace Catrobat.Core.Objects.Costumes
             return xRoot;
         }
 
-        public DataObject Copy(Sprite parent)
-        {
-            var newCostumeRef = new CostumeReference(parent);
-            newCostumeRef.Costume = _costume;
-
-            return newCostumeRef;
-        }
-
-        public void UpdateReferenceObject()
-        {
-            Costume = ReferenceHelper.GetReferenceObject(this, _reference) as Costume;
-        }
-
         internal override void LoadReference()
         {
             Costume = ReferenceHelper.GetReferenceObject(this, _reference) as Costume;
         }
+
+        public DataObject Copy()
+        {
+            var newCostumeRef = new CostumeReference();
+            newCostumeRef.Costume = _costume;
+
+            return newCostumeRef;
+        }        
     }
 }

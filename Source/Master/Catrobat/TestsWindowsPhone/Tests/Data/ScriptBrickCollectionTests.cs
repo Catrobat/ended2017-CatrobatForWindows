@@ -123,9 +123,9 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
       collection.Update(sprite);
       IEnumerator enumerator = collection.GetEnumerator();
 
-      Brick newBrick1 = new ChangeGhostEffectBrick(sprite);
+      Brick newBrick1 = new ChangeGhostEffectBrick();
       collection.Insert(4, newBrick1);
-      Brick newBrick2 = new ChangeXByBrick(sprite);
+      Brick newBrick2 = new ChangeXByBrick();
       collection.Insert(4, newBrick2);
 
       //Script newScript1 = new BroadcastScript(); // TODO: test adding scripts
@@ -165,15 +165,15 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
       ScriptBrickCollection collection = new ScriptBrickCollection();
       collection.Update(sprite);
 
-      Script newScript1 = new BroadcastScript(sprite);
+      Script newScript1 = new BroadcastScript();
       collection.Add(newScript1);
 
-      Brick newBrick1 = new ChangeGhostEffectBrick(sprite);
+      Brick newBrick1 = new ChangeGhostEffectBrick();
       collection.Add(newBrick1);
-      Brick newBrick2 = new ChangeXByBrick(sprite);
+      Brick newBrick2 = new ChangeXByBrick();
       collection.Add(newBrick2);
 
-      Script newScript2 = new WhenScript(sprite);
+      Script newScript2 = new WhenScript();
       collection.Add(newScript2);
 
       IEnumerator enumerator = collection.GetEnumerator();
@@ -221,10 +221,10 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
       while (enumerator.MoveNext())
         Assert.IsTrue(collection.Contains(enumerator.Current));
 
-      Brick notContainedBrick = new BroadcastBrick(sprite);
+      Brick notContainedBrick = new BroadcastBrick();
       Assert.IsFalse(collection.Contains(notContainedBrick));
 
-      Script notContainedScript = new BroadcastScript(sprite);
+      Script notContainedScript = new BroadcastScript();
       Assert.IsFalse(collection.Contains(notContainedScript));
     }
 
@@ -245,10 +245,10 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
         referenceIndex++;
       }
 
-      Brick notContainedBrick = new BroadcastBrick(sprite);
+      Brick notContainedBrick = new BroadcastBrick();
       Assert.AreEqual(collection.IndexOf(notContainedBrick), -1);
 
-      Script notContainedScript = new BroadcastScript(sprite);
+      Script notContainedScript = new BroadcastScript();
       Assert.AreEqual(collection.IndexOf(notContainedScript), -1);
     }
 
@@ -262,8 +262,8 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
       collection.Update(sprite);
 
 
-      Brick insertedBrick1 = new ChangeBrightnessBrick(sprite);
-      Brick insertedBrick2 = new MoveNStepsBrick(sprite);
+      Brick insertedBrick1 = new ChangeBrightnessBrick();
+      Brick insertedBrick2 = new MoveNStepsBrick();
       collection.AddScriptBrick(insertedBrick1, 4, 8);
       collection.AddScriptBrick(insertedBrick2, 1, 6);
 

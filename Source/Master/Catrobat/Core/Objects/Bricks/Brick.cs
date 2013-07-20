@@ -5,33 +5,10 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public abstract class Brick : DataObject
     {
-        protected Sprite _sprite;
-        public Sprite Sprite
-        {
-            get { return _sprite; }
-            set
-            {
-                if (_sprite == value)
-                {
-                    return;
-                }
-
-                _sprite = value;
-                RaisePropertyChanged();
-            }
-        }
-
-
         protected Brick() {}
 
-        protected Brick(Sprite parent)
+        protected Brick(XElement xElement)
         {
-            _sprite = parent;
-        }
-
-        protected Brick(XElement xElement, Sprite parent)
-        {
-            _sprite = parent;
             LoadFromXML(xElement);
 
             //LoadFromCommonXML(xElement); 
@@ -53,6 +30,6 @@ namespace Catrobat.Core.Objects.Bricks
             //  //  xRoot.Add(sprite.CreateXML());
         }
 
-        public abstract DataObject Copy(Sprite parent);
+        public abstract DataObject Copy();
     }
 }

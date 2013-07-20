@@ -6,17 +6,12 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Navigation;
 using Catrobat.IDEWindowsPhone.Annotations;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using System.ComponentModel;
 
 namespace Catrobat.IDEWindowsPhone.Controls.StatusIcons
 {
-  public partial class ProcessIcon : UserControl, INotifyPropertyChanged
+  public partial class ProcessIcon : INotifyPropertyChanged
   {
     private bool _transformationIsRunning = false;
 
@@ -87,13 +82,14 @@ namespace Catrobat.IDEWindowsPhone.Controls.StatusIcons
 
     #region PropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
-
     [NotifyPropertyChangedInvocator]
+
     protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
     {
-      PropertyChangedEventHandler handler = PropertyChanged;
-      if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        PropertyChangedEventHandler handler = PropertyChanged;
+        if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
     }
     #endregion
+
   }
 }

@@ -35,9 +35,7 @@ namespace Catrobat.Core.Objects.Scripts
 
         public BroadcastScript() {}
 
-        public BroadcastScript(Sprite parent) : base(parent) {}
-
-        public BroadcastScript(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public BroadcastScript(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -64,13 +62,13 @@ namespace Catrobat.Core.Objects.Scripts
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBroadcastScript = new BroadcastScript(parent);
+            var newBroadcastScript = new BroadcastScript();
             newBroadcastScript._receivedMessage = _receivedMessage;
             if (_bricks != null)
             {
-                newBroadcastScript._bricks = _bricks.Copy(parent) as BrickList;
+                newBroadcastScript._bricks = _bricks.Copy() as BrickList;
             }
 
             return newBroadcastScript;

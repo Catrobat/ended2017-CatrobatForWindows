@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SharpCompress.WP7, Version=0.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Core\lib\SharpCompress.WP7.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.XML" />
@@ -82,7 +86,6 @@
     <Compile Include="Tests\Storage\StorageTests.cs" />
     <Compile Include="Tests\Data\XmlConverterTests.cs" />
     <Compile Include="Tests\Data\XmlPathHelperTests.cs" />
-    <Compile Include="Tests\Data\XPathHelperTests_old.cs" />
     <Compile Include="Tests\Misc\ZipTests.cs" />
   </ItemGroup>
   <ItemGroup>

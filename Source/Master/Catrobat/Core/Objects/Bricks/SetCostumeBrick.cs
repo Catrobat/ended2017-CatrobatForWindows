@@ -37,7 +37,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 if (_costumeReference == null)
-                    _costumeReference = new CostumeReference(_sprite);
+                    _costumeReference = new CostumeReference();
 
                 if (_costumeReference.Costume == value)
                     return;
@@ -54,15 +54,13 @@ namespace Catrobat.Core.Objects.Bricks
 
         public SetCostumeBrick() {}
 
-        public SetCostumeBrick(Sprite parent) : base(parent) {}
-
-        public SetCostumeBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public SetCostumeBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("look") != null)
             {
-                _costumeReference = new CostumeReference(xRoot.Element("look"), _sprite);
+                _costumeReference = new CostumeReference(xRoot.Element("look"));
             }
         }
 
@@ -85,21 +83,15 @@ namespace Catrobat.Core.Objects.Bricks
             _costumeReference.LoadReference();
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new SetCostumeBrick(parent);
+            var newBrick = new SetCostumeBrick();
             if (_costumeReference != null)
             {
-                newBrick._costumeReference = _costumeReference.Copy(parent) as CostumeReference;
+                newBrick._costumeReference = _costumeReference.Copy() as CostumeReference;
             }
 
             return newBrick;
-        }
-
-        public void UpdateReferenceObject()
-        {
-            if (_costumeReference != null)
-                _costumeReference.UpdateReferenceObject();
         }
     }
 }

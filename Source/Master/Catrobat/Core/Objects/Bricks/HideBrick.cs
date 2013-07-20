@@ -6,9 +6,7 @@ namespace Catrobat.Core.Objects.Bricks
     {
         public HideBrick() {}
 
-        public HideBrick(Sprite parent) : base(parent) {}
-
-        public HideBrick(XElement xElement, Sprite parent) : base(xElement, parent) {}
+        public HideBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot) {}
 
@@ -21,9 +19,9 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
-        public override DataObject Copy(Sprite parent)
+        public override DataObject Copy()
         {
-            var newBrick = new HideBrick(parent);
+            var newBrick = new HideBrick();
 
             return newBrick;
         }

@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Threading;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.ServerCommunication;
@@ -18,12 +17,10 @@ using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
 using System.Windows.Media;
-using Microsoft.Practices.ServiceLocation;
 using System.Windows.Input;
 using Catrobat.IDEWindowsPhone.Views.Service;
 using Catrobat.IDEWindowsPhone.Views.Settings;
 using Catrobat.IDEWindowsPhone.Views.Editor;
-using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 {
@@ -36,7 +33,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private readonly ICatrobatContext _catrobatContext;
         private readonly ObservableCollection<OnlineProjectHeader> _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
         private string _filterText = "";
-        public bool _isLoadingOnlineProjects = false;
+        private bool _isLoadingOnlineProjects;
         private MessageBoxResult _dialogResult;
         private string _deleteProductName;
         private string _copyProjectName;
@@ -408,7 +405,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             if (e.PropertyName == "CurrentProject")
             {
-                if (this.PropertyChanged != null)
+                if (PropertyChanged != null)
                 {
                     RaisePropertyChanged("CurrentProject");
                     RaisePropertyChanged("CurrentProjectScreenshot");
@@ -422,7 +419,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             if (e.PropertyName == "ProjectScreenshot")
             {
-                if (this.PropertyChanged != null)
+                if (PropertyChanged != null)
                 {
                     RaisePropertyChanged("CurrentProjectScreenshot");
                 }

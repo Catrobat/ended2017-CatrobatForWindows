@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,6 +22,7 @@ using System.Windows.Media.Imaging;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Scripts;
+using Catrobat.IDEWindowsPhone.Annotations;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
@@ -32,10 +34,10 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
     /// <summary>
     /// Extends ListBox to enable drag-and-drop reorder within the list.
     /// </summary>
-    [TemplatePart(Name = ReorderListBox.ScrollViewerPart, Type = typeof(ScrollViewer))]
-    [TemplatePart(Name = ReorderListBox.DragIndicatorPart, Type = typeof(Image))]
-    [TemplatePart(Name = ReorderListBox.DragInterceptorPart, Type = typeof(Canvas))]
-    [TemplatePart(Name = ReorderListBox.RearrangeCanvasPart, Type = typeof(Canvas))]
+    [TemplatePart(Name = ScrollViewerPart, Type = typeof(ScrollViewer))]
+    [TemplatePart(Name = DragIndicatorPart, Type = typeof(Image))]
+    [TemplatePart(Name = DragInterceptorPart, Type = typeof(Canvas))]
+    [TemplatePart(Name = RearrangeCanvasPart, Type = typeof(Canvas))]
     public class ReorderListBox : ListBox//, INotifyPropertyChanged
     {
         #region Template part name constants
@@ -49,24 +51,23 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
 
         private const string ScrollViewerScrollingVisualState = "Scrolling";
         private const string ScrollViewerNotScrollingVisualState = "NotScrolling";
-
         private const string IsReorderEnabledPropertyName = "IsReorderEnabled";
 
         #region Private fields
 
-        private double dragScrollDelta;
-        private Panel itemsPanel;
-        private ScrollViewer scrollViewer;
-        private Canvas dragInterceptor;
-        private Image dragIndicator;
-        private object dragItem;
-        private ReorderListBoxItem dragItemContainer;
-        private bool isDragItemSelected;
-        private bool isDraging;
-        private Rect dragInterceptorRect;
-        private int dropTargetIndex;
-        private Canvas rearrangeCanvas;
-        private Queue<KeyValuePair<Action, Duration>> rearrangeQueue;
+        private double _dragScrollDelta;
+        private Panel _itemsPanel;
+        private ScrollViewer _scrollViewer;
+        private Canvas _dragInterceptor;
+        private Image _dragIndicator;
+        private object _dragItem;
+        private ReorderListBoxItem _dragItemContainer;
+        private bool _isDragItemSelected;
+        private bool _isDraging;
+        private Rect _dragInterceptorRect;
+        private int _dropTargetIndex;
+        private Canvas _rearrangeCanvas;
+        private Queue<KeyValuePair<Action, Duration>> _rearrangeQueue;
 
         #endregion
 
@@ -76,7 +77,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         /// </summary>
         public ReorderListBox()
         {
-            this.DefaultStyleKey = typeof(ReorderListBox);
+            DefaultStyleKey = typeof(ReorderListBox);
 
             // For fixing SelectedItems binding
             SelectionChanged += new SelectionChangedEventHandler(BaseListBoxSelectionChanged);
@@ -85,7 +86,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         #region IsReorderEnabled DependencyProperty
 
         public static readonly DependencyProperty IsReorderEnabledProperty = DependencyProperty.Register(
-            ReorderListBox.IsReorderEnabledPropertyName, typeof(bool), typeof(ReorderListBox),
+            IsReorderEnabledPropertyName, typeof(bool), typeof(ReorderListBox),
             new PropertyMetadata(false, (d, e) => ((ReorderListBox)d).OnIsReorderEnabledChanged(e)));
 
         /// <summary>
@@ -95,7 +96,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         {
             get
             {
-                return dragItem;
+                return _dragItem;
             }
         }
 
@@ -106,7 +107,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         {
             get
             {
-                return isDragItemSelected;
+                return _isDragItemSelected;
             }
         }
 
@@ -114,11 +115,11 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         {
             get
             {
-                return isDraging;
+                return _isDraging;
             }
             set
             {
-                isDraging = value;
+                _isDraging = value;
             }
         }
 
@@ -143,22 +144,22 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         {
             get
             {
-                return (bool)this.GetValue(ReorderListBox.IsReorderEnabledProperty);
+                return (bool)GetValue(IsReorderEnabledProperty);
             }
             set
             {
-                this.SetValue(ReorderListBox.IsReorderEnabledProperty, value);
+                SetValue(IsReorderEnabledProperty, value);
             }
         }
 
         protected void OnIsReorderEnabledChanged(DependencyPropertyChangedEventArgs e)
         {
-            if (this.dragInterceptor != null)
+            if (_dragInterceptor != null)
             {
-                this.dragInterceptor.Visibility = (bool)e.NewValue ? Visibility.Visible : Visibility.Collapsed;
+                _dragInterceptor.Visibility = (bool)e.NewValue ? Visibility.Visible : Visibility.Collapsed;
             }
 
-            this.InvalidateArrange();
+            InvalidateArrange();
         }
 
         #endregion
@@ -176,11 +177,11 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         {
             get
             {
-                return (int)this.GetValue(ReorderListBox.AutoScrollMarginProperty);
+                return (int)GetValue(AutoScrollMarginProperty);
             }
             set
             {
-                this.SetValue(ReorderListBox.AutoScrollMarginProperty, value);
+                SetValue(AutoScrollMarginProperty, value);
             }
         }
 
@@ -195,35 +196,35 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         {
             base.OnApplyTemplate();
 
-            this.scrollViewer = (ScrollViewer)this.GetTemplateChild(ReorderListBox.ScrollViewerPart);
-            this.dragInterceptor = this.GetTemplateChild(ReorderListBox.DragInterceptorPart) as Canvas;
-            this.dragIndicator = this.GetTemplateChild(ReorderListBox.DragIndicatorPart) as Image;
-            this.rearrangeCanvas = this.GetTemplateChild(ReorderListBox.RearrangeCanvasPart) as Canvas;
+            _scrollViewer = (ScrollViewer)GetTemplateChild(ScrollViewerPart);
+            _dragInterceptor = GetTemplateChild(DragInterceptorPart) as Canvas;
+            _dragIndicator = GetTemplateChild(DragIndicatorPart) as Image;
+            _rearrangeCanvas = GetTemplateChild(RearrangeCanvasPart) as Canvas;
 
-            if (this.scrollViewer != null && this.dragInterceptor != null && this.dragIndicator != null)
+            if (_scrollViewer != null && _dragInterceptor != null && _dragIndicator != null)
             {
-                this.dragInterceptor.Visibility = this.IsReorderEnabled ? Visibility.Visible : Visibility.Collapsed;
+                _dragInterceptor.Visibility = IsReorderEnabled ? Visibility.Visible : Visibility.Collapsed;
 
-                this.dragInterceptor.ManipulationStarted += this.dragInterceptor_ManipulationStarted;
-                this.dragInterceptor.ManipulationDelta += this.dragInterceptor_ManipulationDelta;
-                this.dragInterceptor.ManipulationCompleted += this.dragInterceptor_ManipulationCompleted;
+                _dragInterceptor.ManipulationStarted += dragInterceptor_ManipulationStarted;
+                _dragInterceptor.ManipulationDelta += dragInterceptor_ManipulationDelta;
+                _dragInterceptor.ManipulationCompleted += dragInterceptor_ManipulationCompleted;
             }
 
             AddMarginToLastItem();
 
-            scrollViewer.Loaded += scrollViewer_Loaded;
+            _scrollViewer.Loaded += scrollViewer_Loaded;
         }
 
         private void scrollViewer_Loaded(object sender, RoutedEventArgs e)
         {
-            ScrollBar verticalScrollBar = ((FrameworkElement)VisualTreeHelper.GetChild(scrollViewer, 0)).FindName("VerticalScrollBar") as ScrollBar;
+            ScrollBar verticalScrollBar = ((FrameworkElement)VisualTreeHelper.GetChild(_scrollViewer, 0)).FindName("VerticalScrollBar") as ScrollBar;
             verticalScrollBar.ValueChanged += ScrollViewer_ScrollStateChanged;
         }
 
         private void ScrollViewer_ScrollStateChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             int viewFirstIndex, viewLastIndex;
-            this.GetViewIndexRange(true, out viewFirstIndex, out viewLastIndex);
+            GetViewIndexRange(true, out viewFirstIndex, out viewLastIndex);
 
             if (ListBoxViewPort != null)
             {
@@ -240,11 +241,6 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
             return item is ReorderListBoxItem;
-        }
-
-        protected override void OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            base.OnItemsChanged(e);
         }
 
         /// <summary>
@@ -282,16 +278,16 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
             itemContainer.SetBinding(ReorderListBoxItem.IsReorderEnabledProperty,
                 new Binding(ReorderListBox.IsReorderEnabledPropertyName) { Source = this });
 
-            if (item == this.dragItem)
+            if (item == this._dragItem)
             {
-                itemContainer.IsSelected = this.isDragItemSelected;
+                itemContainer.IsSelected = this._isDragItemSelected;
                 VisualStateManager.GoToState(itemContainer, ReorderListBoxItem.DraggingState, false);
 
-                if (this.dropTargetIndex >= 0)
+                if (this._dropTargetIndex >= 0)
                 {
                     // The item's dragIndicator is currently being moved, so the item itself is hidden. 
                     itemContainer.Visibility = Visibility.Collapsed;
-                    this.dragItemContainer = itemContainer;
+                    this._dragItemContainer = itemContainer;
                 }
                 else
                 {
@@ -318,10 +314,10 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
             base.ClearContainerForItemOverride(element, item);
 
             ReorderListBoxItem itemContainer = (ReorderListBoxItem)element;
-            if (itemContainer == this.dragItemContainer)
+            if (itemContainer == this._dragItemContainer)
             {
-                this.dragItemContainer.Visibility = Visibility.Visible;
-                this.dragItemContainer = null;
+                this._dragItemContainer.Visibility = Visibility.Visible;
+                this._dragItemContainer = null;
             }
         }
 
@@ -335,60 +331,60 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         /// </summary>
         private void dragInterceptor_ManipulationStarted(object sender, ManipulationStartedEventArgs e)
         {
-            isDraging = true;
+            _isDraging = true;
 
-            if (this.dragItem != null)
+            if (_dragItem != null)
             {
                 return;
             }
 
-            if (this.itemsPanel == null)
+            if (_itemsPanel == null)
             {
-                ItemsPresenter scrollItemsPresenter = (ItemsPresenter)this.scrollViewer.Content;
-                this.itemsPanel = (Panel)VisualTreeHelper.GetChild(scrollItemsPresenter, 0);
+                ItemsPresenter scrollItemsPresenter = (ItemsPresenter)_scrollViewer.Content;
+                _itemsPanel = (Panel)VisualTreeHelper.GetChild(scrollItemsPresenter, 0);
             }
 
-            GeneralTransform interceptorTransform = this.dragInterceptor.TransformToVisual(
+            GeneralTransform interceptorTransform = _dragInterceptor.TransformToVisual(
                 Application.Current.RootVisual);
             Point targetPoint = interceptorTransform.Transform(e.ManipulationOrigin);
-            targetPoint = ReorderListBox.GetHostCoordinates(targetPoint);
+            targetPoint = GetHostCoordinates(targetPoint);
 
             List<UIElement> targetElements = VisualTreeHelper.FindElementsInHostCoordinates(
-                targetPoint, this.itemsPanel).ToList();
+                targetPoint, _itemsPanel).ToList();
             ReorderListBoxItem targetItemContainer = targetElements.OfType<ReorderListBoxItem>().FirstOrDefault();
             if (targetItemContainer != null && targetElements.Contains(targetItemContainer.DragHandle))
             {
                 VisualStateManager.GoToState(targetItemContainer, ReorderListBoxItem.DraggingState, true);
 
-                GeneralTransform targetItemTransform = targetItemContainer.TransformToVisual(this.dragInterceptor);
+                GeneralTransform targetItemTransform = targetItemContainer.TransformToVisual(_dragInterceptor);
                 Point targetItemOrigin = targetItemTransform.Transform(new Point(0, 0));
-                Canvas.SetLeft(this.dragIndicator, targetItemOrigin.X);
-                Canvas.SetTop(this.dragIndicator, targetItemOrigin.Y);
-                this.dragIndicator.Width = targetItemContainer.RenderSize.Width;
-                this.dragIndicator.Height = targetItemContainer.RenderSize.Height;
+                Canvas.SetLeft(_dragIndicator, targetItemOrigin.X);
+                Canvas.SetTop(_dragIndicator, targetItemOrigin.Y);
+                _dragIndicator.Width = targetItemContainer.RenderSize.Width;
+                _dragIndicator.Height = targetItemContainer.RenderSize.Height;
 
-                this.dragItemContainer = targetItemContainer;
-                this.dragItem = this.dragItemContainer.Content;
+                _dragItemContainer = targetItemContainer;
+                _dragItem = _dragItemContainer.Content;
 
-                this.isDragItemSelected = this.dragItemContainer.IsSelected;
+                _isDragItemSelected = _dragItemContainer.IsSelected;
 
-                this.dragInterceptorRect = interceptorTransform.TransformBounds(
-                    new Rect(new Point(0, 0), this.dragInterceptor.RenderSize));
+                _dragInterceptorRect = interceptorTransform.TransformBounds(
+                    new Rect(new Point(0, 0), _dragInterceptor.RenderSize));
 
-                this.dropTargetIndex = -1;
+                _dropTargetIndex = -1;
             }
 
             // Added by valentin
             if (ItemsSource is ScriptBrickCollection)
             {
-                if (dragItem is Script)
+                if (_dragItem is Script)
                 {
                     bool failed = false;
                     foreach (DataObject dataObject in ItemsSource)
                     {
                         if (dataObject is Brick)
                         {
-                            var container = this.ItemContainerGenerator.ContainerFromItem(dataObject);
+                            var container = ItemContainerGenerator.ContainerFromItem(dataObject);
 
                             if (container != null)
                             {
@@ -404,7 +400,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                         {
                             if (dataObject is Brick)
                             {
-                                var container = this.ItemContainerGenerator.ContainerFromItem(dataObject);
+                                var container = ItemContainerGenerator.ContainerFromItem(dataObject);
 
                                 if (container != null)
                                     ((UIElement)container).Visibility = Visibility.Visible;
@@ -422,14 +418,14 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         /// </summary>
         private void dragInterceptor_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
-            if (this.Items.Count <= 1 || this.dragItem == null)
+            if (Items.Count <= 1 || _dragItem == null)
             {
                 return;
             }
 
-            if (this.dropTargetIndex == -1)
+            if (_dropTargetIndex == -1)
             {
-                if (this.dragItemContainer == null)
+                if (_dragItemContainer == null)
                 {
                     return;
                 }
@@ -437,35 +433,35 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                 // When the drag actually starts, swap out the item for the drag-indicator image of the item.
                 // This is necessary because the item itself may be removed from the virtualizing panel
                 // if the drag causes a scroll of considerable distance.
-                Size dragItemSize = this.dragItemContainer.RenderSize;
+                Size dragItemSize = _dragItemContainer.RenderSize;
                 WriteableBitmap writeableBitmap = new WriteableBitmap(
                     (int)dragItemSize.Width, (int)dragItemSize.Height + 10); // +10 added by Valentin
 
                 // Swap states to force the transition to complete.
-                VisualStateManager.GoToState(this.dragItemContainer, ReorderListBoxItem.NotDraggingState, false);
-                VisualStateManager.GoToState(this.dragItemContainer, ReorderListBoxItem.DraggingState, false);
-                writeableBitmap.Render(this.dragItemContainer, null);
+                VisualStateManager.GoToState(_dragItemContainer, ReorderListBoxItem.NotDraggingState, false);
+                VisualStateManager.GoToState(_dragItemContainer, ReorderListBoxItem.DraggingState, false);
+                writeableBitmap.Render(_dragItemContainer, null);
 
                 writeableBitmap.Invalidate();
-                this.dragIndicator.Source = writeableBitmap;
+                _dragIndicator.Source = writeableBitmap;
 
-                this.dragIndicator.Visibility = Visibility.Visible;
-                this.dragItemContainer.Visibility = Visibility.Collapsed;
+                _dragIndicator.Visibility = Visibility.Visible;
+                _dragItemContainer.Visibility = Visibility.Collapsed;
 
-                if (this.itemsPanel.Children.IndexOf(this.dragItemContainer) < this.itemsPanel.Children.Count - 1)
+                if (_itemsPanel.Children.IndexOf(_dragItemContainer) < _itemsPanel.Children.Count - 1)
                 {
-                    this.UpdateDropTarget(Canvas.GetTop(this.dragIndicator) + this.dragIndicator.Height + 1, false);
+                    UpdateDropTarget(Canvas.GetTop(_dragIndicator) + _dragIndicator.Height + 1, false);
                 }
                 else
                 {
-                    this.UpdateDropTarget(Canvas.GetTop(this.dragIndicator) - 1, false);
+                    UpdateDropTarget(Canvas.GetTop(_dragIndicator) - 1, false);
                 }
             }
 
-            double dragItemHeight = this.dragIndicator.Height;
+            double dragItemHeight = _dragIndicator.Height;
 
-            TranslateTransform translation = (TranslateTransform)this.dragIndicator.RenderTransform;
-            double top = Canvas.GetTop(this.dragIndicator);
+            TranslateTransform translation = (TranslateTransform)_dragIndicator.RenderTransform;
+            double top = Canvas.GetTop(_dragIndicator);
 
             // Limit the translation to keep the item within the list area.
             // Use different targeting for the top and bottom edges to allow taller items to
@@ -474,47 +470,47 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
             if (y < 0)
             {
                 y = 0;
-                this.UpdateDropTarget(0, true);
+                UpdateDropTarget(0, true);
             }
-            else if (y >= this.dragInterceptorRect.Height - dragItemHeight)
+            else if (y >= _dragInterceptorRect.Height - dragItemHeight)
             {
-                y = this.dragInterceptorRect.Height - dragItemHeight;
-                this.UpdateDropTarget(this.dragInterceptorRect.Height - 1, true);
+                y = _dragInterceptorRect.Height - dragItemHeight;
+                UpdateDropTarget(_dragInterceptorRect.Height - 1, true);
             }
             else
             {
-                this.UpdateDropTarget(y + dragItemHeight / 2, true);
+                UpdateDropTarget(y + dragItemHeight / 2, true);
             }
 
             translation.Y = y - top;
 
             // Check if we're within the margin where auto-scroll needs to happen.
-            bool scrolling = (this.dragScrollDelta != 0);
-            double autoScrollMargin = this.AutoScrollMargin;
+            bool scrolling = (_dragScrollDelta != 0);
+            double autoScrollMargin = AutoScrollMargin;
             if (autoScrollMargin > 0 && y < autoScrollMargin)
             {
-                this.dragScrollDelta = y - autoScrollMargin;
+                _dragScrollDelta = y - autoScrollMargin;
                 if (!scrolling)
                 {
-                    VisualStateManager.GoToState(this.scrollViewer, ReorderListBox.ScrollViewerScrollingVisualState, true);
-                    this.Dispatcher.BeginInvoke(() => this.DragScroll());
+                    VisualStateManager.GoToState(_scrollViewer, ScrollViewerScrollingVisualState, true);
+                    Dispatcher.BeginInvoke(() => DragScroll());
                     return;
                 }
             }
-            else if (autoScrollMargin > 0 && y + dragItemHeight > this.dragInterceptorRect.Height - autoScrollMargin)
+            else if (autoScrollMargin > 0 && y + dragItemHeight > _dragInterceptorRect.Height - autoScrollMargin)
             {
-                this.dragScrollDelta = (y + dragItemHeight - (this.dragInterceptorRect.Height - autoScrollMargin));
+                _dragScrollDelta = (y + dragItemHeight - (_dragInterceptorRect.Height - autoScrollMargin));
                 if (!scrolling)
                 {
-                    VisualStateManager.GoToState(this.scrollViewer, ReorderListBox.ScrollViewerScrollingVisualState, true);
-                    this.Dispatcher.BeginInvoke(() => this.DragScroll());
+                    VisualStateManager.GoToState(_scrollViewer, ScrollViewerScrollingVisualState, true);
+                    Dispatcher.BeginInvoke(() => DragScroll());
                     return;
                 }
             }
             else
             {
                 // We're not within the auto-scroll margin. This ensures any current scrolling is stopped.
-                this.dragScrollDelta = 0;
+                _dragScrollDelta = 0;
             }
         }
 
@@ -526,12 +522,12 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
 
             if (ItemsSource is ScriptBrickCollection)
             {
-                if (dragItem is Script)
+                if (_dragItem is Script)
                     foreach (DataObject dataObject in ItemsSource)
                     {
                         if (dataObject is Brick)
                         {
-                            var container = this.ItemContainerGenerator.ContainerFromItem(dataObject);
+                            var container = ItemContainerGenerator.ContainerFromItem(dataObject);
 
                             if (container != null)
                                 ((UIElement)container).Visibility = Visibility.Visible;
@@ -539,27 +535,27 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                     }
             }
 
-            if (this.dragItem == null)
+            if (_dragItem == null)
             {
                 return;
             }
 
-            if (this.dropTargetIndex >= 0)
+            if (_dropTargetIndex >= 0)
             {
-                this.MoveItem(this.dragItem, this.dropTargetIndex);
+                MoveItem(_dragItem, _dropTargetIndex);
             }
 
-            if (this.dragItemContainer != null)
+            if (_dragItemContainer != null)
             {
-                this.dragItemContainer.Visibility = Visibility.Visible;
-                this.dragItemContainer.Opacity = 0;
-                this.AnimateDrop(this.dragItemContainer);
-                this.dragItemContainer = null;
+                _dragItemContainer.Visibility = Visibility.Visible;
+                _dragItemContainer.Opacity = 0;
+                AnimateDrop(_dragItemContainer);
+                _dragItemContainer = null;
             }
 
-            this.dragScrollDelta = 0;
-            this.dropTargetIndex = -1;
-            this.ClearDropTarget();
+            _dragScrollDelta = 0;
+            _dropTargetIndex = -1;
+            ClearDropTarget();
         }
 
         private void AddMarginToLastItem()
@@ -569,7 +565,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
 
             foreach (var item in list)
             {
-                var container = this.ItemContainerGenerator.ContainerFromItem(item);
+                var container = ItemContainerGenerator.ContainerFromItem(item);
 
                 var frameworkElement = container as FrameworkElement;
                 if (frameworkElement != null) frameworkElement.Margin = new Thickness(0, 0, 0, 0);
@@ -577,7 +573,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
 
             if (list.Count > 0)
             {
-                var container = this.ItemContainerGenerator.ContainerFromItem(list[list.Count - 1]);
+                var container = ItemContainerGenerator.ContainerFromItem(list[list.Count - 1]);
 
                 var frameworkElement = container as FrameworkElement;
                 if (frameworkElement != null)
@@ -591,32 +587,32 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         /// </summary>
         private void AnimateDrop(ReorderListBoxItem itemContainer)
         {
-            GeneralTransform itemTransform = itemContainer.TransformToVisual(this.dragInterceptor);
+            GeneralTransform itemTransform = itemContainer.TransformToVisual(_dragInterceptor);
             Rect itemRect = itemTransform.TransformBounds(new Rect(new Point(0, 0), itemContainer.RenderSize));
-            double delta = Math.Abs(itemRect.Y - Canvas.GetTop(this.dragIndicator) -
-                ((TranslateTransform)this.dragIndicator.RenderTransform).Y);
+            double delta = Math.Abs(itemRect.Y - Canvas.GetTop(_dragIndicator) -
+                ((TranslateTransform)_dragIndicator.RenderTransform).Y);
 
 
-            if (delta > 0 && !(dragItem is Script))
+            if (delta > 0 && !(_dragItem is Script))
             {
                 // Adjust the duration based on the distance, so the speed will be constant.
                 TimeSpan duration = TimeSpan.FromSeconds(0.25 * delta / itemRect.Height);
 
                 Storyboard dropStoryboard = new Storyboard();
                 DoubleAnimation moveToDropAnimation = new DoubleAnimation();
-                Storyboard.SetTarget(moveToDropAnimation, this.dragIndicator.RenderTransform);
+                Storyboard.SetTarget(moveToDropAnimation, this._dragIndicator.RenderTransform);
                 Storyboard.SetTargetProperty(moveToDropAnimation, new PropertyPath(TranslateTransform.YProperty));
-                moveToDropAnimation.To = itemRect.Y - Canvas.GetTop(this.dragIndicator);
+                moveToDropAnimation.To = itemRect.Y - Canvas.GetTop(this._dragIndicator);
                 moveToDropAnimation.Duration = duration;
                 dropStoryboard.Children.Add(moveToDropAnimation);
 
                 dropStoryboard.Completed += delegate
                 {
-                    this.dragItem = null;
+                    this._dragItem = null;
                     itemContainer.Opacity = 1;
-                    this.dragIndicator.Visibility = Visibility.Collapsed;
-                    this.dragIndicator.Source = null;
-                    ((TranslateTransform)this.dragIndicator.RenderTransform).Y = 0;
+                    this._dragIndicator.Visibility = Visibility.Collapsed;
+                    this._dragIndicator.Source = null;
+                    ((TranslateTransform)this._dragIndicator.RenderTransform).Y = 0;
                     VisualStateManager.GoToState(itemContainer, ReorderListBoxItem.NotDraggingState, true);
 
                 };
@@ -625,10 +621,10 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
             else
             {
                 // There was no need for an animation, so do the visibility swap right now.
-                this.dragItem = null;
+                this._dragItem = null;
                 itemContainer.Opacity = 1;
-                this.dragIndicator.Visibility = Visibility.Collapsed;
-                this.dragIndicator.Source = null;
+                this._dragIndicator.Visibility = Visibility.Collapsed;
+                this._dragIndicator.Source = null;
                 VisualStateManager.GoToState(itemContainer, ReorderListBoxItem.NotDraggingState, true);
             }
         }
@@ -639,23 +635,23 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         /// </summary>
         private void DragScroll()
         {
-            if (this.dragScrollDelta != 0)
+            if (_dragScrollDelta != 0)
             {
-                double scrollRatio = this.scrollViewer.ViewportHeight / this.scrollViewer.RenderSize.Height;
-                double adjustedDelta = this.dragScrollDelta * scrollRatio;
-                double newOffset = this.scrollViewer.VerticalOffset + adjustedDelta;
-                this.scrollViewer.ScrollToVerticalOffset(newOffset);
+                double scrollRatio = _scrollViewer.ViewportHeight / _scrollViewer.RenderSize.Height;
+                double adjustedDelta = _dragScrollDelta * scrollRatio;
+                double newOffset = _scrollViewer.VerticalOffset + adjustedDelta;
+                _scrollViewer.ScrollToVerticalOffset(newOffset);
 
-                this.Dispatcher.BeginInvoke(() => this.DragScroll());
+                Dispatcher.BeginInvoke(() => DragScroll());
 
-                double dragItemOffset = Canvas.GetTop(this.dragIndicator) +
-                    ((TranslateTransform)this.dragIndicator.RenderTransform).Y +
-                    this.dragIndicator.Height / 2;
-                this.UpdateDropTarget(dragItemOffset, true);
+                double dragItemOffset = Canvas.GetTop(_dragIndicator) +
+                    ((TranslateTransform)_dragIndicator.RenderTransform).Y +
+                    _dragIndicator.Height / 2;
+                UpdateDropTarget(dragItemOffset, true);
             }
             else
             {
-                VisualStateManager.GoToState(this.scrollViewer, ReorderListBox.ScrollViewerNotScrollingVisualState, true);
+                VisualStateManager.GoToState(_scrollViewer, ScrollViewerNotScrollingVisualState, true);
             }
         }
 
@@ -667,23 +663,23 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         private void UpdateDropTarget(double dragItemOffset, bool showTransition)
         {
             Point dragPoint = ReorderListBox.GetHostCoordinates(
-                new Point(this.dragInterceptorRect.Left, this.dragInterceptorRect.Top + dragItemOffset));
-            IEnumerable<UIElement> targetElements = VisualTreeHelper.FindElementsInHostCoordinates(dragPoint, this.itemsPanel);
+                new Point(_dragInterceptorRect.Left, _dragInterceptorRect.Top + dragItemOffset));
+            IEnumerable<UIElement> targetElements = VisualTreeHelper.FindElementsInHostCoordinates(dragPoint, _itemsPanel);
             ReorderListBoxItem targetItem = targetElements.OfType<ReorderListBoxItem>().FirstOrDefault();
             if (targetItem != null)
             {
-                GeneralTransform targetTransform = targetItem.DragHandle.TransformToVisual(this.dragInterceptor);
+                GeneralTransform targetTransform = targetItem.DragHandle.TransformToVisual(_dragInterceptor);
                 Rect targetRect = targetTransform.TransformBounds(new Rect(new Point(0, 0), targetItem.DragHandle.RenderSize));
                 double targetCenter = (targetRect.Top + targetRect.Bottom) / 2;
 
-                int targetIndex = this.itemsPanel.Children.IndexOf(targetItem);
-                int childrenCount = this.itemsPanel.Children.Count;
+                int targetIndex = _itemsPanel.Children.IndexOf(targetItem);
+                int childrenCount = _itemsPanel.Children.Count;
                 bool after = dragItemOffset > targetCenter;
 
                 ReorderListBoxItem indicatorItem = null;
                 if (!after && targetIndex > 0)
                 {
-                    ReorderListBoxItem previousItem = (ReorderListBoxItem)this.itemsPanel.Children[targetIndex - 1];
+                    ReorderListBoxItem previousItem = (ReorderListBoxItem)_itemsPanel.Children[targetIndex - 1];
                     if (previousItem.Tag as string == ReorderListBoxItem.DropAfterIndicatorState)
                     {
                         indicatorItem = previousItem;
@@ -691,7 +687,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                 }
                 else if (after && targetIndex < childrenCount - 1)
                 {
-                    ReorderListBoxItem nextItem = (ReorderListBoxItem)this.itemsPanel.Children[targetIndex + 1];
+                    ReorderListBoxItem nextItem = (ReorderListBoxItem)_itemsPanel.Children[targetIndex + 1];
                     if (nextItem.Tag as string == ReorderListBoxItem.DropBeforeIndicatorState)
                     {
                         indicatorItem = nextItem;
@@ -699,7 +695,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                 }
                 if (indicatorItem == null)
                 {
-                    targetItem.DropIndicatorHeight = this.dragIndicator.Height;
+                    targetItem.DropIndicatorHeight = _dragIndicator.Height;
                     string dropIndicatorState = after ?
                         ReorderListBoxItem.DropAfterIndicatorState : ReorderListBoxItem.DropBeforeIndicatorState;
                     VisualStateManager.GoToState(targetItem, dropIndicatorState, showTransition);
@@ -711,7 +707,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                 {
                     if (i >= 0 && i < childrenCount)
                     {
-                        ReorderListBoxItem nearbyItem = (ReorderListBoxItem)this.itemsPanel.Children[i];
+                        ReorderListBoxItem nearbyItem = (ReorderListBoxItem)_itemsPanel.Children[i];
                         if (nearbyItem != indicatorItem)
                         {
                             VisualStateManager.GoToState(nearbyItem, ReorderListBoxItem.NoDropIndicatorState, showTransition);
@@ -720,7 +716,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                     }
                 }
 
-                this.UpdateDropTargetIndex(targetItem, after);
+                UpdateDropTargetIndex(targetItem, after);
             }
         }
 
@@ -729,8 +725,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         /// </summary>
         private void UpdateDropTargetIndex(ReorderListBoxItem targetItemContainer, bool after)
         {
-            int dragItemIndex = this.Items.IndexOf(this.dragItem);
-            int targetItemIndex = this.Items.IndexOf(targetItemContainer.Content);
+            int dragItemIndex = Items.IndexOf(_dragItem);
+            int targetItemIndex = Items.IndexOf(targetItemContainer.Content);
 
             int newDropTargetIndex;
             if (targetItemIndex == dragItemIndex)
@@ -742,9 +738,9 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                 newDropTargetIndex = targetItemIndex + (after ? 1 : 0) - (targetItemIndex >= dragItemIndex ? 1 : 0);
             }
 
-            if (newDropTargetIndex != this.dropTargetIndex)
+            if (newDropTargetIndex != _dropTargetIndex)
             {
-                this.dropTargetIndex = newDropTargetIndex;
+                _dropTargetIndex = newDropTargetIndex;
             }
         }
 
@@ -753,7 +749,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         /// </summary>
         private void ClearDropTarget()
         {
-            foreach (ReorderListBoxItem itemContainer in this.itemsPanel.Children)
+            foreach (ReorderListBoxItem itemContainer in this._itemsPanel.Children)
             {
                 VisualStateManager.GoToState(itemContainer, ReorderListBoxItem.NoDropIndicatorState, false);
                 itemContainer.Tag = null;
@@ -765,7 +761,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         /// </summary>
         private bool MoveItem(object item, int toIndex)
         {
-            object itemsSource = this.ItemsSource;
+            object itemsSource = ItemsSource;
 
             System.Collections.IList sourceList = itemsSource as System.Collections.IList;
             if (!(sourceList is System.Collections.Specialized.INotifyCollectionChanged))
@@ -773,13 +769,13 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                 // If the source does not implement INotifyCollectionChanged, then there's no point in
                 // changing the source because changes to it will not be synchronized with the list items.
                 // So, just change the ListBox's view of the items.
-                sourceList = this.Items;
+                sourceList = Items;
             }
 
             int fromIndex = sourceList.IndexOf(item);
             if (fromIndex != toIndex)
             {
-                double scrollOffset = this.scrollViewer.VerticalOffset;
+                double scrollOffset = _scrollViewer.VerticalOffset;
 
                 sourceList.RemoveAt(fromIndex);
                 sourceList.Insert(toIndex, item);
@@ -787,7 +783,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                 if (fromIndex <= scrollOffset && toIndex > scrollOffset)
                 {
                     // Correct the scroll offset for the removed item so that the list doesn't appear to jump.
-                    this.scrollViewer.ScrollToVerticalOffset(scrollOffset - 1);
+                    _scrollViewer.ScrollToVerticalOffset(scrollOffset - 1);
                 }
                 return true;
             }
@@ -810,48 +806,48 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         /// <param name="lastIndex">Returns the index of the last item in view (or -1 if there are no items).</param>
         public void GetViewIndexRange(bool includePartial, out int firstIndex, out int lastIndex)
         {
-            if (this.Items.Count > 0)
+            if (Items.Count > 0)
             {
                 firstIndex = 0;
-                lastIndex = this.Items.Count - 1;
+                lastIndex = Items.Count - 1;
 
-                if (this.scrollViewer != null && this.Items.Count > 1)
+                if (_scrollViewer != null && Items.Count > 1)
                 {
                     Thickness scrollViewerPadding = new Thickness(
-                        this.scrollViewer.BorderThickness.Left + this.scrollViewer.Padding.Left,
-                        this.scrollViewer.BorderThickness.Top + this.scrollViewer.Padding.Top,
-                        this.scrollViewer.BorderThickness.Right + this.scrollViewer.Padding.Right,
-                        this.scrollViewer.BorderThickness.Bottom + this.scrollViewer.Padding.Bottom);
+                        _scrollViewer.BorderThickness.Left + _scrollViewer.Padding.Left,
+                        _scrollViewer.BorderThickness.Top + _scrollViewer.Padding.Top,
+                        _scrollViewer.BorderThickness.Right + _scrollViewer.Padding.Right,
+                        _scrollViewer.BorderThickness.Bottom + _scrollViewer.Padding.Bottom);
 
-                    GeneralTransform scrollViewerTransform = this.scrollViewer.TransformToVisual(
+                    GeneralTransform scrollViewerTransform = _scrollViewer.TransformToVisual(
                         Application.Current.RootVisual);
                     Rect scrollViewerRect = scrollViewerTransform.TransformBounds(
-                        new Rect(new Point(0, 0), this.scrollViewer.RenderSize));
+                        new Rect(new Point(0, 0), _scrollViewer.RenderSize));
 
-                    Point topPoint = ReorderListBox.GetHostCoordinates(new Point(
+                    Point topPoint = GetHostCoordinates(new Point(
                         scrollViewerRect.Left + scrollViewerPadding.Left,
                         scrollViewerRect.Top + scrollViewerPadding.Top));
                     IEnumerable<UIElement> topElements = VisualTreeHelper.FindElementsInHostCoordinates(
-                        topPoint, this.scrollViewer);
+                        topPoint, _scrollViewer);
                     ReorderListBoxItem topItem = topElements.OfType<ReorderListBoxItem>().FirstOrDefault();
                     if (topItem != null)
                     {
                         GeneralTransform itemTransform = topItem.TransformToVisual(Application.Current.RootVisual);
                         Rect itemRect = itemTransform.TransformBounds(new Rect(new Point(0, 0), topItem.RenderSize));
 
-                        firstIndex = this.ItemContainerGenerator.IndexFromContainer(topItem);
-                        if (!includePartial && firstIndex < this.Items.Count - 1 &&
+                        firstIndex = ItemContainerGenerator.IndexFromContainer(topItem);
+                        if (!includePartial && firstIndex < Items.Count - 1 &&
                             itemRect.Top < scrollViewerRect.Top && itemRect.Bottom < scrollViewerRect.Bottom)
                         {
                             firstIndex++;
                         }
                     }
 
-                    Point bottomPoint = ReorderListBox.GetHostCoordinates(new Point(
+                    Point bottomPoint = GetHostCoordinates(new Point(
                         scrollViewerRect.Left + scrollViewerPadding.Left,
                         scrollViewerRect.Bottom - scrollViewerPadding.Bottom - 1));
                     IEnumerable<UIElement> bottomElements = VisualTreeHelper.FindElementsInHostCoordinates(
-                        bottomPoint, this.scrollViewer);
+                        bottomPoint, _scrollViewer);
                     ReorderListBoxItem bottomItem = bottomElements.OfType<ReorderListBoxItem>().FirstOrDefault();
                     if (bottomItem != null)
                     {
@@ -859,7 +855,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                         Rect itemRect = itemTransform.TransformBounds(
                             new Rect(new Point(0, 0), bottomItem.RenderSize));
 
-                        lastIndex = this.ItemContainerGenerator.IndexFromContainer(bottomItem);
+                        lastIndex = ItemContainerGenerator.IndexFromContainer(bottomItem);
                         if (!includePartial && lastIndex > firstIndex &&
                             itemRect.Bottom > scrollViewerRect.Bottom && itemRect.Top > scrollViewerRect.Top)
                         {
@@ -884,7 +880,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         /// </summary>
         private class RearrangeItemInfo
         {
-            public object Item = null;
+            public object Item;
             public int FromIndex = -1;
             public int ToIndex = -1;
             public double FromY = Double.NaN;
@@ -921,22 +917,22 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                 throw new ArgumentNullException("rearrangeAction");
             }
 
-            if (this.rearrangeCanvas == null)
+            if (_rearrangeCanvas == null)
             {
                 throw new InvalidOperationException("ReorderListBox control template is missing " +
-                    "a part required for rearrange: " + ReorderListBox.RearrangeCanvasPart);
+                    "a part required for rearrange: " + RearrangeCanvasPart);
             }
 
-            if (this.rearrangeQueue == null)
+            if (_rearrangeQueue == null)
             {
-                this.rearrangeQueue = new Queue<KeyValuePair<Action, Duration>>();
-                this.scrollViewer.ScrollToVerticalOffset(this.scrollViewer.VerticalOffset); // Stop scrolling.
-                this.Dispatcher.BeginInvoke(() =>
-                    this.AnimateRearrangeInternal(rearrangeAction, animationDuration));
+                _rearrangeQueue = new Queue<KeyValuePair<Action, Duration>>();
+                _scrollViewer.ScrollToVerticalOffset(_scrollViewer.VerticalOffset); // Stop scrolling.
+                Dispatcher.BeginInvoke(() =>
+                    AnimateRearrangeInternal(rearrangeAction, animationDuration));
             }
             else
             {
-                this.rearrangeQueue.Enqueue(new KeyValuePair<Action, Duration>(rearrangeAction, animationDuration));
+                _rearrangeQueue.Enqueue(new KeyValuePair<Action, Duration>(rearrangeAction, animationDuration));
             }
         }
 
@@ -947,27 +943,27 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         {
             // Find the indices of items in the view. Animations are optimzed to only include what is visible.
             int viewFirstIndex, viewLastIndex;
-            this.GetViewIndexRange(true, out viewFirstIndex, out viewLastIndex);
+            GetViewIndexRange(true, out viewFirstIndex, out viewLastIndex);
 
             // Collect information about items and their positions before any changes are made.
-            RearrangeItemInfo[] rearrangeMap = this.BuildRearrangeMap(viewFirstIndex, viewLastIndex);
+            RearrangeItemInfo[] rearrangeMap = BuildRearrangeMap(viewFirstIndex, viewLastIndex);
 
             // Call the rearrange action callback which actually makes the changes to the source list.
             // Assuming the source list is properly bound, the base class will pick up the changes.
             rearrangeAction();
 
-            this.rearrangeCanvas.Visibility = Visibility.Visible;
+            _rearrangeCanvas.Visibility = Visibility.Visible;
 
             // Update the layout (positions of all items) based on the changes that were just made.
-            this.UpdateLayout();
+            UpdateLayout();
 
             // Find the NEW last-index in view, which may have changed if the items are not constant heights
             // or if the view includes the end of the list.
-            viewLastIndex = this.FindViewLastIndex(viewFirstIndex);
+            viewLastIndex = FindViewLastIndex(viewFirstIndex);
 
             // Collect information about the NEW items and their NEW positions, linking up to information
             // about items which existed before.
-            RearrangeItemInfo[] rearrangeMap2 = this.BuildRearrangeMap2(rearrangeMap,
+            RearrangeItemInfo[] rearrangeMap2 = BuildRearrangeMap2(rearrangeMap,
                 viewFirstIndex, viewLastIndex);
 
             // Find all the movements that need to be animated.
@@ -981,32 +977,32 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                 movesWithinView.Concat(movesOutOfView).Concat(movesInToView);
 
             // Set a clip rect so the animations don't go outside the listbox.
-            this.rearrangeCanvas.Clip = new RectangleGeometry() { Rect = new Rect(new Point(0, 0), this.rearrangeCanvas.RenderSize) };
+            _rearrangeCanvas.Clip = new RectangleGeometry() { Rect = new Rect(new Point(0, 0), _rearrangeCanvas.RenderSize) };
 
             // Create the animation storyboard.
-            Storyboard rearrangeStoryboard = this.CreateRearrangeStoryboard(visibleMoves, animationDuration);
+            Storyboard rearrangeStoryboard = CreateRearrangeStoryboard(visibleMoves, animationDuration);
             if (rearrangeStoryboard.Children.Count > 0)
             {
                 // The storyboard uses an overlay canvas with item snapshots.
                 // While that is playing, hide the real items.
-                this.scrollViewer.Visibility = Visibility.Collapsed;
+                _scrollViewer.Visibility = Visibility.Collapsed;
 
                 rearrangeStoryboard.Completed += delegate
                 {
                     rearrangeStoryboard.Stop();
-                    this.rearrangeCanvas.Children.Clear();
-                    this.rearrangeCanvas.Visibility = Visibility.Collapsed;
-                    this.scrollViewer.Visibility = Visibility.Visible;
+                    _rearrangeCanvas.Children.Clear();
+                    _rearrangeCanvas.Visibility = Visibility.Collapsed;
+                    _scrollViewer.Visibility = Visibility.Visible;
 
-                    this.AnimateNextRearrange();
+                    AnimateNextRearrange();
                 };
 
-                this.Dispatcher.BeginInvoke(() => rearrangeStoryboard.Begin());
+                Dispatcher.BeginInvoke(() => rearrangeStoryboard.Begin());
             }
             else
             {
-                this.rearrangeCanvas.Visibility = Visibility.Collapsed;
-                this.AnimateNextRearrange();
+                _rearrangeCanvas.Visibility = Visibility.Collapsed;
+                AnimateNextRearrange();
             }
         }
 
@@ -1015,15 +1011,15 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         /// </summary>
         private void AnimateNextRearrange()
         {
-            if (this.rearrangeQueue.Count > 0)
+            if (_rearrangeQueue.Count > 0)
             {
-                KeyValuePair<Action, Duration> nextRearrange = this.rearrangeQueue.Dequeue();
-                this.Dispatcher.BeginInvoke(() =>
-                    this.AnimateRearrangeInternal(nextRearrange.Key, nextRearrange.Value));
+                KeyValuePair<Action, Duration> nextRearrange = _rearrangeQueue.Dequeue();
+                Dispatcher.BeginInvoke(() =>
+                    AnimateRearrangeInternal(nextRearrange.Key, nextRearrange.Value));
             }
             else
             {
-                this.rearrangeQueue = null;
+                _rearrangeQueue = null;
             }
         }
 
@@ -1032,11 +1028,11 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         /// </summary>
         private RearrangeItemInfo[] BuildRearrangeMap(int viewFirstIndex, int viewLastIndex)
         {
-            RearrangeItemInfo[] map = new RearrangeItemInfo[this.Items.Count];
+            RearrangeItemInfo[] map = new RearrangeItemInfo[Items.Count];
 
             for (int i = 0; i < map.Length; i++)
             {
-                object item = this.Items[i];
+                object item = Items[i];
 
                 RearrangeItemInfo info = new RearrangeItemInfo()
                 {
@@ -1048,10 +1044,10 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                 if (viewFirstIndex <= i && i <= viewLastIndex)
                 {
                     ReorderListBoxItem itemContainer = (ReorderListBoxItem)
-                        this.ItemContainerGenerator.ContainerFromIndex(i);
+                        ItemContainerGenerator.ContainerFromIndex(i);
                     if (itemContainer != null)
                     {
-                        GeneralTransform itemTransform = itemContainer.TransformToVisual(this.rearrangeCanvas);
+                        GeneralTransform itemTransform = itemContainer.TransformToVisual(_rearrangeCanvas);
                         Point itemPoint = itemTransform.Transform(new Point(0, 0));
                         info.FromY = itemPoint.Y;
                         info.Height = itemContainer.RenderSize.Height;
@@ -1070,11 +1066,11 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         private RearrangeItemInfo[] BuildRearrangeMap2(RearrangeItemInfo[] map,
             int viewFirstIndex, int viewLastIndex)
         {
-            RearrangeItemInfo[] map2 = new RearrangeItemInfo[this.Items.Count];
+            RearrangeItemInfo[] map2 = new RearrangeItemInfo[Items.Count];
 
             for (int i = 0; i < map2.Length; i++)
             {
-                object item = this.Items[i];
+                object item = Items[i];
 
                 // Try to find the same item in the pre-rearrange info.
                 RearrangeItemInfo info = map.FirstOrDefault(rii => rii.ToIndex < 0 && rii.Item == item);
@@ -1092,10 +1088,10 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                 if (viewFirstIndex <= i && i <= viewLastIndex)
                 {
                     ReorderListBoxItem itemContainer = (ReorderListBoxItem)
-                        this.ItemContainerGenerator.ContainerFromIndex(i);
+                        ItemContainerGenerator.ContainerFromIndex(i);
                     if (itemContainer != null)
                     {
-                        GeneralTransform itemTransform = itemContainer.TransformToVisual(this.rearrangeCanvas);
+                        GeneralTransform itemTransform = itemContainer.TransformToVisual(_rearrangeCanvas);
                         Point itemPoint = itemTransform.Transform(new Point(0, 0));
                         info.ToY = itemPoint.Y;
                         info.Height = itemContainer.RenderSize.Height;
@@ -1120,15 +1116,15 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         {
             int lastIndex = firstIndex;
 
-            GeneralTransform scrollViewerTransform = this.scrollViewer.TransformToVisual(
+            GeneralTransform scrollViewerTransform = _scrollViewer.TransformToVisual(
                 Application.Current.RootVisual);
             Rect scrollViewerRect = scrollViewerTransform.TransformBounds(
-                new Rect(new Point(0, 0), this.scrollViewer.RenderSize));
+                new Rect(new Point(0, 0), _scrollViewer.RenderSize));
 
-            while (lastIndex < this.Items.Count - 1)
+            while (lastIndex < Items.Count - 1)
             {
                 ReorderListBoxItem itemContainer = (ReorderListBoxItem)
-                    this.ItemContainerGenerator.ContainerFromIndex(lastIndex + 1);
+                    ItemContainerGenerator.ContainerFromIndex(lastIndex + 1);
                 if (itemContainer == null)
                 {
                     break;
@@ -1161,12 +1157,12 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
 
             foreach (RearrangeItemInfo move in visibleMoves)
             {
-                Size itemSize = new Size(this.rearrangeCanvas.RenderSize.Width, move.Height);
+                Size itemSize = new Size(_rearrangeCanvas.RenderSize.Width, move.Height);
 
                 ReorderListBoxItem itemContainer = null;
                 if (move.ToIndex >= 0)
                 {
-                    itemContainer = (ReorderListBoxItem)this.ItemContainerGenerator.ContainerFromIndex(move.ToIndex);
+                    itemContainer = (ReorderListBoxItem)ItemContainerGenerator.ContainerFromIndex(move.ToIndex);
                 }
                 if (itemContainer == null)
                 {
@@ -1178,8 +1174,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                     itemContainer = temporaryItemContainer;
                     itemContainer.Width = itemSize.Width;
                     itemContainer.Height = itemSize.Height;
-                    this.rearrangeCanvas.Children.Add(itemContainer);
-                    this.PrepareContainerForItemOverride(itemContainer, move.Item);
+                    _rearrangeCanvas.Children.Add(itemContainer);
+                    PrepareContainerForItemOverride(itemContainer, move.Item);
                     itemContainer.UpdateLayout();
                 }
 
@@ -1192,11 +1188,11 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
                 itemImage.Height = itemSize.Height;
                 itemImage.Source = itemSnapshot;
                 itemImage.RenderTransform = new TranslateTransform();
-                this.rearrangeCanvas.Children.Add(itemImage);
+                _rearrangeCanvas.Children.Add(itemImage);
 
                 if (itemContainer == temporaryItemContainer)
                 {
-                    this.rearrangeCanvas.Children.Remove(itemContainer);
+                    _rearrangeCanvas.Children.Remove(itemContainer);
                 }
 
                 if (!Double.IsNaN(move.FromY) && !Double.IsNaN(move.ToY))
@@ -1297,12 +1293,17 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         #endregion
 
 
-        //public new event PropertyChangedEventHandler PropertyChanged;
-        //protected new void RaisePropertyChanged(PropertyChangedEventArgs e)
+        //#region PropertyChanged
+        //public event PropertyChangedEventHandler PropertyChanged;
+        //[NotifyPropertyChangedInvocator]
+
+        //protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         //{
-        //    if (PropertyChanged != null)
-        //        PropertyChanged(this, e);
+        //    PropertyChangedEventHandler handler = PropertyChanged;
+        //    if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         //}
+        //#endregion
+
 
         #region This fixes ´TwoWay binding to selectedItems 
 
@@ -1332,7 +1333,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
       UnsubscribeFromEvents();
 
       //Move items from the selected items list to the list box selection
-      Transfer(SmartSelectedItems as IList, base.SelectedItems);
+      Transfer(SmartSelectedItems as IList, SelectedItems);
 
       //subscribe to the events again so we know when changes are made
       SubscribeToEvents();
@@ -1344,7 +1345,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
       UnsubscribeFromEvents();
 
       //Move items from the selected items list to the list box selection
-      Transfer(base.SelectedItems, SmartSelectedItems as IList);
+      Transfer(SelectedItems, SmartSelectedItems as IList);
 
       //subscribe to the events again so we know when changes are made
       SubscribeToEvents();
@@ -1360,7 +1361,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
       }
     }
 
-    private void Transfer(System.Collections.IList source, IList target)
+    private void Transfer(IList source, IList target)
     {
       if (source == null || target == null)
       {
