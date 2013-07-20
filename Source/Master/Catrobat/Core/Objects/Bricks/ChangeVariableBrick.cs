@@ -57,6 +57,11 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
+        internal override void LoadReference()
+        {
+            _userVariableReference.LoadReference();
+        }
+
         public override DataObject Copy()
         {
             var newBrick = new ChangeVariableBrick();

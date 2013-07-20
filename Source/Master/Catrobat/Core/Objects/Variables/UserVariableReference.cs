@@ -52,17 +52,17 @@ namespace Catrobat.Core.Objects.Variables
             return xRoot;
         }
 
+        internal override void LoadReference()
+        {
+            UserVariable = ReferenceHelper.GetReferenceObject(this, _reference) as UserVariable;
+        }
+
         public DataObject Copy()
         {
             var newUserVariableRef = new UserVariableReference();
             newUserVariableRef.UserVariable = _userVariable;
 
             return newUserVariableRef;
-        }
-
-        internal override void LoadReference()
-        {
-            UserVariable = ReferenceHelper.GetReferenceObject(this, _reference) as UserVariable;
         }
     }
 }

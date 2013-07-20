@@ -5,6 +5,7 @@ using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
+using Catrobat.Core.Objects.Variables;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
@@ -943,6 +944,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         {
             if (result == MessageBoxResult.OK)
             {
+                var userVariableEntries = CurrentProject.VariableList.ObjectVariableList.ObjectVariableEntries;
+                ObjectVariableEntry entryToRemove = null;
+                foreach (var entry in userVariableEntries)
+                {
+                    if(entry.Sprite == SelectedSprite)
+                        entryToRemove = entry;
+                }
+                if(entryToRemove != null)
+                    userVariableEntries.Remove(entryToRemove);
+
                 SelectedSprite.Delete();
                 Sprites.Remove(SelectedSprite);
                 CatrobatContext.GetContext().CleanUpSpriteReferences(SelectedSprite);

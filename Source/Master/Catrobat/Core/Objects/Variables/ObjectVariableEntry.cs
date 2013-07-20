@@ -11,7 +11,7 @@ namespace Catrobat.Core.Objects.Variables
     public class ObjectVariableEntry : DataObject
     {
         private SpriteReference _spriteReference;
-        public SpriteReference SpriteReference
+        internal SpriteReference SpriteReference
         {
             get { return _spriteReference; }
             set
@@ -22,6 +22,34 @@ namespace Catrobat.Core.Objects.Variables
                 }
 
                 _spriteReference = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public Sprite Sprite
+        {
+            get
+            {
+                if (_spriteReference == null)
+                {
+                    return null;
+                }
+
+                return _spriteReference.Sprite;
+            }
+            set
+            {
+                if (_spriteReference == null)
+                    _spriteReference = new SpriteReference();
+
+                if (_spriteReference.Sprite == value)
+                    return;
+
+                _spriteReference.Sprite = value;
+
+                if (value == null)
+                    _spriteReference = null;
+
                 RaisePropertyChanged();
             }
         }

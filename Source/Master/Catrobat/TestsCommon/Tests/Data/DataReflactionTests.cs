@@ -28,7 +28,6 @@ namespace Catrobat.TestsCommon.Tests.Data
         // Bricks that must be tested manually
         public List<Type> ExcludedBricks = new List<Type>
         {
-            typeof(LoopBeginBrick),
             typeof(LoopEndBrick),
             typeof(ForeverBrick),
             typeof(RepeatBrick)
@@ -232,7 +231,7 @@ namespace Catrobat.TestsCommon.Tests.Data
                 var sprite = project.SpriteList.Sprites[spriteIndex];
 
                 int costumeIndex = _rand.Next(sprite.Costumes.Costumes.Count - 1);
-                var costume = sprite.Costumes.Costumes[spriteIndex];
+                var costume = sprite.Costumes.Costumes[costumeIndex];
                 return costume;
             }
 
@@ -242,21 +241,17 @@ namespace Catrobat.TestsCommon.Tests.Data
                 var sprite = project.SpriteList.Sprites[spriteIndex];
 
                 int soundIndex = _rand.Next(sprite.Sounds.Sounds.Count - 1);
-                var sound = sprite.Sounds.Sounds[spriteIndex];
+                var sound = sprite.Sounds.Sounds[soundIndex];
                 return sound;
             }
 
             if (type == typeof(UserVariableReference))
             {
-                int spriteIndex = _rand.Next(project.SpriteList.Sprites.Count - 1);
-                var sprite = project.SpriteList.Sprites[spriteIndex];
                 return new UserVariableReference();
             }
 
             if (type == typeof(LoopBeginBrickRef))
             {
-                int spriteIndex = _rand.Next(project.SpriteList.Sprites.Count - 1);
-                var sprite = project.SpriteList.Sprites[spriteIndex];
                 return new LoopBeginBrickRef()
                 {
                     Class = "Forever",
@@ -266,8 +261,6 @@ namespace Catrobat.TestsCommon.Tests.Data
 
             if (type == typeof(LoopEndBrickRef))
             {
-                int spriteIndex = _rand.Next(project.SpriteList.Sprites.Count - 1);
-                var sprite = project.SpriteList.Sprites[spriteIndex];
                 return new LoopEndBrickRef()
                 {
                     LoopEndBrick = new LoopEndBrick()

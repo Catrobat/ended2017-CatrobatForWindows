@@ -12,6 +12,7 @@ using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
+using Catrobat.Core.Objects.Variables;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Storage;
 using Catrobat.Core.ZIP;
@@ -378,6 +379,24 @@ namespace Catrobat.Core
                         {
                             (brick as PointToBrick).PointedSpriteReference = null;
                         }
+                    }
+                }
+            }
+        }
+
+        public void CleanUpVariableReferences(UserVariable deletedUserVariable, Sprite selectedSprite)
+        {
+            foreach (Script script in selectedSprite.Scripts.Scripts)
+            {
+                foreach (Brick brick in script.Bricks.Bricks)
+                {
+                    if (brick is SetVariableBrick)
+                    {
+                        (brick as SetVariableBrick).UserVariableReference = null;
+                    }
+                    else if (brick is ChangeVariableBrick)
+                    {
+                        (brick as ChangeVariableBrick).UserVariableReference = null;
                     }
                 }
             }
