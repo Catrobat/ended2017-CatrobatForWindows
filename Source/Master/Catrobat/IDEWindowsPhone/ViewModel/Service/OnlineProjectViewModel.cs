@@ -176,8 +176,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void LicenseAction()
         {
-            var browser = new WebBrowserTask();
-            browser.Uri = new Uri(ApplicationResources.ProjectLicenseUrl);
+            var browser = new WebBrowserTask {Uri = new Uri(ApplicationResources.ProjectLicenseUrl)};
             browser.Show();
         }
 
