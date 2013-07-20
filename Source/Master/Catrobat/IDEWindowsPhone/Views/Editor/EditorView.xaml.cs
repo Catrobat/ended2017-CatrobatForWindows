@@ -15,11 +15,6 @@ using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
-using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
-using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
-using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
-using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
-using Catrobat.IDEWindowsPhone.Views.Main;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -27,10 +22,8 @@ using System;
 using System.Windows.Controls;
 using System.Windows;
 using System.ComponentModel;
-using SoundState = Microsoft.Xna.Framework.Audio.SoundState;
 using Microsoft.Practices.ServiceLocation;
-using System.Collections.Generic;
-using System.Windows.Navigation;
+
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor
 {
@@ -39,7 +32,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         private readonly EditorViewModel _viewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
 
         private bool _updatePivot = true;
-        private bool _isSpriteDragging = false;
+        private bool _isSpriteDragging;
 
         public EditorView()
         {

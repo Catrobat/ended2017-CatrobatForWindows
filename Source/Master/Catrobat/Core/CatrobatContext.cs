@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
+using Catrobat.Core.Annotations;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
@@ -27,13 +29,81 @@ namespace Catrobat.Core
         public const string DefaultProjectName = "DefaultProject";
         public const string TempProjectImportZipPath = "Temp/ImportProjectZip";
         public const string TempProjectImportPath = "Temp/ImportProject";
-
         public const string TempPaintImagePath = "Temp/PaintImage";
-
-
         public ContextSaving ContextSaving;
+        
+
+        private static IContextHolder _holder;
+        public static CatrobatContext GetContext()
+        {
+            return _holder.GetContext();
+        }
+
+        public LocalSettings LocalSettings { get; private set; }
+
+        public string CurrentToken
+        {
+            get { return LocalSettings.CurrentToken; }
+
+            set
+            {
+                if (LocalSettings.CurrentToken == value)
+                {
+                    return;
+                }
+
+                LocalSettings.CurrentToken = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string CurrentUserEmail
+        {
+            get { return LocalSettings.CurrentUserEmail; }
+
+            set
+            {
+                if (LocalSettings.CurrentUserEmail == value)
+                {
+                    return;
+                }
+
+                LocalSettings.CurrentUserEmail = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private Project _currentProject;
+        public Project CurrentProject
+        {
+            get { return _currentProject; }
+            set
+            {
+                if (_currentProject == value)
+                {
+                    return;
+                }
+
+                _currentProject = value;
+                RaisePropertyChanged();
+                RaisePropertyChanged("LocalProjects");
+                UpdateLocalProjects();
+            }
+        }
+
         private ObservableCollection<ProjectDummyHeader> _localProjects;
+        public ObservableCollection<ProjectDummyHeader> LocalProjects
+        {
+            get
+            {
+                if (_localProjects == null)
+                {
+                    UpdateLocalProjects();
+                }
+
+                return _localProjects;
+            }
+        }
 
 
         public CatrobatContext()
@@ -62,79 +132,6 @@ namespace Catrobat.Core
         {
             _holder = holder;
         }
-
-        private static IContextHolder _holder;
-
-        public static CatrobatContext GetContext()
-        {
-            return _holder.GetContext();
-        }
-
-        public LocalSettings LocalSettings { get; private set; }
-
-        public string CurrentToken
-        {
-            get { return LocalSettings.CurrentToken; }
-
-            set
-            {
-                if (LocalSettings.CurrentToken == value)
-                {
-                    return;
-                }
-
-                LocalSettings.CurrentToken = value;
-                OnPropertyChanged("CurrentToken");
-            }
-        }
-
-        public string CurrentUserEmail
-        {
-            get { return LocalSettings.CurrentUserEmail; }
-
-            set
-            {
-                if (LocalSettings.CurrentUserEmail == value)
-                {
-                    return;
-                }
-
-                LocalSettings.CurrentUserEmail = value;
-                OnPropertyChanged("CurrentUserEmail");
-            }
-        }
-
-        public Project CurrentProject
-        {
-            get { return _currentProject; }
-            set
-            {
-                if (_currentProject == value)
-                {
-                    return;
-                }
-
-                _currentProject = value;
-                OnPropertyChanged("CurrentProject");
-                OnPropertyChanged("LocalProjects");
-                UpdateLocalProjects();
-            }
-        }
-
-        public ObservableCollection<ProjectDummyHeader> LocalProjects
-        {
-            get
-            {
-                if (_localProjects == null)
-                {
-                    UpdateLocalProjects();
-                }
-
-                return _localProjects;
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public void SetCurrentProject(string projectName)
         {
@@ -169,29 +166,6 @@ namespace Catrobat.Core
         public void CreateNewProject(string projectName)
         {
             RestoreDefaultProject(projectName);
-
-            var projectHeader = new ProjectHeader
-            {
-                ApplicationBuildName = "",
-                ApplicationBuildNumber = 0,
-                ApplicationName = "Pocket Code",
-                ApplicationVersion = "0.0.1",
-                CatrobatLanguageVersion = (float)0.8,
-                DateTimeUpload = "",
-                Description = "",
-                DeviceName = DeviceInformationHelper.DeviceName,
-                MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
-                Platform = PlatformInformationHelper.GetPlatformName(),
-                PlatformVersion = PlatformInformationHelper.GetPlatformVersion(),
-                ProgramLicense = "http://developer.catrobat.org/agpl_v3",
-                ProgramName = "",
-                RemixOf = "",
-                ScreenHeight = DeviceInformationHelper.ScreenHeight,
-                ScreenWidth = DeviceInformationHelper.ScreenWidth,
-                Tags = "",
-                Url = "http://pocketcode.org/details/871",
-                UserHandle = ""
-            };
 
             CurrentProject.Save();
             UpdateLocalProjects();
@@ -409,12 +383,15 @@ namespace Catrobat.Core
             }
         }
 
-        private void OnPropertyChanged(string property)
+        #region PropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        [NotifyPropertyChangedInvocator]
+
+        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }

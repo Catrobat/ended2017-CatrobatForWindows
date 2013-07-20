@@ -15,11 +15,6 @@ namespace Catrobat.Core.Objects
 
         public bool IsRealObject { get; set; }
 
-        //public DataObject(XElement xElement)
-        //{
-        //  //this.LoadFromXML(xElement);
-        //}
-
         public virtual bool IsReorderEnabled
         {
             get { return true; }
@@ -57,13 +52,16 @@ namespace Catrobat.Core.Objects
         }
 
 
+        #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-
         [NotifyPropertyChangedInvocator]
+
         protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
+
     }
 }

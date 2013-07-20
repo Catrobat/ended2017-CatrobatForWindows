@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Scripts;
+using Catrobat.IDEWindowsPhone.Annotations;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
-    public class ScriptBrickCollection : IList, ICollection, IEnumerable, INotifyCollectionChanged, INotifyPropertyChanged
+    public class ScriptBrickCollection : IList, INotifyCollectionChanged
     {
         private ObservableCollection<Script> Scripts
         {
@@ -24,9 +26,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
                 return _selectedSprite.Scripts.Scripts;
             }
         }
-
         private Sprite _selectedSprite;
-
         private Brick _lastDeletedBrick;
         private Brick _lastInsertedBrick;
         private int _lastInsertedIndex;
@@ -160,17 +160,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, brick, brickIndex));
             }
         }
-
-        private void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged.Invoke(this, e);
-            }
-        }
-
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public void RemoveAt(int index)
         {
@@ -490,5 +479,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
         {
             get { return Scripts; }
         }
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }
