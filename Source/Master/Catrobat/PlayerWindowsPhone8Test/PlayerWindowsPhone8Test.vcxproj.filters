@@ -237,6 +237,9 @@
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.cpp">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClCompile>
+    <ClCompile Include="FormulaFunctionTests.cpp">
+      <Filter>FormulaTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
