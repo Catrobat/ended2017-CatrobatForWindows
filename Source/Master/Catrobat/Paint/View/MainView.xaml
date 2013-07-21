@@ -12,7 +12,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    xmlns:local="clr-namespace:Catrobat.Paint.View">
 
 
 
@@ -29,13 +30,19 @@
 
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-  <Grid x:Name="LayoutRoot" Background="Transparent">
-        <TextBlock Grid.Row="1"
-                   Grid.Column="1"
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <TextBlock
                    MinWidth="50"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Text="{Binding ExampleValue}"
-                   TextAlignment="Center" />
+                   TextAlignment="Center" Margin="242,38,227,703" />
+
+
+        <local:MvvmView1 Margin="0,70,0,71"/>
+
     </Grid>
+
+
+
 </phone:PhoneApplicationPage>
