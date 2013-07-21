@@ -14,6 +14,10 @@ namespace Catrobat.IDEWindowsPhone.Converters
 {
     public class FormulaToRichTextConverter : IValueConverter
     {
+        private static readonly SolidColorBrush VariableBrush = new SolidColorBrush(Colors.Purple);
+        private static readonly SolidColorBrush OperatorBrush = new SolidColorBrush(Colors.Black);
+        private static readonly SolidColorBrush ValueBrush = new SolidColorBrush(Colors.Green);
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is Formula))
@@ -31,20 +35,20 @@ namespace Catrobat.IDEWindowsPhone.Converters
             var variable = new TextBlock
             {
                 Text = "a",
-                Foreground = new SolidColorBrush(Colors.Purple)
+                Foreground = VariableBrush
             };
 
             var plus = new TextBlock
             {
                 Text = "+",
-                Foreground = new SolidColorBrush(Colors.Black),
+                Foreground = OperatorBrush,
                 Margin = new Thickness(4, 0, 4, 0)
             };
 
             var intValue = new TextBlock
             {
                 Text = "42",
-                Foreground = new SolidColorBrush(Colors.Green)
+                Foreground = ValueBrush
             };
 
             stackPanel.Children.Add(variable);
