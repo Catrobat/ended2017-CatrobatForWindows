@@ -1,20 +1,30 @@
 ﻿using System;
+using System.Dynamic;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Catrobat.Core.Storage;
 using Catrobat.IDECommon.Resources.Editor;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
+using Coding4Fun.Toolkit.Controls.Common;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Practices.ServiceLocation;
+using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDEWindowsPhone.Views.Main
 {
     public partial class TileGeneratorView : PhoneApplicationPage
     {
         private const string TileSavePath = "/Shared/ShellContent/";
+        private const string TileAbsolutSavePathPrefix = "isostore:";
+
+        public Size SmallTileSize = new Size(159, 159);
+        public Size NormalTileSize = new Size(336, 336);
+        public Size WideTileSize = new Size(672, 336);
 
         private readonly MainViewModel _mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
 
@@ -25,9 +35,20 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ImageSmallTile.Source = (BitmapImage) _mainViewModel.PinProjectHeader.Screenshot;
-            ImageNormalTile.Source = (BitmapImage) _mainViewModel.PinProjectHeader.Screenshot;
-            ImageWideTile.Source = (BitmapImage) _mainViewModel.PinProjectHeader.Screenshot;
+            var screenshot = (BitmapImage) _mainViewModel.PinProjectHeader.Screenshot;
+            var writeableScreenshot = new WriteableBitmap(screenshot);
+            writeableScreenshot.Invalidate();
+
+            var croppedScreenshot = writeableScreenshot.Crop(new Rect(
+                new Point(0, (screenshot.PixelHeight - screenshot.PixelWidth) / 2.0),
+                new Size(screenshot.PixelWidth, screenshot.PixelWidth)));
+
+            ImageSmallTile.Source = croppedScreenshot;
+            ImageNormalTile.Source = croppedScreenshot;
+            ImageWideTile.Source = screenshot;
+
+            TextBlockTiteNormal.Text = _mainViewModel.PinProjectHeader.ProjectName;
+            TextBlockTiteWide.Text = _mainViewModel.PinProjectHeader.ProjectName;
 
             BuildApplicationBar();
 
@@ -36,9 +57,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         private void AddTile()
         {
-            var smallTilePath = TileSavePath + _mainViewModel.PinProjectHeader.ProjectName + "/TileSmall.jpg";
-            var normalTilePath = TileSavePath + _mainViewModel.PinProjectHeader.ProjectName + "/NormalSmall.jpg";
-            var wideTilePath = TileSavePath + _mainViewModel.PinProjectHeader.ProjectName + "/WideSmall.jpg";
+            var smallTilePath = TileSavePath + _mainViewModel.PinProjectHeader.ProjectName + "/TileSmall.png";
+            var normalTilePath = TileSavePath + _mainViewModel.PinProjectHeader.ProjectName + "/NormalSmall.png";
+            var wideTilePath = TileSavePath + _mainViewModel.PinProjectHeader.ProjectName + "/WideSmall.png";
 
             SaveCanvas(CanvasSmallTile, 159, 159, smallTilePath);
             SaveCanvas(CanvasNormalTile, 336, 336, normalTilePath);
@@ -50,7 +71,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         public static void SaveCanvas(Canvas canvas, int width, int height, string filename)
         {
             var writeableImage = new WriteableBitmap(width, height);
-            writeableImage.Render(canvas, null);
+            Transform transform = new ScaleTransform
+            {
+                CenterX = 0,
+                CenterY = 0,
+                ScaleX = width / canvas.RenderSize.Width,
+                ScaleY = height / canvas.RenderSize.Height
+            };
+
+            writeableImage.Render(canvas, transform);
+            writeableImage.Invalidate();
 
             SaveImage(writeableImage, filename);
         }
@@ -60,7 +90,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
             using (var storage = StorageSystem.GetStorage())
             {
                 var fileStream = storage.OpenFile(fileName, StorageFileMode.Create, StorageFileAccess.Write);
-                image.SaveJpeg(fileStream, image.PixelWidth, image.PixelHeight, 0, 100);
+                PNGWriter.WritePNG(image, fileStream, 100);
+
                 fileStream.Close();
             }
         }
@@ -69,18 +100,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         {
             var tile = new FlipTileData
             {
-                Title = _mainViewModel.CurrentProjectHeader.ProjectName,
+                Title = "",
                 Count = 0,
-                //SmallBackgroundImage = new Uri(prefix + smallTilePath, UriKind.Absolute),
-                //BackgroundImage = new Uri(prefix + normalTilePath, UriKind.Absolute),
-                //WideBackgroundImage = new Uri(prefix + wideTilePath, UriKind.Absolute)
+                SmallBackgroundImage = new Uri(TileAbsolutSavePathPrefix + smallTilePath, UriKind.Absolute),
+                BackgroundImage = new Uri(TileAbsolutSavePathPrefix + normalTilePath, UriKind.Absolute),
+                WideBackgroundImage = new Uri(TileAbsolutSavePathPrefix + wideTilePath, UriKind.Absolute)
             };
 
             var path = "/Views/Main/PlayerLauncherView.xaml?ProjectName=" + _mainViewModel.PinProjectHeader.ProjectName;
 
             path += "&Dummy=" + DateTime.UtcNow.Ticks;
-
-            // TODO: read at start like this: "NavigationContext.QueryString["XXXXX"].ToString();"
 
             ShellTile.Create(new Uri(path, UriKind.Relative), tile, true);
             Navigation.NavigateBack();

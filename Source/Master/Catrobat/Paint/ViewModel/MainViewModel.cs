@@ -1,4 +1,6 @@
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace Catrobat.Paint.ViewModel
 {
@@ -29,6 +31,35 @@ namespace Catrobat.Paint.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
+            /// 
+            IncrementValue = new RelayCommand(() => IncrementValueExecute(), () => true);
+            ExampleValue = 0;
         }
+
+
+        public ICommand IncrementValue { get; private set; }
+        private void IncrementValueExecute()
+        {
+            ExampleValue += 1;
+        }
+
+
+        int _exampleValue;
+
+        public int ExampleValue
+        {
+            get
+            {
+                return _exampleValue;
+            }
+            set
+            {
+                _exampleValue = value;
+                RaisePropertyChanged("ExampleValue");
+            }
+        }
+
+        public ViewModelBase CurrentViewModel { get; set; }
+
     }
 }

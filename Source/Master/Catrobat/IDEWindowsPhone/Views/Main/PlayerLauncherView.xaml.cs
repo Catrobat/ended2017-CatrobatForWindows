@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Navigation;
+using Catrobat.Core;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Microsoft.Phone.Controls;
+using Microsoft.Practices.ServiceLocation;
 using PhoneDirect3DXamlAppComponent;
 using Size = Windows.Foundation.Size;
 
@@ -20,9 +23,25 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (IsNavigateBack)
+            if (NavigationContext.QueryString.ContainsKey("ProjectName"))
             {
-                Navigation.NavigateBack();
+                var projectName = NavigationContext.QueryString["ProjectName"] + 1; // TODO: remove + 1
+
+                try
+                {
+                    CatrobatContext.GetContext().SetCurrentProject(projectName);
+                }
+                catch (Exception)
+                {
+                    var projectNotValidViewModel = ServiceLocator.Current.GetInstance<ProjectNotValidViewModel>();
+                    projectNotValidViewModel.Error = PlayerLaunchingError.ProjectDowsNotExist;
+                    Navigation.NavigateTo(typeof(ProjectNotValidView));
+                }
+            }
+            else
+            {
+                if (IsNavigateBack)
+                    Navigation.NavigateBack();
             }
 
             base.OnNavigatedTo(e);

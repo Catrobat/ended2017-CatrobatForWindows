@@ -120,6 +120,9 @@
     <Compile Include="Controls\Buttons\ImageButton.cs" />
     <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
     <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
+    <Compile Include="Controls\FormulaControls\FormulaButton.xaml.cs">
+      <DependentUpon>FormulaButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ListPicker\ListPickerPage.xaml.cs">
       <DependentUpon>ListPickerPage.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,7 @@
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
+    <Compile Include="Converters\FormulaToRichTextConverter.cs" />
     <Compile Include="Converters\IntPixelConverter.cs" />
     <Compile Include="Converters\ImageSizeHeightConverter.cs" />
     <Compile Include="Converters\ImageSizeWidthConverter.cs" />
@@ -186,6 +190,7 @@
     <Compile Include="Themes\ThemeChooser.cs" />
     <Compile Include="ViewModel\Editor\Costumes\ImageSizeEntry.cs" />
     <Compile Include="ViewModel\Editor\Costumes\ImageSizeEntryCollection.cs" />
+    <Compile Include="ViewModel\Editor\Formula\FormulaEditorViewModel.cs" />
     <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\AddNewCostumeViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\ChangeCostumeViewModel.cs" />
@@ -194,6 +199,7 @@
     <Compile Include="ViewModel\Editor\Sprites\AddNewSpriteViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sprites\ChangeSpriteViewModel.cs" />
     <Compile Include="ViewModel\Main\AddNewProjectViewModel.cs" />
+    <Compile Include="ViewModel\Main\ProjectNotValidViewModel.cs" />
     <Compile Include="ViewModel\Main\ProjectImportViewModel.cs" />
     <Compile Include="ViewModel\Scripts\AddNewScriptBrickViewModel.cs" />
     <Compile Include="ViewModel\Scripts\NewBroadcastMessageViewModel.cs" />
@@ -220,6 +226,9 @@
     </Compile>
     <Compile Include="Views\Editor\EditorView.xaml.cs">
       <DependentUpon>EditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Formula\FormulaEditorView.xaml.cs">
+      <DependentUpon>FormulaEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\ProjectSettingsView.xaml.cs">
       <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
@@ -272,6 +281,9 @@
     </Compile>
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\ProjectNotValidView.xaml.cs">
+      <DependentUpon>ProjectNotValidView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Service\OnlineProjectView.xaml.cs">
       <DependentUpon>OnlineProjectView.xaml</DependentUpon>
@@ -326,6 +338,10 @@
     <Page Include="Controls\Buttons\ScreenshotButtonTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\FormulaButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ListPicker\ListPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -384,6 +400,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Editor\EditorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Formula\FormulaEditorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -459,6 +479,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Main\ProjectNotValidView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Service\OnlineProjectView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -502,10 +526,11 @@
     <Content Include="Content\Images\Misc\EditImage.png" />
     <Content Include="Content\Images\Misc\InProcess.png" />
     <Content Include="Content\Images\Screenshot\NoScreenshot.png" />
+    <Content Include="Content\Resources\DesignTime\screenshot.png" />
     <Content Include="fmodex_arm.dll" />
     <Content Include="fmodex_x86.dll" />
     <Content Include="italic.spritefont" />
-    <None Include="Content\Resources\SampleProjects\default.catroid" />
+    <Content Include="Content\Resources\default.catrobat" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
@@ -611,7 +636,6 @@
     <Content Include="Content\Images\Misc\AudioRecorder.png" />
     <Content Include="Content\Images\Misc\Camera.png" />
     <Content Include="Content\Images\Misc\Gallery.png" />
-    <Content Include="Content\Resources\default.catroid" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
@@ -653,6 +677,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Resources\SampleProjects\" />
     <Folder Include="Content\Theme\" />
   </ItemGroup>
   <ItemGroup>

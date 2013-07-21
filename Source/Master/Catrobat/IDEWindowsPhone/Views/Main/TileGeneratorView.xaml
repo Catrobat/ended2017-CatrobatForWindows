@@ -29,44 +29,58 @@
     <!--ContentPanel - place additional content here-->
     <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
       <Grid.RowDefinitions>
-        <RowDefinition Height="2*"/>
-        <RowDefinition Height="2*"/>
-        <RowDefinition Height="1*"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="0.5*"/>
       </Grid.RowDefinitions>
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition/>
           <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-          <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="1*"/>
-          </Grid.RowDefinitions>
-          <Border BorderThickness="4" Width="96" Height="96" BorderBrush="White">
-            <Canvas Name="CanvasSmallTile" Width="88" Height="88" Background="Teal"  Grid.Row="0">
-              <Image Name="ImageSmallTile" Margin="0 -30"  Width="80" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Image.Clip>
-                  <EllipseGeometry RadiusX="40" RadiusY="40" Center="40,70"/>
-                </Image.Clip>
-              </Image>
-            </Canvas>
-          </Border>
-          <TextBlock Grid.Row="1" Text="Small tile" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+        <Grid>
+          <Grid Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="3*"/>
+              <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Background="{StaticResource PhoneAccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Center">
+              <Border BorderThickness="4" Width="96" Height="96" BorderBrush="White">
+                <Canvas Name="CanvasSmallTile" Width="88" Height="88" Background="Transparent">
+                  <Image Name="ImageSmallTile" Margin="0" Height="88"  Width="88" 
+                     VerticalAlignment="Center" HorizontalAlignment="Center" Source="/Content/Resources/DesignTime/screenshot.png">
+                  </Image>
+                </Canvas>
+              </Border>
+            </Grid>
+            <TextBlock Grid.Row="1" Margin="15" Text="Small tile" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+          </Grid>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Margin="0 0 0 25">
           <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
           </Grid.RowDefinitions>
-          <Border BorderThickness="4" Width="176" Height="176" BorderBrush="White">
-            <Canvas Name="CanvasNormalTile" Width="168" Height="168" Background="Teal"  Grid.Row="0">
-              <Grid Name="GridNormalTile" Grid.Row="0">
-                <Image Width="168" Height="168" Name="ImageNormalTile"></Image>
-              </Grid>
-            </Canvas>
-          </Border>
-          <TextBlock Grid.Row="1" Text="Normal tile" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+          <Grid Background="{StaticResource PhoneAccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Border BorderThickness="4" Width="176" Height="176" BorderBrush="White">
+              <Canvas Name="CanvasNormalTile" Width="168" Height="168" 
+                    Background="Transparent">
+                <Grid Name="GridNormalTile">
+                  <Image Width="168" Height="168" Name="ImageNormalTile" Source="/Content/Resources/DesignTime/screenshot.png"></Image>
+                  <Grid>
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Background="#AA000000">
+                      <TextBlock Grid.Row="0" Text="ProjectName" Name="TextBlockTiteNormal" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" Margin="5" FontSize="14"></TextBlock>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Canvas>
+            </Border>
+          </Grid>
+          <TextBlock Grid.Row="1" Margin="15" Text="Normal tile" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
         </Grid>
       </Grid>
       <Grid Grid.Row="1">
@@ -74,13 +88,22 @@
           <RowDefinition Height="5*"/>
           <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Border BorderThickness="4" Width="344" Height="176" BorderBrush="White">
-          <Canvas Name="CanvasWideTile" Width="336" Height="168" Background="Teal"  Grid.Row="0">
-            <Grid Name="GridWideTile" Grid.Row="0">
-              <Image Width="336" Height="168" Name="ImageWideTile"></Image>
-            </Grid>
-          </Canvas>
-        </Border>
+        <Grid Background="{StaticResource PhoneAccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Center">
+          <Border BorderThickness="4" Width="344" Height="176" BorderBrush="White">
+            <Canvas Name="CanvasWideTile" Width="336" Height="168" Background="Transparent"  Grid.Row="0">
+              <Grid Name="GridWideTile" Width="336">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition />
+                  <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Margin="10">
+                  <TextBlock Name="TextBlockTiteWide" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="30"></TextBlock>
+                </Grid>
+                <Image Grid.Column="1" Height="168" Name="ImageWideTile" Source="/Content/Resources/DesignTime/screenshot.png"></Image>
+              </Grid>
+            </Canvas>
+          </Border>
+        </Grid>
         <TextBlock Grid.Row="1" Text="Wide tile" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
       </Grid>
     </Grid>

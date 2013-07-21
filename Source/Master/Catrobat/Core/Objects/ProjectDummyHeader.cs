@@ -9,7 +9,7 @@ namespace Catrobat.Core.Objects
 
         public int CompareTo(ProjectDummyHeader other)
         {
-            return ProjectName.CompareTo(other.ProjectName);
+            return System.String.Compare(ProjectName, other.ProjectName, System.StringComparison.Ordinal);
         }
     }
 }

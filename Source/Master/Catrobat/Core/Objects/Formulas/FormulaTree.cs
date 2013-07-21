@@ -108,7 +108,16 @@ namespace Catrobat.Core.Objects.Formulas
 
         public DataObject Copy()
         {
-            throw new NotImplementedException();
+            var newFormulaTree = new FormulaTree();
+
+            if (_leftChild != null)
+                newFormulaTree._leftChild.Copy();
+            if (_rightChild != null)
+                newFormulaTree._rightChild.Copy();
+            newFormulaTree._variableType = _variableType;
+            newFormulaTree._variableValue = _variableValue;
+
+            return newFormulaTree;
         }
     }
 }

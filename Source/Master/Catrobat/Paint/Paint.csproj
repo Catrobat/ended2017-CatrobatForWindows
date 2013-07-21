@@ -97,6 +97,9 @@
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MvvmView1.xaml.cs">
+      <DependentUpon>MvvmView1.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
@@ -132,6 +135,10 @@
   <ItemGroup>
     <Page Include="View\MainView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MvvmView1.xaml">
+      <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
