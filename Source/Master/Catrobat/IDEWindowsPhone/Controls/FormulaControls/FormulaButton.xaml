@@ -10,6 +10,9 @@
     d:DesignHeight="80" d:DesignWidth="200">
     
     <Grid x:Name="LayoutRoot">
-      <Button Name="ButtonFormula" Click="ButtonFormula_OnClick"></Button>
+      <Button Name="ButtonFormula" Click="ButtonFormula_OnClick">
+      
+        
+      </Button>
     </Grid>
 </UserControl>

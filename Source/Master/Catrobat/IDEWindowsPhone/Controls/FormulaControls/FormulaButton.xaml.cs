@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using Catrobat.Core.Objects.Formulas;
+using Catrobat.IDEWindowsPhone.Converters;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Formula;
 
@@ -18,7 +19,10 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
         private static void FormulaChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((FormulaButton) d).ButtonFormula.Content = e.NewValue.ToString();
+            var converter = new FormulaToRichTextConverter();
+            var richTextFormula = converter.Convert(e.NewValue, null, null, null);
+
+            ((FormulaButton)d).ButtonFormula.Content = richTextFormula;
         }
 
         private new static void IsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
