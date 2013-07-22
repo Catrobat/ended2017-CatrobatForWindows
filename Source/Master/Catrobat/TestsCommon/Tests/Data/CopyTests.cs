@@ -30,9 +30,9 @@ namespace Catrobat.TestsCommon.Tests.Data
             var sprite2 = project.SpriteList.Sprites[1];
             var sprite3 = project.SpriteList.Sprites[2];
 
-            var newSprite1 = sprite1.Copy() as Sprite;
-            var newSprite2 = sprite2.Copy() as Sprite;
-            var newSprite3 = sprite3.Copy() as Sprite;
+            var newSprite1 = sprite1.Copy(project) as Sprite;
+            var newSprite2 = sprite2.Copy(project) as Sprite;
+            var newSprite3 = sprite3.Copy(project) as Sprite;
 
             var pathCostumes = project.BasePath + "/" + Project.ImagesPath + "/";
             var pathSounds = project.BasePath + "/" + Project.SoundsPath + "/";

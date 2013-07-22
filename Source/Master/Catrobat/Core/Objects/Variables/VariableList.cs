@@ -8,7 +8,9 @@ namespace Catrobat.Core.Objects.Variables
         public ObjectVariableList ObjectVariableList;
         public ProgramVariableList ProgramVariableList;
 
-        public VariableList() {}
+        public VariableList()
+        {
+        }
 
         public VariableList(XElement xElement)
         {
@@ -28,6 +30,20 @@ namespace Catrobat.Core.Objects.Variables
             xRoot.Add(ProgramVariableList.CreateXML());
 
             return xRoot;
+        }
+
+        internal override void LoadReference()
+        {
+            ObjectVariableList.LoadReference();
+        }
+
+        public DataObject Copy()
+        {
+            var newVariableList = new VariableList();
+            newVariableList.ObjectVariableList = ObjectVariableList.Copy() as ObjectVariableList;
+            newVariableList.ProgramVariableList = ProgramVariableList.Copy() as ProgramVariableList;
+
+            return newVariableList;
         }
     }
 }

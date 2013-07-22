@@ -10,7 +10,7 @@ namespace Catrobat.Core.Objects.Variables
 {
     public class UserVariableReference : DataObject
     {
-        private string _reference;
+        internal string _reference;
 
         private UserVariable _userVariable;
         public UserVariable UserVariable
@@ -45,7 +45,7 @@ namespace Catrobat.Core.Objects.Variables
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("userVariableRef");
+            var xRoot = new XElement("userVariable");
 
             xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
 

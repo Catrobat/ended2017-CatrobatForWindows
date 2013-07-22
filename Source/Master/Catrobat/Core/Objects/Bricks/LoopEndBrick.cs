@@ -86,11 +86,5 @@ namespace Catrobat.Core.Objects.Bricks
 
             return newBrick;
         }
-
-        public void CopyReference(LoopEndBrick copiedFrom)
-        {
-            if (copiedFrom._loopBeginBrickReference != null)
-                _loopBeginBrickReference = copiedFrom._loopBeginBrickReference.Copy() as LoopBeginBrickRef;
-        }
     }
 }

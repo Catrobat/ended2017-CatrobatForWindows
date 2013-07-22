@@ -63,11 +63,5 @@ namespace Catrobat.Core.Objects.Scripts
         }
 
         public abstract DataObject Copy();
-
-        public void CopyReference(Script copiedFrom)
-        {
-            if (copiedFrom.Bricks != null)
-                _bricks.CopyReference(copiedFrom.Bricks);
-        }
     }
 }

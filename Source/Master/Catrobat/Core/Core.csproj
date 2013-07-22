@@ -82,6 +82,12 @@
     <Compile Include="Objects\Bricks\ClearGraphicEffectBrick.cs" />
     <Compile Include="Objects\Bricks\ComeToFrontBrick.cs" />
     <Compile Include="Objects\Bricks\ChangeVariableBrick.cs" />
+    <Compile Include="Objects\Bricks\IfLogicEndBrickReference.cs" />
+    <Compile Include="Objects\Bricks\IfLogicElseBrickReference.cs" />
+    <Compile Include="Objects\Bricks\IfLogicBeginBrickReference.cs" />
+    <Compile Include="Objects\Bricks\IfLogicEndBrick.cs" />
+    <Compile Include="Objects\Bricks\IfLogicElseBrick.cs" />
+    <Compile Include="Objects\Bricks\IfLogicBeginBrick.cs" />
     <Compile Include="Objects\Bricks\SetVariableBrick.cs" />
     <Compile Include="Objects\Bricks\ForeverBrick.cs" />
     <Compile Include="Objects\Bricks\GlideToBrick.cs" />
@@ -122,6 +128,8 @@
     <Compile Include="Objects\Costumes\CostumeReference.cs" />
     <Compile Include="Objects\DataObject.cs" />
     <Compile Include="Objects\DataRootObject.cs" />
+    <Compile Include="Objects\Formulas\RightChild.cs" />
+    <Compile Include="Objects\Formulas\LeftChild.cs" />
     <Compile Include="Objects\Formulas\Formula.cs" />
     <Compile Include="Objects\Formulas\FormulaTree.cs" />
     <Compile Include="Objects\OnlineProjectHeader.cs" />

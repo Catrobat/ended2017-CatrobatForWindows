@@ -6,7 +6,7 @@ namespace Catrobat.Core.Objects
 {
     public class SpriteReference : DataObject
     {
-        private string _reference;
+        internal string _reference;
 
         private Sprite _sprite;
         public Sprite Sprite

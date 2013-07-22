@@ -577,8 +577,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void CopySpriteAction()
         {
-            var newSprite = SelectedSprite.Copy() as Sprite;
-            Sprites.Add(newSprite);
+            var newSprite = SelectedSprite.Copy(CurrentProject) as Sprite;
+            if(newSprite != null)
+                Sprites.Add(newSprite);
         }
 
         private void DeleteSpriteAction()
@@ -656,7 +657,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             foreach (var costume in SelectedCostumes)
             {
                 var newCostume = costume.Copy() as Costume;
-                Costumes.Add(newCostume);
+                if(newCostume != null)
+                    Costumes.Add(newCostume);
             }
         }
 

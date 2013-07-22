@@ -47,5 +47,13 @@ namespace Catrobat.Core.Objects.Variables
 
             return xRoot;
         }
+
+        public DataObject Copy()
+        {
+            var newUserVariable = new UserVariable();
+            newUserVariable.Name = _name;
+
+            return newUserVariable;
+        }
     }
 }

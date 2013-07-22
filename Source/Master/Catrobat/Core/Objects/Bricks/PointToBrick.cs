@@ -65,8 +65,8 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            if (xRoot.Element("pointedObject") != null)
-                _pointedSpriteReference = new SpriteReference(xRoot.Element("pointedObject"));
+            if (xRoot.Element("object") != null)
+                _pointedSpriteReference = new SpriteReference(xRoot.Element("object"));
         }
 
         internal override XElement CreateXML()
@@ -91,16 +91,9 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy()
         {
             var newBrick = new PointToBrick();
+            newBrick.PointedSprite = PointedSprite;
 
             return newBrick;
-        }
-
-        public void CopyReference(PointToBrick copiedFrom)
-        {
-            if (copiedFrom._pointedSpriteReference != null)
-            {
-                _pointedSpriteReference = copiedFrom._pointedSpriteReference.Copy() as SpriteReference;
-            }
         }
     }
 }

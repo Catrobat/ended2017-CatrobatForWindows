@@ -60,15 +60,5 @@ namespace Catrobat.Core.Objects.Scripts
 
             return newScriptList;
         }
-
-        public void CopyReference(Sprite copiedFrom)
-        {
-            var pos = 0;
-            foreach (Script script in Scripts)
-            {
-                script.CopyReference(copiedFrom.Scripts.Scripts[pos]);
-                pos++;
-            }
-        }
     }
 }

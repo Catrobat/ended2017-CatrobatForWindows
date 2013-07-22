@@ -1,35 +1,34 @@
-﻿using System.ComponentModel;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Catrobat.Core.Misc.Helpers;
 
 namespace Catrobat.Core.Objects.Bricks
 {
-    public class LoopEndBrickRef : DataObject
+    public class IfLogicEndBrickReference : DataObject
     {
         internal string _reference;
 
-        private LoopEndBrick _loopEndBrick;
-        public LoopEndBrick LoopEndBrick
+        private IfLogicEndBrick _ifLogicEndBrick;
+        public IfLogicEndBrick IfLogicEndBrick
         {
-            get { return _loopEndBrick; }
+            get { return _ifLogicEndBrick; }
             set
             {
-                if (_loopEndBrick == value)
+                if (_ifLogicEndBrick == value)
                 {
                     return;
                 }
 
-                _loopEndBrick = value;
+                _ifLogicEndBrick = value;
                 RaisePropertyChanged();
             }
         }
 
 
-        public LoopEndBrickRef()
+        public IfLogicEndBrickReference()
         {
         }
 
-        public LoopEndBrickRef(XElement xElement)
+        public IfLogicEndBrickReference(XElement xElement)
         {
             LoadFromXML(xElement);
         }
@@ -41,7 +40,8 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("loopEndBrick");
+            var xRoot = new XElement("ifEndBrick");
+
             xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
 
             return xRoot;
@@ -49,15 +49,15 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            _loopEndBrick = ReferenceHelper.GetReferenceObject(this, _reference) as LoopEndBrick;
+            IfLogicEndBrick = ReferenceHelper.GetReferenceObject(this, _reference) as IfLogicEndBrick;
         }
 
         public DataObject Copy()
         {
-            var newLoopEndBrickRef = new LoopEndBrickRef();
-            newLoopEndBrickRef._loopEndBrick = _loopEndBrick;
+            var newIfLogicEndBrickRef = new IfLogicEndBrickReference();
+            newIfLogicEndBrickRef.IfLogicEndBrick = _ifLogicEndBrick;
 
-            return newLoopEndBrickRef;
-        }
+            return newIfLogicEndBrickRef;
+        }        
     }
 }

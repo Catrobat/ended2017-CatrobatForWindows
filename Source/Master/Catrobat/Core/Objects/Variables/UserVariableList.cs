@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Catrobat.Core.Objects.Variables
@@ -30,7 +28,7 @@ namespace Catrobat.Core.Objects.Variables
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("listOfVariables");
+            var xRoot = new XElement("list");
 
             foreach (UserVariable userVariable in UserVariables)
             {
@@ -38,6 +36,16 @@ namespace Catrobat.Core.Objects.Variables
             }
 
             return xRoot;
+        }
+
+        public DataObject Copy()
+        {
+            var newUserVariableList = new UserVariableList();
+
+            foreach (var userVariable in UserVariables)
+                newUserVariableList.UserVariables.Add(userVariable.Copy() as UserVariable);
+
+            return newUserVariableList;
         }
     }
 }

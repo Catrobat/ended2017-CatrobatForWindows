@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
+using Catrobat.Core.Objects.Variables;
 
 namespace Catrobat.Core.Objects
 {
     public class Sprite : DataObject
     {
-        public Project Project { get; set; }
-
         private CostumeList _costumes;
         public CostumeList Costumes
         {
@@ -139,7 +139,7 @@ namespace Catrobat.Core.Objects
                 script.LoadReference();
         }
 
-        public DataObject Copy()
+        public DataObject Copy(Project currentProject)
         {
             var newSprite = new Sprite();
             newSprite._name = _name;
@@ -156,10 +156,19 @@ namespace Catrobat.Core.Objects
                 newSprite._scripts = _scripts.Copy() as ScriptList;
             }
 
+            var entries = currentProject.VariableList.ObjectVariableList.ObjectVariableEntries;
+            foreach (var entry in entries)
+            {
+                if (entry.Sprite == this)
+                    entries.Add(entry.Copy(newSprite) as ObjectVariableEntry); //changes Spritereference to new Sprite
+            }
+
+            ReferenceHelper.Project = currentProject;
             if (_scripts != null)
             {
-                newSprite._scripts.CopyReference(this);
+                newSprite._scripts.LoadReference();
             }
+            ReferenceHelper.Project = null;
 
             return newSprite;
         }

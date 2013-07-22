@@ -89,15 +89,15 @@ namespace Catrobat.Core.Objects.Bricks
                         break;
 
                     case "ifLogicBeginBrick":
-                        Bricks.Add(new HideBrick());
+                        Bricks.Add(new IfLogicBeginBrick());
                         break;
 
                     case "ifLogicElseBrick":
-                        Bricks.Add(new HideBrick());
+                        Bricks.Add(new IfLogicElseBrick());
                         break;
 
                     case "ifLogicEndBrick":
-                        Bricks.Add(new HideBrick());
+                        Bricks.Add(new IfLogicEndBrick());
                         break;
 
                     case "ifOnEdgeBounceBrick":
@@ -249,32 +249,6 @@ namespace Catrobat.Core.Objects.Bricks
             }
 
             return newBrickList;
-        }
-
-        public void CopyReference(BrickList copiedFrom)
-        {
-            var pos = 0;
-            ReadHelper.CurrentBrickList = this;
-
-            foreach (Brick brick in Bricks)
-            {
-                if (brick is PointToBrick)
-                {
-                    var pointToBrick = brick as PointToBrick;
-                    pointToBrick.CopyReference(copiedFrom.Bricks[pos] as PointToBrick);
-                }
-                else if (brick is LoopBeginBrick)
-                {
-                    var loopBeginBrick = brick as LoopBeginBrick;
-                    loopBeginBrick.CopyReference(copiedFrom.Bricks[pos] as LoopBeginBrick);
-                }
-                else if (brick is LoopEndBrick)
-                {
-                    var loopEndBrick = brick as LoopEndBrick;
-                    loopEndBrick.CopyReference(copiedFrom.Bricks[pos] as LoopEndBrick);
-                }
-                pos++;
-            }
         }
     }
 }

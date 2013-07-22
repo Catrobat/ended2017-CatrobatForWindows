@@ -78,5 +78,28 @@ namespace Catrobat.Core.Objects.Variables
 
             return xRoot;
         }
+
+        internal override void LoadReference()
+        {
+            _spriteReference.LoadReference();
+        }
+
+        public DataObject Copy(Sprite newSprite)
+        {
+            var newObjectVariableEntry = new ObjectVariableEntry();
+            newObjectVariableEntry.Sprite = newSprite;
+            newObjectVariableEntry.VariableList = VariableList.Copy() as UserVariableList;
+
+            return newObjectVariableEntry;
+        }
+
+        public DataObject Copy()
+        {
+            var newObjectVariableEntry = new ObjectVariableEntry();
+            newObjectVariableEntry.SpriteReference = SpriteReference.Copy() as SpriteReference;
+            newObjectVariableEntry.VariableList = VariableList.Copy() as UserVariableList;
+
+            return newObjectVariableEntry;
+        }
     }
 }
