@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
+#include "TestHelper.h"
 
 #include "Object.h"
 #include "FormulaTree.h"
@@ -441,6 +442,463 @@ namespace PlayerWindowsPhone8Test
 			double expected = 3.141592654;
             double actual = interpreter->EvaluateFormula(formula, object);
             Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionMOD1)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MOD");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "12.0"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "3.0"));
+
+			double expected = 0.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionMOD2)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MOD");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "12.0"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "5.0"));
+
+			double expected = 2.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionMOD3)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MOD");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "17.4"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "3.0"));
+
+			double expected = 2.4;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionMOD4)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MOD");
+			formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "12.0"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "3.0"));
+
+			double expected = 0.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionMOD5)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MOD");
+			formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "12.0"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "7.0"));
+
+			double expected = 2.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionMOD6)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MOD");
+			formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "17.4"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "3.0"));
+
+			double expected = 0.6;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCSIN1)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCSIN");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "0.0"));
+
+			double expected = 0.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCSIN2)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCSIN");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "1.0"));
+
+			double expected = 90.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCSIN3)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCSIN");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "0.5"));
+
+			double expected = 30.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCSIN4)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCSIN");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "0.4"));
+
+			double expected = 23.57817848;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCSIN5)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCSIN");
+			formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+
+			double expected = -90.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCCOS1)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCCOS");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "1.0"));
+
+			double expected = 0.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCCOS2)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCCOS");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "0.5"));
+
+			double expected = 30.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCCOS3)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCCOS");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "0.0"));
+
+			double expected = 90.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCCOS4)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCCOS");
+			formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "0.5"));
+
+			double expected = 120.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCCOS5)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCCOS");
+			formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+
+			double expected = 180.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCCOS6)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCCOS");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "0.4"));
+
+			double expected = 66.42182152;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCTAN1)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCTAN");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "0.0"));
+
+			double expected = 0.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCTAN2)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCTAN");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "1.0"));
+
+			double expected = 45.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCTAN3)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCTAN");
+			formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+
+			double expected = -45.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionARCTAN4)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ARCTAN");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "0.5"));
+
+			double expected = 26.56505118;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionEXP1)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "EXP");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "0.0"));
+
+			double expected = 1.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionEXP2)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "EXP");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "1.0"));
+
+			double expected = 2.718281828;
+            double actual = interpreter->EvaluateFormula(formula, object);
+			Assert::IsTrue(TestHelper::isEqual(expected, actual));
+		}
+
+		TEST_METHOD(FunctionEXP3)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "EXP");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "2.0"));
+
+			double expected = 7.389056099;
+            double actual = interpreter->EvaluateFormula(formula, object);
+			Assert::IsTrue(TestHelper::isEqual(expected, actual));
+		}
+
+		TEST_METHOD(FunctionEXP4)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "EXP");
+			formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+
+			double expected = 0.367879441;
+            double actual = interpreter->EvaluateFormula(formula, object);
+			Assert::IsTrue(TestHelper::isEqual(expected, actual));
+		}
+
+		TEST_METHOD(FunctionMAX1)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MAX");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "2.0"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "7.0"));
+
+			double expected = 7.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+			Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionMAX2)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MAX");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "7.0"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "2.0"));
+
+			double expected = 7.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+			Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionMAX3)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MAX");
+			formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "7.0"));
+
+			double expected = 7.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+			Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionMAX4)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MAX");
+			formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+			formula->SetRightChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetRightChild()->SetRightChild(new FormulaTree("NUMBER", "7.0"));
+
+			double expected = -1.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+			Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionMIN1)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MIN");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "2.0"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "7.0"));
+
+			double expected = 2.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+			Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionMIN2)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MIN");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "7.0"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "2.0"));
+
+			double expected = 2.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+			Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionMIN3)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MIN");
+			formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+			formula->SetRightChild(new FormulaTree("NUMBER", "7.0"));
+
+			double expected = -1.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+			Assert::AreEqual(expected, actual);
+		}
+
+		TEST_METHOD(FunctionMIN4)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "MIN");
+			formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "1.0"));
+			formula->SetRightChild(new FormulaTree("OPERATOR", "MINUS"));
+			formula->GetRightChild()->SetRightChild(new FormulaTree("NUMBER", "7.0"));
+
+			double expected = -7.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+			Assert::AreEqual(expected, actual);
 		}
 
 	};
