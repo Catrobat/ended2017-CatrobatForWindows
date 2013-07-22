@@ -158,6 +158,19 @@ namespace PlayerWindowsPhone8Test
 			Assert::IsFalse(interpreter->EvaluateFormulaToBool(formula, object));
 		}
 
+		TEST_METHOD(Formula_Logic_EQUAL_4)
+		{
+			FormulaTree *formula = new FormulaTree(OP, EQUAL);
+			formula->SetLeftChild(new FormulaTree("NUMBER", "12")); 
+			formula->SetRightChild(new FormulaTree("NUMBER", "12.000"));
+
+			Object *object = new Object("TestObject");
+			Interpreter *interpreter = Interpreter::Instance();
+
+			Assert::IsTrue(interpreter->EvaluateFormulaToBool(formula, object));
+		}
+
+
 		TEST_METHOD(Formula_Logic_NOT_EQUAL)
 		{
 			FormulaTree *formula = new FormulaTree(OP, "NOT_EQUAL");
@@ -192,6 +205,18 @@ namespace PlayerWindowsPhone8Test
 			Interpreter *interpreter = Interpreter::Instance();
 
 			Assert::IsTrue(interpreter->EvaluateFormulaToBool(formula, object));
+		}
+
+		TEST_METHOD(Formula_Logic_NOT_EQUAL_4)
+		{
+			FormulaTree *formula = new FormulaTree(OP, "NOT_EQUAL");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "12.0000")); 
+			formula->SetRightChild(new FormulaTree("NUMBER", "12"));
+
+			Object *object = new Object("TestObject");
+			Interpreter *interpreter = Interpreter::Instance();
+
+			Assert::IsFalse(interpreter->EvaluateFormulaToBool(formula, object));
 		}
 
 		TEST_METHOD(Formula_Logic_More_Complex)

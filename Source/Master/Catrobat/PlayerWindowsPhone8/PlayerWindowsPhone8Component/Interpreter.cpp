@@ -2,7 +2,7 @@
 #include "Interpreter.h"
 #include "FormulaTree.h"
 #include "ProjectDaemon.h"
-#include <string.h>
+#include "string"
 #include <sstream>
 #include <cmath>
 
@@ -203,12 +203,62 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
 	case Function::EXP: 
 		break;
 	case Function::MAX: 
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = this->CalculateMax(leftValue, rightValue);
 		break;
 	case Function::MIN: 
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = this->CalculateMin(leftValue, rightValue);
 		break;
 	default:
 		break;
 	}
 
 	return returnValue;
+}
+
+bool Interpreter::TestChilds(FormulaTree *tree, Childs childs) 
+{
+	bool returnValue = false;
+
+	switch (childs)
+	{
+	case LeftChild:
+		if (tree->GetLeftChild() != NULL && tree->GetRightChild() == NULL)
+			returnValue = true;
+		break;
+	case RightChild:
+		if (tree->GetLeftChild() == NULL && tree->GetRightChild() != NULL)
+			returnValue = true;
+		break;
+	case LeftAndRightChild:
+		if (tree->GetLeftChild() != NULL && tree->GetRightChild() != NULL)
+			returnValue = true;
+		break;
+	case NoChild:
+		if (tree->GetLeftChild() == NULL && tree->GetRightChild() == NULL)
+			returnValue = true;
+		break;
+	default:
+		returnValue = false;
+		break;
+	}
+
+	return returnValue;
+}
+
+double Interpreter::CalculateMax(double value1, double value2)
+{
+	if (value1 < value2)
+		return value2;
+	else
+		return value1;
+}
+
+double Interpreter::CalculateMin(double value1, double value2)
+{
+	if (value1 < value2)
+		return value1;
+	else 
+		return value2;
 }

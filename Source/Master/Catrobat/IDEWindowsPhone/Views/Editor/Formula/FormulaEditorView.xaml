@@ -8,6 +8,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
   xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
+  xmlns:formulaControls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
@@ -21,6 +22,7 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
+      <RowDefinition Height="480" />
     </Grid.RowDefinitions>
     <StackPanel>
       <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
@@ -28,6 +30,7 @@
       </StackPanel>
       
     </StackPanel>
+    <formulaControls:FormulaKeyboard Grid.Row="2"/>
   </Grid>
 
 </phone:PhoneApplicationPage>
