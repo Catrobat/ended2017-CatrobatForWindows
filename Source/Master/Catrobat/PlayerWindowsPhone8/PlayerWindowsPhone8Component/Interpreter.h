@@ -5,6 +5,13 @@
 
 class FormulaTree;
 
+enum Childs {
+	LeftChild, 
+	RightChild, 
+	LeftAndRightChild, 
+	NoChild
+};
+
 class Interpreter
 {
 private:
@@ -31,5 +38,8 @@ private:
     // HelperFunctions
     double InterpretOperator(FormulaTree *tree, Object *object);
 	double InterpretFunction(FormulaTree *tree, Object *object);
+	bool TestChilds(FormulaTree *tree, Childs childs);
+	double CalculateMax(double value1, double value2);
+	double CalculateMin(double value1, double value2);
 };
 

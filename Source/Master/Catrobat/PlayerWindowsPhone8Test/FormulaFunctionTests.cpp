@@ -753,7 +753,7 @@ namespace PlayerWindowsPhone8Test
 
 			double expected = 2.718281828;
             double actual = interpreter->EvaluateFormula(formula, object);
-			Assert::IsTrue(TestHelper::isEqual(expected, actual));
+			Assert::IsTrue(TestHelper::isEqual((float)expected, (float)actual));
 		}
 
 		TEST_METHOD(FunctionEXP3)
@@ -766,7 +766,7 @@ namespace PlayerWindowsPhone8Test
 
 			double expected = 7.389056099;
             double actual = interpreter->EvaluateFormula(formula, object);
-			Assert::IsTrue(TestHelper::isEqual(expected, actual));
+			Assert::IsTrue(TestHelper::isEqual((float)expected, (float)actual));
 		}
 
 		TEST_METHOD(FunctionEXP4)
@@ -780,7 +780,7 @@ namespace PlayerWindowsPhone8Test
 
 			double expected = 0.367879441;
             double actual = interpreter->EvaluateFormula(formula, object);
-			Assert::IsTrue(TestHelper::isEqual(expected, actual));
+			Assert::IsTrue(TestHelper::isEqual((float)expected, (float)actual));
 		}
 
 		TEST_METHOD(FunctionMAX1)
