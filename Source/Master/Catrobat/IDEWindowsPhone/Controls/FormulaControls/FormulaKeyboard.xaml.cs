@@ -14,20 +14,31 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 {
     public enum FormulaEditorKey
     {
-        Number0, Number1, Number2, Number3, Number4, Number5, Number6, Number7, Number8, Number9, NumberDot,
-        KeyEquals, KeyDelete, KeyUndo, KeyRedo, KeyOpenBrecket, KeyClosedBrecket, KeyPlus, KeyMinus, KeyMult, KeyDevide, KeyCompute,
-        KeyLogicEqual, KeyLogicNotEqual, KeyLogicSmaller, KeyLogicSmallerEqual, KeyLogiGreater, KeyLogicGreaterEqual, 
-        KeyLogicAnd, KeyLogicOr, KeyLogicNot, KeyLogicTrue, KeyLogicFalse
+        Number0, Number1, Number2, Number3, Number4, Number5, 
+        Number6, Number7, Number8, Number9, NumberDot,
+        KeyEquals, KeyDelete, KeyUndo, KeyRedo, 
+        KeyOpenBrecket, KeyClosedBrecket, KeyPlus, 
+        KeyMinus, KeyMult, KeyDivide, 
+
+        KeyLogicEqual, KeyLogicNotEqual, KeyLogicSmaller, 
+        KeyLogicSmallerEqual, KeyLogicGreater, KeyLogicGreaterEqual, 
+        KeyLogicAnd, KeyLogicOr, KeyLogicNot, KeyLogicTrue, KeyLogicFalse,
+
+        KeyMathSin, KeyMathCos, KeyMathTan, KeyMathArcSin, KeyMathArcCos, KeyMathArcTan,
+        KeyMathExp, KeyMathLn, KeyMathLog, KeyMathAbs, KeyMathRound, KeyMathMod,
+        KeyMathMin, KeyMathMax, KeyMathSqrt, KeyMathPi, KeyMathRandom
     }
 
     public enum ObjectVariable
     {
-        PositionX, PositionY, Transparency, Brightness, Size, Direction, Layer
+        PositionX, PositionY, Transparency, Brightness, 
+        Size, Direction, Layer
     }
 
     public enum SensorVariable
     {
-        AccelerationX, AccelerationY, AccelerationZ, CompassDirection, InclinationX, InclinationY
+        AccelerationX, AccelerationY, AccelerationZ, 
+        CompassDirection, InclinationX, InclinationY
     }
 
     public delegate void KeyPressed(FormulaEditorKey key);
@@ -35,7 +46,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
     public delegate void SensorVariableSelected(SensorVariable variable);
     public delegate void LocalUserVariableSelected(UserVariable variable);
     public delegate void GlobalUserVariableSelected(UserVariable variable);
-
+    public delegate void EvaluatePresed();
     public partial class FormulaKeyboard : UserControl
     {
         #region DependancyProperties
@@ -77,7 +88,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
         public SensorVariableSelected SensorVariableSelected;
         public LocalUserVariableSelected LocalUserVariableSelected;
         public GlobalUserVariableSelected GlobalUserVariableSelected;
-
+        public EvaluatePresed EvaluatePresed;
         public void RaiseKeyPressed(FormulaEditorKey key)
         {
             if(KeyPressed != null)
@@ -157,6 +168,18 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
         {
             var key = (FormulaEditorKey)(uint)((FrameworkElement)sender).DataContext;
             RaiseKeyPressed(key);
+        }
+
+        private void SensorButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var variable = (SensorVariable)(uint)((FrameworkElement)sender).DataContext;
+            RaiseSensorVariableSelected(variable);
+        }
+
+        private void ObjectButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var variable = (ObjectVariable)(uint)((FrameworkElement)sender).DataContext;
+            RaiseObjectVariableSelected(variable);
         }
     }
 }

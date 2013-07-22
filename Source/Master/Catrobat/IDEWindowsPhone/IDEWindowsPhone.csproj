@@ -126,6 +126,9 @@
     <Compile Include="Controls\FormulaControls\FormulaKeyboard.xaml.cs">
       <DependentUpon>FormulaKeyboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaControls\FormulaViewer.xaml.cs">
+      <DependentUpon>FormulaViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ListPicker\ListPickerPage.xaml.cs">
       <DependentUpon>ListPickerPage.xaml</DependentUpon>
     </Compile>
@@ -154,7 +157,6 @@
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
-    <Compile Include="Converters\FormulaToRichTextConverter.cs" />
     <Compile Include="Converters\IntPixelConverter.cs" />
     <Compile Include="Converters\ImageSizeHeightConverter.cs" />
     <Compile Include="Converters\ImageSizeWidthConverter.cs" />
@@ -347,6 +349,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\FormulaControls\FormulaKeyboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FormulaControls\FormulaViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -187,7 +187,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             CancelCommand = new RelayCommand(CancelAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
+            Messenger.Default.Register<GenericMessage<Sprite>>(this, 
+                ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
 
             InitImageSizes();
             if (IsInDesignMode)

@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using Catrobat.Core.Objects.Formulas;
+using Catrobat.Core.Objects.Variables;
 using Catrobat.IDEWindowsPhone.Converters;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Formula;
@@ -9,6 +11,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 {
     public partial class FormulaButton : UserControl
     {
+        #region DependencyProperties
+
         public Formula Formula
         {
             get { return (Formula)GetValue(FormulaProperty); }
@@ -19,11 +23,10 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
         private static void FormulaChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var converter = new FormulaToRichTextConverter();
-            var richTextFormula = converter.Convert(e.NewValue, null, null, null);
-
-            ((FormulaButton)d).ButtonFormula.Content = richTextFormula;
+            ((FormulaButton)d).FormulaViewer.Formula = e.NewValue as Formula;
         }
+
+        #endregion
 
         private new static void IsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

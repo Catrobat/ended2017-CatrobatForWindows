@@ -92,6 +92,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 EditSpriteCommand.RaiseCanExecuteChanged();
                 CopySpriteCommand.RaiseCanExecuteChanged();
                 DeleteSpriteCommand.RaiseCanExecuteChanged();
+
+                var spriteChangedMessage = new GenericMessage<Sprite>(SelectedSprite);
+                Messenger.Default.Send<GenericMessage<Sprite>>(spriteChangedMessage, ViewModelMessagingToken.SelectedSpriteListener);
             }
         }
 
@@ -484,8 +487,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void AddNewScriptBrickAction()
         {
-            var message1 = new GenericMessage<Sprite>(SelectedSprite);
-            Messenger.Default.Send<GenericMessage<Sprite>>(message1, ViewModelMessagingToken.SelectedSpriteListener);
+            //var message1 = new GenericMessage<Sprite>(SelectedSprite);
+            //Messenger.Default.Send<GenericMessage<Sprite>>(message1, ViewModelMessagingToken.SelectedSpriteListener);
 
             var objects = new List<object> { ScriptBricks, ListBoxViewPort };
 

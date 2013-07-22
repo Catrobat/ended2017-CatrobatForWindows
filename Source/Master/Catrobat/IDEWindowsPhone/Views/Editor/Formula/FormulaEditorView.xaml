@@ -14,7 +14,7 @@
   Foreground="{StaticResource PhoneForegroundBrush}"
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-  DataContext="{Binding AddNewCostume, Source={StaticResource Locator}}"
+  DataContext="{Binding FormulaEditor, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="True">
 
   <Grid x:Name="LayoutRoot"
@@ -24,13 +24,8 @@
       <RowDefinition Height="*" />
       <RowDefinition Height="480" />
     </Grid.RowDefinitions>
-    <StackPanel>
-      <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-        <TextBlock Margin="0" Text="{Binding Path=Editor.TitleNewCostume, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
-      </StackPanel>
-      
-    </StackPanel>
-    <formulaControls:FormulaKeyboard Grid.Row="2"/>
+    <formulaControls:FormulaViewer Name="FormulaViewer" Formula="{Binding Formula}" IsEditEnabled="True" IsMultiline="True"></formulaControls:FormulaViewer>
+    <formulaControls:FormulaKeyboard Name="FormulaKeyboard" LocalVariables="{Binding LocalVariables}" GlobalVariables="{Binding GlobalVariables}" Grid.Row="2"/>
   </Grid>
 
 </phone:PhoneApplicationPage>

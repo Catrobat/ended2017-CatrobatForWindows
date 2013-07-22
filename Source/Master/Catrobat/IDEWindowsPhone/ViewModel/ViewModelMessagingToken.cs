@@ -11,6 +11,7 @@
         BroadcastObjectListener,
         BroadcastMessageListener,
         ScriptBrickCollectionListener,
-        SelectedBrickListener
+        SelectedBrickListener,
+        SelectedProjectListener
     }
 }
