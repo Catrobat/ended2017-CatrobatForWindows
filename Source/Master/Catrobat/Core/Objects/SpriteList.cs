@@ -28,8 +28,6 @@ namespace Catrobat.Core.Objects
                 enumerator.MoveNext();
                 enumerator.Current.LoadFromXML(xSprite);
             }
-
-            LoadReference();
         }
 
         internal override XElement CreateXML()

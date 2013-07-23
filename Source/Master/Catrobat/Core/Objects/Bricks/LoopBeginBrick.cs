@@ -70,11 +70,5 @@ namespace Catrobat.Core.Objects.Bricks
         }
 
         public abstract override DataObject Copy();
-
-        public void CopyReference(LoopBeginBrick copiedFrom)
-        {
-            if (copiedFrom._loopEndBrickReference != null)
-                _loopEndBrickReference = copiedFrom._loopEndBrickReference.Copy() as LoopEndBrickRef;
-        }
     }
 }

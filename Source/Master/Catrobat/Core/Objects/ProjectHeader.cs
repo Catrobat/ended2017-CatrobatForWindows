@@ -305,7 +305,7 @@ namespace Catrobat.Core.Objects
             ApplicationBuildNumber = 0;
             ApplicationName = "Pocket Code";
             ApplicationVersion = "0.0.1";
-            CatrobatLanguageVersion = (float) 0.8;
+            CatrobatLanguageVersion = 0.8f;
             DateTimeUpload = "";
             Description = "";
             DeviceName = DeviceInformationHelper.DeviceName;
@@ -313,7 +313,7 @@ namespace Catrobat.Core.Objects
             Platform = PlatformInformationHelper.GetPlatformName();
             PlatformVersion = PlatformInformationHelper.GetPlatformVersion();
             ProgramLicense = "http://developer.catrobat.org/agpl_v3";
-            ProgramName = "";
+            _programName = ""; //otherwise renameDirectory would be executed
             RemixOf = "";
             ScreenHeight = DeviceInformationHelper.ScreenHeight;
             ScreenWidth = DeviceInformationHelper.ScreenWidth;
@@ -361,7 +361,7 @@ namespace Catrobat.Core.Objects
 
             xProjectHeader.Add(new XElement("applicationBuildNumber")
                 {
-                    Value = _applicationBuildNumber.ToString()
+                    Value = _applicationBuildNumber.ToString(CultureInfo.InvariantCulture)
                 });
 
             xProjectHeader.Add(new XElement("applicationName")
@@ -376,7 +376,7 @@ namespace Catrobat.Core.Objects
 
             xProjectHeader.Add(new XElement("catrobatLanguageVersion")
                 {
-                    Value = _catrobatLanguageVersion.ToString()
+                    Value = _catrobatLanguageVersion.ToString(CultureInfo.InvariantCulture)
                 });
 
             xProjectHeader.Add(new XElement("dateTimeUpload")
@@ -426,12 +426,12 @@ namespace Catrobat.Core.Objects
 
             xProjectHeader.Add(new XElement("screenHeight")
                 {
-                    Value = _screenHeight.ToString()
+                    Value = _screenHeight.ToString(CultureInfo.InvariantCulture)
                 });
 
             xProjectHeader.Add(new XElement("screenWidth")
                 {
-                    Value = _screenWidth.ToString()
+                    Value = _screenWidth.ToString(CultureInfo.InvariantCulture)
                 });
 
             xProjectHeader.Add(new XElement("tags")

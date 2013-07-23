@@ -37,6 +37,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private MessageBoxResult _dialogResult;
         private string _deleteProductName;
         private string _copyProjectName;
+        private Project _currentProject;
+        private ImageSource _currentProjectScreenshot;
 
         #endregion
 
@@ -44,7 +46,24 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public CatrobatContext Context { get; set; }
 
-        public Project CurrentProject { get { return _catrobatContext.CurrentProject; } }
+        public Project CurrentProject
+        {
+            get
+            {
+                return _currentProject;
+            }
+            set
+            {
+                if (value == _currentProject) return;
+
+                _currentProject = value;
+
+                RaisePropertyChanged("CurrentProject");
+
+                var projectChangedMessage = new GenericMessage<Project>(CatrobatContext.GetContext().CurrentProject);
+                Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage, ViewModelMessagingToken.SelectedProjectListener);
+            }
+        }
 
         public ProjectDummyHeader CurrentProjectHeader { get { return _catrobatContext.CurrentProject.ProjectDummyHeader; } }
 
@@ -54,7 +73,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             get
             {
-                return CurrentProject.ProjectScreenshot as ImageSource;
+                return _currentProjectScreenshot;
+            }
+
+            set
+            {
+                if (_currentProjectScreenshot == value) return;
+
+                _currentProjectScreenshot = value;
+                RaisePropertyChanged("CurrentProjectScreenshot");
             }
         }
 
@@ -405,11 +432,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             if (e.PropertyName == "CurrentProject")
             {
-                if (PropertyChanged != null)
-                {
-                    RaisePropertyChanged("CurrentProject");
-                    RaisePropertyChanged("CurrentProjectScreenshot");
-                }
+                CurrentProject = CatrobatContext.GetContext().CurrentProject;
+                CurrentProjectScreenshot = CurrentProject.ProjectScreenshot as ImageSource;
 
                 CatrobatContext.GetContext().CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
             }
@@ -418,12 +442,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         public void CurrentProjectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "ProjectScreenshot")
-            {
-                if (PropertyChanged != null)
-                {
-                    RaisePropertyChanged("CurrentProjectScreenshot");
-                }
-            }
+                CurrentProjectScreenshot = CurrentProject.ProjectScreenshot as ImageSource;
         }
 
         public void ThemeChooserPropertyChanged(object sender, PropertyChangedEventArgs e)

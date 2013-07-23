@@ -6,8 +6,7 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class LoopBeginBrickRef : DataObject
     {
-        private readonly Sprite _sprite;
-        private string _reference;
+        internal string _reference;
 
         protected string _classField;
         public string Class

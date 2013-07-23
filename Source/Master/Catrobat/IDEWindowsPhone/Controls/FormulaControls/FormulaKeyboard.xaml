@@ -6,6 +6,7 @@
     xmlns:formulaControls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:variables="clr-namespace:Catrobat.Core.Objects.Variables;assembly=Catrobat.Core"
+    xmlns:buttons="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -146,12 +147,68 @@
     <formulaControls:FormulaEditorKey x:Key="FormulaKeyNumber7">Number7</formulaControls:FormulaEditorKey>
     <formulaControls:FormulaEditorKey x:Key="FormulaKeyNumber8">Number8</formulaControls:FormulaEditorKey>
     <formulaControls:FormulaEditorKey x:Key="FormulaKeyNumber9">Number9</formulaControls:FormulaEditorKey>
-    <formulaControls:FormulaEditorKey x:Key="FormulaKeyEquals">KeyEquals</formulaControls:FormulaEditorKey>
     <formulaControls:FormulaEditorKey x:Key="FormulaKeyNumberDot">NumberDot</formulaControls:FormulaEditorKey>
+
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyEquals">KeyEquals</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyDelete">KeyDelete</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyUndo">KeyUndo</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyRedo">KeyRedo</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyOpenBrecket">KeyOpenBrecket</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyClosedBrecket">KeyClosedBrecket</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyPlus">KeyPlus</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMinus">KeyMinus</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMult">KeyMult</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyDivide">KeyDivide</formulaControls:FormulaEditorKey>
+
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyLogicEqual">KeyLogicEqual</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyLogicNotEqual">KeyLogicNotEqual</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyLogicSmaller">KeyLogicSmaller</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyLogicSmallerEqual">KeyLogicSmallerEqual</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyLogicGreater">KeyLogicGreater</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyLogicGreaterEqual">KeyLogicGreaterEqual</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyLogicAnd">KeyLogicAnd</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyLogicOr">KeyLogicOr</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyLogicNot">KeyLogicNot</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyLogicTrue">KeyLogicTrue</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyLogicFalse">KeyLogicFalse</formulaControls:FormulaEditorKey>
+
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathSin">KeyMathSin</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathCos">KeyMathCos</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathTan">KeyMathTan</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathArcSin">KeyMathArcSin</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathArcCos">KeyMathArcCos</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathArcTan">KeyMathArcTan</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathExp">KeyMathExp</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathLn">KeyMathLn</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathLog">KeyMathLog</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathAbs">KeyMathAbs</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathRound">KeyMathRound</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathMod">KeyMathMod</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathMin">KeyMathMin</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathMax">KeyMathMax</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathSqrt">KeyMathSqrt</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathPi">KeyMathPi</formulaControls:FormulaEditorKey>
+    <formulaControls:FormulaEditorKey x:Key="FormulaKeyMathRandom">KeyMathRandom</formulaControls:FormulaEditorKey>
+
+
+    <formulaControls:ObjectVariable x:Key="ObjectVariablePositionX">PositionX</formulaControls:ObjectVariable>
+    <formulaControls:ObjectVariable x:Key="ObjectVariablePositionY">PositionY</formulaControls:ObjectVariable>
+    <formulaControls:ObjectVariable x:Key="ObjectVariableTransparency">Transparency</formulaControls:ObjectVariable>
+    <formulaControls:ObjectVariable x:Key="ObjectVariableBrightness">Brightness</formulaControls:ObjectVariable>
+    <formulaControls:ObjectVariable x:Key="ObjectVariableSize">Size</formulaControls:ObjectVariable>
+    <formulaControls:ObjectVariable x:Key="ObjectVariableDirection">Direction</formulaControls:ObjectVariable>
+    <formulaControls:ObjectVariable x:Key="ObjectVariableLayer">Layer</formulaControls:ObjectVariable>
+
+    <formulaControls:SensorVariable x:Key="SensorVariableAccelerationX">AccelerationX</formulaControls:SensorVariable>
+    <formulaControls:SensorVariable x:Key="SensorVariableAccelerationY">AccelerationY</formulaControls:SensorVariable>
+    <formulaControls:SensorVariable x:Key="SensorVariableAccelerationZ">AccelerationZ</formulaControls:SensorVariable>
+    <formulaControls:SensorVariable x:Key="SensorVariableCompassDirection">CompassDirection</formulaControls:SensorVariable>
+    <formulaControls:SensorVariable x:Key="SensorVariableInclinationX">InclinationX</formulaControls:SensorVariable>
+    <formulaControls:SensorVariable x:Key="SensorVariableInclinationY">InclinationY</formulaControls:SensorVariable>
   </UserControl.Resources>
 
   <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
-    <Grid Name="GridMain" Visibility="Collapsed">
+    <Grid Name="GridMain" Margin="0 10 0 0" Visibility="Visible">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="3*"/>
         <ColumnDefinition Width="2*"/>
@@ -170,15 +227,15 @@
           <ColumnDefinition/>
           <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Content="Del" DataContext="{StaticResource FormulaKeyNumber1}" 
+        <Button Grid.Row="0" Grid.Column="0" Content="Del" DataContext="{StaticResource FormulaKeyDelete}" 
               Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-        <Button Grid.Row="0" Grid.Column="1" Content="&lt;-" DataContext="{StaticResource FormulaKeyNumber2}" 
+        <Button Grid.Row="0" Grid.Column="1" Content="&lt;-" DataContext="{StaticResource FormulaKeyUndo}" 
               Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-        <Button Grid.Row="0" Grid.Column="2" Content="-&gt;" DataContext="{StaticResource FormulaKeyNumber3}" 
+        <Button Grid.Row="0" Grid.Column="2" Content="-&gt;" DataContext="{StaticResource FormulaKeyRedo}" 
               Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-        <Button Grid.Row="1" Grid.Column="0" Content="(" DataContext="{StaticResource FormulaKeyNumber4}" 
+        <Button Grid.Row="1" Grid.Column="0" Content="(" DataContext="{StaticResource FormulaKeyOpenBrecket}" 
               Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-        <Button Grid.Row="1" Grid.Column="1" Content=")" DataContext="{StaticResource FormulaKeyNumber5}" 
+        <Button Grid.Row="1" Grid.Column="1" Content=")" DataContext="{StaticResource FormulaKeyClosedBrecket}" 
               Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
         <Button Grid.Row="1" Grid.Column="2" Content="=" DataContext="{StaticResource FormulaKeyEquals}" 
               Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
@@ -192,13 +249,13 @@
           <ColumnDefinition/>
           <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Content="+" DataContext="{StaticResource FormulaKeyNumber1}" 
+        <Button Grid.Row="0" Grid.Column="0" Content="+" DataContext="{StaticResource FormulaKeyPlus}" 
               Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
-        <Button Grid.Row="0" Grid.Column="1" Content="-" DataContext="{StaticResource FormulaKeyNumber2}" 
+        <Button Grid.Row="0" Grid.Column="1" Content="-" DataContext="{StaticResource FormulaKeyMinus}" 
               Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
-        <Button Grid.Row="1" Grid.Column="0" Content="*" DataContext="{StaticResource FormulaKeyNumber3}" 
+        <Button Grid.Row="1" Grid.Column="0" Content="*" DataContext="{StaticResource FormulaKeyMult}" 
               Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
-        <Button Grid.Row="1" Grid.Column="1" Content="/" DataContext="{StaticResource FormulaKeyNumber4}" 
+        <Button Grid.Row="1" Grid.Column="1" Content="/" DataContext="{StaticResource FormulaKeyDivide}" 
               Style="{StaticResource StyleButtonOperators}" Click="KeyButton_OnClick"/>
       </Grid>
       <Grid Column="1" Row="1">
@@ -207,12 +264,15 @@
           <RowDefinition/>
           <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Content="Math" DataContext="{StaticResource FormulaKeyNumber1}" 
-              Style="{StaticResource StyleButtonAditional}" Click="ButtonMath_OnClick"/>
-        <Button Grid.Row="1" Grid.Column="0" Content="Variable" DataContext="{StaticResource FormulaKeyNumber2}" 
-              Style="{StaticResource StyleButtonAditional}" Click="ButtonVariable_OnClick"/>
-        <Button Grid.Row="2" Grid.Column="0" Content="Evaluate" DataContext="{StaticResource FormulaKeyNumber4}" 
-              Style="{StaticResource StyleButtonEvaluate}" Background="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1}"/>
+        <Button Grid.Row="0" Grid.Column="0" Content="Math" 
+                Style="{StaticResource StyleButtonAditional}" 
+                Click="ButtonMath_OnClick"/>
+        <Button Grid.Row="1" Grid.Column="0" Content="Variable"  
+              Style="{StaticResource StyleButtonAditional}" 
+                Click="ButtonVariable_OnClick"/>
+        <Button Grid.Row="2" Grid.Column="0" Content="Evaluate"  
+              Style="{StaticResource StyleButtonEvaluate}" 
+              Background="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1}"/>
       </Grid>
       <Grid Name="GridNumbers" Column="0" Row="1">
         <Grid.RowDefinitions>
@@ -251,13 +311,13 @@
               Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
       </Grid>
     </Grid>
-    <Grid Name="GridMath" Visibility="Visible">
+    <Grid Name="GridMath" Margin="0 10 0 0" Visibility="Collapsed">
       <Grid>
         <Grid.RowDefinitions>
-          <RowDefinition Height="0.5*"/>
+          <RowDefinition Height="Auto"/>
           <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <phone:Pivot Grid.Row="1" Margin="0 0 0 0">
+        <phone:Pivot Grid.Row="1" Margin="70 -100 0 0">
           <phone:PivotItem Header="Math1">
             <Grid Margin="0 0 0 0">
               <Grid.RowDefinitions>
@@ -275,19 +335,19 @@
                   <ColumnDefinition/>
                   <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Row="0" Grid.Column="0" Content="sin" DataContext="{StaticResource FormulaKeyNumber1}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Row="0" Grid.Column="1" Content="cos" DataContext="{StaticResource FormulaKeyNumber2}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Row="0" Grid.Column="2" Content="tan" DataContext="{StaticResource FormulaKeyNumber3}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
+                <Button Grid.Row="0" Grid.Column="0" Content="sin" DataContext="{StaticResource FormulaKeyMathSin}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="cos" DataContext="{StaticResource FormulaKeyMathCos}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="0" Grid.Column="2" Content="tan" DataContext="{StaticResource FormulaKeyMathTan}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
 
-                <Button Grid.Row="1" Grid.Column="0" Content="arcsin" DataContext="{StaticResource FormulaKeyNumber9}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Row="1" Grid.Column="1" Content="arccos" DataContext="{StaticResource FormulaKeyNumber9}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Row="1" Grid.Column="2" Content="arctan" DataContext="{StaticResource FormulaKeyNumber9}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
+                <Button Grid.Row="1" Grid.Column="0" Content="arcsin" DataContext="{StaticResource FormulaKeyMathArcSin}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="1" Grid.Column="1" Content="arccos" DataContext="{StaticResource FormulaKeyMathArcCos}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="1" Grid.Column="2" Content="arctan" DataContext="{StaticResource FormulaKeyMathArcTan}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
               </Grid>
               <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -295,17 +355,17 @@
                   <ColumnDefinition/>
                   <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="exp" DataContext="{StaticResource FormulaKeyNumber9}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Column="1" Content="ln" DataContext="{StaticResource FormulaKeyNumber4}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Column="2" Content="log" DataContext="{StaticResource FormulaKeyNumber5}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
+                <Button Grid.Column="0" Content="exp" DataContext="{StaticResource FormulaKeyMathExp}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Column="1" Content="ln" DataContext="{StaticResource FormulaKeyMathLn}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Column="2" Content="log" DataContext="{StaticResource FormulaKeyMathLog}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
               </Grid>
             </Grid>
           </phone:PivotItem>
-          <phone:PivotItem Header="Math2">
-            <Grid Margin="0 -25 0 0">
+          <phone:PivotItem Header="Math2" Padding="0">
+            <Grid Margin="0 0 0 0">
               <Grid Margin="0 0 0 0">
                 <Grid>
                   <Grid.RowDefinitions>
@@ -318,24 +378,25 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                   </Grid.ColumnDefinitions>
-                  <Button Grid.Row="0" Grid.Column="0" Content="abs" DataContext="{StaticResource FormulaKeyNumber9}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                  <Button Grid.Row="0" Grid.Column="1" Content="round" DataContext="{StaticResource FormulaKeyNumber9}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                  <Button  Grid.Row="0" Grid.Column="2" Content="mod" DataContext="{StaticResource FormulaKeyNumber9}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
+                  <Button Grid.Row="0" Grid.Column="0" Content="abs" DataContext="{StaticResource FormulaKeyMathAbs}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                  <Button Grid.Row="0" Grid.Column="1" Content="round" DataContext="{StaticResource FormulaKeyMathRound}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                  <Button  Grid.Row="0" Grid.Column="2" Content="mod" DataContext="{StaticResource FormulaKeyMathMod}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
 
-                  <Button Grid.Row="1" Grid.Column="0" Content="min" DataContext="{StaticResource FormulaKeyNumber5}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                  <Button Grid.Row="1" Grid.Column="1" Content="max" DataContext="{StaticResource FormulaKeyNumber5}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                  <Button Grid.Row="1" Grid.Column="2" Content="sqrt" DataContext="{StaticResource FormulaKeyNumber7}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
+                  <Button Grid.Row="1" Grid.Column="0" Content="min" DataContext="{StaticResource FormulaKeyMathMin}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                  <Button Grid.Row="1" Grid.Column="1" Content="max" DataContext="{StaticResource FormulaKeyMathMax}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                  <Button Grid.Row="1" Grid.Column="2" Content="sqrt" DataContext="{StaticResource FormulaKeyMathSqrt}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
 
-                  <Button Grid.Row="2" Grid.Column="0" Content="pi" DataContext="{StaticResource FormulaKeyNumber6}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                  <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="random" DataContext="{StaticResource FormulaKeyNumber8}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
+                  <Button Grid.Row="2" Grid.Column="0" Content="pi" DataContext="{StaticResource FormulaKeyMathPi}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                  <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" 
+                          Content="random" DataContext="{StaticResource FormulaKeyMathRandom}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
                 </Grid>
               </Grid>
             </Grid>
@@ -348,37 +409,37 @@
                   <RowDefinition/>
                   <RowDefinition/>
                 </Grid.RowDefinitions>
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
                   <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                  <Button Grid.Row="0" Grid.Column="0" Content="=" DataContext="{StaticResource FormulaKeyNumber9}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Row="0" Grid.Column="1" Content="&#8800;" DataContext="{StaticResource FormulaKeyNumber9}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Row="0" Grid.Column="2" Content="TRUE" DataContext="{StaticResource FormulaKeyNumber6}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Row="0" Grid.Column="3" Content="FALSE" DataContext="{StaticResource FormulaKeyNumber6}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
+                <Button Grid.Row="0" Grid.Column="0" Content="=" DataContext="{StaticResource FormulaKeyLogicEqual}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="&#8800;" DataContext="{StaticResource FormulaKeyLogicNotEqual}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="0" Grid.Column="2" Content="TRUE" DataContext="{StaticResource FormulaKeyLogicTrue}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="0" Grid.Column="3" Content="FALSE" DataContext="{StaticResource FormulaKeyLogicFalse}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
 
 
-                <Button Grid.Row="1" Grid.Column="0" Content="&lt;" DataContext="{StaticResource FormulaKeyNumber5}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Row="1" Grid.Column="1" Content="&#8804;" DataContext="{StaticResource FormulaKeyNumber5}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Row="1" Grid.Column="2" Content="&#8805;" DataContext="{StaticResource FormulaKeyNumber5}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Row="1" Grid.Column="3" Content="&gt;" DataContext="{StaticResource FormulaKeyNumber7}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
+                <Button Grid.Row="1" Grid.Column="0" Content="&lt;" DataContext="{StaticResource FormulaKeyLogicSmaller}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="1" Grid.Column="1" Content="&#8804;" DataContext="{StaticResource FormulaKeyLogicSmallerEqual}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="1" Grid.Column="2" Content="&#8805;" DataContext="{StaticResource FormulaKeyLogicGreaterEqual}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="1" Grid.Column="3" Content="&gt;" DataContext="{StaticResource FormulaKeyLogicGreater}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
 
-                <Button Grid.Row="2" Grid.Column="0" Content="AND" DataContext="{StaticResource FormulaKeyNumber6}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Row="2" Grid.Column="1" Content="OR" DataContext="{StaticResource FormulaKeyNumber6}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
-                <Button Grid.Row="2" Grid.Column="2" Content="NOT" DataContext="{StaticResource FormulaKeyNumber6}" 
-              Style="{StaticResource StyleButtonNumbers}"/>
+                <Button Grid.Row="2" Grid.Column="0" Content="AND" DataContext="{StaticResource FormulaKeyLogicAnd}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="2" Grid.Column="1" Content="OR" DataContext="{StaticResource FormulaKeyLogicOr}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+                <Button Grid.Row="2" Grid.Column="2" Content="NOT" DataContext="{StaticResource FormulaKeyLogicNot}" 
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
               </Grid>
             </Grid>
           </phone:PivotItem>
@@ -388,18 +449,20 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="4*"/>
           </Grid.ColumnDefinitions>
-          <Button  Click="ButtonVariablesBack_Click">back</Button>
-          <TextBlock Grid.Column="1" Text="Math" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
+          <buttons:BackButton Grid.Column="0" Margin="5" VerticalAlignment="Center" 
+                              HorizontalAlignment="Center" 
+                              Template="{StaticResource BackButtonControlTemplate}" 
+                              Click="ButtonVariablesBack_Click"></buttons:BackButton>
         </Grid>
       </Grid>
     </Grid>
     <Grid Name="GridVariable" Visibility="Collapsed">
-      <Grid>
+      <Grid Margin="0 10 0 0">
         <Grid.RowDefinitions>
-          <RowDefinition Height="0.5*"/>
+          <RowDefinition Height="Auto"/>
           <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <phone:Pivot Grid.Row="1" Margin="0 -30 0 0">
+        <phone:Pivot Grid.Row="1" Margin="80 -100 0 0">
           <phone:PivotItem Header="Global">
             <Grid Margin="0 -25 0 0">
               <ListBox Name="ListBoxGlobalVariables">
@@ -420,20 +483,85 @@
           </phone:PivotItem>
           <phone:PivotItem Header="Object">
             <Grid Margin="0 -25 0 0">
-              <!--<ListBox Name="ListBoxSensorVariables">
-                <Grid d:DataContext="{d:DesignInstance variables:UserVariable}">
-                  <TextBlock Text="{Binding Name}"></TextBlock>
+              <Grid Margin="0 0 0 0">
+                <Grid>
+                  <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <Button Grid.Row="0" Grid.Column="0" Content="Brightness" 
+                      DataContext="{StaticResource ObjectVariableBrightness}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="0" Grid.Column="1" Content="Direction" 
+                      DataContext="{StaticResource ObjectVariableDirection}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+
+                  <Button Grid.Row="1" Grid.Column="0" Content="Layer" 
+                      DataContext="{StaticResource ObjectVariableLayer}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="1" Grid.Column="1" Content="Size" 
+                      DataContext="{StaticResource ObjectVariableSize}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+
+                  <Button Grid.Row="2" Grid.Column="0" Content="PositionX" 
+                      DataContext="{StaticResource ObjectVariablePositionX}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="2" Grid.Column="1" Content="PositionY" 
+                      DataContext="{StaticResource ObjectVariablePositionY}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+
+                  <Button Grid.Row="3" Grid.Column="0" Content="Transparency" 
+                      DataContext="{StaticResource ObjectVariableTransparency}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="3" Grid.Column="1" Content="Brush" 
+                      DataContext="{StaticResource ObjectsBrush}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
                 </Grid>
-              </ListBox>-->
+              </Grid>
             </Grid>
           </phone:PivotItem>
           <phone:PivotItem Header="Sensors">
             <Grid Margin="0 -25 0 0">
-              <!--<ListBox Name="ListBoxSensorVariables">
-                <Grid d:DataContext="{d:DesignInstance variables:UserVariable}">
-                  <TextBlock Text="{Binding Name}"></TextBlock>
+              <Grid Margin="0 0 0 0">
+                <Grid>
+                  <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <Button Grid.Row="0" Grid.Column="0" Content="AccelerationX" 
+                      DataContext="{StaticResource SensorVariableAccelerationX}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
+                  <Button Grid.Row="0" Grid.Column="1" Content="AccelerationY" 
+                      DataContext="{StaticResource SensorVariableAccelerationY}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
+
+                  <Button Grid.Row="1" Grid.Column="0" Content="AccelerationZ" 
+                      DataContext="{StaticResource SensorVariableAccelerationZ}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
+                  <Button Grid.Row="1" Grid.Column="1" Content="CompassDirection" 
+                      DataContext="{StaticResource SensorVariableCompassDirection}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
+
+                  <Button Grid.Row="2" Grid.Column="0" Content="InclinationX" 
+                      DataContext="{StaticResource SensorVariableInclinationX}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
+                  <Button Grid.Row="2" Grid.Column="1" Content="InclinationY" 
+                      DataContext="{StaticResource SensorVariableInclinationY}" 
+                      Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
                 </Grid>
-              </ListBox>-->
+              </Grid>
             </Grid>
           </phone:PivotItem>
         </phone:Pivot>
@@ -442,8 +570,8 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="4*"/>
           </Grid.ColumnDefinitions>
-          <Button  Click="ButtonVariablesBack_Click">back</Button>
-          <TextBlock Grid.Column="1" Text="Variables" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
+          <buttons:BackButton Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                              Template="{StaticResource BackButtonControlTemplate}" Click="ButtonVariablesBack_Click"/>
         </Grid>
       </Grid>
     </Grid>

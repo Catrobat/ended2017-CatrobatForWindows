@@ -8,13 +8,42 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public class SetVariableBrick : Brick
     {
-        protected UserVariableReference _userVariableReference;
-        public UserVariableReference UserVariableReference
+        private UserVariableReference _userVariableReference;
+        internal UserVariableReference UserVariableReference
         {
             get { return _userVariableReference; }
             set
             {
+                if (_userVariableReference == value)
+                    return;
+
                 _userVariableReference = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public UserVariable UserVariable
+        {
+            get
+            {
+                if (_userVariableReference == null)
+                    return null;
+
+                return _userVariableReference.UserVariable;
+            }
+            set
+            {
+                if (_userVariableReference == null)
+                    _userVariableReference = new UserVariableReference();
+
+                if (_userVariableReference.UserVariable == value)
+                    return;
+
+                _userVariableReference.UserVariable = value;
+
+                if (value == null)
+                    _userVariableReference = null;
+
                 RaisePropertyChanged();
             }
         }
@@ -25,6 +54,9 @@ namespace Catrobat.Core.Objects.Bricks
             get { return _variableFormula; }
             set
             {
+                if (_variableFormula == value)
+                    return;
+
                 _variableFormula = value;
                 RaisePropertyChanged();
             }
@@ -38,16 +70,18 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            _userVariableReference = new UserVariableReference(xRoot.Element("userVariable"));
-            _variableFormula = new Formula(xRoot.Element("variableFormula"));
+            if (xRoot.Element("userVariable") != null)
+                _userVariableReference = new UserVariableReference(xRoot.Element("userVariable"));
+
+            if (xRoot.Element("variableFormula") != null)
+                _variableFormula = new Formula(xRoot.Element("variableFormula"));
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("setVariableBrick");
 
-            var xVariable1 = new XElement("userVariable");
-            xVariable1.Add(_userVariableReference.CreateXML());
+            var xVariable1 = _userVariableReference.CreateXML();
             xRoot.Add(xVariable1);
 
             var xVariable2 = new XElement("variableFormula");

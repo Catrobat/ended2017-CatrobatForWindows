@@ -84,7 +84,7 @@ namespace Catrobat.Core.Misc.Helpers
             }
 
             foreach (var tempSprite in Project.SpriteList.Sprites)
-                foreach (var script in sprite.Scripts.Scripts)
+                foreach (var script in tempSprite.Scripts.Scripts)
                     foreach (var brick in script.Bricks.Bricks)
                     {
                         if (brick is PointToBrick)
@@ -275,26 +275,44 @@ namespace Catrobat.Core.Misc.Helpers
 
         private static DataObject GetUserVariableObject(UserVariableReference userVariableReference, string reference)
         {
+            bool found = false;
+            var count = 0;
+
             foreach (var sprite in Project.SpriteList.Sprites)
+            {
                 foreach (var script in sprite.Scripts.Scripts)
                     foreach (var brick in script.Bricks.Bricks)
-                    {
                         if (brick is SetVariableBrick || brick is ChangeVariableBrick)
-                        {
-                            if ((brick as SetVariableBrick).UserVariableReference == userVariableReference ||
-                                (brick as ChangeVariableBrick).UserVariableReference == userVariableReference)
+                            if (brick is SetVariableBrick && (brick as SetVariableBrick).UserVariableReference == userVariableReference ||
+                                brick is ChangeVariableBrick && (brick as ChangeVariableBrick).UserVariableReference == userVariableReference)
                             {
-                                var count = 0;
-                                if (reference.Contains("["))
+                                found = true;
+                                if (reference.EndsWith("]"))
                                 {
-                                    reference = reference.Split('[')[1];
+                                    var splittetReference = reference.Split('[');
+                                    if(splittetReference.Count() > 2)
+                                        reference = reference.Split('[')[2];
+                                    else
+                                        reference = reference.Split('[')[1];
+
                                     reference = reference.Split(']')[0];
                                     count = Int32.Parse(reference) - 1;
                                 }
-                                return sprite.Costumes.Costumes[count];
+                                break;
                             }
-                        }
+
+                if (found)
+                {
+                    var entries = Project.VariableList.ObjectVariableList.ObjectVariableEntries;
+                    foreach (var entry in entries)
+                    {
+                        if (entry.Sprite == sprite)
+                            return entry.VariableList.UserVariables[count];
                     }
+                }
+            }
+
+        
             return null;
         }
 

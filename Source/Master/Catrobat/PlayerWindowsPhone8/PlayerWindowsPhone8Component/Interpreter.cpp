@@ -5,6 +5,7 @@
 #include "string"
 #include <sstream>
 #include <cmath>
+#include <ctime>
 
 using namespace std;
 using namespace Windows::Devices::Sensors;
@@ -177,13 +178,16 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
 		returnValue = tan(leftValue);
 		break;
 	case Function::LN: 
+		returnValue = log(leftValue);
 	case Function::LOG:
 		returnValue = log(leftValue);
 		break;
 	case Function::SQRT:
 		returnValue = sqrt(leftValue);
 		break;
-	case Function::RAND: 
+	case Function::RAND:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = this->CalculateRand(leftValue, rightValue);
 		break;
 	case Function::ABS: 
 		returnValue = abs(leftValue);
@@ -261,4 +265,14 @@ double Interpreter::CalculateMin(double value1, double value2)
 		return value1;
 	else 
 		return value2;
+}
+
+double Interpreter::CalculateRand(double value1, double value2)
+{
+	double min = this->CalculateMin(value1, value2);
+	double max = this->CalculateMax(value1, value2);
+
+    double f = (double)rand() / RAND_MAX;
+    double random_num = min + f * (max - min);
+	return random_num;
 }

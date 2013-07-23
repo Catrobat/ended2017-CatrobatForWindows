@@ -157,6 +157,7 @@ namespace Catrobat.Core.Objects
         public Project()
         {
             _broadcastMessages = new ObservableCollection<string>();
+            _variableList = new VariableList();
         }
 
         public Project(String xmlSource)
@@ -187,6 +188,9 @@ namespace Catrobat.Core.Objects
             _spriteList = new SpriteList();
             _spriteList.LoadFromXML(project.Element("objectList"));
             _variableList = new VariableList(project.Element("variables"));
+            _variableList.LoadReference();
+
+            _spriteList.LoadReference();
 
             ReferenceHelper.Project = null;
         }

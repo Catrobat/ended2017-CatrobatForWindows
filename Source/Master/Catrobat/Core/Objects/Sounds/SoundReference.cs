@@ -6,7 +6,7 @@ namespace Catrobat.Core.Objects.Sounds
 {
     public class SoundReference : DataObject
     {
-        private string _reference;
+        internal string _reference;
 
         private Sound _sound;
         public Sound Sound

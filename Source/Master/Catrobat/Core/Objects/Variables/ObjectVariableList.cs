@@ -12,7 +12,7 @@ namespace Catrobat.Core.Objects.Variables
     {
         public ObservableCollection<ObjectVariableEntry> ObjectVariableEntries;
 
-        public ObjectVariableList() {}
+        public ObjectVariableList() { ObjectVariableEntries = new ObservableCollection<ObjectVariableEntry>(); }
 
         public ObjectVariableList(XElement xElement)
         {
@@ -43,6 +43,22 @@ namespace Catrobat.Core.Objects.Variables
             }
 
             return xRoot;
+        }
+
+        internal override void LoadReference()
+        {
+            foreach(var entry in ObjectVariableEntries)
+                entry.LoadReference();
+        }
+
+        public DataObject Copy()
+        {
+            var newObjectVariableList = new ObjectVariableList();
+
+            foreach(var entry in ObjectVariableEntries)
+                newObjectVariableList.ObjectVariableEntries.Add(entry.Copy() as ObjectVariableEntry);
+
+            return newObjectVariableList;
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using Catrobat.Core.Misc.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.TestsCommon.Tests
+namespace Catrobat.TestsCommon.Tests.Misc
 {
   [TestClass]
-  public class FileNameGeneratorTest
+  public class FileNameGeneratorTests
   {
     [ClassInitialize()]
     public static void TestClassInitialize(TestContext testContext)

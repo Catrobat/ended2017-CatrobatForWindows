@@ -6,7 +6,7 @@ namespace Catrobat.Core.Objects.Costumes
 {
     public class CostumeReference : DataObject
     {
-        private string _reference;
+        internal string _reference;
 
         private Costume _costume;
         public Costume Costume
@@ -37,7 +37,7 @@ namespace Catrobat.Core.Objects.Costumes
         internal override void LoadFromXML(XElement xRoot)
         {
             _reference = xRoot.Attribute("reference").Value;
-            //Costume = ReferenceHelper.GetReferenceObject(this, _reference) as Costume;
+
         }
 
         internal override XElement CreateXML()

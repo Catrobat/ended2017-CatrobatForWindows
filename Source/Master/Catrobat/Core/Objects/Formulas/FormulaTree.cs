@@ -5,6 +5,8 @@ namespace Catrobat.Core.Objects.Formulas
 {
     public class FormulaTree : DataObject
     {
+        internal string _childName;
+
         private FormulaTree _leftChild;
         public FormulaTree LeftChild
         {
@@ -70,19 +72,23 @@ namespace Catrobat.Core.Objects.Formulas
         }
 
 
-        public FormulaTree() {}
+        public FormulaTree()
+        {
+            _childName = "formulaTree";
+        }
 
         public FormulaTree(XElement xElement)
         {
+            _childName = "formulaTree";
             LoadFromXML(xElement);
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
             if(xRoot.Element("leftChild") != null)
-                _leftChild = new FormulaTree(xRoot.Element("leftChild"));
+                _leftChild = new LeftChild(xRoot.Element("leftChild"));
             if (xRoot.Element("rightChild") != null)
-            _rightChild = new FormulaTree(xRoot.Element("rightChild"));
+            _rightChild = new RightChild(xRoot.Element("rightChild"));
 
             if (xRoot.Element("type") != null)
             _variableType = xRoot.Element("type").Value;
@@ -92,7 +98,7 @@ namespace Catrobat.Core.Objects.Formulas
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement("formulaTree");
+            var xRoot = new XElement(_childName);
 
             if(_leftChild != null)
                 xRoot.Add(_leftChild.CreateXML());

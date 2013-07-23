@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
-using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects.Costumes;
 
 namespace Catrobat.Core.Objects.Bricks
@@ -72,8 +71,6 @@ namespace Catrobat.Core.Objects.Bricks
             {
                 xRoot.Add(_costumeReference.CreateXML());
             }
-
-            ////CreateCommonXML(xRoot);
 
             return xRoot;
         }

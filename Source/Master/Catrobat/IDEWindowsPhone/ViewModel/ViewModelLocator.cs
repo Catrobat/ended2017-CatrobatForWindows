@@ -36,8 +36,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<OnlineProjectViewModel>();
             SimpleIoc.Default.Register<NewBroadcastMessageViewModel>(true);
             SimpleIoc.Default.Register<AddNewScriptBrickViewModel>(true);
-            SimpleIoc.Default.Register<ProjectNotValidViewModel>();
-            SimpleIoc.Default.Register<FormulaEditorViewModel>();
+            SimpleIoc.Default.Register<ProjectNotValidViewModel>(true);
+            SimpleIoc.Default.Register<FormulaEditorViewModel>(true);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",

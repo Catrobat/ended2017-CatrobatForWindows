@@ -92,6 +92,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 EditSpriteCommand.RaiseCanExecuteChanged();
                 CopySpriteCommand.RaiseCanExecuteChanged();
                 DeleteSpriteCommand.RaiseCanExecuteChanged();
+
+                var spriteChangedMessage = new GenericMessage<Sprite>(SelectedSprite);
+                Messenger.Default.Send<GenericMessage<Sprite>>(spriteChangedMessage, ViewModelMessagingToken.SelectedSpriteListener);
             }
         }
 
@@ -484,8 +487,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void AddNewScriptBrickAction()
         {
-            var message1 = new GenericMessage<Sprite>(SelectedSprite);
-            Messenger.Default.Send<GenericMessage<Sprite>>(message1, ViewModelMessagingToken.SelectedSpriteListener);
+            //var message1 = new GenericMessage<Sprite>(SelectedSprite);
+            //Messenger.Default.Send<GenericMessage<Sprite>>(message1, ViewModelMessagingToken.SelectedSpriteListener);
 
             var objects = new List<object> { ScriptBricks, ListBoxViewPort };
 
@@ -574,8 +577,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void CopySpriteAction()
         {
-            var newSprite = SelectedSprite.Copy() as Sprite;
-            Sprites.Add(newSprite);
+            var newSprite = SelectedSprite.Copy(CurrentProject) as Sprite;
+            if(newSprite != null)
+                Sprites.Add(newSprite);
         }
 
         private void DeleteSpriteAction()
@@ -653,7 +657,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             foreach (var costume in SelectedCostumes)
             {
                 var newCostume = costume.Copy() as Costume;
-                Costumes.Add(newCostume);
+                if(newCostume != null)
+                    Costumes.Add(newCostume);
             }
         }
 

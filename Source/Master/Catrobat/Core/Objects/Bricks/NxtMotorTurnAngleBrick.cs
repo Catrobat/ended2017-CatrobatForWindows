@@ -54,14 +54,14 @@ namespace Catrobat.Core.Objects.Bricks
         {
             var xRoot = new XElement("legoNxtMotorTurnAngleBrick");
 
+            var xVariable = new XElement("degrees");
+            xVariable.Add(_degrees.CreateXML());
+            xRoot.Add(xVariable);
+
              xRoot.Add(new XElement("motor")
             {
                 Value = _motor
             });
-
-             var xVariable = new XElement("degrees");
-             xVariable.Add(_degrees.CreateXML());
-            xRoot.Add(xVariable);
 
             return xRoot;
         }

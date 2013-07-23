@@ -19,11 +19,11 @@ namespace Catrobat.TestsCommon.Misc
 
             for (int i = 0; i < expectedElements.Count(); i++)
             {
-                CompairElement(expectedElements[i], actualElements[i]);
+                CompareElement(expectedElements[i], actualElements[i]);
             }
         }
 
-        private static void CompairElement(XElement expectedElement, XElement actualElement)
+        private static void CompareElement(XElement expectedElement, XElement actualElement)
         {
             Assert.AreEqual(expectedElement.Name, actualElement.Name);
 
@@ -42,7 +42,7 @@ namespace Catrobat.TestsCommon.Misc
 
             for (int i = 0; i < expectedElements.Count(); i++)
             {
-                CompairElement(expectedElements[i], actualElements[i]);
+                CompareElement(expectedElements[i], actualElements[i]);
             }
         }
     }

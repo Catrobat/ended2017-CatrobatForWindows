@@ -163,7 +163,7 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formula = new FormulaTree("FUNCTION", "LN");
 			formula->SetLeftChild(new FormulaTree("NUMBER", "2.0"));
 
-			double expected = 0.69314718;
+			double expected = 0.69314718055994530941723212145818;
             double actual = interpreter->EvaluateFormula(formula, object);
             Assert::AreEqual(expected, actual);
 		}
@@ -176,7 +176,8 @@ namespace PlayerWindowsPhone8Test
 			FormulaTree *formula = new FormulaTree("FUNCTION", "LN");
 			formula->SetLeftChild(new FormulaTree("NUMBER", "0.0"));
 
-			double expected = -1.0; // TODO: test Exception
+			//double expected = -1.0; // TODO: test Exception
+			double expected = NULL;
             double actual = interpreter->EvaluateFormula(formula, object);
             Assert::AreEqual(expected, actual);
 		}
