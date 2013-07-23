@@ -12,6 +12,12 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Catrobat.IDECommon.Resources;
+using Catrobat.IDECommon.Resources.Paint;
+using Catrobat.Paint.Annotations;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -22,13 +28,16 @@ namespace Catrobat.Paint.ViewModel
     /// This class contains static references to all the view models in the
     /// application and provides an entry point for the bindings.
     /// </summary>
-    public class ViewModelLocator
+    public class ViewModelLocator: INotifyPropertyChanged
     {
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
         public ViewModelLocator()
         {
+            _localizedStrings = new LocalizedStrings();
+            _localizedStrings.PropertyChanged += LocalizedStringsOnPropertyChanged;
+
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             ////if (ViewModelBase.IsInDesignModeStatic)
@@ -45,6 +54,20 @@ namespace Catrobat.Paint.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
         }
 
+        private void LocalizedStringsOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            RaisePropertyChanged("Resources");
+        }
+
+        private readonly LocalizedStrings _localizedStrings;
+        public PaintResources Resources
+        {
+            get
+            {
+                return _localizedStrings.Paint;
+            }
+        }
+
         public MainViewModel Main
         {
             get
@@ -57,5 +80,18 @@ namespace Catrobat.Paint.ViewModel
         {
             // TODO Clear the ViewModels
         }
+
+        #region PropertyChenged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
     }
 }

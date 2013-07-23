@@ -9,7 +9,7 @@ using Catrobat.Core;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Storage;
 using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDECommon.Resources.IDE.Editor;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Misc.Sounds;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;

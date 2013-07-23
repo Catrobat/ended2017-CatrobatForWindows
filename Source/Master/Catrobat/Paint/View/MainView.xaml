@@ -13,14 +13,15 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
-    xmlns:local="clr-namespace:Catrobat.Paint.View">
+    xmlns:local="clr-namespace:Catrobat.Paint.View"
+    xmlns:resources="clr-namespace:Catrobat.IDECommon.Resources;assembly=Catrobat.IDECommon">
 
 
 
     <phone:PhoneApplicationPage.Resources>
         <ResourceDictionary>
-            <vm:ViewModelLocator x:Key="Locator" />
-        </ResourceDictionary>
+      <vm:ViewModelLocator x:Key="Locator" />
+    </ResourceDictionary>
     </phone:PhoneApplicationPage.Resources>
 
 
@@ -31,7 +32,8 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <TextBlock
+
+    <TextBlock
                    MinWidth="50"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
@@ -39,9 +41,9 @@
                    TextAlignment="Center" Margin="242,38,227,703" />
 
 
-        <local:MvvmView1 Margin="0,70,0,71"/>
-
-    </Grid>
+      <local:MvvmView1 Margin="0,70,0,71"/>
+    <TextBlock Text="{Binding Path=Resources.ActionSingular, Source={StaticResource Locator}}"/>
+  </Grid>
 
 
 

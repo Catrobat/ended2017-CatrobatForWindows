@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Catrobat.Core.Annotations;
 using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDECommon.Resources.IDE.Editor;
 using Catrobat.IDEWindowsPhone.Misc;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
