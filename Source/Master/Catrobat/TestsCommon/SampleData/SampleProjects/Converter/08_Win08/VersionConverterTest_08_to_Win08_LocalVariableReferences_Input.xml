@@ -68,15 +68,21 @@
   <variables>
     <objectVariableList>
       <entry>
-        <object reference="../../../../objectList/object[1]"/>
+        <object reference="../../../../objectList/object[2]"/>
         <list>
           <userVariable reference="../../../../../objectList/object[2]/scriptList/startScript/brickList/setVariableBrick/userVariable"/>
+
+
+
         </list>
       </entry>
       <entry>
-        <object reference="../../../../objectList/object[0]"/>
+        <object reference="../../../../objectList/object[1]"/>
         <list>
           <userVariable reference="../../../../../objectList/object[1]/scriptList/startScript/brickList/setVariableBrick/userVariable"/>
+
+
+
         </list>
       </entry>
     </objectVariableList>

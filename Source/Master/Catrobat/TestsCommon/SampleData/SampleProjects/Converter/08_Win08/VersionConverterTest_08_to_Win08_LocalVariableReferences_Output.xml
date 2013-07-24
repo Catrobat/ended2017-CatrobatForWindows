@@ -64,7 +64,7 @@
   <variables>
     <objectVariableList>
       <entry>
-        <object reference="../../../../objectList/object[1]"/>
+        <object reference="../../../../objectList/object[2]"/>
         <list>
           <userVariable>
             <name>local1</name>
@@ -72,7 +72,7 @@
         </list>
       </entry>
       <entry>
-        <object reference="../../../../objectList/object[0]"/>
+        <object reference="../../../../objectList/object[1]"/>
         <list>
           <userVariable>
             <name>local1</name>
