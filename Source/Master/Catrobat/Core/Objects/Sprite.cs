@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Xml.Linq;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects.Costumes;
@@ -136,12 +138,14 @@ namespace Catrobat.Core.Objects
         internal override void LoadReference()
         {
             foreach (var script in Scripts.Scripts)
-                script.LoadReference();
+                foreach (var brick in script.Bricks.Bricks)
+                        brick.LoadReference();
         }
 
-        public DataObject Copy(Project currentProject)
+        public DataObject Copy()
         {
             var newSprite = new Sprite();
+
             newSprite._name = _name;
             if (_costumes != null)
             {
@@ -156,19 +160,20 @@ namespace Catrobat.Core.Objects
                 newSprite._scripts = _scripts.Copy() as ScriptList;
             }
 
-            var entries = currentProject.VariableList.ObjectVariableList.ObjectVariableEntries;
-            foreach (var entry in entries)
-            {
-                if (entry.Sprite == this)
-                    entries.Add(entry.Copy(newSprite) as ObjectVariableEntry); //changes Spritereference to new Sprite
-            }
 
-            ReferenceHelper.Project = currentProject;
-            if (_scripts != null)
-            {
-                newSprite._scripts.LoadReference();
-            }
-            ReferenceHelper.Project = null;
+            var entries = ProjectHolder.Project.VariableList.ObjectVariableList.ObjectVariableEntries;
+            ObjectVariableEntry newEntry = null;
+
+            foreach (var entry in entries)
+                if (entry.Sprite == this)
+                {
+                    newEntry = entry.Copy(newSprite) as ObjectVariableEntry; //changes Spritereference to new Sprite
+                }
+            if (newEntry != null)
+                entries.Add(newEntry);
+
+
+            ReferenceHelper.UpdateReferencesAfterCopy(this, newSprite);
 
             return newSprite;
         }

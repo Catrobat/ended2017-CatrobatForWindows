@@ -62,11 +62,11 @@ namespace Catrobat.Core.Objects.Bricks
             }
         }
 
-        public SetVariableBrick() {}
+        public SetVariableBrick() { }
 
         public SetVariableBrick(XElement xElement) : base(xElement) { }
 
-        
+
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -93,7 +93,8 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            _userVariableReference.LoadReference();
+            if(_userVariableReference.UserVariable == null)
+                _userVariableReference.LoadReference();
         }
 
         public override DataObject Copy()

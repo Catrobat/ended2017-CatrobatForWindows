@@ -114,6 +114,14 @@ namespace Catrobat.Core.Objects.Bricks
             return xRoot;
         }
 
+        internal override void LoadReference()
+        {
+            if (_ifLogicBeginBrickReference.IfLogicBeginBrick == null)
+                _ifLogicBeginBrickReference.LoadReference();
+            if (_ifLogicEndBrickReference.IfLogicEndBrick == null)
+                _ifLogicEndBrickReference.LoadReference();
+        }
+
         public override DataObject Copy()
         {
             var newBrick = new IfLogicElseBrick();

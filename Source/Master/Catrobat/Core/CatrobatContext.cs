@@ -86,6 +86,7 @@ namespace Catrobat.Core
                 }
 
                 _currentProject = value;
+                ProjectHolder.Project = _currentProject;
                 RaisePropertyChanged();
                 RaisePropertyChanged("LocalProjects");
                 UpdateLocalProjects();
@@ -337,8 +338,6 @@ namespace Catrobat.Core
 
         public void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
         {
-            ReferenceHelper.Project = CurrentProject;
-
             foreach (Script script in selectedSprite.Scripts.Scripts)
             {
                 foreach (Brick brick in script.Bricks.Bricks)
@@ -349,8 +348,6 @@ namespace Catrobat.Core
                     }
                 }
             }
-
-            ReferenceHelper.Project = null;
         }
 
         public void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite)

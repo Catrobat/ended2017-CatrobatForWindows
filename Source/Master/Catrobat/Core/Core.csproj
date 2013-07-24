@@ -45,9 +45,6 @@
   <ItemGroup>
     <Compile Include="CatrobatContext.cs" />
     <Compile Include="CatrobatContextDeign.cs" />
-    <Compile Include="Converter\Converter.cs" />
-    <Compile Include="Converter\EditXML.cs" />
-    <Compile Include="Converter\PathHelper.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="IContextHolder.cs" />
     <Compile Include="Misc\Helpers\PlatformInformationHelper.cs" />
@@ -60,6 +57,7 @@
     <Compile Include="Misc\Helpers\LanguageHelper.cs" />
     <Compile Include="Misc\Helpers\MD5.cs" />
     <Compile Include="Misc\Helpers\IPlatformInformationHelper.cs" />
+    <Compile Include="Misc\Helpers\ProjectHolder.cs" />
     <Compile Include="Misc\Helpers\ReadHelper.cs" />
     <Compile Include="Misc\Helpers\ReferenceHelper.cs" />
     <Compile Include="ICatrobatContext.cs" />
@@ -95,9 +93,9 @@
     <Compile Include="Objects\Bricks\HideBrick.cs" />
     <Compile Include="Objects\Bricks\IfOnEdgeBounceBrick.cs" />
     <Compile Include="Objects\Bricks\LoopBeginBrick.cs" />
-    <Compile Include="Objects\Bricks\LoopBeginBrickRef.cs" />
+    <Compile Include="Objects\Bricks\LoopBeginBrickReference.cs" />
     <Compile Include="Objects\Bricks\LoopEndBrick.cs" />
-    <Compile Include="Objects\Bricks\LoopEndBrickRef.cs" />
+    <Compile Include="Objects\Bricks\LoopEndBrickReference.cs" />
     <Compile Include="Objects\Bricks\MoveNStepsBrick.cs" />
     <Compile Include="Objects\Bricks\NextCostumeBrick.cs" />
     <Compile Include="Objects\Bricks\NoteBrick.cs" />

@@ -52,9 +52,9 @@ namespace Catrobat.Core.Objects.Bricks
         }
 
 
-        public PlaySoundBrick() {}
+        public PlaySoundBrick() { }
 
-        public PlaySoundBrick(XElement xElement) : base(xElement) {}
+        public PlaySoundBrick(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -80,7 +80,8 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            _soundReference.LoadReference();
+            if (_soundReference.Sound == null)
+                _soundReference.LoadReference();
         }
 
         public override DataObject Copy()

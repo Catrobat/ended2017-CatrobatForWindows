@@ -56,12 +56,6 @@ namespace Catrobat.Core.Objects.Scripts
             }
         }
 
-        internal override void LoadReference()
-        {
-            foreach (var brick in Bricks.Bricks)
-                brick.LoadReference();
-        }
-
         public abstract DataObject Copy();
     }
 }

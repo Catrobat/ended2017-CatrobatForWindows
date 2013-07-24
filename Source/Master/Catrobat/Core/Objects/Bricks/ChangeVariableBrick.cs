@@ -60,7 +60,7 @@ namespace Catrobat.Core.Objects.Bricks
         }
 
 
-        public ChangeVariableBrick() {}
+        public ChangeVariableBrick() { }
 
         public ChangeVariableBrick(XElement xElement) : base(xElement) { }
 
@@ -90,7 +90,8 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            _userVariableReference.LoadReference();
+            if (_userVariableReference.UserVariable == null)
+                _userVariableReference.LoadReference();
         }
 
         public override DataObject Copy()

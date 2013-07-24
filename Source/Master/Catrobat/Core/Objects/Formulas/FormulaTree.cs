@@ -117,11 +117,11 @@ namespace Catrobat.Core.Objects.Formulas
             var newFormulaTree = new FormulaTree();
 
             if (_leftChild != null)
-                newFormulaTree._leftChild.Copy();
+                newFormulaTree.LeftChild = _leftChild.Copy() as LeftChild;
             if (_rightChild != null)
-                newFormulaTree._rightChild.Copy();
-            newFormulaTree._variableType = _variableType;
-            newFormulaTree._variableValue = _variableValue;
+                newFormulaTree.RightChild = _rightChild.Copy() as RightChild;
+            newFormulaTree.VariableType = _variableType;
+            newFormulaTree.VariableValue = _variableValue;
 
             return newFormulaTree;
         }

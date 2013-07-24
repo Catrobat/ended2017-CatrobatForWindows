@@ -4,7 +4,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Xml.Linq;
 using System.Collections.Generic;
-using Catrobat.Core.Converter;
 using Catrobat.Core.VersionConverter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.TestsCommon.Misc;

@@ -6,8 +6,8 @@ namespace Catrobat.Core.Objects.Bricks
 {
     public abstract class LoopBeginBrick : Brick
     {
-        protected LoopEndBrickRef _loopEndBrickReference;
-        public LoopEndBrickRef LoopEndBrickReference
+        protected LoopEndBrickReference _loopEndBrickReference;
+        public LoopEndBrickReference LoopEndBrickReference
         {
             get { return _loopEndBrickReference; }
             set
@@ -28,7 +28,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 if (_loopEndBrickReference == null)
-                    _loopEndBrickReference = new LoopEndBrickRef();
+                    _loopEndBrickReference = new LoopEndBrickReference();
 
                 if (_loopEndBrickReference.LoopEndBrick == value)
                     return;
@@ -55,7 +55,7 @@ namespace Catrobat.Core.Objects.Bricks
         {
             if (xRoot.Element("loopEndBrick") != null)
             {
-                _loopEndBrickReference = new LoopEndBrickRef(xRoot.Element("loopEndBrick"));
+                _loopEndBrickReference = new LoopEndBrickReference(xRoot.Element("loopEndBrick"));
             }
         }
 
@@ -66,7 +66,8 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            _loopEndBrickReference.LoadReference();
+            if (_loopEndBrickReference.LoopEndBrick == null)
+                _loopEndBrickReference.LoadReference();
         }
 
         public abstract override DataObject Copy();

@@ -56,7 +56,7 @@ namespace Catrobat.Core.Objects.Variables
 
         public UserVariableList VariableList;
 
-        public ObjectVariableEntry() { VariableList = new UserVariableList();}
+        public ObjectVariableEntry() { VariableList = new UserVariableList(); }
 
         public ObjectVariableEntry(XElement xElement)
         {
