@@ -1,0 +1,73 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+  xmlns:mvvmLightExtras="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+  xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
+  xmlns:sb="clr-namespace:Catrobat.IDEWindowsPhone.Views.Editor.Scripts"
+  xmlns:rlb="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Bricks"
+  xmlns:controls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.ListPicker"
+  xmlns:costumes="clr-namespace:Catrobat.Core.Objects.Costumes;assembly=Catrobat.Core"
+  xmlns:sounds="clr-namespace:Catrobat.Core.Objects.Sounds;assembly=Catrobat.Core"
+  xmlns:objects="clr-namespace:Catrobat.Core.Objects;assembly=Catrobat.Core"
+  xmlns:system="clr-namespace:System;assembly=mscorlib" 
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:bricks="clr-namespace:Catrobat.Core.Objects.Bricks;assembly=Catrobat.Core"
+  xmlns:scripts="clr-namespace:Catrobat.Core.Objects.Scripts;assembly=Catrobat.Core"
+  xmlns:formulaControls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls"
+  xmlns:math="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas.Math"
+  xmlns:formulas="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas"
+  xmlns:number="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas.Number"
+  xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+  mc:Ignorable="d">
+
+  <converters:BoolFormulaBackgroundConverter x:Key="BoolFormulaBackgroundConverter"/>
+
+
+  <SolidColorBrush x:Key="FormulaSelectedBackgrount" Color="Orange" />
+  <SolidColorBrush x:Key="FormulaNotSelectedBackgrount" Color="Transparent" />
+
+  <SolidColorBrush x:Key="MathFunctionBrush" Color="#FFE035D5" />
+  <SolidColorBrush x:Key="BoolFunctionBrush" Color="#FF8A018C" />
+  <SolidColorBrush x:Key="NumberBrush" Color="#FF891D1D" />
+  <Thickness x:Key="FormulaOpenBrecketMargin">5 0 3 0</Thickness>
+  <Thickness x:Key="FormulaClosedBrecketMargin">2 0 5 0</Thickness>
+  <Thickness x:Key="FormulaParameterSeperatorMargin">1 0 5 0</Thickness>
+
+  <DataTemplate x:Key="UiFormulaRootTemplate">
+    <StackPanel Margin="0" d:DataContext="{d:DesignInstance formulas:UiFormulaRoot}">
+      <formulaControls:UiFormulaTreeItem UiFormula="{Binding UiFormula}"/>
+    </StackPanel>
+  </DataTemplate>
+
+  <!--####### Unknown #################################################################################################-->
+  <DataTemplate x:Key="UiFormulaUnknown" >
+    <toolkit:WrapPanel Orientation="Horizontal" Background="{Binding IsSelected, Converter={StaticResource BoolFormulaBackgroundConverter}, Mode=OneWay}" 
+                Margin="0" d:DataContext="{d:DesignInstance formulas:UiFormula}">
+      <TextBlock Text="{Binding TreeItem.VariableType}" FontSize="{Binding FontSize}" Foreground="{StaticResource NumberBrush}"/>
+    </toolkit:WrapPanel>
+  </DataTemplate>
+
+  <!--####### Formula Numbers #################################################################################################-->
+  <DataTemplate x:Key="UiFormulaNumber" >
+    <toolkit:WrapPanel Orientation="Horizontal" Background="{Binding IsSelected, Converter={StaticResource BoolFormulaBackgroundConverter}, Mode=OneWay}" 
+                Margin="0" d:DataContext="{d:DesignInstance formulas:UiFormula}">
+      <TextBlock Text="{Binding FormulaValue}" FontSize="{Binding FontSize}" Foreground="{StaticResource NumberBrush}"/>
+    </toolkit:WrapPanel>
+  </DataTemplate>
+
+  <!--####### Formula Math Templates #################################################################################################-->
+  <DataTemplate x:Key="UiFormulaTemplateMathRandom">
+    <toolkit:WrapPanel Orientation="Horizontal" Background="{Binding IsSelected, Converter={StaticResource BoolFormulaBackgroundConverter}, Mode=OneWay}" 
+                Margin="0" d:DataContext="{d:DesignInstance formulas:UiFormula}">
+      <TextBlock Text="random" FontSize="{Binding FontSize}" Foreground="{StaticResource MathFunctionBrush}"/>
+      <TextBlock Text="(" FontSize="{Binding FontSize}" Margin="{StaticResource FormulaOpenBrecketMargin}"/>
+      <formulaControls:UiFormulaTreeItem UiFormula="{Binding LeftFormula}"/>
+      <TextBlock Text="," FontSize="{Binding FontSize}" Margin="{StaticResource FormulaParameterSeperatorMargin}"/>
+      <formulaControls:UiFormulaTreeItem UiFormula="{Binding RightFormula}"/>
+      <TextBlock Text=")" FontSize="{Binding FontSize}" Margin="{StaticResource FormulaClosedBrecketMargin}"/>
+    </toolkit:WrapPanel>
+  </DataTemplate>
+
+</ResourceDictionary>

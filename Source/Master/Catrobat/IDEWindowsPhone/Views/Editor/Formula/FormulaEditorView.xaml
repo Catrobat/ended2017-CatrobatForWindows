@@ -20,12 +20,13 @@
   <Grid x:Name="LayoutRoot"
           Background="Transparent">
     <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
       <RowDefinition Height="480" />
     </Grid.RowDefinitions>
-    <formulaControls:FormulaViewer Name="FormulaViewer" Formula="{Binding Formula}" IsEditEnabled="True" IsMultiline="True"></formulaControls:FormulaViewer>
-    <formulaControls:FormulaKeyboard Name="FormulaKeyboard" LocalVariables="{Binding LocalVariables}" GlobalVariables="{Binding GlobalVariables}" Grid.Row="2"/>
+    <ScrollViewer>
+      <formulaControls:FormulaViewer Name="FormulaViewer" IsAutoFontSize="True" IsEditEnabled="True" IsMultiline="True" Formula="{Binding Formula}"></formulaControls:FormulaViewer>
+    </ScrollViewer>
+    <formulaControls:FormulaKeyboard Name="FormulaKeyboard" LocalVariables="{Binding LocalVariables}" GlobalVariables="{Binding GlobalVariables}" Grid.Row="1"/>
   </Grid>
 
 </phone:PhoneApplicationPage>

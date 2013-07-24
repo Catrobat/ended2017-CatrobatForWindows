@@ -11,6 +11,6 @@
     d:DesignHeight="80" d:DesignWidth="480">
 
   <Grid x:Name="LayoutRoot">
-    <formulaControls:FormulaViewerTreeItem Name="FormulaViewerTreeItemRoot"/>
+    <formulaControls:UiFormulaTreeItem Name="FormulaViewerTreeItemRoot" HorizontalAlignment="Left" VerticalAlignment="Top"/>
   </Grid>
 </UserControl>
