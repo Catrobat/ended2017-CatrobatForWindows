@@ -7,7 +7,7 @@ using Catrobat.Core;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.JSON;
 using Catrobat.Core.Misc.ServerCommunication;
-using Catrobat.IDECommon.Resources.Main;
+using Catrobat.IDECommon.Resources.IDE.Main;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Service;
 using GalaSoft.MvvmLight;

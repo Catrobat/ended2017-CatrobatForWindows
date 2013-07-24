@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Catrobat.Core.Objects;
-using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDECommon.Resources.IDE.Editor;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using GalaSoft.MvvmLight;

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Catrobat.IDECommon.Resources.Editor {
+namespace Catrobat.IDECommon.Resources.IDE.Editor {
     using System;
     using System.Reflection;
     
@@ -40,7 +40,7 @@ namespace Catrobat.IDECommon.Resources.Editor {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Catrobat.IDECommon.Resources.Editor.EditorResources", typeof(EditorResources).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Catrobat.IDECommon.Resources.IDE.Editor.EditorResources", typeof(EditorResources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

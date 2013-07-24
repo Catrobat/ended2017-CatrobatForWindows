@@ -129,6 +129,9 @@
     <Compile Include="Controls\FormulaControls\FormulaViewer.xaml.cs">
       <DependentUpon>FormulaViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaControls\FormulaViewerTreeItem.xaml.cs">
+      <DependentUpon>FormulaViewerTreeItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ListPicker\ListPickerPage.xaml.cs">
       <DependentUpon>ListPickerPage.xaml</DependentUpon>
     </Compile>
@@ -353,6 +356,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\FormulaControls\FormulaViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FormulaControls\FormulaViewerTreeItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

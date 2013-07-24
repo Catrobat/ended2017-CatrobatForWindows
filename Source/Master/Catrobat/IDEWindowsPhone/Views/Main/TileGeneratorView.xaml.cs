@@ -6,7 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Catrobat.Core.Storage;
-using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDECommon.Resources.IDE.Editor;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Coding4Fun.Toolkit.Controls.Common;

@@ -14,7 +14,7 @@ using GalaSoft.MvvmLight.Command;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using GalaSoft.MvvmLight.Messaging;
-using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDECommon.Resources.IDE.Editor;
 using System.Windows;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;

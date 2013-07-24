@@ -5,7 +5,10 @@ using Catrobat.Core.Objects.Formulas;
 using Catrobat.Core.Objects.Variables;
 using Catrobat.IDEWindowsPhone.Converters;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.ViewModel;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
 using Catrobat.IDEWindowsPhone.Views.Editor.Formula;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 {
@@ -40,6 +43,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
         private void ButtonFormula_OnClick(object sender, RoutedEventArgs e)
         {
+            var viewModel = ServiceLocator.Current.GetInstance<FormulaEditorViewModel>();
+            viewModel.Formula = Formula;
             Navigation.NavigateTo(typeof(FormulaEditorView));
         }
     }

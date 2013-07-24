@@ -3,7 +3,7 @@ using System.Threading;
 using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.Misc.ServerCommunication;
-using Catrobat.IDECommon.Resources.Main;
+using Catrobat.IDECommon.Resources.IDE.Main;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

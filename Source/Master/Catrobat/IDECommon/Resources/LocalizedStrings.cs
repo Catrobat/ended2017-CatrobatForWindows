@@ -1,28 +1,34 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using Catrobat.IDECommon.Resources.Bricks;
-using Catrobat.IDECommon.Resources.Editor;
-using Catrobat.IDECommon.Resources.Main;
+using Catrobat.IDECommon.Resources.IDE.Bricks;
+using Catrobat.IDECommon.Resources.IDE.Editor;
+using Catrobat.IDECommon.Resources.IDE.Main;
+using Catrobat.IDECommon.Resources.Paint;
+
 
 namespace Catrobat.IDECommon.Resources
 {
   public class LocalizedStrings : INotifyPropertyChanged
   {
-    private static readonly MainResources _main = new MainResources();
-    public MainResources Main { get { return _main; } }
+    private static readonly MainResources MainField = new MainResources();
+    public MainResources Main { get { return MainField; } }
 
-    private static readonly EditorResources _editor = new EditorResources();
-    public EditorResources Editor { get { return _editor; } }
+    private static readonly EditorResources EditorField = new EditorResources();
+    public EditorResources Editor { get { return EditorField; } }
 
-    private static readonly BrickResources _bricks = new BrickResources();
-    public BrickResources Bricks { get { return _bricks; } }
+    private static readonly BrickResources BricksField = new BrickResources();
+    public BrickResources Bricks { get { return BricksField; } }
+
+    private static readonly PaintResources PaintField = new PaintResources();
+    public PaintResources Paint { get { return PaintField; } }
 
     public void Reset()
     {
       RaisePropertyChanged(() => Main);
       RaisePropertyChanged(() => Editor);
       RaisePropertyChanged(() => Bricks);
+      RaisePropertyChanged(() => Paint);
     }
 
     #region INotifyPropertyChanged region

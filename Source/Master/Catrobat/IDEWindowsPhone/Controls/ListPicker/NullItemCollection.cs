@@ -11,7 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Catrobat.IDECommon.Resources.Editor;
+using Catrobat.IDECommon.Resources.IDE.Editor;
 using Catrobat.IDEWindowsPhone.Annotations;
 
 namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
