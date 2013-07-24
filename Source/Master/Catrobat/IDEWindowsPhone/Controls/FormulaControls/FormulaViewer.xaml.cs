@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -8,6 +9,7 @@ using System.Windows.Navigation;
 using Catrobat.Core.Objects.Formulas;
 using Catrobat.Core.Objects.Variables;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Reactive;
 using Microsoft.Phone.Shell;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
@@ -58,10 +60,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
         private static void FormulaChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            // TODO: implement me
-            // Code for dealing with your property changes
+            ((FormulaViewer) d).FormulaViewerTreeItemRoot.TreeItem = ((Formula) e.NewValue).FormulaTree;
         }
-
 
         #endregion
 
@@ -74,7 +74,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
         public void KeyPressed(FormulaEditorKey key)
         {
             // TODO: implement me
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            FormulaViewerTreeItemRoot.TreeItem.LeftChild = new FormulaTree{IsRealObject = true, VariableValue = "42", VariableType = "int"};
         }
 
         public void ObjectVariableSelected(ObjectVariable variable)
