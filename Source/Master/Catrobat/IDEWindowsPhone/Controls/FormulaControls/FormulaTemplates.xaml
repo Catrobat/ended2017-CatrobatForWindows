@@ -20,6 +20,8 @@
   xmlns:formulas="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas"
   xmlns:number="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas.Number"
   xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+  xmlns:generic="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+  xmlns:partControls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls"
   mc:Ignorable="d">
 
   <converters:BoolFormulaBackgroundConverter x:Key="BoolFormulaBackgroundConverter"/>
@@ -50,24 +52,18 @@
   </DataTemplate>
 
   <!--####### Formula Numbers #################################################################################################-->
-  <DataTemplate x:Key="UiFormulaNumber" >
-    <toolkit:WrapPanel Orientation="Horizontal" Background="{Binding IsSelected, Converter={StaticResource BoolFormulaBackgroundConverter}, Mode=OneWay}" 
-                Margin="0" d:DataContext="{d:DesignInstance formulas:UiFormula}">
-      <TextBlock Text="{Binding FormulaValue}" FontSize="{Binding FontSize}" Foreground="{StaticResource NumberBrush}"/>
-    </toolkit:WrapPanel>
-  </DataTemplate>
-
+  <partControls:FormulaPartControlList x:Key="UiFormulaNumber" >
+    <partControls:FormulaPartControlNumbers/>
+  </partControls:FormulaPartControlList>
+  
   <!--####### Formula Math Templates #################################################################################################-->
-  <DataTemplate x:Key="UiFormulaTemplateMathRandom">
-    <toolkit:WrapPanel Orientation="Horizontal" Background="{Binding IsSelected, Converter={StaticResource BoolFormulaBackgroundConverter}, Mode=OneWay}" 
-                Margin="0" d:DataContext="{d:DesignInstance formulas:UiFormula}">
-      <TextBlock Text="random" FontSize="{Binding FontSize}" Foreground="{StaticResource MathFunctionBrush}"/>
-      <TextBlock Text="(" FontSize="{Binding FontSize}" Margin="{StaticResource FormulaOpenBrecketMargin}"/>
-      <formulaControls:UiFormulaTreeItem UiFormula="{Binding LeftFormula}"/>
-      <TextBlock Text="," FontSize="{Binding FontSize}" Margin="{StaticResource FormulaParameterSeperatorMargin}"/>
-      <formulaControls:UiFormulaTreeItem UiFormula="{Binding RightFormula}"/>
-      <TextBlock Text=")" FontSize="{Binding FontSize}" Margin="{StaticResource FormulaClosedBrecketMargin}"/>
-    </toolkit:WrapPanel>
-  </DataTemplate>
+  <partControls:FormulaPartControlList x:Key="UiFormulaTemplateMathRandom">
+    <partControls:FormulaPartControlStaticText LocalizedResourceName="Random"/>
 
+    <partControls:FormulaPartControlStaticText LocalizedResourceName="OpenBrecket"/>
+      <partControls:FormulaPartControlPlaceholderLeft/>
+    <partControls:FormulaPartControlStaticText LocalizedResourceName="ParameterSeperator"/>
+      <partControls:FormulaPartControlPlaceholderRight/>
+    <partControls:FormulaPartControlStaticText LocalizedResourceName="ClosedBrecket"/>
+  </partControls:FormulaPartControlList>
 </ResourceDictionary>

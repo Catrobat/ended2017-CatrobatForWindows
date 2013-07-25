@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Catrobat.Core.Objects.Formulas;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
+using Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -41,11 +42,19 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
         #endregion
 
+
+
+
         private void UpdateUI()
         {
-            ContentControlContent.Content = UiFormula;
-            ContentControlContent.DataContext = UiFormula;
-            ContentControlContent.ContentTemplate = UiFormula.Template;
+            //var allParts = UiFormula.GetAllParts();
+
+
+
+
+            //WrapPanelContent.Children;
+            //ContentControlContent.DataContext = UiFormula;
+            //ContentControlContent.ContentTemplate = UiFormula.Template;
         }
 
         public UiFormulaTreeItem()

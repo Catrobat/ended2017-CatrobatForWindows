@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Catrobat.Core.Objects.Formulas;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.IDEWindowsPhone.Annotations;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas.Math;
 using Microsoft.Phone.Controls;
@@ -16,9 +19,68 @@ using Microsoft.Phone.Shell;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 {
-    public partial class FormulaViewer : UserControl
+    public partial class FormulaViewer : UserControl, INotifyPropertyChanged
     {
+        private UiFormula _uiFormula;
+
         #region DependencyProperties
+
+        public int NormalFontSize
+        {
+            get { return (int)GetValue(NormalFontSizeProperty); }
+            set { SetValue(NormalFontSizeProperty, value); }
+        }
+
+        public static readonly DependencyProperty NormalFontSizeProperty = DependencyProperty.Register("NormalFontSize", typeof(int), typeof(FormulaViewer), new PropertyMetadata(0, NormalFontSizeChanged));
+
+        private static void NormalFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            // Code for dealing with your property changes
+        }
+
+
+
+        public int MinFontSize
+        {
+            get { return (int)GetValue(MinFontSizeProperty); }
+            set { SetValue(MinFontSizeProperty, value); }
+        }
+
+        public static readonly DependencyProperty MinFontSizeProperty = DependencyProperty.Register("MinFontSize", typeof(int), typeof(FormulaViewer), new PropertyMetadata(0, MinFontSizeChanged));
+
+        private static void MinFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            // Code for dealing with your property changes
+        }
+
+
+        public int MaxFontSize
+        {
+            get { return (int)GetValue(MaxFontSizeProperty); }
+            set { SetValue(MaxFontSizeProperty, value); }
+        }
+
+        public static readonly DependencyProperty MaxFontSizeProperty = DependencyProperty.Register("MaxFontSize", typeof(int), typeof(FormulaViewer), new PropertyMetadata(0, MaxFontSizeChanged));
+
+        private static void MaxFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            // Code for dealing with your property changes
+        }
+
+
+        public int CharactersOnNormalFontSize
+        {
+            get { return (int)GetValue(CharactersOnNormalFontSizeProperty); }
+            set { SetValue(CharactersOnNormalFontSizeProperty, value); }
+        }
+
+        public static readonly DependencyProperty CharactersOnNormalFontSizeProperty = DependencyProperty.Register("CharactersOnNormalFontSize", typeof(int), typeof(FormulaViewer), new PropertyMetadata(0, CharactersOnNormalFontSizeChanged));
+
+        private static void CharactersOnNormalFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            // Code for dealing with your property changes
+        }
+
 
         public bool IsEditEnabled
         {
@@ -69,10 +131,14 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
             var formula = e.NewValue as Formula;
             if (formula == null) return;
 
-            var uiFormula = UiFormulaMappings.CreateFormula(formula.FormulaTree, ((FormulaViewer)d).IsEditEnabled);
-            ((FormulaViewer)d).FormulaViewerTreeItemRoot.UiFormula = uiFormula;
-
             ((FormulaViewer)d).FormulaChanged();
+
+
+            //((FormulaViewer)d).FormulaViewerTreeItemRoot.UiFormula = uiFormula;
+
+
+
+            //((FormulaViewer)d).FormulaChanged();
         }
 
 
@@ -82,7 +148,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
             get { return (bool)GetValue(IsAutoFontSizeProperty); }
             set
             {
-                SetValue(IsAutoFontSizeProperty, value); 
+                SetValue(IsAutoFontSizeProperty, value);
                 FormulaChanged();
             }
         }
@@ -91,7 +157,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
         private static void IsAutoFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((FormulaViewer) d).FormulaChanged();
+            ((FormulaViewer)d).FormulaChanged();
         }
 
         #endregion
@@ -104,107 +170,54 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
         public void FormulaChanged()
         {
-            // TODO: update rows, update size
-            var width = FormulaViewerTreeItemRoot.ActualWidth;
+            if (Formula == null)
+                return;
 
-            var size = 50.0;
+            _uiFormula = UiFormulaMappings.CreateFormula(Formula.FormulaTree, IsEditEnabled);
+            var allParts = _uiFormula.GetAllParts();
 
-            if (width > 10.0)
+            var fontSize = NormalFontSize;
+
+            if (IsAutoFontSize)
             {
-                size = FindFontSize(width);
+                var charactersWidth = allParts.Sum(control => control.GetCharacterWidth());
+
+                if (charactersWidth < 50)
+                    charactersWidth += 10;
+
+                if (charactersWidth < 100)
+                    charactersWidth += 10;
+
+                if (charactersWidth < 200)
+                    charactersWidth += 10;
+
+                fontSize = (int) (NormalFontSize * ((double)CharactersOnNormalFontSize / charactersWidth));
+
+                if (fontSize < MinFontSize)
+                    fontSize = MinFontSize;
+                if (fontSize > MaxFontSize)
+                    fontSize = MaxFontSize;
             }
 
-            if (size > 80.0)
-                size = 80.0;
+            var allControls = allParts.Select(part => part.CreateUiControls(fontSize)).ToList();
 
-            if (size < 20.0)
-                size = 20.0;
+            PanelContent.Children.Clear();
+            foreach (var part in allControls)
+                if (part != null)
+                    PanelContent.Children.Add(part);
 
-            if (FormulaViewerTreeItemRoot.UiFormula != null)
-                FormulaViewerTreeItemRoot.UiFormula.FontSize = 24; // TODO: add auto size
-        }
-
-        private double FindFontSize(double width)
-        {
-            return 50.0 * 480.0 / width;
+            var scrollViewerHeight = ScrollViewerContent.ActualWidth;
+            var contentPanelHeight = PanelContent.ActualWidth;
+            ScrollViewerContent.InvalidateScrollInfo();
+            var scrollInfo = ScrollViewerContent.ScrollableHeight;
         }
 
         public void KeyPressed(FormulaEditorKey key)
         {
             // TODO: implement me
 
-            var formula = new Formula
-            {
-                FormulaTree = new FormulaTree
-                {
-                    VariableType = "random",
-                    LeftChild = new FormulaTree
-                    {
-                        VariableType = "random", 
-                        LeftChild = new FormulaTree {VariableType = "NUMBER", VariableValue = "4"},
-                        RightChild = new FormulaTree {VariableType = "NUMBER", VariableValue = "2"}
-                    },
-                    RightChild = new FormulaTree
-                    {
-                        VariableType = "random",
-                        LeftChild = new FormulaTree
-                        {
-                            VariableType = "random",
-                            LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "4" },
-                            RightChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "2" }
-                        },
-                        RightChild = new FormulaTree
-                        {
-                            VariableType = "random",
-                            LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "4" },
-                            RightChild = new FormulaTree
-                            {
-                                VariableType = "random",
-                                LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "41" },
-                                RightChild = new FormulaTree
-                                {
-                                    VariableType = "random",
-                                    LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "42222" },
-                                    RightChild = new FormulaTree
-                                    {
-                                        VariableType = "random",
-                                        LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "42134141" },
-                                        RightChild = new FormulaTree
-                                        {
-                                            VariableType = "random",
-                                            LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "41241" },
-                                            RightChild = new FormulaTree
-                                            {
-                                                VariableType = "random",
-                                                LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "4124" },
-                                                RightChild = new FormulaTree
-                                                {
-                                                    VariableType = "random",
-                                                    LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "42" },
-                                                    RightChild = new FormulaTree
-                                                    {
-                                                        VariableType = "random",
-                                                        LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "4124142" },
-                                                        RightChild = new FormulaTree
-                                                        {
-                                                            VariableType = "random",
-                                                            LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "424" },
-                                                            RightChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "21241241412412414" }
-                                                        },
-                                                    },
-                                                },
-                                            },
-                                        },
-                                    },
-                                },
-                            },
-                        },
-                    },
-                }
-            };
-
-            var uiFormula = UiFormulaMappings.CreateFormula(formula.FormulaTree, IsEditEnabled);
-            FormulaViewerTreeItemRoot.UiFormula = uiFormula;
+            //var uiFormula = UiFormulaMappings.CreateFormula(formula.FormulaTree, IsEditEnabled);
+            //FormulaViewerTreeItemRoot.UiFormula = uiFormula;
             FormulaChanged();
         }
 
@@ -230,6 +243,29 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
         {
             // TODO: implement me
             throw new NotImplementedException();
+        }
+
+        private void ListBoxParts_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ((ListBox)sender).SelectedItem = null;
+        }
+
+        #region PropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
+        public SelectedFormulaInformation GetSelectedFormula()
+        {
+            return _uiFormula.GetSelectedFormula();
         }
     }
 }
