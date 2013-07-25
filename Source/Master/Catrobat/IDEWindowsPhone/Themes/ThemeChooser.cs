@@ -60,7 +60,7 @@ namespace Catrobat.IDEWindowsPhone.Themes
                 AccentColor1 = new SolidColorBrush(Colors.Purple),
                 AccentColor2 = new SolidColorBrush(Colors.Green),
                 AccentColor3 = new SolidColorBrush(Colors.Orange),
-                AppBarColor = new SolidColorBrush(Colors.Red)
+                AppBarColor = new SolidColorBrush(Color.FromArgb(255,50,50,50))
             };
 
 
@@ -70,7 +70,7 @@ namespace Catrobat.IDEWindowsPhone.Themes
                 AccentColor1 = new SolidColorBrush(Colors.Purple),
                 AccentColor2 = new SolidColorBrush(Colors.Green),
                 AccentColor3 = new SolidColorBrush(Colors.Orange),
-                AppBarColor = new SolidColorBrush(Colors.Red)
+                AppBarColor = new SolidColorBrush(Color.FromArgb(255, 50, 50, 50))
             };
 
             var theme3 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_pink",
@@ -79,7 +79,7 @@ namespace Catrobat.IDEWindowsPhone.Themes
                 AccentColor1 = new SolidColorBrush(Colors.Purple),
                 AccentColor2 = new SolidColorBrush(Colors.Green),
                 AccentColor3 = new SolidColorBrush(Colors.Orange),
-                AppBarColor = new SolidColorBrush(Colors.Red)
+                AppBarColor = new SolidColorBrush(Color.FromArgb(255, 50, 50, 50))
             };
 
 

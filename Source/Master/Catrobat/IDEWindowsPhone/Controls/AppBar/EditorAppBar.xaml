@@ -10,7 +10,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="130" d:DesignWidth="480">
 
-  <Grid x:Name="LayoutRoot" Height="130" Background="{StaticResource PhoneChromeBrush}">
+    <Grid x:Name="LayoutRoot" Height="130" Background="{Binding Path=SelectedTheme.AppBarColor, Source={StaticResource ThemeChooser}}">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="100"/>
       <ColumnDefinition/>
