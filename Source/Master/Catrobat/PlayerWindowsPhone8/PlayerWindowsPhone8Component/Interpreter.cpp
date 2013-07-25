@@ -163,26 +163,34 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
 	switch (tree->GetFunction())
 	{
 	case Function::L_TRUE:
+		if (this->TestChilds(tree, Childs::NoChild))
 		returnValue = 1.0;
 		break;
 	case Function::L_FALSE: 
+		if (this->TestChilds(tree, Childs::NoChild))
 		returnValue = 0.0;
 		break;
 	case Function::SIN:
+		if (this->TestChilds(tree, Childs::LeftChild))
 		returnValue = sin(leftValue);
 		break;
 	case Function::COS: 
+		if (this->TestChilds(tree, Childs::LeftChild))
 		returnValue = cos(leftValue);
 		break;
 	case Function::TAN: 
+		if (this->TestChilds(tree, Childs::LeftChild))
 		returnValue = tan(leftValue);
 		break;
 	case Function::LN: 
+		if (this->TestChilds(tree, Childs::LeftChild))
 		returnValue = log(leftValue);
 	case Function::LOG:
+		if (this->TestChilds(tree, Childs::LeftChild))
 		returnValue = log(leftValue);
 		break;
 	case Function::SQRT:
+		if (this->TestChilds(tree, Childs::LeftChild))
 		returnValue = sqrt(leftValue);
 		break;
 	case Function::RAND:
@@ -190,6 +198,7 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
 			returnValue = this->CalculateRand(leftValue, rightValue);
 		break;
 	case Function::ABS: 
+		if (this->TestChilds(tree, Childs::LeftChild))
 		returnValue = abs(leftValue);
 		break;
 	case Function::ROUND: 
@@ -199,6 +208,8 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
 		return 	4.0 * std::atan(1.0);
 		break;
 	case Function::MOD: 
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = this->CalculateModulo(leftValue, rightValue);
 		break;
 	case Function::ARCSIN: 
 		break;
@@ -280,6 +291,16 @@ double Interpreter::CalculateRand(double value1, double value2)
     double percentOfMaxValue = (double)rand() / RAND_MAX;
     double random_num = min + percentOfMaxValue * diff;
 	return random_num;
+}
+
+double Interpreter::CalculateModulo(double dividend, double divisor)
+{
+	int integerQuotient = (int)(dividend/divisor);
+	if ((dividend < 0 || divisor < 0) && !(dividend < 0 && divisor < 0) && fmod(dividend, divisor) != 0)
+		integerQuotient -= 1;
+	double returnValue = dividend - (double)(divisor * integerQuotient);
+
+	return returnValue; 
 }
 
 double Interpreter::RoundDoubleToInt(double value)
