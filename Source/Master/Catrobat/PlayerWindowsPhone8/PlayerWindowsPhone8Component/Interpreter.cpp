@@ -193,8 +193,10 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
 		returnValue = abs(leftValue);
 		break;
 	case Function::ROUND: 
+		return this->RoundDoubleToInt(leftValue);
 		break;
 	case Function::PI: 
+		return 	4.0 * std::atan(1.0);
 		break;
 	case Function::MOD: 
 		break;
@@ -272,7 +274,19 @@ double Interpreter::CalculateRand(double value1, double value2)
 	double min = this->CalculateMin(value1, value2);
 	double max = this->CalculateMax(value1, value2);
 
+	srand (time(NULL));
     double f = (double)rand() / RAND_MAX;
     double random_num = min + f * (max - min);
 	return random_num;
+}
+
+double Interpreter::RoundDoubleToInt(double value)
+{
+	double rounded;
+
+	if(value >= 0)
+		rounded = (int)(value + 0.5);
+	else
+		rounded = (int)(value - 0.5);
+	return rounded;
 }

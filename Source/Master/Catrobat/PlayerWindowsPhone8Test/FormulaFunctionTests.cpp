@@ -433,6 +433,33 @@ namespace PlayerWindowsPhone8Test
             Assert::AreEqual(expected, actual);
 		}
 
+		TEST_METHOD(FunctionROUNDNegative1)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ROUND");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "-12.5"));
+
+			double expected = -13.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+	    
+		TEST_METHOD(FunctionROUNDNegative2)
+		{
+			Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+			FormulaTree *formula = new FormulaTree("FUNCTION", "ROUND");
+			formula->SetLeftChild(new FormulaTree("NUMBER", "-12.4"));
+
+			double expected = -12.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+		}
+
+
 		TEST_METHOD(FunctionPI)
 		{
 			Interpreter *interpreter = Interpreter::Instance();

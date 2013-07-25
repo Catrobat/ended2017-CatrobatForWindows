@@ -42,5 +42,6 @@ private:
 	double CalculateMax(double value1, double value2);
 	double CalculateMin(double value1, double value2);
 	double CalculateRand(double value1, double value2);
+	double RoundDoubleToInt(double value);
 };
 
