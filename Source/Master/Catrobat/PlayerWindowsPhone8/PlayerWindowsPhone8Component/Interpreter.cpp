@@ -274,19 +274,21 @@ double Interpreter::CalculateRand(double value1, double value2)
 	double min = this->CalculateMin(value1, value2);
 	double max = this->CalculateMax(value1, value2);
 
+	double diff = max - min;
+
 	srand (time(NULL));
-    double f = (double)rand() / RAND_MAX;
-    double random_num = min + f * (max - min);
+    double percentOfMaxValue = (double)rand() / RAND_MAX;
+    double random_num = min + percentOfMaxValue * diff;
 	return random_num;
 }
 
 double Interpreter::RoundDoubleToInt(double value)
 {
-	double rounded;
+	double roundedNumber;
 
 	if(value >= 0)
-		rounded = (int)(value + 0.5);
+		roundedNumber = (int)(value + 0.5);
 	else
-		rounded = (int)(value - 0.5);
-	return rounded;
+		roundedNumber = (int)(value - 0.5);
+	return roundedNumber;
 }

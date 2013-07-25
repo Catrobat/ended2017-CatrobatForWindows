@@ -295,11 +295,16 @@ namespace PlayerWindowsPhone8Test
 			formula->SetLeftChild(new FormulaTree("NUMBER", "1.0"));
 			formula->SetRightChild(new FormulaTree("NUMBER", "7.0"));
 
+			
+			//s//leep(1000);
+
             double actual = interpreter->EvaluateFormula(formula, object);
 			if (actual >= 1.0 && actual <= 7.0)
 				Assert::IsTrue(true);
 			else
 				Assert::Fail();
+
+			
 
 			double actual2 = interpreter->EvaluateFormula(formula, object);
 			if (actual2 >= 1.0 && actual2 <= 7.0 && actual2 != actual)
@@ -323,6 +328,8 @@ namespace PlayerWindowsPhone8Test
 			else
 				Assert::Fail();
 
+			//Sleep(1000);
+
 			double actual2 = interpreter->EvaluateFormula(formula, object);
 			if (actual2 >= 1.2 && actual2 <= 7.8 && actual2 != actual)
 				Assert::IsTrue(true);
@@ -345,6 +352,8 @@ namespace PlayerWindowsPhone8Test
 				Assert::IsTrue(true);
 			else
 				Assert::Fail();
+
+			//Sleep(1000);
 
 			double actual2 = interpreter->EvaluateFormula(formula, object);
 			if (actual2 >= -1.0 && actual2 <= 7.0 && actual2 != actual)
