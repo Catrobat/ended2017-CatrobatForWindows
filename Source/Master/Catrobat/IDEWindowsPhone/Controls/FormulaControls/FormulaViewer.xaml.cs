@@ -8,6 +8,8 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Catrobat.Core.Objects.Formulas;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
+using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas.Math;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Reactive;
 using Microsoft.Phone.Shell;
@@ -53,14 +55,43 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
         public Formula Formula
         {
             get { return (Formula)GetValue(FormulaProperty); }
-            set { SetValue(FormulaProperty, value); }
+            set
+            {
+                SetValue(FormulaProperty, value);
+                FormulaChanged();
+            }
         }
 
         public static readonly DependencyProperty FormulaProperty = DependencyProperty.Register("Formula", typeof(Formula), typeof(FormulaViewer), new PropertyMetadata(FormulaChanged));
 
         private static void FormulaChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((FormulaViewer) d).FormulaViewerTreeItemRoot.TreeItem = ((Formula) e.NewValue).FormulaTree;
+            var formula = e.NewValue as Formula;
+            if (formula == null) return;
+
+            var uiFormula = UiFormulaMappings.CreateFormula(formula.FormulaTree, ((FormulaViewer)d).IsEditEnabled);
+            ((FormulaViewer)d).FormulaViewerTreeItemRoot.UiFormula = uiFormula;
+
+            ((FormulaViewer)d).FormulaChanged();
+        }
+
+
+
+        public bool IsAutoFontSize
+        {
+            get { return (bool)GetValue(IsAutoFontSizeProperty); }
+            set
+            {
+                SetValue(IsAutoFontSizeProperty, value); 
+                FormulaChanged();
+            }
+        }
+
+        public static readonly DependencyProperty IsAutoFontSizeProperty = DependencyProperty.Register("IsAutoFontSize", typeof(bool), typeof(FormulaViewer), new PropertyMetadata(IsAutoFontSizeChanged));
+
+        private static void IsAutoFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((FormulaViewer) d).FormulaChanged();
         }
 
         #endregion
@@ -71,11 +102,110 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
             InitializeComponent();
         }
 
+        public void FormulaChanged()
+        {
+            // TODO: update rows, update size
+            var width = FormulaViewerTreeItemRoot.ActualWidth;
+
+            var size = 50.0;
+
+            if (width > 10.0)
+            {
+                size = FindFontSize(width);
+            }
+
+            if (size > 80.0)
+                size = 80.0;
+
+            if (size < 20.0)
+                size = 20.0;
+
+            if (FormulaViewerTreeItemRoot.UiFormula != null)
+                FormulaViewerTreeItemRoot.UiFormula.FontSize = 24; // TODO: add auto size
+        }
+
+        private double FindFontSize(double width)
+        {
+            return 50.0 * 480.0 / width;
+        }
+
         public void KeyPressed(FormulaEditorKey key)
         {
             // TODO: implement me
-            //throw new NotImplementedException();
-            FormulaViewerTreeItemRoot.TreeItem.LeftChild = new FormulaTree{IsRealObject = true, VariableValue = "42", VariableType = "int"};
+
+            var formula = new Formula
+            {
+                FormulaTree = new FormulaTree
+                {
+                    VariableType = "random",
+                    LeftChild = new FormulaTree
+                    {
+                        VariableType = "random", 
+                        LeftChild = new FormulaTree {VariableType = "NUMBER", VariableValue = "4"},
+                        RightChild = new FormulaTree {VariableType = "NUMBER", VariableValue = "2"}
+                    },
+                    RightChild = new FormulaTree
+                    {
+                        VariableType = "random",
+                        LeftChild = new FormulaTree
+                        {
+                            VariableType = "random",
+                            LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "4" },
+                            RightChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "2" }
+                        },
+                        RightChild = new FormulaTree
+                        {
+                            VariableType = "random",
+                            LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "4" },
+                            RightChild = new FormulaTree
+                            {
+                                VariableType = "random",
+                                LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "41" },
+                                RightChild = new FormulaTree
+                                {
+                                    VariableType = "random",
+                                    LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "42222" },
+                                    RightChild = new FormulaTree
+                                    {
+                                        VariableType = "random",
+                                        LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "42134141" },
+                                        RightChild = new FormulaTree
+                                        {
+                                            VariableType = "random",
+                                            LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "41241" },
+                                            RightChild = new FormulaTree
+                                            {
+                                                VariableType = "random",
+                                                LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "4124" },
+                                                RightChild = new FormulaTree
+                                                {
+                                                    VariableType = "random",
+                                                    LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "42" },
+                                                    RightChild = new FormulaTree
+                                                    {
+                                                        VariableType = "random",
+                                                        LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "4124142" },
+                                                        RightChild = new FormulaTree
+                                                        {
+                                                            VariableType = "random",
+                                                            LeftChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "424" },
+                                                            RightChild = new FormulaTree { VariableType = "NUMBER", VariableValue = "21241241412412414" }
+                                                        },
+                                                    },
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                }
+            };
+
+            var uiFormula = UiFormulaMappings.CreateFormula(formula.FormulaTree, IsEditEnabled);
+            FormulaViewerTreeItemRoot.UiFormula = uiFormula;
+            FormulaChanged();
         }
 
         public void ObjectVariableSelected(ObjectVariable variable)

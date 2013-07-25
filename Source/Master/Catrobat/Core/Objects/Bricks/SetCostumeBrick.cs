@@ -51,9 +51,9 @@ namespace Catrobat.Core.Objects.Bricks
         }
 
 
-        public SetCostumeBrick() {}
+        public SetCostumeBrick() { }
 
-        public SetCostumeBrick(XElement xElement) : base(xElement) {}
+        public SetCostumeBrick(XElement xElement) : base(xElement) { }
 
         internal override void LoadFromXML(XElement xRoot)
         {
@@ -77,6 +77,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
+            if(_costumeReference.Costume == null)
             _costumeReference.LoadReference();
         }
 

@@ -21,9 +21,12 @@ namespace Catrobat.TestsCommon.Misc
         // Bricks that must be tested manually
         private static readonly List<Type> ExcludedBricks = new List<Type>
         {
-            //typeof(LoopEndBrick),
-            //typeof(ForeverBrick),
-            //typeof(RepeatBrick)
+            typeof(LoopEndBrick),
+            typeof(ForeverBrick),
+            typeof(RepeatBrick),
+            typeof(IfLogicBeginBrick),
+            typeof(IfLogicElseBrick),
+            typeof(IfLogicEndBrick)
         };
 
         public static Project GenerateProject()
@@ -52,6 +55,9 @@ namespace Catrobat.TestsCommon.Misc
                     UserHandle = ""
                 }
             };
+
+            ProjectHolder.Project = project;
+
             project.ProjectHeader.SetProgramName("project1");
 
             project.SpriteList = new SpriteList();
@@ -142,8 +148,8 @@ namespace Catrobat.TestsCommon.Misc
                         FillDummyValues(brick, project, sprite);
                         script.Bricks.Bricks.Add(brick);
                     }
-
                     AddLoopBricks(script.Bricks.Bricks);
+                    AddIfLogicBricks(script.Bricks.Bricks);
                 }
             }
 
@@ -268,6 +274,8 @@ namespace Catrobat.TestsCommon.Misc
         private static void AddLoopBricks(ObservableCollection<Brick> bricks)
         {
             var foreverBrick = new ForeverBrick();
+            bricks.Add(foreverBrick);
+
             var repeatBrick = new RepeatBrick
                 {
                     TimesToRepeat = new Formula
@@ -279,18 +287,50 @@ namespace Catrobat.TestsCommon.Misc
                                 }
                         }
                 };
+            bricks.Add(repeatBrick);
+
             var loopEndBrickForever = new LoopEndBrick();
+            bricks.Add(loopEndBrickForever);
+
             var loopEndBrickRepeat = new LoopEndBrick();
+            bricks.Add(loopEndBrickRepeat);
 
             foreverBrick.LoopEndBrick = loopEndBrickForever;
             repeatBrick.LoopEndBrick = loopEndBrickRepeat;
             loopEndBrickForever.LoopBeginBrick = foreverBrick;
             loopEndBrickRepeat.LoopBeginBrick = repeatBrick;
+        }
 
-            bricks.Add(foreverBrick);
-            bricks.Add(repeatBrick);
-            bricks.Add(loopEndBrickForever);
-            bricks.Add(loopEndBrickRepeat);
+        private static void AddIfLogicBricks(ObservableCollection<Brick> bricks)
+        {
+            var ifLogicBeginBrick = new IfLogicBeginBrick
+            {
+                IfCondition = new Formula
+                {
+                    FormulaTree = new FormulaTree
+                    {
+                        VariableType = "BOOL",
+                        VariableValue = "1"
+                    }
+                }
+            };
+            bricks.Add(ifLogicBeginBrick);
+
+            var ifLogicElseBrick = new IfLogicElseBrick();
+            bricks.Add(ifLogicElseBrick);
+
+            var ifLogicEndBrick = new IfLogicEndBrick();
+            bricks.Add(ifLogicEndBrick);
+
+
+            ifLogicBeginBrick.IfLogicElseBrick = ifLogicElseBrick;
+            ifLogicBeginBrick.IfLogicEndBrick = ifLogicEndBrick;
+
+            ifLogicElseBrick.IfLogicBeginBrick = ifLogicBeginBrick;
+            ifLogicElseBrick.IfLogicEndBrick = ifLogicEndBrick;
+
+            ifLogicEndBrick.IfLogicBeginBrick = ifLogicBeginBrick;
+            ifLogicEndBrick.IfLogicElseBrick = ifLogicElseBrick;
         }
 
     }

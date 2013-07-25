@@ -85,7 +85,8 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            _pointedSpriteReference.LoadReference();
+            if (_pointedSpriteReference.Sprite == null)
+                _pointedSpriteReference.LoadReference();
         }
 
         public override DataObject Copy()

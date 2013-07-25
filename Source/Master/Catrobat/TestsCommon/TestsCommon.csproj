@@ -79,15 +79,11 @@
     <Compile Include="Tests\Data\VersionConverter08toWin08Tests.cs" />
     <Compile Include="Tests\Data\CopyTests.cs" />
     <Compile Include="Tests\Data\DataDeletingTests.cs" />
-    <Compile Include="Tests\Data\DataReadingTests.cs" />
-    <Compile Include="Tests\Data\DataReflactionTests.cs" />
-    <Compile Include="Tests\Data\DataWritingTests.cs" />
+    <Compile Include="Tests\Data\DataReflectionTests.cs" />
     <Compile Include="Misc\ReflectionHelper.cs" />
     <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />
     <Compile Include="Tests\Data\ProjectTests.cs" />
     <Compile Include="Tests\Storage\StorageTests.cs" />
-    <Compile Include="Tests\Data\XmlConverterTests.cs" />
-    <Compile Include="Tests\Data\XmlPathHelperTests.cs" />
     <Compile Include="Tests\Misc\ZipTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -102,15 +98,11 @@
     <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_ObjectReferences_Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\XPathHelperTestInput.xml" />
     <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_ObjectReferences_Output.xml" />
-    <Content Include="SampleData\SampleProjects\projectcode.xml" />
-    <Content Include="SampleData\SampleProjects\simple.xml" />
-    <Content Include="SampleData\SampleProjects\ultimateTest.xml" />
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SampleData\SampleProjects\default.catroid" />
     <None Include="SampleData\SampleProjects\test.catroid" />
-    <None Include="SampleData\SampleProjects\UltimateTest.catroid" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests\IDE\" />

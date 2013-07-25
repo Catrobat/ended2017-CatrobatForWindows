@@ -176,10 +176,10 @@ namespace Catrobat.Core.Objects
 
         protected override void LoadFromXML(String xml)
         {
-            ReferenceHelper.Project = this;
-
             _document = XDocument.Load(new StringReader(xml));
             _document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
+
+            ProjectHolder.Project = this;
 
             //Converter.Converter.Convert(_document);
 
@@ -191,14 +191,10 @@ namespace Catrobat.Core.Objects
             _variableList.LoadReference();
 
             _spriteList.LoadReference();
-
-            ReferenceHelper.Project = null;
         }
 
         internal override XDocument CreateXML()
         {
-            ReferenceHelper.Project = this;
-
             _document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
             var xProject = new XElement("program");
@@ -210,8 +206,6 @@ namespace Catrobat.Core.Objects
             xProject.Add(_variableList.CreateXML());
 
             _document.Add(xProject);
-
-            ReferenceHelper.Project = null;
 
             return _document;
         }

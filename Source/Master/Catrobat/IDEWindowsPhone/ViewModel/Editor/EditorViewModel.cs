@@ -577,7 +577,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void CopySpriteAction()
         {
-            var newSprite = SelectedSprite.Copy(CurrentProject) as Sprite;
+            var newSprite = SelectedSprite.Copy() as Sprite;
             if(newSprite != null)
                 Sprites.Add(newSprite);
         }

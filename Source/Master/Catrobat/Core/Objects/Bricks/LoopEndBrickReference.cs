@@ -4,7 +4,7 @@ using Catrobat.Core.Misc.Helpers;
 
 namespace Catrobat.Core.Objects.Bricks
 {
-    public class LoopEndBrickRef : DataObject
+    public class LoopEndBrickReference : DataObject
     {
         internal string _reference;
 
@@ -15,9 +15,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 if (_loopEndBrick == value)
-                {
                     return;
-                }
 
                 _loopEndBrick = value;
                 RaisePropertyChanged();
@@ -25,11 +23,11 @@ namespace Catrobat.Core.Objects.Bricks
         }
 
 
-        public LoopEndBrickRef()
+        public LoopEndBrickReference()
         {
         }
 
-        public LoopEndBrickRef(XElement xElement)
+        public LoopEndBrickReference(XElement xElement)
         {
             LoadFromXML(xElement);
         }
@@ -54,8 +52,8 @@ namespace Catrobat.Core.Objects.Bricks
 
         public DataObject Copy()
         {
-            var newLoopEndBrickRef = new LoopEndBrickRef();
-            newLoopEndBrickRef._loopEndBrick = _loopEndBrick;
+            var newLoopEndBrickRef = new LoopEndBrickReference();
+            newLoopEndBrickRef.LoopEndBrick = _loopEndBrick;
 
             return newLoopEndBrickRef;
         }

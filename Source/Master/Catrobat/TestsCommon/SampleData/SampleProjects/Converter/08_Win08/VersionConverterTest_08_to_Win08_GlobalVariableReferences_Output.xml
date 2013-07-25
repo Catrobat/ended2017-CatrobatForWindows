@@ -9,7 +9,7 @@
         <startScript>
           <brickList>
             <setVariableBrick>
-              <userVariable reference="../../../../../../../variables/programVariableList/userVariable[1]" />
+              <userVariable reference="../../../../../../../variables/programVariableList/userVariable" />
               <variableFormula>
                 <formulaTree>
                   <type>NUMBER</type>
@@ -18,7 +18,7 @@
               </variableFormula>
             </setVariableBrick>
             <changeVariableBrick>
-              <userVariable reference="../../../../../../../variables/programVariableList/userVariable[1]" />
+              <userVariable reference="../../../../../../../variables/programVariableList/userVariable" />
               <variableFormula>
                 <formulaTree>
                   <type>NUMBER</type>
@@ -72,7 +72,7 @@
   <variables>
     <objectVariableList>
       <entry>
-        <object reference="../../../../objectList/object[1]"/>
+        <object reference="../../../../objectList/object"/>
         <list/>
       </entry>
       <entry>

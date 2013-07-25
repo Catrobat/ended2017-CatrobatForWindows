@@ -25,6 +25,8 @@ namespace Catrobat.Core.Objects.Bricks
         {
             var newBrick = new ForeverBrick();
 
+            newBrick.LoopEndBrickReference = _loopEndBrickReference.Copy() as LoopEndBrickReference;
+
             return newBrick;
         }
     }

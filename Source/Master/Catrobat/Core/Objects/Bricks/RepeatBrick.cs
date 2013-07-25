@@ -49,6 +49,7 @@ namespace Catrobat.Core.Objects.Bricks
         {
             var newBrick = new RepeatBrick();
             newBrick._timesToRepeat = _timesToRepeat.Copy() as Formula;
+            newBrick.LoopEndBrickReference = _loopEndBrickReference.Copy() as LoopEndBrickReference;
 
             return newBrick;
         }

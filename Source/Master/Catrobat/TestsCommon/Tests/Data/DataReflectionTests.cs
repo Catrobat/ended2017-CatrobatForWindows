@@ -23,7 +23,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Catrobat.TestsCommon.Tests.Data
 {
     [TestClass]
-    public class DataReflactionTests
+    public class DataReflectionTests
     {
         [ClassInitialize()]
         public static void TestClassInitialize(TestContext testContext)

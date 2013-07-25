@@ -14,9 +14,7 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 if (_ifLogicEndBrick == value)
-                {
                     return;
-                }
 
                 _ifLogicEndBrick = value;
                 RaisePropertyChanged();

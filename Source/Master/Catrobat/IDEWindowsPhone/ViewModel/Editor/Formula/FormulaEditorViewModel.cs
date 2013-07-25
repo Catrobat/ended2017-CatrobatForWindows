@@ -2,6 +2,7 @@
 using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using GalaSoft.MvvmLight;
@@ -91,11 +92,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
         #region Commands
 
-        //public RelayCommand AudioLibraryCommand { get; private set; }
+        public RelayCommand<UiFormula> FormulaPartSelectedComand { get; private set; }
 
         #endregion
 
         #region Actions
+
+        private void FormulaPartSelectedAction(UiFormula formula)
+        {
+            bool wasSelected = formula.IsSelected;
+
+            formula.ClearAllSelection();
+
+            if(formula.IsEditEnabled)
+                formula.IsSelected = !wasSelected;
+        }
 
         private void SelectedSpriteChangesMessageAction(GenericMessage<Sprite> message)
         {
@@ -104,7 +115,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
         private void SelectedProjectChangesMessageAction(GenericMessage<Project> message)
         {
-            throw new System.NotImplementedException();
+            SelectedProject = message.Content;
         }
 
 
@@ -116,6 +127,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
                 ViewModelMessagingToken.SelectedSpriteListener, SelectedSpriteChangesMessageAction);
             Messenger.Default.Register<GenericMessage<Project>>(this,
                 ViewModelMessagingToken.SelectedProjectListener, SelectedProjectChangesMessageAction);
+
+            FormulaPartSelectedComand = new RelayCommand<UiFormula>(FormulaPartSelectedAction);
         }
 
         private void ResetViewModel() { }

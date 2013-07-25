@@ -126,11 +126,17 @@
     <Compile Include="Controls\FormulaControls\FormulaKeyboard.xaml.cs">
       <DependentUpon>FormulaKeyboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaControls\Formulas\Math\UiFormulaMathRandom.cs" />
+    <Compile Include="Controls\FormulaControls\Formulas\Number\UiFormulaNumber.cs" />
+    <Compile Include="Controls\FormulaControls\Formulas\UiFormula.cs" />
+    <Compile Include="Controls\FormulaControls\Formulas\UiFormulaMappings.cs" />
+    <Compile Include="Controls\FormulaControls\Formulas\UiFormulaRoot.cs" />
     <Compile Include="Controls\FormulaControls\FormulaViewer.xaml.cs">
       <DependentUpon>FormulaViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FormulaControls\FormulaViewerTreeItem.xaml.cs">
-      <DependentUpon>FormulaViewerTreeItem.xaml</DependentUpon>
+    <Compile Include="Controls\FormulaControls\FormulaTemplateSelector.cs" />
+    <Compile Include="Controls\FormulaControls\UiFormulaTreeItem.xaml.cs">
+      <DependentUpon>UiFormulaTreeItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListPicker\ListPickerPage.xaml.cs">
       <DependentUpon>ListPickerPage.xaml</DependentUpon>
@@ -160,6 +166,7 @@
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
+    <Compile Include="Converters\BoolFormulaBackgroundConverter.cs" />
     <Compile Include="Converters\IntPixelConverter.cs" />
     <Compile Include="Converters\ImageSizeHeightConverter.cs" />
     <Compile Include="Converters\ImageSizeWidthConverter.cs" />
@@ -359,9 +366,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\FormulaControls\FormulaViewerTreeItem.xaml">
+    <Page Include="Controls\FormulaControls\UiFormulaTreeItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FormulaControls\FormulaTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ListPicker\ListPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -551,6 +562,7 @@
     <Content Include="fmodex_x86.dll" />
     <Content Include="italic.spritefont" />
     <Content Include="Content\Resources\default.catrobat" />
+    <None Include="Content\Resources\default.catroid" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
@@ -697,8 +709,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Resources\SampleProjects\" />
     <Folder Include="Content\Theme\" />
+    <Folder Include="Controls\FormulaControls\Formulas\Logic\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AppBarUtils">

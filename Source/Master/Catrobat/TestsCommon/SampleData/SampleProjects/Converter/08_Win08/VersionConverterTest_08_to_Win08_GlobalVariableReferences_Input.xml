@@ -10,7 +10,7 @@
           <brickList>
             <setVariableBrick>
               <userVariable>
-                <name>a</name>
+                <name>global1</name>
               </userVariable>
               <variableFormula>
                 <formulaTree>
@@ -30,7 +30,7 @@
             </changeVariableBrick>
             <changeVariableBrick>
               <userVariable>
-                <name>global</name>
+                <name>global2</name>
               </userVariable>
               <variableFormula>
                 <formulaTree>
@@ -54,7 +54,7 @@
               <xPosition>
                 <formulaTree>
                   <type>USER_VARIABLE</type>
-                  <value>a</value>
+                  <value>global1</value>
                 </formulaTree>
               </xPosition>
             </setXBrick>
