@@ -109,40 +109,52 @@ double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
 
     double returnValue = 0.0;
 
-    switch (tree->GetOperator())
-    {
-    case Operator::PLUS:
-        returnValue = leftValue + rightValue;
-        break;
-    case Operator::MINUS:
-        returnValue = leftValue - rightValue;
-        break;
-    case Operator::MULT:
-        returnValue = leftValue * rightValue;
-        break;
-    case Operator::DIVIDE:
-        if (rightValue == 0)
-            return 0.0f;
-        returnValue = leftValue / rightValue;
-        break;
-    case Operator::POW:
-        returnValue = pow(leftValue, rightValue);
-        break;
-    case Operator::LOGICAL_AND:
-        returnValue = leftValue && rightValue;
-        break;
-    case Operator::LOGICAL_OR:
-        returnValue = leftValue || rightValue;
-        break;
-    case Operator::EQUAL:
-        returnValue = leftValue == rightValue;
-        break;
-    case Operator::NOT_EQUAL:
-        returnValue = leftValue != rightValue;
-        break;
-    default:
-        break;
-    }
+	switch (tree->GetOperator())
+	{
+	case Operator::PLUS:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue + rightValue;
+		break;
+	case Operator::MINUS:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild) ||
+			this->TestChilds(tree, Childs::RightChild))  
+			returnValue = leftValue - rightValue;
+		break;
+	case Operator::MULT:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue * rightValue;
+		break;
+	case Operator::DIVIDE:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+		{
+			if (rightValue == 0)
+				return 0.0f;
+			returnValue = leftValue / rightValue;
+		}
+		break;
+	case Operator::POW:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = pow(leftValue, rightValue);
+		break;
+	case Operator::LOGICAL_AND:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue && rightValue;
+		break;
+	case Operator::LOGICAL_OR:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue || rightValue;
+		break;
+	case Operator::EQUAL:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue == rightValue;
+		break;
+	case Operator::NOT_EQUAL:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue != rightValue;
+		break;
+	default:
+		break;
+	}
 
     return returnValue;
 }
