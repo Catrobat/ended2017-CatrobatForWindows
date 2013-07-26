@@ -220,6 +220,8 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
     case Function::ARCTAN: 
         break;
     case Function::EXP: 
+		if (this->TestChilds(tree, Childs::LeftChild))
+			returnValue = exp(leftValue);
         break;
     case Function::MAX: 
         if (this->TestChilds(tree, Childs::LeftAndRightChild))
