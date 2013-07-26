@@ -123,6 +123,7 @@
     <Compile Include="Controls\FormulaControls\FormulaButton.xaml.cs">
       <DependentUpon>FormulaButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaControls\FormulaEditorTools\FormulaDefaultValueCreater.cs" />
     <Compile Include="Controls\FormulaControls\FormulaKeyboard.xaml.cs">
       <DependentUpon>FormulaKeyboard.xaml</DependentUpon>
     </Compile>
@@ -142,6 +143,7 @@
     <Compile Include="Controls\FormulaControls\FormulaTemplateSelector.cs" />
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlList.cs" />
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlPlaceholderLeft.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartStyleCollection.cs" />
     <Compile Include="Controls\FormulaControls\UiFormulaTreeItem.xaml.cs">
       <DependentUpon>UiFormulaTreeItem.xaml</DependentUpon>
     </Compile>
@@ -249,6 +251,7 @@
     <Compile Include="Views\Editor\EditorView.xaml.cs">
       <DependentUpon>EditorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaControls\FormulaEditorTools\FormulaEditor.cs" />
     <Compile Include="Views\Editor\Formula\FormulaEditorView.xaml.cs">
       <DependentUpon>FormulaEditorView.xaml</DependentUpon>
     </Compile>
@@ -377,7 +380,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\FormulaControls\FormulaTemplates.xaml">
+    <Page Include="Controls\FormulaControls\Formulas\FormulaTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

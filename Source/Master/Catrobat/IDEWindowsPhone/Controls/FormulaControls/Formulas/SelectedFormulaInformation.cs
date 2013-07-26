@@ -11,6 +11,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
     {
         public UiFormula SelectedUiFormula { get; set; }
 
+        public Formula FormulaRoot { get; set; }
+
         public FormulaTree SelectedFormula { get; set; }
 
         public FormulaTree SelectedFormulaParent { get; set; }

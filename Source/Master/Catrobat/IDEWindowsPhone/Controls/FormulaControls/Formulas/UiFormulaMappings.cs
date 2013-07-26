@@ -17,7 +17,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
             {"NUMBER", typeof(UiFormulaNumber)}
         };
 
-        public static UiFormula CreateFormula(FormulaTree formula, bool isEditEnabled)
+        public static UiFormula CreateFormula(Formula formulaRoot, FormulaViewer viewer, FormulaTree formula, bool isEditEnabled, FormulaTree selectedFormula)
         {
             if (formula == null) return null;
 
@@ -26,14 +26,17 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
                 Type type = Mappings[formula.VariableType];
 
                 var uiFormula = (UiFormula)Activator.CreateInstance(type);
-                uiFormula.IsEditEnabled = isEditEnabled;
+                uiFormula.FormulaRoot = formulaRoot;
+                uiFormula.Viewer = viewer;
                 uiFormula.TreeItem = formula;
-                uiFormula.LeftFormula = CreateFormula(formula.LeftChild, isEditEnabled);
+                uiFormula.IsSelected = formula == selectedFormula;
+                uiFormula.IsEditEnabled = isEditEnabled;
+                uiFormula.LeftFormula = CreateFormula(formulaRoot,viewer, formula.LeftChild, isEditEnabled, selectedFormula);
 
                 if (uiFormula.LeftFormula != null)
                     uiFormula.LeftFormula.ParentFormula = uiFormula;
 
-                uiFormula.RightFormula = CreateFormula(formula.RightChild, isEditEnabled);
+                uiFormula.RightFormula = CreateFormula(formulaRoot,viewer, formula.RightChild, isEditEnabled, selectedFormula);
 
                 if (uiFormula.RightFormula != null)
                     uiFormula.RightFormula.ParentFormula = uiFormula;

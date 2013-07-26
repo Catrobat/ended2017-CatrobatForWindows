@@ -20,7 +20,7 @@
         <ResourceDictionary Source="Controls/Buttons/BackButtonTemplates.xaml"/>
         <ResourceDictionary Source="Controls/Buttons/ScreenshotButtonTemplates.xaml"/>
         <ResourceDictionary Source="Controls/Buttons/SettingsButtonTemplates.xaml"/>
-        <ResourceDictionary Source="Controls/FormulaControls/FormulaTemplates.xaml"/>
+        <ResourceDictionary Source="Controls\FormulaControls\Formulas\FormulaTemplates.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

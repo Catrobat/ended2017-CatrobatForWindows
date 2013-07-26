@@ -6,21 +6,49 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
 {
     public class FormulaPartControlNumbers : FormulaPartControl
     {
-        protected override Grid CreateControls(int fontSize)
+        private string GetText()
         {
-            var control = new TextBlock
+            if (UiFormula.FormulaValue == "")
+                return " ";
+            else
+                return UiFormula.FormulaValue;
+        }
+
+        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected)
+        {
+            var textBlock = new TextBlock
             {
-                Text = UiFormula.FormulaValue,
+                Text = GetText(),
                 FontSize = fontSize
             };
 
-            var grid = new Grid();
-            grid.Children.Add(control);
+ 
+            var grid = new Grid {DataContext = this};
+            grid.Children.Add(textBlock);
+
+            if (Style != null)
+            {
+                textBlock.Style = Style.TextStyle;
+                grid.Style = Style.ContainerStyle;
+
+                if (isParentSelected)
+                {
+                    textBlock.Style = Style.ParentSelectedTextStyle;
+                    grid.Style = Style.ParentSelectedContainerStyle;
+                }
+
+                if (isSelected)
+                {
+                    textBlock.Style = Style.SelectedTextStyle;
+                    grid.Style = Style.SelectedContainerStyle;
+                }
+            }
 
             return grid;
         }
@@ -32,7 +60,10 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
 
         public override FormulaPartControl Copy()
         {
-            return new FormulaPartControlNumbers();
+            return new FormulaPartControlNumbers
+            {
+                Style = Style
+            };
         }
     }
 }

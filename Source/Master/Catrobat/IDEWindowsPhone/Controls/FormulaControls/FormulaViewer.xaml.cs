@@ -22,6 +22,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
     public partial class FormulaViewer : UserControl, INotifyPropertyChanged
     {
         private UiFormula _uiFormula;
+        private FormulaTree _selectedFormula;
 
         #region DependencyProperties
 
@@ -168,12 +169,17 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
             InitializeComponent();
         }
 
+        public void SelectedFormulaChanged(FormulaTree formula)
+        {
+            _selectedFormula = formula;
+        }
+
         public void FormulaChanged()
         {
             if (Formula == null)
                 return;
 
-            _uiFormula = UiFormulaMappings.CreateFormula(Formula.FormulaTree, IsEditEnabled);
+            _uiFormula = UiFormulaMappings.CreateFormula(Formula, this, Formula.FormulaTree, IsEditEnabled, _selectedFormula);
             var allParts = _uiFormula.GetAllParts();
 
             var fontSize = NormalFontSize;
@@ -199,7 +205,9 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
                     fontSize = MaxFontSize;
             }
 
-            var allControls = allParts.Select(part => part.CreateUiControls(fontSize)).ToList();
+            var allControls = allParts.Select(part => part.CreateUiControls(fontSize, false, false)).ToList();
+            _uiFormula.UpdateStyles(false);
+
 
             PanelContent.Children.Clear();
             foreach (var part in allControls)

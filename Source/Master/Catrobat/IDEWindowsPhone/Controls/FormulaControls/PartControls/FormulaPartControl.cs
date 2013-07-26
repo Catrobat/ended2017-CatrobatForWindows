@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
 {
     public abstract class FormulaPartControl
     {
-        public Grid CreateUiControls(int fontSize)
+        public FormulaPartStyleCollection Style { get; set; }
+
+        public Grid CreateUiControls(int fontSize, bool isSelected, bool isParentSelected)
         {
-            var control = CreateControls(fontSize);
+            var control = CreateControls(fontSize, isSelected, isParentSelected);
 
             if (control != null)
             {
@@ -25,18 +28,27 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
             return control;
         }
 
-        protected abstract Grid CreateControls(int fontSize);
+        protected abstract Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected);
 
         protected void ControlOnTap(object sender, GestureEventArgs gestureEventArgs)
         {
+             
 
             if (UiFormula.IsEditEnabled)
             {
+                bool wasSelected = UiFormula.IsSelected;
+
                 UiFormula.ClearAllSelection();
                 UiFormula.ClearAllBackground();
-                UiFormula.IsSelected = !UiFormula.IsSelected;
+                UiFormula.IsSelected = !wasSelected;
+                
+                if(UiFormula.IsSelected)
+                    UiFormula.Viewer.SelectedFormulaChanged(UiFormula.TreeItem);
+                else
+                    UiFormula.Viewer.SelectedFormulaChanged(null);
+
                 if (UiFormula.IsSelected)
-                    UiFormula.SetBackground(true);
+                    UiFormula.SetStyle(true, false);
             }
 
             gestureEventArgs.Handled = true;

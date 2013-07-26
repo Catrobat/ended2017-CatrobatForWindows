@@ -19,6 +19,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
         private bool _isSelected;
         private double _fontSize;
 
+        public Formula FormulaRoot { get; set; }
+
         public FormulaViewer Viewer { get; set; }
 
         public FormulaTree TreeItem { get; set; }
@@ -68,31 +70,64 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
         public void ClearAllBackground()
         {
             var root = FindRoot();
-            root.SetBackground(false);
+            root.SetStyle(false, false);
         }
 
-        public void SetBackground(bool isSelected)
+        internal void UpdateStyles(bool isParentSelected)
         {
-            if (isSelected)
+            SetStyle(_isSelected, isParentSelected);
+
+            if (LeftFormula != null)
+                LeftFormula.UpdateStyles(_isSelected);
+
+            if (RightFormula != null)
+                RightFormula.UpdateStyles(_isSelected);
+        }
+
+        public void SetStyle(bool isSelected, bool isParentSelected)
+        {
+            foreach (var control in UiControls)
             {
-                foreach (var control in UiControls)
+                var formulaPartControl = control.DataContext as FormulaPartControl;
+                if (formulaPartControl != null)
                 {
-                    control.Background = new SolidColorBrush(Colors.Blue);
-                }
-            }
-            else
-            {
-                foreach (var control in UiControls)
-                {
-                    control.Background = new SolidColorBrush(Colors.Transparent);
+                    var styles = formulaPartControl.Style;
+
+                    var textBlocks = control.Children.OfType<TextBlock>().Select(child => child as TextBlock).ToList();
+
+                    if (styles != null)
+                    {
+
+                        Style containerStyle = styles.ContainerStyle;
+                        Style textStyle = styles.TextStyle;
+
+
+
+                        if (isParentSelected)
+                        {
+                            textStyle = styles.ParentSelectedTextStyle;
+                            containerStyle = styles.ParentSelectedContainerStyle;
+                        }
+
+                        if (isSelected)
+                        {
+                            textStyle = styles.SelectedTextStyle;
+                            containerStyle = styles.SelectedContainerStyle;
+                        }
+
+                        control.Style = containerStyle;
+
+                        foreach (var textBlock in textBlocks)
+                            textBlock.Style = textStyle;
+                    }
                 }
             }
 
             if (LeftFormula != null)
-                LeftFormula.SetBackground(isSelected);
+                LeftFormula.SetStyle(false, isSelected);
 
             if (RightFormula != null)
-                RightFormula.SetBackground(isSelected);
+                RightFormula.SetStyle(false, isSelected);
         }
 
         public double FontSize
@@ -254,17 +289,18 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
             {
                 FormulaTree parent = null;
 
-                if(ParentFormula != null)
+                if (ParentFormula != null)
                     parent = ParentFormula.TreeItem;
 
                 formulaInformation = new SelectedFormulaInformation
                 {
                     SelectedFormula = TreeItem,
                     SelectedUiFormula = this,
-                    SelectedFormulaParent = parent
+                    SelectedFormulaParent = parent,
+                    FormulaRoot = FormulaRoot
                 };
             }
-                
+
             if (formulaInformation == null && LeftFormula != null)
                 formulaInformation = LeftFormula.GetSelectedFormula();
 

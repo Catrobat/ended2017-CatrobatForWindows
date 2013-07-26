@@ -1,0 +1,156 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+  xmlns:mvvmLightExtras="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+  xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
+  xmlns:sb="clr-namespace:Catrobat.IDEWindowsPhone.Views.Editor.Scripts"
+  xmlns:rlb="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Bricks"
+  xmlns:controls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.ListPicker"
+  xmlns:costumes="clr-namespace:Catrobat.Core.Objects.Costumes;assembly=Catrobat.Core"
+  xmlns:sounds="clr-namespace:Catrobat.Core.Objects.Sounds;assembly=Catrobat.Core"
+  xmlns:objects="clr-namespace:Catrobat.Core.Objects;assembly=Catrobat.Core"
+  xmlns:system="clr-namespace:System;assembly=mscorlib" 
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:bricks="clr-namespace:Catrobat.Core.Objects.Bricks;assembly=Catrobat.Core"
+  xmlns:scripts="clr-namespace:Catrobat.Core.Objects.Scripts;assembly=Catrobat.Core"
+  xmlns:formulaControls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls"
+  xmlns:math="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas.Math"
+  xmlns:formulas="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas"
+  xmlns:number="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas.Number"
+  xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+  xmlns:generic="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+  xmlns:partControls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls"
+  mc:Ignorable="d">
+
+  <converters:BoolFormulaBackgroundConverter x:Key="BoolFormulaBackgroundConverter"/>
+
+
+  <SolidColorBrush x:Key="FormulaSelectedBackgrount" Color="Orange" />
+  <SolidColorBrush x:Key="FormulaNotSelectedBackgrount" Color="Transparent" />
+
+  <!-- ### Numbers #######################################################################################################-->
+  
+  <Style x:Key="TextStyleNumbers" TargetType="TextBlock">
+    <Style.Setters>
+      <Setter Property="FontFamily" Value="Courier New"/>
+      <Setter Property="Foreground" Value="Green"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+    </Style.Setters>
+  </Style>
+
+  <Style x:Key="SelectedTextStyleNumbers" TargetType="TextBlock">
+    <Style.Setters>
+      <Setter Property="FontFamily" Value="Courier New"/>
+      <Setter Property="Foreground" Value="Green"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+    </Style.Setters>
+  </Style>
+
+  <Style x:Key="ParentSelectedTextStyleNumbers" TargetType="TextBlock">
+    <Style.Setters>
+      <Setter Property="FontFamily" Value="Courier New"/>
+      <Setter Property="Foreground" Value="Green"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+    </Style.Setters>
+  </Style>
+
+  <Style x:Key="ParentSelectedContainerStyleNumbers" TargetType="Grid">
+    <Style.Setters>
+      <Setter Property="Background" Value="DarkOrange"/>
+    </Style.Setters>
+  </Style>
+
+  <Style x:Key="SelectedContainerStyleNumbers" TargetType="Grid">
+    <Style.Setters>
+      <Setter Property="Background" Value="LightGreen"/>
+    </Style.Setters>
+  </Style>
+  
+  <!-- ### Numbers #######################################################################################################-->
+  <partControls:FormulaPartStyleCollection x:Key="PartStyleNumber">
+    <partControls:FormulaPartStyleCollection.TextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="Green"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </partControls:FormulaPartStyleCollection.TextStyle>
+
+    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="Green"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+
+    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+      <Style TargetType="TextBlock">
+        <Style.Setters>
+          <Setter Property="FontFamily" Value="Courier New"/>
+          <Setter Property="Foreground" Value="Green"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+        </Style.Setters>
+      </Style>
+    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+
+    <partControls:FormulaPartStyleCollection.ContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="Transparent"/>
+        </Style.Setters>
+      </Style>
+    </partControls:FormulaPartStyleCollection.ContainerStyle>
+
+    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="DarkOrange"/>
+        </Style.Setters>
+      </Style>
+    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+
+    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+      <Style TargetType="Grid">
+        <Style.Setters>
+          <Setter Property="Background" Value="LightGreen"/>
+        </Style.Setters>
+      </Style>
+    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+
+  </partControls:FormulaPartStyleCollection>
+
+
+  <!-- ####################################################################################################################-->
+  
+  <!--####### Unknown #################################################################################################-->
+  <!--<DataTemplate x:Key="UiFormulaUnknown">
+    <toolkit:WrapPanel Orientation="Horizontal" Background="{Binding IsSelected, Converter={StaticResource BoolFormulaBackgroundConverter}, Mode=OneWay}" 
+                Margin="0" d:DataContext="{d:DesignInstance formulas:UiFormula}">
+      <TextBlock Text="{Binding TreeItem.VariableType}" FontSize="{Binding FontSize}" Foreground="{StaticResource NumberBrush}"/>
+    </toolkit:WrapPanel>
+  </DataTemplate>-->
+
+  <!--####### Formula Numbers #################################################################################################-->
+  <partControls:FormulaPartControlList x:Key="UiFormulaNumber" >
+    <partControls:FormulaPartControlNumbers Style="{StaticResource PartStyleNumber}" 
+                                            />
+  </partControls:FormulaPartControlList>
+  
+  <!--####### Formula Math Templates #################################################################################################-->
+  <partControls:FormulaPartControlList x:Key="UiFormulaTemplateMathRandom">
+    <partControls:FormulaPartControlStaticText LocalizedResourceName="Random" Style="{StaticResource PartStyleNumber}"/>
+
+    <partControls:FormulaPartControlStaticText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleNumber}"/>
+      <partControls:FormulaPartControlPlaceholderLeft/>
+    <partControls:FormulaPartControlStaticText LocalizedResourceName="ParameterSeperator" Style="{StaticResource PartStyleNumber}"/>
+      <partControls:FormulaPartControlPlaceholderRight/>
+    <partControls:FormulaPartControlStaticText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleNumber}"/>
+  </partControls:FormulaPartControlList>
+</ResourceDictionary>
