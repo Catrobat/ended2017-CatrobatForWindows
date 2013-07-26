@@ -7,3 +7,10 @@ bool TestHelper::isEqual(float x, float y)
 		return true;
 	return false;
 }
+
+bool TestHelper::isEqual(double x, double y)
+{
+	if (x <= y + EPSILON && x >= y - EPSILON)
+		return true;
+	return false;
+}

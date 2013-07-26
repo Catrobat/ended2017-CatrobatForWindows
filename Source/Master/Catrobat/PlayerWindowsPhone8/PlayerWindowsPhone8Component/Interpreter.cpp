@@ -190,10 +190,7 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
         break;
     case Function::COS: 
         if (this->TestChilds(tree, Childs::LeftChild))
-        {
-            double radians = leftValue * pi / 180.0;
-            returnValue = cos(radians);
-        }
+            returnValue = this->CalculateCosinus(leftValue);
         break;
     case Function::TAN: 
         if (this->TestChilds(tree, Childs::LeftChild))
@@ -339,6 +336,16 @@ double Interpreter::CalculateModulo(double dividend, double divisor)
     double returnValue = dividend - (double)(divisor * integerQuotient);
 
     return returnValue; 
+}
+
+double Interpreter::CalculateCosinus(double degree)
+{
+    double pi = 4.0 * std::atan(1.0);
+
+    if (this->CalculateModulo(degree + 90.0, 180) == 0.0)
+        return 0.0;
+    else
+        return cos(degree * pi / 180.0);
 }
 
 double Interpreter::RoundDoubleToInt(double value)

@@ -43,5 +43,6 @@ private:
     double CalculateMin(double value1, double value2);
     double CalculateRand(double value1, double value2);
     double CalculateModulo(double dividend, double divisor);
+    double CalculateCosinus(double degree);
     double RoundDoubleToInt(double value);
 };

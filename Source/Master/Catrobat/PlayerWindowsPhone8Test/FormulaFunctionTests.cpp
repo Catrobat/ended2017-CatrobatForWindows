@@ -101,7 +101,7 @@ namespace PlayerWindowsPhone8Test
 
             double expected = 0.0;
             double actual = interpreter->EvaluateFormula(formula, object);
-            Assert::AreEqual(expected, actual);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
         }
 
         TEST_METHOD(FunctionCOS3)
@@ -115,6 +115,59 @@ namespace PlayerWindowsPhone8Test
             double expected = 0.5;
             double actual = interpreter->EvaluateFormula(formula, object);
             Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(FunctionCOS4)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            FormulaTree *formula = new FormulaTree("FUNCTION", "COS");
+            formula->SetLeftChild(new FormulaTree("NUMBER", "45.0"));
+
+            double expected = 0.707106781;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(FunctionCOS5)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            FormulaTree *formula = new FormulaTree("FUNCTION", "COS");
+            formula->SetLeftChild(new FormulaTree("OPERATOR", "MINUS"));
+            formula->GetLeftChild()->SetRightChild(new FormulaTree("NUMBER", "4.0"));
+
+            double expected = 0.99756405;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::IsTrue(TestHelper::isEqual(expected, actual));
+        }
+
+        TEST_METHOD(FunctionCOS6)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            FormulaTree *formula = new FormulaTree("FUNCTION", "COS");
+            formula->SetLeftChild(new FormulaTree("NUMBER", "270.0"));
+
+            double expected = 0.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
+        }
+
+        TEST_METHOD(FunctionCOS7)
+        {
+            Interpreter *interpreter = Interpreter::Instance();
+            Object *object = new Object("TestObject");
+
+            FormulaTree *formula = new FormulaTree("FUNCTION", "COS");
+            formula->SetLeftChild(new FormulaTree("NUMBER", "180.0"));
+
+            double expected = -1.0;
+            double actual = interpreter->EvaluateFormula(formula, object);
+            Assert::AreEqual(expected, actual);
         }
 
         TEST_METHOD(FunctionTAN1)
