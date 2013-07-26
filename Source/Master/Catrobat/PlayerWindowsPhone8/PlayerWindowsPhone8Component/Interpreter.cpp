@@ -4,8 +4,9 @@
 #include "ProjectDaemon.h"
 #include "string"
 #include <sstream>
-#include <cmath>
+//#include <cmath>
 #include <ctime>
+#include <math.h>
 
 using namespace std;
 using namespace Windows::Devices::Sensors;
@@ -164,6 +165,7 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
     double returnValue = 0.0;
     FormulaTree *leftChild = tree->GetLeftChild();
     FormulaTree *rightChild = tree->GetRightChild();
+    double pi = 4.0 * std::atan(1.0);
 
     double leftValue = 0.0;
     if (leftChild != NULL)
@@ -184,22 +186,36 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
         break;
     case Function::SIN:
         if (this->TestChilds(tree, Childs::LeftChild))
-            returnValue = sin(leftValue);
+            returnValue = sin(leftValue * pi / 180.0);
         break;
     case Function::COS: 
         if (this->TestChilds(tree, Childs::LeftChild))
-            returnValue = cos(leftValue);
+        {
+            double radians = leftValue * pi / 180.0;
+            returnValue = cos(radians);
+        }
         break;
     case Function::TAN: 
         if (this->TestChilds(tree, Childs::LeftChild))
-            returnValue = tan(leftValue);
+            returnValue = tan(leftValue * pi / 180.0);
         break;
     case Function::LN: 
         if (this->TestChilds(tree, Childs::LeftChild))
-            returnValue = log(leftValue);
+        {
+            if (leftValue <= 0)
+                returnValue = -1.0; //TODO: exception!
+            else
+                returnValue = log(leftValue);
+        }
+        break;
     case Function::LOG:
         if (this->TestChilds(tree, Childs::LeftChild))
-            returnValue = log(leftValue);
+        {
+            if (leftValue <= 0)
+                returnValue = -1.0; //TODO: exception!
+            else
+                returnValue = log10(leftValue);
+        }
         break;
     case Function::SQRT:
         if (this->TestChilds(tree, Childs::LeftChild))
@@ -226,10 +242,16 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
             returnValue = this->CalculateModulo(leftValue, rightValue);
         break;
     case Function::ARCSIN: 
+        if (this->TestChilds(tree, Childs::LeftChild))
+            returnValue = asin(leftValue) * 180 / pi;
         break;
     case Function::ARCCOS: 
+        if (this->TestChilds(tree, Childs::LeftChild))
+            returnValue = acos(leftValue) * 180 / pi;
         break;
     case Function::ARCTAN: 
+        if (this->TestChilds(tree, Childs::LeftChild))
+            returnValue = atan(leftValue) * 180 / pi;
         break;
     case Function::EXP: 
 		if (this->TestChilds(tree, Childs::LeftChild))
