@@ -8,6 +8,13 @@
   In the View:
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 
+ * For Catrobat.Paint:
+ * There is no App.xml in library so we have to define the Locator in each .xaml,
+ * but that's no problem because ViewModel references are static and we always
+ * get the same ones. 
+ * Mr. MvvmLight recommends this solution:
+ * See http://blog.galasoft.ch/archive/2010/03/16/whatrsquos-new-in-mvvm-light-v3.aspx#515715
+
   You can also use Blend to do all this with the tool's support.
   See http://www.galasoft.ch/mvvm
 */
@@ -52,11 +59,12 @@ namespace Catrobat.Paint.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<ColorPickerViewModel>();
         }
 
         private void LocalizedStringsOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            RaisePropertyChanged("Resources");
+            RaisePropertyChanged(propertyName: "Resources");
         }
 
         private readonly LocalizedStrings _localizedStrings;
@@ -75,7 +83,15 @@ namespace Catrobat.Paint.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public ColorPickerViewModel ColorPicker
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ColorPickerViewModel>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
