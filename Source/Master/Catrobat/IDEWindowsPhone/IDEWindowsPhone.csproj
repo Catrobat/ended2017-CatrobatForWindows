@@ -126,6 +126,11 @@
     <Compile Include="Controls\FormulaControls\FormulaKeyboard.xaml.cs">
       <DependentUpon>FormulaKeyboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaControls\Formulas\SelectedFormulaInformation.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlStaticText.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlPlaceholderRight.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControl.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlNumbers.cs" />
     <Compile Include="Controls\FormulaControls\Formulas\Math\UiFormulaMathRandom.cs" />
     <Compile Include="Controls\FormulaControls\Formulas\Number\UiFormulaNumber.cs" />
     <Compile Include="Controls\FormulaControls\Formulas\UiFormula.cs" />
@@ -135,6 +140,8 @@
       <DependentUpon>FormulaViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FormulaControls\FormulaTemplateSelector.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlList.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlPlaceholderLeft.cs" />
     <Compile Include="Controls\FormulaControls\UiFormulaTreeItem.xaml.cs">
       <DependentUpon>UiFormulaTreeItem.xaml</DependentUpon>
     </Compile>

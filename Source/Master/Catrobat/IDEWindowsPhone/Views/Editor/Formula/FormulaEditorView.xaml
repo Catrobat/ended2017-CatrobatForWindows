@@ -24,9 +24,23 @@
       <RowDefinition Height="480" />
     </Grid.RowDefinitions>
     <ScrollViewer>
-      <formulaControls:FormulaViewer Name="FormulaViewer" IsAutoFontSize="True" IsEditEnabled="True" IsMultiline="True" Formula="{Binding Formula}"></formulaControls:FormulaViewer>
+      <formulaControls:FormulaViewer Name="FormulaViewer" 
+                                     CharactersOnNormalFontSize="80"
+                                     NormalFontSize="50"
+                                     MinFontSize="26"
+                                     MaxFontSize="100"
+                                     IsAutoFontSize="True" 
+                                     IsEditEnabled="True" 
+                                     IsMultiline="True" 
+                                     Formula="{Binding Formula}" 
+                                     VerticalAlignment="Stretch" 
+                                     Height="290"
+                                     Grid.Row="0"/>
     </ScrollViewer>
-    <formulaControls:FormulaKeyboard Name="FormulaKeyboard" LocalVariables="{Binding LocalVariables}" GlobalVariables="{Binding GlobalVariables}" Grid.Row="1"/>
+    <formulaControls:FormulaKeyboard Name="FormulaKeyboard" 
+                                     LocalVariables="{Binding LocalVariables}" 
+                                     GlobalVariables="{Binding GlobalVariables}" 
+                                     Grid.Row="1"/>
   </Grid>
 
 </phone:PhoneApplicationPage>

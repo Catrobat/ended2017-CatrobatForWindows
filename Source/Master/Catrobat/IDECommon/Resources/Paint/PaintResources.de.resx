@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ColorPickerPageTitle" xml:space="preserve">
+    <value>Color Picker</value>
+  </data>
+  <data name="ColorPickerSelectedColor" xml:space="preserve">
+    <value>Ausgewählte Farbe</value>
+  </data>
   <data name="Test1" xml:space="preserve">
     <value>Test1de</value>
   </data>

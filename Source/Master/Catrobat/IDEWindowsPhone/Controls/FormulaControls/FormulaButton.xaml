@@ -12,7 +12,10 @@
 
   <Grid x:Name="LayoutRoot">
     <Button Name="ButtonFormula" Click="ButtonFormula_OnClick">
-      <formulaControls:FormulaViewer Name="FormulaViewer" IsEditEnabled="False" IsMultiline="False"/>
+      <Grid>
+        <formulaControls:FormulaViewer Name="FormulaViewer" NormalFontSize="30" IsEditEnabled="False" IsMultiline="False"/>
+        <Grid Name="GridTapPreventer" Background="Transparent"/>
+      </Grid>
     </Button>
   </Grid>
 </UserControl>

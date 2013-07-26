@@ -4,8 +4,9 @@
 #include "ProjectDaemon.h"
 #include "string"
 #include <sstream>
-#include <cmath>
+//#include <cmath>
 #include <ctime>
+#include <math.h>
 
 using namespace std;
 using namespace Windows::Devices::Sensors;
@@ -109,40 +110,52 @@ double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
 
     double returnValue = 0.0;
 
-    switch (tree->GetOperator())
-    {
-    case Operator::PLUS:
-        returnValue = leftValue + rightValue;
-        break;
-    case Operator::MINUS:
-        returnValue = leftValue - rightValue;
-        break;
-    case Operator::MULT:
-        returnValue = leftValue * rightValue;
-        break;
-    case Operator::DIVIDE:
-        if (rightValue == 0)
-            return 0.0f;
-        returnValue = leftValue / rightValue;
-        break;
-    case Operator::POW:
-        returnValue = pow(leftValue, rightValue);
-        break;
-    case Operator::LOGICAL_AND:
-        returnValue = leftValue && rightValue;
-        break;
-    case Operator::LOGICAL_OR:
-        returnValue = leftValue || rightValue;
-        break;
-    case Operator::EQUAL:
-        returnValue = leftValue == rightValue;
-        break;
-    case Operator::NOT_EQUAL:
-        returnValue = leftValue != rightValue;
-        break;
-    default:
-        break;
-    }
+	switch (tree->GetOperator())
+	{
+	case Operator::PLUS:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue + rightValue;
+		break;
+	case Operator::MINUS:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild) ||
+			this->TestChilds(tree, Childs::RightChild))  
+			returnValue = leftValue - rightValue;
+		break;
+	case Operator::MULT:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue * rightValue;
+		break;
+	case Operator::DIVIDE:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+		{
+			if (rightValue == 0)
+				return 0.0f;
+			returnValue = leftValue / rightValue;
+		}
+		break;
+	case Operator::POW:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = pow(leftValue, rightValue);
+		break;
+	case Operator::LOGICAL_AND:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue && rightValue;
+		break;
+	case Operator::LOGICAL_OR:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue || rightValue;
+		break;
+	case Operator::EQUAL:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue == rightValue;
+		break;
+	case Operator::NOT_EQUAL:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue != rightValue;
+		break;
+	default:
+		break;
+	}
 
     return returnValue;
 }
@@ -152,6 +165,7 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
     double returnValue = 0.0;
     FormulaTree *leftChild = tree->GetLeftChild();
     FormulaTree *rightChild = tree->GetRightChild();
+    double pi = 4.0 * std::atan(1.0);
 
     double leftValue = 0.0;
     if (leftChild != NULL)
@@ -172,22 +186,33 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
         break;
     case Function::SIN:
         if (this->TestChilds(tree, Childs::LeftChild))
-            returnValue = sin(leftValue);
+            returnValue = sin(leftValue * pi / 180.0);
         break;
     case Function::COS: 
         if (this->TestChilds(tree, Childs::LeftChild))
-            returnValue = cos(leftValue);
+            returnValue = this->CalculateCosinus(leftValue);
         break;
     case Function::TAN: 
         if (this->TestChilds(tree, Childs::LeftChild))
-            returnValue = tan(leftValue);
+            returnValue = tan(leftValue * pi / 180.0);
         break;
     case Function::LN: 
         if (this->TestChilds(tree, Childs::LeftChild))
-            returnValue = log(leftValue);
+        {
+            if (leftValue <= 0)
+                returnValue = -1.0; //TODO: exception!
+            else
+                returnValue = log(leftValue);
+        }
+        break;
     case Function::LOG:
         if (this->TestChilds(tree, Childs::LeftChild))
-            returnValue = log(leftValue);
+        {
+            if (leftValue <= 0)
+                returnValue = -1.0; //TODO: exception!
+            else
+                returnValue = log10(leftValue);
+        }
         break;
     case Function::SQRT:
         if (this->TestChilds(tree, Childs::LeftChild))
@@ -214,12 +239,20 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
             returnValue = this->CalculateModulo(leftValue, rightValue);
         break;
     case Function::ARCSIN: 
+        if (this->TestChilds(tree, Childs::LeftChild))
+            returnValue = asin(leftValue) * 180 / pi;
         break;
     case Function::ARCCOS: 
+        if (this->TestChilds(tree, Childs::LeftChild))
+            returnValue = acos(leftValue) * 180 / pi;
         break;
     case Function::ARCTAN: 
+        if (this->TestChilds(tree, Childs::LeftChild))
+            returnValue = atan(leftValue) * 180 / pi;
         break;
     case Function::EXP: 
+		if (this->TestChilds(tree, Childs::LeftChild))
+			returnValue = exp(leftValue);
         break;
     case Function::MAX: 
         if (this->TestChilds(tree, Childs::LeftAndRightChild))
@@ -303,6 +336,16 @@ double Interpreter::CalculateModulo(double dividend, double divisor)
     double returnValue = dividend - (double)(divisor * integerQuotient);
 
     return returnValue; 
+}
+
+double Interpreter::CalculateCosinus(double degree)
+{
+    double pi = 4.0 * std::atan(1.0);
+
+    if (this->CalculateModulo(degree + 90.0, 180) == 0.0)
+        return 0.0;
+    else
+        return cos(degree * pi / 180.0);
 }
 
 double Interpreter::RoundDoubleToInt(double value)

@@ -4,13 +4,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:formulaControls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="80" d:DesignWidth="480">
 
-  <Grid x:Name="LayoutRoot">
-    <formulaControls:UiFormulaTreeItem Name="FormulaViewerTreeItemRoot" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+  <Grid x:Name="LayoutRoot" VerticalAlignment="Stretch">
+    <ScrollViewer Name="ScrollViewerContent" VerticalAlignment="Stretch">
+      <toolkit:WrapPanel Name="PanelContent"/>
+    </ScrollViewer>
   </Grid>
 </UserControl>

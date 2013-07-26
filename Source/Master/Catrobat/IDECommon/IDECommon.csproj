@@ -65,6 +65,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EditorResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\IDE\Formula\FormulaResources.de.Designer.cs">
+      <DependentUpon>FormulaResources.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\IDE\Formula\FormulaResources.Designer.cs">
+      <DependentUpon>FormulaResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\LocalizedStrings.cs" />
     <Compile Include="Resources\IDE\Main\MainResources.de.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -103,6 +113,16 @@
     <EmbeddedResource Include="Resources\IDE\Editor\EditorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>EditorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\IDE\Formula\FormulaResources.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FormulaResources.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\IDE\Formula\FormulaResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FormulaResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\IDE\Main\MainResources.de.resx">
       <SubType>Designer</SubType>
