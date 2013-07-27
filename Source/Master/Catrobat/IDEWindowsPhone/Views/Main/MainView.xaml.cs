@@ -46,7 +46,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            while(NavigationService.CanGoBack)
+            while (NavigationService.CanGoBack)
                 Navigation.RemoveBackEntry();
 
             _viewModel.ResetViewModelCommand.Execute(null);
@@ -106,101 +106,100 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         private void LocalProjectControl_OnLocalProjectsBackPressed(object sender, EventArgs e)
         {
-            var newIndex = 2;
-            var curIndex = 1;
+            // var curIndex = 1;
 
-            PanoramaMain.SetValue(Panorama.SelectedItemProperty, PanoramaMain.Items[newIndex]);
+            //(PanoramaMain.Items[curIndex] as PanoramaItem).Visibility = Visibility.Collapsed;
+            //PanoramaMain.SetValue(Panorama.SelectedItemProperty, PanoramaMain.Items[(curIndex - 1)%PanoramaMain.Items.Count]);
+            //PanoramaMain.Measure(new Size());
+            //(PanoramaMain.Items[curIndex] as PanoramaItem).Visibility = Visibility.Visible;
 
-            (PanoramaMain.Items[curIndex] as PanoramaItem).Visibility = Visibility.Collapsed;
-            PanoramaMain.SetValue(Panorama.SelectedItemProperty, PanoramaMain.Items[(curIndex - 1)%PanoramaMain.Items.Count]);
-            PanoramaMain.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-            (PanoramaMain.Items[curIndex] as PanoramaItem).Visibility = Visibility.Visible;
-
-            //SlidePanorama(panoramaMain);
+            SlideLeft(PanoramaMain);
         }
 
-        // Code from: http://xme.im/slide-or-change-panorama-selected-item-programatically
-        private void SlidePanorama(Panorama pan)
+        /// <summary>
+        /// Slides the panorama control to the next left item.
+        /// Code adapted from <see cref="http://xme.im/slide-or-change-panorama-selected-item-programatically"/>
+        /// </summary>
+        /// <remarks>
+        /// This is a bad hack. Remove as soon as UI automation is supported!
+        /// Title animation is missing (not used). See Link in summary when used again. 
+        ///</remarks>
+        private static void SlideLeft(Panorama pan)
         {
-            var panWrapper = VisualTreeHelper.GetChild(pan, 0) as FrameworkElement;
-            var panTitle = VisualTreeHelper.GetChild(panWrapper, 1) as FrameworkElement;
-            //Get the panorama layer to calculate all panorama items size
-            var panLayer = VisualTreeHelper.GetChild(panWrapper, 2) as FrameworkElement;
-            //Get the title presenter to calculate the title size
-            var panTitlePresenter = VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(panTitle, 0) as FrameworkElement, 1) as FrameworkElement;
+            //these values have been measured by eye -.-
+            var animationDuration = TimeSpan.FromSeconds(0.7);
+            var animationEase = new CircleEase();
+            var panoramaItemMargin = 14;
+            var backgroundSlowDown = 0.2; // 0.527 would be the real value but leads to trembling errors due to easing function
 
-            //Current panorama item index
+            //Current and new panorama item index
             var curIndex = pan.SelectedIndex;
+            var newIndex = (curIndex - 1 + pan.Items.Count) % pan.Items.Count;
 
-            //Get the next of next panorama item
-            var third = VisualTreeHelper.GetChild(pan.Items[(curIndex + 2)%pan.Items.Count] as PanoramaItem, 0) as FrameworkElement;
+            var panWrapper = VisualTreeHelper.GetChild(pan, 0) as FrameworkElement;
+            //Get the panorama layer to calculate all panorama items size
+            //var panLayer = VisualTreeHelper.GetChild(panWrapper, 2) as FrameworkElement;
 
             //Be sure the RenderTransform is TranslateTransform
             if (!(pan.RenderTransform is TranslateTransform)
-                || !(panTitle.RenderTransform is TranslateTransform))
+                || !(pan.Background.RelativeTransform is TranslateTransform))
             {
                 pan.RenderTransform = new TranslateTransform();
-                panTitle.RenderTransform = new TranslateTransform();
+                pan.Background.RelativeTransform = new TranslateTransform();
+                // panTitle.RenderTransform = new TranslateTransform();
             }
 
-            //Increase width of panorama to let it render the next slide (if not, default panorama is 480px and the null area appear if we transform it)
-            pan.Width = 960;
+            var animationWidth = (pan.Items[newIndex] as PanoramaItem).ActualWidth + panoramaItemMargin;
 
-            //Animate panorama control to the right
+            ////Increase width of panorama to force it render the next slide (if not the null area appear if we transform it)
+            pan.Margin = new Thickness(0, 0, -animationWidth, 0);
+            pan.MinWidth = pan.ActualWidth + animationWidth;
+
+            //Change the selected item
+            (pan.Items[curIndex] as PanoramaItem).Visibility = Visibility.Collapsed;
+            pan.SetValue(Panorama.SelectedItemProperty, pan.Items[newIndex]);
+            pan.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            (pan.Items[curIndex] as PanoramaItem).Visibility = Visibility.Visible;
+
+            //Animate panorama control to the left
             var sb = new Storyboard();
-            var a = new DoubleAnimation();
-            a.From = 0;
-            a.To = -(pan.Items[curIndex] as PanoramaItem).ActualWidth; //Animate the x transform to a width of one item
-            a.Duration = new Duration(TimeSpan.FromMilliseconds(700));
-            a.EasingFunction = new CircleEase(); //This is default panorama easing effect
+            var a = new DoubleAnimation()
+            {
+                To = 0,
+                From = -animationWidth, //Animate the x transform to a width of one item
+                Duration = animationDuration,
+                EasingFunction = animationEase
+            };
             sb.Children.Add(a);
             Storyboard.SetTarget(a, pan.RenderTransform);
             Storyboard.SetTargetProperty(a, new PropertyPath(TranslateTransform.XProperty));
 
-            //Animate panorama title separately
-            var aTitle = new DoubleAnimation();
-            aTitle.From = 0;
-            aTitle.To = (panLayer.ActualWidth - panTitlePresenter.ActualWidth)/(pan.Items.Count - 1)*1.5; //Calculate where should the title animate to
-            aTitle.Duration = a.Duration;
-            aTitle.EasingFunction = a.EasingFunction; //This is default panorama easing effect
-            sb.Children.Add(aTitle);
-            Storyboard.SetTarget(aTitle, panTitle.RenderTransform);
-            Storyboard.SetTargetProperty(aTitle, new PropertyPath(TranslateTransform.XProperty));
+            //Animate panorama background separately (relative to panorama item)
+            var aBack = new DoubleAnimation()
+            {
+                To = 0,
+                From = backgroundSlowDown,
+                Duration = animationDuration,
+                EasingFunction = animationEase
+            };
+            sb.Children.Add(aBack);
+            Storyboard.SetTarget(aBack, pan.Background.RelativeTransform);
+            Storyboard.SetTargetProperty(aBack, new PropertyPath(TranslateTransform.XProperty));
 
             //Start the effect
             sb.Begin();
 
             //After effect completed, we change the selected item
             a.Completed += (obj, args) =>
-                {
-                    //Reset panorama width
-                    pan.Width = 480;
-                    //Change the selected item
-                    (pan.Items[curIndex] as PanoramaItem).Visibility = Visibility.Collapsed;
-                    pan.SetValue(Panorama.SelectedItemProperty, pan.Items[(curIndex + 1)%pan.Items.Count]);
-                    pan.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                    (pan.Items[curIndex] as PanoramaItem).Visibility = Visibility.Visible;
-                    //Reset panorama render transform
-                    (pan.RenderTransform as TranslateTransform).X = 0;
-                    //Reset title render transform
-                    (panTitle.RenderTransform as TranslateTransform).X = 0;
-
-                    //Because of the next of next item will be load after we change the selected index to next item
-                    //I do not want it appear immediately without any effect, so I create a custom effect for it
-                    if (!(third.RenderTransform is TranslateTransform))
-                    {
-                        third.RenderTransform = new TranslateTransform();
-                    }
-                    var sb2 = new Storyboard();
-                    var aThird = new DoubleAnimation() {From = 100, To = 0, Duration = new Duration(TimeSpan.FromMilliseconds(300))};
-
-                    sb2.Children.Add(aThird);
-                    Storyboard.SetTarget(aThird, third.RenderTransform);
-                    Storyboard.SetTargetProperty(aThird, new PropertyPath(TranslateTransform.XProperty));
-                    sb2.Begin();
-                };
+            {
+                //Reset panorama width
+                pan.MinWidth = 0;
+                pan.Margin = new Thickness(0);
+                //Reset render transform
+                (pan.RenderTransform as TranslateTransform).X = 0;
+                (pan.Background.RelativeTransform as TranslateTransform).X = 0;
+            };
         }
-
 
         private void LongListSelectorOnlineProjects_ItemRealized(object sender, ItemRealizationEventArgs e)
         {
