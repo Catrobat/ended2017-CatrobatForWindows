@@ -15,7 +15,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
         private string GetText()
         {
             if (UiFormula.FormulaValue == "")
-                return " ";
+                return "_";
             else
                 return UiFormula.FormulaValue;
         }
@@ -32,23 +32,23 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
             var grid = new Grid {DataContext = this};
             grid.Children.Add(textBlock);
 
-            if (Style != null)
-            {
-                textBlock.Style = Style.TextStyle;
-                grid.Style = Style.ContainerStyle;
+            //if (Style != null)
+            //{
+            //    textBlock.Style = Style.TextStyle;
+            //    grid.Style = Style.ContainerStyle;
 
-                if (isParentSelected)
-                {
-                    textBlock.Style = Style.ParentSelectedTextStyle;
-                    grid.Style = Style.ParentSelectedContainerStyle;
-                }
+            //    if (isParentSelected)
+            //    {
+            //        textBlock.Style = Style.ParentSelectedTextStyle;
+            //        grid.Style = Style.ParentSelectedContainerStyle;
+            //    }
 
-                if (isSelected)
-                {
-                    textBlock.Style = Style.SelectedTextStyle;
-                    grid.Style = Style.SelectedContainerStyle;
-                }
-            }
+            //    if (isSelected)
+            //    {
+            //        textBlock.Style = Style.SelectedTextStyle;
+            //        grid.Style = Style.SelectedContainerStyle;
+            //    }
+            //}
 
             return grid;
         }

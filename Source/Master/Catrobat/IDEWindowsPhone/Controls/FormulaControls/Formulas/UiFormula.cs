@@ -14,7 +14,7 @@ using Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
 {
-    public abstract class UiFormula : INotifyPropertyChanged
+    public class UiFormula : INotifyPropertyChanged
     {
         private bool _isSelected;
         private double _fontSize;
@@ -25,6 +25,32 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
 
         public FormulaTree TreeItem { get; set; }
 
+        public UiFormula LeftFormula { get; set; }
+
+        public UiFormula RightFormula { get; set; }
+
+        public UiFormula ParentFormula { get; set; }
+
+        public bool IsEditEnabled { get; set; }
+
+        public FormulaPartControlList Template { get; set; }
+
+        public double FontSize
+        {
+            get { return _fontSize; }
+            set
+            {
+                _fontSize = value;
+
+                if (LeftFormula != null)
+                    LeftFormula.FontSize = value;
+
+                if (RightFormula != null)
+                    RightFormula.FontSize = value;
+            }
+        }
+
+
         public string FormulaValue
         {
             get
@@ -33,14 +59,12 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
             }
         }
 
+        public void SetViewer(FormulaViewer viewer)
+        {
+            FindRoot().SetChildrensViewer(viewer);
+        }
 
-        public UiFormula LeftFormula { get; set; }
-
-        public UiFormula RightFormula { get; set; }
-
-        public UiFormula ParentFormula { get; set; }
-
-        public List<Grid> UiControls;
+        public List<Grid> UiControls { get; set; }
 
         public bool IsSelected
         {
@@ -53,19 +77,6 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
                 RaisePropertyChanged();
             }
         }
-
-        //private void SetSelected(bool isSelected)
-        //{
-        //    var root = FindRoot()
-        //    root.SetSelectedRecursive(isSelected);
-        //}
-
-        //private void SetSelectedRecursive(bool isSelected)
-        //{
-        //    this.IsSelected = isSelected;
-        //    LeftFormula.SetSelectedRecursive(isSelected);
-        //    RightFormula.SetSelectedRecursive(isSelected);
-        //}
 
         public void ClearAllBackground()
         {
@@ -101,8 +112,6 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
                         Style containerStyle = styles.ContainerStyle;
                         Style textStyle = styles.TextStyle;
 
-
-
                         if (isParentSelected)
                         {
                             textStyle = styles.ParentSelectedTextStyle;
@@ -124,30 +133,17 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
             }
 
             if (LeftFormula != null)
-                LeftFormula.SetStyle(false, isSelected);
+                LeftFormula.SetStyle(false, isSelected || isParentSelected);
 
             if (RightFormula != null)
-                RightFormula.SetStyle(false, isSelected);
+                RightFormula.SetStyle(false, isSelected || isParentSelected);
         }
 
-        public double FontSize
+
+        public void ClearAllSelection()
         {
-            get { return _fontSize; }
-            set
-            {
-                _fontSize = value;
-
-                if (LeftFormula != null)
-                    LeftFormula.FontSize = value;
-
-                if (RightFormula != null)
-                    RightFormula.FontSize = value;
-            }
+            FindRoot().ClearChildrensSelection();
         }
-
-        public bool IsEditEnabled { get; set; }
-
-        public abstract FormulaPartControlList Template { get; }
 
         public void ClearChildrensSelection()
         {
@@ -160,77 +156,12 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
                 RightFormula.ClearChildrensSelection();
         }
 
-        public void ClearAllSelection()
-        {
-            FindRoot().ClearChildrensSelection();
-        }
-
-        private UiFormula FindRoot()
-        {
-            var parent = this;
-            while (true)
-            {
-                if (parent.ParentFormula != null)
-                    parent = parent.ParentFormula;
-                else
-                    break;
-            }
-
-            return parent;
-        }
-
-        public void SetViewer(FormulaViewer viewer)
-        {
-            FindRoot().SetChildrensViewer(viewer);
-        }
-
-        private void SetChildrensViewer(FormulaViewer viewer)
-        {
-            Viewer = viewer;
-
-            if (LeftFormula != null)
-                LeftFormula.SetChildrensViewer(viewer);
-
-            if (RightFormula != null)
-                RightFormula.SetChildrensViewer(viewer);
-        }
-
-
-        //public List<Grid> GetAllControls(int fontSize)
-        //{
-        //    var allParts = GetAllParts();
-        //    var allControls = new List<Grid>();
-
-        //    foreach (var control in allParts)
-        //    {
-        //        allControls.Add(control.CreateUiControls(fontSize));
-        //    }
-
-        //    return allControls;
-        //}
-
-        //public List<FormulaPartControl> GetMyParts()
-        //{
-        //    var allParts = Template.ToList();
-
-        //    foreach (var part in allParts)
-        //    {
-        //        part.UiFormula = this;
-        //    }
-
-
-        //}
-
 
         public List<FormulaPartControl> GetAllParts()
         {
             UiControls = new List<Grid>();
-            var allParts = new List<FormulaPartControl>();
 
-            foreach (var control in Template.ToList())
-            {
-                allParts.Add(control.Copy());
-            }
+            var allParts = Template.ToList().Select(control => control.Copy()).ToList();
 
             foreach (var part in allParts)
             {
@@ -269,18 +200,6 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
             return allParts;
         }
 
-        #region PropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
-
         public SelectedFormulaInformation GetSelectedFormula()
         {
             SelectedFormulaInformation formulaInformation = null;
@@ -309,5 +228,43 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
 
             return formulaInformation;
         }
+
+        private UiFormula FindRoot()
+        {
+            var parent = this;
+            while (true)
+            {
+                if (parent.ParentFormula != null)
+                    parent = parent.ParentFormula;
+                else
+                    break;
+            }
+
+            return parent;
+        }
+
+        private void SetChildrensViewer(FormulaViewer viewer)
+        {
+            Viewer = viewer;
+
+            if (LeftFormula != null)
+                LeftFormula.SetChildrensViewer(viewer);
+
+            if (RightFormula != null)
+                RightFormula.SetChildrensViewer(viewer);
+        }
+
+        #region PropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
     }
 }

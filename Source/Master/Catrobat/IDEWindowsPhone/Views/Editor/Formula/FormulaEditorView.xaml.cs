@@ -6,7 +6,7 @@ using System.Windows.Media.Animation;
 using Catrobat.Core.Objects.Formulas;
 using Catrobat.Core.Objects.Variables;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
-using Catrobat.IDEWindowsPhone.Controls.FormulaControls.FormulaEditorTools;
+using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Templates;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
 using Microsoft.Phone.Controls;

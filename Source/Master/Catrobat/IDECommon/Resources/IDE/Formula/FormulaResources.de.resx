@@ -132,4 +132,7 @@
   <data name="Random" xml:space="preserve">
     <value>zufall</value>
   </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>unbekannt</value>
+  </data>
 </root>

@@ -105,5 +105,14 @@ namespace Catrobat.IDECommon.Resources.IDE.Formula {
                 return ResourceManager.GetString("Random", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to unknown.
+        /// </summary>
+        public static string Unknown {
+            get {
+                return ResourceManager.GetString("Unknown", resourceCulture);
+            }
+        }
     }
 }

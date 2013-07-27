@@ -32,8 +32,6 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
 
         protected void ControlOnTap(object sender, GestureEventArgs gestureEventArgs)
         {
-             
-
             if (UiFormula.IsEditEnabled)
             {
                 bool wasSelected = UiFormula.IsSelected;
