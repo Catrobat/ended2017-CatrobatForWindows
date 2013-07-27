@@ -80,6 +80,24 @@ namespace Catrobat.IDECommon.Resources.IDE.Formula {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to =.
+        /// </summary>
+        public static string LogicEqual {
+            get {
+                return ResourceManager.GetString("LogicEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OR.
+        /// </summary>
+        public static string LogicOr {
+            get {
+                return ResourceManager.GetString("LogicOr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (.
         /// </summary>
         public static string OpenBrecket {

@@ -280,29 +280,30 @@
         </partControls:FormulaPartControlList>
       </f:FormulaDefinition.Template>
     </f:FormulaDefinition>
+  </f:FormulaDefinitionCollection>
+
+  <!-- ### Logic Equality Formulas ##########################################################################################################-->
+  <f:FormulaDefinition Type="OPERATOR" Value="EQUAL">
+    <f:FormulaDefinition.Template>
+      <partControls:FormulaPartControlList>
+        <partControls:FormulaPartControlPlaceholderLeft/>
+        <partControls:FormulaPartControlStaticText LocalizedResourceName="LogicEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
+        <partControls:FormulaPartControlPlaceholderRight/>
+      </partControls:FormulaPartControlList>
+    </f:FormulaDefinition.Template>
+  </f:FormulaDefinition>
+  </f:FormulaDefinitionCollection>
 
 
-    <!-- ### Logic Equality Formulas ##########################################################################################################-->
-    <f:FormulaDefinition Type="OPERATOR" Value="EQUAL">
-      <f:FormulaDefinition.Template>
-        <partControls:FormulaPartControlList>
-          <partControls:FormulaPartControlPlaceholderLeft/>
-          <partControls:FormulaPartControlStaticText LocalizedResourceName="LogicEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
-          <partControls:FormulaPartControlPlaceholderRight/>
-        </partControls:FormulaPartControlList>
-      </f:FormulaDefinition.Template>
-    </f:FormulaDefinition>
-
-
-    <!-- ### Logic Formulas ##########################################################################################################-->
-    <f:FormulaDefinition Type="OPERATOR" Value="OR">
-      <f:FormulaDefinition.Template>
-        <partControls:FormulaPartControlList>
-          <partControls:FormulaPartControlPlaceholderLeft/>
-          <partControls:FormulaPartControlStaticText LocalizedResourceName="LogicOr" Style="{StaticResource PartStyleOperatorLogic}"/>
-          <partControls:FormulaPartControlPlaceholderRight/>
-        </partControls:FormulaPartControlList>
-      </f:FormulaDefinition.Template>
-    </f:FormulaDefinition>
+  <!-- ### Logic Formulas ##########################################################################################################-->
+  <f:FormulaDefinition Type="OPERATOR" Value="EQUAL">
+    <f:FormulaDefinition.Template>
+      <partControls:FormulaPartControlList>
+        <partControls:FormulaPartControlPlaceholderLeft/>
+        <partControls:FormulaPartControlStaticText LocalizedResourceName="LogicOk" Style="{StaticResource PartStyleOperatorLogic}"/>
+        <partControls:FormulaPartControlPlaceholderRight/>
+      </partControls:FormulaPartControlList>
+    </f:FormulaDefinition.Template>
+  </f:FormulaDefinition>
   </f:FormulaDefinitionCollection>
 </ResourceDictionary>

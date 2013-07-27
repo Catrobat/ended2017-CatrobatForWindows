@@ -123,6 +123,12 @@
   <data name="DecimalPointCharacter" xml:space="preserve">
     <value>.</value>
   </data>
+  <data name="LogicEqual" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="LogicOr" xml:space="preserve">
+    <value>OR</value>
+  </data>
   <data name="OpenBrecket" xml:space="preserve">
     <value>(</value>
   </data>

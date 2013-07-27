@@ -12,7 +12,9 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
 {
     public static class UiFormulaMappings
     {
-        private static Dictionary<string, FormulaPartControlList> _mappings;
+        private const string UnivertialValueDummy = "#universal#";
+
+        private static Dictionary<string, Dictionary<string, FormulaPartControlList>> _mappings;
 
         public static UiFormula CreateFormula(Formula formulaRoot, FormulaViewer viewer, FormulaTree formula, bool isEditEnabled, FormulaTree selectedFormula)
         {
@@ -23,48 +25,57 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
 
             Debug.Assert(_mappings != null, "Mappings != null");
             var type = formula.VariableType.ToLower();
+            var value = formula.VariableValue.ToLower();
 
 
             if (!_mappings.ContainsKey(formula.VariableType.ToLower()))
             {
                 type = "unknown";
-
             }
 
-            FormulaPartControlList controlList = _mappings[type];
+            if (_mappings[type].ContainsKey(UnivertialValueDummy))
+                value = UnivertialValueDummy;
 
-                var uiFormula = new UiFormula
-                {
-                    Template = controlList,
-                    FormulaRoot = formulaRoot,
-                    Viewer = viewer,
-                    TreeItem = formula,
-                    IsSelected = formula == selectedFormula,
-                    IsEditEnabled = isEditEnabled,
-                    LeftFormula = CreateFormula(formulaRoot, viewer, formula.LeftChild, isEditEnabled, selectedFormula)
-                };
+            FormulaPartControlList controlList = _mappings[type][value];
 
-                if (uiFormula.LeftFormula != null)
-                    uiFormula.LeftFormula.ParentFormula = uiFormula;
+            var uiFormula = new UiFormula
+            {
+                Template = controlList,
+                FormulaRoot = formulaRoot,
+                Viewer = viewer,
+                TreeItem = formula,
+                IsSelected = formula == selectedFormula,
+                IsEditEnabled = isEditEnabled,
+                LeftFormula = CreateFormula(formulaRoot, viewer, formula.LeftChild, isEditEnabled, selectedFormula)
+            };
 
-                uiFormula.RightFormula = CreateFormula(formulaRoot,viewer, formula.RightChild, isEditEnabled, selectedFormula);
+            if (uiFormula.LeftFormula != null)
+                uiFormula.LeftFormula.ParentFormula = uiFormula;
 
-                if (uiFormula.RightFormula != null)
-                    uiFormula.RightFormula.ParentFormula = uiFormula;
+            uiFormula.RightFormula = CreateFormula(formulaRoot, viewer, formula.RightChild, isEditEnabled, selectedFormula);
 
-                return uiFormula;
+            if (uiFormula.RightFormula != null)
+                uiFormula.RightFormula.ParentFormula = uiFormula;
+
+            return uiFormula;
         }
 
         private static void InitMappings()
         {
-            _mappings = new Dictionary<string, FormulaPartControlList>();
+            _mappings = new Dictionary<string, Dictionary<string, FormulaPartControlList>>();
             var formulaDefinitions = Application.Current.Resources["FormulaDefinitions"] as FormulaDefinitionCollection;
 
             Debug.Assert(formulaDefinitions != null, "formulaDefinitions != null");
 
             foreach (var definition in formulaDefinitions)
             {
-                _mappings.Add(definition.Type.ToLower(), definition.Template);
+                if (!_mappings.ContainsKey(definition.Type.ToLower()))
+                    _mappings.Add(definition.Type.ToLower(), new Dictionary<string, FormulaPartControlList>());
+
+                var value = definition.Value ?? UnivertialValueDummy;
+                value = value.ToLower();
+
+                _mappings[definition.Type.ToLower()].Add(value, definition.Template);
             }
         }
     }
