@@ -107,7 +107,7 @@ namespace Catrobat.Core.Objects.Formulas
             if(_variableType != null)
                 xRoot.Add(new XElement("type", _variableType));
             if(_variableValue != null)
-                xRoot.Add(new XElement("value", _variableType));
+                xRoot.Add(new XElement("value", _variableValue));
 
             return xRoot;
         }

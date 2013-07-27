@@ -12,7 +12,6 @@ using Catrobat.Core.Objects.Formulas;
 using Catrobat.Core.Objects.Variables;
 using Catrobat.IDEWindowsPhone.Annotations;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
-using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas.Math;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Reactive;
 using Microsoft.Phone.Shell;
@@ -22,6 +21,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
     public partial class FormulaViewer : UserControl, INotifyPropertyChanged
     {
         private UiFormula _uiFormula;
+        private FormulaTree _selectedFormula;
 
         #region DependencyProperties
 
@@ -162,10 +162,14 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
         #endregion
 
-
         public FormulaViewer()
         {
             InitializeComponent();
+        }
+
+        public void SelectedFormulaChanged(FormulaTree formula)
+        {
+            _selectedFormula = formula;
         }
 
         public void FormulaChanged()
@@ -173,7 +177,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
             if (Formula == null)
                 return;
 
-            _uiFormula = UiFormulaMappings.CreateFormula(Formula.FormulaTree, IsEditEnabled);
+            _uiFormula = UiFormulaMappings.CreateFormula(Formula, this, Formula.FormulaTree, IsEditEnabled, _selectedFormula);
             var allParts = _uiFormula.GetAllParts();
 
             var fontSize = NormalFontSize;
@@ -199,55 +203,22 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
                     fontSize = MaxFontSize;
             }
 
-            var allControls = allParts.Select(part => part.CreateUiControls(fontSize)).ToList();
+            var allControls = allParts.Select(part => part.CreateUiControls(fontSize, false, false)).ToList();
+            _uiFormula.UpdateStyles(false);
 
-            PanelContent.Children.Clear();
+            GetPanel().Children.Clear();
+
             foreach (var part in allControls)
                 if (part != null)
-                    PanelContent.Children.Add(part);
-
-            var scrollViewerHeight = ScrollViewerContent.ActualWidth;
-            var contentPanelHeight = PanelContent.ActualWidth;
-            ScrollViewerContent.InvalidateScrollInfo();
-            var scrollInfo = ScrollViewerContent.ScrollableHeight;
+                    GetPanel().Children.Add(part);
         }
 
-        public void KeyPressed(FormulaEditorKey key)
+        private Panel GetPanel()
         {
-            // TODO: implement me
-
-            //var uiFormula = UiFormulaMappings.CreateFormula(formula.FormulaTree, IsEditEnabled);
-            //FormulaViewerTreeItemRoot.UiFormula = uiFormula;
-            FormulaChanged();
-        }
-
-        public void ObjectVariableSelected(ObjectVariable variable)
-        {
-            // TODO: implement me
-            throw new NotImplementedException();
-        }
-
-        public void SensorVariableSelected(SensorVariable variable)
-        {
-            // TODO: implement me
-            throw new NotImplementedException();
-        }
-
-        public void LocalVariableSelected(UserVariable variable)
-        {
-            // TODO: implement me
-            throw new NotImplementedException();
-        }
-
-        public void GlobalVariableSelected(UserVariable variable)
-        {
-            // TODO: implement me
-            throw new NotImplementedException();
-        }
-
-        private void ListBoxParts_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ((ListBox)sender).SelectedItem = null;
+            if (IsMultiline)
+                return MultilinePanelContent;
+            else
+                return SingleLinePanelContent;
         }
 
         #region PropertyChanged

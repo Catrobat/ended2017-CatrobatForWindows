@@ -167,18 +167,21 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
         private void KeyButton_OnClick(object sender, RoutedEventArgs e)
         {
             var key = (FormulaEditorKey)(uint)((FrameworkElement)sender).DataContext;
+            ShowMain();
             RaiseKeyPressed(key);
         }
 
         private void SensorButton_OnClick(object sender, RoutedEventArgs e)
         {
             var variable = (SensorVariable)(uint)((FrameworkElement)sender).DataContext;
+            ShowMain();
             RaiseSensorVariableSelected(variable);
         }
 
         private void ObjectButton_OnClick(object sender, RoutedEventArgs e)
         {
             var variable = (ObjectVariable)(uint)((FrameworkElement)sender).DataContext;
+            ShowMain();
             RaiseObjectVariableSelected(variable);
         }
     }

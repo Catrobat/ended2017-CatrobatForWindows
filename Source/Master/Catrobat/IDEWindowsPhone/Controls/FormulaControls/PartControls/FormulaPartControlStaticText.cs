@@ -18,10 +18,9 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
 
         public string LocalizedResourceName { get; set; }
 
-        protected override Grid CreateControls(int fontSize)
+        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected)
         {
-            string text;
-            text = LocalizedResourceName != null ? GetText() : "RESOURCE MISSING";
+            string text = LocalizedResourceName != null ? GetText() : "RESOURCE MISSING";
 
             var textBlock = new TextBlock
             {
@@ -29,8 +28,28 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
                 FontSize = fontSize
             };
 
-            var grid = new Grid();
+            var grid = new Grid { DataContext = this };
             grid.Children.Add(textBlock);
+
+            //if (Style != null)
+            //{
+            //    textBlock.Style = Style.TextStyle;
+            //    grid.Style = Style.ContainerStyle;
+
+            //    if (isParentSelected)
+            //    {
+            //        textBlock.Style = Style.ParentSelectedTextStyle;
+            //        grid.Style = Style.ParentSelectedContainerStyle;
+            //    }
+
+            //    if (isSelected)
+            //    {
+            //        textBlock.Style = Style.SelectedTextStyle;
+            //        grid.Style = Style.SelectedContainerStyle;
+            //    }
+            //}
+
+
             return grid;
         }
 
@@ -51,7 +70,11 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
 
         public override FormulaPartControl Copy()
         {
-            return new FormulaPartControlStaticText{LocalizedResourceName = this.LocalizedResourceName};
+            return new FormulaPartControlStaticText
+            {
+                Style = Style,
+                LocalizedResourceName = this.LocalizedResourceName
+            };
         }
     }
 }

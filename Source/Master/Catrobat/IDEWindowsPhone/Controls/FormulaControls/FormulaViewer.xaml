@@ -13,7 +13,8 @@
 
   <Grid x:Name="LayoutRoot" VerticalAlignment="Stretch">
     <ScrollViewer Name="ScrollViewerContent" VerticalAlignment="Stretch">
-      <toolkit:WrapPanel Name="PanelContent"/>
+        <toolkit:WrapPanel Name="MultilinePanelContent"/>
     </ScrollViewer>
+    <StackPanel Name="SingleLinePanelContent" Orientation="Horizontal"/>
   </Grid>
 </UserControl>
