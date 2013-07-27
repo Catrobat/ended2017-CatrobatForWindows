@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CatrobatContext.cs" />
-    <Compile Include="CatrobatContextDeign.cs" />
+    <Compile Include="CatrobatContextDesign.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="IContextHolder.cs" />
     <Compile Include="Misc\Helpers\PlatformInformationHelper.cs" />
