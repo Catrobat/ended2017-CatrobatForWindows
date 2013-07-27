@@ -46,7 +46,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
                 object output = conv.Convert((object)"NotATheme", null, null, null);
                 Assert.IsNotNull(output);
                 Assert.IsTrue(output is double);
-                Assert.AreEqual((double)output, null);
+                Assert.AreEqual(null, (double)output);
             });
         }
     }

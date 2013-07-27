@@ -17,7 +17,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
       {
         Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestsPhone,
                                                           "SampleData/SampleProjects/simple.xml");
-        Assert.AreNotEqual(stream, null);
+        Assert.IsNotNull(stream);
         stream.Close();
         stream.Dispose();
       }

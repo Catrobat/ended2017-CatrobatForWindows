@@ -13,7 +13,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
             object output = conv.ConvertBack((object)"4.2", null, null, null);
             Assert.IsNotNull(output);
             Assert.IsTrue(output is double);
-            Assert.AreEqual((double)output, 4.2d);
+            Assert.AreEqual(4.2d, (double)output);
         }
 
         [TestMethod]
@@ -23,7 +23,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
             object output = conv.Convert((object)4.2d, null, null, null);
             Assert.IsNotNull(output);
             Assert.IsTrue(output is string);
-            Assert.AreEqual((string)output, "4.2");
+            Assert.AreEqual("4.2", (string)output);
         }
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
             object output = conv.ConvertBack((object)"4d2", null, 42d, null);
             Assert.IsNotNull(output);
             Assert.IsTrue(output is double);
-            Assert.AreEqual((double)output, 42d);
+            Assert.AreEqual(42d, (double)output);
         }
     }
 }

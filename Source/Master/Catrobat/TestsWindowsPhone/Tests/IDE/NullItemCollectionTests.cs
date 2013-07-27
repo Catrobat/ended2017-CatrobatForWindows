@@ -55,9 +55,9 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE
 
       var collection = new NullItemCollection { NullObject = nullObject, SourceCollection = sourceCollection };
 
-      Assert.AreEqual(false, collection.Contains(newObject));
-      Assert.AreEqual(true, collection.Contains(sourceCollection[0]));
-      Assert.AreEqual(true, collection.Contains(sourceCollection[1]));
+      Assert.IsFalse(collection.Contains(newObject));
+      Assert.IsTrue(collection.Contains(sourceCollection[0]));
+      Assert.IsTrue(collection.Contains(sourceCollection[1]));
     }
 
     [TestMethod]
@@ -104,7 +104,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE
       var collection = new NullItemCollection { NullObject = nullObject, SourceCollection = sourceCollection };
       collection.Remove(item4);
 
-      Assert.AreEqual(false, sourceCollection.Contains(item4));
+      Assert.IsFalse(sourceCollection.Contains(item4));
     }
 
     [TestMethod]
@@ -121,7 +121,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE
       var collection = new NullItemCollection { NullObject = nullObject, SourceCollection = sourceCollection };
       collection.RemoveAt(4);
 
-      Assert.AreEqual(false, sourceCollection.Contains(item4));
+      Assert.IsFalse(sourceCollection.Contains(item4));
     }
 
     [TestMethod]

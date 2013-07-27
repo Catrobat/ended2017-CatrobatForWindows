@@ -29,7 +29,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
                 object output = conv.Convert(null, null, null, null);
                 Assert.IsNotNull(output);
                 Assert.IsTrue(output is Brush);
-                Assert.AreEqual(output, Application.Current.Resources["PhoneAccentBrush"]);
+                Assert.AreEqual(Application.Current.Resources["PhoneAccentBrush"], output);
             });
         }
 
@@ -42,7 +42,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
                 object output = conv.Convert(this, null, null, null);
                 Assert.IsNotNull(output);
                 Assert.IsTrue(output is Brush);
-                Assert.AreEqual(output, Application.Current.Resources["PhoneTextBoxForegroundColor"]);
+                Assert.AreEqual(Application.Current.Resources["PhoneTextBoxForegroundColor"], output);
             });
         }
     }

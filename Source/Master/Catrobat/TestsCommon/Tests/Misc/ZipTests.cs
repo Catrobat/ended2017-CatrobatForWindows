@@ -31,31 +31,31 @@ namespace Catrobat.TestsCommon.Tests.Misc
 
       using (IStorage storage = StorageSystem.GetStorage())
       {
-        Assert.AreEqual(storage.DirectoryExists("/Projects/TestProject"), true);
+        Assert.IsTrue(storage.DirectoryExists("/Projects/TestProject"));
 
-        Assert.AreEqual(storage.FileExists("/Projects/TestProject/.nomedia"), true);
+        Assert.IsTrue(storage.FileExists("/Projects/TestProject/.nomedia"));
 
-        Assert.AreEqual(storage.FileExists("/Projects/TestProject/projectcode.xml"), true);
+        Assert.IsTrue(storage.FileExists("/Projects/TestProject/projectcode.xml"));
 
-        Assert.AreEqual(storage.FileExists("/Projects/TestProject/screenshot.png"), true);
-
-
-        Assert.AreEqual(storage.DirectoryExists("/Projects/TestProject/images"), true);
-
-        Assert.AreEqual(storage.FileExists("/Projects/TestProject/images/.nomedia"), true);
-
-        Assert.AreEqual(storage.FileExists("/Projects/TestProject/images/5A71C6F41035979503BA294F78A09336_background"), true);
-
-        Assert.AreEqual(storage.FileExists("/Projects/TestProject/images/34A109A82231694B6FE09C216B390570_normalCat"), true);
-
-        Assert.AreEqual(storage.FileExists("/Projects/TestProject/images/395CD6389BD601812BDB299934A0CCB4_banzaiCat"), true);
-
-        Assert.AreEqual(storage.FileExists("/Projects/TestProject/images/B4497E87AC34B1329DD9B14C08EEAFF0_cheshireCat"), true);
+        Assert.IsTrue(storage.FileExists("/Projects/TestProject/screenshot.png"));
 
 
-        Assert.AreEqual(storage.DirectoryExists("/Projects/TestProject/sounds"), true);
+        Assert.IsTrue(storage.DirectoryExists("/Projects/TestProject/images"));
 
-        Assert.AreEqual(storage.FileExists("/Projects/TestProject/sounds/.nomedia"), true);
+        Assert.IsTrue(storage.FileExists("/Projects/TestProject/images/.nomedia"));
+
+        Assert.IsTrue(storage.FileExists("/Projects/TestProject/images/5A71C6F41035979503BA294F78A09336_background"));
+
+        Assert.IsTrue(storage.FileExists("/Projects/TestProject/images/34A109A82231694B6FE09C216B390570_normalCat"));
+
+        Assert.IsTrue(storage.FileExists("/Projects/TestProject/images/395CD6389BD601812BDB299934A0CCB4_banzaiCat"));
+
+        Assert.IsTrue(storage.FileExists("/Projects/TestProject/images/B4497E87AC34B1329DD9B14C08EEAFF0_cheshireCat"));
+
+
+        Assert.IsTrue(storage.DirectoryExists("/Projects/TestProject/sounds"));
+
+        Assert.IsTrue(storage.FileExists("/Projects/TestProject/sounds/.nomedia"));
       }
     }
 
@@ -88,7 +88,7 @@ namespace Catrobat.TestsCommon.Tests.Misc
           fileStream.Dispose();
         }
 
-        Assert.AreEqual(storage.FileExists("/Projects/TestProjectZipped/test.catroid"), true);
+        Assert.IsTrue(storage.FileExists("/Projects/TestProjectZipped/test.catroid"));
       }
     }
   }

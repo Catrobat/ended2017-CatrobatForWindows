@@ -232,7 +232,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
                     using (IStorage storage = new StoragePhone())
                     {
                         var image = storage.LoadImage("TestLoadImage/screenshot.png");
-                        Assert.AreNotEqual(image, null);
+                        Assert.IsNotNull(image);
                     }
                 }
             });
@@ -259,7 +259,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
 
                     // TODO: Maybe check if pixels are corect?
 
-                    Assert.AreNotEqual(image2, null);
+                    Assert.IsNotNull(image2);
                 }
             });
         }
@@ -271,7 +271,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
             IStorage storage = new StoragePhone();
 
             storage.WriteTextFile("test.txt", "test123");
-            Assert.AreEqual(storage.ReadTextFile("test.txt"), "test123");
+            Assert.AreEqual("test123", storage.ReadTextFile("test.txt"));
         }
 
         [TestMethod]
@@ -286,7 +286,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
             storage.WriteSerializableObject("testobject", settingsWrite);
             LocalSettings settingsRead = (LocalSettings)storage.ReadSerializableObject("testobject", settingsWrite.GetType());
 
-            Assert.AreEqual(settingsRead.CurrentProjectName, "ProjectName");
+            Assert.AreEqual("ProjectName", settingsRead.CurrentProjectName);
         }
     }
 }
