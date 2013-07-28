@@ -68,19 +68,32 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
         }
 
 
-        public int CharactersOnNormalFontSize
+        public int CharactersInOneLineNormalFontSize
         {
-            get { return (int)GetValue(CharactersOnNormalFontSizeProperty); }
-            set { SetValue(CharactersOnNormalFontSizeProperty, value); }
+            get { return (int)GetValue(CharactersInOneLineNormalFontSizeProperty); }
+            set { SetValue(CharactersInOneLineNormalFontSizeProperty, value); }
         }
 
-        public static readonly DependencyProperty CharactersOnNormalFontSizeProperty = DependencyProperty.Register("CharactersOnNormalFontSize", typeof(int), typeof(FormulaViewer), new PropertyMetadata(0, CharactersOnNormalFontSizeChanged));
+        public static readonly DependencyProperty CharactersInOneLineNormalFontSizeProperty = DependencyProperty.Register("CharactersInOneLineNormalFontSize", typeof(int), typeof(FormulaViewer), new PropertyMetadata(0, CharactersInOneLineNormalFontSizeChanged));
 
-        private static void CharactersOnNormalFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void CharactersInOneLineNormalFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             // Code for dealing with your property changes
         }
 
+
+        public int LinesNormalFontSize
+        {
+            get { return (int)GetValue(LinesNormalFontSizeProperty); }
+            set { SetValue(LinesNormalFontSizeProperty, value); }
+        }
+
+        public static readonly DependencyProperty LinesNormalFontSizeProperty = DependencyProperty.Register("LinesNormalFontSize", typeof(int), typeof(FormulaViewer), new PropertyMetadata(0, LinesNormalFontSizeChanged));
+
+        private static void LinesNormalFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            // Code for dealing with your property changes
+        }
 
         public bool IsEditEnabled
         {
@@ -180,22 +193,49 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
             _uiFormula = UiFormulaMappings.CreateFormula(Formula, this, Formula.FormulaTree, IsEditEnabled, _selectedFormula);
             var allParts = _uiFormula.GetAllParts();
 
-            var fontSize = NormalFontSize;
+            double fontSize = NormalFontSize;
 
             if (IsAutoFontSize)
             {
-                var charactersWidth = allParts.Sum(control => control.GetCharacterWidth());
+                double oldFontSize;
+                double maxSinglePartWidth;
 
-                if (charactersWidth < 50)
-                    charactersWidth += 10;
+                int trials = 0;
+                do
+                {
+                    trials++;
+                    double linesUsedWithCurrentFontSize = 1;
+                    double currentLineCharacters = 0;
+                    maxSinglePartWidth = 0;
+                    oldFontSize = fontSize;
 
-                if (charactersWidth < 100)
-                    charactersWidth += 10;
+                    double oldMaxLinesUsed = LinesNormalFontSize * (NormalFontSize / fontSize);
 
-                if (charactersWidth < 200)
-                    charactersWidth += 10;
+                    double currentCharactersPerLine = CharactersInOneLineNormalFontSize * (NormalFontSize / fontSize);
+                    foreach (var part in allParts)
+                    {
+                        double partWidth = part.GetCharacterWidth();
 
-                fontSize = (int) (NormalFontSize * ((double)CharactersOnNormalFontSize / charactersWidth));
+                        currentLineCharacters += part.GetCharacterWidth();
+
+                        if (currentLineCharacters > currentCharactersPerLine)
+                        {
+                            currentLineCharacters = part.GetCharacterWidth();
+                            linesUsedWithCurrentFontSize++;
+                        }
+
+                        maxSinglePartWidth = Math.Max(maxSinglePartWidth, partWidth);
+                    }
+
+                    fontSize = (0.5) * oldFontSize + 0.5 * (oldFontSize * (oldMaxLinesUsed / linesUsedWithCurrentFontSize));
+
+                } while (Math.Abs(fontSize - oldFontSize) > 7.0 && trials < 10);
+
+                var singleLineFontSize = (int)(NormalFontSize *
+                    (CharactersInOneLineNormalFontSize / maxSinglePartWidth));
+
+                fontSize = Math.Min(fontSize, singleLineFontSize);
+
 
                 if (fontSize < MinFontSize)
                     fontSize = MinFontSize;
@@ -203,7 +243,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
                     fontSize = MaxFontSize;
             }
 
-            var allControls = allParts.Select(part => part.CreateUiControls(fontSize, false, false)).ToList();
+            var allControls = allParts.Select(part => part.CreateUiControls((int)fontSize, false, false)).ToList();
             _uiFormula.UpdateStyles(false);
 
             GetPanel().Children.Clear();

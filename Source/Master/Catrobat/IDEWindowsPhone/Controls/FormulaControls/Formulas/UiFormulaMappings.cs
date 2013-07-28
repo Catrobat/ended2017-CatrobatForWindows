@@ -31,10 +31,12 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
             if (!_mappings.ContainsKey(formula.VariableType.ToLower()))
             {
                 type = "unknown";
+                value = UnivertialValueDummy;
             }
 
             if (_mappings[type].ContainsKey(UnivertialValueDummy))
                 value = UnivertialValueDummy;
+
 
             FormulaPartControlList controlList = _mappings[type][value];
 
@@ -72,10 +74,26 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
                 if (!_mappings.ContainsKey(definition.Type.ToLower()))
                     _mappings.Add(definition.Type.ToLower(), new Dictionary<string, FormulaPartControlList>());
 
-                var value = definition.Value ?? UnivertialValueDummy;
-                value = value.ToLower();
+                var value = definition.Value;
+                var values = definition.Values;
 
-                _mappings[definition.Type.ToLower()].Add(value, definition.Template);
+                if(value == null && values == null)
+                  value = UnivertialValueDummy;
+
+                if (value != null)
+                {
+                    value = value.ToLower();
+
+                    _mappings[definition.Type.ToLower()].Add(value, definition.Template);
+                }
+
+                if (values != null)
+                {
+                    foreach (var v in values)
+                    {
+                        _mappings[definition.Type.ToLower()].Add(v.ToLower(), definition.Template);
+                    }
+                }
             }
         }
     }

@@ -12,15 +12,13 @@ using Catrobat.IDECommon.Resources.IDE.Formula;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
 {
-    public class FormulaPartControlStaticText : FormulaPartControl
+    public class FormulaPartControlDynamicLocalizedText : FormulaPartControl
     {
         private static LocalizedStrings _localizedStrings;
 
-        public string LocalizedResourceName { get; set; }
-
         protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected)
         {
-            string text = LocalizedResourceName != null ? GetText() : "RESOURCE MISSING";
+            string text = GetText() ?? "?";
 
             var textBlock = new TextBlock
             {
@@ -31,25 +29,6 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
             var grid = new Grid { DataContext = this };
             grid.Children.Add(textBlock);
 
-            //if (Style != null)
-            //{
-            //    textBlock.Style = Style.TextStyle;
-            //    grid.Style = Style.ContainerStyle;
-
-            //    if (isParentSelected)
-            //    {
-            //        textBlock.Style = Style.ParentSelectedTextStyle;
-            //        grid.Style = Style.ParentSelectedContainerStyle;
-            //    }
-
-            //    if (isSelected)
-            //    {
-            //        textBlock.Style = Style.SelectedTextStyle;
-            //        grid.Style = Style.SelectedContainerStyle;
-            //    }
-            //}
-
-
             return grid;
         }
 
@@ -58,22 +37,26 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
             if (_localizedStrings == null)
                 _localizedStrings = Application.Current.Resources["LocalizedStrings"] as LocalizedStrings;
 
-            var text = (string)typeof(FormulaResources).GetProperty(LocalizedResourceName).GetValue(_localizedStrings.Formula);
+            var property = typeof (FormulaResources).GetProperty(UiFormula.FormulaValue);
 
+            if (property == null)
+                return null;
+
+            var text = (string)property.GetValue(_localizedStrings.Formula);
             return text;
         }
 
         public override int GetCharacterWidth()
         {
-            return GetText().Length;
+            var text = GetText();
+            return text == null ? 1 : text.Length;
         }
 
         public override FormulaPartControl Copy()
         {
-            return new FormulaPartControlStaticText
+            return new FormulaPartControlDynamicLocalizedText
             {
-                Style = Style,
-                LocalizedResourceName = this.LocalizedResourceName
+                Style = Style
             };
         }
     }

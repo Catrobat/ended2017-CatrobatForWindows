@@ -123,6 +123,9 @@
     <Compile Include="Controls\FormulaControls\FormulaButton.xaml.cs">
       <DependentUpon>FormulaButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaControls\Formulas\StringList.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlDynamicLocalizedText.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlText.cs" />
     <Compile Include="Controls\FormulaControls\Templates\FormulaDefaultValueCreater.cs" />
     <Compile Include="Controls\FormulaControls\FormulaKeyboard.xaml.cs">
       <DependentUpon>FormulaKeyboard.xaml</DependentUpon>
@@ -130,10 +133,9 @@
     <Compile Include="Controls\FormulaControls\Formulas\FormulaDefinition.cs" />
     <Compile Include="Controls\FormulaControls\Formulas\FormulaDefinitionCollection.cs" />
     <Compile Include="Controls\FormulaControls\Formulas\SelectedFormulaInformation.cs" />
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlStaticText.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlStaticLocalizedText.cs" />
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlPlaceholderRight.cs" />
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControl.cs" />
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlNumbers.cs" />
     <Compile Include="Controls\FormulaControls\Formulas\UiFormula.cs" />
     <Compile Include="Controls\FormulaControls\Formulas\UiFormulaMappings.cs" />
     <Compile Include="Controls\FormulaControls\FormulaViewer.xaml.cs">

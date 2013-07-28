@@ -39,22 +39,34 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Formula
 
         private void SensorVariableSelected(SensorVariable variable)
         {
-            throw new NotImplementedException();
+            var formulaEditor = new FormulaEditor(FormulaViewer.GetSelectedFormula());
+            if (!formulaEditor.SensorVariableSelected(variable))
+                ShowKeyErrorAnimation();
+            FormulaViewer.FormulaChanged();
         }
 
         private void ObjectVariableSelected(ObjectVariable variable)
         {
-            throw new NotImplementedException();
+            var formulaEditor = new FormulaEditor(FormulaViewer.GetSelectedFormula());
+            if (!formulaEditor.ObjectVariableSelected(variable))
+                ShowKeyErrorAnimation();
+            FormulaViewer.FormulaChanged();
         }
 
         private void GlobalVariableSelected(UserVariable variable)
         {
-            throw new NotImplementedException();
+            var formulaEditor = new FormulaEditor(FormulaViewer.GetSelectedFormula());
+            if (!formulaEditor.GlobalVariableSelected(variable))
+                ShowKeyErrorAnimation();
+            FormulaViewer.FormulaChanged();
         }
 
         private void LocalVariableSelected(UserVariable variable)
         {
-            throw new NotImplementedException();
+            var formulaEditor = new FormulaEditor(FormulaViewer.GetSelectedFormula());
+            if (!formulaEditor.LocalVariableSelected(variable))
+                ShowKeyErrorAnimation();
+            FormulaViewer.FormulaChanged();
         }
 
         private void KeyPressed(FormulaEditorKey key)
@@ -69,12 +81,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Formula
         private void EvaluatePresed()
         {
             throw new NotImplementedException();
-        }
-
-        protected override void OnBackKeyPress(CancelEventArgs e)
-        {
-            //_viewModel.ResetViewModelCommand.Execute(null);
-            base.OnBackKeyPress(e);
         }
     }
 }

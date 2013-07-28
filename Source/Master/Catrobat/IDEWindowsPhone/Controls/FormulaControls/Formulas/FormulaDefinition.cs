@@ -13,6 +13,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
 
         public string Value { get; set; }
 
+        public StringList Values { get; set; }
+
         public FormulaPartControlList Template { get; set; }
     }
 }
