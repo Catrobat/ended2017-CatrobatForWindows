@@ -1,4 +1,5 @@
 ﻿using System;
+using Catrobat.Core.Objects.Formulas;
 using Catrobat.Core.Objects.Variables;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
 
@@ -6,7 +7,19 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Templates
 {
     public class FormulaEditor
     {
-        private readonly SelectedFormulaInformation _selectedFormulaInfo;
+        private SelectedFormulaInformation _selectedFormulaInfo;
+
+        public SelectedFormulaInformation SelectedFormula
+        {
+            get
+            {
+                return _selectedFormulaInfo;
+            }
+            set
+            {
+                _selectedFormulaInfo = value;
+            }
+        }
 
         public FormulaEditor(SelectedFormulaInformation selectedFormulaInfo)
         {
@@ -18,7 +31,39 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Templates
             bool isKeyValid = false;
             bool handled = false;
 
-            if (_selectedFormulaInfo != null)
+
+            if (_selectedFormulaInfo.SelectedFormula == null &&
+                _selectedFormulaInfo.FormulaRoot.FormulaTree != null &&
+                _selectedFormulaInfo.FormulaRoot.FormulaTree.VariableType == "NUMBER")
+            {
+                var digitString = GetKeyPressed(key);
+                bool isDecimalSeperator = key == FormulaEditorKey.NumberDot;
+                bool isDelete = key == FormulaEditorKey.KeyDelete;
+
+                if (digitString != null || isDecimalSeperator || isDelete)
+                {
+                    SelectedFormula.SelectedFormula = _selectedFormulaInfo.FormulaRoot.FormulaTree;
+                }
+            }
+
+
+            if (_selectedFormulaInfo.SelectedFormula == null &&
+                _selectedFormulaInfo.FormulaRoot.FormulaTree.RightChild != null &&
+                _selectedFormulaInfo.FormulaRoot.FormulaTree.RightChild.VariableType == "NUMBER")
+            {
+                var digitString = GetKeyPressed(key);
+                bool isDecimalSeperator = key == FormulaEditorKey.NumberDot;
+                bool isDelete = key == FormulaEditorKey.KeyDelete;
+
+                if (digitString != null || isDecimalSeperator || isDelete)
+                {
+                    SelectedFormula.SelectedFormula = _selectedFormulaInfo.FormulaRoot.FormulaTree.RightChild;
+                    SelectedFormula.SelectedFormulaParent = _selectedFormulaInfo.FormulaRoot.FormulaTree;
+                }
+            }
+
+
+            if (_selectedFormulaInfo.SelectedFormula != null)
             {
                 if (_selectedFormulaInfo.SelectedFormula.VariableType == "NUMBER")
                 {
@@ -56,8 +101,57 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Templates
                     }
                 }
             }
+            else
+            {
+                if(IsLogicFormula(key))
+                {
+                    var newRoot = FormulaDefaultValueCreater.GetDefaultValueForKey(key);
+                    newRoot.LeftChild = _selectedFormulaInfo.FormulaRoot.FormulaTree;
+                    //newRoot.RightChild = new FormulaTree
+                    //{
+                    //    VariableType = "#EMPTY#",
+                    //    VariableValue = ""
+                    //};
+                    _selectedFormulaInfo.FormulaRoot.FormulaTree = newRoot;
+                }
+                else
+                {
+                    if (_selectedFormulaInfo.FormulaRoot.FormulaTree.RightChild == null)
+                    {
+                        var newChild = FormulaDefaultValueCreater.GetDefaultValueForKey(key);
+                        _selectedFormulaInfo.FormulaRoot.FormulaTree.RightChild = newChild;
+                    }
+                }
+            }
+
 
             return isKeyValid;
+        }
+
+        private bool IsLogicFormula(FormulaEditorKey key)
+        {
+            switch (key)
+            {
+                case FormulaEditorKey.KeyEquals:
+                case FormulaEditorKey.KeyPlus:
+                case FormulaEditorKey.KeyMinus:
+                case FormulaEditorKey.KeyMult:
+                case FormulaEditorKey.KeyDivide:
+                case FormulaEditorKey.KeyLogicEqual:
+                case FormulaEditorKey.KeyLogicNotEqual:
+                case FormulaEditorKey.KeyLogicSmaller:
+                case FormulaEditorKey.KeyLogicSmallerEqual:
+                case FormulaEditorKey.KeyLogicGreater:
+                case FormulaEditorKey.KeyLogicGreaterEqual:
+                case FormulaEditorKey.KeyLogicAnd:
+                case FormulaEditorKey.KeyLogicOr:
+                case FormulaEditorKey.KeyLogicNot:
+                case FormulaEditorKey.KeyLogicTrue:
+                case FormulaEditorKey.KeyLogicFalse:
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         private bool NumberSelectedAndNumberKeyPressed(SelectedFormulaInformation selectedFormulaInfo, string digitString, bool isDelete, bool isDecimalSeperator)

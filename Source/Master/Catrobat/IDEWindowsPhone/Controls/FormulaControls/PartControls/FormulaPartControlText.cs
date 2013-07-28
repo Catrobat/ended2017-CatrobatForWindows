@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,24 +14,52 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
 {
     public class FormulaPartControlText : FormulaPartControl
     {
+        public string GetText()
+        {
+            if (string.IsNullOrEmpty(UiFormula.FormulaValue))
+            {
+                return " ";
+            }
+            else
+            {
+                return UiFormula.FormulaValue;
+            }
+        }
+
         protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected)
         {
             var textBlock = new TextBlock
             {
-                Text = UiFormula.FormulaValue,
+                Text = GetText(),
                 FontSize = fontSize
             };
 
- 
             var grid = new Grid {DataContext = this};
-            grid.Children.Add(textBlock);
+
+            if (string.IsNullOrEmpty(UiFormula.FormulaValue))
+            {
+                var errorGrid = new Grid
+                {
+                    Height = 5.0,
+                    Background = new SolidColorBrush(Colors.Red),
+                    VerticalAlignment = VerticalAlignment.Bottom,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+
+                grid.Children.Add(textBlock);
+                grid.Children.Add(errorGrid);
+            }
+            else
+            {
+                grid.Children.Add(textBlock);
+            }
 
             return grid;
         }
 
         public override int GetCharacterWidth()
         {
-            return UiFormula.FormulaValue.Length;
+            return GetText().Length;
         }
 
         public override FormulaPartControl Copy()

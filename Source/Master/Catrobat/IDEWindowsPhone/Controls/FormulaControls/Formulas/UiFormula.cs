@@ -219,11 +219,21 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
                     FormulaRoot = FormulaRoot
                 };
             }
+            else
+            {
+                formulaInformation = new SelectedFormulaInformation
+                {
+                    SelectedUiFormula = null,
+                    SelectedFormula = null,
+                    SelectedFormulaParent = null,
+                    FormulaRoot = FormulaRoot
+                };
+            }
 
-            if (formulaInformation == null && LeftFormula != null)
+            if (formulaInformation.SelectedFormula == null && LeftFormula != null)
                 formulaInformation = LeftFormula.GetSelectedFormula();
 
-            if (formulaInformation == null && RightFormula != null)
+            if (formulaInformation.SelectedFormula == null && RightFormula != null)
                 formulaInformation = RightFormula.GetSelectedFormula();
 
             return formulaInformation;
