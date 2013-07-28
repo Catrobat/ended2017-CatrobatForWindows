@@ -117,11 +117,50 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ACCELERATION_X" xml:space="preserve">
+    <value>accelerationX</value>
+  </data>
+  <data name="ACCELERATION_Y" xml:space="preserve">
+    <value>accelerationY</value>
+  </data>
+  <data name="ACCELERATION_Z" xml:space="preserve">
+    <value>accelerationZ</value>
+  </data>
+  <data name="BRIGHTNESS" xml:space="preserve">
+    <value>brightness</value>
+  </data>
   <data name="ClosedBrecket" xml:space="preserve">
     <value>)</value>
   </data>
+  <data name="COMPASSDIRECTION" xml:space="preserve">
+    <value>compassdirec</value>
+  </data>
   <data name="DecimalPointCharacter" xml:space="preserve">
     <value>.</value>
+  </data>
+  <data name="DIRECTION" xml:space="preserve">
+    <value>direction</value>
+  </data>
+  <data name="INCLINATION_X" xml:space="preserve">
+    <value>inclinationX</value>
+  </data>
+  <data name="INCLINATION_Y" xml:space="preserve">
+    <value>inclinationY</value>
+  </data>
+  <data name="LAYER" xml:space="preserve">
+    <value>layer</value>
+  </data>
+  <data name="LogicEqual" xml:space="preserve">
+    <value>=</value>
+  </data>
+  <data name="LogicOr" xml:space="preserve">
+    <value>OR</value>
+  </data>
+  <data name="OBJECT_X" xml:space="preserve">
+    <value>objectX</value>
+  </data>
+  <data name="OBJECT_Y" xml:space="preserve">
+    <value>objectY</value>
   </data>
   <data name="OpenBrecket" xml:space="preserve">
     <value>(</value>
@@ -131,6 +170,12 @@
   </data>
   <data name="Random" xml:space="preserve">
     <value>random</value>
+  </data>
+  <data name="SIZE" xml:space="preserve">
+    <value>size</value>
+  </data>
+  <data name="TRANSPARENCY" xml:space="preserve">
+    <value>transparency</value>
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>unknown</value>

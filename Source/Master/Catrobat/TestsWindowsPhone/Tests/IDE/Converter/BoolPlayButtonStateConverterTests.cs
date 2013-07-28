@@ -34,7 +34,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
             var conv = new BoolPlayButtonStateConverter();
             object output = conv.Convert("NotValid", null, null, null);
             Assert.IsNotNull(output);
-            Assert.AreEqual(output, PlayPauseButtonState.Pause);
+            Assert.AreEqual(PlayPauseButtonState.Pause, output);
         }
     }
 }

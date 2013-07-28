@@ -224,7 +224,7 @@ namespace Catrobat.TestsCommon.Tests.Storage
         }
 
         var image = storage.LoadImage("LoadImageTest/screenshot.png");
-        Assert.AreNotEqual(image, null);
+        Assert.IsNotNull(image);
       }
     }
 
@@ -252,7 +252,7 @@ namespace Catrobat.TestsCommon.Tests.Storage
 
     //     TODO: Maybe check if pixels are corect?
 
-    //    Assert.AreNotEqual(image, null);
+    //    Assert.IsNotNull(image);
     //  }
     //}
 
@@ -268,7 +268,7 @@ namespace Catrobat.TestsCommon.Tests.Storage
         Directory.CreateDirectory(basePath);
 
         storage.WriteTextFile("ReadWriteTextFileTest/test.txt", "test123");
-        Assert.AreEqual(storage.ReadTextFile("ReadWriteTextFileTest/test.txt"), "test123");
+        Assert.AreEqual("test123", storage.ReadTextFile("ReadWriteTextFileTest/test.txt"));
       }
     }
 
@@ -285,7 +285,7 @@ namespace Catrobat.TestsCommon.Tests.Storage
         storage.WriteSerializableObject("testobject", settingsWrite);
         LocalSettings settingsRead = (LocalSettings)storage.ReadSerializableObject("testobject", settingsWrite.GetType());
 
-        Assert.AreEqual(settingsRead.CurrentProjectName, "ProjectName");
+        Assert.AreEqual("ProjectName", settingsRead.CurrentProjectName);
       }
     }
   }

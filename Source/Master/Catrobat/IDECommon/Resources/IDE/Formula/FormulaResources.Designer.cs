@@ -62,6 +62,42 @@ namespace Catrobat.IDECommon.Resources.IDE.Formula {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to accelerationX.
+        /// </summary>
+        public static string ACCELERATION_X {
+            get {
+                return ResourceManager.GetString("ACCELERATION_X", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to accelerationY.
+        /// </summary>
+        public static string ACCELERATION_Y {
+            get {
+                return ResourceManager.GetString("ACCELERATION_Y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to accelerationZ.
+        /// </summary>
+        public static string ACCELERATION_Z {
+            get {
+                return ResourceManager.GetString("ACCELERATION_Z", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to brightness.
+        /// </summary>
+        public static string BRIGHTNESS {
+            get {
+                return ResourceManager.GetString("BRIGHTNESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ).
         /// </summary>
         public static string ClosedBrecket {
@@ -71,11 +107,92 @@ namespace Catrobat.IDECommon.Resources.IDE.Formula {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to compassdirec.
+        /// </summary>
+        public static string COMPASSDIRECTION {
+            get {
+                return ResourceManager.GetString("COMPASSDIRECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ..
         /// </summary>
         public static string DecimalPointCharacter {
             get {
                 return ResourceManager.GetString("DecimalPointCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to direction.
+        /// </summary>
+        public static string DIRECTION {
+            get {
+                return ResourceManager.GetString("DIRECTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to inclinationX.
+        /// </summary>
+        public static string INCLINATION_X {
+            get {
+                return ResourceManager.GetString("INCLINATION_X", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to inclinationY.
+        /// </summary>
+        public static string INCLINATION_Y {
+            get {
+                return ResourceManager.GetString("INCLINATION_Y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to layer.
+        /// </summary>
+        public static string LAYER {
+            get {
+                return ResourceManager.GetString("LAYER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to =.
+        /// </summary>
+        public static string LogicEqual {
+            get {
+                return ResourceManager.GetString("LogicEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OR.
+        /// </summary>
+        public static string LogicOr {
+            get {
+                return ResourceManager.GetString("LogicOr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to objectX.
+        /// </summary>
+        public static string OBJECT_X {
+            get {
+                return ResourceManager.GetString("OBJECT_X", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to objectY.
+        /// </summary>
+        public static string OBJECT_Y {
+            get {
+                return ResourceManager.GetString("OBJECT_Y", resourceCulture);
             }
         }
         
@@ -103,6 +220,24 @@ namespace Catrobat.IDECommon.Resources.IDE.Formula {
         public static string Random {
             get {
                 return ResourceManager.GetString("Random", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to size.
+        /// </summary>
+        public static string SIZE {
+            get {
+                return ResourceManager.GetString("SIZE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to transparency.
+        /// </summary>
+        public static string TRANSPARENCY {
+            get {
+                return ResourceManager.GetString("TRANSPARENCY", resourceCulture);
             }
         }
         

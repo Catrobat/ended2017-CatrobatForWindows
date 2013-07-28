@@ -241,15 +241,15 @@ namespace Catrobat.TestsWindowsPhone.Tests.Data
       int referenceIndex = 0;
       while (enumerator.MoveNext())
       {
-        Assert.AreEqual(collection.IndexOf(enumerator.Current), referenceIndex);
+          Assert.AreEqual(referenceIndex, collection.IndexOf(enumerator.Current));
         referenceIndex++;
       }
 
       Brick notContainedBrick = new BroadcastBrick();
-      Assert.AreEqual(collection.IndexOf(notContainedBrick), -1);
+      Assert.AreEqual(-1, collection.IndexOf(notContainedBrick));
 
       Script notContainedScript = new BroadcastScript();
-      Assert.AreEqual(collection.IndexOf(notContainedScript), -1);
+      Assert.AreEqual(-1, collection.IndexOf(notContainedScript));
     }
 
     [TestMethod]

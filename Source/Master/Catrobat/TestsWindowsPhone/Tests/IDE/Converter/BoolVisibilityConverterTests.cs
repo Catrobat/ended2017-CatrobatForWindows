@@ -33,7 +33,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
             var conv = new BoolVisibilityConverter();
             object output = conv.Convert("NotValid", null, null, null);
             Assert.IsNotNull(output);
-            Assert.AreEqual(output, Visibility.Collapsed);
+            Assert.AreEqual(Visibility.Collapsed, output);
         }
     }
 }

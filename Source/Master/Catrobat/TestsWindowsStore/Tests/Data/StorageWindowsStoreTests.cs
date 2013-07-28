@@ -175,7 +175,7 @@
 //      //CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStreamInfo.Stream, "TestLoadImage");
 
 //      //BitmapImage image = storage.LoadImage("TestLoadImage/screenshot.png");
-//      //Assert.AreNotEqual(image, null);
+//      //Assert.IsNotNull(null, image);
 //    }
 
 //    [TestMethod]
@@ -196,7 +196,7 @@
 
 //      //// TODO: Maybe check if pixels are corect?
 
-//      //Assert.AreNotEqual(image, null);
+//      //Assert.IsNotNull(null, image);
 //    }
 
 //    [TestMethod]
@@ -207,7 +207,7 @@
 //      //IStorage storage = new Phone7Storage();
 
 //      //storage.WriteTextFile("test.txt", "test123");
-//      //Assert.AreEqual(storage.ReadTextFile("test.txt"), "test123") ;
+//      //Assert.AreEqual("test123", storage.ReadTextFile("test.txt")) ;
 //    }
 
 //    [TestMethod]
@@ -223,7 +223,7 @@
 //      //storage.WriteSerializableObject("testobject", settingsWrite);
 //      //LocalSettings settingsRead = (LocalSettings) storage.ReadSerializableObject("testobject", settingsWrite.GetType());
 
-//      //Assert.AreEqual(settingsRead.CurrentProjectName, "ProjectName");
+//      //Assert.AreEqual("ProjectName", settingsRead.CurrentProjectName);
 //    }
 //  }
 //}

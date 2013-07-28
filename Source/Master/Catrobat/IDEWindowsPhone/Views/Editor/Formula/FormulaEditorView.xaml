@@ -29,7 +29,8 @@
     </Grid.RowDefinitions>
     <ScrollViewer Grid.Row="0">
       <formulaControls:FormulaViewer Name="FormulaViewer" 
-                                     CharactersOnNormalFontSize="80"
+                                     CharactersInOneLineNormalFontSize="15"
+                                     LinesNormalFontSize="4"
                                      NormalFontSize="50"
                                      MinFontSize="26"
                                      MaxFontSize="70"
