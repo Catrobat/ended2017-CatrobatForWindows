@@ -10,10 +10,10 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
   {
     public BackButton()
     {
-      DefaultStyleKey = typeof(ImageButton);
+      DefaultStyleKey = typeof(BackButton);
     }
 
-    public static readonly DependencyProperty IsAutoColorProperty = DependencyProperty.Register("IsAutoColor", typeof(Boolean), typeof(ImageButton), new PropertyMetadata(true));
+    public static readonly DependencyProperty IsAutoColorProperty = DependencyProperty.Register("IsAutoColor", typeof(Boolean), typeof(BackButton), new PropertyMetadata(true));
     public bool IsAutoColor
     {
       get { return (bool)(this.GetValue(IsAutoColorProperty)); }
