@@ -125,5 +125,10 @@ namespace Catrobat.Core.Objects.Formulas
 
             return newFormulaTree;
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -57,5 +57,10 @@ namespace Catrobat.Core.Objects.Bricks
 
             return newLoopEndBrickRef;
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

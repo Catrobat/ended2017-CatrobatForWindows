@@ -457,5 +457,10 @@ namespace Catrobat.Core.Objects
             _programName = newProgramName;
             RaisePropertyChanged("ProgramName");
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
 {
     public static class UiFormulaMappings
     {
-        private const string UnivertialValueDummy = "#universal#";
+        private const string UniversialValueDummy = "#universal#";
 
         private static Dictionary<string, Dictionary<string, FormulaPartControlList>> _mappings;
 
@@ -31,11 +31,11 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
             if (!_mappings.ContainsKey(formula.VariableType.ToLower()))
             {
                 type = "unknown";
-                value = UnivertialValueDummy;
+                value = UniversialValueDummy;
             }
 
-            if (_mappings[type].ContainsKey(UnivertialValueDummy))
-                value = UnivertialValueDummy;
+            if (_mappings[type].ContainsKey(UniversialValueDummy))
+                value = UniversialValueDummy;
 
 
             FormulaPartControlList controlList = _mappings[type][value];
@@ -78,7 +78,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
                 var values = definition.Values;
 
                 if(value == null && values == null)
-                  value = UnivertialValueDummy;
+                  value = UniversialValueDummy;
 
                 if (value != null)
                 {

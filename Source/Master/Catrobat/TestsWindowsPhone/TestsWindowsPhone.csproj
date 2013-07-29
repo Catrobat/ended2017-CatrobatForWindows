@@ -80,6 +80,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Misc\FormulaComparer.cs" />
     <Compile Include="Misc\TestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
@@ -102,6 +103,7 @@
     <Compile Include="Tests\IDE\Converter\DoubleStringConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\FloatStringConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\SecondStringMillisecondConverterTests.cs" />
+    <Compile Include="Tests\IDE\Formula\FormulaEditorTests.cs" />
     <Compile Include="Tests\IDE\ImageSizeEntryTests.cs" />
     <Compile Include="Tests\IDE\NullItemCollectionTests.cs" />
     <Compile Include="Tests\Storage\ResourceLoaderPhoneTests.cs" />

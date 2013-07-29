@@ -56,6 +56,11 @@ namespace Catrobat.Core.Objects.Bricks
             newIfLogicBeginBrickRef.IfLogicBeginBrick = _ifLogicBeginBrick;
 
             return newIfLogicBeginBrickRef;
-        }        
+        }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

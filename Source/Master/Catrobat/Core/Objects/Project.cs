@@ -176,14 +176,14 @@ namespace Catrobat.Core.Objects
 
         protected override void LoadFromXML(String xml)
         {
-            _document = XDocument.Load(new StringReader(xml));
-            _document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
+            Document = XDocument.Load(new StringReader(xml));
+            Document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
             ProjectHolder.Project = this;
 
             //Converter.Converter.Convert(_document);
 
-            var project = _document.Element("program");
+            var project = Document.Element("program");
             _projectHeader = new ProjectHeader(project.Element("header"));
             _spriteList = new SpriteList();
             _spriteList.LoadFromXML(project.Element("objectList"));
@@ -195,7 +195,7 @@ namespace Catrobat.Core.Objects
 
         internal override XDocument CreateXML()
         {
-            _document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
+            Document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
             var xProject = new XElement("program");
 
@@ -205,9 +205,9 @@ namespace Catrobat.Core.Objects
 
             xProject.Add(_variableList.CreateXML());
 
-            _document.Add(xProject);
+            Document.Add(xProject);
 
-            return _document;
+            return Document;
         }
 
         private void LoadBroadcastMessages()
@@ -275,7 +275,7 @@ namespace Catrobat.Core.Objects
                 try
                 {
                     var writer = new XmlStringWriter();
-                    _document.Save(writer, SaveOptions.None);
+                    Document.Save(writer, SaveOptions.None);
 
                     var xml = writer.GetStringBuilder().ToString();
                     storage.WriteTextFile(path, xml);
@@ -297,6 +297,11 @@ namespace Catrobat.Core.Objects
         {
             // TODO: implement me
             //throw new NotImplementedException();
+        }
+
+        public override bool Equals(DataRootObject other)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -21,9 +21,9 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Templates
             }
         }
 
-        public FormulaEditor(SelectedFormulaInformation selectedFormulaInfo)
+        public FormulaEditor()
         {
-            _selectedFormulaInfo = selectedFormulaInfo;
+
         }
 
         public bool KeyPressed(FormulaEditorKey key)

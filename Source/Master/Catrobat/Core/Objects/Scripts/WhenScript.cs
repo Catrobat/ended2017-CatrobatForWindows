@@ -82,5 +82,10 @@ namespace Catrobat.Core.Objects.Scripts
 
             return newWhenScript;
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

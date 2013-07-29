@@ -101,5 +101,10 @@ namespace Catrobat.Core.Objects.Sounds
                 }
             }
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

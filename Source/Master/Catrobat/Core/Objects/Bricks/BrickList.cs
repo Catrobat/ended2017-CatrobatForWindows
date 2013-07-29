@@ -250,5 +250,10 @@ namespace Catrobat.Core.Objects.Bricks
 
             return newBrickList;
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

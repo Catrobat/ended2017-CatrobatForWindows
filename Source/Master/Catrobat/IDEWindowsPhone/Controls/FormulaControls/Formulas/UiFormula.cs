@@ -50,7 +50,6 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
             }
         }
 
-
         public string FormulaValue
         {
             get

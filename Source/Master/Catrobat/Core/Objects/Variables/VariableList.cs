@@ -45,5 +45,10 @@ namespace Catrobat.Core.Objects.Variables
 
             return newVariableList;
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

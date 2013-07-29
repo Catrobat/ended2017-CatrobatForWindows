@@ -57,5 +57,10 @@ namespace Catrobat.Core.Objects.Costumes
                 costume.Delete();
             }
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

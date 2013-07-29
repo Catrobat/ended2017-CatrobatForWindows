@@ -139,5 +139,10 @@ namespace Catrobat.Core.Objects.Costumes
             }
             catch {}
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
