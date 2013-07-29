@@ -71,21 +71,21 @@
             </Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
               <StackPanel Width="100" Margin="0 15 0 0">
-                <codung4Fun:RoundButton Margin="0 0 0 -5" 
+                <codung4Fun:RoundButton Margin="0 0 0 -5" Command="{Binding CreateNewProjectCommand}"
                   ImageSource="/Content/Images/ApplicationBar/dark/appbar.add.rest.png"/>
                 <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
                   TextWrapping="Wrap" Text="{Binding Path=Main.ButtonCreate, 
                   Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
               </StackPanel>
               <StackPanel Width="100" Margin="0 15 0 0">
-                <codung4Fun:RoundButton Margin="0 0 0 -5" 
+                <codung4Fun:RoundButton Margin="0 0 0 -5" Command="{Binding EditCurrentProjectCommand}"
                   ImageSource="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"/>
                 <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
                   TextWrapping="Wrap" Text="{Binding Path=Main.ButtonEdit, 
                   Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
               </StackPanel>
               <StackPanel Width="100" Margin="0 15 0 0">
-                <codung4Fun:RoundButton Margin="0 0 0 -5" 
+                <codung4Fun:RoundButton Margin="0 0 0 -5" Command="{Binding UploadCurrentProjectCommand}"
                   ImageSource="/Content/Images/ApplicationBar/dark/appbar.upload.rest.png"/>
                 <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
                   TextWrapping="Wrap" Text="{Binding Path=Main.ButtonUpload, 
@@ -128,8 +128,11 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
                   </Grid.ColumnDefinitions>
-                  <buttons:BackButton Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Template="{StaticResource BackButtonControlTemplate}" Click="LocalProjectControl_OnLocalProjectsBackPressed"></buttons:BackButton>
-                  <TextBlock Grid.Column="1" Margin="18,18,12,0" TextWrapping="NoWrap" Text="{Binding CurrentProject.ProjectName}" Style="{StaticResource PhoneTextLargeStyle}"/>
+                  <codung4Fun:RoundButton Margin="15" PressedBrush="Black" Click="LocalProjectControl_OnLocalProjectsBackPressed"
+                    ImageSource="/Content/Images/ApplicationBar/dark/appbar.back.rest.png"/>
+                  <TextBlock Grid.Column="1" Margin="18,18,12,0" TextWrapping="NoWrap" 
+                             Text="{Binding CurrentProject.ProjectName}" 
+                             Style="{StaticResource PhoneTextLargeStyle}"/>
                 </Grid>
 
                 <Grid Grid.Row="1">
