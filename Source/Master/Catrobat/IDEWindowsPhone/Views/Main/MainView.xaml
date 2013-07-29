@@ -190,7 +190,6 @@
             VerticalAlignment="Stretch" 
             HorizontalAlignment="Stretch" 
             Tap="OnlineProject_Tap"
-            
             SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}">
             <phone:LongListSelector.ItemTemplate>
               <DataTemplate>
@@ -206,7 +205,7 @@
               </DataTemplate>
             </phone:LongListSelector.ItemTemplate>
             <phone:LongListSelector.ListFooter>
-              <Grid Background="BlueViolet" Height="35">
+              <Grid Background="BlueViolet" Height="35" Visibility="{Binding IsLoadingOnlineProjects, Converter={StaticResource BoolVisibilityConverter}}">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                   <statusIcons:ProcessIcon IsProcessing="{Binding IsLoadingOnlineProjects}" Margin="0 0 5 0" />
                   <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Main.OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" />
