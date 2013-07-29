@@ -23,8 +23,6 @@
   DataContext="{Binding Editor, Source={StaticResource Locator}}">
 
   <phone:PhoneApplicationPage.Resources>
-    <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
-    <converters:NullIntCountConverter x:Key="NullIntCountConverter"/>
     <buttons:PlayPauseButtonGroup x:Key="PlayPauseButtonGroupSounds" Command="{Binding SoundsPlayStateChangedCommand}" />
   </phone:PhoneApplicationPage.Resources>
 

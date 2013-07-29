@@ -25,11 +25,6 @@
   DataContext="{Binding Main, Source={StaticResource Locator}}">
 
   <phone:PhoneApplicationPage.Resources>
-    <converters:VersionConverter x:Key="VersionConverter"/>
-    <converters:NoScreenshotConverter x:Key="ScreenshotConverter"/>
-    <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
-    <converters:BoolVisibilityNegativeConverter x:Key="BoolVisibilityNegativeConverter"/>
-
     <Style x:Key="ContinuousListBoxButtonStyle" TargetType="Button">
       <Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
       <Setter Property="BorderBrush" Value="{StaticResource PhoneAccentBrush}"/>

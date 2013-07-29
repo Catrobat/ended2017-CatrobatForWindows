@@ -21,6 +21,7 @@
         <ResourceDictionary Source="Controls/Buttons/ScreenshotButtonTemplates.xaml"/>
         <ResourceDictionary Source="Controls/Buttons/SettingsButtonTemplates.xaml"/>
         <ResourceDictionary Source="Controls\FormulaControls\Templates\FormulaTemplates.xaml"/>
+        <ResourceDictionary Source="Converters/ConverterResources.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

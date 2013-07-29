@@ -16,11 +16,6 @@
     mc:Ignorable="d"
     DataContext="{Binding ProjectImport, Source={StaticResource Locator}}"
     shell:SystemTray.IsVisible="True">
-
-  <phone:PhoneApplicationPage.Resources>
-    <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
-    <converters:NoScreenshotConverter x:Key="ScreenshotConverter" />
-  </phone:PhoneApplicationPage.Resources>
   
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <Grid.RowDefinitions>

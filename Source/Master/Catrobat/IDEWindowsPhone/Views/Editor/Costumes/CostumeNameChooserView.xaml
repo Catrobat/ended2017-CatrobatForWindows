@@ -22,11 +22,6 @@
     DataContext="{Binding AddNewCostume, Source={StaticResource Locator}}"
     shell:SystemTray.IsVisible="True">
 
-  <phone:PhoneApplicationPage.Resources>
-    <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
-    <converters:IntPixelConverter x:Key="IntPixelConverter"/>
-  </phone:PhoneApplicationPage.Resources>
-
   <!--LayoutRoot is the root grid where all page content is placed-->
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <Grid.RowDefinitions>

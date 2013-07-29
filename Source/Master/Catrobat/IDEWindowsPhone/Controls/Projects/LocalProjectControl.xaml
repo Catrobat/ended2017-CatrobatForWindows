@@ -14,12 +14,6 @@
   Foreground="{StaticResource PhoneForegroundBrush}"
   d:DesignHeight="280" d:DesignWidth="480">
 
-  <UserControl.Resources>
-    <!--<converters:ActiveProjectVisibilityConverter x:Key="ActiveProjectVisibilityConverter" />
-    <converters:InActiveProjectVisibilityConverter x:Key="InActiveProjectVisibilityConverter" />-->
-    <converters:NoScreenshotConverter x:Key="ScreenshotConverter" />
-  </UserControl.Resources>
-
   <Grid x:Name="LayoutRoot">
     <toolkit:ContextMenuService.ContextMenu>
       <toolkit:ContextMenu>

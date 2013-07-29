@@ -1,0 +1,25 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:vm="clr-namespace:Catrobat.IDEWindowsPhone.ViewModel"
+  xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
+  mc:Ignorable="d">
+
+  <converters:NoScreenshotConverter x:Key="ScreenshotConverter" />
+  <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+  <converters:IntPixelConverter x:Key="IntPixelConverter"/>
+  <converters:NullIntCountConverter x:Key="NullIntCountConverter"/>
+  <converters:NullColorConverter  x:Key="NullColorConverter" />
+  <converters:DoubleStringConverter  x:Key="DoubleStringConverter" />
+  <converters:FloatStringConverter  x:Key="FloatStringConverter" />
+  <converters:IntStringConverter x:Key="IntStringConverter" />
+  <converters:SecondStringMillisecondConverter x:Key="SecondStringMillisecondConverter" />
+  <converters:BoolVisibilityNegativeConverter x:Key="NegativeBoolVisibilityConverter" />
+  <converters:BoolPlayButtonStateConverter x:Key="BoolPlayButtonStateConverter" />
+  <converters:VersionConverter x:Key="VersionConverter"/>
+  <converters:BoolVisibilityNegativeConverter x:Key="BoolVisibilityNegativeConverter"/>
+  <converters:ActiveThemeBrushConverter x:Key="ActiveThemeBrushConverter"/>
+
+</ResourceDictionary>

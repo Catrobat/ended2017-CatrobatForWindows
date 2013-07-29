@@ -14,9 +14,6 @@
   mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
   DataContext="{Binding Settings, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="True">
-  <phone:PhoneApplicationPage.Resources>
-    <Converters:ActiveThemeBrushConverter x:Key="ActiveThemeBrushConverter"/>
-  </phone:PhoneApplicationPage.Resources>
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <Grid.RowDefinitions>

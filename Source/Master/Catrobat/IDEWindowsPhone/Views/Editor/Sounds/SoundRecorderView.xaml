@@ -20,10 +20,6 @@
   shell:SystemTray.IsVisible="True">
 
   <phone:PhoneApplicationPage.Resources>
-    <converters:DoubleStringConverter x:Key="DoubleStringConverter" />
-    <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
-    <converters:BoolVisibilityNegativeConverter x:Key="NegativeBoolVisibilityConverter" />
-    <converters:BoolPlayButtonStateConverter x:Key="BoolPlayButtonStateConverter" />
     <system:String x:Key="TimeFormat">0.0</system:String>
 
     <Storyboard x:Name="RecordingAnimation">
