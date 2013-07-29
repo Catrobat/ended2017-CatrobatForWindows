@@ -26,7 +26,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
             }
         }
 
-        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected)
+        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected, bool isError)
         {
             var textBlock = new TextBlock
             {

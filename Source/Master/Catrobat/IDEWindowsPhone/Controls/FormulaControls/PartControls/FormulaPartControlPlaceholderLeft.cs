@@ -9,7 +9,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
 {
     public class FormulaPartControlPlaceholderLeft : FormulaPartControl
     {
-        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected)
+        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected, bool isError)
         {
             return null;
         }

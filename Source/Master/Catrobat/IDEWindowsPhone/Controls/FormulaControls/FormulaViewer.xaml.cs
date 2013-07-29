@@ -243,7 +243,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
                     fontSize = MaxFontSize;
             }
 
-            var allControls = allParts.Select(part => part.CreateUiControls((int)fontSize, false, false)).ToList();
+            var allControls = allParts.Select(part => part.CreateUiControls((int)fontSize, false, false, false)).ToList(); // TODO: get error from evaluating the formula
             _uiFormula.UpdateStyles(false);
 
             GetPanel().Children.Clear();
