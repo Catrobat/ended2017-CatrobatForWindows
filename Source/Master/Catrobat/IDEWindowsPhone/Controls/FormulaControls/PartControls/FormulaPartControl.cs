@@ -19,6 +19,16 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
         {
             var control = CreateControls(fontSize, isSelected, isParentSelected, isError);
 
+            if (isError)
+            {
+                var errorGrid = new Grid
+                {
+                    Height = 8,
+                    Background = new SolidColorBrush(Colors.Red)
+                };
+                control.Children.Add(errorGrid);
+            }
+
             if (control != null)
             {
                 control.Tap += ControlOnTap;
