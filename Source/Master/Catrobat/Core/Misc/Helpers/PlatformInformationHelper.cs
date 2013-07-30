@@ -15,14 +15,29 @@ namespace Catrobat.Core.Misc.Helpers
             _platformInformationHelper = platformInformationHelper;
         }
 
-        public static string GetPlatformName()
+        public static string PlatformName
         {
-            return _platformInformationHelper.GetPlatformName();
+            get { return _platformInformationHelper.GetPlatformName(); }
         }
 
-        public static string GetPlatformVersion()
+        public static string PlatformVersion
         {
-            return _platformInformationHelper.GetPlatformVersion();
+            get { return _platformInformationHelper.GetPlatformVersion(); }
+        }
+
+        public static string DeviceName
+        {
+            get { return _platformInformationHelper.GetDeviceName(); }
+        }
+
+        public static int ScreenWidth
+        {
+            get { return _platformInformationHelper.GetScreenWidth(); }
+        }
+
+        public static int ScreenHeight
+        {
+            get { return _platformInformationHelper.GetScreenHeight(); }
         }
     }
 }

@@ -237,7 +237,7 @@ namespace Catrobat.TestsCommon.Misc.Storage
       using (Stream fileStream = this.OpenFile(path, StorageFileMode.Open, StorageFileAccess.Read))
       {
         DataContractSerializer serializer = new DataContractSerializer(type);
-        object serialireableObject = serializer.ReadObject(fileStream); // TODO: does not working any more
+        object serialireableObject = serializer.ReadObject(fileStream); // TODO: does not work any more
         fileStream.Close();
         return serialireableObject;
       }

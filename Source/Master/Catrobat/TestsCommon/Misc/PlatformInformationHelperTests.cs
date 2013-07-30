@@ -19,5 +19,21 @@ namespace Catrobat.TestsCommon.Misc
         {
             return "1.0";
         }
+
+
+        public string GetDeviceName()
+        {
+            return "TestDevice";
+        }
+
+        public int GetScreenWidth()
+        {
+            return 480;
+        }
+
+        public int GetScreenHeight()
+        {
+            return 800;
+        }
     }
 }
