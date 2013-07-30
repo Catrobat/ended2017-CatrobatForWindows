@@ -19,127 +19,139 @@ namespace Catrobat.TestsCommon.Tests.Data
         [TestMethod]
         public void CreateNewProjectTest()
         {
-            TestHelper.InitializeAndClearCatrobatContext();
-
-            var catrobatContext = SampleLoader.LoadSampleProject("test.catroid", "DefaultProject");
+            CatrobatContext.SetContextHolder(new ContextHolderTests(new CatrobatContext()));
 
             const string newProjectName = "TestProjectCreateNew";
-
-            catrobatContext.CreateNewProject(newProjectName);
+            CatrobatContext.GetContext().CreateNewProject(newProjectName);
 
             using (IStorage storage = StorageSystem.GetStorage())
             {
-                Assert.AreEqual(CatrobatContext.ProjectsPath + "/" + newProjectName, catrobatContext.CurrentProject.BasePath);
+                Assert.AreEqual(CatrobatContext.ProjectsPath + "/" + newProjectName, CatrobatContext.GetContext().CurrentProject.BasePath);
 
-                Assert.IsTrue(storage.FileExists(catrobatContext.CurrentProject.BasePath + "/" + Project.ProjectCodePath));
-                Assert.IsTrue(storage.DirectoryExists(catrobatContext.CurrentProject.BasePath + "/" + Project.ImagesPath));
-                Assert.IsTrue(storage.DirectoryExists(catrobatContext.CurrentProject.BasePath + "/" + Project.SoundsPath));
+                Assert.IsTrue(storage.FileExists(CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ProjectCodePath));
+                Assert.IsTrue(storage.DirectoryExists(CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ImagesPath));
+                Assert.IsTrue(storage.DirectoryExists(CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath));
             }
 
+            CatrobatContext.SetContextHolder(null);
         }
 
         [TestMethod]
         public void DeleteProjectTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();
+            CatrobatContext.SetContextHolder(new ContextHolderTests(new CatrobatContext()));
 
-            SampleLoader.LoadSampleProject("test.catroid", "DefaultProject1");
-            var catrobatContext = SampleLoader.LoadSampleProject("test.catroid", "DefaultProject2");
+            const string newProjectName = "TestProjectDelete";
+            CatrobatContext.GetContext().CreateNewProject(newProjectName);
 
-            Assert.AreEqual("DefaultProject2", catrobatContext.CurrentProject.ProjectHeader.ProgramName);
-
-            using (IStorage storage = StorageSystem.GetStorage())
-            {
-                Assert.IsTrue(storage.FileExists(catrobatContext.CurrentProject.BasePath + "/" + Project.ProjectCodePath));
-                Assert.IsTrue(storage.DirectoryExists(catrobatContext.CurrentProject.BasePath + "/" + Project.ImagesPath));
-                Assert.IsTrue(storage.DirectoryExists(catrobatContext.CurrentProject.BasePath + "/" + Project.SoundsPath));
-            }
-
-            catrobatContext.DeleteProject("DefaultProject1");
+            Assert.AreEqual(newProjectName, CatrobatContext.GetContext().CurrentProject.ProjectHeader.ProgramName);
 
             using (IStorage storage = StorageSystem.GetStorage())
             {
-                Assert.IsTrue(storage.DirectoryExists(catrobatContext.CurrentProject.BasePath));
-                Assert.IsFalse(storage.DirectoryExists(CatrobatContext.ProjectsPath + "/" + "DefaultProject1"));
+                Assert.IsTrue(storage.FileExists(CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ProjectCodePath));
+                Assert.IsTrue(storage.DirectoryExists(CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ImagesPath));
+                Assert.IsTrue(storage.DirectoryExists(CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath));
             }
+
+            CatrobatContext.GetContext().DeleteProject(newProjectName);
+
+            using (IStorage storage = StorageSystem.GetStorage())
+            {
+                Assert.IsTrue(storage.DirectoryExists(CatrobatContext.GetContext().CurrentProject.BasePath));
+                Assert.IsFalse(storage.DirectoryExists(CatrobatContext.ProjectsPath + "/" + newProjectName));
+            }
+
+            CatrobatContext.SetContextHolder(null);
         }
 
         [TestMethod]
         public void DeleteCurrentProjectTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();
+            CatrobatContext.SetContextHolder(new ContextHolderTests(new CatrobatContext()));
 
-            SampleLoader.LoadSampleProject("test.catroid", "DefaultProject1");
-            var catrobatContext = SampleLoader.LoadSampleProject("test.catroid", "DefaultProject2");
+            const string newProjectName1 = "TestProjectDelete1";
+            const string newProjectName2 = "TestProjectDelete2";
+            CatrobatContext.GetContext().CreateNewProject(newProjectName1);
+            CatrobatContext.GetContext().CreateNewProject(newProjectName2);
 
-            Assert.AreEqual("DefaultProject2", catrobatContext.CurrentProject.ProjectHeader.ProgramName);
-
-            using (IStorage storage = StorageSystem.GetStorage())
-            {
-                Assert.IsTrue(storage.FileExists(catrobatContext.CurrentProject.BasePath + "/" + Project.ProjectCodePath));
-                Assert.IsTrue(storage.DirectoryExists(catrobatContext.CurrentProject.BasePath + "/" + Project.ImagesPath));
-                Assert.IsTrue(storage.DirectoryExists(catrobatContext.CurrentProject.BasePath + "/" + Project.SoundsPath));
-            }
-
-            catrobatContext.DeleteProject("DefaultProject2");
+            Assert.AreEqual(newProjectName2, CatrobatContext.GetContext().CurrentProject.ProjectHeader.ProgramName);
 
             using (IStorage storage = StorageSystem.GetStorage())
             {
-                Assert.IsFalse(storage.DirectoryExists(CatrobatContext.ProjectsPath + "/" + "DefaultProject2"));
+                Assert.IsTrue(storage.FileExists(CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ProjectCodePath));
+                Assert.IsTrue(storage.DirectoryExists(CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ImagesPath));
+                Assert.IsTrue(storage.DirectoryExists(CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath));
             }
 
-            Assert.IsTrue(catrobatContext.CurrentProject.ProjectHeader.ProgramName == CatrobatContext.DefaultProjectName);
+            CatrobatContext.GetContext().DeleteProject(newProjectName2);
+
+            using (IStorage storage = StorageSystem.GetStorage())
+            {
+                Assert.IsFalse(storage.DirectoryExists(CatrobatContext.ProjectsPath + "/" + newProjectName2));
+            }
+
+            Assert.IsTrue(CatrobatContext.GetContext().CurrentProject.ProjectHeader.ProgramName == CatrobatContext.DefaultProjectName);
+
+            CatrobatContext.SetContextHolder(null);
         }
 
         [TestMethod]
         public void SetCurrentProjectTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();
+            CatrobatContext.SetContextHolder(new ContextHolderTests(new CatrobatContext()));
 
-            const string newProjectName = "SelectProjectTestProject";
             const string oldProjectName = "test";
-            var catrobatContext = SampleLoader.LoadSampleProject("test.catroid", oldProjectName);
+            const string newProjectName = "SelectProjectTestProject";
+            CatrobatContext.GetContext().CreateNewProject(oldProjectName);
+            CatrobatContext.GetContext().CreateNewProject(newProjectName);
 
-            catrobatContext.CreateNewProject(newProjectName);
+            CatrobatContext.GetContext().SetCurrentProject(oldProjectName);
 
-            catrobatContext.SetCurrentProject(oldProjectName);
-
-            Assert.AreEqual(oldProjectName, catrobatContext.CurrentProject.ProjectHeader.ProgramName);
+            Assert.AreEqual(oldProjectName, CatrobatContext.GetContext().CurrentProject.ProjectHeader.ProgramName);
+            
+            CatrobatContext.SetContextHolder(null);
         }
 
         [TestMethod]
         public void RenameProjectTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();
+            CatrobatContext.SetContextHolder(new ContextHolderTests(new CatrobatContext()));
 
-            var catrobatContext = SampleLoader.LoadSampleProject("test.catroid", "test");
+            const string projectName = "RenameProjectTestProject";
+            CatrobatContext.GetContext().CreateNewProject(projectName);
 
-            catrobatContext.CurrentProject.ProjectHeader.ProgramName = "RenamedProject";
+            CatrobatContext.GetContext().CurrentProject.ProjectHeader.ProgramName = "RenamedProject";
 
             using (IStorage storage = StorageSystem.GetStorage())
             {
-                Assert.IsTrue(storage.FileExists(catrobatContext.CurrentProject.BasePath + "/" + Project.ProjectCodePath));
-                Assert.IsTrue(storage.DirectoryExists(catrobatContext.CurrentProject.BasePath + "/" + Project.ImagesPath));
-                Assert.IsTrue(storage.DirectoryExists(catrobatContext.CurrentProject.BasePath + "/" + Project.SoundsPath));
+                Assert.AreEqual("Projects/RenamedProject",CatrobatContext.GetContext().CurrentProject.BasePath);
+                Assert.IsTrue(storage.FileExists(CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ProjectCodePath));
+                Assert.IsTrue(storage.DirectoryExists(CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ImagesPath));
+                Assert.IsTrue(storage.DirectoryExists(CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath));
             }
+
+            CatrobatContext.SetContextHolder(null);
         }
 
         [TestMethod]
         public void UpdateLocalProjectsTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();
+            CatrobatContext.SetContextHolder(new ContextHolderTests(new CatrobatContext()));
 
             const string newProjectName1 = "SelectProjectTestProject1";
             const string newProjectName2 = "SelectProjectTestProject2";
             const string newProjectName3 = "SelectProjectTestProject3";
 
-            var catrobatContext = new CatrobatContext();
+            CatrobatContext.GetContext().CreateNewProject(newProjectName1);
+            CatrobatContext.GetContext().CreateNewProject(newProjectName2);
+            CatrobatContext.GetContext().CreateNewProject(newProjectName3);
 
-            catrobatContext.CreateNewProject(newProjectName1);
-            catrobatContext.CreateNewProject(newProjectName2);
-            catrobatContext.CreateNewProject(newProjectName3);
-
-            var loaclProjects = catrobatContext.LocalProjects;
+            var loaclProjects = CatrobatContext.GetContext().LocalProjects;
 
             bool found1 = false;
             bool found2 = false;
@@ -154,30 +166,31 @@ namespace Catrobat.TestsCommon.Tests.Data
 
             Assert.AreEqual(3, loaclProjects.Count);
             Assert.IsTrue(found1 && found2);
+
+            CatrobatContext.SetContextHolder(null);
         }
 
         [TestMethod]
         public void CopyProjectTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();
+            CatrobatContext.SetContextHolder(new ContextHolderTests(new CatrobatContext()));
 
             const string newProjectName1 = "SelectProjectTestProject1";
-            const string newProjectName2 = "SelectProjectTestProject2";
             const string copyToTest1 = "SelectProjectTestProject11";
-            const string copyToTest2 = "SelectProjectTestProject11";
+            const string copyToTest2 = "SelectProjectTestProject12";
 
-            var catrobatContext = new CatrobatContext();
+            CatrobatContext.GetContext().CreateNewProject(newProjectName1);
 
-            catrobatContext.CreateNewProject(newProjectName1);
-            catrobatContext.CreateNewProject(newProjectName2);
+            CatrobatContext.GetContext().CopyProject(newProjectName1);
+            CatrobatContext.GetContext().SetCurrentProject(copyToTest1);
+            Assert.AreEqual(copyToTest1, CatrobatContext.GetContext().CurrentProject.ProjectHeader.ProgramName);
 
-            catrobatContext.CopyProject(newProjectName1);
-            catrobatContext.SetCurrentProject(copyToTest1);
-            Assert.IsTrue(catrobatContext.CurrentProject.ProjectHeader.ProgramName == copyToTest1);
+            CatrobatContext.GetContext().CopyProject(newProjectName1);
+            CatrobatContext.GetContext().SetCurrentProject(copyToTest2);
+            Assert.AreEqual(copyToTest2, CatrobatContext.GetContext().CurrentProject.ProjectHeader.ProgramName);
 
-            catrobatContext.CopyProject(newProjectName1);
-            catrobatContext.SetCurrentProject(copyToTest2);
-            Assert.IsTrue(catrobatContext.CurrentProject.ProjectHeader.ProgramName == copyToTest2);
+            CatrobatContext.SetContextHolder(null);
         }
     }
 }

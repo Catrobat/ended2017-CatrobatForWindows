@@ -114,17 +114,15 @@ namespace Catrobat.Core.Objects
                 {
                     return _projectDummyHeader;
                 }
-                else
+
+                object image = null;
+
+                using (var storage = StorageSystem.GetStorage())
                 {
-                    object image = null;
-
-                    using (var storage = StorageSystem.GetStorage())
-                    {
-                        image = storage.LoadImageThumbnail(BasePath + "/" + ScreenshotPath);
-                    }
-
-                    _projectDummyHeader = new ProjectDummyHeader { ProjectName = ProjectHeader.ProgramName, Screenshot = image };
+                    image = storage.LoadImageThumbnail(BasePath + "/" + ScreenshotPath);
                 }
+
+                _projectDummyHeader = new ProjectDummyHeader { ProjectName = ProjectHeader.ProgramName, Screenshot = image };
 
                 return _projectDummyHeader;
             }

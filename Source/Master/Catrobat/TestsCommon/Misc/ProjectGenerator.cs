@@ -13,6 +13,8 @@ using Catrobat.Core.Objects.Formulas;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Objects.Variables;
+using System.IO;
+using Catrobat.Core.Storage;
 
 namespace Catrobat.TestsCommon.Misc
 {
@@ -39,7 +41,7 @@ namespace Catrobat.TestsCommon.Misc
                     ApplicationBuildNumber = 0,
                     ApplicationName = "Pocket Code",
                     ApplicationVersion = "0.0.1",
-                    CatrobatLanguageVersion = (float) 0.8,
+                    CatrobatLanguageVersion = (float)0.8,
                     DateTimeUpload = DateTime.Now.ToString(CultureInfo.InvariantCulture),
                     Description = "",
                     DeviceName = "SampleDevice",
@@ -81,22 +83,14 @@ namespace Catrobat.TestsCommon.Misc
             {
                 var sprite = sprites[i % 2];
                 sprite.Costumes = new CostumeList();
-                sprite.Costumes.Costumes.Add(new Costume
-                {
-                    FileName = "FileName" + i,
-                    Name = "Look" + i,
-                });
+                sprite.Costumes.Costumes.Add(GenerateCostume(i, project));
             }
 
             for (int i = 0; i < 6; i++)
             {
                 var sprite = sprites[i % 2];
                 sprite.Sounds = new SoundList();
-                sprite.Sounds.Sounds.Add(new Sound
-                {
-                    FileName = "FileName" + i,
-                    Name = "Sound" + i,
-                });
+                sprite.Sounds.Sounds.Add(GenerateSound(i, project));
             }
 
 
@@ -140,7 +134,7 @@ namespace Catrobat.TestsCommon.Misc
             }
         }
 
-        private static Random _rand ;
+        private static Random _rand;
         private static object CreateDummyValue(Type type, Project project, Sprite sprite)
         {
             _rand = new Random(42);
@@ -190,7 +184,7 @@ namespace Catrobat.TestsCommon.Misc
 
             if (type == typeof(UserVariable))
             {
-                foreach(var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
+                foreach (var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
                     if (entry.Sprite == sprite)
                     {
                         var userVariables = entry.VariableList.UserVariables;
@@ -200,9 +194,9 @@ namespace Catrobat.TestsCommon.Misc
 
             if (type == typeof(IfLogicBeginBrick))
             {
-                foreach(var script in sprite.Scripts.Scripts)
-                    foreach(var brick in script.Bricks.Bricks)
-                        if(brick is IfLogicBeginBrick)
+                foreach (var script in sprite.Scripts.Scripts)
+                    foreach (var brick in script.Bricks.Bricks)
+                        if (brick is IfLogicBeginBrick)
                             return brick;
             }
 
@@ -261,6 +255,44 @@ namespace Catrobat.TestsCommon.Misc
                 }
             };
             return formula;
+        }
+
+        private static Costume GenerateCostume(int index, Project project)
+        {
+            var costume = new Costume
+             {
+                 FileName = "FileName" + index,
+                 Name = "Look" + index,
+             };
+
+            var absoluteFileName = Path.Combine(project.BasePath, Project.ImagesPath, costume.FileName);
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                var fileStream = storage.OpenFile(absoluteFileName, StorageFileMode.Create, StorageFileAccess.Write);
+                fileStream.Close();
+            }
+
+            return costume;
+        }
+
+        private static Sound GenerateSound(int index, Project project)
+        {
+            var sound = new Sound
+                {
+                    FileName = "FileName" + index,
+                    Name = "Sound" + index,
+                };
+
+            var absoluteFileName = Path.Combine(project.BasePath, Project.SoundsPath, sound.FileName);
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                var fileStream = storage.OpenFile(absoluteFileName, StorageFileMode.Create, StorageFileAccess.Write);
+                fileStream.Close();
+            }
+
+            return sound;
         }
 
         private static void AddUserVariables(Project project)

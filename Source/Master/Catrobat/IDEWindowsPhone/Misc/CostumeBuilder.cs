@@ -23,7 +23,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
         public Costume Save(string name, ImageDimention dimention)
         {
-            var resizedImage = _bitmap.Resize(dimention.Width, dimention.Height, System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation.Bilinear);
+            var resizedImage = _bitmap.Resize(dimention.Width, dimention.Height, WriteableBitmapExtensions.Interpolation.Bilinear);
 
             var costume = new Costume(name);
             var absoluteFileName = Path.Combine(CatrobatContext.GetContext().CurrentProject.BasePath, Project.ImagesPath, costume.FileName);

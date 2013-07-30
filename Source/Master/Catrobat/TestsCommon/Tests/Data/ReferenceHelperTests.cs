@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
@@ -19,7 +15,6 @@ namespace Catrobat.TestsCommon.Tests.Data
         public static void TestClassInitialize(TestContext testContext)
         {
             TestHelper.InitializeTests();
-            CatrobatContext.SetContextHolder(new ContextHolderTests(new CatrobatContext()));
         }
 
         [TestMethod]

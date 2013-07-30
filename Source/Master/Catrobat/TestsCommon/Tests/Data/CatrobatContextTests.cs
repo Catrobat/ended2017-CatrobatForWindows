@@ -19,12 +19,15 @@ namespace Catrobat.TestsCommon.Tests.Data
     [TestMethod]
     public void InitializeCatrobatContextTest()
     {
-      TestHelper.InitializeAndClearCatrobatContext();
-      var catrobatContext = SampleLoader.LoadSampleProject("test.catroid", "DefaultProject");
-      // TODO: load sample priject
+        TestHelper.InitializeAndClearCatrobatContext();
+        CatrobatContext.SetContextHolder(new ContextHolderTests(new CatrobatContext()));
 
-      // check if project has sucessfully loaded default project
-      Assert.AreEqual("DefaultProject", catrobatContext.LocalSettings.CurrentProjectName);
+        const string newProjectName1 = "DefaultProject";
+        CatrobatContext.GetContext().CreateNewProject(newProjectName1);
+
+        Assert.AreEqual("DefaultProject", CatrobatContext.GetContext().LocalSettings.CurrentProjectName);
+
+        CatrobatContext.SetContextHolder(null);
     }
 
     [TestMethod]

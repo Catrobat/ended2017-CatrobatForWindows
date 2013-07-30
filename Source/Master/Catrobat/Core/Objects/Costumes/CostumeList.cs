@@ -41,13 +41,13 @@ namespace Catrobat.Core.Objects.Costumes
 
         public DataObject Copy()
         {
-            var newCostumeDataList = new CostumeList();
+            var newCostumeList = new CostumeList();
             foreach (Costume costume in Costumes)
             {
-                newCostumeDataList.Costumes.Add(costume.Copy() as Costume);
+                newCostumeList.Costumes.Add(costume.Copy() as Costume);
             }
 
-            return newCostumeDataList;
+            return newCostumeList;
         }
 
         public void Delete()
