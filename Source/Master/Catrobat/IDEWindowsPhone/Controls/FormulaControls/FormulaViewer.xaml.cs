@@ -12,9 +12,11 @@ using Catrobat.Core.Objects.Formulas;
 using Catrobat.Core.Objects.Variables;
 using Catrobat.IDEWindowsPhone.Annotations;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Reactive;
 using Microsoft.Phone.Shell;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 {

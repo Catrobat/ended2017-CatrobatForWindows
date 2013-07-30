@@ -43,6 +43,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Formula
             if (!formulaEditor.SensorVariableSelected(variable))
                 ShowKeyErrorAnimation();
             FormulaViewer.FormulaChanged();
+            _viewModel.FormulaChangedCommand.Execute(null);
         }
 
         private void ObjectVariableSelected(ObjectVariable variable)
@@ -51,6 +52,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Formula
             if (!formulaEditor.ObjectVariableSelected(variable))
                 ShowKeyErrorAnimation();
             FormulaViewer.FormulaChanged();
+            _viewModel.FormulaChangedCommand.Execute(null);
         }
 
         private void GlobalVariableSelected(UserVariable variable)
@@ -59,6 +61,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Formula
             if (!formulaEditor.GlobalVariableSelected(variable))
                 ShowKeyErrorAnimation();
             FormulaViewer.FormulaChanged();
+            _viewModel.FormulaChangedCommand.Execute(null);
         }
 
         private void LocalVariableSelected(UserVariable variable)
@@ -67,6 +70,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Formula
             if (!formulaEditor.LocalVariableSelected(variable))
                 ShowKeyErrorAnimation();
             FormulaViewer.FormulaChanged();
+            _viewModel.FormulaChangedCommand.Execute(null);
         }
 
         private void KeyPressed(FormulaEditorKey key)
@@ -75,6 +79,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Formula
             if(!formulaEditor.KeyPressed(key))
                 ShowKeyErrorAnimation();
             FormulaViewer.FormulaChanged();
+            _viewModel.FormulaChangedCommand.Execute(null);
         }
 
 
