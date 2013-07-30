@@ -16,6 +16,14 @@ using Catrobat.Core.Objects.Variables;
 
 namespace Catrobat.TestsCommon.Misc
 {
+    public enum VariableTypes
+    {
+        Number,
+        Operator,
+        UserVariable,
+        Function
+    };
+
     public class ProjectGenerator
     {
         // Bricks that must be tested manually
@@ -100,37 +108,7 @@ namespace Catrobat.TestsCommon.Misc
             }
 
 
-            project.VariableList = new VariableList
-            {
-                ObjectVariableList = new ObjectVariableList
-                {
-                    ObjectVariableEntries = new ObservableCollection<ObjectVariableEntry>()
-                },
-                ProgramVariableList = new ProgramVariableList()
-                {
-                    UserVariables = new ObservableCollection<UserVariable>()
-                }
-            };
-
-            var count = 0;
-            foreach (var sprite in project.SpriteList.Sprites)
-            {
-                var entry = new ObjectVariableEntry
-                {
-                    Sprite = sprite,
-                    VariableList = new UserVariableList
-                    {
-                        UserVariables = new ObservableCollection<UserVariable>
-                                    {
-                                        new UserVariable
-                                            {
-                                                Name = "LocalTestVariable"
-                                            }
-                                    }
-                    }
-                };
-                project.VariableList.ObjectVariableList.ObjectVariableEntries.Add(entry);
-            }
+            AddUserVariables(project);
 
 
             foreach (var sprite in sprites)
@@ -197,23 +175,7 @@ namespace Catrobat.TestsCommon.Misc
 
             if (type == typeof(Formula))
             {
-                var formula = new Formula
-                {
-                    FormulaTree = new FormulaTree
-                    {
-                        LeftChild = new LeftChild
-                        {
-                            LeftChild = new LeftChild(),
-                            RightChild = new RightChild(),
-                            VariableType = "BOOL",
-                            VariableValue = "1"
-                        },
-                        RightChild = new RightChild(),
-                        VariableType = "NUMBER",
-                        VariableValue = "6"
-                    }
-                };
-                return formula;
+                return GenerateFormula();
             }
 
             if (type == typeof(Sprite))
@@ -269,6 +231,80 @@ namespace Catrobat.TestsCommon.Misc
             }
 
             return null;
+        }
+
+        private static Formula GenerateFormula()
+        {
+            var formula = new Formula
+            {
+                FormulaTree = new FormulaTree
+                {
+                    LeftChild = new LeftChild
+                    {
+                        LeftChild = new LeftChild
+                        {
+                            VariableType = VariableTypes.Operator.ToString(),
+                            VariableValue = "MINUS"
+                        },
+                        RightChild = new RightChild
+                        {
+                            LeftChild = new LeftChild
+                            {
+                                VariableType = VariableTypes.Function.ToString(),
+                                VariableValue = "0"
+                            },
+                            VariableType = VariableTypes.UserVariable.ToString(),
+                            VariableValue = "LocalTestVariable1"
+                        },
+                        VariableType = VariableTypes.Function.ToString(),
+                        VariableValue = "1"
+                    },
+                    RightChild = new RightChild
+                    {
+                        VariableType = VariableTypes.Function.ToString(),
+                        VariableValue = "0"
+                    },
+                    VariableType = "NUMBER",
+                    VariableValue = "6"
+                }
+            };
+            return formula;
+        }
+
+        private static void AddUserVariables(Project project)
+        {
+            project.VariableList = new VariableList
+                {
+                    ObjectVariableList = new ObjectVariableList
+                        {
+                            ObjectVariableEntries = new ObservableCollection<ObjectVariableEntry>()
+                        },
+                    ProgramVariableList = new ProgramVariableList()
+                        {
+                            UserVariables = new ObservableCollection<UserVariable>()
+                        }
+                };
+
+            var count = 0;
+            foreach (var sprite in project.SpriteList.Sprites)
+            {
+                var entry = new ObjectVariableEntry
+                    {
+                        Sprite = sprite,
+                        VariableList = new UserVariableList
+                            {
+                                UserVariables = new ObservableCollection<UserVariable>
+                                    {
+                                        new UserVariable
+                                            {
+                                                Name = "LocalTestVariable" + count
+                                            }
+                                    }
+                            }
+                    };
+                count++;
+                project.VariableList.ObjectVariableList.ObjectVariableEntries.Add(entry);
+            }
         }
 
         private static void AddLoopBricks(ObservableCollection<Brick> bricks)
