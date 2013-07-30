@@ -548,6 +548,7 @@
     <Content Include="Assets\FileTypeAssociation\medium-69x69.png" />
     <Content Include="Assets\FileTypeAssociation\small-33x33.png" />
     <Content Include="Content\Images\ApplicationBar\dark\appbar.copy.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.copy.rest.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_1280.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_800.png" />
     <Content Include="Content\Images\Misc\EditImage.png" />

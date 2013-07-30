@@ -58,8 +58,7 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 			if (status == Windows::Foundation::AsyncStatus::Completed)
 			{
 				auto folderContent = operation->GetResults();
-                // 
-                Check safety
+                // TODO: Check safety
                 m_projectPath = Helper::ConvertPlatformStringToString(folderContent->Path);
 
 				IAsyncOperation<Windows::Storage::StorageFile^>^ getFiles = folderContent->GetFileAsync("code.xml");
