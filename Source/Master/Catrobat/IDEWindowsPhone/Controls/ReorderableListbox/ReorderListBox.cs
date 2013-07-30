@@ -561,7 +561,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         private void AddMarginToLastItem()
         {
             var list = ItemsSource as IList;
-            if(list.Count <= 0) return;
+            if (list.Count <= 0) return;
 
             foreach (var item in list)
             {
@@ -1293,99 +1293,87 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
         #endregion
 
 
-        //#region PropertyChanged
-        //public event PropertyChangedEventHandler PropertyChanged;
-        //[NotifyPropertyChangedInvocator]
+        #region This fixes TwoWay binding to selectedItems
 
-        //protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        //{
-        //    PropertyChangedEventHandler handler = PropertyChanged;
-        //    if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        //}
-        //#endregion
+        public static readonly DependencyProperty SmartSelectedItemsProperty =
+          DependencyProperty.Register("SmartSelectedItems", typeof(INotifyCollectionChanged), typeof(ReorderListBox), new PropertyMetadata(OnSmartSelectedItemsPropertyChanged));
 
+        public INotifyCollectionChanged SmartSelectedItems
+        {
+            get { return (INotifyCollectionChanged)GetValue(SmartSelectedItemsProperty); }
+            set { SetValue(SmartSelectedItemsProperty, value); }
+        }
 
-        #region This fixes ´TwoWay binding to selectedItems 
+        private static void OnSmartSelectedItemsPropertyChanged(DependencyObject target, DependencyPropertyChangedEventArgs args)
+        {
+            var collection = args.NewValue as INotifyCollectionChanged;
+            if (collection != null)
+            {
+                // unsubscribe, before subscribe to make sure not to have multiple subscription
+                collection.CollectionChanged -= ((ReorderListBox)target).SmartSelectedItemsCollectionChanged;
+                collection.CollectionChanged += ((ReorderListBox)target).SmartSelectedItemsCollectionChanged;
+            }
+        }
 
-    public static readonly DependencyProperty SmartSelectedItemsProperty =
-      DependencyProperty.Register("SmartSelectedItems", typeof(INotifyCollectionChanged), typeof(ReorderListBox), new PropertyMetadata(OnSmartSelectedItemsPropertyChanged));
+        void SmartSelectedItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            //Need to unsubscribe from the events so we don't override the transfer
+            UnsubscribeFromEvents();
 
-    public INotifyCollectionChanged SmartSelectedItems
-    {
-      get { return (INotifyCollectionChanged)GetValue(SmartSelectedItemsProperty); }
-      set { SetValue(SmartSelectedItemsProperty, value); }
-    }
+            //Move items from the selected items list to the list box selection
+            Transfer(SmartSelectedItems as IList, SelectedItems);
 
-    private static void OnSmartSelectedItemsPropertyChanged(DependencyObject target, DependencyPropertyChangedEventArgs args)
-    {
-      var collection = args.NewValue as INotifyCollectionChanged;
-      if (collection != null)
-      {
-        // unsubscribe, before subscribe to make sure not to have multiple subscription
-        collection.CollectionChanged -= ((ReorderListBox)target).SmartSelectedItemsCollectionChanged;
-        collection.CollectionChanged += ((ReorderListBox)target).SmartSelectedItemsCollectionChanged;
-      }
-    }
+            //subscribe to the events again so we know when changes are made
+            SubscribeToEvents();
+        }
 
-    void SmartSelectedItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
-      //Need to unsubscribe from the events so we don't override the transfer
-      UnsubscribeFromEvents();
+        void BaseListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Need to unsubscribe from the events so we don't override the transfer
+            UnsubscribeFromEvents();
 
-      //Move items from the selected items list to the list box selection
-      Transfer(SmartSelectedItems as IList, SelectedItems);
+            //Move items from the selected items list to the list box selection
+            Transfer(SelectedItems, SmartSelectedItems as IList);
 
-      //subscribe to the events again so we know when changes are made
-      SubscribeToEvents();
-    }
+            //subscribe to the events again so we know when changes are made
+            SubscribeToEvents();
+        }
 
-    void BaseListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-      //Need to unsubscribe from the events so we don't override the transfer
-      UnsubscribeFromEvents();
+        private void SubscribeToEvents()
+        {
+            SelectionChanged += BaseListBoxSelectionChanged;
 
-      //Move items from the selected items list to the list box selection
-      Transfer(SelectedItems, SmartSelectedItems as IList);
+            if (SmartSelectedItems != null)
+            {
+                SmartSelectedItems.CollectionChanged += SmartSelectedItemsCollectionChanged;
+            }
+        }
 
-      //subscribe to the events again so we know when changes are made
-      SubscribeToEvents();
-    }
+        private void Transfer(IList source, IList target)
+        {
+            if (source == null || target == null)
+            {
+                return;
+            }
 
-    private void SubscribeToEvents()
-    {
-      SelectionChanged += BaseListBoxSelectionChanged;
+            target.Clear();
 
-      if (SmartSelectedItems != null)
-      {
-        SmartSelectedItems.CollectionChanged += SmartSelectedItemsCollectionChanged;
-      }
-    }
+            foreach (var o in source)
+            {
+                target.Add(o);
+            }
+        }
 
-    private void Transfer(IList source, IList target)
-    {
-      if (source == null || target == null)
-      {
-        return;
-      }
+        private void UnsubscribeFromEvents()
+        {
+            SelectionChanged -= BaseListBoxSelectionChanged;
 
-      target.Clear();
+            if (SmartSelectedItems != null)
+            {
+                SmartSelectedItems.CollectionChanged -= SmartSelectedItemsCollectionChanged;
+            }
+        }
 
-      foreach (var o in source)
-      {
-        target.Add(o);
-      }
-    }
-
-    private void UnsubscribeFromEvents()
-    {
-      SelectionChanged -= BaseListBoxSelectionChanged;
-
-      if (SmartSelectedItems != null)
-      {
-        SmartSelectedItems.CollectionChanged -= SmartSelectedItemsCollectionChanged;
-      }
-    }
-
-   #endregion
+        #endregion
     }
 }

@@ -47,5 +47,10 @@ namespace Catrobat.Core.Objects
             foreach (var sprite in Sprites)
                 sprite.LoadReference();
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

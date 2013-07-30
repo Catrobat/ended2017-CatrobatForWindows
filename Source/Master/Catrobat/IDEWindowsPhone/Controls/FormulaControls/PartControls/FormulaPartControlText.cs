@@ -26,7 +26,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
             }
         }
 
-        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected)
+        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected, bool isError)
         {
             var textBlock = new TextBlock
             {
@@ -35,24 +35,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
             };
 
             var grid = new Grid {DataContext = this};
-
-            if (string.IsNullOrEmpty(UiFormula.FormulaValue))
-            {
-                var errorGrid = new Grid
-                {
-                    Height = 5.0,
-                    Background = new SolidColorBrush(Colors.Red),
-                    VerticalAlignment = VerticalAlignment.Bottom,
-                    HorizontalAlignment = HorizontalAlignment.Stretch
-                };
-
-                grid.Children.Add(textBlock);
-                grid.Children.Add(errorGrid);
-            }
-            else
-            {
-                grid.Children.Add(textBlock);
-            }
+            grid.Children.Add(textBlock);
 
             return grid;
         }

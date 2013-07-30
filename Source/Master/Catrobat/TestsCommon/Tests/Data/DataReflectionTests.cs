@@ -1,20 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Bricks;
-using Catrobat.Core.Objects.Costumes;
-using Catrobat.Core.Objects.Formulas;
-using Catrobat.Core.Objects.Scripts;
-using Catrobat.Core.Objects.Sounds;
-using Catrobat.Core.Objects.Variables;
 using Catrobat.Core.Storage;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.Misc.Storage;
@@ -41,7 +28,7 @@ namespace Catrobat.TestsCommon.Tests.Data
 
             project1.Save(savePath1);
 
-            string xml1 = null;
+            string xml1;
             using (IStorage storage = new StorageTest())
             {
                 xml1 = storage.ReadTextFile(savePath1);
@@ -50,7 +37,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             var project2 = new Project(xml1);
             project2.Save(savePath2);
             
-            string xml2 = null;
+            string xml2;
             using (IStorage storage = new StorageTest())
             {
                 xml2 = storage.ReadTextFile(savePath1);

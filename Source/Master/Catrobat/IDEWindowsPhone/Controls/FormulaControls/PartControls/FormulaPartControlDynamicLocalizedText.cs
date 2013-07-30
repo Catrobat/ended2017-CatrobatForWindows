@@ -16,7 +16,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
     {
         private static LocalizedStrings _localizedStrings;
 
-        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected)
+        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected, bool isError)
         {
             string text = GetText() ?? "?";
 

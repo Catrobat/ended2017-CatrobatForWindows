@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
@@ -6,7 +7,7 @@ using Catrobat.Core.Annotations;
 
 namespace Catrobat.Core.Objects
 {
-    public abstract class DataObject : INotifyPropertyChanged
+    public abstract class DataObject : INotifyPropertyChanged, IEquatable<DataObject>
     {
         public DataObject()
         {
@@ -63,5 +64,7 @@ namespace Catrobat.Core.Objects
         }
         #endregion
 
+
+        public abstract bool Equals(DataObject other);
     }
 }

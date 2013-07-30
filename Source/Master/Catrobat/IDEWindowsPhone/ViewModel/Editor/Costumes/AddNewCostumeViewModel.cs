@@ -213,7 +213,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
                     var image = new BitmapImage();
                     image.SetSource(e.ChosenPhoto);
-                    this.Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
+                    Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
 
                     _builder.StartCreateCostumeAsync(_receivedSelectedSprite, image);
 

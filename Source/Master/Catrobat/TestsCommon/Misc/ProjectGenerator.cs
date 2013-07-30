@@ -13,6 +13,8 @@ using Catrobat.Core.Objects.Formulas;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Objects.Variables;
+using System.IO;
+using Catrobat.Core.Storage;
 
 namespace Catrobat.TestsCommon.Misc
 {
@@ -39,7 +41,7 @@ namespace Catrobat.TestsCommon.Misc
                     ApplicationBuildNumber = 0,
                     ApplicationName = "Pocket Code",
                     ApplicationVersion = "0.0.1",
-                    CatrobatLanguageVersion = (float) 0.8,
+                    CatrobatLanguageVersion = (float)0.8,
                     DateTimeUpload = DateTime.Now.ToString(CultureInfo.InvariantCulture),
                     Description = "",
                     DeviceName = "SampleDevice",
@@ -81,56 +83,18 @@ namespace Catrobat.TestsCommon.Misc
             {
                 var sprite = sprites[i % 2];
                 sprite.Costumes = new CostumeList();
-                sprite.Costumes.Costumes.Add(new Costume
-                {
-                    FileName = "FileName" + i,
-                    Name = "Look" + i,
-                });
+                sprite.Costumes.Costumes.Add(GenerateCostume(i, project));
             }
 
             for (int i = 0; i < 6; i++)
             {
                 var sprite = sprites[i % 2];
                 sprite.Sounds = new SoundList();
-                sprite.Sounds.Sounds.Add(new Sound
-                {
-                    FileName = "FileName" + i,
-                    Name = "Sound" + i,
-                });
+                sprite.Sounds.Sounds.Add(GenerateSound(i, project));
             }
 
 
-            project.VariableList = new VariableList
-            {
-                ObjectVariableList = new ObjectVariableList
-                {
-                    ObjectVariableEntries = new ObservableCollection<ObjectVariableEntry>()
-                },
-                ProgramVariableList = new ProgramVariableList()
-                {
-                    UserVariables = new ObservableCollection<UserVariable>()
-                }
-            };
-
-            var count = 0;
-            foreach (var sprite in project.SpriteList.Sprites)
-            {
-                var entry = new ObjectVariableEntry
-                {
-                    Sprite = sprite,
-                    VariableList = new UserVariableList
-                    {
-                        UserVariables = new ObservableCollection<UserVariable>
-                                    {
-                                        new UserVariable
-                                            {
-                                                Name = "LocalTestVariable"
-                                            }
-                                    }
-                    }
-                };
-                project.VariableList.ObjectVariableList.ObjectVariableEntries.Add(entry);
-            }
+            AddUserVariables(project);
 
 
             foreach (var sprite in sprites)
@@ -170,7 +134,7 @@ namespace Catrobat.TestsCommon.Misc
             }
         }
 
-        private static Random _rand ;
+        private static Random _rand;
         private static object CreateDummyValue(Type type, Project project, Sprite sprite)
         {
             _rand = new Random(42);
@@ -197,23 +161,7 @@ namespace Catrobat.TestsCommon.Misc
 
             if (type == typeof(Formula))
             {
-                var formula = new Formula
-                {
-                    FormulaTree = new FormulaTree
-                    {
-                        LeftChild = new LeftChild
-                        {
-                            LeftChild = new LeftChild(),
-                            RightChild = new RightChild(),
-                            VariableType = "BOOL",
-                            VariableValue = "1"
-                        },
-                        RightChild = new RightChild(),
-                        VariableType = "NUMBER",
-                        VariableValue = "6"
-                    }
-                };
-                return formula;
+                return GenerateFormula();
             }
 
             if (type == typeof(Sprite))
@@ -236,7 +184,7 @@ namespace Catrobat.TestsCommon.Misc
 
             if (type == typeof(UserVariable))
             {
-                foreach(var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
+                foreach (var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
                     if (entry.Sprite == sprite)
                     {
                         var userVariables = entry.VariableList.UserVariables;
@@ -246,9 +194,9 @@ namespace Catrobat.TestsCommon.Misc
 
             if (type == typeof(IfLogicBeginBrick))
             {
-                foreach(var script in sprite.Scripts.Scripts)
-                    foreach(var brick in script.Bricks.Bricks)
-                        if(brick is IfLogicBeginBrick)
+                foreach (var script in sprite.Scripts.Scripts)
+                    foreach (var brick in script.Bricks.Bricks)
+                        if (brick is IfLogicBeginBrick)
                             return brick;
             }
 
@@ -269,6 +217,118 @@ namespace Catrobat.TestsCommon.Misc
             }
 
             return null;
+        }
+
+        private static Formula GenerateFormula()
+        {
+            var formula = new Formula
+            {
+                FormulaTree = new FormulaTree
+                {
+                    LeftChild = new LeftChild
+                    {
+                        LeftChild = new LeftChild
+                        {
+                            VariableType = "OPERATOR",
+                            VariableValue = "MINUS"
+                        },
+                        RightChild = new RightChild
+                        {
+                            LeftChild = new LeftChild
+                            {
+                                VariableType = "FUNCTION",
+                                VariableValue = "0"
+                            },
+                            VariableType = "USER_VARIABLE",
+                            VariableValue = "LocalTestVariable1"
+                        },
+                        VariableType = "NUMBER",
+                        VariableValue = "1"
+                    },
+                    RightChild = new RightChild
+                    {
+                        VariableType = "FUNCTION",
+                        VariableValue = "0"
+                    },
+                    VariableType = "NUMBER",
+                    VariableValue = "6"
+                }
+            };
+            return formula;
+        }
+
+        private static Costume GenerateCostume(int index, Project project)
+        {
+            var costume = new Costume
+             {
+                 FileName = "FileName" + index,
+                 Name = "Look" + index,
+             };
+
+            var absoluteFileName = Path.Combine(project.BasePath, Project.ImagesPath, costume.FileName);
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                var fileStream = storage.OpenFile(absoluteFileName, StorageFileMode.Create, StorageFileAccess.Write);
+                fileStream.Close();
+            }
+
+            return costume;
+        }
+
+        private static Sound GenerateSound(int index, Project project)
+        {
+            var sound = new Sound
+                {
+                    FileName = "FileName" + index,
+                    Name = "Sound" + index,
+                };
+
+            var absoluteFileName = Path.Combine(project.BasePath, Project.SoundsPath, sound.FileName);
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                var fileStream = storage.OpenFile(absoluteFileName, StorageFileMode.Create, StorageFileAccess.Write);
+                fileStream.Close();
+            }
+
+            return sound;
+        }
+
+        private static void AddUserVariables(Project project)
+        {
+            project.VariableList = new VariableList
+                {
+                    ObjectVariableList = new ObjectVariableList
+                        {
+                            ObjectVariableEntries = new ObservableCollection<ObjectVariableEntry>()
+                        },
+                    ProgramVariableList = new ProgramVariableList()
+                        {
+                            UserVariables = new ObservableCollection<UserVariable>()
+                        }
+                };
+
+            var count = 0;
+            foreach (var sprite in project.SpriteList.Sprites)
+            {
+                var entry = new ObjectVariableEntry
+                    {
+                        Sprite = sprite,
+                        VariableList = new UserVariableList
+                            {
+                                UserVariables = new ObservableCollection<UserVariable>
+                                    {
+                                        new UserVariable
+                                            {
+                                                Name = "LocalTestVariable" + count
+                                            }
+                                    }
+                            }
+                    };
+                count++;
+                project.VariableList.ObjectVariableList.ObjectVariableEntries.Add(entry);
+            }
         }
 
         private static void AddLoopBricks(ObservableCollection<Brick> bricks)

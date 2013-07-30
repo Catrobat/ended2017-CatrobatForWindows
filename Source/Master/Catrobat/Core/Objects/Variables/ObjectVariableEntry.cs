@@ -101,5 +101,10 @@ namespace Catrobat.Core.Objects.Variables
 
             return newObjectVariableEntry;
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

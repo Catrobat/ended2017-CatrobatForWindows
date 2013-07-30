@@ -60,5 +60,10 @@ namespace Catrobat.Core.Objects
 
             return newSpriteRef;
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -6,10 +6,10 @@ using Catrobat.Core.Annotations;
 
 namespace Catrobat.Core.Objects
 {
-    public abstract class DataRootObject : INotifyPropertyChanged
+    public abstract class DataRootObject : INotifyPropertyChanged, IEquatable<DataRootObject>
     {
-        protected XDocument _document;
-        protected XElement _root;
+        protected XDocument Document;
+        protected XElement Root;
 
         public DataRootObject() {}
 
@@ -33,5 +33,7 @@ namespace Catrobat.Core.Objects
         }
         #endregion
 
+
+        public abstract bool Equals(DataRootObject other);
     }
 }

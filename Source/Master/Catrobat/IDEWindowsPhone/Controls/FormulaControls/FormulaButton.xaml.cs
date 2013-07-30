@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using Catrobat.Core.Objects.Formulas;
@@ -41,10 +42,16 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
             InitializeComponent();
         }
 
+        public void FormulaChanged()
+        {
+            FormulaViewer.Formula = Formula;
+        }
+
         private void ButtonFormula_OnClick(object sender, RoutedEventArgs e)
         {
             var viewModel = ServiceLocator.Current.GetInstance<FormulaEditorViewModel>();
             viewModel.Formula = Formula;
+            viewModel.FormulaButton = this;
             Navigation.NavigateTo(typeof(FormulaEditorView));
         }
     }

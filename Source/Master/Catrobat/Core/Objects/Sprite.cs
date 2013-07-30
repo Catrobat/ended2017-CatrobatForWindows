@@ -183,5 +183,10 @@ namespace Catrobat.Core.Objects
             _costumes.Delete();
             _sounds.Delete();
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -110,14 +110,12 @@
     </Compile>
     <Compile Include="Controls\Bricks\MasterBrick.cs" />
     <Compile Include="Controls\Bricks\NormalBrick.cs" />
-    <Compile Include="Controls\Buttons\BackButton.cs" />
     <Compile Include="Controls\Buttons\PlayPauseButton.xaml.cs">
       <DependentUpon>PlayPauseButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Buttons\PlayPauseButtonGroup.cs" />
     <Compile Include="Controls\Buttons\PlayPauseStateCommandArguments.cs" />
     <Compile Include="Controls\Buttons\SettingsButton.cs" />
-    <Compile Include="Controls\Buttons\ImageButton.cs" />
     <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
     <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
     <Compile Include="Controls\FormulaControls\FormulaButton.xaml.cs">
@@ -172,7 +170,6 @@
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
-    <Compile Include="Converters\BoolFormulaBackgroundConverter.cs" />
     <Compile Include="Converters\IntPixelConverter.cs" />
     <Compile Include="Converters\ImageSizeHeightConverter.cs" />
     <Compile Include="Converters\ImageSizeWidthConverter.cs" />
@@ -341,19 +338,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Buttons\BackButtonTemplates.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\Buttons\PlayPauseButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Buttons\SettingsButtonTemplates.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\Buttons\ImageButtonTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -402,6 +391,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Controls\StatusIcons\ProcessIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Converters\ConverterResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -749,6 +742,7 @@
     <EmbeddedResource Include="Content\Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

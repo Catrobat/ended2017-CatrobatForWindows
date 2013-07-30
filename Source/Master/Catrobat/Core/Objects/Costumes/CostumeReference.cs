@@ -60,6 +60,11 @@ namespace Catrobat.Core.Objects.Costumes
             newCostumeRef.Costume = _costume;
 
             return newCostumeRef;
-        }        
+        }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

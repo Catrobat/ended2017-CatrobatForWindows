@@ -7,6 +7,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:variables="clr-namespace:Catrobat.Core.Objects.Variables;assembly=Catrobat.Core"
     xmlns:buttons="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
+    xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -449,10 +450,9 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="4*"/>
           </Grid.ColumnDefinitions>
-          <buttons:BackButton Grid.Column="0" Margin="5" VerticalAlignment="Center" 
-                              HorizontalAlignment="Center" 
-                              Template="{StaticResource BackButtonControlTemplate}" 
-                              Click="ButtonVariablesBack_Click"></buttons:BackButton>
+          <coding4Fun:RoundButton Grid.Column="0" Margin="15" 
+            Click="ButtonVariablesBack_Click"
+            ImageSource="/Content/Images/ApplicationBar/dark/appbar.back.rest.png"/>
         </Grid>
       </Grid>
     </Grid>
@@ -570,8 +570,9 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="4*"/>
           </Grid.ColumnDefinitions>
-          <buttons:BackButton Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                              Template="{StaticResource BackButtonControlTemplate}" Click="ButtonVariablesBack_Click"/>
+          <coding4Fun:RoundButton Grid.Column="0" Margin="15" 
+            Click="ButtonVariablesBack_Click"
+            ImageSource="/Content/Images/ApplicationBar/dark/appbar.back.rest.png"/>
         </Grid>
       </Grid>
     </Grid>

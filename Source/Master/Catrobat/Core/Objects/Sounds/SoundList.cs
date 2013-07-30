@@ -54,5 +54,10 @@ namespace Catrobat.Core.Objects.Sounds
             foreach (Sound sound in Sounds)
                 sound.Delete();
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

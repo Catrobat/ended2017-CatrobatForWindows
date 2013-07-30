@@ -74,7 +74,7 @@ namespace Catrobat.Core.Objects.Sounds
         {
             var newSoundInfo = new Sound(_name);
 
-            var path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/";
+            var path = ProjectHolder.Project.BasePath + "/" + Project.SoundsPath + "/";
             var absoluteFileNameOld = path + _fileName;
             var absoluteFileNameNew = path + newSoundInfo._fileName;
 
@@ -91,7 +91,7 @@ namespace Catrobat.Core.Objects.Sounds
 
         public void Delete()
         {
-            var path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + _fileName;
+            var path = ProjectHolder.Project.BasePath + "/" + Project.SoundsPath + "/" + _fileName;
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -100,6 +100,11 @@ namespace Catrobat.Core.Objects.Sounds
                     storage.DeleteFile(path);
                 }
             }
+        }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

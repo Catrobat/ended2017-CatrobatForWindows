@@ -39,42 +39,47 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Formula
 
         private void SensorVariableSelected(SensorVariable variable)
         {
-            var formulaEditor = new FormulaEditor(FormulaViewer.GetSelectedFormula());
+            var formulaEditor = new FormulaEditor{SelectedFormula = FormulaViewer.GetSelectedFormula()};
             if (!formulaEditor.SensorVariableSelected(variable))
                 ShowKeyErrorAnimation();
             FormulaViewer.FormulaChanged();
+            _viewModel.FormulaChangedCommand.Execute(null);
         }
 
         private void ObjectVariableSelected(ObjectVariable variable)
         {
-            var formulaEditor = new FormulaEditor(FormulaViewer.GetSelectedFormula());
+            var formulaEditor = new FormulaEditor{SelectedFormula = FormulaViewer.GetSelectedFormula()};
             if (!formulaEditor.ObjectVariableSelected(variable))
                 ShowKeyErrorAnimation();
             FormulaViewer.FormulaChanged();
+            _viewModel.FormulaChangedCommand.Execute(null);
         }
 
         private void GlobalVariableSelected(UserVariable variable)
         {
-            var formulaEditor = new FormulaEditor(FormulaViewer.GetSelectedFormula());
+            var formulaEditor = new FormulaEditor{SelectedFormula = FormulaViewer.GetSelectedFormula()};
             if (!formulaEditor.GlobalVariableSelected(variable))
                 ShowKeyErrorAnimation();
             FormulaViewer.FormulaChanged();
+            _viewModel.FormulaChangedCommand.Execute(null);
         }
 
         private void LocalVariableSelected(UserVariable variable)
         {
-            var formulaEditor = new FormulaEditor(FormulaViewer.GetSelectedFormula());
+            var formulaEditor = new FormulaEditor{SelectedFormula = FormulaViewer.GetSelectedFormula()};
             if (!formulaEditor.LocalVariableSelected(variable))
                 ShowKeyErrorAnimation();
             FormulaViewer.FormulaChanged();
+            _viewModel.FormulaChangedCommand.Execute(null);
         }
 
         private void KeyPressed(FormulaEditorKey key)
         {
-            var formulaEditor = new FormulaEditor(FormulaViewer.GetSelectedFormula());
+            var formulaEditor = new FormulaEditor{SelectedFormula = FormulaViewer.GetSelectedFormula()};
             if(!formulaEditor.KeyPressed(key))
                 ShowKeyErrorAnimation();
             FormulaViewer.FormulaChanged();
+            _viewModel.FormulaChangedCommand.Execute(null);
         }
 
 

@@ -1,48 +1,56 @@
-﻿using Catrobat.Core;
+﻿using System.Collections.Generic;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.TestsCommon.Misc;
-using Catrobat.TestsCommon.SampleData;
 
 namespace Catrobat.TestsCommon.Tests.Data
 {
-  [TestClass]
-  public class DataDeletingTests
-  {
-    [ClassInitialize()]
-    public static void TestClassInitialize(TestContext testContext)
+    [TestClass]
+    public class DataDeletingTests
     {
-      TestHelper.InitializeTests();
+        [ClassInitialize()]
+        public static void TestClassInitialize(TestContext testContext)
+        {
+            TestHelper.InitializeTests();
+        }
+
+        [TestMethod]
+        public void DeleteSprite()
+        {
+            var project = ProjectGenerator.GenerateProject();
+
+            var pathCostumes = project.BasePath + "/" + Project.ImagesPath + "/";
+            var pathSounds = project.BasePath + "/" + Project.SoundsPath + "/";
+
+            var costumes = new List<Costume>();
+            var sounds = new List<Sound>();
+
+            using (IStorage storage = StorageSystem.GetStorage())
+            {
+                foreach (var sprite in project.SpriteList.Sprites)
+                {
+                    foreach (var costume in sprite.Costumes.Costumes)
+                    {
+                        costumes.Add(costume);
+                        Assert.IsTrue(storage.FileExists(pathCostumes + costume.FileName));
+                    }
+                    foreach (var sound in sprite.Sounds.Sounds)
+                    {
+                        sounds.Add(sound);
+                        Assert.IsTrue(storage.FileExists(pathSounds + sound.FileName));
+                    }
+
+                    sprite.Delete();
+                }
+
+                foreach (var costume in costumes)
+                    Assert.IsFalse(storage.FileExists(pathCostumes + costume.FileName));
+                foreach (var sound in sounds)
+                    Assert.IsFalse(storage.FileExists(pathSounds + sound.FileName));
+            }
+        }
     }
-
-    [TestMethod]
-    public void DeleteSprite()
-    {
-      var catrobatContext = SampleLoader.LoadSampleProject("UltimateTest.catroid", "UltimateTest");
-      CatrobatContext.SetContextHolder(new ContextHolderTests(catrobatContext));
-
-      var project = catrobatContext.CurrentProject;
-
-      var sprite1 = project.SpriteList.Sprites[0];
-      var sprite2 = project.SpriteList.Sprites[1];
-
-      var costume = sprite1.Costumes.Costumes[0];
-      var soundInfo = sprite2.Sounds.Sounds[0];
-
-      sprite1.Delete();
-      sprite2.Delete();
-
-      var pathCostumes = project.BasePath + "/" + Project.ImagesPath + "/";
-      var pathSounds = project.BasePath + "/" + Project.SoundsPath + "/";
-
-      using (IStorage storage = StorageSystem.GetStorage())
-      {
-        Assert.IsFalse(storage.FileExists(pathCostumes + costume.FileName));
-        Assert.IsFalse(storage.FileExists(pathSounds + soundInfo.FileName));
-      }
-
-      CatrobatContext.SetContextHolder(null);
-    }
-  }
 }

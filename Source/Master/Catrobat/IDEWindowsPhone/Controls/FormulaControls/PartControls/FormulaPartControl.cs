@@ -15,9 +15,19 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
     {
         public FormulaPartStyleCollection Style { get; set; }
 
-        public Grid CreateUiControls(int fontSize, bool isSelected, bool isParentSelected)
+        public Grid CreateUiControls(int fontSize, bool isSelected, bool isParentSelected, bool isError)
         {
-            var control = CreateControls(fontSize, isSelected, isParentSelected);
+            var control = CreateControls(fontSize, isSelected, isParentSelected, isError);
+
+            if (isError)
+            {
+                var errorGrid = new Grid
+                {
+                    Height = 8,
+                    Background = new SolidColorBrush(Colors.Red)
+                };
+                control.Children.Add(errorGrid);
+            }
 
             if (control != null)
             {
@@ -28,7 +38,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
             return control;
         }
 
-        protected abstract Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected);
+        protected abstract Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected, bool isError);
 
         protected void ControlOnTap(object sender, GestureEventArgs gestureEventArgs)
         {

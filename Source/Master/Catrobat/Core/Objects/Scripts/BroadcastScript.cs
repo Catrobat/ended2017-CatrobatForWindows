@@ -73,5 +73,10 @@ namespace Catrobat.Core.Objects.Scripts
 
             return newBroadcastScript;
         }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

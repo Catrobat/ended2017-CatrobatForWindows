@@ -107,11 +107,11 @@ namespace Catrobat.Core.Objects.Costumes
 
         public DataObject Copy()
         {
-            var newCostumeData = new Costume(_name);
+            var newCostume = new Costume(_name);
 
-            var path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ImagesPath + "/";
+            var path = ProjectHolder.Project.BasePath + "/" + Project.ImagesPath + "/";
             var absoluteFileNameOld = path + _fileName;
-            var absoluteFileNameNew = path + newCostumeData._fileName;
+            var absoluteFileNameNew = path + newCostume._fileName;
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -121,12 +121,12 @@ namespace Catrobat.Core.Objects.Costumes
                 //  MessageBox.Show("Das Kostüm konnte nicht kopiert werden.", "Kopieren nicht möglich", MessageBoxButton.OK); // TODO: is this used? names should be unique
             }
 
-            return newCostumeData;
+            return newCostume;
         }
 
         public void Delete()
         {
-            var path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.ImagesPath + "/" + _fileName;
+            var path = ProjectHolder.Project.BasePath + "/" + Project.ImagesPath + "/" + _fileName;
             try
             {
                 using (var storage = StorageSystem.GetStorage())
@@ -138,6 +138,11 @@ namespace Catrobat.Core.Objects.Costumes
                 }
             }
             catch {}
+        }
+
+        public override bool Equals(DataObject other)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
