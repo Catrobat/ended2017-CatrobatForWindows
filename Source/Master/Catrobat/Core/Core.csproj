@@ -125,8 +125,6 @@
     <Compile Include="Objects\Costumes\CostumeReference.cs" />
     <Compile Include="Objects\DataObject.cs" />
     <Compile Include="Objects\DataRootObject.cs" />
-    <Compile Include="Objects\Formulas\RightChild.cs" />
-    <Compile Include="Objects\Formulas\LeftChild.cs" />
     <Compile Include="Objects\Formulas\Formula.cs" />
     <Compile Include="Objects\Formulas\FormulaTree.cs" />
     <Compile Include="Objects\OnlineProjectHeader.cs" />
