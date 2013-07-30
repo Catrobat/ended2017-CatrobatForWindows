@@ -16,14 +16,6 @@ using Catrobat.Core.Objects.Variables;
 
 namespace Catrobat.TestsCommon.Misc
 {
-    public enum VariableTypes
-    {
-        Number,
-        Operator,
-        UserVariable,
-        Function
-    };
-
     public class ProjectGenerator
     {
         // Bricks that must be tested manually
@@ -243,25 +235,25 @@ namespace Catrobat.TestsCommon.Misc
                     {
                         LeftChild = new LeftChild
                         {
-                            VariableType = VariableTypes.Operator.ToString(),
+                            VariableType = "OPERATOR",
                             VariableValue = "MINUS"
                         },
                         RightChild = new RightChild
                         {
                             LeftChild = new LeftChild
                             {
-                                VariableType = VariableTypes.Function.ToString(),
+                                VariableType = "FUNCTION",
                                 VariableValue = "0"
                             },
-                            VariableType = VariableTypes.UserVariable.ToString(),
+                            VariableType = "USER_VARIABLE",
                             VariableValue = "LocalTestVariable1"
                         },
-                        VariableType = VariableTypes.Function.ToString(),
+                        VariableType = "NUMBER",
                         VariableValue = "1"
                     },
                     RightChild = new RightChild
                     {
-                        VariableType = VariableTypes.Function.ToString(),
+                        VariableType = "FUNCTION",
                         VariableValue = "0"
                     },
                     VariableType = "NUMBER",
