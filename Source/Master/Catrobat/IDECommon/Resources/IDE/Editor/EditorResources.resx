@@ -288,6 +288,9 @@
   <data name="RecorderRecordTime" xml:space="preserve">
     <value>Time</value>
   </data>
+  <data name="RecorderStart" xml:space="preserve">
+    <value>start recording</value>
+  </data>
   <data name="RecorderStop" xml:space="preserve">
     <value>stop</value>
   </data>

@@ -5,8 +5,6 @@ namespace Catrobat.Core.Objects.Formulas
 {
     public class FormulaTree : DataObject
     {
-        internal string _childName;
-
         private FormulaTree _leftChild;
         public FormulaTree LeftChild
         {
@@ -74,21 +72,19 @@ namespace Catrobat.Core.Objects.Formulas
 
         public FormulaTree()
         {
-            _childName = "formulaTree";
         }
 
         public FormulaTree(XElement xElement)
         {
-            _childName = "formulaTree";
             LoadFromXML(xElement);
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
             if(xRoot.Element("leftChild") != null)
-                _leftChild = new LeftChild(xRoot.Element("leftChild"));
+                _leftChild = new FormulaTree(xRoot.Element("leftChild"));
             if (xRoot.Element("rightChild") != null)
-            _rightChild = new RightChild(xRoot.Element("rightChild"));
+                _rightChild = new FormulaTree(xRoot.Element("rightChild"));
 
             if (xRoot.Element("type") != null)
             _variableType = xRoot.Element("type").Value;
@@ -98,15 +94,31 @@ namespace Catrobat.Core.Objects.Formulas
 
         internal override XElement CreateXML()
         {
-            var xRoot = new XElement(_childName);
+            var xRoot = new XElement("formulaTree");
 
             if(_leftChild != null)
-                xRoot.Add(_leftChild.CreateXML());
+                xRoot.Add(_leftChild.CreateXML("leftChild"));
             if(_rightChild != null)
-                xRoot.Add(_rightChild.CreateXML());
+                xRoot.Add(_rightChild.CreateXML("rightChild"));
             if(_variableType != null)
                 xRoot.Add(new XElement("type", _variableType));
             if(_variableValue != null)
+                xRoot.Add(new XElement("value", _variableValue));
+
+            return xRoot;
+        }
+
+        internal XElement CreateXML(string childName)
+        {
+            var xRoot = new XElement(childName);
+
+            if (_leftChild != null)
+                xRoot.Add(_leftChild.CreateXML("leftChild"));
+            if (_rightChild != null)
+                xRoot.Add(_rightChild.CreateXML("rightChild"));
+            if (_variableType != null)
+                xRoot.Add(new XElement("type", _variableType));
+            if (_variableValue != null)
                 xRoot.Add(new XElement("value", _variableValue));
 
             return xRoot;
@@ -117,9 +129,9 @@ namespace Catrobat.Core.Objects.Formulas
             var newFormulaTree = new FormulaTree();
 
             if (_leftChild != null)
-                newFormulaTree.LeftChild = _leftChild.Copy() as LeftChild;
+                newFormulaTree.LeftChild = _leftChild.Copy() as FormulaTree;
             if (_rightChild != null)
-                newFormulaTree.RightChild = _rightChild.Copy() as RightChild;
+                newFormulaTree.RightChild = _rightChild.Copy() as FormulaTree;
             newFormulaTree.VariableType = _variableType;
             newFormulaTree.VariableValue = _variableValue;
 

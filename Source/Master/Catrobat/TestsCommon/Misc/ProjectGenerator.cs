@@ -46,8 +46,8 @@ namespace Catrobat.TestsCommon.Misc
                     Description = "",
                     DeviceName = "SampleDevice",
                     MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
-                    Platform = PlatformInformationHelper.GetPlatformName(),
-                    PlatformVersion = PlatformInformationHelper.GetPlatformVersion(),
+                    Platform = PlatformInformationHelper.PlatformName,
+                    PlatformVersion = PlatformInformationHelper.PlatformVersion,
                     ProgramLicense = "http://developer.catrobat.org/agpl_v3",
                     RemixOf = "",
                     ScreenHeight = 480,
@@ -225,16 +225,16 @@ namespace Catrobat.TestsCommon.Misc
             {
                 FormulaTree = new FormulaTree
                 {
-                    LeftChild = new LeftChild
+                    LeftChild = new FormulaTree
                     {
-                        LeftChild = new LeftChild
+                        LeftChild = new FormulaTree
                         {
                             VariableType = "OPERATOR",
                             VariableValue = "MINUS"
                         },
-                        RightChild = new RightChild
+                        RightChild = new FormulaTree
                         {
-                            LeftChild = new LeftChild
+                            LeftChild = new FormulaTree
                             {
                                 VariableType = "FUNCTION",
                                 VariableValue = "0"
@@ -245,7 +245,7 @@ namespace Catrobat.TestsCommon.Misc
                         VariableType = "NUMBER",
                         VariableValue = "1"
                     },
-                    RightChild = new RightChild
+                    RightChild = new FormulaTree
                     {
                         VariableType = "FUNCTION",
                         VariableValue = "0"

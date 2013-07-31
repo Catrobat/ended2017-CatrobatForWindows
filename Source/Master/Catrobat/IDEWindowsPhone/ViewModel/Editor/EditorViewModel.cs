@@ -733,7 +733,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             }
         }
 
-        private async void StartPlayerAction()
+        private void StartPlayerAction()
         {
             PlayerLauncher.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
         }

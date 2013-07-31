@@ -50,7 +50,6 @@
     <Compile Include="Misc\Helpers\PlatformInformationHelper.cs" />
     <Compile Include="Misc\Helpers\FormatHelper.cs" />
     <Compile Include="Misc\Helpers\ApplicationInformation.cs" />
-    <Compile Include="Misc\Helpers\DeviceInformationHelper.cs" />
     <Compile Include="Misc\Helpers\FileNameGenerator.cs" />
     <Compile Include="Misc\Helpers\FormUpload.cs" />
     <Compile Include="Misc\Helpers\ICulture.cs" />
@@ -126,8 +125,6 @@
     <Compile Include="Objects\Costumes\CostumeReference.cs" />
     <Compile Include="Objects\DataObject.cs" />
     <Compile Include="Objects\DataRootObject.cs" />
-    <Compile Include="Objects\Formulas\RightChild.cs" />
-    <Compile Include="Objects\Formulas\LeftChild.cs" />
     <Compile Include="Objects\Formulas\Formula.cs" />
     <Compile Include="Objects\Formulas\FormulaTree.cs" />
     <Compile Include="Objects\OnlineProjectHeader.cs" />

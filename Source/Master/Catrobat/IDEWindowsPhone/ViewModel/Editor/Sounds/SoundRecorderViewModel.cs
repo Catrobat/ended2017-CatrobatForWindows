@@ -430,10 +430,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         private void UpdateTextProperties()
         {
-            //TODO: use Localize strings
             var recordButtonHeaderRecord = EditorResources.RecorderRecord;
-            var recordButtonHeaderStop = "stop"; // EditorResources.RecorderStop;
-            var recordButtonTextRecord = "start recording"; // EditorResources.RecorderStart;
+            var recordButtonHeaderStop = EditorResources.RecorderStop;
+            var recordButtonTextRecord = EditorResources.RecorderStart;
             var recordButtonTextStop = EditorResources.RecorderStop;
 
             if (IsRecording)

@@ -104,9 +104,7 @@
     <None Include="SampleData\SampleProjects\default.catroid" />
     <None Include="SampleData\SampleProjects\test.catroid" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tests\IDE\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{a4e10bed-8f56-46a6-b78d-bfef1363b195}</Project>

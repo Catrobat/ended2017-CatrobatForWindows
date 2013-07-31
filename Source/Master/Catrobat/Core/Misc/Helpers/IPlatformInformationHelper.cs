@@ -11,5 +11,11 @@ namespace Catrobat.Core.Misc.Helpers
         string GetPlatformName();
 
         string GetPlatformVersion();
+
+        string GetDeviceName();
+
+        int GetScreenWidth();
+
+        int GetScreenHeight();
     }
 }
