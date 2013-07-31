@@ -638,7 +638,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             var message = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SelectedSpriteListener);
 
-            Navigation.NavigateTo(typeof(AddNewCostumeView));
+            Navigation.NavigateTo(typeof(NewCostumeSourceSelectionView));
         }
 
         private void EditCostumeAction()

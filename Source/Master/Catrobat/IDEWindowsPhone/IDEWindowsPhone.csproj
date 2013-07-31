@@ -230,9 +230,6 @@
     <Compile Include="ViewModel\Service\UploadProjectViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ViewModelMessagingToken.cs" />
-    <Compile Include="Views\Editor\Costumes\AddNewCostumeView.xaml.cs">
-      <DependentUpon>AddNewCostumeView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Editor\Costumes\ChangeCostumeView.xaml.cs">
       <DependentUpon>ChangeCostumeView.xaml</DependentUpon>
     </Compile>
@@ -241,6 +238,9 @@
     </Compile>
     <Compile Include="Views\Editor\Costumes\CostumeSavingView.xaml.cs">
       <DependentUpon>CostumeSavingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml.cs">
+      <DependentUpon>NewCostumeSourceSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\EditorLoadingView.xaml.cs">
       <DependentUpon>EditorLoadingView.xaml</DependentUpon>
@@ -401,6 +401,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Properties\DesignTimeResources.xaml" Condition="'$(DesignTime)'=='true' OR ('$(SolutionPath)'!='' AND Exists('$(SolutionPath)') AND '$(BuildingInsideVisualStudio)'!='true' AND '$(BuildingInsideExpressionBlend)'!='true')">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+      <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -413,10 +418,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Costumes\AddNewCostumeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\Editor\Costumes\ChangeCostumeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -426,6 +427,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Editor\Costumes\CostumeSavingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

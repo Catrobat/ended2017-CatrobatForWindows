@@ -297,6 +297,9 @@
   <data name="Recording" xml:space="preserve">
     <value>Recording</value>
   </data>
+  <data name="SavingImage" xml:space="preserve">
+    <value>saving image</value>
+  </data>
   <data name="Selected" xml:space="preserve">
     <value>selected</value>
   </data>
