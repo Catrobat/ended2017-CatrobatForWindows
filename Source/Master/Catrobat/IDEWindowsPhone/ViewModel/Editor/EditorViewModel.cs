@@ -45,6 +45,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         private ObservableCollection<Costume> _selectedCostumes;
         private ObservableCollection<DataObject> _selectedScripts;
         private ObservableCollection<Sound> _selectedSounds;
+        private bool _isSpriteSelecting;
 
         #endregion
 
@@ -103,6 +104,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             get
             {
                 return _scriptBricks;
+            }
+        }
+
+        public bool IsSpriteSelecting
+        {
+            get { return _isSpriteSelecting; }
+            set
+            {
+                _isSpriteSelecting = value;
+                RaisePropertyChanged("IsSpriteSelecting");
             }
         }
 
@@ -966,23 +977,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         }
 
         #endregion
-
-
-        //private void SoundPlayerStateChanged(Misc.SoundState soundState, Misc.SoundState newState)
-        //{
-        //    if (newState == Misc.SoundState.Stopped)
-        //    {
-        //        if (Sounds != null)
-        //        {
-        //            var tempSounds = new ObservableCollection<Sound>();
-        //            foreach (Sound sound in Sounds)
-        //                tempSounds.Add(sound);
-
-        //            Sounds = null;
-        //            Sounds = tempSounds;
-        //        }
-        //    }
-        //}
 
         private void ResetViewModel()
         {

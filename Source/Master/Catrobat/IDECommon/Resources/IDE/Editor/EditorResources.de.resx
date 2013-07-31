@@ -300,6 +300,9 @@
   <data name="Selected" xml:space="preserve">
     <value>ausgewählt</value>
   </data>
+  <data name="SelectingObject" xml:space="preserve">
+    <value>lade objekt</value>
+  </data>
   <data name="SoundName" xml:space="preserve">
     <value>Klangname</value>
   </data>

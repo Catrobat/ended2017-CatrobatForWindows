@@ -620,6 +620,15 @@ namespace Catrobat.IDECommon.Resources.IDE.Editor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to loading object.
+        /// </summary>
+        public static string SelectingObject {
+            get {
+                return ResourceManager.GetString("SelectingObject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sound name.
         /// </summary>
         public static string SoundName {
