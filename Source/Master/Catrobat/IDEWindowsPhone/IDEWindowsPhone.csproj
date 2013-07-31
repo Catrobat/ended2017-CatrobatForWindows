@@ -239,6 +239,9 @@
     <Compile Include="Views\Editor\Costumes\CostumeNameChooserView.xaml.cs">
       <DependentUpon>CostumeNameChooserView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Editor\Costumes\CostumeSavingView.xaml.cs">
+      <DependentUpon>CostumeSavingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Editor\EditorLoadingView.xaml.cs">
       <DependentUpon>EditorLoadingView.xaml</DependentUpon>
     </Compile>
@@ -421,6 +424,10 @@
     <Page Include="Views\Editor\Costumes\CostumeNameChooserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\CostumeSavingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Editor\EditorLoadingView.xaml">
       <SubType>Designer</SubType>

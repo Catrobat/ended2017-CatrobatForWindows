@@ -68,7 +68,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             int newWidth = GetNewImageWidth(desiredSize, width, height);
             int newHeight = GetNewImageHeight(desiredSize, width, height);
 
-            return (int)((newWidth + (double)newHeight) / (width * (double)height));
+            return (int)Math.Round((newWidth * (double)newHeight) / (width * (double)height) * 100);
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows.Navigation;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
@@ -14,10 +15,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
             InitializeComponent();
         }
 
-        protected override void OnBackKeyPress(CancelEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             _viewModel.ResetViewModelCommand.Execute(null);
-            base.OnBackKeyPress(e);
+            base.OnNavigatedTo(e);
         }
     }
 }

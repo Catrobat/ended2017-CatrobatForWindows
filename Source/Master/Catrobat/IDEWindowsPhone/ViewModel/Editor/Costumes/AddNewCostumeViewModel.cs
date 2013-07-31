@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Catrobat.Core.Objects;
@@ -25,6 +26,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         private Sprite _receivedSelectedSprite;
         private ImageDimention _dimention;
         private ImageSizeEntry _selectedSize;
+        private ImageSource _image;
 
         #endregion
 
@@ -42,6 +44,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                 _costumeName = value;
                 RaisePropertyChanged("CostumeName");
                 SaveCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public ImageSource Image
+        {
+            get { return _image; }
+            set
+            {
+                _image = value;
+                RaisePropertyChanged("Image");
             }
         }
 
@@ -143,6 +155,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private async void SaveAction()
         {
+            Navigation.NavigateTo(typeof (CostumeSavingView));
+
             await Task.Run(() =>
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
@@ -155,6 +169,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                     var costume = _builder.Save(CostumeName, newDimention);
                     _receivedSelectedSprite.Costumes.Costumes.Add(costume);
 
+                    Navigation.RemoveBackEntry();
                     Navigation.RemoveBackEntry();
                     Navigation.NavigateBack();
                 });
@@ -216,6 +231,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                     Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
 
                     _builder.StartCreateCostumeAsync(_receivedSelectedSprite, image);
+                    Image = image;
 
                     Deployment.Current.Dispatcher.BeginInvoke(() => Navigation.NavigateTo(typeof(CostumeNameChooserView)));
                 }
@@ -256,16 +272,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private void ResetViewModel()
         {
-            CostumeName = null;
+            //CostumeName = EditorResources.Image;
 
-            InitImageSizes();
-
-            if (_builder != null)
-            {
-                //_builder.LoadCostumeSuccess -= LoadCostumeSuccess;
-                //_builder.LoadCostumeFailed -= LoadCostumeFailed;
-                _builder = null;
-            }
+            //InitImageSizes();
+            //_builder = null;
         }
 
         public override void Cleanup()

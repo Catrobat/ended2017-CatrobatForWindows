@@ -21,12 +21,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
                 });
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            _viewModel.ResetViewModelCommand.Execute(null);
-            base.OnNavigatedFrom(e);
-        }
-
         private void TextBoxCostumeName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _viewModel.CostumeName = TextBoxCostumeName.Text;
