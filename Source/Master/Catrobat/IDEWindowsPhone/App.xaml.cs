@@ -10,7 +10,6 @@ using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Storage;
 using Catrobat.IDECommon.Resources.IDE.Main;
 using Catrobat.IDEWindowsPhone;
-using Catrobat.IDEWindowsPhone.Content.Resources;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Misc.Sounds;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
