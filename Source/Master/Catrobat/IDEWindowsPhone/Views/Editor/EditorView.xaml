@@ -46,7 +46,6 @@
           VerticalAlignment="Stretch"
           IsReorderEnabled="True"
           ItemsSource="{Binding Sprites}"
-          SelectionChanged="reorderListBoxSprites_SelectionChanged"
           ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleNormal}"
           Foreground="White" >
             <reorderableListbox:ReorderListBox.ItemTemplate>
