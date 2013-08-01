@@ -42,7 +42,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                     return;
                 }
                 _costumeName = value;
-                RaisePropertyChanged("CostumeName");
+                RaisePropertyChanged(() => CostumeName);
                 SaveCommand.RaiseCanExecuteChanged();
             }
         }
@@ -53,7 +53,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             set
             {
                 _image = value;
-                RaisePropertyChanged("Image");
+                RaisePropertyChanged(() => Image);
             }
         }
 
@@ -87,8 +87,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                         SelectedSize = ImageSizes[1];
                         break;
                 }
-
-                RaisePropertyChanged("Dimention");
+                RaisePropertyChanged(() => Dimention);
             }
         }
 
@@ -98,7 +97,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             set
             {
                 _selectedSize = value;
-                RaisePropertyChanged("SelectedSize");
+                RaisePropertyChanged(() => SelectedSize);
             }
         }
 

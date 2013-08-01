@@ -40,7 +40,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
                     return;
                 }
                 _brickCollection = value;
-                RaisePropertyChanged("BrickCollection");
+                RaisePropertyChanged(() => BrickCollection);
             }
         }
 

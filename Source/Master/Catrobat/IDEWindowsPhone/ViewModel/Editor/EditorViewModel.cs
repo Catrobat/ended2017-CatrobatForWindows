@@ -85,10 +85,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 if (_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 && ListBoxViewPort.LastVisibleIndex == 0)
                     ListBoxViewPort = new ListBoxViewPort(1, 2);
 
-                RaisePropertyChanged("SelectedSprite");
-                RaisePropertyChanged("Sounds");
-                RaisePropertyChanged("Costumes");
-                RaisePropertyChanged("ScriptBricks");
+                RaisePropertyChanged(() => SelectedSprite);
+                RaisePropertyChanged(() => Sounds);
+                RaisePropertyChanged(() => Costumes);
+                RaisePropertyChanged(() => ScriptBricks);
 
                 EditSpriteCommand.RaiseCanExecuteChanged();
                 CopySpriteCommand.RaiseCanExecuteChanged();
@@ -113,7 +113,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             set
             {
                 _isSpriteSelecting = value;
-                RaisePropertyChanged("IsSpriteSelecting");
+                RaisePropertyChanged(() => IsSpriteSelecting);
             }
         }
 
@@ -123,15 +123,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             {
                 if (_selectedSprite != null)
                     return _selectedSprite.Sounds.Sounds;
-                else
-                    return null;
+
+                return null;
             }
             set
             {
                 if (value == _selectedSprite.Sounds.Sounds) return;
                 _selectedSprite.Sounds.Sounds = value;
 
-                Deployment.Current.Dispatcher.BeginInvoke(() => RaisePropertyChanged("Sounds"));
+                //Deployment.Current.Dispatcher.BeginInvoke(() => RaisePropertyChanged(() => Sounds));
+                RaisePropertyChanged(() => Sounds);
             }
         }
 
@@ -141,8 +142,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             {
                 if (_selectedSprite != null)
                     return _selectedSprite.Costumes.Costumes;
-                else
-                    return null;
+                
+                return null;
             }
         }
 
@@ -153,7 +154,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             {
                 if (value == _listBoxViewPort) return;
                 _listBoxViewPort = value;
-                RaisePropertyChanged("ListBoxViewPort");
+                RaisePropertyChanged(() => ListBoxViewPort);
             }
         }
 
@@ -172,13 +173,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 if (_selectedPivotIndex == -1)
                     _selectedPivotIndex = 0;
 
-                RaisePropertyChanged("SelectedPivotIndex");
+                RaisePropertyChanged(() => SelectedPivotIndex);
 
-
-                RaisePropertyChanged("IsVisibleObjects");
-                RaisePropertyChanged("IsVisibleScripts");
-                RaisePropertyChanged("IsVisibleCostumes");
-                RaisePropertyChanged("IsVisibleSounds");
+                RaisePropertyChanged(() => IsVisibleObjects);
+                RaisePropertyChanged(() => IsVisibleScripts);
+                RaisePropertyChanged(() => IsVisibleCostumes);
+                RaisePropertyChanged(() => IsVisibleSounds);
             }
         }
 
@@ -194,7 +194,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             {
                 if (value == _numberOfCostumesSelected) return;
                 _numberOfCostumesSelected = value;
-                RaisePropertyChanged("NumberOfCostumesSelected");
+                RaisePropertyChanged(() => NumberOfCostumesSelected);
             }
         }
 
@@ -205,7 +205,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             {
                 if (value == _numberOfSoundsSelected) return;
                 _numberOfSoundsSelected = value;
-                RaisePropertyChanged("NumberOfSoundsSelected");
+                RaisePropertyChanged(() => NumberOfSoundsSelected);
             }
         }
 
@@ -216,7 +216,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             {
                 if (value == _numberOfObjectsSelected) return;
                 _numberOfObjectsSelected = value;
-                RaisePropertyChanged("NumberOfObjectsSelected");
+                RaisePropertyChanged(() => NumberOfObjectsSelected);
             }
         }
 
@@ -226,7 +226,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             set
             {
                 _selectedScripts = value;
-                RaisePropertyChanged("SelectedScripts");
+                RaisePropertyChanged(() => SelectedScripts);
             }
         }
 
@@ -236,7 +236,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             set
             {
                 _selectedCostumes = value;
-                RaisePropertyChanged("SelectedCostumes");
+                RaisePropertyChanged(() => SelectedCostumes);
             }
         }
 
@@ -246,7 +246,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             set
             {
                 _selectedSounds = value;
-                RaisePropertyChanged("SelectedSounds");
+                RaisePropertyChanged(() => SelectedSounds);
             }
         }
 

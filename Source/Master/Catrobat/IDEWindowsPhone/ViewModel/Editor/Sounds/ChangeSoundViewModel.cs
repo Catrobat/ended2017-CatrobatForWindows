@@ -27,7 +27,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                     return;
                 }
                 _receivedSound = value;
-                RaisePropertyChanged("ReceivedSound");
+                RaisePropertyChanged(() => ReceivedSound);
             }
         }
 
@@ -41,7 +41,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                     return;
                 }
                 _soundName = value;
-                RaisePropertyChanged("SoundName");
+                RaisePropertyChanged(() => SoundName);
                 SaveCommand.RaiseCanExecuteChanged();
             }
         }

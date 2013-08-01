@@ -25,7 +25,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 {
                     _projectName = value;
 
-                    RaisePropertyChanged("ProjectName");
+                    RaisePropertyChanged(() => ProjectName);
                     SaveCommand.RaiseCanExecuteChanged();
                 }
             }

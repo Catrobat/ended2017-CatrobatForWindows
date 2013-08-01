@@ -31,8 +31,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get { return _error; }
             set
             {
-                _error = value; 
-                RaisePropertyChanged("Error");
+                _error = value;
+                RaisePropertyChanged(() => Error);
             }
         }
 

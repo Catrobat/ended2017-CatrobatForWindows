@@ -43,7 +43,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     return;
                 }
                 _projectName = value;
-                RaisePropertyChanged("ProjectName");
+                RaisePropertyChanged(() => ProjectName);
             }
         }
 
@@ -57,7 +57,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     return;
                 }
                 _screenshotImageSource = value;
-                RaisePropertyChanged("ScreenshotImageSource");
+                RaisePropertyChanged(() => ScreenshotImageSource);
             }
         }
 
@@ -71,7 +71,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     return;
                 }
                 _contentPanelVisibility = value;
-                RaisePropertyChanged("ContentPanelVisibility");
+                RaisePropertyChanged(() => ContentPanelVisibility);
             }
         }
 
@@ -85,7 +85,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     return;
                 }
                 _loadingPanelVisibility = value;
-                RaisePropertyChanged("LoadingPanelVisibility");
+                RaisePropertyChanged(() => LoadingPanelVisibility);
             }
         }
 
@@ -99,7 +99,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     return;
                 }
                 _progressBarLoadingIsIndeterminate = value;
-                RaisePropertyChanged("ProgressBarLoadingIsIndeterminate");
+                RaisePropertyChanged(() => ProgressBarLoadingIsIndeterminate);
             }
         }
 
@@ -113,7 +113,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     return;
                 }
                 _checkBoxMakeActiveIsChecked = value;
-                RaisePropertyChanged("CheckBoxMakeActiveIsChecked");
+                RaisePropertyChanged(() => CheckBoxMakeActiveIsChecked);
             }
         }
 
@@ -127,7 +127,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     return;
                 }
                 _buttonAddIsEnabled = value;
-                RaisePropertyChanged("ButtonAddIsEnabled");
+                RaisePropertyChanged(() => ButtonAddIsEnabled);
                 AddCommand.RaiseCanExecuteChanged();
             }
         }
@@ -142,7 +142,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     return;
                 }
                 _buttonCancelIsEnabled = value;
-                RaisePropertyChanged("ButtonCancelIsEnabled");
+                RaisePropertyChanged(() => ButtonCancelIsEnabled);
                 CancelCommand.RaiseCanExecuteChanged();
             }
         }

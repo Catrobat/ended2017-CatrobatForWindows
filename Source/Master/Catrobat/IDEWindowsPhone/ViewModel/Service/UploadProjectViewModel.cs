@@ -32,7 +32,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                 if (_projectName != value)
                 {
                     _projectName = value;
-                    RaisePropertyChanged("ProjectName");
+                    RaisePropertyChanged(() => ProjectName);
                     UploadCommand.RaiseCanExecuteChanged();
                 }
             }
@@ -46,7 +46,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                 if (_projectDescription != value)
                 {
                     _projectDescription = value;
-                    RaisePropertyChanged("ProjectDescription");
+                    RaisePropertyChanged(() => ProjectDescription);
                 }
             }
         }
