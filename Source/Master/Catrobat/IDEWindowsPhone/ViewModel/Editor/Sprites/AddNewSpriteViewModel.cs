@@ -29,7 +29,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
                     return;
                 }
                 _spriteName = value;
-                RaisePropertyChanged("SpriteName");
+                RaisePropertyChanged(() => SpriteName);
                 SaveCommand.RaiseCanExecuteChanged();
             }
         }

@@ -297,8 +297,14 @@
   <data name="Recording" xml:space="preserve">
     <value>Recording</value>
   </data>
+  <data name="SavingImage" xml:space="preserve">
+    <value>saving image</value>
+  </data>
   <data name="Selected" xml:space="preserve">
     <value>selected</value>
+  </data>
+  <data name="SelectingObject" xml:space="preserve">
+    <value>loading object</value>
   </data>
   <data name="SoundName" xml:space="preserve">
     <value>Sound name</value>

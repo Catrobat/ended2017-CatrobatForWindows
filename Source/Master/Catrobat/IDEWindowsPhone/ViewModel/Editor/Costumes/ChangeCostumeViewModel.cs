@@ -30,7 +30,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                     return;
                 }
                 _receivedCostume = value;
-                RaisePropertyChanged("ReceivedCostume");
+                RaisePropertyChanged(() => ReceivedCostume);
             }
         }
 
@@ -44,7 +44,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                     return;
                 }
                 _costumeName = value;
-                RaisePropertyChanged("CostumeName");
+                RaisePropertyChanged(() => CostumeName);
                 SaveCommand.RaiseCanExecuteChanged();
             }
         }

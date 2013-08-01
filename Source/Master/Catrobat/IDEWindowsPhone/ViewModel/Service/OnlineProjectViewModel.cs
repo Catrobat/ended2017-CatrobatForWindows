@@ -43,7 +43,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
                     if (PropertyChanged != null)
                     {
-                        PropertyChanged(this, new PropertyChangedEventArgs("ButtonDownloadIsEnabled"));
+                        RaisePropertyChanged(() => ButtonDownloadIsEnabled);
                         DownloadCommand.RaiseCanExecuteChanged();
                     }
                 }
@@ -61,7 +61,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
                     if (PropertyChanged != null)
                     {
-                        PropertyChanged(this, new PropertyChangedEventArgs("UploadedLabelText"));
+                        RaisePropertyChanged(() => UploadedLabelText);
                     }
                 }
             }
@@ -78,7 +78,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
                     if (PropertyChanged != null)
                     {
-                        PropertyChanged(this, new PropertyChangedEventArgs("VersionLabelText"));
+                        RaisePropertyChanged(() => VersionLabelText);
                     }
                 }
             }
@@ -95,7 +95,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
                     if (PropertyChanged != null)
                     {
-                        PropertyChanged(this, new PropertyChangedEventArgs("ViewsLabelText"));
+                        RaisePropertyChanged(() => ViewsLabelText);
                     }
                 }
             }
@@ -112,7 +112,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
                     if (PropertyChanged != null)
                     {
-                        PropertyChanged(this, new PropertyChangedEventArgs("DownloadsLabelText"));
+                        RaisePropertyChanged(() => DownloadsLabelText);
                     }
                 }
             }

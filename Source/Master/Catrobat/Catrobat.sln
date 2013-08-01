@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20617.1 PREVIEW
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{A4E10BED-8F56-46A6-B78D-BFEF1363B195}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDECommon", "IDECommon\IDECommon.csproj", "{73EDA75E-B249-40CB-A883-C2521A72B1C0}"
@@ -43,9 +45,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaintStandAloneApp", "Paint
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsPaint", "TestsPaint\TestsPaint.csproj", "{6B88605D-0998-477B-AC57-5688E60169C9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FormulaEvaluation", "FormulaEvaluation\FormulaEvaluation.vcxproj", "{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 17
+		SccNumberOfProjects = 18
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -97,6 +101,9 @@ Global
 		SccProjectUniqueName16 = TestsPaint\\TestsPaint.csproj
 		SccProjectName16 = TestsPaint
 		SccLocalPath16 = TestsPaint
+		SccProjectUniqueName17 = FormulaEvaluation\\FormulaEvaluation.vcxproj
+		SccProjectName17 = FormulaEvaluation
+		SccLocalPath17 = FormulaEvaluation
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -528,6 +535,26 @@ Global
 		{6B88605D-0998-477B-AC57-5688E60169C9}.Release|x86.ActiveCfg = Release|x86
 		{6B88605D-0998-477B-AC57-5688E60169C9}.Release|x86.Build.0 = Release|x86
 		{6B88605D-0998-477B-AC57-5688E60169C9}.Release|x86.Deploy.0 = Release|x86
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Debug|ARM.ActiveCfg = Debug|ARM
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Debug|ARM.Build.0 = Debug|ARM
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Debug|Win32.Build.0 = Debug|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Debug|x64.ActiveCfg = Debug|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Debug|x86.ActiveCfg = Debug|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Debug|x86.Build.0 = Debug|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Release|Any CPU.ActiveCfg = Release|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Release|ARM.ActiveCfg = Release|ARM
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Release|ARM.Build.0 = Release|ARM
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Release|Win32.ActiveCfg = Release|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Release|Win32.Build.0 = Release|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Release|x64.ActiveCfg = Release|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Release|x86.ActiveCfg = Release|Win32
+		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

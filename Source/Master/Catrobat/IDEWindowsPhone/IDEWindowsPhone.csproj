@@ -230,14 +230,17 @@
     <Compile Include="ViewModel\Service\UploadProjectViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ViewModelMessagingToken.cs" />
-    <Compile Include="Views\Editor\Costumes\AddNewCostumeView.xaml.cs">
-      <DependentUpon>AddNewCostumeView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Editor\Costumes\ChangeCostumeView.xaml.cs">
       <DependentUpon>ChangeCostumeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Costumes\CostumeNameChooserView.xaml.cs">
       <DependentUpon>CostumeNameChooserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Costumes\CostumeSavingView.xaml.cs">
+      <DependentUpon>CostumeSavingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml.cs">
+      <DependentUpon>NewCostumeSourceSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\EditorLoadingView.xaml.cs">
       <DependentUpon>EditorLoadingView.xaml</DependentUpon>
@@ -398,6 +401,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Properties\DesignTimeResources.xaml" Condition="'$(DesignTime)'=='true' OR ('$(SolutionPath)'!='' AND Exists('$(SolutionPath)') AND '$(BuildingInsideVisualStudio)'!='true' AND '$(BuildingInsideExpressionBlend)'!='true')">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+      <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -410,10 +418,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Costumes\AddNewCostumeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\Editor\Costumes\ChangeCostumeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -421,6 +425,14 @@
     <Page Include="Views\Editor\Costumes\CostumeNameChooserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\CostumeSavingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Editor\EditorLoadingView.xaml">
       <SubType>Designer</SubType>
@@ -691,6 +703,10 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{A4E10BED-8F56-46A6-B78D-BFEF1363B195}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FormulaEvaluation\FormulaEvaluation.vcxproj">
+      <Project>{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}</Project>
+      <Name>FormulaEvaluation</Name>
     </ProjectReference>
     <ProjectReference Include="..\IDECommon\IDECommon.csproj">
       <Project>{73EDA75E-B249-40CB-A883-C2521A72B1C0}</Project>

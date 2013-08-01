@@ -6,11 +6,11 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
 {
-    public partial class AddNewCostumeView : PhoneApplicationPage
+    public partial class NewCostumeSourceSelectionView : PhoneApplicationPage
     {
         private readonly AddNewCostumeViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewCostumeViewModel>();
 
-        public AddNewCostumeView()
+        public NewCostumeSourceSelectionView()
         {
             InitializeComponent();
         }

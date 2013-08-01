@@ -27,7 +27,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
                     return;
                 }
                 _receivedSprite = value;
-                RaisePropertyChanged("ReceivedSprite");
+                RaisePropertyChanged(() => ReceivedSprite);
             }
         }
 
@@ -41,7 +41,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
                     return;
                 }
                 _spriteName = value;
-                RaisePropertyChanged("SpriteName");
+                RaisePropertyChanged(() => SpriteName);
                 SaveCommand.RaiseCanExecuteChanged();
             }
         }

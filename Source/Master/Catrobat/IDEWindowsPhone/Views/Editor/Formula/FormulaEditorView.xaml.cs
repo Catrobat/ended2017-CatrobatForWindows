@@ -9,6 +9,7 @@ using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Templates;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
+using FormulaEvaluation;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
 
@@ -44,6 +45,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Formula
                 ShowKeyErrorAnimation();
             FormulaViewer.FormulaChanged();
             _viewModel.FormulaChangedCommand.Execute(null);
+
+            var formulaEvaluator = new FormulaEvaluationRuntimeComponent();
+
+            int five = formulaEvaluator.Test(4);
+
+            
         }
 
         private void ObjectVariableSelected(ObjectVariable variable)

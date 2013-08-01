@@ -69,29 +69,34 @@
                 Template="{StaticResource ScreenshotButtonControlTemplate}"
                 Margin="0,0,0,0" Command="{Binding PlayCurrentProjectCommand}" Width="130" />
             </Grid>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-              <StackPanel Width="100" Margin="0 15 0 0">
+            <Grid HorizontalAlignment="Center" Width="340" Margin="0 15 0 0">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+              </Grid.ColumnDefinitions>
+              <StackPanel Grid.Column="0" Margin="0 0 0 0">
                 <codung4Fun:RoundButton Margin="0 0 0 -5" Command="{Binding CreateNewProjectCommand}"
                   ImageSource="/Content/Images/ApplicationBar/dark/appbar.add.rest.png"/>
                 <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
                   TextWrapping="Wrap" Text="{Binding Path=Main.ButtonCreate, 
                   Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
               </StackPanel>
-              <StackPanel Width="100" Margin="0 15 0 0">
+              <StackPanel Grid.Column="1" Margin="0 0 0 0">
                 <codung4Fun:RoundButton Margin="0 0 0 -5" Command="{Binding EditCurrentProjectCommand}"
                   ImageSource="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"/>
                 <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
                   TextWrapping="Wrap" Text="{Binding Path=Main.ButtonEdit, 
                   Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
               </StackPanel>
-              <StackPanel Width="100" Margin="0 15 0 0">
+              <StackPanel Grid.Column="2" Margin="0 0 0 0">
                 <codung4Fun:RoundButton Margin="0 0 0 -5" Command="{Binding UploadCurrentProjectCommand}"
                   ImageSource="/Content/Images/ApplicationBar/dark/appbar.upload.rest.png"/>
                 <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
                   TextWrapping="Wrap" Text="{Binding Path=Main.ButtonUpload, 
                   Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
               </StackPanel>
-            </StackPanel>
+            </Grid>
           </StackPanel>
         </Grid>
       </controls:PanoramaItem>
@@ -220,8 +225,6 @@
       <controls:PanoramaItem Name="PanoramaItemHelp" Header="{Binding Path=Main.HeaderAbout, Source={StaticResource LocalizedStrings}}">
         <StackPanel>
           <TextBlock FontSize="26" TextWrapping="Wrap" Text="{Binding Path=Main.AboutText, Source={StaticResource LocalizedStrings}}" Margin="10 0 0 15" />
-          <!-- StackPanel vs. Grid: 
-               StackPanel cannot limit width of TextBlock to wrap text into two lines -->
           <Grid>
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="130" />

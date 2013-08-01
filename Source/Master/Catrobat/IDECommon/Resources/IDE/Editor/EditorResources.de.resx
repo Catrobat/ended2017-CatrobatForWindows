@@ -294,8 +294,14 @@
   <data name="Recording" xml:space="preserve">
     <value>Aufnahme</value>
   </data>
+  <data name="SavingImage" xml:space="preserve">
+    <value>Bild wird gespeichert</value>
+  </data>
   <data name="Selected" xml:space="preserve">
     <value>ausgewählt</value>
+  </data>
+  <data name="SelectingObject" xml:space="preserve">
+    <value>lade objekt</value>
   </data>
   <data name="SoundName" xml:space="preserve">
     <value>Klangname</value>

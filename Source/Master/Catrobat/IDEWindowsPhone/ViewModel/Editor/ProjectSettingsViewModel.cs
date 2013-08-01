@@ -27,7 +27,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                     return;
                 }
                 _receivedProject = value;
-                RaisePropertyChanged("ReceivedProject");
+                RaisePropertyChanged(() => ReceivedProject);
             }
         }
 
@@ -41,7 +41,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                     return;
                 }
                 _projectName = value;
-                RaisePropertyChanged("ProjectName");
+                RaisePropertyChanged(() => ProjectName);
                 SaveCommand.RaiseCanExecuteChanged();
             }
         }

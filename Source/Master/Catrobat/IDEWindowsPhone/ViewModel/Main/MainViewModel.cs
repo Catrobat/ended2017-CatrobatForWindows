@@ -58,7 +58,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
                 _currentProject = value;
 
-                RaisePropertyChanged("CurrentProject");
+                RaisePropertyChanged(() => CurrentProject);
 
                 var projectChangedMessage = new GenericMessage<Project>(CatrobatContext.GetContext().CurrentProject);
                 Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage, ViewModelMessagingToken.SelectedProjectListener);

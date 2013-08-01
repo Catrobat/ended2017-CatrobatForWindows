@@ -56,7 +56,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                 }
                 _isRecording = value;
                 UpdateTextProperties();
-                RaisePropertyChanged("IsRecording");
+                RaisePropertyChanged(() => IsRecording);
             }
         }
 
@@ -70,7 +70,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                     return;
                 }
                 _isPlaying = value;
-                RaisePropertyChanged("IsPlaying");
+                RaisePropertyChanged(() => IsPlaying);
             }
         }
 
@@ -84,7 +84,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                     return;
                 }
                 _recordingTime = value;
-                RaisePropertyChanged("RecordingTime");
+                RaisePropertyChanged(() => RecordingTime);
             }
         }
 
@@ -98,7 +98,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                     return;
                 }
                 _playingTime = value;
-                RaisePropertyChanged("PlayingTime");
+                RaisePropertyChanged(() => PlayingTime);
             }
         }
 
@@ -112,22 +112,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                     return;
                 }
                 _recordingExists = value;
-                RaisePropertyChanged("RecordingExists");
+                RaisePropertyChanged(() => RecordingExists);
                 SaveCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        public string RecordButtonText
-        {
-            get { return _recordButtonText; }
-            set
-            {
-                if (value == _recordButtonText)
-                {
-                    return;
-                }
-                _recordButtonText = value;
-                RaisePropertyChanged("RecordButtonText");
             }
         }
 
@@ -141,7 +127,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                     return;
                 }
                 _recordButtonHeader = value;
-                RaisePropertyChanged("RecordButtonHeader");
+                RaisePropertyChanged(() => RecordButtonHeader);
+            }
+        }
+
+        public string RecordButtonText
+        {
+            get { return _recordButtonText; }
+            set
+            {
+                if (value == _recordButtonText)
+                {
+                    return;
+                }
+                _recordButtonText = value;
+                RaisePropertyChanged(() => RecordButtonText);
             }
         }
 
@@ -155,7 +155,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                     return;
                 }
                 _resetButtonHeader = value;
-                RaisePropertyChanged("ResetButtonHeader");
+                RaisePropertyChanged(() => ResetButtonHeader);
             }
         }
 
@@ -169,7 +169,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                     return;
                 }
                 _resetButtonText = value;
-                RaisePropertyChanged("ResetButtonText");
+                RaisePropertyChanged(() => ResetButtonText);
             }
         }
 
@@ -183,7 +183,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                     return;
                 }
                 _soundName = value;
-                RaisePropertyChanged("SoundName");
+                RaisePropertyChanged(() => SoundName);
                 SaveNameChosenCommand.RaiseCanExecuteChanged();
             }
         }

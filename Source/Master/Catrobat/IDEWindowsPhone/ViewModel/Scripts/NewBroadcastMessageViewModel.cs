@@ -28,7 +28,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
                 {
                     _broadcastMessage = value;
 
-                    RaisePropertyChanged("BroadcastMessage");
+                    RaisePropertyChanged(() => BroadcastMessage);
                     SaveCommand.RaiseCanExecuteChanged();
                 }
             }

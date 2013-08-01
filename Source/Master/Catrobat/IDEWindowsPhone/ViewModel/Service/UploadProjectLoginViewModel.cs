@@ -49,7 +49,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
                     if (PropertyChanged != null)
                     {
-                        PropertyChanged(this, new PropertyChangedEventArgs("Username"));
+                        RaisePropertyChanged(() => Username);
                     }
                 }
             }
@@ -66,7 +66,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
                     if (PropertyChanged != null)
                     {
-                        PropertyChanged(this, new PropertyChangedEventArgs("Password"));
+                        RaisePropertyChanged(() => Password);
                     }
                 }
             }
@@ -83,7 +83,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
                     if (PropertyChanged != null)
                     {
-                        PropertyChanged(this, new PropertyChangedEventArgs("Email"));
+                        RaisePropertyChanged(() => Email);
                     }
                 }
             }

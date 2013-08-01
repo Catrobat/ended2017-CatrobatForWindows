@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
@@ -46,11 +47,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         {
             if (propertyChangedEventArgs.PropertyName == "SelectedSprite")
                 ReorderListBoxSprites.SelectedItem = _viewModel.SelectedSprite;
-        }
-
-        private void RegisterCollectionsChangedHandlers()
-        {
-            
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)
@@ -107,86 +103,41 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
         private void reorderListBoxSprites_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var reorderableListbox = (sender as ReorderListBox);
-            var selectedSprite = reorderableListbox.SelectedItem as Sprite;
+            _viewModel.IsSpriteSelecting = true;
 
-            if (reorderableListbox.IsDraging)
+            var task = Task.Run(() =>
             {
-                _isSpriteDragging = true;
-                reorderableListbox.IsDraging = false;
-            }
-            else
-            {
-                if (_isSpriteDragging)
+                Dispatcher.BeginInvoke(() =>
                 {
-                    _isSpriteDragging = false;
-                }
-                else
-                {
-                    if (selectedSprite != _viewModel.SelectedSprite)
-                        _viewModel.SelectedSprite = selectedSprite;
+                    var reorderableListbox = (sender as ReorderListBox);
+                    if (reorderableListbox != null)
+                    {
+                        var selectedSprite = reorderableListbox.SelectedItem as Sprite;
 
-                    LockPivotIfNoSpriteSelected();
-                }
-            }
-        }
+                        if (reorderableListbox.IsDraging)
+                        {
+                            _isSpriteDragging = true;
+                            reorderableListbox.IsDraging = false;
+                        }
+                        else
+                        {
+                            if (_isSpriteDragging)
+                            {
+                                _isSpriteDragging = false;
+                            }
+                            else
+                            {
+                                if (selectedSprite != null && selectedSprite != _viewModel.SelectedSprite)
+                                    _viewModel.SelectedSprite = selectedSprite;
 
+                                LockPivotIfNoSpriteSelected();
+                            }
+                        }
+                    }
 
-        private void reorderListBoxScriptBricks_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var list = new ObservableCollection<DataObject>();
-            var listBox = sender as ListBox;
-
-            // ReSharper disable once PossibleNullReferenceException
-            foreach (var item in listBox.SelectedItems)
-            {
-                // ReSharper disable once AssignNullToNotNullAttribute
-                list.Add(item as Script);
-            }
-
-            _viewModel.SelectedScripts = list;
-        }
-
-        private void reorderListBoxCostumes_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var list = new ObservableCollection<Costume>();
-            var listBox = sender as ListBox;
-
-            // ReSharper disable once PossibleNullReferenceException
-            foreach (var item in listBox.SelectedItems)
-            {
-                // ReSharper disable once AssignNullToNotNullAttribute
-                list.Add(item as Costume);
-            }
-
-            _viewModel.SelectedCostumes = list;
-        }
-
-        private void reorderListBoxSounds_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var list = new ObservableCollection<Sound>();
-            var listBox = sender as ListBox;
-
-            // ReSharper disable once PossibleNullReferenceException
-            foreach (var item in listBox.SelectedItems)
-            {
-                // ReSharper disable once AssignNullToNotNullAttribute
-                list.Add(item as Sound);
-            }
-
-            _viewModel.SelectedSounds = list;
-        }
-
-
-        private void buttonSoundPlay_Click(object sender, RoutedEventArgs e)
-        {
-            //PlayButton btnPlay = sender as PlayButton;
-
-            //var parameter = new List<Object>();
-            //parameter.Add(btnPlay.State);
-            //parameter.Add(btnPlay.DataContext as Sound);
-
-            //_viewModel.PlaySoundCommand.Execute(parameter);
+                    _viewModel.IsSpriteSelecting = false;
+                });
+            });
         }
     }
 }

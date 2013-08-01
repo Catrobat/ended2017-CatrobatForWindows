@@ -8,10 +8,12 @@
   xmlns:reorderableListbox="clr-namespace:Catrobat.IDEWindowsPhone.Controls.ReorderableListbox"
   xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
   xmlns:buttons="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
-  xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters" mc:Ignorable="d"
+  xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters" 
+  mc:Ignorable="d"
   xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
   xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
   xmlns:appBar="clr-namespace:Catrobat.IDEWindowsPhone.Controls.AppBar"
+  xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
   d:DesignWidth="480"
   d:DesignHeight="768"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -27,14 +29,16 @@
   </phone:PhoneApplicationPage.Resources>
 
   <Grid x:Name="LayoutRoot">
-    <Grid.RowDefinitions>
-      <RowDefinition/>
-      <RowDefinition Height="Auto"/>
-    </Grid.RowDefinitions>
-    <controls:Pivot Name="PivotMain" Title="{Binding CurrentProject.ProjectName}" SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}">
-      <controls:PivotItem Name="PivotSprites" Header="{Binding Path=Editor.PivotObjects, Source={StaticResource LocalizedStrings}}">
-        <!--Pivot item sprites-->
-        <reorderableListbox:ReorderListBox
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <controls:Pivot Name="PivotMain" Title="{Binding CurrentProject.ProjectName}" SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}">
+        <controls:PivotItem Name="PivotSprites" Header="{Binding Path=Editor.PivotObjects, Source={StaticResource LocalizedStrings}}">
+          <!--Pivot item sprites-->
+          <reorderableListbox:ReorderListBox
           x:Name="ReorderListBoxSprites"
           Margin="0 -25 0 0"
           SelectionMode="Single"
@@ -44,60 +48,60 @@
           SelectionChanged="reorderListBoxSprites_SelectionChanged"
           ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleNormal}"
           Foreground="White" >
-          <reorderableListbox:ReorderListBox.ItemTemplate>
-            <DataTemplate>
-              <Grid Background="{StaticResource ObjectsBrush}" Margin="0 5 0 5" Height="90">
-                <Grid.RowDefinitions>
-                  <RowDefinition/>
-                  <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="Auto" />
-                  </Grid.ColumnDefinitions>
-
-                  <StackPanel Grid.Column="0"  Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock VerticalAlignment="Center" FontSize="28" Margin="5 5 5 5" Text="{Binding Name}" />
-
-                    <StackPanel Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
-                      <TextBlock FontSize="16" Margin="0" Text="{Binding Scripts.Scripts.Count}" />
-                      <TextBlock FontSize="16" Margin="0" Text="/" />
-                      <TextBlock FontSize="16" Margin="0" Text="{Binding Costumes.Costumes.Count}" />
-                      <TextBlock FontSize="16" Margin="0" Text="/" />
-                      <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Sounds.Count}" />
-                    </StackPanel>
-                  </StackPanel>
-                </Grid>
-                <Grid Grid.Row="1">
+            <reorderableListbox:ReorderListBox.ItemTemplate>
+              <DataTemplate>
+                <Grid Background="{StaticResource ObjectsBrush}" Margin="0 5 0 5" Height="90">
                   <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
                     <RowDefinition/>
                   </Grid.RowDefinitions>
-                  <Grid Grid.Row="1" Margin="0 0 0 5" HorizontalAlignment="Right" >
+                  <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="Auto"/>
-                      <ColumnDefinition Width="Auto"/>
-                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition Width="3*" />
+                      <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes.Costumes[0].Image}" />
-                    <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes.Costumes[1].Image}" />
-                    <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes.Costumes[2].Image}" />
+
+                    <StackPanel Grid.Column="0"  Orientation="Horizontal" VerticalAlignment="Center">
+                      <TextBlock VerticalAlignment="Center" FontSize="28" Margin="5 5 5 5" Text="{Binding Name}" />
+
+                      <StackPanel Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock FontSize="16" Margin="0" Text="{Binding Scripts.Scripts.Count}" />
+                        <TextBlock FontSize="16" Margin="0" Text="/" />
+                        <TextBlock FontSize="16" Margin="0" Text="{Binding Costumes.Costumes.Count}" />
+                        <TextBlock FontSize="16" Margin="0" Text="/" />
+                        <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Sounds.Count}" />
+                      </StackPanel>
+                    </StackPanel>
                   </Grid>
+                  <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1" Margin="0 0 0 5" HorizontalAlignment="Right" >
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                      </Grid.ColumnDefinitions>
+                      <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Source="{Binding Costumes.Costumes[0].Image}" />
+                      <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Source="{Binding Costumes.Costumes[1].Image}" />
+                      <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Source="{Binding Costumes.Costumes[2].Image}" />
+                    </Grid>
 
+                  </Grid>
                 </Grid>
-              </Grid>
-            </DataTemplate>
-          </reorderableListbox:ReorderListBox.ItemTemplate>
-        </reorderableListbox:ReorderListBox>
-      </controls:PivotItem>
+              </DataTemplate>
+            </reorderableListbox:ReorderListBox.ItemTemplate>
+          </reorderableListbox:ReorderListBox>
+        </controls:PivotItem>
 
-      <!--Pivot item scripts-->
-      <controls:PivotItem Name="PivotScripts" Header="{Binding Path=Editor.PivotActions, Source={StaticResource LocalizedStrings}}">
-        <reorderableListbox:ReorderListBox
+        <!--Pivot item scripts-->
+        <controls:PivotItem Name="PivotScripts" Header="{Binding Path=Editor.PivotActions, Source={StaticResource LocalizedStrings}}">
+          <reorderableListbox:ReorderListBox
           x:Name="ReorderListBoxScriptBricks"
           Margin="0 -25 0 0"
           SelectionMode="Multiple"
@@ -110,12 +114,12 @@
           Loaded="reorderListBoxScriptBricks_Loaded"
           ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
           Foreground="White" />
-      </controls:PivotItem>
+        </controls:PivotItem>
 
-      <!--Pivot item costume-->
-      <controls:PivotItem Name="PivotCostumes" 
+        <!--Pivot item costume-->
+        <controls:PivotItem Name="PivotCostumes" 
           Header="{Binding Path=Editor.PivotCostumes, Source={StaticResource LocalizedStrings}}">
-        <reorderableListbox:ReorderListBox
+          <reorderableListbox:ReorderListBox
           x:Name="ReorderListBoxCostumes"
           Margin="0 -25 0 0"
           SelectionMode="Multiple"
@@ -125,28 +129,28 @@
           SmartSelectedItems="{Binding SelectedCostumes}"
           ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleNormal}"
           Foreground="White" >
-          <reorderableListbox:ReorderListBox.ItemTemplate>
-            <DataTemplate>
-              <Grid Background="{StaticResource CostumesBrush}" Margin="0 5 0 5" Height="90">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="1*" />
-                  <ColumnDefinition Width="3*" />
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="{Binding Image}" 
+            <reorderableListbox:ReorderListBox.ItemTemplate>
+              <DataTemplate>
+                <Grid Background="{StaticResource CostumesBrush}" Margin="0 5 0 5" Height="90">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="3*" />
+                  </Grid.ColumnDefinitions>
+                  <Image Grid.Column="0" Source="{Binding Image}" 
                        MaxWidth="120" MaxHeight="120" Margin="10 10 5 10" VerticalAlignment="Stretch" />
-                <Grid Grid.Column="1" Margin="5">
-                  <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
+                  <Grid Grid.Column="1" Margin="5">
+                    <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
                              VerticalAlignment="Center" />
+                  </Grid>
                 </Grid>
-              </Grid>
-            </DataTemplate>
-          </reorderableListbox:ReorderListBox.ItemTemplate>
-        </reorderableListbox:ReorderListBox>
-      </controls:PivotItem>
+              </DataTemplate>
+            </reorderableListbox:ReorderListBox.ItemTemplate>
+          </reorderableListbox:ReorderListBox>
+        </controls:PivotItem>
 
-      <!--Pivot item sounds-->
-      <controls:PivotItem Name="PivotSounds" Header="{Binding Path=Editor.PivotSounds, Source={StaticResource LocalizedStrings}}">
-        <reorderableListbox:ReorderListBox
+        <!--Pivot item sounds-->
+        <controls:PivotItem Name="PivotSounds" Header="{Binding Path=Editor.PivotSounds, Source={StaticResource LocalizedStrings}}">
+          <reorderableListbox:ReorderListBox
           x:Name="ReorderListBoxSounds"
           Margin="0 -25 0 0"
           SelectionMode="Multiple"
@@ -156,26 +160,28 @@
           SmartSelectedItems="{Binding SelectedSounds}"
           ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleNormal}"
           Foreground="White">
-          <reorderableListbox:ReorderListBox.ItemTemplate>
-            <DataTemplate>
-              <Grid Background="{StaticResource SoundsBrush}" Margin="0 5 0 5">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="1*" />
-                  <ColumnDefinition Width="3*" />
-                </Grid.ColumnDefinitions>
-                <buttons:PlayPauseButton Group="{StaticResource PlayPauseButtonGroupSounds}" RoundBorderThickness="6" Margin="0 12 0 12"
-                                         Grid.Column="0" Height="80" Width="80" Click="buttonSoundPlay_Click" />
-                <Grid Grid.Column="1" Margin="5">
-                  <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" VerticalAlignment="Center" />
+            <reorderableListbox:ReorderListBox.ItemTemplate>
+              <DataTemplate>
+                <Grid Background="{StaticResource SoundsBrush}" Margin="0 5 0 5">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="3*" />
+                  </Grid.ColumnDefinitions>
+                  <buttons:PlayPauseButton Group="{StaticResource PlayPauseButtonGroupSounds}" 
+                                           RoundBorderThickness="6" Margin="0 12 0 12"
+                                         Grid.Column="0" Height="80" Width="80" />
+                  <Grid Grid.Column="1" Margin="5">
+                    <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
+                               VerticalAlignment="Center" />
+                  </Grid>
                 </Grid>
-              </Grid>
-            </DataTemplate>
-          </reorderableListbox:ReorderListBox.ItemTemplate>
-        </reorderableListbox:ReorderListBox>
-      </controls:PivotItem>
-    </controls:Pivot>
+              </DataTemplate>
+            </reorderableListbox:ReorderListBox.ItemTemplate>
+          </reorderableListbox:ReorderListBox>
+        </controls:PivotItem>
+      </controls:Pivot>
 
-    <appBar:EditorAppBar Grid.Row="1"
+      <appBar:EditorAppBar Grid.Row="1"
       Visibility="{Binding IsVisibleObjects, Converter={StaticResource BoolVisibilityConverter}}" 
       VerticalAlignment="Bottom"
       TargetType="Object"
@@ -186,7 +192,7 @@
       PlayCommand="{Binding StartPlayerCommand}"
       NewCommand="{Binding AddNewSpriteCommand}"
       NumberOfSelectedItems="{Binding SelectedSprite, Converter={StaticResource NullIntCountConverter}}"/>
-    <appBar:EditorAppBar Grid.Row="1"
+      <appBar:EditorAppBar Grid.Row="1"
       Visibility="{Binding IsVisibleScripts, Converter={StaticResource BoolVisibilityConverter}}" 
       VerticalAlignment="Bottom"
       TargetType="Script"
@@ -196,7 +202,7 @@
       PlayCommand="{Binding StartPlayerCommand}"
       NewCommand="{Binding AddNewScriptBrickCommand}"
       NumberOfSelectedItems="{Binding SelectedScripts.Count}"/>
-    <appBar:EditorAppBar Grid.Row="1"
+      <appBar:EditorAppBar Grid.Row="1"
       Visibility="{Binding IsVisibleCostumes, Converter={StaticResource BoolVisibilityConverter}}" 
       VerticalAlignment="Bottom"
       TargetType="Costume"
@@ -207,7 +213,7 @@
       PlayCommand="{Binding StartPlayerCommand}"
       NewCommand="{Binding AddNewCostumeCommand}"
       NumberOfSelectedItems="{Binding SelectedCostumes.Count}"/>
-    <appBar:EditorAppBar Grid.Row="1"
+      <appBar:EditorAppBar Grid.Row="1"
       Visibility="{Binding IsVisibleSounds, Converter={StaticResource BoolVisibilityConverter}}" 
       VerticalAlignment="Bottom"
       TargetType="Sound"
@@ -217,5 +223,16 @@
       PlayCommand="{Binding StartPlayerCommand}"
       NewCommand="{Binding AddNewSoundCommand}"
       NumberOfSelectedItems="{Binding SelectedSounds.Count}"/>
+
+
+    </Grid>
+    <coding4Fun:ProgressOverlay Visibility="{Binding IsSpriteSelecting, Converter={StaticResource BoolVisibilityConverter}}">
+      <coding4Fun:ProgressOverlay.Content>
+        <StackPanel HorizontalAlignment="Stretch">
+          <ProgressBar IsIndeterminate="{Binding IsSpriteSelecting}"/>
+          <TextBlock TextAlignment="Center" Text="{Binding Path=Editor.SelectingObject, Source={StaticResource LocalizedStrings}}"></TextBlock>
+        </StackPanel>
+      </coding4Fun:ProgressOverlay.Content>
+    </coding4Fun:ProgressOverlay>
   </Grid>
 </phone:PhoneApplicationPage>

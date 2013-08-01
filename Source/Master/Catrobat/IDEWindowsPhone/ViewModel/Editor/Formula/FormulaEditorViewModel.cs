@@ -42,7 +42,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             set
             {
                 _formulaButton = value;
-                RaisePropertyChanged("FormulaButton");
+                RaisePropertyChanged(() => FormulaButton);
             }
         }
 
@@ -52,7 +52,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             set
             {
                 _selectedProject = value;
-                RaisePropertyChanged("SelectedProject");
+                RaisePropertyChanged(() => SelectedProject);
 
                 if (_selectedProject == null) return;
 
@@ -66,7 +66,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             set
             {
                 _selectedSprite = value;
-                RaisePropertyChanged("SelectedSprite");
+                RaisePropertyChanged(() => SelectedSprite);
 
                 if (_selectedSprite == null) return;
 
@@ -85,7 +85,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             set
             {
                 _formula = value;
-                RaisePropertyChanged("Formula");
+                RaisePropertyChanged(() => Formula);
             }
         }
 
@@ -95,7 +95,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             set
             {
                 _localVariables = value;
-                RaisePropertyChanged("LocalVariables");
+                RaisePropertyChanged(() => LocalVariables);
             }
         }
 
@@ -105,7 +105,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             set
             {
                 _globalVariables = value;
-                RaisePropertyChanged("GlobalVariables");
+                RaisePropertyChanged(() => GlobalVariables);
             }
         }
 

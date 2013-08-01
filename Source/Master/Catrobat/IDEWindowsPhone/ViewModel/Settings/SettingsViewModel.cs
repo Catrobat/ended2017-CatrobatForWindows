@@ -43,7 +43,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
                 }
 
                 _memoryMonitor.ShowVisualization = value;
-                RaisePropertyChanged("ShowMemoryMonitor");
+                RaisePropertyChanged(() => ShowMemoryMonitor);
             }
         }
 
@@ -73,8 +73,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
                 Thread.CurrentThread.CurrentUICulture = value;
 
                 ((LocalizedStrings) Application.Current.Resources["LocalizedStrings"]).Reset();
-                RaisePropertyChanged("CurrentCulture");
-                RaisePropertyChanged("CurrentCultureName");
+                RaisePropertyChanged(() => CurrentCulture);
             }
         }
 
