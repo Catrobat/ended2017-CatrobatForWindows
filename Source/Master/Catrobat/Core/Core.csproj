@@ -63,6 +63,7 @@
     <Compile Include="LocalSettings.cs" />
     <Compile Include="Misc\JSON\JSONClassDeserializer.cs" />
     <Compile Include="Misc\JSON\JSONStatusResponse.cs" />
+    <Compile Include="Misc\PropertyNameHelper.cs" />
     <Compile Include="Misc\ServerCommunication\IServerCommunication.cs" />
     <Compile Include="Misc\ServerCommunication\ServerCommunication.cs" />
     <Compile Include="Misc\UtilToken.cs" />

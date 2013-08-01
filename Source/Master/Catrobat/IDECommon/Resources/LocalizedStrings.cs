@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using Catrobat.Core.Misc;
 using Catrobat.IDECommon.Resources.IDE.Bricks;
 using Catrobat.IDECommon.Resources.IDE.Editor;
 using Catrobat.IDECommon.Resources.IDE.Formula;
@@ -43,26 +44,8 @@ namespace Catrobat.IDECommon.Resources
     {
       if (PropertyChanged != null)
       {
-        PropertyChanged(this, new PropertyChangedEventArgs(GetPropertyNameFromExpression(selector)));
+          PropertyChanged(this, new PropertyChangedEventArgs(PropertyNameHelper.GetPropertyNameFromExpression(selector)));
       }
-    }
-
-    public static string GetPropertyNameFromExpression<T>(Expression<Func<T>> property)
-    {
-      var lambda = (LambdaExpression)property;
-      MemberExpression memberExpression;
-
-      if (lambda.Body is UnaryExpression)
-      {
-        var unaryExpression = (UnaryExpression)lambda.Body;
-        memberExpression = (MemberExpression)unaryExpression.Operand;
-      }
-      else
-      {
-        memberExpression = (MemberExpression)lambda.Body;
-      }
-
-      return memberExpression.Member.Name;
     }
     #endregion
   }
