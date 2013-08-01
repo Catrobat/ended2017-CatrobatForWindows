@@ -14,6 +14,7 @@
   xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
   xmlns:appBar="clr-namespace:Catrobat.IDEWindowsPhone.Controls.AppBar"
   xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+  xmlns:command="http://www.galasoft.ch/mvvmlight"
   d:DesignWidth="480"
   d:DesignHeight="768"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -55,6 +56,13 @@
                     <RowDefinition/>
                     <RowDefinition/>
                   </Grid.RowDefinitions>
+                  <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Tap">
+                      <command:EventToCommand Command="{Binding Editor.SelectedSpriteChangedCommand, Mode=OneWay, Source={StaticResource Locator}}"
+                                                          CommandParameter="{Binding}" />
+                    </i:EventTrigger>
+                  </i:Interaction.Triggers>
+
                   <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                       <ColumnDefinition Width="3*" />

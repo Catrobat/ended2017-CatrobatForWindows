@@ -556,6 +556,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
             _dragScrollDelta = 0;
             _dropTargetIndex = -1;
             ClearDropTarget();
+            _isDraging = false;
         }
 
         private void AddMarginToLastItem()

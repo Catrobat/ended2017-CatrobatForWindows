@@ -1,4 +1,7 @@
 ﻿using System.Collections.Specialized;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Threading;
 using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
@@ -80,10 +83,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 if (_scriptBricks != null && _scriptBricks.Count == 0 && _listBoxViewPort == null)
                     ListBoxViewPort = new ListBoxViewPort(0, 0);
 
-                _scriptBricks.Update(_selectedSprite);
+                if (_scriptBricks != null)
+                {
+                    _scriptBricks.Update(_selectedSprite);
 
-                if (_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 && ListBoxViewPort.LastVisibleIndex == 0)
-                    ListBoxViewPort = new ListBoxViewPort(1, 2);
+                    if (_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 && ListBoxViewPort.LastVisibleIndex == 0)
+                        ListBoxViewPort = new ListBoxViewPort(1, 2);
+                }
 
                 RaisePropertyChanged(() => SelectedSprite);
                 RaisePropertyChanged(() => Sounds);
@@ -253,6 +259,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         # endregion
 
         #region Commands
+
+
+        public RelayCommand<Sprite> SelectedSpriteChangedCommand
+        {
+            get;
+            private set;
+        }
 
         public RelayCommand AddNewSpriteCommand
         {
@@ -495,6 +508,18 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         #endregion
 
         #region Actions
+
+
+        private void SelectedSpriteChangedAction(Sprite newSelectedSprite)
+        {
+            var task = Task.Run(() =>
+            {
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    SelectedSprite = newSelectedSprite;
+                });
+            });
+        }
 
         private void AddNewScriptBrickAction()
         {
@@ -848,6 +873,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             SelectedCostumes.CollectionChanged += SelectedCostumesOnCollectionChanged;
             SelectedSounds = new ObservableCollection<Sound>();
             SelectedSounds.CollectionChanged += SelectedSoundsOnCollectionChanged;
+
+            SelectedSpriteChangedCommand = new RelayCommand<Sprite>(SelectedSpriteChangedAction);
 
             AddBroadcastMessageCommand = new RelayCommand<DataObject>(AddBroadcastMessageAction);
 
