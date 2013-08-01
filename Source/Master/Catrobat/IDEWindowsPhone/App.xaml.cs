@@ -8,6 +8,7 @@ using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Storage;
+using Catrobat.IDECommon.Resources.IDE.Main;
 using Catrobat.IDEWindowsPhone;
 using Catrobat.IDEWindowsPhone.Content.Resources;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -261,7 +262,7 @@ namespace IDEWindowsPhone
                 //
                 // If a compiler error is hit then ResourceLanguage is missing from
                 // the resource file.
-                RootFrame.Language = XmlLanguage.GetLanguage(AppResources.ResourceLanguage);
+                RootFrame.Language = XmlLanguage.GetLanguage(MainResources.ResourceLanguage);
 
                 // Set the FlowDirection of all elements under the root frame based
                 // on the ResourceFlowDirection resource string for each
@@ -269,7 +270,7 @@ namespace IDEWindowsPhone
                 //
                 // If a compiler error is hit then ResourceFlowDirection is missing from
                 // the resource file.
-                var flow = (FlowDirection) Enum.Parse(typeof (FlowDirection), AppResources.ResourceFlowDirection);
+                var flow = (FlowDirection)Enum.Parse(typeof(FlowDirection), "LeftToRight");
                 RootFrame.FlowDirection = flow;
             }
             catch

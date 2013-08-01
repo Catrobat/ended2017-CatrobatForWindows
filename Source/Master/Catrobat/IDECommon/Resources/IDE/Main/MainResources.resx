@@ -257,6 +257,9 @@ The program is licensed under the MS-RL Lizenz.</value>
   <data name="ProjectNotValid" xml:space="preserve">
     <value>project not valid</value>
   </data>
+  <data name="ResourceLanguage" xml:space="preserve">
+    <value>en-US</value>
+  </data>
   <data name="SettingsBricks" xml:space="preserve">
     <value>enable/disable bricks</value>
   </data>

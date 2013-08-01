@@ -257,6 +257,9 @@ Dieses Programm steht unter der MS-RL Lizenz.</value>
   <data name="ProjectNotValid" xml:space="preserve">
     <value>Projekt ist ungültig</value>
   </data>
+  <data name="ResourceLanguage" xml:space="preserve">
+    <value>de-DE</value>
+  </data>
   <data name="SettingsBricks" xml:space="preserve">
     <value>Bausteine Ein/Ausschalten</value>
   </data>

@@ -478,6 +478,15 @@ namespace Catrobat.IDECommon.Resources.IDE.Main {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to en-US.
+        /// </summary>
+        public static string ResourceLanguage {
+            get {
+                return ResourceManager.GetString("ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to enable/disable bricks.
         /// </summary>
         public static string SettingsBricks {
