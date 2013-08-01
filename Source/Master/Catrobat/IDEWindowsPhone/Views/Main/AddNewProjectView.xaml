@@ -46,7 +46,5 @@
         </abu:SwitchAppBarAction>
       </abu:StateChangedTrigger>
     </i:Interaction.Triggers>
-
   </Grid>
-
 </phone:PhoneApplicationPage>

@@ -248,8 +248,14 @@ Dieses Programm steht unter der MS-RL Lizenz.</value>
   <data name="OnlineProjectViews" xml:space="preserve">
     <value>{0} mal angesehen</value>
   </data>
+  <data name="ProjectDoesNotExist" xml:space="preserve">
+    <value>Projekt existiert nicht</value>
+  </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Projektname</value>
+  </data>
+  <data name="ProjectNotValid" xml:space="preserve">
+    <value>Projekt ist ungültig</value>
   </data>
   <data name="SettingsBricks" xml:space="preserve">
     <value>Bausteine Ein/Ausschalten</value>
@@ -304,5 +310,8 @@ Dieses Programm steht unter der MS-RL Lizenz.</value>
   </data>
   <data name="UploadQueueMessage" xml:space="preserve">
     <value>Dein Projekt wird hochgeladen. Das kann eine Weile dauern, aber wir sagen dir Bescheid, wenn es oben ist!</value>
+  </data>
+  <data name="VersionIsNotSupported" xml:space="preserve">
+    <value>Die Version des Projekts wird von dieser Programmversion nicht unterstützt </value>
   </data>
 </root>

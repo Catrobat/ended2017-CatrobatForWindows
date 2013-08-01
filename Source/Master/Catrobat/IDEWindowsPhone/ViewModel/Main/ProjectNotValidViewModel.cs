@@ -1,10 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using Catrobat.IDECommon.Resources.IDE.Main;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using GalaSoft.MvvmLight;
@@ -13,14 +15,13 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 {
-    public enum PlayerLaunchingError {ProjectDowsNotExist, ProjectNotValid, VersionIsNotSupported}
+    public enum PlayerLaunchingError {ProjectDosNotExist, ProjectNotValid, VersionIsNotSupported}
 
     public class ProjectNotValidViewModel : ViewModelBase, INotifyPropertyChanged
     {
         #region private Members
 
         private PlayerLaunchingError _error;
-
 
         #endregion
 
@@ -33,6 +34,25 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             {
                 _error = value;
                 RaisePropertyChanged(() => Error);
+                RaisePropertyChanged(() => ErrorMessage);
+            }
+        }
+
+        public string ErrorMessage
+        {
+            get
+            {
+                switch (Error)
+                {
+                    case PlayerLaunchingError.ProjectDosNotExist:
+                        return MainResources.ProjectDoesNotExist;
+                    case PlayerLaunchingError.ProjectNotValid:
+                        return MainResources.ProjectNotValid;
+                    case PlayerLaunchingError.VersionIsNotSupported:
+                        return MainResources.VersionIsNotSupported;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
         }
 
@@ -40,6 +60,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         #region Commands
 
+        public RelayCommand FinishedCommand { get; private set; }
+
+        private void FinishedAction()
+        {
+            Navigation.NavigateTo(typeof(MainView));
+            Navigation.RemoveBackEntry();
+        }
 
         #endregion
 
@@ -55,7 +82,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public ProjectNotValidViewModel()
         {
-
+            FinishedCommand = new RelayCommand(FinishedAction);
         }
     }
 }

@@ -248,8 +248,14 @@ The program is licensed under the MS-RL Lizenz.</value>
   <data name="OnlineProjectViews" xml:space="preserve">
     <value>{0} views</value>
   </data>
+  <data name="ProjectDoesNotExist" xml:space="preserve">
+    <value>project does not exist</value>
+  </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Project name</value>
+  </data>
+  <data name="ProjectNotValid" xml:space="preserve">
+    <value>project not valid</value>
   </data>
   <data name="SettingsBricks" xml:space="preserve">
     <value>enable/disable bricks</value>
@@ -307,5 +313,8 @@ The program is licensed under the MS-RL Lizenz.</value>
   </data>
   <data name="UploadQueueMessage" xml:space="preserve">
     <value>Your project is being uploaded. This might take a little while, but we'll tell you when it's finished!</value>
+  </data>
+  <data name="VersionIsNotSupported" xml:space="preserve">
+    <value>project version is not supported</value>
   </data>
 </root>

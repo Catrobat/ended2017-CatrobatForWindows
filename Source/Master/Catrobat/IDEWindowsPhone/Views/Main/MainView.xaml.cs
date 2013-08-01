@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Navigation;
 using Catrobat.Core.Objects;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
@@ -42,6 +43,13 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
                             msg.ProcessCallback(result);
                         }
                     }));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if(Navigation.CanGoBack)
+                Navigation.RemoveBackEntry();
+            base.OnNavigatedTo(e);
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)

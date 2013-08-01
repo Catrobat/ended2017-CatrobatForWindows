@@ -451,11 +451,29 @@ namespace Catrobat.IDECommon.Resources.IDE.Main {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to project does not exist.
+        /// </summary>
+        public static string ProjectDoesNotExist {
+            get {
+                return ResourceManager.GetString("ProjectDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Project name.
         /// </summary>
         public static string ProjectName {
             get {
                 return ResourceManager.GetString("ProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to project not valid.
+        /// </summary>
+        public static string ProjectNotValid {
+            get {
+                return ResourceManager.GetString("ProjectNotValid", resourceCulture);
             }
         }
         
@@ -627,6 +645,15 @@ namespace Catrobat.IDECommon.Resources.IDE.Main {
         public static string UploadQueueMessage {
             get {
                 return ResourceManager.GetString("UploadQueueMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to project version is not supported.
+        /// </summary>
+        public static string VersionIsNotSupported {
+            get {
+                return ResourceManager.GetString("VersionIsNotSupported", resourceCulture);
             }
         }
     }
