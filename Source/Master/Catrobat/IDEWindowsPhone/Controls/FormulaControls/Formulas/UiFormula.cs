@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Catrobat.Core.Objects.Formulas;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
@@ -213,7 +214,6 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
                 formulaInformation = new SelectedFormulaInformation
                 {
                     SelectedFormula = TreeItem,
-                    SelectedUiFormula = this,
                     SelectedFormulaParent = parent,
                     FormulaRoot = FormulaRoot
                 };
@@ -222,7 +222,6 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
             {
                 formulaInformation = new SelectedFormulaInformation
                 {
-                    SelectedUiFormula = null,
                     SelectedFormula = null,
                     SelectedFormulaParent = null,
                     FormulaRoot = FormulaRoot

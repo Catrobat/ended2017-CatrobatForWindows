@@ -7,40 +7,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.IDECommon.Formula.Editor;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 {
-    public enum FormulaEditorKey
-    {
-        Number0, Number1, Number2, Number3, Number4, Number5, 
-        Number6, Number7, Number8, Number9, NumberDot,
-        KeyEquals, KeyDelete, KeyUndo, KeyRedo, 
-        KeyOpenBrecket, KeyClosedBrecket, KeyPlus, 
-        KeyMinus, KeyMult, KeyDivide, 
-
-        KeyLogicEqual, KeyLogicNotEqual, KeyLogicSmaller, 
-        KeyLogicSmallerEqual, KeyLogicGreater, KeyLogicGreaterEqual, 
-        KeyLogicAnd, KeyLogicOr, KeyLogicNot, KeyLogicTrue, KeyLogicFalse,
-
-        KeyMathSin, KeyMathCos, KeyMathTan, KeyMathArcSin, KeyMathArcCos, KeyMathArcTan,
-        KeyMathExp, KeyMathLn, KeyMathLog, KeyMathAbs, KeyMathRound, KeyMathMod,
-        KeyMathMin, KeyMathMax, KeyMathSqrt, KeyMathPi, KeyMathRandom
-    }
-
-    public enum ObjectVariable
-    {
-        PositionX, PositionY, Transparency, Brightness, 
-        Size, Direction, Layer
-    }
-
-    public enum SensorVariable
-    {
-        AccelerationX, AccelerationY, AccelerationZ, 
-        CompassDirection, InclinationX, InclinationY
-    }
-
     public delegate void KeyPressed(FormulaEditorKey key);
     public delegate void ObjectVariableSelected(ObjectVariable variable);
     public delegate void SensorVariableSelected(SensorVariable variable);

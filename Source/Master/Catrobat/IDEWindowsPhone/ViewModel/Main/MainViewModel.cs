@@ -329,10 +329,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public MainViewModel()
         {
-            // Commands
 
-
-            if (true)
+            if (IsInDesignMode)
             {
                 CatrobatContextBase.SetContextHolder(new ContextHolderDesign());
                 Context = new CatrobatContextDesign();

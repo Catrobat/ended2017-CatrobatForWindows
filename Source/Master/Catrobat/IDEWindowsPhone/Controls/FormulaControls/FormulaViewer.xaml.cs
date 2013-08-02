@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Catrobat.Core.Objects.Formulas;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.IDEWindowsPhone.Annotations;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
