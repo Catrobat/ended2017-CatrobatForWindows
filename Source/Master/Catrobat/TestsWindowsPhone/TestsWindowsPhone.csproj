@@ -94,8 +94,6 @@
     <Compile Include="Tests\IDE\Converter\BoolPlayButtonStateConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\BoolVisibilityConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\BoolVisibilityNegativeConverterTests.cs" />
-    <Compile Include="Tests\IDE\Converter\ImageSizeWidthConverterTests.cs" />
-    <Compile Include="Tests\IDE\Converter\ImageSizeHeightConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\NullIntCountConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\NoScreenshotConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\IntStringConverterTests.cs" />

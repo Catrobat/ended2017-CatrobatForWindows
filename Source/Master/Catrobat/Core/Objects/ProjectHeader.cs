@@ -299,27 +299,30 @@ namespace Catrobat.Core.Objects
             }
         }
 
-        public ProjectHeader()
+        public ProjectHeader(bool isAutoFillProperties = true)
         {
-            ApplicationBuildName = "";
-            ApplicationBuildNumber = 0;
-            ApplicationName = "Pocket Code";
-            ApplicationVersion = "0.0.1";
-            CatrobatLanguageVersion = 0.8f;
-            DateTimeUpload = "";
-            Description = "";
-            DeviceName = PlatformInformationHelper.DeviceName;
-            MediaLicense = "http://developer.catrobat.org/ccbysa_v3";
-            Platform = PlatformInformationHelper.PlatformName;
-            PlatformVersion = PlatformInformationHelper.PlatformVersion;
-            ProgramLicense = "http://developer.catrobat.org/agpl_v3";
-            _programName = ""; //otherwise renameDirectory would be executed
-            RemixOf = "";
-            ScreenHeight = PlatformInformationHelper.ScreenHeight;
-            ScreenWidth = PlatformInformationHelper.ScreenWidth;
-            Tags = "";
-            Url = "http://pocketcode.org/details/871";
-            UserHandle = "";
+            if (isAutoFillProperties)
+            {
+                ApplicationBuildName = "";
+                ApplicationBuildNumber = 0;
+                ApplicationName = "Pocket Code";
+                ApplicationVersion = "0.0.1";
+                CatrobatLanguageVersion = 0.8f;
+                DateTimeUpload = "";
+                Description = "";
+                DeviceName = PlatformInformationHelper.DeviceName;
+                MediaLicense = "http://developer.catrobat.org/ccbysa_v3";
+                Platform = PlatformInformationHelper.PlatformName;
+                PlatformVersion = PlatformInformationHelper.PlatformVersion;
+                ProgramLicense = "http://developer.catrobat.org/agpl_v3";
+                _programName = ""; //otherwise renameDirectory would be executed
+                RemixOf = "";
+                ScreenHeight = PlatformInformationHelper.ScreenHeight;
+                ScreenWidth = PlatformInformationHelper.ScreenWidth;
+                Tags = "";
+                Url = "http://pocketcode.org/details/871";
+                UserHandle = "";
+            }
         }
 
         public ProjectHeader(XElement xElement)

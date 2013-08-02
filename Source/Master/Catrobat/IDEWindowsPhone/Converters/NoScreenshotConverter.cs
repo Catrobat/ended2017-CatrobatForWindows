@@ -16,19 +16,27 @@ namespace Catrobat.IDEWindowsPhone.Converters
             }
             else
             {
-                var image = new BitmapImage();
-                using (var loader = ResourceLoader.CreateResourceLoader())
+                try
                 {
-                    var stream = loader.OpenResourceStream(ResourceScope.IdePhone, "Content/Images/Screenshot/NoScreenshot.png");
-                    image.SetSource(stream);
+                    var image = new BitmapImage();
+                    using (var loader = ResourceLoader.CreateResourceLoader())
+                    {
+                        var stream = loader.OpenResourceStream(ResourceScope.IdePhone, "Content/Images/Screenshot/NoScreenshot.png");
+                        image.SetSource(stream);
+                    }
+                    return image;
                 }
-                return image;
+                catch (Exception)
+                {
+                    return null;
+                }
             }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException(); //TODO: delete or implement this
+            // not used
+            return null;
         }
     }
 }

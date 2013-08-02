@@ -5,7 +5,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
   xmlns:imageButton="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
-  xmlns:MvvmLightExtras="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+  xmlns:mvvmLightExtras="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
   xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
   xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
   xmlns:objects="clr-namespace:Catrobat.Core.Objects;assembly=Catrobat.Core"
@@ -30,7 +30,7 @@
     <Border BorderThickness="4" Width="176" Height="176" BorderBrush="White">
       <i:Interaction.Triggers>
         <i:EventTrigger EventName="Tap">
-          <MvvmLightExtras:EventToCommand Command="{Binding MainViewModel.SetCurrentProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
+          <mvvmLightExtras:EventToCommand Command="{Binding MainViewModel.SetCurrentProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
                                                           CommandParameter="{Binding ProjectName, Mode=OneWay}" />
         </i:EventTrigger>
       </i:Interaction.Triggers>

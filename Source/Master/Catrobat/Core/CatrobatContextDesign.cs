@@ -30,7 +30,7 @@ namespace Catrobat.Core
         {
             var project = new Project
             {
-                ProjectHeader = new ProjectHeader
+                ProjectHeader = new ProjectHeader(false)
                 {
                     ApplicationBuildName = "",
                     ApplicationBuildNumber = 0,
