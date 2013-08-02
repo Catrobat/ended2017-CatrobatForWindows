@@ -20,7 +20,7 @@
   d:DesignWidth="720"
   d:DesignHeight="1280"
   shell:SystemTray.IsVisible="False"
-  DataContext="{Binding Main, Source={StaticResource Locator}}">
+  DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
 
   <phone:PhoneApplicationPage.Resources>
     <Style x:Key="ContinuousListBoxButtonStyle" TargetType="Button">
@@ -42,7 +42,7 @@
             <ScrollViewer x:Name="ScrollViewer" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" Padding="{TemplateBinding Padding}">
               <StackPanel>
                 <ItemsPresenter/>
-                <Button Content="{Binding Main.OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" Style="{StaticResource ContinuousListBoxButtonStyle}" Command="{Binding Main.LazyLoadOnlineProjectsCommand, Mode=OneWay, Source={StaticResource Locator}}" />
+                <Button Content="{Binding Resources.Main_OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" Style="{StaticResource ContinuousListBoxButtonStyle}" Command="{Binding MainViewModel.LazyLoadOnlineProjectsCommand, Mode=OneWay, Source={StaticResource Locator}}" />
               </StackPanel>
             </ScrollViewer>
           </ControlTemplate>
@@ -59,7 +59,7 @@
       </controls:Panorama.Background>
 
       <!--My Projects panorama item-->
-      <controls:PanoramaItem Name="PanoramaItemCurrentProject" HorizontalAlignment="Left" Header="{Binding Path=Main.HeaderCurrentProject, Source={StaticResource LocalizedStrings}}">
+      <controls:PanoramaItem Name="PanoramaItemCurrentProject" HorizontalAlignment="Left" Header="{Binding Resources.Main_HeaderCurrentProject, Source={StaticResource LocalizedStrings}}">
         <Grid>
           <StackPanel>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="{ Binding CurrentProject.ProjectName}" Margin="0 0 0 20" Style="{StaticResource PhoneTextLargeStyle}" />
@@ -79,21 +79,21 @@
                 <codung4Fun:RoundButton Margin="0 0 0 -5" Command="{Binding CreateNewProjectCommand}"
                   ImageSource="/Content/Images/ApplicationBar/dark/appbar.add.rest.png"/>
                 <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
-                  TextWrapping="Wrap" Text="{Binding Path=Main.ButtonCreate, 
+                  TextWrapping="Wrap" Text="{Binding Resources.Main_ButtonCreate, 
                   Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
               </StackPanel>
               <StackPanel Grid.Column="1" Margin="0 0 0 0">
                 <codung4Fun:RoundButton Margin="0 0 0 -5" Command="{Binding EditCurrentProjectCommand}"
                   ImageSource="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"/>
                 <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
-                  TextWrapping="Wrap" Text="{Binding Path=Main.ButtonEdit, 
+                  TextWrapping="Wrap" Text="{Binding Resources.Main_ButtonEdit, 
                   Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
               </StackPanel>
               <StackPanel Grid.Column="2" Margin="0 0 0 0">
                 <codung4Fun:RoundButton Margin="0 0 0 -5" Command="{Binding UploadCurrentProjectCommand}"
                   ImageSource="/Content/Images/ApplicationBar/dark/appbar.upload.rest.png"/>
                 <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
-                  TextWrapping="Wrap" Text="{Binding Path=Main.ButtonUpload, 
+                  TextWrapping="Wrap" Text="{Binding Resources.Main_ButtonUpload, 
                   Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
               </StackPanel>
             </Grid>
@@ -102,7 +102,7 @@
       </controls:PanoramaItem>
 
       <!--Local Projects panorama item-->
-      <controls:PanoramaItem Name="PanoramaItemLocalProjects" Header="{Binding Path=Main.HeaderLocalProjects, Source={StaticResource LocalizedStrings}}">
+      <controls:PanoramaItem Name="PanoramaItemLocalProjects" Header="{Binding Resources.Main_HeaderLocalProjects, Source={StaticResource LocalizedStrings}}">
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -111,9 +111,9 @@
           <Border BorderThickness="6" BorderBrush="{StaticResource PhoneForegroundBrush}" Margin="-6 5 0 10" Width="412">
             <toolkit:ContextMenuService.ContextMenu>
               <toolkit:ContextMenu>
-                <toolkit:MenuItem Header="COPY" Command="{Binding Main.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
-                <toolkit:MenuItem Header="DELETE" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
-                <toolkit:MenuItem Header="PIN TO START" Command="{Binding Main.PinLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProjectHeader}" />
+                <toolkit:MenuItem Header="COPY" Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
+                <toolkit:MenuItem Header="DELETE" Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
+                <toolkit:MenuItem Header="PIN TO START" Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProjectHeader}" />
               </toolkit:ContextMenu>
             </toolkit:ContextMenuService.ContextMenu>
             <Grid Background="{StaticResource PhoneAccentBrush}">
@@ -153,7 +153,7 @@
                                              Width="30" Height="30" Margin="5" IsProcessing="True" />
                     <TextBlock Opacity="0.5" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" 
                                VerticalAlignment="Center" Grid.Column="1"> 
-                      Please wait while the project being activated 
+                      Please wait while the project being activated
                     </TextBlock>
                   </Grid>
 
@@ -173,9 +173,14 @@
             </Grid>
           </Border>
           <ListBox Grid.Row="1" Name="ListBoxLocalProjects" ItemsSource="{Binding LocalProjects}" SelectedItem="{Binding CurrentProject}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <ListBox.ItemsPanel>
+              <ItemsPanelTemplate>
+                <toolkit:WrapPanel/>
+              </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
               <DataTemplate>
-                <projectControls:LocalProjectControl Project="{Binding}" />
+                <projectControls:LocalProjectControl Margin="10" Project="{Binding}" />
               </DataTemplate>
             </ListBox.ItemTemplate>
           </ListBox>
@@ -183,13 +188,13 @@
       </controls:PanoramaItem>
 
       <!--Online Projects panorama item-->
-      <controls:PanoramaItem Name="PanoramaItemOnlineProjects" Header="{Binding Path=Main.HeaderOnlineProjects, Source={StaticResource LocalizedStrings}}">
+      <controls:PanoramaItem Name="PanoramaItemOnlineProjects" Header="{Binding Resources.Main_HeaderOnlineProjects, Source={StaticResource LocalizedStrings}}">
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
           </Grid.RowDefinitions>
-          <toolkit:PhoneTextBox xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" Hint="{Binding Path=Main.FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" ActionIcon="../../Resources/Application/Search.png" x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilterTextBox_TextChanged" Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
+          <toolkit:PhoneTextBox xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" Hint="{Binding Resources.Main_FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" ActionIcon="../../Resources/Application/Search.png" x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilterTextBox_TextChanged" Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
           <phone:LongListSelector Name="LongListSelectorOnlineProjects" Grid.Row="1" 
             ItemsSource="{Binding OnlineProjects}" 
             VerticalAlignment="Stretch" 
@@ -213,7 +218,7 @@
               <Grid Background="BlueViolet" Height="35" Visibility="{Binding IsLoadingOnlineProjects, Converter={StaticResource BoolVisibilityConverter}}">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                   <statusIcons:ProcessIcon IsProcessing="{Binding IsLoadingOnlineProjects}" Margin="0 0 5 0" />
-                  <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Main.OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" />
+                  <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Resources.Main_OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" />
                 </StackPanel>
               </Grid>
             </phone:LongListSelector.ListFooter>
@@ -222,9 +227,9 @@
       </controls:PanoramaItem>
 
       <!--About panorama item-->
-      <controls:PanoramaItem Name="PanoramaItemHelp" Header="{Binding Path=Main.HeaderAbout, Source={StaticResource LocalizedStrings}}">
+      <controls:PanoramaItem Name="PanoramaItemHelp" Header="{Binding Resources.Main_HeaderAbout, Source={StaticResource LocalizedStrings}}">
         <StackPanel>
-          <TextBlock FontSize="26" TextWrapping="Wrap" Text="{Binding Path=Main.AboutText, Source={StaticResource LocalizedStrings}}" Margin="10 0 0 15" />
+          <TextBlock FontSize="26" TextWrapping="Wrap" Text="{Binding Resources.Main_AboutText, Source={StaticResource LocalizedStrings}}" Margin="10 0 0 15" />
           <Grid>
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="130" />
@@ -233,7 +238,7 @@
             <buttons:SettingsButton Grid.Column="0" VerticalAlignment="Center" x:Name="ButtonSettings" 
               Template="{StaticResource SettingsButtonControlTemplate}" Command="{Binding SettingsCommand}" />
             <TextBlock Grid.Column="1" Style="{StaticResource PhoneTextLargeStyle}" 
-                       Text="{Binding Main.ApplicationNameAndVersion, Source={StaticResource LocalizedStrings}, 
+                       Text="{Binding Resources.Main_ApplicationNameAndVersion, Source={StaticResource LocalizedStrings}, 
                          Converter={StaticResource VersionConverter}}" 
                        Margin="30" TextWrapping="Wrap" />
           </Grid>

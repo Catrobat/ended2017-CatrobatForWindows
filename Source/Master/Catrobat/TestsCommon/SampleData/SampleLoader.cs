@@ -53,12 +53,12 @@ namespace Catrobat.TestsCommon.SampleData
       using (var resourceLoader = ResourceLoader.CreateResourceLoader())
       {
         Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName);
-        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContext.ProjectsPath + "/" + sampleProjectName);
+        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
         stream.Close();
         stream.Dispose();
       }
       catrobatContext.SetCurrentProject(sampleProjectName);
-      catrobatContext.CurrentProject.SetSetProgramName(sampleProjectName);
+      catrobatContext.CurrentProject.SetProgramName(sampleProjectName);
 
       return catrobatContext;
     }

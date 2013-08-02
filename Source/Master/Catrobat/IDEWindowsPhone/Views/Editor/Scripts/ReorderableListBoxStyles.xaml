@@ -17,8 +17,8 @@
             </Grid.RowDefinitions>
             <!--<toolkit:ContextMenuService.ContextMenu>
               <toolkit:ContextMenu>
-                <toolkit:MenuItem Header="kopieren" Command="{Binding Editor.CopyScriptBrickCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
-                <toolkit:MenuItem Header="löschen" Command="{Binding Editor.DeleteScriptBrickCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                <toolkit:MenuItem Header="kopieren" Command="{Binding Resources.Editor_CopyScriptBrickCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                <toolkit:MenuItem Header="löschen" Command="{Binding Resources.Editor_DeleteScriptBrickCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
               </toolkit:ContextMenu>
             </toolkit:ContextMenuService.ContextMenu>-->
             <Path Fill="{Binding Path=Background, RelativeSource={RelativeSource TemplatedParent}}" Data="M7.499753,99.448822 L7.499753,88.390717 L31.628017,88.390717 L40.026104,97.859222 L56.103401,97.859222 L64.028831,88.390717 L488.81161,88.390717 L488.81161,99.448822 z" Stretch="Fill" UseLayoutRounding="False" Grid.Row="0" />
@@ -47,8 +47,8 @@
             </Grid.RowDefinitions>
             <toolkit:ContextMenuService.ContextMenu>
               <toolkit:ContextMenu>
-                <toolkit:MenuItem Header="kopieren" Command="{Binding Editor.CopyScriptBrickCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
-                <toolkit:MenuItem Header="löschen" Command="{Binding Editor.DeleteScriptBrickCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                <toolkit:MenuItem Header="kopieren" Command="{Binding EditorViewModel.CopyScriptBrickCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+                <toolkit:MenuItem Header="löschen" Command="{Binding EditorViewModel.DeleteScriptBrickCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
               </toolkit:ContextMenu>
             </toolkit:ContextMenuService.ContextMenu>
             <Path Data="M13.151761,97.795746 L20.068861,88.390717 L53.706406,88.390717 L60.338474,97.795746 z" Stretch="Fill" UseLayoutRounding="False" Fill="{TemplateBinding Background}" Grid.Row="0" Margin="9.029,0,0,-0.063" HorizontalAlignment="Left" Width="42" />

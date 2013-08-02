@@ -73,7 +73,7 @@
                       <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid Background="#AA000000">
-                      <TextBlock Grid.Row="0" Text="ProjectName" Name="TextBlockTiteNormal" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" Margin="5" FontSize="14"></TextBlock>
+                      <TextBlock Grid.Row="0" Text="ProjectName" Name="TextBlockTiteNormal" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" FontSize="14"></TextBlock>
                     </Grid>
                   </Grid>
                 </Grid>

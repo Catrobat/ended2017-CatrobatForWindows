@@ -11,8 +11,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Catrobat.IDECommon.Resources.IDE.Editor;
 using Catrobat.IDEWindowsPhone.Annotations;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 
 namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
 {
@@ -32,22 +32,22 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
         {
           if (_sourceCollection is IList<Costume>)
           {
-            NullObject = new Costume { Name = EditorResources.NoCostumeSelected };
+            NullObject = new Costume { Name = AppResources.Editor_NoCostumeSelected };
           }
 
           if (_sourceCollection is IList<Sound>)
           {
-            NullObject = new Sound { Name = EditorResources.NoSoundSelected };
+            NullObject = new Sound { Name = AppResources.Editor_NoSoundSelected };
           }
 
           if (_sourceCollection is IList<Sprite>)
           {
-            NullObject = new Sprite { Name = EditorResources.NoSpriteSelected };
+            NullObject = new Sprite { Name = AppResources.Editor_NoSpriteSelected };
           }
 
           if (_sourceCollection is IList<String>)
           {
-            NullObject = EditorResources.NoMessageSelected;
+            NullObject = AppResources.Editor_NoMessageSelected;
           }
         }
       }

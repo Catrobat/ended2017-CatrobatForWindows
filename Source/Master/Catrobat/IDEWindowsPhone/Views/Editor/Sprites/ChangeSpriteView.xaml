@@ -13,7 +13,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    DataContext="{Binding ChangeSprite, Source={StaticResource Locator}}"
+    DataContext="{Binding ChangeSpriteViewModel, Source={StaticResource Locator}}"
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -24,11 +24,11 @@
         </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Path=Editor.TitleChangeSpriteName, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleChangeSpriteName, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
     </StackPanel>
       
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
-      <TextBlock Margin="0" Text="{Binding Path=Editor.SpriteName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_SpriteName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
       <TextBox Margin="-10 0 10 0" Name="TextBoxSpriteName" Text="{Binding SpriteName, Mode=TwoWay}" HorizontalAlignment="Stretch" TextChanged="TextBoxSpriteName_OnTextChanged" />
     </StackPanel>
 
@@ -37,10 +37,10 @@
         <abu:SwitchAppBarAction>
           <abu:AppBar Id="0">
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.save.rest.png" 
-                              Text="{Binding Path=Editor.ButtonSave, Source={StaticResource LocalizedStrings}}"
+                              Text="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding SaveCommand}" />
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" 
-                              Text="{Binding Path=Editor.ButtonCancel, Source={StaticResource LocalizedStrings}}"
+                              Text="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding CancelCommand}"/>
           </abu:AppBar>
         </abu:SwitchAppBarAction>

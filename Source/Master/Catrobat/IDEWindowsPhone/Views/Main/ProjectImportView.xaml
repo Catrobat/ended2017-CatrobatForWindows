@@ -14,7 +14,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    DataContext="{Binding ProjectImport, Source={StaticResource Locator}}"
+    DataContext="{Binding ProjectImportViewModel, Source={StaticResource Locator}}"
     shell:SystemTray.IsVisible="True">
   
   <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -52,10 +52,10 @@
         <abu:SwitchAppBarAction>
           <abu:AppBar Id="0">
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png" 
-                              Text="{Binding Path=Editor.ButtonSave, Source={StaticResource LocalizedStrings}}"
+                              Text="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding AddCommand}" />
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" 
-                              Text="{Binding Path=Editor.ButtonCancel, Source={StaticResource LocalizedStrings}}"
+                              Text="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding CancelCommand}"/>
           </abu:AppBar>
         </abu:SwitchAppBarAction>

@@ -37,23 +37,23 @@ namespace Catrobat.Core.Resources
 
                     try
                     {
-                        var projectFolderPath = Path.Combine(CatrobatContext.ProjectsPath, projectName);
+                        var projectFolderPath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName);
 
                         using (var storage = StorageSystem.GetStorage())
                         {
                             if (!storage.DirectoryExists(projectFolderPath))
                             {
-                                CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContext.ProjectsPath + "/" + projectName);
+                                CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContextBase.ProjectsPath + "/" + projectName);
                             }
                         }
 
                         using (var storage = StorageSystem.GetStorage())
                         {
-                            var textFilePath = Path.Combine(CatrobatContext.ProjectsPath, projectName, Project.ProjectCodePath);
+                            var textFilePath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.ProjectCodePath);
                             var xml = storage.ReadTextFile(textFilePath);
 
                             var project = new Project(xml);
-                            project.SetSetProgramName(projectName);
+                            project.SetProgramName(projectName);
 
                             project.Save();
                         }

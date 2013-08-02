@@ -104,7 +104,17 @@ namespace Catrobat.Core.Objects.Sounds
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherSound = other as Sound;
+
+            if (otherSound == null)
+                return false;
+
+            if (Name != otherSound.Name)
+                return false;
+            if (FileName != otherSound.FileName)
+                return false;
+
+            return true;
         }
     }
 }

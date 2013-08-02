@@ -141,7 +141,7 @@ namespace Catrobat.Core.Misc.ServerCommunication
 
             using (var stream = new MemoryStream())
             {
-                CatrobatZip.ZipCatrobatPackage(stream, CatrobatContext.ProjectsPath + "/" + projectName);
+                CatrobatZip.ZipCatrobatPackage(stream, CatrobatContextBase.ProjectsPath + "/" + projectName);
                 var data = stream.ToArray();
 
                 postParameters.Add(ApplicationResources.PROJECT_CHECKSUM_TAG, Utils.ToHex(MD5Core.GetHash(data)));

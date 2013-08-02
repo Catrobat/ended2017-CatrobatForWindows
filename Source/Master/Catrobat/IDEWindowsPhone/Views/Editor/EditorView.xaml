@@ -14,6 +14,7 @@
   xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
   xmlns:appBar="clr-namespace:Catrobat.IDEWindowsPhone.Controls.AppBar"
   xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+  xmlns:command="http://www.galasoft.ch/mvvmlight"
   d:DesignWidth="480"
   d:DesignHeight="768"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -22,7 +23,7 @@
   SupportedOrientations="Portrait"
   Orientation="Portrait"
   shell:SystemTray.IsVisible="True"
-  DataContext="{Binding Editor, Source={StaticResource Locator}}">
+  DataContext="{Binding EditorViewModel, Source={StaticResource Locator}}">
 
   <phone:PhoneApplicationPage.Resources>
     <buttons:PlayPauseButtonGroup x:Key="PlayPauseButtonGroupSounds" Command="{Binding SoundsPlayStateChangedCommand}" />
@@ -36,7 +37,7 @@
       </Grid.RowDefinitions>
 
       <controls:Pivot Name="PivotMain" Title="{Binding CurrentProject.ProjectName}" SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}">
-        <controls:PivotItem Name="PivotSprites" Header="{Binding Path=Editor.PivotObjects, Source={StaticResource LocalizedStrings}}">
+        <controls:PivotItem Name="PivotSprites" Header="{Binding Resources.Editor_PivotObjects, Source={StaticResource LocalizedStrings}}">
           <!--Pivot item sprites-->
           <reorderableListbox:ReorderListBox
           x:Name="ReorderListBoxSprites"
@@ -45,7 +46,6 @@
           VerticalAlignment="Stretch"
           IsReorderEnabled="True"
           ItemsSource="{Binding Sprites}"
-          SelectionChanged="reorderListBoxSprites_SelectionChanged"
           ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleNormal}"
           Foreground="White" >
             <reorderableListbox:ReorderListBox.ItemTemplate>
@@ -55,6 +55,13 @@
                     <RowDefinition/>
                     <RowDefinition/>
                   </Grid.RowDefinitions>
+                  <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Tap">
+                      <command:EventToCommand Command="{Binding EditorViewModel.SelectedSpriteChangedCommand, Mode=OneWay, Source={StaticResource Locator}}"
+                                                          CommandParameter="{Binding}" />
+                    </i:EventTrigger>
+                  </i:Interaction.Triggers>
+
                   <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                       <ColumnDefinition Width="3*" />
@@ -100,7 +107,7 @@
         </controls:PivotItem>
 
         <!--Pivot item scripts-->
-        <controls:PivotItem Name="PivotScripts" Header="{Binding Path=Editor.PivotActions, Source={StaticResource LocalizedStrings}}">
+        <controls:PivotItem Name="PivotScripts" Header="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}">
           <reorderableListbox:ReorderListBox
           x:Name="ReorderListBoxScriptBricks"
           Margin="0 -25 0 0"
@@ -118,7 +125,7 @@
 
         <!--Pivot item costume-->
         <controls:PivotItem Name="PivotCostumes" 
-          Header="{Binding Path=Editor.PivotCostumes, Source={StaticResource LocalizedStrings}}">
+          Header="{Binding Resources.Editor_PivotCostumes, Source={StaticResource LocalizedStrings}}">
           <reorderableListbox:ReorderListBox
           x:Name="ReorderListBoxCostumes"
           Margin="0 -25 0 0"
@@ -149,7 +156,7 @@
         </controls:PivotItem>
 
         <!--Pivot item sounds-->
-        <controls:PivotItem Name="PivotSounds" Header="{Binding Path=Editor.PivotSounds, Source={StaticResource LocalizedStrings}}">
+        <controls:PivotItem Name="PivotSounds" Header="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}">
           <reorderableListbox:ReorderListBox
           x:Name="ReorderListBoxSounds"
           Margin="0 -25 0 0"
@@ -230,7 +237,7 @@
       <coding4Fun:ProgressOverlay.Content>
         <StackPanel HorizontalAlignment="Stretch">
           <ProgressBar IsIndeterminate="{Binding IsSpriteSelecting}"/>
-          <TextBlock TextAlignment="Center" Text="{Binding Path=Editor.SelectingObject, Source={StaticResource LocalizedStrings}}"></TextBlock>
+          <TextBlock TextAlignment="Center" Text="{Binding Resources.Editor_SelectingObject, Source={StaticResource LocalizedStrings}}"></TextBlock>
         </StackPanel>
       </coding4Fun:ProgressOverlay.Content>
     </coding4Fun:ProgressOverlay>

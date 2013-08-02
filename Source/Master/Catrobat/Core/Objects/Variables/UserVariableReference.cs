@@ -67,7 +67,15 @@ namespace Catrobat.Core.Objects.Variables
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherReference = other as UserVariableReference;
+
+            if (otherReference == null)
+                return false;
+
+            if (_reference != otherReference._reference)
+                return false;
+
+            return true;
         }
     }
 }

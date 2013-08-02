@@ -14,7 +14,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
-    DataContext="{Binding UploadProjectLogin, Source={StaticResource Locator}}">
+    DataContext="{Binding UploadProjectLoginViewModel, Source={StaticResource Locator}}">
 
   <!--LayoutRoot is the root grid where all page content is placed-->
   <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -25,18 +25,18 @@
 
     <!--TitlePanel contains the name of the application and page title-->
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-      <TextBlock x:Name="ApplicationTitle" Text="{Binding Path=Main.TitleUploadProject, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
-      <TextBlock x:Name="PageTitle" Text="{Binding Path=Main.TitleUploadProjectLogin, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+      <TextBlock x:Name="ApplicationTitle" Text="{Binding Resources.Main_TitleUploadProject, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+      <TextBlock x:Name="PageTitle" Text="{Binding Resources.Main_TitleUploadProjectLogin, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="12 0 12 15">
-      <TextBlock Margin="0" Text="{Binding Path=Main.UploadProjectUsername, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Main_UploadProjectUsername, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
       <TextBox Margin="-10 0 10 0" HorizontalAlignment="Stretch" Text="{Binding Username, Mode=TwoWay}" TextChanged="TextBox_TextChanged" />
 
-      <TextBlock Margin="0" Text="{Binding Path=Main.UploadProjectEmail, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Main_UploadProjectEmail, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
       <TextBox Margin="-10 0 10 0" HorizontalAlignment="Stretch" Text="{Binding Email, Mode=TwoWay}" TextChanged="TextBox_TextChanged" />
       
-      <TextBlock Margin="0" Text="{Binding Path=Main.UploadProjectPassword, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Main_UploadProjectPassword, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
       <PasswordBox Margin="-10 0 10 0" HorizontalAlignment="Stretch" Password="{Binding Password, Mode=TwoWay}" PasswordChanged="PasswordBox_PasswordChanged" />
     </StackPanel>
   </Grid>
@@ -46,10 +46,10 @@
       <abu:SwitchAppBarAction>
         <abu:AppBar Id="0">
           <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.check.rest.png" 
-                              Text="{Binding Path=Main.ButtonLoginRegister, Source={StaticResource LocalizedStrings}}"
+                              Text="{Binding Resources.Main_ButtonLoginRegister, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding LoginCommand}" />
           <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.questionmark.rest.png" 
-                              Text="{Binding Path=Main.ButtonPasswordForgotten, Source={StaticResource LocalizedStrings}}"
+                              Text="{Binding Resources.Main_ButtonPasswordForgotten, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding ForgottenCommand}" />
         </abu:AppBar>
       </abu:SwitchAppBarAction>

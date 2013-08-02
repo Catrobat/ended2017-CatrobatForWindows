@@ -74,6 +74,7 @@
     <Compile Include="SampleData\ContextHolderTests.cs" />
     <Compile Include="SampleData\SampleLoader.cs" />
     <Compile Include="Tests\Data\CatrobatContextTests.cs" />
+    <Compile Include="Tests\Data\DataEqualsTests.cs" />
     <Compile Include="Tests\Data\ReferenceHelperTests.cs" />
     <Compile Include="Tests\Data\XPathHelperTests.cs" />
     <Compile Include="Tests\Data\VersionConverter08toWin08Tests.cs" />

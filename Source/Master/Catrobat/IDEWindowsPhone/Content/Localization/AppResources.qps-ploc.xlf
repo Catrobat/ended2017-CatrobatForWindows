@@ -1,0 +1,904 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en" target-language="qps-ploc" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="IDEWindowsPhone" product-version="1.0.0.0" build-num="0">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="2.0.1000.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="Resx">
+        <trans-unit translate="yes" id="Resx/Brick_Broadcast" xml:space="preserve">
+          <source>broadcast</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[1CB65][!!_ьѓôáđċâŝť_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_BroadcastWait" xml:space="preserve">
+          <source>broadcast and wait</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[CEC8E][!!_ьŕóàďčáŝт àήð ẅãìτ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ButtonNew" xml:space="preserve">
+          <source>new...</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[209FC][!!_иéẅ..._!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_CategoryControl" xml:space="preserve">
+          <source>Control</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[84E6A][!!_Ċõηťŕóľ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_CategoryLooks" xml:space="preserve">
+          <source>Looks</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[991C1][!!_Ĺóòķś_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_CategoryMotion" xml:space="preserve">
+          <source>Motion</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[05062][!!_Μôťîõй_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_CategorySound" xml:space="preserve">
+          <source>Sound</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[178C5][!!_Ŝõûηď_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeBrightnessBy" xml:space="preserve">
+          <source>change brightness by</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[CF41C][!!_ċнâηġè вŕìģħтήêşš ъў_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeGhostEffectBy" xml:space="preserve">
+          <source>change ghost effect by</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[40A56][!!_ćћâиġé ğħóšť êƒƒęčτ ьÿ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeSizeBy" xml:space="preserve">
+          <source>change size by</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[07920][!!_ċћáйģé şîźé ьŷ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeVolumeBy" xml:space="preserve">
+          <source>change volume by</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[B96C1][!!_ćђáηģè νõłùmę ъŷ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeXBy" xml:space="preserve">
+          <source>change X by</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[01B63][!!_ćђâηģé Х ъÿ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeYBy" xml:space="preserve">
+          <source>change Y by</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[75DA5][!!_ćћáηģê Ϋ вÿ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ClearGraphicEffects" xml:space="preserve">
+          <source>clear graphic effects</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[72DFE][!!_čĺęãѓ ģŕáρнíč éƒƒęĉτš_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ComeToFront" xml:space="preserve">
+          <source>come to front</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[AE001][!!_ćómê ţô ƒѓõηт_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Degrees" xml:space="preserve">
+          <source>degrees</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[F6129][!!_ðéġŗêêş_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Forever" xml:space="preserve">
+          <source>forever</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[1B75D][!!_ƒòѓêνêŗ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_GlideToGlide" xml:space="preserve">
+          <source>glide</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[CB436][!!_ĝľìđę_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_GlideToTo" xml:space="preserve">
+          <source>to</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[1FFF0][!!_тô_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_GoNStepsBackGo" xml:space="preserve">
+          <source>go back</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[BC426][!!_ġò ьãĉķ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_GoNStepsBackStepsBack" xml:space="preserve">
+          <source>layers</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[0D7DC][!!_łàУêѓŝ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Hide" xml:space="preserve">
+          <source>hide</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[EB0EA][!!_нįďę_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_IfOnEdgeBounce" xml:space="preserve">
+          <source>if on edge, bounce</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[AB4BA][!!_îƒ òй éđģé, ъôúйĉé_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_LoopEnd" xml:space="preserve">
+          <source>end of loop</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[855BA][!!_éйđ õƒ ĺóõр_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_MoveNStepsMove" xml:space="preserve">
+          <source>move</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[D5DE4][!!_mòνé_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_MoveNStepsSteps" xml:space="preserve">
+          <source>steps</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[E522B][!!_ŝťèрş_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_NextCostume" xml:space="preserve">
+          <source>next costume</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[2AA83][!!_ήęхť ĉóŝţùмè_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Note" xml:space="preserve">
+          <source>note</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[D0A7B][!!_ηòтê_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_PlaceAt" xml:space="preserve">
+          <source>place at</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[E1AE2][!!_ρľàčè àť_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_PlaySound" xml:space="preserve">
+          <source>play sound</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[6CD04][!!_þľáў şõµήð_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_PointInDirection" xml:space="preserve">
+          <source>point in direction</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[8C13A][!!_рõîηт îи ďíѓèĉτįõή_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_PointTo" xml:space="preserve">
+          <source>point towards</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[36D21][!!_þõîиť ţòŵářðš_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Repeat" xml:space="preserve">
+          <source>repeat</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[C0A99][!!_ѓéрèãτ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Seconds" xml:space="preserve">
+          <source>seconds</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[6D1FB][!!_šęċóйðś_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetBrightnessTo" xml:space="preserve">
+          <source>set brightness to</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[40C89][!!_şęţ вŕîġнţйęšś ťô_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetCostume" xml:space="preserve">
+          <source>set costume</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[335B8][!!_šéτ ĉóšťûmę_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetGhostEffectTo" xml:space="preserve">
+          <source>set ghost effect to</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[A6BB9][!!_śéţ ģћõŝţ éƒƒęčт тõ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetSizeTo" xml:space="preserve">
+          <source>set size to</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[89F9E][!!_šéť šįżę ţó_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetVolumeTo" xml:space="preserve">
+          <source>set volume to</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[EF735][!!_ŝêτ νóļúmé тò_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetXTo" xml:space="preserve">
+          <source>set X to</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[CA779][!!_ŝęτ Χ ţô_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetYTo" xml:space="preserve">
+          <source>set Y to</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[5B5EF][!!_śèţ Ỳ ţò_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Show" xml:space="preserve">
+          <source>show</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[B1714][!!_ŝĥôŵ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Speak" xml:space="preserve">
+          <source>speak</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[FDDD2][!!_šþèãќ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_StopAllSounds" xml:space="preserve">
+          <source>stop all sounds</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[360B5][!!_šτóρ àĺļ šôúйðś_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Times" xml:space="preserve">
+          <source>times</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[9CEEB][!!_ţįmęś_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_TurnLeft" xml:space="preserve">
+          <source>turn left</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[9241B][!!_ťµřи ĺêƒτ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_TurnRight" xml:space="preserve">
+          <source>turn right</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[2FB00][!!_ťûŗй ѓìġђť_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Wait" xml:space="preserve">
+          <source>wait</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[5A1DC][!!_ẃáíţ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_WhenIReceive" xml:space="preserve">
+          <source>when I receive</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[5E199][!!_ẃĥêη Î řêčéìνé_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_WhenProjectStarts" xml:space="preserve">
+          <source>when project starts</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[B3871][!!_ẁђéη þřõјêĉť şťãřţŝ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_WhenTapped" xml:space="preserve">
+          <source>when tapped</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[F7D09][!!_ŵħèη τãþρęď_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ActionPlural" xml:space="preserve">
+          <source>actions</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[DFEF6][!!_áċтîóηŝ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ActionSingular" xml:space="preserve">
+          <source>action</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[59125][!!_áċτìõή_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_BroadcastMessage" xml:space="preserve">
+          <source>Broadcast message</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[C6AB4][!!_Βŕòáðćáśτ мèŝşáġè_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddCostume" xml:space="preserve">
+          <source>new costume</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[1716A][!!_ήéŵ ĉôŝτûmè_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddObject" xml:space="preserve">
+          <source>new object</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[EC61D][!!_ήęẅ õвĵęĉτ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddScript" xml:space="preserve">
+          <source>new action</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[7A609][!!_ήęẃ áčτįòή_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddSound" xml:space="preserve">
+          <source>new sound</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[933F5][!!_иęẃ šòµиď_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonBack" xml:space="preserve">
+          <source>back</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[274B1][!!_Бâčќ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonCancel" xml:space="preserve">
+          <source>cancel</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[92F73][!!_čàήćęĺ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonChange" xml:space="preserve">
+          <source>change</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[0C5F3][!!_čĥàйğę_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonCopy" xml:space="preserve">
+          <source>copy</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[E94D3][!!_ċòрУ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonDelete" xml:space="preserve">
+          <source>delete</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[FC26E][!!_ďéłêτê_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonPlayProject" xml:space="preserve">
+          <source>play project</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[0B303][!!_рļàУ ρŕòјęćţ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonSave" xml:space="preserve">
+          <source>save</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[30226][!!_śãνé_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonUse" xml:space="preserve">
+          <source>use</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[349B7][!!_µşę_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Camera" xml:space="preserve">
+          <source>Camera</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[01EAE][!!_Ċãмęřã_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ClearSelection" xml:space="preserve">
+          <source>selektierung aufheben</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[E5EEC][!!_šèĺéķťîèŕùиģ áûƒнèъèи_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_CostumeName" xml:space="preserve">
+          <source>Costume name</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[1B83A][!!_Ċóşţµmę ηãмê_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_CostumePlural" xml:space="preserve">
+          <source>costumes</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[DE618][!!_ćóşťúméš_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_CostumeSingular" xml:space="preserve">
+          <source>costume</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[FEECF][!!_ćòšτúmè_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Image" xml:space="preserve">
+          <source>Image</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[2A404][!!_Įмãĝê_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageGallery" xml:space="preserve">
+          <source>Image Gallery</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[34C0B][!!_Ímáģê Ģâļľęѓў_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageSizeFullSize" xml:space="preserve">
+          <source>full size</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[4517D][!!_ƒúľł şíźę_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageSizeLarge" xml:space="preserve">
+          <source>large</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[1590F][!!_łâŗğę_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageSizeMedium" xml:space="preserve">
+          <source>medium</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[72DA3][!!_мèđìùм_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageSizeSmall" xml:space="preserve">
+          <source>small</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[28B17][!!_şмáľĺ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MediaLibrary" xml:space="preserve">
+          <source>Media Library</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[C4D26][!!_Μéďìã ĿįБŗàŕŷ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MenuProjectSettings" xml:space="preserve">
+          <source>Project settings</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[7A149][!!_Ρѓôјęćт ŝèťτîйģś_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MenuStartSite" xml:space="preserve">
+          <source>Start site</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[78ECE][!!_Şтãŕт şîτę_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxDeleteHeader" xml:space="preserve">
+          <source>Delete {0}</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[1C656][!!_Đęłêτé {0}_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxDeleteText" xml:space="preserve">
+          <source>Delete {0} selected {1}.</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[2B472][!!_Ďêłęţê {0} śêłéċтêð {1}._!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceImageHeader" xml:space="preserve">
+          <source>Not enough space</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[CBB33][!!_Ņòţ êηôùğĥ śрãċè_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceImageText" xml:space="preserve">
+          <source>Without more disc space the image cannot be saved.</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[82569][!!_Ẃįťнôùţ mõѓé ďįšč şрàćè тћé ìмâġé ĉàηήõт Бę śãνèð._!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceSoundHeader" xml:space="preserve">
+          <source>Not enough space</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[F588D][!!_Ňòţ éήõúğђ şþáćê_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceSoundText" xml:space="preserve">
+          <source>Without more disc space the sound cannot be saved.</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[BD568][!!_Ẁìťħõûť môѓê ďíšć şрãĉé тћè śõùйđ ĉáиήõť ъè ŝâνêď._!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxWrongImageFormatHeader" xml:space="preserve">
+          <source>Not supported format</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[5056B][!!_Ņôτ ŝùþþóŕτèð ƒôѓмãτ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxWrongImageFormatText" xml:space="preserve">
+          <source>Unfortunately the image has a not supported format.</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[29E3E][!!_Üηƒóřτùηàţéļў τћę įмáģê ħáŝ â иôт šùрþòŕťêđ ƒôřмãţ._!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_New" xml:space="preserve">
+          <source>new {0}</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[70A6B][!!_ήèẃ {0}_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NewAction" xml:space="preserve">
+          <source>new action</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[16CA8][!!_ηęẁ áĉτįõη_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NewCostume" xml:space="preserve">
+          <source>new costume</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[BADEF][!!_иęẅ čòŝťùmê_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NewObject" xml:space="preserve">
+          <source>new object</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[907F2][!!_ηèŵ õьјêćτ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NewSound" xml:space="preserve">
+          <source>new sound</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[DB3C2][!!_йèẁ ŝòùйď_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NoCostumeSelected" xml:space="preserve">
+          <source>No costume selected</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[25AC5][!!_Ńò ćòŝťµмę śéļèċťéď_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NoMessageSelected" xml:space="preserve">
+          <source>No message selected</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[627A9][!!_Ņô mêşšàġé šèĺęċτèð_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NoSoundSelected" xml:space="preserve">
+          <source>No sound selected</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[42A72][!!_Ņô şõúиđ šęłèĉťęð_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NoSpriteSelected" xml:space="preserve">
+          <source>No object selected</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[57FA0][!!_Ņò õъĵéćť şêłêćτêđ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NothingItem" xml:space="preserve">
+          <source>Nothing...</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[DA8D0][!!_Ņóťħįήĝ..._!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ObjectPlural" xml:space="preserve">
+          <source>objects</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[9775D][!!_ôъјéċтŝ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ObjectSingular" xml:space="preserve">
+          <source>object</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[F0B0D][!!_õьјêčť_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_PivotActions" xml:space="preserve">
+          <source>Actions</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[EED5D][!!_Âćτîôηś_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_PivotCostumes" xml:space="preserve">
+          <source>Costumes</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[F4D40][!!_Čòŝтûмêŝ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_PivotObjects" xml:space="preserve">
+          <source>Objects</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[DAC06][!!_ÓБјęćţş_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_PivotSounds" xml:space="preserve">
+          <source>Sounds</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[8FF4F][!!_Śòúиðš_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ProjectName" xml:space="preserve">
+          <source>Project name</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[7ADB8][!!_Ρѓõјêċţ иâмę_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Recorder" xml:space="preserve">
+          <source>Recorder</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[98FD8][!!_Ŗêċõŕđéŕ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_RecorderRecord" xml:space="preserve">
+          <source>rec</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[F38AE][!!_ѓęċ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_RecorderRecordTime" xml:space="preserve">
+          <source>Time</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[8EEA1][!!_Ťįmę_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_RecorderStart" xml:space="preserve">
+          <source>start recording</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[4C154][!!_śťãŕτ ѓêĉòŕđîиģ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_RecorderStop" xml:space="preserve">
+          <source>stop</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[5E326][!!_šţôþ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Recording" xml:space="preserve">
+          <source>Recording</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[C1E87][!!_Řęčõѓðįиĝ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SavingImage" xml:space="preserve">
+          <source>saving image</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[BAD5C][!!_šáνįηģ îmâġę_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Selected" xml:space="preserve">
+          <source>selected</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[0121B][!!_šéļêćţéð_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SelectingObject" xml:space="preserve">
+          <source>loading object</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[59816][!!_ľôâđìήġ õБјęčτ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SoundName" xml:space="preserve">
+          <source>Sound name</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[5E60B][!!_Śóúйđ иãmê_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SoundPlural" xml:space="preserve">
+          <source>sounds</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[3AA45][!!_şòùηďś_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SoundSingular" xml:space="preserve">
+          <source>sound</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[2E9CF][!!_şôùиđ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SpriteName" xml:space="preserve">
+          <source>Object name</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[33CDC][!!_Òьјêćţ ήâmê_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChangeCostumeName" xml:space="preserve">
+          <source>CHANGE COSTUME NAME</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[E0E4B][!!_ĆĤÁŇĜÈ ĈÒŚТÙΜÉ ŇÁΜÊ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChangeSoundName" xml:space="preserve">
+          <source>CHANGE SOUND NAME</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[682EA][!!_ČĤÂŇĞĘ ŚÔÜÑĎ ŇÂМĘ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChangeSpriteName" xml:space="preserve">
+          <source>CHANGE OBJECT NAME</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[6F018][!!_ĊНÀÑĜÉ ÓΒЈÈĆТ ŅÂΜÈ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseBrick" xml:space="preserve">
+          <source>CHOOSE BRICK</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[7B2A0][!!_ČНÓÓŜÊ βŘÌĊК_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseCategory" xml:space="preserve">
+          <source>CHOOSE CATEGORY</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[1FB23][!!_ĈΉÔÓŠÉ ĊÂТÉĜÒŘΫ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseCostumeName" xml:space="preserve">
+          <source>CHOOSE COSTUME NAME</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[7B600][!!_ČĦÕÕŠÉ ĊÔŚТÛΜÊ ŅÂΜÉ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseSound" xml:space="preserve">
+          <source>CHOOSE SOUND</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[8AA93][!!_ĆΉÔÓŜÈ ŞÒÙŅĎ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseSoundName" xml:space="preserve">
+          <source>CHOOSE SOUND NAME</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[801F1][!!_ČĤÒÕŠÈ ŚÓÚÑĐ ÑÃΜĘ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewAction" xml:space="preserve">
+          <source>new action</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[AD4FA][!!_йêẁ ãċťîôή_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewBroadcastMessage" xml:space="preserve">
+          <source>NEW BROADCAST MESSAGE</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[F4496][!!_ŃÈẂ ЬЃÔÁÐĈÂŚТ ΜÈŜŞÃĞÊ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewCostume" xml:space="preserve">
+          <source>NEW COSTUME</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[B54B8][!!_ŃÉẄ ĊÓŞТÛΜĘ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewSound" xml:space="preserve">
+          <source>NEW SOUND</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[02ACB][!!_ÑÊŴ ŞÓÙŃÐ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewSprite" xml:space="preserve">
+          <source>NEW OBJECT</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[E6CA4][!!_ŇÈŴ ÔβЈĘČТ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleProjectSettings" xml:space="preserve">
+          <source>PROJECT SETTINGS</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[2ACE0][!!_ÞŖÕЈÊĆΤ ŞÉΤŤĮÑĜŞ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleRecorder" xml:space="preserve">
+          <source>RECORD SOUND</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[B6420][!!_ŖĘĈÕŔÐ ŚÓÙÑĎ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ACCELERATION_X" xml:space="preserve">
+          <source>accelerationX</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[3B01C][!!_àċċèĺêŗâτîóйχ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ACCELERATION_Y" xml:space="preserve">
+          <source>accelerationY</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[5FA6E][!!_ãċĉèľéřàťîôйΫ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ACCELERATION_Z" xml:space="preserve">
+          <source>accelerationZ</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[970D5][!!_ãćčèľèŕâťìôйŹ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_BRIGHTNESS" xml:space="preserve">
+          <source>brightness</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[421BB][!!_ъřįġħţиèšš_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ClosedBrecket" xml:space="preserve">
+          <source>)</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[E1AEF][!!_)_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_COMPASSDIRECTION" xml:space="preserve">
+          <source>compassdirec</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[7AF5A][!!_čõмþáššđîŗéĉ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_DecimalPointCharacter" xml:space="preserve">
+          <source>.</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[ECA1E][!!_._!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_DIRECTION" xml:space="preserve">
+          <source>direction</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[79586][!!_ðìřéčτìôή_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_INCLINATION_X" xml:space="preserve">
+          <source>inclinationX</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[18F67][!!_įηćĺíηáťîõйХ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_INCLINATION_Y" xml:space="preserve">
+          <source>inclinationY</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[55F00][!!_ìиčľįήâтîòήΫ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LAYER" xml:space="preserve">
+          <source>layer</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[4D8F5][!!_ļàўèѓ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicEqual" xml:space="preserve">
+          <source>=</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[D9B2F][!!_=_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicOr" xml:space="preserve">
+          <source>OR</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[C250F][!!_ÒЃ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_OBJECT_X" xml:space="preserve">
+          <source>objectX</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[5CE47][!!_ôьјéĉťΧ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_OBJECT_Y" xml:space="preserve">
+          <source>objectY</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[8B2F8][!!_ôБĵęċτŶ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_OpenBrecket" xml:space="preserve">
+          <source>(</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[34691][!!_(_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ParameterSeperator" xml:space="preserve">
+          <source>,</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[94A69][!!_,_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_Random" xml:space="preserve">
+          <source>random</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[7F3DE][!!_řãйðóm_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_SIZE" xml:space="preserve">
+          <source>size</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[A541B][!!_šîžè_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_TRANSPARENCY" xml:space="preserve">
+          <source>transparency</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[74519][!!_ţѓáήśþàŗéήĉУ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_Unknown" xml:space="preserve">
+          <source>unknown</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[D1733][!!_ûиķήóẁй_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_AboutText" xml:space="preserve">
+          <source>Catrobat for Windows is an on-device visual progamming language for Windows Phone 8 devices that is inspired by the scratch programming language developed by the MIT.
+It is developed at the department of Software Technology at the University of Technology Graz, Austria.
+The program is licensed under the MS-RL Lizenz.</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[EDBBD][!!_Čãťѓóъâţ ƒôŗ Ŵìиðôẅś îş áή õή-ðéνíĉę νíšµáĺ рŕõğàмmîήĝ łáйğµãģé ƒòř Ŵìηðòẁš Рћõηê 8 đèνíĉêş ťĥàτ įś íйşρįŗêð Бÿ ťђè šćŕâťćђ ρѓôğѓâммįиġ łáйġµãġè ðéνêľòþêđ вУ ťћè МĮŤ.
+Ìτ îŝ ðêνèļôрęđ âť τнè ďèрâѓтmęйτ õƒ Šòƒťẅâŗę Τęčћηóľõģў áţ тнê ÜйîνèŗšîťУ õƒ Ťêĉћиõĺóġý Ġŕáž, Àúśтřìà.
+Τћé ρŗóġřãm îš ĺìċêηşéď úйďéř тћê ΜŚ-ЃĹ Ľíżèήź._!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ActiveProject" xml:space="preserve">
+          <source>active</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[7E5A3][!!_ãċтíνé_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ApplicationNameAndVersion" xml:space="preserve">
+          <source>Catrobat for Windows v{0}</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[E40AB][!!_Ćáţѓôъâť ƒòř Ẅįηďôẁś ν{0}_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonCancel" xml:space="preserve">
+          <source>cancel</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[87E3B][!!_čãηčéł_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonCopy" xml:space="preserve">
+          <source>copy</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[D2F8B][!!_ćõρў_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonCreate" xml:space="preserve">
+          <source>new</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[C38FC][!!_иéẁ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonDelete" xml:space="preserve">
+          <source>delete</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[EACA1][!!_đèĺèťê_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonEdit" xml:space="preserve">
+          <source>edit</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[A1156][!!_êďìť_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonLoginRegister" xml:space="preserve">
+          <source>Login or Register</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[B1125][!!_Ĺòģíй õř Ŗèğíŝťęŕ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonPasswordForgotten" xml:space="preserve">
+          <source>Password forgotten</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[ED491][!!_Рãŝŝŵòŗð ƒòŕġóţтèη_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonSave" xml:space="preserve">
+          <source>save</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[40AD6][!!_şâνé_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonUpload" xml:space="preserve">
+          <source>upload</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[418C0][!!_ùþłôãď_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_DEBUGShowMemory" xml:space="preserve">
+          <source>Show memory usage</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[01884][!!_Şћòŵ мèmòŗУ úśáģê_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_DownloadQueueMessage" xml:space="preserve">
+          <source>The project you chose is being downloaded. This might take a little while, but we'll tell you when it's finished!</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[86C8B][!!_Тħê þŗòĵêćť ÿõû čĥòšè įś вêíйğ ðõẃήłõâďéď. Ťћìş mìģĥт тâĸè ã łíťťłé ŵĥíĺê, ъµţ ẃę'ľł τèłļ ÿóú ẅђęή ìτ'ş ƒíήìŝнęđ!_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_FilterTextBoxHint" xml:space="preserve">
+          <source>Find...</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[E6BA6][!!_₣įйđ..._!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderAbout" xml:space="preserve">
+          <source>About</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[59276][!!_Áвôûτ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderCurrentProject" xml:space="preserve">
+          <source>Current Project</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[2E3F5][!!_Čûřřęиτ Þѓôĵèčţ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderDesign" xml:space="preserve">
+          <source>Design</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[71BB7][!!_Ðéšįĝй_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderLanguage" xml:space="preserve">
+          <source>Language</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[EF35D][!!_Ŀàηģùãğè_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderLocalProjects" xml:space="preserve">
+          <source>My Projects</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[27267][!!_МУ Ρřóĵêĉτś_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderOnlineProjects" xml:space="preserve">
+          <source>Online</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[FFC13][!!_Òηĺíиę_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderSettings" xml:space="preserve">
+          <source>Settings</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[3D8AE][!!_Šéţťíήģš_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ListDesign" xml:space="preserve">
+          <source>Design</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[3B2CE][!!_Ðęšìģη_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ListLanguage" xml:space="preserve">
+          <source>Language</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[034A2][!!_Ŀãήĝûáģè_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MainCopyProjectDialogMessage" xml:space="preserve">
+          <source>Are sure you want to copy "{0}"?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[B26E5][!!_Âřę ŝùѓę ÿòù ẁàйť ťõ ĉôþУ "{0}"?_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MainCopyProjectDialogTitle" xml:space="preserve">
+          <source>Copy project?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[2748A][!!_Ċóрў þŗôĵêċт?_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MainDeleteProjectDialogMessage" xml:space="preserve">
+          <source>Are sure you want to delete "{0}"?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[F614C][!!_Âřê šûŗê ŷóú ẃàйτ ťò ďéłęтè "{0}"?_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MainDeleteProjectDialogTitle" xml:space="preserve">
+          <source>Delete project?</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[FA7E2][!!_Ðêľèťę ρřõĵêčτ?_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MessageBoxInformation" xml:space="preserve">
+          <source>Information</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[34B19][!!_Įήƒôŗmáťîóй_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_NoDownloadsPending" xml:space="preserve">
+          <source>All downloads have finished.</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[14B91][!!_Âľļ ðôẁηļôàďŝ ћãνé ƒìиìŝнèð._!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_NoUploadsPending" xml:space="preserve">
+          <source>All uploads have finished.</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[91CE3][!!_Àĺĺ ûρĺòâđš ђâνé ƒįйįšĥęð._!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectDescription" xml:space="preserve">
+          <source>description:</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[58498][!!_ðêşċѓìрţîôй:_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectDownloadButton" xml:space="preserve">
+          <source>Download</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[4D373][!!_Đòẃήĺòàð_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectDownloads" xml:space="preserve">
+          <source>{0} downloads</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[17128][!!_{0} ðòŵйľôãðš_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectLicenseButton" xml:space="preserve">
+          <source>License</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[12566][!!_Ļìĉęиśé_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectListBoxLoadMore" xml:space="preserve">
+          <source>Load more...</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[8840B][!!_Ľõàð mòŕę..._!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectProject" xml:space="preserve">
+          <source>project:</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[44FF1][!!_ρŗõјęĉτ:_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectReportButton" xml:space="preserve">
+          <source>Report as unappropriate</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[CC7E7][!!_Řèрóŕť áŝ ùйâρρŕõþѓíàтé_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectStatistics" xml:space="preserve">
+          <source>statistics:</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[87918][!!_śťàţíśτįĉŝ:_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectUploaded" xml:space="preserve">
+          <source>uploaded:</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[9063B][!!_úρłõáđéđ:_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectUploadedBy" xml:space="preserve">
+          <source>{0} by</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[FED35][!!_{0} ъУ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectVersion" xml:space="preserve">
+          <source>(version: {0})</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[1534D][!!_(νêŗšįõη: {0})_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectViews" xml:space="preserve">
+          <source>{0} views</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[9F569][!!_{0} νìèŵŝ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ProjectDoesNotExist" xml:space="preserve">
+          <source>project does not exist</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[EA95B][!!_þŕõĵéĉτ ðòéš йõť ę×ìŝţ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ProjectName" xml:space="preserve">
+          <source>Project name</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[165BA][!!_Þѓóĵéċť йãмę_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ProjectNotValid" xml:space="preserve">
+          <source>project not valid</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[70DC2][!!_þŗõјéčτ ήóτ νáĺíð_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/App_ResourceLanguage" xml:space="preserve">
+          <source>en</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[BFB37][!!_éη_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_SettingsBricks" xml:space="preserve">
+          <source>enable/disable bricks</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[DCF6A][!!_éйâБľè/đíšâБĺé ъřîćкš_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_SettingsEnableNXTBricks" xml:space="preserve">
+          <source>Enable Mindstorm bricks</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[20887][!!_ÉиàБľę Мįйďšтõřm Бŗîċĸŝ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_SettingsTheme" xml:space="preserve">
+          <source>Theme</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[F672D][!!_Тĥémè_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_TitleNewProject" xml:space="preserve">
+          <source>NEW PROJECT</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[D246B][!!_ŇÉŴ РŖÒЈÊČŢ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_TitleSettings" xml:space="preserve">
+          <source>SETTINGS</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[04553][!!_ŞÈŢŢÌŅĢŚ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_TitleUploadProject" xml:space="preserve">
+          <source>UPLOAD PROJECT</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[B0DB3][!!_ÛРĽÔÂĎ ΡЃÒĴÉĆТ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_TitleUploadProjectLogin" xml:space="preserve">
+          <source>LOGIN OR REGISTER</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[8CAD2][!!_ĽÓĠÌŃ ÓŖ ЃÉĜÍŠΤÈŖ_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectEmail" xml:space="preserve">
+          <source>Email:</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[27B9E][!!_Èmáįł:_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectLoginError" xml:space="preserve">
+          <source>Login Error. {0}</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[B51EE][!!_Ļòġíй Ęŗѓõŗ. {0}_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectLoginErrorCaption" xml:space="preserve">
+          <source>Login failed</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[64576][!!_Ľôġįη ƒáíľèď_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectMissingLoginData" xml:space="preserve">
+          <source>Login- or registration- data is incomplete.</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[3F493][!!_Ĺóģîη- òŕ ŕêġìšţřãţįõй- ďàτã įŝ îиčõмрłęţę._!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectPassword" xml:space="preserve">
+          <source>Password:</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[D001B][!!_Рâśŝŵôŗď:_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectProjectDescription" xml:space="preserve">
+          <source>Description:</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[3181F][!!_Đéšċŕíþťîòη:_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectProjectName" xml:space="preserve">
+          <source>Project:</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[79D53][!!_Рřòјéĉτ:_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectRegistrationSucessful" xml:space="preserve">
+          <source>Registration successful!</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[A80FC][!!_Ŗéğįšτŗâťìôή ŝúćčêŝšƒµļ!_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectUndefinedError" xml:space="preserve">
+          <source>Undefined error. Error code {0}</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[E406E][!!_Úήđêƒìйèð êŗŗòѓ. Éѓѓòř ċóďê {0}_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectUsername" xml:space="preserve">
+          <source>Username:</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[CFEA7][!!_Úśéřиáмè:_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectWelcome" xml:space="preserve">
+          <source>Welcome {0}!</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[08F64][!!_Ŵèľĉõmé {0}!_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadQueueMessage" xml:space="preserve">
+          <source>Your project is being uploaded. This might take a little while, but we'll tell you when it's finished!</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[73DF4][!!_Ϋõµř þřôјêćţ įŝ Бèîиĝ µþľòâďèđ. Ţнìš мîğнτ тàĸê à ļįťτĺè ẃĥíľé, вûť ẅê'ļł ťéłľ ŷòû ẃĥęη ìτ'ş ƒįйîşħèđ!_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_VersionIsNotSupported" xml:space="preserve">
+          <source>project version is not supported</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[C8945][!!_рřòĵèċţ νèŕšįòи įś ήõť şùρþôřтèð_!!]</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/App_FlowDirection" xml:space="preserve">
+          <source>LeftToRight</source>
+          <target state="signed-off" state-qualifier="mt-suggestion">[A9356][!!_ĿèƒτΤóŖìĝĥţ_!!]</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

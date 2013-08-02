@@ -64,7 +64,15 @@ namespace Catrobat.Core.Objects.Costumes
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherReference = other as CostumeReference;
+
+            if (otherReference == null)
+                return false;
+
+            if (_reference != otherReference._reference)
+                return false;
+
+            return true;
         }
     }
 }

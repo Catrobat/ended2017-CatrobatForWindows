@@ -7,7 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Catrobat.Core.Objects;
-using Catrobat.IDECommon.Resources.IDE.Editor;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using GalaSoft.MvvmLight;
@@ -27,10 +27,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         private ImageDimention _dimention;
         private ImageSizeEntry _selectedSize;
         private ImageSource _image;
+        private Project _currentProject;
 
         #endregion
 
         #region Properties
+
+        public Project CurrentProject
+        {
+            get { return _currentProject; }
+            set
+            {
+                _currentProject = value;
+                RaisePropertyChanged(() => CurrentProject);
+            }
+        }
 
         public string CostumeName
         {
@@ -154,7 +165,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private async void SaveAction()
         {
-            Navigation.NavigateTo(typeof (CostumeSavingView));
+            Navigation.NavigateTo(typeof(CostumeSavingView));
 
             await Task.Run(() =>
             {
@@ -165,7 +176,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                         Height = SelectedSize.NewHeight,
                         Width = SelectedSize.NewWidth
                     };
-                    var costume = _builder.Save(CostumeName, newDimention);
+                    var costume = _builder.Save(CostumeName, newDimention, CurrentProject.BasePath);
                     _receivedSelectedSprite.Costumes.Costumes.Add(costume);
 
                     Navigation.RemoveBackEntry();
@@ -193,6 +204,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         #endregion
 
+        #region MessageActions
+        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        {
+            CurrentProject = message.Content;
+        }
+
+        #endregion
+
         public AddNewCostumeViewModel()
         {
             OpenGalleryCommand = new RelayCommand(OpenGalleryAction);
@@ -201,8 +220,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             CancelCommand = new RelayCommand(CancelAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-            Messenger.Default.Register<GenericMessage<Sprite>>(this, 
+            Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
+
+            Messenger.Default.Register<GenericMessage<Project>>(this,
+                ViewModelMessagingToken.SelectedProjectListener, CurrentProjectChangedMessageAction);
 
             InitImageSizes();
             if (IsInDesignMode)
@@ -221,7 +243,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             {
                 try
                 {
-                    CostumeName = EditorResources.Image;
+                    CostumeName = AppResources.Editor_Image;
 
                     _builder = new CostumeBuilder();
 
@@ -243,10 +265,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private void ShowLoadingImageFailure()
         {
-            var message = new DialogMessage(EditorResources.MessageBoxWrongImageFormatText, WrongImageFormatResult)
+            var message = new DialogMessage(AppResources.Editor_MessageBoxWrongImageFormatText, WrongImageFormatResult)
             {
                 Button = MessageBoxButton.OK,
-                Caption = EditorResources.MessageBoxWrongImageFormatHeader
+                Caption = AppResources.Editor_MessageBoxWrongImageFormatHeader
             };
             Messenger.Default.Send(message);
         }
@@ -271,7 +293,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private void ResetViewModel()
         {
-            //CostumeName = EditorResources.Image;
+            //CostumeName = AppResources.Editor_Image;
 
             //InitImageSizes();
             //_builder = null;

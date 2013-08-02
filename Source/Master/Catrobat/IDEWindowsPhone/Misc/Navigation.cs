@@ -39,5 +39,13 @@ namespace Catrobat.IDEWindowsPhone.Misc
         {
             ((PhoneApplicationFrame) Application.Current.RootVisual).RemoveBackEntry();
         }
+
+        public static bool CanGoBack
+        {
+            get
+            {
+                return ((PhoneApplicationFrame)Application.Current.RootVisual).CanGoBack;
+            }
+        }
     }
 }

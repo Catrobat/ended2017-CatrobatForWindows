@@ -6,12 +6,14 @@
   xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+  xmlns:appBarUtils="clr-namespace:AppBarUtils;assembly=AppBarUtils"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d"
-  DataContext="{Binding ProjectNotValid, Source={StaticResource Locator}}"
+  DataContext="{Binding ProjectNotValidViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="True">
 
   <!--LayoutRoot is the root grid where all page content is placed-->
@@ -26,8 +28,21 @@
 
     <!--ContentPanel - place additional content here-->
     <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-      <TextBlock Text="Project not supported"></TextBlock>
+      <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock Text="{Binding ErrorMessage}"></TextBlock>
+      </Grid>
     </Grid>
   </Grid>
-
+  
+  <i:Interaction.Triggers>
+    <appBarUtils:StateChangedTrigger State="false">
+      <appBarUtils:SwitchAppBarAction>
+        <appBarUtils:AppBar Id="0">
+          <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.home.rest.png" 
+                              Text="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding FinishedCommand}" />
+        </appBarUtils:AppBar>
+      </appBarUtils:SwitchAppBarAction>
+    </appBarUtils:StateChangedTrigger>
+  </i:Interaction.Triggers>
 </phone:PhoneApplicationPage>

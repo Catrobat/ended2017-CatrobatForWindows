@@ -140,7 +140,44 @@ namespace Catrobat.Core.Objects.Formulas
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherFormulaTree = other as FormulaTree;
+
+            if (otherFormulaTree == null)
+                return false;
+
+            if (LeftChild != null && otherFormulaTree.LeftChild != null)
+            {
+                if (!LeftChild.Equals(otherFormulaTree.LeftChild))
+                    return false;
+            }
+            else if(!(LeftChild == null && otherFormulaTree.LeftChild == null))
+                return false;
+
+            if (RightChild != null && otherFormulaTree.RightChild != null)
+            {
+                if (!RightChild.Equals(otherFormulaTree.RightChild))
+                    return false;
+            }
+            else if(!(RightChild == null && otherFormulaTree.RightChild == null))
+                return false;
+
+            if (VariableType != null && otherFormulaTree.VariableType != null)
+            {
+                if (VariableType != otherFormulaTree.VariableType)
+                    return false;
+            }
+            else if(!(VariableType == null && otherFormulaTree.VariableType == null))
+                return false;
+
+            if (VariableValue != null && otherFormulaTree.VariableValue != null)
+            {
+                if (VariableValue != otherFormulaTree.VariableValue)
+                    return false;
+            }
+            else if(!(VariableValue == null && otherFormulaTree.VariableValue == null))
+                return false;
+
+            return true;
         }
     }
 }

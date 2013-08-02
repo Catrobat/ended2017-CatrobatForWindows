@@ -22,9 +22,8 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.Paint;
 using Catrobat.Paint.Annotations;
+using Catrobat.Paint.Resources;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -68,11 +67,11 @@ namespace Catrobat.Paint.ViewModel
         }
 
         private readonly LocalizedStrings _localizedStrings;
-        public PaintResources Resources
+        public AppResources Resources
         {
             get
             {
-                return _localizedStrings.Paint;
+                return _localizedStrings.Resources;
             }
         }
 

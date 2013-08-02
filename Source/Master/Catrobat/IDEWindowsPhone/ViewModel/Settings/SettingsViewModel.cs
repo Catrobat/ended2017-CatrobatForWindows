@@ -5,8 +5,9 @@ using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.IDECommon.Resources;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.Views.Settings;
@@ -134,9 +135,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
 
         private void ThemeChooserOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            if (propertyChangedEventArgs.PropertyName == "SelectedTheme")
+            if (propertyChangedEventArgs.PropertyName == PropertyNameHelper.GetPropertyNameFromExpression(() => _themeChooser.SelectedTheme))
             {
-                RaisePropertyChanged("ActiveTheme");
+                RaisePropertyChanged(() => ActiveTheme);
             }
         }
     }

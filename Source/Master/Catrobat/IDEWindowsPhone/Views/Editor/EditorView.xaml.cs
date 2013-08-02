@@ -8,8 +8,6 @@ using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
-using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.IDE.Editor;
 using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -33,7 +31,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         private readonly EditorViewModel _viewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
 
         private bool _updatePivot = true;
-        private bool _isSpriteDragging;
 
         public EditorView()
         {
@@ -46,7 +43,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == "SelectedSprite")
+            {
                 ReorderListBoxSprites.SelectedItem = _viewModel.SelectedSprite;
+                LockPivotIfNoSpriteSelected();
+            }
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)
@@ -99,45 +99,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
                     }
                 }
             }
-        }
-
-        private void reorderListBoxSprites_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            _viewModel.IsSpriteSelecting = true;
-
-            var task = Task.Run(() =>
-            {
-                Dispatcher.BeginInvoke(() =>
-                {
-                    var reorderableListbox = (sender as ReorderListBox);
-                    if (reorderableListbox != null)
-                    {
-                        var selectedSprite = reorderableListbox.SelectedItem as Sprite;
-
-                        if (reorderableListbox.IsDraging)
-                        {
-                            _isSpriteDragging = true;
-                            reorderableListbox.IsDraging = false;
-                        }
-                        else
-                        {
-                            if (_isSpriteDragging)
-                            {
-                                _isSpriteDragging = false;
-                            }
-                            else
-                            {
-                                if (selectedSprite != null && selectedSprite != _viewModel.SelectedSprite)
-                                    _viewModel.SelectedSprite = selectedSprite;
-
-                                LockPivotIfNoSpriteSelected();
-                            }
-                        }
-                    }
-
-                    _viewModel.IsSpriteSelecting = false;
-                });
-            });
         }
     }
 }

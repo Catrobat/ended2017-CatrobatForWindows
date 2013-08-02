@@ -253,7 +253,22 @@ namespace Catrobat.Core.Objects.Bricks
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherBrickList = other as BrickList;
+
+            if (otherBrickList == null)
+                return false;
+
+            var count = Bricks.Count;
+            var otherCount = otherBrickList.Bricks.Count;
+
+            if (count != otherCount)
+                return false;
+
+            for(int i = 0; i < count; i++)
+                if(!Bricks[i].Equals(otherBrickList.Bricks[i]))
+                    return false;
+
+            return true;
         }
     }
 }

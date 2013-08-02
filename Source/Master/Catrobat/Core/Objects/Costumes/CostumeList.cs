@@ -60,7 +60,22 @@ namespace Catrobat.Core.Objects.Costumes
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherCostumeList = other as CostumeList;
+
+            if (otherCostumeList == null)
+                return false;
+
+            var count = Costumes.Count;
+            var otherCount = otherCostumeList.Costumes.Count;
+
+            if (count != otherCount)
+                return false;
+
+            for(int i = 0; i < count; i++)
+                if(!Costumes[i].Equals(otherCostumeList.Costumes[i]))
+                    return false;
+            
+            return true;
         }
     }
 }

@@ -13,7 +13,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using IDEWindowsPhone;
 
-namespace Catrobat.IDEWindowsPhone.ViewModel.Scripts
+namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
 {
     public class AddNewScriptBrickViewModel : ViewModelBase
     {

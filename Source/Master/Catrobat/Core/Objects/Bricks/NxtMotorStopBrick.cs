@@ -55,7 +55,15 @@ namespace Catrobat.Core.Objects.Bricks
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherBrick = other as NxtMotorStopBrick;
+
+            if (otherBrick == null)
+                return false;
+
+            if (Motor != otherBrick.Motor)
+                return false;
+
+            return true;
         }
     }
 }

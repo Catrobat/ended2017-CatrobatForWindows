@@ -11,7 +11,7 @@
   Foreground="{StaticResource PhoneForegroundBrush}"
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-  DataContext="{Binding AddNewSound, Source={StaticResource Locator}}"
+  DataContext="{Binding AddNewSoundViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="True">
 
   <Grid x:Name="LayoutRoot"
@@ -22,7 +22,7 @@
     </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Path=Editor.TitleNewSound, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleNewSound, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
@@ -35,7 +35,7 @@
                 <ColumnDefinition/>
               </Grid.ColumnDefinitions>
               <Image Source="/Content/Images/Misc/AudioLibrary.png" Margin="30 15 15 15"></Image>
-              <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Editor.MediaLibrary, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+              <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Resources.Editor_MediaLibrary, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
             </Grid>
           </ControlTemplate>
         </Button.Template>
@@ -49,7 +49,7 @@
                 <ColumnDefinition/>
               </Grid.ColumnDefinitions>
               <Image Source="/Content/Images/Misc/AudioRecorder.png" Margin="30 15 15 15"></Image>
-              <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=Editor.Recorder, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+              <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Resources.Editor_Recorder, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
             </Grid>
           </ControlTemplate>
         </Button.Template>

@@ -160,7 +160,18 @@ namespace Catrobat.Core.Objects.Bricks
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherBrick = other as IfLogicBeginBrick;
+
+            if (otherBrick == null)
+                return false;
+
+            if (!IfLogicElseBrickReference.Equals(otherBrick.IfLogicElseBrickReference))
+                return false;
+
+            if (!IfLogicEndBrickReference.Equals(otherBrick.IfLogicEndBrickReference))
+                return false;
+
+            return true;
         }
     }
 }

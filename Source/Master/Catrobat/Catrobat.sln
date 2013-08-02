@@ -37,8 +37,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsWindowsPhone", "TestsW
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlayerWindowsPhone8Test", "PlayerWindowsPhone8Test\PlayerWindowsPhone8Test.vcxproj", "{C0CED763-9E71-4CA7-9DEF-CE037453AD52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingAppTest", "DrawingAppTest\DrawingAppTest.csproj", "{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paint", "Paint\Paint.csproj", "{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaintStandAloneApp", "PaintStandAloneApp\PaintStandAloneApp.csproj", "{2D3200F2-3FCB-41B2-871B-A2773075613F}"
@@ -49,7 +47,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FormulaEvaluation", "Formul
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 18
+		SccNumberOfProjects = 17
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -89,21 +87,18 @@ Global
 		SccProjectUniqueName12 = PlayerWindowsPhone8Test\\PlayerWindowsPhone8Test.vcxproj
 		SccProjectName12 = PlayerWindowsPhone8Test
 		SccLocalPath12 = PlayerWindowsPhone8Test
-		SccProjectUniqueName13 = DrawingAppTest\\DrawingAppTest.csproj
-		SccProjectName13 = DrawingAppTest
-		SccLocalPath13 = DrawingAppTest
-		SccProjectUniqueName14 = Paint\\Paint.csproj
-		SccProjectName14 = Paint
-		SccLocalPath14 = Paint
-		SccProjectUniqueName15 = PaintStandAloneApp\\PaintStandAloneApp.csproj
-		SccProjectName15 = PaintStandAloneApp
-		SccLocalPath15 = PaintStandAloneApp
-		SccProjectUniqueName16 = TestsPaint\\TestsPaint.csproj
-		SccProjectName16 = TestsPaint
-		SccLocalPath16 = TestsPaint
-		SccProjectUniqueName17 = FormulaEvaluation\\FormulaEvaluation.vcxproj
-		SccProjectName17 = FormulaEvaluation
-		SccLocalPath17 = FormulaEvaluation
+		SccProjectUniqueName13 = Paint\\Paint.csproj
+		SccProjectName13 = Paint
+		SccLocalPath13 = Paint
+		SccProjectUniqueName14 = PaintStandAloneApp\\PaintStandAloneApp.csproj
+		SccProjectName14 = PaintStandAloneApp
+		SccLocalPath14 = PaintStandAloneApp
+		SccProjectUniqueName15 = TestsPaint\\TestsPaint.csproj
+		SccProjectName15 = TestsPaint
+		SccLocalPath15 = TestsPaint
+		SccProjectUniqueName16 = FormulaEvaluation\\FormulaEvaluation.vcxproj
+		SccProjectName16 = FormulaEvaluation
+		SccLocalPath16 = FormulaEvaluation
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -425,34 +420,6 @@ Global
 		{C0CED763-9E71-4CA7-9DEF-CE037453AD52}.Release|x64.ActiveCfg = Release|Win32
 		{C0CED763-9E71-4CA7-9DEF-CE037453AD52}.Release|x86.ActiveCfg = Release|Win32
 		{C0CED763-9E71-4CA7-9DEF-CE037453AD52}.Release|x86.Build.0 = Release|Win32
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|ARM.ActiveCfg = Debug|ARM
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|ARM.Build.0 = Debug|ARM
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|ARM.Deploy.0 = Debug|ARM
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Win32.ActiveCfg = Debug|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Win32.Build.0 = Debug|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|Win32.Deploy.0 = Debug|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|x64.ActiveCfg = Debug|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|x86.ActiveCfg = Debug|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|x86.Build.0 = Debug|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Debug|x86.Deploy.0 = Debug|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Any CPU.ActiveCfg = Release|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|ARM.ActiveCfg = Release|ARM
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|ARM.Build.0 = Release|ARM
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|ARM.Deploy.0 = Release|ARM
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Mixed Platforms.Build.0 = Release|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Mixed Platforms.Deploy.0 = Release|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Win32.ActiveCfg = Release|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Win32.Build.0 = Release|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|Win32.Deploy.0 = Release|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|x64.ActiveCfg = Release|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|x86.ActiveCfg = Release|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|x86.Build.0 = Release|x86
-		{0A04EFE9-8E49-4D56-AC82-4BB6EEFFF97F}.Release|x86.Deploy.0 = Release|x86
 		{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}.Debug|ARM.ActiveCfg = Debug|ARM

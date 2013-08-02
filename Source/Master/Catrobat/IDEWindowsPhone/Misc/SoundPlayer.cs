@@ -39,7 +39,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
             _previousState = SoundState.Stopped;
 
-            var path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/" +
+            var path = CatrobatContextBase.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/" +
                        sound.FileName;
 
             using (var storage = StorageSystem.GetStorage())

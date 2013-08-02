@@ -9,7 +9,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
     {
         #region private Members
 
-        private readonly ICatrobatContext _catrobatContext;
+        private readonly CatrobatContextBase _catrobatContext;
         private string _projectName;
 
         #endregion
@@ -57,7 +57,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private void SaveAction()
         {
             _catrobatContext.CurrentProject.Save();
-            CatrobatContext.GetContext().CreateNewProject(_projectName); //TODO change to _catrobatContext
+            CatrobatContextBase.GetContext().CreateNewProject(_projectName); //TODO change to _catrobatContext
 
             Navigation.NavigateBack();
         }
@@ -87,7 +87,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             }
             else
             {
-                _catrobatContext = CatrobatContext.GetContext();
+                _catrobatContext = CatrobatContextBase.GetContext();
             }
         }
 

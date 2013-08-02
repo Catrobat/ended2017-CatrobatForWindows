@@ -13,7 +13,7 @@
   Foreground="{StaticResource PhoneForegroundBrush}"
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-  DataContext="{Binding AddNewCostume, Source={StaticResource Locator}}"
+  DataContext="{Binding AddNewCostumeViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="True">
 
   <Grid x:Name="LayoutRoot"
@@ -24,7 +24,7 @@
     </Grid.RowDefinitions>
     <StackPanel>
       <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-        <TextBlock Margin="0" Text="{Binding Path=Editor.TitleNewCostume, Source={StaticResource LocalizedStrings}}" 
+        <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleNewCostume, Source={StaticResource LocalizedStrings}}" 
                    Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
       </StackPanel>
 
@@ -40,7 +40,7 @@
                 </Grid.ColumnDefinitions>
                 <Image Source="/Content/Images/Misc/Gallery.png" Margin="30 15 15 15"></Image>
                 <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
-                           Text="{Binding Path=Editor.ImageGallery, Source={StaticResource LocalizedStrings}}" 
+                           Text="{Binding Resources.Editor_ImageGallery, Source={StaticResource LocalizedStrings}}" 
                            Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
               </Grid>
             </ControlTemplate>
@@ -58,7 +58,7 @@
                 </Grid.ColumnDefinitions>
                 <Image Source="/Content/Images/Misc/Camera.png" Margin="30 15 15 15"></Image>
                 <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" 
-                           Text="{Binding Path=Editor.Camera, Source={StaticResource LocalizedStrings}}" 
+                           Text="{Binding Resources.Editor_Camera, Source={StaticResource LocalizedStrings}}" 
                            Style="{StaticResource PhoneTextExtraLargeStyle}" />
               </Grid>
             </ControlTemplate>

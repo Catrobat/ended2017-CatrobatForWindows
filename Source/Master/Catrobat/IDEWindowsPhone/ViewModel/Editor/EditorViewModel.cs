@@ -1,4 +1,7 @@
 ﻿using System.Collections.Specialized;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Threading;
 using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
@@ -6,6 +9,7 @@ using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
@@ -14,7 +18,6 @@ using GalaSoft.MvvmLight.Command;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using GalaSoft.MvvmLight.Messaging;
-using Catrobat.IDECommon.Resources.IDE.Editor;
 using System.Windows;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
@@ -31,7 +34,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
     {
         #region Private Members
 
-        private readonly ICatrobatContext _catrobatContext;
+        private readonly CatrobatContextBase _catrobatContext;
         private Sprite _selectedSprite;
         private readonly ScriptBrickCollection _scriptBricks;
         private SoundPlayer _soundPlayer;
@@ -80,10 +83,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 if (_scriptBricks != null && _scriptBricks.Count == 0 && _listBoxViewPort == null)
                     ListBoxViewPort = new ListBoxViewPort(0, 0);
 
-                _scriptBricks.Update(_selectedSprite);
+                if (_scriptBricks != null)
+                {
+                    _scriptBricks.Update(_selectedSprite);
 
-                if (_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 && ListBoxViewPort.LastVisibleIndex == 0)
-                    ListBoxViewPort = new ListBoxViewPort(1, 2);
+                    if (_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 && ListBoxViewPort.LastVisibleIndex == 0)
+                        ListBoxViewPort = new ListBoxViewPort(1, 2);
+                }
 
                 RaisePropertyChanged(() => SelectedSprite);
                 RaisePropertyChanged(() => Sounds);
@@ -253,6 +259,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         # endregion
 
         #region Commands
+
+
+        public RelayCommand<Sprite> SelectedSpriteChangedCommand
+        {
+            get;
+            private set;
+        }
 
         public RelayCommand AddNewSpriteCommand
         {
@@ -496,6 +509,18 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         #region Actions
 
+
+        private void SelectedSpriteChangedAction(Sprite newSelectedSprite)
+        {
+            var task = Task.Run(() =>
+            {
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    SelectedSprite = newSelectedSprite;
+                });
+            });
+        }
+
         private void AddNewScriptBrickAction()
         {
             //var message1 = new GenericMessage<Sprite>(SelectedSprite);
@@ -595,9 +620,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void DeleteSpriteAction()
         {
-            var sprite = EditorResources.ObjectSingular;
-            var messageContent = String.Format(EditorResources.MessageBoxDeleteText, "1", sprite);
-            var messageHeader = String.Format(EditorResources.MessageBoxDeleteHeader, sprite);
+            var sprite = AppResources.Editor_ObjectSingular;
+            var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, "1", sprite);
+            var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, sprite);
 
             var message =
                 new DialogMessage(messageContent, DeleteSpriteMessageBoxResult)
@@ -630,9 +655,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void DeleteSoundAction()
         {
-            var sound = SelectedSounds.Count == 1 ? EditorResources.SoundSingular : EditorResources.SoundPlural;
-            var messageContent = String.Format(EditorResources.MessageBoxDeleteText, SelectedSounds.Count, sound);
-            var messageHeader = String.Format(EditorResources.MessageBoxDeleteHeader, sound);
+            var sound = SelectedSounds.Count == 1 ? AppResources.Editor_SoundSingular : AppResources.Editor_SoundPlural;
+            var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedSounds.Count, sound);
+            var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, sound);
 
             var message =
                 new DialogMessage(messageContent, DeleteSoundMessageBoxResult)
@@ -675,9 +700,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void DeleteCostumeAction()
         {
-            var costume = SelectedCostumes.Count == 1 ? EditorResources.CostumeSingular : EditorResources.CostumePlural;
-            var messageContent = String.Format(EditorResources.MessageBoxDeleteText, SelectedCostumes.Count, costume);
-            var messageHeader = String.Format(EditorResources.MessageBoxDeleteHeader, costume);
+            var costume = SelectedCostumes.Count == 1 ? AppResources.Editor_CostumeSingular : AppResources.Editor_CostumePlural;
+            var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedCostumes.Count, costume);
+            var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, costume);
 
             var message =
                 new DialogMessage(messageContent, DeleteCostumeMessageBoxResult)
@@ -849,6 +874,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             SelectedSounds = new ObservableCollection<Sound>();
             SelectedSounds.CollectionChanged += SelectedSoundsOnCollectionChanged;
 
+            SelectedSpriteChangedCommand = new RelayCommand<Sprite>(SelectedSpriteChangedAction);
+
             AddBroadcastMessageCommand = new RelayCommand<DataObject>(AddBroadcastMessageAction);
 
             AddNewSpriteCommand = new RelayCommand(AddNewSpriteAction);
@@ -897,7 +924,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             }
             else
             {
-                _catrobatContext = CatrobatContext.GetContext();
+                _catrobatContext = CatrobatContextBase.GetContext();
             }
 
             _scriptBricks = new ScriptBrickCollection();
@@ -936,7 +963,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 {
                     costume.Delete();
                     Costumes.Remove(costume);
-                    CatrobatContext.GetContext().CleanUpCostumeReferences(costume, SelectedSprite);
+                    CatrobatContextBase.GetContext().CleanUpCostumeReferences(costume, SelectedSprite);
                 }
             }
         }
@@ -951,7 +978,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 {
                     sound.Delete();
                     Sounds.Remove(sound);
-                    CatrobatContext.GetContext().CleanUpSoundReferences(sound, SelectedSprite);
+                    CatrobatContextBase.GetContext().CleanUpSoundReferences(sound, SelectedSprite);
                 }
             }
         }
@@ -972,7 +999,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
                 SelectedSprite.Delete();
                 Sprites.Remove(SelectedSprite);
-                CatrobatContext.GetContext().CleanUpSpriteReferences(SelectedSprite);
+                CatrobatContextBase.GetContext().CleanUpSpriteReferences(SelectedSprite);
             }
         }
 

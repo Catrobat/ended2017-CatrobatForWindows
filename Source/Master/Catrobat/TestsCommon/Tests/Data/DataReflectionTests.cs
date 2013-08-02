@@ -21,33 +21,20 @@ namespace Catrobat.TestsCommon.Tests.Data
         [TestMethod]
         public void ReflectionWriteReadTest1()
         {
-            const string savePath1 = "/ReflectionWriteReadTest1/project.xml";
-            const string savePath2 = "/ReflectionWriteReadTest1/project.xml";
+            const string savePath = "/ReflectionWriteReadTest1/project.xml";
 
             var project1 = ProjectGenerator.GenerateProject();
 
-            project1.Save(savePath1);
+            project1.Save(savePath);
 
             string xml1;
             using (IStorage storage = new StorageTest())
             {
-                xml1 = storage.ReadTextFile(savePath1);
+                xml1 = storage.ReadTextFile(savePath);
             }
 
             var project2 = new Project(xml1);
-            project2.Save(savePath2);
-            
-            string xml2;
-            using (IStorage storage = new StorageTest())
-            {
-                xml2 = storage.ReadTextFile(savePath1);
-            }
-
-            var document1 = XDocument.Load(new StringReader(xml1));
-
-            var document2 = XDocument.Load(new StringReader(xml2));
-
-            XmlDocumentCompare.Compare(document1, document2);
+            Assert.IsTrue(project1.Equals(project2));
         }
 
         

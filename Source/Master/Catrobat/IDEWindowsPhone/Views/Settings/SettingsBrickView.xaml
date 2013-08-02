@@ -11,7 +11,7 @@
   Foreground="{StaticResource PhoneForegroundBrush}"
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-  DataContext="{Binding Settings, Source={StaticResource Locator}}"
+  DataContext="{Binding SettingsViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="True">
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -21,8 +21,8 @@
     </Grid.RowDefinitions>
 
     <StackPanel Grid.Row="0" Margin="10 0 0 20">
-      <TextBlock Margin="0" Text="{Binding Path=Main.TitleSettings, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" />
-      <TextBlock Margin="0 -10 0 0" Text="{Binding Path=Main.HeaderSettingsBricks, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextTitle1Style}"/>
+      <TextBlock Margin="0" Text="{Binding Resources.Main_TitleSettings, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock Margin="0 -10 0 0" Text="{Binding Resources.Main_HeaderSettingsBricks, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextTitle1Style}"/>
     </StackPanel>
 
     <Grid Grid.Row="1" Margin="10 0 0 15">
@@ -31,7 +31,7 @@
         <RowDefinition />
       </Grid.RowDefinitions>
 
-      <CheckBox Grid.Row="0" Name="checkboxEnableNXT" Content="{Binding Path=Main.SettingsEnableNXTBricks, Source={StaticResource LocalizedStrings}}" IsChecked="false"></CheckBox>
+      <CheckBox Grid.Row="0" Name="checkboxEnableNXT" Content="{Binding Resources.Main_SettingsEnableNXTBricks, Source={StaticResource LocalizedStrings}}" IsChecked="false"></CheckBox>
     </Grid>
   </Grid>
 </phone:PhoneApplicationPage>

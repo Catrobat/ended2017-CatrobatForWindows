@@ -50,7 +50,22 @@ namespace Catrobat.Core.Objects.Variables
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherUserVariableList = other as UserVariableList;
+
+            if (otherUserVariableList == null)
+                return false;
+
+            var count = UserVariables.Count;
+            var otherCount = otherUserVariableList.UserVariables.Count;
+
+            if (count != otherCount)
+                return false;
+
+            for (int i = 0; i < count; i++)
+                if (UserVariables[i].Equals(otherUserVariableList.UserVariables[i]))
+                    return false;
+
+            return true;
         }
     }
 }

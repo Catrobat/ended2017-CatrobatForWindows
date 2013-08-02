@@ -186,7 +186,39 @@ namespace Catrobat.Core.Objects
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherSprite = other as Sprite;
+
+            if (otherSprite == null)
+                return false;
+
+            if (Costumes != null && otherSprite.Costumes != null)
+            {
+                if (!Costumes.Equals(otherSprite.Costumes))
+                    return false;
+            }
+            else if (!(Costumes == null && otherSprite.Costumes == null))
+                return false;
+
+            if (Sounds != null && otherSprite.Sounds != null)
+            {
+                if (!Sounds.Equals(otherSprite.Sounds))
+                    return false;
+            }
+            else if (!(Sounds == null && otherSprite.Sounds == null))
+                return false;
+
+            if (Scripts != null && otherSprite.Scripts != null)
+            {
+                if (!Scripts.Equals(otherSprite.Scripts))
+                    return false;
+            }
+            else if (!(Scripts == null && otherSprite.Scripts == null))
+                return false;
+
+            if (Name != otherSprite.Name)
+                return false;
+
+            return true;
         }
     }
 }

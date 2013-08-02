@@ -460,7 +460,51 @@ namespace Catrobat.Core.Objects
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherProjectHeader = other as ProjectHeader;
+
+            if (otherProjectHeader == null)
+                return false;
+
+            if (ApplicationBuildName != otherProjectHeader.ApplicationBuildName)
+                return false;
+            if (ApplicationBuildNumber != otherProjectHeader.ApplicationBuildNumber)
+                return false;
+            if (ApplicationName != otherProjectHeader.ApplicationName)
+                return false;
+            if (ApplicationVersion != otherProjectHeader.ApplicationVersion)
+                return false;
+            if (CatrobatLanguageVersion != otherProjectHeader.CatrobatLanguageVersion)
+                return false;
+            if (DateTimeUpload != otherProjectHeader.DateTimeUpload)
+                return false;
+            if (Description != otherProjectHeader.Description)
+                return false;
+            if (DeviceName != otherProjectHeader.DeviceName)
+                return false;
+            if (MediaLicense != otherProjectHeader.MediaLicense)
+                return false;
+            if (Platform != otherProjectHeader.Platform)
+                return false;
+            if (PlatformVersion != otherProjectHeader.PlatformVersion)
+                return false;
+            if (ProgramLicense != otherProjectHeader.ProgramLicense)
+                return false;
+            if (ProgramName != otherProjectHeader.ProgramName)
+                return false;
+            if (RemixOf != otherProjectHeader.RemixOf)
+                return false;
+            if(ScreenHeight != otherProjectHeader.ScreenHeight)
+                return false;
+            if (ScreenWidth != otherProjectHeader.ScreenWidth)
+                return false;
+            if (Tags != otherProjectHeader.Tags)
+                return false;
+            if (Url != otherProjectHeader.Url)
+                return false;
+            if (UserHandle != otherProjectHeader.UserHandle)
+                return false;
+
+            return true;
         }
     }
 }

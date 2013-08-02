@@ -1,0 +1,904 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en" target-language="it" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="IDEWindowsPhone" product-version="1.0.0.0" build-num="0">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="2.0.1000.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="Resx">
+        <trans-unit translate="yes" id="Resx/Brick_Broadcast" xml:space="preserve">
+          <source>broadcast</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">trasmissione</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_BroadcastWait" xml:space="preserve">
+          <source>broadcast and wait</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">broadcast e attesa</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ButtonNew" xml:space="preserve">
+          <source>new...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nuovo...</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_CategoryControl" xml:space="preserve">
+          <source>Control</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Controllo</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_CategoryLooks" xml:space="preserve">
+          <source>Looks</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Guarda</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_CategoryMotion" xml:space="preserve">
+          <source>Motion</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Movimento</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_CategorySound" xml:space="preserve">
+          <source>Sound</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Suono</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeBrightnessBy" xml:space="preserve">
+          <source>change brightness by</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">modificare la luminosità di</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeGhostEffectBy" xml:space="preserve">
+          <source>change ghost effect by</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">cambiare effetto fantasma da</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeSizeBy" xml:space="preserve">
+          <source>change size by</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">modificare le dimensioni di</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeVolumeBy" xml:space="preserve">
+          <source>change volume by</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">modificare il volume di</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeXBy" xml:space="preserve">
+          <source>change X by</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">cambiare X da</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeYBy" xml:space="preserve">
+          <source>change Y by</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">cambiare Y da</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ClearGraphicEffects" xml:space="preserve">
+          <source>clear graphic effects</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">cancellare gli effetti grafici</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ComeToFront" xml:space="preserve">
+          <source>come to front</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Vieni al fronte</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Degrees" xml:space="preserve">
+          <source>degrees</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">gradi</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Forever" xml:space="preserve">
+          <source>forever</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">per sempre</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_GlideToGlide" xml:space="preserve">
+          <source>glide</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Glide</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_GlideToTo" xml:space="preserve">
+          <source>to</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">A</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_GoNStepsBackGo" xml:space="preserve">
+          <source>go back</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Indietro</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_GoNStepsBackStepsBack" xml:space="preserve">
+          <source>layers</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">strati</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Hide" xml:space="preserve">
+          <source>hide</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nascondi</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_IfOnEdgeBounce" xml:space="preserve">
+          <source>if on edge, bounce</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Se sul bordo, rimbalzo</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_LoopEnd" xml:space="preserve">
+          <source>end of loop</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">fine del ciclo</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_MoveNStepsMove" xml:space="preserve">
+          <source>move</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">spostare</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_MoveNStepsSteps" xml:space="preserve">
+          <source>steps</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">passaggi</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_NextCostume" xml:space="preserve">
+          <source>next costume</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">costume successivo</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Note" xml:space="preserve">
+          <source>note</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nota</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_PlaceAt" xml:space="preserve">
+          <source>place at</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">posto a</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_PlaySound" xml:space="preserve">
+          <source>play sound</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">riprodurre l'audio</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_PointInDirection" xml:space="preserve">
+          <source>point in direction</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">punto nella direzione</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_PointTo" xml:space="preserve">
+          <source>point towards</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">punto verso</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Repeat" xml:space="preserve">
+          <source>repeat</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Ripetere</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Seconds" xml:space="preserve">
+          <source>seconds</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">secondi</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetBrightnessTo" xml:space="preserve">
+          <source>set brightness to</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">luminosità impostata a</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetCostume" xml:space="preserve">
+          <source>set costume</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">set costume</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetGhostEffectTo" xml:space="preserve">
+          <source>set ghost effect to</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">impostare effetto fantasma</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetSizeTo" xml:space="preserve">
+          <source>set size to</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">dimensione set a</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetVolumeTo" xml:space="preserve">
+          <source>set volume to</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">volume impostato per</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetXTo" xml:space="preserve">
+          <source>set X to</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">impostare X</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetYTo" xml:space="preserve">
+          <source>set Y to</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Y è impostata su</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Show" xml:space="preserve">
+          <source>show</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Visualizza</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Speak" xml:space="preserve">
+          <source>speak</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">parlare</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_StopAllSounds" xml:space="preserve">
+          <source>stop all sounds</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">interrompere tutti i suoni</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Times" xml:space="preserve">
+          <source>times</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">volte</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_TurnLeft" xml:space="preserve">
+          <source>turn left</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">girare a sinistra</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_TurnRight" xml:space="preserve">
+          <source>turn right</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">girare a destra</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Wait" xml:space="preserve">
+          <source>wait</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">attendere</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_WhenIReceive" xml:space="preserve">
+          <source>when I receive</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Quando ricevo</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_WhenProjectStarts" xml:space="preserve">
+          <source>when project starts</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Quando inizia il progetto</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_WhenTapped" xml:space="preserve">
+          <source>when tapped</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Quando tappata</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ActionPlural" xml:space="preserve">
+          <source>actions</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">azioni</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ActionSingular" xml:space="preserve">
+          <source>action</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">azione</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_BroadcastMessage" xml:space="preserve">
+          <source>Broadcast message</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Messaggio broadcast</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddCostume" xml:space="preserve">
+          <source>new costume</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">nuovo costume</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddObject" xml:space="preserve">
+          <source>new object</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">nuovo oggetto</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddScript" xml:space="preserve">
+          <source>new action</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">nuova azione</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddSound" xml:space="preserve">
+          <source>new sound</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">nuovo suono</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonBack" xml:space="preserve">
+          <source>back</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Indietro</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonCancel" xml:space="preserve">
+          <source>cancel</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Annulla</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonChange" xml:space="preserve">
+          <source>change</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">cambiamento</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonCopy" xml:space="preserve">
+          <source>copy</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">copia</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonDelete" xml:space="preserve">
+          <source>delete</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">eliminare</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonPlayProject" xml:space="preserve">
+          <source>play project</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">giocare a progetto</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonSave" xml:space="preserve">
+          <source>save</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Salva</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonUse" xml:space="preserve">
+          <source>use</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">utilizzare</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Camera" xml:space="preserve">
+          <source>Camera</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Fotocamera</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ClearSelection" xml:space="preserve">
+          <source>selektierung aufheben</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">separazione selektierung</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_CostumeName" xml:space="preserve">
+          <source>Costume name</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nome di costume</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_CostumePlural" xml:space="preserve">
+          <source>costumes</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">costumi</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_CostumeSingular" xml:space="preserve">
+          <source>costume</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">costume</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Image" xml:space="preserve">
+          <source>Image</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Immagine</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageGallery" xml:space="preserve">
+          <source>Image Gallery</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Galleria di immagini</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageSizeFullSize" xml:space="preserve">
+          <source>full size</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Full size</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageSizeLarge" xml:space="preserve">
+          <source>large</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">grande</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageSizeMedium" xml:space="preserve">
+          <source>medium</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">medio</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageSizeSmall" xml:space="preserve">
+          <source>small</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">piccolo</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MediaLibrary" xml:space="preserve">
+          <source>Media Library</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Media Library</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MenuProjectSettings" xml:space="preserve">
+          <source>Project settings</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Impostazioni di progetto</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MenuStartSite" xml:space="preserve">
+          <source>Start site</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Sito di inizio</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxDeleteHeader" xml:space="preserve">
+          <source>Delete {0}</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Eliminare {0}</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxDeleteText" xml:space="preserve">
+          <source>Delete {0} selected {1}.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Eliminare {0} selezionata {1}.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceImageHeader" xml:space="preserve">
+          <source>Not enough space</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Non abbastanza spazio</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceImageText" xml:space="preserve">
+          <source>Without more disc space the image cannot be saved.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Senza più spazio su disco l'immagine non può essere salvata.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceSoundHeader" xml:space="preserve">
+          <source>Not enough space</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Non abbastanza spazio</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceSoundText" xml:space="preserve">
+          <source>Without more disc space the sound cannot be saved.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Senza più spazio su disco il suono non può essere salvato.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxWrongImageFormatHeader" xml:space="preserve">
+          <source>Not supported format</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Formato non supportato</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxWrongImageFormatText" xml:space="preserve">
+          <source>Unfortunately the image has a not supported format.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Purtroppo l'immagine ha un formato non supportato.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_New" xml:space="preserve">
+          <source>new {0}</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">nuovo: {0}</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NewAction" xml:space="preserve">
+          <source>new action</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">nuova azione</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NewCostume" xml:space="preserve">
+          <source>new costume</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">nuovo costume</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NewObject" xml:space="preserve">
+          <source>new object</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">nuovo oggetto</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NewSound" xml:space="preserve">
+          <source>new sound</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">nuovo suono</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NoCostumeSelected" xml:space="preserve">
+          <source>No costume selected</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nessun costume selezionato</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NoMessageSelected" xml:space="preserve">
+          <source>No message selected</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nessun messaggio selezionato</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NoSoundSelected" xml:space="preserve">
+          <source>No sound selected</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nessun suono selezionato</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NoSpriteSelected" xml:space="preserve">
+          <source>No object selected</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nessun oggetto selezionato</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NothingItem" xml:space="preserve">
+          <source>Nothing...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Niente...</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ObjectPlural" xml:space="preserve">
+          <source>objects</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">oggetti</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ObjectSingular" xml:space="preserve">
+          <source>object</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">oggetto</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_PivotActions" xml:space="preserve">
+          <source>Actions</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Azioni</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_PivotCostumes" xml:space="preserve">
+          <source>Costumes</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Costumi</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_PivotObjects" xml:space="preserve">
+          <source>Objects</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Oggetti</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_PivotSounds" xml:space="preserve">
+          <source>Sounds</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Suoni</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ProjectName" xml:space="preserve">
+          <source>Project name</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nome del progetto</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Recorder" xml:space="preserve">
+          <source>Recorder</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Registratore</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_RecorderRecord" xml:space="preserve">
+          <source>rec</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">REC</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_RecorderRecordTime" xml:space="preserve">
+          <source>Time</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Tempo</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_RecorderStart" xml:space="preserve">
+          <source>start recording</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">avviare la registrazione</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_RecorderStop" xml:space="preserve">
+          <source>stop</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Stop</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Recording" xml:space="preserve">
+          <source>Recording</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Registrazione</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SavingImage" xml:space="preserve">
+          <source>saving image</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">salvataggio di immagini</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Selected" xml:space="preserve">
+          <source>selected</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">selezionato</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SelectingObject" xml:space="preserve">
+          <source>loading object</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">caricamento oggetto</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SoundName" xml:space="preserve">
+          <source>Sound name</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nome del suono</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SoundPlural" xml:space="preserve">
+          <source>sounds</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">suoni</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SoundSingular" xml:space="preserve">
+          <source>sound</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">suono</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SpriteName" xml:space="preserve">
+          <source>Object name</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nome dell'oggetto</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChangeCostumeName" xml:space="preserve">
+          <source>CHANGE COSTUME NAME</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">CAMBIA IL NOME DI COSTUME</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChangeSoundName" xml:space="preserve">
+          <source>CHANGE SOUND NAME</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">IL SUONO CAMBIA NOME</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChangeSpriteName" xml:space="preserve">
+          <source>CHANGE OBJECT NAME</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">NOME DELL'OGGETTO MODIFICA</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseBrick" xml:space="preserve">
+          <source>CHOOSE BRICK</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">SCEGLIERE MATTONI</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseCategory" xml:space="preserve">
+          <source>CHOOSE CATEGORY</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">SCEGLI CATEGORIA</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseCostumeName" xml:space="preserve">
+          <source>CHOOSE COSTUME NAME</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">SCEGLIERE IL NOME DI COSTUME</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseSound" xml:space="preserve">
+          <source>CHOOSE SOUND</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">SCEGLIERE SUONO</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseSoundName" xml:space="preserve">
+          <source>CHOOSE SOUND NAME</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">SCEGLIERE IL NOME DEL SUONO</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewAction" xml:space="preserve">
+          <source>new action</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">nuova azione</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewBroadcastMessage" xml:space="preserve">
+          <source>NEW BROADCAST MESSAGE</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">NUOVO MESSAGGIO BROADCAST</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewCostume" xml:space="preserve">
+          <source>NEW COSTUME</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">NUOVO COSTUME</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewSound" xml:space="preserve">
+          <source>NEW SOUND</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">NUOVO SUONO</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewSprite" xml:space="preserve">
+          <source>NEW OBJECT</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">NUOVO OGGETTO</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleProjectSettings" xml:space="preserve">
+          <source>PROJECT SETTINGS</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">IMPOSTAZIONI DI PROGETTO</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleRecorder" xml:space="preserve">
+          <source>RECORD SOUND</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">SUONO RECORD</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ACCELERATION_X" xml:space="preserve">
+          <source>accelerationX</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">accelerationX</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ACCELERATION_Y" xml:space="preserve">
+          <source>accelerationY</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">accelerationY</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ACCELERATION_Z" xml:space="preserve">
+          <source>accelerationZ</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">accelerationZ</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_BRIGHTNESS" xml:space="preserve">
+          <source>brightness</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">luminosità</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ClosedBrecket" xml:space="preserve">
+          <source>)</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">)</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_COMPASSDIRECTION" xml:space="preserve">
+          <source>compassdirec</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">compassdirec</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_DecimalPointCharacter" xml:space="preserve">
+          <source>.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_DIRECTION" xml:space="preserve">
+          <source>direction</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">direzione</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_INCLINATION_X" xml:space="preserve">
+          <source>inclinationX</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">inclinationX</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_INCLINATION_Y" xml:space="preserve">
+          <source>inclinationY</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">inclinationY</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LAYER" xml:space="preserve">
+          <source>layer</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">strato</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicEqual" xml:space="preserve">
+          <source>=</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">=</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicOr" xml:space="preserve">
+          <source>OR</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">O</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_OBJECT_X" xml:space="preserve">
+          <source>objectX</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">objectX</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_OBJECT_Y" xml:space="preserve">
+          <source>objectY</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">objectY</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_OpenBrecket" xml:space="preserve">
+          <source>(</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">(</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ParameterSeperator" xml:space="preserve">
+          <source>,</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">,</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_Random" xml:space="preserve">
+          <source>random</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">casuale</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_SIZE" xml:space="preserve">
+          <source>size</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">dimensione</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_TRANSPARENCY" xml:space="preserve">
+          <source>transparency</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">trasparenza</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_Unknown" xml:space="preserve">
+          <source>unknown</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">sconosciuto</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_AboutText" xml:space="preserve">
+          <source>Catrobat for Windows is an on-device visual progamming language for Windows Phone 8 devices that is inspired by the scratch programming language developed by the MIT.
+It is developed at the department of Software Technology at the University of Technology Graz, Austria.
+The program is licensed under the MS-RL Lizenz.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Catrobat per Windows è un linguaggio di programmazione visual sul dispositivo per i dispositivi Windows Phone 8 che ispira il gratta e Vinci un linguaggio di programmazione sviluppato al mit.
+È stato sviluppato presso il dipartimento di tecnologia Software presso l'Università di tecnologia Graz, Austria.
+Il programma è concesso in licenza sotto la Lizenz MS-RL.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ActiveProject" xml:space="preserve">
+          <source>active</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">attivo</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ApplicationNameAndVersion" xml:space="preserve">
+          <source>Catrobat for Windows v{0}</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">V Catrobat per Windows {0}</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonCancel" xml:space="preserve">
+          <source>cancel</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Annulla</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonCopy" xml:space="preserve">
+          <source>copy</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">copia</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonCreate" xml:space="preserve">
+          <source>new</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nuovo</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonDelete" xml:space="preserve">
+          <source>delete</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">eliminare</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonEdit" xml:space="preserve">
+          <source>edit</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">modifica</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonLoginRegister" xml:space="preserve">
+          <source>Login or Register</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Accedi o registrati</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonPasswordForgotten" xml:space="preserve">
+          <source>Password forgotten</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Password dimenticata</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonSave" xml:space="preserve">
+          <source>save</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Salva</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonUpload" xml:space="preserve">
+          <source>upload</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">upload</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_DEBUGShowMemory" xml:space="preserve">
+          <source>Show memory usage</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Visualizza l'utilizzo della memoria</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_DownloadQueueMessage" xml:space="preserve">
+          <source>The project you chose is being downloaded. This might take a little while, but we'll tell you when it's finished!</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Il progetto che si è scelto viene scaricato. Questo potrebbe richiedere un po' di tempo, ma vi racconteremo quando è finito!</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_FilterTextBoxHint" xml:space="preserve">
+          <source>Find...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Trovare...</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderAbout" xml:space="preserve">
+          <source>About</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Info su</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderCurrentProject" xml:space="preserve">
+          <source>Current Project</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Progetto corrente</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderDesign" xml:space="preserve">
+          <source>Design</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Design</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderLanguage" xml:space="preserve">
+          <source>Language</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Lingua</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderLocalProjects" xml:space="preserve">
+          <source>My Projects</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Miei progetti</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderOnlineProjects" xml:space="preserve">
+          <source>Online</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">On-line</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderSettings" xml:space="preserve">
+          <source>Settings</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Impostazioni</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ListDesign" xml:space="preserve">
+          <source>Design</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Design</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ListLanguage" xml:space="preserve">
+          <source>Language</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Lingua</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MainCopyProjectDialogMessage" xml:space="preserve">
+          <source>Are sure you want to copy "{0}"?</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Sono sicuro che si desidera copiare {0}"?</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MainCopyProjectDialogTitle" xml:space="preserve">
+          <source>Copy project?</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Copia progetto?</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MainDeleteProjectDialogMessage" xml:space="preserve">
+          <source>Are sure you want to delete "{0}"?</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Sei sicuro di che voler eliminare {0}"?</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MainDeleteProjectDialogTitle" xml:space="preserve">
+          <source>Delete project?</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Eliminare il progetto?</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MessageBoxInformation" xml:space="preserve">
+          <source>Information</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Informazioni</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_NoDownloadsPending" xml:space="preserve">
+          <source>All downloads have finished.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Hanno terminato tutti i download.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_NoUploadsPending" xml:space="preserve">
+          <source>All uploads have finished.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Avete finito tutti i caricamenti.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectDescription" xml:space="preserve">
+          <source>description:</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Descrizione:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectDownloadButton" xml:space="preserve">
+          <source>Download</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Scarica</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectDownloads" xml:space="preserve">
+          <source>{0} downloads</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Download: {0}</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectLicenseButton" xml:space="preserve">
+          <source>License</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Licenza</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectListBoxLoadMore" xml:space="preserve">
+          <source>Load more...</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Caricare più...</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectProject" xml:space="preserve">
+          <source>project:</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">progetto:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectReportButton" xml:space="preserve">
+          <source>Report as unappropriate</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Segnala come inappropriato</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectStatistics" xml:space="preserve">
+          <source>statistics:</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Statistiche:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectUploaded" xml:space="preserve">
+          <source>uploaded:</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">caricato:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectUploadedBy" xml:space="preserve">
+          <source>{0} by</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">da: {0}</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectVersion" xml:space="preserve">
+          <source>(version: {0})</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">(versione: {0})</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectViews" xml:space="preserve">
+          <source>{0} views</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">visualizzazioni: {0}</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ProjectDoesNotExist" xml:space="preserve">
+          <source>project does not exist</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">progetto non esiste</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ProjectName" xml:space="preserve">
+          <source>Project name</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nome del progetto</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ProjectNotValid" xml:space="preserve">
+          <source>project not valid</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">progetto non valido</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/App_ResourceLanguage" xml:space="preserve">
+          <source>en</source>
+          <target state="new">en</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_SettingsBricks" xml:space="preserve">
+          <source>enable/disable bricks</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">abilitare/disabilitare mattoni</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_SettingsEnableNXTBricks" xml:space="preserve">
+          <source>Enable Mindstorm bricks</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Abilitare Mindstorm mattoni</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_SettingsTheme" xml:space="preserve">
+          <source>Theme</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Tema</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_TitleNewProject" xml:space="preserve">
+          <source>NEW PROJECT</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">NUOVO PROGETTO</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_TitleSettings" xml:space="preserve">
+          <source>SETTINGS</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Impostazioni</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_TitleUploadProject" xml:space="preserve">
+          <source>UPLOAD PROJECT</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">CARICARE IL PROGETTO</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_TitleUploadProjectLogin" xml:space="preserve">
+          <source>LOGIN OR REGISTER</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">ACCEDI O REGISTRATI</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectEmail" xml:space="preserve">
+          <source>Email:</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Posta elettronica:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectLoginError" xml:space="preserve">
+          <source>Login Error. {0}</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Errore di login. {0}</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectLoginErrorCaption" xml:space="preserve">
+          <source>Login failed</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Accesso non riuscito</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectMissingLoginData" xml:space="preserve">
+          <source>Login- or registration- data is incomplete.</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Dati di login o registrazione è incompleto.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectPassword" xml:space="preserve">
+          <source>Password:</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Password:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectProjectDescription" xml:space="preserve">
+          <source>Description:</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Descrizione:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectProjectName" xml:space="preserve">
+          <source>Project:</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Progetto:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectRegistrationSucessful" xml:space="preserve">
+          <source>Registration successful!</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Registrazione riuscita!</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectUndefinedError" xml:space="preserve">
+          <source>Undefined error. Error code {0}</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Errore indefinito. Errore codice: {0}</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectUsername" xml:space="preserve">
+          <source>Username:</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Nome utente:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectWelcome" xml:space="preserve">
+          <source>Welcome {0}!</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Benvenuto {0}!</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadQueueMessage" xml:space="preserve">
+          <source>Your project is being uploaded. This might take a little while, but we'll tell you when it's finished!</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Il progetto è in fase di caricamento. Questo potrebbe richiedere un po' di tempo, ma vi racconteremo quando è finito!</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_VersionIsNotSupported" xml:space="preserve">
+          <source>project version is not supported</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">versione del progetto non è supportato</target>
+        </trans-unit>
+        <trans-unit translate="no" id="Resx/App_FlowDirection" xml:space="preserve">
+          <source>LeftToRight</source>
+          <target state="signed-off">LeftToRight</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

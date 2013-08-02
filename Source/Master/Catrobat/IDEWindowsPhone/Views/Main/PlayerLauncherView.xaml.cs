@@ -25,16 +25,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         {
             if (NavigationContext.QueryString.ContainsKey("ProjectName"))
             {
-                var projectName = NavigationContext.QueryString["ProjectName"] + 1; // TODO: remove + 1
+                var projectName = NavigationContext.QueryString["ProjectName"];
 
                 try
                 {
-                    CatrobatContext.GetContext().SetCurrentProject(projectName);
+                    CatrobatContextBase.GetContext().SetCurrentProject(projectName);
                 }
                 catch (Exception)
                 {
                     var projectNotValidViewModel = ServiceLocator.Current.GetInstance<ProjectNotValidViewModel>();
-                    projectNotValidViewModel.Error = PlayerLaunchingError.ProjectDowsNotExist;
+                    projectNotValidViewModel.Error = PlayerLaunchingError.ProjectDosNotExist;
                     Navigation.NavigateTo(typeof(ProjectNotValidView));
                 }
             }

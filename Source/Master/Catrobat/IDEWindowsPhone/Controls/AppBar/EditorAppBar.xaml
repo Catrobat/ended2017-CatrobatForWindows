@@ -109,10 +109,14 @@
                     </VisualState>
                     <VisualState x:Name="Pressed">
                       <Storyboard >
-                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gridMain" 
-                                                       Storyboard.TargetProperty="Opacity" Duration="0">
-                          <DiscreteDoubleKeyFrame KeyTime="0:00:00" Value="1.0"/>
-                        </DoubleAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="EllipseBorder" 
+                                                       Storyboard.TargetProperty="Fill" Duration="0">
+                          <DiscreteObjectKeyFrame KeyTime="0:00:00" Value="{StaticResource PhoneAccentBrush}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaySymbol" 
+                                                       Storyboard.TargetProperty="Fill" Duration="0">
+                          <DiscreteObjectKeyFrame KeyTime="0:00:00" Value="{StaticResource PhoneBorderBrush}"/>
+                        </ObjectAnimationUsingKeyFrames>
                       </Storyboard>
                     </VisualState>
                     <VisualState x:Name="Disabled">

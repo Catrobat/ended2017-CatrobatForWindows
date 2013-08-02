@@ -6,7 +6,7 @@ using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Storage;
-using Catrobat.IDECommon.Resources.IDE.Editor;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Misc.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
@@ -342,7 +342,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         private void SaveAction()
         {
-            SoundName = EditorResources.Recording;
+            SoundName = AppResources.Editor_Recording;
             Navigation.NavigateTo(typeof (SoundNameChooserView));
         }
 
@@ -358,7 +358,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
         private void SaveNameChosenAction()
         {
             var sound = new Sound(SoundName);
-            var path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
+            var path = CatrobatContextBase.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -430,10 +430,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         private void UpdateTextProperties()
         {
-            var recordButtonHeaderRecord = EditorResources.RecorderRecord;
-            var recordButtonHeaderStop = EditorResources.RecorderStop;
-            var recordButtonTextRecord = EditorResources.RecorderStart;
-            var recordButtonTextStop = EditorResources.RecorderStop;
+            var recordButtonHeaderRecord = AppResources.Editor_RecorderRecord;
+            var recordButtonHeaderStop = AppResources.Editor_RecorderStop;
+            var recordButtonTextRecord = AppResources.Editor_RecorderStart;
+            var recordButtonTextStop = AppResources.Editor_RecorderStop;
 
             if (IsRecording)
             {

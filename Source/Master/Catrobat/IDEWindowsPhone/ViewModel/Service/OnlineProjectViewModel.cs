@@ -7,7 +7,7 @@ using Catrobat.Core;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Resources;
-using Catrobat.IDECommon.Resources.IDE.Main;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -147,10 +147,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void OnLoadAction(OnlineProjectHeader dataContext)
         {
-            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, MainResources.OnlineProjectUploadedBy, dataContext.Uploaded);
-            VersionLabelText = String.Format(CultureInfo.InvariantCulture, MainResources.OnlineProjectVersion, dataContext.Version);
-            ViewsLabelText = String.Format(CultureInfo.InvariantCulture, MainResources.OnlineProjectViews, dataContext.Views);
-            DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, MainResources.OnlineProjectDownloads, dataContext.Downloads);
+            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectUploadedBy, dataContext.Uploaded);
+            VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectVersion, dataContext.Version);
+            ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectViews, dataContext.Views);
+            DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectDownloads, dataContext.Downloads);
             ButtonDownloadIsEnabled = true;
         }
 
@@ -159,10 +159,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             ButtonDownloadIsEnabled = false;
             ServerCommunication.DownloadAndSaveProject(dataContext.DownloadUrl, dataContext.ProjectName, DownloadCallback);
 
-            var message = new DialogMessage(MainResources.DownloadQueueMessage, DownloadProjectMessageBoxResult)
+            var message = new DialogMessage(AppResources.Main_DownloadQueueMessage, DownloadProjectMessageBoxResult)
             {
                 Button = MessageBoxButton.OK,
-                Caption = MainResources.MessageBoxInformation
+                Caption = AppResources.Main_MessageBoxInformation
             };
             Messenger.Default.Send(message);
 
@@ -201,8 +201,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void DownloadCallback(string filename)
         {
-            CatrobatContext.GetContext().UpdateLocalProjects();
-            CatrobatContext.GetContext().SetCurrentProject(filename);
+            CatrobatContextBase.GetContext().UpdateLocalProjects();
+            CatrobatContextBase.GetContext().SetCurrentProject(filename);
 
             Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
@@ -214,8 +214,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                     {
                         if (ServerCommunication.NoDownloadsPending())
                         {
-                            MessageBox.Show(MainResources.NoDownloadsPending,
-                                            MainResources.MessageBoxInformation, MessageBoxButton.OK);
+                            MessageBox.Show(AppResources.Main_NoDownloadsPending,
+                                            AppResources.Main_MessageBoxInformation, MessageBoxButton.OK);
                         }
                     }
                 });

@@ -21,12 +21,12 @@ namespace Catrobat.IDEWindowsPhone.Misc
             _sprite = sprite;
         }
 
-        public Costume Save(string name, ImageDimention dimention)
+        public Costume Save(string name, ImageDimention dimention, string projectPath)
         {
             var resizedImage = _bitmap.Resize(dimention.Width, dimention.Height, WriteableBitmapExtensions.Interpolation.Bilinear);
 
             var costume = new Costume(name);
-            var absoluteFileName = Path.Combine(CatrobatContext.GetContext().CurrentProject.BasePath, Project.ImagesPath, costume.FileName);
+            var absoluteFileName = Path.Combine(projectPath, Project.ImagesPath, costume.FileName);
 
             using (var storage = StorageSystem.GetStorage())
             {

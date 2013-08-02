@@ -12,7 +12,7 @@
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
   shell:SystemTray.IsVisible="True"
-  DataContext="{Binding Settings, Source={StaticResource Locator}}">
+  DataContext="{Binding SettingsViewModel, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <StackPanel>
@@ -20,7 +20,7 @@
         <Button.Content>
           <StackPanel Name="StackPanelSettingsLanguage" Margin="10 0 10 10" >
             <TextBlock Grid.Row="0" Margin="0 0 10 10"
-                       Text="{Binding Path=Main.ListLanguage, 
+                       Text="{Binding Resources.Main_ListLanguage, 
                        Source={StaticResource LocalizedStrings}}" 
                        Style="{StaticResource PhoneTextLargeStyle}" />
             <TextBlock Grid.Row="1" Margin="0 -5 10 10" 
@@ -92,7 +92,7 @@
 
         </Button.Content>
       </Button>
-      <CheckBox Name="CheckBoxShowMemory" Content="{Binding Path=Main.DEBUGShowMemory, 
+      <CheckBox Name="CheckBoxShowMemory" Content="{Binding Resources.Main_DEBUGShowMemory, 
         Source={StaticResource LocalizedStrings}}" 
                 IsChecked="{Binding ShowMemoryMonitor, Mode=TwoWay}" />
     </StackPanel>

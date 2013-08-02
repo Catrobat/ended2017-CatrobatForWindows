@@ -4,7 +4,7 @@ using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
-using Catrobat.IDECommon.Resources.IDE.Main;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.Views.Main;
@@ -30,7 +30,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         #region private Members
 
-        private readonly ICatrobatContext _catrobatContext;
         private readonly ObservableCollection<OnlineProjectHeader> _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
         private string _filterText = "";
         private bool _isLoadingOnlineProjects;
@@ -44,12 +43,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         #region Properties
 
-        public CatrobatContext Context { get; set; }
+        public CatrobatContextBase Context { get; set; }
 
         public Project CurrentProject
         {
             get
             {
+                if (_currentProject == null)
+                    return CurrentProject = CatrobatContextBase.GetContext().CurrentProject;
+
                 return _currentProject;
             }
             set
@@ -60,12 +62,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
                 RaisePropertyChanged(() => CurrentProject);
 
-                var projectChangedMessage = new GenericMessage<Project>(CatrobatContext.GetContext().CurrentProject);
+                var projectChangedMessage = new GenericMessage<Project>(CatrobatContextBase.GetContext().CurrentProject);
                 Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage, ViewModelMessagingToken.SelectedProjectListener);
             }
         }
 
-        public ProjectDummyHeader CurrentProjectHeader { get { return _catrobatContext.CurrentProject.ProjectDummyHeader; } }
+        public ProjectDummyHeader CurrentProjectHeader { get { return Context.CurrentProject.ProjectDummyHeader; } }
 
         public ProjectDummyHeader PinProjectHeader { get; set; }
 
@@ -85,7 +87,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             }
         }
 
-        public ObservableCollection<ProjectDummyHeader> LocalProjects { get { return _catrobatContext.LocalProjects; } }
+        public ObservableCollection<ProjectDummyHeader> LocalProjects { get { return Context.LocalProjects; } }
 
         public OnlineProjectHeader SelectedOnlineProject { get; set; }
 
@@ -230,10 +232,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             _deleteProductName = projectName;
 
-            var message = new DialogMessage(String.Format(MainResources.MainDeleteProjectDialogMessage, projectName), DeleteProductMessageCallback)
+            var message = new DialogMessage(String.Format(AppResources.Main_MainDeleteProjectDialogMessage, projectName), DeleteProductMessageCallback)
             {
                 Button = MessageBoxButton.OKCancel,
-                Caption = MainResources.MainDeleteProjectDialogTitle
+                Caption = AppResources.Main_MainDeleteProjectDialogTitle
             };
 
             Messenger.Default.Send(message);
@@ -243,10 +245,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             _copyProjectName = projectName;
 
-            var message = new DialogMessage(String.Format(MainResources.MainCopyProjectDialogMessage, projectName), CopyProductMessageCallback)
+            var message = new DialogMessage(String.Format(AppResources.Main_MainCopyProjectDialogMessage, projectName), CopyProductMessageCallback)
             {
                 Button = MessageBoxButton.OKCancel,
-                Caption = MainResources.MainCopyProjectDialogTitle
+                Caption = AppResources.Main_MainCopyProjectDialogTitle
             };
 
             Messenger.Default.Send(message);
@@ -273,7 +275,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    CatrobatContext.GetContext().SetCurrentProject(projectName);
+                    CatrobatContextBase.GetContext().SetCurrentProject(projectName);
                     var minWaitindTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
 
                     if (minWaitindTimeRemaining >= new TimeSpan(0))
@@ -315,7 +317,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private void UploadCurrentProjectAction()
         {
             // Determine which page to open
-            ServerCommunication.CheckToken(CatrobatContext.GetContext().CurrentToken, CheckTokenEvent);
+            ServerCommunication.CheckToken(CatrobatContextBase.GetContext().CurrentToken, CheckTokenEvent);
         }
 
         private void ResetViewModelAction()
@@ -342,19 +344,23 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-            Context = new CatrobatContext();
-            Context.PropertyChanged += CatrobatContextPropertyChanged;
-            Context.CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
-
             var themeChooser = Application.Current.Resources["ThemeChooser"] as ThemeChooser;
             if (themeChooser != null)
                 themeChooser.PropertyChanged += ThemeChooserPropertyChanged;
 
-
             if (IsInDesignMode)
-                _catrobatContext = new CatrobatContextDesign();
+            {
+                CatrobatContextBase.SetContextHolder(new ContextHolderDesign());
+                Context = new CatrobatContextDesign();
+            }
             else
-                _catrobatContext = Context;
+            {
+                Context = new CatrobatContext();
+            }
+
+
+            Context.PropertyChanged += CatrobatContextPropertyChanged;
+            Context.CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
         }
 
 
@@ -381,7 +387,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
             if (_dialogResult == MessageBoxResult.OK)
             {
-                CatrobatContext.GetContext().DeleteProject(_deleteProductName);
+                CatrobatContextBase.GetContext().DeleteProject(_deleteProductName);
                 _deleteProductName = null;
             }
         }
@@ -393,7 +399,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
             if (_dialogResult == MessageBoxResult.OK)
             {
-                CatrobatContext.GetContext().CopyProject(_copyProjectName);
+                CatrobatContextBase.GetContext().CopyProject(_copyProjectName);
                 _copyProjectName = null;
             }
         }
@@ -432,10 +438,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             if (e.PropertyName == "CurrentProject")
             {
-                CurrentProject = CatrobatContext.GetContext().CurrentProject;
+                CurrentProject = CatrobatContextBase.GetContext().CurrentProject;
                 CurrentProjectScreenshot = CurrentProject.ProjectScreenshot as ImageSource;
 
-                CatrobatContext.GetContext().CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
+                CatrobatContextBase.GetContext().CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
             }
         }
 

@@ -8,21 +8,64 @@
   xmlns:MvvmLightExtras="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
   xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
   xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+  xmlns:objects="clr-namespace:Catrobat.Core.Objects;assembly=Catrobat.Core"
   mc:Ignorable="d"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
-  d:DesignHeight="280" d:DesignWidth="480">
+  d:DesignHeight="200" d:DesignWidth="200">
 
-  <Grid x:Name="LayoutRoot">
+  <Grid x:Name="LayoutRoot" Width="176" Height="176" d:DataContext="{d:DesignInstance objects:ProjectDummyHeader}">
     <toolkit:ContextMenuService.ContextMenu>
       <toolkit:ContextMenu>
-        <toolkit:MenuItem Header="COPY" Command="{Binding Main.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding ProjectName}" />
-        <toolkit:MenuItem Header="DELETE" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding ProjectName}" />
-        <toolkit:MenuItem Header="PIN TO START" Command="{Binding Main.PinLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
+        <toolkit:MenuItem Header="COPY" Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                          CommandParameter="{Binding ProjectName}" />
+        <toolkit:MenuItem Header="DELETE" Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                          CommandParameter="{Binding ProjectName}" />
+        <toolkit:MenuItem Header="PIN TO START" Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" 
+                          CommandParameter="{Binding}" />
       </toolkit:ContextMenu>
     </toolkit:ContextMenuService.ContextMenu>
-    <Border Margin="0 5" Width="412">
+
+    <Border BorderThickness="4" Width="176" Height="176" BorderBrush="White">
+      <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Tap">
+          <MvvmLightExtras:EventToCommand Command="{Binding MainViewModel.SetCurrentProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
+                                                          CommandParameter="{Binding ProjectName, Mode=OneWay}" />
+        </i:EventTrigger>
+      </i:Interaction.Triggers>
+
+      <Grid Name="GridNormalTile" Background="{Binding SelectedTheme.AccentColor2, Source={StaticResource ThemeChooser}}">
+        <Image Width="168" Height="168" Name="ImageNormalTile" Source="{Binding Screenshot, Converter={StaticResource ScreenshotConverter}}"></Image>
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
+          <Grid Background="#AA000000">
+            <TextBlock Grid.Row="0" Text="{Binding ProjectName}" TextWrapping="Wrap" 
+                         TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Border>
+
+
+
+    <!--<Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <TextBlock Grid.Row="1" Margin="10,6,10,6" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding ProjectName}" 
+                 Style="{StaticResource PhoneTextNormalStyle}"/>
+      
+      
+    </Grid>-->
+    
+    
+    
+    <!--<Border Margin="0 5" Width="412">
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition/>
@@ -49,7 +92,7 @@
             <Grid Grid.Column="0" Margin="4">
               <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Tap">
-                  <MvvmLightExtras:EventToCommand Command="{Binding Main.SetCurrentProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
+                  <MvvmLightExtras:EventToCommand Command="{Binding MainViewModel.SetCurrentProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
                                                           CommandParameter="{Binding ProjectName, Mode=OneWay}" />
                 </i:EventTrigger>
               </i:Interaction.Triggers>
@@ -63,7 +106,7 @@
         <Grid Grid.Column="1">
           <i:Interaction.Triggers>
             <i:EventTrigger EventName="Tap">
-              <MvvmLightExtras:EventToCommand Command="{Binding Main.SetCurrentProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
+              <MvvmLightExtras:EventToCommand Command="{Binding MainViewModel.SetCurrentProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
                                                           CommandParameter="{Binding ProjectName, Mode=OneWay}" />
             </i:EventTrigger>
           </i:Interaction.Triggers>
@@ -74,6 +117,6 @@
           </Border>
         </Grid>
       </Grid>
-    </Border>
+    </Border>-->
   </Grid>
 </UserControl>

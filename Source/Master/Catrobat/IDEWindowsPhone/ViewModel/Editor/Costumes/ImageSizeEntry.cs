@@ -6,8 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Catrobat.Core.Annotations;
-using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.IDE.Editor;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
@@ -152,13 +151,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                 switch (Size)
                 {
                     case ImageSize.Small:
-                        return EditorResources.ImageSizeSmall;
+                        return AppResources.Editor_ImageSizeSmall;
                     case ImageSize.Medium:
-                        return EditorResources.ImageSizeMedium;
+                        return AppResources.Editor_ImageSizeMedium;
                     case ImageSize.Large:
-                        return EditorResources.ImageSizeLarge;
+                        return AppResources.Editor_ImageSizeLarge;
                     case ImageSize.FullSize:
-                        return EditorResources.ImageSizeFullSize;
+                        return AppResources.Editor_ImageSizeFullSize;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
