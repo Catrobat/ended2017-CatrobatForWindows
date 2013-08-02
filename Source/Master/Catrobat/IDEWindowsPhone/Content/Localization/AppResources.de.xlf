@@ -1,0 +1,904 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en" target-language="de" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="IDEWindowsPhone" product-version="1.0.0.0" build-num="0">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="2.0.1000.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="Resx">
+        <trans-unit translate="yes" id="Resx/Brick_Broadcast" xml:space="preserve">
+          <source>broadcast</source>
+          <target state="signed-off">broadcast</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_BroadcastWait" xml:space="preserve">
+          <source>broadcast and wait</source>
+          <target state="signed-off">broadcast and wait</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ButtonNew" xml:space="preserve">
+          <source>new...</source>
+          <target state="signed-off">new...</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_CategoryControl" xml:space="preserve">
+          <source>Control</source>
+          <target state="signed-off">Control</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_CategoryLooks" xml:space="preserve">
+          <source>Looks</source>
+          <target state="signed-off">Looks</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_CategoryMotion" xml:space="preserve">
+          <source>Motion</source>
+          <target state="signed-off">Motion</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_CategorySound" xml:space="preserve">
+          <source>Sound</source>
+          <target state="signed-off">Sound</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeBrightnessBy" xml:space="preserve">
+          <source>change brightness by</source>
+          <target state="signed-off">change brightness by</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeGhostEffectBy" xml:space="preserve">
+          <source>change ghost effect by</source>
+          <target state="signed-off">change ghost effect by</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeSizeBy" xml:space="preserve">
+          <source>change size by</source>
+          <target state="signed-off">change size by</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeVolumeBy" xml:space="preserve">
+          <source>change volume by</source>
+          <target state="signed-off">change volume by</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeXBy" xml:space="preserve">
+          <source>change X by</source>
+          <target state="signed-off">change X by</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeYBy" xml:space="preserve">
+          <source>change Y by</source>
+          <target state="signed-off">change Y by</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ClearGraphicEffects" xml:space="preserve">
+          <source>clear graphic effects</source>
+          <target state="signed-off">clear graphic effects</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ComeToFront" xml:space="preserve">
+          <source>come to front</source>
+          <target state="signed-off">come to front</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Degrees" xml:space="preserve">
+          <source>degrees</source>
+          <target state="signed-off">degrees</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Forever" xml:space="preserve">
+          <source>forever</source>
+          <target state="signed-off">forever</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_GlideToGlide" xml:space="preserve">
+          <source>glide</source>
+          <target state="signed-off">glide</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_GlideToTo" xml:space="preserve">
+          <source>to</source>
+          <target state="signed-off">to</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_GoNStepsBackGo" xml:space="preserve">
+          <source>go back</source>
+          <target state="signed-off">go back</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_GoNStepsBackStepsBack" xml:space="preserve">
+          <source>layers</source>
+          <target state="signed-off">layers</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Hide" xml:space="preserve">
+          <source>hide</source>
+          <target state="signed-off">hide</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_IfOnEdgeBounce" xml:space="preserve">
+          <source>if on edge, bounce</source>
+          <target state="signed-off">if on edge, bounce</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_LoopEnd" xml:space="preserve">
+          <source>end of loop</source>
+          <target state="signed-off">end of loop</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_MoveNStepsMove" xml:space="preserve">
+          <source>move</source>
+          <target state="signed-off">move</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_MoveNStepsSteps" xml:space="preserve">
+          <source>steps</source>
+          <target state="signed-off">steps</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_NextCostume" xml:space="preserve">
+          <source>next costume</source>
+          <target state="signed-off">next costume</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Note" xml:space="preserve">
+          <source>note</source>
+          <target state="signed-off">note</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_PlaceAt" xml:space="preserve">
+          <source>place at</source>
+          <target state="signed-off">place at</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_PlaySound" xml:space="preserve">
+          <source>play sound</source>
+          <target state="signed-off">play sound</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_PointInDirection" xml:space="preserve">
+          <source>point in direction</source>
+          <target state="signed-off">point in direction</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_PointTo" xml:space="preserve">
+          <source>point towards</source>
+          <target state="signed-off">point towards</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Repeat" xml:space="preserve">
+          <source>repeat</source>
+          <target state="signed-off">repeat</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Seconds" xml:space="preserve">
+          <source>seconds</source>
+          <target state="signed-off">seconds</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetBrightnessTo" xml:space="preserve">
+          <source>set brightness to</source>
+          <target state="signed-off">set brightness to</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetCostume" xml:space="preserve">
+          <source>set costume</source>
+          <target state="signed-off">set costume</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetGhostEffectTo" xml:space="preserve">
+          <source>set ghost effect to</source>
+          <target state="signed-off">set ghost effect to</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetSizeTo" xml:space="preserve">
+          <source>set size to</source>
+          <target state="signed-off">set size to</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetVolumeTo" xml:space="preserve">
+          <source>set volume to</source>
+          <target state="signed-off">set volume to</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetXTo" xml:space="preserve">
+          <source>set X to</source>
+          <target state="signed-off">set X to</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetYTo" xml:space="preserve">
+          <source>set Y to</source>
+          <target state="signed-off">set Y to</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Show" xml:space="preserve">
+          <source>show</source>
+          <target state="signed-off">show</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Speak" xml:space="preserve">
+          <source>speak</source>
+          <target state="signed-off">speak</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_StopAllSounds" xml:space="preserve">
+          <source>stop all sounds</source>
+          <target state="signed-off">stop all sounds</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Times" xml:space="preserve">
+          <source>times</source>
+          <target state="signed-off">times</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_TurnLeft" xml:space="preserve">
+          <source>turn left</source>
+          <target state="signed-off">turn left</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_TurnRight" xml:space="preserve">
+          <source>turn right</source>
+          <target state="signed-off">turn right</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_Wait" xml:space="preserve">
+          <source>wait</source>
+          <target state="signed-off">wait</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_WhenIReceive" xml:space="preserve">
+          <source>when I receive</source>
+          <target state="signed-off">when I receive</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_WhenProjectStarts" xml:space="preserve">
+          <source>when project starts</source>
+          <target state="signed-off">when project starts</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_WhenTapped" xml:space="preserve">
+          <source>when tapped</source>
+          <target state="signed-off">when tapped</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ActionPlural" xml:space="preserve">
+          <source>actions</source>
+          <target state="signed-off">actions</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ActionSingular" xml:space="preserve">
+          <source>action</source>
+          <target state="signed-off">action</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_BroadcastMessage" xml:space="preserve">
+          <source>Broadcast message</source>
+          <target state="signed-off">Broadcast message</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddCostume" xml:space="preserve">
+          <source>new costume</source>
+          <target state="signed-off">new costume</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddObject" xml:space="preserve">
+          <source>new object</source>
+          <target state="signed-off">new object</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddScript" xml:space="preserve">
+          <source>new action</source>
+          <target state="signed-off">new action</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddSound" xml:space="preserve">
+          <source>new sound</source>
+          <target state="signed-off">new sound</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonBack" xml:space="preserve">
+          <source>back</source>
+          <target state="signed-off">back</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonCancel" xml:space="preserve">
+          <source>cancel</source>
+          <target state="signed-off">cancel</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonChange" xml:space="preserve">
+          <source>change</source>
+          <target state="signed-off">change</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonCopy" xml:space="preserve">
+          <source>copy</source>
+          <target state="signed-off">copy</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonDelete" xml:space="preserve">
+          <source>delete</source>
+          <target state="signed-off">delete</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonPlayProject" xml:space="preserve">
+          <source>play project</source>
+          <target state="signed-off">play project</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonSave" xml:space="preserve">
+          <source>save</source>
+          <target state="signed-off">save</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonUse" xml:space="preserve">
+          <source>use</source>
+          <target state="signed-off">use</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Camera" xml:space="preserve">
+          <source>Camera</source>
+          <target state="signed-off">Camera</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ClearSelection" xml:space="preserve">
+          <source>selektierung aufheben</source>
+          <target state="signed-off">selektierung aufheben</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_CostumeName" xml:space="preserve">
+          <source>Costume name</source>
+          <target state="signed-off">Costume name</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_CostumePlural" xml:space="preserve">
+          <source>costumes</source>
+          <target state="signed-off">costumes</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_CostumeSingular" xml:space="preserve">
+          <source>costume</source>
+          <target state="signed-off">costume</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Image" xml:space="preserve">
+          <source>Image</source>
+          <target state="signed-off">Image</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageGallery" xml:space="preserve">
+          <source>Image Gallery</source>
+          <target state="signed-off">Image Gallery</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageSizeFullSize" xml:space="preserve">
+          <source>full size</source>
+          <target state="signed-off">full size</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageSizeLarge" xml:space="preserve">
+          <source>large</source>
+          <target state="signed-off">large</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageSizeMedium" xml:space="preserve">
+          <source>medium</source>
+          <target state="signed-off">medium</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ImageSizeSmall" xml:space="preserve">
+          <source>small</source>
+          <target state="signed-off">small</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MediaLibrary" xml:space="preserve">
+          <source>Media Library</source>
+          <target state="signed-off">Media Library</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MenuProjectSettings" xml:space="preserve">
+          <source>Project settings</source>
+          <target state="signed-off">Project settings</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MenuStartSite" xml:space="preserve">
+          <source>Start site</source>
+          <target state="signed-off">Start site</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxDeleteHeader" xml:space="preserve">
+          <source>Delete {0}</source>
+          <target state="signed-off">Delete {0}</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxDeleteText" xml:space="preserve">
+          <source>Delete {0} selected {1}.</source>
+          <target state="signed-off">Delete {0} selected {1}.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceImageHeader" xml:space="preserve">
+          <source>Not enough space</source>
+          <target state="signed-off">Not enough space</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceImageText" xml:space="preserve">
+          <source>Without more disc space the image cannot be saved.</source>
+          <target state="signed-off">Without more disc space the image cannot be saved.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceSoundHeader" xml:space="preserve">
+          <source>Not enough space</source>
+          <target state="signed-off">Not enough space</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceSoundText" xml:space="preserve">
+          <source>Without more disc space the sound cannot be saved.</source>
+          <target state="signed-off">Without more disc space the sound cannot be saved.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxWrongImageFormatHeader" xml:space="preserve">
+          <source>Not supported format</source>
+          <target state="signed-off">Not supported format</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_MessageBoxWrongImageFormatText" xml:space="preserve">
+          <source>Unfortunately the image has a not supported format.</source>
+          <target state="signed-off">Unfortunately the image has a not supported format.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_New" xml:space="preserve">
+          <source>new {0}</source>
+          <target state="signed-off">new {0}</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NewAction" xml:space="preserve">
+          <source>new action</source>
+          <target state="signed-off">new action</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NewCostume" xml:space="preserve">
+          <source>new costume</source>
+          <target state="signed-off">new costume</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NewObject" xml:space="preserve">
+          <source>new object</source>
+          <target state="signed-off">new object</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NewSound" xml:space="preserve">
+          <source>new sound</source>
+          <target state="signed-off">new sound</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NoCostumeSelected" xml:space="preserve">
+          <source>No costume selected</source>
+          <target state="signed-off">No costume selected</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NoMessageSelected" xml:space="preserve">
+          <source>No message selected</source>
+          <target state="signed-off">No message selected</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NoSoundSelected" xml:space="preserve">
+          <source>No sound selected</source>
+          <target state="signed-off">No sound selected</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NoSpriteSelected" xml:space="preserve">
+          <source>No object selected</source>
+          <target state="signed-off">No object selected</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NothingItem" xml:space="preserve">
+          <source>Nothing...</source>
+          <target state="signed-off">Nothing...</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ObjectPlural" xml:space="preserve">
+          <source>objects</source>
+          <target state="signed-off">objects</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ObjectSingular" xml:space="preserve">
+          <source>object</source>
+          <target state="signed-off">object</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_PivotActions" xml:space="preserve">
+          <source>Actions</source>
+          <target state="signed-off">Actions</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_PivotCostumes" xml:space="preserve">
+          <source>Costumes</source>
+          <target state="signed-off">Costumes</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_PivotObjects" xml:space="preserve">
+          <source>Objects</source>
+          <target state="signed-off">Objects</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_PivotSounds" xml:space="preserve">
+          <source>Sounds</source>
+          <target state="signed-off">Sounds</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ProjectName" xml:space="preserve">
+          <source>Project name</source>
+          <target state="signed-off">Project name</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Recorder" xml:space="preserve">
+          <source>Recorder</source>
+          <target state="signed-off">Recorder</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_RecorderRecord" xml:space="preserve">
+          <source>rec</source>
+          <target state="signed-off">rec</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_RecorderRecordTime" xml:space="preserve">
+          <source>Time</source>
+          <target state="signed-off">Time</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_RecorderStart" xml:space="preserve">
+          <source>start recording</source>
+          <target state="signed-off">start recording</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_RecorderStop" xml:space="preserve">
+          <source>stop</source>
+          <target state="signed-off">stop</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Recording" xml:space="preserve">
+          <source>Recording</source>
+          <target state="signed-off">Recording</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SavingImage" xml:space="preserve">
+          <source>saving image</source>
+          <target state="signed-off">saving image</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Selected" xml:space="preserve">
+          <source>selected</source>
+          <target state="signed-off">selected</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SelectingObject" xml:space="preserve">
+          <source>loading object</source>
+          <target state="signed-off">loading object</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SoundName" xml:space="preserve">
+          <source>Sound name</source>
+          <target state="signed-off">Sound name</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SoundPlural" xml:space="preserve">
+          <source>sounds</source>
+          <target state="signed-off">sounds</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SoundSingular" xml:space="preserve">
+          <source>sound</source>
+          <target state="signed-off">sound</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SpriteName" xml:space="preserve">
+          <source>Object name</source>
+          <target state="signed-off">Object name</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChangeCostumeName" xml:space="preserve">
+          <source>CHANGE COSTUME NAME</source>
+          <target state="signed-off">CHANGE COSTUME NAME</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChangeSoundName" xml:space="preserve">
+          <source>CHANGE SOUND NAME</source>
+          <target state="signed-off">CHANGE SOUND NAME</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChangeSpriteName" xml:space="preserve">
+          <source>CHANGE OBJECT NAME</source>
+          <target state="signed-off">CHANGE OBJECT NAME</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseBrick" xml:space="preserve">
+          <source>CHOOSE BRICK</source>
+          <target state="signed-off">CHOOSE BRICK</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseCategory" xml:space="preserve">
+          <source>CHOOSE CATEGORY</source>
+          <target state="signed-off">CHOOSE CATEGORY</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseCostumeName" xml:space="preserve">
+          <source>CHOOSE COSTUME NAME</source>
+          <target state="signed-off">CHOOSE COSTUME NAME</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseSound" xml:space="preserve">
+          <source>CHOOSE SOUND</source>
+          <target state="signed-off">CHOOSE SOUND</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseSoundName" xml:space="preserve">
+          <source>CHOOSE SOUND NAME</source>
+          <target state="signed-off">CHOOSE SOUND NAME</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewAction" xml:space="preserve">
+          <source>new action</source>
+          <target state="signed-off">new action</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewBroadcastMessage" xml:space="preserve">
+          <source>NEW BROADCAST MESSAGE</source>
+          <target state="signed-off">NEW BROADCAST MESSAGE</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewCostume" xml:space="preserve">
+          <source>NEW COSTUME</source>
+          <target state="signed-off">NEW COSTUME</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewSound" xml:space="preserve">
+          <source>NEW SOUND</source>
+          <target state="signed-off">NEW SOUND</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleNewSprite" xml:space="preserve">
+          <source>NEW OBJECT</source>
+          <target state="signed-off">NEW OBJECT</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleProjectSettings" xml:space="preserve">
+          <source>PROJECT SETTINGS</source>
+          <target state="signed-off">PROJECT SETTINGS</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleRecorder" xml:space="preserve">
+          <source>RECORD SOUND</source>
+          <target state="signed-off">RECORD SOUND</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ACCELERATION_X" xml:space="preserve">
+          <source>accelerationX</source>
+          <target state="signed-off">accelerationX</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ACCELERATION_Y" xml:space="preserve">
+          <source>accelerationY</source>
+          <target state="signed-off">accelerationY</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ACCELERATION_Z" xml:space="preserve">
+          <source>accelerationZ</source>
+          <target state="signed-off">accelerationZ</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_BRIGHTNESS" xml:space="preserve">
+          <source>brightness</source>
+          <target state="signed-off">brightness</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ClosedBrecket" xml:space="preserve">
+          <source>)</source>
+          <target state="signed-off">)</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_COMPASSDIRECTION" xml:space="preserve">
+          <source>compassdirec</source>
+          <target state="signed-off">compassdirec</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_DecimalPointCharacter" xml:space="preserve">
+          <source>.</source>
+          <target state="signed-off">.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_DIRECTION" xml:space="preserve">
+          <source>direction</source>
+          <target state="signed-off">direction</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_INCLINATION_X" xml:space="preserve">
+          <source>inclinationX</source>
+          <target state="signed-off">inclinationX</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_INCLINATION_Y" xml:space="preserve">
+          <source>inclinationY</source>
+          <target state="signed-off">inclinationY</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LAYER" xml:space="preserve">
+          <source>layer</source>
+          <target state="signed-off">layer</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicEqual" xml:space="preserve">
+          <source>=</source>
+          <target state="signed-off">=</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicOr" xml:space="preserve">
+          <source>OR</source>
+          <target state="signed-off">OR</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_OBJECT_X" xml:space="preserve">
+          <source>objectX</source>
+          <target state="signed-off">objectX</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_OBJECT_Y" xml:space="preserve">
+          <source>objectY</source>
+          <target state="signed-off">objectY</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_OpenBrecket" xml:space="preserve">
+          <source>(</source>
+          <target state="signed-off">(</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_ParameterSeperator" xml:space="preserve">
+          <source>,</source>
+          <target state="signed-off">,</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_Random" xml:space="preserve">
+          <source>random</source>
+          <target state="signed-off">random</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_SIZE" xml:space="preserve">
+          <source>size</source>
+          <target state="signed-off">size</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_TRANSPARENCY" xml:space="preserve">
+          <source>transparency</source>
+          <target state="signed-off">transparency</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_Unknown" xml:space="preserve">
+          <source>unknown</source>
+          <target state="signed-off">unknown</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_AboutText" xml:space="preserve">
+          <source>Catrobat for Windows is an on-device visual progamming language for Windows Phone 8 devices that is inspired by the scratch programming language developed by the MIT.
+It is developed at the department of Software Technology at the University of Technology Graz, Austria.
+The program is licensed under the MS-RL Lizenz.</source>
+          <target state="signed-off">Catrobat for Windows is an on-device visual progamming language for Windows Phone 8 devices that is inspired by the scratch programming language developed by the MIT.
+It is developed at the department of Software Technology at the University of Technology Graz, Austria.
+The program is licensed under the MS-RL Lizenz.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ActiveProject" xml:space="preserve">
+          <source>active</source>
+          <target state="signed-off">active</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ApplicationNameAndVersion" xml:space="preserve">
+          <source>Catrobat for Windows v{0}</source>
+          <target state="signed-off">Catrobat for Windows v{0}</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonCancel" xml:space="preserve">
+          <source>cancel</source>
+          <target state="signed-off">cancel</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonCopy" xml:space="preserve">
+          <source>copy</source>
+          <target state="signed-off">copy</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonCreate" xml:space="preserve">
+          <source>new</source>
+          <target state="signed-off">new</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonDelete" xml:space="preserve">
+          <source>delete</source>
+          <target state="signed-off">delete</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonEdit" xml:space="preserve">
+          <source>edit</source>
+          <target state="signed-off">edit</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonLoginRegister" xml:space="preserve">
+          <source>Login or Register</source>
+          <target state="signed-off">Login or Register</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonPasswordForgotten" xml:space="preserve">
+          <source>Password forgotten</source>
+          <target state="signed-off">Password forgotten</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonSave" xml:space="preserve">
+          <source>save</source>
+          <target state="signed-off">save</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ButtonUpload" xml:space="preserve">
+          <source>upload</source>
+          <target state="signed-off">upload</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_DEBUGShowMemory" xml:space="preserve">
+          <source>Show memory usage</source>
+          <target state="signed-off">Show memory usage</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_DownloadQueueMessage" xml:space="preserve">
+          <source>The project you chose is being downloaded. This might take a little while, but we'll tell you when it's finished!</source>
+          <target state="signed-off">The project you chose is being downloaded. This might take a little while, but we'll tell you when it's finished!</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_FilterTextBoxHint" xml:space="preserve">
+          <source>Find...</source>
+          <target state="signed-off">Find...</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderAbout" xml:space="preserve">
+          <source>About</source>
+          <target state="signed-off">About</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderCurrentProject" xml:space="preserve">
+          <source>Current Project</source>
+          <target state="signed-off">Current Project</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderDesign" xml:space="preserve">
+          <source>Design</source>
+          <target state="signed-off">Design</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderLanguage" xml:space="preserve">
+          <source>Language</source>
+          <target state="signed-off">Language</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderLocalProjects" xml:space="preserve">
+          <source>My Projects</source>
+          <target state="signed-off">My Projects</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderOnlineProjects" xml:space="preserve">
+          <source>Online</source>
+          <target state="signed-off">Online</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_HeaderSettings" xml:space="preserve">
+          <source>Settings</source>
+          <target state="signed-off">Settings</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ListDesign" xml:space="preserve">
+          <source>Design</source>
+          <target state="signed-off">Design</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ListLanguage" xml:space="preserve">
+          <source>Language</source>
+          <target state="signed-off">Language</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MainCopyProjectDialogMessage" xml:space="preserve">
+          <source>Are sure you want to copy "{0}"?</source>
+          <target state="signed-off">Are sure you want to copy "{0}"?</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MainCopyProjectDialogTitle" xml:space="preserve">
+          <source>Copy project?</source>
+          <target state="signed-off">Copy project?</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MainDeleteProjectDialogMessage" xml:space="preserve">
+          <source>Are sure you want to delete "{0}"?</source>
+          <target state="signed-off">Are sure you want to delete "{0}"?</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MainDeleteProjectDialogTitle" xml:space="preserve">
+          <source>Delete project?</source>
+          <target state="signed-off">Delete project?</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_MessageBoxInformation" xml:space="preserve">
+          <source>Information</source>
+          <target state="signed-off">Information</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_NoDownloadsPending" xml:space="preserve">
+          <source>All downloads have finished.</source>
+          <target state="signed-off">All downloads have finished.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_NoUploadsPending" xml:space="preserve">
+          <source>All uploads have finished.</source>
+          <target state="signed-off">All uploads have finished.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectDescription" xml:space="preserve">
+          <source>description:</source>
+          <target state="signed-off">description:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectDownloadButton" xml:space="preserve">
+          <source>Download</source>
+          <target state="signed-off">Download</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectDownloads" xml:space="preserve">
+          <source>{0} downloads</source>
+          <target state="signed-off">{0} downloads</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectLicenseButton" xml:space="preserve">
+          <source>License</source>
+          <target state="signed-off">License</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectListBoxLoadMore" xml:space="preserve">
+          <source>Load more...</source>
+          <target state="signed-off">Load more...</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectProject" xml:space="preserve">
+          <source>project:</source>
+          <target state="signed-off">project:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectReportButton" xml:space="preserve">
+          <source>Report as unappropriate</source>
+          <target state="signed-off">Report as unappropriate</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectStatistics" xml:space="preserve">
+          <source>statistics:</source>
+          <target state="signed-off">statistics:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectUploaded" xml:space="preserve">
+          <source>uploaded:</source>
+          <target state="signed-off">uploaded:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectUploadedBy" xml:space="preserve">
+          <source>{0} by</source>
+          <target state="signed-off">{0} by</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectVersion" xml:space="preserve">
+          <source>(version: {0})</source>
+          <target state="signed-off">(version: {0})</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_OnlineProjectViews" xml:space="preserve">
+          <source>{0} views</source>
+          <target state="signed-off">{0} views</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ProjectDoesNotExist" xml:space="preserve">
+          <source>project does not exist</source>
+          <target state="signed-off">project does not exist</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ProjectName" xml:space="preserve">
+          <source>Project name</source>
+          <target state="signed-off">Project name</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ProjectNotValid" xml:space="preserve">
+          <source>project not valid</source>
+          <target state="signed-off">project not valid</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/App_ResourceLanguage" xml:space="preserve">
+          <source>en</source>
+          <target state="signed-off">en</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_SettingsBricks" xml:space="preserve">
+          <source>enable/disable bricks</source>
+          <target state="signed-off">enable/disable bricks</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_SettingsEnableNXTBricks" xml:space="preserve">
+          <source>Enable Mindstorm bricks</source>
+          <target state="signed-off">Enable Mindstorm bricks</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_SettingsTheme" xml:space="preserve">
+          <source>Theme</source>
+          <target state="signed-off">Theme</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_TitleNewProject" xml:space="preserve">
+          <source>NEW PROJECT</source>
+          <target state="signed-off">NEW PROJECT</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_TitleSettings" xml:space="preserve">
+          <source>SETTINGS</source>
+          <target state="signed-off">SETTINGS</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_TitleUploadProject" xml:space="preserve">
+          <source>UPLOAD PROJECT</source>
+          <target state="signed-off">UPLOAD PROJECT</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_TitleUploadProjectLogin" xml:space="preserve">
+          <source>LOGIN OR REGISTER</source>
+          <target state="signed-off">LOGIN OR REGISTER</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectEmail" xml:space="preserve">
+          <source>Email:</source>
+          <target state="signed-off">Email:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectLoginError" xml:space="preserve">
+          <source>Login Error. {0}</source>
+          <target state="signed-off">Login Error. {0}</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectLoginErrorCaption" xml:space="preserve">
+          <source>Login failed</source>
+          <target state="signed-off">Login failed</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectMissingLoginData" xml:space="preserve">
+          <source>Login- or registration- data is incomplete.</source>
+          <target state="signed-off">Login- or registration- data is incomplete.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectPassword" xml:space="preserve">
+          <source>Password:</source>
+          <target state="signed-off">Password:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectProjectDescription" xml:space="preserve">
+          <source>Description:</source>
+          <target state="signed-off">Description:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectProjectName" xml:space="preserve">
+          <source>Project:</source>
+          <target state="signed-off">Project:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectRegistrationSucessful" xml:space="preserve">
+          <source>Registration successful!</source>
+          <target state="signed-off">Registration successful!</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectUndefinedError" xml:space="preserve">
+          <source>Undefined error. Error code {0}</source>
+          <target state="signed-off">Undefined error. Error code {0}</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectUsername" xml:space="preserve">
+          <source>Username:</source>
+          <target state="signed-off">Username:</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectWelcome" xml:space="preserve">
+          <source>Welcome {0}!</source>
+          <target state="signed-off">Welcome {0}!</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadQueueMessage" xml:space="preserve">
+          <source>Your project is being uploaded. This might take a little while, but we'll tell you when it's finished!</source>
+          <target state="signed-off">Your project is being uploaded. This might take a little while, but we'll tell you when it's finished!</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_VersionIsNotSupported" xml:space="preserve">
+          <source>project version is not supported</source>
+          <target state="signed-off">project version is not supported</target>
+        </trans-unit>
+        <trans-unit translate="no" id="Resx/App_FlowDirection" xml:space="preserve">
+          <source>LeftToRight</source>
+          <target state="signed-off">LeftToRight</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

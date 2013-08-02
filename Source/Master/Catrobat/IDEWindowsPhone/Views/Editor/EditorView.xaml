@@ -23,7 +23,7 @@
   SupportedOrientations="Portrait"
   Orientation="Portrait"
   shell:SystemTray.IsVisible="True"
-  DataContext="{Binding Editor, Source={StaticResource Locator}}">
+  DataContext="{Binding EditorViewModel, Source={StaticResource Locator}}">
 
   <phone:PhoneApplicationPage.Resources>
     <buttons:PlayPauseButtonGroup x:Key="PlayPauseButtonGroupSounds" Command="{Binding SoundsPlayStateChangedCommand}" />
@@ -57,7 +57,7 @@
                   </Grid.RowDefinitions>
                   <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Tap">
-                      <command:EventToCommand Command="{Binding Editor.SelectedSpriteChangedCommand, Mode=OneWay, Source={StaticResource Locator}}"
+                      <command:EventToCommand Command="{Binding EditorViewModel.SelectedSpriteChangedCommand, Mode=OneWay, Source={StaticResource Locator}}"
                                                           CommandParameter="{Binding}" />
                     </i:EventTrigger>
                   </i:Interaction.Triggers>

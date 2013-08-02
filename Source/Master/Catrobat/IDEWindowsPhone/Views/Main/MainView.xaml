@@ -20,7 +20,7 @@
   d:DesignWidth="720"
   d:DesignHeight="1280"
   shell:SystemTray.IsVisible="False"
-  DataContext="{Binding Main, Source={StaticResource Locator}}">
+  DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
 
   <phone:PhoneApplicationPage.Resources>
     <Style x:Key="ContinuousListBoxButtonStyle" TargetType="Button">
@@ -42,7 +42,7 @@
             <ScrollViewer x:Name="ScrollViewer" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" Padding="{TemplateBinding Padding}">
               <StackPanel>
                 <ItemsPresenter/>
-                <Button Content="{Binding Main.OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" Style="{StaticResource ContinuousListBoxButtonStyle}" Command="{Binding Main.LazyLoadOnlineProjectsCommand, Mode=OneWay, Source={StaticResource Locator}}" />
+                <Button Content="{Binding Main.OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" Style="{StaticResource ContinuousListBoxButtonStyle}" Command="{Binding MainViewModel.LazyLoadOnlineProjectsCommand, Mode=OneWay, Source={StaticResource Locator}}" />
               </StackPanel>
             </ScrollViewer>
           </ControlTemplate>
@@ -111,9 +111,9 @@
           <Border BorderThickness="6" BorderBrush="{StaticResource PhoneForegroundBrush}" Margin="-6 5 0 10" Width="412">
             <toolkit:ContextMenuService.ContextMenu>
               <toolkit:ContextMenu>
-                <toolkit:MenuItem Header="COPY" Command="{Binding Main.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
-                <toolkit:MenuItem Header="DELETE" Command="{Binding Main.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
-                <toolkit:MenuItem Header="PIN TO START" Command="{Binding Main.PinLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProjectHeader}" />
+                <toolkit:MenuItem Header="COPY" Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
+                <toolkit:MenuItem Header="DELETE" Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProject.ProjectName}" />
+                <toolkit:MenuItem Header="PIN TO START" Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding CurrentProjectHeader}" />
               </toolkit:ContextMenu>
             </toolkit:ContextMenuService.ContextMenu>
             <Grid Background="{StaticResource PhoneAccentBrush}">

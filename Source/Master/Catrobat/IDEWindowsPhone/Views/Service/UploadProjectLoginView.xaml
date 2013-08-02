@@ -14,7 +14,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
-    DataContext="{Binding UploadProjectLogin, Source={StaticResource Locator}}">
+    DataContext="{Binding UploadProjectLoginViewModel, Source={StaticResource Locator}}">
 
   <!--LayoutRoot is the root grid where all page content is placed-->
   <Grid x:Name="LayoutRoot" Background="Transparent">

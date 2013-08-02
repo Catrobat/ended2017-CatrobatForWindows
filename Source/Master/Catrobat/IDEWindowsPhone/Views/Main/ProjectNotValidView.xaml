@@ -13,7 +13,7 @@
   Foreground="{StaticResource PhoneForegroundBrush}"
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d"
-  DataContext="{Binding ProjectNotValid, Source={StaticResource Locator}}"
+  DataContext="{Binding ProjectNotValidViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="True">
 
   <!--LayoutRoot is the root grid where all page content is placed-->

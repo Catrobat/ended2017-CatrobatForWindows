@@ -43,7 +43,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public MainViewModel Main
+        public MainViewModel MainViewModel
         {
             get
             {
@@ -54,7 +54,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public AddNewProjectViewModel AddNewProject
+        public AddNewProjectViewModel AddNewProjectViewModel
         {
             get
             {
@@ -65,7 +65,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public EditorViewModel Editor
+        public EditorViewModel EditorViewModel
         {
             get
             {
@@ -76,7 +76,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public ProjectSettingsViewModel ProjectSettings
+        public ProjectSettingsViewModel ProjectSettingsViewModel
         {
             get
             {
@@ -87,7 +87,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public UploadProjectViewModel UploadProject
+        public UploadProjectViewModel UploadProjectViewModel
         {
             get
             {
@@ -98,7 +98,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public UploadProjectLoginViewModel UploadProjectLogin
+        public UploadProjectLoginViewModel UploadProjectLoginViewModel
         {
             get
             {
@@ -109,7 +109,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public SoundRecorderViewModel SoundRecorder
+        public SoundRecorderViewModel SoundRecorderViewModel
         {
             get
             {
@@ -120,7 +120,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public SettingsViewModel Settings
+        public SettingsViewModel SettingsViewModel
         {
             get
             {
@@ -131,7 +131,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public AddNewCostumeViewModel AddNewCostume
+        public AddNewCostumeViewModel AddNewCostumeViewModel
         {
             get
             {
@@ -142,7 +142,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public ChangeCostumeViewModel ChangeCostume
+        public ChangeCostumeViewModel ChangeCostumeViewModel
         {
             get
             {
@@ -153,7 +153,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public ChangeSoundViewModel ChangeSound
+        public ChangeSoundViewModel ChangeSoundViewModel
         {
             get
             {
@@ -164,7 +164,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public AddNewSoundViewModel AddNewSound
+        public AddNewSoundViewModel AddNewSoundViewModel
         {
             get
             {
@@ -175,7 +175,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public ChangeSpriteViewModel ChangeSprite
+        public ChangeSpriteViewModel ChangeSpriteViewModel
         {
             get
             {
@@ -186,7 +186,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public AddNewSpriteViewModel AddNewSprite
+        public AddNewSpriteViewModel AddNewSpriteViewModel
         {
             get
             {
@@ -197,7 +197,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public ProjectImportViewModel ProjectImport
+        public ProjectImportViewModel ProjectImportViewModel
         {
             get
             {
@@ -208,7 +208,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public OnlineProjectViewModel OnlineProject
+        public OnlineProjectViewModel OnlineProjectViewModel
         {
             get
             {
@@ -219,7 +219,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public NewBroadcastMessageViewModel NewBroadcastMessage
+        public NewBroadcastMessageViewModel NewBroadcastMessageViewModel
         {
             get
             {
@@ -230,7 +230,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public AddNewScriptBrickViewModel AddNewScriptBrick
+        public AddNewScriptBrickViewModel AddNewScriptBrickViewModel
         {
             get
             {
@@ -241,7 +241,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public ProjectNotValidViewModel ProjectNotValid
+        public ProjectNotValidViewModel ProjectNotValidViewModel
         {
             get
             {
@@ -252,7 +252,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public FormulaEditorViewModel FormulaEditor
+        public FormulaEditorViewModel FormulaEditorViewModel
         {
             get
             {
