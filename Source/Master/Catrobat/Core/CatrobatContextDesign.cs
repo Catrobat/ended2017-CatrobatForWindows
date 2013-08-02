@@ -4,6 +4,7 @@ using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
+using Catrobat.Core.Objects.Variables;
 
 namespace Catrobat.Core
 {
@@ -27,9 +28,9 @@ namespace Catrobat.Core
 
         private void InitCurrentProject()
         {
-            var project = new Project();
-
-            project.ProjectHeader = new ProjectHeader
+            var project = new Project
+            {
+                ProjectHeader = new ProjectHeader
                 {
                     ApplicationBuildName = "",
                     ApplicationBuildNumber = 0,
@@ -43,16 +44,29 @@ namespace Catrobat.Core
                     Platform = "Windows Phone",
                     PlatformVersion = "8.0",
                     ProgramLicense = "http://developer.catrobat.org/agpl_v3",
-                    ProgramName = "Program Name",
                     RemixOf = "",
                     ScreenHeight = 1280,
                     ScreenWidth = 720,
                     Tags = "",
                     Url = "http://pocketcode.org/details/871",
                     UserHandle = "Username"
-                };
+                }
+            };
 
-            // TODO: implement other design data here
+            project.SetProgramName("Program1");
+
+            project.VariableList = new VariableList
+            {
+                ObjectVariableList = new ObjectVariableList
+                {
+                    ObjectVariableEntries = new ObservableCollection<ObjectVariableEntry>()
+                },
+                ProgramVariableList = new ProgramVariableList
+                {
+                    UserVariables = new ObservableCollection<UserVariable>()
+                },
+            };
+
 
             var sprites = new SpriteList();
             var sprite = new Sprite();
@@ -88,6 +102,8 @@ namespace Catrobat.Core
         private void InitLocalProjects()
         {
             LocalProjects = new ObservableCollection<ProjectDummyHeader>();
+
+            // TODO: add sample images
 
             var project1 = new ProjectDummyHeader
             {

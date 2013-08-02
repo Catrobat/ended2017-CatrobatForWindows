@@ -119,7 +119,7 @@ namespace Catrobat.Core
                 var tempXmlPath = Path.Combine(destinationPath, Project.ProjectCodePath);
                 var xml = storage.ReadTextFile(tempXmlPath);
                 var newProject = new Project(xml);
-                newProject.SetSetProgramName(newProjectName);
+                newProject.SetProgramName(newProjectName);
                 newProject.Save();
             }
 
@@ -242,7 +242,7 @@ namespace Catrobat.Core
                 var xml = storage.ReadTextFile(tempXmlPath);
                 CurrentProject = new Project(xml);
 
-                CurrentProject.SetSetProgramName(projectName);
+                CurrentProject.SetProgramName(projectName);
             }
         }
 

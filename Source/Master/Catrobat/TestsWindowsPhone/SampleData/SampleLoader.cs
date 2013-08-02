@@ -59,7 +59,7 @@ namespace Catrobat.TestsWindowsPhone.SampleData
       }
 
       catrobatContext.SetCurrentProject(sampleProjectName);
-      catrobatContext.CurrentProject.SetSetProgramName(sampleProjectName);
+      catrobatContext.CurrentProject.SetProgramName(sampleProjectName);
 
       return catrobatContext;
     }

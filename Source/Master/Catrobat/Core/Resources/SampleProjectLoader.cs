@@ -53,7 +53,7 @@ namespace Catrobat.Core.Resources
                             var xml = storage.ReadTextFile(textFilePath);
 
                             var project = new Project(xml);
-                            project.SetSetProgramName(projectName);
+                            project.SetProgramName(projectName);
 
                             project.Save();
                         }

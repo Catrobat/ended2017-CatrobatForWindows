@@ -49,7 +49,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             get
             {
-                if(_currentProject == null)
+                if (_currentProject == null)
                     return CurrentProject = CatrobatContextBase.GetContext().CurrentProject;
 
                 return _currentProject;
@@ -348,11 +348,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             if (themeChooser != null)
                 themeChooser.PropertyChanged += ThemeChooserPropertyChanged;
 
-
             if (IsInDesignMode)
+            {
+                CatrobatContextBase.SetContextHolder(new ContextHolderDesign());
                 Context = new CatrobatContextDesign();
+            }
             else
+            {
                 Context = new CatrobatContext();
+            }
+
 
             Context.PropertyChanged += CatrobatContextPropertyChanged;
             Context.CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;

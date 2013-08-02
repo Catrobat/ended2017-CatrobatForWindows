@@ -58,7 +58,7 @@ namespace Catrobat.TestsCommon.SampleData
         stream.Dispose();
       }
       catrobatContext.SetCurrentProject(sampleProjectName);
-      catrobatContext.CurrentProject.SetSetProgramName(sampleProjectName);
+      catrobatContext.CurrentProject.SetProgramName(sampleProjectName);
 
       return catrobatContext;
     }

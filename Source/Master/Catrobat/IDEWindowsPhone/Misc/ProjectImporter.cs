@@ -121,7 +121,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
                 if (counter != 0)
                 {
                     newProjectName = _tempProjectHeader.ProjectName + counter;
-                    _project.SetSetProgramName(newProjectName);
+                    _project.SetProgramName(newProjectName);
                     var saveToPath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
                     _project.Save(saveToPath);
                 }

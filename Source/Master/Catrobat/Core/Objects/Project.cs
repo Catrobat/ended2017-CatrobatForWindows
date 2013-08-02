@@ -166,7 +166,7 @@ namespace Catrobat.Core.Objects
         }
 
 
-        public void SetSetProgramName(string newProgramName)
+        public void SetProgramName(string newProgramName)
         {
             ProjectHeader.SetProgramName(newProgramName);
         }
