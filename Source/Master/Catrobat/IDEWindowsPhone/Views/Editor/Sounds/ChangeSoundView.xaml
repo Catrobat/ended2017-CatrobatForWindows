@@ -24,11 +24,11 @@
     </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Path=Editor.TitleChangeSoundName, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleChangeSoundName, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
-      <TextBlock Margin="0" Text="{Binding Path=Editor.SoundName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_SoundName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
       <TextBox Margin="-10 0 10 0" Name="TextBoxSoundName" Text="{Binding SoundName}" HorizontalAlignment="Stretch" TextChanged="TextBoxSoundName_OnTextChanged" />
     </StackPanel>
 
@@ -37,10 +37,10 @@
         <abu:SwitchAppBarAction>
           <abu:AppBar Id="0">
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.save.rest.png" 
-                              Text="{Binding Path=Editor.ButtonSave, Source={StaticResource LocalizedStrings}}"
+                              Text="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding SaveCommand}" />
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" 
-                              Text="{Binding Path=Editor.ButtonCancel, Source={StaticResource LocalizedStrings}}"
+                              Text="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding CancelCommand}"/>
           </abu:AppBar>
         </abu:SwitchAppBarAction>

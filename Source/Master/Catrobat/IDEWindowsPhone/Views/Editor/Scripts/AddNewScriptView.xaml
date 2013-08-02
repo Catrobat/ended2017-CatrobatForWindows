@@ -22,24 +22,24 @@
     </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 0 20">
-      <TextBlock x:Name="Headline" Margin="0" Text="{Binding Path=Editor.TitleChooseCategory, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock x:Name="Headline" Margin="0" Text="{Binding Resources.Editor_TitleChooseCategory, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" />
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
       <bricks:NormalBrick Grid.Row="0" Background="{StaticResource MotionBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}" Margin="10 0 10 0" Tap="Movement_Tap">
-        <TextBlock VerticalAlignment="Center" Text="{Binding Path=Bricks.CategoryMotion, Source={StaticResource LocalizedStrings}}" Margin="10" FontSize="24" />
+        <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_CategoryMotion, Source={StaticResource LocalizedStrings}}" Margin="10" FontSize="24" />
       </bricks:NormalBrick>
 
       <bricks:NormalBrick Grid.Row="1" Background="{StaticResource LooksBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}" Margin="10 10 10 0" Tap="Looks_Tap">
-        <TextBlock VerticalAlignment="Center" Text="{Binding Path=Bricks.CategoryLooks, Source={StaticResource LocalizedStrings}}" Margin="10" FontSize="24" />
+        <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_CategoryLooks, Source={StaticResource LocalizedStrings}}" Margin="10" FontSize="24" />
       </bricks:NormalBrick>
 
       <bricks:NormalBrick Grid.Row="2" Background="{StaticResource SoundBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}" Margin="10 10 10 0" Tap="Sound_Tap">
-        <TextBlock VerticalAlignment="Center" Text="{Binding Path=Bricks.CategorySound, Source={StaticResource LocalizedStrings}}" Margin="10" FontSize="24" />
+        <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_CategorySound, Source={StaticResource LocalizedStrings}}" Margin="10" FontSize="24" />
       </bricks:NormalBrick>
 
       <bricks:NormalBrick Grid.Row="3" Background="{StaticResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}" Margin="10 10 10 0" Tap="Control_Tap">
-        <TextBlock VerticalAlignment="Center" Text="{Binding Path=Bricks.CategoryControl, Source={StaticResource LocalizedStrings}}" Margin="10" FontSize="24" />
+        <TextBlock VerticalAlignment="Center" Text="{Binding Resources.Brick_CategoryControl, Source={StaticResource LocalizedStrings}}" Margin="10" FontSize="24" />
       </bricks:NormalBrick>
     </StackPanel>
   </Grid>

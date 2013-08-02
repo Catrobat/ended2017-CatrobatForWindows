@@ -22,7 +22,7 @@
     </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Path=Editor.TitleChooseSound, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleChooseSound, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
     </StackPanel>
 
 
@@ -44,7 +44,7 @@
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15" Name="StackPanelChangeName">
-      <TextBlock Margin="0" Text="{Binding Path=Editor.SoundName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_SoundName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
       <TextBox Margin="-10 0 10 0" Name="TxtName" HorizontalAlignment="Stretch" TextChanged="txtName_TextChanged" />
     </StackPanel>
   </Grid>

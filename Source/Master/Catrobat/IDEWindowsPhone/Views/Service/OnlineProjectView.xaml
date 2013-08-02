@@ -38,15 +38,15 @@
       <Image Width="200" Height="333" Grid.Column="0" VerticalAlignment="Top" Source="{Binding ScreenshotBigUrl}" />
 
       <StackPanel Grid.Column="1" Margin="15 0 5 0">
-        <TextBlock Text="{Binding Path=Main.OnlineProjectProject, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0" />
+        <TextBlock Text="{Binding Resources.Main_OnlineProjectProject, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0" />
         <TextBlock Text="{Binding ProjectName}" TextWrapping="Wrap" />
-        <TextBlock Text="{Binding Path=Main.OnlineProjectDescription, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0 10 0 0" />
+        <TextBlock Text="{Binding Resources.Main_OnlineProjectDescription, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0 10 0 0" />
         <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
-        <TextBlock Text="{Binding Path=Main.OnlineProjectUploaded, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0 10 0 0" />
+        <TextBlock Text="{Binding Resources.Main_OnlineProjectUploaded, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0 10 0 0" />
         <TextBlock TextWrapping="Wrap" x:Name="UploadedLabel" Text="{Binding OnlineProjectViewModel.UploadedLabelText, Source={StaticResource Locator}}" />
         <TextBlock FontWeight="Bold" Text="{Binding Author}" TextWrapping="Wrap" />
         <TextBlock TextWrapping="Wrap" x:Name="VersionLabel" Text="{Binding OnlineProjectViewModel.VersionLabelText, Source={StaticResource Locator}}" />
-        <TextBlock Text="{Binding Path=Main.OnlineProjectStatistics, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0 10 0 0" />
+        <TextBlock Text="{Binding Resources.Main_OnlineProjectStatistics, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0 10 0 0" />
         <TextBlock TextWrapping="Wrap" x:Name="ViewsLabel" Text="{Binding OnlineProjectViewModel.ViewsLabelText, Source={StaticResource Locator}}" />
         <TextBlock TextWrapping="Wrap" x:Name="DownloadsLabel" Text="{Binding OnlineProjectViewModel.DownloadsLabelText, Source={StaticResource Locator}}" />
       </StackPanel>
@@ -57,13 +57,13 @@
         <abu:SwitchAppBarAction>
           <abu:AppBar Id="0">
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.download.rest.png" 
-                              Text="{Binding Path=Main.OnlineProjectDownloadButton, Source={StaticResource LocalizedStrings}}"
+                              Text="{Binding Resources.Main_OnlineProjectDownloadButton, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding OnlineProjectViewModel.DownloadCommand, Source={StaticResource Locator}}"
                               CommandParameter="{Binding}"/>
             <abu:AppBar.MenuItems>
-              <abu:AppBarMenuItem Text="{Binding Path=Main.OnlineProjectReportButton, Source={StaticResource LocalizedStrings}}" 
+              <abu:AppBarMenuItem Text="{Binding Resources.Main_OnlineProjectReportButton, Source={StaticResource LocalizedStrings}}" 
                                   Command="{Binding OnlineProjectViewModel.ReportCommand, Source={StaticResource Locator}}" />
-              <abu:AppBarMenuItem Text="{Binding Path=Main.OnlineProjectLicenseButton, Source={StaticResource LocalizedStrings}}" 
+              <abu:AppBarMenuItem Text="{Binding Resources.Main_OnlineProjectLicenseButton, Source={StaticResource LocalizedStrings}}" 
                                   Command="{Binding OnlineProjectViewModel.LicenseCommand, Source={StaticResource Locator}}" />
             </abu:AppBar.MenuItems>
           </abu:AppBar>

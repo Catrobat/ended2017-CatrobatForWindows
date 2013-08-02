@@ -48,7 +48,7 @@
       <TextBlock Margin="0"  />
     </StackPanel>
     <StackPanel Grid.Row="0" Margin="12,17,0,28">
-      <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{Binding Path=Editor.TitleRecorder, Source={StaticResource LocalizedStrings}}" Name="Headline" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+      <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{Binding Resources.Editor_TitleRecorder, Source={StaticResource LocalizedStrings}}" Name="Headline" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
     </StackPanel>
 
     <!--ContentPanel - place additional content here-->
@@ -147,10 +147,10 @@
         <abu:SwitchAppBarAction>
           <abu:AppBar Id="0">
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.save.rest.png" 
-                              Text="{Binding Path=Editor.ButtonSave, Source={StaticResource LocalizedStrings}}"
+                              Text="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding SaveCommand}" />
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" 
-                              Text="{Binding Path=Editor.ButtonCancel, Source={StaticResource LocalizedStrings}}"
+                              Text="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding CancelCommand}"/>
           </abu:AppBar>
         </abu:SwitchAppBarAction>

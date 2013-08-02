@@ -39,7 +39,7 @@
       <appBarUtils:SwitchAppBarAction>
         <appBarUtils:AppBar Id="0">
           <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.home.rest.png" 
-                              Text="{Binding Path=Editor.ButtonSave, Source={StaticResource LocalizedStrings}}"
+                              Text="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding FinishedCommand}" />
         </appBarUtils:AppBar>
       </appBarUtils:SwitchAppBarAction>

@@ -22,8 +22,8 @@
     </Grid.RowDefinitions>
 
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 0 10">
-      <TextBlock x:Name="Headline" Margin="0 0 0 0" Text="{Binding Path=Main.TitleSettings, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" />
-      <TextBlock x:Name="PageTitle" Margin="0 -10 0 0" Text="{Binding Path=Main.HeaderDesign, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextTitle1Style}"/>
+      <TextBlock x:Name="Headline" Margin="0 0 0 0" Text="{Binding Resources.Main_TitleSettings, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock x:Name="PageTitle" Margin="0 -10 0 0" Text="{Binding Resources.Main_HeaderDesign, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextTitle1Style}"/>
     </StackPanel>
 
     <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10">

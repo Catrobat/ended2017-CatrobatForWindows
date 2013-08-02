@@ -25,7 +25,7 @@
 
     <!--TitlePanel contains the name of the application and page title-->
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 0 20">
-      <TextBlock x:Name="Headline" Margin="0" Text="{Binding Path=Editor.TitleChooseBrick, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock x:Name="Headline" Margin="0" Text="{Binding Resources.Editor_TitleChooseBrick, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" />
     </StackPanel>
     
     <!--ContentPanel - place additional content here-->
