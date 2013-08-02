@@ -99,6 +99,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Localization\AppResources.de.Designer.cs" />
+    <Compile Include="Content\Localization\AppResources.Designer.cs" />
+    <Compile Include="Content\Localization\AppResources.it.Designer.cs" />
+    <Compile Include="Content\Localization\AppResources.qps-ploc.Designer.cs" />
+    <Compile Include="Content\Localization\LocalizedStrings.cs" />
     <Compile Include="ContextHolderWindowsPhone.cs" />
     <Compile Include="Controls\AppBar\EditorAppBar.xaml.cs">
       <DependentUpon>EditorAppBar.xaml</DependentUpon>
@@ -332,6 +337,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Content\Localization\Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\AppBar\EditorAppBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -384,10 +393,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <ApplicationDefinition Include="Content\Resources\Resources.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
     <Page Include="Controls\StatusIcons\ProcessIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -750,6 +755,17 @@
     <Reference Include="WriteableBitmapExWinPhoneXnaDependant">
       <HintPath>..\packages\WriteableBitmapEx.1.0.8.0\lib\WindowsPhone8\WriteableBitmapExWinPhoneXnaDependant.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Localization\AppResources.de.resx" />
+    <EmbeddedResource Include="Content\Localization\AppResources.it.resx" />
+    <EmbeddedResource Include="Content\Localization\AppResources.qps-ploc.resx" />
+    <EmbeddedResource Include="Content\Localization\AppResources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <XliffResource Include="Content\Localization\AppResources.de.xlf" />
+    <XliffResource Include="Content\Localization\AppResources.it.xlf" />
+    <XliffResource Include="Content\Localization\AppResources.qps-ploc.xlf" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
