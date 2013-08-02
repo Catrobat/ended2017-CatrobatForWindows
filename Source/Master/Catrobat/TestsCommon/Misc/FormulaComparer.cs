@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Catrobat.Core.Objects.Formulas;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+﻿using Catrobat.Core.Objects.Formulas;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.TestsWindowsPhone.Misc
+namespace Catrobat.TestsCommon.Misc
 {
     public static class FormulaComparer
     {
