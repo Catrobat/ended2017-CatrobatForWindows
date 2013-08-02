@@ -1,10 +1,10 @@
 ﻿using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
-using Catrobat.IDEWindowsPhone.ViewModel.Scripts;
 using Catrobat.IDEWindowsPhone.ViewModel.Service;
 using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using GalaSoft.MvvmLight.Ioc;

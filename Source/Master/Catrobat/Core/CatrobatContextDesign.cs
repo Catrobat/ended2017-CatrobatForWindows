@@ -7,20 +7,23 @@ using Catrobat.Core.Objects.Sounds;
 
 namespace Catrobat.Core
 {
-    public sealed class CatrobatContextDesign : ICatrobatContext
+    public sealed class CatrobatContextDesign : CatrobatContextBase
     {
         public CatrobatContextDesign()
         {
             InitCurrentProject();
             InitLocalProjects();
             InitOnlineProjects();
+
+            LocalSettings = new LocalSettings
+            {
+                CurrentLanguageString = "en",
+                CurrentProjectName = "DefaultProject",
+                CurrentThemeIndex = 0,
+                CurrentToken = "DummyToken",
+                CurrentUserEmail = "dummy@somedomain.com"
+            };
         }
-
-        public ObservableCollection<OnlineProjectHeader> OnlineProjects { get; private set; }
-
-        public Project CurrentProject { get; set; }
-
-        public ObservableCollection<ProjectDummyHeader> LocalProjects { get; private set; }
 
         private void InitCurrentProject()
         {
@@ -132,92 +135,73 @@ namespace Catrobat.Core
         }
 
 
-        public LocalSettings LocalSettings
-        {
-            get
-            {
-                return new LocalSettings
-                {
-                    CurrentLanguageString = "en",
-                    CurrentProjectName = "DefaultProject",
-                    CurrentThemeIndex = 0,
-                    CurrentToken = "DummyToken",
-                    CurrentUserEmail = "dummy@somedomain.com"
-                };
-            }
-            set
-            {
-                // Nothing to do here
-            }
-        }
-
-        public void SetCurrentProject(string projectName)
+        public override void SetCurrentProject(string projectName)
         {
             // Nothing to do here
         }
 
-        public void CreateNewProject(string projectName)
+        public override void CreateNewProject(string projectName)
         {
             // Nothing to do here
         }
 
-        public void DeleteProject(string projectName)
+        public override void DeleteProject(string projectName)
         {
             // Nothing to do here
         }
 
-        public void CopyProject(string projectName)
+        public override void CopyProject(string projectName)
         {
             // Nothing to do here
         }
 
-        public void UpdateLocalProjects()
+        public override void UpdateLocalProjects()
         {
             // Nothing to do here
         }
 
-        public void StoreLocalSettings()
+        public override void StoreLocalSettings()
         {
             // Nothing to do here
         }
 
-        public bool RestoreLocalSettings()
+        public override bool RestoreLocalSettings()
         {
             return true;
             // Nothing to do here
         }
 
-        public void Save()
+        public override void Save()
         {
             // Nothing to do here
         }
 
-        public void InitializeLocalSettings()
+        public override void InitializeLocalSettings()
         {
             // Nothing to do here
         }
 
-        public void RestoreDefaultProject(string projectName)
+        public override void RestoreDefaultProject(string projectName)
         {
             // Nothing to do here
         }
 
-        public void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
+        public override void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
         {
             // Nothing to do here
         }
 
-        public void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite)
+        public override void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite)
         {
             // Nothing to do here
         }
 
-        public void CleanUpSpriteReferences(Sprite deletedSprite)
+        public override void CleanUpSpriteReferences(Sprite deletedSprite)
         {
             // Nothing to do here
         }
 
-        public void CleanUpVariableReferences(Objects.Variables.UserVariable deletedUserVariable, Sprite selectedSprite)
+        public override void CleanUpVariableReferences(Objects.Variables.UserVariable deletedUserVariable, Sprite selectedSprite)
         {
             // Nothing to do here
         }

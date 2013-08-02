@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Navigation;
 using Catrobat.Core.Objects;
-using Catrobat.IDEWindowsPhone.ViewModel.Scripts;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
 using GestureEventArgs = System.Windows.Input.GestureEventArgs;

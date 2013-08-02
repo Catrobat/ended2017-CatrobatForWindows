@@ -37,14 +37,14 @@ namespace Catrobat.TestsCommon.Tests.Data
 
       using (var storage = StorageSystem.GetStorage())
       {
-        storage.DeleteFile(CatrobatContext.LocalSettingsFilePath);
+        storage.DeleteFile(CatrobatContextBase.LocalSettingsFilePath);
       }
 
       catrobatContext.StoreLocalSettings();
 
       using (var storage = StorageSystem.GetStorage())
       {
-        Assert.IsTrue(storage.FileExists(CatrobatContext.LocalSettingsFilePath));
+          Assert.IsTrue(storage.FileExists(CatrobatContextBase.LocalSettingsFilePath));
       }
     }
   }

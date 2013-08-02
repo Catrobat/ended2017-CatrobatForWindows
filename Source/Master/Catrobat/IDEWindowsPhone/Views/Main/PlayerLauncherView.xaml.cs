@@ -29,7 +29,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
                 try
                 {
-                    CatrobatContext.GetContext().SetCurrentProject(projectName);
+                    CatrobatContextBase.GetContext().SetCurrentProject(projectName);
                 }
                 catch (Exception)
                 {

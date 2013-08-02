@@ -107,7 +107,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
         {
             var sound = new Sound(TxtName.Text);
 
-            var absoluteFileName = Path.Combine(CatrobatContext.GetContext().CurrentProject.BasePath, "sounds", sound.FileName);
+            var absoluteFileName = Path.Combine(CatrobatContextBase.GetContext().CurrentProject.BasePath, "sounds", sound.FileName);
 
             using (var storage = StorageSystem.GetStorage())
             {

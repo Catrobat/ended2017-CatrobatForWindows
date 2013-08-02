@@ -6,7 +6,7 @@ namespace Catrobat.IDEWindowsPhone
 {
     public class ContextHolderWindowsPhone : IContextHolder
     {
-        public CatrobatContext GetContext()
+        public CatrobatContextBase GetContext()
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
             return mainViewModel.Context;

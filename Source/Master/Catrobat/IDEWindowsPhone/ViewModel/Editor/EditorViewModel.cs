@@ -34,7 +34,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
     {
         #region Private Members
 
-        private readonly ICatrobatContext _catrobatContext;
+        private readonly CatrobatContextBase _catrobatContext;
         private Sprite _selectedSprite;
         private readonly ScriptBrickCollection _scriptBricks;
         private SoundPlayer _soundPlayer;
@@ -924,7 +924,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             }
             else
             {
-                _catrobatContext = CatrobatContext.GetContext();
+                _catrobatContext = CatrobatContextBase.GetContext();
             }
 
             _scriptBricks = new ScriptBrickCollection();
@@ -963,7 +963,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 {
                     costume.Delete();
                     Costumes.Remove(costume);
-                    CatrobatContext.GetContext().CleanUpCostumeReferences(costume, SelectedSprite);
+                    CatrobatContextBase.GetContext().CleanUpCostumeReferences(costume, SelectedSprite);
                 }
             }
         }
@@ -978,7 +978,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 {
                     sound.Delete();
                     Sounds.Remove(sound);
-                    CatrobatContext.GetContext().CleanUpSoundReferences(sound, SelectedSprite);
+                    CatrobatContextBase.GetContext().CleanUpSoundReferences(sound, SelectedSprite);
                 }
             }
         }
@@ -999,7 +999,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
                 SelectedSprite.Delete();
                 Sprites.Remove(SelectedSprite);
-                CatrobatContext.GetContext().CleanUpSpriteReferences(SelectedSprite);
+                CatrobatContextBase.GetContext().CleanUpSpriteReferences(SelectedSprite);
             }
         }
 

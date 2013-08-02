@@ -2,6 +2,6 @@
 {
     public interface IContextHolder
     {
-        CatrobatContext GetContext();
+        CatrobatContextBase GetContext();
     }
 }

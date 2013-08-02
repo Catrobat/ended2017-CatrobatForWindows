@@ -70,7 +70,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
                 if (_selectedSprite == null) return;
 
-                foreach (var entry in CatrobatContext.GetContext().
+                foreach (var entry in CatrobatContextBase.GetContext().
                     CurrentProject.VariableList.ObjectVariableList.ObjectVariableEntries)
                 {
                     if (entry.Sprite == _selectedSprite)

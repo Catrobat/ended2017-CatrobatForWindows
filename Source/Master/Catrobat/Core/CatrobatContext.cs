@@ -21,94 +21,9 @@ namespace Catrobat.Core
 {
     public delegate void ContextSaving();
 
-    public sealed class CatrobatContext : ICatrobatContext, INotifyPropertyChanged
+    public sealed class CatrobatContext : CatrobatContextBase
     {
-        public const string PlayerActiveProjectZipPath = "ActivePlayerProject/ActiveProject.catrobat_from_ide";
-        public const string LocalSettingsFilePath = "Settings/settings";
-        public const string DefaultProjectPath = "default.catrobat";
-        public const string ProjectsPath = "Projects";
-        public const string DefaultProjectName = "DefaultProject";
-        public const string TempProjectImportZipPath = "Temp/ImportProjectZip";
-        public const string TempProjectImportPath = "Temp/ImportProject";
-        public const string TempPaintImagePath = "Temp/PaintImage";
-        public ContextSaving ContextSaving;
-        
-
-        private static IContextHolder _holder;
-        public static CatrobatContext GetContext()
-        {
-            return _holder.GetContext();
-        }
-
-        public LocalSettings LocalSettings { get; set; }
-
-        public string CurrentToken
-        {
-            get { return LocalSettings.CurrentToken; }
-
-            set
-            {
-                if (LocalSettings.CurrentToken == value)
-                {
-                    return;
-                }
-
-                LocalSettings.CurrentToken = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public string CurrentUserEmail
-        {
-            get { return LocalSettings.CurrentUserEmail; }
-
-            set
-            {
-                if (LocalSettings.CurrentUserEmail == value)
-                {
-                    return;
-                }
-
-                LocalSettings.CurrentUserEmail = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private Project _currentProject;
-        public Project CurrentProject
-        {
-            get { return _currentProject; }
-            set
-            {
-                if (_currentProject == value)
-                {
-                    return;
-                }
-
-                _currentProject = value;
-                ProjectHolder.Project = _currentProject;
-                RaisePropertyChanged();
-                RaisePropertyChanged("LocalProjects");
-                UpdateLocalProjects();
-            }
-        }
-
-        private ObservableCollection<ProjectDummyHeader> _localProjects;
-        public ObservableCollection<ProjectDummyHeader> LocalProjects
-        {
-            get
-            {
-                if (_localProjects == null)
-                {
-                    UpdateLocalProjects();
-                }
-
-                return _localProjects;
-            }
-        }
-
-
-        public CatrobatContext()
+        public  CatrobatContext()
         {
             var firstTimeUse = !RestoreLocalSettings();
 
@@ -130,21 +45,16 @@ namespace Catrobat.Core
             }
         }
 
-        public static void SetContextHolder(IContextHolder holder)
+        public override void SetCurrentProject(string projectName)
         {
-            _holder = holder;
-        }
-
-        public void SetCurrentProject(string projectName)
-        {
-            if (_currentProject != null && _currentProject.ProjectHeader.ProgramName == projectName)
+            if (CurrentProjectField != null && CurrentProjectField.ProjectHeader.ProgramName == projectName)
             {
                 return;
             }
 
-            if (_currentProject != null)
+            if (CurrentProjectField != null)
             {
-                _currentProject.Save();
+                CurrentProjectField.Save();
             }
 
             var projectCodeFile = Path.Combine(ProjectsPath, projectName);
@@ -165,7 +75,7 @@ namespace Catrobat.Core
             }
         }
 
-        public void CreateNewProject(string projectName)
+        public override void CreateNewProject(string projectName)
         {
             RestoreDefaultProject(projectName);
 
@@ -173,14 +83,14 @@ namespace Catrobat.Core
             UpdateLocalProjects();
         }
 
-        public void DeleteProject(string projectName)
+        public override void DeleteProject(string projectName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
                 storage.DeleteDirectory(ProjectsPath + "/" + projectName);
             }
 
-            if (_currentProject.ProjectHeader.ProgramName == projectName)
+            if (CurrentProjectField.ProjectHeader.ProgramName == projectName)
             {
                 RestoreDefaultProject(DefaultProjectName);
             }
@@ -188,7 +98,7 @@ namespace Catrobat.Core
             UpdateLocalProjects();
         }
 
-        public void CopyProject(string projectName)
+        public override void CopyProject(string projectName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
@@ -216,19 +126,19 @@ namespace Catrobat.Core
             UpdateLocalProjects();
         }
 
-        public void UpdateLocalProjects()
+        public override void UpdateLocalProjects()
         {
             if (CurrentProject == null)
             {
                 return;
             }
 
-            if (_localProjects == null)
+            if (LocalProjectsField == null)
             {
-                _localProjects = new ObservableCollection<ProjectDummyHeader>();
+                LocalProjectsField = new ObservableCollection<ProjectDummyHeader>();
             }
 
-            _localProjects.Clear();
+            LocalProjectsField.Clear();
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -253,14 +163,14 @@ namespace Catrobat.Core
                 projects.Sort();
                 foreach (ProjectDummyHeader header in projects)
                 {
-                    _localProjects.Add(header);
+                    LocalProjectsField.Add(header);
                 }
             }
         }
 
-        public void StoreLocalSettings()
+        public override void StoreLocalSettings()
         {
-            LocalSettings.CurrentProjectName = _currentProject.ProjectHeader.ProgramName;
+            LocalSettings.CurrentProjectName = CurrentProjectField.ProjectHeader.ProgramName;
 
             if (ContextSaving != null)
             {
@@ -273,7 +183,7 @@ namespace Catrobat.Core
             }
         }
 
-        public bool RestoreLocalSettings()
+        public override bool RestoreLocalSettings()
         {
             try
             {
@@ -297,22 +207,22 @@ namespace Catrobat.Core
             return true;
         }
 
-        public void Save()
+        public override void Save()
         {
-            if (_currentProject != null)
+            if (CurrentProjectField != null)
             {
-                _currentProject.Save();
+                CurrentProjectField.Save();
             }
 
             StoreLocalSettings();
         }
 
-        public void InitializeLocalSettings()
+        public override void InitializeLocalSettings()
         {
             SetCurrentProject(LocalSettings.CurrentProjectName);
         }
 
-        public void RestoreDefaultProject(string projectName)
+        public override void RestoreDefaultProject(string projectName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
@@ -336,7 +246,7 @@ namespace Catrobat.Core
             }
         }
 
-        public void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
+        public override void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
         {
             foreach (Script script in selectedSprite.Scripts.Scripts)
             {
@@ -350,7 +260,7 @@ namespace Catrobat.Core
             }
         }
 
-        public void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite)
+        public override void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite)
         {
             foreach (Script script in selectedSprite.Scripts.Scripts)
             {
@@ -364,9 +274,9 @@ namespace Catrobat.Core
             }
         }
 
-        public void CleanUpSpriteReferences(Sprite deletedSprite)
+        public override void CleanUpSpriteReferences(Sprite deletedSprite)
         {
-            foreach (Sprite sprite in _currentProject.SpriteList.Sprites)
+            foreach (Sprite sprite in CurrentProjectField.SpriteList.Sprites)
             {
                 foreach (Script script in sprite.Scripts.Scripts)
                 {
@@ -381,7 +291,7 @@ namespace Catrobat.Core
             }
         }
 
-        public void CleanUpVariableReferences(UserVariable deletedUserVariable, Sprite selectedSprite)
+        public override void CleanUpVariableReferences(UserVariable deletedUserVariable, Sprite selectedSprite)
         {
             foreach (Script script in selectedSprite.Scripts.Scripts)
             {
@@ -398,16 +308,5 @@ namespace Catrobat.Core
                 }
             }
         }
-
-        #region PropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        [NotifyPropertyChangedInvocator]
-
-        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 }

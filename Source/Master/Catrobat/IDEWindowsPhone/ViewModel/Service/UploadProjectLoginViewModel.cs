@@ -24,7 +24,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         #region private Members
 
-        private readonly ICatrobatContext catrobatContext;
+        private readonly CatrobatContextBase catrobatContext;
         private MessageBoxResult _missingLoginDataCallbackResult;
         private MessageBoxResult _wrongLoginDataCallbackResult;
         private MessageBoxResult _registrationSuccessfulCallbackResult;
@@ -152,7 +152,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             }
             else
             {
-                catrobatContext = CatrobatContext.GetContext();
+                catrobatContext = CatrobatContextBase.GetContext();
             }
 
             NavigationCallback = navigationCallback;
@@ -195,7 +195,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void registerOrCheckTokenCallback(bool registered, string errorCode, string statusMessage)
         {
-            CatrobatContext.GetContext().CurrentToken = Utils.CalculateToken(_username, _password);
+            CatrobatContextBase.GetContext().CurrentToken = Utils.CalculateToken(_username, _password);
 
             if (registered)
             {

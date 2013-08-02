@@ -219,8 +219,8 @@
     <Compile Include="ViewModel\Main\AddNewProjectViewModel.cs" />
     <Compile Include="ViewModel\Main\ProjectNotValidViewModel.cs" />
     <Compile Include="ViewModel\Main\ProjectImportViewModel.cs" />
-    <Compile Include="ViewModel\Scripts\AddNewScriptBrickViewModel.cs" />
-    <Compile Include="ViewModel\Scripts\NewBroadcastMessageViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Scripts\AddNewScriptBrickViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Scripts\NewBroadcastMessageViewModel.cs" />
     <Compile Include="ViewModel\Service\OnlineProjectViewModel.cs" />
     <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sounds\SoundRecorderViewModel.cs" />

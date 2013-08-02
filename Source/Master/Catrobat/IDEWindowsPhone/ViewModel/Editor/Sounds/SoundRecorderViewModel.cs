@@ -358,7 +358,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
         private void SaveNameChosenAction()
         {
             var sound = new Sound(SoundName);
-            var path = CatrobatContext.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
+            var path = CatrobatContextBase.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
 
             using (var storage = StorageSystem.GetStorage())
             {

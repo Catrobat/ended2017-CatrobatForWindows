@@ -13,7 +13,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 {
     public class UploadProjectViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        private readonly ICatrobatContext _catrobatContext;
+        private readonly CatrobatContextBase _catrobatContext;
 
         #region private Members
 
@@ -79,9 +79,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             _catrobatContext.CurrentProject.ProjectHeader.ProgramName = _projectName;
 
             ServerCommunication.UploadProject(_projectName, _projectDescription,
-                                              CatrobatContext.GetContext().CurrentUserEmail,
+                                              CatrobatContextBase.GetContext().CurrentUserEmail,
                                               Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
-                                              CatrobatContext.GetContext().CurrentToken, UploadCallback);
+                                              CatrobatContextBase.GetContext().CurrentToken, UploadCallback);
 
             Messenger.Default.Send(new DialogMessage(AppResources.Main_UploadQueueMessage, null)
             {
@@ -119,7 +119,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             }
             else
             {
-                _catrobatContext = CatrobatContext.GetContext();
+                _catrobatContext = CatrobatContextBase.GetContext();
             }
 
             _projectName = _catrobatContext.CurrentProject.ProjectHeader.ProgramName;

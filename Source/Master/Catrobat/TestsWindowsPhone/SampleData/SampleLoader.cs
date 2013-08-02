@@ -53,7 +53,7 @@ namespace Catrobat.TestsWindowsPhone.SampleData
       {
         Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestsPhone, path + sampleName + ".xml");
         CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream,
-                                                            CatrobatContext.ProjectsPath + "/" + sampleProjectName);
+                                                            CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
         stream.Close();
         stream.Dispose();
       }

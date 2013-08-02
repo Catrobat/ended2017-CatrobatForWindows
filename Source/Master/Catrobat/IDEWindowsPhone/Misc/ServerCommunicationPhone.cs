@@ -82,7 +82,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
                         List<string> folders;
                         using (var storeage = StorageSystem.GetStorage())
                         {
-                            folders = storeage.GetDirectoryNames(CatrobatContext.ProjectsPath).ToList<string>();
+                            folders = storeage.GetDirectoryNames(CatrobatContextBase.ProjectsPath).ToList<string>();
                         }
                         var countString = "";
                         var counter = 1;
@@ -94,7 +94,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
 
                         CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(args.Result,
-                                                                            CatrobatContext.ProjectsPath + "/" +
+                                                                            CatrobatContextBase.ProjectsPath + "/" +
                                                                             projectName);
 
                         downloadCounterChange[0]--;

@@ -201,8 +201,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void DownloadCallback(string filename)
         {
-            CatrobatContext.GetContext().UpdateLocalProjects();
-            CatrobatContext.GetContext().SetCurrentProject(filename);
+            CatrobatContextBase.GetContext().UpdateLocalProjects();
+            CatrobatContextBase.GetContext().SetCurrentProject(filename);
 
             Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {

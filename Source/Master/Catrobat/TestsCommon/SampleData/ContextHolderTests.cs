@@ -9,16 +9,16 @@ namespace Catrobat.TestsCommon.SampleData
 {
   public class ContextHolderTests : IContextHolder
   {
-    private CatrobatContext _catrobatContext;
+    private readonly CatrobatContext _catrobatContextField;
 
     public ContextHolderTests(CatrobatContext catrobatContext)
     {
-      _catrobatContext = catrobatContext;
+      _catrobatContextField = catrobatContext;
     }
 
-    public CatrobatContext GetContext()
+    public CatrobatContextBase GetContext()
     {
-      return _catrobatContext;
+      return _catrobatContextField;
     }
   }
 }
