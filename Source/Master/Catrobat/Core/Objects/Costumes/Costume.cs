@@ -142,7 +142,17 @@ namespace Catrobat.Core.Objects.Costumes
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherCostume = other as Costume;
+
+            if (otherCostume == null)
+                return false;
+
+            if (Name != otherCostume.Name)
+                return false;
+            if (FileName != otherCostume.FileName)
+                return false;
+
+            return true;
         }
     }
 }

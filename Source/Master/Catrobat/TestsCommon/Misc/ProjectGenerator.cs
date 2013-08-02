@@ -100,13 +100,14 @@ namespace Catrobat.TestsCommon.Misc
             foreach (var sprite in sprites)
             {
                 var scripts = ReflectionHelper.GetInstances<Script>();
-
+                sprite.Scripts = new ScriptList();
                 foreach (var script in scripts)
                 {
-                    sprite.Scripts = new ScriptList();
+                    FillDummyValues(script, project, sprite);
                     sprite.Scripts.Scripts.Add(script);
 
                     var bricks = ReflectionHelper.GetInstances<Brick>(ExcludedBricks);
+                    script.Bricks = new BrickList();
                     foreach (var brick in bricks)
                     {
                         FillDummyValues(brick, project, sprite);
@@ -157,6 +158,11 @@ namespace Catrobat.TestsCommon.Misc
             if (type == typeof(double))
             {
                 return 42.42;
+            }
+
+            if (type == typeof (WhenScript.WhenScriptAction))
+            {
+                return WhenScript.WhenScriptAction.Tapped;
             }
 
             if (type == typeof(Formula))

@@ -76,7 +76,15 @@ namespace Catrobat.Core.Objects.Scripts
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherScript = other as BroadcastScript;
+
+            if (otherScript == null)
+                return false;
+
+            if (ReceivedMessage != otherScript.ReceivedMessage)
+                return false;
+
+            return Bricks.Equals(otherScript.Bricks);
         }
     }
 }

@@ -63,7 +63,22 @@ namespace Catrobat.Core.Objects.Scripts
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherScriptList = other as ScriptList;
+
+            if (otherScriptList == null)
+                return false;
+
+            var count = Scripts.Count;
+            var otherCount = otherScriptList.Scripts.Count;
+
+            if (count != otherCount)
+                return false;
+
+            for (int i = 0; i < count; i++)
+                if (!Scripts[i].Equals(otherScriptList.Scripts[i]))
+                    return false;
+
+            return true;
         }
     }
 }

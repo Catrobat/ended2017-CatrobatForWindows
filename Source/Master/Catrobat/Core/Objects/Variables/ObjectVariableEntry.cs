@@ -104,7 +104,28 @@ namespace Catrobat.Core.Objects.Variables
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherObjectVariableEntry = other as ObjectVariableEntry;
+
+            if (otherObjectVariableEntry == null)
+                return false;
+
+            if (SpriteReference != null && otherObjectVariableEntry.SpriteReference != null)
+            {
+                if (!SpriteReference.Equals(otherObjectVariableEntry.SpriteReference))
+                    return false;
+            }
+            else if (!(SpriteReference == null && otherObjectVariableEntry.SpriteReference == null))
+                return false;
+
+            if (VariableList != null && otherObjectVariableEntry.VariableList != null)
+            {
+                if (!VariableList.Equals(otherObjectVariableEntry.VariableList))
+                    return false;
+            }
+            else if (!(VariableList == null && otherObjectVariableEntry.VariableList == null))
+                return false;
+
+            return true;
         }
     }
 }

@@ -59,7 +59,15 @@ namespace Catrobat.Core.Objects.Bricks
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherBrick = other as NoteBrick;
+
+            if (otherBrick == null)
+                return false;
+
+            if (Note != otherBrick.Note)
+                return false;
+
+            return true;
         }
     }
 }

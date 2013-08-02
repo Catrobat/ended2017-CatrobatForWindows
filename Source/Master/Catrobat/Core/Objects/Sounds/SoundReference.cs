@@ -63,7 +63,15 @@ namespace Catrobat.Core.Objects.Sounds
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherReference = other as SoundReference;
+
+            if (otherReference == null)
+                return false;
+
+            if (_reference != otherReference._reference)
+                return false;
+
+            return true;
         }
     }
 }

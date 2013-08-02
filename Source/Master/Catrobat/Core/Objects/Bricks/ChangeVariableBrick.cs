@@ -105,7 +105,15 @@ namespace Catrobat.Core.Objects.Bricks
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherBrick = other as ChangeVariableBrick;
+
+            if (otherBrick == null)
+                return false;
+
+            if (!UserVariableReference.Equals(otherBrick.UserVariableReference))
+                return false;
+
+            return VariableFormula.Equals(otherBrick.VariableFormula);
         }
     }
 }

@@ -49,7 +49,18 @@ namespace Catrobat.Core.Objects.Formulas
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
-        }
+            var otherFormula = other as Formula;
+
+            if (otherFormula == null)
+                return false;
+
+            if (FormulaTree != null && otherFormula.FormulaTree != null)
+                return FormulaTree.Equals(otherFormula.FormulaTree);
+
+            if (!(FormulaTree == null && otherFormula.FormulaTree == null))
+                return false;
+
+            return true;
+         }
     }
 }

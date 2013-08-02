@@ -20,8 +20,6 @@ namespace Catrobat.Core.Objects
         public const string ImagesPath = "images";
         public const string SoundsPath = "sounds";
 
-        private ObservableCollection<string> _broadcastMessages;
-
 
         private object _projectScreenshot;
         public object ProjectScreenshot
@@ -61,6 +59,7 @@ namespace Catrobat.Core.Objects
             }
         }
 
+        private ObservableCollection<string> _broadcastMessages;
         public ObservableCollection<string> BroadcastMessages
         {
             get { return _broadcastMessages; }
@@ -299,7 +298,31 @@ namespace Catrobat.Core.Objects
 
         public override bool Equals(DataRootObject other)
         {
-            throw new System.NotImplementedException();
+            var otherProject = other as Project;
+
+            if (otherProject == null)
+                return false;
+
+            var count = BroadcastMessages.Count;
+            var otherCount = otherProject.BroadcastMessages.Count;
+
+            if (count != otherCount)
+                return false;
+
+            for (int i = 0; i < count; i++)
+                if (!BroadcastMessages[i].Equals(otherProject.BroadcastMessages[i]))
+                    return false;
+
+            if (!ProjectHeader.Equals(otherProject.ProjectHeader))
+                return false;
+
+            if(!SpriteList.Equals(otherProject.SpriteList))
+                return false;
+
+            if (!VariableList.Equals(otherProject.VariableList))
+                return false;
+
+            return true;
         }
     }
 }

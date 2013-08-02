@@ -56,7 +56,15 @@ namespace Catrobat.Core.Objects.Bricks
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherBrick = other as RepeatBrick;
+
+            if (otherBrick == null)
+                return false;
+
+            if (!TimesToRepeat.Equals(otherBrick.TimesToRepeat))
+                return false;
+
+            return LoopEndBrickReference.Equals(otherBrick.LoopEndBrickReference);
         }
     }
 }

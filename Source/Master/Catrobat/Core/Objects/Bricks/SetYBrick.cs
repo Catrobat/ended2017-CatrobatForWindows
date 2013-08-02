@@ -48,7 +48,12 @@ namespace Catrobat.Core.Objects.Bricks
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherBrick = other as SetYBrick;
+
+            if (otherBrick == null)
+                return false;
+
+            return YPosition.Equals(otherBrick.YPosition);
         }
     }
 }

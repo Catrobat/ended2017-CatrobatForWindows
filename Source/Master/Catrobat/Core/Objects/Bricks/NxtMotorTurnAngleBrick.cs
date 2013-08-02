@@ -77,7 +77,15 @@ namespace Catrobat.Core.Objects.Bricks
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherBrick = other as NxtMotorTurnAngleBrick;
+
+            if (otherBrick == null)
+                return false;
+
+            if (Motor != otherBrick.Motor)
+                return false;
+
+            return Degrees.Equals(otherBrick.Degrees);
         }
     }
 }

@@ -49,7 +49,12 @@ namespace Catrobat.Core.Objects.Bricks
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherBrick = other as TurnLeftBrick;
+
+            if (otherBrick == null)
+                return false;
+
+            return Degrees.Equals(otherBrick.Degrees);
         }
     }
 }

@@ -50,7 +50,22 @@ namespace Catrobat.Core.Objects
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherSpriteList = other as SpriteList;
+
+            if (otherSpriteList == null)
+                return false;
+
+            var count = Sprites.Count;
+            var otherCount = otherSpriteList.Sprites.Count;
+
+            if (count != otherCount)
+                return false;
+
+            for (int i = 0; i < count; i++)
+                if (!Sprites[i].Equals(otherSpriteList.Sprites[i]))
+                    return false;
+
+            return true;
         }
     }
 }

@@ -33,7 +33,12 @@ namespace Catrobat.Core.Objects.Scripts
 
         public override bool Equals(DataObject other)
         {
-            throw new System.NotImplementedException();
+            var otherScript = other as StartScript;
+
+            if (otherScript == null)
+                return false;
+
+            return Bricks.Equals(otherScript.Bricks);
         }
     }
 }
