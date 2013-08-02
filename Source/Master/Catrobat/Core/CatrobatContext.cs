@@ -40,7 +40,7 @@ namespace Catrobat.Core
             return _holder.GetContext();
         }
 
-        public LocalSettings LocalSettings { get; private set; }
+        public LocalSettings LocalSettings { get; set; }
 
         public string CurrentToken
         {
@@ -258,7 +258,7 @@ namespace Catrobat.Core
             }
         }
 
-        internal void StoreLocalSettings()
+        public void StoreLocalSettings()
         {
             LocalSettings.CurrentProjectName = _currentProject.ProjectHeader.ProgramName;
 
@@ -273,7 +273,7 @@ namespace Catrobat.Core
             }
         }
 
-        internal bool RestoreLocalSettings()
+        public bool RestoreLocalSettings()
         {
             try
             {
@@ -307,12 +307,12 @@ namespace Catrobat.Core
             StoreLocalSettings();
         }
 
-        private void InitializeLocalSettings()
+        public void InitializeLocalSettings()
         {
             SetCurrentProject(LocalSettings.CurrentProjectName);
         }
 
-        internal void RestoreDefaultProject(string projectName)
+        public void RestoreDefaultProject(string projectName)
         {
             using (var storage = StorageSystem.GetStorage())
             {

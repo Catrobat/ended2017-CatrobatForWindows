@@ -50,6 +50,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             get
             {
+                if(_currentProject == null)
+                    return CurrentProject = CatrobatContext.GetContext().CurrentProject;
+
                 return _currentProject;
             }
             set

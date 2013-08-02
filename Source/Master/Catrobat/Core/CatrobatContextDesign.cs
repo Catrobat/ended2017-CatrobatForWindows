@@ -130,5 +130,96 @@ namespace Catrobat.Core
             OnlineProjects.Add(project2);
             OnlineProjects.Add(project3);
         }
+
+
+        public LocalSettings LocalSettings
+        {
+            get
+            {
+                return new LocalSettings
+                {
+                    CurrentLanguageString = "en",
+                    CurrentProjectName = "DefaultProject",
+                    CurrentThemeIndex = 0,
+                    CurrentToken = "DummyToken",
+                    CurrentUserEmail = "dummy@somedomain.com"
+                };
+            }
+            set
+            {
+                // Nothing to do here
+            }
+        }
+
+        public void SetCurrentProject(string projectName)
+        {
+            // Nothing to do here
+        }
+
+        public void CreateNewProject(string projectName)
+        {
+            // Nothing to do here
+        }
+
+        public void DeleteProject(string projectName)
+        {
+            // Nothing to do here
+        }
+
+        public void CopyProject(string projectName)
+        {
+            // Nothing to do here
+        }
+
+        public void UpdateLocalProjects()
+        {
+            // Nothing to do here
+        }
+
+        public void StoreLocalSettings()
+        {
+            // Nothing to do here
+        }
+
+        public bool RestoreLocalSettings()
+        {
+            return true;
+            // Nothing to do here
+        }
+
+        public void Save()
+        {
+            // Nothing to do here
+        }
+
+        public void InitializeLocalSettings()
+        {
+            // Nothing to do here
+        }
+
+        public void RestoreDefaultProject(string projectName)
+        {
+            // Nothing to do here
+        }
+
+        public void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
+        {
+            // Nothing to do here
+        }
+
+        public void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite)
+        {
+            // Nothing to do here
+        }
+
+        public void CleanUpSpriteReferences(Sprite deletedSprite)
+        {
+            // Nothing to do here
+        }
+
+        public void CleanUpVariableReferences(Objects.Variables.UserVariable deletedUserVariable, Sprite selectedSprite)
+        {
+            // Nothing to do here
+        }
     }
 }

@@ -567,9 +567,6 @@
                 <TextBlock Grid.Column="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_ChangeVolumeBy, Source={StaticResource LocalizedStrings}}" 
                            Margin="10" FontSize="24" />
-                <!--<TextBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding Volume, Mode=TwoWay}" InputScope="TelephoneNumber" 
-                         IsEnabled="{Binding IsRealObject}" />-->
                 <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding Volume, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="%" Margin="10" FontSize="24" />
@@ -587,10 +584,8 @@
                 <TextBlock VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_Speak, Source={StaticResource LocalizedStrings}}" 
                            Margin="10" FontSize="24" />
-                <!--<TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                         Text="{Binding Text, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Formula="{Binding Text, Mode=TwoWay}" 
-                                               IsEnabled="{Binding IsRealObject}"/>
+                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                         Text="{Binding Text, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" />
               </StackPanel>
             </rlb:NormalBrick>
           </Grid>
