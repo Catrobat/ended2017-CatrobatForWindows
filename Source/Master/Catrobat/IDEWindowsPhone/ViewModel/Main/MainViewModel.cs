@@ -4,7 +4,7 @@ using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
-using Catrobat.IDECommon.Resources.IDE.Main;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.Views.Main;
@@ -230,10 +230,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             _deleteProductName = projectName;
 
-            var message = new DialogMessage(String.Format(MainResources.MainDeleteProjectDialogMessage, projectName), DeleteProductMessageCallback)
+            var message = new DialogMessage(String.Format(AppResources.Main_MainDeleteProjectDialogMessage, projectName), DeleteProductMessageCallback)
             {
                 Button = MessageBoxButton.OKCancel,
-                Caption = MainResources.MainDeleteProjectDialogTitle
+                Caption = AppResources.Main_MainDeleteProjectDialogTitle
             };
 
             Messenger.Default.Send(message);
@@ -243,10 +243,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             _copyProjectName = projectName;
 
-            var message = new DialogMessage(String.Format(MainResources.MainCopyProjectDialogMessage, projectName), CopyProductMessageCallback)
+            var message = new DialogMessage(String.Format(AppResources.Main_MainCopyProjectDialogMessage, projectName), CopyProductMessageCallback)
             {
                 Button = MessageBoxButton.OKCancel,
-                Caption = MainResources.MainCopyProjectDialogTitle
+                Caption = AppResources.Main_MainCopyProjectDialogTitle
             };
 
             Messenger.Default.Send(message);

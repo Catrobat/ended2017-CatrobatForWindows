@@ -8,8 +8,6 @@ using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
-using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.IDE.Editor;
 using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Misc;

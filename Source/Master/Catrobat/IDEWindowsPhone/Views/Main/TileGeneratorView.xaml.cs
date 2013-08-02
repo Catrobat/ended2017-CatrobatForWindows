@@ -6,10 +6,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Catrobat.Core.Storage;
-using Catrobat.IDECommon.Resources.IDE.Editor;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
-using Coding4Fun.Toolkit.Controls.Common;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Practices.ServiceLocation;
@@ -120,12 +119,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
             ApplicationBar = new ApplicationBar();
 
             var buttonOk = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.check.rest.png", UriKind.Relative));
-            buttonOk.Text = EditorResources.ButtonSave;
+            buttonOk.Text = AppResources.Editor_ButtonSave;
             buttonOk.Click += (sender, args) => AddTile();
             ApplicationBar.Buttons.Add(buttonOk);
 
             var buttonCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
-            buttonCancel.Text = EditorResources.ButtonCancel;
+            buttonCancel.Text = AppResources.Editor_ButtonCancel;
             buttonCancel.Click += (sender, args) => Navigation.NavigateBack();
             ApplicationBar.Buttons.Add(buttonCancel);
         }

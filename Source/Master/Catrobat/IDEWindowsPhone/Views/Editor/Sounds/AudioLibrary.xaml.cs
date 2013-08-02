@@ -8,8 +8,7 @@ using System.Windows.Navigation;
 using Catrobat.Core;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Storage;
-using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.IDE.Editor;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Misc.Sounds;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
@@ -35,7 +34,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
             InitializeComponent();
 
             BuildApplicationBar();
-            (App.Current.Resources["LocalizedStrings"] as LocalizedStrings).PropertyChanged += LanguageChanged;
+            ((LocalizedStrings)Application.Current.Resources["LocalizedStrings"]).PropertyChanged += LanguageChanged;
 
             Dispatcher.BeginInvoke(() =>
                 {
@@ -55,12 +54,12 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
             ApplicationBar = new ApplicationBar();
 
             _btnSave = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.check.rest.png", UriKind.Relative));
-            _btnSave.Text = EditorResources.ButtonSave;
+            _btnSave.Text = AppResources.Editor_ButtonSave;
             _btnSave.Click += btnSave_Click;
             ApplicationBar.Buttons.Add(_btnSave);
 
             var btnCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
-            btnCancel.Text = EditorResources.ButtonCancel;
+            btnCancel.Text = AppResources.Editor_ButtonCancel;
             btnCancel.Click += btnCancel_Click;
             ApplicationBar.Buttons.Add(btnCancel);
         }
@@ -87,7 +86,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
                         StackPanelMediaLibrary.Visibility = Visibility.Visible;
                         StackPanelChangeName.Visibility = Visibility.Collapsed;
                         ApplicationBar.IsVisible = false;
-                        Headline.Text = EditorResources.TitleChooseSound;
+                        Headline.Text = AppResources.Editor_TitleChooseSound;
                         TxtName.Text = "";
                     });
                 e.Cancel = true;
@@ -159,7 +158,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
                         StackPanelChangeName.Visibility = Visibility.Visible;
                         ApplicationBar.IsVisible = true;
 
-                        Headline.Text = EditorResources.TitleChooseSoundName;
+                        Headline.Text = AppResources.Editor_TitleChooseSoundName;
                         TxtName.Text = _selectedSong.Name;
                         TxtName.Focus();
                         TxtName.SelectAll();

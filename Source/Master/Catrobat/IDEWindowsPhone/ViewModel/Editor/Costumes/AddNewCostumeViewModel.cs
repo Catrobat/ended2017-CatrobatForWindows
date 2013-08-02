@@ -7,7 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Catrobat.Core.Objects;
-using Catrobat.IDECommon.Resources.IDE.Editor;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using GalaSoft.MvvmLight;
@@ -221,7 +221,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             {
                 try
                 {
-                    CostumeName = EditorResources.Image;
+                    CostumeName = AppResources.Editor_Image;
 
                     _builder = new CostumeBuilder();
 
@@ -243,10 +243,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private void ShowLoadingImageFailure()
         {
-            var message = new DialogMessage(EditorResources.MessageBoxWrongImageFormatText, WrongImageFormatResult)
+            var message = new DialogMessage(AppResources.Editor_MessageBoxWrongImageFormatText, WrongImageFormatResult)
             {
                 Button = MessageBoxButton.OK,
-                Caption = EditorResources.MessageBoxWrongImageFormatHeader
+                Caption = AppResources.Editor_MessageBoxWrongImageFormatHeader
             };
             Messenger.Default.Send(message);
         }
@@ -271,7 +271,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private void ResetViewModel()
         {
-            //CostumeName = EditorResources.Image;
+            //CostumeName = AppResources.Editor_Image;
 
             //InitImageSizes();
             //_builder = null;

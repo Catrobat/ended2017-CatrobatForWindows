@@ -6,7 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using Catrobat.IDECommon.Resources.IDE.Main;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using GalaSoft.MvvmLight;
@@ -45,11 +45,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 switch (Error)
                 {
                     case PlayerLaunchingError.ProjectDosNotExist:
-                        return MainResources.ProjectDoesNotExist;
+                        return AppResources.Main_ProjectDoesNotExist;
                     case PlayerLaunchingError.ProjectNotValid:
-                        return MainResources.ProjectNotValid;
+                        return AppResources.Main_ProjectNotValid;
                     case PlayerLaunchingError.VersionIsNotSupported:
-                        return MainResources.VersionIsNotSupported;
+                        return AppResources.Main_VersionIsNotSupported;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

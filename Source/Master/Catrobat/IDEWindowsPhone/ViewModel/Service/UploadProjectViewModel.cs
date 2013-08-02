@@ -3,7 +3,7 @@ using System.Threading;
 using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.Misc.ServerCommunication;
-using Catrobat.IDECommon.Resources.IDE.Main;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -83,9 +83,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                                               Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
                                               CatrobatContext.GetContext().CurrentToken, UploadCallback);
 
-            Messenger.Default.Send(new DialogMessage(MainResources.UploadQueueMessage, null)
+            Messenger.Default.Send(new DialogMessage(AppResources.Main_UploadQueueMessage, null)
             {
-                Caption = MainResources.MessageBoxInformation,
+                Caption = AppResources.Main_MessageBoxInformation,
                 Button = MessageBoxButton.OK,
             });
 
@@ -130,9 +130,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
         {
             if (ServerCommunication.NoUploadsPending())
             {
-                Messenger.Default.Send(new DialogMessage(MainResources.NoUploadsPending, null)
+                Messenger.Default.Send(new DialogMessage(AppResources.Main_NoUploadsPending, null)
                 {
-                    Caption = MainResources.MessageBoxInformation,
+                    Caption = AppResources.Main_MessageBoxInformation,
                     Button = MessageBoxButton.OK,
                 });
             }

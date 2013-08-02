@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Linq.Expressions;
 using Catrobat.Core.Misc;
-using Catrobat.IDECommon.Resources.IDE.Main;
+
 
 namespace Catrobat.IDEWindowsPhone.Content.Localization
 {

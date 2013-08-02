@@ -6,9 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.IDE.Editor;
-using Catrobat.IDECommon.Resources.IDE.Formula;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
 {
@@ -39,7 +37,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
             if (_localizedStrings == null)
                 _localizedStrings = Application.Current.Resources["LocalizedStrings"] as LocalizedStrings;
 
-            var text = (string)typeof(FormulaResources).GetProperty(LocalizedResourceName).GetValue(_localizedStrings.Formula);
+            var text = (string)typeof(AppResources).GetProperty("Formula_" + LocalizedResourceName).GetValue(_localizedStrings.Resources);
 
             return text;
         }

@@ -8,9 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
-using Catrobat.IDECommon.Resources;
-using Catrobat.IDECommon.Resources.IDE.Editor;
-using Catrobat.IDECommon.Resources.IDE.Main;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Views.Editor;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -183,19 +181,19 @@ namespace Catrobat.IDEWindowsPhone.Controls.AppBar
             switch (targetType)
             {
                 case AppBarTargetType.Object:
-                    TextBlockNumberOfSelectedItemsText.Text = usePlural ? EditorResources.ObjectPlural : EditorResources.ObjectSingular;
+                    TextBlockNumberOfSelectedItemsText.Text = usePlural ? AppResources.Editor_ObjectPlural : AppResources.Editor_ObjectSingular;
                     break;
 
                 case AppBarTargetType.Script:
-                    TextBlockNumberOfSelectedItemsText.Text = usePlural ? EditorResources.ActionPlural : EditorResources.ActionSingular;
+                    TextBlockNumberOfSelectedItemsText.Text = usePlural ? AppResources.Editor_ActionPlural : AppResources.Editor_ActionSingular;
                     break;
 
                 case AppBarTargetType.Costume:
-                    TextBlockNumberOfSelectedItemsText.Text = usePlural ? EditorResources.CostumePlural : EditorResources.CostumeSingular;
+                    TextBlockNumberOfSelectedItemsText.Text = usePlural ? AppResources.Editor_CostumePlural : AppResources.Editor_CostumeSingular;
                     break;
 
                 case AppBarTargetType.Sound:
-                    TextBlockNumberOfSelectedItemsText.Text = usePlural ? EditorResources.SoundPlural : EditorResources.SoundSingular;
+                    TextBlockNumberOfSelectedItemsText.Text = usePlural ? AppResources.Editor_SoundPlural : AppResources.Editor_SoundSingular;
                     break;
             }
         }
@@ -207,19 +205,19 @@ namespace Catrobat.IDEWindowsPhone.Controls.AppBar
             switch (targetType)
             {
                 case AppBarTargetType.Object:
-                    text = EditorResources.NewObject;
+                    text = AppResources.Editor_NewObject;
                     break;
 
                 case AppBarTargetType.Script:
-                    text = EditorResources.NewAction;
+                    text = AppResources.Editor_NewAction;
                     break;
 
                 case AppBarTargetType.Costume:
-                    text = EditorResources.NewCostume;
+                    text = AppResources.Editor_NewCostume;
                     break;
 
                 case AppBarTargetType.Sound:
-                    text = EditorResources.NewSound;
+                    text = AppResources.Editor_NewSound;
                     break;
             }
 

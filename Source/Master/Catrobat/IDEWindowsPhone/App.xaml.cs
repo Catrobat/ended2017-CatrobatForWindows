@@ -8,7 +8,6 @@ using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Storage;
-using Catrobat.IDECommon.Resources.IDE.Main;
 using Catrobat.IDEWindowsPhone;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;

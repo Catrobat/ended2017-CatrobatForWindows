@@ -9,6 +9,7 @@ using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
@@ -17,7 +18,6 @@ using GalaSoft.MvvmLight.Command;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using GalaSoft.MvvmLight.Messaging;
-using Catrobat.IDECommon.Resources.IDE.Editor;
 using System.Windows;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
@@ -620,9 +620,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void DeleteSpriteAction()
         {
-            var sprite = EditorResources.ObjectSingular;
-            var messageContent = String.Format(EditorResources.MessageBoxDeleteText, "1", sprite);
-            var messageHeader = String.Format(EditorResources.MessageBoxDeleteHeader, sprite);
+            var sprite = AppResources.Editor_ObjectSingular;
+            var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, "1", sprite);
+            var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, sprite);
 
             var message =
                 new DialogMessage(messageContent, DeleteSpriteMessageBoxResult)
@@ -655,9 +655,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void DeleteSoundAction()
         {
-            var sound = SelectedSounds.Count == 1 ? EditorResources.SoundSingular : EditorResources.SoundPlural;
-            var messageContent = String.Format(EditorResources.MessageBoxDeleteText, SelectedSounds.Count, sound);
-            var messageHeader = String.Format(EditorResources.MessageBoxDeleteHeader, sound);
+            var sound = SelectedSounds.Count == 1 ? AppResources.Editor_SoundSingular : AppResources.Editor_SoundPlural;
+            var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedSounds.Count, sound);
+            var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, sound);
 
             var message =
                 new DialogMessage(messageContent, DeleteSoundMessageBoxResult)
@@ -700,9 +700,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void DeleteCostumeAction()
         {
-            var costume = SelectedCostumes.Count == 1 ? EditorResources.CostumeSingular : EditorResources.CostumePlural;
-            var messageContent = String.Format(EditorResources.MessageBoxDeleteText, SelectedCostumes.Count, costume);
-            var messageHeader = String.Format(EditorResources.MessageBoxDeleteHeader, costume);
+            var costume = SelectedCostumes.Count == 1 ? AppResources.Editor_CostumeSingular : AppResources.Editor_CostumePlural;
+            var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedCostumes.Count, costume);
+            var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, costume);
 
             var message =
                 new DialogMessage(messageContent, DeleteCostumeMessageBoxResult)

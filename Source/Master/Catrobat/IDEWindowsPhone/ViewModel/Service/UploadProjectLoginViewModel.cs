@@ -7,7 +7,7 @@ using Catrobat.Core;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.JSON;
 using Catrobat.Core.Misc.ServerCommunication;
-using Catrobat.IDECommon.Resources.IDE.Main;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Service;
 using GalaSoft.MvvmLight;
@@ -109,10 +109,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_email))
             {
-                var message = new DialogMessage(MainResources.UploadProjectMissingLoginData, MissingLoginDataCallback)
+                var message = new DialogMessage(AppResources.Main_UploadProjectMissingLoginData, MissingLoginDataCallback)
                 {
                     Button = MessageBoxButton.OK,
-                    Caption = MainResources.UploadProjectLoginErrorCaption
+                    Caption = AppResources.Main_UploadProjectLoginErrorCaption
                 };
 
                 Messenger.Default.Send(message);
@@ -199,10 +199,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
             if (registered)
             {
-                var message = new DialogMessage(string.Format(MainResources.UploadProjectWelcome, _username), RegistrationSuccessfulCallback)
+                var message = new DialogMessage(string.Format(AppResources.Main_UploadProjectWelcome, _username), RegistrationSuccessfulCallback)
                 {
                     Button = MessageBoxButton.OK,
-                    Caption = MainResources.UploadProjectRegistrationSucessful
+                    Caption = AppResources.Main_UploadProjectRegistrationSucessful
                 };
 
                 Messenger.Default.Send(message);
@@ -221,13 +221,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             }
             else //Unknown error
             {
-                var messageString = string.IsNullOrEmpty(statusMessage) ? string.Format(MainResources.UploadProjectUndefinedError, errorCode) :
-                                        string.Format(MainResources.UploadProjectLoginError, statusMessage);
+                var messageString = string.IsNullOrEmpty(statusMessage) ? string.Format(AppResources.Main_UploadProjectUndefinedError, errorCode) :
+                                        string.Format(AppResources.Main_UploadProjectLoginError, statusMessage);
 
                 var message = new DialogMessage(messageString, WrongLoginDataCallback)
                 {
                     Button = MessageBoxButton.OK,
-                    Caption = MainResources.UploadProjectLoginErrorCaption
+                    Caption = AppResources.Main_UploadProjectLoginErrorCaption
                 };
 
                 Messenger.Default.Send(message);
