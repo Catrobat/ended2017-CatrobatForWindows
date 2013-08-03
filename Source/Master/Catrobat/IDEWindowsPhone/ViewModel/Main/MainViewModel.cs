@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Dynamic;
+using System.Threading;
 using System.Threading.Tasks;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
@@ -50,7 +51,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get
             {
                 if (_currentProject == null)
-                    return CurrentProject = CatrobatContextBase.GetContext().CurrentProject;
+                    return CurrentProject = Context.CurrentProject;
 
                 return _currentProject;
             }
@@ -62,12 +63,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
                 RaisePropertyChanged(() => CurrentProject);
 
-                var projectChangedMessage = new GenericMessage<Project>(CatrobatContextBase.GetContext().CurrentProject);
+                var projectChangedMessage = new GenericMessage<Project>(Context.CurrentProject);
                 Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage, ViewModelMessagingToken.SelectedProjectListener);
             }
         }
-
-        public ProjectDummyHeader CurrentProjectHeader { get { return Context.CurrentProject.ProjectDummyHeader; } }
 
         public ProjectDummyHeader PinProjectHeader { get; set; }
 
@@ -275,7 +274,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    CatrobatContextBase.GetContext().SetCurrentProject(projectName);
+                    Context.SetCurrentProject(projectName);
                     var minWaitindTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
 
                     if (minWaitindTimeRemaining >= new TimeSpan(0))
@@ -330,23 +329,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public MainViewModel()
         {
-            // Commands
-            DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
-            CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
-            PinLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(PinLocalProjectAction);
-            LazyLoadOnlineProjectsCommand = new RelayCommand(LazyLoadOnlineProjectsAction);
-            SetCurrentProjectCommand = new RelayCommand<string>(SetCurrentProjectAction);
-            OnlineProjectTapCommand = new RelayCommand<OnlineProjectHeader>(OnlineProjectTapAction);
-            SettingsCommand = new RelayCommand(SettingsAction);
-            CreateNewProjectCommand = new RelayCommand(CreateNewProjectAction);
-            EditCurrentProjectCommand = new RelayCommand(EditCurrentProjectAction);
-            PlayCurrentProjectCommand = new RelayCommand(PlayCurrentProjectAction);
-            UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
-
-            var themeChooser = Application.Current.Resources["ThemeChooser"] as ThemeChooser;
-            if (themeChooser != null)
-                themeChooser.PropertyChanged += ThemeChooserPropertyChanged;
 
             if (IsInDesignMode)
             {
@@ -355,12 +337,30 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             }
             else
             {
-                Context = new CatrobatContext();
+                DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
+                CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
+                PinLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(PinLocalProjectAction);
+                LazyLoadOnlineProjectsCommand = new RelayCommand(LazyLoadOnlineProjectsAction);
+                SetCurrentProjectCommand = new RelayCommand<string>(SetCurrentProjectAction);
+                OnlineProjectTapCommand = new RelayCommand<OnlineProjectHeader>(OnlineProjectTapAction);
+                SettingsCommand = new RelayCommand(SettingsAction);
+                CreateNewProjectCommand = new RelayCommand(CreateNewProjectAction);
+                EditCurrentProjectCommand = new RelayCommand(EditCurrentProjectAction);
+                PlayCurrentProjectCommand = new RelayCommand(PlayCurrentProjectAction);
+                UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction);
+                ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
+
+                var themeChooser = Application.Current.Resources["ThemeChooser"] as ThemeChooser;
+                if (themeChooser != null)
+                    themeChooser.PropertyChanged += ThemeChooserPropertyChanged;
+
+                Context = new CatrobatContext(); 
+                Context.PropertyChanged += CatrobatContextPropertyChanged;
+                Context.CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
             }
 
 
-            Context.PropertyChanged += CatrobatContextPropertyChanged;
-            Context.CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
+
         }
 
 

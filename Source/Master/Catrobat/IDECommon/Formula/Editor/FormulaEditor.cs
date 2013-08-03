@@ -1,9 +1,6 @@
-﻿using System;
-using Catrobat.Core.Objects.Formulas;
-using Catrobat.Core.Objects.Variables;
-using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
+﻿using Catrobat.Core.Objects.Variables;
 
-namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Templates
+namespace Catrobat.IDECommon.Formula.Editor
 {
     public class FormulaEditor
     {

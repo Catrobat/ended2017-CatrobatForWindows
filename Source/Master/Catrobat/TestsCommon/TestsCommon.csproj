@@ -61,6 +61,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Misc\FormulaComparer.cs" />
     <Compile Include="Misc\PlatformInformationHelperTests.cs" />
     <Compile Include="Misc\ProjectGenerator.cs" />
     <Compile Include="Misc\Storage\BasePathHelper.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Tests\Data\DataDeletingTests.cs" />
     <Compile Include="Tests\Data\DataReflectionTests.cs" />
     <Compile Include="Misc\ReflectionHelper.cs" />
+    <Compile Include="Tests\IDE\Formula\FormulaEditorTests.cs" />
     <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />
     <Compile Include="Tests\Data\ProjectTests.cs" />
     <Compile Include="Tests\Storage\StorageTests.cs" />

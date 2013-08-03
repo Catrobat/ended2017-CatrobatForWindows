@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Catrobat.Core.Objects.Formulas;
-using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
-using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
-using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Templates;
-using Catrobat.TestsWindowsPhone.Misc;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+﻿using Catrobat.Core.Objects.Formulas;
+using Catrobat.IDECommon.Formula.Editor;
+using Catrobat.TestsCommon.Misc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.TestsWindowsPhone.Tests.IDE.Formula
+namespace Catrobat.TestsCommon.Tests.IDE.Formula
 {
     [TestClass]
     public class FormulaEditorTests
