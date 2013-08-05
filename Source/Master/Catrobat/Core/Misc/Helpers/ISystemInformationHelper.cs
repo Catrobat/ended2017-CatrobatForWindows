@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Catrobat.Core.Misc.Helpers
 {
-    public interface IPlatformInformationHelper
+    public interface ISystemInformationHelper
     {
         string GetPlatformName();
 
@@ -17,5 +17,7 @@ namespace Catrobat.Core.Misc.Helpers
         int GetScreenWidth();
 
         int GetScreenHeight();
+
+        string GetCurrentApplicationVersion();
     }
 }

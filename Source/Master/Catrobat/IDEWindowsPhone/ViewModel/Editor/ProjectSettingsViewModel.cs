@@ -10,24 +10,25 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
     {
         #region Private Members
 
-        private Project _receivedProject;
+        private Project _selectedProjectToEdit;
         private string _projectName;
+        private string _projectDescription;
 
         #endregion
 
         #region Properties
 
-        public Project ReceivedProject
+        public Project SelectedProjectToEdit
         {
-            get { return _receivedProject; }
+            get { return _selectedProjectToEdit; }
             set
             {
-                if (value == _receivedProject)
+                if (value == _selectedProjectToEdit)
                 {
                     return;
                 }
-                _receivedProject = value;
-                RaisePropertyChanged(() => ReceivedProject);
+                _selectedProjectToEdit = value;
+                RaisePropertyChanged(() => SelectedProjectToEdit);
             }
         }
 
@@ -36,13 +37,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             get { return _projectName; }
             set
             {
-                if (value == _projectName)
-                {
-                    return;
-                }
+                if (value == _projectName) return;
                 _projectName = value;
                 RaisePropertyChanged(() => ProjectName);
                 SaveCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public string ProjectDescription
+        {
+            get { return _projectDescription; }
+            set
+            {
+                if (value == _projectDescription) return;
+                _projectDescription = value;
+                RaisePropertyChanged(() => ProjectDescription);
             }
         }
 
@@ -71,7 +80,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void SaveAction()
         {
-            ReceivedProject.ProjectHeader.ProgramName = ProjectName;
+            SelectedProjectToEdit.ProjectHeader.ProgramName = ProjectName;
+            SelectedProjectToEdit.ProjectHeader.Description = ProjectDescription;
             Navigation.NavigateBack();
         }
 
@@ -82,8 +92,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void ChangeProjectNameMessageAction(GenericMessage<Project> message)
         {
-            ReceivedProject = message.Content;
-            ProjectName = ReceivedProject.ProjectHeader.ProgramName;
+            SelectedProjectToEdit = message.Content;
+            ProjectName = SelectedProjectToEdit.ProjectHeader.ProgramName;
+            ProjectDescription = SelectedProjectToEdit.ProjectHeader.Description;
         }
 
         private void ResetViewModelAction()

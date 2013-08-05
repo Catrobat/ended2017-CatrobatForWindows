@@ -10,7 +10,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="130" d:DesignWidth="480">
 
-    <Grid x:Name="LayoutRoot" Height="130" Background="{Binding Path=SelectedTheme.AppBarColor, Source={StaticResource ThemeChooser}}">
+  <Grid x:Name="LayoutRoot" Height="130" Background="{Binding Path=SelectedTheme.AppBarColor, Source={StaticResource ThemeChooser}}">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="100"/>
       <ColumnDefinition/>
@@ -86,9 +86,9 @@
     </Grid>
 
     <Grid Grid.Column="2">
-      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button Name="ButtonPlay" Width="100" Height="100" Visibility="Visible" 
-                Margin="0" BorderBrush="Transparent" BorderThickness="0" Padding="0">
+      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+        <Button Name="ButtonPlay" Width="90" Height="90" Visibility="Visible" 
+                Margin="0 0 15 0" BorderBrush="Transparent" BorderThickness="0" Padding="0">
           <Button.Template>
             <ControlTemplate>
               <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -175,6 +175,10 @@
                      VerticalAlignment="Center" 
                      Style="{StaticResource PhoneTextSmallStyle}">run</TextBlock>
       </StackPanel>
+      <!--<Grid VerticalAlignment="Top" HorizontalAlignment="Right">
+        <Button BorderThickness="0" 
+              Margin="-20 -65 -17 -13" FontSize="60">...</Button>
+      </Grid>-->
     </Grid>
   </Grid>
 </UserControl>

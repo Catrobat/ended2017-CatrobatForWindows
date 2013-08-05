@@ -185,7 +185,6 @@
     <Compile Include="Converters\IntPixelConverter.cs" />
     <Compile Include="Converters\NullIntCountConverter.cs" />
     <Compile Include="Converters\NoScreenshotConverter.cs" />
-    <Compile Include="Converters\VersionConverter.cs" />
     <Compile Include="Converters\DoubleStringConverter.cs" />
     <Compile Include="Converters\FloatStringConverter.cs" />
     <Compile Include="Converters\IntStringConverter.cs" />

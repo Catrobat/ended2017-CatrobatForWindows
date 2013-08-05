@@ -785,4 +785,19 @@ The program is licensed under the MS-RL Lizenz.</value>
   <data name="App_FlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
   </data>
+  <data name="Editor_Description" xml:space="preserve">
+    <value>description</value>
+  </data>
+  <data name="Main_ChangeProjectNameAndDescription" xml:space="preserve">
+    <value>change name and description</value>
+  </data>
+  <data name="Main_CopyProject" xml:space="preserve">
+    <value>copy</value>
+  </data>
+  <data name="Main_DeleteProject" xml:space="preserve">
+    <value>delete</value>
+  </data>
+  <data name="Main_PinProjectToStart" xml:space="preserve">
+    <value>pin to start</value>
+  </data>
 </root>

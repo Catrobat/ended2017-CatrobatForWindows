@@ -7,7 +7,7 @@ using Catrobat.Core.Misc.Helpers;
 
 namespace Catrobat.TestsCommon.Misc
 {
-    public class PlatformInformationHelperTests : IPlatformInformationHelper
+    public class PlatformInformationHelperTests : ISystemInformationHelper
     {
 
         public string GetPlatformName()
@@ -34,6 +34,12 @@ namespace Catrobat.TestsCommon.Misc
         public int GetScreenHeight()
         {
             return 800;
+        }
+
+
+        public string GetCurrentApplicationVersion()
+        {
+            return "TestApp01";
         }
     }
 }

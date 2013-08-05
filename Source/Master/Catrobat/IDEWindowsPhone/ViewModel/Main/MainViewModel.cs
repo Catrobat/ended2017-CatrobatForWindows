@@ -97,11 +97,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             }
         }
 
-        public string ApplicationVersion
+        public string ApplicationVersionName
         {
             get
             {
-                return StaticApplicationSettings.CurrentApplicationVersion.ToString();
+                var name =String.Format(AppResources.Main_ApplicationNameAndVersion,
+                    PlatformInformationHelper.CurrentApplicationVersion);
+                return name;
             }
         }
 
@@ -144,6 +146,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         #endregion
 
         #region Commands
+
+        public ICommand RenameCurrentProjectCommand
+        {
+            get;
+            private set;
+        }
 
         public ICommand DeleteLocalProjectCommand
         {
@@ -220,6 +228,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         #endregion
 
         # region Actions
+
+        private void RenameCurrentProjectAction()
+        {
+            var message = new GenericMessage<Project>(CurrentProject);
+            Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.ProjectNameListener);
+
+            Navigation.NavigateTo(typeof(ProjectSettingsView));
+        }
 
         private void DeleteLocalProjectAction(string projectName)
         {
@@ -331,6 +347,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             }
             else
             {
+                RenameCurrentProjectCommand = new RelayCommand(RenameCurrentProjectAction);
                 DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
                 CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
                 PinLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(PinLocalProjectAction);
@@ -352,7 +369,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
 
         }
-
 
         #region MessageBoxCallback
 

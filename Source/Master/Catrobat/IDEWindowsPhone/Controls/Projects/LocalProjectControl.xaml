@@ -16,17 +16,6 @@
   d:DesignHeight="200" d:DesignWidth="200">
 
   <Grid x:Name="LayoutRoot" d:DataContext="{d:DesignInstance objects:ProjectDummyHeader}">
-    <toolkit:ContextMenuService.ContextMenu>
-      <toolkit:ContextMenu>
-        <toolkit:MenuItem Header="COPY" Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" 
-                          CommandParameter="{Binding ProjectName}" />
-        <toolkit:MenuItem Header="DELETE" Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" 
-                          CommandParameter="{Binding ProjectName}" />
-        <toolkit:MenuItem Header="PIN TO START" Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" 
-                          CommandParameter="{Binding}" />
-      </toolkit:ContextMenu>
-    </toolkit:ContextMenuService.ContextMenu>
-
     <Border BorderThickness="4" BorderBrush="White">
       <i:Interaction.Triggers>
         <i:EventTrigger EventName="Tap">

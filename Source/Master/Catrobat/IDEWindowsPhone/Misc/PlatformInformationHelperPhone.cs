@@ -11,7 +11,7 @@ using Microsoft.Phone.Info;
 
 namespace Catrobat.IDEWindowsPhone.Misc
 {
-    class PlatformInformationHelperPhone : IPlatformInformationHelper
+    class PlatformInformationHelperPhone : ISystemInformationHelper
     {
         public string GetPlatformName()
         {
@@ -46,6 +46,13 @@ namespace Catrobat.IDEWindowsPhone.Misc
         public int GetScreenHeight()
         {
             return (int)Application.Current.Host.Content.ActualHeight;
+        }
+
+
+        public string GetCurrentApplicationVersion()
+        {
+            var appVersion = System.Reflection.Assembly.GetExecutingAssembly().FullName.Split('=')[1].Split(',')[0];
+            return appVersion;
         }
     }
 }
