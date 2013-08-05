@@ -6,11 +6,14 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Controls.Misc;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
+using Catrobat.Paint;
+using Coding4Fun.Toolkit.Controls.Common;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -123,6 +126,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         public RelayCommand OpenCameraCommand { get; private set; }
 
+        private void OpenPaintAction()
+        {
+            var newBitmap = new WriteableBitmap(
+                PlatformInformationHelper.ScreenWidth, PlatformInformationHelper.ScreenHeight);
+            PaintLauncher.CurrentImage = newBitmap.ToBitmapImage();
+            PaintLauncher.Launche();
+        }
+
+        public RelayCommand OpenPaintCommand { get; private set; }
+
         public RelayCommand SaveCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
@@ -217,6 +230,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         {
             OpenGalleryCommand = new RelayCommand(OpenGalleryAction);
             OpenCameraCommand = new RelayCommand(OpenCameraAction);
+            OpenPaintCommand = new RelayCommand(OpenPaintAction);
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
