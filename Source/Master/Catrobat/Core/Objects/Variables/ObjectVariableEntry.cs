@@ -81,7 +81,8 @@ namespace Catrobat.Core.Objects.Variables
 
         internal override void LoadReference()
         {
-            _spriteReference.LoadReference();
+            if(_spriteReference != null && SpriteReference.Sprite == null)
+                _spriteReference.LoadReference();
         }
 
         public DataObject Copy(Sprite newSprite)

@@ -20,6 +20,7 @@ namespace Catrobat.Core.Objects
         public const string ImagesPath = "images";
         public const string SoundsPath = "sounds";
 
+        #region Properties
 
         private object _projectScreenshot;
         public object ProjectScreenshot
@@ -150,6 +151,7 @@ namespace Catrobat.Core.Objects
             get { return "Projects/" + ProjectHeader.ProgramName; }
         }
 
+        #endregion
 
         public Project()
         {

@@ -77,7 +77,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            if (_loopBeginBrickReference.LoopBeginBrick == null)
+            if (_loopBeginBrickReference != null && _loopBeginBrickReference.LoopBeginBrick == null)
                 _loopBeginBrickReference.LoadReference();
         }
 

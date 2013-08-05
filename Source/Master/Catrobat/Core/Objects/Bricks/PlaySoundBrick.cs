@@ -80,7 +80,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            if (_soundReference.Sound == null)
+            if (_soundReference != null && _soundReference.Sound == null)
                 _soundReference.LoadReference();
         }
 
