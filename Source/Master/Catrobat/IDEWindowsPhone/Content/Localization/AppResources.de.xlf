@@ -942,6 +942,10 @@ The program is licensed under the MS-RL Lizenz.</target>
           <source>pin to start</source>
           <target state="new">pin to start</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_UploadProjectLoadingMessage" xml:space="preserve">
+          <source>Please wait while your login state is beeing checked!</source>
+          <target state="new">Please wait while your login state is beeing checked!</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_DeleteProject" xml:space="preserve">
           <source>delete</source>
           <target state="new">delete</target>

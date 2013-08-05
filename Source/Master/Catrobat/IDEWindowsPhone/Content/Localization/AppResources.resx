@@ -827,4 +827,7 @@ The program is licensed under the MS-RL Lizenz.</value>
   <data name="Main_PinProjectToStart" xml:space="preserve">
     <value>pin to start</value>
   </data>
+  <data name="Main_UploadProjectLoadingMessage" xml:space="preserve">
+    <value>Please wait while your login state is beeing checked!</value>
+  </data>
 </root>

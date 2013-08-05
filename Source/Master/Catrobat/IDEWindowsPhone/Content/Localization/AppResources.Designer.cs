@@ -2079,6 +2079,15 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please wait while your login state is beeing checked!.
+        /// </summary>
+        public static string Main_UploadProjectLoadingMessage {
+            get {
+                return ResourceManager.GetString("Main_UploadProjectLoadingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login Error. {0}.
         /// </summary>
         public static string Main_UploadProjectLoginError {

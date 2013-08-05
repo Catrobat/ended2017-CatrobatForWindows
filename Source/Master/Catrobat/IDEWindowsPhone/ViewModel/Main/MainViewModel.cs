@@ -325,8 +325,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void UploadCurrentProjectAction()
         {
+            Navigation.NavigateTo(typeof(UploadProjectsLoadingView));
+
             // Determine which page to open
-            ServerCommunication.CheckToken(CatrobatContextBase.GetContext().CurrentToken, CheckTokenEvent);
+            Task.Run(() => ServerCommunication.CheckToken(CatrobatContextBase.GetContext().CurrentToken, CheckTokenEvent));
         }
 
         private void ResetViewModelAction()
@@ -427,14 +429,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             if (registered)
             {
-                Action action = () => Navigation.NavigateTo(typeof(UploadProjectView));
-                Deployment.Current.Dispatcher.BeginInvoke(action);
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    Navigation.NavigateTo(typeof(UploadProjectView));
+                    Navigation.RemoveBackEntry();
+                });
             }
             else
             {
-                Action action = () => Navigation.NavigateTo(typeof(UploadProjectLoginView)); ;
-
-                Deployment.Current.Dispatcher.BeginInvoke(action);
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    Navigation.NavigateTo(typeof(UploadProjectLoginView));
+                    Navigation.RemoveBackEntry();
+                });
             }
         }
 
