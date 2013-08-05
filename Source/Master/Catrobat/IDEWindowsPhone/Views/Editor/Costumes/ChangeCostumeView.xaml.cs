@@ -13,12 +13,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Costumes
         public ChangeCostumeView()
         {
             InitializeComponent();
-
-            Dispatcher.BeginInvoke(() =>
-                {
-                    TextBoxCostumeName.Focus();
-                    TextBoxCostumeName.SelectAll();
-                });
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

@@ -15,7 +15,7 @@
   Foreground="{StaticResource PhoneForegroundBrush}"
   d:DesignHeight="200" d:DesignWidth="200">
 
-  <Grid x:Name="LayoutRoot" Width="176" Height="176" d:DataContext="{d:DesignInstance objects:ProjectDummyHeader}">
+  <Grid x:Name="LayoutRoot" d:DataContext="{d:DesignInstance objects:ProjectDummyHeader}">
     <toolkit:ContextMenuService.ContextMenu>
       <toolkit:ContextMenu>
         <toolkit:MenuItem Header="COPY" Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, Source={StaticResource Locator}}" 
@@ -27,7 +27,7 @@
       </toolkit:ContextMenu>
     </toolkit:ContextMenuService.ContextMenu>
 
-    <Border BorderThickness="4" Width="176" Height="176" BorderBrush="White">
+    <Border BorderThickness="4" BorderBrush="White">
       <i:Interaction.Triggers>
         <i:EventTrigger EventName="Tap">
           <mvvmLightExtras:EventToCommand Command="{Binding MainViewModel.SetCurrentProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
@@ -36,7 +36,7 @@
       </i:Interaction.Triggers>
 
       <Grid Name="GridNormalTile" Background="{Binding SelectedTheme.AccentColor2, Source={StaticResource ThemeChooser}}">
-        <Image Width="168" Height="168" Name="ImageNormalTile" Source="{Binding Screenshot, Converter={StaticResource ScreenshotConverter}}"></Image>
+        <Image Name="ImageNormalTile" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding Screenshot, Converter={StaticResource ScreenshotConverter}}"></Image>
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

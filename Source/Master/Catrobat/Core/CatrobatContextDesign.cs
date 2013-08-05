@@ -53,7 +53,7 @@ namespace Catrobat.Core
                 }
             };
 
-            project.SetProgramName("Program1");
+            project.SetProgramName("Project 1 with very very very very very long name");
 
             project.VariableList = new VariableList
             {
@@ -107,17 +107,17 @@ namespace Catrobat.Core
 
             var project1 = new ProjectDummyHeader
             {
-                ProjectName = "Local Project 1"
+                ProjectName = "Local Project 2 with very very very very very long name"
             };
 
             var project2 = new ProjectDummyHeader
             {
-                ProjectName = "Local Project 2"
+                ProjectName = "Local Project 3"
             };
 
             var project3 = new ProjectDummyHeader
             {
-                ProjectName = "Local Project 3"
+                ProjectName = "Local Project 4"
             };
 
 
@@ -132,17 +132,20 @@ namespace Catrobat.Core
 
             var project1 = new OnlineProjectHeader
             {
-                ProjectName = "Online Project 1"
+                ProjectName = "Online Project 1 with very very very very very long name",
+                Description = "That is a nice description of Project 1. That is a nice description of Project 1. That is a nice description of Project 1"
             };
 
             var project2 = new OnlineProjectHeader
             {
-                ProjectName = "Online Project 2"
+                ProjectName = "Online Project 2",
+                Description = "That is a nice description of Project 2."
             };
 
             var project3 = new OnlineProjectHeader
             {
-                ProjectName = "Online Project 3"
+                ProjectName = "Online Project 3",
+                Description = "That is a nice description of Project 3."
             };
 
             OnlineProjects.Add(project1);
