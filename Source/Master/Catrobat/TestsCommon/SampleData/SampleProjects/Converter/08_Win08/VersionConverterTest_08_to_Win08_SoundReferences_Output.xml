@@ -29,15 +29,12 @@
         <startScript>
           <brickList>
             <playSoundBrick>
-              <object reference="../../../../.."/>
-              <sound reference="../../../../../soundList/sound[1]"/>
+              <sound reference="../../../../../soundList/sound"/>
             </playSoundBrick>
             <playSoundBrick>
-              <object reference="../../../../.."/>
-              <sound reference="../../../../../soundList/sound[1]"/>
+              <sound reference="../../../../../soundList/sound"/>
             </playSoundBrick>
           </brickList>
-          <object reference="../../.."/>
         </startScript>
       </scriptList>
       <soundList>
