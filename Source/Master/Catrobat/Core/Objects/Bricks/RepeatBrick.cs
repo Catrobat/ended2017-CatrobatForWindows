@@ -48,8 +48,11 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy()
         {
             var newBrick = new RepeatBrick();
-            newBrick._timesToRepeat = _timesToRepeat.Copy() as Formula;
-            newBrick.LoopEndBrickReference = _loopEndBrickReference.Copy() as LoopEndBrickReference;
+
+            if(_timesToRepeat != null)
+                newBrick._timesToRepeat = _timesToRepeat.Copy() as Formula;
+            if(_loopEndBrickReference != null)
+                newBrick.LoopEndBrickReference = _loopEndBrickReference.Copy() as LoopEndBrickReference;
 
             return newBrick;
         }

@@ -87,10 +87,9 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy()
         {
             var newBrick = new PlaySoundBrick();
+
             if (_soundReference != null)
-            {
                 newBrick._soundReference = _soundReference.Copy() as SoundReference;
-            }
 
             return newBrick;
         }

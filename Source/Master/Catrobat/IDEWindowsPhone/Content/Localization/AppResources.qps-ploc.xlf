@@ -898,6 +898,42 @@ The program is licensed under the MS-RL Lizenz.</source>
           <source>LeftToRight</source>
           <target state="translated" state-qualifier="mt-suggestion">[A9356][!!_ĿèƒτΤóŖìĝĥţ_!!]</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_CategoryVariables" xml:space="preserve">
+          <source>Variables</source>
+          <target state="new">Variables</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetVariable" xml:space="preserve">
+          <source>set Variable</source>
+          <target state="new">set Variable</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_SetVariableTo" xml:space="preserve">
+          <source>to</source>
+          <target state="new">to</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeVariable" xml:space="preserve">
+          <source>change variable</source>
+          <target state="new">change variable</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ChangeVariableBy" xml:space="preserve">
+          <source>by</source>
+          <target state="new">by</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_IfLogicEnd" xml:space="preserve">
+          <source>else end</source>
+          <target state="new">else end</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_IfLogicElse" xml:space="preserve">
+          <source>else</source>
+          <target state="new">else</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_IfLogicBeginTrue" xml:space="preserve">
+          <source>true, then</source>
+          <target state="new">true, then</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_IfLogicBegin" xml:space="preserve">
+          <source>If</source>
+          <target state="new">If</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_Description" xml:space="preserve">
           <source>description</source>
           <target state="new">description</target>
