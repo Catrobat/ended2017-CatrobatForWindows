@@ -18,7 +18,6 @@
   <converters:SecondStringMillisecondConverter x:Key="SecondStringMillisecondConverter" />
   <converters:BoolVisibilityNegativeConverter x:Key="NegativeBoolVisibilityConverter" />
   <converters:BoolPlayButtonStateConverter x:Key="BoolPlayButtonStateConverter" />
-  <converters:VersionConverter x:Key="VersionConverter"/>
   <converters:BoolVisibilityNegativeConverter x:Key="BoolVisibilityNegativeConverter"/>
   <converters:ActiveThemeBrushConverter x:Key="ActiveThemeBrushConverter"/>
 </ResourceDictionary>

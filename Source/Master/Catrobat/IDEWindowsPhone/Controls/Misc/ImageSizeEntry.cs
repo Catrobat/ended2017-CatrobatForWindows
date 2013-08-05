@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Catrobat.Core.Annotations;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 
-namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
+namespace Catrobat.IDEWindowsPhone.Controls.Misc
 {
     public enum ImageSize {Small, Medium, Large, FullSize}
 

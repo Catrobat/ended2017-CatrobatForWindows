@@ -34,15 +34,12 @@
         <startScript>
           <brickList>
             <setLookBrick>
-              <object reference="../../../../.."/>
               <look reference="../../../../../lookList/look"/>
             </setLookBrick>
             <setLookBrick>
-              <object reference="../../../../.."/>
               <look reference="../../../../../lookList/look"/>
             </setLookBrick>
           </brickList>
-          <object reference="../../.."/>
         </startScript>
       </scriptList>
       <soundList/>

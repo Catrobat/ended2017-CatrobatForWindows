@@ -106,19 +106,5 @@ namespace Catrobat.TestsCommon.Tests.Data
 
         #endregion
 
-
-
-
-        //still buggy and apparently unnecessary
-
-        //[TestMethod]
-        //public void CatrobatVersionConverterTest_ConvertBack_ObjectReferences()
-        //{ 
-        //    XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_ObjectReferences_Output");
-        //    XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_ObjectReferences_Input");
-
-        //    CatrobatVersionConverter.Convert("Win0.8", "0.8", actualDocument);
-        //    XmlDocumentCompare.Compare(expectedDocument, actualDocument);
-        //}
     }
 }

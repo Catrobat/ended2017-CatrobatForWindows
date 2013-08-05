@@ -13,12 +13,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         public ProjectSettingsView()
         {
             InitializeComponent();
-
-            Dispatcher.BeginInvoke(() =>
-                {
-                    TextBoxProjectName.Focus();
-                    TextBoxProjectName.SelectAll();
-                });
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -30,6 +24,11 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         private void TextBoxProjectName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _viewModel.ProjectName = TextBoxProjectName.Text;
+        }
+
+        private void TextBoxProjectDescription_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _viewModel.ProjectDescription = TextBoxProjectDescription.Text;
         }
     }
 }

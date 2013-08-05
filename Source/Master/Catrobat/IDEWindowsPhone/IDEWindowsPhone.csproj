@@ -15,7 +15,7 @@
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
-    <SupportedCultures>de</SupportedCultures>
+    <SupportedCultures>de;qps-ploc</SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
     <XapFilename>IDEWindowsPhone_$(Configuration)_$(Platform).xap</XapFilename>
@@ -95,14 +95,28 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <ToolkitRevision>2</ToolkitRevision>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Localization\AppResources.de.Designer.cs" />
-    <Compile Include="Content\Localization\AppResources.Designer.cs" />
-    <Compile Include="Content\Localization\AppResources.it.Designer.cs" />
-    <Compile Include="Content\Localization\AppResources.qps-ploc.Designer.cs" />
+    <Compile Include="Content\Localization\AppResources.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Localization\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Localization\AppResources.qps-ploc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.qps-ploc.resx</DependentUpon>
+    </Compile>
     <Compile Include="Content\Localization\LocalizedStrings.cs" />
     <Compile Include="ContextHolderWindowsPhone.cs" />
     <Compile Include="Controls\AppBar\EditorAppBar.xaml.cs">
@@ -171,7 +185,6 @@
     <Compile Include="Converters\IntPixelConverter.cs" />
     <Compile Include="Converters\NullIntCountConverter.cs" />
     <Compile Include="Converters\NoScreenshotConverter.cs" />
-    <Compile Include="Converters\VersionConverter.cs" />
     <Compile Include="Converters\DoubleStringConverter.cs" />
     <Compile Include="Converters\FloatStringConverter.cs" />
     <Compile Include="Converters\IntStringConverter.cs" />
@@ -202,8 +215,8 @@
     <Compile Include="Themes\ColorChooser.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeChooser.cs" />
-    <Compile Include="ViewModel\Editor\Costumes\ImageSizeEntry.cs" />
-    <Compile Include="ViewModel\Editor\Costumes\ImageSizeEntryCollection.cs" />
+    <Compile Include="Controls\Misc\ImageSizeEntry.cs" />
+    <Compile Include="Controls\Misc\ImageSizeEntryCollection.cs" />
     <Compile Include="ViewModel\Editor\Formula\FormulaEditorViewModel.cs" />
     <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\AddNewCostumeViewModel.cs" />
@@ -557,6 +570,7 @@
     <Content Include="Content\Images\ApplicationBar\dark\appbar.copy.rest.png" />
     <Content Include="Content\Images\ApplicationBar\dark\appbar.home.rest.png" />
     <Content Include="Content\Images\ApplicationBar\light\appbar.copy.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.home.rest.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_1280.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_800.png" />
     <Content Include="Content\Images\Misc\EditImage.png" />
@@ -752,15 +766,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Content\Localization\AppResources.de.resx" />
-    <EmbeddedResource Include="Content\Localization\AppResources.it.resx" />
-    <EmbeddedResource Include="Content\Localization\AppResources.qps-ploc.resx" />
-    <EmbeddedResource Include="Content\Localization\AppResources.resx" />
+    <EmbeddedResource Include="Content\Localization\AppResources.de.resx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.de.xlf</DependentUpon>
+      <culture>de</culture>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Localization\AppResources.qps-ploc.resx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.qps-ploc.xlf</DependentUpon>
+      <culture>qps-ploc</culture>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.qps-ploc.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Localization\AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <XliffResource Include="Content\Localization\AppResources.de.xlf" />
-    <XliffResource Include="Content\Localization\AppResources.it.xlf" />
-    <XliffResource Include="Content\Localization\AppResources.qps-ploc.xlf" />
+    <XliffResource Include="Content\Localization\AppResources.de.xlf">
+      <Generator>XliffResxGenerator</Generator>
+      <LastGenOutput>AppResources.de.resx</LastGenOutput>
+    </XliffResource>
+    <XliffResource Include="Content\Localization\AppResources.qps-ploc.xlf">
+      <Generator>XliffResxGenerator</Generator>
+      <LastGenOutput>AppResources.qps-ploc.resx</LastGenOutput>
+    </XliffResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
@@ -773,4 +808,5 @@
   -->
   <ProjectExtensions />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.WindowsPhone.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.WindowsPhone.targets')" Label="MultilingualAppToolkitForWindowsPhone" />
 </Project>

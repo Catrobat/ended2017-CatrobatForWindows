@@ -116,9 +116,9 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            if (_ifLogicBeginBrickReference.IfLogicBeginBrick == null)
+            if (_ifLogicBeginBrickReference != null && _ifLogicBeginBrickReference.IfLogicBeginBrick == null)
                 _ifLogicBeginBrickReference.LoadReference();
-            if (_ifLogicEndBrickReference.IfLogicEndBrick == null)
+            if (_ifLogicEndBrickReference != null && _ifLogicEndBrickReference.IfLogicEndBrick == null)
                 _ifLogicEndBrickReference.LoadReference();
         }
 

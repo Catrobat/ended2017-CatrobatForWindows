@@ -898,6 +898,26 @@ The program is licensed under the MS-RL Lizenz.</target>
           <source>LeftToRight</source>
           <target state="signed-off">LeftToRight</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Description" xml:space="preserve">
+          <source>description</source>
+          <target state="new">description</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_PinProjectToStart" xml:space="preserve">
+          <source>pin to start</source>
+          <target state="new">pin to start</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_DeleteProject" xml:space="preserve">
+          <source>delete</source>
+          <target state="new">delete</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_CopyProject" xml:space="preserve">
+          <source>copy</source>
+          <target state="new">copy</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_ChangeProjectNameAndDescription" xml:space="preserve">
+          <source>change name and description</source>
+          <target state="new">change name and description</target>
+        </trans-unit>
       </group>
     </body>
   </file>

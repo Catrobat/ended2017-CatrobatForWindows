@@ -3,6 +3,7 @@
   <DefaultLanguage xmlns="" code="en" />
   <Languages xmlns="">
     <Language code="de" />
+    <Language code="qps-ploc" />
   </Languages>
   <App xmlns="" ProductID="{cddb2c02-9584-45c6-9a7d-2b04b322c232}" Title="Catrobat" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="IDEWindowsPhone author" Description="Catrobat IDE for Windows Phone" Publisher="IDEWindowsPhone" PublisherID="{00331c69-fa4b-4f1d-ad9a-e30a20e7d376}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
@@ -32,19 +33,19 @@
         </TemplateFlip>
       </PrimaryToken>
     </Tokens>
-	<Extensions>
-		<FileTypeAssociation Name="Windows Phone SDK test file type" TaskID="_default" NavUriFragment="fileToken=%s">
-			<Logos>
-				<Logo Size="small" IsRelative="true">Assets/FileTypeAssociation/small-33x33.png</Logo>
-				<Logo Size="medium" IsRelative="true">Assets/FileTypeAssociation/medium-69x69.png</Logo>
-				<Logo Size="large" IsRelative="true">Assets/FileTypeAssociation/large-176x176.png</Logo>
-			</Logos>
-			<SupportedFileTypes>
-				<FileType ContentType="application/sdk">.catroid</FileType>
-				<FileType ContentType="application/sdk">.catrobat</FileType>
-			</SupportedFileTypes>
-		</FileTypeAssociation>
-	</Extensions>
+    <Extensions>
+      <FileTypeAssociation Name="Windows Phone SDK test file type" TaskID="_default" NavUriFragment="fileToken=%s">
+        <Logos>
+          <Logo Size="small" IsRelative="true">Assets/FileTypeAssociation/small-33x33.png</Logo>
+          <Logo Size="medium" IsRelative="true">Assets/FileTypeAssociation/medium-69x69.png</Logo>
+          <Logo Size="large" IsRelative="true">Assets/FileTypeAssociation/large-176x176.png</Logo>
+        </Logos>
+        <SupportedFileTypes>
+          <FileType ContentType="application/sdk">.catroid</FileType>
+          <FileType ContentType="application/sdk">.catrobat</FileType>
+        </SupportedFileTypes>
+      </FileTypeAssociation>
+    </Extensions>
     <ScreenResolutions>
       <ScreenResolution Name="ID_RESOLUTION_WVGA" />
       <ScreenResolution Name="ID_RESOLUTION_WXGA" />

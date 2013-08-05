@@ -718,6 +718,15 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to description.
+        /// </summary>
+        public static string Editor_Description {
+            get {
+                return ResourceManager.GetString("Editor_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Image.
         /// </summary>
         public static string Editor_Image {
@@ -1575,11 +1584,38 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to change name and description.
+        /// </summary>
+        public static string Main_ChangeProjectNameAndDescription {
+            get {
+                return ResourceManager.GetString("Main_ChangeProjectNameAndDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to copy.
+        /// </summary>
+        public static string Main_CopyProject {
+            get {
+                return ResourceManager.GetString("Main_CopyProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show memory usage.
         /// </summary>
         public static string Main_DEBUGShowMemory {
             get {
                 return ResourceManager.GetString("Main_DEBUGShowMemory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to delete.
+        /// </summary>
+        public static string Main_DeleteProject {
+            get {
+                return ResourceManager.GetString("Main_DeleteProject", resourceCulture);
             }
         }
         
@@ -1850,6 +1886,15 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         public static string Main_OnlineProjectViews {
             get {
                 return ResourceManager.GetString("Main_OnlineProjectViews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pin to start.
+        /// </summary>
+        public static string Main_PinProjectToStart {
+            get {
+                return ResourceManager.GetString("Main_PinProjectToStart", resourceCulture);
             }
         }
         

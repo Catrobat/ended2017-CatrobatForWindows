@@ -458,7 +458,7 @@ namespace Catrobat.Core.Objects
         public void SetProgramName(string newProgramName)
         {
             _programName = newProgramName;
-            RaisePropertyChanged("ProgramName");
+            RaisePropertyChanged(() => ProgramName);
         }
 
         public override bool Equals(DataObject other)

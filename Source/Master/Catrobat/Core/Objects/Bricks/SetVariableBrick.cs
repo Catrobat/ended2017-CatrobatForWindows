@@ -93,7 +93,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            if(_userVariableReference.UserVariable == null)
+            if(_userVariableReference != null && _userVariableReference.UserVariable == null)
                 _userVariableReference.LoadReference();
         }
 

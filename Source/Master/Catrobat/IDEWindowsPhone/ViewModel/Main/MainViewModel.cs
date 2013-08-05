@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Catrobat.Core;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
@@ -27,8 +28,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 {
     public class MainViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        public new event PropertyChangedEventHandler PropertyChanged;
-
         #region private Members
 
         private readonly ObservableCollection<OnlineProjectHeader> _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
@@ -82,7 +81,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 if (_currentProjectScreenshot == value) return;
 
                 _currentProjectScreenshot = value;
-                RaisePropertyChanged("CurrentProjectScreenshot");
+                RaisePropertyChanged(() => CurrentProjectScreenshot);
             }
         }
 
@@ -98,11 +97,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             }
         }
 
-        public string ApplicationVersion
+        public string ApplicationVersionName
         {
             get
             {
-                return StaticApplicationSettings.CurrentApplicationVersion.ToString();
+                var name =String.Format(AppResources.Main_ApplicationNameAndVersion,
+                    PlatformInformationHelper.CurrentApplicationVersion);
+                return name;
             }
         }
 
@@ -118,12 +119,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 {
                     _filterText = value;
                     LoadOnlineProjects(false);
-
-                    if (this.PropertyChanged != null)
-                    {
-                        RaisePropertyChanged("FilterText");
-                    }
-
+                    RaisePropertyChanged(() => FilterText);
                 }
             }
         }
@@ -131,7 +127,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         public bool IsLoadingOnlineProjects
         {
             get { return _isLoadingOnlineProjects; }
-            set { _isLoadingOnlineProjects = value; RaisePropertyChanged("IsLoadingOnlineProjects"); }
+            set { _isLoadingOnlineProjects = value; RaisePropertyChanged(() => IsLoadingOnlineProjects); }
         }
 
         public bool IsActiveatingLocalProject
@@ -143,13 +139,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             set
             {
                 _isLoadingOnlineProjects = value;
-                RaisePropertyChanged("IsActiveatingLocalProject");
+                RaisePropertyChanged(() => IsActiveatingLocalProject);
             }
         }
 
         #endregion
 
         #region Commands
+
+        public ICommand RenameCurrentProjectCommand
+        {
+            get;
+            private set;
+        }
 
         public ICommand DeleteLocalProjectCommand
         {
@@ -226,6 +228,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         #endregion
 
         # region Actions
+
+        private void RenameCurrentProjectAction()
+        {
+            var message = new GenericMessage<Project>(CurrentProject);
+            Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.ProjectNameListener);
+
+            Navigation.NavigateTo(typeof(ProjectSettingsView));
+        }
 
         private void DeleteLocalProjectAction(string projectName)
         {
@@ -337,6 +347,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             }
             else
             {
+                RenameCurrentProjectCommand = new RelayCommand(RenameCurrentProjectAction);
                 DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
                 CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
                 PinLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(PinLocalProjectAction);
@@ -350,10 +361,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction);
                 ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-                var themeChooser = Application.Current.Resources["ThemeChooser"] as ThemeChooser;
-                if (themeChooser != null)
-                    themeChooser.PropertyChanged += ThemeChooserPropertyChanged;
-
                 Context = new CatrobatContext(); 
                 Context.PropertyChanged += CatrobatContextPropertyChanged;
                 Context.CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
@@ -362,7 +369,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
 
         }
-
 
         #region MessageBoxCallback
 
@@ -436,7 +442,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public void CatrobatContextPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "CurrentProject")
+            if (e.PropertyName == PropertyNameHelper.GetPropertyNameFromExpression(() => CurrentProject))
             {
                 CurrentProject = CatrobatContextBase.GetContext().CurrentProject;
                 CurrentProjectScreenshot = CurrentProject.ProjectScreenshot as ImageSource;
@@ -447,23 +453,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public void CurrentProjectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "ProjectScreenshot")
+            if (e.PropertyName == PropertyNameHelper.GetPropertyNameFromExpression(() => CurrentProjectScreenshot))
                 CurrentProjectScreenshot = CurrentProject.ProjectScreenshot as ImageSource;
-        }
-
-        public void ThemeChooserPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "SelectedTheme")
-            {
-                RaisePropertyChanged("SelectedTheme");
-            }
-        }
-
-        // This is a fix to the bug that the overwritten RaisePropertyChanged is not working properly
-        protected override void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

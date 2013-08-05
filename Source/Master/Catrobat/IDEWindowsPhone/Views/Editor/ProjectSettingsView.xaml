@@ -22,6 +22,7 @@
           Background="Transparent">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
@@ -31,7 +32,14 @@
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
       <TextBlock Margin="0" Text="{Binding Resources.Editor_ProjectName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
-      <TextBox Margin="-10 0 10 0" HorizontalAlignment="Stretch" Name="TextBoxProjectName" Text="{Binding ProjectName, Mode=TwoWay}" TextChanged="TextBoxProjectName_OnTextChanged" />
+      <TextBox Margin="-10 0 10 0" Name="TextBoxProjectName" HorizontalAlignment="Stretch" Text="{Binding ProjectName, Mode=TwoWay}" TextChanged="TextBoxProjectName_OnTextChanged" />
+    </StackPanel>
+    
+    <StackPanel Grid.Row="2" Margin="10 0 0 15">
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_Description, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+      <TextBox Margin="-10 0 10 0" Name="TextBoxProjectDescription" Height="200" TextWrapping="Wrap" 
+               HorizontalAlignment="Stretch" Text="{Binding ProjectDescription, Mode=TwoWay}" 
+               TextChanged="TextBoxProjectDescription_OnTextChanged" />
     </StackPanel>
 
     <i:Interaction.Triggers>

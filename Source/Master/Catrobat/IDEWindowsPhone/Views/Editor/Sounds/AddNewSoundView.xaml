@@ -26,7 +26,7 @@
     </StackPanel>
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
-      <Button Name="btnMediaLibrary" Margin="0 0 10 10" Command="{Binding AudioLibraryCommand}">
+      <!--<Button Margin="0 0 10 10" Command="{Binding AudioLibraryCommand}">
         <Button.Template>
           <ControlTemplate>
             <Grid Margin="0 10 0 10" Background="{Binding Path=SelectedTheme.AccentColor1, Source={StaticResource ThemeChooser}}" HorizontalAlignment="Stretch" Height="120">
@@ -39,8 +39,8 @@
             </Grid>
           </ControlTemplate>
         </Button.Template>
-      </Button>
-      <Button Name="btnRecorder" Margin="0 0 10 10" Command="{Binding RecorderCommand}">
+      </Button>-->
+      <Button Margin="0 0 10 10" Command="{Binding RecorderCommand}">
         <Button.Template>
           <ControlTemplate>
             <Grid Margin="0 10 0 10" Background="{Binding Path=SelectedTheme.AccentColor2, Source={StaticResource ThemeChooser}}" HorizontalAlignment="Stretch" Height="120">

@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Catrobat.Core.Objects;
 using Catrobat.IDEWindowsPhone.Content.Localization;
+using Catrobat.IDEWindowsPhone.Controls.Misc;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using GalaSoft.MvvmLight;

@@ -8,9 +8,9 @@ namespace Catrobat.Core.Misc.Helpers
 {
     public class PlatformInformationHelper
     {
-        private static IPlatformInformationHelper _platformInformationHelper;
+        private static ISystemInformationHelper _platformInformationHelper;
 
-        public static void SetInterface(IPlatformInformationHelper platformInformationHelper)
+        public static void SetInterface(ISystemInformationHelper platformInformationHelper)
         {
             _platformInformationHelper = platformInformationHelper;
         }
@@ -38,6 +38,11 @@ namespace Catrobat.Core.Misc.Helpers
         public static int ScreenHeight
         {
             get { return _platformInformationHelper.GetScreenHeight(); }
+        }
+
+        public static string CurrentApplicationVersion
+        {
+            get { return _platformInformationHelper.GetCurrentApplicationVersion(); }
         }
     }
 }

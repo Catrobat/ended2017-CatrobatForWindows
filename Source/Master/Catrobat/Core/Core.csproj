@@ -50,13 +50,13 @@
     <Compile Include="IContextHolder.cs" />
     <Compile Include="Misc\Helpers\PlatformInformationHelper.cs" />
     <Compile Include="Misc\Helpers\FormatHelper.cs" />
-    <Compile Include="Misc\Helpers\ApplicationInformation.cs" />
+    <Compile Include="Misc\Helpers\IApplicationInformation.cs" />
     <Compile Include="Misc\Helpers\FileNameGenerator.cs" />
     <Compile Include="Misc\Helpers\FormUpload.cs" />
     <Compile Include="Misc\Helpers\ICulture.cs" />
     <Compile Include="Misc\Helpers\LanguageHelper.cs" />
     <Compile Include="Misc\Helpers\MD5.cs" />
-    <Compile Include="Misc\Helpers\IPlatformInformationHelper.cs" />
+    <Compile Include="Misc\Helpers\ISystemInformationHelper.cs" />
     <Compile Include="Misc\Helpers\ProjectHolder.cs" />
     <Compile Include="Misc\Helpers\ReadHelper.cs" />
     <Compile Include="Misc\Helpers\ReferenceHelper.cs" />
