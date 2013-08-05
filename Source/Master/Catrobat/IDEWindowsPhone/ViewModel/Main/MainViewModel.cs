@@ -28,8 +28,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 {
     public class MainViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        public new event PropertyChangedEventHandler PropertyChanged;
-
         #region private Members
 
         private readonly ObservableCollection<OnlineProjectHeader> _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
@@ -63,16 +61,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 _currentProject = value;
 
                 RaisePropertyChanged(() => CurrentProject);
-                RaisePropertyChanged(() => CurrentProjectName);
 
                 var projectChangedMessage = new GenericMessage<Project>(Context.CurrentProject);
                 Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage, ViewModelMessagingToken.SelectedProjectListener);
             }
-        }
-
-        public string CurrentProjectName
-        {
-            get { return CurrentProject.ProjectHeader.ProgramName; }
         }
 
         public ProjectDummyHeader PinProjectHeader { get; set; }
@@ -125,12 +117,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 {
                     _filterText = value;
                     LoadOnlineProjects(false);
-
-                    if (PropertyChanged != null)
-                    {
-                        RaisePropertyChanged(() => FilterText);
-                    }
-
+                    RaisePropertyChanged(() => FilterText);
                 }
             }
         }

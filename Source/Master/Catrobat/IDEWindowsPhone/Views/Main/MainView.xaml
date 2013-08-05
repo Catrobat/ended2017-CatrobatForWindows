@@ -141,7 +141,7 @@
                   <codung4Fun:RoundButton Margin="0 10 0 0" PressedBrush="Black" Click="LocalProjectControl_OnLocalProjectsBackPressed"
                     ImageSource="/Content/Images/ApplicationBar/dark/appbar.back.rest.png"/>
                   <TextBlock Grid.Column="1" VerticalAlignment="Top" Margin="5,5,5,5" TextWrapping="Wrap" 
-                             Text="{Binding CurrentProjectName}" 
+                             Text="{Binding CurrentProject.ProjectHeader.ProgramName}" 
                              Style="{StaticResource PhoneTextLargeStyle}"/>
                 </Grid>
 
