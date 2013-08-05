@@ -261,7 +261,7 @@
               </DataTemplate>
             </phone:LongListSelector.ItemTemplate>
             <phone:LongListSelector.ListFooter>
-              <Grid Background="BlueViolet" Height="35" Visibility="{Binding IsLoadingOnlineProjects, Converter={StaticResource BoolVisibilityConverter}}">
+              <Grid Background="BlueViolet" Height="35" Opacity="{Binding IsLoadingOnlineProjects, Converter={StaticResource BoolOpacityConverter}}">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                   <statusIcons:ProcessIcon IsProcessing="{Binding IsLoadingOnlineProjects}" Margin="0 0 5 0" />
                   <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Resources.Main_OnlineProjectListBoxLoadMore, Source={StaticResource LocalizedStrings}}" />
