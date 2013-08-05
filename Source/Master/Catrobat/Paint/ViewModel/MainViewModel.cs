@@ -72,7 +72,7 @@ namespace Catrobat.Paint.ViewModel
             set
             {
                 _exampleValue = value;
-                RaisePropertyChanged("ExampleValue");
+                RaisePropertyChanged(() => ExampleValue);
             }
         }
 

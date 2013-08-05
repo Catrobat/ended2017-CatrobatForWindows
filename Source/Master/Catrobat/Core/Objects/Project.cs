@@ -169,6 +169,7 @@ namespace Catrobat.Core.Objects
         public void SetProgramName(string newProgramName)
         {
             ProjectHeader.SetProgramName(newProgramName);
+            RaisePropertyChanged(() => ProjectHeader);
         }
 
         protected override void LoadFromXML(String xml)

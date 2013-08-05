@@ -141,7 +141,7 @@
                   <codung4Fun:RoundButton Margin="0 10 0 0" PressedBrush="Black" Click="LocalProjectControl_OnLocalProjectsBackPressed"
                     ImageSource="/Content/Images/ApplicationBar/dark/appbar.back.rest.png"/>
                   <TextBlock Grid.Column="1" VerticalAlignment="Top" Margin="5,5,5,5" TextWrapping="Wrap" 
-                             Text="{Binding CurrentProject.ProjectHeader.ProgramName}" 
+                             Text="{Binding CurrentProjectName}" 
                              Style="{StaticResource PhoneTextLargeStyle}"/>
                 </Grid>
 
@@ -158,7 +158,7 @@
                                              Width="30" Height="30" Margin="5" IsProcessing="True" />
                     <TextBlock Opacity="0.5" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" 
                                VerticalAlignment="Center" Grid.Column="1"> 
-                      Please wait while the project being activated
+                      Please wait while the project is being activated
                     </TextBlock>
                   </Grid>
 

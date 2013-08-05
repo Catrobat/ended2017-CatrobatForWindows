@@ -1,8 +1,11 @@
 ﻿using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Threading;
 using Catrobat.Core;
+using Catrobat.Core.Annotations;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
@@ -13,7 +16,6 @@ using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
@@ -165,6 +167,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         }
 
         public DataObject SelectedBrick { get; set; }
+
+        public ObservableCollection<string> BroadcastMessages
+        {
+            get { return CurrentProject.BroadcastMessages; }
+        }
 
 
         public int SelectedPivotIndex
@@ -573,7 +580,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         private void ReceiveSelectedBrickMessageAction(GenericMessage<DataObject> message)
         {
             SelectedBrick = message.Content;
-            RaisePropertyChanged("SelectedBrick");
+            RaisePropertyChanged(() => SelectedBrick);
         }
 
 
@@ -590,7 +597,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             if (!CurrentProject.BroadcastMessages.Contains(message.Content))
             {
                 CurrentProject.BroadcastMessages.Add(message.Content);
-                RaisePropertyChanged("BroadcastMessages");
+                RaisePropertyChanged(() => BroadcastMessages);
             }
         }
 
@@ -951,6 +958,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             EditSoundCommand.RaiseCanExecuteChanged();
             DeleteSoundCommand.RaiseCanExecuteChanged();
         }
+
         #region MessageBoxResult
 
         private void DeleteCostumeMessageBoxResult(MessageBoxResult result)

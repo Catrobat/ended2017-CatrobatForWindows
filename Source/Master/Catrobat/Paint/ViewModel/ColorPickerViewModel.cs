@@ -35,7 +35,7 @@ namespace Catrobat.Paint.ViewModel
             set
             {
                 _selectedColor = value;
-                RaisePropertyChanged("SelectedColor");
+                RaisePropertyChanged(() => SelectedColor);
             }
         }
 

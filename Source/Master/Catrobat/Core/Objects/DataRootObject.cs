@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using Catrobat.Core.Annotations;
+using Catrobat.Core.Misc;
 
 namespace Catrobat.Core.Objects
 {
@@ -22,6 +24,9 @@ namespace Catrobat.Core.Objects
 
         internal abstract XDocument CreateXML();
 
+
+        public abstract bool Equals(DataRootObject other);
+
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         [NotifyPropertyChangedInvocator]
@@ -31,9 +36,14 @@ namespace Catrobat.Core.Objects
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void RaisePropertyChanged<T>(Expression<Func<T>> selector)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyNameHelper.GetPropertyNameFromExpression(selector)));
+            }
+        }
         #endregion
-
-
-        public abstract bool Equals(DataRootObject other);
     }
 }

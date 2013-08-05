@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using Catrobat.IDEWindowsPhone.Controls.ListPicker;
+using Catrobat.IDEWindowsPhone.Controls.Misc;
 using Catrobat.IDEWindowsPhone.Converters;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;

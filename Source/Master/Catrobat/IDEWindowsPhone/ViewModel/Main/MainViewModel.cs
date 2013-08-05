@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Catrobat.Core;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
@@ -62,10 +63,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 _currentProject = value;
 
                 RaisePropertyChanged(() => CurrentProject);
+                RaisePropertyChanged(() => CurrentProjectName);
 
                 var projectChangedMessage = new GenericMessage<Project>(Context.CurrentProject);
                 Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage, ViewModelMessagingToken.SelectedProjectListener);
             }
+        }
+
+        public string CurrentProjectName
+        {
+            get { return CurrentProject.ProjectHeader.ProgramName; }
         }
 
         public ProjectDummyHeader PinProjectHeader { get; set; }
@@ -82,7 +89,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 if (_currentProjectScreenshot == value) return;
 
                 _currentProjectScreenshot = value;
-                RaisePropertyChanged("CurrentProjectScreenshot");
+                RaisePropertyChanged(() => CurrentProjectScreenshot);
             }
         }
 
@@ -119,9 +126,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     _filterText = value;
                     LoadOnlineProjects(false);
 
-                    if (this.PropertyChanged != null)
+                    if (PropertyChanged != null)
                     {
-                        RaisePropertyChanged("FilterText");
+                        RaisePropertyChanged(() => FilterText);
                     }
 
                 }
@@ -131,7 +138,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         public bool IsLoadingOnlineProjects
         {
             get { return _isLoadingOnlineProjects; }
-            set { _isLoadingOnlineProjects = value; RaisePropertyChanged("IsLoadingOnlineProjects"); }
+            set { _isLoadingOnlineProjects = value; RaisePropertyChanged(() => IsLoadingOnlineProjects); }
         }
 
         public bool IsActiveatingLocalProject
@@ -143,7 +150,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             set
             {
                 _isLoadingOnlineProjects = value;
-                RaisePropertyChanged("IsActiveatingLocalProject");
+                RaisePropertyChanged(() => IsActiveatingLocalProject);
             }
         }
 
@@ -350,10 +357,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction);
                 ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-                var themeChooser = Application.Current.Resources["ThemeChooser"] as ThemeChooser;
-                if (themeChooser != null)
-                    themeChooser.PropertyChanged += ThemeChooserPropertyChanged;
-
                 Context = new CatrobatContext(); 
                 Context.PropertyChanged += CatrobatContextPropertyChanged;
                 Context.CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
@@ -436,7 +439,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public void CatrobatContextPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "CurrentProject")
+            if (e.PropertyName == PropertyNameHelper.GetPropertyNameFromExpression(() => CurrentProject))
             {
                 CurrentProject = CatrobatContextBase.GetContext().CurrentProject;
                 CurrentProjectScreenshot = CurrentProject.ProjectScreenshot as ImageSource;
@@ -447,23 +450,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public void CurrentProjectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "ProjectScreenshot")
+            if (e.PropertyName == PropertyNameHelper.GetPropertyNameFromExpression(() => CurrentProjectScreenshot))
                 CurrentProjectScreenshot = CurrentProject.ProjectScreenshot as ImageSource;
-        }
-
-        public void ThemeChooserPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "SelectedTheme")
-            {
-                RaisePropertyChanged("SelectedTheme");
-            }
-        }
-
-        // This is a fix to the bug that the overwritten RaisePropertyChanged is not working properly
-        protected override void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

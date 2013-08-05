@@ -1,7 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Catrobat.Core.Annotations;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Costumes;
@@ -90,7 +93,7 @@ namespace Catrobat.Core
                 CurrentProjectField = value;
                 ProjectHolder.Project = CurrentProjectField;
                 RaisePropertyChanged();
-                RaisePropertyChanged("LocalProjects");
+                RaisePropertyChanged(() => LocalProjects);
                 UpdateLocalProjects();
             }
         }
@@ -154,6 +157,15 @@ namespace Catrobat.Core
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void RaisePropertyChanged<T>(Expression<Func<T>> selector)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyNameHelper.GetPropertyNameFromExpression(selector)));
+            }
+        }
+
         #endregion
     }
 }
