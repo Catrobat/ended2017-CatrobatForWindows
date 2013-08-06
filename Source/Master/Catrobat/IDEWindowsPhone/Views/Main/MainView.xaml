@@ -135,7 +135,7 @@
                   Source={StaticResource LocalizedStrings}}"
                   Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, 
                   Source={StaticResource Locator}}" 
-                  CommandParameter="{Binding CurrentProject.ProjectHeader.ProgramName}" />
+                  CommandParameter="{Binding CurrentProject.ProjectDummyHeader}" />
               </toolkit:ContextMenu>
             </toolkit:ContextMenuService.ContextMenu>
             <Grid Background="{StaticResource PhoneAccentBrush}">
@@ -219,7 +219,7 @@
                         Source={StaticResource LocalizedStrings}}"
                         Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, 
                         Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding ProjectName}" />
+                        CommandParameter="{Binding}" />
                     </toolkit:ContextMenu>
                   </toolkit:ContextMenuService.ContextMenu>
 

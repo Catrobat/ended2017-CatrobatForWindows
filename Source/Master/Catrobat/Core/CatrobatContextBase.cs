@@ -109,11 +109,11 @@ namespace Catrobat.Core
 
         //public abstract void UpdateLocalProjects();
 
-        public abstract void StoreLocalSettings();
+        //public abstract void StoreLocalSettings();
 
-        public abstract bool RestoreLocalSettings();
+        //public abstract bool RestoreLocalSettings();
 
-        public abstract void Save();
+        //public abstract void Save();
 
         //public abstract void InitializeLocalSettings();
 

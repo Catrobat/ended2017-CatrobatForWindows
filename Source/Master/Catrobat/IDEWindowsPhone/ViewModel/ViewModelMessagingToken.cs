@@ -14,6 +14,7 @@
         SelectedBrickListener,
         CurrentProjectChangedListener,
         LocalProjectsChangedListener,
-        ContextListener
+        ContextListener,
+        ThemeChooserListener
     }
 }

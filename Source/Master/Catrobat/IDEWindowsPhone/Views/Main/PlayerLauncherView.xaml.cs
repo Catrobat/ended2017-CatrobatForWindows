@@ -29,7 +29,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
                 try
                 {
-                    _viewModel.Context.CurrentProject = CatrobatContext.CreateNewProjectByName(projectName);
+                    _viewModel.Context.CurrentProject = CatrobatContext.CreateNewProjectByNameStatic(projectName);
                 }
                 catch (Exception)
                 {

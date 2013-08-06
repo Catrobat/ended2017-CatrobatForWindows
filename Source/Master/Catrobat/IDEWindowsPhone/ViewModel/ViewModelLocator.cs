@@ -51,14 +51,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<AddNewScriptBrickViewModel>(true);
             SimpleIoc.Default.Register<ProjectNotValidViewModel>(true);
             SimpleIoc.Default.Register<FormulaEditorViewModel>(true);
+            SimpleIoc.Default.Register<PlayerLauncherViewModel>(true);
         }
 
         private static void InitializeFirstTimeUse(CatrobatContextBase context)
         {
             Project currentProject = null;
-            var firstTimeUse = !context.RestoreLocalSettings();
+            var localSettings = CatrobatContext.RestoreLocalSettingsStatic();
 
-            if (firstTimeUse)
+            if (localSettings == null)
             {
                 if (Debugger.IsAttached)
                 {
@@ -71,7 +72,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             }
             else
             {
-                currentProject = CatrobatContext.CreateNewProjectByName(context.LocalSettings.CurrentProjectName);
+                context.LocalSettings = localSettings;
+                currentProject = CatrobatContext.CreateNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
             }
 
             var message = new GenericMessage<Project>(currentProject);
@@ -92,27 +94,24 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             }
 
             if (_context.LocalSettings.CurrentLanguageString == null)
-            {
                 _context.LocalSettings.CurrentLanguageString = LanguageHelper.GetCurrentCultureLanguageCode();
-            }
 
-
+            var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
             if (_context.LocalSettings.CurrentThemeIndex != -1)
-            {
-                var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
                 themeChooser.SelectedThemeIndex = _context.LocalSettings.CurrentThemeIndex;
-            }
 
             if (_context.LocalSettings.CurrentLanguageString != null)
-            {
-                ServiceLocator.Current.GetInstance<SettingsViewModel>().CurrentCulture = new CultureInfo(_context.LocalSettings.CurrentLanguageString);
-            }
+                ServiceLocator.Current.GetInstance<SettingsViewModel>().CurrentCulture = 
+                    new CultureInfo(_context.LocalSettings.CurrentLanguageString);
 
-            var message = new GenericMessage<CatrobatContextBase>(_context);
-            Messenger.Default.Send<GenericMessage<CatrobatContextBase>>(message, ViewModelMessagingToken.ContextListener);
+            var message1 = new GenericMessage<ThemeChooser>(themeChooser);
+            Messenger.Default.Send<GenericMessage<ThemeChooser>>(message1, ViewModelMessagingToken.ThemeChooserListener);
+
+            var message2 = new GenericMessage<CatrobatContextBase>(_context);
+            Messenger.Default.Send<GenericMessage<CatrobatContextBase>>(message2, ViewModelMessagingToken.ContextListener);
         }
 
-        public static void SaveContext()
+        public static void SaveContext(string currentProjectName)
         {
             var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
             var settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
@@ -127,7 +126,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 _context.LocalSettings.CurrentLanguageString = settingsViewModel.CurrentCulture.Name;
             }
 
-            _context.Save();
+            _context.LocalSettings.CurrentProjectName = currentProjectName;
+            CatrobatContext.StoreLocalSettingsStatic(_context.LocalSettings);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -347,6 +347,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<FormulaEditorViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public PlayerLauncherViewModel PlayerLauncherViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<PlayerLauncherViewModel>();
             }
         }
 

@@ -139,7 +139,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
                 {
                     if (setActive)
                     {
-                        CatrobatContext.CurrentProject = Core.CatrobatContext.CreateNewProjectByName(newProjectName);
+                        CatrobatContext.CurrentProject = Core.CatrobatContext.CreateNewProjectByNameStatic(newProjectName);
                     }
                     else
                     {

@@ -303,7 +303,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    CurrentProject =  CatrobatContext.CreateNewProjectByName(projectName);
+                    CurrentProject =  CatrobatContext.CreateNewProjectByNameStatic(projectName);
                     var minWaitindTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
 
                     if (minWaitindTimeRemaining >= new TimeSpan(0))
@@ -441,6 +441,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 {
                     CurrentProject = CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
                 }
+                else
+                    UpdateLocalProjects();
+
 
                 _deleteProjectName = null;
             }

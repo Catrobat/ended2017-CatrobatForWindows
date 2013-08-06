@@ -33,6 +33,9 @@ namespace Catrobat.TestsCommon.Tests.Data
     [TestMethod]
     public void StoreLocalSettingsTest()
     {
+        // TODO: fix test
+        throw new NotImplementedException();
+
       var catrobatContext = new CatrobatContext();
 
       using (var storage = StorageSystem.GetStorage())
@@ -40,7 +43,7 @@ namespace Catrobat.TestsCommon.Tests.Data
         storage.DeleteFile(CatrobatContextBase.LocalSettingsFilePath);
       }
 
-      catrobatContext.StoreLocalSettings();
+      //CatrobatContext.StoreLocalSettingsStatic();
 
       using (var storage = StorageSystem.GetStorage())
       {

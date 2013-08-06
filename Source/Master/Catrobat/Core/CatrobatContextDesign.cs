@@ -181,21 +181,21 @@ namespace Catrobat.Core
         //    // Nothing to do here
         //}
 
-        public override void StoreLocalSettings()
-        {
-            // Nothing to do here
-        }
+        //public override void StoreLocalSettings()
+        //{
+        //    // Nothing to do here
+        //}
 
-        public override bool RestoreLocalSettings()
-        {
-            return true;
-            // Nothing to do here
-        }
+        //public override bool RestoreLocalSettings()
+        //{
+        //    return true;
+        //    // Nothing to do here
+        //}
 
-        public override void Save()
-        {
-            // Nothing to do here
-        }
+        //public override void Save()
+        //{
+        //    // Nothing to do here
+        //}
 
         //public override void InitializeLocalSettings()
         //{

@@ -28,7 +28,7 @@
 
     <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10">
       <ListBox Name="ListBoxDesings" Margin="0 0 0 15" ItemsSource="{Binding AvailableThemes}" 
-        SelectedItem="{Binding ActiveTheme, Mode=OneWay}" HorizontalAlignment="Stretch">
+        SelectedItem="{Binding ThemeChooser.SelectedTheme, Mode=OneWay}" HorizontalAlignment="Stretch">
         <ListBox.ItemTemplate>
           <DataTemplate>
             <Grid Margin="0 0 0 40" Width="470" Background="Transparent" Tap="Item_Tap">
