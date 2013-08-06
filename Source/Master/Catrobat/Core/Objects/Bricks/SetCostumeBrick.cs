@@ -85,9 +85,7 @@ namespace Catrobat.Core.Objects.Bricks
         {
             var newBrick = new SetCostumeBrick();
             if (_costumeReference != null)
-            {
                 newBrick._costumeReference = _costumeReference.Copy() as CostumeReference;
-            }
 
             return newBrick;
         }

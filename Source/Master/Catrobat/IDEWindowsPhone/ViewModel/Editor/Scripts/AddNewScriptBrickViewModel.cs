@@ -17,6 +17,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
 {
     public class AddNewScriptBrickViewModel : ViewModelBase
     {
+        public enum BrickCategory
+        {
+            Motion,
+            Looks,
+            Sounds,
+            Control,
+            Variables
+        }
+
         #region private Members
 
         private Sprite _receivedSelectedSprite;
@@ -58,6 +67,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
 
         public RelayCommand ControlCommand { get; private set; }
 
+        public RelayCommand VariablesCommand { get; private set; }
+
         public RelayCommand OnLoadBrickViewCommand { get; private set; }
 
         public RelayCommand ResetViewModelCommand { get; private set; }
@@ -87,10 +98,28 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
 
             if (_selectedBrick is LoopBeginBrick)
             {
-                var brick = new LoopEndBrick((LoopBeginBrick) _selectedBrick);
+                var brick = new LoopEndBrick();
                 brick.LoopBeginBrick = (LoopBeginBrick) _selectedBrick;
                 ((LoopBeginBrick) _selectedBrick).LoopEndBrick = brick;
                 _receivedScriptBrickCollection.AddScriptBrick(brick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
+            }
+
+            if (_selectedBrick is IfLogicBeginBrick)
+            {
+                var elseBrick = new IfLogicElseBrick();
+                var ifEndBrick = new IfLogicEndBrick();
+
+                elseBrick.IfLogicBeginBrick = (IfLogicBeginBrick) _selectedBrick;
+                elseBrick.IfLogicEndBrick = ifEndBrick;
+
+                ifEndBrick.IfLogicBeginBrick = (IfLogicBeginBrick) _selectedBrick;
+                ifEndBrick.IfLogicElseBrick = elseBrick;
+
+                ((IfLogicBeginBrick) _selectedBrick).IfLogicElseBrick = elseBrick;
+                ((IfLogicBeginBrick) _selectedBrick).IfLogicEndBrick = ifEndBrick;
+                
+                _receivedScriptBrickCollection.AddScriptBrick(elseBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
+                _receivedScriptBrickCollection.AddScriptBrick(ifEndBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 2);
             }
 
             var message = new GenericMessage<DataObject>(_selectedBrick);
@@ -125,6 +154,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
             Navigation.NavigateTo(typeof (AddNewBrickView));
         }
 
+        private void VariablesAction()
+        {
+            _selectedBrickCategory = BrickCategory.Variables;
+            Navigation.NavigateTo(typeof(AddNewBrickView));
+        }
+
         private void OnLoadBrickViewAction()
         {
             var app = (App) Application.Current;
@@ -145,6 +180,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
                 case BrickCategory.Sounds:
                     BrickCollection = app.Resources["ScriptBrickAddDataSound"] as BrickCollection;
                     break;
+                case BrickCategory.Variables:
+                    BrickCollection = app.Resources["ScriptBrickAddDataVariables"] as BrickCollection;
+                    break;
+
             }
         }
 
@@ -175,6 +214,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
             LooksCommand = new RelayCommand(LooksAction);
             SoundCommand = new RelayCommand(SoundAction);
             ControlCommand = new RelayCommand(ControlAction);
+            VariablesCommand = new RelayCommand(VariablesAction);
             OnLoadBrickViewCommand = new RelayCommand(OnLoadBrickViewAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 

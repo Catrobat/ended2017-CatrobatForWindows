@@ -126,8 +126,10 @@ namespace Catrobat.Core.Objects.Bricks
         {
             var newBrick = new IfLogicElseBrick();
 
-            newBrick.IfLogicBeginBrickReference = _ifLogicBeginBrickReference.Copy() as IfLogicBeginBrickReference;
-            newBrick.IfLogicEndBrickReference = _ifLogicEndBrickReference.Copy() as IfLogicEndBrickReference;
+            if(_ifLogicBeginBrickReference != null)
+                newBrick.IfLogicBeginBrickReference = _ifLogicBeginBrickReference.Copy() as IfLogicBeginBrickReference;
+            if(_ifLogicEndBrickReference != null)
+                newBrick.IfLogicEndBrickReference = _ifLogicEndBrickReference.Copy() as IfLogicEndBrickReference;
 
             return newBrick;
         }

@@ -9,6 +9,7 @@
 
   <converters:NoScreenshotConverter x:Key="ScreenshotConverter" />
   <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+  <converters:BoolOpacityConverter x:Key="BoolOpacityConverter"/>
   <converters:IntPixelConverter x:Key="IntPixelConverter"/>
   <converters:NullIntCountConverter x:Key="NullIntCountConverter"/>
   <converters:NullColorConverter  x:Key="NullColorConverter" />

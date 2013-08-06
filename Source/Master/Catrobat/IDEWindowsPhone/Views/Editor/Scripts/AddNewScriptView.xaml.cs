@@ -10,14 +10,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
     public class BrickCollection : ObservableCollection<DataObject> {}
 
-    public enum BrickCategory
-    {
-        Motion,
-        Looks,
-        Sounds,
-        Control
-    }
-
     public partial class AddNewScriptView : PhoneApplicationPage
     {
         private readonly AddNewScriptBrickViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewScriptBrickViewModel>();
@@ -52,6 +44,11 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
         private void Control_Tap(object sender, GestureEventArgs e)
         {
             _viewModel.ControlCommand.Execute(null);
+        }
+
+        private void Variable_Tap(object sender, GestureEventArgs e)
+        {
+            _viewModel.VariablesCommand.Execute(null);
         }
     }
 }

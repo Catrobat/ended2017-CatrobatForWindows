@@ -48,11 +48,6 @@ namespace Catrobat.Core.Objects.Bricks
 
         public LoopEndBrick() {}
 
-        public LoopEndBrick(LoopBeginBrick loopBeginBrick)
-        {
-            LoopBeginBrickReference.LoopBeginBrick = loopBeginBrick;
-        }
-
         public LoopEndBrick(XElement xElement) : base(xElement) {}
 
         internal override void LoadFromXML(XElement xRoot)
@@ -84,7 +79,9 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy()
         {
             var newBrick = new LoopEndBrick();
-            newBrick.LoopBeginBrickReference = _loopBeginBrickReference.Copy() as LoopBeginBrickReference;
+
+            if(_loopBeginBrickReference != null)
+                newBrick.LoopBeginBrickReference = _loopBeginBrickReference.Copy() as LoopBeginBrickReference;
 
             return newBrick;
         }

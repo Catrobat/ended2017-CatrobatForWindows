@@ -785,6 +785,33 @@ The program is licensed under the MS-RL Lizenz.</value>
   <data name="App_FlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
   </data>
+  <data name="Brick_CategoryVariables" xml:space="preserve">
+    <value>Variables</value>
+  </data>
+  <data name="Brick_SetVariable" xml:space="preserve">
+    <value>set Variable</value>
+  </data>
+  <data name="Brick_SetVariableTo" xml:space="preserve">
+    <value>to</value>
+  </data>
+  <data name="Brick_ChangeVariable" xml:space="preserve">
+    <value>change variable</value>
+  </data>
+  <data name="Brick_ChangeVariableBy" xml:space="preserve">
+    <value>by</value>
+  </data>
+  <data name="Brick_IfLogicBegin" xml:space="preserve">
+    <value>If</value>
+  </data>
+  <data name="Brick_IfLogicBeginTrue" xml:space="preserve">
+    <value>true, then</value>
+  </data>
+  <data name="Brick_IfLogicElse" xml:space="preserve">
+    <value>else</value>
+  </data>
+  <data name="Brick_IfLogicEnd" xml:space="preserve">
+    <value>else end</value>
+  </data>
   <data name="Editor_Description" xml:space="preserve">
     <value>description</value>
   </data>
@@ -799,5 +826,8 @@ The program is licensed under the MS-RL Lizenz.</value>
   </data>
   <data name="Main_PinProjectToStart" xml:space="preserve">
     <value>pin to start</value>
+  </data>
+  <data name="Main_UploadProjectLoadingMessage" xml:space="preserve">
+    <value>Please wait while your login state is beeing checked!</value>
   </data>
 </root>

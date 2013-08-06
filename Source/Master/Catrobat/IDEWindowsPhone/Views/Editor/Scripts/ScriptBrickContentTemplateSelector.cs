@@ -102,6 +102,16 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 
         public DataTemplate WaitBrick { get; set; }
 
+        public DataTemplate SetVariableBrick { get; set; }
+
+        public DataTemplate ChangeVariableBrick { get; set; }
+
+        public DataTemplate IfLogicBeginBrick { get; set; }
+
+        public DataTemplate IfLogicElseBrick { get; set; }
+
+        public DataTemplate IfLogicEndBrick { get; set; }
+
         public DataTemplate UnknownBrick { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
@@ -331,6 +341,21 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
                 {
                     return WaitBrick;
                 }
+
+                if (scriptBrick is SetVariableBrick)
+                    return SetVariableBrick;
+
+                if (scriptBrick is ChangeVariableBrick)
+                    return ChangeVariableBrick;
+
+                if (scriptBrick is IfLogicBeginBrick)
+                    return IfLogicBeginBrick;
+
+                if (scriptBrick is IfLogicElseBrick)
+                    return IfLogicElseBrick;
+
+                if (scriptBrick is IfLogicEndBrick)
+                    return IfLogicEndBrick;
 
                 return UnknownBrick;
             }

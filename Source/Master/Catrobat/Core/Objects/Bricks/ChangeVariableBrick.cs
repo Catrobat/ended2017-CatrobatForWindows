@@ -97,8 +97,11 @@ namespace Catrobat.Core.Objects.Bricks
         public override DataObject Copy()
         {
             var newBrick = new ChangeVariableBrick();
-            newBrick._userVariableReference = _userVariableReference.Copy() as UserVariableReference;
-            newBrick._variableFormula = _variableFormula.Copy() as Formula;
+
+            if(_userVariableReference != null)
+                newBrick._userVariableReference = _userVariableReference.Copy() as UserVariableReference;
+            if(_variableFormula != null)
+                newBrick._variableFormula = _variableFormula.Copy() as Formula;
 
             return newBrick;
         }

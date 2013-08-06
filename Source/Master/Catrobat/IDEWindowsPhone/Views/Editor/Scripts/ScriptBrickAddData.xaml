@@ -263,8 +263,31 @@
         </formulas:Formula>
       </d:RepeatBrick.TimesToRepeat>
     </d:RepeatBrick>
+
+    <d:IfLogicBeginBrick IsRealObject="False">
+      <d:IfLogicBeginBrick.IfCondition>
+        <formulas:Formula>
+          <formulas:Formula.FormulaTree>
+            <formulas:FormulaTree VariableType="NUMBER" VariableValue="1" />
+          </formulas:Formula.FormulaTree>
+        </formulas:Formula>
+      </d:IfLogicBeginBrick.IfCondition>
+    </d:IfLogicBeginBrick>
+
   </s:BrickCollection>
 
+  <s:BrickCollection x:Key="ScriptBrickAddDataVariables">
+    <d:SetVariableBrick IsRealObject="False">
+      <d:SetVariableBrick.VariableFormula>
+        <formulas:Formula>
+          <formulas:Formula.FormulaTree>
+            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0.0" />
+          </formulas:Formula.FormulaTree>
+        </formulas:Formula>
+      </d:SetVariableBrick.VariableFormula>
+    </d:SetVariableBrick>
+  </s:BrickCollection>
+  
   <s:BrickCollection x:Key="ScriptBrickAddDataNXT">
     
   </s:BrickCollection>

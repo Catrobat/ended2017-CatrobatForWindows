@@ -182,6 +182,7 @@
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
+    <Compile Include="Converters\BoolOpacityConverter.cs" />
     <Compile Include="Converters\IntPixelConverter.cs" />
     <Compile Include="Converters\NullIntCountConverter.cs" />
     <Compile Include="Converters\NoScreenshotConverter.cs" />
@@ -314,6 +315,9 @@
     </Compile>
     <Compile Include="Views\Main\ProjectNotValidView.xaml.cs">
       <DependentUpon>ProjectNotValidView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Service\UploadProjectsLoadingView.xaml.cs">
+      <DependentUpon>UploadProjectsLoadingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Service\OnlineProjectView.xaml.cs">
       <DependentUpon>OnlineProjectView.xaml</DependentUpon>
@@ -527,6 +531,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Main\ProjectNotValidView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Service\UploadProjectsLoadingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

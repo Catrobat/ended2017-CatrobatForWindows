@@ -25,8 +25,8 @@
   <SolidColorBrush x:Key="MotionBrickBrush" Color="#FF2E2BD7" />
   <SolidColorBrush x:Key="SoundBrickBrush" Color="#FFE035D5" />
   <SolidColorBrush x:Key="ControlBrickBrush" Color="#FFEBB613" />
+  <SolidColorBrush x:Key="VariableBrickBrush" Color="DarkGreen" />
   <SolidColorBrush x:Key="BrickBorderBrush" Color="White" />
-
 
   
 
@@ -997,6 +997,114 @@
           </Grid>
         </DataTemplate>
       </sb:ScriptBrickContentTemplateSelector.BroadcastWaitBrick>
+
+      <sb:ScriptBrickContentTemplateSelector.IfLogicBeginBrick>
+        <DataTemplate>
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:IfLogicBeginBrick}">
+            <rlb:NormalBrick Background="{StaticResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
+              <Grid>
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock VerticalAlignment="Center" 
+                             Text="{Binding Resources.Brick_IfLogicBegin, Source={StaticResource LocalizedStrings}}"
+                             Margin="10" FontSize="24" />
+                  <formulaControls:FormulaButton HorizontalAlignment="Left" Formula="{Binding IfCondition, Mode=TwoWay}" 
+                                                 IsEnabled="{Binding IsRealObject}"/>
+                  <TextBlock VerticalAlignment="Center" 
+                             Text="{Binding Resources.Brick_IfLogicBeginTrue, Source={StaticResource LocalizedStrings}}"
+                             Margin="10" FontSize="24" />
+                </StackPanel>
+              </Grid>
+            </rlb:NormalBrick>
+          </Grid>
+        </DataTemplate>
+      </sb:ScriptBrickContentTemplateSelector.IfLogicBeginBrick>
+
+      <sb:ScriptBrickContentTemplateSelector.IfLogicElseBrick>
+        <DataTemplate>
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:IfLogicElseBrick}">
+            <rlb:NormalBrick Background="{StaticResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
+              <Grid>
+                  <TextBlock VerticalAlignment="Center" 
+                             Text="{Binding Resources.Brick_IfLogicElse, Source={StaticResource LocalizedStrings}}"
+                             Margin="10" FontSize="24" />
+              </Grid>
+            </rlb:NormalBrick>
+          </Grid>
+        </DataTemplate>
+      </sb:ScriptBrickContentTemplateSelector.IfLogicElseBrick>
+
+      <sb:ScriptBrickContentTemplateSelector.IfLogicEndBrick>
+        <DataTemplate>
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:IfLogicEndBrick}">
+            <rlb:NormalBrick Background="{StaticResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
+              <Grid>
+                <TextBlock VerticalAlignment="Center" 
+                             Text="{Binding Resources.Brick_IfLogicEnd, Source={StaticResource LocalizedStrings}}"
+                             Margin="10" FontSize="24" />
+              </Grid>
+            </rlb:NormalBrick>
+          </Grid>
+        </DataTemplate>
+      </sb:ScriptBrickContentTemplateSelector.IfLogicEndBrick>
+
+      <!--####### Variable Bricks ####################################################################################################################################################################################-->
+      
+      <sb:ScriptBrickContentTemplateSelector.SetVariableBrick>
+        <DataTemplate>
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:ChangeVariableBrick}">
+            <rlb:NormalBrick Background="{StaticResource VariableBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
+              <Grid>
+                <Grid.RowDefinitions>
+                  <RowDefinition />
+                  <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="1*" />
+                  <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.ColumnSpan="1" Grid.Row="0" VerticalAlignment="Center" 
+                           Text="{Binding Resources.Brick_SetVariable, Source={StaticResource LocalizedStrings}}"
+                           Margin="10" FontSize="24" />
+                <TextBlock Grid.ColumnSpan="1" Grid.Row="1" Text="{Binding UserVariable.Name, Mode=TwoWay}" Margin="10" FontSize="24" />
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding Resources.Brick_SetVariableTo, Source={StaticResource LocalizedStrings}}" 
+                           Margin="10" FontSize="24" />
+                <formulaControls:FormulaButton Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Formula="{Binding VariableFormula, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsRealObject}"/>
+              </Grid>
+            </rlb:NormalBrick>
+          </Grid>
+        </DataTemplate>
+      </sb:ScriptBrickContentTemplateSelector.SetVariableBrick>
+
+      <sb:ScriptBrickContentTemplateSelector.ChangeVariableBrick>
+        <DataTemplate>
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:SetVariableBrick}">
+            <rlb:NormalBrick Background="{StaticResource VariableBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
+              <Grid>
+                <Grid.RowDefinitions>
+                  <RowDefinition />
+                  <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="1*" />
+                  <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.ColumnSpan="1" Grid.Row="0" VerticalAlignment="Center" 
+                           Text="{Binding Resources.Brick_ChangeVariable, Source={StaticResource LocalizedStrings}}"
+                           Margin="10" FontSize="24" />
+                <TextBlock Grid.ColumnSpan="1" Grid.Row="1" Text="{Binding UserVariable.Name, Mode=TwoWay}" Margin="10" FontSize="24" />
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding Resources.Brick_ChangeVariableBy, Source={StaticResource LocalizedStrings}}" 
+                           Margin="10" FontSize="24" />
+                <formulaControls:FormulaButton Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Formula="{Binding VariableFormula, Mode=TwoWay}" 
+                                               IsEnabled="{Binding IsRealObject}"/>
+              </Grid>
+            </rlb:NormalBrick>
+          </Grid>
+        </DataTemplate>
+      </sb:ScriptBrickContentTemplateSelector.ChangeVariableBrick>
+
 
     </sb:ScriptBrickContentTemplateSelector>
   </DataTemplate>
