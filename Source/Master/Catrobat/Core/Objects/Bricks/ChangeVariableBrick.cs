@@ -19,6 +19,7 @@ namespace Catrobat.Core.Objects.Bricks
 
                 _userVariableReference = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(() => UserVariable);
             }
         }
 
@@ -90,7 +91,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            if (_userVariableReference != null && _userVariableReference.UserVariable == null)
+            if (_userVariableReference != null)
                 _userVariableReference.LoadReference();
         }
 

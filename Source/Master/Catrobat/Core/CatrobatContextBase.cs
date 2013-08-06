@@ -30,22 +30,9 @@ namespace Catrobat.Core
         public const string TempPaintImagePath = "Temp/PaintImage";
 
 
-
-        private static IContextHolder _holder;
-        public static CatrobatContextBase GetContext()
-        {
-            return _holder.GetContext();
-        }
-
-        public static void SetContextHolder(IContextHolder holder)
-        {
-            _holder = holder;
-        }
-
-
-
-
         public LocalSettings LocalSettings { get; set; }
+
+        public ObservableCollection<OnlineProjectHeader> OnlineProjects { get; protected set; }
 
         public string CurrentToken
         {
@@ -80,6 +67,7 @@ namespace Catrobat.Core
         }
 
         protected Project CurrentProjectField;
+
         public Project CurrentProject
         {
             get { return CurrentProjectField; }
@@ -93,42 +81,33 @@ namespace Catrobat.Core
                 CurrentProjectField = value;
                 ProjectHolder.Project = CurrentProjectField;
                 RaisePropertyChanged();
-                RaisePropertyChanged(() => LocalProjects);
-                UpdateLocalProjects();
+                //RaisePropertyChanged(() => );
+                //UpdateLocalProjects();LocalProjects
             }
         }
 
-        protected ObservableCollection<ProjectDummyHeader> LocalProjectsField;
-        public ObservableCollection<ProjectDummyHeader> LocalProjects
-        {
-            get
-            {
-                if (LocalProjectsField == null)
-                {
-                    UpdateLocalProjects();
-                }
+        // To remove:
 
-                return LocalProjectsField;
-            }
+        //private static IContextHolder _holder;
+        //public static CatrobatContextBase GetContext()
+        //{
+        //    return _holder.GetContext();
+        //}
 
-            protected set
-            {
-                LocalProjectsField = value;
-            }
-        }
+        //public static void SetContextHolder(IContextHolder holder)
+        //{
+        //    _holder = holder;
+        //}
 
-        public ObservableCollection<OnlineProjectHeader> OnlineProjects { get; protected set; }
+        //public abstract void SetCurrentProject(string projectName);
 
+        //public abstract void CreateNewProject(string projectName);
 
-        public abstract void SetCurrentProject(string projectName);
+        //public abstract void DeleteProject(string projectName);
 
-        public abstract void CreateNewProject(string projectName);
+        //public abstract void CopyProject(string projectName);
 
-        public abstract void DeleteProject(string projectName);
-
-        public abstract void CopyProject(string projectName);
-
-        public abstract void UpdateLocalProjects();
+        //public abstract void UpdateLocalProjects();
 
         public abstract void StoreLocalSettings();
 
@@ -136,17 +115,17 @@ namespace Catrobat.Core
 
         public abstract void Save();
 
-        public abstract void InitializeLocalSettings();
+        //public abstract void InitializeLocalSettings();
 
-        public abstract void RestoreDefaultProject(string projectName);
+        //public abstract void RestoreDefaultProject(string projectName);
 
-        public abstract void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite);
+        //public abstract void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite);
 
-        public abstract void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite);
+        //public abstract void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite);
 
-        public abstract void CleanUpSpriteReferences(Sprite deletedSprite);
+        //public abstract void CleanUpSpriteReferences(Sprite deletedSprite);
 
-        public abstract void CleanUpVariableReferences(UserVariable deletedUserVariable, Sprite selectedSprite);
+        //public abstract void CleanUpVariableReferences(UserVariable deletedUserVariable, Sprite selectedSprite);
 
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

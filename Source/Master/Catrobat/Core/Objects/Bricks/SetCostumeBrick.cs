@@ -19,6 +19,7 @@ namespace Catrobat.Core.Objects.Bricks
 
                 _costumeReference = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(() => Costume);
             }
         }
 
@@ -77,7 +78,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            if(_costumeReference != null && _costumeReference.Costume == null)
+            if(_costumeReference != null)
             _costumeReference.LoadReference();
         }
 

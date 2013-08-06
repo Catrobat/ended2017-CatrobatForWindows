@@ -10,6 +10,8 @@ using Catrobat.Core.VersionConverter;
 using Catrobat.Core.ZIP;
 using Windows.Phone.Storage.SharedAccess;
 using Windows.Storage;
+using Catrobat.IDEWindowsPhone.ViewModel;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDEWindowsPhone.Misc
 {
@@ -137,11 +139,13 @@ namespace Catrobat.IDEWindowsPhone.Misc
                 {
                     if (setActive)
                     {
-                        CatrobatContext.SetCurrentProject(newProjectName);
+                        CatrobatContext.CurrentProject = Core.CatrobatContext.CreateNewProjectByName(newProjectName);
                     }
                     else
                     {
-                        CatrobatContext.UpdateLocalProjects();
+                        var localProjectsChangedMessage = new MessageBase();
+                        Messenger.Default.Send<MessageBase>(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
+                        //CatrobatContext.UpdateLocalProjects();
                     }
                 });
         }

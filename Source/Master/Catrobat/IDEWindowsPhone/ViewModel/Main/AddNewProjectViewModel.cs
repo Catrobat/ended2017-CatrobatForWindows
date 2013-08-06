@@ -1,7 +1,9 @@
 ﻿using Catrobat.Core;
+using Catrobat.Core.Objects;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 {
@@ -9,13 +11,18 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
     {
         #region private Members
 
-        private readonly CatrobatContextBase _catrobatContext;
+        private Project _currentProject;
         private string _projectName;
 
         #endregion
 
         #region Properties
 
+        public Project CurrentProject
+        {
+            get { return _currentProject; }
+            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+        }
         public string ProjectName
         {
             get { return _projectName; }
@@ -56,8 +63,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void SaveAction()
         {
-            _catrobatContext.CurrentProject.Save();
-            CatrobatContextBase.GetContext().CreateNewProject(_projectName); //TODO change to _catrobatContext
+            CurrentProject.Save();
+            CurrentProject = CatrobatContext.RestoreDefaultProjectStatic(_projectName);
+            CurrentProject.Save();
+
+            var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
+            Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
 
             Navigation.NavigateBack();
         }
@@ -74,6 +85,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         #endregion
 
+        #region MessageActions
+
+        private void CurrentProjectChangedAction(GenericMessage<Project> message)
+        {
+            CurrentProject = message.Content;
+        }
+
+        #endregion
         public AddNewProjectViewModel()
         {
             // Commands
@@ -81,14 +100,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             CancelCommand = new RelayCommand(CancelAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-            if (IsInDesignMode)
-            {
-                _catrobatContext = new CatrobatContextDesign();
-            }
-            else
-            {
-                _catrobatContext = CatrobatContextBase.GetContext();
-            }
+            Messenger.Default.Register<GenericMessage<Project>>(this,
+                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
 
         private void ResetViewModel()

@@ -19,6 +19,7 @@ namespace Catrobat.Core.Objects.Bricks
 
                 _loopEndBrickReference = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(() => LoopEndBrick);
             }
         }
 
@@ -66,7 +67,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            if (_loopEndBrickReference != null && _loopEndBrickReference.LoopEndBrick == null)
+            if (_loopEndBrickReference != null)
                 _loopEndBrickReference.LoadReference();
         }
 

@@ -10,6 +10,8 @@ namespace Catrobat.Core
 {
     public sealed class CatrobatContextDesign : CatrobatContextBase
     {
+        public ObservableCollection<ProjectDummyHeader> LocalProjects { get; protected set; }
+
         public CatrobatContextDesign()
         {
             InitCurrentProject();
@@ -154,30 +156,30 @@ namespace Catrobat.Core
         }
 
 
-        public override void SetCurrentProject(string projectName)
-        {
-            // Nothing to do here
-        }
+        //public override void SetCurrentProject(string projectName)
+        //{
+        //    // Nothing to do here
+        //}
 
-        public override void CreateNewProject(string projectName)
-        {
-            // Nothing to do here
-        }
+        //public override void CreateNewProject(string projectName)
+        //{
+        //    // Nothing to do here
+        //}
 
-        public override void DeleteProject(string projectName)
-        {
-            // Nothing to do here
-        }
+        //public override void DeleteProject(string projectName)
+        //{
+        //    // Nothing to do here
+        //}
 
-        public override void CopyProject(string projectName)
-        {
-            // Nothing to do here
-        }
+        //public override void CopyProject(string projectName)
+        //{
+        //    // Nothing to do here
+        //}
 
-        public override void UpdateLocalProjects()
-        {
-            // Nothing to do here
-        }
+        //public override void UpdateLocalProjects()
+        //{
+        //    // Nothing to do here
+        //}
 
         public override void StoreLocalSettings()
         {
@@ -195,34 +197,34 @@ namespace Catrobat.Core
             // Nothing to do here
         }
 
-        public override void InitializeLocalSettings()
-        {
-            // Nothing to do here
-        }
+        //public override void InitializeLocalSettings()
+        //{
+        //    // Nothing to do here
+        //}
 
-        public override void RestoreDefaultProject(string projectName)
-        {
-            // Nothing to do here
-        }
+        //public override void RestoreDefaultProject(string projectName)
+        //{
+        //    // Nothing to do here
+        //}
 
-        public override void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
-        {
-            // Nothing to do here
-        }
+        //public override void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
+        //{
+        //    // Nothing to do here
+        //}
 
-        public override void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite)
-        {
-            // Nothing to do here
-        }
+        //public override void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite)
+        //{
+        //    // Nothing to do here
+        //}
 
-        public override void CleanUpSpriteReferences(Sprite deletedSprite)
-        {
-            // Nothing to do here
-        }
+        //public override void CleanUpSpriteReferences(Sprite deletedSprite)
+        //{
+        //    // Nothing to do here
+        //}
 
-        public override void CleanUpVariableReferences(Objects.Variables.UserVariable deletedUserVariable, Sprite selectedSprite)
-        {
-            // Nothing to do here
-        }
+        //public override void CleanUpVariableReferences(Objects.Variables.UserVariable deletedUserVariable, Sprite selectedSprite)
+        //{
+        //    // Nothing to do here
+        //}
     }
 }

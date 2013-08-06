@@ -51,7 +51,7 @@ namespace Catrobat.Core.Objects.Costumes
                     {
                         using (var storage = StorageSystem.GetStorage())
                         {
-                            _thumbnail = storage.LoadImageThumbnail(CatrobatContext.GetContext().CurrentProject.BasePath + "/images/" + _fileName);
+                            _thumbnail = storage.LoadImageThumbnail(ProjectHolder.Project.BasePath + "/images/" + _fileName);
                         }
                     }
                     catch { }

@@ -129,7 +129,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
             ShowLanguageSettingsCommand = new RelayCommand(ShowLanguageSettingsAction);
             ActiveThemeChangedCommand = new RelayCommand<Theme>(ActiveThemeChangedAction);
 
-            _themeChooser.PropertyChanged += ThemeChooserOnPropertyChanged;
+            //_themeChooser.PropertyChanged += ThemeChooserOnPropertyChanged;
             _memoryMonitor = Debugger.IsAttached ? new MemoryMonitor(true, false) : new MemoryMonitor(false, false);
         }
 

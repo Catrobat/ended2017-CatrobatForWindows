@@ -874,5 +874,90 @@ namespace Catrobat.Core.Misc.Helpers
                 count++;
             }
         }
+
+        public static void CleanUpReferencesAfterDelete(DataObject deletedObject, Sprite selectedSprite)
+        {
+            if(deletedObject is Costume)
+                CleanUpCostumeReferences(deletedObject as Costume, selectedSprite);
+            else if(deletedObject is Sound)
+                CleanUpSoundReferences(deletedObject as Sound, selectedSprite);
+            else if(deletedObject is Sprite)
+                CleanUpSpriteReferences(deletedObject as Sprite);
+            else if (deletedObject is UserVariable)
+                CleanUpVariableReferences(deletedObject as UserVariable, selectedSprite);
+        }
+
+        private static void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
+        {
+            foreach (Script script in selectedSprite.Scripts.Scripts)
+            {
+                foreach (Brick brick in script.Bricks.Bricks)
+                {
+                    if (brick is SetCostumeBrick)
+                    {
+                        var setCostumeBrick = brick as SetCostumeBrick;
+                        if(setCostumeBrick.Costume == deletedCostume)
+                            setCostumeBrick.CostumeReference = null;
+                    }
+                }
+            }
+        }
+
+        private static void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite)
+        {
+            foreach (Script script in selectedSprite.Scripts.Scripts)
+            {
+                foreach (Brick brick in script.Bricks.Bricks)
+                {
+                    if (brick is PlaySoundBrick)
+                    {
+                        var playSoundBrick = brick as PlaySoundBrick;
+                        if(playSoundBrick.Sound == deletedSound)
+                            playSoundBrick.SoundReference = null;
+                    }
+                }
+            }
+        }
+
+        private static void CleanUpSpriteReferences(Sprite deletedSprite)
+        {
+            foreach (Sprite sprite in ProjectHolder.Project.SpriteList.Sprites)
+            {
+                foreach (Script script in sprite.Scripts.Scripts)
+                {
+                    foreach (Brick brick in script.Bricks.Bricks)
+                    {
+                        if (brick is PointToBrick)
+                        {
+                            var pointToBrick = brick as PointToBrick;
+                            if(pointToBrick.PointedSprite == deletedSprite)
+                                pointToBrick.PointedSpriteReference = null;
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void CleanUpVariableReferences(UserVariable deletedUserVariable, Sprite selectedSprite)
+        {
+            foreach (Script script in selectedSprite.Scripts.Scripts)
+            {
+                foreach (Brick brick in script.Bricks.Bricks)
+                {
+                    if (brick is SetVariableBrick)
+                    {
+                        var setVariableBrick = brick as SetVariableBrick;
+                        if(setVariableBrick.UserVariable == deletedUserVariable)
+                            setVariableBrick.UserVariableReference = null;
+                    }
+                    else if (brick is ChangeVariableBrick)
+                    {
+                        var changeVariableBrick = brick as ChangeVariableBrick;
+                        if(changeVariableBrick.UserVariable == deletedUserVariable)
+                            changeVariableBrick.UserVariableReference = null;
+                    }
+                }
+            }
+        }
     }
 }

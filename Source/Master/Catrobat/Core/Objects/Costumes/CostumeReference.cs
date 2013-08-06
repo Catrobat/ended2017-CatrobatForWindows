@@ -51,7 +51,10 @@ namespace Catrobat.Core.Objects.Costumes
 
         internal override void LoadReference()
         {
-            Costume = ReferenceHelper.GetReferenceObject(this, _reference) as Costume;
+            if(Costume == null)
+                Costume = ReferenceHelper.GetReferenceObject(this, _reference) as Costume;
+            if (_reference == "")
+                _reference = ReferenceHelper.GetReferenceString(Costume);
         }
 
         public DataObject Copy()
@@ -69,7 +72,7 @@ namespace Catrobat.Core.Objects.Costumes
             if (otherReference == null)
                 return false;
 
-            if (_reference != otherReference._reference)
+            if (Costume.Name != otherReference.Costume.Name)
                 return false;
 
             return true;

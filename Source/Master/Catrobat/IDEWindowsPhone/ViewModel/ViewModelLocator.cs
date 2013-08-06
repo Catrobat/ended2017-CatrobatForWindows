@@ -1,4 +1,12 @@
-﻿using Catrobat.IDEWindowsPhone.ViewModel.Editor;
+﻿using System.Diagnostics;
+using System.Globalization;
+using System.Windows;
+using Catrobat.Core;
+using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Objects;
+using Catrobat.Core.Resources;
+using Catrobat.IDEWindowsPhone.Themes;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts;
@@ -7,24 +15,29 @@ using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Catrobat.IDEWindowsPhone.ViewModel.Service;
 using Catrobat.IDEWindowsPhone.ViewModel.Settings;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
+using IDEWindowsPhone;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel
 {
     public class ViewModelLocator
     {
+        private static CatrobatContextBase _context;
+
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<EditorViewModel>();
-            SimpleIoc.Default.Register<AddNewProjectViewModel>();
-            SimpleIoc.Default.Register<UploadProjectViewModel>();
-            SimpleIoc.Default.Register<UploadProjectLoginViewModel>();
+            SimpleIoc.Default.Register<MainViewModel>(true);
+            SimpleIoc.Default.Register<EditorViewModel>(true);
+            SimpleIoc.Default.Register<AddNewProjectViewModel>(true);
+            SimpleIoc.Default.Register<UploadProjectViewModel>(true);
+            SimpleIoc.Default.Register<UploadProjectLoginViewModel>(true);
             SimpleIoc.Default.Register<SoundRecorderViewModel>(true);
-            SimpleIoc.Default.Register<SettingsViewModel>();
+            SimpleIoc.Default.Register<SettingsViewModel>(true);
             SimpleIoc.Default.Register<AddNewCostumeViewModel>(true);
             SimpleIoc.Default.Register<ChangeCostumeViewModel>(true);
             SimpleIoc.Default.Register<AddNewSoundViewModel>(true);
@@ -32,12 +45,89 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<AddNewSpriteViewModel>(true);
             SimpleIoc.Default.Register<ChangeSpriteViewModel>(true);
             SimpleIoc.Default.Register<ProjectSettingsViewModel>(true);
-            SimpleIoc.Default.Register<ProjectImportViewModel>();
-            SimpleIoc.Default.Register<OnlineProjectViewModel>();
+            SimpleIoc.Default.Register<ProjectImportViewModel>(true);
+            SimpleIoc.Default.Register<OnlineProjectViewModel>(true);
             SimpleIoc.Default.Register<NewBroadcastMessageViewModel>(true);
             SimpleIoc.Default.Register<AddNewScriptBrickViewModel>(true);
             SimpleIoc.Default.Register<ProjectNotValidViewModel>(true);
             SimpleIoc.Default.Register<FormulaEditorViewModel>(true);
+        }
+
+        private static void InitializeFirstTimeUse(CatrobatContextBase context)
+        {
+            Project currentProject = null;
+            var firstTimeUse = !context.RestoreLocalSettings();
+
+            if (firstTimeUse)
+            {
+                if (Debugger.IsAttached)
+                {
+                    var loader = new SampleProjectLoader();
+                    loader.LoadSampleProjects();
+                }
+
+                currentProject = CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+                context.LocalSettings = new LocalSettings { CurrentProjectName = currentProject.ProjectHeader.ProgramName };
+            }
+            else
+            {
+                currentProject = CatrobatContext.CreateNewProjectByName(context.LocalSettings.CurrentProjectName);
+            }
+
+            var message = new GenericMessage<Project>(currentProject);
+            Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.CurrentProjectChangedListener);
+        }
+
+        public static void LoadContext()
+        {
+
+            if (ViewModelBase.IsInDesignModeStatic)
+            {
+                _context = new CatrobatContextDesign();
+            }
+            else
+            {
+                _context = new CatrobatContext();
+                InitializeFirstTimeUse(_context);
+            }
+
+            if (_context.LocalSettings.CurrentLanguageString == null)
+            {
+                _context.LocalSettings.CurrentLanguageString = LanguageHelper.GetCurrentCultureLanguageCode();
+            }
+
+
+            if (_context.LocalSettings.CurrentThemeIndex != -1)
+            {
+                var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
+                themeChooser.SelectedThemeIndex = _context.LocalSettings.CurrentThemeIndex;
+            }
+
+            if (_context.LocalSettings.CurrentLanguageString != null)
+            {
+                ServiceLocator.Current.GetInstance<SettingsViewModel>().CurrentCulture = new CultureInfo(_context.LocalSettings.CurrentLanguageString);
+            }
+
+            var message = new GenericMessage<CatrobatContextBase>(_context);
+            Messenger.Default.Send<GenericMessage<CatrobatContextBase>>(message, ViewModelMessagingToken.ContextListener);
+        }
+
+        public static void SaveContext()
+        {
+            var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
+            var settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
+
+            if (themeChooser.SelectedTheme != null)
+            {
+                _context.LocalSettings.CurrentThemeIndex = themeChooser.SelectedThemeIndex;
+            }
+
+            if (settingsViewModel.CurrentCulture != null)
+            {
+                _context.LocalSettings.CurrentLanguageString = settingsViewModel.CurrentCulture.Name;
+            }
+
+            _context.Save();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",

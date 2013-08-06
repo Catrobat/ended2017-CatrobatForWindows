@@ -54,7 +54,10 @@ namespace Catrobat.Core.Objects.Variables
 
         internal override void LoadReference()
         {
-            UserVariable = ReferenceHelper.GetReferenceObject(this, _reference) as UserVariable;
+            if(UserVariable == null)
+                UserVariable = ReferenceHelper.GetReferenceObject(this, _reference) as UserVariable;
+            if (_reference == "")
+                _reference = ReferenceHelper.GetReferenceString(UserVariable);
         }
 
         public DataObject Copy()
@@ -72,7 +75,7 @@ namespace Catrobat.Core.Objects.Variables
             if (otherReference == null)
                 return false;
 
-            if (_reference != otherReference._reference)
+            if (UserVariable.Name != otherReference.UserVariable.Name)
                 return false;
 
             return true;

@@ -30,6 +30,7 @@ namespace Catrobat.Core.Objects.Bricks
 
                 _ifLogicElseBrickReference = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(() => IfLogicElseBrick);
             }
         }
 
@@ -70,6 +71,7 @@ namespace Catrobat.Core.Objects.Bricks
 
                 _ifLogicEndBrickReference = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(() => IfLogicEndBrick);
             }
         }
 
@@ -141,9 +143,9 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            if (_ifLogicElseBrickReference != null && _ifLogicElseBrickReference.IfLogicElseBrick == null)
+            if (_ifLogicElseBrickReference != null)
                 _ifLogicElseBrickReference.LoadReference();
-            if (_ifLogicEndBrickReference != null && _ifLogicEndBrickReference.IfLogicEndBrick == null)
+            if (_ifLogicEndBrickReference != null)
                 _ifLogicEndBrickReference.LoadReference();
         }
 

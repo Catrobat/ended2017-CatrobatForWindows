@@ -1,11 +1,6 @@
 ﻿using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Catrobat.Core;
-using Catrobat.Core.Annotations;
-using Catrobat.Core.Misc;
+using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
@@ -36,7 +31,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
     {
         #region Private Members
 
-        private readonly CatrobatContextBase _catrobatContext;
+        private Project _currentProject;
         private Sprite _selectedSprite;
         private readonly ScriptBrickCollection _scriptBricks;
         private SoundPlayer _soundPlayer;
@@ -58,10 +53,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         public Project CurrentProject
         {
-            get
-            {
-                return _catrobatContext.CurrentProject;
-            }
+            get { return _currentProject; }
+            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
         }
 
         public ObservableCollection<Sprite> Sprites
@@ -577,12 +570,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                     ScriptBricks.Remove(scriptBrick);
         }
 
-        private void ReceiveSelectedBrickMessageAction(GenericMessage<DataObject> message)
-        {
-            SelectedBrick = message.Content;
-            RaisePropertyChanged(() => SelectedBrick);
-        }
-
 
         private void AddBroadcastMessageAction(DataObject broadcastObject)
         {
@@ -591,16 +578,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
             Navigation.NavigateTo(typeof(NewBroadcastMessageView));
         }
-
-        private void ReceiveNewBroadcastMessageAction(GenericMessage<string> message)
-        {
-            if (!CurrentProject.BroadcastMessages.Contains(message.Content))
-            {
-                CurrentProject.BroadcastMessages.Add(message.Content);
-                RaisePropertyChanged(() => BroadcastMessages);
-            }
-        }
-
 
         private void AddNewSpriteAction()
         {
@@ -849,7 +826,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             if(_soundPlayer != null)
                 _soundPlayer.Clear();
 
-            _soundPlayer = new SoundPlayer();
+            _soundPlayer = new SoundPlayer(CurrentProject.BasePath);
 
             _soundPlayer.SoundFinished += delegate()
             {
@@ -872,6 +849,28 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         #endregion
 
+        #region MessageActions
+
+        private void CurrentProjectChangedAction(GenericMessage<Project> message)
+        {
+            CurrentProject = message.Content;
+        }
+
+        private void ReceiveNewBroadcastMessageAction(GenericMessage<string> message)
+        {
+            if (!CurrentProject.BroadcastMessages.Contains(message.Content))
+            {
+                CurrentProject.BroadcastMessages.Add(message.Content);
+                RaisePropertyChanged(() => BroadcastMessages);
+            }
+        }
+
+        private void ReceiveSelectedBrickMessageAction(GenericMessage<DataObject> message)
+        {
+            SelectedBrick = message.Content;
+            RaisePropertyChanged(() => SelectedBrick);
+        }
+        #endregion
         public EditorViewModel()
         {
             SelectedScripts = new ObservableCollection<DataObject>();
@@ -918,26 +917,18 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             ClearSoundsSelectionCommand = new RelayCommand(ClearSoundsSelectionAction);
 
             NothingItemHackCommand = new RelayCommand<object>(NothingItemHackAction);
-
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
-
             SoundsPlayStateChangedCommand = new RelayCommand<PlayPauseCommandArguments>(SoundsPlayStateChangedAction);
-
-
-            if (IsInDesignMode)
-            {
-                _catrobatContext = new CatrobatContextDesign();
-                _selectedSprite = _catrobatContext.CurrentProject.SpriteList.Sprites[0];
-            }
-            else
-            {
-                _catrobatContext = CatrobatContextBase.GetContext();
-            }
 
             _scriptBricks = new ScriptBrickCollection();
 
-            Messenger.Default.Register<GenericMessage<string>>(this, ViewModelMessagingToken.BroadcastMessageListener, ReceiveNewBroadcastMessageAction);
-            Messenger.Default.Register<GenericMessage<DataObject>>(this, ViewModelMessagingToken.SelectedBrickListener, ReceiveSelectedBrickMessageAction);
+
+            Messenger.Default.Register<GenericMessage<Project>>(this,
+                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
+            Messenger.Default.Register<GenericMessage<string>>(this, 
+                ViewModelMessagingToken.BroadcastMessageListener, ReceiveNewBroadcastMessageAction);
+            Messenger.Default.Register<GenericMessage<DataObject>>(this, 
+                ViewModelMessagingToken.SelectedBrickListener, ReceiveSelectedBrickMessageAction);
         }
 
         private void SelectedScriptsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
@@ -969,9 +960,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
                 foreach (var costume in costumesToRemove)
                 {
+                    ReferenceHelper.CleanUpReferencesAfterDelete(costume, SelectedSprite);
+
                     costume.Delete();
                     Costumes.Remove(costume);
-                    CatrobatContextBase.GetContext().CleanUpCostumeReferences(costume, SelectedSprite);
                 }
             }
         }
@@ -984,9 +976,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
                 foreach (var sound in soundsToRemove)
                 {
+                    ReferenceHelper.CleanUpReferencesAfterDelete(sound, SelectedSprite);
+
                     sound.Delete();
                     Sounds.Remove(sound);
-                    CatrobatContextBase.GetContext().CleanUpSoundReferences(sound, SelectedSprite);
                 }
             }
         }
@@ -999,15 +992,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 ObjectVariableEntry entryToRemove = null;
                 foreach (var entry in userVariableEntries)
                 {
-                    if(entry.Sprite == SelectedSprite)
+                    if (entry.Sprite == SelectedSprite)
+                    {
                         entryToRemove = entry;
+                    }
                 }
+
                 if(entryToRemove != null)
                     userVariableEntries.Remove(entryToRemove);
 
+                ReferenceHelper.CleanUpReferencesAfterDelete(SelectedSprite, SelectedSprite);
+
                 SelectedSprite.Delete();
                 Sprites.Remove(SelectedSprite);
-                CatrobatContextBase.GetContext().CleanUpSpriteReferences(SelectedSprite);
             }
         }
 

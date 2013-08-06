@@ -118,6 +118,9 @@ namespace Catrobat.TestsCommon.Misc
                 }
             }
 
+            project.LoadReference();
+            project.LoadBroadcastMessages();
+
             return project;
         }
 

@@ -15,6 +15,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Service
             InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            _viewModel.InitializeCommand.Execute(null);
+        }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             _viewModel.ResetViewModelCommand.Execute(null);

@@ -27,10 +27,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
         private string _versionLabelText = "";
         private string _viewsLabelText = "";
         private string _downloadsLabelText = "";
+        private Project _currentProject;
 
         #endregion
 
         #region Properties
+
+        public Project CurrentProject
+        {
+            get { return _currentProject; }
+            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+        }
 
         public bool ButtonDownloadIsEnabled
         {
@@ -154,10 +161,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             ButtonDownloadIsEnabled = true;
         }
 
-        private void DownloadAction(OnlineProjectHeader dataContext)
+        private void DownloadAction(OnlineProjectHeader onlineProjectHeader)
         {
             ButtonDownloadIsEnabled = false;
-            ServerCommunication.DownloadAndSaveProject(dataContext.DownloadUrl, dataContext.ProjectName, DownloadCallback);
+            ServerCommunication.DownloadAndSaveProject(onlineProjectHeader.DownloadUrl, onlineProjectHeader.ProjectName, DownloadCallback);
 
             var message = new DialogMessage(AppResources.Main_DownloadQueueMessage, DownloadProjectMessageBoxResult)
             {
@@ -187,6 +194,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         #endregion
 
+        #region MessageActions
+        private void CurrentProjectChangedAction(GenericMessage<Project> message)
+        {
+            CurrentProject = message.Content;
+        }
+        #endregion
         public OnlineProjectViewModel()
         {
             // Commands
@@ -195,14 +208,20 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             ReportCommand = new RelayCommand(ReportAction);
             LicenseCommand = new RelayCommand(LicenseAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
+
+            Messenger.Default.Register<GenericMessage<Project>>(this,
+                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
 
         private void DownloadProjectMessageBoxResult(MessageBoxResult result) {}
 
         private void DownloadCallback(string filename)
         {
-            CatrobatContextBase.GetContext().UpdateLocalProjects();
-            CatrobatContextBase.GetContext().SetCurrentProject(filename);
+            //TODO: comment in and fix
+            //var localProjectsChangedMessage = new MessageBase();
+            //Messenger.Default.Send<MessageBase>(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
+
+            //CatrobatContextBase.GetContext().SetCurrentProject(filename);
 
             Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {

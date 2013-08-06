@@ -24,7 +24,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         #region private Members
 
-        private readonly CatrobatContextBase catrobatContext;
+        private CatrobatContextBase _context;
         private MessageBoxResult _missingLoginDataCallbackResult;
         private MessageBoxResult _wrongLoginDataCallbackResult;
         private MessageBoxResult _registrationSuccessfulCallbackResult;
@@ -36,6 +36,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         #region Properties
 
+        public CatrobatContextBase Context
+        {
+            get { return _context; }
+            set { _context = value; RaisePropertyChanged(() => Context); }
+        }
         public NavigationCallbackEvent NavigationCallback { get; set; }
 
         public string Username
@@ -139,6 +144,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         #endregion
 
+        #region MessageActions
+        private void ContextChangedAction(GenericMessage<CatrobatContextBase> message)
+        {
+            Context = message.Content;
+        }
+        #endregion
         public UploadProjectLoginViewModel()
         {
             // Commands
@@ -146,14 +157,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             ForgottenCommand = new RelayCommand(ForgottenAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-            if (IsInDesignMode)
-            {
-                catrobatContext = new CatrobatContextDesign();
-            }
-            else
-            {
-                catrobatContext = CatrobatContextBase.GetContext();
-            }
+            Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
+                 ViewModelMessagingToken.ContextListener, ContextChangedAction);
 
             NavigationCallback = navigationCallback;
         }
@@ -195,7 +200,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void registerOrCheckTokenCallback(bool registered, string errorCode, string statusMessage)
         {
-            CatrobatContextBase.GetContext().CurrentToken = Utils.CalculateToken(_username, _password);
+           Context.CurrentToken = Utils.CalculateToken(_username, _password);
 
             if (registered)
             {

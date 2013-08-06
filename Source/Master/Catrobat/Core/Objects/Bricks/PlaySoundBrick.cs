@@ -20,6 +20,7 @@ namespace Catrobat.Core.Objects.Bricks
 
                 _soundReference = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged(() => Sound);
             }
         }
 
@@ -80,7 +81,7 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            if (_soundReference != null && _soundReference.Sound == null)
+            if (_soundReference != null)
                 _soundReference.LoadReference();
         }
 

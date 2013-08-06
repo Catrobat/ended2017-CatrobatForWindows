@@ -25,37 +25,20 @@ namespace Catrobat.Core
     {
         public  CatrobatContext()
         {
-            var firstTimeUse = !RestoreLocalSettings();
 
-            if (firstTimeUse)
-            {
-                if (Debugger.IsAttached)
-                {
-                    var loader = new SampleProjectLoader();
-                    loader.LoadSampleProjects();
-                    UpdateLocalProjects();
-                }
-
-                RestoreDefaultProject(DefaultProjectName);
-                LocalSettings = new LocalSettings {CurrentProjectName = CurrentProject.ProjectHeader.ProgramName};
-            }
-            else
-            {
-                InitializeLocalSettings();
-            }
         }
 
-        public override void SetCurrentProject(string projectName)
+        public static Project CreateNewProjectByName(string projectName)
         {
-            if (CurrentProjectField != null && CurrentProjectField.ProjectHeader.ProgramName == projectName)
-            {
-                return;
-            }
+            //if (CurrentProjectField != null && CurrentProjectField.ProjectHeader.ProgramName == projectName)
+            //{
+            //    return;
+            //}
 
-            if (CurrentProjectField != null)
-            {
-                CurrentProjectField.Save();
-            }
+            //if (CurrentProjectField != null)
+            //{
+            //    CurrentProjectField.Save();
+            //}
 
             var projectCodeFile = Path.Combine(ProjectsPath, projectName);
 
@@ -66,7 +49,7 @@ namespace Catrobat.Core
                     var tempPath = Path.Combine(projectCodeFile, Project.ProjectCodePath);
                     var xml = storage.ReadTextFile(tempPath);
                     var newProject = new Project(xml);
-                    CurrentProject = newProject;
+                    return newProject;
                 }
             }
             catch
@@ -75,98 +58,98 @@ namespace Catrobat.Core
             }
         }
 
-        public override void CreateNewProject(string projectName)
-        {
-            RestoreDefaultProject(projectName);
+        //public override void CreateNewProject(string projectName)
+        //{
+        //    RestoreDefaultProject(projectName);
 
-            CurrentProject.Save();
-            UpdateLocalProjects();
-        }
+        //    CurrentProject.Save();
+        //    UpdateLocalProjects();
+        //}
 
-        public override void DeleteProject(string projectName)
-        {
-            using (var storage = StorageSystem.GetStorage())
-            {
-                storage.DeleteDirectory(ProjectsPath + "/" + projectName);
-            }
+        //public override void DeleteProject(string projectName)
+        //{
+        //    using (var storage = StorageSystem.GetStorage())
+        //    {
+        //        storage.DeleteDirectory(ProjectsPath + "/" + projectName);
+        //    }
 
-            if (CurrentProjectField.ProjectHeader.ProgramName == projectName)
-            {
-                RestoreDefaultProject(DefaultProjectName);
-            }
+        //    if (CurrentProjectField.ProjectHeader.ProgramName == projectName)
+        //    {
+        //        RestoreDefaultProject(DefaultProjectName);
+        //    }
 
-            UpdateLocalProjects();
-        }
+        //    UpdateLocalProjects();
+        //}
 
-        public override void CopyProject(string projectName)
-        {
-            using (var storage = StorageSystem.GetStorage())
-            {
-                var sourcePath = Path.Combine(ProjectsPath, projectName);
-                var newProjectName = projectName;
-                var destinationPath = Path.Combine(ProjectsPath, newProjectName);
+        //public override void CopyProject(string projectName)
+        //{
+        //    using (var storage = StorageSystem.GetStorage())
+        //    {
+        //        var sourcePath = Path.Combine(ProjectsPath, projectName);
+        //        var newProjectName = projectName;
+        //        var destinationPath = Path.Combine(ProjectsPath, newProjectName);
 
-                var counter = 1;
-                while (storage.DirectoryExists(destinationPath))
-                {
-                    newProjectName = projectName + counter;
-                    destinationPath = Path.Combine(ProjectsPath, newProjectName);
-                    counter++;
-                }
+        //        var counter = 1;
+        //        while (storage.DirectoryExists(destinationPath))
+        //        {
+        //            newProjectName = projectName + counter;
+        //            destinationPath = Path.Combine(ProjectsPath, newProjectName);
+        //            counter++;
+        //        }
 
-                storage.CopyDirectory(sourcePath, destinationPath);
+        //        storage.CopyDirectory(sourcePath, destinationPath);
 
-                var tempXmlPath = Path.Combine(destinationPath, Project.ProjectCodePath);
-                var xml = storage.ReadTextFile(tempXmlPath);
-                var newProject = new Project(xml);
-                newProject.SetProgramName(newProjectName);
-                newProject.Save();
-            }
+        //        var tempXmlPath = Path.Combine(destinationPath, Project.ProjectCodePath);
+        //        var xml = storage.ReadTextFile(tempXmlPath);
+        //        var newProject = new Project(xml);
+        //        newProject.SetProgramName(newProjectName);
+        //        newProject.Save();
+        //    }
 
-            UpdateLocalProjects();
-        }
+        //    UpdateLocalProjects();
+        //}
 
-        public override void UpdateLocalProjects()
-        {
-            if (CurrentProject == null)
-            {
-                return;
-            }
+        //public override void UpdateLocalProjects()
+        //{
+        //    if (CurrentProject == null)
+        //    {
+        //        return;
+        //    }
 
-            if (LocalProjectsField == null)
-            {
-                LocalProjectsField = new ObservableCollection<ProjectDummyHeader>();
-            }
+        //    if (LocalProjectsField == null)
+        //    {
+        //        LocalProjectsField = new ObservableCollection<ProjectDummyHeader>();
+        //    }
 
-            LocalProjectsField.Clear();
+        //    LocalProjectsField.Clear();
 
-            using (var storage = StorageSystem.GetStorage())
-            {
-                var projectNames = storage.GetDirectoryNames(ProjectsPath);
+        //    using (var storage = StorageSystem.GetStorage())
+        //    {
+        //        var projectNames = storage.GetDirectoryNames(ProjectsPath);
 
-                var projects = new List<ProjectDummyHeader>();
+        //        var projects = new List<ProjectDummyHeader>();
 
-                foreach (string projectName in projectNames)
-                {
-                    if (projectName != CurrentProject.ProjectHeader.ProgramName)
-                    {
-                        var screenshotPath = Path.Combine(ProjectsPath, projectName, Project.ScreenshotPath);
-                        var projectScreenshot = storage.LoadImage(screenshotPath);
-                        var projectHeader = new ProjectDummyHeader
-                        {
-                            ProjectName = projectName,
-                            Screenshot = projectScreenshot
-                        };
-                        projects.Add(projectHeader);
-                    }
-                }
-                projects.Sort();
-                foreach (ProjectDummyHeader header in projects)
-                {
-                    LocalProjectsField.Add(header);
-                }
-            }
-        }
+        //        foreach (string projectName in projectNames)
+        //        {
+        //            if (projectName != CurrentProject.ProjectHeader.ProgramName)
+        //            {
+        //                var screenshotPath = Path.Combine(ProjectsPath, projectName, Project.ScreenshotPath);
+        //                var projectScreenshot = storage.LoadImage(screenshotPath);
+        //                var projectHeader = new ProjectDummyHeader
+        //                {
+        //                    ProjectName = projectName,
+        //                    Screenshot = projectScreenshot
+        //                };
+        //                projects.Add(projectHeader);
+        //            }
+        //        }
+        //        projects.Sort();
+        //        foreach (ProjectDummyHeader header in projects)
+        //        {
+        //            LocalProjectsField.Add(header);
+        //        }
+        //    }
+        //}
 
         public override void StoreLocalSettings()
         {
@@ -217,12 +200,12 @@ namespace Catrobat.Core
             StoreLocalSettings();
         }
 
-        public override void InitializeLocalSettings()
-        {
-            SetCurrentProject(LocalSettings.CurrentProjectName);
-        }
+        //public override void InitializeLocalSettings()
+        //{
+        //    SetCurrentProject(LocalSettings.CurrentProjectName);
+        //}
 
-        public override void RestoreDefaultProject(string projectName)
+        public static Project RestoreDefaultProjectStatic(string projectName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
@@ -240,73 +223,74 @@ namespace Catrobat.Core
 
                 var tempXmlPath = Path.Combine(projectCodeFile, Project.ProjectCodePath);
                 var xml = storage.ReadTextFile(tempXmlPath);
-                CurrentProject = new Project(xml);
 
-                CurrentProject.SetProgramName(projectName);
+                var project = new Project(xml);
+                project.SetProgramName(projectName);
+                return project;
             }
         }
 
-        public override void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
-        {
-            foreach (Script script in selectedSprite.Scripts.Scripts)
-            {
-                foreach (Brick brick in script.Bricks.Bricks)
-                {
-                    if (brick is SetCostumeBrick)
-                    {
-                        (brick as SetCostumeBrick).CostumeReference = null;
-                    }
-                }
-            }
-        }
+        //public override void CleanUpCostumeReferences(Costume deletedCostume, Sprite selectedSprite)
+        //{
+        //    foreach (Script script in selectedSprite.Scripts.Scripts)
+        //    {
+        //        foreach (Brick brick in script.Bricks.Bricks)
+        //        {
+        //            if (brick is SetCostumeBrick)
+        //            {
+        //                (brick as SetCostumeBrick).CostumeReference = null;
+        //            }
+        //        }
+        //    }
+        //}
 
-        public override void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite)
-        {
-            foreach (Script script in selectedSprite.Scripts.Scripts)
-            {
-                foreach (Brick brick in script.Bricks.Bricks)
-                {
-                    if (brick is PlaySoundBrick)
-                    {
-                        (brick as PlaySoundBrick).SoundReference = null;
-                    }
-                }
-            }
-        }
+        //public override void CleanUpSoundReferences(Sound deletedSound, Sprite selectedSprite)
+        //{
+        //    foreach (Script script in selectedSprite.Scripts.Scripts)
+        //    {
+        //        foreach (Brick brick in script.Bricks.Bricks)
+        //        {
+        //            if (brick is PlaySoundBrick)
+        //            {
+        //                (brick as PlaySoundBrick).SoundReference = null;
+        //            }
+        //        }
+        //    }
+        //}
 
-        public override void CleanUpSpriteReferences(Sprite deletedSprite)
-        {
-            foreach (Sprite sprite in CurrentProjectField.SpriteList.Sprites)
-            {
-                foreach (Script script in sprite.Scripts.Scripts)
-                {
-                    foreach (Brick brick in script.Bricks.Bricks)
-                    {
-                        if (brick is PointToBrick)
-                        {
-                            (brick as PointToBrick).PointedSpriteReference = null;
-                        }
-                    }
-                }
-            }
-        }
+        //public override void CleanUpSpriteReferences(Sprite deletedSprite)
+        //{
+        //    foreach (Sprite sprite in CurrentProjectField.SpriteList.Sprites)
+        //    {
+        //        foreach (Script script in sprite.Scripts.Scripts)
+        //        {
+        //            foreach (Brick brick in script.Bricks.Bricks)
+        //            {
+        //                if (brick is PointToBrick)
+        //                {
+        //                    (brick as PointToBrick).PointedSpriteReference = null;
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
-        public override void CleanUpVariableReferences(UserVariable deletedUserVariable, Sprite selectedSprite)
-        {
-            foreach (Script script in selectedSprite.Scripts.Scripts)
-            {
-                foreach (Brick brick in script.Bricks.Bricks)
-                {
-                    if (brick is SetVariableBrick)
-                    {
-                        (brick as SetVariableBrick).UserVariableReference = null;
-                    }
-                    else if (brick is ChangeVariableBrick)
-                    {
-                        (brick as ChangeVariableBrick).UserVariableReference = null;
-                    }
-                }
-            }
-        }
+        //public override void CleanUpVariableReferences(UserVariable deletedUserVariable, Sprite selectedSprite)
+        //{
+        //    foreach (Script script in selectedSprite.Scripts.Scripts)
+        //    {
+        //        foreach (Brick brick in script.Bricks.Bricks)
+        //        {
+        //            if (brick is SetVariableBrick)
+        //            {
+        //                (brick as SetVariableBrick).UserVariableReference = null;
+        //            }
+        //            else if (brick is ChangeVariableBrick)
+        //            {
+        //                (brick as ChangeVariableBrick).UserVariableReference = null;
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

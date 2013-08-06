@@ -17,7 +17,6 @@ namespace Catrobat.Core.Objects
 
         public DataRootObject(String xml)
         {
-            LoadFromXML(xml);
         }
 
         protected abstract void LoadFromXML(String xmlSource);

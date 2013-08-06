@@ -31,10 +31,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
         private Sprite _selectedSprite;
         private Project _selectedProject;
         private FormulaButton _formulaButton;
+        private Project _currentProject;
 
         #endregion
 
         #region Properties
+
+        public Project CurrentProject
+        {
+            get { return _currentProject; }
+            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject);}
+        }
 
         public FormulaButton FormulaButton
         {
@@ -70,8 +77,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
                 if (_selectedSprite == null) return;
 
-                foreach (var entry in CatrobatContextBase.GetContext().
-                    CurrentProject.VariableList.ObjectVariableList.ObjectVariableEntries)
+                foreach (var entry in CurrentProject.VariableList.ObjectVariableList.ObjectVariableEntries)
                 {
                     if (entry.Sprite == _selectedSprite)
                         LocalVariables = entry.VariableList.UserVariables;
@@ -149,16 +155,30 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
         #endregion
 
+        #region MessageActions
+
+        private void CurrentProjectChangedAction(GenericMessage<Project> message)
+        {
+            CurrentProject = message.Content;
+        }
+
+        #endregion
+
         public FormulaEditorViewModel()
         {
             Messenger.Default.Register<GenericMessage<Sprite>>(this, 
                 ViewModelMessagingToken.SelectedSpriteListener, SelectedSpriteChangesMessageAction);
             Messenger.Default.Register<GenericMessage<Project>>(this,
-                ViewModelMessagingToken.SelectedProjectListener, SelectedProjectChangesMessageAction);
+                ViewModelMessagingToken.CurrentProjectChangedListener, SelectedProjectChangesMessageAction);
+
+            Messenger.Default.Register<GenericMessage<Project>>(this,
+                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
 
             FormulaPartSelectedComand = new RelayCommand<UiFormula>(FormulaPartSelectedAction);
             FormulaChangedCommand = new RelayCommand(FormulaChangedAction);
         }
+
+        
 
         private void ResetViewModel() { }
     }
