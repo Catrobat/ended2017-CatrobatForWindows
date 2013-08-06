@@ -137,16 +137,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
                 formula.IsSelected = !wasSelected;
         }
 
-        private void SelectedSpriteChangesMessageAction(GenericMessage<Sprite> message)
-        {
-            SelectedSprite = message.Content;
-        }
-
-        private void SelectedProjectChangesMessageAction(GenericMessage<Project> message)
-        {
-            SelectedProject = message.Content;
-        }
-
         private void FormulaChangedAction()
         {
             if(FormulaButton != null)
@@ -162,14 +152,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             CurrentProject = message.Content;
         }
 
+        private void SelectedSpriteChangesMessageAction(GenericMessage<Sprite> message)
+        {
+            SelectedSprite = message.Content;
+        }
+
         #endregion
 
         public FormulaEditorViewModel()
         {
             Messenger.Default.Register<GenericMessage<Sprite>>(this, 
                 ViewModelMessagingToken.SelectedSpriteListener, SelectedSpriteChangesMessageAction);
-            Messenger.Default.Register<GenericMessage<Project>>(this,
-                ViewModelMessagingToken.CurrentProjectChangedListener, SelectedProjectChangesMessageAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
@@ -177,8 +170,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             FormulaPartSelectedComand = new RelayCommand<UiFormula>(FormulaPartSelectedAction);
             FormulaChangedCommand = new RelayCommand(FormulaChangedAction);
         }
-
-        
 
         private void ResetViewModel() { }
     }

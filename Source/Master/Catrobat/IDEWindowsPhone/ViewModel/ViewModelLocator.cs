@@ -29,6 +29,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         static ViewModelLocator()
         {
+            InitializeInterfaces();
+
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<MainViewModel>(true);
@@ -52,6 +54,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<ProjectNotValidViewModel>(true);
             SimpleIoc.Default.Register<FormulaEditorViewModel>(true);
             SimpleIoc.Default.Register<PlayerLauncherViewModel>(true);
+        }
+
+        private static void InitializeInterfaces()
+        {
+            // TODO: register interfaces as singeltons
         }
 
         private static void InitializeFirstTimeUse(CatrobatContextBase context)

@@ -34,7 +34,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
     {
         #region private Members
 
-        private readonly ObservableCollection<OnlineProjectHeader> _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
         private string _filterText = "";
         private bool _isLoadingOnlineProjects;
         private MessageBoxResult _dialogResult;
@@ -44,6 +43,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private ImageSource _currentProjectScreenshot;
         private ObservableCollection<ProjectDummyHeader> _localProjects;
         private CatrobatContextBase _context;
+        private ObservableCollection<OnlineProjectHeader> _onlineProjects;
 
         #endregion
 
@@ -59,9 +59,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             get
             {
-                if (_currentProject == null)
-                    return CurrentProject = Context.CurrentProject;
-
                 return _currentProject;
             }
             set
@@ -74,7 +71,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 UpdateLocalProjects();
 
                 var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
-                Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage,
+                    ViewModelMessagingToken.CurrentProjectChangedListener);
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
         }
 
@@ -110,9 +111,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public ObservableCollection<OnlineProjectHeader> OnlineProjects
         {
-            get
+            get { return _onlineProjects; }
+            set
             {
-                return _onlineProjects;
+                _onlineProjects = value; 
+                RaisePropertyChanged(() => OnlineProjects);
             }
         }
 
@@ -293,17 +296,35 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             LoadOnlineProjects(true);
         }
 
+
         private void SetCurrentProjectAction(string projectName)
         {
-            var minLoadingTime = new TimeSpan(0, 0, 0, 0, 800);
+            lock (CurrentProject)
+            {
+                if (IsActiveatingLocalProject)
+                    return;
+
+                IsActiveatingLocalProject = true;
+            }
+
+            var minLoadingTime = new TimeSpan(0, 0, 0, 0, 500);
             DateTime startTime = DateTime.UtcNow;
-            IsActiveatingLocalProject = true;
+
 
             var setActiveTask = Task.Run(() =>
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    CurrentProject =  CatrobatContext.CreateNewProjectByNameStatic(projectName);
+                    try
+                    {
+                        CurrentProject = CatrobatContext.CreateNewProjectByNameStatic(projectName);
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+
                     var minWaitindTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
 
                     if (minWaitindTimeRemaining >= new TimeSpan(0))
@@ -313,7 +334,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 });
 
             });
-
         }
 
         private void CreateNewProjectAction()
@@ -370,6 +390,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             if (Context is CatrobatContextDesign)
             {
                 LocalProjects = (Context as CatrobatContextDesign).LocalProjects;
+                OnlineProjects = (Context as CatrobatContextDesign).OnlineProjects;
             }
             else
             {
@@ -386,6 +407,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public MainViewModel()
         {
+            _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
+
+
             RenameCurrentProjectCommand = new RelayCommand(RenameCurrentProjectAction);
             DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
             CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
@@ -413,16 +437,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void LoadOnlineProjectsCallback(List<OnlineProjectHeader> projects, bool append)
         {
-            if (!append)
+            lock (OnlineProjects)
             {
-                _onlineProjects.Clear();
-            }
+                if (!append)
+                {
+                    _onlineProjects.Clear();
+                }
 
-            IsLoadingOnlineProjects = false;
+                IsLoadingOnlineProjects = false;
 
-            foreach (OnlineProjectHeader header in projects)
-            {
-                _onlineProjects.Add(header);
+                foreach (OnlineProjectHeader header in projects)
+                {
+                    _onlineProjects.Add(header);
+                }
             }
         }
 
@@ -489,12 +516,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public void LoadOnlineProjects(bool append)
         {
-            if (!IsLoadingOnlineProjects)
-            {
-                IsLoadingOnlineProjects = true;
-                ServerCommunication.LoadOnlineProjects(append, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
-            }
+            IsLoadingOnlineProjects = true;
 
+            if(!append)
+                _onlineProjects.Clear();
+
+            ServerCommunication.LoadOnlineProjects(append, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
         }
 
         private void CheckTokenEvent(bool registered)
@@ -531,7 +558,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
         }
 
-        
+
 
         private void UpdateLocalProjects()
         {
