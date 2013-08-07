@@ -89,7 +89,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         public static void LoadContext()
         {
-
             if (ViewModelBase.IsInDesignModeStatic)
             {
                 _context = new CatrobatContextDesign();
