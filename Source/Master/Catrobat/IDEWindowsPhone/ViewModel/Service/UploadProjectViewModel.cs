@@ -3,6 +3,7 @@ using System.Threading;
 using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.Misc.ServerCommunication;
+using Catrobat.Core.Objects;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
@@ -20,10 +21,28 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
         private string _projectName;
         private string _projectDescription;
         private CatrobatContextBase _context;
+        private Project _currentProject;
 
         #endregion
 
         #region Properties
+
+        public Project CurrentProject
+        {
+            get
+            {
+                return _currentProject;
+            }
+            set
+            {
+                if (value == _currentProject) return;
+
+                _currentProject = value;
+
+                RaisePropertyChanged(() => CurrentProject);
+            }
+        }
+
 
         public CatrobatContextBase Context
         {
@@ -92,13 +111,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
         private void InitializeAction()
         {
             if (Context != null)
-                ProjectName = Context.CurrentProject.ProjectHeader.ProgramName;
+                ProjectName = CurrentProject.ProjectHeader.ProgramName;
             else
                 ProjectName = "";
         }
         private void UploadAction()
         {
-            _catrobatContext.CurrentProject.ProjectHeader.ProgramName = ProjectName;
+            CurrentProject.ProjectHeader.ProgramName = ProjectName;
 
             ServerCommunication.UploadProject(_projectName, _projectDescription,
                                               Context.CurrentUserEmail,
@@ -133,6 +152,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
         {
             Context = message.Content;
         }
+
+        private void CurrentProjectChangedChangedAction(GenericMessage<Project> message)
+        {
+            CurrentProject = message.Content;
+        }
+
         #endregion
 
         public UploadProjectViewModel()
@@ -144,6 +169,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedAction);
+
+            Messenger.Default.Register<GenericMessage<Project>>(this,
+                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedChangedAction);
         }
 
 

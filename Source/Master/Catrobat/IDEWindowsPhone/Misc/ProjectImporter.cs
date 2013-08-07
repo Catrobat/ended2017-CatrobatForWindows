@@ -139,13 +139,15 @@ namespace Catrobat.IDEWindowsPhone.Misc
                 {
                     if (setActive)
                     {
-                        CatrobatContext.CurrentProject = Core.CatrobatContext.CreateNewProjectByNameStatic(newProjectName);
+                        var newProject = Core.CatrobatContext.CreateNewProjectByNameStatic(newProjectName);
+
+                        var projectChangedMessage = new GenericMessage<Project>(newProject);
+                        Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
                     }
                     else
                     {
                         var localProjectsChangedMessage = new MessageBase();
-                        Messenger.Default.Send<MessageBase>(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
-                        //CatrobatContext.UpdateLocalProjects();
+                        Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
                     }
                 });
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
@@ -10,8 +11,31 @@ namespace Catrobat.Core
 {
     public sealed class CatrobatContextDesign : CatrobatContextBase
     {
+        #region Private members
+
+        private Project _currentProject;
+
+        #endregion
+
+        #region Properties
+
+        public Project CurrentProject
+        {
+            get { return _currentProject; }
+            set
+            {
+                if (_currentProject == value) return;
+
+                _currentProject = value;
+                RaisePropertyChanged(() => CurrentProject);
+            }
+        }
+
         public ObservableCollection<ProjectDummyHeader> LocalProjects { get; protected set; }
         public ObservableCollection<OnlineProjectHeader> OnlineProjects { get; protected set; }
+
+        #endregion
+
 
         public CatrobatContextDesign()
         {
@@ -155,5 +179,6 @@ namespace Catrobat.Core
             OnlineProjects.Add(project2);
             OnlineProjects.Add(project3);
         }
+
     }
 }

@@ -69,6 +69,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
                 RaisePropertyChanged(() => CurrentProject);
                 UpdateLocalProjects();
+                ProjectHolder.Project = _currentProject;
 
                 var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
                 Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage,

@@ -61,7 +61,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             // TODO: register interfaces as singeltons
         }
 
-        private static void InitializeFirstTimeUse(CatrobatContextBase context)
+        private static Project InitializeFirstTimeUse(CatrobatContextBase context)
         {
             Project currentProject = null;
             var localSettings = CatrobatContext.RestoreLocalSettingsStatic();
@@ -83,20 +83,22 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 currentProject = CatrobatContext.CreateNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
             }
 
-            var message = new GenericMessage<Project>(currentProject);
-            Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.CurrentProjectChangedListener);
+            return currentProject;
         }
 
         public static void LoadContext()
         {
+            Project currentProject = null;
+
             if (ViewModelBase.IsInDesignModeStatic)
             {
                 _context = new CatrobatContextDesign();
+                currentProject = ((CatrobatContextDesign)_context).CurrentProject;
             }
             else
             {
                 _context = new CatrobatContext();
-                InitializeFirstTimeUse(_context);
+                currentProject = InitializeFirstTimeUse(_context);
             }
 
             if (_context.LocalSettings.CurrentLanguageString == null)
@@ -115,6 +117,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
             var message2 = new GenericMessage<CatrobatContextBase>(_context);
             Messenger.Default.Send<GenericMessage<CatrobatContextBase>>(message2, ViewModelMessagingToken.ContextListener);
+
+            var message = new GenericMessage<Project>(currentProject);
+            Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.CurrentProjectChangedListener);
         }
 
         public static void SaveContext(string currentProjectName)

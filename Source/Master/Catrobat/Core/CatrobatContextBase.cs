@@ -61,18 +61,18 @@ namespace Catrobat.Core
             }
         }
 
-        public Project CurrentProject
-        {
-            get { return _currentProject; }
-            set
-            {
-                if (_currentProject == value) return;
+        //public Project CurrentProject
+        //{
+        //    get { return _currentProject; }
+        //    set
+        //    {
+        //        if (_currentProject == value) return;
 
-                _currentProject = value;
-                ProjectHolder.Project = _currentProject;
-                RaisePropertyChanged();
-            }
-        }
+        //        _currentProject = value;
+        //        ProjectHolder.Project = _currentProject;
+        //        RaisePropertyChanged();
+        //    }
+        //}
 
         #endregion
 

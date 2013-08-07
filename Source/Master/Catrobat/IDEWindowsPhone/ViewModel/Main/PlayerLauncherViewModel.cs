@@ -1,4 +1,5 @@
 ﻿using Catrobat.Core;
+using Catrobat.Core.Objects;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -10,16 +11,26 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
     {
         #region private Members
 
-        private CatrobatContextBase _context;
+        private Project _currentProject;
 
         #endregion
 
         #region Properties
 
-        public CatrobatContextBase Context
+        public Project CurrentProject
         {
-            get { return _context; }
-            set { _context = value; RaisePropertyChanged(() => Context);}
+            get
+            {
+                return _currentProject;
+            }
+            set
+            {
+                if (value == _currentProject) return;
+
+                _currentProject = value;
+
+                RaisePropertyChanged(() => CurrentProject);
+            }
         }
 
         #endregion
@@ -37,17 +48,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         #endregion
 
         #region MessageActions
-        private void ContextChangedAction(GenericMessage<CatrobatContextBase> message)
+
+        private void CurrentProjectChangedChangedAction(GenericMessage<Project> message)
         {
-            Context = message.Content;
+            CurrentProject = message.Content;
         }
+
         #endregion
 
         public PlayerLauncherViewModel()
         {
 
-            Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
-                 ViewModelMessagingToken.ContextListener, ContextChangedAction);
+            Messenger.Default.Register<GenericMessage<Project>>(this,
+                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedChangedAction);
         }
 
 

@@ -18,8 +18,8 @@ namespace Catrobat.TestsCommon.SampleData
             string xml = null;
             using (var resourceLoader = ResourceLoader.CreateResourceLoader())
             {
-                Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, Path + sampleName + ".xml");
-                StreamReader reader = new StreamReader(stream);
+                var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, Path + sampleName + ".xml");
+                var reader = new StreamReader(stream);
 
                 xml = reader.ReadToEnd();
                 reader.Close();
@@ -34,7 +34,7 @@ namespace Catrobat.TestsCommon.SampleData
         {
             using (var resourceLoader = ResourceLoader.CreateResourceLoader())
             {
-                Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, Path + sampleName);
+                var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, Path + sampleName);
                 CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
                 stream.Close();
                 stream.Dispose();
