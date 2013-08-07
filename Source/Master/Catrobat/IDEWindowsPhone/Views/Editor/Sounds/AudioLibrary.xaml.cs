@@ -105,21 +105,21 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
         //TODO: Write UI Test
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var sound = new Sound(TxtName.Text);
+            //var sound = new Sound(TxtName.Text);
 
-            var absoluteFileName = Path.Combine(CatrobatContextBase.GetContext().CurrentProject.BasePath, "sounds", sound.FileName);
+            //var absoluteFileName = Path.Combine(CatrobatContextBase.GetContext().CurrentProject.BasePath, "sounds", sound.FileName);
 
-            using (var storage = StorageSystem.GetStorage())
-            {
-                using (var stream = storage.OpenFile(absoluteFileName, StorageFileMode.Create, StorageFileAccess.Write))
-                {
-                    //TODO: write song to isolated storage
-                }
-            }
+            //using (var storage = StorageSystem.GetStorage())
+            //{
+            //    using (var stream = storage.OpenFile(absoluteFileName, StorageFileMode.Create, StorageFileAccess.Write))
+            //    {
+            //        //TODO: write song to isolated storage
+            //    }
+            //}
 
-            _editorViewModel.SelectedSprite.Sounds.Sounds.Add(sound);
-            Navigation.RemoveBackEntry();
-            Navigation.NavigateBack();
+            //_editorViewModel.SelectedSprite.Sounds.Sounds.Add(sound);
+            //Navigation.RemoveBackEntry();
+            //Navigation.NavigateBack();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

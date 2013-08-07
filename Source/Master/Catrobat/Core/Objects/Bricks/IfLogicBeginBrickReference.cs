@@ -47,7 +47,10 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadReference()
         {
-            IfLogicBeginBrick = ReferenceHelper.GetReferenceObject(this, _reference) as IfLogicBeginBrick;
+            if(IfLogicBeginBrick == null)
+                IfLogicBeginBrick = ReferenceHelper.GetReferenceObject(this, _reference) as IfLogicBeginBrick;
+            if (string.IsNullOrEmpty(_reference))
+                _reference = ReferenceHelper.GetReferenceString(this);
         }
 
         public DataObject Copy()

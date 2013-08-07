@@ -782,4 +782,31 @@ The program is licensed under the MS-RL Lizenz.</value>
   <data name="Main_VersionIsNotSupported" xml:space="preserve">
     <value>project version is not supported</value>
   </data>
+  <data name="Brick_IfLogicEnd" xml:space="preserve">
+    <value>sonst Ende</value>
+  </data>
+  <data name="Brick_IfLogicElse" xml:space="preserve">
+    <value>sonst</value>
+  </data>
+  <data name="Brick_IfLogicBeginTrue" xml:space="preserve">
+    <value>wahr ist, dann</value>
+  </data>
+  <data name="Brick_IfLogicBegin" xml:space="preserve">
+    <value>Falls</value>
+  </data>
+  <data name="Brick_ChangeVariableBy" xml:space="preserve">
+    <value>um</value>
+  </data>
+  <data name="Brick_ChangeVariable" xml:space="preserve">
+    <value>Ändere Variable</value>
+  </data>
+  <data name="Brick_SetVariableTo" xml:space="preserve">
+    <value>auf</value>
+  </data>
+  <data name="Brick_SetVariable" xml:space="preserve">
+    <value>Setze Variable</value>
+  </data>
+  <data name="Brick_CategoryVariables" xml:space="preserve">
+    <value>Variablen</value>
+  </data>
 </root>

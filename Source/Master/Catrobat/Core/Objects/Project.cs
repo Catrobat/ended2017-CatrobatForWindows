@@ -32,7 +32,7 @@ namespace Catrobat.Core.Objects
                     using (var storage = StorageSystem.GetStorage())
                     {
                         _projectScreenshot =
-                            storage.LoadImage(CatrobatContext.GetContext().CurrentProject.BasePath + "/screenshot.png");
+                            storage.LoadImage(BasePath + "/screenshot.png");
                     }
                 }
 
@@ -148,7 +148,7 @@ namespace Catrobat.Core.Objects
 
         public string BasePath
         {
-            get { return "Projects/" + ProjectHeader.ProgramName; }
+            get { return CatrobatContextBase.ProjectsPath + "/" + ProjectHeader.ProgramName; }
         }
 
         #endregion
@@ -163,7 +163,8 @@ namespace Catrobat.Core.Objects
             : base(xmlSource)
         {
             _broadcastMessages = new ObservableCollection<string>();
-            LoadBroadcastMessages();
+            LoadFromXML(xmlSource);
+
             PreloadImages();
         }
 
@@ -185,12 +186,14 @@ namespace Catrobat.Core.Objects
 
             var project = Document.Element("program");
             _projectHeader = new ProjectHeader(project.Element("header"));
+
             _spriteList = new SpriteList();
             _spriteList.LoadFromXML(project.Element("objectList"));
-            _variableList = new VariableList(project.Element("variables"));
-            _variableList.LoadReference();
 
-            _spriteList.LoadReference();
+            _variableList = new VariableList(project.Element("variables"));
+            
+            LoadReference();
+            LoadBroadcastMessages();
         }
 
         internal override XDocument CreateXML()
@@ -210,7 +213,13 @@ namespace Catrobat.Core.Objects
             return Document;
         }
 
-        private void LoadBroadcastMessages()
+        internal void LoadReference()
+        {
+            _variableList.LoadReference();
+            _spriteList.LoadReference();
+        }
+
+        internal void LoadBroadcastMessages()
         {
             foreach (Sprite sprite in _spriteList.Sprites)
             {

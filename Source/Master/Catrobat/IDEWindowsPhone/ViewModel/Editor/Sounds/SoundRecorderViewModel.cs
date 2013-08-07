@@ -20,6 +20,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
     {
         #region Private Members
 
+        private Project _currentProject;
         private Sprite _receivedSelectedSprite;
         private Recorder _recorder;
         private Thread _recordTimeUpdateThread;
@@ -45,6 +46,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         #region Properties
 
+        public Project CurrentProject
+        {
+            get { return _currentProject; }
+            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+        }
         public bool IsRecording
         {
             get { return _isRecording; }
@@ -358,7 +364,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
         private void SaveNameChosenAction()
         {
             var sound = new Sound(SoundName);
-            var path = CatrobatContextBase.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
+            var path = CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
 
             using (var storage = StorageSystem.GetStorage())
             {
@@ -390,11 +396,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             Navigation.NavigateBack();
         }
 
-        private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
-        {
-            _receivedSelectedSprite = message.Content;
-        }
-
         private void ResetViewModelAction()
         {
             ResetViewModel();
@@ -402,6 +403,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         #endregion
 
+
+        #region MessageActions
+
+        private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
+        {
+            _receivedSelectedSprite = message.Content;
+        }
+
+        private void CurrentProjectChangedAction(GenericMessage<Project> message)
+        {
+            CurrentProject = message.Content;
+        }
+        #endregion
         public SoundRecorderViewModel()
         {
             StartRecordingCommand = new RelayCommand(StartRecordingAction);
@@ -413,7 +427,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             CancelNameChosenCommand = new RelayCommand(CancelNameChosenAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
+            Messenger.Default.Register<GenericMessage<Sprite>>(this, 
+                ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
+
+            Messenger.Default.Register<GenericMessage<Project>>(this,
+                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
 
             if (!IsInDesignMode)
             {

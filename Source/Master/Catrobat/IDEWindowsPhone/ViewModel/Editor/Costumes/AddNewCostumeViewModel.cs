@@ -239,7 +239,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                 ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
-                ViewModelMessagingToken.SelectedProjectListener, CurrentProjectChangedMessageAction);
+                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
 
             InitImageSizes();
             if (IsInDesignMode)

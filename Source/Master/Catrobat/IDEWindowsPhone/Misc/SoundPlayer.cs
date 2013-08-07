@@ -24,11 +24,17 @@ namespace Catrobat.IDEWindowsPhone.Misc
         public SoundStateChanged SoundStateChanged;
         public SoundFinished SoundFinished;
 
+        private string _currentProjectBasePath;
         private SoundEffectInstance _soundEffect;
         private Thread _checkSoundThread;
         private SoundState _previousState;
 
         private bool _aborted = false;
+
+        public SoundPlayer(string currentProjectBasePath)
+        {
+            _currentProjectBasePath = currentProjectBasePath;
+        }
 
         public void SetSound(Sound sound)
         {
@@ -39,7 +45,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
             _previousState = SoundState.Stopped;
 
-            var path = CatrobatContextBase.GetContext().CurrentProject.BasePath + "/" + Project.SoundsPath + "/" +
+            var path = _currentProjectBasePath + "/" + Project.SoundsPath + "/" +
                        sound.FileName;
 
             using (var storage = StorageSystem.GetStorage())

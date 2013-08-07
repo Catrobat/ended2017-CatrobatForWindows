@@ -16,7 +16,7 @@ namespace Catrobat.IDEWindowsPhone.Converters
             var settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
             var theme = value as Theme;
 
-            if (theme != null && settingsViewModel.ActiveTheme == value)
+            if (theme != null && settingsViewModel.ThemeChooser.SelectedTheme == value)
             {
                 return Application.Current.Resources["PhoneAccentBrush"];
             }

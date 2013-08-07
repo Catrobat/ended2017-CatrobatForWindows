@@ -50,7 +50,10 @@ namespace Catrobat.Core.Objects.Sounds
 
         internal override void LoadReference()
         {
-            Sound = ReferenceHelper.GetReferenceObject(this, _reference) as Sound;
+            if(Sound == null)
+                Sound = ReferenceHelper.GetReferenceObject(this, _reference) as Sound;
+            if (string.IsNullOrEmpty(_reference))
+                _reference = ReferenceHelper.GetReferenceString(this);
         }
 
         public DataObject Copy()
@@ -66,6 +69,9 @@ namespace Catrobat.Core.Objects.Sounds
             var otherReference = other as SoundReference;
 
             if (otherReference == null)
+                return false;
+
+            if (Sound.Name != otherReference.Sound.Name)
                 return false;
 
             if (_reference != otherReference._reference)

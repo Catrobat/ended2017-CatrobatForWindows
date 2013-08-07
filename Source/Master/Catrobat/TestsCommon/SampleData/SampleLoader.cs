@@ -9,58 +9,37 @@ using Catrobat.TestsCommon.Misc.Storage;
 
 namespace Catrobat.TestsCommon.SampleData
 {
-  public class SampleLoader
-  {
-    private static string path = BasePathHelper.GetSampleProjectsPath();
-
-    public static Project LoadSampleXML(string sampleName)
+    public class SampleLoader
     {
-      String xml = null;
-      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
-      {
-        Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName + ".xml");
-        StreamReader reader = new StreamReader(stream);
+        private static readonly string Path = BasePathHelper.GetSampleProjectsPath();
 
-        xml = reader.ReadToEnd();
-        reader.Close();
-        reader.Dispose();
-        stream.Close();
-        stream.Dispose();
-      }
-      return new Project(xml);
+        public static XDocument LoadSampleXDocument(string sampleName)
+        {
+            string xml = null;
+            using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+            {
+                Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, Path + sampleName + ".xml");
+                StreamReader reader = new StreamReader(stream);
+
+                xml = reader.ReadToEnd();
+                reader.Close();
+                reader.Dispose();
+                stream.Close();
+                stream.Dispose();
+            }
+            return XDocument.Load(new StringReader(xml));
+        }
+
+        public static Project LoadSampleProject(string sampleName, string sampleProjectName)
+        {
+            using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+            {
+                Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, Path + sampleName);
+                CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
+                stream.Close();
+                stream.Dispose();
+            }
+            return CatrobatContext.CreateNewProjectByNameStatic(sampleProjectName);
+        }
     }
-
-    public static XDocument LoadSampleXDocument(string sampleName)
-    {
-      String xml = null;
-      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
-      {
-        Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName + ".xml");
-        StreamReader reader = new StreamReader(stream);
-
-        xml = reader.ReadToEnd();
-        reader.Close();
-        reader.Dispose();
-        stream.Close();
-        stream.Dispose();
-      }
-      return XDocument.Load(new StringReader(xml));
-    }
-
-    public static CatrobatContext LoadSampleProject(string sampleName, string sampleProjectName)
-    {
-      var catrobatContext = new CatrobatContext();
-      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
-      {
-        Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path + sampleName);
-        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
-        stream.Close();
-        stream.Dispose();
-      }
-      catrobatContext.SetCurrentProject(sampleProjectName);
-      catrobatContext.CurrentProject.SetProgramName(sampleProjectName);
-
-      return catrobatContext;
-    }
-  }
 }

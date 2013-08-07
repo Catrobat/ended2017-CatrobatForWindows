@@ -13,8 +13,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True"
-    xmlns:local="clr-namespace:Catrobat.Paint.View"
-    xmlns:resources="clr-namespace:Catrobat.IDECommon.Resources;assembly=Catrobat.IDECommon">
+    xmlns:local="clr-namespace:Catrobat.Paint.View">
 
 
 
@@ -43,7 +42,9 @@
     <local:MvvmView1 Margin="36,70,36,164"/>
 
     <TextBlock Text="{Binding Path=Resources.Test1, Source={StaticResource Locator}}" Margin="161,0,161,516"/>
-    <Button Content="ColorPicker" Command="{Binding NavigateColorPickerCommand}" HorizontalAlignment="Left" Margin="166,639,0,0" VerticalAlignment="Top"/>
+    <Button Content="PaintingArea" Command="{Binding NavigatePaintingAreaCommand}" HorizontalAlignment="Left" Margin="60,639,0,0" VerticalAlignment="Top"/>
+
+    <Button Content="ColorPicker" Command="{Binding NavigateColorPickerCommand}" HorizontalAlignment="Left" Margin="276,639,0,0" VerticalAlignment="Top"/>
 
 
 

@@ -39,7 +39,11 @@ namespace Catrobat.Paint.Data
             get { return _selectedColor; }
             set { _selectedColor = value; }
         }
-
+        public Color SelectedColorAsColor
+        {
+            get { return _selectedColor.Color; }
+            set { _selectedColor.Color = value; }
+        }
         #endregion
     }
 }

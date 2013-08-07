@@ -50,7 +50,10 @@ namespace Catrobat.Core.Objects
 
         internal override void LoadReference()
         {
-            Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as Sprite;
+            if(Sprite == null)
+                Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as Sprite;
+            if (string.IsNullOrEmpty(_reference))
+                _reference = ReferenceHelper.GetReferenceString(this);
         }
 
         public DataObject Copy()
@@ -68,7 +71,13 @@ namespace Catrobat.Core.Objects
             if (otherReference == null)
                 return false;
 
-            if (_reference != otherReference._reference)
+            if (Sprite.Name != otherReference.Sprite.Name)
+                return false;
+            if (Sprite.Costumes.Costumes.Count != otherReference.Sprite.Costumes.Costumes.Count)
+                return false;
+            if (Sprite.Sounds.Sounds.Count != otherReference.Sprite.Sounds.Sounds.Count)
+                return false;
+            if (Sprite.Scripts.Scripts.Count != otherReference.Sprite.Scripts.Scripts.Count)
                 return false;
 
             return true;

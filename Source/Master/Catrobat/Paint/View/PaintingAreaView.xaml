@@ -1,0 +1,67 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Catrobat.Paint.View.PaintingAreaView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Catrobat.Paint.ViewModel"
+    xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+  <phone:PhoneApplicationPage.Resources>
+    <ResourceDictionary>
+      <vm:ViewModelLocator x:Key="Locator" />
+    </ResourceDictionary>
+  </phone:PhoneApplicationPage.Resources>
+
+  <phone:PhoneApplicationPage.DataContext>
+    <Binding Source="{StaticResource Locator}" Path="PaintingArea" />
+  </phone:PhoneApplicationPage.DataContext>
+
+
+
+  <Canvas>
+    <TextBlock Text="{Binding Path=Resources.PaintAreaTitle, Source={StaticResource Locator}}" FontWeight="Bold" Margin="50,30,0,0" />
+    <Rectangle Height="694" Width="460" Margin="0,0,0,0" Stroke="White" Canvas.Left="10" Canvas.Top="64" />
+    <InkPresenter x:Name="InkPresenter"  Height="694" Width="460"
+                  Strokes="{Binding Strokes}"
+              MouseLeftButtonDown="InkPresenter_MouseLeftButtonDown" 
+              LostMouseCapture="InkPresenter_LostMouseCapture" 
+              MouseMove="InkPresenter_MouseMove" 
+                  MouseLeftButtonUp="InkPresenter_OnMouseLeftButtonUp"
+              Background="Transparent" Opacity="1" Canvas.Left="10" Canvas.Top="64" />
+  </Canvas>
+
+  <phone:PhoneApplicationPage.ApplicationBar>
+    <shell:ApplicationBar>
+      <shell:ApplicationBarIconButton IconUri="/Assets/ApplicationBar/Dark/appbar.undo.curve.png" Text="undo"/>
+      <shell:ApplicationBarIconButton IconUri="/Assets/ApplicationBar/Dark/appbar.redo.curve.png" Text="redo"/>
+      <shell:ApplicationBar.MenuItems>
+        <shell:ApplicationBarMenuItem Text="clear"/>
+      </shell:ApplicationBar.MenuItems>
+    </shell:ApplicationBar>
+  </phone:PhoneApplicationPage.ApplicationBar>
+
+  <i:Interaction.Behaviors>
+    <abu:AppBarPropertyBinder />
+    <abu:AppBarItemCommand Id="undo"
+                              Text="{Binding Path=Resources.Undo, Source={StaticResource Locator}}"
+                              Command="{Binding UndoCommand}" />
+    <abu:AppBarItemCommand Id="redo"
+                              Text="{Binding Path=Resources.Redo, Source={StaticResource Locator}}"
+                              Command="{Binding RedoCommand}"/>
+    <abu:AppBarItemCommand Id="clear" Command="{Binding ClearCommand}" 
+                        Text="{Binding Path=Resources.Clear, Source={StaticResource Locator}}" Type="MenuItem" />
+  </i:Interaction.Behaviors>
+
+
+
+</phone:PhoneApplicationPage>

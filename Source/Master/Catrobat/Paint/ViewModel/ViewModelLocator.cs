@@ -59,11 +59,12 @@ namespace Catrobat.Paint.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ColorPickerViewModel>();
+            SimpleIoc.Default.Register<PaintingAreaViewModel>();
         }
 
         private void LocalizedStringsOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            RaisePropertyChanged(propertyName: "Resources");
+            RaisePropertyChanged("Resources");
         }
 
         private readonly LocalizedStrings _localizedStrings;
@@ -88,6 +89,14 @@ namespace Catrobat.Paint.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<ColorPickerViewModel>();
+            }
+        }
+
+        public PaintingAreaViewModel PaintingArea
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<PaintingAreaViewModel>();
             }
         }
 

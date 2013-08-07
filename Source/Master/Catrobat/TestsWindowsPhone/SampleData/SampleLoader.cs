@@ -58,7 +58,7 @@ namespace Catrobat.TestsWindowsPhone.SampleData
         stream.Dispose();
       }
 
-      catrobatContext.SetCurrentProject(sampleProjectName);
+      catrobatContext.CurrentProject = CatrobatContext.CreateNewProjectByNameStatic(sampleProjectName);
       catrobatContext.CurrentProject.SetProgramName(sampleProjectName);
 
       return catrobatContext;

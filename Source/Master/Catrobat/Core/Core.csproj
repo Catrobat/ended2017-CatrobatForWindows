@@ -50,7 +50,6 @@
     <Compile Include="IContextHolder.cs" />
     <Compile Include="Misc\Helpers\PlatformInformationHelper.cs" />
     <Compile Include="Misc\Helpers\FormatHelper.cs" />
-    <Compile Include="Misc\Helpers\IApplicationInformation.cs" />
     <Compile Include="Misc\Helpers\FileNameGenerator.cs" />
     <Compile Include="Misc\Helpers\FormUpload.cs" />
     <Compile Include="Misc\Helpers\ICulture.cs" />

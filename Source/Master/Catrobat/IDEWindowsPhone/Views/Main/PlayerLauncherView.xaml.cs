@@ -14,7 +14,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
     public partial class PlayerLauncherView : PhoneApplicationPage
     {
         public static bool IsNavigateBack = true;
-
+        private readonly PlayerLauncherViewModel _viewModel = ServiceLocator.Current.GetInstance<PlayerLauncherViewModel>();
         public PlayerLauncherView()
         {
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
                 try
                 {
-                    CatrobatContextBase.GetContext().SetCurrentProject(projectName);
+                    _viewModel.Context.CurrentProject = CatrobatContext.CreateNewProjectByNameStatic(projectName);
                 }
                 catch (Exception)
                 {

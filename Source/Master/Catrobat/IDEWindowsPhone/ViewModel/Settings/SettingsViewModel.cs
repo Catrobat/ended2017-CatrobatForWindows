@@ -1,11 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
-using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -13,7 +11,7 @@ using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.Views.Settings;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using IDEWindowsPhone;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
 {
@@ -21,12 +19,18 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
     {
         #region Private Members
 
-        private readonly ThemeChooser _themeChooser = (App.Current.Resources["ThemeChooser"] as ThemeChooser);
+        private ThemeChooser _themeChooser;
         private readonly MemoryMonitor _memoryMonitor;
 
         #endregion
 
         #region Properties
+
+        public ThemeChooser ThemeChooser
+        {
+            get { return _themeChooser; }
+            set { _themeChooser = value; RaisePropertyChanged(() => ThemeChooser); }
+        }
 
         public bool ShowMemoryMonitorOption
         {
@@ -48,12 +52,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
             }
         }
 
-        public Theme ActiveTheme
-        {
-            get { return _themeChooser.SelectedTheme; }
-            set { _themeChooser.SelectedTheme = value; }
-        }
-
         public ObservableCollection<Theme> AvailableThemes
         {
             get { return _themeChooser.Themes; }
@@ -73,7 +71,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
                 Thread.CurrentThread.CurrentCulture = value;
                 Thread.CurrentThread.CurrentUICulture = value;
 
-                ((LocalizedStrings) Application.Current.Resources["LocalizedStrings"]).Reset();
+                ((LocalizedStrings)Application.Current.Resources["LocalizedStrings"]).Reset();
                 RaisePropertyChanged(() => CurrentCulture);
             }
         }
@@ -101,23 +99,32 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
 
         private void ShowDesignSettingsAction()
         {
-            Navigation.NavigateTo(typeof (SettingsThemeView));
+            Navigation.NavigateTo(typeof(SettingsThemeView));
         }
 
         private void ShowBrickSettingsAction()
         {
-            Navigation.NavigateTo(typeof (SettingsBrickView));
+            Navigation.NavigateTo(typeof(SettingsBrickView));
         }
 
         private void ShowLanguageSettingsAction()
         {
-            Navigation.NavigateTo(typeof (SettingsLanguageView));
+            Navigation.NavigateTo(typeof(SettingsLanguageView));
         }
 
         private void ActiveThemeChangedAction(Theme newTheme)
         {
-            ActiveTheme = newTheme;
+            ThemeChooser.SelectedTheme = newTheme;
             Navigation.NavigateBack();
+        }
+
+        #endregion
+
+        #region MessageActions
+
+        private void ThemeChooserInitializedMessageAction(GenericMessage<ThemeChooser> message)
+        {
+            ThemeChooser = message.Content;
         }
 
         #endregion
@@ -129,16 +136,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
             ShowLanguageSettingsCommand = new RelayCommand(ShowLanguageSettingsAction);
             ActiveThemeChangedCommand = new RelayCommand<Theme>(ActiveThemeChangedAction);
 
-            _themeChooser.PropertyChanged += ThemeChooserOnPropertyChanged;
             _memoryMonitor = Debugger.IsAttached ? new MemoryMonitor(true, false) : new MemoryMonitor(false, false);
-        }
 
-        private void ThemeChooserOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            if (propertyChangedEventArgs.PropertyName == PropertyNameHelper.GetPropertyNameFromExpression(() => _themeChooser.SelectedTheme))
-            {
-                RaisePropertyChanged(() => ActiveTheme);
-            }
+            Messenger.Default.Register<GenericMessage<ThemeChooser>>(this,
+                 ViewModelMessagingToken.ThemeChooserListener, ThemeChooserInitializedMessageAction);
         }
     }
 }

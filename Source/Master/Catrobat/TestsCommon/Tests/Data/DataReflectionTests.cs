@@ -12,7 +12,7 @@ namespace Catrobat.TestsCommon.Tests.Data
     [TestClass]
     public class DataReflectionTests
     {
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
         {
             TestHelper.InitializeTests();

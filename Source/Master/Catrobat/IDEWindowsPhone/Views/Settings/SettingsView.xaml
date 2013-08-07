@@ -19,11 +19,11 @@
       <Button Command="{Binding ShowLanguageSettingsCommand}" BorderThickness="0">
         <Button.Content>
           <StackPanel Name="StackPanelSettingsLanguage" Margin="10 0 10 10" >
-            <TextBlock Grid.Row="0" Margin="0 0 10 10"
+            <TextBlock Margin="0 0 10 10"
                        Text="{Binding Resources.Main_ListLanguage, 
                        Source={StaticResource LocalizedStrings}}" 
                        Style="{StaticResource PhoneTextLargeStyle}" />
-            <TextBlock Grid.Row="1" Margin="0 -5 10 10" 
+            <TextBlock Margin="0 -5 10 10" 
                        Text="{Binding CurrentCulture.NativeName}" 
                        Style="{StaticResource PhoneTextNormalStyle}"/>
           </StackPanel>
@@ -44,15 +44,17 @@
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1.5*" />
               </Grid.ColumnDefinitions>
-              <Image Grid.Column="0" Width="150" Height="150" x:Name="ImgDesign" Margin="10" Source="{Binding ActiveTheme.CroppedBackground}" />
+              <Image Grid.Column="0" Width="150" Height="150" x:Name="ImgDesign" Margin="10" 
+                     Source="{Binding ThemeChooser.SelectedTheme.CroppedBackground}" />
               <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                   <RowDefinition Height="Auto"/>
                   <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Margin="10 0 0 0" Grid.Row="0" Text="{ Binding Source={StaticResource LocalizedStrings}, 
-                Path=Main.SettingsTheme}" />
+                <TextBlock Margin="10 0 0 0" Grid.Row="0" 
+                           Text="{ Binding Resources.Main_SettingsTheme, 
+                           Source={StaticResource LocalizedStrings}}" />
 
                 <Grid Grid.Row="1" Margin="10">
                   <Grid Margin="0">
@@ -76,13 +78,13 @@
                       <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"
-                        Background="{Binding ActiveTheme.AccentColor1}" 
+                        Background="{Binding ThemeChooser.SelectedTheme.AccentColor1}" 
                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                     <Grid Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="3"
-                        Background="{Binding ActiveTheme.AccentColor2}" 
+                        Background="{Binding ThemeChooser.SelectedTheme.AccentColor2}" 
                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                     <Grid Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="3"
-                        Background="{Binding ActiveTheme.AccentColor3}" 
+                        Background="{Binding ThemeChooser.SelectedTheme.AccentColor3}" 
                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                   </Grid>
                 </Grid>

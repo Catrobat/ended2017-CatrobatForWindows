@@ -12,6 +12,9 @@
         BroadcastMessageListener,
         ScriptBrickCollectionListener,
         SelectedBrickListener,
-        SelectedProjectListener
+        CurrentProjectChangedListener,
+        LocalProjectsChangedListener,
+        ContextListener,
+        ThemeChooserListener
     }
 }

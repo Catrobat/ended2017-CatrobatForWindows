@@ -19,14 +19,28 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private string _projectName;
         private string _projectDescription;
+        private CatrobatContextBase _context;
 
         #endregion
 
         #region Properties
 
+        public CatrobatContextBase Context
+        {
+            get { return _context; }
+            set
+            {
+                _context = value; 
+                RaisePropertyChanged(() => Context);
+            }
+        }
+
         public string ProjectName
         {
-            get { return _projectName; }
+            get
+            {
+                return _projectName;
+            }
             set
             {
                 if (_projectName != value)
@@ -55,6 +69,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         #region Commands
 
+        public RelayCommand InitializeCommand { get; private set; }
         public RelayCommand UploadCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
@@ -74,14 +89,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         #region Actions
 
+        private void InitializeAction()
+        {
+            if (Context != null)
+                ProjectName = Context.CurrentProject.ProjectHeader.ProgramName;
+            else
+                ProjectName = "";
+        }
         private void UploadAction()
         {
-            _catrobatContext.CurrentProject.ProjectHeader.ProgramName = _projectName;
+            _catrobatContext.CurrentProject.ProjectHeader.ProgramName = ProjectName;
 
             ServerCommunication.UploadProject(_projectName, _projectDescription,
-                                              CatrobatContextBase.GetContext().CurrentUserEmail,
+                                              Context.CurrentUserEmail,
                                               Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
-                                              CatrobatContextBase.GetContext().CurrentToken, UploadCallback);
+                                              Context.CurrentToken, UploadCallback);
 
             Messenger.Default.Send(new DialogMessage(AppResources.Main_UploadQueueMessage, null)
             {
@@ -106,23 +128,22 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         #endregion
 
+        #region MessageActions
+        private void ContextChangedAction(GenericMessage<CatrobatContextBase> message)
+        {
+            Context = message.Content;
+        }
+        #endregion
+
         public UploadProjectViewModel()
         {
-            // Commands
             UploadCommand = new RelayCommand(UploadAction, UploadCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-            if (IsInDesignMode)
-            {
-                _catrobatContext = new CatrobatContextDesign();
-            }
-            else
-            {
-                _catrobatContext = CatrobatContextBase.GetContext();
-            }
 
-            _projectName = _catrobatContext.CurrentProject.ProjectHeader.ProgramName;
+            Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
+                 ViewModelMessagingToken.ContextListener, ContextChangedAction);
         }
 
 
