@@ -52,8 +52,8 @@ namespace Catrobat.Core.Objects.Sounds
         {
             if(Sound == null)
                 Sound = ReferenceHelper.GetReferenceObject(this, _reference) as Sound;
-            if (_reference == "")
-                _reference = ReferenceHelper.GetReferenceString(Sound);
+            if (string.IsNullOrEmpty(_reference))
+                _reference = ReferenceHelper.GetReferenceString(this);
         }
 
         public DataObject Copy()
@@ -72,6 +72,9 @@ namespace Catrobat.Core.Objects.Sounds
                 return false;
 
             if (Sound.Name != otherReference.Sound.Name)
+                return false;
+
+            if (_reference != otherReference._reference)
                 return false;
 
             return true;

@@ -52,8 +52,8 @@ namespace Catrobat.Core.Objects
         {
             if(Sprite == null)
                 Sprite = ReferenceHelper.GetReferenceObject(this, _reference) as Sprite;
-            if (_reference == "")
-                _reference = ReferenceHelper.GetReferenceString(Sprite);
+            if (string.IsNullOrEmpty(_reference))
+                _reference = ReferenceHelper.GetReferenceString(this);
         }
 
         public DataObject Copy()

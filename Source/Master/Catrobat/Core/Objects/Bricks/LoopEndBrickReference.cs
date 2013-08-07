@@ -49,8 +49,8 @@ namespace Catrobat.Core.Objects.Bricks
         {
             if(LoopEndBrick == null)
                 LoopEndBrick = ReferenceHelper.GetReferenceObject(this, _reference) as LoopEndBrick;
-            if (_reference == "")
-                _reference = ReferenceHelper.GetReferenceString(LoopEndBrick);
+            if (string.IsNullOrEmpty(_reference))
+                _reference = ReferenceHelper.GetReferenceString(this);
         }
 
         public DataObject Copy()

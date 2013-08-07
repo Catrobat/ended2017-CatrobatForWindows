@@ -9,49 +9,49 @@ using System;
 
 namespace Catrobat.TestsCommon.Misc.Storage
 {
-  public class ResourcesTest : IResources
-  {
-    private readonly List<Stream> _openedStreams = new List<Stream>();
-
-    public Stream OpenResourceStream(ResourceScope project, string uri)
+    public class ResourcesTest : IResources
     {
-      string projectPath = "";
+        private readonly List<Stream> _openedStreams = new List<Stream>();
 
-      string basePath = BasePathHelper.GetTestBasePathWithBranch();
+        public Stream OpenResourceStream(ResourceScope project, string uri)
+        {
+            string projectPath = "";
 
-      switch (project)
-      {
-        case ResourceScope.Core:
-          projectPath = "Core/";
-          break;
+            string basePath = BasePathHelper.GetTestBasePathWithBranch();
 
-        case ResourceScope.IdeCommon:
-          projectPath = "IDECommon/";
-          break;
+            switch (project)
+            {
+                case ResourceScope.Core:
+                    projectPath = "Core/";
+                    break;
 
-        case ResourceScope.TestCommon:
-          projectPath = "TestsCommon/";
-          break;
-        case ResourceScope.Resources:
-          projectPath = "IDEWindowsPhone/Content/Resources/";
-          break;
+                case ResourceScope.IdeCommon:
+                    projectPath = "IDECommon/";
+                    break;
 
-        default:
-          throw new ArgumentOutOfRangeException("project");
-      }
-      
-      Stream stream = File.Open(basePath + projectPath + uri, FileMode.Open, FileAccess.Read);
-      _openedStreams.Add(stream);
-      return stream;
+                case ResourceScope.TestCommon:
+                    projectPath = "TestsCommon/";
+                    break;
+                case ResourceScope.Resources:
+                    projectPath = "IDEWindowsPhone/Content/Resources/";
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException("project");
+            }
+
+            Stream stream = File.Open(basePath + projectPath + uri, FileMode.Open, FileAccess.Read);
+            _openedStreams.Add(stream);
+            return stream;
+        }
+
+        public void Dispose()
+        {
+            foreach (var stream in _openedStreams)
+            {
+                stream.Close();
+                stream.Dispose();
+            }
+        }
     }
-
-    public void Dispose()
-    {
-      foreach (var stream in _openedStreams)
-      {
-        stream.Close();
-        stream.Dispose();
-      }
-    }
-  }
 }

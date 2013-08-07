@@ -34,21 +34,33 @@ namespace Catrobat.TestsCommon.Tests.Data
     public void StoreLocalSettingsTest()
     {
         // TODO: fix test
-        throw new NotImplementedException();
+        var localSettings = new LocalSettings
+            {
+                CurrentLanguageString = "de-DE",
+                CurrentProjectName = "DefaultProject",
+                CurrentThemeIndex = 1,
+                CurrentToken = "tokentoken",
+                CurrentUserEmail = "e-mail@gmail.com"
+            };
 
-      var catrobatContext = new CatrobatContext();
+        using (var storage = StorageSystem.GetStorage())
+        {
+            storage.DeleteFile(CatrobatContextBase.LocalSettingsFilePath);
+            Assert.IsFalse(storage.FileExists(CatrobatContextBase.LocalSettingsFilePath));
+        }
 
-      using (var storage = StorageSystem.GetStorage())
-      {
-        storage.DeleteFile(CatrobatContextBase.LocalSettingsFilePath);
-      }
+        CatrobatContext.StoreLocalSettingsStatic(localSettings);
+        using (var storage = StorageSystem.GetStorage())
+        {
+            Assert.IsTrue(storage.FileExists(CatrobatContextBase.LocalSettingsFilePath));
+        }
 
-      //CatrobatContext.StoreLocalSettingsStatic();
-
-      using (var storage = StorageSystem.GetStorage())
-      {
-          Assert.IsTrue(storage.FileExists(CatrobatContextBase.LocalSettingsFilePath));
-      }
+        var newLocalSetting = CatrobatContext.RestoreLocalSettingsStatic();
+        Assert.AreEqual(localSettings.CurrentLanguageString, newLocalSetting.CurrentLanguageString);
+        Assert.AreEqual(localSettings.CurrentProjectName, newLocalSetting.CurrentProjectName);
+        Assert.AreEqual(localSettings.CurrentThemeIndex, newLocalSetting.CurrentThemeIndex);
+        Assert.AreEqual(localSettings.CurrentToken, newLocalSetting.CurrentToken);
+        Assert.AreEqual(localSettings.CurrentUserEmail, newLocalSetting.CurrentUserEmail);
     }
   }
 }

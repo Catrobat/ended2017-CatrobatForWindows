@@ -49,8 +49,8 @@ namespace Catrobat.Core.Objects.Bricks
         {
             if(IfLogicElseBrick == null)
                 IfLogicElseBrick = ReferenceHelper.GetReferenceObject(this, _reference) as IfLogicElseBrick;
-            if (_reference == "")
-                _reference = ReferenceHelper.GetReferenceString(IfLogicElseBrick);
+            if (string.IsNullOrEmpty(_reference))
+                _reference = ReferenceHelper.GetReferenceString(this);
         }
 
         public DataObject Copy()
@@ -68,7 +68,7 @@ namespace Catrobat.Core.Objects.Bricks
             if (otherReference == null)
                 return false;
 
-            if (IfLogicElseBrick != otherReference.IfLogicElseBrick)
+            if (_reference != otherReference._reference)
                 return false;
 
             return true;

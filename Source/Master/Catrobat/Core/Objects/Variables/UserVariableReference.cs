@@ -56,8 +56,8 @@ namespace Catrobat.Core.Objects.Variables
         {
             if(UserVariable == null)
                 UserVariable = ReferenceHelper.GetReferenceObject(this, _reference) as UserVariable;
-            if (_reference == "")
-                _reference = ReferenceHelper.GetReferenceString(UserVariable);
+            if (string.IsNullOrEmpty(_reference))
+                _reference = ReferenceHelper.GetReferenceString(this);
         }
 
         public DataObject Copy()
@@ -76,6 +76,9 @@ namespace Catrobat.Core.Objects.Variables
                 return false;
 
             if (UserVariable.Name != otherReference.UserVariable.Name)
+                return false;
+
+            if (_reference != otherReference._reference)
                 return false;
 
             return true;
