@@ -1,10 +1,16 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Resources;
+using Catrobat.Core.Storage;
+using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Misc.Storage;
 using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
@@ -54,11 +60,23 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<ProjectNotValidViewModel>(true);
             SimpleIoc.Default.Register<FormulaEditorViewModel>(true);
             SimpleIoc.Default.Register<PlayerLauncherViewModel>(true);
+
+            if (ViewModelBase.IsInDesignModeStatic)
+            {
+                var context = new CatrobatContextDesign();
+  
+                var messageContext = new GenericMessage<CatrobatContextBase>(context);
+                Messenger.Default.Send(messageContext, ViewModelMessagingToken.ContextListener);
+            }
         }
 
         private static void InitializeInterfaces()
         {
-            // TODO: register interfaces as singeltons
+            StorageSystem.SetStorageFactory(new StorageFactoryPhone());
+            ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryPhone());
+            LanguageHelper.SetICulture(new CulturePhone());
+            ServerCommunication.SetIServerCommunication(new ServerCommunicationPhone());
+            PlatformInformationHelper.SetInterface(new PlatformInformationHelperPhone());
         }
 
         private static Project InitializeFirstTimeUse(CatrobatContextBase context)
@@ -88,18 +106,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         public static void LoadContext()
         {
-            Project currentProject = null;
-
-            if (ViewModelBase.IsInDesignModeStatic)
-            {
-                _context = new CatrobatContextDesign();
-                currentProject = ((CatrobatContextDesign)_context).CurrentProject;
-            }
-            else
-            {
-                _context = new CatrobatContext();
-                currentProject = InitializeFirstTimeUse(_context);
-            }
+            _context = new CatrobatContext();
+            var currentProject = InitializeFirstTimeUse(_context);
 
             if (_context.LocalSettings.CurrentLanguageString == null)
                 _context.LocalSettings.CurrentLanguageString = LanguageHelper.GetCurrentCultureLanguageCode();
@@ -109,17 +117,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 themeChooser.SelectedThemeIndex = _context.LocalSettings.CurrentThemeIndex;
 
             if (_context.LocalSettings.CurrentLanguageString != null)
-                ServiceLocator.Current.GetInstance<SettingsViewModel>().CurrentCulture = 
+                ServiceLocator.Current.GetInstance<SettingsViewModel>().CurrentCulture =
                     new CultureInfo(_context.LocalSettings.CurrentLanguageString);
 
             var message1 = new GenericMessage<ThemeChooser>(themeChooser);
-            Messenger.Default.Send<GenericMessage<ThemeChooser>>(message1, ViewModelMessagingToken.ThemeChooserListener);
+            Messenger.Default.Send(message1, ViewModelMessagingToken.ThemeChooserListener);
 
             var message2 = new GenericMessage<CatrobatContextBase>(_context);
-            Messenger.Default.Send<GenericMessage<CatrobatContextBase>>(message2, ViewModelMessagingToken.ContextListener);
+            Messenger.Default.Send(message2, ViewModelMessagingToken.ContextListener);
 
             var message = new GenericMessage<Project>(currentProject);
-            Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.CurrentProjectChangedListener);
+            Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectChangedListener);
         }
 
         public static void SaveContext(string currentProjectName)

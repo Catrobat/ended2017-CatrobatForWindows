@@ -52,7 +52,20 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         public CatrobatContextBase Context
         {
             get { return _context; }
-            set { _context = value; RaisePropertyChanged(() => Context); }
+            set 
+            {
+                _context = value;
+
+                if (Context is CatrobatContextDesign)
+                {
+                    var designContext = (CatrobatContextDesign)_context;
+                    LocalProjects = designContext.LocalProjects;
+                    OnlineProjects = designContext.OnlineProjects;
+                    CurrentProject = designContext.CurrentProject;
+                }
+
+                RaisePropertyChanged(() => Context); 
+            }
         }
 
         public Project CurrentProject
@@ -68,7 +81,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 _currentProject = value;
 
                 RaisePropertyChanged(() => CurrentProject);
-                UpdateLocalProjects();
+                //UpdateLocalProjects();
                 ProjectHolder.Project = _currentProject;
 
                 var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
@@ -408,6 +421,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public MainViewModel()
         {
+            CurrentProject = new Project {ProjectHeader = new ProjectHeader(false)};
+            CurrentProject.ProjectHeader.SetProgramName("dfsdfsfdsfdf");
+
             _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
 
 
@@ -559,10 +575,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
         }
 
-
-
         private void UpdateLocalProjects()
         {
+            if (IsInDesignMode) return;
+
             if (CurrentProject == null)
             {
                 return;

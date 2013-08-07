@@ -249,14 +249,18 @@
             <phone:LongListSelector.ItemTemplate>
               <DataTemplate>
                 <Grid Margin="12 5 12 5" Width="412" Background="{StaticResource PhoneAccentBrush}"
-                      d:DataContext="{d:DesignInstance objects:OnlineProjectHeader}">
-                  <StackPanel Orientation="Horizontal">
-                    <Image Source="{Binding ScreenshotSmallUrl}" Width="60" Height="100" Margin="5" />
-                    <StackPanel>
+                      DataContext="{Binding}">
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="{Binding ScreenshotSmallUrl}" Width="60" Height="100" Margin="5" />
+                    <StackPanel Grid.Column="1">
                       <TextBlock Margin="15 0 0 5" Text="{Binding ProjectName}" TextTrimming="WordEllipsis" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" />
                       <TextBlock Margin="15 0 0 5" Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" />
                     </StackPanel>
-                  </StackPanel>
+                  </Grid>
                 </Grid>
               </DataTemplate>
             </phone:LongListSelector.ItemTemplate>
