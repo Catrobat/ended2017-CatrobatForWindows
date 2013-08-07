@@ -39,19 +39,9 @@ namespace Catrobat.IDECommon.Formula.Editor
             if (IsNumber(key)) return HandleNumberKey(key);
             if (IsDelete(key)) return HandleDeleteKey();
             if (IsDecimalSeparator(key)) return HandleDecimalSeparatorKey();
-            //if (IsSucceedingOperator(key)) return HandleSucceedingOperatorKey(key);
-            //if (IsPreceedingOperator(key)) return HandlePreceedingOperatorKey(key);
-            if (key == FormulaEditorKey.KeyPlus)
-            {
-                SelectedFormula.FormulaRoot.FormulaTree = new FormulaTree
-                {
-                    VariableType = "OPERATOR",
-                    VariableValue = "PLUS"
-                };
-                
-                return true;
-            }
-
+            if (IsSucceedingOperator(key)) return HandleSucceedingOperatorKey(key);
+            if (IsPreceedingOperator(key)) return HandlePreceedingOperatorKey(key);
+            if (IsEquals(key)) return HandleEqualsKey();
             return isKeyValid;
             #region Old Code
             //if (_selectedFormulaInfo.SelectedFormula == null &&
@@ -184,12 +174,23 @@ namespace Catrobat.IDECommon.Formula.Editor
         {
 
             FormulaTree formulaToChange = GetRightmostNode(SelectedFormula.FormulaRoot.FormulaTree);
-            if (formulaToChange.VariableValue == null) return false;
+            if (formulaToChange.VariableValue == null)
+            {
+                return false;
+            }
             if (formulaToChange.VariableValue == "")   return false;
             if (formulaToChange.VariableType == "NUMBER")
             {
                 var length = formulaToChange.VariableValue.Length;
                 formulaToChange.VariableValue = formulaToChange.VariableValue.Substring(0, length - 1);
+                if (formulaToChange.VariableValue == "")
+                {
+                    var parentNode = GetParentOfRightmostNode(SelectedFormula.FormulaRoot.FormulaTree);
+                    if (parentNode != null)
+                    {
+                        parentNode.RightChild = null;
+                    }
+                }
                 return true;
             }
             if (formulaToChange.VariableType == "OPERATOR")
@@ -198,10 +199,26 @@ namespace Catrobat.IDECommon.Formula.Editor
                 if (IsPreceedingOperator(formulaToChange.VariableValue))
                 {
                     var parentNode = GetParentOfRightmostNode(SelectedFormula.FormulaRoot.FormulaTree);
+                    if (parentNode == null)
+                    {
+                        SelectedFormula.FormulaRoot.FormulaTree = formulaToChange.LeftChild;
+                        return true;
+                    }
                     parentNode.RightChild = replacementNode;
                     return true;
                 }
                 if (IsSucceedingOperator(formulaToChange.VariableValue))
+                {
+                    var parentNode = GetParentOfRightmostNode(SelectedFormula.FormulaRoot.FormulaTree);
+                    if (parentNode == null)
+                    {
+                        SelectedFormula.FormulaRoot.FormulaTree = formulaToChange.LeftChild;
+                        return true;
+                    }
+                    parentNode.RightChild = replacementNode;
+                    return true;
+                }
+                if (IsEquals(formulaToChange.VariableValue))
                 {
                     SelectedFormula.FormulaRoot.FormulaTree = formulaToChange.LeftChild;
                     return true;
@@ -233,6 +250,17 @@ namespace Catrobat.IDECommon.Formula.Editor
             FormulaTree formulaToChange = SelectedFormula.FormulaRoot.FormulaTree;
             if (formulaToChange.VariableType == "OPERATOR")
             {
+                if (IsEquals(formulaToChange.VariableValue))
+                {
+                    var childNode = formulaToChange.RightChild;
+                    formulaToChange.RightChild = new FormulaTree
+                    {
+                        VariableType = "OPERATOR",
+                        VariableValue = GetKeyPressed(key),
+                        LeftChild = childNode
+                    };
+                    return true;
+                }
                 SelectedFormula.FormulaRoot.FormulaTree = new FormulaTree
                 {
                     VariableType = "OPERATOR",
@@ -280,6 +308,23 @@ namespace Catrobat.IDECommon.Formula.Editor
                 return true;
             }
             return false;
+        }
+
+        private bool HandleEqualsKey()
+        {
+            FormulaTree formulaToChange = SelectedFormula.FormulaRoot.FormulaTree;
+            //if (IsEquals(formulaToChange.VariableValue))
+            //{
+            //    return false;
+            //}
+            SelectedFormula.FormulaRoot.FormulaTree = new FormulaTree
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "EQUAL",
+                LeftChild = formulaToChange
+            };
+
+            return true;
         }
 
         #endregion
@@ -380,6 +425,16 @@ namespace Catrobat.IDECommon.Formula.Editor
                 default:
                     return false;
             }
+        }
+
+        private bool IsEquals(FormulaEditorKey key)
+        {
+            return (key == FormulaEditorKey.KeyEquals);
+        }
+
+        private bool IsEquals(string operatorValue)
+        {
+            return operatorValue == "EQUAL";
         }
 
         
