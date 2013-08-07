@@ -193,7 +193,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
             if (Formula == null)
                 return;
 
-            _uiFormula = UiFormulaMappings.CreateFormula(Formula, this, Formula.FormulaTree, IsEditEnabled, null);
+            _uiFormula = UiFormulaMappings.CreateFormula(Formula, this, Formula.FormulaTree, IsEditEnabled, _selectedFormula);
             var allParts = _uiFormula.GetAllParts();
 
             double fontSize = NormalFontSize;
