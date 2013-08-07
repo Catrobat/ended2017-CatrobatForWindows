@@ -6,17 +6,33 @@
     </header>
     <body>
       <group id="Resx">
+        <trans-unit translate="yes" id="Resx/Clear" xml:space="preserve">
+          <source>Clear</source>
+          <target state="new">Clear</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/ColorPickerPageTitle" xml:space="preserve">
           <source>Color Picker</source>
-          <target state="new">Color Picker</target>
+          <target state="signed-off" state-qualifier="mt-suggestion">Farbauswahl</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/ColorPickerSelectedColor" xml:space="preserve">
           <source>Selected Color</source>
-          <target state="new">Selected Color</target>
+          <target state="signed-off" state-qualifier="mt-suggestion">Ausgewählte Farbe</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PaintAreaTitle" xml:space="preserve">
+          <source>Painting Area</source>
+          <target state="signed-off">Zeichenfläche</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Redo" xml:space="preserve">
+          <source>Redo</source>
+          <target state="new">Redo</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Test1" xml:space="preserve">
           <source>Test1en</source>
-          <target state="new">Test1en</target>
+          <target state="signed-off">Test1de</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Undo" xml:space="preserve">
+          <source>Undo</source>
+          <target state="new">Undo</target>
         </trans-unit>
       </group>
     </body>

@@ -21,46 +21,32 @@ namespace Catrobat.Paint.ViewModel
             SelectColorValue = new RelayCommand<SolidColorBrush>(SelectColorValueExecute);
         }
 
-        #region Private Members
 
+        #region Private Members
         private SolidColorBrush _selectedColor = Data.GlobalValues.Instance.SelectedColor;
         #endregion
 
 
         #region Properties
-
         public SolidColorBrush SelectedColor
         {
             get { return _selectedColor; }
             set
             {
-                _selectedColor = value;
+                _selectedColor = value;                
+                Data.GlobalValues.Instance.SelectedColor = value;
                 RaisePropertyChanged(() => SelectedColor);
             }
         }
-
-
-
         #endregion
 
 
         #region Commands
-         
-
-
         public ICommand SelectColorValue { get; private set; }
         private void SelectColorValueExecute(SolidColorBrush color)
         {
             SelectedColor = color;
         }
-
-
-
         #endregion
-
-
     }
-
-
-
 }

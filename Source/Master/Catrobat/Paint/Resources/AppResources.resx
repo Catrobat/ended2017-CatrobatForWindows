@@ -117,13 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
   <data name="ColorPickerPageTitle" xml:space="preserve">
     <value>Color Picker</value>
   </data>
   <data name="ColorPickerSelectedColor" xml:space="preserve">
     <value>Selected Color</value>
   </data>
+  <data name="PaintAreaTitle" xml:space="preserve">
+    <value>Painting Area</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
   <data name="Test1" xml:space="preserve">
     <value>Test1en</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Undo</value>
   </data>
 </root>

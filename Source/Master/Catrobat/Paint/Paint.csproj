@@ -111,6 +111,7 @@
     <Compile Include="Resources\LocalizedStrings.cs" />
     <Compile Include="ViewModel\ColorPickerViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PaintingAreaViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\ColorPickerView.xaml.cs">
       <DependentUpon>ColorPickerView.xaml</DependentUpon>
@@ -121,8 +122,14 @@
     <Compile Include="View\MvvmView1.xaml.cs">
       <DependentUpon>MvvmView1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PaintingAreaView.xaml.cs">
+      <DependentUpon>PaintingAreaView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ApplicationBar\Dark\appbar.page.new.png" />
+    <Content Include="Assets\ApplicationBar\Dark\appbar.redo.curve.png" />
+    <Content Include="Assets\ApplicationBar\Dark\appbar.undo.curve.png" />
     <Content Include="Assets\ColorPicker\checkeredbg.png" />
     <Content Include="Assets\ColorPicker\icon_color_chooser_tab_palette.png" />
     <Content Include="Assets\ColorPicker\icon_color_chooser_tab_rgba.png" />
@@ -134,6 +141,9 @@
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AppBarUtils">
+      <HintPath>..\packages\AppBarUtils.2.4\lib\windowsphone8\AppBarUtils.dll</HintPath>
+    </Reference>
     <Reference Include="Coding4Fun.Toolkit.Controls">
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.6\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
@@ -167,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MvvmView1.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PaintingAreaView.xaml">
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

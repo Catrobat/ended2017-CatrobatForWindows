@@ -42,6 +42,7 @@ namespace Catrobat.Paint.ViewModel
             ExampleValue = 0;
 
             NavigateColorPickerCommand = new RelayCommand(NavigateColorPickerAction);
+            NavigatePaintingAreaCommand = new RelayCommand(NavigatePaintingAreaAction);
 
         }
  
@@ -52,6 +53,14 @@ namespace Catrobat.Paint.ViewModel
             var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
             if (phoneApplicationFrame != null)
                 phoneApplicationFrame.Navigate(new Uri("/Paint;component/View/ColorPickerView.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        public ICommand NavigatePaintingAreaCommand { get; private set; }
+        private void NavigatePaintingAreaAction()
+        {
+            var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
+            if (phoneApplicationFrame != null)
+                phoneApplicationFrame.Navigate(new Uri("/Paint;component/View/PaintingAreaView.xaml", UriKind.RelativeOrAbsolute));
         }
 
         public ICommand IncrementValue { get; private set; }
