@@ -107,7 +107,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
             if ((PanoramaMain.SelectedItem == PanoramaItemOnlineProjects)) //&& (LongListSelectorOnlineProjects.Items.Count == 0)
             {
                 // Load Data - this has to stay in code-behind
-                _viewModel.LoadOnlineProjects(false);
+                _viewModel.LoadOnlineProjects(false, true);
             }
         }
 

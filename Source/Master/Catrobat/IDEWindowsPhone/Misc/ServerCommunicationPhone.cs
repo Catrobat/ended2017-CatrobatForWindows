@@ -63,7 +63,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
                                     }).ToList();
                         if (callback != null)
                         {
-                            callback(list, append);
+                            callback(filterText, list, append);
                         }
                     });
         }

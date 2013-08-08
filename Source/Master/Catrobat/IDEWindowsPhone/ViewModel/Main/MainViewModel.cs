@@ -35,6 +35,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         #region private Members
 
         private string _filterText = "";
+        private string _previousFilterText = "";
         private bool _isLoadingOnlineProjects;
         private MessageBoxResult _dialogResult;
         private string _deleteProjectName;
@@ -421,9 +422,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public MainViewModel()
         {
-            CurrentProject = new Project {ProjectHeader = new ProjectHeader(false)};
-            CurrentProject.ProjectHeader.SetProgramName("dfsdfsfdsfdf");
-
             _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
 
 
@@ -452,10 +450,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         #region MessageBoxCallback
 
-        private void LoadOnlineProjectsCallback(List<OnlineProjectHeader> projects, bool append)
+        private void LoadOnlineProjectsCallback(string filterText, List<OnlineProjectHeader> projects, bool append)
         {
             lock (OnlineProjects)
             {
+                if (FilterText != filterText && !append)
+                    return;
+
                 if (!append)
                 {
                     _onlineProjects.Clear();
@@ -531,14 +532,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         #endregion
 
 
-        public void LoadOnlineProjects(bool append)
+        public void LoadOnlineProjects(bool isAppend, bool isAuto = false)
         {
+            if (isAuto && isAppend)
+                return;
+
             IsLoadingOnlineProjects = true;
 
-            if(!append)
+            if (!isAppend && _previousFilterText != _filterText)
                 _onlineProjects.Clear();
 
-            ServerCommunication.LoadOnlineProjects(append, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
+            _previousFilterText = _filterText;
+
+            ServerCommunication.LoadOnlineProjects(isAppend, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
         }
 
         private void CheckTokenEvent(bool registered)

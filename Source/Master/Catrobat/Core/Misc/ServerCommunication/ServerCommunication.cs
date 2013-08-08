@@ -16,7 +16,7 @@ namespace Catrobat.Core.Misc.ServerCommunication
 
         public delegate void CheckTokenEvent(bool registered);
 
-        public delegate void LoadOnlineProjectsEvent(List<OnlineProjectHeader> projects, bool append);
+        public delegate void LoadOnlineProjectsEvent(string filterText, List<OnlineProjectHeader> projects, bool append);
 
         public delegate void DownloadAndSaveProjectEvent(string filename);
 
