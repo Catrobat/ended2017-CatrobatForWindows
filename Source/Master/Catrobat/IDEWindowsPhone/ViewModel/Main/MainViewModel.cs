@@ -606,7 +606,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     if (projectName != CurrentProject.ProjectHeader.ProgramName)
                     {
                         var screenshotPath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.ScreenshotPath);
-                        var projectScreenshot = storage.LoadImage(screenshotPath);
+                        var automaticProjectScreenshotPath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.AutomaticScreenshotPath);
+                        object projectScreenshot = null;
+
+                        if (storage.FileExists(screenshotPath))
+                            projectScreenshot = storage.LoadImage(screenshotPath);
+                        else if (storage.FileExists(automaticProjectScreenshotPath))
+                            projectScreenshot = storage.LoadImage(automaticProjectScreenshotPath);
+
                         var projectHeader = new ProjectDummyHeader
                         {
                             ProjectName = projectName,

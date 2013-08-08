@@ -200,6 +200,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             CurrentProject = message.Content;
         }
         #endregion
+
         public OnlineProjectViewModel()
         {
             // Commands
