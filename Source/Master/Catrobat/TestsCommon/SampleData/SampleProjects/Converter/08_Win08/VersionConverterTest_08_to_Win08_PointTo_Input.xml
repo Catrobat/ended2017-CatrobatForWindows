@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<program>
+  <objectList>
+    <object>
+      <lookList/>
+      <name>Hintergrund</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <pointToBrick>
+              <object reference="../../../../.."/>
+              <pointedObject>
+                <lookList/>
+                <name>sprite2</name>
+                <scriptList/>
+                <soundList/>
+              </pointedObject>
+            </pointToBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object reference="../object/scriptList/startScript/brickList/pointToBrick/pointedObject"/>
+  </objectList>
+  <variables>
+    <objectVariableList>
+      <entry>
+        <object reference="../../../../objectList/object"/>
+        <list/>
+      </entry>
+    </objectVariableList>
+    <programVariableList>
+      <userVariable>
+        <name>zufällig von</name>
+      </userVariable>
+      <userVariable>
+        <name>zufällig bis</name>
+      </userVariable>
+    </programVariableList>
+  </variables>
+</program>
