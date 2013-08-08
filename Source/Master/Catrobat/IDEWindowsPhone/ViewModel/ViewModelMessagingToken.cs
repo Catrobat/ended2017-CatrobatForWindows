@@ -4,7 +4,7 @@
     {
         CostumeNameListener,
         SoundNameListener,
-        SelectedSpriteListener,
+        CurrentSpriteChangedListener,
         SpriteNameListener,
         SpriteListListener,
         ProjectNameListener,

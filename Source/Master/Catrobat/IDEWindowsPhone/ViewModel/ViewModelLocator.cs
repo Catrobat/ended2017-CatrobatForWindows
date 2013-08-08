@@ -16,6 +16,7 @@ using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor.Variables;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Catrobat.IDEWindowsPhone.ViewModel.Service;
 using Catrobat.IDEWindowsPhone.ViewModel.Settings;
@@ -57,6 +58,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<FormulaEditorViewModel>(true);
             SimpleIoc.Default.Register<PlayerLauncherViewModel>(true);
             SimpleIoc.Default.Register<TileGeneratorViewModel>(true);
+            SimpleIoc.Default.Register<VariableSelectionViewModel>(true);
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -64,6 +66,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
   
                 var messageContext = new GenericMessage<CatrobatContextBase>(context);
                 Messenger.Default.Send(messageContext, ViewModelMessagingToken.ContextListener);
+
+                var messageCurrentSprite = new GenericMessage<Sprite>(context.CurrentProject.SpriteList.Sprites[0]);
+                Messenger.Default.Send(messageCurrentSprite, ViewModelMessagingToken.CurrentSpriteChangedListener);
             }
         }
 
@@ -377,6 +382,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<TileGeneratorViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public VariableSelectionViewModel VariableSelectionViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<VariableSelectionViewModel>();
             }
         }
 

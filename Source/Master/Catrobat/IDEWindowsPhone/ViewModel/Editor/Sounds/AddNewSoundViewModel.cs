@@ -34,7 +34,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
         private void AudioLibraryAction()
         {
             var message = new GenericMessage<Sprite>(_receivedSelectedSprite);
-            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SelectedSpriteListener);
+            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
             Navigation.NavigateTo(typeof (AudioLibrary));
         }
@@ -42,7 +42,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
         private void RecorderAction()
         {
             var message = new GenericMessage<Sprite>(_receivedSelectedSprite);
-            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SelectedSpriteListener);
+            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
             Navigation.NavigateTo(typeof (SoundRecorderView));
         }
@@ -65,7 +65,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             RecorderCommand = new RelayCommand(RecorderAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
+            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
         }
 
         private void ResetViewModel() {}

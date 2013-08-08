@@ -96,7 +96,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 DeleteSpriteCommand.RaiseCanExecuteChanged();
 
                 var spriteChangedMessage = new GenericMessage<Sprite>(SelectedSprite);
-                Messenger.Default.Send<GenericMessage<Sprite>>(spriteChangedMessage, ViewModelMessagingToken.SelectedSpriteListener);
+                Messenger.Default.Send<GenericMessage<Sprite>>(spriteChangedMessage, ViewModelMessagingToken.CurrentSpriteChangedListener);
             }
         }
 
@@ -621,7 +621,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         private void AddNewSoundAction()
         {
             var message = new GenericMessage<Sprite>(SelectedSprite);
-            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SelectedSpriteListener);
+            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
             Navigation.NavigateTo(typeof(AddNewSoundView));
         }
@@ -656,7 +656,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         private void AddNewCostumeAction()
         {
             var message = new GenericMessage<Sprite>(SelectedSprite);
-            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SelectedSpriteListener);
+            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
             Navigation.NavigateTo(typeof(NewCostumeSourceSelectionView));
         }

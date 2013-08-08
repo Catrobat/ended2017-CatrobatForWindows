@@ -61,6 +61,7 @@
     <Compile Include="Misc\Helpers\ReferenceHelper.cs" />
     <Compile Include="CatrobatContextBase.cs" />
     <Compile Include="LocalSettings.cs" />
+    <Compile Include="Misc\Helpers\VariableHelper.cs" />
     <Compile Include="Misc\JSON\JSONClassDeserializer.cs" />
     <Compile Include="Misc\JSON\JSONStatusResponse.cs" />
     <Compile Include="Misc\PropertyNameHelper.cs" />

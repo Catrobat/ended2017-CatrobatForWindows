@@ -162,7 +162,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
         public FormulaEditorViewModel()
         {
             Messenger.Default.Register<GenericMessage<Sprite>>(this, 
-                ViewModelMessagingToken.SelectedSpriteListener, SelectedSpriteChangesMessageAction);
+                ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangesMessageAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);

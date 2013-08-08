@@ -946,6 +946,18 @@ The program is licensed under the MS-RL Lizenz.</target>
           <source>Please wait while your login state is beeing checked!</source>
           <target state="new">Please wait while your login state is beeing checked!</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_SelectVariablesViewHeader" xml:space="preserve">
+          <source>SELECT VARIABLE</source>
+          <target state="new">SELECT VARIABLE</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_LocalVariables" xml:space="preserve">
+          <source>Object</source>
+          <target state="new">Object</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_GlobalVariables" xml:space="preserve">
+          <source>Global</source>
+          <target state="new">Global</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_DeleteProject" xml:space="preserve">
           <source>delete</source>
           <target state="new">delete</target>

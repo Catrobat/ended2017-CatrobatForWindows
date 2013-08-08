@@ -428,7 +428,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this, 
-                ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
+                ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);

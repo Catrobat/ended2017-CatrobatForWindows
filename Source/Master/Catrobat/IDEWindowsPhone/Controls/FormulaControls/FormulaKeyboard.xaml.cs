@@ -33,7 +33,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
         private static void GlobalVariablesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((FormulaKeyboard) d).ListBoxGlobalVariables.ItemsSource = e.NewValue as IEnumerable;
+            //((FormulaKeyboard) d).ListBoxGlobalVariables.ItemsSource = e.NewValue as IEnumerable;
         }
 
 
@@ -49,7 +49,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
         private static void LocalVariablesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((FormulaKeyboard)d).ListBoxLocalVariables.ItemsSource = e.NewValue as IEnumerable;
+            //((FormulaKeyboard)d).ListBoxLocalVariables.ItemsSource = e.NewValue as IEnumerable;
         }
 
         #endregion
@@ -101,6 +101,11 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
             ShowVariable();
         }
 
+        private void ButtonSensors_OnClick(object sender, RoutedEventArgs e)
+        {
+            ShowSensors();
+        }
+
         private void ButtonMath_OnClick(object sender, RoutedEventArgs e)
         {
             ShowMath();
@@ -121,12 +126,14 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
             GridMain.Visibility = Visibility.Visible;
             GridMath.Visibility = Visibility.Collapsed;
             GridVariable.Visibility = Visibility.Collapsed;
+            GridSensors.Visibility = Visibility.Collapsed;
         }
         private void ShowMath()
         {
             GridMain.Visibility = Visibility.Collapsed;
             GridMath.Visibility = Visibility.Visible;
             GridVariable.Visibility = Visibility.Collapsed;
+            GridSensors.Visibility = Visibility.Collapsed;
         }
 
         private void ShowVariable()
@@ -134,6 +141,15 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
             GridMain.Visibility = Visibility.Collapsed;
             GridMath.Visibility = Visibility.Collapsed;
             GridVariable.Visibility = Visibility.Visible;
+            GridSensors.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowSensors()
+        {
+            GridMain.Visibility = Visibility.Collapsed;
+            GridMath.Visibility = Visibility.Collapsed;
+            GridVariable.Visibility = Visibility.Collapsed;
+            GridSensors.Visibility = Visibility.Visible;
         }
 
         private void KeyButton_OnClick(object sender, RoutedEventArgs e)

@@ -830,4 +830,13 @@ The program is licensed under the MS-RL Lizenz.</value>
   <data name="Main_UploadProjectLoadingMessage" xml:space="preserve">
     <value>Please wait while your login state is beeing checked!</value>
   </data>
+  <data name="Editor_GlobalVariables" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="Editor_LocalVariables" xml:space="preserve">
+    <value>Object</value>
+  </data>
+  <data name="Editor_SelectVariablesViewHeader" xml:space="preserve">
+    <value>SELECT VARIABLE</value>
+  </data>
 </root>

@@ -180,5 +180,9 @@ namespace Catrobat.Core
             OnlineProjects.Add(project3);
         }
 
+        private void InitVariables()
+        {
+            //TODO: init variables
+        }
     }
 }

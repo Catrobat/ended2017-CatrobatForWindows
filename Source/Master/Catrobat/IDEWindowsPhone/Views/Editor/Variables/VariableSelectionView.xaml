@@ -1,0 +1,75 @@
+﻿<phone:PhoneApplicationPage
+  x:Class="Catrobat.IDEWindowsPhone.Views.Editor.Variables.VariableSelectionView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+  xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+  xmlns:appBarUtils="clr-namespace:AppBarUtils;assembly=AppBarUtils"
+  FontFamily="{StaticResource PhoneFontFamilyNormal}"
+  FontSize="{StaticResource PhoneFontSizeNormal}"
+  Foreground="{StaticResource PhoneForegroundBrush}"
+  SupportedOrientations="Portrait" Orientation="Portrait"
+  mc:Ignorable="d"
+  DataContext="{Binding VariableSelectionViewModel, Source={StaticResource Locator}}"
+  shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+      <TextBlock Text="{Binding Resources.Editor_SelectVariablesViewHeader, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+    </StackPanel>
+
+    <phone:Pivot Grid.Row="1" Name="PivotMain" Title="{Binding CurrentProject.ProjectName}" SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}">
+      <!-- Pivot local variables -->
+      <phone:PivotItem Name="PivotLocal" Header="{Binding Resources.Editor_LocalVariables, Source={StaticResource LocalizedStrings}}">
+        <ListBox ItemsSource="{Binding LocalVariables}" SelectedItem="{Binding SelectedLocalVariable}">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Grid DataContext="{Binding}">
+                <TextBlock Text="{Binding Name}"></TextBlock>
+              </Grid>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </phone:PivotItem>
+      
+      <!-- Pivot global variables -->
+      <phone:PivotItem Name="PivotGlobal" Header="{Binding Resources.Editor_GlobalVariables, Source={StaticResource LocalizedStrings}}">
+        <ListBox ItemsSource="{Binding GlobalVariables}" SelectedItem="{Binding SelectedGlobalVariable}">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Grid DataContext="{Binding}">
+                <TextBlock Text="{Binding Name}"></TextBlock>
+              </Grid>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </phone:PivotItem>
+    </phone:Pivot>
+  </Grid>
+
+  <i:Interaction.Triggers>
+    <appBarUtils:StateChangedTrigger State="false">
+      <appBarUtils:SwitchAppBarAction>
+        <appBarUtils:AppBar Id="0">
+          <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.save.rest.png" 
+                              Text="{Binding Resources.Editor_AppbarButtonSelect, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding FinishedCommand}" />
+          <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" 
+                              Text="{Binding Resources.Editor_AppbarButtonCancel, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding CancelCommand}"/>
+        </appBarUtils:AppBar>
+      </appBarUtils:SwitchAppBarAction>
+    </appBarUtils:StateChangedTrigger>
+  </i:Interaction.Triggers>
+
+</phone:PhoneApplicationPage>
