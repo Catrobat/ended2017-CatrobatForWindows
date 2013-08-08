@@ -36,7 +36,7 @@ namespace Catrobat.Core
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                var tempPath = Path.Combine(projectCodeFile, Project.ProjectCodePath);
+                var tempPath = Path.Combine(projectCodeFilePath, Project.ProjectCodePath);
                 var xml = storage.ReadTextFile(tempPath);
                 var newProject = new Project(xml);
                 return newProject;
