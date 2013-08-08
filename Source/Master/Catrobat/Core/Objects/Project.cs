@@ -281,8 +281,6 @@ namespace Catrobat.Core.Objects
 
         public void Save(string path = null)
         {
-            var xDocument = CreateXML();
-
             if (path == null)
             {
                 path = BasePath + "/" + ProjectCodePath;

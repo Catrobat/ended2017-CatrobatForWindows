@@ -6,6 +6,7 @@ using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.JSON;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Resources;
+using Catrobat.Core.VersionConverter;
 using Catrobat.Core.ZIP;
 
 namespace Catrobat.Core.Misc.ServerCommunication
@@ -18,7 +19,7 @@ namespace Catrobat.Core.Misc.ServerCommunication
 
         public delegate void LoadOnlineProjectsEvent(string filterText, List<OnlineProjectHeader> projects, bool append);
 
-        public delegate void DownloadAndSaveProjectEvent(string filename);
+        public delegate void DownloadAndSaveProjectEvent(string filename, CatrobatVersionConverter.VersionConverterError error);
 
         public delegate void UploadProjectEvent(bool successful);
 

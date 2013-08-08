@@ -10,6 +10,7 @@ using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Storage;
+using Catrobat.Core.VersionConverter;
 using Catrobat.Core.ZIP;
 
 namespace Catrobat.IDEWindowsPhone.Misc
@@ -98,18 +99,20 @@ namespace Catrobat.IDEWindowsPhone.Misc
                                                                             CatrobatContextBase.ProjectsPath + "/" +
                                                                             projectName);
 
+                        var error = CatrobatVersionConverter.ConvertByProjectName(projectName);
+
                         downloadCounterChange[0]--;
 
                         if (callback != null)
                         {
-                            callback(projectName);
+                            callback(projectName, error);
                         }
                     }
                     catch (Exception)
                     {
                         if (callback != null)
                         {
-                            callback("");
+                            callback("", CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid);
                         }
                     }
                 });

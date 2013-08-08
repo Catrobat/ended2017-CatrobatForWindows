@@ -7,6 +7,7 @@ using Catrobat.Core;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Resources;
+using Catrobat.Core.VersionConverter;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
@@ -216,7 +217,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void DownloadProjectMessageBoxResult(MessageBoxResult result) {}
 
-        private void DownloadCallback(string filename)
+        private void DownloadCallback(string filename, CatrobatVersionConverter.VersionConverterError error)
         {
             var localProjectsChangedMessage = new MessageBase();
             Messenger.Default.Send<MessageBase>(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
