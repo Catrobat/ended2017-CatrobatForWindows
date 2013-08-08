@@ -584,7 +584,6 @@
     <Content Include="fmodex_x86.dll" />
     <Content Include="italic.spritefont" />
     <Content Include="Content\Resources\default.catrobat" />
-    <None Include="Content\Resources\default.catroid" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">

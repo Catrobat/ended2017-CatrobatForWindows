@@ -482,7 +482,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
                 if (CurrentProject.ProjectHeader.ProgramName == _deleteProjectName)
                 {
-                    CurrentProject = CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+                    if (LocalProjects.Count > 0)
+                    {
+                        var projectName = LocalProjects[0].ProjectName;
+                        CurrentProject = CatrobatContext.CreateNewProjectByNameStatic(projectName);
+                    }
+                    else
+                        CurrentProject = CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
                 }
                 else
                     UpdateLocalProjects();
