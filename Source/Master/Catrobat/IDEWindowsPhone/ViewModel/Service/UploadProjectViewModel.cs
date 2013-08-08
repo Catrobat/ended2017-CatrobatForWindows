@@ -34,12 +34,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             {
                 return _currentProject;
             }
-            set
+            private set
             {
                 if (value == _currentProject) return;
-
                 _currentProject = value;
-
                 RaisePropertyChanged(() => CurrentProject);
             }
         }

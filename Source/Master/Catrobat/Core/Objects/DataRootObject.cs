@@ -10,7 +10,6 @@ namespace Catrobat.Core.Objects
 {
     public abstract class DataRootObject : INotifyPropertyChanged, IEquatable<DataRootObject>
     {
-        protected XDocument Document;
         protected XElement Root;
 
         public DataRootObject() {}

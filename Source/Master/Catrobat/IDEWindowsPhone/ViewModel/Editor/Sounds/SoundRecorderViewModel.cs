@@ -49,7 +49,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
         public Project CurrentProject
         {
             get { return _currentProject; }
-            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
         }
         public bool IsRecording
         {

@@ -188,12 +188,12 @@ namespace Catrobat.Core.Objects
 
         protected override void LoadFromXML(String xml)
         {
-            Document = XDocument.Load(new StringReader(xml));
-            Document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
+            var document = XDocument.Load(new StringReader(xml));
+            document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
             ProjectHolder.Project = this;
 
-            var project = Document.Element("program");
+            var project = document.Element("program");
             _projectHeader = new ProjectHeader(project.Element("header"));
 
             _spriteList = new SpriteList();
@@ -207,7 +207,7 @@ namespace Catrobat.Core.Objects
 
         internal override XDocument CreateXML()
         {
-            Document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
+            var document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
             var xProject = new XElement("program");
 
@@ -217,9 +217,9 @@ namespace Catrobat.Core.Objects
 
             xProject.Add(_variableList.CreateXML());
 
-            Document.Add(xProject);
+            document.Add(xProject);
 
-            return Document;
+            return document;
         }
 
         internal void LoadReference()
@@ -290,7 +290,8 @@ namespace Catrobat.Core.Objects
                 try
                 {
                     var writer = new XmlStringWriter();
-                    Document.Save(writer, SaveOptions.None);
+                    var document = CreateXML();
+                    document.Save(writer, SaveOptions.None);
 
                     var xml = writer.GetStringBuilder().ToString();
                     storage.WriteTextFile(path, xml);

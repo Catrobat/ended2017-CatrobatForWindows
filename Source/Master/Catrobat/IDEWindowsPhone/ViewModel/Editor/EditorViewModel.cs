@@ -54,7 +54,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         public Project CurrentProject
         {
             get { return _currentProject; }
-            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
         }
 
         public ObservableCollection<Sprite> Sprites

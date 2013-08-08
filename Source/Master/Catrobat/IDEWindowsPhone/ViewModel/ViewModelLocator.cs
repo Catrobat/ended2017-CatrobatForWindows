@@ -90,12 +90,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 }
 
                 currentProject = CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+                currentProject.Save();
                 context.LocalSettings = new LocalSettings { CurrentProjectName = currentProject.ProjectHeader.ProgramName };
             }
             else
             {
                 context.LocalSettings = localSettings;
-                currentProject = CatrobatContext.CreateNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
+                currentProject = CatrobatContext.LoadNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
             }
 
             return currentProject;

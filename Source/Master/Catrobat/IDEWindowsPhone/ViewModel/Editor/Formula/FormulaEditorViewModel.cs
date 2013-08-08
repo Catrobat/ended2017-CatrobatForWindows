@@ -40,7 +40,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
         public Project CurrentProject
         {
             get { return _currentProject; }
-            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject);}
+            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject);}
         }
 
         public FormulaButton FormulaButton

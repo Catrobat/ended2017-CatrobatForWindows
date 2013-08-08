@@ -39,7 +39,7 @@ namespace Catrobat.TestsCommon.SampleData
                 stream.Close();
                 stream.Dispose();
             }
-            return CatrobatContext.CreateNewProjectByNameStatic(sampleProjectName);
+            return CatrobatContext.LoadNewProjectByNameStatic(sampleProjectName);
         }
     }
 }

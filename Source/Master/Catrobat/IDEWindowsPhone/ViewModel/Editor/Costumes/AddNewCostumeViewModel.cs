@@ -40,7 +40,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         public Project CurrentProject
         {
             get { return _currentProject; }
-            set
+            private set
             {
                 _currentProject = value;
                 RaisePropertyChanged(() => CurrentProject);

@@ -165,7 +165,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             set { _isLoadingOnlineProjects = value; RaisePropertyChanged(() => IsLoadingOnlineProjects); }
         }
 
-        public bool IsActiveatingLocalProject
+        public bool IsActivatingLocalProject
         {
             get
             {
@@ -174,7 +174,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             set
             {
                 _isLoadingOnlineProjects = value;
-                RaisePropertyChanged(() => IsActiveatingLocalProject);
+                RaisePropertyChanged(() => IsActivatingLocalProject);
             }
         }
 
@@ -324,10 +324,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             lock (CurrentProject)
             {
-                if (IsActiveatingLocalProject)
+                if (IsActivatingLocalProject)
                     return;
 
-                IsActiveatingLocalProject = true;
+                IsActivatingLocalProject = true;
             }
 
             var minLoadingTime = new TimeSpan(0, 0, 0, 0, 500);
@@ -338,14 +338,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    CurrentProject = CatrobatContext.CreateNewProjectByNameStatic(projectName);
+                    CurrentProject.Save();
+                    CurrentProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
 
                     var minWaitindTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
 
                     if (minWaitindTimeRemaining >= new TimeSpan(0))
                         Thread.Sleep(minWaitindTimeRemaining);
 
-                    IsActiveatingLocalProject = false;
+                    IsActivatingLocalProject = false;
                 });
 
             });
@@ -537,7 +538,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     if (LocalProjects.Count > 0)
                     {
                         var projectName = LocalProjects[0].ProjectName;
-                        CurrentProject = CatrobatContext.CreateNewProjectByNameStatic(projectName);
+                        CurrentProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
                     }
                     else
                         CurrentProject = CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);

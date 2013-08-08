@@ -39,7 +39,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
         public Project CurrentProject
         {
             get { return _currentProject; }
-            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
         }
 
         public bool ButtonDownloadIsEnabled

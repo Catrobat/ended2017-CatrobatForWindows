@@ -11,17 +11,17 @@ namespace Catrobat.Core
     {
         #region Static methods
 
-        public static Project CreateNewProjectByNameStatic(string projectName)
+        public static Project LoadNewProjectByNameStatic(string projectName)
         {
             if (Debugger.IsAttached)
             {
-                return CreateNewProjectByNameStaticWithoutTryCatch(projectName);
+                return LoadNewProjectByNameStaticWithoutTryCatch(projectName);
             }
             else
             {
                 try
                 {
-                    return CreateNewProjectByNameStaticWithoutTryCatch(projectName);
+                    return LoadNewProjectByNameStaticWithoutTryCatch(projectName);
                 }
                 catch
                 {
@@ -30,7 +30,7 @@ namespace Catrobat.Core
             }
         }
 
-        private static Project CreateNewProjectByNameStaticWithoutTryCatch(string projectName)
+        private static Project LoadNewProjectByNameStaticWithoutTryCatch(string projectName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
@@ -63,6 +63,7 @@ namespace Catrobat.Core
 
                 var project = new Project(xml);
                 project.SetProgramName(projectName);
+                //project.Save();
                 return project;
             }
         }
