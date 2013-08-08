@@ -338,15 +338,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    try
-                    {
+                    //try
+                    //{
                         CurrentProject = CatrobatContext.CreateNewProjectByNameStatic(projectName);
-                    }
-                    catch (Exception)
-                    {
+                    //}
+                    //catch (Exception e)
+                    //{
 
-                        throw;
-                    }
+                    //    throw;
+                    //}
 
                     var minWaitindTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Storage;
@@ -14,19 +15,31 @@ namespace Catrobat.Core
         {
             var projectCodeFile = Path.Combine(ProjectsPath, projectName);
 
-            try
+            if (Debugger.IsAttached)
             {
-                using (var storage = StorageSystem.GetStorage())
+                return CreateNewProjectByNameStaticWithoutTryCatch(projectCodeFile);
+            }
+            else
+            {
+                try
                 {
-                    var tempPath = Path.Combine(projectCodeFile, Project.ProjectCodePath);
-                    var xml = storage.ReadTextFile(tempPath);
-                    var newProject = new Project(xml);
-                    return newProject;
+                    return CreateNewProjectByNameStaticWithoutTryCatch(projectCodeFile);
+                }
+                catch
+                {
+                    throw new Exception("Project does not exist");
                 }
             }
-            catch
+        }
+
+        private static Project CreateNewProjectByNameStaticWithoutTryCatch(string projectCodeFilePath)
+        {
+            using (var storage = StorageSystem.GetStorage())
             {
-                throw new Exception("Project does not exist");
+                var tempPath = Path.Combine(projectCodeFile, Project.ProjectCodePath);
+                var xml = storage.ReadTextFile(tempPath);
+                var newProject = new Project(xml);
+                return newProject;
             }
         }
 

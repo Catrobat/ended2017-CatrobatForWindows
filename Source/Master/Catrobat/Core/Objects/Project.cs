@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Xml.Linq;
 using Catrobat.Core.Misc.Helpers;
@@ -30,12 +31,12 @@ namespace Catrobat.Core.Objects
                 {
                     var screenshotPath = Path.Combine(BasePath, ScreenshotPath);
                     var automaticProjectScreenshotPath = Path.Combine(BasePath, AutomaticScreenshotPath);
-                        
+
                     using (var storage = StorageSystem.GetStorage())
                     {
-                        if(storage.FileExists(screenshotPath))
+                        if (storage.FileExists(screenshotPath))
                             _projectScreenshot = storage.LoadImage(screenshotPath);
-                        else if(storage.FileExists(automaticProjectScreenshotPath))
+                        else if (storage.FileExists(automaticProjectScreenshotPath))
                             _projectScreenshot = storage.LoadImage(automaticProjectScreenshotPath);
                     }
                 }
@@ -192,8 +193,6 @@ namespace Catrobat.Core.Objects
 
             ProjectHolder.Project = this;
 
-            //Converter.Converter.Convert(_document);
-
             var project = Document.Element("program");
             _projectHeader = new ProjectHeader(project.Element("header"));
 
@@ -201,7 +200,7 @@ namespace Catrobat.Core.Objects
             _spriteList.LoadFromXML(project.Element("objectList"));
 
             _variableList = new VariableList(project.Element("variables"));
-            
+
             LoadReference();
             LoadBroadcastMessages();
         }
@@ -335,7 +334,7 @@ namespace Catrobat.Core.Objects
             if (!ProjectHeader.Equals(otherProject.ProjectHeader))
                 return false;
 
-            if(!SpriteList.Equals(otherProject.SpriteList))
+            if (!SpriteList.Equals(otherProject.SpriteList))
                 return false;
 
             if (!VariableList.Equals(otherProject.VariableList))
