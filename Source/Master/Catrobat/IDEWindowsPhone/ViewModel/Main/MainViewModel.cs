@@ -621,6 +621,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     _localProjects.Add(header);
                 }
             }
+
+            RaisePropertyChanged(()=> LocalProjects);
         }
     }
 }

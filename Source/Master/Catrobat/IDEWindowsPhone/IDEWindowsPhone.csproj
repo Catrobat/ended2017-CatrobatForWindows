@@ -183,6 +183,7 @@
     <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
     <Compile Include="Converters\BoolOpacityConverter.cs" />
+    <Compile Include="Converters\ImagePathToScreenshotConverter.cs" />
     <Compile Include="Converters\IntPixelConverter.cs" />
     <Compile Include="Converters\NullIntCountConverter.cs" />
     <Compile Include="Converters\NoScreenshotConverter.cs" />

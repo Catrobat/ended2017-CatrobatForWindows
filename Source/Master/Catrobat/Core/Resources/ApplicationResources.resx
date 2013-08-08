@@ -138,6 +138,9 @@
   <data name="OnlineRecentUrl" xml:space="preserve">
     <value>http://catroidtest.ist.tugraz.at/api/projects/recent.xml?limit=5&amp;offset={0}</value>
   </data>
+  <data name="OnlineImagesBaseUrl" xml:space="preserve">
+    <value>http://catroidtest.ist.tugraz.at/</value>
+  </data>
   <data name="ProjectLicenseUrl" xml:space="preserve">
     <value>http://catroid.org/catroid/projectlicense</value>
   </data>

@@ -35,7 +35,8 @@
         <ColumnDefinition Width="200" />
         <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
-      <Image Width="200" Height="333" Grid.Column="0" VerticalAlignment="Top" Source="{Binding ScreenshotBigUrl}" />
+      <Image Width="200" Height="333" Grid.Column="0" VerticalAlignment="Top" 
+             Source="{Binding ScreenshotBigUrl}" />
 
       <StackPanel Grid.Column="1" Margin="15 0 5 0">
         <TextBlock Text="{Binding Resources.Main_OnlineProjectProject, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneAccentBrush}" Margin="0" />
