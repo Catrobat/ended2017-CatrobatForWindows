@@ -1,18 +1,13 @@
-﻿using System.Diagnostics;
-using System.Dynamic;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Catrobat.Core;
-using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
-using Catrobat.Core.Resources;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
@@ -82,12 +77,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 _currentProject = value;
 
                 RaisePropertyChanged(() => CurrentProject);
-                //UpdateLocalProjects();
+                UpdateLocalProjects();
                 ProjectHolder.Project = _currentProject;
 
                 var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
-                Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage,
-                    ViewModelMessagingToken.CurrentProjectChangedListener);
+                Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
 
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
@@ -303,6 +297,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private void PinLocalProjectAction(ProjectDummyHeader project)
         {
             PinProjectHeader = project;
+
+            var message = new GenericMessage<ProjectDummyHeader>(PinProjectHeader);
+            Messenger.Default.Send(message, ViewModelMessagingToken.PinProjectHeaderListener);
+
             Navigation.NavigateTo(typeof(TileGeneratorView));
         }
 
@@ -326,7 +324,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             DateTime startTime = DateTime.UtcNow;
 
 
-            var setActiveTask = Task.Run(() =>
+            Task.Run(() =>
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {

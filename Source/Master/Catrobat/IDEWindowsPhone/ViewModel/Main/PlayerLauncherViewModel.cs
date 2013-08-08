@@ -1,8 +1,5 @@
-﻿using Catrobat.Core;
-using Catrobat.Core.Objects;
-using Catrobat.IDEWindowsPhone.Misc;
+﻿using Catrobat.Core.Objects;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Main
@@ -37,13 +34,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         #region Commands
 
-    
 
         #endregion
 
         #region Actions
 
-        
 
         #endregion
 

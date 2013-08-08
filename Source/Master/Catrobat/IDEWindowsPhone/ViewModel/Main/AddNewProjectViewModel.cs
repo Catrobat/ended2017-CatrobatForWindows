@@ -93,6 +93,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         }
 
         #endregion
+
         public AddNewProjectViewModel()
         {
             // Commands

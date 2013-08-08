@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
 using Catrobat.Core;
@@ -24,7 +22,6 @@ using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using IDEWindowsPhone;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel
@@ -57,9 +54,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<OnlineProjectViewModel>(true);
             SimpleIoc.Default.Register<NewBroadcastMessageViewModel>(true);
             SimpleIoc.Default.Register<AddNewScriptBrickViewModel>(true);
-            SimpleIoc.Default.Register<ProjectNotValidViewModel>(true);
             SimpleIoc.Default.Register<FormulaEditorViewModel>(true);
             SimpleIoc.Default.Register<PlayerLauncherViewModel>(true);
+            SimpleIoc.Default.Register<TileGeneratorViewModel>(true);
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -350,17 +347,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public ProjectNotValidViewModel ProjectNotValidViewModel
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<ProjectNotValidViewModel>();
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-        "CA1822:MarkMembersAsStatic",
-        Justification = "This non-static member is needed for data binding purposes.")]
         public FormulaEditorViewModel FormulaEditorViewModel
         {
             get
@@ -377,6 +363,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<PlayerLauncherViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public TileGeneratorViewModel TileGeneratorViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<TileGeneratorViewModel>();
             }
         }
 
