@@ -4,6 +4,6 @@
     {
         void LoadOnlineProjects(bool append, string filterText, int offset, ServerCommunication.LoadOnlineProjectsEvent callback);
 
-        int DownloadAndSaveProject(string downloadUrl, string projectName, ServerCommunication.DownloadAndSaveProjectEvent callback);
+        void DownloadAndSaveProject(string downloadUrl, string projectName, ServerCommunication.DownloadAndSaveProjectEvent callback);
     }
 }

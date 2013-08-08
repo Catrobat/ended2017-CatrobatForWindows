@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.ServerCommunication;
@@ -9,6 +10,7 @@ using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Main;
+using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -29,6 +31,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
     {
         #region private Members
 
+        private bool _showDownloadMessage;
+        private bool _showUploadMessage;
         private string _filterText = "";
         private string _previousFilterText = "";
         private bool _isLoadingOnlineProjects;
@@ -256,6 +260,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             private set;
         }
 
+        public ICommand ShowMessagesCommand
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
         # region Actions
@@ -388,6 +398,46 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             ResetViewModel();
         }
 
+        private void ShowMessagesAction()
+        {
+            if (_showDownloadMessage)
+            {
+                var image = new BitmapImage();
+                using (var loader = ResourceLoader.CreateResourceLoader())
+                {
+                    var stream = loader.OpenResourceStream(ResourceScope.IdePhone, "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
+                    image.SetSource(stream);
+                }
+
+                var toast = new ToastPrompt
+                {
+                    ImageSource = image,
+                    Message = AppResources.Main_DownloadQueueMessage
+                };
+                toast.Show();
+
+                _showDownloadMessage = false;
+            }
+            if (_showUploadMessage)
+            {
+                var image = new BitmapImage();
+                using (var loader = ResourceLoader.CreateResourceLoader())
+                {
+                    var stream = loader.OpenResourceStream(ResourceScope.IdePhone, "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
+                    image.SetSource(stream);
+                }
+
+                var toast = new ToastPrompt
+                {
+                    ImageSource = image,
+                    Message = AppResources.Main_UploadQueueMessage
+                };
+                toast.Show();
+
+                _showUploadMessage = false;
+            }
+        }
+
         #endregion
 
         #region MessageActions
@@ -397,6 +447,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             UpdateLocalProjects();
         }
 
+        private void DownloadProjectStartedMessageAction(MessageBase message)
+        {
+            _showDownloadMessage = true;
+        }
+
+        private void UploadProjectStartedMessageAction(MessageBase message)
+        {
+            _showUploadMessage = true;
+        }
+
         private void ContextChangedAction(GenericMessage<CatrobatContextBase> message)
         {
             Context = message.Content;
@@ -404,10 +464,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             {
                 LocalProjects = (Context as CatrobatContextDesign).LocalProjects;
                 OnlineProjects = (Context as CatrobatContextDesign).OnlineProjects;
-            }
-            else
-            {
-                //Context.CurrentProject.PropertyChanged += CurrentProjectPropertyChanged;
             }
         }
 
@@ -422,7 +478,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
 
-
             RenameCurrentProjectCommand = new RelayCommand(RenameCurrentProjectAction);
             DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
             CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
@@ -436,10 +491,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             PlayCurrentProjectCommand = new RelayCommand(PlayCurrentProjectAction);
             UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
+            ShowMessagesCommand = new RelayCommand(ShowMessagesAction);
 
 
             Messenger.Default.Register<MessageBase>(this,
                 ViewModelMessagingToken.LocalProjectsChangedListener, LocalProjectsChangedMessageAction);
+            Messenger.Default.Register<MessageBase>(this,
+                ViewModelMessagingToken.DownloadProjectStartedListener, DownloadProjectStartedMessageAction);
+            Messenger.Default.Register<MessageBase>(this,
+               ViewModelMessagingToken.UploadProjectStartedListener, UploadProjectStartedMessageAction);
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                              ViewModelMessagingToken.ContextListener, ContextChangedAction);
             Messenger.Default.Register<GenericMessage<Project>>(this,

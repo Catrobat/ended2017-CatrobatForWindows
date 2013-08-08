@@ -679,8 +679,8 @@ The program is licensed under the MS-RL Lizenz.</source>
           <target state="translated" state-qualifier="mt-suggestion">[01884][!!_Şћòŵ мèmòŗУ úśáģê_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_DownloadQueueMessage" xml:space="preserve">
-          <source>The project you chose is being downloaded. This might take a little while, but we'll tell you when it's finished!</source>
-          <target state="translated" state-qualifier="mt-suggestion">[86C8B][!!_Тħê þŗòĵêćť ÿõû čĥòšè įś вêíйğ ðõẃήłõâďéď. Ťћìş mìģĥт тâĸè ã łíťťłé ŵĥíĺê, ъµţ ẃę'ľł τèłļ ÿóú ẅђęή ìτ'ş ƒíήìŝнęđ!_!!]</target>
+          <source>The project you chose is being downloaded.</source>
+          <target state="new" state-qualifier="mt-suggestion">The project you chose is being downloaded.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_FilterTextBoxHint" xml:space="preserve">
           <source>Find...</source>
@@ -743,12 +743,12 @@ The program is licensed under the MS-RL Lizenz.</source>
           <target state="translated" state-qualifier="mt-suggestion">[34B19][!!_Įήƒôŗmáťîóй_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_NoDownloadsPending" xml:space="preserve">
-          <source>All downloads have finished.</source>
-          <target state="translated" state-qualifier="mt-suggestion">[14B91][!!_Âľļ ðôẁηļôàďŝ ћãνé ƒìиìŝнèð._!!]</target>
+          <source>All downloads finished.</source>
+          <target state="new" state-qualifier="mt-suggestion">All downloads finished.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_NoUploadsPending" xml:space="preserve">
-          <source>All uploads have finished.</source>
-          <target state="translated" state-qualifier="mt-suggestion">[91CE3][!!_Àĺĺ ûρĺòâđš ђâνé ƒįйįšĥęð._!!]</target>
+          <source>All uploads finished.</source>
+          <target state="new" state-qualifier="mt-suggestion">All uploads finished.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectDescription" xml:space="preserve">
           <source>description:</source>
@@ -807,8 +807,8 @@ The program is licensed under the MS-RL Lizenz.</source>
           <target state="translated" state-qualifier="mt-suggestion">[165BA][!!_Þѓóĵéċť йãмę_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ProjectNotValid" xml:space="preserve">
-          <source>project not valid</source>
-          <target state="translated" state-qualifier="mt-suggestion">[70DC2][!!_þŗõјéčτ ήóτ νáĺíð_!!]</target>
+          <source>Project not valid.</source>
+          <target state="new" state-qualifier="mt-suggestion">Project not valid.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/App_ResourceLanguage" xml:space="preserve">
           <source>en</source>
@@ -891,8 +891,8 @@ The program is licensed under the MS-RL Lizenz.</source>
           <target state="translated" state-qualifier="mt-suggestion">[73DF4][!!_Ϋõµř þřôјêćţ įŝ Бèîиĝ µþľòâďèđ. Ţнìš мîğнτ тàĸê à ļįťτĺè ẃĥíľé, вûť ẅê'ļł ťéłľ ŷòû ẃĥęη ìτ'ş ƒįйîşħèđ!_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_VersionIsNotSupported" xml:space="preserve">
-          <source>project version is not supported</source>
-          <target state="translated" state-qualifier="mt-suggestion">[C8945][!!_рřòĵèċţ νèŕšįòи įś ήõť şùρþôřтèð_!!]</target>
+          <source>Project version is not supported.</source>
+          <target state="new" state-qualifier="mt-suggestion">Project version is not supported.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/App_FlowDirection" xml:space="preserve">
           <source>LeftToRight</source>

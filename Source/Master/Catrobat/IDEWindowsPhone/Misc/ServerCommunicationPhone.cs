@@ -70,11 +70,9 @@ namespace Catrobat.IDEWindowsPhone.Misc
                     });
         }
 
-        public int DownloadAndSaveProject(string downloadUrl, string projectName,
+        public void DownloadAndSaveProject(string downloadUrl, string projectName,
                                           ServerCommunication.DownloadAndSaveProjectEvent callback)
         {
-            int[] downloadCounterChange = {0};
-
             var wc = new WebClient();
             wc.OpenReadCompleted += ((s, args) =>
                 {
@@ -101,8 +99,6 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
                         var error = CatrobatVersionConverter.ConvertByProjectName(projectName);
 
-                        downloadCounterChange[0]--;
-
                         if (callback != null)
                         {
                             callback(projectName, error);
@@ -117,10 +113,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
                     }
                 });
 
-            downloadCounterChange[0]++;
             wc.OpenReadAsync(new Uri(downloadUrl, UriKind.RelativeOrAbsolute));
-
-            return downloadCounterChange[0];
         }
     }
 }

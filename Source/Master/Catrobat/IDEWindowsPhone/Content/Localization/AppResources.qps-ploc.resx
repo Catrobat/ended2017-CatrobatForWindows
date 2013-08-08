@@ -620,9 +620,6 @@
   <data name="Main_DEBUGShowMemory" xml:space="preserve">
     <value>[01884][!!_Şћòŵ мèmòŗУ úśáģê_!!]</value>
   </data>
-  <data name="Main_DownloadQueueMessage" xml:space="preserve">
-    <value>[86C8B][!!_Тħê þŗòĵêćť ÿõû čĥòšè įś вêíйğ ðõẃήłõâďéď. Ťћìş mìģĥт тâĸè ã łíťťłé ŵĥíĺê, ъµţ ẃę'ľł τèłļ ÿóú ẅђęή ìτ'ş ƒíήìŝнęđ!_!!]</value>
-  </data>
   <data name="Main_FilterTextBoxHint" xml:space="preserve">
     <value>[E6BA6][!!_₣įйđ..._!!]</value>
   </data>
@@ -668,12 +665,6 @@
   <data name="Main_MessageBoxInformation" xml:space="preserve">
     <value>[34B19][!!_Įήƒôŗmáťîóй_!!]</value>
   </data>
-  <data name="Main_NoDownloadsPending" xml:space="preserve">
-    <value>[14B91][!!_Âľļ ðôẁηļôàďŝ ћãνé ƒìиìŝнèð._!!]</value>
-  </data>
-  <data name="Main_NoUploadsPending" xml:space="preserve">
-    <value>[91CE3][!!_Àĺĺ ûρĺòâđš ђâνé ƒįйįšĥęð._!!]</value>
-  </data>
   <data name="Main_OnlineProjectDescription" xml:space="preserve">
     <value>[58498][!!_ðêşċѓìрţîôй:_!!]</value>
   </data>
@@ -715,9 +706,6 @@
   </data>
   <data name="Main_ProjectName" xml:space="preserve">
     <value>[165BA][!!_Þѓóĵéċť йãмę_!!]</value>
-  </data>
-  <data name="Main_ProjectNotValid" xml:space="preserve">
-    <value>[70DC2][!!_þŗõјéčτ ήóτ νáĺíð_!!]</value>
   </data>
   <data name="App_ResourceLanguage" xml:space="preserve">
     <value>[BFB37][!!_éη_!!]</value>
@@ -778,9 +766,6 @@
   </data>
   <data name="Main_UploadQueueMessage" xml:space="preserve">
     <value>[73DF4][!!_Ϋõµř þřôјêćţ įŝ Бèîиĝ µþľòâďèđ. Ţнìš мîğнτ тàĸê à ļįťτĺè ẃĥíľé, вûť ẅê'ļł ťéłľ ŷòû ẃĥęη ìτ'ş ƒįйîşħèđ!_!!]</value>
-  </data>
-  <data name="Main_VersionIsNotSupported" xml:space="preserve">
-    <value>[C8945][!!_рřòĵèċţ νèŕšįòи įś ήõť şùρþôřтèð_!!]</value>
   </data>
   <data name="App_FlowDirection" xml:space="preserve">
     <value>[A9356][!!_ĿèƒτΤóŖìĝĥţ_!!]</value>

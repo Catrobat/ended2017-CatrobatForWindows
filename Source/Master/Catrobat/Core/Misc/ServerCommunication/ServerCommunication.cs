@@ -24,7 +24,6 @@ namespace Catrobat.Core.Misc.ServerCommunication
         public delegate void UploadProjectEvent(bool successful);
 
         private static int _uploadCounter = 0;
-        private static int _downloadCounter = 0;
 
         private static IServerCommunication _iServerCommunication;
 
@@ -36,11 +35,6 @@ namespace Catrobat.Core.Misc.ServerCommunication
         public static bool NoUploadsPending()
         {
             return _uploadCounter == 0;
-        }
-
-        public static bool NoDownloadsPending()
-        {
-            return _downloadCounter == 0;
         }
 
         public static void RegisterOrCheckToken(string username,
@@ -71,27 +65,27 @@ namespace Catrobat.Core.Misc.ServerCommunication
             }
 
             WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.CheckTokenOrRegisterUrl,
-                                                                  ApplicationResources.UserAgent,
-                                                                  postParameters,
-                                                                  a =>
-                                                                      {
-                                                                          if (callback != null)
-                                                                          {
-                                                                              var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
-                                                                              if (response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK)
-                                                                              {
-                                                                                  callback(false, response.StatusCode.ToString(), response.StatusMessage);
-                                                                              }
-                                                                              else if (response.StatusCode == StatusCodes.SERVER_RESPONSE_REGISTER_OK)
-                                                                              {
-                                                                                  callback(true, response.StatusCode.ToString(), response.StatusMessage);
-                                                                              }
-                                                                              else
-                                                                              {
-                                                                                  callback(false, response.StatusCode.ToString(), response.StatusMessage);
-                                                                              }
-                                                                          }
-                                                                      });
+                            ApplicationResources.UserAgent,
+                            postParameters,
+                            a =>
+                                {
+                                    if (callback != null)
+                                    {
+                                        var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
+                                        if (response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK)
+                                        {
+                                            callback(false, response.StatusCode.ToString(), response.StatusMessage);
+                                        }
+                                        else if (response.StatusCode == StatusCodes.SERVER_RESPONSE_REGISTER_OK)
+                                        {
+                                            callback(true, response.StatusCode.ToString(), response.StatusMessage);
+                                        }
+                                        else
+                                        {
+                                            callback(false, response.StatusCode.ToString(), response.StatusMessage);
+                                        }
+                                    }
+                                });
         }
 
         public static void CheckToken(string token, CheckTokenEvent callback)
@@ -100,16 +94,16 @@ namespace Catrobat.Core.Misc.ServerCommunication
             var postParameters = new Dictionary<string, object> {{ApplicationResources.TOKEN, token}};
 
             WebRequest request = FormUpload.MultipartFormDataPost(ApplicationResources.CheckTokenUrl,
-                                                                  ApplicationResources.UserAgent,
-                                                                  postParameters,
-                                                                  a =>
-                                                                      {
-                                                                          if (callback != null)
-                                                                          {
-                                                                              var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
-                                                                              callback(response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK);
-                                                                          }
-                                                                      });
+                                ApplicationResources.UserAgent,
+                                postParameters,
+                                a =>
+                                    {
+                                        if (callback != null)
+                                        {
+                                            var response = JSONClassDeserializer.Deserialise<JSONStatusResponse>(a);
+                                            callback(response.StatusCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK);
+                                        }
+                                    });
         }
 
         public static DateTime ConvertUnixTimeStamp(double timestamp)
@@ -125,7 +119,7 @@ namespace Catrobat.Core.Misc.ServerCommunication
 
         public static void DownloadAndSaveProject(string downloadUrl, string projectName, DownloadAndSaveProjectEvent callback)
         {
-            _downloadCounter += _iServerCommunication.DownloadAndSaveProject(downloadUrl, projectName, callback);
+            _iServerCommunication.DownloadAndSaveProject(downloadUrl, projectName, callback);
         }
 
         public static void UploadProject(string projectName, string projectDescription, string userEmail,

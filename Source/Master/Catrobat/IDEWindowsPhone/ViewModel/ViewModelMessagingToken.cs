@@ -16,6 +16,8 @@
         LocalProjectsChangedListener,
         ContextListener,
         ThemeChooserListener,
-        PinProjectHeaderListener
+        PinProjectHeaderListener,
+        DownloadProjectStartedListener,
+        UploadProjectStartedListener
     }
 }

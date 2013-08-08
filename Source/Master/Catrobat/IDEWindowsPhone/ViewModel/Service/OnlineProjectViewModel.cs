@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using Catrobat.Core;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
@@ -10,6 +11,7 @@ using Catrobat.Core.Resources;
 using Catrobat.Core.VersionConverter;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
+using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -167,12 +169,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             ButtonDownloadIsEnabled = false;
             ServerCommunication.DownloadAndSaveProject(onlineProjectHeader.DownloadUrl, onlineProjectHeader.ProjectName, DownloadCallback);
 
-            var message = new DialogMessage(AppResources.Main_DownloadQueueMessage, DownloadProjectMessageBoxResult)
-            {
-                Button = MessageBoxButton.OK,
-                Caption = AppResources.Main_MessageBoxInformation
-            };
-            Messenger.Default.Send(message);
+            var projectChangedMessage = new MessageBase();
+            Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.DownloadProjectStartedListener);
 
             Navigation.NavigateBack();
         }
@@ -184,7 +182,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void LicenseAction()
         {
-            var browser = new WebBrowserTask {Uri = new Uri(ApplicationResources.ProjectLicenseUrl)};
+            var browser = new WebBrowserTask { Uri = new Uri(ApplicationResources.ProjectLicenseUrl) };
             browser.Show();
         }
 
@@ -215,28 +213,31 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
 
-        private void DownloadProjectMessageBoxResult(MessageBoxResult result) {}
 
         private void DownloadCallback(string filename, CatrobatVersionConverter.VersionConverterError error)
         {
-            var localProjectsChangedMessage = new MessageBase();
-            Messenger.Default.Send<MessageBase>(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
+            var message = new MessageBase();
+            Messenger.Default.Send(message, ViewModelMessagingToken.LocalProjectsChangedListener);
 
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            if (error != CatrobatVersionConverter.VersionConverterError.NoError)
+            {
+                switch (error)
                 {
-                    if (filename == "")
-                    {
-                        // TODO: show error message
-                    }
-                    else
-                    {
-                        if (ServerCommunication.NoDownloadsPending())
-                        {
-                            MessageBox.Show(AppResources.Main_NoDownloadsPending,
-                                            AppResources.Main_MessageBoxInformation, MessageBoxButton.OK);
-                        }
-                    }
-                });
+                    case CatrobatVersionConverter.VersionConverterError.VersionNotSupported:
+                        var toast = new ToastPrompt { Message = AppResources.Main_VersionIsNotSupported };
+                        toast.Show();
+                        break;
+                    case CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid:
+                        toast = new ToastPrompt { Message = AppResources.Main_ProjectNotValid };
+                        toast.Show();
+                        break;
+                }
+            }
+            else
+            {
+                var toast = new ToastPrompt { Message = AppResources.Main_NoDownloadsPending };
+                toast.Show();
+            }
         }
 
 

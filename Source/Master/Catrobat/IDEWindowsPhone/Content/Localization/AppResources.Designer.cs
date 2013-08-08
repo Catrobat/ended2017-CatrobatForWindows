@@ -1701,7 +1701,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The project you chose is being downloaded. This might take a little while, but we&apos;ll tell you when it&apos;s finished!.
+        ///   Looks up a localized string similar to The project you chose is being downloaded..
         /// </summary>
         public static string Main_DownloadQueueMessage {
             get {
@@ -1845,7 +1845,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All downloads have finished..
+        ///   Looks up a localized string similar to All downloads finished..
         /// </summary>
         public static string Main_NoDownloadsPending {
             get {
@@ -1854,7 +1854,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All uploads have finished..
+        ///   Looks up a localized string similar to All uploads finished..
         /// </summary>
         public static string Main_NoUploadsPending {
             get {
@@ -1998,7 +1998,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to project not valid.
+        ///   Looks up a localized string similar to Project not valid..
         /// </summary>
         public static string Main_ProjectNotValid {
             get {
@@ -2187,7 +2187,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to project version is not supported.
+        ///   Looks up a localized string similar to Project version is not supported..
         /// </summary>
         public static string Main_VersionIsNotSupported {
             get {

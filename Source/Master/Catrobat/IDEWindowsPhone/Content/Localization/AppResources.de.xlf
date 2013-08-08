@@ -679,8 +679,8 @@ The program is licensed under the MS-RL Lizenz.</target>
           <target state="signed-off">Show memory usage</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_DownloadQueueMessage" xml:space="preserve">
-          <source>The project you chose is being downloaded. This might take a little while, but we'll tell you when it's finished!</source>
-          <target state="signed-off">The project you chose is being downloaded. This might take a little while, but we'll tell you when it's finished!</target>
+          <source>The project you chose is being downloaded.</source>
+          <target state="new">The project you chose is being downloaded.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_FilterTextBoxHint" xml:space="preserve">
           <source>Find...</source>
@@ -743,12 +743,12 @@ The program is licensed under the MS-RL Lizenz.</target>
           <target state="signed-off">Information</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_NoDownloadsPending" xml:space="preserve">
-          <source>All downloads have finished.</source>
-          <target state="signed-off">All downloads have finished.</target>
+          <source>All downloads finished.</source>
+          <target state="new">All downloads finished.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_NoUploadsPending" xml:space="preserve">
-          <source>All uploads have finished.</source>
-          <target state="signed-off">All uploads have finished.</target>
+          <source>All uploads finished.</source>
+          <target state="new">All uploads finished.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectDescription" xml:space="preserve">
           <source>description:</source>
@@ -807,8 +807,8 @@ The program is licensed under the MS-RL Lizenz.</target>
           <target state="signed-off">Project name</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ProjectNotValid" xml:space="preserve">
-          <source>project not valid</source>
-          <target state="signed-off">project not valid</target>
+          <source>Project not valid.</source>
+          <target state="new">Project not valid.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/App_ResourceLanguage" xml:space="preserve">
           <source>en</source>
@@ -891,8 +891,8 @@ The program is licensed under the MS-RL Lizenz.</target>
           <target state="signed-off">Your project is being uploaded. This might take a little while, but we'll tell you when it's finished!</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_VersionIsNotSupported" xml:space="preserve">
-          <source>project version is not supported</source>
-          <target state="signed-off">project version is not supported</target>
+          <source>Project version is not supported.</source>
+          <target state="new">Project version is not supported.</target>
         </trans-unit>
         <trans-unit translate="no" id="Resx/App_FlowDirection" xml:space="preserve">
           <source>LeftToRight</source>

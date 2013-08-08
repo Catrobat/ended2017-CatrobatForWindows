@@ -620,9 +620,6 @@ The program is licensed under the MS-RL Lizenz.</value>
   <data name="Main_DEBUGShowMemory" xml:space="preserve">
     <value>Show memory usage</value>
   </data>
-  <data name="Main_DownloadQueueMessage" xml:space="preserve">
-    <value>The project you chose is being downloaded. This might take a little while, but we'll tell you when it's finished!</value>
-  </data>
   <data name="Main_FilterTextBoxHint" xml:space="preserve">
     <value>Find...</value>
   </data>
@@ -668,12 +665,6 @@ The program is licensed under the MS-RL Lizenz.</value>
   <data name="Main_MessageBoxInformation" xml:space="preserve">
     <value>Information</value>
   </data>
-  <data name="Main_NoDownloadsPending" xml:space="preserve">
-    <value>All downloads have finished.</value>
-  </data>
-  <data name="Main_NoUploadsPending" xml:space="preserve">
-    <value>All uploads have finished.</value>
-  </data>
   <data name="Main_OnlineProjectDescription" xml:space="preserve">
     <value>description:</value>
   </data>
@@ -715,9 +706,6 @@ The program is licensed under the MS-RL Lizenz.</value>
   </data>
   <data name="Main_ProjectName" xml:space="preserve">
     <value>Project name</value>
-  </data>
-  <data name="Main_ProjectNotValid" xml:space="preserve">
-    <value>project not valid</value>
   </data>
   <data name="App_ResourceLanguage" xml:space="preserve">
     <value>en</value>
@@ -778,9 +766,6 @@ The program is licensed under the MS-RL Lizenz.</value>
   </data>
   <data name="Main_UploadQueueMessage" xml:space="preserve">
     <value>Your project is being uploaded. This might take a little while, but we'll tell you when it's finished!</value>
-  </data>
-  <data name="Main_VersionIsNotSupported" xml:space="preserve">
-    <value>project version is not supported</value>
   </data>
   <data name="Brick_IfLogicEnd" xml:space="preserve">
     <value>sonst Ende</value>

@@ -621,7 +621,7 @@ The program is licensed under the MS-RL Lizenz.</value>
     <value>Show memory usage</value>
   </data>
   <data name="Main_DownloadQueueMessage" xml:space="preserve">
-    <value>The project you chose is being downloaded. This might take a little while, but we'll tell you when it's finished!</value>
+    <value>The project you chose is being downloaded.</value>
   </data>
   <data name="Main_FilterTextBoxHint" xml:space="preserve">
     <value>Find...</value>
@@ -669,10 +669,10 @@ The program is licensed under the MS-RL Lizenz.</value>
     <value>Information</value>
   </data>
   <data name="Main_NoDownloadsPending" xml:space="preserve">
-    <value>All downloads have finished.</value>
+    <value>All downloads finished.</value>
   </data>
   <data name="Main_NoUploadsPending" xml:space="preserve">
-    <value>All uploads have finished.</value>
+    <value>All uploads finished.</value>
   </data>
   <data name="Main_OnlineProjectDescription" xml:space="preserve">
     <value>description:</value>
@@ -717,7 +717,7 @@ The program is licensed under the MS-RL Lizenz.</value>
     <value>Project name</value>
   </data>
   <data name="Main_ProjectNotValid" xml:space="preserve">
-    <value>project not valid</value>
+    <value>Project not valid.</value>
   </data>
   <data name="App_ResourceLanguage" xml:space="preserve">
     <value>en</value>
@@ -780,7 +780,7 @@ The program is licensed under the MS-RL Lizenz.</value>
     <value>Your project is being uploaded. This might take a little while, but we'll tell you when it's finished!</value>
   </data>
   <data name="Main_VersionIsNotSupported" xml:space="preserve">
-    <value>project version is not supported</value>
+    <value>Project version is not supported.</value>
   </data>
   <data name="App_FlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
