@@ -557,6 +557,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
             if (_dialogResult == MessageBoxResult.OK)
             {
+                if(_copyProjectName == CurrentProject.ProjectHeader.ProgramName)
+                    CurrentProject.Save();
+
                 using (var storage = StorageSystem.GetStorage())
                 {
                     var sourcePath = Path.Combine(CatrobatContextBase.ProjectsPath, _copyProjectName);

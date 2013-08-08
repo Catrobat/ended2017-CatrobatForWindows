@@ -50,7 +50,6 @@ namespace Catrobat.TestsCommon.Tests.Data
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
-
         [TestMethod]
         public void CatrobatVersionConverterTest_Convert_GlobalVariableReferences()
         {
