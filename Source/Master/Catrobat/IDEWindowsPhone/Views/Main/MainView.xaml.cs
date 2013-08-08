@@ -84,17 +84,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
             //progressIndicator.Text = "Loading new tweets...";
         }
 
-        private void OnlineProject_Tap(object sender, GestureEventArgs e)
-        {
-            if (LongListSelectorOnlineProjects.SelectedItem != null)
-            {
-                _viewModel.OnlineProjectTapCommand.Execute(LongListSelectorOnlineProjects.SelectedItem as OnlineProjectHeader);
-            }
-        }
-
         private void FilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Hack - needed because it won't update immediately without it!
             var textBox = sender as TextBox;
             if (textBox != null)
             {
@@ -104,23 +95,15 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         private void panoramaMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((PanoramaMain.SelectedItem == PanoramaItemOnlineProjects)) //&& (LongListSelectorOnlineProjects.Items.Count == 0)
+            if ((PanoramaMain.SelectedItem == PanoramaItemOnlineProjects))
             {
-                // Load Data - this has to stay in code-behind
-                _viewModel.LoadOnlineProjects(false);
+                _viewModel.LoadOnlineProjects(false, true);
             }
         }
 
 
         private void LocalProjectControl_OnLocalProjectsBackPressed(object sender, EventArgs e)
         {
-            // var curIndex = 1;
-
-            //(PanoramaMain.Items[curIndex] as PanoramaItem).Visibility = Visibility.Collapsed;
-            //PanoramaMain.SetValue(Panorama.SelectedItemProperty, PanoramaMain.Items[(curIndex - 1)%PanoramaMain.Items.Count]);
-            //PanoramaMain.Measure(new Size());
-            //(PanoramaMain.Items[curIndex] as PanoramaItem).Visibility = Visibility.Visible;
-
             SlideLeft(PanoramaMain);
         }
 

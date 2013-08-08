@@ -200,6 +200,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             CurrentProject = message.Content;
         }
         #endregion
+
         public OnlineProjectViewModel()
         {
             // Commands
@@ -217,11 +218,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void DownloadCallback(string filename)
         {
-            //TODO: comment in and fix
-            //var localProjectsChangedMessage = new MessageBase();
-            //Messenger.Default.Send<MessageBase>(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
-
-            //CatrobatContextBase.GetContext().SetCurrentProject(filename);
+            var localProjectsChangedMessage = new MessageBase();
+            Messenger.Default.Send<MessageBase>(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
 
             Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {

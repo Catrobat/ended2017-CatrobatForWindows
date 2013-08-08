@@ -16,7 +16,6 @@ namespace Catrobat.IDEWindowsPhone.Misc
     {
         public static void LaunchPlayer(String projectName)
         {
-            PlayerLauncherView.IsNavigateBack = false;
             var navigationUri = "/Views/Main/PlayerLauncherView.xaml?ProjectName=" + projectName;
             ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri(navigationUri, UriKind.Relative));
         }

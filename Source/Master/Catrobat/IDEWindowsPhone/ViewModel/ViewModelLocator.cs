@@ -3,8 +3,12 @@ using System.Globalization;
 using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Resources;
+using Catrobat.Core.Storage;
+using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Misc.Storage;
 using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
@@ -18,7 +22,6 @@ using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using IDEWindowsPhone;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel
@@ -51,17 +54,29 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<OnlineProjectViewModel>(true);
             SimpleIoc.Default.Register<NewBroadcastMessageViewModel>(true);
             SimpleIoc.Default.Register<AddNewScriptBrickViewModel>(true);
-            SimpleIoc.Default.Register<ProjectNotValidViewModel>(true);
             SimpleIoc.Default.Register<FormulaEditorViewModel>(true);
             SimpleIoc.Default.Register<PlayerLauncherViewModel>(true);
+            SimpleIoc.Default.Register<TileGeneratorViewModel>(true);
+
+            if (ViewModelBase.IsInDesignModeStatic)
+            {
+                var context = new CatrobatContextDesign();
+  
+                var messageContext = new GenericMessage<CatrobatContextBase>(context);
+                Messenger.Default.Send(messageContext, ViewModelMessagingToken.ContextListener);
+            }
         }
 
         private static void InitializeInterfaces()
         {
-            // TODO: register interfaces as singeltons
+            StorageSystem.SetStorageFactory(new StorageFactoryPhone());
+            ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryPhone());
+            LanguageHelper.SetICulture(new CulturePhone());
+            ServerCommunication.SetIServerCommunication(new ServerCommunicationPhone());
+            PlatformInformationHelper.SetInterface(new PlatformInformationHelperPhone());
         }
 
-        private static void InitializeFirstTimeUse(CatrobatContextBase context)
+        private static Project InitializeFirstTimeUse(CatrobatContextBase context)
         {
             Project currentProject = null;
             var localSettings = CatrobatContext.RestoreLocalSettingsStatic();
@@ -83,22 +98,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 currentProject = CatrobatContext.CreateNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
             }
 
-            var message = new GenericMessage<Project>(currentProject);
-            Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.CurrentProjectChangedListener);
+            return currentProject;
         }
 
         public static void LoadContext()
         {
-
-            if (ViewModelBase.IsInDesignModeStatic)
-            {
-                _context = new CatrobatContextDesign();
-            }
-            else
-            {
-                _context = new CatrobatContext();
-                InitializeFirstTimeUse(_context);
-            }
+            _context = new CatrobatContext();
+            var currentProject = InitializeFirstTimeUse(_context);
 
             if (_context.LocalSettings.CurrentLanguageString == null)
                 _context.LocalSettings.CurrentLanguageString = LanguageHelper.GetCurrentCultureLanguageCode();
@@ -108,14 +114,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 themeChooser.SelectedThemeIndex = _context.LocalSettings.CurrentThemeIndex;
 
             if (_context.LocalSettings.CurrentLanguageString != null)
-                ServiceLocator.Current.GetInstance<SettingsViewModel>().CurrentCulture = 
+                ServiceLocator.Current.GetInstance<SettingsViewModel>().CurrentCulture =
                     new CultureInfo(_context.LocalSettings.CurrentLanguageString);
 
             var message1 = new GenericMessage<ThemeChooser>(themeChooser);
-            Messenger.Default.Send<GenericMessage<ThemeChooser>>(message1, ViewModelMessagingToken.ThemeChooserListener);
+            Messenger.Default.Send(message1, ViewModelMessagingToken.ThemeChooserListener);
 
             var message2 = new GenericMessage<CatrobatContextBase>(_context);
-            Messenger.Default.Send<GenericMessage<CatrobatContextBase>>(message2, ViewModelMessagingToken.ContextListener);
+            Messenger.Default.Send(message2, ViewModelMessagingToken.ContextListener);
+
+            var message = new GenericMessage<Project>(currentProject);
+            Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectChangedListener);
         }
 
         public static void SaveContext(string currentProjectName)
@@ -338,17 +347,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public ProjectNotValidViewModel ProjectNotValidViewModel
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<ProjectNotValidViewModel>();
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-        "CA1822:MarkMembersAsStatic",
-        Justification = "This non-static member is needed for data binding purposes.")]
         public FormulaEditorViewModel FormulaEditorViewModel
         {
             get
@@ -365,6 +363,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<PlayerLauncherViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public TileGeneratorViewModel TileGeneratorViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<TileGeneratorViewModel>();
             }
         }
 

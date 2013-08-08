@@ -27,8 +27,6 @@ namespace Catrobat.Core
 
         #region Private members
 
-        private Project _currentProject;
-
         #endregion
 
         #region Properties
@@ -57,19 +55,6 @@ namespace Catrobat.Core
                 if (LocalSettings.CurrentUserEmail == value) return;
 
                 LocalSettings.CurrentUserEmail = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Project CurrentProject
-        {
-            get { return _currentProject; }
-            set
-            {
-                if (_currentProject == value) return;
-
-                _currentProject = value;
-                ProjectHolder.Project = _currentProject;
                 RaisePropertyChanged();
             }
         }

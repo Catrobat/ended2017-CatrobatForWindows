@@ -476,7 +476,7 @@ namespace Catrobat.Core.Objects
                 return false;
             if (ApplicationVersion != otherProjectHeader.ApplicationVersion)
                 return false;
-            if (CatrobatLanguageVersion != otherProjectHeader.CatrobatLanguageVersion)
+            if (Math.Abs(CatrobatLanguageVersion - otherProjectHeader.CatrobatLanguageVersion) > 0.01)
                 return false;
             if (DateTimeUpload != otherProjectHeader.DateTimeUpload)
                 return false;

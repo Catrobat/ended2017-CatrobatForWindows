@@ -183,6 +183,7 @@
     <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
     <Compile Include="Converters\BoolOpacityConverter.cs" />
+    <Compile Include="Converters\ImagePathToScreenshotConverter.cs" />
     <Compile Include="Converters\IntPixelConverter.cs" />
     <Compile Include="Converters\NullIntCountConverter.cs" />
     <Compile Include="Converters\NoScreenshotConverter.cs" />
@@ -227,8 +228,8 @@
     <Compile Include="ViewModel\Editor\Sprites\AddNewSpriteViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sprites\ChangeSpriteViewModel.cs" />
     <Compile Include="ViewModel\Main\AddNewProjectViewModel.cs" />
+    <Compile Include="ViewModel\Main\TileGeneratorViewModel.cs" />
     <Compile Include="ViewModel\Main\PlayerLauncherViewModel.cs" />
-    <Compile Include="ViewModel\Main\ProjectNotValidViewModel.cs" />
     <Compile Include="ViewModel\Main\ProjectImportViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\AddNewScriptBrickViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\NewBroadcastMessageViewModel.cs" />
@@ -313,9 +314,6 @@
     </Compile>
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Main\ProjectNotValidView.xaml.cs">
-      <DependentUpon>ProjectNotValidView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Service\UploadProjectsLoadingView.xaml.cs">
       <DependentUpon>UploadProjectsLoadingView.xaml</DependentUpon>
@@ -531,10 +529,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Main\ProjectNotValidView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Service\UploadProjectsLoadingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -590,7 +584,6 @@
     <Content Include="fmodex_x86.dll" />
     <Content Include="italic.spritefont" />
     <Content Include="Content\Resources\default.catrobat" />
-    <None Include="Content\Resources\default.catroid" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">

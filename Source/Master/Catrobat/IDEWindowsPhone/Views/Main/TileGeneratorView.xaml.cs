@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Dynamic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -25,7 +24,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         public Size NormalTileSize = new Size(336, 336);
         public Size WideTileSize = new Size(672, 336);
 
-        private readonly MainViewModel _mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+        private readonly TileGeneratorViewModel _viewModel = ServiceLocator.Current.GetInstance<TileGeneratorViewModel>();
 
         public TileGeneratorView()
         {
@@ -34,7 +33,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var screenshot = (BitmapImage) _mainViewModel.PinProjectHeader.Screenshot;
+            var screenshot = (BitmapImage) _viewModel.PinProjectHeader.Screenshot;
             var writeableScreenshot = new WriteableBitmap(screenshot);
             writeableScreenshot.Invalidate();
 
@@ -46,8 +45,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
             ImageNormalTile.Source = croppedScreenshot;
             ImageWideTile.Source = screenshot;
 
-            TextBlockTiteNormal.Text = _mainViewModel.PinProjectHeader.ProjectName;
-            TextBlockTiteWide.Text = _mainViewModel.PinProjectHeader.ProjectName;
+            TextBlockTiteNormal.Text = _viewModel.PinProjectHeader.ProjectName;
+            TextBlockTiteWide.Text = _viewModel.PinProjectHeader.ProjectName;
 
             BuildApplicationBar();
 
@@ -56,9 +55,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         private void AddTile()
         {
-            var smallTilePath = TileSavePath + _mainViewModel.PinProjectHeader.ProjectName + "/TileSmall.png";
-            var normalTilePath = TileSavePath + _mainViewModel.PinProjectHeader.ProjectName + "/NormalSmall.png";
-            var wideTilePath = TileSavePath + _mainViewModel.PinProjectHeader.ProjectName + "/WideSmall.png";
+            var smallTilePath = TileSavePath + _viewModel.PinProjectHeader.ProjectName + "/TileSmall.png";
+            var normalTilePath = TileSavePath + _viewModel.PinProjectHeader.ProjectName + "/NormalSmall.png";
+            var wideTilePath = TileSavePath + _viewModel.PinProjectHeader.ProjectName + "/WideSmall.png";
 
             SaveCanvas(CanvasSmallTile, 159, 159, smallTilePath);
             SaveCanvas(CanvasNormalTile, 336, 336, normalTilePath);
@@ -106,7 +105,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
                 WideBackgroundImage = new Uri(TileAbsolutSavePathPrefix + wideTilePath, UriKind.Absolute)
             };
 
-            var path = "/Views/Main/PlayerLauncherView.xaml?ProjectName=" + _mainViewModel.PinProjectHeader.ProjectName;
+            var path = "/Views/Main/PlayerLauncherView.xaml?ProjectName=" + _viewModel.PinProjectHeader.ProjectName;
 
             path += "&Dummy=" + DateTime.UtcNow.Ticks;
 

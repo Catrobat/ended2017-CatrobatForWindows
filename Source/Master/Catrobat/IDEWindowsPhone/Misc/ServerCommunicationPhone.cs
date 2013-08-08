@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Xml.Linq;
@@ -56,14 +57,14 @@ namespace Catrobat.IDEWindowsPhone.Misc
                                         Version = item.Element("Version").Value,
                                         Views = FormatHelper.ParseInt(item.Element("Views").Value),
                                         Downloads = FormatHelper.ParseInt(item.Element("Downloads").Value),
-                                        ScreenshotSmallUrl = item.Element("ScreenshotSmall").Value,
-                                        ScreenshotBigUrl = item.Element("ScreenshotBig").Value,
-                                        ProjectUrl = item.Element("ProjectUrl").Value,
-                                        DownloadUrl = item.Element("DownloadUrl").Value
+                                        ScreenshotSmallUrl = ApplicationResources.OnlineImagesBaseUrl + item.Element("ScreenshotSmall").Value,
+                                        ScreenshotBigUrl = ApplicationResources.OnlineImagesBaseUrl + item.Element("ScreenshotBig").Value,
+                                        ProjectUrl = ApplicationResources.OnlineImagesBaseUrl + item.Element("ProjectUrl").Value,
+                                        DownloadUrl = ApplicationResources.OnlineImagesBaseUrl + item.Element("DownloadUrl").Value
                                     }).ToList();
                         if (callback != null)
                         {
-                            callback(list, append);
+                            callback(filterText, list, append);
                         }
                     });
         }
@@ -88,7 +89,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
                         var counter = 1;
                         while (folders.IndexOf(projectName + countString) >= 0)
                         {
-                            countString = " " + counter++.ToString();
+                            countString = " " + counter++.ToString(CultureInfo.InvariantCulture);
                         }
                         projectName = projectName + countString;
 

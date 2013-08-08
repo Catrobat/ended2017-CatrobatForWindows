@@ -12,6 +12,8 @@
   xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
   xmlns:codung4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
   xmlns:objects="clr-namespace:Catrobat.Core.Objects;assembly=Catrobat.Core"
+  xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+  xmlns:command="http://www.galasoft.ch/mvvmlight"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
@@ -70,7 +72,7 @@
           </Grid.RowDefinitions>
           <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Text="{ Binding CurrentProject.ProjectHeader.ProgramName}" TextAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 20" Style="{StaticResource PhoneTextLargeStyle}" />
           <Grid Grid.Row="1">
-            <Image Name="ImageCurrentProjectScreenshot" Source="{Binding CurrentProjectScreenshot, Converter={StaticResource ScreenshotConverter}}" />
+            <Image Name="ImageCurrentProjectScreenshot" Source="{Binding CurrentProject.ProjectScreenshot, Converter={StaticResource NoScreenshotConverter}}" />
             <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="ButtonPlayCurrentProject"          
                 Template="{StaticResource ScreenshotButtonControlTemplate}"
                 Margin="0,0,0,0" Command="{Binding PlayCurrentProjectCommand}" Width="130" />
@@ -188,7 +190,7 @@
               <Grid Grid.Column="1">
                 <Border BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="4 0 0 0">
                   <Grid HorizontalAlignment="Right">
-                    <Image HorizontalAlignment="Right" Source="{Binding CurrentProjectScreenshot, Converter={StaticResource ScreenshotConverter}}" MaxHeight="155" MaxWidth="160"/>
+                    <Image HorizontalAlignment="Right" Source="{Binding CurrentProject.ProjectScreenshot, Converter={StaticResource NoScreenshotConverter}}" MaxHeight="155" MaxWidth="160"/>
                   </Grid>
                 </Border>
               </Grid>
@@ -239,24 +241,33 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
           </Grid.RowDefinitions>
-          <toolkit:PhoneTextBox xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" Hint="{Binding Resources.Main_FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" ActionIcon="../../Resources/Application/Search.png" x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilterTextBox_TextChanged" Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
+          <toolkit:PhoneTextBox Hint="{Binding Resources.Main_FilterTextBoxHint, Source={StaticResource LocalizedStrings}}" ActionIcon="../../Resources/Application/Search.png" x:Name="FilterTextBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilterTextBox_TextChanged" Text="{Binding Path=FilterText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
           <phone:LongListSelector Name="LongListSelectorOnlineProjects" Grid.Row="1" 
             ItemsSource="{Binding OnlineProjects}" 
             VerticalAlignment="Stretch" 
             HorizontalAlignment="Stretch" 
-            Tap="OnlineProject_Tap"
             SelectedItem="{Binding SelectedOnlineProject, Mode=TwoWay}">
             <phone:LongListSelector.ItemTemplate>
               <DataTemplate>
                 <Grid Margin="12 5 12 5" Width="412" Background="{StaticResource PhoneAccentBrush}"
-                      d:DataContext="{d:DesignInstance objects:OnlineProjectHeader}">
-                  <StackPanel Orientation="Horizontal">
-                    <Image Source="{Binding ScreenshotSmallUrl}" Width="60" Height="100" Margin="5" />
-                    <StackPanel>
+                      DataContext="{Binding}">
+                  <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Tap">
+                      <command:EventToCommand Command="{Binding MainViewModel.OnlineProjectTapCommand, Mode=OneWay, Source={StaticResource Locator}}"
+                                              CommandParameter="{Binding}" />
+                    </i:EventTrigger>
+                  </i:Interaction.Triggers>
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="{Binding ScreenshotSmallUrl}" Width="60" Height="100" Margin="5" />
+                    <StackPanel Grid.Column="1">
                       <TextBlock Margin="15 0 0 5" Text="{Binding ProjectName}" TextTrimming="WordEllipsis" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" />
                       <TextBlock Margin="15 0 0 5" Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" />
                     </StackPanel>
-                  </StackPanel>
+                  </Grid>
                 </Grid>
               </DataTemplate>
             </phone:LongListSelector.ItemTemplate>

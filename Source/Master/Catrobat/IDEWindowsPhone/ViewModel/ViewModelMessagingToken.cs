@@ -15,6 +15,7 @@
         CurrentProjectChangedListener,
         LocalProjectsChangedListener,
         ContextListener,
-        ThemeChooserListener
+        ThemeChooserListener,
+        PinProjectHeaderListener
     }
 }

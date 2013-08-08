@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Globalization;
 using System.IO;
 using System.Xml.Linq;
 using Catrobat.Core.Misc.Helpers;
@@ -15,10 +13,11 @@ namespace Catrobat.Core.Objects
 {
     public class Project : DataRootObject
     {
-        public const string ProjectCodePath = "projectcode.xml";
+        public const string ProjectCodePath = "code.xml";
         public const string ScreenshotPath = "screenshot.png";
         public const string ImagesPath = "images";
         public const string SoundsPath = "sounds";
+        public const string AutomaticScreenshotPath = "automatic_screenshot.png";
 
         #region Properties
 
@@ -29,10 +28,15 @@ namespace Catrobat.Core.Objects
             {
                 if (_projectScreenshot == null)
                 {
+                    var screenshotPath = Path.Combine(BasePath, ScreenshotPath);
+                    var automaticProjectScreenshotPath = Path.Combine(BasePath, AutomaticScreenshotPath);
+                        
                     using (var storage = StorageSystem.GetStorage())
                     {
-                        _projectScreenshot =
-                            storage.LoadImage(BasePath + "/screenshot.png");
+                        if(storage.FileExists(screenshotPath))
+                            _projectScreenshot = storage.LoadImage(screenshotPath);
+                        else if(storage.FileExists(automaticProjectScreenshotPath))
+                            _projectScreenshot = storage.LoadImage(automaticProjectScreenshotPath);
                     }
                 }
 
@@ -119,7 +123,13 @@ namespace Catrobat.Core.Objects
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    image = storage.LoadImageThumbnail(BasePath + "/" + ScreenshotPath);
+                    var screenshotPath = Path.Combine(BasePath, ScreenshotPath);
+                    var automaticProjectScreenshotPath = Path.Combine(BasePath, AutomaticScreenshotPath);
+
+                    if (storage.FileExists(screenshotPath))
+                        image = storage.LoadImageThumbnail(screenshotPath);
+                    else if (storage.FileExists(automaticProjectScreenshotPath))
+                        image = storage.LoadImageThumbnail(automaticProjectScreenshotPath);
                 }
 
                 _projectDummyHeader = new ProjectDummyHeader { ProjectName = ProjectHeader.ProgramName, Screenshot = image };
@@ -267,7 +277,6 @@ namespace Catrobat.Core.Objects
                 }
             }
         }
-
 
 
         public void Save(string path = null)

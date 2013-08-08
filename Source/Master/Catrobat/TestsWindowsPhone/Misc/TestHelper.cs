@@ -7,18 +7,6 @@ namespace Catrobat.TestsWindowsPhone.Misc
 {
   public static class TestHelper
   {
-    public static void InitializeAndClearCatrobatContext()
-    {
-      InitializeTests();
-
-      using (var storage = StorageSystem.GetStorage())
-      {
-        storage.DeleteDirectory("");
-      }
-      var catrobatContext = new CatrobatContext();
-      catrobatContext.CurrentProject = null;
-    }
-
     public static void DeleteFolder(this IsolatedStorageFile iso, string path)
     {
       if (!iso.DirectoryExists(path))

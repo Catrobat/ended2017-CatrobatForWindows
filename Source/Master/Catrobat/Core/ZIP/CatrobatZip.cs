@@ -17,6 +17,7 @@ namespace Catrobat.Core.ZIP
                 while (reader.MoveToNextEntry())
                 {
                     var absolutPath = Path.Combine(localStoragePath, reader.Entry.FilePath);
+                    absolutPath = absolutPath.Replace("\\", "/");
 
                     if (!reader.Entry.IsDirectory)
                     {

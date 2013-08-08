@@ -222,8 +222,6 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
         {
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
-                TestHelper.InitializeAndClearCatrobatContext();
-
                 using (var resource = (new ResourceLoaderFactoryPhone()).CreateResoucreLoader())
                 {
                     var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
@@ -243,7 +241,6 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
         {
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
-                TestHelper.InitializeAndClearCatrobatContext();
                 IStorage storage = new StoragePhone();
 
                 using (var resource = (new ResourceLoaderFactoryPhone()).CreateResoucreLoader())

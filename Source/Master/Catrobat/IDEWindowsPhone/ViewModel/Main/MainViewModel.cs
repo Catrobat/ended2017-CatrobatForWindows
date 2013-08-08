@@ -1,18 +1,13 @@
-﻿using System.Diagnostics;
-using System.Dynamic;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Catrobat.Core;
-using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
-using Catrobat.Core.Resources;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
@@ -35,6 +30,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         #region private Members
 
         private string _filterText = "";
+        private string _previousFilterText = "";
         private bool _isLoadingOnlineProjects;
         private MessageBoxResult _dialogResult;
         private string _deleteProjectName;
@@ -52,7 +48,20 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         public CatrobatContextBase Context
         {
             get { return _context; }
-            set { _context = value; RaisePropertyChanged(() => Context); }
+            set 
+            {
+                _context = value;
+
+                if (Context is CatrobatContextDesign)
+                {
+                    var designContext = (CatrobatContextDesign)_context;
+                    LocalProjects = designContext.LocalProjects;
+                    OnlineProjects = designContext.OnlineProjects;
+                    CurrentProject = designContext.CurrentProject;
+                }
+
+                RaisePropertyChanged(() => Context); 
+            }
         }
 
         public Project CurrentProject
@@ -69,10 +78,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
                 RaisePropertyChanged(() => CurrentProject);
                 UpdateLocalProjects();
+                ProjectHolder.Project = _currentProject;
 
                 var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
-                Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage,
-                    ViewModelMessagingToken.CurrentProjectChangedListener);
+                Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
 
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
@@ -288,6 +297,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private void PinLocalProjectAction(ProjectDummyHeader project)
         {
             PinProjectHeader = project;
+
+            var message = new GenericMessage<ProjectDummyHeader>(PinProjectHeader);
+            Messenger.Default.Send(message, ViewModelMessagingToken.PinProjectHeaderListener);
+
             Navigation.NavigateTo(typeof(TileGeneratorView));
         }
 
@@ -311,7 +324,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             DateTime startTime = DateTime.UtcNow;
 
 
-            var setActiveTask = Task.Run(() =>
+            Task.Run(() =>
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
@@ -435,10 +448,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         #region MessageBoxCallback
 
-        private void LoadOnlineProjectsCallback(List<OnlineProjectHeader> projects, bool append)
+        private void LoadOnlineProjectsCallback(string filterText, List<OnlineProjectHeader> projects, bool append)
         {
             lock (OnlineProjects)
             {
+                if (FilterText != filterText && !append)
+                    return;
+
                 if (!append)
                 {
                     _onlineProjects.Clear();
@@ -466,7 +482,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
                 if (CurrentProject.ProjectHeader.ProgramName == _deleteProjectName)
                 {
-                    CurrentProject = CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+                    if (LocalProjects.Count > 0)
+                    {
+                        var projectName = LocalProjects[0].ProjectName;
+                        CurrentProject = CatrobatContext.CreateNewProjectByNameStatic(projectName);
+                    }
+                    else
+                        CurrentProject = CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
                 }
                 else
                     UpdateLocalProjects();
@@ -514,14 +536,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         #endregion
 
 
-        public void LoadOnlineProjects(bool append)
+        public void LoadOnlineProjects(bool isAppend, bool isAuto = false)
         {
+            if (isAuto && isAppend)
+                return;
+
             IsLoadingOnlineProjects = true;
 
-            if(!append)
+            if (!isAppend && _previousFilterText != _filterText)
                 _onlineProjects.Clear();
 
-            ServerCommunication.LoadOnlineProjects(append, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
+            _previousFilterText = _filterText;
+
+            ServerCommunication.LoadOnlineProjects(isAppend, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
         }
 
         private void CheckTokenEvent(bool registered)
@@ -558,10 +585,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
         }
 
-
-
         private void UpdateLocalProjects()
         {
+            if (IsInDesignMode) return;
+
             if (CurrentProject == null)
             {
                 return;
@@ -585,7 +612,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     if (projectName != CurrentProject.ProjectHeader.ProgramName)
                     {
                         var screenshotPath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.ScreenshotPath);
-                        var projectScreenshot = storage.LoadImage(screenshotPath);
+                        var automaticProjectScreenshotPath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.AutomaticScreenshotPath);
+                        object projectScreenshot = null;
+
+                        if (storage.FileExists(screenshotPath))
+                            projectScreenshot = storage.LoadImage(screenshotPath);
+                        else if (storage.FileExists(automaticProjectScreenshotPath))
+                            projectScreenshot = storage.LoadImage(automaticProjectScreenshotPath);
+
                         var projectHeader = new ProjectDummyHeader
                         {
                             ProjectName = projectName,
@@ -600,6 +634,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     _localProjects.Add(header);
                 }
             }
+
+            RaisePropertyChanged(()=> LocalProjects);
         }
     }
 }

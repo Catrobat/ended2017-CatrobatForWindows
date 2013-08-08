@@ -39,12 +39,6 @@ namespace IDEWindowsPhone
         /// </summary>
         public App()
         {
-            StorageSystem.SetStorageFactory(new StorageFactoryPhone());
-            ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryPhone());
-            LanguageHelper.SetICulture(new CulturePhone());
-            ServerCommunication.SetIServerCommunication(new ServerCommunicationPhone());
-            PlatformInformationHelper.SetInterface(new PlatformInformationHelperPhone());
-
             // Global handler for uncaught exceptions.
             UnhandledException += Application_UnhandledException;
 
