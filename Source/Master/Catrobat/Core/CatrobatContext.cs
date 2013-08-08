@@ -13,17 +13,15 @@ namespace Catrobat.Core
 
         public static Project CreateNewProjectByNameStatic(string projectName)
         {
-            var projectCodeFile = Path.Combine(ProjectsPath, projectName);
-
             if (Debugger.IsAttached)
             {
-                return CreateNewProjectByNameStaticWithoutTryCatch(projectCodeFile);
+                return CreateNewProjectByNameStaticWithoutTryCatch(projectName);
             }
             else
             {
                 try
                 {
-                    return CreateNewProjectByNameStaticWithoutTryCatch(projectCodeFile);
+                    return CreateNewProjectByNameStaticWithoutTryCatch(projectName);
                 }
                 catch
                 {
@@ -32,13 +30,14 @@ namespace Catrobat.Core
             }
         }
 
-        private static Project CreateNewProjectByNameStaticWithoutTryCatch(string projectCodeFilePath)
+        private static Project CreateNewProjectByNameStaticWithoutTryCatch(string projectName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                var tempPath = Path.Combine(projectCodeFilePath, Project.ProjectCodePath);
+                var tempPath = Path.Combine(ProjectsPath, projectName, Project.ProjectCodePath);
                 var xml = storage.ReadTextFile(tempPath);
                 var newProject = new Project(xml);
+                newProject.SetProgramName(projectName);
                 return newProject;
             }
         }
