@@ -170,7 +170,7 @@
     <Compile Include="VersionConverter\CatrobatVersionPair.cs" />
     <Compile Include="VersionConverter\CatrobatVersionConfig.cs" />
     <Compile Include="VersionConverter\CatrobatVersionConverter.cs" />
-    <Compile Include="VersionConverter\Versions\CatrobatVersion08.cs" />
+    <Compile Include="VersionConverter\Versions\CatrobatVersion08ToWin08.cs" />
     <Compile Include="Misc\XPathHelper.cs" />
     <Compile Include="XmlStringWriter.cs" />
     <Compile Include="ZIP\CatrobatZip.cs" />

@@ -127,7 +127,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectChangedListener);
         }
 
-        public static void SaveContext(string currentProjectName)
+        public static void SaveContext(Project currentProject)
         {
             var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
             var settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
@@ -142,8 +142,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 _context.LocalSettings.CurrentLanguageString = settingsViewModel.CurrentCulture.Name;
             }
 
-            _context.LocalSettings.CurrentProjectName = currentProjectName;
+            _context.LocalSettings.CurrentProjectName = currentProject.ProjectHeader.ProgramName;
             CatrobatContext.StoreLocalSettingsStatic(_context.LocalSettings);
+
+            currentProject.Save();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",

@@ -21,7 +21,7 @@ namespace Catrobat.Core.VersionConverter
             {
                 return new Dictionary<CatrobatVersionPair, CatrobatVersion>(new CatrobatVersionPair.EqualityComparer())
                 {
-                    {new CatrobatVersionPair {InputVersion = "0.8", OutputVersion = "Win0.8"}, new CatrobatVersion08()}
+                    {new CatrobatVersionPair {InputVersion = "0.8", OutputVersion = "Win0.8"}, new CatrobatVersion08ToWin08()}
                 };
             }
         }
