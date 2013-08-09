@@ -16,5 +16,10 @@ namespace Catrobat.Core.Misc.Helpers
             // todo: implement me
             return new ObservableCollection<UserVariable> { new UserVariable { Name = "Variable 1" }, new UserVariable { Name = "Variable 2" } };
         }
+
+        public static bool IsVariableLogal(Project project, UserVariable variable)
+        {
+            return !project.VariableList.ProgramVariableList.UserVariables.Contains(variable);
+        }
     }
 }

@@ -129,7 +129,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
         public RelayCommand FinishedCommand { get; private set; }
 
-        public RelayCommand CancelCommand { get; private set; }
+        public RelayCommand AddVariableCommand { get; private set; }
 
         #endregion
 
@@ -193,7 +193,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
         {
             // Commands
             FinishedCommand = new RelayCommand(FinishedAction, FinishedCommand_CanExecute);
-            CancelCommand = new RelayCommand(CancelAction);
+            AddVariableCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);

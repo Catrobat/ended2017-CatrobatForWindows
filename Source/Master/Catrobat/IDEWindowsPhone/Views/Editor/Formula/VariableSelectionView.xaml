@@ -64,6 +64,12 @@
           <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.back.rest.png" 
                               Text="{Binding Resources.Editor_ButtonBack, Source={StaticResource LocalizedStrings}}"
                               Command="{Binding FinishedCommand}" />
+          <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png" 
+                              Text="{Binding Resources.Editor_ButtonAddVariable, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding AddCommand}" />
+          <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.delete.rest.png" 
+                              Text="{Binding Resources.Editor_ButtonDelete, Source={StaticResource LocalizedStrings}}"
+                              Command="{Binding DeleteCommand}" />
         </appBarUtils:AppBar>
       </appBarUtils:SwitchAppBarAction>
     </appBarUtils:StateChangedTrigger>
