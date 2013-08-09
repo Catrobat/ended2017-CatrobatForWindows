@@ -57,7 +57,6 @@
     <Compile Include="Misc\Helpers\MD5.cs" />
     <Compile Include="Misc\Helpers\ISystemInformationHelper.cs" />
     <Compile Include="Misc\Helpers\ProjectHolder.cs" />
-    <Compile Include="Misc\Helpers\ReadHelper.cs" />
     <Compile Include="Misc\Helpers\ReferenceHelper.cs" />
     <Compile Include="CatrobatContextBase.cs" />
     <Compile Include="LocalSettings.cs" />

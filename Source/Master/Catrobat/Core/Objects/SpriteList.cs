@@ -13,10 +13,14 @@ namespace Catrobat.Core.Objects
             Sprites = new ObservableCollection<Sprite>();
         }
 
-        internal override void LoadFromXML(XElement xRoot)
+        public SpriteList(XElement xRoot)
         {
             Sprites = new ObservableCollection<Sprite>();
+            LoadFromXML(xRoot);
+        }
 
+        internal override void LoadFromXML(XElement xRoot)
+        {
             foreach (XElement xSprite in xRoot.Elements("object"))
             {
                 Sprites.Add(new Sprite());

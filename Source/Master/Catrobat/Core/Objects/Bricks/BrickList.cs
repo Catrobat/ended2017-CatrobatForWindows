@@ -16,14 +16,12 @@ namespace Catrobat.Core.Objects.Bricks
 
         public BrickList(XElement xElement)
         {
+            Bricks = new ObservableCollection<Brick>();
             LoadFromXML(xElement);
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            ReadHelper.CurrentBrickList = this;
-
-            Bricks = new ObservableCollection<Brick>();
             foreach (XElement element in xRoot.Elements())
             {
                 switch (element.Name.LocalName)
@@ -241,7 +239,6 @@ namespace Catrobat.Core.Objects.Bricks
         public DataObject Copy()
         {
             var newBrickList = new BrickList();
-            ReadHelper.CurrentBrickList = newBrickList;
 
             foreach (Brick brick in Bricks)
             {

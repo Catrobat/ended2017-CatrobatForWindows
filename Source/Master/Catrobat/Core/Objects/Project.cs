@@ -69,7 +69,7 @@ namespace Catrobat.Core.Objects
         public ObservableCollection<string> BroadcastMessages
         {
             get { return _broadcastMessages; }
-            set
+            private set
             {
                 if (value != null)
                 {
@@ -196,8 +196,7 @@ namespace Catrobat.Core.Objects
             var project = document.Element("program");
             _projectHeader = new ProjectHeader(project.Element("header"));
 
-            _spriteList = new SpriteList();
-            _spriteList.LoadFromXML(project.Element("objectList"));
+            _spriteList = new SpriteList(project.Element("objectList"));
 
             _variableList = new VariableList(project.Element("variables"));
 

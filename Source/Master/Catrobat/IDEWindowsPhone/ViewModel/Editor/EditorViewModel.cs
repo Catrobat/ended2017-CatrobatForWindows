@@ -562,12 +562,31 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             var scriptBricksToRemove = new List<DataObject>(SelectedScripts);
 
             foreach (var scriptBrick in scriptBricksToRemove)
-                if (scriptBrick is Brick)
-                    ScriptBricks.Remove(scriptBrick);
+            {
+                //if (scriptBrick is LoopBeginBrick)
+                //    scriptBricksToRemove.Add((scriptBrick as LoopBeginBrick).LoopEndBrick);
+                //if (scriptBrick is IfLogicBeginBrick)
+                //{
+                //    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicElseBrick);
+                //    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicEndBrick);
+                //}
+                //if (scriptBrick is IfLogicElseBrick)
+                //{
+                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicBeginBrick);
+                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicEndBrick);
+                //}
+                //if (scriptBrick is IfLogicElseBrick)
+                //{
+                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicBeginBrick);
+                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicEndBrick);
+                //}
 
-            foreach (var scriptBrick in scriptBricksToRemove)
-                if (scriptBrick is Script)
+
+                if (scriptBrick is Brick || scriptBrick is Script)
                     ScriptBricks.Remove(scriptBrick);
+            }
+
+
         }
 
 

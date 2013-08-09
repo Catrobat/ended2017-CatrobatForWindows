@@ -15,12 +15,12 @@ namespace Catrobat.Core.Objects.Scripts
 
         public ScriptList(XElement xElement)
         {
+            Scripts = new ObservableCollection<Script>();
             LoadFromXML(xElement);
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
-            Scripts = new ObservableCollection<Script>();
             foreach (XElement element in xRoot.Elements())
             {
                 switch (element.Name.LocalName)
