@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Storage;
@@ -10,23 +11,34 @@ namespace Catrobat.Core
     {
         #region Static methods
 
-        public static Project CreateNewProjectByNameStatic(string projectName)
+        public static Project LoadNewProjectByNameStatic(string projectName)
         {
-            var projectCodeFile = Path.Combine(ProjectsPath, projectName);
-
-            try
+            if (Debugger.IsAttached)
             {
-                using (var storage = StorageSystem.GetStorage())
+                return LoadNewProjectByNameStaticWithoutTryCatch(projectName);
+            }
+            else
+            {
+                try
                 {
-                    var tempPath = Path.Combine(projectCodeFile, Project.ProjectCodePath);
-                    var xml = storage.ReadTextFile(tempPath);
-                    var newProject = new Project(xml);
-                    return newProject;
+                    return LoadNewProjectByNameStaticWithoutTryCatch(projectName);
+                }
+                catch
+                {
+                    throw new Exception("Project does not exist");
                 }
             }
-            catch
+        }
+
+        private static Project LoadNewProjectByNameStaticWithoutTryCatch(string projectName)
+        {
+            using (var storage = StorageSystem.GetStorage())
             {
-                throw new Exception("Project does not exist");
+                var tempPath = Path.Combine(ProjectsPath, projectName, Project.ProjectCodePath);
+                var xml = storage.ReadTextFile(tempPath);
+                var newProject = new Project(xml);
+                newProject.SetProgramName(projectName);
+                return newProject;
             }
         }
 
@@ -51,6 +63,7 @@ namespace Catrobat.Core
 
                 var project = new Project(xml);
                 project.SetProgramName(projectName);
+                //project.Save();
                 return project;
             }
         }

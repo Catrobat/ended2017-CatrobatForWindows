@@ -54,7 +54,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         public Project CurrentProject
         {
             get { return _currentProject; }
-            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
         }
 
         public ObservableCollection<Sprite> Sprites
@@ -96,7 +96,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 DeleteSpriteCommand.RaiseCanExecuteChanged();
 
                 var spriteChangedMessage = new GenericMessage<Sprite>(SelectedSprite);
-                Messenger.Default.Send<GenericMessage<Sprite>>(spriteChangedMessage, ViewModelMessagingToken.SelectedSpriteListener);
+                Messenger.Default.Send<GenericMessage<Sprite>>(spriteChangedMessage, ViewModelMessagingToken.CurrentSpriteChangedListener);
             }
         }
 
@@ -562,12 +562,31 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             var scriptBricksToRemove = new List<DataObject>(SelectedScripts);
 
             foreach (var scriptBrick in scriptBricksToRemove)
-                if (scriptBrick is Brick)
-                    ScriptBricks.Remove(scriptBrick);
+            {
+                //if (scriptBrick is LoopBeginBrick)
+                //    scriptBricksToRemove.Add((scriptBrick as LoopBeginBrick).LoopEndBrick);
+                //if (scriptBrick is IfLogicBeginBrick)
+                //{
+                //    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicElseBrick);
+                //    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicEndBrick);
+                //}
+                //if (scriptBrick is IfLogicElseBrick)
+                //{
+                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicBeginBrick);
+                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicEndBrick);
+                //}
+                //if (scriptBrick is IfLogicElseBrick)
+                //{
+                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicBeginBrick);
+                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicEndBrick);
+                //}
 
-            foreach (var scriptBrick in scriptBricksToRemove)
-                if (scriptBrick is Script)
+
+                if (scriptBrick is Brick || scriptBrick is Script)
                     ScriptBricks.Remove(scriptBrick);
+            }
+
+
         }
 
 
@@ -621,7 +640,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         private void AddNewSoundAction()
         {
             var message = new GenericMessage<Sprite>(SelectedSprite);
-            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SelectedSpriteListener);
+            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
             Navigation.NavigateTo(typeof(AddNewSoundView));
         }
@@ -656,7 +675,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         private void AddNewCostumeAction()
         {
             var message = new GenericMessage<Sprite>(SelectedSprite);
-            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SelectedSpriteListener);
+            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
             Navigation.NavigateTo(typeof(NewCostumeSourceSelectionView));
         }

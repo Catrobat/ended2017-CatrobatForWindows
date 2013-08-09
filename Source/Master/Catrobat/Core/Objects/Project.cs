@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Xml.Linq;
 using Catrobat.Core.Misc.Helpers;
@@ -30,12 +31,12 @@ namespace Catrobat.Core.Objects
                 {
                     var screenshotPath = Path.Combine(BasePath, ScreenshotPath);
                     var automaticProjectScreenshotPath = Path.Combine(BasePath, AutomaticScreenshotPath);
-                        
+
                     using (var storage = StorageSystem.GetStorage())
                     {
-                        if(storage.FileExists(screenshotPath))
+                        if (storage.FileExists(screenshotPath))
                             _projectScreenshot = storage.LoadImage(screenshotPath);
-                        else if(storage.FileExists(automaticProjectScreenshotPath))
+                        else if (storage.FileExists(automaticProjectScreenshotPath))
                             _projectScreenshot = storage.LoadImage(automaticProjectScreenshotPath);
                     }
                 }
@@ -68,7 +69,7 @@ namespace Catrobat.Core.Objects
         public ObservableCollection<string> BroadcastMessages
         {
             get { return _broadcastMessages; }
-            set
+            private set
             {
                 if (value != null)
                 {
@@ -187,28 +188,25 @@ namespace Catrobat.Core.Objects
 
         protected override void LoadFromXML(String xml)
         {
-            Document = XDocument.Load(new StringReader(xml));
-            Document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
+            var document = XDocument.Load(new StringReader(xml));
+            document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
             ProjectHolder.Project = this;
 
-            //Converter.Converter.Convert(_document);
-
-            var project = Document.Element("program");
+            var project = document.Element("program");
             _projectHeader = new ProjectHeader(project.Element("header"));
 
-            _spriteList = new SpriteList();
-            _spriteList.LoadFromXML(project.Element("objectList"));
+            _spriteList = new SpriteList(project.Element("objectList"));
 
             _variableList = new VariableList(project.Element("variables"));
-            
+
             LoadReference();
             LoadBroadcastMessages();
         }
 
         internal override XDocument CreateXML()
         {
-            Document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
+            var document = new XDocument { Declaration = new XDeclaration("1.0", "UTF-8", "yes") };
 
             var xProject = new XElement("program");
 
@@ -218,9 +216,9 @@ namespace Catrobat.Core.Objects
 
             xProject.Add(_variableList.CreateXML());
 
-            Document.Add(xProject);
+            document.Add(xProject);
 
-            return Document;
+            return document;
         }
 
         internal void LoadReference()
@@ -281,8 +279,6 @@ namespace Catrobat.Core.Objects
 
         public void Save(string path = null)
         {
-            var xDocument = CreateXML();
-
             if (path == null)
             {
                 path = BasePath + "/" + ProjectCodePath;
@@ -293,7 +289,8 @@ namespace Catrobat.Core.Objects
                 try
                 {
                     var writer = new XmlStringWriter();
-                    Document.Save(writer, SaveOptions.None);
+                    var document = CreateXML();
+                    document.Save(writer, SaveOptions.None);
 
                     var xml = writer.GetStringBuilder().ToString();
                     storage.WriteTextFile(path, xml);
@@ -337,7 +334,7 @@ namespace Catrobat.Core.Objects
             if (!ProjectHeader.Equals(otherProject.ProjectHeader))
                 return false;
 
-            if(!SpriteList.Equals(otherProject.SpriteList))
+            if (!SpriteList.Equals(otherProject.SpriteList))
                 return false;
 
             if (!VariableList.Equals(otherProject.VariableList))

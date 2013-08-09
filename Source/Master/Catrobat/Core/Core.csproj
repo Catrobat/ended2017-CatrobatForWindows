@@ -57,10 +57,10 @@
     <Compile Include="Misc\Helpers\MD5.cs" />
     <Compile Include="Misc\Helpers\ISystemInformationHelper.cs" />
     <Compile Include="Misc\Helpers\ProjectHolder.cs" />
-    <Compile Include="Misc\Helpers\ReadHelper.cs" />
     <Compile Include="Misc\Helpers\ReferenceHelper.cs" />
     <Compile Include="CatrobatContextBase.cs" />
     <Compile Include="LocalSettings.cs" />
+    <Compile Include="Misc\Helpers\VariableHelper.cs" />
     <Compile Include="Misc\JSON\JSONClassDeserializer.cs" />
     <Compile Include="Misc\JSON\JSONStatusResponse.cs" />
     <Compile Include="Misc\PropertyNameHelper.cs" />
@@ -170,7 +170,7 @@
     <Compile Include="VersionConverter\CatrobatVersionPair.cs" />
     <Compile Include="VersionConverter\CatrobatVersionConfig.cs" />
     <Compile Include="VersionConverter\CatrobatVersionConverter.cs" />
-    <Compile Include="VersionConverter\Versions\CatrobatVersion08.cs" />
+    <Compile Include="VersionConverter\Versions\CatrobatVersion08ToWin08.cs" />
     <Compile Include="Misc\XPathHelper.cs" />
     <Compile Include="XmlStringWriter.cs" />
     <Compile Include="ZIP\CatrobatZip.cs" />

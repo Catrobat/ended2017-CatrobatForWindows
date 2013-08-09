@@ -16,17 +16,15 @@ namespace Catrobat.Core.Objects.Variables
 
         public ProgramVariableList(XElement xElement)
         {
+            UserVariables = new ObservableCollection<UserVariable>();
             LoadFromXML(xElement);
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot == null)
-            {
-                UserVariables = new ObservableCollection<UserVariable>();
                 return;
-            }
-            UserVariables = new ObservableCollection<UserVariable>();
+
             foreach (XElement element in xRoot.Elements())
             {
                 UserVariables.Add(new UserVariable(element));

@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using Catrobat.Core;
+using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -12,26 +14,40 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 {
-    public delegate void FormulaChangedCallback(Core.Objects.Formulas.Formula formula);
+    public delegate void FormulaChanged(Core.Objects.Formulas.Formula formula);
 
+    public delegate void ErrorOccurred();
 
     public class FormulaEditorViewModel : ViewModelBase
     {
         #region Events
 
-        public FormulaChangedCallback FormulaChangedCallback;
+        public FormulaChanged FormulaChanged;
+
+        public ErrorOccurred ErrorOccurred;
+
+        private void RaiseFormulaChanged(Core.Objects.Formulas.Formula formula)
+        {
+            if (FormulaChanged != null)
+                FormulaChanged.Invoke(formula);
+        }
+
+        private void RaiseKeyError()
+        {
+            if (ErrorOccurred != null)
+                ErrorOccurred.Invoke();
+        }
 
         #endregion
 
         #region Private Members
 
         private Core.Objects.Formulas.Formula _formula;
-        private ObservableCollection<UserVariable> _localVariables;
-        private ObservableCollection<UserVariable> _globalVariables;
         private Sprite _selectedSprite;
         private Project _selectedProject;
         private FormulaButton _formulaButton;
         private Project _currentProject;
+        private SelectedFormulaInformation _selectedFormulaInformation;
 
         #endregion
 
@@ -40,7 +56,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
         public Project CurrentProject
         {
             get { return _currentProject; }
-            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject);}
+            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
         }
 
         public FormulaButton FormulaButton
@@ -53,6 +69,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             }
         }
 
+        public SelectedFormulaInformation SelectedFormulaInformation
+        {
+            get { return _selectedFormulaInformation; }
+            set
+            {
+                _selectedFormulaInformation = value;
+                RaisePropertyChanged(() => SelectedFormulaInformation);
+            }
+        }
+
         public Project SelectedProject
         {
             get { return _selectedProject; }
@@ -62,8 +88,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
                 RaisePropertyChanged(() => SelectedProject);
 
                 if (_selectedProject == null) return;
-
-                GlobalVariables = _selectedProject.VariableList.ProgramVariableList.UserVariables;
             }
         }
 
@@ -76,12 +100,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
                 RaisePropertyChanged(() => SelectedSprite);
 
                 if (_selectedSprite == null) return;
-
-                foreach (var entry in CurrentProject.VariableList.ObjectVariableList.ObjectVariableEntries)
-                {
-                    if (entry.Sprite == _selectedSprite)
-                        LocalVariables = entry.VariableList.UserVariables;
-                }
             }
         }
 
@@ -95,26 +113,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             }
         }
 
-        public ObservableCollection<UserVariable> LocalVariables
-        {
-            get { return _localVariables; }
-            set
-            {
-                _localVariables = value;
-                RaisePropertyChanged(() => LocalVariables);
-            }
-        }
-
-        public ObservableCollection<UserVariable> GlobalVariables
-        {
-            get { return _globalVariables; }
-            set
-            {
-                _globalVariables = value;
-                RaisePropertyChanged(() => GlobalVariables);
-            }
-        }
-
         #endregion
 
         #region Commands
@@ -122,6 +120,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
         public RelayCommand<UiFormula> FormulaPartSelectedComand { get; private set; }
 
         public RelayCommand FormulaChangedCommand { get; private set; }
+
+        public RelayCommand<SensorVariable> SensorVariableSelectedCommand { get; private set; }
+
+        public RelayCommand<ObjectVariable> ObjectVariableSelectedCommand { get; private set; }
+
+        public RelayCommand<FormulaEditorKey> KeyPressedCommand { get; private set; }
 
         #endregion
 
@@ -133,21 +137,51 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
             formula.ClearAllSelection();
 
-            if(formula.IsEditEnabled)
+            if (formula.IsEditEnabled)
                 formula.IsSelected = !wasSelected;
         }
 
         private void FormulaChangedAction()
         {
-            if(FormulaButton != null)
+            if (FormulaButton != null)
                 FormulaButton.FormulaChanged();
+        }
+
+        private void KeyPressedCommandAction(FormulaEditorKey key)
+        {
+            var formulaEditor = new FormulaEditor { SelectedFormula = SelectedFormulaInformation };
+            if (!formulaEditor.KeyPressed(key))
+                RaiseKeyError();
+
+            FormulaButton.FormulaChanged();
+            RaiseFormulaChanged(Formula);
+        }
+
+        private void ObjectVariableSelectedAction(ObjectVariable variable)
+        {
+            var formulaEditor = new FormulaEditor { SelectedFormula = SelectedFormulaInformation };
+            if (!formulaEditor.ObjectVariableSelected(variable))
+                RaiseKeyError();
+
+            FormulaButton.FormulaChanged();
+            RaiseFormulaChanged(Formula);
+        }
+
+        private void SensorVariableSelectedAction(SensorVariable variable)
+        {
+            var formulaEditor = new FormulaEditor{SelectedFormula = SelectedFormulaInformation};
+            if (!formulaEditor.SensorVariableSelected(variable))
+                RaiseKeyError();
+
+            FormulaButton.FormulaChanged();
+            RaiseFormulaChanged(Formula);
         }
 
         #endregion
 
         #region MessageActions
 
-        private void CurrentProjectChangedAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
         {
             CurrentProject = message.Content;
         }
@@ -157,19 +191,47 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             SelectedSprite = message.Content;
         }
 
+        private void UserVariableSelectedMessageAction(GenericMessage<UserVariable> message)
+        {
+            var formulaEditor = new FormulaEditor { SelectedFormula = SelectedFormulaInformation };
+            var variable = message.Content;
+
+            if (VariableHelper.IsVariableLocal(CurrentProject, variable))
+            {
+                if (!formulaEditor.LocalVariableSelected(variable))
+                    RaiseKeyError();
+            }
+            else
+            {
+                if (!formulaEditor.GlobalVariableSelected(variable))
+                    RaiseKeyError();
+            }
+
+            RaiseFormulaChanged(Formula);
+        }
+
         #endregion
 
         public FormulaEditorViewModel()
         {
-            Messenger.Default.Register<GenericMessage<Sprite>>(this, 
-                ViewModelMessagingToken.SelectedSpriteListener, SelectedSpriteChangesMessageAction);
+            Messenger.Default.Register<GenericMessage<Sprite>>(this,
+                ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangesMessageAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
+                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+
+
+            Messenger.Default.Register<GenericMessage<UserVariable>>(this,
+                 ViewModelMessagingToken.UserVariableSelectedListener, UserVariableSelectedMessageAction);
 
             FormulaPartSelectedComand = new RelayCommand<UiFormula>(FormulaPartSelectedAction);
             FormulaChangedCommand = new RelayCommand(FormulaChangedAction);
+
+            SensorVariableSelectedCommand = new RelayCommand<SensorVariable>(SensorVariableSelectedAction);
+            ObjectVariableSelectedCommand = new RelayCommand<ObjectVariable>(ObjectVariableSelectedAction);
+            KeyPressedCommand = new RelayCommand<FormulaEditorKey>(KeyPressedCommandAction);
         }
+
 
         private void ResetViewModel() { }
     }

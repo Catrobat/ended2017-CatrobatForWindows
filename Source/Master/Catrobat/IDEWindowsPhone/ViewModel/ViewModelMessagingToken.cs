@@ -4,7 +4,7 @@
     {
         CostumeNameListener,
         SoundNameListener,
-        SelectedSpriteListener,
+        CurrentSpriteChangedListener,
         SpriteNameListener,
         SpriteListListener,
         ProjectNameListener,
@@ -16,6 +16,9 @@
         LocalProjectsChangedListener,
         ContextListener,
         ThemeChooserListener,
-        PinProjectHeaderListener
+        PinProjectHeaderListener,
+        DownloadProjectStartedListener,
+        UploadProjectStartedListener,
+        UserVariableSelectedListener
     }
 }

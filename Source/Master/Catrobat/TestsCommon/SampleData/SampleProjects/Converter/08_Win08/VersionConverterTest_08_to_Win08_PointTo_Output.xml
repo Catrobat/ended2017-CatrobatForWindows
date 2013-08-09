@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<program>
+  <objectList>
+    <object>
+      <lookList />
+      <name>Hintergrund</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <pointToBrick>
+              <object reference="../../../../../../object[2]" />
+            </pointToBrick>
+          </brickList>
+        </startScript>
+      </scriptList>
+      <soundList />
+    </object>
+    <object>
+      <lookList />
+      <name>sprite1</name>
+      <scriptList />
+      <soundList />
+    </object>
+  </objectList>
+  <variables>
+    <objectVariableList />
+    <programVariableList />
+  </variables>
+</program>

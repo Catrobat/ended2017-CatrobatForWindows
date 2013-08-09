@@ -40,7 +40,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         public Project CurrentProject
         {
             get { return _currentProject; }
-            set
+            private set
             {
                 _currentProject = value;
                 RaisePropertyChanged(() => CurrentProject);
@@ -236,7 +236,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
-                ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
+                ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);

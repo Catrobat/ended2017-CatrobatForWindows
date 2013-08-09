@@ -49,7 +49,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
         public Project CurrentProject
         {
             get { return _currentProject; }
-            set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
         }
         public bool IsRecording
         {
@@ -428,7 +428,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this, 
-                ViewModelMessagingToken.SelectedSpriteListener, ReceiveSelectedSpriteMessageAction);
+                ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);

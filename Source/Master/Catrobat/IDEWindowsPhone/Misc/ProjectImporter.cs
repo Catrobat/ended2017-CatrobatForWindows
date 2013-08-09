@@ -139,7 +139,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
                 {
                     if (setActive)
                     {
-                        var newProject = Core.CatrobatContext.CreateNewProjectByNameStatic(newProjectName);
+                        var newProject = Core.CatrobatContext.LoadNewProjectByNameStatic(newProjectName);
 
                         var projectChangedMessage = new GenericMessage<Project>(newProject);
                         Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);

@@ -166,7 +166,7 @@
 
                 <Grid Grid.Row="1">
                   <Grid
-                    Visibility="{Binding IsActiveatingLocalProject, 
+                    Visibility="{Binding IsActivatingLocalProject, 
                     Converter={StaticResource BoolVisibilityConverter}}"
                     Margin="0 0 10 0">
                     <Grid.ColumnDefinitions>
@@ -182,7 +182,7 @@
                   </Grid>
 
                   <TextBlock Grid.Column="0" Opacity="0.9" Margin="10 0 10 0" TextWrapping="Wrap" TextAlignment="Center" 
-                             Visibility="{Binding IsActiveatingLocalProject, 
+                             Visibility="{Binding IsActivatingLocalProject, 
                               Converter={StaticResource BoolVisibilityNegativeConverter}}"
                              VerticalAlignment="Center" HorizontalAlignment="Left">ACTIVE</TextBlock>
                 </Grid>

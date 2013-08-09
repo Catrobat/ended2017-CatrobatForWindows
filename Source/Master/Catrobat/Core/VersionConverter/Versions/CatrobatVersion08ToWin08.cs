@@ -9,7 +9,7 @@ using Catrobat.Core.Misc;
 
 namespace Catrobat.Core.VersionConverter.Versions
 {
-    public class CatrobatVersion08 : CatrobatVersion
+    public class CatrobatVersion08ToWin08 : CatrobatVersion
     {
         public override CatrobatVersionPair CatrobatVersionPair { 
             get
@@ -129,9 +129,6 @@ namespace Catrobat.Core.VersionConverter.Versions
             }
         }
 
-        
-
-
         protected void UnifyObjectReferences(XDocument document)
         {
             var listNodes = document.Descendants("objectList").ToList();
@@ -149,7 +146,6 @@ namespace Catrobat.Core.VersionConverter.Versions
 
         protected void UnifyLookReferences(XDocument document)
         {
-            // TODO: implement me
             // seems unnecessary since look list lies before any possible references
         }
 

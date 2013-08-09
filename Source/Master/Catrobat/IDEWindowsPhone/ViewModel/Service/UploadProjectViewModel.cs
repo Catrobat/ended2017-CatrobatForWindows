@@ -6,6 +6,7 @@ using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
+using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -33,12 +34,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             {
                 return _currentProject;
             }
-            set
+            private set
             {
                 if (value == _currentProject) return;
-
                 _currentProject = value;
-
                 RaisePropertyChanged(() => CurrentProject);
             }
         }
@@ -124,11 +123,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                                               Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
                                               Context.CurrentToken, UploadCallback);
 
-            Messenger.Default.Send(new DialogMessage(AppResources.Main_UploadQueueMessage, null)
-            {
-                Caption = AppResources.Main_MessageBoxInformation,
-                Button = MessageBoxButton.OK,
-            });
+            var message = new MessageBase();
+            Messenger.Default.Send(message, ViewModelMessagingToken.UploadProjectStartedListener);
 
             Navigation.RemoveBackEntry();
             Navigation.NavigateBack();
@@ -162,6 +158,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         public UploadProjectViewModel()
         {
+            InitializeCommand = new RelayCommand(InitializeAction);
             UploadCommand = new RelayCommand(UploadAction, UploadCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
@@ -179,11 +176,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
         {
             if (ServerCommunication.NoUploadsPending())
             {
-                Messenger.Default.Send(new DialogMessage(AppResources.Main_NoUploadsPending, null)
+                var toast = new ToastPrompt
                 {
-                    Caption = AppResources.Main_MessageBoxInformation,
-                    Button = MessageBoxButton.OK,
-                });
+                    Message = AppResources.Main_NoUploadsPending
+                };
+                toast.Show();
             }
         }
 

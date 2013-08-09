@@ -4,10 +4,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Storage;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
+using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
@@ -49,6 +53,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         {
             if(Navigation.CanGoBack)
                 Navigation.RemoveBackEntry();
+
+            _viewModel.ShowMessagesCommand.Execute(null);
+
             base.OnNavigatedTo(e);
         }
 

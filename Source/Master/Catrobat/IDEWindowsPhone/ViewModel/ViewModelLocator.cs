@@ -57,6 +57,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<FormulaEditorViewModel>(true);
             SimpleIoc.Default.Register<PlayerLauncherViewModel>(true);
             SimpleIoc.Default.Register<TileGeneratorViewModel>(true);
+            SimpleIoc.Default.Register<VariableSelectionViewModel>(true);
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -64,6 +65,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
   
                 var messageContext = new GenericMessage<CatrobatContextBase>(context);
                 Messenger.Default.Send(messageContext, ViewModelMessagingToken.ContextListener);
+
+                var messageCurrentSprite = new GenericMessage<Sprite>(context.CurrentProject.SpriteList.Sprites[0]);
+                Messenger.Default.Send(messageCurrentSprite, ViewModelMessagingToken.CurrentSpriteChangedListener);
             }
         }
 
@@ -90,12 +94,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 }
 
                 currentProject = CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+                currentProject.Save();
                 context.LocalSettings = new LocalSettings { CurrentProjectName = currentProject.ProjectHeader.ProgramName };
             }
             else
             {
                 context.LocalSettings = localSettings;
-                currentProject = CatrobatContext.CreateNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
+                currentProject = CatrobatContext.LoadNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
             }
 
             return currentProject;
@@ -127,7 +132,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectChangedListener);
         }
 
-        public static void SaveContext(string currentProjectName)
+        public static void SaveContext(Project currentProject)
         {
             var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
             var settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
@@ -142,8 +147,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 _context.LocalSettings.CurrentLanguageString = settingsViewModel.CurrentCulture.Name;
             }
 
-            _context.LocalSettings.CurrentProjectName = currentProjectName;
+            _context.LocalSettings.CurrentProjectName = currentProject.ProjectHeader.ProgramName;
             CatrobatContext.StoreLocalSettingsStatic(_context.LocalSettings);
+
+            currentProject.Save();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
@@ -374,6 +381,17 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<TileGeneratorViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public VariableSelectionViewModel VariableSelectionViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<VariableSelectionViewModel>();
             }
         }
 

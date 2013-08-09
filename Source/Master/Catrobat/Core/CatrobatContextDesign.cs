@@ -82,46 +82,66 @@ namespace Catrobat.Core
 
             project.SetProgramName("Project 1 with very very very very very long name");
 
-            project.VariableList = new VariableList
-            {
-                ObjectVariableList = new ObjectVariableList
+            project.SpriteList = new SpriteList();
+
+            var sprite = new Sprite { Name = "Object 1" };
+
+            var costumes = new CostumeList
                 {
-                    ObjectVariableEntries = new ObservableCollection<ObjectVariableEntry>()
-                },
-                ProgramVariableList = new ProgramVariableList
+                    Costumes = new ObservableCollection<Costume>{new Costume{Name = "Cat"}}
+                };
+            sprite.Costumes = costumes;
+
+            var sounds = new SoundList
                 {
-                    UserVariables = new ObservableCollection<UserVariable>()
-                },
+                    Sounds = new ObservableCollection<Sound> {new Sound {Name = "Miau Sound"}}
+                };
+            sprite.Sounds = sounds;
+
+            var scripts = new ScriptList
+                {
+                    Scripts = new ObservableCollection<Script>
+                    {
+                        new StartScript{ Bricks = new BrickList() }
+                    }
+                };
+
+            var setCostumeBrick = new SetCostumeBrick
+                {
+                    Costume = sprite.Costumes.Costumes[0],
+                };
+            scripts.Scripts[0].Bricks.Bricks.Add(setCostumeBrick);
+            sprite.Scripts = scripts;
+            project.SpriteList.Sprites.Add(sprite);
+
+
+            project.VariableList = new VariableList();
+
+            var programVariableList = new ProgramVariableList();
+            var globalVariables = new ObservableCollection<UserVariable> 
+            { 
+                new UserVariable { Name = "GlobalVariable 1" }, 
+                new UserVariable { Name = "GlobalVariable 2" }
             };
+            programVariableList.UserVariables = globalVariables;
 
+            var objectVariableList = new ObjectVariableList();
+            var entries = new ObservableCollection<ObjectVariableEntry>
+                {
+                    new ObjectVariableEntry
+                    {
+                        SpriteReference = new SpriteReference{Sprite = sprite},
+                        VariableList = new UserVariableList{UserVariables = new ObservableCollection<UserVariable>
+                        {
+                            new UserVariable{Name = "LocalVariable 1"},
+                            new UserVariable{Name = "LocalVariable 2"}
+                        }}
+                    }
+                };
+            objectVariableList.ObjectVariableEntries = entries;
 
-            var sprites = new SpriteList();
-            var sprite = new Sprite();
-            sprite.Name = "Object 1";
-
-            sprite.Costumes = new CostumeList();
-            var costume = new Costume("Cat");
-            var image = new byte[0]; //new BitmapImage(new Uri(costume.FileName, UriKind.Relative)); // TODO: fix me
-            //costume.Image = image;
-            sprite.Costumes.Costumes.Add(costume);
-
-            sprite.Sounds = new SoundList();
-            var sound = new Sound("Miau_Sound");
-            sprite.Sounds.Sounds.Add(sound);
-
-            sprite.Scripts = new ScriptList();
-            Script startScript = new StartScript();
-
-            startScript.Bricks = new BrickList();
-            var setCostumeBrick = new SetCostumeBrick();
-            var costumeRef = new CostumeReference();
-            costumeRef.Costume = costume;
-            //setCostumeBrick.Costume = costumeRef;
-
-            //TODO: Add more Bricks if you need them
-
-            sprites.Sprites.Add(sprite);
-            project.SpriteList = sprites;
+            project.VariableList.ObjectVariableList = objectVariableList;
+            project.VariableList.ProgramVariableList = programVariableList;
 
             CurrentProject = project;
         }
@@ -180,5 +200,9 @@ namespace Catrobat.Core
             OnlineProjects.Add(project3);
         }
 
+        private void InitVariables()
+        {
+            //TODO: init variables
+        }
     }
 }

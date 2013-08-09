@@ -10,6 +10,7 @@ using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Storage;
+using Catrobat.Core.VersionConverter;
 using Catrobat.Core.ZIP;
 
 namespace Catrobat.IDEWindowsPhone.Misc
@@ -69,11 +70,9 @@ namespace Catrobat.IDEWindowsPhone.Misc
                     });
         }
 
-        public int DownloadAndSaveProject(string downloadUrl, string projectName,
+        public void DownloadAndSaveProject(string downloadUrl, string projectName,
                                           ServerCommunication.DownloadAndSaveProjectEvent callback)
         {
-            int[] downloadCounterChange = {0};
-
             var wc = new WebClient();
             wc.OpenReadCompleted += ((s, args) =>
                 {
@@ -98,26 +97,23 @@ namespace Catrobat.IDEWindowsPhone.Misc
                                                                             CatrobatContextBase.ProjectsPath + "/" +
                                                                             projectName);
 
-                        downloadCounterChange[0]--;
+                        var error = CatrobatVersionConverter.ConvertByProjectName(projectName);
 
                         if (callback != null)
                         {
-                            callback(projectName);
+                            callback(projectName, error);
                         }
                     }
                     catch (Exception)
                     {
                         if (callback != null)
                         {
-                            callback("");
+                            callback("", CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid);
                         }
                     }
                 });
 
-            downloadCounterChange[0]++;
             wc.OpenReadAsync(new Uri(downloadUrl, UriKind.RelativeOrAbsolute));
-
-            return downloadCounterChange[0];
         }
     }
 }

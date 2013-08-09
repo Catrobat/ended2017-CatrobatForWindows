@@ -91,7 +91,7 @@ namespace IDEWindowsPhone
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-            ViewModelLocator.SaveContext(mainViewModel.CurrentProject.ProjectHeader.ProgramName);
+            ViewModelLocator.SaveContext(mainViewModel.CurrentProject);
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
@@ -99,7 +99,7 @@ namespace IDEWindowsPhone
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-            ViewModelLocator.SaveContext(mainViewModel.CurrentProject.ProjectHeader.ProgramName);
+            ViewModelLocator.SaveContext(mainViewModel.CurrentProject);
             ViewModelLocator.Cleanup();
         }
 

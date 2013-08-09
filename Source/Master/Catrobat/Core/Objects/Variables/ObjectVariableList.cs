@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Xml.Linq;
 
 namespace Catrobat.Core.Objects.Variables
@@ -16,17 +11,15 @@ namespace Catrobat.Core.Objects.Variables
 
         public ObjectVariableList(XElement xElement)
         {
+            ObjectVariableEntries = new ObservableCollection<ObjectVariableEntry>();
             LoadFromXML(xElement);
         }
 
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot == null)
-            {
-                ObjectVariableEntries = new ObservableCollection<ObjectVariableEntry>();
                 return;
-            }
-            ObjectVariableEntries = new ObservableCollection<ObjectVariableEntry>();
+
             foreach (XElement element in xRoot.Elements())
             {
                 ObjectVariableEntries.Add(new ObjectVariableEntry(element));
@@ -39,7 +32,8 @@ namespace Catrobat.Core.Objects.Variables
 
             foreach (ObjectVariableEntry entry in ObjectVariableEntries)
             {
-                xRoot.Add(entry.CreateXML());
+                if(entry.VariableList.UserVariables.Count > 0)
+                    xRoot.Add(entry.CreateXML());
             }
 
             return xRoot;

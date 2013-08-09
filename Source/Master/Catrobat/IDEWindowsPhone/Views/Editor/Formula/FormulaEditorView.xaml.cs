@@ -30,69 +30,48 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Formula
         public FormulaEditorView()
         {
             InitializeComponent();
+
+            _viewModel.FormulaChanged += FormulaChanged;
+            _viewModel.ErrorOccurred += ErrorOccurred;
+
             FormulaKeyboard.KeyPressed += KeyPressed;
-            FormulaKeyboard.LocalUserVariableSelected += LocalVariableSelected;
-            FormulaKeyboard.GlobalUserVariableSelected += GlobalVariableSelected;
             FormulaKeyboard.ObjectVariableSelected += ObjectVariableSelected;
             FormulaKeyboard.SensorVariableSelected += SensorVariableSelected;
             FormulaKeyboard.EvaluatePresed += EvaluatePresed;
         }
 
+        private void ErrorOccurred()
+        {
+            ShowKeyErrorAnimation();
+        }
+
+        private void FormulaChanged(Core.Objects.Formulas.Formula formula)
+        {
+            FormulaViewer.Formula = formula;
+        }
+
         private void SensorVariableSelected(SensorVariable variable)
         {
-            var formulaEditor = new FormulaEditor{SelectedFormula = FormulaViewer.GetSelectedFormula()};
-            if (!formulaEditor.SensorVariableSelected(variable))
-                ShowKeyErrorAnimation();
-            FormulaViewer.FormulaChanged();
-            _viewModel.FormulaChangedCommand.Execute(null);
-
-            var formulaEvaluator = new FormulaEvaluationRuntimeComponent();
-
-            int five = formulaEvaluator.Test(4);
-
-            
+            _viewModel.SelectedFormulaInformation = FormulaViewer.GetSelectedFormula();
+            _viewModel.SensorVariableSelectedCommand.Execute(variable);           
         }
 
         private void ObjectVariableSelected(ObjectVariable variable)
         {
-            var formulaEditor = new FormulaEditor{SelectedFormula = FormulaViewer.GetSelectedFormula()};
-            if (!formulaEditor.ObjectVariableSelected(variable))
-                ShowKeyErrorAnimation();
-            FormulaViewer.FormulaChanged();
-            _viewModel.FormulaChangedCommand.Execute(null);
-        }
-
-        private void GlobalVariableSelected(UserVariable variable)
-        {
-            var formulaEditor = new FormulaEditor{SelectedFormula = FormulaViewer.GetSelectedFormula()};
-            if (!formulaEditor.GlobalVariableSelected(variable))
-                ShowKeyErrorAnimation();
-            FormulaViewer.FormulaChanged();
-            _viewModel.FormulaChangedCommand.Execute(null);
-        }
-
-        private void LocalVariableSelected(UserVariable variable)
-        {
-            var formulaEditor = new FormulaEditor{SelectedFormula = FormulaViewer.GetSelectedFormula()};
-            if (!formulaEditor.LocalVariableSelected(variable))
-                ShowKeyErrorAnimation();
-            FormulaViewer.FormulaChanged();
-            _viewModel.FormulaChangedCommand.Execute(null);
+            _viewModel.SelectedFormulaInformation = FormulaViewer.GetSelectedFormula();
+            _viewModel.ObjectVariableSelectedCommand.Execute(variable);
         }
 
         private void KeyPressed(FormulaEditorKey key)
         {
-            var formulaEditor = new FormulaEditor{SelectedFormula = FormulaViewer.GetSelectedFormula()};
-            if(!formulaEditor.KeyPressed(key))
-                ShowKeyErrorAnimation();
-            FormulaViewer.FormulaChanged();
-            _viewModel.FormulaChangedCommand.Execute(null);
+            _viewModel.SelectedFormulaInformation = FormulaViewer.GetSelectedFormula();
+            _viewModel.KeyPressedCommand.Execute(key);
         }
-
 
         private void EvaluatePresed()
         {
-            throw new NotImplementedException();
+            //TODO: implement me
+            //throw new NotImplementedException();
         }
     }
 }
