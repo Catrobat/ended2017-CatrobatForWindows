@@ -196,7 +196,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             var formulaEditor = new FormulaEditor { SelectedFormula = SelectedFormulaInformation };
             var variable = message.Content;
 
-            if (VariableHelper.IsVariableLogal(CurrentProject, variable))
+            if (VariableHelper.IsVariableLocal(CurrentProject, variable))
             {
                 if (!formulaEditor.LocalVariableSelected(variable))
                     RaiseKeyError();

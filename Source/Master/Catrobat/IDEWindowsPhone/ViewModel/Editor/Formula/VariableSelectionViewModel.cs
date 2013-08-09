@@ -108,7 +108,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
                 if (_selectedVariableContainer!= null && _selectedVariableContainer.Variable != null)
                 {
-                    if (VariableHelper.IsVariableLogal(CurrentProject, _selectedVariableContainer.Variable))
+                    if (VariableHelper.IsVariableLocal(CurrentProject, _selectedVariableContainer.Variable))
                         SelectedLocalVariable = _selectedVariableContainer.Variable;
                     else
                         SelectedGlobalVariable = _selectedVariableContainer.Variable;

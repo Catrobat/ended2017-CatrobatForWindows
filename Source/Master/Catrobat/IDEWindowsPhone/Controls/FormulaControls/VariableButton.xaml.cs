@@ -51,7 +51,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
             TextBlockVariableName.Text = newVariable.Name;
 
-            if (VariableHelper.IsVariableLogal(viewModel.CurrentProject, newVariable))
+            if (VariableHelper.IsVariableLocal(viewModel.CurrentProject, newVariable))
             {
                 TextBlockVariableName.Foreground = new SolidColorBrush(Colors.Black);
             }
