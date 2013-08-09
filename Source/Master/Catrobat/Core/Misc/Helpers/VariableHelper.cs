@@ -14,7 +14,14 @@ namespace Catrobat.Core.Misc.Helpers
                     return entry.VariableList.UserVariables;
             }
 
-            return null;
+
+            var newEntry = new ObjectVariableEntry
+                {
+                    Sprite = sprite,
+                    VariableList = new UserVariableList()
+                };
+            project.VariableList.ObjectVariableList.ObjectVariableEntries.Add(newEntry);
+            return newEntry.VariableList.UserVariables;
         }
 
         public static void DeleteGlobalVariable(Project project, UserVariable variable)

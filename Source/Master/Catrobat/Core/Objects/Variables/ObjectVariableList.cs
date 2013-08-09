@@ -32,7 +32,8 @@ namespace Catrobat.Core.Objects.Variables
 
             foreach (ObjectVariableEntry entry in ObjectVariableEntries)
             {
-                xRoot.Add(entry.CreateXML());
+                if(entry.VariableList.UserVariables.Count > 0)
+                    xRoot.Add(entry.CreateXML());
             }
 
             return xRoot;
