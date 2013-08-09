@@ -18,6 +18,7 @@
         ThemeChooserListener,
         PinProjectHeaderListener,
         DownloadProjectStartedListener,
-        UploadProjectStartedListener
+        UploadProjectStartedListener,
+        UserVariableSelectedListener
     }
 }

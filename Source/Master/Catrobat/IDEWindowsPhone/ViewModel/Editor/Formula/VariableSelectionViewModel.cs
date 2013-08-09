@@ -2,12 +2,13 @@
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Variables
+namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 {
     public class VariableSelectionViewModel : ViewModelBase
     {
@@ -19,6 +20,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Variables
         private ObservableCollection<UserVariable> _globalVariables;
         private UserVariable _selectedLocalVariable;
         private UserVariable _selectedGlobalVariable;
+        private VariableConteiner _selectedVariableContainer;
 
         #endregion
 
@@ -35,8 +37,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Variables
             get { return _currentSprite; }
             set
             {
-                _currentSprite = value; 
-                RaisePropertyChanged(()=> CurrentSprite);
+                _currentSprite = value;
+                RaisePropertyChanged(() => CurrentSprite);
             }
         }
 
@@ -45,8 +47,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Variables
             get { return _localVariables; }
             set
             {
-                _localVariables = value; 
-                RaisePropertyChanged(()=> LocalVariables);
+                _localVariables = value;
+                RaisePropertyChanged(() => LocalVariables);
             }
         }
 
@@ -65,11 +67,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Variables
             get { return _selectedLocalVariable; }
             set
             {
-                _selectedLocalVariable = value; 
-                RaisePropertyChanged(()=> SelectedLocalVariable);
+                _selectedLocalVariable = value;
+                RaisePropertyChanged(() => SelectedLocalVariable);
 
                 if (_selectedLocalVariable != null)
+                {
                     SelectedGlobalVariable = null;
+
+                    if (SelectedVariableContainer != null)
+                        SelectedVariableContainer.Variable = _selectedLocalVariable;
+                }
             }
         }
 
@@ -82,7 +89,37 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Variables
                 RaisePropertyChanged(() => SelectedGlobalVariable);
 
                 if (_selectedGlobalVariable != null)
+                {
                     SelectedLocalVariable = null;
+
+                    if (SelectedVariableContainer != null)
+                        SelectedVariableContainer.Variable = _selectedGlobalVariable;
+                }
+            }
+        }
+
+        public VariableConteiner SelectedVariableContainer
+        {
+            get { return _selectedVariableContainer; }
+            set
+            {
+                _selectedVariableContainer = value;
+                RaisePropertyChanged(() => SelectedVariableContainer);
+
+                if (_selectedVariableContainer!= null && _selectedVariableContainer.Variable != null)
+                {
+                    if (VariableHelper.IsVariableLogal(CurrentProject, _selectedVariableContainer.Variable))
+                        SelectedLocalVariable = _selectedVariableContainer.Variable;
+                    else
+                        SelectedGlobalVariable = _selectedVariableContainer.Variable;
+                }
+                else
+                {
+                    SelectedLocalVariable = null;
+                    SelectedGlobalVariable = null;
+                }
+
+
             }
         }
 
@@ -100,7 +137,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Variables
 
         private bool FinishedCommand_CanExecute()
         {
-            return false;
+            return true;
         }
 
         #endregion
@@ -109,7 +146,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Variables
 
         private void FinishedAction()
         {
-            // TODO: send message
+            Reset();
+
+            if (SelectedVariableContainer == null)
+            {
+                var selectedVariable = SelectedLocalVariable ?? SelectedGlobalVariable;
+                var message = new GenericMessage<UserVariable>(selectedVariable);
+                Messenger.Default.Send(message, ViewModelMessagingToken.UserVariableSelectedListener);
+            }
 
             Navigation.NavigateBack();
         }
@@ -158,10 +202,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Variables
                 ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMesageAction);
         }
 
-        public override void Cleanup()
+        public void Reset()
         {
-            CurrentProject = null;
-            base.Cleanup();
+            SelectedGlobalVariable = null;
+            SelectedLocalVariable = null;
+            SelectedVariableContainer = null;
         }
     }
 }

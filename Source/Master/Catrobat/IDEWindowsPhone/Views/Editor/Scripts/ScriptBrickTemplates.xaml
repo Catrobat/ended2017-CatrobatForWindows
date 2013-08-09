@@ -1058,19 +1058,25 @@
                   <RowDefinition />
                   <RowDefinition />
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
+                <!--<Grid.ColumnDefinitions>
                   <ColumnDefinition Width="1*" />
                   <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>-->
 
-                <TextBlock Grid.ColumnSpan="1" Grid.Row="0" VerticalAlignment="Center" 
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                  <TextBlock VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_SetVariable, Source={StaticResource LocalizedStrings}}"
                            Margin="10" FontSize="24" />
-                <TextBlock Grid.ColumnSpan="1" Grid.Row="1" Text="{Binding UserVariable.Name, Mode=TwoWay}" Margin="10" FontSize="24" />
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding Resources.Brick_SetVariableTo, Source={StaticResource LocalizedStrings}}" 
+
+                  <formulaControls:VariableButton MinWidth="120" MaxWidth="300" Variable="{Binding UserVariable}" IsEnabled="{Binding IsRealObject}"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                  <TextBlock Text="{Binding Resources.Brick_SetVariableTo, Source={StaticResource LocalizedStrings}}" 
                            Margin="10" FontSize="24" />
-                <formulaControls:FormulaButton Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Formula="{Binding VariableFormula, Mode=TwoWay}" 
+                  <formulaControls:FormulaButton HorizontalAlignment="Left" Formula="{Binding VariableFormula, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
+                </StackPanel>
               </Grid>
             </rlb:NormalBrick>
           </Grid>

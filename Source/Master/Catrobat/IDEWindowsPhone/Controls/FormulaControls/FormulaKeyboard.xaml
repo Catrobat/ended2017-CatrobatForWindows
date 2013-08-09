@@ -8,7 +8,7 @@
     xmlns:variables="clr-namespace:Catrobat.Core.Objects.Variables;assembly=Catrobat.Core"
     xmlns:buttons="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
     xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
-    xmlns:variables1="clr-namespace:Catrobat.IDEWindowsPhone.Views.Editor.Variables"
+    xmlns:formula="clr-namespace:Catrobat.IDEWindowsPhone.Views.Editor.Formula"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -467,7 +467,7 @@
           <RowDefinition Height="Auto"/>
           <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <variables1:VariableSelectionView VerticalAlignment="Stretch"></variables1:VariableSelectionView>
+        <formula:VariableSelectionView VerticalAlignment="Stretch"></formula:VariableSelectionView>
       </Grid>
     </Grid>
     <Grid Name="GridSensors" Visibility="Collapsed">

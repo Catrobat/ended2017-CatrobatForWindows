@@ -16,7 +16,6 @@ using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
-using Catrobat.IDEWindowsPhone.ViewModel.Editor.Variables;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Catrobat.IDEWindowsPhone.ViewModel.Service;
 using Catrobat.IDEWindowsPhone.ViewModel.Settings;
