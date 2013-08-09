@@ -6,7 +6,12 @@ namespace Catrobat.Core.Misc.Helpers
 {
     public class VariableHelper
     {
-        public static ObservableCollection<UserVariable> GetAndCreateLocalVariableList(Project project, Sprite sprite)
+        public static ObservableCollection<UserVariable> GetGlobalVariableList(Project project)
+        {
+            return project.VariableList.ProgramVariableList.UserVariables;
+        }
+
+        public static ObservableCollection<UserVariable> GetLocalVariableList(Project project, Sprite sprite)
         {
             foreach (var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
             {
@@ -29,12 +34,12 @@ namespace Catrobat.Core.Misc.Helpers
             project.VariableList.ProgramVariableList.UserVariables.Remove(variable);
         }
 
-        public static void DeleteLocalVariable(Project project, UserVariable variable)
+        public static void DeleteLocalVariable(Project project, Sprite sprite, UserVariable variable)
         {
             foreach (var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
             {
-                if(entry.VariableList.UserVariables.Contains(variable))
-                entry.VariableList.UserVariables.Remove(variable);
+                if(entry.Sprite == sprite)
+                    entry.VariableList.UserVariables.Remove(variable);
             }
         }
 
@@ -66,6 +71,18 @@ namespace Catrobat.Core.Misc.Helpers
         public static bool IsVariableLocal(Project project, UserVariable variable)
         {
             return !project.VariableList.ProgramVariableList.UserVariables.Contains(variable);
+        }
+
+        public static UserVariable CreateUniqueLocalVariable(Project project, Sprite sprite)
+        {
+            // TODO: implement me
+            return new UserVariable { Name = sprite.Name + "_a"};
+        }
+
+        public static UserVariable CreateUniqueGlobalVariable(Project project)
+        {
+            // TODO: implement me
+            return new UserVariable { Name = "global_a" };
         }
     }
 }

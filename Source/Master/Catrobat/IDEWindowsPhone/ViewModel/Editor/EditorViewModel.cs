@@ -1024,6 +1024,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
                 SelectedSprite.Delete();
                 Sprites.Remove(SelectedSprite);
+
+                SelectedSprite = null;
             }
         }
 

@@ -8,6 +8,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
   xmlns:appBarUtils="clr-namespace:AppBarUtils;assembly=AppBarUtils"
+  xmlns:coding4FunControls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
@@ -16,39 +17,109 @@
   DataContext="{Binding VariableSelectionViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="True">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+  <!--LayoutRoot is the root grid where all page content is placed-->
+  <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+    <!--TitlePanel contains the name of the application and page title-->
+    <StackPanel Grid.Row="0" Margin="12,17,0,28">
       <TextBlock Text="{Binding Resources.Editor_SelectVariablesViewHeader, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
     </StackPanel>
 
-    <phone:Pivot Grid.Row="1" Name="PivotMain" Title="{Binding Resources.Editor_GlobalVariables, Source={StaticResource LocalizedStrings}}">
+    <phone:Pivot Grid.Row="1" SelectedIndex="{Binding IsLocalView, 
+      Converter={StaticResource BoolToSelectedPivotItemConverter}, 
+      ConverterParameter={StaticResource BooleanFalse}, Mode=TwoWay }" 
+      Title="{Binding Resources.Editor_GlobalVariables, 
+      Source={StaticResource LocalizedStrings}}">
       <!-- Pivot local variables -->
       <phone:PivotItem Name="PivotLocal" Header="{Binding Resources.Editor_LocalVariables, Source={StaticResource LocalizedStrings}}">
         <ListBox ItemsSource="{Binding LocalVariables}" SelectionMode="Single" SelectedItem="{Binding SelectedLocalVariable, Mode=TwoWay}">
           <ListBox.ItemTemplate>
             <DataTemplate>
               <Grid DataContext="{Binding}">
-                <TextBlock Text="{Binding Name}"></TextBlock>
+                <Grid Visibility="{Binding Converter={StaticResource VariableEditVisibilityConverter}, 
+                  ConverterParameter={StaticResource BooleanTrue}}">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+
+                  <TextBlock Grid.Column="0" FontSize="45" Margin="5" VerticalAlignment="Center" KeyUp="TextBoxLocalVariableName_KeyDown" Text="{Binding Name}" />
+                  <coding4FunControls:RoundButton Grid.Column="1" VerticalAlignment="Center" Margin="0 0 0 0" 
+                    Visibility="{Binding Converter={StaticResource VariableButtonVisibilityConverter}, 
+                    ConverterParameter={StaticResource BooleanFalse}, Mode=OneWay}"
+                    Command="{Binding VariableSelectionViewModel.StartEditSelectedVariableCommand, Source={StaticResource Locator}}"                        
+                    ImageSource="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"/>
+                  <coding4FunControls:RoundButton Grid.Column="2" VerticalAlignment="Center" Margin="0 0 0 0"
+                    Visibility="{Binding Converter={StaticResource VariableButtonVisibilityConverter}, 
+                    ConverterParameter={StaticResource BooleanFalse}, Mode=OneWay}"
+                    Command="{Binding VariableSelectionViewModel.DeleteSelectedVariableCommand, Source={StaticResource Locator}}"                        
+                    ImageSource="/Content/Images/ApplicationBar/dark/appbar.delete.rest.png"/>
+                </Grid>
+                <Grid Visibility="{Binding Converter={StaticResource VariableEditVisibilityConverter}, 
+                  ConverterParameter={StaticResource BooleanFalse}}">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="350"/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+
+                  <TextBox Grid.Column="0" VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" />
+                  <coding4FunControls:RoundButton Grid.Column="1" VerticalAlignment="Center" Margin="0 0 0 0" 
+                    Visibility="{Binding Converter={StaticResource VariableButtonVisibilityConverter}, 
+                    ConverterParameter={StaticResource BooleanFalse}, Mode=OneWay}"
+                    Command="{Binding VariableSelectionViewModel.EndEditSelectedVariableCommand, Source={StaticResource Locator}}"                        
+                    ImageSource="/Content/Images/ApplicationBar/dark/appbar.check.rest.png"/>
+                </Grid>
               </Grid>
             </DataTemplate>
           </ListBox.ItemTemplate>
         </ListBox>
       </phone:PivotItem>
-      
+
       <!-- Pivot global variables -->
       <phone:PivotItem Name="PivotGlobal" Header="{Binding Resources.Editor_GlobalVariables, Source={StaticResource LocalizedStrings}}">
         <ListBox ItemsSource="{Binding GlobalVariables}" SelectionMode="Single" SelectedItem="{Binding SelectedGlobalVariable, Mode=TwoWay}">
           <ListBox.ItemTemplate>
             <DataTemplate>
               <Grid DataContext="{Binding}">
-                <TextBlock Text="{Binding Name}"></TextBlock>
+                <Grid Visibility="{Binding Converter={StaticResource VariableEditVisibilityConverter}, 
+                  ConverterParameter={StaticResource BooleanTrue}}">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+
+                  <TextBlock Grid.Column="0" FontSize="45" Margin="5" VerticalAlignment="Center" Text="{Binding Name}" />
+                  <coding4FunControls:RoundButton Grid.Column="1" VerticalAlignment="Center" Margin="0 0 0 0" 
+                    Visibility="{Binding Converter={StaticResource VariableButtonVisibilityConverter}, 
+                    ConverterParameter={StaticResource BooleanFalse}, Mode=OneWay}"
+                    Command="{Binding VariableSelectionViewModel.StartEditSelectedVariableCommand, Source={StaticResource Locator}}"                        
+                    ImageSource="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"/>
+                  <coding4FunControls:RoundButton Grid.Column="2" VerticalAlignment="Center" Margin="0 0 0 0"
+                    Visibility="{Binding Converter={StaticResource VariableButtonVisibilityConverter}, 
+                    ConverterParameter={StaticResource BooleanFalse}, Mode=OneWay}"
+                    Command="{Binding VariableSelectionViewModel.DeleteSelectedVariableCommand, Source={StaticResource Locator}}"                        
+                    ImageSource="/Content/Images/ApplicationBar/dark/appbar.delete.rest.png"/>
+                </Grid>
+                <Grid Visibility="{Binding Converter={StaticResource VariableEditVisibilityConverter}, 
+                  ConverterParameter={StaticResource BooleanFalse}}">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="350"/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+
+                  <TextBox Grid.Column="0" VerticalAlignment="Center" KeyUp="TextBoxGlobalVariableName_KeyDown" Text="{Binding Name, Mode=TwoWay}" />
+                  <coding4FunControls:RoundButton Grid.Column="1" VerticalAlignment="Center" Margin="0 0 0 0" 
+                    Visibility="{Binding Converter={StaticResource VariableButtonVisibilityConverter}, 
+                    ConverterParameter={StaticResource BooleanFalse}, Mode=OneWay}"
+                    Command="{Binding VariableSelectionViewModel.EndEditSelectedVariableCommand, Source={StaticResource Locator}}"                        
+                    ImageSource="/Content/Images/ApplicationBar/dark/appbar.check.rest.png"/>
+                </Grid>
               </Grid>
             </DataTemplate>
           </ListBox.ItemTemplate>
@@ -66,10 +137,10 @@
                               Command="{Binding FinishedCommand}" />
           <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.add.rest.png" 
                               Text="{Binding Resources.Editor_ButtonAddVariable, Source={StaticResource LocalizedStrings}}"
-                              Command="{Binding AddCommand}" />
-          <appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.delete.rest.png" 
+                              Command="{Binding AddVariableCommand}" />
+          <!--<appBarUtils:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.delete.rest.png" 
                               Text="{Binding Resources.Editor_ButtonDelete, Source={StaticResource LocalizedStrings}}"
-                              Command="{Binding DeleteCommand}" />
+                              Command="{Binding DeleteCommand}" />-->
         </appBarUtils:AppBar>
       </appBarUtils:SwitchAppBarAction>
     </appBarUtils:StateChangedTrigger>
