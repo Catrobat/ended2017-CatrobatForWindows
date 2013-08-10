@@ -20,7 +20,7 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 {
-    public partial class VariableButton : UserControl, INotifyPropertyChanged 
+    public partial class VariableButton : UserControl, INotifyPropertyChanged
     {
         #region DependencyProperties
 
@@ -42,35 +42,42 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
         private new static void IsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((VariableButton)d).IsEnabled = (bool) e.NewValue;
+            ((VariableButton)d).IsEnabled = (bool)e.NewValue;
         }
 
         public void VariableChanged(UserVariable newVariable)
         {
+            var isSelected = newVariable != null;
+            var converter = new NullVariableConverter();
+
+            newVariable = (UserVariable)converter.Convert(newVariable, null, null, null);
+
             var viewModel = ServiceLocator.Current.GetInstance<VariableSelectionViewModel>();
 
             TextBlockVariableName.Text = newVariable.Name;
 
-            if (VariableHelper.IsVariableLocal(viewModel.CurrentProject, newVariable))
+            if (isSelected)
             {
-                TextBlockVariableName.Foreground = new SolidColorBrush(Colors.Black);
+                TextBlockVariableName.Foreground = VariableHelper.IsVariableLocal(viewModel.CurrentProject, newVariable) ?
+                    new SolidColorBrush(Colors.Black) : new SolidColorBrush(Colors.Gray);
             }
             else
             {
-                TextBlockVariableName.Foreground = new SolidColorBrush(Colors.Gray);
+                TextBlockVariableName.Foreground = new SolidColorBrush(Colors.Red);
             }
         }
 
         public VariableButton()
         {
             InitializeComponent();
+            VariableChanged(null);
         }
 
         private void ButtonFormula_OnClick(object sender, RoutedEventArgs e)
         {
             var viewModel = ServiceLocator.Current.GetInstance<VariableSelectionViewModel>();
 
-            var container = new VariableConteiner {Variable = Variable};
+            var container = new VariableConteiner { Variable = Variable };
             container.PropertyChanged += ContainerOnPropertyChanged;
             viewModel.SelectedVariableContainer = container;
 
@@ -79,7 +86,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
         private void ContainerOnPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            var container = (VariableConteiner) sender;
+            var container = (VariableConteiner)sender;
 
             if (args.PropertyName == PropertyNameHelper.
                 GetPropertyNameFromExpression(() => container.Variable))

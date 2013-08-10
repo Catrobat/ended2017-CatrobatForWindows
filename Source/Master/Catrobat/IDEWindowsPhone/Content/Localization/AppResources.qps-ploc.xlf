@@ -950,6 +950,10 @@ The program is licensed under the MS-RL Lizenz.</source>
           <source>SELECT VARIABLE</source>
           <target state="new">SELECT VARIABLE</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_NoVariableSelected" xml:space="preserve">
+          <source>NEW</source>
+          <target state="new">NEW</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_LocalVariables" xml:space="preserve">
           <source>Object</source>
           <target state="new">Object</target>

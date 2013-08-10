@@ -188,6 +188,7 @@
     <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
     <Compile Include="Converters\BoolOpacityConverter.cs" />
     <Compile Include="Converters\BoolToSelectedPivotItemConverter.cs" />
+    <Compile Include="Converters\NullVariableConverter.cs" />
     <Compile Include="Converters\VariableButtonVisibilityConverter.cs" />
     <Compile Include="Converters\VariableEditVisibilityConverter.cs" />
     <Compile Include="Converters\ImagePathToScreenshotConverter.cs" />

@@ -868,6 +868,27 @@ namespace Catrobat.IDECommon.Formula.Editor
 
 
 #region Old code II
+
+        public bool SensorVariableSelected(SensorVariable variable)
+        {
+            return false;
+        }
+
+        public bool ObjectVariableSelected(ObjectVariable variable)
+        {
+            return false;
+        }
+
+        public bool GlobalVariableSelected(UserVariable variable)
+        {
+            return false;
+        }
+
+        public bool LocalVariableSelected(UserVariable variable)
+        {
+            return false;
+        }
+
         //private bool NumberSelectedAndNumberKeyPressed(SelectedFormulaInformation selectedFormulaInfo, string digitString, bool isDelete, bool isDecimalSeperator)
         //{
         //    bool isValid = false;

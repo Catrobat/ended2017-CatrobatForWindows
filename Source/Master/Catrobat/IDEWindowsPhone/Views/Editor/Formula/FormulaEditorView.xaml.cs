@@ -19,8 +19,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Formula
     {
         private readonly FormulaEditorViewModel _viewModel = ServiceLocator.Current.GetInstance<FormulaEditorViewModel>();
 
-        private object _keyLock = new object();
-
         private void ShowKeyErrorAnimation()
         {
             KeyErrorAnimation.Stop();

@@ -30,5 +30,6 @@
   <converters:VariableEditVisibilityConverter x:Key="VariableEditVisibilityConverter"/>
   <converters:VariableButtonVisibilityConverter x:Key="VariableButtonVisibilityConverter"/>
   <converters:BoolToSelectedPivotItemConverter x:Key="BoolToSelectedPivotItemConverter"/>
-
+  <converters:NullVariableConverter x:Key="NullVariableConverter"/>
+  
 </ResourceDictionary>

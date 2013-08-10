@@ -1069,6 +1069,15 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NEW.
+        /// </summary>
+        public static string Editor_NoVariableSelected {
+            get {
+                return ResourceManager.GetString("Editor_NoVariableSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to objects.
         /// </summary>
         public static string Editor_ObjectPlural {
