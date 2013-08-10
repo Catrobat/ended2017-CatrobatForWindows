@@ -842,4 +842,10 @@ The program is licensed under the MS-RL Lizenz.</value>
   <data name="Editor_NoVariableSelected" xml:space="preserve">
     <value>NEW</value>
   </data>
+  <data name="Main_SelectedProjectNotValidHeader" xml:space="preserve">
+    <value>Sorry! The selected project could not be opened.</value>
+  </data>
+  <data name="Main_SelectedProjectNotValidMessage" xml:space="preserve">
+    <value>Project not valid</value>
+  </data>
 </root>

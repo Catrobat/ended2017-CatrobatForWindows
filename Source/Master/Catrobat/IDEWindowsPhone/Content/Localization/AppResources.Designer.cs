@@ -2043,6 +2043,24 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry! The selected project could not be opened..
+        /// </summary>
+        public static string Main_SelectedProjectNotValidHeader {
+            get {
+                return ResourceManager.GetString("Main_SelectedProjectNotValidHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project not valid.
+        /// </summary>
+        public static string Main_SelectedProjectNotValidMessage {
+            get {
+                return ResourceManager.GetString("Main_SelectedProjectNotValidMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to enable/disable bricks.
         /// </summary>
         public static string Main_SettingsBricks {

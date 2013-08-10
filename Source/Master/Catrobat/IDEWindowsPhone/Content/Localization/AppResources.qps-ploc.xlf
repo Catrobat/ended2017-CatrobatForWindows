@@ -954,6 +954,14 @@ The program is licensed under the MS-RL Lizenz.</source>
           <source>NEW</source>
           <target state="new">NEW</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_SelectedProjectNotValidMessage" xml:space="preserve">
+          <source>Project not valid</source>
+          <target state="new">Project not valid</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_SelectedProjectNotValidHeader" xml:space="preserve">
+          <source>Sorry! The selected project could not be opened.</source>
+          <target state="new">Sorry! The selected project could not be opened.</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_LocalVariables" xml:space="preserve">
           <source>Object</source>
           <target state="new">Object</target>
