@@ -20,7 +20,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
         #region Private Members
 
         private ThemeChooser _themeChooser;
-        private readonly MemoryMonitor _memoryMonitor;
 
         #endregion
 
@@ -35,21 +34,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
         public bool ShowMemoryMonitorOption
         {
             get { return Debugger.IsAttached; }
-        }
-
-        public bool ShowMemoryMonitor
-        {
-            get { return _memoryMonitor.ShowVisualization; }
-            set
-            {
-                if (_memoryMonitor.ShowVisualization == value)
-                {
-                    return;
-                }
-
-                _memoryMonitor.ShowVisualization = value;
-                RaisePropertyChanged(() => ShowMemoryMonitor);
-            }
         }
 
         public ObservableCollection<Theme> AvailableThemes
@@ -135,8 +119,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
             ShowBrickSettingsCommand = new RelayCommand(ShowBrickSettingsAction);
             ShowLanguageSettingsCommand = new RelayCommand(ShowLanguageSettingsAction);
             ActiveThemeChangedCommand = new RelayCommand<Theme>(ActiveThemeChangedAction);
-
-            _memoryMonitor = Debugger.IsAttached ? new MemoryMonitor(true, false) : new MemoryMonitor(false, false);
 
             Messenger.Default.Register<GenericMessage<ThemeChooser>>(this,
                  ViewModelMessagingToken.ThemeChooserListener, ThemeChooserInitializedMessageAction);

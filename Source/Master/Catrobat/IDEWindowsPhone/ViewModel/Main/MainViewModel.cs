@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
@@ -48,6 +49,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         #endregion
 
         #region Properties
+
+        public bool IsMemoryMonitorEnabled { get { return Context.LocalSettings.IsInDevelopingMode; } }
 
         public CatrobatContextBase Context
         {
@@ -378,11 +381,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     Messenger.Default.Send(message);
                 }
             });
-        }
-
-        private void SetCorrentProjectPart2(MessageBoxResult obj)
-        {
-            throw new NotImplementedException();
         }
 
         private void CreateNewProjectAction()
