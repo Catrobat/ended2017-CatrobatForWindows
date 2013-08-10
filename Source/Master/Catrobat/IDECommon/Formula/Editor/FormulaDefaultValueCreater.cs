@@ -175,7 +175,7 @@ namespace Catrobat.IDECommon.Formula.Editor
                     return new FormulaTree
                     {
                         VariableType = "OPERATOR",
-                        VariableValue = "EQUAL"
+                        VariableValue = "GREATEREQUAL"
                     };
                 case FormulaEditorKey.KeyLogicAnd:
                     return new FormulaTree
@@ -199,7 +199,7 @@ namespace Catrobat.IDECommon.Formula.Editor
                     return new FormulaTree
                     {
                         VariableType = "OPERATOR",
-                        VariableValue = "FALSE"
+                        VariableValue = "TRUE"
                     };
                 case FormulaEditorKey.KeyLogicFalse:
                     return new FormulaTree

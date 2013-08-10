@@ -5,7 +5,11 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:vm="clr-namespace:Catrobat.IDEWindowsPhone.ViewModel"
   xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
+  xmlns:system="clr-namespace:System;assembly=mscorlib"
   mc:Ignorable="d">
+  
+  <system:Boolean x:Key="BooleanFalse">False</system:Boolean>
+  <system:Boolean x:Key="BooleanTrue">True</system:Boolean>
 
   <converters:NoScreenshotConverter x:Key="NoScreenshotConverter" />
   <converters:ImagePathToScreenshotConverter x:Key="ImagePathToScreenshotConverter" />
@@ -22,4 +26,10 @@
   <converters:BoolPlayButtonStateConverter x:Key="BoolPlayButtonStateConverter" />
   <converters:BoolVisibilityNegativeConverter x:Key="BoolVisibilityNegativeConverter"/>
   <converters:ActiveThemeBrushConverter x:Key="ActiveThemeBrushConverter"/>
+
+  <converters:VariableEditVisibilityConverter x:Key="VariableEditVisibilityConverter"/>
+  <converters:VariableButtonVisibilityConverter x:Key="VariableButtonVisibilityConverter"/>
+  <converters:BoolToSelectedPivotItemConverter x:Key="BoolToSelectedPivotItemConverter"/>
+  <converters:NullVariableConverter x:Key="NullVariableConverter"/>
+  
 </ResourceDictionary>
