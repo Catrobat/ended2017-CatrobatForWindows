@@ -3,7 +3,6 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:s="clr-namespace:Catrobat.IDEWindowsPhone.Views.Editor.Scripts"
   xmlns:d="clr-namespace:Catrobat.Core.Objects.Bricks;assembly=Catrobat.Core"
-  xmlns:objects="clr-namespace:Catrobat.Core.Objects;assembly=Catrobat.Core"
   xmlns:scripts="clr-namespace:Catrobat.Core.Objects.Scripts;assembly=Catrobat.Core"
   xmlns:formulas="clr-namespace:Catrobat.Core.Objects.Formulas;assembly=Catrobat.Core">
 
@@ -286,6 +285,16 @@
         </formulas:Formula>
       </d:SetVariableBrick.VariableFormula>
     </d:SetVariableBrick>
+
+    <d:ChangeVariableBrick IsRealObject="False">
+      <d:ChangeVariableBrick.VariableFormula>
+        <formulas:Formula>
+          <formulas:Formula.FormulaTree>
+            <formulas:FormulaTree VariableType="NUMBER" VariableValue="0.0" />
+          </formulas:Formula.FormulaTree>
+        </formulas:Formula>
+      </d:ChangeVariableBrick.VariableFormula>
+    </d:ChangeVariableBrick>
   </s:BrickCollection>
   
   <s:BrickCollection x:Key="ScriptBrickAddDataNXT">

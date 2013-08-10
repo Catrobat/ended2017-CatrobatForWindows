@@ -3,12 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Scripts;
-using Catrobat.IDEWindowsPhone.Annotations;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 {
