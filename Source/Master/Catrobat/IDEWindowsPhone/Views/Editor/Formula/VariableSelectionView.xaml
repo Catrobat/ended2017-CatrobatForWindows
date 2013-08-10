@@ -25,15 +25,13 @@
     </Grid.RowDefinitions>
 
     <!--TitlePanel contains the name of the application and page title-->
-    <StackPanel Grid.Row="0" Margin="12,17,0,28">
+    <StackPanel Grid.Row="0" Margin="12,17,0,0">
       <TextBlock Text="{Binding Resources.Editor_SelectVariablesViewHeader, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
     </StackPanel>
 
     <phone:Pivot Grid.Row="1" SelectedIndex="{Binding IsLocalView, 
       Converter={StaticResource BoolToSelectedPivotItemConverter}, 
-      ConverterParameter={StaticResource BooleanFalse}, Mode=TwoWay }" 
-      Title="{Binding Resources.Editor_GlobalVariables, 
-      Source={StaticResource LocalizedStrings}}">
+      ConverterParameter={StaticResource BooleanFalse}, Mode=TwoWay }" Margin="0 -20 0 0" >
       <!-- Pivot local variables -->
       <phone:PivotItem Name="PivotLocal" Header="{Binding Resources.Editor_LocalVariables, Source={StaticResource LocalizedStrings}}">
         <ListBox ItemsSource="{Binding LocalVariables}" SelectionMode="Single" SelectedItem="{Binding SelectedLocalVariable, Mode=TwoWay}">
