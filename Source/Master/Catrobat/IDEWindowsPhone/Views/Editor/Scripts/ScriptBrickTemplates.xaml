@@ -452,16 +452,10 @@
                            Text="{Binding Resources.Brick_PlaceAt, Source={StaticResource LocalizedStrings}}"
                            Margin="10" FontSize="24" />
                 <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="X" Margin="10" FontSize="24" />
-                <!--<TextBox Grid.Column="2" HorizontalAlignment="Stretch" 
-                         VerticalAlignment="Center" Text="{Binding XPosition, Mode=TwoWay}" 
-                         InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="1" Formula="{Binding XPosition, Mode=TwoWay}" 
+                <formulaControls:FormulaButton Grid.Column="2" Formula="{Binding XPosition, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
                 <TextBlock Grid.Column="3" VerticalAlignment="Center" Text="Y" Margin="10" FontSize="24" />
-                <!--<TextBox Grid.Column="4" HorizontalAlignment="Stretch" 
-                         VerticalAlignment="Center" Text="{Binding YPosition, Mode=TwoWay}" 
-                         InputScope="TelephoneNumber" IsEnabled="{Binding IsRealObject}" />-->
-                <formulaControls:FormulaButton Grid.Column="3" Formula="{Binding YPosition, Mode=TwoWay}" 
+                <formulaControls:FormulaButton Grid.Column="4" Formula="{Binding YPosition, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
               </Grid>
             </rlb:NormalBrick>
