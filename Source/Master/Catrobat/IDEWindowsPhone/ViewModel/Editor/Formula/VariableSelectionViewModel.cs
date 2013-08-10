@@ -4,6 +4,7 @@ using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Variables;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Views.Editor.Formula;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -22,7 +23,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
         private UserVariable _selectedGlobalVariable;
         private VariableConteiner _selectedVariableContainer;
         private bool _isLocalView;
-        private bool _isSelectedVariableInEditMode;
 
         #endregion
 
@@ -35,6 +35,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             {
                 _isLocalView = value;
                 RaisePropertyChanged(() => IsLocalView);
+                EditVariableCommand.RaiseCanExecuteChanged();
+                DeleteVariableCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -102,6 +104,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
                 RaisePropertyChanged(() => SelectedLocalVariable);
                 RaisePropertyChanged(() => LocalVariables);
+                EditVariableCommand.RaiseCanExecuteChanged();
+                DeleteVariableCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -133,6 +137,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
                 RaisePropertyChanged(() => SelectedGlobalVariable);
                 RaisePropertyChanged(() => GlobalVariables);
+                EditVariableCommand.RaiseCanExecuteChanged();
+                DeleteVariableCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -161,16 +167,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             }
         }
 
-        public bool IsSelectedVariableInEditMode
-        {
-            get { return _isSelectedVariableInEditMode; }
-            set
-            {
-                _isSelectedVariableInEditMode = value;
-                RaisePropertyChanged(() => IsSelectedVariableInEditMode);
-            }
-        }
-
         #endregion
 
         #region Commands
@@ -179,11 +175,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
         public RelayCommand AddVariableCommand { get; private set; }
 
-        public RelayCommand DeleteSelectedVariableCommand { get; private set; }
+        public RelayCommand DeleteVariableCommand { get; private set; }
 
-        public RelayCommand StartEditSelectedVariableCommand { get; private set; }
-
-        public RelayCommand EndEditSelectedVariableCommand { get; private set; }
+        public RelayCommand EditVariableCommand { get; private set; }
 
         #endregion
 
@@ -194,31 +188,52 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             return true;
         }
 
+        private bool DeleteVariableCommand_CanExecute()
+        {
+            if (IsLocalView)
+                return SelectedLocalVariable != null;
+            else
+                return SelectedGlobalVariable != null;
+        }
+
+        private bool EditVariableCommand_CanExecute()
+        {
+            if (IsLocalView)
+                return SelectedLocalVariable != null;
+            else
+                return SelectedGlobalVariable != null;
+        }
+
         #endregion
 
         #region Actions
 
         private void FinishedAction()
         {
-            if (IsSelectedVariableInEditMode)
-                EndEditSelectedVariableAction();
-
             if (SelectedVariableContainer == null)
             {
                 var selectedVariable = SelectedLocalVariable ?? SelectedGlobalVariable;
                 var message = new GenericMessage<UserVariable>(selectedVariable);
-                Messenger.Default.Send(message, ViewModelMessagingToken.UserVariableSelectedListener);
+                Messenger.Default.Send(message, ViewModelMessagingToken.SelectedUserVariableChangedListener);
             }
             else
             {
                 SelectedVariableContainer.Variable = SelectedGlobalVariable ?? SelectedLocalVariable;
             }
 
-            Reset();
+            ResetViewModel();
             Navigation.NavigateBack();
         }
 
-        private void DeleteSelectedVariableAction()
+        private void AddVariableAction()
+        {
+            if (IsLocalView)
+                Navigation.NavigateTo(typeof(AddNewLocalVariableView));
+            else
+                Navigation.NavigateTo(typeof(AddNewGlobalVariableView));
+        }
+
+        private void DeleteVariableAction()
         {
             if (SelectedGlobalVariable != null)
                 VariableHelper.DeleteGlobalVariable(CurrentProject, SelectedGlobalVariable);
@@ -227,57 +242,18 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
                 VariableHelper.DeleteLocalVariable(CurrentProject, CurrentSprite, SelectedLocalVariable);
         }
 
-        private void AddVariableAction()
+        private void EditVariableAction()
         {
+            UserVariable selectedVariable;
             if (IsLocalView)
-            {
-                var variable = VariableHelper.CreateUniqueLocalVariable(CurrentProject, CurrentSprite);
-                VariableHelper.AddLocalVariable(CurrentProject, CurrentSprite, variable);
-            }
+                selectedVariable = SelectedLocalVariable;
             else
-            {
-                var variable = VariableHelper.CreateUniqueGlobalVariable(CurrentProject);
-                VariableHelper.AddGlobalVariable(CurrentProject, variable);
-            }
+                selectedVariable = SelectedGlobalVariable;
 
+            var message = new GenericMessage<UserVariable>(selectedVariable);
+            Messenger.Default.Send(message, ViewModelMessagingToken.SelectedUserVariableChangedListener);
 
-            if (GlobalVariables == null)
-                GlobalVariables = VariableHelper.GetGlobalVariableList(CurrentProject);
-
-            if (LocalVariables == null)
-                LocalVariables = VariableHelper.GetLocalVariableList(CurrentProject, CurrentSprite);
-        }
-
-        private void StartEditSelectedVariableAction()
-        {
-            IsSelectedVariableInEditMode = true;
-
-            var selectedLocalVariable = _selectedLocalVariable;
-            ReaddLocalVariable(_selectedLocalVariable);
-            _selectedLocalVariable = selectedLocalVariable;
-
-            var selectedGlobalVariable = _selectedGlobalVariable;
-            ReaddGlobalVariable(_selectedGlobalVariable);
-            _selectedGlobalVariable = selectedGlobalVariable;
-
-            RaisePropertyChanged(() => SelectedLocalVariable);
-            RaisePropertyChanged(() => SelectedGlobalVariable);
-        }
-
-        private void EndEditSelectedVariableAction()
-        {
-            IsSelectedVariableInEditMode = false;
-
-            var selectedLocalVariable = _selectedLocalVariable;
-            ReaddLocalVariable(_selectedLocalVariable);
-            _selectedLocalVariable = selectedLocalVariable;
-
-            var selectedGlobalVariable = _selectedGlobalVariable;
-            ReaddGlobalVariable(_selectedGlobalVariable);
-            _selectedGlobalVariable = selectedGlobalVariable;
-
-            RaisePropertyChanged(()=> SelectedLocalVariable);
-            RaisePropertyChanged(() => SelectedGlobalVariable);
+            Navigation.NavigateTo(typeof(ChangeVariableView));
         }
 
         #endregion
@@ -307,12 +283,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
         public VariableSelectionViewModel()
         {
-            // Commands
             FinishedCommand = new RelayCommand(FinishedAction, FinishedCommand_CanExecute);
             AddVariableCommand = new RelayCommand(AddVariableAction);
-            DeleteSelectedVariableCommand = new RelayCommand(DeleteSelectedVariableAction);
-            StartEditSelectedVariableCommand = new RelayCommand(StartEditSelectedVariableAction);
-            EndEditSelectedVariableCommand = new RelayCommand(EndEditSelectedVariableAction);
+            DeleteVariableCommand = new RelayCommand(DeleteVariableAction, DeleteVariableCommand_CanExecute);
+            EditVariableCommand = new RelayCommand(EditVariableAction, EditVariableCommand_CanExecute);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
@@ -347,11 +321,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             }
         }
 
-        public void Reset()
+        private void ResetViewModel()
         {
-            //SelectedGlobalVariable = null;
-            //SelectedLocalVariable = null;
-            //SelectedVariableContainer = null;
         }
     }
 }

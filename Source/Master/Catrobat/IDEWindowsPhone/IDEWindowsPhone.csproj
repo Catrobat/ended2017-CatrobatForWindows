@@ -227,6 +227,9 @@
     <Compile Include="Themes\ThemeChooser.cs" />
     <Compile Include="Controls\Misc\ImageSizeEntry.cs" />
     <Compile Include="Controls\Misc\ImageSizeEntryCollection.cs" />
+    <Compile Include="ViewModel\Editor\Formula\AddNewGlobalVariableViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Formula\AddNewLocalVariableViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Formula\ChangeVariableViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\FormulaEditorViewModel.cs" />
     <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\AddNewCostumeViewModel.cs" />
@@ -268,6 +271,15 @@
     </Compile>
     <Compile Include="Views\Editor\EditorView.xaml.cs">
       <DependentUpon>EditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Formula\AddNewGlobalVariableView.xaml.cs">
+      <DependentUpon>AddNewGlobalVariableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Formula\AddNewLocalVariableView.xaml.cs">
+      <DependentUpon>AddNewLocalVariableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Formula\ChangeVariableView.xaml.cs">
+      <DependentUpon>ChangeVariableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Formula\FormulaEditorView.xaml.cs">
       <DependentUpon>FormulaEditorView.xaml</DependentUpon>
@@ -466,6 +478,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Editor\EditorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Formula\AddNewGlobalVariableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editor\Formula\AddNewLocalVariableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editor\Formula\ChangeVariableView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

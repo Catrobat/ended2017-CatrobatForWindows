@@ -496,7 +496,7 @@
     <value>CHOOSE SOUND NAME</value>
   </data>
   <data name="Editor_TitleNewAction" xml:space="preserve">
-    <value>new action</value>
+    <value>NEW ACTION</value>
   </data>
   <data name="Editor_TitleNewBroadcastMessage" xml:space="preserve">
     <value>NEW BROADCAST MESSAGE</value>
@@ -841,6 +841,30 @@ The program is licensed under the MS-RL Lizenz.</value>
   </data>
   <data name="Editor_NoVariableSelected" xml:space="preserve">
     <value>NEW</value>
+  </data>
+  <data name="Editor_ButtonAddGlobalVariable" xml:space="preserve">
+    <value>add global variable</value>
+  </data>
+  <data name="Editor_ButtonAddLocalVariable" xml:space="preserve">
+    <value>add local variable</value>
+  </data>
+  <data name="Editor_StandardGlobalVariableName" xml:space="preserve">
+    <value>GlobalVariable</value>
+  </data>
+  <data name="Editor_StandardLocalVariableName" xml:space="preserve">
+    <value>ObjectVariable</value>
+  </data>
+  <data name="Editor_TitleChangeVariableName" xml:space="preserve">
+    <value>CHANGE VARIABLE NAME</value>
+  </data>
+  <data name="Editor_TitleChooseGlobalVariableName" xml:space="preserve">
+    <value>CHOOSE GLOBAL VARIABLE NAME</value>
+  </data>
+  <data name="Editor_TitleChooseLocalVariableName" xml:space="preserve">
+    <value>CHOOSE OBJECT VARIABLE NAME</value>
+  </data>
+  <data name="Editor_VariableName" xml:space="preserve">
+    <value>Variable name</value>
   </data>
   <data name="Main_SelectedProjectNotValidHeader" xml:space="preserve">
     <value>Sorry! The selected project could not be opened.</value>

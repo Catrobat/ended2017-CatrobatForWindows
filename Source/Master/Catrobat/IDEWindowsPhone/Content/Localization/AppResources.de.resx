@@ -495,9 +495,6 @@
   <data name="Editor_TitleChooseSoundName" xml:space="preserve">
     <value>CHOOSE SOUND NAME</value>
   </data>
-  <data name="Editor_TitleNewAction" xml:space="preserve">
-    <value>new action</value>
-  </data>
   <data name="Editor_TitleNewBroadcastMessage" xml:space="preserve">
     <value>NEW BROADCAST MESSAGE</value>
   </data>

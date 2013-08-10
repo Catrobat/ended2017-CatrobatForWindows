@@ -511,8 +511,8 @@
           <target state="translated" state-qualifier="mt-suggestion">[801F1][!!_ČĤÒÕŠÈ ŚÓÚÑĐ ÑÃΜĘ_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleNewAction" xml:space="preserve">
-          <source>new action</source>
-          <target state="translated" state-qualifier="mt-suggestion">[AD4FA][!!_йêẁ ãċťîôή_!!]</target>
+          <source>NEW ACTION</source>
+          <target state="new" state-qualifier="mt-suggestion">NEW ACTION</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleNewBroadcastMessage" xml:space="preserve">
           <source>NEW BROADCAST MESSAGE</source>
@@ -953,6 +953,38 @@ The program is licensed under the MS-RL Lizenz.</source>
         <trans-unit translate="yes" id="Resx/Editor_NoVariableSelected" xml:space="preserve">
           <source>NEW</source>
           <target state="new">NEW</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddLocalVariable" xml:space="preserve">
+          <source>add local variable</source>
+          <target state="new">add local variable</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_ButtonAddGlobalVariable" xml:space="preserve">
+          <source>add global variable</source>
+          <target state="new">add global variable</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_StandardLocalVariableName" xml:space="preserve">
+          <source>ObjectVariable</source>
+          <target state="new">ObjectVariable</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChangeVariableName" xml:space="preserve">
+          <source>CHANGE VARIABLE NAME</source>
+          <target state="new">CHANGE VARIABLE NAME</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_StandardGlobalVariableName" xml:space="preserve">
+          <source>GlobalVariable</source>
+          <target state="new">GlobalVariable</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_VariableName" xml:space="preserve">
+          <source>Variable name</source>
+          <target state="new">Variable name</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseLocalVariableName" xml:space="preserve">
+          <source>CHOOSE OBJECT VARIABLE NAME</source>
+          <target state="new">CHOOSE OBJECT VARIABLE NAME</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_TitleChooseGlobalVariableName" xml:space="preserve">
+          <source>CHOOSE GLOBAL VARIABLE NAME</source>
+          <target state="new">CHOOSE GLOBAL VARIABLE NAME</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_SelectedProjectNotValidMessage" xml:space="preserve">
           <source>Project not valid</source>

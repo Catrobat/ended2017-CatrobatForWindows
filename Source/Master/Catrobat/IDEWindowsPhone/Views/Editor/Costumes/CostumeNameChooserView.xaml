@@ -8,19 +8,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
-    xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
-    xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=System"
-    xmlns:costumes="clr-namespace:Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes"
-    xmlns:system="clr-namespace:System;assembly=mscorlib"
-    xmlns:generic="clr-namespace:System.Collections.Generic;assembly=mscorlib"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
-    DataContext="{Binding AddNewCostumeViewModel, Source={StaticResource Locator}}"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding AddNewCostumeViewModel, Source={StaticResource Locator}}">
 
   <!--LayoutRoot is the root grid where all page content is placed-->
   <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -41,7 +36,8 @@
       <TextBlock Margin="0 10 0 10" Text="{Binding Resources.Editor_CostumeName, 
               Source={StaticResource LocalizedStrings}}" 
                Style="{StaticResource PhoneTextSmallStyle}" />
-      <TextBox Margin="-10 0 10 0" Name="TextBoxCostumeName" Text="{Binding CostumeName, Mode=TwoWay}" 
+      <TextBox Margin="-10 0 10 0" Name="TextBoxCostumeName" 
+               Text="{Binding CostumeName, Mode=TwoWay}" 
                HorizontalAlignment="Stretch" 
                TextChanged="TextBoxCostumeName_OnTextChanged" />
     </StackPanel>
@@ -52,7 +48,9 @@
         <RowDefinition/>
       </Grid.RowDefinitions>
       <TextBlock Grid.Row="0" Margin="10 0 10 0" Text="resize image"></TextBlock>
-      <ListBox Grid.Row="1"  Margin="30 0 30 0" ItemsSource="{Binding ImageSizes}" SelectedItem="{Binding SelectedSize, Mode=TwoWay}">
+      <ListBox Grid.Row="1"  Margin="30 0 30 0" 
+               ItemsSource="{Binding ImageSizes}" 
+               SelectedItem="{Binding SelectedSize, Mode=TwoWay}">
         <ListBox.ItemsPanel>
           <ItemsPanelTemplate>
             <toolkit:WrapPanel>
@@ -63,14 +61,17 @@
 
         <ListBox.ItemTemplate>
           <DataTemplate>
-            <Grid Margin="10" Width="155" Height="135" Visibility="{Binding IsVisible, Converter={StaticResource BoolVisibilityConverter}}" Background="Transparent">
+            <Grid Margin="10" Width="155" Height="135" 
+                  Visibility="{Binding IsVisible, Converter={StaticResource BoolVisibilityConverter}}" 
+                  Background="Transparent">
               <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
               </Grid.RowDefinitions>
-              <TextBlock Grid.Row="0" Text="{Binding SizeName}" HorizontalAlignment="Center" 
-                         VerticalAlignment="Center" FontSize="20" Margin="5 0 33 0"/>
-
+              <TextBlock Grid.Row="0" Text="{Binding SizeName}" 
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center" 
+                         FontSize="20" Margin="5 0 33 0"/>
               <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                   <RowDefinition Height="3*"/>
@@ -82,14 +83,24 @@
                 </Grid.ColumnDefinitions>
                 <Rectangle Grid.Column="0" Grid.Row="0" Margin="7 7 0 0" Fill="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1}"></Rectangle>
 
-                <StackPanel Grid.Row="0" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6 0 0 0" Orientation="Horizontal">
-                  <TextBlock Text="{Binding Percentage}" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="27" Margin="0 0 2 0"></TextBlock>
-                  <TextBlock Text="%" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="27"></TextBlock>
+                <StackPanel Grid.Row="0" Grid.Column="0"  
+                            VerticalAlignment="Center" HorizontalAlignment="Center" 
+                            Margin="6 0 0 0" Orientation="Horizontal">
+                  <TextBlock Text="{Binding Percentage}" 
+                             Foreground="{StaticResource PhoneForegroundBrush}" 
+                             FontSize="27" Margin="0 0 2 0"></TextBlock>
+                  <TextBlock Text="%" 
+                             Foreground="{StaticResource PhoneForegroundBrush}" 
+                             FontSize="27"></TextBlock>
                 </StackPanel>
                 
-                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                  <TextBlock Foreground="{StaticResource PhoneForegroundBrush}" VerticalAlignment="Center" 
-                             TextAlignment="Center" Text="{Binding NewWidth, Converter={StaticResource IntPixelConverter}}" FontSize="16" Margin="0 0 3 0" />
+                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" 
+                            HorizontalAlignment="Center">
+                  <TextBlock Foreground="{StaticResource PhoneForegroundBrush}" 
+                             VerticalAlignment="Center" 
+                             TextAlignment="Center" 
+                             Text="{Binding NewWidth, Converter={StaticResource IntPixelConverter}}" 
+                             FontSize="16" Margin="0 0 3 0" />
                 </StackPanel>
 
                 <Grid Grid.Column="1" Grid.Row="0">
@@ -97,8 +108,10 @@
                     <RowDefinition/>
                     <RowDefinition/>
                   </Grid.RowDefinitions>
-                  <TextBlock Grid.Row="1" FontSize="16" Foreground="{StaticResource PhoneForegroundBrush}" 
-                             Text="{Binding NewHeight, Converter={StaticResource IntPixelConverter}}" Margin="-0.25,24,0.25,-33" >
+                  <TextBlock Grid.Row="1" FontSize="16" 
+                             Foreground="{StaticResource PhoneForegroundBrush}" 
+                             Text="{Binding NewHeight, Converter={StaticResource IntPixelConverter}}" 
+                             Margin="-0.25,24,0.25,-33" >
                     <TextBlock.RenderTransform>
                       <CompositeTransform Rotation="-90"/>
                     </TextBlock.RenderTransform>

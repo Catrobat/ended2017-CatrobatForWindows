@@ -58,6 +58,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<PlayerLauncherViewModel>(true);
             SimpleIoc.Default.Register<TileGeneratorViewModel>(true);
             SimpleIoc.Default.Register<VariableSelectionViewModel>(true);
+            SimpleIoc.Default.Register<AddNewGlobalVariableViewModel>(true);
+            SimpleIoc.Default.Register<AddNewLocalVariableViewModel>(true);
+            SimpleIoc.Default.Register<ChangeVariableViewModel>(true);
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -392,6 +395,39 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<VariableSelectionViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public AddNewGlobalVariableViewModel AddNewGlobalVariableViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddNewGlobalVariableViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public AddNewLocalVariableViewModel AddNewLocalVariableViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddNewLocalVariableViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public ChangeVariableViewModel ChangeVariableViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ChangeVariableViewModel>();
             }
         }
 
