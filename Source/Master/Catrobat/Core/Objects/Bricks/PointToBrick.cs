@@ -74,11 +74,7 @@ namespace Catrobat.Core.Objects.Bricks
             var xRoot = new XElement("pointToBrick");
 
             if (_pointedSpriteReference != null)
-            {
                 xRoot.Add(_pointedSpriteReference.CreateXML());
-            }
-
-            ////CreateCommonXML(xRoot);
 
             return xRoot;
         }

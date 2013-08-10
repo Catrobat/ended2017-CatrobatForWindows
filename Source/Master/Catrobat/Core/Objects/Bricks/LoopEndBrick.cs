@@ -63,10 +63,7 @@ namespace Catrobat.Core.Objects.Bricks
         {
             var xRoot = new XElement("loopEndBrick");
 
-            if (_loopBeginBrickReference != null)
-            {
-                xRoot.Add(_loopBeginBrickReference.CreateXML());
-            }
+            xRoot.Add(_loopBeginBrickReference.CreateXML());
 
             return xRoot;
         }

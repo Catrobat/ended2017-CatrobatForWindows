@@ -79,12 +79,12 @@ namespace Catrobat.Core.Objects.Bricks
         {
             var xRoot = new XElement("changeVariableBrick");
 
-            var xVariable1 = _userVariableReference.CreateXML();
-            xRoot.Add(xVariable1);
+            if(_userVariableReference != null)
+                xRoot.Add(_userVariableReference.CreateXML());
 
-            var xVariable2 = new XElement("variableFormula");
-            xVariable2.Add(_variableFormula.CreateXML());
-            xRoot.Add(xVariable2);
+            var xFormula = new XElement("variableFormula");
+            xFormula.Add(_variableFormula.CreateXML());
+            xRoot.Add(xFormula);
 
             return xRoot;
         }

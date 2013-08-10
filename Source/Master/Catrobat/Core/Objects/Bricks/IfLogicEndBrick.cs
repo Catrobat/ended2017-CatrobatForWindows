@@ -107,10 +107,8 @@ namespace Catrobat.Core.Objects.Bricks
         {
             var xRoot = new XElement("ifLogicEndBrick");
 
-            if(_ifLogicBeginBrickReference != null)
                 xRoot.Add(_ifLogicBeginBrickReference.CreateXML());
 
-            if (_ifLogicElseBrickReference != null)
                 xRoot.Add(_ifLogicElseBrickReference.CreateXML());
 
             return xRoot;
