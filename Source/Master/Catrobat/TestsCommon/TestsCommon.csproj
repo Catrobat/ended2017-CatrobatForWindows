@@ -75,6 +75,7 @@
     <Compile Include="SampleData\ContextHolderTests.cs" />
     <Compile Include="SampleData\SampleLoader.cs" />
     <Compile Include="Tests\Data\CatrobatContextTests.cs" />
+    <Compile Include="Tests\Data\DataReadingTests.cs" />
     <Compile Include="Tests\Data\DataEqualsTests.cs" />
     <Compile Include="Tests\Data\ReferenceHelperTests.cs" />
     <Compile Include="Tests\Data\XPathHelperTests.cs" />
@@ -109,6 +110,7 @@
     <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_ObjectReferences_Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\XPathHelperTestInput.xml" />
     <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_ObjectReferences_Output.xml" />
+    <Content Include="SampleData\SampleProjects\DataReadingTests\test_code1.xml" />
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
   <ItemGroup>

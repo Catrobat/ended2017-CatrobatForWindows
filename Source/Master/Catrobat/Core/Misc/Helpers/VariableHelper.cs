@@ -84,5 +84,47 @@ namespace Catrobat.Core.Misc.Helpers
             // TODO: implement me
             return new UserVariable { Name = "global_a" };
         }
+
+        public static bool VariableNameExists(Project project, Sprite sprite, string variableName)
+        {
+            foreach (var variable in project.VariableList.ProgramVariableList.UserVariables)
+            {
+                if (variable.Name == variableName)
+                    return true;
+            }
+
+            foreach (var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
+            {
+                if (entry.Sprite == sprite)
+                {
+                    foreach (var variable in entry.VariableList.UserVariables)
+                        if (variable.Name == variableName)
+                            return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool VariableNameExistsCheckSelf(Project project, Sprite sprite, UserVariable self, string variableName)
+        {
+            foreach (var variable in project.VariableList.ProgramVariableList.UserVariables)
+            {
+                if (variable != self && variable.Name == variableName)
+                    return true;
+            }
+
+            foreach (var entry in project.VariableList.ObjectVariableList.ObjectVariableEntries)
+            {
+                if (entry.Sprite == sprite)
+                {
+                    foreach (var variable in entry.VariableList.UserVariables)
+                        if (variable != self && variable.Name == variableName)
+                            return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

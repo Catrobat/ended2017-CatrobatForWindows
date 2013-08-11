@@ -90,8 +90,8 @@ namespace IDEWindowsPhone
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
-            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-            ViewModelLocator.SaveContext(mainViewModel.CurrentProject);
+            //var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            //ViewModelLocator.SaveContext(mainViewModel.CurrentProject);
         }
 
         // Code to execute when the application is closing (eg, user hit Back)

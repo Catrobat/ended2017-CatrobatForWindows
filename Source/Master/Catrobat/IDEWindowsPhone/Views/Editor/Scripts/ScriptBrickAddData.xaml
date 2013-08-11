@@ -131,8 +131,15 @@
         </formulas:Formula>
       </d:GlideToBrick.YDestination>
     </d:GlideToBrick>
-    
-    <d:GoNStepsBackBrick IsRealObject="False"></d:GoNStepsBackBrick>
+    <d:GoNStepsBackBrick IsRealObject="False">
+      <d:GoNStepsBackBrick.Steps>
+        <formulas:Formula>
+          <formulas:Formula.FormulaTree>
+            <formulas:FormulaTree VariableType="NUMBER" VariableValue="1" />
+          </formulas:Formula.FormulaTree>
+        </formulas:Formula>
+      </d:GoNStepsBackBrick.Steps>
+    </d:GoNStepsBackBrick>
     <d:ComeToFrontBrick IsRealObject="False"></d:ComeToFrontBrick>
   </s:BrickCollection>
 

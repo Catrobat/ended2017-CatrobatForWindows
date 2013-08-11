@@ -126,14 +126,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         public RelayCommand OpenCameraCommand { get; private set; }
 
-        private void OpenPaintAction()
-        {
-            var newBitmap = new WriteableBitmap(
-                PlatformInformationHelper.ScreenWidth, PlatformInformationHelper.ScreenHeight);
-            PaintLauncher.CurrentImage = newBitmap.ToBitmapImage();
-            PaintLauncher.Launche();
-        }
-
         public RelayCommand OpenPaintCommand { get; private set; }
 
         public RelayCommand SaveCommand { get; private set; }
@@ -175,6 +167,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                 cameraCaptureTask.Completed += Task_Completed;
                 cameraCaptureTask.Show();
             }
+        }
+
+        private void OpenPaintAction()
+        {
+            var newBitmap = new WriteableBitmap(
+                PlatformInformationHelper.ScreenWidth, PlatformInformationHelper.ScreenHeight);
+            PaintLauncher.CurrentImage = newBitmap.ToBitmapImage();
+            PaintLauncher.Launche();
         }
 
         private async void SaveAction()

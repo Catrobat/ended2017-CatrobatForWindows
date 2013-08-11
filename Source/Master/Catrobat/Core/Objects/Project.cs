@@ -284,21 +284,34 @@ namespace Catrobat.Core.Objects
                 path = BasePath + "/" + ProjectCodePath;
             }
 
-            using (var storage = StorageSystem.GetStorage())
+            if (Debugger.IsAttached)
+            {
+                SaveInternal(path);
+            }
+            else
             {
                 try
                 {
-                    var writer = new XmlStringWriter();
-                    var document = CreateXML();
-                    document.Save(writer, SaveOptions.None);
-
-                    var xml = writer.GetStringBuilder().ToString();
-                    storage.WriteTextFile(path, xml);
+                    SaveInternal(path);
                 }
                 catch
                 {
                     throw new Exception("Cannot write Project");
                 }
+            }
+        }
+
+        public void SaveInternal(string path)
+        {
+            using (var storage = StorageSystem.GetStorage())
+            {
+                var writer = new XmlStringWriter();
+                var document = CreateXML();
+                document.Save(writer, SaveOptions.None);
+
+                var xml = writer.GetStringBuilder().ToString();
+                storage.WriteTextFile(path, xml);
+
             }
         }
 

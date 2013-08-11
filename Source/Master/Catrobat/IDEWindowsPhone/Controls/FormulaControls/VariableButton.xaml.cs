@@ -9,6 +9,7 @@ using System.Windows.Media;
 using Catrobat.Core.Annotations;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Formulas;
 using Catrobat.Core.Objects.Variables;
 using Catrobat.IDEWindowsPhone.Converters;
@@ -47,6 +48,14 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 
         public void VariableChanged(UserVariable newVariable)
         {
+            var setVariableBrick = DataContext as SetVariableBrick;
+            if (setVariableBrick != null)
+                setVariableBrick.UserVariable = newVariable;
+
+            var changeVariableBrick = DataContext as ChangeVariableBrick;
+            if (changeVariableBrick != null)
+                changeVariableBrick.UserVariable = newVariable;
+
             var isSelected = newVariable != null;
             var converter = new NullVariableConverter();
 

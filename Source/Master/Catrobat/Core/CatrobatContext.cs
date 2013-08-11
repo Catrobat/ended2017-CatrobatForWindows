@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Storage;
 using Catrobat.Core.ZIP;
@@ -13,7 +14,7 @@ namespace Catrobat.Core
 
         public static Project LoadNewProjectByNameStatic(string projectName)
         {
-            if (Debugger.IsAttached)
+            if (false) // Debugger.IsAttached)
             {
                 return LoadNewProjectByNameStaticWithoutTryCatch(projectName);
             }
@@ -25,7 +26,7 @@ namespace Catrobat.Core
                 }
                 catch
                 {
-                    throw new Exception("Project does not exist");
+                    return null;
                 }
             }
         }

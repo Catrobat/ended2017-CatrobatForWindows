@@ -94,9 +94,6 @@
 
         </Button.Content>
       </Button>
-      <CheckBox Name="CheckBoxShowMemory" Content="{Binding Resources.Main_DEBUGShowMemory, 
-        Source={StaticResource LocalizedStrings}}" 
-                IsChecked="{Binding ShowMemoryMonitor, Mode=TwoWay}" />
     </StackPanel>
   </Grid>
 </phone:PhoneApplicationPage>

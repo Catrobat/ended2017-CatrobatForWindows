@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
@@ -49,10 +50,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         #region Properties
 
+        public bool IsMemoryMonitorEnabled { get { return Context.LocalSettings.IsInDevelopingMode; } }
+
         public CatrobatContextBase Context
         {
             get { return _context; }
-            set 
+            set
             {
                 _context = value;
 
@@ -64,7 +67,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     CurrentProject = designContext.CurrentProject;
                 }
 
-                RaisePropertyChanged(() => Context); 
+                RaisePropertyChanged(() => Context);
             }
         }
 
@@ -127,7 +130,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get { return _onlineProjects; }
             set
             {
-                _onlineProjects = value; 
+                _onlineProjects = value;
                 RaisePropertyChanged(() => OnlineProjects);
             }
         }
@@ -336,19 +339,47 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
             Task.Run(() =>
             {
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                CurrentProject.Save();
+                var newProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
+
+
+                if (newProject != null)
                 {
-                    CurrentProject.Save();
-                    CurrentProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
+                    Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    {
+                        CurrentProject = newProject;
+                    });
 
-                    var minWaitindTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
+                        var minWaitingTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
 
-                    if (minWaitindTimeRemaining >= new TimeSpan(0))
-                        Thread.Sleep(minWaitindTimeRemaining);
+                        if (minWaitingTimeRemaining >= new TimeSpan(0))
+                            Thread.Sleep(minWaitingTimeRemaining);
 
-                    IsActivatingLocalProject = false;
-                });
+                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        {
+                            IsActivatingLocalProject = false;
+                        });
+                    
+                }
+                else
+                {
+                    ProjectHolder.Project = CurrentProject;
 
+                    var message = new DialogMessage(String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName),
+                        new Action<MessageBoxResult>( delegate
+                            {
+                                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                                {
+                                    IsActivatingLocalProject = false;
+                                });
+                            }))
+                    {
+                        Button = MessageBoxButton.OK,
+                        Caption = AppResources.Main_SelectedProjectNotValidMessage
+                    };
+
+                    Messenger.Default.Send(message);
+                }
             });
         }
 
@@ -557,7 +588,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
             if (_dialogResult == MessageBoxResult.OK)
             {
-                if(_copyProjectName == CurrentProject.ProjectHeader.ProgramName)
+                if (_copyProjectName == CurrentProject.ProjectHeader.ProgramName)
                     CurrentProject.Save();
 
                 using (var storage = StorageSystem.GetStorage())
@@ -691,7 +722,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 }
             }
 
-            RaisePropertyChanged(()=> LocalProjects);
+            RaisePropertyChanged(() => LocalProjects);
         }
     }
 }

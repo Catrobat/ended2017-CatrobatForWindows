@@ -206,7 +206,6 @@
     <Compile Include="Misc\Navigation.cs" />
     <Compile Include="Misc\CostumeBuilder.cs" />
     <Compile Include="Misc\CulturePhone.cs" />
-    <Compile Include="Misc\MemoryMonitor.cs" />
     <Compile Include="Misc\PlatformInformationHelperPhone.cs" />
     <Compile Include="Misc\PlayerLauncher.cs" />
     <Compile Include="Misc\ProjectImporter.cs" />
@@ -227,6 +226,9 @@
     <Compile Include="Themes\ThemeChooser.cs" />
     <Compile Include="Controls\Misc\ImageSizeEntry.cs" />
     <Compile Include="Controls\Misc\ImageSizeEntryCollection.cs" />
+    <Compile Include="ViewModel\Editor\Formula\AddNewGlobalVariableViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Formula\AddNewLocalVariableViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Formula\ChangeVariableViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\FormulaEditorViewModel.cs" />
     <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\AddNewCostumeViewModel.cs" />
@@ -268,6 +270,15 @@
     </Compile>
     <Compile Include="Views\Editor\EditorView.xaml.cs">
       <DependentUpon>EditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Formula\AddNewGlobalVariableView.xaml.cs">
+      <DependentUpon>AddNewGlobalVariableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Formula\AddNewLocalVariableView.xaml.cs">
+      <DependentUpon>AddNewLocalVariableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Formula\ChangeVariableView.xaml.cs">
+      <DependentUpon>ChangeVariableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Formula\FormulaEditorView.xaml.cs">
       <DependentUpon>FormulaEditorView.xaml</DependentUpon>
@@ -469,6 +480,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Editor\Formula\AddNewGlobalVariableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editor\Formula\AddNewLocalVariableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editor\Formula\ChangeVariableView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Editor\Formula\FormulaEditorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -604,6 +627,7 @@
     <Content Include="fmodex_x86.dll" />
     <Content Include="italic.spritefont" />
     <Content Include="Content\Resources\default.catrobat" />
+    <Content Include="Content\Resources\default_new.catrobat" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">

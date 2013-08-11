@@ -1,13 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using Catrobat.Core;
-using Catrobat.Core.Misc.Helpers;
+﻿using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Variables;
 using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
-using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -44,7 +40,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
         private Core.Objects.Formulas.Formula _formula;
         private Sprite _selectedSprite;
-        private Project _selectedProject;
         private FormulaButton _formulaButton;
         private Project _currentProject;
         private SelectedFormulaInformation _selectedFormulaInformation;
@@ -79,18 +74,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             }
         }
 
-        public Project SelectedProject
-        {
-            get { return _selectedProject; }
-            set
-            {
-                _selectedProject = value;
-                RaisePropertyChanged(() => SelectedProject);
-
-                if (_selectedProject == null) return;
-            }
-        }
-
         public Sprite SelectedSprite
         {
             get { return _selectedSprite; }
@@ -98,8 +81,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             {
                 _selectedSprite = value;
                 RaisePropertyChanged(() => SelectedSprite);
-
-                if (_selectedSprite == null) return;
             }
         }
 
@@ -128,6 +109,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
         public RelayCommand<FormulaEditorKey> KeyPressedCommand { get; private set; }
 
         #endregion
+
+        
 
         #region Actions
 
@@ -186,12 +169,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             CurrentProject = message.Content;
         }
 
-        private void SelectedSpriteChangesMessageAction(GenericMessage<Sprite> message)
+        private void SelectedSpriteChangedMessageAction(GenericMessage<Sprite> message)
         {
             SelectedSprite = message.Content;
         }
 
-        private void UserVariableSelectedMessageAction(GenericMessage<UserVariable> message)
+        private void SelectedUserVariableChangedMessageAction(GenericMessage<UserVariable> message)
         {
             var formulaEditor = new FormulaEditor { SelectedFormula = SelectedFormulaInformation };
             var variable = message.Content;
@@ -214,22 +197,23 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
         public FormulaEditorViewModel()
         {
-            Messenger.Default.Register<GenericMessage<Sprite>>(this,
-                ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangesMessageAction);
-
-            Messenger.Default.Register<GenericMessage<Project>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
-
-
-            Messenger.Default.Register<GenericMessage<UserVariable>>(this,
-                 ViewModelMessagingToken.UserVariableSelectedListener, UserVariableSelectedMessageAction);
-
             FormulaPartSelectedComand = new RelayCommand<UiFormula>(FormulaPartSelectedAction);
             FormulaChangedCommand = new RelayCommand(FormulaChangedAction);
 
             SensorVariableSelectedCommand = new RelayCommand<SensorVariable>(SensorVariableSelectedAction);
             ObjectVariableSelectedCommand = new RelayCommand<ObjectVariable>(ObjectVariableSelectedAction);
             KeyPressedCommand = new RelayCommand<FormulaEditorKey>(KeyPressedCommandAction);
+
+
+            Messenger.Default.Register<GenericMessage<Sprite>>(this,
+                ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
+
+            Messenger.Default.Register<GenericMessage<Project>>(this,
+                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+
+
+            Messenger.Default.Register<GenericMessage<UserVariable>>(this,
+                 ViewModelMessagingToken.SelectedUserVariableChangedListener, SelectedUserVariableChangedMessageAction); 
         }
 
 
