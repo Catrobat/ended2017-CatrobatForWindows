@@ -56,8 +56,10 @@
                   </Grid.RowDefinitions>
                   <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Tap">
-                      <command:EventToCommand Command="{Binding EditorViewModel.SelectedSpriteChangedCommand, Mode=OneWay, Source={StaticResource Locator}}"
-                                                          CommandParameter="{Binding}" />
+                      <command:EventToCommand 
+                        Command="{Binding EditorViewModel.SelectedSpriteChangedCommand, 
+                        Source={StaticResource Locator}}"
+                        CommandParameter="{Binding}" />
                     </i:EventTrigger>
                   </i:Interaction.Triggers>
 
