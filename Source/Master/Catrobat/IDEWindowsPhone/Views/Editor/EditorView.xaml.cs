@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Catrobat.Core;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
@@ -35,17 +36,19 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
         public EditorView()
         {
             InitializeComponent();
-            LockPivotIfNoSpriteSelected();
+            LockPivotIfNoSpriteSelected(null);
 
             _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
         }
 
-        private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            if (propertyChangedEventArgs.PropertyName == "SelectedSprite")
+            if (args.PropertyName == PropertyNameHelper.GetPropertyNameFromExpression(()=> _viewModel.SelectedSprite))
             {
-                ReorderListBoxSprites.SelectedItem = _viewModel.SelectedSprite;
-                LockPivotIfNoSpriteSelected();
+                var selectedSprite = _viewModel.SelectedSprite;
+
+                ReorderListBoxSprites.SelectedItem = selectedSprite;
+                LockPivotIfNoSpriteSelected(selectedSprite);
             }
         }
 
@@ -64,10 +67,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
             }
         }
 
-        private void LockPivotIfNoSpriteSelected()
+        private void LockPivotIfNoSpriteSelected(Sprite selectedSprite)
         {
-            Sprite selectedSprite = _viewModel.SelectedSprite;
-
             if (selectedSprite == null)
             {
                 if (PivotMain.Items.Contains(PivotScripts))
