@@ -7,8 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Catrobat.Paint.ViewModel"
-    xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
-    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -30,8 +29,8 @@
 
   <Canvas>
     <TextBlock Text="{Binding Path=Resources.PaintAreaTitle, Source={StaticResource Locator}}" FontWeight="Bold" Margin="50,30,0,0" />
-    <Rectangle Height="694" Width="460" Margin="0,0,0,0" Stroke="White" Canvas.Left="10" Canvas.Top="64" />
-    <InkPresenter x:Name="InkPresenter"  Height="694" Width="460"
+    <Rectangle Height="622" Width="460" Margin="0,0,0,0" Stroke="White" Canvas.Left="10" Canvas.Top="64" />
+    <InkPresenter x:Name="InkPresenter"  Height="622" Width="460"
                   Strokes="{Binding Strokes}"
               MouseLeftButtonDown="InkPresenter_MouseLeftButtonDown" 
               LostMouseCapture="InkPresenter_LostMouseCapture" 
@@ -42,26 +41,13 @@
 
   <phone:PhoneApplicationPage.ApplicationBar>
     <shell:ApplicationBar>
-      <shell:ApplicationBarIconButton IconUri="/Assets/ApplicationBar/Dark/appbar.undo.curve.png" Text="undo"/>
-      <shell:ApplicationBarIconButton IconUri="/Assets/ApplicationBar/Dark/appbar.redo.curve.png" Text="redo"/>
+      <shell:ApplicationBarIconButton x:Name="ButtonUndo" IconUri="/Assets/ApplicationBar/Dark/appbar.undo.curve.png" Text="undo" Click="ButtonUndo_Click"/>
+      <shell:ApplicationBarIconButton x:Name="ButtonRedo" IconUri="/Assets/ApplicationBar/Dark/appbar.redo.curve.png" Text="redo" Click="ButtonRedo_Click"/>
       <shell:ApplicationBar.MenuItems>
-        <shell:ApplicationBarMenuItem Text="clear"/>
+        <shell:ApplicationBarMenuItem x:Name="ButtonClear" Text="clear" Click="ButtonClear_Click"/>
       </shell:ApplicationBar.MenuItems>
     </shell:ApplicationBar>
   </phone:PhoneApplicationPage.ApplicationBar>
-
-  <i:Interaction.Behaviors>
-    <abu:AppBarPropertyBinder />
-    <abu:AppBarItemCommand Id="undo"
-                              Text="{Binding Path=Resources.Undo, Source={StaticResource Locator}}"
-                              Command="{Binding UndoCommand}" />
-    <abu:AppBarItemCommand Id="redo"
-                              Text="{Binding Path=Resources.Redo, Source={StaticResource Locator}}"
-                              Command="{Binding RedoCommand}"/>
-    <abu:AppBarItemCommand Id="clear" Command="{Binding ClearCommand}" 
-                        Text="{Binding Path=Resources.Clear, Source={StaticResource Locator}}" Type="MenuItem" />
-  </i:Interaction.Behaviors>
-
 
 
 </phone:PhoneApplicationPage>
