@@ -45,6 +45,7 @@
       <shell:ApplicationBarIconButton x:Name="ButtonRedo" IconUri="/Assets/ApplicationBar/Dark/appbar.redo.curve.png" Text="redo" Click="ButtonRedo_Click"/>
       <shell:ApplicationBar.MenuItems>
         <shell:ApplicationBarMenuItem x:Name="ButtonClear" Text="clear" Click="ButtonClear_Click"/>
+        <shell:ApplicationBarMenuItem x:Name="ButtonSaveToCatrobat" Text="Save to catrobat" Click="ButtonSaveToCatrobat_Click"/>
       </shell:ApplicationBar.MenuItems>
     </shell:ApplicationBar>
   </phone:PhoneApplicationPage.ApplicationBar>

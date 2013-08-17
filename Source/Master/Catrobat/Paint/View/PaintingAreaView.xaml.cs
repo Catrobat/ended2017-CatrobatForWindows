@@ -1,11 +1,17 @@
-﻿using System.Data.Linq;
+﻿using System;
+using System.Data.Linq;
 using System.Diagnostics;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Catrobat.Paint.ViewModel;
 using Microsoft.Phone.Controls;
+using Microsoft.Xna.Framework.Media;
+using Windows.Storage;
 
 namespace Catrobat.Paint.View
 {
@@ -93,7 +99,14 @@ namespace Catrobat.Paint.View
             ViewModel.ClearCommand.Execute(null);
         }
 
-        #endregion   
+        #endregion
+
+        private void ButtonSaveToCatrobat_Click(object sender, System.EventArgs e)
+        {
+            WriteableBitmap wb = new WriteableBitmap(InkPresenter, new TranslateTransform());
+
+            ViewModel.SaveCommand.Execute(wb);
+        }
 
 
 

@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Windows;
 using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Catrobat.Paint.Data;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -42,16 +46,29 @@ namespace Catrobat.Paint.ViewModel
             ClearCommand = new RelayCommand(ClearExecute);
             UndoCommand = new RelayCommand(UndoExecute);
             RedoCommand = new RelayCommand(RedoExecute);
+            SaveCommand = new RelayCommand<WriteableBitmap>(SaveExecute);
         }
 
         ~PaintingAreaViewModel()
         {
             Debug.WriteLine("PaintingAreaViewModel Destructor called.");
         }
-
-
+ 
 
         #region Commands
+
+        public ICommand SaveCommand { get; private set; }
+        private void SaveExecute(WriteableBitmap wb)
+        {
+            using (IsolatedStorageFile isStore = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                using (IsolatedStorageFileStream targetStream = isStore.OpenFile(DateTime.Now.ToLongDateString()  + ".jpg", FileMode.Create, FileAccess.Write))
+                {
+                    wb.SaveJpeg(targetStream, wb.PixelWidth, wb.PixelHeight, 1, 100);
+                }
+            } 
+        }
+
 
         public ICommand BeginStrokeCommand { get; private set; }
         private void BeginStrokeExecute(Point point)
