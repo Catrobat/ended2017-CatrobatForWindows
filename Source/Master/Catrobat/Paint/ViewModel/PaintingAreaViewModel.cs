@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using Catrobat.Paint.Data;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Phone.Controls;
 
 namespace Catrobat.Paint.ViewModel
 {
@@ -47,6 +48,7 @@ namespace Catrobat.Paint.ViewModel
             UndoCommand = new RelayCommand(UndoExecute);
             RedoCommand = new RelayCommand(RedoExecute);
             SaveCommand = new RelayCommand<WriteableBitmap>(SaveExecute);
+            ToColorPickerCommand = new RelayCommand(ToColorPickerExecute);
         }
 
         ~PaintingAreaViewModel()
@@ -56,6 +58,14 @@ namespace Catrobat.Paint.ViewModel
  
 
         #region Commands
+
+        public ICommand ToColorPickerCommand { get; private set; }
+        private void ToColorPickerExecute()
+        {
+            var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
+            if (phoneApplicationFrame != null)
+                phoneApplicationFrame.Navigate(new Uri("/Paint;component/View/ColorPickerView.xaml", UriKind.RelativeOrAbsolute));
+        }
 
         public ICommand SaveCommand { get; private set; }
         private void SaveExecute(WriteableBitmap wb)

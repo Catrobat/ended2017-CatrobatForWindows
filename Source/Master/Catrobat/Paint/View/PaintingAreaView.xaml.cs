@@ -99,14 +99,21 @@ namespace Catrobat.Paint.View
             ViewModel.ClearCommand.Execute(null);
         }
 
-        #endregion
-
         private void ButtonSaveToCatrobat_Click(object sender, System.EventArgs e)
         {
-            WriteableBitmap wb = new WriteableBitmap(InkPresenter, new TranslateTransform());
+            var wb = new WriteableBitmap(InkPresenter, new TranslateTransform());
 
             ViewModel.SaveCommand.Execute(wb);
         }
+
+        private void ButtonColorpicker_Click(object sender, EventArgs e)
+        {
+            ViewModel.ToColorPickerCommand.Execute(null);
+        }
+
+        #endregion
+
+
 
 
 

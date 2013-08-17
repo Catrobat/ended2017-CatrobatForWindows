@@ -16,7 +16,7 @@ namespace Catrobat.Paint
 
         public static void Launche()
         {
-            ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri("/Paint;component/View/MainView.xaml", UriKind.RelativeOrAbsolute));
+            ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri("/Paint;component/View/PaintingAreaView.xaml", UriKind.RelativeOrAbsolute));
         }
     }
 }
