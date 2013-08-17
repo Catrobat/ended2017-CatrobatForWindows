@@ -141,9 +141,6 @@
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="AppBarUtils">
-      <HintPath>..\packages\AppBarUtils.2.4\lib\windowsphone8\AppBarUtils.dll</HintPath>
-    </Reference>
     <Reference Include="Coding4Fun.Toolkit.Controls">
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.6\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>

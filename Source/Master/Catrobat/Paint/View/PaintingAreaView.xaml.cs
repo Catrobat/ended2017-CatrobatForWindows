@@ -43,6 +43,9 @@ namespace Catrobat.Paint.View
             InkPresenter.Clip = clip;
         }
 
+
+
+
         private PaintingAreaViewModel ViewModel
         {
             get
@@ -75,6 +78,24 @@ namespace Catrobat.Paint.View
             ViewModel.EndStrokeCommand.Execute(null);
         }
 
+        private void ButtonUndo_Click(object sender, System.EventArgs e)
+        {
+            ViewModel.UndoCommand.Execute(null);
+        }
+
+        private void ButtonRedo_Click(object sender, System.EventArgs e)
+        {
+            ViewModel.RedoCommand.Execute(null);
+        }
+
+        private void ButtonClear_Click(object sender, System.EventArgs e)
+        {
+            ViewModel.ClearCommand.Execute(null);
+        }
+
         #endregion   
+
+
+
     }
 }
