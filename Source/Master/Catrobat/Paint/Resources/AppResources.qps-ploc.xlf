@@ -22,9 +22,17 @@
           <source>Painting Area</source>
           <target state="new">Painting Area</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/PaintingAreaMessageBoxImageSaved" xml:space="preserve">
+          <source>Saved file as</source>
+          <target state="new">Saved file as</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/Redo" xml:space="preserve">
           <source>Redo</source>
           <target state="new">Redo</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/SaveToCatrobat" xml:space="preserve">
+          <source>Save for Catrobat</source>
+          <target state="new">Save for Catrobat</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Test1" xml:space="preserve">
           <source>Test1en</source>

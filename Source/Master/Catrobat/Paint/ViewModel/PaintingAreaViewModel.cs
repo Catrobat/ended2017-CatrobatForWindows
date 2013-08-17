@@ -66,13 +66,13 @@ namespace Catrobat.Paint.ViewModel
                 {
                     wb.SaveJpeg(targetStream, wb.PixelWidth, wb.PixelHeight, 1, 100);
                     targetStream.Close();
-                    BitmapImage biMap = new BitmapImage();
+                    var biMap = new BitmapImage();
                     biMap.CreateOptions = BitmapCreateOptions.None;
                     using (var fs = isStore.OpenFile(DateTime.Now.ToLongDateString() + ".jpg", FileMode.Open))
                     {
                         biMap.SetSource(fs);
                         PaintLauncher.CurrentImage = biMap;
-                        MessageBox.Show("Saved Image as " + Path.GetFileName(DateTime.Now.ToLongDateString() + ".jpg"));
+                        MessageBox.Show(Resources.AppResources.PaintingAreaMessageBoxImageSaved + " " + Path.GetFileName(DateTime.Now.ToLongDateString() + ".jpg"));
                     }
                     
                 }

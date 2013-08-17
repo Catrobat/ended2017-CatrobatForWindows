@@ -129,8 +129,14 @@
   <data name="PaintAreaTitle" xml:space="preserve">
     <value>Painting Area</value>
   </data>
+  <data name="PaintingAreaMessageBoxImageSaved" xml:space="preserve">
+    <value>Saved file as</value>
+  </data>
   <data name="Redo" xml:space="preserve">
     <value>Redo</value>
+  </data>
+  <data name="SaveToCatrobat" xml:space="preserve">
+    <value>Save for Catrobat</value>
   </data>
   <data name="Test1" xml:space="preserve">
     <value>Test1en</value>
