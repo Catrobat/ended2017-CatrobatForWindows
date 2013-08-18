@@ -1,7 +1,10 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Phone.Controls;
 
 namespace Catrobat.Paint.ViewModel
 {
@@ -19,6 +22,7 @@ namespace Catrobat.Paint.ViewModel
         public ColorPickerViewModel()
         {
             SelectColorValue = new RelayCommand<SolidColorBrush>(SelectColorValueExecute);
+            SelectColorDone = new RelayCommand(SelectColorDoneExecute);
         }
 
 
@@ -46,6 +50,14 @@ namespace Catrobat.Paint.ViewModel
         private void SelectColorValueExecute(SolidColorBrush color)
         {
             SelectedColor = color;
+        }
+
+        public ICommand SelectColorDone { get; private set; }
+        private void SelectColorDoneExecute()
+        {
+            var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
+            if (phoneApplicationFrame != null)
+                phoneApplicationFrame.GoBack();
         }
         #endregion
     }
