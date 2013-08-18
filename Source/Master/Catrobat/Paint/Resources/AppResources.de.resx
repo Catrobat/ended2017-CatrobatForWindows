@@ -129,4 +129,19 @@
   <data name="PaintAreaTitle" xml:space="preserve">
     <value>Zeichenfläche</value>
   </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="PaintingAreaMessageBoxImageSaved" xml:space="preserve">
+    <value>Bild gespeichert als</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Wiederherstellen</value>
+  </data>
+  <data name="SaveToCatrobat" xml:space="preserve">
+    <value>Speichern für Catrobat</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Rückgängig</value>
+  </data>
 </root>

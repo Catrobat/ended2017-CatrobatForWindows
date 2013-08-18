@@ -97,11 +97,29 @@ namespace Catrobat.Paint.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saved file as.
+        /// </summary>
+        public static string PaintingAreaMessageBoxImageSaved {
+            get {
+                return ResourceManager.GetString("PaintingAreaMessageBoxImageSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Redo.
         /// </summary>
         public static string Redo {
             get {
                 return ResourceManager.GetString("Redo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save for Catrobat.
+        /// </summary>
+        public static string SaveToCatrobat {
+            get {
+                return ResourceManager.GetString("SaveToCatrobat", resourceCulture);
             }
         }
         

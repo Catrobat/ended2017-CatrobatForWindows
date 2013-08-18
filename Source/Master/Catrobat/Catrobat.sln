@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.20623.1 VSUPREVIEW
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{A4E10BED-8F56-46A6-B78D-BFEF1363B195}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDECommon", "IDECommon\IDECommon.csproj", "{73EDA75E-B249-40CB-A883-C2521A72B1C0}"
@@ -415,8 +413,8 @@ Global
 		{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}.Debug|ARM.ActiveCfg = Debug|ARM
 		{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}.Debug|ARM.Build.0 = Debug|ARM
-		{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}.Debug|Win32.ActiveCfg = Debug|x86
 		{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}.Debug|Win32.Build.0 = Debug|x86
 		{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -437,9 +435,9 @@ Global
 		{2D3200F2-3FCB-41B2-871B-A2773075613F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{2D3200F2-3FCB-41B2-871B-A2773075613F}.Debug|ARM.ActiveCfg = Debug|ARM
 		{2D3200F2-3FCB-41B2-871B-A2773075613F}.Debug|ARM.Build.0 = Debug|ARM
-		{2D3200F2-3FCB-41B2-871B-A2773075613F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{2D3200F2-3FCB-41B2-871B-A2773075613F}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{2D3200F2-3FCB-41B2-871B-A2773075613F}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
+		{2D3200F2-3FCB-41B2-871B-A2773075613F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2D3200F2-3FCB-41B2-871B-A2773075613F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2D3200F2-3FCB-41B2-871B-A2773075613F}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
 		{2D3200F2-3FCB-41B2-871B-A2773075613F}.Debug|Win32.ActiveCfg = Debug|x86
 		{2D3200F2-3FCB-41B2-871B-A2773075613F}.Debug|Win32.Build.0 = Debug|x86
 		{2D3200F2-3FCB-41B2-871B-A2773075613F}.Debug|Win32.Deploy.0 = Debug|x86
