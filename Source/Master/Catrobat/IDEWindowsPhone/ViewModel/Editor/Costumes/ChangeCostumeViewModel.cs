@@ -112,6 +112,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Costume>>(this, ViewModelMessagingToken.CostumeNameListener, ChangeCostumeNameMessageAction);
+        
+            PaintLauncher.OnImageChanged += OnPaintImageChanged;
+        }
+
+        private void OnPaintImageChanged()
+        {
+            var costumeBuilder = new CostumeBuilder();
+            costumeBuilder.ReplaceImageInStorage(ReceivedCostume, PaintLauncher.CurrentImage);
         }
 
         private void ResetViewModel()

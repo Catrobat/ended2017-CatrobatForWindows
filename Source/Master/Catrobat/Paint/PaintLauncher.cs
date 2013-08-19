@@ -12,6 +12,16 @@ namespace Catrobat.Paint
 {
     public static class PaintLauncher
     {
+        public delegate void ImageChanged();
+
+        public static ImageChanged OnImageChanged;
+
+        public static void RaiseImageChanged()
+        {
+            if(OnImageChanged != null)
+                OnImageChanged.Invoke();
+        }
+
         public static BitmapImage CurrentImage { get; set; }
 
         public static void Launche()

@@ -38,5 +38,16 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
             return costume;
         }
+
+        internal void ReplaceImageInStorage(Costume recievedCostume, BitmapImage newImage)
+        {
+            using (var storage = StorageSystem.GetStorage())
+            {
+                recievedCostume.Image = newImage;
+
+                // TODO: replace image and create thumbnail
+                //storage.SaveImage(recievedCostume.FileName, newImage);
+            }
+        }
     }
 }

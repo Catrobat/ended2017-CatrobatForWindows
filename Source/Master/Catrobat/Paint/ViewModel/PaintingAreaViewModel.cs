@@ -82,6 +82,7 @@ namespace Catrobat.Paint.ViewModel
                     {
                         biMap.SetSource(fs);
                         PaintLauncher.CurrentImage = biMap;
+                        PaintLauncher.RaiseImageChanged();
                         MessageBox.Show(Resources.AppResources.PaintingAreaMessageBoxImageSaved + " " + Path.GetFileName(DateTime.Now.ToLongDateString() + ".jpg"));
                     }
                     
