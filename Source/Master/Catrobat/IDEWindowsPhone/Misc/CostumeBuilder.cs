@@ -38,5 +38,16 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
             return costume;
         }
+
+        public void ReplaceImageInStorage(Project project, Costume costume, WriteableBitmap newImage)
+        {
+            var path = Path.Combine(project.BasePath, Project.ImagesPath, costume.FileName);
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                storage.SaveImage(path, newImage, true);
+                costume.Image = storage.CreateThumbnail(newImage);
+            }
+        }
     }
 }

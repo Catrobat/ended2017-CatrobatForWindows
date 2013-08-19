@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Views.Editor;
 using Catrobat.Paint;
+using Coding4Fun.Toolkit.Controls.Common;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -15,10 +20,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private Costume _receivedCostume;
         private string _costumeName;
+        private Project _currentProject;
 
         #endregion
 
         #region Properties
+
+        public Project CurrentProject
+        {
+            get { return _currentProject; }
+            set
+            {
+                _currentProject = value; 
+                RaisePropertyChanged(()=> CurrentProject);
+            }
+        }
 
         public Costume ReceivedCostume
         {
@@ -87,19 +103,48 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private void EditCostumeAction()
         {
-            PaintLauncher.CurrentImage = ReceivedCostume.Image as BitmapImage;
-            PaintLauncher.Launche();
+            var task = new PaintLauncherTask { CurrentImage = new WriteableBitmap(ReceivedCostume.Image as BitmapSource) };
+            task.OnImageChanged += OnPaintLauncherTaskImageChanged;
+            PaintLauncher.Launche(task);
+        }
+
+        private void OnPaintLauncherTaskImageChanged(PaintLauncherTask task)
+        {
+            try
+            {
+                var costumeBuilder = new CostumeBuilder();
+                costumeBuilder.ReplaceImageInStorage(CurrentProject, ReceivedCostume, task.CurrentImage);
+            }
+            catch (Exception)
+            {
+                // TODO: fix error on changing the same costume twice in a short time
+
+                if(Debugger.IsAttached)
+                    Debugger.Break();
+            }
+
+            Navigation.RemoveBackEntry();
+            Navigation.NavigateBack();
+        }
+
+        private void ResetViewModelAction()
+        {
+            ResetViewModel();
+        }
+
+        #endregion
+
+        #region MessageActions
+
+        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        {
+            CurrentProject = message.Content;
         }
 
         private void ChangeCostumeNameMessageAction(GenericMessage<Costume> message)
         {
             ReceivedCostume = message.Content;
             CostumeName = ReceivedCostume.Name;
-        }
-
-        private void ResetViewModelAction()
-        {
-            ResetViewModel();
         }
 
         #endregion
@@ -111,6 +156,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             CancelCommand = new RelayCommand(CancelAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
+            Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Costume>>(this, ViewModelMessagingToken.CostumeNameListener, ChangeCostumeNameMessageAction);
         }
 

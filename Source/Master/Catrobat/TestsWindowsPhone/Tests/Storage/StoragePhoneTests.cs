@@ -251,7 +251,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
                     var image = storage.LoadImage("TestLoadImage/screenshot.png");
 
                     //throw new NotImplementedException("TODO: check next line");
-                    storage.SaveImage("TestLoadImage2/screenshot.png", image);
+                    storage.SaveImage("TestLoadImage2/screenshot.png", image, true);
                     var image2 = storage.LoadImage("TestLoadImage2/screenshot.png");
 
                     // TODO: Maybe check if pixels are corect?

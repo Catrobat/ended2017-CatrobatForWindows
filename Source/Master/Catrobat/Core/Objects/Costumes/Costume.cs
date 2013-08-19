@@ -59,6 +59,18 @@ namespace Catrobat.Core.Objects.Costumes
 
                 return _thumbnail;
             }
+
+            set
+            {
+                _thumbnail = value;
+                RaisePropertyChanged(() => Image);
+            }
+        }
+
+        public void ResetImage()
+        {
+            _thumbnail = null;
+            RaisePropertyChanged(() => Image);
         }
 
         //public byte[] Thumbnail

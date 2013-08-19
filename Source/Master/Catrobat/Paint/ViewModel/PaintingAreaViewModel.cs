@@ -10,18 +10,13 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Catrobat.Paint.Data;
+using Coding4Fun.Toolkit.Controls.Common;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.Paint.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that a View can data bind to.
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
     public class PaintingAreaViewModel : ViewModelBase
     {
         private readonly Stack<Stroke> _undoneStrokes = new Stack<Stroke>();
@@ -36,9 +31,7 @@ namespace Catrobat.Paint.ViewModel
                 return _strokes;
             }
         }
-        /// <summary>
-        /// Initializes a new instance of the PaintingAreaViewModel class.
-        /// </summary>
+
         public PaintingAreaViewModel()
         {
             BeginStrokeCommand = new RelayCommand<Point>(BeginStrokeExecute);
@@ -70,23 +63,27 @@ namespace Catrobat.Paint.ViewModel
         public ICommand SaveCommand { get; private set; }
         private void SaveExecute(WriteableBitmap wb)
         {
-            using (IsolatedStorageFile isStore = IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                using (IsolatedStorageFileStream targetStream = isStore.OpenFile(DateTime.Now.ToLongDateString()  + ".jpg", FileMode.Create, FileAccess.Write))
-                {
-                    wb.SaveJpeg(targetStream, wb.PixelWidth, wb.PixelHeight, 1, 100);
-                    targetStream.Close();
-                    var biMap = new BitmapImage();
-                    biMap.CreateOptions = BitmapCreateOptions.None;
-                    using (var fs = isStore.OpenFile(DateTime.Now.ToLongDateString() + ".jpg", FileMode.Open))
-                    {
-                        biMap.SetSource(fs);
-                        PaintLauncher.CurrentImage = biMap;
-                        MessageBox.Show(Resources.AppResources.PaintingAreaMessageBoxImageSaved + " " + Path.GetFileName(DateTime.Now.ToLongDateString() + ".jpg"));
-                    }
+            PaintLauncher.Task.CurrentImage = new WriteableBitmap(wb);
+            PaintLauncher.Task.RaiseImageChanged();
+
+            //using (IsolatedStorageFile isStore = IsolatedStorageFile.GetUserStoreForApplication())
+            //{
+            //    using (IsolatedStorageFileStream targetStream = isStore.OpenFile(DateTime.Now.ToLongDateString()  + ".jpg", FileMode.Create, FileAccess.Write))
+            //    {
+            //        wb.SaveJpeg(targetStream, wb.PixelWidth, wb.PixelHeight, 1, 100);
+            //        targetStream.Close();
+            //        var biMap = new BitmapImage();
+            //        biMap.CreateOptions = BitmapCreateOptions.None;
+            //        using (var fs = isStore.OpenFile(DateTime.Now.ToLongDateString() + ".jpg", FileMode.Open))
+            //        {
+            //            biMap.SetSource(fs);
+            //            PaintLauncher.Task.CurrentImage = biMap;
+            //            PaintLauncher.Task.RaiseImageChanged();
+            //            MessageBox.Show(Resources.AppResources.PaintingAreaMessageBoxImageSaved + " " + Path.GetFileName(DateTime.Now.ToLongDateString() + ".jpg"));
+            //        }
                     
-                }
-            } 
+            //    }
+            //} 
         }
 
 

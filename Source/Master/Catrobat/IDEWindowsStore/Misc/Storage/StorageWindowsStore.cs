@@ -109,7 +109,7 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
     }
 
 
-    public void SaveImage(string path, object image)
+    public void SaveImage(string path, object image, bool deleteExisting)
     {
       throw new NotImplementedException();
     }
@@ -118,6 +118,11 @@ namespace Catrobat.IDEWindowsStore.Misc.Storage
     public object LoadImageThumbnail(string pathToImage)
     {
       throw new NotImplementedException();
+    }
+
+    public object CreateThumbnail(object image)
+    {
+        throw new NotImplementedException();
     }
 
 

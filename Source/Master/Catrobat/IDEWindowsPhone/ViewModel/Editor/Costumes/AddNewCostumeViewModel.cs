@@ -173,8 +173,31 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         {
             var newBitmap = new WriteableBitmap(
                 PlatformInformationHelper.ScreenWidth, PlatformInformationHelper.ScreenHeight);
-            PaintLauncher.CurrentImage = newBitmap.ToBitmapImage();
-            PaintLauncher.Launche();
+
+            var task = new PaintLauncherTask { CurrentImage = newBitmap };
+            task.OnImageChanged += OnPaintLauncherImageChanged;
+            PaintLauncher.Launche(task);
+        }
+
+        private async void OnPaintLauncherImageChanged(PaintLauncherTask task)
+        {
+            try
+            {
+                CostumeName = AppResources.Editor_Image;
+                _builder = new CostumeBuilder();
+
+                var image = task.CurrentImage;
+                Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
+
+                _builder.StartCreateCostumeAsync(_receivedSelectedSprite, image.ToBitmapImage());
+                Image = image;
+
+                Deployment.Current.Dispatcher.BeginInvoke(() => Navigation.NavigateTo(typeof(CostumeNameChooserView)));
+            }
+            catch (Exception)
+            {
+                ShowLoadingImageFailure();
+            }
         }
 
         private async void SaveAction()

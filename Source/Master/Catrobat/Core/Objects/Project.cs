@@ -58,7 +58,7 @@ namespace Catrobat.Core.Objects
                         storage.DeleteFile(ScreenshotPath);
                     }
 
-                    storage.SaveImage(ScreenshotPath, value);
+                    storage.SaveImage(ScreenshotPath, value, true);
                 }
 
                 RaisePropertyChanged();

@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Media.Imaging;
 using Catrobat.Core.ExtensionMethods;
 using Catrobat.Core.Storage;
+using Coding4Fun.Toolkit.Controls.Common;
 using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDEWindowsPhone.Misc.Storage
@@ -227,6 +228,8 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
         public object LoadImage(string pathToImage)
         {
+            pathToImage = pathToImage.Replace("\\", "/");
+
             if (FileExists(pathToImage))
             {
                 try
@@ -252,6 +255,8 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
         public object LoadImageThumbnail(string pathToImage)
         {
+            pathToImage = pathToImage.Replace("\\", "/");
+
             object retVal = null;
             var withoutExtension = Path.GetFileNameWithoutExtension(pathToImage);
             var thumbnailPath = string.Format("{0}{1}",withoutExtension, ThumbnailExtension);
@@ -286,10 +291,58 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
             return retVal;
         }
 
-        public void SaveImage(string path, object image)
+        public object CreateThumbnail(object image)
         {
-            //TODO: Implement!
-            throw new NotImplementedException();
+            WriteableBitmap writeableBitmap = null;
+            if (image is WriteableBitmap)
+            {
+                writeableBitmap = image as WriteableBitmap;
+            }
+            else
+            {
+                if (image is BitmapImage)
+                {
+                    writeableBitmap = new WriteableBitmap(image as BitmapImage);
+                }
+                else
+                {
+                    throw new Exception("image is no WritableBitmap or BitmapImage");
+                }
+            }
+
+            var thumbnailImage = ImageResizer.ResizeImage(writeableBitmap, _imageThumbnailDefaultMaxWidthHeight);
+            return thumbnailImage;
+        }
+
+        public void SaveImage(string path, object image, bool deleteExisting)
+        {
+            path = path.Replace("\\", "/");
+
+            WriteableBitmap writeableBitmap = null;
+
+            if (image is WriteableBitmap)
+                writeableBitmap = image as WriteableBitmap;
+            else if(image is BitmapImage)
+                writeableBitmap = new WriteableBitmap((WriteableBitmap) image);
+
+            if (writeableBitmap == null)
+                throw new Exception("image is not a Bitmapimage or WriteableBitmap");
+
+            var withoutExtension = Path.GetFileNameWithoutExtension(path);
+            var thumbnailPath = string.Format("{0}{1}", withoutExtension, ThumbnailExtension);
+
+            if (deleteExisting)
+            {
+                if(FileExists(path))
+                    _iso.DeleteFile(path);
+
+                if (FileExists(thumbnailPath))
+                    _iso.DeleteFile(thumbnailPath);
+            }
+
+            var stream = _iso.OpenFile(path, FileMode.CreateNew, FileAccess.Write);
+
+            PNGWriter.WritePNG(writeableBitmap, stream, 90);
         }
 
         public void Dispose()
