@@ -295,7 +295,7 @@ namespace Catrobat.TestsCommon.Misc.Storage
       return pathToFormat.Replace('\\', '/');
     }
 
-    public void SaveImage(string path, object image)
+    public void SaveImage(string path, object image, bool deleteExisting)
     {
       throw new NotImplementedException();
     }
@@ -306,6 +306,10 @@ namespace Catrobat.TestsCommon.Misc.Storage
       throw new NotImplementedException();
     }
 
+    public object CreateThumbnail(object image)
+    {
+        throw new NotImplementedException();
+    }
 
     public void MoveDirectory(string sourcePath, string destinationPath)
     {

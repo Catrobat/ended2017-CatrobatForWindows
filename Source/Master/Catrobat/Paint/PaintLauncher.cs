@@ -12,21 +12,27 @@ namespace Catrobat.Paint
 {
     public static class PaintLauncher
     {
-        public delegate void ImageChanged();
+        public static PaintLauncherTask Task { get; set; }
 
-        public static ImageChanged OnImageChanged;
-
-        public static void RaiseImageChanged()
+        public static void Launche(PaintLauncherTask task)
         {
-            if(OnImageChanged != null)
-                OnImageChanged.Invoke();
-        }
-
-        public static BitmapImage CurrentImage { get; set; }
-
-        public static void Launche()
-        {
+            Task = task;
             ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri("/Paint;component/View/PaintingAreaView.xaml", UriKind.RelativeOrAbsolute));
         }
+    }
+
+    public class PaintLauncherTask
+    {
+        public delegate void ImageChanged(PaintLauncherTask task);
+
+        public ImageChanged OnImageChanged;
+
+        public void RaiseImageChanged()
+        {
+            if (OnImageChanged != null)
+                OnImageChanged.Invoke(this);
+        }
+
+        public WriteableBitmap CurrentImage { get; set; }
     }
 }

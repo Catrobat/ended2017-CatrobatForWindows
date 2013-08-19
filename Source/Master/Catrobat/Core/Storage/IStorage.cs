@@ -50,7 +50,9 @@ namespace Catrobat.Core.Storage
 
         object LoadImageThumbnail(string pathToImage);
 
-        void SaveImage(string path, object image);
+        object CreateThumbnail(object image);
+
+        void SaveImage(string path, object image, bool deleteExisting);
 
         string ReadTextFile(string path);
 
