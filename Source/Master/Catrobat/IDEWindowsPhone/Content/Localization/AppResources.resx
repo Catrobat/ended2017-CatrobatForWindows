@@ -580,9 +580,7 @@
     <value>unknown</value>
   </data>
   <data name="Main_AboutText" xml:space="preserve">
-    <value>Catrobat for Windows is an on-device visual progamming language for Windows Phone 8 devices that is inspired by the scratch programming language developed by the MIT.
-It is developed at the department of Software Technology at the University of Technology Graz, Austria.
-The program is licensed under the MS-RL Lizenz.</value>
+    <value>Catrobat for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Catrobat is an independent free and open source project developed by the Catrobat team. Catrobat for Windows is licensed under the MS-RL license.</value>
   </data>
   <data name="Main_ActiveProject" xml:space="preserve">
     <value>active</value>
