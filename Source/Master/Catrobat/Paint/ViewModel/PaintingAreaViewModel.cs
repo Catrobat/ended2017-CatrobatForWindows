@@ -22,8 +22,9 @@ namespace Catrobat.Paint.ViewModel
         private readonly Stack<Stroke> _undoneStrokes = new Stack<Stroke>();
         private Stroke _stroke;
 
-        private readonly StrokeCollection _strokes = new StrokeCollection();
 
+        #region Properties
+        private readonly StrokeCollection _strokes = new StrokeCollection();
         public StrokeCollection Strokes
         {
             get
@@ -32,8 +33,15 @@ namespace Catrobat.Paint.ViewModel
             }
         }
 
+        private readonly WriteableBitmap _currentImage;
+        public WriteableBitmap CurrentImage { get { return _currentImage; } }
+        #endregion 
+
+
         public PaintingAreaViewModel()
         {
+            _currentImage = PaintLauncher.Task.CurrentImage;
+
             BeginStrokeCommand = new RelayCommand<Point>(BeginStrokeExecute);
             SetStrokePointCommand = new RelayCommand<Point>(SetStrokePointExecute);
             EndStrokeCommand = new RelayCommand(EndStrokeExecute);

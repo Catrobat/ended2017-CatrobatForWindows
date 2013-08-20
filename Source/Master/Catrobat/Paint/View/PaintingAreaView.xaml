@@ -18,6 +18,10 @@
   <phone:PhoneApplicationPage.Resources>
     <ResourceDictionary>
       <vm:ViewModelLocator x:Key="Locator" />
+
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Converters/ConverterResources.xaml" />
+      </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </phone:PhoneApplicationPage.Resources>
 
@@ -36,7 +40,9 @@
               LostMouseCapture="InkPresenter_LostMouseCapture" 
               MouseMove="InkPresenter_MouseMove" 
                   MouseLeftButtonUp="InkPresenter_OnMouseLeftButtonUp"
-              Background="Transparent" Opacity="1" Canvas.Left="10" Canvas.Top="64" />
+              Background="{Binding Path=CurrentImage, Converter={StaticResource WritableBitmapImageBrushConverter}}" 
+              Opacity="1" Canvas.Left="10" Canvas.Top="64" 
+                  />
   </Canvas>
 
   <phone:PhoneApplicationPage.ApplicationBar>

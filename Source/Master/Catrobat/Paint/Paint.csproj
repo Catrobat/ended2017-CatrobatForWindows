@@ -93,6 +93,7 @@
     <ToolkitRevision>2</ToolkitRevision>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Converters\WritableBitmapImageBrushConverter.cs" />
     <Compile Include="Data\GlobalValues.cs" />
     <Compile Include="Misc\PropertyNameHelper.cs" />
     <Compile Include="PaintLauncher.cs" />
@@ -165,6 +166,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Converters\ConverterResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ColorPickerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

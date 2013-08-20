@@ -27,10 +27,10 @@ namespace Catrobat.Paint.View
         {
             InitializeComponent();
          
-            if (PaintLauncher.Task.CurrentImage != null)
-            {
-                SetBackground(PaintLauncher.Task.CurrentImage);
-            }
+//            if (PaintLauncher.Task.CurrentImage != null)
+//            {
+//                SetBackground(PaintLauncher.Task.CurrentImage);
+//            }
 
             SetBoundary();
         }
