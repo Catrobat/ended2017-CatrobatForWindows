@@ -40,19 +40,22 @@
               LostMouseCapture="InkPresenter_LostMouseCapture" 
               MouseMove="InkPresenter_MouseMove" 
                   MouseLeftButtonUp="InkPresenter_OnMouseLeftButtonUp"
-              Background="{Binding Path=CurrentImage, Converter={StaticResource WritableBitmapImageBrushConverter}}" 
+              Background="{Binding Path=CurrentImage, Mode=TwoWay, Converter={StaticResource WritableBitmapImageBrushConverter}}" 
               Opacity="1" Canvas.Left="10" Canvas.Top="64" 
                   />
+
+    <Slider x:Name="SliderThickness" Canvas.Left="10" Value="{Binding StrokeThickness, Mode=TwoWay}" Canvas.Top="629" Width="460"  Maximum="50" Minimum="1" Visibility="Collapsed"/>
   </Canvas>
 
   <phone:PhoneApplicationPage.ApplicationBar>
     <shell:ApplicationBar>
+      <shell:ApplicationBarIconButton x:Name="ButtonThickness" IconUri="/Assets/ColorPicker/icon_menu_strokes.png" Text="thickness" Click="ButtonThickness_Click" />
       <shell:ApplicationBarIconButton x:Name="ButtonUndo" IconUri="/Assets/ApplicationBar/Dark/appbar.undo.curve.png" Text="undo" Click="ButtonUndo_Click"/>
       <shell:ApplicationBarIconButton x:Name="ButtonRedo" IconUri="/Assets/ApplicationBar/Dark/appbar.redo.curve.png" Text="redo" Click="ButtonRedo_Click"/>
       <shell:ApplicationBarIconButton x:Name="ButtonColorpicker" IconUri="/Assets/ColorPicker/icon_menu_color_palette.png" Text="color" Click="ButtonColorpicker_Click"/>
       <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem x:Name="ButtonClear" Text="Clear" Click="ButtonClear_Click"/>
-                <shell:ApplicationBarMenuItem x:Name="ButtonSaveToCatrobat" Text="Save to Catrobat" Click="ButtonSaveToCatrobat_Click"/>
+        <shell:ApplicationBarMenuItem x:Name="ButtonClear" Text="Clear" Click="ButtonClear_Click"/>
+        <shell:ApplicationBarMenuItem x:Name="ButtonSaveToCatrobat" Text="Save to Catrobat" Click="ButtonSaveToCatrobat_Click"/>
       </shell:ApplicationBar.MenuItems>
     </shell:ApplicationBar>
   </phone:PhoneApplicationPage.ApplicationBar>

@@ -33,14 +33,35 @@ namespace Catrobat.Paint.ViewModel
             }
         }
 
-        private readonly WriteableBitmap _currentImage;
-        public WriteableBitmap CurrentImage { get { return _currentImage; } }
-        #endregion 
+        private WriteableBitmap _currentImage;
+        // PaintingAreaViewModel stays in memory if user navigates back to catrobat and changes image. At switching to paint
+        // again a new PaintLauncherTask gets created and by comparing instances we know that a new image has to be loaded.
+        // But what to do with rest of this ViewModel? Resetting strokes? Or should the ViewModel be recreated?
+        private PaintLauncherTask _task;
+
+        public WriteableBitmap CurrentImage
+        {
+            get
+            {
+                if (!_task.Equals(PaintLauncher.Task)) GetCurrentImage();
+                return _currentImage;
+            }
+        }
+
+        private int _strokeThickness = 3;
+
+        public int StrokeThickness
+        {
+            get { return _strokeThickness; }
+            set { _strokeThickness = value; }
+        }
+
+        #endregion
 
 
         public PaintingAreaViewModel()
         {
-            _currentImage = PaintLauncher.Task.CurrentImage;
+            GetCurrentImage();
 
             BeginStrokeCommand = new RelayCommand<Point>(BeginStrokeExecute);
             SetStrokePointCommand = new RelayCommand<Point>(SetStrokePointExecute);
@@ -52,11 +73,17 @@ namespace Catrobat.Paint.ViewModel
             ToColorPickerCommand = new RelayCommand(ToColorPickerExecute);
         }
 
+        private void GetCurrentImage()
+        {
+            _currentImage = PaintLauncher.Task.CurrentImage;
+            _task = PaintLauncher.Task;
+        }
+
         ~PaintingAreaViewModel()
         {
             Debug.WriteLine("PaintingAreaViewModel Destructor called.");
         }
- 
+
 
         #region Commands
 
@@ -89,7 +116,7 @@ namespace Catrobat.Paint.ViewModel
             //            PaintLauncher.Task.RaiseImageChanged();
             //            MessageBox.Show(Resources.AppResources.PaintingAreaMessageBoxImageSaved + " " + Path.GetFileName(DateTime.Now.ToLongDateString() + ".jpg"));
             //        }
-                    
+
             //    }
             //} 
         }
@@ -101,6 +128,8 @@ namespace Catrobat.Paint.ViewModel
             _stroke = new Stroke();
             _stroke.StylusPoints.Add(ConvertToStylusPoint(point));
             _stroke.DrawingAttributes.Color = GlobalValues.Instance.SelectedColorAsColor;
+            _stroke.DrawingAttributes.Width = _strokeThickness;
+            _stroke.DrawingAttributes.Height = _strokeThickness;
             _strokes.Add(_stroke);
             Debug.WriteLine("<StylusPoint X=\"{0}\" Y=\"{1}\" />", point.X, point.Y);
 

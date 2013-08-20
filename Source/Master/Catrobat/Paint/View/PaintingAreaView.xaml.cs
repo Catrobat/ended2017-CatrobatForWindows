@@ -52,12 +52,6 @@ namespace Catrobat.Paint.View
             InkPresenter.Clip = clip;
         }
 
-        private void SetBackground(ImageSource image)
-        {
-
-            InkPresenter.Background = new ImageBrush{ ImageSource = image };
-        }
-
         private PaintingAreaViewModel ViewModel
         {
             get
@@ -118,6 +112,11 @@ namespace Catrobat.Paint.View
         }
 
         #endregion
+
+        private void ButtonThickness_Click(object sender, EventArgs e)
+        {
+            SliderThickness.Visibility = SliderThickness.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+        }
 
 
 
