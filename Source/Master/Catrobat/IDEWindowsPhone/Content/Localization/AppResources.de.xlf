@@ -98,9 +98,9 @@
           <source>if on edge, bounce</source>
           <target state="signed-off">if on edge, bounce</target>
         </trans-unit>
-        <trans-unit translate="yes" id="Resx/Brick_LoopEnd" xml:space="preserve">
-          <source>end of loop</source>
-          <target state="signed-off">end of loop</target>
+        <trans-unit translate="yes" id="Resx/Brick_RepeatLoopEnd" xml:space="preserve">
+          <source>repeat end</source>
+          <target state="new">repeat end</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_MoveNStepsMove" xml:space="preserve">
           <source>move</source>
@@ -985,6 +985,10 @@
         <trans-unit translate="yes" id="Resx/Main_SelectedProjectNotValidMessage" xml:space="preserve">
           <source>Project not valid</source>
           <target state="new">Project not valid</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ForeverLoopEnd" xml:space="preserve">
+          <source>forever end</source>
+          <target state="new">forever end</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_SelectedProjectNotValidHeader" xml:space="preserve">
           <source>Sorry! The selected project could not be opened.</source>

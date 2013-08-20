@@ -861,17 +861,29 @@
         </DataTemplate>
       </sb:ScriptBrickContentTemplateSelector.ForeverBrick>
 
-      <sb:ScriptBrickContentTemplateSelector.LoopEndBrick>
+      <sb:ScriptBrickContentTemplateSelector.RepeatLoopEndBrick>
         <DataTemplate>
-          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:LoopEndBrick}">
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:RepeatLoopEndBrick}">
             <rlb:NormalBrick Background="{StaticResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
               <TextBlock VerticalAlignment="Center" 
-                         Text="{Binding Resources.Brick_LoopEnd, Source={StaticResource LocalizedStrings}}" 
+                         Text="{Binding Resources.Brick_RepeatLoopEnd, Source={StaticResource LocalizedStrings}}" 
                          Margin="10" FontSize="24" />
             </rlb:NormalBrick>
           </Grid>
         </DataTemplate>
-      </sb:ScriptBrickContentTemplateSelector.LoopEndBrick>
+      </sb:ScriptBrickContentTemplateSelector.RepeatLoopEndBrick>
+
+      <sb:ScriptBrickContentTemplateSelector.ForeverLoopEndBrick>
+        <DataTemplate>
+          <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:ForeverLoopEndBrick}">
+            <rlb:NormalBrick Background="{StaticResource ControlBrickBrush}" BorderBrush="{StaticResource BrickBorderBrush}">
+              <TextBlock VerticalAlignment="Center" 
+                         Text="{Binding Resources.Brick_ForeverLoopEnd, Source={StaticResource LocalizedStrings}}" 
+                         Margin="10" FontSize="24" />
+            </rlb:NormalBrick>
+          </Grid>
+        </DataTemplate>
+      </sb:ScriptBrickContentTemplateSelector.ForeverLoopEndBrick>
 
       <sb:ScriptBrickContentTemplateSelector.NoteBrick>
         <DataTemplate>

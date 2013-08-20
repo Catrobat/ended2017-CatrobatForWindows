@@ -80,6 +80,8 @@
     <Compile Include="Objects\Bricks\ClearGraphicEffectBrick.cs" />
     <Compile Include="Objects\Bricks\ComeToFrontBrick.cs" />
     <Compile Include="Objects\Bricks\ChangeVariableBrick.cs" />
+    <Compile Include="Objects\Bricks\RepeatLoopEndBrick.cs" />
+    <Compile Include="Objects\Bricks\ForeverLoopEndBrick.cs" />
     <Compile Include="Objects\Bricks\IfLogicEndBrickReference.cs" />
     <Compile Include="Objects\Bricks\IfLogicElseBrickReference.cs" />
     <Compile Include="Objects\Bricks\IfLogicBeginBrickReference.cs" />

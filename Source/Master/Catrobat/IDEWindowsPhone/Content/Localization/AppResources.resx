@@ -186,8 +186,8 @@
   <data name="Brick_IfOnEdgeBounce" xml:space="preserve">
     <value>if on edge, bounce</value>
   </data>
-  <data name="Brick_LoopEnd" xml:space="preserve">
-    <value>end of loop</value>
+  <data name="Brick_RepeatLoopEnd" xml:space="preserve">
+    <value>repeat end</value>
   </data>
   <data name="Brick_MoveNStepsMove" xml:space="preserve">
     <value>move</value>
@@ -869,5 +869,8 @@
   </data>
   <data name="Main_SelectedProjectNotValidMessage" xml:space="preserve">
     <value>Project not valid</value>
+  </data>
+  <data name="Brick_ForeverLoopEnd" xml:space="preserve">
+    <value>forever end</value>
   </data>
 </root>

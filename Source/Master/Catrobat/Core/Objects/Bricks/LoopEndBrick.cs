@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Xml.Linq;
-using Catrobat.Core.Misc.Helpers;
+﻿using System.Xml.Linq;
 
 namespace Catrobat.Core.Objects.Bricks
 {

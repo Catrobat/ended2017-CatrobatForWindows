@@ -50,7 +50,9 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
 
         public DataTemplate IfOnEdgeBounceBrick { get; set; }
 
-        public DataTemplate LoopEndBrick { get; set; }
+        public DataTemplate RepeatLoopEndBrick { get; set; }
+
+        public DataTemplate ForeverLoopEndBrick { get; set; }
 
         public DataTemplate MoveNStepsBrick { get; set; }
 
@@ -212,9 +214,14 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
                     return IfOnEdgeBounceBrick;
                 }
 
-                if (scriptBrick is LoopEndBrick)
+                if (scriptBrick is ForeverLoopEndBrick)
                 {
-                    return LoopEndBrick;
+                    return ForeverLoopEndBrick;
+                }
+
+                if (scriptBrick is RepeatLoopEndBrick)
+                {
+                    return RepeatLoopEndBrick;
                 }
 
                 if (scriptBrick is MoveNStepsBrick)

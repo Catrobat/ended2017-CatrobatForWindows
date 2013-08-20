@@ -259,6 +259,15 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to forever end.
+        /// </summary>
+        public static string Brick_ForeverLoopEnd {
+            get {
+                return ResourceManager.GetString("Brick_ForeverLoopEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to glide.
         /// </summary>
         public static string Brick_GlideToGlide {
@@ -349,15 +358,6 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to end of loop.
-        /// </summary>
-        public static string Brick_LoopEnd {
-            get {
-                return ResourceManager.GetString("Brick_LoopEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to move.
         /// </summary>
         public static string Brick_MoveNStepsMove {
@@ -435,6 +435,15 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         public static string Brick_Repeat {
             get {
                 return ResourceManager.GetString("Brick_Repeat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to repeat end.
+        /// </summary>
+        public static string Brick_RepeatLoopEnd {
+            get {
+                return ResourceManager.GetString("Brick_RepeatLoopEnd", resourceCulture);
             }
         }
         

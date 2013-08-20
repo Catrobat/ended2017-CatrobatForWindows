@@ -29,6 +29,15 @@ namespace Catrobat.Core.Objects.Bricks
             set
             {
                 if (_loopEndBrickReference == null)
+                {
+                    _loopEndBrickReference = new LoopEndBrickReference();
+                    if (value is RepeatLoopEndBrick)
+                        _loopEndBrickReference.Class = "loopEndBrick";
+                    else if (value is ForeverLoopEndBrick)
+                        _loopEndBrickReference.Class = "loopEndlessBrick";
+                }
+
+                if (_loopEndBrickReference == null)
                     _loopEndBrickReference = new LoopEndBrickReference();
 
                 if (_loopEndBrickReference.LoopEndBrick == value)

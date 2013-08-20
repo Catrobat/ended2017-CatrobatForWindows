@@ -186,9 +186,6 @@
   <data name="Brick_IfOnEdgeBounce" xml:space="preserve">
     <value>[AB4BA][!!_îƒ òй éđģé, ъôúйĉé_!!]</value>
   </data>
-  <data name="Brick_LoopEnd" xml:space="preserve">
-    <value>[855BA][!!_éйđ õƒ ĺóõр_!!]</value>
-  </data>
   <data name="Brick_MoveNStepsMove" xml:space="preserve">
     <value>[D5DE4][!!_mòνé_!!]</value>
   </data>
