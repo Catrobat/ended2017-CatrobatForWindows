@@ -17,7 +17,7 @@
               </timesToRepeat>
             </repeatBrick>
             <loopEndBrick>
-              <loopBeginBrick class="repeat" reference="../../repeatBrick[1]" />
+              <loopBeginBrick class="repeatBrick" reference="../../repeatBrick[1]" />
             </loopEndBrick>
           </brickList>
         </startScript>

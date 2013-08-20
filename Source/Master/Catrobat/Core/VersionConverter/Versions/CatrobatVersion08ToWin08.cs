@@ -57,7 +57,6 @@ namespace Catrobat.Core.VersionConverter.Versions
             UnifySoundReferences(document);
             UnifyVariableReferences(document);
             ResolveReferencesToReferences(document);
-            //UnifyPointToBrickReferences(document);
             UnifyForeverBrickReferences(document);
             UnifyRepeatBrickReferences(document);
             UnifyIfLogicBeginBrickReferences(document);
@@ -66,37 +65,27 @@ namespace Catrobat.Core.VersionConverter.Versions
             ConvertRemoveProperties(document);
         }
 
-        //private void UnifyPointToBrickReferences(XDocument document)
-        //{
-
-        //}
-
         private void UnifyForeverBrickReferences(XDocument document)
         {
             var loopEndlessBricks = document.Descendants("brickList").Descendants("loopEndlessBrick").ToList();
             SwapCrossReferences(document, loopEndlessBricks);
-            
-            //loopEndlessBricks = document.Descendants("brickList").Descendants("loopBeginBrick").ToList();
-
-            //foreach (var element in loopEndlessBricks)
-            //{
-            //    if (element.Attributes("reference").Any())
-            //    {
-            //        XPathHelper.GetXPath(element, )
-            //    }
-            //}
-            //loopBeginBrick
-
         }
 
         private void UnifyRepeatBrickReferences(XDocument document)
         {
-            //throw new NotImplementedException();
+            var loopEndlessBricks = document.Descendants("brickList").Descendants("loopEndBrick").ToList();
+            SwapCrossReferences(document, loopEndlessBricks);
         }
 
         private void UnifyIfLogicBeginBrickReferences(XDocument document)
         {
-            //throw new NotImplementedException();
+            var loopEndlessBricks = document.Descendants("brickList").Descendants("ifLogicElseBrick").ToList();
+            SwapCrossReferences(document, loopEndlessBricks);
+            RemoveSelfReferences(document);
+
+            loopEndlessBricks = document.Descendants("brickList").Descendants("ifLogicEndBrick").ToList();
+            SwapCrossReferences(document, loopEndlessBricks);
+            RemoveSelfReferences(document);
         }
 
         protected void SwapReferencesInList(XDocument document, List<XElement> listNodes)
@@ -132,8 +121,31 @@ namespace Catrobat.Core.VersionConverter.Versions
             foreach (var listElement in elementsToSwap)
             {
                 var referenceAttribute = listElement.Attribute("reference");
+
+                if (referenceAttribute == null)
+                    continue;
+
                 var referencedElement = XPathHelper.GetElement(listElement, referenceAttribute.Value);
+
+
+                var referenceElements = from a in document.Descendants()
+                                        where a.Attribute("reference") != null
+                                        select a;
+
+                var changedReferences = new List<XElement>();
+
+                foreach (var referenceElement in referenceElements)
+                {
+                    var path = referenceElement.Attribute("reference").Value;
+                    if (XPathHelper.GetElement(referenceElement, path) == referencedElement)
+                    {
+                        changedReferences.Add(referenceElement);
+                    }
+                }
+
+
                 listElement.ReplaceNodes(referencedElement.Elements());
+
                 var newReferencePath = XPathHelper.GetXPath(referencedElement, listElement);
                 referencedElement.SetAttributeValue("reference", newReferencePath);
                 listElement.SetAttributeValue("reference", null);
@@ -141,9 +153,23 @@ namespace Catrobat.Core.VersionConverter.Versions
                 foreach (var child in listElement.Elements())
                     if (child.Attributes("reference").Any())
                     {
-                        var newPath = XPathHelper.GetXPath(child, referencedElement.Parent);
-                        child.SetAttributeValue("reference", newPath);
+                        var newChildPath = XPathHelper.GetXPath(child, referencedElement.Parent);
+                        child.SetAttributeValue("reference", newChildPath);
                     }
+                    else
+                    {
+                        foreach (var grandChild in child.Elements())
+                        {
+                            var newGrandChildPath = XPathHelper.GetXPath(grandChild, referencedElement.Parent);
+                            grandChild.SetAttributeValue("reference", newGrandChildPath);
+                        }
+                    }
+
+                foreach (var referenceElement in changedReferences)
+                {
+                    var newPath = XPathHelper.GetXPath(referenceElement, referencedElement);
+                    referenceElement.SetAttributeValue("reference", newPath);
+                }
 
                 referencedElement.RemoveNodes();
             }
