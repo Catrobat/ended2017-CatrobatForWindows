@@ -20,15 +20,18 @@ namespace Catrobat.Paint.View
     /// </summary>
     public partial class PaintingAreaView : PhoneApplicationPage
     {
-        //private readonly PaintingAreaViewModel _model = new PaintingAreaViewModel();
         /// <summary>
         /// Initializes a new instance of the PaintingAreaView class.
         /// </summary>
         public PaintingAreaView()
         {
-            //DataContext = _model;
             InitializeComponent();
-            
+         
+            if (PaintLauncher.Task.CurrentImage != null)
+            {
+                SetBackground(PaintLauncher.Task.CurrentImage);
+            }
+
             SetBoundary();
         }
 
@@ -49,8 +52,11 @@ namespace Catrobat.Paint.View
             InkPresenter.Clip = clip;
         }
 
+        private void SetBackground(ImageSource image)
+        {
 
-
+            InkPresenter.Background = new ImageBrush{ ImageSource = image };
+        }
 
         private PaintingAreaViewModel ViewModel
         {

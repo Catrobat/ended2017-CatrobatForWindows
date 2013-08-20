@@ -17,8 +17,31 @@ namespace Catrobat.PaintStandAloneApp
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            PaintLauncher.CurrentImage = new BitmapImage(new Uri("/Content/TestImage.png", UriKind.Relative));
-            PaintLauncher.Launche();
+//            PaintLauncher.Task.CurrentImage = new WriteableBitmap(new BitmapImage(new Uri("/Content/TestImage.png", UriKind.Relative)));
+            try
+            {
+
+                var u = new Uri("test.jpg", UriKind.Relative);
+                var b = new BitmapImage(u);
+                b.CreateOptions = BitmapCreateOptions.None;
+                
+                var w = new WriteableBitmap(b as BitmapSource);
+
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
+            var task = new PaintLauncherTask { CurrentImage = null};
+            task.OnImageChanged += OnPaintLauncherTaskImageChanged;
+            PaintLauncher.Launche(task);
+             
+        }
+
+        private void OnPaintLauncherTaskImageChanged(PaintLauncherTask task)
+        {
+            
         }
     }
 }
