@@ -94,16 +94,6 @@ namespace Catrobat.TestsCommon.Tests.Data
         }
 
         [TestMethod]
-        public void CatrobatVersionConverterTest_Convert_IfLoginBeginBrickReferences()
-        {
-            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_IfLogicBegin_Input");
-            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_IfLogicBegin_Output");
-
-            CatrobatVersionConverter.Convert("0.8", "Win0.8", actualDocument);
-            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
-        }
-
-        [TestMethod]
         public void CatrobatVersionConverterTest_Convert_RepeatBrickReferences()
         {
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_Repeat_Input");
@@ -113,6 +103,15 @@ namespace Catrobat.TestsCommon.Tests.Data
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
+        [TestMethod]
+        public void CatrobatVersionConverterTest_Convert_IfLoginBeginBrickReferences()
+        {
+            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_IfLogicBegin_Input");
+            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_IfLogicBegin_Output");
+
+            CatrobatVersionConverter.Convert("0.8", "Win0.8", actualDocument);
+            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+        }
 
         #endregion
 

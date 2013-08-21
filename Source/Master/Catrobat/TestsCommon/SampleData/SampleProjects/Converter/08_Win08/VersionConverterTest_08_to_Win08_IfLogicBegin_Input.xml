@@ -24,10 +24,10 @@
                   <ifElseBrick reference="../.."/>
                 </ifEndBrick>
               </ifElseBrick>
-              <ifEndBrick reference="../ifElseBrick/ifEndBrick"/>
+              <ifEndBrick reference="../ifElseBrick/ifEndBrick[1]"/>
             </ifLogicBeginBrick>
-            <ifLogicElseBrick reference="../ifLogicBeginBrick/ifElseBrick"/>
-            <ifLogicEndBrick reference="../ifLogicBeginBrick/ifElseBrick/ifEndBrick"/>
+            <ifLogicElseBrick reference="../ifLogicBeginBrick/ifElseBrick[1]"/>
+            <ifLogicEndBrick reference="../ifLogicBeginBrick/ifElseBrick/ifEndBrick[1]"/>
           </brickList>
           <object reference="../../.."/>
         </startScript>
@@ -35,20 +35,5 @@
       <soundList/>
     </object>
   </objectList>
-  <variables>
-    <objectVariableList>
-      <entry>
-        <object reference="../../../../objectList/object"/>
-        <list/>
-      </entry>
-    </objectVariableList>
-    <programVariableList>
-      <userVariable>
-        <name>zufällig von</name>
-      </userVariable>
-      <userVariable>
-        <name>zufällig bis</name>
-      </userVariable>
-    </programVariableList>
-  </variables>
+  <variables></variables>
 </program>

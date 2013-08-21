@@ -29,19 +29,5 @@
     </object>
   </objectList>
   <variables>
-    <objectVariableList>
-      <entry>
-        <object reference="../../../../objectList/object"/>
-        <list/>
-      </entry>
-    </objectVariableList>
-    <programVariableList>
-      <userVariable>
-        <name>zufällig von</name>
-      </userVariable>
-      <userVariable>
-        <name>zufällig bis</name>
-      </userVariable>
-    </programVariableList>
   </variables>
 </program>

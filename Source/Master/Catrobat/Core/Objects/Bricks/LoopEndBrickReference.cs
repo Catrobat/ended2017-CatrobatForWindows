@@ -8,6 +8,22 @@ namespace Catrobat.Core.Objects.Bricks
     {
         internal string _reference;
 
+        protected string _classField;
+        public string Class
+        {
+            get { return _classField; }
+            set
+            {
+                if (_classField == value)
+                {
+                    return;
+                }
+
+                _classField = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private LoopEndBrick _loopEndBrick;
         public LoopEndBrick LoopEndBrick
         {
@@ -34,12 +50,14 @@ namespace Catrobat.Core.Objects.Bricks
 
         internal override void LoadFromXML(XElement xRoot)
         {
+            _classField = xRoot.Attribute("class").Value;
             _reference = xRoot.Attribute("reference").Value;
         }
 
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("loopEndBrick");
+            xRoot.Add(new XAttribute("class", _classField));
             xRoot.Add(new XAttribute("reference", ReferenceHelper.GetReferenceString(this)));
 
             return xRoot;
@@ -56,6 +74,7 @@ namespace Catrobat.Core.Objects.Bricks
         public DataObject Copy()
         {
             var newLoopEndBrickRef = new LoopEndBrickReference();
+            newLoopEndBrickRef.Class = _classField;
             newLoopEndBrickRef.LoopEndBrick = _loopEndBrick;
 
             return newLoopEndBrickRef;

@@ -74,6 +74,10 @@ namespace Catrobat.Core.Objects.Bricks
                         Bricks.Add(new ForeverBrick());
                         break;
 
+                    case "loopEndlessBrick":
+                        Bricks.Add(new ForeverLoopEndBrick());
+                        break;
+
                     case "glideToBrick":
                         Bricks.Add(new GlideToBrick());
                         break;
@@ -118,10 +122,6 @@ namespace Catrobat.Core.Objects.Bricks
                         Bricks.Add(new NxtPlayToneBrick());
                         break;
 
-                    case "loopEndBrick":
-                        Bricks.Add(new LoopEndBrick());
-                        break;
-
                     case "moveNStepsBrick":
                         Bricks.Add(new MoveNStepsBrick());
                         break;
@@ -152,6 +152,10 @@ namespace Catrobat.Core.Objects.Bricks
 
                     case "repeatBrick":
                         Bricks.Add(new RepeatBrick());
+                        break;
+
+                    case "loopEndBrick":
+                        Bricks.Add(new RepeatLoopEndBrick());
                         break;
 
                     case "setBrightnessBrick":

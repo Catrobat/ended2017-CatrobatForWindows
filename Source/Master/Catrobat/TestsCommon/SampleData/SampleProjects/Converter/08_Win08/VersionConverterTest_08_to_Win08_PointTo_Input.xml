@@ -11,7 +11,7 @@
               <object reference="../../../../.."/>
               <pointedObject>
                 <lookList/>
-                <name>sprite2</name>
+                <name>sprite1</name>
                 <scriptList/>
                 <soundList/>
               </pointedObject>
@@ -25,19 +25,5 @@
     <object reference="../object/scriptList/startScript/brickList/pointToBrick/pointedObject"/>
   </objectList>
   <variables>
-    <objectVariableList>
-      <entry>
-        <object reference="../../../../objectList/object"/>
-        <list/>
-      </entry>
-    </objectVariableList>
-    <programVariableList>
-      <userVariable>
-        <name>zufällig von</name>
-      </userVariable>
-      <userVariable>
-        <name>zufällig bis</name>
-      </userVariable>
-    </programVariableList>
   </variables>
 </program>

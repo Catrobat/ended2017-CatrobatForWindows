@@ -80,28 +80,27 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
         private void AddNewScriptBrickAction(DataObject dataObject)
         {
             if (dataObject == null)
-            {
                 return;
-            }
 
             if (dataObject is Brick)
-            {
                 _selectedBrick = (dataObject as Brick).Copy();
-            }
             else if (dataObject is Script)
-            {
                 _selectedBrick = (dataObject as Script).Copy();
-            }
 
 
             _receivedScriptBrickCollection.AddScriptBrick(_selectedBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex);
 
-            if (_selectedBrick is LoopBeginBrick)
+
+            if(_selectedBrick is LoopBeginBrick)
             {
-                var brick = new LoopEndBrick();
-                brick.LoopBeginBrick = (LoopBeginBrick) _selectedBrick;
-                ((LoopBeginBrick) _selectedBrick).LoopEndBrick = brick;
-                _receivedScriptBrickCollection.AddScriptBrick(brick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
+                LoopEndBrick endBrick;
+                if (_selectedBrick is ForeverBrick)
+                    endBrick = new ForeverLoopEndBrick{ LoopBeginBrick = (LoopBeginBrick) _selectedBrick };
+                else
+                    endBrick = new RepeatLoopEndBrick { LoopBeginBrick = (LoopBeginBrick)_selectedBrick };
+
+                ((LoopBeginBrick) _selectedBrick).LoopEndBrick = endBrick;
+                _receivedScriptBrickCollection.AddScriptBrick(endBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
             }
 
             if (_selectedBrick is IfLogicBeginBrick)
@@ -123,7 +122,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
             }
 
             var message = new GenericMessage<DataObject>(_selectedBrick);
-            Messenger.Default.Send<GenericMessage<DataObject>>(message, ViewModelMessagingToken.SelectedBrickListener);
+            Messenger.Default.Send(message, ViewModelMessagingToken.SelectedBrickListener);
 
 
             Navigation.RemoveBackEntry();

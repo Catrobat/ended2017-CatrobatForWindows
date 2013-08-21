@@ -11,45 +11,38 @@ namespace Catrobat.Core.VersionConverter.Versions
 {
     public class CatrobatVersion08ToWin08 : CatrobatVersion
     {
-        public override CatrobatVersionPair CatrobatVersionPair { 
-            get
-            {
-                return new CatrobatVersionPair {InputVersion = "0.8", OutputVersion = "Win0.8"};
-            } 
-        }
-
-        protected override List<CatrobatVersionPropertyRenameEntry> AttributesToRename
+        public override CatrobatVersionPair CatrobatVersionPair
         {
             get
             {
-                return new List<CatrobatVersionPropertyRenameEntry>
-                {
-                    //new CatrobatVersionPropertyRenameEntry{ElementName = "", PropertyName = "", NewPropertyName = ""}
-                };
-            }
-        }
-
-        protected override List<CatrobatVersionElementRenameEntry> ElementsToRename
-        {
-            get
-            {
-                return new List<CatrobatVersionElementRenameEntry>
-                {
-                    //new CatrobatVersionElementRenameEntry{ElementName = "", NewElementName = ""}
-                };
+                return new CatrobatVersionPair { InputVersion = "0.8", OutputVersion = "Win0.8" };
             }
         }
 
         #region Convert
 
-        protected override void ConvertRemoveElements(XDocument document)
+        protected void ConvertRemoveElements(XDocument document)
         {
             //throw new NotImplementedException();
         }
 
-        protected override void ConvertRemoveProperties(XDocument document)
+        protected void ConvertRemoveProperties(XDocument document)
         {
-            //throw new NotImplementedException();
+            var program = document.Element("program");
+            var objectList = program.Element("objectList");
+            var variables = program.Element("variables");
+
+            foreach (var sprite in objectList.Descendants("object"))
+            {
+                if (sprite.Elements("reference").Any())
+                {
+                    sprite.Remove();
+                }
+            }
+
+            foreach (var pointToBrick in objectList.Descendants("pointToBrick"))
+                foreach (var pointedObject in pointToBrick.Descendants("pointedObject"))
+                    pointedObject.Name = "object";
         }
 
         protected override void ConvertStructure(XDocument document)
@@ -64,27 +57,121 @@ namespace Catrobat.Core.VersionConverter.Versions
             UnifySoundReferences(document);
             UnifyVariableReferences(document);
             ResolveReferencesToReferences(document);
+            UnifyForeverBrickReferences(document);
+            UnifyRepeatBrickReferences(document);
+            UnifyIfLogicBeginBrickReferences(document);
+
+            ConvertRemoveElements(document);
+            ConvertRemoveProperties(document);
         }
 
-        protected void SwapReferencesInList(XDocument document, List<XElement> listNodes )
+        private void UnifyForeverBrickReferences(XDocument document)
+        {
+            var loopEndlessBricks = document.Descendants("brickList").Descendants("loopEndlessBrick").ToList();
+            SwapCrossReferences(document, loopEndlessBricks);
+        }
+
+        private void UnifyRepeatBrickReferences(XDocument document)
+        {
+            var loopEndlessBricks = document.Descendants("brickList").Descendants("loopEndBrick").ToList();
+            SwapCrossReferences(document, loopEndlessBricks);
+        }
+
+        private void UnifyIfLogicBeginBrickReferences(XDocument document)
+        {
+            var loopEndlessBricks = document.Descendants("brickList").Descendants("ifLogicElseBrick").ToList();
+            SwapCrossReferences(document, loopEndlessBricks);
+            RemoveSelfReferences(document);
+
+            loopEndlessBricks = document.Descendants("brickList").Descendants("ifLogicEndBrick").ToList();
+            SwapCrossReferences(document, loopEndlessBricks);
+            RemoveSelfReferences(document);
+        }
+
+        protected void SwapReferencesInList(XDocument document, List<XElement> listNodes)
         {
             //var listNodes = document.Descendants(listName);
             foreach (var listNode in listNodes)
             {
                 var listElements = listNode.Elements();
                 var listElementsToSwap = from a in listElements
-                    where a.Attribute("reference") != null
-                    select a;
-                foreach (var listElement in listElementsToSwap)
+                                         where a.Attribute("reference") != null
+                                         select a;
+
+                SwapReferences(document, listElementsToSwap.ToList());
+            }
+        }
+
+        protected void SwapReferences(XDocument document, List<XElement> elementsToSwap)
+        {
+            foreach (var listElement in elementsToSwap)
+            {
+                var referenceAttribute = listElement.Attribute("reference");
+                var referencedElement = XPathHelper.GetElement(listElement, referenceAttribute.Value);
+                listElement.ReplaceNodes(referencedElement.Elements());
+                var newReferencePath = XPathHelper.GetXPath(referencedElement, listElement);
+                referencedElement.SetAttributeValue("reference", newReferencePath);
+                listElement.SetAttributeValue("reference", null);
+                referencedElement.RemoveNodes();
+            }
+        }
+
+        protected void SwapCrossReferences(XDocument document, List<XElement> elementsToSwap)
+        {
+            foreach (var listElement in elementsToSwap)
+            {
+                var referenceAttribute = listElement.Attribute("reference");
+
+                if (referenceAttribute == null)
+                    continue;
+
+                var referencedElement = XPathHelper.GetElement(listElement, referenceAttribute.Value);
+
+
+                var referenceElements = from a in document.Descendants()
+                                        where a.Attribute("reference") != null
+                                        select a;
+
+                var changedReferences = new List<XElement>();
+
+                foreach (var referenceElement in referenceElements)
                 {
-                    var referenceAttribute = listElement.Attribute("reference");
-                    var referenceElement = XPathHelper.GetElement(listElement, referenceAttribute.Value);
-                    listElement.ReplaceNodes(referenceElement.Elements());
-                    var newReferencePath = XPathHelper.GetXPath(referenceElement, listElement);
-                    referenceElement.SetAttributeValue("reference", newReferencePath);
-                    listElement.SetAttributeValue("reference", null);
-                    referenceElement.RemoveNodes();
+                    var path = referenceElement.Attribute("reference").Value;
+                    if (XPathHelper.GetElement(referenceElement, path) == referencedElement)
+                    {
+                        changedReferences.Add(referenceElement);
+                    }
                 }
+
+
+                listElement.ReplaceNodes(referencedElement.Elements());
+
+                var newReferencePath = XPathHelper.GetXPath(referencedElement, listElement);
+                referencedElement.SetAttributeValue("reference", newReferencePath);
+                listElement.SetAttributeValue("reference", null);
+
+                foreach (var child in listElement.Elements())
+                    if (child.Attributes("reference").Any())
+                    {
+                        var newChildPath = XPathHelper.GetXPath(child, referencedElement.Parent);
+                        child.SetAttributeValue("reference", newChildPath);
+                    }
+                    else
+                    {
+                        foreach (var grandChild in child.Elements())
+                        {
+                            var newGrandChildPath = XPathHelper.GetXPath(grandChild, referencedElement.Parent);
+                            grandChild.SetAttributeValue("reference", newGrandChildPath);
+                        }
+                    }
+
+                foreach (var referenceElement in changedReferences)
+                {
+                    var newPath = XPathHelper.GetXPath(referenceElement, referencedElement);
+                    referenceElement.SetAttributeValue("reference", newPath);
+                }
+
+                referencedElement.RemoveNodes();
             }
         }
 
@@ -92,13 +179,13 @@ namespace Catrobat.Core.VersionConverter.Versions
         {
             var allElements = document.Descendants("objectList").ToArray()[0].Descendants("object");
             var objectReferences = from a in allElements
-                where a.Attribute("reference") != null
-                select a;
-            var objectReferencesToRemove = (from objectReference in objectReferences 
-                let referenceAttribute = objectReference.Attribute("reference") 
-                let originalElement = XPathHelper.GetElement(objectReference, referenceAttribute.Value) 
-                where originalElement.Descendants().ToList().Contains(objectReference) 
-                select objectReference).ToList();
+                                   where a.Attribute("reference") != null
+                                   select a;
+            var objectReferencesToRemove = (from objectReference in objectReferences
+                                            let referenceAttribute = objectReference.Attribute("reference")
+                                            let originalElement = XPathHelper.GetElement(objectReference, referenceAttribute.Value)
+                                            where originalElement.Descendants().ToList().Contains(objectReference)
+                                            select objectReference).ToList();
             foreach (var objectReferenceToRemove in objectReferencesToRemove)
             {
                 objectReferenceToRemove.Remove();
@@ -108,8 +195,8 @@ namespace Catrobat.Core.VersionConverter.Versions
         protected void ResolveReferencesToReferences(XDocument document)
         {
             var allReferenceElements = (from a in document.Descendants()
-                where a.Attribute("reference") != null
-                select a).ToList();
+                                        where a.Attribute("reference") != null
+                                        select a).ToList();
             foreach (var referenceElement in allReferenceElements)
             {
                 var referenceAttribute = referenceElement.Attribute("reference");
@@ -125,7 +212,7 @@ namespace Catrobat.Core.VersionConverter.Versions
                 {
                     referenceElement.Attribute("reference").Value = XPathHelper.GetXPath(referenceElement, targetElement);
                 }
-                
+
             }
         }
 
@@ -198,8 +285,8 @@ namespace Catrobat.Core.VersionConverter.Versions
         {
             var allElements = document.Descendants("objectList").ToArray()[0].Descendants().ToList();
             var referenceElements = (from a in allElements
-                where a.Attribute("reference") != null
-                select a).ToList();
+                                     where a.Attribute("reference") != null
+                                     select a).ToList();
             var swappedReferences = new List<XElement>();
             foreach (var referenceElement in referenceElements)
             {
@@ -228,16 +315,16 @@ namespace Catrobat.Core.VersionConverter.Versions
                     .ToList();
                 var element = objectElement;
                 referenceElements.AddRange(
-                    from a in swappedReferences 
-                    let referenceAttribute = a.Attribute("reference") 
-                    select XPathHelper.GetElement(a, referenceAttribute.Value) 
-                    into targetElement 
-                    where element.Descendants().Contains(targetElement) 
-                    select targetElement);
+                    from a in swappedReferences
+                    let referenceAttribute = a.Attribute("reference")
+                    select XPathHelper.GetElement(a, referenceAttribute.Value)
+                        into targetElement
+                        where element.Descendants().Contains(targetElement)
+                        select targetElement);
                 foreach (var referenceElement in referenceElements)
                 {
                     var newElement = new XElement(objectElement.Name);
-                    newElement.SetAttributeValue("reference",XPathHelper.GetXPath(referenceElement, objectElement));
+                    newElement.SetAttributeValue("reference", XPathHelper.GetXPath(referenceElement, objectElement));
                     referenceElement.AddBeforeSelf(newElement);
                 }
             }

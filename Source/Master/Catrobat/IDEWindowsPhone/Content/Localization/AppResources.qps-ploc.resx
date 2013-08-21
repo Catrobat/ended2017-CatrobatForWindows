@@ -186,9 +186,6 @@
   <data name="Brick_IfOnEdgeBounce" xml:space="preserve">
     <value>[AB4BA][!!_îƒ òй éđģé, ъôúйĉé_!!]</value>
   </data>
-  <data name="Brick_LoopEnd" xml:space="preserve">
-    <value>[855BA][!!_éйđ õƒ ĺóõр_!!]</value>
-  </data>
   <data name="Brick_MoveNStepsMove" xml:space="preserve">
     <value>[D5DE4][!!_mòνé_!!]</value>
   </data>
@@ -575,11 +572,6 @@
   </data>
   <data name="Formula_Unknown" xml:space="preserve">
     <value>[D1733][!!_ûиķήóẁй_!!]</value>
-  </data>
-  <data name="Main_AboutText" xml:space="preserve">
-    <value>[EDBBD][!!_Čãťѓóъâţ ƒôŗ Ŵìиðôẅś îş áή õή-ðéνíĉę νíšµáĺ рŕõğàмmîήĝ łáйğµãģé ƒòř Ŵìηðòẁš Рћõηê 8 đèνíĉêş ťĥàτ įś íйşρįŗêð Бÿ ťђè šćŕâťćђ ρѓôğѓâммįиġ łáйġµãġè ðéνêľòþêđ вУ ťћè МĮŤ.
-Ìτ îŝ ðêνèļôрęđ âť τнè ďèрâѓтmęйτ õƒ Šòƒťẅâŗę Τęčћηóľõģў áţ тнê ÜйîνèŗšîťУ õƒ Ťêĉћиõĺóġý Ġŕáž, Àúśтřìà.
-Τћé ρŗóġřãm îš ĺìċêηşéď úйďéř тћê ΜŚ-ЃĹ Ľíżèήź._!!]</value>
   </data>
   <data name="Main_ActiveProject" xml:space="preserve">
     <value>[7E5A3][!!_ãċтíνé_!!]</value>

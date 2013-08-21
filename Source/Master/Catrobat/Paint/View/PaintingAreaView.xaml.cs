@@ -27,10 +27,10 @@ namespace Catrobat.Paint.View
         {
             InitializeComponent();
          
-            if (PaintLauncher.Task.CurrentImage != null)
-            {
-                SetBackground(PaintLauncher.Task.CurrentImage);
-            }
+//            if (PaintLauncher.Task.CurrentImage != null)
+//            {
+//                SetBackground(PaintLauncher.Task.CurrentImage);
+//            }
 
             SetBoundary();
         }
@@ -50,12 +50,6 @@ namespace Catrobat.Paint.View
                     Rect = new Rect(0, 0, InkPresenter.ActualWidth, InkPresenter.ActualHeight)
                 };
             InkPresenter.Clip = clip;
-        }
-
-        private void SetBackground(ImageSource image)
-        {
-
-            InkPresenter.Background = new ImageBrush{ ImageSource = image };
         }
 
         private PaintingAreaViewModel ViewModel
@@ -118,6 +112,11 @@ namespace Catrobat.Paint.View
         }
 
         #endregion
+
+        private void ButtonThickness_Click(object sender, EventArgs e)
+        {
+            SliderThickness.Visibility = SliderThickness.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+        }
 
 
 

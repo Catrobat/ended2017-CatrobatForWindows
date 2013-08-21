@@ -98,9 +98,9 @@
           <source>if on edge, bounce</source>
           <target state="signed-off">if on edge, bounce</target>
         </trans-unit>
-        <trans-unit translate="yes" id="Resx/Brick_LoopEnd" xml:space="preserve">
-          <source>end of loop</source>
-          <target state="signed-off">end of loop</target>
+        <trans-unit translate="yes" id="Resx/Brick_RepeatLoopEnd" xml:space="preserve">
+          <source>repeat end</source>
+          <target state="new">repeat end</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_MoveNStepsMove" xml:space="preserve">
           <source>move</source>
@@ -623,12 +623,8 @@
           <target state="signed-off">unknown</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_AboutText" xml:space="preserve">
-          <source>Catrobat for Windows is an on-device visual progamming language for Windows Phone 8 devices that is inspired by the scratch programming language developed by the MIT.
-It is developed at the department of Software Technology at the University of Technology Graz, Austria.
-The program is licensed under the MS-RL Lizenz.</source>
-          <target state="signed-off">Catrobat for Windows is an on-device visual progamming language for Windows Phone 8 devices that is inspired by the scratch programming language developed by the MIT.
-It is developed at the department of Software Technology at the University of Technology Graz, Austria.
-The program is licensed under the MS-RL Lizenz.</target>
+          <source>Catrobat for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Catrobat is an independent free and open source project developed by the Catrobat team. Catrobat for Windows is licensed under the MS-RL license.</source>
+          <target state="new">Catrobat for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Catrobat is an independent free and open source project developed by the Catrobat team. Catrobat for Windows is licensed under the MS-RL license.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ActiveProject" xml:space="preserve">
           <source>active</source>
@@ -989,6 +985,10 @@ The program is licensed under the MS-RL Lizenz.</target>
         <trans-unit translate="yes" id="Resx/Main_SelectedProjectNotValidMessage" xml:space="preserve">
           <source>Project not valid</source>
           <target state="new">Project not valid</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Brick_ForeverLoopEnd" xml:space="preserve">
+          <source>forever end</source>
+          <target state="new">forever end</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_SelectedProjectNotValidHeader" xml:space="preserve">
           <source>Sorry! The selected project could not be opened.</source>

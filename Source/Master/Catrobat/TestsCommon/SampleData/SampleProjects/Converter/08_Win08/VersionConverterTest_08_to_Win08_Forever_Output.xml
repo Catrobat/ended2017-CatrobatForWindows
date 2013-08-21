@@ -8,11 +8,11 @@
         <startScript>
           <brickList>
             <foreverBrick>
-              <loopEndBrick reference="../../loopEndBrick[1]" />
+              <loopEndBrick class="loopEndlessBrick" reference="../../loopEndlessBrick[1]" />
             </foreverBrick>
-            <loopEndBrick>
-              <loopBeginBrick class="forever" reference="../../foreverBrick[1]" />
-            </loopEndBrick>
+            <loopEndlessBrick>
+              <loopBeginBrick class="foreverBrick" reference="../../foreverBrick[1]" />
+            </loopEndlessBrick>
           </brickList>
         </startScript>
       </scriptList>
@@ -20,7 +20,5 @@
     </object>
   </objectList>
   <variables>
-    <objectVariableList />
-    <programVariableList />
   </variables>
 </program>

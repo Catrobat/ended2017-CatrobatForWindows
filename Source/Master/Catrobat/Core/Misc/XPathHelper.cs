@@ -61,7 +61,7 @@ namespace Catrobat.Core.Misc
 
             path += GetNameWithIndex(toElement);
 
-            path = path.Replace("[1]", "");
+            //path = path.Replace("[1]", "");
 
             return path;
         }
