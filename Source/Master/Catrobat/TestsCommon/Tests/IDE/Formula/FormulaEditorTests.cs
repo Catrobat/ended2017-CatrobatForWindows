@@ -9,6 +9,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
     public class FormulaEditorTests
     {
         [TestMethod]
+        [TestCategory("TFSCyclicUnitTest")]
         public void FormulaEditorNumberTypingTest_01()
         {
             var editor = new FormulaEditor();
@@ -70,6 +71,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //}
 
         [TestMethod]
+        [TestCategory("TFSCyclicUnitTest")]
         public void FormulaEditorDeletionTest_01()
         {
             var editor = new FormulaEditor();
@@ -95,6 +97,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         }
 
         [TestMethod]
+        [TestCategory("TFSCyclicUnitTest")]
         public void FormulaEditorDeletionTest_02()
         {
             var editor = new FormulaEditor();
@@ -124,6 +127,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         }
 
         [TestMethod]
+        [TestCategory("TFSCyclicUnitTest")]
         public void FormulaEditorDecimalSeparatorTest_01()
         {
             var editor = new FormulaEditor();
@@ -151,6 +155,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         }
 
         [TestMethod]
+        [TestCategory("TFSCyclicUnitTest")]
         public void FormulaEditorTreeTest_01()
         {
             var editor = new FormulaEditor();
@@ -233,6 +238,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         }
 
         [TestMethod]
+        [TestCategory("TFSCyclicUnitTest")]
         public void FormulaEditorTreeTest_02()
         {
             var editor = new FormulaEditor();
