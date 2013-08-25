@@ -2,7 +2,7 @@ using Cirrious.MvvmCross.ViewModels;
 
 namespace Catrobat.IDE.Core.ViewModels.Main
 {
-    public class FirstViewModel 
+    public class MainViewModel 
 		: MvxViewModel
     {
 		private string _hello = "Hello MvvmCross";

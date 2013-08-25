@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 				
-            RegisterAppStart<FirstViewModel>();
+            RegisterAppStart<MainViewModel>();
         }
     }
 }
