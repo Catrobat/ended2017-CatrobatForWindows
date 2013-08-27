@@ -39,7 +39,7 @@
               MouseLeftButtonDown="InkPresenter_MouseLeftButtonDown" 
               LostMouseCapture="InkPresenter_LostMouseCapture" 
               MouseMove="InkPresenter_MouseMove" 
-                  MouseLeftButtonUp="InkPresenter_OnMouseLeftButtonUp"
+              MouseLeftButtonUp="InkPresenter_OnMouseLeftButtonUp"
               Background="{Binding Path=CurrentImage, Mode=TwoWay, Converter={StaticResource WritableBitmapImageBrushConverter}}" 
               Opacity="1" Canvas.Left="10" Canvas.Top="64" 
                   />
