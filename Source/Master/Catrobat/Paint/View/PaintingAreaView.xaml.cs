@@ -66,12 +66,8 @@ namespace Catrobat.Paint.View
 
         private void InkPresenter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            SliderThickness.Visibility = Visibility.Collapsed;
             ViewModel.BeginStrokeCommand.Execute(e.GetPosition((InkPresenter)sender));
-        }
-
-        private void InkPresenter_LostMouseCapture(object sender, MouseEventArgs e)
-        {
-            //OnMouseLeftButtonUp and this one looks pretty much the same. what's better?
         }
 
         private void InkPresenter_MouseMove(object sender, MouseEventArgs e)
@@ -111,15 +107,18 @@ namespace Catrobat.Paint.View
             ViewModel.ToColorPickerCommand.Execute(null);
         }
 
+
+        private void ButtonInkEraserToggle_Click(object sender, EventArgs e)
+        {
+             ViewModel.ToggleInkEraserCommand.Execute(null);
+        }
+
         #endregion
 
         private void ButtonThickness_Click(object sender, EventArgs e)
         {
             SliderThickness.Visibility = SliderThickness.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
         }
-
-
-
 
 
     }

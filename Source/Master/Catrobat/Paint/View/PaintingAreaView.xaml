@@ -37,11 +37,11 @@
     <InkPresenter x:Name="InkPresenter"  Height="622" Width="460"
                   Strokes="{Binding Strokes}"
               MouseLeftButtonDown="InkPresenter_MouseLeftButtonDown" 
-              LostMouseCapture="InkPresenter_LostMouseCapture" 
               MouseMove="InkPresenter_MouseMove" 
               MouseLeftButtonUp="InkPresenter_OnMouseLeftButtonUp"
               Background="{Binding Path=CurrentImage, Mode=TwoWay, Converter={StaticResource WritableBitmapImageBrushConverter}}" 
               Opacity="1" Canvas.Left="10" Canvas.Top="64" 
+                  
                   />
 
     <Slider x:Name="SliderThickness" Canvas.Left="10" Value="{Binding StrokeThickness, Mode=TwoWay}" Canvas.Top="629" Width="460"  Maximum="50" Minimum="1" Visibility="Collapsed"/>
@@ -56,6 +56,7 @@
       <shell:ApplicationBar.MenuItems>
         <shell:ApplicationBarMenuItem x:Name="ButtonClear" Text="Clear" Click="ButtonClear_Click"/>
         <shell:ApplicationBarMenuItem x:Name="ButtonSaveToCatrobat" Text="Save to Catrobat" Click="ButtonSaveToCatrobat_Click"/>
+        <shell:ApplicationBarMenuItem x:Name="ButtonInkEraserToggle" Text="Toggle Ink and Eraser" Click="ButtonInkEraserToggle_Click"/>
       </shell:ApplicationBar.MenuItems>
     </shell:ApplicationBar>
   </phone:PhoneApplicationPage.ApplicationBar>
