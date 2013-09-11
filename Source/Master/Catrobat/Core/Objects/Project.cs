@@ -186,7 +186,7 @@ namespace Catrobat.Core.Objects
             RaisePropertyChanged(() => ProjectHeader);
         }
 
-        protected override void LoadFromXML(String xml)
+        protected override void LoadFromXML(string xml)
         {
             var document = XDocument.Load(new StringReader(xml));
             document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");

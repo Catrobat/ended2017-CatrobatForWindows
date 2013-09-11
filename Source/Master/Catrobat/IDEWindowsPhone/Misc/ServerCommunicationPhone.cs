@@ -12,6 +12,7 @@ using Catrobat.Core.Resources;
 using Catrobat.Core.Storage;
 using Catrobat.Core.VersionConverter;
 using Catrobat.Core.ZIP;
+using System.IO;
 
 namespace Catrobat.IDEWindowsPhone.Misc
 {
@@ -97,9 +98,10 @@ namespace Catrobat.IDEWindowsPhone.Misc
                                                                             CatrobatContextBase.ProjectsPath + "/" +
                                                                             projectName);
 
-                        var error = CatrobatVersionConverter.ConvertByProjectName(projectName);
+                        CatrobatVersionConverter.VersionConverterError error;
+                        CatrobatVersionConverter.ConvertToInternalXmlVersionByProjectName(projectName, out error, true);
 
-                        if (callback != null)
+                        if (callback != null) //TODO
                         {
                             callback(projectName, error);
                         }

@@ -10,6 +10,18 @@ namespace Catrobat.Core.VersionConverter
 
         public bool IsInverse { get; set; }
 
+        public CatrobatVersionPair(string inputVersion, string outputVersion)
+        {
+            InputVersion = inputVersion;
+            OutputVersion = outputVersion;
+        }
+
+        public CatrobatVersionPair(string inputVersion, string outputVersion, bool isInverse)
+            : this(inputVersion, outputVersion)
+        {
+            IsInverse = isInverse;
+        }
+
         public void Invert()
         {
             var temp = OutputVersion;

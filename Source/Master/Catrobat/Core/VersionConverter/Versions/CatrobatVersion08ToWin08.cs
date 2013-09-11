@@ -15,7 +15,7 @@ namespace Catrobat.Core.VersionConverter.Versions
         {
             get
             {
-                return new CatrobatVersionPair { InputVersion = "0.8", OutputVersion = "Win0.8" };
+                return new CatrobatVersionPair("0.8", "Win0.8");
             }
         }
 
@@ -79,12 +79,12 @@ namespace Catrobat.Core.VersionConverter.Versions
 
         private void UnifyIfLogicBeginBrickReferences(XDocument document)
         {
-            var loopEndlessBricks = document.Descendants("brickList").Descendants("ifLogicElseBrick").ToList();
-            SwapCrossReferences(document, loopEndlessBricks);
+            var elseBricks = document.Descendants("brickList").Descendants("ifLogicElseBrick").ToList();
+            SwapCrossReferences(document, elseBricks);
             RemoveSelfReferences(document);
 
-            loopEndlessBricks = document.Descendants("brickList").Descendants("ifLogicEndBrick").ToList();
-            SwapCrossReferences(document, loopEndlessBricks);
+            var endBricks = document.Descendants("brickList").Descendants("ifLogicEndBrick").ToList();
+            SwapCrossReferences(document, endBricks);
             RemoveSelfReferences(document);
         }
 
