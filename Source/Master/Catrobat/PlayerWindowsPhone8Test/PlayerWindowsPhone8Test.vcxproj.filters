@@ -234,11 +234,23 @@
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ExceptionLogger.cpp">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.cpp">
-      <Filter>PlayerWindowsPhone8Files</Filter>
-    </ClCompile>
     <ClCompile Include="FormulaFunctionTests.cpp">
       <Filter>FormulaTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTreeException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserFatalException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTreeFatalException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlayerException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -428,10 +440,22 @@
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ExceptionLogger.h">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.h">
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Constants.h">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Constants.h">
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTreeException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserFatalException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTreeFatalException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlayerException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.h">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClInclude>
   </ItemGroup>

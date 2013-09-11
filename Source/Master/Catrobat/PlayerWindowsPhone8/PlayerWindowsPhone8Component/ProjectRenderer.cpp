@@ -20,15 +20,16 @@ void ProjectRenderer::CreateWindowSizeDependentResources()
 
 void ProjectRenderer::Render()
 {
-	static bool init_hack = false;
-	if (!init_hack)
+	static bool initialized = false;
+
+	if (!initialized)
 	{	
 		ProjectDaemon::Instance()->ApplyDesiredRenderTargetSizeFromProject();
 		m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_d3dContext.Get()));
 		m_spriteFont = unique_ptr<SpriteFont>(new SpriteFont(m_d3dDevice.Get(), L"italic.spritefont"));
 
 		StartUpTasks();
-		init_hack = true;
+		initialized = true;
 	}
 
 	// This code is Generating a Midnightblue Background on our screen

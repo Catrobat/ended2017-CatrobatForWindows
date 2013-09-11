@@ -181,20 +181,29 @@
     <ClCompile Include="BaseException.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
-    <ClCompile Include="XMLParserException.cpp">
-      <Filter>Exceptions</Filter>
-    </ClCompile>
-    <ClCompile Include="XMLParserSevereException.cpp">
-      <Filter>Exceptions</Filter>
-    </ClCompile>
-    <ClCompile Include="XMLParserWarningException.cpp">
-      <Filter>Exceptions</Filter>
-    </ClCompile>
     <ClCompile Include="ExceptionLogger.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
     <ClCompile Include="Helper.cpp">
       <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerException.cpp">
+      <Filter>Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLParserFatalException.cpp">
+      <Filter>Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="FormulaTreeException.cpp">
+      <Filter>Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="FormulaTreeFatalException.cpp">
+      <Filter>Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLParserException.cpp">
+      <Filter>Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLParserSevereException.cpp">
+      <Filter>Exceptions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -384,15 +393,6 @@
     <ClInclude Include="BaseException.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
-    <ClInclude Include="XMLParserException.h">
-      <Filter>Exceptions</Filter>
-    </ClInclude>
-    <ClInclude Include="XMLParserSevereException.h">
-      <Filter>Exceptions</Filter>
-    </ClInclude>
-    <ClInclude Include="XMLParserWarningException.h">
-      <Filter>Exceptions</Filter>
-    </ClInclude>
     <ClInclude Include="ExceptionLogger.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
@@ -401,6 +401,24 @@
     </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerException.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLParserFatalException.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="FormulaTreeException.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="FormulaTreeFatalException.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLParserException.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLParserSevereException.h">
+      <Filter>Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

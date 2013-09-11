@@ -174,6 +174,8 @@
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ExceptionLogger.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ForeverBrick.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTree.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTreeException.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTreeFatalException.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\GlideToBrick.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Helper.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\HideBrick.h" />
@@ -186,6 +188,7 @@
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Object.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ObjectList.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlaceAtBrick.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlayerException.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlaySoundBrick.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PointToBrick.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Project.h" />
@@ -214,6 +217,7 @@
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\WhenScript.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParser.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserException.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserFatalException.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="TestHelper.h" />
@@ -239,6 +243,8 @@
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ExceptionLogger.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ForeverBrick.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTree.cpp" />
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTreeException.cpp" />
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTreeFatalException.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\GlideToBrick.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Helper.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\HideBrick.cpp" />
@@ -251,6 +257,7 @@
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Object.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ObjectList.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlaceAtBrick.cpp" />
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlayerException.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlaySoundBrick.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PointToBrick.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Project.cpp" />
@@ -279,6 +286,7 @@
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\WhenScript.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParser.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserException.cpp" />
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserFatalException.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.cpp" />
     <ClCompile Include="BasicArithmeticalOperations.cpp" />
     <ClCompile Include="ControlBricks.cpp" />

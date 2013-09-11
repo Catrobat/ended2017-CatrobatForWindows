@@ -1,12 +1,8 @@
 #pragma once
-
-#include "XMLParserException.h"
-
-#include <string>
-
-class XMLParserSevereException : public XMLParserException
+class XMLParserSevereException
 {
 public:
-    XMLParserSevereException(std::string errorMessage);
-    std::string GetName();
+    XMLParserSevereException(void);
+    ~XMLParserSevereException(void);
 };
+

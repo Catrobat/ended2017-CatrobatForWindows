@@ -168,6 +168,8 @@
     <ClInclude Include="ExceptionLogger.h" />
     <ClInclude Include="ForeverBrick.h" />
     <ClInclude Include="FormulaTree.h" />
+    <ClInclude Include="FormulaTreeException.h" />
+    <ClInclude Include="FormulaTreeFatalException.h" />
     <ClInclude Include="GlideToBrick.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="HideBrick.h" />
@@ -212,9 +214,10 @@
     <ClInclude Include="WaitBrick.h" />
     <ClInclude Include="WhenScript.h" />
     <ClInclude Include="XMLParser.h" />
+    <ClInclude Include="PlayerException.h" />
     <ClInclude Include="XMLParserException.h" />
+    <ClInclude Include="XMLParserFatalException.h" />
     <ClInclude Include="XMLParserSevereException.h" />
-    <ClInclude Include="XMLParserWarningException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseException.cpp" />
@@ -236,6 +239,8 @@
     <ClCompile Include="ExceptionLogger.cpp" />
     <ClCompile Include="ForeverBrick.cpp" />
     <ClCompile Include="FormulaTree.cpp" />
+    <ClCompile Include="FormulaTreeException.cpp" />
+    <ClCompile Include="FormulaTreeFatalException.cpp" />
     <ClCompile Include="GlideToBrick.cpp" />
     <ClCompile Include="Helper.cpp" />
     <ClCompile Include="HideBrick.cpp" />
@@ -281,9 +286,10 @@
     <ClCompile Include="WaitBrick.cpp" />
     <ClCompile Include="WhenScript.cpp" />
     <ClCompile Include="XMLParser.cpp" />
+    <ClCompile Include="PlayerException.cpp" />
     <ClCompile Include="XMLParserException.cpp" />
+    <ClCompile Include="XMLParserFatalException.cpp" />
     <ClCompile Include="XMLParserSevereException.cpp" />
-    <ClCompile Include="XMLParserWarningException.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DirectXTK\DirectXTK_WindowsPhone8.vcxproj">
