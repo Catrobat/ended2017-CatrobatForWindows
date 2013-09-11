@@ -1,16 +1,12 @@
 #include "pch.h"
 #include "XMLParserSevereException.h"
-#include "Helper.h"
 
-using namespace std;
 
-XMLParserSevereException::XMLParserSevereException(string errorMessage)
-    : XMLParserException (errorMessage)
+XMLParserSevereException::XMLParserSevereException(void)
 {
 }
 
-string XMLParserSevereException::GetName()
-{
 
-    return Helper::RetrieveClassName(typeid (XMLParserSevereException).name());
+XMLParserSevereException::~XMLParserSevereException(void)
+{
 }

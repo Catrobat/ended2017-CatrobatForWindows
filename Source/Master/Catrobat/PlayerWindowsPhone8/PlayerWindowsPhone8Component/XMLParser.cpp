@@ -32,9 +32,8 @@
 #include "TurnRightBrick.h"
 #include "PlaySoundBrick.h"
 #include "ExceptionLogger.h"
-#include "XMLParserSevereException.h"
-#include "XMLParserWarningException.h"
 #include "Constants.h"
+#include "XMLParserFatalException.h"
 
 #include <time.h>
 #include <iostream>
@@ -57,12 +56,13 @@ XMLParser::~XMLParser()
 
 bool XMLParser::LoadXML(string fileName)
 {
-
-    
     ifstream inputFile;
     inputFile.open(fileName);
+
     if (!inputFile) 
+    {
         return false;
+    }
 
     string text;
     while(!inputFile.eof())
@@ -78,13 +78,13 @@ bool XMLParser::LoadXML(string fileName)
     }
     catch (BaseException *e)
     {
-        if (dynamic_cast<XMLParserSevereException *>(e))
+        if (dynamic_cast<XMLParserFatalException *>(e))
         {
             inputFile.close();
             throw e;
         }
     }
-    
+
     inputFile.close();
     return true;
 }
@@ -113,10 +113,15 @@ Project* XMLParser::ParseProjectHeader(xml_document<> *doc)
 {
     xml_node<> *baseNode = doc->first_node(Constants::XMLParser::Header::Program.c_str());
     if (!baseNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::Program + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::Program + Constants::ErrorMessage::Missing);
+    }
+
     baseNode = baseNode->first_node(Constants::XMLParser::Header::Header.c_str());
     if (!baseNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::Header + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::Header + Constants::ErrorMessage::Missing);
+    }
 
 #pragma region Local Variables Delcaration
 
@@ -144,98 +149,155 @@ Project* XMLParser::ParseProjectHeader(xml_document<> *doc)
 
 #pragma region Project Header Nodes
     xml_node<> *projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ApplicationBuildName.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::ApplicationBuildName + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::ApplicationBuildName + Constants::ErrorMessage::Missing);
+    }
     applicationBuildName = projectInformationNode->value();
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ApplicationBuildNumber.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::ApplicationBuildNumber + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::ApplicationBuildNumber + Constants::ErrorMessage::Missing);
+    }
     applicationBuildNumber = atoi(projectInformationNode->value());
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ApplicationName.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::ApplicationName + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::ApplicationName + Constants::ErrorMessage::Missing);
+    }
     applicationName = projectInformationNode->value();
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ApplicationVersion.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::ApplicationVersion + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::ApplicationVersion + Constants::ErrorMessage::Missing);
+    }
     applicationVersion = projectInformationNode->value();
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::CatrobatLanguageVersion.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::CatrobatLanguageVersion + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::CatrobatLanguageVersion + Constants::ErrorMessage::Missing);
+    }
     catrobatLanguageVersion = projectInformationNode->value();
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::DateTimeUpload.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::DateTimeUpload + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::DateTimeUpload + Constants::ErrorMessage::Missing);
+    }
     dateTimeUpload = ParseDateTime(projectInformationNode->value());
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::Description.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::Description + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::Description + Constants::ErrorMessage::Missing);
+    }
     description = projectInformationNode->value();
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::DeviceName.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::DeviceName + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::DeviceName + Constants::ErrorMessage::Missing);
+    }
     deviceName = projectInformationNode->value();
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::MediaLicense.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::MediaLicense + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::MediaLicense + Constants::ErrorMessage::Missing);
+    }
     mediaLicense = projectInformationNode->value();
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::Platform.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::Platform + Constants::ErrorMessage::Missing);
+    {    
+        throw new XMLParserFatalException (Constants::XMLParser::Header::Platform + Constants::ErrorMessage::Missing);
+    }
     platform = projectInformationNode->value();
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::PlatformVersion.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::PlatformVersion + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::PlatformVersion + Constants::ErrorMessage::Missing);
+    }
     platformVersion = atoi(projectInformationNode->value());
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::PlatformVersion.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::PlatformVersion + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::PlatformVersion + Constants::ErrorMessage::Missing);
+    }
     programLicense = projectInformationNode->value();
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ProgramName.c_str());
+    
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::ProgramName + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::ProgramName + Constants::ErrorMessage::Missing);
+    }
     programName = projectInformationNode->value();
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::RemixOf.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::RemixOf + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::RemixOf + Constants::ErrorMessage::Missing);
+    }
     remixOf = projectInformationNode->value();
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ScreenHeight.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::ScreenHeight + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::ScreenHeight + Constants::ErrorMessage::Missing);
+    }
     screenHeight = atoi(projectInformationNode->value());
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::ScreenWidth.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::ScreenWidth + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::ScreenWidth + Constants::ErrorMessage::Missing);
+    }
     screenWidth = atoi(projectInformationNode->value());
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::Tags.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::Tags + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::Tags + Constants::ErrorMessage::Missing);
+    }
     tags = ParseVector(projectInformationNode->value());
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::Url.c_str());
+    
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::Url + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::Url + Constants::ErrorMessage::Missing);
+    }
     url = projectInformationNode->value();
 
     projectInformationNode = baseNode->first_node(Constants::XMLParser::Header::UserHandle.c_str());
+
     if (!projectInformationNode)
-        throw new XMLParserSevereException (Constants::XMLParser::Header::UserHandle + Constants::ErrorMessage::Missing);
+    {
+        throw new XMLParserFatalException (Constants::XMLParser::Header::UserHandle + Constants::ErrorMessage::Missing);
+    }
     userHandle = projectInformationNode->value();
 
 #pragma endregion
@@ -1319,52 +1381,71 @@ time_t XMLParser::ParseDateTime(string input)
 void XMLParser::ParseVariableList(xml_document<> *doc, Project *project)
 {
     xml_node<> *baseNode = doc->first_node()->first_node(Constants::XMLParser::Formula::Variables.c_str());
-    if (!baseNode)
-        return;
 
-    xml_node<> *variableListNode = baseNode->first_node(Constants::XMLParser::Formula::ObjectVariableList.c_str());
-    xml_node<> *node = variableListNode->first_node(Constants::XMLParser::Formula::Entry.c_str());
-    while (node)
+    if (baseNode)
     {
-        xml_node<> *objectReferenceNode = node->first_node(Constants::XMLParser::Object::Object.c_str());	
-        if (!objectReferenceNode)
-            return;
+        xml_node<> *variableListNode = baseNode->first_node(Constants::XMLParser::Formula::ObjectVariableList.c_str());
+        xml_node<> *node = variableListNode->first_node(Constants::XMLParser::Formula::Entry.c_str());
 
-        xml_attribute<> *objectReferenceAttribute = objectReferenceNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
-        if (!objectReferenceAttribute)
-            return;
-
-        string reference = objectReferenceAttribute->value();
-        reference = reference + "/";
-        xml_node<> *objectNode = EvaluateString("/", reference, objectReferenceNode);
-        if (!objectNode)
-            return;
-
-        xml_node<> *nameNode = objectNode->first_node(Constants::XMLParser::Formula::Name.c_str());
-        if (!nameNode)
-            return;
-        Object *object = project->GetObjectList()->GetObject(nameNode->value());
-
-        xml_node<> *listNode = node->first_node(Constants::XMLParser::Formula::List.c_str());
-        if (!listNode)
-            return;
-        listNode = listNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
-        while (listNode)
+        while (node)
         {
-            object->AddVariable(ParseUserVariable(listNode));
-            listNode = listNode->next_sibling(Constants::XMLParser::Formula::UserVariable.c_str());
-        }
-        node = node->next_sibling(Constants::XMLParser::Formula::Entry.c_str());
-    }
+            xml_node<> *objectReferenceNode = node->first_node(Constants::XMLParser::Object::Object.c_str());
 
-    variableListNode = baseNode->first_node(Constants::XMLParser::Formula::ProgramVariableList.c_str());
-    if (!variableListNode)
-        return;
-    node = variableListNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
-    while (node)
-    {
-        m_project->AddVariable(ParseUserVariable(node));
-        node = node->next_sibling(Constants::XMLParser::Formula::UserVariable.c_str());
+            if (objectReferenceNode)
+            {
+                xml_attribute<> *objectReferenceAttribute = objectReferenceNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
+
+                if (objectReferenceAttribute)
+                {
+                    string reference = objectReferenceAttribute->value();
+                    reference = reference + "/";
+                    xml_node<> *objectNode = EvaluateString("/", reference, objectReferenceNode);
+
+                    if (objectNode)
+                    {
+                        xml_node<> *nameNode = objectNode->first_node(Constants::XMLParser::Formula::Name.c_str());
+
+                        if (nameNode)
+                        {
+                            Object *object = project->GetObjectList()->GetObject(nameNode->value());
+                            xml_node<> *listNode = node->first_node(Constants::XMLParser::Formula::List.c_str());
+
+                            if (listNode)
+                            {
+                                listNode = listNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
+
+                                while (listNode)
+                                {
+                                    object->AddVariable(ParseUserVariable(listNode));
+                                    listNode = listNode->next_sibling(Constants::XMLParser::Formula::UserVariable.c_str());
+                                }
+
+                                node = node->next_sibling(Constants::XMLParser::Formula::Entry.c_str());
+                            }
+
+                            variableListNode = baseNode->first_node(Constants::XMLParser::Formula::ProgramVariableList.c_str());
+
+                            if (variableListNode)
+                            {
+                                node = variableListNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
+
+                                while (node)
+                                {
+                                    pair<string, UserVariable*> variable = ParseUserVariable(node);
+
+                                    if(variable.first != "invalid")
+                                    {
+                                        m_project->AddVariable(variable);
+                                    }
+
+                                    node = node->next_sibling(Constants::XMLParser::Formula::UserVariable.c_str());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -1372,18 +1453,33 @@ pair<string, UserVariable*> XMLParser::ParseUserVariable(xml_node<> *baseNode)
 {
     xml_node<> *referencedNode = baseNode;
     xml_attribute<> *referenceAttribute = baseNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
-    string reference = referenceAttribute->value();
+    string name;
+    UserVariable *variable;
 
-    xml_node<> *evaluatedReferenceNode = EvaluateString("/", reference, referencedNode);
-    evaluatedReferenceNode = evaluatedReferenceNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
+    if(referenceAttribute)
+    {
+        string reference = referenceAttribute->value();
 
-    xml_node<> *variableNode = evaluatedReferenceNode->first_node(Constants::XMLParser::Formula::Name.c_str());
-    string name = variableNode->value();
-    variableNode = evaluatedReferenceNode->first_node(Constants::XMLParser::Formula::Value.c_str());
-    string value = "";
-    if (variableNode)
-        value = variableNode->value();
-    UserVariable *variable = new UserVariable(name, "");
+        xml_node<> *evaluatedReferenceNode = EvaluateString("/", reference, referencedNode);
+        evaluatedReferenceNode = evaluatedReferenceNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
+
+        xml_node<> *variableNode = evaluatedReferenceNode->first_node(Constants::XMLParser::Formula::Name.c_str());
+        name = variableNode->value();
+        variableNode = evaluatedReferenceNode->first_node(Constants::XMLParser::Formula::Value.c_str());
+        string value = "";
+
+        if (variableNode)
+        {
+            value = variableNode->value();
+        }
+
+        variable = new UserVariable(name, "");
+    }
+    else
+    {
+        name = "invalid";
+        //throw new XMLParserFatalException("Error parsing user variable");
+    }
 
     return pair<string, UserVariable*>(name, variable);
 }

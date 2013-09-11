@@ -18,7 +18,6 @@ namespace Catrobat.Core.Misc
                 }
                 else
                 {
-                    var descendants = currentElement.Descendants();
                     int index = 0;
                     var splitPath = part.Split('[');
                     var childElementName = splitPath[0];
@@ -32,7 +31,6 @@ namespace Catrobat.Core.Misc
 
                     currentElement = currentElement.Descendants(childElementName).ToArray()[index];
                 }
-
             }
 
             return currentElement;
@@ -42,8 +40,6 @@ namespace Catrobat.Core.Misc
         {
             var path = "";
             
-            var currentElement = fromElement;
-
             var absolutFromPath = GetAbsolutPath(fromElement);
             var absolutToPath = GetAbsolutPath(toElement);
 

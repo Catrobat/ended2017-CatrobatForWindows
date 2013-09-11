@@ -8,8 +8,8 @@ namespace Catrobat.Core.VersionConverter
 {
     public static class CatrobatVersionConfig
     {
-        public static string TargetOutputVersion { get { return "0.8"; } }
+        public const string TargetOutputVersion = "Win0.8";
 
-        public static string TargetInputVersion { get { return "Win0.8"; } }
+        public const string TargetInputVersion = "0.8";
     }
 }
