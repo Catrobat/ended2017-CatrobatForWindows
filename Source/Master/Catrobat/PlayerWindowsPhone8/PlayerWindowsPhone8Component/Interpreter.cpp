@@ -52,6 +52,8 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
         return this->EvaluateFormula(tree->GetRightChild(), object);
     case FUNCTION:
         return InterpretFunction(tree, object);
+    case SENSOR:
+        return ReadCompass();
     default:
         break;
     }
@@ -97,6 +99,13 @@ void Interpreter::ReadAcceleration()
             // The reverting is tracked by WP8 # 159660
         }
     }	
+}
+
+double Interpreter::ReadCompass()
+{
+    // reading compass
+
+    return 0.0;
 }
 
 double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)

@@ -8,7 +8,8 @@ enum Type
 	NUMBER,
 	USER_VARIABLE, 
     BRACKET, 
-	FUNCTION
+	FUNCTION, 
+    SENSOR
 };
 
 enum Operator
@@ -60,6 +61,13 @@ enum Function
 	NO_FUNCTION
 };
 
+enum Sensor
+{
+    COMPASS_DIRECTION, 
+
+    NO_SENSOR
+};
+
 class FormulaTree
 {
 public:
@@ -85,5 +93,6 @@ private:
 	std::string m_value;
     Operator m_operator;
 	Function m_function;
+    Sensor m_sensor;
 };
 

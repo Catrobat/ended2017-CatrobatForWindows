@@ -29,6 +29,7 @@ public:
     bool EvaluateFormulaToBool(FormulaTree *tree, Object *object);
 
     void ReadAcceleration();
+    double ReadCompass();
 
 private:
     // Sensors
