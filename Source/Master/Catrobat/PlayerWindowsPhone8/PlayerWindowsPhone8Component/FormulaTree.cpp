@@ -16,6 +16,8 @@ FormulaTree::FormulaTree(string type, string value)
         m_type = Type::BRACKET;
 	else if (type == "FUNCTION")
 		m_type = Type::FUNCTION;
+    else if (type == "SENSOR")
+        m_type = Type::SENSOR;
 
     if (m_type == Type::OPERATOR)
     {
@@ -96,6 +98,16 @@ FormulaTree::FormulaTree(string type, string value)
 	{
 		m_function = Function::NO_FUNCTION;
 	}
+
+    if (m_type == Type::SENSOR)
+    {
+        if (m_value == "COMPASS_DIRECTION")
+            m_sensor = Sensor::COMPASS_DIRECTION;
+    }
+    else
+    {
+        m_sensor = Sensor::NO_SENSOR;
+    }
 }
 
 void FormulaTree::SetLeftChild(FormulaTree *leftChild)
