@@ -8,534 +8,652 @@
   xmlns:system="clr-namespace:System;assembly=mscorlib"
   mc:Ignorable="d">
 
-  <SolidColorBrush x:Key="FormulaSelectedBackgrount" Color="Orange" />
-  <SolidColorBrush x:Key="FormulaNotSelectedBackgrount" Color="Transparent" />
+    <SolidColorBrush x:Key="FormulaSelectedBackgrount" Color="Orange" />
+    <SolidColorBrush x:Key="FormulaNotSelectedBackgrount" Color="Transparent" />
 
-  <!-- ### Numbers #######################################################################################################-->
-  
-  <!--Styles from this collection will be used if they are not specified in the used collection-->
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleDefault">
-    <partControls:FormulaPartStyleCollection.TextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
+    <!-- ### Numbers #######################################################################################################-->
 
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    <!--Styles from this collection will be used if they are not specified in the used collection-->
+    <partControls:FormulaPartStyleCollection x:Key="PartStyleDefault">
+        <partControls:FormulaPartStyleCollection.TextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.TextStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+        <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="Transparent"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
+        <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="LightGreen"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+        <partControls:FormulaPartStyleCollection.ContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
+        <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="LightGreen"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
 
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleNumber" DefaultStyles="{StaticResource PartStyleDefault}">
-    <partControls:FormulaPartStyleCollection.TextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
+        <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    </partControls:FormulaPartStyleCollection>
 
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    <partControls:FormulaPartStyleCollection x:Key="PartStyleNumber" DefaultStyles="{StaticResource PartStyleDefault}">
+        <partControls:FormulaPartStyleCollection.TextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.TextStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+        <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="Transparent"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
+        <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="LightGreen"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+        <partControls:FormulaPartStyleCollection.ContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
+        <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="LightGreen"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
 
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleMath" DefaultStyles="{StaticResource PartStyleDefault}">
-    <partControls:FormulaPartStyleCollection.TextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
+        <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    </partControls:FormulaPartStyleCollection>
 
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    <partControls:FormulaPartStyleCollection x:Key="PartStyleMath" DefaultStyles="{StaticResource PartStyleDefault}">
+        <partControls:FormulaPartStyleCollection.TextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.TextStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+        <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="Transparent"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
+        <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+        <partControls:FormulaPartStyleCollection.ContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
+        <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
 
-
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleEmpty" DefaultStyles="{StaticResource PartStyleDefault}">
-
-  </partControls:FormulaPartStyleCollection>
-
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleOperatorEquality" DefaultStyles="{StaticResource PartStyleDefault}">
-    <partControls:FormulaPartStyleCollection.TextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
-
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
-
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
-
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="Transparent"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
-
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
-
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
-
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleOperatorLogic" DefaultStyles="{StaticResource PartStyleDefault}">
-    <partControls:FormulaPartStyleCollection.TextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
-
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
-
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
-
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="Transparent"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
-
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
-
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
-
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleVariable" DefaultStyles="{StaticResource PartStyleDefault}">
-    <partControls:FormulaPartStyleCollection.TextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
-
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
-
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
-
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="Transparent"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
-
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
-
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
-
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleSensorVariable" DefaultStyles="{StaticResource PartStyleDefault}">
-    <partControls:FormulaPartStyleCollection.TextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
-
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
-
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
-      <Style TargetType="TextBlock">
-        <Style.Setters>
-          <Setter Property="FontFamily" Value="Courier New"/>
-          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
-
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="Transparent"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
-
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
-
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-      <Style TargetType="Grid">
-        <Style.Setters>
-          <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
-        </Style.Setters>
-      </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
-
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleObjectVariable" DefaultStyles="{StaticResource PartStyleDefault}">
-
-  </partControls:FormulaPartStyleCollection>
-
-  
-  <f:FormulaDefinitionCollection x:Key="FormulaDefinitions">
-    <!-- ### Unknown Formula ##########################################################################################################-->
-    <f:FormulaDefinition Type="UNKNOWN">
-      <f:FormulaDefinition.Template>
-        <partControls:FormulaPartControlList>
-          <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Unknown" Style="{StaticResource PartStyleMath}"/>
-          <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
-          <partControls:FormulaPartControlPlaceholderLeft/>
-          <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ParameterSeperator" Style="{StaticResource PartStyleMath}"/>
-          <partControls:FormulaPartControlPlaceholderRight/>
-          <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
-        </partControls:FormulaPartControlList>
-      </f:FormulaDefinition.Template>
-    </f:FormulaDefinition>
-
-    <!-- ### Number Formulas ##########################################################################################################-->
-    <f:FormulaDefinition Type="#EMPTY#">
-      <f:FormulaDefinition.Template>
-        <partControls:FormulaPartControlList>
-          <partControls:FormulaPartControlText Style="{StaticResource PartStyleEmpty}" />
-        </partControls:FormulaPartControlList>
-      </f:FormulaDefinition.Template>
-    </f:FormulaDefinition>
-
-    <!-- ### Number Formulas ##########################################################################################################-->
-    <f:FormulaDefinition Type="NUMBER">
-      <f:FormulaDefinition.Template>
-        <partControls:FormulaPartControlList>
-          <partControls:FormulaPartControlText Style="{StaticResource PartStyleNumber}" />
-        </partControls:FormulaPartControlList>
-      </f:FormulaDefinition.Template>
-    </f:FormulaDefinition>
+        <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    </partControls:FormulaPartStyleCollection>
 
 
-    <!-- ### Math Formulas ##########################################################################################################-->
-    <f:FormulaDefinition Type="FUNCTION" Value="RANDOM">
-      <f:FormulaDefinition.Template>
-        <partControls:FormulaPartControlList>
-          <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Random" Style="{StaticResource PartStyleMath}"/>
-          <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
-          <partControls:FormulaPartControlPlaceholderLeft/>
-          <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ParameterSeperator" Style="{StaticResource PartStyleMath}"/>
-          <partControls:FormulaPartControlPlaceholderRight/>
-          <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
-        </partControls:FormulaPartControlList>
-      </f:FormulaDefinition.Template>
-    </f:FormulaDefinition>
+    <partControls:FormulaPartStyleCollection x:Key="PartStyleEmpty" DefaultStyles="{StaticResource PartStyleDefault}">
+
+    </partControls:FormulaPartStyleCollection>
+
+    <partControls:FormulaPartStyleCollection x:Key="PartStyleOperatorEquality" DefaultStyles="{StaticResource PartStyleDefault}">
+        <partControls:FormulaPartStyleCollection.TextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.TextStyle>
+
+        <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+
+        <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+
+        <partControls:FormulaPartStyleCollection.ContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ContainerStyle>
+
+        <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+
+        <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    </partControls:FormulaPartStyleCollection>
+
+    <partControls:FormulaPartStyleCollection x:Key="PartStyleOperatorLogic" DefaultStyles="{StaticResource PartStyleDefault}">
+        <partControls:FormulaPartStyleCollection.TextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.TextStyle>
+
+        <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+
+        <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+
+        <partControls:FormulaPartStyleCollection.ContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ContainerStyle>
+
+        <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+
+        <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    </partControls:FormulaPartStyleCollection>
+
+    <partControls:FormulaPartStyleCollection x:Key="PartStyleVariable" DefaultStyles="{StaticResource PartStyleDefault}">
+        <partControls:FormulaPartStyleCollection.TextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.TextStyle>
+
+        <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+
+        <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+
+        <partControls:FormulaPartStyleCollection.ContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ContainerStyle>
+
+        <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+
+        <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    </partControls:FormulaPartStyleCollection>
+
+    <partControls:FormulaPartStyleCollection x:Key="PartStyleSensorVariable" DefaultStyles="{StaticResource PartStyleDefault}">
+        <partControls:FormulaPartStyleCollection.TextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.TextStyle>
+
+        <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+
+        <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+            <Style TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="FontFamily" Value="Courier New"/>
+                    <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+
+        <partControls:FormulaPartStyleCollection.ContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ContainerStyle>
+
+        <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+
+        <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+            <Style TargetType="Grid">
+                <Style.Setters>
+                    <Setter Property="Background" Value="{StaticResource FormulaSelectedBackgrount}"/>
+                </Style.Setters>
+            </Style>
+        </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    </partControls:FormulaPartStyleCollection>
+
+    <partControls:FormulaPartStyleCollection x:Key="PartStyleObjectVariable" DefaultStyles="{StaticResource PartStyleDefault}">
+
+    </partControls:FormulaPartStyleCollection>
 
 
-    <!-- ### Logic Equality Formulas ##########################################################################################################-->
-    <f:FormulaDefinition Type="OPERATOR" Value="EQUAL">
-      <f:FormulaDefinition.Template>
-        <partControls:FormulaPartControlList>
-          <partControls:FormulaPartControlPlaceholderLeft/>
-          <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
-          <partControls:FormulaPartControlPlaceholderRight/>
-        </partControls:FormulaPartControlList>
-      </f:FormulaDefinition.Template>
-    </f:FormulaDefinition>
+    <f:FormulaDefinitionCollection x:Key="FormulaDefinitions">
+        <!-- ### Unknown Formula ##########################################################################################################-->
+        <f:FormulaDefinition Type="UNKNOWN">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Unknown" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ParameterSeperator" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+
+        <!-- ### Number Formulas ##########################################################################################################-->
+        <f:FormulaDefinition Type="#EMPTY#">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlText Style="{StaticResource PartStyleEmpty}" />
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+
+        <!-- ### Number Formulas ##########################################################################################################-->
+        <f:FormulaDefinition Type="NUMBER">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlText Style="{StaticResource PartStyleNumber}" />
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
 
 
-    <!-- ### Logic Formulas ##########################################################################################################-->
-    <f:FormulaDefinition Type="OPERATOR" Value="OR">
-      <f:FormulaDefinition.Template>
-        <partControls:FormulaPartControlList>
-          <partControls:FormulaPartControlPlaceholderLeft/>
-          <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicOr" Style="{StaticResource PartStyleOperatorLogic}"/>
-          <partControls:FormulaPartControlPlaceholderRight/>
-        </partControls:FormulaPartControlList>
-      </f:FormulaDefinition.Template>
-    </f:FormulaDefinition>
-
-    <!-- ### Object Variable ##########################################################################################################-->
-    <f:FormulaDefinition Type="SENSOR">
-      <f:FormulaDefinition.Values>
-        <f:StringList>
-          <system:String>OBJECT_X</system:String>
-          <system:String>OBJECT_Y</system:String>
-          <system:String>TRANSPARENCY</system:String>
-          <system:String>BRIGHTNESS</system:String>
-          <system:String>SIZE</system:String>
-          <system:String>DIRECTION</system:String>
-          <system:String>LAYER</system:String>
-        </f:StringList>
-      </f:FormulaDefinition.Values>
-      <f:FormulaDefinition.Template>
-        <partControls:FormulaPartControlList>
-          <partControls:FormulaPartControlDynamicLocalizedText Style="{StaticResource PartStyleObjectVariable}"/>
-        </partControls:FormulaPartControlList>
-      </f:FormulaDefinition.Template>
-    </f:FormulaDefinition>
+        <!-- ### Math Formulas ##########################################################################################################-->
+        <f:FormulaDefinition Type="FUNCTION" Value="RANDOM">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Random" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ParameterSeperator" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
 
 
-    <!-- ### Sensor Variable ##########################################################################################################-->
-    <f:FormulaDefinition Type="SENSOR">
-      <f:FormulaDefinition.Values>
-        <f:StringList>
-          <system:String>ACCELERATION_X</system:String>
-          <system:String>ACCELERATION_Y</system:String>
-          <system:String>ACCELERATION_Z</system:String>
-          <system:String>COMPASSDIRECTION</system:String>
-          <system:String>INCLINATION_X</system:String>
-          <system:String>INCLINATION_Y</system:String>
-        </f:StringList>
-      </f:FormulaDefinition.Values>
-      <f:FormulaDefinition.Template>
-        <partControls:FormulaPartControlList>
-          <partControls:FormulaPartControlDynamicLocalizedText Style="{StaticResource PartStyleSensorVariable}"/>
-        </partControls:FormulaPartControlList>
-      </f:FormulaDefinition.Template>
-    </f:FormulaDefinition>
+        <!-- ### Logic Equality Formulas ##########################################################################################################-->
+        <f:FormulaDefinition Type="OPERATOR" Value="EQUAL">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="OPERATOR" Value="NOTEQUAL">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicNotEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="OPERATOR" Value="SMALLER">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicSmaller" Style="{StaticResource PartStyleOperatorEquality}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="OPERATOR" Value="SMALLEREQUAL">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicSmallerEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="OPERATOR" Value="GREATER">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicGreater" Style="{StaticResource PartStyleOperatorEquality}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="OPERATOR" Value="GREATEREQUAL">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicGreaterEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
 
 
-    <!-- ### UserVariable ##########################################################################################################-->
-    <f:FormulaDefinition Type="USERVARIABLE">
-      <f:FormulaDefinition.Template>
-        <partControls:FormulaPartControlList>
-          <partControls:FormulaPartControlText Style="{StaticResource PartStyleVariable}"/>
-        </partControls:FormulaPartControlList>
-      </f:FormulaDefinition.Template>
-    </f:FormulaDefinition>
-  </f:FormulaDefinitionCollection>
+        <!-- ### Logic Formulas ##########################################################################################################-->
+        <f:FormulaDefinition Type="OPERATOR" Value="OR">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicOr" Style="{StaticResource PartStyleOperatorLogic}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+
+        <f:FormulaDefinition Type="OPERATOR" Value="AND">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicAnd" Style="{StaticResource PartStyleOperatorLogic}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+
+        <f:FormulaDefinition Type="OPERATOR" Value="TRUE">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicTrue" Style="{StaticResource PartStyleOperatorLogic}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="OPERATOR" Value="FALSE">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicFalse" Style="{StaticResource PartStyleOperatorLogic}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="OPERATOR" Value="NOT">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicNot" Style="{StaticResource PartStyleOperatorLogic}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <!-- ### Algebraic Formulas ##########################################################################################################-->
+        <f:FormulaDefinition Type="OPERATOR" Value="PLUS">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Plus" Style="{StaticResource PartStyleOperatorLogic}"/><!-- TODO: Change Style Resource-->
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="OPERATOR" Value="MINUS">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Minus" Style="{StaticResource PartStyleOperatorLogic}"/>
+                    <!-- TODO: Change Style Resource-->
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="OPERATOR" Value="MULT">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Mult" Style="{StaticResource PartStyleOperatorLogic}"/>
+                    <!-- TODO: Change Style Resource-->
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="OPERATOR" Value="DEVIDE">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Divide" Style="{StaticResource PartStyleOperatorLogic}"/>
+                    <!-- TODO: Change Style Resource-->
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+
+        <!-- ### Object Variable ##########################################################################################################-->
+        <f:FormulaDefinition Type="SENSOR">
+            <f:FormulaDefinition.Values>
+                <f:StringList>
+                    <system:String>OBJECT_X</system:String>
+                    <system:String>OBJECT_Y</system:String>
+                    <system:String>TRANSPARENCY</system:String>
+                    <system:String>BRIGHTNESS</system:String>
+                    <system:String>SIZE</system:String>
+                    <system:String>DIRECTION</system:String>
+                    <system:String>LAYER</system:String>
+                </f:StringList>
+            </f:FormulaDefinition.Values>
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlDynamicLocalizedText Style="{StaticResource PartStyleObjectVariable}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+
+
+        <!-- ### Sensor Variable ##########################################################################################################-->
+        <f:FormulaDefinition Type="SENSOR">
+            <f:FormulaDefinition.Values>
+                <f:StringList>
+                    <system:String>ACCELERATION_X</system:String>
+                    <system:String>ACCELERATION_Y</system:String>
+                    <system:String>ACCELERATION_Z</system:String>
+                    <system:String>COMPASSDIRECTION</system:String>
+                    <system:String>INCLINATION_X</system:String>
+                    <system:String>INCLINATION_Y</system:String>
+                </f:StringList>
+            </f:FormulaDefinition.Values>
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlDynamicLocalizedText Style="{StaticResource PartStyleSensorVariable}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+
+
+        <!-- ### UserVariable ##########################################################################################################-->
+        <f:FormulaDefinition Type="USERVARIABLE">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlText Style="{StaticResource PartStyleVariable}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+    </f:FormulaDefinitionCollection>
 </ResourceDictionary>
