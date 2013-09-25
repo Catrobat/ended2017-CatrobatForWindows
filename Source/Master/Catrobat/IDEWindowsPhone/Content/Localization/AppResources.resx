@@ -873,4 +873,46 @@
   <data name="Brick_ForeverLoopEnd" xml:space="preserve">
     <value>forever end</value>
   </data>
+  <data name="Formula_Divide" xml:space="preserve">
+    <value>/</value>
+    <comment>Alternate: ÷</comment>
+  </data>
+  <data name="Formula_LogicAnd" xml:space="preserve">
+    <value>AND</value>
+  </data>
+  <data name="Formula_LogicFalse" xml:space="preserve">
+    <value>FALSE</value>
+  </data>
+  <data name="Formula_LogicGreater" xml:space="preserve">
+    <value>&gt;</value>
+  </data>
+  <data name="Formula_LogicGreaterEqual" xml:space="preserve">
+    <value>≥</value>
+  </data>
+  <data name="Formula_LogicNot" xml:space="preserve">
+    <value>NOT</value>
+    <comment>Alternate: ¬</comment>
+  </data>
+  <data name="Formula_LogicNotEqual" xml:space="preserve">
+    <value>≠</value>
+  </data>
+  <data name="Formula_LogicSmaller" xml:space="preserve">
+    <value>&lt;</value>
+  </data>
+  <data name="Formula_LogicSmallerEqual" xml:space="preserve">
+    <value>≤</value>
+  </data>
+  <data name="Formula_LogicTrue" xml:space="preserve">
+    <value>TRUE</value>
+  </data>
+  <data name="Formula_Minus" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="Formula_Mult" xml:space="preserve">
+    <value>*</value>
+    <comment>Alternate: •</comment>
+  </data>
+  <data name="Formula_Plus" xml:space="preserve">
+    <value>+</value>
+  </data>
 </root>

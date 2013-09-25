@@ -990,6 +990,61 @@
           <source>forever end</source>
           <target state="new">forever end</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_Divide" xml:space="preserve">
+          <source>/</source>
+          <target state="new">/</target>
+        <note from="MultilingualBuild" annotates="source" priority="2">Alternate: ÷</note>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicAnd" xml:space="preserve">
+          <source>AND</source>
+          <target state="new">AND</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicTrue" xml:space="preserve">
+          <source>TRUE</source>
+          <target state="new">TRUE</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicSmallerEqual" xml:space="preserve">
+          <source>≤</source>
+          <target state="new">≤</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicSmaller" xml:space="preserve">
+          <source>&lt;</source>
+          <target state="new">&lt;</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicNot" xml:space="preserve">
+          <source>NOT</source>
+          <target state="new">NOT</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Alternate: ¬</note>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicNotEqual" xml:space="preserve">
+          <source>≠</source>
+          <target state="new">≠</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicGreaterEqual" xml:space="preserve">
+          <source>≥</source>
+          <target state="new">≥</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicGreater" xml:space="preserve">
+          <source>&gt;</source>
+          <target state="new">&gt;</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_LogicFalse" xml:space="preserve">
+          <source>FALSE</source>
+          <target state="new">FALSE</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_Plus" xml:space="preserve">
+          <source>+</source>
+          <target state="new">+</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_Mult" xml:space="preserve">
+          <source>*</source>
+          <target state="new">*</target>
+        <note from="MultilingualBuild" annotates="source" priority="2">Alternate: •</note>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_Minus" xml:space="preserve">
+          <source>-</source>
+          <target state="new">-</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_SelectedProjectNotValidHeader" xml:space="preserve">
           <source>Sorry! The selected project could not be opened.</source>
           <target state="new">Sorry! The selected project could not be opened.</target>
