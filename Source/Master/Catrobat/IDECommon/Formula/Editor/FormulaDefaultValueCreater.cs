@@ -108,15 +108,15 @@ namespace Catrobat.IDECommon.Formula.Editor
                 case FormulaEditorKey.KeyOpenBrecket:
                     return new FormulaTree
                     {
-                        VariableType = "OPERATOR",
-                        VariableValue = "OPENBRECKET"
+                        VariableType = "BRACKET",
+                        VariableValue = "OPEN"
                     };
-                case FormulaEditorKey.KeyClosedBrecket:
-                    return new FormulaTree
-                    {
-                        VariableType = "OPERATOR",
-                        VariableValue = "CLOSEDBRECKET"
-                    };
+                //case FormulaEditorKey.KeyClosedBrecket:
+                //    return new FormulaTree
+                //    {
+                //        VariableType = "OPERATOR",
+                //        VariableValue = "CLOSEDBRECKET"
+                //    };
                 case FormulaEditorKey.KeyPlus:
                     return new FormulaTree
                     {

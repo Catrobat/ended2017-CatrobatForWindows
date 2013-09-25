@@ -13,9 +13,11 @@ namespace Catrobat.TestsCommon.Misc
             Assert.IsNotNull(expectedFromula);
             Assert.IsNotNull(actualFormula);
 
+            if (expectedFromula.VariableType != null || actualFormula.VariableType != null)
             Assert.AreEqual(expectedFromula.VariableType.ToLowerInvariant(),
                 actualFormula.VariableType.ToLowerInvariant());
 
+            if (expectedFromula.VariableValue != null || actualFormula.VariableValue != null)
             Assert.AreEqual(expectedFromula.VariableValue.ToLowerInvariant(),
                 actualFormula.VariableValue.ToLowerInvariant());
 
