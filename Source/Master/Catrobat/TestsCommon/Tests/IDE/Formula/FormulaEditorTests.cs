@@ -441,7 +441,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             };
             Assert.IsTrue(valid);
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            
+
         }
 
         [TestMethod]
@@ -1539,7 +1539,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    };
         //    Assert.IsTrue(valid);
         //    FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-       
+
         //}
 
         //[TestMethod]
@@ -2606,7 +2606,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    };
         //    Assert.IsFalse(valid);
         //    FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-       
+
         //}
 
         //[TestMethod]
@@ -2694,7 +2694,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    };
         //    Assert.IsTrue(valid);
         //    FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-          
+
         //}
 
         [TestMethod]
@@ -2724,26 +2724,26 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                     LeftChild = new FormulaTree
                     {
                         VariableType = "OPERATOR",
-                    VariableValue = "MINUS",
+                        VariableValue = "MINUS",
                         RightChild = new FormulaTree
                         {
                             VariableType = "NUMBER",
-                        VariableValue = "1"
+                            VariableValue = "1"
                         },
-                        },
-                RightChild = new FormulaTree
-            {
-                VariableType = "OPERATOR",
-                    VariableValue = "MULT",
-                RightChild = new FormulaTree
+                    },
+                    RightChild = new FormulaTree
                 {
                     VariableType = "OPERATOR",
-                        VariableValue = "MINUS",
+                    VariableValue = "MULT",
                     RightChild = new FormulaTree
                     {
-                        VariableType = "NUMBER",
+                        VariableType = "OPERATOR",
+                        VariableValue = "MINUS",
+                        RightChild = new FormulaTree
+                        {
+                            VariableType = "NUMBER",
                             VariableValue = "3"
-                    },
+                        },
                     },
                     LeftChild = new FormulaTree
                     {
@@ -2756,10 +2756,10 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                         },
                     }
                 }
-            };
+                };
             Assert.IsTrue(valid);
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-          
+
         }
 
         [TestMethod]
@@ -2795,69 +2795,69 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                 VariableValue = "AND",
                 RightChild = new FormulaTree
                 {
-                  VariableType  = "OPERATOR",
-                  VariableValue = "PLUS",
-                LeftChild = new FormulaTree
-                {
                     VariableType = "OPERATOR",
-                      VariableValue = "MINUS",
-                    RightChild = new FormulaTree
-                    {
-                        VariableType = "NUMBER",
-                          VariableValue = "5",
-                      }
-                    },
-                  RightChild = new FormulaTree
+                    VariableValue = "PLUS",
+                    LeftChild = new FormulaTree
                     {
                         VariableType = "OPERATOR",
-                      VariableValue = "MINUS",
+                        VariableValue = "MINUS",
                         RightChild = new FormulaTree
                         {
                             VariableType = "NUMBER",
-                          VariableValue = "6",
-                      }
-                  },
-                        },
-                        LeftChild = new FormulaTree
-                        {
+                            VariableValue = "5",
+                        }
+                    },
+                    RightChild = new FormulaTree
+                      {
+                          VariableType = "OPERATOR",
+                          VariableValue = "MINUS",
+                          RightChild = new FormulaTree
+                          {
+                              VariableType = "NUMBER",
+                              VariableValue = "6",
+                          }
+                      },
+                },
+                LeftChild = new FormulaTree
+                {
                     VariableType = "OPERATOR",
                     VariableValue = "NOTEQUAL",
                     RightChild = new FormulaTree
             {
                 VariableType = "OPERATOR",
-                        VariableValue = "MINUS",
+                VariableValue = "MINUS",
                 RightChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "4",
-                        }
-                },
-                LeftChild = new FormulaTree
-                {
-                    VariableType = "OPERATOR",
+                }
+            },
+                    LeftChild = new FormulaTree
+                    {
+                        VariableType = "OPERATOR",
                         VariableValue = "MINUS",
                         RightChild = new FormulaTree
                     {
                         VariableType = "NUMBER",
-                            VariableValue = "3",
+                        VariableValue = "3",
                     },
                         LeftChild = new FormulaTree
                         {
                             VariableType = "OPERATOR",
                             VariableValue = "MINUS",
-                    RightChild = new FormulaTree
-                    {
-                        VariableType = "OPERATOR",
+                            RightChild = new FormulaTree
+                            {
+                                VariableType = "OPERATOR",
                                 VariableValue = "MINUS",
-                        RightChild = new FormulaTree
-                        {
-                            VariableType = "NUMBER",
+                                RightChild = new FormulaTree
+                                {
+                                    VariableType = "NUMBER",
                                     VariableValue = "2",
                                 }
-                        },
-                        LeftChild = new FormulaTree
-                        {
-                            VariableType = "NUMBER",
+                            },
+                            LeftChild = new FormulaTree
+                            {
+                                VariableType = "NUMBER",
                                 VariableValue = "1",
                             }
                         }
@@ -2866,7 +2866,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             };
             Assert.IsTrue(valid);
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-          
+
         }
 
         [TestMethod]
@@ -2903,42 +2903,42 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                         VariableType = "NUMBER",
                         VariableValue = "5",
                     },
-                        LeftChild = new FormulaTree
-                        {
-                            VariableType = "NUMBER",
+                    LeftChild = new FormulaTree
+                    {
+                        VariableType = "NUMBER",
                         VariableValue = "4",
-                        },
+                    },
                 },
-                            LeftChild = new FormulaTree
-                            {
+                LeftChild = new FormulaTree
+                {
                     VariableType = "OPERATOR",
                     VariableValue = "EQUAL",
-                            RightChild = new FormulaTree
-                            {
-                                VariableType = "OPERATOR",
+                    RightChild = new FormulaTree
+                    {
+                        VariableType = "OPERATOR",
                         VariableValue = "MINUS",
                         RightChild = new FormulaTree
                                 {
                                     VariableType = "NUMBER",
-                            VariableValue = "3",
+                                    VariableValue = "3",
                                 },
-                                    LeftChild = new FormulaTree
-                                    {
-                                        VariableType = "NUMBER",
+                        LeftChild = new FormulaTree
+                        {
+                            VariableType = "NUMBER",
                             VariableValue = "2",
-                                    },
+                        },
                     },
                     LeftChild = new FormulaTree
                                     {
                                         VariableType = "NUMBER",
-                        VariableValue = "1",
+                                        VariableValue = "1",
                                     },
-                                }
+                }
             };
             Assert.IsTrue(valid);
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-          
-                            }
+
+        }
 
         [TestMethod]
         public void FormulaEditorTypingTest_02()
@@ -2986,20 +2986,20 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
-                            VariableValue = "PLUS",
-                            LeftChild = new FormulaTree
-                            {
-                                VariableType = "OPERATOR",
+                VariableValue = "PLUS",
+                LeftChild = new FormulaTree
+                {
+                    VariableType = "OPERATOR",
                     VariableValue = "MINUS",
-                                RightChild = new FormulaTree
-                                {
-                                        VariableType = "NUMBER",
+                    RightChild = new FormulaTree
+                    {
+                        VariableType = "NUMBER",
                         VariableValue = "9"
-                                    }
-                                }
+                    }
+                }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-       
+
         }
 
         //[TestMethod]
@@ -3184,7 +3184,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //        }
         //    };
         //    FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-        
+
         //}
 
         [TestMethod]
@@ -3288,41 +3288,41 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                 },
                 RightChild = new FormulaTree
                 {
-                        VariableType = "NUMBER",
-                        VariableValue = "2"
+                    VariableType = "NUMBER",
+                    VariableValue = "2"
                 }
             };
             var nodeB = new FormulaTree
                     {
                         VariableType = "OPERATOR",
-                VariableValue="MINUS",
+                        VariableValue = "MINUS",
                         LeftChild = new FormulaTree
                         {
                             VariableType = "OPERATOR",
                             VariableValue = "PLUS",
-                    LeftChild = nodeA,
+                            LeftChild = nodeA,
                             RightChild = new FormulaTree
                             {
-                                    VariableType = "NUMBER",
-                        VariableValue = "3"
-                    }
-                                },
-                RightChild = nodeA
-            };
+                                VariableType = "NUMBER",
+                                VariableValue = "3"
+                            }
+                        },
+                        RightChild = nodeA
+                    };
             var nodeC = new FormulaTree
                                 {
                                     VariableType = "OPERATOR",
-                VariableValue = "EQUAL",
-                LeftChild = nodeB,
-                RightChild = nodeB
-            };
+                                    VariableValue = "EQUAL",
+                                    LeftChild = nodeB,
+                                    RightChild = nodeB
+                                };
             var nodeD = new FormulaTree
                                     {
-                VariableType = "OPERATOR",
-                VariableValue = "AND",
-                LeftChild = nodeC,
-                RightChild = nodeC
-            };
+                                        VariableType = "OPERATOR",
+                                        VariableValue = "AND",
+                                        LeftChild = nodeC,
+                                        RightChild = nodeC
+                                    };
             var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
@@ -3331,17 +3331,17 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                 RightChild = nodeD
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-        
+
         }
 
         [TestMethod]
         public void FormulaEditorTreeTest_04()
-                {
+        {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
                 {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
-            };
+                    FormulaRoot = new Core.Objects.Formulas.Formula()
+                };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -3353,28 +3353,28 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var expectedFormula = new FormulaTree
                     {
                         VariableType = "OPERATOR",
-                VariableValue = "MULT",
+                        VariableValue = "MULT",
                         RightChild = new FormulaTree
                         {
                             VariableType = "NUMBER",
-                    VariableValue = "3",
+                            VariableValue = "3",
                         },
                         LeftChild = new FormulaTree
                         {
                             VariableType = "OPERATOR",
-                    VariableValue = "MULT",
+                            VariableValue = "MULT",
                             RightChild = new FormulaTree
                             {
-                                    VariableType = "NUMBER",
-                        VariableValue = "2",
-                                },
-                                    LeftChild = new FormulaTree
-                                    {
-                                        VariableType = "NUMBER",
-                        VariableValue = "1",
-                                    }
-                                }
-            };
+                                VariableType = "NUMBER",
+                                VariableValue = "2",
+                            },
+                            LeftChild = new FormulaTree
+                            {
+                                VariableType = "NUMBER",
+                                VariableValue = "1",
+                            }
+                        }
+                    };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
 
         }
@@ -3409,8 +3409,8 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                 VariableValue = "OR",
                 RightChild = new FormulaTree
                 {
-                  VariableType  = "OPERATOR",
-                  VariableValue = "TRUE"
+                    VariableType = "OPERATOR",
+                    VariableValue = "TRUE"
                 },
                 LeftChild = new FormulaTree
                 {
@@ -3420,41 +3420,41 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "FALSE"
-                        },
-                            LeftChild = new FormulaTree
-                            {
-                                VariableType = "OPERATOR",
-                        VariableValue = "SMALLER",
-                                RightChild = new FormulaTree
-                                {
-                                    VariableType = "OPERATOR",
-                            VariableValue = "TRUE"
-                                    },
-                LeftChild = new FormulaTree
-                {
-                    VariableType = "OPERATOR",
-                            VariableValue = "MINUS",
-                    RightChild = new FormulaTree
+                    },
+                    LeftChild = new FormulaTree
                     {
                         VariableType = "OPERATOR",
-                                VariableValue = "FALSE"
+                        VariableValue = "SMALLER",
+                        RightChild = new FormulaTree
+                        {
+                            VariableType = "OPERATOR",
+                            VariableValue = "TRUE"
                         },
                         LeftChild = new FormulaTree
                         {
                             VariableType = "OPERATOR",
-                                VariableValue = "PLUS",
+                            VariableValue = "MINUS",
                             RightChild = new FormulaTree
                             {
                                 VariableType = "OPERATOR",
+                                VariableValue = "FALSE"
+                            },
+                            LeftChild = new FormulaTree
+                            {
+                                VariableType = "OPERATOR",
+                                VariableValue = "PLUS",
+                                RightChild = new FormulaTree
+                                {
+                                    VariableType = "OPERATOR",
                                     VariableValue = "TRUE"
                                 },
                                 LeftChild = new FormulaTree
                                 {
                                     VariableType = "OPERATOR",
                                     VariableValue = "MULT",
-                                RightChild = new FormulaTree
-                                {
-                                    VariableType = "OPERATOR",
+                                    RightChild = new FormulaTree
+                                    {
+                                        VariableType = "OPERATOR",
                                         VariableValue = "FALSE"
                                     },
                                     LeftChild = new FormulaTree
@@ -3504,38 +3504,38 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
             var expectedFormula = new FormulaTree()
             {
-                    VariableType = "NUMBER",
+                VariableType = "NUMBER",
                 VariableValue = "0"
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-        
+
 
         }
 
         [TestMethod]
         public void FormulaEditorSignedNumberTest_05()
-                {
+        {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
                     {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
-            };
+                        FormulaRoot = new Core.Objects.Formulas.Formula()
+                    };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
                     {
                         VariableType = "OPERATOR",
-                VariableValue = "MULT",
+                        VariableValue = "MULT",
                         LeftChild = new FormulaTree
                         {
                             VariableType = "NUMBER",
-                    VariableValue = "1"
+                            VariableValue = "1"
                         },
                         RightChild = new FormulaTree
                         {
-                                VariableType = "NUMBER",
-                    VariableValue = "2"
-                }
-            };
+                            VariableType = "NUMBER",
+                            VariableValue = "2"
+                        }
+                    };
             editor.SelectedFormula = selectedFromula;
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.RightChild;
             editor.SelectedFormula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
@@ -3547,36 +3547,36 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                                 LeftChild = new FormulaTree
                                 {
                                     VariableType = "NUMBER",
-                    VariableValue = "1"
+                                    VariableValue = "1"
                                 },
                                 RightChild = new FormulaTree
                                 {
                                     VariableType = "OPERATOR",
-                    VariableValue = "MINUS",
+                                    VariableValue = "MINUS",
                                     RightChild = new FormulaTree
                                     {
                                         VariableType = "NUMBER",
-                        VariableValue = "2"
+                                        VariableValue = "2"
+                                    }
                                 }
-                            }
-            };
+                            };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-        
+
         }
 
         [TestMethod]
         public void FormulaEditorSignedNumberTest_06()
-            {
+        {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
                 {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
-            };
+                    FormulaRoot = new Core.Objects.Formulas.Formula()
+                };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
                 {
                     VariableType = "OPERATOR",
-                VariableValue = "MULT",
+                    VariableValue = "MULT",
                     LeftChild = new FormulaTree
                     {
                         VariableType = "NUMBER",
@@ -3585,34 +3585,34 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                     RightChild = new FormulaTree
                     {
                         VariableType = "OPERATOR",
-                    VariableValue = "MINUS",
-                    RightChild = new FormulaTree
-                        {
-                            VariableType = "NUMBER",
-                            VariableValue = "2"
+                        VariableValue = "MINUS",
+                        RightChild = new FormulaTree
+                            {
+                                VariableType = "NUMBER",
+                                VariableValue = "2"
+                            }
                     }
-                }
-            };
+                };
             editor.SelectedFormula = selectedFromula;
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.RightChild;
             editor.SelectedFormula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
             var expectedFormula = selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
-            
+
                                 {
                                     VariableType = "OPERATOR",
                                     VariableValue = "MULT",
                                     LeftChild = new FormulaTree
                                     {
                                         VariableType = "NUMBER",
-                    VariableValue = "1"
+                                        VariableValue = "1"
                                     },
                                     RightChild = new FormulaTree
                                     {
                                         VariableType = "NUMBER",
-                    VariableValue = "2"
-                }
-            };
+                                        VariableValue = "2"
+                                    }
+                                };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
 
         }
@@ -3628,7 +3628,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
-                            VariableType = "NUMBER",
+                VariableType = "NUMBER",
                 VariableValue = "123"
             };
             editor.SelectedFormula = selectedFromula;
@@ -3639,19 +3639,19 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var expectedFormula = new FormulaTree
                             {
                                 VariableType = "NUMBER",
-                VariableValue = "0"
-            };
+                                VariableValue = "0"
+                            };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
         }
 
         [TestMethod]
         public void FormulaEditorDeletionTest_06()
-                            {
+        {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
                                 {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
-            };
+                                    FormulaRoot = new Core.Objects.Formulas.Formula()
+                                };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
                                 {
@@ -3660,26 +3660,26 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                                     LeftChild = new FormulaTree
                                     {
                                         VariableType = "NUMBER",
-                    VariableValue = "1"
+                                        VariableValue = "1"
                                     },
                                     RightChild = new FormulaTree
                                     {
                                         VariableType = "NUMBER",
-                    VariableValue = "2"
-                }
-            };
+                                        VariableValue = "2"
+                                    }
+                                };
             editor.SelectedFormula = selectedFromula;
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
             var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
-                                    VariableValue = "MULT",
-                                    LeftChild = new FormulaTree
-                                    {
-                                        VariableType = "NUMBER",
+                VariableValue = "MULT",
+                LeftChild = new FormulaTree
+                {
+                    VariableType = "NUMBER",
                     VariableValue = "1"
-                                    },
+                },
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
 
@@ -3697,15 +3697,15 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "OPERATOR",
-                        VariableValue = "AND",
-                        LeftChild = new FormulaTree
-                        {
-                            VariableType = "OPERATOR",
+                VariableValue = "AND",
+                LeftChild = new FormulaTree
+                {
+                    VariableType = "OPERATOR",
                     VariableValue = "FALSE"
-                            },
-                            RightChild = new FormulaTree
-                            {
-                                VariableType = "OPERATOR",
+                },
+                RightChild = new FormulaTree
+                {
+                    VariableType = "OPERATOR",
                     VariableValue = "TRUE"
                 }
             };
@@ -3718,21 +3718,21 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var expectedFormula = new FormulaTree
                                 {
                                     VariableType = "OPERATOR",
-                VariableValue = "AND",
+                                    VariableValue = "AND",
                                     LeftChild = new FormulaTree
                                     {
                                         VariableType = "NUMBER",
-                    VariableValue = "0"
+                                        VariableValue = "0"
                                     },
                                     RightChild = new FormulaTree
                                     {
-                    VariableType = "OPERATOR",
-                    VariableValue = "TRUE"
-                    }
-            };
+                                        VariableType = "OPERATOR",
+                                        VariableValue = "TRUE"
+                                    }
+                                };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            
-                }
+
+        }
 
         [TestMethod]
         public void FormulaEditorLogicNotTest_01()
@@ -3763,20 +3763,20 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                         VariableType = "OPERATOR",
                         VariableValue = "FALSE"
                     }
-                        },
+                },
+                RightChild = new FormulaTree
+                    {
+                        VariableType = "OPERATOR",
+                        VariableValue = "NOT",
                         RightChild = new FormulaTree
-                            {
-                                VariableType = "OPERATOR",
-                    VariableValue = "NOT",
-                                RightChild = new FormulaTree
-                                {
-                                    VariableType = "OPERATOR",
-                        VariableValue = "TRUE"
+                        {
+                            VariableType = "OPERATOR",
+                            VariableValue = "TRUE"
+                        }
                     }
-                }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            
+
         }
 
         [TestMethod]
@@ -3858,17 +3858,17 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    editor.SelectedFormula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
         //    Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
         //    FormulaComparer.CompareFormulas(originalFormula, selectedFromula.FormulaRoot.FormulaTree);
-           
+
         //}
 
         [TestMethod]
         public void FormulaEditorLogicNotTest_04()
-            {
+        {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
                 {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
-            };
+                    FormulaRoot = new Core.Objects.Formulas.Formula()
+                };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -3883,22 +3883,22 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                     LeftChild = new FormulaTree
                             {
                                 VariableType = "OPERATOR",
-                    VariableValue = "FALSE"
-                                },
-                                RightChild = new FormulaTree
-                                {
-                                    VariableType = "OPERATOR",
-                    VariableValue = "NOT",
-                                    RightChild = new FormulaTree
-                                    {
-                                        VariableType = "NUMBER",
-                        VariableValue = "0"
+                                VariableValue = "FALSE"
+                            },
+                    RightChild = new FormulaTree
+                    {
+                        VariableType = "OPERATOR",
+                        VariableValue = "NOT",
+                        RightChild = new FormulaTree
+                        {
+                            VariableType = "NUMBER",
+                            VariableValue = "0"
                         }
                     }
-            };
+                };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
 
-                }
+        }
 
         [TestMethod]
         public void FormulaEditorSignedNumberTest_07()
@@ -3921,16 +3921,16 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                 VariableValue = "OR",
                 LeftChild = new FormulaTree
                 {
-                            VariableType = "OPERATOR",
+                    VariableType = "OPERATOR",
                     VariableValue = "FALSE"
-                            },
-                            RightChild = new FormulaTree
-                            {
-                                VariableType = "OPERATOR",
+                },
+                RightChild = new FormulaTree
+                {
+                    VariableType = "OPERATOR",
                     VariableValue = "MINUS",
-                                RightChild = new FormulaTree
-                                {
-                                    VariableType = "OPERATOR",
+                    RightChild = new FormulaTree
+                    {
+                        VariableType = "OPERATOR",
                         VariableValue = "TRUE"
                     }
                 }
@@ -3980,88 +3980,93 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                     VariableValue = "OR",
                     LeftChild = new FormulaTree
                     {
-                  VariableType  = "NUMBER",
+                        VariableType = "NUMBER",
                         VariableValue = "1"
                     },
                     RightChild = new FormulaTree
                     {
-                    VariableType = "NUMBER",
-                    VariableValue = "2"
-                }
-            };
+                        VariableType = "NUMBER",
+                        VariableValue = "2"
+                    }
+                };
             var node2 = new FormulaTree
             {
-                        VariableType = "OPERATOR",
-                        VariableValue = "AND",
-                        LeftChild = new FormulaTree
-                        {
+                VariableType = "OPERATOR",
+                VariableValue = "AND",
+                LeftChild = new FormulaTree
+                {
                     VariableType = "BRACKET",
+                    VariableValue = "",
                     RightChild = node1
-                        },
-                        RightChild = new FormulaTree
-                        {
+                },
+                RightChild = new FormulaTree
+                {
                     VariableType = "NUMBER",
                     VariableValue = "3"
                 }
             };
             var node3 = new FormulaTree
             {
-                            VariableType = "OPERATOR",
-                            VariableValue = "SMALLER",
-                            LeftChild = new FormulaTree
-                            {
+                VariableType = "OPERATOR",
+                VariableValue = "SMALLER",
+                LeftChild = new FormulaTree
+                {
                     VariableType = "BRACKET",
+                    VariableValue = "",
                     RightChild = node2
-                            },
-                            RightChild = new FormulaTree
-                            {
+                },
+                RightChild = new FormulaTree
+                {
                     VariableType = "NUMBER",
                     VariableValue = "4"
                 }
             };
             var node4 = new FormulaTree
             {
-                                VariableType = "OPERATOR",
-                                VariableValue = "PLUS",
-                                LeftChild = new FormulaTree
-                                {
+                VariableType = "OPERATOR",
+                VariableValue = "PLUS",
+                LeftChild = new FormulaTree
+                {
                     VariableType = "BRACKET",
+                    VariableValue = "",
                     RightChild = node3
-                                },
-                                RightChild = new FormulaTree
-                                {
+                },
+                RightChild = new FormulaTree
+                {
                     VariableType = "NUMBER",
                     VariableValue = "5"
                 }
             };
             var node5 = new FormulaTree
             {
-                                    VariableType = "OPERATOR",
+                VariableType = "OPERATOR",
                 VariableValue = "MINUS",
-                                    LeftChild = new FormulaTree
-                                    {
+                LeftChild = new FormulaTree
+                {
                     VariableType = "BRACKET",
+                    VariableValue = "",
                     RightChild = node4
-                                    },
-                                    RightChild = new FormulaTree
-                                    {
-                                        VariableType = "NUMBER",
-                                        VariableValue = "6"
-                                    }
+                },
+                RightChild = new FormulaTree
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "6"
+                }
             };
             var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                    LeftChild = new FormulaTree
-                    {
+                LeftChild = new FormulaTree
+                {
                     VariableType = "BRACKET",
+                    VariableValue = "",
                     RightChild = node5
-                    },
-                    RightChild = new FormulaTree
-                    {
-                            VariableType = "NUMBER",
-                            VariableValue = "7"
+                },
+                RightChild = new FormulaTree
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "7"
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
@@ -4070,12 +4075,12 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
 
         [TestMethod]
         public void FormulaEditorBracketTest_02()
-                        {
+        {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
                             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
-            };
+                                FormulaRoot = new Core.Objects.Formulas.Formula()
+                            };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -4092,31 +4097,32 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                                 VariableValue = "PLUS",
                                 LeftChild = new FormulaTree
                                 {
-                  VariableType  = "NUMBER",
-                  VariableValue = "1"
+                                    VariableType = "NUMBER",
+                                    VariableValue = "1"
                                 },
                                 RightChild = new FormulaTree
                                 {
-                    VariableType = "BRACKET",
-                    RightChild = new FormulaTree
-                    {
-                                    VariableType = "OPERATOR",
-                        VariableValue = "AND",
-                                    LeftChild = new FormulaTree
-                                    {
-                                        VariableType = "NUMBER",
-                            VariableValue = "2"
-                                    },
+                                    VariableType = "BRACKET",
+                                    VariableValue = "",
                                     RightChild = new FormulaTree
                                     {
-                                        VariableType = "NUMBER",
-                            VariableValue = "3"
-                    }
-                }
-        }
-            };
+                                        VariableType = "OPERATOR",
+                                        VariableValue = "AND",
+                                        LeftChild = new FormulaTree
+                                        {
+                                            VariableType = "NUMBER",
+                                            VariableValue = "2"
+                                        },
+                                        RightChild = new FormulaTree
+                                        {
+                                            VariableType = "NUMBER",
+                                            VariableValue = "3"
+                                        }
+                                    }
+                                }
+                            };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-       
+
         }
 
         [TestMethod]
@@ -4153,22 +4159,22 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
-            
+
             var node1 = new FormulaTree
                 {
                     VariableType = "OPERATOR",
-                VariableValue = "OR",
+                    VariableValue = "OR",
                     RightChild = new FormulaTree
                     {
                         VariableType = "NUMBER",
-                    VariableValue = "1"
+                        VariableValue = "1"
                     },
                     LeftChild = new FormulaTree
                         {
                             VariableType = "NUMBER",
-                    VariableValue = "2"
-                }
-            };
+                            VariableValue = "2"
+                        }
+                };
             var node2 = new FormulaTree
             {
                 VariableType = "OPERATOR",
@@ -4176,6 +4182,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                 RightChild = new FormulaTree
                 {
                     VariableType = "BRACKET",
+                    VariableValue = "",
                     RightChild = node1
                 },
                 LeftChild = new FormulaTree
@@ -4186,33 +4193,35 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             };
             var node3 = new FormulaTree
             {
-                    VariableType = "OPERATOR",
+                VariableType = "OPERATOR",
                 VariableValue = "SMALLER",
-                    RightChild = new FormulaTree
-                    {
+                RightChild = new FormulaTree
+                {
                     VariableType = "BRACKET",
+                    VariableValue = "",
                     RightChild = node2
-                    },
-                    LeftChild = new FormulaTree
-                    {
+                },
+                LeftChild = new FormulaTree
+                {
                     VariableType = "NUMBER",
                     VariableValue = "4"
                 }
             };
             var node4 = new FormulaTree
             {
-                        VariableType = "OPERATOR",
-                        VariableValue = "PLUS",
-                        RightChild = new FormulaTree
-                        {
+                VariableType = "OPERATOR",
+                VariableValue = "PLUS",
+                RightChild = new FormulaTree
+                {
                     VariableType = "BRACKET",
+                    VariableValue = "",
                     RightChild = node3
-                        },
-                        LeftChild = new FormulaTree
-                        {
-                            VariableType = "NUMBER",
+                },
+                LeftChild = new FormulaTree
+                {
+                    VariableType = "NUMBER",
                     VariableValue = "5"
-        }
+                }
             };
             var node5 = new FormulaTree
                 {
@@ -4220,32 +4229,140 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                     VariableValue = "MINUS",
                     RightChild = new FormulaTree
                     {
-                    VariableType = "BRACKET",
-                    RightChild = node4
-                },
-                LeftChild = new FormulaTree
-                {
+                        VariableType = "BRACKET",
+                        VariableValue = "",
+                        RightChild = node4
+                    },
+                    LeftChild = new FormulaTree
+                    {
                         VariableType = "NUMBER",
-                    VariableValue = "6"
-                }
-            };
+                        VariableValue = "6"
+                    }
+                };
             var expectedFormula = new FormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MULT",
                     RightChild = new FormulaTree
                     {
-                    VariableType = "BRACKET",
-                    RightChild = node5
+                        VariableType = "BRACKET",
+                        VariableValue = "",
+                        RightChild = node5
                     },
                     LeftChild = new FormulaTree
                     {
-                            VariableType = "NUMBER",
-                    VariableValue = "7"
+                        VariableType = "NUMBER",
+                        VariableValue = "7"
+                    }
+                };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+
+        }
+
+        [TestMethod]
+        public void FormulaEditorTerminalZeroTest_01()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+            var terminalZero = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            selectedFromula.FormulaRoot.FormulaTree = terminalZero;
+            editor.SelectedFormula = selectedFromula;
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "1"
+            };
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "BRACKET",
+                VariableValue = "OPEN"
+            };
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "MINUS"
+            };
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "NOT"
+            };
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicNot));
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "TRUE"
+            };
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "FALSE"
+            };
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicFalse));
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
+        }
+
+        [TestMethod]
+        public void FormulaEditorBracketTest_04()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            editor.SelectedFormula = selectedFromula;
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "BRACKET",
+                VariableValue = "OPEN",
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "123"
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-          
+
         }
     }
 }

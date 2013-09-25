@@ -605,6 +605,27 @@
                 </partControls:FormulaPartControlList>
             </f:FormulaDefinition.Template>
         </f:FormulaDefinition>
+        <!-- ### Brackets ##########################################################################################################-->
+        
+        <f:FormulaDefinition Type="BRACKET" Value="OPEN">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleOperatorLogic}"/>
+                    <!-- TODO: Change Style Resource-->
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="BRACKET" Value="">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleOperatorLogic}"/>
+                    <!-- TODO: Change Style Resource-->
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleOperatorLogic}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
 
         <!-- ### Object Variable ##########################################################################################################-->
         <f:FormulaDefinition Type="SENSOR">
