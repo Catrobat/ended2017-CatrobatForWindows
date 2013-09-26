@@ -277,9 +277,21 @@ namespace Catrobat.IDECommon.Formula.Editor
             //    }
             //    return false;
             //}
+            var rightmostClosedBracket = GetRightmostClosedBracket();
+            if (!IsNull(rightmostClosedBracket))
+            {
+                OpenBracket(rightmostClosedBracket);
+                return true;
+            }
             var formulaToChange = GetRightmostNode();
             if (IsNull(formulaToChange))
             {
+                formulaToChange = RootNodeOrSelection;
+                if (IsOpenBracket(formulaToChange))
+                {
+                    ReplaceNode(formulaToChange, DefaultNode(FormulaEditorKey.Number0));
+                    return true;
+                }
                 return false;
             }
             if (IsEmpty(formulaToChange))
@@ -358,6 +370,11 @@ namespace Catrobat.IDECommon.Formula.Editor
             //    return false;
             //}
             var rightmostNode = GetRightmostNode();
+            if (IsTerminalZero(rightmostNode))
+            {
+                ReplaceNode(rightmostNode, DefaultNode(FormulaEditorKey.KeyMinus));
+                return true;
+            }
             if (IsOperator(rightmostNode))
             {
                 if (IsNull(rightmostNode.LeftChild)) return false;
@@ -452,6 +469,11 @@ namespace Catrobat.IDECommon.Formula.Editor
             //    return true;
             //}
             var formulaToChange = GetRightmostNode();
+            if (IsTerminalZero(formulaToChange))
+            {
+                ReplaceNode(formulaToChange, DefaultNode(key));
+                return true;
+            }
             if (IsNull(formulaToChange) || IsEmpty(formulaToChange))
             {
                 RootNode = DefaultNode(key);
@@ -475,6 +497,11 @@ namespace Catrobat.IDECommon.Formula.Editor
             //    return true;
             //}
             var formulaToChange = GetRightmostNode();
+            if (IsTerminalZero(formulaToChange))
+            {
+                ReplaceNode(formulaToChange, DefaultNode(FormulaEditorKey.KeyLogicNot));
+                return true;
+            }
             if (IsNull(formulaToChange) || IsEmpty(formulaToChange))
             {
                 RootNode = DefaultNode(FormulaEditorKey.KeyLogicNot);
@@ -497,6 +524,11 @@ namespace Catrobat.IDECommon.Formula.Editor
                 EffectiveRootNode = DefaultNode(FormulaEditorKey.KeyOpenBrecket);
                 return true;
             }
+            if (IsTerminalZero(formulaToChange))
+            {
+                ReplaceNode(formulaToChange, DefaultNode(FormulaEditorKey.KeyOpenBrecket));
+                return true;
+            }
             if (IsOperator(formulaToChange))
             {
                 Subordinate(formulaToChange, FormulaEditorKey.KeyOpenBrecket);
@@ -509,7 +541,8 @@ namespace Catrobat.IDECommon.Formula.Editor
         {
             var node = GetRightmostOpenBracket();
             if (IsNull(node)) return false;
-            node.VariableValue = null;
+            CloseBracket(node);
+            //node.VariableValue = "";
             return true;
         }
 
@@ -724,7 +757,7 @@ namespace Catrobat.IDECommon.Formula.Editor
 
         private static bool IsClosedBracket(FormulaTree node)
         {
-            return node.VariableType == "BRACKET" && node.VariableValue == null;
+            return node.VariableType == "BRACKET" && node.VariableValue == "";
         }
 
         private bool IsTerminalZero(FormulaTree node)
@@ -860,6 +893,21 @@ namespace Catrobat.IDECommon.Formula.Editor
             return openBracketNode;
         }
 
+        private FormulaTree GetRightmostClosedBracket()
+        {
+            var node = RootNode;
+            FormulaTree closedBracketNode = null;
+            while (!IsNull(node))
+            {
+                if (IsClosedBracket(node))
+                {
+                    closedBracketNode = node;
+                }
+                node = node.RightChild;
+            }
+            return closedBracketNode;
+        }
+
         #endregion
 
 
@@ -897,8 +945,7 @@ namespace Catrobat.IDECommon.Formula.Editor
             if (IsNull(formulaToChange)) return;
             if (IsTerminalNode(formulaToChange))
             {
-                formulaToChange.VariableType = "NUMBER";
-                formulaToChange.VariableValue = "0";
+                ReplaceNode(formulaToChange, DefaultNode(FormulaEditorKey.Number0));
                 return;
             }
             var replacementNode = formulaToChange.LeftChild;
@@ -1021,6 +1068,18 @@ namespace Catrobat.IDECommon.Formula.Editor
                 return;
             }
             Subordinate(parentNode, key);
+        }
+
+        private void CloseBracket(FormulaTree node)
+        {
+            if (!IsOpenBracket(node)) return;
+            node.VariableValue = "";
+        }
+
+        private void OpenBracket(FormulaTree node)
+        {
+            if (!IsClosedBracket(node)) return;
+            node.VariableValue = "OPEN";
         }
 
         #endregion
