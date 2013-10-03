@@ -37,6 +37,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private string _filterText = "";
         private string _previousFilterText = "";
         private bool _isLoadingOnlineProjects;
+        private bool _isActivatingLocalProject;
         private MessageBoxResult _dialogResult;
         private string _deleteProjectName;
         private string _copyProjectName;
@@ -172,11 +173,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         {
             get
             {
-                return _isLoadingOnlineProjects;
+                return _isActivatingLocalProject;
             }
             set
             {
-                _isLoadingOnlineProjects = value;
+                _isActivatingLocalProject = value;
                 RaisePropertyChanged(() => IsActivatingLocalProject);
             }
         }

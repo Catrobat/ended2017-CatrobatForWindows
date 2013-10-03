@@ -8,7 +8,7 @@
       <group id="Resx">
         <trans-unit translate="yes" id="Resx/Brick_Broadcast" xml:space="preserve">
           <source>broadcast</source>
-          <target state="translated" state-qualifier="mt-suggestion">[1CB65][!!_ьѓôáđċâŝť_!!]</target>
+          <target state="translated">[1CB65][!!_ьѓôáđċâŝť_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_BroadcastWait" xml:space="preserve">
           <source>broadcast and wait</source>
