@@ -56,10 +56,11 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
                     var scriptBeginIndex = scriptEndIndex + 1;
                     scriptEndIndex += script.Bricks.Bricks.Count + 1;
 
-                    if (scriptEndIndex > lastViewIndex && scriptBeginIndex >= firstViewIndex)
-                    {
-                        break;
-                    }
+                    // what does that do?
+                    //if (scriptEndIndex > lastViewIndex && scriptBeginIndex >= firstViewIndex)
+                    //{
+                    //    break;
+                    //}
 
                     lastFullScript = script;
                 }

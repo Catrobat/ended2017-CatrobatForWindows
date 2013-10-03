@@ -890,6 +890,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             RaisePropertyChanged(() => SelectedBrick);
         }
         #endregion
+
         public EditorViewModel()
         {
             SelectedScripts = new ObservableCollection<DataObject>();

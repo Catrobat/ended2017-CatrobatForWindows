@@ -15,12 +15,6 @@
               <RowDefinition Height="*"/>
               <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
-            <!--<toolkit:ContextMenuService.ContextMenu>
-              <toolkit:ContextMenu>
-                <toolkit:MenuItem Header="kopieren" Command="{Binding Resources.Editor_CopyScriptBrickCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
-                <toolkit:MenuItem Header="löschen" Command="{Binding Resources.Editor_DeleteScriptBrickCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
-              </toolkit:ContextMenu>
-            </toolkit:ContextMenuService.ContextMenu>-->
             <Path Fill="{Binding Path=Background, RelativeSource={RelativeSource TemplatedParent}}" Data="M7.499753,99.448822 L7.499753,88.390717 L31.628017,88.390717 L40.026104,97.859222 L56.103401,97.859222 L64.028831,88.390717 L488.81161,88.390717 L488.81161,99.448822 z" Stretch="Fill" UseLayoutRounding="False" Grid.Row="0" />
             <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M5.9855595,99.75132 L5.9855595,88.390717 L30.512451,88.390717 L37.42955,97.795746 L53.706406,97.795746 L60.338474,88.390717 L490.1813,88.390717 L490.1813,99.710037" Stretch="Fill" UseLayoutRounding="False" StrokeThickness="3"  Margin="-0.031,0,0,-1.531" Grid.Row="0" />
             <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource PhoneForegroundBrush}" Grid.Row="1" BorderThickness="3 0 3 0">
@@ -45,12 +39,6 @@
               <RowDefinition Height="*"/>
               <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
-            <toolkit:ContextMenuService.ContextMenu>
-              <toolkit:ContextMenu>
-                <toolkit:MenuItem Header="kopieren" Command="{Binding EditorViewModel.CopyScriptBrickCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
-                <toolkit:MenuItem Header="löschen" Command="{Binding EditorViewModel.DeleteScriptBrickCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}" />
-              </toolkit:ContextMenu>
-            </toolkit:ContextMenuService.ContextMenu>
             <Path Data="M13.151761,97.795746 L20.068861,88.390717 L53.706406,88.390717 L60.338474,97.795746 z" Stretch="Fill" UseLayoutRounding="False" Fill="{TemplateBinding Background}" Grid.Row="0" Margin="9.029,0,0,-0.063" HorizontalAlignment="Left" Width="42" />
             <Path Stroke="{StaticResource PhoneForegroundBrush}" Data="M4.4944959,97.795746 L13.151761,97.795746 L20.068861,88.390717 L53.706406,88.390717 L60.338474,97.795746 L491.70383,97.795746" Stretch="Fill" UseLayoutRounding="False"  StrokeThickness="3"  Grid.Row="0" Margin="-1.5,0,-1.5,-0.063" />
             <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource PhoneForegroundBrush}" Grid.Row="1" BorderThickness="3 0 3 0">
