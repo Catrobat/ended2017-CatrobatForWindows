@@ -9,13 +9,13 @@ using Catrobat.Core.Misc;
 
 namespace Catrobat.Core.VersionConverter.Versions
 {
-    public class CatrobatVersion08ToWin08 : CatrobatVersion
+    public class CatrobatVersion080ToWin080 : CatrobatVersion
     {
         public override CatrobatVersionPair CatrobatVersionPair
         {
             get
             {
-                return new CatrobatVersionPair("0.8", "Win0.8");
+                return new CatrobatVersionPair("0.80", "Win0.80");
             }
         }
 
@@ -59,7 +59,7 @@ namespace Catrobat.Core.VersionConverter.Versions
             ResolveReferencesToReferences(document);
             UnifyForeverBrickReferences(document);
             UnifyRepeatBrickReferences(document);
-            UnifyIfLogicBeginBrickReferences(document);
+            //UnifyIfLogicBeginBrickReferences(document);
 
             ConvertRemoveElements(document);
             ConvertRemoveProperties(document);

@@ -15,10 +15,11 @@ namespace Catrobat.Core.Objects
     public class Project : DataRootObject
     {
         public const string ProjectCodePath = "code.xml";
-        public const string ScreenshotPath = "screenshot.png";
+        public const string ScreenshotPath = "manual_screenshot.png‏";
+        public const string AutomaticScreenshotPath = "automatic_screenshot.png";
         public const string ImagesPath = "images";
         public const string SoundsPath = "sounds";
-        public const string AutomaticScreenshotPath = "automatic_screenshot.png";
+
 
         #region Properties
 

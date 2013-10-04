@@ -111,6 +111,7 @@
     <Content Include="SampleData\SampleProjects\Converter\XPathHelperTestInput.xml" />
     <Content Include="SampleData\SampleProjects\Converter\08_Win08\VersionConverterTest_08_to_Win08_ObjectReferences_Output.xml" />
     <Content Include="SampleData\SampleProjects\DataReadingTests\test_code1.xml" />
+    <Content Include="SampleData\SampleProjects\DataReadingTests\testCatrobat091.xml" />
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
   <ItemGroup>

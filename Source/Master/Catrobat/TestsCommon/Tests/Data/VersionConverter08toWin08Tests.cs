@@ -26,7 +26,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_ObjectReferences_Input");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_ObjectReferences_Output");
 
-            CatrobatVersionConverter.SetConverterDirections("0.8", "Win0.8", actualDocument);
+            CatrobatVersionConverter.SetConverterDirections("0.80", "Win0.80", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
@@ -36,7 +36,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_SoundReferences_Input");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_SoundReferences_Output");
 
-            CatrobatVersionConverter.SetConverterDirections("0.8", "Win0.8", actualDocument);
+            CatrobatVersionConverter.SetConverterDirections("0.80", "Win0.80", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
@@ -46,7 +46,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_LookReferences_Input");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_LookReferences_Output");
 
-            CatrobatVersionConverter.SetConverterDirections("0.8", "Win0.8", actualDocument);
+            CatrobatVersionConverter.SetConverterDirections("0.80", "Win0.80", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
@@ -56,7 +56,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_GlobalVariableReferences_Input");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_GlobalVariableReferences_Output");
 
-            CatrobatVersionConverter.SetConverterDirections("0.8", "Win0.8", actualDocument);
+            CatrobatVersionConverter.SetConverterDirections("0.80", "Win0.80", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
@@ -66,7 +66,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_LocalVariableReferences_Input");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_LocalVariableReferences_Output");
 
-            CatrobatVersionConverter.SetConverterDirections("0.8", "Win0.8", actualDocument);
+            CatrobatVersionConverter.SetConverterDirections("0.80", "Win0.80", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
@@ -78,7 +78,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_PointTo_Input");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_PointTo_Output");
 
-            CatrobatVersionConverter.SetConverterDirections("0.8", "Win0.8", actualDocument);
+            CatrobatVersionConverter.SetConverterDirections("0.80", "Win0.80", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
@@ -89,7 +89,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_Forever_Input");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_Forever_Output");
 
-            CatrobatVersionConverter.SetConverterDirections("0.8", "Win0.8", actualDocument);
+            CatrobatVersionConverter.SetConverterDirections("0.80", "Win0.80", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
@@ -99,7 +99,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_Repeat_Input");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_Repeat_Output");
 
-            CatrobatVersionConverter.SetConverterDirections("0.8", "Win0.8", actualDocument);
+            CatrobatVersionConverter.SetConverterDirections("0.80", "Win0.80", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
@@ -109,7 +109,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_IfLogicBegin_Input");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/VersionConverterTest_08_to_Win08_IfLogicBegin_Output");
 
-            CatrobatVersionConverter.SetConverterDirections("0.8", "Win0.8", actualDocument);
+            CatrobatVersionConverter.SetConverterDirections("0.80", "Win0.80", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
@@ -123,7 +123,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/PracticalTests/VersionConverterTest_08_to_Win08_Compass_Input");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/PracticalTests/VersionConverterTest_08_to_Win08_Compass_Output");
 
-            CatrobatVersionConverter.SetConverterDirections("0.8", "Win0.8", actualDocument);
+            CatrobatVersionConverter.SetConverterDirections("0.80", "Win0.80", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
@@ -133,7 +133,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/PracticalTests/VersionConverterTest_08_to_Win08_Wake_Up_Input");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/PracticalTests/VersionConverterTest_08_to_Win08_Wake_Up_Output");
 
-            CatrobatVersionConverter.SetConverterDirections("0.8", "Win0.8", actualDocument);
+            CatrobatVersionConverter.SetConverterDirections("0.80", "Win0.80", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
@@ -143,7 +143,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/PracticalTests/VersionConverterTest_08_to_Win08_Drums_Input");
             XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/08_Win08/PracticalTests/VersionConverterTest_08_to_Win08_Drums_Output");
 
-            CatrobatVersionConverter.SetConverterDirections("0.8", "Win0.8", actualDocument);
+            CatrobatVersionConverter.SetConverterDirections("0.80", "Win0.80", actualDocument);
             XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 

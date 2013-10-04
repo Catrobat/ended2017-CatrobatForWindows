@@ -22,7 +22,8 @@ namespace Catrobat.Core.VersionConverter
             {
                 return new Dictionary<CatrobatVersionPair, CatrobatVersion>(new CatrobatVersionPair.EqualityComparer())
                 {
-                    {new CatrobatVersionPair(CatrobatVersionConfig.TargetInputVersion, CatrobatVersionConfig.TargetOutputVersion), new CatrobatVersion08ToWin08()}
+                    {new CatrobatVersionPair("0.80", "Win0.80"), new CatrobatVersion080ToWin080()},
+                    {new CatrobatVersionPair("0.91", "0.80"), new CatrobatVersion091To080()}
                 };
             }
         }
@@ -34,21 +35,40 @@ namespace Catrobat.Core.VersionConverter
                 return new Dictionary<CatrobatVersionPair, List<CatrobatVersionPair>>(new CatrobatVersionPair.EqualityComparer())
                 {
                     {
-                        new CatrobatVersionPair(CatrobatVersionConfig.TargetInputVersion, CatrobatVersionConfig.TargetOutputVersion),
+                        new CatrobatVersionPair("0.80", "Win0.80"),
 
                         new List<CatrobatVersionPair>
                         {
-                            new CatrobatVersionPair(CatrobatVersionConfig.TargetInputVersion, CatrobatVersionConfig.TargetOutputVersion,false)
+                            new CatrobatVersionPair("0.80", "Win0.80",false)
                         }
                     },
                     {
-                        new CatrobatVersionPair(CatrobatVersionConfig.TargetOutputVersion, CatrobatVersionConfig.TargetInputVersion),
+                       new CatrobatVersionPair("Win0.80", "0.80"),
 
                         new List<CatrobatVersionPair>
                         {
-                            new CatrobatVersionPair(CatrobatVersionConfig.TargetInputVersion,CatrobatVersionConfig.TargetOutputVersion, true)
+                            new CatrobatVersionPair("Win0.80", "0.80",true)
                         }
-                    }
+                    },
+
+                  {
+                        new CatrobatVersionPair("0.91", "Win0.80"),
+
+                        new List<CatrobatVersionPair>
+                        {
+                            new CatrobatVersionPair("0.91", "0.80",false),
+                            new CatrobatVersionPair("0.80", "Win0.80",false)
+                        }
+                    },
+                    {
+                       new CatrobatVersionPair("Win0.80", "0.91"),
+
+                        new List<CatrobatVersionPair>
+                        {
+                            new CatrobatVersionPair("0.80", "0.91",true),
+                            new CatrobatVersionPair("Win0.80", "0.80",true)
+                        }
+                    },
                 };
             }
         }

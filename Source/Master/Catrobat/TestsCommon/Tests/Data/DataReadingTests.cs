@@ -25,7 +25,7 @@ namespace Catrobat.TestsCommon.Tests.Data
         public void DataReadingTest1()
         {
             XDocument xDocument = SampleLoader.LoadSampleXDocument("DataReadingTests/test_code1");
-            CatrobatVersionConverter.SetConverterDirections("0.8", "Win0.8", xDocument);
+            CatrobatVersionConverter.SetConverterDirections("0.80", "Win0.80", xDocument);
 
             var writer = new XmlStringWriter();
             xDocument.Save(writer, SaveOptions.None);
@@ -35,5 +35,21 @@ namespace Catrobat.TestsCommon.Tests.Data
 
             // TODO: check project if it is correct!
         }
+
+        [TestMethod]
+        public void DataReadingTestCatrobatV091()
+        {
+            XDocument xDocument = SampleLoader.LoadSampleXDocument("DataReadingTests/testCatrobat091");
+            CatrobatVersionConverter.SetConverterDirections("0.91", "Win0.80", xDocument);
+
+            var writer = new XmlStringWriter();
+            xDocument.Save(writer, SaveOptions.None);
+
+            var xml = writer.GetStringBuilder().ToString();
+            var project = new Project(xml);
+
+            // TODO: check project if it is correct!
+        }
+        
     }
 }

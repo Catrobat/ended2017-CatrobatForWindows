@@ -54,8 +54,8 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    projectScreenshot = storage.LoadImage(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ScreenshotPath));
-                    //projectCode = storage.ReadTextFile(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath));
+                    projectScreenshot = storage.LoadImage(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ScreenshotPath)) ??
+                                        storage.LoadImage(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.AutomaticScreenshotPath));
                 }
 
                 CatrobatVersionConverter.VersionConverterError error;
