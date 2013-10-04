@@ -8,7 +8,7 @@
       <group id="Resx">
         <trans-unit translate="yes" id="Resx/Brick_Broadcast" xml:space="preserve">
           <source>broadcast</source>
-          <target state="translated" state-qualifier="mt-suggestion">[1CB65][!!_ьѓôáđċâŝť_!!]</target>
+          <target state="translated">[1CB65][!!_ьѓôáđċâŝť_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_BroadcastWait" xml:space="preserve">
           <source>broadcast and wait</source>
@@ -993,8 +993,8 @@
         <trans-unit translate="yes" id="Resx/Formula_Divide" xml:space="preserve">
           <source>/</source>
           <target state="new">/</target>
-        <note from="MultilingualBuild" annotates="source" priority="2">Alternate: ÷</note>
-        </trans-unit>
+        
+        <note from="MultilingualBuild" annotates="source" priority="2">Alternate: ÷</note></trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LogicAnd" xml:space="preserve">
           <source>AND</source>
           <target state="new">AND</target>
@@ -1014,8 +1014,8 @@
         <trans-unit translate="yes" id="Resx/Formula_LogicNot" xml:space="preserve">
           <source>NOT</source>
           <target state="new">NOT</target>
-          <note from="MultilingualBuild" annotates="source" priority="2">Alternate: ¬</note>
-        </trans-unit>
+          
+        <note from="MultilingualBuild" annotates="source" priority="2">Alternate: ¬</note></trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LogicNotEqual" xml:space="preserve">
           <source>≠</source>
           <target state="new">≠</target>
@@ -1039,8 +1039,8 @@
         <trans-unit translate="yes" id="Resx/Formula_Mult" xml:space="preserve">
           <source>*</source>
           <target state="new">*</target>
-        <note from="MultilingualBuild" annotates="source" priority="2">Alternate: •</note>
-        </trans-unit>
+        
+        <note from="MultilingualBuild" annotates="source" priority="2">Alternate: •</note></trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_Minus" xml:space="preserve">
           <source>-</source>
           <target state="new">-</target>

@@ -8,11 +8,11 @@
       <group id="Resx">
         <trans-unit translate="yes" id="Resx/Clear" xml:space="preserve">
           <source>Clear</source>
-          <target state="signed-off">Löschen</target>
+          <target state="translated">Löschen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/ColorPickerPageTitle" xml:space="preserve">
           <source>Color Picker</source>
-          <target state="signed-off" state-qualifier="mt-suggestion">Farbauswahl</target>
+          <target state="translated">Farbauswahl</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/ColorPickerSelectedColor" xml:space="preserve">
           <source>Selected Color</source>

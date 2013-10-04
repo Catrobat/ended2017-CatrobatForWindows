@@ -25,10 +25,14 @@
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
           <Title>Catrobat</Title>
-          <BackContent></BackContent>
-          <BackBackgroundImageURI IsRelative="true" IsResource="false"></BackBackgroundImageURI>
-          <BackTitle></BackTitle>
-          <DeviceLockImageURI IsRelative="true" IsResource="false"></DeviceLockImageURI>
+          <BackContent>
+          </BackContent>
+          <BackBackgroundImageURI IsRelative="true" IsResource="false">
+          </BackBackgroundImageURI>
+          <BackTitle>
+          </BackTitle>
+          <DeviceLockImageURI IsRelative="true" IsResource="false">
+          </DeviceLockImageURI>
           <HasLarge>false</HasLarge>
         </TemplateFlip>
       </PrimaryToken>
