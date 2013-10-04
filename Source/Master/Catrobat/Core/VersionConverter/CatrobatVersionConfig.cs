@@ -10,6 +10,8 @@ namespace Catrobat.Core.VersionConverter
     {
         public const string TargetOutputVersion = "Win0.80";
 
-        public const string TargetInputVersion = "0.91";
+        public const string TargetIDEVersion = "0.91";
+
+        public static string TargetPlayerVersion = "0.80";
     }
 }

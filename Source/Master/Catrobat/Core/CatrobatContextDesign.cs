@@ -63,7 +63,7 @@ namespace Catrobat.Core
                     ApplicationBuildNumber = 0,
                     ApplicationName = "Pocket Code",
                     ApplicationVersion = "0.8.2",
-                    CatrobatLanguageVersion = (float)0.8,
+                    CatrobatLanguageVersion = "Win0.8",
                     DateTimeUpload = "",
                     Description = "Dies ist eine Test Anwendung.",
                     DeviceName = "Device 1",

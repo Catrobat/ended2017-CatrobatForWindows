@@ -60,7 +60,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
 
                 CatrobatVersionConverter.VersionConverterError error;
                 var projectCodePath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
-                projectCode = CatrobatVersionConverter.ConvertToInternalXmlVersion(projectCodePath, out error);
+                projectCode = CatrobatVersionConverter.ConvertToXmlVersion(projectCodePath, CatrobatVersionConfig.TargetIDEVersion, out error);
                 //TODO: error handling
 
                 _project = new Project(projectCode);

@@ -98,8 +98,8 @@ namespace Catrobat.IDEWindowsPhone.Misc
                                                                             CatrobatContextBase.ProjectsPath + "/" +
                                                                             projectName);
 
-                        CatrobatVersionConverter.VersionConverterError error;
-                        CatrobatVersionConverter.ConvertToInternalXmlVersionByProjectName(projectName, out error, true);
+                        var error = CatrobatVersionConverter.VersionConverterError.NoError;
+                        CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, CatrobatVersionConfig.TargetIDEVersion, out error, true);
 
                         if (callback != null) //TODO
                         {

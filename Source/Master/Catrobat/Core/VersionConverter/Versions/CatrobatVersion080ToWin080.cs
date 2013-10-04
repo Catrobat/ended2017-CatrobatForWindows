@@ -255,17 +255,17 @@ namespace Catrobat.Core.VersionConverter.Versions
 
         protected override void ConvertBackRemoveElements(XDocument document)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         protected override void ConvertBackRemoveProperties(XDocument document)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         protected override void ConvertBackStructure(XDocument document)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             //RestoreReferences(document);
         }
 
