@@ -1,10 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Threading;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using GalaSoft.MvvmLight;
@@ -28,6 +30,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private bool _buttonCancelIsEnabled = true;
         private string _projectName = "";
         private ImageSource _screenshotImageSource = null;
+        private bool _errorPanelVisibility;
 
         #endregion
 
@@ -86,6 +89,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 }
                 _loadingPanelVisibility = value;
                 RaisePropertyChanged(() => LoadingPanelVisibility);
+            }
+        }
+
+        public bool ErrorPanelVisibility
+        {
+            get { return _errorPanelVisibility; }
+            set
+            {
+                _errorPanelVisibility = value;
+                RaisePropertyChanged(() => ErrorPanelVisibility);
             }
         }
 
@@ -185,12 +198,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             }
 
             _isWorking = true;
-
-            ButtonAddIsEnabled = false;
-            ButtonCancelIsEnabled = false;
-            ContentPanelVisibility = false;
-            LoadingPanelVisibility = true;
-            ProgressBarLoadingIsIndeterminate = true;
+            ShowPanel(VisiblePanel.Loading);
 
             var task = Task.Run(() =>
                 {
@@ -201,11 +209,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                             _importer.AcceptTempProject(CheckBoxMakeActiveIsChecked);
                         }
 
-                        Deployment.Current.Dispatcher.BeginInvoke(() => Navigation.NavigateTo(typeof (MainView)));
+                        Deployment.Current.Dispatcher.BeginInvoke(() => Navigation.NavigateTo(typeof(MainView)));
                     }
                     catch
                     {
-                        ShowErrorMessage();
+                        ShowPanel(VisiblePanel.Error);
                     }
                 });
 
@@ -214,7 +222,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void CancelAction()
         {
-            Navigation.NavigateTo(typeof (MainView));
+            Navigation.NavigateTo(typeof(MainView));
         }
 
         private async void OnLoadAction(NavigationContext navigationContext)
@@ -231,13 +239,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     ProjectName = projectHeader.ProjectName;
 
                     ScreenshotImageSource = projectHeader.Screenshot as BitmapImage;
-                    ContentPanelVisibility = true;
-                    LoadingPanelVisibility = false;
-                    ProgressBarLoadingIsIndeterminate = false;
+                    
+                    ShowPanel(VisiblePanel.Content);
                 }
                 else
                 {
-                    ShowErrorMessage();
+                    ShowPanel(VisiblePanel.Error);
                 }
             }
             _isWorking = false;
@@ -259,19 +266,54 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
         }
 
-        private void ShowErrorMessage()
+        private enum VisiblePanel { Error, Content, Loading }
+
+        private void ShowPanel(VisiblePanel panel)
         {
-            var message = new DialogMessage("Sorry! The project is not valid or not compatible with this version of Catrobat.", ProjectNotValidMessageResult)
+            switch (panel)
             {
-                Button = MessageBoxButton.OK,
-                Caption = "Project can not be opened"
-            };
-            Messenger.Default.Send(message);
+                case VisiblePanel.Error:
+                        ErrorPanelVisibility = true;
+                        ContentPanelVisibility = false;
+                        LoadingPanelVisibility = false;
+                        ProgressBarLoadingIsIndeterminate = false;
+                        ButtonAddIsEnabled = false;
+                        ButtonCancelIsEnabled = true;
+                    break;
+                case VisiblePanel.Content:
+                        ErrorPanelVisibility = false;
+                        ContentPanelVisibility = true;
+                        LoadingPanelVisibility = false;
+                        ProgressBarLoadingIsIndeterminate = false;
+                        ButtonAddIsEnabled = true;
+                        ButtonCancelIsEnabled = true;
+                    break;
+                case VisiblePanel.Loading:
+                        ErrorPanelVisibility = false;
+                        ContentPanelVisibility = false;
+                        LoadingPanelVisibility = true;
+                        ProgressBarLoadingIsIndeterminate = true;
+                        ButtonAddIsEnabled = false;
+                        ButtonCancelIsEnabled = true;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("panel");
+            }
+
+            //Deployment.Current.Dispatcher.BeginInvoke(() =>
+            //{
+            //    var message = new DialogMessage("Sorry! The project is not valid or not compatible with this version of Catrobat.", ProjectNotValidMessageResult)
+            //    {
+            //        Button = MessageBoxButton.OK,
+            //        Caption = "Project can not be opened"
+            //    };
+            //    Messenger.Default.Send(message);
+            //});
         }
 
         private void ProjectNotValidMessageResult(MessageBoxResult obj)
         {
-            Navigation.NavigateTo(typeof (MainView));
+            Navigation.NavigateTo(typeof(MainView));
         }
 
         private void ResetViewModel()

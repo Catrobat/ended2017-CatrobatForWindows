@@ -63,7 +63,7 @@ namespace Catrobat.Core.VersionConverter
                         }
                     },
                     {
-                       new CatrobatVersionPair("Win0.80", "0.91"),
+                       new CatrobatVersionPair("Win0.80", "0.9"),
 
                         new List<CatrobatVersionPair>
                         {
