@@ -240,6 +240,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
 
         #region Commands
 
+
+
+        public RelayCommand RenameSpriteCommand
+        {
+            get;
+            private set;
+        }
+
         public RelayCommand<DataObject> AddBroadcastMessageCommand
         {
             get;
@@ -442,6 +450,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
         #endregion
 
         #region Actions
+
+        private void RenameSpriteAction()
+        {
+            var message = new GenericMessage<Sprite>(SelectedSprite);
+            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SpriteNameListener);
+
+            Navigation.NavigateTo(typeof(ChangeSpriteView));
+        }
 
         private void AddNewScriptBrickAction()
         {
@@ -788,6 +804,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             SelectedCostumes.CollectionChanged += SelectedCostumesOnCollectionChanged;
             SelectedSounds = new ObservableCollection<Sound>();
             SelectedSounds.CollectionChanged += SelectedSoundsOnCollectionChanged;
+
+            RenameSpriteCommand = new RelayCommand(RenameSpriteAction);
 
             AddBroadcastMessageCommand = new RelayCommand<DataObject>(AddBroadcastMessageAction);
 

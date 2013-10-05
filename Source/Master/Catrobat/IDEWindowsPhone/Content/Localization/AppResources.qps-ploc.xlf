@@ -1040,6 +1040,10 @@
           <source>tan</source>
           <target state="new">tan</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Camera_Rename" xml:space="preserve">
+          <source>rename</source>
+          <target state="new">rename</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionSqrt" xml:space="preserve">
           <source>sqrt</source>
           <target state="new">sqrt</target>

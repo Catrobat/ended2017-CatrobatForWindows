@@ -31,26 +31,43 @@
   <Grid x:Name="LayoutRoot">
     <Grid>
       <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
         <RowDefinition/>
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
 
-      <controls:Pivot Name="PivotMain" Title="{Binding CurrentProject.ProjectHeader.ProgramName}" SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}">
+      <Grid Grid.Row="0">
+        <Grid Margin="15" >
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
+          <TextBlock Grid.Column="0" FontSize="35" Text="{Binding SelectedSprite.Name}"/>
+          <HyperlinkButton Grid.Column="1" Content="{Binding Resources.Editor_Camera_Rename, Source={StaticResource LocalizedStrings}}"
+                           Command="{Binding RenameSpriteCommand}"/>
+        </Grid>
+        
+      </Grid>
+      
+      <controls:Pivot 
+        Name="PivotMain" Grid.Row="1"
+        SelectedIndex="{Binding SelectedPivotIndex, Mode=TwoWay}">
         <!--Pivot item scripts-->
-        <controls:PivotItem Name="PivotScripts" Header="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}">
+        <controls:PivotItem Name="PivotScripts" 
+          Header="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}">
           <reorderableListbox:ReorderListBox
-          x:Name="ReorderListBoxScriptBricks"
-          Margin="0 -25 0 0"
-          SelectionMode="Multiple"
-          VerticalAlignment="Stretch"
-          IsReorderEnabled="True"
-          ItemsSource="{Binding ScriptBricks}"
-          ItemTemplate="{StaticResource ScriptsBrickTemplate}"
-          ListBoxViewPort="{Binding ListBoxViewPort}"
-          SmartSelectedItems="{Binding SelectedScripts}"
-          Loaded="reorderListBoxScriptBricks_Loaded"
-          ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
-          Foreground="White" />
+            x:Name="ReorderListBoxScriptBricks"
+            Margin="0 -25 0 0"
+            SelectionMode="Multiple"
+            VerticalAlignment="Stretch"
+            IsReorderEnabled="True"
+            ItemsSource="{Binding ScriptBricks}"
+            ItemTemplate="{StaticResource ScriptsBrickTemplate}"
+            ListBoxViewPort="{Binding ListBoxViewPort}"
+            SmartSelectedItems="{Binding SelectedScripts}"
+            Loaded="reorderListBoxScriptBricks_Loaded"
+            ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
+            Foreground="White" />
         </controls:PivotItem>
 
         <!--Pivot item costume-->
@@ -118,37 +135,39 @@
         </controls:PivotItem>
       </controls:Pivot>
 
-      <appBar:EditorAppBar Grid.Row="1"
-      Visibility="{Binding IsVisibleScripts, Converter={StaticResource BoolVisibilityConverter}}" 
-      VerticalAlignment="Bottom"
-      TargetType="Script"
-      ClearSelectionCommand="{Binding ClearScriptsSelectionCommand}"
-      CopyCommand="{Binding CopyScriptBrickCommand}"
-      DeleteCommand="{Binding DeleteScriptBrickCommand}"
-      PlayCommand="{Binding StartPlayerCommand}"
-      NewCommand="{Binding AddNewScriptBrickCommand}"
-      NumberOfSelectedItems="{Binding SelectedScripts.Count}"/>
-      <appBar:EditorAppBar Grid.Row="1"
-      Visibility="{Binding IsVisibleCostumes, Converter={StaticResource BoolVisibilityConverter}}" 
-      VerticalAlignment="Bottom"
-      TargetType="Costume"
-      ClearSelectionCommand="{Binding ClearCostumesSelectionCommand}"
-      CopyCommand="{Binding CopyCostumeCommand}"
-      DeleteCommand="{Binding DeleteCostumeCommand}"
-      EditCommand="{Binding EditCostumeCommand}"
-      PlayCommand="{Binding StartPlayerCommand}"
-      NewCommand="{Binding AddNewCostumeCommand}"
-      NumberOfSelectedItems="{Binding SelectedCostumes.Count}"/>
-      <appBar:EditorAppBar Grid.Row="1"
-      Visibility="{Binding IsVisibleSounds, Converter={StaticResource BoolVisibilityConverter}}" 
-      VerticalAlignment="Bottom"
-      TargetType="Sound"
-      ClearSelectionCommand="{Binding ClearSoundsSelectionCommand}"
-      DeleteCommand="{Binding DeleteSoundCommand}"
-      EditCommand="{Binding EditSoundCommand}"
-      PlayCommand="{Binding StartPlayerCommand}"
-      NewCommand="{Binding AddNewSoundCommand}"
-      NumberOfSelectedItems="{Binding SelectedSounds.Count}"/>
+      <StackPanel Grid.Row="2">
+        <appBar:EditorAppBar
+        Visibility="{Binding IsVisibleScripts, Converter={StaticResource BoolVisibilityConverter}}" 
+        VerticalAlignment="Bottom"
+        TargetType="Script"
+        ClearSelectionCommand="{Binding ClearScriptsSelectionCommand}"
+        CopyCommand="{Binding CopyScriptBrickCommand}"
+        DeleteCommand="{Binding DeleteScriptBrickCommand}"
+        PlayCommand="{Binding StartPlayerCommand}"
+        NewCommand="{Binding AddNewScriptBrickCommand}"
+        NumberOfSelectedItems="{Binding SelectedScripts.Count}"/>
+        <appBar:EditorAppBar
+        Visibility="{Binding IsVisibleCostumes, Converter={StaticResource BoolVisibilityConverter}}" 
+        VerticalAlignment="Bottom"
+        TargetType="Costume"
+        ClearSelectionCommand="{Binding ClearCostumesSelectionCommand}"
+        CopyCommand="{Binding CopyCostumeCommand}"
+        DeleteCommand="{Binding DeleteCostumeCommand}"
+        EditCommand="{Binding EditCostumeCommand}"
+        PlayCommand="{Binding StartPlayerCommand}"
+        NewCommand="{Binding AddNewCostumeCommand}"
+        NumberOfSelectedItems="{Binding SelectedCostumes.Count}"/>
+        <appBar:EditorAppBar
+        Visibility="{Binding IsVisibleSounds, Converter={StaticResource BoolVisibilityConverter}}" 
+        VerticalAlignment="Bottom"
+        TargetType="Sound"
+        ClearSelectionCommand="{Binding ClearSoundsSelectionCommand}"
+        DeleteCommand="{Binding DeleteSoundCommand}"
+        EditCommand="{Binding EditSoundCommand}"
+        PlayCommand="{Binding StartPlayerCommand}"
+        NewCommand="{Binding AddNewSoundCommand}"
+        NumberOfSelectedItems="{Binding SelectedSounds.Count}"/>
+      </StackPanel>
 
 
     </Grid>

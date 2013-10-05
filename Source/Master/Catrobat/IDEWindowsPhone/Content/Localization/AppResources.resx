@@ -966,4 +966,7 @@
   <data name="Formula_FunctionTan" xml:space="preserve">
     <value>tan</value>
   </data>
+  <data name="Editor_Camera_Rename" xml:space="preserve">
+    <value>rename</value>
+  </data>
 </root>
