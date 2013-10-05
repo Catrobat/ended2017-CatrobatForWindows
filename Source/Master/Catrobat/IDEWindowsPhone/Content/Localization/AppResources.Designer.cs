@@ -646,6 +646,15 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to add.
+        /// </summary>
+        public static string Editor_AppbarAdd {
+            get {
+                return ResourceManager.GetString("Editor_AppbarAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Broadcast message.
         /// </summary>
         public static string Editor_BroadcastMessage {

@@ -6,7 +6,7 @@
         SoundNameListener,
         CurrentSpriteChangedListener,
         SpriteNameListener,
-        SpriteListListener,
+        //SpriteListListener,
         ProjectNameListener,
         BroadcastObjectListener,
         BroadcastMessageListener,

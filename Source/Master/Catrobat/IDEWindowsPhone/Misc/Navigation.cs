@@ -9,6 +9,8 @@ namespace Catrobat.IDEWindowsPhone.Misc
     {
         public static void NavigateTo(Type type)
         {
+            if (type == null) return;
+
             var assemblyFullName = Assembly.GetExecutingAssembly().FullName;
             var assemblyName = assemblyFullName.Split(',')[0];
 

@@ -1044,6 +1044,10 @@
           <source>rename</source>
           <target state="new">rename</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_AppbarAdd" xml:space="preserve">
+          <source>add</source>
+          <target state="new">add</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionSqrt" xml:space="preserve">
           <source>sqrt</source>
           <target state="new">sqrt</target>

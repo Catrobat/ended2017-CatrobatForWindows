@@ -175,7 +175,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="24" 
                            Margin="10" Text="{Binding Resources.Brick_WhenIReceive, Source={StaticResource LocalizedStrings}}" />
                 <controls:ListPicker Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
-                                     ItemTemplate="{StaticResource ListBoxBroadcastItem}" 
+                                     ItemTemplate="{StaticResource ListBoxBroadcastItem}"
                                      PageItemTemplate="{StaticResource PageListBoxBroadcastItem}" 
                                      ItemsSource="{Binding SpriteEditorViewModel.BroadcastMessages, Source={StaticResource Locator}, Mode=OneTime}" 
                                      SelectedItem="{Binding ReceivedMessage, Mode=TwoWay}" IsEnabled="{Binding IsRealObject}" 

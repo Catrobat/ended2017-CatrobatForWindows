@@ -13,7 +13,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
         #region Private Members
 
         private string _spriteName;
-        private ObservableCollection<Sprite> _receivedSprites;
+        //private ObservableCollection<Sprite> _receivedSprites;
+        private Project _currentProject;
 
         #endregion
 
@@ -31,6 +32,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
                 _spriteName = value;
                 RaisePropertyChanged(() => SpriteName);
                 SaveCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public Project CurrentProject
+        {
+            get { return _currentProject; }
+            private set
+            {
+                _currentProject = value;
+                RaisePropertyChanged(() => CurrentProject);
             }
         }
 
@@ -59,9 +70,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
 
         private void SaveAction()
         {
-            var sprite = new Sprite();
-            sprite.Name = SpriteName;
-            _receivedSprites.Add(sprite);
+            var sprite = new Sprite { Name = SpriteName };
+            CurrentProject.SpriteList.Sprites.Add(sprite);
+            //_receivedSprites.Add(sprite);
 
             ResetViewModel();
             Navigation.NavigateBack();
@@ -73,14 +84,23 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             Navigation.NavigateBack();
         }
 
-        private void ReceiveSpriteListMessageAction(GenericMessage<ObservableCollection<Sprite>> message)
-        {
-            _receivedSprites = message.Content;
-        }
+        //private void ReceiveSpriteListMessageAction(GenericMessage<ObservableCollection<Sprite>> message)
+        //{
+        //    _receivedSprites = message.Content;
+        //}
 
         private void ResetViewModelAction()
         {
             ResetViewModel();
+        }
+
+        #endregion
+
+        #region Message Actions
+
+        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        {
+            CurrentProject = message.Content;
         }
 
         #endregion
@@ -91,7 +111,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             CancelCommand = new RelayCommand(CancelAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-            Messenger.Default.Register<GenericMessage<ObservableCollection<Sprite>>>(this, ViewModelMessagingToken.SpriteListListener, ReceiveSpriteListMessageAction);
+            //Messenger.Default.Register<GenericMessage<ObservableCollection<Sprite>>>(this,
+            //    ViewModelMessagingToken.SpriteListListener, ReceiveSpriteListMessageAction);
+            Messenger.Default.Register<GenericMessage<Project>>(this,
+                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
         }
 
         private void ResetViewModel()

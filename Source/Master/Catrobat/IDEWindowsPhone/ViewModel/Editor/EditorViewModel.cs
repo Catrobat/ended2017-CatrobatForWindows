@@ -600,8 +600,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void AddNewSpriteAction()
         {
-            var message = new GenericMessage<ObservableCollection<Sprite>>(Sprites);
-            Messenger.Default.Send<GenericMessage<ObservableCollection<Sprite>>>(message, ViewModelMessagingToken.SpriteListListener);
+            //var message = new GenericMessage<ObservableCollection<Sprite>>(Sprites);
+            //Messenger.Default.Send<GenericMessage<ObservableCollection<Sprite>>>(message, ViewModelMessagingToken.SpriteListListener);
 
             Navigation.NavigateTo(typeof(AddNewSpriteView));
         }
