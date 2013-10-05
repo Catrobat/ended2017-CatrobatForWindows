@@ -9,7 +9,7 @@ using Catrobat.Core.Misc;
 
 namespace Catrobat.Core.VersionConverter.Versions
 {
-    public class CatrobatVersion08ToWin08 : CatrobatVersion
+    public class CatrobatVersion08ToWin080 : CatrobatVersion
     {
         public override CatrobatVersionPair CatrobatVersionPair
         {
@@ -59,7 +59,7 @@ namespace Catrobat.Core.VersionConverter.Versions
             ResolveReferencesToReferences(document);
             UnifyForeverBrickReferences(document);
             UnifyRepeatBrickReferences(document);
-            UnifyIfLogicBeginBrickReferences(document);
+            //UnifyIfLogicBeginBrickReferences(document);
 
             ConvertRemoveElements(document);
             ConvertRemoveProperties(document);
@@ -255,17 +255,17 @@ namespace Catrobat.Core.VersionConverter.Versions
 
         protected override void ConvertBackRemoveElements(XDocument document)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         protected override void ConvertBackRemoveProperties(XDocument document)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         protected override void ConvertBackStructure(XDocument document)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             //RestoreReferences(document);
         }
 

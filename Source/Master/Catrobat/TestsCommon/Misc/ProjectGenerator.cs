@@ -41,7 +41,7 @@ namespace Catrobat.TestsCommon.Misc
                     ApplicationBuildNumber = 0,
                     ApplicationName = "Pocket Code",
                     ApplicationVersion = "0.0.1",
-                    CatrobatLanguageVersion = (float)0.8,
+                    CatrobatLanguageVersion = "Win0.08",
                     DateTimeUpload = DateTime.Now.ToString(CultureInfo.InvariantCulture),
                     Description = "",
                     DeviceName = "SampleDevice",

@@ -22,7 +22,9 @@ namespace Catrobat.Core.VersionConverter
             {
                 return new Dictionary<CatrobatVersionPair, CatrobatVersion>(new CatrobatVersionPair.EqualityComparer())
                 {
-                    {new CatrobatVersionPair(CatrobatVersionConfig.TargetInputVersion, CatrobatVersionConfig.TargetOutputVersion), new CatrobatVersion08ToWin08()}
+                    {new CatrobatVersionPair("0.8", "Win0.80"), new CatrobatVersion08ToWin080()},
+                    {new CatrobatVersionPair("0.91", "0.9"), new CatrobatVersion091To09()},
+                    {new CatrobatVersionPair("0.9", "0.8"), new CatrobatVersion09To08()},
                 };
             }
         }
@@ -34,26 +36,69 @@ namespace Catrobat.Core.VersionConverter
                 return new Dictionary<CatrobatVersionPair, List<CatrobatVersionPair>>(new CatrobatVersionPair.EqualityComparer())
                 {
                     {
-                        new CatrobatVersionPair(CatrobatVersionConfig.TargetInputVersion, CatrobatVersionConfig.TargetOutputVersion),
+                        new CatrobatVersionPair("0.8", "Win0.80"),
 
                         new List<CatrobatVersionPair>
                         {
-                            new CatrobatVersionPair(CatrobatVersionConfig.TargetInputVersion, CatrobatVersionConfig.TargetOutputVersion,false)
+                            new CatrobatVersionPair("0.8", "Win0.80",false)
                         }
                     },
                     {
-                        new CatrobatVersionPair(CatrobatVersionConfig.TargetOutputVersion, CatrobatVersionConfig.TargetInputVersion),
+                       new CatrobatVersionPair("Win0.80", "0.8"),
 
                         new List<CatrobatVersionPair>
                         {
-                            new CatrobatVersionPair(CatrobatVersionConfig.TargetInputVersion,CatrobatVersionConfig.TargetOutputVersion, true)
+                            new CatrobatVersionPair("Win0.80", "0.8",true)
                         }
-                    }
+                    },
+
+
+                    {
+                        new CatrobatVersionPair("0.9", "Win0.80"),
+
+                        new List<CatrobatVersionPair>
+                        {
+                            new CatrobatVersionPair("0.9", "0.8",false),
+                            new CatrobatVersionPair("0.8", "Win0.80",false)
+                        }
+                    },
+                    {
+                       new CatrobatVersionPair("Win0.80", "0.9"),
+
+                        new List<CatrobatVersionPair>
+                        {
+                            new CatrobatVersionPair("Win0.80", "0.8",true),
+                            new CatrobatVersionPair("0.8", "0.9",true),
+                        }
+                    },
+
+
+                  {
+                        new CatrobatVersionPair("0.91", "Win0.80"),
+
+                        new List<CatrobatVersionPair>
+                        {
+                            new CatrobatVersionPair("0.91", "0.9",false),
+                            new CatrobatVersionPair("0.9", "0.8",false),
+                            new CatrobatVersionPair("0.8", "Win0.80",false)
+                        }
+                    },
+                    {
+                       new CatrobatVersionPair("Win0.80", "0.91"),
+
+                        new List<CatrobatVersionPair>
+                        {
+                            new CatrobatVersionPair("Win0.80", "0.8",true),
+                            new CatrobatVersionPair("0.8", "0.9",true),
+                            new CatrobatVersionPair("0.9", "0.91",true),
+                        }
+                    },
+                    
                 };
             }
         }
 
-        public static VersionConverterError SetConverterDirections(string inputVersion, string outputVersion, XDocument document)
+        public static VersionConverterError ConvertVersions(string inputVersion, string outputVersion, XDocument document)
         {
             var error = VersionConverterError.NoError;
             var versionPair = new CatrobatVersionPair(inputVersion, outputVersion);
@@ -74,7 +119,8 @@ namespace Catrobat.Core.VersionConverter
                         {
                             if (pair.IsInverse)
                             {
-                                Converters[pair].ConvertBack(document);
+                                var inversePath = new CatrobatVersionPair(pair.OutputVersion, pair.InputVersion);
+                                Converters[inversePath].ConvertBack(document);
                             }
                             else
                             {
@@ -114,7 +160,7 @@ namespace Catrobat.Core.VersionConverter
             return inputVersion;
         }
 
-        public static string ConvertToInternalXmlVersion(string projectCodePath, out VersionConverterError error, bool overwriteProject = false)
+        public static string ConvertToXmlVersion(string projectCodePath, string targetVersion, out VersionConverterError error, bool overwriteProject = false)
         {
             var xml = "";
 
@@ -124,7 +170,7 @@ namespace Catrobat.Core.VersionConverter
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    projectCode = storage.ReadTextFile(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath));
+                    projectCode = storage.ReadTextFile(projectCodePath);
                 }
 
                 if (projectCode != null)
@@ -134,7 +180,7 @@ namespace Catrobat.Core.VersionConverter
 
                     var inputVersion = GetInputVersion(document);
 
-                    error = SetConverterDirections(inputVersion, CatrobatVersionConfig.TargetOutputVersion, document);
+                    error = ConvertVersions(inputVersion, targetVersion, document);
 
                     if (error == VersionConverterError.NoError)
                     {
@@ -169,24 +215,24 @@ namespace Catrobat.Core.VersionConverter
                 }
             }
             else
-            { 
+            {
                 error = VersionConverterError.ProjectCodePathNotValid;
             }
 
             return xml;
         }
 
-        public static string ConvertToInternalXmlVersionByProjectName(string projectName, out VersionConverterError error, bool overwriteProject = false)
+        public static string ConvertToXmlVersionByProjectName(string projectName, string targetVersion, out VersionConverterError error, bool overwriteProject = false)
         {
             var projectCodePath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.ProjectCodePath);
-            string projectCode = null;
+            //string projectCode = null;
 
-            using (var storage = StorageSystem.GetStorage())
-            {
-                projectCode = storage.ReadTextFile(projectCodePath);
-            }
+            //using (var storage = StorageSystem.GetStorage())
+            //{
+            //    projectCode = storage.ReadTextFile(projectCodePath);
+            //}
 
-            var xml = ConvertToInternalXmlVersion(projectCode, out error, overwriteProject);
+            var xml = ConvertToXmlVersion(projectCodePath, targetVersion, out error, overwriteProject);
             return xml;
         }
     }

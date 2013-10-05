@@ -28,24 +28,34 @@
       <TextBlock Text="{Binding ProjectName}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
     </StackPanel>
 
-    <Grid x:Name="LoadingPanel" Visibility="{Binding LoadingPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Grid.Row="1" Margin="12,0,12,170">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition/>
-      </Grid.RowDefinitions>
-      <ProgressBar Grid.Row="0" Name="ProgressBarLoading" IsIndeterminate="{Binding ProgressBarLoadingIsIndeterminate}"></ProgressBar>
-      <TextBlock Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="Please wait while we try to load the new project. This can take some time."></TextBlock>
-    </Grid>
-
-    <Grid x:Name="ContentPanel" Visibility="{Binding ContentPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Grid.Row="1" Margin="12,0,12,0">
-      <Grid.RowDefinitions>
-        <RowDefinition/>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-      </Grid.RowDefinitions>
-      <Image VerticalAlignment="Stretch" Grid.Row="0" Name="ImageProjectScreenshot" Source="{Binding ScreenshotImageSource, Converter={StaticResource NoScreenshotConverter}}"></Image>
-      <CheckBox Grid.Row="1" Name="CheckBoxMakeActive" IsChecked="{Binding CheckBoxMakeActiveIsChecked}">Make new Project active</CheckBox>
-    </Grid>
+    <StackPanel Grid.Row="1">
+      <Grid x:Name="LoadingPanel" Visibility="{Binding LoadingPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,170">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ProgressBar Grid.Row="0" Name="ProgressBarLoading" IsIndeterminate="{Binding ProgressBarLoadingIsIndeterminate}"></ProgressBar>
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" 
+                   Text="Please wait while we try to load the new project. This can take some time."></TextBlock>
+      </Grid>
+      <Grid x:Name="ErrorPanel" Background="Red" Visibility="{Binding ErrorPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,170">
+        <StackPanel>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" 
+                   Text="Sorry!  The project is not valid or it's version is not compatible to the current version of this IDE."></TextBlock>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" 
+                   Text="Please look for updates in your Windows Phone store."></TextBlock>
+        </StackPanel>
+      </Grid>
+      <Grid x:Name="ContentPanel" Visibility="{Binding ContentPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,0">
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Image VerticalAlignment="Stretch" Grid.Row="0" Name="ImageProjectScreenshot" Source="{Binding ScreenshotImageSource, Converter={StaticResource NoScreenshotConverter}}"></Image>
+        <CheckBox Grid.Row="1" Name="CheckBoxMakeActive" IsChecked="{Binding CheckBoxMakeActiveIsChecked}">Make new Project active</CheckBox>
+      </Grid>
+    </StackPanel>
 
     <i:Interaction.Triggers>
       <abu:StateChangedTrigger State="false">

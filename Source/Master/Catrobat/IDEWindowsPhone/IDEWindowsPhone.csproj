@@ -623,11 +623,11 @@
     <Content Include="Content\Images\Misc\EditImage.png" />
     <Content Include="Content\Images\Misc\InProcess.png" />
     <Content Include="Content\Images\Screenshot\NoScreenshot.png" />
+    <Content Include="Content\Resources\default.catrobat" />
     <Content Include="Content\Resources\DesignTime\screenshot.png" />
     <Content Include="fmodex_arm.dll" />
     <Content Include="fmodex_x86.dll" />
     <Content Include="italic.spritefont" />
-    <Content Include="Content\Resources\default.catrobat" />
     <Content Include="Content\Resources\default_new.catrobat" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />

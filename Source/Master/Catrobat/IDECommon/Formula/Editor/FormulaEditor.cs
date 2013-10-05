@@ -49,7 +49,7 @@ namespace Catrobat.IDECommon.Formula.Editor
             }
             set
             {
-                    SelectedFormula.FormulaRoot.FormulaTree = value;
+                SelectedFormula.FormulaRoot.FormulaTree = value;
             }
         }
 
@@ -77,7 +77,7 @@ namespace Catrobat.IDECommon.Formula.Editor
 
         private FormulaTree RootNodeOrSelection
         {
-            get 
+            get
             {
                 return HasSelection() ? Selection : RootNode;
             }
@@ -85,7 +85,7 @@ namespace Catrobat.IDECommon.Formula.Editor
             {
                 if (HasSelection())
                 {
-                    
+
                     if (!IsNull(SelectionParent))
                     {
                         SwapChildNode(SelectionParent, Selection, value);
@@ -108,112 +108,37 @@ namespace Catrobat.IDECommon.Formula.Editor
             if (IsNumber(key)) return HandleNumberKey(key);
             if (IsDelete(key)) return HandleDeleteKey();
             if (IsDecimalSeparator(key)) return HandleDecimalSeparatorKey();
-            if (IsPlusOperator(key)) return HandlePlusOperatorKey();
-            if (IsMinusOperator(key)) return HandleMinusOperatorKey();
-            if (IsPreceedingOperator(key)) return HandlePreceedingOperatorKey(key);
-            if (IsRelationalOperator(key)) return HandleRelationalOperatorKey(key);
-            if (IsLogicAnd(key)) return HandleLogicAndKey();
-            if (IsLogicOr(key)) return HandleLogicOrKey();
-            if (IsLogicValue(key)) return HandleLogicValueKey(key);
-            if (IsLogicNot(key)) return HandleLogicNotKey();
+            if (IsGeneralOperator(key)) return HandleGeneralOperatorKey(key);
+            if (IsNegatingOperator(key)) return HandleNegatingOperator(key);
+            if (IsLogicValue(key)) return HandleRightSubordinatingKey(key);
             if (IsOpenBracket(key)) return HandleOpenBracketKey();
             if (IsClosedBracket(key)) return HandleClosedBracketKey();
+            if (IsFunction(key)) return HandleRightSubordinatingKey(key);
             return false;
-            #region Old Code
-            //if (_selectedFormulaInfo.SelectedFormula == null &&
-            //    _selectedFormulaInfo.FormulaRoot.FormulaTree != null &&
-            //    _selectedFormulaInfo.FormulaRoot.FormulaTree.VariableType == "NUMBER")
-            //{
-            //    var digitString = GetKeyPressed(key);
-            //    bool isDecimalSeperator = key == FormulaEditorKey.NumberDot;
-            //    bool isDelete = key == FormulaEditorKey.KeyDelete;
+        }
 
-            //    if (digitString != null || isDecimalSeperator || isDelete)
-            //    {
-            //        SelectedFormula.SelectedFormula = _selectedFormulaInfo.FormulaRoot.FormulaTree;
-            //    }
-            //}
+        public bool SensorVariableSelected(SensorVariable variable)
+        {
+            var node = DefaultNode(variable);
+            return HandleRightSubordinatingNode(node);
+        }
 
+        public bool ObjectVariableSelected(ObjectVariable variable)
+        {
+            var node = DefaultNode(variable);
+            return HandleRightSubordinatingNode(node);
+        }
 
-            //if (_selectedFormulaInfo.SelectedFormula == null &&
-            //    _selectedFormulaInfo.FormulaRoot.FormulaTree.RightChild != null &&
-            //    _selectedFormulaInfo.FormulaRoot.FormulaTree.RightChild.VariableType == "NUMBER")
-            //{
-            //    var digitString = GetKeyPressed(key);
-            //    bool isDecimalSeperator = key == FormulaEditorKey.NumberDot;
-            //    bool isDelete = key == FormulaEditorKey.KeyDelete;
+        public bool GlobalVariableSelected(UserVariable variable)
+        {
+            var node = FormulaDefaultValueCreater.GetDefaultValueForGlobalVariable(variable);
+            return HandleRightSubordinatingNode(node);
+        }
 
-            //    if (digitString != null || isDecimalSeperator || isDelete)
-            //    {
-            //        SelectedFormula.SelectedFormula = _selectedFormulaInfo.FormulaRoot.FormulaTree.RightChild;
-            //        SelectedFormula.SelectedFormulaParent = _selectedFormulaInfo.FormulaRoot.FormulaTree;
-            //    }
-            //}
-
-
-            //if (_selectedFormulaInfo.SelectedFormula != null)
-            //{
-            //    if (_selectedFormulaInfo.SelectedFormula.VariableType == "NUMBER")
-            //    {
-            //        var digitString = GetKeyPressed(key);
-            //        bool isDecimalSeperator = key == FormulaEditorKey.NumberDot;
-            //        bool isDelete = key == FormulaEditorKey.KeyDelete;
-
-
-            //        if (digitString != null || isDecimalSeperator || isDelete)
-            //        {
-            //            isKeyValid = NumberSelectedAndNumberKeyPressed(_selectedFormulaInfo, digitString,
-            //                isDecimalSeperator, isDelete);
-            //            handled = true;
-            //        }
-            //    }
-
-            //    if (!handled)
-            //    {
-            //        if (_selectedFormulaInfo.SelectedFormulaParent != null)
-            //        {
-            //            var newChild = FormulaDefaultValueCreater.GetDefaultValueForKey(key);
-
-            //            if (_selectedFormulaInfo.SelectedFormulaParent.LeftChild == _selectedFormulaInfo.SelectedFormula)
-            //                _selectedFormulaInfo.SelectedFormulaParent.LeftChild = newChild;
-            //            else
-            //                _selectedFormulaInfo.SelectedFormulaParent.RightChild = newChild;
-
-            //            isKeyValid = true;
-            //        }
-            //        else
-            //        {
-            //            var newRoot = FormulaDefaultValueCreater.GetDefaultValueForKey(key);
-            //            _selectedFormulaInfo.FormulaRoot.FormulaTree = newRoot;
-            //            isKeyValid = true;
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    if (IsLogicFormula(key))
-            //    {
-            //        var newRoot = FormulaDefaultValueCreater.GetDefaultValueForKey(key);
-            //        newRoot.LeftChild = _selectedFormulaInfo.FormulaRoot.FormulaTree;
-            //        //newRoot.RightChild = new FormulaTree
-            //        //{
-            //        //    VariableType = "#EMPTY#",
-            //        //    VariableValue = ""
-            //        //};
-            //        _selectedFormulaInfo.FormulaRoot.FormulaTree = newRoot;
-            //    }
-            //    else
-            //    {
-            //        if (_selectedFormulaInfo.FormulaRoot.FormulaTree.RightChild == null)
-            //        {
-            //            var newChild = FormulaDefaultValueCreater.GetDefaultValueForKey(key);
-            //            _selectedFormulaInfo.FormulaRoot.FormulaTree.RightChild = newChild;
-            //        }
-            //    }
-            //}
-            //return isKeyValid;
-            #endregion
-            
+        public bool LocalVariableSelected(UserVariable variable)
+        {
+            var node = FormulaDefaultValueCreater.GetDefaultValueForLocalVariable(variable);
+            return HandleRightSubordinatingNode(node);
         }
 
 
@@ -252,31 +177,6 @@ namespace Catrobat.IDECommon.Formula.Editor
 
         private bool HandleDeleteKey()
         {
-            //if (HasSelection())
-            //{
-            //    if (IsSignedNumber(Selection) || IsLogicNot(Selection))
-            //    {
-            //        if (IsNull(SelectionParent))
-            //        {
-            //            RootNode = Selection.RightChild;
-            //        }
-            //        else
-            //        {
-            //            SwapChildNode(SelectionParent, Selection, Selection.RightChild);
-            //        }
-            //        return true;
-            //    }
-            //    if (IsNumber(Selection))
-            //    {
-            //        DeleteDigit(Selection);
-            //        if (IsEmpty(Selection))
-            //        {
-            //            Selection.VariableValue = "0";
-            //        }
-            //        return true;
-            //    }
-            //    return false;
-            //}
             var rightmostClosedBracket = GetRightmostClosedBracket();
             if (!IsNull(rightmostClosedBracket))
             {
@@ -286,15 +186,21 @@ namespace Catrobat.IDECommon.Formula.Editor
             var formulaToChange = GetRightmostNode();
             if (IsNull(formulaToChange))
             {
-                formulaToChange = RootNodeOrSelection;
-                if (IsOpenBracket(formulaToChange))
+                var rightmostOpenBracket = GetRightmostOpenBracket();
+                if (!IsNull(rightmostOpenBracket))
                 {
-                    ReplaceNode(formulaToChange, DefaultNode(FormulaEditorKey.Number0));
+                    Extract(rightmostOpenBracket);
                     return true;
                 }
-                return false;
+                //formulaToChange = RootNodeOrSelection;
+                //if (IsOpenBracket(formulaToChange))
+                //{
+                //    ReplaceNode(formulaToChange, DefaultNode(FormulaEditorKey.Number0));
+                //    return true;
+                //}
+                //return false;
             }
-            if (IsEmpty(formulaToChange))
+            if (IsTerminalZero(formulaToChange))
             {
                 return false;
             }
@@ -303,17 +209,34 @@ namespace Catrobat.IDECommon.Formula.Editor
                 DeleteDigit(formulaToChange);
                 if (IsEmpty(formulaToChange))
                 {
-                    Extract();
+                    Extract(formulaToChange);
                 }
                 return true;
             }
-            Extract();
+            if (IsFunction(formulaToChange))
+            {
+                formulaToChange.LeftChild = null;
+                formulaToChange.RightChild = null;
+                Extract(formulaToChange);
+                return true;
+            }
+            Extract(formulaToChange);
             return true;
         }
 
         private bool HandleDecimalSeparatorKey()
         {
             var formulaToChange = GetRightmostNode();
+            if (IsNull(formulaToChange))
+            {
+                var rightmostOpenBracket = GetRightmostOpenBracket();
+                if (!IsNull(rightmostOpenBracket))
+                {
+                    Subordinate(rightmostOpenBracket, FormulaEditorKey.NumberDot);
+                    return true;
+                }
+                return false;
+            }
             if (IsOperator(formulaToChange))
             {
                 formulaToChange.RightChild = DefaultNode(FormulaEditorKey.NumberDot);
@@ -331,189 +254,6 @@ namespace Catrobat.IDECommon.Formula.Editor
             }
             formulaToChange.VariableValue += ".";
             return true;
-        }
-
-        private bool HandlePlusOperatorKey()
-        {
-            //if (HasSelection())
-            //{
-            //    if (!IsOperator(Selection)) return false;
-            //    if (IsSignedNumber(Selection)) return false;
-            //    ReplaceNodeAndReorderTree(FormulaEditorKey.KeyPlus);
-            //    return true;
-            //}
-            var formulaToChange = RootNode;
-            if (IsNull(formulaToChange) || IsEmpty(formulaToChange))
-            {
-                return false;
-            }
-            if (IsOperator(GetRightmostNode())) return false;
-            AddOperatorNode(FormulaEditorKey.KeyPlus);
-            return true;
-        }
-
-        private bool HandleMinusOperatorKey()
-        {
-
-            //if (HasSelection())
-            //{
-            //    if (IsNumber(Selection))
-            //    {
-            //        return NegateSelectedNumber();
-            //    }
-            //    if (IsOperator(Selection))
-            //    {
-            //        if (IsSignedNumber(Selection)) return true;
-            //        ReplaceNodeAndReorderTree(FormulaEditorKey.KeyMinus);
-            //        return true;
-            //    }
-            //    return false;
-            //}
-            var rightmostNode = GetRightmostNode();
-            if (IsTerminalZero(rightmostNode))
-            {
-                ReplaceNode(rightmostNode, DefaultNode(FormulaEditorKey.KeyMinus));
-                return true;
-            }
-            if (IsOperator(rightmostNode))
-            {
-                if (IsNull(rightmostNode.LeftChild)) return false;
-                Subordinate(rightmostNode,FormulaEditorKey.KeyMinus);
-                return true;
-            }
-            var formulaToChange = RootNode;
-            if (IsNull(formulaToChange) || IsEmpty(formulaToChange))
-            {
-                RootNode = DefaultNode(FormulaEditorKey.KeyMinus);
-                return true;
-            }
-            AddOperatorNode(FormulaEditorKey.KeyMinus);
-            return true;
-        }
-
-        private bool HandlePreceedingOperatorKey(FormulaEditorKey key)
-        {
-            //if (HasSelection())
-            //{
-            //    if (!IsOperator(Selection)) return false;
-            //    if (IsSignedNumber(Selection)) return false;
-            //    ReplaceNodeAndReorderTree(key);
-            //    return true;
-            //}
-            var formulaToChange = GetRightmostNode();
-            if (IsNumber(formulaToChange))
-            {
-                AddOperatorNode(key);
-                return true;
-            }
-            if (IsLogicValue(formulaToChange))
-            {
-                AddOperatorNode(key);
-                return true;
-            }
-            return false;
-        }
-
-        private bool HandleRelationalOperatorKey(FormulaEditorKey key)
-        {
-            //if (HasSelection())
-            //{
-            //    if (!IsOperator(Selection)) return false;
-            //    if (IsSignedNumber(Selection)) return false;
-            //    ReplaceNodeAndReorderTree(key);
-            //    return true;
-            //}
-            if (IsNull(RootNode) || IsEmpty(RootNode)) return false;
-            if (IsOperator(GetRightmostNode())) return false;
-            AddOperatorNode(key);
-            return true;
-        }
-
-        private bool HandleLogicAndKey()
-        {
-            //if (HasSelection())
-            //{
-            //    if (!IsOperator(Selection)) return false;
-            //    if (IsSignedNumber(Selection)) return false;
-            //    ReplaceNodeAndReorderTree(FormulaEditorKey.KeyLogicAnd);
-            //    return true;
-            //}
-            if (IsNull(EffectiveRootNode) || IsEmpty(EffectiveRootNode)) return false;
-            if (IsOperator(GetRightmostNode())) return false;
-            AddOperatorNode(FormulaEditorKey.KeyLogicAnd);
-            return true;
-        }
-
-        private bool HandleLogicOrKey()
-        {
-            //if (HasSelection())
-            //{
-            //    if (!IsOperator(Selection)) return false;
-            //    if (IsSignedNumber(Selection)) return false;
-            //    ReplaceNodeAndReorderTree(FormulaEditorKey.KeyLogicOr);
-            //    return true;
-            //}
-            if (IsNull(EffectiveRootNode) || IsEmpty(EffectiveRootNode)) return false;
-            if (IsOperator(GetRightmostNode())) return false;
-            AddOperatorNode(FormulaEditorKey.KeyLogicOr);
-            return true;
-        }
-
-        private bool HandleLogicValueKey(FormulaEditorKey key)
-        {
-            //if (HasSelection())
-            //{
-            //    if (!IsLogicValue(Selection)) return false;
-            //    //ReplaceNodeAndReorderTree(key);
-            //    RewriteNode(Selection, key);
-            //    return true;
-            //}
-            var formulaToChange = GetRightmostNode();
-            if (IsTerminalZero(formulaToChange))
-            {
-                ReplaceNode(formulaToChange, DefaultNode(key));
-                return true;
-            }
-            if (IsNull(formulaToChange) || IsEmpty(formulaToChange))
-            {
-                RootNode = DefaultNode(key);
-                return true;
-            }
-            if (IsOperator(formulaToChange))
-            {
-                formulaToChange.RightChild = DefaultNode(key);
-                return true;
-            }
-            return false;
-        }
-
-        private bool HandleLogicNotKey()
-        {
-            //if (HasSelection())
-            //{
-            //    if (!IsLogicValue(Selection)) return false;
-            //    if (IsLogicNot(SelectionParent)) return false;
-            //    NegateSelectedLogicValue();
-            //    return true;
-            //}
-            var formulaToChange = GetRightmostNode();
-            if (IsTerminalZero(formulaToChange))
-            {
-                ReplaceNode(formulaToChange, DefaultNode(FormulaEditorKey.KeyLogicNot));
-                return true;
-            }
-            if (IsNull(formulaToChange) || IsEmpty(formulaToChange))
-            {
-                RootNode = DefaultNode(FormulaEditorKey.KeyLogicNot);
-                return true;
-            }
-            if (IsOperator(formulaToChange))
-            {
-                if (IsNull(formulaToChange.LeftChild)) return false;
-                Subordinate(formulaToChange, FormulaEditorKey.KeyLogicNot);
-                return true;
-            }
-            return false;
         }
 
         private bool HandleOpenBracketKey()
@@ -541,13 +281,71 @@ namespace Catrobat.IDECommon.Formula.Editor
         {
             var node = GetRightmostOpenBracket();
             if (IsNull(node)) return false;
+            if (IsNull(node.RightChild)) return false;
             CloseBracket(node);
-            //node.VariableValue = "";
+            return true;
+        }
+
+        private bool HandleRightSubordinatingKey(FormulaEditorKey key)
+        {
+            return HandleRightSubordinatingNode(DefaultNode(key));
+        }
+
+        private bool HandleRightSubordinatingNode(FormulaTree node)
+        {
+            var formulaToChange = GetRightmostNode();
+            if (IsNull(formulaToChange) || IsEmpty(formulaToChange))
+            {
+                EffectiveRootNode = node;
+                return true;
+            }
+            if (IsTerminalZero(formulaToChange))
+            {
+                ReplaceNode(formulaToChange, node);
+                return true;
+            }
+            if (IsOperator(formulaToChange))
+            {
+                formulaToChange.RightChild = node;
+                return true;
+            }
+            return false;
+        }
+
+        private bool HandleGeneralOperatorKey(FormulaEditorKey key)
+        {
+            if (IsNull(RootNode) || IsEmpty(RootNode)) return false;
+            if (IsOperator(GetRightmostNode())) return false;
+            AddOperatorNode(key);
+            return true;
+        }
+
+        private bool HandleNegatingOperator(FormulaEditorKey key)
+        {
+            var rightmostNode = GetRightmostNode();
+            if (IsTerminalZero(rightmostNode))
+            {
+                ReplaceNode(rightmostNode, DefaultNode(key));
+                return true;
+            }
+            if (IsOperator(rightmostNode))
+            {
+                if (IsNull(rightmostNode.LeftChild)) return false;
+                Subordinate(rightmostNode, key);
+                return true;
+            }
+            var formulaToChange = RootNode;
+            if (IsNull(formulaToChange) || IsEmpty(formulaToChange))
+            {
+                RootNode = DefaultNode(key);
+                return true;
+            }
+            if (key == FormulaEditorKey.KeyLogicNot) return false;
+            AddOperatorNode(key);
             return true;
         }
 
         #endregion
-
 
         #region Type Checks
 
@@ -691,16 +489,16 @@ namespace Catrobat.IDECommon.Formula.Editor
             return node == null;
         }
 
-        private static bool IsMinus(FormulaTree node)
+        private static bool IsMinusOperator(FormulaTree node)
         {
             return node.VariableValue == "MINUS";
         }
 
         private static bool IsSignedNumber(FormulaTree node)
         {
-            return IsMinus(node) 
-                && IsNull(node.LeftChild) 
-                && !IsNull(node.RightChild) 
+            return IsMinusOperator(node)
+                && IsNull(node.LeftChild)
+                && !IsNull(node.RightChild)
                 && IsNumber(node.RightChild);
         }
 
@@ -735,11 +533,6 @@ namespace Catrobat.IDECommon.Formula.Editor
             return key == FormulaEditorKey.KeyLogicNot;
         }
 
-        private static bool IsLogicNot(FormulaTree node)
-        {
-            return node.VariableValue == "NOT";
-        }
-
         private static bool IsOpenBracket(FormulaEditorKey key)
         {
             return key == FormulaEditorKey.KeyOpenBrecket;
@@ -764,7 +557,6 @@ namespace Catrobat.IDECommon.Formula.Editor
         {
             if (node.VariableType != "NUMBER") return false;
             if (node.VariableValue != "0") return false;
-            //if (RootNodeOrSelection != node) return false;
             if (!IsTerminalNode(node)) return false;
             return true;
         }
@@ -777,6 +569,86 @@ namespace Catrobat.IDECommon.Formula.Editor
             return true;
         }
 
+        private static bool IsUnaryFunction(FormulaEditorKey key)
+        {
+            switch (key)
+            {
+                case FormulaEditorKey.KeyMathSin:
+                    return true;
+                case FormulaEditorKey.KeyMathCos:
+                    return true;
+                case FormulaEditorKey.KeyMathTan:
+                    return true;
+                case FormulaEditorKey.KeyMathLn:
+                    return true;
+                case FormulaEditorKey.KeyMathLog:
+                    return true;
+                case FormulaEditorKey.KeyMathSqrt:
+                    return true;
+                case FormulaEditorKey.KeyMathAbs:
+                    return true;
+                case FormulaEditorKey.KeyMathRound:
+                    return true;
+                case FormulaEditorKey.KeyMathArcSin:
+                    return true;
+                case FormulaEditorKey.KeyMathArcCos:
+                    return true;
+                case FormulaEditorKey.KeyMathArcTan:
+                    return true;
+                case FormulaEditorKey.KeyMathExp:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        private static bool IsFunction(FormulaTree node)
+        {
+            return node.VariableType == "FUNCTION";
+        }
+
+        private static bool IsFunction(FormulaEditorKey key)
+        {
+            return IsUnaryFunction(key) || IsBinaryFunction(key) || IsLiteralFunction(key);
+        }
+
+        private static bool IsBinaryFunction(FormulaEditorKey key)
+        {
+            switch (key)
+            {
+                case FormulaEditorKey.KeyMathRandom:
+                    return true;
+                case FormulaEditorKey.KeyMathMod:
+                    return true;
+                case FormulaEditorKey.KeyMathMax:
+                    return true;
+                case FormulaEditorKey.KeyMathMin:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        private static bool IsLiteralFunction(FormulaEditorKey key)
+        {
+            return key == FormulaEditorKey.KeyMathPi;
+        }
+
+        private static bool IsGeneralOperator(FormulaEditorKey key)
+        {
+            if (IsPlusOperator(key)) return true;
+            if (IsPreceedingOperator(key)) return true;
+            if (IsRelationalOperator(key)) return true;
+            if (IsLogicAnd(key)) return true;
+            if (IsLogicOr(key)) return true;
+            return false;
+        }
+
+        private static bool IsNegatingOperator(FormulaEditorKey key)
+        {
+            return IsMinusOperator(key) || IsLogicNot(key);
+        }
+
         #endregion
 
 
@@ -786,20 +658,8 @@ namespace Catrobat.IDECommon.Formula.Editor
         {
             var node = EffectiveRootNode;
             if (IsNull(node)) return null;
-            while (node.RightChild != null) node = node.RightChild;
+            while ((!IsNull(node.RightChild)) && (!IsFunction(node))) node = node.RightChild;
             return node;
-        }
-
-        private FormulaTree GetParentOfRightmostNode()
-        {
-            var node = RootNode;
-            var oldNode = node;
-            while (node.RightChild != null)
-            {
-                oldNode = node;
-                node = node.RightChild;
-            }
-            return node == oldNode ? null : oldNode;
         }
 
         private FormulaTree GetRightmostSuperiorNode(FormulaEditorKey key)
@@ -812,16 +672,6 @@ namespace Catrobat.IDECommon.Formula.Editor
             return node;
         }
 
-        private List<FormulaTree> DepthFirstSearchLeft(FormulaTree node)
-        {
-            return DepthFirstSearchLeft(RootNode, node, new List<FormulaTree>());
-        }
-
-        private static List<FormulaTree> DepthFirstSearchLeft(FormulaTree node, FormulaTree expectedNode, List<FormulaTree> path)
-        {
-            return DepthFirstSearch(node, expectedNode, path);
-        }
-
         private static List<FormulaTree> DepthFirstSearch(FormulaTree node, FormulaTree expectedNode, List<FormulaTree> path)
         {
             if (node == expectedNode)
@@ -829,8 +679,6 @@ namespace Catrobat.IDECommon.Formula.Editor
                 path.Add(node);
                 return path;
             }
-            //var firstNode = leftNodeFirst ? node.LeftChild : node.RightChild;
-            //var secondNode = leftNodeFirst ? node.RightChild : node.LeftChild;
             var firstNode = node.LeftChild;
             var secondNode = node.RightChild;
             if (!IsNull(firstNode))
@@ -854,33 +702,14 @@ namespace Catrobat.IDECommon.Formula.Editor
             return null;
         }
 
-        private static FormulaTree GetMiddleChild(FormulaTree node, FormulaTree parentNode)
+        private List<FormulaTree> DepthFirstSearch(FormulaTree node)
         {
-            if (node == parentNode.LeftChild) return node.RightChild;
-            if (node == parentNode.RightChild) return node.LeftChild;
-            return null;
-        }
-
-        private static FormulaTree GetChildToRotateDown(FormulaTree node)
-        {
-            var parentPriority = GetNodePriority(node);
-            if (!IsNull(node.LeftChild))
-            {
-                var childPriority = GetNodePriority(node.LeftChild);
-                if (childPriority > parentPriority) return node.LeftChild;
-            }
-            if (!IsNull(node.RightChild))
-            {
-                var childPriority = GetNodePriority(node.RightChild);
-                if (childPriority > parentPriority) return node.RightChild;
-                if (childPriority == parentPriority) return node.RightChild;
-            }
-            return null;
+            return DepthFirstSearch(RootNode, node, new List<FormulaTree>());
         }
 
         private FormulaTree GetRightmostOpenBracket()
         {
-            var node = RootNode;
+            var node = RootNodeOrSelection;
             FormulaTree openBracketNode = null;
             while (!IsNull(node))
             {
@@ -895,21 +724,21 @@ namespace Catrobat.IDECommon.Formula.Editor
 
         private FormulaTree GetRightmostClosedBracket()
         {
-            var node = RootNode;
-            FormulaTree closedBracketNode = null;
+            var node = RootNodeOrSelection;
+            //FormulaTree closedBracketNode = null;
             while (!IsNull(node))
             {
                 if (IsClosedBracket(node))
                 {
-                    closedBracketNode = node;
+                    //closedBracketNode = node;
+                    return node;
                 }
                 node = node.RightChild;
             }
-            return closedBracketNode;
+            return null;
         }
 
         #endregion
-
 
         #region Tree Operations
 
@@ -938,18 +767,20 @@ namespace Catrobat.IDECommon.Formula.Editor
             node.RightChild.LeftChild = childNode;
         }
 
-        private void Extract()
+        private void Extract(FormulaTree node)
         {
-            
-            var formulaToChange = GetRightmostNode();
-            if (IsNull(formulaToChange)) return;
-            if (IsTerminalNode(formulaToChange))
+            if (IsTerminalNode(node))
             {
-                ReplaceNode(formulaToChange, DefaultNode(FormulaEditorKey.Number0));
+                ReplaceNode(node, DefaultNode(FormulaEditorKey.Number0));
                 return;
             }
-            var replacementNode = formulaToChange.LeftChild;
-            var parentNode = GetParentOfRightmostNode();
+            var replacementNode = node.LeftChild;
+            var path = DepthFirstSearch(node);
+            FormulaTree parentNode = null;
+            if (path.Count > 1)
+            {
+                parentNode = path.ElementAt(1);
+            }
             if (IsNull(parentNode))
             {
                 RootNodeOrSelection = replacementNode;
@@ -960,53 +791,53 @@ namespace Catrobat.IDECommon.Formula.Editor
             }
         }
 
-        private void RotateUp(FormulaTree node)
-        {
-            var pathToNode = DepthFirstSearchLeft(node);
-            while (pathToNode.Count > 1)
-            {
-                var upwardNode = pathToNode.ElementAt(0);
-                var downwardNode = pathToNode.ElementAt(1);
-                if (!ShouldRotateUp(upwardNode, downwardNode)) return;
-                var middleChild = GetMiddleChild(upwardNode, downwardNode);
+        //private void RotateUp(FormulaTree node)
+        //{
+        //    var pathToNode = DepthFirstSearchLeft(node);
+        //    while (pathToNode.Count > 1)
+        //    {
+        //        var upwardNode = pathToNode.ElementAt(0);
+        //        var downwardNode = pathToNode.ElementAt(1);
+        //        if (!ShouldRotateUp(upwardNode, downwardNode)) return;
+        //        var middleChild = GetMiddleChild(upwardNode, downwardNode);
 
-                if (pathToNode.Count < 3)
-                {
-                    RootNode = upwardNode;
-                }
-                else
-                {
-                    var parentNode = pathToNode.ElementAt(2);
-                    SwapChildNode(parentNode, downwardNode, upwardNode);
-                }
-                SwapChildNode(downwardNode,upwardNode,middleChild);
-                SwapChildNode(upwardNode,middleChild,downwardNode);
-                pathToNode.RemoveAt(1);
-            }
-        }
+        //        if (pathToNode.Count < 3)
+        //        {
+        //            RootNode = upwardNode;
+        //        }
+        //        else
+        //        {
+        //            var parentNode = pathToNode.ElementAt(2);
+        //            SwapChildNode(parentNode, downwardNode, upwardNode);
+        //        }
+        //        SwapChildNode(downwardNode, upwardNode, middleChild);
+        //        SwapChildNode(upwardNode, middleChild, downwardNode);
+        //        pathToNode.RemoveAt(1);
+        //    }
+        //}
 
-        private bool RotateDown(FormulaTree downwardNode, FormulaTree parentNode)
-        {
-            var hasRotated = false;
-            while (true)
-            {
-                var upwardNode = GetChildToRotateDown(downwardNode);
-                if (IsNull(upwardNode)) return hasRotated;
-                var middleChild = GetMiddleChild(upwardNode, downwardNode);
-                if (IsNull(parentNode))
-                {
-                    RootNode = upwardNode;
-                }
-                else
-                {
-                    SwapChildNode(parentNode, downwardNode, upwardNode);
-                }
-                SwapChildNode(downwardNode, upwardNode, middleChild);
-                SwapChildNode(upwardNode, middleChild, downwardNode);
-                parentNode = upwardNode;
-                hasRotated = true;
-            }
-        }
+        //private bool RotateDown(FormulaTree downwardNode, FormulaTree parentNode)
+        //{
+        //    var hasRotated = false;
+        //    while (true)
+        //    {
+        //        var upwardNode = GetChildToRotateDown(downwardNode);
+        //        if (IsNull(upwardNode)) return hasRotated;
+        //        var middleChild = GetMiddleChild(upwardNode, downwardNode);
+        //        if (IsNull(parentNode))
+        //        {
+        //            RootNode = upwardNode;
+        //        }
+        //        else
+        //        {
+        //            SwapChildNode(parentNode, downwardNode, upwardNode);
+        //        }
+        //        SwapChildNode(downwardNode, upwardNode, middleChild);
+        //        SwapChildNode(upwardNode, middleChild, downwardNode);
+        //        parentNode = upwardNode;
+        //        hasRotated = true;
+        //    }
+        //}
 
         private static void SwapChildNode(FormulaTree node, FormulaTree oldChildNode, FormulaTree newChildNode)
         {
@@ -1014,14 +845,14 @@ namespace Catrobat.IDECommon.Formula.Editor
             if (oldChildNode == node.RightChild) node.RightChild = newChildNode;
         }
 
-        private void ReplaceNodeAndReorderTree(FormulaEditorKey key)
-        {
-            RewriteNode(Selection, key);
-            if (RotateDown(Selection, SelectionParent)) return;
-            RotateUp(Selection);
-        }
+        //private void ReplaceNodeAndReorderTree(FormulaEditorKey key)
+        //{
+        //    RewriteNode(Selection, key);
+        //    if (RotateDown(Selection, SelectionParent)) return;
+        //    RotateUp(Selection);
+        //}
 
-        private void ReplaceNode(FormulaTree oldNode, FormulaTree newNode)
+        private static void ReplaceNode(FormulaTree oldNode, FormulaTree newNode)
         {
             oldNode.VariableType = newNode.VariableType;
             oldNode.VariableValue = newNode.VariableValue;
@@ -1029,35 +860,35 @@ namespace Catrobat.IDECommon.Formula.Editor
             oldNode.RightChild = newNode.RightChild;
         }
 
-        private bool NegateSelectedNumber()
-        {
-            var newNode = DefaultNode(FormulaEditorKey.KeyMinus);
-            if (IsNull(SelectionParent))
-            {
-                RootNode = newNode;
-            }
-            else
-            {
-                if (IsSignedNumber(SelectionParent)) return false;
-                SwapChildNode(SelectionParent, Selection, newNode);
-            }
-            newNode.RightChild = Selection;
-            return true;
-        }
-        private bool NegateSelectedLogicValue()
-        {
-            var newNode = DefaultNode(FormulaEditorKey.KeyLogicNot);
-            if (IsNull(SelectionParent))
-            {
-                RootNode = newNode;
-            }
-            else
-            {
-                SwapChildNode(SelectionParent, Selection, newNode);
-            }
-            newNode.RightChild = Selection;
-            return true;
-        }
+        //private bool NegateSelectedNumber()
+        //{
+        //    var newNode = DefaultNode(FormulaEditorKey.KeyMinus);
+        //    if (IsNull(SelectionParent))
+        //    {
+        //        RootNode = newNode;
+        //    }
+        //    else
+        //    {
+        //        if (IsSignedNumber(SelectionParent)) return false;
+        //        SwapChildNode(SelectionParent, Selection, newNode);
+        //    }
+        //    newNode.RightChild = Selection;
+        //    return true;
+        //}
+        //private bool NegateSelectedLogicValue()
+        //{
+        //    var newNode = DefaultNode(FormulaEditorKey.KeyLogicNot);
+        //    if (IsNull(SelectionParent))
+        //    {
+        //        RootNode = newNode;
+        //    }
+        //    else
+        //    {
+        //        SwapChildNode(SelectionParent, Selection, newNode);
+        //    }
+        //    newNode.RightChild = Selection;
+        //    return true;
+        //}
 
         private void AddOperatorNode(FormulaEditorKey key)
         {
@@ -1070,13 +901,13 @@ namespace Catrobat.IDECommon.Formula.Editor
             Subordinate(parentNode, key);
         }
 
-        private void CloseBracket(FormulaTree node)
+        private static void CloseBracket(FormulaTree node)
         {
             if (!IsOpenBracket(node)) return;
             node.VariableValue = "";
         }
 
-        private void OpenBracket(FormulaTree node)
+        private static void OpenBracket(FormulaTree node)
         {
             if (!IsClosedBracket(node)) return;
             node.VariableValue = "OPEN";
@@ -1087,19 +918,24 @@ namespace Catrobat.IDECommon.Formula.Editor
 
         #region Some Short Helper Methods
 
-        //private FormulaTree GetFormulaToChange(FormulaTree standardFormula)
-        //{
-        //    return HasSelection() ? Selection : standardFormula;
-        //}
-
         private bool HasSelection()
         {
-            return Selection != null;
+            return !IsNull(Selection);
         }
 
         private static FormulaTree DefaultNode(FormulaEditorKey key)
         {
             return FormulaDefaultValueCreater.GetDefaultValueForKey(key);
+        }
+
+        private static FormulaTree DefaultNode(SensorVariable variable)
+        {
+            return FormulaDefaultValueCreater.GetDefaultValueForSensorVariable(variable);
+        }
+
+        private static FormulaTree DefaultNode(ObjectVariable variable)
+        {
+            return FormulaDefaultValueCreater.GetDefaultValueForObjectVariable(variable);
         }
 
         private static string GetKeyPressed(FormulaEditorKey key)
@@ -1143,15 +979,6 @@ namespace Catrobat.IDECommon.Formula.Editor
             return -1;
         }
 
-        private static bool ShouldRotateUp(FormulaTree upwardNode, FormulaTree downwardNode)
-        {
-            var upwardNodePriority = GetNodePriority(upwardNode);
-            var downwardNodePriority = GetNodePriority(downwardNode);
-            if (upwardNodePriority > downwardNodePriority) return true;
-            if (upwardNodePriority < downwardNodePriority) return false;
-            return upwardNode != downwardNode.LeftChild;
-        }
-
         private static void DeleteDigit(FormulaTree node)
         {
             var length = node.VariableValue.Length;
@@ -1160,143 +987,5 @@ namespace Catrobat.IDECommon.Formula.Editor
 
         #endregion
 
-
-
-
-#region Old code II
-
-        public bool SensorVariableSelected(SensorVariable variable)
-        {
-            return false;
-        }
-
-        public bool ObjectVariableSelected(ObjectVariable variable)
-        {
-            return false;
-        }
-
-        public bool GlobalVariableSelected(UserVariable variable)
-        {
-            return false;
-        }
-
-        public bool LocalVariableSelected(UserVariable variable)
-        {
-            return false;
-        }
-
-        //private bool NumberSelectedAndNumberKeyPressed(SelectedFormulaInformation selectedFormulaInfo, string digitString, bool isDelete, bool isDecimalSeperator)
-        //{
-        //    bool isValid = false;
-
-        //    var oldVariableValue = selectedFormulaInfo.SelectedFormula.VariableValue;
-
-
-        //    if (digitString != null)
-        //    {
-        //        if (selectedFormulaInfo.SelectedFormula.VariableValue == "0")
-        //            selectedFormulaInfo.SelectedFormula.VariableValue = "";
-
-        //        selectedFormulaInfo.SelectedFormula.VariableValue += digitString;
-        //        isValid = true;
-        //    }
-
-        //    if (isDelete)
-        //    {
-        //        if (!selectedFormulaInfo.SelectedFormula.VariableValue.Contains("."))
-        //        {
-        //            selectedFormulaInfo.SelectedFormula.VariableValue += ".";
-        //            isValid = true;
-        //        }
-        //    }
-
-        //    if (isDecimalSeperator)
-        //    {
-        //        if (oldVariableValue != "")
-        //        {
-        //            selectedFormulaInfo.SelectedFormula.VariableValue = oldVariableValue.Substring(0, oldVariableValue.Length - 1);
-        //            isValid = true;
-        //        }
-        //    }
-
-        //    return isValid;
-        //}
-
-        //public bool SensorVariableSelected(SensorVariable variable)
-        //{
-        //    var newFormula = FormulaDefaultValueCreater.GetDefaultValueForSensorVariable(variable);
-
-        //    if (_selectedFormulaInfo.SelectedFormulaParent != null)
-        //    {
-        //        if (_selectedFormulaInfo.SelectedFormulaParent.LeftChild == _selectedFormulaInfo.SelectedFormula)
-        //            _selectedFormulaInfo.SelectedFormulaParent.LeftChild = newFormula;
-        //        else
-        //            _selectedFormulaInfo.SelectedFormulaParent.RightChild = newFormula;
-        //    }
-        //    else
-        //    {
-        //        _selectedFormulaInfo.FormulaRoot.FormulaTree = newFormula;
-        //    }
-
-        //    return true;
-        //}
-
-        //public bool ObjectVariableSelected(ObjectVariable variable)
-        //{
-        //    var newFormula = FormulaDefaultValueCreater.GetDefaultValueForObjectVariable(variable);
-
-        //    if (_selectedFormulaInfo.SelectedFormulaParent != null)
-        //    {
-        //        if (_selectedFormulaInfo.SelectedFormulaParent.LeftChild == _selectedFormulaInfo.SelectedFormula)
-        //            _selectedFormulaInfo.SelectedFormulaParent.LeftChild = newFormula;
-        //        else
-        //            _selectedFormulaInfo.SelectedFormulaParent.RightChild = newFormula;
-        //    }
-        //    else
-        //    {
-        //        _selectedFormulaInfo.FormulaRoot.FormulaTree = newFormula;
-        //    }
-
-        //    return true;
-        //}
-
-        //public bool GlobalVariableSelected(UserVariable variable)
-        //{
-        //    var newFormula = FormulaDefaultValueCreater.GetDefaultValueForGlobalVariable(variable);
-
-        //    if (_selectedFormulaInfo.SelectedFormulaParent != null)
-        //    {
-        //        if (_selectedFormulaInfo.SelectedFormulaParent.LeftChild == _selectedFormulaInfo.SelectedFormula)
-        //            _selectedFormulaInfo.SelectedFormulaParent.LeftChild = newFormula;
-        //        else
-        //            _selectedFormulaInfo.SelectedFormulaParent.RightChild = newFormula;
-        //    }
-        //    else
-        //    {
-        //        _selectedFormulaInfo.FormulaRoot.FormulaTree = newFormula;
-        //    }
-
-        //    return true;
-        //}
-
-        //public bool LocalVariableSelected(UserVariable variable)
-        //{
-        //    var newFormula = FormulaDefaultValueCreater.GetDefaultValueForLocalVariable(variable);
-
-        //    if (_selectedFormulaInfo.SelectedFormulaParent != null)
-        //    {
-        //        if (_selectedFormulaInfo.SelectedFormulaParent.LeftChild == _selectedFormulaInfo.SelectedFormula)
-        //            _selectedFormulaInfo.SelectedFormulaParent.LeftChild = newFormula;
-        //        else
-        //            _selectedFormulaInfo.SelectedFormulaParent.RightChild = newFormula;
-        //    }
-        //    else
-        //    {
-        //        _selectedFormulaInfo.FormulaRoot.FormulaTree = newFormula;
-        //    }
-
-        //    return true;
-        //}
-#endregion
     }
 }

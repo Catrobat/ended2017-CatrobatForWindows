@@ -73,9 +73,9 @@ namespace Catrobat.Core.Objects
             }
         }
 
-        private float _catrobatLanguageVersion;
+        private string _catrobatLanguageVersion;
 
-        public float CatrobatLanguageVersion
+        public string CatrobatLanguageVersion
         {
             get { return _catrobatLanguageVersion; }
             set
@@ -307,7 +307,7 @@ namespace Catrobat.Core.Objects
                 ApplicationBuildNumber = 0;
                 ApplicationName = "Pocket Code";
                 ApplicationVersion = "0.0.1";
-                CatrobatLanguageVersion = 0.8f;
+                CatrobatLanguageVersion = "Win0.08";
                 DateTimeUpload = "";
                 Description = "";
                 DeviceName = PlatformInformationHelper.DeviceName;
@@ -336,7 +336,7 @@ namespace Catrobat.Core.Objects
             _applicationBuildNumber = int.Parse(xRoot.Element("applicationBuildNumber").Value, CultureInfo.InvariantCulture);
             _applicationName = xRoot.Element("applicationName").Value;
             _applicationVersion = xRoot.Element("applicationVersion").Value;
-            _catrobatLanguageVersion = float.Parse(xRoot.Element("catrobatLanguageVersion").Value, CultureInfo.InvariantCulture);
+            _catrobatLanguageVersion = xRoot.Element("catrobatLanguageVersion").Value;
             _dateTimeUpload = xRoot.Element("dateTimeUpload").Value;
             _description = xRoot.Element("description").Value;
             _deviceName = xRoot.Element("deviceName").Value;
@@ -379,7 +379,7 @@ namespace Catrobat.Core.Objects
 
             xProjectHeader.Add(new XElement("catrobatLanguageVersion")
                 {
-                    Value = _catrobatLanguageVersion.ToString(CultureInfo.InvariantCulture)
+                    Value = _catrobatLanguageVersion
                 });
 
             xProjectHeader.Add(new XElement("dateTimeUpload")
@@ -476,7 +476,7 @@ namespace Catrobat.Core.Objects
                 return false;
             if (ApplicationVersion != otherProjectHeader.ApplicationVersion)
                 return false;
-            if (Math.Abs(CatrobatLanguageVersion - otherProjectHeader.CatrobatLanguageVersion) > 0.01)
+            if (CatrobatLanguageVersion != otherProjectHeader.CatrobatLanguageVersion)
                 return false;
             if (DateTimeUpload != otherProjectHeader.DateTimeUpload)
                 return false;

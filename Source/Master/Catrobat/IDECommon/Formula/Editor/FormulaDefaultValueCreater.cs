@@ -281,7 +281,7 @@ namespace Catrobat.IDECommon.Formula.Editor
                         LeftChild = new FormulaTree
                         {
                             VariableType = "NUMBER",
-                            VariableValue = "0"
+                            VariableValue = "1"
                         }
                     };
                 case FormulaEditorKey.KeyMathLn:
@@ -337,6 +337,11 @@ namespace Catrobat.IDECommon.Formula.Editor
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0"
+                        },
+                        RightChild = new FormulaTree
+                        {
+                            VariableType = "NUMBER",
+                            VariableValue = "1"
                         }
                     };
                 case FormulaEditorKey.KeyMathMin:
@@ -348,6 +353,11 @@ namespace Catrobat.IDECommon.Formula.Editor
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0"
+                        },
+                        RightChild = new FormulaTree
+                        {
+                            VariableType = "NUMBER",
+                            VariableValue = "1"
                         }
                     };
                 case FormulaEditorKey.KeyMathMax:
@@ -359,6 +369,11 @@ namespace Catrobat.IDECommon.Formula.Editor
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0"
+                        },
+                        RightChild = new FormulaTree
+                        {
+                            VariableType = "NUMBER",
+                            VariableValue = "1"
                         }
                     };
                 case FormulaEditorKey.KeyMathSqrt:

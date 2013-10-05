@@ -915,4 +915,55 @@
   <data name="Formula_Plus" xml:space="preserve">
     <value>+</value>
   </data>
+  <data name="Formula_FunctionAbs" xml:space="preserve">
+    <value>abs</value>
+  </data>
+  <data name="Formula_FunctionArcCos" xml:space="preserve">
+    <value>arccos</value>
+  </data>
+  <data name="Formula_FunctionArcSin" xml:space="preserve">
+    <value>arcsin</value>
+  </data>
+  <data name="Formula_FunctionArcTan" xml:space="preserve">
+    <value>arctan</value>
+  </data>
+  <data name="Formula_FunctionCos" xml:space="preserve">
+    <value>cos</value>
+  </data>
+  <data name="Formula_FunctionExp" xml:space="preserve">
+    <value>exp</value>
+  </data>
+  <data name="Formula_FunctionLn" xml:space="preserve">
+    <value>ln</value>
+  </data>
+  <data name="Formula_FunctionLog" xml:space="preserve">
+    <value>log</value>
+  </data>
+  <data name="Formula_FunctionMax" xml:space="preserve">
+    <value>max</value>
+  </data>
+  <data name="Formula_FunctionMin" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="Formula_FunctionMod" xml:space="preserve">
+    <value>mod</value>
+  </data>
+  <data name="Formula_FunctionPi" xml:space="preserve">
+    <value>pi</value>
+  </data>
+  <data name="Formula_FunctionRandom" xml:space="preserve">
+    <value>random</value>
+  </data>
+  <data name="Formula_FunctionRound" xml:space="preserve">
+    <value>round</value>
+  </data>
+  <data name="Formula_FunctionSin" xml:space="preserve">
+    <value>sin</value>
+  </data>
+  <data name="Formula_FunctionSqrt" xml:space="preserve">
+    <value>sqrt</value>
+  </data>
+  <data name="Formula_FunctionTan" xml:space="preserve">
+    <value>tan</value>
+  </data>
 </root>

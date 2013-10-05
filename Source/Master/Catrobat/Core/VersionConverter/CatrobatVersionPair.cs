@@ -31,7 +31,7 @@ namespace Catrobat.Core.VersionConverter
 
         public bool Equals(CatrobatVersionPair other)
         {
-            return InputVersion == other.InputVersion && OutputVersion == other.OutputVersion;
+            return (InputVersion == other.InputVersion && OutputVersion == other.OutputVersion);
         }
 
         public class EqualityComparer : IEqualityComparer<CatrobatVersionPair>

@@ -2,7 +2,7 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en" target-language="qps-ploc" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="IDEWindowsPhone" product-version="1.0.0.0" build-num="0">
     <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="2.1.1100.0" tool-company="Microsoft" />
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="2.0.1000.0" tool-company="Microsoft" />
     </header>
     <body>
       <group id="Resx">
@@ -588,7 +588,7 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LogicOr" xml:space="preserve">
           <source>OR</source>
-          <target state="translated" state-qualifier="mt-suggestion">[C250F][!!_ÒЃ_!!]</target>
+          <target state="new" state-qualifier="mt-suggestion">OR</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_OBJECT_X" xml:space="preserve">
           <source>objectX</source>
@@ -1035,6 +1035,74 @@
         <trans-unit translate="yes" id="Resx/Formula_Plus" xml:space="preserve">
           <source>+</source>
           <target state="new">+</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionTan" xml:space="preserve">
+          <source>tan</source>
+          <target state="new">tan</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionSqrt" xml:space="preserve">
+          <source>sqrt</source>
+          <target state="new">sqrt</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionSin" xml:space="preserve">
+          <source>sin</source>
+          <target state="new">sin</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionRound" xml:space="preserve">
+          <source>round</source>
+          <target state="new">round</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionRandom" xml:space="preserve">
+          <source>random</source>
+          <target state="new">random</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionPi" xml:space="preserve">
+          <source>pi</source>
+          <target state="new">pi</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionMod" xml:space="preserve">
+          <source>mod</source>
+          <target state="new">mod</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionMin" xml:space="preserve">
+          <source>min</source>
+          <target state="new">min</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionMax" xml:space="preserve">
+          <source>max</source>
+          <target state="new">max</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionLog" xml:space="preserve">
+          <source>log</source>
+          <target state="new">log</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionLn" xml:space="preserve">
+          <source>ln</source>
+          <target state="new">ln</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionCos" xml:space="preserve">
+          <source>cos</source>
+          <target state="new">cos</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionExp" xml:space="preserve">
+          <source>exp</source>
+          <target state="new">exp</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionAbs" xml:space="preserve">
+          <source>abs</source>
+          <target state="new">abs</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionArcTan" xml:space="preserve">
+          <source>arctan</source>
+          <target state="new">arctan</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionArcSin" xml:space="preserve">
+          <source>arcsin</source>
+          <target state="new">arcsin</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Formula_FunctionArcCos" xml:space="preserve">
+          <source>arccos</source>
+          <target state="new">arccos</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_Mult" xml:space="preserve">
           <source>*</source>
