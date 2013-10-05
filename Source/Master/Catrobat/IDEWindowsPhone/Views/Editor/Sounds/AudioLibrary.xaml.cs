@@ -12,6 +12,7 @@ using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Misc.Sounds;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
+using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -23,7 +24,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 {
     public partial class AudioLibrary : PhoneApplicationPage
     {
-        private readonly EditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<EditorViewModel>();
+        private readonly SpriteEditorViewModel _editorViewModel = ServiceLocator.Current.GetInstance<SpriteEditorViewModel>();
         private Song _selectedSong;
         private ObservableCollection<SoundListItem> _songs = new ObservableCollection<SoundListItem>();
         private bool _songSelected = false;
