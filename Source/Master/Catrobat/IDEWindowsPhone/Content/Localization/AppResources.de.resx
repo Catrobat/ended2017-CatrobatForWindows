@@ -546,9 +546,6 @@
   <data name="Formula_LogicEqual" xml:space="preserve">
     <value>=</value>
   </data>
-  <data name="Formula_LogicOr" xml:space="preserve">
-    <value>OR</value>
-  </data>
   <data name="Formula_OBJECT_X" xml:space="preserve">
     <value>objectX</value>
   </data>

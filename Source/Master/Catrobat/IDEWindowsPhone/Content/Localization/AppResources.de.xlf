@@ -588,7 +588,7 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LogicOr" xml:space="preserve">
           <source>OR</source>
-          <target state="signed-off">OR</target>
+          <target state="new">OR</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_OBJECT_X" xml:space="preserve">
           <source>objectX</source>

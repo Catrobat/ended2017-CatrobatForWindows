@@ -588,7 +588,7 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LogicOr" xml:space="preserve">
           <source>OR</source>
-          <target state="translated" state-qualifier="mt-suggestion">[C250F][!!_ÒЃ_!!]</target>
+          <target state="new" state-qualifier="mt-suggestion">OR</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_OBJECT_X" xml:space="preserve">
           <source>objectX</source>
