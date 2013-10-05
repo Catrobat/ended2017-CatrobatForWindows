@@ -25,7 +25,7 @@ namespace Catrobat.TestsCommon.Tests.Data
         public void DataReadingTest1()
         {
             XDocument xDocument = SampleLoader.LoadSampleXDocument("DataReadingTests/test_code1");
-            CatrobatVersionConverter.ConvertVersions("0.80", "Win0.80", xDocument);
+            CatrobatVersionConverter.ConvertVersions("0.8", "Win0.80", xDocument);
 
             var writer = new XmlStringWriter();
             xDocument.Save(writer, SaveOptions.None);

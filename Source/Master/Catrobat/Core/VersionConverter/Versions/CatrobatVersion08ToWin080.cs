@@ -9,13 +9,13 @@ using Catrobat.Core.Misc;
 
 namespace Catrobat.Core.VersionConverter.Versions
 {
-    public class CatrobatVersion080ToWin080 : CatrobatVersion
+    public class CatrobatVersion08ToWin080 : CatrobatVersion
     {
         public override CatrobatVersionPair CatrobatVersionPair
         {
             get
             {
-                return new CatrobatVersionPair("0.80", "Win0.80");
+                return new CatrobatVersionPair("0.8", "Win0.8");
             }
         }
 

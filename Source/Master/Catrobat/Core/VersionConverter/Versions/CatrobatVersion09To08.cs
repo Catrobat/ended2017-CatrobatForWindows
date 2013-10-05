@@ -9,13 +9,13 @@ using Catrobat.Core.Misc;
 
 namespace Catrobat.Core.VersionConverter.Versions
 {
-    public class CatrobatVersion091To080 : CatrobatVersion
+    public class CatrobatVersion09To08 : CatrobatVersion
     {
         public override CatrobatVersionPair CatrobatVersionPair
         {
             get
             {
-                return new CatrobatVersionPair("0.91", "0.80");
+                return new CatrobatVersionPair("0.9", "0.8");
             }
         }
         #region Convert

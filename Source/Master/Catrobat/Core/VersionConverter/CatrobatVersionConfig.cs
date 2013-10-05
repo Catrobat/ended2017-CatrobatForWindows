@@ -12,6 +12,6 @@ namespace Catrobat.Core.VersionConverter
 
         public const string TargetIDEVersion = "0.91";
 
-        public static string TargetPlayerVersion = "0.80";
+        public static string TargetPlayerVersion = "0.8";
     }
 }

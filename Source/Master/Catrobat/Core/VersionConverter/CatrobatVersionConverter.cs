@@ -22,8 +22,9 @@ namespace Catrobat.Core.VersionConverter
             {
                 return new Dictionary<CatrobatVersionPair, CatrobatVersion>(new CatrobatVersionPair.EqualityComparer())
                 {
-                    {new CatrobatVersionPair("0.80", "Win0.80"), new CatrobatVersion080ToWin080()},
-                    {new CatrobatVersionPair("0.91", "0.80"), new CatrobatVersion091To080()}
+                    {new CatrobatVersionPair("0.8", "Win0.80"), new CatrobatVersion08ToWin080()},
+                    {new CatrobatVersionPair("0.91", "0.9"), new CatrobatVersion091To09()},
+                    {new CatrobatVersionPair("0.9", "0.8"), new CatrobatVersion09To08()},
                 };
             }
         }
@@ -35,29 +36,30 @@ namespace Catrobat.Core.VersionConverter
                 return new Dictionary<CatrobatVersionPair, List<CatrobatVersionPair>>(new CatrobatVersionPair.EqualityComparer())
                 {
                     {
-                        new CatrobatVersionPair("0.80", "Win0.80"),
+                        new CatrobatVersionPair("0.8", "Win0.80"),
 
                         new List<CatrobatVersionPair>
                         {
-                            new CatrobatVersionPair("0.80", "Win0.80",false)
+                            new CatrobatVersionPair("0.8", "Win0.80",false)
                         }
                     },
                     {
-                       new CatrobatVersionPair("Win0.80", "0.80"),
+                       new CatrobatVersionPair("Win0.80", "0.8"),
 
                         new List<CatrobatVersionPair>
                         {
-                            new CatrobatVersionPair("Win0.80", "0.80",true)
+                            new CatrobatVersionPair("Win0.80", "0.8",true)
                         }
                     },
 
-                  {
-                        new CatrobatVersionPair("0.91", "Win0.80"),
+
+                    {
+                        new CatrobatVersionPair("0.9", "Win0.80"),
 
                         new List<CatrobatVersionPair>
                         {
-                            new CatrobatVersionPair("0.91", "0.80",false),
-                            new CatrobatVersionPair("0.80", "Win0.80",false)
+                            new CatrobatVersionPair("0.9", "0.8",false),
+                            new CatrobatVersionPair("0.8", "Win0.80",false)
                         }
                     },
                     {
@@ -65,10 +67,33 @@ namespace Catrobat.Core.VersionConverter
 
                         new List<CatrobatVersionPair>
                         {
-                            new CatrobatVersionPair("0.80", "0.91",true),
-                            new CatrobatVersionPair("Win0.80", "0.80",true)
+                            new CatrobatVersionPair("Win0.80", "0.8",true),
+                            new CatrobatVersionPair("0.8", "0.9",true),
                         }
                     },
+
+
+                  {
+                        new CatrobatVersionPair("0.91", "Win0.80"),
+
+                        new List<CatrobatVersionPair>
+                        {
+                            new CatrobatVersionPair("0.91", "0.9",false),
+                            new CatrobatVersionPair("0.9", "0.8",false),
+                            new CatrobatVersionPair("0.8", "Win0.80",false)
+                        }
+                    },
+                    {
+                       new CatrobatVersionPair("Win0.80", "0.91"),
+
+                        new List<CatrobatVersionPair>
+                        {
+                            new CatrobatVersionPair("Win0.80", "0.8",true),
+                            new CatrobatVersionPair("0.8", "0.9",true),
+                            new CatrobatVersionPair("0.9", "0.91",true),
+                        }
+                    },
+                    
                 };
             }
         }
@@ -190,7 +215,7 @@ namespace Catrobat.Core.VersionConverter
                 }
             }
             else
-            { 
+            {
                 error = VersionConverterError.ProjectCodePathNotValid;
             }
 
