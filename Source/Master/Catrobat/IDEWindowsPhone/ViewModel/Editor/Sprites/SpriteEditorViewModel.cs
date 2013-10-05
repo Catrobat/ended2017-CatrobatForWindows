@@ -893,16 +893,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
 
         private void ResetViewModel()
         {
-            SelectedSprite = null;
-            SelectedBrick = null;
-            ListBoxViewPort = null;
+            //SelectedSprite = null;
+            //SelectedBrick = null;
+            //ListBoxViewPort = null;
 
-            if (_soundPlayer != null)
-            {
-                _soundPlayer.Clear();
-            }
-            _soundPlayer = null;
-            _sound = null;
+            //if (_soundPlayer != null)
+            //{
+            //    _soundPlayer.Clear();
+            //}
+            //_soundPlayer = null;
+            //_sound = null;
         }
 
         public override void Cleanup()

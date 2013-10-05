@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace Catrobat.Core.Objects.Scripts
@@ -7,17 +10,42 @@ namespace Catrobat.Core.Objects.Scripts
     {
         public ObservableCollection<Script> Scripts { get; set; }
 
+        public int ActionCount
+        {
+            get
+            {
+                return Scripts.Sum(script => script.Bricks.Bricks.Count + 1);
+            }
+        }
 
         public ScriptList()
         {
             Scripts = new ObservableCollection<Script>();
+            Scripts.CollectionChanged += ScriptsOnCollectionChanged;
         }
 
         public ScriptList(XElement xElement)
         {
             Scripts = new ObservableCollection<Script>();
+            Scripts.CollectionChanged += ScriptsOnCollectionChanged;
             LoadFromXML(xElement);
         }
+
+        private void ScriptsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            RaisePropertyChanged(()=> ActionCount);
+
+            foreach (var script in Scripts)
+            {
+                script.Bricks.Bricks.CollectionChanged += BricksOnCollectionChanged;
+            }
+        }
+
+        private void BricksOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            RaisePropertyChanged(() => ActionCount);
+        }
+
 
         internal override void LoadFromXML(XElement xRoot)
         {
