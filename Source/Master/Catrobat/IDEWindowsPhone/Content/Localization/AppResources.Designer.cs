@@ -1564,6 +1564,159 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die abs ähnelt.
+        /// </summary>
+        public static string Formula_FunctionAbs {
+            get {
+                return ResourceManager.GetString("Formula_FunctionAbs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die arccos ähnelt.
+        /// </summary>
+        public static string Formula_FunctionArcCos {
+            get {
+                return ResourceManager.GetString("Formula_FunctionArcCos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die arcsin ähnelt.
+        /// </summary>
+        public static string Formula_FunctionArcSin {
+            get {
+                return ResourceManager.GetString("Formula_FunctionArcSin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die arctan ähnelt.
+        /// </summary>
+        public static string Formula_FunctionArcTan {
+            get {
+                return ResourceManager.GetString("Formula_FunctionArcTan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die cos ähnelt.
+        /// </summary>
+        public static string Formula_FunctionCos {
+            get {
+                return ResourceManager.GetString("Formula_FunctionCos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die exp ähnelt.
+        /// </summary>
+        public static string Formula_FunctionExp {
+            get {
+                return ResourceManager.GetString("Formula_FunctionExp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ln ähnelt.
+        /// </summary>
+        public static string Formula_FunctionLn {
+            get {
+                return ResourceManager.GetString("Formula_FunctionLn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die log ähnelt.
+        /// </summary>
+        public static string Formula_FunctionLog {
+            get {
+                return ResourceManager.GetString("Formula_FunctionLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die max ähnelt.
+        /// </summary>
+        public static string Formula_FunctionMax {
+            get {
+                return ResourceManager.GetString("Formula_FunctionMax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die min ähnelt.
+        /// </summary>
+        public static string Formula_FunctionMin {
+            get {
+                return ResourceManager.GetString("Formula_FunctionMin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die mod ähnelt.
+        /// </summary>
+        public static string Formula_FunctionMod {
+            get {
+                return ResourceManager.GetString("Formula_FunctionMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die pi ähnelt.
+        /// </summary>
+        public static string Formula_FunctionPi {
+            get {
+                return ResourceManager.GetString("Formula_FunctionPi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die random ähnelt.
+        /// </summary>
+        public static string Formula_FunctionRandom {
+            get {
+                return ResourceManager.GetString("Formula_FunctionRandom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die round ähnelt.
+        /// </summary>
+        public static string Formula_FunctionRound {
+            get {
+                return ResourceManager.GetString("Formula_FunctionRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die sin ähnelt.
+        /// </summary>
+        public static string Formula_FunctionSin {
+            get {
+                return ResourceManager.GetString("Formula_FunctionSin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die sqrt ähnelt.
+        /// </summary>
+        public static string Formula_FunctionSqrt {
+            get {
+                return ResourceManager.GetString("Formula_FunctionSqrt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die tan ähnelt.
+        /// </summary>
+        public static string Formula_FunctionTan {
+            get {
+                return ResourceManager.GetString("Formula_FunctionTan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die inclinationX ähnelt.
         /// </summary>
         public static string Formula_INCLINATION_X {

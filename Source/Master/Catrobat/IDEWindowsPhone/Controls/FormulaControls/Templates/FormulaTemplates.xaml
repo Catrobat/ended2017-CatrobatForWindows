@@ -450,11 +450,11 @@
         </f:FormulaDefinition>
 
 
-        <!-- ### Math Formulas ##########################################################################################################-->
+        <!-- ### Binary Functions ##########################################################################################################-->
         <f:FormulaDefinition Type="FUNCTION" Value="RANDOM">
             <f:FormulaDefinition.Template>
                 <partControls:FormulaPartControlList>
-                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Random" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionRandom" Style="{StaticResource PartStyleMath}"/>
                     <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
                     <partControls:FormulaPartControlPlaceholderLeft/>
                     <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ParameterSeperator" Style="{StaticResource PartStyleMath}"/>
@@ -463,7 +463,172 @@
                 </partControls:FormulaPartControlList>
             </f:FormulaDefinition.Template>
         </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="MOD">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionMod" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ParameterSeperator" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="MAX">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionMax" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ParameterSeperator" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="MIN">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionMin" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ParameterSeperator" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderRight/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <!-- ### Unary Functions ##########################################################################################################-->
+        <f:FormulaDefinition Type="FUNCTION" Value="SIN">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionSin" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="COS">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionCos" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="TAN">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionTan" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="LN">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionLn" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="LOG">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionLog" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="SQRT">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionSqrt" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="ABS">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionAbs" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="ROUND">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionRound" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="ARCSIN">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionArcSin" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="ARCCOS">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionArcCos" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="ARCTAN">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionArcTan" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <f:FormulaDefinition Type="FUNCTION" Value="EXP">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionExp" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OpenBrecket" Style="{StaticResource PartStyleMath}"/>
+                    <partControls:FormulaPartControlPlaceholderLeft/>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ClosedBrecket" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
+        <!-- ### Literal Functions ##########################################################################################################-->
 
+        <f:FormulaDefinition Type="FUNCTION" Value="PI">
+            <f:FormulaDefinition.Template>
+                <partControls:FormulaPartControlList>
+                    <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionPi" Style="{StaticResource PartStyleMath}"/>
+                </partControls:FormulaPartControlList>
+            </f:FormulaDefinition.Template>
+        </f:FormulaDefinition>
 
         <!-- ### Logic Equality Formulas ##########################################################################################################-->
         <f:FormulaDefinition Type="OPERATOR" Value="EQUAL">

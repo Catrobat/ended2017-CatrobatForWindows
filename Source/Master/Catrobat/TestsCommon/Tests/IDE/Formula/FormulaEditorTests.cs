@@ -1,4 +1,5 @@
 ﻿using Catrobat.Core.Objects.Formulas;
+using Catrobat.Core.Objects.Variables;
 using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.TestsCommon.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -107,21 +108,19 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
-            var valid = true;
-            valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.Number2);
-            valid &= editor.KeyPressed(FormulaEditorKey.Number3);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.Number4);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number4));
             var expectedFormula = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "4",
             };
-            Assert.IsTrue(valid);
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
 
         }
@@ -1116,18 +1115,16 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
-            var valid = true;
-            valid &= editor.KeyPressed(FormulaEditorKey.Number0);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicAnd);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicOr);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyEquals);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicGreater);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            Assert.IsTrue(valid);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number0));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicAnd));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyEquals));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicGreater));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyDelete));
             var expectedFormula = new FormulaTree
             {
                 VariableType = "NUMBER",
@@ -4360,6 +4357,768 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
                     VariableType = "NUMBER",
                     VariableValue = "123"
                 }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+
+        }
+
+        [TestMethod]
+        public void FormulaEditorFunctionTest_01()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            editor.SelectedFormula = selectedFromula;
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathAbs));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "ABS",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathArcCos));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "ARCCOS",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathArcSin));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "ARCSIN",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathArcTan));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "ARCTAN",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathCos));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "COS",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathExp));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "EXP",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathLn));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "LN",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathLog));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "LOG",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathMax));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "MAX",
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                },
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathMin));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "MIN",
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                },
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathMod));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "MOD",
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                },
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathPi));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "PI",
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathRandom));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "RANDOM",
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                },
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathRound));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "ROUND",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathSin));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "SIN",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathSqrt));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "SQRT",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                },
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathTan));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "TAN",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                },
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+        }
+
+        [TestMethod]
+        public void FormulaEditorFunctionTest_02()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            editor.SelectedFormula = selectedFromula;
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathCos));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "PLUS",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                },
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "OPERATOR",
+                    VariableValue = "MULT",
+                    LeftChild = new FormulaTree()
+                    {
+                        VariableType = "FUNCTION",
+                        VariableValue = "COS",
+                        LeftChild = new FormulaTree()
+                        {
+                            VariableType = "NUMBER",
+                            VariableValue = "0"
+                        }
+                    },
+                    RightChild = new FormulaTree()
+                    {
+                        VariableType = "NUMBER",
+                        VariableValue = "3"
+                    }
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "PLUS",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                },
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+
+        }
+
+        [TestMethod]
+        public void FormulaEditorFunctionTest_03()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            editor.SelectedFormula = selectedFromula;
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathSin));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathCos));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "MULT",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                },
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "BRACKET",
+                    VariableValue = "",
+                    RightChild = new FormulaTree()
+                    {
+                        VariableType = "OPERATOR",
+                        VariableValue = "PLUS",
+                        LeftChild = new FormulaTree()
+                        {
+                            VariableType = "FUNCTION",
+                            VariableValue = "SIN",
+                            LeftChild = new FormulaTree()
+                            {
+                                VariableType = "NUMBER",
+                                VariableValue = "0"
+                            }
+                        },
+                        RightChild = new FormulaTree()
+                        {
+                            VariableType = "FUNCTION",
+                            VariableValue = "COS",
+                            LeftChild = new FormulaTree()
+                            {
+                                VariableType = "NUMBER",
+                                VariableValue = "0"
+                            }
+                        }
+                    }
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+
+        }
+
+        [TestMethod]
+        public void FormulaEditorBracketTest_05()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            editor.SelectedFormula = selectedFromula;
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "PLUS",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+
+        }
+
+        [TestMethod]
+        public void FormulaEditorBracketTest_06()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            editor.SelectedFormula = selectedFromula;
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberDot));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "BRACKET",
+                VariableValue = "",
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0."
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+        }
+
+        [TestMethod]
+        public void FormulaEditorVariableTest_01()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            editor.SelectedFormula = selectedFromula;
+            Assert.IsTrue(editor.SensorVariableSelected(SensorVariable.AccelerationX));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "MULT",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "SENSOR",
+                    VariableValue = "ACCELERATION_X"
+                },
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+        
+        }
+
+        [TestMethod]
+        public void FormulaEditorVariableTest_02()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            editor.SelectedFormula = selectedFromula;
+            Assert.IsTrue(editor.ObjectVariableSelected(ObjectVariable.PositionX));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "MULT",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "SENSOR",
+                    VariableValue = "OBJECT_X"
+                },
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+
+        }
+
+        [TestMethod]
+        public void FormulaEditorVariableTest_03()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            editor.SelectedFormula = selectedFromula;
+            var variable = new UserVariable()
+            {
+                Name = "MyVar"
+            };
+            Assert.IsTrue(editor.GlobalVariableSelected(variable));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "MULT",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "USER_VARIABLE",
+                    VariableValue = "MyVar"
+                },
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+
+        }
+
+        [TestMethod]
+        public void FormulaEditorVariableTest_04()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            editor.SelectedFormula = selectedFromula;
+            var variable = new UserVariable()
+            {
+                Name = "MyVar"
+            };
+            Assert.IsTrue(editor.LocalVariableSelected(variable));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "MULT",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "USER_VARIABLE",
+                    VariableValue = "MyVar"
+                },
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+
+        }
+
+        [TestMethod]
+        public void FormulaEditorSelectionTest_02()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "MIN",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                },
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
+                }
+            };
+            editor.SelectedFormula = selectedFromula;
+            selectedFromula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.LeftChild;
+            selectedFromula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            selectedFromula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.RightChild;
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "MIN",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                },
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                }
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+
+        }
+
+        [TestMethod]
+        public void FormulaEditorFunctionTest_04()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "MAX",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "FUNCTION",
+                    VariableValue = "SIN",
+                    LeftChild = new FormulaTree()
+                    {
+                        VariableType = "NUMBER",
+                        VariableValue = "0"
+                    }
+                },
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "FUNCTION",
+                    VariableValue = "COS",
+                    LeftChild = new FormulaTree()
+                    {
+                        VariableType = "NUMBER",
+                        VariableValue = "0"
+                    }
+                }
+            };
+            editor.SelectedFormula = selectedFromula;
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+
+        }
+
+        [TestMethod]
+        public void FormulaEditorSelectionTest_03()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.Objects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "SIN",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "0"
+                },
+            };
+            editor.SelectedFormula = selectedFromula;
+            selectedFromula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.LeftChild;
+            selectedFromula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "SIN",
+                LeftChild = new FormulaTree()
+                {
+                    VariableType = "OPERATOR",
+                    VariableValue = "PLUS",
+                    LeftChild = new FormulaTree()
+                    {
+                        VariableType = "OPERATOR",
+                        VariableValue = "PLUS",
+                        LeftChild = new FormulaTree()
+                        {
+                            VariableType = "NUMBER",
+                            VariableValue = "1"
+                        },
+                        RightChild = new FormulaTree()
+                        {
+                            VariableType = "NUMBER",
+                            VariableValue = "2"
+                        }
+                    },
+                    RightChild = new FormulaTree()
+                    {
+                        VariableType = "NUMBER",
+                        VariableValue = "3"
+                    }
+                },
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
 
