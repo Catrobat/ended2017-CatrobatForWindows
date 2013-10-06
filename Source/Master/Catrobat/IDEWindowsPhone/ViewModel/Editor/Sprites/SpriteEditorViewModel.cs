@@ -114,7 +114,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
                 if (value == _selectedSprite.Sounds.Sounds) return;
                 _selectedSprite.Sounds.Sounds = value;
 
-                //Deployment.Current.Dispatcher.BeginInvoke(() => RaisePropertyChanged(() => Sounds));
                 RaisePropertyChanged(() => Sounds);
             }
         }
@@ -481,13 +480,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
                     if (scriptBrick is Script)
                     {
                         DataObject copy = (scriptBrick as Script).Copy();
-                        ScriptBricks.Insert(ScriptBricks.ScriptIndexOf((Script)scriptBrick), copy);
+                        ScriptBricks.Insert(ScriptBricks.ScriptIndexOf((Script)scriptBrick) + 1, copy);
                     }
 
                     if (scriptBrick is Brick)
                     {
                         DataObject copy = (scriptBrick as Brick).Copy();
-                        ScriptBricks.Insert(ScriptBricks.IndexOf(scriptBrick), copy);
+                        ScriptBricks.Insert(ScriptBricks.IndexOf(scriptBrick) + 1, copy);
                     }
                 }
             }
@@ -597,7 +596,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             {
                 var newCostume = costume.Copy() as Costume;
                 if(newCostume != null)
-                    Costumes.Add(newCostume);
+                    Costumes.Insert(Costumes.IndexOf(costume) + 1, newCostume);
             }
         }
 

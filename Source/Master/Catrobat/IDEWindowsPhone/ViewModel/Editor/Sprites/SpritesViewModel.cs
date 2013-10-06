@@ -154,25 +154,22 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
 
         private void AddNewSpriteAction()
         {
-            //var message = new GenericMessage<ObservableCollection<Sprite>>(Sprites);
-            //Messenger.Default.Send<GenericMessage<ObservableCollection<Sprite>>>(message, ViewModelMessagingToken.SpriteListListener);
-
             Navigation.NavigateTo(typeof(AddNewSpriteView));
         }
 
         private void EditSpriteAction()
         {
-            //var message = new GenericMessage<Sprite>(SelectedSprite);
-            //Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SpriteNameListener);
-
             Navigation.NavigateTo(typeof(SpriteEditorView));
         }
 
         private void CopySpriteAction()
         {
-            var newSprite = SelectedSprite.Copy() as Sprite;
-            if(newSprite != null)
-                Sprites.Add(newSprite);
+            var originalIndex = Sprites.IndexOf(SelectedSprite);
+
+            var newSprite = (Sprite) SelectedSprite.Copy();
+            var newIndex = originalIndex + 1;
+
+            Sprites.Insert(newIndex, newSprite);
         }
 
         private void DeleteSpriteAction()

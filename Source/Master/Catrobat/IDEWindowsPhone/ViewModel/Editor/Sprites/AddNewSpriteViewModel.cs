@@ -13,7 +13,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
         #region Private Members
 
         private string _spriteName;
-        //private ObservableCollection<Sprite> _receivedSprites;
         private Project _currentProject;
 
         #endregion
@@ -72,7 +71,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
         {
             var sprite = new Sprite { Name = SpriteName };
             CurrentProject.SpriteList.Sprites.Add(sprite);
-            //_receivedSprites.Add(sprite);
 
             ResetViewModel();
             Navigation.NavigateBack();
@@ -83,11 +81,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             ResetViewModel();
             Navigation.NavigateBack();
         }
-
-        //private void ReceiveSpriteListMessageAction(GenericMessage<ObservableCollection<Sprite>> message)
-        //{
-        //    _receivedSprites = message.Content;
-        //}
 
         private void ResetViewModelAction()
         {
@@ -111,8 +104,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             CancelCommand = new RelayCommand(CancelAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-            //Messenger.Default.Register<GenericMessage<ObservableCollection<Sprite>>>(this,
-            //    ViewModelMessagingToken.SpriteListListener, ReceiveSpriteListMessageAction);
             Messenger.Default.Register<GenericMessage<Project>>(this,
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
         }
