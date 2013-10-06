@@ -8,7 +8,7 @@ class ContainerBrick :
 	public Brick
 {
 public:
-	ContainerBrick(TypeOfBrick brickType, string objectReference, Script *parent);
+	ContainerBrick(TypeOfBrick brickType, Script *parent);
 
 	virtual void Execute() = 0;
 	virtual void AddBrick(Brick *brick) = 0;

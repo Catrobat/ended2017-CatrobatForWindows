@@ -2,8 +2,8 @@
 #include "ForeverBrick.h"
 #include "Interpreter.h"
 
-ForeverBrick::ForeverBrick(string spriteReference, Script *parent) :
-	ContainerBrick(TypeOfBrick::ContainerBrick, spriteReference, parent)
+ForeverBrick::ForeverBrick(Script *parent) :
+	ContainerBrick(TypeOfBrick::ContainerBrick, parent)
 {
 	m_brickList = new list<Brick*>();
 }

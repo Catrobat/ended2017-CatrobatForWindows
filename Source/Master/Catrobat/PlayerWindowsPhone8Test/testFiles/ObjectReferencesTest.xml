@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <program>
   <header>
     <applicationBuildName/>
@@ -27,8 +27,29 @@ Compatible with latest version.</description>
   </header>
   <objectList>
     <object>
+      <lookList/>
+      <name>object1</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <pointToBrick>
+              <pointedObject reference="../../../../../../object[2]" />
+            </pointToBrick>
+            <pointToBrick>
+              <pointedObject reference="../../../../../../object[2]"/>
+            </pointToBrick>
+          </brickList>
+        </startScript>
+      </scriptList>
+      <soundList/>
     </object>
     <object>
+      <lookList/>
+      <name>object2</name>
+      <scriptList/>
+      <soundList/>
     </object>
   </objectList>
+  <variables>
+  </variables>
 </program>

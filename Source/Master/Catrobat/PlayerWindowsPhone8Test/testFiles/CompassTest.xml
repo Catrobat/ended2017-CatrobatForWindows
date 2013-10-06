@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<program>
   <header>
     <applicationBuildName/>
     <applicationBuildNumber>0</applicationBuildNumber>
@@ -25,4 +23,3 @@ Compatible with latest version.</description>
     <url>http://pocketcode.org/details/991</url>
     <userHandle>VCT</userHandle>
   </header>
-</program>

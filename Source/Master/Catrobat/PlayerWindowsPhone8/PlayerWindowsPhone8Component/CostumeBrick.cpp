@@ -3,13 +3,13 @@
 #include "Script.h"
 #include "Object.h"
 
-CostumeBrick::CostumeBrick(string spriteReference, string costumeDataReference, int index, Script *parent) :
-	Brick(TypeOfBrick::CostumeBrick, spriteReference, parent), m_costumeDataReference(costumeDataReference), m_index(index)
+CostumeBrick::CostumeBrick(string costumeDataReference, int index, Script *parent) :
+	Brick(TypeOfBrick::CostumeBrick, parent), m_costumeDataReference(costumeDataReference), m_index(index)
 {
 }
 
-CostumeBrick::CostumeBrick(string spriteReference, Script *parent) :
-	Brick(TypeOfBrick::CostumeBrick, spriteReference, parent), m_index(0)
+CostumeBrick::CostumeBrick(Script *parent) :
+	Brick(TypeOfBrick::CostumeBrick, parent), m_index(0)
 {
 }
 

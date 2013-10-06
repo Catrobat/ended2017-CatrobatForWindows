@@ -4,6 +4,6 @@ class NextLookBrick :
 	public Brick
 {
 public:
-	NextLookBrick(string spriteReference, Script *parent);
+	NextLookBrick(Script *parent);
 	void Execute();
 };

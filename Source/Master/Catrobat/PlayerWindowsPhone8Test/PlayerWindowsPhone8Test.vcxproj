@@ -140,6 +140,18 @@
     <Xml Include="testFiles\HeaderTest.xml" />
     <Xml Include="testFiles\ObjectListTest1.xml" />
     <Xml Include="testFiles\ObjectListTest2.xml" />
+    <Xml Include="testFiles\CompassTest.xml" />
+    <Xml Include="testFiles\ForeverTest.xml" />
+    <Xml Include="testFiles\GlobalVariableReferencesTest.xml" />
+    <Xml Include="testFiles\IfLogicBeginTest.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="testFiles\LocalVariableReferencesTest.xml" />
+    <Xml Include="testFiles\LookReferencesTest.xml" />
+    <Xml Include="testFiles\ObjectReferencesTest.xml" />
+    <Xml Include="testFiles\PointToTest.xml" />
+    <Xml Include="testFiles\RepeatTest.xml" />
+    <Xml Include="testFiles\SoundReferencesTest.xml" />
     <Xml Include="WMAppManifest.xml">
       <SubType>Designer</SubType>
     </Xml>
@@ -292,6 +304,7 @@
     <ClCompile Include="ControlBricks.cpp" />
     <ClCompile Include="FormulaTreeTests.cpp" />
     <ClCompile Include="FormulaFunctionTests.cpp" />
+    <ClCompile Include="IfLogicBeginBrick.cpp" />
     <ClCompile Include="LogicOperations.cpp" />
     <ClCompile Include="LookBricks.cpp" />
     <ClCompile Include="MovementBricks.cpp" />

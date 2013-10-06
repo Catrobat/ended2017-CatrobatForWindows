@@ -4,8 +4,8 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-ChangeYByBrick::ChangeYByBrick(string spriteReference, FormulaTree *offsetY, Script *parent) :
-	Brick(TypeOfBrick::ChangeYByBrick, spriteReference, parent),
+ChangeYByBrick::ChangeYByBrick(FormulaTree *offsetY, Script *parent) :
+	Brick(TypeOfBrick::ChangeYByBrick, parent),
 	m_offsetY(offsetY)
 {
 }

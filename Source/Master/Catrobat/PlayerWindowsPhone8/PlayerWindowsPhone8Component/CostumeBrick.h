@@ -4,8 +4,8 @@ class CostumeBrick :
 	public Brick
 {
 public:
-	CostumeBrick(string spriteReference, string costumeDataReference, int index, Script *parent);
-	CostumeBrick(string spriteReference, Script *parent);
+	CostumeBrick(string costumeDataReference, int index, Script *parent);
+	CostumeBrick(Script *parent);
 
 	void Execute();
 	int GetIndex();

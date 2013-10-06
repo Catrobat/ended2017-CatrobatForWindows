@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <program>
   <header>
     <applicationBuildName/>
@@ -27,8 +27,28 @@ Compatible with latest version.</description>
   </header>
   <objectList>
     <object>
-    </object>
-    <object>
+      <lookList/>
+      <name>object1</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <playSoundBrick>
+              <sound reference="../../../../../soundList/sound"/>
+            </playSoundBrick>
+            <playSoundBrick>
+              <sound reference="../../../../../soundList/sound"/>
+            </playSoundBrick>
+          </brickList>
+        </startScript>
+      </scriptList>
+      <soundList>
+        <sound>
+          <fileName>8a62916587359d404386a1ea757cebb4_Aufnahme.mp3</fileName>
+          <name>Aufnahme1</name>
+        </sound>
+      </soundList>
     </object>
   </objectList>
+  <variables>
+  </variables>
 </program>

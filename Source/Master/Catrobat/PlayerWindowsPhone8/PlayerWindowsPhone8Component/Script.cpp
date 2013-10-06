@@ -8,8 +8,8 @@
 using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
 
-Script::Script(TypeOfScript scriptType, string spriteReference, Object *parent) :
-	m_scriptType(scriptType), m_spriteReference(spriteReference), m_parent(parent)
+Script::Script(TypeOfScript scriptType, Object *parent) :
+	m_scriptType(scriptType), m_parent(parent)
 {
 	m_brickList = new list<Brick*>();
 }
@@ -29,10 +29,10 @@ Script::TypeOfScript Script::GetType()
 	return m_scriptType;
 }
 
-string Script::GetSpriteReference()
-{
-	return m_spriteReference;
-}
+//string Script::GetSpriteReference()
+//{
+//	return m_spriteReference;
+//}
 
 int Script::GetBrickListSize()
 {

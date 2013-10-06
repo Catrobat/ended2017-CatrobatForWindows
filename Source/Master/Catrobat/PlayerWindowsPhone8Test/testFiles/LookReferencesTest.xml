@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <program>
   <header>
     <applicationBuildName/>
@@ -27,8 +27,28 @@ Compatible with latest version.</description>
   </header>
   <objectList>
     <object>
-    </object>
-    <object>
+      <lookList>
+        <look>
+          <fileName>145f309c7a3a46af2db73901b9ca8127_Aussehen.jpg</fileName>
+          <name>Aussehen</name>
+        </look>
+      </lookList>
+      <name>object1</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setLookBrick>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <setLookBrick>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+          </brickList>
+        </startScript>
+      </scriptList>
+      <soundList/>
     </object>
   </objectList>
+  <variables>
+  </variables>
 </program>

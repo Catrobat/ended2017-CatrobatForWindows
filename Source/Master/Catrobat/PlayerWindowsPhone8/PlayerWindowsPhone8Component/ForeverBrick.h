@@ -8,7 +8,7 @@ class ForeverBrick :
 	public ContainerBrick
 {
 public:
-	ForeverBrick(string spriteReference, Script *parent);
+	ForeverBrick(Script *parent);
 	~ForeverBrick(void);
 
 	void Execute();

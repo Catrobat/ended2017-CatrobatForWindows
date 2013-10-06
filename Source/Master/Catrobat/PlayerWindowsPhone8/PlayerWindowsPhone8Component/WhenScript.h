@@ -1,5 +1,4 @@
-#pragma once
-#include "script.h"
+#pragma once#include "script.h"
 class WhenScript :
 	public Script
 {
@@ -9,7 +8,7 @@ public:
 		Tapped
 	};
 
-	WhenScript(string action, string spriteReference, Object *parent);
+	WhenScript(string action, Object *parent);
 	~WhenScript();
 	int GetAction();
 

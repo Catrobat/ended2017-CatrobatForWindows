@@ -3,8 +3,8 @@
 #include "Script.h"
 #include "Object.h"
 
-NextLookBrick::NextLookBrick(string spriteReference, Script *parent) :
-	Brick(TypeOfBrick::NextlookBrick, spriteReference, parent)
+NextLookBrick::NextLookBrick(Script *parent) :
+	Brick(TypeOfBrick::NextlookBrick, parent)
 {
 }
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <program>
   <header>
     <applicationBuildName/>
@@ -25,4 +25,31 @@ Compatible with latest version.</description>
     <url>http://pocketcode.org/details/991</url>
     <userHandle>VCT</userHandle>
   </header>
+  <objectList>
+    <object>
+      <lookList />
+      <name>Hintergrund</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <repeatBrick>
+              <loopEndBrick reference="../../loopEndBrick[1]" />
+              <timesToRepeat>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>10</value>
+                </formulaTree>
+              </timesToRepeat>
+            </repeatBrick>
+            <loopEndBrick>
+              <loopBeginBrick class="repeatBrick" reference="../../repeatBrick[1]" />
+            </loopEndBrick>
+          </brickList>
+        </startScript>
+      </scriptList>
+      <soundList />
+    </object>
+  </objectList>
+  <variables>
+  </variables>
 </program>

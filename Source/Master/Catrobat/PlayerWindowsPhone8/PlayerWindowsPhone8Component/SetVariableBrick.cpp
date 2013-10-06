@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "SetVariableBrick.h"
 
-SetVariableBrick::SetVariableBrick(string objectReference, FormulaTree *variableFormula, Script *parent)
-	: VariableManagementBrick(TypeOfBrick::SetVariableBrick, objectReference, variableFormula, parent)
+SetVariableBrick::SetVariableBrick(FormulaTree *variableFormula, Script *parent)
+	: VariableManagementBrick(TypeOfBrick::SetVariableBrick, variableFormula, parent)
 {
 }
 

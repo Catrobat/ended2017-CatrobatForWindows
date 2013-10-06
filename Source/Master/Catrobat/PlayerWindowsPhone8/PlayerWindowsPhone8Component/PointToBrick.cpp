@@ -4,8 +4,8 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-PointToBrick::PointToBrick(string spriteReference, FormulaTree *rotation, Script *parent) :
-	Brick(TypeOfBrick::PointToBrick, spriteReference, parent),
+PointToBrick::PointToBrick(FormulaTree *rotation, Script *parent) :
+	Brick(TypeOfBrick::PointToBrick, parent),
 	m_rotation(rotation)
 {
 }

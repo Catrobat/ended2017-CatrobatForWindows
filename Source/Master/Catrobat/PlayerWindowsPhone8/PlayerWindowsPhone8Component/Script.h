@@ -25,7 +25,7 @@ public:
 
 	void Execute();
 
-	string GetSpriteReference();
+	//string GetSpriteReference();
 
 	int GetBrickListSize();
 	Brick *GetBrick(int index);
@@ -33,7 +33,7 @@ public:
 	TypeOfScript GetType();
 
 protected:
-	Script(TypeOfScript scriptType, string spriteReference, Object *parent);
+	Script(TypeOfScript scriptType, Object *parent);
 
 	list<Brick*> *m_brickList;
 

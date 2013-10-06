@@ -10,8 +10,8 @@
 using namespace Windows::System::Threading;
 using namespace Windows::Foundation;
 
-Brick::Brick(TypeOfBrick brickType, string objectReference, Script *parent) :
-	m_brickType(brickType), m_objectReference(objectReference), m_parent(parent)
+Brick::Brick(TypeOfBrick brickType, Script *parent) :
+	m_brickType(brickType), m_parent(parent)
 {
 }
 

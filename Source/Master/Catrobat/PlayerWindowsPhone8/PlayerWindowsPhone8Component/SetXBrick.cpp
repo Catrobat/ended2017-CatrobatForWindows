@@ -4,8 +4,8 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-SetXBrick::SetXBrick(string spriteReference, FormulaTree *positionX, Script *parent) :
-	Brick(TypeOfBrick::SetXBrick, spriteReference, parent),
+SetXBrick::SetXBrick(FormulaTree *positionX, Script *parent) :
+	Brick(TypeOfBrick::SetXBrick, parent),
 	m_positionX(positionX)
 {
 }

@@ -14,7 +14,7 @@ class IfBrick :
 	public ContainerBrick
 {
 public:
-	IfBrick(string spriteReference, FormulaTree *condition, Script *parent);
+	IfBrick(FormulaTree *condition, Script *parent);
 	~IfBrick(void);
 
 	void Execute();

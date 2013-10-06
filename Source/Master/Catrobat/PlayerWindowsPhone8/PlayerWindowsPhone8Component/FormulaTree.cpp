@@ -4,18 +4,18 @@
 using namespace std;
 
 FormulaTree::FormulaTree(string type, string value)
-	: m_value(value)
+    : m_value(value)
 {
-	if (type == "NUMBER")
-		m_type = Type::NUMBER;
-	else if (type == "OPERATOR")
-		m_type = Type::OPERATOR;
-	else if (type == "USER_VARIABLE")
-		m_type = Type::USER_VARIABLE;
+    if (type == "NUMBER")
+        m_type = Type::NUMBER;
+    else if (type == "OPERATOR")
+        m_type = Type::OPERATOR;
+    else if (type == "USER_VARIABLE")
+        m_type = Type::USER_VARIABLE;
     else if (type == "BRACKET")
         m_type = Type::BRACKET;
-	else if (type == "FUNCTION")
-		m_type = Type::FUNCTION;
+    else if (type == "FUNCTION")
+        m_type = Type::FUNCTION;
     else if (type == "SENSOR")
         m_type = Type::SENSOR;
 
@@ -53,56 +53,58 @@ FormulaTree::FormulaTree(string type, string value)
         m_operator = Operator::NO_OPERATOR;
     }
 
-	if (m_type == Type::FUNCTION)
-	{
-		if (m_value == "TRUE")
-			m_function = Function::L_TRUE;
-		else if (m_value == "FALSE")
-			m_function = Function::L_FALSE;
-		else if (m_value == "SIN")
-			m_function = Function::SIN;
-		else if (m_value == "COS")
-			m_function = Function::COS;
-		else if (m_value == "TAN")
-			m_function = Function::TAN;
-		else if (m_value == "LN")
-			m_function = Function::LN;
-		else if (m_value == "LOG")
-			m_function = Function::LOG;
-		else if (m_value == "SQRT")
-			m_function = Function::SQRT;
-		else if (m_value == "RAND")
-			m_function = Function::RAND;
-		else if (m_value == "ABS")
-			m_function = Function::ABS;
-		else if (m_value == "ROUND")
-			m_function = Function::ROUND;
-		else if (m_value == "PI")
-			m_function = Function::PI;
-		else if (m_value == "MOD")
-			m_function = Function::MOD;
-		else if (m_value == "ARCSIN")
-			m_function = Function::ARCSIN;
-		else if (m_value == "ARCCOS")
-			m_function = Function::ARCCOS;
-		else if (m_value == "ARCTAN")
-			m_function = Function::ARCTAN;
-		else if (m_value == "EXP")
-			m_function = Function::EXP;
-		else if (m_value == "MAX")
-			m_function = Function::MAX;
-		else if (m_value == "MIN")
-			m_function = Function::MIN;
-	}
-	else
-	{
-		m_function = Function::NO_FUNCTION;
-	}
+    if (m_type == Type::FUNCTION)
+    {
+        if (m_value == "TRUE")
+            m_function = Function::L_TRUE;
+        else if (m_value == "FALSE")
+            m_function = Function::L_FALSE;
+        else if (m_value == "SIN")
+            m_function = Function::SIN;
+        else if (m_value == "COS")
+            m_function = Function::COS;
+        else if (m_value == "TAN")
+            m_function = Function::TAN;
+        else if (m_value == "LN")
+            m_function = Function::LN;
+        else if (m_value == "LOG")
+            m_function = Function::LOG;
+        else if (m_value == "SQRT")
+            m_function = Function::SQRT;
+        else if (m_value == "RAND")
+            m_function = Function::RAND;
+        else if (m_value == "ABS")
+            m_function = Function::ABS;
+        else if (m_value == "ROUND")
+            m_function = Function::ROUND;
+        else if (m_value == "PI")
+            m_function = Function::PI;
+        else if (m_value == "MOD")
+            m_function = Function::MOD;
+        else if (m_value == "ARCSIN")
+            m_function = Function::ARCSIN;
+        else if (m_value == "ARCCOS")
+            m_function = Function::ARCCOS;
+        else if (m_value == "ARCTAN")
+            m_function = Function::ARCTAN;
+        else if (m_value == "EXP")
+            m_function = Function::EXP;
+        else if (m_value == "MAX")
+            m_function = Function::MAX;
+        else if (m_value == "MIN")
+            m_function = Function::MIN;
+    }
+    else
+    {
+        m_function = Function::NO_FUNCTION;
+    }
 
     if (m_type == Type::SENSOR)
     {
         if (m_value == "COMPASS_DIRECTION")
+        {
             m_sensor = Sensor::COMPASS_DIRECTION;
+        }
     }
     else
     {
@@ -112,38 +114,32 @@ FormulaTree::FormulaTree(string type, string value)
 
 void FormulaTree::SetLeftChild(FormulaTree *leftChild)
 {
-	m_leftChild = leftChild;
+    m_leftChild = leftChild;
 }
 
 void FormulaTree::SetRightChild(FormulaTree *rightChild)
 {
-	m_rightChild = rightChild;
+    m_rightChild = rightChild;
 }
 
 FormulaTree *FormulaTree::GetLeftChild()
 {
-    if (this->m_leftChild != NULL)
-        return this->m_leftChild;
-    else
-        return NULL;
+    return this->m_leftChild;
 }
 
 FormulaTree *FormulaTree::GetRightChild()
 {
-    if (this->m_rightChild != NULL)
-        return this->m_rightChild;
-    else
-        return NULL;
+    return this->m_rightChild;
 }
 
 Type FormulaTree::GetType()
 {
-	return m_type;
+    return m_type;
 }
 
 string FormulaTree::Value()
 {
-	return m_value;
+    return m_value;
 }
 
 Operator FormulaTree::GetOperator()
@@ -153,5 +149,5 @@ Operator FormulaTree::GetOperator()
 
 Function FormulaTree::GetFunction()
 {
-	return this->m_function;
+    return this->m_function;
 }
