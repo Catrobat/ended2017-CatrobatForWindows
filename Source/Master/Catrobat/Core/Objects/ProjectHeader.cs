@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Services;
 using Catrobat.Core.Storage;
 
 namespace Catrobat.Core.Objects
@@ -310,15 +311,15 @@ namespace Catrobat.Core.Objects
                 CatrobatLanguageVersion = "Win0.08";
                 DateTimeUpload = "";
                 Description = "";
-                DeviceName = PlatformInformationHelper.DeviceName;
+                DeviceName = ServiceLocator.SystemInformationService.DeviceName;
                 MediaLicense = "http://developer.catrobat.org/ccbysa_v3";
-                Platform = PlatformInformationHelper.PlatformName;
-                PlatformVersion = PlatformInformationHelper.PlatformVersion;
+                Platform = ServiceLocator.SystemInformationService.PlatformName;
+                PlatformVersion = ServiceLocator.SystemInformationService.PlatformVersion;
                 ProgramLicense = "http://developer.catrobat.org/agpl_v3";
                 _programName = ""; //otherwise renameDirectory would be executed
                 RemixOf = "";
-                ScreenHeight = PlatformInformationHelper.ScreenHeight;
-                ScreenWidth = PlatformInformationHelper.ScreenWidth;
+                ScreenHeight = ServiceLocator.SystemInformationService.ScreenHeight;
+                ScreenWidth = ServiceLocator.SystemInformationService.ScreenWidth;
                 Tags = "";
                 Url = "http://pocketcode.org/details/871";
                 UserHandle = "";

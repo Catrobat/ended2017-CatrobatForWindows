@@ -7,39 +7,55 @@ using Catrobat.Core.Misc.Helpers;
 
 namespace Catrobat.TestsCommon.Misc
 {
-    public class PlatformInformationHelperTests : ISystemInformationHelper
+    public class PlatformInformationHelperTests : ISystemInformationService
     {
-
-        public string GetPlatformName()
+        public string PlatformName
         {
-            return "TestEnvironment";
+            get
+            {
+                return "TestEnvironment";
+            }
         }
 
-        public string GetPlatformVersion()
+        public string PlatformVersion
         {
-            return "1.0";
+            get
+            {
+                return "1.0";
+            }
+        }
+
+        public string DeviceName
+        {
+            get
+            {
+                return "TestDevice";
+            }
+        }
+
+        public int ScreenWidth
+        {
+            get
+            {
+                return 480;
+            }
+        }
+
+        public int ScreenHeight
+        {
+            get
+            {
+                return 800;
+            }
         }
 
 
-        public string GetDeviceName()
+        public string CurrentApplicationVersion
         {
-            return "TestDevice";
-        }
-
-        public int GetScreenWidth()
-        {
-            return 480;
-        }
-
-        public int GetScreenHeight()
-        {
-            return 800;
-        }
-
-
-        public string GetCurrentApplicationVersion()
-        {
-            return "TestApp01";
+            get
+            {
+                return "TestApp01";
+            }
         }
     }
 }

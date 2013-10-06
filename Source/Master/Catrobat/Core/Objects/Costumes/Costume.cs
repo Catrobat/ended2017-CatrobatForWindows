@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 
 namespace Catrobat.Core.Objects.Costumes
@@ -51,7 +52,7 @@ namespace Catrobat.Core.Objects.Costumes
                     {
                         using (var storage = StorageSystem.GetStorage())
                         {
-                            _thumbnail = storage.LoadImageThumbnail(ProjectHolder.Project.BasePath + "/images/" + _fileName);
+                            _thumbnail = storage.LoadImageThumbnail(XmlParserTempProjectHelper.Project.BasePath + "/images/" + _fileName);
                         }
                     }
                     catch { }
@@ -92,7 +93,7 @@ namespace Catrobat.Core.Objects.Costumes
         public Costume(string name)
         {
             _name = name;
-            _fileName = FileNameGenerator.Generate() + _name;
+            _fileName = FileNameGenerationHelper.Generate() + _name;
         }
 
         internal Costume(XElement xElement)
@@ -121,7 +122,7 @@ namespace Catrobat.Core.Objects.Costumes
         {
             var newCostume = new Costume(_name);
 
-            var path = ProjectHolder.Project.BasePath + "/" + Project.ImagesPath + "/";
+            var path = XmlParserTempProjectHelper.Project.BasePath + "/" + Project.ImagesPath + "/";
             var absoluteFileNameOld = path + _fileName;
             var absoluteFileNameNew = path + newCostume._fileName;
 
@@ -138,7 +139,7 @@ namespace Catrobat.Core.Objects.Costumes
 
         public void Delete()
         {
-            var path = ProjectHolder.Project.BasePath + "/" + Project.ImagesPath + "/" + _fileName;
+            var path = XmlParserTempProjectHelper.Project.BasePath + "/" + Project.ImagesPath + "/" + _fileName;
             try
             {
                 using (var storage = StorageSystem.GetStorage())

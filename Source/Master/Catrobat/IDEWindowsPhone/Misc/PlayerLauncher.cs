@@ -6,7 +6,6 @@ using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Storage;
 using Catrobat.Core.VersionConverter;
-using Catrobat.Core.ZIP;
 using Windows.Storage;
 using Windows.System;
 using Catrobat.IDEWindowsPhone.Views.Main;

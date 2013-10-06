@@ -12,6 +12,7 @@ using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Controls.Misc;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Misc.Images;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using Catrobat.Paint;
 using Coding4Fun.Toolkit.Controls.Common;
@@ -173,7 +174,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         private void OpenPaintAction()
         {
             var newBitmap = new WriteableBitmap(
-                PlatformInformationHelper.ScreenWidth, PlatformInformationHelper.ScreenHeight);
+                ServiceLocator.SystemInformationService.ScreenWidth, ServiceLocator.SystemInformationService.ScreenHeight);
 
             var task = new PaintLauncherTask { CurrentImage = newBitmap };
             task.OnImageChanged += OnPaintLauncherImageChanged;

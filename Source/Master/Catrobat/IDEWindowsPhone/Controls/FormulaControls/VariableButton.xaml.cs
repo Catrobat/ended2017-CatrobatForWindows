@@ -97,8 +97,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
         {
             var container = (VariableConteiner)sender;
 
-            if (args.PropertyName == PropertyNameHelper.
-                GetPropertyNameFromExpression(() => container.Variable))
+            if (args.PropertyName == PropertyHelper.
+                GetPropertyName(() => container.Variable))
             {
                 VariableChanged(container.Variable);
                 //SetValue(VariableProperty, container.Variable);
@@ -120,7 +120,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
         {
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyNameHelper.GetPropertyNameFromExpression(selector)));
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyHelper.GetPropertyName(selector)));
             }
         }
 

@@ -3,11 +3,13 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Xml.Linq;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 
 namespace Catrobat.Core.Objects
@@ -192,7 +194,7 @@ namespace Catrobat.Core.Objects
             var document = XDocument.Load(new StringReader(xml));
             document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
 
-            ProjectHolder.Project = this;
+            XmlParserTempProjectHelper.Project = this;
 
             var project = document.Element("program");
             _projectHeader = new ProjectHeader(project.Element("header"));

@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using Catrobat.Core.Annotations;
 using Catrobat.Core.Misc;
+using Catrobat.Core.Misc.Helpers;
 
 namespace Catrobat.Core.Objects
 {
@@ -39,7 +40,7 @@ namespace Catrobat.Core.Objects
         {
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyNameHelper.GetPropertyNameFromExpression(selector)));
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyHelper.GetPropertyName(selector)));
             }
         }
         #endregion

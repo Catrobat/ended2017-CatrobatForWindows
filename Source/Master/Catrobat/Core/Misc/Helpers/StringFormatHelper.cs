@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 
-namespace Catrobat.Core.Misc.Helpers
+namespace Catrobat.Core.Services.Common
 {
-    public static class FormatHelper
+    public static class StringFormatHelper
     {
         public static int ParseInt(string value)
         {

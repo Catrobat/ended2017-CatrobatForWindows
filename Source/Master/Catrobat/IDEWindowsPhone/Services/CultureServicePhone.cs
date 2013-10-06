@@ -1,9 +1,10 @@
 ﻿using System.Threading;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Services;
 
-namespace Catrobat.IDEWindowsPhone.Misc
+namespace Catrobat.IDEWindowsPhone.Services
 {
-    public class CulturePhone : ICulture
+    public class CulturePhone : ICultureService
     {
         public string GetToLetterCultureColde()
         {

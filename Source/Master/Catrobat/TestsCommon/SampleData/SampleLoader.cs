@@ -1,9 +1,10 @@
 ﻿using System;
 using Catrobat.Core;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Objects;
-using Catrobat.Core.ZIP;
 using System.IO;
 using System.Xml.Linq;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 using Catrobat.TestsCommon.Misc.Storage;
 
@@ -35,7 +36,7 @@ namespace Catrobat.TestsCommon.SampleData
             using (var resourceLoader = ResourceLoader.CreateResourceLoader())
             {
                 var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, Path + sampleName);
-                CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
+                CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
                 stream.Close();
                 stream.Dispose();
             }

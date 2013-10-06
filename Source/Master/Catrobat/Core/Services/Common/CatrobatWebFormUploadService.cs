@@ -4,11 +4,11 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace Catrobat.Core.Misc.Helpers
+namespace Catrobat.Core.Services.Common
 {
     // Implements multipart/form-data POST in C# http://www.ietf.org/rfc/rfc2388.txt
     // http://www.briangrinstead.com/blog/multipart-form-post-in-c
-    public static class FormUpload
+    public static class CatrobatWebFormUploadService
     {
         public delegate void FinishedCallback(string result);
 

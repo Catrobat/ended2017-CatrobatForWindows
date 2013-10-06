@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.IO.IsolatedStorage;
+using Catrobat.Core.Misc;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
-using Catrobat.Core.ZIP;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.Misc.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -218,7 +219,7 @@ namespace Catrobat.TestsCommon.Tests.Storage
         {
           Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon,
                                                             sampleProjectsPath + "test.catroid");
-          CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
+          CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, basePath);
           stream.Close();
           stream.Dispose();
         }

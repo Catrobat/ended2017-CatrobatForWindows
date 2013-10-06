@@ -6,6 +6,7 @@ using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Storage;
+using Catrobat.IDEWindowsPhone.Misc.Images;
 using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDEWindowsPhone.Misc

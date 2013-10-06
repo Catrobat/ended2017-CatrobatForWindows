@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Services.Common;
 
 namespace Catrobat.IDEWindowsPhone.Converters
 {
@@ -9,14 +10,14 @@ namespace Catrobat.IDEWindowsPhone.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return FormatHelper.ConvertInt((int) value);
+            return StringFormatHelper.ConvertInt((int) value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
-                return FormatHelper.ParseInt((string) value);
+                return StringFormatHelper.ParseInt((string) value);
             }
             catch (Exception)
             {

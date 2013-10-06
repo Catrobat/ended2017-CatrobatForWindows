@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 
 namespace Catrobat.Core.Objects.Sounds
@@ -45,7 +46,7 @@ namespace Catrobat.Core.Objects.Sounds
         public Sound(string name)
         {
             _name = name;
-            _fileName = FileNameGenerator.Generate() + _name;
+            _fileName = FileNameGenerationHelper.Generate() + _name;
         }
 
         internal Sound(XElement xElement)
@@ -74,7 +75,7 @@ namespace Catrobat.Core.Objects.Sounds
         {
             var newSoundInfo = new Sound(_name);
 
-            var path = ProjectHolder.Project.BasePath + "/" + Project.SoundsPath + "/";
+            var path = XmlParserTempProjectHelper.Project.BasePath + "/" + Project.SoundsPath + "/";
             var absoluteFileNameOld = path + _fileName;
             var absoluteFileNameNew = path + newSoundInfo._fileName;
 
@@ -91,7 +92,7 @@ namespace Catrobat.Core.Objects.Sounds
 
         public void Delete()
         {
-            var path = ProjectHolder.Project.BasePath + "/" + Project.SoundsPath + "/" + _fileName;
+            var path = XmlParserTempProjectHelper.Project.BasePath + "/" + Project.SoundsPath + "/" + _fileName;
 
             using (var storage = StorageSystem.GetStorage())
             {

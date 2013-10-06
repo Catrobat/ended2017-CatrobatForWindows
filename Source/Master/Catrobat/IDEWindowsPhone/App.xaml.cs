@@ -6,7 +6,6 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone;
 using Catrobat.IDEWindowsPhone.Content.Localization;

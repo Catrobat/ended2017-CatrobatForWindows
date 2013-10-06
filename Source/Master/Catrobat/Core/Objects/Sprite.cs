@@ -7,6 +7,7 @@ using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.Services.Common;
 
 namespace Catrobat.Core.Objects
 {
@@ -161,7 +162,7 @@ namespace Catrobat.Core.Objects
             }
 
 
-            var entries = ProjectHolder.Project.VariableList.ObjectVariableList.ObjectVariableEntries;
+            var entries = XmlParserTempProjectHelper.Project.VariableList.ObjectVariableList.ObjectVariableEntries;
             ObjectVariableEntry newEntry = null;
 
             foreach (var entry in entries)

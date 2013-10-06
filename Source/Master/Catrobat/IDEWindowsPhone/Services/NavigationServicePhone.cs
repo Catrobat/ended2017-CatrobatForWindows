@@ -6,7 +6,7 @@ using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDEWindowsPhone.Services
 {
-    public class NavigationService : INavigationService
+    public class NavigationServicePhone : INavigationService
     {
         public void NavigateTo(Type type)
         {

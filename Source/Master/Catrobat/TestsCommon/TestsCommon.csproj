@@ -72,7 +72,6 @@
     <Compile Include="Misc\TestHelper.cs" />
     <Compile Include="Misc\XmlDocumentCompare.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleData\ContextHolderTests.cs" />
     <Compile Include="SampleData\SampleLoader.cs" />
     <Compile Include="Tests\Data\CatrobatContextTests.cs" />
     <Compile Include="Tests\Data\VariableHelperTests.cs" />

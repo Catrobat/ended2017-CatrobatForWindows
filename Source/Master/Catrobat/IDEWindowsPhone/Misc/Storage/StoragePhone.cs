@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Media.Imaging;
 using Catrobat.Core.ExtensionMethods;
 using Catrobat.Core.Storage;
+using Catrobat.IDEWindowsPhone.Misc.Images;
 using Coding4Fun.Toolkit.Controls.Common;
 using ToolStackPNGWriterLib;
 

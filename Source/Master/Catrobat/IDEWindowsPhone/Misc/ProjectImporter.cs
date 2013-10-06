@@ -4,10 +4,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.ExtensionMethods;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 using Catrobat.Core.VersionConverter;
-using Catrobat.Core.ZIP;
 using Windows.Phone.Storage.SharedAccess;
 using Windows.Storage;
 using Catrobat.IDEWindowsPhone.ViewModel;
@@ -47,7 +48,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
                 var projectZipFile = await projectTempZipFolder.GetFileAsync(tempProjectZipName);
                 var projectZipStream = await projectZipFile.OpenStreamForReadAsync();
 
-                CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream, CatrobatContextBase.TempProjectImportPath);
+                CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream, CatrobatContextBase.TempProjectImportPath);
 
                 object projectScreenshot = null;
                 string projectCode = "";

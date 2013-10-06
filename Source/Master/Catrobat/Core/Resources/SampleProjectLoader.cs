@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
-using Catrobat.Core.ZIP;
 
 namespace Catrobat.Core.Resources
 {
@@ -43,7 +44,7 @@ namespace Catrobat.Core.Resources
                         {
                             if (!storage.DirectoryExists(projectFolderPath))
                             {
-                                CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContextBase.ProjectsPath + "/" + projectName);
+                                CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContextBase.ProjectsPath + "/" + projectName);
                             }
                         }
 

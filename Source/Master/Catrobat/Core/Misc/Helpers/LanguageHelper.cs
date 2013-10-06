@@ -1,22 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Globalization;
 
-namespace Catrobat.Core.Misc.Helpers
+namespace Catrobat.Core.Services.Common
 {
     public static class LanguageHelper
     {
-        private static ICulture _culture;
-
-        public static void SetICulture(ICulture culture)
-        {
-            _culture = culture;
-        }
-
-        private static readonly string[] SupportedLanguageCodes =
-        {
-            "DE", "EN"
-        };
-
         private static ObservableCollection<CultureInfo> _supportedLanguages;
 
         public static ObservableCollection<CultureInfo> SupportedLanguages
@@ -27,7 +15,7 @@ namespace Catrobat.Core.Misc.Helpers
                 {
                     _supportedLanguages = new ObservableCollection<CultureInfo>();
 
-                    foreach (string languageCode in SupportedLanguageCodes)
+                    foreach (string languageCode in Constants.SupportedLanguageCodes)
                     {
                         var culture = new CultureInfo(languageCode);
                         if (culture.IsNeutralCulture)
@@ -39,11 +27,6 @@ namespace Catrobat.Core.Misc.Helpers
 
                 return _supportedLanguages;
             }
-        }
-
-        public static string GetCurrentCultureLanguageCode()
-        {
-            return _culture.GetToLetterCultureColde();
         }
     }
 }

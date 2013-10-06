@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Services;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -87,7 +87,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
                 RaisePropertyChanged(() => CurrentProject);
                 UpdateLocalProjects();
-                ProjectHolder.Project = _currentProject;
+                XmlParserTempProjectHelper.Project = _currentProject;
 
                 var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
                 Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
@@ -142,7 +142,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get
             {
                 var name = String.Format(AppResources.Main_ApplicationNameAndVersion,
-                    PlatformInformationHelper.CurrentApplicationVersion);
+                    ServiceLocator.SystemInformationService.CurrentApplicationVersion);
                 return name;
             }
         }
@@ -365,7 +365,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 }
                 else
                 {
-                    ProjectHolder.Project = CurrentProject;
+                    XmlParserTempProjectHelper.Project = CurrentProject;
 
                     var message = new DialogMessage(String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName),
                         new Action<MessageBoxResult>( delegate
@@ -416,7 +416,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectsLoadingView));
 
             // Determine which page to open
-            Task.Run(() => ServerCommunication.CheckToken(Context.CurrentToken, CheckTokenEvent));
+            Task.Run(() => CatrobatWebCommunicationService.CheckToken(Context.CurrentToken, CheckTokenEvent));
         }
 
         private void ResetViewModelAction()
@@ -637,7 +637,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
             _previousFilterText = _filterText;
 
-            ServerCommunication.LoadOnlineProjects(isAppend, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
+            CatrobatWebCommunicationService.LoadOnlineProjects(isAppend, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
         }
 
         private void CheckTokenEvent(bool registered)

@@ -14,6 +14,8 @@ using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Objects.Variables;
 using System.IO;
+using Catrobat.Core.Services;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 
 namespace Catrobat.TestsCommon.Misc
@@ -46,8 +48,8 @@ namespace Catrobat.TestsCommon.Misc
                     Description = "",
                     DeviceName = "SampleDevice",
                     MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
-                    Platform = PlatformInformationHelper.PlatformName,
-                    PlatformVersion = PlatformInformationHelper.PlatformVersion,
+                    Platform = ServiceLocator.SystemInformationService.PlatformName,
+                    PlatformVersion = ServiceLocator.SystemInformationService.PlatformVersion,
                     ProgramLicense = "http://developer.catrobat.org/agpl_v3",
                     RemixOf = "",
                     ScreenHeight = 480,
@@ -58,7 +60,7 @@ namespace Catrobat.TestsCommon.Misc
                 }
             };
 
-            ProjectHolder.Project = project;
+            XmlParserTempProjectHelper.Project = project;
 
             project.ProjectHeader.SetProgramName("project1");
 

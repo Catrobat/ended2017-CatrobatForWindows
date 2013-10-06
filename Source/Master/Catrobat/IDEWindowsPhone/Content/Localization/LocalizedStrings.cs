@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq.Expressions;
 using Catrobat.Core.Misc;
+using Catrobat.Core.Misc.Helpers;
 
 
 namespace Catrobat.IDEWindowsPhone.Content.Localization
@@ -31,7 +32,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization
     {
       if (PropertyChanged != null)
       {
-          PropertyChanged(this, new PropertyChangedEventArgs(PropertyNameHelper.GetPropertyNameFromExpression(selector)));
+          PropertyChanged(this, new PropertyChangedEventArgs(PropertyHelper.GetPropertyName(selector)));
       }
     }
     #endregion

@@ -45,27 +45,25 @@
   <ItemGroup>
     <Compile Include="CatrobatContext.cs" />
     <Compile Include="CatrobatContextDesign.cs" />
-    <Compile Include="ContextHolderDesign.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
-    <Compile Include="IContextHolder.cs" />
-    <Compile Include="Misc\Helpers\PlatformInformationHelper.cs" />
-    <Compile Include="Misc\Helpers\FormatHelper.cs" />
-    <Compile Include="Misc\Helpers\FileNameGenerator.cs" />
-    <Compile Include="Misc\Helpers\FormUpload.cs" />
-    <Compile Include="Misc\Helpers\ICulture.cs" />
+    <Compile Include="Misc\Helpers\StringFormatHelper.cs" />
+    <Compile Include="Misc\Helpers\FileNameGenerationHelper.cs" />
+    <Compile Include="Services\Common\CatrobatWebFormUploadService.cs" />
+    <Compile Include="Services\ICultureService.cs" />
     <Compile Include="Misc\Helpers\LanguageHelper.cs" />
-    <Compile Include="Misc\Helpers\MD5.cs" />
-    <Compile Include="Misc\Helpers\ISystemInformationHelper.cs" />
-    <Compile Include="Misc\Helpers\ProjectHolder.cs" />
+    <Compile Include="Misc\MD5.cs" />
+    <Compile Include="Services\ISystemInformationService.cs" />
+    <Compile Include="Misc\Helpers\XmlParserTempProjectHelper.cs" />
     <Compile Include="Misc\Helpers\ReferenceHelper.cs" />
     <Compile Include="CatrobatContextBase.cs" />
     <Compile Include="LocalSettings.cs" />
     <Compile Include="Misc\Helpers\VariableHelper.cs" />
     <Compile Include="Misc\JSON\JSONClassDeserializer.cs" />
     <Compile Include="Misc\JSON\JSONStatusResponse.cs" />
-    <Compile Include="Misc\PropertyNameHelper.cs" />
-    <Compile Include="Misc\ServerCommunication\IServerCommunication.cs" />
-    <Compile Include="Misc\ServerCommunication\ServerCommunication.cs" />
+    <Compile Include="Misc\Helpers\PropertyNameHelper.cs" />
+    <Compile Include="Services\IServerCommunicationService.cs" />
+    <Compile Include="Services\Common\CatrobatWebCommunicationService.cs" />
     <Compile Include="Misc\UtilToken.cs" />
     <Compile Include="Objects\Bricks\Brick.cs" />
     <Compile Include="Objects\Bricks\BrickList.cs" />
@@ -177,9 +175,9 @@
     <Compile Include="VersionConverter\Versions\CatrobatVersion091To9.cs" />
     <Compile Include="VersionConverter\Versions\CatrobatVersion09To08.cs" />
     <Compile Include="VersionConverter\Versions\CatrobatVersion08ToWin080.cs" />
-    <Compile Include="Misc\XPathHelper.cs" />
-    <Compile Include="XmlStringWriter.cs" />
-    <Compile Include="ZIP\CatrobatZip.cs" />
+    <Compile Include="Misc\Helpers\XPathHelper.cs" />
+    <Compile Include="Misc\XmlStringWriter.cs" />
+    <Compile Include="Services\Common\CatrobatZipService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ApplicationResources.resx">
@@ -202,7 +200,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Misc\ServerCommunication\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

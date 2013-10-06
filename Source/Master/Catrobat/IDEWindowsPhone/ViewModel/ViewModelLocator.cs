@@ -3,9 +3,9 @@ using System.Globalization;
 using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Resources;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
@@ -84,14 +84,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
         private static void InitializeInterfaces()
         {
             Core.Services.ServiceLocator.SetServices(
-                new NavigationService()
+                new NavigationServicePhone(),
+                new SystemInformationServicePhone(),
+                new CulturePhone()
                 );
 
             StorageSystem.SetStorageFactory(new StorageFactoryPhone());
             ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryPhone());
-            LanguageHelper.SetICulture(new CulturePhone());
-            ServerCommunication.SetIServerCommunication(new ServerCommunicationPhone());
-            PlatformInformationHelper.SetInterface(new PlatformInformationHelperPhone());
+            CatrobatWebCommunicationService.SetIServerCommunication(new ServerCommunicationPhone());
         }
 
         private static Project InitializeFirstTimeUse(CatrobatContextBase context)
@@ -126,7 +126,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             var currentProject = InitializeFirstTimeUse(_context);
 
             if (_context.LocalSettings.CurrentLanguageString == null)
-                _context.LocalSettings.CurrentLanguageString = LanguageHelper.GetCurrentCultureLanguageCode();
+                _context.LocalSettings.CurrentLanguageString =
+                    Core.Services.ServiceLocator.CulureService.GetToLetterCultureColde();
 
             var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
             if (_context.LocalSettings.CurrentThemeIndex != -1)

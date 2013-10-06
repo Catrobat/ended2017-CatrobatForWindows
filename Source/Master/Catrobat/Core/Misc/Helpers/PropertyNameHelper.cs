@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Catrobat.Core.Misc
+namespace Catrobat.Core.Misc.Helpers
 {
-    public class PropertyNameHelper
+    public class PropertyHelper
     {
-        public static string GetPropertyNameFromExpression<T>(Expression<Func<T>> property)
+        public static string GetPropertyName<T>(Expression<Func<T>> property)
         {
             var lambda = (LambdaExpression)property;
             MemberExpression memberExpression;

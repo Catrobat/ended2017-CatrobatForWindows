@@ -10,6 +10,7 @@ using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.Services.Common;
 
 namespace Catrobat.Core.Misc.Helpers
 {
@@ -47,7 +48,7 @@ namespace Catrobat.Core.Misc.Helpers
 
         private static string GetCostumeReferenceString(Costume costume)
         {
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
             {
                 var count = 0;
                 foreach (var tempCostume in sprite.Costumes.Costumes)
@@ -62,7 +63,7 @@ namespace Catrobat.Core.Misc.Helpers
 
         private static string GetSoundReferenceString(Sound sound)
         {
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
             {
                 var count = 0;
                 foreach (var tempSound in sprite.Sounds.Sounds)
@@ -80,14 +81,14 @@ namespace Catrobat.Core.Misc.Helpers
             var sprite = spriteReference.Sprite;
             var count = 0;
 
-            foreach (var tempSprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var tempSprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
             {
                 count++;
                 if (tempSprite == sprite)
                     break;
             }
 
-            foreach (var tempSprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var tempSprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in tempSprite.Scripts.Scripts)
                     foreach (var brick in script.Bricks.Bricks)
                     {
@@ -99,7 +100,7 @@ namespace Catrobat.Core.Misc.Helpers
                         }
                     }
 
-            foreach (var entry in ProjectHolder.Project.VariableList.ObjectVariableList.ObjectVariableEntries)
+            foreach (var entry in XmlParserTempProjectHelper.Project.VariableList.ObjectVariableList.ObjectVariableEntries)
             {
                 if (entry.SpriteReference == spriteReference)
                     return "../../../../objectList/object[" + count + "]";
@@ -112,7 +113,7 @@ namespace Catrobat.Core.Misc.Helpers
         {
             var userVariable = userVariableReference.UserVariable;
             var entryCount = 0;
-            foreach (var entry in ProjectHolder.Project.VariableList.ObjectVariableList.ObjectVariableEntries)
+            foreach (var entry in XmlParserTempProjectHelper.Project.VariableList.ObjectVariableList.ObjectVariableEntries)
             {
                 entryCount++;
                 var userVariableCount = 0;
@@ -126,7 +127,7 @@ namespace Catrobat.Core.Misc.Helpers
             }
 
             var count = 0;
-            foreach (var tempUserVariable in ProjectHolder.Project.VariableList.ProgramVariableList.UserVariables)
+            foreach (var tempUserVariable in XmlParserTempProjectHelper.Project.VariableList.ProgramVariableList.UserVariables)
             {
                 count++;
                 if (tempUserVariable == userVariable)
@@ -138,7 +139,7 @@ namespace Catrobat.Core.Misc.Helpers
 
         private static string GetForeverBrickReferenceString(LoopBeginBrick loopBeginBrick)
         {
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                 {
                     var count = 0;
@@ -155,7 +156,7 @@ namespace Catrobat.Core.Misc.Helpers
 
         private static string GetRepeatBrickReferenceString(LoopBeginBrick loopBeginBrick)
         {
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                 {
                     var count = 0;
@@ -174,7 +175,7 @@ namespace Catrobat.Core.Misc.Helpers
         {
             var loopEndBrick = loopEndBrickRef.LoopEndBrick;
 
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                 {
                     var count = 0;
@@ -193,7 +194,7 @@ namespace Catrobat.Core.Misc.Helpers
         {
             var ifLogicBeginBrick = ifLogicBeginBrickReference.IfLogicBeginBrick;
 
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                 {
                     var count = 0;
@@ -212,7 +213,7 @@ namespace Catrobat.Core.Misc.Helpers
         {
             var ifLogicElseBrick = ifLogicElseBrickReference.IfLogicElseBrick;
 
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                 {
                     var count = 0;
@@ -231,7 +232,7 @@ namespace Catrobat.Core.Misc.Helpers
         {
             var ifLogicEndBrick = ifLogicEndBrickReference.IfLogicEndBrick;
 
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                 {
                     var count = 0;
@@ -280,7 +281,7 @@ namespace Catrobat.Core.Misc.Helpers
 
         private static DataObject GetCostumeObject(CostumeReference costumeReference, string reference)
         {
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                     foreach (var brick in script.Bricks.Bricks)
                     {
@@ -306,7 +307,7 @@ namespace Catrobat.Core.Misc.Helpers
 
         private static DataObject GetSoundObject(SoundReference soundReference, string reference)
         {
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                     foreach (var brick in script.Bricks.Bricks)
                     {
@@ -340,7 +341,7 @@ namespace Catrobat.Core.Misc.Helpers
                 reference = reference.Split(']')[0];
                 count = Int32.Parse(reference) - 1;
             }
-            return ProjectHolder.Project.SpriteList.Sprites[count];
+            return XmlParserTempProjectHelper.Project.SpriteList.Sprites[count];
         }
 
         private static DataObject GetUserVariableObject(UserVariableReference userVariableReference, string reference)
@@ -348,7 +349,7 @@ namespace Catrobat.Core.Misc.Helpers
             bool found = false;
             var count = 0;
 
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
             {
                 foreach (var script in sprite.Scripts.Scripts)
                     foreach (var brick in script.Bricks.Bricks)
@@ -369,7 +370,7 @@ namespace Catrobat.Core.Misc.Helpers
 
                 if (found)
                 {
-                    var entries = ProjectHolder.Project.VariableList.ObjectVariableList.ObjectVariableEntries;
+                    var entries = XmlParserTempProjectHelper.Project.VariableList.ObjectVariableList.ObjectVariableEntries;
                     foreach (var entry in entries)
                     {
                         if (entry.Sprite == sprite)
@@ -385,7 +386,7 @@ namespace Catrobat.Core.Misc.Helpers
         private static DataObject GetForeverBrickObject(LoopBeginBrickReference loopBeginBrickReference, string reference)
         {
             var foreverBricks = new List<Brick>();
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                     foreach (var brick in script.Bricks.Bricks)
                     {
@@ -414,7 +415,7 @@ namespace Catrobat.Core.Misc.Helpers
         private static DataObject GetRepeatBrickObject(LoopBeginBrickReference loopBeginBrickReference, string reference)
         {
             var repeatBricks = new List<Brick>();
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                     foreach (var brick in script.Bricks.Bricks)
                     {
@@ -445,7 +446,7 @@ namespace Catrobat.Core.Misc.Helpers
             bool found = false;
             var loopEndBricks = new List<Brick>();
 
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                 {
                     foreach (var brick in script.Bricks.Bricks)
@@ -486,7 +487,7 @@ namespace Catrobat.Core.Misc.Helpers
             bool found = false;
             var ifLogicBeginBricks = new List<Brick>();
 
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                 {
                     foreach (var brick in script.Bricks.Bricks)
@@ -527,7 +528,7 @@ namespace Catrobat.Core.Misc.Helpers
             bool found = false;
             var ifLogicElseBricks = new List<Brick>();
 
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                 {
                     foreach (var brick in script.Bricks.Bricks)
@@ -568,7 +569,7 @@ namespace Catrobat.Core.Misc.Helpers
             bool found = false;
             var ifLogicEndBricks = new List<Brick>();
 
-            foreach (var sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                 {
                     foreach (var brick in script.Bricks.Bricks)
@@ -703,7 +704,7 @@ namespace Catrobat.Core.Misc.Helpers
                         .UserVariableReference;
             }
 
-            var entries = ProjectHolder.Project.VariableList.ObjectVariableList.ObjectVariableEntries;
+            var entries = XmlParserTempProjectHelper.Project.VariableList.ObjectVariableList.ObjectVariableEntries;
             foreach (var oldEntry in entries)
                 if (oldEntry.Sprite == oldSprite)
                 {
@@ -921,7 +922,7 @@ namespace Catrobat.Core.Misc.Helpers
 
         private static void CleanUpSpriteReferences(Sprite deletedSprite)
         {
-            foreach (Sprite sprite in ProjectHolder.Project.SpriteList.Sprites)
+            foreach (Sprite sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
             {
                 foreach (Script script in sprite.Scripts.Scripts)
                 {

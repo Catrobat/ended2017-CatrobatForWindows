@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace Catrobat.Core
+namespace Catrobat.Core.Misc
 {
     public class XmlStringWriter : StringWriter
     {

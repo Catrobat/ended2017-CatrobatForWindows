@@ -4,8 +4,8 @@ namespace Catrobat.Core.Misc.JSON
 {
     public enum StatusCodes
     {
-        SERVER_RESPONSE_TOKEN_OK = 200,
-        SERVER_RESPONSE_REGISTER_OK = 201
+        ServerResponseTokenOk = 200,
+        ServerResponseRegisterOk = 201
     };
 
     [DataContract]

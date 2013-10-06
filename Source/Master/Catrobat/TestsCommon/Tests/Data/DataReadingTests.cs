@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml.Linq;
 using Catrobat.Core;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Storage;
 using Catrobat.Core.VersionConverter;

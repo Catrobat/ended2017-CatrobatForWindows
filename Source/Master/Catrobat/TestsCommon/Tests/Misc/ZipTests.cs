@@ -1,5 +1,6 @@
-﻿using Catrobat.Core.ZIP;
-using System.IO;
+﻿using System.IO;
+using Catrobat.Core.Misc;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.TestsCommon.Misc;
@@ -24,7 +25,7 @@ namespace Catrobat.TestsCommon.Tests.Misc
       using (var resourceLoader = ResourceLoader.CreateResourceLoader())
       {
         Stream originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path);
-        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
+        CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
         originalStream.Close();
         originalStream.Dispose();
       }
@@ -68,7 +69,7 @@ namespace Catrobat.TestsCommon.Tests.Misc
       using (var resourceLoader = ResourceLoader.CreateResourceLoader())
       {
         Stream originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path);
-        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
+        CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
         originalStream.Close();
         originalStream.Dispose();
       }
@@ -83,7 +84,7 @@ namespace Catrobat.TestsCommon.Tests.Misc
 
         using (Stream fileStream = storage.OpenFile(writePath, StorageFileMode.Create, StorageFileAccess.Write))
         {
-          CatrobatZip.ZipCatrobatPackage(fileStream, sourcePath);
+          CatrobatZipService.ZipCatrobatPackage(fileStream, sourcePath);
           fileStream.Close();
           fileStream.Dispose();
         }

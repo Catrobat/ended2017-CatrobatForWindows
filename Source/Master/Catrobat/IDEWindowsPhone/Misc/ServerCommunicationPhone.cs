@@ -5,21 +5,22 @@ using System.Linq;
 using System.Net;
 using System.Xml.Linq;
 using Catrobat.Core;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Resources;
+using Catrobat.Core.Services;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 using Catrobat.Core.VersionConverter;
-using Catrobat.Core.ZIP;
 using System.IO;
 
 namespace Catrobat.IDEWindowsPhone.Misc
 {
-    public class ServerCommunicationPhone : IServerCommunication
+    public class ServerCommunicationPhone : IServerCommunicationService
     {
         public void LoadOnlineProjects(bool append, string filterText, int offset,
-                                       ServerCommunication.LoadOnlineProjectsEvent callback)
+                                       CatrobatWebCommunicationService.LoadOnlineProjectsEvent callback)
         {
             var tempUrl = "";
 
@@ -54,11 +55,11 @@ namespace Catrobat.IDEWindowsPhone.Misc
                                         Author = item.Element("Author").Value,
                                         Description = item.Element("Description").Value,
                                         Uploaded =
-                                            ServerCommunication.ConvertUnixTimeStamp(
-                                                FormatHelper.ParseDouble(item.Element("Uploaded").Value)),
+                                            CatrobatWebCommunicationService.ConvertUnixTimeStamp(
+                                                StringFormatHelper.ParseDouble(item.Element("Uploaded").Value)),
                                         Version = item.Element("Version").Value,
-                                        Views = FormatHelper.ParseInt(item.Element("Views").Value),
-                                        Downloads = FormatHelper.ParseInt(item.Element("Downloads").Value),
+                                        Views = StringFormatHelper.ParseInt(item.Element("Views").Value),
+                                        Downloads = StringFormatHelper.ParseInt(item.Element("Downloads").Value),
                                         ScreenshotSmallUrl = ApplicationResources.OnlineImagesBaseUrl + item.Element("ScreenshotSmall").Value,
                                         ScreenshotBigUrl = ApplicationResources.OnlineImagesBaseUrl + item.Element("ScreenshotBig").Value,
                                         ProjectUrl = ApplicationResources.OnlineImagesBaseUrl + item.Element("ProjectUrl").Value,
@@ -72,7 +73,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
         }
 
         public void DownloadAndSaveProject(string downloadUrl, string projectName,
-                                          ServerCommunication.DownloadAndSaveProjectEvent callback)
+                                          CatrobatWebCommunicationService.DownloadAndSaveProjectEvent callback)
         {
             var wc = new WebClient();
             wc.OpenReadCompleted += ((s, args) =>
@@ -94,7 +95,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
                         projectName = projectName + countString;
 
 
-                        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(args.Result,
+                        CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(args.Result,
                                                                             CatrobatContextBase.ProjectsPath + "/" +
                                                                             projectName);
 

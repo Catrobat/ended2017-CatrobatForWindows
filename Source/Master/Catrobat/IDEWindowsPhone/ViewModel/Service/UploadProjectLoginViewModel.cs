@@ -6,8 +6,8 @@ using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.JSON;
-using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Services;
+using Catrobat.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Service;
@@ -125,7 +125,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             }
             else
             {
-                ServerCommunication.RegisterOrCheckToken(_username, _password, _email,
+                CatrobatWebCommunicationService.RegisterOrCheckToken(_username, _password, _email,
                                                          Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
                                                          RegionInfo.CurrentRegion.TwoLetterISORegionName,
                                                          Utils.CalculateToken(_username, _password),
@@ -213,7 +213,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
                 Messenger.Default.Send(message);
             }
-            else if (errorCode == StatusCodes.SERVER_RESPONSE_TOKEN_OK.ToString())
+            else if (errorCode == StatusCodes.ServerResponseTokenOk.ToString())
             {
                 if (NavigationCallback != null)
                 {
