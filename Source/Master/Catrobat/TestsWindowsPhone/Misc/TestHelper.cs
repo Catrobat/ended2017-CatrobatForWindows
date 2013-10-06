@@ -2,6 +2,7 @@
 using Catrobat.Core;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
+using Catrobat.IDEWindowsPhone.Utilities.Storage;
 
 namespace Catrobat.TestsWindowsPhone.Misc
 {

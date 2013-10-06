@@ -6,6 +6,7 @@ using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Utilities;
 using Catrobat.IDEWindowsPhone.Views.Editor;
 using Catrobat.Paint;
 using Coding4Fun.Toolkit.Controls.Common;
@@ -113,7 +114,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         {
             try
             {
-                var costumeBuilder = new CostumeBuilder();
+                var costumeBuilder = new CostumeBuilderHelper();
                 costumeBuilder.ReplaceImageInStorage(CurrentProject, ReceivedCostume, task.CurrentImage);
             }
             catch (Exception)

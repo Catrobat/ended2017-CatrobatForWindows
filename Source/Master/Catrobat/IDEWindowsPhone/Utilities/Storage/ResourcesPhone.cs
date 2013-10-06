@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Windows;
 using Catrobat.Core.Storage;
 
-namespace Catrobat.IDEWindowsPhone.Misc.Storage
+namespace Catrobat.IDEWindowsPhone.Utilities.Storage
 {
     public class ResourcesPhone : IResources
     {

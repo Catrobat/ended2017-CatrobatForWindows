@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows.Navigation;
 using Windows.Phone.Storage.SharedAccess;
 
-namespace Catrobat.IDEWindowsPhone.Misc
+namespace Catrobat.IDEWindowsPhone.Utilities
 {
     internal class AssociationUriMapper : UriMapperBase
     {

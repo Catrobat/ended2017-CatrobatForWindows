@@ -1,6 +1,6 @@
 ﻿using Catrobat.Core.Storage;
 
-namespace Catrobat.IDEWindowsPhone.Misc.Storage
+namespace Catrobat.IDEWindowsPhone.Utilities.Storage
 {
     public class ResourceLoaderFactoryPhone : IResourceLoaderFactory
     {

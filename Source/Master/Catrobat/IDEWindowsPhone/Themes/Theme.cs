@@ -2,6 +2,7 @@
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Utilities.Helpers;
 
 namespace Catrobat.IDEWindowsPhone.Themes
 {
@@ -27,7 +28,7 @@ namespace Catrobat.IDEWindowsPhone.Themes
                         case Resolutions.WXGA:
                             _background = new BitmapImage(new Uri(_backgroundPath + "_800.png", UriKind.Relative));
                             break;
-                        case Resolutions.HD720p:
+                        case Resolutions.HD720P:
                             _background = new BitmapImage(new Uri(_backgroundPath + "_800.png", UriKind.Relative));
                             break;
                         default:

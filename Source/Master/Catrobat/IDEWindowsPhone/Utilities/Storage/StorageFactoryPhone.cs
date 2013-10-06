@@ -1,7 +1,9 @@
 ﻿using System;
 using Catrobat.Core.Storage;
+using Catrobat.IDEWindowsPhone.Misc.Storage;
+using Catrobat.IDEWindowsPhone.Utilities.Helpers;
 
-namespace Catrobat.IDEWindowsPhone.Misc.Storage
+namespace Catrobat.IDEWindowsPhone.Utilities.Storage
 {
     public class StorageFactoryPhone : IStorageFactory
     {
@@ -17,7 +19,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
                 case Resolutions.WXGA:
                     storage.SetImageMaxThumbnailWidthHeight(220);
                     break;
-                case Resolutions.HD720p:
+                case Resolutions.HD720P:
                     storage.SetImageMaxThumbnailWidthHeight(220);
                     break;
                 default:

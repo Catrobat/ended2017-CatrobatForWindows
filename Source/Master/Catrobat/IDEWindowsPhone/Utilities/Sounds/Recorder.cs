@@ -5,7 +5,7 @@ using System.Windows.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
-namespace Catrobat.IDEWindowsPhone.Misc.Sounds
+namespace Catrobat.IDEWindowsPhone.Utilities.Sounds
 {
     internal class Recorder
     {

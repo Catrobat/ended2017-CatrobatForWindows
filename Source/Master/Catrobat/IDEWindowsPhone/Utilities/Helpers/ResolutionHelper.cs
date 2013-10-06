@@ -1,13 +1,13 @@
 ﻿using System;
 using IDEWindowsPhone;
 
-namespace Catrobat.IDEWindowsPhone.Misc
+namespace Catrobat.IDEWindowsPhone.Utilities.Helpers
 {
     public enum Resolutions
     {
         WVGA,
         WXGA,
-        HD720p
+        HD720P
     };
 
     public static class ResolutionHelper
@@ -42,7 +42,7 @@ namespace Catrobat.IDEWindowsPhone.Misc
             }
         }
 
-        private static bool Is720p
+        private static bool Is720P
         {
             get
             {
@@ -69,9 +69,9 @@ namespace Catrobat.IDEWindowsPhone.Misc
                 {
                     return Resolutions.WXGA;
                 }
-                else if (Is720p)
+                else if (Is720P)
                 {
-                    return Resolutions.HD720p;
+                    return Resolutions.HD720P;
                 }
                 else
                 {

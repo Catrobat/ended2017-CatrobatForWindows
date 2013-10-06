@@ -3,13 +3,14 @@ using System.IO;
 using System.Threading;
 using System.Windows;
 using Catrobat.Core;
+using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Services;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.Misc.Sounds;
+using Catrobat.IDEWindowsPhone.Utilities.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -373,7 +374,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                 {
                     var writer = new BinaryWriter(stream);
 
-                    WaveHeaderWriter.WriteHeader(writer.BaseStream, _recorder.SampleRate);
+                    WaveHeaderHelper.WriteHeader(writer.BaseStream, _recorder.SampleRate);
                     var dataBuffer = _recorder.GetSoundAsStream().GetBuffer();
                     writer.Write(dataBuffer, 0, (int) _recorder.GetSoundAsStream().Length);
                     writer.Flush();

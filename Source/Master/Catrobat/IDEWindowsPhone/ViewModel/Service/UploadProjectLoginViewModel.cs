@@ -128,8 +128,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
                 CatrobatWebCommunicationService.RegisterOrCheckToken(_username, _password, _email,
                                                          Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
                                                          RegionInfo.CurrentRegion.TwoLetterISORegionName,
-                                                         Utils.CalculateToken(_username, _password),
-                                                         registerOrCheckTokenCallback);
+                                                         UtilTokenHelper.CalculateToken(_username, _password),
+                                                         RegisterOrCheckTokenCallback);
             }
         }
 
@@ -199,9 +199,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             }
         }
 
-        private void registerOrCheckTokenCallback(bool registered, string errorCode, string statusMessage)
+        private void RegisterOrCheckTokenCallback(bool registered, string errorCode, string statusMessage)
         {
-           Context.CurrentToken = Utils.CalculateToken(_username, _password);
+            Context.CurrentToken = UtilTokenHelper.CalculateToken(_username, _password);
 
             if (registered)
             {

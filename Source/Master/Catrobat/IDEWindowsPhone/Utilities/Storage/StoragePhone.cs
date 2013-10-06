@@ -6,8 +6,9 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Windows.Media.Imaging;
 using Catrobat.Core.ExtensionMethods;
+using Catrobat.Core.Services;
 using Catrobat.Core.Storage;
-using Catrobat.IDEWindowsPhone.Misc.Images;
+using Catrobat.IDEWindowsPhone.Services;
 using Coding4Fun.Toolkit.Controls.Common;
 using ToolStackPNGWriterLib;
 
@@ -274,7 +275,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
                 {
                     var fullSizeImage = new WriteableBitmap(fullSizeBitmapImage);
 
-                    var thumbnailImage =  ImageResizer.ResizeImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight);
+                    var thumbnailImage =  ImageResizeServicePhone.ResizeImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight);
                     retVal = thumbnailImage;
                     try
                     {
@@ -311,7 +312,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
                 }
             }
 
-            var thumbnailImage = ImageResizer.ResizeImage(writeableBitmap, _imageThumbnailDefaultMaxWidthHeight);
+            var thumbnailImage = ImageResizeServicePhone.ResizeImage(writeableBitmap, _imageThumbnailDefaultMaxWidthHeight);
             return thumbnailImage;
         }
 

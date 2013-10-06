@@ -5,19 +5,16 @@ using System.Linq;
 using System.Net;
 using System.Xml.Linq;
 using Catrobat.Core;
-using Catrobat.Core.Misc;
-using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 using Catrobat.Core.VersionConverter;
-using System.IO;
 
-namespace Catrobat.IDEWindowsPhone.Misc
+namespace Catrobat.IDEWindowsPhone.Services
 {
-    public class ServerCommunicationPhone : IServerCommunicationService
+    public class ServerCommunicationServicePhone : IServerCommunicationService
     {
         public void LoadOnlineProjects(bool append, string filterText, int offset,
                                        CatrobatWebCommunicationService.LoadOnlineProjectsEvent callback)

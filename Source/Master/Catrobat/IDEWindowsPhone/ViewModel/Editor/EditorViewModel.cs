@@ -9,6 +9,8 @@ using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Objects.Variables;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
+using Catrobat.IDEWindowsPhone.Utilities;
+using Catrobat.IDEWindowsPhone.Utilities.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
@@ -775,7 +777,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void StartPlayerAction()
         {
-            PlayerLauncher.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
+            ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
         }
 
         private void GoToMainViewAction()

@@ -9,6 +9,7 @@ using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Utilities;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using GalaSoft.MvvmLight;
@@ -195,7 +196,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
 
         private void StartPlayerAction()
         {
-            PlayerLauncher.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
+           ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
         }
 
         private void UndoAction()

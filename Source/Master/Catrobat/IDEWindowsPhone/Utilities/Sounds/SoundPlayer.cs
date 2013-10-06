@@ -1,12 +1,11 @@
 ﻿using System.Threading;
 using System.Windows;
-using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Storage;
 using Microsoft.Xna.Framework.Audio;
 
-namespace Catrobat.IDEWindowsPhone.Misc
+namespace Catrobat.IDEWindowsPhone.Utilities.Sounds
 {
     public enum SoundState
     {

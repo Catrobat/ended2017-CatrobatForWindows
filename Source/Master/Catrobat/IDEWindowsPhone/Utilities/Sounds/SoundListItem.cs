@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using Catrobat.IDEWindowsPhone.Annotations;
 using Microsoft.Xna.Framework.Media;
 
-namespace Catrobat.IDEWindowsPhone.Misc.Sounds
+namespace Catrobat.IDEWindowsPhone.Utilities.Sounds
 {
     public class SoundListItem : INotifyPropertyChanged
     {
@@ -21,23 +21,6 @@ namespace Catrobat.IDEWindowsPhone.Misc.Sounds
                 }
             }
         }
-
-        //private PlayButtonState _state;
-        //public PlayButtonState State
-        //{
-        //  get
-        //  {
-        //    return _state;
-        //  }
-        //  set
-        //  {
-        //    if (this._state == value)
-        //      return;
-
-        //    this._state = value;
-        //    this.RaisePropertyChanged();
-        //  }
-        //}
 
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

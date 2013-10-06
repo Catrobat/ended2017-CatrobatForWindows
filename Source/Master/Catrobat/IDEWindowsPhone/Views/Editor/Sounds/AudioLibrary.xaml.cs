@@ -10,7 +10,7 @@ using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.Misc.Sounds;
+using Catrobat.IDEWindowsPhone.Utilities.Sounds;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
 using IDEWindowsPhone;

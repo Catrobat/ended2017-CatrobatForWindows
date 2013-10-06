@@ -1,21 +1,17 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
 using Catrobat.Core;
-using Catrobat.Core.Objects;
+using Catrobat.Core.Services;
 using Catrobat.Core.Storage;
 using Catrobat.Core.VersionConverter;
-using Windows.Storage;
-using Windows.System;
-using Catrobat.IDEWindowsPhone.Views.Main;
 using Microsoft.Phone.Controls;
 
-namespace Catrobat.IDEWindowsPhone.Misc
+namespace Catrobat.IDEWindowsPhone.Services
 {
-    public class PlayerLauncher
+    public class PlayerLauncherServicePhone :IPlayerLauncherService
     {
-        public static void LaunchPlayer(String projectName)
+        public void LaunchPlayer(String projectName)
         {
             CatrobatVersionConverter.VersionConverterError error;
 
@@ -43,7 +39,6 @@ namespace Catrobat.IDEWindowsPhone.Misc
             {
                // TODO: show error?
             }
-
         }
     }
 }

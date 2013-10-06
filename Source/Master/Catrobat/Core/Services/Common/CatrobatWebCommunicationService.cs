@@ -139,7 +139,7 @@ namespace Catrobat.Core.Services.Common
                 CatrobatZipService.ZipCatrobatPackage(stream, CatrobatContextBase.ProjectsPath + "/" + projectName);
                 var data = stream.ToArray();
 
-                postParameters.Add(ApplicationResources.PROJECT_CHECKSUM_TAG, Utils.ToHex(MD5Core.GetHash(data)));
+                postParameters.Add(ApplicationResources.PROJECT_CHECKSUM_TAG, UtilTokenHelper.ToHex(MD5Core.GetHash(data)));
 
                 if (language != null)
                 {

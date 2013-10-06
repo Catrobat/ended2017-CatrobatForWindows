@@ -46,7 +46,7 @@ namespace Catrobat.TestsCommon.Misc
         {
             StorageSystem.SetStorageFactory(new StorageFactoryTest());
             ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryTest());
-            ServiceLocator.SetServices(null, new PlatformInformationHelperTests(), null);
+            ServiceLocator.SetServices(null, new PlatformInformationHelperTests(), null, null, null);
         }
     }
 }

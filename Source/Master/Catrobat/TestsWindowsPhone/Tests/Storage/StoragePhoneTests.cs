@@ -4,6 +4,7 @@ using Catrobat.Core;
 using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
+using Catrobat.IDEWindowsPhone.Utilities.Storage;
 using Catrobat.TestsWindowsPhone.Misc;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using System.IO;

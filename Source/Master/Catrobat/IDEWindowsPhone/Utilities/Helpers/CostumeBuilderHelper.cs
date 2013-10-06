@@ -1,17 +1,14 @@
-﻿using System;
-using System.IO;
-using System.Windows;
+﻿using System.IO;
 using System.Windows.Media.Imaging;
-using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Services.Data;
 using Catrobat.Core.Storage;
-using Catrobat.IDEWindowsPhone.Misc.Images;
 using ToolStackPNGWriterLib;
 
-namespace Catrobat.IDEWindowsPhone.Misc
+namespace Catrobat.IDEWindowsPhone.Utilities
 {
-    public class CostumeBuilder
+    public class CostumeBuilderHelper
     {
         private WriteableBitmap _bitmap;
         private Sprite _sprite;

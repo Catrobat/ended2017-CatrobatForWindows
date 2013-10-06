@@ -10,15 +10,24 @@ namespace Catrobat.Core.Services
 
         public static ICultureService CulureService { get; private set; }
 
+        public static IImageResizeService ImageResizeService { get; private set; }
+
+        public static IPlayerLauncherService PlayerLauncherService { get; private set; }
+
+
         public static void SetServices(
             INavigationService navigationService,
             ISystemInformationService systemInformationService,
-            ICultureService culureService
+            ICultureService culureService,
+            IImageResizeService imageResizeService,
+            IPlayerLauncherService playerLauncherService
             )
         {
             NavigationService = navigationService;
             SystemInformationService = systemInformationService;
             CulureService = culureService;
+            ImageResizeService = imageResizeService;
+            PlayerLauncherService = playerLauncherService;
         }
     }
 }

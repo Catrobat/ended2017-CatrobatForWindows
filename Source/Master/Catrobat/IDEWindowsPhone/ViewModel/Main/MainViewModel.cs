@@ -11,6 +11,7 @@ using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Utilities;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
@@ -408,7 +409,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void PlayCurrentProjectAction()
         {
-            PlayerLauncher.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
+            ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
         }
 
         private void UploadCurrentProjectAction()

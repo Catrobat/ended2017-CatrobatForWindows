@@ -4,7 +4,7 @@ using Catrobat.Core.Services;
 
 namespace Catrobat.IDEWindowsPhone.Services
 {
-    public class CulturePhone : ICultureService
+    public class CultureServicePhone : ICultureService
     {
         public string GetToLetterCultureColde()
         {

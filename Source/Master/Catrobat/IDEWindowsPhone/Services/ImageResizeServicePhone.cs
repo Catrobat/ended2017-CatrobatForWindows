@@ -1,10 +1,21 @@
 ﻿using System.Windows.Media.Imaging;
+using Catrobat.Core.Services;
 
-namespace Catrobat.IDEWindowsPhone.Misc.Images
+namespace Catrobat.IDEWindowsPhone.Services
 {
-    public class ImageResizer
+    public class ImageResizeServicePhone : IImageResizeService
     {
-        public static WriteableBitmap ResizeImage(WriteableBitmap image, int maxWidthHeight)
+        public byte[] ResizeImage(byte[] image, int actualPixelWidth, int actualPixelHeight, int maxWidthHeight)
+        {
+
+            var bitmap = new WriteableBitmap(actualPixelWidth, actualPixelHeight);
+            bitmap.FromByteArray(image);
+
+            var resizedImage = ResizeImage(bitmap, maxWidthHeight);
+            return resizedImage.ToByteArray();
+        }
+
+        internal static WriteableBitmap ResizeImage(WriteableBitmap image, int maxWidthHeight)
         {
             int maxWidth = maxWidthHeight;
             int maxHeight = maxWidthHeight;

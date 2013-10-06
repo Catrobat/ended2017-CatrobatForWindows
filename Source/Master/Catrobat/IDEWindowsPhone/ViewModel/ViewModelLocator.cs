@@ -11,6 +11,8 @@ using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
 using Catrobat.IDEWindowsPhone.Services;
 using Catrobat.IDEWindowsPhone.Themes;
+using Catrobat.IDEWindowsPhone.Utilities;
+using Catrobat.IDEWindowsPhone.Utilities.Storage;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
@@ -86,12 +88,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             Core.Services.ServiceLocator.SetServices(
                 new NavigationServicePhone(),
                 new SystemInformationServicePhone(),
-                new CulturePhone()
+                new CultureServicePhone(),
+                new ImageResizeServicePhone(),
+                new PlayerLauncherServicePhone()
                 );
 
             StorageSystem.SetStorageFactory(new StorageFactoryPhone());
             ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryPhone());
-            CatrobatWebCommunicationService.SetIServerCommunication(new ServerCommunicationPhone());
+            CatrobatWebCommunicationService.SetIServerCommunication(new ServerCommunicationServicePhone());
         }
 
         private static Project InitializeFirstTimeUse(CatrobatContextBase context)

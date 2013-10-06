@@ -2,19 +2,18 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using Windows.Phone.Storage.SharedAccess;
+using Windows.Storage;
 using Catrobat.Core;
 using Catrobat.Core.ExtensionMethods;
-using Catrobat.Core.Misc;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
 using Catrobat.Core.VersionConverter;
-using Windows.Phone.Storage.SharedAccess;
-using Windows.Storage;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace Catrobat.IDEWindowsPhone.Misc
+namespace Catrobat.IDEWindowsPhone.Utilities
 {
     public class ProjectImporter
     {

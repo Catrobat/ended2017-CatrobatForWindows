@@ -199,24 +199,23 @@
     <Compile Include="Converters\IntStringConverter.cs" />
     <Compile Include="Converters\NullColorConverter.cs" />
     <Compile Include="Converters\SecondStringMillisecondConverter.cs" />
-    <Compile Include="Misc\AssociationUriMapper.cs" />
-    <Compile Include="Misc\Images\ImageDimention.cs" />
-    <Compile Include="Misc\Images\ImageResizer.cs" />
-    <Compile Include="Misc\CostumeBuilder.cs" />
+    <Compile Include="Utilities\AssociationUriMapper.cs" />
+    <Compile Include="Services\ImageResizeServicePhone.cs" />
+    <Compile Include="Utilities\Helpers\CostumeBuilderHelper.cs" />
     <Compile Include="Services\CultureServicePhone.cs" />
     <Compile Include="Services\SystemInformationServicePhone.cs" />
-    <Compile Include="Misc\PlayerLauncher.cs" />
-    <Compile Include="Misc\ProjectImporter.cs" />
-    <Compile Include="Misc\ResolutionHelper.cs" />
-    <Compile Include="Misc\ServerCommunicationPhone.cs" />
-    <Compile Include="Misc\SoundPlayer.cs" />
-    <Compile Include="Misc\Storage\ImageFormatHelper.cs" />
-    <Compile Include="Misc\Storage\ResourceLoaderFactoryPhone.cs" />
-    <Compile Include="Misc\Storage\ResourcesPhone.cs" />
-    <Compile Include="Misc\Storage\StorageFactoryPhone.cs" />
-    <Compile Include="Misc\Storage\StoragePhone.cs" />
-    <Compile Include="Misc\WritableBitmapExtensions\ToolStackCRCLib.cs" />
-    <Compile Include="Misc\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
+    <Compile Include="Services\PlayerLauncherServicePhone.cs" />
+    <Compile Include="Utilities\ProjectImporter.cs" />
+    <Compile Include="Utilities\Helpers\ResolutionHelper.cs" />
+    <Compile Include="Services\ServerCommunicationServicePhone.cs" />
+    <Compile Include="Utilities\Sounds\SoundPlayer.cs" />
+    <Compile Include="Utilities\Helpers\ImageFormatHelper.cs" />
+    <Compile Include="Utilities\Storage\ResourceLoaderFactoryPhone.cs" />
+    <Compile Include="Utilities\Storage\ResourcesPhone.cs" />
+    <Compile Include="Utilities\Storage\StorageFactoryPhone.cs" />
+    <Compile Include="Utilities\Storage\StoragePhone.cs" />
+    <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
+    <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NavigationServicePhone.cs" />
@@ -317,13 +316,12 @@
     <Compile Include="Views\Editor\Sounds\SoundNameChooserView.xaml.cs">
       <DependentUpon>SoundNameChooserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Misc\Sounds\Recorder.cs" />
-    <Compile Include="Misc\Sounds\SoundListItem.cs" />
+    <Compile Include="Utilities\Sounds\Recorder.cs" />
+    <Compile Include="Utilities\Sounds\SoundListItem.cs" />
     <Compile Include="Views\Editor\Sounds\SoundRecorderView.xaml.cs">
       <DependentUpon>SoundRecorderView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Misc\Sounds\WaveHeaderWriter.cs" />
-    <Compile Include="Misc\Sounds\XNAFrameworkDispatcherService.cs" />
+    <Compile Include="Utilities\Sounds\XNAFrameworkDispatcherService.cs" />
     <Compile Include="Views\Editor\Sprites\AddNewSpriteView.xaml.cs">
       <DependentUpon>AddNewSpriteView.xaml</DependentUpon>
     </Compile>
@@ -790,9 +788,7 @@
       <Name>PlayerWindowsPhone8Component</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Native\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="AppBarUtils">
       <HintPath>..\packages\AppBarUtils.2.4\lib\windowsphone8\AppBarUtils.dll</HintPath>
