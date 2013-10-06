@@ -9,6 +9,7 @@ using System.Windows.Navigation;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Sounds;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
@@ -96,7 +97,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
 
         private static void ShowViewModel(Type type)
         {
-            Navigation.NavigateTo(ListPickerPage.AddViewType);
+            ServiceLocator.NavigationService.NavigateTo(ListPickerPage.AddViewType);
         }
     }
 }

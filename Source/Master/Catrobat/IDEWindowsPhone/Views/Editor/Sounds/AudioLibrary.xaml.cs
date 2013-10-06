@@ -125,8 +125,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sounds
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            Navigation.RemoveBackEntry();
-            Navigation.NavigateBack();
+            Core.Services.ServiceLocator.NavigationService.RemoveBackEntry();
+            Core.Services.ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void txtName_TextChanged(object sender, TextChangedEventArgs e)

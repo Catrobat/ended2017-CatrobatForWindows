@@ -5,6 +5,7 @@ using System.Windows;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -154,12 +155,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
 
         private void AddNewSpriteAction()
         {
-            Navigation.NavigateTo(typeof(AddNewSpriteView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewSpriteView));
         }
 
         private void EditSpriteAction()
         {
-            Navigation.NavigateTo(typeof(SpriteEditorView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(SpriteEditorView));
         }
 
         private void CopySpriteAction()

@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Controls.Misc;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -192,7 +193,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                 _builder.StartCreateCostumeAsync(_receivedSelectedSprite, image.ToBitmapImage());
                 Image = image;
 
-                Deployment.Current.Dispatcher.BeginInvoke(() => Navigation.NavigateTo(typeof(CostumeNameChooserView)));
+                Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
             }
             catch (Exception)
             {
@@ -202,7 +203,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private async void SaveAction()
         {
-            Navigation.NavigateTo(typeof(CostumeSavingView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(CostumeSavingView));
 
             await Task.Run(() =>
             {
@@ -216,9 +217,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                     var costume = _builder.Save(CostumeName, newDimention, CurrentProject.BasePath);
                     _receivedSelectedSprite.Costumes.Costumes.Add(costume);
 
-                    Navigation.RemoveBackEntry();
-                    Navigation.RemoveBackEntry();
-                    Navigation.NavigateBack();
+                    ServiceLocator.NavigationService.RemoveBackEntry();
+                    ServiceLocator.NavigationService.RemoveBackEntry();
+                    ServiceLocator.NavigationService.NavigateBack();
                 });
             });
 
@@ -226,7 +227,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private void CancelAction()
         {
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
@@ -292,7 +293,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                     _builder.StartCreateCostumeAsync(_receivedSelectedSprite, image);
                     Image = image;
 
-                    Deployment.Current.Dispatcher.BeginInvoke(() => Navigation.NavigateTo(typeof(CostumeNameChooserView)));
+                    Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
                 }
                 catch (Exception)
                 {
@@ -313,7 +314,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private void WrongImageFormatResult(MessageBoxResult result)
         {
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void InitImageSizes()

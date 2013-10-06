@@ -11,6 +11,7 @@ using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
@@ -366,12 +367,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             private set;
         }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
-
         public RelayCommand<PlayPauseCommandArguments> SoundsPlayStateChangedCommand
         {
             get;
@@ -455,7 +450,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             var message = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SpriteNameListener);
 
-            Navigation.NavigateTo(typeof(ChangeSpriteView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(ChangeSpriteView));
         }
 
         private void AddNewScriptBrickAction()
@@ -468,7 +463,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             var message2 = new GenericMessage<List<Object>>(objects);
             Messenger.Default.Send<GenericMessage<List<Object>>>(message2, ViewModelMessagingToken.ScriptBrickCollectionListener);
 
-            Navigation.NavigateTo(typeof(AddNewScriptView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewScriptView));
         }
 
         private void CopyScriptBrickAction()
@@ -532,7 +527,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             var message = new GenericMessage<DataObject>(broadcastObject);
             Messenger.Default.Send<GenericMessage<DataObject>>(message, ViewModelMessagingToken.BroadcastObjectListener);
 
-            Navigation.NavigateTo(typeof(NewBroadcastMessageView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(NewBroadcastMessageView));
         }
 
 
@@ -541,7 +536,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             var message = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
-            Navigation.NavigateTo(typeof(AddNewSoundView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewSoundView));
         }
 
         private void EditSoundAction()
@@ -551,7 +546,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
                 var message = new GenericMessage<Sound>(sound);
                 Messenger.Default.Send<GenericMessage<Sound>>(message, ViewModelMessagingToken.SoundNameListener);
 
-                Navigation.NavigateTo(typeof(ChangeSoundView));
+                ServiceLocator.NavigationService.NavigateTo(typeof(ChangeSoundView));
             }
         }
 
@@ -576,7 +571,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             var message = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
-            Navigation.NavigateTo(typeof(NewCostumeSourceSelectionView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(NewCostumeSourceSelectionView));
         }
 
         private void EditCostumeAction()
@@ -586,7 +581,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
                 var message = new GenericMessage<Costume>(costume);
                 Messenger.Default.Send<GenericMessage<Costume>>(message, ViewModelMessagingToken.CostumeNameListener);
 
-                Navigation.NavigateTo(typeof(ChangeCostumeView));
+                ServiceLocator.NavigationService.NavigateTo(typeof(ChangeCostumeView));
             }
         }
 
@@ -678,8 +673,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
 
         private void GoToMainViewAction()
         {
-            ResetViewModel();
-            Navigation.NavigateTo(typeof(MainView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(MainView));
         }
 
         private void ProjectSettingsAction()
@@ -687,7 +681,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             var message = new GenericMessage<Project>(CurrentProject);
             Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.ProjectNameListener);
 
-            Navigation.NavigateTo(typeof(ProjectSettingsView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(ProjectSettingsView));
         }
 
 
@@ -729,12 +723,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
                 ((BroadcastWaitBrick)attachedObject).BroadcastMessage = null;
             }
         }
-
-        private void ResetViewModelAction()
-        {
-            ResetViewModel();
-        }
-
 
         private void SoundsPlayStateChangedAction(PlayPauseCommandArguments args)
         {
@@ -836,7 +824,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             ClearSoundsSelectionCommand = new RelayCommand(ClearSoundsSelectionAction);
 
             NothingItemHackCommand = new RelayCommand<object>(NothingItemHackAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
             SoundsPlayStateChangedCommand = new RelayCommand<PlayPauseCommandArguments>(SoundsPlayStateChangedAction);
 
             _scriptBricks = new ScriptBrickCollection();
@@ -907,20 +894,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
         }
 
         #endregion
-
-        private void ResetViewModel()
-        {
-            //SelectedSprite = null;
-            //SelectedBrick = null;
-            //ListBoxViewPort = null;
-
-            //if (_soundPlayer != null)
-            //{
-            //    _soundPlayer.Clear();
-            //}
-            //_soundPlayer = null;
-            //_sound = null;
-        }
 
         public override void Cleanup()
         {

@@ -51,8 +51,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if(Navigation.CanGoBack)
-                Navigation.RemoveBackEntry();
+            if (Core.Services.ServiceLocator.NavigationService.CanGoBack)
+                Core.Services.ServiceLocator.NavigationService.RemoveBackEntry();
 
             _viewModel.ShowMessagesCommand.Execute(null);
 
@@ -62,7 +62,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
             while (NavigationService.CanGoBack)
-                Navigation.RemoveBackEntry();
+                Core.Services.ServiceLocator.NavigationService.RemoveBackEntry();
 
             _viewModel.ResetViewModelCommand.Execute(null);
             base.OnBackKeyPress(e);

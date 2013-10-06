@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Themes;
@@ -83,23 +84,23 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Settings
 
         private void ShowDesignSettingsAction()
         {
-            Navigation.NavigateTo(typeof(SettingsThemeView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsThemeView));
         }
 
         private void ShowBrickSettingsAction()
         {
-            Navigation.NavigateTo(typeof(SettingsBrickView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsBrickView));
         }
 
         private void ShowLanguageSettingsAction()
         {
-            Navigation.NavigateTo(typeof(SettingsLanguageView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsLanguageView));
         }
 
         private void ActiveThemeChangedAction(Theme newTheme)
         {
             ThemeChooser.SelectedTheme = newTheme;
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         #endregion

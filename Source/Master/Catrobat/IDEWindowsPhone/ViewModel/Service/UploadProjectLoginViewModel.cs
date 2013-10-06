@@ -7,6 +7,7 @@ using Catrobat.Core;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.JSON;
 using Catrobat.Core.Misc.ServerCommunication;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Service;
@@ -110,7 +111,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void LoginAction()
         {
-            Navigation.RemoveBackEntry();
+            ServiceLocator.NavigationService.RemoveBackEntry();
 
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_email))
             {
@@ -167,7 +168,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void navigationCallback()
         {
-            Navigation.NavigateTo(typeof (UploadProjectView));
+            ServiceLocator.NavigationService.NavigateTo(typeof (UploadProjectView));
         }
 
         private void MissingLoginDataCallback(MessageBoxResult result)

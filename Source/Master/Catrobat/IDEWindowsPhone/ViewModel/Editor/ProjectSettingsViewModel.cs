@@ -1,4 +1,5 @@
 ﻿using Catrobat.Core.Objects;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -82,12 +83,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         {
             SelectedProjectToEdit.ProjectHeader.ProgramName = ProjectName;
             SelectedProjectToEdit.ProjectHeader.Description = ProjectDescription;
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void CancelAction()
         {
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void ChangeProjectNameMessageAction(GenericMessage<Project> message)

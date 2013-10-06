@@ -9,6 +9,7 @@ using Catrobat.Core.Resources;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
+using Catrobat.IDEWindowsPhone.Services;
 using Catrobat.IDEWindowsPhone.Themes;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
@@ -82,6 +83,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private static void InitializeInterfaces()
         {
+            Core.Services.ServiceLocator.SetServices(
+                new NavigationService()
+                );
+
             StorageSystem.SetStorageFactory(new StorageFactoryPhone());
             ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryPhone());
             LanguageHelper.SetICulture(new CulturePhone());

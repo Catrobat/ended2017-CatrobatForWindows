@@ -18,12 +18,6 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Sprites
             InitializeComponent();
         }
 
-        protected override void OnBackKeyPress(CancelEventArgs e)
-        {
-            _viewModel.ResetViewModelCommand.Execute(null);
-            base.OnBackKeyPress(e);
-        }
-
         private void reorderListBoxScriptBricks_Loaded(object sender, RoutedEventArgs e)
         {
             if (_viewModel.SelectedBrick != null)

@@ -1,6 +1,7 @@
 ﻿using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Scripts;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -75,7 +76,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
                 (_broadcastObject as BroadcastWaitBrick).BroadcastMessage = BroadcastMessage;
             }
 
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void ReceiveBroadcastObjectAction(GenericMessage<DataObject> message)
@@ -85,7 +86,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
 
         private void CancelAction()
         {
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void ResetViewModelAction()

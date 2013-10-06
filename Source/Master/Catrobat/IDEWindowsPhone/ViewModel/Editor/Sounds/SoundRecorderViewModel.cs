@@ -5,6 +5,7 @@ using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Sounds;
+using Catrobat.Core.Services;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -349,7 +350,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
         private void SaveAction()
         {
             SoundName = AppResources.Editor_Recording;
-            Navigation.NavigateTo(typeof (SoundNameChooserView));
+            ServiceLocator.NavigationService.NavigateTo(typeof (SoundNameChooserView));
         }
 
         private void CancelAction()
@@ -358,7 +359,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             _recorder.StopRecording();
 
             ResetViewModel();
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void SaveNameChosenAction()
@@ -383,9 +384,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             _receivedSelectedSprite.Sounds.Sounds.Add(sound);
 
             ResetViewModel();
-            Navigation.RemoveBackEntry();
-            Navigation.RemoveBackEntry();
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.RemoveBackEntry();
+            ServiceLocator.NavigationService.RemoveBackEntry();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void CancelNameChosenAction()
@@ -393,7 +394,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             SoundName = null;
             UpdateTextProperties();
 
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void ResetViewModelAction()
