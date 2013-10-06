@@ -1,5 +1,9 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Threading.Tasks;
+using System.Windows;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
@@ -9,26 +13,22 @@ using Catrobat.Core.Objects.Sounds;
 using Catrobat.Core.Objects.Variables;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
-using GalaSoft.MvvmLight;
-using System.Collections.ObjectModel;
-using GalaSoft.MvvmLight.Command;
+using Catrobat.IDEWindowsPhone.Controls.Buttons;
+using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Views.Editor;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
-using GalaSoft.MvvmLight.Messaging;
-using System.Windows;
+using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
 using Catrobat.IDEWindowsPhone.Views.Main;
-using Catrobat.IDEWindowsPhone.Views.Editor;
-using Catrobat.IDEWindowsPhone.Controls.Buttons;
-using System.Collections.Generic;
-using System;
-using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
-namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
+namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
 {
-    public class EditorViewModel : ViewModelBase
+    public class SpriteEditorViewModel : ViewModelBase
     {
         #region Private Members
 
@@ -46,7 +46,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         private ObservableCollection<Costume> _selectedCostumes;
         private ObservableCollection<DataObject> _selectedScripts;
         private ObservableCollection<Sound> _selectedSounds;
-        private bool _isSpriteSelecting;
 
         #endregion
 
@@ -91,13 +90,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 RaisePropertyChanged(() => Sounds);
                 RaisePropertyChanged(() => Costumes);
                 RaisePropertyChanged(() => ScriptBricks);
-
-                EditSpriteCommand.RaiseCanExecuteChanged();
-                CopySpriteCommand.RaiseCanExecuteChanged();
-                DeleteSpriteCommand.RaiseCanExecuteChanged();
-
-                var spriteChangedMessage = new GenericMessage<Sprite>(SelectedSprite);
-                Messenger.Default.Send<GenericMessage<Sprite>>(spriteChangedMessage, ViewModelMessagingToken.CurrentSpriteChangedListener);
             }
         }
 
@@ -106,16 +98,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             get
             {
                 return _scriptBricks;
-            }
-        }
-
-        public bool IsSpriteSelecting
-        {
-            get { return _isSpriteSelecting; }
-            set
-            {
-                _isSpriteSelecting = value;
-                RaisePropertyChanged(() => IsSpriteSelecting);
             }
         }
 
@@ -133,7 +115,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 if (value == _selectedSprite.Sounds.Sounds) return;
                 _selectedSprite.Sounds.Sounds = value;
 
-                //Deployment.Current.Dispatcher.BeginInvoke(() => RaisePropertyChanged(() => Sounds));
                 RaisePropertyChanged(() => Sounds);
             }
         }
@@ -182,17 +163,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
                 RaisePropertyChanged(() => SelectedPivotIndex);
 
-                RaisePropertyChanged(() => IsVisibleObjects);
                 RaisePropertyChanged(() => IsVisibleScripts);
                 RaisePropertyChanged(() => IsVisibleCostumes);
                 RaisePropertyChanged(() => IsVisibleSounds);
             }
         }
 
-        public bool IsVisibleObjects { get { return SelectedPivotIndex == 0; } }
-        public bool IsVisibleScripts { get { return SelectedPivotIndex == 1; } }
-        public bool IsVisibleCostumes { get { return SelectedPivotIndex == 2; } }
-        public bool IsVisibleSounds { get { return SelectedPivotIndex == 3; } }
+        public bool IsVisibleScripts { get { return SelectedPivotIndex == 0; } }
+        public bool IsVisibleCostumes { get { return SelectedPivotIndex == 1; } }
+        public bool IsVisibleSounds { get { return SelectedPivotIndex == 2; } }
 
         public int NumberOfCostumesSelected
         {
@@ -262,36 +241,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         #region Commands
 
 
-        public RelayCommand<Sprite> SelectedSpriteChangedCommand
+
+        public RelayCommand RenameSpriteCommand
         {
             get;
             private set;
         }
-
-        public RelayCommand AddNewSpriteCommand
-        {
-            get;
-            private set;
-        }
-
-        public RelayCommand EditSpriteCommand
-        {
-            get;
-            private set;
-        }
-
-        public RelayCommand CopySpriteCommand
-        {
-            get;
-            private set;
-        }
-
-        public RelayCommand DeleteSpriteCommand
-        {
-            get;
-            private set;
-        }
-
 
         public RelayCommand<DataObject> AddBroadcastMessageCommand
         {
@@ -412,12 +367,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             private set;
         }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
-
         public RelayCommand<PlayPauseCommandArguments> SoundsPlayStateChangedCommand
         {
             get;
@@ -451,20 +400,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         # endregion
 
         #region CanCommandsExecute
-        private bool CanExecuteDeleteSpriteCommand()
-        {
-            return SelectedSprite != null;
-        }
-        private bool CanExecuteCopySpriteCommand()
-        {
-            return SelectedSprite != null;
-        }
-        private bool CanExecuteEditSpriteCommand()
-        {
-            return SelectedSprite != null;
-        }
-
-
 
         private bool CanExecuteDeleteActionCommand()
         {
@@ -510,16 +445,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         #region Actions
 
-
-        private void SelectedSpriteChangedAction(Sprite newSelectedSprite)
+        private void RenameSpriteAction()
         {
-            var task = Task.Run(() =>
-            {
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    SelectedSprite = newSelectedSprite;
-                });
-            });
+            var message = new GenericMessage<Sprite>(SelectedSprite);
+            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SpriteNameListener);
+
+            ServiceLocator.NavigationService.NavigateTo(typeof(ChangeSpriteView));
         }
 
         private void AddNewScriptBrickAction()
@@ -544,13 +475,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                     if (scriptBrick is Script)
                     {
                         DataObject copy = (scriptBrick as Script).Copy();
-                        ScriptBricks.Insert(ScriptBricks.ScriptIndexOf((Script)scriptBrick), copy);
+                        ScriptBricks.Insert(ScriptBricks.ScriptIndexOf((Script)scriptBrick) + 1, copy);
                     }
 
                     if (scriptBrick is Brick)
                     {
                         DataObject copy = (scriptBrick as Brick).Copy();
-                        ScriptBricks.Insert(ScriptBricks.IndexOf(scriptBrick), copy);
+                        ScriptBricks.Insert(ScriptBricks.IndexOf(scriptBrick) + 1, copy);
                     }
                 }
             }
@@ -597,44 +528,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             Messenger.Default.Send<GenericMessage<DataObject>>(message, ViewModelMessagingToken.BroadcastObjectListener);
 
             ServiceLocator.NavigationService.NavigateTo(typeof(NewBroadcastMessageView));
-        }
-
-        private void AddNewSpriteAction()
-        {
-            //var message = new GenericMessage<ObservableCollection<Sprite>>(Sprites);
-            //Messenger.Default.Send<GenericMessage<ObservableCollection<Sprite>>>(message, ViewModelMessagingToken.SpriteListListener);
-
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewSpriteView));
-        }
-
-        private void EditSpriteAction()
-        {
-            var message = new GenericMessage<Sprite>(SelectedSprite);
-            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SpriteNameListener);
-
-            ServiceLocator.NavigationService.NavigateTo(typeof(ChangeSpriteView));
-        }
-
-        private void CopySpriteAction()
-        {
-            var newSprite = SelectedSprite.Copy() as Sprite;
-            if(newSprite != null)
-                Sprites.Add(newSprite);
-        }
-
-        private void DeleteSpriteAction()
-        {
-            var sprite = AppResources.Editor_ObjectSingular;
-            var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, "1", sprite);
-            var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, sprite);
-
-            var message =
-                new DialogMessage(messageContent, DeleteSpriteMessageBoxResult)
-                {
-                    Button = MessageBoxButton.OKCancel,
-                    Caption = messageHeader
-                };
-            Messenger.Default.Send(message);
         }
 
 
@@ -698,7 +591,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             {
                 var newCostume = costume.Copy() as Costume;
                 if(newCostume != null)
-                    Costumes.Add(newCostume);
+                    Costumes.Insert(Costumes.IndexOf(costume) + 1, newCostume);
             }
         }
 
@@ -780,7 +673,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void GoToMainViewAction()
         {
-            ResetViewModel();
             ServiceLocator.NavigationService.NavigateTo(typeof(MainView));
         }
 
@@ -832,12 +724,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             }
         }
 
-        private void ResetViewModelAction()
-        {
-            ResetViewModel();
-        }
-
-
         private void SoundsPlayStateChangedAction(PlayPauseCommandArguments args)
         {
             var playedSound = args.ChangedToPlayObject as Sound;
@@ -871,9 +757,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         #region MessageActions
 
-        private void CurrentProjectChangedAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
         {
             CurrentProject = message.Content;
+        }
+
+        private void CurrentSpriteChangedMessageAction(GenericMessage<Sprite> message)
+        {
+            SelectedSprite = message.Content;
         }
 
         private void ReceiveNewBroadcastMessageAction(GenericMessage<string> message)
@@ -892,7 +783,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         }
         #endregion
 
-        public EditorViewModel()
+        public SpriteEditorViewModel()
         {
             SelectedScripts = new ObservableCollection<DataObject>();
             SelectedScripts.CollectionChanged += SelectedScriptsOnCollectionChanged;
@@ -901,14 +792,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             SelectedSounds = new ObservableCollection<Sound>();
             SelectedSounds.CollectionChanged += SelectedSoundsOnCollectionChanged;
 
-            SelectedSpriteChangedCommand = new RelayCommand<Sprite>(SelectedSpriteChangedAction);
+            RenameSpriteCommand = new RelayCommand(RenameSpriteAction);
 
             AddBroadcastMessageCommand = new RelayCommand<DataObject>(AddBroadcastMessageAction);
-
-            AddNewSpriteCommand = new RelayCommand(AddNewSpriteAction);
-            EditSpriteCommand = new RelayCommand(EditSpriteAction, CanExecuteEditSpriteCommand);
-            CopySpriteCommand = new RelayCommand(CopySpriteAction, CanExecuteCopySpriteCommand);
-            DeleteSpriteCommand = new RelayCommand(DeleteSpriteAction, CanExecuteDeleteSpriteCommand);
 
             AddNewScriptBrickCommand = new RelayCommand(AddNewScriptBrickAction);
             CopyScriptBrickCommand = new RelayCommand(CopyScriptBrickAction, CanExecuteCopyActionCommand);
@@ -938,19 +824,20 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             ClearSoundsSelectionCommand = new RelayCommand(ClearSoundsSelectionAction);
 
             NothingItemHackCommand = new RelayCommand<object>(NothingItemHackAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
             SoundsPlayStateChangedCommand = new RelayCommand<PlayPauseCommandArguments>(SoundsPlayStateChangedAction);
 
             _scriptBricks = new ScriptBrickCollection();
 
 
-            // Temporarile disabled, enable if reintroducing this ViewModel
-            //Messenger.Default.Register<GenericMessage<Project>>(this,
-            //     ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
-            //Messenger.Default.Register<GenericMessage<string>>(this, 
-            //    ViewModelMessagingToken.BroadcastMessageListener, ReceiveNewBroadcastMessageAction);
-            //Messenger.Default.Register<GenericMessage<DataObject>>(this, 
-            //    ViewModelMessagingToken.SelectedBrickListener, ReceiveSelectedBrickMessageAction);
+            Messenger.Default.Register<GenericMessage<Project>>(this,
+                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<Sprite>>(this,
+                ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
+
+            Messenger.Default.Register<GenericMessage<string>>(this, 
+                ViewModelMessagingToken.BroadcastMessageListener, ReceiveNewBroadcastMessageAction);
+            Messenger.Default.Register<GenericMessage<DataObject>>(this, 
+                ViewModelMessagingToken.SelectedBrickListener, ReceiveSelectedBrickMessageAction);
         }
 
         private void SelectedScriptsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
@@ -1006,47 +893,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             }
         }
 
-        private void DeleteSpriteMessageBoxResult(MessageBoxResult result)
-        {
-            if (result == MessageBoxResult.OK)
-            {
-                var userVariableEntries = CurrentProject.VariableList.ObjectVariableList.ObjectVariableEntries;
-                ObjectVariableEntry entryToRemove = null;
-                foreach (var entry in userVariableEntries)
-                {
-                    if (entry.Sprite == SelectedSprite)
-                    {
-                        entryToRemove = entry;
-                    }
-                }
-
-                if(entryToRemove != null)
-                    userVariableEntries.Remove(entryToRemove);
-
-                ReferenceHelper.CleanUpReferencesAfterDelete(SelectedSprite, SelectedSprite);
-
-                SelectedSprite.Delete();
-                Sprites.Remove(SelectedSprite);
-
-                SelectedSprite = null;
-            }
-        }
-
         #endregion
-
-        private void ResetViewModel()
-        {
-            SelectedSprite = null;
-            SelectedBrick = null;
-            ListBoxViewPort = null;
-
-            if (_soundPlayer != null)
-            {
-                _soundPlayer.Clear();
-            }
-            _soundPlayer = null;
-            _sound = null;
-        }
 
         public override void Cleanup()
         {

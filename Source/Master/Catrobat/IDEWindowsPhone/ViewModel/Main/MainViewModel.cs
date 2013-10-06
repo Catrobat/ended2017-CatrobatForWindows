@@ -7,6 +7,7 @@ using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Services;
 using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -279,7 +280,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             var message = new GenericMessage<Project>(CurrentProject);
             Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.ProjectNameListener);
 
-            Navigation.NavigateTo(typeof(ProjectSettingsView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(ProjectSettingsView));
         }
 
         private void DeleteLocalProjectAction(string projectName)
@@ -315,7 +316,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             var message = new GenericMessage<ProjectDummyHeader>(PinProjectHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.PinProjectHeaderListener);
 
-            Navigation.NavigateTo(typeof(TileGeneratorView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(TileGeneratorView));
         }
 
         private void LazyLoadOnlineProjectsAction()
@@ -386,23 +387,23 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void CreateNewProjectAction()
         {
-            Navigation.NavigateTo(typeof(AddNewProjectView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewProjectView));
         }
 
         private void EditCurrentProjectAction()
         {
-            Navigation.NavigateTo(typeof(EditorLoadingView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(EditorLoadingView));
         }
 
         private void SettingsAction()
         {
-            Navigation.NavigateTo(typeof(SettingsView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsView));
         }
 
         private void OnlineProjectTapAction(OnlineProjectHeader project)
         {
             SelectedOnlineProject = project;
-            Navigation.NavigateTo(typeof(OnlineProjectView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(OnlineProjectView));
         }
 
         private void PlayCurrentProjectAction()
@@ -412,7 +413,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void UploadCurrentProjectAction()
         {
-            Navigation.NavigateTo(typeof(UploadProjectsLoadingView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectsLoadingView));
 
             // Determine which page to open
             Task.Run(() => ServerCommunication.CheckToken(Context.CurrentToken, CheckTokenEvent));
@@ -645,16 +646,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    Navigation.NavigateTo(typeof(UploadProjectView));
-                    Navigation.RemoveBackEntry();
+                    ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectView));
+                    ServiceLocator.NavigationService.RemoveBackEntry();
                 });
             }
             else
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    Navigation.NavigateTo(typeof(UploadProjectLoginView));
-                    Navigation.RemoveBackEntry();
+                    ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectLoginView));
+                    ServiceLocator.NavigationService.RemoveBackEntry();
                 });
             }
         }

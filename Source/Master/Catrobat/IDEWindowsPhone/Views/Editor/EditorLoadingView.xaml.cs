@@ -5,7 +5,9 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -21,8 +23,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            Navigation.NavigateTo(typeof(EditorView));
-            Navigation.RemoveBackEntry();
+            ServiceLocator.NavigationService.NavigateTo(typeof(SpritesView));
+            ServiceLocator.NavigationService.RemoveBackEntry();
         }
     }
 }

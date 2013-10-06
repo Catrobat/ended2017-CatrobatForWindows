@@ -202,7 +202,6 @@
     <Compile Include="Misc\AssociationUriMapper.cs" />
     <Compile Include="Misc\ImageDimention.cs" />
     <Compile Include="Misc\ImageResizer.cs" />
-    <Compile Include="Misc\Navigation.cs" />
     <Compile Include="Misc\CostumeBuilder.cs" />
     <Compile Include="Misc\CulturePhone.cs" />
     <Compile Include="Misc\PlatformInformationHelperPhone.cs" />
@@ -220,11 +219,14 @@
     <Compile Include="Misc\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Themes\ColorChooser.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeChooser.cs" />
     <Compile Include="Controls\Misc\ImageSizeEntry.cs" />
     <Compile Include="Controls\Misc\ImageSizeEntryCollection.cs" />
+    <Compile Include="ViewModel\Editor\Sprites\SpriteEditorViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sprites\SpritesViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\AddNewGlobalVariableViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\AddNewLocalVariableViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\ChangeVariableViewModel.cs" />
@@ -266,6 +268,12 @@
     </Compile>
     <Compile Include="Views\Editor\EditorLoadingView.xaml.cs">
       <DependentUpon>EditorLoadingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sprites\SpriteEditorView.xaml.cs">
+      <DependentUpon>SpriteEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sprites\SpritesView.xaml.cs">
+      <DependentUpon>SpritesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\EditorView.xaml.cs">
       <DependentUpon>EditorView.xaml</DependentUpon>
@@ -474,6 +482,14 @@
     <Page Include="Views\Editor\EditorLoadingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editor\Sprites\SpriteEditorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sprites\SpritesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Editor\EditorView.xaml">
       <Generator>MSBuild:Compile</Generator>

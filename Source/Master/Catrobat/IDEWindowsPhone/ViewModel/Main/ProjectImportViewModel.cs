@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using GalaSoft.MvvmLight;
@@ -209,7 +210,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                             _importer.AcceptTempProject(CheckBoxMakeActiveIsChecked);
                         }
 
-                        Deployment.Current.Dispatcher.BeginInvoke(() => Navigation.NavigateTo(typeof(MainView)));
+                        Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(MainView)));
                     }
                     catch
                     {
@@ -222,7 +223,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void CancelAction()
         {
-            Navigation.NavigateTo(typeof(MainView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(MainView));
         }
 
         private async void OnLoadAction(NavigationContext navigationContext)
@@ -313,7 +314,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void ProjectNotValidMessageResult(MessageBoxResult obj)
         {
-            Navigation.NavigateTo(typeof(MainView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(MainView));
         }
 
         private void ResetViewModel()

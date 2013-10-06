@@ -1,0 +1,126 @@
+﻿<phone:PhoneApplicationPage x:Class="Catrobat.IDEWindowsPhone.Views.Editor.Sprites.SpritesView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+  xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:reorderableListbox="clr-namespace:Catrobat.IDEWindowsPhone.Controls.ReorderableListbox"
+  xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+  xmlns:buttons="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
+  xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters" 
+  mc:Ignorable="d"
+  xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+  xmlns:appBar="clr-namespace:Catrobat.IDEWindowsPhone.Controls.AppBar"
+  xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+  d:DesignWidth="480"
+  d:DesignHeight="768"
+  FontFamily="{StaticResource PhoneFontFamilyNormal}"
+  FontSize="{StaticResource PhoneFontSizeNormal}"
+  Foreground="{StaticResource PhoneForegroundBrush}"
+  SupportedOrientations="Portrait"
+  Orientation="Portrait"
+  shell:SystemTray.IsVisible="True"
+  DataContext="{Binding SpritesViewModel, Source={StaticResource Locator}}">
+
+  <Grid x:Name="LayoutRoot">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <Grid Margin="10 5 10 25">
+        <TextBlock Text="{Binding CurrentProject.ProjectHeader.ProgramName}" FontSize="36">
+          
+        </TextBlock>
+      </Grid>
+     
+          <!--Pivot item sprites-->
+          <reorderableListbox:ReorderListBox
+          x:Name="ReorderListBoxSprites"
+          Grid.Row="1"
+          Margin="10"
+          SelectionMode="Single"
+          VerticalAlignment="Stretch"
+          IsReorderEnabled="True"
+          ItemsSource="{Binding Sprites}"
+          SelectedItem="{Binding SelectedSprite, Mode=TwoWay}"
+          ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleNormal}"
+          Foreground="White" >
+            <reorderableListbox:ReorderListBox.ItemTemplate>
+              <DataTemplate>
+                <Grid Background="{StaticResource ObjectsBrush}" Margin="0 5 0 5" Height="90">
+                  <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                  </Grid.RowDefinitions>
+                  <!--<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Tap">
+                      <command:EventToCommand 
+                        Command="{Binding SpriteEditorViewModel.SelectedSpriteChangedCommand, 
+                        Source={StaticResource Locator}}"
+                        CommandParameter="{Binding}" />
+                    </i:EventTrigger>
+                  </i:Interaction.Triggers>-->
+
+                  <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="3*" />
+                      <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0"  Orientation="Horizontal" VerticalAlignment="Center">
+                      <TextBlock VerticalAlignment="Center" FontSize="28" Margin="5 5 5 5" Text="{Binding Name}" />
+
+                      <StackPanel Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock FontSize="16" Margin="0" Text="{Binding Scripts.ActionCount}" />
+                        <TextBlock FontSize="16" Margin="0" Text="/" />
+                        <TextBlock FontSize="16" Margin="0" Text="{Binding Costumes.Costumes.Count}" />
+                        <TextBlock FontSize="16" Margin="0" Text="/" />
+                        <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Sounds.Count}" />
+                      </StackPanel>
+                    </StackPanel>
+                  </Grid>
+                  <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1" Margin="0 0 0 5" HorizontalAlignment="Right" >
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                      </Grid.ColumnDefinitions>
+                      <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Source="{Binding Costumes.Costumes[0].Image}" />
+                      <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Source="{Binding Costumes.Costumes[1].Image}" />
+                      <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Source="{Binding Costumes.Costumes[2].Image}" />
+                    </Grid>
+
+                  </Grid>
+                </Grid>
+              </DataTemplate>
+            </reorderableListbox:ReorderListBox.ItemTemplate>
+          </reorderableListbox:ReorderListBox>
+        
+
+      <appBar:EditorAppBar Grid.Row="2"
+      Visibility="{Binding IsVisibleObjects, Converter={StaticResource BoolVisibilityConverter}}" 
+      VerticalAlignment="Bottom"
+      TargetType="Object"
+      ClearSelectionCommand="{Binding ClearObjectsSelectionCommand}"
+      CopyCommand="{Binding CopySpriteCommand}"
+      DeleteCommand="{Binding DeleteSpriteCommand}"
+      EditCommand="{Binding EditSpriteCommand}"
+      PlayCommand="{Binding StartPlayerCommand}"
+      NewCommand="{Binding AddNewSpriteCommand}"
+      NumberOfSelectedItems="{Binding SelectedSprite, Converter={StaticResource NullIntCountConverter}}"/>
+    </Grid>
+  </Grid>
+</phone:PhoneApplicationPage>

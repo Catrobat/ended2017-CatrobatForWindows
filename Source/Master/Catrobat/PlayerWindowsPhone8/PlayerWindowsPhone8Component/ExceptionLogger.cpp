@@ -69,6 +69,49 @@ void ExceptionLogger::Log(BaseException *exception)
     });
 }
 
+void ExceptionLogger::Log(Platform::Exception^ exception)
+{
+	task<StorageFile^> getFileTask(ApplicationData::Current->LocalFolder->CreateFileAsync(
+		Helper::ConvertStringToPlatformString(LOGFILE), CreationCollisionOption::OpenIfExists));
+
+	auto writer = std::make_shared<Streams::DataWriter^>(nullptr);
+	getFileTask.then([](StorageFile^ file)
+	{
+		EnterCriticalSection(&__crit_section);
+		return file->OpenAsync(FileAccessMode::ReadWrite);
+	}).then([this, exception, writer](Streams::IRandomAccessStream^ stream)
+	{
+		time_t now = time(0);
+		struct tm timeStamp;
+		localtime_s(&timeStamp, &now);
+		Streams::DataWriter^ state = ref new Streams::DataWriter(stream->GetOutputStreamAt(stream->Size));
+		*writer = state;
+		state->WriteString(L"[" + (timeStamp.tm_year + 1900).ToString() + L"-");
+		state->WriteString(CalculateDate(timeStamp.tm_mon + 1) + L"-");
+		state->WriteString(CalculateDate(timeStamp.tm_mday) + L" ");
+		state->WriteString(CalculateDate(timeStamp.tm_hour) + L":");
+		state->WriteString(CalculateDate(timeStamp.tm_min) + L":");
+		state->WriteString(CalculateDate(timeStamp.tm_sec) + L"] ");
+
+		
+
+		std::wstring messageW(exception->Message->Begin());
+		std::string message(messageW.begin(), messageW.end());
+
+		state->WriteString(Helper::ConvertStringToPlatformString("System Exception") + L": ");
+		state->WriteString(Helper::ConvertStringToPlatformString(message) + L"\n");
+
+		return state->StoreAsync();
+	}).then([writer](uint32 count)
+	{
+		return (*writer)->FlushAsync();
+	}).then([this, writer](bool flushed)
+	{
+		delete (*writer);
+		LeaveCriticalSection(&__crit_section);
+	});
+}
+
 void ExceptionLogger::Log(int severity, std::string warning)
 {
     task<StorageFile^> getFileTask(ApplicationData::Current->LocalFolder->CreateFileAsync(

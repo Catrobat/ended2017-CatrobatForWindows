@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Scripts;
@@ -221,12 +222,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts
         {
             get
             {
-                var count = 0;
-                foreach (Script script in Scripts)
-                {
-                    count += script.Bricks.Bricks.Count + 1;
-                }
-                return count;
+                return Scripts.Sum(script => script.Bricks.Bricks.Count + 1);
             }
         }
 

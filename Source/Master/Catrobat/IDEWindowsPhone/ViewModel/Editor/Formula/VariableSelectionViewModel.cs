@@ -2,6 +2,7 @@
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Formula;
@@ -222,15 +223,15 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             }
 
             ResetViewModel();
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void AddVariableAction()
         {
             if (IsLocalView)
-                Navigation.NavigateTo(typeof(AddNewLocalVariableView));
+                ServiceLocator.NavigationService.NavigateTo(typeof(AddNewLocalVariableView));
             else
-                Navigation.NavigateTo(typeof(AddNewGlobalVariableView));
+                ServiceLocator.NavigationService.NavigateTo(typeof(AddNewGlobalVariableView));
         }
 
         private void DeleteVariableAction()
@@ -253,7 +254,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             var message = new GenericMessage<UserVariable>(selectedVariable);
             Messenger.Default.Send(message, ViewModelMessagingToken.SelectedUserVariableChangedListener);
 
-            Navigation.NavigateTo(typeof(ChangeVariableView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(ChangeVariableView));
         }
 
         #endregion

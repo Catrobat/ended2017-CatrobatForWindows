@@ -1,6 +1,7 @@
 ﻿using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
@@ -75,12 +76,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
         private void SaveAction()
         {
             VariableHelper.AddGlobalVariable(CurrentProject, new UserVariable { Name = UserVariableName });
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void CancelAction()
         {
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void ResetViewModelAction()

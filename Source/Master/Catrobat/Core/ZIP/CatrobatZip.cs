@@ -10,32 +10,36 @@ namespace Catrobat.Core.ZIP
     {
         public static void UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
         {
-            var reader = ReaderFactory.Open(zipStream);
-
-            using (var storage = StorageSystem.GetStorage())
+            if (zipStream != null)
             {
-                while (reader.MoveToNextEntry())
+                var reader = ReaderFactory.Open(zipStream);
+
+                using (var storage = StorageSystem.GetStorage())
                 {
-                    var absolutPath = Path.Combine(localStoragePath, reader.Entry.FilePath);
-                    absolutPath = absolutPath.Replace("\\", "/");
-
-                    if (!reader.Entry.IsDirectory)
+                    while (reader.MoveToNextEntry())
                     {
-                        if (storage.FileExists(absolutPath))
-                        {
-                            storage.DeleteFile(absolutPath);
-                        }
+                        var absolutPath = Path.Combine(localStoragePath, reader.Entry.FilePath);
+                        absolutPath = absolutPath.Replace("\\", "/");
 
-                        var fileStream = storage.OpenFile(absolutPath,
-                                                          StorageFileMode.Create,
-                                                          StorageFileAccess.Write);
-                        reader.WriteEntryTo(fileStream);
-                        fileStream.Dispose();
+                        if (!reader.Entry.IsDirectory)
+                        {
+                            if (storage.FileExists(absolutPath))
+                            {
+                                storage.DeleteFile(absolutPath);
+                            }
+
+                            var fileStream = storage.OpenFile(absolutPath,
+                                                              StorageFileMode.Create,
+                                                              StorageFileAccess.Write);
+                            reader.WriteEntryTo(fileStream);
+                            fileStream.Dispose();
+                        }
                     }
                 }
-            }
 
-            reader.Dispose();
+                reader.Dispose();
+            }
+            //TODO: Error message? Why is the stream every restart null?
         }
 
 

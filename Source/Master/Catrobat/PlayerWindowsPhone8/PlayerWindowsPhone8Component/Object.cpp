@@ -77,6 +77,9 @@ double radians(float degree)
 	return degree * 3.14159265 / 180;
 }
 
+/*
+Draw the current look of this object.
+*/
 void Object::Draw(SpriteBatch *spriteBatch)
 {
 	if (m_look == NULL)
@@ -89,7 +92,11 @@ void Object::Draw(SpriteBatch *spriteBatch)
 	position.y = ProjectDaemon::Instance()->GetProject()->GetScreenHeight() / 2 + m_position.y;
 
 	if (m_look != NULL)
-		spriteBatch->Draw(m_look->GetTexture(), position, nullptr, Colors::White * m_opacity, (float) radians(m_rotation), XMFLOAT2(((float) m_look->GetWidth()) / 2.0f, ((float) m_look->GetHeight()) / 2.0f), m_objectScale, SpriteEffects_None, 0.0f);
+	{
+		spriteBatch->Draw(m_look->GetTexture(), position, nullptr,
+			Colors::White * m_opacity, (float) radians(m_rotation), XMFLOAT2(((float) m_look->GetWidth()) / 2.0f,
+			((float) m_look->GetHeight()) / 2.0f), m_objectScale, SpriteEffects_None, 0.0f);
+	}
 }
 
 void Object::SetLook(int index)
@@ -144,13 +151,23 @@ Bounds Object::GetBounds()
 	return bounds;
 }
 
+/*
+Executes all Startscripts of the object and sets the first look if the
+costume list is not empty.
+*/
 void Object::StartUp()
 {
 	for (int i = 0; i < GetScriptListSize(); i++)
 	{
 		Script *script = GetScript(i);
 		if (script->GetType() == Script::TypeOfScript::StartScript)
+		{
 			script->Execute();
+		}
+		if (m_lookList != NULL && m_lookList->size() > 0)
+		{
+			m_look = m_lookList->front();
+		}
 	}
 }
 

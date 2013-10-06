@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Scripts;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
@@ -125,38 +126,38 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
             Messenger.Default.Send(message, ViewModelMessagingToken.SelectedBrickListener);
 
 
-            Navigation.RemoveBackEntry();
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.RemoveBackEntry();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void MovementAction()
         {
             _selectedBrickCategory = BrickCategory.Motion;
-            Navigation.NavigateTo(typeof (AddNewBrickView));
+            ServiceLocator.NavigationService.NavigateTo(typeof (AddNewBrickView));
         }
 
         private void LooksAction()
         {
             _selectedBrickCategory = BrickCategory.Looks;
-            Navigation.NavigateTo(typeof (AddNewBrickView));
+            ServiceLocator.NavigationService.NavigateTo(typeof (AddNewBrickView));
         }
 
         private void SoundAction()
         {
             _selectedBrickCategory = BrickCategory.Sounds;
-            Navigation.NavigateTo(typeof (AddNewBrickView));
+            ServiceLocator.NavigationService.NavigateTo(typeof (AddNewBrickView));
         }
 
         private void ControlAction()
         {
             _selectedBrickCategory = BrickCategory.Control;
-            Navigation.NavigateTo(typeof (AddNewBrickView));
+            ServiceLocator.NavigationService.NavigateTo(typeof (AddNewBrickView));
         }
 
         private void VariablesAction()
         {
             _selectedBrickCategory = BrickCategory.Variables;
-            Navigation.NavigateTo(typeof(AddNewBrickView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewBrickView));
         }
 
         private void OnLoadBrickViewAction()

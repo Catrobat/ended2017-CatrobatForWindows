@@ -110,7 +110,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
             path += "&Dummy=" + DateTime.UtcNow.Ticks;
 
             ShellTile.Create(new Uri(path, UriKind.Relative), tile, true);
-            Navigation.NavigateBack();
+            Core.Services.ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void BuildApplicationBar()
@@ -124,7 +124,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
             var buttonCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
             buttonCancel.Text = AppResources.Editor_ButtonCancel;
-            buttonCancel.Click += (sender, args) => Navigation.NavigateBack();
+            buttonCancel.Click += (sender, args) => Core.Services.ServiceLocator.NavigationService.NavigateBack();
             ApplicationBar.Buttons.Add(buttonCancel);
         }
     }

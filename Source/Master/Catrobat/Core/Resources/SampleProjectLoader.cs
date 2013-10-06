@@ -35,7 +35,7 @@ namespace Catrobat.Core.Resources
                     var resourceLoader = ResourceLoader.CreateResourceLoader();
                     resourceStream = resourceLoader.OpenResourceStream(ResourceScope.Resources, path);
 
-                    try
+                    if (resourceStream != null)
                     {
                         var projectFolderPath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName);
 
@@ -58,8 +58,6 @@ namespace Catrobat.Core.Resources
                             project.Save();
                         }
                     }
-                    catch (Exception) // TODO: Implement catch exception body
-                    {}
                 }
                 catch (Exception)
                 {

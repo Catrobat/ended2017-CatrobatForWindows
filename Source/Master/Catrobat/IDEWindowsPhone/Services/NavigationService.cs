@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows;
+using Catrobat.Core.Services;
 using Microsoft.Phone.Controls;
 
-namespace Catrobat.IDEWindowsPhone.Misc
+namespace Catrobat.IDEWindowsPhone.Services
 {
-    public class Navigation
+    public class NavigationService : INavigationService
     {
-        public static void NavigateTo(Type type)
+        public void NavigateTo(Type type)
         {
+            if (type == null) return;
+
             var assemblyFullName = Assembly.GetExecutingAssembly().FullName;
             var assemblyName = assemblyFullName.Split(',')[0];
 
@@ -29,18 +32,17 @@ namespace Catrobat.IDEWindowsPhone.Misc
             ((PhoneApplicationFrame) Application.Current.RootVisual).Navigate(new Uri(pathToXaml, UriKind.Relative));
         }
 
-        public static void NavigateBack()
+        public void NavigateBack()
         {
             ((PhoneApplicationFrame) Application.Current.RootVisual).GoBack();
         }
 
-
-        public static void RemoveBackEntry()
+        public void RemoveBackEntry()
         {
             ((PhoneApplicationFrame) Application.Current.RootVisual).RemoveBackEntry();
         }
 
-        public static bool CanGoBack
+        public bool CanGoBack
         {
             get
             {

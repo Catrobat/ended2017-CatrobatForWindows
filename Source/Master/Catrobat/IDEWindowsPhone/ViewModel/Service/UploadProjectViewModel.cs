@@ -4,6 +4,7 @@ using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Coding4Fun.Toolkit.Controls;
@@ -126,14 +127,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             var message = new MessageBase();
             Messenger.Default.Send(message, ViewModelMessagingToken.UploadProjectStartedListener);
 
-            Navigation.RemoveBackEntry();
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.RemoveBackEntry();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void CancelAction()
         {
-            Navigation.RemoveBackEntry();
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.RemoveBackEntry();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void ResetViewModelAction()

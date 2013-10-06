@@ -2,7 +2,7 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en" target-language="de" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="IDEWindowsPhone" product-version="1.0.0.0" build-num="0">
     <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="2.0.1000.0" tool-company="Microsoft" />
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="2.1.1100.0" tool-company="Microsoft" />
     </header>
     <body>
       <group id="Resx">
@@ -1039,6 +1039,14 @@
         <trans-unit translate="yes" id="Resx/Formula_FunctionTan" xml:space="preserve">
           <source>tan</source>
           <target state="new">tan</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_Camera_Rename" xml:space="preserve">
+          <source>rename</source>
+          <target state="new">rename</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Editor_AppbarAdd" xml:space="preserve">
+          <source>add</source>
+          <target state="new">add</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionSqrt" xml:space="preserve">
           <source>sqrt</source>

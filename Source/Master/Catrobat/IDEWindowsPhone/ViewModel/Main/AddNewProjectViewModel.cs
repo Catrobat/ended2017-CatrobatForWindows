@@ -1,5 +1,6 @@
 ﻿using Catrobat.Core;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -70,12 +71,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
             Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
 
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void CancelAction()
         {
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void ResetViewModelAction()

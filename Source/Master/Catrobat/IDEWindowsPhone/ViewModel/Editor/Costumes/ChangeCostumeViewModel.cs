@@ -4,6 +4,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor;
 using Catrobat.Paint;
@@ -93,12 +94,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         private void SaveAction()
         {
             ReceivedCostume.Name = CostumeName;
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void CancelAction()
         {
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void EditCostumeAction()
@@ -123,8 +124,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                     Debugger.Break();
             }
 
-            Navigation.RemoveBackEntry();
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.RemoveBackEntry();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void ResetViewModelAction()

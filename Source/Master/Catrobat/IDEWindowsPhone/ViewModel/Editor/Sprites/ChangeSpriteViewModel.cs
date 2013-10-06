@@ -1,4 +1,5 @@
 ﻿using Catrobat.Core.Objects;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -74,13 +75,13 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             ReceivedSprite.Name = SpriteName;
 
             ResetViewModel();
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void CancelAction()
         {
             ResetViewModel();
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void ChangeSpriteNameMessageAction(GenericMessage<Sprite> message)

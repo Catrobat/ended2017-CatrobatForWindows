@@ -5,6 +5,7 @@
 #include "ExceptionLogger.h"
 #include "XMLParserFatalException.h"
 #include "PlayerException.h"
+#include "Constants.h"
 #include <ppltasks.h>
 
 using namespace Microsoft::WRL;
@@ -55,129 +56,85 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 {
     if(projectName->IsEmpty())
     {
-        throw new XMLParserFatalException("Project name must not be empty!");
+        throw new PlayerException("No project name was specified.");
     }
 
     m_files = new vector<Platform::String^>();
     auto path = Windows::Storage::ApplicationData::Current->LocalFolder->Path + "/Projects/" + projectName;
 
     auto openProjectTask = create_task(Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderFromPathAsync(path))
-        .then([this](task<StorageFolder^> folderResult)
-    {
-        try
-        {
-            StorageFolder^ folder = folderResult.get();
-            return folder->GetFileAsync("code.xml");
-        }
-        catch(Platform::Exception^ ex)
-        {
-            std::string message = "ProjectFolder not found!";
-            ExceptionLogger::Instance()->Log(CRITICALWARNING, message);
-            throw;
-        }
-    },task_continuation_context::use_current())
+        .then([this, path](task<StorageFolder^> folderResult)
+	{
+		try
+		{
+			Platform::String^ filename = Helper::ConvertStringToPlatformString(Constants::Player::xmlFileName);
+			StorageFolder^ folder = folderResult.get();
+
+			// If the path exists, make it available within the project
+			m_projectPath = Helper::ConvertPlatformStringToString(path);
+
+			return folder->GetFileAsync(filename);
+		}
+		catch (Exception^ e)
+		{
+			throw new PlayerException(&e, "Specified Path could not be found [" + Helper::ConvertPlatformStringToString(path) + "].");
+		}
+
+    }, task_continuation_context::use_current())
         .then([this](task<StorageFile^> fileResult)
     {
-        try
-        {
-            StorageFile^ file = fileResult.get();
-            string pathString = Helper::ConvertPlatformStringToString(file->Path);
-            return pathString;
-        }
-        catch(Platform::Exception ^ex)
-        {
-            std::string message = "code.xml not found!";
-            ExceptionLogger::Instance()->Log(CRITICALWARNING, message);
-            throw;
-        }
-    },task_continuation_context::use_arbitrary())
-        .then([this](task<string> filePathResult)
-    {
-        // Create and load XML
-        XMLParser *xml = new XMLParser();
-        try
-        {
-            string filePath = filePathResult.get();
-            xml->LoadXML(filePath);
+		try
+		{
+			StorageFile^ file = fileResult.get();
+			string pathString = Helper::ConvertPlatformStringToString(file->Path);
+			return pathString;
+		}
+		catch (Exception^ e)
+		{
+			throw new PlayerException(&e, "Specified file could not be found [" + Constants::Player::xmlFileName + "].");
+		}
 
-            // Set Project to be accessed from everywhere
-            SetProject(xml->GetProject());
+    }, task_continuation_context::use_current())
+		.then([this](task<string> filePathResult)
+	{
+		try
+		{
+			// Create and load XML
+			XMLParser *xml = new XMLParser();
+			string filePath = filePathResult.get();
+			xml->LoadXML(filePath);
 
-            // Initialize Renderer and enable rendering to be started
-            m_renderer->Initialize(m_device);
-            m_finishedLoading = true;
-            free(xml);
-        }
-        catch (BaseException *e)
-        {
-            ExceptionLogger::Instance()->Log(e);
-            ExceptionLogger::Instance()->Log(INFORMATION, "Problem opening Project! Aborting...");
-            ProjectDaemon::Instance()->AddDebug("Problem opening Project. Check Logfile");
-            m_finishedLoading = false;
-        }
-    });
+			// Set Project to be accessed from everywhere
+			SetProject(xml->GetProject());
 
-    //auto getFolder = Windows::Storage::ApplicationData::Current->LocalFolder->GetFolderFromPathAsync(path);
+			// Initialize Renderer and enable rendering to be started
+			m_renderer->Initialize(m_device);
+			m_finishedLoading = true;
+			free(xml);
+		}
+		catch (Platform::Exception^ e)
+		{
+			throw new PlayerException(&e, "Not able to open the XML file.");
+		}
+	});
 
-    //getFolder->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFolder^>
-    //    (
-    //    [this](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFolder^>^ operation, Windows::Foundation::AsyncStatus status)
-    //{
-    //    if (status == Windows::Foundation::AsyncStatus::Completed)
-    //    {
-    //        
-    //        auto folderContent = operation->GetResults();
-    //        // TODO: Check safety>
-    //        m_projectPath = Helper::ConvertPlatformStringToString(folderContent->Path);
-
-    //        IAsyncOperation<Windows::Storage::StorageFile^>^ getFiles = folderContent->GetFileAsync("code.xml");
-    //        getFiles->Completed = ref new Windows::Foundation::AsyncOperationCompletedHandler<Windows::Storage::StorageFile^>
-    //            (
-    //            [this](Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile^>^ operation, Windows::Foundation::AsyncStatus status)
-    //        {
-    //            if (status == Windows::Foundation::AsyncStatus::Completed)
-    //            {
-    //                // Get the Path 
-    //                auto projectCode = operation->GetResults();
-    //                string pathString = Helper::ConvertPlatformStringToString(projectCode->Path);
-
-    //                // Create and load XML
-    //                XMLParser *xml = new XMLParser();
-    //                try
-    //                {
-    //                    xml->LoadXML(pathString);
-
-    //                    // Set Project to be accessed from everywhere
-    //                    SetProject(xml->GetProject());
-
-    //                    // Initialize Renderer and enable rendering to be started
-    //                    m_renderer->Initialize(m_device);
-    //                    m_finishedLoading = true;
-    //                    free(xml);
-    //                }
-    //                catch (BaseException *e)
-    //                {
-    //                    ExceptionLogger::Instance()->Log(e);
-    //                    ExceptionLogger::Instance()->Log(INFORMATION, "Problem opening Project! Aborting...");
-    //                    ProjectDaemon::Instance()->AddDebug("Problem opening Project. Check Logfile");
-    //                    m_finishedLoading = false;
-    //                }
-    //            }
-    //            else if (status == Windows::Foundation::AsyncStatus::Error)
-    //            {
-    //                std::string message = "ProjectFolder not found!";
-    //                ExceptionLogger::Instance()->Log(CRITICALWARNING, message);
-    //            }
-    //        }
-    //        );
-    //    }
-    //    else if (status == Windows::Foundation::AsyncStatus::Error)
-    //    {
-    //        std::string message = "code.xml not found!";
-    //        ExceptionLogger::Instance()->Log(CRITICALWARNING, message);
-    //    }
-    //}
-    //);
+	openProjectTask.then([this](task<void> t)
+	{
+		try
+		{
+			t.get();
+		}
+		catch (BaseException *e)
+		{
+			ExceptionLogger::Instance()->Log(e);
+			this->AddDebug(Helper::ConvertStringToPlatformString(e->GetErrorMessage()));
+		}
+		catch (Exception ^e)
+		{
+			ExceptionLogger::Instance()->Log(e);
+			this->AddDebug(e->Message);
+		}
+	});
 }
 
 vector<Platform::String^> *ProjectDaemon::GetProjectList()
@@ -221,18 +178,6 @@ void ProjectDaemon::SetupRenderer(ID3D11Device1 *device, ProjectRenderer^ render
 bool ProjectDaemon::FinishedLoading()
 {
     return m_finishedLoading;
-}
-
-void ProjectDaemon::SetError(ProjectDaemon::Error error)
-{
-    switch (error)
-    {
-    case ProjectDaemon::FILE_NOT_FOUND:
-        m_errorList->push_back("Requested file could not be found");
-        break;
-    default:
-        break;
-    }
 }
 
 void ProjectDaemon::AddDebug(Platform::String^ info)

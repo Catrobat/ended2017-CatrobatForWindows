@@ -8,6 +8,7 @@ using Catrobat.Core;
 using Catrobat.Core.Misc.ServerCommunication;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Resources;
+using Catrobat.Core.Services;
 using Catrobat.Core.VersionConverter;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -172,7 +173,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
             var projectChangedMessage = new MessageBase();
             Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.DownloadProjectStartedListener);
 
-            Navigation.NavigateBack();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void ReportAction()

@@ -2,6 +2,8 @@
 #include "Renderer.h"
 #include "ProjectDaemon.h"
 
+#include <sstream>
+
 using namespace DirectX;
 using namespace Microsoft::WRL;
 using namespace Windows::Foundation;
@@ -64,20 +66,40 @@ void Renderer::Render()
 	// ---------------------------------------------------------------------->
 	m_spriteBatch->Begin();
 	{
-		Platform::String^ loadingScreen = L"";//CPPBridgeNameSpace::CPPBridge::Instance()->ProjectName();
-		std::wstring loadingScreenWidestr(loadingScreen->Begin());
-		const wchar_t* lScreen = loadingScreenWidestr.c_str();
-
-		m_spriteFont->DrawString(m_spriteBatch.get(), lScreen, XMFLOAT2(100, 100), Colors::Black);
-
 		vector<string> *errors = ProjectDaemon::Instance()->GetErrorList();
 		float offset = 100;
 		for (unsigned int index = 0; index < errors->size(); index++)
 		{
 			string error = errors->at(index);
-			std::wstring errorString = std::wstring(error.begin(), error.end());
-			const wchar_t* cerrorString = errorString.c_str();
-			m_spriteFont->DrawString(m_spriteBatch.get(), cerrorString, XMFLOAT2(100, offset += 100), Colors::Black);
+			if (error.length() > 15)
+			{
+				istringstream iss(error);
+				vector<string> tokens;
+				string buffer;
+				while (iss >> buffer)
+				{
+					tokens.push_back(buffer);
+				}
+
+				vector<string> lines;
+				string line;
+				for each (string token in tokens)
+				{
+					line += " " + token;
+					if (line.length() > 15)
+					{
+						lines.push_back(line);
+						line = "";
+					}
+				}
+
+				for each (string line in lines)
+				{
+					std::wstring errorString = std::wstring(line.begin(), line.end());
+					const wchar_t* cerrorString = errorString.c_str();
+					m_spriteFont->DrawString(m_spriteBatch.get(), cerrorString, XMFLOAT2(10, offset += 100), Colors::Black);
+				}
+			}
 		}
 	}
 	m_spriteBatch->End();
