@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using System.Windows.Media.Imaging;
 using Catrobat.Core.Misc.Storage;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Costumes;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Costumes;
 using Catrobat.Core.Services.Data;
 using ToolStackPNGWriterLib;
 
-namespace Catrobat.IDEWindowsPhone.Utilities
+namespace Catrobat.IDEWindowsPhone.Utilities.Helpers
 {
     public class CostumeBuilderHelper
     {

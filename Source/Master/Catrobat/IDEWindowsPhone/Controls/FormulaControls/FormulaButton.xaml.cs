@@ -2,8 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using Catrobat.Core.Objects.Formulas;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects.Formulas;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.IDEWindowsPhone.Converters;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;

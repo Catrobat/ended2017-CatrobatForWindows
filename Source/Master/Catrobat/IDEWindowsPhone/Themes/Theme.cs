@@ -19,7 +19,7 @@ namespace Catrobat.IDEWindowsPhone.Themes
             {
                 if (_background == null)
                 {
-                    //TODO: This block makes no sense
+                    //TODO: Update _800.png to real images
                     switch (ResolutionHelper.CurrentResolution)
                     {
                         case Resolutions.WVGA:

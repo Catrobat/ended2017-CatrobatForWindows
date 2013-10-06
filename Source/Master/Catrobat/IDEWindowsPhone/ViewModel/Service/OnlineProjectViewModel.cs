@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Catrobat.Core;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;

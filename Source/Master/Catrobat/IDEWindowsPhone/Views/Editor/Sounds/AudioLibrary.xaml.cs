@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Catrobat.Core;
-using Catrobat.Core.Objects.Sounds;
+using Catrobat.Core.CatrobatObjects.Sounds;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Utilities.Sounds;

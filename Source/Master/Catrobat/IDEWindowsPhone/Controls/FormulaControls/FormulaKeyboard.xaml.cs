@@ -6,7 +6,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.IDECommon.Formula.Editor;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;

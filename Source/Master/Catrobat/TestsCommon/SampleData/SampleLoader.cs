@@ -2,7 +2,7 @@
 using Catrobat.Core;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Storage;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 using System.IO;
 using System.Xml.Linq;
 using Catrobat.Core.Services;

@@ -1,4 +1,4 @@
-﻿using Catrobat.Core.Objects;
+﻿using Catrobat.Core.CatrobatObjects;
 
 namespace Catrobat.Core.Services.Common
 {

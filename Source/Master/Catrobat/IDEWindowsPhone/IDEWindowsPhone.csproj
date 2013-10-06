@@ -209,7 +209,6 @@
     <Compile Include="Utilities\Helpers\ResolutionHelper.cs" />
     <Compile Include="Services\ServerCommunicationServicePhone.cs" />
     <Compile Include="Utilities\Sounds\SoundPlayer.cs" />
-    <Compile Include="Utilities\Helpers\ImageFormatHelper.cs" />
     <Compile Include="Utilities\Storage\ResourceLoaderFactoryPhone.cs" />
     <Compile Include="Utilities\Storage\ResourcesPhone.cs" />
     <Compile Include="Utilities\Storage\StorageFactoryPhone.cs" />
@@ -301,9 +300,7 @@
     <Compile Include="Views\Editor\Scripts\NewBroadcastMessageView.xaml.cs">
       <DependentUpon>NewBroadcastMessageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Scripts\ScriptBrickCollection.cs" />
     <Compile Include="Views\Editor\Scripts\ScriptBrickContentTemplateSelector.cs" />
-    <Compile Include="Views\Editor\Scripts\ScriptBrickIterator.cs" />
     <Compile Include="Views\Editor\Sounds\AddNewSoundView.xaml.cs">
       <DependentUpon>AddNewSoundView.xaml</DependentUpon>
     </Compile>

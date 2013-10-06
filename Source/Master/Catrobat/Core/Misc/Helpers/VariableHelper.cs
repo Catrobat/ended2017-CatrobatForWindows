@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.Core.Misc.Helpers
 {

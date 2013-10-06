@@ -4,9 +4,9 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows;
 using Catrobat.Core;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 using System.Collections.Generic;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 
 namespace Catrobat.IDEWindowsPhone.Converters

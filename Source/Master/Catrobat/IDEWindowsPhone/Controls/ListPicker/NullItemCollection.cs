@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Costumes;
-using Catrobat.Core.Objects.Sounds;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Costumes;
+using Catrobat.Core.CatrobatObjects.Sounds;
 using System;
 using System.Collections;
 using System.Collections.Generic;

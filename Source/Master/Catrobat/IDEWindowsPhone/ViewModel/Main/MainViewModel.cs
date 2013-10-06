@@ -6,7 +6,7 @@ using System.Windows.Media.Imaging;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.Storage;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Content.Localization;

@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Catrobat.Core.Objects.Formulas;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects.Formulas;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls;
 

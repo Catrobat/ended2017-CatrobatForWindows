@@ -1,5 +1,5 @@
 ﻿using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.TestsCommon.Misc;
 

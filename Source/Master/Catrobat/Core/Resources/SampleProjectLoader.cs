@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Storage;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;
 

@@ -4,7 +4,7 @@ using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.Storage;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Misc;

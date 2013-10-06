@@ -7,13 +7,13 @@
   xmlns:sb="clr-namespace:Catrobat.IDEWindowsPhone.Views.Editor.Scripts"
   xmlns:rlb="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Bricks"
   xmlns:controls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.ListPicker"
-  xmlns:costumes="clr-namespace:Catrobat.Core.Objects.Costumes;assembly=Catrobat.Core"
-  xmlns:sounds="clr-namespace:Catrobat.Core.Objects.Sounds;assembly=Catrobat.Core"
+  xmlns:costumes="clr-namespace:Catrobat.Core.CatrobatObjects.Costumes;assembly=Catrobat.Core"
+  xmlns:sounds="clr-namespace:Catrobat.Core.CatrobatObjects.Sounds;assembly=Catrobat.Core"
   xmlns:objects="clr-namespace:Catrobat.Core.Objects;assembly=Catrobat.Core"
   xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:bricks="clr-namespace:Catrobat.Core.Objects.Bricks;assembly=Catrobat.Core"
-  xmlns:scripts="clr-namespace:Catrobat.Core.Objects.Scripts;assembly=Catrobat.Core"
+  xmlns:bricks="clr-namespace:Catrobat.Core.CatrobatObjects.Bricks;assembly=Catrobat.Core"
+  xmlns:scripts="clr-namespace:Catrobat.Core.CatrobatObjects.Scripts;assembly=Catrobat.Core"
   xmlns:formulaControls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls"
   mc:Ignorable="d">
 

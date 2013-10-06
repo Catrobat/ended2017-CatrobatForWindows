@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
 using Microsoft.Practices.ServiceLocation;
 

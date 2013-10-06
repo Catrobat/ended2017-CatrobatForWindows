@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Bricks;
-using Catrobat.Core.Objects.Scripts;
+using Catrobat.Core.CatroatObjects.Scripts;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Bricks;
+using Catrobat.Core.CatrobatObjects.Scripts;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Misc;

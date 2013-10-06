@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using IDEWindowsPhone;
 
 namespace Catrobat.IDEWindowsPhone.Utilities.Helpers
@@ -18,7 +19,7 @@ namespace Catrobat.IDEWindowsPhone.Utilities.Helpers
             {
                 try
                 {
-                    return App.Current.Host.Content.ScaleFactor == 100;
+                    return Application.Current.Host.Content.ScaleFactor == 100;
                 }
                 catch
                 {
@@ -33,7 +34,7 @@ namespace Catrobat.IDEWindowsPhone.Utilities.Helpers
             {
                 try
                 {
-                    return App.Current.Host.Content.ScaleFactor == 160;
+                    return Application.Current.Host.Content.ScaleFactor == 160;
                 }
                 catch
                 {
@@ -48,7 +49,7 @@ namespace Catrobat.IDEWindowsPhone.Utilities.Helpers
             {
                 try
                 {
-                    return App.Current.Host.Content.ScaleFactor == 150;
+                    return Application.Current.Host.Content.ScaleFactor == 150;
                 }
                 catch
                 {

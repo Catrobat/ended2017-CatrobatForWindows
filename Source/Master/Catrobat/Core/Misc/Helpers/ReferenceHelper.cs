@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Bricks;
-using Catrobat.Core.Objects.Costumes;
-using Catrobat.Core.Objects.Scripts;
-using Catrobat.Core.Objects.Sounds;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Bricks;
+using Catrobat.Core.CatrobatObjects.Costumes;
+using Catrobat.Core.CatrobatObjects.Scripts;
+using Catrobat.Core.CatrobatObjects.Sounds;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.Core.Services.Common;
 
 namespace Catrobat.Core.Misc.Helpers

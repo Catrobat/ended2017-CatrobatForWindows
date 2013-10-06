@@ -5,7 +5,7 @@ using System.Net;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.JSON;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Resources;
 using Catrobat.Core.VersionConverter;
 

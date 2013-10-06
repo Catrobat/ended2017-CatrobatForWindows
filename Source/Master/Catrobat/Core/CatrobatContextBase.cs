@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using Catrobat.Core.Annotations;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 
 namespace Catrobat.Core
 {

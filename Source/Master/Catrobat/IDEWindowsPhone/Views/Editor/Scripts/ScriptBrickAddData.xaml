@@ -2,9 +2,9 @@
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:s="clr-namespace:Catrobat.IDEWindowsPhone.Views.Editor.Scripts"
-  xmlns:d="clr-namespace:Catrobat.Core.Objects.Bricks;assembly=Catrobat.Core"
-  xmlns:scripts="clr-namespace:Catrobat.Core.Objects.Scripts;assembly=Catrobat.Core"
-  xmlns:formulas="clr-namespace:Catrobat.Core.Objects.Formulas;assembly=Catrobat.Core">
+  xmlns:d="clr-namespace:Catrobat.Core.CatrobatObjects.Bricks;assembly=Catrobat.Core"
+  xmlns:scripts="clr-namespace:Catrobat.Core.CatrobatObjects.Scripts;assembly=Catrobat.Core"
+  xmlns:formulas="clr-namespace:Catrobat.Core.CatrobatObjects.Formulas;assembly=Catrobat.Core">
 
   <s:BrickCollection x:Key="ScriptBrickAddDataMovement">
     <d:PlaceAtBrick IsRealObject="False">

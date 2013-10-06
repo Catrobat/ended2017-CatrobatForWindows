@@ -5,7 +5,7 @@ using System.Xml.Linq;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Misc.Storage;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services.Common;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.Misc.Storage;
