@@ -135,4 +135,9 @@ namespace Constants
     {
          static const string Missing                        =       " missing";
     };
+
+	namespace Player
+	{
+		static const string xmlFileName						=		"code.xml";
+	};
 };

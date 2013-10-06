@@ -12,11 +12,6 @@
 class ProjectDaemon
 {
 public:
-	enum Error
-	{
-		FILE_NOT_FOUND
-	};
-
 	static ProjectDaemon *Instance();
 
 	void SetProject(Project *project);
@@ -32,7 +27,6 @@ public:
 	void SetupRenderer(ID3D11Device1 *device, ProjectRenderer^ renderer);
 	void ApplyDesiredRenderTargetSizeFromProject();
 
-	void SetError(Error error);
     void AddDebug(Platform::String^ info);
 	std::vector<std::string> *GetErrorList();
 

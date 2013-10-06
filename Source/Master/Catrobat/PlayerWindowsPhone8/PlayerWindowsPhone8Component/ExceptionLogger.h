@@ -32,6 +32,7 @@ class ExceptionLogger
 public:
     static ExceptionLogger *Instance();
     void Log(BaseException *exception);
+	void Log(Platform::Exception^ exception);
     void Log(int severity, std::string warning);
 
 private:

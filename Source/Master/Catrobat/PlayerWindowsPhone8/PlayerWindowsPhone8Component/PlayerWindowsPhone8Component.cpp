@@ -143,7 +143,8 @@ namespace PhoneDirect3DXamlAppComponent
 
         // Load Project
 #ifdef _DEBUG
-        ProjectDaemon::Instance()->OpenProject("Default");
+		
+        ProjectDaemon::Instance()->OpenProject("994");
 #else
         ProjectDaemon::Instance()->OpenProject(ProjectName);
 #endif
