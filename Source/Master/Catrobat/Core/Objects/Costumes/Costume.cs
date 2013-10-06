@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Misc.Storage;
 using Catrobat.Core.Services.Common;
-using Catrobat.Core.Storage;
 
 namespace Catrobat.Core.Objects.Costumes
 {

@@ -1,7 +1,8 @@
 ﻿using System.IO;
 using Catrobat.Core.Misc;
+using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;
-using Catrobat.Core.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.TestsCommon.Misc;
 
@@ -22,7 +23,7 @@ namespace Catrobat.TestsCommon.Tests.Misc
       TestHelper.InitializeAndClearCatrobatContext();
       string path = "SampleData/SampleProjects/test.catroid";
 
-      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
       {
         Stream originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path);
         CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
@@ -66,7 +67,7 @@ namespace Catrobat.TestsCommon.Tests.Misc
       TestHelper.InitializeAndClearCatrobatContext();
       string path = "SampleData/SampleProjects/test.catroid";
 
-      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
       {
         Stream originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path);
         CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");

@@ -25,13 +25,6 @@ namespace Catrobat.Core.Services.Common
 
         private static int _uploadCounter = 0;
 
-        private static IServerCommunicationService _iServerCommunication;
-
-        public static void SetIServerCommunication(IServerCommunicationService iServerCommunication)
-        {
-            _iServerCommunication = iServerCommunication;
-        }
-
         public static bool NoUploadsPending()
         {
             return _uploadCounter == 0;
@@ -114,12 +107,12 @@ namespace Catrobat.Core.Services.Common
 
         public static void LoadOnlineProjects(bool append, string filterText, int offset, LoadOnlineProjectsEvent callback)
         {
-            _iServerCommunication.LoadOnlineProjects(append, filterText, offset, callback);
+            ServiceLocator.ServerCommunicationService.LoadOnlineProjects(append, filterText, offset, callback);
         }
 
         public static void DownloadAndSaveProject(string downloadUrl, string projectName, DownloadAndSaveProjectEvent callback)
         {
-            _iServerCommunication.DownloadAndSaveProject(downloadUrl, projectName, callback);
+            ServiceLocator.ServerCommunicationService.DownloadAndSaveProject(downloadUrl, projectName, callback);
         }
 
         public static void UploadProject(string projectName, string projectDescription, string userEmail,

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
 using Catrobat.Core;
+using Catrobat.Core.Misc.Storage;
 using Catrobat.Core.Services.Common;
-using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
 using Catrobat.IDEWindowsPhone.Utilities.Storage;
 using Catrobat.TestsWindowsPhone.Misc;
@@ -223,7 +223,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
         {
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
-                using (var resource = (new ResourceLoaderFactoryPhone()).CreateResoucreLoader())
+                using (var resource = (new ResourceLoaderFactoryPhone()).CreateResourceLoader())
                 {
                     var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
                     CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
@@ -244,7 +244,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
             {
                 IStorage storage = new StoragePhone();
 
-                using (var resource = (new ResourceLoaderFactoryPhone()).CreateResoucreLoader())
+                using (var resource = (new ResourceLoaderFactoryPhone()).CreateResourceLoader())
                 {
                     var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
                     CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");

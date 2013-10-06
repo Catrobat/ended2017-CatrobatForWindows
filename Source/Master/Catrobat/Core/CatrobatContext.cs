@@ -3,9 +3,10 @@ using System.Diagnostics;
 using System.IO;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Misc.Storage;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;
-using Catrobat.Core.Storage;
 
 namespace Catrobat.Core
 {
@@ -52,7 +53,7 @@ namespace Catrobat.Core
 
                 if (!storage.FileExists(projectCodeFile))
                 {
-                    using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+                    using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
                     {
                         var stream = resourceLoader.OpenResourceStream(ResourceScope.Resources, DefaultProjectPath);
                         CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectCodeFile);

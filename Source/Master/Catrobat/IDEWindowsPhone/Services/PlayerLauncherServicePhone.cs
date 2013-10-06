@@ -2,8 +2,8 @@
 using System.IO;
 using System.Windows;
 using Catrobat.Core;
+using Catrobat.Core.Misc.Storage;
 using Catrobat.Core.Services;
-using Catrobat.Core.Storage;
 using Catrobat.Core.VersionConverter;
 using Microsoft.Phone.Controls;
 

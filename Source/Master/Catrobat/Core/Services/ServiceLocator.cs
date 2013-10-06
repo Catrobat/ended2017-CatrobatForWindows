@@ -1,4 +1,5 @@
 ﻿using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Misc.Storage;
 
 namespace Catrobat.Core.Services
 {
@@ -14,13 +15,21 @@ namespace Catrobat.Core.Services
 
         public static IPlayerLauncherService PlayerLauncherService { get; private set; }
 
+        public static IResourceLoaderFactory ResourceLoaderFactory { get; private set; }
+
+        public static IStorageFactory StorageFactory { get; set; }
+
+        public static IServerCommunicationService ServerCommunicationService { get; private set; }
 
         public static void SetServices(
             INavigationService navigationService,
             ISystemInformationService systemInformationService,
             ICultureService culureService,
             IImageResizeService imageResizeService,
-            IPlayerLauncherService playerLauncherService
+            IPlayerLauncherService playerLauncherService,
+            IResourceLoaderFactory resourceLoaderFactory,
+            IStorageFactory storageFactory,
+            IServerCommunicationService serverCommunicationService
             )
         {
             NavigationService = navigationService;
@@ -28,6 +37,9 @@ namespace Catrobat.Core.Services
             CulureService = culureService;
             ImageResizeService = imageResizeService;
             PlayerLauncherService = playerLauncherService;
+            ResourceLoaderFactory = resourceLoaderFactory;
+            StorageFactory = storageFactory;
+            ServerCommunicationService = serverCommunicationService;
         }
     }
 }

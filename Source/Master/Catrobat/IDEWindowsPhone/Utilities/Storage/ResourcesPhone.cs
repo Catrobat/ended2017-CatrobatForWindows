@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Misc.Storage;
 
 namespace Catrobat.IDEWindowsPhone.Utilities.Storage
 {
-    public class ResourcesPhone : IResources
+    public class ResourcesPhone : IResourceLoader
     {
         private readonly List<Stream> _openedStreams = new List<Stream>();
 

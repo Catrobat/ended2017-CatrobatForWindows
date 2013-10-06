@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using Catrobat.Core.Misc.Storage;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
@@ -12,7 +13,6 @@ using Catrobat.Core.Objects.Variables;
 using System.IO;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;
-using Catrobat.Core.Storage;
 
 namespace Catrobat.TestsCommon.Misc
 {

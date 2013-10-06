@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Threading;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Misc.Storage;
 using System;
 using System.Runtime.Serialization;
 

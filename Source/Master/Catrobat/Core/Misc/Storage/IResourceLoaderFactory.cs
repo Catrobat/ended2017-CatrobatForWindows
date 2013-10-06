@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-namespace Catrobat.Core.Storage
+﻿namespace Catrobat.Core.Misc.Storage
 {
     public enum ResourceScope
     {
@@ -15,8 +12,8 @@ namespace Catrobat.Core.Storage
         Resources
     }
 
-    public interface IResources : IDisposable
+    public interface IResourceLoaderFactory
     {
-        Stream OpenResourceStream(ResourceScope project, string url);
+        IResourceLoader CreateResourceLoader();
     }
 }

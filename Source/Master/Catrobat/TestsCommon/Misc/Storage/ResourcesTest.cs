@@ -4,12 +4,12 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Misc.Storage;
 using System;
 
 namespace Catrobat.TestsCommon.Misc.Storage
 {
-    public class ResourcesTest : IResources
+    public class ResourcesTest : IResourceLoader
     {
         private readonly List<Stream> _openedStreams = new List<Stream>();
 

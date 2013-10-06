@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Windows;
+using Catrobat.Core.Misc.Storage;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Sounds;
-using Catrobat.Core.Storage;
 using Microsoft.Xna.Framework.Audio;
 
 namespace Catrobat.IDEWindowsPhone.Utilities.Sounds

@@ -3,10 +3,10 @@ using System.Globalization;
 using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Misc.Storage;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Services.Common;
-using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
 using Catrobat.IDEWindowsPhone.Services;
@@ -90,12 +90,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 new SystemInformationServicePhone(),
                 new CultureServicePhone(),
                 new ImageResizeServicePhone(),
-                new PlayerLauncherServicePhone()
+                new PlayerLauncherServicePhone(),
+                new ResourceLoaderFactoryPhone(),
+                new StorageFactoryPhone(),
+                new ServerCommunicationServicePhone()
                 );
-
-            StorageSystem.SetStorageFactory(new StorageFactoryPhone());
-            ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryPhone());
-            CatrobatWebCommunicationService.SetIServerCommunication(new ServerCommunicationServicePhone());
         }
 
         private static Project InitializeFirstTimeUse(CatrobatContextBase context)

@@ -5,12 +5,12 @@ using System.IO;
 using System.Xml.Linq;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Misc.Storage;
 using Catrobat.Core.Objects.Bricks;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Objects.Scripts;
 using Catrobat.Core.Objects.Variables;
 using Catrobat.Core.Services.Common;
-using Catrobat.Core.Storage;
 
 namespace Catrobat.Core.Objects
 {

@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Misc.Storage;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;
-using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Utilities;
@@ -430,7 +430,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             if (_showDownloadMessage)
             {
                 var image = new BitmapImage();
-                using (var loader = ResourceLoader.CreateResourceLoader())
+                using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
                 {
                     var stream = loader.OpenResourceStream(ResourceScope.IdePhone, "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
                     image.SetSource(stream);
@@ -448,7 +448,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             if (_showUploadMessage)
             {
                 var image = new BitmapImage();
-                using (var loader = ResourceLoader.CreateResourceLoader())
+                using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
                 {
                     var stream = loader.OpenResourceStream(ResourceScope.IdePhone, "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
                     image.SetSource(stream);

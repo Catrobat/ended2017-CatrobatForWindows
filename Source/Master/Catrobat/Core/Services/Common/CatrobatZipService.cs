@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Misc.Storage;
 using SharpCompress.Archive.Zip;
 using SharpCompress.Common;
 using SharpCompress.Reader;

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Misc.Storage;
 
 namespace Catrobat.TestsCommon.Misc.Storage
 {
   public class ResourceLoaderFactoryTest : IResourceLoaderFactory
   {
-    public IResources CreateResoucreLoader()
+    public IResourceLoader CreateResourceLoader()
     {
       return new ResourcesTest();
     }

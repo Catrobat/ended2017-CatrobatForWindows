@@ -7,7 +7,6 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Catrobat.Core.Objects;
-using Catrobat.Core.Storage;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;

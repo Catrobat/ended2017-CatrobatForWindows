@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using System.Windows.Media.Imaging;
+using Catrobat.Core.Misc.Storage;
 using Catrobat.Core.Objects;
 using Catrobat.Core.Objects.Costumes;
 using Catrobat.Core.Services.Data;
-using Catrobat.Core.Storage;
 using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDEWindowsPhone.Utilities

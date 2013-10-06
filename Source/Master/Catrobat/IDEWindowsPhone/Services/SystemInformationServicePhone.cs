@@ -5,7 +5,7 @@ using Microsoft.Phone.Info;
 
 namespace Catrobat.IDEWindowsPhone.Services
 {
-    class SystemInformationServicePhone : ISystemInformationService
+    public class SystemInformationServicePhone : ISystemInformationService
     {
         public string PlatformName
         {
