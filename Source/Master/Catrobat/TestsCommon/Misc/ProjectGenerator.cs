@@ -100,14 +100,12 @@ namespace Catrobat.TestsCommon.Misc
             foreach (var sprite in sprites)
             {
                 var scripts = ReflectionHelper.GetInstances<Script>();
-                sprite.Scripts = new ScriptList();
                 foreach (var script in scripts)
                 {
                     FillDummyValues(script, project, sprite);
                     sprite.Scripts.Scripts.Add(script);
 
                     var bricks = ReflectionHelper.GetInstances<Brick>(ExcludedBricks);
-                    script.Bricks = new BrickList();
                     foreach (var brick in bricks)
                     {
                         FillDummyValues(brick, project, sprite);
@@ -225,6 +223,12 @@ namespace Catrobat.TestsCommon.Misc
                             return brick;
             }
 
+            if (type == typeof (ScriptList))
+                return new ScriptList();
+
+            if (type == typeof (BrickList))
+                return new BrickList();
+
             return null;
         }
 
@@ -312,13 +316,12 @@ namespace Catrobat.TestsCommon.Misc
                         {
                             ObjectVariableEntries = new ObservableCollection<ObjectVariableEntry>()
                         },
-                    ProgramVariableList = new ProgramVariableList()
+                    ProgramVariableList = new ProgramVariableList
                         {
                             UserVariables = new ObservableCollection<UserVariable>()
                         }
                 };
 
-            var count = 0;
             foreach (var sprite in project.SpriteList.Sprites)
             {
                 var entry = new ObjectVariableEntry
@@ -330,14 +333,23 @@ namespace Catrobat.TestsCommon.Misc
                                     {
                                         new UserVariable
                                             {
-                                                Name = "LocalTestVariable" + count
+                                                Name = "LocalTestVariable"
                                             }
                                     }
                             }
                     };
-                count++;
+
                 project.VariableList.ObjectVariableList.ObjectVariableEntries.Add(entry);
             }
+
+            for (int i = 0; i < 3; i++)
+            {
+                project.VariableList.ProgramVariableList.UserVariables.Add(new UserVariable
+                    {
+                        Name = "GlobalTestVariable" + i
+                    });
+            }
+
         }
 
         private static void AddLoopBricks(ObservableCollection<Brick> bricks)

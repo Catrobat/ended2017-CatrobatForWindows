@@ -37,7 +37,7 @@ namespace Catrobat.Core.Objects.Scripts
 
             foreach (var script in Scripts)
             {
-                script.Bricks.Bricks.CollectionChanged += BricksOnCollectionChanged;
+                    script.Bricks.Bricks.CollectionChanged += BricksOnCollectionChanged;
             }
         }
 
