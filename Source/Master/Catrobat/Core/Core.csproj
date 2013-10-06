@@ -50,6 +50,9 @@
     <Compile Include="Misc\Helpers\StringFormatHelper.cs" />
     <Compile Include="Misc\Helpers\FileNameGenerationHelper.cs" />
     <Compile Include="Services\Common\CatrobatWebFormUploadService.cs" />
+    <Compile Include="Services\Common\CatrobatZipService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Services\ICultureService.cs" />
     <Compile Include="Misc\Helpers\LanguageHelper.cs" />
     <Compile Include="Misc\MD5.cs" />
@@ -177,7 +180,6 @@
     <Compile Include="VersionConverter\Versions\CatrobatVersion08ToWin080.cs" />
     <Compile Include="Misc\Helpers\XPathHelper.cs" />
     <Compile Include="Misc\XmlStringWriter.cs" />
-    <Compile Include="Services\Common\CatrobatZipService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ApplicationResources.resx">

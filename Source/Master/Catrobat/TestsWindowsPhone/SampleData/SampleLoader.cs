@@ -1,7 +1,7 @@
 ﻿using Catrobat.Core;
 using Catrobat.Core.Objects;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Storage;
-using Catrobat.Core.ZIP;
 using System;
 using System.IO;
 using System.Xml.Linq;
@@ -51,7 +51,7 @@ namespace Catrobat.TestsWindowsPhone.SampleData
         using (var resourceLoader = ResourceLoader.CreateResourceLoader())
         {
             var stream = resourceLoader.OpenResourceStream(ResourceScope.TestsPhone, path + sampleName);
-            CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
+            CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
             stream.Close();
             stream.Dispose();
         }
