@@ -10,7 +10,7 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 {
-    public delegate void FormulaChanged(Core.CatrobatObjects.Formulas.Formula formula);
+    public delegate void FormulaChanged(SelectedFormulaInformation formulaInformation);
 
     public delegate void ErrorOccurred();
 
@@ -22,10 +22,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
         public ErrorOccurred ErrorOccurred;
 
-        private void RaiseFormulaChanged(Core.CatrobatObjects.Formulas.Formula formula)
+        private void RaiseFormulaChanged(SelectedFormulaInformation formulaInformation)
         {
             if (FormulaChanged != null)
-                FormulaChanged.Invoke(formula);
+                FormulaChanged.Invoke(formulaInformation);
         }
 
         private void RaiseKeyError()
@@ -137,7 +137,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
                 RaiseKeyError();
 
             FormulaButton.FormulaChanged();
-            RaiseFormulaChanged(Formula);
+            RaiseFormulaChanged(SelectedFormulaInformation);
         }
 
         private void ObjectVariableSelectedAction(ObjectVariable variable)
@@ -147,7 +147,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
                 RaiseKeyError();
 
             FormulaButton.FormulaChanged();
-            RaiseFormulaChanged(Formula);
+            RaiseFormulaChanged(SelectedFormulaInformation);
         }
 
         private void SensorVariableSelectedAction(SensorVariable variable)
@@ -157,7 +157,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
                 RaiseKeyError();
 
             FormulaButton.FormulaChanged();
-            RaiseFormulaChanged(Formula);
+            RaiseFormulaChanged(SelectedFormulaInformation);
         }
 
         #endregion
@@ -190,7 +190,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
                     RaiseKeyError();
             }
 
-            RaiseFormulaChanged(Formula);
+            RaiseFormulaChanged(SelectedFormulaInformation);
         }
 
         #endregion

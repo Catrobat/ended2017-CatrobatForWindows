@@ -281,5 +281,10 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
         {
             return _uiFormula.GetSelectedFormula();
         }
+
+        public void SetSelectedFormula(SelectedFormulaInformation formulaInformation)
+        {
+            _uiFormula.SetSelectedFormula(formulaInformation);
+        }
     }
 }
