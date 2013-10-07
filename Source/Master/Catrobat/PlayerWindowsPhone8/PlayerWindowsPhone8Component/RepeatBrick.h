@@ -8,7 +8,7 @@ class RepeatBrick :
 	public ContainerBrick
 {
 public:
-	RepeatBrick(string spriteReference, FormulaTree *times, Script *parent);
+	RepeatBrick(FormulaTree *times, Script *parent);
 	~RepeatBrick(void);
 
 	void Execute();

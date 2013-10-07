@@ -2,7 +2,7 @@
 #include "ContainerBrick.h"
 #include "Interpreter.h"
 
-ContainerBrick::ContainerBrick(TypeOfBrick brickType, string objectReference, Script *parent) :
-	Brick(brickType, objectReference, parent)
+ContainerBrick::ContainerBrick(TypeOfBrick brickType, Script *parent) :
+	Brick(brickType, parent)
 {
 }

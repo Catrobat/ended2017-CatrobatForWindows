@@ -6,8 +6,8 @@
 #include <windows.h>
 #include <ppltasks.h>
 
-GlideToBrick::GlideToBrick(string spriteReference, FormulaTree *xDestination, FormulaTree *yDestination, FormulaTree *duration, Script *parent) :
-	Brick(TypeOfBrick::GlideToBrick, spriteReference, parent),
+GlideToBrick::GlideToBrick(FormulaTree *xDestination, FormulaTree *yDestination, FormulaTree *duration, Script *parent) :
+	Brick(TypeOfBrick::GlideToBrick, parent),
 	m_xDestination(xDestination), m_yDestination(yDestination),
 	m_duration(duration)
 {

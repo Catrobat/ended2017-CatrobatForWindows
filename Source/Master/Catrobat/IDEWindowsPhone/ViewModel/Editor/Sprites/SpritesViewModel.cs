@@ -3,12 +3,13 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Utilities;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using GalaSoft.MvvmLight;
@@ -195,7 +196,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
 
         private void StartPlayerAction()
         {
-            PlayerLauncher.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
+           ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject);
         }
 
         private void UndoAction()

@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls
 {

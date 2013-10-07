@@ -1,7 +1,10 @@
 ﻿using System.IO.IsolatedStorage;
 using Catrobat.Core;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
+using Catrobat.IDEWindowsPhone.Services;
+using Catrobat.IDEWindowsPhone.Utilities.Storage;
 
 namespace Catrobat.TestsWindowsPhone.Misc
 {
@@ -30,8 +33,11 @@ namespace Catrobat.TestsWindowsPhone.Misc
 
     internal static void InitializeTests()
     {
-      StorageSystem.SetStorageFactory(new StorageFactoryPhone());
-      ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryPhone());
+      ServiceLocator.SetServices(new NavigationServicePhone(), 
+          new SystemInformationServicePhone(), new CultureServicePhone(), 
+          new ImageResizeServicePhone(), new PlayerLauncherServicePhone(), 
+          new ResourceLoaderFactoryPhone(), new StorageFactoryPhone(), 
+          new ServerCommunicationServicePhone() );
     }
   }
 }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using Catrobat.Core.Misc;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
 using Microsoft.Phone.Controls;

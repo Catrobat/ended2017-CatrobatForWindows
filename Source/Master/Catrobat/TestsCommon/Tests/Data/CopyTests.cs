@@ -4,8 +4,9 @@ using System.IO;
 using System.Xml.Linq;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.Services.Common;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.Misc.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -43,9 +44,9 @@ namespace Catrobat.TestsCommon.Tests.Data
 
             project2.VariableList = project1.VariableList;
 
-            ProjectHolder.Project = project1;
+            XmlParserTempProjectHelper.Project = project1;
             project1.Save(savePath1);
-            ProjectHolder.Project = project2;
+            XmlParserTempProjectHelper.Project = project2;
             project2.Save(savePath2);
 
             string xml1;

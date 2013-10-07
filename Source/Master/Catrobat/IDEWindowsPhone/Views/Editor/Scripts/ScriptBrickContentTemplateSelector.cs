@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Bricks;
-using Catrobat.Core.Objects.Scripts;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Bricks;
+using Catrobat.Core.CatrobatObjects.Scripts;
 using Catrobat.IDEWindowsPhone.Controls.DynamicDataTemplates;
 
 namespace Catrobat.IDEWindowsPhone.Views.Editor.Scripts

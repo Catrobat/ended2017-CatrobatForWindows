@@ -6,7 +6,7 @@ class WaitBrick :
 	public Brick
 {
 public:
-	WaitBrick(string objectReference, FormulaTree *timeToWaitInSeconds, Script *parent);
+	WaitBrick(FormulaTree *timeToWaitInSeconds, Script *parent);
 	void Execute();
 private:
 	FormulaTree *m_timeToWaitInSeconds;

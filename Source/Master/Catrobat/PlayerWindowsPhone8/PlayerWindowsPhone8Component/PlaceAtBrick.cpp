@@ -4,8 +4,8 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-PlaceAtBrick::PlaceAtBrick(string spriteReference, FormulaTree *positionX, FormulaTree *positionY, Script *parent) :
-	Brick(TypeOfBrick::PlaceAtBrick, spriteReference, parent),
+PlaceAtBrick::PlaceAtBrick(FormulaTree *positionX, FormulaTree *positionY, Script *parent) :
+	Brick(TypeOfBrick::PlaceAtBrick, parent),
 	m_positionX(positionX), m_positionY(positionY)
 {
 }

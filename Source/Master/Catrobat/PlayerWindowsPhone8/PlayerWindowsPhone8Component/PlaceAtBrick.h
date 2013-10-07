@@ -4,7 +4,7 @@ class PlaceAtBrick :
 	public Brick
 {
 public:
-	PlaceAtBrick(string spriteReference, FormulaTree *positionX, FormulaTree *positionY, Script *parent);
+	PlaceAtBrick(FormulaTree *positionX, FormulaTree *positionY, Script *parent);
 	void Execute();
 private:
 	FormulaTree *m_positionX;

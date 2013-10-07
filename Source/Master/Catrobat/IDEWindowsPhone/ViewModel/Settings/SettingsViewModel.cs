@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using Catrobat.Core.Misc.Helpers;
 using Catrobat.Core.Services;
+using Catrobat.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Themes;

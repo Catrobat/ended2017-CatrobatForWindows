@@ -1,9 +1,9 @@
 ﻿using System;
 using Catrobat.Core;
+using Catrobat.Core.Misc.Storage;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Catrobat.Core.Storage;
 
 namespace Catrobat.TestsCommon.Tests.Data
 {

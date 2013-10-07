@@ -2,8 +2,8 @@
 #include "RepeatBrick.h"
 #include "Interpreter.h"
 
-RepeatBrick::RepeatBrick(string spriteReference, FormulaTree *times, Script *parent) :
-	ContainerBrick(TypeOfBrick::ContainerBrick, spriteReference, parent), m_timesToRepeat(times)
+RepeatBrick::RepeatBrick(FormulaTree *times, Script *parent) :
+	ContainerBrick(TypeOfBrick::ContainerBrick, parent), m_timesToRepeat(times)
 {
 	m_brickList = new list<Brick*>();
 }

@@ -1,10 +1,10 @@
-﻿using Catrobat.Core.Objects.Formulas;
+﻿using Catrobat.Core.CatrobatObjects.Formulas;
 
 namespace Catrobat.IDECommon.Formula.Editor
 {
     public class SelectedFormulaInformation
     {
-        public Core.Objects.Formulas.Formula FormulaRoot { get; set; }
+        public Core.CatrobatObjects.Formulas.Formula FormulaRoot { get; set; }
 
         public FormulaTree SelectedFormula { get; set; }
 

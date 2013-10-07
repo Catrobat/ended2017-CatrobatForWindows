@@ -14,6 +14,12 @@
     <Filter Include="TestFiles">
       <UniqueIdentifier>{20839112-92e5-4528-8e5c-6af2326ae07d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="XMLParserTests">
+      <UniqueIdentifier>{e1b39ba0-bf86-410e-863e-3c5cdb9e1c05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XMLParserTests\BrickTests">
+      <UniqueIdentifier>{69006a30-9a2a-4a8d-bac3-9a4723f74d9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\ApplicationIcon.png">
@@ -220,7 +226,6 @@
     </ClCompile>
     <ClCompile Include="VariableBricks.cpp" />
     <ClCompile Include="Variables.cpp" />
-    <ClCompile Include="XMLParserTests.cpp" />
     <ClCompile Include="LogicOperations.cpp">
       <Filter>FormulaTests</Filter>
     </ClCompile>
@@ -251,6 +256,12 @@
     </ClCompile>
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.cpp">
       <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IfLogicBeginBrick.cpp">
+      <Filter>XMLParserTests\BrickTests</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLParserTests.cpp">
+      <Filter>XMLParserTests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -475,6 +486,36 @@
       <Filter>TestFiles</Filter>
     </Xml>
     <Xml Include="testFiles\ObjectListTest1.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\CompassTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\ForeverTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\GlobalVariableReferencesTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\IfLogicBeginTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\LocalVariableReferencesTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\LookReferencesTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\ObjectReferencesTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\PointToTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\RepeatTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\SoundReferencesTest.xml">
       <Filter>TestFiles</Filter>
     </Xml>
   </ItemGroup>

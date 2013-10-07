@@ -1,6 +1,6 @@
-﻿using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Bricks;
-using Catrobat.Core.Objects.Scripts;
+﻿using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Bricks;
+using Catrobat.Core.CatrobatObjects.Scripts;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;

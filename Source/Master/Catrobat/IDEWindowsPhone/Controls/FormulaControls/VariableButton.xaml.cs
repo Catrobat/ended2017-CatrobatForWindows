@@ -9,9 +9,9 @@ using System.Windows.Media;
 using Catrobat.Core.Annotations;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Objects.Bricks;
-using Catrobat.Core.Objects.Formulas;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects.Bricks;
+using Catrobat.Core.CatrobatObjects.Formulas;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.IDEWindowsPhone.Converters;
 using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel;
@@ -97,8 +97,8 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
         {
             var container = (VariableConteiner)sender;
 
-            if (args.PropertyName == PropertyNameHelper.
-                GetPropertyNameFromExpression(() => container.Variable))
+            if (args.PropertyName == PropertyHelper.
+                GetPropertyName(() => container.Variable))
             {
                 VariableChanged(container.Variable);
                 //SetValue(VariableProperty, container.Variable);
@@ -120,7 +120,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
         {
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyNameHelper.GetPropertyNameFromExpression(selector)));
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyHelper.GetPropertyName(selector)));
             }
         }
 

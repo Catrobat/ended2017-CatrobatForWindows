@@ -4,18 +4,21 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
 using System.Windows;
+using Catrobat.Core.CatroatObjects.Scripts;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Bricks;
-using Catrobat.Core.Objects.Costumes;
-using Catrobat.Core.Objects.Scripts;
-using Catrobat.Core.Objects.Sounds;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Bricks;
+using Catrobat.Core.CatrobatObjects.Costumes;
+using Catrobat.Core.CatrobatObjects.Scripts;
+using Catrobat.Core.CatrobatObjects.Sounds;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Utilities;
+using Catrobat.IDEWindowsPhone.Utilities.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
@@ -668,7 +671,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
 
         private void StartPlayerAction()
         {
-            PlayerLauncher.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
+            ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject);
         }
 
         private void GoToMainViewAction()

@@ -573,9 +573,6 @@
   <data name="Main_ActiveProject" xml:space="preserve">
     <value>active</value>
   </data>
-  <data name="Main_ApplicationNameAndVersion" xml:space="preserve">
-    <value>Catrobat for Windows v{0}</value>
-  </data>
   <data name="Main_ButtonCancel" xml:space="preserve">
     <value>cancel</value>
   </data>

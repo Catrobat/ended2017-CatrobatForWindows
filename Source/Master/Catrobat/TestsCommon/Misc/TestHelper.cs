@@ -1,7 +1,8 @@
 ﻿using System.IO.IsolatedStorage;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Services;
 using Catrobat.TestsCommon.Misc.Storage;
 
 namespace Catrobat.TestsCommon.Misc
@@ -43,9 +44,8 @@ namespace Catrobat.TestsCommon.Misc
 
         internal static void InitializeTests()
         {
-            StorageSystem.SetStorageFactory(new StorageFactoryTest());
-            ResourceLoader.SetResourceLoaderFactory(new ResourceLoaderFactoryTest());
-            PlatformInformationHelper.SetInterface(new PlatformInformationHelperTests());
+            ServiceLocator.SetServices(null, new PlatformInformationHelperTests(), null, null, 
+                null, new ResourceLoaderFactoryTest(), new StorageFactoryTest(), null);
         }
     }
 }

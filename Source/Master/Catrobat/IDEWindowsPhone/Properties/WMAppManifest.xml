@@ -5,8 +5,8 @@
     <Language code="de" />
     <Language code="qps-ploc" />
   </Languages>
-  <App xmlns="" ProductID="{cddb2c02-9584-45c6-9a7d-2b04b322c232}" Title="Catrobat" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="IDEWindowsPhone author" Description="Catrobat IDE for Windows Phone" Publisher="IDEWindowsPhone" PublisherID="{00331c69-fa4b-4f1d-ad9a-e30a20e7d376}">
-    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
+  <App xmlns="" ProductID="{cddb2c02-9584-45c6-9a7d-2b04b322c232}" Title="Pocket Code" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="IDEWindowsPhone author" Description="Pocket Code for Windows Phone" Publisher="IDEWindowsPhone" PublisherID="{00331c69-fa4b-4f1d-ad9a-e30a20e7d376}">
+    <IconPath IsRelative="true" IsResource="false">windows_pocketcode_450.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
@@ -21,10 +21,10 @@
     <Tokens>
       <PrimaryToken TokenID="IDEWindowsPhoneToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">windows_pocketcode_450.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>Catrobat</Title>
+          <BackgroundImageURI IsRelative="true" IsResource="false">windows_pocketcode_450.png</BackgroundImageURI>
+          <Title>Pocket Code</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI IsRelative="true" IsResource="false">

@@ -623,16 +623,16 @@
           <target state="translated" state-qualifier="mt-suggestion">[D1733][!!_ûиķήóẁй_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_AboutText" xml:space="preserve">
-          <source>Catrobat for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Catrobat is an independent free and open source project developed by the Catrobat team. Catrobat for Windows is licensed under the MS-RL license.</source>
-          <target state="new" state-qualifier="mt-suggestion">Catrobat for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Catrobat is an independent free and open source project developed by the Catrobat team. Catrobat for Windows is licensed under the MS-RL license.</target>
+          <source>Pocket Code for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Pocket Code is an independent free and open source project developed by the Pocket Code team. Pocket Code for Windows is licensed under the MS-RL license.</source>
+          <target state="new" state-qualifier="mt-suggestion">Pocket Code for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Pocket Code is an independent free and open source project developed by the Pocket Code team. Pocket Code for Windows is licensed under the MS-RL license.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ActiveProject" xml:space="preserve">
           <source>active</source>
           <target state="translated" state-qualifier="mt-suggestion">[7E5A3][!!_ãċтíνé_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ApplicationNameAndVersion" xml:space="preserve">
-          <source>Catrobat for Windows v{0}</source>
-          <target state="translated" state-qualifier="mt-suggestion">[E40AB][!!_Ćáţѓôъâť ƒòř Ẅįηďôẁś ν{0}_!!]</target>
+          <source>Pocket Code for Windows v{0}</source>
+          <target state="new" state-qualifier="mt-suggestion">Pocket Code for Windows v{0}</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ButtonCancel" xml:space="preserve">
           <source>cancel</source>

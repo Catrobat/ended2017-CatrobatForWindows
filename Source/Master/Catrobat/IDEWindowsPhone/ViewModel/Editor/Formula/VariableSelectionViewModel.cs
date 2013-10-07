@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
 using Catrobat.IDEWindowsPhone.Misc;

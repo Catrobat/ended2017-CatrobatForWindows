@@ -5,7 +5,7 @@ class BroadcastBrick :
 	public Brick
 {
 public:
-	BroadcastBrick(string objectReference, std::string broadcastMessage, Script *parent);
+	BroadcastBrick(std::string broadcastMessage, Script *parent);
 	void Execute();
 
 private:

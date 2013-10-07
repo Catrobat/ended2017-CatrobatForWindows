@@ -1,7 +1,8 @@
 ﻿using Catrobat.Core;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Storage;
-using Catrobat.Core.ZIP;
+using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.Services;
+using Catrobat.Core.Services.Common;
 using System;
 using System.IO;
 using System.Xml.Linq;
@@ -15,7 +16,7 @@ namespace Catrobat.TestsWindowsPhone.SampleData
     public static Project LoadSampleXML(string sampleName)
     {
       String xml = null;
-      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
       {
         Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestsPhone, path + sampleName + ".xml");
         StreamReader reader = new StreamReader(stream);
@@ -32,7 +33,7 @@ namespace Catrobat.TestsWindowsPhone.SampleData
     public static XDocument LoadSampleXDocument(string sampleName)
     {
       String xml = null;
-      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
       {
         Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestsPhone, path + sampleName + ".xml");
         StreamReader reader = new StreamReader(stream);
@@ -48,10 +49,10 @@ namespace Catrobat.TestsWindowsPhone.SampleData
 
     public static Project LoadSampleProject(string sampleName, string sampleProjectName)
     {
-        using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+        using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
         {
             var stream = resourceLoader.OpenResourceStream(ResourceScope.TestsPhone, path + sampleName);
-            CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
+            CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
             stream.Close();
             stream.Dispose();
         }

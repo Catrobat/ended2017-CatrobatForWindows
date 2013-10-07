@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows;
 using Catrobat.Core;
-using Catrobat.Core.Storage;
-using Catrobat.Core.ZIP;
+using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
+using Catrobat.IDEWindowsPhone.Utilities.Storage;
 using Catrobat.TestsWindowsPhone.Misc;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using System.IO;
@@ -222,10 +223,10 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
         {
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
-                using (var resource = (new ResourceLoaderFactoryPhone()).CreateResoucreLoader())
+                using (var resource = (new ResourceLoaderFactoryPhone()).CreateResourceLoader())
                 {
                     var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
-                    CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
+                    CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
 
                     using (IStorage storage = new StoragePhone())
                     {
@@ -243,10 +244,10 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
             {
                 IStorage storage = new StoragePhone();
 
-                using (var resource = (new ResourceLoaderFactoryPhone()).CreateResoucreLoader())
+                using (var resource = (new ResourceLoaderFactoryPhone()).CreateResourceLoader())
                 {
                     var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
-                    CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
+                    CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
 
                     var image = storage.LoadImage("TestLoadImage/screenshot.png");
 

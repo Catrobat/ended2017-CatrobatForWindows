@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Bricks;
-using Catrobat.Core.Objects.Costumes;
-using Catrobat.Core.Objects.Formulas;
-using Catrobat.Core.Objects.Scripts;
-using Catrobat.Core.Objects.Sounds;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Bricks;
+using Catrobat.Core.CatrobatObjects.Costumes;
+using Catrobat.Core.CatrobatObjects.Formulas;
+using Catrobat.Core.CatrobatObjects.Scripts;
+using Catrobat.Core.CatrobatObjects.Sounds;
+using Catrobat.Core.CatrobatObjects.Variables;
 using System.IO;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Services;
+using Catrobat.Core.Services.Common;
 
 namespace Catrobat.TestsCommon.Misc
 {
@@ -46,8 +44,8 @@ namespace Catrobat.TestsCommon.Misc
                     Description = "",
                     DeviceName = "SampleDevice",
                     MediaLicense = "http://developer.catrobat.org/ccbysa_v3",
-                    Platform = PlatformInformationHelper.PlatformName,
-                    PlatformVersion = PlatformInformationHelper.PlatformVersion,
+                    Platform = ServiceLocator.SystemInformationService.PlatformName,
+                    PlatformVersion = ServiceLocator.SystemInformationService.PlatformVersion,
                     ProgramLicense = "http://developer.catrobat.org/agpl_v3",
                     RemixOf = "",
                     ScreenHeight = 480,
@@ -58,7 +56,7 @@ namespace Catrobat.TestsCommon.Misc
                 }
             };
 
-            ProjectHolder.Project = project;
+            XmlParserTempProjectHelper.Project = project;
 
             project.ProjectHeader.SetProgramName("project1");
 
@@ -100,14 +98,12 @@ namespace Catrobat.TestsCommon.Misc
             foreach (var sprite in sprites)
             {
                 var scripts = ReflectionHelper.GetInstances<Script>();
-                sprite.Scripts = new ScriptList();
                 foreach (var script in scripts)
                 {
                     FillDummyValues(script, project, sprite);
                     sprite.Scripts.Scripts.Add(script);
 
                     var bricks = ReflectionHelper.GetInstances<Brick>(ExcludedBricks);
-                    script.Bricks = new BrickList();
                     foreach (var brick in bricks)
                     {
                         FillDummyValues(brick, project, sprite);
@@ -225,6 +221,12 @@ namespace Catrobat.TestsCommon.Misc
                             return brick;
             }
 
+            if (type == typeof (ScriptList))
+                return new ScriptList();
+
+            if (type == typeof (BrickList))
+                return new BrickList();
+
             return null;
         }
 
@@ -312,13 +314,12 @@ namespace Catrobat.TestsCommon.Misc
                         {
                             ObjectVariableEntries = new ObservableCollection<ObjectVariableEntry>()
                         },
-                    ProgramVariableList = new ProgramVariableList()
+                    ProgramVariableList = new ProgramVariableList
                         {
                             UserVariables = new ObservableCollection<UserVariable>()
                         }
                 };
 
-            var count = 0;
             foreach (var sprite in project.SpriteList.Sprites)
             {
                 var entry = new ObjectVariableEntry
@@ -330,14 +331,23 @@ namespace Catrobat.TestsCommon.Misc
                                     {
                                         new UserVariable
                                             {
-                                                Name = "LocalTestVariable" + count
+                                                Name = "LocalTestVariable"
                                             }
                                     }
                             }
                     };
-                count++;
+
                 project.VariableList.ObjectVariableList.ObjectVariableEntries.Add(entry);
             }
+
+            for (int i = 0; i < 3; i++)
+            {
+                project.VariableList.ProgramVariableList.UserVariables.Add(new UserVariable
+                    {
+                        Name = "GlobalTestVariable" + i
+                    });
+            }
+
         }
 
         private static void AddLoopBricks(ObservableCollection<Brick> bricks)

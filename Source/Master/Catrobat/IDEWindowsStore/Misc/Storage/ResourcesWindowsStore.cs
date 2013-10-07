@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Misc.Storage;
 using System;
 using System.Reflection;
 using Windows.Storage;
 
 namespace Catrobat.IDEWindowsStore.Misc.Storage
 {
-  public class ResourcesWindowsStore : IResources
+  public class ResourcesWindowsStore : IResourceLoader
   {
     private readonly List<Stream> _openedStreams = new List<Stream>();
 

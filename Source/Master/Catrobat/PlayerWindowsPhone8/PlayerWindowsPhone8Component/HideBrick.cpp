@@ -3,8 +3,8 @@
 #include "Script.h"
 #include "Object.h"
 
-HideBrick::HideBrick(string spriteReference, Script *parent) :
-	Brick(TypeOfBrick::HideBrick, spriteReference, parent)
+HideBrick::HideBrick(Script *parent) :
+	Brick(TypeOfBrick::HideBrick, parent)
 {
 }
 

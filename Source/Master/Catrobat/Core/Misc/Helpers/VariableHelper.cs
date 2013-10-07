@@ -1,6 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Variables;
+﻿using System;
+using System.Collections.ObjectModel;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.Core.Misc.Helpers
 {
@@ -73,16 +74,14 @@ namespace Catrobat.Core.Misc.Helpers
             return !project.VariableList.ProgramVariableList.UserVariables.Contains(variable);
         }
 
-        public static UserVariable CreateUniqueLocalVariable(Project project, Sprite sprite)
+        public static UserVariable CreateUniqueGlobalVariable()
         {
-            // TODO: implement me
-            return new UserVariable { Name = sprite.Name + "_a"};
+            return new UserVariable { Name = "global_" + Guid.NewGuid().ToString() };
         }
 
-        public static UserVariable CreateUniqueGlobalVariable(Project project)
+        public static UserVariable CreateUniqueLocalVariable(Sprite sprite)
         {
-            // TODO: implement me
-            return new UserVariable { Name = "global_a" };
+            return new UserVariable { Name = sprite.Name + "_" + Guid.NewGuid().ToString() };
         }
 
         public static bool VariableNameExists(Project project, Sprite sprite, string variableName)

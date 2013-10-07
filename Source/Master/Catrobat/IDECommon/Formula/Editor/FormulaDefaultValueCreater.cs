@@ -1,6 +1,6 @@
 ﻿using System;
-using Catrobat.Core.Objects.Formulas;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects.Formulas;
+using Catrobat.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDECommon.Formula.Editor
 {

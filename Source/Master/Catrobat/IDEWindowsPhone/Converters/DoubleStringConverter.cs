@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Services.Common;
 
 namespace Catrobat.IDEWindowsPhone.Converters
 {
@@ -15,7 +16,7 @@ namespace Catrobat.IDEWindowsPhone.Converters
             }
             else
             {
-                return FormatHelper.ConvertDouble((double) value);
+                return StringFormatHelper.ConvertDouble((double) value);
             }
         }
 
@@ -23,7 +24,7 @@ namespace Catrobat.IDEWindowsPhone.Converters
         {
             try
             {
-                return FormatHelper.ParseDouble((string) value);
+                return StringFormatHelper.ParseDouble((string) value);
             }
             catch (Exception)
             {

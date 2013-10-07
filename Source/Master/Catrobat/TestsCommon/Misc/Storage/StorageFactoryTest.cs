@@ -1,4 +1,4 @@
-﻿using Catrobat.Core.Storage;
+﻿using Catrobat.Core.Misc.Storage;
 
 namespace Catrobat.TestsCommon.Misc.Storage
 {

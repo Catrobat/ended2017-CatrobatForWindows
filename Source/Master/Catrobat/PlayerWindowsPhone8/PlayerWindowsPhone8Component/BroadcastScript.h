@@ -6,7 +6,7 @@ class BroadcastScript :
 	public Script
 {
 public:
-	BroadcastScript(string receivedMessage, string spriteReference, Object *parent);
+	BroadcastScript(string receivedMessage, Object *parent);
 	~BroadcastScript();
 
 	void EvaluateMessage(Platform::String ^message);

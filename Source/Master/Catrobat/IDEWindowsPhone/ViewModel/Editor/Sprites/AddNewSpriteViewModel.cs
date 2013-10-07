@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Catrobat.Core;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;

@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Catrobat.Core;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Misc.ServerCommunication;
-using Catrobat.Core.Objects;
+using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Utilities;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
@@ -87,7 +88,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
                 RaisePropertyChanged(() => CurrentProject);
                 UpdateLocalProjects();
-                ProjectHolder.Project = _currentProject;
+                XmlParserTempProjectHelper.Project = _currentProject;
 
                 var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
                 Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
@@ -142,7 +143,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get
             {
                 var name = String.Format(AppResources.Main_ApplicationNameAndVersion,
-                    PlatformInformationHelper.CurrentApplicationVersion);
+                    ServiceLocator.SystemInformationService.CurrentApplicationVersion);
                 return name;
             }
         }
@@ -365,7 +366,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 }
                 else
                 {
-                    ProjectHolder.Project = CurrentProject;
+                    XmlParserTempProjectHelper.Project = CurrentProject;
 
                     var message = new DialogMessage(String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName),
                         new Action<MessageBoxResult>( delegate
@@ -408,7 +409,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void PlayCurrentProjectAction()
         {
-            PlayerLauncher.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
+            ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject);
         }
 
         private void UploadCurrentProjectAction()
@@ -416,7 +417,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectsLoadingView));
 
             // Determine which page to open
-            Task.Run(() => ServerCommunication.CheckToken(Context.CurrentToken, CheckTokenEvent));
+            Task.Run(() => CatrobatWebCommunicationService.CheckToken(Context.CurrentToken, CheckTokenEvent));
         }
 
         private void ResetViewModelAction()
@@ -429,7 +430,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             if (_showDownloadMessage)
             {
                 var image = new BitmapImage();
-                using (var loader = ResourceLoader.CreateResourceLoader())
+                using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
                 {
                     var stream = loader.OpenResourceStream(ResourceScope.IdePhone, "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
                     image.SetSource(stream);
@@ -447,7 +448,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             if (_showUploadMessage)
             {
                 var image = new BitmapImage();
-                using (var loader = ResourceLoader.CreateResourceLoader())
+                using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
                 {
                     var stream = loader.OpenResourceStream(ResourceScope.IdePhone, "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
                     image.SetSource(stream);
@@ -637,7 +638,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
             _previousFilterText = _filterText;
 
-            ServerCommunication.LoadOnlineProjects(isAppend, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
+            CatrobatWebCommunicationService.LoadOnlineProjects(isAppend, _filterText, _onlineProjects.Count, LoadOnlineProjectsCallback);
         }
 
         private void CheckTokenEvent(bool registered)

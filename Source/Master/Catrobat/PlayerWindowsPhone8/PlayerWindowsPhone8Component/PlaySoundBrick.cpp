@@ -2,8 +2,8 @@
 #include "PlaySoundBrick.h"
 #include "SoundManager.h"
 
-PlaySoundBrick::PlaySoundBrick(string spriteReference, string filename, string name, Script *parent) :
-	Brick(TypeOfBrick::PlaySoundBrick, spriteReference, parent),
+PlaySoundBrick::PlaySoundBrick(string filename, string name, Script *parent) :
+	Brick(TypeOfBrick::PlaySoundBrick, parent),
 	m_filename(filename), m_name(name)
 {
 }

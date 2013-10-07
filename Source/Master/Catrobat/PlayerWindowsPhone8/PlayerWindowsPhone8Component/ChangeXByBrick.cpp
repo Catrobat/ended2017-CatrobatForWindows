@@ -4,8 +4,8 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-ChangeXByBrick::ChangeXByBrick(string spriteReference, FormulaTree *offsetX, Script *parent) :
-	Brick(TypeOfBrick::ChangeXByBrick, spriteReference, parent),
+ChangeXByBrick::ChangeXByBrick(FormulaTree *offsetX, Script *parent) :
+	Brick(TypeOfBrick::ChangeXByBrick, parent),
 	m_offsetX(offsetX)
 {
 }

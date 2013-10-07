@@ -4,7 +4,7 @@ class GlideToBrick :
 	public Brick
 {
 public:
-	GlideToBrick(string spriteReference, FormulaTree *xDestination, FormulaTree *yDestination, FormulaTree *duration, Script *parent);
+	GlideToBrick(FormulaTree *xDestination, FormulaTree *yDestination, FormulaTree *duration, Script *parent);
 	void Execute();
 private:
 	FormulaTree *m_xDestination;

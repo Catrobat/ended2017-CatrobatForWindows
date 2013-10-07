@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Misc;
+using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.VersionConverter.Versions;
 
 namespace Catrobat.Core.VersionConverter

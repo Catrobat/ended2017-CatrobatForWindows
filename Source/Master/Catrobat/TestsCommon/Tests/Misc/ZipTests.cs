@@ -1,6 +1,8 @@
-﻿using Catrobat.Core.ZIP;
-using System.IO;
-using Catrobat.Core.Storage;
+﻿using System.IO;
+using Catrobat.Core.Misc;
+using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Services;
+using Catrobat.Core.Services.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.TestsCommon.Misc;
 
@@ -21,10 +23,10 @@ namespace Catrobat.TestsCommon.Tests.Misc
       TestHelper.InitializeAndClearCatrobatContext();
       string path = "SampleData/SampleProjects/test.catroid";
 
-      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
       {
         Stream originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path);
-        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
+        CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
         originalStream.Close();
         originalStream.Dispose();
       }
@@ -65,10 +67,10 @@ namespace Catrobat.TestsCommon.Tests.Misc
       TestHelper.InitializeAndClearCatrobatContext();
       string path = "SampleData/SampleProjects/test.catroid";
 
-      using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+      using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
       {
         Stream originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path);
-        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
+        CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
         originalStream.Close();
         originalStream.Dispose();
       }
@@ -83,7 +85,7 @@ namespace Catrobat.TestsCommon.Tests.Misc
 
         using (Stream fileStream = storage.OpenFile(writePath, StorageFileMode.Create, StorageFileAccess.Write))
         {
-          CatrobatZip.ZipCatrobatPackage(fileStream, sourcePath);
+          CatrobatZipService.ZipCatrobatPackage(fileStream, sourcePath);
           fileStream.Close();
           fileStream.Dispose();
         }

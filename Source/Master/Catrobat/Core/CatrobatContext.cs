@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Storage;
-using Catrobat.Core.ZIP;
+using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.Services;
+using Catrobat.Core.Services.Common;
 
 namespace Catrobat.Core
 {
@@ -51,10 +53,10 @@ namespace Catrobat.Core
 
                 if (!storage.FileExists(projectCodeFile))
                 {
-                    using (var resourceLoader = ResourceLoader.CreateResourceLoader())
+                    using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
                     {
                         var stream = resourceLoader.OpenResourceStream(ResourceScope.Resources, DefaultProjectPath);
-                        CatrobatZip.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectCodeFile);
+                        CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectCodeFile);
                         stream.Dispose();
                     }
                 }

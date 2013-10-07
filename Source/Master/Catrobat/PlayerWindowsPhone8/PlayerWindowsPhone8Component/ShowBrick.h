@@ -4,6 +4,6 @@ class ShowBrick :
 	public Brick
 {
 public:
-	ShowBrick(string spriteReference, Script *parent);
+	ShowBrick(Script *parent);
 	void Execute();
 };

@@ -1,6 +1,6 @@
 ﻿using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
@@ -10,7 +10,7 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 {
-    public delegate void FormulaChanged(Core.Objects.Formulas.Formula formula);
+    public delegate void FormulaChanged(Core.CatrobatObjects.Formulas.Formula formula);
 
     public delegate void ErrorOccurred();
 
@@ -22,7 +22,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
         public ErrorOccurred ErrorOccurred;
 
-        private void RaiseFormulaChanged(Core.Objects.Formulas.Formula formula)
+        private void RaiseFormulaChanged(Core.CatrobatObjects.Formulas.Formula formula)
         {
             if (FormulaChanged != null)
                 FormulaChanged.Invoke(formula);
@@ -38,7 +38,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
         #region Private Members
 
-        private Core.Objects.Formulas.Formula _formula;
+        private Core.CatrobatObjects.Formulas.Formula _formula;
         private Sprite _selectedSprite;
         private FormulaButton _formulaButton;
         private Project _currentProject;
@@ -84,7 +84,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             }
         }
 
-        public Core.Objects.Formulas.Formula Formula
+        public Core.CatrobatObjects.Formulas.Formula Formula
         {
             get { return _formula; }
             set

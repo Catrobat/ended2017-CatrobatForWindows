@@ -4,8 +4,8 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-ChangeGhostEffectByBrick::ChangeGhostEffectByBrick(string spriteReference, FormulaTree *transparency, Script *parent) :
-	Brick(TypeOfBrick::ChangeGhostEffectByBrick, spriteReference, parent),
+ChangeGhostEffectByBrick::ChangeGhostEffectByBrick(FormulaTree *transparency, Script *parent) :
+	Brick(TypeOfBrick::ChangeGhostEffectByBrick, parent),
 	m_transparency(transparency)
 {
 }

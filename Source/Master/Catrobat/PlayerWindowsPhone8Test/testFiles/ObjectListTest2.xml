@@ -3,23 +3,27 @@
   <header>
     <applicationBuildName/>
     <applicationBuildNumber>0</applicationBuildNumber>
-    <applicationName>CatroidTest</applicationName>
-    <applicationVersion>testVersion</applicationVersion>
+    <applicationName>Pocket Code</applicationName>
+    <applicationVersion>0.9.3</applicationVersion>
+    <catrobatLanguageVersion>0.91</catrobatLanguageVersion>
     <dateTimeUpload/>
-    <description/>
-    <deviceName>TestDevice</deviceName>
+    <description>A functional dice. Tap it to "roll it".
+
+New background- and diceskin.
+New sounds.
+Compatible with latest version.</description>
+    <deviceName>Nexus 7</deviceName>
     <mediaLicense>http://developer.catrobat.org/ccbysa_v3</mediaLicense>
-    <platform>TestSystem</platform>
-    <platformVersion>1</platformVersion>
-    <catrobatLanguageVersion>1.0</catrobatLanguageVersion>
+    <platform>Android</platform>
+    <platformVersion>18</platformVersion>
     <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
-    <programName>TestProgram</programName>
-    <remixOf>https://pocketcode.org/details/732</remixOf>
-    <screenHeight>1184</screenHeight>
-    <screenWidth>768</screenWidth>
+    <programName>VCTapdice 3 Reskinned</programName>
+    <remixOf/>
+    <screenHeight>1205</screenHeight>
+    <screenWidth>800</screenWidth>
     <tags/>
-    <url>http://pocketcode.org/details/732</url>
-    <userHandle>test</userHandle>
+    <url>http://pocketcode.org/details/991</url>
+    <userHandle>VCT</userHandle>
   </header>
   <objectList>
     <object>

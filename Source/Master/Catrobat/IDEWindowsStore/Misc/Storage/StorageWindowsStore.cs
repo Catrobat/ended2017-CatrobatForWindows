@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Misc.Storage;
 using System;
 
 namespace Catrobat.IDEWindowsStore.Misc.Storage

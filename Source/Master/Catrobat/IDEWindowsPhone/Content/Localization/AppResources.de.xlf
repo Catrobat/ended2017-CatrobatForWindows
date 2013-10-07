@@ -623,16 +623,16 @@
           <target state="signed-off">unknown</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_AboutText" xml:space="preserve">
-          <source>Catrobat for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Catrobat is an independent free and open source project developed by the Catrobat team. Catrobat for Windows is licensed under the MS-RL license.</source>
-          <target state="new">Catrobat for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Catrobat is an independent free and open source project developed by the Catrobat team. Catrobat for Windows is licensed under the MS-RL license.</target>
+          <source>Pocket Code for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Pocket Code is an independent free and open source project developed by the Pocket Code team. Pocket Code for Windows is licensed under the MS-RL license.</source>
+          <target state="new">Pocket Code for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Pocket Code is an independent free and open source project developed by the Pocket Code team. Pocket Code for Windows is licensed under the MS-RL license.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ActiveProject" xml:space="preserve">
           <source>active</source>
           <target state="signed-off">active</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ApplicationNameAndVersion" xml:space="preserve">
-          <source>Catrobat for Windows v{0}</source>
-          <target state="signed-off">Catrobat for Windows v{0}</target>
+          <source>Pocket Code for Windows v{0}</source>
+          <target state="new">Pocket Code for Windows v{0}</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ButtonCancel" xml:space="preserve">
           <source>cancel</source>

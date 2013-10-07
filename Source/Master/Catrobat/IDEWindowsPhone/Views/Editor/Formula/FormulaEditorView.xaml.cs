@@ -3,8 +3,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using Catrobat.Core.Objects.Formulas;
-using Catrobat.Core.Objects.Variables;
+using Catrobat.Core.CatrobatObjects.Formulas;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
@@ -43,7 +43,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Formula
             ShowKeyErrorAnimation();
         }
 
-        private void FormulaChanged(Core.Objects.Formulas.Formula formula)
+        private void FormulaChanged(Core.CatrobatObjects.Formulas.Formula formula)
         {
             FormulaViewer.Formula = formula;
         }

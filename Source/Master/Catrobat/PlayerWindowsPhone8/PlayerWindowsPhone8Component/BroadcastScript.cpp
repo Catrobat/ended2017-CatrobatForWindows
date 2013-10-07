@@ -2,8 +2,8 @@
 #include "BroadcastScript.h"
 #include "BroadcastMessageDaemon.h"
 
-BroadcastScript::BroadcastScript(string receivedMessage, string spriteReference, Object *parent) :
-	Script(TypeOfScript::BroadcastScript, spriteReference, parent), m_receivedMessage(receivedMessage)
+BroadcastScript::BroadcastScript(string receivedMessage, Object *parent) :
+	Script(TypeOfScript::BroadcastScript, parent), m_receivedMessage(receivedMessage)
 {
 	m_broadcastMessageListener = ref new BroadcastMessageListener();
 	m_broadcastMessageListener->SetScript((int)(&(*this)));

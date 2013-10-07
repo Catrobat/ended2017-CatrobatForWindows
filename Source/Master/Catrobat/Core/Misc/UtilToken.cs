@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Catrobat.Core.Misc
 {
-    public static class Utils
+    public static class UtilTokenHelper
     {
         public static string ToHex(byte[] array)
         {

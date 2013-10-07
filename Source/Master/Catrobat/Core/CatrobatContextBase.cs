@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using Catrobat.Core.Annotations;
 using Catrobat.Core.Misc;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 
 namespace Catrobat.Core
 {
@@ -75,7 +75,7 @@ namespace Catrobat.Core
         {
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyNameHelper.GetPropertyNameFromExpression(selector)));
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyHelper.GetPropertyName(selector)));
             }
         }
 

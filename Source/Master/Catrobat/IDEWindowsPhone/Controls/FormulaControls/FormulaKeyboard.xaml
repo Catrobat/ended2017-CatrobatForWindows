@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:formulaControls="clr-namespace:Catrobat.IDECommon.Formula.Editor;assembly=Catrobat.IDECommon"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-    xmlns:variables="clr-namespace:Catrobat.Core.Objects.Variables;assembly=Catrobat.Core"
+    xmlns:variables="clr-namespace:Catrobat.Core.CatrobatObjects.Variables;assembly=Catrobat.Core"
     xmlns:buttons="clr-namespace:Catrobat.IDEWindowsPhone.Controls.Buttons"
     xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     xmlns:formula="clr-namespace:Catrobat.IDEWindowsPhone.Views.Editor.Formula"

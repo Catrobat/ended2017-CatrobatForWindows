@@ -7,11 +7,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
+using Catrobat.Core.Services.Data;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Controls.Misc;
 using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.IDEWindowsPhone.Utilities;
+using Catrobat.IDEWindowsPhone.Utilities.Helpers;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using Catrobat.Paint;
 using Coding4Fun.Toolkit.Controls.Common;
@@ -27,7 +30,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         #region Private Members
 
         private string _costumeName;
-        private CostumeBuilder _builder;
+        private CostumeBuilderHelper _builder;
         private Sprite _receivedSelectedSprite;
         private ImageDimention _dimention;
         private ImageSizeEntry _selectedSize;
@@ -173,7 +176,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         private void OpenPaintAction()
         {
             var newBitmap = new WriteableBitmap(
-                PlatformInformationHelper.ScreenWidth, PlatformInformationHelper.ScreenHeight);
+                ServiceLocator.SystemInformationService.ScreenWidth, ServiceLocator.SystemInformationService.ScreenHeight);
 
             var task = new PaintLauncherTask { CurrentImage = newBitmap };
             task.OnImageChanged += OnPaintLauncherImageChanged;
@@ -185,7 +188,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             try
             {
                 CostumeName = AppResources.Editor_Image;
-                _builder = new CostumeBuilder();
+                _builder = new CostumeBuilderHelper();
 
                 var image = task.CurrentImage;
                 Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
@@ -284,7 +287,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                 {
                     CostumeName = AppResources.Editor_Image;
 
-                    _builder = new CostumeBuilder();
+                    _builder = new CostumeBuilderHelper();
 
                     var image = new BitmapImage();
                     image.SetSource(e.ChosenPhoto);

@@ -1,4 +1,4 @@
-﻿using Catrobat.Core.Objects.Formulas;
+﻿using Catrobat.Core.CatrobatObjects.Formulas;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.TestsCommon.Misc

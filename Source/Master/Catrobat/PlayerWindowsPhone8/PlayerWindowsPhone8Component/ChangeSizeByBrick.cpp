@@ -4,8 +4,8 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-ChangeSizeByBrick::ChangeSizeByBrick(string spriteReference, FormulaTree *scale, Script *parent) :
-	Brick(TypeOfBrick::SetGhostEffectBrick, spriteReference, parent),
+ChangeSizeByBrick::ChangeSizeByBrick(FormulaTree *scale, Script *parent) :
+	Brick(TypeOfBrick::SetGhostEffectBrick, parent),
 	m_scale(scale)
 {
 }

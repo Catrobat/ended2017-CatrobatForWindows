@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Catrobat.Core;
 using Catrobat.Core.Misc;
-using Catrobat.Core.Objects;
-using Catrobat.Core.Objects.Bricks;
-using Catrobat.Core.Objects.Costumes;
-using Catrobat.Core.Objects.Scripts;
-using Catrobat.Core.Objects.Sounds;
+using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.CatrobatObjects;
+using Catrobat.Core.CatrobatObjects.Bricks;
+using Catrobat.Core.CatrobatObjects.Costumes;
+using Catrobat.Core.CatrobatObjects.Scripts;
+using Catrobat.Core.CatrobatObjects.Sounds;
 using Catrobat.IDEWindowsPhone.Controls.Buttons;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Misc;
@@ -43,7 +44,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor
 
         private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName == PropertyNameHelper.GetPropertyNameFromExpression(()=> _viewModel.SelectedSprite))
+            if (args.PropertyName == PropertyHelper.GetPropertyName(()=> _viewModel.SelectedSprite))
             {
                 var selectedSprite = _viewModel.SelectedSprite;
 

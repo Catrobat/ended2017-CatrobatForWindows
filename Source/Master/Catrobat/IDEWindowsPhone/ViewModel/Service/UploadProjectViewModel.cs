@@ -2,9 +2,9 @@
 using System.Threading;
 using System.Windows;
 using Catrobat.Core;
-using Catrobat.Core.Misc.ServerCommunication;
-using Catrobat.Core.Objects;
+using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
+using Catrobat.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using Coding4Fun.Toolkit.Controls;
@@ -119,7 +119,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
         {
             CurrentProject.ProjectHeader.ProgramName = ProjectName;
 
-            ServerCommunication.UploadProject(_projectName, _projectDescription,
+            CatrobatWebCommunicationService.UploadProject(_projectName, _projectDescription,
                                               Context.CurrentUserEmail,
                                               Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
                                               Context.CurrentToken, UploadCallback);
@@ -175,7 +175,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Service
 
         private void UploadCallback(bool successful)
         {
-            if (ServerCommunication.NoUploadsPending())
+            if (CatrobatWebCommunicationService.NoUploadsPending())
             {
                 var toast = new ToastPrompt
                 {

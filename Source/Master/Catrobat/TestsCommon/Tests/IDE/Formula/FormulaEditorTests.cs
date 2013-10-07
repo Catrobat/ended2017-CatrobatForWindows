@@ -1,5 +1,5 @@
-﻿using Catrobat.Core.Objects.Formulas;
-using Catrobat.Core.Objects.Variables;
+﻿using Catrobat.Core.CatrobatObjects.Formulas;
+using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.TestsCommon.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,7 +16,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -48,7 +48,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
         //    {
@@ -78,7 +78,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -104,7 +104,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -132,7 +132,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -160,7 +160,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -243,7 +243,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -303,7 +303,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -363,7 +363,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -449,7 +449,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -604,7 +604,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
@@ -653,7 +653,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
         //    {
@@ -699,7 +699,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -734,7 +734,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -840,7 +840,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -910,7 +910,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -963,7 +963,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -1045,7 +1045,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -1111,7 +1111,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -1140,7 +1140,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
@@ -1222,7 +1222,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
         //    {
@@ -1309,7 +1309,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
         //    {
@@ -1396,7 +1396,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
 
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -1545,7 +1545,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
 
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -1694,7 +1694,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
 
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -1843,7 +1843,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
 
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -1992,7 +1992,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
 
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -2140,7 +2140,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
 
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -2287,7 +2287,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
 
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -2434,7 +2434,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
 
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -2581,7 +2581,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
         //    {
@@ -2612,7 +2612,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
 
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -2700,7 +2700,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -2765,7 +2765,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -2872,7 +2872,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -2943,7 +2943,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -3005,7 +3005,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
 
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -3046,7 +3046,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
 
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -3111,7 +3111,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
 
         //    selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -3190,7 +3190,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -3337,7 +3337,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
                 {
-                    FormulaRoot = new Core.Objects.Formulas.Formula()
+                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                 };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -3382,7 +3382,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -3475,7 +3475,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -3515,7 +3515,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
                     {
-                        FormulaRoot = new Core.Objects.Formulas.Formula()
+                        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                     };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -3567,7 +3567,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
                 {
-                    FormulaRoot = new Core.Objects.Formulas.Formula()
+                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                 };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -3620,7 +3620,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -3647,7 +3647,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
                                 {
-                                    FormulaRoot = new Core.Objects.Formulas.Formula()
+                                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                                 };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -3688,7 +3688,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
@@ -3737,7 +3737,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -3782,7 +3782,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -3803,7 +3803,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
         //    var editor = new FormulaEditor();
         //    var selectedFromula = new SelectedFormulaInformation
         //    {
-        //        FormulaRoot = new Core.Objects.Formulas.Formula()
+        //        FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
         //    };
 
         //    var originalFormula = new FormulaTree
@@ -3864,7 +3864,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
                 {
-                    FormulaRoot = new Core.Objects.Formulas.Formula()
+                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                 };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -3903,7 +3903,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -3942,7 +3942,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -4076,7 +4076,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
                             {
-                                FormulaRoot = new Core.Objects.Formulas.Formula()
+                                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -4128,7 +4128,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
@@ -4262,7 +4262,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
             var terminalZero = new FormulaTree()
             {
@@ -4333,7 +4333,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -4368,7 +4368,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -4621,7 +4621,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -4689,7 +4689,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -4755,7 +4755,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -4788,7 +4788,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -4819,7 +4819,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -4856,7 +4856,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -4893,7 +4893,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -4934,7 +4934,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -4975,7 +4975,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -5024,7 +5024,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -5069,7 +5069,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -5130,7 +5130,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -5151,7 +5151,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
@@ -5172,7 +5172,7 @@ namespace Catrobat.TestsCommon.Tests.IDE.Formula
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
-                FormulaRoot = new Core.Objects.Formulas.Formula()
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()

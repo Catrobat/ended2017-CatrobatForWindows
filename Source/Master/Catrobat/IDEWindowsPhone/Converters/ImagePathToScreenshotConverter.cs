@@ -2,7 +2,8 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
-using Catrobat.Core.Storage;
+using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Services;
 
 namespace Catrobat.IDEWindowsPhone.Converters
 {
@@ -27,7 +28,7 @@ namespace Catrobat.IDEWindowsPhone.Converters
             try
             {
                 var image = new BitmapImage();
-                using (var loader = ResourceLoader.CreateResourceLoader())
+                using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
                 {
                     var stream = loader.OpenResourceStream(ResourceScope.IdePhone,
                         "Content/Images/Screenshot/NoScreenshot.png");

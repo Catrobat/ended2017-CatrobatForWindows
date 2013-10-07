@@ -4,8 +4,8 @@
 #include "Object.h"
 #include "Interpreter.h"
 
-TurnRightBrick::TurnRightBrick(string spriteReference, FormulaTree *rotation, Script *parent) :
-	Brick(TypeOfBrick::TurnRightBrick, spriteReference, parent),
+TurnRightBrick::TurnRightBrick(FormulaTree *rotation, Script *parent) :
+	Brick(TypeOfBrick::TurnRightBrick, parent),
 	m_rotation(rotation)
 {
 }

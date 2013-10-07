@@ -4,6 +4,6 @@ class HideBrick :
 	public Brick
 {
 public:
-	HideBrick(string spriteReference, Script *parent);
+	HideBrick(Script *parent);
 	void Execute();
 };

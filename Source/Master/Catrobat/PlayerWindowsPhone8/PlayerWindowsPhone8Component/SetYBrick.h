@@ -4,7 +4,7 @@ class SetYBrick :
 	public Brick
 {
 public:
-	SetYBrick(string spriteReference, FormulaTree *positionY, Script *parent);
+	SetYBrick(FormulaTree *positionY, Script *parent);
 	void Execute();
 private:
 	FormulaTree *m_positionY;

@@ -46,10 +46,9 @@ public:
 	TypeOfBrick GetBrickType();
 
 protected:
-	Brick(TypeOfBrick brickType, string objectReference, Script *parent);
+	Brick(TypeOfBrick brickType, Script *parent);
 	Script *m_parent;
 
 private:
 	TypeOfBrick m_brickType;
-	string m_objectReference;
 };
