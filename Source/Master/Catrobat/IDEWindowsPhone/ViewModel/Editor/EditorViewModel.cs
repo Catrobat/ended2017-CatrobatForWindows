@@ -778,7 +778,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
 
         private void StartPlayerAction()
         {
-            ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
+            ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject);
         }
 
         private void GoToMainViewAction()

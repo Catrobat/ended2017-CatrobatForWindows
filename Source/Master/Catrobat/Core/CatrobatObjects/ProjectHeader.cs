@@ -304,26 +304,36 @@ namespace Catrobat.Core.CatrobatObjects
         {
             if (isAutoFillProperties)
             {
-                ApplicationBuildName = "";
-                ApplicationBuildNumber = 0;
-                ApplicationName = "Pocket Code";
-                ApplicationVersion = "0.0.1";
-                CatrobatLanguageVersion = "Win0.08";
-                DateTimeUpload = "";
-                Description = "";
-                DeviceName = ServiceLocator.SystemInformationService.DeviceName;
-                MediaLicense = "http://developer.catrobat.org/ccbysa_v3";
-                Platform = ServiceLocator.SystemInformationService.PlatformName;
-                PlatformVersion = ServiceLocator.SystemInformationService.PlatformVersion;
-                ProgramLicense = "http://developer.catrobat.org/agpl_v3";
-                _programName = ""; //otherwise renameDirectory would be executed
-                RemixOf = "";
-                ScreenHeight = ServiceLocator.SystemInformationService.ScreenHeight;
-                ScreenWidth = ServiceLocator.SystemInformationService.ScreenWidth;
-                Tags = "";
-                Url = "http://pocketcode.org/details/871";
-                UserHandle = "";
+                AutoFill();
+                UpdateSystemInformation();
             }
+        }
+
+        private void AutoFill()
+        {
+            DateTimeUpload = "";
+            Description = "";
+            MediaLicense = "http://developer.catrobat.org/ccbysa_v3";
+            ProgramLicense = "http://developer.catrobat.org/agpl_v3";
+            _programName = ""; //otherwise renameDirectory would be executed
+            RemixOf = "";
+            Tags = "";
+            Url = "http://pocketcode.org/details/871";
+            UserHandle = "";
+        }
+
+        private void UpdateSystemInformation()
+        {
+            ApplicationBuildName = Constants.CurrentAppBuildName;
+            ApplicationBuildNumber = Constants.CurrentAppBuildNumber;
+            ApplicationName = Constants.ApplicationName;
+            ApplicationVersion = Constants.CurrentAppVersion;
+            CatrobatLanguageVersion = Constants.TargetIDEVersion;
+            DeviceName = ServiceLocator.SystemInformationService.DeviceName;
+            Platform = ServiceLocator.SystemInformationService.PlatformName;
+            PlatformVersion = ServiceLocator.SystemInformationService.PlatformVersion;
+            ScreenHeight = ServiceLocator.SystemInformationService.ScreenHeight;
+            ScreenWidth = ServiceLocator.SystemInformationService.ScreenWidth;
         }
 
         public ProjectHeader(XElement xElement)
@@ -356,6 +366,8 @@ namespace Catrobat.Core.CatrobatObjects
 
         internal override XElement CreateXML()
         {
+            UpdateSystemInformation();
+
             var xProjectHeader = new XElement("header");
 
             xProjectHeader.Add(new XElement("applicationBuildName")

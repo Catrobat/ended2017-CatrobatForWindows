@@ -15,6 +15,7 @@
   xmlns:bricks="clr-namespace:Catrobat.Core.CatrobatObjects.Bricks;assembly=Catrobat.Core"
   xmlns:scripts="clr-namespace:Catrobat.Core.CatrobatObjects.Scripts;assembly=Catrobat.Core"
   xmlns:formulaControls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.FormulaControls"
+  xmlns:catrobatObjects="clr-namespace:Catrobat.Core.CatrobatObjects;assembly=Catrobat.Core"
   mc:Ignorable="d">
 
   <SolidColorBrush x:Key="SoundsBrush" Color="#FFE035D5" />
@@ -81,13 +82,13 @@
   </Style>
 
   <DataTemplate x:Key="ListBoxSpriteItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance objects:Sprite}">
+    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance catrobatObjects:Sprite}">
       <TextBlock Text="{Binding Path=Name}" FontSize="24" />
     </StackPanel>
   </DataTemplate>
 
   <DataTemplate x:Key="PageListBoxSpriteItem">
-    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance objects:Sprite}">
+    <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance catrobatObjects:Sprite}">
       <TextBlock Text="{Binding Path=Name}" FontSize="40" />
     </StackPanel>
   </DataTemplate>

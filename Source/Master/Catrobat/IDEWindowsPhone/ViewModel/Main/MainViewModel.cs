@@ -409,7 +409,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void PlayCurrentProjectAction()
         {
-            ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
+            ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject);
         }
 
         private void UploadCurrentProjectAction()

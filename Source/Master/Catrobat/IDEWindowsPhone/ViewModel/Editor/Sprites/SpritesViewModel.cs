@@ -196,7 +196,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
 
         private void StartPlayerAction()
         {
-           ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject.ProjectHeader.ProgramName);
+           ServiceLocator.PlayerLauncherService.LaunchPlayer(CurrentProject);
         }
 
         private void UndoAction()

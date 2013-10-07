@@ -178,7 +178,6 @@
     <Compile Include="VersionConverter\CatrobatVersionElementRenameEntry.cs" />
     <Compile Include="VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
     <Compile Include="VersionConverter\CatrobatVersionPair.cs" />
-    <Compile Include="VersionConverter\CatrobatVersionConfig.cs" />
     <Compile Include="VersionConverter\CatrobatVersionConverter.cs" />
     <Compile Include="VersionConverter\Versions\CatrobatVersion091To9.cs" />
     <Compile Include="VersionConverter\Versions\CatrobatVersion09To08.cs" />

@@ -97,7 +97,7 @@ namespace Catrobat.IDEWindowsPhone.Services
                                                                             projectName);
 
                         var error = CatrobatVersionConverter.VersionConverterError.NoError;
-                        CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, CatrobatVersionConfig.TargetIDEVersion, out error, true);
+                        CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, out error, true);
 
                         if (callback != null) //TODO
                         {
