@@ -972,4 +972,7 @@
   <data name="Editor_AppbarAdd" xml:space="preserve">
     <value>add</value>
   </data>
+  <data name="Main_TakeCurrentProjectAsTemplate" xml:space="preserve">
+    <value>Take current project ({0}) as template?</value>
+  </data>
 </root>

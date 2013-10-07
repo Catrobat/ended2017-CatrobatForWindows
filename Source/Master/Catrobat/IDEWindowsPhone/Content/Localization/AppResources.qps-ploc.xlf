@@ -1048,6 +1048,10 @@
           <source>add</source>
           <target state="new">add</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/Main_TakeCurrentProjectAsTemplate" xml:space="preserve">
+          <source>Take current project ({0}) as template?</source>
+          <target state="new">Take current project ({0}) as template?</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionSqrt" xml:space="preserve">
           <source>sqrt</source>
           <target state="new">sqrt</target>
