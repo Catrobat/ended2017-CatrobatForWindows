@@ -54,8 +54,8 @@ namespace Catrobat.IDEWindowsPhone.Themes
 
         public ThemeChooser()
         {
-            var theme1 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_strings",
-                                   "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/MainViewPanorama_strings_small.png")
+            var theme1 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/empty_background.png",
+                                   "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/empty_background.png")
             {
                 AccentColor1 = new SolidColorBrush(Colors.Purple),
                 AccentColor2 = new SolidColorBrush(Colors.Green),

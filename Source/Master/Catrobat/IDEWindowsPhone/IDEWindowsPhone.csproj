@@ -629,6 +629,7 @@
     <Content Include="Content\Images\ApplicationBar\dark\appbar.home.rest.png" />
     <Content Include="Content\Images\ApplicationBar\light\appbar.copy.rest.png" />
     <Content Include="Content\Images\ApplicationBar\light\appbar.home.rest.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\empty_background.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_1280.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_800.png" />
     <Content Include="Content\Images\Misc\EditImage.png" />
