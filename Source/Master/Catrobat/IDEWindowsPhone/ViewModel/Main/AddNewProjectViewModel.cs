@@ -31,7 +31,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         public string TextCopyCurrentProjectAsTemplate
         {
-            get { return String.Format(AppResources.Main_TakeCurrentProjectAsTemplate, CurrentProject.ProjectHeader.ProgramName); }
+            get { return String.Format(AppResources.Main_UseCurrentProjectAsTemplate, CurrentProject.ProjectHeader.ProgramName); }
         }
 
         public string ProjectName
