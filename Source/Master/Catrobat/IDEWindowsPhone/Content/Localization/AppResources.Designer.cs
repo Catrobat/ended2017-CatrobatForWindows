@@ -2608,6 +2608,15 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use current project ({0}) as template?.
+        /// </summary>
+        public static string Main_UseCurrentProjectAsTemplate {
+            get {
+                return ResourceManager.GetString("Main_UseCurrentProjectAsTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Project version is not supported..
         /// </summary>
         public static string Main_VersionIsNotSupported {

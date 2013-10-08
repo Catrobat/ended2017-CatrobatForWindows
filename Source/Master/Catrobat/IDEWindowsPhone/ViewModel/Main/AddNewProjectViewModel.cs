@@ -1,6 +1,9 @@
-﻿using Catrobat.Core;
+﻿using System;
+using System.Windows;
+using Catrobat.Core;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
+using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -14,6 +17,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private Project _currentProject;
         private string _projectName;
+        private bool _copyCurrentProjectAsTemplate;
 
         #endregion
 
@@ -24,6 +28,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             get { return _currentProject; }
             set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
         }
+
+        public string TextCopyCurrentProjectAsTemplate
+        {
+            get { return String.Format(AppResources.Main_UseCurrentProjectAsTemplate, CurrentProject.ProjectHeader.ProgramName); }
+        }
+
         public string ProjectName
         {
             get { return _projectName; }
@@ -36,6 +46,16 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     RaisePropertyChanged(() => ProjectName);
                     SaveCommand.RaiseCanExecuteChanged();
                 }
+            }
+        }
+
+        public bool CopyCurrentProjectAsTemplate
+        {
+            get { return _copyCurrentProjectAsTemplate; }
+            set
+            {
+                _copyCurrentProjectAsTemplate = value;
+                RaisePropertyChanged(() => CopyCurrentProjectAsTemplate);
             }
         }
 
@@ -64,14 +84,24 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
         private void SaveAction()
         {
-            CurrentProject.Save();
-            CurrentProject = CatrobatContext.RestoreDefaultProjectStatic(_projectName);
-            CurrentProject.Save();
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                CurrentProject.Save();
 
-            var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
-            Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                CurrentProject = CopyCurrentProjectAsTemplate ?
+                    CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName, _projectName) :
+                    CatrobatContext.CreateEmptyProject(_projectName);
 
-            ServiceLocator.NavigationService.NavigateBack();
+                if (CurrentProject != null)
+                {
+                    CurrentProject.Save();
+
+                    var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
+                    Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                }
+
+                ServiceLocator.NavigationService.NavigateBack();
+            });
         }
 
         private void CancelAction()

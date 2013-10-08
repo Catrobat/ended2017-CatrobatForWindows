@@ -43,9 +43,10 @@ namespace Catrobat.IDEWindowsPhone.Views.Editor.Formula
             ShowKeyErrorAnimation();
         }
 
-        private void FormulaChanged(Core.CatrobatObjects.Formulas.Formula formula)
+        private void FormulaChanged(SelectedFormulaInformation formulaInformation)
         {
-            FormulaViewer.Formula = formula;
+            FormulaViewer.Formula = formulaInformation.FormulaRoot;
+            FormulaViewer.SetSelectedFormula(formulaInformation);
         }
 
         private void SensorVariableSelected(SensorVariable variable)

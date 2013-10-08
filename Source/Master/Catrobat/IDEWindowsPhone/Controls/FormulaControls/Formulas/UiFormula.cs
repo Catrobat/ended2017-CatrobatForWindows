@@ -100,36 +100,32 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
             foreach (var control in UiControls)
             {
                 var formulaPartControl = control.DataContext as FormulaPartControl;
-                if (formulaPartControl != null)
+                if (formulaPartControl == null) continue;
+
+                var styles = formulaPartControl.Style;
+                if (styles == null) continue;
+
+                var textBlocks = control.Children.OfType<TextBlock>().Select(child => child as TextBlock).ToList();
+
+                Style containerStyle = styles.ContainerStyle;
+                Style textStyle = styles.TextStyle;
+
+                if (isParentSelected)
                 {
-                    var styles = formulaPartControl.Style;
-
-                    var textBlocks = control.Children.OfType<TextBlock>().Select(child => child as TextBlock).ToList();
-
-                    if (styles != null)
-                    {
-
-                        Style containerStyle = styles.ContainerStyle;
-                        Style textStyle = styles.TextStyle;
-
-                        if (isParentSelected)
-                        {
-                            textStyle = styles.ParentSelectedTextStyle;
-                            containerStyle = styles.ParentSelectedContainerStyle;
-                        }
-
-                        if (isSelected)
-                        {
-                            textStyle = styles.SelectedTextStyle;
-                            containerStyle = styles.SelectedContainerStyle;
-                        }
-
-                        control.Style = containerStyle;
-
-                        foreach (var textBlock in textBlocks)
-                            textBlock.Style = textStyle;
-                    }
+                    textStyle = styles.ParentSelectedTextStyle;
+                    containerStyle = styles.ParentSelectedContainerStyle;
                 }
+
+                if (isSelected)
+                {
+                    textStyle = styles.SelectedTextStyle;
+                    containerStyle = styles.SelectedContainerStyle;
+                }
+
+                control.Style = containerStyle;
+
+                foreach (var textBlock in textBlocks)
+                    textBlock.Style = textStyle;
             }
 
             if (LeftFormula != null)
@@ -235,6 +231,18 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas
                 formulaInformation = RightFormula.GetSelectedFormula();
 
             return formulaInformation;
+        }
+
+        public void SetSelectedFormula(SelectedFormulaInformation formulaInformation)
+        {
+            // FormulaRoot is already set view pseudo bindings
+
+            this.IsSelected = (TreeItem == formulaInformation.SelectedFormula);
+            SetStyle(IsSelected, false);
+
+            if (this.IsSelected) return;
+            if (LeftFormula != null) LeftFormula.SetSelectedFormula(formulaInformation);
+            if (RightFormula != null) RightFormula.SetSelectedFormula(formulaInformation);
         }
 
         private UiFormula FindRoot()

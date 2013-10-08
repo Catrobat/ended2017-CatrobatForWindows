@@ -36,6 +36,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
         private BrickCollection _brickCollection;
         private int _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex;
         private DataObject _selectedBrick;
+        private bool _isAdding = false;
 
         #endregion
 
@@ -81,78 +82,86 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
 
         private void AddNewScriptBrickAction(DataObject dataObject)
         {
-            if (dataObject == null)
-                return;
-
-            if (dataObject is Brick)
-                _selectedBrick = (dataObject as Brick).Copy();
-            else if (dataObject is Script)
-                _selectedBrick = (dataObject as Script).Copy();
-
-
-            _receivedScriptBrickCollection.AddScriptBrick(_selectedBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex);
-
-
-            if(_selectedBrick is LoopBeginBrick)
+            lock (_receivedScriptBrickCollection)
             {
-                LoopEndBrick endBrick;
-                if (_selectedBrick is ForeverBrick)
-                    endBrick = new ForeverLoopEndBrick{ LoopBeginBrick = (LoopBeginBrick) _selectedBrick };
-                else
-                    endBrick = new RepeatLoopEndBrick { LoopBeginBrick = (LoopBeginBrick)_selectedBrick };
+                if (dataObject == null || _isAdding)
+                    return;
 
-                ((LoopBeginBrick) _selectedBrick).LoopEndBrick = endBrick;
-                _receivedScriptBrickCollection.AddScriptBrick(endBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
+                _isAdding = true;
+
+
+                if (dataObject is Brick)
+                    _selectedBrick = (dataObject as Brick).Copy();
+                else if (dataObject is Script)
+                    _selectedBrick = (dataObject as Script).Copy();
+
+
+                _receivedScriptBrickCollection.AddScriptBrick(_selectedBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex);
+
+
+                if (_selectedBrick is LoopBeginBrick)
+                {
+                    LoopEndBrick endBrick;
+                    if (_selectedBrick is ForeverBrick)
+                        endBrick = new ForeverLoopEndBrick { LoopBeginBrick = (LoopBeginBrick)_selectedBrick };
+                    else
+                        endBrick = new RepeatLoopEndBrick { LoopBeginBrick = (LoopBeginBrick)_selectedBrick };
+
+                    ((LoopBeginBrick)_selectedBrick).LoopEndBrick = endBrick;
+                    _receivedScriptBrickCollection.AddScriptBrick(endBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
+                }
+
+                if (_selectedBrick is IfLogicBeginBrick)
+                {
+                    var elseBrick = new IfLogicElseBrick();
+                    var ifEndBrick = new IfLogicEndBrick();
+
+                    elseBrick.IfLogicBeginBrick = (IfLogicBeginBrick)_selectedBrick;
+                    elseBrick.IfLogicEndBrick = ifEndBrick;
+
+                    ifEndBrick.IfLogicBeginBrick = (IfLogicBeginBrick)_selectedBrick;
+                    ifEndBrick.IfLogicElseBrick = elseBrick;
+
+                    ((IfLogicBeginBrick)_selectedBrick).IfLogicElseBrick = elseBrick;
+                    ((IfLogicBeginBrick)_selectedBrick).IfLogicEndBrick = ifEndBrick;
+
+                    _receivedScriptBrickCollection.AddScriptBrick(elseBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
+                    _receivedScriptBrickCollection.AddScriptBrick(ifEndBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 2);
+                }
+
+                var message = new GenericMessage<DataObject>(_selectedBrick);
+                Messenger.Default.Send(message, ViewModelMessagingToken.SelectedBrickListener);
+
+
+                ServiceLocator.NavigationService.RemoveBackEntry();
+                ServiceLocator.NavigationService.NavigateBack();
+
+                _isAdding = false;
             }
-
-            if (_selectedBrick is IfLogicBeginBrick)
-            {
-                var elseBrick = new IfLogicElseBrick();
-                var ifEndBrick = new IfLogicEndBrick();
-
-                elseBrick.IfLogicBeginBrick = (IfLogicBeginBrick) _selectedBrick;
-                elseBrick.IfLogicEndBrick = ifEndBrick;
-
-                ifEndBrick.IfLogicBeginBrick = (IfLogicBeginBrick) _selectedBrick;
-                ifEndBrick.IfLogicElseBrick = elseBrick;
-
-                ((IfLogicBeginBrick) _selectedBrick).IfLogicElseBrick = elseBrick;
-                ((IfLogicBeginBrick) _selectedBrick).IfLogicEndBrick = ifEndBrick;
-                
-                _receivedScriptBrickCollection.AddScriptBrick(elseBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 1);
-                _receivedScriptBrickCollection.AddScriptBrick(ifEndBrick, _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex + 2);
-            }
-
-            var message = new GenericMessage<DataObject>(_selectedBrick);
-            Messenger.Default.Send(message, ViewModelMessagingToken.SelectedBrickListener);
-
-
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void MovementAction()
         {
             _selectedBrickCategory = BrickCategory.Motion;
-            ServiceLocator.NavigationService.NavigateTo(typeof (AddNewBrickView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewBrickView));
         }
 
         private void LooksAction()
         {
             _selectedBrickCategory = BrickCategory.Looks;
-            ServiceLocator.NavigationService.NavigateTo(typeof (AddNewBrickView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewBrickView));
         }
 
         private void SoundAction()
         {
             _selectedBrickCategory = BrickCategory.Sounds;
-            ServiceLocator.NavigationService.NavigateTo(typeof (AddNewBrickView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewBrickView));
         }
 
         private void ControlAction()
         {
             _selectedBrickCategory = BrickCategory.Control;
-            ServiceLocator.NavigationService.NavigateTo(typeof (AddNewBrickView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewBrickView));
         }
 
         private void VariablesAction()
@@ -163,7 +172,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
 
         private void OnLoadBrickViewAction()
         {
-            var app = (App) Application.Current;
+            var app = (App)Application.Current;
             switch (_selectedBrickCategory)
             {
                 case BrickCategory.Control:
@@ -196,8 +205,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Scripts
         private void ReceiveScriptBrickCollectionAction(GenericMessage<List<Object>> message)
         {
             _receivedScriptBrickCollection = message.Content[0] as ScriptBrickCollection;
-            _firstVisibleScriptBrickIndex = ((ListBoxViewPort) message.Content[1]).FirstVisibleIndex;
-            _lastVisibleScriptBrickIndex = ((ListBoxViewPort) message.Content[1]).LastVisibleIndex;
+            _firstVisibleScriptBrickIndex = ((ListBoxViewPort)message.Content[1]).FirstVisibleIndex;
+            _lastVisibleScriptBrickIndex = ((ListBoxViewPort)message.Content[1]).LastVisibleIndex;
         }
 
 

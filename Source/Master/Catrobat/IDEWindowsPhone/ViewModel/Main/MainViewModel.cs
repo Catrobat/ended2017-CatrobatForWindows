@@ -342,47 +342,45 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 
             Task.Run(() =>
             {
-                CurrentProject.Save();
-                var newProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
-
-
-                if (newProject != null)
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    CurrentProject.Save();
+                    var newProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
+
+
+                    if (newProject != null)
                     {
                         CurrentProject = newProject;
-                    });
 
                         var minWaitingTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
 
                         if (minWaitingTimeRemaining >= new TimeSpan(0))
                             Thread.Sleep(minWaitingTimeRemaining);
 
-                        Deployment.Current.Dispatcher.BeginInvoke(() =>
-                        {
-                            IsActivatingLocalProject = false;
-                        });
-                    
-                }
-                else
-                {
-                    XmlParserTempProjectHelper.Project = CurrentProject;
+                        IsActivatingLocalProject = false;
 
-                    var message = new DialogMessage(String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName),
-                        new Action<MessageBoxResult>( delegate
-                            {
-                                Deployment.Current.Dispatcher.BeginInvoke(() =>
-                                {
-                                    IsActivatingLocalProject = false;
-                                });
-                            }))
+
+                    }
+                    else
                     {
-                        Button = MessageBoxButton.OK,
-                        Caption = AppResources.Main_SelectedProjectNotValidMessage
-                    };
+                        XmlParserTempProjectHelper.Project = CurrentProject;
 
-                    Messenger.Default.Send(message);
-                }
+                        var message = new DialogMessage(String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName),
+                            new Action<MessageBoxResult>(delegate
+                                {
+                                    Deployment.Current.Dispatcher.BeginInvoke(() =>
+                                    {
+                                        IsActivatingLocalProject = false;
+                                    });
+                                }))
+                        {
+                            Button = MessageBoxButton.OK,
+                            Caption = AppResources.Main_SelectedProjectNotValidMessage
+                        };
+
+                        Messenger.Default.Send(message);
+                    }
+                });
             });
         }
 
@@ -594,31 +592,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 if (_copyProjectName == CurrentProject.ProjectHeader.ProgramName)
                     CurrentProject.Save();
 
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    var sourcePath = Path.Combine(CatrobatContextBase.ProjectsPath, _copyProjectName);
-                    var newProjectName = _copyProjectName;
-                    var destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
-
-                    var counter = 1;
-                    while (storage.DirectoryExists(destinationPath))
-                    {
-                        newProjectName = _copyProjectName + counter;
-                        destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
-                        counter++;
-                    }
-
-                    storage.CopyDirectory(sourcePath, destinationPath);
-
-                    var tempXmlPath = Path.Combine(destinationPath, Project.ProjectCodePath);
-                    var xml = storage.ReadTextFile(tempXmlPath);
-                    var newProject = new Project(xml);
-                    newProject.SetProgramName(newProjectName);
-                    newProject.Save();
-                }
+                CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName,
+                    CurrentProject.ProjectHeader.ProgramName);
 
                 UpdateLocalProjects();
-
                 _copyProjectName = null;
             }
         }
