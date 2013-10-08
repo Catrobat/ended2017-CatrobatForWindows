@@ -189,7 +189,7 @@ namespace Catrobat.Core.CatrobatObjects
             RaisePropertyChanged(() => ProjectHeader);
         }
 
-        protected override void LoadFromXML(string xml)
+        protected override sealed void LoadFromXML(string xml)
         {
             var document = XDocument.Load(new StringReader(xml));
             document.Declaration = new XDeclaration("1.0", "UTF-8", "yes");
