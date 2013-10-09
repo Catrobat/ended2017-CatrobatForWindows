@@ -37,7 +37,7 @@ namespace Catrobat.TestsWindowsPhone.Misc
           new SystemInformationServicePhone(), new CultureServicePhone(), 
           new ImageResizeServicePhone(), new PlayerLauncherServicePhone(), 
           new ResourceLoaderFactoryPhone(), new StorageFactoryPhone(), 
-          new ServerCommunicationServicePhone() );
+          new ServerCommunicationServicePhone(), new ImageSourceConversionServicePhone());
     }
   }
 }

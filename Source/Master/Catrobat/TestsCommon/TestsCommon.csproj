@@ -78,6 +78,7 @@
     <Compile Include="Tests\Data\DataReadingTests.cs" />
     <Compile Include="Tests\Data\DataEqualsTests.cs" />
     <Compile Include="Tests\Data\ReferenceHelperTests.cs" />
+    <Compile Include="Tests\Data\VersionConverter091ToWin091ProcticalTests.cs" />
     <Compile Include="Tests\Data\XPathHelperTests.cs" />
     <Compile Include="Tests\Data\VersionConverter091ToWin091Tests.cs" />
     <Compile Include="Tests\Data\CopyTests.cs" />

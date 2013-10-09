@@ -91,7 +91,7 @@ namespace Catrobat.Core.VersionConverter.Versions
             foreach (var endBrick in endBricks)
                 endBrick.Remove();
 
-            // TODO: remove code above and replaye with working code for if handling
+            // TODO: remove code above and replace with working code for if handling
 
             //var elseBricks = document.Descendants("brickList").Descendants("ifLogicElseBrick").ToList();
             //SwapCrossReferences(document, elseBricks);

@@ -17,9 +17,12 @@ namespace Catrobat.Core.Services
 
         public static IResourceLoaderFactory ResourceLoaderFactory { get; private set; }
 
-        public static IStorageFactory StorageFactory { get; set; }
+        public static IStorageFactory StorageFactory { get; private set; }
 
         public static IServerCommunicationService ServerCommunicationService { get; private set; }
+
+        public static IImageSourceConversionService ImageSourceConversionService { get; private set; }
+        
 
         public static void SetServices(
             INavigationService navigationService,
@@ -29,7 +32,8 @@ namespace Catrobat.Core.Services
             IPlayerLauncherService playerLauncherService,
             IResourceLoaderFactory resourceLoaderFactory,
             IStorageFactory storageFactory,
-            IServerCommunicationService serverCommunicationService
+            IServerCommunicationService serverCommunicationService,
+            IImageSourceConversionService imageSourceConversionService
             )
         {
             NavigationService = navigationService;
@@ -40,6 +44,7 @@ namespace Catrobat.Core.Services
             ResourceLoaderFactory = resourceLoaderFactory;
             StorageFactory = storageFactory;
             ServerCommunicationService = serverCommunicationService;
+            ImageSourceConversionService = imageSourceConversionService;
         }
     }
 }

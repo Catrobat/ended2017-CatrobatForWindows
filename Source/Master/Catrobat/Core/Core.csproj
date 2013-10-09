@@ -52,6 +52,7 @@
     <Compile Include="Misc\Helpers\StringFormatHelper.cs" />
     <Compile Include="Misc\Helpers\FileNameGenerationHelper.cs" />
     <Compile Include="Misc\Helpers\WaveHeaderHelper.cs" />
+    <Compile Include="Misc\Images\PortableImage.cs" />
     <Compile Include="Services\Common\CatrobatWebFormUploadService.cs" />
     <Compile Include="Services\Common\CatrobatZipService.cs">
       <SubType>Code</SubType>
@@ -61,6 +62,7 @@
     <Compile Include="Misc\Helpers\LanguageHelper.cs" />
     <Compile Include="Misc\MD5.cs" />
     <Compile Include="Services\IImageResizeService.cs" />
+    <Compile Include="Services\IImageSourceConversionService.cs" />
     <Compile Include="Services\ISystemInformationService.cs" />
     <Compile Include="Misc\Helpers\XmlParserTempProjectHelper.cs" />
     <Compile Include="Misc\Helpers\ReferenceHelper.cs" />

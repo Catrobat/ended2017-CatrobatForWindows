@@ -199,6 +199,7 @@
     <Compile Include="Converters\IntStringConverter.cs" />
     <Compile Include="Converters\NullColorConverter.cs" />
     <Compile Include="Converters\SecondStringMillisecondConverter.cs" />
+    <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
     <Compile Include="Utilities\AssociationUriMapper.cs" />
     <Compile Include="Services\ImageResizeServicePhone.cs" />
     <Compile Include="Utilities\Helpers\CostumeBuilderHelper.cs" />
