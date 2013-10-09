@@ -35,12 +35,20 @@ namespace Catrobat.TestsWindowsPhone.Misc
 
     internal static void InitializeTests()
     {
-      ServiceLocator.SetServices(new NavigationServicePhone(), 
-          new SystemInformationServicePhone(), new CultureServicePhone(), 
-          new ImageResizeServicePhone(), new PlayerLauncherServicePhone(), 
-          new ResourceLoaderFactoryPhone(), new StorageFactoryPhone(), 
-          new ServerCommunicationServicePhone(), new ImageSourceConversionServicePhone(),
-          new ProjectImporterService(), new SoundPlayerServicePhone());
+        Core.Services.ServiceLocator.SetServices(
+                        new NavigationServicePhone(),
+                        new SystemInformationServicePhone(),
+                        new CultureServicePhone(),
+                        new ImageResizeServicePhone(),
+                        new PlayerLauncherServicePhone(),
+                        new ResourceLoaderFactoryPhone(),
+                        new StorageFactoryPhone(),
+                        new ServerCommunicationServicePhone(),
+                        new ImageSourceConversionServicePhone(),
+                        new ProjectImporterService(),
+                        new SoundPlayerServicePhone(),
+                        new SoundRecorderServicePhone()
+                        );
     }
   }
 }

@@ -59,13 +59,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<AddNewGlobalVariableViewModel>(true);
             SimpleIoc.Default.Register<AddNewLocalVariableViewModel>(true);
             SimpleIoc.Default.Register<ChangeVariableViewModel>(true);
-
-            //SimpleIoc.Default.Register<EditorViewModel>(true);
             SimpleIoc.Default.Register<SpritesViewModel>(true);
             SimpleIoc.Default.Register<SpriteEditorViewModel>(true);
-            //SimpleIoc.Default.Register<LookEditorViewModel>(true);
-            //SimpleIoc.Default.Register<SoundEditorViewModel>(true);
-            //SimpleIoc.Default.Register<ActionEditorViewModel>(true);
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -92,7 +87,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 new ServerCommunicationServicePhone(),
                 new ImageSourceConversionServicePhone(),
                 new ProjectImporterService(),
-                new SoundPlayerServicePhone()
+                new SoundPlayerServicePhone(),
+                new SoundRecorderServicePhone()
                 );
         }
 
@@ -180,17 +176,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-        //    "CA1822:MarkMembersAsStatic",
-        //    Justification = "This non-static member is needed for data binding purposes.")]
-        //public EditorViewModel EditorViewModel
-        //{
-        //    get
-        //    {
-        //        return ServiceLocator.Current.GetInstance<EditorViewModel>();
-        //    }
-        //}
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
@@ -468,39 +453,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 return ServiceLocator.Current.GetInstance<SpriteEditorViewModel>();
             }
         }
-
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-        //"CA1822:MarkMembersAsStatic",
-        //Justification = "This non-static member is needed for data binding purposes.")]
-        //public SoundEditorViewModel SoundEditorViewModel
-        //{
-        //    get
-        //    {
-        //        return ServiceLocator.Current.GetInstance<SoundEditorViewModel>();
-        //    }
-        //}
-
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-        //"CA1822:MarkMembersAsStatic",
-        //Justification = "This non-static member is needed for data binding purposes.")]
-        //public LookEditorViewModel LookEditorViewModel
-        //{
-        //    get
-        //    {
-        //        return ServiceLocator.Current.GetInstance<LookEditorViewModel>();
-        //    }
-        //}
-
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-        //"CA1822:MarkMembersAsStatic",
-        //Justification = "This non-static member is needed for data binding purposes.")]
-        //public ActionEditorViewModel ActionEditorViewModel
-        //{
-        //    get
-        //    {
-        //        return ServiceLocator.Current.GetInstance<ActionEditorViewModel>();
-        //    }
-        //}
 
         public static void Cleanup()
         {

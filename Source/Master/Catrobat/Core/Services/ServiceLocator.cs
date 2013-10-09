@@ -27,6 +27,8 @@ namespace Catrobat.Core.Services
 
         public static ISoundPlayerService SoundPlayerService { get; private set; }
 
+        public static ISoundRecorderService SoundRecorderService { get; private set; }
+
         public static void SetServices(
             INavigationService navigationService,
             ISystemInformationService systemInformationService,
@@ -38,7 +40,8 @@ namespace Catrobat.Core.Services
             IServerCommunicationService serverCommunicationService,
             IImageSourceConversionService imageSourceConversionService,
             IProjectImporterService projectImporterService,
-            ISoundPlayerService soundPlayerService
+            ISoundPlayerService soundPlayerService,
+            ISoundRecorderService soundRecorderService
             )
         {
             NavigationService = navigationService;
@@ -52,6 +55,7 @@ namespace Catrobat.Core.Services
             ImageSourceConversionService = imageSourceConversionService;
             ProjectImporterService = projectImporterService;
             SoundPlayerService = soundPlayerService;
+            SoundRecorderService = soundRecorderService;
         }
     }
 }

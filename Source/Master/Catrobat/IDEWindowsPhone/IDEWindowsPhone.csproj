@@ -311,7 +311,7 @@
     <Compile Include="Views\Editor\Sounds\SoundNameChooserView.xaml.cs">
       <DependentUpon>SoundNameChooserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\SoundRecorder.cs" />
+    <Compile Include="Services\SoundRecorderServicePhone.cs" />
     <Compile Include="Views\Editor\Sounds\SoundRecorderView.xaml.cs">
       <DependentUpon>SoundRecorderView.xaml</DependentUpon>
     </Compile>

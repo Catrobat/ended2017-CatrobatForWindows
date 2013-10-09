@@ -8,6 +8,7 @@ using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Sounds;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
+using Catrobat.IDEWindowsPhone.Services;
 using Catrobat.IDEWindowsPhone.Utilities;
 using Catrobat.IDEWindowsPhone.Utilities.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
@@ -23,7 +24,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         private Project _currentProject;
         private Sprite _receivedSelectedSprite;
-        private SoundRecorder _recorder;
         private Thread _recordTimeUpdateThread;
         private DateTime _recorderStartTime;
         private TimeSpan _recorderTimeGoneBy;
@@ -235,12 +235,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         private void StartRecordingAction()
         {
-            lock (_recorder)
+            lock (ServiceLocator.SoundRecorderService)
             {
                 if (IsRecording)
                 {
-                    _recorder.StopRecording();
-                    _recorder.StopSound();
+                    ServiceLocator.SoundRecorderService.StopRecording();
+                    ServiceLocator.SoundRecorderService.StopPlayingRecordedSound();
 
                     _recordTimeUpdateThread.Abort();
 
@@ -250,19 +250,19 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                 {
                     IsPlaying = false;
                     RecordingExists = false;
-                    _recorder.StartRecording();
+                    ServiceLocator.SoundRecorderService.StartRecording();
                     _recorderStartTime = DateTime.UtcNow;
 
                     _recordTimeUpdateThread = new Thread(delegate(object o)
                         {
                             try
                             {
-                                while (!_recorder.StopRequested)
+                                while (ServiceLocator.SoundRecorderService.State != SoundRecorderState.StoppingRecording)
                                 {
                                     _recorderTimeGoneBy = DateTime.UtcNow - _recorderStartTime;
                                     Deployment.Current.Dispatcher.BeginInvoke(() =>
                                         {
-                                            if (!_recorder.StopRequested)
+                                            if (ServiceLocator.SoundRecorderService.State != SoundRecorderState.StoppingRecording)
                                             {
                                                 RecordingTime = _recorderTimeGoneBy.TotalSeconds;
                                             }
@@ -286,25 +286,25 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         private void ResetAction()
         {
-            _recorder.StopSound();
-            _recorder.StopRecording();
+            ServiceLocator.SoundRecorderService.StopPlayingRecordedSound();
+            ServiceLocator.SoundRecorderService.StopRecording();
         }
 
         private void PlayPauseAction()
         {
-            lock (_recorder)
+            lock (ServiceLocator.SoundRecorderService)
             {
-                _recorder.InitializeSound();
+                ServiceLocator.SoundRecorderService.InitializeSound();
 
                 if (IsPlaying)
                 {
                     IsPlaying = false;
-                    _recorder.StopRecording();
-                    _recorder.StopSound();
+                    ServiceLocator.SoundRecorderService.StopRecording();
+                    ServiceLocator.SoundRecorderService.StopPlayingRecordedSound();
                 }
                 else
                 {
-                    _recorder.StopRecording();
+                    ServiceLocator.SoundRecorderService.StopRecording();
                     _playerStartTime = DateTime.UtcNow;
                     IsPlaying = true;
                     _playerTimeUpdateThread = new Thread(delegate(object o)
@@ -322,11 +322,11 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                                             }
                                             else
                                             {
-                                                lock (_recorder)
+                                                lock (ServiceLocator.SoundRecorderService)
                                                 {
                                                     PlayingTime = RecordingTime;
                                                     IsPlaying = false;
-                                                    _recorder.StopSound();
+                                                    ServiceLocator.SoundRecorderService.StopPlayingRecordedSound();
                                                 }
                                             }
                                         });
@@ -342,7 +342,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                         });
 
                     _playerTimeUpdateThread.Start();
-                    _recorder.PlaySound();
+                    ServiceLocator.SoundRecorderService.PlayRecordedSound();
                 }
             }
         }
@@ -355,8 +355,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         private void CancelAction()
         {
-            _recorder.StopSound();
-            _recorder.StopRecording();
+            ServiceLocator.SoundRecorderService.StopPlayingRecordedSound();
+            ServiceLocator.SoundRecorderService.StopRecording();
 
             ResetViewModel();
             ServiceLocator.NavigationService.NavigateBack();
@@ -373,9 +373,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
                 {
                     var writer = new BinaryWriter(stream);
 
-                    WaveHeaderHelper.WriteHeader(writer.BaseStream, _recorder.SampleRate);
-                    var dataBuffer = _recorder.GetSoundAsStream().GetBuffer();
-                    writer.Write(dataBuffer, 0, (int) _recorder.GetSoundAsStream().Length);
+                    WaveHeaderHelper.WriteHeader(writer.BaseStream, ServiceLocator.SoundRecorderService.SampleRate);
+                    var dataBuffer = ServiceLocator.SoundRecorderService.GetSoundAsStream().GetBuffer();
+                    writer.Write(dataBuffer, 0, (int) ServiceLocator.SoundRecorderService.GetSoundAsStream().Length);
                     writer.Flush();
                     writer.Close();
                 }
@@ -434,11 +434,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
 
-            if (!IsInDesignMode)
-            {
-                _recorder = new SoundRecorder();
-            }
-
             UpdateTextProperties();
 
             if (IsInDesignMode)
@@ -481,7 +476,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             RecordingTime = 0;
             PlayingTime = 0;
 
-            _recorder = new SoundRecorder();
             if (_recordTimeUpdateThread != null)
             {
                 _recordTimeUpdateThread.Abort();

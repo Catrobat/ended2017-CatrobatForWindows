@@ -52,6 +52,7 @@
     <Compile Include="Services\Common\ProjectImporterService.cs" />
     <Compile Include="Services\IProjectImporterService.cs" />
     <Compile Include="Services\ISoundPlayerService.cs" />
+    <Compile Include="Services\ISoundRecorderService.cs" />
     <Compile Include="Utilities\Helpers\StringFormatHelper.cs" />
     <Compile Include="Utilities\Helpers\FileNameGenerationHelper.cs" />
     <Compile Include="Utilities\Helpers\WaveHeaderHelper.cs" />
