@@ -1,5 +1,7 @@
 ﻿using System.IO.IsolatedStorage;
+using System.Linq.Expressions;
 using Catrobat.Core;
+using Catrobat.Core.Services.Common;
 using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
@@ -37,7 +39,8 @@ namespace Catrobat.TestsWindowsPhone.Misc
           new SystemInformationServicePhone(), new CultureServicePhone(), 
           new ImageResizeServicePhone(), new PlayerLauncherServicePhone(), 
           new ResourceLoaderFactoryPhone(), new StorageFactoryPhone(), 
-          new ServerCommunicationServicePhone(), new ImageSourceConversionServicePhone());
+          new ServerCommunicationServicePhone(), new ImageSourceConversionServicePhone(),
+          new ProjectImporterService());
     }
   }
 }

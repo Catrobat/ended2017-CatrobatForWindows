@@ -94,7 +94,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 new ResourceLoaderFactoryPhone(),
                 new StorageFactoryPhone(),
                 new ServerCommunicationServicePhone(),
-                new ImageSourceConversionServicePhone()
+                new ImageSourceConversionServicePhone(),
+                new ProjectImporterService()
                 );
         }
 
