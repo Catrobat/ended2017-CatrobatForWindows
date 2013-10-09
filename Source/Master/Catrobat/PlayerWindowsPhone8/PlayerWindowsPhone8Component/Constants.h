@@ -120,7 +120,7 @@ namespace Constants
             static const string Degrees                     =       "degrees";
             static const string XDestination                =       "xDestination";
             static const string YDestination                =       "yDestination";
-            static const string DurationInMilliSeconds      =       "durationInMilliSeconds";
+            static const string DurationInSeconds      =            "durationInSeconds";
             static const string Transparency                =       "transparency";
             static const string BroadcastMessage            =       "broadcastMessage";
             static const string Sound                       =       "sound";
