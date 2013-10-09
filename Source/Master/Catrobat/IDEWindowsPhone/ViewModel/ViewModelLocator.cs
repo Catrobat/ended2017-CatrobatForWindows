@@ -7,6 +7,7 @@ using Catrobat.Core.Resources;
 using Catrobat.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Services;
 using Catrobat.IDEWindowsPhone.Themes;
+using Catrobat.IDEWindowsPhone.Utilities.Sounds;
 using Catrobat.IDEWindowsPhone.Utilities.Storage;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
@@ -90,7 +91,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 new StorageFactoryPhone(),
                 new ServerCommunicationServicePhone(),
                 new ImageSourceConversionServicePhone(),
-                new ProjectImporterService()
+                new ProjectImporterService(),
+                new SoundPlayerServicePhone()
                 );
         }
 

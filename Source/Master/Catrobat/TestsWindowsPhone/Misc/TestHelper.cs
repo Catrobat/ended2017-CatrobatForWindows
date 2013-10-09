@@ -5,6 +5,7 @@ using Catrobat.Core.Services.Common;
 using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Services;
+using Catrobat.IDEWindowsPhone.Utilities.Sounds;
 using Catrobat.IDEWindowsPhone.Utilities.Storage;
 
 namespace Catrobat.TestsWindowsPhone.Misc
@@ -39,7 +40,7 @@ namespace Catrobat.TestsWindowsPhone.Misc
           new ImageResizeServicePhone(), new PlayerLauncherServicePhone(), 
           new ResourceLoaderFactoryPhone(), new StorageFactoryPhone(), 
           new ServerCommunicationServicePhone(), new ImageSourceConversionServicePhone(),
-          new ProjectImporterService());
+          new ProjectImporterService(), new SoundPlayerServicePhone());
     }
   }
 }

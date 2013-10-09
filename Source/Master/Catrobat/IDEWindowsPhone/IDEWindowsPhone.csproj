@@ -209,7 +209,7 @@
     <Compile Include="Utilities\ProjectImporter.cs" />
     <Compile Include="Utilities\Helpers\ResolutionHelper.cs" />
     <Compile Include="Services\ServerCommunicationServicePhone.cs" />
-    <Compile Include="Utilities\Sounds\SoundPlayer.cs" />
+    <Compile Include="Services\SoundPlayerServicePhone.cs" />
     <Compile Include="Utilities\Storage\ResourceLoaderFactoryPhone.cs" />
     <Compile Include="Utilities\Storage\ResourcesPhone.cs" />
     <Compile Include="Utilities\Storage\StorageFactoryPhone.cs" />
@@ -305,21 +305,16 @@
     <Compile Include="Views\Editor\Sounds\AddNewSoundView.xaml.cs">
       <DependentUpon>AddNewSoundView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Sounds\AudioLibrary.xaml.cs">
-      <DependentUpon>AudioLibrary.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Editor\Sounds\ChangeSoundView.xaml.cs">
       <DependentUpon>ChangeSoundView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Sounds\SoundNameChooserView.xaml.cs">
       <DependentUpon>SoundNameChooserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Sounds\Recorder.cs" />
-    <Compile Include="Utilities\Sounds\SoundListItem.cs" />
+    <Compile Include="Utilities\SoundRecorder.cs" />
     <Compile Include="Views\Editor\Sounds\SoundRecorderView.xaml.cs">
       <DependentUpon>SoundRecorderView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Sounds\XNAFrameworkDispatcherService.cs" />
     <Compile Include="Views\Editor\Sprites\AddNewSpriteView.xaml.cs">
       <DependentUpon>AddNewSpriteView.xaml</DependentUpon>
     </Compile>
@@ -536,10 +531,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Editor\Sounds\AddNewSoundView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Editor\Sounds\AudioLibrary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -791,7 +782,9 @@
       <Name>PlayerWindowsPhone8Component</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utilities\Sounds\" />
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="AppBarUtils">
       <HintPath>..\packages\AppBarUtils.2.4\lib\windowsphone8\AppBarUtils.dll</HintPath>

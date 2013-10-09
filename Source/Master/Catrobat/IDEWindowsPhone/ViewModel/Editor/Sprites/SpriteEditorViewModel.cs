@@ -34,7 +34,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
         private Project _currentProject;
         private Sprite _selectedSprite;
         private readonly ScriptBrickCollection _scriptBricks;
-        private SoundPlayer _soundPlayer;
         private Sound _sound;
         private ListBoxViewPort _listBoxViewPort;
 
@@ -633,10 +632,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
         {
             //StopSoundCommand.Execute(null);
 
-            //if (_soundPlayer == null)
+            //if (ServiceLocator.SoundPlayerService == null)
             //{
-            //    _soundPlayer = new SoundPlayer();
-            //    _soundPlayer.SoundStateChanged += SoundPlayerStateChanged;
+            //    ServiceLocator.SoundPlayerService = new SoundPlayer();
+            //    ServiceLocator.SoundPlayerService.SoundStateChanged += SoundPlayerStateChanged;
             //}
 
             //var state = (PlayButtonState)parameter[0];
@@ -647,21 +646,21 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             //    if (_sound != sound)
             //    {
             //        _sound = sound;
-            //        _soundPlayer.SetSound(_sound);
+            //        ServiceLocator.SoundPlayerService.SetSound(_sound);
             //    }
-            //    _soundPlayer.Play();
+            //    ServiceLocator.SoundPlayerService.Play();
             //}
             //else
             //{
-            //    _soundPlayer.Pause();
+            //    ServiceLocator.SoundPlayerService.Pause();
             //}
         }
 
         private void StopSoundAction()
         {
-            if (_soundPlayer != null)
+            if (ServiceLocator.SoundPlayerService != null)
             {
-                _soundPlayer.Pause();
+                ServiceLocator.SoundPlayerService.Pause();
             }
         }
 
@@ -728,27 +727,24 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites
             var playedSound = args.ChangedToPlayObject as Sound;
             var pausedSound = args.ChangedToPausedObject as Sound;
 
-            if(_soundPlayer != null)
-                _soundPlayer.Clear();
+            ServiceLocator.SoundPlayerService.Clear();
 
-            _soundPlayer = new SoundPlayer(CurrentProject.BasePath);
-
-            _soundPlayer.SoundFinished += delegate()
+            ServiceLocator.SoundPlayerService.SoundFinished += delegate()
             {
                 args.CurrentButton.State = PlayPauseButtonState.Pause;
             };
 
             if (pausedSound != null)
-                _soundPlayer.Pause();
+                ServiceLocator.SoundPlayerService.Pause();
 
             if (playedSound != null)
             {
                 if (_sound != playedSound)
                 {
                     _sound = playedSound;
-                    _soundPlayer.SetSound(_sound);
+                    ServiceLocator.SoundPlayerService.SetSound(_sound, CurrentProject);
                 }
-                _soundPlayer.Play();
+                ServiceLocator.SoundPlayerService.Play();
             }
         }
 

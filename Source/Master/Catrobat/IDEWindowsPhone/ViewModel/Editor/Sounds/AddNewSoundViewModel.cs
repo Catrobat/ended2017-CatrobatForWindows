@@ -36,7 +36,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             var message = new GenericMessage<Sprite>(_receivedSelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof (AudioLibrary));
+            //ServiceLocator.NavigationService.NavigateTo(typeof (AudioLibrary));
         }
 
         private void RecorderAction()

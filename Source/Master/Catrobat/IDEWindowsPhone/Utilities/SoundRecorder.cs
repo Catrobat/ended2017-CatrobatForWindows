@@ -5,9 +5,9 @@ using System.Windows.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
-namespace Catrobat.IDEWindowsPhone.Utilities.Sounds
+namespace Catrobat.IDEWindowsPhone.Utilities
 {
-    internal class Recorder
+    internal class SoundRecorder
     {
         private Microphone _microphone;
         private byte[] _audioBuffer;
@@ -21,7 +21,7 @@ namespace Catrobat.IDEWindowsPhone.Utilities.Sounds
             get { return _sampleRate; }
         }
 
-        public SoundEffectInstance Sound { get; set; }
+        private SoundEffectInstance Sound { get; set; }
 
         public void InitializeSound()
         {
@@ -31,7 +31,7 @@ namespace Catrobat.IDEWindowsPhone.Utilities.Sounds
             }
         }
 
-        public Recorder()
+        public SoundRecorder()
         {
             StopRequested = false;
             Sound = null;

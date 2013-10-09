@@ -8,6 +8,7 @@ using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Sounds;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
+using Catrobat.IDEWindowsPhone.Utilities;
 using Catrobat.IDEWindowsPhone.Utilities.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using GalaSoft.MvvmLight;
@@ -22,7 +23,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
         private Project _currentProject;
         private Sprite _receivedSelectedSprite;
-        private Recorder _recorder;
+        private SoundRecorder _recorder;
         private Thread _recordTimeUpdateThread;
         private DateTime _recorderStartTime;
         private TimeSpan _recorderTimeGoneBy;
@@ -435,7 +436,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
 
             if (!IsInDesignMode)
             {
-                _recorder = new Recorder();
+                _recorder = new SoundRecorder();
             }
 
             UpdateTextProperties();
@@ -480,7 +481,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             RecordingTime = 0;
             PlayingTime = 0;
 
-            _recorder = new Recorder();
+            _recorder = new SoundRecorder();
             if (_recordTimeUpdateThread != null)
             {
                 _recordTimeUpdateThread.Abort();

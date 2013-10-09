@@ -36,7 +36,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
         private Project _currentProject;
         private Sprite _selectedSprite;
         private readonly ScriptBrickCollection _scriptBricks;
-        private SoundPlayer _soundPlayer;
+        private SoundPlayerServicePhone _soundPlayer;
         private Sound _sound;
         private ListBoxViewPort _listBoxViewPort;
 
@@ -847,7 +847,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
             if(_soundPlayer != null)
                 _soundPlayer.Clear();
 
-            _soundPlayer = new SoundPlayer(CurrentProject.BasePath);
+            _soundPlayer = new SoundPlayerServicePhone();
 
             _soundPlayer.SoundFinished += delegate()
             {
@@ -862,7 +862,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor
                 if (_sound != playedSound)
                 {
                     _sound = playedSound;
-                    _soundPlayer.SetSound(_sound);
+                    _soundPlayer.SetSound(_sound, CurrentProject);
                 }
                 _soundPlayer.Play();
             }
