@@ -1,6 +1,6 @@
 ﻿using System.IO.IsolatedStorage;
 using Catrobat.Core;
-using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Misc.Storage;
 using Catrobat.IDEWindowsPhone.Services;

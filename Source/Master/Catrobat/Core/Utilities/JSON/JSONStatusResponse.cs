@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Catrobat.Core.Misc.JSON
+namespace Catrobat.Core.Utilities.JSON
 {
     public enum StatusCodes
     {

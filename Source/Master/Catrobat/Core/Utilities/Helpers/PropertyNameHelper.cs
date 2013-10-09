@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Catrobat.Core.Misc.Helpers
+namespace Catrobat.Core.Utilities.Helpers
 {
     public class PropertyHelper
     {

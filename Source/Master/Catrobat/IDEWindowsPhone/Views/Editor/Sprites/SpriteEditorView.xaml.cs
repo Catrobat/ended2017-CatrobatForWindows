@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using Catrobat.Core.Misc;
+using Catrobat.Core.Utilities;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;

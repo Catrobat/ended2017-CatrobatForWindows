@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using System.Windows;
-using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Sounds;
 using Microsoft.Xna.Framework.Audio;

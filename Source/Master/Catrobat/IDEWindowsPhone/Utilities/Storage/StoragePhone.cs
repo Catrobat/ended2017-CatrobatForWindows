@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Windows.Media.Imaging;
 using Catrobat.Core.ExtensionMethods;
-using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Services;
 using Coding4Fun.Toolkit.Controls.Common;

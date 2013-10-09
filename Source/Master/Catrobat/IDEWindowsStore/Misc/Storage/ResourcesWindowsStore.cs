@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Utilities.Storage;
 using System;
 using System.Reflection;
 using Windows.Storage;

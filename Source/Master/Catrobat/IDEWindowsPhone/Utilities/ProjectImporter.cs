@@ -6,7 +6,7 @@ using Windows.Phone.Storage.SharedAccess;
 using Windows.Storage;
 using Catrobat.Core;
 using Catrobat.Core.ExtensionMethods;
-using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services.Common;
 using Catrobat.Core.VersionConverter;

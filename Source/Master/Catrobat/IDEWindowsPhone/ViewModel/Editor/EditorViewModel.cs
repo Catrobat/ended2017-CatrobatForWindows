@@ -1,7 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Catrobat.Core.CatroatObjects.Scripts;
-using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Bricks;
 using Catrobat.Core.CatrobatObjects.Costumes;

@@ -7,9 +7,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Catrobat.Core.Annotations;
-using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Utilities.Helpers;
 
-namespace Catrobat.Core.Misc.Images
+namespace Catrobat.Core.Utilities.Images
 {
     public class PortableImage : INotifyPropertyChanged
     {

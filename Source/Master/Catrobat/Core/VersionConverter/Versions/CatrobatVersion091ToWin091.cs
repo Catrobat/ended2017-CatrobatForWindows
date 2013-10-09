@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Catrobat.Core.Misc;
+using Catrobat.Core.Utilities;
 
 namespace Catrobat.Core.VersionConverter.Versions
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows;
-using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Utilities.Storage;
 
 namespace Catrobat.IDEWindowsPhone.Utilities.Storage
 {

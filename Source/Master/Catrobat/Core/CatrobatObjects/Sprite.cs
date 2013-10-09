@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Xml.Linq;
-using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Core.CatrobatObjects.Costumes;
 using Catrobat.Core.CatrobatObjects.Scripts;
 using Catrobat.Core.CatrobatObjects.Sounds;

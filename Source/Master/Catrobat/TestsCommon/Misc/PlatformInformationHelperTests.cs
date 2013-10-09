@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Core.Services;
 
 namespace Catrobat.TestsCommon.Misc

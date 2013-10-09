@@ -4,8 +4,8 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using Catrobat.Core.Annotations;
-using Catrobat.Core.Misc;
-using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Utilities;
+using Catrobat.Core.Utilities.Helpers;
 
 namespace Catrobat.Core.CatrobatObjects
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Catrobat.Core.Misc.Storage
+namespace Catrobat.Core.Utilities.Storage
 {
     public enum StorageFileMode
     {

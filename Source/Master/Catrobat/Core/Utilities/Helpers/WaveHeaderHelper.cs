@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace Catrobat.Core.Misc.Helpers
+namespace Catrobat.Core.Utilities.Helpers
 {
     public class WaveHeaderHelper
     {

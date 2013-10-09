@@ -6,8 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Utilities.Helpers;
+using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.Services;
 
 namespace Catrobat.Core.CatrobatObjects
