@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using Catrobat.Core.Misc;
+using Catrobat.Core.Utilities;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;

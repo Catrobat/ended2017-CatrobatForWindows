@@ -1,5 +1,5 @@
 ﻿using System;
-using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Bricks;
 using Catrobat.TestsCommon.Misc;

@@ -1,6 +1,6 @@
 ﻿using Catrobat.Core.Services;
 
-namespace Catrobat.Core.Misc.Storage
+namespace Catrobat.Core.Utilities.Storage
 {
     public class StorageSystem
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using Catrobat.Core.Misc;
-using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Misc.JSON;
+using Catrobat.Core.Utilities;
+using Catrobat.Core.Utilities.Helpers;
+using Catrobat.Core.Utilities.JSON;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Resources;
 using Catrobat.Core.VersionConverter;

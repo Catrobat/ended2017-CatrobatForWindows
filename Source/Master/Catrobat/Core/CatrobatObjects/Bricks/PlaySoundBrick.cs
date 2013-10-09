@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
-using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Core.CatrobatObjects.Sounds;
 
 namespace Catrobat.Core.CatrobatObjects.Bricks

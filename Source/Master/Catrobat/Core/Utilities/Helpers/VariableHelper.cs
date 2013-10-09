@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Variables;
 
-namespace Catrobat.Core.Misc.Helpers
+namespace Catrobat.Core.Utilities.Helpers
 {
     public class VariableHelper
     {

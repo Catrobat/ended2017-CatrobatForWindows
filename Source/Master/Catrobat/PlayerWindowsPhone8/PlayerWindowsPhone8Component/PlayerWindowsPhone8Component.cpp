@@ -145,6 +145,7 @@ namespace PhoneDirect3DXamlAppComponent
 #ifdef _DEBUG
 		
         ProjectDaemon::Instance()->OpenProject("stoeckchen");
+        //ProjectDaemon::Instance()->OpenProject(ProjectName);
 #else
         ProjectDaemon::Instance()->OpenProject(ProjectName);
 #endif

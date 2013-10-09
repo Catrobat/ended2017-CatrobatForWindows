@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
-using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Utilities.Helpers;
 
 namespace Catrobat.Core.CatrobatObjects.Bricks
 {
@@ -31,10 +31,10 @@ namespace Catrobat.Core.CatrobatObjects.Bricks
                 if (_loopEndBrickReference == null)
                 {
                     _loopEndBrickReference = new LoopEndBrickReference();
-                    if (value is RepeatLoopEndBrick)
-                        _loopEndBrickReference.Class = "loopEndBrick";
-                    else if (value is ForeverLoopEndBrick)
-                        _loopEndBrickReference.Class = "loopEndlessBrick";
+                    //if (value is RepeatLoopEndBrick)
+                    //    _loopEndBrickReference.Class = "loopEndBrick";
+                    //else if (value is ForeverLoopEndBrick)
+                    //    _loopEndBrickReference.Class = "loopEndlessBrick";
                 }
 
                 if (_loopEndBrickReference == null)

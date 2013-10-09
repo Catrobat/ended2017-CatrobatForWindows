@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml.Linq;
 using Catrobat.Core;
-using Catrobat.Core.Misc;
+using Catrobat.Core.Utilities;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.VersionConverter;
 using Catrobat.TestsCommon.Misc;

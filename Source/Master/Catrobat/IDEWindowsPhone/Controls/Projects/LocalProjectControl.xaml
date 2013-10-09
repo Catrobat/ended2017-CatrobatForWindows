@@ -8,14 +8,14 @@
   xmlns:mvvmLightExtras="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
   xmlns:converters="clr-namespace:Catrobat.IDEWindowsPhone.Converters"
   xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-  xmlns:objects="clr-namespace:Catrobat.Core.Objects;assembly=Catrobat.Core"
+  xmlns:catrobatObjects="clr-namespace:Catrobat.Core.CatrobatObjects;assembly=Catrobat.Core"
   mc:Ignorable="d"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
   d:DesignHeight="200" d:DesignWidth="200">
 
-  <Grid x:Name="LayoutRoot" d:DataContext="{d:DesignInstance objects:ProjectDummyHeader}">
+  <Grid x:Name="LayoutRoot" d:DataContext="{d:DesignInstance catrobatObjects:ProjectDummyHeader}">
     <Border BorderThickness="4" BorderBrush="White">
       <i:Interaction.Triggers>
         <i:EventTrigger EventName="Tap">

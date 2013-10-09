@@ -12,7 +12,7 @@ using Catrobat.Core.CatrobatObjects.Sounds;
 using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.Core.Services.Common;
 
-namespace Catrobat.Core.Misc.Helpers
+namespace Catrobat.Core.Utilities.Helpers
 {
     public class ReferenceHelper
     {

@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
-using Catrobat.Core.Misc;
-using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Utilities;
+using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.VersionConverter.Versions;
 
@@ -23,9 +23,7 @@ namespace Catrobat.Core.VersionConverter
             {
                 return new Dictionary<CatrobatVersionPair, CatrobatVersion>(new CatrobatVersionPair.EqualityComparer())
                 {
-                    {new CatrobatVersionPair("0.8", "Win0.80"), new CatrobatVersion08ToWin080()},
-                    {new CatrobatVersionPair("0.91", "0.9"), new CatrobatVersion091To09()},
-                    {new CatrobatVersionPair("0.9", "0.8"), new CatrobatVersion09To08()},
+                    {new CatrobatVersionPair("0.91", "Win0.91"), new CatrobatVersion091ToWin091()}
                 };
             }
         }
@@ -37,64 +35,21 @@ namespace Catrobat.Core.VersionConverter
                 return new Dictionary<CatrobatVersionPair, List<CatrobatVersionPair>>(new CatrobatVersionPair.EqualityComparer())
                 {
                     {
-                        new CatrobatVersionPair("0.8", "Win0.80"),
+                        new CatrobatVersionPair("0.91", "Win0.91"),
 
                         new List<CatrobatVersionPair>
                         {
-                            new CatrobatVersionPair("0.8", "Win0.80",false)
+                            new CatrobatVersionPair("0.91", "Win0.91",false)
                         }
                     },
                     {
-                       new CatrobatVersionPair("Win0.80", "0.8"),
+                       new CatrobatVersionPair("Win0.91", "0.91"),
 
                         new List<CatrobatVersionPair>
                         {
-                            new CatrobatVersionPair("Win0.80", "0.8",true)
+                            new CatrobatVersionPair("Win0.91", "0.91",true)
                         }
                     },
-
-
-                    {
-                        new CatrobatVersionPair("0.9", "Win0.80"),
-
-                        new List<CatrobatVersionPair>
-                        {
-                            new CatrobatVersionPair("0.9", "0.8",false),
-                            new CatrobatVersionPair("0.8", "Win0.80",false)
-                        }
-                    },
-                    {
-                       new CatrobatVersionPair("Win0.80", "0.9"),
-
-                        new List<CatrobatVersionPair>
-                        {
-                            new CatrobatVersionPair("Win0.80", "0.8",true),
-                            new CatrobatVersionPair("0.8", "0.9",true),
-                        }
-                    },
-
-
-                  {
-                        new CatrobatVersionPair("0.91", "Win0.80"),
-
-                        new List<CatrobatVersionPair>
-                        {
-                            new CatrobatVersionPair("0.91", "0.9",false),
-                            new CatrobatVersionPair("0.9", "0.8",false),
-                            new CatrobatVersionPair("0.8", "Win0.80",false)
-                        }
-                    },
-                    {
-                       new CatrobatVersionPair("Win0.80", "0.91"),
-
-                        new List<CatrobatVersionPair>
-                        {
-                            new CatrobatVersionPair("Win0.80", "0.8",true),
-                            new CatrobatVersionPair("0.8", "0.9",true),
-                            new CatrobatVersionPair("0.9", "0.91",true),
-                        }
-                    },
-                    
                 };
             }
         }
@@ -226,12 +181,6 @@ namespace Catrobat.Core.VersionConverter
         public static string ConvertToXmlVersionByProjectName(string projectName, string targetVersion, out VersionConverterError error, bool overwriteProject = false)
         {
             var projectCodePath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.ProjectCodePath);
-            //string projectCode = null;
-
-            //using (var storage = StorageSystem.GetStorage())
-            //{
-            //    projectCode = storage.ReadTextFile(projectCodePath);
-            //}
 
             var xml = ConvertToXmlVersion(projectCodePath, targetVersion, out error, overwriteProject);
             return xml;

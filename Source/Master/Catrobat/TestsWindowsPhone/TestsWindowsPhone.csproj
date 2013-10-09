@@ -126,6 +126,7 @@
     <Content Include="SampleData\SampleProjects\default.catroid" />
     <Content Include="SampleData\SampleProjects\test.catroid" />
     <Content Include="SampleData\SampleProjects\UltimateTest.catroid" />
+    <None Include="SampleData\SampleProjects\stoeckchen.catrobat" />
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="MSTestFramework, Version=11.0" />
@@ -168,6 +169,9 @@
       <Project>{CDDB2C02-9584-45C6-9A7D-2B04B322C232}</Project>
       <Name>IDEWindowsPhone</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

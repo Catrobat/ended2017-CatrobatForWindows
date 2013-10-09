@@ -9,7 +9,6 @@
   xmlns:controls="clr-namespace:Catrobat.IDEWindowsPhone.Controls.ListPicker"
   xmlns:costumes="clr-namespace:Catrobat.Core.CatrobatObjects.Costumes;assembly=Catrobat.Core"
   xmlns:sounds="clr-namespace:Catrobat.Core.CatrobatObjects.Sounds;assembly=Catrobat.Core"
-  xmlns:objects="clr-namespace:Catrobat.Core.Objects;assembly=Catrobat.Core"
   xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:bricks="clr-namespace:Catrobat.Core.CatrobatObjects.Bricks;assembly=Catrobat.Core"

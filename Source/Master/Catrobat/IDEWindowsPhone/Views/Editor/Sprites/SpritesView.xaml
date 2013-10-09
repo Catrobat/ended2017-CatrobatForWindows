@@ -111,7 +111,6 @@
         
 
       <appBar:EditorAppBar Grid.Row="2"
-      Visibility="{Binding IsVisibleObjects, Converter={StaticResource BoolVisibilityConverter}}" 
       VerticalAlignment="Bottom"
       TargetType="Object"
       ClearSelectionCommand="{Binding ClearObjectsSelectionCommand}"

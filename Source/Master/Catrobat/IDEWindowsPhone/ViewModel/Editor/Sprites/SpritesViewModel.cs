@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
-using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.Core.Services;

@@ -5,8 +5,10 @@ using System.Windows;
 using Windows.Phone.Storage.SharedAccess;
 using Windows.Storage;
 using Catrobat.Core;
+using Catrobat.Core.CatrobatObjects.Bricks;
 using Catrobat.Core.ExtensionMethods;
-using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Services;
+using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services.Common;
 using Catrobat.Core.VersionConverter;
@@ -17,12 +19,7 @@ namespace Catrobat.IDEWindowsPhone.Utilities
 {
     public class ProjectImporter
     {
-        private ProjectDummyHeader _tempProjectHeader;
-        private Project _project;
-
-        public CatrobatContextBase CatrobatContext { get; set; } 
-
-        public async Task<ProjectDummyHeader> ImportProjects(String fileToken)
+        public async Task<ProjectDummyHeader> ImportProject(String fileToken)
         {
             try
             {
@@ -38,105 +35,41 @@ namespace Catrobat.IDEWindowsPhone.Utilities
                 var tempZipSplitList = CatrobatContextBase.TempProjectImportZipPath.Split('/');
 
                 var localFolder = ApplicationData.Current.LocalFolder;
-                var tempFolder = await localFolder.CreateFolderAsync(tempSplitList[0], CreationCollisionOption.OpenIfExists);
-                var projectTempFolder = await tempFolder.CreateFolderAsync(tempSplitList[1], CreationCollisionOption.OpenIfExists);
-                var projectTempZipFolder = await tempFolder.CreateFolderAsync(tempZipSplitList[1], CreationCollisionOption.OpenIfExists);
+                var tempFolder =
+                    await localFolder.CreateFolderAsync(tempSplitList[0], CreationCollisionOption.OpenIfExists);
+                var projectTempZipFolder =
+                    await tempFolder.CreateFolderAsync(tempZipSplitList[1], CreationCollisionOption.OpenIfExists);
 
-                await SharedStorageAccessManager.CopySharedFileAsync(projectTempZipFolder, tempProjectZipName, NameCollisionOption.ReplaceExisting, fileToken);
+                await SharedStorageAccessManager.CopySharedFileAsync(projectTempZipFolder, tempProjectZipName,
+                        NameCollisionOption.ReplaceExisting, fileToken);
 
                 var projectZipFile = await projectTempZipFolder.GetFileAsync(tempProjectZipName);
                 var projectZipStream = await projectZipFile.OpenStreamForReadAsync();
 
-                CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream, CatrobatContextBase.TempProjectImportPath);
+                var newProjectDummyHeader = await ServiceLocator.ProjectImporterService.ImportProjects(projectZipStream);
 
-                object projectScreenshot = null;
-                string projectCode = "";
+                projectZipStream.Close();
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    projectScreenshot = storage.LoadImage(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ScreenshotPath)) ??
-                                        storage.LoadImage(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.AutomaticScreenshotPath));
-                }
+                    if (storage.DirectoryExists(CatrobatContextBase.TempProjectImportPath))
+                        storage.DeleteDirectory(CatrobatContextBase.TempProjectImportPath);
 
-                CatrobatVersionConverter.VersionConverterError error;
-                var projectCodePath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
-                projectCode = CatrobatVersionConverter.ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion, out error);
-                //TODO: error handling
-
-                _project = new Project(projectCode);
-
-                _tempProjectHeader = new ProjectDummyHeader
-                {
-                    Screenshot = projectScreenshot,
-                    ProjectName = _project.ProjectHeader.ProgramName
-                };
-            }
-            catch (Exception)
-            {
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
-                    {
+                    if (storage.DirectoryExists(CatrobatContextBase.TempProjectImportZipPath))
                         storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
-                    }
                 }
 
-                _tempProjectHeader = null;
+                return newProjectDummyHeader;
             }
-            finally
+            catch
             {
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
-                    {
-                        storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
-                    }
-                }
+                return null;
             }
-
-            return _tempProjectHeader;
         }
 
-        public void AcceptTempProject(bool setActive)
+        public async void AcceptTempProject(bool setActive)
         {
-            var newProjectName = "";
-
-            using (var storage = StorageSystem.GetStorage())
-            {
-                var counter = 0;
-                while (true)
-                {
-                    var projectPath = Path.Combine(CatrobatContextBase.ProjectsPath, _tempProjectHeader.ProjectName);
-
-                    if (counter != 0)
-                    {
-                        projectPath = Path.Combine(CatrobatContextBase.ProjectsPath, StringExtensions.Concat(_tempProjectHeader.ProjectName, counter.ToString()));
-                    }
-
-                    if (!storage.DirectoryExists(projectPath))
-                    {
-                        break;
-                    }
-
-                    counter++;
-                }
-
-                newProjectName = _tempProjectHeader.ProjectName;
-
-                if (counter != 0)
-                {
-                    newProjectName = _tempProjectHeader.ProjectName + counter;
-                    _project.SetProgramName(newProjectName);
-                    var saveToPath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
-                    _project.Save(saveToPath);
-                }
-            }
-
-            using (var storage = StorageSystem.GetStorage())
-            {
-                var tempPath = Path.Combine(CatrobatContextBase.ProjectsPath, _project.ProjectHeader.ProgramName);
-                storage.MoveDirectory(CatrobatContextBase.TempProjectImportPath, tempPath);
-            }
+            var newProjectName = await ServiceLocator.ProjectImporterService.AcceptTempProject();
 
             Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
@@ -155,16 +88,9 @@ namespace Catrobat.IDEWindowsPhone.Utilities
                 });
         }
 
-        public void CancelImport(bool setActive)
+        public void CancelImport()
         {
-            _tempProjectHeader = null;
-            _project = null;
-
-            using (var storage = StorageSystem.GetStorage())
-            {
-                storage.DeleteDirectory(CatrobatContextBase.TempProjectImportPath);
-                storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
-            }
+            ServiceLocator.ProjectImporterService.CancelImport();
         }
     }
 }

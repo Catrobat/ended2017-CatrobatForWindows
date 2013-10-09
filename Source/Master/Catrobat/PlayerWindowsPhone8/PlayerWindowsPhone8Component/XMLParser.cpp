@@ -65,6 +65,7 @@ bool XMLParser::LoadXML(string fileName)
     }
 
     string text;
+
     while(!inputFile.eof())
     {
         string line;
@@ -83,9 +84,9 @@ bool XMLParser::LoadXML(string fileName)
             inputFile.close();
             throw e;
         }
-        else if(dynamic_cast<XMLParserFatalException *>(e))
+        else if(dynamic_cast<XMLParserException *>(e))
         {
-            
+            auto bla = 0;
         }
     }
 
@@ -114,12 +115,14 @@ void XMLParser::ParseXML(string xml)
 Project* XMLParser::ParseProjectHeader(xml_document<> *doc)
 {
     xml_node<> *baseNode = doc->first_node(Constants::XMLParser::Header::Program.c_str());
+
     if (!baseNode)
     {
         throw new XMLParserFatalException (Constants::XMLParser::Header::Program + Constants::ErrorMessage::Missing);
     }
 
     baseNode = baseNode->first_node(Constants::XMLParser::Header::Header.c_str());
+
     if (!baseNode)
     {
         throw new XMLParserFatalException (Constants::XMLParser::Header::Header + Constants::ErrorMessage::Missing);
@@ -330,14 +333,18 @@ Project* XMLParser::ParseProjectHeader(xml_document<> *doc)
 void XMLParser::ParseObjectList(xml_document<> *doc, ObjectList *objectList)
 {
     xml_node<> *objectListNode = doc->first_node()->first_node(Constants::XMLParser::Object::ObjectList.c_str());
+
     if (!objectListNode)
+    {
         return;
+    }
+
     xml_node<> *node = objectListNode->first_node(Constants::XMLParser::Object::Object.c_str());
     while (node)
     {
         // TODO: Check if necessary
-
         xml_attribute<> *objectReference = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
+
         if (objectReference)
         {
             string reference = objectReference->value();
@@ -363,8 +370,11 @@ void XMLParser::ParseObjectList(xml_document<> *doc, ObjectList *objectList)
 Object *XMLParser::ParseObject(xml_node<> *baseNode)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Object::Name.c_str());
+
     if (!node)
+    {
         return NULL;
+    }
 
     Object *object = new Object(node->value());
 
@@ -432,13 +442,20 @@ Look *XMLParser::ParseLook(xml_node<> *baseNode)
     xml_node<> *node;
 
     node = baseNode->first_node(Constants::XMLParser::Look::FileName.c_str());
-    if (!node)
-        return NULL;
-    filename = node->value();
 
-    node = baseNode->first_node(Constants::XMLParser::Look::Name.c_str());
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<look><filename></look> element missing.");
+    }
+
+    filename = node->value();
+    node = baseNode->first_node(Constants::XMLParser::Look::Name.c_str());
+
+    if (!node)
+    {
+        throw new XMLParserException("<look><name></look> element missing.");
+    }
+
     name = node->value();
 
     Look *look = new Look(filename, name);
@@ -455,8 +472,11 @@ Script *XMLParser::ParseStartScript(xml_node<> *baseNode, Object *object)
 Script *XMLParser::ParseBroadcastScript(xml_node<> *baseNode, Object *object)
 {
     xml_node<> *messageNode = baseNode->first_node(Constants::XMLParser::Script::ReceivedMessage.c_str());
+
     if (!messageNode)
-        return NULL;
+    {
+        throw new XMLParserException("<broadcastScript><receivedMessage></broadcastScript> element missing.");
+    }
 
     BroadcastScript *script = new BroadcastScript(messageNode->value(), object);
     ParseBrickList(baseNode, script);
@@ -466,21 +486,29 @@ Script *XMLParser::ParseBroadcastScript(xml_node<> *baseNode, Object *object)
 Script *XMLParser::ParseWhenScript(xml_node<> *baseNode, Object *object)
 {
     xml_node<> *actionNode = baseNode->first_node(Constants::XMLParser::Object::Action.c_str());
+
     if (!actionNode)
-        return NULL;
+    {
+        throw new XMLParserException("<whenScript><action></whenScript> element missing.");
+    }
 
     WhenScript *script = new WhenScript(actionNode->value(), object);
     ParseBrickList(baseNode, script);
+
     return script;
 }
 
 void XMLParser::ParseBrickList(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *brickListNode = baseNode->first_node(Constants::XMLParser::Object::BrickList.c_str());
+
     if (!brickListNode)
-        return;
+    {
+        throw new XMLParserException("<brickList> element missing.");
+    }
 
     xml_node<> *node = brickListNode->first_node();
+
     while(node)
     {
         Brick *current = NULL;
@@ -631,18 +659,25 @@ void XMLParser::ParseBrickList(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseLookBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *lookNode =  baseNode->first_node(Constants::XMLParser::Object::Look.c_str());
+
     if (!lookNode)
+    {
         return new CostumeBrick(script);
+    }
 
     xml_attribute<> *lookRef = lookNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
+
     if (!lookRef)
-        return NULL;
+    {
+        throw new XMLParserException("<look><reference></look> element missing.");
+    }
 
     string ref = lookRef->value();
 
     int begin = ref.find("[");
     int end = ref.find("]");
     int index = 0;
+
     if (begin != string::npos && end != string::npos)
     {
         string index_str = ref.substr(begin + 1, end);
@@ -665,19 +700,12 @@ Brick *XMLParser::ParseShowBrick(xml_node<> *baseNode, Script *script)
 
 Brick *XMLParser::ParseIfLogicBeginBrick(xml_node<> *baseNode, Script *script)
 {
-    //xml_node<> *objectNode = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    //if (!objectNode)
-    //    return NULL;
-
-    //xml_attribute<> *objectRef = objectNode->first_attribute(Constants::XMLParser::Object::Reference.c_str());
-    //if (!objectRef)
-    //    return NULL;
-
-    //string objectReference = objectRef->value();
-
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::IfCondition.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<ifLogicBeginBrick><ifCondition></ifLogicBeginBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *condition = NULL;
@@ -717,13 +745,19 @@ void XMLParser::ParseForeverEndBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseRepeatBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::TimesToRepeat.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<repeatBrick><timesToRepeat></repeatBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *times = NULL;
+
     if (formulaTreeNode)
+    {
         times = ParseFormulaTree(formulaTreeNode);
+    }
 
     RepeatBrick *brick = new RepeatBrick(times, script);
 
@@ -763,17 +797,19 @@ void XMLParser::ParseIfLogicEndBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseWaitBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::TimeToWaitInSeconds.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<waitBrick><timeToWaitInSeconds></waitBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *time = NULL;
-    if (formulaTreeNode)
-        time = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
+    if (formulaTreeNode)
+    {
+        time = ParseFormulaTree(formulaTreeNode);
+    }
 
     return new WaitBrick(time, script);
 }
@@ -781,17 +817,19 @@ Brick *XMLParser::ParseWaitBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseChangeGhostEffectByNBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::ChangeGhostEffect.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<changeGhostEffectByNBrick><changeGhostEffect></changeGhostEffectByNBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *amount = NULL;
-    if (formulaTreeNode)
-        amount = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
+    if (formulaTreeNode)
+    {
+        amount = ParseFormulaTree(formulaTreeNode);
+    }
 
     return new ChangeGhostEffectByBrick(amount, script);
 }
@@ -799,13 +837,19 @@ Brick *XMLParser::ParseChangeGhostEffectByNBrick(xml_node<> *baseNode, Script *s
 Brick *XMLParser::ParseSetSizeToBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Size.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<setSizeToBrick><size></setSizeToBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *size = NULL;
+
     if (formulaTreeNode)
+    {
         size = ParseFormulaTree(formulaTreeNode);
+    }
 
     return new SetSizeToBrick(size, script);
 }
@@ -813,22 +857,31 @@ Brick *XMLParser::ParseSetSizeToBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseChangeSizeByNBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Size.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<changeSizeByNBrick><size></changeSizeByNBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *size = NULL;
+
     if (formulaTreeNode)
+    {
         size = ParseFormulaTree(formulaTreeNode);
+    }
 
     return new ChangeSizeByBrick(size, script);
 }
 
 Brick *XMLParser::ParseNextLookBrick(xml_node<> *baseNode, Script *script)
 {
-    xml_node<> *node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
+    //xml_node<> *node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
+
+    //if (!node)
+    //{
+    //    throw new XMLParserException("<nextLookBrick><object></nextLookBrick> element missing.");
+    //}
 
     return new NextLookBrick(script);
 }
@@ -836,17 +889,19 @@ Brick *XMLParser::ParseNextLookBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseSetXBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::XPosition.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<setXBrick><xPosition></setXBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *position = NULL;
-    if (formulaTreeNode)
-        position = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
+    if (formulaTreeNode)
+    {
+        position = ParseFormulaTree(formulaTreeNode);
+    }
 
     return new SetXBrick(position, script);
 }
@@ -854,17 +909,19 @@ Brick *XMLParser::ParseSetXBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseSetYBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::YPosition.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<setYBrick><yPosition></setYBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *position = NULL;
-    if (formulaTreeNode)
-        position = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
+    if (formulaTreeNode)
+    {
+        position = ParseFormulaTree(formulaTreeNode);
+    }
 
     return new SetYBrick(position, script);
 }
@@ -872,17 +929,19 @@ Brick *XMLParser::ParseSetYBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseChangeXByNBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::XMovement.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<changeXByNBrick><xMovement></changeXByNBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *movement = NULL;
-    if (formulaTreeNode)
-        movement = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
+    if (formulaTreeNode)
+    {
+        movement = ParseFormulaTree(formulaTreeNode);
+    }
 
     return new ChangeXByBrick(movement, script);
 }
@@ -890,17 +949,19 @@ Brick *XMLParser::ParseChangeXByNBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseChangeYByNBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::YMovement.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<changeYByNBrick><yMovement></changeYByNBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *movement = NULL;
-    if (formulaTreeNode)
-        movement = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
+    if (formulaTreeNode)
+    {
+        movement = ParseFormulaTree(formulaTreeNode);
+    }
 
     return new ChangeYByBrick(movement, script);
 }
@@ -908,17 +969,19 @@ Brick *XMLParser::ParseChangeYByNBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParsePointInDirectionBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Degrees.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<pointInDirectionBrick><degrees></pointInDirectionBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *degrees = NULL;
-    if (formulaTreeNode)
-        degrees = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
+    if (formulaTreeNode)
+    {
+        degrees = ParseFormulaTree(formulaTreeNode);
+    }
 
     return new PointToBrick(degrees, script);
 }
@@ -926,17 +989,19 @@ Brick *XMLParser::ParsePointInDirectionBrick(xml_node<> *baseNode, Script *scrip
 Brick *XMLParser::ParseTurnLeftBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Degrees.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<turnLeftBrick><degrees></turnLeftBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *degrees = NULL;
-    if (formulaTreeNode)
-        degrees = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
+    if (formulaTreeNode)
+    {
+        degrees = ParseFormulaTree(formulaTreeNode);
+    }
 
     return new TurnLeftBrick(degrees, script);
 }
@@ -944,17 +1009,19 @@ Brick *XMLParser::ParseTurnLeftBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseTurnRightBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Degrees.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<turnRightBrick><degrees></turnRightBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *degrees = NULL;
-    if (formulaTreeNode)
-        degrees = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
+    if (formulaTreeNode)
+    {
+        degrees = ParseFormulaTree(formulaTreeNode);
+    }
 
     return new TurnRightBrick(degrees, script);
 }
@@ -962,22 +1029,34 @@ Brick *XMLParser::ParseTurnRightBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParsePlaceAtBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::XPosition.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<placeAtBrick><xPosition></placeAtBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *postionX = NULL;
+
     if (formulaTreeNode)
+    {
         postionX = ParseFormulaTree(formulaTreeNode);
+    }
 
     node = baseNode->first_node(Constants::XMLParser::Brick::YPosition.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<placeAtBrick><yPosition></placeAtBrick> element missing.");
+    }
 
     formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *postionY = NULL;
+
     if (formulaTreeNode)
+    {
         postionY = ParseFormulaTree(formulaTreeNode);
+    }
 
     return new PlaceAtBrick(postionX, postionY, script);
 }
@@ -985,62 +1064,69 @@ Brick *XMLParser::ParsePlaceAtBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseGlideToBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::XDestination.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<glideToBrick><xDestination></glideToBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *destinationX = NULL;
+
     if (formulaTreeNode)
+    {
         destinationX = ParseFormulaTree(formulaTreeNode);
+    }
 
     node = baseNode->first_node(Constants::XMLParser::Brick::YDestination.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<glideToBrick><yDestination></glideToBrick> element missing.");
+    }
 
     formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *destinationY = NULL;
+
     if (formulaTreeNode)
+    {
         destinationY = ParseFormulaTree(formulaTreeNode);
+    }
 
-    node = baseNode->first_node(Constants::XMLParser::Brick::DurationInMilliSeconds.c_str());
+    node = baseNode->first_node(Constants::XMLParser::Brick::DurationInSeconds.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<glideToBrick><durationInSeconds></glideToBrick> element missing.");
+    }
 
     formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
-    FormulaTree *durationInMilliSeconds = NULL;
+    FormulaTree *durationInSeconds = NULL;
+
     if (formulaTreeNode)
-        durationInMilliSeconds = ParseFormulaTree(formulaTreeNode);
+    {
+        durationInSeconds = ParseFormulaTree(formulaTreeNode);
+    }
 
-    node = baseNode->first_node(Constants::XMLParser::Brick::DurationInMilliSeconds.c_str());
-    if (!node)
-        return NULL;
-
-    formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
-    FormulaTree *duration = NULL;
-    if (formulaTreeNode)
-        duration = ParseFormulaTree(formulaTreeNode);
-
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
-
-    return new GlideToBrick(destinationX, destinationY, duration, script);
+    return new GlideToBrick(destinationX, destinationY, durationInSeconds, script);
 }
 
 Brick *XMLParser::ParseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::Transparency.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<setGhostEffectBrick><transparency></setGhostEffectBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
     FormulaTree *transparency = NULL;
-    if (formulaTreeNode)
-        transparency = ParseFormulaTree(formulaTreeNode);
 
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
+    if (formulaTreeNode)
+    {
+        transparency = ParseFormulaTree(formulaTreeNode);
+    }
 
     return new SetGhostEffectBrick(transparency, script);
 }
@@ -1048,8 +1134,12 @@ Brick *XMLParser::ParseSetGhostEffectBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseBroadcastBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Brick::BroadcastMessage.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<broadcastBrick><broadcastMessage></broadcastBrick> element missing.");
+    }
+
     string broadcastMessage = node->value();
 
     return new BroadcastBrick(broadcastMessage, script);
@@ -1058,22 +1148,28 @@ Brick *XMLParser::ParseBroadcastBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParsePlaySoundBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *soundInfoNode = baseNode->first_node(Constants::XMLParser::Brick::Sound.c_str());
+
     if (!soundInfoNode)
-        return NULL;
+    {
+        throw new XMLParserException("<playSoundBrick><sound></playSoundBrick> element missing.");
+    }
 
     xml_node<> *node = soundInfoNode->first_node(Constants::XMLParser::Brick::FileName.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<playSoundBrick><sound><fileName></sound></playSoundBrick> element missing.");
+    }
+
     string filename = node->value();
-
     node = soundInfoNode->first_node(Constants::XMLParser::Brick::Name.c_str());
-    if (!node)
-        return NULL;
-    string name = node->value();
 
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<playSoundBrick><sound><name></sound></playSoundBrick> element missing.");
+    }
+
+    string name = node->value();
 
     return new PlaySoundBrick(filename, name, script);
 }
@@ -1081,45 +1177,57 @@ Brick *XMLParser::ParsePlaySoundBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseSetVariableBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<setVariableBrick><userVariable></setVariableBrick> element missing.");
+    }
 
     xml_node<> *variableNode = node->first_node(Constants::XMLParser::Formula::Name.c_str());
     string name;
+
     if (variableNode)
+    {
         name = variableNode->value();
+    }
     else
     {
         xml_attribute<> *referenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
+
         if (!referenceAttribute)
-            return NULL;
+        {
+            throw new XMLParserException("<setVariableBrick><userVariable><reference></userVariable></setVariableBrick> element missing.");
+        }
+
         string reference = referenceAttribute->value();
         reference = reference + "/";
         xml_node<> *referencedNode = EvaluateString("/", reference, node); 
         variableNode = referencedNode->first_node(Constants::XMLParser::Formula::Name.c_str());
+
         if (!variableNode)
-            return NULL;
+        {
+            string message = "Unable to find the corresponding variable with the path " + reference;
+            throw new XMLParserException(message);
+        }
+
         name = variableNode->value();
     }
 
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
-
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
-    if (!objectReferenceAttribute)
-        return NULL;
-
     FormulaTree *variableFormula = NULL;
     node = baseNode->first_node(Constants::XMLParser::Formula::VariableFormula.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<setVariableBrick><variableFormula></setVariableBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
-    if (formulaTreeNode)
-        variableFormula = ParseFormulaTree(formulaTreeNode);
 
-    string objectReference = objectReferenceAttribute->value();
+    if (formulaTreeNode) //TODO: check if variable formulais neccessary
+    {
+        variableFormula = ParseFormulaTree(formulaTreeNode);
+    }
+
     VariableManagementBrick *newBrick = new SetVariableBrick(variableFormula, script);
     m_pendingVariables->insert(pair<VariableManagementBrick*, string>(newBrick, name));
     return newBrick;
@@ -1128,38 +1236,56 @@ Brick *XMLParser::ParseSetVariableBrick(xml_node<> *baseNode, Script *script)
 Brick *XMLParser::ParseChangeVariableBrick(xml_node<> *baseNode, Script *script)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Formula::UserVariable.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<changeVariableBrick><userVariable></changeVariableBrick> element missing.");
+    }
 
     xml_attribute<> *referenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
+
     if (!referenceAttribute)
-        return NULL;
+    {
+        throw new XMLParserException("<changeVariableBrick><userVariable><reference></userVariable></changeVariableBrick> element missing.");
+    }
+
     string reference = referenceAttribute->value();
     reference = reference + "/";
     xml_node<> *referencedNode = EvaluateString("/", reference, node); 
+
+    if(!referencedNode)
+    {
+        string message = "Unable to find the corresponding userVariable with the path " + reference;
+        throw new XMLParserException(message);
+    }
+
     xml_node<> *variableNode = referencedNode->first_node(Constants::XMLParser::Formula::Name.c_str());
+
     if (!variableNode)
-        return NULL;
+    {
+        throw new XMLParserException("<userVariable><name></userVariable> element missing.");
+    }
+
     string name = variableNode->value();
-
-    node = baseNode->first_node(Constants::XMLParser::Object::Object.c_str());
-    if (!node)
-        return NULL;
-
-    xml_attribute<> *objectReferenceAttribute = node->first_attribute(Constants::XMLParser::Object::Reference.c_str());
-    if (!objectReferenceAttribute)
-        return NULL;
 
     FormulaTree *variableFormula = NULL;
     node = baseNode->first_node(Constants::XMLParser::Formula::VariableFormula.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<changeVariableBrick><variableFormula></changeVariableBrick> element missing.");
+    }
 
     xml_node<> *formulaTreeNode = node->first_node(Constants::XMLParser::Formula::FormulaTree.c_str());
-    if (formulaTreeNode)
-        variableFormula = ParseFormulaTree(formulaTreeNode);
 
-    string objectReference = objectReferenceAttribute->value();
+    if (!formulaTreeNode)
+    {
+        throw new XMLParserException("<changeVariableBrick><variableFormula><formulaTree></variableFormula></changeVariableBrick> element missing.");
+
+    }
+
+    variableFormula = ParseFormulaTree(formulaTreeNode);
+
     VariableManagementBrick *newBrick = new ChangeVariableBrick(variableFormula, script);
     m_pendingVariables->insert(pair<VariableManagementBrick*, string>(newBrick, name));
     return newBrick;
@@ -1168,24 +1294,43 @@ Brick *XMLParser::ParseChangeVariableBrick(xml_node<> *baseNode, Script *script)
 FormulaTree *XMLParser::ParseFormulaTree(xml_node<> *baseNode)
 {
     xml_node<> *node = baseNode->first_node(Constants::XMLParser::Formula::Type.c_str());
+
     if (!node)
-        return NULL;
+    {
+        throw new XMLParserException("<formulaTree><type></formulaTree> element missing.");
+    }
+
     string type = node->value();
 
     node = baseNode->first_node(Constants::XMLParser::Formula::Value.c_str());
     string value = "";
-    if (node)
-        value = node->value();
+
+    if (!node)
+    {
+        throw new XMLParserException("<formulaTree><value></formulaTree> element missing.");
+    }
+
+    value = node->value();
 
     FormulaTree *formulaTree = new FormulaTree(type, value);
 
     node = baseNode->first_node(Constants::XMLParser::Formula::LeftChild.c_str());
+
+    //throw new XMLParserException("<formulaTree><leftChild></formulaTree> element missing.");
     if (node)
-        formulaTree->SetLeftChild(ParseFormulaTree(node));
+    {
+        formulaTree->SetLeftChild(ParseFormulaTree(node)); 
+    }
+
 
     node = baseNode->first_node(Constants::XMLParser::Formula::RightChild.c_str());
+
+    //throw new XMLParserException("<formulaTree><rightChild></formulaTree> element missing.");
+
     if (node)
+    {
         formulaTree->SetRightChild(ParseFormulaTree(node));
+    }
 
     return formulaTree;
 }
@@ -1193,9 +1338,13 @@ FormulaTree *XMLParser::ParseFormulaTree(xml_node<> *baseNode)
 bool XMLParser::ParseBoolean(string input)
 {
     if (input.compare(Constants::XMLParser::Formula::True) == 0)
+    {
         return true;
+    }
     else
+    {
         return false;
+    }
 }
 
 vector<string> *XMLParser::ParseVector(string input)
@@ -1212,6 +1361,7 @@ time_t XMLParser::ParseDateTime(string input)
 
 void XMLParser::ParseVariableList(xml_document<> *doc, Project *project)
 {
+    //TODO: error handling
     try
     {
         xml_node<> *baseNode = doc->first_node()->first_node(Constants::XMLParser::Formula::Variables.c_str());
@@ -1342,7 +1492,9 @@ xml_node<> *XMLParser::EvaluateString(string query, string input, xml_node<> *no
     {
         string result = input.substr(0, characterPos);
         if (result == "..")
+        {
             node = node->parent();
+        }
         else
         {
             int value = EvaluateIndex(&result);
@@ -1356,6 +1508,7 @@ xml_node<> *XMLParser::EvaluateString(string query, string input, xml_node<> *no
         input.erase(0, characterPos + 1);
         characterPos = input.find(query);
     }
+
     return node;
 }
 
@@ -1364,14 +1517,19 @@ int XMLParser::EvaluateIndex(string *input)
     int result = 0;
     size_t bracketPosBegin = input->find("[");
     size_t bracketPosEnd = input->find("[");
+
     if (bracketPosBegin != string::npos && bracketPosEnd != string::npos)
     {
         string index = input->substr(bracketPosBegin + 1, bracketPosEnd - 1);
         input->erase(bracketPosBegin, bracketPosEnd);
         result = atoi(index.c_str());
+
         if (result > 0)
+        {
             result--;
+        }
     }
+
     return result;
 }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Catrobat.Core.Misc
+namespace Catrobat.Core.Utilities
 {
     public static class UtilTokenHelper
     {

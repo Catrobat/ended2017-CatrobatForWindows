@@ -20,7 +20,7 @@ namespace Catrobat.Core
 
         // Vatrobat XML Version
 
-        public const string TargetIDEVersion = "Win0.80";
+        public const string TargetIDEVersion = "Win0.91";
 
         public const string TargetOutputVersion = "0.91";
 

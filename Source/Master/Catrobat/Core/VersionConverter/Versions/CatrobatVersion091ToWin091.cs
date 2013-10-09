@@ -5,17 +5,17 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Catrobat.Core.Misc;
+using Catrobat.Core.Utilities;
 
 namespace Catrobat.Core.VersionConverter.Versions
 {
-    public class CatrobatVersion08ToWin080 : CatrobatVersion
+    public class CatrobatVersion091ToWin091 : CatrobatVersion
     {
         public override CatrobatVersionPair CatrobatVersionPair
         {
             get
             {
-                return new CatrobatVersionPair("0.8", "Win0.8");
+                return new CatrobatVersionPair("0.91", "Win0.91");
             }
         }
 
@@ -59,7 +59,7 @@ namespace Catrobat.Core.VersionConverter.Versions
             ResolveReferencesToReferences(document);
             UnifyForeverBrickReferences(document);
             UnifyRepeatBrickReferences(document);
-            //UnifyIfLogicBeginBrickReferences(document);
+            UnifyIfLogicBeginBrickReferences(document);
 
             ConvertRemoveElements(document);
             ConvertRemoveProperties(document);
@@ -79,13 +79,27 @@ namespace Catrobat.Core.VersionConverter.Versions
 
         private void UnifyIfLogicBeginBrickReferences(XDocument document)
         {
-            var elseBricks = document.Descendants("brickList").Descendants("ifLogicElseBrick").ToList();
-            SwapCrossReferences(document, elseBricks);
-            RemoveSelfReferences(document);
+            var ifBricks = document.Descendants("brickList").Descendants("ifBeginBrick").ToList();
+            foreach(var ifBrick in ifBricks)
+                ifBrick.Remove();
 
-            var endBricks = document.Descendants("brickList").Descendants("ifLogicEndBrick").ToList();
-            SwapCrossReferences(document, endBricks);
-            RemoveSelfReferences(document);
+            var elseBricks = document.Descendants("brickList").Descendants("ifElseBrick").ToList();
+            foreach (var elseBrick in elseBricks)
+                elseBrick.Remove();
+
+            var endBricks = document.Descendants("brickList").Descendants("ifEndBrick").ToList();
+            foreach (var endBrick in endBricks)
+                endBrick.Remove();
+
+            // TODO: remove code above and replace with working code for if handling
+
+            //var elseBricks = document.Descendants("brickList").Descendants("ifLogicElseBrick").ToList();
+            //SwapCrossReferences(document, elseBricks);
+            //RemoveSelfReferences(document);
+
+            //var endBricks = document.Descendants("brickList").Descendants("ifLogicEndBrick").ToList();
+            //SwapCrossReferences(document, endBricks);
+            //RemoveSelfReferences(document);
         }
 
         protected void SwapReferencesInList(XDocument document, List<XElement> listNodes)

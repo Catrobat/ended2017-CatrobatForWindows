@@ -2,8 +2,8 @@
 using System.Globalization;
 using System.Windows;
 using Catrobat.Core;
-using Catrobat.Core.Misc.Helpers;
-using Catrobat.Core.Misc.Storage;
+using Catrobat.Core.Utilities.Helpers;
+using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Services.Common;
@@ -93,7 +93,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 new PlayerLauncherServicePhone(),
                 new ResourceLoaderFactoryPhone(),
                 new StorageFactoryPhone(),
-                new ServerCommunicationServicePhone()
+                new ServerCommunicationServicePhone(),
+                new ImageSourceConversionServicePhone(),
+                new ProjectImporterService()
                 );
         }
 

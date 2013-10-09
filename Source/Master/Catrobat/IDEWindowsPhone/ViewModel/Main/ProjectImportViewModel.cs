@@ -234,7 +234,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             if (navigationContext.QueryString.TryGetValue("fileToken", out fileToken))
             {
                 _importer = new ProjectImporter();
-                var projectHeader = await _importer.ImportProjects(fileToken);
+                var projectHeader = await _importer.ImportProject(fileToken);
 
                 if (projectHeader != null)
                 {

@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
 
-namespace Catrobat.Core.Misc.JSON
+namespace Catrobat.Core.Utilities.JSON
 {
     public static class JSONClassDeserializer
     {

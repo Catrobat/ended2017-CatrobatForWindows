@@ -29,10 +29,10 @@
         <startScript>
           <brickList>
             <pointToBrick>
-              <pointedObject reference="../../../../../../object[2]" />
+              <object reference="../../../../../../object[2]" />
             </pointToBrick>
             <pointToBrick>
-              <pointedObject reference="../../../../../../object[2]"/>
+              <object reference="../../../../../../object[2]"/>
             </pointToBrick>
           </brickList>
         </startScript>

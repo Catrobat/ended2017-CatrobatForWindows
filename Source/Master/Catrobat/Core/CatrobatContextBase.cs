@@ -3,8 +3,8 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Catrobat.Core.Annotations;
-using Catrobat.Core.Misc;
-using Catrobat.Core.Misc.Helpers;
+using Catrobat.Core.Utilities;
+using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Core.CatrobatObjects;
 
 namespace Catrobat.Core

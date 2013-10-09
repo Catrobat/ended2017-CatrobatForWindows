@@ -1,4 +1,4 @@
-﻿using Catrobat.Core.Misc.Helpers;
+﻿using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.IDECommon.Formula.Editor;
