@@ -14,7 +14,7 @@ using Catrobat.Core.Services.Common;
 
 namespace Catrobat.Core.Utilities.Helpers
 {
-    public class ReferenceHelper
+    public static class ReferenceHelper
     {
         public static string GetReferenceString(DataObject referenceObject)
         {

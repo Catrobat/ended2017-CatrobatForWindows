@@ -2,7 +2,6 @@
 using Catrobat.Core.CatrobatObjects.Bricks;
 using Catrobat.Core.CatrobatObjects.Scripts;
 using Catrobat.Core.Services;
-using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;

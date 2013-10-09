@@ -3,8 +3,8 @@ using System.Windows;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
-using PhoneDirect3DXamlAppComponent;
 using Size = Windows.Foundation.Size;
+using PhoneDirect3DXamlAppComponent;
 
 namespace Catrobat.IDEWindowsPhone.Views.Main
 {

@@ -1,6 +1,5 @@
 ﻿using System;
 using Catrobat.Core.Utilities.Storage;
-using Catrobat.IDEWindowsPhone.Misc.Storage;
 using Catrobat.IDEWindowsPhone.Utilities.Helpers;
 
 namespace Catrobat.IDEWindowsPhone.Utilities.Storage

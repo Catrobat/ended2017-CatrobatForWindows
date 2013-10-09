@@ -1,23 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Net;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 using Catrobat.Core.CatrobatObjects.Formulas;
-using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.IDEWindowsPhone.Annotations;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
-using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Reactive;
-using Microsoft.Phone.Shell;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 {

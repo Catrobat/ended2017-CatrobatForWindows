@@ -2,16 +2,11 @@
 using System.Globalization;
 using System.Windows;
 using Catrobat.Core;
-using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Services.Common;
-using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.Misc.Storage;
 using Catrobat.IDEWindowsPhone.Services;
 using Catrobat.IDEWindowsPhone.Themes;
-using Catrobat.IDEWindowsPhone.Utilities;
 using Catrobat.IDEWindowsPhone.Utilities.Storage;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;

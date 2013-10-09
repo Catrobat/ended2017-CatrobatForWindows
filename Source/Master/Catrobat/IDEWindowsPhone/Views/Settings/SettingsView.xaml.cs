@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows;
-using Microsoft.Phone.Controls;
-using System.Diagnostics;
+﻿using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDEWindowsPhone.Views.Settings
 {

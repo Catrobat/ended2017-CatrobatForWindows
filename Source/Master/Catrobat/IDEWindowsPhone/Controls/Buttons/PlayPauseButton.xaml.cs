@@ -1,8 +1,6 @@
-﻿using System.Collections.Specialized;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using Catrobat.IDEWindowsPhone.Annotations;
 

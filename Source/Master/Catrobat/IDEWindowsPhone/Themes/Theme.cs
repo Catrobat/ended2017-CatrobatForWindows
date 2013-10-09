@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Utilities.Helpers;
 
 namespace Catrobat.IDEWindowsPhone.Themes

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
@@ -10,8 +9,6 @@ using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.Utilities;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;

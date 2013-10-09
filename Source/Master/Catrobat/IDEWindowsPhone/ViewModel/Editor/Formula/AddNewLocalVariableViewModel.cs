@@ -3,7 +3,6 @@ using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;

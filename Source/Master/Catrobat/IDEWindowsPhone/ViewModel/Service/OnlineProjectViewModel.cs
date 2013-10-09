@@ -1,17 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using Catrobat.Core;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;
 using Catrobat.Core.VersionConverter;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Misc;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

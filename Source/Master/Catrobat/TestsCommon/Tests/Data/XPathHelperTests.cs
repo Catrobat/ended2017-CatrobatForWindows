@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
+using Catrobat.Core.Utilities.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.SampleData;
@@ -31,7 +32,7 @@ namespace Catrobat.TestsCommon.Tests.Data
                                 select a).Single();
 
 
-            var foundElement = Catrobat.Core.Utilities.XPathHelper.GetElement(start1, path1);
+            var foundElement = XPathHelper.GetElement(start1, path1);
             Assert.AreEqual(destination1, foundElement);
         }
 
@@ -51,7 +52,7 @@ namespace Catrobat.TestsCommon.Tests.Data
                                 select a).Single();
 
 
-            var foundPath = Catrobat.Core.Utilities.XPathHelper.GetXPath(start1, destination1);
+            var foundPath = XPathHelper.GetXPath(start1, destination1);
             Assert.AreEqual(path1, foundPath);
         }
 
@@ -60,7 +61,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             const string path1 = "../../../element1[1]/element11[2]";
             const string path2 = "../../../element1[1]/element11[2]";
 
-            Assert.IsTrue(Catrobat.Core.Utilities.XPathHelper.XPathEquals(path1, path2));
+            Assert.IsTrue(XPathHelper.XPathEquals(path1, path2));
         }
 
         public void XPathEqualsTest2()
@@ -68,7 +69,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             const string path1 = "../../../element2[1]/element11[2]";
             const string path2 = "../../../element1[1]/element11[2]";
 
-            Assert.IsFalse(Catrobat.Core.Utilities.XPathHelper.XPathEquals(path1, path2));
+            Assert.IsFalse(XPathHelper.XPathEquals(path1, path2));
         }
     }
 }

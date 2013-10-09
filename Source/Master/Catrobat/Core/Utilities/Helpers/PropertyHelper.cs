@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Catrobat.Core.Utilities.Helpers
 {
-    public class PropertyHelper
+    public static class PropertyHelper
     {
         public static string GetPropertyName<T>(Expression<Func<T>> property)
         {

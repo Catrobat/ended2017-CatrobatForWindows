@@ -9,7 +9,6 @@ using Catrobat.Core.Utilities.JSON;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

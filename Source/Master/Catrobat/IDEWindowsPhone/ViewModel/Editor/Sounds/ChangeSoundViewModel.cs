@@ -1,6 +1,5 @@
 ﻿using Catrobat.Core.CatrobatObjects.Sounds;
 using Catrobat.Core.Services;
-using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Globalization;
 
-namespace Catrobat.Core.Services.Common
+namespace Catrobat.Core.Utilities.Helpers
 {
     public static class LanguageHelper
     {

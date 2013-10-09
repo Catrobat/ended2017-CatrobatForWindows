@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Catrobat.Core.Utilities
+namespace Catrobat.Core.Utilities.Helpers
 {
     public static class XPathHelper
     {

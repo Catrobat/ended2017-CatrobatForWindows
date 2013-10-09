@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Bricks;

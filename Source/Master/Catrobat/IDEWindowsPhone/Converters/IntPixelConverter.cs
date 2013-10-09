@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
-using Catrobat.IDEWindowsPhone.Themes;
-using Catrobat.IDEWindowsPhone.ViewModel.Settings;
-using IDEWindowsPhone;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDEWindowsPhone.Converters
 {

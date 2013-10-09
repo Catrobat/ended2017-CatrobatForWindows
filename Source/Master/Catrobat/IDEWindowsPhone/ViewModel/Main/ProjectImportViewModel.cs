@@ -6,14 +6,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Threading;
 using Catrobat.Core.Services;
-using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Utilities;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 {

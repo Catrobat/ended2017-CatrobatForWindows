@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Views.Editor;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 
 namespace Catrobat.IDEWindowsPhone.Controls.AppBar
 {

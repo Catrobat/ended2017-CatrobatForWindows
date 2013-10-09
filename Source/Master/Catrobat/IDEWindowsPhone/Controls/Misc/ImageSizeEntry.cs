@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using Catrobat.Core.Annotations;
 using Catrobat.Core.Services.Data;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Misc;
 
 namespace Catrobat.IDEWindowsPhone.Controls.Misc
 {

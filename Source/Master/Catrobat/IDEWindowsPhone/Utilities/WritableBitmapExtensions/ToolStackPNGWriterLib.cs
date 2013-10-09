@@ -18,9 +18,7 @@
  */
 
 using System;
-using System.Globalization;
 using System.IO;
-using System.IO.IsolatedStorage;
 using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;

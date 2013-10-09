@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Windows;
 using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
-using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.Utilities;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
-using Catrobat.IDEWindowsPhone.Views.Main;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;

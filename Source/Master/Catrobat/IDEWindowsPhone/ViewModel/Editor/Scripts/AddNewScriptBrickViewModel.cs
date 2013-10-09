@@ -8,7 +8,6 @@ using Catrobat.Core.CatrobatObjects.Bricks;
 using Catrobat.Core.CatrobatObjects.Scripts;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
-using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

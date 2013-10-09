@@ -11,7 +11,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -23,12 +22,9 @@ using Catrobat.Core.CatroatObjects.Scripts;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Bricks;
 using Catrobat.Core.CatrobatObjects.Scripts;
-using Catrobat.IDEWindowsPhone.Annotations;
-using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using IDEWindowsPhone;
 using Microsoft.Phone.Controls;
 using System.Windows.Controls.Primitives;
-using System.ComponentModel;
 
 namespace Catrobat.IDEWindowsPhone.Controls.ReorderableListbox
 {

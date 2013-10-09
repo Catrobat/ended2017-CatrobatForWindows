@@ -5,14 +5,11 @@ using System.IO.IsolatedStorage;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Windows.Media.Imaging;
-using Catrobat.Core.ExtensionMethods;
 using Catrobat.Core.Utilities.Storage;
-using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Services;
-using Coding4Fun.Toolkit.Controls.Common;
 using ToolStackPNGWriterLib;
 
-namespace Catrobat.IDEWindowsPhone.Misc.Storage
+namespace Catrobat.IDEWindowsPhone.Utilities.Storage
 {
     public class StoragePhone : IStorage
     {

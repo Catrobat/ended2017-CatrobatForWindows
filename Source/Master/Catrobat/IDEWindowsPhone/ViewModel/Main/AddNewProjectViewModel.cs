@@ -4,7 +4,6 @@ using Catrobat.Core;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Misc;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;

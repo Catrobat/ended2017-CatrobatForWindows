@@ -73,7 +73,7 @@
     <Compile Include="Utilities\Helpers\VariableHelper.cs" />
     <Compile Include="Utilities\JSON\JSONClassDeserializer.cs" />
     <Compile Include="Utilities\JSON\JSONStatusResponse.cs" />
-    <Compile Include="Utilities\Helpers\PropertyNameHelper.cs" />
+    <Compile Include="Utilities\Helpers\PropertyHelper.cs" />
     <Compile Include="Services\IServerCommunicationService.cs" />
     <Compile Include="Services\Common\CatrobatWebCommunicationService.cs" />
     <Compile Include="Utilities\UtilToken.cs" />

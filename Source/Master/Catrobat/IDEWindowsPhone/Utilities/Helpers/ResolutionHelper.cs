@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using IDEWindowsPhone;
 
 namespace Catrobat.IDEWindowsPhone.Utilities.Helpers
 {

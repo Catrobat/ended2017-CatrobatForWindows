@@ -2,14 +2,12 @@
 using System.IO;
 using System.Threading;
 using System.Windows;
-using Catrobat.Core;
 using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Sounds;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Utilities.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using GalaSoft.MvvmLight;

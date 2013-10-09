@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Xml.Linq;
 using Catrobat.Core;
+using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Resources;

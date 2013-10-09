@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows.Navigation;
+﻿using System.Windows.Navigation;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
