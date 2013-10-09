@@ -14,7 +14,8 @@ namespace Catrobat.Core.Resources
     {
         private readonly Dictionary<string, string> _sampleProjectNames = new Dictionary<string, string>
         {
-            {"Whack_A_Mole.catrobat", "Whack A Mole"}
+            {"Whack_A_Mole.catrobat", "Whack A Mole"},
+            {"stoeckchen.catrobat", "stoeckchen"}
         };
 
         public void LoadSampleProjects()
@@ -36,6 +37,7 @@ namespace Catrobat.Core.Resources
                 {
                     var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader();
                     resourceStream = resourceLoader.OpenResourceStream(ResourceScope.Resources, path);
+                    
 
                     if (resourceStream != null)
                     {
