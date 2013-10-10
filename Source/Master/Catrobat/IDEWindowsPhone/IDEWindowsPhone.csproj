@@ -626,7 +626,6 @@
     <Content Include="fmodex_x86.dll" />
     <Content Include="italic.spritefont" />
     <Content Include="Content\Resources\default_new.catrobat" />
-    <Content Include="ToDo-MvvmCross\_ Windows Phone UI.txt" />
     <Content Include="windows_pocketcode_450.png" />
     <None Include="app.config" />
     <None Include="Content\Resources\SampleProjects\stoeckchen.catrobat">

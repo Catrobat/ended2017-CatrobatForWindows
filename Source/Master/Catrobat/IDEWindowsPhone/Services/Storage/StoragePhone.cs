@@ -262,39 +262,46 @@ namespace Catrobat.IDEWindowsPhone.Services.Storage
 
             PortableImage retVal = null;
             var withoutExtension = Path.GetFileNameWithoutExtension(pathToImage);
-            var thumbnailPath = string.Format("{0}{1}",withoutExtension, ThumbnailExtension);
+            var imageBasePath = Path.GetDirectoryName(pathToImage);
 
-            if (FileExists(thumbnailPath))
+            if (imageBasePath != null)
             {
-                retVal = LoadImage(thumbnailPath);
-            }
-            else
-            {
-                var fullSizePortableImage = LoadImage(pathToImage);
+                var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}", withoutExtension, ThumbnailExtension));
 
-                if (fullSizePortableImage != null)
+                if (FileExists(thumbnailPath))
                 {
-                    var thumbnailImage = ServiceLocator.ImageResizeService.ResizeImage(fullSizePortableImage,
-                        _imageThumbnailDefaultMaxWidthHeight);
-                    retVal = thumbnailImage;
+                    retVal = LoadImage(thumbnailPath);
+                }
+                else
+                {
+                    var fullSizePortableImage = LoadImage(pathToImage);
 
-                    //var fullSizeImage = new WriteableBitmap(fullSizePortableImage.Width, fullSizePortableImage.Height);
-                    //fullSizeImage.FromByteArray(fullSizePortableImage.Data);
+                    if (fullSizePortableImage != null)
+                    {
+                        var thumbnailImage = ServiceLocator.ImageResizeService.ResizeImage(fullSizePortableImage,
+                            _imageThumbnailDefaultMaxWidthHeight);
+                        retVal = thumbnailImage;
 
-                    //var thumbnailImage =  ImageResizeServicePhone.ResizeImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight);
-                    //retVal = thumbnailImage;
+                        //var fullSizeImage = new WriteableBitmap(fullSizePortableImage.Width, fullSizePortableImage.Height);
+                        //fullSizeImage.FromByteArray(fullSizePortableImage.Data);
+
+                        //var thumbnailImage =  ImageResizeServicePhone.ResizeImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight);
+                        //retVal = thumbnailImage;
                     
-                    try
-                    {
-                        SaveImage(thumbnailPath, thumbnailImage, true, ImageFormat.Png);
+                        try
+                        {
+                            //SaveImage(thumbnailPath, thumbnailImage, true, ImageFormat.Png);
 
-                        //var fileStream = OpenFile(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
-                        //PNGWriter.WritePNG(thumbnailImage, fileStream, 90);
-                    }
+                            var fileStream = OpenFile(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
+                            var writeableBitmap = new WriteableBitmap(thumbnailImage.Width, thumbnailImage.Height);
+                            writeableBitmap.FromByteArray(thumbnailImage.Data);
+                            PNGWriter.WritePNG(writeableBitmap, fileStream, 95);
+                        }
 
-                    catch
-                    {
-                        retVal = null;
+                        catch
+                        {
+                            retVal = null;
+                        }
                     }
                 }
             }
