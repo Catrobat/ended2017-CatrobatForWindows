@@ -66,7 +66,7 @@ namespace Catrobat.TestsCommon.Tests.Data
             var changeVariableBrick = sprite2.Scripts.Scripts[1].Bricks.Bricks[5] as ChangeVariableBrick;
 
             Assert.IsNotNull(changeVariableBrick);
-            Assert.AreEqual(entries[1].VariableList.UserVariables[1], changeVariableBrick.UserVariable);
+            Assert.AreEqual(project.VariableList.ProgramVariableList.UserVariables[0], changeVariableBrick.UserVariable);
         }
 
         [TestMethod]

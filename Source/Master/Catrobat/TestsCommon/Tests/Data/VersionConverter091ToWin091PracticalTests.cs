@@ -13,7 +13,7 @@ using Catrobat.TestsCommon.SampleData;
 namespace Catrobat.TestsCommon.Tests.Data
 {
     [TestClass]
-    public class VersionConverter091ToWin091ProcticalTests
+    public class VersionConverter091ToWin091PracticalTests
     {
         [ClassInitialize()]
         public static void TestClassInitialize(TestContext testContext)
