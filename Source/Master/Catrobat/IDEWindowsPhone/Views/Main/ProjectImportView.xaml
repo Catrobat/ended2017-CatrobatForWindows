@@ -52,7 +52,7 @@
           <RowDefinition Height="Auto"/>
           <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Image VerticalAlignment="Stretch" Grid.Row="0" Name="ImageProjectScreenshot" Source="{Binding ScreenshotImageSource, Converter={StaticResource NoScreenshotConverter}}"></Image>
+        <Image VerticalAlignment="Stretch" Grid.Row="0" Name="ImageProjectScreenshot" Source="{Binding ScreenshotImageSource.ImageSource, Converter={StaticResource NoScreenshotConverter}}"></Image>
         <CheckBox Grid.Row="1" Name="CheckBoxMakeActive" IsChecked="{Binding CheckBoxMakeActiveIsChecked}">Make new Project active</CheckBox>
       </Grid>
     </StackPanel>

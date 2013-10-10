@@ -175,9 +175,6 @@
     <Compile Include="Controls\ReorderableListbox\PullDownToRefreshPanel.cs" />
     <Compile Include="Controls\ReorderableListbox\ReorderListBox.cs" />
     <Compile Include="Controls\ReorderableListbox\ReorderListBoxItem.cs" />
-    <Compile Include="Controls\SplashScreen\AnimatedSplashScreen.xaml.cs">
-      <DependentUpon>AnimatedSplashScreen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
@@ -202,17 +199,16 @@
     <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
     <Compile Include="Utilities\AssociationUriMapper.cs" />
     <Compile Include="Services\ImageResizeServicePhone.cs" />
-    <Compile Include="Utilities\Helpers\CostumeBuilderHelper.cs" />
     <Compile Include="Services\CultureServicePhone.cs" />
     <Compile Include="Services\SystemInformationServicePhone.cs" />
     <Compile Include="Services\PlayerLauncherServicePhone.cs" />
     <Compile Include="Utilities\ProjectImporter.cs" />
     <Compile Include="Services\ServerCommunicationServicePhone.cs" />
     <Compile Include="Services\SoundPlayerServicePhone.cs" />
-    <Compile Include="Utilities\Storage\ResourceLoaderFactoryPhone.cs" />
-    <Compile Include="Utilities\Storage\ResourcesPhone.cs" />
-    <Compile Include="Utilities\Storage\StorageFactoryPhone.cs" />
-    <Compile Include="Utilities\Storage\StoragePhone.cs" />
+    <Compile Include="Services\Storage\ResourceLoaderFactoryPhone.cs" />
+    <Compile Include="Services\Storage\ResourcesPhone.cs" />
+    <Compile Include="Services\Storage\StorageFactoryPhone.cs" />
+    <Compile Include="Services\Storage\StoragePhone.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -245,7 +241,6 @@
     <Compile Include="ViewModel\Service\OnlineProjectViewModel.cs" />
     <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sounds\SoundRecorderViewModel.cs" />
-    <Compile Include="ViewModel\Editor\EditorViewModel.cs" />
     <Compile Include="ViewModel\Main\MainViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectLoginViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectViewModel.cs" />
@@ -272,9 +267,6 @@
     </Compile>
     <Compile Include="Views\Editor\Sprites\SpritesView.xaml.cs">
       <DependentUpon>SpritesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Editor\EditorView.xaml.cs">
-      <DependentUpon>EditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Formula\AddNewGlobalVariableView.xaml.cs">
       <DependentUpon>AddNewGlobalVariableView.xaml</DependentUpon>
@@ -424,10 +416,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SplashScreen\AnimatedSplashScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\StatusIcons\ProcessIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -478,10 +466,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Editor\Sprites\SpritesView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Editor\EditorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

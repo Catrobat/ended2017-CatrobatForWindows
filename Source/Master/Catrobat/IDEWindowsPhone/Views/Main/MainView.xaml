@@ -71,7 +71,7 @@
           </Grid.RowDefinitions>
           <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Text="{ Binding CurrentProject.ProjectHeader.ProgramName}" TextAlignment="Center" TextWrapping="Wrap" Margin="0 0 0 20" Style="{StaticResource PhoneTextLargeStyle}" />
           <Grid Grid.Row="1">
-            <Image Name="ImageCurrentProjectScreenshot" Source="{Binding CurrentProject.ProjectScreenshot, Converter={StaticResource NoScreenshotConverter}}" />
+            <Image Name="ImageCurrentProjectScreenshot" Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}" />
             <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="ButtonPlayCurrentProject"          
                 Template="{StaticResource ScreenshotButtonControlTemplate}"
                 Margin="0,0,0,0" Command="{Binding PlayCurrentProjectCommand}" Width="130" />
@@ -189,7 +189,7 @@
               <Grid Grid.Column="1">
                 <Border BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="4 0 0 0">
                   <Grid HorizontalAlignment="Right">
-                    <Image HorizontalAlignment="Right" Source="{Binding CurrentProject.ProjectScreenshot, Converter={StaticResource NoScreenshotConverter}}" MaxHeight="155" MaxWidth="160"/>
+                    <Image HorizontalAlignment="Right" Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}" MaxHeight="155" MaxWidth="160"/>
                   </Grid>
                 </Border>
               </Grid>

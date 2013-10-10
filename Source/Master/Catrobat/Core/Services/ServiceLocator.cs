@@ -1,5 +1,5 @@
-﻿using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.Utilities.Storage;
+﻿using Catrobat.Core.Services.Storage;
+using Catrobat.Core.Utilities.Helpers;
 
 namespace Catrobat.Core.Services
 {

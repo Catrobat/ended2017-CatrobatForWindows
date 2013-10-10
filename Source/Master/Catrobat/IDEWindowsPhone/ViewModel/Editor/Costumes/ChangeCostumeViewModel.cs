@@ -4,7 +4,8 @@ using System.Windows.Media.Imaging;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Costumes;
 using Catrobat.Core.Services;
-using Catrobat.IDEWindowsPhone.Utilities.Helpers;
+using Catrobat.Core.Services.Data;
+using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Paint;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -101,7 +102,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
 
         private void EditCostumeAction()
         {
-            var task = new PaintLauncherTask { CurrentImage = new WriteableBitmap(ReceivedCostume.Image as BitmapSource) };
+            var writeableBitmap = new WriteableBitmap(ReceivedCostume.Image.Width, ReceivedCostume.Image.Height);
+            writeableBitmap.FromByteArray(ReceivedCostume.Image.Data);
+
+            var task = new PaintLauncherTask { CurrentImage = new WriteableBitmap(writeableBitmap) };
             task.OnImageChanged += OnPaintLauncherTaskImageChanged;
             PaintLauncher.Launche(task);
         }
@@ -110,8 +114,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         {
             try
             {
-                var costumeBuilder = new CostumeBuilderHelper();
-                costumeBuilder.ReplaceImageInStorage(CurrentProject, ReceivedCostume, task.CurrentImage);
+                var writeableBitmap = new WriteableBitmap(task.CurrentImage);
+                var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
+                    writeableBitmap.PixelHeight);
+                CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, portableImage);
             }
             catch (Exception)
             {

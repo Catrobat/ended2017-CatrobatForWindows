@@ -5,7 +5,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 {
   public class ScreenshotButton : Button
   {
-    bool blockChangingBackToNormalState = false;
+    bool _blockChangingBackToNormalState = false;
 
     public ScreenshotButton()
     {
@@ -14,13 +14,13 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
 
     protected override void OnClick()
     {
-      blockChangingBackToNormalState = true;
+      _blockChangingBackToNormalState = true;
       base.OnClick();
     }
 
     protected override void OnLostFocus(RoutedEventArgs e)
     {
-      blockChangingBackToNormalState = false;
+      _blockChangingBackToNormalState = false;
       base.IsPressed = false;
       base.OnLostFocus(e);
     }
@@ -29,7 +29,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.Buttons
     {
       base.OnIsPressedChanged(e);
 
-      if(blockChangingBackToNormalState)
+      if(_blockChangingBackToNormalState)
         base.IsPressed = true;
     }
   }

@@ -1,4 +1,4 @@
-﻿namespace Catrobat.Core.Utilities.Storage
+﻿namespace Catrobat.Core.Services.Storage
 {
     public interface IStorageFactory
     {

@@ -32,7 +32,7 @@
       <Grid Background="Transparent" Margin="8">
         <Grid Name="gridPlay" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity=".45">
           <Path Data="M211,328 L254,359.5 L211,392 z" Fill="#FFF4F4F5" Height="65" Margin="42,24,0,0" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" VerticalAlignment="Top" HorizontalAlignment="Left" Width="44" StrokeThickness="0"/>
-          <Ellipse Fill="#00F4F4F5" Height="112" Grid.Row="1" Stroke="White" VerticalAlignment="Top" StrokeThickness="8" HorizontalAlignment="Left" Width="112"/>
+          <Ellipse Fill="#00F4F4F5" Height="112" Stroke="White" VerticalAlignment="Top" StrokeThickness="8" HorizontalAlignment="Left" Width="112"/>
         </Grid>
       </Grid>
     </Grid>

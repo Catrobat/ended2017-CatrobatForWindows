@@ -2,9 +2,9 @@
 using System.Linq.Expressions;
 using Catrobat.Core;
 using Catrobat.Core.Services.Common;
-using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Services;
+using Catrobat.IDEWindowsPhone.Services.Storage;
 using Catrobat.IDEWindowsPhone.Utilities.Sounds;
 using Catrobat.IDEWindowsPhone.Utilities.Storage;
 

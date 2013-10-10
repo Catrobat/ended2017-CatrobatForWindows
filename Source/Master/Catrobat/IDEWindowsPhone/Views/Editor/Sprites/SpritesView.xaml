@@ -34,12 +34,12 @@
 
       <Grid Margin="10 5 10 25">
         <TextBlock Text="{Binding CurrentProject.ProjectHeader.ProgramName}" FontSize="36">
-          
+
         </TextBlock>
       </Grid>
-     
-          <!--Pivot item sprites-->
-          <reorderableListbox:ReorderListBox
+
+      <!--Pivot item sprites-->
+      <reorderableListbox:ReorderListBox
           x:Name="ReorderListBoxSprites"
           Grid.Row="1"
           Margin="10"
@@ -50,14 +50,14 @@
           SelectedItem="{Binding SelectedSprite, Mode=TwoWay}"
           ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleNormal}"
           Foreground="White" >
-            <reorderableListbox:ReorderListBox.ItemTemplate>
-              <DataTemplate>
-                <Grid Background="{StaticResource ObjectsBrush}" Margin="0 5 0 5" Height="90">
-                  <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                  </Grid.RowDefinitions>
-                  <!--<i:Interaction.Triggers>
+        <reorderableListbox:ReorderListBox.ItemTemplate>
+          <DataTemplate>
+            <Grid Background="{StaticResource ObjectsBrush}" Margin="0 5 0 5" Height="90">
+              <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+              </Grid.RowDefinitions>
+              <!--<i:Interaction.Triggers>
                     <i:EventTrigger EventName="Tap">
                       <command:EventToCommand 
                         Command="{Binding SpriteEditorViewModel.SelectedSpriteChangedCommand, 
@@ -66,49 +66,49 @@
                     </i:EventTrigger>
                   </i:Interaction.Triggers>-->
 
-                  <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="3*" />
-                      <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+              <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="3*" />
+                  <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0"  Orientation="Horizontal" VerticalAlignment="Center">
-                      <TextBlock VerticalAlignment="Center" FontSize="28" Margin="5 5 5 5" Text="{Binding Name}" />
+                <StackPanel Grid.Column="0"  Orientation="Horizontal" VerticalAlignment="Center">
+                  <TextBlock VerticalAlignment="Center" FontSize="28" Margin="5 5 5 5" Text="{Binding Name}" />
 
-                      <StackPanel Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock FontSize="16" Margin="0" Text="{Binding Scripts.ActionCount}" />
-                        <TextBlock FontSize="16" Margin="0" Text="/" />
-                        <TextBlock FontSize="16" Margin="0" Text="{Binding Costumes.Costumes.Count}" />
-                        <TextBlock FontSize="16" Margin="0" Text="/" />
-                        <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Sounds.Count}" />
-                      </StackPanel>
-                    </StackPanel>
-                  </Grid>
-                  <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                      <RowDefinition Height="Auto"/>
-                      <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="1" Margin="0 0 0 5" HorizontalAlignment="Right" >
-                      <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                      </Grid.ColumnDefinitions>
-                      <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes.Costumes[0].Image}" />
-                      <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes.Costumes[1].Image}" />
-                      <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes.Costumes[2].Image}" />
-                    </Grid>
-
-                  </Grid>
+                  <StackPanel Margin="5 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock FontSize="16" Margin="0" Text="{Binding Scripts.ActionCount}" />
+                    <TextBlock FontSize="16" Margin="0" Text="/" />
+                    <TextBlock FontSize="16" Margin="0" Text="{Binding Costumes.Costumes.Count}" />
+                    <TextBlock FontSize="16" Margin="0" Text="/" />
+                    <TextBlock FontSize="16" Margin="0" Text="{Binding Sounds.Sounds.Count}" />
+                  </StackPanel>
+                </StackPanel>
+              </Grid>
+              <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto"/>
+                  <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1" Margin="0 0 0 5" HorizontalAlignment="Right" >
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Source="{Binding Costumes.Costumes[0].Image.ImageSource}" />
+                  <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Source="{Binding Costumes.Costumes[1].Image.ImageSource}" />
+                  <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Source="{Binding Costumes.Costumes[2].Image.ImageSource}" />
                 </Grid>
-              </DataTemplate>
-            </reorderableListbox:ReorderListBox.ItemTemplate>
-          </reorderableListbox:ReorderListBox>
-        
+
+              </Grid>
+            </Grid>
+          </DataTemplate>
+        </reorderableListbox:ReorderListBox.ItemTemplate>
+      </reorderableListbox:ReorderListBox>
+
 
       <appBar:EditorAppBar Grid.Row="2"
       VerticalAlignment="Bottom"

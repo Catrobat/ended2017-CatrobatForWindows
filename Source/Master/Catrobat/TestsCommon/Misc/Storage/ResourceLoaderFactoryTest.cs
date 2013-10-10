@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Catrobat.Core.Utilities.Storage;
+using Catrobat.Core.Services.Storage;
 
 namespace Catrobat.TestsCommon.Misc.Storage
 {

@@ -3,9 +3,10 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Xml.Linq;
+using Catrobat.Core.Services.Data;
+using Catrobat.Core.Services.Storage;
 using Catrobat.Core.Utilities;
 using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects.Bricks;
 using Catrobat.Core.CatrobatObjects.Costumes;
 using Catrobat.Core.CatrobatObjects.Scripts;
@@ -25,8 +26,8 @@ namespace Catrobat.Core.CatrobatObjects
 
         #region Properties
 
-        private object _projectScreenshot;
-        public object ProjectScreenshot
+        private PortableImage _projectScreenshot;
+        public PortableImage ProjectScreenshot
         {
             get
             {
@@ -61,7 +62,7 @@ namespace Catrobat.Core.CatrobatObjects
                         storage.DeleteFile(ScreenshotPath);
                     }
 
-                    storage.SaveImage(ScreenshotPath, value, true);
+                    storage.SaveImage(ScreenshotPath, value, true, ImageFormat.Png);
                 }
 
                 RaisePropertyChanged();
@@ -123,7 +124,7 @@ namespace Catrobat.Core.CatrobatObjects
                     return _projectDummyHeader;
                 }
 
-                object image = null;
+                PortableImage image = null;
 
                 using (var storage = StorageSystem.GetStorage())
                 {

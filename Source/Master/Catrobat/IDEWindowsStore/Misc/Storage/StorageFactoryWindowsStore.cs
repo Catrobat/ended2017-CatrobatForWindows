@@ -1,4 +1,4 @@
-﻿using Catrobat.Core.Utilities.Storage;
+﻿using Catrobat.Core.Services.Storage;
 
 namespace Catrobat.IDEWindowsStore.Misc.Storage
 {

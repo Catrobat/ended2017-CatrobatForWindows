@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Linq;
+using Catrobat.Core.Services.Storage;
 using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.TestsCommon.Misc;
 using Catrobat.TestsCommon.Misc.Storage;

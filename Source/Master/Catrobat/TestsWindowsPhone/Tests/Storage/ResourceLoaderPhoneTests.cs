@@ -1,6 +1,6 @@
 ﻿using System.IO;
-using Catrobat.Core.Utilities.Storage;
-using Catrobat.IDEWindowsPhone.Utilities.Storage;
+using Catrobat.Core.Services.Storage;
+using Catrobat.IDEWindowsPhone.Services.Storage;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
 namespace Catrobat.TestsWindowsPhone.Tests.Storage

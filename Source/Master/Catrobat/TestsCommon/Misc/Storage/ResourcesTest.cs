@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Catrobat.Core.Utilities.Storage;
+using Catrobat.Core.Services.Storage;
 using System;
 
 namespace Catrobat.TestsCommon.Misc.Storage

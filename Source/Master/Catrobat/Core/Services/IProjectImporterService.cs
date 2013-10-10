@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Catrobat.Core.Annotations;
 using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.Utilities.Storage;
 
 namespace Catrobat.Core.Services
 {

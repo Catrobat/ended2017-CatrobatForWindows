@@ -2,17 +2,15 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Data;
+using Catrobat.Core.Utilities.Helpers;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Controls.Misc;
-using Catrobat.IDEWindowsPhone.Utilities.Helpers;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using Catrobat.Paint;
-using Coding4Fun.Toolkit.Controls.Common;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -25,11 +23,10 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         #region Private Members
 
         private string _costumeName;
-        private CostumeBuilderHelper _builder;
         private Sprite _receivedSelectedSprite;
         private ImageDimention _dimention;
         private ImageSizeEntry _selectedSize;
-        private ImageSource _image;
+        private PortableImage _image;
         private Project _currentProject;
 
         #endregion
@@ -61,7 +58,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             }
         }
 
-        public ImageSource Image
+        public PortableImage Image
         {
             get { return _image; }
             set
@@ -183,13 +180,12 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             try
             {
                 CostumeName = AppResources.Editor_Image;
-                _builder = new CostumeBuilderHelper();
 
                 var image = task.CurrentImage;
                 Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
 
-                _builder.StartCreateCostumeAsync(_receivedSelectedSprite, image.ToBitmapImage());
-                Image = image;
+                var portableImage = new PortableImage(image.ToByteArray(), image.PixelWidth, image.PixelHeight);
+                Image = portableImage;
 
                 Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
             }
@@ -212,7 +208,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                         Height = SelectedSize.NewHeight,
                         Width = SelectedSize.NewWidth
                     };
-                    var costume = _builder.Save(CostumeName, newDimention, CurrentProject.BasePath);
+                    var costume = CostumeHelper.Save(Image,CostumeName, newDimention, CurrentProject.BasePath);
                     _receivedSelectedSprite.Costumes.Costumes.Add(costume);
 
                     ServiceLocator.NavigationService.RemoveBackEntry();
@@ -282,14 +278,14 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                 {
                     CostumeName = AppResources.Editor_Image;
 
-                    _builder = new CostumeBuilderHelper();
-
                     var image = new BitmapImage();
                     image.SetSource(e.ChosenPhoto);
                     Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
 
-                    _builder.StartCreateCostumeAsync(_receivedSelectedSprite, image);
-                    Image = image;
+                    var writeableBitmap = new WriteableBitmap(image);
+                    var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
+
+                    Image = portableImage;
 
                     Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
                 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using Catrobat.Core.Services.Storage;
 using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Costumes;
 using Catrobat.Core.CatrobatObjects.Sounds;

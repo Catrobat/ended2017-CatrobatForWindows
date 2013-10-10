@@ -1,5 +1,5 @@
 ﻿using Catrobat.Core;
-using Catrobat.Core.Utilities.Storage;
+using Catrobat.Core.Services.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;

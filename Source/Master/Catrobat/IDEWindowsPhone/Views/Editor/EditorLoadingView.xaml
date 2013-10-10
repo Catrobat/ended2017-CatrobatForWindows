@@ -26,7 +26,7 @@
     <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
       <Grid>
         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
-          <Image Height="300" Margin="0 0 0 20" Source="{Binding CurrentProject.ProjectScreenshot}"></Image>
+          <Image Height="300" Margin="0 0 0 20" Source="{Binding CurrentProject.ProjectScreenshot.ImageSource}"></Image>
           <ProgressBar Margin="80 0 80 0" IsIndeterminate="True"/>
           <TextBlock Text="Preparing your project" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </StackPanel>
