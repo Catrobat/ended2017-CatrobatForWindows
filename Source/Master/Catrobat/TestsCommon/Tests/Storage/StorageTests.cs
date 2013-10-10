@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.IO.IsolatedStorage;
+using Catrobat.Core.Services.Storage;
 using Catrobat.Core.Utilities;
-using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;
 using Catrobat.TestsCommon.Misc;

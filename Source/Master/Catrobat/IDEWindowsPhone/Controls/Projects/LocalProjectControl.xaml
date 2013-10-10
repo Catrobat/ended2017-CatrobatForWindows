@@ -25,7 +25,7 @@
       </i:Interaction.Triggers>
 
       <Grid Name="GridNormalTile" Background="{Binding SelectedTheme.AccentColor2, Source={StaticResource ThemeChooser}}">
-        <Image Name="ImageNormalTile" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding Screenshot, Converter={StaticResource NoScreenshotConverter}}"></Image>
+        <Image Name="ImageNormalTile" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding Screenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}"></Image>
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

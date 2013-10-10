@@ -1,14 +1,15 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.Core.Services.Data;
+using Catrobat.Core.Services.Storage;
 using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.Services.Common;
 
 namespace Catrobat.Core.CatrobatObjects.Costumes
 {
     public class Costume : DataObject
     {
-        private object _thumbnail;
+        private PortableImage _thumbnail;
 
         private string _fileName;
         public string FileName
@@ -42,7 +43,7 @@ namespace Catrobat.Core.CatrobatObjects.Costumes
             }
         }
 
-        public object Image
+        public PortableImage Image
         {
             get
             {

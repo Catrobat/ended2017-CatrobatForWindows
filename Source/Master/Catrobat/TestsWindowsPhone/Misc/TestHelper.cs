@@ -2,10 +2,10 @@
 using System.Linq.Expressions;
 using Catrobat.Core;
 using Catrobat.Core.Services.Common;
-using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.Services;
-using Catrobat.IDEWindowsPhone.Misc.Storage;
 using Catrobat.IDEWindowsPhone.Services;
+using Catrobat.IDEWindowsPhone.Services.Storage;
+using Catrobat.IDEWindowsPhone.Utilities.Sounds;
 using Catrobat.IDEWindowsPhone.Utilities.Storage;
 
 namespace Catrobat.TestsWindowsPhone.Misc
@@ -35,12 +35,20 @@ namespace Catrobat.TestsWindowsPhone.Misc
 
     internal static void InitializeTests()
     {
-      ServiceLocator.SetServices(new NavigationServicePhone(), 
-          new SystemInformationServicePhone(), new CultureServicePhone(), 
-          new ImageResizeServicePhone(), new PlayerLauncherServicePhone(), 
-          new ResourceLoaderFactoryPhone(), new StorageFactoryPhone(), 
-          new ServerCommunicationServicePhone(), new ImageSourceConversionServicePhone(),
-          new ProjectImporterService());
+        Core.Services.ServiceLocator.SetServices(
+                        new NavigationServicePhone(),
+                        new SystemInformationServicePhone(),
+                        new CultureServicePhone(),
+                        new ImageResizeServicePhone(),
+                        new PlayerLauncherServicePhone(),
+                        new ResourceLoaderFactoryPhone(),
+                        new StorageFactoryPhone(),
+                        new ServerCommunicationServicePhone(),
+                        new ImageSourceConversionServicePhone(),
+                        new ProjectImporterService(),
+                        new SoundPlayerServicePhone(),
+                        new SoundRecorderServicePhone()
+                        );
     }
   }
 }

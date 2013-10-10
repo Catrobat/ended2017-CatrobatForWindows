@@ -1,7 +1,7 @@
 ﻿using System;
 using Catrobat.Core;
+using Catrobat.Core.Services.Storage;
 using Catrobat.Core.Utilities;
-using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using System.IO;
 using System.Xml.Linq;

@@ -5,14 +5,12 @@ using System.IO.IsolatedStorage;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Windows.Media.Imaging;
-using Catrobat.Core.ExtensionMethods;
-using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.Services;
-using Catrobat.IDEWindowsPhone.Services;
-using Coding4Fun.Toolkit.Controls.Common;
+using Catrobat.Core.Services.Data;
+using Catrobat.Core.Services.Storage;
 using ToolStackPNGWriterLib;
 
-namespace Catrobat.IDEWindowsPhone.Misc.Storage
+namespace Catrobat.IDEWindowsPhone.Services.Storage
 {
     public class StoragePhone : IStorage
     {
@@ -228,7 +226,7 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
             return text;
         }
 
-        public object LoadImage(string pathToImage)
+        public PortableImage LoadImage(string pathToImage)
         {
             pathToImage = pathToImage.Replace("\\", "/");
 
@@ -246,7 +244,10 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
                         storageFileStream.Close();
                         storageFileStream.Dispose();
 
-                        return bitmapImage;
+                        var writeableBitmap = new WriteableBitmap(bitmapImage);
+                        var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
+                            writeableBitmap.PixelHeight);
+                        return portableImage;
                     }
                 }
                 catch {} //TODO: Exception message. Maybe logging?
@@ -255,32 +256,40 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
             return null;
         }
 
-        public object LoadImageThumbnail(string pathToImage)
+        public PortableImage LoadImageThumbnail(string pathToImage)
         {
             pathToImage = pathToImage.Replace("\\", "/");
 
-            object retVal = null;
+            PortableImage retVal = null;
             var withoutExtension = Path.GetFileNameWithoutExtension(pathToImage);
             var thumbnailPath = string.Format("{0}{1}",withoutExtension, ThumbnailExtension);
 
             if (FileExists(thumbnailPath))
             {
-                retVal = LoadImage(thumbnailPath) as BitmapImage;
+                retVal = LoadImage(thumbnailPath);
             }
             else
             {
-                var fullSizeBitmapImage = LoadImage(pathToImage) as BitmapImage;
+                var fullSizePortableImage = LoadImage(pathToImage);
 
-                if (fullSizeBitmapImage != null)
+                if (fullSizePortableImage != null)
                 {
-                    var fullSizeImage = new WriteableBitmap(fullSizeBitmapImage);
-
-                    var thumbnailImage =  ImageResizeServicePhone.ResizeImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight);
+                    var thumbnailImage = ServiceLocator.ImageResizeService.ResizeImage(fullSizePortableImage,
+                        _imageThumbnailDefaultMaxWidthHeight);
                     retVal = thumbnailImage;
+
+                    //var fullSizeImage = new WriteableBitmap(fullSizePortableImage.Width, fullSizePortableImage.Height);
+                    //fullSizeImage.FromByteArray(fullSizePortableImage.Data);
+
+                    //var thumbnailImage =  ImageResizeServicePhone.ResizeImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight);
+                    //retVal = thumbnailImage;
+                    
                     try
                     {
-                        var fileStream = OpenFile(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
-                        PNGWriter.WritePNG(thumbnailImage, fileStream, 90);
+                        SaveImage(thumbnailPath, thumbnailImage, true, ImageFormat.Png);
+
+                        //var fileStream = OpenFile(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
+                        //PNGWriter.WritePNG(thumbnailImage, fileStream, 90);
                     }
 
                     catch
@@ -293,42 +302,9 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
             return retVal;
         }
 
-        public object CreateThumbnail(object image)
-        {
-            WriteableBitmap writeableBitmap = null;
-            if (image is WriteableBitmap)
-            {
-                writeableBitmap = image as WriteableBitmap;
-            }
-            else
-            {
-                if (image is BitmapImage)
-                {
-                    writeableBitmap = new WriteableBitmap(image as BitmapImage);
-                }
-                else
-                {
-                    throw new Exception("image is no WritableBitmap or BitmapImage");
-                }
-            }
-
-            var thumbnailImage = ImageResizeServicePhone.ResizeImage(writeableBitmap, _imageThumbnailDefaultMaxWidthHeight);
-            return thumbnailImage;
-        }
-
-        public void SaveImage(string path, object image, bool deleteExisting)
+        public void SaveImage(string path, PortableImage image, bool deleteExisting, ImageFormat format)
         {
             path = path.Replace("\\", "/");
-
-            WriteableBitmap writeableBitmap = null;
-
-            if (image is WriteableBitmap)
-                writeableBitmap = image as WriteableBitmap;
-            else if(image is BitmapImage)
-                writeableBitmap = new WriteableBitmap((WriteableBitmap) image);
-
-            if (writeableBitmap == null)
-                throw new Exception("image is not a Bitmapimage or WriteableBitmap");
 
             var withoutExtension = Path.GetFileNameWithoutExtension(path);
             var thumbnailPath = string.Format("{0}{1}", withoutExtension, ThumbnailExtension);
@@ -344,7 +320,21 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
 
             var stream = _iso.OpenFile(path, FileMode.CreateNew, FileAccess.Write);
 
-            PNGWriter.WritePNG(writeableBitmap, stream, 90);
+            var writeableBitmap = new WriteableBitmap(image.Width, image.Height);
+
+            switch (format)
+            {
+                case ImageFormat.Png:
+                    PNGWriter.WritePNG(writeableBitmap, stream, 95);
+                    break;
+                case ImageFormat.Jpg:
+                    writeableBitmap.SaveJpeg(stream, image.Width, image.Height, 0, 95);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("format");
+            }
+
+
         }
 
         public void Dispose()
@@ -467,6 +457,11 @@ namespace Catrobat.IDEWindowsPhone.Misc.Storage
             wb.SaveJpeg(fileStream, wb.PixelWidth, wb.PixelHeight, 0, 85);
             fileStream.Close();
             fileStream.Dispose();
+        }
+
+        public PortableImage CreateThumbnail(PortableImage image)
+        {
+            return ServiceLocator.ImageResizeService.ResizeImage(image, _imageThumbnailDefaultMaxWidthHeight);
         }
     }
 }

@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
 using Catrobat.Core;
-using Catrobat.Core.Utilities.Helpers;
-using Catrobat.IDEWindowsPhone;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.Misc.Storage;
-using Catrobat.IDEWindowsPhone.Themes;
+using Catrobat.IDEWindowsPhone.Services;
 using Catrobat.IDEWindowsPhone.Utilities;
-using Catrobat.IDEWindowsPhone.Utilities.Sounds;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
-using Catrobat.IDEWindowsPhone.ViewModel.Settings;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Practices.ServiceLocation;
@@ -50,7 +43,7 @@ namespace IDEWindowsPhone
             // Language display initialization
             InitializeLanguage();
 
-            ApplicationLifetimeObjects.Add(new RecorderDispatcher(TimeSpan.FromMilliseconds(50)));
+            ApplicationLifetimeObjects.Add(new SoundRecorderServicePhone.RecorderDispatcher(TimeSpan.FromMilliseconds(50)));
 
 
             // Show graphics profiling information while debugging.

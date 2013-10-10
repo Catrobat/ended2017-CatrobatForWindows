@@ -5,7 +5,7 @@ using Catrobat.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.Core.Utilities.Helpers
 {
-    public class VariableHelper
+    public static class VariableHelper
     {
         public static ObservableCollection<UserVariable> GetGlobalVariableList(Project project)
         {

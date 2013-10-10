@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Catrobat.Core.Utilities.Helpers
 {
-    public class WaveHeaderHelper
+    public static class WaveHeaderHelper
     {
         public static void WriteHeader(Stream stream, int sampleRate)
         {

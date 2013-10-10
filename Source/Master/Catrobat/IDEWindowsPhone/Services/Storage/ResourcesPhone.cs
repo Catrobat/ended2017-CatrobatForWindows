@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows;
-using Catrobat.Core.Utilities.Storage;
+using Catrobat.Core.Services.Storage;
 
-namespace Catrobat.IDEWindowsPhone.Utilities.Storage
+namespace Catrobat.IDEWindowsPhone.Services.Storage
 {
     public class ResourcesPhone : IResourceLoader
     {

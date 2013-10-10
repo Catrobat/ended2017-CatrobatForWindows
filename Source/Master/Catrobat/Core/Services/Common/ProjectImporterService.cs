@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.ExtensionMethods;
-using Catrobat.Core.Utilities.Storage;
+using Catrobat.Core.Services.Data;
+using Catrobat.Core.Services.Storage;
 using Catrobat.Core.VersionConverter;
 
 namespace Catrobat.Core.Services.Common
@@ -22,7 +23,7 @@ namespace Catrobat.Core.Services.Common
             {
                 CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream, CatrobatContextBase.TempProjectImportPath);
 
-                object projectScreenshot = null;
+                PortableImage projectScreenshot = null;
                 string projectCode = "";
 
                 using (var storage = StorageSystem.GetStorage())

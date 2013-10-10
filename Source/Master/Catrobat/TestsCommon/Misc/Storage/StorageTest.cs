@@ -2,7 +2,8 @@
 using System.IO;
 using System.Reflection;
 using System.Threading;
-using Catrobat.Core.Utilities.Storage;
+using Catrobat.Core.Services.Data;
+using Catrobat.Core.Services.Storage;
 using System;
 using System.Runtime.Serialization;
 
@@ -203,17 +204,14 @@ namespace Catrobat.TestsCommon.Misc.Storage
         Directory.Move(BasePath + directoryPath, BasePath + GetPath(directoryPath) + newDirectoryName);
     }
 
-    public object LoadImage(string pathToImage)
+    public PortableImage LoadImage(string pathToImage)
     {
-      if (File.Exists(BasePath + pathToImage))
-        return File.ReadAllBytes(BasePath + pathToImage);
-      else
-        return null;
-    }
+        return new PortableImage();
 
-    public bool IncreaseQuotaTo(long quota)
-    {
-      throw new NotImplementedException();
+      //if (File.Exists(BasePath + pathToImage))
+      //  return File.ReadAllBytes(BasePath + pathToImage);
+      //else
+      //  return null;
     }
 
     public string ReadTextFile(string path)
@@ -295,18 +293,18 @@ namespace Catrobat.TestsCommon.Misc.Storage
       return pathToFormat.Replace('\\', '/');
     }
 
-    public void SaveImage(string path, object image, bool deleteExisting)
+    public void SaveImage(string path, PortableImage image, bool deleteExisting, ImageFormat format)
     {
       throw new NotImplementedException();
     }
 
 
-    public object LoadImageThumbnail(string pathToImage)
+    public PortableImage LoadImageThumbnail(string pathToImage)
     {
       throw new NotImplementedException();
     }
 
-    public object CreateThumbnail(object image)
+    public PortableImage CreateThumbnail(PortableImage image)
     {
         throw new NotImplementedException();
     }

@@ -1,6 +1,6 @@
 ﻿using Catrobat.Core.CatrobatObjects;
 
-namespace Catrobat.Core.Services.Common
+namespace Catrobat.Core.Utilities.Helpers
 {
     public static class XmlParserTempProjectHelper
     {

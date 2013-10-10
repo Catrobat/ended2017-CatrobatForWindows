@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
 using Catrobat.Core;
-using Catrobat.Core.Utilities.Storage;
+using Catrobat.Core.Services.Storage;
 using Catrobat.Core.Services.Common;
-using Catrobat.IDEWindowsPhone.Misc.Storage;
+using Catrobat.IDEWindowsPhone.Services.Storage;
 using Catrobat.IDEWindowsPhone.Utilities.Storage;
 using Catrobat.TestsWindowsPhone.Misc;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
@@ -252,7 +252,7 @@ namespace Catrobat.TestsWindowsPhone.Tests.Storage
                     var image = storage.LoadImage("TestLoadImage/screenshot.png");
 
                     //throw new NotImplementedException("TODO: check next line");
-                    storage.SaveImage("TestLoadImage2/screenshot.png", image, true);
+                    storage.SaveImage("TestLoadImage2/screenshot.png", image, true, ImageFormat.Png);
                     var image2 = storage.LoadImage("TestLoadImage2/screenshot.png");
 
                     // TODO: Maybe check if pixels are corect?

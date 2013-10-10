@@ -1,23 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
+using System.IO;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Catrobat.Core.Annotations;
+using Catrobat.Core.Services.Storage;
 using Catrobat.Core.Utilities.Helpers;
 
-namespace Catrobat.Core.Utilities.Images
+namespace Catrobat.Core.Services.Data
 {
-    public class PortableImage : INotifyPropertyChanged
+    public sealed class PortableImage : INotifyPropertyChanged
     {
         private byte[] _data;
         private int _width;
         private int _height;
 
-        internal byte[] Data
+        public byte[] Data
         {
             get { return _data; }
             private set
@@ -28,13 +26,13 @@ namespace Catrobat.Core.Utilities.Images
             }
         }
 
-        internal int Width
+        public int Width
         {
             get { return _width; }
             private set { _width = value; }
         }
 
-        internal int Height
+        public int Height
         {
             get { return _height; }
             private set { _height = value; }
@@ -54,11 +52,38 @@ namespace Catrobat.Core.Utilities.Images
             }
         }
 
+        public PortableImage()
+        {
+            
+        }
+
+        public PortableImage(byte[] data, int width, int height)
+        {
+            _data = data;
+            _width = width;
+            _height = height;
+        }
+
+        public void WriateAsPng(string path)
+        {
+            using (var storage = StorageSystem.GetStorage())
+            {
+                storage.SaveImage(path, this, true, ImageFormat.Png);
+            }
+        }
+
+        public void WriteAsJpg(string path)
+        {
+            using (var storage = StorageSystem.GetStorage())
+            {
+                storage.SaveImage(path, this, true, ImageFormat.Jpg);
+            }
+        }
+
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         [NotifyPropertyChangedInvocator]
-
-        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));

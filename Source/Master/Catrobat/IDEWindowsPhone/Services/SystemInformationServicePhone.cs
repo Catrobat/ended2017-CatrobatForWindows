@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using Catrobat.Core.Utilities.Helpers;
 using Catrobat.Core.Services;
 using Microsoft.Phone.Info;
 

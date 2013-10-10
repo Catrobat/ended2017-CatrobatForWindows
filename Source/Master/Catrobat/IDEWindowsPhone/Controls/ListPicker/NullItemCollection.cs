@@ -6,11 +6,7 @@ using Catrobat.Core.CatrobatObjects.Sounds;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Catrobat.IDEWindowsPhone.Annotations;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 

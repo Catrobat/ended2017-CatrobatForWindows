@@ -2,16 +2,13 @@
 using System.Globalization;
 using System.Windows;
 using Catrobat.Core;
-using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Resources;
 using Catrobat.Core.Services.Common;
-using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.Misc.Storage;
 using Catrobat.IDEWindowsPhone.Services;
+using Catrobat.IDEWindowsPhone.Services.Storage;
 using Catrobat.IDEWindowsPhone.Themes;
-using Catrobat.IDEWindowsPhone.Utilities;
+using Catrobat.IDEWindowsPhone.Utilities.Sounds;
 using Catrobat.IDEWindowsPhone.Utilities.Storage;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
@@ -63,13 +60,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
             SimpleIoc.Default.Register<AddNewGlobalVariableViewModel>(true);
             SimpleIoc.Default.Register<AddNewLocalVariableViewModel>(true);
             SimpleIoc.Default.Register<ChangeVariableViewModel>(true);
-
-            //SimpleIoc.Default.Register<EditorViewModel>(true);
             SimpleIoc.Default.Register<SpritesViewModel>(true);
             SimpleIoc.Default.Register<SpriteEditorViewModel>(true);
-            //SimpleIoc.Default.Register<LookEditorViewModel>(true);
-            //SimpleIoc.Default.Register<SoundEditorViewModel>(true);
-            //SimpleIoc.Default.Register<ActionEditorViewModel>(true);
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -95,7 +87,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 new StorageFactoryPhone(),
                 new ServerCommunicationServicePhone(),
                 new ImageSourceConversionServicePhone(),
-                new ProjectImporterService()
+                new ProjectImporterService(),
+                new SoundPlayerServicePhone(),
+                new SoundRecorderServicePhone()
                 );
         }
 
@@ -183,17 +177,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-        //    "CA1822:MarkMembersAsStatic",
-        //    Justification = "This non-static member is needed for data binding purposes.")]
-        //public EditorViewModel EditorViewModel
-        //{
-        //    get
-        //    {
-        //        return ServiceLocator.Current.GetInstance<EditorViewModel>();
-        //    }
-        //}
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
@@ -471,39 +454,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 return ServiceLocator.Current.GetInstance<SpriteEditorViewModel>();
             }
         }
-
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-        //"CA1822:MarkMembersAsStatic",
-        //Justification = "This non-static member is needed for data binding purposes.")]
-        //public SoundEditorViewModel SoundEditorViewModel
-        //{
-        //    get
-        //    {
-        //        return ServiceLocator.Current.GetInstance<SoundEditorViewModel>();
-        //    }
-        //}
-
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-        //"CA1822:MarkMembersAsStatic",
-        //Justification = "This non-static member is needed for data binding purposes.")]
-        //public LookEditorViewModel LookEditorViewModel
-        //{
-        //    get
-        //    {
-        //        return ServiceLocator.Current.GetInstance<LookEditorViewModel>();
-        //    }
-        //}
-
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
-        //"CA1822:MarkMembersAsStatic",
-        //Justification = "This non-static member is needed for data binding purposes.")]
-        //public ActionEditorViewModel ActionEditorViewModel
-        //{
-        //    get
-        //    {
-        //        return ServiceLocator.Current.GetInstance<ActionEditorViewModel>();
-        //    }
-        //}
 
         public static void Cleanup()
         {

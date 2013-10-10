@@ -51,10 +51,13 @@
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="Services\Common\ProjectImporterService.cs" />
     <Compile Include="Services\IProjectImporterService.cs" />
+    <Compile Include="Services\ISoundPlayerService.cs" />
+    <Compile Include="Services\ISoundRecorderService.cs" />
+    <Compile Include="Utilities\Helpers\CostumeHelper.cs" />
     <Compile Include="Utilities\Helpers\StringFormatHelper.cs" />
     <Compile Include="Utilities\Helpers\FileNameGenerationHelper.cs" />
     <Compile Include="Utilities\Helpers\WaveHeaderHelper.cs" />
-    <Compile Include="Utilities\Images\PortableImage.cs" />
+    <Compile Include="Services\Data\PortableImage.cs" />
     <Compile Include="Services\Common\CatrobatWebFormUploadService.cs" />
     <Compile Include="Services\Common\CatrobatZipService.cs">
       <SubType>Code</SubType>
@@ -73,7 +76,7 @@
     <Compile Include="Utilities\Helpers\VariableHelper.cs" />
     <Compile Include="Utilities\JSON\JSONClassDeserializer.cs" />
     <Compile Include="Utilities\JSON\JSONStatusResponse.cs" />
-    <Compile Include="Utilities\Helpers\PropertyNameHelper.cs" />
+    <Compile Include="Utilities\Helpers\PropertyHelper.cs" />
     <Compile Include="Services\IServerCommunicationService.cs" />
     <Compile Include="Services\Common\CatrobatWebCommunicationService.cs" />
     <Compile Include="Utilities\UtilToken.cs" />
@@ -173,11 +176,11 @@
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\IPlayerLauncherService.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
-    <Compile Include="Utilities\Storage\IResourceLoaderFactory.cs" />
-    <Compile Include="Utilities\Storage\IResourceLoader.cs" />
-    <Compile Include="Utilities\Storage\IStorage.cs" />
-    <Compile Include="Utilities\Storage\IStorageFactory.cs" />
-    <Compile Include="Utilities\Storage\StorageSystem.cs" />
+    <Compile Include="Services\Storage\IResourceLoaderFactory.cs" />
+    <Compile Include="Services\Storage\IResourceLoader.cs" />
+    <Compile Include="Services\Storage\IStorage.cs" />
+    <Compile Include="Services\Storage\IStorageFactory.cs" />
+    <Compile Include="Services\Storage\StorageSystem.cs" />
     <Compile Include="VersionConverter\CatrobatVersion.cs" />
     <Compile Include="VersionConverter\CatrobatVersionElementRenameEntry.cs" />
     <Compile Include="VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
@@ -208,7 +211,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utilities\Images\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

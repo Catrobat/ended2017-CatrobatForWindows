@@ -5,13 +5,9 @@ using System.Windows;
 using Windows.Phone.Storage.SharedAccess;
 using Windows.Storage;
 using Catrobat.Core;
-using Catrobat.Core.CatrobatObjects.Bricks;
-using Catrobat.Core.ExtensionMethods;
 using Catrobat.Core.Services;
-using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.Services.Common;
-using Catrobat.Core.VersionConverter;
+using Catrobat.Core.Services.Storage;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -49,15 +45,6 @@ namespace Catrobat.IDEWindowsPhone.Utilities
                 var newProjectDummyHeader = await ServiceLocator.ProjectImporterService.ImportProjects(projectZipStream);
 
                 projectZipStream.Close();
-
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    if (storage.DirectoryExists(CatrobatContextBase.TempProjectImportPath))
-                        storage.DeleteDirectory(CatrobatContextBase.TempProjectImportPath);
-
-                    if (storage.DirectoryExists(CatrobatContextBase.TempProjectImportZipPath))
-                        storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
-                }
 
                 return newProjectDummyHeader;
             }

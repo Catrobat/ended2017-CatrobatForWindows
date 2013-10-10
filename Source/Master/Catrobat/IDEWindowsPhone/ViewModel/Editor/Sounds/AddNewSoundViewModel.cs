@@ -1,6 +1,5 @@
 ﻿using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
-using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -37,7 +36,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Sounds
             var message = new GenericMessage<Sprite>(_receivedSelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof (AudioLibrary));
+            //ServiceLocator.NavigationService.NavigateTo(typeof (AudioLibrary));
         }
 
         private void RecorderAction()

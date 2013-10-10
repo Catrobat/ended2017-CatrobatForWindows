@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
+using Catrobat.Core.Services.Data;
 
-namespace Catrobat.Core.Utilities.Storage
+namespace Catrobat.Core.Services.Storage
 {
     public enum StorageFileMode
     {
@@ -18,6 +19,12 @@ namespace Catrobat.Core.Utilities.Storage
         Read,
         ReadWrite,
         Write
+    }
+
+    public enum ImageFormat
+    {
+        Png,
+        Jpg
     }
 
     public interface IStorage : IDisposable
@@ -46,13 +53,13 @@ namespace Catrobat.Core.Utilities.Storage
 
         void RenameDirectory(string directoryPath, string newDirectoryName);
 
-        object LoadImage(string pathToImage);
+        PortableImage LoadImage(string pathToImage);
 
-        object LoadImageThumbnail(string pathToImage);
+        PortableImage LoadImageThumbnail(string pathToImage);
 
-        object CreateThumbnail(object image);
+        PortableImage CreateThumbnail(PortableImage image);
 
-        void SaveImage(string path, object image, bool deleteExisting);
+        void SaveImage(string path, PortableImage image, bool deleteExisting, ImageFormat format);
 
         string ReadTextFile(string path);
 

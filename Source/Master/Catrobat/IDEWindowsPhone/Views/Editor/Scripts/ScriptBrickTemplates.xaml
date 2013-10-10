@@ -95,14 +95,14 @@
 
   <DataTemplate x:Key="ListBoxCostumeItem">
     <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance costumes:Costume}">
-      <Image Source="{Binding Path=Image}" Width="24" Height="24" />
+      <Image Source="{Binding Path=Image.ImageSource}" Width="24" Height="24" />
       <TextBlock Text="{Binding Path=Name}" FontSize="24" Padding="10,0,0,0" />
     </StackPanel>
   </DataTemplate>
 
   <DataTemplate x:Key="PageListBoxCostumeItem">
     <StackPanel Orientation="Horizontal" Margin="5" d:DataContext="{d:DesignInstance costumes:Costume}">
-      <Image Source="{Binding Path=Image}" Width="40" Height="40" />
+      <Image Source="{Binding Path=Image.ImageSource}" Width="40" Height="40" />
       <TextBlock Text="{Binding Path=Name}" FontSize="40" Padding="10,0,0,0" />
     </StackPanel>
   </DataTemplate>

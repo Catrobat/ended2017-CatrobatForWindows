@@ -17,7 +17,7 @@
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-      <Image Source="{Binding Image}" Width="300" Height="300"></Image>
+      <Image Source="{Binding Image.ImageSource}" Width="300" Height="300"></Image>
       <ProgressBar IsIndeterminate="True"></ProgressBar>
       <TextBlock Text="Saving image" TextAlignment="Center" Margin="0 15 0 0" Style="{StaticResource PhoneTextLargeStyle}"/>
     </StackPanel>

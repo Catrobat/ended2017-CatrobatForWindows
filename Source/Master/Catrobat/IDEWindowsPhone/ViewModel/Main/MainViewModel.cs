@@ -1,17 +1,15 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Catrobat.Core;
+using Catrobat.Core.Services.Data;
+using Catrobat.Core.Services.Storage;
 using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.Utilities.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.Utilities;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
@@ -22,7 +20,6 @@ using System.Collections.Generic;
 using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
-using System.Windows.Media;
 using System.Windows.Input;
 using Catrobat.IDEWindowsPhone.Views.Service;
 using Catrobat.IDEWindowsPhone.Views.Settings;
@@ -44,7 +41,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private string _deleteProjectName;
         private string _copyProjectName;
         private Project _currentProject;
-        private ImageSource _currentProjectScreenshot;
         private ObservableCollection<ProjectDummyHeader> _localProjects;
         private CatrobatContextBase _context;
         private ObservableCollection<OnlineProjectHeader> _onlineProjects;
@@ -99,22 +95,6 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         }
 
         public ProjectDummyHeader PinProjectHeader { get; set; }
-
-        public ImageSource CurrentProjectScreenshot
-        {
-            get
-            {
-                return _currentProjectScreenshot;
-            }
-
-            set
-            {
-                if (_currentProjectScreenshot == value) return;
-
-                _currentProjectScreenshot = value;
-                RaisePropertyChanged(() => CurrentProjectScreenshot);
-            }
-        }
 
         public ObservableCollection<ProjectDummyHeader> LocalProjects
         {
@@ -680,7 +660,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                     {
                         var screenshotPath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.ScreenshotPath);
                         var automaticProjectScreenshotPath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.AutomaticScreenshotPath);
-                        object projectScreenshot = null;
+                        PortableImage projectScreenshot = null;
 
                         if (storage.FileExists(screenshotPath))
                             projectScreenshot = storage.LoadImage(screenshotPath);

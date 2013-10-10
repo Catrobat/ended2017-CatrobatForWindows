@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Linq;
 using System.Windows.Data;
-using System.Windows;
-using Catrobat.Core;
-using Catrobat.Core.CatrobatObjects;
-using System.Collections.Generic;
 using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 

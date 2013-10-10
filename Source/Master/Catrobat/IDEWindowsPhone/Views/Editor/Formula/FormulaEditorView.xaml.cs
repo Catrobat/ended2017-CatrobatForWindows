@@ -1,15 +1,5 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using Catrobat.Core.CatrobatObjects.Formulas;
-using Catrobat.Core.CatrobatObjects.Variables;
-using Catrobat.IDECommon.Formula.Editor;
-using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
-using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
+﻿using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
-using FormulaEvaluation;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
 

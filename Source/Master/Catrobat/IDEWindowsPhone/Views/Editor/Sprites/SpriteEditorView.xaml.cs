@@ -1,8 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows;
-using Catrobat.Core.Utilities;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.IDEWindowsPhone.ViewModel.Editor;
+﻿using System.Windows;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;

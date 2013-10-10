@@ -1,24 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Navigation;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Costumes;
 using Catrobat.Core.CatrobatObjects.Sounds;
 using Catrobat.Core.Services;
-using Catrobat.IDEWindowsPhone.Misc;
-using Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes;
 using Catrobat.IDEWindowsPhone.Views.Editor.Costumes;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sounds;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 
 namespace Catrobat.IDEWindowsPhone.Controls.ListPicker
 {

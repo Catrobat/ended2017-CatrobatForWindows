@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel;
 using System.Threading;
-using System.Windows;
 using Catrobat.Core;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.Services;
 using Catrobat.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Misc;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

@@ -3,17 +3,13 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Threading;
 using Catrobat.Core.Services;
-using Catrobat.IDEWindowsPhone.Misc;
+using Catrobat.Core.Services.Data;
 using Catrobat.IDEWindowsPhone.Utilities;
 using Catrobat.IDEWindowsPhone.Views.Main;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDEWindowsPhone.ViewModel.Main
 {
@@ -31,7 +27,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
         private bool _buttonAddIsEnabled = true;
         private bool _buttonCancelIsEnabled = true;
         private string _projectName = "";
-        private ImageSource _screenshotImageSource = null;
+        private PortableImage _screenshotImageSource = null;
         private bool _errorPanelVisibility;
 
         #endregion
@@ -52,7 +48,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
             }
         }
 
-        public ImageSource ScreenshotImageSource
+        public PortableImage ScreenshotImageSource
         {
             get { return _screenshotImageSource; }
             set
@@ -240,7 +236,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Main
                 {
                     ProjectName = projectHeader.ProjectName;
 
-                    ScreenshotImageSource = projectHeader.Screenshot as BitmapImage;
+                    ScreenshotImageSource = projectHeader.Screenshot;
                     
                     ShowPanel(VisiblePanel.Content);
                 }

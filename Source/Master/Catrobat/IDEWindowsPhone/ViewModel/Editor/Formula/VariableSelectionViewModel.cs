@@ -4,7 +4,6 @@ using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Variables;
 using Catrobat.Core.Services;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
-using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.Views.Editor.Formula;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

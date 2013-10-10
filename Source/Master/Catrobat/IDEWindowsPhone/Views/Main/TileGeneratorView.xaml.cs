@@ -4,9 +4,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using Catrobat.Core.Utilities.Storage;
+using Catrobat.Core.Services.Storage;
 using Catrobat.IDEWindowsPhone.Content.Localization;
-using Catrobat.IDEWindowsPhone.Misc;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -33,17 +32,18 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var screenshot = (BitmapImage) _viewModel.PinProjectHeader.Screenshot;
-            var writeableScreenshot = new WriteableBitmap(screenshot);
+            var screenshot = _viewModel.PinProjectHeader.Screenshot;
+            var writeableScreenshot = new WriteableBitmap(screenshot.Width, screenshot.Height);
+            writeableScreenshot.FromByteArray(screenshot.Data);
             writeableScreenshot.Invalidate();
 
             var croppedScreenshot = writeableScreenshot.Crop(new Rect(
-                new Point(0, (screenshot.PixelHeight - screenshot.PixelWidth) / 2.0),
-                new Size(screenshot.PixelWidth, screenshot.PixelWidth)));
+                new Point(0, (writeableScreenshot.PixelHeight - writeableScreenshot.PixelWidth) / 2.0),
+                new Size(writeableScreenshot.PixelWidth, writeableScreenshot.PixelWidth)));
 
             ImageSmallTile.Source = croppedScreenshot;
             ImageNormalTile.Source = croppedScreenshot;
-            ImageWideTile.Source = screenshot;
+            ImageWideTile.Source = (ImageSource) screenshot.ImageSource;
 
             TextBlockTiteNormal.Text = _viewModel.PinProjectHeader.ProjectName;
             TextBlockTiteWide.Text = _viewModel.PinProjectHeader.ProjectName;

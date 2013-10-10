@@ -1,48 +1,34 @@
 ﻿using System.Threading;
 using System.Windows;
-using Catrobat.Core.Utilities.Storage;
+using Catrobat.Core.Services;
+using Catrobat.Core.Services.Storage;
 using Catrobat.Core.CatrobatObjects;
 using Catrobat.Core.CatrobatObjects.Sounds;
 using Microsoft.Xna.Framework.Audio;
 
 namespace Catrobat.IDEWindowsPhone.Utilities.Sounds
 {
-    public enum SoundState
+    public class SoundPlayerServicePhone : ISoundPlayerService
     {
-        Playing,
-        Paused,
-        Stopped
-    }
-
-    public delegate void SoundStateChanged(SoundState oldState, SoundState newState);
-
-    public delegate void SoundFinished();
-
-    public class SoundPlayer
-    {
-        public SoundStateChanged SoundStateChanged;
-        public SoundFinished SoundFinished;
-
         private string _currentProjectBasePath;
         private SoundEffectInstance _soundEffect;
         private Thread _checkSoundThread;
-        private SoundState _previousState;
-
+        private SoundPlayerState _previousState;
         private bool _aborted = false;
 
-        public SoundPlayer(string currentProjectBasePath)
-        {
-            _currentProjectBasePath = currentProjectBasePath;
-        }
+        public event SoundStateChanged SoundStateChanged;
+        public event SoundFinished SoundFinished;
 
-        public void SetSound(Sound sound)
+        public void SetSound(Sound sound, Project currentProject)
         {
+            _currentProjectBasePath = currentProject.BasePath;
+
             if (_soundEffect != null)
             {
                 _soundEffect.Stop();
             }
 
-            _previousState = SoundState.Stopped;
+            _previousState = SoundPlayerState.Stopped;
 
             var path = _currentProjectBasePath + "/" + Project.SoundsPath + "/" +
                        sound.FileName;
@@ -63,50 +49,6 @@ namespace Catrobat.IDEWindowsPhone.Utilities.Sounds
             }
         }
 
-        private void CheckIfSoundFinished()
-        {
-            var newState = GetSoundState(_soundEffect.State);
-            var previousStateTemp = _previousState;
-            _previousState = newState;
-
-            do
-            {
-                _previousState = newState;
-                newState = GetSoundState(_soundEffect.State);
-                Thread.Sleep(50);
-            } while (newState == _previousState);
-
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    if (SoundFinished != null && !_aborted)
-                    {
-                        SoundFinished.Invoke();
-                    }
-
-                    _aborted = false;
-
-                    if (SoundStateChanged != null)
-                    {
-                        SoundStateChanged.Invoke(previousStateTemp, newState);
-                    }
-                });
-        }
-
-        private SoundState GetSoundState(Microsoft.Xna.Framework.Audio.SoundState state)
-        {
-            switch (state)
-            {
-                case Microsoft.Xna.Framework.Audio.SoundState.Paused:
-                    return SoundState.Paused;
-
-                case Microsoft.Xna.Framework.Audio.SoundState.Playing:
-                    return SoundState.Playing;
-
-                default:
-                    return SoundState.Stopped;
-            }
-        }
-
         public void Play()
         {
             if (_soundEffect != null)
@@ -120,7 +62,7 @@ namespace Catrobat.IDEWindowsPhone.Utilities.Sounds
 
                 _soundEffect.Play();
                 var previousStateTemp = _previousState;
-                _previousState = SoundState.Playing;
+                _previousState = SoundPlayerState.Playing;
                 if (SoundStateChanged != null)
                 {
                     SoundStateChanged.Invoke(previousStateTemp, _previousState);
@@ -136,7 +78,7 @@ namespace Catrobat.IDEWindowsPhone.Utilities.Sounds
 
                 _soundEffect.Pause();
                 var previousStateTemp = _previousState;
-                _previousState = SoundState.Paused;
+                _previousState = SoundPlayerState.Paused;
                 if (SoundStateChanged != null)
                 {
                     SoundStateChanged.Invoke(previousStateTemp, _previousState);
@@ -152,7 +94,7 @@ namespace Catrobat.IDEWindowsPhone.Utilities.Sounds
 
                 _soundEffect.Stop();
                 var previousStateTemp = _previousState;
-                _previousState = SoundState.Stopped;
+                _previousState = SoundPlayerState.Stopped;
                 if (SoundStateChanged != null)
                 {
                     SoundStateChanged.Invoke(previousStateTemp, _previousState);
@@ -164,6 +106,50 @@ namespace Catrobat.IDEWindowsPhone.Utilities.Sounds
         {
             Stop();
             SoundStateChanged = null;
+        }
+
+        private void CheckIfSoundFinished()
+        {
+            var newState = GetSoundState(_soundEffect.State);
+            var previousStateTemp = _previousState;
+            _previousState = newState;
+
+            do
+            {
+                _previousState = newState;
+                newState = GetSoundState(_soundEffect.State);
+                Thread.Sleep(50);
+            } while (newState == _previousState);
+
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                if (SoundFinished != null && !_aborted)
+                {
+                    SoundFinished.Invoke();
+                }
+
+                _aborted = false;
+
+                if (SoundStateChanged != null)
+                {
+                    SoundStateChanged.Invoke(previousStateTemp, newState);
+                }
+            });
+        }
+
+        private SoundPlayerState GetSoundState(Microsoft.Xna.Framework.Audio.SoundState state)
+        {
+            switch (state)
+            {
+                case Microsoft.Xna.Framework.Audio.SoundState.Paused:
+                    return SoundPlayerState.Paused;
+
+                case Microsoft.Xna.Framework.Audio.SoundState.Playing:
+                    return SoundPlayerState.Playing;
+
+                default:
+                    return SoundPlayerState.Stopped;
+            }
         }
     }
 }
