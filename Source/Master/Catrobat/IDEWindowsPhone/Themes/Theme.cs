@@ -14,27 +14,9 @@ namespace Catrobat.IDEWindowsPhone.Themes
 
         public BitmapImage Background
         {
-            get
-            {
-                if (_background == null)
-                {
-                    //TODO: Update _800.png to real images
-                    switch (ResolutionHelper.CurrentResolution)
-                    {
-                        case Resolutions.WVGA:
-                            _background = new BitmapImage(new Uri(_backgroundPath + "_800.png", UriKind.Relative));
-                            break;
-                        case Resolutions.WXGA:
-                            _background = new BitmapImage(new Uri(_backgroundPath + "_800.png", UriKind.Relative));
-                            break;
-                        case Resolutions.HD720P:
-                            _background = new BitmapImage(new Uri(_backgroundPath + "_800.png", UriKind.Relative));
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                }
-                return _background;
+            get {
+                return _background ?? 
+                    (_background = new BitmapImage(new Uri(_backgroundPath + "_800.png", UriKind.Relative)));
             }
         }
 

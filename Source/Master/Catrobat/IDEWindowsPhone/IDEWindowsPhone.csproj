@@ -207,7 +207,6 @@
     <Compile Include="Services\SystemInformationServicePhone.cs" />
     <Compile Include="Services\PlayerLauncherServicePhone.cs" />
     <Compile Include="Utilities\ProjectImporter.cs" />
-    <Compile Include="Utilities\Helpers\ResolutionHelper.cs" />
     <Compile Include="Services\ServerCommunicationServicePhone.cs" />
     <Compile Include="Services\SoundPlayerServicePhone.cs" />
     <Compile Include="Utilities\Storage\ResourceLoaderFactoryPhone.cs" />
@@ -782,9 +781,7 @@
       <Name>PlayerWindowsPhone8Component</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utilities\Sounds\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="AppBarUtils">
       <HintPath>..\packages\AppBarUtils.2.4\lib\windowsphone8\AppBarUtils.dll</HintPath>
