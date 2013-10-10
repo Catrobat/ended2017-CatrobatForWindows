@@ -19,6 +19,7 @@ using Catrobat.IDEWindowsPhone.ViewModel.Editor.Sprites;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Catrobat.IDEWindowsPhone.ViewModel.Service;
 using Catrobat.IDEWindowsPhone.ViewModel.Settings;
+using Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
@@ -91,6 +92,9 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 new SoundPlayerServicePhone(),
                 new SoundRecorderServicePhone()
                 );
+
+            Core.Services.ServiceLocator.SetMvxServices(
+                new MvxPictureChooserTask());
         }
 
         private static Project InitializeFirstTimeUse(CatrobatContextBase context)

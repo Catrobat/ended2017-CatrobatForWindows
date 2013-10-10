@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -147,6 +148,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         {
             lock (this)
             {
+                //ServiceLocator.MvxPictureChooserTask.ChoosePictureFromLibrary(int.MaxValue, 95, PictureAvailable, () => {/* No action here */});
+
                 var photoChooserTask = new PhotoChooserTask();
                 photoChooserTask.Completed -= Task_Completed;
                 photoChooserTask.Completed += Task_Completed;
@@ -158,6 +161,8 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
         {
             lock (this)
             {
+                //ServiceLocator.MvxPictureChooserTask.TakePicture(int.MaxValue, 95, PictureAvailable, () => {/* No action here */});
+
                 var cameraCaptureTask = new CameraCaptureTask();
                 cameraCaptureTask.Completed -= Task_Completed;
                 cameraCaptureTask.Completed += Task_Completed;
@@ -208,7 +213,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
                         Height = SelectedSize.NewHeight,
                         Width = SelectedSize.NewWidth
                     };
-                    var costume = CostumeHelper.Save(Image,CostumeName, newDimention, CurrentProject.BasePath);
+                    var costume = CostumeHelper.Save(Image, CostumeName, newDimention, CurrentProject.BasePath);
                     _receivedSelectedSprite.Costumes.Costumes.Add(costume);
 
                     ServiceLocator.NavigationService.RemoveBackEntry();
@@ -269,6 +274,31 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Costumes
             Dimention = new ImageDimention { Width = 500, Height = 500 };
             _selectedSize = ImageSizes[1];
         }
+
+        //private void PictureAvailable(Stream stream)
+        //{
+        //    try
+        //    {
+        //        CostumeName = AppResources.Editor_Image;
+
+        //        var image = new BitmapImage();
+        //        image.SetSource(stream);
+        //        Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
+
+        //        var writeableBitmap = new WriteableBitmap(image);
+        //        var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
+
+        //        Image = portableImage;
+
+        //        Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        ShowLoadingImageFailure();
+        //    }
+        //}
+
+
 
         private void Task_Completed(object sender, PhotoResult e)
         {

@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{A4E10BED-8F56-46A6-B78D-BFEF1363B195}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDECommon", "IDECommon\IDECommon.csproj", "{73EDA75E-B249-40CB-A883-C2521A72B1C0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDEWindowsStore", "IDEWindowsStore\IDEWindowsStore.csproj", "{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EB6B4FF2-8CB6-46FB-B50E-D001C863762D}"
 	ProjectSection(SolutionItems) = preProject
@@ -23,8 +23,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlayerWindowsPhone8Componen
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXTK_WindowsPhone8", "DirectXTK\DirectXTK_WindowsPhone8.vcxproj", "{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsCommon", "TestsCommon\TestsCommon.csproj", "{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDEWindowsPhone", "IDEWindowsPhone\IDEWindowsPhone.csproj", "{CDDB2C02-9584-45C6-9A7D-2B04B322C232}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingApp", "DrawingApp\DrawingApp.csproj", "{5447D6AA-07AD-4B2F-8106-992EE6F41CEC}"
@@ -41,9 +39,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsPaint", "TestsPaint\Te
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FormulaEvaluation", "FormulaEvaluation\FormulaEvaluation.vcxproj", "{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.IDE.Tests", "Catrobat.IDE.Tests\Catrobat.IDE.Tests.csproj", "{900D7440-4758-495A-A974-081C3BEBA044}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 16
+		SccNumberOfProjects = 15
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://catrobat.ist.tugraz.at:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -53,45 +53,42 @@ Global
 		SccProjectUniqueName2 = IDECommon\\IDECommon.csproj
 		SccProjectName2 = IDECommon
 		SccLocalPath2 = IDECommon
-		SccProjectUniqueName3 = IDEWindowsStore\\IDEWindowsStore.csproj
-		SccProjectName3 = IDEWindowsStore
-		SccLocalPath3 = IDEWindowsStore
-		SccProjectUniqueName4 = PlayerWindowsPhone8\\PlayerWindowsPhone8\\PlayerWindowsPhone8.csproj
-		SccProjectName4 = PlayerWindowsPhone8/PlayerWindowsPhone8
-		SccLocalPath4 = PlayerWindowsPhone8\\PlayerWindowsPhone8
-		SccProjectUniqueName5 = PlayerWindowsPhone8\\PlayerWindowsPhone8Component\\PlayerWindowsPhone8Component.vcxproj
-		SccProjectName5 = PlayerWindowsPhone8/PlayerWindowsPhone8Component
-		SccLocalPath5 = PlayerWindowsPhone8\\PlayerWindowsPhone8Component
-		SccProjectUniqueName6 = DirectXTK\\DirectXTK_WindowsPhone8.vcxproj
-		SccProjectName6 = DirectXTK
-		SccLocalPath6 = DirectXTK
-		SccProjectUniqueName7 = TestsCommon\\TestsCommon.csproj
-		SccProjectName7 = TestsCommon
-		SccLocalPath7 = TestsCommon
-		SccProjectUniqueName8 = IDEWindowsPhone\\IDEWindowsPhone.csproj
-		SccProjectName8 = IDEWindowsPhone
-		SccLocalPath8 = IDEWindowsPhone
-		SccProjectUniqueName9 = DrawingApp\\DrawingApp.csproj
-		SccProjectName9 = DrawingApp
-		SccLocalPath9 = DrawingApp
-		SccProjectUniqueName10 = TestsWindowsPhone\\TestsWindowsPhone.csproj
-		SccProjectName10 = TestsWindowsPhone
-		SccLocalPath10 = TestsWindowsPhone
-		SccProjectUniqueName11 = PlayerWindowsPhone8Test\\PlayerWindowsPhone8Test.vcxproj
-		SccProjectName11 = PlayerWindowsPhone8Test
-		SccLocalPath11 = PlayerWindowsPhone8Test
-		SccProjectUniqueName12 = Paint\\Paint.csproj
-		SccProjectName12 = Paint
-		SccLocalPath12 = Paint
-		SccProjectUniqueName13 = PaintStandAloneApp\\PaintStandAloneApp.csproj
-		SccProjectName13 = PaintStandAloneApp
-		SccLocalPath13 = PaintStandAloneApp
-		SccProjectUniqueName14 = TestsPaint\\TestsPaint.csproj
-		SccProjectName14 = TestsPaint
-		SccLocalPath14 = TestsPaint
-		SccProjectUniqueName15 = FormulaEvaluation\\FormulaEvaluation.vcxproj
-		SccProjectName15 = FormulaEvaluation
-		SccLocalPath15 = FormulaEvaluation
+		SccProjectUniqueName3 = PlayerWindowsPhone8\\PlayerWindowsPhone8\\PlayerWindowsPhone8.csproj
+		SccProjectName3 = PlayerWindowsPhone8/PlayerWindowsPhone8
+		SccLocalPath3 = PlayerWindowsPhone8\\PlayerWindowsPhone8
+		SccProjectUniqueName4 = PlayerWindowsPhone8\\PlayerWindowsPhone8Component\\PlayerWindowsPhone8Component.vcxproj
+		SccProjectName4 = PlayerWindowsPhone8/PlayerWindowsPhone8Component
+		SccLocalPath4 = PlayerWindowsPhone8\\PlayerWindowsPhone8Component
+		SccProjectUniqueName5 = DirectXTK\\DirectXTK_WindowsPhone8.vcxproj
+		SccProjectName5 = DirectXTK
+		SccLocalPath5 = DirectXTK
+		SccProjectUniqueName6 = IDEWindowsPhone\\IDEWindowsPhone.csproj
+		SccProjectName6 = IDEWindowsPhone
+		SccLocalPath6 = IDEWindowsPhone
+		SccProjectUniqueName7 = DrawingApp\\DrawingApp.csproj
+		SccProjectName7 = DrawingApp
+		SccLocalPath7 = DrawingApp
+		SccProjectUniqueName8 = TestsWindowsPhone\\TestsWindowsPhone.csproj
+		SccProjectName8 = TestsWindowsPhone
+		SccLocalPath8 = TestsWindowsPhone
+		SccProjectUniqueName9 = PlayerWindowsPhone8Test\\PlayerWindowsPhone8Test.vcxproj
+		SccProjectName9 = PlayerWindowsPhone8Test
+		SccLocalPath9 = PlayerWindowsPhone8Test
+		SccProjectUniqueName10 = Paint\\Paint.csproj
+		SccProjectName10 = Paint
+		SccLocalPath10 = Paint
+		SccProjectUniqueName11 = PaintStandAloneApp\\PaintStandAloneApp.csproj
+		SccProjectName11 = PaintStandAloneApp
+		SccLocalPath11 = PaintStandAloneApp
+		SccProjectUniqueName12 = TestsPaint\\TestsPaint.csproj
+		SccProjectName12 = TestsPaint
+		SccLocalPath12 = TestsPaint
+		SccProjectUniqueName13 = FormulaEvaluation\\FormulaEvaluation.vcxproj
+		SccProjectName13 = FormulaEvaluation
+		SccLocalPath13 = FormulaEvaluation
+		SccProjectUniqueName14 = Catrobat.IDE.Tests\\Catrobat.IDE.Tests.csproj
+		SccProjectName14 = Catrobat.IDE.Tests
+		SccLocalPath14 = Catrobat.IDE.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -148,37 +145,6 @@ Global
 		{73EDA75E-B249-40CB-A883-C2521A72B1C0}.Release|Win32.ActiveCfg = Release|Any CPU
 		{73EDA75E-B249-40CB-A883-C2521A72B1C0}.Release|x64.ActiveCfg = Release|Any CPU
 		{73EDA75E-B249-40CB-A883-C2521A72B1C0}.Release|x86.ActiveCfg = Release|Any CPU
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Debug|ARM.ActiveCfg = Debug|ARM
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Debug|ARM.Build.0 = Debug|ARM
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Debug|Win32.ActiveCfg = Debug|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Debug|Win32.Build.0 = Debug|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Debug|Win32.Deploy.0 = Debug|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Debug|x64.ActiveCfg = Debug|x64
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Debug|x64.Build.0 = Debug|x64
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Debug|x64.Deploy.0 = Debug|x64
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Debug|x86.ActiveCfg = Debug|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Debug|x86.Build.0 = Debug|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|ARM.ActiveCfg = Release|ARM
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|ARM.Build.0 = Release|ARM
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|ARM.Deploy.0 = Release|ARM
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|Mixed Platforms.Build.0 = Release|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|Mixed Platforms.Deploy.0 = Release|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|Win32.ActiveCfg = Release|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|Win32.Build.0 = Release|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|Win32.Deploy.0 = Release|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|x64.ActiveCfg = Release|x64
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|x64.Build.0 = Release|x64
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|x64.Deploy.0 = Release|x64
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|x86.ActiveCfg = Release|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|x86.Build.0 = Release|x86
-		{F1EEF384-9527-49E6-8F5A-3F88671CDBAC}.Release|x86.Deploy.0 = Release|x86
 		{60C5D6B8-9B12-458F-B1A8-7150F7B396A4}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{60C5D6B8-9B12-458F-B1A8-7150F7B396A4}.Debug|Any CPU.Build.0 = Debug|x86
 		{60C5D6B8-9B12-458F-B1A8-7150F7B396A4}.Debug|Any CPU.Deploy.0 = Debug|x86
@@ -250,25 +216,6 @@ Global
 		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Release|x64.ActiveCfg = Release|Win32
 		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Release|x86.ActiveCfg = Release|Win32
 		{E0B52AE7-E160-4D32-BF3F-910B785E5A8E}.Release|x86.Build.0 = Release|Win32
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|ARM.Build.0 = Debug|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|Win32.Build.0 = Debug|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Debug|x86.Build.0 = Debug|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Release|ARM.ActiveCfg = Release|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Release|ARM.Build.0 = Release|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Release|Win32.ActiveCfg = Release|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Release|x64.ActiveCfg = Release|Any CPU
-		{F4C7AAA7-C1D8-41BC-8B40-EB3E7A03C4F4}.Release|x86.ActiveCfg = Release|Any CPU
 		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDDB2C02-9584-45C6-9A7D-2B04B322C232}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -476,6 +423,22 @@ Global
 		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Release|x64.ActiveCfg = Release|Win32
 		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Release|x86.ActiveCfg = Release|Win32
 		{44CC016A-EEBA-4E9A-AC7A-9FF93C1D478E}.Release|x86.Build.0 = Release|Win32
+		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Release|Any CPU.Build.0 = Release|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Release|ARM.ActiveCfg = Release|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Release|Win32.ActiveCfg = Release|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Release|x64.ActiveCfg = Release|Any CPU
+		{900D7440-4758-495A-A974-081C3BEBA044}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
 using Catrobat.Core;
+using Catrobat.Core.Utilities;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Services;
 using Catrobat.IDEWindowsPhone.Utilities;
@@ -31,6 +32,8 @@ namespace IDEWindowsPhone
         /// </summary>
         public App()
         {
+            MvvmCrossSetup.Instance.EnsureInit();
+
             // Global handler for uncaught exceptions.
             UnhandledException += Application_UnhandledException;
 
@@ -72,7 +75,17 @@ namespace IDEWindowsPhone
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
             ViewModelLocator.LoadContext();
+            RootFrame.Navigating += RootFrameOnNavigating;
         }
+
+        private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs args)
+        {
+            // TODO: comment in for switching to MvvmCross
+            //args.Cancel = true;
+            //RootFrame.Navigating -= RootFrameOnNavigating;
+            //RootFrame.Dispatcher.BeginInvoke(() => Cirrious.CrossCore.Mvx.Resolve<Cirrious.MvvmCross.ViewModels.IMvxAppStart>().Start());
+        }
+	
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
