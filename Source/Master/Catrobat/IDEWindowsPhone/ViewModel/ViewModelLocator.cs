@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
-using Catrobat.Core;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.Resources;
-using Catrobat.Core.Services.Common;
+using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Resources;
+using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Services;
 using Catrobat.IDEWindowsPhone.Services.Storage;
 using Catrobat.IDEWindowsPhone.Themes;
@@ -78,7 +78,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
         private static void InitializeInterfaces()
         {
-            Core.Services.ServiceLocator.SetServices(
+            Catrobat.IDE.Core.Services.ServiceLocator.SetServices(
                 new NavigationServicePhone(),
                 new SystemInformationServicePhone(),
                 new CultureServicePhone(),
@@ -93,7 +93,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
                 new SoundRecorderServicePhone()
                 );
 
-            Core.Services.ServiceLocator.SetMvxServices(
+            Catrobat.IDE.Core.Services.ServiceLocator.SetMvxServices(
                 new MvxPictureChooserTask());
         }
 
@@ -130,7 +130,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel
 
             if (_context.LocalSettings.CurrentLanguageString == null)
                 _context.LocalSettings.CurrentLanguageString =
-                    Core.Services.ServiceLocator.CulureService.GetToLetterCultureColde();
+                    Catrobat.IDE.Core.Services.ServiceLocator.CulureService.GetToLetterCultureColde();
 
             var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
             if (_context.LocalSettings.CurrentThemeIndex != -1)

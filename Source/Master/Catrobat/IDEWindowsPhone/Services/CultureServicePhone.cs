@@ -1,5 +1,5 @@
 ﻿using System.Threading;
-using Catrobat.Core.Services;
+using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDEWindowsPhone.Services
 {

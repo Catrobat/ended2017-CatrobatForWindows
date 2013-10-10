@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows;
-using Catrobat.Core.Services;
+using Catrobat.IDE.Core.Services;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDEWindowsPhone.Services

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
-using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.CatrobatObjects.Variables;
-using Catrobat.Core.Services;
+using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
 using GalaSoft.MvvmLight;

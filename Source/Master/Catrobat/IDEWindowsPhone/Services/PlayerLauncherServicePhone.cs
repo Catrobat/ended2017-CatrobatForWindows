@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.Services;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Services;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDEWindowsPhone.Services

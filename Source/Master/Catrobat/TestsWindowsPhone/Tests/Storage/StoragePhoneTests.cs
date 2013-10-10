@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
-using Catrobat.Core;
-using Catrobat.Core.Services.Storage;
-using Catrobat.Core.Services.Common;
+using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDEWindowsPhone.Services.Storage;
 using Catrobat.IDEWindowsPhone.Utilities.Storage;
 using Catrobat.TestsWindowsPhone.Misc;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using Catrobat.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDEWindowsPhone.Converters
 {

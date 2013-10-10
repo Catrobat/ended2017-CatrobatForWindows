@@ -162,9 +162,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{A4E10BED-8F56-46A6-B78D-BFEF1363B195}</Project>
-      <Name>Core</Name>
+    <ProjectReference Include="..\Catrobat.IDE.Core\Catrobat.IDE.Core.csproj">
+      <Project>{BCA5086E-499A-4507-AA9B-A55D7E534EF7}</Project>
+      <Name>Catrobat.IDE.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\IDECommon\IDECommon.csproj">
       <Project>{73EDA75E-B249-40CB-A883-C2521A72B1C0}</Project>

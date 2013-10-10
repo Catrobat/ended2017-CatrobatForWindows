@@ -131,9 +131,9 @@
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{a4e10bed-8f56-46a6-b78d-bfef1363b195}</Project>
-      <Name>Core</Name>
+    <ProjectReference Include="..\Catrobat.IDE.Core\Catrobat.IDE.Core.csproj">
+      <Project>{bca5086e-499a-4507-aa9b-a55d7e534ef7}</Project>
+      <Name>Catrobat.IDE.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\IDECommon\IDECommon.csproj">
       <Project>{73eda75e-b249-40cb-a883-c2521a72b1c0}</Project>

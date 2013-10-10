@@ -2,8 +2,8 @@
 using System.IO;
 using System.Reflection;
 using System.Threading;
-using Catrobat.Core.Services.Data;
-using Catrobat.Core.Services.Storage;
+using Catrobat.IDE.Core.Services.Data;
+using Catrobat.IDE.Core.Services.Storage;
 using System;
 using System.Runtime.Serialization;
 

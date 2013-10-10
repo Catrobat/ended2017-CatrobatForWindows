@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using Windows.Phone.Storage.SharedAccess;
 using Windows.Storage;
-using Catrobat.Core;
-using Catrobat.Core.Services;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.Services.Storage;
+using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDEWindowsPhone.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -62,7 +62,7 @@ namespace Catrobat.IDEWindowsPhone.Utilities
                 {
                     if (setActive)
                     {
-                        var newProject = Core.CatrobatContext.LoadNewProjectByNameStatic(newProjectName);
+                        var newProject = Catrobat.IDE.Core.CatrobatContext.LoadNewProjectByNameStatic(newProjectName);
 
                         var projectChangedMessage = new GenericMessage<Project>(newProject);
                         Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);

@@ -13,7 +13,7 @@ namespace Catrobat.IDEWindowsPhone
 
         protected override IMvxApplication CreateApp()
         {
-            return new Core.App();
+            return new Catrobat.IDE.Core.App();
         }
 		
         protected override IMvxTrace CreateDebugTrace()

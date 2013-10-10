@@ -2,7 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
-using Catrobat.Core.Services;
+using Catrobat.IDE.Core.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 

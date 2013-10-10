@@ -1,7 +1,7 @@
 ﻿using System;
-using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.CatrobatObjects.Bricks;
+using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects.Bricks;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

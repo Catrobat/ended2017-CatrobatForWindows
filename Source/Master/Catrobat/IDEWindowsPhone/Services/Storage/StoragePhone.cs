@@ -5,9 +5,9 @@ using System.IO.IsolatedStorage;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Windows.Media.Imaging;
-using Catrobat.Core.Services;
-using Catrobat.Core.Services.Data;
-using Catrobat.Core.Services.Storage;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Data;
+using Catrobat.IDE.Core.Services.Storage;
 using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDEWindowsPhone.Services.Storage

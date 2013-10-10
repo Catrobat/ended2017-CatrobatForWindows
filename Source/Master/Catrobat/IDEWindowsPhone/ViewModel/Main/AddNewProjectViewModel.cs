@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
-using Catrobat.Core;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.Services;
+using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

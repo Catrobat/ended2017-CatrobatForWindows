@@ -1,5 +1,5 @@
-﻿using Catrobat.Core.CatrobatObjects.Sounds;
-using Catrobat.Core.Services;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Sounds;
+using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;

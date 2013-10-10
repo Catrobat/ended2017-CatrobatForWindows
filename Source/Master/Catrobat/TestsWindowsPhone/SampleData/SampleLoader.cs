@@ -1,8 +1,8 @@
-﻿using Catrobat.Core;
-using Catrobat.Core.Services.Storage;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.Services;
-using Catrobat.Core.Services.Common;
+﻿using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
 using System;
 using System.IO;
 using System.Xml.Linq;

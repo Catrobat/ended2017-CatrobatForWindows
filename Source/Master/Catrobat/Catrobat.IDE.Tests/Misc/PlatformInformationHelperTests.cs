@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.Services;
+using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Tests.Misc
 {

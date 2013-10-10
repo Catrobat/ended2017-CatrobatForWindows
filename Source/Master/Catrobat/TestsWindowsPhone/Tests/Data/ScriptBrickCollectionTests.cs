@@ -1,11 +1,11 @@
 ﻿using System.Collections;
-using Catrobat.Core.CatroatObjects.Scripts;
-using Catrobat.Core.CatrobatObjects.Scripts;
+using Catrobat.IDE.Core.CatroatObjects.Scripts;
+using Catrobat.IDE.Core.CatrobatObjects.Scripts;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using Catrobat.TestsWindowsPhone.SampleData;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Catrobat.Core.CatrobatObjects.Bricks;
-using Catrobat.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects.Bricks;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.TestsWindowsPhone.Misc;
 
 namespace Catrobat.TestsWindowsPhone.Tests.Data

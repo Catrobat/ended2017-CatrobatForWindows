@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
-using Catrobat.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.Utilities.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.SampleData;

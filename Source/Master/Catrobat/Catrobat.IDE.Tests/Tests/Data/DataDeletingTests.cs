@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Catrobat.Core.Services.Storage;
-using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.CatrobatObjects.Costumes;
-using Catrobat.Core.CatrobatObjects.Sounds;
+using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects.Costumes;
+using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Tests.Misc;
 

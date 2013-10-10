@@ -1,15 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.IO.IsolatedStorage;
-using Catrobat.Core.Services.Storage;
-using Catrobat.Core.Utilities;
-using Catrobat.Core.Services;
-using Catrobat.Core.Services.Common;
+using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.Utilities;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.Misc.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
-using Catrobat.Core;
+using Catrobat.IDE.Core;
 
 namespace Catrobat.IDE.Tests.Tests.Storage
 {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Linq;
-using Catrobat.Core;
-using Catrobat.Core.Utilities;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.VersionConverter;
+using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Utilities;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.VersionConverter;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.Misc.Storage;
 using Catrobat.IDE.Tests.SampleData;

@@ -1,12 +1,12 @@
 ﻿using System;
-using Catrobat.Core;
-using Catrobat.Core.Services.Storage;
-using Catrobat.Core.Utilities;
-using Catrobat.Core.CatrobatObjects;
+using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.Utilities;
+using Catrobat.IDE.Core.CatrobatObjects;
 using System.IO;
 using System.Xml.Linq;
-using Catrobat.Core.Services;
-using Catrobat.Core.Services.Common;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Tests.Misc.Storage;
 
 namespace Catrobat.IDE.Tests.SampleData

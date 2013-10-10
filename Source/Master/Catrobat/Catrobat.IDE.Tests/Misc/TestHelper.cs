@@ -1,9 +1,9 @@
 ﻿using System.IO.IsolatedStorage;
-using Catrobat.Core;
-using Catrobat.Core.Services.Common;
-using Catrobat.Core.Services.Storage;
-using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.Services;
+using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Misc.Storage;
 
 namespace Catrobat.IDE.Tests.Misc

@@ -1,5 +1,5 @@
-﻿using Catrobat.Core.CatrobatObjects.Formulas;
-using Catrobat.Core.CatrobatObjects.Variables;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.IDE.Tests.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

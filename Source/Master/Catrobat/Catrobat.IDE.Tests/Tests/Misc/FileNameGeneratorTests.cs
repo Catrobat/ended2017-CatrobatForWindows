@@ -1,5 +1,5 @@
-﻿using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.Services.Common;
+﻿using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.Services.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Tests.Tests.Misc

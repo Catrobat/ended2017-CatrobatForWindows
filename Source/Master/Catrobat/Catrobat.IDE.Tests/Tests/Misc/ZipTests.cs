@@ -1,8 +1,8 @@
 ﻿using System.IO;
-using Catrobat.Core.Services.Storage;
-using Catrobat.Core.Utilities;
-using Catrobat.Core.Services;
-using Catrobat.Core.Services.Common;
+using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.Utilities;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Tests.Misc;
 

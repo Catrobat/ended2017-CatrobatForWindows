@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using Catrobat.Core.Services;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDEWindowsPhone.Views.Editor.Sprites;
 using Microsoft.Phone.Controls;
 

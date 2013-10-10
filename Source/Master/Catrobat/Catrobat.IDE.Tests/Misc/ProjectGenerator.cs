@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using Catrobat.Core.Services.Storage;
-using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.CatrobatObjects.Bricks;
-using Catrobat.Core.CatrobatObjects.Costumes;
-using Catrobat.Core.CatrobatObjects.Formulas;
-using Catrobat.Core.CatrobatObjects.Scripts;
-using Catrobat.Core.CatrobatObjects.Sounds;
-using Catrobat.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects.Bricks;
+using Catrobat.IDE.Core.CatrobatObjects.Costumes;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.CatrobatObjects.Scripts;
+using Catrobat.IDE.Core.CatrobatObjects.Sounds;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using System.IO;
-using Catrobat.Core.Services;
-using Catrobat.Core.Services.Common;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
 
 namespace Catrobat.IDE.Tests.Misc
 {

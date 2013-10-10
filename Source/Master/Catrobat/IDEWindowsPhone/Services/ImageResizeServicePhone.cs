@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media.Imaging;
-using Catrobat.Core.Services;
-using Catrobat.Core.Services.Data;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Data;
 
 namespace Catrobat.IDEWindowsPhone.Services
 {

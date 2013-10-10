@@ -1,7 +1,7 @@
-﻿using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.CatrobatObjects.Variables;
-using Catrobat.Core.Services;
+﻿using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

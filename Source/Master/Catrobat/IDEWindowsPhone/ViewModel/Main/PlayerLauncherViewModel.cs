@@ -1,4 +1,4 @@
-﻿using Catrobat.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 

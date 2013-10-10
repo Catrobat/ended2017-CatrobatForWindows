@@ -1,6 +1,6 @@
-﻿using Catrobat.Core.Utilities.Helpers;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.CatrobatObjects.Variables;
+﻿using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.Formulas;
@@ -38,7 +38,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
 
         #region Private Members
 
-        private Core.CatrobatObjects.Formulas.Formula _formula;
+        private Catrobat.IDE.Core.CatrobatObjects.Formulas.Formula _formula;
         private Sprite _selectedSprite;
         private FormulaButton _formulaButton;
         private Project _currentProject;
@@ -84,7 +84,7 @@ namespace Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula
             }
         }
 
-        public Core.CatrobatObjects.Formulas.Formula Formula
+        public Catrobat.IDE.Core.CatrobatObjects.Formulas.Formula Formula
         {
             get { return _formula; }
             set

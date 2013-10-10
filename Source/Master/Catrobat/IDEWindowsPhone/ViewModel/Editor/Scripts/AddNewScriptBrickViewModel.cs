@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using Catrobat.Core.CatroatObjects.Scripts;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.CatrobatObjects.Bricks;
-using Catrobat.Core.CatrobatObjects.Scripts;
-using Catrobat.Core.Services;
+using Catrobat.IDE.Core.CatroatObjects.Scripts;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects.Bricks;
+using Catrobat.IDE.Core.CatrobatObjects.Scripts;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDEWindowsPhone.Controls.ReorderableListbox;
 using Catrobat.IDEWindowsPhone.Views.Editor.Scripts;
 using GalaSoft.MvvmLight;

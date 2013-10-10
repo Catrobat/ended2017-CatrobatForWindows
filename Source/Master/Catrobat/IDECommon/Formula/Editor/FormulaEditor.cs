@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Catrobat.Core.CatrobatObjects.Formulas;
-using Catrobat.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDECommon.Formula.Editor
 {
