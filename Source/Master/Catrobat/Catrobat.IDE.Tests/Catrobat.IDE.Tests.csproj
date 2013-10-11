@@ -135,10 +135,6 @@
       <Project>{bca5086e-499a-4507-aa9b-a55d7e534ef7}</Project>
       <Name>Catrobat.IDE.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IDECommon\IDECommon.csproj">
-      <Project>{73eda75e-b249-40cb-a883-c2521a72b1c0}</Project>
-      <Name>IDECommon</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:formulaControls="clr-namespace:Catrobat.IDECommon.Formula.Editor;assembly=Catrobat.IDECommon"
+    xmlns:formulaControls="clr-namespace:Catrobat.IDE.Core.FormulaEditor.Editor;assembly=Catrobat.IDE.Core"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:variables="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Variables;assembly=Catrobat.IDE.Core"
     xmlns:buttons="clr-namespace:Catrobat.IDE.Phone.Controls.Buttons"

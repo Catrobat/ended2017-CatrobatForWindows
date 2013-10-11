@@ -39,10 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Formula\Editor\FormulaDefaultValueCreater.cs" />
-    <Compile Include="Formula\Editor\FormulaEditor.cs" />
-    <Compile Include="Formula\Editor\FormulaKeys.cs" />
-    <Compile Include="Formula\Editor\SelectedFormulaInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

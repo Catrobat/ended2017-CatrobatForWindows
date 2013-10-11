@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Catrobat.IDECommon.Formula.Editor
+﻿namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
     public enum FormulaEditorKey
     {

@@ -3,7 +3,7 @@ using System.Linq;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
-namespace Catrobat.IDECommon.Formula.Editor
+namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
     public class FormulaEditor
     {

@@ -1,6 +1,6 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 
-namespace Catrobat.IDECommon.Formula.Editor
+namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
     public class SelectedFormulaInformation
     {

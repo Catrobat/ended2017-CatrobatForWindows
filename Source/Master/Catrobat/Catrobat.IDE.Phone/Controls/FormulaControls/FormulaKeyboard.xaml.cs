@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDECommon.Formula.Editor;
+using Catrobat.IDE.Core.FormulaEditor.Editor;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {

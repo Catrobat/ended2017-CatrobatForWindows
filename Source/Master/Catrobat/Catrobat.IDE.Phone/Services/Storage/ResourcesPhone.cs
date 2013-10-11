@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
                     }
                 case ResourceScope.IdeCommon:
                     {
-                        projectPath = "Catrobat.IDECommon.";
+                        projectPath = "Catrobat.IDE.Core.";
                         var path = projectPath + uri.Replace("/", ".");
                         var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
                         _openedStreams.Add(stream);

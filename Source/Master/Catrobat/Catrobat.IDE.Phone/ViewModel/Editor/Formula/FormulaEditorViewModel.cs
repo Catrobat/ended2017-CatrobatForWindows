@@ -1,7 +1,7 @@
-﻿using Catrobat.IDE.Core.Utilities.Helpers;
+﻿using Catrobat.IDE.Core.FormulaEditor.Editor;
+using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDECommon.Formula.Editor;
 using Catrobat.IDE.Phone.Controls.FormulaControls;
 using Catrobat.IDE.Phone.Controls.FormulaControls.Formulas;
 using GalaSoft.MvvmLight;

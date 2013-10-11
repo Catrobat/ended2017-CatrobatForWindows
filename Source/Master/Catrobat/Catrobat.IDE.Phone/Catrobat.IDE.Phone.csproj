@@ -841,10 +841,6 @@
       <Project>{BCA5086E-499A-4507-AA9B-A55D7E534EF7}</Project>
       <Name>Catrobat.IDE.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IDECommon\IDECommon.csproj">
-      <Project>{73EDA75E-B249-40CB-A883-C2521A72B1C0}</Project>
-      <Name>IDECommon</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Paint\Paint.csproj">
       <Project>{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}</Project>
       <Name>Paint</Name>

@@ -1,4 +1,4 @@
-﻿using Catrobat.IDECommon.Formula.Editor;
+﻿using Catrobat.IDE.Core.FormulaEditor.Editor;
 using Catrobat.IDE.Phone.ViewModel.Editor.Formula;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
