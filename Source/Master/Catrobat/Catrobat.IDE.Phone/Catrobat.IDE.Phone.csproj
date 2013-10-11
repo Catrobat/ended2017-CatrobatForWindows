@@ -105,22 +105,6 @@
       </SubType>
     </Compile>
     <Compile Include="Bootstrap\PictureChooserPluginBootstrap.cs" />
-    <Compile Include="Content\Localization\AppResources.de.Designer.cs">
-      <DependentUpon>AppResources.de.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Content\Localization\AppResources.Designer.cs">
-      <DependentUpon>AppResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Content\Localization\AppResources.qps-ploc.Designer.cs">
-      <DependentUpon>AppResources.qps-ploc.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Content\Localization\LocalizedStrings.cs" />
     <Compile Include="Controls\AppBar\EditorAppBar.xaml.cs">
       <DependentUpon>EditorAppBar.xaml</DependentUpon>
     </Compile>
@@ -751,38 +735,6 @@
     <Content Include="Content\Images\Misc\Gallery.png" />
     <Content Include="Content\Images\Misc\InProcess.png" />
     <Content Include="Content\Images\Screenshot\NoScreenshot.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Content\Localization\AppResources.de.resx">
-      <DependentUpon>AppResources.de.xlf</DependentUpon>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.de.Designer.cs</LastGenOutput>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Content\Localization\AppResources.qps-ploc.resx">
-      <DependentUpon>AppResources.qps-ploc.xlf</DependentUpon>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.qps-ploc.Designer.cs</LastGenOutput>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Content\Localization\AppResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="Content\Localization\AppResources.de.xlf">
-      <Generator>XliffResxGenerator</Generator>
-      <LastGenOutput>AppResources.de.resx</LastGenOutput>
-    </CodeAnalysisDictionary>
-  </ItemGroup>
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="Content\Localization\AppResources.qps-ploc.xlf">
-      <Generator>XliffResxGenerator</Generator>
-      <LastGenOutput>AppResources.qps-ploc.resx</LastGenOutput>
-    </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AppBarUtils">

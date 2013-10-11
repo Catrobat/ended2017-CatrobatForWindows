@@ -8,7 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Catrobat.IDE.Phone.Annotations;
-using Catrobat.IDE.Phone.Content.Localization;
+using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Phone.Controls.ListPicker
 {

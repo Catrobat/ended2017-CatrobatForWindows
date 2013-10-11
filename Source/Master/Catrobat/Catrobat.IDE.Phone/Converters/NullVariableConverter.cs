@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Phone.Content.Localization;
+using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Phone.Converters
 {

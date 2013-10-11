@@ -5,9 +5,9 @@
 
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:localization="clr-namespace:Catrobat.IDE.Phone.Content.Localization"
+  xmlns:localization1="clr-namespace:Catrobat.IDE.Core.Resources.Localization;assembly=Catrobat.IDE.Core"
   mc:Ignorable="d"
   >
 
-  <localization:LocalizedStrings x:Key="LocalizedStrings" />
+  <localization1:LocalizedStrings x:Key="LocalizedStrings" />
 </ResourceDictionary>

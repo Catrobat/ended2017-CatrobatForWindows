@@ -775,4 +775,129 @@
   <data name="Editor_NoVariableSelected" xml:space="preserve">
     <value>NEU</value>
   </data>
+  <data name="Editor_ButtonAddLocalVariable" xml:space="preserve">
+    <value>Objektvariable hinzufügen</value>
+  </data>
+  <data name="Editor_ButtonAddGlobalVariable" xml:space="preserve">
+    <value>Programmvariable hinzufügen</value>
+  </data>
+  <data name="Editor_StandardLocalVariableName" xml:space="preserve">
+    <value>Objektvariable</value>
+  </data>
+  <data name="Editor_TitleChangeVariableName" xml:space="preserve">
+    <value>VARIABLENNAME ÄNDERN</value>
+  </data>
+  <data name="Editor_StandardGlobalVariableName" xml:space="preserve">
+    <value>Programmvariable</value>
+  </data>
+  <data name="Editor_VariableName" xml:space="preserve">
+    <value>Variablenname</value>
+  </data>
+  <data name="Editor_TitleChooseLocalVariableName" xml:space="preserve">
+    <value>OBJEKTVARIABLENNAME WÄHLEN</value>
+  </data>
+  <data name="Editor_TitleChooseGlobalVariableName" xml:space="preserve">
+    <value>PROGRAMMVARIABLENNAME WÄHLEN</value>
+  </data>
+  <data name="Main_SelectedProjectNotValidMessage" xml:space="preserve">
+    <value>Projekt ungültig</value>
+  </data>
+  <data name="Formula_LogicAnd" xml:space="preserve">
+    <value>UND</value>
+  </data>
+  <data name="Formula_LogicTrue" xml:space="preserve">
+    <value>WAHR</value>
+  </data>
+  <data name="Formula_LogicNot" xml:space="preserve">
+    <value>NICHT</value>
+    <comment>Alternate: ¬</comment>
+  </data>
+  <data name="Formula_LogicFalse" xml:space="preserve">
+    <value>FALSCH</value>
+  </data>
+  <data name="Formula_FunctionTan" xml:space="preserve">
+    <value>TAN</value>
+  </data>
+  <data name="Editor_Camera_Rename" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
+  <data name="Editor_AppbarAdd" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="Main_UseCurrentProjectAsTemplate" xml:space="preserve">
+    <value>Ausgewähltes Projekt ({0}) als Vorlage verwenden?</value>
+  </data>
+  <data name="Formula_FunctionSqrt" xml:space="preserve">
+    <value>SQRT</value>
+  </data>
+  <data name="Formula_FunctionSin" xml:space="preserve">
+    <value>SIN</value>
+  </data>
+  <data name="Formula_FunctionRound" xml:space="preserve">
+    <value>Runden</value>
+  </data>
+  <data name="Formula_FunctionRandom" xml:space="preserve">
+    <value>Zufall</value>
+  </data>
+  <data name="Formula_FunctionPi" xml:space="preserve">
+    <value>Pi</value>
+  </data>
+  <data name="Formula_FunctionMod" xml:space="preserve">
+    <value>MOD</value>
+  </data>
+  <data name="Formula_FunctionMin" xml:space="preserve">
+    <value>MIN</value>
+  </data>
+  <data name="Formula_FunctionMax" xml:space="preserve">
+    <value>MAX</value>
+  </data>
+  <data name="Formula_FunctionLog" xml:space="preserve">
+    <value>LOG</value>
+  </data>
+  <data name="Formula_FunctionLn" xml:space="preserve">
+    <value>LN</value>
+  </data>
+  <data name="Formula_FunctionCos" xml:space="preserve">
+    <value>COS</value>
+  </data>
+  <data name="Formula_FunctionExp" xml:space="preserve">
+    <value>EXP</value>
+  </data>
+  <data name="Formula_FunctionAbs" xml:space="preserve">
+    <value>ABS</value>
+  </data>
+  <data name="Formula_FunctionArcTan" xml:space="preserve">
+    <value>ARCTAN</value>
+  </data>
+  <data name="Formula_FunctionArcSin" xml:space="preserve">
+    <value>ARCSIN</value>
+  </data>
+  <data name="Formula_FunctionArcCos" xml:space="preserve">
+    <value>ARCCOS</value>
+  </data>
+  <data name="Formula_Mult" xml:space="preserve">
+    <value>*</value>
+    <comment>Alternate: •</comment>
+  </data>
+  <data name="Formula_Minus" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="Main_SelectedProjectNotValidHeader" xml:space="preserve">
+    <value>Leider konnte das ausgewählte Projekt nicht geöffnet werden.</value>
+  </data>
+  <data name="Editor_LocalVariables" xml:space="preserve">
+    <value>Objekt</value>
+  </data>
+  <data name="Editor_GlobalVariables" xml:space="preserve">
+    <value>Programm</value>
+  </data>
+  <data name="Main_DeleteProject" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Main_CopyProject" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="Main_ChangeProjectNameAndDescription" xml:space="preserve">
+    <value>Name und Beschreibung ändern</value>
+  </data>
 </root>
