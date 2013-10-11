@@ -96,8 +96,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Controls\Misc\ImageSizeEntry.cs" />
-    <Compile Include="Controls\Misc\ImageSizeEntryCollection.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -150,7 +148,6 @@
     <Compile Include="Controls\ListPicker\ListPickerPage.xaml.cs">
       <DependentUpon>ListPickerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ListPicker\NullItemCollection.cs" />
     <Compile Include="Controls\Misc\ImageSizeIcon.xaml.cs">
       <DependentUpon>ImageSizeIcon.xaml</DependentUpon>
     </Compile>
@@ -349,7 +346,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="Content\Localization\Resources.xaml">
+    <Page Include="Content\Resources.xaml">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -422,10 +419,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\ThemeResources.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ViewModel\ViewModelLocatorResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -801,6 +794,9 @@
       <Project>{A1D92942-96B3-455F-BDCC-5D32214804B6}</Project>
       <Name>PlayerWindowsPhone8Component</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Localization\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

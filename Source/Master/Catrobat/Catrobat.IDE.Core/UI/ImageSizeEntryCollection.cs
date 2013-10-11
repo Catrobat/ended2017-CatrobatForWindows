@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace Catrobat.IDE.Phone.Controls.Misc
+namespace Catrobat.IDE.Core.UI
 {
     public class ImageSizeEntryCollection : ObservableCollection<ImageSizeEntry>
     {

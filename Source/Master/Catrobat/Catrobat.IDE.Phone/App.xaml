@@ -9,8 +9,7 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Content\Localization\Resources.xaml"/>
-        <ResourceDictionary Source="ViewModel/ViewModelLocatorResources.xaml"/>
+        <ResourceDictionary Source="Content\Resources.xaml"/>
         <ResourceDictionary Source="Themes/ThemeResources.xaml"/>
         <ResourceDictionary Source="Views/Editor/Scripts/ScriptBrickTemplates.xaml"/>
         <ResourceDictionary Source="Views/Editor/Scripts/ReorderableListBoxStyles.xaml"/>

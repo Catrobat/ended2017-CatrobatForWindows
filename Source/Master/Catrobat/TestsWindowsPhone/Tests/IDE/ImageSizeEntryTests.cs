@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Phone.Controls.Misc;
+﻿using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Phone.Controls.Misc;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
 namespace Catrobat.IDE.Phone.Tests.Tests.IDE

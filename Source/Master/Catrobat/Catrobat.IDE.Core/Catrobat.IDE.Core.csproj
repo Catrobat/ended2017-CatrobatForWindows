@@ -187,6 +187,9 @@
     <Compile Include="Services\Storage\IStorage.cs" />
     <Compile Include="Services\Storage\IStorageFactory.cs" />
     <Compile Include="Services\Storage\StorageSystem.cs" />
+    <Compile Include="UI\ImageSizeEntry.cs" />
+    <Compile Include="UI\ImageSizeEntryCollection.cs" />
+    <Compile Include="UI\NullItemCollection.cs" />
     <Compile Include="Utilities\Helpers\CostumeHelper.cs" />
     <Compile Include="Utilities\Helpers\FileNameGenerationHelper.cs" />
     <Compile Include="Utilities\Helpers\LanguageHelper.cs" />
@@ -252,9 +255,7 @@
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />

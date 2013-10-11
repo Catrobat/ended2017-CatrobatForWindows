@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Catrobat.IDE.Core.Annotations;
-using Catrobat.IDE.Core.Services.Data;
 using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.IDE.Core.Services.Data;
 
-namespace Catrobat.IDE.Phone.Controls.Misc
+namespace Catrobat.IDE.Core.UI
 {
     public enum ImageSize {Small, Medium, Large, FullSize}
 
-
-
-    public class ImageSizeEntry
+    public sealed class ImageSizeEntry
     {
         private static readonly Dictionary<ImageSize, int> MaxWidthHeights = new Dictionary<ImageSize, int>
         {
@@ -166,7 +164,7 @@ namespace Catrobat.IDE.Phone.Controls.Misc
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
