@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.Services.Data;
-using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.IDE.Phone.Content.Localization;
 
 namespace Catrobat.IDE.Phone.Controls.Misc
 {

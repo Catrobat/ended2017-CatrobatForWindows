@@ -1,56 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
-  <DefaultLanguage xmlns="" code="en" />
+  <DefaultLanguage xmlns="" code="en-US" />
   <Languages xmlns="">
-    <Language code="qps-ploc" />
-    <Language code="en" />
     <Language code="de" />
   </Languages>
-  <App xmlns="" ProductID="{cddb2c02-9584-45c6-9a7d-2b04b322c232}" Title="Pocket Code" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="IDEWindowsPhone author" Description="Pocket Code for Windows Phone" Publisher="IDEWindowsPhone" PublisherID="{00331c69-fa4b-4f1d-ad9a-e30a20e7d376}">
-    <IconPath IsRelative="true" IsResource="false">windows_pocketcode_450.png</IconPath>
+  <App xmlns="" ProductID="{6ac4ff1d-1995-4f04-b91d-4644ce964368}" Title="Catrobat.IDE.Phone" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Catrobat.IDE.Phone author" Description="Sample description" Publisher="Catrobat.IDE.Phone" PublisherID="{1e7996de-4b31-4984-b9e3-b26d555a715f}">
+    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
       <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
       <Capability Name="ID_CAP_SENSORS" />
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
-      <Capability Name="ID_CAP_MICROPHONE" />
     </Capabilities>
     <Tasks>
-      <DefaultTask Name="_default" NavigationPage="Views\Main\MainView.xaml" />
+      <DefaultTask Name="_default" NavigationPage="/Views/Main/MainView.xaml" />
     </Tasks>
     <Tokens>
-      <PrimaryToken TokenID="IDEWindowsPhoneToken" TaskName="_default">
+      <PrimaryToken TokenID="Catrobat.IDE.PhoneToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">windows_pocketcode_450.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">windows_pocketcode_450.png</BackgroundImageURI>
-          <Title>Pocket Code</Title>
-          <BackContent>
-          </BackContent>
-          <BackBackgroundImageURI IsRelative="true" IsResource="false">
-          </BackBackgroundImageURI>
-          <BackTitle>
-          </BackTitle>
-          <DeviceLockImageURI IsRelative="true" IsResource="false">
-          </DeviceLockImageURI>
-          <HasLarge>false</HasLarge>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
+          <Title>Catrobat.IDE.Phone</Title>
+          <BackContent></BackContent>
+          <BackBackgroundImageURI></BackBackgroundImageURI>
+          <BackTitle></BackTitle>
+          <DeviceLockImageURI></DeviceLockImageURI>
+          <HasLarge></HasLarge>
         </TemplateFlip>
       </PrimaryToken>
     </Tokens>
-    <Extensions>
-      <FileTypeAssociation Name="Windows Phone SDK test file type" TaskID="_default" NavUriFragment="fileToken=%s">
-        <Logos>
-          <Logo Size="small" IsRelative="true">Assets/FileTypeAssociation/small-33x33.png</Logo>
-          <Logo Size="medium" IsRelative="true">Assets/FileTypeAssociation/medium-69x69.png</Logo>
-          <Logo Size="large" IsRelative="true">Assets/FileTypeAssociation/large-176x176.png</Logo>
-        </Logos>
-        <SupportedFileTypes>
-          <FileType ContentType="application/sdk">.catroid</FileType>
-          <FileType ContentType="application/sdk">.catrobat</FileType>
-        </SupportedFileTypes>
-      </FileTypeAssociation>
-    </Extensions>
     <ScreenResolutions>
       <ScreenResolution Name="ID_RESOLUTION_WVGA" />
       <ScreenResolution Name="ID_RESOLUTION_WXGA" />
