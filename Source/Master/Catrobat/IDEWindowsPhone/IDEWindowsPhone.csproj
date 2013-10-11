@@ -15,7 +15,7 @@
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
-    <SupportedCultures>de;qps-ploc</SupportedCultures>
+    <SupportedCultures>qps-ploc</SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
     <XapFilename>IDEWindowsPhone_$(Configuration)_$(Platform).xap</XapFilename>
@@ -103,11 +103,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bootstrap\PictureChooserPluginBootstrap.cs" />
-    <Compile Include="Content\Localization\AppResources.de.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AppResources.de.resx</DependentUpon>
-    </Compile>
     <Compile Include="Content\Localization\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -838,14 +833,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Content\Localization\AppResources.de.resx">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AppResources.de.xlf</DependentUpon>
-      <culture>de</culture>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.de.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Content\Localization\AppResources.qps-ploc.resx">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -860,10 +847,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <XliffResource Include="Content\Localization\AppResources.de.xlf">
-      <Generator>XliffResxGenerator</Generator>
-      <LastGenOutput>AppResources.de.resx</LastGenOutput>
-    </XliffResource>
     <XliffResource Include="Content\Localization\AppResources.qps-ploc.xlf">
       <Generator>XliffResxGenerator</Generator>
       <LastGenOutput>AppResources.qps-ploc.resx</LastGenOutput>

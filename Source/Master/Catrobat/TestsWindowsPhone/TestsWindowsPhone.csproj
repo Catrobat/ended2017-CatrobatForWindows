@@ -166,13 +166,13 @@
       <Project>{BCA5086E-499A-4507-AA9B-A55D7E534EF7}</Project>
       <Name>Catrobat.IDE.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Catrobat.IDE.Phone\Catrobat.IDE.Phone.csproj">
+      <Project>{6AC4FF1D-1995-4F04-B91D-4644CE964368}</Project>
+      <Name>Catrobat.IDE.Phone</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IDECommon\IDECommon.csproj">
       <Project>{73EDA75E-B249-40CB-A883-C2521A72B1C0}</Project>
       <Name>IDECommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IDEWindowsPhone\IDEWindowsPhone.csproj">
-      <Project>{CDDB2C02-9584-45C6-9A7D-2B04B322C232}</Project>
-      <Name>IDEWindowsPhone</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

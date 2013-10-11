@@ -3,10 +3,9 @@ using System.Linq.Expressions;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDEWindowsPhone.Services;
-using Catrobat.IDEWindowsPhone.Services.Storage;
-using Catrobat.IDEWindowsPhone.Utilities.Sounds;
-using Catrobat.IDEWindowsPhone.Utilities.Storage;
+using Catrobat.IDE.Phone.Services;
+using Catrobat.IDE.Phone.Services.Storage;
+
 
 namespace Catrobat.TestsWindowsPhone.Misc
 {

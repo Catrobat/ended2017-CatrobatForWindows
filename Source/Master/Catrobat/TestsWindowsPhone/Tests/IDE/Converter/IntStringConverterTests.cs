@@ -1,4 +1,4 @@
-﻿using Catrobat.IDEWindowsPhone.Converters;
+﻿using Catrobat.IDE.Phone.Converters;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
 namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter

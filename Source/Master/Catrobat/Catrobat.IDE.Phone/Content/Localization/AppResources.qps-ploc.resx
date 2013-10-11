@@ -1,0 +1,756 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Brick_Broadcast" xml:space="preserve">
+    <value>[1CB65][!!_ьѓôáđċâŝť_!!]</value>
+  </data>
+  <data name="Brick_BroadcastWait" xml:space="preserve">
+    <value>[CEC8E][!!_ьŕóàďčáŝт àήð ẅãìτ_!!]</value>
+  </data>
+  <data name="Brick_ButtonNew" xml:space="preserve">
+    <value>[209FC][!!_иéẅ..._!!]</value>
+  </data>
+  <data name="Brick_CategoryControl" xml:space="preserve">
+    <value>[84E6A][!!_Ċõηťŕóľ_!!]</value>
+  </data>
+  <data name="Brick_CategoryLooks" xml:space="preserve">
+    <value>[991C1][!!_Ĺóòķś_!!]</value>
+  </data>
+  <data name="Brick_CategoryMotion" xml:space="preserve">
+    <value>[05062][!!_Μôťîõй_!!]</value>
+  </data>
+  <data name="Brick_CategorySound" xml:space="preserve">
+    <value>[178C5][!!_Ŝõûηď_!!]</value>
+  </data>
+  <data name="Brick_ChangeBrightnessBy" xml:space="preserve">
+    <value>[CF41C][!!_ċнâηġè вŕìģħтήêşš ъў_!!]</value>
+  </data>
+  <data name="Brick_ChangeGhostEffectBy" xml:space="preserve">
+    <value>[40A56][!!_ćћâиġé ğħóšť êƒƒęčτ ьÿ_!!]</value>
+  </data>
+  <data name="Brick_ChangeSizeBy" xml:space="preserve">
+    <value>[07920][!!_ċћáйģé şîźé ьŷ_!!]</value>
+  </data>
+  <data name="Brick_ChangeVolumeBy" xml:space="preserve">
+    <value>[B96C1][!!_ćђáηģè νõłùmę ъŷ_!!]</value>
+  </data>
+  <data name="Brick_ChangeXBy" xml:space="preserve">
+    <value>[01B63][!!_ćђâηģé Х ъÿ_!!]</value>
+  </data>
+  <data name="Brick_ChangeYBy" xml:space="preserve">
+    <value>[75DA5][!!_ćћáηģê Ϋ вÿ_!!]</value>
+  </data>
+  <data name="Brick_ClearGraphicEffects" xml:space="preserve">
+    <value>[72DFE][!!_čĺęãѓ ģŕáρнíč éƒƒęĉτš_!!]</value>
+  </data>
+  <data name="Brick_ComeToFront" xml:space="preserve">
+    <value>[AE001][!!_ćómê ţô ƒѓõηт_!!]</value>
+  </data>
+  <data name="Brick_Degrees" xml:space="preserve">
+    <value>[F6129][!!_ðéġŗêêş_!!]</value>
+  </data>
+  <data name="Brick_Forever" xml:space="preserve">
+    <value>[1B75D][!!_ƒòѓêνêŗ_!!]</value>
+  </data>
+  <data name="Brick_GlideToGlide" xml:space="preserve">
+    <value>[CB436][!!_ĝľìđę_!!]</value>
+  </data>
+  <data name="Brick_GlideToTo" xml:space="preserve">
+    <value>[1FFF0][!!_тô_!!]</value>
+  </data>
+  <data name="Brick_GoNStepsBackGo" xml:space="preserve">
+    <value>[BC426][!!_ġò ьãĉķ_!!]</value>
+  </data>
+  <data name="Brick_GoNStepsBackStepsBack" xml:space="preserve">
+    <value>[0D7DC][!!_łàУêѓŝ_!!]</value>
+  </data>
+  <data name="Brick_Hide" xml:space="preserve">
+    <value>[EB0EA][!!_нįďę_!!]</value>
+  </data>
+  <data name="Brick_IfOnEdgeBounce" xml:space="preserve">
+    <value>[AB4BA][!!_îƒ òй éđģé, ъôúйĉé_!!]</value>
+  </data>
+  <data name="Brick_MoveNStepsMove" xml:space="preserve">
+    <value>[D5DE4][!!_mòνé_!!]</value>
+  </data>
+  <data name="Brick_MoveNStepsSteps" xml:space="preserve">
+    <value>[E522B][!!_ŝťèрş_!!]</value>
+  </data>
+  <data name="Brick_NextCostume" xml:space="preserve">
+    <value>[2AA83][!!_ήęхť ĉóŝţùмè_!!]</value>
+  </data>
+  <data name="Brick_Note" xml:space="preserve">
+    <value>[D0A7B][!!_ηòтê_!!]</value>
+  </data>
+  <data name="Brick_PlaceAt" xml:space="preserve">
+    <value>[E1AE2][!!_ρľàčè àť_!!]</value>
+  </data>
+  <data name="Brick_PlaySound" xml:space="preserve">
+    <value>[6CD04][!!_þľáў şõµήð_!!]</value>
+  </data>
+  <data name="Brick_PointInDirection" xml:space="preserve">
+    <value>[8C13A][!!_рõîηт îи ďíѓèĉτįõή_!!]</value>
+  </data>
+  <data name="Brick_PointTo" xml:space="preserve">
+    <value>[36D21][!!_þõîиť ţòŵářðš_!!]</value>
+  </data>
+  <data name="Brick_Repeat" xml:space="preserve">
+    <value>[C0A99][!!_ѓéрèãτ_!!]</value>
+  </data>
+  <data name="Brick_Seconds" xml:space="preserve">
+    <value>[6D1FB][!!_šęċóйðś_!!]</value>
+  </data>
+  <data name="Brick_SetBrightnessTo" xml:space="preserve">
+    <value>[40C89][!!_şęţ вŕîġнţйęšś ťô_!!]</value>
+  </data>
+  <data name="Brick_SetCostume" xml:space="preserve">
+    <value>[335B8][!!_šéτ ĉóšťûmę_!!]</value>
+  </data>
+  <data name="Brick_SetGhostEffectTo" xml:space="preserve">
+    <value>[A6BB9][!!_śéţ ģћõŝţ éƒƒęčт тõ_!!]</value>
+  </data>
+  <data name="Brick_SetSizeTo" xml:space="preserve">
+    <value>[89F9E][!!_šéť šįżę ţó_!!]</value>
+  </data>
+  <data name="Brick_SetVolumeTo" xml:space="preserve">
+    <value>[EF735][!!_ŝêτ νóļúmé тò_!!]</value>
+  </data>
+  <data name="Brick_SetXTo" xml:space="preserve">
+    <value>[CA779][!!_ŝęτ Χ ţô_!!]</value>
+  </data>
+  <data name="Brick_SetYTo" xml:space="preserve">
+    <value>[5B5EF][!!_śèţ Ỳ ţò_!!]</value>
+  </data>
+  <data name="Brick_Show" xml:space="preserve">
+    <value>[B1714][!!_ŝĥôŵ_!!]</value>
+  </data>
+  <data name="Brick_Speak" xml:space="preserve">
+    <value>[FDDD2][!!_šþèãќ_!!]</value>
+  </data>
+  <data name="Brick_StopAllSounds" xml:space="preserve">
+    <value>[360B5][!!_šτóρ àĺļ šôúйðś_!!]</value>
+  </data>
+  <data name="Brick_Times" xml:space="preserve">
+    <value>[9CEEB][!!_ţįmęś_!!]</value>
+  </data>
+  <data name="Brick_TurnLeft" xml:space="preserve">
+    <value>[9241B][!!_ťµřи ĺêƒτ_!!]</value>
+  </data>
+  <data name="Brick_TurnRight" xml:space="preserve">
+    <value>[2FB00][!!_ťûŗй ѓìġђť_!!]</value>
+  </data>
+  <data name="Brick_Wait" xml:space="preserve">
+    <value>[5A1DC][!!_ẃáíţ_!!]</value>
+  </data>
+  <data name="Brick_WhenIReceive" xml:space="preserve">
+    <value>[5E199][!!_ẃĥêη Î řêčéìνé_!!]</value>
+  </data>
+  <data name="Brick_WhenProjectStarts" xml:space="preserve">
+    <value>[B3871][!!_ẁђéη þřõјêĉť şťãřţŝ_!!]</value>
+  </data>
+  <data name="Brick_WhenTapped" xml:space="preserve">
+    <value>[F7D09][!!_ŵħèη τãþρęď_!!]</value>
+  </data>
+  <data name="Editor_ActionPlural" xml:space="preserve">
+    <value>[DFEF6][!!_áċтîóηŝ_!!]</value>
+  </data>
+  <data name="Editor_ActionSingular" xml:space="preserve">
+    <value>[59125][!!_áċτìõή_!!]</value>
+  </data>
+  <data name="Editor_BroadcastMessage" xml:space="preserve">
+    <value>[C6AB4][!!_Βŕòáðćáśτ мèŝşáġè_!!]</value>
+  </data>
+  <data name="Editor_ButtonAddCostume" xml:space="preserve">
+    <value>[1716A][!!_ήéŵ ĉôŝτûmè_!!]</value>
+  </data>
+  <data name="Editor_ButtonAddObject" xml:space="preserve">
+    <value>[EC61D][!!_ήęẅ õвĵęĉτ_!!]</value>
+  </data>
+  <data name="Editor_ButtonAddScript" xml:space="preserve">
+    <value>[7A609][!!_ήęẃ áčτįòή_!!]</value>
+  </data>
+  <data name="Editor_ButtonAddSound" xml:space="preserve">
+    <value>[933F5][!!_иęẃ šòµиď_!!]</value>
+  </data>
+  <data name="Editor_ButtonBack" xml:space="preserve">
+    <value>[274B1][!!_Бâčќ_!!]</value>
+  </data>
+  <data name="Editor_ButtonCancel" xml:space="preserve">
+    <value>[92F73][!!_čàήćęĺ_!!]</value>
+  </data>
+  <data name="Editor_ButtonChange" xml:space="preserve">
+    <value>[0C5F3][!!_čĥàйğę_!!]</value>
+  </data>
+  <data name="Editor_ButtonCopy" xml:space="preserve">
+    <value>[E94D3][!!_ċòрУ_!!]</value>
+  </data>
+  <data name="Editor_ButtonDelete" xml:space="preserve">
+    <value>[FC26E][!!_ďéłêτê_!!]</value>
+  </data>
+  <data name="Editor_ButtonPlayProject" xml:space="preserve">
+    <value>[0B303][!!_рļàУ ρŕòјęćţ_!!]</value>
+  </data>
+  <data name="Editor_ButtonSave" xml:space="preserve">
+    <value>[30226][!!_śãνé_!!]</value>
+  </data>
+  <data name="Editor_ButtonUse" xml:space="preserve">
+    <value>[349B7][!!_µşę_!!]</value>
+  </data>
+  <data name="Editor_Camera" xml:space="preserve">
+    <value>[01EAE][!!_Ċãмęřã_!!]</value>
+  </data>
+  <data name="Editor_ClearSelection" xml:space="preserve">
+    <value>[E5EEC][!!_šèĺéķťîèŕùиģ áûƒнèъèи_!!]</value>
+  </data>
+  <data name="Editor_CostumeName" xml:space="preserve">
+    <value>[1B83A][!!_Ċóşţµmę ηãмê_!!]</value>
+  </data>
+  <data name="Editor_CostumePlural" xml:space="preserve">
+    <value>[DE618][!!_ćóşťúméš_!!]</value>
+  </data>
+  <data name="Editor_CostumeSingular" xml:space="preserve">
+    <value>[FEECF][!!_ćòšτúmè_!!]</value>
+  </data>
+  <data name="Editor_Image" xml:space="preserve">
+    <value>[2A404][!!_Įмãĝê_!!]</value>
+  </data>
+  <data name="Editor_ImageGallery" xml:space="preserve">
+    <value>[34C0B][!!_Ímáģê Ģâļľęѓў_!!]</value>
+  </data>
+  <data name="Editor_ImageSizeFullSize" xml:space="preserve">
+    <value>[4517D][!!_ƒúľł şíźę_!!]</value>
+  </data>
+  <data name="Editor_ImageSizeLarge" xml:space="preserve">
+    <value>[1590F][!!_łâŗğę_!!]</value>
+  </data>
+  <data name="Editor_ImageSizeMedium" xml:space="preserve">
+    <value>[72DA3][!!_мèđìùм_!!]</value>
+  </data>
+  <data name="Editor_ImageSizeSmall" xml:space="preserve">
+    <value>[28B17][!!_şмáľĺ_!!]</value>
+  </data>
+  <data name="Editor_MediaLibrary" xml:space="preserve">
+    <value>[C4D26][!!_Μéďìã ĿįБŗàŕŷ_!!]</value>
+  </data>
+  <data name="Editor_MenuProjectSettings" xml:space="preserve">
+    <value>[7A149][!!_Ρѓôјęćт ŝèťτîйģś_!!]</value>
+  </data>
+  <data name="Editor_MenuStartSite" xml:space="preserve">
+    <value>[78ECE][!!_Şтãŕт şîτę_!!]</value>
+  </data>
+  <data name="Editor_MessageBoxDeleteHeader" xml:space="preserve">
+    <value>[1C656][!!_Đęłêτé {0}_!!]</value>
+  </data>
+  <data name="Editor_MessageBoxDeleteText" xml:space="preserve">
+    <value>[2B472][!!_Ďêłęţê {0} śêłéċтêð {1}._!!]</value>
+  </data>
+  <data name="Editor_MessageBoxNotEnoughSpaceImageHeader" xml:space="preserve">
+    <value>[CBB33][!!_Ņòţ êηôùğĥ śрãċè_!!]</value>
+  </data>
+  <data name="Editor_MessageBoxNotEnoughSpaceImageText" xml:space="preserve">
+    <value>[82569][!!_Ẃįťнôùţ mõѓé ďįšč şрàćè тћé ìмâġé ĉàηήõт Бę śãνèð._!!]</value>
+  </data>
+  <data name="Editor_MessageBoxNotEnoughSpaceSoundHeader" xml:space="preserve">
+    <value>[F588D][!!_Ňòţ éήõúğђ şþáćê_!!]</value>
+  </data>
+  <data name="Editor_MessageBoxNotEnoughSpaceSoundText" xml:space="preserve">
+    <value>[BD568][!!_Ẁìťħõûť môѓê ďíšć şрãĉé тћè śõùйđ ĉáиήõť ъè ŝâνêď._!!]</value>
+  </data>
+  <data name="Editor_MessageBoxWrongImageFormatHeader" xml:space="preserve">
+    <value>[5056B][!!_Ņôτ ŝùþþóŕτèð ƒôѓмãτ_!!]</value>
+  </data>
+  <data name="Editor_MessageBoxWrongImageFormatText" xml:space="preserve">
+    <value>[29E3E][!!_Üηƒóřτùηàţéļў τћę įмáģê ħáŝ â иôт šùрþòŕťêđ ƒôřмãţ._!!]</value>
+  </data>
+  <data name="Editor_New" xml:space="preserve">
+    <value>[70A6B][!!_ήèẃ {0}_!!]</value>
+  </data>
+  <data name="Editor_NewAction" xml:space="preserve">
+    <value>[16CA8][!!_ηęẁ áĉτįõη_!!]</value>
+  </data>
+  <data name="Editor_NewCostume" xml:space="preserve">
+    <value>[BADEF][!!_иęẅ čòŝťùmê_!!]</value>
+  </data>
+  <data name="Editor_NewObject" xml:space="preserve">
+    <value>[907F2][!!_ηèŵ õьјêćτ_!!]</value>
+  </data>
+  <data name="Editor_NewSound" xml:space="preserve">
+    <value>[DB3C2][!!_йèẁ ŝòùйď_!!]</value>
+  </data>
+  <data name="Editor_NoCostumeSelected" xml:space="preserve">
+    <value>[25AC5][!!_Ńò ćòŝťµмę śéļèċťéď_!!]</value>
+  </data>
+  <data name="Editor_NoMessageSelected" xml:space="preserve">
+    <value>[627A9][!!_Ņô mêşšàġé šèĺęċτèð_!!]</value>
+  </data>
+  <data name="Editor_NoSoundSelected" xml:space="preserve">
+    <value>[42A72][!!_Ņô şõúиđ šęłèĉťęð_!!]</value>
+  </data>
+  <data name="Editor_NoSpriteSelected" xml:space="preserve">
+    <value>[57FA0][!!_Ņò õъĵéćť şêłêćτêđ_!!]</value>
+  </data>
+  <data name="Editor_NothingItem" xml:space="preserve">
+    <value>[DA8D0][!!_Ņóťħįήĝ..._!!]</value>
+  </data>
+  <data name="Editor_ObjectPlural" xml:space="preserve">
+    <value>[9775D][!!_ôъјéċтŝ_!!]</value>
+  </data>
+  <data name="Editor_ObjectSingular" xml:space="preserve">
+    <value>[F0B0D][!!_õьјêčť_!!]</value>
+  </data>
+  <data name="Editor_PivotActions" xml:space="preserve">
+    <value>[EED5D][!!_Âćτîôηś_!!]</value>
+  </data>
+  <data name="Editor_PivotCostumes" xml:space="preserve">
+    <value>[F4D40][!!_Čòŝтûмêŝ_!!]</value>
+  </data>
+  <data name="Editor_PivotObjects" xml:space="preserve">
+    <value>[DAC06][!!_ÓБјęćţş_!!]</value>
+  </data>
+  <data name="Editor_PivotSounds" xml:space="preserve">
+    <value>[8FF4F][!!_Śòúиðš_!!]</value>
+  </data>
+  <data name="Editor_ProjectName" xml:space="preserve">
+    <value>[7ADB8][!!_Ρѓõјêċţ иâмę_!!]</value>
+  </data>
+  <data name="Editor_Recorder" xml:space="preserve">
+    <value>[98FD8][!!_Ŗêċõŕđéŕ_!!]</value>
+  </data>
+  <data name="Editor_RecorderRecord" xml:space="preserve">
+    <value>[F38AE][!!_ѓęċ_!!]</value>
+  </data>
+  <data name="Editor_RecorderRecordTime" xml:space="preserve">
+    <value>[8EEA1][!!_Ťįmę_!!]</value>
+  </data>
+  <data name="Editor_RecorderStart" xml:space="preserve">
+    <value>[4C154][!!_śťãŕτ ѓêĉòŕđîиģ_!!]</value>
+  </data>
+  <data name="Editor_RecorderStop" xml:space="preserve">
+    <value>[5E326][!!_šţôþ_!!]</value>
+  </data>
+  <data name="Editor_Recording" xml:space="preserve">
+    <value>[C1E87][!!_Řęčõѓðįиĝ_!!]</value>
+  </data>
+  <data name="Editor_SavingImage" xml:space="preserve">
+    <value>[BAD5C][!!_šáνįηģ îmâġę_!!]</value>
+  </data>
+  <data name="Editor_Selected" xml:space="preserve">
+    <value>[0121B][!!_šéļêćţéð_!!]</value>
+  </data>
+  <data name="Editor_SelectingObject" xml:space="preserve">
+    <value>[59816][!!_ľôâđìήġ õБјęčτ_!!]</value>
+  </data>
+  <data name="Editor_SoundName" xml:space="preserve">
+    <value>[5E60B][!!_Śóúйđ иãmê_!!]</value>
+  </data>
+  <data name="Editor_SoundPlural" xml:space="preserve">
+    <value>[3AA45][!!_şòùηďś_!!]</value>
+  </data>
+  <data name="Editor_SoundSingular" xml:space="preserve">
+    <value>[2E9CF][!!_şôùиđ_!!]</value>
+  </data>
+  <data name="Editor_SpriteName" xml:space="preserve">
+    <value>[33CDC][!!_Òьјêćţ ήâmê_!!]</value>
+  </data>
+  <data name="Editor_TitleChangeCostumeName" xml:space="preserve">
+    <value>[E0E4B][!!_ĆĤÁŇĜÈ ĈÒŚТÙΜÉ ŇÁΜÊ_!!]</value>
+  </data>
+  <data name="Editor_TitleChangeSoundName" xml:space="preserve">
+    <value>[682EA][!!_ČĤÂŇĞĘ ŚÔÜÑĎ ŇÂМĘ_!!]</value>
+  </data>
+  <data name="Editor_TitleChangeSpriteName" xml:space="preserve">
+    <value>[6F018][!!_ĊНÀÑĜÉ ÓΒЈÈĆТ ŅÂΜÈ_!!]</value>
+  </data>
+  <data name="Editor_TitleChooseBrick" xml:space="preserve">
+    <value>[7B2A0][!!_ČНÓÓŜÊ βŘÌĊК_!!]</value>
+  </data>
+  <data name="Editor_TitleChooseCategory" xml:space="preserve">
+    <value>[1FB23][!!_ĈΉÔÓŠÉ ĊÂТÉĜÒŘΫ_!!]</value>
+  </data>
+  <data name="Editor_TitleChooseCostumeName" xml:space="preserve">
+    <value>[7B600][!!_ČĦÕÕŠÉ ĊÔŚТÛΜÊ ŅÂΜÉ_!!]</value>
+  </data>
+  <data name="Editor_TitleChooseSound" xml:space="preserve">
+    <value>[8AA93][!!_ĆΉÔÓŜÈ ŞÒÙŅĎ_!!]</value>
+  </data>
+  <data name="Editor_TitleChooseSoundName" xml:space="preserve">
+    <value>[801F1][!!_ČĤÒÕŠÈ ŚÓÚÑĐ ÑÃΜĘ_!!]</value>
+  </data>
+  <data name="Editor_TitleNewBroadcastMessage" xml:space="preserve">
+    <value>[F4496][!!_ŃÈẂ ЬЃÔÁÐĈÂŚТ ΜÈŜŞÃĞÊ_!!]</value>
+  </data>
+  <data name="Editor_TitleNewCostume" xml:space="preserve">
+    <value>[B54B8][!!_ŃÉẄ ĊÓŞТÛΜĘ_!!]</value>
+  </data>
+  <data name="Editor_TitleNewSound" xml:space="preserve">
+    <value>[02ACB][!!_ÑÊŴ ŞÓÙŃÐ_!!]</value>
+  </data>
+  <data name="Editor_TitleNewSprite" xml:space="preserve">
+    <value>[E6CA4][!!_ŇÈŴ ÔβЈĘČТ_!!]</value>
+  </data>
+  <data name="Editor_TitleProjectSettings" xml:space="preserve">
+    <value>[2ACE0][!!_ÞŖÕЈÊĆΤ ŞÉΤŤĮÑĜŞ_!!]</value>
+  </data>
+  <data name="Editor_TitleRecorder" xml:space="preserve">
+    <value>[B6420][!!_ŖĘĈÕŔÐ ŚÓÙÑĎ_!!]</value>
+  </data>
+  <data name="Formula_ACCELERATION_X" xml:space="preserve">
+    <value>[3B01C][!!_àċċèĺêŗâτîóйχ_!!]</value>
+  </data>
+  <data name="Formula_ACCELERATION_Y" xml:space="preserve">
+    <value>[5FA6E][!!_ãċĉèľéřàťîôйΫ_!!]</value>
+  </data>
+  <data name="Formula_ACCELERATION_Z" xml:space="preserve">
+    <value>[970D5][!!_ãćčèľèŕâťìôйŹ_!!]</value>
+  </data>
+  <data name="Formula_BRIGHTNESS" xml:space="preserve">
+    <value>[421BB][!!_ъřįġħţиèšš_!!]</value>
+  </data>
+  <data name="Formula_ClosedBrecket" xml:space="preserve">
+    <value>[E1AEF][!!_)_!!]</value>
+  </data>
+  <data name="Formula_COMPASSDIRECTION" xml:space="preserve">
+    <value>[7AF5A][!!_čõмþáššđîŗéĉ_!!]</value>
+  </data>
+  <data name="Formula_DecimalPointCharacter" xml:space="preserve">
+    <value>[ECA1E][!!_._!!]</value>
+  </data>
+  <data name="Formula_DIRECTION" xml:space="preserve">
+    <value>[79586][!!_ðìřéčτìôή_!!]</value>
+  </data>
+  <data name="Formula_INCLINATION_X" xml:space="preserve">
+    <value>[18F67][!!_įηćĺíηáťîõйХ_!!]</value>
+  </data>
+  <data name="Formula_INCLINATION_Y" xml:space="preserve">
+    <value>[55F00][!!_ìиčľįήâтîòήΫ_!!]</value>
+  </data>
+  <data name="Formula_LAYER" xml:space="preserve">
+    <value>[4D8F5][!!_ļàўèѓ_!!]</value>
+  </data>
+  <data name="Formula_LogicEqual" xml:space="preserve">
+    <value>[D9B2F][!!_=_!!]</value>
+  </data>
+  <data name="Formula_OBJECT_X" xml:space="preserve">
+    <value>[5CE47][!!_ôьјéĉťΧ_!!]</value>
+  </data>
+  <data name="Formula_OBJECT_Y" xml:space="preserve">
+    <value>[8B2F8][!!_ôБĵęċτŶ_!!]</value>
+  </data>
+  <data name="Formula_OpenBrecket" xml:space="preserve">
+    <value>[34691][!!_(_!!]</value>
+  </data>
+  <data name="Formula_ParameterSeperator" xml:space="preserve">
+    <value>[94A69][!!_,_!!]</value>
+  </data>
+  <data name="Formula_Random" xml:space="preserve">
+    <value>[7F3DE][!!_řãйðóm_!!]</value>
+  </data>
+  <data name="Formula_SIZE" xml:space="preserve">
+    <value>[A541B][!!_šîžè_!!]</value>
+  </data>
+  <data name="Formula_TRANSPARENCY" xml:space="preserve">
+    <value>[74519][!!_ţѓáήśþàŗéήĉУ_!!]</value>
+  </data>
+  <data name="Formula_Unknown" xml:space="preserve">
+    <value>[D1733][!!_ûиķήóẁй_!!]</value>
+  </data>
+  <data name="Main_ActiveProject" xml:space="preserve">
+    <value>[7E5A3][!!_ãċтíνé_!!]</value>
+  </data>
+  <data name="Main_ButtonCancel" xml:space="preserve">
+    <value>[87E3B][!!_čãηčéł_!!]</value>
+  </data>
+  <data name="Main_ButtonCopy" xml:space="preserve">
+    <value>[D2F8B][!!_ćõρў_!!]</value>
+  </data>
+  <data name="Main_ButtonCreate" xml:space="preserve">
+    <value>[C38FC][!!_иéẁ_!!]</value>
+  </data>
+  <data name="Main_ButtonDelete" xml:space="preserve">
+    <value>[EACA1][!!_đèĺèťê_!!]</value>
+  </data>
+  <data name="Main_ButtonEdit" xml:space="preserve">
+    <value>[A1156][!!_êďìť_!!]</value>
+  </data>
+  <data name="Main_ButtonLoginRegister" xml:space="preserve">
+    <value>[B1125][!!_Ĺòģíй õř Ŗèğíŝťęŕ_!!]</value>
+  </data>
+  <data name="Main_ButtonPasswordForgotten" xml:space="preserve">
+    <value>[ED491][!!_Рãŝŝŵòŗð ƒòŕġóţтèη_!!]</value>
+  </data>
+  <data name="Main_ButtonSave" xml:space="preserve">
+    <value>[40AD6][!!_şâνé_!!]</value>
+  </data>
+  <data name="Main_ButtonUpload" xml:space="preserve">
+    <value>[418C0][!!_ùþłôãď_!!]</value>
+  </data>
+  <data name="Main_DEBUGShowMemory" xml:space="preserve">
+    <value>[01884][!!_Şћòŵ мèmòŗУ úśáģê_!!]</value>
+  </data>
+  <data name="Main_FilterTextBoxHint" xml:space="preserve">
+    <value>[E6BA6][!!_₣įйđ..._!!]</value>
+  </data>
+  <data name="Main_HeaderAbout" xml:space="preserve">
+    <value>[59276][!!_Áвôûτ_!!]</value>
+  </data>
+  <data name="Main_HeaderCurrentProject" xml:space="preserve">
+    <value>[2E3F5][!!_Čûřřęиτ Þѓôĵèčţ_!!]</value>
+  </data>
+  <data name="Main_HeaderDesign" xml:space="preserve">
+    <value>[71BB7][!!_Ðéšįĝй_!!]</value>
+  </data>
+  <data name="Main_HeaderLanguage" xml:space="preserve">
+    <value>[EF35D][!!_Ŀàηģùãğè_!!]</value>
+  </data>
+  <data name="Main_HeaderLocalProjects" xml:space="preserve">
+    <value>[27267][!!_МУ Ρřóĵêĉτś_!!]</value>
+  </data>
+  <data name="Main_HeaderOnlineProjects" xml:space="preserve">
+    <value>[FFC13][!!_Òηĺíиę_!!]</value>
+  </data>
+  <data name="Main_HeaderSettings" xml:space="preserve">
+    <value>[3D8AE][!!_Šéţťíήģš_!!]</value>
+  </data>
+  <data name="Main_ListDesign" xml:space="preserve">
+    <value>[3B2CE][!!_Ðęšìģη_!!]</value>
+  </data>
+  <data name="Main_ListLanguage" xml:space="preserve">
+    <value>[034A2][!!_Ŀãήĝûáģè_!!]</value>
+  </data>
+  <data name="Main_MainCopyProjectDialogMessage" xml:space="preserve">
+    <value>[B26E5][!!_Âřę ŝùѓę ÿòù ẁàйť ťõ ĉôþУ "{0}"?_!!]</value>
+  </data>
+  <data name="Main_MainCopyProjectDialogTitle" xml:space="preserve">
+    <value>[2748A][!!_Ċóрў þŗôĵêċт?_!!]</value>
+  </data>
+  <data name="Main_MainDeleteProjectDialogMessage" xml:space="preserve">
+    <value>[F614C][!!_Âřê šûŗê ŷóú ẃàйτ ťò ďéłęтè "{0}"?_!!]</value>
+  </data>
+  <data name="Main_MainDeleteProjectDialogTitle" xml:space="preserve">
+    <value>[FA7E2][!!_Ðêľèťę ρřõĵêčτ?_!!]</value>
+  </data>
+  <data name="Main_MessageBoxInformation" xml:space="preserve">
+    <value>[34B19][!!_Įήƒôŗmáťîóй_!!]</value>
+  </data>
+  <data name="Main_OnlineProjectDescription" xml:space="preserve">
+    <value>[58498][!!_ðêşċѓìрţîôй:_!!]</value>
+  </data>
+  <data name="Main_OnlineProjectDownloadButton" xml:space="preserve">
+    <value>[4D373][!!_Đòẃήĺòàð_!!]</value>
+  </data>
+  <data name="Main_OnlineProjectDownloads" xml:space="preserve">
+    <value>[17128][!!_{0} ðòŵйľôãðš_!!]</value>
+  </data>
+  <data name="Main_OnlineProjectLicenseButton" xml:space="preserve">
+    <value>[12566][!!_Ļìĉęиśé_!!]</value>
+  </data>
+  <data name="Main_OnlineProjectListBoxLoadMore" xml:space="preserve">
+    <value>[8840B][!!_Ľõàð mòŕę..._!!]</value>
+  </data>
+  <data name="Main_OnlineProjectProject" xml:space="preserve">
+    <value>[44FF1][!!_ρŗõјęĉτ:_!!]</value>
+  </data>
+  <data name="Main_OnlineProjectReportButton" xml:space="preserve">
+    <value>[CC7E7][!!_Řèрóŕť áŝ ùйâρρŕõþѓíàтé_!!]</value>
+  </data>
+  <data name="Main_OnlineProjectStatistics" xml:space="preserve">
+    <value>[87918][!!_śťàţíśτįĉŝ:_!!]</value>
+  </data>
+  <data name="Main_OnlineProjectUploaded" xml:space="preserve">
+    <value>[9063B][!!_úρłõáđéđ:_!!]</value>
+  </data>
+  <data name="Main_OnlineProjectUploadedBy" xml:space="preserve">
+    <value>[FED35][!!_{0} ъУ_!!]</value>
+  </data>
+  <data name="Main_OnlineProjectVersion" xml:space="preserve">
+    <value>[1534D][!!_(νêŗšįõη: {0})_!!]</value>
+  </data>
+  <data name="Main_OnlineProjectViews" xml:space="preserve">
+    <value>[9F569][!!_{0} νìèŵŝ_!!]</value>
+  </data>
+  <data name="Main_ProjectDoesNotExist" xml:space="preserve">
+    <value>[EA95B][!!_þŕõĵéĉτ ðòéš йõť ę×ìŝţ_!!]</value>
+  </data>
+  <data name="Main_ProjectName" xml:space="preserve">
+    <value>[165BA][!!_Þѓóĵéċť йãмę_!!]</value>
+  </data>
+  <data name="App_ResourceLanguage" xml:space="preserve">
+    <value>[BFB37][!!_éη_!!]</value>
+  </data>
+  <data name="Main_SettingsBricks" xml:space="preserve">
+    <value>[DCF6A][!!_éйâБľè/đíšâБĺé ъřîćкš_!!]</value>
+  </data>
+  <data name="Main_SettingsEnableNXTBricks" xml:space="preserve">
+    <value>[20887][!!_ÉиàБľę Мįйďšтõřm Бŗîċĸŝ_!!]</value>
+  </data>
+  <data name="Main_SettingsTheme" xml:space="preserve">
+    <value>[F672D][!!_Тĥémè_!!]</value>
+  </data>
+  <data name="Main_TitleNewProject" xml:space="preserve">
+    <value>[D246B][!!_ŇÉŴ РŖÒЈÊČŢ_!!]</value>
+  </data>
+  <data name="Main_TitleSettings" xml:space="preserve">
+    <value>[04553][!!_ŞÈŢŢÌŅĢŚ_!!]</value>
+  </data>
+  <data name="Main_TitleUploadProject" xml:space="preserve">
+    <value>[B0DB3][!!_ÛРĽÔÂĎ ΡЃÒĴÉĆТ_!!]</value>
+  </data>
+  <data name="Main_TitleUploadProjectLogin" xml:space="preserve">
+    <value>[8CAD2][!!_ĽÓĠÌŃ ÓŖ ЃÉĜÍŠΤÈŖ_!!]</value>
+  </data>
+  <data name="Main_UploadProjectEmail" xml:space="preserve">
+    <value>[27B9E][!!_Èmáįł:_!!]</value>
+  </data>
+  <data name="Main_UploadProjectLoginError" xml:space="preserve">
+    <value>[B51EE][!!_Ļòġíй Ęŗѓõŗ. {0}_!!]</value>
+  </data>
+  <data name="Main_UploadProjectLoginErrorCaption" xml:space="preserve">
+    <value>[64576][!!_Ľôġįη ƒáíľèď_!!]</value>
+  </data>
+  <data name="Main_UploadProjectMissingLoginData" xml:space="preserve">
+    <value>[3F493][!!_Ĺóģîη- òŕ ŕêġìšţřãţįõй- ďàτã įŝ îиčõмрłęţę._!!]</value>
+  </data>
+  <data name="Main_UploadProjectPassword" xml:space="preserve">
+    <value>[D001B][!!_Рâśŝŵôŗď:_!!]</value>
+  </data>
+  <data name="Main_UploadProjectProjectDescription" xml:space="preserve">
+    <value>[3181F][!!_Đéšċŕíþťîòη:_!!]</value>
+  </data>
+  <data name="Main_UploadProjectProjectName" xml:space="preserve">
+    <value>[79D53][!!_Рřòјéĉτ:_!!]</value>
+  </data>
+  <data name="Main_UploadProjectRegistrationSucessful" xml:space="preserve">
+    <value>[A80FC][!!_Ŗéğįšτŗâťìôή ŝúćčêŝšƒµļ!_!!]</value>
+  </data>
+  <data name="Main_UploadProjectUndefinedError" xml:space="preserve">
+    <value>[E406E][!!_Úήđêƒìйèð êŗŗòѓ. Éѓѓòř ċóďê {0}_!!]</value>
+  </data>
+  <data name="Main_UploadProjectUsername" xml:space="preserve">
+    <value>[CFEA7][!!_Úśéřиáмè:_!!]</value>
+  </data>
+  <data name="Main_UploadProjectWelcome" xml:space="preserve">
+    <value>[08F64][!!_Ŵèľĉõmé {0}!_!!]</value>
+  </data>
+  <data name="Main_UploadQueueMessage" xml:space="preserve">
+    <value>[73DF4][!!_Ϋõµř þřôјêćţ įŝ Бèîиĝ µþľòâďèđ. Ţнìš мîğнτ тàĸê à ļįťτĺè ẃĥíľé, вûť ẅê'ļł ťéłľ ŷòû ẃĥęη ìτ'ş ƒįйîşħèđ!_!!]</value>
+  </data>
+  <data name="App_FlowDirection" xml:space="preserve">
+    <value>[A9356][!!_ĿèƒτΤóŖìĝĥţ_!!]</value>
+  </data>
+</root>
