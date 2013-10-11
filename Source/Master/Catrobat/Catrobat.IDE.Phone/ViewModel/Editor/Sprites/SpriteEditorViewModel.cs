@@ -11,7 +11,7 @@ using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.CatrobatObjects.Scripts;
 using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Phone.Content.Localization;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Phone.Controls.Buttons;
 using Catrobat.IDE.Phone.Controls.ReorderableListbox;
 using Catrobat.IDE.Phone.Views.Editor;

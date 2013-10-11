@@ -8,7 +8,7 @@ using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
-using Catrobat.IDE.Phone.Content.Localization;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Phone.Views.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

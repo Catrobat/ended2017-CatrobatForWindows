@@ -5,7 +5,7 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Utilities;
-using Catrobat.IDE.Phone.Content.Localization;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Phone.Services;
 using Catrobat.IDE.Phone.Utilities;
 using Catrobat.IDE.Phone.ViewModel;
