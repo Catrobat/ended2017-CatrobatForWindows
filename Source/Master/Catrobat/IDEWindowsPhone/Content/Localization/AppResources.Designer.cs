@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace Catrobat.IDEWindowsPhone.Content.Localization {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -670,7 +673,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to add global variable.
+        ///   Looks up a localized string similar to add program variable.
         /// </summary>
         public static string Editor_ButtonAddGlobalVariable {
             get {
@@ -679,7 +682,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to add local variable.
+        ///   Looks up a localized string similar to add object variable.
         /// </summary>
         public static string Editor_ButtonAddLocalVariable {
             get {
@@ -850,7 +853,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Global.
+        ///   Looks up a localized string similar to Program.
         /// </summary>
         public static string Editor_GlobalVariables {
             get {
@@ -958,7 +961,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete {0} selected {1}..
+        ///   Looks up a localized string similar to Delete {0} selected {1}?.
         /// </summary>
         public static string Editor_MessageBoxDeleteText {
             get {
@@ -1017,51 +1020,6 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         public static string Editor_MessageBoxWrongImageFormatText {
             get {
                 return ResourceManager.GetString("Editor_MessageBoxWrongImageFormatText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to new {0}.
-        /// </summary>
-        public static string Editor_New {
-            get {
-                return ResourceManager.GetString("Editor_New", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to new action.
-        /// </summary>
-        public static string Editor_NewAction {
-            get {
-                return ResourceManager.GetString("Editor_NewAction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to new costume.
-        /// </summary>
-        public static string Editor_NewCostume {
-            get {
-                return ResourceManager.GetString("Editor_NewCostume", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to new object.
-        /// </summary>
-        public static string Editor_NewObject {
-            get {
-                return ResourceManager.GetString("Editor_NewObject", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to new sound.
-        /// </summary>
-        public static string Editor_NewSound {
-            get {
-                return ResourceManager.GetString("Editor_NewSound", resourceCulture);
             }
         }
         
@@ -1309,7 +1267,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GlobalVariable.
+        ///   Looks up a localized string similar to ProgramVariable.
         /// </summary>
         public static string Editor_StandardGlobalVariableName {
             get {
@@ -1390,7 +1348,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CHOOSE GLOBAL VARIABLE NAME.
+        ///   Looks up a localized string similar to CHOOSE PROGRAM VARIABLE NAME.
         /// </summary>
         public static string Editor_TitleChooseGlobalVariableName {
             get {
@@ -1543,7 +1501,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to compassdirec.
+        ///   Looks up a localized string similar to compassdirection.
         /// </summary>
         public static string Formula_COMPASSDIRECTION {
             get {
@@ -2335,7 +2293,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to uploaded:.
+        ///   Looks up a localized string similar to uploaded.
         /// </summary>
         public static string Main_OnlineProjectUploaded {
             get {
@@ -2344,7 +2302,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} by.
+        ///   Looks up a localized string similar to {0} by:.
         /// </summary>
         public static string Main_OnlineProjectUploadedBy {
             get {
@@ -2524,7 +2482,7 @@ namespace Catrobat.IDEWindowsPhone.Content.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login- or registration- data is incomplete..
+        ///   Looks up a localized string similar to Login- or registrationdata is incomplete..
         /// </summary>
         public static string Main_UploadProjectMissingLoginData {
             get {

@@ -361,7 +361,7 @@
     <value>Delete {0}</value>
   </data>
   <data name="Editor_MessageBoxDeleteText" xml:space="preserve">
-    <value>Delete {0} selected {1}.</value>
+    <value>Delete {0} selected {1}?</value>
   </data>
   <data name="Editor_MessageBoxNotEnoughSpaceImageHeader" xml:space="preserve">
     <value>Not enough space</value>
@@ -380,21 +380,6 @@
   </data>
   <data name="Editor_MessageBoxWrongImageFormatText" xml:space="preserve">
     <value>Unfortunately the image has a not supported format.</value>
-  </data>
-  <data name="Editor_New" xml:space="preserve">
-    <value>new {0}</value>
-  </data>
-  <data name="Editor_NewAction" xml:space="preserve">
-    <value>new action</value>
-  </data>
-  <data name="Editor_NewCostume" xml:space="preserve">
-    <value>new costume</value>
-  </data>
-  <data name="Editor_NewObject" xml:space="preserve">
-    <value>new object</value>
-  </data>
-  <data name="Editor_NewSound" xml:space="preserve">
-    <value>new sound</value>
   </data>
   <data name="Editor_NoCostumeSelected" xml:space="preserve">
     <value>No costume selected</value>
@@ -532,7 +517,7 @@
     <value>)</value>
   </data>
   <data name="Formula_COMPASSDIRECTION" xml:space="preserve">
-    <value>compassdirec</value>
+    <value>compassdirection</value>
   </data>
   <data name="Formula_DecimalPointCharacter" xml:space="preserve">
     <value>.</value>
@@ -697,10 +682,10 @@
     <value>statistics:</value>
   </data>
   <data name="Main_OnlineProjectUploaded" xml:space="preserve">
-    <value>uploaded:</value>
+    <value>uploaded</value>
   </data>
   <data name="Main_OnlineProjectUploadedBy" xml:space="preserve">
-    <value>{0} by</value>
+    <value>{0} by:</value>
   </data>
   <data name="Main_OnlineProjectVersion" xml:space="preserve">
     <value>(version: {0})</value>
@@ -751,7 +736,7 @@
     <value>Login failed</value>
   </data>
   <data name="Main_UploadProjectMissingLoginData" xml:space="preserve">
-    <value>Login- or registration- data is incomplete.</value>
+    <value>Login- or registrationdata is incomplete.</value>
   </data>
   <data name="Main_UploadProjectPassword" xml:space="preserve">
     <value>Password:</value>
@@ -829,7 +814,7 @@
     <value>Please wait while your login state is beeing checked!</value>
   </data>
   <data name="Editor_GlobalVariables" xml:space="preserve">
-    <value>Global</value>
+    <value>Program</value>
   </data>
   <data name="Editor_LocalVariables" xml:space="preserve">
     <value>Object</value>
@@ -841,13 +826,13 @@
     <value>NEW</value>
   </data>
   <data name="Editor_ButtonAddGlobalVariable" xml:space="preserve">
-    <value>add global variable</value>
+    <value>add program variable</value>
   </data>
   <data name="Editor_ButtonAddLocalVariable" xml:space="preserve">
-    <value>add local variable</value>
+    <value>add object variable</value>
   </data>
   <data name="Editor_StandardGlobalVariableName" xml:space="preserve">
-    <value>GlobalVariable</value>
+    <value>ProgramVariable</value>
   </data>
   <data name="Editor_StandardLocalVariableName" xml:space="preserve">
     <value>ObjectVariable</value>
@@ -856,7 +841,7 @@
     <value>CHANGE VARIABLE NAME</value>
   </data>
   <data name="Editor_TitleChooseGlobalVariableName" xml:space="preserve">
-    <value>CHOOSE GLOBAL VARIABLE NAME</value>
+    <value>CHOOSE PROGRAM VARIABLE NAME</value>
   </data>
   <data name="Editor_TitleChooseLocalVariableName" xml:space="preserve">
     <value>CHOOSE OBJECT VARIABLE NAME</value>
