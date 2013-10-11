@@ -366,7 +366,7 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="Content\Localization\Resources.xaml">
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\AppBar\EditorAppBar.xaml">

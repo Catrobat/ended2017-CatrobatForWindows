@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
-  <file datatype="xml" source-language="en-US" target-language="qps-ploc" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="Catrobat.IDE.Phone" product-version="1.0.0.0" build-num="0">
+  <file datatype="xml" source-language="en" target-language="qps-ploc" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="IDEWindowsPhone" product-version="1.0.0.0" build-num="0">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="2.1.1100.0" tool-company="Microsoft" />
     </header>
@@ -331,8 +331,8 @@
           <target state="translated" state-qualifier="mt-suggestion">[1C656][!!_Đęłêτé {0}_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_MessageBoxDeleteText" xml:space="preserve">
-          <source>Delete {0} selected {1}.</source>
-          <target state="translated" state-qualifier="mt-suggestion">[2B472][!!_Ďêłęţê {0} śêłéċтêð {1}._!!]</target>
+          <source>Delete {0} selected {1}?</source>
+          <target state="new" state-qualifier="mt-suggestion">Delete {0} selected {1}?</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceImageHeader" xml:space="preserve">
           <source>Not enough space</source>
@@ -357,26 +357,6 @@
         <trans-unit translate="yes" id="Resx/Editor_MessageBoxWrongImageFormatText" xml:space="preserve">
           <source>Unfortunately the image has a not supported format.</source>
           <target state="translated" state-qualifier="mt-suggestion">[29E3E][!!_Üηƒóřτùηàţéļў τћę įмáģê ħáŝ â иôт šùрþòŕťêđ ƒôřмãţ._!!]</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/Editor_New" xml:space="preserve">
-          <source>new {0}</source>
-          <target state="translated" state-qualifier="mt-suggestion">[70A6B][!!_ήèẃ {0}_!!]</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/Editor_NewAction" xml:space="preserve">
-          <source>new action</source>
-          <target state="translated" state-qualifier="mt-suggestion">[16CA8][!!_ηęẁ áĉτįõη_!!]</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/Editor_NewCostume" xml:space="preserve">
-          <source>new costume</source>
-          <target state="translated" state-qualifier="mt-suggestion">[BADEF][!!_иęẅ čòŝťùmê_!!]</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/Editor_NewObject" xml:space="preserve">
-          <source>new object</source>
-          <target state="translated" state-qualifier="mt-suggestion">[907F2][!!_ηèŵ õьјêćτ_!!]</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/Editor_NewSound" xml:space="preserve">
-          <source>new sound</source>
-          <target state="translated" state-qualifier="mt-suggestion">[DB3C2][!!_йèẁ ŝòùйď_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_NoCostumeSelected" xml:space="preserve">
           <source>No costume selected</source>
@@ -559,8 +539,8 @@
           <target state="translated" state-qualifier="mt-suggestion">[E1AEF][!!_)_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_COMPASSDIRECTION" xml:space="preserve">
-          <source>compassdirec</source>
-          <target state="translated" state-qualifier="mt-suggestion">[7AF5A][!!_čõмþáššđîŗéĉ_!!]</target>
+          <source>compassdirection</source>
+          <target state="new" state-qualifier="mt-suggestion">compassdirection</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_DecimalPointCharacter" xml:space="preserve">
           <source>.</source>
@@ -779,12 +759,12 @@
           <target state="translated" state-qualifier="mt-suggestion">[87918][!!_śťàţíśτįĉŝ:_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectUploaded" xml:space="preserve">
-          <source>uploaded:</source>
-          <target state="translated" state-qualifier="mt-suggestion">[9063B][!!_úρłõáđéđ:_!!]</target>
+          <source>uploaded</source>
+          <target state="new" state-qualifier="mt-suggestion">uploaded</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectUploadedBy" xml:space="preserve">
-          <source>{0} by</source>
-          <target state="translated" state-qualifier="mt-suggestion">[FED35][!!_{0} ъУ_!!]</target>
+          <source>{0} by:</source>
+          <target state="new" state-qualifier="mt-suggestion">{0} by:</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectVersion" xml:space="preserve">
           <source>(version: {0})</source>
@@ -851,8 +831,8 @@
           <target state="translated" state-qualifier="mt-suggestion">[64576][!!_Ľôġįη ƒáíľèď_!!]</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectMissingLoginData" xml:space="preserve">
-          <source>Login- or registration- data is incomplete.</source>
-          <target state="translated" state-qualifier="mt-suggestion">[3F493][!!_Ĺóģîη- òŕ ŕêġìšţřãţįõй- ďàτã įŝ îиčõмрłęţę._!!]</target>
+          <source>Login- or registrationdata is incomplete.</source>
+          <target state="new" state-qualifier="mt-suggestion">Login- or registrationdata is incomplete.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectPassword" xml:space="preserve">
           <source>Password:</source>
@@ -951,12 +931,12 @@
           <target state="new">NEW</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonAddLocalVariable" xml:space="preserve">
-          <source>add local variable</source>
-          <target state="new">add local variable</target>
+          <source>add object variable</source>
+          <target state="new">add object variable</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonAddGlobalVariable" xml:space="preserve">
-          <source>add global variable</source>
-          <target state="new">add global variable</target>
+          <source>add program variable</source>
+          <target state="new">add program variable</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_StandardLocalVariableName" xml:space="preserve">
           <source>ObjectVariable</source>
@@ -967,8 +947,8 @@
           <target state="new">CHANGE VARIABLE NAME</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_StandardGlobalVariableName" xml:space="preserve">
-          <source>GlobalVariable</source>
-          <target state="new">GlobalVariable</target>
+          <source>ProgramVariable</source>
+          <target state="new">ProgramVariable</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_VariableName" xml:space="preserve">
           <source>Variable name</source>
@@ -979,8 +959,8 @@
           <target state="new">CHOOSE OBJECT VARIABLE NAME</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleChooseGlobalVariableName" xml:space="preserve">
-          <source>CHOOSE GLOBAL VARIABLE NAME</source>
-          <target state="new">CHOOSE GLOBAL VARIABLE NAME</target>
+          <source>CHOOSE PROGRAM VARIABLE NAME</source>
+          <target state="new">CHOOSE PROGRAM VARIABLE NAME</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_SelectedProjectNotValidMessage" xml:space="preserve">
           <source>Project not valid</source>
@@ -1134,8 +1114,8 @@
           <target state="new">Object</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_GlobalVariables" xml:space="preserve">
-          <source>Global</source>
-          <target state="new">Global</target>
+          <source>Program</source>
+          <target state="new">Program</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_DeleteProject" xml:space="preserve">
           <source>delete</source>

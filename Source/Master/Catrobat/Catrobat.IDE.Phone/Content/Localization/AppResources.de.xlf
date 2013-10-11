@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
-  <file datatype="xml" source-language="en-US" target-language="de" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="Catrobat.IDE.Phone" product-version="1.0.0.0" build-num="0">
+  <file datatype="xml" source-language="en" target-language="de" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="IDEWindowsPhone" product-version="1.0.0.0" build-num="0">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="2.1.1100.0" tool-company="Microsoft" />
     </header>
@@ -8,559 +8,539 @@
       <group id="Resx">
         <trans-unit translate="yes" id="Resx/Brick_Broadcast" xml:space="preserve">
           <source>broadcast</source>
-          <target state="new">broadcast</target>
+          <target state="translated">Sende an alle</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_BroadcastWait" xml:space="preserve">
           <source>broadcast and wait</source>
-          <target state="new">broadcast and wait</target>
+          <target state="translated">Sende an alle und warte</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_ButtonNew" xml:space="preserve">
           <source>new...</source>
-          <target state="new">new...</target>
+          <target state="translated">Neu...</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_CategoryControl" xml:space="preserve">
           <source>Control</source>
-          <target state="new">Control</target>
+          <target state="translated">Steuerung</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_CategoryLooks" xml:space="preserve">
           <source>Looks</source>
-          <target state="new">Looks</target>
+          <target state="translated">Aussehen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_CategoryMotion" xml:space="preserve">
           <source>Motion</source>
-          <target state="new">Motion</target>
+          <target state="translated">Bewegung</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_CategorySound" xml:space="preserve">
           <source>Sound</source>
-          <target state="new">Sound</target>
+          <target state="translated">Klang</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_ChangeBrightnessBy" xml:space="preserve">
           <source>change brightness by</source>
-          <target state="new">change brightness by</target>
+          <target state="translated">Ändere Helligkeit um</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_ChangeGhostEffectBy" xml:space="preserve">
           <source>change ghost effect by</source>
-          <target state="new">change ghost effect by</target>
+          <target state="translated">Ändere Durchsichtigkeit um</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_ChangeSizeBy" xml:space="preserve">
           <source>change size by</source>
-          <target state="new">change size by</target>
+          <target state="translated">Ändere Größe um</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_ChangeVolumeBy" xml:space="preserve">
           <source>change volume by</source>
-          <target state="new">change volume by</target>
+          <target state="translated">Ändere Lautstärke um</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_ChangeXBy" xml:space="preserve">
           <source>change X by</source>
-          <target state="new">change X by</target>
+          <target state="translated">Ändere X um</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_ChangeYBy" xml:space="preserve">
           <source>change Y by</source>
-          <target state="new">change Y by</target>
+          <target state="translated">Ändere Y um</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_ClearGraphicEffects" xml:space="preserve">
           <source>clear graphic effects</source>
-          <target state="new">clear graphic effects</target>
+          <target state="translated">Schalte Grafikeffekte aus</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_ComeToFront" xml:space="preserve">
           <source>come to front</source>
-          <target state="new">come to front</target>
+          <target state="translated">Komm nach vorne</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_Degrees" xml:space="preserve">
           <source>degrees</source>
-          <target state="new">degrees</target>
+          <target state="translated">Grad</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_Forever" xml:space="preserve">
           <source>forever</source>
-          <target state="new">forever</target>
+          <target state="translated">Wiederhole fortlaufend</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_GlideToGlide" xml:space="preserve">
           <source>glide</source>
-          <target state="new">glide</target>
+          <target state="translated">Gleite</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_GlideToTo" xml:space="preserve">
           <source>to</source>
-          <target state="new">to</target>
+          <target state="translated">zu</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_GoNStepsBackGo" xml:space="preserve">
           <source>go back</source>
-          <target state="new">go back</target>
+          <target state="translated">Gehe</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_GoNStepsBackStepsBack" xml:space="preserve">
           <source>layers</source>
-          <target state="new">layers</target>
+          <target state="translated">Ebenen nach hinten</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_Hide" xml:space="preserve">
           <source>hide</source>
-          <target state="new">hide</target>
+          <target state="translated">Verstecke dich</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_IfOnEdgeBounce" xml:space="preserve">
           <source>if on edge, bounce</source>
-          <target state="new">if on edge, bounce</target>
+          <target state="translated">Pralle vom Rand ab</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_RepeatLoopEnd" xml:space="preserve">
           <source>repeat end</source>
-          <target state="new">repeat end</target>
+          <target state="translated">Wiederholen beenden</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_MoveNStepsMove" xml:space="preserve">
           <source>move</source>
-          <target state="new">move</target>
+          <target state="translated">Gehe</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_MoveNStepsSteps" xml:space="preserve">
           <source>steps</source>
-          <target state="new">steps</target>
+          <target state="translated">Schritte</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_NextCostume" xml:space="preserve">
           <source>next costume</source>
-          <target state="new">next costume</target>
+          <target state="translated">Nächstes Kostüm</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_Note" xml:space="preserve">
           <source>note</source>
-          <target state="new">note</target>
+          <target state="translated">Notiz</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_PlaceAt" xml:space="preserve">
           <source>place at</source>
-          <target state="new">place at</target>
+          <target state="translated">Setze Position</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_PlaySound" xml:space="preserve">
           <source>play sound</source>
-          <target state="new">play sound</target>
+          <target state="translated">Spiele Klang</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_PointInDirection" xml:space="preserve">
           <source>point in direction</source>
-          <target state="new">point in direction</target>
+          <target state="translated">Zeige in Richtung</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_PointTo" xml:space="preserve">
           <source>point towards</source>
-          <target state="new">point towards</target>
+          <target state="translated">Zeige auf</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_Repeat" xml:space="preserve">
           <source>repeat</source>
-          <target state="new">repeat</target>
+          <target state="translated">Wiederhole</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_Seconds" xml:space="preserve">
           <source>seconds</source>
-          <target state="new">seconds</target>
+          <target state="translated">Sekunden</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_SetBrightnessTo" xml:space="preserve">
           <source>set brightness to</source>
-          <target state="new">set brightness to</target>
+          <target state="translated">Setze Helligkeit auf</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_SetCostume" xml:space="preserve">
           <source>set costume</source>
-          <target state="new">set costume</target>
+          <target state="translated">Setze Kostüm</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_SetGhostEffectTo" xml:space="preserve">
           <source>set ghost effect to</source>
-          <target state="new">set ghost effect to</target>
+          <target state="translated">Setze Durchsichtigkeit auf</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_SetSizeTo" xml:space="preserve">
           <source>set size to</source>
-          <target state="new">set size to</target>
+          <target state="translated">Setze Größe auf</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_SetVolumeTo" xml:space="preserve">
           <source>set volume to</source>
-          <target state="new">set volume to</target>
+          <target state="translated">Setze Lautstärke auf</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_SetXTo" xml:space="preserve">
           <source>set X to</source>
-          <target state="new">set X to</target>
+          <target state="translated">Setze X auf</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_SetYTo" xml:space="preserve">
           <source>set Y to</source>
-          <target state="new">set Y to</target>
+          <target state="translated">Setze Y auf</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_Show" xml:space="preserve">
           <source>show</source>
-          <target state="new">show</target>
+          <target state="translated">Zeige dich</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_Speak" xml:space="preserve">
           <source>speak</source>
-          <target state="new">speak</target>
+          <target state="translated">Sprich</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_StopAllSounds" xml:space="preserve">
           <source>stop all sounds</source>
-          <target state="new">stop all sounds</target>
+          <target state="translated">Stoppe alle Klänge</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_Times" xml:space="preserve">
           <source>times</source>
-          <target state="new">times</target>
+          <target state="translated">mal</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_TurnLeft" xml:space="preserve">
           <source>turn left</source>
-          <target state="new">turn left</target>
+          <target state="translated">Drehe links</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_TurnRight" xml:space="preserve">
           <source>turn right</source>
-          <target state="new">turn right</target>
+          <target state="translated">Drehe rechts</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_Wait" xml:space="preserve">
           <source>wait</source>
-          <target state="new">wait</target>
+          <target state="translated">Warte</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_WhenIReceive" xml:space="preserve">
           <source>when I receive</source>
-          <target state="new">when I receive</target>
+          <target state="translated">Wenn ich empfange</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_WhenProjectStarts" xml:space="preserve">
           <source>when project starts</source>
-          <target state="new">when project starts</target>
+          <target state="translated">Wenn Projekt gestartet</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_WhenTapped" xml:space="preserve">
           <source>when tapped</source>
-          <target state="new">when tapped</target>
+          <target state="translated">Wenn angetippt</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ActionPlural" xml:space="preserve">
           <source>actions</source>
-          <target state="new">actions</target>
+          <target state="translated">Aktionen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ActionSingular" xml:space="preserve">
           <source>action</source>
-          <target state="new">action</target>
+          <target state="translated">Aktion</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_BroadcastMessage" xml:space="preserve">
           <source>Broadcast message</source>
-          <target state="new">Broadcast message</target>
+          <target state="translated">Nachricht</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonAddCostume" xml:space="preserve">
           <source>new costume</source>
-          <target state="new">new costume</target>
+          <target state="translated">Neues Kostüm</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonAddObject" xml:space="preserve">
           <source>new object</source>
-          <target state="new">new object</target>
+          <target state="translated">Neues Objekt</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonAddScript" xml:space="preserve">
           <source>new action</source>
-          <target state="new">new action</target>
+          <target state="translated">Neue Aktion</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonAddSound" xml:space="preserve">
           <source>new sound</source>
-          <target state="new">new sound</target>
+          <target state="translated">Neuer Klang</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonBack" xml:space="preserve">
           <source>back</source>
-          <target state="new">back</target>
+          <target state="translated">Zurück</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonCancel" xml:space="preserve">
           <source>cancel</source>
-          <target state="new">cancel</target>
+          <target state="translated">Abbrechen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonChange" xml:space="preserve">
           <source>change</source>
-          <target state="new">change</target>
+          <target state="translated">Ändern</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonCopy" xml:space="preserve">
           <source>copy</source>
-          <target state="new">copy</target>
+          <target state="translated">Kopieren</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonDelete" xml:space="preserve">
           <source>delete</source>
-          <target state="new">delete</target>
+          <target state="translated">Löschen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonPlayProject" xml:space="preserve">
           <source>play project</source>
-          <target state="new">play project</target>
+          <target state="translated">Projekt abspielen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonSave" xml:space="preserve">
           <source>save</source>
-          <target state="new">save</target>
+          <target state="translated">Speichern</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonUse" xml:space="preserve">
           <source>use</source>
-          <target state="new">use</target>
+          <target state="translated">Verwenden</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_Camera" xml:space="preserve">
           <source>Camera</source>
-          <target state="new">Camera</target>
+          <target state="translated">Kamera</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ClearSelection" xml:space="preserve">
           <source>selektierung aufheben</source>
-          <target state="new">selektierung aufheben</target>
+          <target state="translated">Auswahl aufheben</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_CostumeName" xml:space="preserve">
           <source>Costume name</source>
-          <target state="new">Costume name</target>
+          <target state="translated">Kostümname</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_CostumePlural" xml:space="preserve">
           <source>costumes</source>
-          <target state="new">costumes</target>
+          <target state="translated">Kostüme</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_CostumeSingular" xml:space="preserve">
           <source>costume</source>
-          <target state="new">costume</target>
+          <target state="translated">Kostüm</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_Image" xml:space="preserve">
           <source>Image</source>
-          <target state="new">Image</target>
+          <target state="translated">Bild</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ImageGallery" xml:space="preserve">
           <source>Image Gallery</source>
-          <target state="new">Image Gallery</target>
+          <target state="translated">Bildergalerie</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ImageSizeFullSize" xml:space="preserve">
           <source>full size</source>
-          <target state="new">full size</target>
+          <target state="translated">volle größe</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ImageSizeLarge" xml:space="preserve">
           <source>large</source>
-          <target state="new">large</target>
+          <target state="translated">groß</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ImageSizeMedium" xml:space="preserve">
           <source>medium</source>
-          <target state="new">medium</target>
+          <target state="translated">mittel</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ImageSizeSmall" xml:space="preserve">
           <source>small</source>
-          <target state="new">small</target>
+          <target state="translated">klein</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_MediaLibrary" xml:space="preserve">
           <source>Media Library</source>
-          <target state="new">Media Library</target>
+          <target state="translated">Medienbibliothek</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_MenuProjectSettings" xml:space="preserve">
           <source>Project settings</source>
-          <target state="new">Project settings</target>
+          <target state="translated">Projekt Einstellungen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_MenuStartSite" xml:space="preserve">
           <source>Start site</source>
-          <target state="new">Start site</target>
+          <target state="translated">Startseite</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_MessageBoxDeleteHeader" xml:space="preserve">
           <source>Delete {0}</source>
-          <target state="new">Delete {0}</target>
+          <target state="translated">Lösche {0}</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_MessageBoxDeleteText" xml:space="preserve">
-          <source>Delete {0} selected {1}.</source>
-          <target state="new">Delete {0} selected {1}.</target>
-        </trans-unit>
+          <source>Delete {0} selected {1}?</source>
+          <target state="translated">{0} {1} ausgewählt. Wirlich löschen?</target>
+        <note from="MultilingualEditor" annotates="source" priority="4">Delete 1 selected Sound?</note><note from="MultilingualEditor" annotates="source" priority="4">Delete 2 selected sounds?</note><note from="MultilingualEditor" annotates="source" priority="4">Delete 1 selected costume?</note></trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceImageHeader" xml:space="preserve">
           <source>Not enough space</source>
-          <target state="new">Not enough space</target>
+          <target state="translated">Zu wenig Speicherplatz</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceImageText" xml:space="preserve">
           <source>Without more disc space the image cannot be saved.</source>
-          <target state="new">Without more disc space the image cannot be saved.</target>
+          <target state="translated">Ohne zusätzlichen Speicherplatz kann das Bild nicht gespeichert werden.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceSoundHeader" xml:space="preserve">
           <source>Not enough space</source>
-          <target state="new">Not enough space</target>
+          <target state="translated">Zu wenig Speicherplatz</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_MessageBoxNotEnoughSpaceSoundText" xml:space="preserve">
           <source>Without more disc space the sound cannot be saved.</source>
-          <target state="new">Without more disc space the sound cannot be saved.</target>
+          <target state="translated">Ohne zusätzlichen Speicherplatz kann der Klang nicht gespeichert werden.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_MessageBoxWrongImageFormatHeader" xml:space="preserve">
           <source>Not supported format</source>
-          <target state="new">Not supported format</target>
+          <target state="translated">Nicht unterstütztes Format</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_MessageBoxWrongImageFormatText" xml:space="preserve">
           <source>Unfortunately the image has a not supported format.</source>
-          <target state="new">Unfortunately the image has a not supported format.</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/Editor_New" xml:space="preserve">
-          <source>new {0}</source>
-          <target state="new">new {0}</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/Editor_NewAction" xml:space="preserve">
-          <source>new action</source>
-          <target state="new">new action</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/Editor_NewCostume" xml:space="preserve">
-          <source>new costume</source>
-          <target state="new">new costume</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/Editor_NewObject" xml:space="preserve">
-          <source>new object</source>
-          <target state="new">new object</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/Editor_NewSound" xml:space="preserve">
-          <source>new sound</source>
-          <target state="new">new sound</target>
+          <target state="translated">Das gewählte Bild hat leider ein nicht unterstütztes Format.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_NoCostumeSelected" xml:space="preserve">
           <source>No costume selected</source>
-          <target state="new">No costume selected</target>
+          <target state="translated">Kein Kostüm ausgewählt</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_NoMessageSelected" xml:space="preserve">
           <source>No message selected</source>
-          <target state="new">No message selected</target>
+          <target state="translated">Keine Nachricht ausgewählt</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_NoSoundSelected" xml:space="preserve">
           <source>No sound selected</source>
-          <target state="new">No sound selected</target>
+          <target state="translated">Kein Klang ausgewählt</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_NoSpriteSelected" xml:space="preserve">
           <source>No object selected</source>
-          <target state="new">No object selected</target>
+          <target state="translated">Kein Objekt ausgewählt</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_NothingItem" xml:space="preserve">
           <source>Nothing...</source>
-          <target state="new">Nothing...</target>
+          <target state="translated">Nichts...</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ObjectPlural" xml:space="preserve">
           <source>objects</source>
-          <target state="new">objects</target>
+          <target state="translated">Objekte</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ObjectSingular" xml:space="preserve">
           <source>object</source>
-          <target state="new">object</target>
+          <target state="translated">Objekt</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_PivotActions" xml:space="preserve">
           <source>Actions</source>
-          <target state="new">Actions</target>
+          <target state="translated">Aktionen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_PivotCostumes" xml:space="preserve">
           <source>Costumes</source>
-          <target state="new">Costumes</target>
+          <target state="translated">Kostüme</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_PivotObjects" xml:space="preserve">
           <source>Objects</source>
-          <target state="new">Objects</target>
+          <target state="translated">Objekte</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_PivotSounds" xml:space="preserve">
           <source>Sounds</source>
-          <target state="new">Sounds</target>
+          <target state="translated">Klänge</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ProjectName" xml:space="preserve">
           <source>Project name</source>
-          <target state="new">Project name</target>
+          <target state="translated">Projektname</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_Recorder" xml:space="preserve">
           <source>Recorder</source>
-          <target state="new">Recorder</target>
+          <target state="translated">Recorder</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_RecorderRecord" xml:space="preserve">
           <source>rec</source>
-          <target state="new">rec</target>
+          <target state="translated">Rec</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_RecorderRecordTime" xml:space="preserve">
           <source>Time</source>
-          <target state="new">Time</target>
+          <target state="translated">Zeit</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_RecorderStart" xml:space="preserve">
           <source>start recording</source>
-          <target state="new">start recording</target>
+          <target state="translated">Aufnahme starten</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_RecorderStop" xml:space="preserve">
           <source>stop</source>
-          <target state="new">stop</target>
+          <target state="translated">Stop</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_Recording" xml:space="preserve">
           <source>Recording</source>
-          <target state="new">Recording</target>
+          <target state="translated">Aufnahme</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_SavingImage" xml:space="preserve">
           <source>saving image</source>
-          <target state="new">saving image</target>
+          <target state="translated">Bild wird gespeichert</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_Selected" xml:space="preserve">
           <source>selected</source>
-          <target state="new">selected</target>
+          <target state="translated">ausgewählt</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_SelectingObject" xml:space="preserve">
           <source>loading object</source>
-          <target state="new">loading object</target>
+          <target state="translated">lade Objekt</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_SoundName" xml:space="preserve">
           <source>Sound name</source>
-          <target state="new">Sound name</target>
+          <target state="translated">Klangname</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_SoundPlural" xml:space="preserve">
           <source>sounds</source>
-          <target state="new">sounds</target>
+          <target state="translated">Klänge</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_SoundSingular" xml:space="preserve">
           <source>sound</source>
-          <target state="new">sound</target>
+          <target state="translated">Klang</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_SpriteName" xml:space="preserve">
           <source>Object name</source>
-          <target state="new">Object name</target>
+          <target state="translated">Objektname</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleChangeCostumeName" xml:space="preserve">
           <source>CHANGE COSTUME NAME</source>
-          <target state="new">CHANGE COSTUME NAME</target>
+          <target state="translated">KOSTÜMNAMEN ÄNDERN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleChangeSoundName" xml:space="preserve">
           <source>CHANGE SOUND NAME</source>
-          <target state="new">CHANGE SOUND NAME</target>
+          <target state="translated">KLANGNAMEN ÄNDERN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleChangeSpriteName" xml:space="preserve">
           <source>CHANGE OBJECT NAME</source>
-          <target state="new">CHANGE OBJECT NAME</target>
+          <target state="translated">OBJEKTNAMEN ÄNDERN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleChooseBrick" xml:space="preserve">
           <source>CHOOSE BRICK</source>
-          <target state="new">CHOOSE BRICK</target>
+          <target state="translated">BAUSTEIN WÄHLEN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleChooseCategory" xml:space="preserve">
           <source>CHOOSE CATEGORY</source>
-          <target state="new">CHOOSE CATEGORY</target>
+          <target state="translated">KATEGORIE WÄHLEN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleChooseCostumeName" xml:space="preserve">
           <source>CHOOSE COSTUME NAME</source>
-          <target state="new">CHOOSE COSTUME NAME</target>
+          <target state="translated">KOSTÜMNAMEN WÄHLEN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleChooseSound" xml:space="preserve">
           <source>CHOOSE SOUND</source>
-          <target state="new">CHOOSE SOUND</target>
+          <target state="translated">KLANG WÄHLEN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleChooseSoundName" xml:space="preserve">
           <source>CHOOSE SOUND NAME</source>
-          <target state="new">CHOOSE SOUND NAME</target>
+          <target state="translated">KLANGNAMEN WÄHLEN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleNewAction" xml:space="preserve">
           <source>NEW ACTION</source>
-          <target state="new">NEW ACTION</target>
+          <target state="translated">NEUE AKTION</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleNewBroadcastMessage" xml:space="preserve">
           <source>NEW BROADCAST MESSAGE</source>
-          <target state="new">NEW BROADCAST MESSAGE</target>
+          <target state="translated">NEUE NACHRICHT</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleNewCostume" xml:space="preserve">
           <source>NEW COSTUME</source>
-          <target state="new">NEW COSTUME</target>
+          <target state="translated">NEUES KOSTÜM</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleNewSound" xml:space="preserve">
           <source>NEW SOUND</source>
-          <target state="new">NEW SOUND</target>
+          <target state="translated">NEUER KLANG</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleNewSprite" xml:space="preserve">
           <source>NEW OBJECT</source>
-          <target state="new">NEW OBJECT</target>
+          <target state="translated">NEUES OBJEKT</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleProjectSettings" xml:space="preserve">
           <source>PROJECT SETTINGS</source>
-          <target state="new">PROJECT SETTINGS</target>
+          <target state="translated">PROJEKT EINSTELLUNGEN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleRecorder" xml:space="preserve">
           <source>RECORD SOUND</source>
-          <target state="new">RECORD SOUND</target>
+          <target state="translated">KLANG AUFNEHMEN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_ACCELERATION_X" xml:space="preserve">
           <source>accelerationX</source>
-          <target state="new">accelerationX</target>
+          <target state="translated">BeschleunigungX</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_ACCELERATION_Y" xml:space="preserve">
           <source>accelerationY</source>
-          <target state="new">accelerationY</target>
+          <target state="translated">BeschleunigungY</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_ACCELERATION_Z" xml:space="preserve">
           <source>accelerationZ</source>
-          <target state="new">accelerationZ</target>
+          <target state="translated">BeschleunigungZ</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_BRIGHTNESS" xml:space="preserve">
           <source>brightness</source>
-          <target state="new">brightness</target>
+          <target state="translated">Helligkeit</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_ClosedBrecket" xml:space="preserve">
           <source>)</source>
           <target state="new">)</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_COMPASSDIRECTION" xml:space="preserve">
-          <source>compassdirec</source>
-          <target state="new">compassdirec</target>
+          <source>compassdirection</source>
+          <target state="translated">KompassRichtung</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_DecimalPointCharacter" xml:space="preserve">
           <source>.</source>
@@ -572,15 +552,15 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_INCLINATION_X" xml:space="preserve">
           <source>inclinationX</source>
-          <target state="new">inclinationX</target>
+          <target state="translated">NeigungX</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_INCLINATION_Y" xml:space="preserve">
           <source>inclinationY</source>
-          <target state="new">inclinationY</target>
+          <target state="translated">NeigungY</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LAYER" xml:space="preserve">
           <source>layer</source>
-          <target state="new">layer</target>
+          <target state="translated">Ebene</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LogicEqual" xml:space="preserve">
           <source>=</source>
@@ -588,15 +568,15 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LogicOr" xml:space="preserve">
           <source>OR</source>
-          <target state="new">OR</target>
+          <target state="translated">ODER</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_OBJECT_X" xml:space="preserve">
           <source>objectX</source>
-          <target state="new">objectX</target>
+          <target state="translated">ObjektX</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_OBJECT_Y" xml:space="preserve">
           <source>objectY</source>
-          <target state="new">objectY</target>
+          <target state="translated">ObjektY</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_OpenBrecket" xml:space="preserve">
           <source>(</source>
@@ -608,87 +588,87 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_Random" xml:space="preserve">
           <source>random</source>
-          <target state="new">random</target>
+          <target state="translated">Zufall</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_SIZE" xml:space="preserve">
           <source>size</source>
-          <target state="new">size</target>
+          <target state="translated">Größe</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_TRANSPARENCY" xml:space="preserve">
           <source>transparency</source>
-          <target state="new">transparency</target>
+          <target state="translated">Transparenz</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_Unknown" xml:space="preserve">
           <source>unknown</source>
-          <target state="new">unknown</target>
+          <target state="translated">Unbekannt</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_AboutText" xml:space="preserve">
           <source>Pocket Code for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Pocket Code is an independent free and open source project developed by the Pocket Code team. Pocket Code for Windows is licensed under the MS-RL license.</source>
-          <target state="new">Pocket Code for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Pocket Code is an independent free and open source project developed by the Pocket Code team. Pocket Code for Windows is licensed under the MS-RL license.</target>
+          <target state="translated">Catrobat für Windows ist eine Entwicklungsumgebung für die grafische Programmiersprache Catrobat, inspiriert vom Scratch Projekt des MIT. Es wird am Institut für Software Technologie an der Technischen Universität Graz in Österreich entwickelt. Dieses Programm steht unter der MS-RL Lizenz.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ActiveProject" xml:space="preserve">
           <source>active</source>
-          <target state="new">active</target>
+          <target state="translated">aktiv</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ApplicationNameAndVersion" xml:space="preserve">
           <source>Pocket Code for Windows v{0}</source>
-          <target state="new">Pocket Code for Windows v{0}</target>
+          <target state="translated">Catrobat für Windows v{0}</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ButtonCancel" xml:space="preserve">
           <source>cancel</source>
-          <target state="new">cancel</target>
+          <target state="translated">Abbrechen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ButtonCopy" xml:space="preserve">
           <source>copy</source>
-          <target state="new">copy</target>
+          <target state="translated">Kopieren</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ButtonCreate" xml:space="preserve">
           <source>new</source>
-          <target state="new">new</target>
+          <target state="translated">Neu</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ButtonDelete" xml:space="preserve">
           <source>delete</source>
-          <target state="new">delete</target>
+          <target state="translated">Löschen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ButtonEdit" xml:space="preserve">
           <source>edit</source>
-          <target state="new">edit</target>
+          <target state="translated">Bearbeiten</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ButtonLoginRegister" xml:space="preserve">
           <source>Login or Register</source>
-          <target state="new">Login or Register</target>
+          <target state="translated">Einloggen / Registrieren</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ButtonPasswordForgotten" xml:space="preserve">
           <source>Password forgotten</source>
-          <target state="new">Password forgotten</target>
+          <target state="translated">Password vergessen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ButtonSave" xml:space="preserve">
           <source>save</source>
-          <target state="new">save</target>
+          <target state="translated">Speichern</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ButtonUpload" xml:space="preserve">
           <source>upload</source>
-          <target state="new">upload</target>
+          <target state="translated">Hochladen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_DEBUGShowMemory" xml:space="preserve">
           <source>Show memory usage</source>
-          <target state="new">Show memory usage</target>
+          <target state="translated">Speicherverbrauch anzeigen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_DownloadQueueMessage" xml:space="preserve">
           <source>The project you chose is being downloaded.</source>
-          <target state="new">The project you chose is being downloaded.</target>
+          <target state="translated">Das gewählte Projekt wird heruntergeladen. Das kann eine Weile dauern, aber wir sagen dir Bescheid, wenn es da ist!</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_FilterTextBoxHint" xml:space="preserve">
           <source>Find...</source>
-          <target state="new">Find...</target>
+          <target state="translated">Suchen...</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_HeaderAbout" xml:space="preserve">
           <source>About</source>
-          <target state="new">About</target>
+          <target state="translated">Über</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_HeaderCurrentProject" xml:space="preserve">
           <source>Current Project</source>
-          <target state="new">Current Project</target>
+          <target state="translated">Aktuelles Projekt</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_HeaderDesign" xml:space="preserve">
           <source>Design</source>
@@ -696,11 +676,11 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_HeaderLanguage" xml:space="preserve">
           <source>Language</source>
-          <target state="new">Language</target>
+          <target state="translated">Sprache</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_HeaderLocalProjects" xml:space="preserve">
           <source>My Projects</source>
-          <target state="new">My Projects</target>
+          <target state="translated">Meine Projekte</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_HeaderOnlineProjects" xml:space="preserve">
           <source>Online</source>
@@ -708,7 +688,7 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_HeaderSettings" xml:space="preserve">
           <source>Settings</source>
-          <target state="new">Settings</target>
+          <target state="translated">Einstellungen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ListDesign" xml:space="preserve">
           <source>Design</source>
@@ -716,23 +696,23 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ListLanguage" xml:space="preserve">
           <source>Language</source>
-          <target state="new">Language</target>
+          <target state="translated">Sprache</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_MainCopyProjectDialogMessage" xml:space="preserve">
           <source>Are sure you want to copy "{0}"?</source>
-          <target state="new">Are sure you want to copy "{0}"?</target>
+          <target state="translated">Sind sie sicher, dass sie das Projekt "{0}" kopieren wollen?</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_MainCopyProjectDialogTitle" xml:space="preserve">
           <source>Copy project?</source>
-          <target state="new">Copy project?</target>
+          <target state="translated">Projekt kopieren?</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_MainDeleteProjectDialogMessage" xml:space="preserve">
           <source>Are sure you want to delete "{0}"?</source>
-          <target state="new">Are sure you want to delete "{0}"?</target>
+          <target state="translated">Sind sie sicher, dass sie das Projekt "{0}" löschen wollen?</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_MainDeleteProjectDialogTitle" xml:space="preserve">
           <source>Delete project?</source>
-          <target state="new">Delete project?</target>
+          <target state="translated">Projekt löschen?</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_MessageBoxInformation" xml:space="preserve">
           <source>Information</source>
@@ -740,103 +720,103 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_NoDownloadsPending" xml:space="preserve">
           <source>All downloads finished.</source>
-          <target state="new">All downloads finished.</target>
+          <target state="translated">Alle Downloads wurden abgeschlossen.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_NoUploadsPending" xml:space="preserve">
           <source>All uploads finished.</source>
-          <target state="new">All uploads finished.</target>
+          <target state="translated">Alle Uploads wurden abgeschlossen.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectDescription" xml:space="preserve">
           <source>description:</source>
-          <target state="new">description:</target>
+          <target state="translated">Beschreibung:</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectDownloadButton" xml:space="preserve">
           <source>Download</source>
-          <target state="new">Download</target>
+          <target state="translated">Herunterladen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectDownloads" xml:space="preserve">
           <source>{0} downloads</source>
-          <target state="new">{0} downloads</target>
+          <target state="translated">{0} Mal heruntergeladen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectLicenseButton" xml:space="preserve">
           <source>License</source>
-          <target state="new">License</target>
+          <target state="translated">Lizenz</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectListBoxLoadMore" xml:space="preserve">
           <source>Load more...</source>
-          <target state="new">Load more...</target>
+          <target state="translated">Mehr laden...</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectProject" xml:space="preserve">
           <source>project:</source>
-          <target state="new">project:</target>
+          <target state="translated">Projekt:</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectReportButton" xml:space="preserve">
           <source>Report as unappropriate</source>
-          <target state="new">Report as unappropriate</target>
+          <target state="translated">Als unangemessen melden</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectStatistics" xml:space="preserve">
           <source>statistics:</source>
-          <target state="new">statistics:</target>
+          <target state="translated">Statistiken:</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectUploaded" xml:space="preserve">
-          <source>uploaded:</source>
-          <target state="new">uploaded:</target>
+          <source>uploaded</source>
+          <target state="translated">Hochgeladen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectUploadedBy" xml:space="preserve">
-          <source>{0} by</source>
-          <target state="new">{0} by</target>
+          <source>{0} by:</source>
+          <target state="translated">{0} von:</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectVersion" xml:space="preserve">
           <source>(version: {0})</source>
-          <target state="new">(version: {0})</target>
+          <target state="translated">(Version: {0})</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_OnlineProjectViews" xml:space="preserve">
           <source>{0} views</source>
-          <target state="new">{0} views</target>
+          <target state="translated">{0} Mal angesehen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ProjectDoesNotExist" xml:space="preserve">
           <source>project does not exist</source>
-          <target state="new">project does not exist</target>
+          <target state="translated">Projekt existiert nicht.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ProjectName" xml:space="preserve">
           <source>Project name</source>
-          <target state="new">Project name</target>
+          <target state="translated">Projektname</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ProjectNotValid" xml:space="preserve">
           <source>Project not valid.</source>
-          <target state="new">Project not valid.</target>
+          <target state="translated">Projekt ist ungültig.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/App_ResourceLanguage" xml:space="preserve">
           <source>en</source>
-          <target state="new">en</target>
+          <target state="translated">de</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_SettingsBricks" xml:space="preserve">
           <source>enable/disable bricks</source>
-          <target state="new">enable/disable bricks</target>
+          <target state="translated">Bausteine Ein/Ausschalten</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_SettingsEnableNXTBricks" xml:space="preserve">
           <source>Enable Mindstorm bricks</source>
-          <target state="new">Enable Mindstorm bricks</target>
+          <target state="translated">Mindstorm Bausteine einschalten</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_SettingsTheme" xml:space="preserve">
           <source>Theme</source>
-          <target state="new">Theme</target>
+          <target state="translated">Design</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_TitleNewProject" xml:space="preserve">
           <source>NEW PROJECT</source>
-          <target state="new">NEW PROJECT</target>
+          <target state="translated">NEUES PROJEKT</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_TitleSettings" xml:space="preserve">
           <source>SETTINGS</source>
-          <target state="new">SETTINGS</target>
+          <target state="translated">EINSTELLUNGEN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_TitleUploadProject" xml:space="preserve">
           <source>UPLOAD PROJECT</source>
-          <target state="new">UPLOAD PROJECT</target>
+          <target state="translated">PROJEKT HOCHLADEN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_TitleUploadProjectLogin" xml:space="preserve">
           <source>LOGIN OR REGISTER</source>
-          <target state="new">LOGIN OR REGISTER</target>
+          <target state="translated">EINLOGGEN ODER REGISTRIEREN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectEmail" xml:space="preserve">
           <source>Email:</source>
@@ -844,51 +824,51 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectLoginError" xml:space="preserve">
           <source>Login Error. {0}</source>
-          <target state="new">Login Error. {0}</target>
+          <target state="translated">Login Fehler. {0}</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectLoginErrorCaption" xml:space="preserve">
           <source>Login failed</source>
-          <target state="new">Login failed</target>
+          <target state="translated">Login fehlgeschlagen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectMissingLoginData" xml:space="preserve">
-          <source>Login- or registration- data is incomplete.</source>
-          <target state="new">Login- or registration- data is incomplete.</target>
+          <source>Login- or registrationdata is incomplete.</source>
+          <target state="translated">Login- oder Registrierungsdaten sind nicht vollständig.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectPassword" xml:space="preserve">
           <source>Password:</source>
-          <target state="new">Password:</target>
+          <target state="translated">Passwort:</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectProjectDescription" xml:space="preserve">
           <source>Description:</source>
-          <target state="new">Description:</target>
+          <target state="translated">Beschreibung:</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectProjectName" xml:space="preserve">
           <source>Project:</source>
-          <target state="new">Project:</target>
+          <target state="translated">Projekt:</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectRegistrationSucessful" xml:space="preserve">
           <source>Registration successful!</source>
-          <target state="new">Registration successful!</target>
+          <target state="translated">Registrierung erfolgreich!</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectUndefinedError" xml:space="preserve">
           <source>Undefined error. Error code {0}</source>
-          <target state="new">Undefined error. Error code {0}</target>
+          <target state="translated">Undefinierter Fehler. Fehlercode {0}</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectUsername" xml:space="preserve">
           <source>Username:</source>
-          <target state="new">Username:</target>
+          <target state="translated">Benutzername:</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectWelcome" xml:space="preserve">
           <source>Welcome {0}!</source>
-          <target state="new">Welcome {0}!</target>
+          <target state="translated">Willkommen {0}!</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadQueueMessage" xml:space="preserve">
           <source>Your project is being uploaded. This might take a little while, but we'll tell you when it's finished!</source>
-          <target state="new">Your project is being uploaded. This might take a little while, but we'll tell you when it's finished!</target>
+          <target state="translated">Dein Projekt wird hochgeladen. Das kann eine Weile dauern, aber wir sagen dir Bescheid, wenn der Vorgang abgeschlossen ist!</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_VersionIsNotSupported" xml:space="preserve">
           <source>Project version is not supported.</source>
-          <target state="new">Project version is not supported.</target>
+          <target state="translated">Die Version des Projekts wird von dieser Programmversion nicht unterstützt.</target>
         </trans-unit>
         <trans-unit translate="no" id="Resx/App_FlowDirection" xml:space="preserve">
           <source>LeftToRight</source>
@@ -896,95 +876,95 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_IfLogicEnd" xml:space="preserve">
           <source>else end</source>
-          <target state="new">else end</target>
+          <target state="translated">Sonst Ende</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_IfLogicElse" xml:space="preserve">
           <source>else</source>
-          <target state="new">else</target>
+          <target state="translated">Sonst</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_IfLogicBeginTrue" xml:space="preserve">
           <source>true, then</source>
-          <target state="new">true, then</target>
+          <target state="translated">wahr, dann</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_IfLogicBegin" xml:space="preserve">
           <source>If</source>
-          <target state="new">If</target>
+          <target state="translated">Wenn</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_ChangeVariableBy" xml:space="preserve">
           <source>by</source>
-          <target state="new">by</target>
+          <target state="translated">um</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_ChangeVariable" xml:space="preserve">
           <source>change variable</source>
-          <target state="new">change variable</target>
+          <target state="translated">Ändere Variable</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_SetVariableTo" xml:space="preserve">
           <source>to</source>
-          <target state="new">to</target>
+          <target state="translated">auf</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_SetVariable" xml:space="preserve">
           <source>set Variable</source>
-          <target state="new">set Variable</target>
+          <target state="translated">Setze Variable</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_CategoryVariables" xml:space="preserve">
           <source>Variables</source>
-          <target state="new">Variables</target>
+          <target state="translated">Variablen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_Description" xml:space="preserve">
           <source>description</source>
-          <target state="new">description</target>
+          <target state="translated">Beschreibung</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_PinProjectToStart" xml:space="preserve">
           <source>pin to start</source>
-          <target state="new">pin to start</target>
+          <target state="translated">An Start anheften</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UploadProjectLoadingMessage" xml:space="preserve">
           <source>Please wait while your login state is beeing checked!</source>
-          <target state="new">Please wait while your login state is beeing checked!</target>
+          <target state="translated">Loginstatus wird geprüft!</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_SelectVariablesViewHeader" xml:space="preserve">
           <source>SELECT VARIABLE</source>
-          <target state="new">SELECT VARIABLE</target>
+          <target state="translated">VARIABLE AUSWÄHLEN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_NoVariableSelected" xml:space="preserve">
           <source>NEW</source>
-          <target state="new">NEW</target>
+          <target state="translated">NEU</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonAddLocalVariable" xml:space="preserve">
-          <source>add local variable</source>
-          <target state="new">add local variable</target>
+          <source>add object variable</source>
+          <target state="translated">Objektvariable hinzufügen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_ButtonAddGlobalVariable" xml:space="preserve">
-          <source>add global variable</source>
-          <target state="new">add global variable</target>
+          <source>add program variable</source>
+          <target state="translated">Programmvariable hinzufügen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_StandardLocalVariableName" xml:space="preserve">
           <source>ObjectVariable</source>
-          <target state="new">ObjectVariable</target>
+          <target state="translated">Objektvariable</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleChangeVariableName" xml:space="preserve">
           <source>CHANGE VARIABLE NAME</source>
-          <target state="new">CHANGE VARIABLE NAME</target>
+          <target state="translated">VARIABLENNAME ÄNDERN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_StandardGlobalVariableName" xml:space="preserve">
-          <source>GlobalVariable</source>
-          <target state="new">GlobalVariable</target>
+          <source>ProgramVariable</source>
+          <target state="translated">Programmvariable</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_VariableName" xml:space="preserve">
           <source>Variable name</source>
-          <target state="new">Variable name</target>
+          <target state="translated">Variablenname</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleChooseLocalVariableName" xml:space="preserve">
           <source>CHOOSE OBJECT VARIABLE NAME</source>
-          <target state="new">CHOOSE OBJECT VARIABLE NAME</target>
+          <target state="translated">OBJEKTVARIABLENNAME WÄHLEN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_TitleChooseGlobalVariableName" xml:space="preserve">
-          <source>CHOOSE GLOBAL VARIABLE NAME</source>
-          <target state="new">CHOOSE GLOBAL VARIABLE NAME</target>
+          <source>CHOOSE PROGRAM VARIABLE NAME</source>
+          <target state="translated">PROGRAMMVARIABLENNAME WÄHLEN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_SelectedProjectNotValidMessage" xml:space="preserve">
           <source>Project not valid</source>
-          <target state="new">Project not valid</target>
+          <target state="translated">Projekt ungültig</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Brick_ForeverLoopEnd" xml:space="preserve">
           <source>forever end</source>
@@ -997,11 +977,11 @@
         <note from="MultilingualBuild" annotates="source" priority="2">Alternate: ÷</note></trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LogicAnd" xml:space="preserve">
           <source>AND</source>
-          <target state="new">AND</target>
+          <target state="translated">UND</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LogicTrue" xml:space="preserve">
           <source>TRUE</source>
-          <target state="new">TRUE</target>
+          <target state="translated">WAHR</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LogicSmallerEqual" xml:space="preserve">
           <source>≤</source>
@@ -1013,7 +993,7 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LogicNot" xml:space="preserve">
           <source>NOT</source>
-          <target state="new">NOT</target>
+          <target state="translated">NICHT</target>
           
         <note from="MultilingualBuild" annotates="source" priority="2">Alternate: ¬</note></trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LogicNotEqual" xml:space="preserve">
@@ -1030,7 +1010,7 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_LogicFalse" xml:space="preserve">
           <source>FALSE</source>
-          <target state="new">FALSE</target>
+          <target state="translated">FALSCH</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_Plus" xml:space="preserve">
           <source>+</source>
@@ -1038,116 +1018,116 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionTan" xml:space="preserve">
           <source>tan</source>
-          <target state="new">tan</target>
+          <target state="translated">TAN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_Camera_Rename" xml:space="preserve">
           <source>rename</source>
-          <target state="new">rename</target>
+          <target state="translated">Umbenennen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_AppbarAdd" xml:space="preserve">
           <source>add</source>
-          <target state="new">add</target>
+          <target state="translated">Hinzufügen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_UseCurrentProjectAsTemplate" xml:space="preserve">
           <source>Use current project ({0}) as template?</source>
-          <target state="new">Use current project ({0}) as template?</target>
+          <target state="translated">Ausgewähltes Projekt ({0}) als Vorlage verwenden?</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionSqrt" xml:space="preserve">
           <source>sqrt</source>
-          <target state="new">sqrt</target>
+          <target state="translated">SQRT</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionSin" xml:space="preserve">
           <source>sin</source>
-          <target state="new">sin</target>
+          <target state="translated">SIN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionRound" xml:space="preserve">
           <source>round</source>
-          <target state="new">round</target>
+          <target state="translated">Runden</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionRandom" xml:space="preserve">
           <source>random</source>
-          <target state="new">random</target>
+          <target state="translated">Zufall</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionPi" xml:space="preserve">
           <source>pi</source>
-          <target state="new">pi</target>
+          <target state="translated">Pi</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionMod" xml:space="preserve">
           <source>mod</source>
-          <target state="new">mod</target>
+          <target state="translated">MOD</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionMin" xml:space="preserve">
           <source>min</source>
-          <target state="new">min</target>
+          <target state="translated">MIN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionMax" xml:space="preserve">
           <source>max</source>
-          <target state="new">max</target>
+          <target state="translated">MAX</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionLog" xml:space="preserve">
           <source>log</source>
-          <target state="new">log</target>
+          <target state="translated">LOG</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionLn" xml:space="preserve">
           <source>ln</source>
-          <target state="new">ln</target>
+          <target state="translated">LN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionCos" xml:space="preserve">
           <source>cos</source>
-          <target state="new">cos</target>
+          <target state="translated">COS</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionExp" xml:space="preserve">
           <source>exp</source>
-          <target state="new">exp</target>
+          <target state="translated">EXP</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionAbs" xml:space="preserve">
           <source>abs</source>
-          <target state="new">abs</target>
+          <target state="translated">ABS</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionArcTan" xml:space="preserve">
           <source>arctan</source>
-          <target state="new">arctan</target>
+          <target state="translated">ARCTAN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionArcSin" xml:space="preserve">
           <source>arcsin</source>
-          <target state="new">arcsin</target>
+          <target state="translated">ARCSIN</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_FunctionArcCos" xml:space="preserve">
           <source>arccos</source>
-          <target state="new">arccos</target>
+          <target state="translated">ARCCOS</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_Mult" xml:space="preserve">
           <source>*</source>
-          <target state="new">*</target>
+          <target state="translated">*</target>
         
         <note from="MultilingualBuild" annotates="source" priority="2">Alternate: •</note></trans-unit>
         <trans-unit translate="yes" id="Resx/Formula_Minus" xml:space="preserve">
           <source>-</source>
-          <target state="new">-</target>
+          <target state="translated">-</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_SelectedProjectNotValidHeader" xml:space="preserve">
           <source>Sorry! The selected project could not be opened.</source>
-          <target state="new">Sorry! The selected project could not be opened.</target>
+          <target state="translated">Leider konnte das ausgewählte Projekt nicht geöffnet werden.</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_LocalVariables" xml:space="preserve">
           <source>Object</source>
-          <target state="new">Object</target>
+          <target state="translated">Objekt</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Editor_GlobalVariables" xml:space="preserve">
-          <source>Global</source>
-          <target state="new">Global</target>
+          <source>Program</source>
+          <target state="translated">Programm</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_DeleteProject" xml:space="preserve">
           <source>delete</source>
-          <target state="new">delete</target>
+          <target state="translated">Löschen</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_CopyProject" xml:space="preserve">
           <source>copy</source>
-          <target state="new">copy</target>
+          <target state="translated">Kopieren</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Main_ChangeProjectNameAndDescription" xml:space="preserve">
           <source>change name and description</source>
-          <target state="new">change name and description</target>
+          <target state="translated">Name und Beschreibung ändern</target>
         </trans-unit>
       </group>
     </body>

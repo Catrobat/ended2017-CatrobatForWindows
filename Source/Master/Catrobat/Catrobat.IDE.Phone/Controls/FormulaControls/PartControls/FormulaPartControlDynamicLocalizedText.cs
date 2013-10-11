@@ -2,7 +2,6 @@
 using System.Windows.Controls;
 using Catrobat.IDE.Phone.Content.Localization;
 
-
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {
     public class FormulaPartControlDynamicLocalizedText : FormulaPartControl

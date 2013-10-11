@@ -197,19 +197,19 @@ namespace Catrobat.IDE.Phone.Controls.AppBar
             switch (targetType)
             {
                 case AppBarTargetType.Object:
-                    text = AppResources.Editor_NewObject;
+                    text = AppResources.Editor_ButtonAddObject;
                     break;
 
                 case AppBarTargetType.Script:
-                    text = AppResources.Editor_NewAction;
+                    text = AppResources.Editor_ButtonAddScript;
                     break;
 
                 case AppBarTargetType.Costume:
-                    text = AppResources.Editor_NewCostume;
+                    text = AppResources.Editor_ButtonAddCostume;
                     break;
 
                 case AppBarTargetType.Sound:
-                    text = AppResources.Editor_NewSound;
+                    text = AppResources.Editor_ButtonAddSound;
                     break;
             }
 
