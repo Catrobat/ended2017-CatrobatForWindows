@@ -83,6 +83,7 @@
     <Compile Include="Tests\Data\DataReflectionTests.cs" />
     <Compile Include="Tests\Data\ProjectTests.cs" />
     <Compile Include="Tests\Data\ReferenceHelperTests.cs" />
+    <Compile Include="Tests\Data\ScriptBrickCollectionTests.cs" />
     <Compile Include="Tests\Data\VariableHelperTests.cs" />
     <Compile Include="Tests\Data\VersionConverter091ToWin091PracticalTests.cs" />
     <Compile Include="Tests\Data\VersionConverter091ToWin091Tests.cs" />
@@ -128,6 +129,7 @@
     <Content Include="SampleData\SampleProjects\Converter\XPathHelperTestInput.xml" />
     <Content Include="SampleData\SampleProjects\DataReadingTests\testCatrobat091.xml" />
     <Content Include="SampleData\SampleProjects\DataReadingTests\test_code1.xml" />
+    <Content Include="SampleData\SampleProjects\simple.xml" />
     <Content Include="SampleData\screenshot.png" />
   </ItemGroup>
   <ItemGroup>

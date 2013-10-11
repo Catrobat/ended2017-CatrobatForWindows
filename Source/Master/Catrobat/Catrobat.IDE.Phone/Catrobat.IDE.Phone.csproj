@@ -96,6 +96,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controls\Misc\ImageSizeEntry.cs" />
+    <Compile Include="Controls\Misc\ImageSizeEntryCollection.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -165,8 +167,6 @@
       <DependentUpon>ListPickerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListPicker\NullItemCollection.cs" />
-    <Compile Include="Controls\Misc\ImageSizeEntry.cs" />
-    <Compile Include="Controls\Misc\ImageSizeEntryCollection.cs" />
     <Compile Include="Controls\Misc\ImageSizeIcon.xaml.cs">
       <DependentUpon>ImageSizeIcon.xaml</DependentUpon>
     </Compile>

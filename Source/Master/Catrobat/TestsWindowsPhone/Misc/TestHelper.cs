@@ -7,7 +7,7 @@ using Catrobat.IDE.Phone.Services;
 using Catrobat.IDE.Phone.Services.Storage;
 
 
-namespace Catrobat.TestsWindowsPhone.Misc
+namespace Catrobat.IDE.Phone.Tests.Misc
 {
   public static class TestHelper
   {

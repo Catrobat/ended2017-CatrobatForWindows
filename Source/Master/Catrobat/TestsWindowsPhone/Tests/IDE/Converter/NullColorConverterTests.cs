@@ -4,7 +4,7 @@ using System.Windows.Threading;
 using Catrobat.IDE.Phone.Converters;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
-namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
+namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
 {
     [TestClass]
     public class NullColorConverterTests

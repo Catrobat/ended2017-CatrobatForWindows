@@ -5,7 +5,7 @@ using Catrobat.IDE.Phone.Converters;
 using Catrobat.IDE.Phone.Themes;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
-namespace Catrobat.TestsWindowsPhone.Tests.IDE.Converter
+namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
 {
     [TestClass]
     public class NullIntCountConverterTests

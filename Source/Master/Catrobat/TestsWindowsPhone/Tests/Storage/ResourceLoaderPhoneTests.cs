@@ -3,7 +3,7 @@ using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Phone.Services.Storage;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
-namespace Catrobat.TestsWindowsPhone.Tests.Storage
+namespace Catrobat.IDE.Phone.Tests.Tests.Storage
 {
     [TestClass]
     public class ResourceLoaderPhoneTests
