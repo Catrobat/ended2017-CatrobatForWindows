@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Navigation;
-using Catrobat.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDEWindowsPhone.ViewModel.Service;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;

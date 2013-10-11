@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media;
-using Catrobat.IDEWindowsPhone.Controls.ListPicker;
-using Catrobat.IDEWindowsPhone.Converters;
+using Catrobat.IDE.Phone.Controls.ListPicker;
+using Catrobat.IDE.Phone.Converters;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
 namespace Catrobat.TestsWindowsPhone.Tests.IDE

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Media.Imaging;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.CatrobatObjects.Costumes;
-using Catrobat.Core.Services;
-using Catrobat.Core.Services.Data;
-using Catrobat.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects.Costumes;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Data;
+using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.Paint;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

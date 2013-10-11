@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using Catrobat.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDEWindowsPhone.Controls.FormulaControls.PartControls;
 using System.Windows;
 

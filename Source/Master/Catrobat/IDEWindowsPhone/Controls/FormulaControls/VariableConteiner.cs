@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Catrobat.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
 {

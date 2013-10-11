@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Data;
-using Catrobat.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 
 namespace Catrobat.IDEWindowsPhone.Converters

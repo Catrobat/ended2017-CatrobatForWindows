@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Catrobat.Core.Annotations;
-using Catrobat.Core.Services.Data;
+using Catrobat.IDE.Core.Annotations;
+using Catrobat.IDE.Core.Services.Data;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 
 namespace Catrobat.IDEWindowsPhone.Controls.Misc

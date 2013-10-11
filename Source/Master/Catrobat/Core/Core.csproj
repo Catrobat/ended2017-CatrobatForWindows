@@ -43,6 +43,7 @@
     <Content Include="lib\SharpCompress.WP7.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
     <Compile Include="CatrobatObjects\Scripts\ScriptBrickCollection.cs" />
     <Compile Include="CatrobatObjects\Scripts\ScriptBrickIterator.cs" />
     <Compile Include="CatrobatContext.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Utilities\Helpers\PropertyHelper.cs" />
     <Compile Include="Services\IServerCommunicationService.cs" />
     <Compile Include="Services\Common\CatrobatWebCommunicationService.cs" />
+    <Compile Include="Utilities\MvvmCrossSetup.cs" />
     <Compile Include="Utilities\UtilToken.cs" />
     <Compile Include="CatrobatObjects\Bricks\Brick.cs" />
     <Compile Include="CatrobatObjects\Bricks\BrickList.cs" />
@@ -189,6 +191,7 @@
     <Compile Include="VersionConverter\Versions\CatrobatVersion091ToWin091.cs" />
     <Compile Include="Utilities\Helpers\XPathHelper.cs" />
     <Compile Include="Utilities\XmlStringWriter.cs" />
+    <Compile Include="ViewModels\FirstViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ApplicationResources.resx">
@@ -197,6 +200,18 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Cirrious.CrossCore">
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.CrossCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross">
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Localization">
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.PictureChooser">
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.PictureChooser.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Plugins.PictureChooser.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.14-rc\lib\portable-net45+win8+wp8\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
@@ -211,9 +226,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utilities\Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

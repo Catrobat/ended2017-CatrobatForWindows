@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
-using Catrobat.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
@@ -45,8 +45,8 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (Core.Services.ServiceLocator.NavigationService.CanGoBack)
-                Core.Services.ServiceLocator.NavigationService.RemoveBackEntry();
+            if (Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.CanGoBack)
+                Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.RemoveBackEntry();
 
             _viewModel.ShowMessagesCommand.Execute(null);
 
@@ -56,7 +56,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
             while (NavigationService.CanGoBack)
-                Core.Services.ServiceLocator.NavigationService.RemoveBackEntry();
+                Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.RemoveBackEntry();
 
             _viewModel.ResetViewModelCommand.Execute(null);
             base.OnBackKeyPress(e);

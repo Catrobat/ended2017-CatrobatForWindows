@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Catrobat.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects;
 
 namespace Catrobat.IDEWindowsPhone.Controls.Projects
 {

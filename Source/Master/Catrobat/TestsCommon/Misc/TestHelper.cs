@@ -45,9 +45,9 @@ namespace Catrobat.TestsCommon.Misc
 
         internal static void InitializeTests()
         {
-            ServiceLocator.SetServices(null, new PlatformInformationHelperTests(), null, null, 
-                null, new ResourceLoaderFactoryTest(), new StorageFactoryTest(), null, null, 
-                new ProjectImporterService(), null, null);
+            //ServiceLocator.SetServices(null, new PlatformInformationHelperTests(), null, null, 
+            //    null, new ResourceLoaderFactoryTest(), new StorageFactoryTest(), null, null, 
+            //    new ProjectImporterService(), null, null, null);
         }
     }
 }

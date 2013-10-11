@@ -2,8 +2,8 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
-using Catrobat.Core.Services.Storage;
-using Catrobat.Core.Services;
+using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDEWindowsPhone.Converters
 {

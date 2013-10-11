@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using Catrobat.Core.Services.Storage;
+using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Catrobat.IDEWindowsPhone.ViewModel.Main;
 using Microsoft.Phone.Controls;
@@ -110,7 +110,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
             path += "&Dummy=" + DateTime.UtcNow.Ticks;
 
             ShellTile.Create(new Uri(path, UriKind.Relative), tile, true);
-            Core.Services.ServiceLocator.NavigationService.NavigateBack();
+            Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void BuildApplicationBar()
@@ -124,7 +124,7 @@ namespace Catrobat.IDEWindowsPhone.Views.Main
 
             var buttonCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
             buttonCancel.Text = AppResources.Editor_ButtonCancel;
-            buttonCancel.Click += (sender, args) => Core.Services.ServiceLocator.NavigationService.NavigateBack();
+            buttonCancel.Click += (sender, args) => Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.NavigateBack();
             ApplicationBar.Buttons.Add(buttonCancel);
         }
     }

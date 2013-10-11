@@ -2,7 +2,6 @@
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en" />
   <Languages xmlns="">
-    <Language code="de" />
     <Language code="qps-ploc" />
   </Languages>
   <App xmlns="" ProductID="{cddb2c02-9584-45c6-9a7d-2b04b322c232}" Title="Pocket Code" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="IDEWindowsPhone author" Description="Pocket Code for Windows Phone" Publisher="IDEWindowsPhone" PublisherID="{00331c69-fa4b-4f1d-ad9a-e30a20e7d376}">
@@ -25,14 +24,10 @@
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">windows_pocketcode_450.png</BackgroundImageURI>
           <Title>Pocket Code</Title>
-          <BackContent>
-          </BackContent>
-          <BackBackgroundImageURI IsRelative="true" IsResource="false">
-          </BackBackgroundImageURI>
-          <BackTitle>
-          </BackTitle>
-          <DeviceLockImageURI IsRelative="true" IsResource="false">
-          </DeviceLockImageURI>
+          <BackContent></BackContent>
+          <BackBackgroundImageURI IsRelative="true" IsResource="false"></BackBackgroundImageURI>
+          <BackTitle></BackTitle>
+          <DeviceLockImageURI IsRelative="true" IsResource="false"></DeviceLockImageURI>
           <HasLarge>false</HasLarge>
         </TemplateFlip>
       </PrimaryToken>

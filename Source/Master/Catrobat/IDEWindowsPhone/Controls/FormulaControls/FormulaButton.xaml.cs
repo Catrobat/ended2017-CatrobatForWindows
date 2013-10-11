@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Catrobat.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDEWindowsPhone.ViewModel.Editor.Formula;
 using Catrobat.IDEWindowsPhone.Views.Editor.Formula;
 using Microsoft.Practices.ServiceLocation;
@@ -46,7 +46,7 @@ namespace Catrobat.IDEWindowsPhone.Controls.FormulaControls
             var viewModel = ServiceLocator.Current.GetInstance<FormulaEditorViewModel>();
             viewModel.Formula = Formula;
             viewModel.FormulaButton = this;
-            Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(FormulaEditorView));
+            Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(FormulaEditorView));
         }
     }
 }

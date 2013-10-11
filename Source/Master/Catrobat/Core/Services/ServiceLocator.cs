@@ -1,5 +1,6 @@
 ﻿using Catrobat.Core.Services.Storage;
 using Catrobat.Core.Utilities.Helpers;
+using Cirrious.MvvmCross.Plugins.PictureChooser;
 
 namespace Catrobat.Core.Services
 {
@@ -29,6 +30,8 @@ namespace Catrobat.Core.Services
 
         public static ISoundRecorderService SoundRecorderService { get; private set; }
 
+        public static IMvxPictureChooserTask MvxPictureChooserTask { get; private set; }
+
         public static void SetServices(
             INavigationService navigationService,
             ISystemInformationService systemInformationService,
@@ -56,6 +59,11 @@ namespace Catrobat.Core.Services
             ProjectImporterService = projectImporterService;
             SoundPlayerService = soundPlayerService;
             SoundRecorderService = soundRecorderService;
+        }
+
+        public static void SetMvxServices(IMvxPictureChooserTask mvxPictureChooserTask)
+        {
+            MvxPictureChooserTask = mvxPictureChooserTask;
         }
     }
 }

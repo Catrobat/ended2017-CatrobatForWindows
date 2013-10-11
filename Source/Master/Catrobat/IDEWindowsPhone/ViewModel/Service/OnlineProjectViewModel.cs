@@ -2,11 +2,11 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Input;
-using Catrobat.Core.CatrobatObjects;
-using Catrobat.Core.Resources;
-using Catrobat.Core.Services;
-using Catrobat.Core.Services.Common;
-using Catrobat.Core.VersionConverter;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Resources;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.VersionConverter;
 using Catrobat.IDEWindowsPhone.Content.Localization;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;

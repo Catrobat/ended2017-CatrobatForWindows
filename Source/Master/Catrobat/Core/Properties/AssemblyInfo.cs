@@ -33,3 +33,4 @@ using System.Runtime.CompilerServices;
 // For UnitTests
 [assembly: InternalsVisibleTo("Catrobat.TestsWindowsStore")]
 [assembly: InternalsVisibleTo("Catrobat.TestsCommon")]
+[assembly: InternalsVisibleTo("Catrobat.IDE.Tests")]

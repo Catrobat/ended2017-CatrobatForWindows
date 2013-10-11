@@ -2,306 +2,307 @@
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:s="clr-namespace:Catrobat.IDEWindowsPhone.Views.Editor.Scripts"
-  xmlns:d="clr-namespace:Catrobat.Core.CatrobatObjects.Bricks;assembly=Catrobat.Core"
-  xmlns:scripts="clr-namespace:Catrobat.Core.CatrobatObjects.Scripts;assembly=Catrobat.Core"
-  xmlns:formulas="clr-namespace:Catrobat.Core.CatrobatObjects.Formulas;assembly=Catrobat.Core">
+  xmlns:d="clr-namespace:Catrobat.IDE.Core.CatroatObjects.Scripts;assembly=Catrobat.IDE.Core"
+  xmlns:scripts="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Scripts;assembly=Catrobat.IDE.Core"
+  xmlns:formulas="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas;assembly=Catrobat.IDE.Core"
+  xmlns:bricks="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Bricks;assembly=Catrobat.IDE.Core">
 
   <s:BrickCollection x:Key="ScriptBrickAddDataMovement">
-    <d:PlaceAtBrick IsRealObject="False">
-      <d:PlaceAtBrick.XPosition>
+    <bricks:PlaceAtBrick IsRealObject="False">
+      <bricks:PlaceAtBrick.XPosition>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:PlaceAtBrick.XPosition>
-      <d:PlaceAtBrick.YPosition>
+      </bricks:PlaceAtBrick.XPosition>
+      <bricks:PlaceAtBrick.YPosition>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:PlaceAtBrick.YPosition>
-    </d:PlaceAtBrick>
+      </bricks:PlaceAtBrick.YPosition>
+    </bricks:PlaceAtBrick>
     
-    <d:SetXBrick IsRealObject="False">
-      <d:SetXBrick.XPosition>
+    <bricks:SetXBrick IsRealObject="False">
+      <bricks:SetXBrick.XPosition>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:SetXBrick.XPosition>
-    </d:SetXBrick>
+      </bricks:SetXBrick.XPosition>
+    </bricks:SetXBrick>
     
-    <d:SetYBrick IsRealObject="False">
-      <d:SetYBrick.YPosition>
+    <bricks:SetYBrick IsRealObject="False">
+      <bricks:SetYBrick.YPosition>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:SetYBrick.YPosition>
-    </d:SetYBrick>
+      </bricks:SetYBrick.YPosition>
+    </bricks:SetYBrick>
     
-    <d:ChangeXByBrick IsRealObject="False">
-      <d:ChangeXByBrick.XMovement>
+    <bricks:ChangeXByBrick IsRealObject="False">
+      <bricks:ChangeXByBrick.XMovement>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:ChangeXByBrick.XMovement>
-    </d:ChangeXByBrick>
+      </bricks:ChangeXByBrick.XMovement>
+    </bricks:ChangeXByBrick>
     
-    <d:ChangeYByBrick IsRealObject="False">
-      <d:ChangeYByBrick.YMovement>
+    <bricks:ChangeYByBrick IsRealObject="False">
+      <bricks:ChangeYByBrick.YMovement>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:ChangeYByBrick.YMovement>
-    </d:ChangeYByBrick>
+      </bricks:ChangeYByBrick.YMovement>
+    </bricks:ChangeYByBrick>
     
-    <d:IfOnEdgeBounceBrick IsRealObject="False"></d:IfOnEdgeBounceBrick>
+    <bricks:IfOnEdgeBounceBrick IsRealObject="False"></bricks:IfOnEdgeBounceBrick>
     
-    <d:MoveNStepsBrick IsRealObject="False">
-      <d:MoveNStepsBrick.Steps>
+    <bricks:MoveNStepsBrick IsRealObject="False">
+      <bricks:MoveNStepsBrick.Steps>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="1" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:MoveNStepsBrick.Steps>
-    </d:MoveNStepsBrick>
+      </bricks:MoveNStepsBrick.Steps>
+    </bricks:MoveNStepsBrick>
     
-    <d:TurnLeftBrick IsRealObject="False">
-      <d:TurnLeftBrick.Degrees>
+    <bricks:TurnLeftBrick IsRealObject="False">
+      <bricks:TurnLeftBrick.Degrees>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="15" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:TurnLeftBrick.Degrees>
-    </d:TurnLeftBrick>
+      </bricks:TurnLeftBrick.Degrees>
+    </bricks:TurnLeftBrick>
     
-    <d:TurnRightBrick IsRealObject="False">
-      <d:TurnRightBrick.Degrees>
+    <bricks:TurnRightBrick IsRealObject="False">
+      <bricks:TurnRightBrick.Degrees>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="15" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:TurnRightBrick.Degrees>
-    </d:TurnRightBrick>
+      </bricks:TurnRightBrick.Degrees>
+    </bricks:TurnRightBrick>
     
-    <d:PointInDirectionBrick IsRealObject="False">
-      <d:PointInDirectionBrick.Degrees>
+    <bricks:PointInDirectionBrick IsRealObject="False">
+      <bricks:PointInDirectionBrick.Degrees>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="90" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:PointInDirectionBrick.Degrees>
-    </d:PointInDirectionBrick>
+      </bricks:PointInDirectionBrick.Degrees>
+    </bricks:PointInDirectionBrick>
     
-    <d:PointToBrick IsRealObject="False"></d:PointToBrick>
+    <bricks:PointToBrick IsRealObject="False"></bricks:PointToBrick>
     
-    <d:GlideToBrick IsRealObject="False">
-      <d:GlideToBrick.DurationInSeconds>
+    <bricks:GlideToBrick IsRealObject="False">
+      <bricks:GlideToBrick.DurationInSeconds>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="3" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:GlideToBrick.DurationInSeconds>
-      <d:GlideToBrick.XDestination>
+      </bricks:GlideToBrick.DurationInSeconds>
+      <bricks:GlideToBrick.XDestination>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:GlideToBrick.XDestination>
-      <d:GlideToBrick.YDestination>
+      </bricks:GlideToBrick.XDestination>
+      <bricks:GlideToBrick.YDestination>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:GlideToBrick.YDestination>
-    </d:GlideToBrick>
-    <d:GoNStepsBackBrick IsRealObject="False">
-      <d:GoNStepsBackBrick.Steps>
+      </bricks:GlideToBrick.YDestination>
+    </bricks:GlideToBrick>
+    <bricks:GoNStepsBackBrick IsRealObject="False">
+      <bricks:GoNStepsBackBrick.Steps>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="1" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:GoNStepsBackBrick.Steps>
-    </d:GoNStepsBackBrick>
-    <d:ComeToFrontBrick IsRealObject="False"></d:ComeToFrontBrick>
+      </bricks:GoNStepsBackBrick.Steps>
+    </bricks:GoNStepsBackBrick>
+    <bricks:ComeToFrontBrick IsRealObject="False"></bricks:ComeToFrontBrick>
   </s:BrickCollection>
 
   <s:BrickCollection x:Key="ScriptBrickAddDataSound">
-    <d:PlaySoundBrick IsRealObject="False"></d:PlaySoundBrick>
-    <d:StopAllSoundsBrick IsRealObject="False"></d:StopAllSoundsBrick>
+    <bricks:PlaySoundBrick IsRealObject="False"></bricks:PlaySoundBrick>
+    <bricks:StopAllSoundsBrick IsRealObject="False"></bricks:StopAllSoundsBrick>
     
-    <d:SetVolumeToBrick IsRealObject="False">
-      <d:SetVolumeToBrick.Volume>
+    <bricks:SetVolumeToBrick IsRealObject="False">
+      <bricks:SetVolumeToBrick.Volume>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="100" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:SetVolumeToBrick.Volume>
-    </d:SetVolumeToBrick>
+      </bricks:SetVolumeToBrick.Volume>
+    </bricks:SetVolumeToBrick>
     
-    <d:ChangeVolumeByBrick IsRealObject="False">
-      <d:ChangeVolumeByBrick.Volume>
+    <bricks:ChangeVolumeByBrick IsRealObject="False">
+      <bricks:ChangeVolumeByBrick.Volume>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="100" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:ChangeVolumeByBrick.Volume>
-    </d:ChangeVolumeByBrick>
+      </bricks:ChangeVolumeByBrick.Volume>
+    </bricks:ChangeVolumeByBrick>
     
-    <d:SpeakBrick Text="" IsRealObject="False"></d:SpeakBrick>
+    <bricks:SpeakBrick Text="" IsRealObject="False"></bricks:SpeakBrick>
   </s:BrickCollection>
   
   <s:BrickCollection x:Key="ScriptBrickAddDataLook">
-    <d:SetCostumeBrick IsRealObject="False"></d:SetCostumeBrick>
-    <d:NextCostumeBrick IsRealObject="False"></d:NextCostumeBrick>
+    <bricks:SetCostumeBrick IsRealObject="False"></bricks:SetCostumeBrick>
+    <bricks:NextCostumeBrick IsRealObject="False"></bricks:NextCostumeBrick>
     
-    <d:SetSizeToBrick IsRealObject="False">
-      <d:SetSizeToBrick.Size>
+    <bricks:SetSizeToBrick IsRealObject="False">
+      <bricks:SetSizeToBrick.Size>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="100" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:SetSizeToBrick.Size>
-    </d:SetSizeToBrick>
+      </bricks:SetSizeToBrick.Size>
+    </bricks:SetSizeToBrick>
     
-    <d:ChangeSizeByNBrick IsRealObject="False">
-      <d:ChangeSizeByNBrick.Size>
+    <bricks:ChangeSizeByNBrick IsRealObject="False">
+      <bricks:ChangeSizeByNBrick.Size>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="20" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:ChangeSizeByNBrick.Size>
-    </d:ChangeSizeByNBrick>
+      </bricks:ChangeSizeByNBrick.Size>
+    </bricks:ChangeSizeByNBrick>
     
-    <d:HideBrick IsRealObject="False"></d:HideBrick>
-    <d:ShowBrick IsRealObject="False"></d:ShowBrick>
+    <bricks:HideBrick IsRealObject="False"></bricks:HideBrick>
+    <bricks:ShowBrick IsRealObject="False"></bricks:ShowBrick>
     
-    <d:SetGhostEffectBrick IsRealObject="False">
-      <d:SetGhostEffectBrick.Transparency>
+    <bricks:SetGhostEffectBrick IsRealObject="False">
+      <bricks:SetGhostEffectBrick.Transparency>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:SetGhostEffectBrick.Transparency>
-    </d:SetGhostEffectBrick>
+      </bricks:SetGhostEffectBrick.Transparency>
+    </bricks:SetGhostEffectBrick>
     
-    <d:ChangeGhostEffectBrick IsRealObject="False">
-      <d:ChangeGhostEffectBrick.ChangeGhostEffect>
+    <bricks:ChangeGhostEffectBrick IsRealObject="False">
+      <bricks:ChangeGhostEffectBrick.ChangeGhostEffect>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="25" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:ChangeGhostEffectBrick.ChangeGhostEffect>
-    </d:ChangeGhostEffectBrick>
+      </bricks:ChangeGhostEffectBrick.ChangeGhostEffect>
+    </bricks:ChangeGhostEffectBrick>
     
-    <d:SetBrightnessBrick IsRealObject="False">
-      <d:SetBrightnessBrick.Brightness>
+    <bricks:SetBrightnessBrick IsRealObject="False">
+      <bricks:SetBrightnessBrick.Brightness>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:SetBrightnessBrick.Brightness>
-    </d:SetBrightnessBrick>
+      </bricks:SetBrightnessBrick.Brightness>
+    </bricks:SetBrightnessBrick>
     
-    <d:ChangeBrightnessBrick IsRealObject="False">
-      <d:ChangeBrightnessBrick.ChangeBrightness>
+    <bricks:ChangeBrightnessBrick IsRealObject="False">
+      <bricks:ChangeBrightnessBrick.ChangeBrightness>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="25" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:ChangeBrightnessBrick.ChangeBrightness>
-    </d:ChangeBrightnessBrick>
+      </bricks:ChangeBrightnessBrick.ChangeBrightness>
+    </bricks:ChangeBrightnessBrick>
     
-    <d:ClearGraphicEffectBrick IsRealObject="False"></d:ClearGraphicEffectBrick>
+    <bricks:ClearGraphicEffectBrick IsRealObject="False"></bricks:ClearGraphicEffectBrick>
   </s:BrickCollection>
 
   <s:BrickCollection x:Key="ScriptBrickAddDataControl">
     <scripts:StartScript IsRealObject="False"></scripts:StartScript>
     <scripts:WhenScript Action="Tapped" IsRealObject="False"></scripts:WhenScript>
     
-    <d:WaitBrick IsRealObject="False">
-      <d:WaitBrick.TimeToWaitInSeconds>
+    <bricks:WaitBrick IsRealObject="False">
+      <bricks:WaitBrick.TimeToWaitInSeconds>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="1" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:WaitBrick.TimeToWaitInSeconds>
-    </d:WaitBrick>
+      </bricks:WaitBrick.TimeToWaitInSeconds>
+    </bricks:WaitBrick>
     
     <scripts:BroadcastScript IsRealObject="False"></scripts:BroadcastScript>
-    <d:BroadcastBrick IsRealObject="False"></d:BroadcastBrick>
-    <d:BroadcastWaitBrick IsRealObject="False"></d:BroadcastWaitBrick>
-    <d:NoteBrick Note="" IsRealObject="False"></d:NoteBrick>
-    <d:ForeverBrick IsRealObject="False"></d:ForeverBrick>
+    <bricks:BroadcastBrick IsRealObject="False"></bricks:BroadcastBrick>
+    <bricks:BroadcastWaitBrick IsRealObject="False"></bricks:BroadcastWaitBrick>
+    <bricks:NoteBrick Note="" IsRealObject="False"></bricks:NoteBrick>
+    <bricks:ForeverBrick IsRealObject="False"></bricks:ForeverBrick>
     
-    <d:RepeatBrick IsRealObject="False">
-      <d:RepeatBrick.TimesToRepeat>
+    <bricks:RepeatBrick IsRealObject="False">
+      <bricks:RepeatBrick.TimesToRepeat>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="3" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:RepeatBrick.TimesToRepeat>
-    </d:RepeatBrick>
+      </bricks:RepeatBrick.TimesToRepeat>
+    </bricks:RepeatBrick>
 
-    <d:IfLogicBeginBrick IsRealObject="False">
-      <d:IfLogicBeginBrick.IfCondition>
+    <bricks:IfLogicBeginBrick IsRealObject="False">
+      <bricks:IfLogicBeginBrick.IfCondition>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="1" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:IfLogicBeginBrick.IfCondition>
-    </d:IfLogicBeginBrick>
+      </bricks:IfLogicBeginBrick.IfCondition>
+    </bricks:IfLogicBeginBrick>
 
   </s:BrickCollection>
 
   <s:BrickCollection x:Key="ScriptBrickAddDataVariables">
-    <d:SetVariableBrick IsRealObject="False">
-      <d:SetVariableBrick.VariableFormula>
+    <bricks:SetVariableBrick IsRealObject="False">
+      <bricks:SetVariableBrick.VariableFormula>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="0.0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:SetVariableBrick.VariableFormula>
-    </d:SetVariableBrick>
+      </bricks:SetVariableBrick.VariableFormula>
+    </bricks:SetVariableBrick>
 
-    <d:ChangeVariableBrick IsRealObject="False">
-      <d:ChangeVariableBrick.VariableFormula>
+    <bricks:ChangeVariableBrick IsRealObject="False">
+      <bricks:ChangeVariableBrick.VariableFormula>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
             <formulas:FormulaTree VariableType="NUMBER" VariableValue="0.0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
-      </d:ChangeVariableBrick.VariableFormula>
-    </d:ChangeVariableBrick>
+      </bricks:ChangeVariableBrick.VariableFormula>
+    </bricks:ChangeVariableBrick>
   </s:BrickCollection>
   
   <s:BrickCollection x:Key="ScriptBrickAddDataNXT">

@@ -346,7 +346,8 @@ namespace Catrobat.Core.Utilities.Helpers
 
         private static DataObject GetUserVariableObject(UserVariableReference userVariableReference, string reference)
         {
-            bool found = false;
+            var tmpReference = reference;
+            var found = false;
             var count = 0;
 
             foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
@@ -358,23 +359,30 @@ namespace Catrobat.Core.Utilities.Helpers
                                 brick is ChangeVariableBrick && (brick as ChangeVariableBrick).UserVariableReference == userVariableReference)
                             {
                                 found = true;
-                                if (reference.EndsWith("]"))
+                                if (tmpReference.EndsWith("]"))
                                 {
-                                    var splittetReference = reference.Split('[');
-                                    reference = reference.Split('[')[splittetReference.Count() - 1];
-                                    reference = reference.Split(']')[0];
-                                    count = Int32.Parse(reference) - 1;
+                                    var splittetReference = tmpReference.Split('[');
+                                    tmpReference = tmpReference.Split('[')[splittetReference.Count() - 1];
+                                    tmpReference = tmpReference.Split(']')[0];
+                                    count = Int32.Parse(tmpReference) - 1;
                                 }
                                 break;
                             }
 
                 if (found)
                 {
-                    var entries = XmlParserTempProjectHelper.Project.VariableList.ObjectVariableList.ObjectVariableEntries;
-                    foreach (var entry in entries)
+                    if(reference.Contains("programVariableList"))
                     {
-                        if (entry.Sprite == sprite)
-                            return entry.VariableList.UserVariables[count];
+                        return XmlParserTempProjectHelper.Project.VariableList.ProgramVariableList.UserVariables[count];
+                    }
+                    else
+                    {
+                        var entries = XmlParserTempProjectHelper.Project.VariableList.ObjectVariableList.ObjectVariableEntries;
+                        foreach (var entry in entries)
+                        {
+                            if (entry.Sprite == sprite)
+                                return entry.VariableList.UserVariables[count];
+                        }
                     }
                 }
             }

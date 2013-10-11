@@ -114,7 +114,6 @@ namespace Catrobat.Core
             sprite.Scripts = scripts;
             project.SpriteList.Sprites.Add(sprite);
 
-
             project.VariableList = new VariableList();
 
             var programVariableList = new ProgramVariableList();

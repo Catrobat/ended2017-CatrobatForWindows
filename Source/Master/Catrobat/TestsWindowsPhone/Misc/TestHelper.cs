@@ -1,12 +1,11 @@
 ﻿using System.IO.IsolatedStorage;
 using System.Linq.Expressions;
-using Catrobat.Core;
-using Catrobat.Core.Services.Common;
-using Catrobat.Core.Services;
-using Catrobat.IDEWindowsPhone.Services;
-using Catrobat.IDEWindowsPhone.Services.Storage;
-using Catrobat.IDEWindowsPhone.Utilities.Sounds;
-using Catrobat.IDEWindowsPhone.Utilities.Storage;
+using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Phone.Services;
+using Catrobat.IDE.Phone.Services.Storage;
+
 
 namespace Catrobat.TestsWindowsPhone.Misc
 {
@@ -35,20 +34,20 @@ namespace Catrobat.TestsWindowsPhone.Misc
 
     internal static void InitializeTests()
     {
-        Core.Services.ServiceLocator.SetServices(
-                        new NavigationServicePhone(),
-                        new SystemInformationServicePhone(),
-                        new CultureServicePhone(),
-                        new ImageResizeServicePhone(),
-                        new PlayerLauncherServicePhone(),
-                        new ResourceLoaderFactoryPhone(),
-                        new StorageFactoryPhone(),
-                        new ServerCommunicationServicePhone(),
-                        new ImageSourceConversionServicePhone(),
-                        new ProjectImporterService(),
-                        new SoundPlayerServicePhone(),
-                        new SoundRecorderServicePhone()
-                        );
+        Catrobat.IDE.Core.Services.ServiceLocator.SetServices(
+            new NavigationServicePhone(),
+            new SystemInformationServicePhone(),
+            new CultureServicePhone(),
+            new ImageResizeServicePhone(),
+            new PlayerLauncherServicePhone(),
+            new ResourceLoaderFactoryPhone(),
+            new StorageFactoryPhone(),
+            new ServerCommunicationServicePhone(),
+            new ImageSourceConversionServicePhone(),
+            new ProjectImporterService(),
+            new SoundPlayerServicePhone(),
+            new SoundRecorderServicePhone()
+            );
     }
   }
 }
