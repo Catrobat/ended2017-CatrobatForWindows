@@ -15,13 +15,21 @@
   DataContext="{Binding SettingsViewModel, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
-    <StackPanel>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 0 10">
+      <TextBlock x:Name="Headline" Margin="0 0 0 0" Text="{Binding Resources.Main_TitleSettings, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" />
+    </StackPanel>
+
+    <StackPanel Grid.Row="1">
       <Button Command="{Binding ShowLanguageSettingsCommand}" BorderThickness="0">
         <Button.Content>
           <StackPanel Name="StackPanelSettingsLanguage" Margin="10 0 10 10" >
             <TextBlock Margin="0 0 10 10"
-                       Text="{Binding Resources.Main_ListLanguage, 
-                       Source={StaticResource LocalizedStrings}}" 
+                       Text="{Binding Resources.Main_ListLanguage, Source={StaticResource LocalizedStrings}}" 
                        Style="{StaticResource PhoneTextLargeStyle}" />
             <TextBlock Margin="0 -5 10 10" 
                        Text="{Binding CurrentCulture.NativeName}" 
@@ -53,8 +61,8 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Margin="10 0 0 0" Grid.Row="0" 
-                           Text="{ Binding Resources.Main_SettingsTheme, 
-                           Source={StaticResource LocalizedStrings}}" />
+                           Text="{ Binding Resources.Main_SettingsTheme, Source={StaticResource LocalizedStrings}}" 
+                           Style="{StaticResource PhoneTextLargeStyle}"/>
 
                 <Grid Grid.Row="1" Margin="10">
                   <Grid Margin="0">

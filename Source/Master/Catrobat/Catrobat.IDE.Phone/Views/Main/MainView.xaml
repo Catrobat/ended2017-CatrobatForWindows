@@ -175,15 +175,14 @@
                     <statusIcons:ProcessIcon Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                              Width="30" Height="30" Margin="5" IsProcessing="True" />
                     <TextBlock Opacity="0.5" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" 
-                               VerticalAlignment="Center" Grid.Column="1"> 
-                      Please wait while the project is being activated
-                    </TextBlock>
+                               VerticalAlignment="Center" Grid.Column="1"
+                               Text="{Binding Resources.Main_ProjectGettingActivated, Source={StaticResource LocalizedStrings}}" />
                   </Grid>
 
                   <TextBlock Grid.Column="0" Opacity="0.9" Margin="10 0 10 0" TextWrapping="Wrap" TextAlignment="Center" 
-                             Visibility="{Binding IsActivatingLocalProject, 
-                              Converter={StaticResource BoolVisibilityNegativeConverter}}"
-                             VerticalAlignment="Center" HorizontalAlignment="Left">ACTIVE</TextBlock>
+                             Visibility="{Binding IsActivatingLocalProject, Converter={StaticResource BoolVisibilityNegativeConverter}}"
+                             VerticalAlignment="Center" HorizontalAlignment="Left"
+                             Text="{Binding Resources.Main_ActiveProject, Source={StaticResource LocalizedStrings}}" />
                 </Grid>
               </Grid>
               <Grid Grid.Column="1">

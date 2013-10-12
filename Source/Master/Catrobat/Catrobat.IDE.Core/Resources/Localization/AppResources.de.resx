@@ -297,8 +297,8 @@
   <data name="Editor_ButtonCancel" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
-  <data name="Editor_ButtonChange" xml:space="preserve">
-    <value>Ändern</value>
+  <data name="Editor_ButtonEdit" xml:space="preserve">
+    <value>Bearbeiten</value>
   </data>
   <data name="Editor_ButtonCopy" xml:space="preserve">
     <value>Kopieren</value>
@@ -307,7 +307,7 @@
     <value>Löschen</value>
   </data>
   <data name="Editor_ButtonPlayProject" xml:space="preserve">
-    <value>Projekt abspielen</value>
+    <value>Abspielen</value>
   </data>
   <data name="Editor_ButtonSave" xml:space="preserve">
     <value>Speichern</value>
@@ -380,7 +380,6 @@
   </data>
   <data name="Editor_MessageBoxDeleteText" xml:space="preserve">
     <value>{0} {1} ausgewählt. Wirlich löschen?</value>
-    <comment></comment>
   </data>
   <data name="Editor_NoCostumeSelected" xml:space="preserve">
     <value>Kein Kostüm ausgewählt</value>
@@ -551,7 +550,7 @@
     <value>Catrobat für Windows ist eine Entwicklungsumgebung für die grafische Programmiersprache Catrobat, inspiriert vom Scratch Projekt des MIT. Es wird am Institut für Software Technologie an der Technischen Universität Graz in Österreich entwickelt. Dieses Programm steht unter der MS-RL Lizenz.</value>
   </data>
   <data name="Main_ActiveProject" xml:space="preserve">
-    <value>aktiv</value>
+    <value>AKTIV</value>
   </data>
   <data name="Main_ApplicationNameAndVersion" xml:space="preserve">
     <value>Catrobat für Windows v{0}</value>
@@ -818,7 +817,7 @@
   <data name="Formula_FunctionTan" xml:space="preserve">
     <value>TAN</value>
   </data>
-  <data name="Editor_Camera_Rename" xml:space="preserve">
+  <data name="Editor_Rename" xml:space="preserve">
     <value>Umbenennen</value>
   </data>
   <data name="Editor_AppbarAdd" xml:space="preserve">
@@ -899,5 +898,11 @@
   </data>
   <data name="Main_ChangeProjectNameAndDescription" xml:space="preserve">
     <value>Name und Beschreibung ändern</value>
+  </data>
+  <data name="Editor_PreparingProject" xml:space="preserve">
+    <value>Projekt wird geladen</value>
+  </data>
+  <data name="Main_ProjectGettingActivated" xml:space="preserve">
+    <value>Projekt wird aktiviert.</value>
   </data>
 </root>

@@ -22,7 +22,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Content\Tiles\ApplicationIcon.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Content\Tiles\ApplicationIcon.png</BackgroundImageURI>
-          <Title>Catrobat.IDE.Phone</Title>
+          <Title>Pocket Code</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>

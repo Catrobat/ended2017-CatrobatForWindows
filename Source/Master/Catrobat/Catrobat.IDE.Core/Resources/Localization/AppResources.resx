@@ -297,8 +297,8 @@
   <data name="Editor_ButtonCancel" xml:space="preserve">
     <value>cancel</value>
   </data>
-  <data name="Editor_ButtonChange" xml:space="preserve">
-    <value>change</value>
+  <data name="Editor_ButtonEdit" xml:space="preserve">
+    <value>edit</value>
   </data>
   <data name="Editor_ButtonCopy" xml:space="preserve">
     <value>copy</value>
@@ -307,7 +307,7 @@
     <value>delete</value>
   </data>
   <data name="Editor_ButtonPlayProject" xml:space="preserve">
-    <value>play project</value>
+    <value>play</value>
   </data>
   <data name="Editor_ButtonSave" xml:space="preserve">
     <value>save</value>
@@ -319,7 +319,7 @@
     <value>Camera</value>
   </data>
   <data name="Editor_ClearSelection" xml:space="preserve">
-    <value>selektierung aufheben</value>
+    <value>clear selection</value>
   </data>
   <data name="Editor_CostumeName" xml:space="preserve">
     <value>Costume name</value>
@@ -568,7 +568,7 @@
     <value>Pocket Code for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Pocket Code is an independent free and open source project developed by the Pocket Code team. Pocket Code for Windows is licensed under the MS-RL license.</value>
   </data>
   <data name="Main_ActiveProject" xml:space="preserve">
-    <value>active</value>
+    <value>ACTIVE</value>
   </data>
   <data name="Main_ApplicationNameAndVersion" xml:space="preserve">
     <value>Pocket Code for Windows v{0}</value>
@@ -951,7 +951,7 @@
   <data name="Formula_FunctionTan" xml:space="preserve">
     <value>tan</value>
   </data>
-  <data name="Editor_Camera_Rename" xml:space="preserve">
+  <data name="Editor_Rename" xml:space="preserve">
     <value>rename</value>
   </data>
   <data name="Editor_AppbarAdd" xml:space="preserve">
@@ -959,5 +959,11 @@
   </data>
   <data name="Main_UseCurrentProjectAsTemplate" xml:space="preserve">
     <value>Use current project ({0}) as template?</value>
+  </data>
+  <data name="Editor_PreparingProject" xml:space="preserve">
+    <value>preparing project</value>
+  </data>
+  <data name="Main_ProjectGettingActivated" xml:space="preserve">
+    <value>Please wait, while the project is being activated.</value>
   </data>
 </root>
