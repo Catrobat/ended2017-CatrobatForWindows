@@ -12,16 +12,16 @@
 
   <Grid x:Name="LayoutRoot" Height="130" Background="{Binding Path=SelectedTheme.AppBarColor, Source={StaticResource ThemeChooser}}">
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="100"/>
+      <ColumnDefinition Width="90"/>
       <ColumnDefinition/>
-      <ColumnDefinition Width="130"/>
+      <ColumnDefinition Width="110"/>
     </Grid.ColumnDefinitions>
 
     <Grid Grid.Column="0">
-      <StackPanel  Grid.Column="0" Margin="0 15 0 0" Grid.RowSpan="2">
+      <StackPanel Grid.Column="0" Margin="0 15 0 0" Grid.RowSpan="2">
         <coding4FunControls:RoundButton Name="ButtonNew" Margin="0 0 0 -13" 
           ImageSource="/Content/Images/ApplicationBar/dark/appbar.new.rest.png"/>
-        <TextBlock Name="TextBlockAdd" HorizontalAlignment="Center" TextAlignment="Center" 
+        <TextBlock Margin="0" Name="TextBlockAdd" HorizontalAlignment="Center" TextAlignment="Center" 
           TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}">new costume</TextBlock>
       </StackPanel>
     </Grid>
@@ -30,29 +30,29 @@
         <RowDefinition/>
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
-      <Grid Grid.Row="0" Margin="0 0 0 0">
+      <Grid Grid.Row="0" Margin="-10 0 -15 0">
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"/>
           <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Height="50" HorizontalAlignment="Right">
+        <StackPanel Orientation="Horizontal" Margin="30 0 0 0" Height="50" HorizontalAlignment="Left">
           <StackPanel Name="StackPanelNew" Orientation="Horizontal"
-                    HorizontalAlignment="Right" Margin="0 0 0 0" Width="100">
+                    HorizontalAlignment="Left" Margin="0 0 0 0" Width="100">
             <TextBlock Name="TextBlockNumberOfSelectedItemsNumber" VerticalAlignment="Center" 
-                       FontSize="25" TextAlignment="Right" MinWidth="30" Margin="5 0 7 0">0</TextBlock>
+                       FontSize="25" TextAlignment="Right" MinWidth="30" Margin="0 0 7 0">0</TextBlock>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-              <TextBlock Name="TextBlockNumberOfSelectedItemsText" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Center" 
+              <TextBlock Name="TextBlockNumberOfSelectedItemsText" TextWrapping="Wrap" FontSize="12" VerticalAlignment="Center" 
                        >OBJECTS</TextBlock>
-              <TextBlock TextWrapping="Wrap" FontSize="14" VerticalAlignment="Center"
+              <TextBlock TextWrapping="Wrap" FontSize="12" VerticalAlignment="Center"
                          Text="{Binding Resources.Editor_Selected, Source={StaticResource LocalizedStrings}}" />
             </StackPanel>
           </StackPanel>
-          <HyperlinkButton FontSize="18" Name="ButtonClearSelection" 
+          <HyperlinkButton FontSize="16" Margin="0 10 0 15" Name="ButtonClearSelection" VerticalAlignment="Center"
                            Content="{Binding Resources.Editor_ClearSelection, Source={StaticResource LocalizedStrings}}" />
         </StackPanel>
 
-        <Grid Grid.Row="1" Margin="-10 0 -10 5">
+        <Grid Grid.Row="1" Margin="0 0 0 5">
           <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -62,7 +62,7 @@
           <StackPanel Grid.Column="0" Name="StackPanelCopy">
             <coding4FunControls:RoundButton Name="ButtonCopy" Margin="0 0 0 -13" 
                                             ImageSource="/Content/Images/ApplicationBar/dark/appbar.copy.rest.png"/>
-            <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
+            <TextBlock Margin="0" HorizontalAlignment="Center" TextAlignment="Center" 
                        TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}"
                        Text="{Binding Resources.Editor_ButtonCopy, Source={StaticResource LocalizedStrings}}" />
           </StackPanel>
@@ -70,7 +70,7 @@
           <StackPanel Grid.Column="1" Name="StackPanelEdit">
             <coding4FunControls:RoundButton Name="ButtonEdit" Margin="0 0 0 -13" 
                                             ImageSource="/Content/Images/ApplicationBar/dark/appbar.edit.rest.png"/>
-            <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
+            <TextBlock Margin="0" HorizontalAlignment="Center" TextAlignment="Center" 
                        TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}"
                        Text="{Binding Resources.Editor_ButtonEdit, Source={StaticResource LocalizedStrings}}"/>
           </StackPanel>
@@ -78,7 +78,7 @@
           <StackPanel Grid.Column="2" Name="StackPanelDelete">
             <coding4FunControls:RoundButton Name="ButtonDelete" Margin="0 0 0 -13" 
                                             ImageSource="/Content/Images/ApplicationBar/dark/appbar.delete.rest.png"/>
-            <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
+            <TextBlock Margin="0" HorizontalAlignment="Center" TextAlignment="Center" 
                        TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" 
                        Text="{Binding Resources.Editor_ButtonDelete, Source={StaticResource LocalizedStrings}}"/>
           </StackPanel>
@@ -86,7 +86,7 @@
       </Grid>
     </Grid>
 
-    <Grid Grid.Column="2">
+    <Grid Grid.Column="2" Margin="0 10 0 0">
       <Grid.RowDefinitions>
         <RowDefinition />
         <RowDefinition Height="Auto" />
@@ -176,14 +176,10 @@
             </ControlTemplate>
           </Button.Template>
         </Button>
-      <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="5 5 5 10"
+      <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="5 -7 5 8"
                    VerticalAlignment="Center" 
                    Style="{StaticResource PhoneTextSmallStyle}"
                    Text="{Binding Resources.Editor_ButtonPlayProject, Source={StaticResource LocalizedStrings}}"/>
-      <!--<Grid VerticalAlignment="Top" HorizontalAlignment="Right">
-        <Button BorderThickness="0" 
-              Margin="-20 -65 -17 -13" FontSize="60">...</Button>
-      </Grid>-->
     </Grid>
   </Grid>
 </UserControl>
