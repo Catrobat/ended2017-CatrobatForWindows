@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Phone.Content.Localization;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Phone.Themes;
 using Catrobat.IDE.Phone.Views.Settings;
 using GalaSoft.MvvmLight;

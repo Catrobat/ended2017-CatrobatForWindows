@@ -3,8 +3,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using Catrobat.IDE.Core.Utilities.Helpers;
 
-
-namespace Catrobat.IDE.Phone.Content.Localization
+namespace Catrobat.IDE.Core.Resources.Localization
 {
     public class LocalizedStrings : INotifyPropertyChanged
     {

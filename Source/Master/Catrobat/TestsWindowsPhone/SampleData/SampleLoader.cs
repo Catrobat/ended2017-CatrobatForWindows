@@ -7,7 +7,7 @@ using System;
 using System.IO;
 using System.Xml.Linq;
 
-namespace Catrobat.TestsWindowsPhone.SampleData
+namespace Catrobat.IDE.Phone.Tests.SampleData
 {
   public class SampleLoader
   {

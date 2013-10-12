@@ -7,7 +7,6 @@
         IdeStore,
         TestsPhone,
         TestsStore,
-        IdeCommon,
         TestCommon,
         Resources
     }

@@ -3,9 +3,11 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:vm="clr-namespace:Catrobat.IDE.Phone.ViewModel"
+  xmlns:localization="clr-namespace:Catrobat.IDE.Core.Resources.Localization;assembly=Catrobat.IDE.Core"
+  xmlns:viewModel="clr-namespace:Catrobat.IDE.Phone.ViewModel"
   mc:Ignorable="d">
-
-  <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+  
+  <localization:LocalizedStrings x:Key="LocalizedStrings" />
+  <viewModel:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
 
 </ResourceDictionary>

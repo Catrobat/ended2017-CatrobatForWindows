@@ -4,13 +4,13 @@ using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Phone.Services.Storage;
-using Catrobat.TestsWindowsPhone.Misc;
+using Catrobat.IDE.Phone.Tests.Misc;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Windows.Threading;
 
-namespace Catrobat.TestsWindowsPhone.Tests.Storage
+namespace Catrobat.IDE.Phone.Tests.Tests.Storage
 {
     [TestClass]
     public class StoragePhoneTests

@@ -24,16 +24,11 @@ namespace Catrobat.IDE.Tests.Misc.Storage
                 case ResourceScope.Core:
                     projectPath = "Core/";
                     break;
-
-                case ResourceScope.IdeCommon:
-                    projectPath = "IDECommon/";
-                    break;
-
                 case ResourceScope.TestCommon:
                     projectPath = "Catrobat.IDE.Tests/";
                     break;
                 case ResourceScope.Resources:
-                    projectPath = "IDEWindowsPhone/Content/Resources/";
+                    projectPath = "Catrobat.IDE.Phone/Content/Resources/";
                     break;
 
                 default:

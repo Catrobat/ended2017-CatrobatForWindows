@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Catrobat.TestsWindowsPhone.Misc
+namespace Catrobat.IDE.Phone.Tests.Misc
 {
   public static class BasePathHelper
   {

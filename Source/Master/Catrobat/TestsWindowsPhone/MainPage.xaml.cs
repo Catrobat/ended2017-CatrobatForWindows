@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestPlatform.Core;
 using vstest_executionengine_platformbridge;
 using Microsoft.VisualStudio.TestPlatform.TestExecutor;
 
-namespace Catrobat.TestsWindowsPhone
+namespace Catrobat.IDE.Phone.Tests
 {
   public partial class MainPage : PhoneApplicationPage
   {

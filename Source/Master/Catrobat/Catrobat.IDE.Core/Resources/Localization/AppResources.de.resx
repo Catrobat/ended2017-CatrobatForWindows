@@ -118,861 +118,791 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Brick_Broadcast" xml:space="preserve">
-    <value>broadcast</value>
+    <value>Sende an alle</value>
   </data>
   <data name="Brick_BroadcastWait" xml:space="preserve">
-    <value>broadcast and wait</value>
+    <value>Sende an alle und warte</value>
   </data>
   <data name="Brick_ButtonNew" xml:space="preserve">
-    <value>new...</value>
+    <value>Neu...</value>
   </data>
   <data name="Brick_CategoryControl" xml:space="preserve">
-    <value>Control</value>
+    <value>Steuerung</value>
   </data>
   <data name="Brick_CategoryLooks" xml:space="preserve">
-    <value>Looks</value>
+    <value>Aussehen</value>
   </data>
   <data name="Brick_CategoryMotion" xml:space="preserve">
-    <value>Motion</value>
+    <value>Bewegung</value>
   </data>
   <data name="Brick_CategorySound" xml:space="preserve">
-    <value>Sound</value>
+    <value>Klang</value>
   </data>
   <data name="Brick_ChangeBrightnessBy" xml:space="preserve">
-    <value>change brightness by</value>
+    <value>Ändere Helligkeit um</value>
   </data>
   <data name="Brick_ChangeGhostEffectBy" xml:space="preserve">
-    <value>change ghost effect by</value>
+    <value>Ändere Durchsichtigkeit um</value>
   </data>
   <data name="Brick_ChangeSizeBy" xml:space="preserve">
-    <value>change size by</value>
+    <value>Ändere Größe um</value>
   </data>
   <data name="Brick_ChangeVolumeBy" xml:space="preserve">
-    <value>change volume by</value>
+    <value>Ändere Lautstärke um</value>
   </data>
   <data name="Brick_ChangeXBy" xml:space="preserve">
-    <value>change X by</value>
+    <value>Ändere X um</value>
   </data>
   <data name="Brick_ChangeYBy" xml:space="preserve">
-    <value>change Y by</value>
+    <value>Ändere Y um</value>
   </data>
   <data name="Brick_ClearGraphicEffects" xml:space="preserve">
-    <value>clear graphic effects</value>
+    <value>Schalte Grafikeffekte aus</value>
   </data>
   <data name="Brick_ComeToFront" xml:space="preserve">
-    <value>come to front</value>
+    <value>Komm nach vorne</value>
   </data>
   <data name="Brick_Degrees" xml:space="preserve">
-    <value>degrees</value>
+    <value>Grad</value>
   </data>
   <data name="Brick_Forever" xml:space="preserve">
-    <value>forever</value>
+    <value>Wiederhole fortlaufend</value>
   </data>
   <data name="Brick_GlideToGlide" xml:space="preserve">
-    <value>glide</value>
+    <value>Gleite</value>
   </data>
   <data name="Brick_GlideToTo" xml:space="preserve">
-    <value>to</value>
+    <value>zu</value>
   </data>
   <data name="Brick_GoNStepsBackGo" xml:space="preserve">
-    <value>go back</value>
+    <value>Gehe</value>
   </data>
   <data name="Brick_GoNStepsBackStepsBack" xml:space="preserve">
-    <value>layers</value>
+    <value>Ebenen nach hinten</value>
   </data>
   <data name="Brick_Hide" xml:space="preserve">
-    <value>hide</value>
+    <value>Verstecke dich</value>
   </data>
   <data name="Brick_IfOnEdgeBounce" xml:space="preserve">
-    <value>if on edge, bounce</value>
+    <value>Pralle vom Rand ab</value>
   </data>
   <data name="Brick_RepeatLoopEnd" xml:space="preserve">
-    <value>repeat end</value>
+    <value>Wiederholen beenden</value>
   </data>
   <data name="Brick_MoveNStepsMove" xml:space="preserve">
-    <value>move</value>
+    <value>Gehe</value>
   </data>
   <data name="Brick_MoveNStepsSteps" xml:space="preserve">
-    <value>steps</value>
+    <value>Schritte</value>
   </data>
   <data name="Brick_NextCostume" xml:space="preserve">
-    <value>next costume</value>
+    <value>Nächstes Kostüm</value>
   </data>
   <data name="Brick_Note" xml:space="preserve">
-    <value>note</value>
+    <value>Notiz</value>
   </data>
   <data name="Brick_PlaceAt" xml:space="preserve">
-    <value>place at</value>
+    <value>Setze Position</value>
   </data>
   <data name="Brick_PlaySound" xml:space="preserve">
-    <value>play sound</value>
+    <value>Spiele Klang</value>
   </data>
   <data name="Brick_PointInDirection" xml:space="preserve">
-    <value>point in direction</value>
+    <value>Zeige in Richtung</value>
   </data>
   <data name="Brick_PointTo" xml:space="preserve">
-    <value>point towards</value>
+    <value>Zeige auf</value>
   </data>
   <data name="Brick_Repeat" xml:space="preserve">
-    <value>repeat</value>
+    <value>Wiederhole</value>
   </data>
   <data name="Brick_Seconds" xml:space="preserve">
-    <value>seconds</value>
+    <value>Sekunden</value>
   </data>
   <data name="Brick_SetBrightnessTo" xml:space="preserve">
-    <value>set brightness to</value>
+    <value>Setze Helligkeit auf</value>
   </data>
   <data name="Brick_SetCostume" xml:space="preserve">
-    <value>set costume</value>
+    <value>Setze Kostüm</value>
   </data>
   <data name="Brick_SetGhostEffectTo" xml:space="preserve">
-    <value>set ghost effect to</value>
+    <value>Setze Durchsichtigkeit auf</value>
   </data>
   <data name="Brick_SetSizeTo" xml:space="preserve">
-    <value>set size to</value>
+    <value>Setze Größe auf</value>
   </data>
   <data name="Brick_SetVolumeTo" xml:space="preserve">
-    <value>set volume to</value>
+    <value>Setze Lautstärke auf</value>
   </data>
   <data name="Brick_SetXTo" xml:space="preserve">
-    <value>set X to</value>
+    <value>Setze X auf</value>
   </data>
   <data name="Brick_SetYTo" xml:space="preserve">
-    <value>set Y to</value>
+    <value>Setze Y auf</value>
   </data>
   <data name="Brick_Show" xml:space="preserve">
-    <value>show</value>
+    <value>Zeige dich</value>
   </data>
   <data name="Brick_Speak" xml:space="preserve">
-    <value>speak</value>
+    <value>Sprich</value>
   </data>
   <data name="Brick_StopAllSounds" xml:space="preserve">
-    <value>stop all sounds</value>
+    <value>Stoppe alle Klänge</value>
   </data>
   <data name="Brick_Times" xml:space="preserve">
-    <value>times</value>
+    <value>mal</value>
   </data>
   <data name="Brick_TurnLeft" xml:space="preserve">
-    <value>turn left</value>
+    <value>Drehe links</value>
   </data>
   <data name="Brick_TurnRight" xml:space="preserve">
-    <value>turn right</value>
+    <value>Drehe rechts</value>
   </data>
   <data name="Brick_Wait" xml:space="preserve">
-    <value>wait</value>
+    <value>Warte</value>
   </data>
   <data name="Brick_WhenIReceive" xml:space="preserve">
-    <value>when I receive</value>
+    <value>Wenn ich empfange</value>
   </data>
   <data name="Brick_WhenProjectStarts" xml:space="preserve">
-    <value>when project starts</value>
+    <value>Wenn Projekt gestartet</value>
   </data>
   <data name="Brick_WhenTapped" xml:space="preserve">
-    <value>when tapped</value>
+    <value>Wenn angetippt</value>
   </data>
   <data name="Editor_ActionPlural" xml:space="preserve">
-    <value>actions</value>
+    <value>Aktionen</value>
   </data>
   <data name="Editor_ActionSingular" xml:space="preserve">
-    <value>action</value>
+    <value>Aktion</value>
   </data>
   <data name="Editor_BroadcastMessage" xml:space="preserve">
-    <value>Broadcast message</value>
+    <value>Nachricht</value>
   </data>
   <data name="Editor_ButtonAddCostume" xml:space="preserve">
-    <value>new costume</value>
+    <value>Neues Kostüm</value>
   </data>
   <data name="Editor_ButtonAddObject" xml:space="preserve">
-    <value>new object</value>
+    <value>Neues Objekt</value>
   </data>
   <data name="Editor_ButtonAddScript" xml:space="preserve">
-    <value>new action</value>
+    <value>Neue Aktion</value>
   </data>
   <data name="Editor_ButtonAddSound" xml:space="preserve">
-    <value>new sound</value>
+    <value>Neuer Klang</value>
   </data>
   <data name="Editor_ButtonBack" xml:space="preserve">
-    <value>back</value>
+    <value>Zurück</value>
   </data>
   <data name="Editor_ButtonCancel" xml:space="preserve">
-    <value>cancel</value>
+    <value>Abbrechen</value>
   </data>
-  <data name="Editor_ButtonChange" xml:space="preserve">
-    <value>change</value>
+  <data name="Editor_ButtonEdit" xml:space="preserve">
+    <value>Bearbeiten</value>
   </data>
   <data name="Editor_ButtonCopy" xml:space="preserve">
-    <value>copy</value>
+    <value>Kopieren</value>
   </data>
   <data name="Editor_ButtonDelete" xml:space="preserve">
-    <value>delete</value>
+    <value>Löschen</value>
   </data>
   <data name="Editor_ButtonPlayProject" xml:space="preserve">
-    <value>play project</value>
+    <value>Abspielen</value>
   </data>
   <data name="Editor_ButtonSave" xml:space="preserve">
-    <value>save</value>
+    <value>Speichern</value>
   </data>
   <data name="Editor_ButtonUse" xml:space="preserve">
-    <value>use</value>
+    <value>Verwenden</value>
   </data>
   <data name="Editor_Camera" xml:space="preserve">
-    <value>Camera</value>
+    <value>Kamera</value>
   </data>
   <data name="Editor_ClearSelection" xml:space="preserve">
-    <value>selektierung aufheben</value>
+    <value>Auswahl aufheben</value>
   </data>
   <data name="Editor_CostumeName" xml:space="preserve">
-    <value>Costume name</value>
+    <value>Kostümname</value>
   </data>
   <data name="Editor_CostumePlural" xml:space="preserve">
-    <value>costumes</value>
+    <value>Kostüme</value>
   </data>
   <data name="Editor_CostumeSingular" xml:space="preserve">
-    <value>costume</value>
+    <value>Kostüm</value>
   </data>
   <data name="Editor_Image" xml:space="preserve">
-    <value>Image</value>
+    <value>Bild</value>
   </data>
   <data name="Editor_ImageGallery" xml:space="preserve">
-    <value>Image Gallery</value>
+    <value>Bildergalerie</value>
   </data>
   <data name="Editor_ImageSizeFullSize" xml:space="preserve">
-    <value>full size</value>
+    <value>volle größe</value>
   </data>
   <data name="Editor_ImageSizeLarge" xml:space="preserve">
-    <value>large</value>
+    <value>groß</value>
   </data>
   <data name="Editor_ImageSizeMedium" xml:space="preserve">
-    <value>medium</value>
+    <value>mittel</value>
   </data>
   <data name="Editor_ImageSizeSmall" xml:space="preserve">
-    <value>small</value>
+    <value>klein</value>
   </data>
   <data name="Editor_MediaLibrary" xml:space="preserve">
-    <value>Media Library</value>
+    <value>Medienbibliothek</value>
   </data>
   <data name="Editor_MenuProjectSettings" xml:space="preserve">
-    <value>Project settings</value>
+    <value>Projekt Einstellungen</value>
   </data>
   <data name="Editor_MenuStartSite" xml:space="preserve">
-    <value>Start site</value>
+    <value>Startseite</value>
   </data>
   <data name="Editor_MessageBoxDeleteHeader" xml:space="preserve">
-    <value>Delete {0}</value>
-  </data>
-  <data name="Editor_MessageBoxDeleteText" xml:space="preserve">
-    <value>Delete {0} selected {1}.</value>
+    <value>Lösche {0}</value>
   </data>
   <data name="Editor_MessageBoxNotEnoughSpaceImageHeader" xml:space="preserve">
-    <value>Not enough space</value>
+    <value>Zu wenig Speicherplatz</value>
   </data>
   <data name="Editor_MessageBoxNotEnoughSpaceImageText" xml:space="preserve">
-    <value>Without more disc space the image cannot be saved.</value>
+    <value>Ohne zusätzlichen Speicherplatz kann das Bild nicht gespeichert werden.</value>
   </data>
   <data name="Editor_MessageBoxNotEnoughSpaceSoundHeader" xml:space="preserve">
-    <value>Not enough space</value>
+    <value>Zu wenig Speicherplatz</value>
   </data>
   <data name="Editor_MessageBoxNotEnoughSpaceSoundText" xml:space="preserve">
-    <value>Without more disc space the sound cannot be saved.</value>
+    <value>Ohne zusätzlichen Speicherplatz kann der Klang nicht gespeichert werden.</value>
   </data>
   <data name="Editor_MessageBoxWrongImageFormatHeader" xml:space="preserve">
-    <value>Not supported format</value>
+    <value>Nicht unterstütztes Format</value>
   </data>
   <data name="Editor_MessageBoxWrongImageFormatText" xml:space="preserve">
-    <value>Unfortunately the image has a not supported format.</value>
+    <value>Das gewählte Bild hat leider ein nicht unterstütztes Format.</value>
   </data>
-  <data name="Editor_New" xml:space="preserve">
-    <value>new {0}</value>
-  </data>
-  <data name="Editor_NewAction" xml:space="preserve">
-    <value>new action</value>
-  </data>
-  <data name="Editor_NewCostume" xml:space="preserve">
-    <value>new costume</value>
-  </data>
-  <data name="Editor_NewObject" xml:space="preserve">
-    <value>new object</value>
-  </data>
-  <data name="Editor_NewSound" xml:space="preserve">
-    <value>new sound</value>
+  <data name="Editor_MessageBoxDeleteText" xml:space="preserve">
+    <value>{0} {1} ausgewählt. Wirlich löschen?</value>
   </data>
   <data name="Editor_NoCostumeSelected" xml:space="preserve">
-    <value>No costume selected</value>
+    <value>Kein Kostüm ausgewählt</value>
   </data>
   <data name="Editor_NoMessageSelected" xml:space="preserve">
-    <value>No message selected</value>
+    <value>Keine Nachricht ausgewählt</value>
   </data>
   <data name="Editor_NoSoundSelected" xml:space="preserve">
-    <value>No sound selected</value>
+    <value>Kein Klang ausgewählt</value>
   </data>
   <data name="Editor_NoSpriteSelected" xml:space="preserve">
-    <value>No object selected</value>
+    <value>Kein Objekt ausgewählt</value>
   </data>
   <data name="Editor_NothingItem" xml:space="preserve">
-    <value>Nothing...</value>
+    <value>Nichts...</value>
   </data>
   <data name="Editor_ObjectPlural" xml:space="preserve">
-    <value>objects</value>
+    <value>Objekte</value>
   </data>
   <data name="Editor_ObjectSingular" xml:space="preserve">
-    <value>object</value>
+    <value>Objekt</value>
   </data>
   <data name="Editor_PivotActions" xml:space="preserve">
-    <value>Actions</value>
+    <value>Aktionen</value>
   </data>
   <data name="Editor_PivotCostumes" xml:space="preserve">
-    <value>Costumes</value>
+    <value>Kostüme</value>
   </data>
   <data name="Editor_PivotObjects" xml:space="preserve">
-    <value>Objects</value>
+    <value>Objekte</value>
   </data>
   <data name="Editor_PivotSounds" xml:space="preserve">
-    <value>Sounds</value>
+    <value>Klänge</value>
   </data>
   <data name="Editor_ProjectName" xml:space="preserve">
-    <value>Project name</value>
+    <value>Projektname</value>
   </data>
   <data name="Editor_Recorder" xml:space="preserve">
     <value>Recorder</value>
   </data>
   <data name="Editor_RecorderRecord" xml:space="preserve">
-    <value>rec</value>
+    <value>Rec</value>
   </data>
   <data name="Editor_RecorderRecordTime" xml:space="preserve">
-    <value>Time</value>
+    <value>Zeit</value>
   </data>
   <data name="Editor_RecorderStart" xml:space="preserve">
-    <value>start recording</value>
+    <value>Aufnahme starten</value>
   </data>
   <data name="Editor_RecorderStop" xml:space="preserve">
-    <value>stop</value>
+    <value>Stop</value>
   </data>
   <data name="Editor_Recording" xml:space="preserve">
-    <value>Recording</value>
+    <value>Aufnahme</value>
   </data>
   <data name="Editor_SavingImage" xml:space="preserve">
-    <value>saving image</value>
+    <value>Bild wird gespeichert</value>
   </data>
   <data name="Editor_Selected" xml:space="preserve">
-    <value>selected</value>
+    <value>ausgewählt</value>
   </data>
   <data name="Editor_SelectingObject" xml:space="preserve">
-    <value>loading object</value>
+    <value>lade Objekt</value>
   </data>
   <data name="Editor_SoundName" xml:space="preserve">
-    <value>Sound name</value>
+    <value>Klangname</value>
   </data>
   <data name="Editor_SoundPlural" xml:space="preserve">
-    <value>sounds</value>
+    <value>Klänge</value>
   </data>
   <data name="Editor_SoundSingular" xml:space="preserve">
-    <value>sound</value>
+    <value>Klang</value>
   </data>
   <data name="Editor_SpriteName" xml:space="preserve">
-    <value>Object name</value>
+    <value>Objektname</value>
   </data>
   <data name="Editor_TitleChangeCostumeName" xml:space="preserve">
-    <value>CHANGE COSTUME NAME</value>
+    <value>KOSTÜMNAMEN ÄNDERN</value>
   </data>
   <data name="Editor_TitleChangeSoundName" xml:space="preserve">
-    <value>CHANGE SOUND NAME</value>
+    <value>KLANGNAMEN ÄNDERN</value>
   </data>
   <data name="Editor_TitleChangeSpriteName" xml:space="preserve">
-    <value>CHANGE OBJECT NAME</value>
+    <value>OBJEKTNAMEN ÄNDERN</value>
   </data>
   <data name="Editor_TitleChooseBrick" xml:space="preserve">
-    <value>CHOOSE BRICK</value>
+    <value>BAUSTEIN WÄHLEN</value>
   </data>
   <data name="Editor_TitleChooseCategory" xml:space="preserve">
-    <value>CHOOSE CATEGORY</value>
+    <value>KATEGORIE WÄHLEN</value>
   </data>
   <data name="Editor_TitleChooseCostumeName" xml:space="preserve">
-    <value>CHOOSE COSTUME NAME</value>
+    <value>KOSTÜMNAMEN WÄHLEN</value>
   </data>
   <data name="Editor_TitleChooseSound" xml:space="preserve">
-    <value>CHOOSE SOUND</value>
+    <value>KLANG WÄHLEN</value>
   </data>
   <data name="Editor_TitleChooseSoundName" xml:space="preserve">
-    <value>CHOOSE SOUND NAME</value>
+    <value>KLANGNAMEN WÄHLEN</value>
   </data>
   <data name="Editor_TitleNewAction" xml:space="preserve">
-    <value>NEW ACTION</value>
+    <value>NEUE AKTION</value>
   </data>
   <data name="Editor_TitleNewBroadcastMessage" xml:space="preserve">
-    <value>NEW BROADCAST MESSAGE</value>
+    <value>NEUE NACHRICHT</value>
   </data>
   <data name="Editor_TitleNewCostume" xml:space="preserve">
-    <value>NEW COSTUME</value>
+    <value>NEUES KOSTÜM</value>
   </data>
   <data name="Editor_TitleNewSound" xml:space="preserve">
-    <value>NEW SOUND</value>
+    <value>NEUER KLANG</value>
   </data>
   <data name="Editor_TitleNewSprite" xml:space="preserve">
-    <value>NEW OBJECT</value>
+    <value>NEUES OBJEKT</value>
   </data>
   <data name="Editor_TitleProjectSettings" xml:space="preserve">
-    <value>PROJECT SETTINGS</value>
+    <value>PROJEKT EINSTELLUNGEN</value>
   </data>
   <data name="Editor_TitleRecorder" xml:space="preserve">
-    <value>RECORD SOUND</value>
+    <value>KLANG AUFNEHMEN</value>
   </data>
   <data name="Formula_ACCELERATION_X" xml:space="preserve">
-    <value>accelerationX</value>
+    <value>BeschleunigungX</value>
   </data>
   <data name="Formula_ACCELERATION_Y" xml:space="preserve">
-    <value>accelerationY</value>
+    <value>BeschleunigungY</value>
   </data>
   <data name="Formula_ACCELERATION_Z" xml:space="preserve">
-    <value>accelerationZ</value>
+    <value>BeschleunigungZ</value>
   </data>
   <data name="Formula_BRIGHTNESS" xml:space="preserve">
-    <value>brightness</value>
-  </data>
-  <data name="Formula_ClosedBrecket" xml:space="preserve">
-    <value>)</value>
-  </data>
-  <data name="Formula_COMPASSDIRECTION" xml:space="preserve">
-    <value>compassdirec</value>
-  </data>
-  <data name="Formula_DecimalPointCharacter" xml:space="preserve">
-    <value>.</value>
-  </data>
-  <data name="Formula_DIRECTION" xml:space="preserve">
-    <value>direction</value>
-  </data>
-  <data name="Formula_INCLINATION_X" xml:space="preserve">
-    <value>inclinationX</value>
-  </data>
-  <data name="Formula_INCLINATION_Y" xml:space="preserve">
-    <value>inclinationY</value>
-  </data>
-  <data name="Formula_LAYER" xml:space="preserve">
-    <value>layer</value>
-  </data>
-  <data name="Formula_LogicEqual" xml:space="preserve">
-    <value>=</value>
+    <value>Helligkeit</value>
   </data>
   <data name="Formula_LogicOr" xml:space="preserve">
-    <value>OR</value>
-  </data>
-  <data name="Formula_OBJECT_X" xml:space="preserve">
-    <value>objectX</value>
-  </data>
-  <data name="Formula_OBJECT_Y" xml:space="preserve">
-    <value>objectY</value>
-  </data>
-  <data name="Formula_OpenBrecket" xml:space="preserve">
-    <value>(</value>
-  </data>
-  <data name="Formula_ParameterSeperator" xml:space="preserve">
-    <value>,</value>
+    <value>ODER</value>
   </data>
   <data name="Formula_Random" xml:space="preserve">
-    <value>random</value>
-  </data>
-  <data name="Formula_SIZE" xml:space="preserve">
-    <value>size</value>
-  </data>
-  <data name="Formula_TRANSPARENCY" xml:space="preserve">
-    <value>transparency</value>
+    <value>Zufall</value>
   </data>
   <data name="Formula_Unknown" xml:space="preserve">
-    <value>unknown</value>
+    <value>Unbekannt</value>
+  </data>
+  <data name="Formula_COMPASSDIRECTION" xml:space="preserve">
+    <value>KompassRichtung</value>
+  </data>
+  <data name="Formula_INCLINATION_X" xml:space="preserve">
+    <value>NeigungX</value>
+  </data>
+  <data name="Formula_INCLINATION_Y" xml:space="preserve">
+    <value>NeigungY</value>
+  </data>
+  <data name="Formula_LAYER" xml:space="preserve">
+    <value>Ebene</value>
+  </data>
+  <data name="Formula_OBJECT_X" xml:space="preserve">
+    <value>ObjektX</value>
+  </data>
+  <data name="Formula_OBJECT_Y" xml:space="preserve">
+    <value>ObjektY</value>
+  </data>
+  <data name="Formula_SIZE" xml:space="preserve">
+    <value>Größe</value>
+  </data>
+  <data name="Formula_TRANSPARENCY" xml:space="preserve">
+    <value>Transparenz</value>
   </data>
   <data name="Main_AboutText" xml:space="preserve">
-    <value>Pocket Code for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Pocket Code is an independent free and open source project developed by the Pocket Code team. Pocket Code for Windows is licensed under the MS-RL license.</value>
+    <value>Catrobat für Windows ist eine Entwicklungsumgebung für die grafische Programmiersprache Catrobat, inspiriert vom Scratch Projekt des MIT. Es wird am Institut für Software Technologie an der Technischen Universität Graz in Österreich entwickelt. Dieses Programm steht unter der MS-RL Lizenz.</value>
   </data>
   <data name="Main_ActiveProject" xml:space="preserve">
-    <value>active</value>
+    <value>AKTIV</value>
   </data>
   <data name="Main_ApplicationNameAndVersion" xml:space="preserve">
-    <value>Pocket Code for Windows v{0}</value>
+    <value>Catrobat für Windows v{0}</value>
   </data>
   <data name="Main_ButtonCancel" xml:space="preserve">
-    <value>cancel</value>
+    <value>Abbrechen</value>
   </data>
   <data name="Main_ButtonCopy" xml:space="preserve">
-    <value>copy</value>
+    <value>Kopieren</value>
   </data>
   <data name="Main_ButtonCreate" xml:space="preserve">
-    <value>new</value>
+    <value>Neu</value>
   </data>
   <data name="Main_ButtonDelete" xml:space="preserve">
-    <value>delete</value>
+    <value>Löschen</value>
   </data>
   <data name="Main_ButtonEdit" xml:space="preserve">
-    <value>edit</value>
+    <value>Bearbeiten</value>
   </data>
   <data name="Main_ButtonLoginRegister" xml:space="preserve">
-    <value>Login or Register</value>
+    <value>Einloggen / Registrieren</value>
   </data>
   <data name="Main_ButtonPasswordForgotten" xml:space="preserve">
-    <value>Password forgotten</value>
+    <value>Password vergessen</value>
   </data>
   <data name="Main_ButtonSave" xml:space="preserve">
-    <value>save</value>
+    <value>Speichern</value>
   </data>
   <data name="Main_ButtonUpload" xml:space="preserve">
-    <value>upload</value>
+    <value>Hochladen</value>
   </data>
   <data name="Main_DEBUGShowMemory" xml:space="preserve">
-    <value>Show memory usage</value>
+    <value>Speicherverbrauch anzeigen</value>
   </data>
   <data name="Main_DownloadQueueMessage" xml:space="preserve">
-    <value>The project you chose is being downloaded.</value>
+    <value>Das gewählte Projekt wird heruntergeladen. Das kann eine Weile dauern, aber wir sagen dir Bescheid, wenn es da ist!</value>
   </data>
   <data name="Main_FilterTextBoxHint" xml:space="preserve">
-    <value>Find...</value>
+    <value>Suchen...</value>
   </data>
   <data name="Main_HeaderAbout" xml:space="preserve">
-    <value>About</value>
+    <value>Über</value>
   </data>
   <data name="Main_HeaderCurrentProject" xml:space="preserve">
-    <value>Current Project</value>
-  </data>
-  <data name="Main_HeaderDesign" xml:space="preserve">
-    <value>Design</value>
+    <value>Aktuelles Projekt</value>
   </data>
   <data name="Main_HeaderLanguage" xml:space="preserve">
-    <value>Language</value>
+    <value>Sprache</value>
   </data>
   <data name="Main_HeaderLocalProjects" xml:space="preserve">
-    <value>My Projects</value>
-  </data>
-  <data name="Main_HeaderOnlineProjects" xml:space="preserve">
-    <value>Online</value>
+    <value>Meine Projekte</value>
   </data>
   <data name="Main_HeaderSettings" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="Main_ListDesign" xml:space="preserve">
-    <value>Design</value>
+    <value>Einstellungen</value>
   </data>
   <data name="Main_ListLanguage" xml:space="preserve">
-    <value>Language</value>
+    <value>Sprache</value>
   </data>
   <data name="Main_MainCopyProjectDialogMessage" xml:space="preserve">
-    <value>Are sure you want to copy "{0}"?</value>
+    <value>Sind sie sicher, dass sie das Projekt "{0}" kopieren wollen?</value>
   </data>
   <data name="Main_MainCopyProjectDialogTitle" xml:space="preserve">
-    <value>Copy project?</value>
+    <value>Projekt kopieren?</value>
   </data>
   <data name="Main_MainDeleteProjectDialogMessage" xml:space="preserve">
-    <value>Are sure you want to delete "{0}"?</value>
+    <value>Sind sie sicher, dass sie das Projekt "{0}" löschen wollen?</value>
   </data>
   <data name="Main_MainDeleteProjectDialogTitle" xml:space="preserve">
-    <value>Delete project?</value>
-  </data>
-  <data name="Main_MessageBoxInformation" xml:space="preserve">
-    <value>Information</value>
+    <value>Projekt löschen?</value>
   </data>
   <data name="Main_NoDownloadsPending" xml:space="preserve">
-    <value>All downloads finished.</value>
+    <value>Alle Downloads wurden abgeschlossen.</value>
   </data>
   <data name="Main_NoUploadsPending" xml:space="preserve">
-    <value>All uploads finished.</value>
+    <value>Alle Uploads wurden abgeschlossen.</value>
   </data>
   <data name="Main_OnlineProjectDescription" xml:space="preserve">
-    <value>description:</value>
+    <value>Beschreibung:</value>
   </data>
   <data name="Main_OnlineProjectDownloadButton" xml:space="preserve">
-    <value>Download</value>
+    <value>Herunterladen</value>
   </data>
   <data name="Main_OnlineProjectDownloads" xml:space="preserve">
-    <value>{0} downloads</value>
+    <value>{0} Mal heruntergeladen</value>
   </data>
   <data name="Main_OnlineProjectLicenseButton" xml:space="preserve">
-    <value>License</value>
+    <value>Lizenz</value>
   </data>
   <data name="Main_OnlineProjectListBoxLoadMore" xml:space="preserve">
-    <value>Load more...</value>
+    <value>Mehr laden...</value>
   </data>
   <data name="Main_OnlineProjectProject" xml:space="preserve">
-    <value>project:</value>
+    <value>Projekt:</value>
   </data>
   <data name="Main_OnlineProjectReportButton" xml:space="preserve">
-    <value>Report as unappropriate</value>
+    <value>Als unangemessen melden</value>
   </data>
   <data name="Main_OnlineProjectStatistics" xml:space="preserve">
-    <value>statistics:</value>
+    <value>Statistiken:</value>
   </data>
   <data name="Main_OnlineProjectUploaded" xml:space="preserve">
-    <value>uploaded:</value>
+    <value>Hochgeladen</value>
   </data>
   <data name="Main_OnlineProjectUploadedBy" xml:space="preserve">
-    <value>{0} by</value>
+    <value>{0} von:</value>
   </data>
   <data name="Main_OnlineProjectVersion" xml:space="preserve">
-    <value>(version: {0})</value>
+    <value>(Version: {0})</value>
   </data>
   <data name="Main_OnlineProjectViews" xml:space="preserve">
-    <value>{0} views</value>
+    <value>{0} Mal angesehen</value>
   </data>
   <data name="Main_ProjectDoesNotExist" xml:space="preserve">
-    <value>project does not exist</value>
+    <value>Projekt existiert nicht.</value>
   </data>
   <data name="Main_ProjectName" xml:space="preserve">
-    <value>Project name</value>
+    <value>Projektname</value>
   </data>
   <data name="Main_ProjectNotValid" xml:space="preserve">
-    <value>Project not valid.</value>
+    <value>Projekt ist ungültig.</value>
   </data>
   <data name="App_ResourceLanguage" xml:space="preserve">
-    <value>en</value>
+    <value>de</value>
   </data>
   <data name="Main_SettingsBricks" xml:space="preserve">
-    <value>enable/disable bricks</value>
+    <value>Bausteine Ein/Ausschalten</value>
   </data>
   <data name="Main_SettingsEnableNXTBricks" xml:space="preserve">
-    <value>Enable Mindstorm bricks</value>
+    <value>Mindstorm Bausteine einschalten</value>
   </data>
   <data name="Main_SettingsTheme" xml:space="preserve">
-    <value>Theme</value>
+    <value>Design</value>
   </data>
   <data name="Main_TitleNewProject" xml:space="preserve">
-    <value>NEW PROJECT</value>
+    <value>NEUES PROJEKT</value>
   </data>
   <data name="Main_TitleSettings" xml:space="preserve">
-    <value>SETTINGS</value>
+    <value>EINSTELLUNGEN</value>
   </data>
   <data name="Main_TitleUploadProject" xml:space="preserve">
-    <value>UPLOAD PROJECT</value>
+    <value>PROJEKT HOCHLADEN</value>
   </data>
   <data name="Main_TitleUploadProjectLogin" xml:space="preserve">
-    <value>LOGIN OR REGISTER</value>
-  </data>
-  <data name="Main_UploadProjectEmail" xml:space="preserve">
-    <value>Email:</value>
+    <value>EINLOGGEN ODER REGISTRIEREN</value>
   </data>
   <data name="Main_UploadProjectLoginError" xml:space="preserve">
-    <value>Login Error. {0}</value>
+    <value>Login Fehler. {0}</value>
   </data>
   <data name="Main_UploadProjectLoginErrorCaption" xml:space="preserve">
-    <value>Login failed</value>
+    <value>Login fehlgeschlagen</value>
   </data>
   <data name="Main_UploadProjectMissingLoginData" xml:space="preserve">
-    <value>Login- or registration- data is incomplete.</value>
+    <value>Login- oder Registrierungsdaten sind nicht vollständig.</value>
   </data>
   <data name="Main_UploadProjectPassword" xml:space="preserve">
-    <value>Password:</value>
+    <value>Passwort:</value>
   </data>
   <data name="Main_UploadProjectProjectDescription" xml:space="preserve">
-    <value>Description:</value>
+    <value>Beschreibung:</value>
   </data>
   <data name="Main_UploadProjectProjectName" xml:space="preserve">
-    <value>Project:</value>
+    <value>Projekt:</value>
   </data>
   <data name="Main_UploadProjectRegistrationSucessful" xml:space="preserve">
-    <value>Registration successful!</value>
+    <value>Registrierung erfolgreich!</value>
   </data>
   <data name="Main_UploadProjectUndefinedError" xml:space="preserve">
-    <value>Undefined error. Error code {0}</value>
+    <value>Undefinierter Fehler. Fehlercode {0}</value>
   </data>
   <data name="Main_UploadProjectUsername" xml:space="preserve">
-    <value>Username:</value>
+    <value>Benutzername:</value>
   </data>
   <data name="Main_UploadProjectWelcome" xml:space="preserve">
-    <value>Welcome {0}!</value>
+    <value>Willkommen {0}!</value>
   </data>
   <data name="Main_UploadQueueMessage" xml:space="preserve">
-    <value>Your project is being uploaded. This might take a little while, but we'll tell you when it's finished!</value>
+    <value>Dein Projekt wird hochgeladen. Das kann eine Weile dauern, aber wir sagen dir Bescheid, wenn der Vorgang abgeschlossen ist!</value>
   </data>
   <data name="Main_VersionIsNotSupported" xml:space="preserve">
-    <value>Project version is not supported.</value>
-  </data>
-  <data name="App_FlowDirection" xml:space="preserve">
-    <value>LeftToRight</value>
-  </data>
-  <data name="Brick_CategoryVariables" xml:space="preserve">
-    <value>Variables</value>
-  </data>
-  <data name="Brick_SetVariable" xml:space="preserve">
-    <value>set Variable</value>
-  </data>
-  <data name="Brick_SetVariableTo" xml:space="preserve">
-    <value>to</value>
-  </data>
-  <data name="Brick_ChangeVariable" xml:space="preserve">
-    <value>change variable</value>
-  </data>
-  <data name="Brick_ChangeVariableBy" xml:space="preserve">
-    <value>by</value>
-  </data>
-  <data name="Brick_IfLogicBegin" xml:space="preserve">
-    <value>If</value>
-  </data>
-  <data name="Brick_IfLogicBeginTrue" xml:space="preserve">
-    <value>true, then</value>
-  </data>
-  <data name="Brick_IfLogicElse" xml:space="preserve">
-    <value>else</value>
+    <value>Die Version des Projekts wird von dieser Programmversion nicht unterstützt.</value>
   </data>
   <data name="Brick_IfLogicEnd" xml:space="preserve">
-    <value>else end</value>
+    <value>Sonst Ende</value>
+  </data>
+  <data name="Brick_IfLogicElse" xml:space="preserve">
+    <value>Sonst</value>
+  </data>
+  <data name="Brick_IfLogicBeginTrue" xml:space="preserve">
+    <value>wahr, dann</value>
+  </data>
+  <data name="Brick_IfLogicBegin" xml:space="preserve">
+    <value>Wenn</value>
+  </data>
+  <data name="Brick_ChangeVariableBy" xml:space="preserve">
+    <value>um</value>
+  </data>
+  <data name="Brick_ChangeVariable" xml:space="preserve">
+    <value>Ändere Variable</value>
+  </data>
+  <data name="Brick_SetVariableTo" xml:space="preserve">
+    <value>auf</value>
+  </data>
+  <data name="Brick_SetVariable" xml:space="preserve">
+    <value>Setze Variable</value>
+  </data>
+  <data name="Brick_CategoryVariables" xml:space="preserve">
+    <value>Variablen</value>
   </data>
   <data name="Editor_Description" xml:space="preserve">
-    <value>description</value>
-  </data>
-  <data name="Main_ChangeProjectNameAndDescription" xml:space="preserve">
-    <value>change name and description</value>
-  </data>
-  <data name="Main_CopyProject" xml:space="preserve">
-    <value>copy</value>
-  </data>
-  <data name="Main_DeleteProject" xml:space="preserve">
-    <value>delete</value>
+    <value>Beschreibung</value>
   </data>
   <data name="Main_PinProjectToStart" xml:space="preserve">
-    <value>pin to start</value>
+    <value>An Start anheften</value>
   </data>
   <data name="Main_UploadProjectLoadingMessage" xml:space="preserve">
-    <value>Please wait while your login state is beeing checked!</value>
-  </data>
-  <data name="Editor_GlobalVariables" xml:space="preserve">
-    <value>Global</value>
-  </data>
-  <data name="Editor_LocalVariables" xml:space="preserve">
-    <value>Object</value>
+    <value>Loginstatus wird geprüft!</value>
   </data>
   <data name="Editor_SelectVariablesViewHeader" xml:space="preserve">
-    <value>SELECT VARIABLE</value>
+    <value>VARIABLE AUSWÄHLEN</value>
   </data>
   <data name="Editor_NoVariableSelected" xml:space="preserve">
-    <value>NEW</value>
-  </data>
-  <data name="Editor_ButtonAddGlobalVariable" xml:space="preserve">
-    <value>add global variable</value>
+    <value>NEU</value>
   </data>
   <data name="Editor_ButtonAddLocalVariable" xml:space="preserve">
-    <value>add local variable</value>
+    <value>Objektvariable hinzufügen</value>
   </data>
-  <data name="Editor_StandardGlobalVariableName" xml:space="preserve">
-    <value>GlobalVariable</value>
+  <data name="Editor_ButtonAddGlobalVariable" xml:space="preserve">
+    <value>Programmvariable hinzufügen</value>
   </data>
   <data name="Editor_StandardLocalVariableName" xml:space="preserve">
-    <value>ObjectVariable</value>
+    <value>Objektvariable</value>
   </data>
   <data name="Editor_TitleChangeVariableName" xml:space="preserve">
-    <value>CHANGE VARIABLE NAME</value>
+    <value>VARIABLENNAME ÄNDERN</value>
   </data>
-  <data name="Editor_TitleChooseGlobalVariableName" xml:space="preserve">
-    <value>CHOOSE GLOBAL VARIABLE NAME</value>
-  </data>
-  <data name="Editor_TitleChooseLocalVariableName" xml:space="preserve">
-    <value>CHOOSE OBJECT VARIABLE NAME</value>
+  <data name="Editor_StandardGlobalVariableName" xml:space="preserve">
+    <value>Programmvariable</value>
   </data>
   <data name="Editor_VariableName" xml:space="preserve">
-    <value>Variable name</value>
+    <value>Variablenname</value>
   </data>
-  <data name="Main_SelectedProjectNotValidHeader" xml:space="preserve">
-    <value>Sorry! The selected project could not be opened.</value>
+  <data name="Editor_TitleChooseLocalVariableName" xml:space="preserve">
+    <value>OBJEKTVARIABLENNAME WÄHLEN</value>
+  </data>
+  <data name="Editor_TitleChooseGlobalVariableName" xml:space="preserve">
+    <value>PROGRAMMVARIABLENNAME WÄHLEN</value>
   </data>
   <data name="Main_SelectedProjectNotValidMessage" xml:space="preserve">
-    <value>Project not valid</value>
-  </data>
-  <data name="Brick_ForeverLoopEnd" xml:space="preserve">
-    <value>forever end</value>
-  </data>
-  <data name="Formula_Divide" xml:space="preserve">
-    <value>/</value>
-    <comment>Alternate: ÷</comment>
+    <value>Projekt ungültig</value>
   </data>
   <data name="Formula_LogicAnd" xml:space="preserve">
-    <value>AND</value>
-  </data>
-  <data name="Formula_LogicFalse" xml:space="preserve">
-    <value>FALSE</value>
-  </data>
-  <data name="Formula_LogicGreater" xml:space="preserve">
-    <value>&gt;</value>
-  </data>
-  <data name="Formula_LogicGreaterEqual" xml:space="preserve">
-    <value>≥</value>
-  </data>
-  <data name="Formula_LogicNot" xml:space="preserve">
-    <value>NOT</value>
-    <comment>Alternate: ¬</comment>
-  </data>
-  <data name="Formula_LogicNotEqual" xml:space="preserve">
-    <value>≠</value>
-  </data>
-  <data name="Formula_LogicSmaller" xml:space="preserve">
-    <value>&lt;</value>
-  </data>
-  <data name="Formula_LogicSmallerEqual" xml:space="preserve">
-    <value>≤</value>
+    <value>UND</value>
   </data>
   <data name="Formula_LogicTrue" xml:space="preserve">
-    <value>TRUE</value>
+    <value>WAHR</value>
   </data>
-  <data name="Formula_Minus" xml:space="preserve">
-    <value>-</value>
+  <data name="Formula_LogicNot" xml:space="preserve">
+    <value>NICHT</value>
+    <comment>Alternate: ¬</comment>
+  </data>
+  <data name="Formula_LogicFalse" xml:space="preserve">
+    <value>FALSCH</value>
+  </data>
+  <data name="Formula_FunctionTan" xml:space="preserve">
+    <value>TAN</value>
+  </data>
+  <data name="Editor_Rename" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
+  <data name="Editor_AppbarAdd" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="Main_UseCurrentProjectAsTemplate" xml:space="preserve">
+    <value>Ausgewähltes Projekt ({0}) als Vorlage verwenden?</value>
+  </data>
+  <data name="Formula_FunctionSqrt" xml:space="preserve">
+    <value>SQRT</value>
+  </data>
+  <data name="Formula_FunctionSin" xml:space="preserve">
+    <value>SIN</value>
+  </data>
+  <data name="Formula_FunctionRound" xml:space="preserve">
+    <value>Runden</value>
+  </data>
+  <data name="Formula_FunctionRandom" xml:space="preserve">
+    <value>Zufall</value>
+  </data>
+  <data name="Formula_FunctionPi" xml:space="preserve">
+    <value>Pi</value>
+  </data>
+  <data name="Formula_FunctionMod" xml:space="preserve">
+    <value>MOD</value>
+  </data>
+  <data name="Formula_FunctionMin" xml:space="preserve">
+    <value>MIN</value>
+  </data>
+  <data name="Formula_FunctionMax" xml:space="preserve">
+    <value>MAX</value>
+  </data>
+  <data name="Formula_FunctionLog" xml:space="preserve">
+    <value>LOG</value>
+  </data>
+  <data name="Formula_FunctionLn" xml:space="preserve">
+    <value>LN</value>
+  </data>
+  <data name="Formula_FunctionCos" xml:space="preserve">
+    <value>COS</value>
+  </data>
+  <data name="Formula_FunctionExp" xml:space="preserve">
+    <value>EXP</value>
+  </data>
+  <data name="Formula_FunctionAbs" xml:space="preserve">
+    <value>ABS</value>
+  </data>
+  <data name="Formula_FunctionArcTan" xml:space="preserve">
+    <value>ARCTAN</value>
+  </data>
+  <data name="Formula_FunctionArcSin" xml:space="preserve">
+    <value>ARCSIN</value>
+  </data>
+  <data name="Formula_FunctionArcCos" xml:space="preserve">
+    <value>ARCCOS</value>
   </data>
   <data name="Formula_Mult" xml:space="preserve">
     <value>*</value>
     <comment>Alternate: •</comment>
   </data>
-  <data name="Formula_Plus" xml:space="preserve">
-    <value>+</value>
+  <data name="Formula_Minus" xml:space="preserve">
+    <value>-</value>
   </data>
-  <data name="Formula_FunctionAbs" xml:space="preserve">
-    <value>abs</value>
+  <data name="Main_SelectedProjectNotValidHeader" xml:space="preserve">
+    <value>Leider konnte das ausgewählte Projekt nicht geöffnet werden.</value>
   </data>
-  <data name="Formula_FunctionArcCos" xml:space="preserve">
-    <value>arccos</value>
+  <data name="Editor_LocalVariables" xml:space="preserve">
+    <value>Objekt</value>
   </data>
-  <data name="Formula_FunctionArcSin" xml:space="preserve">
-    <value>arcsin</value>
+  <data name="Editor_GlobalVariables" xml:space="preserve">
+    <value>Programm</value>
   </data>
-  <data name="Formula_FunctionArcTan" xml:space="preserve">
-    <value>arctan</value>
+  <data name="Main_DeleteProject" xml:space="preserve">
+    <value>Löschen</value>
   </data>
-  <data name="Formula_FunctionCos" xml:space="preserve">
-    <value>cos</value>
+  <data name="Main_CopyProject" xml:space="preserve">
+    <value>Kopieren</value>
   </data>
-  <data name="Formula_FunctionExp" xml:space="preserve">
-    <value>exp</value>
+  <data name="Main_ChangeProjectNameAndDescription" xml:space="preserve">
+    <value>Name und Beschreibung ändern</value>
   </data>
-  <data name="Formula_FunctionLn" xml:space="preserve">
-    <value>ln</value>
+  <data name="Editor_PreparingProject" xml:space="preserve">
+    <value>Projekt wird geladen</value>
   </data>
-  <data name="Formula_FunctionLog" xml:space="preserve">
-    <value>log</value>
-  </data>
-  <data name="Formula_FunctionMax" xml:space="preserve">
-    <value>max</value>
-  </data>
-  <data name="Formula_FunctionMin" xml:space="preserve">
-    <value>min</value>
-  </data>
-  <data name="Formula_FunctionMod" xml:space="preserve">
-    <value>mod</value>
-  </data>
-  <data name="Formula_FunctionPi" xml:space="preserve">
-    <value>pi</value>
-  </data>
-  <data name="Formula_FunctionRandom" xml:space="preserve">
-    <value>random</value>
-  </data>
-  <data name="Formula_FunctionRound" xml:space="preserve">
-    <value>round</value>
-  </data>
-  <data name="Formula_FunctionSin" xml:space="preserve">
-    <value>sin</value>
-  </data>
-  <data name="Formula_FunctionSqrt" xml:space="preserve">
-    <value>sqrt</value>
-  </data>
-  <data name="Formula_FunctionTan" xml:space="preserve">
-    <value>tan</value>
-  </data>
-  <data name="Editor_Camera_Rename" xml:space="preserve">
-    <value>rename</value>
-  </data>
-  <data name="Editor_AppbarAdd" xml:space="preserve">
-    <value>add</value>
-  </data>
-  <data name="Main_UseCurrentProjectAsTemplate" xml:space="preserve">
-    <value>Use current project ({0}) as template?</value>
+  <data name="Main_ProjectGettingActivated" xml:space="preserve">
+    <value>Projekt wird aktiviert.</value>
   </data>
 </root>

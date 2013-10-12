@@ -357,9 +357,6 @@
   <data name="Editor_MessageBoxDeleteHeader" xml:space="preserve">
     <value>[1C656][!!_Đęłêτé {0}_!!]</value>
   </data>
-  <data name="Editor_MessageBoxDeleteText" xml:space="preserve">
-    <value>[2B472][!!_Ďêłęţê {0} śêłéċтêð {1}._!!]</value>
-  </data>
   <data name="Editor_MessageBoxNotEnoughSpaceImageHeader" xml:space="preserve">
     <value>[CBB33][!!_Ņòţ êηôùğĥ śрãċè_!!]</value>
   </data>
@@ -377,21 +374,6 @@
   </data>
   <data name="Editor_MessageBoxWrongImageFormatText" xml:space="preserve">
     <value>[29E3E][!!_Üηƒóřτùηàţéļў τћę įмáģê ħáŝ â иôт šùрþòŕťêđ ƒôřмãţ._!!]</value>
-  </data>
-  <data name="Editor_New" xml:space="preserve">
-    <value>[70A6B][!!_ήèẃ {0}_!!]</value>
-  </data>
-  <data name="Editor_NewAction" xml:space="preserve">
-    <value>[16CA8][!!_ηęẁ áĉτįõη_!!]</value>
-  </data>
-  <data name="Editor_NewCostume" xml:space="preserve">
-    <value>[BADEF][!!_иęẅ čòŝťùmê_!!]</value>
-  </data>
-  <data name="Editor_NewObject" xml:space="preserve">
-    <value>[907F2][!!_ηèŵ õьјêćτ_!!]</value>
-  </data>
-  <data name="Editor_NewSound" xml:space="preserve">
-    <value>[DB3C2][!!_йèẁ ŝòùйď_!!]</value>
   </data>
   <data name="Editor_NoCostumeSelected" xml:space="preserve">
     <value>[25AC5][!!_Ńò ćòŝťµмę śéļèċťéď_!!]</value>
@@ -524,9 +506,6 @@
   </data>
   <data name="Formula_ClosedBrecket" xml:space="preserve">
     <value>[E1AEF][!!_)_!!]</value>
-  </data>
-  <data name="Formula_COMPASSDIRECTION" xml:space="preserve">
-    <value>[7AF5A][!!_čõмþáššđîŗéĉ_!!]</value>
   </data>
   <data name="Formula_DecimalPointCharacter" xml:space="preserve">
     <value>[ECA1E][!!_._!!]</value>
@@ -672,12 +651,6 @@
   <data name="Main_OnlineProjectStatistics" xml:space="preserve">
     <value>[87918][!!_śťàţíśτįĉŝ:_!!]</value>
   </data>
-  <data name="Main_OnlineProjectUploaded" xml:space="preserve">
-    <value>[9063B][!!_úρłõáđéđ:_!!]</value>
-  </data>
-  <data name="Main_OnlineProjectUploadedBy" xml:space="preserve">
-    <value>[FED35][!!_{0} ъУ_!!]</value>
-  </data>
   <data name="Main_OnlineProjectVersion" xml:space="preserve">
     <value>[1534D][!!_(νêŗšįõη: {0})_!!]</value>
   </data>
@@ -722,9 +695,6 @@
   </data>
   <data name="Main_UploadProjectLoginErrorCaption" xml:space="preserve">
     <value>[64576][!!_Ľôġįη ƒáíľèď_!!]</value>
-  </data>
-  <data name="Main_UploadProjectMissingLoginData" xml:space="preserve">
-    <value>[3F493][!!_Ĺóģîη- òŕ ŕêġìšţřãţįõй- ďàτã įŝ îиčõмрłęţę._!!]</value>
   </data>
   <data name="Main_UploadProjectPassword" xml:space="preserve">
     <value>[D001B][!!_Рâśŝŵôŗď:_!!]</value>

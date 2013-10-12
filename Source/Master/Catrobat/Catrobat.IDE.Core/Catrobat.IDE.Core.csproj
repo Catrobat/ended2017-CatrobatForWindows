@@ -148,6 +148,22 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Localization\AppResources.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Localization\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Localization\AppResources.qps-ploc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.qps-ploc.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Localization\LocalizedStrings.cs" />
     <Compile Include="Resources\SampleProjectLoader.cs" />
     <Compile Include="Services\Common\CatrobatWebCommunicationService.cs" />
     <Compile Include="Services\Common\CatrobatWebFormUploadService.cs" />
@@ -171,6 +187,9 @@
     <Compile Include="Services\Storage\IStorage.cs" />
     <Compile Include="Services\Storage\IStorageFactory.cs" />
     <Compile Include="Services\Storage\StorageSystem.cs" />
+    <Compile Include="UI\ImageSizeEntry.cs" />
+    <Compile Include="UI\ImageSizeEntryCollection.cs" />
+    <Compile Include="UI\NullItemCollection.cs" />
     <Compile Include="Utilities\Helpers\CostumeHelper.cs" />
     <Compile Include="Utilities\Helpers\FileNameGenerationHelper.cs" />
     <Compile Include="Utilities\Helpers\LanguageHelper.cs" />
@@ -223,7 +242,20 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApplicationResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Localization\AppResources.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Localization\AppResources.qps-ploc.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.qps-ploc.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Localization\AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />

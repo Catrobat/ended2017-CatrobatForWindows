@@ -1,18 +1,18 @@
-﻿using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Costumes;
-using Catrobat.IDE.Core.CatrobatObjects.Sounds;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Catrobat.IDE.Phone.Annotations;
-using Catrobat.IDE.Phone.Content.Localization;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using Catrobat.IDE.Core.Annotations;
+using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects.Costumes;
+using Catrobat.IDE.Core.CatrobatObjects.Sounds;
+using Catrobat.IDE.Core.Resources.Localization;
 
-namespace Catrobat.IDE.Phone.Controls.ListPicker
+namespace Catrobat.IDE.Core.UI
 {
-  public class NullItemCollection : IList
+  public sealed class NullItemCollection : IList
   {
     public object NullObject { get; set; }
 
@@ -148,8 +148,7 @@ namespace Catrobat.IDE.Phone.Controls.ListPicker
     #region PropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
     [NotifyPropertyChangedInvocator]
-
-    protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+    private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChangedEventHandler handler = PropertyChanged;
         if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));

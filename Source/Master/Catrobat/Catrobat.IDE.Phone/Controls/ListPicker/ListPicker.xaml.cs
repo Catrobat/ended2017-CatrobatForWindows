@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
+using Catrobat.IDE.Core.UI;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDE.Phone.Controls.ListPicker

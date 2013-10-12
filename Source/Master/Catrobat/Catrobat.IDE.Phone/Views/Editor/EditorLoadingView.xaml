@@ -6,7 +6,6 @@
   xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:statusIcons="clr-namespace:Catrobat.IDE.Phone.Controls.StatusIcons"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
@@ -28,7 +27,7 @@
         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
           <Image Height="300" Margin="0 0 0 20" Source="{Binding CurrentProject.ProjectScreenshot.ImageSource}"></Image>
           <ProgressBar Margin="80 0 80 0" IsIndeterminate="True"/>
-          <TextBlock Text="Preparing your project" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          <TextBlock Text="{Binding Resources.Editor_PreparingProject, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </StackPanel>
 
       </Grid>

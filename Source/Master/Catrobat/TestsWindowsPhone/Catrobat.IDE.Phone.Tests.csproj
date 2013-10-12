@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Catrobat.TestsWindowsPhone</RootNamespace>
-    <AssemblyName>Catrobat.TestsWindowsPhone</AssemblyName>
+    <RootNamespace>Catrobat.IDE.Phone.Tests</RootNamespace>
+    <AssemblyName>Catrobat.IDE.Phone.Tests</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
@@ -22,7 +22,7 @@
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
     <XapFilename>TestsWindowsPhone_$(Configuration)_$(Platform).xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>TestsWindowsPhone.App</SilverlightAppEntry>
+    <SilverlightAppEntry>Catrobat.IDE.Phone.Tests.App</SilverlightAppEntry>
     <ValidateXaml>false</ValidateXaml>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
@@ -79,7 +79,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Bootstrap\PictureChooserPluginBootstrap.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -92,7 +91,6 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="SampleData\SampleLoader.cs" />
-    <Compile Include="Tests\Data\ScriptBrickCollectionTests.cs" />
     <Compile Include="Tests\IDE\Converter\ActiveThemeBrushConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\BoolPlayButtonStateConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\BoolVisibilityConverterTests.cs" />
@@ -123,7 +121,6 @@
     <Content Include="SampleData\TestImages\Catrobat_725x1024.jpg" />
     <Content Include="SampleData\TestImages\Catrobat_300x120.png" />
     <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
@@ -175,23 +172,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.CrossCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e16445fd9b451819, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\sl4-wp71\Cirrious.CrossCore.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.CrossCore.WindowsPhone">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\sl4-wp71\Cirrious.CrossCore.WindowsPhone.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Localization">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\sl4-wp71\Cirrious.MvvmCross.Localization.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Plugins.PictureChooser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.PictureChooser.3.0.13\lib\sl4-wp71\Cirrious.MvvmCross.Plugins.PictureChooser.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone">
-      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.PictureChooser.3.0.13\lib\sl4-wp71\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone.dll</HintPath>
-    </Reference>
+    <Folder Include="Bootstrap\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
