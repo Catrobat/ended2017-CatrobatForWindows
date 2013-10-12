@@ -175,6 +175,7 @@
     <Compile Include="Services\IImageResizeService.cs" />
     <Compile Include="Services\IImageSourceConversionService.cs" />
     <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Services\IPictureService.cs" />
     <Compile Include="Services\IPlayerLauncherService.cs" />
     <Compile Include="Services\IProjectImporterService.cs" />
     <Compile Include="Services\IServerCommunicationService.cs" />
@@ -203,7 +204,6 @@
     <Compile Include="Utilities\JSON\JSONClassDeserializer.cs" />
     <Compile Include="Utilities\JSON\JSONStatusResponse.cs" />
     <Compile Include="Utilities\MD5.cs" />
-    <Compile Include="Utilities\MvvmCrossSetup.cs" />
     <Compile Include="Utilities\UtilToken.cs" />
     <Compile Include="Utilities\XmlStringWriter.cs" />
     <Compile Include="VersionConverter\CatrobatVersion.cs" />
@@ -223,9 +223,6 @@
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Localization">
       <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Localization.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Plugins.PictureChooser">
-      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.PictureChooser.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Plugins.PictureChooser.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\portable-net45+win8+wp8\Microsoft.Threading.Tasks.dll</HintPath>

@@ -46,7 +46,8 @@ namespace Catrobat.IDE.Phone.Tests.Misc
             new ImageSourceConversionServicePhone(),
             new ProjectImporterService(),
             new SoundPlayerServicePhone(),
-            new SoundRecorderServicePhone()
+            new SoundRecorderServicePhone(),
+            new PictureServicePhone()
             );
     }
   }

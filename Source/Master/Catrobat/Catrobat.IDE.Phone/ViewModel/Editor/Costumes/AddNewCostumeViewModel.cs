@@ -149,25 +149,36 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
         {
             lock (this)
             {
-                //ServiceLocator.MvxPictureChooserTask.ChoosePictureFromLibrary(int.MaxValue, 95, PictureAvailable, () => {/* No action here */});
-
-                var photoChooserTask = new PhotoChooserTask();
-                photoChooserTask.Completed -= Task_Completed;
-                photoChooserTask.Completed += Task_Completed;
-                photoChooserTask.Show();
+                ServiceLocator.PictureService.ChoosePictureFromLibrary(PictureSuccess, PictureCanceled, PictureError);
             }
         }
+
+        private void PictureSuccess(PortableImage image)
+        {
+            Image = image;
+            CostumeName = AppResources.Editor_Image;
+            Dimention = new ImageDimention { Height = image.Height, Width = image.Width };
+
+            Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
+        }
+
+        private void PictureCanceled()
+        {
+            // No action here
+        }
+
+        private void PictureError()
+        {
+            ShowLoadingImageFailure();
+        }
+
+
 
         private void OpenCameraAction()
         {
             lock (this)
             {
-                //ServiceLocator.MvxPictureChooserTask.TakePicture(int.MaxValue, 95, PictureAvailable, () => {/* No action here */});
-
-                var cameraCaptureTask = new CameraCaptureTask();
-                cameraCaptureTask.Completed -= Task_Completed;
-                cameraCaptureTask.Completed += Task_Completed;
-                cameraCaptureTask.Show();
+                ServiceLocator.PictureService.TakePicture(PictureSuccess, PictureCanceled, PictureError);
             }
         }
 
@@ -222,7 +233,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
                     ServiceLocator.NavigationService.NavigateBack();
                 });
             });
-
         }
 
         private void CancelAction()
@@ -276,54 +286,26 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
             _selectedSize = ImageSizes[1];
         }
 
-        //private void PictureAvailable(Stream stream)
-        //{
-        //    try
-        //    {
-        //        CostumeName = AppResources.Editor_Image;
-
-        //        var image = new BitmapImage();
-        //        image.SetSource(stream);
-        //        Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
-
-        //        var writeableBitmap = new WriteableBitmap(image);
-        //        var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
-
-        //        Image = portableImage;
-
-        //        Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
-        //    }
-        //    catch (Exception)
-        //    {
-        //        ShowLoadingImageFailure();
-        //    }
-        //}
-
-
-
-        private void Task_Completed(object sender, PhotoResult e)
+        private void PictureAvailable(Stream stream)
         {
-            if (e.TaskResult == TaskResult.OK)
+            try
             {
-                try
-                {
-                    CostumeName = AppResources.Editor_Image;
+                CostumeName = AppResources.Editor_Image;
 
-                    var image = new BitmapImage();
-                    image.SetSource(e.ChosenPhoto);
-                    Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
+                var image = new BitmapImage();
+                image.SetSource(stream);
+                Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
 
-                    var writeableBitmap = new WriteableBitmap(image);
-                    var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
+                var writeableBitmap = new WriteableBitmap(image);
+                var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
 
-                    Image = portableImage;
+                Image = portableImage;
 
-                    Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
-                }
-                catch (Exception)
-                {
-                    ShowLoadingImageFailure();
-                }
+                Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
+            }
+            catch (Exception)
+            {
+                ShowLoadingImageFailure();
             }
         }
 

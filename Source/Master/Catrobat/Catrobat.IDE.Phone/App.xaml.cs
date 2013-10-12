@@ -32,8 +32,6 @@ namespace Catrobat.IDE.Phone
         /// </summary>
         public App()
         {
-            MvvmCrossSetup.Instance.EnsureInit();
-
             // Global handler for uncaught exceptions.
             UnhandledException += Application_UnhandledException;
 
@@ -68,6 +66,9 @@ namespace Catrobat.IDE.Phone
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
+
+            var setup = new Setup(RootFrame);
+            setup.Initialize();
         }
 
         // Code to execute when the application is launching (eg, from Start)

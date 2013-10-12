@@ -47,7 +47,7 @@ namespace Catrobat.IDE.Tests.Misc
         {
             ServiceLocator.SetServices(null, new PlatformInformationHelperTests(), null, null,
                 null, new ResourceLoaderFactoryTest(), new StorageFactoryTest(), null, null,
-                new ProjectImporterService(), null, null);
+                new ProjectImporterService(), null, null, null);
         }
     }
 }
