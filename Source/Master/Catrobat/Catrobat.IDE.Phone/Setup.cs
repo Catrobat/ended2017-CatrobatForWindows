@@ -40,7 +40,8 @@ namespace Catrobat.IDE.Phone
                 new ProjectImporterService(),
                 new SoundPlayerServicePhone(),
                 new SoundRecorderServicePhone(),
-                new PictureServicePhone()
+                new PictureServicePhone(),
+                new NotificationServicePhone()
                 );
         }
     }

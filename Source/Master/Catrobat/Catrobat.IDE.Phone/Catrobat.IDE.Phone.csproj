@@ -185,6 +185,7 @@
     <Compile Include="Services\ImageResizeServicePhone.cs" />
     <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
     <Compile Include="Services\NavigationServicePhone.cs" />
+    <Compile Include="Services\NotificationServicePhone.cs" />
     <Compile Include="Services\PictureServicePhone.cs" />
     <Compile Include="Services\PlayerLauncherServicePhone.cs" />
     <Compile Include="Services\ServerCommunicationServicePhone.cs" />

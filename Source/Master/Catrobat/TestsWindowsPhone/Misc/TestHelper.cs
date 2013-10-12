@@ -34,21 +34,22 @@ namespace Catrobat.IDE.Phone.Tests.Misc
 
     internal static void InitializeTests()
     {
-        Catrobat.IDE.Core.Services.ServiceLocator.SetServices(
-            new NavigationServicePhone(),
-            new SystemInformationServicePhone(),
-            new CultureServicePhone(),
-            new ImageResizeServicePhone(),
-            new PlayerLauncherServicePhone(),
-            new ResourceLoaderFactoryPhone(),
-            new StorageFactoryPhone(),
-            new ServerCommunicationServicePhone(),
-            new ImageSourceConversionServicePhone(),
-            new ProjectImporterService(),
-            new SoundPlayerServicePhone(),
-            new SoundRecorderServicePhone(),
-            new PictureServicePhone()
-            );
+        //Catrobat.IDE.Core.Services.ServiceLocator.SetServices(
+        //    new NavigationServicePhone(),
+        //    new SystemInformationServicePhone(),
+        //    new CultureServicePhone(),
+        //    new ImageResizeServicePhone(),
+        //    new PlayerLauncherServicePhone(),
+        //    new ResourceLoaderFactoryPhone(),
+        //    new StorageFactoryPhone(),
+        //    new ServerCommunicationServicePhone(),
+        //    new ImageSourceConversionServicePhone(),
+        //    new ProjectImporterService(),
+        //    new SoundPlayerServicePhone(),
+        //    new SoundRecorderServicePhone(),
+        //    new PictureServicePhone(),
+        //    new NotificationServicePhone()
+        //    );
     }
   }
 }
