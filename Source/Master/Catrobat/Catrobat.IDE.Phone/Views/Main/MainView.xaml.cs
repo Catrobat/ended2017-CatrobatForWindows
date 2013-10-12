@@ -26,21 +26,21 @@ namespace Catrobat.IDE.Phone.Views.Main
             Loaded += new RoutedEventHandler(MainPage_Loaded);
 
             // Dirty but there is no way around this
-            Messenger.Default.Register<DialogMessage>(
-                this,
-                msg => Dispatcher.BeginInvoke(() =>
-                    {
-                        var result = MessageBox.Show(
-                            msg.Content,
-                            msg.Caption,
-                            msg.Button);
+            //Messenger.Default.Register<DialogMessage>(
+            //    this,
+            //    msg => Dispatcher.BeginInvoke(() =>
+            //        {
+            //            var result = MessageBox.Show(
+            //                msg.Content,
+            //                msg.Caption,
+            //                msg.Button);
 
-                        if (msg.Callback != null)
-                        {
-                            // Send callback
-                            msg.ProcessCallback(result);
-                        }
-                    }));
+            //            if (msg.Callback != null)
+            //            {
+            //                // Send callback
+            //                msg.ProcessCallback(result);
+            //            }
+            //        }));
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

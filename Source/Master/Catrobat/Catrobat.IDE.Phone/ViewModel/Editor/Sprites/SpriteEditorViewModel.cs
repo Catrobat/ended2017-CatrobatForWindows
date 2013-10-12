@@ -553,15 +553,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedSounds.Count, sound);
             var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, sound);
 
-            var message =
-                new DialogMessage(messageContent, DeleteSoundMessageBoxResult)
-                {
-                    Button = MessageBoxButton.OKCancel,
-                    Caption = messageHeader
-                };
-            Messenger.Default.Send(message);
+            ServiceLocator.NotifictionService.ShowMessageBox(messageHeader, 
+                messageContent, DeleteSoundMessageBoxResult, MessageBoxOptions.OkCancel);
         }
-
 
         private void AddNewCostumeAction()
         {
@@ -598,13 +592,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedCostumes.Count, costume);
             var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, costume);
 
-            var message =
-                new DialogMessage(messageContent, DeleteCostumeMessageBoxResult)
-                {
-                    Button = MessageBoxButton.OKCancel,
-                    Caption = messageHeader
-                };
-            Messenger.Default.Send(message);
+            ServiceLocator.NotifictionService.ShowMessageBox(messageHeader, messageContent, DeleteCostumeMessageBoxResult, MessageBoxOptions.OkCancel);
         }
 
         private void ClearObjectSelectionAction()
@@ -855,9 +843,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         #region MessageBoxResult
 
-        private void DeleteCostumeMessageBoxResult(MessageBoxResult result)
+        private void DeleteCostumeMessageBoxResult(MessageboxResult result)
         {
-            if (result == MessageBoxResult.OK)
+            if (result == MessageboxResult.Ok)
             {
                 var costumesToRemove = new List<Costume>(SelectedCostumes);
 
@@ -871,9 +859,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             }
         }
 
-        private void DeleteSoundMessageBoxResult(MessageBoxResult result)
+        private void DeleteSoundMessageBoxResult(MessageboxResult result)
         {
-            if (result == MessageBoxResult.OK)
+            if (result == MessageboxResult.Ok)
             {
                 var soundsToRemove = new List<Sound>(SelectedSounds);
 
@@ -886,6 +874,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                 }
             }
         }
+
 
         #endregion
 

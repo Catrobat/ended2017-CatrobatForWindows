@@ -311,15 +311,11 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
 
         private void ShowLoadingImageFailure()
         {
-            var message = new DialogMessage(AppResources.Editor_MessageBoxWrongImageFormatText, WrongImageFormatResult)
-            {
-                Button = MessageBoxButton.OK,
-                Caption = AppResources.Editor_MessageBoxWrongImageFormatHeader
-            };
-            Messenger.Default.Send(message);
+            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Editor_MessageBoxWrongImageFormatHeader,
+                AppResources.Editor_MessageBoxWrongImageFormatText, WrongImageFormatResult, MessageBoxOptions.Ok);
         }
 
-        private void WrongImageFormatResult(MessageBoxResult result)
+        private void WrongImageFormatResult(MessageboxResult result)
         {
             ServiceLocator.NavigationService.NavigateBack();
         }

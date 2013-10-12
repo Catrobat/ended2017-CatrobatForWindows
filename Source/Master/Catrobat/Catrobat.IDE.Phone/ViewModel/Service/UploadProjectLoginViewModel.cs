@@ -25,9 +25,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
         #region private Members
 
         private CatrobatContextBase _context;
-        private MessageBoxResult _missingLoginDataCallbackResult;
-        private MessageBoxResult _wrongLoginDataCallbackResult;
-        private MessageBoxResult _registrationSuccessfulCallbackResult;
+        private MessageboxResult _missingLoginDataCallbackResult;
+        private MessageboxResult _wrongLoginDataCallbackResult;
+        private MessageboxResult _registrationSuccessfulCallbackResult;
         private string _username;
         private string _password;
         private string _email;
@@ -114,13 +114,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
 
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_email))
             {
-                var message = new DialogMessage(AppResources.Main_UploadProjectMissingLoginData, MissingLoginDataCallback)
-                {
-                    Button = MessageBoxButton.OK,
-                    Caption = AppResources.Main_UploadProjectLoginErrorCaption
-                };
-
-                Messenger.Default.Send(message);
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption, 
+                    AppResources.Main_UploadProjectMissingLoginData, MissingLoginDataCallback, MessageBoxOptions.Ok);
             }
             else
             {
@@ -170,21 +165,21 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
             ServiceLocator.NavigationService.NavigateTo(typeof (UploadProjectView));
         }
 
-        private void MissingLoginDataCallback(MessageBoxResult result)
+        private void MissingLoginDataCallback(MessageboxResult result)
         {
             _missingLoginDataCallbackResult = result;
         }
 
-        private void WrongLoginDataCallback(MessageBoxResult result)
+        private void WrongLoginDataCallback(MessageboxResult result)
         {
             _wrongLoginDataCallbackResult = result;
         }
 
-        private void RegistrationSuccessfulCallback(MessageBoxResult result)
+        private void RegistrationSuccessfulCallback(MessageboxResult result)
         {
             _registrationSuccessfulCallbackResult = result;
 
-            if (result == MessageBoxResult.OK)
+            if (result == MessageboxResult.Ok)
             {
                 if (NavigationCallback != null)
                 {
@@ -204,13 +199,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
 
             if (registered)
             {
-                var message = new DialogMessage(string.Format(AppResources.Main_UploadProjectWelcome, _username), RegistrationSuccessfulCallback)
-                {
-                    Button = MessageBoxButton.OK,
-                    Caption = AppResources.Main_UploadProjectRegistrationSucessful
-                };
-
-                Messenger.Default.Send(message);
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectRegistrationSucessful,
+                    string.Format(AppResources.Main_UploadProjectWelcome, _username), RegistrationSuccessfulCallback, MessageBoxOptions.Ok);
             }
             else if (errorCode == StatusCodes.ServerResponseTokenOk.ToString())
             {
@@ -229,13 +219,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
                 var messageString = string.IsNullOrEmpty(statusMessage) ? string.Format(AppResources.Main_UploadProjectUndefinedError, errorCode) :
                                         string.Format(AppResources.Main_UploadProjectLoginError, statusMessage);
 
-                var message = new DialogMessage(messageString, WrongLoginDataCallback)
-                {
-                    Button = MessageBoxButton.OK,
-                    Caption = AppResources.Main_UploadProjectLoginErrorCaption
-                };
-
-                Messenger.Default.Send(message);
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
+                    messageString, WrongLoginDataCallback, MessageBoxOptions.Ok);
             }
         }
 
