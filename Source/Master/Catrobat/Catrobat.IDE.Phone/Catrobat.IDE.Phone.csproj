@@ -583,9 +583,14 @@
     <Content Include="Content\Resources\default.catrobat" />
     <Content Include="Content\Resources\default_new.catrobat" />
     <Content Include="Content\Resources\DesignTime\screenshot.png" />
+    <Content Include="Content\Tiles\FlipCycleTileLarge.png" />
+    <Content Include="Content\Tiles\FlipCycleTileMedium.png" />
+    <Content Include="Content\Tiles\FlipCycleTileSmall.png" />
+    <Content Include="Content\Tiles\IconicTileMediumLarge.png" />
+    <Content Include="Content\Tiles\IconicTileSmall.png" />
+    <Content Include="Content\Tiles\ApplicationIcon.png" />
     <Content Include="fmodex_arm.dll" />
     <Content Include="fmodex_x86.dll" />
-    <Content Include="windows_pocketcode_450.png" />
     <None Include="app.config" />
     <None Include="Content\Resources\SampleProjects\stoeckchen.catrobat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -600,24 +605,9 @@
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png" />
-    <Content Include="Assets\FileTypeAssociation\large-176x176.png" />
-    <Content Include="Assets\FileTypeAssociation\medium-69x69.png" />
-    <Content Include="Assets\FileTypeAssociation\small-33x33.png" />
-    <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\FlipCycleTileMedium.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\FlipCycleTileSmall.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\IconicTileMediumLarge.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\IconicTileSmall.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\FileTypeAssociation\large-176x176.png" />
+    <Content Include="Content\FileTypeAssociation\medium-69x69.png" />
+    <Content Include="Content\FileTypeAssociation\small-33x33.png" />
     <Content Include="Content\Images\ApplicationBar\dark\appbar.add.rest.png" />
     <Content Include="Content\Images\ApplicationBar\dark\appbar.back.rest.png" />
     <Content Include="Content\Images\ApplicationBar\dark\appbar.basecircle.rest.png" />
@@ -795,9 +785,7 @@
       <Name>PlayerWindowsPhone8Component</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\Localization\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
