@@ -927,12 +927,12 @@
     <value>Bildbearbeitungsprogramm</value>
   </data>
   <data name="Editor_Recorded" xml:space="preserve">
-    <value />
+    <value>Aufnahme</value>
   </data>
   <data name="Editor_ResizeImage" xml:space="preserve">
     <value>Bildgröße ändern</value>
   </data>
   <data name="Editor_Sec" xml:space="preserve">
-    <value>Sek. aufgenommen</value>
+    <value>Sek.</value>
   </data>
 </root>
