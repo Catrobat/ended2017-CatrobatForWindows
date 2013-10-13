@@ -116,8 +116,11 @@
     <Compile Include="CatrobatObjects\ProjectHeader.cs" />
     <Compile Include="CatrobatObjects\Scripts\BroadcastScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\Script.cs" />
-    <Compile Include="CatrobatObjects\Scripts\ScriptBrickCollection.cs" />
-    <Compile Include="CatrobatObjects\Scripts\ScriptBrickIterator.cs" />
+    <Compile Include="UI\IPlayPauseButton.cs" />
+    <Compile Include="UI\PlayPauseStateCommandArguments.cs" />
+    <Compile Include="UI\PortableListBoxViewPort.cs" />
+    <Compile Include="UI\ScriptBrickCollection.cs" />
+    <Compile Include="UI\ScriptBrickIterator.cs" />
     <Compile Include="CatrobatObjects\Scripts\ScriptList.cs" />
     <Compile Include="CatrobatObjects\Scripts\StartScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\WhenScript.cs" />
@@ -170,11 +173,16 @@
     <Compile Include="Services\Common\CatrobatZipService.cs" />
     <Compile Include="Services\Common\ProjectImporterService.cs" />
     <Compile Include="Services\Data\ImageDimention.cs" />
+    <Compile Include="Services\Data\PortableBrush.cs" />
     <Compile Include="Services\Data\PortableImage.cs" />
+    <Compile Include="Services\Data\PortableSolidColorBrush.cs" />
+    <Compile Include="Services\IColorService.cs" />
     <Compile Include="Services\ICultureService.cs" />
     <Compile Include="Services\IImageResizeService.cs" />
     <Compile Include="Services\IImageSourceConversionService.cs" />
     <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Services\INotifictionService.cs" />
+    <Compile Include="Services\IPictureService.cs" />
     <Compile Include="Services\IPlayerLauncherService.cs" />
     <Compile Include="Services\IProjectImporterService.cs" />
     <Compile Include="Services\IServerCommunicationService.cs" />
@@ -187,9 +195,13 @@
     <Compile Include="Services\Storage\IStorage.cs" />
     <Compile Include="Services\Storage\IStorageFactory.cs" />
     <Compile Include="Services\Storage\StorageSystem.cs" />
+    <Compile Include="UI\BrickCollection.cs" />
     <Compile Include="UI\ImageSizeEntry.cs" />
     <Compile Include="UI\ImageSizeEntryCollection.cs" />
     <Compile Include="UI\NullItemCollection.cs" />
+    <Compile Include="UI\Theme.cs" />
+    <Compile Include="UI\ThemeChooser.cs" />
+    <Compile Include="UI\VariableConteiner.cs" />
     <Compile Include="Utilities\Helpers\CostumeHelper.cs" />
     <Compile Include="Utilities\Helpers\FileNameGenerationHelper.cs" />
     <Compile Include="Utilities\Helpers\LanguageHelper.cs" />
@@ -203,7 +215,6 @@
     <Compile Include="Utilities\JSON\JSONClassDeserializer.cs" />
     <Compile Include="Utilities\JSON\JSONStatusResponse.cs" />
     <Compile Include="Utilities\MD5.cs" />
-    <Compile Include="Utilities\MvvmCrossSetup.cs" />
     <Compile Include="Utilities\UtilToken.cs" />
     <Compile Include="Utilities\XmlStringWriter.cs" />
     <Compile Include="VersionConverter\CatrobatVersion.cs" />
@@ -212,7 +223,6 @@
     <Compile Include="VersionConverter\CatrobatVersionPair.cs" />
     <Compile Include="VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
     <Compile Include="VersionConverter\Versions\CatrobatVersion091ToWin091.cs" />
-    <Compile Include="ViewModels\FirstViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.CrossCore">
@@ -223,9 +233,6 @@
     </Reference>
     <Reference Include="Cirrious.MvvmCross.Localization">
       <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Localization.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Plugins.PictureChooser">
-      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.PictureChooser.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Plugins.PictureChooser.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\portable-net45+win8+wp8\Microsoft.Threading.Tasks.dll</HintPath>

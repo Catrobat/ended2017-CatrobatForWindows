@@ -36,7 +36,7 @@
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1.5*" />
               </Grid.ColumnDefinitions>
-              <Image Grid.Column="0" Width="150" Height="150" x:Name="imgDesign" Margin="10" Source="{Binding CroppedBackground}" />
+              <Image Grid.Column="0" Width="150" Height="150" x:Name="imgDesign" Margin="10" Source="{Binding CroppedBackground.ImageSource}" />
               <Grid Grid.Column="1" Margin="22" Background="{Binding Converter={StaticResource ActiveThemeBrushConverter}}">
                 <Grid Margin="10">
                   <Grid.RowDefinitions>
@@ -57,9 +57,9 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                   </Grid.ColumnDefinitions>
-                  <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding AccentColor1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
-                  <Grid Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding AccentColor2}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
-                  <Grid Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding AccentColor3}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
+                  <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding AccentColor1.NativeBrush}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
+                  <Grid Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding AccentColor2.NativeBrush}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
+                  <Grid Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{Binding AccentColor3.NativeBrush}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
                 </Grid>
               </Grid>
             </Grid>

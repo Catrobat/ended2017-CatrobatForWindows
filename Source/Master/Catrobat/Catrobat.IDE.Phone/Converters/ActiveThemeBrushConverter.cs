@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using Catrobat.IDE.Phone.Themes;
+using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Phone.ViewModel.Settings;
 using Microsoft.Practices.ServiceLocation;
 

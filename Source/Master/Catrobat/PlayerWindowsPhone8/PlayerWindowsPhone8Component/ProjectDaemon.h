@@ -13,7 +13,8 @@ class ProjectDaemon
 {
 public:
 	static ProjectDaemon *Instance();
-
+    
+    void ReInit();
 	void SetProject(Project *project);
 	Project *GetProject();
 	string GetProjectPath();

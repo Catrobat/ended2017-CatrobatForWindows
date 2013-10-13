@@ -8,8 +8,6 @@ using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Scripts
 {
-    public class BrickCollection : ObservableCollection<DataObject> {}
-
     public partial class AddNewScriptView : PhoneApplicationPage
     {
         private readonly AddNewScriptBrickViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewScriptBrickViewModel>();

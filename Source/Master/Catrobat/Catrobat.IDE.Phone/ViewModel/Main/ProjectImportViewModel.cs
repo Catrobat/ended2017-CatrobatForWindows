@@ -309,11 +309,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             //});
         }
 
-        private void ProjectNotValidMessageResult(MessageBoxResult obj)
-        {
-            ServiceLocator.NavigationService.NavigateTo(typeof(MainView));
-        }
-
         private void ResetViewModel()
         {
             ProjectName = "";

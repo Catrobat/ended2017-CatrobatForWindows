@@ -25,11 +25,11 @@
       <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleNewSound, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
     </StackPanel>
 
-    <StackPanel Grid.Row="1" Margin="10 0 0 15">
+    <StackPanel Grid.Row="1" Margin="10 20 0 15">
       <!--<Button Margin="0 0 10 10" Command="{Binding AudioLibraryCommand}">
         <Button.Template>
           <ControlTemplate>
-            <Grid Margin="0 10 0 10" Background="{Binding Path=SelectedTheme.AccentColor1, Source={StaticResource ThemeChooser}}" HorizontalAlignment="Stretch" Height="120">
+            <Grid Margin="0 10 0 10" Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" HorizontalAlignment="Stretch" Height="120">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -40,16 +40,25 @@
           </ControlTemplate>
         </Button.Template>
       </Button>-->
-      <Button Margin="0 0 10 10" Command="{Binding RecorderCommand}">
+      
+      <Button Margin="0 0 10 0" Command="{Binding RecorderCommand}">
         <Button.Template>
           <ControlTemplate>
-            <Grid Margin="0 10 0 10" Background="{Binding Path=SelectedTheme.AccentColor2, Source={StaticResource ThemeChooser}}" HorizontalAlignment="Stretch" Height="120">
+            <Grid Background="{Binding Path=SelectedTheme.AccentColor2.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                    HorizontalAlignment="Stretch" 
+                    Height="140">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
               </Grid.ColumnDefinitions>
-              <Image Source="/Content/Images/Misc/AudioRecorder.png" Margin="30 15 15 15"></Image>
-              <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Resources.Editor_Recorder, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+              <Image Grid.Column="0"
+                     Source="/Content/Images/Misc/AudioRecorder.png" 
+                     Margin="30 15 15 15" />
+              <TextBlock Grid.Column="1" Margin="10" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="Left" 
+                           Text="{Binding Resources.Editor_Recorder, Source={StaticResource LocalizedStrings}}" 
+                           Style="{StaticResource PhoneTextExtraLargeStyle}" />
             </Grid>
           </ControlTemplate>
         </Button.Template>

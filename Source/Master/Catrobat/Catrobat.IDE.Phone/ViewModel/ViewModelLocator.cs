@@ -5,9 +5,9 @@ using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Phone.Services;
 using Catrobat.IDE.Phone.Services.Storage;
-using Catrobat.IDE.Phone.Themes;
 using Catrobat.IDE.Phone.ViewModel.Editor;
 using Catrobat.IDE.Phone.ViewModel.Editor.Costumes;
 using Catrobat.IDE.Phone.ViewModel.Editor.Formula;
@@ -17,7 +17,6 @@ using Catrobat.IDE.Phone.ViewModel.Editor.Sprites;
 using Catrobat.IDE.Phone.ViewModel.Main;
 using Catrobat.IDE.Phone.ViewModel.Service;
 using Catrobat.IDE.Phone.ViewModel.Settings;
-using Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
@@ -31,8 +30,6 @@ namespace Catrobat.IDE.Phone.ViewModel
 
         static ViewModelLocator()
         {
-            InitializeInterfaces();
-
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<MainViewModel>(true);
@@ -72,27 +69,6 @@ namespace Catrobat.IDE.Phone.ViewModel
                 var messageCurrentSprite = new GenericMessage<Sprite>(context.CurrentProject.SpriteList.Sprites[0]);
                 Messenger.Default.Send(messageCurrentSprite, ViewModelMessagingToken.CurrentSpriteChangedListener);
             }
-        }
-
-        private static void InitializeInterfaces()
-        {
-            Catrobat.IDE.Core.Services.ServiceLocator.SetServices(
-                new NavigationServicePhone(),
-                new SystemInformationServicePhone(),
-                new CultureServicePhone(),
-                new ImageResizeServicePhone(),
-                new PlayerLauncherServicePhone(),
-                new ResourceLoaderFactoryPhone(),
-                new StorageFactoryPhone(),
-                new ServerCommunicationServicePhone(),
-                new ImageSourceConversionServicePhone(),
-                new ProjectImporterService(),
-                new SoundPlayerServicePhone(),
-                new SoundRecorderServicePhone()
-                );
-
-            //Catrobat.IDE.Core.Services.ServiceLocator.SetMvxServices(
-            //    new MvxPictureChooserTask());
         }
 
         private static Project InitializeFirstTimeUse(CatrobatContextBase context)

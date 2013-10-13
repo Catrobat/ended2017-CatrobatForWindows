@@ -129,10 +129,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Costumes
 
             using (var storage = StorageSystem.GetStorage())
             {
-                //if (storage.FileExists(absoluteFileNameOld))
                 storage.CopyFile(absoluteFileNameOld, absoluteFileNameNew);
-                //else
-                //  MessageBox.Show("Das Kostüm konnte nicht kopiert werden.", "Kopieren nicht möglich", MessageBoxButton.OK); // TODO: is this used? names should be unique
             }
 
             return newCostume;

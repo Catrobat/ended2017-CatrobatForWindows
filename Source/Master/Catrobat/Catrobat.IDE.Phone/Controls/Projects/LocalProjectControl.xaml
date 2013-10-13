@@ -24,7 +24,7 @@
         </i:EventTrigger>
       </i:Interaction.Triggers>
 
-      <Grid Name="GridNormalTile" Background="{Binding SelectedTheme.AccentColor2, Source={StaticResource ThemeChooser}}">
+      <Grid Name="GridNormalTile" Background="{Binding SelectedTheme.AccentColor2.NativeBrush, Source={StaticResource ThemeChooser}}">
         <Image Name="ImageNormalTile" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding Screenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}"></Image>
         <Grid>
           <Grid.RowDefinitions>

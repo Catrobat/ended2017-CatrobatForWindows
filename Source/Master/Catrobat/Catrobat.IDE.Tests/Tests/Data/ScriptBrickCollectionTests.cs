@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using Catrobat.IDE.Core.CatroatObjects.Scripts;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Bricks;
 using Catrobat.IDE.Core.CatrobatObjects.Scripts;
+using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

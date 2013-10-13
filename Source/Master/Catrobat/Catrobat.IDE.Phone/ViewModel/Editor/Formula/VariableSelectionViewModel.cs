@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;

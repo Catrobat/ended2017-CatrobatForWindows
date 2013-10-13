@@ -13,7 +13,8 @@ using namespace Windows::Graphics::Display;
 Renderer::Renderer() :
 	m_loadingComplete(false),
 	m_startup(true),
-	m_indexCount(0)
+	m_indexCount(0),
+    m_initialized(false)
 {
 	m_scale = DisplayProperties::LogicalDpi / 96.0f;
 }
@@ -34,12 +35,11 @@ void Renderer::Update(float timeTotal, float timeDelta)
 
 void Renderer::Render()
 {
-	static bool __init_hack = false;
-	if (!__init_hack)
+    if (!m_initialized)
 	{
 		m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_d3dContext.Get()));
 		m_spriteFont = unique_ptr<SpriteFont>(new SpriteFont(m_d3dDevice.Get(), L"italic.spritefont"));
-		__init_hack = true;
+		m_initialized = true;
 	}
 
 	// This code is Generating a Midnightblue Background on our screen

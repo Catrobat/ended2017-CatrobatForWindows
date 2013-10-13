@@ -12,6 +12,7 @@ ref class ProjectRenderer sealed : public Direct3DBase
 {
 public:
 	ProjectRenderer();
+    virtual ~ProjectRenderer();
 
 	// Direct3DBase methods.
 	virtual void CreateDeviceResources() override;
@@ -26,5 +27,6 @@ public:
 private:
 	std::unique_ptr<SpriteBatch> m_spriteBatch;
 	std::unique_ptr<SpriteFont> m_spriteFont; 
+	bool m_Initialized;
 };
 

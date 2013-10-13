@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows;
-using Catrobat.IDE.Core.CatroatObjects.Scripts;
+using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Bricks;
@@ -64,13 +64,21 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         public Sprite SelectedSprite
         {
-            get
-            {
-                return _selectedSprite;
-            }
+            get { return _selectedSprite; }
             set
             {
                 _selectedSprite = value;
+
+                if (_selectedSprite != null)
+                {
+                    Costumes.CollectionChanged -= CostumesCollectionChanged;
+                    Sounds.CollectionChanged -= SoundsCollectionChanged;
+                    ScriptBricks.CollectionChanged -= ScriptBricksCollectionChanged;
+
+                    Costumes.CollectionChanged += CostumesCollectionChanged;
+                    Sounds.CollectionChanged += SoundsCollectionChanged;
+                    ScriptBricks.CollectionChanged += ScriptBricksCollectionChanged;
+                }
 
                 if (_scriptBricks != null && _scriptBricks.Count == 0 && _listBoxViewPort == null)
                     ListBoxViewPort = new ListBoxViewPort(0, 0);
@@ -79,7 +87,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                 {
                     _scriptBricks.Update(_selectedSprite);
 
-                    if (_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 && ListBoxViewPort.LastVisibleIndex == 0)
+                    if (_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 &&
+                        ListBoxViewPort.LastVisibleIndex == 0)
                         ListBoxViewPort = new ListBoxViewPort(1, 2);
                 }
 
@@ -98,6 +107,16 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             }
         }
 
+        public bool IsScirptBricksEmpty
+        {
+            get
+            {
+                if (_scriptBricks == null)
+                    return true;
+                return _scriptBricks.Count == 0;
+            }
+        }
+
         public ObservableCollection<Sound> Sounds
         {
             get
@@ -107,12 +126,15 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
                 return null;
             }
-            set
-            {
-                if (value == _selectedSprite.Sounds.Sounds) return;
-                _selectedSprite.Sounds.Sounds = value;
+        }
 
-                RaisePropertyChanged(() => Sounds);
+        public bool IsSoundsEmpty
+        {
+            get
+            {
+                if (_selectedSprite == null || _selectedSprite.Sounds.Sounds == null)
+                    return true;
+                return _selectedSprite.Sounds.Sounds.Count == 0;
             }
         }
 
@@ -124,6 +146,16 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                     return _selectedSprite.Costumes.Costumes;
                 
                 return null;
+            }
+        }
+
+        public bool IsCostumesEmpty
+        {
+            get
+            {
+                if (_selectedSprite == null || _selectedSprite.Costumes.Costumes == null)
+                    return true;
+                return _selectedSprite.Costumes.Costumes.Count == 0;
             }
         }
 
@@ -144,7 +176,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
         {
             get { return CurrentProject.BroadcastMessages; }
         }
-
 
         public int SelectedPivotIndex
         {
@@ -452,13 +483,10 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         private void AddNewScriptBrickAction()
         {
-            //var message1 = new GenericMessage<Sprite>(SelectedSprite);
-            //Messenger.Default.Send<GenericMessage<Sprite>>(message1, ViewModelMessagingToken.SelectedSpriteListener);
-
             var objects = new List<object> { ScriptBricks, ListBoxViewPort };
 
-            var message2 = new GenericMessage<List<Object>>(objects);
-            Messenger.Default.Send<GenericMessage<List<Object>>>(message2, ViewModelMessagingToken.ScriptBrickCollectionListener);
+            var message = new GenericMessage<List<Object>>(objects);
+            Messenger.Default.Send<GenericMessage<List<Object>>>(message, ViewModelMessagingToken.ScriptBrickCollectionListener);
 
             ServiceLocator.NavigationService.NavigateTo(typeof(AddNewScriptView));
         }
@@ -553,15 +581,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedSounds.Count, sound);
             var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, sound);
 
-            var message =
-                new DialogMessage(messageContent, DeleteSoundMessageBoxResult)
-                {
-                    Button = MessageBoxButton.OKCancel,
-                    Caption = messageHeader
-                };
-            Messenger.Default.Send(message);
+            ServiceLocator.NotifictionService.ShowMessageBox(messageHeader, 
+                messageContent, DeleteSoundMessageBoxResult, MessageBoxOptions.OkCancel);
         }
-
 
         private void AddNewCostumeAction()
         {
@@ -598,13 +620,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedCostumes.Count, costume);
             var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, costume);
 
-            var message =
-                new DialogMessage(messageContent, DeleteCostumeMessageBoxResult)
-                {
-                    Button = MessageBoxButton.OKCancel,
-                    Caption = messageHeader
-                };
-            Messenger.Default.Send(message);
+            ServiceLocator.NotifictionService.ShowMessageBox(messageHeader, messageContent, DeleteCostumeMessageBoxResult, MessageBoxOptions.OkCancel);
         }
 
         private void ClearObjectSelectionAction()
@@ -834,6 +850,21 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                 ViewModelMessagingToken.SelectedBrickListener, ReceiveSelectedBrickMessageAction);
         }
 
+        private void ScriptBricksCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            RaisePropertyChanged(() => IsScirptBricksEmpty);
+        }
+
+        private void CostumesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            RaisePropertyChanged(() => IsCostumesEmpty);
+        }
+
+        private void SoundsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            RaisePropertyChanged(() => IsSoundsEmpty);
+        }
+
         private void SelectedScriptsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             CopyScriptBrickCommand.RaiseCanExecuteChanged();
@@ -855,9 +886,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         #region MessageBoxResult
 
-        private void DeleteCostumeMessageBoxResult(MessageBoxResult result)
+        private void DeleteCostumeMessageBoxResult(MessageboxResult result)
         {
-            if (result == MessageBoxResult.OK)
+            if (result == MessageboxResult.Ok)
             {
                 var costumesToRemove = new List<Costume>(SelectedCostumes);
 
@@ -871,9 +902,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             }
         }
 
-        private void DeleteSoundMessageBoxResult(MessageBoxResult result)
+        private void DeleteSoundMessageBoxResult(MessageboxResult result)
         {
-            if (result == MessageBoxResult.OK)
+            if (result == MessageboxResult.Ok)
             {
                 var soundsToRemove = new List<Sound>(SelectedSounds);
 
@@ -886,6 +917,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                 }
             }
         }
+
 
         #endregion
 

@@ -18,7 +18,7 @@
     </Grid.ColumnDefinitions>
 
     <Grid Grid.Column="0">
-      <StackPanel Grid.Column="0" Margin="0 15 0 0" Grid.RowSpan="2">
+      <StackPanel Grid.Column="0" Margin="5 15 0 0" Grid.RowSpan="2">
         <coding4FunControls:RoundButton Name="ButtonNew" Margin="0 0 0 -13" 
           ImageSource="/Content/Images/ApplicationBar/dark/appbar.new.rest.png"/>
         <TextBlock Margin="0" Name="TextBlockAdd" HorizontalAlignment="Center" TextAlignment="Center" 

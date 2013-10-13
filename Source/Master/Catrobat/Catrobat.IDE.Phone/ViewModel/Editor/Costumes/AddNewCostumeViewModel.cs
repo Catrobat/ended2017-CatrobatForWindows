@@ -149,57 +149,67 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
         {
             lock (this)
             {
-                //ServiceLocator.MvxPictureChooserTask.ChoosePictureFromLibrary(int.MaxValue, 95, PictureAvailable, () => {/* No action here */});
-
-                var photoChooserTask = new PhotoChooserTask();
-                photoChooserTask.Completed -= Task_Completed;
-                photoChooserTask.Completed += Task_Completed;
-                photoChooserTask.Show();
+                ServiceLocator.PictureService.ChoosePictureFromLibrary(PictureSuccess, PictureCanceled, PictureError);
             }
         }
+
+        private void PictureSuccess(PortableImage image)
+        {
+            Image = image;
+            CostumeName = AppResources.Editor_Image;
+            Dimention = new ImageDimention { Height = image.Height, Width = image.Width };
+
+            Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
+        }
+
+        private void PictureCanceled()
+        {
+            // No action here
+        }
+
+        private void PictureError()
+        {
+            ShowLoadingImageFailure();
+        }
+
+
 
         private void OpenCameraAction()
         {
             lock (this)
             {
-                //ServiceLocator.MvxPictureChooserTask.TakePicture(int.MaxValue, 95, PictureAvailable, () => {/* No action here */});
-
-                var cameraCaptureTask = new CameraCaptureTask();
-                cameraCaptureTask.Completed -= Task_Completed;
-                cameraCaptureTask.Completed += Task_Completed;
-                cameraCaptureTask.Show();
+                ServiceLocator.PictureService.TakePicture(PictureSuccess, PictureCanceled, PictureError);
             }
         }
 
         private void OpenPaintAction()
         {
-            var newBitmap = new WriteableBitmap(
-                ServiceLocator.SystemInformationService.ScreenWidth, ServiceLocator.SystemInformationService.ScreenHeight);
+            ServiceLocator.PictureService.DrawPicture(PictureSuccess, PictureCanceled, PictureError);
+            ServiceLocator.NavigationService.RemoveBackEntry();
 
-            var task = new PaintLauncherTask { CurrentImage = newBitmap };
-            task.OnImageChanged += OnPaintLauncherImageChanged;
-            PaintLauncher.Launche(task);
+            //var newBitmap = new WriteableBitmap(
+            //    ServiceLocator.SystemInformationService.ScreenWidth, ServiceLocator.SystemInformationService.ScreenHeight);
+
+            //var task = new PaintLauncherTask { CurrentImage = newBitmap };
+            //task.OnImageChanged += OnPaintLauncherImageChanged;
+            //PaintLauncher.Launche(task);
         }
 
-        private async void OnPaintLauncherImageChanged(PaintLauncherTask task)
-        {
-            try
-            {
-                CostumeName = AppResources.Editor_Image;
+        //private async void OnPaintLauncherImageChanged(PortableImage image)
+        //{
+        //    try
+        //    {
+        //        Image = image;
+        //        CostumeName = AppResources.Editor_Image;
+        //        Dimention = new ImageDimention { Height = image.Height, Width = image.Width };
 
-                var image = task.CurrentImage;
-                Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
-
-                var portableImage = new PortableImage(image.ToByteArray(), image.PixelWidth, image.PixelHeight);
-                Image = portableImage;
-
-                Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
-            }
-            catch (Exception)
-            {
-                ShowLoadingImageFailure();
-            }
-        }
+        //        Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        ShowLoadingImageFailure();
+        //    }
+        //}
 
         private async void SaveAction()
         {
@@ -222,7 +232,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
                     ServiceLocator.NavigationService.NavigateBack();
                 });
             });
-
         }
 
         private void CancelAction()
@@ -276,68 +285,36 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
             _selectedSize = ImageSizes[1];
         }
 
-        //private void PictureAvailable(Stream stream)
-        //{
-        //    try
-        //    {
-        //        CostumeName = AppResources.Editor_Image;
-
-        //        var image = new BitmapImage();
-        //        image.SetSource(stream);
-        //        Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
-
-        //        var writeableBitmap = new WriteableBitmap(image);
-        //        var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
-
-        //        Image = portableImage;
-
-        //        Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
-        //    }
-        //    catch (Exception)
-        //    {
-        //        ShowLoadingImageFailure();
-        //    }
-        //}
-
-
-
-        private void Task_Completed(object sender, PhotoResult e)
+        private void PictureAvailable(Stream stream)
         {
-            if (e.TaskResult == TaskResult.OK)
+            try
             {
-                try
-                {
-                    CostumeName = AppResources.Editor_Image;
+                CostumeName = AppResources.Editor_Image;
 
-                    var image = new BitmapImage();
-                    image.SetSource(e.ChosenPhoto);
-                    Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
+                var image = new BitmapImage();
+                image.SetSource(stream);
+                Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
 
-                    var writeableBitmap = new WriteableBitmap(image);
-                    var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
+                var writeableBitmap = new WriteableBitmap(image);
+                var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
 
-                    Image = portableImage;
+                Image = portableImage;
 
-                    Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
-                }
-                catch (Exception)
-                {
-                    ShowLoadingImageFailure();
-                }
+                Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
+            }
+            catch (Exception)
+            {
+                ShowLoadingImageFailure();
             }
         }
 
         private void ShowLoadingImageFailure()
         {
-            var message = new DialogMessage(AppResources.Editor_MessageBoxWrongImageFormatText, WrongImageFormatResult)
-            {
-                Button = MessageBoxButton.OK,
-                Caption = AppResources.Editor_MessageBoxWrongImageFormatHeader
-            };
-            Messenger.Default.Send(message);
+            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Editor_MessageBoxWrongImageFormatHeader,
+                AppResources.Editor_MessageBoxWrongImageFormatText, WrongImageFormatResult, MessageBoxOptions.Ok);
         }
 
-        private void WrongImageFormatResult(MessageBoxResult result)
+        private void WrongImageFormatResult(MessageboxResult result)
         {
             ServiceLocator.NavigationService.NavigateBack();
         }

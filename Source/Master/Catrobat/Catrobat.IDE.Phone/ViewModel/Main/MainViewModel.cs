@@ -38,7 +38,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
         private string _previousFilterText = "";
         private bool _isLoadingOnlineProjects;
         private bool _isActivatingLocalProject;
-        private MessageBoxResult _dialogResult;
+        private MessageboxResult _dialogResult;
         private string _deleteProjectName;
         private string _copyProjectName;
         private Project _currentProject;
@@ -269,26 +269,16 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
         {
             _deleteProjectName = projectName;
 
-            var message = new DialogMessage(String.Format(AppResources.Main_MainDeleteProjectDialogMessage, projectName), DeleteProjectMessageCallback)
-            {
-                Button = MessageBoxButton.OKCancel,
-                Caption = AppResources.Main_MainDeleteProjectDialogTitle
-            };
-
-            Messenger.Default.Send(message);
+            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_MainDeleteProjectDialogTitle,
+                String.Format(AppResources.Main_MainDeleteProjectDialogMessage, projectName), DeleteProjectMessageCallback, MessageBoxOptions.OkCancel);
         }
 
         private void CopyLocalProjectAction(string projectName)
         {
             _copyProjectName = projectName;
 
-            var message = new DialogMessage(String.Format(AppResources.Main_MainCopyProjectDialogMessage, projectName), CopyProjectMessageCallback)
-            {
-                Button = MessageBoxButton.OKCancel,
-                Caption = AppResources.Main_MainCopyProjectDialogTitle
-            };
-
-            Messenger.Default.Send(message);
+            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_MainCopyProjectDialogTitle,
+                String.Format(AppResources.Main_MainCopyProjectDialogMessage, projectName), CopyProjectMessageCallback, MessageBoxOptions.OkCancel);
         }
 
         private void PinLocalProjectAction(ProjectDummyHeader project)
@@ -346,20 +336,14 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
                     {
                         XmlParserTempProjectHelper.Project = CurrentProject;
 
-                        var message = new DialogMessage(String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName),
-                            new Action<MessageBoxResult>(delegate
+                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_SelectedProjectNotValidMessage, 
+                            String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName), new Action<MessageboxResult>(delegate
                                 {
                                     Deployment.Current.Dispatcher.BeginInvoke(() =>
                                     {
                                         IsActivatingLocalProject = false;
                                     });
-                                }))
-                        {
-                            Button = MessageBoxButton.OK,
-                            Caption = AppResources.Main_SelectedProjectNotValidMessage
-                        };
-
-                        Messenger.Default.Send(message);
+                                }), MessageBoxOptions.Ok);
                     }
                 });
             });
@@ -535,11 +519,11 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             }
         }
 
-        private void DeleteProjectMessageCallback(MessageBoxResult result)
+        private void DeleteProjectMessageCallback(MessageboxResult result)
         {
             _dialogResult = result;
 
-            if (_dialogResult == MessageBoxResult.OK)
+            if (_dialogResult == MessageboxResult.Ok)
             {
                 using (var storage = StorageSystem.GetStorage())
                 {
@@ -564,11 +548,11 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             }
         }
 
-        private void CopyProjectMessageCallback(MessageBoxResult result)
+        private void CopyProjectMessageCallback(MessageboxResult result)
         {
             _dialogResult = result;
 
-            if (_dialogResult == MessageBoxResult.OK)
+            if (_dialogResult == MessageboxResult.Ok)
             {
                 if (_copyProjectName == CurrentProject.ProjectHeader.ProgramName)
                     CurrentProject.Save();

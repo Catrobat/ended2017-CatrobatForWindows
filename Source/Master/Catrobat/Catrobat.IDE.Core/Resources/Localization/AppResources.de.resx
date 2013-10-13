@@ -250,7 +250,7 @@
     <value>Stoppe alle Klänge</value>
   </data>
   <data name="Brick_Times" xml:space="preserve">
-    <value>mal</value>
+    <value>Mal</value>
   </data>
   <data name="Brick_TurnLeft" xml:space="preserve">
     <value>Drehe links</value>
@@ -436,7 +436,7 @@
     <value>Aufnahme</value>
   </data>
   <data name="Editor_SavingImage" xml:space="preserve">
-    <value>Bild wird gespeichert</value>
+    <value>Bild speichern...</value>
   </data>
   <data name="Editor_Selected" xml:space="preserve">
     <value>ausgewählt</value>
@@ -739,10 +739,10 @@
     <value>Sonst</value>
   </data>
   <data name="Brick_IfLogicBeginTrue" xml:space="preserve">
-    <value>wahr, dann</value>
+    <value>wahr ist, dann</value>
   </data>
   <data name="Brick_IfLogicBegin" xml:space="preserve">
-    <value>Wenn</value>
+    <value>Falls</value>
   </data>
   <data name="Brick_ChangeVariableBy" xml:space="preserve">
     <value>um</value>
@@ -904,5 +904,35 @@
   </data>
   <data name="Main_ProjectGettingActivated" xml:space="preserve">
     <value>Projekt wird aktiviert.</value>
+  </data>
+  <data name="Brick_ForeverLoopEnd" xml:space="preserve">
+    <value>Wiederholen beenden</value>
+  </data>
+  <data name="Main_ReallyCloseApplicationCaption" xml:space="preserve">
+    <value>Programm schließen</value>
+  </data>
+  <data name="Main_ReallyCloseApplicationText" xml:space="preserve">
+    <value>Programm wirklich schließen?</value>
+  </data>
+  <data name="Editor_ClickPlusToAddAction" xml:space="preserve">
+    <value>Drücke '+' um eine neue Aktion hinzuzufügen.</value>
+  </data>
+  <data name="Editor_ClickPlusToAddCostume" xml:space="preserve">
+    <value>Drücke '+' um ein neues Kostüm hinzuzufügen.</value>
+  </data>
+  <data name="Editor_ClickPlusToAddSound" xml:space="preserve">
+    <value>Drücke '+' um einen neuen Klang hinzuzufügen.</value>
+  </data>
+  <data name="Editor_ImageEditingProgram" xml:space="preserve">
+    <value>Bildbearbeitungsprogramm</value>
+  </data>
+  <data name="Editor_Recorded" xml:space="preserve">
+    <value>Aufnahme</value>
+  </data>
+  <data name="Editor_ResizeImage" xml:space="preserve">
+    <value>Bildgröße ändern</value>
+  </data>
+  <data name="Editor_Sec" xml:space="preserve">
+    <value>Sek.</value>
   </data>
 </root>

@@ -81,15 +81,23 @@
                 </Ellipse.RenderTransform>-->
             </Ellipse>
           </Grid>
-          <TextBlock Grid.Column="1" Text="Recorded" Margin="0 0 5 0" VerticalAlignment="Top" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
+          <TextBlock Grid.Column="1" 
+                     Text="{Binding Resources.Editor_Recorded, Source={StaticResource LocalizedStrings}}" 
+                     Margin="0 0 5 0" 
+                     VerticalAlignment="Top" 
+                     Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
           <Grid Grid.Column="2" Margin="0 0 0 0" VerticalAlignment="Top">
             <Grid.RowDefinitions>
               <RowDefinition/>
               <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{Binding RecordingTime, Mode=OneWay, Converter={StaticResource DoubleStringConverter}, ConverterParameter={StaticResource TimeFormat}}" 
-                       FontSize="45" FontFamily="Cordia New"  Margin="0 0 5 0" 
-                       VerticalAlignment="Center" HorizontalAlignment="Right" TextAlignment="Right" 
+            <TextBlock Grid.Row="0" 
+                       Text="{Binding RecordingTime, Mode=OneWay, Converter={StaticResource DoubleStringConverter}, ConverterParameter={StaticResource TimeFormat}}" 
+                       FontSize="45" FontFamily="Cordia New" 
+                       Margin="0 0 5 0" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Right" 
+                       TextAlignment="Right" 
                        FontWeight="Bold" Foreground="YellowGreen" 
                        Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
             <TextBlock Grid.Row="1" Text="{Binding PlayingTime, Mode=OneWay, Converter={StaticResource DoubleStringConverter}, ConverterParameter={StaticResource TimeFormat}}" 
@@ -100,7 +108,12 @@
                        Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
           </Grid>
 
-          <TextBlock Grid.Column="3" Text="sec" Margin="0 0 10 0" VerticalAlignment="Top" 
+          <TextBlock Grid.Column="3" 
+                     Text="{Binding Resources.Editor_Sec, Source={StaticResource LocalizedStrings}}" 
+                     Margin="0 0 10 0" 
+                     VerticalAlignment="Top" 
+                     TextWrapping="Wrap"
+                     TextAlignment="Center"
                      FontWeight="ExtraBlack" Style="{StaticResource PhoneTextLargeStyle}"/>
           <c:PlayPauseButton Grid.Column="4" x:Name="PlayButton" 
                              State="{Binding IsPlaying, Mode=OneWay, Converter={StaticResource BoolPlayButtonStateConverter}}" 
@@ -113,7 +126,7 @@
       <Grid Grid.Row="2">
         <Button Grid.Column="0" Width="220" Height="220" Name="ButtonRecord" 
                 Command="{Binding StartRecordingCommand}"
-                Background="{Binding Path=SelectedTheme.AccentColor1, Source={StaticResource ThemeChooser}}">
+                Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}">
           <Grid Width="170" Height="170" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
               <RowDefinition/>

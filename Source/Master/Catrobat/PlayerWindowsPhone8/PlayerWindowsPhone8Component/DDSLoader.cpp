@@ -2,6 +2,8 @@
 #include "DDSLoader.h"
 #include "lodepng.h"
 #include "DDSTextureLoader.h"
+#include "PlayerException.h"
+#include "Helper.h"
 
 #include <D3D11.h>
 
@@ -16,7 +18,7 @@ using namespace DirectX;
 using namespace std;
 
 
-void DDSLoader::ConvertToDDS(vector<unsigned char> image, unsigned int width,  unsigned int height, BYTE **stream, unsigned int *streamSize)
+void DDSLoader::ConvertToDDS(vector<unsigned char> image, unsigned int width, unsigned int height, BYTE **stream, unsigned int *streamSize)
 {
 	// Set HEADER values ---------------------------------------------------------------------------------------
 	DDS_HEADER ddsHeader;
@@ -76,7 +78,7 @@ void DDSLoader::ConvertToDDS(vector<unsigned char> image, unsigned int width,  u
 	WriteDWord(*stream, &byteIndex, ddsHeader.dwHeight);
 	WriteDWord(*stream, &byteIndex, ddsHeader.dwWidth);
 	WriteDWord(*stream, &byteIndex, ddsHeader.dwPitchOrLinearSize);
-    WriteDWord(*stream, &byteIndex, ddsHeader.dwDepth);
+	WriteDWord(*stream, &byteIndex, ddsHeader.dwDepth);
 	WriteDWord(*stream, &byteIndex, ddsHeader.dwMipMapCount);
 	for (unsigned int i = 0; i < 11; i++)
 	{
@@ -96,7 +98,7 @@ void DDSLoader::ConvertToDDS(vector<unsigned char> image, unsigned int width,  u
 	// Write DDS_HEADER 
 	WriteDWord(*stream, &byteIndex, ddsHeader.dwCaps);
 	WriteDWord(*stream, &byteIndex, ddsHeader.dwCaps2);
-    WriteDWord(*stream, &byteIndex, ddsHeader.dwCaps3);
+	WriteDWord(*stream, &byteIndex, ddsHeader.dwCaps3);
 	WriteDWord(*stream, &byteIndex, ddsHeader.dwCaps4);
 	WriteDWord(*stream, &byteIndex, ddsHeader.dwReserved2);
 
@@ -110,7 +112,7 @@ void DDSLoader::WriteDWord(BYTE *stream, int *byteIndex, DWORD dword)
 {
 	BYTE data4 = dword & 0x000000FF;
 	dword = dword >> 8;
-	BYTE data3= dword & 0x000000FF;
+	BYTE data3 = dword & 0x000000FF;
 	dword = dword >> 8;
 	BYTE data2 = dword & 0x000000FF;
 	dword = dword >> 8;
@@ -126,9 +128,27 @@ void DDSLoader::LoadTexture(ID3D11Device* d3dDevice, string filename, ID3D11Shad
 	std::vector<unsigned char> image; //the raw pixels
 	unsigned error = lodepng::decode(image, *width, *height, filename);
 
-	BYTE *stream = nullptr;
-	unsigned int streamSize;
-	ConvertToDDS(image, *width, *height, &stream, &streamSize);
-	CreateDDSTextureFromMemory(d3dDevice, stream, streamSize, nullptr, texture, MAXSIZE_T);
+	switch (error)
+	{
+	case 0:
+		{
+			BYTE *stream = nullptr;
+			unsigned int streamSize;
+			ConvertToDDS(image, *width, *height, &stream, &streamSize);
+			CreateDDSTextureFromMemory(d3dDevice, stream, streamSize, nullptr, texture, MAXSIZE_T);
+			break;
+		}
+	case 48:
+		{
+			throw new PlayerException("LodePNG Error. Texture not found. Invalid Path.");
+			break;
+		}
+	default:
+		{
+			throw new PlayerException("LodePNG Error. Error code: " + Helper::ConvertPlatformStringToString(error.ToString()));
+			break;
+		}
+		break;
+	}
 }
 

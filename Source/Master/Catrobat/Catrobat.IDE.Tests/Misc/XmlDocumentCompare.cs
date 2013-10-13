@@ -15,9 +15,9 @@ namespace Catrobat.IDE.Tests.Misc
             var expectedElements = expected.Elements().ToArray();
             var actualElements = actual.Elements().ToArray();
 
-            Assert.AreEqual(expectedElements.Count(), actualElements.Count());
+            Assert.AreEqual(expectedElements.Length, actualElements.Length);
 
-            for (int i = 0; i < expectedElements.Count(); i++)
+            for (var i = 0; i < expectedElements.Count(); i++)
             {
                 CompareElement(expectedElements[i], actualElements[i]);
             }
@@ -30,9 +30,9 @@ namespace Catrobat.IDE.Tests.Misc
             var expectedAttributes = expectedElement.Attributes().ToArray();
             var actualAttributes = actualElement.Attributes().ToArray();
 
-            //Assert.AreEqual(expectedAttributes.Count(), actualAttributes.Count());
+            Assert.AreEqual(expectedAttributes.Length, actualAttributes.Length);
 
-            for (int i = 0; i < expectedAttributes.Count(); i++)
+            for (var i = 0; i < expectedAttributes.Count(); i++)
             {
                 Assert.AreEqual(expectedAttributes[i].Name, actualAttributes[i].Name);
             }
@@ -40,7 +40,9 @@ namespace Catrobat.IDE.Tests.Misc
             var expectedElements = expectedElement.Elements().ToArray();
             var actualElements = actualElement.Elements().ToArray();
 
-            for (int i = 0; i < expectedElements.Count(); i++)
+            Assert.AreEqual(expectedElements.Length, actualElements.Length);
+            
+            for (var i = 0; i < expectedElements.Count(); i++)
             {
                 CompareElement(expectedElements[i], actualElements[i]);
             }

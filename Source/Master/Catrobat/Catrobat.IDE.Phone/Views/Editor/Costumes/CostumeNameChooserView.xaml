@@ -26,9 +26,8 @@
       <RowDefinition />
     </Grid.RowDefinitions>
 
-    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleChooseCostumeName, 
-        Source={StaticResource LocalizedStrings}}" 
+    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 40">
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleChooseCostumeName, Source={StaticResource LocalizedStrings}}" 
                  Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
     </StackPanel>
 
@@ -47,7 +46,9 @@
         <RowDefinition/>
         <RowDefinition/>
       </Grid.RowDefinitions>
-      <TextBlock Grid.Row="0" Margin="10 0 10 0" Text="resize image"></TextBlock>
+      <TextBlock Grid.Row="0" Margin="10 0 10 0" 
+                 Text="{Binding Resources.Editor_ResizeImage, Source={StaticResource LocalizedStrings}}"
+                 Style="{StaticResource PhoneTextSmallStyle}" />
       <ListBox Grid.Row="1"  Margin="30 0 30 0" 
                ItemsSource="{Binding ImageSizes}" 
                SelectedItem="{Binding SelectedSize, Mode=TwoWay}">
@@ -81,7 +82,7 @@
                   <ColumnDefinition Width="3*"/>
                   <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Grid.Column="0" Grid.Row="0" Margin="7 7 0 0" Fill="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1}"></Rectangle>
+                <Rectangle Grid.Column="0" Grid.Row="0" Margin="7 7 0 0" Fill="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1.NativeBrush}"></Rectangle>
 
                 <StackPanel Grid.Row="0" Grid.Column="0"  
                             VerticalAlignment="Center" HorizontalAlignment="Center" 

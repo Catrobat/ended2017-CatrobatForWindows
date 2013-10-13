@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Phone.Converters;
-using Catrobat.IDE.Phone.Themes;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
 namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter

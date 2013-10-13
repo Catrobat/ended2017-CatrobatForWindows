@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using Catrobat.IDE.Phone.Themes;
+using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Phone.ViewModel.Settings;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;

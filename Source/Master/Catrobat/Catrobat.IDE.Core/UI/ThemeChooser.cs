@@ -1,10 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Media;
-using Catrobat.IDE.Phone.Annotations;
+using Catrobat.IDE.Core.Annotations;
+using Catrobat.IDE.Core.Services.Data;
 
-namespace Catrobat.IDE.Phone.Themes
+namespace Catrobat.IDE.Core.UI
 {
     public class ThemeChooser : INotifyPropertyChanged
     {
@@ -57,29 +57,29 @@ namespace Catrobat.IDE.Phone.Themes
             var theme1 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/empty_background.png",
                                    "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/empty_background.png")
             {
-                AccentColor1 = new SolidColorBrush(Colors.Purple),
-                AccentColor2 = new SolidColorBrush(Colors.Green),
-                AccentColor3 = new SolidColorBrush(Colors.Orange),
-                AppBarColor = new SolidColorBrush(Color.FromArgb(255,50,50,50))
+                AccentColor1 = new PortableSolidColorBrush(255, 128, 0, 128),
+                AccentColor2 = new PortableSolidColorBrush(255, 0, 128, 0),
+                AccentColor3 = new PortableSolidColorBrush(255, 155, 165, 0),
+                AppBarColor = new PortableSolidColorBrush(255, 50, 50, 50)
             };
 
 
-            var theme2 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_blue",
+            var theme2 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_blue.png",
                                    "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/MainViewPanorama_cats_blue_small.png")
             {
-                AccentColor1 = new SolidColorBrush(Colors.Purple),
-                AccentColor2 = new SolidColorBrush(Colors.Green),
-                AccentColor3 = new SolidColorBrush(Colors.Orange),
-                AppBarColor = new SolidColorBrush(Color.FromArgb(255, 50, 50, 50))
+                AccentColor1 = new PortableSolidColorBrush(255, 128, 0, 128),
+                AccentColor2 = new PortableSolidColorBrush(255, 0, 128, 0),
+                AccentColor3 = new PortableSolidColorBrush(255, 155, 165, 0),
+                AppBarColor = new PortableSolidColorBrush(255, 50, 50, 50)
             };
 
-            var theme3 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_pink",
+            var theme3 = new Theme("/Content/Images/Application/MainViewPanoramaBackgrounds/MainViewPanorama_cats_pink.png",
                                    "/Content/Images/Application/MainViewPanoramaBackgrounds/CroppedImages/MainViewPanorama_cats_pink_small.png")
             {
-                AccentColor1 = new SolidColorBrush(Colors.Purple),
-                AccentColor2 = new SolidColorBrush(Colors.Green),
-                AccentColor3 = new SolidColorBrush(Colors.Orange),
-                AppBarColor = new SolidColorBrush(Color.FromArgb(255, 50, 50, 50))
+                AccentColor1 = new PortableSolidColorBrush(255, 128, 0, 128),
+                AccentColor2 = new PortableSolidColorBrush(255, 0, 128, 0),
+                AccentColor3 = new PortableSolidColorBrush(255, 155, 165, 0),
+                AppBarColor = new PortableSolidColorBrush(255, 50, 50, 50)
             };
 
 

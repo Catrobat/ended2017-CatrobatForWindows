@@ -102,7 +102,6 @@
       <SubType>
       </SubType>
     </Compile>
-    <Compile Include="Bootstrap\PictureChooserPluginBootstrap.cs" />
     <Compile Include="Controls\AppBar\EditorAppBar.xaml.cs">
       <DependentUpon>EditorAppBar.xaml</DependentUpon>
     </Compile>
@@ -112,7 +111,6 @@
       <DependentUpon>PlayPauseButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Buttons\PlayPauseButtonGroup.cs" />
-    <Compile Include="Controls\Buttons\PlayPauseStateCommandArguments.cs" />
     <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
     <Compile Include="Controls\Buttons\SettingsButton.cs" />
     <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
@@ -141,7 +139,6 @@
     <Compile Include="Controls\FormulaControls\VariableButton.xaml.cs">
       <DependentUpon>VariableButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FormulaControls\VariableConteiner.cs" />
     <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
       <DependentUpon>ListPicker.xaml</DependentUpon>
     </Compile>
@@ -182,10 +179,13 @@
     <Compile Include="Converters\VariableEditVisibilityConverter.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ColorConversionServicePhone.cs" />
     <Compile Include="Services\CultureServicePhone.cs" />
     <Compile Include="Services\ImageResizeServicePhone.cs" />
     <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
     <Compile Include="Services\NavigationServicePhone.cs" />
+    <Compile Include="Services\NotificationServicePhone.cs" />
+    <Compile Include="Services\PictureServicePhone.cs" />
     <Compile Include="Services\PlayerLauncherServicePhone.cs" />
     <Compile Include="Services\ServerCommunicationServicePhone.cs" />
     <Compile Include="Services\SoundPlayerServicePhone.cs" />
@@ -196,9 +196,6 @@
     <Compile Include="Services\Storage\StoragePhone.cs" />
     <Compile Include="Services\SystemInformationServicePhone.cs" />
     <Compile Include="Setup.cs" />
-    <Compile Include="Themes\ColorChooser.cs" />
-    <Compile Include="Themes\Theme.cs" />
-    <Compile Include="Themes\ThemeChooser.cs" />
     <Compile Include="Utilities\AssociationUriMapper.cs" />
     <Compile Include="Utilities\ProjectImporter.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
@@ -684,10 +681,9 @@
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\CroppedImages\MainViewPanorama_cats_pink_small.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\CroppedImages\MainViewPanorama_strings_small.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\empty_background.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_blue_800.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_pink_800.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_1280.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_800.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_blue.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_pink.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings.png" />
     <Content Include="Content\Images\Application\Search.png" />
     <Content Include="Content\Images\ImageButtons\add_dark.png" />
     <Content Include="Content\Images\ImageButtons\add_light.png" />
@@ -733,12 +729,6 @@
     <Reference Include="Cirrious.MvvmCross.Localization">
       <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\sl4-wp71\Cirrious.MvvmCross.Localization.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross.Plugins.PictureChooser">
-      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.PictureChooser.3.0.13\lib\sl4-wp71\Cirrious.MvvmCross.Plugins.PictureChooser.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone">
-      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.PictureChooser.3.0.13\lib\sl4-wp71\Cirrious.MvvmCross.Plugins.PictureChooser.WindowsPhone.dll</HintPath>
-    </Reference>
     <Reference Include="Cirrious.MvvmCross.WindowsPhone">
       <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.0.13\lib\sl4-wp71\Cirrious.MvvmCross.WindowsPhone.dll</HintPath>
     </Reference>
@@ -758,6 +748,15 @@
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\MvvmLightLibs.4.1.27.1\lib\wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\wp8\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\wp8\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Phone">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\wp8\Microsoft.Threading.Tasks.Extensions.Phone.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.4.1.27.1\lib\wp8\System.Windows.Interactivity.dll</HintPath>
@@ -797,4 +796,9 @@
   -->
   <ProjectExtensions />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
 </Project>

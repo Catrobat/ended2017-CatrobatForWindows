@@ -38,7 +38,7 @@ void ExceptionLogger::Log(BaseException *exception)
         Helper::ConvertStringToPlatformString(LOGFILE), CreationCollisionOption::OpenIfExists));
 
     auto writer = std::make_shared<Streams::DataWriter^>(nullptr);
-    getFileTask.then([](StorageFile^ file)
+	auto fileTaskComplete = getFileTask.then([](StorageFile^ file)
     {
         EnterCriticalSection(&__crit_section);
         return file->OpenAsync(FileAccessMode::ReadWrite);
@@ -66,7 +66,19 @@ void ExceptionLogger::Log(BaseException *exception)
     {
         delete (*writer);
         LeaveCriticalSection(&__crit_section);
-    });
+	});
+
+	fileTaskComplete.then([this](task<void> t)
+	{
+		try
+		{
+			t.get();
+		}
+		catch (Platform::Exception^ e)
+		{
+			// TODO: Handle
+		}
+	});
 }
 
 void ExceptionLogger::Log(Platform::Exception^ exception)

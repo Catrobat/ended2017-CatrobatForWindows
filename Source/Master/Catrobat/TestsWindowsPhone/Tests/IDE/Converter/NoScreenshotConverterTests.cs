@@ -3,7 +3,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Catrobat.IDE.Phone.Controls.Buttons;
 using Catrobat.IDE.Phone.Converters;
-using Catrobat.IDE.Phone.Themes;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
 namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter

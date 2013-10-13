@@ -175,13 +175,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, "1", sprite);
             var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, sprite);
 
-            var message =
-                new DialogMessage(messageContent, DeleteSpriteMessageBoxResult)
-                {
-                    Button = MessageBoxButton.OKCancel,
-                    Caption = messageHeader
-                };
-            Messenger.Default.Send(message);
+            ServiceLocator.NotifictionService.ShowMessageBox(messageHeader,
+                messageContent, DeleteSpriteMessageBoxResult, MessageBoxOptions.OkCancel);
         }
 
         private void ClearObjectSelectionAction()
@@ -223,9 +218,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         #region MessageBoxResult
 
-        private void DeleteSpriteMessageBoxResult(MessageBoxResult result)
+        private void DeleteSpriteMessageBoxResult(MessageboxResult result)
         {
-            if (result == MessageBoxResult.OK)
+            if (result == MessageboxResult.Ok)
             {
                 var userVariableEntries = CurrentProject.VariableList.ObjectVariableList.ObjectVariableEntries;
                 ObjectVariableEntry entryToRemove = null;

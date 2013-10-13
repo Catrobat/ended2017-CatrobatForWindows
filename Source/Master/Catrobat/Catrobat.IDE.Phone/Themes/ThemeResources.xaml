@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:themes="clr-namespace:Catrobat.IDE.Phone.Themes">
+  xmlns:ui="clr-namespace:Catrobat.IDE.Core.UI;assembly=Catrobat.IDE.Core">
 
 
-  <themes:ThemeChooser x:Key="ThemeChooser" />
+  <ui:ThemeChooser x:Key="ThemeChooser" />
 </ResourceDictionary>
