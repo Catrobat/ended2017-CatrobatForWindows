@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Phone.Controls.Buttons;
 
 namespace Catrobat.IDE.Phone.Converters

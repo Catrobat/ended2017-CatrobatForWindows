@@ -481,13 +481,10 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         private void AddNewScriptBrickAction()
         {
-            //var message1 = new GenericMessage<Sprite>(SelectedSprite);
-            //Messenger.Default.Send<GenericMessage<Sprite>>(message1, ViewModelMessagingToken.SelectedSpriteListener);
-
             var objects = new List<object> { ScriptBricks, ListBoxViewPort };
 
-            var message2 = new GenericMessage<List<Object>>(objects);
-            Messenger.Default.Send<GenericMessage<List<Object>>>(message2, ViewModelMessagingToken.ScriptBrickCollectionListener);
+            var message = new GenericMessage<List<Object>>(objects);
+            Messenger.Default.Send<GenericMessage<List<Object>>>(message, ViewModelMessagingToken.ScriptBrickCollectionListener);
 
             ServiceLocator.NavigationService.NavigateTo(typeof(AddNewScriptView));
         }

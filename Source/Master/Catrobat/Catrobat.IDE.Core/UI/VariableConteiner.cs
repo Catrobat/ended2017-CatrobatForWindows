@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
-namespace Catrobat.IDE.Phone.Controls.FormulaControls
+namespace Catrobat.IDE.Core.UI
 {
     public class VariableConteiner : INotifyPropertyChanged
     {

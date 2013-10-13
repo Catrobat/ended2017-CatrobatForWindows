@@ -2,13 +2,14 @@
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
+using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Phone.Annotations;
 
 namespace Catrobat.IDE.Phone.Controls.Buttons
 {
     public delegate void PlayStateChanged(object sender, PlayPauseButtonState state);
 
-    public partial class PlayPauseButton : INotifyPropertyChanged
+    public partial class PlayPauseButton : INotifyPropertyChanged, IPlayPauseButton
     {
         public event PlayStateChanged PlayStateChanged;
         public event RoutedEventHandler Click;

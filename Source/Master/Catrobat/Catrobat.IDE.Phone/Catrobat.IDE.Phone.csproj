@@ -111,7 +111,6 @@
       <DependentUpon>PlayPauseButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Buttons\PlayPauseButtonGroup.cs" />
-    <Compile Include="Controls\Buttons\PlayPauseStateCommandArguments.cs" />
     <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
     <Compile Include="Controls\Buttons\SettingsButton.cs" />
     <Compile Include="Controls\DynamicDataTemplates\DataTemplateSelector.cs" />
@@ -140,7 +139,6 @@
     <Compile Include="Controls\FormulaControls\VariableButton.xaml.cs">
       <DependentUpon>VariableButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FormulaControls\VariableConteiner.cs" />
     <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
       <DependentUpon>ListPicker.xaml</DependentUpon>
     </Compile>
@@ -776,7 +774,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bootstrap\" />
     <Folder Include="Content\Libs\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
