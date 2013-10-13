@@ -2,6 +2,10 @@
 #include "TextureDaemon.h"
 #include "ProjectDaemon.h"
 #include "DDSLoader.h"
+#include "BaseException.h"
+#include "PlayerException.h"
+
+#include <exception>
 
 using namespace std;
 
@@ -28,15 +32,25 @@ void TextureDaemon::LoadTexture(ID3D11Device *d3dDevice, CatrobatTexture **textu
 {
 	map<string, CatrobatTexture*>::iterator currentTexture;
 	currentTexture = m_textures->find(textureKey);
-	
+
 	if (currentTexture == m_textures->end())
 	{
 		CatrobatTexture *newTexture = new CatrobatTexture();
 		string path = ProjectDaemon::Instance()->GetProjectPath() + "/images/" + textureKey;
-		DDSLoader::LoadTexture(d3dDevice, path, &(newTexture->texture), &(newTexture->width), &(newTexture->height));
-
-		m_textures->insert(pair<string, CatrobatTexture*>(textureKey, newTexture));
-		*texture = newTexture;
+		try
+		{
+			DDSLoader::LoadTexture(d3dDevice, path, &(newTexture->texture), &(newTexture->width), &(newTexture->height));
+			m_textures->insert(pair<string, CatrobatTexture*>(textureKey, newTexture));
+			*texture = newTexture;
+		}
+		catch (PlayerException* e)
+		{
+			*texture = NULL;
+		}
+		catch (Platform::Exception^ e)
+		{
+			*texture = NULL;
+		}
 	}
 	else
 	{

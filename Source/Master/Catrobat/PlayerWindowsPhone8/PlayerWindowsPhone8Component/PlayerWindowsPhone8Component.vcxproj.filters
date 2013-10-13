@@ -181,9 +181,6 @@
     <ClCompile Include="BaseException.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
-    <ClCompile Include="ExceptionLogger.cpp">
-      <Filter>Exceptions</Filter>
-    </ClCompile>
     <ClCompile Include="Helper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
@@ -391,9 +388,6 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="BaseException.h">
-      <Filter>Exceptions</Filter>
-    </ClInclude>
-    <ClInclude Include="ExceptionLogger.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
     <ClInclude Include="Helper.h">

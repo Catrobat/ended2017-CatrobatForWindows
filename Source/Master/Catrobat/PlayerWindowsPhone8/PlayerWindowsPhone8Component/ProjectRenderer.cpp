@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "ProjectRenderer.h"
 #include "ProjectDaemon.h"
+#include "PlayerException.h"
 
+#include <exception>
 ProjectRenderer::ProjectRenderer()
 {
 }

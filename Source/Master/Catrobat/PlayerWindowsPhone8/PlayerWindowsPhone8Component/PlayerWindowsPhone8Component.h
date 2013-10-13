@@ -49,6 +49,7 @@ private:
 	ProjectRenderer^ m_projectRenderer;
 	BasicTimer^ m_timer;
 	Windows::Foundation::Rect m_originalWindowsBounds;
+	bool m_renderingErrorOccured;
 };
 
 }

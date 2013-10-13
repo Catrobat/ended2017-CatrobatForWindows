@@ -2,7 +2,6 @@
 #include "ProjectDaemon.h"
 #include "XMLParser.h"
 #include "Helper.h"
-#include "ExceptionLogger.h"
 #include "XMLParserFatalException.h"
 #include "PlayerException.h"
 #include "Constants.h"
@@ -126,12 +125,10 @@ void ProjectDaemon::OpenProject(Platform::String^ projectName)
 		}
 		catch (BaseException *e)
 		{
-			ExceptionLogger::Instance()->Log(e);
 			this->AddDebug(Helper::ConvertStringToPlatformString(e->GetErrorMessage()));
 		}
 		catch (Exception ^e)
 		{
-			ExceptionLogger::Instance()->Log(e);
 			this->AddDebug(e->Message);
 		}
 	});

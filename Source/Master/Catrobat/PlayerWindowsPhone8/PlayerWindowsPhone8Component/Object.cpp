@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "Object.h"
 #include "ProjectDaemon.h"
+#include "PlayerException.h"
+
+#include <exception>
 
 Object::Object(string name) :
     BaseObject(),

@@ -165,7 +165,6 @@
     <ClInclude Include="DDSLoader.h" />
     <ClInclude Include="BroadcastMessageSender.h" />
     <ClInclude Include="BroadcastMessageListener.h" />
-    <ClInclude Include="ExceptionLogger.h" />
     <ClInclude Include="ForeverBrick.h" />
     <ClInclude Include="FormulaTree.h" />
     <ClInclude Include="FormulaTreeException.h" />
@@ -236,7 +235,6 @@
     <ClCompile Include="DDSLoader.cpp" />
     <ClCompile Include="BroadcastMessageSender.cpp" />
     <ClCompile Include="BroadcastMessageListener.cpp" />
-    <ClCompile Include="ExceptionLogger.cpp" />
     <ClCompile Include="ForeverBrick.cpp" />
     <ClCompile Include="FormulaTree.cpp" />
     <ClCompile Include="FormulaTreeException.cpp" />
