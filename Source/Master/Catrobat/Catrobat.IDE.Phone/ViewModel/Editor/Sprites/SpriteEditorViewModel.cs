@@ -69,10 +69,16 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             {
                 _selectedSprite = value;
 
-                Costumes.CollectionChanged -= CostumesCollectionChanged;
-                Sounds.CollectionChanged -= SoundsCollectionChanged;
-                ScriptBricks.CollectionChanged -= ScriptBricksCollectionChanged;
+                if (_selectedSprite != null)
+                {
+                    Costumes.CollectionChanged -= CostumesCollectionChanged;
+                    Sounds.CollectionChanged -= SoundsCollectionChanged;
+                    ScriptBricks.CollectionChanged -= ScriptBricksCollectionChanged;
 
+                    Costumes.CollectionChanged += CostumesCollectionChanged;
+                    Sounds.CollectionChanged += SoundsCollectionChanged;
+                    ScriptBricks.CollectionChanged += ScriptBricksCollectionChanged;
+                }
 
                 if (_scriptBricks != null && _scriptBricks.Count == 0 && _listBoxViewPort == null)
                     ListBoxViewPort = new ListBoxViewPort(0, 0);
@@ -85,10 +91,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                         ListBoxViewPort.LastVisibleIndex == 0)
                         ListBoxViewPort = new ListBoxViewPort(1, 2);
                 }
-
-                Costumes.CollectionChanged += CostumesCollectionChanged;
-                Sounds.CollectionChanged += SoundsCollectionChanged;
-                ScriptBricks.CollectionChanged += ScriptBricksCollectionChanged;
 
                 RaisePropertyChanged(() => SelectedSprite);
                 RaisePropertyChanged(() => Sounds);
