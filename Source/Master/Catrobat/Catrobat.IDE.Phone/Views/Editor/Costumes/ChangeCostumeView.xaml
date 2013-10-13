@@ -32,21 +32,29 @@
       <TextBlock Margin="0" Text="{Binding Resources.Editor_CostumeName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
       <TextBox Margin="-10 0 10 0" Name="TextBoxCostumeName" Text="{Binding CostumeName, Mode=TwoWay}" HorizontalAlignment="Stretch" TextChanged="TextBoxCostumeName_OnTextChanged" />
     </StackPanel>
-    <Button Grid.Row="2" Margin="0 0 10 10" Name="ButtonEditImage" Command="{Binding EditCostumeCommand}" VerticalAlignment="Top">
+    <Button Grid.Row="2" Margin="0 0 10 10" 
+            Command="{Binding EditCostumeCommand}" 
+            VerticalAlignment="Top">
       <Button.Template>
         <ControlTemplate>
-          <Grid Margin="0 10 0 10" Background="{Binding Path=SelectedTheme.AccentColor2.NativeBrush, Source={StaticResource ThemeChooser}}" HorizontalAlignment="Stretch" Height="120">
+          <Grid Background="{Binding Path=SelectedTheme.AccentColor3.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                    HorizontalAlignment="Stretch" 
+                    Height="140">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="Auto"/>
               <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Image Source="/Content/Images/Misc/EditImage.png" Margin="30 15 15 15"></Image>
-            <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Edit with paint" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+            <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" 
+                           HorizontalAlignment="Left" 
+                           Text="{Binding Resources.Editor_ImageEditingProgram, Source={StaticResource LocalizedStrings}}" 
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
           </Grid>
         </ControlTemplate>
       </Button.Template>
     </Button>
-    
 
     <i:Interaction.Triggers>
       <abu:StateChangedTrigger State="false">

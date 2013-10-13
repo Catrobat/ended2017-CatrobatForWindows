@@ -98,7 +98,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to new....
+        ///   Looks up a localized string similar to New....
         /// </summary>
         public static string Brick_ButtonNew {
             get {
@@ -890,6 +890,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Image editing program.
+        /// </summary>
+        public static string Editor_ImageEditingProgram {
+            get {
+                return ResourceManager.GetString("Editor_ImageEditingProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Image Gallery.
         /// </summary>
         public static string Editor_ImageGallery {
@@ -1169,6 +1178,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recorded.
+        /// </summary>
+        public static string Editor_Recorded {
+            get {
+                return ResourceManager.GetString("Editor_Recorded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recorder.
         /// </summary>
         public static string Editor_Recorder {
@@ -1232,11 +1250,29 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to saving image.
+        ///   Looks up a localized string similar to Resize image.
+        /// </summary>
+        public static string Editor_ResizeImage {
+            get {
+                return ResourceManager.GetString("Editor_ResizeImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving image....
         /// </summary>
         public static string Editor_SavingImage {
             get {
                 return ResourceManager.GetString("Editor_SavingImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sec.
+        /// </summary>
+        public static string Editor_Sec {
+            get {
+                return ResourceManager.GetString("Editor_Sec", resourceCulture);
             }
         }
         

@@ -124,7 +124,7 @@
     <value>broadcast and wait</value>
   </data>
   <data name="Brick_ButtonNew" xml:space="preserve">
-    <value>new...</value>
+    <value>New...</value>
   </data>
   <data name="Brick_CategoryControl" xml:space="preserve">
     <value>Control</value>
@@ -436,7 +436,7 @@
     <value>Recording</value>
   </data>
   <data name="Editor_SavingImage" xml:space="preserve">
-    <value>saving image</value>
+    <value>Saving image...</value>
   </data>
   <data name="Editor_Selected" xml:space="preserve">
     <value>selected</value>
@@ -980,5 +980,17 @@
   </data>
   <data name="Editor_ClickPlusToAddSound" xml:space="preserve">
     <value>Click '+' to add a new sound.</value>
+  </data>
+  <data name="Editor_ImageEditingProgram" xml:space="preserve">
+    <value>Image editing program</value>
+  </data>
+  <data name="Editor_Recorded" xml:space="preserve">
+    <value>Recorded</value>
+  </data>
+  <data name="Editor_ResizeImage" xml:space="preserve">
+    <value>Resize image</value>
+  </data>
+  <data name="Editor_Sec" xml:space="preserve">
+    <value>sec</value>
   </data>
 </root>

@@ -436,7 +436,7 @@
     <value>Aufnahme</value>
   </data>
   <data name="Editor_SavingImage" xml:space="preserve">
-    <value>Bild wird gespeichert</value>
+    <value>Bild speichern...</value>
   </data>
   <data name="Editor_Selected" xml:space="preserve">
     <value>ausgewählt</value>
@@ -922,5 +922,17 @@
   </data>
   <data name="Editor_ClickPlusToAddSound" xml:space="preserve">
     <value>Drücke '+' um einen neuen Klang hinzuzufügen.</value>
+  </data>
+  <data name="Editor_ImageEditingProgram" xml:space="preserve">
+    <value>Bildbearbeitungsprogramm</value>
+  </data>
+  <data name="Editor_Recorded" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Editor_ResizeImage" xml:space="preserve">
+    <value>Bildgröße ändern</value>
+  </data>
+  <data name="Editor_Sec" xml:space="preserve">
+    <value>Sek. aufgenommen</value>
   </data>
 </root>
