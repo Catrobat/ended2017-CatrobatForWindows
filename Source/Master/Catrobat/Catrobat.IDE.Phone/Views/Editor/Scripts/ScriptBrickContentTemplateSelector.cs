@@ -116,6 +116,8 @@ namespace Catrobat.IDE.Phone.Views.Editor.Scripts
 
         public DataTemplate UnknownBrick { get; set; }
 
+        public DataTemplate EmptyDummyBrick { get; set; }
+
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             var scriptBrick = item as DataObject;
@@ -363,6 +365,9 @@ namespace Catrobat.IDE.Phone.Views.Editor.Scripts
 
                 if (scriptBrick is IfLogicEndBrick)
                     return IfLogicEndBrick;
+
+                if (scriptBrick is EmptyDummyBrick)
+                    return EmptyDummyBrick;
 
                 return UnknownBrick;
             }

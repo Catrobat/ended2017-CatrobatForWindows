@@ -30,7 +30,13 @@ namespace Catrobat.IDE.Core.UI
                 }
                 else
                 {
-                    return _scriptEnumerator.Current;
+                    var script = _scriptEnumerator.Current;
+
+                    if (script == null)
+                        return new EmptyDummyBrick();
+
+
+                    return script;
                 }
             }
         }
@@ -51,7 +57,13 @@ namespace Catrobat.IDE.Core.UI
                 }
                 else
                 {
-                    return _scriptEnumerator.Current;
+                    var script = _scriptEnumerator.Current;
+
+                    if (script == null)
+                        return new EmptyDummyBrick();
+
+
+                    return script;
                 }
             }
         }
@@ -70,6 +82,14 @@ namespace Catrobat.IDE.Core.UI
 
                     if (_scriptEnumerator.Current == null)
                     {
+                        bool isLastEmpty = !_wasEmptyItem;
+
+                        if (isLastEmpty)
+                        {
+                            _wasEmptyItem = true;
+                            return true;
+                        }
+
                         return false;
                     }
                     else
@@ -97,5 +117,7 @@ namespace Catrobat.IDE.Core.UI
             _brickEnumerator.Dispose();
             _brickEnumerator = null;
         }
+
+        public bool _wasEmptyItem { get; set; }
     }
 }

@@ -1120,6 +1120,15 @@
       </sb:ScriptBrickContentTemplateSelector.ChangeVariableBrick>
 
 
+      <sb:ScriptBrickContentTemplateSelector.EmptyDummyBrick>
+        <DataTemplate>
+          <Grid Margin="0" Height="75">
+
+          </Grid>
+        </DataTemplate>
+      </sb:ScriptBrickContentTemplateSelector.EmptyDummyBrick>
+
+
     </sb:ScriptBrickContentTemplateSelector>
   </DataTemplate>
 

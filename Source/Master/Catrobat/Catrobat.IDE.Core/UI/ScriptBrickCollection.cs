@@ -222,7 +222,7 @@ namespace Catrobat.IDE.Core.UI
         {
             get
             {
-                return Scripts.Sum(script => script.Bricks.Bricks.Count + 1);
+                return Scripts.Sum(script => script.Bricks.Bricks.Count + 1) + 1;
             }
         }
 

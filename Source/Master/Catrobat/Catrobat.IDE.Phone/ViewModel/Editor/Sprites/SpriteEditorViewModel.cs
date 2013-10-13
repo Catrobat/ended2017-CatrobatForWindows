@@ -80,14 +80,15 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                     ScriptBricks.CollectionChanged += ScriptBricksCollectionChanged;
                 }
 
-                if (_scriptBricks != null && _scriptBricks.Count == 0 && _listBoxViewPort == null)
+                //if (_scriptBricks != null && _scriptBricks.Count == 0 && ListBoxViewPort == null)
                     ListBoxViewPort = new ListBoxViewPort(0, 0);
 
                 if (_scriptBricks != null)
                 {
                     _scriptBricks.Update(_selectedSprite);
 
-                    if (_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 &&
+                    if (_scriptBricks.Count > 0 &&
+                        ListBoxViewPort.FirstVisibleIndex == 0 &&
                         ListBoxViewPort.LastVisibleIndex == 0)
                         ListBoxViewPort = new ListBoxViewPort(1, 2);
                 }
