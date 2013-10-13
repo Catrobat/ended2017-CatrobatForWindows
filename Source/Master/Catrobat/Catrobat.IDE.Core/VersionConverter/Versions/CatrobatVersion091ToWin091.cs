@@ -60,7 +60,7 @@ namespace Catrobat.IDE.Core.VersionConverter.Versions
             ResolveReferencesToReferences(document);
             UnifyForeverBrickReferences(document);
             UnifyRepeatBrickReferences(document);
-            UnifyIfLogicBeginBrickReferences(document);
+            UnifyIfLogicBeginBrickReferences(document.Descendants("brickList").ToList());
 
             ConvertRemoveElements(document);
             ConvertRemoveProperties(document);
@@ -78,29 +78,11 @@ namespace Catrobat.IDE.Core.VersionConverter.Versions
             SwapCrossReferences(document, loopEndlessBricks);
         }
 
-        private void UnifyIfLogicBeginBrickReferences(XDocument document)
+        private static void UnifyIfLogicBeginBrickReferences(List<XElement> rootElements)
         {
-            var ifBricks = document.Descendants("brickList").Descendants("ifBeginBrick").ToList();
-            foreach(var ifBrick in ifBricks)
-                ifBrick.Remove();
-
-            var elseBricks = document.Descendants("brickList").Descendants("ifElseBrick").ToList();
-            foreach (var elseBrick in elseBricks)
-                elseBrick.Remove();
-
-            var endBricks = document.Descendants("brickList").Descendants("ifEndBrick").ToList();
-            foreach (var endBrick in endBricks)
-                endBrick.Remove();
-
-            // TODO: remove code above and replace with working code for if handling
-
-            //var elseBricks = document.Descendants("brickList").Descendants("ifLogicElseBrick").ToList();
-            //SwapCrossReferences(document, elseBricks);
-            //RemoveSelfReferences(document);
-
-            //var endBricks = document.Descendants("brickList").Descendants("ifLogicEndBrick").ToList();
-            //SwapCrossReferences(document, endBricks);
-            //RemoveSelfReferences(document);
+            var ifElseBricks = rootElements.Descendants("ifElseBrick");
+            var ifEndBricks = rootElements.Descendants("ifEndBrick");
+            SwapDefinitionsToLastReference(rootElements, ifElseBricks.Concat(ifEndBricks));
         }
 
         protected void SwapReferencesInList(XDocument document, List<XElement> listNodes)
@@ -188,6 +170,80 @@ namespace Catrobat.IDE.Core.VersionConverter.Versions
 
                 referencedElement.RemoveNodes();
             }
+        }
+
+        protected static void SwapDefinitionsToLastReference(List<XElement> rootElements, IEnumerable<XElement> elementsToSwap)
+        {
+            // definition <=> no reference attribute
+            elementsToSwap = elementsToSwap.Where(element => !element.HasAttribute("reference"));
+
+            while (true)
+            {
+                // run query every time because elements may have been moved
+                var nextDefinition = elementsToSwap.
+                    Select(elementToSwap => new
+                    {
+                        OldDefinition = elementToSwap,
+                        NewDefinition = rootElements.Descendants().
+                            Where(element =>
+                            {
+                                var referenceAttribute = element.Attribute("reference");
+                                return referenceAttribute != null &&
+                                       XPathHelper.GetElement(element, referenceAttribute.Value) == elementToSwap;
+                            }).LastOrDefault()
+                    }).
+                    FirstOrDefault(definitions => definitions.OldDefinition != definitions.NewDefinition);
+
+                if (nextDefinition == null) break;
+                MoveNodes(rootElements, nextDefinition.OldDefinition, nextDefinition.NewDefinition);
+            }
+        }
+
+        protected static void MoveNodes(List<XElement> rootElements, XElement elementFrom, XElement elementTo)
+        {
+            // copy elements and attributes
+            elementTo.ReplaceNodes(elementFrom.Nodes());
+            elementTo.Attribute("reference").Remove();
+
+            var movedElements = elementFrom.DescendantsAndSelf().
+                Zip(elementTo.DescendantsAndSelf(), (oldElement, newElement) => new
+                {
+                    OldElement = oldElement,
+                    NewElement = newElement
+                }).ToList();
+
+            // update references of moved elements
+            var movedReferenceElements = movedElements.
+                Where(movedElement => movedElement.NewElement.HasAttribute("reference")).
+                ToList();
+            foreach (var movedElement in movedReferenceElements)
+            {
+                var referenceAttribute = movedElement.NewElement.Attribute("reference");
+                var referenceTarget = XPathHelper.GetElement(movedElement.OldElement, referenceAttribute.Value);
+                referenceAttribute.SetValue(XPathHelper.GetXPath(movedElement.NewElement, referenceTarget));
+
+            }
+
+            // update references to moved elements
+            var outdatedReferenceElements = rootElements.Descendants().
+                Where(element => element.HasAttribute("reference")).
+                Join(movedElements,
+                outerKeySelector: referenceElement => XPathHelper.GetElement(referenceElement, referenceElement.Attribute("reference").Value),
+                innerKeySelector: movedElement => movedElement.OldElement,
+                resultSelector: (referenceElement, movedElement) => new
+                {
+                    ReferenceElement = referenceElement,
+                    NewTarget = movedElement.NewElement
+                }).ToList();
+            foreach (var outdatedElement in outdatedReferenceElements)
+            {
+                var referenceAttribute = outdatedElement.ReferenceElement.Attribute("reference");
+                referenceAttribute.SetValue(XPathHelper.GetXPath(outdatedElement.ReferenceElement, outdatedElement.NewTarget));
+            }
+
+            elementFrom.RemoveNodes();
+            elementFrom.SetAttributeValue("reference", XPathHelper.GetXPath(elementFrom, elementTo));
+
         }
 
         protected void RemoveSelfReferences(XDocument document)
@@ -348,4 +404,15 @@ namespace Catrobat.IDE.Core.VersionConverter.Versions
 
         #endregion
     }
+
+    public static class XElementExtensions
+    {
+
+        public static bool HasAttribute(this XElement element, string name)
+        {
+            return element.Attribute(name) != null;
+        }
+
+    }
+
 }
