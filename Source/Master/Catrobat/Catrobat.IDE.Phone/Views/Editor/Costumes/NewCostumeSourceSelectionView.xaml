@@ -79,7 +79,7 @@
                 <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" 
                            HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_ImageEditingProgram, Source={StaticResource LocalizedStrings}}" 
-                           TextAlignment="Center"
+                           TextAlignment="Left"
                            TextWrapping="Wrap"
                            Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
               </Grid>
