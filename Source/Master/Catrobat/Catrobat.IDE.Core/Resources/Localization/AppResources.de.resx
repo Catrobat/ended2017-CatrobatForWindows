@@ -914,4 +914,13 @@
   <data name="Main_ReallyCloseApplicationText" xml:space="preserve">
     <value>Programm wirklich schließen?</value>
   </data>
+  <data name="Editor_ClickPlusToAddAction" xml:space="preserve">
+    <value>Drücke '+' um eine neue Aktion hinzuzufügen.</value>
+  </data>
+  <data name="Editor_ClickPlusToAddCostume" xml:space="preserve">
+    <value>Drücke '+' um ein neues Kostüm hinzuzufügen.</value>
+  </data>
+  <data name="Editor_ClickPlusToAddSound" xml:space="preserve">
+    <value>Drücke '+' um einen neuen Klang hinzuzufügen.</value>
+  </data>
 </root>

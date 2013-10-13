@@ -64,13 +64,15 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         public Sprite SelectedSprite
         {
-            get
-            {
-                return _selectedSprite;
-            }
+            get { return _selectedSprite; }
             set
             {
                 _selectedSprite = value;
+
+                Costumes.CollectionChanged -= CostumesCollectionChanged;
+                Sounds.CollectionChanged -= SoundsCollectionChanged;
+                ScriptBricks.CollectionChanged -= ScriptBricksCollectionChanged;
+
 
                 if (_scriptBricks != null && _scriptBricks.Count == 0 && _listBoxViewPort == null)
                     ListBoxViewPort = new ListBoxViewPort(0, 0);
@@ -79,9 +81,14 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                 {
                     _scriptBricks.Update(_selectedSprite);
 
-                    if (_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 && ListBoxViewPort.LastVisibleIndex == 0)
+                    if (_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 &&
+                        ListBoxViewPort.LastVisibleIndex == 0)
                         ListBoxViewPort = new ListBoxViewPort(1, 2);
                 }
+
+                Costumes.CollectionChanged += CostumesCollectionChanged;
+                Sounds.CollectionChanged += SoundsCollectionChanged;
+                ScriptBricks.CollectionChanged += ScriptBricksCollectionChanged;
 
                 RaisePropertyChanged(() => SelectedSprite);
                 RaisePropertyChanged(() => Sounds);
@@ -98,6 +105,16 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             }
         }
 
+        public bool IsScirptBricksEmpty
+        {
+            get
+            {
+                if (_scriptBricks == null)
+                    return true;
+                return _scriptBricks.Count == 0;
+            }
+        }
+
         public ObservableCollection<Sound> Sounds
         {
             get
@@ -107,12 +124,15 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
                 return null;
             }
-            set
-            {
-                if (value == _selectedSprite.Sounds.Sounds) return;
-                _selectedSprite.Sounds.Sounds = value;
+        }
 
-                RaisePropertyChanged(() => Sounds);
+        public bool IsSoundsEmpty
+        {
+            get
+            {
+                if (_selectedSprite == null || _selectedSprite.Sounds.Sounds == null)
+                    return true;
+                return _selectedSprite.Sounds.Sounds.Count == 0;
             }
         }
 
@@ -124,6 +144,16 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                     return _selectedSprite.Costumes.Costumes;
                 
                 return null;
+            }
+        }
+
+        public bool IsCostumesEmpty
+        {
+            get
+            {
+                if (_selectedSprite == null || _selectedSprite.Costumes.Costumes == null)
+                    return true;
+                return _selectedSprite.Costumes.Costumes.Count == 0;
             }
         }
 
@@ -144,7 +174,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
         {
             get { return CurrentProject.BroadcastMessages; }
         }
-
 
         public int SelectedPivotIndex
         {
@@ -820,6 +849,21 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                 ViewModelMessagingToken.BroadcastMessageListener, ReceiveNewBroadcastMessageAction);
             Messenger.Default.Register<GenericMessage<DataObject>>(this, 
                 ViewModelMessagingToken.SelectedBrickListener, ReceiveSelectedBrickMessageAction);
+        }
+
+        private void ScriptBricksCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            RaisePropertyChanged(() => IsScirptBricksEmpty);
+        }
+
+        private void CostumesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            RaisePropertyChanged(() => IsCostumesEmpty);
+        }
+
+        private void SoundsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            RaisePropertyChanged(() => IsSoundsEmpty);
         }
 
         private void SelectedScriptsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)

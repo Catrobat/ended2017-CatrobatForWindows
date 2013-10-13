@@ -809,6 +809,33 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click &apos;+&apos; to add a new action..
+        /// </summary>
+        public static string Editor_ClickPlusToAddAction {
+            get {
+                return ResourceManager.GetString("Editor_ClickPlusToAddAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click &apos;+&apos; to add a new costume..
+        /// </summary>
+        public static string Editor_ClickPlusToAddCostume {
+            get {
+                return ResourceManager.GetString("Editor_ClickPlusToAddCostume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click &apos;+&apos; to add a new sound..
+        /// </summary>
+        public static string Editor_ClickPlusToAddSound {
+            get {
+                return ResourceManager.GetString("Editor_ClickPlusToAddSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Costume name.
         /// </summary>
         public static string Editor_CostumeName {
