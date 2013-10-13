@@ -18,6 +18,7 @@ public ref class Direct3DBackground sealed : public Windows::Phone::Input::Inter
 {
 public:
 	Direct3DBackground();
+	virtual ~Direct3DBackground();
 
 	Windows::Phone::Graphics::Interop::IDrawingSurfaceBackgroundContentProvider^ CreateContentProvider();
 
@@ -50,6 +51,7 @@ private:
 	BasicTimer^ m_timer;
 	Windows::Foundation::Rect m_originalWindowsBounds;
 	bool m_renderingErrorOccured;
+    bool m_initialized;
 };
 
 }

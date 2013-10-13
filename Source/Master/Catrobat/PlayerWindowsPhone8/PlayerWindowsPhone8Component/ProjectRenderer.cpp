@@ -6,6 +6,12 @@
 #include <exception>
 ProjectRenderer::ProjectRenderer()
 {
+    m_Initialized = false;
+}
+
+ProjectRenderer::~ProjectRenderer()
+{
+    m_Initialized = false;
 }
 
 void ProjectRenderer::CreateDeviceResources() 
@@ -22,16 +28,15 @@ void ProjectRenderer::CreateWindowSizeDependentResources()
 
 void ProjectRenderer::Render()
 {
-	static bool initialized = false;
 
-	if (!initialized)
+	if (!m_Initialized)
 	{	
 		ProjectDaemon::Instance()->ApplyDesiredRenderTargetSizeFromProject();
 		m_spriteBatch = unique_ptr<SpriteBatch>(new SpriteBatch(m_d3dContext.Get()));
 		m_spriteFont = unique_ptr<SpriteFont>(new SpriteFont(m_d3dDevice.Get(), L"italic.spritefont"));
 
 		StartUpTasks();
-		initialized = true;
+		m_Initialized = true;
 	}
 
 	// This code is Generating a Midnightblue Background on our screen

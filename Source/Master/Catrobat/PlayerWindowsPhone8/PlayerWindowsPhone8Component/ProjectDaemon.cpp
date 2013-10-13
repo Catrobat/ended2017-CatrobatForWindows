@@ -28,6 +28,11 @@ ProjectDaemon *ProjectDaemon::Instance()
     return m_instance;
 }
 
+void ProjectDaemon::ReInit()
+{
+    m_instance = new ProjectDaemon();
+}
+
 ProjectDaemon::ProjectDaemon()
 {
     m_finishedLoading = false;

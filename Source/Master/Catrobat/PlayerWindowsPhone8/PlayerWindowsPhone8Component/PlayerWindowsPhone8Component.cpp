@@ -31,6 +31,12 @@ namespace PhoneDirect3DXamlAppComponent
     Direct3DBackground::Direct3DBackground() :
         m_timer(ref new BasicTimer())
     {
+        m_initialized = false;
+    }
+
+    Direct3DBackground::~Direct3DBackground()
+    {
+        m_initialized = false;
     }
 
     IDrawingSurfaceBackgroundContentProvider^ Direct3DBackground::CreateContentProvider()
@@ -158,9 +164,9 @@ namespace PhoneDirect3DXamlAppComponent
 
         // Load Project
 #ifdef _DEBUG
-		
-        ProjectDaemon::Instance()->OpenProject("stoeckchen");
-        //ProjectDaemon::Instance()->OpenProject(ProjectName);
+
+        //ProjectDaemon::Instance()->OpenProject("stoeckchen");
+        ProjectDaemon::Instance()->OpenProject(ProjectName);
 #else
         ProjectDaemon::Instance()->OpenProject(ProjectName);
 #endif
@@ -176,7 +182,6 @@ namespace PhoneDirect3DXamlAppComponent
         m_projectRenderer = nullptr;
     }
 
-    static bool init = false;
     HRESULT Direct3DBackground::PrepareResources(_In_ const LARGE_INTEGER* presentTargetTime, _Inout_ DrawingSurfaceSizeF* desiredRenderTargetSize)
     {
         m_timer->Update();
@@ -184,12 +189,12 @@ namespace PhoneDirect3DXamlAppComponent
         m_projectRenderer->Update(m_timer->Total, m_timer->Delta);
 
         // Save this for later
-        if (!init)
+        if (!m_initialized)
         {
             m_originalWindowsBounds.X = desiredRenderTargetSize->width;
             m_originalWindowsBounds.Y = desiredRenderTargetSize->height;
             ProjectDaemon::Instance()->SetDesiredRenderTargetSize(desiredRenderTargetSize);
-            init = true;
+            m_initialized = true;
         }
 
         return S_OK;
