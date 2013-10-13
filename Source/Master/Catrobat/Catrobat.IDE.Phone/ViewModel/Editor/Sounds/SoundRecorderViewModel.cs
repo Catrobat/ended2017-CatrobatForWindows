@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities.Helpers;
@@ -21,11 +22,11 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
 
         private Project _currentProject;
         private Sprite _receivedSelectedSprite;
-        private Thread _recordTimeUpdateThread;
+        private Task _recordTimeUpdateTask;
         private DateTime _recorderStartTime;
         private TimeSpan _recorderTimeGoneBy;
 
-        private Thread _playerTimeUpdateThread;
+        private Task _playerTimeUpdateTask;
         private DateTime _playerStartTime;
         private TimeSpan _playerTimeGoneBy;
 
@@ -239,7 +240,11 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
                     ServiceLocator.SoundRecorderService.StopRecording();
                     ServiceLocator.SoundRecorderService.StopPlayingRecordedSound();
 
-                    _recordTimeUpdateThread.Abort();
+                    if (ServiceLocator.SoundRecorderService.State == SoundRecorderState.Recording)
+                        ServiceLocator.SoundRecorderService.StopRecording();
+
+                    //_recordTimeUpdateTaskCancellationToken.Cancel();
+                    //_recordTimeUpdateTask.Abort();
 
                     RecordingExists = true;
                 }
@@ -250,19 +255,19 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
                     ServiceLocator.SoundRecorderService.StartRecording();
                     _recorderStartTime = DateTime.UtcNow;
 
-                    _recordTimeUpdateThread = new Thread(delegate(object o)
+                    //_recordTimeUpdateTaskCancellationToken = new CancellationTokenSource();
+
+                    _recordTimeUpdateTask = new Task(delegate()
                         {
                             try
                             {
-                                while (ServiceLocator.SoundRecorderService.State != SoundRecorderState.StoppingRecording)
+                                while (ServiceLocator.SoundRecorderService.State != SoundRecorderState.StoppingRecording &&
+                                    ServiceLocator.SoundRecorderService.State != SoundRecorderState.NoAction)
                                 {
                                     _recorderTimeGoneBy = DateTime.UtcNow - _recorderStartTime;
                                     Deployment.Current.Dispatcher.BeginInvoke(() =>
                                         {
-                                            if (ServiceLocator.SoundRecorderService.State != SoundRecorderState.StoppingRecording)
-                                            {
-                                                RecordingTime = _recorderTimeGoneBy.TotalSeconds;
-                                            }
+                                            RecordingTime = _recorderTimeGoneBy.TotalSeconds;
                                         });
 
                                     Thread.Sleep(45);
@@ -272,9 +277,10 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
                             {
                                 /* Nothing here */
                             }
-                        });
+                        }
+                    );
 
-                    _recordTimeUpdateThread.Start();
+                    _recordTimeUpdateTask.Start();
                 }
             }
 
@@ -304,7 +310,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
                     ServiceLocator.SoundRecorderService.StopRecording();
                     _playerStartTime = DateTime.UtcNow;
                     IsPlaying = true;
-                    _playerTimeUpdateThread = new Thread(delegate(object o)
+
+                    _playerTimeUpdateTask = new Task(delegate()
                         {
                             try
                             {
@@ -338,7 +345,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
                             }
                         });
 
-                    _playerTimeUpdateThread.Start();
+                    _playerTimeUpdateTask.Start();
                     ServiceLocator.SoundRecorderService.PlayRecordedSound();
                 }
             }
@@ -347,7 +354,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
         private void SaveAction()
         {
             SoundName = AppResources.Editor_Recording;
-            ServiceLocator.NavigationService.NavigateTo(typeof (SoundNameChooserView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(SoundNameChooserView));
         }
 
         private void CancelAction()
@@ -372,7 +379,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
 
                     WaveHeaderHelper.WriteHeader(writer.BaseStream, ServiceLocator.SoundRecorderService.SampleRate);
                     var dataBuffer = ServiceLocator.SoundRecorderService.GetSoundAsStream().GetBuffer();
-                    writer.Write(dataBuffer, 0, (int) ServiceLocator.SoundRecorderService.GetSoundAsStream().Length);
+                    writer.Write(dataBuffer, 0, (int)ServiceLocator.SoundRecorderService.GetSoundAsStream().Length);
                     writer.Flush();
                     writer.Close();
                 }
@@ -425,7 +432,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
             CancelNameChosenCommand = new RelayCommand(CancelNameChosenAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-            Messenger.Default.Register<GenericMessage<Sprite>>(this, 
+            Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
@@ -473,19 +480,33 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
             RecordingTime = 0;
             PlayingTime = 0;
 
-            if (_recordTimeUpdateThread != null)
+            if (_recordTimeUpdateTask != null)
             {
-                _recordTimeUpdateThread.Abort();
+                if (ServiceLocator.SoundRecorderService.State == SoundRecorderState.Recording)
+                    ServiceLocator.SoundRecorderService.StopRecording();
+
+                if (ServiceLocator.SoundRecorderService.State == SoundRecorderState.Playing)
+                    ServiceLocator.SoundRecorderService.StopPlayingRecordedSound();
+
+                //_recordTimeUpdateTaskCancellationToken.Cancel();
+                //_recordTimeUpdateTask.Abort();
             }
-            _recordTimeUpdateThread = null;
+            _recordTimeUpdateTask = null;
             _recorderStartTime = new DateTime();
             _recorderTimeGoneBy = new TimeSpan();
 
-            if (_playerTimeUpdateThread != null)
-            {
-                _playerTimeUpdateThread.Abort();
-            }
-            _playerTimeUpdateThread = null;
+            //if (_playerTimeUpdateTask != null)
+            //{
+            //    if (ServiceLocator.SoundRecorderService.State == SoundRecorderState.Recording)
+            //    ServiceLocator.SoundRecorderService.StopRecording();
+
+            //    if (ServiceLocator.SoundRecorderService.State == SoundRecorderState.Playing)
+            //        ServiceLocator.SoundRecorderService.StopPlayingRecordedSound();
+
+            //    //_playerTimeUpdateTaskCancellationToken.Cancel();
+            //    //_playerTimeUpdateTask.Abort();
+            //}
+            _playerTimeUpdateTask = null;
             _playerStartTime = new DateTime();
             _playerTimeGoneBy = new TimeSpan();
         }
