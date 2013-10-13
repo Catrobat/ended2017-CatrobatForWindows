@@ -244,6 +244,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
                         storageFileStream.Close();
                         storageFileStream.Dispose();
 
+
                         var writeableBitmap = new WriteableBitmap(bitmapImage);
                         var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
                             writeableBitmap.PixelHeight);
@@ -254,6 +255,12 @@ namespace Catrobat.IDE.Phone.Services.Storage
             }
 
             return null;
+        }
+
+        public void DeleteImage(string pathToImage)
+        {
+            DeleteFile(pathToImage);
+            DeleteFile(pathToImage + ThumbnailExtension);
         }
 
         public PortableImage LoadImageThumbnail(string pathToImage)
@@ -295,6 +302,9 @@ namespace Catrobat.IDE.Phone.Services.Storage
                             var fileStream = OpenFile(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
                             var writeableBitmap = new WriteableBitmap(thumbnailImage.Width, thumbnailImage.Height);
                             writeableBitmap.FromByteArray(thumbnailImage.Data);
+
+
+                            //writeableBitmap.SaveJpeg(fileStream, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, 0, 95);
                             PNGWriter.WritePNG(writeableBitmap, fileStream, 95);
                         }
 
@@ -328,6 +338,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
             var stream = _iso.OpenFile(path, FileMode.CreateNew, FileAccess.Write);
 
             var writeableBitmap = new WriteableBitmap(image.Width, image.Height);
+            writeableBitmap.FromByteArray(image.Data);
 
             switch (format)
             {
@@ -340,8 +351,6 @@ namespace Catrobat.IDE.Phone.Services.Storage
                 default:
                     throw new ArgumentOutOfRangeException("format");
             }
-
-
         }
 
         public void Dispose()

@@ -318,5 +318,11 @@ namespace Catrobat.IDE.Tests.Misc.Storage
     {
         throw new NotImplementedException();
     }
+
+
+    public void DeleteImage(string pathToImage)
+    {
+        throw new NotImplementedException();
+    }
   }
 }

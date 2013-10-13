@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Xml.Linq;
 using Catrobat.IDE.Core.Services.Data;
 using Catrobat.IDE.Core.Services.Storage;
@@ -53,10 +54,16 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Costumes
                     {
                         using (var storage = StorageSystem.GetStorage())
                         {
-                            _thumbnail = storage.LoadImageThumbnail(XmlParserTempProjectHelper.Project.BasePath + "/images/" + _fileName);
+                            _thumbnail =
+                                storage.LoadImageThumbnail(XmlParserTempProjectHelper.Project.BasePath + "/images/" +
+                                                           _fileName);
                         }
                     }
-                    catch { }
+                    catch
+                    {
+                        if (Debugger.IsAttached)
+                            Debugger.Break();
+                    }
                 }
 
                 return _thumbnail;
@@ -87,9 +94,9 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Costumes
         //    return _thumbnail;
         //  }
         //}
-        
 
-        public Costume() {}
+
+        public Costume() { }
 
         public Costume(string name)
         {
@@ -144,11 +151,11 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Costumes
                 {
                     if (storage.FileExists(path))
                     {
-                        storage.DeleteFile(path);
+                        storage.DeleteImage(path);
                     }
                 }
             }
-            catch {}
+            catch { }
         }
 
         public override bool Equals(DataObject other)

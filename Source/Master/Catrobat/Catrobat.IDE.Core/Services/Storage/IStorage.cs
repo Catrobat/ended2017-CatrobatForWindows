@@ -59,6 +59,8 @@ namespace Catrobat.IDE.Core.Services.Storage
 
         PortableImage CreateThumbnail(PortableImage image);
 
+        void DeleteImage(string pathToImage);
+
         void SaveImage(string path, PortableImage image, bool deleteExisting, ImageFormat format);
 
         string ReadTextFile(string path);
