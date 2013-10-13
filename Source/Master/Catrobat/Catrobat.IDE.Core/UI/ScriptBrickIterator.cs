@@ -5,7 +5,7 @@ using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Bricks;
 using Catrobat.IDE.Core.CatrobatObjects.Scripts;
 
-namespace Catrobat.IDE.Core.CatroatObjects.Scripts
+namespace Catrobat.IDE.Core.UI
 {
     public class ScriptBrickIterator : IEnumerator<DataObject>
     {

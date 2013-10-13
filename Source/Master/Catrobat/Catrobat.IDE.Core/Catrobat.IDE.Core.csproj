@@ -116,8 +116,8 @@
     <Compile Include="CatrobatObjects\ProjectHeader.cs" />
     <Compile Include="CatrobatObjects\Scripts\BroadcastScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\Script.cs" />
-    <Compile Include="CatrobatObjects\Scripts\ScriptBrickCollection.cs" />
-    <Compile Include="CatrobatObjects\Scripts\ScriptBrickIterator.cs" />
+    <Compile Include="UI\ScriptBrickCollection.cs" />
+    <Compile Include="UI\ScriptBrickIterator.cs" />
     <Compile Include="CatrobatObjects\Scripts\ScriptList.cs" />
     <Compile Include="CatrobatObjects\Scripts\StartScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\WhenScript.cs" />
@@ -192,6 +192,7 @@
     <Compile Include="Services\Storage\IStorage.cs" />
     <Compile Include="Services\Storage\IStorageFactory.cs" />
     <Compile Include="Services\Storage\StorageSystem.cs" />
+    <Compile Include="UI\BrickCollection.cs" />
     <Compile Include="UI\ImageSizeEntry.cs" />
     <Compile Include="UI\ImageSizeEntryCollection.cs" />
     <Compile Include="UI\NullItemCollection.cs" />

@@ -18,10 +18,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using Catrobat.IDE.Core.CatroatObjects.Scripts;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Bricks;
 using Catrobat.IDE.Core.CatrobatObjects.Scripts;
+using Catrobat.IDE.Core.UI;
 using Microsoft.Phone.Controls;
 using System.Windows.Controls.Primitives;
 
