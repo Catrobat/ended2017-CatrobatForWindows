@@ -966,4 +966,10 @@
   <data name="Main_ProjectGettingActivated" xml:space="preserve">
     <value>Please wait, while the project is being activated.</value>
   </data>
+  <data name="Main_ReallyCloseApplicationCaption" xml:space="preserve">
+    <value>Close application</value>
+  </data>
+  <data name="Main_ReallyCloseApplicationText" xml:space="preserve">
+    <value>Do you really want to close the application?</value>
+  </data>
 </root>

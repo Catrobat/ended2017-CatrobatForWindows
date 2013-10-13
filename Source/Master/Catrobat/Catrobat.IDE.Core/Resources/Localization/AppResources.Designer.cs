@@ -2384,6 +2384,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close application.
+        /// </summary>
+        public static string Main_ReallyCloseApplicationCaption {
+            get {
+                return ResourceManager.GetString("Main_ReallyCloseApplicationCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you really want to close the application?.
+        /// </summary>
+        public static string Main_ReallyCloseApplicationText {
+            get {
+                return ResourceManager.GetString("Main_ReallyCloseApplicationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry! The selected project could not be opened..
         /// </summary>
         public static string Main_SelectedProjectNotValidHeader {

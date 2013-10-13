@@ -6,8 +6,8 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Phone.ViewModel.Main;
-using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Practices.ServiceLocation;
 
@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Phone.Views.Main
     public partial class MainView : PhoneApplicationPage
     {
         private readonly MainViewModel _viewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-        private int _offsetKnob = 5;
+        private const int _offsetKnob = 5;
 
         public MainView()
         {
@@ -45,21 +45,28 @@ namespace Catrobat.IDE.Phone.Views.Main
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.CanGoBack)
-                Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.RemoveBackEntry();
+            if (Core.Services.ServiceLocator.NavigationService.CanGoBack)
+                Core.Services.ServiceLocator.NavigationService.RemoveBackEntry();
 
-            _viewModel.ShowMessagesCommand.Execute(null);
-
-            base.OnNavigatedTo(e);
+                _viewModel.ShowMessagesCommand.Execute(null);
+                base.OnNavigatedTo(e);
         }
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
             while (NavigationService.CanGoBack)
-                Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.RemoveBackEntry();
+                Core.Services.ServiceLocator.NavigationService.RemoveBackEntry();
 
-            _viewModel.ResetViewModelCommand.Execute(null);
-            base.OnBackKeyPress(e);
+            var result = MessageBox.Show(AppResources.Main_ReallyCloseApplicationText, AppResources.Main_ReallyCloseApplicationCaption,
+                            MessageBoxButton.OKCancel);
+
+            if (result == MessageBoxResult.OK)
+            {
+                _viewModel.ResetViewModelCommand.Execute(null);
+                base.OnBackKeyPress(e);
+            }
+            else
+                e.Cancel = true;
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
