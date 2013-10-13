@@ -155,6 +155,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
 
         private void PictureSuccess(PortableImage image)
         {
+            ServiceLocator.NavigationService.RemoveBackEntry();
+
             Image = image;
             CostumeName = AppResources.Editor_Image;
             Dimention = new ImageDimention { Height = image.Height, Width = image.Width };
@@ -185,7 +187,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
         private void OpenPaintAction()
         {
             ServiceLocator.PictureService.DrawPicture(PictureSuccess, PictureCanceled, PictureError);
-            ServiceLocator.NavigationService.RemoveBackEntry();
 
             //var newBitmap = new WriteableBitmap(
             //    ServiceLocator.SystemInformationService.ScreenWidth, ServiceLocator.SystemInformationService.ScreenHeight);
