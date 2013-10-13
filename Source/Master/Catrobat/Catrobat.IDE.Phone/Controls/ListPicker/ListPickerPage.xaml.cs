@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -44,6 +45,16 @@ namespace Catrobat.IDE.Phone.Controls.ListPicker
             else if (nullItem is Sound)
             {
                 AddViewType = typeof(AddNewSoundView);
+            }
+            else if (nullItem is string)
+            {
+                AddViewType = typeof(NewBroadcastMessageView);
+            }
+            else
+            {
+                // Add new type above
+                if (Debugger.IsAttached)
+                    Debugger.Break();
             }
         }
 

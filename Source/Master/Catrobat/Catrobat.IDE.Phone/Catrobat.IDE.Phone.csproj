@@ -188,6 +188,7 @@
     <Compile Include="Services\PictureServicePhone.cs" />
     <Compile Include="Services\PlayerLauncherServicePhone.cs" />
     <Compile Include="Services\ServerCommunicationServicePhone.cs" />
+    <Compile Include="Services\ShareServicePhone.cs" />
     <Compile Include="Services\SoundPlayerServicePhone.cs" />
     <Compile Include="Services\SoundRecorderServicePhone.cs" />
     <Compile Include="Services\Storage\ResourceLoaderFactoryPhone.cs" />
