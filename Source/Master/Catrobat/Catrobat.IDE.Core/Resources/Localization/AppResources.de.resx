@@ -250,7 +250,7 @@
     <value>Stoppe alle Klänge</value>
   </data>
   <data name="Brick_Times" xml:space="preserve">
-    <value>mal</value>
+    <value>Mal</value>
   </data>
   <data name="Brick_TurnLeft" xml:space="preserve">
     <value>Drehe links</value>
@@ -739,10 +739,10 @@
     <value>Sonst</value>
   </data>
   <data name="Brick_IfLogicBeginTrue" xml:space="preserve">
-    <value>wahr, dann</value>
+    <value>wahr ist, dann</value>
   </data>
   <data name="Brick_IfLogicBegin" xml:space="preserve">
-    <value>Wenn</value>
+    <value>Falls</value>
   </data>
   <data name="Brick_ChangeVariableBy" xml:space="preserve">
     <value>um</value>
@@ -904,5 +904,8 @@
   </data>
   <data name="Main_ProjectGettingActivated" xml:space="preserve">
     <value>Projekt wird aktiviert.</value>
+  </data>
+  <data name="Brick_ForeverLoopEnd" xml:space="preserve">
+    <value>Wiederholen beenden</value>
   </data>
 </root>

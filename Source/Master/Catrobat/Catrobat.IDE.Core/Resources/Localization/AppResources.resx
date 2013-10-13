@@ -187,7 +187,7 @@
     <value>if on edge, bounce</value>
   </data>
   <data name="Brick_RepeatLoopEnd" xml:space="preserve">
-    <value>repeat end</value>
+    <value>end of loop</value>
   </data>
   <data name="Brick_MoveNStepsMove" xml:space="preserve">
     <value>move</value>
@@ -787,13 +787,13 @@
     <value>If</value>
   </data>
   <data name="Brick_IfLogicBeginTrue" xml:space="preserve">
-    <value>true, then</value>
+    <value>is true, then</value>
   </data>
   <data name="Brick_IfLogicElse" xml:space="preserve">
     <value>else</value>
   </data>
   <data name="Brick_IfLogicEnd" xml:space="preserve">
-    <value>else end</value>
+    <value>end if</value>
   </data>
   <data name="Editor_Description" xml:space="preserve">
     <value>description</value>
@@ -856,7 +856,7 @@
     <value>Project not valid</value>
   </data>
   <data name="Brick_ForeverLoopEnd" xml:space="preserve">
-    <value>forever end</value>
+    <value>end of loop</value>
   </data>
   <data name="Formula_Divide" xml:space="preserve">
     <value>/</value>

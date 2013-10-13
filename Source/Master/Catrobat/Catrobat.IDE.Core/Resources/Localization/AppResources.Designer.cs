@@ -260,7 +260,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to forever end.
+        ///   Looks up a localized string similar to end of loop.
         /// </summary>
         public static string Brick_ForeverLoopEnd {
             get {
@@ -323,7 +323,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to true, then.
+        ///   Looks up a localized string similar to is true, then.
         /// </summary>
         public static string Brick_IfLogicBeginTrue {
             get {
@@ -341,7 +341,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to else end.
+        ///   Looks up a localized string similar to end if.
         /// </summary>
         public static string Brick_IfLogicEnd {
             get {
@@ -440,7 +440,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to repeat end.
+        ///   Looks up a localized string similar to end of loop.
         /// </summary>
         public static string Brick_RepeatLoopEnd {
             get {
