@@ -212,7 +212,21 @@ namespace PhoneDirect3DXamlAppComponent
         else
         {
             // Render Project
-            m_projectRenderer->UpdateDevice(device, context, renderTargetView);
+			try
+			{
+				m_projectRenderer->UpdateDevice(device, context, renderTargetView);
+			}
+			catch (PlayerException *e)
+			{
+				m_renderingErrorOccured = true;
+				ProjectDaemon::Instance()->AddDebug(L"Error Updating Device.");
+			}
+			catch (Platform::Exception^ e)
+			{
+				m_renderingErrorOccured = true;
+				ProjectDaemon::Instance()->AddDebug(L"Error Updating Device.");
+			}
+
 			try
 			{
 				m_projectRenderer->Render();
