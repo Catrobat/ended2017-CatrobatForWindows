@@ -176,7 +176,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, sprite);
 
             ServiceLocator.NotifictionService.ShowMessageBox(messageHeader,
-                messageContent, DeleteSpriteMessageBoxResult, MessageBoxOptions.Ok);
+                messageContent, DeleteSpriteMessageBoxResult, MessageBoxOptions.OkCancel);
         }
 
         private void ClearObjectSelectionAction()
