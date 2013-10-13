@@ -140,12 +140,12 @@ void DDSLoader::LoadTexture(ID3D11Device* d3dDevice, string filename, ID3D11Shad
 		}
 	case 48:
 		{
-			throw new PlayerException("LodePNG Error. Texture not found. Invalid Path.");
+			throw new PlayerException("LoadPNG Error. Texture not found. Invalid Path.");
 			break;
 		}
 	default:
 		{
-			throw new PlayerException("LodePNG Error. Error code: " + Helper::ConvertPlatformStringToString(error.ToString()));
+			throw new PlayerException("LoadPNG Error. Error code: " + Helper::ConvertPlatformStringToString(error.ToString()));
 			break;
 		}
 		break;
