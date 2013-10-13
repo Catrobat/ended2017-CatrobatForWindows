@@ -336,6 +336,9 @@ namespace Catrobat.IDE.Core.UI
 
         public void Insert(int index, object value)
         {
+            if (index == Count)
+                index--;
+
             if (PreventIsertOfNext != null && PreventIsertOfNext == value)
             {
                 PreventIsertOfNext = null;

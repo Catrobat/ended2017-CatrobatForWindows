@@ -77,8 +77,11 @@ namespace Catrobat.IDE.Core.UI
                 if (_brickEnumerator.Current == null)
                 {
                     _brickEnumerator.Dispose();
-                    _brickEnumerator = _scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
+
                     _scriptEnumerator.MoveNext();
+
+                    if (_scriptEnumerator.Current != null)
+                        _brickEnumerator = _scriptEnumerator.Current.Bricks.Bricks.GetEnumerator();
 
                     if (_scriptEnumerator.Current == null)
                     {
