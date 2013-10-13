@@ -114,7 +114,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             {
                 if (_scriptBricks == null)
                     return true;
-                return _scriptBricks.Count == 0;
+                return _scriptBricks.Count <= 1;
             }
         }
 
