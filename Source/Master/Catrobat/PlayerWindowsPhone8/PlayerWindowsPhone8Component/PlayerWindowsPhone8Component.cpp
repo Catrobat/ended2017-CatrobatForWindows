@@ -31,6 +31,7 @@ namespace PhoneDirect3DXamlAppComponent
     Direct3DBackground::Direct3DBackground() :
         m_timer(ref new BasicTimer())
     {
+        ProjectDaemon::Instance()->ReInit();
         m_initialized = false;
     }
 

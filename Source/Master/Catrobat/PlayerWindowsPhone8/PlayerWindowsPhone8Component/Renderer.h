@@ -34,9 +34,6 @@ private:
 	float m_scale;
 
 	void StartUpTasks();
-
-	// Just for testing
-	void CreateTestObject2();
-	void CreateTestObject3();
-	void CreateTestObject4();
+    
+    bool m_initialized;
 };

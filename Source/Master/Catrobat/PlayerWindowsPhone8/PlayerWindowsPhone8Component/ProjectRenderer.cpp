@@ -46,10 +46,10 @@ void ProjectRenderer::Render()
 		m_depthStencilView.Get()
 		);
 
-	const float midnightBlue[] = { 0.098f, 0.098f, 0.439f, 1.000f };
+	const float whiteBackground[] = { 1.000f, 1.000f, 1.000f, 1.000f };
 	m_d3dContext->ClearRenderTargetView(
 		m_renderTargetView.Get(),
-		midnightBlue
+		whiteBackground
 		);
 
 	m_d3dContext->ClearDepthStencilView(
