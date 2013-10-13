@@ -30,8 +30,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
             get { return _currentProject; }
             set
             {
-                _currentProject = value; 
-                RaisePropertyChanged(()=> CurrentProject);
+                _currentProject = value;
+                RaisePropertyChanged(() => CurrentProject);
             }
         }
 
@@ -102,34 +102,58 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
 
         private void EditCostumeAction()
         {
-            var writeableBitmap = new WriteableBitmap(ReceivedCostume.Image.Width, ReceivedCostume.Image.Height);
-            writeableBitmap.FromByteArray(ReceivedCostume.Image.Data);
+            
+            ServiceLocator.PictureService.DrawPicture(ChangedPictureSuccess, () => {/* No action here */}, () => {/* No action here */},
+                ReceivedCostume.Image);
+            ServiceLocator.NavigationService.RemoveBackEntry();
 
-            var task = new PaintLauncherTask { CurrentImage = new WriteableBitmap(writeableBitmap) };
-            task.OnImageChanged += OnPaintLauncherTaskImageChanged;
-            PaintLauncher.Launche(task);
+            //var writeableBitmap = new WriteableBitmap(ReceivedCostume.Image.Width, ReceivedCostume.Image.Height);
+            //writeableBitmap.FromByteArray(ReceivedCostume.Image.Data);
+
+            //var task = new PaintLauncherTask { CurrentImage = new WriteableBitmap(writeableBitmap) };
+            //task.OnImageChanged += OnPaintLauncherTaskImageChanged;
+            //PaintLauncher.Launche(task);
         }
 
-        private void OnPaintLauncherTaskImageChanged(PaintLauncherTask task)
+        private void ChangedPictureSuccess(PortableImage image)
         {
             try
             {
-                var writeableBitmap = new WriteableBitmap(task.CurrentImage);
-                var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
-                    writeableBitmap.PixelHeight);
-                CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, portableImage);
+                
+                CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, image);
             }
             catch (Exception)
             {
                 // TODO: fix error on changing the same costume twice in a short time
 
-                if(Debugger.IsAttached)
+                if (Debugger.IsAttached)
                     Debugger.Break();
             }
 
             ServiceLocator.NavigationService.RemoveBackEntry();
             ServiceLocator.NavigationService.NavigateBack();
         }
+
+        //private void OnPaintLauncherTaskImageChanged(PaintLauncherTask task)
+        //{
+        //    try
+        //    {
+        //        var writeableBitmap = new WriteableBitmap(task.CurrentImage);
+        //        var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
+        //            writeableBitmap.PixelHeight);
+        //        CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, portableImage);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // TODO: fix error on changing the same costume twice in a short time
+
+        //        if (Debugger.IsAttached)
+        //            Debugger.Break();
+        //    }
+
+        //    ServiceLocator.NavigationService.RemoveBackEntry();
+        //    ServiceLocator.NavigationService.NavigateBack();
+        //}
 
         private void ResetViewModelAction()
         {

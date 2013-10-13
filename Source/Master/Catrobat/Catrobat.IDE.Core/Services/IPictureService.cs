@@ -9,5 +9,7 @@ namespace Catrobat.IDE.Core.Services
         void ChoosePictureFromLibrary(Action<PortableImage> success, Action cancelled, Action error);
 
         void TakePicture(Action<PortableImage> success, Action cancelled, Action error);
+
+        void DrawPicture(Action<PortableImage> success, Action cancelled, Action error, PortableImage imageToEdit = null);
     }
 }

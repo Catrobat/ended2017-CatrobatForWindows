@@ -184,33 +184,32 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
 
         private void OpenPaintAction()
         {
-            var newBitmap = new WriteableBitmap(
-                ServiceLocator.SystemInformationService.ScreenWidth, ServiceLocator.SystemInformationService.ScreenHeight);
+            ServiceLocator.PictureService.DrawPicture(PictureSuccess, PictureCanceled, PictureError);
+            ServiceLocator.NavigationService.RemoveBackEntry();
 
-            var task = new PaintLauncherTask { CurrentImage = newBitmap };
-            task.OnImageChanged += OnPaintLauncherImageChanged;
-            PaintLauncher.Launche(task);
+            //var newBitmap = new WriteableBitmap(
+            //    ServiceLocator.SystemInformationService.ScreenWidth, ServiceLocator.SystemInformationService.ScreenHeight);
+
+            //var task = new PaintLauncherTask { CurrentImage = newBitmap };
+            //task.OnImageChanged += OnPaintLauncherImageChanged;
+            //PaintLauncher.Launche(task);
         }
 
-        private async void OnPaintLauncherImageChanged(PaintLauncherTask task)
-        {
-            try
-            {
-                CostumeName = AppResources.Editor_Image;
+        //private async void OnPaintLauncherImageChanged(PortableImage image)
+        //{
+        //    try
+        //    {
+        //        Image = image;
+        //        CostumeName = AppResources.Editor_Image;
+        //        Dimention = new ImageDimention { Height = image.Height, Width = image.Width };
 
-                var image = task.CurrentImage;
-                Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
-
-                var portableImage = new PortableImage(image.ToByteArray(), image.PixelWidth, image.PixelHeight);
-                Image = portableImage;
-
-                Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
-            }
-            catch (Exception)
-            {
-                ShowLoadingImageFailure();
-            }
-        }
+        //        Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
+        //    }
+        //    catch (Exception)
+        //    {
+        //        ShowLoadingImageFailure();
+        //    }
+        //}
 
         private async void SaveAction()
         {

@@ -11,6 +11,8 @@ using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Data;
 using Catrobat.IDE.Phone.Views.Editor.Costumes;
+using Catrobat.Paint;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 
 namespace Catrobat.IDE.Phone.Services
@@ -43,6 +45,38 @@ namespace Catrobat.IDE.Phone.Services
             cameraCaptureTask.Completed -= Task_Completed;
             cameraCaptureTask.Completed += Task_Completed;
             cameraCaptureTask.Show();
+        }
+
+        public void DrawPicture(Action<PortableImage> success, Action cancelled, Action error, PortableImage imageToEdit = null)
+        {
+            _successCallback = success;
+            _cancelleCallback = cancelled;
+            _errorCallback = error;
+
+            WriteableBitmap bitmap = null;
+
+            if (imageToEdit == null)
+            {
+                bitmap = new WriteableBitmap(
+                  ServiceLocator.SystemInformationService.ScreenWidth, ServiceLocator.SystemInformationService.ScreenHeight);
+            }
+            else
+            {
+                bitmap = new WriteableBitmap(imageToEdit.Width, imageToEdit.Height);
+                bitmap.FromByteArray(imageToEdit.Data);
+            }
+
+            var task = new PaintLauncherTask { CurrentImage = bitmap };
+            task.OnImageChanged += OnPaintLauncherImageChanged;
+            PaintLauncher.Launche(task);
+        }
+
+        private void OnPaintLauncherImageChanged(PaintLauncherTask task)
+        {
+            var image = task.CurrentImage;
+            var portableImage = new PortableImage(image.ToByteArray(), image.PixelWidth, image.PixelHeight);
+
+            _successCallback.Invoke(portableImage);
         }
 
         private void Task_Completed(object sender, PhotoResult e)
