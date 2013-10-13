@@ -9,7 +9,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 {
     public static class CostumeHelper
     {
-        public static Costume Save(PortableImage image, string name, ImageDimention dimention, string projectPath)
+        public static Costume Save(PortableImage image, string name, ImageDimension dimension, string projectPath)
         {
             using (var storage = StorageSystem.GetStorage())
             {
@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                     storage.CreateDirectory(imagePath);
             }
 
-            var resizedImage = ServiceLocator.ImageResizeService.ResizeImage(image, dimention.Width, dimention.Height);
+            var resizedImage = ServiceLocator.ImageResizeService.ResizeImage(image, dimension.Width, dimension.Height);
             var costume = new Costume(name);
             var absoluteFileName = Path.Combine(projectPath, Project.ImagesPath, costume.FileName);
             resizedImage.WriateAsPng(absoluteFileName);

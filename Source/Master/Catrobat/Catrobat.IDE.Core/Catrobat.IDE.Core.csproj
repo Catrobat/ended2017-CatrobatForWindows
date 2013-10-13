@@ -173,7 +173,7 @@
     <Compile Include="Services\Common\CatrobatWebFormUploadService.cs" />
     <Compile Include="Services\Common\CatrobatZipService.cs" />
     <Compile Include="Services\Common\ProjectImporterService.cs" />
-    <Compile Include="Services\Data\ImageDimention.cs" />
+    <Compile Include="Services\Data\ImageDimension.cs" />
     <Compile Include="Services\Data\PortableBrush.cs" />
     <Compile Include="Services\Data\PortableImage.cs" />
     <Compile Include="Services\Data\PortableSolidColorBrush.cs" />

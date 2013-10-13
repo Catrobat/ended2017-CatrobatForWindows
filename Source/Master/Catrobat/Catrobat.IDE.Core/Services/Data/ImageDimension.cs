@@ -1,6 +1,6 @@
 ﻿namespace Catrobat.IDE.Core.Services.Data
 {
-    public class ImageDimention
+    public class ImageDimension
     {
         public int Width { get; set; }
         public int Height { get; set; }

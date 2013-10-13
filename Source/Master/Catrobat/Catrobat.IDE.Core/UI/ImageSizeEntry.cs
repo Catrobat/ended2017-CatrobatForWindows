@@ -23,7 +23,7 @@ namespace Catrobat.IDE.Core.UI
         private int _newWidth;
         private int _newHeight;
         private ImageSize _size;
-        private ImageDimention _dimention;
+        private ImageDimension _dimension;
         private bool _isVisible;
         private int _percentage;
 
@@ -76,15 +76,15 @@ namespace Catrobat.IDE.Core.UI
             }
         }
 
-        public ImageDimention Dimention
+        public ImageDimension Dimension
         {
-            get { return _dimention; }
+            get { return _dimension; }
             set
             {
-                _dimention = value;
-                NewWidth = GetNewImageWidth(Size, Dimention.Width, Dimention.Height);
-                NewHeight = GetNewImageHeight(Size, Dimention.Width, Dimention.Height);
-                Percentage = GetNewImagePercentage(Size, Dimention.Width, Dimention.Height);
+                _dimension = value;
+                NewWidth = GetNewImageWidth(Size, Dimension.Width, Dimension.Height);
+                NewHeight = GetNewImageHeight(Size, Dimension.Width, Dimension.Height);
+                Percentage = GetNewImagePercentage(Size, Dimension.Width, Dimension.Height);
                 UpdateVisibility();
 
                 RaisePropertyChanged();
@@ -93,7 +93,7 @@ namespace Catrobat.IDE.Core.UI
 
         private void UpdateVisibility()
         {
-            IsVisible = (Dimention.Height != NewHeight && Dimention.Width != NewWidth);
+            IsVisible = (Dimension.Height != NewHeight && Dimension.Width != NewWidth);
 
             if (Size == ImageSize.FullSize)
                 IsVisible = true;

@@ -589,9 +589,7 @@
     <Content Include="fmodex_arm.dll" />
     <Content Include="fmodex_x86.dll" />
     <None Include="app.config" />
-    <None Include="Content\Resources\SampleProjects\stoeckchen.catrobat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Content Include="Content\Resources\SampleProjects\stick.catrobat" />
     <Content Include="italic.spritefont" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />

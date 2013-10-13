@@ -340,21 +340,34 @@ namespace Catrobat.IDE.Phone.Services.Storage
                     _iso.DeleteFile(thumbnailPath);
             }
 
-            var stream = _iso.OpenFile(path, FileMode.CreateNew, FileAccess.Write);
+            IsolatedStorageFileStream stream = null;
 
-            var writeableBitmap = new WriteableBitmap(image.Width, image.Height);
-            writeableBitmap.FromByteArray(image.Data);
-
-            switch (format)
+            try
             {
-                case ImageFormat.Png:
-                    PNGWriter.WritePNG(writeableBitmap, stream, 95);
-                    break;
-                case ImageFormat.Jpg:
-                    writeableBitmap.SaveJpeg(stream, image.Width, image.Height, 0, 95);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException("format");
+                stream = _iso.OpenFile(path, FileMode.CreateNew, FileAccess.Write);
+
+                var writeableBitmap = new WriteableBitmap(image.Width, image.Height);
+                writeableBitmap.FromByteArray(image.Data);
+
+                switch (format)
+                {
+                    case ImageFormat.Png:
+                        PNGWriter.WritePNG(writeableBitmap, stream, 95);
+                        break;
+                    case ImageFormat.Jpg:
+                        writeableBitmap.SaveJpeg(stream, image.Width, image.Height, 0, 95);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException("format");
+                }
+            }//TODO: Where should the error be handled?
+            finally 
+            {
+                if (stream != null)
+                {
+                    stream.Flush();
+                    stream.Dispose();
+                }
             }
         }
 
