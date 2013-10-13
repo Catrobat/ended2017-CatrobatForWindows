@@ -24,6 +24,11 @@ namespace Catrobat.IDE.Phone.Services.Storage
             return _iso.FileExists(path);
         }
 
+        public void CreateDirectory(string path)
+        {
+            _iso.CreateDirectory(path);
+        }
+
         public bool DirectoryExists(string path)
         {
             return _iso.DirectoryExists(path);

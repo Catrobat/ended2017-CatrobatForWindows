@@ -29,6 +29,8 @@ namespace Catrobat.IDE.Core.Services.Storage
 
     public interface IStorage : IDisposable
     {
+        void CreateDirectory(string path);
+
         bool DirectoryExists(string path);
 
         bool FileExists(string path);

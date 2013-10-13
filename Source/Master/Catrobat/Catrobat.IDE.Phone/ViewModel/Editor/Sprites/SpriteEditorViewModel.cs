@@ -514,36 +514,32 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         private void DeleteScriptBrickAction()
         {
-            // TODO: show messagebox?
-
             var scriptBricksToRemove = new List<DataObject>(SelectedScripts);
 
             foreach (var scriptBrick in scriptBricksToRemove)
             {
-                //if (scriptBrick is LoopBeginBrick)
-                //    scriptBricksToRemove.Add((scriptBrick as LoopBeginBrick).LoopEndBrick);
-                //if (scriptBrick is IfLogicBeginBrick)
-                //{
-                //    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicElseBrick);
-                //    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicEndBrick);
-                //}
-                //if (scriptBrick is IfLogicElseBrick)
-                //{
-                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicBeginBrick);
-                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicEndBrick);
-                //}
-                //if (scriptBrick is IfLogicElseBrick)
-                //{
-                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicBeginBrick);
-                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicEndBrick);
-                //}
+                if (scriptBrick is LoopBeginBrick)
+                    scriptBricksToRemove.Add((scriptBrick as LoopBeginBrick).LoopEndBrick);
+                if (scriptBrick is IfLogicBeginBrick)
+                {
+                    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicElseBrick);
+                    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicEndBrick);
+                }
+                if (scriptBrick is IfLogicElseBrick)
+                {
+                    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicBeginBrick);
+                    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicEndBrick);
+                }
+                if (scriptBrick is IfLogicEndBrick)
+                {
+                    scriptBricksToRemove.Add((scriptBrick as IfLogicEndBrick).IfLogicBeginBrick);
+                    scriptBricksToRemove.Add((scriptBrick as IfLogicEndBrick).IfLogicElseBrick);
+                }
 
 
                 if (scriptBrick is Brick || scriptBrick is Script)
                     ScriptBricks.Remove(scriptBrick);
             }
-
-
         }
 
 
