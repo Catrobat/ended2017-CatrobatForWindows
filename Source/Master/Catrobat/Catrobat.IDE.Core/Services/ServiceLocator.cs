@@ -33,6 +33,8 @@ namespace Catrobat.IDE.Core.Services
 
         public static INotifictionService NotifictionService { get; private set; }
 
+        public static IColorConversionService ColorConversionService { get; private set; }
+
         public static void SetServices(
             INavigationService navigationService,
             ISystemInformationService systemInformationService,
@@ -47,7 +49,8 @@ namespace Catrobat.IDE.Core.Services
             ISoundPlayerService soundPlayerService,
             ISoundRecorderService soundRecorderService,
             IPictureService pictureService,
-            INotifictionService notifictionService
+            INotifictionService notifictionService,
+            IColorConversionService colorConversionService
             )
         {
             NavigationService = navigationService;
@@ -64,6 +67,7 @@ namespace Catrobat.IDE.Core.Services
             SoundRecorderService = soundRecorderService;
             PictureService = pictureService;
             NotifictionService = notifictionService;
+            ColorConversionService = colorConversionService;
         }
     }
 }

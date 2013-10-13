@@ -181,6 +181,7 @@
     <Compile Include="Converters\VariableEditVisibilityConverter.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ColorConversionServicePhone.cs" />
     <Compile Include="Services\CultureServicePhone.cs" />
     <Compile Include="Services\ImageResizeServicePhone.cs" />
     <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
@@ -197,9 +198,6 @@
     <Compile Include="Services\Storage\StoragePhone.cs" />
     <Compile Include="Services\SystemInformationServicePhone.cs" />
     <Compile Include="Setup.cs" />
-    <Compile Include="Themes\ColorChooser.cs" />
-    <Compile Include="Themes\Theme.cs" />
-    <Compile Include="Themes\ThemeChooser.cs" />
     <Compile Include="Utilities\AssociationUriMapper.cs" />
     <Compile Include="Utilities\ProjectImporter.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
@@ -685,10 +683,9 @@
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\CroppedImages\MainViewPanorama_cats_pink_small.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\CroppedImages\MainViewPanorama_strings_small.png" />
     <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\empty_background.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_blue_800.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_pink_800.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_1280.png" />
-    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings_800.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_blue.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_pink.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings.png" />
     <Content Include="Content\Images\Application\Search.png" />
     <Content Include="Content\Images\ImageButtons\add_dark.png" />
     <Content Include="Content\Images\ImageButtons\add_light.png" />

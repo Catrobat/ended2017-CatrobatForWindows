@@ -29,7 +29,7 @@
       <!--<Button Margin="0 0 10 10" Command="{Binding AudioLibraryCommand}">
         <Button.Template>
           <ControlTemplate>
-            <Grid Margin="0 10 0 10" Background="{Binding Path=SelectedTheme.AccentColor1, Source={StaticResource ThemeChooser}}" HorizontalAlignment="Stretch" Height="120">
+            <Grid Margin="0 10 0 10" Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" HorizontalAlignment="Stretch" Height="120">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -43,7 +43,7 @@
       <Button Margin="0 0 10 10" Command="{Binding RecorderCommand}">
         <Button.Template>
           <ControlTemplate>
-            <Grid Margin="0 10 0 10" Background="{Binding Path=SelectedTheme.AccentColor2, Source={StaticResource ThemeChooser}}" HorizontalAlignment="Stretch" Height="120">
+            <Grid Margin="0 10 0 10" Background="{Binding Path=SelectedTheme.AccentColor2.NativeBrush, Source={StaticResource ThemeChooser}}" HorizontalAlignment="Stretch" Height="120">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>

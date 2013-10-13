@@ -170,7 +170,10 @@
     <Compile Include="Services\Common\CatrobatZipService.cs" />
     <Compile Include="Services\Common\ProjectImporterService.cs" />
     <Compile Include="Services\Data\ImageDimention.cs" />
+    <Compile Include="Services\Data\PortableBrush.cs" />
     <Compile Include="Services\Data\PortableImage.cs" />
+    <Compile Include="Services\Data\PortableSolidColorBrush.cs" />
+    <Compile Include="Services\IColorService.cs" />
     <Compile Include="Services\ICultureService.cs" />
     <Compile Include="Services\IImageResizeService.cs" />
     <Compile Include="Services\IImageSourceConversionService.cs" />
@@ -192,6 +195,8 @@
     <Compile Include="UI\ImageSizeEntry.cs" />
     <Compile Include="UI\ImageSizeEntryCollection.cs" />
     <Compile Include="UI\NullItemCollection.cs" />
+    <Compile Include="UI\Theme.cs" />
+    <Compile Include="UI\ThemeChooser.cs" />
     <Compile Include="Utilities\Helpers\CostumeHelper.cs" />
     <Compile Include="Utilities\Helpers\FileNameGenerationHelper.cs" />
     <Compile Include="Utilities\Helpers\LanguageHelper.cs" />

@@ -113,7 +113,7 @@
       <Grid Grid.Row="2">
         <Button Grid.Column="0" Width="220" Height="220" Name="ButtonRecord" 
                 Command="{Binding StartRecordingCommand}"
-                Background="{Binding Path=SelectedTheme.AccentColor1, Source={StaticResource ThemeChooser}}">
+                Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}">
           <Grid Width="170" Height="170" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
               <RowDefinition/>

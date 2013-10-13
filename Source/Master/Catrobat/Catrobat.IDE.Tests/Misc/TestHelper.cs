@@ -18,8 +18,6 @@ namespace Catrobat.IDE.Tests.Misc
             {
                 storage.DeleteDirectory("");
             }
-
-            //CatrobatContext.GetContext().CurrentProject = null;
         }
 
         public static void DeleteFolder(this IsolatedStorageFile iso, string path)
@@ -47,7 +45,7 @@ namespace Catrobat.IDE.Tests.Misc
         {
             ServiceLocator.SetServices(null, new PlatformInformationHelperTests(), null, null,
                 null, new ResourceLoaderFactoryTest(), new StorageFactoryTest(), null, null,
-                new ProjectImporterService(), null, null, null, null);
+                new ProjectImporterService(), null, null, null, null, null);
         }
     }
 }

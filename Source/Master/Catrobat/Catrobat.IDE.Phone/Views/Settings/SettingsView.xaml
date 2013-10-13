@@ -53,7 +53,7 @@
                 <ColumnDefinition Width="1.5*" />
               </Grid.ColumnDefinitions>
               <Image Grid.Column="0" Width="150" Height="150" x:Name="ImgDesign" Margin="10" 
-                     Source="{Binding ThemeChooser.SelectedTheme.CroppedBackground}" />
+                     Source="{Binding ThemeChooser.SelectedTheme.CroppedBackground.ImageSource}" />
               <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                   <RowDefinition Height="Auto"/>
@@ -86,13 +86,13 @@
                       <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3"
-                        Background="{Binding ThemeChooser.SelectedTheme.AccentColor1}" 
+                        Background="{Binding ThemeChooser.SelectedTheme.AccentColor1.NativeBrush}" 
                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                     <Grid Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="3"
-                        Background="{Binding ThemeChooser.SelectedTheme.AccentColor2}" 
+                        Background="{Binding ThemeChooser.SelectedTheme.AccentColor2.NativeBrush}" 
                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                     <Grid Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="3"
-                        Background="{Binding ThemeChooser.SelectedTheme.AccentColor3}" 
+                        Background="{Binding ThemeChooser.SelectedTheme.AccentColor3.NativeBrush}" 
                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                   </Grid>
                 </Grid>

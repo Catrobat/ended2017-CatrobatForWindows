@@ -48,5 +48,11 @@ namespace Catrobat.IDE.Tests.Misc.Storage
                 stream.Dispose();
             }
         }
+
+
+        public object LoadImage(ResourceScope resourceScope, string path)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

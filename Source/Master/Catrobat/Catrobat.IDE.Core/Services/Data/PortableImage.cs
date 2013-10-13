@@ -42,6 +42,9 @@ namespace Catrobat.IDE.Core.Services.Data
         {
             get
             {
+                if (_nativeImageSource != null)
+                    return _nativeImageSource;
+
                 return Services.ServiceLocator.ImageSourceConversionService.ConvertToLocalImageSource(_data, _width, _height);
             }
 
@@ -97,5 +100,24 @@ namespace Catrobat.IDE.Core.Services.Data
             }
         }
         #endregion
+
+
+        private object _nativeImageSource;
+        public void LoadFromResources(ResourceScope scope, string path)
+        {
+            using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
+            {
+                _nativeImageSource = loader.LoadImage(scope, path);
+
+                //object portableImage = loader.LoadImage(scope, path);
+
+                //if (portableImage != null)
+                //{
+                //    this.Data = portableImage.Data;
+                //    this.Height = portableImage.Height;
+                //    this.Width = portableImage.Width;
+                //}
+            }
+        }
     }
 }

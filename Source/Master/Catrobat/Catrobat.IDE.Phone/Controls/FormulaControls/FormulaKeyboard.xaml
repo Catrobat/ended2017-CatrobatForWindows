@@ -278,7 +278,7 @@
                 Click="ButtonVariable_OnClick"/>
         <Button Grid.Row="3" Grid.Column="0" Content="Evaluate"  
               Style="{StaticResource StyleButtonEvaluate}" 
-              Background="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1}"/>
+              Background="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1.NativeBrush}"/>
       </Grid>
       <Grid Name="GridNumbers" Column="0" Row="1">
         <Grid.RowDefinitions>

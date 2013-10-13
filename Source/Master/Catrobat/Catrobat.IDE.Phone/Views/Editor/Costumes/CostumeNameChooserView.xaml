@@ -81,7 +81,7 @@
                   <ColumnDefinition Width="3*"/>
                   <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Grid.Column="0" Grid.Row="0" Margin="7 7 0 0" Fill="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1}"></Rectangle>
+                <Rectangle Grid.Column="0" Grid.Row="0" Margin="7 7 0 0" Fill="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1.NativeBrush}"></Rectangle>
 
                 <StackPanel Grid.Row="0" Grid.Column="0"  
                             VerticalAlignment="Center" HorizontalAlignment="Center" 

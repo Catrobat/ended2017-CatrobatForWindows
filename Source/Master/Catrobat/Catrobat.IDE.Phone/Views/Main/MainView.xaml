@@ -57,7 +57,7 @@
     <!--Panorama control-->
     <controls:Panorama Name="PanoramaMain" SelectionChanged="panoramaMain_SelectionChanged">
       <controls:Panorama.Background>
-        <ImageBrush ImageSource="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.Background}" />
+        <ImageBrush ImageSource="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.Background.ImageSource}" />
       </controls:Panorama.Background>
 
       <!--My Projects panorama item-->

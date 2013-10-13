@@ -41,7 +41,8 @@ namespace Catrobat.IDE.Phone
                 new SoundPlayerServicePhone(),
                 new SoundRecorderServicePhone(),
                 new PictureServicePhone(),
-                new NotificationServicePhone()
+                new NotificationServicePhone(),
+                new ColorConversionServicePhone()
                 );
         }
     }
