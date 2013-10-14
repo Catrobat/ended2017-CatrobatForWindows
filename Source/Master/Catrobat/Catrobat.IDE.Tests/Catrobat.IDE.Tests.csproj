@@ -81,7 +81,7 @@
     <Compile Include="Misc\TestHelper.cs" />
     <Compile Include="Misc\XmlDocumentCompare.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleData\SampleLoader.cs" />
+    <Compile Include="Binaries\SampleData\SampleLoader.cs" />
     <Compile Include="Tests\Data\CatrobatContextTests.cs" />
     <Compile Include="Tests\Data\CopyTests.cs" />
     <Compile Include="Tests\Data\DataDeletingTests.cs" />
@@ -102,129 +102,129 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="SampleData\SampleProjects\default.catroid">
+    <Content Include="Binaries\SampleData\SampleProjects\default.catroid">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\test.catroid">
+    <Content Include="Binaries\SampleData\SampleProjects\test.catroid">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test1Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test1Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test2Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test2Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test3Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test3Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test4Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test4Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test5Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test5Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test6Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test6Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test7Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test7Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test8Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test8Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test9Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test9Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test10Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test10Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test11Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test11Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test12Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test12Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test14Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test14Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test15Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test15Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test13Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test13Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test16Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test16Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Forever_Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Forever_Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Forever_Output.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Forever_Output.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_GlobalVariableReferences_Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_GlobalVariableReferences_Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_GlobalVariableReferences_Output.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_GlobalVariableReferences_Output.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_IfLogicBegin_Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_IfLogicBegin_Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_IfLogicBegin_Output.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_IfLogicBegin_Output.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_LocalVariableReferences_Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_LocalVariableReferences_Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_LocalVariableReferences_Output.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_LocalVariableReferences_Output.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_LookReferences_Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_LookReferences_Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_LookReferences_Output.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_LookReferences_Output.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_ObjectReferences_Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_ObjectReferences_Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_ObjectReferences_Output.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_ObjectReferences_Output.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_PointTo_Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_PointTo_Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_PointTo_Output.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_PointTo_Output.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Repeat_Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Repeat_Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Repeat_Output.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Repeat_Output.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_SoundReferences_Input.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_SoundReferences_Input.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_SoundReferences_Output.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_SoundReferences_Output.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\Converter\XPathHelperTestInput.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\Converter\XPathHelperTestInput.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\DataReadingTests\testCatrobat091.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\DataReadingTests\testCatrobat091.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\DataReadingTests\test_code1.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\DataReadingTests\test_code1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\SampleProjects\simple.xml">
+    <Content Include="Binaries\SampleData\SampleProjects\simple.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleData\screenshot.png">
+    <Content Include="Binaries\SampleData\screenshot.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
