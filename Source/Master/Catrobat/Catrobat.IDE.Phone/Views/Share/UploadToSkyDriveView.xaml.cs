@@ -27,26 +27,26 @@ namespace Catrobat.IDE.Phone.Views.Share
 
                 _viewModel.UploadToSkyDriveCommand.Execute(_client);
 
-                try
-                {
-                    dynamic meResult = operationResult.Result;
-                    if (meResult.first_name != null &&
-                        meResult.last_name != null)
-                    {
-                        //infoTextBlock.Text = "Hello " +
-                        //    meResult.first_name + " " +
-                        //    meResult.last_name + "!";
-                    }
-                    else
-                    {
-                        //infoTextBlock.Text = "Hello, signed-in user!";
-                    }
-                }
-                catch (LiveConnectException exception)
-                {
-                    //this.infoTextBlock.Text = "Error calling API: " +
-                    //    exception.Message;
-                }
+                //try
+                //{
+                //    dynamic meResult = operationResult.Result;
+                //    if (meResult.first_name != null &&
+                //        meResult.last_name != null)
+                //    {
+                //        //infoTextBlock.Text = "Hello " +
+                //        //    meResult.first_name + " " +
+                //        //    meResult.last_name + "!";
+                //    }
+                //    else
+                //    {
+                //        //infoTextBlock.Text = "Hello, signed-in user!";
+                //    }
+                //}
+                //catch (LiveConnectException exception)
+                //{
+                //    //this.infoTextBlock.Text = "Error calling API: " +
+                //    //    exception.Message;
+                //}
             }
             else
             {

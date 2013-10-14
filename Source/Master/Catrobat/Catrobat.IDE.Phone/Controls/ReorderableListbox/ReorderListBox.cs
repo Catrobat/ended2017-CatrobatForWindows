@@ -213,9 +213,6 @@ namespace Catrobat.IDE.Phone.Controls.ReorderableListbox
         {
             ScrollBar verticalScrollBar = ((FrameworkElement)VisualTreeHelper.GetChild(_scrollViewer, 0)).FindName("VerticalScrollBar") as ScrollBar;
             verticalScrollBar.ValueChanged += ScrollViewer_ScrollStateChanged;
-
-            if (ItemsSource is ScriptBrickCollection)
-                AddMarginToLastItem();
         }
 
         private void ScrollViewer_ScrollStateChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -551,48 +548,6 @@ namespace Catrobat.IDE.Phone.Controls.ReorderableListbox
             _dropTargetIndex = -1;
             ClearDropTarget();
             _isDraging = false;
-        }
-
-        private void AddMarginToLastItem()
-        {
-            //this.Margin = new Thickness(0,0,0,100);
-            //_scrollViewer.Margin = new Thickness(0,0,0,-100);
-            return;
-
-            // caution very ugly hack!!!
-            var list = ItemsSource as IList;
-            if (list.Count <= 0) return;
-
-            double margin = 20;
-
-            const int offsetPerItem = 80;
-
-            foreach (var item in list)
-            {
-                var container = ItemContainerGenerator.ContainerFromItem(item);
-
-                var reorderItem = container as ReorderListBoxItem;
-                if (reorderItem != null)
-                {
-                    if (reorderItem.DataContext is SetVariableBrick || reorderItem.DataContext is ChangeVariableBrick)
-                    {
-                        margin += 100;
-                    }
-                    var height = reorderItem.RenderSize.Height - offsetPerItem;
-                    margin += height;
-
-                    reorderItem.Margin = new Thickness(0, 0, 0, 0);
-                }
-            }
-
-            if (list.Count > 0)
-            {
-                var container = ItemContainerGenerator.ContainerFromItem(list[list.Count - 1]);
-
-                var reorderItem = container as ReorderListBoxItem;
-                if (reorderItem != null)
-                    reorderItem.Margin = new Thickness(0, 0, 0, margin);
-            }
         }
 
         /// <summary>

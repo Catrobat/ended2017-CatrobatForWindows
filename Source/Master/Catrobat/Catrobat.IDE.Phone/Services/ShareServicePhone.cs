@@ -55,7 +55,7 @@ namespace Catrobat.IDE.Phone.Services
                         stream.Seek(0, SeekOrigin.Begin);
 
 
-                        ((LiveConnectClient)client).UploadAsync("me/skydrive", fileName, stream, OverwriteOption.Rename);
+                        await ((LiveConnectClient)client).UploadAsync("me/skydrive", fileName, stream, OverwriteOption.Rename);
 
                         success();
                     

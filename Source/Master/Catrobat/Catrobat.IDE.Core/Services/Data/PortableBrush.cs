@@ -8,6 +8,6 @@ namespace Catrobat.IDE.Core.Services.Data
 {
     public abstract class PortableBrush
     {
-        public object NativeBrush { get; set; }
+        public abstract object NativeBrush { get; set; }
     }
 }

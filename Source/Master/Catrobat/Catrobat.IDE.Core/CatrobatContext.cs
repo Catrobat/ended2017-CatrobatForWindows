@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Core
 
         public static Project LoadNewProjectByNameStatic(string projectName)
         {
-            if (false) // Debugger.IsAttached)
+            if (Debugger.IsAttached)
             {
                 return LoadNewProjectByNameStaticWithoutTryCatch(projectName);
             }

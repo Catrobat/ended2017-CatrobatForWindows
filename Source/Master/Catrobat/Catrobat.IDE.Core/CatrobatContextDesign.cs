@@ -31,8 +31,8 @@ namespace Catrobat.IDE.Core
             }
         }
 
-        public ObservableCollection<ProjectDummyHeader> LocalProjects { get; protected set; }
-        public ObservableCollection<OnlineProjectHeader> OnlineProjects { get; protected set; }
+        public ObservableCollection<ProjectDummyHeader> LocalProjects { get; private set; }
+        public ObservableCollection<OnlineProjectHeader> OnlineProjects { get; private set; }
 
         #endregion
 

@@ -14,7 +14,6 @@ namespace Catrobat.IDE.Phone.Services
         private SoundEffectInstance _soundEffect;
         private Thread _checkSoundThread;
         private SoundPlayerState _previousState;
-        private bool _aborted = false;
 
         public event SoundStateChanged SoundStateChanged;
         public event SoundFinished SoundFinished;
@@ -74,8 +73,6 @@ namespace Catrobat.IDE.Phone.Services
         {
             if (_soundEffect != null)
             {
-                _aborted = true;
-
                 _soundEffect.Pause();
                 var previousStateTemp = _previousState;
                 _previousState = SoundPlayerState.Paused;
@@ -90,8 +87,6 @@ namespace Catrobat.IDE.Phone.Services
         {
             if (_soundEffect != null)
             {
-                _aborted = true;
-
                 _soundEffect.Stop();
                 var previousStateTemp = _previousState;
                 _previousState = SoundPlayerState.Stopped;
@@ -127,8 +122,6 @@ namespace Catrobat.IDE.Phone.Services
                 //{
                     SoundFinished.Invoke();
                 //}
-
-                _aborted = false;
 
                 if (SoundStateChanged != null)
                 {
