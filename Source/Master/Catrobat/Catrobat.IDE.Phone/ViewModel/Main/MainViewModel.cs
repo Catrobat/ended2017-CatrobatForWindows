@@ -12,6 +12,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Phone.Views.Main;
+using Catrobat.IDE.Phone.Views.Share;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
@@ -28,7 +29,7 @@ using Catrobat.IDE.Phone.Views.Editor;
 
 namespace Catrobat.IDE.Phone.ViewModel.Main
 {
-    public class MainViewModel : ViewModelBase, INotifyPropertyChanged
+    public class MainViewModel : ViewModelBase
     {
         #region private Members
 
@@ -193,6 +194,12 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             private set;
         }
 
+        public ICommand ShareLocalProjectCommand
+        {
+            get;
+            private set;
+        }
+
         public ICommand LazyLoadOnlineProjectsCommand
         {
             get;
@@ -289,6 +296,19 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             Messenger.Default.Send(message, ViewModelMessagingToken.PinProjectHeaderListener);
 
             ServiceLocator.NavigationService.NavigateTo(typeof(TileGeneratorView));
+        }
+
+        private void ShareLocalProjectAction(ProjectDummyHeader project)
+        {
+            if(CurrentProject.ProjectDummyHeader == project)
+                CurrentProject.Save();
+
+            PinProjectHeader = project;
+
+            var message = new GenericMessage<ProjectDummyHeader>(PinProjectHeader);
+            Messenger.Default.Send(message, ViewModelMessagingToken.ShareProjectHeaderListener);
+
+            ServiceLocator.NavigationService.NavigateTo(typeof(ShareProjectServiceSelectionView));
         }
 
         private void LazyLoadOnlineProjectsAction()
@@ -472,6 +492,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
             CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
             PinLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(PinLocalProjectAction);
+            ShareLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(ShareLocalProjectAction);
             LazyLoadOnlineProjectsCommand = new RelayCommand(LazyLoadOnlineProjectsAction);
             SetCurrentProjectCommand = new RelayCommand<string>(SetCurrentProjectAction);
             OnlineProjectTapCommand = new RelayCommand<OnlineProjectHeader>(OnlineProjectTapAction);
@@ -486,12 +507,16 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
 
             Messenger.Default.Register<MessageBase>(this,
                 ViewModelMessagingToken.LocalProjectsChangedListener, LocalProjectsChangedMessageAction);
+
             Messenger.Default.Register<MessageBase>(this,
                 ViewModelMessagingToken.DownloadProjectStartedListener, DownloadProjectStartedMessageAction);
+
             Messenger.Default.Register<MessageBase>(this,
                ViewModelMessagingToken.UploadProjectStartedListener, UploadProjectStartedMessageAction);
+
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
-                             ViewModelMessagingToken.ContextListener, ContextChangedAction);
+               ViewModelMessagingToken.ContextListener, ContextChangedAction);
+
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
         }

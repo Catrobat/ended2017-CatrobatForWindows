@@ -29,6 +29,8 @@ namespace Catrobat.IDE.Core.Services.Storage
 
     public interface IStorage : IDisposable
     {
+        void CreateDirectory(string path);
+
         bool DirectoryExists(string path);
 
         bool FileExists(string path);
@@ -58,6 +60,8 @@ namespace Catrobat.IDE.Core.Services.Storage
         PortableImage LoadImageThumbnail(string pathToImage);
 
         PortableImage CreateThumbnail(PortableImage image);
+
+        void DeleteImage(string pathToImage);
 
         void SaveImage(string path, PortableImage image, bool deleteExisting, ImageFormat format);
 

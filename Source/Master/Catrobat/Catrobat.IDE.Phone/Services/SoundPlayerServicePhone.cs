@@ -119,14 +119,14 @@ namespace Catrobat.IDE.Phone.Services
                 _previousState = newState;
                 newState = GetSoundState(_soundEffect.State);
                 Thread.Sleep(50);
-            } while (newState == _previousState);
+            } while (newState == _previousState && newState != SoundPlayerState.Stopped);
 
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
-                if (SoundFinished != null && !_aborted)
-                {
+                //if (SoundFinished != null && !_aborted)
+                //{
                     SoundFinished.Invoke();
-                }
+                //}
 
                 _aborted = false;
 

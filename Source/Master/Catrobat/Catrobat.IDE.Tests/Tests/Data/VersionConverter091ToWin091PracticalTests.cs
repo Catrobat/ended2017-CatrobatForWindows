@@ -161,6 +161,97 @@ namespace Catrobat.IDE.Tests.Tests.Data
             //XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         }
 
+        [TestMethod]
+        public void CatrobatVersionConverterTest_PocketCode10()
+        {
+            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test10Input");
+            //XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test10Output");
+
+            var error = CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
+            Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, error);
+            var xml = actualDocument.ToString();
+            var project = new Project(xml);
+            //XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+        }
+
+        [TestMethod]
+        public void CatrobatVersionConverterTest_PocketCode11()
+        {
+            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test11Input");
+            //XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test11Output");
+
+            var error = CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
+            Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, error);
+            var xml = actualDocument.ToString();
+            var project = new Project(xml);
+            //XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+        }
+
+        [TestMethod]
+        public void CatrobatVersionConverterTest_PocketCode12()
+        {
+            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test12Input");
+            //XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test12Output");
+
+            var error = CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
+            Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, error);
+            var xml = actualDocument.ToString();
+            var project = new Project(xml);
+            //XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+        }
+
+        [TestMethod]
+        public void CatrobatVersionConverterTest_PocketCode13()
+        {
+            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test13Input");
+            //XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test13Output");
+
+            var error = CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
+            Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, error);
+            var xml = actualDocument.ToString();
+            var project = new Project(xml);
+            //XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+        }
+
+        [TestMethod]
+        public void CatrobatVersionConverterTest_PocketCode14()
+        {
+            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test14Input");
+            //XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test14Output");
+
+            var error = CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
+            Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, error);
+            var xml = actualDocument.ToString();
+            var project = new Project(xml);
+            //XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+        }
+
+        [TestMethod]
+        public void CatrobatVersionConverterTest_PocketCode15()
+        {
+            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test15Input");
+            //XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test15Output");
+
+            var error = CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
+            Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, error);
+            var xml = actualDocument.ToString();
+            var project = new Project(xml);
+            //XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+        }
+
+        [TestMethod]
+        public void CatrobatVersionConverterTest_PocketCode16()
+        {
+            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test16Input");
+            //XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/Test16Output");
+
+            var error = CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
+            Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, error);
+            var xml = actualDocument.ToString();
+            var project = new Project(xml);
+            //XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+        }
+
         #endregion
 
     }

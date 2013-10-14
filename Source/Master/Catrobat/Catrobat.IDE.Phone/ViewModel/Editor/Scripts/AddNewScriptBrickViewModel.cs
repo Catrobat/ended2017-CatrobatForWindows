@@ -36,6 +36,11 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Scripts
         private int _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex;
         private DataObject _selectedBrick;
         private bool _isAdding = false;
+        private bool _isControlVisible;
+        private bool _isLookVisible;
+        private bool _isMovementVisible;
+        private bool _isSoundVisible;
+        private bool _isVariableVisible;
 
         #endregion
 
@@ -52,6 +57,56 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Scripts
                 }
                 _brickCollection = value;
                 RaisePropertyChanged(() => BrickCollection);
+            }
+        }
+
+        public bool IsControlVisible
+        {
+            get { return _isControlVisible; }
+            set
+            {
+                _isControlVisible = value;
+                RaisePropertyChanged(() => IsControlVisible);
+            }
+        }
+
+        public bool IsLookVisible
+        {
+            get { return _isLookVisible; }
+            set
+            {
+                _isLookVisible = value;
+                RaisePropertyChanged(() => IsLookVisible);
+            }
+        }
+
+        public bool IsMovementVisible
+        {
+            get { return _isMovementVisible; }
+            set
+            {
+                _isMovementVisible = value;
+                RaisePropertyChanged(() => IsMovementVisible);
+            }
+        }
+
+        public bool IsSoundVisible
+        {
+            get { return _isSoundVisible; }
+            set
+            {
+                _isSoundVisible = value;
+                RaisePropertyChanged(() => IsSoundVisible);
+            }
+        }
+
+        public bool IsVariableVisible
+        {
+            get { return _isVariableVisible; }
+            set
+            {
+                _isVariableVisible = value;
+                RaisePropertyChanged(() => IsVariableVisible);
             }
         }
 
@@ -83,6 +138,10 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Scripts
         {
             lock (_receivedScriptBrickCollection)
             {
+                if (dataObject is EmptyDummyBrick)
+                    return;
+
+
                 if (dataObject == null || _isAdding)
                     return;
 
@@ -172,25 +231,40 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Scripts
         private void OnLoadBrickViewAction()
         {
             var app = (App)Application.Current;
+
+            IsControlVisible = false;
+            IsLookVisible = false;
+            IsMovementVisible = false;
+            IsSoundVisible = false;
+            IsVariableVisible = false;
+
             switch (_selectedBrickCategory)
             {
                 case BrickCategory.Control:
-                    BrickCollection = app.Resources["ScriptBrickAddDataControl"] as BrickCollection;
+                    IsControlVisible = true;
+                    //BrickCollection = app.Resources["ScriptBrickAddDataControl"] as BrickCollection;
                     break;
 
                 case BrickCategory.Looks:
-                    BrickCollection = app.Resources["ScriptBrickAddDataLook"] as BrickCollection;
+                    IsLookVisible = true;
+
+                    //BrickCollection = app.Resources["ScriptBrickAddDataLook"] as BrickCollection;
                     break;
 
                 case BrickCategory.Motion:
-                    BrickCollection = app.Resources["ScriptBrickAddDataMovement"] as BrickCollection;
+                    IsMovementVisible = true;
+
+                    //BrickCollection = app.Resources["ScriptBrickAddDataMovement"] as BrickCollection;
                     break;
 
                 case BrickCategory.Sounds:
-                    BrickCollection = app.Resources["ScriptBrickAddDataSound"] as BrickCollection;
+                    IsSoundVisible = true;
+  
+                    //BrickCollection = app.Resources["ScriptBrickAddDataSound"] as BrickCollection;
                     break;
                 case BrickCategory.Variables:
-                    BrickCollection = app.Resources["ScriptBrickAddDataVariables"] as BrickCollection;
+                    IsVariableVisible = true;
+                    //BrickCollection = app.Resources["ScriptBrickAddDataVariables"] as BrickCollection;
                     break;
 
             }
@@ -229,6 +303,10 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Scripts
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
             Messenger.Default.Register<GenericMessage<List<Object>>>(this, ViewModelMessagingToken.ScriptBrickCollectionListener, ReceiveScriptBrickCollectionAction);
+
+            if (IsInDesignMode)
+                IsLookVisible = true;
+
         }
 
         private void ResetViewModel()

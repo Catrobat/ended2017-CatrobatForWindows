@@ -72,7 +72,7 @@
             IsReorderEnabled="True"
             ItemsSource="{Binding ScriptBricks}"
             ItemTemplate="{StaticResource ScriptsBrickTemplate}"
-            ListBoxViewPort="{Binding ListBoxViewPort}"
+            ListBoxViewPort="{Binding ListBoxViewPort, Mode=TwoWay}"
             SmartSelectedItems="{Binding SelectedScripts}"
             Loaded="reorderListBoxScriptBricks_Loaded"
             ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"

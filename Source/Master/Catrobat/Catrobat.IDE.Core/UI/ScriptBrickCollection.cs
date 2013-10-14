@@ -222,7 +222,7 @@ namespace Catrobat.IDE.Core.UI
         {
             get
             {
-                return Scripts.Sum(script => script.Bricks.Bricks.Count + 1);
+                return Scripts.Sum(script => script.Bricks.Bricks.Count + 1) + 1;
             }
         }
 
@@ -336,6 +336,9 @@ namespace Catrobat.IDE.Core.UI
 
         public void Insert(int index, object value)
         {
+            if (index == Count)
+                index--;
+
             if (PreventIsertOfNext != null && PreventIsertOfNext == value)
             {
                 PreventIsertOfNext = null;

@@ -13,7 +13,7 @@ using GalaSoft.MvvmLight.Command;
 
 namespace Catrobat.IDE.Phone.ViewModel.Main
 {
-    public class ProjectImportViewModel : ViewModelBase, INotifyPropertyChanged
+    public class ProjectImportViewModel : ViewModelBase
     {
         #region private Members
 

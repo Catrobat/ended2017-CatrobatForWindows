@@ -444,18 +444,20 @@
                   <ColumnDefinition Width="auto" />
                   <ColumnDefinition Width="auto" />
                   <ColumnDefinition Width="*" />
-                  <ColumnDefinition Width="auto" />
-                  <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition/>
+                  <RowDefinition/>
+                </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" VerticalAlignment="Center" 
+                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" 
                            Text="{Binding Resources.Brick_PlaceAt, Source={StaticResource LocalizedStrings}}"
                            Margin="10" FontSize="24" />
-                <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="X" Margin="10" FontSize="24" />
-                <formulaControls:FormulaButton Grid.Column="2" Formula="{Binding XPosition, Mode=TwoWay}" 
+                <TextBlock Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Text="X" Margin="10" FontSize="24" />
+                <formulaControls:FormulaButton Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" Formula="{Binding XPosition, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
-                <TextBlock Grid.Column="3" VerticalAlignment="Center" Text="Y" Margin="10" FontSize="24" />
-                <formulaControls:FormulaButton Grid.Column="4" Formula="{Binding YPosition, Mode=TwoWay}" 
+                <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Text="Y" Margin="10" FontSize="24" />
+                <formulaControls:FormulaButton Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Formula="{Binding YPosition, Mode=TwoWay}" 
                                                IsEnabled="{Binding IsRealObject}"/>
               </Grid>
             </rlb:NormalBrick>
@@ -1118,6 +1120,15 @@
           </Grid>
         </DataTemplate>
       </sb:ScriptBrickContentTemplateSelector.ChangeVariableBrick>
+
+
+      <sb:ScriptBrickContentTemplateSelector.EmptyDummyBrick>
+        <DataTemplate>
+          <Grid Margin="0" Height="75" Background="Transparent">
+
+          </Grid>
+        </DataTemplate>
+      </sb:ScriptBrickContentTemplateSelector.EmptyDummyBrick>
 
 
     </sb:ScriptBrickContentTemplateSelector>

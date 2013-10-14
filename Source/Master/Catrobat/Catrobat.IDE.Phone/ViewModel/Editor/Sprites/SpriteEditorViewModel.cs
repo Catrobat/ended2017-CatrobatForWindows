@@ -80,14 +80,15 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                     ScriptBricks.CollectionChanged += ScriptBricksCollectionChanged;
                 }
 
-                if (_scriptBricks != null && _scriptBricks.Count == 0 && _listBoxViewPort == null)
+                //if (_scriptBricks != null && _scriptBricks.Count == 0 && ListBoxViewPort == null)
                     ListBoxViewPort = new ListBoxViewPort(0, 0);
 
                 if (_scriptBricks != null)
                 {
                     _scriptBricks.Update(_selectedSprite);
 
-                    if (_scriptBricks.Count > 0 && ListBoxViewPort.FirstVisibleIndex == 0 &&
+                    if (_scriptBricks.Count > 0 &&
+                        ListBoxViewPort.FirstVisibleIndex == 0 &&
                         ListBoxViewPort.LastVisibleIndex == 0)
                         ListBoxViewPort = new ListBoxViewPort(1, 2);
                 }
@@ -113,7 +114,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             {
                 if (_scriptBricks == null)
                     return true;
-                return _scriptBricks.Count == 0;
+                return _scriptBricks.Count <= 1;
             }
         }
 
@@ -514,36 +515,32 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         private void DeleteScriptBrickAction()
         {
-            // TODO: show messagebox?
-
             var scriptBricksToRemove = new List<DataObject>(SelectedScripts);
 
             foreach (var scriptBrick in scriptBricksToRemove)
             {
-                //if (scriptBrick is LoopBeginBrick)
-                //    scriptBricksToRemove.Add((scriptBrick as LoopBeginBrick).LoopEndBrick);
-                //if (scriptBrick is IfLogicBeginBrick)
-                //{
-                //    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicElseBrick);
-                //    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicEndBrick);
-                //}
-                //if (scriptBrick is IfLogicElseBrick)
-                //{
-                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicBeginBrick);
-                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicEndBrick);
-                //}
-                //if (scriptBrick is IfLogicElseBrick)
-                //{
-                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicBeginBrick);
-                //    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicEndBrick);
-                //}
+                if (scriptBrick is LoopBeginBrick)
+                    scriptBricksToRemove.Add((scriptBrick as LoopBeginBrick).LoopEndBrick);
+                if (scriptBrick is IfLogicBeginBrick)
+                {
+                    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicElseBrick);
+                    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicEndBrick);
+                }
+                if (scriptBrick is IfLogicElseBrick)
+                {
+                    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicBeginBrick);
+                    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicEndBrick);
+                }
+                if (scriptBrick is IfLogicEndBrick)
+                {
+                    scriptBricksToRemove.Add((scriptBrick as IfLogicEndBrick).IfLogicBeginBrick);
+                    scriptBricksToRemove.Add((scriptBrick as IfLogicEndBrick).IfLogicElseBrick);
+                }
 
 
                 if (scriptBrick is Brick || scriptBrick is Script)
                     ScriptBricks.Remove(scriptBrick);
             }
-
-
         }
 
 

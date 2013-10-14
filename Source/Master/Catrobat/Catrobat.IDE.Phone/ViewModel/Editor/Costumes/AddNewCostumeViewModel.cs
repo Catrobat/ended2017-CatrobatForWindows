@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
 
         private string _costumeName;
         private Sprite _receivedSelectedSprite;
-        private ImageDimention _dimention;
+        private ImageDimension _dimension;
         private ImageSizeEntry _selectedSize;
         private PortableImage _image;
         private Project _currentProject;
@@ -70,17 +70,17 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
             }
         }
 
-        public ImageDimention Dimention
+        public ImageDimension Dimension
         {
-            get { return _dimention; }
+            get { return _dimension; }
             set
             {
-                _dimention = value;
+                _dimension = value;
 
                 int visibleCounter = 0;
                 foreach (var size in ImageSizes)
                 {
-                    size.Dimention = Dimention;
+                    size.Dimension = Dimension;
                     if (size.IsVisible)
                         visibleCounter++;
                 }
@@ -100,7 +100,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
                         SelectedSize = ImageSizes[1];
                         break;
                 }
-                RaisePropertyChanged(() => Dimention);
+                RaisePropertyChanged(() => Dimension);
             }
         }
 
@@ -155,9 +155,11 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
 
         private void PictureSuccess(PortableImage image)
         {
+            ServiceLocator.NavigationService.RemoveBackEntry();
+
             Image = image;
             CostumeName = AppResources.Editor_Image;
-            Dimention = new ImageDimention { Height = image.Height, Width = image.Width };
+            Dimension = new ImageDimension { Height = image.Height, Width = image.Width };
 
             Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
         }
@@ -185,7 +187,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
         private void OpenPaintAction()
         {
             ServiceLocator.PictureService.DrawPicture(PictureSuccess, PictureCanceled, PictureError);
-            ServiceLocator.NavigationService.RemoveBackEntry();
 
             //var newBitmap = new WriteableBitmap(
             //    ServiceLocator.SystemInformationService.ScreenWidth, ServiceLocator.SystemInformationService.ScreenHeight);
@@ -219,7 +220,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    var newDimention = new ImageDimention
+                    var newDimention = new ImageDimension
                     {
                         Height = SelectedSize.NewHeight,
                         Width = SelectedSize.NewWidth
@@ -281,7 +282,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
 
         private void InitDesignData()
         {
-            Dimention = new ImageDimention { Width = 500, Height = 500 };
+            Dimension = new ImageDimension { Width = 500, Height = 500 };
             _selectedSize = ImageSizes[1];
         }
 
@@ -293,7 +294,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
 
                 var image = new BitmapImage();
                 image.SetSource(stream);
-                Dimention = new ImageDimention { Height = image.PixelHeight, Width = image.PixelWidth };
+                Dimension = new ImageDimension { Height = image.PixelHeight, Width = image.PixelWidth };
 
                 var writeableBitmap = new WriteableBitmap(image);
                 var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
@@ -329,7 +330,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
                 new ImageSizeEntry {Size = ImageSize.FullSize}
             };
 
-            Dimention = new ImageDimention { Width = 0, Height = 0 };
+            Dimension = new ImageDimension { Width = 0, Height = 0 };
         }
 
         private void ResetViewModel()

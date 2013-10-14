@@ -24,6 +24,11 @@ namespace Catrobat.IDE.Phone.Services.Storage
             return _iso.FileExists(path);
         }
 
+        public void CreateDirectory(string path)
+        {
+            _iso.CreateDirectory(path);
+        }
+
         public bool DirectoryExists(string path)
         {
             return _iso.DirectoryExists(path);
@@ -244,6 +249,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
                         storageFileStream.Close();
                         storageFileStream.Dispose();
 
+
                         var writeableBitmap = new WriteableBitmap(bitmapImage);
                         var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
                             writeableBitmap.PixelHeight);
@@ -254,6 +260,12 @@ namespace Catrobat.IDE.Phone.Services.Storage
             }
 
             return null;
+        }
+
+        public void DeleteImage(string pathToImage)
+        {
+            DeleteFile(pathToImage);
+            DeleteFile(pathToImage + ThumbnailExtension);
         }
 
         public PortableImage LoadImageThumbnail(string pathToImage)
@@ -295,6 +307,9 @@ namespace Catrobat.IDE.Phone.Services.Storage
                             var fileStream = OpenFile(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
                             var writeableBitmap = new WriteableBitmap(thumbnailImage.Width, thumbnailImage.Height);
                             writeableBitmap.FromByteArray(thumbnailImage.Data);
+
+
+                            //writeableBitmap.SaveJpeg(fileStream, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, 0, 95);
                             PNGWriter.WritePNG(writeableBitmap, fileStream, 95);
                         }
 
@@ -325,23 +340,35 @@ namespace Catrobat.IDE.Phone.Services.Storage
                     _iso.DeleteFile(thumbnailPath);
             }
 
-            var stream = _iso.OpenFile(path, FileMode.CreateNew, FileAccess.Write);
+            IsolatedStorageFileStream stream = null;
 
-            var writeableBitmap = new WriteableBitmap(image.Width, image.Height);
-
-            switch (format)
+            try
             {
-                case ImageFormat.Png:
-                    PNGWriter.WritePNG(writeableBitmap, stream, 95);
-                    break;
-                case ImageFormat.Jpg:
-                    writeableBitmap.SaveJpeg(stream, image.Width, image.Height, 0, 95);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException("format");
+                stream = _iso.OpenFile(path, FileMode.CreateNew, FileAccess.Write);
+
+                var writeableBitmap = new WriteableBitmap(image.Width, image.Height);
+                writeableBitmap.FromByteArray(image.Data);
+
+                switch (format)
+                {
+                    case ImageFormat.Png:
+                        PNGWriter.WritePNG(writeableBitmap, stream, 95);
+                        break;
+                    case ImageFormat.Jpg:
+                        writeableBitmap.SaveJpeg(stream, image.Width, image.Height, 0, 95);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException("format");
+                }
+            }//TODO: Where should the error be handled?
+            finally 
+            {
+                if (stream != null)
+                {
+                    stream.Flush();
+                    stream.Dispose();
+                }
             }
-
-
         }
 
         public void Dispose()

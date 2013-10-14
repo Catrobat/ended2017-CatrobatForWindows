@@ -137,6 +137,11 @@
                   Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, 
                   Source={StaticResource Locator}}" 
                   CommandParameter="{Binding CurrentProject.ProjectDummyHeader}" />
+                <toolkit:MenuItem Header="{Binding Resources.Main_ShareProject, 
+                        Source={StaticResource LocalizedStrings}}"
+                        Command="{Binding MainViewModel.ShareLocalProjectCommand, Mode=OneWay, 
+                        Source={StaticResource Locator}}" 
+                        CommandParameter="{Binding CurrentProject.ProjectDummyHeader}" />
               </toolkit:ContextMenu>
             </toolkit:ContextMenuService.ContextMenu>
             <Grid Background="{StaticResource PhoneAccentBrush}">
@@ -218,6 +223,11 @@
                       <toolkit:MenuItem Header="{Binding Resources.Main_PinProjectToStart, 
                         Source={StaticResource LocalizedStrings}}"
                         Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, 
+                        Source={StaticResource Locator}}" 
+                        CommandParameter="{Binding}" />
+                      <toolkit:MenuItem Header="{Binding Resources.Main_ShareProject, 
+                        Source={StaticResource LocalizedStrings}}"
+                        Command="{Binding MainViewModel.ShareLocalProjectCommand, Mode=OneWay, 
                         Source={StaticResource Locator}}" 
                         CommandParameter="{Binding}" />
                     </toolkit:ContextMenu>

@@ -16,10 +16,8 @@ using Microsoft.Phone.Tasks;
 
 namespace Catrobat.IDE.Phone.ViewModel.Service
 {
-    public class OnlineProjectViewModel : ViewModelBase, INotifyPropertyChanged
+    public class OnlineProjectViewModel : ViewModelBase
     {
-        public new event PropertyChangedEventHandler PropertyChanged;
-
         #region private Members
 
         private bool _buttonDownloadIsEnabled = true;
@@ -48,11 +46,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
                 {
                     _buttonDownloadIsEnabled = value;
 
-                    if (PropertyChanged != null)
-                    {
-                        RaisePropertyChanged(() => ButtonDownloadIsEnabled);
-                        DownloadCommand.RaiseCanExecuteChanged();
-                    }
+                    RaisePropertyChanged(() => ButtonDownloadIsEnabled);
+                    DownloadCommand.RaiseCanExecuteChanged();
                 }
             }
         }
@@ -66,10 +61,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
                 {
                     _uploadedLabelText = value;
 
-                    if (PropertyChanged != null)
-                    {
-                        RaisePropertyChanged(() => UploadedLabelText);
-                    }
+                    RaisePropertyChanged(() => UploadedLabelText);
                 }
             }
         }
@@ -83,10 +75,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
                 {
                     _versionLabelText = value;
 
-                    if (PropertyChanged != null)
-                    {
-                        RaisePropertyChanged(() => VersionLabelText);
-                    }
+                    RaisePropertyChanged(() => VersionLabelText);
                 }
             }
         }
@@ -99,11 +88,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
                 if (_viewsLabelText != value)
                 {
                     _viewsLabelText = value;
-
-                    if (PropertyChanged != null)
-                    {
-                        RaisePropertyChanged(() => ViewsLabelText);
-                    }
+                    RaisePropertyChanged(() => ViewsLabelText);
                 }
             }
         }
@@ -116,11 +101,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
                 if (_downloadsLabelText != value)
                 {
                     _downloadsLabelText = value;
-
-                    if (PropertyChanged != null)
-                    {
-                        RaisePropertyChanged(() => DownloadsLabelText);
-                    }
+                    RaisePropertyChanged(() => DownloadsLabelText);
                 }
             }
         }

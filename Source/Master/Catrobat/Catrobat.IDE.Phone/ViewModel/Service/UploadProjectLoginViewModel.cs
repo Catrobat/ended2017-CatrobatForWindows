@@ -16,10 +16,8 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Phone.ViewModel.Service
 {
-    public class UploadProjectLoginViewModel : ViewModelBase, INotifyPropertyChanged
+    public class UploadProjectLoginViewModel : ViewModelBase
     {
-        public new event PropertyChangedEventHandler PropertyChanged;
-
         public delegate void NavigationCallbackEvent();
 
         #region private Members
@@ -52,10 +50,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
                 {
                     _username = value;
 
-                    if (PropertyChanged != null)
-                    {
-                        RaisePropertyChanged(() => Username);
-                    }
+                    RaisePropertyChanged(() => Username);
                 }
             }
         }
@@ -69,10 +64,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
                 {
                     _password = value;
 
-                    if (PropertyChanged != null)
-                    {
-                        RaisePropertyChanged(() => Password);
-                    }
+                    RaisePropertyChanged(() => Password);
                 }
             }
         }
@@ -85,11 +77,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
                 if (_email != value)
                 {
                     _email = value;
-
-                    if (PropertyChanged != null)
-                    {
-                        RaisePropertyChanged(() => Email);
-                    }
+                    RaisePropertyChanged(() => Email);
                 }
             }
         }
@@ -114,7 +102,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
 
             if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_email))
             {
-                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption, 
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_UploadProjectLoginErrorCaption,
                     AppResources.Main_UploadProjectMissingLoginData, MissingLoginDataCallback, MessageBoxOptions.Ok);
             }
             else
@@ -162,7 +150,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
 
         private void navigationCallback()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof (UploadProjectView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectView));
         }
 
         private void MissingLoginDataCallback(MessageboxResult result)

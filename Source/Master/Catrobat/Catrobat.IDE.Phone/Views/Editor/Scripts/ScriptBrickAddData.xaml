@@ -117,6 +117,7 @@
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:GlideToBrick.DurationInSeconds>
+      
       <bricks:GlideToBrick.XDestination>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
@@ -124,6 +125,7 @@
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:GlideToBrick.XDestination>
+      
       <bricks:GlideToBrick.YDestination>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
@@ -132,6 +134,7 @@
         </formulas:Formula>
       </bricks:GlideToBrick.YDestination>
     </bricks:GlideToBrick>
+    
     <bricks:GoNStepsBackBrick IsRealObject="False">
       <bricks:GoNStepsBackBrick.Steps>
         <formulas:Formula>
@@ -141,7 +144,11 @@
         </formulas:Formula>
       </bricks:GoNStepsBackBrick.Steps>
     </bricks:GoNStepsBackBrick>
+    
     <bricks:ComeToFrontBrick IsRealObject="False"></bricks:ComeToFrontBrick>
+
+    <scripts:EmptyDummyBrick/>
+    
   </ui:BrickCollection>
 
   <ui:BrickCollection x:Key="ScriptBrickAddDataSound">
@@ -169,6 +176,9 @@
     </bricks:ChangeVolumeByBrick>
     
     <bricks:SpeakBrick Text="" IsRealObject="False"></bricks:SpeakBrick>
+
+    <scripts:EmptyDummyBrick/>
+    
   </ui:BrickCollection>
   
   <ui:BrickCollection x:Key="ScriptBrickAddDataLook">
@@ -239,6 +249,8 @@
     </bricks:ChangeBrightnessBrick>
     
     <bricks:ClearGraphicEffectBrick IsRealObject="False"></bricks:ClearGraphicEffectBrick>
+
+    <scripts:EmptyDummyBrick/>
   </ui:BrickCollection>
 
   <ui:BrickCollection x:Key="ScriptBrickAddDataControl">
@@ -280,7 +292,8 @@
         </formulas:Formula>
       </bricks:IfLogicBeginBrick.IfCondition>
     </bricks:IfLogicBeginBrick>
-
+    
+    <scripts:EmptyDummyBrick/>
   </ui:BrickCollection>
 
   <ui:BrickCollection x:Key="ScriptBrickAddDataVariables">
@@ -303,6 +316,8 @@
         </formulas:Formula>
       </bricks:ChangeVariableBrick.VariableFormula>
     </bricks:ChangeVariableBrick>
+    
+    <scripts:EmptyDummyBrick/>
   </ui:BrickCollection>
   
   <ui:BrickCollection x:Key="ScriptBrickAddDataNXT">

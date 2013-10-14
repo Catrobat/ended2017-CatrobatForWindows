@@ -12,7 +12,7 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Phone.ViewModel.Service
 {
-    public class UploadProjectViewModel : ViewModelBase, INotifyPropertyChanged
+    public class UploadProjectViewModel : ViewModelBase
     {
         private readonly CatrobatContextBase _catrobatContext;
 

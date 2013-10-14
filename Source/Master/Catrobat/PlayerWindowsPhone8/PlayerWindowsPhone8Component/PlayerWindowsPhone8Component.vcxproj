@@ -80,6 +80,8 @@
       <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <CompileAsWinRT>true</CompileAsWinRT>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\..\DirectXTK\Inc;$(ProjectDir)\..\..\FMOD\inc;$(ProjectDir)\..\..\FMOD\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level3</WarningLevel>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
