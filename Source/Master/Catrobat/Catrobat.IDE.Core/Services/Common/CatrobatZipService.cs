@@ -48,29 +48,32 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 using (var archive = ZipArchive.Create())
                 {
-                    WriteFilesRecursiveToZip(archive, storage, localStoragePath);
+                    WriteFilesRecursiveToZip(archive, storage, localStoragePath, "");
                     archive.SaveTo(zipStream, CompressionType.None);
                 }
             }
         }
 
-        private static void WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage, string basePath)
+        private static void WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage, 
+            string sourceBasePath, string destinationBasePath)
         {
-            var searchPattern = basePath;
+            var searchPattern = sourceBasePath;
             var fileNames = storage.GetFileNames(searchPattern);
 
             foreach (string fileName in fileNames)
             {
-                var tempPath = Path.Combine(basePath, fileName);
+                var tempPath = Path.Combine(sourceBasePath, fileName);
                 var fileStream = storage.OpenFile(tempPath, StorageFileMode.Open, StorageFileAccess.Read);
-                archive.AddEntry(fileName, fileStream);
+                var destinationPath = Path.Combine(destinationBasePath, fileName);
+                archive.AddEntry(destinationPath, fileStream);
             }
 
             var directrryNames = storage.GetDirectoryNames(searchPattern);
             foreach (string directoryName in directrryNames)
             {
-                var tempZipPath = Path.Combine(basePath, directoryName);
-                WriteFilesRecursiveToZip(archive, storage, tempZipPath);
+                var tempZipPath = Path.Combine(sourceBasePath, directoryName);
+                var nextDestinationBasePath = Path.Combine(destinationBasePath, directoryName);
+                WriteFilesRecursiveToZip(archive, storage, tempZipPath, nextDestinationBasePath);
             }
         }
     }
