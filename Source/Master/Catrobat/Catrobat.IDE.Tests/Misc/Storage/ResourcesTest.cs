@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Tests.Misc.Storage
                     projectPath = "Core/";
                     break;
                 case ResourceScope.TestCommon:
-                    projectPath = "Catrobat.IDE.Tests/";
+                    projectPath = "Catrobat.IDE.Tests/Binaries/";
                     break;
                 case ResourceScope.Resources:
                     projectPath = "Catrobat.IDE.Phone/Content/Resources/";
