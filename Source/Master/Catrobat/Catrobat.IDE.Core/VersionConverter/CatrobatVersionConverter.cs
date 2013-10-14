@@ -84,7 +84,7 @@ namespace Catrobat.IDE.Core.VersionConverter
                             }
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
                         error = VersionConverterError.ProjectCodeNotValid;
                     }

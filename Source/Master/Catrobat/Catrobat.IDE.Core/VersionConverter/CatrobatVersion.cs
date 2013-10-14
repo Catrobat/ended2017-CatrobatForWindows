@@ -23,14 +23,7 @@ namespace Catrobat.IDE.Core.VersionConverter
         public void ConvertBack(XDocument document)
         {
             ConvertBackStructure(document);
-
-            ConvertBackRemoveProperties(document);
-            ConvertBackRemoveElements(document);
         }
-
-        protected abstract void ConvertBackRemoveElements(XDocument document);
-
-        protected abstract void ConvertBackRemoveProperties(XDocument document);
 
         protected abstract void ConvertBackStructure(XDocument document);
 

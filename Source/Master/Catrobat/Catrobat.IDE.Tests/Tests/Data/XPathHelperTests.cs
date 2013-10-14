@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod]
         public void GetElementTest()
         {
-            XDocument document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");
+            var document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");
 
             const string path1 = "../../../element1/element11[2]";
 
@@ -39,9 +39,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod]
         public void GetXPathTest()
         {
-            XDocument document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");
+            var document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");
 
-            const string path1 = "../../../element1[1]/element11[2]";
+            const string path1 = "../../../element1/element11[2]";
 
             var start1 = (from a in document.Descendants()
                           where a.Attribute("start") != null && a.Attribute("start").Value == "1"
