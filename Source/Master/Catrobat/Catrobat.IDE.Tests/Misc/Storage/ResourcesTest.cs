@@ -25,7 +25,11 @@ namespace Catrobat.IDE.Tests.Misc.Storage
                     projectPath = "Core/";
                     break;
                 case ResourceScope.TestCommon:
-                    projectPath = "Catrobat.IDE.Tests/Binaries/";
+                    projectPath = "Catrobat.IDE.Tests/";
+
+                    if (!Directory.Exists(projectPath + "/SampleData")) // For testing on Build server
+                        projectPath += "Binaries/";
+
                     break;
                 case ResourceScope.Resources:
                     projectPath = "Catrobat.IDE.Phone/Content/Resources/";
