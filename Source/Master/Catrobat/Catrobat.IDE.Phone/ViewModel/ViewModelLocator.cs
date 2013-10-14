@@ -17,6 +17,7 @@ using Catrobat.IDE.Phone.ViewModel.Editor.Sprites;
 using Catrobat.IDE.Phone.ViewModel.Main;
 using Catrobat.IDE.Phone.ViewModel.Service;
 using Catrobat.IDE.Phone.ViewModel.Settings;
+using Catrobat.IDE.Phone.ViewModel.Share;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
@@ -58,6 +59,9 @@ namespace Catrobat.IDE.Phone.ViewModel
             SimpleIoc.Default.Register<ChangeVariableViewModel>(true);
             SimpleIoc.Default.Register<SpritesViewModel>(true);
             SimpleIoc.Default.Register<SpriteEditorViewModel>(true);
+            SimpleIoc.Default.Register<ShareProjectServiceSelectionViewModel>(true);
+            SimpleIoc.Default.Register<UploadToSkyDriveViewModel>(true);
+            
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -432,6 +436,30 @@ namespace Catrobat.IDE.Phone.ViewModel
                 return ServiceLocator.Current.GetInstance<SpriteEditorViewModel>();
             }
         }
+
+        
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public ShareProjectServiceSelectionViewModel ShareProjectServiceSelectionViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ShareProjectServiceSelectionViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public UploadToSkyDriveViewModel UploadToSkyDriveViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<UploadToSkyDriveViewModel>();
+            }
+        }
+        
 
         public static void Cleanup()
         {

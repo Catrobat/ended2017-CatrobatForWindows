@@ -40,6 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Include="Fonts\LiveSymbol.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +118,7 @@
     <Compile Include="CatrobatObjects\ProjectHeader.cs" />
     <Compile Include="CatrobatObjects\Scripts\BroadcastScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\Script.cs" />
+    <Compile Include="Services\IDispatcherService.cs" />
     <Compile Include="Services\IShareService.cs" />
     <Compile Include="UI\IPlayPauseButton.cs" />
     <Compile Include="UI\PlayPauseStateCommandArguments.cs" />
@@ -162,11 +164,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Localization\AppResources.qps-ploc.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AppResources.qps-ploc.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Localization\LocalizedStrings.cs" />
     <Compile Include="Resources\SampleProjectLoader.cs" />
@@ -254,10 +251,6 @@
     <EmbeddedResource Include="Resources\Localization\AppResources.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.de.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Localization\AppResources.qps-ploc.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.qps-ploc.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Localization\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

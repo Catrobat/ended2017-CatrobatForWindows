@@ -19,6 +19,7 @@
         PinProjectHeaderListener,
         DownloadProjectStartedListener,
         UploadProjectStartedListener,
-        SelectedUserVariableChangedListener
+        SelectedUserVariableChangedListener,
+        ShareProjectHeaderListener
     }
 }

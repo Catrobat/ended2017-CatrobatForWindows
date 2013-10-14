@@ -43,7 +43,8 @@ namespace Catrobat.IDE.Phone
                 new PictureServicePhone(),
                 new NotificationServicePhone(),
                 new ColorConversionServicePhone(),
-                new ShareServicePhone()
+                new ShareServicePhone(),
+                new DispatcherServicePhone()
                 );
         }
     }

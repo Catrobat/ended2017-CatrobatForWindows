@@ -1520,6 +1520,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload to SkyDrive.
+        /// </summary>
+        public static string Editor_UploadToSkyDrive {
+            get {
+                return ResourceManager.GetString("Editor_UploadToSkyDrive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Variable name.
         /// </summary>
         public static string Editor_VariableName {
@@ -2506,6 +2515,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_SettingsTheme {
             get {
                 return ResourceManager.GetString("Main_SettingsTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to share.
+        /// </summary>
+        public static string Main_ShareProject {
+            get {
+                return ResourceManager.GetString("Main_ShareProject", resourceCulture);
             }
         }
         

@@ -993,4 +993,10 @@
   <data name="Editor_Sec" xml:space="preserve">
     <value>sec</value>
   </data>
+  <data name="Editor_UploadToSkyDrive" xml:space="preserve">
+    <value>Upload to SkyDrive</value>
+  </data>
+  <data name="Main_ShareProject" xml:space="preserve">
+    <value>share</value>
+  </data>
 </root>
