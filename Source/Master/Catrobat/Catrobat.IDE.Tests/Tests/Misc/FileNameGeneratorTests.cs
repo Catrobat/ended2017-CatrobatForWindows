@@ -16,10 +16,10 @@ namespace Catrobat.IDE.Tests.Tests.Misc
     [TestMethod]
     public void GenerateValidFileName()
     {
-      string fileName = FileNameGenerationHelper.Generate();
+      string fileName1 = FileNameGenerationHelper.Generate();
+      string fileName2 = FileNameGenerationHelper.Generate();
 
-      Assert.IsTrue(fileName.EndsWith("_"));
-      Assert.IsTrue(fileName.Length >= 33); //32 x Hexzahl + 1 x "_"
+      Assert.AreNotEqual(fileName1, fileName2);
     }
   }
     

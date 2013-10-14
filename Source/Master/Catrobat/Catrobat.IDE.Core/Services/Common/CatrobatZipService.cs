@@ -62,6 +62,9 @@ namespace Catrobat.IDE.Core.Services.Common
 
             foreach (string fileName in fileNames)
             {
+                if (fileName.EndsWith(CatrobatContextBase.ImageThumbnailExtension))
+                    continue;
+
                 var tempPath = Path.Combine(sourceBasePath, fileName);
                 var fileStream = storage.OpenFile(tempPath, StorageFileMode.Open, StorageFileAccess.Read);
                 var destinationPath = Path.Combine(destinationBasePath, fileName);
