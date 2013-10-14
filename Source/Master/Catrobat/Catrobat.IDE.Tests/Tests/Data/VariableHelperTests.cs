@@ -35,7 +35,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             {
                 var localVariableList = VariableHelper.GetLocalVariableList(project1, sprite);
                 Assert.AreEqual(1, localVariableList.Count);
-                Assert.AreEqual("LocalTestVariable" + sprite.Name, localVariableList[0].Name);
+                Assert.AreEqual("LocalTestVariable", localVariableList[0].Name);
             }   
         }
 
@@ -162,7 +162,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             var notExistingLocalVariableName = "test1";
             foreach (var sprite in project1.SpriteList.Sprites)
             {
-                var existingLocalVariableName = "LocalTestVariable" + sprite.Name;
+                var existingLocalVariableName = "LocalTestVariable";
 
                 Assert.IsTrue(VariableHelper.VariableNameExists(project1, sprite, existingLocalVariableName));
                 Assert.IsFalse(VariableHelper.VariableNameExists(project1, sprite, notExistingLocalVariableName));
@@ -188,7 +188,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             {
                 foreach (var localVariable in VariableHelper.GetLocalVariableList(project1, sprite))
                 {
-                    var existingLocalVariableName = "LocalTestVariable" + sprite.Name;
+                    var existingLocalVariableName = "LocalTestVariable";
 
                     if(localVariable.Name != existingLocalVariableName)
                         Assert.IsTrue(VariableHelper.VariableNameExistsCheckSelf(project1, sprite, localVariable, existingLocalVariableName));
