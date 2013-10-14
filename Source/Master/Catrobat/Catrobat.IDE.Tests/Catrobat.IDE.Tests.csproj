@@ -115,6 +115,13 @@
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test7Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test8Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test9Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test10Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test11Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test12Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test14Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test15Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test13Input.xml" />
+    <Content Include="SampleData\SampleProjects\Converter\091_Win091\PracticalTests\Test16Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Forever_Input.xml" />
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_Forever_Output.xml" />
     <Content Include="SampleData\SampleProjects\Converter\091_Win091\VersionConverterTest_08_to_Win08_GlobalVariableReferences_Input.xml" />
