@@ -515,30 +515,64 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         private void DeleteScriptBrickAction()
         {
-            var scriptBricksToRemove = new List<DataObject>(SelectedActions);
+            var scriptBricksToRemove = new List<DataObject>();
 
-            foreach (var scriptBrick in scriptBricksToRemove)
+            foreach (var scriptBrick in SelectedActions)
             {
+                DataObject beginBrick = null;
+                DataObject endBrick = null;
+
                 if (scriptBrick is LoopBeginBrick)
-                    scriptBricksToRemove.Add((scriptBrick as LoopBeginBrick).LoopEndBrick);
+                {
+                    beginBrick = scriptBrick;
+                    endBrick = (scriptBrick as LoopBeginBrick).LoopEndBrick;
+                }
+                if (scriptBrick is LoopEndBrick)
+                {
+                    beginBrick = (scriptBrick as LoopEndBrick).LoopBeginBrick;
+                    endBrick = scriptBrick;
+                }
+
                 if (scriptBrick is IfLogicBeginBrick)
                 {
-                    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicElseBrick);
-                    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicEndBrick);
+                    beginBrick = scriptBrick;
+                    endBrick = (scriptBrick as IfLogicBeginBrick).IfLogicEndBrick;
                 }
                 if (scriptBrick is IfLogicElseBrick)
                 {
-                    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicBeginBrick);
-                    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicEndBrick);
+                    beginBrick = (scriptBrick as IfLogicElseBrick).IfLogicBeginBrick;
+                    endBrick = (scriptBrick as IfLogicElseBrick).IfLogicEndBrick;
                 }
                 if (scriptBrick is IfLogicEndBrick)
                 {
-                    scriptBricksToRemove.Add((scriptBrick as IfLogicEndBrick).IfLogicBeginBrick);
-                    scriptBricksToRemove.Add((scriptBrick as IfLogicEndBrick).IfLogicElseBrick);
+                    beginBrick = (scriptBrick as IfLogicEndBrick).IfLogicBeginBrick;
+                    endBrick = scriptBrick;
                 }
 
+                if ((scriptBrick is Brick || scriptBrick is Script) && !scriptBricksToRemove.Contains(scriptBrick))
+                    scriptBricksToRemove.Add(scriptBrick);
 
-                if (scriptBrick is Brick || scriptBrick is Script)
+                if (beginBrick != null)
+                {
+                    var isToDelete = false;
+                    foreach (var scriptBrickToRemove in ScriptBricks)
+                    {
+                        if (scriptBrickToRemove == beginBrick)
+                            isToDelete = true;
+
+                        if (isToDelete && !scriptBricksToRemove.Contains(scriptBrickToRemove))
+                        {
+                            scriptBricksToRemove.Add(scriptBrickToRemove);
+                }
+
+                        if (scriptBrickToRemove == endBrick)
+                            break;
+                    }
+                }
+            }
+
+            foreach (var scriptBrick in scriptBricksToRemove)
+            {
                     ScriptBricks.Remove(scriptBrick);
             }
         }
@@ -606,7 +640,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             foreach (var costume in SelectedCostumes)
             {
                 var newCostume = costume.Copy() as Costume;
-                if(newCostume != null)
+                if (newCostume != null)
                     Costumes.Insert(Costumes.IndexOf(costume) + 1, newCostume);
             }
         }

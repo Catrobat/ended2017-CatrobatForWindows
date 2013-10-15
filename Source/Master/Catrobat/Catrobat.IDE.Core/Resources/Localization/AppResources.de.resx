@@ -382,16 +382,16 @@
     <value>{0} {1} ausgewählt. Wirlich löschen?</value>
   </data>
   <data name="Editor_NoCostumeSelected" xml:space="preserve">
-    <value>Kein Kostüm ausgewählt</value>
+    <value>Kein Kostüm...</value>
   </data>
   <data name="Editor_NoMessageSelected" xml:space="preserve">
-    <value>Keine Nachricht ausgewählt</value>
+    <value>Keine Nachricht...</value>
   </data>
   <data name="Editor_NoSoundSelected" xml:space="preserve">
-    <value>Kein Klang ausgewählt</value>
+    <value>Kein Klang...</value>
   </data>
   <data name="Editor_NoSpriteSelected" xml:space="preserve">
-    <value>Kein Objekt ausgewählt</value>
+    <value>Kein Objekt...</value>
   </data>
   <data name="Editor_NothingItem" xml:space="preserve">
     <value>Nichts...</value>

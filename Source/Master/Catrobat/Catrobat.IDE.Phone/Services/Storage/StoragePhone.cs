@@ -370,6 +370,8 @@ namespace Catrobat.IDE.Phone.Services.Storage
                     stream.Dispose();
                 }
             }
+
+            stream.Close();
         }
 
         public void Dispose()
