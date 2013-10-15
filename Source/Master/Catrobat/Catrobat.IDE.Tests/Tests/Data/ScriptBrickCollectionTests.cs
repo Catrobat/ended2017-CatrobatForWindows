@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Bricks;
 using Catrobat.IDE.Core.CatrobatObjects.Scripts;
@@ -60,6 +61,11 @@ namespace Catrobat.IDE.Tests.Tests.Data
                 Assert.IsTrue(enumerator.Current is WaitBrick);
                 enumerator.MoveNext();
                 Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+
+                enumerator.MoveNext();
+                Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
+
+                Assert.IsFalse(enumerator.MoveNext());
             }
         }
 
@@ -112,6 +118,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is WaitBrick);
 
+            enumerator.MoveNext();
+            Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
+
             Assert.IsFalse(enumerator.MoveNext());
         }
 
@@ -156,6 +165,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsTrue(enumerator.Current is WaitBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
+
+            enumerator.MoveNext();
+            Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
 
             Assert.IsFalse(enumerator.MoveNext());
         }
@@ -210,6 +222,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is WhenScript);
 
+            enumerator.MoveNext();
+            Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
+
             Assert.IsFalse(enumerator.MoveNext());
         }
 
@@ -226,7 +241,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
             IEnumerator enumerator = collection.GetEnumerator();
 
             while (enumerator.MoveNext())
-                Assert.IsTrue(collection.Contains(enumerator.Current));
+                if (!(enumerator.Current is EmptyDummyBrick))
+                    Assert.IsTrue(collection.Contains(enumerator.Current));
 
             Brick notContainedBrick = new BroadcastBrick();
             Assert.IsFalse(collection.Contains(notContainedBrick));
@@ -250,7 +266,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
             int referenceIndex = 0;
             while (enumerator.MoveNext())
             {
-                Assert.AreEqual(referenceIndex, collection.IndexOf(enumerator.Current));
+                if (!(enumerator.Current is EmptyDummyBrick))
+                    Assert.AreEqual(referenceIndex, collection.IndexOf(enumerator.Current));
+
                 referenceIndex++;
             }
 
@@ -285,8 +303,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsTrue(enumerator.Current is StartScript);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
-            enumerator.MoveNext();
-            Assert.IsTrue(enumerator.Current is MoveNStepsBrick);
+            //enumerator.MoveNext();
+            //Assert.IsTrue(enumerator.Current is MoveNStepsBrick);
 
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is WhenScript);
@@ -302,6 +320,12 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsTrue(enumerator.Current is SetCostumeBrick);
             enumerator.MoveNext();
             Assert.IsTrue(enumerator.Current is ChangeBrightnessBrick);
+
+            enumerator.MoveNext();
+            Assert.IsTrue(enumerator.Current is MoveNStepsBrick);
+            enumerator.MoveNext();
+            Assert.IsTrue(enumerator.Current is EmptyDummyBrick);
+
             Assert.IsFalse(enumerator.MoveNext());
         }
     }

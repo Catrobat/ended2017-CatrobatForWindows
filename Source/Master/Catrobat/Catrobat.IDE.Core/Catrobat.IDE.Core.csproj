@@ -222,6 +222,7 @@
     <Compile Include="VersionConverter\CatrobatVersionPair.cs" />
     <Compile Include="VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
     <Compile Include="VersionConverter\Versions\CatrobatVersion091ToWin091.cs" />
+    <Compile Include="Utilities\Helpers\XElementExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.CrossCore">

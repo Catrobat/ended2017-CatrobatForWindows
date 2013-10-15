@@ -10,7 +10,6 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Phone.Views.Main;
 using Catrobat.IDE.Phone.Views.Share;
 using Coding4Fun.Toolkit.Controls;

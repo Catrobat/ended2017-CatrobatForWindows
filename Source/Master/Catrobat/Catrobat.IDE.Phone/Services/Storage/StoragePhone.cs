@@ -5,6 +5,7 @@ using System.IO.IsolatedStorage;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Windows.Media.Imaging;
+using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Data;
 using Catrobat.IDE.Core.Services.Storage;
@@ -14,7 +15,6 @@ namespace Catrobat.IDE.Phone.Services.Storage
 {
     public class StoragePhone : IStorage
     {
-        private const string ThumbnailExtension = "_thumb.png";
         private static int _imageThumbnailDefaultMaxWidthHeight = 200;
         private readonly IsolatedStorageFile _iso = IsolatedStorageFile.GetUserStoreForApplication();
         private readonly List<Stream> _openedStreams = new List<Stream>();
@@ -265,7 +265,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
         public void DeleteImage(string pathToImage)
         {
             DeleteFile(pathToImage);
-            DeleteFile(pathToImage + ThumbnailExtension);
+            DeleteFile(pathToImage + CatrobatContextBase.ImageThumbnailExtension);
         }
 
         public PortableImage LoadImageThumbnail(string pathToImage)
@@ -278,7 +278,8 @@ namespace Catrobat.IDE.Phone.Services.Storage
 
             if (imageBasePath != null)
             {
-                var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}", withoutExtension, ThumbnailExtension));
+                var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}", 
+                    withoutExtension, CatrobatContextBase.ImageThumbnailExtension));
 
                 if (FileExists(thumbnailPath))
                 {
@@ -329,7 +330,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
             path = path.Replace("\\", "/");
 
             var withoutExtension = Path.GetFileNameWithoutExtension(path);
-            var thumbnailPath = string.Format("{0}{1}", withoutExtension, ThumbnailExtension);
+            var thumbnailPath = string.Format("{0}{1}", withoutExtension, CatrobatContextBase.ImageThumbnailExtension);
 
             if (deleteExisting)
             {

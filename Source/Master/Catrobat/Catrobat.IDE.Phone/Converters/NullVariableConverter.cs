@@ -13,8 +13,6 @@ namespace Catrobat.IDE.Phone.Converters
                 return value;
 
             return new UserVariable {Name = AppResources.Editor_NoVariableSelected};
-
-            return value == null ? 0 : 1;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

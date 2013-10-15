@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -18,19 +19,21 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 }
                 else
                 {
-                    int index = 0;
                     var splitPath = part.Split('[');
                     var childElementName = splitPath[0];
+                    var index = 0;
 
                     if (splitPath.Length > 1)
                     {
                         var indexAsString = splitPath[1].Split(']')[0];
-                        index = int.Parse(indexAsString);
-                        index --;
+
+                        // numbering starts with 1
+                        index = int.Parse(indexAsString) - 1;
                     }
 
-                    currentElement = currentElement.Descendants(childElementName).ToArray()[index];
+                    currentElement = currentElement.Descendants(childElementName).ElementAtOrDefault(index);
                 }
+                if (currentElement == null) break;
             }
 
             return currentElement;
@@ -40,19 +43,19 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
         {
             var path = "";
             
-            var absolutFromPath = GetAbsolutPath(fromElement);
-            var absolutToPath = GetAbsolutPath(toElement);
+            var absolutePathFrom = GetAbsolutePath(fromElement);
+            var absolutePathTo = GetAbsolutePath(toElement);
 
-            int commonPath = 0;
-            while (commonPath < absolutFromPath.Count && commonPath < absolutToPath.Count && absolutFromPath[commonPath] == absolutToPath[commonPath])
+            var commonPath = 0;
+            while (commonPath < absolutePathFrom.Count && commonPath < absolutePathTo.Count && absolutePathFrom[commonPath] == absolutePathTo[commonPath])
                 commonPath++;
 
-            for (int i = 0; i < absolutFromPath.Count - commonPath + 1; i++)
+            for (var i = 0; i < absolutePathFrom.Count - commonPath + 1; i++)
                 path += "../";
 
-            for (int i = commonPath; i < absolutToPath.Count; i++)
+            for (var i = commonPath; i < absolutePathTo.Count; i++)
             {
-                path += GetNameWithIndex(absolutToPath[i]) + "/";
+                path += GetNameWithIndex(absolutePathTo[i]) + "/";
             }
 
             path += GetNameWithIndex(toElement);
@@ -70,36 +73,31 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return xPath1 == xPath2;
         }
 
-        private static List<XElement> GetAbsolutPath(XElement element)
+        private static List<XElement> GetAbsolutePath(XElement element)
         {
-            var reverePath = new List<XElement>();
+            var reversePath = new List<XElement>();
             var currentElement = element;
 
             while (currentElement.Parent != null)
             {
-                reverePath.Add(currentElement.Parent);
+                reversePath.Add(currentElement.Parent);
                 currentElement = currentElement.Parent;
             }
 
-            var path = new List<XElement>();
+            reversePath.Reverse();
 
-            for(int i = reverePath.Count - 1; i >= 0; i--)
-                path.Add(reverePath[i]);
-
-            return path;
+            return reversePath;
         }
 
         private static string GetNameWithIndex(XElement element)
         {
-            var index = 0;
+            // numbering starts with 1
+            var index = element.ElementsBeforeSelf(element.Name).Count() + 1;
 
-            foreach (var sibling in element.ElementsBeforeSelf(element.Name))
-                if (sibling != element)
-                    index++;
+            // add index only when there are more then 1 elements
+            if (index == 1 && !element.ElementsAfterSelf(element.Name).Any()) return element.Name.ToString();
 
-            index++;
-            var nameWithIndex = element.Name + "[" + index + "]";
-            return nameWithIndex;
+            return element.Name + "[" + index + "]";;
         }
     }
 }

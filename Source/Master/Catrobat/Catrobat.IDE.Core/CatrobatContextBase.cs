@@ -23,6 +23,8 @@ namespace Catrobat.IDE.Core
         public const string TempProjectImportPath = "Temp/ImportProject";
         public const string TempPaintImagePath = "Temp/PaintImage";
 
+        public const string ImageThumbnailExtension = "_thumb";
+
         #endregion
 
         #region Private members

@@ -23,7 +23,7 @@ namespace Catrobat.IDE.Core.Services.Data
             B = b;
         }
 
-        public object NativeBrush
+        public override object NativeBrush
         {
             get
             {

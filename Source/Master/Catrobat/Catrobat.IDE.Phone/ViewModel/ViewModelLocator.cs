@@ -104,7 +104,8 @@ namespace Catrobat.IDE.Phone.ViewModel
         public static void LoadContext()
         {
             _context = new CatrobatContext();
-            var currentProject = InitializeFirstTimeUse(_context);
+            var currentProject = InitializeFirstTimeUse(_context) ??
+                                 CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
 
             if (_context.LocalSettings.CurrentLanguageString == null)
                 _context.LocalSettings.CurrentLanguageString =

@@ -14,8 +14,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
 {
     public class UploadProjectViewModel : ViewModelBase
     {
-        private readonly CatrobatContextBase _catrobatContext;
-
         #region private Members
 
         private string _projectName;

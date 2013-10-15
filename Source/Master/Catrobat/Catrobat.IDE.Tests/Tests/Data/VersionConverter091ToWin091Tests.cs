@@ -24,51 +24,31 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod]
         public void CatrobatVersionConverterTest_Convert_ObjectReferences()
         {
-            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_ObjectReferences_Input");
-            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_ObjectReferences_Output");
-
-            CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
-            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+            TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_ObjectReferences");
         }
 
         [TestMethod]
         public void CatrobatVersionConverterTest_Convert_SoundReferences()
         {
-            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_SoundReferences_Input");
-            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_SoundReferences_Output");
-
-            CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
-            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+            TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_SoundReferences");
         }
 
         [TestMethod]
         public void CatrobatVersionConverterTest_Convert_LookReferences()
         {
-            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_LookReferences_Input");
-            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_LookReferences_Output");
-
-            CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
-            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+            TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_LookReferences");
         }
 
         [TestMethod]
         public void CatrobatVersionConverterTest_Convert_GlobalVariableReferences()
         {
-            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_GlobalVariableReferences_Input");
-            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_GlobalVariableReferences_Output");
-
-            CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
-            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+            TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_GlobalVariableReferences");
         }
 
         [TestMethod]
         public void CatrobatVersionConverterTest_Convert_LocalVariableReferences()
         {
-            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_LocalVariableReferences_Input");
-            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_LocalVariableReferences_Output");
-
-            CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
-            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+            TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_LocalVariableReferences");
         }
 
         #region References in Bricks
@@ -76,44 +56,40 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod]
         public void CatrobatVersionConverterTest_Convert_PointToBrickReferences()
         {
-            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_PointTo_Input");
-            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_PointTo_Output");
-
-            CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
-            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+            TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_PointTo");
         }
 
 
         [TestMethod]
         public void CatrobatVersionConverterTest_Convert_ForeverBrickReferences()
         {
-            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_Forever_Input");
-            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_Forever_Output");
-
-            CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
-            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+            TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_Forever");
         }
 
         [TestMethod]
         public void CatrobatVersionConverterTest_Convert_RepeatBrickReferences()
         {
-            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_Repeat_Input");
-            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_Repeat_Output");
-
-            CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
-            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+            TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_Repeat");
         }
 
         [TestMethod]
         public void CatrobatVersionConverterTest_Convert_IfLoginBeginBrickReferences()
         {
-            XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_IfLogicBegin_Input");
-            XDocument expectedDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/VersionConverterTest_08_to_Win08_IfLogicBegin_Output");
-
-            CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
-            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+            TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_IfLogicBegin");
         }
 
         #endregion
+
+        private void TestSampleData(string path)
+        {
+            var actualDocument = SampleLoader.LoadSampleXDocument(path + "_Input");
+            var expectedDocument = SampleLoader.LoadSampleXDocument(path + "_Output");
+
+            var error = CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
+            Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, error);
+
+            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+        }
+
     }
 }
