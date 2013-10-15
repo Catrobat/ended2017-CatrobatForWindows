@@ -14,6 +14,7 @@ namespace Catrobat.IDE.Core.Services.Data
         private byte[] _data;
         private int _width;
         private int _height;
+        private object _nativeImageSource;
 
         public byte[] Data
         {
@@ -45,7 +46,8 @@ namespace Catrobat.IDE.Core.Services.Data
                 if (_nativeImageSource != null)
                     return _nativeImageSource;
 
-                return Services.ServiceLocator.ImageSourceConversionService.ConvertToLocalImageSource(_data, _width, _height);
+                var image = Services.ServiceLocator.ImageSourceConversionService.ConvertToLocalImageSource(_data, _width, _height);
+                return image;
             }
 
             set
@@ -65,6 +67,11 @@ namespace Catrobat.IDE.Core.Services.Data
             _data = data;
             _width = width;
             _height = height;
+        }
+
+        public PortableImage(object nativeImageSource)
+        {
+            _nativeImageSource = nativeImageSource;
         }
 
         public void WriateAsPng(string path)
@@ -101,22 +108,11 @@ namespace Catrobat.IDE.Core.Services.Data
         }
         #endregion
 
-
-        private object _nativeImageSource;
         public void LoadFromResources(ResourceScope scope, string path)
         {
             using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
                 _nativeImageSource = loader.LoadImage(scope, path);
-
-                //object portableImage = loader.LoadImage(scope, path);
-
-                //if (portableImage != null)
-                //{
-                //    this.Data = portableImage.Data;
-                //    this.Height = portableImage.Height;
-                //    this.Width = portableImage.Width;
-                //}
             }
         }
     }

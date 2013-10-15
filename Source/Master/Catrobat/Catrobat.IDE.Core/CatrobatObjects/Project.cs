@@ -43,6 +43,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects
                         else if (storage.FileExists(automaticProjectScreenshotPath))
                             _projectScreenshot = storage.LoadImage(automaticProjectScreenshotPath);
                     }
+                    if(_projectScreenshot == null)
+                        return new PortableImage();
                 }
 
                 if (ProjectDummyHeader != null)
