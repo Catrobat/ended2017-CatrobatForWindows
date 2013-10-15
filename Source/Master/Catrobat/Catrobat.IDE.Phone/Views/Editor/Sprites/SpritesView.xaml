@@ -109,8 +109,17 @@
         </reorderableListbox:ReorderListBox.ItemTemplate>
       </reorderableListbox:ReorderListBox>
 
+      <TextBlock Grid.Row="1"
+              Text ="{Binding Resources.Editor_ClickPlusToAddAction, Source={StaticResource LocalizedStrings}}"
+              Visibility="{Binding IsSpritesEmpty, Converter={StaticResource BoolVisibilityConverter}}"
+              Style="{StaticResource PhoneTextLargeStyle}"
+              TextWrapping="Wrap"
+              TextAlignment="Center"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center" />
 
-      <appBar:EditorAppBar Grid.Row="2"
+      
+    <appBar:EditorAppBar Grid.Row="2"
       VerticalAlignment="Bottom"
       TargetType="Object"
       ClearSelectionCommand="{Binding ClearObjectsSelectionCommand}"

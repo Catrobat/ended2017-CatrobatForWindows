@@ -515,7 +515,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         private void DeleteScriptBrickAction()
         {
-            var scriptBricksToRemove = new List<DataObject>();
+            var bricksToRemove = new List<Brick>();
+            var scriptsToRemove = new List<Script>();
 
             foreach (var scriptBrick in SelectedActions)
             {
@@ -549,8 +550,11 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                     endBrick = scriptBrick;
                 }
 
-                if ((scriptBrick is Brick || scriptBrick is Script) && !scriptBricksToRemove.Contains(scriptBrick))
-                    scriptBricksToRemove.Add(scriptBrick);
+                if(scriptBrick is Script && !scriptsToRemove.Contains(scriptBrick as Script))
+                    scriptsToRemove.Add(scriptBrick as Script);
+
+                if (scriptBrick is Brick && !bricksToRemove.Contains(scriptBrick as Brick))
+                    bricksToRemove.Add(scriptBrick as Brick);
 
                 if (beginBrick != null)
                 {
@@ -560,9 +564,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                         if (scriptBrickToRemove == beginBrick)
                             isToDelete = true;
 
-                        if (isToDelete && !scriptBricksToRemove.Contains(scriptBrickToRemove))
+                        if (isToDelete && !bricksToRemove.Contains(scriptBrickToRemove as Brick))
                         {
-                            scriptBricksToRemove.Add(scriptBrickToRemove);
+                            bricksToRemove.Add(scriptBrickToRemove as Brick);
                 }
 
                         if (scriptBrickToRemove == endBrick)
@@ -571,10 +575,14 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                 }
             }
 
-            foreach (var scriptBrick in scriptBricksToRemove)
-            {
-                    ScriptBricks.Remove(scriptBrick);
-            }
+            SelectedActions.Clear();
+
+            foreach (var brick in bricksToRemove)
+                ScriptBricks.Remove(brick);
+
+            foreach (var script in scriptsToRemove)
+                ScriptBricks.Remove(script);
+
         }
 
 

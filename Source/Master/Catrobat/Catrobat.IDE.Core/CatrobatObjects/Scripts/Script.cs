@@ -24,7 +24,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Scripts
 
         protected Script()
         {
-            Bricks = new BrickList();
+            if(!(this is EmptyDummyBrick))
+                Bricks = new BrickList();
         }
 
         protected Script(XElement xElement)

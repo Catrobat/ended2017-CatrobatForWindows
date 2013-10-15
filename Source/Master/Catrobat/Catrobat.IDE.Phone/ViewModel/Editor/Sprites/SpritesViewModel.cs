@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -29,7 +30,19 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
         public Project CurrentProject
         {
             get { return _currentProject; }
-            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+            private set 
+            { 
+                _currentProject = value;
+
+                if (_currentProject != null)
+                {
+                    Sprites.CollectionChanged -= SpritesCollectionChanged;
+
+                    Sprites.CollectionChanged += SpritesCollectionChanged;
+                }
+                
+                RaisePropertyChanged(() => CurrentProject); 
+            }
         }
 
         public ObservableCollection<Sprite> Sprites
@@ -37,6 +50,16 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             get
             {
                 return CurrentProject.SpriteList.Sprites;
+            }
+        }
+
+        public bool IsSpritesEmpty
+        {
+            get
+            {
+                if (Sprites == null)
+                    return true;
+                return Sprites.Count <= 0;
             }
         }
 
@@ -264,9 +287,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
 
-        public override void Cleanup()
+        private void SpritesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            base.Cleanup();
+            RaisePropertyChanged(() => IsSpritesEmpty);
         }
     }
 }
