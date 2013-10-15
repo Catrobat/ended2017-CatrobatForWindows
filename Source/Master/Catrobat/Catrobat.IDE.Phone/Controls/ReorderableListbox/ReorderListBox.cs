@@ -1329,7 +1329,8 @@ namespace Catrobat.IDE.Phone.Controls.ReorderableListbox
 
             foreach (var o in source)
             {
-                target.Add(o);
+                if (!(o is EmptyDummyBrick)) // This if is used for preventing the EmptyDummyBrick to get selected
+                    target.Add(o);
             }
         }
 

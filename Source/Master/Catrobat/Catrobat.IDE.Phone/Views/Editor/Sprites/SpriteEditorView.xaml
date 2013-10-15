@@ -73,7 +73,7 @@
             ItemsSource="{Binding ScriptBricks}"
             ItemTemplate="{StaticResource ScriptsBrickTemplate}"
             ListBoxViewPort="{Binding ListBoxViewPort, Mode=TwoWay}"
-            SmartSelectedItems="{Binding SelectedScripts}"
+            SmartSelectedItems="{Binding SelectedActions}"
             Loaded="reorderListBoxScriptBricks_Loaded"
             ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
             Foreground="White" />
