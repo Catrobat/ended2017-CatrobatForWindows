@@ -8,7 +8,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Scripts
 {
     public class ScriptList : DataObject
     {
-        public ObservableCollection<Script> Scripts { get; private set; }
+        public ObservableCollection<Script> Scripts { get; set; }
 
         public int ActionCount
         {

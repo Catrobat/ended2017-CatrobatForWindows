@@ -21,7 +21,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod]
         public void DeleteSprite()
         {
-            var project = ProjectGenerator.GenerateProject();
+            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            var project = projectgenerator.GenerateProject();
 
             var pathCostumes = project.BasePath + "/" + Project.ImagesPath + "/";
             var pathSounds = project.BasePath + "/" + Project.SoundsPath + "/";

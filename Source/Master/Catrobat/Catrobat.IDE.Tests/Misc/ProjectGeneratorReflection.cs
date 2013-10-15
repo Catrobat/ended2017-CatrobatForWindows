@@ -17,7 +17,7 @@ using Catrobat.IDE.Core.Services.Common;
 
 namespace Catrobat.IDE.Tests.Misc
 {
-    public class ProjectGenerator
+    public class ProjectGeneratorReflection : IProjectGenerator
     {
         // Bricks that must be tested manually
         private static readonly List<Type> ExcludedBricks = new List<Type>
@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Tests.Misc
             typeof(IfLogicEndBrick)
         };
 
-        public static Project GenerateProject()
+        public Project GenerateProject()
         {
             var project = new Project
             {
@@ -121,7 +121,7 @@ namespace Catrobat.IDE.Tests.Misc
             return project;
         }
 
-        private static void FillDummyValues(object o, Project project, Sprite sprite)
+        private void FillDummyValues(object o, Project project, Sprite sprite)
         {
             var type = o.GetType();
 
@@ -135,8 +135,8 @@ namespace Catrobat.IDE.Tests.Misc
             }
         }
 
-        private static Random _rand;
-        private static object CreateDummyValue(Type type, Project project, Sprite sprite)
+        private Random _rand;
+        private object CreateDummyValue(Type type, Project project, Sprite sprite)
         {
             _rand = new Random(42);
 
@@ -231,7 +231,7 @@ namespace Catrobat.IDE.Tests.Misc
             return null;
         }
 
-        private static Formula GenerateFormula()
+        private Formula GenerateFormula()
         {
             var formula = new Formula
             {
@@ -269,7 +269,7 @@ namespace Catrobat.IDE.Tests.Misc
             return formula;
         }
 
-        private static Costume GenerateCostume(int index, Project project)
+        private Costume GenerateCostume(int index, Project project)
         {
             var costume = new Costume
              {
@@ -288,7 +288,7 @@ namespace Catrobat.IDE.Tests.Misc
             return costume;
         }
 
-        private static Sound GenerateSound(int index, Project project)
+        private Sound GenerateSound(int index, Project project)
         {
             var sound = new Sound
                 {
@@ -307,7 +307,7 @@ namespace Catrobat.IDE.Tests.Misc
             return sound;
         }
 
-        private static void AddUserVariables(Project project)
+        private void AddUserVariables(Project project)
         {
             project.VariableList = new VariableList
                 {
@@ -351,7 +351,7 @@ namespace Catrobat.IDE.Tests.Misc
 
         }
 
-        private static void AddLoopBricks(ObservableCollection<Brick> bricks)
+        private void AddLoopBricks(ObservableCollection<Brick> bricks)
         {
             var foreverBrick = new ForeverBrick();
             bricks.Add(foreverBrick);
@@ -381,7 +381,7 @@ namespace Catrobat.IDE.Tests.Misc
             loopEndBrickRepeat.LoopBeginBrick = repeatBrick;
         }
 
-        private static void AddIfLogicBricks(ObservableCollection<Brick> bricks)
+        private void AddIfLogicBricks(ObservableCollection<Brick> bricks)
         {
             var ifLogicBeginBrick = new IfLogicBeginBrick
             {
