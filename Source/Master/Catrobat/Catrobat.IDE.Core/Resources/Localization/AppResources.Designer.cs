@@ -494,7 +494,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to set Variable.
+        ///   Looks up a localized string similar to set variable.
         /// </summary>
         public static string Brick_SetVariable {
             get {
