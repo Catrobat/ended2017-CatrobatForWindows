@@ -23,7 +23,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
     }
 
 
-    [TestMethod]
+    [TestMethod,TestCategory("GatedTests")]
     public void DeleteDirectoryTest()
     {
       using (IStorage storage = new StorageTest())
@@ -51,7 +51,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
       }
     }
 
-    [TestMethod]
+    [TestMethod,TestCategory("GatedTests")]
     public void DeleteFileTest()
     {
       using (IStorage storage = new StorageTest())
@@ -77,7 +77,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
       }
     }
 
-    [TestMethod]
+    [TestMethod,TestCategory("GatedTests")]
     public void CopyDirectoryTest()
     {
       using (IStorage storage = new StorageTest())
@@ -107,7 +107,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
       }
     }
 
-    [TestMethod]
+    [TestMethod,TestCategory("GatedTests")]
     public void CopyFileTest()
     {
       using (IStorage storage = new StorageTest())
@@ -138,7 +138,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
       }
     }
 
-    [TestMethod]
+    [TestMethod,TestCategory("GatedTests")]
     public void OpenFileTest()
     {
       using (IStorage storage = new StorageTest())
@@ -173,7 +173,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
       }
     }
 
-    [TestMethod]
+    [TestMethod,TestCategory("GatedTests")]
     public void RenameDirectoryTest()
     {
       using (IStorage storage = new StorageTest())
@@ -203,7 +203,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
       }
     }
 
-    [TestMethod]
+    [TestMethod,TestCategory("GatedTests")]
     public void LoadImageTest()
     {
       using (IStorage storage = new StorageTest())
@@ -230,7 +230,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
       }
     }
 
-    //[TestMethod]
+    //[TestMethod,TestCategory("GatedTests")]
     //public void SaveImageTest()
     //{
     //  using (IStorage storage = new StorageTest())
@@ -258,7 +258,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
     //  }
     //}
 
-    [TestMethod]
+    [TestMethod,TestCategory("GatedTests")]
     public void ReadWriteTextFileTest()
     {
       using (IStorage storage = new StorageTest())
@@ -274,7 +274,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
       }
     }
 
-    [TestMethod]
+    [TestMethod,TestCategory("GatedTests")]
     public void ReadWriteSerializableObjectTest()
     {
       TestHelper.InitializeAndClearCatrobatContext();

@@ -17,7 +17,7 @@ namespace Catrobat.IDE.Tests.Tests.Misc
             TestHelper.InitializeTests();
         }
 
-        [TestMethod]
+        [TestMethod,TestCategory("GatedTests")]
         public void UnZipSimpleTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();
@@ -61,7 +61,7 @@ namespace Catrobat.IDE.Tests.Tests.Misc
             }
         }
 
-        [TestMethod]
+        [TestMethod,TestCategory("GatedTests")]
         public void ZipSimpleTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();

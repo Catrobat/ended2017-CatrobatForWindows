@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region typing
 
-        [TestMethod,TestCategory("GuardedTests")]
+        [TestMethod,TestCategory("GatedTests")]
         public void FormulaEditorTests_NumberTypingTest_01()
         {
             var editor = new FormulaEditor();
