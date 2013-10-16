@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
 {
-    public class LoopEndBrick : Brick
+    public abstract class LoopEndBrick : Brick
     {
         protected LoopBeginBrickReference _loopBeginBrickReference;
         internal LoopBeginBrickReference LoopBeginBrickReference
@@ -27,10 +27,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
                 if (_loopBeginBrickReference == null)
                 {
                     _loopBeginBrickReference = new LoopBeginBrickReference();
-                    if (value is RepeatBrick)
-                        _loopBeginBrickReference.Class = "repeatBrick";
-                    else if (value is ForeverBrick)
-                        _loopBeginBrickReference.Class = "foreverBrick";
                 }
 
                 if (_loopBeginBrickReference.LoopBeginBrick == value)
@@ -45,11 +41,15 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
             }
         }
 
-        public LoopEndBrick() {}
+        protected LoopEndBrick() {}
 
-        public LoopEndBrick(XElement xElement) : base(xElement) {}
+        protected LoopEndBrick(XElement xElement) : base(xElement) {}
 
-        internal override void LoadFromXML(XElement xRoot)
+        internal abstract override void LoadFromXML(XElement xRoot);
+
+        internal abstract override XElement CreateXML();
+
+        protected override void LoadFromCommonXML(XElement xRoot)
         {
             if (xRoot.Element("loopBeginBrick") != null)
             {
@@ -57,13 +57,9 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
             }
         }
 
-        internal override XElement CreateXML()
+        protected override void CreateCommonXML(XElement xRoot)
         {
-            var xRoot = new XElement("loopEndBrick");
-
             xRoot.Add(_loopBeginBrickReference.CreateXML());
-
-            return xRoot;
         }
 
         internal override void LoadReference()
@@ -72,15 +68,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
                 _loopBeginBrickReference.LoadReference();
         }
 
-        public override DataObject Copy()
-        {
-            var newBrick = new LoopEndBrick();
-
-            if(_loopBeginBrickReference != null)
-                newBrick.LoopBeginBrickReference = _loopBeginBrickReference.Copy() as LoopBeginBrickReference;
-
-            return newBrick;
-        }
+        public abstract override DataObject Copy();
 
         public override bool Equals(DataObject other)
         {

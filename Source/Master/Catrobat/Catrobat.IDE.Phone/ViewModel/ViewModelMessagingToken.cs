@@ -7,7 +7,7 @@
         CurrentSpriteChangedListener,
         SpriteNameListener,
         //SpriteListListener,
-        ProjectNameListener,
+        //ProjectNameListener,
         BroadcastObjectListener,
         BroadcastMessageListener,
         ScriptBrickCollectionListener,
@@ -20,6 +20,7 @@
         DownloadProjectStartedListener,
         UploadProjectStartedListener,
         SelectedUserVariableChangedListener,
-        ShareProjectHeaderListener
+        ShareProjectHeaderListener,
+        ChangeLocalProjectListener
     }
 }

@@ -98,19 +98,17 @@ namespace Catrobat.IDE.Core
                 };
             sprite.Sounds = sounds;
 
-            var scripts = new ScriptList
-                {
-                    Scripts = new ObservableCollection<Script>
-                    {
-                        new StartScript{ Bricks = new BrickList() }
-                    }
-                };
+            var scripts = new ScriptList();
+
+            var script = new StartScript();
 
             var setCostumeBrick = new SetCostumeBrick
                 {
                     Costume = sprite.Costumes.Costumes[0],
                 };
-            scripts.Scripts[0].Bricks.Bricks.Add(setCostumeBrick);
+
+            script.Bricks.Bricks.Add(setCostumeBrick);
+            scripts.Scripts.Add(script);
             sprite.Scripts = scripts;
             project.SpriteList.Sprites.Add(sprite);
 

@@ -62,7 +62,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Variables
                 return false;
 
             for (int i = 0; i < count; i++)
-                if (UserVariables[i].Equals(otherUserVariableList.UserVariables[i]))
+                if (!(UserVariables[i].Equals(otherUserVariableList.UserVariables[i])))
                     return false;
 
             return true;

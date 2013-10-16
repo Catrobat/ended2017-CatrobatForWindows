@@ -772,7 +772,7 @@
     <value>Variables</value>
   </data>
   <data name="Brick_SetVariable" xml:space="preserve">
-    <value>set Variable</value>
+    <value>set variable</value>
   </data>
   <data name="Brick_SetVariableTo" xml:space="preserve">
     <value>to</value>

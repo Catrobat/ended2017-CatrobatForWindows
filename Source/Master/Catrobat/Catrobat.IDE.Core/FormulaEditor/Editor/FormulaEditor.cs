@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
     public class FormulaEditor
     {
         private SelectedFormulaInformation _selectedFormulaInfo;
+        private Stack<FormulaTree> _undoStack;
+        private Stack<FormulaTree> _redoStack;
 
         public SelectedFormulaInformation SelectedFormula
         {
@@ -18,6 +20,38 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             set
             {
                 _selectedFormulaInfo = value;
+            }
+        }
+
+        public Stack<FormulaTree> UndoStack
+        {
+            get
+            {
+                if (_undoStack == null)
+                {
+                    _undoStack = new Stack<FormulaTree>();
+                }
+                return _undoStack;
+            }
+            set
+            {
+                _undoStack = value;
+            }
+        }
+
+        public Stack<FormulaTree> RedoStack
+        {
+            get
+            {
+                if (_redoStack == null)
+                {
+                    _redoStack = new Stack<FormulaTree>();
+                }
+                return _redoStack;
+            }
+            set
+            {
+                _redoStack = value;
             }
         }
 
@@ -38,6 +72,11 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             get
             {
                 return SelectedFormula.SelectedFormulaParent;
+            }
+
+            set
+            {
+                SelectedFormula.SelectedFormulaParent = value;
             }
         }
 
@@ -105,6 +144,75 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         public bool KeyPressed(FormulaEditorKey key)
         {
+            if (IsUndoCommand(key)) return HandleUndoCommand();
+            if (IsRedoCommand(key)) return HandleRedoCommand();
+
+            UndoStack.Push(RootNode.Copy() as FormulaTree);
+            if (HandleKey(key))
+            {
+                RedoStack.Clear();
+                return true;
+            }
+            UndoStack.Pop();
+            return false;
+        }
+
+        public bool SensorVariableSelected(SensorVariable variable)
+        {
+            UndoStack.Push(RootNode.Copy() as FormulaTree);
+            var node = DefaultNode(variable);
+            if (HandleRightSubordinatingNode(node))
+            {
+                RedoStack.Clear();
+                return true;
+            }
+            UndoStack.Pop();
+            return false;
+        }
+
+        public bool ObjectVariableSelected(ObjectVariable variable)
+        {
+            UndoStack.Push(RootNode.Copy() as FormulaTree);
+            var node = DefaultNode(variable);
+            if (HandleRightSubordinatingNode(node))
+            {
+                RedoStack.Clear();
+                return true;
+            }
+            UndoStack.Pop();
+            return false;
+        }
+
+        public bool GlobalVariableSelected(UserVariable variable)
+        {
+            UndoStack.Push(RootNode.Copy() as FormulaTree);
+            var node = FormulaDefaultValueCreater.GetDefaultValueForGlobalVariable(variable);
+            if (HandleRightSubordinatingNode(node))
+            {
+                RedoStack.Clear();
+                return true;
+            }
+            UndoStack.Pop();
+            return false;
+        }
+
+        public bool LocalVariableSelected(UserVariable variable)
+        {
+            UndoStack.Push(RootNode.Copy() as FormulaTree);
+            var node = FormulaDefaultValueCreater.GetDefaultValueForLocalVariable(variable);
+            if (HandleRightSubordinatingNode(node))
+            {
+                RedoStack.Clear();
+                return true;
+            }
+            UndoStack.Pop();
+            return false;
+        }
+
+        #region Key Handlers
+
+        private bool HandleKey(FormulaEditorKey key)
+        {
             if (IsNumber(key)) return HandleNumberKey(key);
             if (IsDelete(key)) return HandleDeleteKey();
             if (IsDecimalSeparator(key)) return HandleDecimalSeparatorKey();
@@ -116,33 +224,6 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             if (IsFunction(key)) return HandleRightSubordinatingKey(key);
             return false;
         }
-
-        public bool SensorVariableSelected(SensorVariable variable)
-        {
-            var node = DefaultNode(variable);
-            return HandleRightSubordinatingNode(node);
-        }
-
-        public bool ObjectVariableSelected(ObjectVariable variable)
-        {
-            var node = DefaultNode(variable);
-            return HandleRightSubordinatingNode(node);
-        }
-
-        public bool GlobalVariableSelected(UserVariable variable)
-        {
-            var node = FormulaDefaultValueCreater.GetDefaultValueForGlobalVariable(variable);
-            return HandleRightSubordinatingNode(node);
-        }
-
-        public bool LocalVariableSelected(UserVariable variable)
-        {
-            var node = FormulaDefaultValueCreater.GetDefaultValueForLocalVariable(variable);
-            return HandleRightSubordinatingNode(node);
-        }
-
-
-        #region Key Handlers
 
         private bool HandleNumberKey(FormulaEditorKey key)
         {
@@ -323,6 +404,11 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         private bool HandleNegatingOperator(FormulaEditorKey key)
         {
             var rightmostNode = GetRightmostNode();
+            if (IsNull(rightmostNode))
+            {
+                EffectiveRootNode = DefaultNode(key);
+                return true;
+            }
             if (IsTerminalZero(rightmostNode))
             {
                 ReplaceNode(rightmostNode, DefaultNode(key));
@@ -342,6 +428,26 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
             if (key == FormulaEditorKey.KeyLogicNot) return false;
             AddOperatorNode(key);
+            return true;
+        }
+
+        private bool HandleUndoCommand()
+        {
+            if (UndoStack.Count == 0) return false;
+            RedoStack.Push(RootNode.Copy() as FormulaTree);
+            RootNode = UndoStack.Pop();
+            Selection = null;
+            SelectionParent = null;
+            return true;
+        }
+
+        private bool HandleRedoCommand()
+        {
+            if (RedoStack.Count == 0) return false;
+            UndoStack.Push(RootNode);
+            RootNode = RedoStack.Pop();
+            Selection = null;
+            SelectionParent = null;
             return true;
         }
 
@@ -649,6 +755,21 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             return IsMinusOperator(key) || IsLogicNot(key);
         }
 
+        private static bool IsUndoCommand(FormulaEditorKey key)
+        {
+            return key == FormulaEditorKey.KeyUndo;
+        }
+
+        private static bool IsRedoCommand(FormulaEditorKey key)
+        {
+            return key == FormulaEditorKey.KeyRedo;
+        }
+
+        private static bool IsSequentialCommand(FormulaEditorKey key)
+        {
+            return IsUndoCommand(key) || IsRedoCommand(key);
+        }
+
         #endregion
 
 
@@ -914,6 +1035,18 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         }
 
         #endregion
+
+        //#region Undo & Redo methods
+
+        //private void PushUndoStack()
+        //{
+        //    UndoStack.Push(RootNode.Copy() as FormulaTree);
+        //    RedoStack.Clear();
+        //}
+
+
+
+        //#endregion
 
 
         #region Some Short Helper Methods

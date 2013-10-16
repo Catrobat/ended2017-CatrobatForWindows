@@ -28,14 +28,20 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 return GetVariableReferenceString(referenceObject as UserVariableReference);
             if (referenceObject is LoopBeginBrickReference)
             {
-                var loopBeginBrickReference = referenceObject as LoopBeginBrickReference;
-                if (loopBeginBrickReference.Class == "forever")
-                    return GetForeverBrickReferenceString(loopBeginBrickReference.LoopBeginBrick);
-                if (loopBeginBrickReference.Class == "repeat")
-                    return GetRepeatBrickReferenceString(loopBeginBrickReference.LoopBeginBrick);
+               var loopBeginBrickRef = referenceObject as LoopBeginBrickReference;
+                if (loopBeginBrickRef.LoopBeginBrick is ForeverBrick)
+                    return GetForeverBrickReferenceString(loopBeginBrickRef.LoopBeginBrick);
+                else
+                    return GetRepeatBrickReferenceString(loopBeginBrickRef.LoopBeginBrick);
             }
             if (referenceObject is LoopEndBrickReference)
-                return GetLoopEndBrickReferenceString(referenceObject as LoopEndBrickReference);
+            {
+                var loopEndBrickRef = referenceObject as LoopEndBrickReference;
+                if(loopEndBrickRef.LoopEndBrick is ForeverLoopEndBrick)
+                    return GetForeverLoopEndBrickReferenceString(loopEndBrickRef.LoopEndBrick);
+                else
+                    return GetRepeatLoopEndBrickReferenceString(loopEndBrickRef.LoopEndBrick);
+            }
             if (referenceObject is IfLogicBeginBrickReference)
                 return GetIfLogicBeginBrickReferenceString(referenceObject as IfLogicBeginBrickReference);
             if (referenceObject is IfLogicElseBrickReference)
@@ -171,16 +177,31 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return "";
         }
 
-        private static string GetLoopEndBrickReferenceString(LoopEndBrickReference loopEndBrickRef)
+        private static string GetForeverLoopEndBrickReferenceString(LoopEndBrick loopEndBrick)
         {
-            var loopEndBrick = loopEndBrickRef.LoopEndBrick;
-
             foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
                 foreach (var script in sprite.Scripts.Scripts)
                 {
                     var count = 0;
                     foreach (var brick in script.Bricks.Bricks)
-                        if (brick is LoopEndBrick)
+                        if (brick is ForeverLoopEndBrick)
+                        {
+                            count++;
+                            if (brick == loopEndBrick)
+                                return "../../loopEndlessBrick[" + count + "]";
+                        }
+                }
+            return "";
+        }
+
+        private static string GetRepeatLoopEndBrickReferenceString(LoopEndBrick loopEndBrick)
+        {
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
+                foreach (var script in sprite.Scripts.Scripts)
+                {
+                    var count = 0;
+                    foreach (var brick in script.Bricks.Bricks)
+                        if (brick is RepeatLoopEndBrick)
                         {
                             count++;
                             if (brick == loopEndBrick)
@@ -250,6 +271,9 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 
         public static DataObject GetReferenceObject(DataObject dataObject, string reference)
         {
+            if (reference == null)
+                return null;
+
             if (dataObject is CostumeReference)
                 return GetCostumeObject(dataObject as CostumeReference, reference);
             if (dataObject is SoundReference)
@@ -260,14 +284,18 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                 return GetUserVariableObject(dataObject as UserVariableReference, reference);
             if (dataObject is LoopBeginBrickReference)
             {
-                var loopBeginBrickReference = dataObject as LoopBeginBrickReference;
-                if (loopBeginBrickReference.Class == "forever")
-                    return GetForeverBrickObject(loopBeginBrickReference, reference);
-                if (loopBeginBrickReference.Class == "repeat")
-                    return GetRepeatBrickObject(loopBeginBrickReference, reference);
+                if (reference.ToLower().Contains("forever"))
+                    return GetForeverBrickObject(dataObject as LoopBeginBrickReference, reference);
+                else
+                    return GetRepeatBrickObject(dataObject as LoopBeginBrickReference, reference);
             }
             if (dataObject is LoopEndBrickReference)
-                return GetLoopEndBrickObject(dataObject as LoopEndBrickReference, reference);
+            {
+                if (reference.ToLower().Contains("endless"))
+                    return GetForeverLoopEndBrickObject(dataObject as LoopEndBrickReference, reference);
+                else
+                    return GetRepeatLoopEndBrickObject(dataObject as LoopEndBrickReference, reference);
+            }
             if (dataObject is IfLogicBeginBrickReference)
                 return GetIfLogicBeginBrickObject(dataObject as IfLogicBeginBrickReference, reference);
             if (dataObject is IfLogicElseBrickReference)
@@ -449,7 +477,42 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             return null;
         }
 
-        private static DataObject GetLoopEndBrickObject(LoopEndBrickReference loopEndBrickReference, string reference)
+        private static DataObject GetForeverLoopEndBrickObject(LoopEndBrickReference loopEndBrickReference, string reference)
+        {
+            bool found = false;
+            var loopEndBricks = new List<Brick>();
+
+            foreach (var sprite in XmlParserTempProjectHelper.Project.SpriteList.Sprites)
+                foreach (var script in sprite.Scripts.Scripts)
+                {
+                    foreach (var brick in script.Bricks.Bricks)
+                    {
+                        if (brick is ForeverBrick)
+                        {
+                            var foreverBrick = brick as ForeverBrick;
+                            if (foreverBrick.LoopEndBrickReference == loopEndBrickReference)
+                                found = true;
+                        }
+                        if (brick is ForeverLoopEndBrick)
+                            loopEndBricks.Add(brick);
+                    }
+                    if (found)
+                    {
+                        var count = 0;
+                        if (reference.EndsWith("]"))
+                        {
+                            var splittetReference = reference.Split('[');
+                            reference = reference.Split('[')[splittetReference.Count() - 1];
+                            reference = reference.Split(']')[0];
+                            count = Int32.Parse(reference) - 1;
+                        }
+                        return loopEndBricks[count];
+                    }
+                }
+            return null;
+        }
+
+        private static DataObject GetRepeatLoopEndBrickObject(LoopEndBrickReference loopEndBrickReference, string reference)
         {
             bool found = false;
             var loopEndBricks = new List<Brick>();
@@ -465,13 +528,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                             if (repeatBrick.LoopEndBrickReference == loopEndBrickReference)
                                 found = true;
                         }
-                        if (brick is ForeverBrick)
-                        {
-                            var foreverBrick = brick as ForeverBrick;
-                            if (foreverBrick.LoopEndBrickReference == loopEndBrickReference)
-                                found = true;
-                        }
-                        if (brick is LoopEndBrick)
+                        if (brick is RepeatLoopEndBrick)
                             loopEndBricks.Add(brick);
                     }
                     if (found)

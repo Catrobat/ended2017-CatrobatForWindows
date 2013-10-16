@@ -41,7 +41,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
         private int _numberOfSoundsSelected;
         private int _numberOfObjectsSelected;
         private ObservableCollection<Costume> _selectedCostumes;
-        private ObservableCollection<DataObject> _selectedScripts;
+        private ObservableCollection<DataObject> _SelectedActions;
         private ObservableCollection<Sound> _selectedSounds;
 
         #endregion
@@ -235,13 +235,13 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             }
         }
 
-        public ObservableCollection<DataObject> SelectedScripts
+        public ObservableCollection<DataObject> SelectedActions
         {
-            get { return _selectedScripts; }
+            get { return _SelectedActions; }
             set
             {
-                _selectedScripts = value;
-                RaisePropertyChanged(() => SelectedScripts);
+                _SelectedActions = value;
+                RaisePropertyChanged(() => SelectedActions);
             }
         }
 
@@ -432,11 +432,11 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         private bool CanExecuteDeleteActionCommand()
         {
-            return SelectedScripts.Count > 0;
+            return SelectedActions.Count > 0;
         }
         private bool CanExecuteCopyActionCommand()
         {
-            return SelectedScripts.Count > 0;
+            return SelectedActions.Count > 0;
         }
         private bool CanExecuteEditActionCommand()
         {
@@ -494,7 +494,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         private void CopyScriptBrickAction()
         {
-            foreach (var scriptBrick in SelectedScripts)
+            foreach (var scriptBrick in SelectedActions)
             {
                 if (scriptBrick != null)
                 {
@@ -515,32 +515,74 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         private void DeleteScriptBrickAction()
         {
-            var scriptBricksToRemove = new List<DataObject>(SelectedScripts);
+            var bricksToRemove = new List<Brick>();
+            var scriptsToRemove = new List<Script>();
 
-            foreach (var scriptBrick in scriptBricksToRemove)
+            foreach (var scriptBrick in SelectedActions)
             {
+                DataObject beginBrick = null;
+                DataObject endBrick = null;
+
                 if (scriptBrick is LoopBeginBrick)
-                    scriptBricksToRemove.Add((scriptBrick as LoopBeginBrick).LoopEndBrick);
+                {
+                    beginBrick = scriptBrick;
+                    endBrick = (scriptBrick as LoopBeginBrick).LoopEndBrick;
+                }
+                if (scriptBrick is LoopEndBrick)
+                {
+                    beginBrick = (scriptBrick as LoopEndBrick).LoopBeginBrick;
+                    endBrick = scriptBrick;
+                }
+
                 if (scriptBrick is IfLogicBeginBrick)
                 {
-                    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicElseBrick);
-                    scriptBricksToRemove.Add((scriptBrick as IfLogicBeginBrick).IfLogicEndBrick);
+                    beginBrick = scriptBrick;
+                    endBrick = (scriptBrick as IfLogicBeginBrick).IfLogicEndBrick;
                 }
                 if (scriptBrick is IfLogicElseBrick)
                 {
-                    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicBeginBrick);
-                    scriptBricksToRemove.Add((scriptBrick as IfLogicElseBrick).IfLogicEndBrick);
+                    beginBrick = (scriptBrick as IfLogicElseBrick).IfLogicBeginBrick;
+                    endBrick = (scriptBrick as IfLogicElseBrick).IfLogicEndBrick;
                 }
                 if (scriptBrick is IfLogicEndBrick)
                 {
-                    scriptBricksToRemove.Add((scriptBrick as IfLogicEndBrick).IfLogicBeginBrick);
-                    scriptBricksToRemove.Add((scriptBrick as IfLogicEndBrick).IfLogicElseBrick);
+                    beginBrick = (scriptBrick as IfLogicEndBrick).IfLogicBeginBrick;
+                    endBrick = scriptBrick;
                 }
 
+                if(scriptBrick is Script && !scriptsToRemove.Contains(scriptBrick as Script))
+                    scriptsToRemove.Add(scriptBrick as Script);
 
-                if (scriptBrick is Brick || scriptBrick is Script)
-                    ScriptBricks.Remove(scriptBrick);
+                if (scriptBrick is Brick && !bricksToRemove.Contains(scriptBrick as Brick))
+                    bricksToRemove.Add(scriptBrick as Brick);
+
+                if (beginBrick != null)
+                {
+                    var isToDelete = false;
+                    foreach (var scriptBrickToRemove in ScriptBricks)
+                    {
+                        if (scriptBrickToRemove == beginBrick)
+                            isToDelete = true;
+
+                        if (isToDelete && !bricksToRemove.Contains(scriptBrickToRemove as Brick))
+                        {
+                            bricksToRemove.Add(scriptBrickToRemove as Brick);
+                }
+
+                        if (scriptBrickToRemove == endBrick)
+                            break;
+                    }
+                }
             }
+
+            SelectedActions.Clear();
+
+            foreach (var brick in bricksToRemove)
+                ScriptBricks.Remove(brick);
+
+            foreach (var script in scriptsToRemove)
+                ScriptBricks.Remove(script);
+
         }
 
 
@@ -606,7 +648,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             foreach (var costume in SelectedCostumes)
             {
                 var newCostume = costume.Copy() as Costume;
-                if(newCostume != null)
+                if (newCostume != null)
                     Costumes.Insert(Costumes.IndexOf(costume) + 1, newCostume);
             }
         }
@@ -627,7 +669,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         private void ClearScriptsSelectionAction()
         {
-            SelectedScripts.Clear();
+            SelectedActions.Clear();
         }
 
         private void ClearCostumesSelectionAction()
@@ -689,7 +731,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
         private void ProjectSettingsAction()
         {
             var message = new GenericMessage<Project>(CurrentProject);
-            Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.ProjectNameListener);
+            Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.ChangeLocalProjectListener);
 
             ServiceLocator.NavigationService.NavigateTo(typeof(ProjectSettingsView));
         }
@@ -792,8 +834,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         public SpriteEditorViewModel()
         {
-            SelectedScripts = new ObservableCollection<DataObject>();
-            SelectedScripts.CollectionChanged += SelectedScriptsOnCollectionChanged;
+            SelectedActions = new ObservableCollection<DataObject>();
+            SelectedActions.CollectionChanged += SelectedActionsOnCollectionChanged;
             SelectedCostumes = new ObservableCollection<Costume>();
             SelectedCostumes.CollectionChanged += SelectedCostumesOnCollectionChanged;
             SelectedSounds = new ObservableCollection<Sound>();
@@ -862,7 +904,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             RaisePropertyChanged(() => IsSoundsEmpty);
         }
 
-        private void SelectedScriptsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        private void SelectedActionsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             CopyScriptBrickCommand.RaiseCanExecuteChanged();
             DeleteScriptBrickCommand.RaiseCanExecuteChanged();

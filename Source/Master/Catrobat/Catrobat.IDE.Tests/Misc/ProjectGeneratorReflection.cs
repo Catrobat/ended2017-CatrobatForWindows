@@ -17,20 +17,27 @@ using Catrobat.IDE.Core.Services.Common;
 
 namespace Catrobat.IDE.Tests.Misc
 {
-    public class ProjectGenerator
+    public class ProjectGeneratorReflection : IProjectGenerator
     {
         // Bricks that must be tested manually
         private static readonly List<Type> ExcludedBricks = new List<Type>
         {
-            typeof(LoopEndBrick),
             typeof(ForeverBrick),
+            typeof(ForeverLoopEndBrick),
             typeof(RepeatBrick),
+            typeof(RepeatLoopEndBrick),
             typeof(IfLogicBeginBrick),
             typeof(IfLogicElseBrick),
-            typeof(IfLogicEndBrick)
+            typeof(IfLogicEndBrick),
+            typeof(EmptyDummyBrick)
         };
 
-        public static Project GenerateProject()
+        private static readonly List<Type> ExcludedScripts = new List<Type>
+        {
+            typeof(EmptyDummyBrick)
+        };
+
+        public Project GenerateProject()
         {
             var project = new Project
             {
@@ -98,7 +105,8 @@ namespace Catrobat.IDE.Tests.Misc
 
             foreach (var sprite in sprites)
             {
-                var scripts = ReflectionHelper.GetInstances<Script>();
+                var scripts = ReflectionHelper.GetInstances<Script>(ExcludedScripts);
+
                 foreach (var script in scripts)
                 {
                     FillDummyValues(script, project, sprite);
@@ -121,7 +129,7 @@ namespace Catrobat.IDE.Tests.Misc
             return project;
         }
 
-        private static void FillDummyValues(object o, Project project, Sprite sprite)
+        private void FillDummyValues(object o, Project project, Sprite sprite)
         {
             var type = o.GetType();
 
@@ -135,8 +143,8 @@ namespace Catrobat.IDE.Tests.Misc
             }
         }
 
-        private static Random _rand;
-        private static object CreateDummyValue(Type type, Project project, Sprite sprite)
+        private Random _rand;
+        private object CreateDummyValue(Type type, Project project, Sprite sprite)
         {
             _rand = new Random(42);
 
@@ -231,7 +239,7 @@ namespace Catrobat.IDE.Tests.Misc
             return null;
         }
 
-        private static Formula GenerateFormula()
+        private Formula GenerateFormula()
         {
             var formula = new Formula
             {
@@ -269,7 +277,7 @@ namespace Catrobat.IDE.Tests.Misc
             return formula;
         }
 
-        private static Costume GenerateCostume(int index, Project project)
+        private Costume GenerateCostume(int index, Project project)
         {
             var costume = new Costume
              {
@@ -288,7 +296,7 @@ namespace Catrobat.IDE.Tests.Misc
             return costume;
         }
 
-        private static Sound GenerateSound(int index, Project project)
+        private Sound GenerateSound(int index, Project project)
         {
             var sound = new Sound
                 {
@@ -307,7 +315,7 @@ namespace Catrobat.IDE.Tests.Misc
             return sound;
         }
 
-        private static void AddUserVariables(Project project)
+        private void AddUserVariables(Project project)
         {
             project.VariableList = new VariableList
                 {
@@ -351,7 +359,7 @@ namespace Catrobat.IDE.Tests.Misc
 
         }
 
-        private static void AddLoopBricks(ObservableCollection<Brick> bricks)
+        private void AddLoopBricks(ObservableCollection<Brick> bricks)
         {
             var foreverBrick = new ForeverBrick();
             bricks.Add(foreverBrick);
@@ -369,10 +377,10 @@ namespace Catrobat.IDE.Tests.Misc
                 };
             bricks.Add(repeatBrick);
 
-            var loopEndBrickForever = new LoopEndBrick();
+            var loopEndBrickForever = new ForeverLoopEndBrick();
             bricks.Add(loopEndBrickForever);
 
-            var loopEndBrickRepeat = new LoopEndBrick();
+            var loopEndBrickRepeat = new RepeatLoopEndBrick();
             bricks.Add(loopEndBrickRepeat);
 
             foreverBrick.LoopEndBrick = loopEndBrickForever;
@@ -381,7 +389,7 @@ namespace Catrobat.IDE.Tests.Misc
             loopEndBrickRepeat.LoopBeginBrick = repeatBrick;
         }
 
-        private static void AddIfLogicBricks(ObservableCollection<Brick> bricks)
+        private void AddIfLogicBricks(ObservableCollection<Brick> bricks)
         {
             var ifLogicBeginBrick = new IfLogicBeginBrick
             {

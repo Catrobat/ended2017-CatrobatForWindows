@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Xml.Linq;
-using Catrobat.IDE.Core.Utilities.Helpers;
+﻿using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
 {
@@ -10,13 +8,27 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
 
         public ForeverLoopEndBrick(XElement xElement) : base(xElement) { }
 
+        internal override void LoadFromXML(XElement xRoot)
+        {
+            base.LoadFromCommonXML(xRoot);
+        }
+
         internal override XElement CreateXML()
         {
             var xRoot = new XElement("loopEndlessBrick");
-
-            xRoot.Add(_loopBeginBrickReference.CreateXML());
+            base.CreateCommonXML(xRoot);
 
             return xRoot;
+        }
+
+        public override DataObject Copy()
+        {
+            var newBrick = new ForeverLoopEndBrick();
+
+            if (_loopBeginBrickReference != null)
+                newBrick.LoopBeginBrickReference = _loopBeginBrickReference.Copy() as LoopBeginBrickReference;
+
+            return newBrick;
         }
     }
 }

@@ -19,12 +19,13 @@ namespace Catrobat.IDE.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void ReflectionWriteReadTest1()
         {
             const string savePath = "/ReflectionWriteReadTest1/project.xml";
 
-            var project1 = ProjectGenerator.GenerateProject();
+            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            var project1 = projectgenerator.GenerateProject();
 
             project1.Save(savePath);
 

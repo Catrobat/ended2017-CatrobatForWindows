@@ -7,6 +7,8 @@ using Catrobat.IDE.Phone.Controls.FormulaControls.Formulas;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Collections.Generic;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 
 namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
 {
@@ -43,6 +45,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
         private FormulaButton _formulaButton;
         private Project _currentProject;
         private SelectedFormulaInformation _selectedFormulaInformation;
+        private readonly Stack<FormulaTree> _undoStack = new Stack<FormulaTree>();
+        private readonly Stack<FormulaTree> _redoStack = new Stack<FormulaTree>(); 
 
         #endregion
 
@@ -110,8 +114,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
 
         #endregion
 
-        
-
         #region Actions
 
         private void FormulaPartSelectedAction(UiFormula formula)
@@ -132,7 +134,12 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
 
         private void KeyPressedCommandAction(FormulaEditorKey key)
         {
-            var formulaEditor = new FormulaEditor { SelectedFormula = SelectedFormulaInformation };
+            var formulaEditor = new FormulaEditor
+            {
+                SelectedFormula = SelectedFormulaInformation,
+                UndoStack = _undoStack,
+                RedoStack = _redoStack
+            };
             if (!formulaEditor.KeyPressed(key))
                 RaiseKeyError();
 
@@ -142,7 +149,12 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
 
         private void ObjectVariableSelectedAction(ObjectVariable variable)
         {
-            var formulaEditor = new FormulaEditor { SelectedFormula = SelectedFormulaInformation };
+            var formulaEditor = new FormulaEditor
+            {
+                SelectedFormula = SelectedFormulaInformation,
+                UndoStack = _undoStack,
+                RedoStack = _redoStack
+            };
             if (!formulaEditor.ObjectVariableSelected(variable))
                 RaiseKeyError();
 
@@ -152,7 +164,12 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
 
         private void SensorVariableSelectedAction(SensorVariable variable)
         {
-            var formulaEditor = new FormulaEditor{SelectedFormula = SelectedFormulaInformation};
+            var formulaEditor = new FormulaEditor
+            {
+                SelectedFormula = SelectedFormulaInformation,
+                UndoStack = _undoStack,
+                RedoStack = _redoStack
+            };
             if (!formulaEditor.SensorVariableSelected(variable))
                 RaiseKeyError();
 
@@ -218,5 +235,12 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
 
 
         private void ResetViewModel() { }
+
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            _undoStack.Clear();
+            _redoStack.Clear();
+        }
     }
 }

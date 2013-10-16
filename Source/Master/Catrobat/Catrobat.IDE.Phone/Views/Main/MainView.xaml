@@ -129,9 +129,9 @@
                   CommandParameter="{Binding CurrentProject.ProjectHeader.ProgramName}" />
                 <toolkit:MenuItem Header="{Binding Resources.Main_ChangeProjectNameAndDescription, 
                   Source={StaticResource LocalizedStrings}}" 
-                  Command="{Binding MainViewModel.RenameCurrentProjectCommand, Mode=OneWay, 
+                  Command="{Binding MainViewModel.RenameLocalProjectCommand, Mode=OneWay, 
                   Source={StaticResource Locator}}"
-                  CommandParameter="{Binding CurrentProject.ProjectHeader.ProgramName}" />
+                  CommandParameter="{Binding CurrentProject.ProjectDummyHeader}" />
                 <toolkit:MenuItem Header="{Binding Resources.Main_PinProjectToStart, 
                   Source={StaticResource LocalizedStrings}}"
                   Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, 
@@ -220,6 +220,11 @@
                         Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
                         Source={StaticResource Locator}}" 
                         CommandParameter="{Binding ProjectName}" />
+                      <toolkit:MenuItem Header="{Binding Resources.Main_ChangeProjectNameAndDescription, 
+                        Source={StaticResource LocalizedStrings}}" 
+                        Command="{Binding MainViewModel.RenameLocalProjectCommand, Mode=OneWay, 
+                        Source={StaticResource Locator}}"
+                        CommandParameter="{Binding}" />
                       <toolkit:MenuItem Header="{Binding Resources.Main_PinProjectToStart, 
                         Source={StaticResource LocalizedStrings}}"
                         Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, 

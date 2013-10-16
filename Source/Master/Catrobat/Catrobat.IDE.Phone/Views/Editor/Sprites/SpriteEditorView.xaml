@@ -73,7 +73,7 @@
             ItemsSource="{Binding ScriptBricks}"
             ItemTemplate="{StaticResource ScriptsBrickTemplate}"
             ListBoxViewPort="{Binding ListBoxViewPort, Mode=TwoWay}"
-            SmartSelectedItems="{Binding SelectedScripts}"
+            SmartSelectedItems="{Binding SelectedActions}"
             Loaded="reorderListBoxScriptBricks_Loaded"
             ItemContainerStyle="{StaticResource ReorderableListBoxItemStyleScriptBrick}"
             Foreground="White" />
@@ -104,7 +104,8 @@
           Foreground="White" >
               <reorderableListbox:ReorderListBox.ItemTemplate>
                 <DataTemplate>
-                  <Grid Background="{StaticResource CostumesBrush}" Margin="0 5 0 5" Height="90">
+                  <Grid Background="{StaticResource CostumesBrush}" 
+                        Margin="0 5 0 5" Height="90" DataContext="{Binding}">
                     <Grid.ColumnDefinitions>
                       <ColumnDefinition Width="1*" />
                       <ColumnDefinition Width="3*" />
@@ -184,7 +185,7 @@
         DeleteCommand="{Binding DeleteScriptBrickCommand}"
         PlayCommand="{Binding StartPlayerCommand}"
         NewCommand="{Binding AddNewScriptBrickCommand}"
-        NumberOfSelectedItems="{Binding SelectedScripts.Count}"/>
+        NumberOfSelectedItems="{Binding SelectedActions.Count}"/>
         <appBar:EditorAppBar
         Visibility="{Binding IsVisibleCostumes, Converter={StaticResource BoolVisibilityConverter}}" 
         VerticalAlignment="Bottom"

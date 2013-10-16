@@ -74,6 +74,28 @@ namespace Catrobat.IDE.Tests.Tests.Data
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
             var sprite = project.SpriteList.Sprites[1];
+            var foreverBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[4] as ForeverLoopEndBrick;
+
+            Assert.IsNotNull(foreverBrick);
+            Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[3], foreverBrick.LoopBeginBrick);
+        }
+
+        [TestMethod]
+        public void GetRepeatBrickObjectTest()
+        {
+            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var sprite = project.SpriteList.Sprites[1];
+            var repeatBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[6] as RepeatLoopEndBrick;
+
+            Assert.IsNotNull(repeatBrick);
+            Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[5], repeatBrick.LoopBeginBrick);
+        }
+
+        [TestMethod]
+        public void GetForeverLoopEndBrickObjectTest()
+        {
+            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var sprite = project.SpriteList.Sprites[1];
             var foreverBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[3] as ForeverBrick;
 
             Assert.IsNotNull(foreverBrick);
@@ -81,7 +103,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod]
-        public void GetRepeatBrickObjectTest()
+        public void GetRepeatLoopEndBrickObjectTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
             var sprite = project.SpriteList.Sprites[1];
@@ -214,7 +236,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
             reference = ReferenceHelper.GetReferenceString(userVariableReference);
 
-            Assert.AreEqual("../../../../../variables/objectVariableList/entry[2]/list/userVariable[2]", reference);
+            Assert.AreEqual("../../../../../variables/programVariableList/userVariable[1]", reference);
         }
 
         [TestMethod]
@@ -244,10 +266,23 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod]
-        public void GetLoopEndBrickReferenceStringTest()
+        public void GetForeverLoopEndBrickReferenceStringTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
             var loopEndBrickReference = (project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[3] as ForeverBrick).LoopEndBrickReference;
+
+            Assert.IsNotNull(loopEndBrickReference);
+
+            var reference = ReferenceHelper.GetReferenceString(loopEndBrickReference);
+
+            Assert.AreEqual("../../loopEndlessBrick[1]", reference);
+        }
+
+        [TestMethod]
+        public void GetRepeatLoopEndBrickReferenceStringTest()
+        {
+            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var loopEndBrickReference = (project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[5] as RepeatBrick).LoopEndBrickReference;
 
             Assert.IsNotNull(loopEndBrickReference);
 
@@ -376,7 +411,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod]
-        public void UpdateVariableReferenceTest()
+        public void CopyVariableOnSpriteCopyTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[0];
@@ -399,14 +434,14 @@ namespace Catrobat.IDE.Tests.Tests.Data
             newSprite = oldSprite.Copy() as Sprite;
             Assert.IsNotNull(newSprite);
 
-            oldVariable = project.VariableList.ObjectVariableList.ObjectVariableEntries[1].VariableList.UserVariables[1];
-            newVariable = project.VariableList.ObjectVariableList.ObjectVariableEntries[3].VariableList.UserVariables[1];
+            oldVariable = project.VariableList.ProgramVariableList.UserVariables[0];
+            newVariable = project.VariableList.ProgramVariableList.UserVariables[0];
 
             var oldBrick2 = oldSprite.Scripts.Scripts[1].Bricks.Bricks[5] as ChangeVariableBrick;
             var newBrick2 = newSprite.Scripts.Scripts[1].Bricks.Bricks[5] as ChangeVariableBrick;
             Assert.IsNotNull(oldBrick2);
             Assert.IsNotNull(newBrick2);
-            Assert.AreNotEqual(oldBrick2.UserVariable, newBrick2.UserVariable);
+            Assert.AreEqual(oldBrick2.UserVariable, newBrick2.UserVariable);
             Assert.AreEqual(oldVariable, oldBrick2.UserVariable);
             Assert.AreEqual(newVariable, newBrick2.UserVariable);
         }

@@ -9,6 +9,7 @@ using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.Misc.Storage;
+using Catrobat.IDE.Tests.Tests.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Tests.Tests.Data
@@ -16,19 +17,21 @@ namespace Catrobat.IDE.Tests.Tests.Data
     [TestClass]
     public class CopyTests
     {
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
         {
             TestHelper.InitializeTests();
         }
 
-        [TestMethod]
+
+        [TestMethod, TestCategory("GuardedTests")]
         public void CopySprite()
         {
             const string savePath1 = "/CopyTest1/project.xml";
             const string savePath2 = "/CopyTest1/project.xml";
 
-            var project1 = ProjectGenerator.GenerateProject();
+            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            var project1 = projectgenerator.GenerateProject();
 
             var project2 = new Project();
             project2.ProjectHeader = project1.ProjectHeader;

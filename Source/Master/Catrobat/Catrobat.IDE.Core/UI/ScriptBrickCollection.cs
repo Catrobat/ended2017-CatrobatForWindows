@@ -233,7 +233,7 @@ namespace Catrobat.IDE.Core.UI
 
         public bool Remove(DataObject item)
         {
-            if (item is DataObject)
+            if (item != null)
             {
                 Remove((object) item);
                 return true;

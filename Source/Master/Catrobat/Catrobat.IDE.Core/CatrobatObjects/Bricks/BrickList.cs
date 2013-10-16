@@ -1,13 +1,11 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Xml.Linq;
-using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
 {
     public class BrickList : DataObject
     {
-        public ObservableCollection<Brick> Bricks { get; private set; }
+        public ObservableCollection<Brick> Bricks { get; set; }
 
         public BrickList()
         {

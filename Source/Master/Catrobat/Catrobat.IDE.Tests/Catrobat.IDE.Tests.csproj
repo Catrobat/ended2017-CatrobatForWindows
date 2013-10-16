@@ -70,8 +70,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Misc\FormulaComparer.cs" />
+    <Compile Include="Misc\IProjectGenerator.cs" />
     <Compile Include="Misc\PlatformInformationHelperTests.cs" />
-    <Compile Include="Misc\ProjectGenerator.cs" />
+    <Compile Include="Misc\ProjectGeneratorForScriptBrickCollectionTests.cs" />
+    <Compile Include="Misc\ProjectGeneratorReflection.cs" />
     <Compile Include="Misc\ReflectionHelper.cs" />
     <Compile Include="Misc\Storage\BasePathHelper.cs" />
     <Compile Include="Misc\Storage\ResourceLoaderFactoryTest.cs" />

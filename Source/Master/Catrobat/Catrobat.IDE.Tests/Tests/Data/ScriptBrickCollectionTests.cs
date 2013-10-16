@@ -19,12 +19,12 @@ namespace Catrobat.IDE.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void ScriptBrickEnumeratorTest()
         {
-            var document = SampleLoader.LoadSampleXDocument("simple");
-            var xml = document.ToString();
-            var project = new Project(xml);
+            IProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
+            var project = projectGenerator.GenerateProject();
+
 
             {
                 Sprite sprite = project.SpriteList.Sprites[0];
@@ -69,12 +69,11 @@ namespace Catrobat.IDE.Tests.Tests.Data
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void ScriptBrickCollectionRemoveTest()
         {
-            var document = SampleLoader.LoadSampleXDocument("simple");
-            var xml = document.ToString();
-            var project = new Project(xml);
+            IProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
+            var project = projectGenerator.GenerateProject();
 
             Sprite sprite = project.SpriteList.Sprites[1];
             ScriptBrickCollection collection = new ScriptBrickCollection();
@@ -124,12 +123,11 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsFalse(enumerator.MoveNext());
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void ScriptBrickCollectionInsertTest()
         {
-            var document = SampleLoader.LoadSampleXDocument("simple");
-            var xml = document.ToString();
-            var project = new Project(xml);
+            IProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
+            var project = projectGenerator.GenerateProject();
 
             Sprite sprite = project.SpriteList.Sprites[1];
             ScriptBrickCollection collection = new ScriptBrickCollection();
@@ -172,12 +170,11 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsFalse(enumerator.MoveNext());
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void ScriptBrickCollectionAddTest()
         {
-            var document = SampleLoader.LoadSampleXDocument("simple");
-            var xml = document.ToString();
-            var project = new Project(xml);
+            IProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
+            var project = projectGenerator.GenerateProject();
 
             Sprite sprite = project.SpriteList.Sprites[1];
             ScriptBrickCollection collection = new ScriptBrickCollection();
@@ -228,12 +225,11 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsFalse(enumerator.MoveNext());
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void ScriptBrickCollectionContainsTest()
         {
-            var document = SampleLoader.LoadSampleXDocument("simple");
-            var xml = document.ToString();
-            var project = new Project(xml);
+            IProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
+            var project = projectGenerator.GenerateProject();
 
             Sprite sprite = project.SpriteList.Sprites[1];
             ScriptBrickCollection collection = new ScriptBrickCollection();
@@ -251,12 +247,11 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsFalse(collection.Contains(notContainedScript));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void ScriptBrickCollectionIndexIfTest()
         {
-            var document = SampleLoader.LoadSampleXDocument("simple");
-            var xml = document.ToString();
-            var project = new Project(xml);
+            IProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
+            var project = projectGenerator.GenerateProject();
 
             Sprite sprite = project.SpriteList.Sprites[1];
             ScriptBrickCollection collection = new ScriptBrickCollection();
@@ -279,12 +274,11 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(-1, collection.IndexOf(notContainedScript));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void ScriptBrickCollectionAddBrickTest()
         {
-            var document = SampleLoader.LoadSampleXDocument("simple");
-            var xml = document.ToString();
-            var project = new Project(xml);
+            IProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
+            var project = projectGenerator.GenerateProject();
 
             Sprite sprite = project.SpriteList.Sprites[1];
             ScriptBrickCollection collection = new ScriptBrickCollection();

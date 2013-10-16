@@ -1,10 +1,10 @@
 ﻿using System.Xml.Linq;
+using Catrobat.IDE.Core.CatrobatObjects.Bricks;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Scripts
 {
     public class EmptyDummyBrick : Script
     {
-
         internal override void LoadFromXML(XElement xRoot)
         {
             

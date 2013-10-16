@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
       TestHelper.InitializeTests();
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("GuardedTests")]
     public void InitializeCatrobatContextTest()
     {
         //TestHelper.InitializeAndClearCatrobatContext();
@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         //CatrobatContext.SetContextHolder(null);
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("GuardedTests")]
     public void StoreLocalSettingsTest()
     {
         // TODO: fix test

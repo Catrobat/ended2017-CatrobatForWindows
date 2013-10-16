@@ -8,10 +8,20 @@ namespace Catrobat.IDE.Phone.Services
     {
         public object ConvertToLocalImageSource(byte[] data, int width, int height)
         {
-            var bitmap = new WriteableBitmap(width, height);
-            bitmap.FromByteArray(data);
+            if (data == null)
+                return null;
 
-            return bitmap;
+            try
+            {
+                var bitmap = new WriteableBitmap(width, height);
+                bitmap.FromByteArray(data);
+
+                return bitmap;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public void ConvertToBytes(object inputData, out byte[] outputData, out int outputWidth, out int outputHeight)
