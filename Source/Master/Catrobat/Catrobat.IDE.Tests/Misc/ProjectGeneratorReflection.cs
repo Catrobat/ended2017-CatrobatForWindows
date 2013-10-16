@@ -369,10 +369,10 @@ namespace Catrobat.IDE.Tests.Misc
                 };
             bricks.Add(repeatBrick);
 
-            var loopEndBrickForever = new LoopEndBrick();
+            var loopEndBrickForever = new ForeverLoopEndBrick();
             bricks.Add(loopEndBrickForever);
 
-            var loopEndBrickRepeat = new LoopEndBrick();
+            var loopEndBrickRepeat = new RepeatLoopEndBrick();
             bricks.Add(loopEndBrickRepeat);
 
             foreverBrick.LoopEndBrick = loopEndBrickForever;
