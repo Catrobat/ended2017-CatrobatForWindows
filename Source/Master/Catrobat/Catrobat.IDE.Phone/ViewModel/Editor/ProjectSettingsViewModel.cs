@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -11,12 +12,24 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor
         #region Private Members
 
         private Project _selectedProjectToEdit;
+        private ProjectDummyHeader _selectedProjectHeaderToEdit;
         private string _projectName;
         private string _projectDescription;
+        private Project _currentProject;
 
         #endregion
 
         #region Properties
+
+        public Project CurrentProject
+        {
+            get { return _currentProject; }
+            set
+            {
+                _currentProject = value;
+                RaisePropertyChanged(() => CurrentProject);
+            }
+        }
 
         public Project SelectedProjectToEdit
         {
@@ -29,6 +42,20 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor
                 }
                 _selectedProjectToEdit = value;
                 RaisePropertyChanged(() => SelectedProjectToEdit);
+            }
+        }
+
+        public ProjectDummyHeader SelectedProjectHeaderToEdit
+        {
+            get { return _selectedProjectHeaderToEdit; }
+            set
+            {
+                if (value == _selectedProjectHeaderToEdit)
+                {
+                    return;
+                }
+                _selectedProjectHeaderToEdit = value;
+                RaisePropertyChanged(() => SelectedProjectHeaderToEdit);
             }
         }
 
@@ -80,8 +107,21 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor
 
         private void SaveAction()
         {
-            SelectedProjectToEdit.ProjectHeader.ProgramName = ProjectName;
-            SelectedProjectToEdit.ProjectHeader.Description = ProjectDescription;
+            if (CurrentProject.ProjectDummyHeader == SelectedProjectHeaderToEdit)
+            {
+                CurrentProject.ProjectHeader.ProgramName = ProjectName;
+                CurrentProject.ProjectHeader.Description = ProjectDescription;
+            }
+            else
+            {
+                SelectedProjectHeaderToEdit.ProjectName = ProjectName;
+                SelectedProjectToEdit.ProjectHeader.ProgramName = ProjectName;
+                SelectedProjectToEdit.ProjectHeader.Description = ProjectDescription;
+                SelectedProjectToEdit.Save();
+            }
+
+
+
             ServiceLocator.NavigationService.NavigateBack();
         }
 
@@ -90,16 +130,27 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor
             ServiceLocator.NavigationService.NavigateBack();
         }
 
-        private void ChangeProjectNameMessageAction(GenericMessage<Project> message)
-        {
-            SelectedProjectToEdit = message.Content;
-            ProjectName = SelectedProjectToEdit.ProjectHeader.ProgramName;
-            ProjectDescription = SelectedProjectToEdit.ProjectHeader.Description;
-        }
-
         private void ResetViewModelAction()
         {
             ResetViewModel();
+        }
+
+        #endregion
+
+        #region Message Actions
+
+        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
+        {
+            CurrentProject = message.Content;
+        }
+
+        private void ChangeProjectNameMessageAction(GenericMessage<ProjectDummyHeader> message)
+        {
+            SelectedProjectHeaderToEdit = message.Content;
+
+            SelectedProjectToEdit = CatrobatContext.LoadNewProjectByNameStatic(SelectedProjectHeaderToEdit.ProjectName);
+            ProjectName = SelectedProjectToEdit.ProjectHeader.ProgramName;
+            ProjectDescription = SelectedProjectToEdit.ProjectHeader.Description;
         }
 
         #endregion
@@ -110,7 +161,10 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor
             CancelCommand = new RelayCommand(CancelAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.ProjectNameListener, ChangeProjectNameMessageAction);
+            Messenger.Default.Register<GenericMessage<ProjectDummyHeader>>(this, 
+                ViewModelMessagingToken.ChangeLocalProjectListener, ChangeProjectNameMessageAction);
+            Messenger.Default.Register<GenericMessage<Project>>(this, 
+                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
         }
 
         private void ResetViewModel()

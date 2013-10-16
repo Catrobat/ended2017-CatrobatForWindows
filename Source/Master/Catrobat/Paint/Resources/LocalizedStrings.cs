@@ -15,7 +15,8 @@ namespace Catrobat.Paint.Resources
         RaisePropertyChanged(() => Resources);
     }
 
-    #region INotifyPropertyChanged region
+    #region INotifyPropertyChanged
+
     public event PropertyChangedEventHandler PropertyChanged;
 
     public void RaisePropertyChanged<T>(Expression<Func<T>> selector)
@@ -25,6 +26,7 @@ namespace Catrobat.Paint.Resources
           PropertyChanged(this, new PropertyChangedEventArgs(PropertyNameHelper.GetPropertyNameFromExpression(selector)));
       }
     }
+
     #endregion
   }
 }

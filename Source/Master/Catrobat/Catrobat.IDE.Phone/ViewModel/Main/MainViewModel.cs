@@ -169,7 +169,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
 
         #region Commands
 
-        public ICommand RenameCurrentProjectCommand
+        public ICommand RenameLocalProjectCommand
         {
             get;
             private set;
@@ -263,10 +263,10 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
 
         # region Actions
 
-        private void RenameCurrentProjectAction()
+        private void RenameLocalProjectAction(ProjectDummyHeader project)
         {
-            var message = new GenericMessage<Project>(CurrentProject);
-            Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.ProjectNameListener);
+            var message = new GenericMessage<ProjectDummyHeader>(project);
+            Messenger.Default.Send(message, ViewModelMessagingToken.ChangeLocalProjectListener);
 
             ServiceLocator.NavigationService.NavigateTo(typeof(ProjectSettingsView));
         }
@@ -487,7 +487,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
         {
             _onlineProjects = new ObservableCollection<OnlineProjectHeader>();
 
-            RenameCurrentProjectCommand = new RelayCommand(RenameCurrentProjectAction);
+            RenameLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(RenameLocalProjectAction);
             DeleteLocalProjectCommand = new RelayCommand<string>(DeleteLocalProjectAction);
             CopyLocalProjectCommand = new RelayCommand<string>(CopyLocalProjectAction);
             PinLocalProjectCommand = new RelayCommand<ProjectDummyHeader>(PinLocalProjectAction);
@@ -675,6 +675,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
                             projectScreenshot = storage.LoadImage(screenshotPath);
                         else if (storage.FileExists(automaticProjectScreenshotPath))
                             projectScreenshot = storage.LoadImage(automaticProjectScreenshotPath);
+
+                        if(projectScreenshot == null)
+                            projectScreenshot = new PortableImage();
 
                         var projectHeader = new ProjectDummyHeader
                         {

@@ -731,7 +731,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
         private void ProjectSettingsAction()
         {
             var message = new GenericMessage<Project>(CurrentProject);
-            Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.ProjectNameListener);
+            Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.ChangeLocalProjectListener);
 
             ServiceLocator.NavigationService.NavigateTo(typeof(ProjectSettingsView));
         }
