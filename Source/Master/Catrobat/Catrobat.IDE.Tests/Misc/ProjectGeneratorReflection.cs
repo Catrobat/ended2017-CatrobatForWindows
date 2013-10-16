@@ -27,7 +27,13 @@ namespace Catrobat.IDE.Tests.Misc
             typeof(RepeatBrick),
             typeof(IfLogicBeginBrick),
             typeof(IfLogicElseBrick),
-            typeof(IfLogicEndBrick)
+            typeof(IfLogicEndBrick),
+            typeof(EmptyDummyBrick)
+        };
+
+        private static readonly List<Type> ExcludedScripts = new List<Type>
+        {
+            typeof(EmptyDummyBrick)
         };
 
         public Project GenerateProject()
@@ -98,7 +104,8 @@ namespace Catrobat.IDE.Tests.Misc
 
             foreach (var sprite in sprites)
             {
-                var scripts = ReflectionHelper.GetInstances<Script>();
+                var scripts = ReflectionHelper.GetInstances<Script>(ExcludedScripts);
+
                 foreach (var script in scripts)
                 {
                     FillDummyValues(script, project, sprite);
