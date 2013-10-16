@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Variables
             if (otherUserVariable == null)
                 return false;
 
-            return Name != otherUserVariable.Name;
+            return Name == otherUserVariable.Name;
         }
     }
 }

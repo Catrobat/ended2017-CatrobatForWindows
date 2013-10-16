@@ -29,10 +29,6 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             if (referenceObject is LoopBeginBrickReference)
             {
                 var loopBeginBrickReference = referenceObject as LoopBeginBrickReference;
-                if (loopBeginBrickReference.Class == "forever")
-                    return GetForeverBrickReferenceString(loopBeginBrickReference.LoopBeginBrick);
-                if (loopBeginBrickReference.Class == "repeat")
-                    return GetRepeatBrickReferenceString(loopBeginBrickReference.LoopBeginBrick);
             }
             if (referenceObject is LoopEndBrickReference)
                 return GetLoopEndBrickReferenceString(referenceObject as LoopEndBrickReference);
@@ -261,10 +257,6 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             if (dataObject is LoopBeginBrickReference)
             {
                 var loopBeginBrickReference = dataObject as LoopBeginBrickReference;
-                if (loopBeginBrickReference.Class == "forever")
-                    return GetForeverBrickObject(loopBeginBrickReference, reference);
-                if (loopBeginBrickReference.Class == "repeat")
-                    return GetRepeatBrickObject(loopBeginBrickReference, reference);
             }
             if (dataObject is LoopEndBrickReference)
                 return GetLoopEndBrickObject(dataObject as LoopEndBrickReference, reference);

@@ -27,10 +27,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
                 if (_loopBeginBrickReference == null)
                 {
                     _loopBeginBrickReference = new LoopBeginBrickReference();
-                    if (value is RepeatBrick)
-                        _loopBeginBrickReference.Class = "repeatBrick";
-                    else if (value is ForeverBrick)
-                        _loopBeginBrickReference.Class = "foreverBrick";
                 }
 
                 if (_loopBeginBrickReference.LoopBeginBrick == value)

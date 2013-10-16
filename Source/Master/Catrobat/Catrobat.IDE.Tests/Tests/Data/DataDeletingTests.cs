@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -21,8 +23,42 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod]
         public void DeleteSprite()
         {
+            const string programName = "DataDeletingTests.DeleteSprite";
+
+            using (IStorage storage = StorageSystem.GetStorage())
+            {
+                storage.DeleteDirectory(Path.Combine(CatrobatContextBase.ProjectsPath, programName));
+            }
+
             IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project = projectgenerator.GenerateProject();
+            project.SetProgramName(programName);
+            // TODO: write dummy costume files to disk
+
+            using (IStorage storage = StorageSystem.GetStorage())
+            {
+                foreach (var sprite in project.SpriteList.Sprites)
+                {
+                    foreach (var costume in sprite.Costumes.Costumes)
+                    {
+                        var stream = storage.OpenFile(Path.Combine(project.BasePath, Project.ImagesPath , costume.FileName), 
+                            StorageFileMode.Create, StorageFileAccess.Write);
+                        stream.Close();
+                    }
+
+                    foreach (var sound in sprite.Sounds.Sounds)
+                    {
+                        var stream = storage.OpenFile(Path.Combine(project.BasePath, Project.SoundsPath, sound.FileName),
+                            StorageFileMode.Create, StorageFileAccess.Write);
+                        stream.Close();
+                    }
+                }
+
+                storage.DeleteDirectory(Path.Combine(CatrobatContextBase.ProjectsPath, programName));
+            }
+
+
+            project.Save();
 
             var pathCostumes = project.BasePath + "/" + Project.ImagesPath + "/";
             var pathSounds = project.BasePath + "/" + Project.SoundsPath + "/";
