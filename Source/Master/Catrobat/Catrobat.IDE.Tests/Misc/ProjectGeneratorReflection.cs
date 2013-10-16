@@ -22,9 +22,10 @@ namespace Catrobat.IDE.Tests.Misc
         // Bricks that must be tested manually
         private static readonly List<Type> ExcludedBricks = new List<Type>
         {
-            typeof(LoopEndBrick),
             typeof(ForeverBrick),
+            typeof(ForeverLoopEndBrick),
             typeof(RepeatBrick),
+            typeof(RepeatLoopEndBrick),
             typeof(IfLogicBeginBrick),
             typeof(IfLogicElseBrick),
             typeof(IfLogicEndBrick),
