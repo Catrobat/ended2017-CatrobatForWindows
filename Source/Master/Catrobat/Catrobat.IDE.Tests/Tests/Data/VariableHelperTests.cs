@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod]
+        [TestMethod,TestCategory("GuardedTests")]
         public void GetGlobalVariableListTest()
         {
             IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
                 Assert.AreEqual("GlobalTestVariable" + i, globalVariableList[i].Name);
         }
 
-        [TestMethod]
+        [TestMethod,TestCategory("GuardedTests")]
         public void GetLocalVariableListTest()
         {
             IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
@@ -41,7 +41,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             }   
         }
 
-        [TestMethod]
+        [TestMethod,TestCategory("GuardedTests")]
         public void DeleteGlobalVariableTest()
         {
             IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
@@ -58,7 +58,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
                 Assert.AreEqual("GlobalTestVariable" + i, globalVariableList[i].Name);
         }
 
-        [TestMethod]
+        [TestMethod,TestCategory("GuardedTests")]
         public void DeleteLocalVariableTest()
         {
             IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
@@ -76,7 +76,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             }
         }
 
-        [TestMethod]
+        [TestMethod,TestCategory("GuardedTests")]
         public void AddGlobalVariableTest()
         {
             IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
@@ -92,7 +92,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsTrue(VariableHelper.GetGlobalVariableList(project1).Contains(newUserVariable));
         }
 
-        [TestMethod]
+        [TestMethod,TestCategory("GuardedTests")]
         public void AddLocalVariableTest()
         {
             IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
@@ -111,7 +111,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             }
         }
 
-        [TestMethod]
+        [TestMethod,TestCategory("GuardedTests")]
         public void IsVariableLocalTest()
         {
             IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
@@ -122,7 +122,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsTrue(VariableHelper.IsVariableLocal(project1, localVariable));
         }
 
-        [TestMethod]
+        [TestMethod,TestCategory("GuardedTests")]
         public void CreateUniqueGlobalVariableTest()
         {
             IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
@@ -139,7 +139,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             }
         }
 
-        [TestMethod]
+        [TestMethod,TestCategory("GuardedTests")]
         public void CreateUniqueLocalVariableTest()
         {
             IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
@@ -157,7 +157,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             }
         }
 
-        [TestMethod]
+        [TestMethod,TestCategory("GuardedTests")]
         public void VariableNameExistsTest()
         {
             IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
@@ -179,7 +179,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             }
         }
 
-        [TestMethod]
+        [TestMethod,TestCategory("GuardedTests")]
         public void VariableNameExistsCheckSelfTest()
         {
             IProjectGenerator projectgenerator = new ProjectGeneratorReflection();

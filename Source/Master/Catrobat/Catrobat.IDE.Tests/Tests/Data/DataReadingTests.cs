@@ -15,41 +15,41 @@ namespace Catrobat.IDE.Tests.Tests.Data
     [TestClass]
     public class DataReadingTests
     {
-        [ClassInitialize]
+                [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
         {
             TestHelper.InitializeTests();
         }
 
-        [TestMethod]
-        public void DataReadingTest1()
-        {
-            XDocument xDocument = SampleLoader.LoadSampleXDocument("DataReadingTests/test_code1");
-            CatrobatVersionConverter.ConvertVersions("0.8", "Win0.80", xDocument);
+        //[TestMethod]
+        //public void DataReadingTest1()
+        //{
+        //    XDocument xDocument = SampleLoader.LoadSampleXDocument("DataReadingTests/test_code1");
+        //    CatrobatVersionConverter.ConvertVersions("0.8", "Win0.80", xDocument);
 
-            var writer = new XmlStringWriter();
-            xDocument.Save(writer, SaveOptions.None);
+        //    var writer = new XmlStringWriter();
+        //    xDocument.Save(writer, SaveOptions.None);
 
-            var xml = writer.GetStringBuilder().ToString();
-            var project = new Project(xml);
+        //    var xml = writer.GetStringBuilder().ToString();
+        //    var project = new Project(xml);
 
-            // TODO: check project if it is correct!
-        }
+        //    // TODO: check project if it is correct!
+        //}
 
-        [TestMethod]
-        public void DataReadingTestCatrobatV091()
-        {
-            XDocument xDocument = SampleLoader.LoadSampleXDocument("DataReadingTests/testCatrobat091");
-            CatrobatVersionConverter.ConvertVersions("0.91", "Win0.80", xDocument);
+        //[TestMethod]
+        //public void DataReadingTestCatrobatV091()
+        //{
+        //    XDocument xDocument = SampleLoader.LoadSampleXDocument("DataReadingTests/testCatrobat091");
+        //    CatrobatVersionConverter.ConvertVersions("0.91", "Win0.80", xDocument);
 
-            var writer = new XmlStringWriter();
-            xDocument.Save(writer, SaveOptions.None);
+        //    var writer = new XmlStringWriter();
+        //    xDocument.Save(writer, SaveOptions.None);
 
-            var xml = writer.GetStringBuilder().ToString();
-            var project = new Project(xml);
+        //    var xml = writer.GetStringBuilder().ToString();
+        //    var project = new Project(xml);
 
-            // TODO: check project if it is correct!
-        }
+        //    // TODO: check project if it is correct!
+        //}
         
     }
 }

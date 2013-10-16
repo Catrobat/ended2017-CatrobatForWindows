@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region typing
 
-        [TestMethod,TestCategory("TFSCyclicUnitTest")]
+        [TestMethod,TestCategory("GuardedTests")]
         public void FormulaEditorTests_NumberTypingTest_01()
         {
             var editor = new FormulaEditor();
@@ -110,7 +110,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region decimal separator
 
-        [TestMethod, TestCategory("TFSCyclicUnitTest")]
+        [TestMethod, TestCategory("GuardedTests")]
         public void FormulaEditorTests_DecimalSeparatorTest_01()
         {
             var editor = new FormulaEditor();
@@ -176,7 +176,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region tree
 
-        [TestMethod, TestCategory("TFSCyclicUnitTest")]
+        [TestMethod, TestCategory("GuardedTests")]
         public void FormulaEditorTests_Tree_01()
         {
             var editor = new FormulaEditor();
@@ -258,7 +258,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod, TestCategory("TFSCyclicUnitTest")]
+        [TestMethod, TestCategory("GuardedTests")]
         public void FormulaEditorTests_Tree_02()
         {
             var editor = new FormulaEditor();
@@ -1648,7 +1648,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region deletion
 
-        [TestMethod, TestCategory("TFSCyclicUnitTest")]
+        [TestMethod, TestCategory("GuardedTests")]
         public void FormulaEditorTests_Deletion_01()
         {
             var editor = new FormulaEditor();
@@ -1673,7 +1673,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
         }
 
-        [TestMethod, TestCategory("TFSCyclicUnitTest")]
+        [TestMethod, TestCategory("GuardedTests")]
         public void FormulaEditorTests_Deletion_02()
         {
             var editor = new FormulaEditor();

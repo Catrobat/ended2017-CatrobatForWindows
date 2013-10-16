@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void DeleteSprite()
         {
             const string programName = "DataDeletingTests.DeleteSprite";
