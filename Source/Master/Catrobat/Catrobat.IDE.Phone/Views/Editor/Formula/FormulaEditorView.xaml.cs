@@ -62,5 +62,11 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             //TODO: implement me
             //throw new NotImplementedException();
         }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            _viewModel.Cleanup();
+        }
     }
 }

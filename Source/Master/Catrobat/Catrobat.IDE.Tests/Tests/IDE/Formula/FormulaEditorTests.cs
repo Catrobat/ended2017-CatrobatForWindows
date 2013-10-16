@@ -3027,6 +3027,44 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
+        [TestMethod]
+        public void FormulaEditorTests_Bracket_09()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            editor.SelectedFormula = selectedFromula;
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "BRACKET",
+                VariableValue = "",
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "OPERATOR",
+                    VariableValue = "MINUS",
+                    RightChild = new FormulaTree()
+                    {
+                        VariableType = "NUMBER",
+                        VariableValue = "1"
+                    }
+                }
+
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+        }
+
         #endregion
 
         #region variable
@@ -3526,6 +3564,81 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             Assert.IsTrue(editor.SensorVariableSelected(variable));
             FormulaComparer.CompareFormulas(expectedFormula, editor.SelectedFormula.FormulaRoot.FormulaTree);
+        }
+
+        #endregion
+
+        #region undo
+
+        [TestMethod]
+        public void FormulaEditorTests_Undo_01()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            editor.SelectedFormula = selectedFromula;
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyUndo));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyUndo));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "1"
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyUndo));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyUndo));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyRedo));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyRedo));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyRedo));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyRedo));
+            expectedFormula = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "123"
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyUndo));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyRedo));
+        }
+
+
+        [TestMethod]
+        public void FormulaEditorTests_Undo_02()
+        {
+            var editor = new FormulaEditor();
+            var selectedFromula = new SelectedFormulaInformation
+            {
+                FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
+            };
+
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "0"
+            };
+            editor.SelectedFormula = selectedFromula;
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyUndo));
+            var expectedFormula = new FormulaTree()
+            {
+                VariableType = "NUMBER",
+                VariableValue = "1"
+            };
+            FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
         }
 
         #endregion
