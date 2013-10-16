@@ -41,6 +41,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
                 {
                     foreach (var costume in sprite.Costumes.Costumes)
                     {
+                        //Projects/DataDeletingTests.DeleteSprite/images/
                         var stream = storage.OpenFile(Path.Combine(project.BasePath, Project.ImagesPath , costume.FileName), 
                             StorageFileMode.Create, StorageFileAccess.Write);
                         stream.Close();
@@ -53,8 +54,6 @@ namespace Catrobat.IDE.Tests.Tests.Data
                         stream.Close();
                     }
                 }
-
-                storage.DeleteDirectory(Path.Combine(CatrobatContextBase.ProjectsPath, programName));
             }
 
 

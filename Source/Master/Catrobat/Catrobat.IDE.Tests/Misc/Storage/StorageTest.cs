@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services.Data;
 using Catrobat.IDE.Core.Services.Storage;
 using System;
@@ -303,6 +304,11 @@ namespace Catrobat.IDE.Tests.Misc.Storage
             throw new NotImplementedException();
         }
 
+        public void DeleteImage(string pathToImage)
+        {
+            DeleteFile(pathToImage);
+            DeleteFile(pathToImage + CatrobatContextBase.ImageThumbnailExtension);
+        }
 
         public PortableImage LoadImageThumbnail(string pathToImage)
         {
@@ -320,12 +326,6 @@ namespace Catrobat.IDE.Tests.Misc.Storage
         }
 
         public void MoveFile(string sourcePath, string destinationPath)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public void DeleteImage(string pathToImage)
         {
             throw new NotImplementedException();
         }
