@@ -411,7 +411,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod]
-        public void UpdateVariableReferenceTest()
+        public void CopyVariableOnSpriteCopyTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[0];
@@ -434,14 +434,14 @@ namespace Catrobat.IDE.Tests.Tests.Data
             newSprite = oldSprite.Copy() as Sprite;
             Assert.IsNotNull(newSprite);
 
-            oldVariable = project.VariableList.ObjectVariableList.ObjectVariableEntries[1].VariableList.UserVariables[1];
-            newVariable = project.VariableList.ObjectVariableList.ObjectVariableEntries[3].VariableList.UserVariables[1];
+            oldVariable = project.VariableList.ProgramVariableList.UserVariables[0];
+            newVariable = project.VariableList.ProgramVariableList.UserVariables[0];
 
             var oldBrick2 = oldSprite.Scripts.Scripts[1].Bricks.Bricks[5] as ChangeVariableBrick;
             var newBrick2 = newSprite.Scripts.Scripts[1].Bricks.Bricks[5] as ChangeVariableBrick;
             Assert.IsNotNull(oldBrick2);
             Assert.IsNotNull(newBrick2);
-            Assert.AreNotEqual(oldBrick2.UserVariable, newBrick2.UserVariable);
+            Assert.AreEqual(oldBrick2.UserVariable, newBrick2.UserVariable);
             Assert.AreEqual(oldVariable, oldBrick2.UserVariable);
             Assert.AreEqual(newVariable, newBrick2.UserVariable);
         }
