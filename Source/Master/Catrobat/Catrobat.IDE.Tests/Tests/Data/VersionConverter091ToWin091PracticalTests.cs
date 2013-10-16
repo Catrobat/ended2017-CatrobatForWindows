@@ -1,14 +1,8 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Xml.Linq;
-using System.Collections.Generic;
-using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.VersionConverter;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.SampleData;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Tests.Tests.Data
 {
