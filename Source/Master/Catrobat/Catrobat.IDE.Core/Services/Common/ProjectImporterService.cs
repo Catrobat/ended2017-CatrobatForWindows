@@ -12,7 +12,7 @@ using Catrobat.IDE.Core.VersionConverter;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
-    public class ProjectImporterService : IProjectImporterService
+    public class ProjectImporterService
     {
         private ProjectDummyHeader _tempProjectHeader;
         private Project _project;

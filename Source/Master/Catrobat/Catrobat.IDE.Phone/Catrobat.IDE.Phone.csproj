@@ -173,6 +173,7 @@
     <Compile Include="Services\DispatcherServicePhone.cs" />
     <Compile Include="Services\ImageResizeServicePhone.cs" />
     <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
+    <Compile Include="Services\ProjectImporterServicePhone.cs" />
     <Compile Include="Services\NavigationServicePhone.cs" />
     <Compile Include="Services\NotificationServicePhone.cs" />
     <Compile Include="Services\PictureServicePhone.cs" />
@@ -189,7 +190,6 @@
     <Compile Include="Services\SystemInformationServicePhone.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Utilities\AssociationUriMapper.cs" />
-    <Compile Include="Utilities\ProjectImporter.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
     <Compile Include="ViewModel\Editor\Costumes\AddNewCostumeViewModel.cs" />

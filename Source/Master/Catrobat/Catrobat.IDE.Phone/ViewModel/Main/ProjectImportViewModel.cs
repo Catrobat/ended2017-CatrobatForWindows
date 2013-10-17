@@ -17,7 +17,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
     {
         #region private Members
 
-        private ProjectImporter _importer;
         private bool _isWorking = false;
 
         private bool _contentPanelVisibility = false;
@@ -202,10 +201,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
                 {
                     try
                     {
-                        if (_importer != null)
-                        {
-                            _importer.AcceptTempProject(CheckBoxMakeActiveIsChecked);
-                        }
+                        ServiceLocator.ProjectImporterService.AcceptTempProject(CheckBoxMakeActiveIsChecked);
 
                         Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(MainView)));
                     }
@@ -229,15 +225,14 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             string fileToken;
             if (navigationContext.QueryString.TryGetValue("fileToken", out fileToken))
             {
-                _importer = new ProjectImporter();
-                var projectHeader = await _importer.ImportProject(fileToken);
+                var projectHeader = await ServiceLocator.ProjectImporterService.ImportProject(fileToken);
 
                 if (projectHeader != null)
                 {
                     ProjectName = projectHeader.ProjectName;
 
                     ScreenshotImageSource = projectHeader.Screenshot;
-                    
+
                     ShowPanel(VisiblePanel.Content);
                 }
                 else
@@ -271,28 +266,28 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             switch (panel)
             {
                 case VisiblePanel.Error:
-                        ErrorPanelVisibility = true;
-                        ContentPanelVisibility = false;
-                        LoadingPanelVisibility = false;
-                        ProgressBarLoadingIsIndeterminate = false;
-                        ButtonAddIsEnabled = false;
-                        ButtonCancelIsEnabled = true;
+                    ErrorPanelVisibility = true;
+                    ContentPanelVisibility = false;
+                    LoadingPanelVisibility = false;
+                    ProgressBarLoadingIsIndeterminate = false;
+                    ButtonAddIsEnabled = false;
+                    ButtonCancelIsEnabled = true;
                     break;
                 case VisiblePanel.Content:
-                        ErrorPanelVisibility = false;
-                        ContentPanelVisibility = true;
-                        LoadingPanelVisibility = false;
-                        ProgressBarLoadingIsIndeterminate = false;
-                        ButtonAddIsEnabled = true;
-                        ButtonCancelIsEnabled = true;
+                    ErrorPanelVisibility = false;
+                    ContentPanelVisibility = true;
+                    LoadingPanelVisibility = false;
+                    ProgressBarLoadingIsIndeterminate = false;
+                    ButtonAddIsEnabled = true;
+                    ButtonCancelIsEnabled = true;
                     break;
                 case VisiblePanel.Loading:
-                        ErrorPanelVisibility = false;
-                        ContentPanelVisibility = false;
-                        LoadingPanelVisibility = true;
-                        ProgressBarLoadingIsIndeterminate = true;
-                        ButtonAddIsEnabled = false;
-                        ButtonCancelIsEnabled = true;
+                    ErrorPanelVisibility = false;
+                    ContentPanelVisibility = false;
+                    LoadingPanelVisibility = true;
+                    ProgressBarLoadingIsIndeterminate = true;
+                    ButtonAddIsEnabled = false;
+                    ButtonCancelIsEnabled = true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("panel");
