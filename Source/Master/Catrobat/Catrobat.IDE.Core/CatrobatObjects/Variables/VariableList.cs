@@ -9,6 +9,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Variables
 
         public VariableList()
         {
+            ObjectVariableList = new ObjectVariableList();
+            ProgramVariableList = new ProgramVariableList();
         }
 
         public VariableList(XElement xElement)

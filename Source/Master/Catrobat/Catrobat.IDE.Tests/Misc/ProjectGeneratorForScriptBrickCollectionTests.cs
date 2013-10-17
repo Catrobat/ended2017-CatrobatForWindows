@@ -12,7 +12,7 @@ using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Tests.Misc
 {
-    public class ProjectGeneratorForScriptBrickCollectionTests : IProjectGenerator
+    public class ProjectGeneratorForScriptBrickCollectionTests : ITestProjectGenerator
     {
         public Project GenerateProject()
         {

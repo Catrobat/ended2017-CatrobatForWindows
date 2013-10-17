@@ -118,8 +118,11 @@
     <Compile Include="CatrobatObjects\ProjectHeader.cs" />
     <Compile Include="CatrobatObjects\Scripts\BroadcastScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\Script.cs" />
+    <Compile Include="Services\Common\ProjectGeneratorDefault.cs" />
     <Compile Include="Services\IDispatcherService.cs" />
+    <Compile Include="Services\IProjectGenerator.cs" />
     <Compile Include="Services\IShareService.cs" />
+    <Compile Include="Services\ITestProjectGenerator.cs" />
     <Compile Include="UI\IPlayPauseButton.cs" />
     <Compile Include="UI\PlayPauseStateCommandArguments.cs" />
     <Compile Include="UI\PortableListBoxViewPort.cs" />

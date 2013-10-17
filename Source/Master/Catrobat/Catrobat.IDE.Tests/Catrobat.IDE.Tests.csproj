@@ -70,7 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Misc\FormulaComparer.cs" />
-    <Compile Include="Misc\IProjectGenerator.cs" />
+    <Compile Include="Misc\ITestProjectGenerator.cs" />
     <Compile Include="Misc\PlatformInformationHelperTests.cs" />
     <Compile Include="Misc\ProjectGeneratorForScriptBrickCollectionTests.cs" />
     <Compile Include="Misc\ProjectGeneratorReflection.cs" />

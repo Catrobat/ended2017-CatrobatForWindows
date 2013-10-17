@@ -49,28 +49,32 @@ namespace Catrobat.IDE.Core
 
         public static Project RestoreDefaultProjectStatic(string projectName)
         {
-            using (var storage = StorageSystem.GetStorage())
-            {
-                var projectCodeFile = Path.Combine(ProjectsPath, projectName);
+            IProjectGenerator projectGenerator = new ProjectGeneratorDefault();
 
-                if (!storage.FileExists(projectCodeFile))
-                {
-                    using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
-                    {
-                        var stream = resourceLoader.OpenResourceStream(ResourceScope.Resources, DefaultProjectPath);
-                        CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectCodeFile);
-                        stream.Dispose();
-                    }
-                }
+            return projectGenerator.GenerateProject(ServiceLocator.CulureService.GetToLetterCultureColde(), true);
 
-                var tempXmlPath = Path.Combine(projectCodeFile, Project.ProjectCodePath);
-                var xml = storage.ReadTextFile(tempXmlPath);
+            //using (var storage = StorageSystem.GetStorage())
+            //{
+            //    var projectCodeFile = Path.Combine(ProjectsPath, projectName);
 
-                var project = new Project(xml);
-                project.SetProgramName(projectName);
-                //project.Save();
-                return project;
-            }
+            //    if (!storage.FileExists(projectCodeFile))
+            //    {
+            //        using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
+            //        {
+            //            var stream = resourceLoader.OpenResourceStream(ResourceScope.Resources, DefaultProjectPath);
+            //            CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectCodeFile);
+            //            stream.Dispose();
+            //        }
+            //    }
+
+            //    var tempXmlPath = Path.Combine(projectCodeFile, Project.ProjectCodePath);
+            //    var xml = storage.ReadTextFile(tempXmlPath);
+
+            //    var project = new Project(xml);
+            //    project.SetProgramName(projectName);
+            //    //project.Save();
+            //    return project;
+            //}
         }
 
         public static Project CreateEmptyProject(string newProjectName)
