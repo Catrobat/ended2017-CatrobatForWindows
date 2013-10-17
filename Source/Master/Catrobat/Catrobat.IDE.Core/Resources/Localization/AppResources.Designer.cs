@@ -2132,6 +2132,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default Program.
+        /// </summary>
+        public static string Main_DefaultProjectName {
+            get {
+                return ResourceManager.GetString("Main_DefaultProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to delete.
         /// </summary>
         public static string Main_DeleteProject {

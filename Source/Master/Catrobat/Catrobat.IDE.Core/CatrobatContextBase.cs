@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Catrobat.IDE.Core.Annotations;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -18,12 +20,19 @@ namespace Catrobat.IDE.Core
         public const string LocalSettingsFilePath = "Settings/settings";
         public const string DefaultProjectPath = "default.catrobat";
         public const string ProjectsPath = "Projects";
-        public const string DefaultProjectName = "DefaultProject";
         public const string TempProjectImportZipPath = "Temp/ImportProjectZip";
         public const string TempProjectImportPath = "Temp/ImportProject";
         public const string TempPaintImagePath = "Temp/PaintImage";
 
         public const string ImageThumbnailExtension = "_thumb";
+
+        public static string DefaultProjectName
+        {
+            get
+            {
+                return AppResources.Main_DefaultProjectName;
+            }
+        }
 
         #endregion
 
