@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Microsoft.Phone.Info;
 
 namespace Catrobat.IDE.Phone.Services
@@ -64,6 +65,14 @@ namespace Catrobat.IDE.Phone.Services
             {
                 var appVersion = System.Reflection.Assembly.GetExecutingAssembly().FullName.Split('=')[1].Split(',')[0];
                 return appVersion;
+            }
+        }
+
+        public PortableSolidColorBrush AccentBrush
+        {
+            get 
+            {
+                return new PortableSolidColorBrush {NativeBrush = Application.Current.Resources["PhoneAccentBrush"]};
             }
         }
     }

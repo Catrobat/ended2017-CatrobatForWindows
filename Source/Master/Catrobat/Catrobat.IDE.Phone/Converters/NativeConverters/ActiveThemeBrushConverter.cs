@@ -16,13 +16,9 @@ namespace Catrobat.IDE.Phone.Converters.NativeConverters
             var theme = value as Theme;
 
             if (theme != null && settingsViewModel.ThemeChooser.SelectedTheme == value)
-            {
-                return Application.Current.Resources["PhoneAccentBrush"];
-            }
-            else
-            {
-                return null;
-            }
+                return Core.Services.ServiceLocator.SystemInformationService.AccentBrush;
+
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

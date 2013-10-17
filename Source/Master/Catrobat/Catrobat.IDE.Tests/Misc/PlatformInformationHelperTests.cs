@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Services;
 
@@ -56,6 +57,14 @@ namespace Catrobat.IDE.Tests.Misc
             get
             {
                 return "TestApp01";
+            }
+        }
+
+        public PortableSolidColorBrush AccentBrush
+        {
+            get
+            {
+                return new PortableSolidColorBrush(0,0,0,0);
             }
         }
     }

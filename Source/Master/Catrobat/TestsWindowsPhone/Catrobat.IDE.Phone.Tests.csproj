@@ -92,16 +92,6 @@
     </Compile>
     <Compile Include="SampleData\SampleLoader.cs" />
     <Compile Include="Tests\IDE\Converter\ActiveThemeBrushConverterTests.cs" />
-    <Compile Include="Tests\IDE\Converter\BoolPlayButtonStateConverterTests.cs" />
-    <Compile Include="Tests\IDE\Converter\BoolVisibilityConverterTests.cs" />
-    <Compile Include="Tests\IDE\Converter\BoolVisibilityNegativeConverterTests.cs" />
-    <Compile Include="Tests\IDE\Converter\NullIntCountConverterTests.cs" />
-    <Compile Include="Tests\IDE\Converter\NoScreenshotConverterTests.cs" />
-    <Compile Include="Tests\IDE\Converter\IntStringConverterTests.cs" />
-    <Compile Include="Tests\IDE\Converter\NullColorConverterTests.cs" />
-    <Compile Include="Tests\IDE\Converter\DoubleStringConverterTests.cs" />
-    <Compile Include="Tests\IDE\Converter\FloatStringConverterTests.cs" />
-    <Compile Include="Tests\IDE\Converter\SecondStringMillisecondConverterTests.cs" />
     <Compile Include="Tests\Storage\ResourceLoaderPhoneTests.cs" />
     <Compile Include="Tests\Storage\StoragePhoneTests.cs" />
   </ItemGroup>
