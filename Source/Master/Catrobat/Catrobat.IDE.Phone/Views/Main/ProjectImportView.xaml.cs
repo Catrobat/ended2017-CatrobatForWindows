@@ -22,7 +22,10 @@ namespace Catrobat.IDE.Phone.Views.Main
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            _viewModel.OnLoadCommand.Execute(NavigationContext);
+            //string fileToken;
+            //NavigationContext.QueryString.TryGetValue("fileToken", out fileToken);
+
+            //_viewModel.OnLoadCommand.Execute(fileToken);
         }
     }
 }

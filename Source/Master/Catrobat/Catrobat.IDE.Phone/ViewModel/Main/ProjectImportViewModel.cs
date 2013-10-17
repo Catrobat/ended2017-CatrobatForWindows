@@ -219,11 +219,10 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             ServiceLocator.NavigationService.NavigateTo(typeof(MainView));
         }
 
-        private async void OnLoadAction(NavigationContext navigationContext)
+        private async void OnLoadAction(string fileToken)
         {
             _isWorking = true;
-            string fileToken;
-            if (navigationContext.QueryString.TryGetValue("fileToken", out fileToken))
+            if (fileToken != null)
             {
                 var projectHeader = await ServiceLocator.ProjectImporterService.ImportProject(fileToken);
 
@@ -255,7 +254,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             // Commands
             AddCommand = new RelayCommand(AddAction, AddCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction, CancelCommand_CanExecute);
-            OnLoadCommand = new RelayCommand<NavigationContext>(OnLoadAction);
+            OnLoadCommand = new RelayCommand<string>(OnLoadAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
         }
 

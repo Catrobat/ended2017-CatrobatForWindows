@@ -37,6 +37,19 @@
         </TemplateFlip>
       </PrimaryToken>
     </Tokens>
+	    <Extensions>
+      <FileTypeAssociation Name="Windows Phone SDK test file type" TaskID="_default" NavUriFragment="fileToken=%s">
+        <Logos>
+          <Logo Size="small" IsRelative="true">Assets/FileTypeAssociation/small-33x33.png</Logo>
+          <Logo Size="medium" IsRelative="true">Assets/FileTypeAssociation/medium-69x69.png</Logo>
+          <Logo Size="large" IsRelative="true">Assets/FileTypeAssociation/large-176x176.png</Logo>
+        </Logos>
+        <SupportedFileTypes>
+          <FileType ContentType="application/sdk">.catroid</FileType>
+          <FileType ContentType="application/sdk">.catrobat</FileType>
+        </SupportedFileTypes>
+      </FileTypeAssociation>
+    </Extensions>
     <ScreenResolutions>
       <ScreenResolution Name="ID_RESOLUTION_WVGA" />
       <ScreenResolution Name="ID_RESOLUTION_WXGA" />

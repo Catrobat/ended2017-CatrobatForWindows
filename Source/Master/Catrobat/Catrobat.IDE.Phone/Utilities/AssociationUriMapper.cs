@@ -31,9 +31,9 @@ namespace Catrobat.IDE.Phone.Utilities
                 {
                     case ".catroid":
                     case ".catrobat":
-                        return new Uri("/Views/Main/ProjectImportView.xaml?fileToken=" + fileId, UriKind.Relative);
+                        return new Uri("/Controls/SplashScreen/SplashScreen.xaml?fileToken=" + fileId, UriKind.Relative);
                     default:
-                        return new Uri("/Views/Main/MainView.xaml", UriKind.Relative);
+                        return new Uri("/Controls/SplashScreen/SplashScreen.xaml", UriKind.Relative);
                 }
             }
             // Otherwise perform normal launch.

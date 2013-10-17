@@ -5,85 +5,86 @@ using System.ComponentModel;
 
 namespace Catrobat.IDE.Phone.Controls.StatusIcons
 {
-  public partial class ProcessIcon : INotifyPropertyChanged
-  {
-    private bool _transformationIsRunning = false;
-
-    #region Properties
-    public bool IsProcessing
+    public partial class ProcessIcon : INotifyPropertyChanged
     {
-      get { return (bool)GetValue(IsProcessingProperty); }
-      set { SetValue(IsProcessingProperty, value); }
-    }
+        private const bool TransformationIsRunning = false;
 
-    public static readonly DependencyProperty IsProcessingProperty = DependencyProperty.Register("IsProcessing", typeof(bool), typeof(ProcessIcon), new PropertyMetadata(IsProcessingChanged));
+        #region Properties
 
-    private static void IsProcessingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-      ((ProcessIcon)d).OnStateChanged((bool)e.NewValue);
-    }
-
-    protected virtual void OnStateChanged(bool isProcessing)
-    {
-      ProcessingStateChanged(isProcessing);
-    }
-    #endregion
-
-
-    public ProcessIcon()
-    {
-      InitializeComponent();
-    }
-
-    private void ProcessingStateChanged(bool isProcessing)
-    {
-      Dispatcher.BeginInvoke(() =>
-      {
-        if (isProcessing)
+        public bool IsProcessing
         {
-          imageInProcess.Visibility = Visibility.Visible;
-          StartTransformationThread();
+            get { return (bool)GetValue(IsProcessingProperty); }
+            set { SetValue(IsProcessingProperty, value); }
         }
-        else
+
+        public static readonly DependencyProperty IsProcessingProperty = DependencyProperty.Register("IsProcessing", typeof(bool), typeof(ProcessIcon), new PropertyMetadata(IsProcessingChanged));
+
+        private static void IsProcessingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-          imageInProcess.Visibility = Visibility.Collapsed;
-          StopTransformationThread();
+            ((ProcessIcon)d).OnStateChanged((bool)e.NewValue);
         }
-      });
+
+        protected virtual void OnStateChanged(bool isProcessing)
+        {
+            ProcessingStateChanged(isProcessing);
+        }
+
+        #endregion
+
+        public ProcessIcon()
+        {
+            InitializeComponent();
+        }
+
+        private void ProcessingStateChanged(bool isProcessing)
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                if (isProcessing)
+                {
+                    imageInProcess.Visibility = Visibility.Visible;
+                    StartTransformationThread();
+                }
+                else
+                {
+                    imageInProcess.Visibility = Visibility.Collapsed;
+                    StopTransformationThread();
+                }
+            });
+        }
+
+        #region TransformationThread
+
+        public void StartTransformationThread()
+        {
+            Dispatcher.BeginInvoke(() => StoryboardAnimation.Begin());
+        }
+
+        public void StopTransformationThread()
+        {
+            Dispatcher.BeginInvoke(() => StoryboardAnimation.Begin());
+        }
+
+        public void UpdateTransformation()
+        {
+            while (TransformationIsRunning)
+            {
+                Dispatcher.BeginInvoke(() => StoryboardAnimation.Begin());
+            }
+        }
+
+        #endregion
+
+        #region PropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        [NotifyPropertyChangedInvocator]
+
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
     }
-
-    #region TransformationThread
-
-    public void StartTransformationThread()
-    {
-      Dispatcher.BeginInvoke(() => StoryboardAnimation.Begin());
-    }
-
-    public void StopTransformationThread()
-    {
-      Dispatcher.BeginInvoke(() => StoryboardAnimation.Begin());
-    }
-
-    public void UpdateTransformation()
-    {
-      while (_transformationIsRunning)
-      {
-        Dispatcher.BeginInvoke(() => StoryboardAnimation.Begin());
-      }
-    }
-
-    #endregion
-
-    #region PropertyChanged
-    public event PropertyChangedEventHandler PropertyChanged;
-    [NotifyPropertyChangedInvocator]
-
-    protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChangedEventHandler handler = PropertyChanged;
-        if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-    }
-    #endregion
-
-  }
 }
