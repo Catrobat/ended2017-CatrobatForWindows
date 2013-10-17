@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void ScriptBrickEnumeratorTest()
         {
             ITestProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
@@ -69,7 +69,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             }
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void ScriptBrickCollectionRemoveTest()
         {
             ITestProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
@@ -123,7 +123,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsFalse(enumerator.MoveNext());
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void ScriptBrickCollectionInsertTest()
         {
             ITestProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
@@ -170,7 +170,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsFalse(enumerator.MoveNext());
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void ScriptBrickCollectionAddTest()
         {
             ITestProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
@@ -225,7 +225,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsFalse(enumerator.MoveNext());
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void ScriptBrickCollectionContainsTest()
         {
             ITestProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
@@ -247,7 +247,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsFalse(collection.Contains(notContainedScript));
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void ScriptBrickCollectionIndexIfTest()
         {
             ITestProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();
@@ -274,7 +274,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(-1, collection.IndexOf(notContainedScript));
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void ScriptBrickCollectionAddBrickTest()
         {
             ITestProjectGenerator projectGenerator = new ProjectGeneratorForScriptBrickCollectionTests();

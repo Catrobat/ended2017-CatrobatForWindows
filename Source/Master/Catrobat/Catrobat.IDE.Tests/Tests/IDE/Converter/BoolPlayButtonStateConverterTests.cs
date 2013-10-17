@@ -7,7 +7,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
     [TestClass]
     public class BoolPlayButtonStateConverterTests
     {
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void TestConversion()
         {
             var conv = new BoolPlayButtonStateConverter();
@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
             Assert.AreEqual(PlayPauseButtonState.Pause, output);
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void TestBackConversion()
         {
             var conv = new BoolPlayButtonStateConverter();
@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
             Assert.AreEqual(true, output);
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void TestFaultyConversion()
         {
             var conv = new BoolPlayButtonStateConverter();

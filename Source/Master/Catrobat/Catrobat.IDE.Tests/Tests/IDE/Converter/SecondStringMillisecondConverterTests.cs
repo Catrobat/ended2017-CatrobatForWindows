@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
     [TestClass]
     public class SecondStringMillisecondConverterTests
     {
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void TestSecondStringToMillisecondConversion()
         {
             var conv = new SecondStringMillisecondConverter();
@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
             Assert.AreEqual(4200, (int)output);
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void TestMillisecondToSecondStringConversion()
         {
             var conv = new SecondStringMillisecondConverter();
@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
             Assert.AreEqual("4.2", (string)output);
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void TestFaultySecondStringToMillisecondConversion()
         {
             var conv = new SecondStringMillisecondConverter();

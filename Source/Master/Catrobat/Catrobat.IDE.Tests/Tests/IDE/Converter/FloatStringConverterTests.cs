@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
     [TestClass]
     public class FloatStringConverterTests
     {
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void TestStringToFloatConversion()
         {
             var conv = new FloatStringConverter();
@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
             Assert.AreEqual(4.2f, (float)output);
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void TestFloatToStringConversion()
         {
             var conv = new FloatStringConverter();
@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
             Assert.AreEqual("4.2", (string)output);
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void TestFaultyStringToFloatConversion()
         {
             var conv = new FloatStringConverter();

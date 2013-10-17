@@ -9,7 +9,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
     {
         // TODO: comment in and fix this tests
 
-        //[TestMethod, TestCategory("GuardedTests")]
+        //[TestMethod, TestCategory("GatedTests")]
         //public void TestConversion()
         //{
         //    var conv = new NoScreenshotConverter();
@@ -18,7 +18,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
         //    Assert.IsInstanceOfType(output, typeof(PortableImage));
         //}
 
-        //[TestMethod, TestCategory("GuardedTests")]
+        //[TestMethod, TestCategory("GatedTests")]
         //public void TestBackConversion()
         //{
         //    var image = new PortableImage();
@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
         //    Assert.AreEqual(image, output);
         //}
 
-        //[TestMethod, TestCategory("GuardedTests")]
+        //[TestMethod, TestCategory("GatedTests")]
         //public void TestFaultyConversion()
         //{
         //    var conv = new NoScreenshotConverter();

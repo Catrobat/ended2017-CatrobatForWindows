@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
     [TestClass]
     public class DoubleStringConverterTests
     {
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void TestStringToDoubleConversion()
         {
             var conv = new DoubleStringConverter();
@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
             Assert.AreEqual(4.2d, (double)output);
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void TestDoubleToStringConversion()
         {
             var conv = new DoubleStringConverter();
@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
             Assert.AreEqual("4.2", (string)output);
         }
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void TestFaultyStringToDoubleConversion()
         {
             var conv = new DoubleStringConverter();
