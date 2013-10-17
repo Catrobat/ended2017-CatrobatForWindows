@@ -102,12 +102,10 @@ namespace Catrobat.IDE.Phone.Services.Storage
             }
             else
             {
-                return null;
+                return new BitmapImage(new Uri(path, UriKind.Relative));
+                //return null;
             }
-
-
-            // or:
-            //return new BitmapImage(new Uri(path, UriKind.Relative));
+            
         }
     }
 }
