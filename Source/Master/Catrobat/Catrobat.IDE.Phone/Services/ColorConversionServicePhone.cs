@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Data;
+using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Phone.Services
 {

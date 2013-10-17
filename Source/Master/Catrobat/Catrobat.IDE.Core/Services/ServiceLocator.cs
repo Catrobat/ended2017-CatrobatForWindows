@@ -1,4 +1,5 @@
 ﻿using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.Services
@@ -39,6 +40,8 @@ namespace Catrobat.IDE.Core.Services
 
         public static IDispatcherService DispatcherService { get; private set; }
 
+        public static IPortableUIElementConversionService PortableUIElementConversionService { get; private set; }
+
         public static void SetServices(
             INavigationService navigationService,
             ISystemInformationService systemInformationService,
@@ -56,7 +59,8 @@ namespace Catrobat.IDE.Core.Services
             INotifictionService notifictionService,
             IColorConversionService colorConversionService,
             IShareService shareService,
-            IDispatcherService dispatcherService
+            IDispatcherService dispatcherService,
+            IPortableUIElementConversionService portableUIElementConversionService
             )
         {
             NavigationService = navigationService;
@@ -76,6 +80,7 @@ namespace Catrobat.IDE.Core.Services
             ColorConversionService = colorConversionService;
             ShareService = shareService;
             DispatcherService = dispatcherService;
+            PortableUIElementConversionService = portableUIElementConversionService;
         }
     }
 }

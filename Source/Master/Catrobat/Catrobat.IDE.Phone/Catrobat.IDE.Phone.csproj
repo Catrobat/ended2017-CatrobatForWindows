@@ -99,7 +99,8 @@
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\NativeConverterPhone.cs" />
+    <Compile Include="Converters\PortableConverters.cs" />
+    <Compile Include="Converters\PortableValueConverterPhone.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -164,7 +165,6 @@
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ActiveThemeBrushConverter.cs" />
-    <Compile Include="Converters\BoolOpacityConverter.cs" />
     <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="Converters\BoolToSelectedPivotItemConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
@@ -192,6 +192,7 @@
     <Compile Include="Services\NotificationServicePhone.cs" />
     <Compile Include="Services\PictureServicePhone.cs" />
     <Compile Include="Services\PlayerLauncherServicePhone.cs" />
+    <Compile Include="Services\PortableUIElementsConvertionServicePhone.cs" />
     <Compile Include="Services\ServerCommunicationServicePhone.cs" />
     <Compile Include="Services\ShareServicePhone.cs" />
     <Compile Include="Services\SoundPlayerServicePhone.cs" />

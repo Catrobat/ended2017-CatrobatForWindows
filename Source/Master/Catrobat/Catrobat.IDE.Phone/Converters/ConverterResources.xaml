@@ -13,7 +13,7 @@
   <converters:NoScreenshotConverter x:Key="NoScreenshotConverter" />
   <converters:ImagePathToScreenshotConverter x:Key="ImagePathToScreenshotConverter" />
   <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
-  <converters:BoolOpacityConverter x:Key="BoolOpacityConverter"/>
+  <converters:BoolOpacityConverterBootstrap x:Key="BoolOpacityConverter"/>
   <converters:IntPixelConverter x:Key="IntPixelConverter"/>
   <converters:NullIntCountConverter x:Key="NullIntCountConverter"/>
   <converters:NullColorConverter  x:Key="NullColorConverter" />

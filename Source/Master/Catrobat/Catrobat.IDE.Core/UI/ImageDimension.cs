@@ -1,4 +1,4 @@
-﻿namespace Catrobat.IDE.Core.Services.Data
+﻿namespace Catrobat.IDE.Core.UI
 {
     public class ImageDimension
     {

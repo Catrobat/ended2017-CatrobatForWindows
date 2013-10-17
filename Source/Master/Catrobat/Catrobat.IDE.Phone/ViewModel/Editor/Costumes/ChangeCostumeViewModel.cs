@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Data;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.Paint;
 using GalaSoft.MvvmLight;

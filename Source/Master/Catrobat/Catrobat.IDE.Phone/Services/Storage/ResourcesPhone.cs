@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Resources;
-using Catrobat.IDE.Core.Services.Data;
 using Catrobat.IDE.Core.Services.Storage;
 using Coding4Fun.Toolkit.Controls.Common;
 

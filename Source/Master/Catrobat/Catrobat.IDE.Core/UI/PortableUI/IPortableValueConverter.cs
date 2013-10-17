@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Catrobat.IDE.Core.UI.Converters
+namespace Catrobat.IDE.Core.UI.PortableUI
 {
-    public interface IValueConverter
+    public interface IPortableValueConverter
     {
         object Convert(object value, Type targetType, object parameter, CultureInfo culture);
 

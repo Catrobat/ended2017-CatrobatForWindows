@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Data;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Phone.Utilities;
 using Catrobat.IDE.Phone.Views.Main;
 using GalaSoft.MvvmLight;

@@ -3,10 +3,10 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using Catrobat.IDE.Core;
-using Catrobat.IDE.Core.Services.Data;
 using Catrobat.IDE.Core.Services.Storage;
 using System;
 using System.Runtime.Serialization;
+using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Tests.Misc.Storage
 {

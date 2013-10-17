@@ -1,13 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
-using System.IO;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Catrobat.IDE.Core.Annotations;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities.Helpers;
 
-namespace Catrobat.IDE.Core.Services.Data
+namespace Catrobat.IDE.Core.UI.PortableUI
 {
     public sealed class PortableImage : INotifyPropertyChanged
     {

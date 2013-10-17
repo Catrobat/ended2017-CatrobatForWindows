@@ -7,8 +7,8 @@ using System.Text;
 using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Data;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.UI.PortableUI;
 using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDE.Phone.Services.Storage

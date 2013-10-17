@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Core.Services.Data;
 
 namespace Catrobat.IDE.Core.UI
 {

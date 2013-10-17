@@ -44,7 +44,8 @@ namespace Catrobat.IDE.Phone
                 new NotificationServicePhone(),
                 new ColorConversionServicePhone(),
                 new ShareServicePhone(),
-                new DispatcherServicePhone()
+                new DispatcherServicePhone(),
+                new PortableUIElementsConvertionServicePhone()
                 );
         }
     }

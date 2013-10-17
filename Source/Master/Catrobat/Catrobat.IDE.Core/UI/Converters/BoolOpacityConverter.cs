@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
+using Catrobat.IDE.Core.UI.PortableUI;
 
-namespace Catrobat.IDE.Phone.Converters
+namespace Catrobat.IDE.Core.UI.Converters
 {
-    public class BoolOpacityConverter : IValueConverter
+    public class BoolOpacityConverter : IPortableValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null || !(value is bool))
-                return Visibility.Collapsed;
+                return PortableVisibility.Collapsed;
 
             var visible = (bool) value;
 
