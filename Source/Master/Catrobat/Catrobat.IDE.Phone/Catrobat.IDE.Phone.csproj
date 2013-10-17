@@ -603,8 +603,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\Share\skydrive.jpg" />
-    <Content Include="Content\Resources\default.catrobat" />
-    <Content Include="Content\Resources\default_new.catrobat" />
     <Content Include="Content\Resources\DesignTime\screenshot.png" />
     <Content Include="Content\Tiles\FlipCycleTileLarge.png" />
     <Content Include="Content\Tiles\FlipCycleTileMedium.png" />

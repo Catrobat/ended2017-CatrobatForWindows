@@ -944,4 +944,10 @@
   <data name="Main_DefaultProjectName" xml:space="preserve">
     <value>Standardprojekt</value>
   </data>
+  <data name="DefaultProject_Background" xml:space="preserve">
+    <value>Background</value>
+  </data>
+  <data name="DefaultProject_Mole" xml:space="preserve">
+    <value>Maulwurf</value>
+  </data>
 </root>

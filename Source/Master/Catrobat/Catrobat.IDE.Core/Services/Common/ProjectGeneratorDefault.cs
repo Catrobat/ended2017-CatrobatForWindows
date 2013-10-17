@@ -29,9 +29,17 @@ namespace Catrobat.IDE.Core.Services.Common
 
         private void FillSprites(Project project, bool writeToDisk)
         {
-            project.SpriteList.Sprites.Add(new Sprite { Name = "Object1" }); // TODO: localize objects
-            project.SpriteList.Sprites.Add(new Sprite { Name = "Object2" });
-            project.SpriteList.Sprites.Add(new Sprite { Name = "Object3" });
+            var spriteBackground = new Sprite {Name = AppResources.DefaultProject_Background};
+            var spriteMole1 = new Sprite {Name = AppResources.DefaultProject_Mole + " 1"};
+            var spriteMole2 = new Sprite { Name = AppResources.DefaultProject_Mole + " 2" };
+            var spriteMole3 = new Sprite { Name = AppResources.DefaultProject_Mole + " 3" };
+            var spriteMole4 = new Sprite { Name = AppResources.DefaultProject_Mole + " 4" };
+
+            project.SpriteList.Sprites.Add(spriteBackground);
+            project.SpriteList.Sprites.Add(spriteMole1);
+            project.SpriteList.Sprites.Add(spriteMole2);
+            project.SpriteList.Sprites.Add(spriteMole3);
+            project.SpriteList.Sprites.Add(spriteMole4);
         }
     }
 }
