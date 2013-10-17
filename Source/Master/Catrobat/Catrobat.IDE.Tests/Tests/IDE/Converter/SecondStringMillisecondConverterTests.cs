@@ -1,15 +1,12 @@
-﻿using System.Windows;
-using System.Windows.Media;
-using Catrobat.IDE.Core.UI.Converters;
-using Catrobat.IDE.Phone.Converters;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+﻿using Catrobat.IDE.Core.UI.Converters;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
+namespace Catrobat.IDE.Tests.Tests.IDE.Converter
 {
     [TestClass]
     public class SecondStringMillisecondConverterTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestSecondStringToMillisecondConversion()
         {
             var conv = new SecondStringMillisecondConverter();
@@ -19,7 +16,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
             Assert.AreEqual(4200, (int)output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestMillisecondToSecondStringConversion()
         {
             var conv = new SecondStringMillisecondConverter();
@@ -29,7 +26,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
             Assert.AreEqual("4.2", (string)output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestFaultySecondStringToMillisecondConversion()
         {
             var conv = new SecondStringMillisecondConverter();

@@ -3,32 +3,33 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:converters="clr-namespace:Catrobat.IDE.Phone.Converters"
   xmlns:system="clr-namespace:System;assembly=mscorlib"
+  xmlns:converters="clr-namespace:Catrobat.IDE.Phone.Converters"
+  xmlns:nativeConverters="clr-namespace:Catrobat.IDE.Phone.Converters.NativeConverters"
+
   mc:Ignorable="d">
   
   <system:Boolean x:Key="BooleanFalse">False</system:Boolean>
   <system:Boolean x:Key="BooleanTrue">True</system:Boolean>
 
-  <converters:NoScreenshotConverter x:Key="NoScreenshotConverter" />
-  <converters:ImagePathToScreenshotConverter x:Key="ImagePathToScreenshotConverter" />
-  <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter"/>
+  <converters:NoScreenshotConverterBootstrap x:Key="NoScreenshotConverter" />
+  <converters:BoolVisibilityConverterBootstrap x:Key="BoolVisibilityConverter"/>
   <converters:BoolOpacityConverterBootstrap x:Key="BoolOpacityConverter"/>
-  <converters:IntPixelConverter x:Key="IntPixelConverter"/>
-  <converters:NullIntCountConverter x:Key="NullIntCountConverter"/>
-  <converters:NullColorConverter  x:Key="NullColorConverter" />
-  <converters:DoubleStringConverter  x:Key="DoubleStringConverter" />
-  <converters:FloatStringConverter  x:Key="FloatStringConverter" />
-  <converters:IntStringConverter x:Key="IntStringConverter" />
-  <converters:SecondStringMillisecondConverter x:Key="SecondStringMillisecondConverter" />
-  <converters:BoolVisibilityNegativeConverter x:Key="NegativeBoolVisibilityConverter" />
-  <converters:BoolPlayButtonStateConverter x:Key="BoolPlayButtonStateConverter" />
-  <converters:BoolVisibilityNegativeConverter x:Key="BoolVisibilityNegativeConverter"/>
-  <converters:ActiveThemeBrushConverter x:Key="ActiveThemeBrushConverter"/>
+  <converters:IntPixelConverterBootstrap x:Key="IntPixelConverter"/>
+  <converters:NullIntCountConverterBootstrap x:Key="NullIntCountConverter"/>
+  <converters:DoubleStringConverterBootstrap  x:Key="DoubleStringConverter" />
+  <converters:FloatStringConverterBootstrap  x:Key="FloatStringConverter" />
+  <converters:IntStringConverterBootstrap x:Key="IntStringConverter" />
+  <converters:SecondStringMillisecondConverterBootstrap x:Key="SecondStringMillisecondConverter" />
+  <converters:BoolVisibilityNegativeConverterBootstrap x:Key="NegativeBoolVisibilityConverter" />
+  <converters:BoolPlayButtonStateConverterBootstrap x:Key="BoolPlayButtonStateConverter" />
+  <converters:BoolVisibilityNegativeConverterBootstrap x:Key="BoolVisibilityNegativeConverter"/>
+  <converters:BoolToSelectedPivotItemConverterBootstrap x:Key="BoolToSelectedPivotItemConverter"/>
+  <converters:NullVariableConverterBootstrap x:Key="NullVariableConverter"/>
 
-  <converters:VariableEditVisibilityConverter x:Key="VariableEditVisibilityConverter"/>
-  <converters:VariableButtonVisibilityConverter x:Key="VariableButtonVisibilityConverter"/>
-  <converters:BoolToSelectedPivotItemConverter x:Key="BoolToSelectedPivotItemConverter"/>
-  <converters:NullVariableConverter x:Key="NullVariableConverter"/>
-  
+
+  <nativeConverters:NullColorConverter  x:Key="NullColorConverter" />
+  <nativeConverters:ActiveThemeBrushConverter x:Key="ActiveThemeBrushConverter"/>
+  <nativeConverters:VariableButtonVisibilityConverter x:Key="VariableButtonVisibilityConverter"/>
+
 </ResourceDictionary>

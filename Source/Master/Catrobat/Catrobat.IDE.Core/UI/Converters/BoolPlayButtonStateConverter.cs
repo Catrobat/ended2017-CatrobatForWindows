@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows.Data;
-using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Phone.Controls.Buttons;
+using Catrobat.IDE.Core.UI.PortableUI;
 
-namespace Catrobat.IDE.Phone.Converters
+namespace Catrobat.IDE.Core.UI.Converters
 {
-    public class BoolPlayButtonStateConverter : IValueConverter
+    public class BoolPlayButtonStateConverter : IPortableValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

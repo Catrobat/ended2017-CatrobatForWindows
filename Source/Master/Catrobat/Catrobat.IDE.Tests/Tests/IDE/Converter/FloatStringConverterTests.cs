@@ -1,13 +1,12 @@
 ﻿using Catrobat.IDE.Core.UI.Converters;
-using Catrobat.IDE.Phone.Converters;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
+namespace Catrobat.IDE.Tests.Tests.IDE.Converter
 {
     [TestClass]
     public class FloatStringConverterTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestStringToFloatConversion()
         {
             var conv = new FloatStringConverter();
@@ -17,7 +16,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
             Assert.AreEqual(4.2f, (float)output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestFloatToStringConversion()
         {
             var conv = new FloatStringConverter();
@@ -27,7 +26,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
             Assert.AreEqual("4.2", (string)output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestFaultyStringToFloatConversion()
         {
             var conv = new FloatStringConverter();

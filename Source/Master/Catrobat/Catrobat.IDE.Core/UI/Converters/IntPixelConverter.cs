@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows.Data;
+using Catrobat.IDE.Core.UI.PortableUI;
 
-namespace Catrobat.IDE.Phone.Converters
+namespace Catrobat.IDE.Core.UI.Converters
 {
-    public class IntPixelConverter : IValueConverter
+    public class IntPixelConverter : IPortableValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

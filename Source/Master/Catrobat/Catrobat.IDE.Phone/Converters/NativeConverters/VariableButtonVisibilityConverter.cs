@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Phone.ViewModel.Editor.Formula;
 using Microsoft.Practices.ServiceLocation;
 
-namespace Catrobat.IDE.Phone.Converters
+namespace Catrobat.IDE.Phone.Converters.NativeConverters
 {
     public class VariableButtonVisibilityConverter : IValueConverter
     {

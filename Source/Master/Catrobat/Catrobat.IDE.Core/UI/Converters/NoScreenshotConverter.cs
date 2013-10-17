@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows.Data;
-using System.Windows.Media.Imaging;
-using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.UI.PortableUI;
 
-namespace Catrobat.IDE.Phone.Converters
+namespace Catrobat.IDE.Core.UI.Converters
 {
-    public class NoScreenshotConverter : IValueConverter
+    public class NoScreenshotConverter : IPortableValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -19,11 +18,10 @@ namespace Catrobat.IDE.Phone.Converters
             {
                 try
                 {
-                    var image = new BitmapImage();
+                    var image = new PortableImage();
                     using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
                     {
-                        var stream = loader.OpenResourceStream(ResourceScope.IdePhone, "Content/Images/Screenshot/NoScreenshot.png");
-                        image.SetSource(stream);
+                        image.LoadFromResources(ResourceScope.IdePhone, "Content/Images/Screenshot/NoScreenshot.png");
                     }
                     return image;
                 }

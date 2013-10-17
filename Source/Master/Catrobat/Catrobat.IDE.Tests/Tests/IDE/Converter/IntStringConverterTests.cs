@@ -1,14 +1,13 @@
 ﻿using Catrobat.IDE.Core.UI.Converters;
-using Catrobat.IDE.Phone.Converters;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
+namespace Catrobat.IDE.Tests.Tests.IDE.Converter
 {
     [TestClass]
     public class IntStringConverterTests
     {
         // ####### IntStringConverter #############################################
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestStringToIntConversion()
         {
             var conv = new IntStringConverter();
@@ -18,7 +17,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
             Assert.AreEqual(12, (int)output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestIntToStringConversion()
         {
             var conv = new IntStringConverter();
@@ -28,7 +27,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
             Assert.AreEqual("42", (string)output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestFaultyStringToIntConversion()
         {
             var conv = new IntStringConverter();

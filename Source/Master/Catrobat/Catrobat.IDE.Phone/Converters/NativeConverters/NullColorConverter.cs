@@ -3,18 +3,20 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Catrobat.IDE.Phone.Converters
+namespace Catrobat.IDE.Phone.Converters.NativeConverters
 {
-    public class BoolVisibilityNegativeConverter : IValueConverter
+    public class NullColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || !(value is bool))
-                return Visibility.Collapsed;
-
-            var visible = !(bool) value;
-
-            return visible ? Visibility.Visible : Visibility.Collapsed;
+            if (value == null)
+            {
+                return Application.Current.Resources["PhoneAccentBrush"];
+            }
+            else
+            {
+                return Application.Current.Resources["PhoneTextBoxForegroundBrush"];
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

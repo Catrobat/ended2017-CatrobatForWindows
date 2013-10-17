@@ -99,6 +99,9 @@
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\NativeConverters\ActiveThemeBrushConverter.cs" />
+    <Compile Include="Converters\NativeConverters\NullColorConverter.cs" />
+    <Compile Include="Converters\NativeConverters\VariableButtonVisibilityConverter.cs" />
     <Compile Include="Converters\PortableConverters.cs" />
     <Compile Include="Converters\PortableValueConverterPhone.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -164,23 +167,6 @@
     <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\ActiveThemeBrushConverter.cs" />
-    <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
-    <Compile Include="Converters\BoolToSelectedPivotItemConverter.cs" />
-    <Compile Include="Converters\BoolVisibilityConverter.cs" />
-    <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
-    <Compile Include="Converters\DoubleStringConverter.cs" />
-    <Compile Include="Converters\FloatStringConverter.cs" />
-    <Compile Include="Converters\ImagePathToScreenshotConverter.cs" />
-    <Compile Include="Converters\IntPixelConverter.cs" />
-    <Compile Include="Converters\IntStringConverter.cs" />
-    <Compile Include="Converters\NoScreenshotConverter.cs" />
-    <Compile Include="Converters\NullColorConverter.cs" />
-    <Compile Include="Converters\NullIntCountConverter.cs" />
-    <Compile Include="Converters\NullVariableConverter.cs" />
-    <Compile Include="Converters\SecondStringMillisecondConverter.cs" />
-    <Compile Include="Converters\VariableButtonVisibilityConverter.cs" />
-    <Compile Include="Converters\VariableEditVisibilityConverter.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ColorConversionServicePhone.cs" />

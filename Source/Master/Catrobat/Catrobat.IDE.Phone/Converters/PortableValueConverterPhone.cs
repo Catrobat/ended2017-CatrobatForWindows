@@ -24,16 +24,26 @@ namespace Catrobat.IDE.Phone.Converters
         public object Convert(object value, System.Type targetType, 
             object parameter, System.Globalization.CultureInfo culture)
         {
-            var portableUIElement = _coreConverter.Convert(value, targetType, parameter, culture);
+            var portableConvertedUIElement = _coreConverter.Convert(value, targetType, parameter, culture);
 
-            return ServiceLocator.PortableUIElementConversionService.
-                ConvertToNativeUIElement(portableUIElement);
+            var nativeUIElement = ServiceLocator.PortableUIElementConversionService.
+                ConvertToNativeUIElement(portableConvertedUIElement);
+
+            return nativeUIElement;
         }
 
         public object ConvertBack(object value, System.Type targetType, 
             object parameter, System.Globalization.CultureInfo culture)
         {
-            return _coreConverter.ConvertBack(value, targetType, parameter, culture);
+            var portableValue = ServiceLocator.PortableUIElementConversionService.
+                ConvertToPortableUIElement(value);
+
+            var portableParameter = ServiceLocator.PortableUIElementConversionService.
+                ConvertToPortableUIElement(parameter);
+
+            var portableConvertedValue = _coreConverter.ConvertBack(portableValue, targetType, portableParameter, culture);
+
+            return portableConvertedValue;
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows.Data;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 
-namespace Catrobat.IDE.Phone.Converters
+namespace Catrobat.IDE.Core.UI.Converters
 {
-    public class FloatStringConverter : IValueConverter
+    public class FloatStringConverter : IPortableValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

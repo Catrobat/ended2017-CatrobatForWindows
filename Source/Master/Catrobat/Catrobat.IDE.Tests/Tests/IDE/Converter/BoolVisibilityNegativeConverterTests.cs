@@ -1,37 +1,34 @@
-﻿using System.Windows;
-using System.Windows.Media;
-using Catrobat.IDE.Core.UI.Converters;
-using Catrobat.IDE.Phone.Controls.Buttons;
-using Catrobat.IDE.Phone.Converters;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+﻿using Catrobat.IDE.Core.UI.Converters;
+using Catrobat.IDE.Core.UI.PortableUI;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
+namespace Catrobat.IDE.Tests.Tests.IDE.Converter
 {
     [TestClass]
     public class BoolVisibilityNegativeConverterTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestConversion()
         {
             var conv = new BoolVisibilityNegativeConverter();
             object output = conv.Convert(false, null, null, null);
-            Assert.AreEqual(Visibility.Visible, output);
+            Assert.AreEqual(PortableVisibility.Visible, output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestBackConversion()
         {
             var conv = new BoolVisibilityNegativeConverter();
-            object output = conv.ConvertBack(Visibility.Collapsed, null, null, null);
+            object output = conv.ConvertBack(PortableVisibility.Collapsed, null, null, null);
             Assert.AreEqual(null, output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestFaultyConversion()
         {
             var conv = new BoolVisibilityNegativeConverter();
             object output = conv.Convert("NotValid", null, null, null);
-            Assert.AreEqual(Visibility.Collapsed, output);
+            Assert.AreEqual(PortableVisibility.Collapsed, output);
         }
     }
 }

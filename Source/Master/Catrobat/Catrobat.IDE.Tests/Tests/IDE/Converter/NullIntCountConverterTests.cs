@@ -1,16 +1,12 @@
-﻿using System.Windows;
-using System.Windows.Media;
-using Catrobat.IDE.Core.UI.Converters;
-using Catrobat.IDE.Phone.Controls.Buttons;
-using Catrobat.IDE.Phone.Converters;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+﻿using Catrobat.IDE.Core.UI.Converters;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
+namespace Catrobat.IDE.Tests.Tests.IDE.Converter
 {
     [TestClass]
     public class NullIntCountConverterTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestConversion1()
         {
             var conv = new NullIntCountConverter();
@@ -19,7 +15,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
             Assert.AreEqual(0, output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestConversion2()
         {
             var conv = new NullIntCountConverter();
@@ -28,7 +24,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
             Assert.AreEqual(1, output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestBackConversion()
         {
             var conv = new NullIntCountConverter();

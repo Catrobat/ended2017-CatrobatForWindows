@@ -93,31 +93,21 @@ namespace Catrobat.IDE.Phone.Services.Storage
             if (resourceScope != ResourceScope.IdePhone)
                 throw new NotImplementedException("Only ResourceScope.IdePhone is implemented");
 
-            return new BitmapImage(new Uri(path, UriKind.Relative));
+            var image = new BitmapImage();
+            var stream = OpenResourceStream(resourceScope, path);
+            if (stream != null)
+            {
+                image.SetSource(stream);
+                return image;
+            }
+            else
+            {
+                return null;
+            }
 
-            //try
-            //{
-            //    Stream s = OpenResourceStream(resourceScope, path);
 
-            //    using (s)
-            //    {
-            //        var bitmapImage = new BitmapImage();
-            //        bitmapImage.SetSource(s);
-            //        bitmapImage.CreateOptions = BitmapCreateOptions.None;
-
-            //        //var bitmapImage = new BitmapImage(new Uri(path, UriKind.Relative)); // TODO: check uri, and maybe add prefix
-
-            //        var writeableBitmap = new WriteableBitmap(bitmapImage);
-            //        var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
-            //            writeableBitmap.PixelHeight);
-
-            //        return portableImage;
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    return null;
-            //}
+            // or:
+            //return new BitmapImage(new Uri(path, UriKind.Relative));
         }
     }
 }

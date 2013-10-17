@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Catrobat.IDE.Core.UI.Converters;
 using Catrobat.IDE.Phone.Controls.Buttons;
 using Catrobat.IDE.Phone.Converters;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;

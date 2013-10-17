@@ -1,13 +1,12 @@
 ﻿using Catrobat.IDE.Core.UI.Converters;
-using Catrobat.IDE.Phone.Converters;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
+namespace Catrobat.IDE.Tests.Tests.IDE.Converter
 {
     [TestClass]
     public class DoubleStringConverterTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestStringToDoubleConversion()
         {
             var conv = new DoubleStringConverter();
@@ -17,7 +16,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
             Assert.AreEqual(4.2d, (double)output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestDoubleToStringConversion()
         {
             var conv = new DoubleStringConverter();
@@ -27,7 +26,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE.Converter
             Assert.AreEqual("4.2", (string)output);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GuardedTests")]
         public void TestFaultyStringToDoubleConversion()
         {
             var conv = new DoubleStringConverter();

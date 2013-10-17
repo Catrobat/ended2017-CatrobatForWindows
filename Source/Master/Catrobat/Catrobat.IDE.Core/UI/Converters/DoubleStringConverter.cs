@@ -1,22 +1,29 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows.Data;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 
-namespace Catrobat.IDE.Phone.Converters
+namespace Catrobat.IDE.Core.UI.Converters
 {
-    public class SecondStringMillisecondConverter : IValueConverter
+    public class DoubleStringConverter : IPortableValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return StringFormatHelper.ConvertDouble(((int) value)/1000f);
+            if (parameter != null)
+            {
+                return ((double) value).ToString(parameter as String);
+            }
+            else
+            {
+                return StringFormatHelper.ConvertDouble((double) value);
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
-                return (int) Math.Round(StringFormatHelper.ParseDouble((string) value)*1000);
+                return StringFormatHelper.ParseDouble((string) value);
             }
             catch (Exception)
             {
