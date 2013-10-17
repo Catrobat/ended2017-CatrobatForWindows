@@ -27,9 +27,9 @@ float RotationProvider::GetRotation()
     {
         return m_rotation;
     }
-    else if (m_type == COMPASS)
+    else if (m_type == COMPASS)//TODO: Check
     {
-        return m_compassProvider->GetDirection();
+        return 360.0f - m_compassProvider->GetDirection();
     }
     else //TODO: Error report
     {
