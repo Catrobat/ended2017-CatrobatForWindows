@@ -10,7 +10,9 @@ using Windows.Storage;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Phone.Controls.FormulaControls;
 using Catrobat.IDE.Phone.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -18,6 +20,8 @@ namespace Catrobat.IDE.Phone.Services
 {
     public class ProjectImporterServicePhone : IProjectImporterService
     {
+        private readonly ProjectImporterService _importer = new ProjectImporterService();
+
         public async Task<ProjectDummyHeader> ImportProject(object systemSpeciticObject)
         {
             try
@@ -47,7 +51,7 @@ namespace Catrobat.IDE.Phone.Services
                 var projectZipFile = await projectTempZipFolder.GetFileAsync(tempProjectZipName);
                 var projectZipStream = await projectZipFile.OpenStreamForReadAsync();
 
-                var newProjectDummyHeader = await ServiceLocator.ProjectImporterService.ImportProject(projectZipStream);
+                var newProjectDummyHeader = await _importer.ImportProject(projectZipStream);
 
                 projectZipStream.Close();
 
@@ -59,32 +63,15 @@ namespace Catrobat.IDE.Phone.Services
             }
         }
 
-        public async Task<string> AcceptTempProject(bool setActive)
+        public async Task<string> AcceptTempProject()
         {
-            var newProjectName = await ServiceLocator.ProjectImporterService.AcceptTempProject(setActive);
-
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                if (setActive)
-                {
-                    var newProject = Catrobat.IDE.Core.CatrobatContext.LoadNewProjectByNameStatic(newProjectName);
-
-                    var projectChangedMessage = new GenericMessage<Project>(newProject);
-                    Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
-                }
-                else
-                {
-                    var localProjectsChangedMessage = new MessageBase();
-                    Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
-                }
-            });
-
+            var newProjectName = await _importer.AcceptTempProject();
             return newProjectName;
         }
 
-        public void CancelImport()
+        public async Task CancelImport()
         {
-            ServiceLocator.ProjectImporterService.CancelImport();
+            await _importer.CancelImport();
         }
     }
 }

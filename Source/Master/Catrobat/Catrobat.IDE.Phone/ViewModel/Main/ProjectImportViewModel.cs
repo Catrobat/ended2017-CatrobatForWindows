@@ -4,12 +4,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Phone.Utilities;
 using Catrobat.IDE.Phone.Views.Main;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Phone.ViewModel.Main
 {
@@ -187,7 +189,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
 
         #region Actions
 
-        private void AddAction()
+        private async void AddAction()
         {
             if (_isWorking)
             {
@@ -197,25 +199,39 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             _isWorking = true;
             ShowPanel(VisiblePanel.Loading);
 
-            var task = Task.Run(() =>
-                {
-                    try
-                    {
-                        ServiceLocator.ProjectImporterService.AcceptTempProject(CheckBoxMakeActiveIsChecked);
+            try
+            {
+                var newProjectName = await ServiceLocator.ProjectImporterService.AcceptTempProject();
 
-                        Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(MainView)));
-                    }
-                    catch
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    if (CheckBoxMakeActiveIsChecked)
                     {
-                        ShowPanel(VisiblePanel.Error);
+                        var newProject = Catrobat.IDE.Core.CatrobatContext.LoadNewProjectByNameStatic(newProjectName);
+
+                        var projectChangedMessage = new GenericMessage<Project>(newProject);
+                        Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                    }
+                    else
+                    {
+                        var localProjectsChangedMessage = new MessageBase();
+                        Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
                     }
                 });
+
+                Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(MainView)));
+            }
+            catch
+            {
+                ShowPanel(VisiblePanel.Error);
+            }
 
             _isWorking = false;
         }
 
         private void CancelAction()
         {
+            ServiceLocator.ProjectImporterService.CancelImport();
             ServiceLocator.NavigationService.NavigateTo(typeof(MainView));
         }
 

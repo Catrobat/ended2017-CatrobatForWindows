@@ -13,8 +13,8 @@ namespace Catrobat.IDE.Core.Services
     {
         Task<ProjectDummyHeader> ImportProject(object systemSpeciticObject);
 
-        Task<string> AcceptTempProject(bool setActive);
+        Task<string> AcceptTempProject();
 
-        void CancelImport();
+        Task CancelImport();
     }
 }
