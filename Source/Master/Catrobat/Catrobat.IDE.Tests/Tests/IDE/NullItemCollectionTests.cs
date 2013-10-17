@@ -1,17 +1,13 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Media;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Phone.Controls.ListPicker;
-using Catrobat.IDE.Phone.Converters;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Phone.Tests.Tests.IDE
+namespace Catrobat.IDE.Tests.Tests.IDE
 {
   [TestClass]
   public class NullItemCollectionTests
   {
-    [TestMethod]
+    [TestMethod, TestCategory("GuardedTests")]
     public void CountTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2" };
@@ -22,7 +18,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE
       Assert.AreEqual(3, collection.Count);
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("GuardedTests")]
     public void AddTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2" };
@@ -35,7 +31,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE
       Assert.AreEqual(newObject, sourceCollection[2]);
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("GuardedTests")]
     public void ClearTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2" };
@@ -47,7 +43,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE
       Assert.AreEqual(0, sourceCollection.Count);
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("GuardedTests")]
     public void ContainsTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2" };
@@ -61,7 +57,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE
       Assert.IsTrue(collection.Contains(sourceCollection[1]));
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("GuardedTests")]
     public void IndexOfTest()
     {
       var sourceCollection = new ObservableCollection<string> {"Item1", "Item2"};
@@ -74,7 +70,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE
       Assert.AreEqual(2, collection.IndexOf(sourceCollection[1]));
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("GuardedTests")]
     public void InsertTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2" };
@@ -91,7 +87,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE
       Assert.AreEqual(3, sourceCollection.IndexOf(newObject2));
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("GuardedTests")]
     public void RemoveTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2", "Item3" };
@@ -108,7 +104,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE
       Assert.IsFalse(sourceCollection.Contains(item4));
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("GuardedTests")]
     public void RemoveAtTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2", "Item3" };
@@ -125,7 +121,7 @@ namespace Catrobat.IDE.Phone.Tests.Tests.IDE
       Assert.IsFalse(sourceCollection.Contains(item4));
     }
 
-    [TestMethod]
+    [TestMethod, TestCategory("GuardedTests")]
     public void IndexOperatorTest()
     {
       var sourceCollection = new ObservableCollection<string> { "Item1", "Item2", "Item3" };

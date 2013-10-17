@@ -118,8 +118,13 @@
     <Compile Include="CatrobatObjects\ProjectHeader.cs" />
     <Compile Include="CatrobatObjects\Scripts\BroadcastScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\Script.cs" />
+    <Compile Include="Services\Common\ProjectGeneratorDefault.cs" />
     <Compile Include="Services\IDispatcherService.cs" />
+    <Compile Include="Services\IProjectGenerator.cs" />
     <Compile Include="Services\IShareService.cs" />
+    <Compile Include="Services\ITestProjectGenerator.cs" />
+    <Compile Include="UI\Converters\ConverterLocator.cs" />
+    <Compile Include="UI\Converters\IValueConverter.cs" />
     <Compile Include="UI\IPlayPauseButton.cs" />
     <Compile Include="UI\PlayPauseStateCommandArguments.cs" />
     <Compile Include="UI\PortableListBoxViewPort.cs" />
@@ -206,6 +211,7 @@
     <Compile Include="Utilities\Helpers\LanguageHelper.cs" />
     <Compile Include="Utilities\Helpers\PropertyHelper.cs" />
     <Compile Include="Utilities\Helpers\ReferenceHelper.cs" />
+    <Compile Include="Utilities\Helpers\ReflectionHelper.cs" />
     <Compile Include="Utilities\Helpers\StringFormatHelper.cs" />
     <Compile Include="Utilities\Helpers\VariableHelper.cs" />
     <Compile Include="Utilities\Helpers\WaveHeaderHelper.cs" />

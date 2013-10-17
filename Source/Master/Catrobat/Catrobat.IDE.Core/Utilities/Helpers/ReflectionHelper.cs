@@ -1,29 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Linq;
 using System.Reflection;
+using Enumerable = System.Linq.Enumerable;
 
-namespace Catrobat.IDE.Tests.Misc
+namespace Catrobat.IDE.Core.Utilities.Helpers
 {
-    internal class ReflectionHelper
+    public class ReflectionHelper
     {
         public static IList<T> GetInstances<T>(List<Type> excludedTypes = null)
         {
+            var excludedTypeInfos = Enumerable.ToList(
+                Enumerable.Select(excludedTypes, type => type.GetTypeInfo()));
+
             if (excludedTypes == null)
                 excludedTypes = new List<Type>();
 
             var instances = new List<T>();
             var assemblie = GetAssembly(typeof(T));
 
-            foreach (var type in assemblie.GetTypes())
+            foreach (var type in assemblie.DefinedTypes)
             {
                 if (!type.IsAbstract && type.IsSubclassOf(typeof(T)))
                 {
                     try
                     {
-                        if(!excludedTypes.Contains(type))
-                            instances.Add((T)Activator.CreateInstance(type));
+                        if (!excludedTypeInfos.Contains(type))
+                            instances.Add((T)Activator.CreateInstance(type.AsType()));
                     }
                     catch (Exception)
                     {
@@ -41,7 +44,7 @@ namespace Catrobat.IDE.Tests.Misc
 
             Contract.EndContractBlock();
 
-            Module m = type.Module;
+            Module m = type.GetTypeInfo().Module;
             if (m == null)
                 return null;
             else

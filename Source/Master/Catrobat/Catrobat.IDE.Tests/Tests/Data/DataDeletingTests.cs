@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
                 storage.DeleteDirectory(Path.Combine(CatrobatContextBase.ProjectsPath, programName));
             }
 
-            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project = projectgenerator.GenerateProject();
             project.SetProgramName(programName);
             // TODO: write dummy costume files to disk

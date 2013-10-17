@@ -75,7 +75,6 @@ namespace Catrobat.IDE.Phone
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            ViewModelLocator.LoadContext();
             RootFrame.Navigating += RootFrameOnNavigating;
         }
 

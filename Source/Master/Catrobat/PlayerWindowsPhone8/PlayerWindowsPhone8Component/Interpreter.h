@@ -2,6 +2,8 @@
 
 #include <map>
 #include "Object.h"
+#include "CompassProvider.h"
+#include "RotationProvider.h"
 
 class FormulaTree;
 
@@ -11,6 +13,8 @@ enum Childs {
     LeftAndRightChild, 
     NoChild
 };
+
+typedef float(RotationProvider::*pt2Func)(ROTATION_PROVIDER_TYPES, float);
 
 class Interpreter
 {
@@ -27,9 +31,11 @@ public:
     int EvaluateFormulaToInt(FormulaTree *tree, Object *object);
     float EvaluateFormulaToFloat(FormulaTree *tree, Object *object);
     bool EvaluateFormulaToBool(FormulaTree *tree, Object *object);
+    
+    RotationProvider* GetRotationProvider(FormulaTree *tree, Object *object);
 
     void ReadAcceleration();
-    double ReadCompass();
+    double ReadSensor();
 
 private:
     // Sensors

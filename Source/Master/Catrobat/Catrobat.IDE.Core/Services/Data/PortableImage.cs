@@ -115,5 +115,13 @@ namespace Catrobat.IDE.Core.Services.Data
                 _nativeImageSource = loader.LoadImage(scope, path);
             }
         }
+
+        public bool IsEmpty
+        {
+            get
+            {
+                return Data == null && _nativeImageSource == null;
+            }
+        }
     }
 }

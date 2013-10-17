@@ -64,7 +64,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects
                         storage.DeleteFile(ScreenshotPath);
                     }
 
-                    storage.SaveImage(ScreenshotPath, value, true, ImageFormat.Png);
+                    if(value != null && !value.IsEmpty)
+                        storage.SaveImage(ScreenshotPath, value, true, ImageFormat.Png);
                 }
 
                 RaisePropertyChanged();
@@ -172,6 +173,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
 
         public Project()
         {
+            SpriteList = new SpriteList();
             _broadcastMessages = new ObservableCollection<string>();
             _variableList = new VariableList();
         }

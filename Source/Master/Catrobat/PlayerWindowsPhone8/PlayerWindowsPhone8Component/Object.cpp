@@ -9,7 +9,6 @@ Object::Object(string name) :
     BaseObject(),
     m_name(name),
     m_opacity(1),
-    m_rotation(0.0f),
     m_look(NULL)
 {
     m_lookList = new list<Look*>();
@@ -97,7 +96,7 @@ void Object::Draw(SpriteBatch *spriteBatch)
     if (m_look != NULL)
     {
         spriteBatch->Draw(m_look->GetTexture(), position, nullptr,
-            Colors::White * m_opacity, (float) radians(m_rotation), XMFLOAT2(((float) m_look->GetWidth()) / 2.0f,
+            Colors::White * m_opacity, (float) radians(this->GetRotation()), XMFLOAT2(((float) m_look->GetWidth()) / 2.0f,
             ((float) m_look->GetHeight()) / 2.0f), m_objectScale, SpriteEffects_None, 0.0f);
     }
 }
@@ -211,12 +210,22 @@ float Object::GetTransparency()
     return 1.0f - m_opacity;
 }
 
-void Object::SetRotation(float rotation)
+void Object::SetRotation(RotationProvider* rotation)
 {
     m_rotation = rotation;
 }
 
 float Object::GetRotation()
+{
+    if (m_rotation != NULL)
+    {
+        return m_rotation->GetRotation();
+    }
+
+    return 0.0;
+}
+
+RotationProvider* Object::GetRotationProvider()
 {
     return m_rotation;
 }

@@ -629,6 +629,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Background.
+        /// </summary>
+        public static string DefaultProject_Background {
+            get {
+                return ResourceManager.GetString("DefaultProject_Background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mole.
+        /// </summary>
+        public static string DefaultProject_Mole {
+            get {
+                return ResourceManager.GetString("DefaultProject_Mole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to actions.
         /// </summary>
         public static string Editor_ActionPlural {
@@ -2128,6 +2146,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_DEBUGShowMemory {
             get {
                 return ResourceManager.GetString("Main_DEBUGShowMemory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Program.
+        /// </summary>
+        public static string Main_DefaultProjectName {
+            get {
+                return ResourceManager.GetString("Main_DefaultProjectName", resourceCulture);
             }
         }
         

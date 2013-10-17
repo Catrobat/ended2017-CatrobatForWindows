@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod, TestCategory("GuardedTests")]
         public void EqualsProjectTest()
         {
-            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
             var project2 = projectgenerator.GenerateProject();
 

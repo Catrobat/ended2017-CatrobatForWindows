@@ -161,6 +161,7 @@
     <ClInclude Include="ChangeVariableBrick.h" />
     <ClInclude Include="ChangeXByBrick.h" />
     <ClInclude Include="ChangeYByBrick.h" />
+    <ClInclude Include="CompassProvider.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ContainerBrick.h" />
     <ClInclude Include="CostumeBrick.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Direct3DContentProvider.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RepeatBrick.h" />
+    <ClInclude Include="RotationProvider.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptHandler.h" />
     <ClInclude Include="SetGhostEffectBrick.h" />
@@ -232,6 +234,7 @@
     <ClCompile Include="ChangeVariableBrick.cpp" />
     <ClCompile Include="ChangeXByBrick.cpp" />
     <ClCompile Include="ChangeYByBrick.cpp" />
+    <ClCompile Include="CompassProvider.cpp" />
     <ClCompile Include="ContainerBrick.cpp" />
     <ClCompile Include="CostumeBrick.cpp" />
     <ClCompile Include="DDSLoader.cpp" />
@@ -264,6 +267,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="RepeatBrick.cpp" />
+    <ClCompile Include="RotationProvider.cpp" />
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptHandler.cpp" />
     <ClCompile Include="SetGhostEffectBrick.cpp" />

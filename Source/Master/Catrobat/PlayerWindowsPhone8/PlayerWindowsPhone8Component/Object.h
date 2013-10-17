@@ -7,6 +7,8 @@
 #include "Script.h"
 #include "SoundInfo.h"
 #include "UserVariable.h"
+#include "Interpreter.h"
+#include "RotationProvider.h"
 
 using namespace std;
 
@@ -53,8 +55,11 @@ public:
 
 	void SetTransparency(float transparency);
 	float GetTransparency();
-	void SetRotation(float rotation);
+
+    void SetRotation(RotationProvider* rotation);
 	float GetRotation();
+    RotationProvider* GetRotationProvider();
+
 	void SetScale(float scale);
 	float GetScale();
 
@@ -66,5 +71,5 @@ private:
 	std::map<std::string, UserVariable*> *m_variableList;
 	string m_name;
 	float m_opacity;
-	float m_rotation;
+    RotationProvider* m_rotation;
 };

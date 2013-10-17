@@ -96,6 +96,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\NativeConverterPhone.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -409,6 +413,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\SplashScreen\SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\StatusIcons\ProcessIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -596,8 +604,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\Share\skydrive.jpg" />
-    <Content Include="Content\Resources\default.catrobat" />
-    <Content Include="Content\Resources\default_new.catrobat" />
     <Content Include="Content\Resources\DesignTime\screenshot.png" />
     <Content Include="Content\Tiles\FlipCycleTileLarge.png" />
     <Content Include="Content\Tiles\FlipCycleTileMedium.png" />

@@ -202,6 +202,8 @@
     <ClCompile Include="XMLParserSevereException.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
+    <ClCompile Include="CompassProvider.cpp" />
+    <ClCompile Include="RotationProvider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -414,6 +416,8 @@
     <ClInclude Include="XMLParserSevereException.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
+    <ClInclude Include="CompassProvider.h" />
+    <ClInclude Include="RotationProvider.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">

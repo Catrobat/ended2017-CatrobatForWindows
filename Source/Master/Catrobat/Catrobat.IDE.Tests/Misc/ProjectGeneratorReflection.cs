@@ -17,7 +17,7 @@ using Catrobat.IDE.Core.Services.Common;
 
 namespace Catrobat.IDE.Tests.Misc
 {
-    public class ProjectGeneratorReflection : IProjectGenerator
+    public class ProjectGeneratorReflection : ITestProjectGenerator
     {
         // Bricks that must be tested manually
         private static readonly List<Type> ExcludedBricks = new List<Type>

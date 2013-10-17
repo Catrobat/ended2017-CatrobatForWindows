@@ -17,7 +17,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod,TestCategory("GatedTests")]
         public void GetGlobalVariableListTest()
         {
-            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
             var globalVariableList = VariableHelper.GetGlobalVariableList(project1);
 
@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod,TestCategory("GatedTests")]
         public void GetLocalVariableListTest()
         {
-            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
 
             foreach (var sprite in project1.SpriteList.Sprites)
@@ -44,7 +44,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod,TestCategory("GatedTests")]
         public void DeleteGlobalVariableTest()
         {
-            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
             var globalVariableList = VariableHelper.GetGlobalVariableList(project1);
 
@@ -61,7 +61,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod,TestCategory("GatedTests")]
         public void DeleteLocalVariableTest()
         {
-            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
 
             foreach (var sprite in project1.SpriteList.Sprites)
@@ -79,7 +79,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod,TestCategory("GatedTests")]
         public void AddGlobalVariableTest()
         {
-            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
 
             var newUserVariable = new UserVariable
@@ -95,7 +95,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod,TestCategory("GatedTests")]
         public void AddLocalVariableTest()
         {
-            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
 
             foreach (var sprite in project1.SpriteList.Sprites)
@@ -114,7 +114,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod,TestCategory("GatedTests")]
         public void IsVariableLocalTest()
         {
-            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
             var localVariable = project1.VariableList.ObjectVariableList.ObjectVariableEntries[0].VariableList.UserVariables[0];
 
@@ -125,7 +125,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod,TestCategory("GatedTests")]
         public void CreateUniqueGlobalVariableTest()
         {
-            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
 
             for (int i = 0; i < 20; i++)
@@ -142,7 +142,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod,TestCategory("GatedTests")]
         public void CreateUniqueLocalVariableTest()
         {
-            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
             var sprite1 = project1.SpriteList.Sprites[0];
 
@@ -160,7 +160,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod,TestCategory("GatedTests")]
         public void VariableNameExistsTest()
         {
-            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
             var existingGlobalVariableName = "GlobalTestVariable1";
             var notExistingGlobalVariableName = "test2";
@@ -182,7 +182,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod,TestCategory("GatedTests")]
         public void VariableNameExistsCheckSelfTest()
         {
-            IProjectGenerator projectgenerator = new ProjectGeneratorReflection();
+            ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
             var globalVariable = VariableHelper.GetGlobalVariableList(project1)[0];
             var sameGlobalVariableName = "GlobalTestVariable0";
