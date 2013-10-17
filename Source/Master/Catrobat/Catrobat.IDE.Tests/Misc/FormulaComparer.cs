@@ -5,24 +5,26 @@ namespace Catrobat.IDE.Tests.Misc
 {
     public static class FormulaComparer
     {
-        public static void CompareFormulas(FormulaTree expectedFromula, FormulaTree actualFormula)
+        public static void CompareFormulas(FormulaTree expectedFormula, FormulaTree actualFormula)
         {
-            if (expectedFromula == null && actualFormula == null)
+            if (expectedFormula == null && actualFormula == null)
                 return;
 
-            Assert.IsNotNull(expectedFromula);
+            Assert.IsNotNull(expectedFormula);
             Assert.IsNotNull(actualFormula);
 
-            if (expectedFromula.VariableType != null || actualFormula.VariableType != null)
-            Assert.AreEqual(expectedFromula.VariableType.ToLowerInvariant(),
-                actualFormula.VariableType.ToLowerInvariant());
+            if (expectedFormula.VariableType != null || actualFormula.VariableType != null)
+                Assert.AreEqual(
+                    expectedFormula.VariableType.ToLowerInvariant(),
+                    actualFormula.VariableType.ToLowerInvariant());
 
-            if (expectedFromula.VariableValue != null || actualFormula.VariableValue != null)
-            Assert.AreEqual(expectedFromula.VariableValue.ToLowerInvariant(),
-                actualFormula.VariableValue.ToLowerInvariant());
+            if (expectedFormula.VariableValue != null || actualFormula.VariableValue != null)
+                Assert.AreEqual(
+                    expectedFormula.VariableValue.ToLowerInvariant(),
+                    actualFormula.VariableValue.ToLowerInvariant());
 
-            CompareFormulas(expectedFromula.LeftChild, actualFormula.LeftChild);
-            CompareFormulas(expectedFromula.RightChild, actualFormula.RightChild);
+            CompareFormulas(expectedFormula.LeftChild, actualFormula.LeftChild);
+            CompareFormulas(expectedFormula.RightChild, actualFormula.RightChild);
         }
     }
 }

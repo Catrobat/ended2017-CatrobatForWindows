@@ -1576,11 +1576,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicAnd));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicFalse));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicFalse));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Number9));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.NumberDot));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number9));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberDot));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
@@ -1590,8 +1591,6 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 VariableValue = "0"
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-
-
         }
 
         [TestMethod]
@@ -1620,7 +1619,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             editor.SelectedFormula = selectedFromula;
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree;
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.LeftChild;
             editor.SelectedFormula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
@@ -1640,7 +1639,6 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-
         }
 
         #endregion
@@ -3541,15 +3539,6 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         [TestMethod]
         public void FormulaEditorTests_EmptyChilds()
         {
-            var inputFormula = new FormulaTree()
-            {
-                VariableType = "NUMBER",
-                VariableValue = "0.0",
-                LeftChild = null,
-                RightChild = null
-            };
-            const SensorVariable variable = SensorVariable.CompassDirection;
-            var expectedFormula = FormulaDefaultValueCreater.GetDefaultValueForSensorVariable(variable);
 
             var editor = new FormulaEditor
             {
@@ -3557,12 +3546,31 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 {
                     FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                     {
-                        FormulaTree = inputFormula
+                        FormulaTree = new FormulaTree()
+                        {
+                            VariableType = "NUMBER",
+                            VariableValue = "0.0",
+                            LeftChild = null,
+                            RightChild = null
+                        }
                     }
                 }
             };
+
+            // type a sensor variable (should replace 0.0)
+            const SensorVariable variable = SensorVariable.CompassDirection;
             Assert.IsTrue(editor.SensorVariableSelected(variable));
-            FormulaComparer.CompareFormulas(expectedFormula, editor.SelectedFormula.FormulaRoot.FormulaTree);
+            FormulaComparer.CompareFormulas(
+                expectedFormula: FormulaDefaultValueCreater.GetDefaultValueForSensorVariable(variable), 
+                actualFormula: editor.SelectedFormula.FormulaRoot.FormulaTree);
+
+
+            // type 0 (should replace the sensor variable)
+            const FormulaEditorKey numberKey = FormulaEditorKey.Number0;
+            Assert.IsTrue(editor.KeyPressed(numberKey));
+            FormulaComparer.CompareFormulas(
+                expectedFormula: FormulaDefaultValueCreater.GetDefaultValueForKey(numberKey),
+                actualFormula: editor.SelectedFormula.FormulaRoot.FormulaTree);
         }
 
         #endregion

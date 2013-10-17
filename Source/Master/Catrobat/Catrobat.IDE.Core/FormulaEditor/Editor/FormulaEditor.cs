@@ -7,21 +7,10 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
     public class FormulaEditor
     {
-        private SelectedFormulaInformation _selectedFormulaInfo;
         private Stack<FormulaTree> _undoStack;
         private Stack<FormulaTree> _redoStack;
 
-        public SelectedFormulaInformation SelectedFormula
-        {
-            get
-            {
-                return _selectedFormulaInfo;
-            }
-            set
-            {
-                _selectedFormulaInfo = value;
-            }
-        }
+        public SelectedFormulaInformation SelectedFormula { get; set; }
 
         public Stack<FormulaTree> UndoStack
         {
@@ -248,6 +237,11 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 formulaToChange.VariableValue += GetKeyPressed(key);
                 return true;
             }
+            if (!HasChildren(formulaToChange))
+            {
+                ReplaceNode(formulaToChange, DefaultNode(key));
+                return true;
+            }
             if (IsEmpty(formulaToChange))
             {
                 RewriteNode(formulaToChange, key);
@@ -388,6 +382,11 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             if (IsOperator(formulaToChange))
             {
                 formulaToChange.RightChild = node;
+                return true;
+            }
+            if (!HasChildren(node))
+            {
+                ReplaceNode(formulaToChange, node);
                 return true;
             }
             return false;
@@ -657,6 +656,11 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         private static bool IsClosedBracket(FormulaTree node)
         {
             return node.VariableType == "BRACKET" && node.VariableValue == "";
+        }
+
+        private bool HasChildren(FormulaTree node)
+        {
+            return node.LeftChild != null || node.RightChild != null;
         }
 
         private bool IsTerminalZero(FormulaTree node)
