@@ -28,8 +28,14 @@
       <TextBlock Text="{Binding ProjectName}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
     </StackPanel>
 
-    <StackPanel Grid.Row="1">
-      <Grid x:Name="LoadingPanel" Visibility="{Binding LoadingPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,170">
+    <Grid Grid.Row="1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      
+      <Grid x:Name="LoadingPanel" Grid.Row="0" Visibility="{Binding LoadingPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,170">
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"/>
           <RowDefinition/>
@@ -38,7 +44,8 @@
         <TextBlock Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" 
                    Text="Please wait while we try to load the new project. This can take some time."></TextBlock>
       </Grid>
-      <Grid x:Name="ErrorPanel" Background="Red" Visibility="{Binding ErrorPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,170">
+      
+      <Grid x:Name="ErrorPanel" Grid.Row="1" Background="Red" Visibility="{Binding ErrorPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,170">
         <StackPanel>
         <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" 
                    Text="Sorry!  The project is not valid or it's version is not compatible to the current version of this IDE."></TextBlock>
@@ -46,16 +53,24 @@
                    Text="Please look for updates in your Windows Phone store."></TextBlock>
         </StackPanel>
       </Grid>
-      <Grid x:Name="ContentPanel" Visibility="{Binding ContentPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,0">
+      
+      <Grid x:Name="ContentPanel" Grid.Row="1" Visibility="{Binding ContentPanelVisibility, Converter={StaticResource BoolVisibilityConverter}}" Margin="12,0,12,0">
         <Grid.RowDefinitions>
           <RowDefinition/>
           <RowDefinition Height="Auto"/>
-          <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Image VerticalAlignment="Stretch" Grid.Row="0" Name="ImageProjectScreenshot" Source="{Binding ScreenshotImageSource.ImageSource, Converter={StaticResource NoScreenshotConverter}}"></Image>
-        <CheckBox Grid.Row="1" Name="CheckBoxMakeActive" IsChecked="{Binding CheckBoxMakeActiveIsChecked}">Make new Project active</CheckBox>
+        <Image Grid.Row="0" 
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"
+               Width="400"
+               Height="400"
+               Name="ImageProjectScreenshot"
+               Stretch="Uniform"
+               Source="{Binding ScreenshotImageSource, 
+               Converter={StaticResource NoScreenshotConverter}}"/>
+        <CheckBox Grid.Row="1" Margin="0 15 0 30" Name="CheckBoxMakeActive" IsChecked="{Binding CheckBoxMakeActiveIsChecked}">Make new Project active</CheckBox>
       </Grid>
-    </StackPanel>
+    </Grid>
 
     <i:Interaction.Triggers>
       <abu:StateChangedTrigger State="false">
