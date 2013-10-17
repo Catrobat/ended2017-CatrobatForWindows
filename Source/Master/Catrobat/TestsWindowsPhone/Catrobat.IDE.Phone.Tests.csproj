@@ -102,8 +102,6 @@
     <Compile Include="Tests\IDE\Converter\DoubleStringConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\FloatStringConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\SecondStringMillisecondConverterTests.cs" />
-    <Compile Include="Tests\IDE\ImageSizeEntryTests.cs" />
-    <Compile Include="Tests\IDE\NullItemCollectionTests.cs" />
     <Compile Include="Tests\Storage\ResourceLoaderPhoneTests.cs" />
     <Compile Include="Tests\Storage\StoragePhoneTests.cs" />
   </ItemGroup>
@@ -172,9 +170,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Bootstrap\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\wp8\Microsoft.Threading.Tasks.dll</HintPath>

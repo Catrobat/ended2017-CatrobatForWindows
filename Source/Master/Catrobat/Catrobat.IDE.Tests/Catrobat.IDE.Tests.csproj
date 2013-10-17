@@ -74,7 +74,6 @@
     <Compile Include="Misc\PlatformInformationHelperTests.cs" />
     <Compile Include="Misc\ProjectGeneratorForScriptBrickCollectionTests.cs" />
     <Compile Include="Misc\ProjectGeneratorReflection.cs" />
-    <Compile Include="Misc\ReflectionHelper.cs" />
     <Compile Include="Misc\Storage\BasePathHelper.cs" />
     <Compile Include="Misc\Storage\ResourceLoaderFactoryTest.cs" />
     <Compile Include="Misc\Storage\ResourcesTest.cs" />
@@ -88,7 +87,6 @@
     <Compile Include="Tests\Data\CopyTests.cs" />
     <Compile Include="Tests\Data\DataDeletingTests.cs" />
     <Compile Include="Tests\Data\DataEqualsTests.cs" />
-    <Compile Include="Tests\Data\DataReadingTests.cs" />
     <Compile Include="Tests\Data\DataReflectionTests.cs" />
     <Compile Include="Tests\Data\ProjectTests.cs" />
     <Compile Include="Tests\Data\ReferenceHelperTests.cs" />
@@ -98,6 +96,8 @@
     <Compile Include="Tests\Data\VersionConverter091ToWin091Tests.cs" />
     <Compile Include="Tests\Data\XPathHelperTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaEditorTests.cs" />
+    <Compile Include="Tests\IDE\ImageSizeEntryTests.cs" />
+    <Compile Include="Tests\IDE\NullItemCollectionTests.cs" />
     <Compile Include="Tests\Misc\FileNameGeneratorTests.cs" />
     <Compile Include="Tests\Misc\ZipTests.cs" />
     <Compile Include="Tests\Storage\StorageTests.cs" />
