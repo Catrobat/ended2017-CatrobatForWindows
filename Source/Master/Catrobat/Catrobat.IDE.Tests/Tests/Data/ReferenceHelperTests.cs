@@ -1,4 +1,5 @@
 ﻿using System;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Bricks;
@@ -11,6 +12,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
     [TestClass]
     public class ReferenceHelperTests
     {
+        public static ITestProjectGenerator ProjectGenerator = new ProjectGeneratorForReferenceHelperTests();
+
         [ClassInitialize()]
         public static void TestClassInitialize(TestContext testContext)
         {
@@ -20,7 +23,8 @@ namespace Catrobat.IDE.Tests.Tests.Data
         [TestMethod]
         public void GetCostumeObjectTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid","default");
+            var project = ProjectGenerator.GenerateProject();
+
             var sprite = project.SpriteList.Sprites[0];
             var setCostumeBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[0] as SetCostumeBrick;
             

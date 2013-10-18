@@ -122,7 +122,6 @@
     <Compile Include="Services\IDispatcherService.cs" />
     <Compile Include="Services\IProjectGenerator.cs" />
     <Compile Include="Services\IShareService.cs" />
-    <Compile Include="Services\ITestProjectGenerator.cs" />
     <Compile Include="UI\Converters\BoolOpacityConverter.cs" />
     <Compile Include="UI\Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="UI\Converters\BoolToSelectedPivotItemConverter.cs" />

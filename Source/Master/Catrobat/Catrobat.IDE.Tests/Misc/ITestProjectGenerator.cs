@@ -7,7 +7,7 @@ using Catrobat.IDE.Core.CatrobatObjects;
 
 namespace Catrobat.IDE.Tests.Misc
 {
-    interface ITestProjectGenerator
+    public interface ITestProjectGenerator
     {
         Project GenerateProject();
     }
