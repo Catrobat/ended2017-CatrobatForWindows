@@ -7,8 +7,10 @@ using Catrobat.IDE.Core.Annotations;
 
 namespace Catrobat.IDE.Core.Services
 {
+    public enum DispatcherPriority{Low, Medium, High}
+
     public interface IDispatcherService
     {
-        void RunOnMainThread(Action action);
+        void RunOnMainThread(Action action, DispatcherPriority priority = DispatcherPriority.Medium);
     }
 }
