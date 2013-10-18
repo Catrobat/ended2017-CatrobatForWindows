@@ -45,26 +45,21 @@ namespace Catrobat.IDE.Core.VersionConverter.Versions
                 Elements("objectVariableList").
                 Elements("entry").
                 Elements("object").
-                Where(element => !element.HasAttribute("reference")).
+                Where(element => !element.HasReference()).
                 ToList();
             foreach (var definition in orphanedEntries)
             {
                 var reference = new XElement("object");
                 objectList.Add(reference);
-                reference.SetAttributeValue("reference", XPathHelper.GetXPath(reference, definition));
+                reference.SetReferenceTarget(definition);
                 MoveDefinitionToReference(program, definition, reference);
             }
 
             // remove object self references
             var selfReferences = program.Descendants("object").Where(reference =>
             {
-                var referenceAttribute = reference.Attribute("reference");
-                if (referenceAttribute == null) return false;
-
-                var target = XPathHelper.GetElement(reference, referenceAttribute.Value);
-                if (target == null) return false;
-
-                return target.Descendants().Contains(reference);
+                var target = reference.GetReferenceTarget();
+                return target != null && target.Descendants().Contains(reference);
             }).ToList();
             foreach (var selfReference in selfReferences)
             {
@@ -143,53 +138,6 @@ namespace Catrobat.IDE.Core.VersionConverter.Versions
             }
         }
 
-        protected static void MoveDefinitionsToReference(XElement rootElement, IEnumerable<XElement> elements)
-        {
-            MoveDefinitionsToReference(Enumerable.Repeat(rootElement, 1).ToList(), elements);
-        }
-
-        protected static void MoveDefinitionsToReference(List<XElement> rootElements, IEnumerable<XElement> elements)
-        {
-            var references = elements.Where(element => element.HasAttribute("reference"));
-            var pendingDefinitions = references.Select(reference => new
-            {
-                OldDefinition = XPathHelper.GetElement(reference, reference.Attribute("reference").Value),
-                NewDefinition = reference
-            });
-
-            // run query every time instead of .ToList() and foreach
-            // because elements may have been moved in previous iteration
-            AdaptiveForEach(
-                elements: pendingDefinitions,
-                body: definition => MoveDefinitionToReference(rootElements, definition.OldDefinition, definition.NewDefinition));
-        }
-
-        protected static void MoveDefinitionsToReferenceAfterParent(List<XElement> rootElements, IEnumerable<XElement> elements, string name)
-        {
-            var definitions = elements.Where(element => !element.HasAttribute("reference"));
-            var pendingElements = definitions.
-                Select(definition =>
-                {
-                    var reference = definition.Parent.ElementsAfterSelf(name).FirstOrDefault();
-                    if (reference == null) return null;
-
-                    var referenceAttribute = reference.Attribute("reference");
-                    if (referenceAttribute == null) return null;
-
-                    var target = XPathHelper.GetElement(reference, referenceAttribute.Value);
-                    if (target != definition) return null;
-
-                    return new { Definition = definition, Reference = reference };
-                }).
-                Where(element => element != null);
-
-            // run query every time instead of .ToList() and foreach
-            // because elements may have been moved in previous iteration
-            AdaptiveForEach(
-                elements: pendingElements,
-                body: element => MoveDefinitionToReference(rootElements, element.Definition, element.Reference));
-        }
-
         #endregion
 
         #region Convert back
@@ -204,34 +152,124 @@ namespace Catrobat.IDE.Core.VersionConverter.Versions
 
         protected static void MoveDefinitionsToFirstOccurence(List<XElement> rootElements, IEnumerable<XElement> elements)
         {
-            var definitions = elements.Where(element => !element.HasAttribute("reference"));
+            var definitions = elements.Where(element => !element.HasReference());
             var pendingElements = definitions.
-                Select(definition =>
+                Select(definition => new
                 {
-                    var occurences = rootElements.Descendants().Where(element =>
-                    {
-                        if (element == definition) return true;
-
-                        var referenceAttribute = element.Attribute("reference");
-                        if (referenceAttribute == null) return false;
-
-                        var target = XPathHelper.GetElement(element, referenceAttribute.Value);
-                        return target == definition;
-                    });
-
-                    return new
-                    {
-                        Definition = definition, 
-                        FirstOccurence = occurences.FirstOrDefault()
-                    };
+                    Definition = definition, 
+                    FirstOccurence = rootElements.Descendants().
+                        FirstOrDefault(element => 
+                            element == definition || 
+                            element.GetReferenceTarget() == definition)
                 }).
-                Where(element => element.Definition != element.FirstOccurence);
+                Where(x => x.Definition != x.FirstOccurence);
 
             // run query every time instead of .ToList() and foreach
             // because elements may have been moved in previous iteration
             AdaptiveForEach(
                 elements: pendingElements,
                 body: element => MoveDefinitionToReference(rootElements, element.Definition, element.FirstOccurence));
+        }
+
+        #endregion
+
+        #region move nodes
+
+        protected static void MoveDefinitionsToReference(XElement rootElement, IEnumerable<XElement> elements)
+        {
+            MoveDefinitionsToReference(Enumerable.Repeat(rootElement, 1).ToList(), elements);
+        }
+
+        protected static void MoveDefinitionsToReference(List<XElement> rootElements, IEnumerable<XElement> references)
+        {
+            var pendingDefinitions = references.
+                Select(reference => new
+                {
+                    Definition = reference.GetReferenceTarget(),
+                    Reference = reference
+                }).
+                Where(x => x.Definition != null);
+
+            // run query every time instead of .ToList() and foreach
+            // because elements may have been moved in previous iteration
+            AdaptiveForEach(
+                elements: pendingDefinitions,
+                body: x => MoveDefinitionToReference(rootElements, x.Definition, x.Reference));
+        }
+
+        protected static void MoveDefinitionsToReferenceAfterParent(List<XElement> rootElements, IEnumerable<XElement> elements, string name)
+        {
+            var definitions = elements.Where(element => !element.HasReference());
+            var pendingElements = definitions.
+                Select(definition =>
+                new
+                {
+                    Definition = definition,
+                    Reference = definition.Parent.ElementsAfterSelf(name).
+                        FirstOrDefault(element => element.GetReferenceTarget() == definition)
+                }).
+                Where(x => x.Reference != null);
+
+            // run query every time instead of .ToList() and foreach
+            // because elements may have been moved in previous iteration
+            AdaptiveForEach(
+                elements: pendingElements,
+                body: element => MoveDefinitionToReference(rootElements, element.Definition, element.Reference));
+        }
+
+
+        protected static void MoveDefinitionToReference(XElement rootElement, XElement definition, XElement reference)
+        {
+            MoveDefinitionToReference(Enumerable.Repeat(rootElement, 1).ToList(), definition, reference);
+        }
+
+        protected static void MoveDefinitionToReference(List<XElement> rootElements, XElement definition, XElement reference)
+        {
+            reference.Attribute("reference").Remove();
+            MoveNodes(rootElements, definition, reference);
+            definition.SetReferenceTarget(reference);
+        }
+
+        protected static void MoveNodes(List<XElement> rootElements, XElement elementFrom, XElement elementTo)
+        {
+            // copy elements and attributes
+            elementTo.ReplaceNodes(elementFrom.Nodes());
+            var movedElements = elementFrom.DescendantsAndSelf().
+                Zip(elementTo.DescendantsAndSelf(), (oldElement, newElement) => new
+                {
+                    OldElement = oldElement,
+                    NewElement = newElement
+                }).ToList();
+
+            // update references of moved elements
+            var movedReferenceElements = movedElements.
+                Where(movedElement => movedElement.NewElement.HasReference()).
+                ToList();
+            foreach (var movedElement in movedReferenceElements)
+            {
+                var target = movedElement.OldElement.GetReferenceTarget();
+                movedElement.NewElement.SetReferenceTarget(target);
+
+            }
+
+            // update references to moved elements
+            var outdatedReferenceElements = rootElements.Descendants().
+                Where(element => element.HasReference()).
+                Join(movedElements,
+                outerKeySelector: referenceElement => referenceElement.GetReferenceTarget(),
+                innerKeySelector: movedElement => movedElement.OldElement,
+                resultSelector: (referenceElement, movedElement) => new
+                {
+                    ReferenceElement = referenceElement,
+                    NewTarget = movedElement.NewElement
+                }).ToList();
+            foreach (var outdatedElement in outdatedReferenceElements)
+            {
+                outdatedElement.ReferenceElement.SetReferenceTarget(outdatedElement.NewTarget);
+            }
+
+            // delete copied nodes
+            elementFrom.RemoveNodes();
         }
 
         #endregion
@@ -257,62 +295,7 @@ namespace Catrobat.IDE.Core.VersionConverter.Versions
             }
         }
 
-        protected static void MoveDefinitionToReference(XElement rootElement, XElement definition, XElement reference)
-        {
-            MoveDefinitionToReference(Enumerable.Repeat(rootElement, 1).ToList(), definition, reference);
-        }
-
-        protected static void MoveDefinitionToReference(List<XElement> rootElements, XElement definition, XElement reference)
-        {
-            reference.Attribute("reference").Remove();
-            MoveNodes(rootElements, definition, reference);
-            definition.SetAttributeValue("reference", XPathHelper.GetXPath(definition, reference));
-        }
-
-        protected static void MoveNodes(List<XElement> rootElements, XElement elementFrom, XElement elementTo)
-        {
-            // copy elements and attributes
-            elementTo.ReplaceNodes(elementFrom.Nodes());
-            var movedElements = elementFrom.DescendantsAndSelf().
-                Zip(elementTo.DescendantsAndSelf(), (oldElement, newElement) => new
-                {
-                    OldElement = oldElement,
-                    NewElement = newElement
-                }).ToList();
-
-            // update references of moved elements
-            var movedReferenceElements = movedElements.
-                Where(movedElement => movedElement.NewElement.HasAttribute("reference")).
-                ToList();
-            foreach (var movedElement in movedReferenceElements)
-            {
-                var referenceAttribute = movedElement.NewElement.Attribute("reference");
-                var referenceTarget = XPathHelper.GetElement(movedElement.OldElement, referenceAttribute.Value);
-                referenceAttribute.SetValue(XPathHelper.GetXPath(movedElement.NewElement, referenceTarget));
-
-            }
-
-            // update references to moved elements
-            var outdatedReferenceElements = rootElements.Descendants().
-                Where(element => element.HasAttribute("reference")).
-                Join(movedElements,
-                outerKeySelector: referenceElement => XPathHelper.GetElement(referenceElement, referenceElement.Attribute("reference").Value),
-                innerKeySelector: movedElement => movedElement.OldElement,
-                resultSelector: (referenceElement, movedElement) => new
-                {
-                    ReferenceElement = referenceElement,
-                    NewTarget = movedElement.NewElement
-                }).ToList();
-            foreach (var outdatedElement in outdatedReferenceElements)
-            {
-                var referenceAttribute = outdatedElement.ReferenceElement.Attribute("reference");
-                referenceAttribute.SetValue(XPathHelper.GetXPath(outdatedElement.ReferenceElement, outdatedElement.NewTarget));
-            }
-
-            // delete copied nodes
-            elementFrom.RemoveNodes();
-        }
-
+        [Obsolete("Not used any more. ")]
         protected void ResolveReferencesToReferences(XDocument document)
         {
             foreach (var element in document.Descendants())
@@ -328,7 +311,7 @@ namespace Catrobat.IDE.Core.VersionConverter.Versions
                 }
                 if (target != null && referencesCount > 1)
                 {
-                    element.SetAttributeValue("reference", XPathHelper.GetXPath(element, target));
+                    element.SetReferenceTarget(target);
                 }
             }
         }

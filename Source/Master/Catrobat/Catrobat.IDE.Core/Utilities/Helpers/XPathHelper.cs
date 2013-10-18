@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
                         index = int.Parse(indexAsString) - 1;
                     }
 
-                    currentElement = currentElement.Descendants(childElementName).ElementAtOrDefault(index);
+                    currentElement = currentElement.Elements(childElementName).ElementAtOrDefault(index);
                 }
                 if (currentElement == null) break;
             }
