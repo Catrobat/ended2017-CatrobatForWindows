@@ -4,17 +4,17 @@
     {
         Number0, Number1, Number2, Number3, Number4, Number5,
         Number6, Number7, Number8, Number9, NumberDot,
-        KeyEquals, KeyDelete, KeyUndo, KeyRedo,
-        KeyOpenBrecket, KeyClosedBrecket, KeyPlus,
-        KeyMinus, KeyMult, KeyDivide,
+        NumberEquals, Delete, Undo, Redo,
+        OpenBracket, CloseBracket, Plus,
+        Minus, Multiply, Divide,
 
-        KeyLogicEqual, KeyLogicNotEqual, KeyLogicSmaller,
-        KeyLogicSmallerEqual, KeyLogicGreater, KeyLogicGreaterEqual,
-        KeyLogicAnd, KeyLogicOr, KeyLogicNot, KeyLogicTrue, KeyLogicFalse,
+        LogicEqual, LogicNotEqual, LogicSmaller,
+        LogicSmallerEqual, LogicGreater, LogicGreaterEqual,
+        LogicAnd, LogicOr, LogicNot, LogicTrue, LogicFalse,
 
-        KeyMathSin, KeyMathCos, KeyMathTan, KeyMathArcSin, KeyMathArcCos, KeyMathArcTan,
-        KeyMathExp, KeyMathLn, KeyMathLog, KeyMathAbs, KeyMathRound, KeyMathMod,
-        KeyMathMin, KeyMathMax, KeyMathSqrt, KeyMathPi, KeyMathRandom
+        MathSin, MathCos, MathTan, MathArcSin, MathArcCos, MathArcTan,
+        MathExp, MathLn, MathLog, MathAbs, MathRound, MathMod,
+        MathMin, MathMax, MathSqrt, MathPi, MathRandom
     }
 
     public enum ObjectVariable

@@ -11,6 +11,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
     {
 
         #region typing
+
         [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_NumberTypingTest_01()
         {
@@ -54,37 +55,37 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyPlus));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyMult));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyDivide));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyEquals));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicEqual));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicNotEqual));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicSmaller));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicSmallerEqual));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicGreater));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicGreaterEqual));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicAnd));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Plus));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Multiply));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Divide));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.NumberEquals));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicEqual));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicNotEqual));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicSmaller));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicSmallerEqual));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicGreater));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicGreaterEqual));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicAnd));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicOr));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
 
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyPlus));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyMult));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyDivide));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyEquals));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicEqual));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicNotEqual));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicSmaller));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicSmallerEqual));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicGreater));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicGreaterEqual));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicAnd));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Plus));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Multiply));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Divide));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.NumberEquals));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicEqual));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicNotEqual));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicSmaller));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicSmallerEqual));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicGreater));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicGreaterEqual));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicAnd));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicOr));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Minus));
 
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number9));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Plus));
 
             var expectedFormula = new FormulaTree
             {
@@ -148,7 +149,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.NumberDot);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
             var expectedFormula = new FormulaTree
@@ -187,7 +188,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
             var expectedFormula = new FormulaTree
@@ -208,7 +209,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(valid);
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
 
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMult);
+            valid &= editor.KeyPressed(FormulaEditorKey.Multiply);
             valid &= editor.KeyPressed(FormulaEditorKey.Number4);
             expectedFormula = new FormulaTree
             {
@@ -239,7 +240,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
 
             var subTree = expectedFormula;
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
             expectedFormula = new FormulaTree
             {
@@ -270,22 +271,22 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.NumberDot);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMult);
+            valid &= editor.KeyPressed(FormulaEditorKey.Multiply);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
             valid &= editor.KeyPressed(FormulaEditorKey.NumberDot);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number4);
             valid &= editor.KeyPressed(FormulaEditorKey.NumberDot);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
             valid &= editor.KeyPressed(FormulaEditorKey.Number6);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMult);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
+            valid &= editor.KeyPressed(FormulaEditorKey.Multiply);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             valid &= editor.KeyPressed(FormulaEditorKey.Number7);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             valid &= editor.KeyPressed(FormulaEditorKey.Number8);
             var expectedFormula = new FormulaTree
             {
@@ -329,83 +330,83 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyEquals));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberEquals));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicAnd));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicAnd));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyEquals));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberEquals));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicOr));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyEquals));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberEquals));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicAnd));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicAnd));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyEquals));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberEquals));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
             var nodeA = new FormulaTree
             {
@@ -476,9 +477,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
             var expectedFormula = new FormulaTree
             {
@@ -525,13 +526,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyEquals);
+            valid &= editor.KeyPressed(FormulaEditorKey.NumberEquals);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
             var expectedFormula = new FormulaTree
             {
@@ -580,7 +581,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             Assert.IsTrue(valid);
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyEquals);
+            valid &= editor.KeyPressed(FormulaEditorKey.NumberEquals);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
             var oldTree = expectedFormula;
             expectedFormula = new FormulaTree
@@ -615,19 +616,19 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyEquals);
+            valid &= editor.KeyPressed(FormulaEditorKey.NumberEquals);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicEqual);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicNotEqual);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicNotEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.Number4);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicSmaller);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicSmaller);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicSmallerEqual);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicSmallerEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.Number6);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicGreater);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicGreater);
             valid &= editor.KeyPressed(FormulaEditorKey.Number7);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicGreaterEqual);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicGreaterEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.Number8);
             var expectedFormula = new FormulaTree
             {
@@ -721,13 +722,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicNotEqual);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicNotEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicNotEqual);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicNotEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDivide);
+            valid &= editor.KeyPressed(FormulaEditorKey.Divide);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
             var expectedFormula = new FormulaTree
             {
@@ -791,17 +792,17 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicNotEqual);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicNotEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
             valid &= editor.KeyPressed(FormulaEditorKey.NumberDot);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicNotEqual);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicNotEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.NumberDot);
             valid &= editor.KeyPressed(FormulaEditorKey.Number4);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicNotEqual);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicNotEqual);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
@@ -848,15 +849,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicOr);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicOr);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number4);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicAnd);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicAnd);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number6);
             var expectedFormula = new FormulaTree
             {
@@ -930,20 +931,20 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicAnd);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicAnd);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicOr);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicOr);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicAnd);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicAnd);
             valid &= editor.KeyPressed(FormulaEditorKey.Number4);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicOr);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicOr);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicAnd);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicAnd);
             valid &= editor.KeyPressed(FormulaEditorKey.Number6);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
@@ -996,15 +997,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicNotEqual);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicNotEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicAnd);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicAnd);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicNotEqual);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicNotEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.Number4);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicOr);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicOr);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicNotEqual);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicNotEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.Number6);
             var expectedFormula = new FormulaTree
             {
@@ -1082,13 +1083,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMinus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Minus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMinus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Minus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMult);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMinus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Multiply);
+            valid &= editor.KeyPressed(FormulaEditorKey.Minus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
             var expectedFormula = new FormulaTree
                 {
@@ -1148,19 +1149,19 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMinus);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMinus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Minus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Minus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMinus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Minus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicNotEqual);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMinus);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicNotEqual);
+            valid &= editor.KeyPressed(FormulaEditorKey.Minus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number4);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicAnd);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMinus);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicAnd);
+            valid &= editor.KeyPressed(FormulaEditorKey.Minus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMinus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Minus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number6);
             var expectedFormula = new FormulaTree
             {
@@ -1255,13 +1256,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyEquals);
+            valid &= editor.KeyPressed(FormulaEditorKey.NumberEquals);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMinus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Minus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyLogicAnd);
+            valid &= editor.KeyPressed(FormulaEditorKey.LogicAnd);
             valid &= editor.KeyPressed(FormulaEditorKey.Number4);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMinus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Minus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
             var expectedFormula = new FormulaTree
             {
@@ -1340,7 +1341,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.RightChild;
             editor.SelectedFormula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             var expectedFormula = selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "OPERATOR",
@@ -1397,7 +1398,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.RightChild;
             editor.SelectedFormula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             var expectedFormula = selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
 
             {
@@ -1429,10 +1430,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicFalse));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicFalse));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicOr));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
             var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
@@ -1472,19 +1473,19 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicFalse));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicFalse));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicSmaller));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicAnd));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicFalse));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicFalse));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicFalse));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicSmaller));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicAnd));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicFalse));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicOr));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
             var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
@@ -1565,26 +1566,26 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyEquals));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicAnd));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicFalse));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberEquals));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicAnd));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicFalse));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicOr));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number9));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberDot));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             var expectedFormula = new FormulaTree()
             {
                 VariableType = "NUMBER",
@@ -1619,10 +1620,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             editor.SelectedFormula = selectedFromula;
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.LeftChild;
             editor.SelectedFormula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
@@ -1659,8 +1660,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             var expectedFormula = new FormulaTree
             {
                 VariableType = "NUMBER",
@@ -1683,10 +1684,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number4));
             var expectedFormula = new FormulaTree
             {
@@ -1711,26 +1712,26 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
             valid &= editor.KeyPressed(FormulaEditorKey.Number0);
             valid &= editor.KeyPressed(FormulaEditorKey.Number0);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
             valid &= editor.KeyPressed(FormulaEditorKey.Number0);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyEquals);
+            valid &= editor.KeyPressed(FormulaEditorKey.NumberEquals);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMult);
+            valid &= editor.KeyPressed(FormulaEditorKey.Multiply);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMult);
+            valid &= editor.KeyPressed(FormulaEditorKey.Multiply);
             valid &= editor.KeyPressed(FormulaEditorKey.Number4);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMult);
+            valid &= editor.KeyPressed(FormulaEditorKey.Multiply);
             valid &= editor.KeyPressed(FormulaEditorKey.Number6);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyMult);
+            valid &= editor.KeyPressed(FormulaEditorKey.Multiply);
             valid &= editor.KeyPressed(FormulaEditorKey.Number7);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyPlus);
+            valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number8);
             var expectedFormula = new FormulaTree
             {
@@ -1841,7 +1842,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             for (int i = 0; i < 23; i++)
             {
-                valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
+                valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             }
             expectedFormula = new FormulaTree
             {
@@ -1863,15 +1864,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number0));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicAnd));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyEquals));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicGreater));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicAnd));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicOr));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberEquals));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicGreater));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Delete));
             var expectedFormula = new FormulaTree
             {
                 VariableType = "NUMBER",
@@ -1897,9 +1898,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             editor.SelectedFormula = selectedFromula;
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             var expectedFormula = new FormulaTree
                             {
                                 VariableType = "NUMBER",
@@ -1934,7 +1935,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                                 };
             editor.SelectedFormula = selectedFromula;
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
@@ -1964,11 +1965,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicNot));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicFalse));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicNot));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicNot));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicFalse));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicOr));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicNot));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
             var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
@@ -2009,14 +2010,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicNot));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicNot));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyPlus));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyMinus));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyMult));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicSmaller));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicAnd));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicNot));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicNot));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Plus));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Minus));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Multiply));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicSmaller));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicAnd));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicOr));
         }
 
         [TestMethod]
@@ -2030,9 +2031,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicFalse));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicNot));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicFalse));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicOr));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicNot));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number0));
             var expectedFormula = new FormulaTree
                 {
@@ -2075,8 +2076,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
             };
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyLogicNot));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicNot));
         }
 
         #endregion
@@ -2084,7 +2085,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region function
 
         [TestMethod]
-        public void FormulaEditorTests_Function_01()
+        public void FormulaEditorTests_Function_DefaultValues()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2098,7 +2099,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 VariableValue = "0"
             };
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathAbs));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathAbs));
             var expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
@@ -2110,8 +2111,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathArcCos));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathArcCos));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
@@ -2123,8 +2124,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathArcSin));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathArcSin));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
@@ -2136,8 +2137,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathArcTan));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathArcTan));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
@@ -2149,8 +2150,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathCos));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathCos));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
@@ -2162,8 +2163,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathExp));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathExp));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
@@ -2175,8 +2176,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathLn));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathLn));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
@@ -2184,12 +2185,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 LeftChild = new FormulaTree()
                 {
                     VariableType = "NUMBER",
-                    VariableValue = "0"
+                    VariableValue = "1"
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathLog));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathLog));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
@@ -2197,92 +2198,92 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 LeftChild = new FormulaTree()
                 {
                     VariableType = "NUMBER",
-                    VariableValue = "0"
+                    VariableValue = "1"
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathMax));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathMax));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MAX",
-                RightChild = new FormulaTree()
+                LeftChild = new FormulaTree()
                 {
                     VariableType = "NUMBER",
-                    VariableValue = "1"
+                    VariableValue = "0"
                 },
-                LeftChild = new FormulaTree()
+                RightChild = new FormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathMin));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathMin));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MIN",
-                RightChild = new FormulaTree()
+                LeftChild = new FormulaTree()
                 {
                     VariableType = "NUMBER",
-                    VariableValue = "1"
+                    VariableValue = "0"
                 },
-                LeftChild = new FormulaTree()
+                RightChild = new FormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathMod));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathMod));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MOD",
-                RightChild = new FormulaTree()
-                {
-                    VariableType = "NUMBER",
-                    VariableValue = "1"
-                },
                 LeftChild = new FormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
+                },
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathPi));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathPi));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "PI",
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathRandom));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathRandom));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "RANDOM",
-                RightChild = new FormulaTree()
-                {
-                    VariableType = "NUMBER",
-                    VariableValue = "1"
-                },
                 LeftChild = new FormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
+                },
+                RightChild = new FormulaTree()
+                {
+                    VariableType = "NUMBER",
+                    VariableValue = "1"
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathRound));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathRound));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
@@ -2294,8 +2295,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathSin));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathSin));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
@@ -2307,8 +2308,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathSqrt));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathSqrt));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
@@ -2320,8 +2321,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 },
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathTan));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathTan));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
@@ -2333,7 +2334,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 },
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
         }
 
         [TestMethod]
@@ -2352,9 +2353,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathCos));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathCos));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
             var expectedFormula = new FormulaTree()
             {
@@ -2387,9 +2388,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "OPERATOR",
@@ -2420,12 +2421,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathSin));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMathCos));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathSin));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathCos));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
             var expectedFormula = new FormulaTree()
             {
                 VariableType = "OPERATOR",
@@ -2505,7 +2506,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             var expectedFormula = new FormulaTree()
             {
                 VariableType = "NUMBER",
@@ -2530,28 +2531,28 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicOr));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicAnd));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicAnd));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicSmaller));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicSmaller));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number4));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number5));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number6));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number7));
 
             var node1 = new FormulaTree
@@ -2665,12 +2666,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicAnd));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicAnd));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
             var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
@@ -2717,28 +2718,28 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number7));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number6));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number5));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number4));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicSmaller));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicSmaller));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicAnd));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicAnd));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicOr));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicOr));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
 
             var node1 = new FormulaTree
             {
@@ -2854,12 +2855,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 VariableValue = "0"
             };
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             var expectedFormula = new FormulaTree()
             {
                 VariableType = "BRACKET",
@@ -2890,9 +2891,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             var expectedFormula = new FormulaTree()
             {
                 VariableType = "OPERATOR",
@@ -2922,9 +2923,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 VariableValue = "0"
             };
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberDot));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
             var expectedFormula = new FormulaTree()
             {
                 VariableType = "BRACKET",
@@ -2955,8 +2956,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
             };
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.CloseBracket));
         }
 
         [TestMethod]
@@ -2974,16 +2975,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 VariableValue = "0"
             };
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             //Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
             var expectedFormula = new FormulaTree()
             {
@@ -3039,10 +3040,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 VariableValue = "0"
             };
             editor.SelectedFormula = selectedFromula;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyClosedBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
             var expectedFormula = new FormulaTree()
             {
                 VariableType = "BRACKET",
@@ -3082,7 +3083,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.SensorVariableSelected(SensorVariable.AccelerationX));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             var expectedFormula = new FormulaTree()
             {
@@ -3119,7 +3120,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.ObjectVariableSelected(ObjectVariable.PositionX));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             var expectedFormula = new FormulaTree()
             {
@@ -3160,7 +3161,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 Name = "MyVar"
             };
             Assert.IsTrue(editor.GlobalVariableSelected(variable));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             var expectedFormula = new FormulaTree()
             {
@@ -3201,7 +3202,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 Name = "MyVar"
             };
             Assert.IsTrue(editor.LocalVariableSelected(variable));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             var expectedFormula = new FormulaTree()
             {
@@ -3239,47 +3240,27 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 VariableType = "OPERATOR",
                 VariableValue = "EQUAL",
-                LeftChild = new FormulaTree
-                {
-                    VariableType = "NUMBER",
-                    VariableValue = "42",
-                },
+                LeftChild = FormulaTreeFactory.CreateNumber(42),
                 RightChild = new FormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "PLUS",
-                    LeftChild = new FormulaTree
-                    {
-                        VariableType = "NUMBER",
-                        VariableValue = "31",
-                    },
-                    RightChild = new FormulaTree
-                    {
-                        VariableType = "NUMBER",
-                        VariableValue = "11",
-                    }
+                    LeftChild = FormulaTreeFactory.CreateNumber(31),
+                    RightChild = FormulaTreeFactory.CreateNumber(11)
                 }
             };
 
             editor.SelectedFormula = selectedFromula;
-            editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            editor.KeyPressed(FormulaEditorKey.KeyDelete);
+            editor.KeyPressed(FormulaEditorKey.Delete);
+            editor.KeyPressed(FormulaEditorKey.Delete);
+            editor.KeyPressed(FormulaEditorKey.Delete);
 
             var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "EQUAL",
-                LeftChild = new FormulaTree
-                {
-                    VariableType = "NUMBER",
-                    VariableValue = "42",
-                },
-                RightChild = new FormulaTree
-                {
-                    VariableType = "NUMBER",
-                    VariableValue = "31"
-                }
+                LeftChild = FormulaTreeFactory.CreateNumber(42),
+                RightChild = FormulaTreeFactory.CreateNumber(31)
             };
 
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
@@ -3312,8 +3293,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             selectedFromula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.LeftChild;
             editor.SelectedFormula = selectedFromula;
             var valid = true;
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
-            valid &= editor.KeyPressed(FormulaEditorKey.KeyDelete);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
+            valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             valid &= editor.KeyPressed(FormulaEditorKey.Number7);
             valid &= editor.KeyPressed(FormulaEditorKey.Number8);
             var expectedFormula = new FormulaTree
@@ -3362,9 +3343,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             selectedFromula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.LeftChild;
             selectedFromula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             selectedFromula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.RightChild;
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             var expectedFormula = new FormulaTree()
             {
                 VariableType = "FUNCTION",
@@ -3407,9 +3388,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             selectedFromula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.LeftChild;
             selectedFromula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
             var expectedFormula = new FormulaTree()
             {
@@ -3458,20 +3439,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0",
-                            LeftChild = new FormulaTree()
-                            {
-                                VariableType = "NUMBER",
-                                VariableValue = "0",
-                                LeftChild = null,
-                                RightChild = null
-                            },
-                            RightChild = new FormulaTree()
-                            {
-                                VariableType = "NUMBER",
-                                VariableValue = "0",
-                                LeftChild = null,
-                                RightChild = null
-                            }
+                            LeftChild = FormulaTreeFactory.CreateNumber(0),
+                            RightChild = FormulaTreeFactory.CreateNumber(0)
                         }
                     }
                 }
@@ -3493,8 +3462,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 // type numbers
                 Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberDot));
                 Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number9));
-                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
                 Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number9));
                 Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberDot));
                 Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number6));
@@ -3515,20 +3484,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0",
-                            LeftChild = new FormulaTree()
-                            {
-                                VariableType = "NUMBER",
-                                VariableValue = "0",
-                                LeftChild = null,
-                                RightChild = null
-                            },
-                            RightChild = new FormulaTree()
-                            {
-                                VariableType = "NUMBER",
-                                VariableValue = "0",
-                                LeftChild = null,
-                                RightChild = null
-                            }
+                            LeftChild = FormulaTreeFactory.CreateNumber(0),
+                            RightChild = FormulaTreeFactory.CreateNumber(0)
                         }
                     }
                 }
@@ -3547,17 +3504,17 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 selection.RightChild = null;
 
                 // type numbers
-                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
                 Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number9));
-                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
                 Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberDot));
                 Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number6));
-                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
                 Assert.AreSame(selection, editor.SelectedFormula.SelectedFormula);
             }
         }
@@ -3575,20 +3532,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0",
-                            LeftChild = new FormulaTree()
-                            {
-                                VariableType = "NUMBER",
-                                VariableValue = "0",
-                                LeftChild = null,
-                                RightChild = null
-                            },
-                            RightChild = new FormulaTree()
-                            {
-                                VariableType = "NUMBER",
-                                VariableValue = "0",
-                                LeftChild = null,
-                                RightChild = null
-                            }
+                            LeftChild = FormulaTreeFactory.CreateNumber(0),
+                            RightChild = FormulaTreeFactory.CreateNumber(0)
                         }
                     }
                 }
@@ -3608,7 +3553,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
                 // type numbers
                 Assert.IsTrue(editor.SensorVariableSelected(SensorVariable.CompassDirection));
-                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
                 Assert.AreSame(selection, editor.SelectedFormula.SelectedFormula);
             }
         }
@@ -3639,52 +3584,52 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
             expectedFormula = new FormulaTree()
             {
                 VariableType = "BRACKET",
                 VariableValue = "OPEN"
             };
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyOpenBrecket));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
             expectedFormula = new FormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MINUS"
             };
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMinus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
             expectedFormula = new FormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "NOT"
             };
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicNot));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicNot));
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
             expectedFormula = new FormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "TRUE"
             };
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicTrue));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
             expectedFormula = new FormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "FALSE"
             };
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyLogicFalse));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicFalse));
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
         }
 
@@ -3702,13 +3647,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 {
                     FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                     {
-                        FormulaTree = new FormulaTree()
-                        {
-                            VariableType = "NUMBER",
-                            VariableValue = "0.0",
-                            LeftChild = null,
-                            RightChild = null
-                        }
+                        FormulaTree = FormulaTreeFactory.CreateNumber("0.0")
                     }
                 }
             };
@@ -3717,7 +3656,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             const SensorVariable variable = SensorVariable.CompassDirection;
             Assert.IsTrue(editor.SensorVariableSelected(variable));
             FormulaComparer.CompareFormulas(
-                expectedFormula: FormulaDefaultValueCreater.GetDefaultValueForSensorVariable(variable), 
+                expectedFormula: FormulaTreeFactory.CreateDefaultNode(variable), 
                 actualFormula: editor.SelectedFormula.FormulaRoot.FormulaTree);
 
 
@@ -3725,7 +3664,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             const FormulaEditorKey numberKey = FormulaEditorKey.Number0;
             Assert.IsTrue(editor.KeyPressed(numberKey));
             FormulaComparer.CompareFormulas(
-                expectedFormula: FormulaDefaultValueCreater.GetDefaultValueForKey(numberKey),
+                expectedFormula: FormulaTreeFactory.CreateDefaultNode(numberKey),
                 actualFormula: editor.SelectedFormula.FormulaRoot.FormulaTree);
         }
 
@@ -3751,29 +3690,29 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyUndo));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyUndo));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Undo));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Undo));
             var expectedFormula = new FormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "1"
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyUndo));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyUndo));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyRedo));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyRedo));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyRedo));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyRedo));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Undo));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Undo));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Redo));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Redo));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Redo));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Redo));
             expectedFormula = new FormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "123"
             };
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyUndo));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Undo));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyRedo));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Redo));
         }
 
 
@@ -3793,9 +3732,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
-            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.KeyPlus));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyUndo));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
+            Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Plus));
+            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Undo));
             var expectedFormula = new FormulaTree()
             {
                 VariableType = "NUMBER",

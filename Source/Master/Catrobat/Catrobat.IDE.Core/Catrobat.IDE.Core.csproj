@@ -162,7 +162,7 @@
     <Compile Include="CatrobatObjects\Variables\VariableList.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
-    <Compile Include="FormulaEditor\Editor\FormulaDefaultValueCreater.cs" />
+    <Compile Include="FormulaEditor\Editor\FormulaTreeFactory.cs" />
     <Compile Include="FormulaEditor\Editor\FormulaEditor.cs" />
     <Compile Include="FormulaEditor\Editor\FormulaKeys.cs" />
     <Compile Include="FormulaEditor\Editor\SelectedFormulaInformation.cs" />
