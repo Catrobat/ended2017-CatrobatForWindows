@@ -10,6 +10,10 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
+using Catrobat.IDE.Phone.ViewModel.Editor;
+using Catrobat.IDE.Phone.ViewModel.Service;
+using Catrobat.IDE.Phone.ViewModel.Settings;
+using Catrobat.IDE.Phone.ViewModel.Share;
 using Catrobat.IDE.Phone.Views.Main;
 using Catrobat.IDE.Phone.Views.Share;
 using Coding4Fun.Toolkit.Controls;
@@ -268,7 +272,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             var message = new GenericMessage<ProjectDummyHeader>(project);
             Messenger.Default.Send(message, ViewModelMessagingToken.ChangeLocalProjectListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ProjectSettingsView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(ProjectSettingsViewModel));
         }
 
         private void DeleteLocalProjectAction(string projectName)
@@ -294,7 +298,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             var message = new GenericMessage<ProjectDummyHeader>(PinProjectHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.PinProjectHeaderListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(TileGeneratorView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(TileGeneratorViewModel));
         }
 
         private void ShareLocalProjectAction(ProjectDummyHeader project)
@@ -307,7 +311,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             var message = new GenericMessage<ProjectDummyHeader>(PinProjectHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.ShareProjectHeaderListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ShareProjectServiceSelectionView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(ShareProjectServiceSelectionViewModel));
         }
 
         private void LazyLoadOnlineProjectsAction()
@@ -370,7 +374,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
 
         private void CreateNewProjectAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewProjectView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewProjectViewModel));
         }
 
         private void EditCurrentProjectAction()
@@ -380,13 +384,13 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
 
         private void SettingsAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsViewModel));
         }
 
         private void OnlineProjectTapAction(OnlineProjectHeader project)
         {
             SelectedOnlineProject = project;
-            ServiceLocator.NavigationService.NavigateTo(typeof(OnlineProjectView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(OnlineProjectViewModel));
         }
 
         private void PlayCurrentProjectAction()
@@ -411,37 +415,38 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
         {
             if (_showDownloadMessage)
             {
-                var image = new BitmapImage();
-                using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
-                {
-                    var stream = loader.OpenResourceStream(ResourceScope.IdePhone, "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
-                    image.SetSource(stream);
-                }
+                var portbleImage = new PortableImage();
+                portbleImage.LoadFromResources(ResourceScope.IdePhone, 
+                    "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
 
-                var toast = new ToastPrompt
-                {
-                    ImageSource = image,
-                    Message = AppResources.Main_DownloadQueueMessage
-                };
-                toast.Show();
+                ServiceLocator.NotifictionService.ShowToastNotification(portbleImage, null, 
+                    AppResources.Main_DownloadQueueMessage, ToastNotificationTime.Short);
 
                 _showDownloadMessage = false;
             }
             if (_showUploadMessage)
             {
-                var image = new BitmapImage();
-                using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
-                {
-                    var stream = loader.OpenResourceStream(ResourceScope.IdePhone, "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
-                    image.SetSource(stream);
-                }
+                //var image = new BitmapImage();
+                //using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
+                //{
+                //    var stream = loader.OpenResourceStream(ResourceScope.IdePhone, "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
+                //    image.SetSource(stream);
+                //}
 
-                var toast = new ToastPrompt
-                {
-                    ImageSource = image,
-                    Message = AppResources.Main_UploadQueueMessage
-                };
-                toast.Show();
+                //var toast = new ToastPrompt
+                //{
+                //    ImageSource = image,
+                //    Message = AppResources.Main_UploadQueueMessage
+                //};
+                //toast.Show();
+
+
+                var portbleImage = new PortableImage();
+                portbleImage.LoadFromResources(ResourceScope.IdePhone,
+                    "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
+
+                ServiceLocator.NotifictionService.ShowToastNotification(portbleImage, null,
+                    AppResources.Main_UploadQueueMessage, ToastNotificationTime.Short);
 
                 _showUploadMessage = false;
             }
@@ -613,7 +618,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectView));
+                    ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectViewModel));
                     ServiceLocator.NavigationService.RemoveBackEntry();
                 });
             }
@@ -621,7 +626,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectLoginView));
+                    ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectLoginViewModel));
                     ServiceLocator.NavigationService.RemoveBackEntry();
                 });
             }

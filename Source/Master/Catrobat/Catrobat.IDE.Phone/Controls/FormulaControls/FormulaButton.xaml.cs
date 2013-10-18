@@ -48,7 +48,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             var viewModel = ServiceLocator.Current.GetInstance<FormulaEditorViewModel>();
             viewModel.Formula = Formula;
             viewModel.FormulaButton = this;
-            Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(FormulaEditorView));
+            Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(FormulaEditorViewModel));
         }
     }
 }

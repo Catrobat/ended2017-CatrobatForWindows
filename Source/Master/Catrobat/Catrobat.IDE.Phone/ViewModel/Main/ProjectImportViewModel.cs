@@ -219,7 +219,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
                     }
                 });
 
-                Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(MainView)));
+                Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel)));
             }
             catch
             {
@@ -232,7 +232,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
         private void CancelAction()
         {
             ServiceLocator.ProjectImporterService.CancelImport();
-            ServiceLocator.NavigationService.NavigateTo(typeof(MainView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
         }
 
         private async void OnLoadAction(string fileToken)

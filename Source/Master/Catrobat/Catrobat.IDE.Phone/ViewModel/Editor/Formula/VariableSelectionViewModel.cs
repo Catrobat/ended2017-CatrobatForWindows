@@ -229,9 +229,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
         private void AddVariableAction()
         {
             if (IsLocalView)
-                ServiceLocator.NavigationService.NavigateTo(typeof(AddNewLocalVariableView));
+                ServiceLocator.NavigationService.NavigateTo(typeof(AddNewLocalVariableViewModel));
             else
-                ServiceLocator.NavigationService.NavigateTo(typeof(AddNewGlobalVariableView));
+                ServiceLocator.NavigationService.NavigateTo(typeof(AddNewGlobalVariableViewModel));
         }
 
         private void DeleteVariableAction()
@@ -254,7 +254,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
             var message = new GenericMessage<UserVariable>(selectedVariable);
             Messenger.Default.Send(message, ViewModelMessagingToken.SelectedUserVariableChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ChangeVariableView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(ChangeVariableViewModel));
         }
 
         #endregion

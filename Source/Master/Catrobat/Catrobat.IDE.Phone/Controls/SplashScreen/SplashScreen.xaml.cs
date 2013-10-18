@@ -28,10 +28,10 @@ namespace Catrobat.IDE.Phone.Controls.SplashScreen
             {
                 var viewModel = ServiceLocator.Current.GetInstance<ProjectImportViewModel>();
                 viewModel.OnLoadCommand.Execute(fileToken);
-                Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof (ProjectImportView));
+                Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(ProjectImportViewModel));
             }
             else
-                Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof (MainView));
+                Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
         }
     }
 }

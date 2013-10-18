@@ -15,5 +15,7 @@ namespace Catrobat.IDE.Core.Services
         void RemoveBackEntry();
 
         bool CanGoBack { get; }
+
+        void NavigateToWebPage(string p);
     }
 }

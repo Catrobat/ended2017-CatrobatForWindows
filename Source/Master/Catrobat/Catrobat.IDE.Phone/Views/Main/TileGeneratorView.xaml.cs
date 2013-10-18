@@ -34,8 +34,12 @@ namespace Catrobat.IDE.Phone.Views.Main
         {
             var screenshot = _viewModel.PinProjectHeader.Screenshot;
             var writeableScreenshot = new WriteableBitmap(screenshot.Width, screenshot.Height);
-            writeableScreenshot.FromByteArray(screenshot.Data);
-            writeableScreenshot.Invalidate();
+
+            if (screenshot.Data != null)
+            {
+                writeableScreenshot.FromByteArray(screenshot.Data);
+                writeableScreenshot.Invalidate();
+            }
 
             var croppedScreenshot = writeableScreenshot.Crop(new Rect(
                 new Point(0, (writeableScreenshot.PixelHeight - writeableScreenshot.PixelWidth) / 2.0),

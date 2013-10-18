@@ -286,29 +286,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
             _selectedSize = ImageSizes[1];
         }
 
-        private void PictureAvailable(Stream stream)
-        {
-            try
-            {
-                CostumeName = AppResources.Editor_Image;
-
-                var image = new BitmapImage();
-                image.SetSource(stream);
-                Dimension = new ImageDimension { Height = image.PixelHeight, Width = image.PixelWidth };
-
-                var writeableBitmap = new WriteableBitmap(image);
-                var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
-
-                Image = portableImage;
-
-                Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
-            }
-            catch (Exception)
-            {
-                ShowLoadingImageFailure();
-            }
-        }
-
         private void ShowLoadingImageFailure()
         {
             ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Editor_MessageBoxWrongImageFormatHeader,

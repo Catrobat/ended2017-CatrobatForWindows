@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.Annotations;
+using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Core.Services
 {
@@ -21,7 +22,7 @@ namespace Catrobat.IDE.Core.Services
 
     public interface INotifictionService
     {
-        void ShowToastNotification(string title, string message, ToastNotificationTime timeTillHide, MessageBoxOptions options);
+        void ShowToastNotification(PortableImage image, string title, string message, ToastNotificationTime timeTillHide);
 
         void ShowMessageBox(string title, string message, Action<MessageboxResult> callback, MessageBoxOptions options);
     }
