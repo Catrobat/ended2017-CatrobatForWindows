@@ -222,6 +222,18 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 EffectiveRootNode = DefaultNode(key);
                 return true;
             }
+            if (IsNumber(formulaToChange))
+            {
+                if (formulaToChange.VariableValue != "0")
+                {
+                    formulaToChange.VariableValue += GetKeyPressed(key);
+                }
+                else
+                {
+                    formulaToChange.VariableValue = GetKeyPressed(key);
+                }
+                return true;
+            }
             if (IsTerminalZero(formulaToChange))
             {
                 RootNodeOrSelection = DefaultNode(key);
@@ -232,9 +244,9 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 formulaToChange.RightChild = DefaultNode(key);
                 return true;
             }
-            if (IsNumber(formulaToChange))
+            if (!HasChildren(formulaToChange))
             {
-                formulaToChange.VariableValue += GetKeyPressed(key);
+                ReplaceNode(formulaToChange, DefaultNode(key));
                 return true;
             }
             if (!HasChildren(formulaToChange))

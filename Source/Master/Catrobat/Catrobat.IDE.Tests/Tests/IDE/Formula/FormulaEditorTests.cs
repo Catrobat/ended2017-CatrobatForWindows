@@ -11,7 +11,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
     {
 
         #region typing
-        [TestMethod,TestCategory("GatedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_NumberTypingTest_01()
         {
             var editor = new FormulaEditor();
@@ -3446,15 +3446,171 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaEditorTests_Selection_Plus()
+        public void FormulaEditorTests_Selection_Number()
         {
-            Assert.Inconclusive("Write test");
+            var editor = new FormulaEditor
+            {
+                SelectedFormula = new SelectedFormulaInformation
+                {
+                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
+                    {
+                        FormulaTree = new FormulaTree()
+                        {
+                            VariableType = "NUMBER",
+                            VariableValue = "0",
+                            LeftChild = new FormulaTree()
+                            {
+                                VariableType = "NUMBER",
+                                VariableValue = "0",
+                                LeftChild = null,
+                                RightChild = null
+                            },
+                            RightChild = new FormulaTree()
+                            {
+                                VariableType = "NUMBER",
+                                VariableValue = "0",
+                                LeftChild = null,
+                                RightChild = null
+                            }
+                        }
+                    }
+                }
+            };
+
+            var selections = new FormulaTree[]
+            {
+                editor.SelectedFormula.FormulaRoot.FormulaTree.LeftChild, 
+                editor.SelectedFormula.FormulaRoot.FormulaTree.RightChild, 
+                editor.SelectedFormula.FormulaRoot.FormulaTree
+            };
+            foreach (var selection in selections)
+            {
+                editor.SelectedFormula.SelectedFormula = selection;
+                selection.LeftChild = null;
+                selection.RightChild = null;
+
+
+                // type numbers
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberDot));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number9));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number9));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberDot));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number6));
+                Assert.AreSame(selection, editor.SelectedFormula.SelectedFormula);
+            }
         }
 
         [TestMethod]
-        public void FormulaEditorTests_Selection_More()
+        public void FormulaEditorTests_Selection_Operator()
         {
-            Assert.Inconclusive("Write more tests like Selection_Plus");
+            var editor = new FormulaEditor
+            {
+                SelectedFormula = new SelectedFormulaInformation
+                {
+                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
+                    {
+                        FormulaTree = new FormulaTree()
+                        {
+                            VariableType = "NUMBER",
+                            VariableValue = "0",
+                            LeftChild = new FormulaTree()
+                            {
+                                VariableType = "NUMBER",
+                                VariableValue = "0",
+                                LeftChild = null,
+                                RightChild = null
+                            },
+                            RightChild = new FormulaTree()
+                            {
+                                VariableType = "NUMBER",
+                                VariableValue = "0",
+                                LeftChild = null,
+                                RightChild = null
+                            }
+                        }
+                    }
+                }
+            };
+
+            var selections = new FormulaTree[]
+            {
+                editor.SelectedFormula.FormulaRoot.FormulaTree.LeftChild, 
+                editor.SelectedFormula.FormulaRoot.FormulaTree.RightChild, 
+                editor.SelectedFormula.FormulaRoot.FormulaTree
+            };
+            foreach (var selection in selections)
+        {
+                editor.SelectedFormula.SelectedFormula = selection;
+                selection.LeftChild = null;
+                selection.RightChild = null;
+
+                // type numbers
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyMult));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number9));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyPlus));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberDot));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number6));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+                Assert.AreSame(selection, editor.SelectedFormula.SelectedFormula);
+            }
+        }
+
+        [TestMethod]
+        public void FormulaEditorTests_Selection_Sensor()
+        {
+            var editor = new FormulaEditor
+            {
+                SelectedFormula = new SelectedFormulaInformation
+                {
+                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
+                    {
+                        FormulaTree = new FormulaTree()
+                        {
+                            VariableType = "NUMBER",
+                            VariableValue = "0",
+                            LeftChild = new FormulaTree()
+                            {
+                                VariableType = "NUMBER",
+                                VariableValue = "0",
+                                LeftChild = null,
+                                RightChild = null
+                            },
+                            RightChild = new FormulaTree()
+                            {
+                                VariableType = "NUMBER",
+                                VariableValue = "0",
+                                LeftChild = null,
+                                RightChild = null
+                            }
+                        }
+                    }
+                }
+            };
+
+            var selections = new FormulaTree[]
+            {
+                editor.SelectedFormula.FormulaRoot.FormulaTree.LeftChild, 
+                editor.SelectedFormula.FormulaRoot.FormulaTree.RightChild, 
+                editor.SelectedFormula.FormulaRoot.FormulaTree
+            };
+            foreach (var selection in selections)
+        {
+                editor.SelectedFormula.SelectedFormula = selection;
+                selection.LeftChild = null;
+                selection.RightChild = null;
+
+                // type numbers
+                Assert.IsTrue(editor.SensorVariableSelected(SensorVariable.CompassDirection));
+                Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
+                Assert.AreSame(selection, editor.SelectedFormula.SelectedFormula);
+            }
         }
 
         #endregion
