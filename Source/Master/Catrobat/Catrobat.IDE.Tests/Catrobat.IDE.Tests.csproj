@@ -95,6 +95,15 @@
     <Compile Include="Tests\Data\VersionConverter091ToWin091PracticalTests.cs" />
     <Compile Include="Tests\Data\VersionConverter091ToWin091Tests.cs" />
     <Compile Include="Tests\Data\XPathHelperTests.cs" />
+    <Compile Include="Tests\IDE\Converter\BoolPlayButtonStateConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\BoolVisibilityConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\BoolVisibilityNegativeConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\DoubleStringConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\FloatStringConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\IntStringConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\NoScreenshotConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\NullIntCountConverterTests.cs" />
+    <Compile Include="Tests\IDE\Converter\SecondStringMillisecondConverterTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaEditorTests.cs" />
     <Compile Include="Tests\IDE\ImageSizeEntryTests.cs" />
     <Compile Include="Tests\IDE\NullItemCollectionTests.cs" />
@@ -236,7 +245,9 @@
       <Name>Catrobat.IDE.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />

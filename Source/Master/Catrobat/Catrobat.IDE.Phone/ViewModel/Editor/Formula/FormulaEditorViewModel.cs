@@ -1,4 +1,6 @@
 ﻿using Catrobat.IDE.Core.FormulaEditor.Editor;
+using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.UI.Formula;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
@@ -40,9 +42,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
 
         #region Private Members
 
-        private Catrobat.IDE.Core.CatrobatObjects.Formulas.Formula _formula;
+        private Core.CatrobatObjects.Formulas.Formula _formula;
         private Sprite _selectedSprite;
-        private FormulaButton _formulaButton;
+        private IPortableFormulaButton _formulaButton;
         private Project _currentProject;
         private SelectedFormulaInformation _selectedFormulaInformation;
         private readonly Stack<FormulaTree> _undoStack = new Stack<FormulaTree>();
@@ -58,7 +60,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
             private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
         }
 
-        public FormulaButton FormulaButton
+        public IPortableFormulaButton FormulaButton
         {
             get { return _formulaButton; }
             set
@@ -88,7 +90,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
             }
         }
 
-        public Catrobat.IDE.Core.CatrobatObjects.Formulas.Formula Formula
+        public Core.CatrobatObjects.Formulas.Formula Formula
         {
             get { return _formula; }
             set
@@ -102,7 +104,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
 
         #region Commands
 
-        public RelayCommand<UiFormula> FormulaPartSelectedComand { get; private set; }
+        public RelayCommand<IPortableUIFormula> FormulaPartSelectedComand { get; private set; }
 
         public RelayCommand FormulaChangedCommand { get; private set; }
 
@@ -116,7 +118,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
 
         #region Actions
 
-        private void FormulaPartSelectedAction(UiFormula formula)
+        private void FormulaPartSelectedAction(IPortableUIFormula formula)
         {
             bool wasSelected = formula.IsSelected;
 
@@ -214,7 +216,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Formula
 
         public FormulaEditorViewModel()
         {
-            FormulaPartSelectedComand = new RelayCommand<UiFormula>(FormulaPartSelectedAction);
+            FormulaPartSelectedComand = new RelayCommand<IPortableUIFormula>(FormulaPartSelectedAction);
             FormulaChangedCommand = new RelayCommand(FormulaChangedAction);
 
             SensorVariableSelectedCommand = new RelayCommand<SensorVariable>(SensorVariableSelectedAction);

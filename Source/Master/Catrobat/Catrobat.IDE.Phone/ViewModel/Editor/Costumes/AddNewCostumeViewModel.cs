@@ -6,8 +6,8 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Data;
 using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Phone.Controls.Misc;
@@ -284,29 +284,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
         {
             Dimension = new ImageDimension { Width = 500, Height = 500 };
             _selectedSize = ImageSizes[1];
-        }
-
-        private void PictureAvailable(Stream stream)
-        {
-            try
-            {
-                CostumeName = AppResources.Editor_Image;
-
-                var image = new BitmapImage();
-                image.SetSource(stream);
-                Dimension = new ImageDimension { Height = image.PixelHeight, Width = image.PixelWidth };
-
-                var writeableBitmap = new WriteableBitmap(image);
-                var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
-
-                Image = portableImage;
-
-                Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
-            }
-            catch (Exception)
-            {
-                ShowLoadingImageFailure();
-            }
         }
 
         private void ShowLoadingImageFailure()

@@ -160,8 +160,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
 
         private void LicenseAction()
         {
-            var browser = new WebBrowserTask { Uri = new Uri(ApplicationResources.ProjectLicenseUrl) };
-            browser.Show();
+            ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.ProjectLicenseUrl);
         }
 
         private void ResetViewModelAction()
@@ -202,19 +201,20 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
                 switch (error)
                 {
                     case CatrobatVersionConverter.VersionConverterError.VersionNotSupported:
-                        var toast = new ToastPrompt { Message = AppResources.Main_VersionIsNotSupported };
-                        toast.Show();
+                        ServiceLocator.NotifictionService.ShowToastNotification(null, null,
+                            AppResources.Main_VersionIsNotSupported, ToastNotificationTime.Medeum);
+
                         break;
                     case CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid:
-                        toast = new ToastPrompt { Message = AppResources.Main_ProjectNotValid };
-                        toast.Show();
+                        ServiceLocator.NotifictionService.ShowToastNotification(null, null,
+                            AppResources.Main_ProjectNotValid, ToastNotificationTime.Medeum);
                         break;
                 }
             }
             else
             {
-                var toast = new ToastPrompt { Message = AppResources.Main_NoDownloadsPending };
-                toast.Show();
+                ServiceLocator.NotifictionService.ShowToastNotification(null, null,
+                    AppResources.Main_NoDownloadsPending, ToastNotificationTime.Short);
             }
         }
 

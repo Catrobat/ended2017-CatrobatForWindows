@@ -36,7 +36,6 @@ namespace Catrobat.IDE.Core
 
         #endregion
 
-
         public CatrobatContextDesign()
         {
             InitCurrentProject();

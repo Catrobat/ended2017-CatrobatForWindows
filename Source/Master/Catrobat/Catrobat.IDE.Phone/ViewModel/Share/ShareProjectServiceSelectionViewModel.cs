@@ -54,7 +54,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Share
 
         private void ShareWithSkydriveAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(UploadToSkyDriveView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(UploadToSkyDriveViewModel));
         }
 
 

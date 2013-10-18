@@ -1,4 +1,6 @@
-﻿namespace Catrobat.IDE.Core.Services
+﻿using Catrobat.IDE.Core.UI.PortableUI;
+
+namespace Catrobat.IDE.Core.Services
 {
     public interface ISystemInformationService
     {
@@ -13,5 +15,7 @@
         int ScreenHeight { get; }
 
         string CurrentApplicationVersion { get; }
+
+        PortableSolidColorBrush AccentBrush { get; }
     }
 }

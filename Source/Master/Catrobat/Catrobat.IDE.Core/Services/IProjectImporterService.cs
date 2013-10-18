@@ -11,7 +11,7 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IProjectImporterService
     {
-        Task<ProjectDummyHeader> ImportProjects(Stream projectStream);
+        Task<ProjectDummyHeader> ImportProject(object systemSpeciticObject);
 
         Task<string> AcceptTempProject();
 

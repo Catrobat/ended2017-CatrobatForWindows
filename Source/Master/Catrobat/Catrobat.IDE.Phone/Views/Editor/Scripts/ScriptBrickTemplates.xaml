@@ -44,31 +44,6 @@
       </Setter.Value>
     </Setter>
   </Style>
-  <Style x:Key="LocalListBoxStyle" TargetType="ListBox">
-    <Setter Property="Background" Value="{StaticResource PhoneTextBoxColor}"/>
-    <Setter Property="Foreground" Value="{StaticResource PhoneTextBoxForegroundColor}"/>
-    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible"/>
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="ListBox">
-          <ScrollViewer x:Name="ScrollViewer" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" Padding="{TemplateBinding Padding}" Style="{StaticResource LocalScrollViewerStyle}" >
-            <StackPanel>
-              <TextBlock Text="{Binding Resources.Editor_NothingItem, Source={StaticResource LocalizedStrings}}" FontSize="24" Margin="5" Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedItem, Converter={StaticResource NullColorConverter}}">
-                <i:Interaction.Triggers>
-                  <i:EventTrigger EventName="Tap">
-                    <mvvmLightExtras:EventToCommand Command="{Binding SpriteEditorViewModel.NothingItemHackCommand, Mode=OneWay, Source={StaticResource Locator}}"
-                                                           CommandParameter="{Binding}" />
-                  </i:EventTrigger>
-                </i:Interaction.Triggers>
-              </TextBlock>
-              <ItemsPresenter/>
-            </StackPanel>
-          </ScrollViewer>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
 
   <Style x:Key="ScriptBlockBackground" TargetType="ContentControl">
     <Setter Property="ContentTemplate">

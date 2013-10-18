@@ -10,8 +10,12 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
     {
         public static IList<T> GetInstances<T>(List<Type> excludedTypes = null)
         {
-            var excludedTypeInfos = Enumerable.ToList(
-                Enumerable.Select(excludedTypes, type => type.GetTypeInfo()));
+            List<TypeInfo> excludedTypeInfos = null;
+            if (excludedTypes != null)
+            {
+                excludedTypeInfos = Enumerable.ToList(
+                    Enumerable.Select(excludedTypes, type => type.GetTypeInfo()));
+            }
 
             if (excludedTypes == null)
                 excludedTypes = new List<Type>();

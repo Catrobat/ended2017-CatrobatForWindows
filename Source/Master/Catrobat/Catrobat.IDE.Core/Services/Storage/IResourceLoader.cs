@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Catrobat.IDE.Core.Services.Data;
 
 namespace Catrobat.IDE.Core.Services.Storage
 {

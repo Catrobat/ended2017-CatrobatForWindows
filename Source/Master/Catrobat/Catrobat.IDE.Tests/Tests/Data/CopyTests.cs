@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
 
-        [TestMethod, TestCategory("GuardedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void CopySprite()
         {
             const string savePath1 = "/CopyTest1/project.xml";

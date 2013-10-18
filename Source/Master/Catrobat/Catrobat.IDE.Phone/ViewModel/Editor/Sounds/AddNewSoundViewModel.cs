@@ -44,7 +44,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
             var message = new GenericMessage<Sprite>(_receivedSelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof (SoundRecorderView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(SoundRecorderViewModel));
         }
 
         private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)

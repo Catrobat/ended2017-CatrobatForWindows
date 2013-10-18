@@ -6,143 +6,133 @@ using System.Text;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.ExtensionMethods;
-using Catrobat.IDE.Core.Services.Data;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.VersionConverter;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
-    public class ProjectImporterService : IProjectImporterService
+    public class ProjectImporterService
     {
         private ProjectDummyHeader _tempProjectHeader;
         private Project _project;
 
-        public Task<ProjectDummyHeader> ImportProjects(Stream projectZipStream)
+        public async Task<ProjectDummyHeader> ImportProject(Stream projectZipStream)
         {
-            return new Task<ProjectDummyHeader>(() =>
+            try
             {
-                try
-                {
-                    CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream, CatrobatContextBase.TempProjectImportPath);
+                CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream, CatrobatContextBase.TempProjectImportPath);
 
-                    PortableImage projectScreenshot = null;
-                    string projectCode = "";
-
-                    using (var storage = StorageSystem.GetStorage())
-                    {
-                        projectScreenshot = storage.LoadImage(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ScreenshotPath)) ??
-                                            storage.LoadImage(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.AutomaticScreenshotPath));
-                    }
-
-                    CatrobatVersionConverter.VersionConverterError error;
-                    var projectCodePath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
-                    projectCode = CatrobatVersionConverter.ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion, out error);
-                    //TODO: error handling
-
-                    _project = new Project(projectCode);
-
-                    _tempProjectHeader = new ProjectDummyHeader
-                    {
-                        Screenshot = projectScreenshot,
-                        ProjectName = _project.ProjectHeader.ProgramName
-                    };
-                }
-                catch (Exception)
-                {
-                    using (var storage = StorageSystem.GetStorage())
-                    {
-                        if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
-                        {
-                            storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
-                        }
-                    }
-
-                    _tempProjectHeader = null;
-                }
-                finally
-                {
-                    using (var storage = StorageSystem.GetStorage())
-                    {
-                        if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
-                        {
-                            storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
-                        }
-                    }
-                }
-
-                return _tempProjectHeader;
-            });
-
-
-        }
-
-        public Task<string> AcceptTempProject()
-        {
-            return new Task<string>(() =>
-            {
-                var newProjectName = "";
+                PortableImage projectScreenshot = null;
+                string projectCode = "";
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    var counter = 0;
-                    while (true)
+                    projectScreenshot = storage.LoadImage(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ScreenshotPath)) ??
+                                        storage.LoadImage(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.AutomaticScreenshotPath));
+                }
+
+                CatrobatVersionConverter.VersionConverterError error;
+                var projectCodePath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
+                projectCode = CatrobatVersionConverter.ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion, out error);
+                //TODO: error handling
+
+                _project = new Project(projectCode);
+                _project.Save();
+
+                _tempProjectHeader = new ProjectDummyHeader
+                {
+                    Screenshot = projectScreenshot,
+                    ProjectName = _project.ProjectHeader.ProgramName
+                };
+            }
+            catch (Exception)
+            {
+                using (var storage = StorageSystem.GetStorage())
+                {
+                    if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
                     {
-                        var projectPath = Path.Combine(CatrobatContextBase.ProjectsPath, _tempProjectHeader.ProjectName);
-
-                        if (counter != 0)
-                        {
-                            projectPath = Path.Combine(CatrobatContextBase.ProjectsPath,
-                                StringExtensions.Concat(_tempProjectHeader.ProjectName, counter.ToString()));
-                        }
-
-                        if (!storage.DirectoryExists(projectPath))
-                        {
-                            break;
-                        }
-
-                        counter++;
+                        storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
                     }
+                }
 
-                    newProjectName = _tempProjectHeader.ProjectName;
+                _tempProjectHeader = null;
+            }
+            finally
+            {
+                using (var storage = StorageSystem.GetStorage())
+                {
+                    if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
+                    {
+                        storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
+                    }
+                }
+            }
+
+            return _tempProjectHeader;
+        }
+
+        public async Task<string> AcceptTempProject()
+        {
+            var newProjectName = "";
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                var counter = 0;
+                while (true)
+                {
+                    var projectPath = Path.Combine(CatrobatContextBase.ProjectsPath, _tempProjectHeader.ProjectName);
 
                     if (counter != 0)
                     {
-                        newProjectName = _tempProjectHeader.ProjectName + counter;
-                        _project.SetProgramName(newProjectName);
-                        var saveToPath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
-                        _project.Save(saveToPath);
+                        projectPath = Path.Combine(CatrobatContextBase.ProjectsPath,
+                            StringExtensions.Concat(_tempProjectHeader.ProjectName, counter.ToString()));
                     }
+
+                    if (!storage.DirectoryExists(projectPath))
+                    {
+                        break;
+                    }
+
+                    counter++;
                 }
 
-                using (var storage = StorageSystem.GetStorage())
+                newProjectName = _tempProjectHeader.ProjectName;
+
+                if (counter != 0)
                 {
-                    var tempPath = Path.Combine(CatrobatContextBase.ProjectsPath, _project.ProjectHeader.ProgramName);
-                    storage.MoveDirectory(CatrobatContextBase.TempProjectImportPath, tempPath);
+                    newProjectName = _tempProjectHeader.ProjectName + counter;
+                    _project.SetProgramName(newProjectName);
+                    var saveToPath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
+                    _project.Save(saveToPath);
                 }
+            }
 
-                _tempProjectHeader = null;
-                _project = null;
+            using (var storage = StorageSystem.GetStorage())
+            {
+                var tempPath = Path.Combine(CatrobatContextBase.ProjectsPath, _project.ProjectHeader.ProgramName);
+                storage.MoveDirectory(CatrobatContextBase.TempProjectImportPath, tempPath);
+            }
 
-                return newProjectName;
-            });
+            _tempProjectHeader = null;
+            _project = null;
+
+            return newProjectName;
         }
 
-        public Task CancelImport()
+        public async Task CancelImport()
         {
-            return new Task(() =>
+            _tempProjectHeader = null;
+            _project = null;
+
+            using (var storage = StorageSystem.GetStorage())
             {
-                _tempProjectHeader = null;
-                _project = null;
+                storage.DeleteDirectory(CatrobatContextBase.TempProjectImportPath);
+                storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
+            }
 
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    storage.DeleteDirectory(CatrobatContextBase.TempProjectImportPath);
-                    storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
-                }
-
-                _tempProjectHeader = null;
-                _project = null;
-            });
+            _tempProjectHeader = null;
+            _project = null;
         }
     }
 }

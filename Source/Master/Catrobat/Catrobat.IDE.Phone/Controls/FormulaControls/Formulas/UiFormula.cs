@@ -6,11 +6,12 @@ using System.Windows;
 using System.Windows.Controls;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.FormulaEditor.Editor;
+using Catrobat.IDE.Core.UI.Formula;
 using Catrobat.IDE.Phone.Controls.FormulaControls.PartControls;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.Formulas
 {
-    public class UiFormula : INotifyPropertyChanged
+    public class UiFormula : INotifyPropertyChanged, IPortableUIFormula
     {
         private bool _isSelected;
         private double _fontSize;

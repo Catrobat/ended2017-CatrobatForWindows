@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.UI.Converters;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects.Bricks;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
@@ -86,7 +87,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             container.PropertyChanged += ContainerOnPropertyChanged;
             viewModel.SelectedVariableContainer = container;
 
-            Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(VariableSelectionView));
+            Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(VariableSelectionViewModel));
         }
 
         private void ContainerOnPropertyChanged(object sender, PropertyChangedEventArgs args)

@@ -173,11 +173,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
         {
             if (CatrobatWebCommunicationService.NoUploadsPending())
             {
-                var toast = new ToastPrompt
-                {
-                    Message = AppResources.Main_NoUploadsPending
-                };
-                toast.Show();
+                ServiceLocator.NotifictionService.ShowToastNotification(null, null,
+                    AppResources.Main_NoUploadsPending, ToastNotificationTime.Short);
             }
         }
 

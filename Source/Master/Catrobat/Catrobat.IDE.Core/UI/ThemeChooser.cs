@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Catrobat.IDE.Core.Annotations;
-using Catrobat.IDE.Core.Services.Data;
+using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Core.UI
 {

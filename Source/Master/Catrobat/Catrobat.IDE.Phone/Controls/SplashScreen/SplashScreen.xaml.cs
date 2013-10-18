@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows;
-using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Phone.ViewModel;
-using Catrobat.IDE.Phone.Views.Main;
+using Catrobat.IDE.Phone.ViewModel.Main;
 using Microsoft.Phone.Controls;
+using Microsoft.Practices.ServiceLocation;
+using Catrobat.IDE.Phone.Views.Main;
 
 namespace Catrobat.IDE.Phone.Controls.SplashScreen
 {
@@ -20,7 +21,17 @@ namespace Catrobat.IDE.Phone.Controls.SplashScreen
             // init app
             ViewModelLocator.LoadContext();
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(MainView));
+            string fileToken;
+            NavigationContext.QueryString.TryGetValue("fileToken", out fileToken);
+
+            if (fileToken != null)
+            {
+                var viewModel = ServiceLocator.Current.GetInstance<ProjectImportViewModel>();
+                viewModel.OnLoadCommand.Execute(fileToken);
+                Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(ProjectImportViewModel));
+            }
+            else
+                Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
         }
     }
 }

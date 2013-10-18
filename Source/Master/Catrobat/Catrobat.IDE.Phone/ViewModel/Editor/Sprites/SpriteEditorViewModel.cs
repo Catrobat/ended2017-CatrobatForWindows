@@ -14,6 +14,10 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Phone.Controls.Buttons;
 using Catrobat.IDE.Phone.Controls.ReorderableListbox;
+using Catrobat.IDE.Phone.ViewModel.Editor.Costumes;
+using Catrobat.IDE.Phone.ViewModel.Editor.Scripts;
+using Catrobat.IDE.Phone.ViewModel.Editor.Sounds;
+using Catrobat.IDE.Phone.ViewModel.Main;
 using Catrobat.IDE.Phone.Views.Editor;
 using Catrobat.IDE.Phone.Views.Editor.Costumes;
 using Catrobat.IDE.Phone.Views.Editor.Scripts;
@@ -479,7 +483,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             var message = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.SpriteNameListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ChangeSpriteView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(ChangeSpriteViewModel));
         }
 
         private void AddNewScriptBrickAction()
@@ -591,7 +595,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             var message = new GenericMessage<DataObject>(broadcastObject);
             Messenger.Default.Send<GenericMessage<DataObject>>(message, ViewModelMessagingToken.BroadcastObjectListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(NewBroadcastMessageView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(NewBroadcastMessageViewModel));
         }
 
 
@@ -600,7 +604,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             var message = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewSoundView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewSoundViewModel));
         }
 
         private void EditSoundAction()
@@ -610,7 +614,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                 var message = new GenericMessage<Sound>(sound);
                 Messenger.Default.Send<GenericMessage<Sound>>(message, ViewModelMessagingToken.SoundNameListener);
 
-                ServiceLocator.NavigationService.NavigateTo(typeof(ChangeSoundView));
+                ServiceLocator.NavigationService.NavigateTo(typeof(ChangeSoundViewModel));
             }
         }
 
@@ -639,7 +643,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                 var message = new GenericMessage<Costume>(costume);
                 Messenger.Default.Send<GenericMessage<Costume>>(message, ViewModelMessagingToken.CostumeNameListener);
 
-                ServiceLocator.NavigationService.NavigateTo(typeof(ChangeCostumeView));
+                ServiceLocator.NavigationService.NavigateTo(typeof(ChangeCostumeViewModel));
             }
         }
 
@@ -725,7 +729,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
 
         private void GoToMainViewAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(MainView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
         }
 
         private void ProjectSettingsAction()
@@ -733,7 +737,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             var message = new GenericMessage<Project>(CurrentProject);
             Messenger.Default.Send<GenericMessage<Project>>(message, ViewModelMessagingToken.ChangeLocalProjectListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ProjectSettingsView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(ProjectSettingsViewModel));
         }
 
 

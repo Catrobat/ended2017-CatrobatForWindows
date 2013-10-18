@@ -12,7 +12,7 @@
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
-  shell:SystemTray.IsVisible="True">
+  shell:SystemTray.IsVisible="False">
 
   <!--LayoutRoot is the root grid where all page content is placed-->
   <DrawingSurfaceBackgroundGrid x:Name="DrawingSurfaceBackground" Loaded="DrawingSurfaceBackground_Loaded">

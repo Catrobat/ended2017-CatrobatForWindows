@@ -4,16 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.UI.PortableUI;
+using Coding4Fun.Toolkit.Controls;
 
 namespace Catrobat.IDE.Phone.Services
 {
     class NotificationServicePhone : INotifictionService
     {
-        public void ShowToastNotification(string title, string message, ToastNotificationTime timeTillHide, MessageBoxOptions options)
+        public void ShowToastNotification(PortableImage image, string title, string message, ToastNotificationTime timeTillHide)
         {
-            // TODO: show tile notification
-            throw new NotImplementedException();
+            var toast = new ToastPrompt
+            {
+                ImageSource = (ImageSource)image.ImageSource,
+                Message = AppResources.Main_DownloadQueueMessage,
+                Title = title,
+            };
+            toast.Show();
         }
 
         public void ShowMessageBox(string title, string message, Action<MessageboxResult> callback, MessageBoxOptions options)

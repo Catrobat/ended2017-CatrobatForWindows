@@ -37,14 +37,15 @@ namespace Catrobat.IDE.Phone
                 new StorageFactoryPhone(),
                 new ServerCommunicationServicePhone(),
                 new ImageSourceConversionServicePhone(),
-                new ProjectImporterService(),
+                new ProjectImporterServicePhone(),
                 new SoundPlayerServicePhone(),
                 new SoundRecorderServicePhone(),
                 new PictureServicePhone(),
                 new NotificationServicePhone(),
                 new ColorConversionServicePhone(),
                 new ShareServicePhone(),
-                new DispatcherServicePhone()
+                new DispatcherServicePhone(),
+                new PortableUIElementsConvertionServicePhone()
                 );
         }
     }

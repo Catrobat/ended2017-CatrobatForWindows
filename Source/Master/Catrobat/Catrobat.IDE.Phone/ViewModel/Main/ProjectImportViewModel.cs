@@ -4,12 +4,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Data;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Phone.Utilities;
 using Catrobat.IDE.Phone.Views.Main;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Phone.ViewModel.Main
 {
@@ -17,7 +19,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
     {
         #region private Members
 
-        private ProjectImporter _importer;
         private bool _isWorking = false;
 
         private bool _contentPanelVisibility = false;
@@ -188,7 +189,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
 
         #region Actions
 
-        private void AddAction()
+        private async void AddAction()
         {
             if (_isWorking)
             {
@@ -198,46 +199,55 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             _isWorking = true;
             ShowPanel(VisiblePanel.Loading);
 
-            var task = Task.Run(() =>
-                {
-                    try
-                    {
-                        if (_importer != null)
-                        {
-                            _importer.AcceptTempProject(CheckBoxMakeActiveIsChecked);
-                        }
+            try
+            {
+                var newProjectName = await ServiceLocator.ProjectImporterService.AcceptTempProject();
 
-                        Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(MainView)));
-                    }
-                    catch
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    if (CheckBoxMakeActiveIsChecked)
                     {
-                        ShowPanel(VisiblePanel.Error);
+                        var newProject = Catrobat.IDE.Core.CatrobatContext.LoadNewProjectByNameStatic(newProjectName);
+
+                        var projectChangedMessage = new GenericMessage<Project>(newProject);
+                        Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                    }
+                    else
+                    {
+                        var localProjectsChangedMessage = new MessageBase();
+                        Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
                     }
                 });
+
+                Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel)));
+            }
+            catch
+            {
+                ShowPanel(VisiblePanel.Error);
+            }
 
             _isWorking = false;
         }
 
         private void CancelAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(MainView));
+            ServiceLocator.ProjectImporterService.CancelImport();
+            ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
         }
 
-        private async void OnLoadAction(NavigationContext navigationContext)
+        private async void OnLoadAction(string fileToken)
         {
             _isWorking = true;
-            string fileToken;
-            if (navigationContext.QueryString.TryGetValue("fileToken", out fileToken))
+            if (fileToken != null)
             {
-                _importer = new ProjectImporter();
-                var projectHeader = await _importer.ImportProject(fileToken);
+                var projectHeader = await ServiceLocator.ProjectImporterService.ImportProject(fileToken);
 
                 if (projectHeader != null)
                 {
                     ProjectName = projectHeader.ProjectName;
 
                     ScreenshotImageSource = projectHeader.Screenshot;
-                    
+
                     ShowPanel(VisiblePanel.Content);
                 }
                 else
@@ -260,7 +270,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             // Commands
             AddCommand = new RelayCommand(AddAction, AddCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction, CancelCommand_CanExecute);
-            OnLoadCommand = new RelayCommand<NavigationContext>(OnLoadAction);
+            OnLoadCommand = new RelayCommand<string>(OnLoadAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
         }
 
@@ -271,28 +281,28 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             switch (panel)
             {
                 case VisiblePanel.Error:
-                        ErrorPanelVisibility = true;
-                        ContentPanelVisibility = false;
-                        LoadingPanelVisibility = false;
-                        ProgressBarLoadingIsIndeterminate = false;
-                        ButtonAddIsEnabled = false;
-                        ButtonCancelIsEnabled = true;
+                    ErrorPanelVisibility = true;
+                    ContentPanelVisibility = false;
+                    LoadingPanelVisibility = false;
+                    ProgressBarLoadingIsIndeterminate = false;
+                    ButtonAddIsEnabled = false;
+                    ButtonCancelIsEnabled = true;
                     break;
                 case VisiblePanel.Content:
-                        ErrorPanelVisibility = false;
-                        ContentPanelVisibility = true;
-                        LoadingPanelVisibility = false;
-                        ProgressBarLoadingIsIndeterminate = false;
-                        ButtonAddIsEnabled = true;
-                        ButtonCancelIsEnabled = true;
+                    ErrorPanelVisibility = false;
+                    ContentPanelVisibility = true;
+                    LoadingPanelVisibility = false;
+                    ProgressBarLoadingIsIndeterminate = false;
+                    ButtonAddIsEnabled = true;
+                    ButtonCancelIsEnabled = true;
                     break;
                 case VisiblePanel.Loading:
-                        ErrorPanelVisibility = false;
-                        ContentPanelVisibility = false;
-                        LoadingPanelVisibility = true;
-                        ProgressBarLoadingIsIndeterminate = true;
-                        ButtonAddIsEnabled = false;
-                        ButtonCancelIsEnabled = true;
+                    ErrorPanelVisibility = false;
+                    ContentPanelVisibility = false;
+                    LoadingPanelVisibility = true;
+                    ProgressBarLoadingIsIndeterminate = true;
+                    ButtonAddIsEnabled = false;
+                    ButtonCancelIsEnabled = true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("panel");

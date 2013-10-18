@@ -131,6 +131,9 @@ namespace Catrobat.IDE.Phone.ViewModel
 
         public static void SaveContext(Project currentProject)
         {
+            if (currentProject == null || _context == null)
+                return;
+
             var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
             var settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
 

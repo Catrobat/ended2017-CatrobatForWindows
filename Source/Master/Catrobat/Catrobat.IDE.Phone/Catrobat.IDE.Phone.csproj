@@ -99,7 +99,10 @@
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\NativeConverterPhone.cs" />
+    <Compile Include="Converters\NativeConverters\ActiveThemeBrushConverter.cs" />
+    <Compile Include="Converters\NativeConverters\VariableButtonVisibilityConverter.cs" />
+    <Compile Include="Converters\PortableConverters.cs" />
+    <Compile Include="Converters\PortableValueConverterPhone.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -163,24 +166,6 @@
     <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\ActiveThemeBrushConverter.cs" />
-    <Compile Include="Converters\BoolOpacityConverter.cs" />
-    <Compile Include="Converters\BoolPlayButtonStateConverter.cs" />
-    <Compile Include="Converters\BoolToSelectedPivotItemConverter.cs" />
-    <Compile Include="Converters\BoolVisibilityConverter.cs" />
-    <Compile Include="Converters\BoolVisibilityNegativeConverter.cs" />
-    <Compile Include="Converters\DoubleStringConverter.cs" />
-    <Compile Include="Converters\FloatStringConverter.cs" />
-    <Compile Include="Converters\ImagePathToScreenshotConverter.cs" />
-    <Compile Include="Converters\IntPixelConverter.cs" />
-    <Compile Include="Converters\IntStringConverter.cs" />
-    <Compile Include="Converters\NoScreenshotConverter.cs" />
-    <Compile Include="Converters\NullColorConverter.cs" />
-    <Compile Include="Converters\NullIntCountConverter.cs" />
-    <Compile Include="Converters\NullVariableConverter.cs" />
-    <Compile Include="Converters\SecondStringMillisecondConverter.cs" />
-    <Compile Include="Converters\VariableButtonVisibilityConverter.cs" />
-    <Compile Include="Converters\VariableEditVisibilityConverter.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ColorConversionServicePhone.cs" />
@@ -188,10 +173,12 @@
     <Compile Include="Services\DispatcherServicePhone.cs" />
     <Compile Include="Services\ImageResizeServicePhone.cs" />
     <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
+    <Compile Include="Services\ProjectImporterServicePhone.cs" />
     <Compile Include="Services\NavigationServicePhone.cs" />
     <Compile Include="Services\NotificationServicePhone.cs" />
     <Compile Include="Services\PictureServicePhone.cs" />
     <Compile Include="Services\PlayerLauncherServicePhone.cs" />
+    <Compile Include="Services\PortableUIElementsConvertionServicePhone.cs" />
     <Compile Include="Services\ServerCommunicationServicePhone.cs" />
     <Compile Include="Services\ShareServicePhone.cs" />
     <Compile Include="Services\SoundPlayerServicePhone.cs" />
@@ -203,7 +190,6 @@
     <Compile Include="Services\SystemInformationServicePhone.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Utilities\AssociationUriMapper.cs" />
-    <Compile Include="Utilities\ProjectImporter.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
     <Compile Include="ViewModel\Editor\Costumes\AddNewCostumeViewModel.cs" />
@@ -430,10 +416,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\ThemeResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
