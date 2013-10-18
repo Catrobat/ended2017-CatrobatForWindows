@@ -1,13 +1,15 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.UI.Formula;
 using Catrobat.IDE.Phone.ViewModel.Editor.Formula;
 using Catrobat.IDE.Phone.Views.Editor.Formula;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {
-    public partial class FormulaButton : UserControl
+    public partial class FormulaButton : IPortableFormulaButton
     {
         #region DependencyProperties
 
