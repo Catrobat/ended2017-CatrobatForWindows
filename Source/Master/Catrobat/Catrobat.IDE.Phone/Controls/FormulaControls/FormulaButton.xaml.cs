@@ -2,8 +2,8 @@
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.Formula;
-using Catrobat.IDE.Phone.ViewModel;
-using Catrobat.IDE.Phone.ViewModel.Editor.Formula;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {

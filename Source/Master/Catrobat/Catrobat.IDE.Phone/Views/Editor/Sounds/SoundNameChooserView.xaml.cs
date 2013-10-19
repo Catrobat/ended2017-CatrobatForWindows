@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Phone.ViewModel;
-using Catrobat.IDE.Phone.ViewModel.Editor.Sounds;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Editor.Sounds;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Sounds

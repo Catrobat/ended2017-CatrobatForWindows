@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Phone.ViewModel;
-using Catrobat.IDE.Phone.ViewModel.Main;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Main;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDE.Phone.Controls.SplashScreen

@@ -34,9 +34,10 @@ namespace Catrobat.IDE.Phone.Services
 
             if (type.BaseType == typeof(ViewModelBase))
             {
-                pathToXaml = pathToXaml.Replace("ViewModel", "Views");
+                //Catrobat/IDE/Phone/Views/Main/MainView.xaml
+                pathToXaml = pathToXaml.Replace("Catrobat/IDE/Core/ViewModel", "/Views");
 
-                pathToXaml = pathToXaml.Replace("Views.xaml", "View.xaml");
+                pathToXaml = pathToXaml.Replace("ViewModel.xaml", "View.xaml");
             }
 
             try

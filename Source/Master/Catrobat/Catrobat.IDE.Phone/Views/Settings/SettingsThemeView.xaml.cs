@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Phone.ViewModel;
-using Catrobat.IDE.Phone.ViewModel.Settings;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Settings;
 using Microsoft.Phone.Controls;
 using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 

@@ -1,6 +1,6 @@
 ﻿using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Phone.ViewModel;
-using Catrobat.IDE.Phone.ViewModel.Share;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Share;
 using Microsoft.Live;
 using Microsoft.Live.Controls;
 using Microsoft.Phone.Controls;

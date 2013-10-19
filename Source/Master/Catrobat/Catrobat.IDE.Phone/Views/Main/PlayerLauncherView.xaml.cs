@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Phone.ViewModel;
-using Catrobat.IDE.Phone.ViewModel.Main;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Main;
 using Microsoft.Phone.Controls;
 using Size = Windows.Foundation.Size;
 using PhoneDirect3DXamlAppComponent;

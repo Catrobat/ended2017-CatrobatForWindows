@@ -4,8 +4,8 @@ using System.Windows;
 using System.Windows.Data;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Phone.ViewModel;
-using Catrobat.IDE.Phone.ViewModel.Editor.Formula;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 
 namespace Catrobat.IDE.Phone.Converters.NativeConverters
 {

@@ -1,7 +1,7 @@
 ﻿using Catrobat.IDE.Core.FormulaEditor.Editor;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Phone.ViewModel;
-using Catrobat.IDE.Phone.ViewModel.Editor.Formula;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Formula
