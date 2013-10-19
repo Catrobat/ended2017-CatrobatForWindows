@@ -226,12 +226,14 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
                                     ServiceLocator.SoundRecorderService.State != SoundRecorderState.NoAction)
                                 {
                                     _recorderTimeGoneBy = DateTime.UtcNow - _recorderStartTime;
-                                    Deployment.Current.Dispatcher.BeginInvoke(() =>
+                                    ServiceLocator.DispatcherService.RunOnMainThread(() =>
                                         {
                                             RecordingTime = _recorderTimeGoneBy.TotalSeconds;
                                         });
 
-                                    Thread.Sleep(45);
+
+                                    Task.Delay(45).Wait();
+                                    //Thread.Sleep(45);
                                 }
                             }
                             catch
@@ -279,7 +281,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
                                 while (IsPlaying)
                                 {
                                     _playerTimeGoneBy = DateTime.UtcNow - _playerStartTime;
-                                    Deployment.Current.Dispatcher.BeginInvoke(() =>
+                                    ServiceLocator.DispatcherService.RunOnMainThread(() =>
                                         {
                                             if (_playerTimeGoneBy.TotalSeconds < RecordingTime)
                                             {
@@ -296,7 +298,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
                                             }
                                         });
 
-                                    Thread.Sleep(45);
+                                    Task.Delay(45).Wait();
+                                    //Thread.Sleep(45);
                                 }
                                 IsPlaying = false;
                             }

@@ -203,7 +203,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             {
                 var newProjectName = await ServiceLocator.ProjectImporterService.AcceptTempProject();
 
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
                     if (CheckBoxMakeActiveIsChecked)
                     {
@@ -219,7 +219,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
                     }
                 });
 
-                Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel)));
+                ServiceLocator.DispatcherService.RunOnMainThread(() => ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel)));
             }
             catch
             {
@@ -308,7 +308,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
                     throw new ArgumentOutOfRangeException("panel");
             }
 
-            //Deployment.Current.Dispatcher.BeginInvoke(() =>
+            //ServiceLocator.DispatcherService.RunOnMainThread(() =>
             //{
             //    var message = new DialogMessage("Sorry! The project is not valid or not compatible with this version of Catrobat.", ProjectNotValidMessageResult)
             //    {

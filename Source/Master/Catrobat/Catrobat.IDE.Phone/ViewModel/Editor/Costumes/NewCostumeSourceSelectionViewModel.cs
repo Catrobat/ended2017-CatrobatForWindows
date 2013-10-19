@@ -83,7 +83,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
             var message = new GenericMessage<PortableImage>(image);
             Messenger.Default.Send(message, ViewModelMessagingToken.CostumeImageListener);
 
-            Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserViewModel)));
+            ServiceLocator.DispatcherService.RunOnMainThread(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserViewModel)));
         }
 
         private void PictureCanceled()

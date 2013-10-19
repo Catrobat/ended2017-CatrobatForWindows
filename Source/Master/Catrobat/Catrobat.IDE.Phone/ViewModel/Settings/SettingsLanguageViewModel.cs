@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Threading;
 using System.Windows;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Resources.Localization;
@@ -25,18 +26,19 @@ namespace Catrobat.IDE.Phone.ViewModel.Settings
 
         public CultureInfo CurrentCulture
         {
-            get { return Thread.CurrentThread.CurrentCulture; }
+            get { return ServiceLocator.CulureService.GetCulture(); }
 
             set
             {
-                if (Thread.CurrentThread.CurrentCulture.Equals(value))
+                if (ServiceLocator.CulureService.GetCulture().Equals(value))
                 {
                     return;
                 }
 
-                Thread.CurrentThread.CurrentCulture = value;
-                Thread.CurrentThread.CurrentUICulture = value;
+                ServiceLocator.CulureService.SetCulture(value);
+                //Thread.CurrentThread.CurrentUICulture = value;
 
+                // TODO: portable
                 ((LocalizedStrings)Application.Current.Resources["LocalizedStrings"]).Reset();
                 RaisePropertyChanged(() => CurrentCulture);
             }

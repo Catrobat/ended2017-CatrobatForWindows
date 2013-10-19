@@ -158,7 +158,6 @@
     <Compile Include="Controls\Projects\LocalProjectControl.xaml.cs">
       <DependentUpon>LocalProjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ReorderableListbox\ListBoxViewPort.cs" />
     <Compile Include="Controls\ReorderableListbox\NegativeValueConverter.cs" />
     <Compile Include="Controls\ReorderableListbox\PullDownToRefreshPanel.cs" />
     <Compile Include="Controls\ReorderableListbox\ReorderListBox.cs" />

@@ -117,7 +117,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
 
             CatrobatWebCommunicationService.UploadProject(_projectName, _projectDescription,
                                               Context.CurrentUserEmail,
-                                              Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
+                                              ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName,
                                               Context.CurrentToken, UploadCallback);
 
             var message = new MessageBase();

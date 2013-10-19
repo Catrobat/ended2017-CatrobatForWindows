@@ -79,10 +79,10 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
                     var writer = new BinaryWriter(stream);
 
                     WaveHeaderHelper.WriteHeader(writer.BaseStream, ServiceLocator.SoundRecorderService.SampleRate);
-                    var dataBuffer = ServiceLocator.SoundRecorderService.GetSoundAsStream().GetBuffer();
+                    var dataBuffer = ServiceLocator.SoundRecorderService.GetSoundAsStream().GetBuffer(); // TODO: portable ".GetBuffer()"
                     writer.Write(dataBuffer, 0, (int)ServiceLocator.SoundRecorderService.GetSoundAsStream().Length);
                     writer.Flush();
-                    writer.Close();
+                    writer.Dispose();
                 }
             }
 

@@ -116,7 +116,7 @@ namespace Catrobat.IDE.Phone.Services
                 Thread.Sleep(50);
             } while (newState == _previousState && newState != SoundPlayerState.Stopped);
 
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
                 //if (SoundFinished != null && !_aborted)
                 //{

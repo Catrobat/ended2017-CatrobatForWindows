@@ -231,8 +231,8 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Scripts
         private void ReceiveScriptBrickCollectionMessageAction(GenericMessage<List<Object>> message)
         {
             _receivedScriptBrickCollection = message.Content[0] as ScriptBrickCollection;
-            _firstVisibleScriptBrickIndex = ((ListBoxViewPort)message.Content[1]).FirstVisibleIndex;
-            _lastVisibleScriptBrickIndex = ((ListBoxViewPort)message.Content[1]).LastVisibleIndex;
+            _firstVisibleScriptBrickIndex = ((PortableListBoxViewPort)message.Content[1]).FirstVisibleIndex;
+            _lastVisibleScriptBrickIndex = ((PortableListBoxViewPort)message.Content[1]).LastVisibleIndex;
         }
 
         private void ScriptBrickCategoryReceivedMessageAction(GenericMessage<BrickCategory> message)

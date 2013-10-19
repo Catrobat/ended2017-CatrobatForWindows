@@ -326,42 +326,39 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             DateTime startTime = DateTime.UtcNow;
 
 
-            Task.Run(() =>
+            Task.Run(() => ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                CurrentProject.Save();
+                var newProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
+
+                if (newProject != null)
                 {
-                    CurrentProject.Save();
-                    var newProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
+                    CurrentProject = newProject;
+
+                    var minWaitingTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
+
+                    if (minWaitingTimeRemaining >= new TimeSpan(0))
+                        Task.Delay(minWaitingTimeRemaining).Wait();
+                        //Thread.Sleep(minWaitingTimeRemaining);
+
+                    IsActivatingLocalProject = false;
 
 
-                    if (newProject != null)
-                    {
-                        CurrentProject = newProject;
+                }
+                else
+                {
+                    XmlParserTempProjectHelper.Project = CurrentProject;
 
-                        var minWaitingTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
-
-                        if (minWaitingTimeRemaining >= new TimeSpan(0))
-                            Thread.Sleep(minWaitingTimeRemaining);
-
-                        IsActivatingLocalProject = false;
-
-
-                    }
-                    else
-                    {
-                        XmlParserTempProjectHelper.Project = CurrentProject;
-
-                        ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_SelectedProjectNotValidMessage, 
-                            String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName), new Action<MessageboxResult>(delegate
-                                {
-                                    Deployment.Current.Dispatcher.BeginInvoke(() =>
-                                    {
-                                        IsActivatingLocalProject = false;
-                                    });
-                                }), MessageBoxOptions.Ok);
-                    }
-                });
-            });
+                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_SelectedProjectNotValidMessage, 
+                        String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName), new Action<MessageboxResult>(delegate
+                        {
+                            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                            {
+                                IsActivatingLocalProject = false;
+                            });
+                        }), MessageBoxOptions.Ok);
+                }
+            }));
         }
 
         private void CreateNewProjectAction()
@@ -608,7 +605,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
         {
             if (registered)
             {
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
                     ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectViewModel));
                     ServiceLocator.NavigationService.RemoveBackEntry();
@@ -616,7 +613,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
             }
             else
             {
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
                     ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectLoginViewModel));
                     ServiceLocator.NavigationService.RemoveBackEntry();

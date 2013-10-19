@@ -108,7 +108,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Service
             else
             {
                 CatrobatWebCommunicationService.RegisterOrCheckToken(_username, _password, _email,
-                                                         Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName,
+                                                         ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName,
                                                          RegionInfo.CurrentRegion.TwoLetterISORegionName,
                                                          UtilTokenHelper.CalculateToken(_username, _password),
                                                          RegisterOrCheckTokenCallback);

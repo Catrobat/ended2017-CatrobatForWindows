@@ -32,7 +32,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
         private Sprite _selectedSprite;
         private readonly ScriptBrickCollection _scriptBricks;
         private Sound _sound;
-        private ListBoxViewPort _listBoxViewPort;
+        private PortableListBoxViewPort _listBoxViewPort;
 
         private int _selectedPivotIndex;
         private int _numberOfCostumesSelected;
@@ -79,7 +79,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                 }
 
                 //if (_scriptBricks != null && _scriptBricks.Count == 0 && ListBoxViewPort == null)
-                    ListBoxViewPort = new ListBoxViewPort(0, 0);
+                ListBoxViewPort = new PortableListBoxViewPort(0, 0);
 
                 if (_scriptBricks != null)
                 {
@@ -88,7 +88,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
                     if (_scriptBricks.Count > 0 &&
                         ListBoxViewPort.FirstVisibleIndex == 0 &&
                         ListBoxViewPort.LastVisibleIndex == 0)
-                        ListBoxViewPort = new ListBoxViewPort(1, 2);
+                        ListBoxViewPort = new PortableListBoxViewPort(1, 2);
                 }
 
                 RaisePropertyChanged(() => SelectedSprite);
@@ -158,7 +158,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             }
         }
 
-        public ListBoxViewPort ListBoxViewPort
+        public PortableListBoxViewPort ListBoxViewPort
         {
             get { return _listBoxViewPort; }
             set

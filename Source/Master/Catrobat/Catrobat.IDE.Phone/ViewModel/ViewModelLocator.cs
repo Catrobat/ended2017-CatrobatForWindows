@@ -115,7 +115,7 @@ namespace Catrobat.IDE.Phone.ViewModel
 
             if (_context.LocalSettings.CurrentLanguageString == null)
                 _context.LocalSettings.CurrentLanguageString =
-                    Core.Services.ServiceLocator.CulureService.GetToLetterCultureColde();
+                    Core.Services.ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName;
 
             var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
             if (_context.LocalSettings.CurrentThemeIndex != -1)

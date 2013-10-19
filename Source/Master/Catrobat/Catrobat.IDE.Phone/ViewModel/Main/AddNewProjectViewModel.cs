@@ -83,7 +83,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
 
         private void SaveAction()
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
                 CurrentProject.Save();
 

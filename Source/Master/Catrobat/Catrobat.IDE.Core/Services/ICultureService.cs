@@ -1,7 +1,11 @@
-﻿namespace Catrobat.IDE.Core.Services
+﻿using System.Globalization;
+
+namespace Catrobat.IDE.Core.Services
 {
     public interface ICultureService
     {
-        string GetToLetterCultureColde();
+        CultureInfo GetCulture();
+
+        void SetCulture(CultureInfo culture);
     }
 }
