@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;

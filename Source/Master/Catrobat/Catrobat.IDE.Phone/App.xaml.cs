@@ -4,15 +4,14 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
 using Catrobat.IDE.Core;
-using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Phone.Services;
 using Catrobat.IDE.Phone.Utilities;
 using Catrobat.IDE.Phone.ViewModel;
 using Catrobat.IDE.Phone.ViewModel.Main;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone
 {
@@ -103,7 +102,7 @@ namespace Catrobat.IDE.Phone
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            var mainViewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).MainViewModel;
             ViewModelLocator.SaveContext(mainViewModel.CurrentProject);
             ViewModelLocator.Cleanup();
         }

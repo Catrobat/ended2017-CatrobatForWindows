@@ -1,14 +1,16 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Navigation;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Phone.ViewModel;
 using Catrobat.IDE.Phone.ViewModel.Editor.Sounds;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Sounds
 {
     public partial class ChangeSoundView : PhoneApplicationPage
     {
-        private readonly ChangeSoundViewModel _viewModel = ServiceLocator.Current.GetInstance<ChangeSoundViewModel>();
+        private readonly ChangeSoundViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).ChangeSoundViewModel;
 
         public ChangeSoundView()
         {

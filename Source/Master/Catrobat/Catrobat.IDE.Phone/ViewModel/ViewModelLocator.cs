@@ -4,6 +4,7 @@ using System.Windows;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Phone.ViewModel.Editor;
 using Catrobat.IDE.Phone.ViewModel.Editor.Costumes;
@@ -18,7 +19,7 @@ using Catrobat.IDE.Phone.ViewModel.Share;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.Practices.ServiceLocation;
+using ServiceLocator = Microsoft.Practices.ServiceLocation.ServiceLocator;
 
 namespace Catrobat.IDE.Phone.ViewModel
 {
@@ -28,45 +29,43 @@ namespace Catrobat.IDE.Phone.ViewModel
 
         static ViewModelLocator()
         {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            SimpleIoc.Default.Register<MainViewModel>(true);
-            SimpleIoc.Default.Register<AddNewProjectViewModel>(true);
-            SimpleIoc.Default.Register<UploadProjectViewModel>(true);
-            SimpleIoc.Default.Register<UploadProjectLoadingViewModel>(true);
-            SimpleIoc.Default.Register<UploadProjectLoginViewModel>(true);
-            SimpleIoc.Default.Register<SoundRecorderViewModel>(true);
-            SimpleIoc.Default.Register<SettingsViewModel>(true);
-            SimpleIoc.Default.Register<SettingsBrickViewModel>(true);
-            SimpleIoc.Default.Register<SettingsLanguageViewModel>(true);
-            SimpleIoc.Default.Register<SettingsThemeViewModel>(true);
-            SimpleIoc.Default.Register<CostumeNameChooserViewModel>(true);
-            SimpleIoc.Default.Register<ChangeCostumeViewModel>(true);
-            SimpleIoc.Default.Register<NewSoundSourceSelectionViewModel>(true);
-            SimpleIoc.Default.Register<ChangeSoundViewModel>(true);
-            SimpleIoc.Default.Register<SoundNameChooserViewModel>(true);
-            SimpleIoc.Default.Register<AddNewSpriteViewModel>(true);
-            SimpleIoc.Default.Register<ChangeSpriteViewModel>(true);
-            SimpleIoc.Default.Register<ProjectSettingsViewModel>(true);
-            SimpleIoc.Default.Register<ProjectImportViewModel>(true);
-            SimpleIoc.Default.Register<OnlineProjectViewModel>(true);
-            SimpleIoc.Default.Register<NewBroadcastMessageViewModel>(true);
-            SimpleIoc.Default.Register<ScriptBrickCategoryViewModel>(true);
-            SimpleIoc.Default.Register<AddNewScriptBrickViewModel>(true);
-            SimpleIoc.Default.Register<FormulaEditorViewModel>(true);
-            SimpleIoc.Default.Register<PlayerLauncherViewModel>(true);
-            SimpleIoc.Default.Register<TileGeneratorViewModel>(true);
-            SimpleIoc.Default.Register<VariableSelectionViewModel>(true);
-            SimpleIoc.Default.Register<AddNewGlobalVariableViewModel>(true);
-            SimpleIoc.Default.Register<AddNewLocalVariableViewModel>(true);
-            SimpleIoc.Default.Register<ChangeVariableViewModel>(true);
-            SimpleIoc.Default.Register<SpritesViewModel>(true);
-            SimpleIoc.Default.Register<SpriteEditorViewModel>(true);
-            SimpleIoc.Default.Register<ShareProjectServiceSelectionViewModel>(true);
-            SimpleIoc.Default.Register<UploadToSkyDriveViewModel>(true);
-            SimpleIoc.Default.Register<NewCostumeSourceSelectionViewModel>(true);
-            SimpleIoc.Default.Register<CostumeSavingViewModel>(true);
-            SimpleIoc.Default.Register<EditorLoadingViewModel>(true);
+            Core.Services.ServiceLocator.Register<MainViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<AddNewProjectViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<UploadProjectViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<UploadProjectLoadingViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<UploadProjectLoginViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<SoundRecorderViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<SettingsViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<SettingsBrickViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<SettingsLanguageViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<SettingsThemeViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<CostumeNameChooserViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<ChangeCostumeViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<NewSoundSourceSelectionViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<ChangeSoundViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<SoundNameChooserViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<AddNewSpriteViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<ChangeSpriteViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<ProjectSettingsViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<ProjectImportViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<OnlineProjectViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<NewBroadcastMessageViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<ScriptBrickCategoryViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<AddNewScriptBrickViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<FormulaEditorViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<PlayerLauncherViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<TileGeneratorViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<VariableSelectionViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<AddNewGlobalVariableViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<AddNewLocalVariableViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<ChangeVariableViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<SpritesViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<SpriteEditorViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<ShareProjectServiceSelectionViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<UploadToSkyDriveViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<NewCostumeSourceSelectionViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<CostumeSavingViewModel>(TypeCreationMode.Normal);
+            Core.Services.ServiceLocator.Register<EditorLoadingViewModel>(TypeCreationMode.Normal);
 
 
             if (ViewModelBase.IsInDesignModeStatic)
@@ -117,12 +116,12 @@ namespace Catrobat.IDE.Phone.ViewModel
                 _context.LocalSettings.CurrentLanguageString =
                     Core.Services.ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName;
 
-            var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
+            var themeChooser = (ThemeChooser)Core.Services.ServiceLocator.ThemeChooser;
             if (_context.LocalSettings.CurrentThemeIndex != -1)
                 themeChooser.SelectedThemeIndex = _context.LocalSettings.CurrentThemeIndex;
 
             if (_context.LocalSettings.CurrentLanguageString != null)
-                ServiceLocator.Current.GetInstance<SettingsViewModel>().CurrentCulture =
+                Core.Services.ServiceLocator.GetInstance<SettingsViewModel>().CurrentCulture =
                     new CultureInfo(_context.LocalSettings.CurrentLanguageString);
 
             var message1 = new GenericMessage<ThemeChooser>(themeChooser);
@@ -140,8 +139,8 @@ namespace Catrobat.IDE.Phone.ViewModel
             if (currentProject == null || _context == null)
                 return;
 
-            var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
-            var settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
+            var themeChooser = (ThemeChooser)Core.Services.ServiceLocator.ThemeChooser;
+            var settingsViewModel = Core.Services.ServiceLocator.GetInstance<SettingsViewModel>();
 
             if (themeChooser.SelectedTheme != null)
             {
@@ -166,7 +165,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<MainViewModel>();
             }
         }
 
@@ -177,7 +176,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<AddNewProjectViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<AddNewProjectViewModel>();
             }
         }
 
@@ -190,7 +189,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<ProjectSettingsViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<ProjectSettingsViewModel>();
             }
         }
 
@@ -201,7 +200,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<UploadProjectViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<UploadProjectViewModel>();
             }
         }
 
@@ -212,7 +211,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<UploadProjectLoadingViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<UploadProjectLoadingViewModel>();
             }
         }
 
@@ -223,7 +222,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<UploadProjectLoginViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<UploadProjectLoginViewModel>();
             }
         }
 
@@ -234,7 +233,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<SoundRecorderViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<SoundRecorderViewModel>();
             }
         }
 
@@ -245,7 +244,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<SettingsViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<SettingsViewModel>();
             }
         }
 
@@ -256,7 +255,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<SettingsBrickViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<SettingsBrickViewModel>();
             }
         }
 
@@ -267,7 +266,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<SettingsLanguageViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<SettingsLanguageViewModel>();
             }
         }
 
@@ -278,18 +277,18 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<SettingsThemeViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<SettingsThemeViewModel>();
             }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public CostumeNameChooserViewModel AddNewCostumeViewModel
+        public CostumeNameChooserViewModel CostumeNameChooserViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<CostumeNameChooserViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<CostumeNameChooserViewModel>();
             }
         }
 
@@ -300,7 +299,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<ChangeCostumeViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<ChangeCostumeViewModel>();
             }
         }
 
@@ -311,7 +310,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<ChangeSoundViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<ChangeSoundViewModel>();
             }
         }
 
@@ -322,7 +321,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<NewSoundSourceSelectionViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<NewSoundSourceSelectionViewModel>();
             }
         }
 
@@ -333,7 +332,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<SoundNameChooserViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<SoundNameChooserViewModel>();
             }
         }
 
@@ -344,7 +343,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<ChangeSpriteViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<ChangeSpriteViewModel>();
             }
         }
 
@@ -355,7 +354,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<AddNewSpriteViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<AddNewSpriteViewModel>();
             }
         }
 
@@ -366,7 +365,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<ProjectImportViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<ProjectImportViewModel>();
             }
         }
 
@@ -377,7 +376,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<OnlineProjectViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<OnlineProjectViewModel>();
             }
         }
 
@@ -388,7 +387,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<NewBroadcastMessageViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<NewBroadcastMessageViewModel>();
             }
         }
 
@@ -399,7 +398,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<ScriptBrickCategoryViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<ScriptBrickCategoryViewModel>();
             }
         }
 
@@ -410,7 +409,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<AddNewScriptBrickViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<AddNewScriptBrickViewModel>();
             }
         }
 
@@ -421,7 +420,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<FormulaEditorViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<FormulaEditorViewModel>();
             }
         }
 
@@ -432,7 +431,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<PlayerLauncherViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<PlayerLauncherViewModel>();
             }
         }
 
@@ -443,7 +442,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<TileGeneratorViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<TileGeneratorViewModel>();
             }
         }
 
@@ -454,7 +453,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<VariableSelectionViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<VariableSelectionViewModel>();
             }
         }
 
@@ -465,7 +464,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<AddNewGlobalVariableViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<AddNewGlobalVariableViewModel>();
             }
         }
 
@@ -476,7 +475,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<AddNewLocalVariableViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<AddNewLocalVariableViewModel>();
             }
         }
 
@@ -487,7 +486,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<ChangeVariableViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<ChangeVariableViewModel>();
             }
         }
 
@@ -498,7 +497,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<SpritesViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<SpritesViewModel>();
             }
         }
 
@@ -509,7 +508,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<SpriteEditorViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<SpriteEditorViewModel>();
             }
         }
 
@@ -521,7 +520,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<ShareProjectServiceSelectionViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<ShareProjectServiceSelectionViewModel>();
             }
         }
 
@@ -532,7 +531,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<UploadToSkyDriveViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<UploadToSkyDriveViewModel>();
             }
         }
 
@@ -543,7 +542,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<NewCostumeSourceSelectionViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<NewCostumeSourceSelectionViewModel>();
             }
         }
         
@@ -554,7 +553,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<CostumeSavingViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<CostumeSavingViewModel>();
             }
         }
 
@@ -565,7 +564,7 @@ namespace Catrobat.IDE.Phone.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<EditorLoadingViewModel>();
+                return Core.Services.ServiceLocator.GetInstance<EditorLoadingViewModel>();
             }
         }
 

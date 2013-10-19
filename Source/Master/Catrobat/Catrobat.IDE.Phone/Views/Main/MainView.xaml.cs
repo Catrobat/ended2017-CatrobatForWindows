@@ -7,15 +7,18 @@ using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Phone.ViewModel;
 using Catrobat.IDE.Phone.ViewModel.Main;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Main
 {
     public partial class MainView : PhoneApplicationPage
     {
-        private readonly MainViewModel _viewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+        private readonly MainViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).MainViewModel;
+
         private const int _offsetKnob = 5;
 
         public MainView()

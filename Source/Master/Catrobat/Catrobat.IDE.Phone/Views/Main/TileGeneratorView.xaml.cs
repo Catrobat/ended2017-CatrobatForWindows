@@ -4,12 +4,13 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Resources.Localization;
+using Catrobat.IDE.Phone.ViewModel;
 using Catrobat.IDE.Phone.ViewModel.Main;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Microsoft.Practices.ServiceLocation;
 using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDE.Phone.Views.Main
@@ -23,7 +24,8 @@ namespace Catrobat.IDE.Phone.Views.Main
         public Size NormalTileSize = new Size(336, 336);
         public Size WideTileSize = new Size(672, 336);
 
-        private readonly TileGeneratorViewModel _viewModel = ServiceLocator.Current.GetInstance<TileGeneratorViewModel>();
+        private readonly TileGeneratorViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).TileGeneratorViewModel;
 
         public TileGeneratorView()
         {

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows;
-using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;

@@ -1,15 +1,17 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Navigation;
 using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Phone.ViewModel;
 using Catrobat.IDE.Phone.ViewModel.Editor.Scripts;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Scripts
 {
     public partial class AddNewScriptBrickView : PhoneApplicationPage
     {
-        private readonly AddNewScriptBrickViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewScriptBrickViewModel>();
+        private readonly AddNewScriptBrickViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).AddNewScriptBrickViewModel;
 
         public AddNewScriptBrickView()
         {

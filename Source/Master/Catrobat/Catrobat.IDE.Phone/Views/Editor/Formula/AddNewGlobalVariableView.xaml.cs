@@ -1,13 +1,15 @@
 ﻿using System.Windows.Controls;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Phone.ViewModel;
 using Catrobat.IDE.Phone.ViewModel.Editor.Formula;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Formula
 {
     public partial class AddNewGlobalVariableView : PhoneApplicationPage
     {
-        private readonly AddNewGlobalVariableViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewGlobalVariableViewModel>();
+        private readonly AddNewGlobalVariableViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).AddNewGlobalVariableViewModel;
 
         public AddNewGlobalVariableView()
         {

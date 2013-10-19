@@ -1,14 +1,16 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Navigation;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Phone.ViewModel;
 using Catrobat.IDE.Phone.ViewModel.Service;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Service
 {
     public partial class UploadProjectView : PhoneApplicationPage
     {
-        private readonly UploadProjectViewModel _viewModel = ServiceLocator.Current.GetInstance<UploadProjectViewModel>();
+        private readonly UploadProjectViewModel _viewModel =
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).UploadProjectViewModel;
 
         public UploadProjectView()
         {

@@ -1,4 +1,5 @@
-using Catrobat.IDE.Core.Services.Common;
+using System.Windows;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Phone.Services;
 using Catrobat.IDE.Phone.Services.Storage;
 using Cirrious.CrossCore.Platform;
@@ -27,26 +28,28 @@ namespace Catrobat.IDE.Phone
 
         private static void InitializeInterfaces()
         {
-            Catrobat.IDE.Core.Services.ServiceLocator.SetServices(
-                new NavigationServicePhone(),
-                new SystemInformationServicePhone(),
-                new CultureServicePhone(),
-                new ImageResizeServicePhone(),
-                new PlayerLauncherServicePhone(),
-                new ResourceLoaderFactoryPhone(),
-                new StorageFactoryPhone(),
-                new ServerCommunicationServicePhone(),
-                new ImageSourceConversionServicePhone(),
-                new ProjectImporterServicePhone(),
-                new SoundPlayerServicePhone(),
-                new SoundRecorderServicePhone(),
-                new PictureServicePhone(),
-                new NotificationServicePhone(),
-                new ColorConversionServicePhone(),
-                new ShareServicePhone(),
-                new DispatcherServicePhone(),
-                new PortableUIElementsConvertionServicePhone()
-                );
+            ServiceLocator.ViewModelLocator = Application.Current.Resources["Locator"];
+            ServiceLocator.ThemeChooser = Application.Current.Resources["ThemeChooser"];
+            ServiceLocator.LocalizedStrings = Application.Current.Resources["LocalizedStrings"];
+
+            ServiceLocator.Register<NavigationServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SystemInformationServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<CultureServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ImageResizeServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<PlayerLauncherServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ResourceLoaderFactoryPhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<StorageFactoryPhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ServerCommunicationServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ImageSourceConversionServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ProjectImporterServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SoundPlayerServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SoundRecorderServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<PictureServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<NotificationServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ColorConversionServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ShareServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<DispatcherServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<PortableUIElementsConvertionServicePhone>(TypeCreationMode.Lazy);
         }
     }
 }

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Globalization;
-using System.Threading;
-using System.Windows;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Phone.Views.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;

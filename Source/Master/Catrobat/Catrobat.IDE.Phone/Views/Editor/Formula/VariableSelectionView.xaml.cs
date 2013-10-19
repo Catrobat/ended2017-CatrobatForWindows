@@ -1,14 +1,16 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Phone.ViewModel;
 using Catrobat.IDE.Phone.ViewModel.Editor.Formula;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Formula
 {
     public partial class VariableSelectionView : PhoneApplicationPage
     {
-        readonly VariableSelectionViewModel _viewModel = ServiceLocator.Current.GetInstance<VariableSelectionViewModel>();
+        readonly VariableSelectionViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).VariableSelectionViewModel;
 
         public VariableSelectionView()
         {

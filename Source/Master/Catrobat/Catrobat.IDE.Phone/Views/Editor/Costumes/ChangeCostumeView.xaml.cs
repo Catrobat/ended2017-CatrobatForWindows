@@ -1,14 +1,16 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Navigation;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Phone.ViewModel;
 using Catrobat.IDE.Phone.ViewModel.Editor.Costumes;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Costumes
 {
     public partial class ChangeCostumeView : PhoneApplicationPage
     {
-        private readonly ChangeCostumeViewModel _viewModel = ServiceLocator.Current.GetInstance<ChangeCostumeViewModel>();
+        private readonly ChangeCostumeViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).ChangeCostumeViewModel;
 
         public ChangeCostumeView()
         {

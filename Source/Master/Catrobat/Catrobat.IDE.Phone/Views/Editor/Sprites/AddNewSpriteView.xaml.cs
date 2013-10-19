@@ -1,14 +1,16 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Navigation;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Phone.ViewModel;
 using Catrobat.IDE.Phone.ViewModel.Editor.Sprites;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Sprites
 {
     public partial class AddNewSpriteView : PhoneApplicationPage
     {
-        private readonly AddNewSpriteViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewSpriteViewModel>();
+        private readonly AddNewSpriteViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).AddNewSpriteViewModel;
 
         public AddNewSpriteView()
         {

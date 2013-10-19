@@ -9,6 +9,7 @@
   xmlns:converters="clr-namespace:Catrobat.IDE.Phone.Converters"
   xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
   xmlns:catrobatObjects="clr-namespace:Catrobat.IDE.Core.CatrobatObjects;assembly=Catrobat.IDE.Core"
+  xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform.WP8"
   mc:Ignorable="d"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -19,7 +20,7 @@
     <Border BorderThickness="4" BorderBrush="White">
       <i:Interaction.Triggers>
         <i:EventTrigger EventName="Tap">
-          <mvvmLightExtras:EventToCommand Command="{Binding MainViewModel.SetCurrentProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
+          <command:EventToCommand Command="{Binding MainViewModel.SetCurrentProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
                                                           CommandParameter="{Binding ProjectName, Mode=OneWay}" />
         </i:EventTrigger>
       </i:Interaction.Triggers>

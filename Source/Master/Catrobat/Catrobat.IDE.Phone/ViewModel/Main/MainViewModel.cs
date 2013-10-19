@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Resources.Localization;
@@ -18,7 +17,6 @@ using System.Collections.ObjectModel;
 using System;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.Command;
-using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
 using System.Windows.Input;
 

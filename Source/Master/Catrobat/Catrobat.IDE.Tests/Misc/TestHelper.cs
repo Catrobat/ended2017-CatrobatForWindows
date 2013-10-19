@@ -43,9 +43,10 @@ namespace Catrobat.IDE.Tests.Misc
 
         internal static void InitializeTests()
         {
-            ServiceLocator.SetServices(null, new PlatformInformationHelperTests(), null, null,
-                null, new ResourceLoaderFactoryTest(), new StorageFactoryTest(), null, null,
-                null, null, null, null, null, null, null, null, null);
+            ServiceLocator.UnRegisterAll();
+            ServiceLocator.Register<PlatformInformationHelperTests>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<ResourceLoaderFactoryTest>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<StorageFactoryTest>(TypeCreationMode.Lazy);
         }
     }
 }

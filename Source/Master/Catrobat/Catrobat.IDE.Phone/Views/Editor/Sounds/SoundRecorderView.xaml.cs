@@ -1,14 +1,16 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Phone.ViewModel;
 using Catrobat.IDE.Phone.ViewModel.Editor.Sounds;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Sounds
 {
     public partial class SoundRecorderView : PhoneApplicationPage
     {
-        private readonly SoundRecorderViewModel _viewModel = ServiceLocator.Current.GetInstance<SoundRecorderViewModel>();
+        private readonly SoundRecorderViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).SoundRecorderViewModel;
 
         public SoundRecorderView()
         {

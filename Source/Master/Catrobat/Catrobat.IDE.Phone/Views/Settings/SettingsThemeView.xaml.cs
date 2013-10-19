@@ -1,15 +1,17 @@
 ﻿using System.Windows;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Phone.ViewModel;
 using Catrobat.IDE.Phone.ViewModel.Settings;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
 namespace Catrobat.IDE.Phone.Views.Settings
 {
     public partial class SettingsThemeView : PhoneApplicationPage
     {
-        private readonly SettingsThemeViewModel _viewModel = ServiceLocator.Current.GetInstance<SettingsThemeViewModel>();
+        private readonly SettingsThemeViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).SettingsThemeViewModel;
 
         public SettingsThemeView()
         {

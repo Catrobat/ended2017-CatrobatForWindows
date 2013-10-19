@@ -1,3 +1,4 @@
+using Catrobat.IDE.Core.Services;
 using Cirrious.CrossCore.IoC;
 
 namespace Catrobat.IDE.Core
@@ -6,6 +7,7 @@ namespace Catrobat.IDE.Core
     {
         public override void Initialize()
         {
+
             //CreatableTypes()
             //    .EndingWith("Service")
             //    .AsInterfaces()

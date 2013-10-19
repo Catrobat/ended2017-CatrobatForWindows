@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
-using System.Threading;
 using System.Windows;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.Services;
@@ -47,7 +46,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Settings
                 //Thread.CurrentThread.CurrentUICulture = value;
 
                 // todo: portable
-                ((LocalizedStrings)Application.Current.Resources["LocalizedStrings"]).Reset();
+                ((LocalizedStrings)ServiceLocator.LocalizedStrings).Reset();
                 RaisePropertyChanged(() => CurrentCulture);
             }
         }

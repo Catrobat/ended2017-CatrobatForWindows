@@ -1,14 +1,16 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Navigation;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Phone.ViewModel;
 using Catrobat.IDE.Phone.ViewModel.Editor.Scripts;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Scripts
 {
     public partial class NewBroadcastMessageView : PhoneApplicationPage
     {
-        private readonly NewBroadcastMessageViewModel _viewModel = ServiceLocator.Current.GetInstance<NewBroadcastMessageViewModel>();
+        private readonly NewBroadcastMessageViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).NewBroadcastMessageViewModel;
 
         public NewBroadcastMessageView()
         {

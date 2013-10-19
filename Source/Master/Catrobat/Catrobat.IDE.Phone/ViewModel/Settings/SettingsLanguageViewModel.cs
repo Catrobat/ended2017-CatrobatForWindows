@@ -1,13 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Threading;
 using System.Windows;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Resources.Localization;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Phone.ViewModel.Settings
 {
@@ -39,7 +36,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Settings
                 //Thread.CurrentThread.CurrentUICulture = value;
 
                 // TODO: portable
-                ((LocalizedStrings)Application.Current.Resources["LocalizedStrings"]).Reset();
+                ((LocalizedStrings)ServiceLocator.LocalizedStrings).Reset();
                 RaisePropertyChanged(() => CurrentCulture);
             }
         }

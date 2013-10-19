@@ -1,14 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Globalization;
-using System.Threading;
-using System.Windows;
 using System.Windows.Input;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Phone.Views.Settings;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
