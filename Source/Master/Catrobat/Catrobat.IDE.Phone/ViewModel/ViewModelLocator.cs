@@ -36,6 +36,9 @@ namespace Catrobat.IDE.Phone.ViewModel
             SimpleIoc.Default.Register<UploadProjectLoginViewModel>(true);
             SimpleIoc.Default.Register<SoundRecorderViewModel>(true);
             SimpleIoc.Default.Register<SettingsViewModel>(true);
+            SimpleIoc.Default.Register<SettingsBrickViewModel>(true);
+            SimpleIoc.Default.Register<SettingsLanguageViewModel>(true);
+            SimpleIoc.Default.Register<SettingsThemeViewModel>(true);
             SimpleIoc.Default.Register<CostumeNameChooserViewModel>(true);
             SimpleIoc.Default.Register<ChangeCostumeViewModel>(true);
             SimpleIoc.Default.Register<NewSoundSourceSelectionViewModel>(true);
@@ -110,7 +113,7 @@ namespace Catrobat.IDE.Phone.ViewModel
 
             if (_context.LocalSettings.CurrentLanguageString == null)
                 _context.LocalSettings.CurrentLanguageString =
-                    Catrobat.IDE.Core.Services.ServiceLocator.CulureService.GetToLetterCultureColde();
+                    Core.Services.ServiceLocator.CulureService.GetToLetterCultureColde();
 
             var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
             if (_context.LocalSettings.CurrentThemeIndex != -1)
@@ -230,6 +233,39 @@ namespace Catrobat.IDE.Phone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<SettingsViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public SettingsBrickViewModel SettingsBrickViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SettingsBrickViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public SettingsLanguageViewModel SettingsLanguageViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SettingsLanguageViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public SettingsThemeViewModel SettingsThemeViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SettingsThemeViewModel>();
             }
         }
 

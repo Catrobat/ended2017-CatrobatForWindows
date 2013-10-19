@@ -221,6 +221,9 @@
     <Compile Include="ViewModel\Service\OnlineProjectViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectLoginViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectViewModel.cs" />
+    <Compile Include="ViewModel\Settings\SettingsThemeViewModel.cs" />
+    <Compile Include="ViewModel\Settings\SettingsLanguageViewModel.cs" />
+    <Compile Include="ViewModel\Settings\SettingsBrickViewModel.cs" />
     <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Share\UploadToSkyDriveViewModel.cs" />
     <Compile Include="ViewModel\Share\ShareProjectServiceSelectionViewModel.cs" />

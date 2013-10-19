@@ -9,7 +9,7 @@ namespace Catrobat.IDE.Phone.Views.Settings
 {
     public partial class SettingsThemeView : PhoneApplicationPage
     {
-        private readonly SettingsViewModel _settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
+        private readonly SettingsThemeViewModel _viewModel = ServiceLocator.Current.GetInstance<SettingsThemeViewModel>();
 
         public SettingsThemeView()
         {
@@ -22,7 +22,7 @@ namespace Catrobat.IDE.Phone.Views.Settings
             if (frameworkElement != null)
             {
                 var theme = frameworkElement.DataContext as Theme;
-                _settingsViewModel.ActiveThemeChangedCommand.Execute(theme);
+                _viewModel.ActiveThemeChangedCommand.Execute(theme);
             }
         }
     }
