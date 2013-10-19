@@ -4,10 +4,7 @@ using System.Windows;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources;
-using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Phone.Services;
-using Catrobat.IDE.Phone.Services.Storage;
 using Catrobat.IDE.Phone.ViewModel.Editor;
 using Catrobat.IDE.Phone.ViewModel.Editor.Costumes;
 using Catrobat.IDE.Phone.ViewModel.Editor.Formula;
@@ -39,16 +36,21 @@ namespace Catrobat.IDE.Phone.ViewModel
             SimpleIoc.Default.Register<UploadProjectLoginViewModel>(true);
             SimpleIoc.Default.Register<SoundRecorderViewModel>(true);
             SimpleIoc.Default.Register<SettingsViewModel>(true);
-            SimpleIoc.Default.Register<AddNewCostumeViewModel>(true);
+            SimpleIoc.Default.Register<SettingsBrickViewModel>(true);
+            SimpleIoc.Default.Register<SettingsLanguageViewModel>(true);
+            SimpleIoc.Default.Register<SettingsThemeViewModel>(true);
+            SimpleIoc.Default.Register<CostumeNameChooserViewModel>(true);
             SimpleIoc.Default.Register<ChangeCostumeViewModel>(true);
-            SimpleIoc.Default.Register<AddNewSoundViewModel>(true);
+            SimpleIoc.Default.Register<NewSoundSourceSelectionViewModel>(true);
             SimpleIoc.Default.Register<ChangeSoundViewModel>(true);
+            SimpleIoc.Default.Register<SoundNameChooserViewModel>(true);
             SimpleIoc.Default.Register<AddNewSpriteViewModel>(true);
             SimpleIoc.Default.Register<ChangeSpriteViewModel>(true);
             SimpleIoc.Default.Register<ProjectSettingsViewModel>(true);
             SimpleIoc.Default.Register<ProjectImportViewModel>(true);
             SimpleIoc.Default.Register<OnlineProjectViewModel>(true);
             SimpleIoc.Default.Register<NewBroadcastMessageViewModel>(true);
+            SimpleIoc.Default.Register<ScriptBrickCategoryViewModel>(true);
             SimpleIoc.Default.Register<AddNewScriptBrickViewModel>(true);
             SimpleIoc.Default.Register<FormulaEditorViewModel>(true);
             SimpleIoc.Default.Register<PlayerLauncherViewModel>(true);
@@ -61,6 +63,8 @@ namespace Catrobat.IDE.Phone.ViewModel
             SimpleIoc.Default.Register<SpriteEditorViewModel>(true);
             SimpleIoc.Default.Register<ShareProjectServiceSelectionViewModel>(true);
             SimpleIoc.Default.Register<UploadToSkyDriveViewModel>(true);
+            SimpleIoc.Default.Register<NewCostumeSourceSelectionViewModel>(true);
+            SimpleIoc.Default.Register<CostumeSavingViewModel>(true);
             
 
             if (ViewModelBase.IsInDesignModeStatic)
@@ -109,7 +113,7 @@ namespace Catrobat.IDE.Phone.ViewModel
 
             if (_context.LocalSettings.CurrentLanguageString == null)
                 _context.LocalSettings.CurrentLanguageString =
-                    Catrobat.IDE.Core.Services.ServiceLocator.CulureService.GetToLetterCultureColde();
+                    Core.Services.ServiceLocator.CulureService.GetToLetterCultureColde();
 
             var themeChooser = (ThemeChooser)Application.Current.Resources["ThemeChooser"];
             if (_context.LocalSettings.CurrentThemeIndex != -1)
@@ -235,11 +239,44 @@ namespace Catrobat.IDE.Phone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public AddNewCostumeViewModel AddNewCostumeViewModel
+        public SettingsBrickViewModel SettingsBrickViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<AddNewCostumeViewModel>();
+                return ServiceLocator.Current.GetInstance<SettingsBrickViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public SettingsLanguageViewModel SettingsLanguageViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SettingsLanguageViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public SettingsThemeViewModel SettingsThemeViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SettingsThemeViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public CostumeNameChooserViewModel AddNewCostumeViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CostumeNameChooserViewModel>();
             }
         }
 
@@ -268,11 +305,22 @@ namespace Catrobat.IDE.Phone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public AddNewSoundViewModel AddNewSoundViewModel
+        public NewSoundSourceSelectionViewModel NewSoundSourceSelectionViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<AddNewSoundViewModel>();
+                return ServiceLocator.Current.GetInstance<NewSoundSourceSelectionViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public SoundNameChooserViewModel SoundNameChooserViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SoundNameChooserViewModel>();
             }
         }
 
@@ -328,6 +376,17 @@ namespace Catrobat.IDE.Phone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<NewBroadcastMessageViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public ScriptBrickCategoryViewModel ScriptBrickCategoryViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ScriptBrickCategoryViewModel>();
             }
         }
 
@@ -463,8 +522,30 @@ namespace Catrobat.IDE.Phone.ViewModel
                 return ServiceLocator.Current.GetInstance<UploadToSkyDriveViewModel>();
             }
         }
-        
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+           "CA1822:MarkMembersAsStatic",
+           Justification = "This non-static member is needed for data binding purposes.")]
+        public NewCostumeSourceSelectionViewModel NewCostumeSourceSelectionViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<NewCostumeSourceSelectionViewModel>();
+            }
+        }
+        
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+           "CA1822:MarkMembersAsStatic",
+           Justification = "This non-static member is needed for data binding purposes.")]
+        public CostumeSavingViewModel CostumeSavingViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CostumeSavingViewModel>();
+            }
+        }
+
+        
         public static void Cleanup()
         {
         }

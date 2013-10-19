@@ -1,18 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Utilities.Helpers;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Phone.Views.Editor.Sounds;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
 {
@@ -20,8 +13,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
     {
         #region Private Members
 
-        private Project _currentProject;
-        private Sprite _receivedSelectedSprite;
         private Task _recordTimeUpdateTask;
         private DateTime _recorderStartTime;
         private TimeSpan _recorderTimeGoneBy;
@@ -39,17 +30,11 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
         private string _resetButtonText;
         private string _recordButtonHeader;
         private string _resetButtonHeader;
-        private string _soundName;
 
         #endregion
 
         #region Properties
 
-        public Project CurrentProject
-        {
-            get { return _currentProject; }
-            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
-        }
         public bool IsRecording
         {
             get { return _isRecording; }
@@ -178,21 +163,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
             }
         }
 
-        public string SoundName
-        {
-            get { return _soundName; }
-            set
-            {
-                if (value == _soundName)
-                {
-                    return;
-                }
-                _soundName = value;
-                RaisePropertyChanged(() => SoundName);
-                SaveNameChosenCommand.RaiseCanExecuteChanged();
-            }
-        }
-
         #endregion
 
         #region Commands
@@ -207,10 +177,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
 
         public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand SaveNameChosenCommand { get; private set; }
-
-        public RelayCommand CancelNameChosenCommand { get; private set; }
-
         public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
@@ -220,11 +186,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
         private bool SaveCommand_CanExecute()
         {
             return RecordingExists;
-        }
-
-        private bool SaveNameChosenCommand_CanExecute()
-        {
-            return SoundName != null && SoundName.Length >= 2;
         }
 
         #endregion
@@ -287,7 +248,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
             IsRecording = !IsRecording;
         }
 
-        private void ResetAction()
+        private static void ResetAction()
         {
             ServiceLocator.SoundRecorderService.StopPlayingRecordedSound();
             ServiceLocator.SoundRecorderService.StopRecording();
@@ -351,10 +312,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
             }
         }
 
-        private void SaveAction()
+        private static void SaveAction()
         {
-            SoundName = AppResources.Editor_Recording;
-            ServiceLocator.NavigationService.NavigateTo(typeof(SoundNameChooserView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(SoundNameChooserViewModel));
         }
 
         private void CancelAction()
@@ -366,41 +326,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
             ServiceLocator.NavigationService.NavigateBack();
         }
 
-        private void SaveNameChosenAction()
-        {
-            var sound = new Sound(SoundName);
-            var path = CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
-
-            using (var storage = StorageSystem.GetStorage())
-            {
-                using (var stream = storage.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write))
-                {
-                    var writer = new BinaryWriter(stream);
-
-                    WaveHeaderHelper.WriteHeader(writer.BaseStream, ServiceLocator.SoundRecorderService.SampleRate);
-                    var dataBuffer = ServiceLocator.SoundRecorderService.GetSoundAsStream().GetBuffer();
-                    writer.Write(dataBuffer, 0, (int)ServiceLocator.SoundRecorderService.GetSoundAsStream().Length);
-                    writer.Flush();
-                    writer.Close();
-                }
-            }
-
-            _receivedSelectedSprite.Sounds.Sounds.Add(sound);
-
-            ResetViewModel();
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            ServiceLocator.NavigationService.NavigateBack();
-        }
-
-        private void CancelNameChosenAction()
-        {
-            SoundName = null;
-            UpdateTextProperties();
-
-            ServiceLocator.NavigationService.NavigateBack();
-        }
-
         private void ResetViewModelAction()
         {
             ResetViewModel();
@@ -408,19 +333,11 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
 
         #endregion
 
-
         #region MessageActions
 
-        private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
-        {
-            _receivedSelectedSprite = message.Content;
-        }
 
-        private void CurrentProjectChangedAction(GenericMessage<Project> message)
-        {
-            CurrentProject = message.Content;
-        }
         #endregion
+
         public SoundRecorderViewModel()
         {
             StartRecordingCommand = new RelayCommand(StartRecordingAction);
@@ -428,15 +345,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
             PlayPauseCommand = new RelayCommand(PlayPauseAction);
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
-            SaveNameChosenCommand = new RelayCommand(SaveNameChosenAction, SaveNameChosenCommand_CanExecute);
-            CancelNameChosenCommand = new RelayCommand(CancelNameChosenAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
-
-            Messenger.Default.Register<GenericMessage<Sprite>>(this,
-                ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
-
-            Messenger.Default.Register<GenericMessage<Project>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
 
             UpdateTextProperties();
 
@@ -473,7 +382,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
 
         private void ResetViewModel()
         {
-            SoundName = null;
             IsPlaying = false;
             IsRecording = false;
             RecordingExists = false;

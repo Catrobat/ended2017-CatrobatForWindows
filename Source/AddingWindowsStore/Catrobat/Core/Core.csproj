@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A4E10BED-8F56-46A6-B78D-BFEF1363B195}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Catrobat.Core</RootNamespace>
+    <AssemblyName>Catrobat.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <Content Include="lib\SharpCompress.WP7.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="CatrobatObjects\Scripts\ScriptBrickCollection.cs" />
+    <Compile Include="CatrobatObjects\Scripts\ScriptBrickIterator.cs" />
+    <Compile Include="CatrobatContext.cs" />
+    <Compile Include="CatrobatContextDesign.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="ExtensionMethods\StringExtensions.cs" />
+    <Compile Include="Services\Common\ProjectImporterService.cs" />
+    <Compile Include="Services\IProjectImporterService.cs" />
+    <Compile Include="Services\ISoundPlayerService.cs" />
+    <Compile Include="Services\ISoundRecorderService.cs" />
+    <Compile Include="Utilities\Helpers\CostumeHelper.cs" />
+    <Compile Include="Utilities\Helpers\StringFormatHelper.cs" />
+    <Compile Include="Utilities\Helpers\FileNameGenerationHelper.cs" />
+    <Compile Include="Utilities\Helpers\WaveHeaderHelper.cs" />
+    <Compile Include="Services\Data\PortableImage.cs" />
+    <Compile Include="Services\Common\CatrobatWebFormUploadService.cs" />
+    <Compile Include="Services\Common\CatrobatZipService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Data\ImageDimention.cs" />
+    <Compile Include="Services\ICultureService.cs" />
+    <Compile Include="Utilities\Helpers\LanguageHelper.cs" />
+    <Compile Include="Utilities\MD5.cs" />
+    <Compile Include="Services\IImageResizeService.cs" />
+    <Compile Include="Services\IImageSourceConversionService.cs" />
+    <Compile Include="Services\ISystemInformationService.cs" />
+    <Compile Include="Utilities\Helpers\XmlParserTempProjectHelper.cs" />
+    <Compile Include="Utilities\Helpers\ReferenceHelper.cs" />
+    <Compile Include="CatrobatContextBase.cs" />
+    <Compile Include="LocalSettings.cs" />
+    <Compile Include="Utilities\Helpers\VariableHelper.cs" />
+    <Compile Include="Utilities\JSON\JSONClassDeserializer.cs" />
+    <Compile Include="Utilities\JSON\JSONStatusResponse.cs" />
+    <Compile Include="Utilities\Helpers\PropertyHelper.cs" />
+    <Compile Include="Services\IServerCommunicationService.cs" />
+    <Compile Include="Services\Common\CatrobatWebCommunicationService.cs" />
+    <Compile Include="Utilities\MvvmCrossSetup.cs" />
+    <Compile Include="Utilities\UtilToken.cs" />
+    <Compile Include="CatrobatObjects\Bricks\Brick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\BrickList.cs" />
+    <Compile Include="CatrobatObjects\Bricks\BroadcastBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\BroadcastWaitBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\ChangeBrightnessBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\ChangeGhostEffectBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\ChangeSizeByNBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\ChangeVolumeByBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\ChangeXByBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\ChangeYByBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\ClearGraphicEffectBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\ComeToFrontBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\ChangeVariableBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\RepeatLoopEndBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\ForeverLoopEndBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\IfLogicEndBrickReference.cs" />
+    <Compile Include="CatrobatObjects\Bricks\IfLogicElseBrickReference.cs" />
+    <Compile Include="CatrobatObjects\Bricks\IfLogicBeginBrickReference.cs" />
+    <Compile Include="CatrobatObjects\Bricks\IfLogicEndBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\IfLogicElseBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\IfLogicBeginBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\SetVariableBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\ForeverBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\GlideToBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\GoNStepsBackBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\HideBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\IfOnEdgeBounceBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\LoopBeginBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\LoopBeginBrickReference.cs" />
+    <Compile Include="CatrobatObjects\Bricks\LoopEndBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\LoopEndBrickReference.cs" />
+    <Compile Include="CatrobatObjects\Bricks\MoveNStepsBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\NextCostumeBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\NoteBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\NxtMotorActionBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\NxtMotorStopBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\NxtMotorTurnAngleBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\NxtPlayToneBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\PlaceAtBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\PlaySoundBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\PointInDirectionBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\PointToBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\RepeatBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\SetBrightnessBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\SetCostumeBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\SetGhostEffectBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\SetSizeToBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\SetVolumeToBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\SetXBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\SetYBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\ShowBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\SpeakBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\StopAllSoundsBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\TurnLeftBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\TurnRightBrick.cs" />
+    <Compile Include="CatrobatObjects\Bricks\WaitBrick.cs" />
+    <Compile Include="CatrobatObjects\Costumes\Costume.cs" />
+    <Compile Include="CatrobatObjects\Costumes\CostumeList.cs" />
+    <Compile Include="CatrobatObjects\Costumes\CostumeReference.cs" />
+    <Compile Include="CatrobatObjects\DataObject.cs" />
+    <Compile Include="CatrobatObjects\DataRootObject.cs" />
+    <Compile Include="CatrobatObjects\Formulas\Formula.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaTree.cs" />
+    <Compile Include="CatrobatObjects\OnlineProjectHeader.cs" />
+    <Compile Include="CatrobatObjects\Project.cs" />
+    <Compile Include="CatrobatObjects\ProjectDummyHeader.cs" />
+    <Compile Include="CatrobatObjects\ProjectHeader.cs" />
+    <Compile Include="CatrobatObjects\Scripts\BroadcastScript.cs" />
+    <Compile Include="CatrobatObjects\Scripts\Script.cs" />
+    <Compile Include="CatrobatObjects\Scripts\ScriptList.cs" />
+    <Compile Include="CatrobatObjects\Scripts\StartScript.cs" />
+    <Compile Include="CatrobatObjects\Scripts\WhenScript.cs" />
+    <Compile Include="CatrobatObjects\Sounds\Sound.cs" />
+    <Compile Include="CatrobatObjects\Sounds\SoundReference.cs" />
+    <Compile Include="CatrobatObjects\Sounds\SoundList.cs" />
+    <Compile Include="CatrobatObjects\Sprite.cs" />
+    <Compile Include="CatrobatObjects\SpriteList.cs" />
+    <Compile Include="CatrobatObjects\SpriteReference.cs" />
+    <Compile Include="CatrobatObjects\Variables\ProgramVariableList.cs" />
+    <Compile Include="CatrobatObjects\Variables\ObjectVariableList.cs" />
+    <Compile Include="CatrobatObjects\Variables\ObjectVariableEntry.cs" />
+    <Compile Include="CatrobatObjects\Variables\UserVariable.cs" />
+    <Compile Include="CatrobatObjects\Variables\UserVariableReference.cs" />
+    <Compile Include="CatrobatObjects\Variables\UserVariableList.cs" />
+    <Compile Include="CatrobatObjects\Variables\VariableList.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\ApplicationResources.Designer.cs">
+      <DependentUpon>ApplicationResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\SampleProjectLoader.cs" />
+    <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Services\IPlayerLauncherService.cs" />
+    <Compile Include="Services\ServiceLocator.cs" />
+    <Compile Include="Services\Storage\IResourceLoaderFactory.cs" />
+    <Compile Include="Services\Storage\IResourceLoader.cs" />
+    <Compile Include="Services\Storage\IStorage.cs" />
+    <Compile Include="Services\Storage\IStorageFactory.cs" />
+    <Compile Include="Services\Storage\StorageSystem.cs" />
+    <Compile Include="VersionConverter\CatrobatVersion.cs" />
+    <Compile Include="VersionConverter\CatrobatVersionElementRenameEntry.cs" />
+    <Compile Include="VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
+    <Compile Include="VersionConverter\CatrobatVersionPair.cs" />
+    <Compile Include="VersionConverter\CatrobatVersionConverter.cs" />
+    <Compile Include="VersionConverter\Versions\CatrobatVersion091ToWin091.cs" />
+    <Compile Include="Utilities\Helpers\XPathHelper.cs" />
+    <Compile Include="Utilities\XmlStringWriter.cs" />
+    <Compile Include="ViewModels\FirstViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ApplicationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Cirrious.CrossCore">
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.CrossCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross">
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Localization">
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Plugins.PictureChooser">
+      <HintPath>..\packages\MvvmCross.HotTuna.Plugin.PictureChooser.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Plugins.PictureChooser.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.14-rc\lib\portable-net45+win8+wp8\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.14-rc\lib\portable-net45+win8+wp8\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpCompress.WP7, Version=0.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\SharpCompress.WP7.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

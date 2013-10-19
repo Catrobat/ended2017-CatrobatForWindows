@@ -10,6 +10,8 @@ namespace Catrobat.IDE.Core
 
         public string CurrentLanguageString { get; set; }
 
+        public bool IsNxtBricksEnabled { get; set; }
+
         public int CurrentThemeIndex { get; set; }
 
         public string CurrentUserEmail { get; set; }

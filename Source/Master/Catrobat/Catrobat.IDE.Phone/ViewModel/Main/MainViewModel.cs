@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
@@ -14,12 +13,8 @@ using Catrobat.IDE.Phone.ViewModel.Editor;
 using Catrobat.IDE.Phone.ViewModel.Service;
 using Catrobat.IDE.Phone.ViewModel.Settings;
 using Catrobat.IDE.Phone.ViewModel.Share;
-using Catrobat.IDE.Phone.Views.Main;
-using Catrobat.IDE.Phone.Views.Share;
-using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.Command;
@@ -27,7 +22,6 @@ using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
 using System.Windows.Input;
 using Catrobat.IDE.Phone.Views.Service;
-using Catrobat.IDE.Phone.Views.Settings;
 using Catrobat.IDE.Phone.Views.Editor;
 
 namespace Catrobat.IDE.Phone.ViewModel.Main

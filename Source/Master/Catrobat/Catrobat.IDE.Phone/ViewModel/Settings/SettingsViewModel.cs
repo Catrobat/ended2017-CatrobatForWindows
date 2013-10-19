@@ -1,14 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
-using System.Windows.Input;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Phone.Views.Settings;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -36,11 +32,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Settings
             get { return Debugger.IsAttached; }
         }
 
-        public ObservableCollection<Theme> AvailableThemes
-        {
-            get { return _themeChooser.Themes; }
-        }
-
         public CultureInfo CurrentCulture
         {
             get { return Thread.CurrentThread.CurrentCulture; }
@@ -60,11 +51,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Settings
             }
         }
 
-        public ObservableCollection<CultureInfo> AvailableCultures
-        {
-            get { return LanguageHelper.SupportedLanguages; }
-        }
-
         #endregion
 
         #region Commands
@@ -75,31 +61,23 @@ namespace Catrobat.IDE.Phone.ViewModel.Settings
 
         public RelayCommand ShowLanguageSettingsCommand { get; private set; }
 
-        public ICommand ActiveThemeChangedCommand { get; private set; }
-
         #endregion
 
         #region Actions
 
-        private void ShowDesignSettingsAction()
+        private static void ShowDesignSettingsAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsThemeView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsThemeViewModel));
         }
 
-        private void ShowBrickSettingsAction()
+        private static void ShowBrickSettingsAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsBrickView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsBrickViewModel));
         }
 
-        private void ShowLanguageSettingsAction()
+        private static void ShowLanguageSettingsAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsLanguageView));
-        }
-
-        private void ActiveThemeChangedAction(Theme newTheme)
-        {
-            ThemeChooser.SelectedTheme = newTheme;
-            ServiceLocator.NavigationService.NavigateBack();
+            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsLanguageViewModel));
         }
 
         #endregion
@@ -118,7 +96,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Settings
             ShowDesignSettingsCommand = new RelayCommand(ShowDesignSettingsAction);
             ShowBrickSettingsCommand = new RelayCommand(ShowBrickSettingsAction);
             ShowLanguageSettingsCommand = new RelayCommand(ShowLanguageSettingsAction);
-            ActiveThemeChangedCommand = new RelayCommand<Theme>(ActiveThemeChangedAction);
 
             Messenger.Default.Register<GenericMessage<ThemeChooser>>(this,
                  ViewModelMessagingToken.ThemeChooserListener, ThemeChooserInitializedMessageAction);

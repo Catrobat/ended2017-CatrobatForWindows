@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<program>
+  <objectList>
+    <object>
+      <lookList />
+      <name>Hintergrund</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <foreverBrick>
+              <loopEndBrick class="loopEndlessBrick" reference="../../loopEndlessBrick[1]" />
+            </foreverBrick>
+            <loopEndlessBrick>
+              <loopBeginBrick class="foreverBrick" reference="../../foreverBrick[1]" />
+            </loopEndlessBrick>
+          </brickList>
+        </startScript>
+      </scriptList>
+      <soundList />
+    </object>
+  </objectList>
+  <variables>
+  </variables>
+</program>
