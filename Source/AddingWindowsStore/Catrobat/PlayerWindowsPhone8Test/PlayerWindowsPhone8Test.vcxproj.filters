@@ -1,0 +1,522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>17b52f90-9b33-4188-8a0e-808582bbabbc</UniqueIdentifier>
+      <Extensions>ico;bmp;dlg;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;resw;resjson</Extensions>
+    </Filter>
+    <Filter Include="PlayerWindowsPhone8Files">
+      <UniqueIdentifier>{9d11dd5d-4f86-4563-8745-12d07ab6af83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FormulaTests">
+      <UniqueIdentifier>{5892d712-3166-450c-a773-0663b96441d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestFiles">
+      <UniqueIdentifier>{20839112-92e5-4528-8e5c-6af2326ae07d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XMLParserTests">
+      <UniqueIdentifier>{e1b39ba0-bf86-410e-863e-3c5cdb9e1c05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XMLParserTests\BrickTests">
+      <UniqueIdentifier>{69006a30-9a2a-4a8d-bac3-9a4723f74d9b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\ApplicationIcon.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\AlignmentGrid.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\FlipCycleTileLarge.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\FlipCycleTileMedium.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\FlipCycleTileSmall.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\IconicTileMediumLarge.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Tiles\IconicTileSmall.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseObject.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Brick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BroadcastBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BroadcastMessageDaemon.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BroadcastMessageListener.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BroadcastMessageSender.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BroadcastScript.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ChangeGhostEffectByBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ChangeSizeByBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ChangeVariableBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ChangeXByBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ChangeYByBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ContainerBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\CostumeBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\DDSLoader.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Direct3DBase.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ForeverBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTree.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\GlideToBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\HideBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\IfBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Interpreter.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\lodepng.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\lodepng_util.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Look.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\NextLookBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Object.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ObjectList.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlaceAtBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlaySoundBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PointToBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Project.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ProjectDaemon.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ProjectRenderer.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Renderer.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\RepeatBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Script.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ScriptHandler.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SetGhostEffectBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SetSizeToBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SetVariableBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SetXBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SetYBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ShowBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Sound.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SoundInfo.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SoundManager.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\StartScript.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\TextureDaemon.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\TurnLeftBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\TurnRightBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\UserVariable.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\VariableManagementBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\WaitBrick.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\WhenScript.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParser.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LookBricks.cpp" />
+    <ClCompile Include="TestHelper.cpp" />
+    <ClCompile Include="MovementBricks.cpp" />
+    <ClCompile Include="ControlBricks.cpp" />
+    <ClCompile Include="BasicArithmeticalOperations.cpp">
+      <Filter>FormulaTests</Filter>
+    </ClCompile>
+    <ClCompile Include="FormulaTreeTests.cpp">
+      <Filter>FormulaTests</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableBricks.cpp" />
+    <ClCompile Include="Variables.cpp" />
+    <ClCompile Include="LogicOperations.cpp">
+      <Filter>FormulaTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Helper.cpp" />
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ExceptionLogger.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FormulaFunctionTests.cpp">
+      <Filter>FormulaTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTreeException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserFatalException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTreeFatalException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlayerException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IfLogicBeginBrick.cpp">
+      <Filter>XMLParserTests\BrickTests</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLParserTests.cpp">
+      <Filter>XMLParserTests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseObject.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BasicTimer.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Brick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BroadcastBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BroadcastMessageDaemon.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BroadcastMessageListener.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BroadcastMessageSender.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BroadcastScript.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ChangeGhostEffectByBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ChangeSizeByBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ChangeVariableBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ChangeXByBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ChangeYByBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ContainerBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\CostumeBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\DDSLoader.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Direct3DBase.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\DirectXHelper.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ForeverBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTree.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\GlideToBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\HideBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\IfBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Interpreter.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\lodepng.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\lodepng_util.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Look.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\NextLookBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Object.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ObjectList.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlaceAtBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlaySoundBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PointToBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Project.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ProjectDaemon.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ProjectRenderer.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Renderer.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\RepeatBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Script.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ScriptHandler.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SetGhostEffectBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SetSizeToBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SetVariableBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SetXBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SetYBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ShowBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Sound.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SoundInfo.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\SoundManager.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\StartScript.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\TextureDaemon.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\TurnLeftBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\TurnRightBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\UserVariable.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\VariableManagementBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\WaitBrick.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\WhenScript.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParser.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestHelper.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Helper.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\ExceptionLogger.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Constants.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTreeException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserFatalException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\FormulaTreeFatalException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlayerException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestApp.dll" />
+    <None Include="AppManifest.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="WMAppManifest.xml" />
+    <Xml Include="testFiles\HeaderTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\BroadcastTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\ObjectListTest2.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\ObjectListTest1.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\CompassTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\ForeverTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\GlobalVariableReferencesTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\IfLogicBeginTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\LocalVariableReferencesTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\LookReferencesTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\ObjectReferencesTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\PointToTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\RepeatTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+    <Xml Include="testFiles\SoundReferencesTest.xml">
+      <Filter>TestFiles</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>
