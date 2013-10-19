@@ -201,6 +201,7 @@
     <Compile Include="ViewModel\Editor\Formula\ChangeVariableViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\FormulaEditorViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\VariableSelectionViewModel.cs" />
+    <Compile Include="ViewModel\Editor\EditorLoadingViewModel.cs" />
     <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\AddNewScriptBrickViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\ScriptBrickCategoryViewModel.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="ViewModel\Main\PlayerLauncherViewModel.cs" />
     <Compile Include="ViewModel\Main\ProjectImportViewModel.cs" />
     <Compile Include="ViewModel\Main\TileGeneratorViewModel.cs" />
+    <Compile Include="ViewModel\Service\UploadProjectLoadingViewModel.cs" />
     <Compile Include="ViewModel\Service\OnlineProjectViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectLoginViewModel.cs" />
     <Compile Include="ViewModel\Service\UploadProjectViewModel.cs" />
@@ -317,8 +319,8 @@
     <Compile Include="Views\Service\UploadProjectLoginView.xaml.cs">
       <DependentUpon>UploadProjectLoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service\UploadProjectsLoadingView.xaml.cs">
-      <DependentUpon>UploadProjectsLoadingView.xaml</DependentUpon>
+    <Compile Include="Views\Service\UploadProjectLoadingView.xaml.cs">
+      <DependentUpon>UploadProjectLoadingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Service\UploadProjectView.xaml.cs">
       <DependentUpon>UploadProjectView.xaml</DependentUpon>
@@ -551,7 +553,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Service\UploadProjectsLoadingView.xaml">
+    <Page Include="Views\Service\UploadProjectLoadingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

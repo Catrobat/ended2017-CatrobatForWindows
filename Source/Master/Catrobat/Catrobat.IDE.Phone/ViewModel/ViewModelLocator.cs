@@ -33,6 +33,7 @@ namespace Catrobat.IDE.Phone.ViewModel
             SimpleIoc.Default.Register<MainViewModel>(true);
             SimpleIoc.Default.Register<AddNewProjectViewModel>(true);
             SimpleIoc.Default.Register<UploadProjectViewModel>(true);
+            SimpleIoc.Default.Register<UploadProjectLoadingViewModel>(true);
             SimpleIoc.Default.Register<UploadProjectLoginViewModel>(true);
             SimpleIoc.Default.Register<SoundRecorderViewModel>(true);
             SimpleIoc.Default.Register<SettingsViewModel>(true);
@@ -65,7 +66,8 @@ namespace Catrobat.IDE.Phone.ViewModel
             SimpleIoc.Default.Register<UploadToSkyDriveViewModel>(true);
             SimpleIoc.Default.Register<NewCostumeSourceSelectionViewModel>(true);
             SimpleIoc.Default.Register<CostumeSavingViewModel>(true);
-            
+            SimpleIoc.Default.Register<EditorLoadingViewModel>(true);
+
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -200,6 +202,17 @@ namespace Catrobat.IDE.Phone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<UploadProjectViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public UploadProjectLoadingViewModel UploadProjectLoadingViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<UploadProjectLoadingViewModel>();
             }
         }
 
@@ -542,6 +555,17 @@ namespace Catrobat.IDE.Phone.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<CostumeSavingViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+           "CA1822:MarkMembersAsStatic",
+           Justification = "This non-static member is needed for data binding purposes.")]
+        public EditorLoadingViewModel EditorLoadingViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EditorLoadingViewModel>();
             }
         }
 

@@ -3,9 +3,9 @@ using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDE.Phone.Views.Service
 {
-    public partial class UploadProjectsLoadingView : PhoneApplicationPage
+    public partial class UploadProjectLoadingView : PhoneApplicationPage
     {
-        public UploadProjectsLoadingView()
+        public UploadProjectLoadingView()
         {
             InitializeComponent();
         }

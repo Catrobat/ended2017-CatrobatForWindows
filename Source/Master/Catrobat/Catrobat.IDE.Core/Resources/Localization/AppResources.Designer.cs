@@ -881,7 +881,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to description.
+        ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Editor_Description {
             get {

@@ -21,8 +21,6 @@ using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
 using System.Windows.Input;
-using Catrobat.IDE.Phone.Views.Service;
-using Catrobat.IDE.Phone.Views.Editor;
 
 namespace Catrobat.IDE.Phone.ViewModel.Main
 {
@@ -373,7 +371,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
 
         private void EditCurrentProjectAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(EditorLoadingView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(EditorLoadingViewModel));
         }
 
         private void SettingsAction()
@@ -394,7 +392,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Main
 
         private void UploadCurrentProjectAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectsLoadingView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectLoadingViewModel));
 
             // Determine which page to open
             Task.Run(() => CatrobatWebCommunicationService.CheckToken(Context.CurrentToken, CheckTokenEvent));
