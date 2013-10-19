@@ -7,11 +7,11 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Scripts
 {
-    public partial class AddNewBrickView : PhoneApplicationPage
+    public partial class AddNewScriptBrickView : PhoneApplicationPage
     {
         private readonly AddNewScriptBrickViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewScriptBrickViewModel>();
 
-        public AddNewBrickView()
+        public AddNewScriptBrickView()
         {
             InitializeComponent();
         }

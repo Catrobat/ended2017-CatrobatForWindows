@@ -192,8 +192,10 @@
     <Compile Include="Utilities\AssociationUriMapper.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
-    <Compile Include="ViewModel\Editor\Costumes\AddNewCostumeViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Costumes\CostumeSavingViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Costumes\CostumeNameChooserViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\ChangeCostumeViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Costumes\NewCostumeSourceSelectionViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\AddNewGlobalVariableViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\AddNewLocalVariableViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\ChangeVariableViewModel.cs" />
@@ -201,6 +203,7 @@
     <Compile Include="ViewModel\Editor\Formula\VariableSelectionViewModel.cs" />
     <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\AddNewScriptBrickViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Scripts\ScriptBrickCategoryViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\NewBroadcastMessageViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sounds\AddNewSoundViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sounds\ChangeSoundViewModel.cs" />
@@ -255,11 +258,11 @@
     <Compile Include="Views\Editor\ProjectSettingsView.xaml.cs">
       <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Scripts\AddNewBrickView.xaml.cs">
-      <DependentUpon>AddNewBrickView.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Scripts\AddNewScriptBrickView.xaml.cs">
+      <DependentUpon>AddNewScriptBrickView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Scripts\AddNewScriptView.xaml.cs">
-      <DependentUpon>AddNewScriptView.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Scripts\ScriptBrickCategoryView.xaml.cs">
+      <DependentUpon>ScriptBrickCategoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Scripts\NewBroadcastMessageView.xaml.cs">
       <DependentUpon>NewBroadcastMessageView.xaml</DependentUpon>
@@ -460,11 +463,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Scripts\AddNewBrickView.xaml">
+    <Page Include="Views\Editor\Scripts\AddNewScriptBrickView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Scripts\AddNewScriptView.xaml">
+    <Page Include="Views\Editor\Scripts\ScriptBrickCategoryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

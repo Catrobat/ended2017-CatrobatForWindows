@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
@@ -20,7 +21,7 @@ using Microsoft.Phone.Tasks;
 
 namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
 {
-    public class AddNewCostumeViewModel : ViewModelBase
+    public class CostumeNameChooserViewModel : ViewModelBase
     {
         #region Private Members
 
@@ -120,12 +121,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
 
         #region Commands
 
-        public RelayCommand OpenGalleryCommand { get; private set; }
-
-        public RelayCommand OpenCameraCommand { get; private set; }
-
-        public RelayCommand OpenPaintCommand { get; private set; }
-
         public RelayCommand SaveCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
@@ -145,76 +140,12 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
 
         #region Actions
 
-        private void OpenGalleryAction()
-        {
-            lock (this)
-            {
-                ServiceLocator.PictureService.ChoosePictureFromLibrary(PictureSuccess, PictureCanceled, PictureError);
-            }
-        }
-
-        private void PictureSuccess(PortableImage image)
-        {
-            ServiceLocator.NavigationService.RemoveBackEntry();
-
-            Image = image;
-            CostumeName = AppResources.Editor_Image;
-            Dimension = new ImageDimension { Height = image.Height, Width = image.Width };
-
-            Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
-        }
-
-        private void PictureCanceled()
-        {
-            // No action here
-        }
-
-        private void PictureError()
-        {
-            ShowLoadingImageFailure();
-        }
-
-
-
-        private void OpenCameraAction()
-        {
-            lock (this)
-            {
-                ServiceLocator.PictureService.TakePicture(PictureSuccess, PictureCanceled, PictureError);
-            }
-        }
-
-        private void OpenPaintAction()
-        {
-            ServiceLocator.PictureService.DrawPicture(PictureSuccess, PictureCanceled, PictureError);
-
-            //var newBitmap = new WriteableBitmap(
-            //    ServiceLocator.SystemInformationService.ScreenWidth, ServiceLocator.SystemInformationService.ScreenHeight);
-
-            //var task = new PaintLauncherTask { CurrentImage = newBitmap };
-            //task.OnImageChanged += OnPaintLauncherImageChanged;
-            //PaintLauncher.Launche(task);
-        }
-
-        //private async void OnPaintLauncherImageChanged(PortableImage image)
-        //{
-        //    try
-        //    {
-        //        Image = image;
-        //        CostumeName = AppResources.Editor_Image;
-        //        Dimention = new ImageDimention { Height = image.Height, Width = image.Width };
-
-        //        Deployment.Current.Dispatcher.BeginInvoke(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserView)));
-        //    }
-        //    catch (Exception)
-        //    {
-        //        ShowLoadingImageFailure();
-        //    }
-        //}
-
         private async void SaveAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(CostumeSavingView));
+            var message = new GenericMessage<PortableImage>(Image);
+            Messenger.Default.Send(message, ViewModelMessagingToken.CostumeImageToSaveListener);
+
+            ServiceLocator.NavigationService.NavigateTo(typeof(CostumeSavingViewModel));
 
             await Task.Run(() =>
             {
@@ -239,11 +170,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
         {
             ServiceLocator.NavigationService.NavigateBack();
         }
-
-        private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
-        {
-            _receivedSelectedSprite = message.Content;
-        }
+       
 
         private void ResetViewModelAction()
         {
@@ -253,18 +180,28 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
         #endregion
 
         #region MessageActions
+
+        private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
+        {
+            _receivedSelectedSprite = message.Content;
+        }
+
         private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
         {
             CurrentProject = message.Content;
         }
 
+        private void CostumeImageReceivedMessageAction(GenericMessage<PortableImage> message)
+        {
+            Image = message.Content;
+            CostumeName = AppResources.Editor_Image;
+            Dimension = new ImageDimension { Height = Image.Height, Width = Image.Width };
+        }
+
         #endregion
 
-        public AddNewCostumeViewModel()
+        public CostumeNameChooserViewModel()
         {
-            OpenGalleryCommand = new RelayCommand(OpenGalleryAction);
-            OpenCameraCommand = new RelayCommand(OpenCameraAction);
-            OpenPaintCommand = new RelayCommand(OpenPaintAction);
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
@@ -275,6 +212,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
             Messenger.Default.Register<GenericMessage<Project>>(this,
                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
 
+            Messenger.Default.Register<GenericMessage<PortableImage>>(this,
+                ViewModelMessagingToken.CostumeImageListener, CostumeImageReceivedMessageAction);
+
             InitImageSizes();
             if (IsInDesignMode)
                 InitDesignData();
@@ -284,17 +224,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
         {
             Dimension = new ImageDimension { Width = 500, Height = 500 };
             _selectedSize = ImageSizes[1];
-        }
-
-        private void ShowLoadingImageFailure()
-        {
-            ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Editor_MessageBoxWrongImageFormatHeader,
-                AppResources.Editor_MessageBoxWrongImageFormatText, WrongImageFormatResult, MessageBoxOptions.Ok);
-        }
-
-        private void WrongImageFormatResult(MessageboxResult result)
-        {
-            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void InitImageSizes()

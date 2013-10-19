@@ -11,7 +11,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    DataContext="{Binding AddNewCostumeViewModel, Source={StaticResource Locator}}"
+    DataContext="{Binding CostumeSavingViewModel, Source={StaticResource Locator}}"
     shell:SystemTray.IsVisible="True">
 
 

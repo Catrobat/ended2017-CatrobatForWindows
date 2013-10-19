@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -9,7 +8,6 @@ using Catrobat.IDE.Core.CatrobatObjects.Scripts;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Phone.Controls.ReorderableListbox;
-using Catrobat.IDE.Phone.Views.Editor.Scripts;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -18,24 +16,16 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Scripts
 {
     public class AddNewScriptBrickViewModel : ViewModelBase
     {
-        public enum BrickCategory
-        {
-            Motion,
-            Looks,
-            Sounds,
-            Control,
-            Variables
-        }
 
         #region private Members
 
-        private Sprite _receivedSelectedSprite;
-        private ScriptBrickCollection _receivedScriptBrickCollection;
         private BrickCategory _selectedBrickCategory;
+        private ScriptBrickCollection _receivedScriptBrickCollection;
+        
         private BrickCollection _brickCollection;
         private int _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex;
         private DataObject _selectedBrick;
-        private bool _isAdding = false;
+        private bool _isAdding;
         private bool _isControlVisible;
         private bool _isLookVisible;
         private bool _isMovementVisible;
@@ -116,16 +106,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Scripts
 
         public ICommand AddNewScriptBrickCommand { get; private set; }
 
-        public RelayCommand MovementCommand { get; private set; }
-
-        public RelayCommand LooksCommand { get; private set; }
-
-        public RelayCommand SoundCommand { get; private set; }
-
-        public RelayCommand ControlCommand { get; private set; }
-
-        public RelayCommand VariablesCommand { get; private set; }
-
         public RelayCommand OnLoadBrickViewCommand { get; private set; }
 
         public RelayCommand ResetViewModelCommand { get; private set; }
@@ -198,39 +178,9 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Scripts
             }
         }
 
-        private void MovementAction()
-        {
-            _selectedBrickCategory = BrickCategory.Motion;
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewBrickView));
-        }
-
-        private void LooksAction()
-        {
-            _selectedBrickCategory = BrickCategory.Looks;
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewBrickView));
-        }
-
-        private void SoundAction()
-        {
-            _selectedBrickCategory = BrickCategory.Sounds;
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewBrickView));
-        }
-
-        private void ControlAction()
-        {
-            _selectedBrickCategory = BrickCategory.Control;
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewBrickView));
-        }
-
-        private void VariablesAction()
-        {
-            _selectedBrickCategory = BrickCategory.Variables;
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewBrickView));
-        }
-
         private void OnLoadBrickViewAction()
         {
-            var app = (App)Application.Current;
+            //var app = (App)Application.Current;
 
             IsControlVisible = false;
             IsLookVisible = false;
@@ -259,29 +209,15 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Scripts
 
                 case BrickCategory.Sounds:
                     IsSoundVisible = true;
-  
+
                     //BrickCollection = app.Resources["ScriptBrickAddDataSound"] as BrickCollection;
                     break;
                 case BrickCategory.Variables:
                     IsVariableVisible = true;
                     //BrickCollection = app.Resources["ScriptBrickAddDataVariables"] as BrickCollection;
                     break;
-
             }
         }
-
-        private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
-        {
-            _receivedSelectedSprite = message.Content;
-        }
-
-        private void ReceiveScriptBrickCollectionAction(GenericMessage<List<Object>> message)
-        {
-            _receivedScriptBrickCollection = message.Content[0] as ScriptBrickCollection;
-            _firstVisibleScriptBrickIndex = ((ListBoxViewPort)message.Content[1]).FirstVisibleIndex;
-            _lastVisibleScriptBrickIndex = ((ListBoxViewPort)message.Content[1]).LastVisibleIndex;
-        }
-
 
         private void ResetViewModelAction()
         {
@@ -290,19 +226,30 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Scripts
 
         #endregion
 
+        #region MessageActions
+
+        private void ReceiveScriptBrickCollectionMessageAction(GenericMessage<List<Object>> message)
+        {
+            _receivedScriptBrickCollection = message.Content[0] as ScriptBrickCollection;
+            _firstVisibleScriptBrickIndex = ((ListBoxViewPort)message.Content[1]).FirstVisibleIndex;
+            _lastVisibleScriptBrickIndex = ((ListBoxViewPort)message.Content[1]).LastVisibleIndex;
+        }
+
+        private void ScriptBrickCategoryReceivedMessageAction(GenericMessage<BrickCategory> message)
+        {
+            _selectedBrickCategory = message.Content;
+        }
+
+        #endregion
+
         public AddNewScriptBrickViewModel()
         {
             AddNewScriptBrickCommand = new RelayCommand<DataObject>(AddNewScriptBrickAction);
-            MovementCommand = new RelayCommand(MovementAction);
-            LooksCommand = new RelayCommand(LooksAction);
-            SoundCommand = new RelayCommand(SoundAction);
-            ControlCommand = new RelayCommand(ControlAction);
-            VariablesCommand = new RelayCommand(VariablesAction);
             OnLoadBrickViewCommand = new RelayCommand(OnLoadBrickViewAction);
             ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
-            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
-            Messenger.Default.Register<GenericMessage<List<Object>>>(this, ViewModelMessagingToken.ScriptBrickCollectionListener, ReceiveScriptBrickCollectionAction);
+            Messenger.Default.Register<GenericMessage<List<Object>>>(this, ViewModelMessagingToken.ScriptBrickCollectionListener, ReceiveScriptBrickCollectionMessageAction);
+            Messenger.Default.Register<GenericMessage<BrickCategory>>(this, ViewModelMessagingToken.ScriptBrickCategoryListener, ScriptBrickCategoryReceivedMessageAction);
 
             if (IsInDesignMode)
                 IsLookVisible = true;

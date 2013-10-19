@@ -7,7 +7,7 @@ namespace Catrobat.IDE.Phone.Views.Editor.Costumes
 {
     public partial class CostumeNameChooserView : PhoneApplicationPage
     {
-        private readonly AddNewCostumeViewModel _viewModel = ServiceLocator.Current.GetInstance<AddNewCostumeViewModel>();
+        private readonly CostumeNameChooserViewModel _viewModel = ServiceLocator.Current.GetInstance<CostumeNameChooserViewModel>();
 
         public CostumeNameChooserView()
         {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Windows;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -12,18 +11,13 @@ using Catrobat.IDE.Core.CatrobatObjects.Scripts;
 using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Phone.Controls.Buttons;
 using Catrobat.IDE.Phone.Controls.ReorderableListbox;
 using Catrobat.IDE.Phone.ViewModel.Editor.Costumes;
 using Catrobat.IDE.Phone.ViewModel.Editor.Scripts;
 using Catrobat.IDE.Phone.ViewModel.Editor.Sounds;
 using Catrobat.IDE.Phone.ViewModel.Main;
-using Catrobat.IDE.Phone.Views.Editor;
 using Catrobat.IDE.Phone.Views.Editor.Costumes;
 using Catrobat.IDE.Phone.Views.Editor.Scripts;
-using Catrobat.IDE.Phone.Views.Editor.Sounds;
-using Catrobat.IDE.Phone.Views.Editor.Sprites;
-using Catrobat.IDE.Phone.Views.Main;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -493,7 +487,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             var message = new GenericMessage<List<Object>>(objects);
             Messenger.Default.Send<GenericMessage<List<Object>>>(message, ViewModelMessagingToken.ScriptBrickCollectionListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewScriptView));
+            ServiceLocator.NavigationService.NavigateTo(typeof(ScriptBrickCategoryViewModel));
         }
 
         private void CopyScriptBrickAction()
