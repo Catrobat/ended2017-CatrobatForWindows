@@ -598,7 +598,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sprites
             var message = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewSoundViewModel));
+            ServiceLocator.NavigationService.NavigateTo(typeof(NewSoundSourceSelectionViewModel));
         }
 
         private void EditSoundAction()

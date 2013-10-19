@@ -7,7 +7,7 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
 {
-    public class AddNewSoundViewModel : ViewModelBase
+    public class NewSoundSourceSelectionViewModel : ViewModelBase
     {
         #region Private Members
 
@@ -25,8 +25,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
 
         public RelayCommand RecorderCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand { get; private set; }
-
         #endregion
 
         #region Actions
@@ -34,7 +32,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
         private void AudioLibraryAction()
         {
             var message = new GenericMessage<Sprite>(_receivedSelectedSprite);
-            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
+            Messenger.Default.Send(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
             //ServiceLocator.NavigationService.NavigateTo(typeof (AudioLibrary));
         }
@@ -42,7 +40,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
         private void RecorderAction()
         {
             var message = new GenericMessage<Sprite>(_receivedSelectedSprite);
-            Messenger.Default.Send<GenericMessage<Sprite>>(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
+            Messenger.Default.Send(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
             ServiceLocator.NavigationService.NavigateTo(typeof(SoundRecorderViewModel));
         }
@@ -52,22 +50,14 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Sounds
             _receivedSelectedSprite = message.Content;
         }
 
-        private void ResetViewModelAction()
-        {
-            ResetViewModel();
-        }
-
         #endregion
 
-        public AddNewSoundViewModel()
+        public NewSoundSourceSelectionViewModel()
         {
             AudioLibraryCommand = new RelayCommand(AudioLibraryAction);
             RecorderCommand = new RelayCommand(RecorderAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
         }
-
-        private void ResetViewModel() {}
     }
 }

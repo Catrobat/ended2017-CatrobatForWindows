@@ -8,7 +8,7 @@ namespace Catrobat.IDE.Phone.Views.Editor.Sounds
 {
     public partial class SoundNameChooserView : PhoneApplicationPage
     {
-        private readonly SoundRecorderViewModel _soundRecorderViewModel = ServiceLocator.Current.GetInstance<SoundRecorderViewModel>();
+        private readonly SoundNameChooserViewModel _viewModel = ServiceLocator.Current.GetInstance<SoundNameChooserViewModel>();
 
         public SoundNameChooserView()
         {
@@ -21,14 +21,9 @@ namespace Catrobat.IDE.Phone.Views.Editor.Sounds
                 });
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            //DON'T RESET VIEWMODEL
-        }
-
         private void TextBoxSoundName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            _soundRecorderViewModel.SoundName = TextBoxSoundName.Text;
+            _viewModel.SoundName = TextBoxSoundName.Text;
         }
     }
 }

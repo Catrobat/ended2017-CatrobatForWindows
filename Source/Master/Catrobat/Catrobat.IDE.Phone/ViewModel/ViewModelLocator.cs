@@ -38,8 +38,9 @@ namespace Catrobat.IDE.Phone.ViewModel
             SimpleIoc.Default.Register<SettingsViewModel>(true);
             SimpleIoc.Default.Register<CostumeNameChooserViewModel>(true);
             SimpleIoc.Default.Register<ChangeCostumeViewModel>(true);
-            SimpleIoc.Default.Register<AddNewSoundViewModel>(true);
+            SimpleIoc.Default.Register<NewSoundSourceSelectionViewModel>(true);
             SimpleIoc.Default.Register<ChangeSoundViewModel>(true);
+            SimpleIoc.Default.Register<SoundNameChooserViewModel>(true);
             SimpleIoc.Default.Register<AddNewSpriteViewModel>(true);
             SimpleIoc.Default.Register<ChangeSpriteViewModel>(true);
             SimpleIoc.Default.Register<ProjectSettingsViewModel>(true);
@@ -268,11 +269,22 @@ namespace Catrobat.IDE.Phone.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public AddNewSoundViewModel AddNewSoundViewModel
+        public NewSoundSourceSelectionViewModel NewSoundSourceSelectionViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<AddNewSoundViewModel>();
+                return ServiceLocator.Current.GetInstance<NewSoundSourceSelectionViewModel>();
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public SoundNameChooserViewModel SoundNameChooserViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SoundNameChooserViewModel>();
             }
         }
 

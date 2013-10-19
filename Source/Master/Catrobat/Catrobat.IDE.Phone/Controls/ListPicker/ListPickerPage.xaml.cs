@@ -44,7 +44,7 @@ namespace Catrobat.IDE.Phone.Controls.ListPicker
             }
             else if (nullItem is Sound)
             {
-                AddViewType = typeof(AddNewSoundViewModel);
+                AddViewType = typeof(NewSoundSourceSelectionViewModel);
             }
             else if (nullItem is string)
             {

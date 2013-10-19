@@ -205,7 +205,8 @@
     <Compile Include="ViewModel\Editor\Scripts\AddNewScriptBrickViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\ScriptBrickCategoryViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\NewBroadcastMessageViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Sounds\AddNewSoundViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sounds\SoundNameChooserViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sounds\NewSoundSourceSelectionViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sounds\ChangeSoundViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sounds\SoundRecorderViewModel.cs" />
     <Compile Include="ViewModel\Editor\Sprites\AddNewSpriteViewModel.cs" />
@@ -268,8 +269,8 @@
       <DependentUpon>NewBroadcastMessageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Scripts\ScriptBrickContentTemplateSelector.cs" />
-    <Compile Include="Views\Editor\Sounds\AddNewSoundView.xaml.cs">
-      <DependentUpon>AddNewSoundView.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Sounds\NewSoundSourceSelectionView.xaml.cs">
+      <DependentUpon>NewSoundSourceSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Sounds\ChangeSoundView.xaml.cs">
       <DependentUpon>ChangeSoundView.xaml</DependentUpon>
@@ -487,7 +488,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Sounds\AddNewSoundView.xaml">
+    <Page Include="Views\Editor\Sounds\NewSoundSourceSelectionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Phone.Controls.Misc;
-using Catrobat.IDE.Phone.Views.Editor.Costumes;
-using Catrobat.Paint;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.Phone.Tasks;
 
 namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
 {
@@ -25,7 +17,7 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
     {
         #region Private Members
 
-        private string _costumeName;
+        private string _costumeName = AppResources.Editor_Image;
         private Sprite _receivedSelectedSprite;
         private ImageDimension _dimension;
         private ImageSizeEntry _selectedSize;
@@ -194,7 +186,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
         private void CostumeImageReceivedMessageAction(GenericMessage<PortableImage> message)
         {
             Image = message.Content;
-            CostumeName = AppResources.Editor_Image;
             Dimension = new ImageDimension { Height = Image.Height, Width = Image.Width };
         }
 
@@ -245,11 +236,6 @@ namespace Catrobat.IDE.Phone.ViewModel.Editor.Costumes
 
             //InitImageSizes();
             //_builder = null;
-        }
-
-        public override void Cleanup()
-        {
-            base.Cleanup();
         }
     }
 }
