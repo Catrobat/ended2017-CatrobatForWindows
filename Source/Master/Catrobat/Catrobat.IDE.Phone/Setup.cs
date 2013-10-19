@@ -1,4 +1,5 @@
 using System.Windows;
+using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Phone.Services;
 using Catrobat.IDE.Phone.Services.Storage;

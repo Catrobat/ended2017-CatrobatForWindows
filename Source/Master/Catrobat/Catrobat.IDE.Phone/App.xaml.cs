@@ -17,9 +17,6 @@ namespace Catrobat.IDE.Phone
 {
     public partial class App : Application
     {
-        public CatrobatContext Context;
-
-
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -65,9 +62,6 @@ namespace Catrobat.IDE.Phone
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
-
-            var setup = new Setup(RootFrame);
-            setup.Initialize();
         }
 
         // Code to execute when the application is launching (eg, from Start)
@@ -103,7 +97,7 @@ namespace Catrobat.IDE.Phone
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
             var mainViewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).MainViewModel;
-            ViewModelLocator.SaveContext(mainViewModel.CurrentProject);
+            Core.App.SaveContext(mainViewModel.CurrentProject);
             ViewModelLocator.Cleanup();
         }
 

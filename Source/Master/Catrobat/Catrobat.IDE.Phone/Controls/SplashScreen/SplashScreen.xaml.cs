@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Main;
@@ -14,22 +15,31 @@ namespace Catrobat.IDE.Phone.Controls.SplashScreen
             Loaded += OnLoaded;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        private async void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            // init app
-            ViewModelLocator.LoadContext();
-
+            var frame = (PhoneApplicationFrame)Application.Current.RootVisual;
             string fileToken;
             NavigationContext.QueryString.TryGetValue("fileToken", out fileToken);
 
-            if (fileToken != null)
+            await Task.Run(() =>
             {
-                var viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).ProjectImportViewModel;
-                viewModel.OnLoadCommand.Execute(fileToken);
-                Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(ProjectImportViewModel));
-            }
-            else
-                Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    var setup = new Setup(frame);
+                    setup.Initialize();
+
+                    if (fileToken != null)
+                    {
+                        var viewModel = ((ViewModelLocator) ServiceLocator.ViewModelLocator).ProjectImportViewModel;
+                        viewModel.OnLoadCommand.Execute(fileToken);
+                        ServiceLocator.NavigationService.NavigateTo(typeof (ProjectImportViewModel));
+                    }
+                    else
+                        ServiceLocator.NavigationService.NavigateTo(typeof (MainViewModel));
+
+                });
+            });
+
         }
     }
 }
