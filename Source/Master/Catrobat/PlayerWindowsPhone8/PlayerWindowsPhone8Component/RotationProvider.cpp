@@ -18,7 +18,6 @@ RotationProvider::RotationProvider(ROTATION_PROVIDER_TYPES type, float rotation)
 
 RotationProvider::~RotationProvider()
 {
-    m_compassProvider->Stop();
     delete m_compassProvider;
 }
 
