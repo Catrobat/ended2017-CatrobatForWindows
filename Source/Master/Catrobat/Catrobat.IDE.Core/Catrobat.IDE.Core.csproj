@@ -123,6 +123,7 @@
     <Compile Include="Services\IDispatcherService.cs" />
     <Compile Include="Services\IProjectGenerator.cs" />
     <Compile Include="Services\IShareService.cs" />
+    <Compile Include="UI\Converters\ActiveThemeBrushConverter.cs" />
     <Compile Include="UI\Converters\BoolOpacityConverter.cs" />
     <Compile Include="UI\Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="UI\Converters\BoolToSelectedPivotItemConverter.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="UI\Converters\NullIntCountConverter.cs" />
     <Compile Include="UI\Converters\NullVariableConverter.cs" />
     <Compile Include="UI\Converters\SecondStringMillisecondConverter.cs" />
+    <Compile Include="UI\Converters\VariableButtonVisibilityConverter.cs" />
     <Compile Include="UI\Formula\IPortableFormulaButton.cs" />
     <Compile Include="UI\Formula\IPortableUIFormula.cs" />
     <Compile Include="UI\PortableUI\IPortableValueConverter.cs" />

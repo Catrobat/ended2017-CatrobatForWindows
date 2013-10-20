@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows.Data;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Settings;
 
-namespace Catrobat.IDE.Phone.Converters.NativeConverters
+namespace Catrobat.IDE.Core.UI.Converters
 {
-    public class ActiveThemeBrushConverter : IValueConverter
+    public class ActiveThemeBrushConverter : IPortableValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

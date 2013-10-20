@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 
-namespace Catrobat.IDE.Phone.Converters.NativeConverters
+namespace Catrobat.IDE.Core.UI.Converters
 {
-    public class VariableButtonVisibilityConverter : IValueConverter
+    public class VariableButtonVisibilityConverter : IPortableValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -24,7 +22,7 @@ namespace Catrobat.IDE.Phone.Converters.NativeConverters
             if (invert)
                 visible = !visible;
 
-            return visible ? Visibility.Visible : Visibility.Collapsed;
+            return visible ? PortableVisibility.Visible : PortableVisibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
