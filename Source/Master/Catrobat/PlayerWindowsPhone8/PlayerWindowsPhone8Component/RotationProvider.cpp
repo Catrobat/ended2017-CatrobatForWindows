@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "RotationProvider.h"
 
+RotationProvider::RotationProvider() : m_rotation(0.0f), m_type(STATIC) {}
 
 RotationProvider::RotationProvider(ROTATION_PROVIDER_TYPES type, float rotation) : m_rotation(rotation), m_type(type)
 {
