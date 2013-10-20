@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -6,18 +7,28 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Settings;
-using Cirrious.CrossCore.IoC;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Core
 {
-    public class App : Cirrious.MvvmCross.ViewModels.MvxApplication
+    public abstract class App
     {
         private static CatrobatContextBase _context;
+        private static INativeApp _app;
 
-        public override void Initialize()
+        public static void SetNativeApp(INativeApp app)
         {
+            _app = app;
+        }
+
+        public static void Initialize()
+        {
+            if (_context != null)
+                return;
+
+            _app.InitializeInterfaces();
+
             if (ViewModelBase.IsInDesignModeStatic)
             {
                 var context = new CatrobatContextDesign();
@@ -60,7 +71,7 @@ namespace Catrobat.IDE.Core
             return currentProject;
         }
 
-        public static void LoadContext()
+        private static void LoadContext()
         {
             _context = new CatrobatContext();
             var currentProject = InitializeFirstTimeUse(_context) ??

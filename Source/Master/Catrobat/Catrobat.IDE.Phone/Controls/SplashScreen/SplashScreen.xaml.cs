@@ -3,6 +3,7 @@ using System.Windows;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Main;
+using GalaSoft.MvvmLight;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDE.Phone.Controls.SplashScreen
@@ -25,17 +26,20 @@ namespace Catrobat.IDE.Phone.Controls.SplashScreen
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    var setup = new Setup(frame);
-                    setup.Initialize();
+                    if (!ViewModelBase.IsInDesignModeStatic)
+                    {
+                        Core.App.SetNativeApp(new AppPhone());
+                        Core.App.Initialize();
+                    }
 
                     if (fileToken != null)
                     {
-                        var viewModel = ((ViewModelLocator) ServiceLocator.ViewModelLocator).ProjectImportViewModel;
+                        var viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).ProjectImportViewModel;
                         viewModel.OnLoadCommand.Execute(fileToken);
-                        ServiceLocator.NavigationService.NavigateTo(typeof (ProjectImportViewModel));
+                        ServiceLocator.NavigationService.NavigateTo(typeof(ProjectImportViewModel));
                     }
                     else
-                        ServiceLocator.NavigationService.NavigateTo(typeof (MainViewModel));
+                        ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
 
                 });
             });

@@ -1,33 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Phone.Services;
 using Catrobat.IDE.Phone.Services.Storage;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.WindowsPhone.Platform;
-using Microsoft.Phone.Controls;
+using GalaSoft.MvvmLight;
 
 namespace Catrobat.IDE.Phone
 {
-    public class Setup : MvxPhoneSetup
+    public class AppDesignStatic
     {
-        public Setup(PhoneApplicationFrame rootFrame) : base(rootFrame)
+        static AppDesignStatic()
         {
-            InitializeInterfaces();
+            if (ViewModelBase.IsInDesignModeStatic)
+            {
+                Core.App.SetNativeApp(new AppPhone());
+                Core.App.Initialize();
+            }
         }
+    }
 
-        protected override IMvxApplication CreateApp()
-        {
-            return new Core.App();
-        }
-		
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
-        }
-
-        private static void InitializeInterfaces()
+    public class AppDesign : INativeApp
+    {
+        public void InitializeInterfaces()
         {
             ServiceLocator.ViewModelLocator = Application.Current.Resources["Locator"];
             ServiceLocator.ThemeChooser = Application.Current.Resources["ThemeChooser"];
