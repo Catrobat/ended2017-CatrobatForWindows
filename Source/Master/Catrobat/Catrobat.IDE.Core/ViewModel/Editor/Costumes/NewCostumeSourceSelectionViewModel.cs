@@ -54,7 +54,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         private void OpenPaintAction()
         {
-            ServiceLocator.PictureService.DrawPicture(PictureSuccess, PictureCanceled, PictureError);
+            lock (this)
+            {
+                ServiceLocator.PictureService.DrawPicture(PictureSuccess, PictureCanceled, PictureError);
+                ServiceLocator.NavigationService.RemoveBackEntry();
+            }
         }
 
         #endregion
