@@ -51,7 +51,7 @@ namespace Catrobat.IDE.Core
         {
             IProjectGenerator projectGenerator = new ProjectGeneratorDefault();
 
-            return projectGenerator.GenerateProject(ServiceLocator.CulureService.GetToLetterCultureColde(), true);
+            return projectGenerator.GenerateProject(ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName, true);
 
             //using (var storage = StorageSystem.GetStorage())
             //{

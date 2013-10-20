@@ -7,10 +7,10 @@ using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Phone.ViewModel.Editor.Costumes;
-using Catrobat.IDE.Phone.ViewModel.Editor.Scripts;
-using Catrobat.IDE.Phone.ViewModel.Editor.Sounds;
-using Catrobat.IDE.Phone.ViewModel.Editor.Sprites;
+using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModel.Editor.Scripts;
+using Catrobat.IDE.Core.ViewModel.Editor.Sounds;
+using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Phone.Controls;
 

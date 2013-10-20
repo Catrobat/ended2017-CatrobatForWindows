@@ -1,13 +1,14 @@
 ﻿using Catrobat.IDE.Core.FormulaEditor.Editor;
-using Catrobat.IDE.Phone.ViewModel.Editor.Formula;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Formula
 {
     public partial class FormulaEditorView : PhoneApplicationPage
     {
-        private readonly FormulaEditorViewModel _viewModel = ServiceLocator.Current.GetInstance<FormulaEditorViewModel>();
+        private readonly FormulaEditorViewModel _viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).FormulaEditorViewModel;
 
         private void ShowKeyErrorAnimation()
         {

@@ -3,8 +3,9 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Phone.ViewModel.Editor.Formula;
-using Microsoft.Practices.ServiceLocation;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 
 namespace Catrobat.IDE.Phone.Converters.NativeConverters
 {
@@ -12,7 +13,8 @@ namespace Catrobat.IDE.Phone.Converters.NativeConverters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var variableSelectionViewModel = ServiceLocator.Current.GetInstance<VariableSelectionViewModel>();
+            var variableSelectionViewModel =
+                ((ViewModelLocator)ServiceLocator.ViewModelLocator).VariableSelectionViewModel;
 
             var variable = (UserVariable)value;
             var invert = (bool)parameter;

@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
 using Microsoft.Live;
-using Microsoft.Live.Controls;
 using Microsoft.Phone.Tasks;
 
 namespace Catrobat.IDE.Phone.Services

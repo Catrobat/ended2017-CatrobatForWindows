@@ -119,13 +119,13 @@ namespace Catrobat.IDE.Phone.Controls.ReorderableListbox
             }
         }
 
-        public ListBoxViewPort ListBoxViewPort
+        public PortableListBoxViewPort ListBoxViewPort
         {
-            get { return (ListBoxViewPort)GetValue(ListBoxViewPortProperty); }
+            get { return (PortableListBoxViewPort)GetValue(ListBoxViewPortProperty); }
             set { SetValue(ListBoxViewPortProperty, value); }
         }
 
-        public static readonly DependencyProperty ListBoxViewPortProperty = DependencyProperty.Register("ListBoxViewPort", typeof(ListBoxViewPort), typeof(ReorderListBox), new PropertyMetadata(ListBoxViewPortChanged));
+        public static readonly DependencyProperty ListBoxViewPortProperty = DependencyProperty.Register("ListBoxViewPort", typeof(PortableListBoxViewPort), typeof(ReorderListBox), new PropertyMetadata(ListBoxViewPortChanged));
 
         private static void ListBoxViewPortChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

@@ -6,15 +6,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Catrobat.IDE.Core.Annotations;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.Converters;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects.Bricks;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Phone.Converters;
-using Catrobat.IDE.Phone.ViewModel.Editor.Formula;
-using Catrobat.IDE.Phone.Views.Editor.Formula;
-using Microsoft.Practices.ServiceLocation;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {
@@ -58,7 +57,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
             newVariable = (UserVariable)converter.Convert(newVariable, null, null, null);
 
-            var viewModel = ServiceLocator.Current.GetInstance<VariableSelectionViewModel>();
+            var viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).VariableSelectionViewModel;
 
             TextBlockVariableName.Text = newVariable.Name;
 
@@ -81,7 +80,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private void ButtonFormula_OnClick(object sender, RoutedEventArgs e)
         {
-            var viewModel = ServiceLocator.Current.GetInstance<VariableSelectionViewModel>();
+            var viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).VariableSelectionViewModel;
 
             var container = new VariableConteiner { Variable = Variable };
             container.PropertyChanged += ContainerOnPropertyChanged;
