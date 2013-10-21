@@ -118,7 +118,23 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Services\ColorConversionServiceStore.cs" />
+    <Compile Include="Services\CultureServiceStore.cs" />
+    <Compile Include="Services\DispatcherServiceStore.cs" />
+    <Compile Include="Services\ImageResizeServiceStore.cs" />
+    <Compile Include="Services\ImageSourceConversionServiceStore.cs" />
+    <Compile Include="Services\NavigationServiceStore.cs" />
+    <Compile Include="Services\NotificationServiceStore.cs" />
+    <Compile Include="Services\PictureServiceStore.cs" />
+    <Compile Include="Services\PlayerLauncherServiceStore.cs" />
+    <Compile Include="Services\PortableUIElementsConvertionServiceStore.cs" />
+    <Compile Include="Services\ProjectImporterServiceStore.cs" />
+    <Compile Include="Services\ServerCommunicationServiceStore.cs" />
+    <Compile Include="Services\ShareServiceStore.cs" />
+    <Compile Include="Services\SoundPlayerServiceStore.cs" />
+    <Compile Include="Services\SoundRecorderServiceStore.cs" />
+    <Compile Include="Services\SystemInformationServiceStore.cs" />
+    <Compile Include="Videos\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,6 +144,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="Catrobat.IDE.Store_TemporaryKey.pfx" />
+    <Content Include="Fonts\LiveSymbol.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -141,7 +158,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="Videos\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -156,6 +173,9 @@
     <Reference Include="GalaSoft.MvvmLight.Platform.NetCore45">
       <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\netcore45\GalaSoft.MvvmLight.Platform.NetCore45.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Live">
+      <HintPath>..\packages\LiveSDK.5.5\WindowsXAML\Microsoft.Live.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\Portable.CommonServiceLocator.1.2.2\lib\portable-net4+sl4+wp7+win8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -168,7 +188,11 @@
     <Reference Include="Windows.UI.Interactivity">
       <HintPath>..\packages\Windows.UI.Interactivity.1.3.0.0\lib\win8\Windows.UI.Interactivity.dll</HintPath>
     </Reference>
+    <Reference Include="WriteableBitmapEx.WinRT">
+      <HintPath>..\packages\WriteableBitmapEx.1.0.8.0\lib\NetCore45\WriteableBitmapEx.WinRT.dll</HintPath>
+    </Reference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
