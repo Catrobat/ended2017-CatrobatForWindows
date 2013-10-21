@@ -2,6 +2,8 @@
 
 namespace Catrobat.IDE.Phone.Converters
 {
+    public class ActiveThemeBrushConverterBootstrap : PortableValueConverterPhone<ActiveThemeBrushConverter> { }
+
     public class BoolOpacityConverterBootstrap : PortableValueConverterPhone<BoolOpacityConverter> { }
 
     public class BoolPlayButtonStateConverterBootstrap : PortableValueConverterPhone<BoolPlayButtonStateConverter> { }
@@ -28,5 +30,6 @@ namespace Catrobat.IDE.Phone.Converters
 
     public class SecondStringMillisecondConverterBootstrap : PortableValueConverterPhone<SecondStringMillisecondConverter> { }
 
+    public class VariableButtonVisibilityConverterBootstrap : PortableValueConverterPhone<VariableButtonVisibilityConverter> { }
     
 }

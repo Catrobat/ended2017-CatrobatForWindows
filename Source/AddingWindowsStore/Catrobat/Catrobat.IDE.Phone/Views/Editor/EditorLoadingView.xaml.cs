@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Phone.ViewModel.Editor.Sprites;
-using Catrobat.IDE.Phone.Views.Editor.Sprites;
+using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDE.Phone.Views.Editor

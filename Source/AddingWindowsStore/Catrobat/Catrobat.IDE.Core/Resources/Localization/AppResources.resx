@@ -432,9 +432,6 @@
   <data name="Editor_RecorderStop" xml:space="preserve">
     <value>stop</value>
   </data>
-  <data name="Editor_Recording" xml:space="preserve">
-    <value>Recording</value>
-  </data>
   <data name="Editor_SavingImage" xml:space="preserve">
     <value>Saving image...</value>
   </data>
@@ -796,7 +793,7 @@
     <value>end if</value>
   </data>
   <data name="Editor_Description" xml:space="preserve">
-    <value>description</value>
+    <value>Description</value>
   </data>
   <data name="Main_ChangeProjectNameAndDescription" xml:space="preserve">
     <value>change name and description</value>
@@ -1007,5 +1004,8 @@
   </data>
   <data name="DefaultProject_Mole" xml:space="preserve">
     <value>Mole</value>
+  </data>
+  <data name="Editor_NameOfSound" xml:space="preserve">
+    <value>Sound</value>
   </data>
 </root>

@@ -118,10 +118,12 @@
     <Compile Include="CatrobatObjects\ProjectHeader.cs" />
     <Compile Include="CatrobatObjects\Scripts\BroadcastScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\Script.cs" />
+    <Compile Include="INativeApp.cs" />
     <Compile Include="Services\Common\ProjectGeneratorDefault.cs" />
     <Compile Include="Services\IDispatcherService.cs" />
     <Compile Include="Services\IProjectGenerator.cs" />
     <Compile Include="Services\IShareService.cs" />
+    <Compile Include="UI\Converters\ActiveThemeBrushConverter.cs" />
     <Compile Include="UI\Converters\BoolOpacityConverter.cs" />
     <Compile Include="UI\Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="UI\Converters\BoolToSelectedPivotItemConverter.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="UI\Converters\NullIntCountConverter.cs" />
     <Compile Include="UI\Converters\NullVariableConverter.cs" />
     <Compile Include="UI\Converters\SecondStringMillisecondConverter.cs" />
+    <Compile Include="UI\Converters\VariableButtonVisibilityConverter.cs" />
     <Compile Include="UI\Formula\IPortableFormulaButton.cs" />
     <Compile Include="UI\Formula\IPortableUIFormula.cs" />
     <Compile Include="UI\PortableUI\IPortableValueConverter.cs" />
@@ -244,16 +247,55 @@
     <Compile Include="VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
     <Compile Include="VersionConverter\Versions\CatrobatVersion091ToWin091.cs" />
     <Compile Include="Utilities\Helpers\XElementExtensions.cs" />
+    <Compile Include="ViewModel\Editor\Costumes\ChangeCostumeViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Costumes\CostumeNameChooserViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Costumes\CostumeSavingViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Costumes\NewCostumeSourceSelectionViewModel.cs" />
+    <Compile Include="ViewModel\Editor\EditorLoadingViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Formula\AddNewGlobalVariableViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Formula\AddNewLocalVariableViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Formula\ChangeVariableViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Formula\FormulaEditorViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Formula\VariableSelectionViewModel.cs" />
+    <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Scripts\AddNewScriptBrickViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Scripts\NewBroadcastMessageViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Scripts\ScriptBrickCategoryViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sounds\ChangeSoundViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sounds\NewSoundSourceSelectionViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sounds\SoundNameChooserViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sounds\SoundRecorderViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sprites\AddNewSpriteViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sprites\ChangeSpriteViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sprites\SpriteEditorViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Sprites\SpritesViewModel.cs" />
+    <Compile Include="ViewModel\Main\AddNewProjectViewModel.cs" />
+    <Compile Include="ViewModel\Main\MainViewModel.cs" />
+    <Compile Include="ViewModel\Main\PlayerLauncherViewModel.cs" />
+    <Compile Include="ViewModel\Main\ProjectImportViewModel.cs" />
+    <Compile Include="ViewModel\Main\TileGeneratorViewModel.cs" />
+    <Compile Include="ViewModel\Service\OnlineProjectViewModel.cs" />
+    <Compile Include="ViewModel\Service\UploadProjectLoadingViewModel.cs" />
+    <Compile Include="ViewModel\Service\UploadProjectLoginViewModel.cs" />
+    <Compile Include="ViewModel\Service\UploadProjectViewModel.cs" />
+    <Compile Include="ViewModel\Settings\SettingsBrickViewModel.cs" />
+    <Compile Include="ViewModel\Settings\SettingsLanguageViewModel.cs" />
+    <Compile Include="ViewModel\Settings\SettingsThemeViewModel.cs" />
+    <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\Share\ShareProjectServiceSelectionViewModel.cs" />
+    <Compile Include="ViewModel\Share\UploadToSkyDriveViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModel\ViewModelMessagingToken.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Cirrious.CrossCore">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.CrossCore.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight">
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\portable-net45+sl4+wp71+win8\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight.Extras">
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\portable-net45+sl4+wp71+win8\GalaSoft.MvvmLight.Extras.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.MvvmCross.Localization">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\portable-win+net45+MonoAndroid16+MonoTouch40+sl40+wp71\Cirrious.MvvmCross.Localization.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\Portable.CommonServiceLocator.1.2.2\lib\portable-net4+sl4+wp7+win8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\portable-net45+win8+wp8\Microsoft.Threading.Tasks.dll</HintPath>

@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Phone.Views.Editor.Costumes;
 using Catrobat.Paint;
-using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 
 namespace Catrobat.IDE.Phone.Services

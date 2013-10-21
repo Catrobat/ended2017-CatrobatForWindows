@@ -432,8 +432,8 @@
   <data name="Editor_RecorderStop" xml:space="preserve">
     <value>Stop</value>
   </data>
-  <data name="Editor_Recording" xml:space="preserve">
-    <value>Aufnahme</value>
+  <data name="Editor_NameOfSound" xml:space="preserve">
+    <value>Klang</value>
   </data>
   <data name="Editor_SavingImage" xml:space="preserve">
     <value>Bild speichern...</value>

@@ -96,11 +96,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AppDesignStatic.cs" />
+    <Compile Include="AppPhone.cs" />
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\NativeConverters\ActiveThemeBrushConverter.cs" />
-    <Compile Include="Converters\NativeConverters\VariableButtonVisibilityConverter.cs" />
     <Compile Include="Converters\PortableConverters.cs" />
     <Compile Include="Converters\PortableValueConverterPhone.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -158,7 +158,6 @@
     <Compile Include="Controls\Projects\LocalProjectControl.xaml.cs">
       <DependentUpon>LocalProjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ReorderableListbox\ListBoxViewPort.cs" />
     <Compile Include="Controls\ReorderableListbox\NegativeValueConverter.cs" />
     <Compile Include="Controls\ReorderableListbox\PullDownToRefreshPanel.cs" />
     <Compile Include="Controls\ReorderableListbox\ReorderListBox.cs" />
@@ -166,7 +165,6 @@
     <Compile Include="Controls\StatusIcons\ProcessIcon.xaml.cs">
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DebugTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ColorConversionServicePhone.cs" />
     <Compile Include="Services\CultureServicePhone.cs" />
@@ -188,40 +186,9 @@
     <Compile Include="Services\Storage\StorageFactoryPhone.cs" />
     <Compile Include="Services\Storage\StoragePhone.cs" />
     <Compile Include="Services\SystemInformationServicePhone.cs" />
-    <Compile Include="Setup.cs" />
     <Compile Include="Utilities\AssociationUriMapper.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
-    <Compile Include="ViewModel\Editor\Costumes\AddNewCostumeViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Costumes\ChangeCostumeViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Formula\AddNewGlobalVariableViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Formula\AddNewLocalVariableViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Formula\ChangeVariableViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Formula\FormulaEditorViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Formula\VariableSelectionViewModel.cs" />
-    <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Scripts\AddNewScriptBrickViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Scripts\NewBroadcastMessageViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Sounds\AddNewSoundViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Sounds\ChangeSoundViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Sounds\SoundRecorderViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Sprites\AddNewSpriteViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Sprites\ChangeSpriteViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Sprites\SpriteEditorViewModel.cs" />
-    <Compile Include="ViewModel\Editor\Sprites\SpritesViewModel.cs" />
-    <Compile Include="ViewModel\Main\AddNewProjectViewModel.cs" />
-    <Compile Include="ViewModel\Main\MainViewModel.cs" />
-    <Compile Include="ViewModel\Main\PlayerLauncherViewModel.cs" />
-    <Compile Include="ViewModel\Main\ProjectImportViewModel.cs" />
-    <Compile Include="ViewModel\Main\TileGeneratorViewModel.cs" />
-    <Compile Include="ViewModel\Service\OnlineProjectViewModel.cs" />
-    <Compile Include="ViewModel\Service\UploadProjectLoginViewModel.cs" />
-    <Compile Include="ViewModel\Service\UploadProjectViewModel.cs" />
-    <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
-    <Compile Include="ViewModel\Share\UploadToSkyDriveViewModel.cs" />
-    <Compile Include="ViewModel\Share\ShareProjectServiceSelectionViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="ViewModel\ViewModelMessagingToken.cs" />
     <Compile Include="Views\Editor\Costumes\ChangeCostumeView.xaml.cs">
       <DependentUpon>ChangeCostumeView.xaml</DependentUpon>
     </Compile>
@@ -255,18 +222,18 @@
     <Compile Include="Views\Editor\ProjectSettingsView.xaml.cs">
       <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Scripts\AddNewBrickView.xaml.cs">
-      <DependentUpon>AddNewBrickView.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Scripts\AddNewScriptBrickView.xaml.cs">
+      <DependentUpon>AddNewScriptBrickView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Scripts\AddNewScriptView.xaml.cs">
-      <DependentUpon>AddNewScriptView.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Scripts\ScriptBrickCategoryView.xaml.cs">
+      <DependentUpon>ScriptBrickCategoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Scripts\NewBroadcastMessageView.xaml.cs">
       <DependentUpon>NewBroadcastMessageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Scripts\ScriptBrickContentTemplateSelector.cs" />
-    <Compile Include="Views\Editor\Sounds\AddNewSoundView.xaml.cs">
-      <DependentUpon>AddNewSoundView.xaml</DependentUpon>
+    <Compile Include="Views\Editor\Sounds\NewSoundSourceSelectionView.xaml.cs">
+      <DependentUpon>NewSoundSourceSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Sounds\ChangeSoundView.xaml.cs">
       <DependentUpon>ChangeSoundView.xaml</DependentUpon>
@@ -310,8 +277,8 @@
     <Compile Include="Views\Service\UploadProjectLoginView.xaml.cs">
       <DependentUpon>UploadProjectLoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Service\UploadProjectsLoadingView.xaml.cs">
-      <DependentUpon>UploadProjectsLoadingView.xaml</DependentUpon>
+    <Compile Include="Views\Service\UploadProjectLoadingView.xaml.cs">
+      <DependentUpon>UploadProjectLoadingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Service\UploadProjectView.xaml.cs">
       <DependentUpon>UploadProjectView.xaml</DependentUpon>
@@ -460,11 +427,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Scripts\AddNewBrickView.xaml">
+    <Page Include="Views\Editor\Scripts\AddNewScriptBrickView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Scripts\AddNewScriptView.xaml">
+    <Page Include="Views\Editor\Scripts\ScriptBrickCategoryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -484,7 +451,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Sounds\AddNewSoundView.xaml">
+    <Page Include="Views\Editor\Sounds\NewSoundSourceSelectionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -544,7 +511,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Service\UploadProjectsLoadingView.xaml">
+    <Page Include="Views\Service\UploadProjectLoadingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -716,34 +683,25 @@
     <Reference Include="AppBarUtils">
       <HintPath>..\packages\AppBarUtils.2.4\lib\windowsphone8\AppBarUtils.dll</HintPath>
     </Reference>
-    <Reference Include="Cirrious.CrossCore">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\sl4-wp71\Cirrious.CrossCore.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.CrossCore.WindowsPhone">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\sl4-wp71\Cirrious.CrossCore.WindowsPhone.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross">
-      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.0.13\lib\sl4-wp71\Cirrious.MvvmCross.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.Localization">
-      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.0.13\lib\sl4-wp71\Cirrious.MvvmCross.Localization.dll</HintPath>
-    </Reference>
-    <Reference Include="Cirrious.MvvmCross.WindowsPhone">
-      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.0.13\lib\sl4-wp71\Cirrious.MvvmCross.WindowsPhone.dll</HintPath>
-    </Reference>
     <Reference Include="Coding4Fun.Toolkit.Controls">
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras.WP8">
-      <HintPath>..\packages\MvvmLightLibs.4.1.27.1\lib\wp8\GalaSoft.MvvmLight.Extras.WP8.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight">
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\wp8\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.WP8">
-      <HintPath>..\packages\MvvmLightLibs.4.1.27.1\lib\wp8\GalaSoft.MvvmLight.WP8.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight.Extras">
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\wp8\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform.WP8">
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\wp8\GalaSoft.MvvmLight.Platform.WP8.dll</HintPath>
     </Reference>
     <Reference Include="LiveSDKAsync.WP8">
       <HintPath>..\packages\AsyncLiveConnectSDK.1.0.5\lib\wp8\LiveSDKAsync.WP8.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Drawing, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Expression.Interactions, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unofficial.Blend.Interactivity.1.0.0\lib\wp8\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Live, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveSDK.5.4\lib\WindowsPhone8\Microsoft.Live.dll</HintPath>
     </Reference>
@@ -754,8 +712,9 @@
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\packages\MvvmLightLibs.4.1.27.1\lib\wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\wp8\Microsoft.Threading.Tasks.dll</HintPath>
@@ -767,7 +726,7 @@
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\wp8\Microsoft.Threading.Tasks.Extensions.Phone.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.4.1.27.1\lib\wp8\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="WriteableBitmapExWinPhone">
       <HintPath>..\packages\WriteableBitmapEx.1.0.8.0\lib\WindowsPhone8\WriteableBitmapExWinPhone.dll</HintPath>
@@ -792,6 +751,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Libs\" />
+    <Folder Include="Converters\NativeConverters\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

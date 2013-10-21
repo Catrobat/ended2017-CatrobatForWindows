@@ -7,10 +7,10 @@ using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Phone.Views.Editor.Costumes;
-using Catrobat.IDE.Phone.Views.Editor.Scripts;
-using Catrobat.IDE.Phone.Views.Editor.Sounds;
-using Catrobat.IDE.Phone.Views.Editor.Sprites;
+using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModel.Editor.Scripts;
+using Catrobat.IDE.Core.ViewModel.Editor.Sounds;
+using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Phone.Controls;
 
@@ -32,23 +32,23 @@ namespace Catrobat.IDE.Phone.Controls.ListPicker
         {
             if (nullItem is Sprite)
             {
-                AddViewType = typeof(AddNewSpriteView);
+                AddViewType = typeof(AddNewSpriteViewModel);
             }
             else if (nullItem is Action)
             {
-                AddViewType = typeof(AddNewBrickView);
+                AddViewType = typeof(ScriptBrickCategoryViewModel);
             }
             else if (nullItem is Costume)
             {
-                AddViewType = typeof(NewCostumeSourceSelectionView);
+                AddViewType = typeof(NewCostumeSourceSelectionViewModel);
             }
             else if (nullItem is Sound)
             {
-                AddViewType = typeof(AddNewSoundView);
+                AddViewType = typeof(NewSoundSourceSelectionViewModel);
             }
             else if (nullItem is string)
             {
-                AddViewType = typeof(NewBroadcastMessageView);
+                AddViewType = typeof(NewBroadcastMessageViewModel);
             }
             else
             {

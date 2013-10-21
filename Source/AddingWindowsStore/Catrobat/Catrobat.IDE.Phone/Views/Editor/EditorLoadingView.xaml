@@ -11,7 +11,7 @@
   Foreground="{StaticResource PhoneForegroundBrush}"
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d"
-  DataContext="{Binding SpritesViewModel, Source={StaticResource Locator}}"
+  DataContext="{Binding EditorLoadingViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="True">
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -25,9 +25,11 @@
     <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
       <Grid>
         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
-          <Image Height="300" Margin="0 0 0 20" Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}"></Image>
+          <Image Height="300" Margin="0 0 0 20" 
+                 Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}" />
           <ProgressBar Margin="80 0 80 0" IsIndeterminate="True"/>
-          <TextBlock Text="{Binding Resources.Editor_PreparingProject, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          <TextBlock Text="{Binding Resources.Editor_PreparingProject, Source={StaticResource LocalizedStrings}}" 
+                     HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </StackPanel>
 
       </Grid>

@@ -27,7 +27,7 @@
   <converters:BoolToSelectedPivotItemConverterBootstrap x:Key="BoolToSelectedPivotItemConverter"/>
   <converters:NullVariableConverterBootstrap x:Key="NullVariableConverter"/>
 
-  <nativeConverters:ActiveThemeBrushConverter x:Key="ActiveThemeBrushConverter"/>
-  <nativeConverters:VariableButtonVisibilityConverter x:Key="VariableButtonVisibilityConverter"/>
+  <converters:ActiveThemeBrushConverterBootstrap x:Key="ActiveThemeBrushConverter"/>
+  <converters:VariableButtonVisibilityConverterBootstrap x:Key="VariableButtonVisibilityConverter"/>
 
 </ResourceDictionary>

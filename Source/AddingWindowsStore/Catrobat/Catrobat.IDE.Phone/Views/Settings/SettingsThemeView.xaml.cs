@@ -1,15 +1,17 @@
 ﻿using System.Windows;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Phone.ViewModel.Settings;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Settings;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
 namespace Catrobat.IDE.Phone.Views.Settings
 {
     public partial class SettingsThemeView : PhoneApplicationPage
     {
-        private readonly SettingsViewModel _settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
+        private readonly SettingsThemeViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).SettingsThemeViewModel;
 
         public SettingsThemeView()
         {
@@ -22,7 +24,7 @@ namespace Catrobat.IDE.Phone.Views.Settings
             if (frameworkElement != null)
             {
                 var theme = frameworkElement.DataContext as Theme;
-                _settingsViewModel.ActiveThemeChangedCommand.Execute(theme);
+                _viewModel.ActiveThemeChangedCommand.Execute(theme);
             }
         }
     }

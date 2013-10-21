@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             TestHelper.InitializeTests();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetCostumeObjectTest()
         {
             var project = ProjectGenerator.GenerateProject();
@@ -32,7 +32,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(sprite.Costumes.Costumes[0], setCostumeBrick.Costume);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetSoundObjectTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -43,7 +43,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(sprite.Sounds.Sounds[0], playSoundBrick.Sound);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetSpriteObjectTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -54,7 +54,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(project.SpriteList.Sprites[1], pointToBrick.PointedSprite);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetUserVariableObjectTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -73,7 +73,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(project.VariableList.ProgramVariableList.UserVariables[0], changeVariableBrick.UserVariable);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetForeverBrickObjectTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -84,7 +84,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[3], foreverBrick.LoopBeginBrick);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetRepeatBrickObjectTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -95,7 +95,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[5], repeatBrick.LoopBeginBrick);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetForeverLoopEndBrickObjectTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -106,7 +106,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[4], foreverBrick.LoopEndBrick);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetRepeatLoopEndBrickObjectTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -117,7 +117,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[6], repeatBrick.LoopEndBrick);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetLoopEndBrickObjectTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -128,7 +128,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[3], loopEndBrick.LoopBeginBrick);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetIfLogicBeginBrickObjectTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -146,7 +146,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[5], ifLogicBeginBrick2.IfLogicEndBrick);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetIfLogicElseBrickObjectTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -164,7 +164,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(sprite.Scripts.Scripts[0].Bricks.Bricks[7], ifLogicElseBrick2.IfLogicEndBrick);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetIfLogicEndBrickObjectTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -183,7 +183,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetCostumeReferenceStringTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -196,7 +196,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual("../../../../../lookList/look[1]", reference);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetSoundReferenceStringTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -209,7 +209,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual("../../../../../soundList/sound[1]", reference);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetSpriteReferenceStringTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -222,7 +222,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual("../../../../../../object[2]", reference);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetVariableReferenceStringTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -243,7 +243,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual("../../../../../variables/programVariableList/userVariable[1]", reference);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetForeverBrickReferenceStringTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -256,7 +256,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual("../../foreverBrick[1]", reference);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetRepeatBrickReferenceStringTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -269,7 +269,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual("../../repeatBrick[1]", reference);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetForeverLoopEndBrickReferenceStringTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -282,7 +282,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual("../../loopEndlessBrick[1]", reference);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetRepeatLoopEndBrickReferenceStringTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -295,7 +295,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual("../../loopEndBrick[1]", reference);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetIfLogicBeginBrickReferenceStringTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -321,7 +321,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual("../../ifLogicBeginBrick[1]", reference);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetIfLogicElseBrickReferenceStringTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -347,7 +347,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual("../../ifLogicElseBrick[2]", reference);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void GetIfLogicEndBrickReferenceStringTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -374,7 +374,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void UpdateCostumeReferenceTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -394,7 +394,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(newCostume, newCostumeBrick.Costume);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void UpdateSoundReferenceTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -414,7 +414,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(newSound, newPlaySoundBrick.Sound);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CopyVariableOnSpriteCopyTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -450,7 +450,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(newVariable, newBrick2.UserVariable);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void UpdateLoopBeginBrickReferenceTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -483,7 +483,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(newLoopBeginBrick, newBrick2.LoopBeginBrick);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void UpdateLoopEndBrickReferenceTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -516,7 +516,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(newLoopEndBrick, newBrick2.LoopEndBrick);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void UpdateIfLogicBeginBrickReferenceTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -566,7 +566,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(newIfLogicBeginBrick1, newIfLogicEndBrick1.IfLogicBeginBrick);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void UpdateIfLogicElseBrickReferenceTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");
@@ -616,7 +616,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.AreEqual(newIfLogicElseBrick1, newIfLogicEndBrick1.IfLogicElseBrick);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void UpdateIfLogicEndBrickReferenceTest()
         {
             var project = SampleLoader.LoadSampleProject("default.catroid", "default");

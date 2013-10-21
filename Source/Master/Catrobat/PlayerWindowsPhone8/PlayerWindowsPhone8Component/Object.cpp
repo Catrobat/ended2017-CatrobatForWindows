@@ -11,6 +11,7 @@ Object::Object(string name) :
     m_opacity(1),
     m_look(NULL)
 {
+    m_rotation = new RotationProvider();
     m_lookList = new list<Look*>();
     m_scripts = new list<Script*>();
     m_soundInfos = new list<SoundInfo*>();

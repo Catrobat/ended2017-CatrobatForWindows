@@ -12,7 +12,7 @@
   xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
   xmlns:codung4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
   xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-  xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+  xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform.WP8"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
@@ -80,7 +80,7 @@
             <Grid.ColumnDefinitions>
               <ColumnDefinition/>
               <ColumnDefinition/>
-              <ColumnDefinition/>
+              <!--<ColumnDefinition/>-->
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Margin="0 0 0 0">
               <codung4Fun:RoundButton Margin="0 0 0 -5" Command="{Binding CreateNewProjectCommand}"
@@ -96,13 +96,13 @@
                   TextWrapping="Wrap" Text="{Binding Resources.Main_ButtonEdit, 
                   Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
             </StackPanel>
-            <StackPanel Grid.Column="2" Margin="0 0 0 0">
+            <!--<StackPanel Grid.Column="2" Margin="0 0 0 0">
               <codung4Fun:RoundButton Margin="0 0 0 -5" Command="{Binding UploadCurrentProjectCommand}"
                   ImageSource="/Content/Images/ApplicationBar/dark/appbar.upload.rest.png"/>
               <TextBlock HorizontalAlignment="Center" TextAlignment="Center" 
                   TextWrapping="Wrap" Text="{Binding Resources.Main_ButtonUpload, 
                   Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
-            </StackPanel>
+            </StackPanel>-->
           </Grid>
         </Grid>
       </controls:PanoramaItem>
@@ -250,6 +250,16 @@
       <!--Online Projects panorama item-->
       <controls:PanoramaItem Name="PanoramaItemOnlineProjects" Header="{Binding Resources.Main_HeaderOnlineProjects, Source={StaticResource LocalizedStrings}}">
         <Grid>
+          <StackPanel>
+          <TextBlock FontSize="34" VerticalAlignment="Center" TextAlignment="Center"> Download programs from</TextBlock>
+            <HyperlinkButton FontSize="44" Click="NavigateToCatrobatWebsite_OnClick">
+              PocketCode
+            </HyperlinkButton>
+            <TextBlock FontSize="34" VerticalAlignment="Center" TextAlignment="Center">website</TextBlock>
+          </StackPanel>
+        </Grid>
+        
+        <!--<Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -293,7 +303,7 @@
               </Grid>
             </phone:LongListSelector.ListFooter>
           </phone:LongListSelector>
-        </Grid>
+        </Grid>-->
       </controls:PanoramaItem>
 
       <!--About panorama item-->

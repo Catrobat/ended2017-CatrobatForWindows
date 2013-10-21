@@ -2,16 +2,17 @@
 using System.Windows.Data;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Phone.Services;
 
 namespace Catrobat.IDE.Phone.Converters
 {
     public class PortableValueConverterPhone<T> : IValueConverter
     {
-        private readonly Core.UI.PortableUI.IPortableValueConverter _coreConverter;
+        private readonly IPortableValueConverter _coreConverter;
 
         public PortableValueConverterPhone()
         {
-            var converter = (T) Activator.CreateInstance<T>();
+            var converter = Activator.CreateInstance<T>();
 
             if (!(converter is IPortableValueConverter))
                 throw new Exception("Converter must be a subtype of IPortableValueConverter");
@@ -19,25 +20,24 @@ namespace Catrobat.IDE.Phone.Converters
             _coreConverter = (IPortableValueConverter)converter;
         }
 
-        public object Convert(object value, System.Type targetType, 
+        public object Convert(object value, Type targetType,
             object parameter, System.Globalization.CultureInfo culture)
         {
             var portableConvertedUIElement = _coreConverter.Convert(value, targetType, parameter, culture);
 
-            var nativeUIElement = ServiceLocator.PortableUIElementConversionService.
-                ConvertToNativeUIElement(portableConvertedUIElement);
-
+            var converter = new PortableUIElementsConvertionServicePhone();
+            var nativeUIElement = converter.ConvertToNativeUIElement(portableConvertedUIElement);
             return nativeUIElement;
         }
 
-        public object ConvertBack(object value, System.Type targetType, 
+        public object ConvertBack(object value, Type targetType,
             object parameter, System.Globalization.CultureInfo culture)
         {
-            var portableValue = ServiceLocator.PortableUIElementConversionService.
-                ConvertToPortableUIElement(value);
+            var converter = new PortableUIElementsConvertionServicePhone();
 
-            var portableParameter = ServiceLocator.PortableUIElementConversionService.
-                ConvertToPortableUIElement(parameter);
+            var portableValue = converter.ConvertToPortableUIElement(value);
+
+            var portableParameter = converter.ConvertToPortableUIElement(parameter);
 
             var portableConvertedValue = _coreConverter.ConvertBack(portableValue, targetType, portableParameter, culture);
 
