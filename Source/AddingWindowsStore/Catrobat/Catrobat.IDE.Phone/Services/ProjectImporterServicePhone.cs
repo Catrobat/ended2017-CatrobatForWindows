@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using Windows.Phone.Storage.SharedAccess;
 using Windows.Storage;
 using Catrobat.IDE.Core;
@@ -12,9 +8,6 @@ using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Phone.Controls.FormulaControls;
-using Catrobat.IDE.Phone.ViewModel;
-using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Phone.Services
 {

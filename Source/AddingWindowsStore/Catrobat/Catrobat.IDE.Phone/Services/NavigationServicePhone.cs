@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows;
-using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
@@ -38,9 +34,10 @@ namespace Catrobat.IDE.Phone.Services
 
             if (type.BaseType == typeof(ViewModelBase))
             {
-                pathToXaml = pathToXaml.Replace("ViewModel", "Views");
+                //Catrobat/IDE/Phone/Views/Main/MainView.xaml
+                pathToXaml = pathToXaml.Replace("Catrobat/IDE/Core/ViewModel", "/Views");
 
-                pathToXaml = pathToXaml.Replace("Views.xaml", "View.xaml");
+                pathToXaml = pathToXaml.Replace("ViewModel.xaml", "View.xaml");
             }
 
             try

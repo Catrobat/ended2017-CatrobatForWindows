@@ -13,7 +13,7 @@
   Foreground="{StaticResource PhoneForegroundBrush}"
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d"
-  DataContext="{Binding SoundRecorderViewModel, Source={StaticResource Locator}}"
+  DataContext="{Binding SoundNameChooserViewModel, Source={StaticResource Locator}}"
   shell:SystemTray.IsVisible="True">
 
   <!--LayoutRoot is the root grid where all page content is placed-->
@@ -44,10 +44,10 @@
           <abu:AppBar Id="0">
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.save.rest.png" 
                               Text="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}"
-                              Command="{Binding SaveNameChosenCommand}" />
+                              Command="{Binding SaveCommand}" />
             <abu:AppBarButton IconUri="/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png" 
                               Text="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}"
-                              Command="{Binding CancelNameChosenCommand}"/>
+                              Command="{Binding CancelCommand}"/>
           </abu:AppBar>
         </abu:SwitchAppBarAction>
       </abu:StateChangedTrigger>

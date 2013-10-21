@@ -7,40 +7,25 @@ using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Phone.ViewModel.Main;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Main;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Main
 {
     public partial class MainView : PhoneApplicationPage
     {
-        private readonly MainViewModel _viewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+        private readonly MainViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).MainViewModel;
+
         private const int _offsetKnob = 5;
 
         public MainView()
         {
             InitializeComponent();
 
-            LongListSelectorOnlineProjects.ItemRealized += LongListSelectorOnlineProjects_ItemRealized;
-            Loaded += new RoutedEventHandler(MainPage_Loaded);
-
-            // Dirty but there is no way around this
-            //Messenger.Default.Register<DialogMessage>(
-            //    this,
-            //    msg => Dispatcher.BeginInvoke(() =>
-            //        {
-            //            var result = MessageBox.Show(
-            //                msg.Content,
-            //                msg.Caption,
-            //                msg.Button);
-
-            //            if (msg.Callback != null)
-            //            {
-            //                // Send callback
-            //                msg.ProcessCallback(result);
-            //            }
-            //        }));
+            //LongListSelectorOnlineProjects.ItemRealized += LongListSelectorOnlineProjects_ItemRealized;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -67,29 +52,6 @@ namespace Catrobat.IDE.Phone.Views.Main
             }
             else
                 e.Cancel = true;
-        }
-
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            //var progressIndicator = SystemTray.ProgressIndicator;
-            //if (progressIndicator != null)
-            //{
-            //  return;
-            //}
-
-            //progressIndicator = new ProgressIndicator();
-
-            //SystemTray.SetProgressIndicator(this, progressIndicator);
-
-            //Binding binding = new Binding("IsLoading") { Source = _viewModel };
-            //BindingOperations.SetBinding(
-            //    progressIndicator, ProgressIndicator.IsVisibleProperty, binding);
-
-            //binding = new Binding("IsLoading") { Source = _viewModel };
-            //BindingOperations.SetBinding(
-            //    progressIndicator, ProgressIndicator.IsIndeterminateProperty, binding);
-
-            //progressIndicator.Text = "Loading new tweets...";
         }
 
         private void FilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -200,19 +162,23 @@ namespace Catrobat.IDE.Phone.Views.Main
             };
         }
 
-        private void LongListSelectorOnlineProjects_ItemRealized(object sender, ItemRealizationEventArgs e)
+        //private void LongListSelectorOnlineProjects_ItemRealized(object sender, ItemRealizationEventArgs e)
+        //{
+        //    // !_viewModel.IsLoading &&
+        //    if (LongListSelectorOnlineProjects.ItemsSource != null && LongListSelectorOnlineProjects.ItemsSource.Count >= _offsetKnob)
+        //    {
+        //        if (e.ItemKind == LongListSelectorItemKind.Item)
+        //        {
+        //            if ((e.Container.Content as OnlineProjectHeader).Equals(LongListSelectorOnlineProjects.ItemsSource[LongListSelectorOnlineProjects.ItemsSource.Count - _offsetKnob]))
+        //            {
+        //                _viewModel.LoadOnlineProjects(true);
+        //            }
+        //        }
+        //    }
+        //}
+        private void NavigateToCatrobatWebsite_OnClick(object sender, RoutedEventArgs e)
         {
-            // !_viewModel.IsLoading &&
-            if (LongListSelectorOnlineProjects.ItemsSource != null && LongListSelectorOnlineProjects.ItemsSource.Count >= _offsetKnob)
-            {
-                if (e.ItemKind == LongListSelectorItemKind.Item)
-                {
-                    if ((e.Container.Content as OnlineProjectHeader).Equals(LongListSelectorOnlineProjects.ItemsSource[LongListSelectorOnlineProjects.ItemsSource.Count - _offsetKnob]))
-                    {
-                        _viewModel.LoadOnlineProjects(true);
-                    }
-                }
-            }
+            ServiceLocator.NavigationService.NavigateToWebPage("http://www.pocketcode.org");
         }
     }
 }

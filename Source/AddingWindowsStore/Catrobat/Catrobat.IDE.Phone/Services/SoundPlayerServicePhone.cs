@@ -1,5 +1,4 @@
 ﻿using System.Threading;
-using System.Windows;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Catrobat.IDE.Core.Services;
@@ -116,7 +115,7 @@ namespace Catrobat.IDE.Phone.Services
                 Thread.Sleep(50);
             } while (newState == _previousState && newState != SoundPlayerState.Stopped);
 
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
                 //if (SoundFinished != null && !_aborted)
                 //{

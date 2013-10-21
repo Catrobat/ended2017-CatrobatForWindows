@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Windows;
-using Catrobat.IDE.Phone.ViewModel.Main;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Main;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 using Size = Windows.Foundation.Size;
 using PhoneDirect3DXamlAppComponent;
 
@@ -11,7 +12,8 @@ namespace Catrobat.IDE.Phone.Views.Main
     public partial class PlayerLauncherView : PhoneApplicationPage
     {
         //TODO: maybe delete viewmodel
-        private readonly PlayerLauncherViewModel _viewModel = ServiceLocator.Current.GetInstance<PlayerLauncherViewModel>();
+        private readonly PlayerLauncherViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).PlayerLauncherViewModel;
         public PlayerLauncherView()
         {
             InitializeComponent();

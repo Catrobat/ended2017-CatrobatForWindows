@@ -10,6 +10,7 @@ enum ROTATION_PROVIDER_TYPES
 class RotationProvider
 {
 public:
+    RotationProvider();
     RotationProvider(ROTATION_PROVIDER_TYPES type, float rotation);
     ~RotationProvider();
 

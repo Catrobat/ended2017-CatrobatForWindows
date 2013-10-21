@@ -12,7 +12,7 @@
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
   shell:SystemTray.IsVisible="True"
-  DataContext="{Binding SettingsViewModel, Source={StaticResource Locator}}">
+  DataContext="{Binding SettingsLanguageViewModel, Source={StaticResource Locator}}">
 
   <Grid x:Name="LayoutRoot" Background="Transparent">
     <Grid.RowDefinitions>
@@ -20,17 +20,22 @@
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
-    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 0 20">
-      <TextBlock x:Name="Headline" Margin="0" Text="{Binding Resources.Main_TitleSettings, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" />
-      <TextBlock x:Name="textBlockPageTitle" Margin="0 -10 0 0" Text="{Binding Resources.Main_HeaderLanguage, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextTitle1Style}"/>
+    <StackPanel Grid.Row="0" Margin="10 0 0 20">
+      <TextBlock Margin="0" 
+                 Text="{Binding Resources.Main_TitleSettings, Source={StaticResource LocalizedStrings}}" 
+                 Style="{StaticResource PhoneTextNormalStyle}" />
+      <TextBlock Margin="0 -10 0 0" Text="{Binding Resources.Main_HeaderLanguage, Source={StaticResource LocalizedStrings}}" 
+                 Style="{StaticResource PhoneTextTitle1Style}"/>
     </StackPanel>
 
     <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10 0 0 15">
-      <ListBox Name="listboxLanguages" Margin="0 0 0 15" ItemsSource="{Binding AvailableCultures}" SelectedItem="{Binding CurrentCulture, Mode=TwoWay}">
+      <ListBox Margin="0 0 0 15" ItemsSource="{Binding AvailableCultures}" 
+               SelectedItem="{Binding CurrentCulture, Mode=TwoWay}">
         <ItemsControl.ItemTemplate>
           <DataTemplate>
             <Grid>
-              <TextBlock Margin="0 0 10 10" Text="{Binding NativeName}" FontSize="{StaticResource PhoneFontSizeLarge}" />
+              <TextBlock Margin="0 0 10 10" Text="{Binding NativeName}" 
+                         FontSize="{StaticResource PhoneFontSizeLarge}" />
             </Grid>
           </DataTemplate>
         </ItemsControl.ItemTemplate>

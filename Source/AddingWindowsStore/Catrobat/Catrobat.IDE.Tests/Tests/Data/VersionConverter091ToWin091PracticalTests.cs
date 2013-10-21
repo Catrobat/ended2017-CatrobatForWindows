@@ -17,7 +17,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
         #region Examples from PocketCode.com
 
-        //[TestMethod]
+        //[TestMethod, TestCategory("GatedTests")]
         //public void CatrobatVersionConverterTest_Convert_Compass()
         //{
         //    XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/VersionConverterTest_08_to_Win08_Compass_Input");
@@ -27,7 +27,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         //    XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         //}
 
-        //[TestMethod]
+        //[TestMethod, TestCategory("GatedTests")]
         //public void CatrobatVersionConverterTest_Convert_Wake_Up()
         //{
         //    XDocument actualDocument = SampleLoader.LoadSampleXDocument("Converter/091_Win091/PracticalTests/VersionConverterTest_08_to_Win08_Wake_Up_Input");
@@ -37,98 +37,98 @@ namespace Catrobat.IDE.Tests.Tests.Data
         //    XmlDocumentCompare.Compare(expectedDocument, actualDocument);
         //}
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode01()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test1Input");
         }
 
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode02()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test2Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode03()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test3Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode04()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test4Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode05()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test5Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode06()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test6Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode07()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test7Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode08()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test8Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode09()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test9Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode10()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test10Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode11()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test11Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode12()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test12Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode13()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test13Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode14()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test14Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode15()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test15Input");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void CatrobatVersionConverterTest_PocketCode16()
         {
             TestSampleData("Converter/091_Win091/PracticalTests/Test16Input");

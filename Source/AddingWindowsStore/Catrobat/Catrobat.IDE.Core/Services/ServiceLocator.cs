@@ -1,86 +1,187 @@
-﻿using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.Utilities.Helpers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Catrobat.IDE.Core.Services.Storage;
 
 namespace Catrobat.IDE.Core.Services
 {
+    public enum TypeCreationMode { Lazy, Normal }
+
     public class ServiceLocator
     {
-        public static INavigationService NavigationService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static INavigationService NavigationService
+        { get { return GetInstance<INavigationService>(); } }
 
-        public static ISystemInformationService SystemInformationService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static ISystemInformationService SystemInformationService
+        { get { return GetInstance<ISystemInformationService>(); } }
 
-        public static ICultureService CulureService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static ICultureService CulureService
+        { get { return GetInstance<ICultureService>(); } }
 
-        public static IImageResizeService ImageResizeService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IImageResizeService ImageResizeService
+        { get { return GetInstance<IImageResizeService>(); } }
 
-        public static IPlayerLauncherService PlayerLauncherService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IPlayerLauncherService PlayerLauncherService
+        { get { return GetInstance<IPlayerLauncherService>(); } }
 
-        public static IResourceLoaderFactory ResourceLoaderFactory { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IResourceLoaderFactory ResourceLoaderFactory
+        { get { return GetInstance<IResourceLoaderFactory>(); } }
 
-        public static IStorageFactory StorageFactory { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IStorageFactory StorageFactory
+        { get { return GetInstance<IStorageFactory>(); } }
 
-        public static IServerCommunicationService ServerCommunicationService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IServerCommunicationService ServerCommunicationService
+        { get { return GetInstance<IServerCommunicationService>(); } }
 
-        public static IImageSourceConversionService ImageSourceConversionService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IImageSourceConversionService ImageSourceConversionService
+        { get { return GetInstance<IImageSourceConversionService>(); } }
 
-        public static IProjectImporterService ProjectImporterService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IProjectImporterService ProjectImporterService
+        { get { return GetInstance<IProjectImporterService>(); } }
 
-        public static ISoundPlayerService SoundPlayerService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static ISoundPlayerService SoundPlayerService
+        { get { return GetInstance<ISoundPlayerService>(); } }
 
-        public static ISoundRecorderService SoundRecorderService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static ISoundRecorderService SoundRecorderService
+        { get { return GetInstance<ISoundRecorderService>(); } }
 
-        public static IPictureService PictureService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IPictureService PictureService
+        { get { return GetInstance<IPictureService>(); } }
 
-        public static INotifictionService NotifictionService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static INotifictionService NotifictionService
+        { get { return GetInstance<INotifictionService>(); } }
 
-        public static IColorConversionService ColorConversionService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IColorConversionService ColorConversionService
+        { get { return GetInstance<IColorConversionService>(); } }
 
-        public static IShareService ShareService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IShareService ShareService
+        { get { return GetInstance<IShareService>(); } }
 
-        public static IDispatcherService DispatcherService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IDispatcherService DispatcherService
+        { get { return GetInstance<IDispatcherService>(); } }
 
-        public static IPortableUIElementConversionService PortableUIElementConversionService { get; private set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IPortableUIElementConversionService PortableUIElementConversionService
+        { get { return GetInstance<IPortableUIElementConversionService>(); } }
 
-        public static void SetServices(
-            INavigationService navigationService,
-            ISystemInformationService systemInformationService,
-            ICultureService culureService,
-            IImageResizeService imageResizeService,
-            IPlayerLauncherService playerLauncherService,
-            IResourceLoaderFactory resourceLoaderFactory,
-            IStorageFactory storageFactory,
-            IServerCommunicationService serverCommunicationService,
-            IImageSourceConversionService imageSourceConversionService,
-            IProjectImporterService projectImporterService,
-            ISoundPlayerService soundPlayerService,
-            ISoundRecorderService soundRecorderService,
-            IPictureService pictureService,
-            INotifictionService notifictionService,
-            IColorConversionService colorConversionService,
-            IShareService shareService,
-            IDispatcherService dispatcherService,
-            IPortableUIElementConversionService portableUIElementConversionService
-            )
+        public static object ViewModelLocator { get; set; }
+
+        public static object ThemeChooser { get; set; }
+
+        public static object LocalizedStrings { get; set; }
+
+        
+
+        private static readonly Dictionary<Type, object> Instances = new Dictionary<Type, object>();
+
+        public static void Register<T>(TypeCreationMode mode)
         {
-            NavigationService = navigationService;
-            SystemInformationService = systemInformationService;
-            CulureService = culureService;
-            ImageResizeService = imageResizeService;
-            PlayerLauncherService = playerLauncherService;
-            ResourceLoaderFactory = resourceLoaderFactory;
-            StorageFactory = storageFactory;
-            ServerCommunicationService = serverCommunicationService;
-            ImageSourceConversionService = imageSourceConversionService;
-            ProjectImporterService = projectImporterService;
-            SoundPlayerService = soundPlayerService;
-            SoundRecorderService = soundRecorderService;
-            PictureService = pictureService;
-            NotifictionService = notifictionService;
-            ColorConversionService = colorConversionService;
-            ShareService = shareService;
-            DispatcherService = dispatcherService;
-            PortableUIElementConversionService = portableUIElementConversionService;
+            lock (Instances)
+            {
+                if (mode == TypeCreationMode.Lazy)
+                {
+                    Instances.Add(typeof(T), null);
+                }
+                else if (mode == TypeCreationMode.Normal)
+                {
+                    Instances.Add(typeof(T), Activator.CreateInstance<T>());
+                }
+            }
+        }
+
+        public static T GetInstance<T>()
+        {
+            lock (Instances)
+            {
+                object instance = null;
+                bool isInDictionary = false;
+
+                foreach (var pair in Instances)
+                {
+                    if (pair.Key.GetTypeInfo().BaseType == typeof(T)
+                        || pair.Key == typeof(T)
+                        || pair.Key.GetTypeInfo().ImplementedInterfaces.Contains(typeof(T)))
+                    {
+                        instance = pair.Value;
+
+                        isInDictionary = instance != null;
+
+                        if (!isInDictionary)
+                            instance = Activator.CreateInstance(pair.Key);
+
+                        break;
+                    }
+                }
+
+                if (instance == null)
+                    throw new Exception("Type " + typeof(T).GetTypeInfo().Name + " is not registered.");
+
+                if (!isInDictionary)
+                    Instances[typeof(T)] = instance;
+
+                return (T)instance;
+            }
+        }
+
+
+
+        internal static void UnRegisterAll()
+        {
+            Instances.Clear();
         }
     }
 }

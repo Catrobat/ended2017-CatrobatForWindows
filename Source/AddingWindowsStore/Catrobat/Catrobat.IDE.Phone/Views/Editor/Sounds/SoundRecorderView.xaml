@@ -7,7 +7,6 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:c="clr-namespace:Catrobat.IDE.Phone.Controls.Buttons"
-  xmlns:converters="clr-namespace:Catrobat.IDE.Phone.Converters"
   xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
   xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
   xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -48,7 +47,9 @@
       <TextBlock Margin="0"  />
     </StackPanel>
     <StackPanel Grid.Row="0" Margin="12,17,0,28">
-      <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{Binding Resources.Editor_TitleRecorder, Source={StaticResource LocalizedStrings}}" Name="Headline" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+      <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                 Text="{Binding Resources.Editor_TitleRecorder, Source={StaticResource LocalizedStrings}}" 
+                 Name="Headline" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
     </StackPanel>
 
     <!--ContentPanel - place additional content here-->
@@ -72,7 +73,8 @@
             <ColumnDefinition Width="1*"/>
           </Grid.ColumnDefinitions>
 
-          <Grid Grid.Column="0" Visibility="{Binding IsRecording, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}">
+          <Grid Grid.Column="0" 
+                Visibility="{Binding IsRecording, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}">
             <Ellipse Name="RecordingStatusElement" Grid.Column="0" Margin="0 10 7 0" Fill="Red" StrokeThickness="0" 
                    Stroke="White" Width="30" Height="30" 
                    VerticalAlignment="Top" HorizontalAlignment="Right">

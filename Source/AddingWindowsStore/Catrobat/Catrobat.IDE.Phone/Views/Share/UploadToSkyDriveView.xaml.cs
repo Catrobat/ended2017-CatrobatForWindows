@@ -1,16 +1,17 @@
-﻿using Catrobat.IDE.Phone.Controls.FormulaControls;
-using Catrobat.IDE.Phone.ViewModel.Share;
+﻿using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Share;
 using Microsoft.Live;
 using Microsoft.Live.Controls;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Share
 {
     public partial class UploadToSkyDriveView : PhoneApplicationPage
     {
         private LiveConnectClient _client;
-        private readonly UploadToSkyDriveViewModel _viewModel = ServiceLocator.Current.GetInstance<UploadToSkyDriveViewModel>();
+        private readonly UploadToSkyDriveViewModel _viewModel =
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).UploadToSkyDriveViewModel;
 
         public UploadToSkyDriveView()
         {

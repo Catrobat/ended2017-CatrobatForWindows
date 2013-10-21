@@ -44,7 +44,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_TypingTest_02()
         {
             var editor = new FormulaEditor();
@@ -137,7 +137,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_DecimalSeparatorTest_02()
         {
             var editor = new FormulaEditor();
@@ -318,7 +318,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Tree_03()
         {
             var editor = new FormulaEditor();
@@ -465,7 +465,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Tree_04()
         {
             var editor = new FormulaEditor();
@@ -514,7 +514,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region equals
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_EqualsTest_01()
         {
             var editor = new FormulaEditor();
@@ -604,7 +604,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region relational operator
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_RelationalOperator_01()
         {
             var editor = new FormulaEditor();
@@ -710,7 +710,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_RelationalOperator_02()
         {
             var editor = new FormulaEditor();
@@ -780,7 +780,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_RelationalOperator_03()
         {
             var editor = new FormulaEditor();
@@ -837,7 +837,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region logical operator
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_LogicalOperator_01()
         {
             var editor = new FormulaEditor();
@@ -919,7 +919,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_LogicalOprator_02()
         {
             var editor = new FormulaEditor();
@@ -985,7 +985,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_LogicalOperator_03()
         {
             var editor = new FormulaEditor();
@@ -1071,7 +1071,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region signed number
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_SignedNumber_01()
         {
             var editor = new FormulaEditor();
@@ -1136,7 +1136,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_SignedNumber_02()
         {
             var editor = new FormulaEditor();
@@ -1243,7 +1243,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_SignedNumber_03()
         {
             var editor = new FormulaEditor();
@@ -1314,7 +1314,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_SignedNumber_05()
         {
             var editor = new FormulaEditor();
@@ -1366,7 +1366,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_SignedNumber_06()
         {
             var editor = new FormulaEditor();
@@ -1419,7 +1419,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_SignedNumber_07()
         {
             var editor = new FormulaEditor();
@@ -1462,7 +1462,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region logical value
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_LogicValue_01()
         {
             var editor = new FormulaEditor();
@@ -1555,7 +1555,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_LogicValue_02()
         {
             var editor = new FormulaEditor();
@@ -1594,7 +1594,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_LogicValue_03()
         {
             var editor = new FormulaEditor();
@@ -1698,7 +1698,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Deletion_03()
         {
             var editor = new FormulaEditor();
@@ -1853,7 +1853,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Deletion_04()
         {
             var editor = new FormulaEditor();
@@ -1882,7 +1882,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Deletion_05()
         {
             var editor = new FormulaEditor();
@@ -1909,7 +1909,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Deletion_06()
         {
             var editor = new FormulaEditor();
@@ -1954,7 +1954,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region logic not
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_LogicNot_01()
         {
             var editor = new FormulaEditor();
@@ -1999,7 +1999,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_LogicNot_02()
         {
             var editor = new FormulaEditor();
@@ -2020,7 +2020,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicOr));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_LogicNot_04()
         {
             var editor = new FormulaEditor();
@@ -2059,7 +2059,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_LogicNot_05()
         {
             var editor = new FormulaEditor();
@@ -2084,7 +2084,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region function
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Function_DefaultValues()
         {
             var editor = new FormulaEditor();
@@ -2337,7 +2337,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Function_02()
         {
             var editor = new FormulaEditor();
@@ -2405,7 +2405,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Function_03()
         {
             var editor = new FormulaEditor();
@@ -2471,7 +2471,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
  
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Function_04()
         {
             var editor = new FormulaEditor();
@@ -2520,7 +2520,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region bracket
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Bracket_01()
         {
             var editor = new FormulaEditor();
@@ -2654,7 +2654,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Bracket_02()
         {
             var editor = new FormulaEditor();
@@ -2706,7 +2706,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Bracket_03()
         {
             var editor = new FormulaEditor();
@@ -2840,7 +2840,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Bracket_04()
         {
             var editor = new FormulaEditor();
@@ -2875,7 +2875,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Bracket_05()
         {
             var editor = new FormulaEditor();
@@ -2908,7 +2908,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Bracket_06()
         {
             var editor = new FormulaEditor();
@@ -2939,7 +2939,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Bracket_07()
         {
             var editor = new FormulaEditor();
@@ -2960,7 +2960,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.CloseBracket));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Bracket_08()
         {
             var editor = new FormulaEditor();
@@ -3025,7 +3025,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Bracket_09()
         {
             var editor = new FormulaEditor();
@@ -3067,7 +3067,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region variable
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Variable_01()
         {
             var editor = new FormulaEditor();
@@ -3104,7 +3104,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Variable_02()
         {
             var editor = new FormulaEditor();
@@ -3141,7 +3141,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Variable_03()
         {
             var editor = new FormulaEditor();
@@ -3182,7 +3182,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Variable_04()
         {
             var editor = new FormulaEditor();
@@ -3227,7 +3227,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region selection
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Selection_NoSelection()
         {
             var editor = new FormulaEditor();
@@ -3267,7 +3267,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Selection_01()
         {
             var editor = new FormulaEditor();
@@ -3316,7 +3316,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Selection_02()
         {
             var editor = new FormulaEditor();
@@ -3365,7 +3365,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Selection_03()
         {
             var editor = new FormulaEditor();
@@ -3426,7 +3426,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Selection_Number()
         {
             var editor = new FormulaEditor
@@ -3471,7 +3471,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Selection_Operator()
         {
             var editor = new FormulaEditor
@@ -3519,7 +3519,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Selection_Sensor()
         {
             var editor = new FormulaEditor
@@ -3562,7 +3562,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region terminal zero
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_TerminalZero_01()
         {
             var editor = new FormulaEditor();
@@ -3637,7 +3637,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region node with empty childs
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_EmptyChilds()
         {
 
@@ -3672,7 +3672,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region undo
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Undo_01()
         {
             var editor = new FormulaEditor();
@@ -3716,7 +3716,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
 
-        [TestMethod]
+        [TestMethod, TestCategory("GatedTests")]
         public void FormulaEditorTests_Undo_02()
         {
             var editor = new FormulaEditor();

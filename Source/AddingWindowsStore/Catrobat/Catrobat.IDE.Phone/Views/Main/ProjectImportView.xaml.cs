@@ -1,14 +1,16 @@
 ﻿using System.ComponentModel;
 using System.Windows.Navigation;
-using Catrobat.IDE.Phone.ViewModel.Main;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Main;
 using Microsoft.Phone.Controls;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Catrobat.IDE.Phone.Views.Main
 {
     public partial class ProjectImportView : PhoneApplicationPage
     {
-        private readonly ProjectImportViewModel _viewModel = ServiceLocator.Current.GetInstance<ProjectImportViewModel>();
+        private readonly ProjectImportViewModel _viewModel = 
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).ProjectImportViewModel;
 
         public ProjectImportView()
         {
