@@ -638,11 +638,47 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mole.
+        ///   Looks up a localized string similar to Cat.
         /// </summary>
-        public static string DefaultProject_Mole {
+        public static string DefaultProject_Cat {
             get {
-                return ResourceManager.GetString("DefaultProject_Mole", resourceCulture);
+                return ResourceManager.GetString("DefaultProject_Cat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cloud.
+        /// </summary>
+        public static string DefaultProject_Cloud {
+            get {
+                return ResourceManager.GetString("DefaultProject_Cloud", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rain drop.
+        /// </summary>
+        public static string DefaultProject_Rain {
+            get {
+                return ResourceManager.GetString("DefaultProject_Rain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sun.
+        /// </summary>
+        public static string DefaultProject_Sun {
+            get {
+                return ResourceManager.GetString("DefaultProject_Sun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Water.
+        /// </summary>
+        public static string DefaultProject_Water {
+            get {
+                return ResourceManager.GetString("DefaultProject_Water", resourceCulture);
             }
         }
         

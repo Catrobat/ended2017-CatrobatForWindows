@@ -947,7 +947,19 @@
   <data name="DefaultProject_Background" xml:space="preserve">
     <value>Background</value>
   </data>
-  <data name="DefaultProject_Mole" xml:space="preserve">
-    <value>Maulwurf</value>
+  <data name="DefaultProject_Cat" xml:space="preserve">
+    <value>Katze</value>
+  </data>
+  <data name="DefaultProject_Cloud" xml:space="preserve">
+    <value>Wolke</value>
+  </data>
+  <data name="DefaultProject_Rain" xml:space="preserve">
+    <value>Regentropfen</value>
+  </data>
+  <data name="DefaultProject_Sun" xml:space="preserve">
+    <value>Sonne</value>
+  </data>
+  <data name="DefaultProject_Water" xml:space="preserve">
+    <value>Wasser</value>
   </data>
 </root>

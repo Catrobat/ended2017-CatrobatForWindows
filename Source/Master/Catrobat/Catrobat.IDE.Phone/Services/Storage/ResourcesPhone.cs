@@ -20,8 +20,10 @@ namespace Catrobat.IDE.Phone.Services.Storage
             {
                 case ResourceScope.Core:
                     {
-                        projectPath = "Catrobat.IDE.Core.";
-                        var path = projectPath + uri.Replace("/", ".");
+                        projectPath = "Catrobat.IDE.Core";
+                        var path = Path.Combine(projectPath, uri);
+                        path = path.Replace("\\", "/");
+                        path = path.Replace("/", ".");
                         var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
                         _openedStreams.Add(stream);
                         return stream;

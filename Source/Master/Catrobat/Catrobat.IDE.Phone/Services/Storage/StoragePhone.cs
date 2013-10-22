@@ -391,6 +391,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
 
         private void CreateFoldersIfNotExist(string path, bool isFilePath)
         {
+            path = path.Replace("\\", "/");
             var splitPath = path.Split('/');
             var offset = isFilePath ? 1 : 0;
             for (var index = 0; index < splitPath.Length - 1; index++)
