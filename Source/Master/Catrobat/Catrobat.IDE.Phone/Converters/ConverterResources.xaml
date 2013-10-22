@@ -5,7 +5,6 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:system="clr-namespace:System;assembly=mscorlib"
   xmlns:converters="clr-namespace:Catrobat.IDE.Phone.Converters"
-  xmlns:nativeConverters="clr-namespace:Catrobat.IDE.Phone.Converters.NativeConverters"
 
   mc:Ignorable="d">
   
