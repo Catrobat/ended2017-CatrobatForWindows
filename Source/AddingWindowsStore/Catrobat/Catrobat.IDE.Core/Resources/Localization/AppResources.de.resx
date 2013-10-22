@@ -196,7 +196,7 @@
     <value>Schritte</value>
   </data>
   <data name="Brick_NextCostume" xml:space="preserve">
-    <value>Nächstes Kostüm</value>
+    <value>Nächstes Aussehen</value>
   </data>
   <data name="Brick_Note" xml:space="preserve">
     <value>Notiz</value>
@@ -223,7 +223,7 @@
     <value>Setze Helligkeit auf</value>
   </data>
   <data name="Brick_SetCostume" xml:space="preserve">
-    <value>Setze Kostüm</value>
+    <value>Setze Aussehen</value>
   </data>
   <data name="Brick_SetGhostEffectTo" xml:space="preserve">
     <value>Setze Durchsichtigkeit auf</value>
@@ -265,7 +265,7 @@
     <value>Wenn ich empfange</value>
   </data>
   <data name="Brick_WhenProjectStarts" xml:space="preserve">
-    <value>Wenn Projekt gestartet</value>
+    <value>Wenn Programm gestartet</value>
   </data>
   <data name="Brick_WhenTapped" xml:space="preserve">
     <value>Wenn angetippt</value>
@@ -280,7 +280,7 @@
     <value>Nachricht</value>
   </data>
   <data name="Editor_ButtonAddCostume" xml:space="preserve">
-    <value>Neues Kostüm</value>
+    <value>Neues Aussehen</value>
   </data>
   <data name="Editor_ButtonAddObject" xml:space="preserve">
     <value>Neues Objekt</value>
@@ -322,13 +322,13 @@
     <value>Auswahl aufheben</value>
   </data>
   <data name="Editor_CostumeName" xml:space="preserve">
-    <value>Kostümname</value>
+    <value>Name</value>
   </data>
   <data name="Editor_CostumePlural" xml:space="preserve">
-    <value>Kostüme</value>
+    <value>Aussehen</value>
   </data>
   <data name="Editor_CostumeSingular" xml:space="preserve">
-    <value>Kostüm</value>
+    <value>Aussehen</value>
   </data>
   <data name="Editor_Image" xml:space="preserve">
     <value>Bild</value>
@@ -352,7 +352,7 @@
     <value>Medienbibliothek</value>
   </data>
   <data name="Editor_MenuProjectSettings" xml:space="preserve">
-    <value>Projekt Einstellungen</value>
+    <value>Programm Einstellungen</value>
   </data>
   <data name="Editor_MenuStartSite" xml:space="preserve">
     <value>Startseite</value>
@@ -382,7 +382,7 @@
     <value>{0} {1} ausgewählt. Wirlich löschen?</value>
   </data>
   <data name="Editor_NoCostumeSelected" xml:space="preserve">
-    <value>Kein Kostüm...</value>
+    <value>Kein Aussehen...</value>
   </data>
   <data name="Editor_NoMessageSelected" xml:space="preserve">
     <value>Keine Nachricht...</value>
@@ -406,7 +406,7 @@
     <value>Aktionen</value>
   </data>
   <data name="Editor_PivotCostumes" xml:space="preserve">
-    <value>Kostüme</value>
+    <value>Aussehen</value>
   </data>
   <data name="Editor_PivotObjects" xml:space="preserve">
     <value>Objekte</value>
@@ -415,7 +415,7 @@
     <value>Klänge</value>
   </data>
   <data name="Editor_ProjectName" xml:space="preserve">
-    <value>Projektname</value>
+    <value>Name des Programms</value>
   </data>
   <data name="Editor_Recorder" xml:space="preserve">
     <value>Recorder</value>
@@ -457,7 +457,7 @@
     <value>Objektname</value>
   </data>
   <data name="Editor_TitleChangeCostumeName" xml:space="preserve">
-    <value>KOSTÜMNAMEN ÄNDERN</value>
+    <value>NAMES DES AUSSEHENS ÄNDERN</value>
   </data>
   <data name="Editor_TitleChangeSoundName" xml:space="preserve">
     <value>KLANGNAMEN ÄNDERN</value>
@@ -472,7 +472,7 @@
     <value>KATEGORIE WÄHLEN</value>
   </data>
   <data name="Editor_TitleChooseCostumeName" xml:space="preserve">
-    <value>KOSTÜMNAMEN WÄHLEN</value>
+    <value>NAMES DES AUSSEHENS WÄHLEN</value>
   </data>
   <data name="Editor_TitleChooseSound" xml:space="preserve">
     <value>KLANG WÄHLEN</value>
@@ -487,7 +487,7 @@
     <value>NEUE NACHRICHT</value>
   </data>
   <data name="Editor_TitleNewCostume" xml:space="preserve">
-    <value>NEUES KOSTÜM</value>
+    <value>NEUES AUSSEHEN</value>
   </data>
   <data name="Editor_TitleNewSound" xml:space="preserve">
     <value>NEUER KLANG</value>
@@ -496,7 +496,7 @@
     <value>NEUES OBJEKT</value>
   </data>
   <data name="Editor_TitleProjectSettings" xml:space="preserve">
-    <value>PROJEKT EINSTELLUNGEN</value>
+    <value>PROGRAMM EINSTELLUNGEN</value>
   </data>
   <data name="Editor_TitleRecorder" xml:space="preserve">
     <value>KLANG AUFNEHMEN</value>
@@ -586,7 +586,7 @@
     <value>Speicherverbrauch anzeigen</value>
   </data>
   <data name="Main_DownloadQueueMessage" xml:space="preserve">
-    <value>Das gewählte Projekt wird heruntergeladen. Das kann eine Weile dauern, aber wir sagen dir Bescheid, wenn es da ist!</value>
+    <value>Das gewählte Programm wird heruntergeladen. Das kann eine Weile dauern, aber wir sagen dir Bescheid, wenn es da ist!</value>
   </data>
   <data name="Main_FilterTextBoxHint" xml:space="preserve">
     <value>Suchen...</value>
@@ -595,13 +595,13 @@
     <value>Über</value>
   </data>
   <data name="Main_HeaderCurrentProject" xml:space="preserve">
-    <value>Aktuelles Projekt</value>
+    <value>Aktuelles Programm</value>
   </data>
   <data name="Main_HeaderLanguage" xml:space="preserve">
     <value>Sprache</value>
   </data>
   <data name="Main_HeaderLocalProjects" xml:space="preserve">
-    <value>Meine Projekte</value>
+    <value>Meine Programme</value>
   </data>
   <data name="Main_HeaderSettings" xml:space="preserve">
     <value>Einstellungen</value>
@@ -610,16 +610,16 @@
     <value>Sprache</value>
   </data>
   <data name="Main_MainCopyProjectDialogMessage" xml:space="preserve">
-    <value>Sind sie sicher, dass sie das Projekt "{0}" kopieren wollen?</value>
+    <value>Sind sie sicher, dass sie das Programm "{0}" kopieren wollen?</value>
   </data>
   <data name="Main_MainCopyProjectDialogTitle" xml:space="preserve">
-    <value>Projekt kopieren?</value>
+    <value>Programm kopieren?</value>
   </data>
   <data name="Main_MainDeleteProjectDialogMessage" xml:space="preserve">
-    <value>Sind sie sicher, dass sie das Projekt "{0}" löschen wollen?</value>
+    <value>Sind sie sicher, dass sie das Programm "{0}" löschen wollen?</value>
   </data>
   <data name="Main_MainDeleteProjectDialogTitle" xml:space="preserve">
-    <value>Projekt löschen?</value>
+    <value>Programm löschen?</value>
   </data>
   <data name="Main_NoDownloadsPending" xml:space="preserve">
     <value>Alle Downloads wurden abgeschlossen.</value>
@@ -643,7 +643,7 @@
     <value>Mehr laden...</value>
   </data>
   <data name="Main_OnlineProjectProject" xml:space="preserve">
-    <value>Projekt:</value>
+    <value>Programm:</value>
   </data>
   <data name="Main_OnlineProjectReportButton" xml:space="preserve">
     <value>Als unangemessen melden</value>
@@ -664,13 +664,13 @@
     <value>{0} Mal angesehen</value>
   </data>
   <data name="Main_ProjectDoesNotExist" xml:space="preserve">
-    <value>Projekt existiert nicht.</value>
+    <value>Programm existiert nicht.</value>
   </data>
   <data name="Main_ProjectName" xml:space="preserve">
-    <value>Projektname</value>
+    <value>Name des Programms</value>
   </data>
   <data name="Main_ProjectNotValid" xml:space="preserve">
-    <value>Projekt ist ungültig.</value>
+    <value>Programm ist ungültig.</value>
   </data>
   <data name="App_ResourceLanguage" xml:space="preserve">
     <value>de</value>
@@ -685,13 +685,13 @@
     <value>Design</value>
   </data>
   <data name="Main_TitleNewProject" xml:space="preserve">
-    <value>NEUES PROJEKT</value>
+    <value>NEUES PROGRAMM</value>
   </data>
   <data name="Main_TitleSettings" xml:space="preserve">
     <value>EINSTELLUNGEN</value>
   </data>
   <data name="Main_TitleUploadProject" xml:space="preserve">
-    <value>PROJEKT HOCHLADEN</value>
+    <value>PROGRAMM HOCHLADEN</value>
   </data>
   <data name="Main_TitleUploadProjectLogin" xml:space="preserve">
     <value>EINLOGGEN ODER REGISTRIEREN</value>
@@ -712,7 +712,7 @@
     <value>Beschreibung:</value>
   </data>
   <data name="Main_UploadProjectProjectName" xml:space="preserve">
-    <value>Projekt:</value>
+    <value>Programm:</value>
   </data>
   <data name="Main_UploadProjectRegistrationSucessful" xml:space="preserve">
     <value>Registrierung erfolgreich!</value>
@@ -727,10 +727,10 @@
     <value>Willkommen {0}!</value>
   </data>
   <data name="Main_UploadQueueMessage" xml:space="preserve">
-    <value>Dein Projekt wird hochgeladen. Das kann eine Weile dauern, aber wir sagen dir Bescheid, wenn der Vorgang abgeschlossen ist!</value>
+    <value>Dein Programm wird hochgeladen. Das kann eine Weile dauern, aber wir sagen dir Bescheid, wenn der Vorgang abgeschlossen ist!</value>
   </data>
   <data name="Main_VersionIsNotSupported" xml:space="preserve">
-    <value>Die Version des Projekts wird von dieser Programmversion nicht unterstützt.</value>
+    <value>Die Version des Programms wird von dieser Programmversion nicht unterstützt.</value>
   </data>
   <data name="Brick_IfLogicEnd" xml:space="preserve">
     <value>Sonst Ende</value>
@@ -799,7 +799,7 @@
     <value>PROGRAMMVARIABLENNAME WÄHLEN</value>
   </data>
   <data name="Main_SelectedProjectNotValidMessage" xml:space="preserve">
-    <value>Projekt ungültig</value>
+    <value>Programm ungültig</value>
   </data>
   <data name="Formula_LogicAnd" xml:space="preserve">
     <value>UND</value>
@@ -824,7 +824,7 @@
     <value>Hinzufügen</value>
   </data>
   <data name="Main_UseCurrentProjectAsTemplate" xml:space="preserve">
-    <value>Ausgewähltes Projekt ({0}) als Vorlage verwenden?</value>
+    <value>Ausgewähltes Programm ({0}) als Vorlage verwenden?</value>
   </data>
   <data name="Formula_FunctionSqrt" xml:space="preserve">
     <value>SQRT</value>
@@ -882,7 +882,7 @@
     <value>-</value>
   </data>
   <data name="Main_SelectedProjectNotValidHeader" xml:space="preserve">
-    <value>Leider konnte das ausgewählte Projekt nicht geöffnet werden.</value>
+    <value>Leider konnte das ausgewählte Programm nicht geöffnet werden.</value>
   </data>
   <data name="Editor_LocalVariables" xml:space="preserve">
     <value>Objekt</value>
@@ -900,10 +900,10 @@
     <value>Name und Beschreibung ändern</value>
   </data>
   <data name="Editor_PreparingProject" xml:space="preserve">
-    <value>Projekt wird geladen</value>
+    <value>Programm wird geladen</value>
   </data>
   <data name="Main_ProjectGettingActivated" xml:space="preserve">
-    <value>Projekt wird aktiviert.</value>
+    <value>Programm wird aktiviert.</value>
   </data>
   <data name="Brick_ForeverLoopEnd" xml:space="preserve">
     <value>Wiederholen beenden</value>
@@ -918,7 +918,7 @@
     <value>Drücke '+' um eine neue Aktion hinzuzufügen.</value>
   </data>
   <data name="Editor_ClickPlusToAddCostume" xml:space="preserve">
-    <value>Drücke '+' um ein neues Kostüm hinzuzufügen.</value>
+    <value>Drücke '+' um ein neues Aussehen hinzuzufügen.</value>
   </data>
   <data name="Editor_ClickPlusToAddSound" xml:space="preserve">
     <value>Drücke '+' um einen neuen Klang hinzuzufügen.</value>
@@ -942,12 +942,24 @@
     <value>Teilen</value>
   </data>
   <data name="Main_DefaultProjectName" xml:space="preserve">
-    <value>Standardprojekt</value>
+    <value>Standardprogramm</value>
   </data>
   <data name="DefaultProject_Background" xml:space="preserve">
     <value>Background</value>
   </data>
-  <data name="DefaultProject_Mole" xml:space="preserve">
-    <value>Maulwurf</value>
+  <data name="DefaultProject_Cat" xml:space="preserve">
+    <value>Katze</value>
+  </data>
+  <data name="DefaultProject_Cloud" xml:space="preserve">
+    <value>Wolke</value>
+  </data>
+  <data name="DefaultProject_Rain" xml:space="preserve">
+    <value>Regentropfen</value>
+  </data>
+  <data name="DefaultProject_Sun" xml:space="preserve">
+    <value>Sonne</value>
+  </data>
+  <data name="DefaultProject_Water" xml:space="preserve">
+    <value>Wasser</value>
   </data>
 </root>

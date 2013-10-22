@@ -196,7 +196,7 @@
     <value>steps</value>
   </data>
   <data name="Brick_NextCostume" xml:space="preserve">
-    <value>next costume</value>
+    <value>next look</value>
   </data>
   <data name="Brick_Note" xml:space="preserve">
     <value>note</value>
@@ -223,7 +223,7 @@
     <value>set brightness to</value>
   </data>
   <data name="Brick_SetCostume" xml:space="preserve">
-    <value>set costume</value>
+    <value>set look</value>
   </data>
   <data name="Brick_SetGhostEffectTo" xml:space="preserve">
     <value>set ghost effect to</value>
@@ -265,7 +265,7 @@
     <value>when I receive</value>
   </data>
   <data name="Brick_WhenProjectStarts" xml:space="preserve">
-    <value>when project starts</value>
+    <value>when program starts</value>
   </data>
   <data name="Brick_WhenTapped" xml:space="preserve">
     <value>when tapped</value>
@@ -280,7 +280,7 @@
     <value>Broadcast message</value>
   </data>
   <data name="Editor_ButtonAddCostume" xml:space="preserve">
-    <value>new costume</value>
+    <value>new look</value>
   </data>
   <data name="Editor_ButtonAddObject" xml:space="preserve">
     <value>new object</value>
@@ -322,13 +322,13 @@
     <value>clear selection</value>
   </data>
   <data name="Editor_CostumeName" xml:space="preserve">
-    <value>Costume name</value>
+    <value>Look name</value>
   </data>
   <data name="Editor_CostumePlural" xml:space="preserve">
-    <value>costumes</value>
+    <value>looks</value>
   </data>
   <data name="Editor_CostumeSingular" xml:space="preserve">
-    <value>costume</value>
+    <value>look</value>
   </data>
   <data name="Editor_Image" xml:space="preserve">
     <value>Image</value>
@@ -352,7 +352,7 @@
     <value>Media Library</value>
   </data>
   <data name="Editor_MenuProjectSettings" xml:space="preserve">
-    <value>Project settings</value>
+    <value>Program settings</value>
   </data>
   <data name="Editor_MenuStartSite" xml:space="preserve">
     <value>Start site</value>
@@ -382,7 +382,7 @@
     <value>Unfortunately the image has a not supported format.</value>
   </data>
   <data name="Editor_NoCostumeSelected" xml:space="preserve">
-    <value>No costume selected</value>
+    <value>No look selected</value>
   </data>
   <data name="Editor_NoMessageSelected" xml:space="preserve">
     <value>No message selected</value>
@@ -406,7 +406,7 @@
     <value>Actions</value>
   </data>
   <data name="Editor_PivotCostumes" xml:space="preserve">
-    <value>Costumes</value>
+    <value>Looks</value>
   </data>
   <data name="Editor_PivotObjects" xml:space="preserve">
     <value>Objects</value>
@@ -415,7 +415,7 @@
     <value>Sounds</value>
   </data>
   <data name="Editor_ProjectName" xml:space="preserve">
-    <value>Project name</value>
+    <value>Program name</value>
   </data>
   <data name="Editor_Recorder" xml:space="preserve">
     <value>Recorder</value>
@@ -454,7 +454,7 @@
     <value>Object name</value>
   </data>
   <data name="Editor_TitleChangeCostumeName" xml:space="preserve">
-    <value>CHANGE COSTUME NAME</value>
+    <value>CHANGE LOOK NAME</value>
   </data>
   <data name="Editor_TitleChangeSoundName" xml:space="preserve">
     <value>CHANGE SOUND NAME</value>
@@ -469,7 +469,7 @@
     <value>CHOOSE CATEGORY</value>
   </data>
   <data name="Editor_TitleChooseCostumeName" xml:space="preserve">
-    <value>CHOOSE COSTUME NAME</value>
+    <value>CHOOSE LOOK NAME</value>
   </data>
   <data name="Editor_TitleChooseSound" xml:space="preserve">
     <value>CHOOSE SOUND</value>
@@ -484,7 +484,7 @@
     <value>NEW BROADCAST MESSAGE</value>
   </data>
   <data name="Editor_TitleNewCostume" xml:space="preserve">
-    <value>NEW COSTUME</value>
+    <value>NEW LOOK</value>
   </data>
   <data name="Editor_TitleNewSound" xml:space="preserve">
     <value>NEW SOUND</value>
@@ -493,7 +493,7 @@
     <value>NEW OBJECT</value>
   </data>
   <data name="Editor_TitleProjectSettings" xml:space="preserve">
-    <value>PROJECT SETTINGS</value>
+    <value>PROGRAM SETTINGS</value>
   </data>
   <data name="Editor_TitleRecorder" xml:space="preserve">
     <value>RECORD SOUND</value>
@@ -601,7 +601,7 @@
     <value>Show memory usage</value>
   </data>
   <data name="Main_DownloadQueueMessage" xml:space="preserve">
-    <value>The project you chose is being downloaded.</value>
+    <value>The program you chose is being downloaded.</value>
   </data>
   <data name="Main_FilterTextBoxHint" xml:space="preserve">
     <value>Find...</value>
@@ -610,7 +610,7 @@
     <value>About</value>
   </data>
   <data name="Main_HeaderCurrentProject" xml:space="preserve">
-    <value>Current Project</value>
+    <value>Current program</value>
   </data>
   <data name="Main_HeaderDesign" xml:space="preserve">
     <value>Design</value>
@@ -619,7 +619,7 @@
     <value>Language</value>
   </data>
   <data name="Main_HeaderLocalProjects" xml:space="preserve">
-    <value>My Projects</value>
+    <value>My programs</value>
   </data>
   <data name="Main_HeaderOnlineProjects" xml:space="preserve">
     <value>Online</value>
@@ -637,13 +637,13 @@
     <value>Are sure you want to copy "{0}"?</value>
   </data>
   <data name="Main_MainCopyProjectDialogTitle" xml:space="preserve">
-    <value>Copy project?</value>
+    <value>Copy program?</value>
   </data>
   <data name="Main_MainDeleteProjectDialogMessage" xml:space="preserve">
     <value>Are sure you want to delete "{0}"?</value>
   </data>
   <data name="Main_MainDeleteProjectDialogTitle" xml:space="preserve">
-    <value>Delete project?</value>
+    <value>Delete program?</value>
   </data>
   <data name="Main_MessageBoxInformation" xml:space="preserve">
     <value>Information</value>
@@ -670,7 +670,7 @@
     <value>Load more...</value>
   </data>
   <data name="Main_OnlineProjectProject" xml:space="preserve">
-    <value>project:</value>
+    <value>program:</value>
   </data>
   <data name="Main_OnlineProjectReportButton" xml:space="preserve">
     <value>Report as unappropriate</value>
@@ -691,13 +691,13 @@
     <value>{0} views</value>
   </data>
   <data name="Main_ProjectDoesNotExist" xml:space="preserve">
-    <value>project does not exist</value>
+    <value>program does not exist</value>
   </data>
   <data name="Main_ProjectName" xml:space="preserve">
-    <value>Project name</value>
+    <value>Program name</value>
   </data>
   <data name="Main_ProjectNotValid" xml:space="preserve">
-    <value>Project not valid.</value>
+    <value>Program not valid.</value>
   </data>
   <data name="App_ResourceLanguage" xml:space="preserve">
     <value>en</value>
@@ -712,13 +712,13 @@
     <value>Theme</value>
   </data>
   <data name="Main_TitleNewProject" xml:space="preserve">
-    <value>NEW PROJECT</value>
+    <value>NEW PROGRAM</value>
   </data>
   <data name="Main_TitleSettings" xml:space="preserve">
     <value>SETTINGS</value>
   </data>
   <data name="Main_TitleUploadProject" xml:space="preserve">
-    <value>UPLOAD PROJECT</value>
+    <value>UPLOAD PROGRAM</value>
   </data>
   <data name="Main_TitleUploadProjectLogin" xml:space="preserve">
     <value>LOGIN OR REGISTER</value>
@@ -742,7 +742,7 @@
     <value>Description:</value>
   </data>
   <data name="Main_UploadProjectProjectName" xml:space="preserve">
-    <value>Project:</value>
+    <value>Program:</value>
   </data>
   <data name="Main_UploadProjectRegistrationSucessful" xml:space="preserve">
     <value>Registration successful!</value>
@@ -757,10 +757,10 @@
     <value>Welcome {0}!</value>
   </data>
   <data name="Main_UploadQueueMessage" xml:space="preserve">
-    <value>Your project is being uploaded. This might take a little while, but we'll tell you when it's finished!</value>
+    <value>Your program is being uploaded. This might take a little while, but we'll tell you when it's finished!</value>
   </data>
   <data name="Main_VersionIsNotSupported" xml:space="preserve">
-    <value>Project version is not supported.</value>
+    <value>Program version is not supported.</value>
   </data>
   <data name="App_FlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
@@ -847,10 +847,10 @@
     <value>Variable name</value>
   </data>
   <data name="Main_SelectedProjectNotValidHeader" xml:space="preserve">
-    <value>Sorry! The selected project could not be opened.</value>
+    <value>Sorry! The selected program could not be opened.</value>
   </data>
   <data name="Main_SelectedProjectNotValidMessage" xml:space="preserve">
-    <value>Project not valid</value>
+    <value>Program not valid</value>
   </data>
   <data name="Brick_ForeverLoopEnd" xml:space="preserve">
     <value>end of loop</value>
@@ -955,13 +955,13 @@
     <value>add</value>
   </data>
   <data name="Main_UseCurrentProjectAsTemplate" xml:space="preserve">
-    <value>Use current project ({0}) as template?</value>
+    <value>Use current program ({0}) as template?</value>
   </data>
   <data name="Editor_PreparingProject" xml:space="preserve">
-    <value>preparing project</value>
+    <value>preparing program</value>
   </data>
   <data name="Main_ProjectGettingActivated" xml:space="preserve">
-    <value>Please wait, while the project is being activated.</value>
+    <value>Please wait, while the program is being activated.</value>
   </data>
   <data name="Main_ReallyCloseApplicationCaption" xml:space="preserve">
     <value>Close application</value>
@@ -973,7 +973,7 @@
     <value>Click '+' to add a new action.</value>
   </data>
   <data name="Editor_ClickPlusToAddCostume" xml:space="preserve">
-    <value>Click '+' to add a new costume.</value>
+    <value>Click '+' to add a new look.</value>
   </data>
   <data name="Editor_ClickPlusToAddSound" xml:space="preserve">
     <value>Click '+' to add a new sound.</value>
@@ -1002,10 +1002,22 @@
   <data name="DefaultProject_Background" xml:space="preserve">
     <value>Background</value>
   </data>
-  <data name="DefaultProject_Mole" xml:space="preserve">
-    <value>Mole</value>
-  </data>
   <data name="Editor_NameOfSound" xml:space="preserve">
     <value>Sound</value>
+  </data>
+  <data name="DefaultProject_Cat" xml:space="preserve">
+    <value>Cat</value>
+  </data>
+  <data name="DefaultProject_Cloud" xml:space="preserve">
+    <value>Cloud</value>
+  </data>
+  <data name="DefaultProject_Rain" xml:space="preserve">
+    <value>Rain drop</value>
+  </data>
+  <data name="DefaultProject_Sun" xml:space="preserve">
+    <value>Sun</value>
+  </data>
+  <data name="DefaultProject_Water" xml:space="preserve">
+    <value>Water</value>
   </data>
 </root>
