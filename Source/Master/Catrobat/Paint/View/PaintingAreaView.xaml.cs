@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Data.Linq;
 using System.Diagnostics;
 using System.IO;
@@ -113,13 +114,21 @@ namespace Catrobat.Paint.View
              ViewModel.ToggleInkEraserCommand.Execute(null);
         }
 
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            var wb = new WriteableBitmap(InkPresenter, new TranslateTransform());
+            ViewModel.BackPressedCommand.Execute(wb);
+
+            e.Cancel = true;
+
+            base.OnBackKeyPress(e);
+        }
+
         #endregion
 
         private void ButtonThickness_Click(object sender, EventArgs e)
         {
             SliderThickness.Visibility = SliderThickness.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
         }
-
-
     }
 }

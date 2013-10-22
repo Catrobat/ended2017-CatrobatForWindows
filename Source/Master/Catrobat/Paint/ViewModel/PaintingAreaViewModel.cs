@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
@@ -9,8 +10,10 @@ using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using Catrobat.Paint.Data;
 using Catrobat.Paint.Misc;
+using Catrobat.Paint.Resources;
 using Coding4Fun.Toolkit.Controls.Common;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -22,7 +25,7 @@ namespace Catrobat.Paint.ViewModel
     {
         private readonly Stack<Stroke> _undoneStrokes = new Stack<Stroke>();
         private Stroke _stroke;
-        private StylusPointCollection _erasingPoints = new StylusPointCollection();
+        private readonly StylusPointCollection _erasingPoints = new StylusPointCollection();
         private StylusPoint? _lastPoint;
 
 
@@ -68,8 +71,6 @@ namespace Catrobat.Paint.ViewModel
         {
             GetCurrentImage();
 
-
-
             BeginStrokeCommand = new RelayCommand<Point>(BeginStrokeExecute);
             SetStrokePointCommand = new RelayCommand<Point>(SetStrokePointExecute);
             EndStrokeCommand = new RelayCommand(EndStrokeExecute);
@@ -77,6 +78,7 @@ namespace Catrobat.Paint.ViewModel
             UndoCommand = new RelayCommand(UndoExecute);
             RedoCommand = new RelayCommand(RedoExecute);
             SaveCommand = new RelayCommand<WriteableBitmap>(SaveExecute);
+            BackPressedCommand = new RelayCommand<WriteableBitmap>(BackPressedExecute);
             ToColorPickerCommand = new RelayCommand(ToColorPickerExecute);
             ToggleInkEraserCommand = new RelayCommand(ToggleInkEraserExecute);
             
@@ -95,6 +97,25 @@ namespace Catrobat.Paint.ViewModel
 
 
         #region Commands
+
+        public ICommand BackPressedCommand { get; private set; }
+        private void BackPressedExecute(WriteableBitmap wb)
+        {
+            MessageBoxResult result = MessageBox.Show(AppResources.SaveChangesToCatrobatMessageContent, AppResources.SaveChangesToCatrobatMessageTitle, MessageBoxButton.OKCancel);
+
+            if (result == MessageBoxResult.OK)
+            {
+                PaintLauncher.Task.CurrentImage = new WriteableBitmap(wb);
+                PaintLauncher.Task.RaiseImageChanged();
+            }
+            else
+            {
+                ((PhoneApplicationFrame)Application.Current.RootVisual).GoBack();
+            }
+
+            _strokes.Clear();
+            
+        }
 
         public ICommand ToColorPickerCommand { get; private set; }
         private void ToColorPickerExecute()
