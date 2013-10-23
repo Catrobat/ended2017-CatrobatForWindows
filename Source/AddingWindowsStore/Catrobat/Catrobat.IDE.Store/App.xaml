@@ -9,6 +9,7 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Content\Resources.xaml"/>
         <ResourceDictionary Source="ms-appx:///Converters\ConverterResources.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Controls/Buttons/ScreenshotButtonTemplates.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

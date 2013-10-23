@@ -120,6 +120,7 @@
     </Compile>
     <Compile Include="AppStore.cs" />
     <Compile Include="AppCoreDesignStatic.cs" />
+    <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
     <Compile Include="Controls\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
@@ -145,6 +146,8 @@
     <Compile Include="Services\Storage\StorageFactoryStore.cs" />
     <Compile Include="Services\Storage\StorageStore.cs" />
     <Compile Include="Services\SystemInformationServiceStore.cs" />
+    <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
+    <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -155,7 +158,9 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="Catrobat.IDE.Store_TemporaryKey.pfx" />
+    <Content Include="Content\Resources\DesignTime\screenshot.png" />
     <Content Include="Fonts\LiveSymbol.ttf" />
+    <Content Include="Content\Resources\SampleProjects\stick.catrobat" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +175,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Content\Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Buttons\ScreenshotButtonTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

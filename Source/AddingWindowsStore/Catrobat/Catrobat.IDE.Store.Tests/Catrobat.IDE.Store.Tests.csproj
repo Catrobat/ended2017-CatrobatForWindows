@@ -116,6 +116,8 @@
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\Storage\ResourceLoaderStoreTests.cs" />
+    <Compile Include="Tests\Storage\StorageStoreTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -140,6 +142,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Catrobat.IDE.Core\Catrobat.IDE.Core.csproj">
+      <Project>{bca5086e-499a-4507-aa9b-a55d7e534ef7}</Project>
+      <Name>Catrobat.IDE.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Catrobat.IDE.Store\Catrobat.IDE.Store.csproj">
       <Project>{503c2fa2-bf48-48d7-a890-dea6b8e54229}</Project>
       <Name>Catrobat.IDE.Store</Name>

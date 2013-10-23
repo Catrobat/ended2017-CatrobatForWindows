@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
@@ -18,6 +19,8 @@ namespace Catrobat.IDE.Phone.Services.Storage
         private static int _imageThumbnailDefaultMaxWidthHeight = 200;
         private readonly IsolatedStorageFile _iso = IsolatedStorageFile.GetUserStoreForApplication();
         private readonly List<Stream> _openedStreams = new List<Stream>();
+
+        #region Synchron
 
         public bool FileExists(string path)
         {
@@ -497,9 +500,127 @@ namespace Catrobat.IDE.Phone.Services.Storage
             fileStream.Dispose();
         }
 
+        #endregion
+
+
+        #region Async
+
         public PortableImage CreateThumbnail(PortableImage image)
         {
             return ServiceLocator.ImageResizeService.ResizeImage(image, _imageThumbnailDefaultMaxWidthHeight);
         }
+
+
+        public Task CreateDirectoryAsync(string path)
+        {
+            return Task.Run(() => CreateDirectory(path));
+        }
+
+        public Task<bool> DirectoryExistsAsync(string path)
+        {
+            return Task.Run(() => DirectoryExists(path));
+        }
+
+        public Task<bool> FileExistsAsync(string path)
+        {
+            return Task.Run(() => FileExists(path));
+        }
+
+        public Task<string[]> GetDirectoryNamesAsync(string path)
+        {
+            return Task.Run(() => GetDirectoryNames(path));
+        }
+
+        public Task<string[]> GetFileNamesAsync(string path)
+        {
+            return Task.Run(() => GetFileNames(path));
+        }
+
+        public Task DeleteDirectoryAsync(string path)
+        {
+            return Task.Run(() => DeleteDirectory(path));
+        }
+
+        public Task DeleteFileAsync(string path)
+        {
+            return Task.Run(() => DeleteFile(path));
+        }
+
+        public Task CopyDirectoryAsync(string sourcePath, string destinationPath)
+        {
+            return Task.Run(() => CopyDirectory(sourcePath, destinationPath));
+        }
+
+        public Task MoveDirectoryAsync(string sourcePath, string destinationPath)
+        {
+            return Task.Run(() => MoveDirectory(sourcePath, destinationPath));
+        }
+
+        public Task CopyFileAsync(string sourcePath, string destinationPath)
+        {
+            return Task.Run(() => CopyFile(sourcePath, destinationPath));
+        }
+
+        public Task MoveFileAsync(string sourcePath, string destinationPath)
+        {
+            return Task.Run(() => MoveFile(sourcePath, destinationPath));
+        }
+
+        public Task<Stream> OpenFileAsync(string path, StorageFileMode mode, StorageFileAccess access)
+        {
+            return Task.Run(() => OpenFile(path, mode, access));
+        }
+
+        public Task RenameDirectoryAsync(string directoryPath, string newDirectoryName)
+        {
+            return Task.Run(() => RenameDirectory(directoryPath, newDirectoryName));
+        }
+
+        public Task<PortableImage> LoadImageAsync(string pathToImage)
+        {
+            return Task.Run(() => LoadImage(pathToImage));
+        }
+
+        public Task<PortableImage> LoadImageThumbnailAsync(string pathToImage)
+        {
+            return Task.Run(() => LoadImageThumbnail(pathToImage));
+        }
+
+        public Task<PortableImage> CreateThumbnailAsync(PortableImage image)
+        {
+            return Task.Run(() => CreateThumbnail(image));
+        }
+
+        public Task DeleteImageAsync(string pathToImage)
+        {
+            return Task.Run(() => DeleteImage(pathToImage));
+        }
+
+        public Task SaveImageAsync(string path, PortableImage image, bool deleteExisting, ImageFormat format)
+        {
+            return Task.Run(() => SaveImage(path, image, deleteExisting, format));
+        }
+
+        public Task<string> ReadTextFileAsync(string path)
+        {
+            return Task.Run(() => ReadTextFile(path));
+        }
+
+        public Task WriteTextFileAsync(string path, string content)
+        {
+            return Task.Run(() => WriteTextFile(path, content));
+        }
+
+        public Task<object> ReadSerializableObjectAsync(string path, Type type)
+        {
+            return Task.Run(() => ReadSerializableObject(path, type));
+        }
+
+        public Task WriteSerializableObjectAsync(string path, object serializableObject)
+        {
+            return Task.Run(() => WriteSerializableObject(path, serializableObject));
+        }
+
+        #endregion
     }
 }
