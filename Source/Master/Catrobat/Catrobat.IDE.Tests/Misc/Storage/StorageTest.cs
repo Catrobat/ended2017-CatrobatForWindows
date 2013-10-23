@@ -2,7 +2,9 @@
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using System;
 using System.Runtime.Serialization;
@@ -14,10 +16,7 @@ namespace Catrobat.IDE.Tests.Misc.Storage
     {
         private readonly List<Stream> _openedStreams = new List<Stream>();
 
-        public long Quota
-        {
-            get { throw new NotImplementedException(); }
-        }
+        #region Synchron
 
         public void CreateDirectory(string path)
         {
@@ -310,16 +309,6 @@ namespace Catrobat.IDE.Tests.Misc.Storage
             DeleteFile(pathToImage + CatrobatContextBase.ImageThumbnailExtension);
         }
 
-        public PortableImage LoadImageThumbnail(string pathToImage)
-        {
-            throw new NotImplementedException();
-        }
-
-        public PortableImage CreateThumbnail(PortableImage image)
-        {
-            throw new NotImplementedException();
-        }
-
         public void MoveDirectory(string sourcePath, string destinationPath)
         {
             throw new NotImplementedException();
@@ -329,5 +318,132 @@ namespace Catrobat.IDE.Tests.Misc.Storage
         {
             throw new NotImplementedException();
         }
+
+        public PortableImage LoadImageThumbnail(string pathToImage)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+
+        #region Async
+
+        public PortableImage CreateThumbnail(PortableImage image)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public System.Threading.Tasks.Task CreateDirectoryAsync(string path)
+        {
+            return Task.Run(() => CreateDirectory(path));
+        }
+
+        public System.Threading.Tasks.Task DirectoryExistsAsync(string path)
+        {
+            return Task.Run(() => DirectoryExists(path));
+        }
+
+        public System.Threading.Tasks.Task FileExistsAsync(string path)
+        {
+            return Task.Run(() => FileExists(path));
+        }
+
+        public System.Threading.Tasks.Task<string[]> GetDirectoryNamesAsync(string path)
+        {
+            return Task.Run(() => GetDirectoryNames(path));
+        }
+
+        public System.Threading.Tasks.Task<string[]> GetFileNamesAsync(string path)
+        {
+            return Task.Run(() => GetFileNames(path));
+        }
+
+        public System.Threading.Tasks.Task DeleteDirectoryAsync(string path)
+        {
+            return Task.Run(() => DeleteDirectory(path));
+        }
+
+        public System.Threading.Tasks.Task DeleteFileAsync(string path)
+        {
+            return Task.Run(() => DeleteFile(path));
+        }
+
+        public System.Threading.Tasks.Task CopyDirectoryAsync(string sourcePath, string destinationPath)
+        {
+            return Task.Run(() => CopyDirectory(sourcePath, destinationPath));
+        }
+
+        public System.Threading.Tasks.Task MoveDirectoryAsync(string sourcePath, string destinationPath)
+        {
+            return Task.Run(() => MoveDirectory(sourcePath, destinationPath));
+        }
+
+        public System.Threading.Tasks.Task CopyFileAsync(string sourcePath, string destinationPath)
+        {
+            return Task.Run(() => CopyFile(sourcePath, destinationPath));
+        }
+
+        public System.Threading.Tasks.Task MoveFileAsync(string sourcePath, string destinationPath)
+        {
+            return Task.Run(() => MoveFile(sourcePath, destinationPath));
+        }
+
+        public System.Threading.Tasks.Task<Stream> OpenFileAsync(string path, StorageFileMode mode, StorageFileAccess access)
+        {
+            return Task.Run(() => OpenFile(path, mode, access));
+        }
+
+        public System.Threading.Tasks.Task RenameDirectoryAsync(string directoryPath, string newDirectoryName)
+        {
+            return Task.Run(() => RenameDirectory(directoryPath, newDirectoryName));
+        }
+
+        public System.Threading.Tasks.Task<PortableImage> LoadImageAsync(string pathToImage)
+        {
+            return Task.Run(() => LoadImage(pathToImage));
+        }
+
+        public System.Threading.Tasks.Task<PortableImage> LoadImageThumbnailAsync(string pathToImage)
+        {
+            return Task.Run(() => LoadImageThumbnail(pathToImage));
+        }
+
+        public System.Threading.Tasks.Task<PortableImage> CreateThumbnailAsync(PortableImage image)
+        {
+            return Task.Run(() => CreateThumbnail(image));
+        }
+
+        public System.Threading.Tasks.Task DeleteImageAsync(string pathToImage)
+        {
+            return Task.Run(() => DeleteImage(pathToImage));
+        }
+
+        public System.Threading.Tasks.Task SaveImageAsync(string path, PortableImage image, bool deleteExisting, ImageFormat format)
+        {
+            return Task.Run(() => SaveImage(path, image, deleteExisting, format));
+        }
+
+        public System.Threading.Tasks.Task<string> ReadTextFileAsync(string path)
+        {
+            return Task.Run(() => ReadTextFile(path));
+        }
+
+        public System.Threading.Tasks.Task WriteTextFileAsync(string path, string content)
+        {
+            return Task.Run(() => WriteTextFile(path, content));
+        }
+
+        public System.Threading.Tasks.Task<object> ReadSerializableObjectAsync(string path, Type type)
+        {
+            return Task.Run(() => ReadSerializableObject(path, type));
+        }
+
+        public System.Threading.Tasks.Task WriteSerializableObjectAsync(string path, object serializableObject)
+        {
+            return Task.Run(() => WriteSerializableObject(path, serializableObject));
+        }
+
+        #endregion
     }
 }
