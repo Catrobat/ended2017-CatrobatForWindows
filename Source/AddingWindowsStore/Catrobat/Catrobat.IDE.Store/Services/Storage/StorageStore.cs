@@ -27,6 +27,7 @@ namespace Catrobat.IDE.Store.Services.Storage
 
         public bool DirectoryExists(string path)
         {
+            throw new NotImplementedException();
             //var folder = await StorageFolder.GetFolderFromPathAsync(path);
             //await folder.CreateFolderAsync(path);
         }
