@@ -4,7 +4,7 @@ using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class SoundRecorderServicePhone : ISoundRecorderService
+    public class SoundRecorderServiceStore : ISoundRecorderService
     {
 
         public SoundRecorderState State

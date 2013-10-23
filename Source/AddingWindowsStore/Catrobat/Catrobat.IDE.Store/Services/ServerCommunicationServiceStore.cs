@@ -4,7 +4,7 @@ using Catrobat.IDE.Core.Services.Common;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class ServerCommunicationServicePhone : IServerCommunicationService
+    public class ServerCommunicationServiceStore : IServerCommunicationService
     {
         public void LoadOnlineProjects(bool append, string filterText, int offset, CatrobatWebCommunicationService.LoadOnlineProjectsEvent callback)
         {

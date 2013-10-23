@@ -5,7 +5,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class ImageResizeServicePhone : IImageResizeService
+    public class ImageResizeServiceStore : IImageResizeService
     {
         public PortableImage ResizeImage(PortableImage image, int maxWidthHeight)
         {

@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class ColorConversionServicePhone : IColorConversionService
+    public class ColorConversionServiceStore : IColorConversionService
     {
         public object ConvertToLocalSolidColorBrush(PortableSolidColorBrush portableSolidColorBrush)
         {

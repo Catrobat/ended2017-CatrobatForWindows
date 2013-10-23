@@ -6,7 +6,7 @@ using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class CultureServicePhone : ICultureService
+    public class CultureServiceStore : ICultureService
     {
         public CultureInfo GetCulture()
         {

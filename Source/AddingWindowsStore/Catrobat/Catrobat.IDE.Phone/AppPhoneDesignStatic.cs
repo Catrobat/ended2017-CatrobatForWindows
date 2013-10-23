@@ -12,9 +12,9 @@ using GalaSoft.MvvmLight;
 
 namespace Catrobat.IDE.Phone
 {
-    public class AppDesignStatic
+    public class AppPhoneDesignStatic
     {
-        static AppDesignStatic()
+        static AppPhoneDesignStatic()
         {
             Core.App.SetNativeApp(new AppPhone());
             Core.App.Initialize();

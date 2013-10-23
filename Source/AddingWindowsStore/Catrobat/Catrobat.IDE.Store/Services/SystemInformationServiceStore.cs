@@ -9,7 +9,7 @@ using Buffer = System.Buffer;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class SystemInformationServicePhone : ISystemInformationService
+    public class SystemInformationServiceStore : ISystemInformationService
     {
 
         public string PlatformName

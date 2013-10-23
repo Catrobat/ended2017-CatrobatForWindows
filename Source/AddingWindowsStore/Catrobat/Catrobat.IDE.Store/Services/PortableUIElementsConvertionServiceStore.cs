@@ -5,7 +5,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class PortableUIElementsConvertionServicePhone : IPortableUIElementConversionService
+    public class PortableUIElementsConvertionServiceStore : IPortableUIElementConversionService
     {
         public object ConvertToNativeUIElement(object portableUIElement)
         {

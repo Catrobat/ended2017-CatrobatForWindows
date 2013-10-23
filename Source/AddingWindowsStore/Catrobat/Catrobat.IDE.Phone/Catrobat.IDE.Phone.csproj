@@ -96,7 +96,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AppDesignStatic.cs" />
+    <Compile Include="AppPhoneDesignStatic.cs" />
     <Compile Include="AppPhone.cs" />
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>

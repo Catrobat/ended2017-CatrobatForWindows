@@ -4,11 +4,11 @@ using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class DispatcherServicePhone : IDispatcherService
+    public class DispatcherServiceStore : IDispatcherService
     {
         private readonly CoreDispatcher _dispatcher;
 
-        public DispatcherServicePhone(CoreDispatcher dispatcher)
+        public DispatcherServiceStore(CoreDispatcher dispatcher)
         {
             _dispatcher = dispatcher;
         }

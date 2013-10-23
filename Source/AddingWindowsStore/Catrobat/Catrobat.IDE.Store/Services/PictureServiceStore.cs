@@ -9,7 +9,7 @@ using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class PictureServicePhone : IPictureService
+    public class PictureServiceStore : IPictureService
     {
         private static List<string> _supportedFileNames = new List<string>
         {

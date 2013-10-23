@@ -5,7 +5,7 @@ using Catrobat.IDE.Core.Services.Common;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class ProjectImporterServicePhone : IProjectImporterService
+    public class ProjectImporterServiceStore : IProjectImporterService
     {
         private readonly ProjectImporterService _importer = new ProjectImporterService();
 

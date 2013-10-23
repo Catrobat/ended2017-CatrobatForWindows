@@ -4,7 +4,7 @@ using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class ImageSourceConversionServicePhone : IImageSourceConversionService
+    public class ImageSourceConversionServiceStore : IImageSourceConversionService
     {
         public object ConvertToLocalImageSource(byte[] data, int width, int height)
         {

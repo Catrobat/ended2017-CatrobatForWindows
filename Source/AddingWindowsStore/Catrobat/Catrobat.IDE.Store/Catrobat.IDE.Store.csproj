@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Catrobat.IDE.Store</RootNamespace>
     <AssemblyName>Catrobat.IDE.Store</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -118,6 +118,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppStore.cs" />
+    <Compile Include="AppCoreDesignStatic.cs" />
+    <Compile Include="Controls\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\PortableConverters.cs" />
+    <Compile Include="Converters\PortableValueConverterStore.cs" />
     <Compile Include="Services\ColorConversionServiceStore.cs" />
     <Compile Include="Services\CultureServiceStore.cs" />
     <Compile Include="Services\DispatcherServiceStore.cs" />
@@ -133,9 +140,13 @@
     <Compile Include="Services\ShareServiceStore.cs" />
     <Compile Include="Services\SoundPlayerServiceStore.cs" />
     <Compile Include="Services\SoundRecorderServiceStore.cs" />
+    <Compile Include="Services\Storage\ResourceLoaderFactoryStore.cs" />
+    <Compile Include="Services\Storage\ResourcesStore.cs" />
+    <Compile Include="Services\Storage\StorageFactoryStore.cs" />
+    <Compile Include="Services\Storage\StorageStore.cs" />
     <Compile Include="Services\SystemInformationServiceStore.cs" />
-    <Compile Include="Videos\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Views\Main\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -158,7 +169,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Videos\MainPage.xaml">
+    <Page Include="Content\Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Converters\ConverterResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -192,7 +215,9 @@
       <HintPath>..\packages\WriteableBitmapEx.1.0.8.0\lib\NetCore45\WriteableBitmapEx.WinRT.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Converters\NativeConverters\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

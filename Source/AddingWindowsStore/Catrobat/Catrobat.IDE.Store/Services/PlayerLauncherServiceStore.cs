@@ -9,7 +9,7 @@ using Catrobat.IDE.Core.VersionConverter;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class PlayerLauncherServicePhone :IPlayerLauncherService
+    public class PlayerLauncherServiceStore :IPlayerLauncherService
     {
         public void LaunchPlayer(Project project)
         {

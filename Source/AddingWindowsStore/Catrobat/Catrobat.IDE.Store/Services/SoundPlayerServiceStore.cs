@@ -4,7 +4,7 @@ using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class SoundPlayerServicePhone : ISoundPlayerService
+    public class SoundPlayerServiceStore : ISoundPlayerService
     {
         public event SoundStateChanged SoundStateChanged;
 

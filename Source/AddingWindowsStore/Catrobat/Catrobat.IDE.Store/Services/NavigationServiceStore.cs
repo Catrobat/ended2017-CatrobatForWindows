@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Reflection;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
+using GalaSoft.MvvmLight;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class NavigationServicePhone : INavigationService
+    public class NavigationServiceStore : INavigationService
     {
         private Frame _frame;
 
-        public NavigationServicePhone(Frame frame)
+        public NavigationServiceStore(Frame frame)
         {
             _frame = frame;
         }
@@ -17,6 +19,14 @@ namespace Catrobat.IDE.Store.Services
 
         public void NavigateTo(Type type)
         {
+            if (type.GetTypeInfo().BaseType == typeof (ViewModelBase))
+            {
+                var viewModelName = type.GetTypeInfo().Name;
+                var viewType = viewModelName.Replace("ViewModel", "View");
+
+                type = Type.GetType(viewType);
+            }
+
             _frame.Navigate(type);
         }
 
