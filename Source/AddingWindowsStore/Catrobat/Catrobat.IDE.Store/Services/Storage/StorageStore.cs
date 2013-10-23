@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading.Tasks;
+using Windows.Storage;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
@@ -15,16 +17,18 @@ namespace Catrobat.IDE.Store.Services.Storage
         private static int _imageThumbnailDefaultMaxWidthHeight = 400;
         private readonly List<Stream> _openedStreams = new List<Stream>();
 
-
-
-        public void CreateDirectory(string path)
+        public async void CreateDirectory(string path)
         {
-            throw new NotImplementedException();
+            await CreateFolderPath(path);
+            var parent = Path.GetPathRoot(path);
+            var folder = await StorageFolder.GetFolderFromPathAsync(parent);
+            await folder.CreateFolderAsync(path);
         }
 
         public bool DirectoryExists(string path)
         {
-            throw new NotImplementedException();
+            //var folder = await StorageFolder.GetFolderFromPathAsync(path);
+            //await folder.CreateFolderAsync(path);
         }
 
         public bool FileExists(string path)
@@ -140,6 +144,28 @@ namespace Catrobat.IDE.Store.Services.Storage
         internal void SetImageMaxThumbnailWidthHeight(int maxWidthHeight)
         {
             _imageThumbnailDefaultMaxWidthHeight = maxWidthHeight;
+        }
+
+        private async Task CreateFolderPath(string path)
+        {
+            while (true)
+            {
+                var subPath = Path.GetPathRoot(path);
+
+                if (subPath == null)
+                    return;
+
+                await CreateFolderPath(subPath);
+
+                if (!DirectoryExists(subPath))
+                {
+                    var f = await StorageFolder.GetFolderFromPathAsync(subPath);
+                    if (f != null)
+                    {
+                        f.CreateFolderAsync(path);
+                    }
+                }
+            }
         }
     }
 }
