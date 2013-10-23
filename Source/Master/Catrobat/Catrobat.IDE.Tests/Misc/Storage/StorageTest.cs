@@ -339,12 +339,12 @@ namespace Catrobat.IDE.Tests.Misc.Storage
             return Task.Run(() => CreateDirectory(path));
         }
 
-        public System.Threading.Tasks.Task DirectoryExistsAsync(string path)
+        public Task<bool> DirectoryExistsAsync(string path)
         {
             return Task.Run(() => DirectoryExists(path));
         }
 
-        public System.Threading.Tasks.Task FileExistsAsync(string path)
+        public Task<bool> FileExistsAsync(string path)
         {
             return Task.Run(() => FileExists(path));
         }

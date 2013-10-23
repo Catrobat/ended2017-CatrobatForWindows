@@ -82,9 +82,9 @@ namespace Catrobat.IDE.Core.Services.Storage
 
         Task CreateDirectoryAsync(string path);
 
-        Task DirectoryExistsAsync(string path);
+        Task<bool> DirectoryExistsAsync(string path);
 
-        Task FileExistsAsync(string path);
+        Task<bool> FileExistsAsync(string path);
 
         Task<string[]> GetDirectoryNamesAsync(string path);
 
