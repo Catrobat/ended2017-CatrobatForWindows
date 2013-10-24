@@ -44,8 +44,8 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         private IPortableFormulaButton _formulaButton;
         private Project _currentProject;
         private SelectedFormulaInformation _selectedFormulaInformation;
-        private readonly Stack<FormulaTree> _undoStack = new Stack<FormulaTree>();
-        private readonly Stack<FormulaTree> _redoStack = new Stack<FormulaTree>(); 
+        private readonly Stack<XmlFormulaTree> _undoStack = new Stack<XmlFormulaTree>();
+        private readonly Stack<XmlFormulaTree> _redoStack = new Stack<XmlFormulaTree>(); 
 
         #endregion
 

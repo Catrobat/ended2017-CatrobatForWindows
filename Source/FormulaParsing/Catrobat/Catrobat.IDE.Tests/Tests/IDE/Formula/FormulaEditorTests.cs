@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number9);
@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
             valid &= editor.KeyPressed(FormulaEditorKey.Number0);
             valid &= editor.KeyPressed(FormulaEditorKey.Number9);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "98765432109",
@@ -53,7 +53,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Multiply));
@@ -87,15 +87,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Plus));
 
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MINUS",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "9"
@@ -118,7 +118,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
@@ -127,7 +127,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
             Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.NumberDot));
             valid &= editor.KeyPressed(FormulaEditorKey.Number4);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "1.234",
@@ -145,23 +145,23 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
             valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.NumberDot);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0.5"
@@ -184,23 +184,23 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
             valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1",
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "23"
@@ -211,25 +211,25 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
             valid &= editor.KeyPressed(FormulaEditorKey.Multiply);
             valid &= editor.KeyPressed(FormulaEditorKey.Number4);
-            expectedFormula = new FormulaTree
+            expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1",
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MULT",
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "23",
                     },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "4",
@@ -242,12 +242,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var subTree = expectedFormula;
             valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
-            expectedFormula = new FormulaTree
+            expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
                 LeftChild = subTree,
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "5",
@@ -266,7 +266,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.NumberDot);
@@ -288,26 +288,26 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Number7);
             valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             valid &= editor.KeyPressed(FormulaEditorKey.Number8);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MULT",
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "0.1"
                     },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "2.3"
                     }
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "4.58"
@@ -327,7 +327,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
@@ -408,31 +408,31 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
-            var nodeA = new FormulaTree
+            var nodeA = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "2"
                 }
             };
-            var nodeB = new FormulaTree
+            var nodeB = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MINUS",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "PLUS",
                     LeftChild = nodeA,
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "3"
@@ -440,21 +440,21 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 },
                 RightChild = nodeA
             };
-            var nodeC = new FormulaTree
+            var nodeC = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "EQUAL",
                 LeftChild = nodeB,
                 RightChild = nodeB
             };
-            var nodeD = new FormulaTree
+            var nodeD = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "AND",
                 LeftChild = nodeC,
                 RightChild = nodeC
             };
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "OR",
@@ -474,32 +474,32 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "3",
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MULT",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "2",
                     },
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "1",
@@ -522,7 +522,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
@@ -534,45 +534,45 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
             valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "EQUAL",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "PLUS",
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "2"
                     },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "1"
                     }
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "PLUS",
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "PLUS",
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "1"
                         },
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "1"
                         }
                     },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "1"
@@ -584,12 +584,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.NumberEquals);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
             var oldTree = expectedFormula;
-            expectedFormula = new FormulaTree
+            expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "EQUAL",
                 LeftChild = oldTree,
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -612,7 +612,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
@@ -630,70 +630,70 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Number7);
             valid &= editor.KeyPressed(FormulaEditorKey.LogicGreaterEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.Number8);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "GREATEREQUAL",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "8"
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "GREATER",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "7"
                     },
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "SMALLEREQUAL",
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "6"
                         },
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "OPERATOR",
                             VariableValue = "SMALLER",
-                            RightChild = new FormulaTree
+                            RightChild = new XmlFormulaTree
                             {
                                 VariableType = "NUMBER",
                                 VariableValue = "5"
                             },
-                            LeftChild = new FormulaTree
+                            LeftChild = new XmlFormulaTree
                             {
                                 VariableType = "OPERATOR",
                                 VariableValue = "NOTEQUAL",
-                                RightChild = new FormulaTree
+                                RightChild = new XmlFormulaTree
                                 {
                                     VariableType = "NUMBER",
                                     VariableValue = "4"
                                 },
-                                LeftChild = new FormulaTree
+                                LeftChild = new XmlFormulaTree
                                 {
                                     VariableType = "OPERATOR",
                                     VariableValue = "EQUAL",
-                                    RightChild = new FormulaTree
+                                    RightChild = new XmlFormulaTree
                                     {
                                         VariableType = "NUMBER",
                                         VariableValue = "3"
                                     },
-                                    LeftChild = new FormulaTree
+                                    LeftChild = new XmlFormulaTree
                                     {
                                         VariableType = "OPERATOR",
                                         VariableValue = "EQUAL",
-                                        RightChild = new FormulaTree
+                                        RightChild = new XmlFormulaTree
                                         {
                                             VariableType = "NUMBER",
                                             VariableValue = "2"
                                         },
-                                        LeftChild = new FormulaTree
+                                        LeftChild = new XmlFormulaTree
                                         {
                                             VariableType = "NUMBER",
                                             VariableValue = "1"
@@ -718,7 +718,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
@@ -730,45 +730,45 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
             valid &= editor.KeyPressed(FormulaEditorKey.Divide);
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "NOTEQUAL",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "DEVIDE",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "1",
                     },
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "1",
                     },
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "NOTEQUAL",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "PLUS",
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "1",
                         },
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "1",
                         },
                     },
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "2",
@@ -788,7 +788,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
@@ -803,25 +803,25 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.LogicNotEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             valid &= editor.KeyPressed(FormulaEditorKey.Delete);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "NOTEQUAL",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0.4",
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "NOTEQUAL",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "2.3",
                     },
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "1",
@@ -845,7 +845,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
@@ -859,54 +859,54 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
             valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number6);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "OR",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "PLUS",
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "1",
                     },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "2",
                     },
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "AND",
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "PLUS",
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "3",
                         },
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "4",
                         },
                     },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "PLUS",
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "5",
                         },
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "6",
@@ -927,7 +927,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
@@ -945,35 +945,35 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             valid &= editor.KeyPressed(FormulaEditorKey.Delete);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "OR",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "AND",
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "1",
                     },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "2",
                     },
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "AND",
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "3",
                     },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "4",
@@ -993,7 +993,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
@@ -1007,54 +1007,54 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
             valid &= editor.KeyPressed(FormulaEditorKey.LogicNotEqual);
             valid &= editor.KeyPressed(FormulaEditorKey.Number6);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "OR",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "NOTEQUAL",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "6",
                     },
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "5",
                     },
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "AND",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "NOTEQUAL",
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "4",
                         },
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "3",
                         },
                     },
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "NOTEQUAL",
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "2",
                         },
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "1",
@@ -1080,7 +1080,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Minus);
@@ -1091,39 +1091,39 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Multiply);
             valid &= editor.KeyPressed(FormulaEditorKey.Minus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "PLUS",
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "MINUS",
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "1"
                         },
                     },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MULT",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "MINUS",
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "3"
                         },
                     },
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "MINUS",
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "2"
@@ -1145,7 +1145,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
@@ -1163,73 +1163,73 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Minus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number6);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "AND",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "PLUS",
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "MINUS",
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "5",
                         }
                     },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                       {
                           VariableType = "OPERATOR",
                           VariableValue = "MINUS",
-                          RightChild = new FormulaTree
+                          RightChild = new XmlFormulaTree
                           {
                               VariableType = "NUMBER",
                               VariableValue = "6",
                           }
                       },
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "NOTEQUAL",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MINUS",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "4",
                 }
             },
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "MINUS",
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "3",
                     },
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "OPERATOR",
                             VariableValue = "MINUS",
-                            RightChild = new FormulaTree
+                            RightChild = new XmlFormulaTree
                             {
                                 VariableType = "OPERATOR",
                                 VariableValue = "MINUS",
-                                RightChild = new FormulaTree
+                                RightChild = new XmlFormulaTree
                                 {
                                     VariableType = "NUMBER",
                                     VariableValue = "2",
                                 }
                             },
-                            LeftChild = new FormulaTree
+                            LeftChild = new XmlFormulaTree
                             {
                                 VariableType = "NUMBER",
                                 VariableValue = "1",
@@ -1252,7 +1252,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
@@ -1264,45 +1264,45 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Number4);
             valid &= editor.KeyPressed(FormulaEditorKey.Minus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number5);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "AND",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MINUS",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "5",
                     },
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "4",
                     },
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "EQUAL",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "MINUS",
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                                 {
                                     VariableType = "NUMBER",
                                     VariableValue = "3",
                                 },
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "2",
                         },
                     },
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                                     {
                                         VariableType = "NUMBER",
                                         VariableValue = "1",
@@ -1323,16 +1323,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "2"
@@ -1342,20 +1342,20 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.RightChild;
             editor.SelectedFormula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
-            var expectedFormula = selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
+            var expectedFormula = selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MINUS",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "2"
@@ -1375,20 +1375,20 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MINUS",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "2"
@@ -1399,17 +1399,17 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.RightChild;
             editor.SelectedFormula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
+            var expectedFormula = selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree
 
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "2"
@@ -1428,26 +1428,26 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicFalse));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicOr));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "OR",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "FALSE"
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MINUS",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "TRUE"
@@ -1471,7 +1471,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
@@ -1486,61 +1486,61 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicFalse));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicOr));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "OR",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "TRUE"
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "AND",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "FALSE"
                     },
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "SMALLER",
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "OPERATOR",
                             VariableValue = "TRUE"
                         },
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "OPERATOR",
                             VariableValue = "MINUS",
-                            RightChild = new FormulaTree
+                            RightChild = new XmlFormulaTree
                             {
                                 VariableType = "OPERATOR",
                                 VariableValue = "FALSE"
                             },
-                            LeftChild = new FormulaTree
+                            LeftChild = new XmlFormulaTree
                             {
                                 VariableType = "OPERATOR",
                                 VariableValue = "PLUS",
-                                RightChild = new FormulaTree
+                                RightChild = new XmlFormulaTree
                                 {
                                     VariableType = "OPERATOR",
                                     VariableValue = "TRUE"
                                 },
-                                LeftChild = new FormulaTree
+                                LeftChild = new XmlFormulaTree
                                 {
                                     VariableType = "OPERATOR",
                                     VariableValue = "MULT",
-                                    RightChild = new FormulaTree
+                                    RightChild = new XmlFormulaTree
                                     {
                                         VariableType = "OPERATOR",
                                         VariableValue = "FALSE"
                                     },
-                                    LeftChild = new FormulaTree
+                                    LeftChild = new XmlFormulaTree
                                     {
                                         VariableType = "OPERATOR",
                                         VariableValue = "TRUE"
@@ -1564,7 +1564,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
@@ -1586,7 +1586,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -1603,16 +1603,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "AND",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "FALSE"
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "TRUE"
@@ -1624,16 +1624,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.LeftChild;
             editor.SelectedFormula.SelectedFormulaParent = selectedFromula.FormulaRoot.FormulaTree;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "AND",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "TRUE"
@@ -1654,7 +1654,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number1);
@@ -1662,7 +1662,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Number3);
             valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             valid &= editor.KeyPressed(FormulaEditorKey.Delete);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "1",
@@ -1679,7 +1679,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
@@ -1689,7 +1689,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number4));
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "4",
@@ -1706,7 +1706,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             var valid = true;
             valid &= editor.KeyPressed(FormulaEditorKey.Number2);
@@ -1733,97 +1733,97 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Number7);
             valid &= editor.KeyPressed(FormulaEditorKey.Plus);
             valid &= editor.KeyPressed(FormulaEditorKey.Number8);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "EQUAL",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "PLUS",
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "PLUS",
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "200"
                         },
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "30"
                         },
                     },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "2"
                     },
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "PLUS",
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "PLUS",
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "OPERATOR",
                             VariableValue = "PLUS",
-                            LeftChild = new FormulaTree
+                            LeftChild = new XmlFormulaTree
                             {
                                 VariableType = "OPERATOR",
                                 VariableValue = "MULT",
-                                LeftChild = new FormulaTree
+                                LeftChild = new XmlFormulaTree
                                 {
                                     VariableType = "NUMBER",
                                     VariableValue = "1",
                                 },
-                                RightChild = new FormulaTree
+                                RightChild = new XmlFormulaTree
                                 {
                                     VariableType = "NUMBER",
                                     VariableValue = "2",
                                 },
                             },
-                            RightChild = new FormulaTree
+                            RightChild = new XmlFormulaTree
                             {
                                 VariableType = "OPERATOR",
                                 VariableValue = "MULT",
-                                LeftChild = new FormulaTree
+                                LeftChild = new XmlFormulaTree
                                 {
                                     VariableType = "NUMBER",
                                     VariableValue = "3",
                                 },
-                                RightChild = new FormulaTree
+                                RightChild = new XmlFormulaTree
                                 {
                                     VariableType = "NUMBER",
                                     VariableValue = "4",
                                 },
                             }
                         },
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "OPERATOR",
                             VariableValue = "MULT",
-                            RightChild = new FormulaTree
+                            RightChild = new XmlFormulaTree
                             {
                                 VariableType = "NUMBER",
                                 VariableValue = "7",
                             },
-                            LeftChild = new FormulaTree
+                            LeftChild = new XmlFormulaTree
                             {
                                 VariableType = "OPERATOR",
                                 VariableValue = "MULT",
-                                LeftChild = new FormulaTree
+                                LeftChild = new XmlFormulaTree
                                 {
                                     VariableType = "NUMBER",
                                     VariableValue = "5",
                                 },
-                                RightChild = new FormulaTree
+                                RightChild = new XmlFormulaTree
                                 {
                                     VariableType = "NUMBER",
                                     VariableValue = "6",
@@ -1831,7 +1831,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                             }
                         }
                     },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "8",
@@ -1844,7 +1844,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             }
-            expectedFormula = new FormulaTree
+            expectedFormula = new XmlFormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "2"
@@ -1861,7 +1861,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number0));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicAnd));
@@ -1873,7 +1873,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicGreater));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -1891,7 +1891,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "123"
@@ -1901,7 +1901,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
                             {
                                 VariableType = "NUMBER",
                                 VariableValue = "0"
@@ -1918,16 +1918,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                                     FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                                 };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree
                                 {
                                     VariableType = "OPERATOR",
                                     VariableValue = "MULT",
-                                    LeftChild = new FormulaTree
+                                    LeftChild = new XmlFormulaTree
                                     {
                                         VariableType = "NUMBER",
                                         VariableValue = "1"
                                     },
-                                    RightChild = new FormulaTree
+                                    RightChild = new XmlFormulaTree
                                     {
                                         VariableType = "NUMBER",
                                         VariableValue = "2"
@@ -1936,11 +1936,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.SelectedFormula = selectedFromula;
             editor.SelectedFormula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -1963,32 +1963,32 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicNot));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicFalse));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicOr));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicNot));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "OR",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "NOT",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "FALSE"
                     }
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "NOT",
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "OPERATOR",
                             VariableValue = "TRUE"
@@ -2008,7 +2008,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicNot));
             Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.LogicNot));
@@ -2029,26 +2029,26 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                     FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                 };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicFalse));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicOr));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicNot));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number0));
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "OR",
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                             {
                                 VariableType = "OPERATOR",
                                 VariableValue = "FALSE"
                             },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "NOT",
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0"
@@ -2068,7 +2068,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
 
                 VariableType = "NUMBER",
@@ -2093,18 +2093,18 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
             };
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathAbs));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "ABS",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2113,11 +2113,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathArcCos));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "ARCCOS",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2126,11 +2126,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathArcSin));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "ARCSIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2139,11 +2139,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathArcTan));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "ARCTAN",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2152,11 +2152,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathCos));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "COS",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2165,11 +2165,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathExp));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "EXP",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2178,11 +2178,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathLn));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "LN",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2191,11 +2191,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathLog));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "LOG",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2204,16 +2204,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathMax));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MAX",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2222,16 +2222,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathMin));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2240,16 +2240,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathMod));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MOD",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2258,7 +2258,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathPi));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "PI",
@@ -2266,16 +2266,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathRandom));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "RANDOM",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2284,11 +2284,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathRound));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "ROUND",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2297,11 +2297,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathSin));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "SIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2310,11 +2310,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathSqrt));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "SQRT",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2323,11 +2323,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathTan));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "TAN",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2346,7 +2346,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2357,30 +2357,30 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathCos));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MULT",
-                    LeftChild = new FormulaTree()
+                    LeftChild = new XmlFormulaTree()
                     {
                         VariableType = "FUNCTION",
                         VariableValue = "COS",
-                        LeftChild = new FormulaTree()
+                        LeftChild = new XmlFormulaTree()
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0"
                         }
                     },
-                    RightChild = new FormulaTree()
+                    RightChild = new XmlFormulaTree()
                     {
                         VariableType = "NUMBER",
                         VariableValue = "3"
@@ -2391,11 +2391,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2414,7 +2414,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2427,38 +2427,38 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathCos));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "BRACKET",
                     VariableValue = "",
-                    RightChild = new FormulaTree()
+                    RightChild = new XmlFormulaTree()
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "PLUS",
-                        LeftChild = new FormulaTree()
+                        LeftChild = new XmlFormulaTree()
                         {
                             VariableType = "FUNCTION",
                             VariableValue = "SIN",
-                            LeftChild = new FormulaTree()
+                            LeftChild = new XmlFormulaTree()
                             {
                                 VariableType = "NUMBER",
                                 VariableValue = "0"
                             }
                         },
-                        RightChild = new FormulaTree()
+                        RightChild = new XmlFormulaTree()
                         {
                             VariableType = "FUNCTION",
                             VariableValue = "COS",
-                            LeftChild = new FormulaTree()
+                            LeftChild = new XmlFormulaTree()
                             {
                                 VariableType = "NUMBER",
                                 VariableValue = "0"
@@ -2480,25 +2480,25 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MAX",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "FUNCTION",
                     VariableValue = "SIN",
-                    LeftChild = new FormulaTree()
+                    LeftChild = new XmlFormulaTree()
                     {
                         VariableType = "NUMBER",
                         VariableValue = "0"
                     }
                 },
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "FUNCTION",
                     VariableValue = "COS",
-                    LeftChild = new FormulaTree()
+                    LeftChild = new XmlFormulaTree()
                     {
                         VariableType = "NUMBER",
                         VariableValue = "0"
@@ -2507,7 +2507,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2529,7 +2529,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
@@ -2555,96 +2555,96 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number7));
 
-            var node1 = new FormulaTree
+            var node1 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "OR",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "2"
                 }
             };
-            var node2 = new FormulaTree
+            var node2 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "AND",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
                     VariableValue = "",
                     RightChild = node1
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "3"
                 }
             };
-            var node3 = new FormulaTree
+            var node3 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "SMALLER",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
                     VariableValue = "",
                     RightChild = node2
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "4"
                 }
             };
-            var node4 = new FormulaTree
+            var node4 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
                     VariableValue = "",
                     RightChild = node3
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "5"
                 }
             };
-            var node5 = new FormulaTree
+            var node5 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MINUS",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
                     VariableValue = "",
                     RightChild = node4
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "6"
                 }
             };
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
                     VariableValue = "",
                     RightChild = node5
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "7"
@@ -2663,7 +2663,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
@@ -2672,29 +2672,29 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicAnd));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
                     VariableValue = "",
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "AND",
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "2"
                         },
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "3"
@@ -2715,7 +2715,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree();
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree();
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number7));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
@@ -2741,96 +2741,96 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
 
-            var node1 = new FormulaTree
+            var node1 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "OR",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "2"
                 }
             };
-            var node2 = new FormulaTree
+            var node2 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "AND",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
                     VariableValue = "",
                     RightChild = node1
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "3"
                 }
             };
-            var node3 = new FormulaTree
+            var node3 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "SMALLER",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
                     VariableValue = "",
                     RightChild = node2
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "4"
                 }
             };
-            var node4 = new FormulaTree
+            var node4 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
                     VariableValue = "",
                     RightChild = node3
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "5"
                 }
             };
-            var node5 = new FormulaTree
+            var node5 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MINUS",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
                     VariableValue = "",
                     RightChild = node4
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "6"
                 }
             };
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
                     VariableValue = "",
                     RightChild = node5
                 },
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "7"
@@ -2849,7 +2849,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2861,11 +2861,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "BRACKET",
                 VariableValue = "OPEN",
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "123"
@@ -2884,7 +2884,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2894,11 +2894,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2917,7 +2917,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2926,11 +2926,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberDot));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "BRACKET",
                 VariableValue = "",
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0."
@@ -2948,7 +2948,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
 
                 VariableType = "NUMBER",
@@ -2969,7 +2969,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2986,33 +2986,33 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             //Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "BRACKET",
                 VariableValue = "OPEN",
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MULT",
-                    LeftChild = new FormulaTree()
+                    LeftChild = new XmlFormulaTree()
                     {
                         VariableType = "NUMBER",
                         VariableValue = "1"
                     },
-                    RightChild = new FormulaTree()
+                    RightChild = new XmlFormulaTree()
                     {
                         VariableType = "BRACKET",
                         VariableValue = "",
-                        RightChild = new FormulaTree()
+                        RightChild = new XmlFormulaTree()
                         {
                             VariableType = "OPERATOR",
                             VariableValue = "PLUS",
-                            LeftChild = new FormulaTree()
+                            LeftChild = new XmlFormulaTree()
                             {
                                 VariableType = "NUMBER",
                                 VariableValue = "2"
                             },
-                            RightChild = new FormulaTree()
+                            RightChild = new XmlFormulaTree()
                             {
                                 VariableType = "NUMBER",
                                 VariableValue = "3"
@@ -3034,7 +3034,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -3044,15 +3044,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "BRACKET",
                 VariableValue = "",
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MINUS",
-                    RightChild = new FormulaTree()
+                    RightChild = new XmlFormulaTree()
                     {
                         VariableType = "NUMBER",
                         VariableValue = "1"
@@ -3076,7 +3076,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -3085,16 +3085,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.SensorVariableSelected(SensorVariable.AccelerationX));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "SENSOR",
                     VariableValue = "ACCELERATION_X"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -3113,7 +3113,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -3122,16 +3122,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.ObjectVariableSelected(ObjectVariable.PositionX));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "SENSOR",
                     VariableValue = "OBJECT_X"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -3150,7 +3150,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -3163,16 +3163,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.GlobalVariableSelected(variable));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "USER_VARIABLE",
                     VariableValue = "MyVar"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -3191,7 +3191,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -3204,16 +3204,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.LocalVariableSelected(variable));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "USER_VARIABLE",
                     VariableValue = "MyVar"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -3236,17 +3236,17 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "EQUAL",
-                LeftChild = FormulaTreeFactory.CreateNumber(42),
-                RightChild = new FormulaTree
+                LeftChild = XmlFormulaTreeFactory.CreateNumber(42),
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "PLUS",
-                    LeftChild = FormulaTreeFactory.CreateNumber(31),
-                    RightChild = FormulaTreeFactory.CreateNumber(11)
+                    LeftChild = XmlFormulaTreeFactory.CreateNumber(31),
+                    RightChild = XmlFormulaTreeFactory.CreateNumber(11)
                 }
             };
 
@@ -3255,12 +3255,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             editor.KeyPressed(FormulaEditorKey.Delete);
             editor.KeyPressed(FormulaEditorKey.Delete);
 
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "EQUAL",
-                LeftChild = FormulaTreeFactory.CreateNumber(42),
-                RightChild = FormulaTreeFactory.CreateNumber(31)
+                LeftChild = XmlFormulaTreeFactory.CreateNumber(42),
+                RightChild = XmlFormulaTreeFactory.CreateNumber(31)
             };
 
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
@@ -3275,16 +3275,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "123"
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "456"
@@ -3297,16 +3297,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             valid &= editor.KeyPressed(FormulaEditorKey.Delete);
             valid &= editor.KeyPressed(FormulaEditorKey.Number7);
             valid &= editor.KeyPressed(FormulaEditorKey.Number8);
-            var expectedFormula = new FormulaTree
+            var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree
+                LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "178"
                 },
-                RightChild = new FormulaTree
+                RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "456"
@@ -3325,16 +3325,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -3346,16 +3346,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             selectedFromula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.RightChild;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -3374,11 +3374,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "SIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -3392,30 +3392,30 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = "SIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "PLUS",
-                    LeftChild = new FormulaTree()
+                    LeftChild = new XmlFormulaTree()
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "PLUS",
-                        LeftChild = new FormulaTree()
+                        LeftChild = new XmlFormulaTree()
                         {
                             VariableType = "NUMBER",
                             VariableValue = "1"
                         },
-                        RightChild = new FormulaTree()
+                        RightChild = new XmlFormulaTree()
                         {
                             VariableType = "NUMBER",
                             VariableValue = "2"
                         }
                     },
-                    RightChild = new FormulaTree()
+                    RightChild = new XmlFormulaTree()
                     {
                         VariableType = "NUMBER",
                         VariableValue = "3"
@@ -3435,18 +3435,18 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 {
                     FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                     {
-                        FormulaTree = new FormulaTree()
+                        FormulaTree = new XmlFormulaTree()
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0",
-                            LeftChild = FormulaTreeFactory.CreateNumber(0),
-                            RightChild = FormulaTreeFactory.CreateNumber(0)
+                            LeftChild = XmlFormulaTreeFactory.CreateNumber(0),
+                            RightChild = XmlFormulaTreeFactory.CreateNumber(0)
                         }
                     }
                 }
             };
 
-            var selections = new FormulaTree[]
+            var selections = new XmlFormulaTree[]
             {
                 editor.SelectedFormula.FormulaRoot.FormulaTree.LeftChild, 
                 editor.SelectedFormula.FormulaRoot.FormulaTree.RightChild, 
@@ -3480,18 +3480,18 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 {
                     FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                     {
-                        FormulaTree = new FormulaTree()
+                        FormulaTree = new XmlFormulaTree()
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0",
-                            LeftChild = FormulaTreeFactory.CreateNumber(0),
-                            RightChild = FormulaTreeFactory.CreateNumber(0)
+                            LeftChild = XmlFormulaTreeFactory.CreateNumber(0),
+                            RightChild = XmlFormulaTreeFactory.CreateNumber(0)
                         }
                     }
                 }
             };
 
-            var selections = new FormulaTree[]
+            var selections = new XmlFormulaTree[]
             {
                 editor.SelectedFormula.FormulaRoot.FormulaTree.LeftChild, 
                 editor.SelectedFormula.FormulaRoot.FormulaTree.RightChild, 
@@ -3528,18 +3528,18 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 {
                     FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                     {
-                        FormulaTree = new FormulaTree()
+                        FormulaTree = new XmlFormulaTree()
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0",
-                            LeftChild = FormulaTreeFactory.CreateNumber(0),
-                            RightChild = FormulaTreeFactory.CreateNumber(0)
+                            LeftChild = XmlFormulaTreeFactory.CreateNumber(0),
+                            RightChild = XmlFormulaTreeFactory.CreateNumber(0)
                         }
                     }
                 }
             };
 
-            var selections = new FormulaTree[]
+            var selections = new XmlFormulaTree[]
             {
                 editor.SelectedFormula.FormulaRoot.FormulaTree.LeftChild, 
                 editor.SelectedFormula.FormulaRoot.FormulaTree.RightChild, 
@@ -3570,14 +3570,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            var terminalZero = new FormulaTree()
+            var terminalZero = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
             };
             selectedFromula.FormulaRoot.FormulaTree = terminalZero;
             editor.SelectedFormula = selectedFromula;
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "1"
@@ -3586,7 +3586,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "BRACKET",
                 VariableValue = "OPEN"
@@ -3595,7 +3595,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MINUS"
@@ -3604,7 +3604,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "NOT"
@@ -3613,7 +3613,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "TRUE"
@@ -3622,7 +3622,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = "FALSE"
@@ -3647,7 +3647,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 {
                     FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
                     {
-                        FormulaTree = FormulaTreeFactory.CreateNumber("0.0")
+                        FormulaTree = XmlFormulaTreeFactory.CreateNumber("0.0")
                     }
                 }
             };
@@ -3656,7 +3656,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             const SensorVariable variable = SensorVariable.CompassDirection;
             Assert.IsTrue(editor.SensorVariableSelected(variable));
             FormulaComparer.CompareFormulas(
-                expectedFormula: FormulaTreeFactory.CreateDefaultNode(variable), 
+                expectedFormula: XmlFormulaTreeFactory.CreateDefaultNode(variable), 
                 actualFormula: editor.SelectedFormula.FormulaRoot.FormulaTree);
 
 
@@ -3664,7 +3664,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             const FormulaEditorKey numberKey = FormulaEditorKey.Number0;
             Assert.IsTrue(editor.KeyPressed(numberKey));
             FormulaComparer.CompareFormulas(
-                expectedFormula: FormulaTreeFactory.CreateDefaultNode(numberKey),
+                expectedFormula: XmlFormulaTreeFactory.CreateDefaultNode(numberKey),
                 actualFormula: editor.SelectedFormula.FormulaRoot.FormulaTree);
         }
 
@@ -3681,7 +3681,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -3692,7 +3692,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Undo));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Undo));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "1"
@@ -3704,7 +3704,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Redo));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Redo));
             Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Redo));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "123"
@@ -3725,7 +3725,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -3735,7 +3735,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Undo));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = "1"

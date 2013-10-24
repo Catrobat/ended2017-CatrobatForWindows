@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.Formulas
 
         public FormulaViewer Viewer { get; set; }
 
-        public FormulaTree TreeItem { get; set; }
+        public XmlFormulaTree TreeItem { get; set; }
 
         public UiFormula LeftFormula { get; set; }
 
@@ -198,7 +198,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.Formulas
 
             if (this.IsSelected)
             {
-                FormulaTree parent = null;
+                XmlFormulaTree parent = null;
 
                 if (ParentFormula != null)
                     parent = ParentFormula.TreeItem;

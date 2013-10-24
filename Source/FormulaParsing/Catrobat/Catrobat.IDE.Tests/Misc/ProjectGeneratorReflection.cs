@@ -243,18 +243,18 @@ namespace Catrobat.IDE.Tests.Misc
         {
             var formula = new Formula
             {
-                FormulaTree = new FormulaTree
+                FormulaTree = new XmlFormulaTree
                 {
-                    LeftChild = new FormulaTree
+                    LeftChild = new XmlFormulaTree
                     {
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "OPERATOR",
                             VariableValue = "MINUS"
                         },
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
-                            LeftChild = new FormulaTree
+                            LeftChild = new XmlFormulaTree
                             {
                                 VariableType = "FUNCTION",
                                 VariableValue = "0"
@@ -265,7 +265,7 @@ namespace Catrobat.IDE.Tests.Misc
                         VariableType = "NUMBER",
                         VariableValue = "1"
                     },
-                    RightChild = new FormulaTree
+                    RightChild = new XmlFormulaTree
                     {
                         VariableType = "FUNCTION",
                         VariableValue = "0"
@@ -368,7 +368,7 @@ namespace Catrobat.IDE.Tests.Misc
                 {
                     TimesToRepeat = new Formula
                         {
-                            FormulaTree = new FormulaTree
+                            FormulaTree = new XmlFormulaTree
                                 {
                                     VariableType = "NUMBER",
                                     VariableValue = "2"
@@ -395,7 +395,7 @@ namespace Catrobat.IDE.Tests.Misc
             {
                 IfCondition = new Formula
                 {
-                    FormulaTree = new FormulaTree
+                    FormulaTree = new XmlFormulaTree
                     {
                         VariableType = "BOOL",
                         VariableValue = "1"

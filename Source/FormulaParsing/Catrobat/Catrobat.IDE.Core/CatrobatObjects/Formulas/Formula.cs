@@ -5,8 +5,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 {
     public class Formula : DataObject
     {
-        private FormulaTree _formulaTree;
-        public FormulaTree FormulaTree
+        private XmlFormulaTree _formulaTree;
+        public XmlFormulaTree FormulaTree
         {
             get { return _formulaTree; }
             set
@@ -31,7 +31,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("formulaTree") != null)
-                _formulaTree = new FormulaTree(xRoot.Element("formulaTree"));
+                _formulaTree = new XmlFormulaTree(xRoot.Element("formulaTree"));
         }
 
         internal override XElement CreateXML()
@@ -42,7 +42,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
         public DataObject Copy()
         {
             var newFormula = new Formula();
-            newFormula._formulaTree = _formulaTree.Copy() as FormulaTree;
+            newFormula._formulaTree = _formulaTree.Copy() as XmlFormulaTree;
 
             return newFormula;
         }

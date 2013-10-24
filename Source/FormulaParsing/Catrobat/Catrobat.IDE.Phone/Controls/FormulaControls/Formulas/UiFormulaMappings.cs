@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.Formulas
 
         private static Dictionary<string, Dictionary<string, FormulaPartControlList>> _mappings;
 
-        public static UiFormula CreateFormula(Formula formulaRoot, FormulaViewer viewer, FormulaTree formula, bool isEditEnabled, FormulaTree selectedFormula)
+        public static UiFormula CreateFormula(Formula formulaRoot, FormulaViewer viewer, XmlFormulaTree formula, bool isEditEnabled, XmlFormulaTree selectedFormula)
         {
             if (_mappings == null)
                 InitMappings();

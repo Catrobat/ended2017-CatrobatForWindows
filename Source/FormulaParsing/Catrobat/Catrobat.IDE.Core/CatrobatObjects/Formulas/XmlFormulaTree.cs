@@ -3,10 +3,10 @@ using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 {
-    public class FormulaTree : DataObject
+    public class XmlFormulaTree : DataObject
     {
-        private FormulaTree _leftChild;
-        public FormulaTree LeftChild
+        private XmlFormulaTree _leftChild;
+        public XmlFormulaTree LeftChild
         {
             get { return _leftChild; }
             set
@@ -21,8 +21,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
             }
         }
 
-        private FormulaTree _rightChild;
-        public FormulaTree RightChild
+        private XmlFormulaTree _rightChild;
+        public XmlFormulaTree RightChild
         {
             get { return _rightChild; }
             set
@@ -70,11 +70,11 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
         }
 
 
-        public FormulaTree()
+        public XmlFormulaTree()
         {
         }
 
-        public FormulaTree(XElement xElement)
+        public XmlFormulaTree(XElement xElement)
         {
             LoadFromXML(xElement);
         }
@@ -82,9 +82,9 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
         internal override void LoadFromXML(XElement xRoot)
         {
             if(xRoot.Element("leftChild") != null)
-                _leftChild = new FormulaTree(xRoot.Element("leftChild"));
+                _leftChild = new XmlFormulaTree(xRoot.Element("leftChild"));
             if (xRoot.Element("rightChild") != null)
-                _rightChild = new FormulaTree(xRoot.Element("rightChild"));
+                _rightChild = new XmlFormulaTree(xRoot.Element("rightChild"));
 
             if (xRoot.Element("type") != null)
             _variableType = xRoot.Element("type").Value;
@@ -126,12 +126,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 
         public DataObject Copy()
         {
-            var newFormulaTree = new FormulaTree();
+            var newFormulaTree = new XmlFormulaTree();
 
             if (_leftChild != null)
-                newFormulaTree.LeftChild = _leftChild.Copy() as FormulaTree;
+                newFormulaTree.LeftChild = _leftChild.Copy() as XmlFormulaTree;
             if (_rightChild != null)
-                newFormulaTree.RightChild = _rightChild.Copy() as FormulaTree;
+                newFormulaTree.RightChild = _rightChild.Copy() as XmlFormulaTree;
             newFormulaTree.VariableType = _variableType;
             newFormulaTree.VariableValue = _variableValue;
 
@@ -140,7 +140,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 
         public override bool Equals(DataObject other)
         {
-            var otherFormulaTree = other as FormulaTree;
+            var otherFormulaTree = other as XmlFormulaTree;
 
             if (otherFormulaTree == null)
                 return false;

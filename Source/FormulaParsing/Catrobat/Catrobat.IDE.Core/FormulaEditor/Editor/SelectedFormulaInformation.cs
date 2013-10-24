@@ -6,8 +6,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
     {
         public Formula FormulaRoot { get; set; }
 
-        public FormulaTree SelectedFormula { get; set; }
+        public XmlFormulaTree SelectedFormula { get; set; }
 
-        public FormulaTree SelectedFormulaParent { get; set; }
+        public XmlFormulaTree SelectedFormulaParent { get; set; }
     }
 }

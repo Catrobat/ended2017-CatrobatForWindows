@@ -10,18 +10,18 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region members
 
-        private Stack<FormulaTree> _undoStack;
-        private Stack<FormulaTree> _redoStack;
+        private Stack<XmlFormulaTree> _undoStack;
+        private Stack<XmlFormulaTree> _redoStack;
 
         public SelectedFormulaInformation SelectedFormula { get; set; }
 
-        public Stack<FormulaTree> UndoStack
+        public Stack<XmlFormulaTree> UndoStack
         {
             get
             {
                 if (_undoStack == null)
                 {
-                    _undoStack = new Stack<FormulaTree>();
+                    _undoStack = new Stack<XmlFormulaTree>();
                 }
                 return _undoStack;
             }
@@ -31,13 +31,13 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        public Stack<FormulaTree> RedoStack
+        public Stack<XmlFormulaTree> RedoStack
         {
             get
             {
                 if (_redoStack == null)
                 {
-                    _redoStack = new Stack<FormulaTree>();
+                    _redoStack = new Stack<XmlFormulaTree>();
                 }
                 return _redoStack;
             }
@@ -47,7 +47,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        private FormulaTree Selection
+        private XmlFormulaTree Selection
         {
             get
             {
@@ -64,7 +64,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             return Selection != null;
         }
 
-        private FormulaTree SelectionParent
+        private XmlFormulaTree SelectionParent
         {
             get
             {
@@ -77,7 +77,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        private FormulaTree RootNode
+        private XmlFormulaTree RootNode
         {
             get
             {
@@ -89,7 +89,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        private FormulaTree EffectiveRootNode
+        private XmlFormulaTree EffectiveRootNode
         {
             get
             {
@@ -111,7 +111,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        private FormulaTree RootNodeOrSelection
+        private XmlFormulaTree RootNodeOrSelection
         {
             get
             {
@@ -148,7 +148,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             if (key == FormulaEditorKey.Undo) return HandleUndoCommand();
             if (key == FormulaEditorKey.Redo) return HandleRedoCommand();
 
-            UndoStack.Push(RootNode.Copy() as FormulaTree);
+            UndoStack.Push(RootNode.Copy() as XmlFormulaTree);
             if (HandleKey(key))
             {
                 RedoStack.Clear();
@@ -160,8 +160,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         public bool SensorVariableSelected(SensorVariable variable)
         {
-            UndoStack.Push(RootNode.Copy() as FormulaTree);
-            var node = FormulaTreeFactory.CreateDefaultNode(variable);
+            UndoStack.Push(RootNode.Copy() as XmlFormulaTree);
+            var node = XmlFormulaTreeFactory.CreateDefaultNode(variable);
             if (HandleRightSubordinatingNode(node))
             {
                 RedoStack.Clear();
@@ -173,8 +173,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         public bool ObjectVariableSelected(ObjectVariable variable)
         {
-            UndoStack.Push(RootNode.Copy() as FormulaTree);
-            var node = FormulaTreeFactory.CreateDefaultNode(variable);
+            UndoStack.Push(RootNode.Copy() as XmlFormulaTree);
+            var node = XmlFormulaTreeFactory.CreateDefaultNode(variable);
             if (HandleRightSubordinatingNode(node))
             {
                 RedoStack.Clear();
@@ -186,8 +186,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         public bool GlobalVariableSelected(UserVariable variable)
         {
-            UndoStack.Push(RootNode.Copy() as FormulaTree);
-            var node = FormulaTreeFactory.CreateDefaultNode(variable);
+            UndoStack.Push(RootNode.Copy() as XmlFormulaTree);
+            var node = XmlFormulaTreeFactory.CreateDefaultNode(variable);
             if (HandleRightSubordinatingNode(node))
             {
                 RedoStack.Clear();
@@ -199,8 +199,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         public bool LocalVariableSelected(UserVariable variable)
         {
-            UndoStack.Push(RootNode.Copy() as FormulaTree);
-            var node = FormulaTreeFactory.CreateDefaultNode(variable);
+            UndoStack.Push(RootNode.Copy() as XmlFormulaTree);
+            var node = XmlFormulaTreeFactory.CreateDefaultNode(variable);
             if (HandleRightSubordinatingNode(node))
             {
                 RedoStack.Clear();
@@ -233,7 +233,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             var formulaToChange = GetRightmostNode();
             if (formulaToChange == null)
             {
-                EffectiveRootNode = FormulaTreeFactory.CreateDefaultNode(key);
+                EffectiveRootNode = XmlFormulaTreeFactory.CreateDefaultNode(key);
                 return true;
             }
             if (IsNumber(formulaToChange))
@@ -250,22 +250,22 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
             if (IsTerminalZero(formulaToChange))
             {
-                RootNodeOrSelection = FormulaTreeFactory.CreateDefaultNode(key);
+                RootNodeOrSelection = XmlFormulaTreeFactory.CreateDefaultNode(key);
                 return true;
             }
             if (IsOperator(formulaToChange))
             {
-                formulaToChange.RightChild = FormulaTreeFactory.CreateDefaultNode(key);
+                formulaToChange.RightChild = XmlFormulaTreeFactory.CreateDefaultNode(key);
                 return true;
             }
             if (!HasChildren(formulaToChange))
             {
-                ReplaceNode(formulaToChange, FormulaTreeFactory.CreateDefaultNode(key));
+                ReplaceNode(formulaToChange, XmlFormulaTreeFactory.CreateDefaultNode(key));
                 return true;
             }
             if (!HasChildren(formulaToChange))
             {
-                ReplaceNode(formulaToChange, FormulaTreeFactory.CreateDefaultNode(key));
+                ReplaceNode(formulaToChange, XmlFormulaTreeFactory.CreateDefaultNode(key));
                 return true;
             }
             if (IsEmpty(formulaToChange))
@@ -347,7 +347,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             return true;
         }
 
-        private static void DeleteDigit(FormulaTree node)
+        private static void DeleteDigit(XmlFormulaTree node)
         {
             var length = node.VariableValue.Length;
             node.VariableValue = node.VariableValue.Substring(0, length - 1);
@@ -365,7 +365,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
             if (IsOperator(formulaToChange))
             {
-                formulaToChange.RightChild = FormulaTreeFactory.CreateDefaultNode(FormulaEditorKey.NumberDot);
+                formulaToChange.RightChild = XmlFormulaTreeFactory.CreateDefaultNode(FormulaEditorKey.NumberDot);
                 return true;
             }
             if (IsEmpty(formulaToChange))
@@ -387,12 +387,12 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             var formulaToChange = GetRightmostNode();
             if (formulaToChange == null || IsEmpty(formulaToChange))
             {
-                EffectiveRootNode = FormulaTreeFactory.CreateDefaultNode(FormulaEditorKey.OpenBracket);
+                EffectiveRootNode = XmlFormulaTreeFactory.CreateDefaultNode(FormulaEditorKey.OpenBracket);
                 return true;
             }
             if (IsTerminalZero(formulaToChange))
             {
-                ReplaceNode(formulaToChange, FormulaTreeFactory.CreateDefaultNode(FormulaEditorKey.OpenBracket));
+                ReplaceNode(formulaToChange, XmlFormulaTreeFactory.CreateDefaultNode(FormulaEditorKey.OpenBracket));
                 return true;
             }
             if (IsOperator(formulaToChange))
@@ -413,10 +413,10 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         private bool HandleRightSubordinatingKey(FormulaEditorKey key)
         {
-            return HandleRightSubordinatingNode(FormulaTreeFactory.CreateDefaultNode(key));
+            return HandleRightSubordinatingNode(XmlFormulaTreeFactory.CreateDefaultNode(key));
         }
 
-        private bool HandleRightSubordinatingNode(FormulaTree node)
+        private bool HandleRightSubordinatingNode(XmlFormulaTree node)
         {
             var formulaToChange = GetRightmostNode();
             if (formulaToChange == null || IsEmpty(formulaToChange))
@@ -455,12 +455,12 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             var rightmostNode = GetRightmostNode();
             if (rightmostNode == null)
             {
-                EffectiveRootNode = FormulaTreeFactory.CreateDefaultNode(key);
+                EffectiveRootNode = XmlFormulaTreeFactory.CreateDefaultNode(key);
                 return true;
             }
             if (IsTerminalZero(rightmostNode))
             {
-                ReplaceNode(rightmostNode, FormulaTreeFactory.CreateDefaultNode(key));
+                ReplaceNode(rightmostNode, XmlFormulaTreeFactory.CreateDefaultNode(key));
                 return true;
             }
             if (IsOperator(rightmostNode))
@@ -472,7 +472,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             var formulaToChange = RootNode;
             if (formulaToChange == null || IsEmpty(formulaToChange))
             {
-                RootNode = FormulaTreeFactory.CreateDefaultNode(key);
+                RootNode = XmlFormulaTreeFactory.CreateDefaultNode(key);
                 return true;
             }
             if (key == FormulaEditorKey.LogicNot) return false;
@@ -483,7 +483,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         private bool HandleUndoCommand()
         {
             if (UndoStack.Count == 0) return false;
-            RedoStack.Push(RootNode.Copy() as FormulaTree);
+            RedoStack.Push(RootNode.Copy() as XmlFormulaTree);
             RootNode = UndoStack.Pop();
             Selection = null;
             SelectionParent = null;
@@ -524,22 +524,22 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        private static bool IsNumber(FormulaTree node)
+        private static bool IsNumber(XmlFormulaTree node)
         {
             return node.VariableType == "NUMBER";
         }
 
-        private static bool IsOperator(FormulaTree node)
+        private static bool IsOperator(XmlFormulaTree node)
         {
             return !IsLogicValue(node) && node.VariableType == "OPERATOR";
         }
 
-        private static bool IsEmpty(FormulaTree node)
+        private static bool IsEmpty(XmlFormulaTree node)
         {
             return !IsCloseBracket(node) && string.IsNullOrEmpty(node.VariableValue);
         }
 
-        private static bool IsPreceedingOperator(FormulaTree node)
+        private static bool IsPreceedingOperator(XmlFormulaTree node)
         {
             var operatorName = node.VariableValue;
             return 
@@ -547,7 +547,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 operatorName == "DEVIDE";
         }
 
-        private static bool IsSucceedingOperator(FormulaTree node)
+        private static bool IsSucceedingOperator(XmlFormulaTree node)
         {
             var operatorName = node.VariableValue;
             return 
@@ -555,7 +555,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 operatorName == "MINUS";
         }
 
-        private static bool IsRelationalOperator(FormulaTree node)
+        private static bool IsRelationalOperator(XmlFormulaTree node)
         {
             var operatorName = node.VariableValue;
             return
@@ -567,22 +567,22 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 operatorName == "GREATEREQUAL";
         }
 
-        private static bool IsLogicAnd(FormulaTree node)
+        private static bool IsLogicAnd(XmlFormulaTree node)
         {
             return (node.VariableValue == "AND");
         }
 
-        private static bool IsLogicOr(FormulaTree node)
+        private static bool IsLogicOr(XmlFormulaTree node)
         {
             return (node.VariableValue == "OR");
         }
 
-        private static bool IsMinusOperator(FormulaTree node)
+        private static bool IsMinusOperator(XmlFormulaTree node)
         {
             return node.VariableValue == "MINUS";
         }
 
-        private static bool IsSignedNumber(FormulaTree node)
+        private static bool IsSignedNumber(XmlFormulaTree node)
         {
             return IsMinusOperator(node)
                 && node.LeftChild == null
@@ -597,7 +597,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 key == FormulaEditorKey.LogicFalse;
         }
 
-        private static bool IsLogicValue(FormulaTree node)
+        private static bool IsLogicValue(XmlFormulaTree node)
         {
             var value = node.VariableValue;
             return
@@ -605,32 +605,32 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 value == "FALSE";
         }
 
-        private static bool IsOpenBracket(FormulaTree node)
+        private static bool IsOpenBracket(XmlFormulaTree node)
         {
             return node.VariableType == "BRACKET" && node.VariableValue == "OPEN";
         }
 
-        private static bool IsCloseBracket(FormulaTree node)
+        private static bool IsCloseBracket(XmlFormulaTree node)
         {
             return node.VariableType == "BRACKET" && node.VariableValue == "";
         }
 
-        private static bool HasChildren(FormulaTree node)
+        private static bool HasChildren(XmlFormulaTree node)
         {
             return node.LeftChild != null || node.RightChild != null;
         }
 
-        private bool IsTerminalZero(FormulaTree node)
+        private bool IsTerminalZero(XmlFormulaTree node)
         {
             return node.VariableType == "NUMBER" && node.VariableValue == "0" && IsTerminalNode(node);
         }
 
-        private bool IsTerminalNode(FormulaTree node)
+        private bool IsTerminalNode(XmlFormulaTree node)
         {
             return RootNodeOrSelection == node && !HasChildren(node);
         }
 
-        private static bool IsFunction(FormulaTree node)
+        private static bool IsFunction(XmlFormulaTree node)
         {
             return node.VariableType == "FUNCTION";
         }
@@ -697,7 +697,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region tree navigation
 
-        private FormulaTree GetRightmostNode()
+        private XmlFormulaTree GetRightmostNode()
         {
             var node = EffectiveRootNode;
             if (node == null) return null;
@@ -708,9 +708,9 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             return node;
         }
 
-        private FormulaTree GetRightmostSuperiorNode(FormulaEditorKey key)
+        private XmlFormulaTree GetRightmostSuperiorNode(FormulaEditorKey key)
         {
-            var nodePriority = GetNodePriority(FormulaTreeFactory.CreateDefaultNode(key));
+            var nodePriority = GetNodePriority(XmlFormulaTreeFactory.CreateDefaultNode(key));
             var node = EffectiveRootNode;
             if (node == null) return null;
             if (GetNodePriority(node) <= nodePriority) return null;
@@ -721,7 +721,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             return node;
         }
 
-        private static List<FormulaTree> DepthFirstSearch(FormulaTree node, FormulaTree expectedNode, List<FormulaTree> path)
+        private static List<XmlFormulaTree> DepthFirstSearch(XmlFormulaTree node, XmlFormulaTree expectedNode, List<XmlFormulaTree> path)
         {
             if (node == expectedNode)
             {
@@ -751,15 +751,15 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             return null;
         }
 
-        private List<FormulaTree> DepthFirstSearch(FormulaTree node)
+        private List<XmlFormulaTree> DepthFirstSearch(XmlFormulaTree node)
         {
-            return DepthFirstSearch(RootNode, node, new List<FormulaTree>());
+            return DepthFirstSearch(RootNode, node, new List<XmlFormulaTree>());
         }
 
-        private FormulaTree GetRightmostOpenBracket()
+        private XmlFormulaTree GetRightmostOpenBracket()
         {
             var node = RootNodeOrSelection;
-            FormulaTree openBracketNode = null;
+            XmlFormulaTree openBracketNode = null;
             while (node != null)
             {
                 if (IsOpenBracket(node))
@@ -771,7 +771,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             return openBracketNode;
         }
 
-        private FormulaTree GetRightmostClosedBracket()
+        private XmlFormulaTree GetRightmostClosedBracket()
         {
             var node = RootNodeOrSelection;
             while (node != null)
@@ -789,16 +789,16 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region tree manipulation
 
-        private static void RewriteNode(FormulaTree node, FormulaEditorKey key)
+        private static void RewriteNode(XmlFormulaTree node, FormulaEditorKey key)
         {
-            var modelNode = FormulaTreeFactory.CreateDefaultNode(key);
+            var modelNode = XmlFormulaTreeFactory.CreateDefaultNode(key);
             node.VariableType = modelNode.VariableType;
             node.VariableValue = modelNode.VariableValue;
         }
 
         private void Superordinate(FormulaEditorKey key)
         {
-            var newNode = FormulaTreeFactory.CreateDefaultNode(key);
+            var newNode = XmlFormulaTreeFactory.CreateDefaultNode(key);
             var node = EffectiveRootNode;
             EffectiveRootNode = newNode;
             if (node != null && !IsEmpty(node))
@@ -807,23 +807,23 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        private static void Subordinate(FormulaTree node, FormulaEditorKey key)
+        private static void Subordinate(XmlFormulaTree node, FormulaEditorKey key)
         {
             var childNode = node.RightChild;
-            node.RightChild = FormulaTreeFactory.CreateDefaultNode(key);
+            node.RightChild = XmlFormulaTreeFactory.CreateDefaultNode(key);
             node.RightChild.LeftChild = childNode;
         }
 
-        private void Extract(FormulaTree node)
+        private void Extract(XmlFormulaTree node)
         {
             if (IsTerminalNode(node))
             {
-                ReplaceNode(node, FormulaTreeFactory.CreateDefaultNode(FormulaEditorKey.Number0));
+                ReplaceNode(node, XmlFormulaTreeFactory.CreateDefaultNode(FormulaEditorKey.Number0));
                 return;
             }
             var replacementNode = node.LeftChild;
             var path = DepthFirstSearch(node);
-            FormulaTree parentNode = null;
+            XmlFormulaTree parentNode = null;
             if (path.Count > 1)
             {
                 parentNode = path.ElementAt(1);
@@ -886,7 +886,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         //    }
         //}
 
-        private static void SwapChildNode(FormulaTree node, FormulaTree oldChildNode, FormulaTree newChildNode)
+        private static void SwapChildNode(XmlFormulaTree node, XmlFormulaTree oldChildNode, XmlFormulaTree newChildNode)
         {
             if (oldChildNode == node.LeftChild) node.LeftChild = newChildNode;
             if (oldChildNode == node.RightChild) node.RightChild = newChildNode;
@@ -899,7 +899,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         //    RotateUp(Selection);
         //}
 
-        private static void ReplaceNode(FormulaTree oldNode, FormulaTree newNode)
+        private static void ReplaceNode(XmlFormulaTree oldNode, XmlFormulaTree newNode)
         {
             oldNode.VariableType = newNode.VariableType;
             oldNode.VariableValue = newNode.VariableValue;
@@ -948,13 +948,13 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             Subordinate(parentNode, key);
         }
 
-        private static void CloseBracket(FormulaTree node)
+        private static void CloseBracket(XmlFormulaTree node)
         {
             if (!IsOpenBracket(node)) return;
             node.VariableValue = "";
         }
 
-        private static void OpenBracket(FormulaTree node)
+        private static void OpenBracket(XmlFormulaTree node)
         {
             if (!IsCloseBracket(node)) return;
             node.VariableValue = "OPEN";
@@ -962,7 +962,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #endregion
 
-        private static int GetNodePriority(FormulaTree node)
+        private static int GetNodePriority(XmlFormulaTree node)
         {
             if (IsSignedNumber(node)) return 0;
             if (IsNumber(node)) return 0;

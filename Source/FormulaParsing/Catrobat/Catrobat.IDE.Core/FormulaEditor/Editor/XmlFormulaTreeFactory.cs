@@ -5,44 +5,44 @@ using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
-    public static class FormulaTreeFactory
+    public static class XmlFormulaTreeFactory
     {
-        public static FormulaTree CreateNumber(double value)
+        public static XmlFormulaTree CreateNumber(double value)
         {
             return CreateNumber(value.ToString(CultureInfo.InvariantCulture));
         }
 
-        public static FormulaTree CreateNumber(string value)
+        public static XmlFormulaTree CreateNumber(string value)
         {
-            return new FormulaTree()
+            return new XmlFormulaTree()
             {
                 VariableType = "NUMBER",
                 VariableValue = value
             };
         }
 
-        private static FormulaTree CreateOperator(string name)
+        private static XmlFormulaTree CreateOperator(string name)
         {
-            return new FormulaTree()
+            return new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
                 VariableValue = name
             };
         }
 
-        private static FormulaTree CreateFunction(string name, double value)
+        private static XmlFormulaTree CreateFunction(string name, double value)
         {
             return CreateFunction(name, CreateNumber(value));
         }
 
-        private static FormulaTree CreateFunction(string name, double value1, double value2)
+        private static XmlFormulaTree CreateFunction(string name, double value1, double value2)
         {
             return CreateFunction(name, CreateNumber(value1), CreateNumber(value2));
         }
 
-        private static FormulaTree CreateFunction(string name, FormulaTree argument1 = null, FormulaTree argument2 = null)
+        private static XmlFormulaTree CreateFunction(string name, XmlFormulaTree argument1 = null, XmlFormulaTree argument2 = null)
         {
-            return new FormulaTree()
+            return new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
                 VariableValue = name,
@@ -51,25 +51,25 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        private static FormulaTree CreateSensor(string name)
+        private static XmlFormulaTree CreateSensor(string name)
         {
-            return new FormulaTree()
+            return new XmlFormulaTree()
             {
                 VariableType = "SENSOR",
                 VariableValue = name
             };
         }
 
-        private static FormulaTree CreateUserVariable(string name)
+        private static XmlFormulaTree CreateUserVariable(string name)
         {
-            return new FormulaTree()
+            return new XmlFormulaTree()
             {
                 VariableType = "USER_VARIABLE",
                 VariableValue = name
             };
         }
 
-        public static FormulaTree CreateDefaultNode(FormulaEditorKey key)
+        public static XmlFormulaTree CreateDefaultNode(FormulaEditorKey key)
         {
             switch (key)
             {
@@ -169,7 +169,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                     return CreateFunction("RANDOM", 0, 1);
 
                 case FormulaEditorKey.OpenBracket:
-                    return new FormulaTree
+                    return new XmlFormulaTree
                     {
                         VariableType = "BRACKET",
                         VariableValue = "OPEN"
@@ -182,16 +182,16 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 //    };
 
                 default:
-                    return new FormulaTree
+                    return new XmlFormulaTree
                     {
                         VariableType = "UNKNOWN",
                         VariableValue = "",
-                        LeftChild = new FormulaTree
+                        LeftChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = ""
                         },
-                        RightChild = new FormulaTree
+                        RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = ""
@@ -200,7 +200,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        public static FormulaTree CreateDefaultNode(SensorVariable variable)
+        public static XmlFormulaTree CreateDefaultNode(SensorVariable variable)
         {
             switch (variable)
             {
@@ -221,7 +221,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        public static FormulaTree CreateDefaultNode(ObjectVariable variable)
+        public static XmlFormulaTree CreateDefaultNode(ObjectVariable variable)
         {
             switch (variable)
             {
@@ -244,7 +244,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        public static FormulaTree CreateDefaultNode(UserVariable variable)
+        public static XmlFormulaTree CreateDefaultNode(UserVariable variable)
         {
             return CreateUserVariable(variable.Name);
         }

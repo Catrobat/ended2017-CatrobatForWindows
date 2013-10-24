@@ -5,7 +5,7 @@ namespace Catrobat.IDE.Tests.Misc
 {
     public static class FormulaComparer
     {
-        public static void CompareFormulas(FormulaTree expectedFormula, FormulaTree actualFormula)
+        public static void CompareFormulas(XmlFormulaTree expectedFormula, XmlFormulaTree actualFormula)
         {
             if (expectedFormula == null && actualFormula == null)
                 return;

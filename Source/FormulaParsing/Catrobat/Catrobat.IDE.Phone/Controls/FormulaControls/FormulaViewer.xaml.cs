@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
     public partial class FormulaViewer : UserControl, INotifyPropertyChanged
     {
         private UiFormula _uiFormula;
-        private FormulaTree _selectedFormula;
+        private XmlFormulaTree _selectedFormula;
 
         #region DependencyProperties
 
@@ -173,7 +173,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             InitializeComponent();
         }
 
-        public void SelectedFormulaChanged(FormulaTree formula)
+        public void SelectedFormulaChanged(XmlFormulaTree formula)
         {
             _selectedFormula = formula;
         }
