@@ -104,7 +104,7 @@
       </reorderableListbox:ReorderListBox>
 
       <TextBlock Grid.Row="1"
-              Text ="{Binding Resources.Editor_ClickPlusToAddAction, Source={StaticResource LocalizedStrings}}"
+              Text ="{Binding Resources.Editor_ClickPlusToAddCostume, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsSpritesEmpty, Converter={StaticResource BoolVisibilityConverter}}"
               Style="{StaticResource PhoneTextLargeStyle}"
               TextWrapping="Wrap"

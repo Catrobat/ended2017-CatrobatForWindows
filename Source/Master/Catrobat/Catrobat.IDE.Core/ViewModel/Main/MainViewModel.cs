@@ -535,7 +535,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             }
         }
 
-        private void DeleteProjectMessageCallback(MessageboxResult result)
+        private async void DeleteProjectMessageCallback(MessageboxResult result)// TODO: async, should this be awaitable?
         {
             _dialogResult = result;
 
@@ -554,7 +554,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                         CurrentProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
                     }
                     else
-                        CurrentProject = CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+                        CurrentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
                 }
                 else
                     UpdateLocalProjects();
@@ -564,16 +564,16 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             }
         }
 
-        private void CopyProjectMessageCallback(MessageboxResult result)
+        private async void CopyProjectMessageCallback(MessageboxResult result) // TODO: async, should this be awaitable?
         {
             _dialogResult = result;
 
             if (_dialogResult == MessageboxResult.Ok)
             {
                 if (_copyProjectName == CurrentProject.ProjectHeader.ProgramName)
-                    CurrentProject.Save();
+                    await CurrentProject.Save();
 
-                CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName,
+                await CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName,
                     CurrentProject.ProjectHeader.ProgramName);
 
                 UpdateLocalProjects();

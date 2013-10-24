@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
@@ -285,7 +286,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
         }
 
 
-        public void Save(string path = null)
+        public async Task Save(string path = null)
         {
             if (path == null)
             {
@@ -294,13 +295,13 @@ namespace Catrobat.IDE.Core.CatrobatObjects
 
             if (Debugger.IsAttached)
             {
-                SaveInternal(path);
+                await SaveInternal(path);
             }
             else
             {
                 try
                 {
-                    SaveInternal(path);
+                    await SaveInternal(path);
                 }
                 catch
                 {
@@ -309,7 +310,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             }
         }
 
-        public void SaveInternal(string path)
+        private async Task SaveInternal(string path)
         {
             using (var storage = StorageSystem.GetStorage())
             {
@@ -318,8 +319,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
                 document.Save(writer, SaveOptions.None);
 
                 var xml = writer.GetStringBuilder().ToString();
-                storage.WriteTextFile(path, xml);
-
+                await storage.WriteTextFileAsync(path, xml);
             }
         }
 

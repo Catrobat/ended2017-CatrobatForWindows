@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.Resources.Localization;
@@ -17,6 +18,8 @@ namespace Catrobat.IDE.Core.Services.Common
     public class ProjectGeneratorDefault : IProjectGenerator
     {
         private const string ResourcePathToLookFiles = "Content/Programs/Default/Looks/";
+        private const string ResourcePathToScreenshot = "Content/Programs/Default";
+        private const string ScreenshotFilename = "automatic_screenshot.png";
 
         private const string LookFileNameBackground = "52fb8540d8d751880ab012e26c86e1f5_background.png";
         private const string LookFileNameCat = "cd8435e8bf34b6be6c0fdf700f03e01e_cat.png";
@@ -26,29 +29,50 @@ namespace Catrobat.IDE.Core.Services.Common
         private const string LookFileNameCloud1 = "e8b139ca83c443159b464c26d8483bae_cloud1.png";
         private const string LookFileNameCloud2 = "c96b5d3adc1d4b199fc76fc518deae86_cloud2.png";
 
-        public Project GenerateProject(string twoLetterIsoLanguageCode, bool writeToDisk)
+        public async Task<Project> GenerateProject(string twoLetterIsoLanguageCode, bool writeToDisk)
         {
-            var project = new Project();
+            var project = new Project
+            {
+                ProjectHeader = new ProjectHeader()
+            };
 
-            project.ProjectHeader = new ProjectHeader();
             project.SetProgramName(AppResources.Main_DefaultProjectName);
-            project.ProjectScreenshot = new PortableImage(); // TODO: add real screenshot
 
-            //XmlParserTempProjectHelper.Project = project;
+            using (var storage = StorageSystem.GetStorage())
+            {
+                using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
+                {
+                    var inputStream =
+                        await loader.OpenResourceStreamAsync(ResourceScope.IdePhone, 
+                        Path.Combine(ResourcePathToScreenshot, ScreenshotFilename));
 
-            if(writeToDisk)
-                WriteLooksToDisk(Path.Combine(project.BasePath, Project.ImagesPath));
+                    var outputStream = await storage.OpenFileAsync(
+                        Path.Combine(project.BasePath, ScreenshotFilename),
+                        StorageFileMode.Create, StorageFileAccess.Write);
+
+                    inputStream.CopyTo(outputStream);
+                    outputStream.Flush();
+                    inputStream.Dispose();
+                    outputStream.Dispose();
+                }
+            }
+
+
+
+
+            if (writeToDisk)
+                await WriteLooksToDisk(Path.Combine(project.BasePath, Project.ImagesPath));
 
             FillSprites(project);
 
 
-            if(writeToDisk)
-                project.Save();
+            if (writeToDisk)
+                await project.Save();
 
             return project;
         }
 
-        private void WriteLooksToDisk(string basePathToLookFiles)
+        private static async Task WriteLooksToDisk(string basePathToLookFiles)
         {
             var lookFiles = new List<string>
             {
@@ -67,10 +91,10 @@ namespace Catrobat.IDE.Core.Services.Common
                 {
                     foreach (string lookFile in lookFiles)
                     {
-                        var inputStream = loader.OpenResourceStream(ResourceScope.IdePhone, // TODO: change resourceScope to suppot phone and store app
+                        var inputStream = await loader.OpenResourceStreamAsync(ResourceScope.IdePhone, // TODO: change resourceScope to suppot phone and store app
                             Path.Combine(ResourcePathToLookFiles, lookFile));
 
-                        var outputStream = storage.OpenFile(Path.Combine(basePathToLookFiles, lookFile),
+                        var outputStream = await storage.OpenFileAsync(Path.Combine(basePathToLookFiles, lookFile),
                             StorageFileMode.Create, StorageFileAccess.Write);
 
                         inputStream.CopyTo(outputStream);
@@ -82,9 +106,9 @@ namespace Catrobat.IDE.Core.Services.Common
             }
         }
 
-        private void FillSprites(Project project)
+        private static void FillSprites(Project project)
         {
-            var objectBackground = new Sprite {Name = AppResources.DefaultProject_Background};
+            var objectBackground = new Sprite { Name = AppResources.DefaultProject_Background };
             var objectCat = new Sprite { Name = AppResources.DefaultProject_Cat };
             var objectRain = new Sprite { Name = AppResources.DefaultProject_Rain };
             var objectSun = new Sprite { Name = AppResources.DefaultProject_Sun };

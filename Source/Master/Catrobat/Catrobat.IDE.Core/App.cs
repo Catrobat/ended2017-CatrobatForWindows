@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Services;
@@ -22,7 +23,7 @@ namespace Catrobat.IDE.Core
             _app = app;
         }
 
-        public static void Initialize()
+        public static async Task Initialize()
         {
             if (_context != null)
                 return;
@@ -41,25 +42,25 @@ namespace Catrobat.IDE.Core
             }
             else
             {
-                LoadContext();
+                await LoadContext();
             }
         }
 
-        private static Project InitializeFirstTimeUse(CatrobatContextBase context)
+        private static async Task<Project> InitializeFirstTimeUse(CatrobatContextBase context)
         {
             Project currentProject = null;
-            var localSettings = CatrobatContext.RestoreLocalSettingsStatic();
+            var localSettings = await CatrobatContext.RestoreLocalSettingsStatic();
 
             if (localSettings == null)
             {
                 if (Debugger.IsAttached)
                 {
                     var loader = new SampleProjectLoader();
-                    loader.LoadSampleProjects();
+                    await loader.LoadSampleProjects();
                 }
 
-                currentProject = CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
-                currentProject.Save();
+                currentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+                await currentProject.Save();
                 context.LocalSettings = new LocalSettings { CurrentProjectName = currentProject.ProjectHeader.ProgramName };
             }
             else
@@ -71,22 +72,22 @@ namespace Catrobat.IDE.Core
             return currentProject;
         }
 
-        private static void LoadContext()
+        private static async Task LoadContext()
         {
             _context = new CatrobatContext();
-            var currentProject = InitializeFirstTimeUse(_context) ??
-                                 CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+            var currentProject = await InitializeFirstTimeUse(_context) ??
+                                 await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
 
             if (_context.LocalSettings.CurrentLanguageString == null)
                 _context.LocalSettings.CurrentLanguageString =
-                    Core.Services.ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName;
+                    ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName;
 
             var themeChooser = (ThemeChooser)Core.Services.ServiceLocator.ThemeChooser;
             if (_context.LocalSettings.CurrentThemeIndex != -1)
                 themeChooser.SelectedThemeIndex = _context.LocalSettings.CurrentThemeIndex;
 
             if (_context.LocalSettings.CurrentLanguageString != null)
-                Core.Services.ServiceLocator.GetInstance<SettingsViewModel>().CurrentCulture =
+                ServiceLocator.GetInstance<SettingsViewModel>().CurrentCulture =
                     new CultureInfo(_context.LocalSettings.CurrentLanguageString);
 
             var message1 = new GenericMessage<ThemeChooser>(themeChooser);
@@ -99,13 +100,13 @@ namespace Catrobat.IDE.Core
             Messenger.Default.Send(message, ViewModelMessagingToken.CurrentProjectChangedListener);
         }
 
-        public static void SaveContext(Project currentProject)
+        public static async Task SaveContext(Project currentProject)
         {
             if (currentProject == null || _context == null)
                 return;
 
-            var themeChooser = (ThemeChooser)Core.Services.ServiceLocator.ThemeChooser;
-            var settingsViewModel = Core.Services.ServiceLocator.GetInstance<SettingsViewModel>();
+            var themeChooser = (ThemeChooser)ServiceLocator.ThemeChooser;
+            var settingsViewModel = ServiceLocator.GetInstance<SettingsViewModel>();
 
             if (themeChooser.SelectedTheme != null)
             {
@@ -118,9 +119,9 @@ namespace Catrobat.IDE.Core
             }
 
             _context.LocalSettings.CurrentProjectName = currentProject.ProjectHeader.ProgramName;
-            CatrobatContext.StoreLocalSettingsStatic(_context.LocalSettings);
 
-            currentProject.Save();
+            await CatrobatContext.StoreLocalSettingsStatic(_context.LocalSettings);
+            await currentProject.Save();
         }
     }
 }

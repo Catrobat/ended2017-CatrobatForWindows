@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
 
         [TestMethod, TestCategory("GatedTests")]
-        public void CopySprite()
+        public async void CopySprite()
         {
             const string savePath1 = "/CopyTest1/project.xml";
             const string savePath2 = "/CopyTest1/project.xml";
@@ -48,9 +48,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
             project2.VariableList = project1.VariableList;
 
             XmlParserTempProjectHelper.Project = project1;
-            project1.Save(savePath1);
+            await project1.Save(savePath1);
             XmlParserTempProjectHelper.Project = project2;
-            project2.Save(savePath2);
+            await project2.Save(savePath2);
 
             string xml1;
             string xml2;
