@@ -7,11 +7,13 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Storage.Search;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Core.Utilities.Helpers;
 using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDE.Store.Services.Storage
@@ -178,22 +180,22 @@ namespace Catrobat.IDE.Store.Services.Storage
         public async Task CreateDirectoryAsync(string path)
         {
             await CreateFolderPath(path);
-            var parent = Path.GetPathRoot(path);
-            var folder = await StorageFolder.GetFolderFromPathAsync(parent);
-            await folder.CreateFolderAsync(path);
+            //var parent = Path.GetPathRoot(path);
+            //var folder = await GetFolder(parent);
+            //await folder.CreateFolderAsync(path);
         }
 
         public async Task<bool> DirectoryExistsAsync(string path)
         {
-            var folder = await StorageFolder.GetFolderFromPathAsync(path);
-            return folder == null;
+            var folder = await GetFolderAsync(path);
+            return folder != null;
         }
 
         public async Task<bool> FileExistsAsync(string path)
         {
             try
             {
-                var folder = await StorageFile.GetFileFromPathAsync(path);
+                var folder = await GetFileAsync(path);
                 return folder == null;
             }
             catch (Exception)
@@ -204,7 +206,7 @@ namespace Catrobat.IDE.Store.Services.Storage
 
         public async Task<string[]> GetDirectoryNamesAsync(string path)
         {
-            var rootDirectory = await StorageFolder.GetFolderFromPathAsync(path);
+            var rootDirectory = await GetFolderAsync(path);
             var directories = await rootDirectory.GetFoldersAsync();
 
             return directories.Select(directory => directory.Name).ToArray();
@@ -212,7 +214,7 @@ namespace Catrobat.IDE.Store.Services.Storage
 
         public async Task<string[]> GetFileNamesAsync(string path)
         {
-            var rootDirectory = await StorageFolder.GetFolderFromPathAsync(path);
+            var rootDirectory = await GetFolderAsync(path);
             var files = await rootDirectory.GetFilesAsync();
 
             return files.Select(file => file.Name).ToArray();
@@ -223,7 +225,7 @@ namespace Catrobat.IDE.Store.Services.Storage
             if (path == "")
                 return; // TODO: check how to fix that
 
-            var directory = await StorageFolder.GetFolderFromPathAsync(path);
+            var directory = await GetFolderAsync(path);
 
             foreach (var folder in await directory.GetFoldersAsync())
             {
@@ -241,13 +243,15 @@ namespace Catrobat.IDE.Store.Services.Storage
 
         public async Task DeleteFileAsync(string path)
         {
-            var file = await StorageFile.GetFileFromPathAsync(path);
-            await file.DeleteAsync();
+            var file = await GetFileAsync(path);
+
+            if (file != null)
+                await file.DeleteAsync();
         }
 
         public async Task CopyDirectoryAsync(string sourcePath, string destinationPath)
         {
-            var directory = await StorageFolder.GetFolderFromPathAsync(sourcePath);
+            var directory = await GetFolderAsync(sourcePath);
 
             foreach (var folder in await directory.GetFoldersAsync())
             {
@@ -283,30 +287,31 @@ namespace Catrobat.IDE.Store.Services.Storage
         {
             await CopyDirectoryAsync(sourcePath, destinationPath);
 
-            var directory = await StorageFolder.GetFolderFromPathAsync(sourcePath);
+            var directory = await GetFolderAsync(sourcePath);
             await directory.DeleteAsync();
         }
 
         public async Task CopyFileAsync(string sourcePath, string destinationPath)
         {
-            var file = await StorageFile.GetFileFromPathAsync(sourcePath);
+            var file = await GetFileAsync(sourcePath);
             var destinationFolderPath = Path.GetPathRoot(destinationPath);
-            var destinationFolder = await StorageFolder.GetFolderFromPathAsync(destinationFolderPath);
+            var destinationFolder = await GetFolderAsync(destinationFolderPath);
             await file.CopyAsync(destinationFolder);
         }
 
         public async Task MoveFileAsync(string sourcePath, string destinationPath)
         {
-            var file = await StorageFile.GetFileFromPathAsync(sourcePath);
+            var file = await GetFileAsync(sourcePath);
             var destinationFolderPath = Path.GetPathRoot(destinationPath);
-            var destinationFolder = await StorageFolder.GetFolderFromPathAsync(destinationFolderPath);
+            var destinationFolder = await GetFolderAsync(destinationFolderPath);
 
             await file.MoveAsync(destinationFolder);
         }
 
         public async Task<Stream> OpenFileAsync(string path, StorageFileMode mode, StorageFileAccess access)
         {
-            var file = await StorageFile.GetFileFromPathAsync(path);
+            var folderPath = Path.GetDirectoryName(path);
+            var fileName = Path.GetFileName(path);
 
             var accessMode = FileAccessMode.ReadWrite;
 
@@ -325,6 +330,32 @@ namespace Catrobat.IDE.Store.Services.Storage
                     throw new ArgumentOutOfRangeException("access");
             }
 
+
+            StorageFile file;
+
+            switch (mode)
+            {
+                case StorageFileMode.Append:
+                case StorageFileMode.Open:
+                case StorageFileMode.OpenOrCreate:
+                case StorageFileMode.Truncate:
+                    file = await GetFileAsync(path);
+                    break;
+                case StorageFileMode.Create:
+                case StorageFileMode.CreateNew:
+                    {
+                        await CreateFolderPath(Path.GetDirectoryName(path));
+                        var folder = await GetFolderAsync(folderPath);
+                        file = await folder.CreateFileAsync(fileName);
+                        break;
+                    }
+                default:
+                    throw new ArgumentOutOfRangeException("mode");
+            }
+
+            if (file == null)
+                return null;
+
             var stream = await file.OpenAsync(accessMode);
             _openedStreams.Add(stream.AsStream());
             return stream.AsStream();
@@ -332,7 +363,7 @@ namespace Catrobat.IDE.Store.Services.Storage
 
         public async Task RenameDirectoryAsync(string directoryPath, string newDirectoryName)
         {
-            var directory = await StorageFile.GetFileFromPathAsync(directoryPath);
+            var directory = await GetFileAsync(directoryPath);
             await directory.RenameAsync(newDirectoryName);
         }
 
@@ -346,7 +377,7 @@ namespace Catrobat.IDE.Store.Services.Storage
                 {
                     var bitmapImage = new BitmapImage();
 
-                    var file = await StorageFile.GetFileFromPathAsync(pathToImage);
+                    var file = await GetFileAsync(pathToImage);
                     var stream = await file.OpenAsync(FileAccessMode.Read);
                     bitmapImage.SetSource(stream);
                     stream.Dispose();
@@ -474,13 +505,17 @@ namespace Catrobat.IDE.Store.Services.Storage
 
         public async Task<string> ReadTextFileAsync(string path)
         {
-            var file = await StorageFile.GetFileFromPathAsync(path);
+            var file = await GetFileAsync(path);
+
+            if (file == null)
+                return null;
+
             return await FileIO.ReadTextAsync(file);
         }
 
         public async Task WriteTextFileAsync(string path, string content)
         {
-            var file = await StorageFile.GetFileFromPathAsync(path);
+            var file = await GetFileAsync(path);
             await FileIO.WriteTextAsync(file, content);
         }
 
@@ -489,6 +524,10 @@ namespace Catrobat.IDE.Store.Services.Storage
             using (var fileStream = await OpenFileAsync(path, StorageFileMode.Open, StorageFileAccess.Read))
             {
                 var serializer = new DataContractSerializer(type);
+
+                if (fileStream == null)
+                    return null;
+
                 var serializeableObject = serializer.ReadObject(fileStream);
                 fileStream.Dispose();
                 return serializeableObject;
@@ -512,25 +551,59 @@ namespace Catrobat.IDE.Store.Services.Storage
 
         private async Task CreateFolderPath(string path)
         {
-            while (true)
+            var subPath = Path.GetDirectoryName(path);
+
+            if (subPath == "")
+                return;
+
+            await CreateFolderPath(subPath);
+
+            var folder = await GetFolderAsync(subPath);
+            var fileName = Path.GetFileName(path);
+            if (folder != null)
             {
-                var subPath = Path.GetPathRoot(path);
+                folder.CreateFolderAsync(fileName);
+            }
 
-                if (subPath == null)
-                    return;
+            path = subPath;
+        }
 
-                await CreateFolderPath(subPath);
+        public async Task<StorageFolder> GetFolderAsync(string path)
+        {
+            if (path == "")
+                return ApplicationData.Current.LocalFolder;
 
-                if (!DirectoryExists(subPath))
-                {
-                    var f = await StorageFolder.GetFolderFromPathAsync(subPath);
-                    if (f != null)
-                    {
-                        f.CreateFolderAsync(path);
-                    }
-                }
+            var subPath = Path.GetDirectoryName(path);
+
+
+            var parentFolder = await GetFolderAsync(subPath);
+
+            if (parentFolder == null)
+                return null;
+
+            var folderName = Path.GetFileName(path);
+
+            try
+            {
+                var folder = await parentFolder.GetFolderAsync(folderName);
+                return folder;
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
+
+        private async Task<StorageFile> GetFileAsync(string path)
+        {
+            var folder = await GetFolderAsync(Path.GetDirectoryName(path));
+
+            if (folder == null)
+                return null;
+
+            return await folder.GetFileAsync(Path.GetFileName(path));
+        }
+
 
         #endregion
     }

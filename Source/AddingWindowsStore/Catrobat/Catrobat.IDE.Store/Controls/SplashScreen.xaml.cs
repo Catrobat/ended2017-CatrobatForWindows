@@ -34,30 +34,13 @@ namespace Catrobat.IDE.Store.Controls
 
         private async void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-
-
-            await Task.Run(() =>
+            if (!ViewModelBase.IsInDesignModeStatic)
             {
-                Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
-                {
-                    if (!ViewModelBase.IsInDesignModeStatic)
-                    {
-                        Core.App.SetNativeApp(new AppStore());
-                        Core.App.Initialize();
-                    }
+                Core.App.SetNativeApp(new AppStore());
+                await Core.App.Initialize();
+            }
 
-                    //if (fileToken != null)
-                    //{
-                    //    var viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).ProjectImportViewModel;
-                    //    viewModel.OnLoadCommand.Execute(fileToken);
-                    //    ServiceLocator.NavigationService.NavigateTo(typeof(ProjectImportViewModel));
-                    //}
-                    //else
-                        ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
-
-                });
-            });
-
+            ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
         }
     }
 }

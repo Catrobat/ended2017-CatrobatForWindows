@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services.Storage;
 using SharpCompress.Archive.Zip;
 using SharpCompress.Common;
@@ -8,7 +9,7 @@ namespace Catrobat.IDE.Core.Services.Common
 {
     public static class CatrobatZipService
     {
-        public static void UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
+        public static async Task UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
         {
             if (zipStream != null)
             {
@@ -23,12 +24,12 @@ namespace Catrobat.IDE.Core.Services.Common
 
                         if (!reader.Entry.IsDirectory)
                         {
-                            if (storage.FileExists(absolutPath))
+                            if (await storage.FileExistsAsync(absolutPath))
                             {
-                                storage.DeleteFile(absolutPath);
+                                await storage.DeleteFileAsync(absolutPath);
                             }
 
-                            var fileStream = storage.OpenFile(absolutPath,
+                            var fileStream = await storage.OpenFileAsync(absolutPath,
                                                               StorageFileMode.Create,
                                                               StorageFileAccess.Write);
                             reader.WriteEntryTo(fileStream);

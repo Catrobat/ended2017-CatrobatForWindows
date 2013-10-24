@@ -58,5 +58,16 @@ namespace Catrobat.IDE.Tests.Misc.Storage
         {
             throw new NotImplementedException();
         }
+
+
+        public Task<Stream> OpenResourceStreamAsync(ResourceScope resourceScope, string uri)
+        {
+            return Task.Run(() => OpenResourceStream(resourceScope, uri));
+        }
+
+        public Task<object> LoadImageAsync(ResourceScope resourceScope, string path)
+        {
+            return Task.Run(() => LoadImage(resourceScope, path));
+        }
     }
 }

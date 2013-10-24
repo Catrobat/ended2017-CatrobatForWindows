@@ -158,6 +158,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="Catrobat.IDE.Store_TemporaryKey.pfx" />
+    <Content Include="Content\Programs\Default\automatic_screenshot.png" />
     <Content Include="Content\Programs\Default\Looks\28226cf909b0e5deb2d275b73a96fbec_rain.png" />
     <Content Include="Content\Programs\Default\Looks\52fb8540d8d751880ab012e26c86e1f5_background.png" />
     <Content Include="Content\Programs\Default\Looks\5c8b67f427443c1bb5c50a4aeb007949_sun.png" />

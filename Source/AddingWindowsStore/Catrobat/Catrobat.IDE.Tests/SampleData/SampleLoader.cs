@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities;
@@ -32,12 +33,12 @@ namespace Catrobat.IDE.Tests.SampleData
             return XDocument.Load(new StringReader(xml));
         }
 
-        public static Project LoadSampleProject(string sampleName, string sampleProjectName)
+        public static async Task<Project> LoadSampleProject(string sampleName, string sampleProjectName)
         {
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
                 var stream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, Path + sampleName);
-                CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
+                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
                 stream.Close();
                 stream.Dispose();
             }

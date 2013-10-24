@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using Windows.Storage;
 using Catrobat.IDE.Core.Services.Storage;
 
 namespace Catrobat.IDE.Phone.Services.Storage
@@ -12,11 +14,11 @@ namespace Catrobat.IDE.Phone.Services.Storage
     {
         private readonly List<Stream> _openedStreams = new List<Stream>();
 
-        public Stream OpenResourceStream(ResourceScope project, string uri)
+        public Stream OpenResourceStream(ResourceScope resourceScope, string uri)
         {
             var projectPath = "";
 
-            switch (project)
+            switch (resourceScope)
             {
                 case ResourceScope.Core:
                     {
@@ -80,14 +82,6 @@ namespace Catrobat.IDE.Phone.Services.Storage
             }
         }
 
-        public void Dispose()
-        {
-            foreach (var stream in _openedStreams)
-            {
-                stream.Dispose();
-            }
-        }
-
         public object LoadImage(ResourceScope resourceScope, string path)
         {
             if (resourceScope != ResourceScope.IdePhone)
@@ -106,6 +100,24 @@ namespace Catrobat.IDE.Phone.Services.Storage
                 //return null;
             }
             
+        }
+
+        public Task<Stream> OpenResourceStreamAsync(ResourceScope resourceScope, string uri)
+        {
+            return Task.Run(() => OpenResourceStream(resourceScope, uri));
+        }
+
+        public Task<object> LoadImageAsync(ResourceScope resourceScope, string path)
+        {
+            return Task.Run(() => LoadImage(resourceScope, path));
+        }
+
+        public void Dispose()
+        {
+            foreach (var stream in _openedStreams)
+            {
+                stream.Dispose();
+            }
         }
     }
 }

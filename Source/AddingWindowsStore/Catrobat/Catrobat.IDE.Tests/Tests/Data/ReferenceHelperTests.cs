@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetCostumeObjectTest()
+        public async void GetCostumeObjectTest()
         {
             var project = ProjectGenerator.GenerateProject();
 
@@ -33,9 +33,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetSoundObjectTest()
+        public async void GetSoundObjectTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var sprite = project.SpriteList.Sprites[1];
             var playSoundBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[1] as PlaySoundBrick;
 
@@ -44,9 +44,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetSpriteObjectTest()
+        public async void GetSpriteObjectTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var sprite = project.SpriteList.Sprites[1];
             var pointToBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[2] as PointToBrick;
 
@@ -55,9 +55,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetUserVariableObjectTest()
+        public async void GetUserVariableObjectTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var sprite1 = project.SpriteList.Sprites[0];
             var setVariableBrick = sprite1.Scripts.Scripts[0].Bricks.Bricks[1] as SetVariableBrick;
 
@@ -74,9 +74,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetForeverBrickObjectTest()
+        public async void GetForeverBrickObjectTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var sprite = project.SpriteList.Sprites[1];
             var foreverBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[4] as ForeverLoopEndBrick;
 
@@ -85,9 +85,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetRepeatBrickObjectTest()
+        public async void GetRepeatBrickObjectTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var sprite = project.SpriteList.Sprites[1];
             var repeatBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[6] as RepeatLoopEndBrick;
 
@@ -96,9 +96,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetForeverLoopEndBrickObjectTest()
+        public async void GetForeverLoopEndBrickObjectTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var sprite = project.SpriteList.Sprites[1];
             var foreverBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[3] as ForeverBrick;
 
@@ -107,9 +107,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetRepeatLoopEndBrickObjectTest()
+        public async void GetRepeatLoopEndBrickObjectTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var sprite = project.SpriteList.Sprites[1];
             var repeatBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[5] as RepeatBrick;
 
@@ -118,9 +118,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetLoopEndBrickObjectTest()
+        public async void GetLoopEndBrickObjectTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var sprite = project.SpriteList.Sprites[1];
             var loopEndBrick = sprite.Scripts.Scripts[0].Bricks.Bricks[4] as LoopEndBrick;
 
@@ -129,9 +129,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetIfLogicBeginBrickObjectTest()
+        public async void GetIfLogicBeginBrickObjectTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var sprite = project.SpriteList.Sprites[0];
             var ifLogicBeginBrick1 = sprite.Scripts.Scripts[0].Bricks.Bricks[2] as IfLogicBeginBrick;
 
@@ -147,9 +147,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetIfLogicElseBrickObjectTest()
+        public async void GetIfLogicElseBrickObjectTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var sprite = project.SpriteList.Sprites[0];
             var ifLogicElseBrick1 = sprite.Scripts.Scripts[0].Bricks.Bricks[4] as IfLogicElseBrick;
 
@@ -165,9 +165,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetIfLogicEndBrickObjectTest()
+        public async void GetIfLogicEndBrickObjectTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var sprite = project.SpriteList.Sprites[0];
             var ifLogicEndBrick1 = sprite.Scripts.Scripts[0].Bricks.Bricks[5] as IfLogicEndBrick;
 
@@ -184,9 +184,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetCostumeReferenceStringTest()
+        public async void GetCostumeReferenceStringTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var costumeReference = (project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[0] as SetCostumeBrick).CostumeReference;
 
             Assert.IsNotNull(costumeReference);
@@ -197,9 +197,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetSoundReferenceStringTest()
+        public async void GetSoundReferenceStringTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var soundReference = (project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[1] as PlaySoundBrick).SoundReference;
 
             Assert.IsNotNull(soundReference);
@@ -210,9 +210,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetSpriteReferenceStringTest()
+        public async void GetSpriteReferenceStringTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var pointedSpriteReference = (project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[2] as PointToBrick).PointedSpriteReference;
 
             Assert.IsNotNull(pointedSpriteReference);
@@ -223,9 +223,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetVariableReferenceStringTest()
+        public async void GetVariableReferenceStringTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var userVariableReference = (project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[1] as SetVariableBrick).UserVariableReference;
 
             Assert.IsNotNull(userVariableReference);
@@ -244,9 +244,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetForeverBrickReferenceStringTest()
+        public async void GetForeverBrickReferenceStringTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var loopBeginBrickReference = (project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[4] as LoopEndBrick).LoopBeginBrickReference;
 
             Assert.IsNotNull(loopBeginBrickReference);
@@ -257,9 +257,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetRepeatBrickReferenceStringTest()
+        public async void GetRepeatBrickReferenceStringTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var loopBeginBrickReference = (project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[6] as LoopEndBrick).LoopBeginBrickReference;
 
             Assert.IsNotNull(loopBeginBrickReference);
@@ -270,9 +270,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetForeverLoopEndBrickReferenceStringTest()
+        public async void GetForeverLoopEndBrickReferenceStringTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var loopEndBrickReference = (project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[3] as ForeverBrick).LoopEndBrickReference;
 
             Assert.IsNotNull(loopEndBrickReference);
@@ -283,9 +283,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetRepeatLoopEndBrickReferenceStringTest()
+        public async void GetRepeatLoopEndBrickReferenceStringTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var loopEndBrickReference = (project.SpriteList.Sprites[1].Scripts.Scripts[0].Bricks.Bricks[5] as RepeatBrick).LoopEndBrickReference;
 
             Assert.IsNotNull(loopEndBrickReference);
@@ -296,9 +296,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetIfLogicBeginBrickReferenceStringTest()
+        public async void GetIfLogicBeginBrickReferenceStringTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
 
             var ifLogicBeginBrickReference = (project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[4] as IfLogicElseBrick).IfLogicBeginBrickReference;
             Assert.IsNotNull(ifLogicBeginBrickReference);
@@ -322,9 +322,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetIfLogicElseBrickReferenceStringTest()
+        public async void GetIfLogicElseBrickReferenceStringTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
 
             var ifLogicElseBrickReference = (project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[2] as IfLogicBeginBrick).IfLogicElseBrickReference;
             Assert.IsNotNull(ifLogicElseBrickReference);
@@ -348,9 +348,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void GetIfLogicEndBrickReferenceStringTest()
+        public async void GetIfLogicEndBrickReferenceStringTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
 
             var ifLogicEndBrickReference = (project.SpriteList.Sprites[0].Scripts.Scripts[0].Bricks.Bricks[2] as IfLogicBeginBrick).IfLogicEndBrickReference;
             Assert.IsNotNull(ifLogicEndBrickReference);
@@ -375,9 +375,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
 
         [TestMethod, TestCategory("GatedTests")]
-        public void UpdateCostumeReferenceTest()
+        public async void UpdateCostumeReferenceTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[0];
             var newSprite = oldSprite.Copy() as Sprite;
             Assert.IsNotNull(newSprite);
@@ -395,9 +395,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void UpdateSoundReferenceTest()
+        public async void UpdateSoundReferenceTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[1];
             var newSprite = oldSprite.Copy() as Sprite;
             Assert.IsNotNull(newSprite);
@@ -415,9 +415,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void CopyVariableOnSpriteCopyTest()
+        public async void CopyVariableOnSpriteCopyTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[0];
             var newSprite = oldSprite.Copy() as Sprite;
             Assert.IsNotNull(newSprite);
@@ -451,9 +451,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void UpdateLoopBeginBrickReferenceTest()
+        public async void UpdateLoopBeginBrickReferenceTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[1];
             var newSprite = oldSprite.Copy() as Sprite;
 
@@ -484,9 +484,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void UpdateLoopEndBrickReferenceTest()
+        public async void UpdateLoopEndBrickReferenceTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[1];
             var newSprite = oldSprite.Copy() as Sprite;
 
@@ -517,9 +517,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void UpdateIfLogicBeginBrickReferenceTest()
+        public async void UpdateIfLogicBeginBrickReferenceTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[0];
             var newSprite = oldSprite.Copy() as Sprite;
 
@@ -567,9 +567,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void UpdateIfLogicElseBrickReferenceTest()
+        public async void UpdateIfLogicElseBrickReferenceTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[0];
             var newSprite = oldSprite.Copy() as Sprite;
 
@@ -617,9 +617,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void UpdateIfLogicEndBrickReferenceTest()
+        public async void UpdateIfLogicEndBrickReferenceTest()
         {
-            var project = SampleLoader.LoadSampleProject("default.catroid", "default");
+            var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[0];
             var newSprite = oldSprite.Copy() as Sprite;
 
