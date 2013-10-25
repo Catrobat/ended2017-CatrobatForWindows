@@ -15,7 +15,6 @@ namespace Catrobat.IDE.Core.Resources
     {
         private readonly Dictionary<string, string> _sampleProjectNames = new Dictionary<string, string>
         {
-            {"Whack_A_Mole.catrobat", "Whack A Mole"},
             {"stick.catrobat", "stick"}
         };
 
