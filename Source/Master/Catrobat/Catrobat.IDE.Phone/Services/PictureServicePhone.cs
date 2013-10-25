@@ -3,6 +3,7 @@ using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.Paint;
+using Coding4Fun.Toolkit.Controls.Common;
 using Microsoft.Phone.Tasks;
 
 namespace Catrobat.IDE.Phone.Services
@@ -52,7 +53,7 @@ namespace Catrobat.IDE.Phone.Services
             }
             else
             {
-                bitmap = new WriteableBitmap((BitmapImage) imageToEdit.ImageSource);
+                bitmap = new WriteableBitmap((BitmapSource) imageToEdit.ImageSource);
                 //bitmap.FromByteArray(imageToEdit.Data);
             }
 
@@ -64,7 +65,10 @@ namespace Catrobat.IDE.Phone.Services
         private void OnPaintLauncherImageChanged(PaintLauncherTask task)
         {
             var image = task.CurrentImage;
-            var portableImage = new PortableImage(image.ToByteArray(), image.PixelWidth, image.PixelHeight);
+            var portableImage = new PortableImage(image.ToBitmapImage());
+            portableImage.Width = image.PixelWidth;
+            portableImage.Height = image.PixelHeight;
+            portableImage.Data = image.ToByteArray();
 
             _successCallback.Invoke(portableImage);
         }

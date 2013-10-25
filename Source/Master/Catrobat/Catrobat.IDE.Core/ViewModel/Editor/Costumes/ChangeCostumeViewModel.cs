@@ -103,7 +103,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             
             ServiceLocator.PictureService.DrawPicture(ChangedPictureSuccess, () => {/* No action here */}, () => {/* No action here */},
                 ReceivedCostume.Image);
-            ServiceLocator.NavigationService.RemoveBackEntry();
+            //ServiceLocator.NavigationService.RemoveBackEntry();
 
             //var writeableBitmap = new WriteableBitmap(ReceivedCostume.Image.Width, ReceivedCostume.Image.Height);
             //writeableBitmap.FromByteArray(ReceivedCostume.Image.Data);

@@ -22,7 +22,7 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         public byte[] Data
         {
             get { return _data; }
-            private set
+            set
             {
                 _data = value;
                 RaisePropertyChanged(() => Data);
@@ -42,13 +42,13 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         public int Width
         {
             get { return _width; }
-            private set { _width = value; }
+            set { _width = value; }
         }
 
         public int Height
         {
             get { return _height; }
-            private set { _height = value; }
+            set { _height = value; }
         }
 
         public object ImageSource
@@ -58,8 +58,13 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 if (!IsLoaded)
                     return ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStreeam(null);
 
-                if (EncodedData != null)
-                    return _nativeImageSource = ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStreeam(EncodedData);
+                if (EncodedData != null && _nativeImageSource == null)
+                    _nativeImageSource = ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStreeam(EncodedData);
+
+                if (_nativeImageSource != null)
+                    return _nativeImageSource;
+
+
 
                 if (_data != null)
                     return ServiceLocator.ImageSourceConversionService.ConvertToLocalImageSource(_data, _width, _height);
@@ -118,7 +123,7 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 }
                 catch (Exception)
                 {
-                    
+
                 }
 
                 IsLoaded = true;

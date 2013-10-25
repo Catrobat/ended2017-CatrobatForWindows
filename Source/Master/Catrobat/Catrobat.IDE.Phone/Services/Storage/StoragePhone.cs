@@ -326,8 +326,18 @@ namespace Catrobat.IDE.Phone.Services.Storage
             {
                 stream = _iso.OpenFile(path, FileMode.CreateNew, FileAccess.Write);
 
-                var writeableBitmap = new WriteableBitmap(image.Width, image.Height);
-                writeableBitmap.FromByteArray(image.Data);
+                WriteableBitmap writeableBitmap = null;
+
+                if (image.Data != null)
+                {
+                    writeableBitmap = new WriteableBitmap(image.Width, image.Height);
+                    writeableBitmap.FromByteArray(image.Data);
+                }
+                else
+                {
+                    writeableBitmap = new WriteableBitmap((BitmapSource) image.ImageSource);
+                }
+
 
                 switch (format)
                 {
@@ -483,7 +493,8 @@ namespace Catrobat.IDE.Phone.Services.Storage
 
         public PortableImage CreateThumbnail(PortableImage image)
         {
-            return ServiceLocator.ImageResizeService.ResizeImage(image, _imageThumbnailDefaultMaxWidthHeight);
+            return image;
+            //return ServiceLocator.ImageResizeService.ResizeImage(image, _imageThumbnailDefaultMaxWidthHeight);
         }
 
 
