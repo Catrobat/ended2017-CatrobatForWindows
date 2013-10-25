@@ -38,14 +38,6 @@ namespace Catrobat.IDE.Phone.Controls.SplashScreen
                 };
 
                 ManualImageCache.NoScreenshotImage = image;
-
-                //var image = new PortableImage();
-                //using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
-                //{
-                //    await image.LoadFromResources(ResourceScope.IdePhone, "Content/Images/Screenshot/NoScreenshot.png");
-                //}
-                //ManualImageCache.NoScreenshotImage = image;
-                //((BitmapImage)image.ImageSource).CreateOptions = BitmapCreateOptions.BackgroundCreation;
             }
 
             if (fileToken != null)
