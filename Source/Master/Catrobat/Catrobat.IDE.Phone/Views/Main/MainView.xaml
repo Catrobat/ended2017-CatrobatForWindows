@@ -68,15 +68,15 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="130"/>
+            <RowDefinition Height="30"/>
           </Grid.RowDefinitions>
           
-          <Grid Grid.Row="2" Width="220"
-              Background="{Binding SelectedTheme.AccentColor2.NativeBrush, 
-              Source={StaticResource ThemeChooser}}"
+          <Grid Grid.Row="2" Width="280" VerticalAlignment="Center"
               HorizontalAlignment="Center">
-            <buttons:ScreenshotButton
-            VerticalAlignment="Center" Template="{StaticResource ScreenshotButtonControlTemplate}" Margin="0,0,0,0" HorizontalAlignment="Center" Command="{Binding PlayCurrentProjectCommand}"/>
+            <buttons:ScreenshotButton VerticalAlignment="Center" 
+               Template="{StaticResource ScreenshotButtonControlTemplate}" 
+               Margin="0,0,0,0" HorizontalAlignment="Center" 
+               Command="{Binding PlayCurrentProjectCommand}"/>
             <Grid>
               <Image Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}" />
               <Grid Background="#AA000000" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch">
@@ -332,20 +332,22 @@
       <controls:PanoramaItem Name="PanoramaItemHelp" Header="{Binding Resources.Main_HeaderAbout, Source={StaticResource LocalizedStrings}}">
         <StackPanel>
           <Image Grid.Row="1" Margin="-10,-70,-30,-50" Source="/Content/Images/Application/pocketcode01.png"></Image>
-          <TextBlock FontSize="26" TextWrapping="Wrap" Text="{Binding Resources.Main_AboutText, Source={StaticResource LocalizedStrings}}" Margin="10 0 0 15" />
+          <TextBlock FontSize="24" TextWrapping="Wrap" Text="{Binding Resources.Main_AboutText, Source={StaticResource LocalizedStrings}}" Margin="10 0 0 15" />
           <Grid>
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="130" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <buttons:SettingsButton Grid.Column="0" VerticalAlignment="Center" x:Name="ButtonSettings" 
-              Template="{StaticResource SettingsButtonControlTemplate}" Command="{Binding SettingsCommand}" />
-            <StackPanel Grid.Column="1" Orientation="Vertical">
+            <buttons:SettingsButton Grid.Column="0" VerticalAlignment="Center"
+              Template="{StaticResource SettingsButtonControlTemplate}" 
+              Command="{Binding SettingsCommand}" Margin="20 0 20 20" />
+            <StackPanel Grid.Column="1" HorizontalAlignment="Left" Orientation="Vertical">
               <TextBlock Style="{StaticResource PhoneTextNormalStyle}" 
                        Text="{Binding ApplicationVersionName}" 
                        Margin="30" TextWrapping="Wrap" />
-              <StackPanel Orientation="Horizontal" Margin="50 0 0 0" Visibility="{Binding IsMemoryMonitorEnabled, 
-              Converter={StaticResource BoolVisibilityConverter}}" >
+              <StackPanel Orientation="Horizontal" Margin="50 0 0 0" 
+                Visibility="{Binding IsMemoryMonitorEnabled, 
+                Converter={StaticResource BoolVisibilityConverter}}" >
                 <TextBlock Text="used memory:" VerticalAlignment="Center" Margin="0 0 10 0"/>
                 <codung4Fun:MemoryCounter VerticalAlignment="Center" />
               </StackPanel>
