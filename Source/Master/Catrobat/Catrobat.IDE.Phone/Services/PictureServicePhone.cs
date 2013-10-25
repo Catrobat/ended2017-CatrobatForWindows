@@ -52,8 +52,8 @@ namespace Catrobat.IDE.Phone.Services
             }
             else
             {
-                bitmap = new WriteableBitmap(imageToEdit.Width, imageToEdit.Height);
-                bitmap.FromByteArray(imageToEdit.Data);
+                bitmap = new WriteableBitmap((BitmapImage) imageToEdit.ImageSource);
+                //bitmap.FromByteArray(imageToEdit.Data);
             }
 
             var task = new PaintLauncherTask { CurrentImage = bitmap };
