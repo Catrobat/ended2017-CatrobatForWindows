@@ -70,7 +70,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="130"/>
           </Grid.RowDefinitions>
-          <Image Grid.Row="1" Margin="-30 -70 -30 -70" Source="/Content/Images/Application/pocketcode01.png"></Image>
+          
           <Grid Grid.Row="2" Width="220"
               Background="{Binding SelectedTheme.AccentColor2.NativeBrush, 
               Source={StaticResource ThemeChooser}}"
@@ -331,6 +331,7 @@
       <!--About panorama item-->
       <controls:PanoramaItem Name="PanoramaItemHelp" Header="{Binding Resources.Main_HeaderAbout, Source={StaticResource LocalizedStrings}}">
         <StackPanel>
+          <Image Grid.Row="1" Margin="-10,-70,-30,-50" Source="/Content/Images/Application/pocketcode01.png"></Image>
           <TextBlock FontSize="26" TextWrapping="Wrap" Text="{Binding Resources.Main_AboutText, Source={StaticResource LocalizedStrings}}" Margin="10 0 0 15" />
           <Grid>
             <Grid.ColumnDefinitions>
