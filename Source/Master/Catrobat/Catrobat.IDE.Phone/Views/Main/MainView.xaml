@@ -75,19 +75,20 @@
               Background="{Binding SelectedTheme.AccentColor2.NativeBrush, 
               Source={StaticResource ThemeChooser}}"
               HorizontalAlignment="Center">
-            <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center"        
-                Template="{StaticResource ScreenshotButtonControlTemplate}"
-                Margin="0,0,0,0" Command="{Binding PlayCurrentProjectCommand}" />
+            <buttons:ScreenshotButton
+            VerticalAlignment="Center" Template="{StaticResource ScreenshotButtonControlTemplate}" Margin="0,0,0,0" HorizontalAlignment="Center" Command="{Binding PlayCurrentProjectCommand}"/>
             <Grid>
-              <Image Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, 
-                Converter={StaticResource NoScreenshotConverter}}" />
+              <Image Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}" />
               <Grid Background="#AA000000" Height="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                 <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                     Text="{ Binding CurrentProject.ProjectHeader.ProgramName}" 
+                     Text="{Binding CurrentProject.ProjectHeader.ProgramName}" 
                      TextAlignment="Center" TextWrapping="Wrap" Margin="5 5 5 10" 
                      Style="{StaticResource PhoneTextTitle2Style}" />
               </Grid>
             </Grid>
+            <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center"        
+                Template="{StaticResource ScreenshotButtonControlTemplate}"
+                Margin="0,0,0,0" Command="{Binding PlayCurrentProjectCommand}" />
           </Grid>
 
 
