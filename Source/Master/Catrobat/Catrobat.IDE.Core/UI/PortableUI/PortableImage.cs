@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
@@ -15,6 +17,7 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         private int _width;
         private int _height;
         private object _nativeImageSource;
+        private MemoryStream _encodedData;
 
         public byte[] Data
         {
@@ -24,6 +27,15 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 _data = value;
                 RaisePropertyChanged(() => Data);
                 RaisePropertyChanged(() => ImageSource);
+            }
+        }
+
+        public MemoryStream EncodedData
+        {
+            get { return _encodedData; }
+            set
+            {
+                _encodedData = value;
             }
         }
 
@@ -43,27 +55,33 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         {
             get
             {
-                if (_nativeImageSource != null)
-                    return _nativeImageSource;
+                if (!IsLoaded)
+                    return ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStreeam(null);
 
-                var image = Services.ServiceLocator.ImageSourceConversionService.ConvertToLocalImageSource(_data, _width, _height);
-                return image;
+                if (EncodedData != null)
+                    return _nativeImageSource = ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStreeam(EncodedData);
+
+                if (_data != null)
+                    return ServiceLocator.ImageSourceConversionService.ConvertToLocalImageSource(_data, _width, _height);
+
+                return null;
             }
 
             set
             {
                 Services.ServiceLocator.ImageSourceConversionService.ConvertToBytes(value, out _data, out _height, out _height);
-                RaisePropertyChanged(()=> ImageSource);
+                RaisePropertyChanged(() => ImageSource);
             }
         }
 
         public PortableImage()
         {
-            
+
         }
 
         public PortableImage(byte[] data, int width, int height)
         {
+            this.IsLoaded = true;
             _data = data;
             _width = width;
             _height = height;
@@ -71,8 +89,61 @@ namespace Catrobat.IDE.Core.UI.PortableUI
 
         public PortableImage(object nativeImageSource)
         {
+            this.IsLoaded = true;
             _nativeImageSource = nativeImageSource;
         }
+
+        public async void LoadAsync(string uri, string alternativeUri = null, bool loadFullImage = true)
+        {
+            IsLoading = true;
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                PortableImage image = null;
+
+                try
+                {
+                    if (loadFullImage)
+                        image = await storage.LoadImageAsync(uri);
+                    else
+                        image = await storage.LoadImageThumbnailAsync(uri);
+
+                    if (image == null && alternativeUri != null)
+                    {
+                        if (loadFullImage)
+                            image = await storage.LoadImageAsync(alternativeUri);
+                        else
+                            image = await storage.LoadImageThumbnailAsync(alternativeUri);
+                    }
+                }
+                catch (Exception)
+                {
+                    
+                }
+
+                IsLoaded = true;
+                IsLoading = false;
+
+                if (image != null)
+                {
+                    EncodedData = image.EncodedData;
+                    Data = image.Data;
+                    Width = image.Width;
+                    Height = image.Height;
+                    _nativeImageSource = image._nativeImageSource;
+                }
+
+                RaisePropertyChanged(() => ImageSource);
+                RaisePropertyChanged(() => Data);
+                RaisePropertyChanged(() => Width);
+                RaisePropertyChanged(() => Height);
+                RaisePropertyChanged(() => IsLoaded);
+            }
+        }
+
+        public bool IsLoaded { get; private set; }
+
+        public bool IsLoading { get; private set; }
 
         public void WriateAsPng(string path)
         {
@@ -92,6 +163,7 @@ namespace Catrobat.IDE.Core.UI.PortableUI
 
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
+
         [NotifyPropertyChangedInvocator]
         private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -108,11 +180,11 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         }
         #endregion
 
-        public void LoadFromResources(ResourceScope scope, string path)
+        public async Task LoadFromResources(ResourceScope scope, string path)
         {
             using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
-                _nativeImageSource = loader.LoadImage(scope, path);
+                _nativeImageSource = await loader.LoadImageAsync(scope, path);
             }
         }
 

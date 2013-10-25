@@ -242,21 +242,27 @@ namespace Catrobat.IDE.Phone.Services.Storage
             {
                 try
                 {
-                    var bitmapImage = new BitmapImage();
+                    //var bitmapImage = new BitmapImage();
 
                     using (var storageFileStream = _iso.OpenFile(pathToImage,
                                                                  FileMode.Open,
                                                                  FileAccess.Read))
                     {
-                        bitmapImage.SetSource(storageFileStream);
-                        storageFileStream.Close();
-                        storageFileStream.Dispose();
+                        var image = new PortableImage();
+                        var memoryStream = new MemoryStream();
+                        storageFileStream.CopyTo(memoryStream);
+                        image.EncodedData = memoryStream;
+                        return image;
+
+                        //bitmapImage.SetSource(storageFileStream);
+                        //storageFileStream.Close();
+                        //storageFileStream.Dispose();
 
 
-                        var writeableBitmap = new WriteableBitmap(bitmapImage);
-                        var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
-                            writeableBitmap.PixelHeight);
-                        return portableImage;
+                        //var writeableBitmap = new WriteableBitmap(bitmapImage);
+                        //var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
+                        //    writeableBitmap.PixelHeight);
+                        //return portableImage;
                     }
                 }
                 catch {} //TODO: Exception message. Maybe logging?
@@ -291,37 +297,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
                 else
                 {
                     var fullSizePortableImage = LoadImage(pathToImage);
-
-                    if (fullSizePortableImage != null)
-                    {
-                        var thumbnailImage = ServiceLocator.ImageResizeService.ResizeImage(fullSizePortableImage,
-                            _imageThumbnailDefaultMaxWidthHeight);
-                        retVal = thumbnailImage;
-
-                        //var fullSizeImage = new WriteableBitmap(fullSizePortableImage.Width, fullSizePortableImage.Height);
-                        //fullSizeImage.FromByteArray(fullSizePortableImage.Data);
-
-                        //var thumbnailImage =  ImageResizeServicePhone.ResizeImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight);
-                        //retVal = thumbnailImage;
-                    
-                        try
-                        {
-                            //SaveImage(thumbnailPath, thumbnailImage, true, ImageFormat.Png);
-
-                            var fileStream = OpenFile(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
-                            var writeableBitmap = new WriteableBitmap(thumbnailImage.Width, thumbnailImage.Height);
-                            writeableBitmap.FromByteArray(thumbnailImage.Data);
-
-
-                            //writeableBitmap.SaveJpeg(fileStream, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, 0, 95);
-                            PNGWriter.WritePNG(writeableBitmap, fileStream, 95);
-                        }
-
-                        catch
-                        {
-                            retVal = null;
-                        }
-                    }
+                    return fullSizePortableImage;
                 }
             }
 

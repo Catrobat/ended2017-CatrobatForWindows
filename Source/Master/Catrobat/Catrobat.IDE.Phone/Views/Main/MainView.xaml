@@ -114,7 +114,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
           </Grid.RowDefinitions>
-          <Border BorderThickness="6" BorderBrush="{StaticResource PhoneForegroundBrush}" Margin="-6 5 0 10" Width="412">
+          <Border BorderThickness="6" BorderBrush="{StaticResource PhoneForegroundBrush}" Margin="-6 5 0 10" Height="170" Width="412">
             <toolkit:ContextMenuService.ContextMenu>
               <toolkit:ContextMenu>
                 <toolkit:MenuItem Header="{Binding Resources.Main_CopyProject, 
@@ -193,7 +193,7 @@
               <Grid Grid.Column="1">
                 <Border BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="4 0 0 0">
                   <Grid HorizontalAlignment="Right">
-                    <Image HorizontalAlignment="Right" Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}" MaxHeight="155" MaxWidth="160"/>
+                    <Image HorizontalAlignment="Right" Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}" MaxWidth="160"/>
                   </Grid>
                 </Border>
               </Grid>
