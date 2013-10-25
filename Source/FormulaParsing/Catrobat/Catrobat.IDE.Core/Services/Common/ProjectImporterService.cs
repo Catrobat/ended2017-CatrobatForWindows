@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             try
             {
-                CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream, CatrobatContextBase.TempProjectImportPath);
+                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream, CatrobatContextBase.TempProjectImportPath);
 
                 PortableImage projectScreenshot = null;
                 string projectCode = "";
@@ -38,7 +38,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 //TODO: error handling
 
                 _project = new Project(projectCode);
-                _project.Save();
+                await _project.Save();
 
                 _tempProjectHeader = new ProjectDummyHeader
                 {
@@ -104,7 +104,7 @@ namespace Catrobat.IDE.Core.Services.Common
                     newProjectName = _tempProjectHeader.ProjectName + counter;
                     _project.SetProgramName(newProjectName);
                     var saveToPath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
-                    _project.Save(saveToPath);
+                    await _project.Save(saveToPath);
                 }
             }
 
@@ -127,8 +127,8 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var storage = StorageSystem.GetStorage())
             {
-                storage.DeleteDirectory(CatrobatContextBase.TempProjectImportPath);
-                storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
+                await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportPath);
+                await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
             }
 
             _tempProjectHeader = null;

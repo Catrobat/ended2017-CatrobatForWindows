@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Xml.Linq;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
@@ -52,12 +53,17 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Costumes
                 {
                     try
                     {
-                        using (var storage = StorageSystem.GetStorage())
-                        {
-                            _thumbnail =
-                                storage.LoadImageThumbnail(XmlParserTempProjectHelper.Project.BasePath + "/" + Project.ImagesPath + "/" +
-                                                           _fileName);
-                        }
+                        _thumbnail = new PortableImage();
+                        var fileName = XmlParserTempProjectHelper.Project.BasePath + "/" + 
+                            Project.ImagesPath + "/" + _fileName;
+                        _thumbnail.LoadAsync(fileName, null, false);
+
+                        //using (var storage = StorageSystem.GetStorage())
+                        //{
+                        //    _thumbnail =
+                        //        storage.LoadImageThumbnail(XmlParserTempProjectHelper.Project.BasePath + "/" + Project.ImagesPath + "/" +
+                        //                                   _fileName);
+                        //}
                     }
                     catch
                     {

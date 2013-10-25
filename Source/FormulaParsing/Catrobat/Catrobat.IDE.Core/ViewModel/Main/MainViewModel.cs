@@ -291,10 +291,10 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             ServiceLocator.NavigationService.NavigateTo(typeof(TileGeneratorViewModel));
         }
 
-        private void ShareLocalProjectAction(ProjectDummyHeader project)
+        private async void ShareLocalProjectAction(ProjectDummyHeader project)
         {
-            if(CurrentProject.ProjectDummyHeader == project)
-                CurrentProject.Save();
+            if (CurrentProject.ProjectDummyHeader == project)
+                await CurrentProject.Save();
 
             PinProjectHeader = project;
 
@@ -310,7 +310,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
         }
 
 
-        private void SetCurrentProjectAction(string projectName)
+        private async void SetCurrentProjectAction(string projectName)
         {
             lock (CurrentProject)
             {
@@ -323,40 +323,38 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             var minLoadingTime = new TimeSpan(0, 0, 0, 0, 500);
             DateTime startTime = DateTime.UtcNow;
 
+            await CurrentProject.Save();
+            var newProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
 
-            Task.Run(() => ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            if (newProject != null)
             {
-                CurrentProject.Save();
-                var newProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
+                CurrentProject = newProject;
 
-                if (newProject != null)
-                {
-                    CurrentProject = newProject;
+                var minWaitingTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
 
-                    var minWaitingTimeRemaining = minLoadingTime.Subtract(DateTime.UtcNow.Subtract(startTime));
+                if (minWaitingTimeRemaining >= new TimeSpan(0))
+                    Task.Delay(minWaitingTimeRemaining).Wait();
+                //Thread.Sleep(minWaitingTimeRemaining);
 
-                    if (minWaitingTimeRemaining >= new TimeSpan(0))
-                        Task.Delay(minWaitingTimeRemaining).Wait();
-                        //Thread.Sleep(minWaitingTimeRemaining);
-
-                    IsActivatingLocalProject = false;
+                IsActivatingLocalProject = false;
 
 
-                }
-                else
-                {
-                    XmlParserTempProjectHelper.Project = CurrentProject;
+            }
+            else
+            {
+                XmlParserTempProjectHelper.Project = CurrentProject;
 
-                    ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_SelectedProjectNotValidMessage, 
-                        String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName), new Action<MessageboxResult>(delegate
+                ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_SelectedProjectNotValidMessage,
+                    String.Format(AppResources.Main_SelectedProjectNotValidHeader, projectName), new Action<MessageboxResult>(delegate
+                    {
+                        ServiceLocator.DispatcherService.RunOnMainThread(() =>
                         {
-                            ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                            {
-                                IsActivatingLocalProject = false;
-                            });
-                        }), MessageBoxOptions.Ok);
-                }
-            }));
+                            IsActivatingLocalProject = false;
+                        });
+                    }), MessageBoxOptions.Ok);
+            }
+
+            await Core.App.SaveContext(CurrentProject);
         }
 
         private void CreateNewProjectAction()
@@ -398,38 +396,23 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             ResetViewModel();
         }
 
-        private void ShowMessagesAction()
+        private async void ShowMessagesAction()
         {
             if (_showDownloadMessage)
             {
                 var portbleImage = new PortableImage();
-                portbleImage.LoadFromResources(ResourceScope.IdePhone, 
+                await portbleImage.LoadFromResources(ResourceScope.IdePhone,
                     "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
 
-                ServiceLocator.NotifictionService.ShowToastNotification(portbleImage, null, 
+                ServiceLocator.NotifictionService.ShowToastNotification(portbleImage, null,
                     AppResources.Main_DownloadQueueMessage, ToastNotificationTime.Short);
 
                 _showDownloadMessage = false;
             }
             if (_showUploadMessage)
             {
-                //var image = new BitmapImage();
-                //using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
-                //{
-                //    var stream = loader.OpenResourceStream(ResourceScope.IdePhone, "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
-                //    image.SetSource(stream);
-                //}
-
-                //var toast = new ToastPrompt
-                //{
-                //    ImageSource = image,
-                //    Message = AppResources.Main_UploadQueueMessage
-                //};
-                //toast.Show();
-
-
                 var portbleImage = new PortableImage();
-                portbleImage.LoadFromResources(ResourceScope.IdePhone,
+                await portbleImage.LoadFromResources(ResourceScope.IdePhone,
                     "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
 
                 ServiceLocator.NotifictionService.ShowToastNotification(portbleImage, null,
@@ -535,7 +518,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             }
         }
 
-        private void DeleteProjectMessageCallback(MessageboxResult result)
+        private async void DeleteProjectMessageCallback(MessageboxResult result)// TODO: async, should this be awaitable?
         {
             _dialogResult = result;
 
@@ -554,7 +537,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                         CurrentProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
                     }
                     else
-                        CurrentProject = CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+                        CurrentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
                 }
                 else
                     UpdateLocalProjects();
@@ -562,18 +545,20 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
                 _deleteProjectName = null;
             }
+
+            await Core.App.SaveContext(CurrentProject);
         }
 
-        private void CopyProjectMessageCallback(MessageboxResult result)
+        private async void CopyProjectMessageCallback(MessageboxResult result) // TODO: async, should this be awaitable?
         {
             _dialogResult = result;
 
             if (_dialogResult == MessageboxResult.Ok)
             {
                 if (_copyProjectName == CurrentProject.ProjectHeader.ProgramName)
-                    CurrentProject.Save();
+                    await CurrentProject.Save();
 
-                CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName,
+                await CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName,
                     CurrentProject.ProjectHeader.ProgramName);
 
                 UpdateLocalProjects();
@@ -647,43 +632,104 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                 _localProjects = new ObservableCollection<ProjectDummyHeader>();
             }
 
-            _localProjects.Clear();
+            //_localProjects.Clear();
 
             using (var storage = StorageSystem.GetStorage())
             {
                 var projectNames = storage.GetDirectoryNames(CatrobatContextBase.ProjectsPath);
 
-                var projects = new List<ProjectDummyHeader>();
+                //var projects = new List<ProjectDummyHeader>();
+
+                var projectsToRemove = new List<ProjectDummyHeader>();
+
+                foreach (var header in _localProjects)
+                {
+                    var found = false;
+                    foreach (string projectName in projectNames)
+                        if (header.ProjectName == projectName)
+                            found = true;
+
+                    if (!found)
+                        projectsToRemove.Add(header);
+                }
+
+                foreach (var header in _localProjects)
+                {
+                    if (header.ProjectName == CurrentProject.ProjectDummyHeader.ProjectName)
+                        projectsToRemove.Add(header);
+                }
+
+                foreach (var project in projectsToRemove)
+                {
+                    _localProjects.Remove(project);
+                }
+
+
+                var projectsToAdd = new List<ProjectDummyHeader>();
 
                 foreach (string projectName in projectNames)
                 {
-                    if (projectName != CurrentProject.ProjectHeader.ProgramName)
+                    var exists = false;
+
+                    foreach (var header in _localProjects)
                     {
-                        var screenshotPath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.ScreenshotPath);
-                        var automaticProjectScreenshotPath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.AutomaticScreenshotPath);
-                        PortableImage projectScreenshot = null;
+                            if (header.ProjectName == projectName)
+                                exists = true;
+                    }
 
-                        if (storage.FileExists(screenshotPath))
-                            projectScreenshot = storage.LoadImage(screenshotPath);
-                        else if (storage.FileExists(automaticProjectScreenshotPath))
-                            projectScreenshot = storage.LoadImage(automaticProjectScreenshotPath);
+                    if (!exists && projectName != CurrentProject.ProjectDummyHeader.ProjectName)
+                    {
+                        var manualScreenshotPath = Path.Combine(
+                            CatrobatContextBase.ProjectsPath, projectName, Project.ScreenshotPath);
+                        var automaticProjectScreenshotPath = Path.Combine(
+                            CatrobatContextBase.ProjectsPath, projectName, Project.AutomaticScreenshotPath);
 
-                        if(projectScreenshot == null)
-                            projectScreenshot = new PortableImage();
+                        var projectScreenshot = new PortableImage();
+                        projectScreenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);
 
                         var projectHeader = new ProjectDummyHeader
                         {
                             ProjectName = projectName,
                             Screenshot = projectScreenshot
                         };
-                        projects.Add(projectHeader);
+
+                        _localProjects.Insert(0, projectHeader);
                     }
                 }
-                projects.Sort();
-                foreach (ProjectDummyHeader header in projects)
+
+                projectsToAdd.Sort();
+
+                foreach (var project in projectsToAdd)
                 {
-                    _localProjects.Add(header);
+                    _localProjects.Insert(0, project);
                 }
+
+                //foreach (string projectName in projectNames)
+                //{
+                //    if (projectName != CurrentProject.ProjectHeader.ProgramName)
+                //    {
+                //        var manualScreenshotPath = Path.Combine(
+                //            CatrobatContextBase.ProjectsPath, projectName, Project.ScreenshotPath);
+                //        var automaticProjectScreenshotPath = Path.Combine(
+                //            CatrobatContextBase.ProjectsPath, projectName, Project.AutomaticScreenshotPath);
+
+                //        var projectScreenshot = new PortableImage();
+                //        projectScreenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);
+
+
+                //        var projectHeader = new ProjectDummyHeader
+                //        {
+                //            ProjectName = projectName,
+                //            Screenshot = projectScreenshot
+                //        };
+                //        projects.Add(projectHeader);
+                //    }
+                //}
+                //projects.Sort();
+                //foreach (ProjectDummyHeader header in projects)
+                //{
+                //    _localProjects.Add(header);
+                //}
             }
 
             RaisePropertyChanged(() => LocalProjects);

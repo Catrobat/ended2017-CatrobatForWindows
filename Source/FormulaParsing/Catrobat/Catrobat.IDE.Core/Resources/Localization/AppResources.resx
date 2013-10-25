@@ -1020,4 +1020,7 @@
   <data name="DefaultProject_Water" xml:space="preserve">
     <value>Water</value>
   </data>
+  <data name="Editor_ClickPlusToAddSprite" xml:space="preserve">
+    <value>Click '+' to add a new object.</value>
+  </data>
 </root>

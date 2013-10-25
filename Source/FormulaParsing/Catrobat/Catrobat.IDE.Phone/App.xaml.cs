@@ -96,8 +96,8 @@ namespace Catrobat.IDE.Phone
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            var mainViewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).MainViewModel;
-            Core.App.SaveContext(mainViewModel.CurrentProject);
+            //var mainViewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).MainViewModel;
+            //Core.App.SaveContext(mainViewModel.CurrentProject);
             ViewModelLocator.Cleanup();
         }
 

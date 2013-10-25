@@ -545,7 +545,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\Application\pocketcode01.png" />
     <Content Include="Content\Images\Share\skydrive.jpg" />
+    <Content Include="Content\Programs\Default\automatic_screenshot.png" />
     <Content Include="Content\Programs\Default\Looks\28226cf909b0e5deb2d275b73a96fbec_rain.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

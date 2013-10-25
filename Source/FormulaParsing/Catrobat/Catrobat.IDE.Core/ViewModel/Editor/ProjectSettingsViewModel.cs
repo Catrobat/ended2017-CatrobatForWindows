@@ -105,7 +105,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
 
         #region Actions
 
-        private void SaveAction()
+        private async void SaveAction()
         {
             if (CurrentProject.ProjectDummyHeader == SelectedProjectHeaderToEdit)
             {
@@ -117,12 +117,12 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
                 SelectedProjectHeaderToEdit.ProjectName = ProjectName;
                 SelectedProjectToEdit.ProjectHeader.ProgramName = ProjectName;
                 SelectedProjectToEdit.ProjectHeader.Description = ProjectDescription;
-                SelectedProjectToEdit.Save();
+                await SelectedProjectToEdit.Save();
             }
 
-
-
             ServiceLocator.NavigationService.NavigateBack();
+
+            await App.SaveContext(CurrentProject);
         }
 
         private void CancelAction()

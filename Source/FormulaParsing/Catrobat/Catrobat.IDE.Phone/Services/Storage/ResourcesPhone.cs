@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using Windows.Storage;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Phone.Services.Storage
 {
@@ -12,11 +15,11 @@ namespace Catrobat.IDE.Phone.Services.Storage
     {
         private readonly List<Stream> _openedStreams = new List<Stream>();
 
-        public Stream OpenResourceStream(ResourceScope project, string uri)
+        public Stream OpenResourceStream(ResourceScope resourceScope, string uri)
         {
             var projectPath = "";
 
-            switch (project)
+            switch (resourceScope)
             {
                 case ResourceScope.Core:
                     {
@@ -80,32 +83,49 @@ namespace Catrobat.IDE.Phone.Services.Storage
             }
         }
 
+        public PortableImage LoadImage(ResourceScope resourceScope, string path)
+        {
+            if (resourceScope != ResourceScope.IdePhone)
+                throw new NotImplementedException("Only ResourceScope.IdePhone is implemented");
+
+            var stream = OpenResourceStream(resourceScope, path);
+            var image = new PortableImage();
+            var memoryStream = new MemoryStream();
+            stream.CopyTo(memoryStream);
+            image.EncodedData = memoryStream;
+            return image;
+
+            //var image = new BitmapImage();
+            //var stream = OpenResourceStream(resourceScope, path);
+            //if (stream != null)
+            //{
+            //    image.SetSource(stream);
+            //    return image;
+            //}
+            //else
+            //{
+            //    return new BitmapImage(new Uri(path, UriKind.Relative));
+            //    //return null;
+            //}
+            
+        }
+
+        public Task<Stream> OpenResourceStreamAsync(ResourceScope resourceScope, string uri)
+        {
+            return Task.Run(() => OpenResourceStream(resourceScope, uri));
+        }
+
+        public Task<PortableImage> LoadImageAsync(ResourceScope resourceScope, string path)
+        {
+            return Task.Run(() => LoadImage(resourceScope, path));
+        }
+
         public void Dispose()
         {
             foreach (var stream in _openedStreams)
             {
                 stream.Dispose();
             }
-        }
-
-        public object LoadImage(ResourceScope resourceScope, string path)
-        {
-            if (resourceScope != ResourceScope.IdePhone)
-                throw new NotImplementedException("Only ResourceScope.IdePhone is implemented");
-
-            var image = new BitmapImage();
-            var stream = OpenResourceStream(resourceScope, path);
-            if (stream != null)
-            {
-                image.SetSource(stream);
-                return image;
-            }
-            else
-            {
-                return new BitmapImage(new Uri(path, UriKind.Relative));
-                //return null;
-            }
-            
         }
     }
 }

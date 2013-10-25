@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services.Storage;
 using System;
+using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Tests.Misc.Storage
 {
@@ -54,9 +55,20 @@ namespace Catrobat.IDE.Tests.Misc.Storage
         }
 
 
-        public object LoadImage(ResourceScope resourceScope, string path)
+        public PortableImage LoadImage(ResourceScope resourceScope, string path)
         {
             throw new NotImplementedException();
+        }
+
+
+        public Task<Stream> OpenResourceStreamAsync(ResourceScope resourceScope, string uri)
+        {
+            return Task.Run(() => OpenResourceStream(resourceScope, uri));
+        }
+
+        public Task<PortableImage> LoadImageAsync(ResourceScope resourceScope, string path)
+        {
+            return Task.Run(() => LoadImage(resourceScope, path));
         }
     }
 }

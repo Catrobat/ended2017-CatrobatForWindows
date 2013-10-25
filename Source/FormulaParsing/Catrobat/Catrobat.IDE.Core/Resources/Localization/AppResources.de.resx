@@ -962,4 +962,7 @@
   <data name="DefaultProject_Water" xml:space="preserve">
     <value>Wasser</value>
   </data>
+  <data name="Editor_ClickPlusToAddSprite" xml:space="preserve">
+    <value>Drücke '+' um ein neues Objekt hinzuzufügen.</value>
+  </data>
 </root>

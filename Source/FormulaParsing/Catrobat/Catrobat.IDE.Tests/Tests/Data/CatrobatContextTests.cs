@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Tests.Misc;
@@ -31,7 +32,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
     }
 
     [TestMethod, TestCategory("GatedTests")]
-    public void StoreLocalSettingsTest()
+    public async Task StoreLocalSettingsTest()
     {
         // TODO: fix test
         var localSettings = new LocalSettings
@@ -49,13 +50,13 @@ namespace Catrobat.IDE.Tests.Tests.Data
             Assert.IsFalse(storage.FileExists(CatrobatContextBase.LocalSettingsFilePath));
         }
 
-        CatrobatContext.StoreLocalSettingsStatic(localSettings);
+        await CatrobatContext.StoreLocalSettingsStatic(localSettings);
         using (var storage = StorageSystem.GetStorage())
         {
             Assert.IsTrue(storage.FileExists(CatrobatContextBase.LocalSettingsFilePath));
         }
 
-        var newLocalSetting = CatrobatContext.RestoreLocalSettingsStatic();
+        var newLocalSetting = await CatrobatContext.RestoreLocalSettingsStatic();
         Assert.AreEqual(localSettings.CurrentLanguageString, newLocalSetting.CurrentLanguageString);
         Assert.AreEqual(localSettings.CurrentProjectName, newLocalSetting.CurrentProjectName);
         Assert.AreEqual(localSettings.CurrentThemeIndex, newLocalSetting.CurrentThemeIndex);

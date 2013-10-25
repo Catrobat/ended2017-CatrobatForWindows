@@ -890,6 +890,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click &apos;+&apos; to add a new object..
+        /// </summary>
+        public static string Editor_ClickPlusToAddSprite {
+            get {
+                return ResourceManager.GetString("Editor_ClickPlusToAddSprite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Look name.
         /// </summary>
         public static string Editor_CostumeName {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
@@ -80,26 +81,26 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         #region Actions
 
-        private void SaveAction()
+        private async void SaveAction()
         {
-            ServiceLocator.DispatcherService.RunOnMainThread(() =>
-            {
-                CurrentProject.Save();
+            //ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            //{
+                await CurrentProject.Save();
 
                 CurrentProject = CopyCurrentProjectAsTemplate ?
-                    CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName, _projectName) :
-                    CatrobatContext.CreateEmptyProject(_projectName);
+                    await CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName, _projectName) :
+                    await CatrobatContext.CreateEmptyProject(_projectName);
 
                 if (CurrentProject != null)
                 {
-                    CurrentProject.Save();
+                    await CurrentProject.Save();
 
                     var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
-                    Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+                    Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
                 }
 
                 ServiceLocator.NavigationService.NavigateBack();
-            });
+            //});
         }
 
         private void CancelAction()

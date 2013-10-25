@@ -9,6 +9,6 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IProjectGenerator
     {
-        Project GenerateProject(string twoLetterIsoLanguageCode, bool writeToDisk);
+        Task<Project> GenerateProject(string twoLetterIsoLanguageCode, bool writeToDisk);
     }
 }
