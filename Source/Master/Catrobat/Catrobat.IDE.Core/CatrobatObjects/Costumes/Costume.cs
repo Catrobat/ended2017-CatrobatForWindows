@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
@@ -132,7 +133,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Costumes
             return xRoot;
         }
 
-        public DataObject Copy()
+        public async Task<DataObject> Copy()
         {
             var newCostume = new Costume(_name);
 
@@ -142,22 +143,22 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Costumes
 
             using (var storage = StorageSystem.GetStorage())
             {
-                storage.CopyFile(absoluteFileNameOld, absoluteFileNameNew);
+                await storage.CopyFileAsync(absoluteFileNameOld, absoluteFileNameNew);
             }
 
             return newCostume;
         }
 
-        public void Delete()
+        public async Task Delete()
         {
             var path = XmlParserTempProjectHelper.Project.BasePath + "/" + Project.ImagesPath + "/" + _fileName;
             try
             {
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    if (storage.FileExists(path))
+                    if (await storage.FileExistsAsync(path))
                     {
-                        storage.DeleteImage(path);
+                        await storage.DeleteImageAsync(path);
                     }
                 }
             }

@@ -324,7 +324,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             DateTime startTime = DateTime.UtcNow;
 
             await CurrentProject.Save();
-            var newProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
+            var newProject = await CatrobatContext.LoadNewProjectByNameStatic(projectName);
 
             if (newProject != null)
             {
@@ -426,9 +426,9 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         #region MessageActions
 
-        private void LocalProjectsChangedMessageAction(MessageBase message)
+        private async void LocalProjectsChangedMessageAction(MessageBase message)
         {
-            UpdateLocalProjects();
+            await UpdateLocalProjects();
         }
 
         private void DownloadProjectStartedMessageAction(MessageBase message)
@@ -518,7 +518,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             }
         }
 
-        private async void DeleteProjectMessageCallback(MessageboxResult result)// TODO: async, should this be awaitable?
+        private async void DeleteProjectMessageCallback(MessageboxResult result)
         {
             _dialogResult = result;
 
@@ -526,7 +526,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             {
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    storage.DeleteDirectory(CatrobatContextBase.ProjectsPath + "/" + _deleteProjectName);
+                    await storage.DeleteDirectoryAsync(CatrobatContextBase.ProjectsPath + "/" + _deleteProjectName);
                 }
 
                 if (CurrentProject.ProjectHeader.ProgramName == _deleteProjectName)
@@ -534,13 +534,13 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                     if (LocalProjects.Count > 0)
                     {
                         var projectName = LocalProjects[0].ProjectName;
-                        CurrentProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
+                        CurrentProject = await CatrobatContext.LoadNewProjectByNameStatic(projectName);
                     }
                     else
                         CurrentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
                 }
                 else
-                    UpdateLocalProjects();
+                    await UpdateLocalProjects();
 
 
                 _deleteProjectName = null;
@@ -561,7 +561,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                 await CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName,
                     CurrentProject.ProjectHeader.ProgramName);
 
-                UpdateLocalProjects();
+                await UpdateLocalProjects();
                 _copyProjectName = null;
             }
         }
@@ -618,7 +618,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
         {
         }
 
-        private void UpdateLocalProjects()
+        private async Task UpdateLocalProjects()
         {
             if (IsInDesignMode) return;
 
@@ -636,7 +636,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var projectNames = storage.GetDirectoryNames(CatrobatContextBase.ProjectsPath);
+                var projectNames = await storage.GetDirectoryNamesAsync(CatrobatContextBase.ProjectsPath);
 
                 //var projects = new List<ProjectDummyHeader>();
 

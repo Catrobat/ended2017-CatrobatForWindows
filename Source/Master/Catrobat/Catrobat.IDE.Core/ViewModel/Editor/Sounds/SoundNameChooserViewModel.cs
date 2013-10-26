@@ -67,14 +67,14 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
 
         #region Actions
 
-        private void SaveAction()
+        private async void SaveAction()
         {
             var sound = new Sound(SoundName);
             var path = CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
 
             using (var storage = StorageSystem.GetStorage())
             {
-                using (var stream = storage.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write))
+                using (var stream = await storage.OpenFileAsync(path, StorageFileMode.Create, StorageFileAccess.Write))
                 {
                     var writer = new BinaryWriter(stream);
 

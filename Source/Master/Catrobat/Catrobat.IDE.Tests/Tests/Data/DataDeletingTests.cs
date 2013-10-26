@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void DeleteSprite()
+        public async void DeleteSprite()
         {
             const string programName = "DataDeletingTests.DeleteSprite";
 
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             }
 
 
-            project.Save();
+            await project.Save();
 
             var pathCostumes = project.BasePath + "/" + Project.ImagesPath + "/";
             var pathSounds = project.BasePath + "/" + Project.SoundsPath + "/";
@@ -80,7 +80,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
                         Assert.IsTrue(storage.FileExists(pathSounds + sound.FileName));
                     }
 
-                    sprite.Delete();
+                    await sprite.Delete();
                 }
 
                 foreach (var costume in costumes)

@@ -113,12 +113,12 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             //PaintLauncher.Launche(task);
         }
 
-        private void ChangedPictureSuccess(PortableImage image)
+        private async void ChangedPictureSuccess(PortableImage image)
         {
             try
             {
                 
-                CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, image);
+                await CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, image);
             }
             catch (Exception)
             {

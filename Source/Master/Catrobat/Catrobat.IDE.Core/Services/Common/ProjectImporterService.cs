@@ -28,13 +28,18 @@ namespace Catrobat.IDE.Core.Services.Common
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    projectScreenshot = storage.LoadImage(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ScreenshotPath)) ??
-                                        storage.LoadImage(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.AutomaticScreenshotPath));
+                    projectScreenshot = await storage.LoadImageAsync(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ScreenshotPath)) ??
+                                        await storage.LoadImageAsync(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.AutomaticScreenshotPath));
                 }
 
                 CatrobatVersionConverter.VersionConverterError error;
                 var projectCodePath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
-                projectCode = CatrobatVersionConverter.ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion, out error);
+                
+                
+                var result = await CatrobatVersionConverter.ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion);
+
+                projectCode = result.Xml;
+
                 //TODO: error handling
 
                 _project = new Project(projectCode);
@@ -48,24 +53,27 @@ namespace Catrobat.IDE.Core.Services.Common
             }
             catch (Exception)
             {
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
-                    {
-                        storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
-                    }
-                }
-
                 _tempProjectHeader = null;
             }
-            finally
+
+
+            if (_tempProjectHeader == null)
             {
                 using (var storage = StorageSystem.GetStorage())
                 {
                     if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
                     {
-                        storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
+                        await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
                     }
+                }
+            }
+
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
+                {
+                    await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
                 }
             }
 
@@ -89,7 +97,7 @@ namespace Catrobat.IDE.Core.Services.Common
                             StringExtensions.Concat(_tempProjectHeader.ProjectName, counter.ToString()));
                     }
 
-                    if (!storage.DirectoryExists(projectPath))
+                    if (!await storage.DirectoryExistsAsync(projectPath))
                     {
                         break;
                     }
@@ -111,7 +119,7 @@ namespace Catrobat.IDE.Core.Services.Common
             using (var storage = StorageSystem.GetStorage())
             {
                 var tempPath = Path.Combine(CatrobatContextBase.ProjectsPath, _project.ProjectHeader.ProgramName);
-                storage.MoveDirectory(CatrobatContextBase.TempProjectImportPath, tempPath);
+                await storage.MoveDirectoryAsync(CatrobatContextBase.TempProjectImportPath, tempPath);
             }
 
             _tempProjectHeader = null;

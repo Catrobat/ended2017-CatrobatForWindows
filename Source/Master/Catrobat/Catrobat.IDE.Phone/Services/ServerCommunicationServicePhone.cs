@@ -74,7 +74,7 @@ namespace Catrobat.IDE.Phone.Services
                                           CatrobatWebCommunicationService.DownloadAndSaveProjectEvent callback)
         {
             var wc = new WebClient();
-            wc.OpenReadCompleted += ((s, args) =>
+            wc.OpenReadCompleted += (async (s, args) =>
                 {
                     try
                     {
@@ -93,12 +93,13 @@ namespace Catrobat.IDE.Phone.Services
                         projectName = projectName + countString;
 
 
-                        CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(args.Result,
+                        await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(args.Result,
                                                                             CatrobatContextBase.ProjectsPath + "/" +
                                                                             projectName);
 
-                        var error = CatrobatVersionConverter.VersionConverterError.NoError;
-                        CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, out error, true);
+                        var result = await CatrobatVersionConverter.ConvertToXmlVersionByProjectName(projectName, Constants.TargetIDEVersion, true);
+                        var error = result.Error;
+
 
                         if (callback != null) //TODO
                         {

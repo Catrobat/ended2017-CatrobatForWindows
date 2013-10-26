@@ -6,10 +6,12 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Phone.Utilities;
 using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDE.Phone.Services.Storage
@@ -585,7 +587,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
 
         public Task SaveImageAsync(string path, PortableImage image, bool deleteExisting, ImageFormat format)
         {
-            return Task.Run(() => SaveImage(path, image, deleteExisting, format));
+            return AsyncRunner.RunAsyncOnMainThread(() => SaveImage(path, image, deleteExisting, format));
         }
 
         public Task<string> ReadTextFileAsync(string path)

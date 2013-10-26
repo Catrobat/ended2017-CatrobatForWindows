@@ -150,19 +150,19 @@ namespace Catrobat.IDE.Core.UI.PortableUI
 
         public bool IsLoading { get; private set; }
 
-        public void WriateAsPng(string path)
+        public async Task WriateAsPng(string path)
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                storage.SaveImage(path, this, true, ImageFormat.Png);
+                await storage.SaveImageAsync(path, this, true, ImageFormat.Png);
             }
         }
 
-        public void WriteAsJpg(string path)
+        public async Task WriteAsJpg(string path)
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                storage.SaveImage(path, this, true, ImageFormat.Jpg);
+                await storage.SaveImageAsync(path, this, true, ImageFormat.Jpg);
             }
         }
 

@@ -638,11 +638,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             }
         }
 
-        private void CopyCostumeAction()
+        private async void CopyCostumeAction()
         {
             foreach (var costume in SelectedCostumes)
             {
-                var newCostume = costume.Copy() as Costume;
+                var newCostume = await costume.Copy() as Costume;
                 if (newCostume != null)
                     Costumes.Insert(Costumes.IndexOf(costume) + 1, newCostume);
             }
@@ -920,7 +920,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
 
         #region MessageBoxResult
 
-        private void DeleteCostumeMessageBoxResult(MessageboxResult result)
+        private async void DeleteCostumeMessageBoxResult(MessageboxResult result)
         {
             if (result == MessageboxResult.Ok)
             {
@@ -930,13 +930,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
                 {
                     ReferenceHelper.CleanUpReferencesAfterDelete(costume, SelectedSprite);
 
-                    costume.Delete();
+                    await costume.Delete();
                     Costumes.Remove(costume);
                 }
             }
         }
 
-        private void DeleteSoundMessageBoxResult(MessageboxResult result)
+        private async void DeleteSoundMessageBoxResult(MessageboxResult result)
         {
             if (result == MessageboxResult.Ok)
             {
@@ -946,7 +946,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
                 {
                     ReferenceHelper.CleanUpReferencesAfterDelete(sound, SelectedSprite);
 
-                    sound.Delete();
+                    await sound.Delete();
                     Sounds.Remove(sound);
                 }
             }

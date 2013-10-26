@@ -187,6 +187,8 @@
     <Compile Include="Services\Storage\StoragePhone.cs" />
     <Compile Include="Services\SystemInformationServicePhone.cs" />
     <Compile Include="Utilities\AssociationUriMapper.cs" />
+    <Compile Include="Utilities\AsyncRunner.cs" />
+    <Compile Include="Utilities\Semaphore.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
     <Compile Include="Views\Editor\Costumes\ChangeCostumeView.xaml.cs">

@@ -22,7 +22,7 @@ namespace Catrobat.IDE.Core.Resources
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                storage.DeleteDirectory("");
+                await storage.DeleteDirectoryAsync("");
             }
 
             foreach (KeyValuePair<string, string> pair in _sampleProjectNames)
@@ -45,7 +45,7 @@ namespace Catrobat.IDE.Core.Resources
 
                         using (var storage = StorageSystem.GetStorage())
                         {
-                            if (!storage.DirectoryExists(projectFolderPath))
+                            if (!await storage.DirectoryExistsAsync(projectFolderPath))
                             {
                                 await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContextBase.ProjectsPath + "/" + projectName);
                             }

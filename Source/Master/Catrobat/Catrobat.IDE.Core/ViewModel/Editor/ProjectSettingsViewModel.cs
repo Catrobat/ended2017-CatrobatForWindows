@@ -144,11 +144,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
             CurrentProject = message.Content;
         }
 
-        private void ChangeProjectNameMessageAction(GenericMessage<ProjectDummyHeader> message)
+        private async void ChangeProjectNameMessageAction(GenericMessage<ProjectDummyHeader> message)
         {
             SelectedProjectHeaderToEdit = message.Content;
 
-            SelectedProjectToEdit = CatrobatContext.LoadNewProjectByNameStatic(SelectedProjectHeaderToEdit.ProjectName);
+            SelectedProjectToEdit = await CatrobatContext.LoadNewProjectByNameStatic(SelectedProjectHeaderToEdit.ProjectName);
             ProjectName = SelectedProjectToEdit.ProjectHeader.ProgramName;
             ProjectDescription = SelectedProjectToEdit.ProjectHeader.Description;
         }

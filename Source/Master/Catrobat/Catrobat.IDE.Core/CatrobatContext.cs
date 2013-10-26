@@ -17,17 +17,17 @@ namespace Catrobat.IDE.Core
     {
         #region Static methods
 
-        public static Project LoadNewProjectByNameStatic(string projectName)
+        public static async Task<Project> LoadNewProjectByNameStatic(string projectName)
         {
             if (Debugger.IsAttached)
             {
-                return LoadNewProjectByNameStaticWithoutTryCatch(projectName);
+                return await LoadNewProjectByNameStaticWithoutTryCatch(projectName);
             }
             else
             {
                 try
                 {
-                    return LoadNewProjectByNameStaticWithoutTryCatch(projectName);
+                    return await LoadNewProjectByNameStaticWithoutTryCatch(projectName);
                 }
                 catch
                 {
@@ -36,12 +36,12 @@ namespace Catrobat.IDE.Core
             }
         }
 
-        private static Project LoadNewProjectByNameStaticWithoutTryCatch(string projectName)
+        private static async Task<Project> LoadNewProjectByNameStaticWithoutTryCatch(string projectName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
                 var tempPath = Path.Combine(ProjectsPath, projectName, Project.ProjectCodePath);
-                var xml = storage.ReadTextFile(tempPath);
+                var xml = await storage.ReadTextFileAsync(tempPath);
                 var newProject = new Project(xml);
                 newProject.SetProgramName(projectName);
                 return newProject;
@@ -64,7 +64,7 @@ namespace Catrobat.IDE.Core
                 var destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
 
                 var counter = 1;
-                while (storage.DirectoryExists(destinationPath))
+                while (await storage.DirectoryExistsAsync(destinationPath))
                 {
                     newProjectName = newProjectName + counter;
                     destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
@@ -90,17 +90,17 @@ namespace Catrobat.IDE.Core
                 var destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
 
                 var counter = 1;
-                while (storage.DirectoryExists(destinationPath))
+                while (await storage.DirectoryExistsAsync(destinationPath))
                 {
                     newProjectName = newProjectName + counter;
                     destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
                     counter++;
                 }
 
-                storage.CopyDirectory(sourcePath, destinationPath);
+                await storage.CopyDirectoryAsync(sourcePath, destinationPath);
 
                 var tempXmlPath = Path.Combine(destinationPath, Project.ProjectCodePath);
-                var xml = storage.ReadTextFile(tempXmlPath);
+                var xml = await storage.ReadTextFileAsync(tempXmlPath);
                 var newProject = new Project(xml);
                 newProject.SetProgramName(newProjectName);
                 await newProject.Save();

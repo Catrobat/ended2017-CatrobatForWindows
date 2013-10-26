@@ -65,10 +65,12 @@ namespace Catrobat.IDE.Phone.Services
         private void OnPaintLauncherImageChanged(PaintLauncherTask task)
         {
             var image = task.CurrentImage;
-            var portableImage = new PortableImage(image.ToBitmapImage());
-            portableImage.Width = image.PixelWidth;
-            portableImage.Height = image.PixelHeight;
-            portableImage.Data = image.ToByteArray();
+            var portableImage = new PortableImage(image.ToBitmapImage())
+            {
+                Width = image.PixelWidth,
+                Height = image.PixelHeight,
+                Data = image.ToByteArray()
+            };
 
             _successCallback.Invoke(portableImage);
         }

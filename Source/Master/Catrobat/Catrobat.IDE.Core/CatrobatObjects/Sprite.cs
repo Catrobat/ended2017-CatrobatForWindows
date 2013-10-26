@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
@@ -143,18 +144,18 @@ namespace Catrobat.IDE.Core.CatrobatObjects
                         brick.LoadReference();
         }
 
-        public DataObject Copy()
+        public async Task<DataObject> Copy()
         {
             var newSprite = new Sprite();
 
             newSprite._name = _name;
             if (_costumes != null)
             {
-                newSprite._costumes = _costumes.Copy() as CostumeList;
+                newSprite._costumes = await _costumes.Copy() as CostumeList;
             }
             if (_sounds != null)
             {
-                newSprite._sounds = _sounds.Copy() as SoundList;
+                newSprite._sounds = await _sounds.Copy() as SoundList;
             }
             if (_scripts != null)
             {
@@ -179,10 +180,10 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             return newSprite;
         }
 
-        public void Delete()
+        public async Task Delete()
         {
-            _costumes.Delete();
-            _sounds.Delete();
+            await _costumes.Delete();
+            await _sounds.Delete();
         }
 
         public override bool Equals(DataObject other)
