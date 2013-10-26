@@ -23,7 +23,8 @@ namespace Catrobat.IDE.Phone.Controls.SplashScreen
 
         private async void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            var frame = (PhoneApplicationFrame)Application.Current.RootVisual;
+            var isDirectPlayerLaunche = NavigationContext.QueryString.ContainsKey("ProjectName");
+
             string fileToken;
             NavigationContext.QueryString.TryGetValue("fileToken", out fileToken);
 
@@ -38,6 +39,11 @@ namespace Catrobat.IDE.Phone.Controls.SplashScreen
                 };
 
                 ManualImageCache.NoScreenshotImage = image;
+            }
+
+            if (isDirectPlayerLaunche)
+            {
+                ServiceLocator.NavigationService.NavigateTo(typeof(PlayerLauncherViewModel));
             }
 
             if (fileToken != null)

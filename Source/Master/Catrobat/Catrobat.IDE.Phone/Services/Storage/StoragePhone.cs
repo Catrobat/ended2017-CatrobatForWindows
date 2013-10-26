@@ -244,8 +244,6 @@ namespace Catrobat.IDE.Phone.Services.Storage
             {
                 try
                 {
-                    //var bitmapImage = new BitmapImage();
-
                     using (var storageFileStream = _iso.OpenFile(pathToImage,
                                                                  FileMode.Open,
                                                                  FileAccess.Read))
@@ -255,16 +253,6 @@ namespace Catrobat.IDE.Phone.Services.Storage
                         storageFileStream.CopyTo(memoryStream);
                         image.EncodedData = memoryStream;
                         return image;
-
-                        //bitmapImage.SetSource(storageFileStream);
-                        //storageFileStream.Close();
-                        //storageFileStream.Dispose();
-
-
-                        //var writeableBitmap = new WriteableBitmap(bitmapImage);
-                        //var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
-                        //    writeableBitmap.PixelHeight);
-                        //return portableImage;
                     }
                 }
                 catch {} //TODO: Exception message. Maybe logging?
@@ -327,19 +315,8 @@ namespace Catrobat.IDE.Phone.Services.Storage
             try
             {
                 stream = _iso.OpenFile(path, FileMode.CreateNew, FileAccess.Write);
-
                 WriteableBitmap writeableBitmap = null;
-
-                if (image.Data != null)
-                {
-                    writeableBitmap = new WriteableBitmap(image.Width, image.Height);
-                    writeableBitmap.FromByteArray(image.Data);
-                }
-                else
-                {
-                    writeableBitmap = new WriteableBitmap((BitmapSource) image.ImageSource);
-                }
-
+                writeableBitmap = new WriteableBitmap((BitmapSource) image.ImageSource);
 
                 switch (format)
                 {

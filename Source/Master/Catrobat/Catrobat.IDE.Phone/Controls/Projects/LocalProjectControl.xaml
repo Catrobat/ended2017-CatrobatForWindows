@@ -16,13 +16,17 @@
     <Border BorderThickness="4" BorderBrush="White">
       <i:Interaction.Triggers>
         <i:EventTrigger EventName="Tap">
-          <command:EventToCommand Command="{Binding MainViewModel.SetCurrentProjectCommand, Mode=OneWay, Source={StaticResource Locator}}"
-                                                          CommandParameter="{Binding ProjectName, Mode=OneWay}" />
+          <command:EventToCommand Command="{Binding MainViewModel.SetCurrentProjectCommand, 
+            Mode=OneWay, Source={StaticResource Locator}}"
+            CommandParameter="{Binding ProjectName, Mode=OneWay}" />
         </i:EventTrigger>
       </i:Interaction.Triggers>
 
-      <Grid Name="GridNormalTile" Background="{Binding SelectedTheme.AccentColor2.NativeBrush, Source={StaticResource ThemeChooser}}">
-        <Image Name="ImageNormalTile" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding Screenshot.ImageSource, Converter={StaticResource NoScreenshotConverter}}"></Image>
+      <Grid Name="GridNormalTile" Background="{Binding SelectedTheme.AccentColor2.NativeBrush, 
+        Source={StaticResource ThemeChooser}}">
+        <Image Name="ImageNormalTile" VerticalAlignment="Stretch"
+               HorizontalAlignment="Stretch" Source="{Binding Screenshot.ImageSource, 
+          Converter={StaticResource ImageSquareConverter}}" />
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -30,7 +34,8 @@
           </Grid.RowDefinitions>
           <Grid Background="#AA000000">
             <TextBlock Grid.Row="0" Text="{Binding ProjectName}" TextWrapping="Wrap" 
-                         TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" FontSize="14"/>
+              TextAlignment="Center" HorizontalAlignment="Stretch" 
+              VerticalAlignment="Center" Margin="5" FontSize="14"/>
           </Grid>
         </Grid>
       </Grid>

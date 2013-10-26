@@ -19,17 +19,6 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         private object _nativeImageSource;
         private MemoryStream _encodedData;
 
-        public byte[] Data
-        {
-            get { return _data; }
-            set
-            {
-                _data = value;
-                RaisePropertyChanged(() => Data);
-                RaisePropertyChanged(() => ImageSource);
-            }
-        }
-
         public MemoryStream EncodedData
         {
             get { return _encodedData; }
@@ -38,6 +27,17 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 _encodedData = value;
             }
         }
+
+        //public byte[] Data
+        //{
+        //    get { return _data; }
+        //    set
+        //    {
+        //        _data = value;
+        //        RaisePropertyChanged(() => Data);
+        //        RaisePropertyChanged(() => ImageSource);
+        //    }
+        //}
 
         public int Width
         {
@@ -132,14 +132,14 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 if (image != null)
                 {
                     EncodedData = image.EncodedData;
-                    Data = image.Data;
+                    //Data = image.Data;
                     Width = image.Width;
                     Height = image.Height;
                     _nativeImageSource = image._nativeImageSource;
                 }
 
                 RaisePropertyChanged(() => ImageSource);
-                RaisePropertyChanged(() => Data);
+                //RaisePropertyChanged(() => Data);
                 RaisePropertyChanged(() => Width);
                 RaisePropertyChanged(() => Height);
                 RaisePropertyChanged(() => IsLoaded);
@@ -197,7 +197,7 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         {
             get
             {
-                return Data == null && _nativeImageSource == null;
+                return _nativeImageSource == null && EncodedData == null;
             }
         }
     }

@@ -68,8 +68,7 @@ namespace Catrobat.IDE.Phone.Services
             var portableImage = new PortableImage(image.ToBitmapImage())
             {
                 Width = image.PixelWidth,
-                Height = image.PixelHeight,
-                Data = image.ToByteArray()
+                Height = image.PixelHeight
             };
 
             _successCallback.Invoke(portableImage);

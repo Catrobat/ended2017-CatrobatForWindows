@@ -49,7 +49,7 @@ namespace Catrobat.IDE.Phone.Services
 
         public object ConvertFromEncodedStreeam(MemoryStream encodedStream)
         {
-            var image = new BitmapImage();
+            var image = new BitmapImage {CreateOptions = BitmapCreateOptions.None};
 
             if(encodedStream != null)
                 image.SetSource(encodedStream);

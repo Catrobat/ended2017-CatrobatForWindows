@@ -335,12 +335,13 @@
           <TextBlock FontSize="24" TextWrapping="Wrap" Text="{Binding Resources.Main_AboutText, Source={StaticResource LocalizedStrings}}" Margin="10 0 0 15" />
           <Grid>
             <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="130" />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <buttons:SettingsButton Grid.Column="0" VerticalAlignment="Center"
               Template="{StaticResource SettingsButtonControlTemplate}" 
-              Command="{Binding SettingsCommand}" Margin="20 0 20 20" />
+              Command="{Binding SettingsCommand}"  
+              Margin="0 0 0 0" />
             <StackPanel Grid.Column="1" HorizontalAlignment="Left" Orientation="Vertical">
               <TextBlock Style="{StaticResource PhoneTextNormalStyle}" 
                        Text="{Binding ApplicationVersionName}" 
