@@ -610,7 +610,7 @@
     <value>About</value>
   </data>
   <data name="Main_HeaderCurrentProject" xml:space="preserve">
-    <value>Actual program</value>
+    <value>Active program</value>
   </data>
   <data name="Main_HeaderDesign" xml:space="preserve">
     <value>Design</value>

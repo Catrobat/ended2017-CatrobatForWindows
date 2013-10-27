@@ -2240,7 +2240,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Actual program.
+        ///   Looks up a localized string similar to Active program.
         /// </summary>
         public static string Main_HeaderCurrentProject {
             get {

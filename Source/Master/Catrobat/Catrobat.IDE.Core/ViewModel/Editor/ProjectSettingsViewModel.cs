@@ -11,8 +11,8 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
     {
         #region Private Members
 
-        private Project _selectedProjectToEdit;
-        private ProjectDummyHeader _selectedProjectHeaderToEdit;
+        private Project _selectedProject;
+        private ProjectDummyHeader _selectedProjectHeader;
         private string _projectName;
         private string _projectDescription;
         private Project _currentProject;
@@ -31,31 +31,31 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
             }
         }
 
-        public Project SelectedProjectToEdit
+        public Project SelectedProject
         {
-            get { return _selectedProjectToEdit; }
+            get { return _selectedProject; }
             set
             {
-                if (value == _selectedProjectToEdit)
+                if (value == _selectedProject)
                 {
                     return;
                 }
-                _selectedProjectToEdit = value;
-                RaisePropertyChanged(() => SelectedProjectToEdit);
+                _selectedProject = value;
+                RaisePropertyChanged(() => SelectedProject);
             }
         }
 
-        public ProjectDummyHeader SelectedProjectHeaderToEdit
+        public ProjectDummyHeader SelectedProjectHeader
         {
-            get { return _selectedProjectHeaderToEdit; }
+            get { return _selectedProjectHeader; }
             set
             {
-                if (value == _selectedProjectHeaderToEdit)
+                if (value == _selectedProjectHeader)
                 {
                     return;
                 }
-                _selectedProjectHeaderToEdit = value;
-                RaisePropertyChanged(() => SelectedProjectHeaderToEdit);
+                _selectedProjectHeader = value;
+                RaisePropertyChanged(() => SelectedProjectHeader);
             }
         }
 
@@ -107,17 +107,18 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
 
         private async void SaveAction()
         {
-            if (CurrentProject.ProjectDummyHeader == SelectedProjectHeaderToEdit)
+            if (CurrentProject.ProjectDummyHeader == SelectedProjectHeader)
             {
+                CurrentProject.ProjectDummyHeader.ProjectName = ProjectName;
                 CurrentProject.ProjectHeader.ProgramName = ProjectName;
                 CurrentProject.ProjectHeader.Description = ProjectDescription;
             }
             else
             {
-                SelectedProjectHeaderToEdit.ProjectName = ProjectName;
-                SelectedProjectToEdit.ProjectHeader.ProgramName = ProjectName;
-                SelectedProjectToEdit.ProjectHeader.Description = ProjectDescription;
-                await SelectedProjectToEdit.Save();
+                SelectedProjectHeader.ProjectName = ProjectName;
+                SelectedProject.ProjectHeader.ProgramName = ProjectName;
+                SelectedProject.ProjectHeader.Description = ProjectDescription;
+                await SelectedProject.Save();
             }
 
             ServiceLocator.NavigationService.NavigateBack();
@@ -146,11 +147,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
 
         private async void ChangeProjectNameMessageAction(GenericMessage<ProjectDummyHeader> message)
         {
-            SelectedProjectHeaderToEdit = message.Content;
+            SelectedProjectHeader = message.Content;
 
-            SelectedProjectToEdit = await CatrobatContext.LoadNewProjectByNameStatic(SelectedProjectHeaderToEdit.ProjectName);
-            ProjectName = SelectedProjectToEdit.ProjectHeader.ProgramName;
-            ProjectDescription = SelectedProjectToEdit.ProjectHeader.Description;
+            SelectedProject = await CatrobatContext.LoadNewProjectByNameStatic(SelectedProjectHeader.ProjectName);
+            ProjectName = SelectedProject.ProjectHeader.ProgramName;
+            ProjectDescription = SelectedProject.ProjectHeader.Description;
         }
 
         #endregion
