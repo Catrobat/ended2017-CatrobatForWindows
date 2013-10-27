@@ -20,7 +20,6 @@ namespace Catrobat.IDE.Phone
             ServiceLocator.ThemeChooser = Application.Current.Resources["ThemeChooser"];
             ServiceLocator.LocalizedStrings = Application.Current.Resources["LocalizedStrings"];
 
-            ServiceLocator.Register<NavigationServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SystemInformationServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<CultureServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ImageResizeServicePhone>(TypeCreationMode.Lazy);
@@ -39,6 +38,8 @@ namespace Catrobat.IDE.Phone
             ServiceLocator.Register<DispatcherServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<PortableUIElementsConvertionServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ActionTemplateServicePhone>(TypeCreationMode.Lazy);
+
+            ServiceLocator.NavigationService = new NavigationServicePhone();
         }
     }
 }
