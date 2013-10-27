@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Core.Services
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
         public static INavigationService NavigationService
-        { get { return GetInstance<INavigationService>(); } }
+        { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",

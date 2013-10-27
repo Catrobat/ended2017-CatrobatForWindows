@@ -195,7 +195,7 @@ namespace Catrobat.IDE.Store.Services.Storage
         {
             try
             {
-                var folder = await GetFileAsync(path);
+                var folder = await GetFileAsync(path, false);
                 return folder == null;
             }
             catch (Exception)
@@ -371,7 +371,7 @@ namespace Catrobat.IDE.Store.Services.Storage
         {
             pathToImage = pathToImage.Replace("\\", "/");
 
-            if (FileExists(pathToImage))
+            if (await FileExistsAsync(pathToImage))
             {
                 try
                 {
@@ -410,13 +410,13 @@ namespace Catrobat.IDE.Store.Services.Storage
                 var thumbnailPath = Path.Combine(imageBasePath, string.Format("{0}{1}",
                     withoutExtension, CatrobatContextBase.ImageThumbnailExtension));
 
-                if (FileExists(thumbnailPath))
+                if (await FileExistsAsync(thumbnailPath))
                 {
                     retVal = LoadImage(thumbnailPath);
                 }
                 else
                 {
-                    var fullSizePortableImage = LoadImage(pathToImage);
+                    var fullSizePortableImage = await LoadImageAsync(pathToImage);
 
                     if (fullSizePortableImage != null)
                     {

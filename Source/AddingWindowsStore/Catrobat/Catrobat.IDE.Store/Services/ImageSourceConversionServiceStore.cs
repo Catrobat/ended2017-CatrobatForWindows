@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 
@@ -30,8 +31,8 @@ namespace Catrobat.IDE.Store.Services
 
             if (inputImage is BitmapImage)
             {
-                var image = (BitmapImage) inputImage;
-                
+                var image = (BitmapImage)inputImage;
+
                 writableBitmap = new WriteableBitmap(image.PixelWidth, image.PixelHeight);
                 throw new NotImplementedException();
             }
@@ -46,13 +47,22 @@ namespace Catrobat.IDE.Store.Services
 
             outputData = writableBitmap.ToByteArray();
             outputWidth = writableBitmap.PixelWidth;
-            outputHeight = writableBitmap.PixelWidth;
+            outputHeight = writableBitmap.PixelHeight;
         }
 
 
         public object ConvertFromEncodedStreeam(System.IO.MemoryStream encodedStream)
         {
-            throw new NotImplementedException();
+            if (encodedStream == null)
+                return null;
+
+            var image = new BitmapImage();
+            image.SetSource(encodedStream.AsRandomAccessStream());
+            image.CreateOptions = BitmapCreateOptions.None;
+
+            var writeableImage = new WriteableBitmap(image.PixelWidth, image.PixelHeight);
+            image.SetSource(encodedStream.AsRandomAccessStream());
+            return writeableImage;
         }
     }
 }

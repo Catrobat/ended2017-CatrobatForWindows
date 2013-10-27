@@ -8,6 +8,6 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+      <Image Source="/Content/Images/Application/pocketcode01.png" Width="800" Height="400"></Image>
     </Grid>
 </Page>

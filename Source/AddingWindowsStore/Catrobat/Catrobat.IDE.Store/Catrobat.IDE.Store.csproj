@@ -159,6 +159,9 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="Catrobat.IDE.Store_TemporaryKey.pfx" />
+    <Content Include="Content\Images\Application\pocketcode01.png" />
+    <Content Include="Content\Images\Pocketcode.svg" />
+    <Content Include="Content\Images\Screenshot\NoScreenshot.png" />
     <Content Include="Content\Programs\Default\automatic_screenshot.png" />
     <Content Include="Content\Programs\Default\Looks\28226cf909b0e5deb2d275b73a96fbec_rain.png" />
     <Content Include="Content\Programs\Default\Looks\52fb8540d8d751880ab012e26c86e1f5_background.png" />

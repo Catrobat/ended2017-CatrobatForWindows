@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Core.Resources
                 try
                 {
                     var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader();
-                    resourceStream = resourceLoader.OpenResourceStream(ResourceScope.Resources, path);
+                    resourceStream = await resourceLoader.OpenResourceStreamAsync(ResourceScope.Resources, path);
                     
 
                     if (resourceStream != null)

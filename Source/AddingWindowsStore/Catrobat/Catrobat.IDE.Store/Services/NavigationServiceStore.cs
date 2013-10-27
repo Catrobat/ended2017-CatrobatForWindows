@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
@@ -21,8 +22,9 @@ namespace Catrobat.IDE.Store.Services
         {
             if (type.GetTypeInfo().BaseType == typeof (ViewModelBase))
             {
-                var viewModelName = type.GetTypeInfo().Name;
-                var viewType = viewModelName.Replace("ViewModel", "View");
+                var viewModelName = type.GetTypeInfo().AssemblyQualifiedName.Split(',').First();
+                var viewType = viewModelName.Replace("Catrobat.IDE.Core.ViewModel", "Catrobat.IDE.Store.Views");
+                viewType = viewType.Replace("ViewModel", "View");
 
                 type = Type.GetType(viewType);
             }
