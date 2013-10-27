@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Bricks;
@@ -19,7 +20,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
 
         private BrickCategory _selectedBrickCategory;
         private ScriptBrickCollection _receivedScriptBrickCollection;
-        
+
         private BrickCollection _brickCollection;
         private int _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex;
         private DataObject _selectedBrick;
@@ -176,44 +177,36 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
             }
         }
 
-        private void OnLoadBrickViewAction()
+        private async void OnLoadBrickViewAction()
         {
-            //var app = (App)Application.Current;
+            var actions = ServiceLocator.ActionTemplateService.GetActionTemplatesForCategry(_selectedBrickCategory);
 
-            IsControlVisible = false;
-            IsLookVisible = false;
-            IsMovementVisible = false;
-            IsSoundVisible = false;
-            IsVariableVisible = false;
+            BrickCollection = new BrickCollection();
 
-            switch (_selectedBrickCategory)
+            var actionsToLoadAsync = new BrickCollection();
+            var actionsToLoadImmediately = new BrickCollection();
+
+            int count = 0;
+            foreach (var action in actions)
             {
-                case BrickCategory.Control:
-                    IsControlVisible = true;
-                    //BrickCollection = app.Resources["ScriptBrickAddDataControl"] as BrickCollection;
-                    break;
+                if (count <= 6)
+                    actionsToLoadImmediately.Add(action);
+                else
+                    actionsToLoadAsync.Add(action);
+            }
 
-                case BrickCategory.Looks:
-                    IsLookVisible = true;
+            await Task.Run(() => ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                foreach (var action in actionsToLoadImmediately)
+                {
+                    BrickCollection.Add(action);
+                }
+            }));
 
-                    //BrickCollection = app.Resources["ScriptBrickAddDataLook"] as BrickCollection;
-                    break;
-
-                case BrickCategory.Motion:
-                    IsMovementVisible = true;
-
-                    //BrickCollection = app.Resources["ScriptBrickAddDataMovement"] as BrickCollection;
-                    break;
-
-                case BrickCategory.Sounds:
-                    IsSoundVisible = true;
-
-                    //BrickCollection = app.Resources["ScriptBrickAddDataSound"] as BrickCollection;
-                    break;
-                case BrickCategory.Variables:
-                    IsVariableVisible = true;
-                    //BrickCollection = app.Resources["ScriptBrickAddDataVariables"] as BrickCollection;
-                    break;
+            foreach (var action in actionsToLoadAsync)
+            {
+                await Task.Run(() => ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                    BrickCollection.Add(action)));
             }
         }
 
