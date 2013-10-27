@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 
@@ -44,6 +45,16 @@ namespace Catrobat.IDE.Phone.Services
             outputData = writableBitmap.ToByteArray();
             outputWidth = writableBitmap.PixelWidth;
             outputHeight = writableBitmap.PixelWidth;
+        }
+
+        public object ConvertFromEncodedStreeam(MemoryStream encodedStream)
+        {
+            var image = new BitmapImage {CreateOptions = BitmapCreateOptions.None};
+
+            if(encodedStream != null)
+                image.SetSource(encodedStream);
+
+            return image;
         }
     }
 }

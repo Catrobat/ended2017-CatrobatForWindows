@@ -118,6 +118,14 @@ namespace Catrobat.IDE.Core.Services
         public static IPortableUIElementConversionService PortableUIElementConversionService
         { get { return GetInstance<IPortableUIElementConversionService>(); } }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IActionTemplateService ActionTemplateService
+        { get { return GetInstance<IActionTemplateService>(); } }
+
+
+
         public static object ViewModelLocator { get; set; }
 
         public static object ThemeChooser { get; set; }

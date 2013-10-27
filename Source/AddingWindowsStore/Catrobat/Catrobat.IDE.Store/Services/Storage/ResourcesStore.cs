@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Store.Services.Storage
 {
@@ -36,7 +38,7 @@ namespace Catrobat.IDE.Store.Services.Storage
                         try
                         {
                             const string prefix = "ms-appx:///";
-                            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(prefix + uri, UriKind.Absolute));
+                            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(Path.Combine(prefix, uri), UriKind.Absolute));
                             var randomAccessStream = await file.OpenReadAsync();
                             var stream = randomAccessStream.AsStream();
                             _openedStreams.Add(stream);
@@ -54,20 +56,12 @@ namespace Catrobat.IDE.Store.Services.Storage
                     }
                 case ResourceScope.Resources:
                     {
-                        throw new NotImplementedException();
-
-                        //projectPath = "Content/Resources/";
-                        //var resourceUri = new Uri(projectPath + uri, UriKind.Relative);
-                        //var resource = Application.GetResourceStream(resourceUri);
-
-                        //if (resource != null)
-                        //{
-                        //    var stream = resource.Stream;
-                        //    _openedStreams.Add(stream);
-                        //    return stream;
-                        //}
-
-                        //return null;
+                        const string prefix = "ms-appx:///Content/Resources";
+                        var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(Path.Combine(prefix, uri), UriKind.Absolute));
+                        var randomAccessStream = await file.OpenReadAsync();
+                        var stream = randomAccessStream.AsStream();
+                        _openedStreams.Add(stream);
+                        return stream;
                     }
                 default:
                     {
@@ -84,7 +78,7 @@ namespace Catrobat.IDE.Store.Services.Storage
             }
         }
 
-        public Task<object> LoadImageAsync(ResourceScope resourceScope, string path)
+        public Task<PortableImage> LoadImageAsync(ResourceScope resourceScope, string path)
         {
             throw new NotImplementedException();
 
@@ -113,7 +107,7 @@ namespace Catrobat.IDE.Store.Services.Storage
             return task.Result;
         }
 
-        public object LoadImage(ResourceScope resourceScope, string path)
+        public PortableImage LoadImage(ResourceScope resourceScope, string path)
         {
             var task = LoadImageAsync(resourceScope, path);
             task.Wait();

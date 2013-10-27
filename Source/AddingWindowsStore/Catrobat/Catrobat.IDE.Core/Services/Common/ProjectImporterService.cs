@@ -21,24 +21,29 @@ namespace Catrobat.IDE.Core.Services.Common
         {
             try
             {
-                CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream, CatrobatContextBase.TempProjectImportPath);
+                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(projectZipStream, CatrobatContextBase.TempProjectImportPath);
 
                 PortableImage projectScreenshot = null;
                 string projectCode = "";
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    projectScreenshot = storage.LoadImage(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ScreenshotPath)) ??
-                                        storage.LoadImage(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.AutomaticScreenshotPath));
+                    projectScreenshot = await storage.LoadImageAsync(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ScreenshotPath)) ??
+                                        await storage.LoadImageAsync(Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.AutomaticScreenshotPath));
                 }
 
                 CatrobatVersionConverter.VersionConverterError error;
                 var projectCodePath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
-                projectCode = CatrobatVersionConverter.ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion, out error);
+                
+                
+                var result = await CatrobatVersionConverter.ConvertToXmlVersion(projectCodePath, Constants.TargetIDEVersion);
+
+                projectCode = result.Xml;
+
                 //TODO: error handling
 
                 _project = new Project(projectCode);
-                _project.Save();
+                await _project.Save();
 
                 _tempProjectHeader = new ProjectDummyHeader
                 {
@@ -48,24 +53,27 @@ namespace Catrobat.IDE.Core.Services.Common
             }
             catch (Exception)
             {
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
-                    {
-                        storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
-                    }
-                }
-
                 _tempProjectHeader = null;
             }
-            finally
+
+
+            if (_tempProjectHeader == null)
             {
                 using (var storage = StorageSystem.GetStorage())
                 {
                     if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
                     {
-                        storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
+                        await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
                     }
+                }
+            }
+
+
+            using (var storage = StorageSystem.GetStorage())
+            {
+                if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
+                {
+                    await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
                 }
             }
 
@@ -89,7 +97,7 @@ namespace Catrobat.IDE.Core.Services.Common
                             StringExtensions.Concat(_tempProjectHeader.ProjectName, counter.ToString()));
                     }
 
-                    if (!storage.DirectoryExists(projectPath))
+                    if (!await storage.DirectoryExistsAsync(projectPath))
                     {
                         break;
                     }
@@ -104,14 +112,14 @@ namespace Catrobat.IDE.Core.Services.Common
                     newProjectName = _tempProjectHeader.ProjectName + counter;
                     _project.SetProgramName(newProjectName);
                     var saveToPath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
-                    _project.Save(saveToPath);
+                    await _project.Save(saveToPath);
                 }
             }
 
             using (var storage = StorageSystem.GetStorage())
             {
                 var tempPath = Path.Combine(CatrobatContextBase.ProjectsPath, _project.ProjectHeader.ProgramName);
-                storage.MoveDirectory(CatrobatContextBase.TempProjectImportPath, tempPath);
+                await storage.MoveDirectoryAsync(CatrobatContextBase.TempProjectImportPath, tempPath);
             }
 
             _tempProjectHeader = null;
@@ -127,8 +135,8 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var storage = StorageSystem.GetStorage())
             {
-                storage.DeleteDirectory(CatrobatContextBase.TempProjectImportPath);
-                storage.DeleteDirectory(CatrobatContextBase.TempProjectImportZipPath);
+                await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportPath);
+                await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
             }
 
             _tempProjectHeader = null;

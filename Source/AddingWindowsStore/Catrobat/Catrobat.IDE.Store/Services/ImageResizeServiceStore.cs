@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
@@ -9,23 +10,25 @@ namespace Catrobat.IDE.Store.Services
     {
         public PortableImage ResizeImage(PortableImage image, int maxWidthHeight)
         {
-            var bitmap = new WriteableBitmap(image.Width, image.Height);
-            bitmap.FromByteArray(image.Data);
+            if(!(image.ImageSource is WriteableBitmap))
+                throw new ArgumentException("image.ImageSource must be of type WriteableBitmap");
 
-            var resizedImage = ResizeImage(bitmap, maxWidthHeight);
-            var resizedPortableImage = new PortableImage(resizedImage.ToByteArray(), resizedImage.PixelWidth, resizedImage.PixelHeight);
+            var resizedImage = ResizeImage((WriteableBitmap) image.ImageSource, maxWidthHeight);
+            var resizedPortableImage = new PortableImage(resizedImage);
 
             return resizedPortableImage;
         }
 
         public PortableImage ResizeImage(PortableImage image, int newWidth, int newHeight)
         {
-            var bitmap = new WriteableBitmap(image.Width, image.Height);
-            bitmap.FromByteArray(image.Data);
+            if (!(image.ImageSource is WriteableBitmap))
+                throw new ArgumentException("image.ImageSource must be of type WriteableBitmap");
+
+            var bitmap = ((WriteableBitmap) image.ImageSource).Clone();
 
             var resizedImage = bitmap.Resize(newWidth, newHeight, WriteableBitmapExtensions.Interpolation.Bilinear);
 
-            var resizedPortableImage = new PortableImage(resizedImage.ToByteArray(), resizedImage.PixelWidth, resizedImage.PixelHeight);
+            var resizedPortableImage = new PortableImage(resizedImage);
 
             return resizedPortableImage;
         }

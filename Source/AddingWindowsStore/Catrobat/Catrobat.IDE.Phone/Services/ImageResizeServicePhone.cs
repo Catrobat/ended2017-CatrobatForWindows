@@ -8,8 +8,9 @@ namespace Catrobat.IDE.Phone.Services
     {
         public PortableImage ResizeImage(PortableImage image, int maxWidthHeight)
         {
-            var bitmap = new WriteableBitmap(image.Width, image.Height);
-            bitmap.FromByteArray(image.Data);
+            var bitmapSource = (BitmapSource)image.ImageSource;
+            var bitmap = new WriteableBitmap(bitmapSource);
+            //bitmap.FromByteArray(image.Data);
 
             var resizedImage = ResizeImage(bitmap, maxWidthHeight);
             var resizedPortableImage = new PortableImage(resizedImage.ToByteArray(), resizedImage.PixelWidth, resizedImage.PixelHeight);
@@ -19,9 +20,10 @@ namespace Catrobat.IDE.Phone.Services
 
         public PortableImage ResizeImage(PortableImage image, int newWidth, int newHeight)
         {
-
-            var bitmap = new WriteableBitmap(image.Width, image.Height);
-            bitmap.FromByteArray(image.Data);
+            var bitmapSource = (BitmapSource)image.ImageSource;
+            var bitmap = new WriteableBitmap(bitmapSource);
+            //var bitmap = new WriteableBitmap(image.Width, image.Height);
+            //bitmap.FromByteArray(image.Data);
 
             var resizedImage = bitmap.Resize(newWidth, newHeight, WriteableBitmapExtensions.Interpolation.Bilinear);
 

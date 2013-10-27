@@ -40,7 +40,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             var sprites = project1.SpriteList.Sprites;
             var spritesToAdd = new List<Sprite>();
             foreach (var sprite in sprites)
-                spritesToAdd.Add(sprite.Copy() as Sprite);
+                spritesToAdd.Add(await sprite.Copy() as Sprite);
 
             foreach (var sprite in spritesToAdd)
                 project2.SpriteList.Sprites.Add(sprite);

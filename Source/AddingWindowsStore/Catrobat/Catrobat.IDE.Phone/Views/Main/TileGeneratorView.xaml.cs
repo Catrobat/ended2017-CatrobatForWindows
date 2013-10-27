@@ -35,13 +35,7 @@ namespace Catrobat.IDE.Phone.Views.Main
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var screenshot = _viewModel.PinProjectHeader.Screenshot;
-            var writeableScreenshot = new WriteableBitmap(screenshot.Width, screenshot.Height);
-
-            if (screenshot.Data != null)
-            {
-                writeableScreenshot.FromByteArray(screenshot.Data);
-                writeableScreenshot.Invalidate();
-            }
+            var writeableScreenshot = new WriteableBitmap((BitmapSource)screenshot.ImageSource);
 
             var croppedScreenshot = writeableScreenshot.Crop(new Rect(
                 new Point(0, (writeableScreenshot.PixelHeight - writeableScreenshot.PixelWidth) / 2.0),
@@ -111,7 +105,7 @@ namespace Catrobat.IDE.Phone.Views.Main
                 WideBackgroundImage = new Uri(TileAbsolutSavePathPrefix + wideTilePath, UriKind.Absolute)
             };
 
-            var path = "/Views/Main/PlayerLauncherView.xaml?ProjectName=" + _viewModel.PinProjectHeader.ProjectName;
+            var path = "/Controls/SplashScreen/SplashScreen.xaml?ProjectName=" + _viewModel.PinProjectHeader.ProjectName;
 
             path += "&Dummy=" + DateTime.UtcNow.Ticks;
 

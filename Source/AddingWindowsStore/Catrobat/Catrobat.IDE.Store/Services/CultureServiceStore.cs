@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Store.Services
     {
         public CultureInfo GetCulture()
         {
-            return new CultureInfo(Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride);
+            return new CultureInfo(Windows.Globalization.ApplicationLanguages.Languages[0]);
         }
 
         public void SetCulture(CultureInfo culture)

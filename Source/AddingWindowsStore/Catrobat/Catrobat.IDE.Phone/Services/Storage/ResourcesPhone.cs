@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using Windows.Storage;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Phone.Services.Storage
 {
@@ -82,23 +83,30 @@ namespace Catrobat.IDE.Phone.Services.Storage
             }
         }
 
-        public object LoadImage(ResourceScope resourceScope, string path)
+        public PortableImage LoadImage(ResourceScope resourceScope, string path)
         {
             if (resourceScope != ResourceScope.IdePhone)
                 throw new NotImplementedException("Only ResourceScope.IdePhone is implemented");
 
-            var image = new BitmapImage();
             var stream = OpenResourceStream(resourceScope, path);
-            if (stream != null)
-            {
-                image.SetSource(stream);
-                return image;
-            }
-            else
-            {
-                return new BitmapImage(new Uri(path, UriKind.Relative));
-                //return null;
-            }
+            var image = new PortableImage();
+            var memoryStream = new MemoryStream();
+            stream.CopyTo(memoryStream);
+            image.EncodedData = memoryStream;
+            return image;
+
+            //var image = new BitmapImage();
+            //var stream = OpenResourceStream(resourceScope, path);
+            //if (stream != null)
+            //{
+            //    image.SetSource(stream);
+            //    return image;
+            //}
+            //else
+            //{
+            //    return new BitmapImage(new Uri(path, UriKind.Relative));
+            //    //return null;
+            //}
             
         }
 
@@ -107,7 +115,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
             return Task.Run(() => OpenResourceStream(resourceScope, uri));
         }
 
-        public Task<object> LoadImageAsync(ResourceScope resourceScope, string path)
+        public Task<PortableImage> LoadImageAsync(ResourceScope resourceScope, string path)
         {
             return Task.Run(() => LoadImage(resourceScope, path));
         }

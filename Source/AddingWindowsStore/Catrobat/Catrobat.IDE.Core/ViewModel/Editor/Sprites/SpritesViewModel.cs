@@ -180,11 +180,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             ServiceLocator.NavigationService.NavigateTo(typeof(SpriteEditorViewModel));
         }
 
-        private void CopySpriteAction()
+        private async void CopySpriteAction()
         {
             var originalIndex = Sprites.IndexOf(SelectedSprite);
 
-            var newSprite = (Sprite) SelectedSprite.Copy();
+            var newSprite = (Sprite) await SelectedSprite.Copy();
             var newIndex = originalIndex + 1;
 
             Sprites.Insert(newIndex, newSprite);

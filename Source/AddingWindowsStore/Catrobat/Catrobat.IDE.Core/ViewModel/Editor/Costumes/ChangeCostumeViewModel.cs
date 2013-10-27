@@ -103,7 +103,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             
             ServiceLocator.PictureService.DrawPicture(ChangedPictureSuccess, () => {/* No action here */}, () => {/* No action here */},
                 ReceivedCostume.Image);
-            ServiceLocator.NavigationService.RemoveBackEntry();
+            //ServiceLocator.NavigationService.RemoveBackEntry();
 
             //var writeableBitmap = new WriteableBitmap(ReceivedCostume.Image.Width, ReceivedCostume.Image.Height);
             //writeableBitmap.FromByteArray(ReceivedCostume.Image.Data);
@@ -113,12 +113,12 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             //PaintLauncher.Launche(task);
         }
 
-        private void ChangedPictureSuccess(PortableImage image)
+        private async void ChangedPictureSuccess(PortableImage image)
         {
             try
             {
                 
-                CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, image);
+                await CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, image);
             }
             catch (Exception)
             {

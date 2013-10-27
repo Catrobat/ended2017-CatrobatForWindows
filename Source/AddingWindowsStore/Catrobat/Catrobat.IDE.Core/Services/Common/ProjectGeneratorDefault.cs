@@ -57,9 +57,6 @@ namespace Catrobat.IDE.Core.Services.Common
                 }
             }
 
-
-
-
             if (writeToDisk)
                 await WriteLooksToDisk(Path.Combine(project.BasePath, Project.ImagesPath));
 
@@ -120,7 +117,6 @@ namespace Catrobat.IDE.Core.Services.Common
                 Name = AppResources.DefaultProject_Background,
                 FileName = LookFileNameBackground
             });
-            var image = objectBackground.Costumes.Costumes[0].Image;
 
             objectCat.Costumes.Costumes.Add(new Costume
             {

@@ -138,20 +138,18 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
             ServiceLocator.NavigationService.NavigateTo(typeof(CostumeSavingViewModel));
 
-            await Task.Run(() => ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            var newDimention = new ImageDimension
             {
-                var newDimention = new ImageDimension
-                {
-                    Height = SelectedSize.NewHeight,
-                    Width = SelectedSize.NewWidth
-                };
-                var costume = CostumeHelper.Save(Image, CostumeName, newDimention, CurrentProject.BasePath);
-                _receivedSelectedSprite.Costumes.Costumes.Add(costume);
+                Height = SelectedSize.NewHeight,
+                Width = SelectedSize.NewWidth
+            };
 
-                ServiceLocator.NavigationService.RemoveBackEntry();
-                ServiceLocator.NavigationService.RemoveBackEntry();
-                ServiceLocator.NavigationService.NavigateBack();
-            }));
+            var costume = await CostumeHelper.Save(Image, CostumeName, newDimention, CurrentProject.BasePath);
+            _receivedSelectedSprite.Costumes.Costumes.Add(costume);
+
+            ServiceLocator.NavigationService.RemoveBackEntry();
+            ServiceLocator.NavigationService.RemoveBackEntry();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private void CancelAction()

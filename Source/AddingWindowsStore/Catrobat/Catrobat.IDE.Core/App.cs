@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Settings;
 using GalaSoft.MvvmLight;
@@ -66,7 +68,7 @@ namespace Catrobat.IDE.Core
             else
             {
                 context.LocalSettings = localSettings;
-                currentProject = CatrobatContext.LoadNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
+                currentProject = await CatrobatContext.LoadNewProjectByNameStatic(context.LocalSettings.CurrentProjectName);
             }
 
             return currentProject;

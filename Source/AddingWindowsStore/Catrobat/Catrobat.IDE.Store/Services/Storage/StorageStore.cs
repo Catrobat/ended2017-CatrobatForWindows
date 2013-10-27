@@ -222,12 +222,11 @@ namespace Catrobat.IDE.Store.Services.Storage
 
         public async Task DeleteDirectoryAsync(string path)
         {
-            if (path == "")
-                return; // TODO: check how to fix that
-
             var directory = await GetFolderAsync(path);
 
-            foreach (var folder in await directory.GetFoldersAsync())
+            var folders = await directory.GetFoldersAsync();
+
+            foreach (var folder in folders)
             {
                 var folderPath = Path.Combine(path, folder.Name);
                 await DeleteDirectoryAsync(folderPath);
@@ -238,7 +237,8 @@ namespace Catrobat.IDE.Store.Services.Storage
                 await file.DeleteAsync();
             }
 
-            await directory.DeleteAsync();
+            if(path != "")
+                await directory.DeleteAsync();
         }
 
         public async Task DeleteFileAsync(string path)
@@ -344,9 +344,9 @@ namespace Catrobat.IDE.Store.Services.Storage
                 case StorageFileMode.Create:
                 case StorageFileMode.CreateNew:
                     {
-                        await CreateFolderPath(Path.GetDirectoryName(path));
-                        var folder = await GetFolderAsync(folderPath);
-                        file = await folder.CreateFileAsync(fileName);
+                        var folder =  await CreateFolderPath(Path.GetDirectoryName(path));
+                        //var folder = await GetFolderAsync(folderPath);
+                        file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
                         break;
                     }
                 default:
@@ -385,8 +385,7 @@ namespace Catrobat.IDE.Store.Services.Storage
                     var writeableBitmap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
                     stream.Seek(0);
                     writeableBitmap.SetSource(stream);
-                    var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
-                        writeableBitmap.PixelHeight);
+                    var portableImage = new PortableImage(writeableBitmap);
                     return portableImage;
 
                 }
@@ -428,10 +427,10 @@ namespace Catrobat.IDE.Store.Services.Storage
                         try
                         {
                             var fileStream = OpenFile(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
-                            var writeableBitmap = new WriteableBitmap(thumbnailImage.Width, thumbnailImage.Height);
-                            writeableBitmap.FromByteArray(thumbnailImage.Data);
+                            //var writeableBitmap = new WriteableBitmap(thumbnailImage.Width, thumbnailImage.Height);
+                            //writeableBitmap.FromByteArray(thumbnailImage.Data);
 
-                            PNGWriter.WritePNG(writeableBitmap, fileStream, 95);
+                            PNGWriter.WritePNG((WriteableBitmap)thumbnailImage.ImageSource, fileStream, 95);
                         }
 
                         catch
@@ -476,18 +475,14 @@ namespace Catrobat.IDE.Store.Services.Storage
             {
                 stream = await OpenFileAsync(path, StorageFileMode.CreateNew, StorageFileAccess.Write);
 
-                var writeableBitmap = new WriteableBitmap(image.Width, image.Height);
-                writeableBitmap.FromByteArray(image.Data);
-
                 switch (format)
                 {
                     case ImageFormat.Png:
-                        throw new NotImplementedException();
-                        //PNGWriter.WritePNG(writeableBitmap, stream, 95);
+                        PNGWriter.WritePNG((WriteableBitmap)image.ImageSource, stream, 95);
                         break;
                     case ImageFormat.Jpg:
                         throw new NotImplementedException();
-                        //writeableBitmap.SaveJpeg(stream, image.Width, image.Height, 0, 95);
+                        //((WriteableBitmap)image.ImageSource).SaveJpeg(stream, image.Width, image.Height, 0, 95);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException("format");
@@ -549,23 +544,54 @@ namespace Catrobat.IDE.Store.Services.Storage
 
         #region Helpers
 
-        private async Task CreateFolderPath(string path)
+        public async Task<StorageFolder> CreateFolderPath(string path)
         {
+            if (path == "")
+                return ApplicationData.Current.LocalFolder;
+
             var subPath = Path.GetDirectoryName(path);
 
-            if (subPath == "")
-                return;
+            var parentFolder = await CreateFolderPath(subPath);
 
-            await CreateFolderPath(subPath);
+            if (parentFolder == null)
+                return null;
 
-            var folder = await GetFolderAsync(subPath);
-            var fileName = Path.GetFileName(path);
-            if (folder != null)
+            var folderName = Path.GetFileName(path);
+
+            try
             {
-                folder.CreateFolderAsync(fileName);
+                var folder = await parentFolder.GetFolderAsync(folderName);
+                return folder;
+            }
+            catch { }
+
+
+            var folders = await parentFolder.GetFoldersAsync();
+
+            foreach (var folder in folders)
+            {
+                
             }
 
-            path = subPath;
+            await parentFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
+            var newFolder = await parentFolder.GetFolderAsync(folderName);
+            return newFolder;
+
+            //var subPath = Path.GetDirectoryName(path);
+
+            //if (subPath == "")
+            //    return;
+
+            //await CreateFolderPath(subPath);
+
+            //var folder = await GetFolderAsync(subPath);
+            //var fileName = Path.GetFileName(path);
+            //if (folder != null)
+            //{
+            //    folder.CreateFolderAsync(fileName);
+            //}
+
+            //path = subPath;
         }
 
         public async Task<StorageFolder> GetFolderAsync(string path)
@@ -574,7 +600,6 @@ namespace Catrobat.IDE.Store.Services.Storage
                 return ApplicationData.Current.LocalFolder;
 
             var subPath = Path.GetDirectoryName(path);
-
 
             var parentFolder = await GetFolderAsync(subPath);
 
@@ -594,14 +619,18 @@ namespace Catrobat.IDE.Store.Services.Storage
             }
         }
 
-        private async Task<StorageFile> GetFileAsync(string path)
+        public async Task<StorageFile> GetFileAsync(string path, bool createIfExists = true)
         {
+            var fileName = Path.GetFileName(path);
             var folder = await GetFolderAsync(Path.GetDirectoryName(path));
 
             if (folder == null)
                 return null;
 
-            return await folder.GetFileAsync(Path.GetFileName(path));
+            if (createIfExists)
+                return await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
+
+            return await folder.GetFileAsync(fileName);
         }
 
 

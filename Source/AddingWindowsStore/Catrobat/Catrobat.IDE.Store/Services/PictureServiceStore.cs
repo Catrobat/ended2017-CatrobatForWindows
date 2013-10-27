@@ -42,8 +42,7 @@ namespace Catrobat.IDE.Store.Services
                 imagetobind.SetSource(filestream);
                 var writeableBuitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
                 await writeableBuitmap.FromStream(filestream);
-                var portableImage = new PortableImage(writeableBuitmap.ToByteArray(), 
-                    writeableBuitmap.PixelWidth, writeableBuitmap.PixelHeight);
+                var portableImage = new PortableImage(writeableBuitmap);
 
                 success(portableImage);
             }
@@ -69,8 +68,7 @@ namespace Catrobat.IDE.Store.Services
                 imagetobind.SetSource(filestream);
                 var writeableBuitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
                 await writeableBuitmap.FromStream(filestream);
-                var portableImage = new PortableImage(writeableBuitmap.ToByteArray(),
-                    writeableBuitmap.PixelWidth, writeableBuitmap.PixelHeight);
+                var portableImage = new PortableImage(writeableBuitmap);
 
                 success(portableImage);
             }

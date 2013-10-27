@@ -890,6 +890,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click &apos;+&apos; to add a new object..
+        /// </summary>
+        public static string Editor_ClickPlusToAddSprite {
+            get {
+                return ResourceManager.GetString("Editor_ClickPlusToAddSprite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Look name.
         /// </summary>
         public static string Editor_CostumeName {
@@ -2051,7 +2060,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pocket Code for Windows is an on-device visual programming language and set of creativity tools for Windows Phone 8 devices. It is inspired by the Scratch programming system developed by the Lifelong Kindergarten group at the MIT Media Lab. Pocket Code is an independent free and open source project developed by the Pocket Code team. Pocket Code for Windows is licensed under the MS-RL license..
+        ///   Looks up a localized string similar to Pocket Code for Windows Phone is an on-device visual programming system for the Catrobat programming language..
         /// </summary>
         public static string Main_AboutText {
             get {
@@ -2231,7 +2240,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current program.
+        ///   Looks up a localized string similar to Active program.
         /// </summary>
         public static string Main_HeaderCurrentProject {
             get {

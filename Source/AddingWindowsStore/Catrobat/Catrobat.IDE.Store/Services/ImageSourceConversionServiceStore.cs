@@ -48,5 +48,11 @@ namespace Catrobat.IDE.Store.Services
             outputWidth = writableBitmap.PixelWidth;
             outputHeight = writableBitmap.PixelWidth;
         }
+
+
+        public object ConvertFromEncodedStreeam(System.IO.MemoryStream encodedStream)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -34,23 +34,17 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             {
                 if (_projectScreenshot == null)
                 {
-                    var screenshotPath = Path.Combine(BasePath, ScreenshotPath);
+                    var manualScreenshotPath = Path.Combine(BasePath, ScreenshotPath);
                     var automaticProjectScreenshotPath = Path.Combine(BasePath, AutomaticScreenshotPath);
+                    _projectScreenshot = new PortableImage();
+                    _projectScreenshot.LoadAsync(manualScreenshotPath, automaticProjectScreenshotPath, false);
 
-                    using (var storage = StorageSystem.GetStorage())
+                    if (ProjectDummyHeader != null)
                     {
-                        if (storage.FileExists(screenshotPath))
-                            _projectScreenshot = storage.LoadImage(screenshotPath);
-                        else if (storage.FileExists(automaticProjectScreenshotPath))
-                            _projectScreenshot = storage.LoadImage(automaticProjectScreenshotPath);
+                        ProjectDummyHeader.Screenshot = _projectScreenshot;
                     }
-                    if(_projectScreenshot == null)
-                        return new PortableImage();
-                }
 
-                if (ProjectDummyHeader != null)
-                {
-                    ProjectDummyHeader.Screenshot = _projectScreenshot;
+                    return _projectScreenshot;
                 }
 
                 return _projectScreenshot;
@@ -58,18 +52,18 @@ namespace Catrobat.IDE.Core.CatrobatObjects
 
             set
             {
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    if (storage.FileExists(ScreenshotPath))
-                    {
-                        storage.DeleteFile(ScreenshotPath);
-                    }
+                //using (var storage = StorageSystem.GetStorage())
+                //{
+                //    if (storage.FileExists(ScreenshotPath))
+                //    {
+                //        storage.DeleteFile(ScreenshotPath);
+                //    }
 
-                    if(value != null && !value.IsEmpty)
-                        storage.SaveImage(ScreenshotPath, value, true, ImageFormat.Png);
-                }
+                //    if(value != null && !value.IsEmpty)
+                //        storage.SaveImage(ScreenshotPath, value, true, ImageFormat.Png);
+                //}
 
-                RaisePropertyChanged();
+                //RaisePropertyChanged();
             }
         }
 
@@ -124,24 +118,9 @@ namespace Catrobat.IDE.Core.CatrobatObjects
             get
             {
                 if (_projectDummyHeader != null)
-                {
                     return _projectDummyHeader;
-                }
 
-                PortableImage image = null;
-
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    var screenshotPath = Path.Combine(BasePath, ScreenshotPath);
-                    var automaticProjectScreenshotPath = Path.Combine(BasePath, AutomaticScreenshotPath);
-
-                    if (storage.FileExists(screenshotPath))
-                        image = storage.LoadImageThumbnail(screenshotPath);
-                    else if (storage.FileExists(automaticProjectScreenshotPath))
-                        image = storage.LoadImageThumbnail(automaticProjectScreenshotPath);
-                }
-
-                _projectDummyHeader = new ProjectDummyHeader { ProjectName = ProjectHeader.ProgramName, Screenshot = image };
+                _projectDummyHeader = new ProjectDummyHeader { ProjectName = ProjectHeader.ProgramName, Screenshot = ProjectScreenshot };
 
                 return _projectDummyHeader;
             }

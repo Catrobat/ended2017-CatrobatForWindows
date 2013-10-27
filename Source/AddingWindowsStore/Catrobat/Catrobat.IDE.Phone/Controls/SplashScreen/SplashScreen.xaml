@@ -24,8 +24,8 @@
         <StackPanel Grid.Row="0" Margin="12,17,0,28"/>
 
     <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-          <Image Source="/Content/Tiles/ApplicationIcon.png"></Image>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="-20,0,-40,160">
+          <Image Source="/Content/Images/Application/pocketcode01.png"></Image>
         </Grid>
     </Grid>
 

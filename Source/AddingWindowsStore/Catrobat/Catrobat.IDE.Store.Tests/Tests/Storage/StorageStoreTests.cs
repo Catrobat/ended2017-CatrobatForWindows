@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
+using Windows.Storage;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
@@ -218,53 +220,46 @@ namespace Catrobat.IDE.Store.Tests.Tests.Storage
         }
 
         [TestMethod]
-        public void LoadImageTest()
+        public async void LoadImageTest()
         {
-            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            using (var resource = (new ResourceLoaderFactoryStore()).CreateResourceLoader())
             {
-                using (var resource = (new ResourceLoaderFactoryStore()).CreateResourceLoader())
-                {
-                    var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
-                    CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
+                var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
+                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
 
-                    using (IStorage storage = new StorageStore())
-                    {
-                        var image = storage.LoadImage("TestLoadImage/screenshot.png");
-                        Assert.IsNotNull(image);
-                    }
+                using (IStorage storage = new StorageStore())
+                {
+                    var image = storage.LoadImage("TestLoadImage/screenshot.png");
+                    Assert.IsNotNull(image);
                 }
-            });
+            }
         }
 
         [TestMethod]
-        public void SaveImageTest()
+        public async void SaveImageTest()
         {
-            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            IStorage storage = new StorageStore();
+
+            using (var resource = (new ResourceLoaderFactoryStore()).CreateResourceLoader())
             {
-                IStorage storage = new StorageStore();
+                var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
+                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
 
-                using (var resource = (new ResourceLoaderFactoryStore()).CreateResourceLoader())
-                {
-                    var resourceStream = resource.OpenResourceStream(ResourceScope.TestsPhone, "SampleData/SampleProjects/test.catroid");
-                    CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, "TestLoadImage");
+                var image = storage.LoadImage("TestLoadImage/screenshot.png");
 
-                    var image = storage.LoadImage("TestLoadImage/screenshot.png");
+                //throw new NotImplementedException("TODO: check next line");
+                storage.SaveImage("TestLoadImage2/screenshot.png", image, true, ImageFormat.Png);
+                var image2 = storage.LoadImage("TestLoadImage2/screenshot.png");
 
-                    //throw new NotImplementedException("TODO: check next line");
-                    storage.SaveImage("TestLoadImage2/screenshot.png", image, true, ImageFormat.Png);
-                    var image2 = storage.LoadImage("TestLoadImage2/screenshot.png");
+                // TODO: Maybe check if pixels are corect?
 
-                    // TODO: Maybe check if pixels are corect?
-
-                    Assert.IsNotNull(image2);
-                }
-            });
+                Assert.IsNotNull(image2);
+            }
         }
 
         [TestMethod]
         public void ReadWriteTextFileTest()
         {
-            //TestHelper.InitializeAndClearCatrobatContext();
             IStorage storage = new StorageStore();
 
             storage.WriteTextFile("test.txt", "test123");
@@ -274,16 +269,62 @@ namespace Catrobat.IDE.Store.Tests.Tests.Storage
         [TestMethod]
         public void ReadWriteSerializableObjectTest()
         {
-            //TestHelper.InitializeAndClearCatrobatContext();
             IStorage storage = new StorageStore();
 
-            var settingsWrite = new LocalSettings();
-            settingsWrite.CurrentProjectName = "ProjectName";
+            var settingsWrite = new LocalSettings
+            {
+                CurrentProjectName = "ProjectName"
+            };
 
             storage.WriteSerializableObject("testobject", settingsWrite);
             var settingsRead = (LocalSettings)storage.ReadSerializableObject("testobject", settingsWrite.GetType());
 
             Assert.AreEqual("ProjectName", settingsRead.CurrentProjectName);
+        }
+
+        [TestMethod]
+        public async void CreateFolderTest()
+        {
+            const string folderName1 = "StorageStoreTests.CreateFolderTest";
+            const string folderName2 = "Folder2";
+            const string folderName3 = "Folder3";
+
+            var storage = new StorageStore();
+            await storage.CreateFolderPath(Path.Combine(folderName1, folderName2, folderName3));
+
+            var localFolder = ApplicationData.Current.LocalFolder;
+            var folder1 = await localFolder.GetFolderAsync(folderName1);
+            var folder2 = await folder1.GetFolderAsync(folderName2);
+            var folder3 = await folder2.GetFolderAsync(folderName3);
+
+            Assert.IsNotNull(folder3);
+        }
+
+        [TestMethod]
+        public async void GetFolderTest()
+        {
+            const string folderName1 = "StorageStoreTests.GetFolderTest";
+            const string folderName2 = "Folder2";
+            const string folderName3 = "Folder3";
+
+            var storage = new StorageStore();
+            await storage.CreateFolderPath(Path.Combine(folderName1, folderName2, folderName3));
+
+            var localFolder = ApplicationData.Current.LocalFolder;
+            await localFolder.CreateFolderAsync(folderName1);
+            var folder1 = await localFolder.GetFolderAsync(folderName1);
+            await localFolder.CreateFolderAsync(folderName2);
+            var folder2 = await localFolder.GetFolderAsync(folderName2);
+            await localFolder.CreateFolderAsync(folderName3);
+            var folder3 = await localFolder.GetFolderAsync(folderName3);
+        }
+
+        [TestMethod]
+        public async void GetFileTest()
+        {
+            IStorage storage = new StorageStore();
+
+
         }
     }
 }

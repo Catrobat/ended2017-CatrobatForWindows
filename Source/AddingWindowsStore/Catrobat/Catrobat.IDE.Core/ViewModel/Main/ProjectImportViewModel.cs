@@ -197,11 +197,9 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             {
                 var newProjectName = await ServiceLocator.ProjectImporterService.AcceptTempProject();
 
-                ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                {
                     if (CheckBoxMakeActiveIsChecked)
                     {
-                        var newProject = Catrobat.IDE.Core.CatrobatContext.LoadNewProjectByNameStatic(newProjectName);
+                        var newProject = await Catrobat.IDE.Core.CatrobatContext.LoadNewProjectByNameStatic(newProjectName);
 
                         var projectChangedMessage = new GenericMessage<Project>(newProject);
                         Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
@@ -211,7 +209,6 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                         var localProjectsChangedMessage = new MessageBase();
                         Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
                     }
-                });
 
                 ServiceLocator.DispatcherService.RunOnMainThread(() => ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel)));
             }

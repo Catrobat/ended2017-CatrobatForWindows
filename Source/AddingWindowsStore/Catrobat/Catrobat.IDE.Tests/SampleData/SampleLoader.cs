@@ -42,7 +42,7 @@ namespace Catrobat.IDE.Tests.SampleData
                 stream.Close();
                 stream.Dispose();
             }
-            return CatrobatContext.LoadNewProjectByNameStatic(sampleProjectName);
+            return await CatrobatContext.LoadNewProjectByNameStatic(sampleProjectName);
         }
     }
 }

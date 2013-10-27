@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities.Helpers;
@@ -71,7 +72,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Sounds
             return xRoot;
         }
 
-        public DataObject Copy()
+        public async Task<DataObject> Copy()
         {
             var newSoundInfo = new Sound(_name);
 
@@ -81,24 +82,21 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Sounds
 
             using (var storage = StorageSystem.GetStorage())
             {
-                //if (storage.FileExists(absoluteFileNameOld))
-                storage.CopyFile(absoluteFileNameOld, absoluteFileNameNew);
-                //else
-                //  MessageBox.Show("Der Klang konnte nicht kopiert werden.", "Kopieren nicht möglich", MessageBoxButton.OK); // TODO: is this used? names should be unique
+                await storage.CopyFileAsync(absoluteFileNameOld, absoluteFileNameNew);
             }
 
             return newSoundInfo;
         }
 
-        public void Delete()
+        public async Task Delete()
         {
             var path = XmlParserTempProjectHelper.Project.BasePath + "/" + Project.SoundsPath + "/" + _fileName;
 
             using (var storage = StorageSystem.GetStorage())
             {
-                if (storage.FileExists(path))
+                if (await storage.FileExistsAsync(path))
                 {
-                    storage.DeleteFile(path);
+                    await storage.DeleteFileAsync(path);
                 }
             }
         }

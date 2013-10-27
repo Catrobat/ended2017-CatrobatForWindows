@@ -64,6 +64,7 @@ namespace Catrobat.IDE.Core.ViewModel
             Core.Services.ServiceLocator.Register<NewCostumeSourceSelectionViewModel>(TypeCreationMode.Normal);
             Core.Services.ServiceLocator.Register<CostumeSavingViewModel>(TypeCreationMode.Normal);
             Core.Services.ServiceLocator.Register<EditorLoadingViewModel>(TypeCreationMode.Normal);
+            
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",

@@ -84,7 +84,7 @@ namespace Catrobat.IDE.Core.VersionConverter
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         error = VersionConverterError.ProjectCodeNotValid;
                     }
@@ -116,9 +116,11 @@ namespace Catrobat.IDE.Core.VersionConverter
             return inputVersion;
         }
 
-        public static string ConvertToXmlVersion(string projectCodePath, string targetVersion, out VersionConverterError error, bool overwriteProject = false)
+        public static async Task<VersionConverterResult> ConvertToXmlVersion(string projectCodePath, string targetVersion, bool overwriteProject = false)
         {
+            VersionConverterError error;
             var xml = "";
+
 
             if (!string.IsNullOrEmpty(projectCodePath))
             {
@@ -126,7 +128,7 @@ namespace Catrobat.IDE.Core.VersionConverter
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    projectCode = storage.ReadTextFile(projectCodePath);
+                    projectCode = await storage.ReadTextFileAsync(projectCodePath);
                 }
 
                 if (projectCode != null)
@@ -151,7 +153,7 @@ namespace Catrobat.IDE.Core.VersionConverter
                             {
                                 try
                                 {
-                                    storage.WriteTextFile(projectCodePath, xml);
+                                    await storage.WriteTextFileAsync(projectCodePath, xml);
                                 }
                                 catch
                                 {
@@ -175,15 +177,14 @@ namespace Catrobat.IDE.Core.VersionConverter
                 error = VersionConverterError.ProjectCodePathNotValid;
             }
 
-            return xml;
+            return new VersionConverterResult{Xml = xml, Error = error};
         }
 
-        public static string ConvertToXmlVersionByProjectName(string projectName, string targetVersion, out VersionConverterError error, bool overwriteProject = false)
+        public static async Task<VersionConverterResult> ConvertToXmlVersionByProjectName(string projectName, string targetVersion, bool overwriteProject = false)
         {
             var projectCodePath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.ProjectCodePath);
-
-            var xml = ConvertToXmlVersion(projectCodePath, targetVersion, out error, overwriteProject);
-            return xml;
+            var result = await ConvertToXmlVersion(projectCodePath, targetVersion, overwriteProject);
+            return result;
         }
     }
 }

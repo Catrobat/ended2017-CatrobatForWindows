@@ -16,19 +16,21 @@ namespace Catrobat.IDE.Core.UI.Converters
             }
             else
             {
-                try
-                {
-                    var image = new PortableImage();
-                    using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
-                    {
-                        image.LoadFromResources(ResourceScope.IdePhone, "Content/Images/Screenshot/NoScreenshot.png");
-                    }
-                    return image;
-                }
-                catch (Exception)
-                {
-                    return null;
-                }
+                return ManualImageCache.NoScreenshotImage;
+
+                //try
+                //{
+                //    var image = new PortableImage();
+                //    using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
+                //    {
+                //        image.LoadFromResources(ResourceScope.IdePhone, "Content/Images/Screenshot/NoScreenshot.png");
+                //    }
+                //    return image.ImageSource;
+                //}
+                //catch (Exception)
+                //{
+                //    return null;
+                //}
             }
         }
 
