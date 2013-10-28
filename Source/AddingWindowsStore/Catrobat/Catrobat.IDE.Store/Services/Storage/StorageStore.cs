@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Search;
 using Windows.UI.Xaml.Media.Imaging;
@@ -180,9 +182,6 @@ namespace Catrobat.IDE.Store.Services.Storage
         public async Task CreateDirectoryAsync(string path)
         {
             await CreateFolderPath(path);
-            //var parent = Path.GetPathRoot(path);
-            //var folder = await GetFolder(parent);
-            //await folder.CreateFolderAsync(path);
         }
 
         public async Task<bool> DirectoryExistsAsync(string path)
@@ -196,7 +195,7 @@ namespace Catrobat.IDE.Store.Services.Storage
             try
             {
                 var folder = await GetFileAsync(path, false);
-                return folder == null;
+                return folder != null;
             }
             catch (Exception)
             {
@@ -369,8 +368,6 @@ namespace Catrobat.IDE.Store.Services.Storage
 
         public async Task<PortableImage> LoadImageAsync(string pathToImage)
         {
-            pathToImage = pathToImage.Replace("\\", "/");
-
             if (await FileExistsAsync(pathToImage))
             {
                 try
@@ -380,12 +377,12 @@ namespace Catrobat.IDE.Store.Services.Storage
                     var file = await GetFileAsync(pathToImage);
                     var stream = await file.OpenAsync(FileAccessMode.Read);
                     bitmapImage.SetSource(stream);
-                    stream.Dispose();
 
                     var writeableBitmap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
                     stream.Seek(0);
                     writeableBitmap.SetSource(stream);
                     var portableImage = new PortableImage(writeableBitmap);
+                    // TODO: Dispose Stream?
                     return portableImage;
 
                 }
@@ -426,11 +423,20 @@ namespace Catrobat.IDE.Store.Services.Storage
 
                         try
                         {
-                            var fileStream = OpenFile(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
-                            //var writeableBitmap = new WriteableBitmap(thumbnailImage.Width, thumbnailImage.Height);
-                            //writeableBitmap.FromByteArray(thumbnailImage.Data);
+                            var bitmap = ((WriteableBitmap) thumbnailImage.ImageSource);
+                            var resolution = 100;
 
-                            PNGWriter.WritePNG((WriteableBitmap)thumbnailImage.ImageSource, fileStream, 95);
+                            var fileStream = await OpenFileAsync(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
+
+                            var encoderId = BitmapEncoder.PngEncoderId;
+                            var encoder = await  BitmapEncoder.CreateAsync(encoderId, fileStream.AsRandomAccessStream());
+                            encoder.SetPixelData(BitmapPixelFormat.Rgba8,
+                                                                 BitmapAlphaMode.Ignore,
+                                                                 (uint)bitmap.PixelWidth,
+                                                                 (uint)bitmap.PixelHeight,
+                                                                 resolution,
+                                                                 resolution,
+                                                                 bitmap.ToByteArray());
                         }
 
                         catch
@@ -500,7 +506,7 @@ namespace Catrobat.IDE.Store.Services.Storage
 
         public async Task<string> ReadTextFileAsync(string path)
         {
-            var file = await GetFileAsync(path);
+            var file = await GetFileAsync(path, false);
 
             if (file == null)
                 return null;
@@ -622,7 +628,8 @@ namespace Catrobat.IDE.Store.Services.Storage
         public async Task<StorageFile> GetFileAsync(string path, bool createIfExists = true)
         {
             var fileName = Path.GetFileName(path);
-            var folder = await GetFolderAsync(Path.GetDirectoryName(path));
+            var directoryName = Path.GetDirectoryName(path);
+            var folder = await GetFolderAsync(directoryName);
 
             if (folder == null)
                 return null;

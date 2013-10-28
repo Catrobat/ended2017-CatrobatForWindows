@@ -121,10 +121,18 @@
     </Compile>
     <Compile Include="AppStore.cs" />
     <Compile Include="AppCoreDesignStatic.cs" />
+    <Compile Include="Common\NavigationHelper.cs" />
+    <Compile Include="Common\ObservableDictionary.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
+    <Compile Include="Controls\Projects\LocalProjectControl.xaml.cs">
+      <DependentUpon>LocalProjectControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\NativeConverters\NativeImageSquareConverter.cs" />
     <Compile Include="Converters\PortableConverters.cs" />
     <Compile Include="Converters\PortableValueConverterStore.cs" />
     <Compile Include="Services\ColorConversionServiceStore.cs" />
@@ -149,9 +157,6 @@
     <Compile Include="Services\SystemInformationServiceStore.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
-    <Compile Include="Views\Main\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +164,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="Catrobat.IDE.Store_TemporaryKey.pfx" />
+    <Content Include="Common\ReadMe.txt" />
     <Content Include="Content\Images\Application\pocketcode01.png" />
     <Content Include="Content\Images\Pocketcode.svg" />
     <Content Include="Content\Images\Screenshot\NoScreenshot.png" />
@@ -194,15 +200,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\Projects\LocalProjectControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\SplashScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Converters\ConverterResources.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -234,7 +240,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Programs\Default\Sounds\" />
-    <Folder Include="Converters\NativeConverters\" />
+    <Folder Include="Views\Main\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
