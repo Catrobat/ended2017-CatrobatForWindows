@@ -22,7 +22,7 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
 
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
         {
-            _viewModel.ResetViewModelCommand.Execute(null);
+            _viewModel.GoBackCommand.Execute(null);
         }
 
 

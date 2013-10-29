@@ -1,10 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
-using System.Windows;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Resources.Localization;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -78,6 +76,11 @@ namespace Catrobat.IDE.Core.ViewModel.Settings
         private static void ShowLanguageSettingsAction()
         {
             ServiceLocator.NavigationService.NavigateTo(typeof(SettingsLanguageViewModel));
+        }
+
+        protected override void GoBackAction()
+        {
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         #endregion

@@ -25,8 +25,7 @@ namespace Catrobat.IDE.Phone.Views.Editor.Sprites
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            _viewModel.ResetViewModelCommand.Execute(null);
-            base.OnNavigatedFrom(e);
+            _viewModel.GoBackCommand.Execute(null);
         }
 
         private void TextBoxSpriteName_OnTextChanged(object sender, TextChangedEventArgs e)

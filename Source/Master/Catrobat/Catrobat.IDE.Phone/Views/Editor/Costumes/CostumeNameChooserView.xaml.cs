@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Navigation;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
@@ -20,6 +21,11 @@ namespace Catrobat.IDE.Phone.Views.Editor.Costumes
                     TextBoxCostumeName.Focus();
                     TextBoxCostumeName.SelectAll();
                 });
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            _viewModel.GoBackCommand.Execute(null);
         }
 
         private void TextBoxCostumeName_OnTextChanged(object sender, TextChangedEventArgs e)

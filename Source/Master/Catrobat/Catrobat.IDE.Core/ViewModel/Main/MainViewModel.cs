@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
@@ -12,7 +11,6 @@ using Catrobat.IDE.Core.ViewModel.Editor;
 using Catrobat.IDE.Core.ViewModel.Service;
 using Catrobat.IDE.Core.ViewModel.Settings;
 using Catrobat.IDE.Core.ViewModel.Share;
-using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
 using System;
 using System.Collections.Generic;
@@ -241,12 +239,6 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             private set;
         }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
-
         public ICommand ShowMessagesCommand
         {
             get;
@@ -391,9 +383,10 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             Task.Run(() => CatrobatWebCommunicationService.CheckToken(Context.CurrentToken, CheckTokenEvent));
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         private async void ShowMessagesAction()
@@ -475,7 +468,6 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             EditCurrentProjectCommand = new RelayCommand(EditCurrentProjectAction);
             PlayCurrentProjectCommand = new RelayCommand(PlayCurrentProjectAction);
             UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
             ShowMessagesCommand = new RelayCommand(ShowMessagesAction);
 
 

@@ -17,16 +17,9 @@ namespace Catrobat.IDE.Phone.Views.Main
             InitializeComponent();
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            
-            base.OnNavigatedFrom(e);
-        }
-
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            _viewModel.CancelCommand.Execute(null);
-            base.OnBackKeyPress(e);
+            _viewModel.GoBackCommand.Execute(null);
         }
 
 

@@ -1,17 +1,14 @@
-using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Settings;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;
 
 namespace Catrobat.IDE.Core
 {

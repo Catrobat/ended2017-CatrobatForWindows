@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -51,6 +52,11 @@ namespace Catrobat.IDE.Phone.Views.Main
             BuildApplicationBar();
 
             base.OnNavigatedTo(e);
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            _viewModel.GoBackCommand.Execute(null);
         }
 
         private void AddTile()
@@ -124,7 +130,7 @@ namespace Catrobat.IDE.Phone.Views.Main
 
             var buttonCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
             buttonCancel.Text = AppResources.Editor_ButtonCancel;
-            buttonCancel.Click += (sender, args) => Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.NavigateBack();
+            buttonCancel.Click += (sender, args) => ServiceLocator.NavigationService.NavigateBack();
             ApplicationBar.Buttons.Add(buttonCancel);
         }
     }

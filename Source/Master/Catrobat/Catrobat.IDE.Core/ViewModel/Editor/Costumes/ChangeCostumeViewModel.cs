@@ -5,7 +5,6 @@ using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -72,8 +71,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand { get; private set; }
-
         #endregion
 
         #region CommandCanExecute
@@ -93,7 +90,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             ServiceLocator.NavigationService.NavigateBack();
         }
 
-        private void CancelAction()
+        private static void CancelAction()
         {
             ServiceLocator.NavigationService.NavigateBack();
         }
@@ -153,9 +150,10 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
         //    ServiceLocator.NavigationService.NavigateBack();
         //}
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         #endregion
@@ -180,7 +178,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             EditCostumeCommand = new RelayCommand(EditCostumeAction);
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Costume>>(this, ViewModelMessagingToken.CostumeNameListener, ChangeCostumeNameMessageAction);

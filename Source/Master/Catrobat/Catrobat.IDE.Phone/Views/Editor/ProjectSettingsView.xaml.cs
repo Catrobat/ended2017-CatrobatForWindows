@@ -19,8 +19,7 @@ namespace Catrobat.IDE.Phone.Views.Editor
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            _viewModel.ResetViewModelCommand.Execute(null);
-            base.OnNavigatedFrom(e);
+            _viewModel.GoBackCommand.Execute(null);
         }
 
         private void TextBoxProjectName_OnTextChanged(object sender, TextChangedEventArgs e)

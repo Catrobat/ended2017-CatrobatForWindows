@@ -7,7 +7,6 @@ using Catrobat.IDE.Core.CatrobatObjects.Bricks;
 using Catrobat.IDE.Core.CatrobatObjects.Scripts;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -106,8 +105,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
         public ICommand AddNewScriptBrickCommand { get; private set; }
 
         public RelayCommand OnLoadBrickViewCommand { get; private set; }
-
-        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -210,9 +207,10 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
             }
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         #endregion
@@ -237,7 +235,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
         {
             AddNewScriptBrickCommand = new RelayCommand<DataObject>(AddNewScriptBrickAction);
             OnLoadBrickViewCommand = new RelayCommand(OnLoadBrickViewAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<List<Object>>>(this, ViewModelMessagingToken.ScriptBrickCollectionListener, ReceiveScriptBrickCollectionMessageAction);
             Messenger.Default.Register<GenericMessage<BrickCategory>>(this, ViewModelMessagingToken.ScriptBrickCategoryListener, ScriptBrickCategoryReceivedMessageAction);

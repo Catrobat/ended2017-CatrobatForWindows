@@ -1,7 +1,6 @@
 ﻿using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -61,6 +60,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             }
         }
 
+        protected override void GoBackAction()
+        {
+            ServiceLocator.NavigationService.NavigateBack();
+        }
+
         #endregion
 
         #region MessageActions
@@ -108,6 +112,5 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
         }
 
         #endregion
-
     }
 }

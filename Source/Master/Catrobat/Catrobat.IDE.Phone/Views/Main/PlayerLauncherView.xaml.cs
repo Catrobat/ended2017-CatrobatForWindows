@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Navigation;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Main;
@@ -11,12 +12,17 @@ namespace Catrobat.IDE.Phone.Views.Main
 {
     public partial class PlayerLauncherView : PhoneApplicationPage
     {
-        //TODO: maybe delete viewmodel
         private readonly PlayerLauncherViewModel _viewModel = 
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).PlayerLauncherViewModel;
+
         public PlayerLauncherView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            _viewModel.GoBackCommand.Execute(null);
         }
 
         private readonly Direct3DBackground _d3DBackground = new Direct3DBackground();

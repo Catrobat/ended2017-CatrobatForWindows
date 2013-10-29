@@ -1,5 +1,4 @@
-﻿using Catrobat.IDE.Core;
-using GalaSoft.MvvmLight;
+﻿using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Core.ViewModel.Settings
@@ -32,7 +31,10 @@ namespace Catrobat.IDE.Core.ViewModel.Settings
 
         #region Actions
 
-        
+        protected override void GoBackAction()
+        {
+            ServiceLocator.NavigationService.NavigateBack();
+        }
 
         #endregion
 

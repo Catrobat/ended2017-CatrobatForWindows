@@ -2,7 +2,6 @@
 using System.Windows.Input;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -42,6 +41,11 @@ namespace Catrobat.IDE.Core.ViewModel.Settings
         private void ActiveThemeChangedAction(Theme newTheme)
         {
             ThemeChooser.SelectedTheme = newTheme;
+            ServiceLocator.NavigationService.NavigateBack();
+        }
+
+        protected override void GoBackAction()
+        {
             ServiceLocator.NavigationService.NavigateBack();
         }
 

@@ -1,5 +1,4 @@
 ﻿using Catrobat.IDE.Core.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -81,6 +80,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
             Messenger.Default.Send(message, ViewModelMessagingToken.ScriptBrickCategoryListener);
 
             ServiceLocator.NavigationService.NavigateTo(typeof(AddNewScriptBrickViewModel));
+        }
+
+        protected override void GoBackAction()
+        {
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         #endregion

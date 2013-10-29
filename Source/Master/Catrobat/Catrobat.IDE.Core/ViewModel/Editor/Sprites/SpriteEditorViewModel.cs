@@ -15,7 +15,6 @@ using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
 using Catrobat.IDE.Core.ViewModel.Editor.Scripts;
 using Catrobat.IDE.Core.ViewModel.Editor.Sounds;
 using Catrobat.IDE.Core.ViewModel.Main;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -797,6 +796,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             }
         }
 
+        protected override void GoBackAction()
+        {
+            ServiceLocator.NavigationService.NavigateBack();
+        }
+
         #endregion
 
         #region MessageActions
@@ -954,10 +958,5 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
 
 
         #endregion
-
-        public override void Cleanup()
-        {
-            base.Cleanup();
-        }
     }
 }

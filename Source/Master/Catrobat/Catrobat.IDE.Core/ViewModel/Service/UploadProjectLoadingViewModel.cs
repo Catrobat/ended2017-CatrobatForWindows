@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Core.ViewModel.Service
 {
@@ -23,7 +23,10 @@ namespace Catrobat.IDE.Core.ViewModel.Service
 
         #region Actions
 
-
+        protected override void GoBackAction()
+        {
+            ServiceLocator.NavigationService.NavigateBack();
+        }
 
         #endregion
 

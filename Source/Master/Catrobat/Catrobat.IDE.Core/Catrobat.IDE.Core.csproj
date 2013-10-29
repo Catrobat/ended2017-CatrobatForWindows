@@ -287,6 +287,7 @@
     <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Share\ShareProjectServiceSelectionViewModel.cs" />
     <Compile Include="ViewModel\Share\UploadToSkyDriveViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ViewModelMessagingToken.cs" />
   </ItemGroup>

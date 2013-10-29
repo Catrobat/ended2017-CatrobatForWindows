@@ -17,6 +17,11 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             InitializeComponent();
         }
 
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            _viewModel.GoBackCommand.Execute(null);
+        }
+
         private void TextBoxLocalVariableName_KeyDown(object sender, KeyEventArgs e)
         {
             _viewModel.SelectedLocalVariable.Name = ((TextBox) sender).Text;

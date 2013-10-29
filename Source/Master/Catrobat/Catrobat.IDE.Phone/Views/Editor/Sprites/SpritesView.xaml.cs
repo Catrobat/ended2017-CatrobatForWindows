@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.Services;
+﻿using System.Windows.Navigation;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using Microsoft.Phone.Controls;
@@ -14,6 +15,11 @@ namespace Catrobat.IDE.Phone.Views.Editor.Sprites
         {
             InitializeComponent();
             //_viewModel.PropertyChanged += ViewModelOnPropertyChanged;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            _viewModel.GoBackCommand.Execute(null);
         }
 
         //private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs args)

@@ -5,7 +5,6 @@ using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Resources.Localization;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -51,8 +50,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
         public RelayCommand SaveCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
-
-        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -101,9 +98,10 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
             ServiceLocator.NavigationService.NavigateBack();
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         #endregion
@@ -125,7 +123,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
         {
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);

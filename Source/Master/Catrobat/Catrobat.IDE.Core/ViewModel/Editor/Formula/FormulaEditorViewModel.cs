@@ -1,9 +1,9 @@
 ﻿using Catrobat.IDE.Core.FormulaEditor.Editor;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.Formula;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Collections.Generic;
@@ -115,7 +115,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
         #region Actions
 
-        private void FormulaPartSelectedAction(IPortableUIFormula formula)
+        private static void FormulaPartSelectedAction(IPortableUIFormula formula)
         {
             bool wasSelected = formula.IsSelected;
 
@@ -174,6 +174,12 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
             FormulaButton.FormulaChanged();
             RaiseFormulaChanged(SelectedFormulaInformation);
+        }
+
+        protected override void GoBackAction()
+        {
+            ResetViewModel();
+            ServiceLocator.NavigationService.NavigateBack();
         }
 
         #endregion

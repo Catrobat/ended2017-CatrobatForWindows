@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Phone.Views.Main
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            _viewModel.ResetViewModelCommand.Execute(null);
+            _viewModel.GoBackCommand.Execute(null);
             base.OnNavigatedFrom(e);
         }
 

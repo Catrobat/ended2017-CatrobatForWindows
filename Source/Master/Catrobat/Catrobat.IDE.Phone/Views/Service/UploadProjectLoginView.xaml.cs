@@ -20,8 +20,7 @@ namespace Catrobat.IDE.Phone.Views.Service
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            _viewModel.ResetViewModelCommand.Execute(null);
-            base.OnNavigatedFrom(e);
+            _viewModel.GoBackCommand.Execute(null);
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
