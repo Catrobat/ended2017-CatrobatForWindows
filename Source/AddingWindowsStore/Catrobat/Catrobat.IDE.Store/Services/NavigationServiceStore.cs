@@ -57,33 +57,29 @@ namespace Catrobat.IDE.Store.Services
     {
         public static void RemoveBackEntry(this Frame frame)
         {
-            throw new NotImplementedException();
+            //var parts = frame.GetNavigationState().Split(',');
+            //var count = Int32.Parse(parts[1]);
 
-            // TODO: fix code below
+            //if (count > 1)
+            //{
+            //    int index1 = 3;
 
-            var parts = frame.GetNavigationState().Split(',');
-            var count = Int32.Parse(parts[1]);
+            //    // Find the beginning of the next-to-last entry
+            //    for (int i = 0; i < count - 2; i++)
+            //        index1 = FindNextEntry(parts, index1);
 
-            if (count > 2)
-            {
-                int index1 = 3;
+            //    // Find the beginning of the last entry
+            //    int index2 = FindNextEntry(parts, index1);
 
-                // Find the beginning of the next-to-last entry
-                for (int i = 0; i < count - 2; i++)
-                    index1 = FindNextEntry(parts, index1);
+            //    // Subtract 1 from the page count and 2 from the page index
+            //    parts[1] = (Int32.Parse(parts[1]) - 1).ToString();
+            //    parts[2] = (Int32.Parse(parts[2]) - 1).ToString();
 
-                // Find the beginning of the last entry
-                int index2 = FindNextEntry(parts, index1);
-
-                // Subtract 1 from the page count and 2 from the page index
-                parts[1] = (Int32.Parse(parts[1]) - 1).ToString();
-                parts[2] = (Int32.Parse(parts[2]) - 2).ToString();
-
-                // Stringify the results and navigate back two pages by calling SetNavigationState
-                var state = String.Join(",", parts, 0, index1) + "," +
-                            String.Join(",", parts, index2, parts.Length - index2);
-                frame.SetNavigationState(state);
-            }
+            //    // Stringify the results and navigate back two pages by calling SetNavigationState
+            //    var state = String.Join(",", parts, 0, index1) + "," +
+            //                String.Join(",", parts, index2, parts.Length - index2);
+            //    frame.SetNavigationState(state);
+            //}
         }
 
         private static int FindNextEntry(string[] entries, int index)
