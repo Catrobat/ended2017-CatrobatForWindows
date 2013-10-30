@@ -62,7 +62,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         protected override void GoBackAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion
@@ -108,7 +108,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         private void WrongImageFormatResult(MessageboxResult result)
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

@@ -179,7 +179,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

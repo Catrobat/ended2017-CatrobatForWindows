@@ -94,19 +94,19 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                     Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
                 }
 
-                ServiceLocator.NavigationService.NavigateBack();
+                base.GoBackAction();
             //});
         }
 
-        private static void CancelAction()
+        private void CancelAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

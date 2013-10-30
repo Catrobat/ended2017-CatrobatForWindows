@@ -50,7 +50,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
 
         protected override void GoBackAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
 

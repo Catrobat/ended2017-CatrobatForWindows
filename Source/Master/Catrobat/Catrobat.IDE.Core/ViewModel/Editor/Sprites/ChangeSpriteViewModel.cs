@@ -71,13 +71,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             ReceivedSprite.Name = SpriteName;
 
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void CancelAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void ChangeSpriteNameMessageAction(GenericMessage<Sprite> message)
@@ -89,7 +89,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

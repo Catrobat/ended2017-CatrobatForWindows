@@ -68,19 +68,19 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             CurrentProject.SpriteList.Sprites.Add(sprite);
 
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void CancelAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

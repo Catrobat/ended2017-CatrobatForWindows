@@ -88,20 +88,20 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
             ResetViewModel();
             ServiceLocator.NavigationService.RemoveBackEntry();
             ServiceLocator.NavigationService.RemoveBackEntry();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void CancelAction()
         {
             SoundName = null;
 
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

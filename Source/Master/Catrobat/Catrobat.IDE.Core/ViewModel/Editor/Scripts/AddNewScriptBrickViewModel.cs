@@ -168,7 +168,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
 
 
                 ServiceLocator.NavigationService.RemoveBackEntry();
-                ServiceLocator.NavigationService.NavigateBack();
+                base.GoBackAction();
 
                 _isAdding = false;
             }
@@ -210,7 +210,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

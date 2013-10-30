@@ -220,7 +220,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             }
 
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void AddVariableAction()
@@ -257,7 +257,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

@@ -227,7 +227,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
 
         protected override void GoBackAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

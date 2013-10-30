@@ -41,7 +41,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
 
         protected override void GoBackAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

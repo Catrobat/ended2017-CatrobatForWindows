@@ -51,7 +51,7 @@ namespace Catrobat.IDE.Phone.Services
             
         }
 
-        public void NavigateBack()
+        public void NavigateBack(object navigationObject)
         {
             ((PhoneApplicationFrame) Application.Current.RootVisual).GoBack();
         }

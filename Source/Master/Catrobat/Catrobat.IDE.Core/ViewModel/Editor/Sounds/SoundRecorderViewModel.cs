@@ -321,13 +321,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
             ServiceLocator.SoundRecorderService.StopRecording();
 
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

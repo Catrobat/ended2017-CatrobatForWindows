@@ -117,20 +117,20 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
                 await SelectedProject.Save();
             }
 
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
 
             await App.SaveContext(CurrentProject);
         }
 
-        private static void CancelAction()
+        private void CancelAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

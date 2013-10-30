@@ -144,7 +144,7 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             var projectChangedMessage = new MessageBase();
             Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.DownloadProjectStartedListener);
 
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void ReportAction()
@@ -160,7 +160,7 @@ namespace Catrobat.IDE.Core.ViewModel.Service
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

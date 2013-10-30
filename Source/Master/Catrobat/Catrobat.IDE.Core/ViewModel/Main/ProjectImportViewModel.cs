@@ -250,7 +250,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
         {
             ServiceLocator.ProjectImporterService.CancelImport();
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Core.Services
     {
         void NavigateTo(Type type);
 
-        void NavigateBack();
+        void NavigateBack(object navigationObject = null);
 
         void RemoveBackEntry();
 

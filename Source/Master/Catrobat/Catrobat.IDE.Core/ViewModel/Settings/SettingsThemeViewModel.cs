@@ -41,12 +41,12 @@ namespace Catrobat.IDE.Core.ViewModel.Settings
         private void ActiveThemeChangedAction(Theme newTheme)
         {
             ThemeChooser.SelectedTheme = newTheme;
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         protected override void GoBackAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

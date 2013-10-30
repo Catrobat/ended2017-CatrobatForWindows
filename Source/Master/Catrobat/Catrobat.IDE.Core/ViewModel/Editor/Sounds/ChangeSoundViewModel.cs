@@ -71,12 +71,12 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
         private void SaveAction()
         {
             ReceivedSound.Name = SoundName;
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
-        private static void CancelAction()
+        private void CancelAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void EditSoundAction()
@@ -87,7 +87,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

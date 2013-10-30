@@ -72,18 +72,18 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         private void SaveAction()
         {
             VariableHelper.AddGlobalVariable(CurrentProject, new UserVariable { Name = UserVariableName });
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
-        private static void CancelAction()
+        private void CancelAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
 

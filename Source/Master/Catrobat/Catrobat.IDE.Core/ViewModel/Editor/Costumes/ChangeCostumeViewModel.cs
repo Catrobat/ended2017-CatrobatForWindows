@@ -87,12 +87,12 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
         private void SaveAction()
         {
             ReceivedCostume.Name = CostumeName;
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
-        private static void CancelAction()
+        private void CancelAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void EditCostumeAction()
@@ -126,7 +126,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             }
 
             ServiceLocator.NavigationService.RemoveBackEntry();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         //private void OnPaintLauncherTaskImageChanged(PaintLauncherTask task)
@@ -147,13 +147,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
         //    }
 
         //    ServiceLocator.NavigationService.RemoveBackEntry();
-        //    ServiceLocator.NavigationService.NavigateBack();
+        //    base.GoBackAction();
         //}
 
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion

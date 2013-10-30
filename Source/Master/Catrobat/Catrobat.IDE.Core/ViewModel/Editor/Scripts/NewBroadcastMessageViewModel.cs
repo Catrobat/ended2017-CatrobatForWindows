@@ -72,7 +72,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
                 (_broadcastObject as BroadcastWaitBrick).BroadcastMessage = BroadcastMessage;
             }
 
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void ReceiveBroadcastObjectAction(GenericMessage<DataObject> message)
@@ -80,15 +80,15 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
             _broadcastObject = message.Content;
         }
 
-        private static void CancelAction()
+        private void CancelAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         protected override void GoBackAction()
         {
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion
