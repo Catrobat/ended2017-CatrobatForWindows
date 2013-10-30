@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public async void GetCostumeObjectTest()
+        public void GetCostumeObjectTest()
         {
             var project = ProjectGenerator.GenerateProject();
 

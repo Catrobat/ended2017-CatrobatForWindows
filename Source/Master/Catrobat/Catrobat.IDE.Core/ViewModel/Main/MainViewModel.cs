@@ -386,7 +386,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
         protected override void GoBackAction()
         {
             ResetViewModel();
-            base.GoBackAction();
+            //base.GoBackAction();
         }
 
         private async void ShowMessagesAction()

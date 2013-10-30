@@ -321,7 +321,7 @@ namespace Catrobat.IDE.Tests.Misc.Storage
 
         public PortableImage LoadImageThumbnail(string pathToImage)
         {
-            throw new NotImplementedException();
+            return null;
         }
         #endregion
 
