@@ -128,7 +128,22 @@
     <Compile Include="Controls\AppBar\EditorAppBar.xaml.cs">
       <DependentUpon>EditorAppBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BricksControls\MasterBrick.cs" />
+    <Compile Include="Controls\BricksControls\NormalBrick.cs" />
     <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
+    <Compile Include="Controls\FormulaControls\FormulaButton.xaml.cs">
+      <DependentUpon>FormulaButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FormulaControls\VariableButton.xaml.cs">
+      <DependentUpon>VariableButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GridViewEx.cs" />
+    <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
+      <DependentUpon>ListPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Pages\PageHeaderControl.xaml.cs">
+      <DependentUpon>PageHeaderControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Projects\LocalProjectControl.xaml.cs">
       <DependentUpon>LocalProjectControl.xaml</DependentUpon>
     </Compile>
@@ -158,6 +173,7 @@
     <Compile Include="Services\Storage\StorageFactoryStore.cs" />
     <Compile Include="Services\Storage\StorageStore.cs" />
     <Compile Include="Services\SystemInformationServiceStore.cs" />
+    <Compile Include="Content\Templates\ActionTemplateSelector.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -224,6 +240,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\FormulaControls\FormulaButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\VariableButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ListPicker\ListPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Pages\PageHeaderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Projects\LocalProjectControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -233,6 +265,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Converters\ConverterResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Templates\ScriptBrickTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -288,7 +324,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Programs\Default\Sounds\" />
-    <Folder Include="Content\Templates\" />
+    <Folder Include="Views\Editor\Scripts\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

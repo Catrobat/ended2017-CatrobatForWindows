@@ -8,6 +8,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:appBar="using:Catrobat.IDE.Store.Controls.AppBar"
+  xmlns:pages="using:Catrobat.IDE.Store.Controls.Pages"
   DataContext="{Binding SpritesViewModel, Source={ StaticResource Locator }}"
   mc:Ignorable="d">
 
@@ -23,20 +24,21 @@
     </Grid.RowDefinitions>
 
     <!-- Back button and page title -->
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="120"/>
-        <ColumnDefinition Width="*"/>
-      </Grid.ColumnDefinitions>
-      <Button Margin="39,59,39,0" Command="{Binding GoBackCommand}"
-                        Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        VerticalAlignment="Top"
-                        AutomationProperties.Name="Back"
-                        AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button"/>
-      <TextBlock Text="Objects" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-    </Grid>
+    <pages:PageHeaderControl BackCommand="{Binding GoBackCommand}">
+      <pages:PageHeaderControl.HeaderContent>
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+          <TextBlock Text="{Binding CurrentProject.ProjectHeader.ProgramName}" 
+                   Style="{StaticResource HeaderTextBlockStyle}"
+                   IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+          <TextBlock Text="-" 
+                   Style="{StaticResource HeaderTextBlockStyle}"
+                   IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+          <TextBlock Text="{Binding Resources.Editor_PivotObjects, Source={StaticResource LocalizedStrings}}" 
+                   Style="{StaticResource HeaderTextBlockStyle}" 
+                   IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+        </StackPanel>
+      </pages:PageHeaderControl.HeaderContent>
+    </pages:PageHeaderControl>
 
     <Grid Grid.Row="1" x:Name="LayoutRoot">
       <Grid>
@@ -135,9 +137,9 @@
               <local:AddNewSpriteView/>
             </Flyout>
           </appBar:EditorAppBar.NewFlyout>
-          
-          
-          </appBar:EditorAppBar>
+
+
+        </appBar:EditorAppBar>
       </Grid>
 
 

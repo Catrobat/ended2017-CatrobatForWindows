@@ -1,5 +1,5 @@
 ﻿<Page
-  x:Name="pageRoot"
+  x:Name="PageRoot"
   x:Class="Catrobat.IDE.Store.Views.Main.MainView"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,54 +9,32 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:buttons="using:Catrobat.IDE.Store.Controls.Buttons"
   xmlns:projects="using:Catrobat.IDE.Store.Controls.Projects"
+  xmlns:pages="using:Catrobat.IDE.Store.Controls.Pages"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
   mc:Ignorable="d">
 
-    <Page.Resources>
-        <x:String x:Key="ChevronGlyph">&#xE26B;</x:String>
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <Grid.ChildrenTransitions>
+      <TransitionCollection>
+        <EntranceThemeTransition/>
+      </TransitionCollection>
+    </Grid.ChildrenTransitions>
 
-        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+    <pages:PageHeaderControl ShowBackButton="False" Grid.Row="0"/>
 
-    </Page.Resources>
+    <Hub Grid.Row="1" Margin="0 -120 0 0">
 
-    <!--
-        This grid acts as a root panel for the page.
-    -->
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
-
-        <Hub>
-            <Hub.Header>
-                <!-- Back button and page title -->
-                <Grid>
-                    <!--<Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>-->
-                    <!--<Button  x:Name="backButton" Margin="0,0,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
-                        Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        VerticalAlignment="Top"
-                        AutomationProperties.Name="Back"
-                        AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button"/>-->
-                    <!--<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Top"/>-->
-                  <Image Source="/Content/Images/Application/pocketcode01.png" Height="230" Margin="-50 -170 -50 -150"></Image>
-                </Grid>
-            </Hub.Header>
-
-            <!--<HubSection Width="780" Margin="0,0,80,0">
+      <!--<HubSection Width="780" Margin="0,0,80,0">
                 <HubSection.Background>
                     <ImageBrush Stretch="UniformToFill" />
                 </HubSection.Background>
             </HubSection>-->
       <HubSection Width="500" Header="{Binding Resources.Main_HeaderCurrentProject, Source={StaticResource LocalizedStrings}}">
-                <DataTemplate>
+        <DataTemplate>
           <Grid Row="1">
             <Grid.RowDefinitions>
               <RowDefinition Height="Auto"/>
@@ -103,11 +81,11 @@
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="3" 
                                    Text="Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. "/>
                     </Grid>-->
-                </DataTemplate>
-            </HubSection>
+        </DataTemplate>
+      </HubSection>
 
       <HubSection Header="{Binding Resources.Main_HeaderLocalProjects, Source={StaticResource LocalizedStrings}}">
-                <DataTemplate>
+        <DataTemplate>
           <Grid>
             <Grid.RowDefinitions>
               <RowDefinition Height="Auto" />
@@ -154,8 +132,8 @@
               </GridView.ItemTemplate>
             </GridView>
           </Grid>
-                </DataTemplate>
-            </HubSection>
+        </DataTemplate>
+      </HubSection>
 
       <HubSection Width="520" Header="{Binding Resources.Main_HeaderAbout, Source={StaticResource LocalizedStrings}}">
         <DataTemplate>
@@ -180,5 +158,5 @@
         </DataTemplate>
       </HubSection>
     </Hub>
-    </Grid>
+  </Grid>
 </Page>

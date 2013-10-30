@@ -102,5 +102,10 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
         }
 
         #endregion
+
+        private void List_OnDrop(object sender, DragEventArgs e)
+        {
+            
+        }
     }
 }
