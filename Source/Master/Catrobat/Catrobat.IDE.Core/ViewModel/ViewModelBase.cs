@@ -11,6 +11,8 @@ namespace Catrobat.IDE.Core.ViewModel
 
         public object NavigationObject { protected get; set; }
 
+        public ViewModelBase SkipOnNavigation { protected get; set; }
+
         #endregion
 
 
