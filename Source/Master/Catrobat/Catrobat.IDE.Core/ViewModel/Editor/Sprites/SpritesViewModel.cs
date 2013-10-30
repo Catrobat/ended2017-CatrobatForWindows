@@ -177,12 +177,12 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
 
         private static void AddNewSpriteAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewSpriteViewModel));
+            ServiceLocator.NavigationService.NavigateTo<AddNewSpriteViewModel>();
         }
 
         private static void EditSpriteAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SpriteEditorViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SpriteEditorViewModel>();
         }
 
         private async void CopySpriteAction()

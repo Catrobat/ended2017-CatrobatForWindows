@@ -142,7 +142,7 @@ namespace Catrobat.IDE.Core.ViewModel.Service
 
         private void navigationCallback()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectViewModel));
+            ServiceLocator.NavigationService.NavigateTo<UploadProjectViewModel>();
         }
 
         private void MissingLoginDataCallback(MessageboxResult result)

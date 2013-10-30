@@ -86,7 +86,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             container.PropertyChanged += ContainerOnPropertyChanged;
             viewModel.SelectedVariableContainer = container;
 
-            Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(VariableSelectionViewModel));
+            Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.NavigateTo<VariableSelectionViewModel>();
         }
 
         private void ContainerOnPropertyChanged(object sender, PropertyChangedEventArgs args)

@@ -47,7 +47,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
             var message = new GenericMessage<BrickCategory>(BrickCategory.Motion);
             Messenger.Default.Send(message, ViewModelMessagingToken.ScriptBrickCategoryListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewScriptBrickViewModel));
+            ServiceLocator.NavigationService.NavigateTo<AddNewScriptBrickViewModel>();
         }
 
         private void LooksAction()
@@ -55,7 +55,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
             var message = new GenericMessage<BrickCategory>(BrickCategory.Looks);
             Messenger.Default.Send(message, ViewModelMessagingToken.ScriptBrickCategoryListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewScriptBrickViewModel));
+            ServiceLocator.NavigationService.NavigateTo<AddNewScriptBrickViewModel>();
         }
 
         private void SoundAction()
@@ -63,7 +63,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
             var message = new GenericMessage<BrickCategory>(BrickCategory.Sounds);
             Messenger.Default.Send(message, ViewModelMessagingToken.ScriptBrickCategoryListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewScriptBrickViewModel));
+            ServiceLocator.NavigationService.NavigateTo<AddNewScriptBrickViewModel>();
         }
 
         private void ControlAction()
@@ -71,7 +71,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
             var message = new GenericMessage<BrickCategory>(BrickCategory.Control);
             Messenger.Default.Send(message, ViewModelMessagingToken.ScriptBrickCategoryListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewScriptBrickViewModel));
+            ServiceLocator.NavigationService.NavigateTo<AddNewScriptBrickViewModel>();
         }
 
         private void VariablesAction()
@@ -79,7 +79,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
             var message = new GenericMessage<BrickCategory>(BrickCategory.Variables);
             Messenger.Default.Send(message, ViewModelMessagingToken.ScriptBrickCategoryListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewScriptBrickViewModel));
+            ServiceLocator.NavigationService.NavigateTo<AddNewScriptBrickViewModel>();
         }
 
         protected override void GoBackAction()

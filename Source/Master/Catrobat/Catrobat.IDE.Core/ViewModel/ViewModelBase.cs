@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Core.ViewModel
 
         public object NavigationObject { protected get; set; }
 
-        public Type SkipAndNavigateTo { protected get; set; }
+        public Type SkipAndNavigateTo { get; set; }
 
         #endregion
 

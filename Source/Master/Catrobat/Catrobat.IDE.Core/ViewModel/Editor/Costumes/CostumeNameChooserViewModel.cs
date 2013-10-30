@@ -132,7 +132,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             var message = new GenericMessage<PortableImage>(Image);
             Messenger.Default.Send(message, ViewModelMessagingToken.CostumeImageToSaveListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(CostumeSavingViewModel));
+            ServiceLocator.NavigationService.NavigateTo<CostumeSavingViewModel>();
 
             var newDimention = new ImageDimension
             {

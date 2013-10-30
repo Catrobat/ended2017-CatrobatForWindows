@@ -207,7 +207,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                         Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
                     }
 
-                ServiceLocator.DispatcherService.RunOnMainThread(() => ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel)));
+                ServiceLocator.DispatcherService.RunOnMainThread(() => ServiceLocator.NavigationService.NavigateTo<MainViewModel>());
             }
             catch
             {
@@ -220,7 +220,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
         private static void CancelAction()
         {
             ServiceLocator.ProjectImporterService.CancelImport();
-            ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
+            ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
         }
 
         private async void OnLoadAction(string fileToken)

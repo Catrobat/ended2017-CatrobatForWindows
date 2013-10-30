@@ -65,17 +65,17 @@ namespace Catrobat.IDE.Core.ViewModel.Settings
 
         private static void ShowDesignSettingsAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsThemeViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SettingsThemeViewModel>();
         }
 
         private static void ShowBrickSettingsAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsBrickViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SettingsBrickViewModel>();
         }
 
         private static void ShowLanguageSettingsAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsLanguageViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SettingsLanguageViewModel>();
         }
 
         protected override void GoBackAction()

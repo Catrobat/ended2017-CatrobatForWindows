@@ -254,7 +254,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             var message = new GenericMessage<ProjectDummyHeader>(project);
             Messenger.Default.Send(message, ViewModelMessagingToken.ChangeLocalProjectListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ProjectSettingsViewModel));
+            ServiceLocator.NavigationService.NavigateTo<ProjectSettingsViewModel>();
         }
 
         private void DeleteLocalProjectAction(string projectName)
@@ -280,7 +280,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             var message = new GenericMessage<ProjectDummyHeader>(PinProjectHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.PinProjectHeaderListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(TileGeneratorViewModel));
+            ServiceLocator.NavigationService.NavigateTo<TileGeneratorViewModel>();
         }
 
         private async void ShareLocalProjectAction(ProjectDummyHeader project)
@@ -293,7 +293,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             var message = new GenericMessage<ProjectDummyHeader>(PinProjectHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.ShareProjectHeaderListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ShareProjectServiceSelectionViewModel));
+            ServiceLocator.NavigationService.NavigateTo<ShareProjectServiceSelectionViewModel>();
         }
 
         private void LazyLoadOnlineProjectsAction()
@@ -351,23 +351,23 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         private void CreateNewProjectAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewProjectViewModel));
+            ServiceLocator.NavigationService.NavigateTo<AddNewProjectViewModel>();
         }
 
         private void EditCurrentProjectAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(EditorLoadingViewModel));
+            ServiceLocator.NavigationService.NavigateTo<EditorLoadingViewModel>();
         }
 
         private void SettingsAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SettingsViewModel>();
         }
 
         private void OnlineProjectTapAction(OnlineProjectHeader project)
         {
             SelectedOnlineProject = project;
-            ServiceLocator.NavigationService.NavigateTo(typeof(OnlineProjectViewModel));
+            ServiceLocator.NavigationService.NavigateTo<OnlineProjectViewModel>();
         }
 
         private void PlayCurrentProjectAction()
@@ -377,7 +377,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         private void UploadCurrentProjectAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectLoadingViewModel));
+            ServiceLocator.NavigationService.NavigateTo<UploadProjectLoadingViewModel>();
 
             // Determine which page to open
             Task.Run(() => CatrobatWebCommunicationService.CheckToken(Context.CurrentToken, CheckTokenEvent));
@@ -582,7 +582,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             {
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
-                    ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectViewModel));
+                    ServiceLocator.NavigationService.NavigateTo<UploadProjectViewModel>();
                     ServiceLocator.NavigationService.RemoveBackEntry();
                 });
             }
@@ -590,7 +590,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             {
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
-                    ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectLoginViewModel));
+                    ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
                     ServiceLocator.NavigationService.RemoveBackEntry();
                 });
             }

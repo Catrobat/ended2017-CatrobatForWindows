@@ -43,7 +43,7 @@ namespace Catrobat.IDE.Core.ViewModel.Share
 
         private void ShareWithSkydriveAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(UploadToSkyDriveViewModel));
+            ServiceLocator.NavigationService.NavigateTo<UploadToSkyDriveViewModel>();
         }
 
         protected override void GoBackAction()

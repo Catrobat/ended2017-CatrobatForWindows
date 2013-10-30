@@ -22,7 +22,7 @@ namespace Catrobat.IDE.Phone.Views.Editor
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SpritesViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SpritesViewModel>();
             ServiceLocator.NavigationService.RemoveBackEntry();
         }
 

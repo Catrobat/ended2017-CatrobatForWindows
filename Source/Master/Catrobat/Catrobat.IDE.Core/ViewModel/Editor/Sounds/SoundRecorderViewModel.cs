@@ -312,7 +312,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
 
         private static void SaveAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SoundNameChooserViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SoundNameChooserViewModel>();
         }
 
         private void CancelAction()

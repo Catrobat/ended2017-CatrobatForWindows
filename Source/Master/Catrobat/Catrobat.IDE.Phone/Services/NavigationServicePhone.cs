@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using Catrobat.IDE.Core.Services;
@@ -42,13 +43,18 @@ namespace Catrobat.IDE.Phone.Services
 
             try
             {
-                ((PhoneApplicationFrame) Application.Current.RootVisual).Navigate(new Uri(pathToXaml, UriKind.Relative));
+                ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri(pathToXaml, UriKind.Relative));
             }
             catch
             {
                 throw new Exception("Navigation not possible: " + pathToXaml);
             }
-            
+        }
+
+        public void NavigateTo<T>()
+        {
+            var type = typeof (T);
+            NavigateTo(type);
         }
 
         public void NavigateBack(object navigationObject)

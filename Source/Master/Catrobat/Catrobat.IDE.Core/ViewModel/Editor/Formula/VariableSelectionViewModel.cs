@@ -226,9 +226,9 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         private void AddVariableAction()
         {
             if (IsLocalView)
-                ServiceLocator.NavigationService.NavigateTo(typeof(AddNewLocalVariableViewModel));
+                ServiceLocator.NavigationService.NavigateTo<AddNewLocalVariableViewModel>();
             else
-                ServiceLocator.NavigationService.NavigateTo(typeof(AddNewGlobalVariableViewModel));
+                ServiceLocator.NavigationService.NavigateTo<AddNewGlobalVariableViewModel>();
         }
 
         private void DeleteVariableAction()
@@ -251,7 +251,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             var message = new GenericMessage<UserVariable>(selectedVariable);
             Messenger.Default.Send(message, ViewModelMessagingToken.SelectedUserVariableChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ChangeVariableViewModel));
+            ServiceLocator.NavigationService.NavigateTo<ChangeVariableViewModel>();
         }
 
         protected override void GoBackAction()

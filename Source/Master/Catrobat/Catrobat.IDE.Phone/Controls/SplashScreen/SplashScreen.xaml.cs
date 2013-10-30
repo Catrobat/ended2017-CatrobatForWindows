@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Phone.Controls.SplashScreen
             string fileToken;
             NavigationContext.QueryString.TryGetValue("fileToken", out fileToken);
 
-            if (!ViewModelBase.IsInDesignModeStatic)
+            if (!GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
                 Core.App.SetNativeApp(new AppPhone());
                 await Core.App.Initialize();
@@ -40,17 +40,17 @@ namespace Catrobat.IDE.Phone.Controls.SplashScreen
 
             if (isDirectPlayerLaunche)
             {
-                ServiceLocator.NavigationService.NavigateTo(typeof(PlayerLauncherViewModel));
+                ServiceLocator.NavigationService.NavigateTo<PlayerLauncherViewModel>();
             }
 
             if (fileToken != null)
             {
                 var viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).ProjectImportViewModel;
                 viewModel.OnLoadCommand.Execute(fileToken);
-                ServiceLocator.NavigationService.NavigateTo(typeof(ProjectImportViewModel));
+                ServiceLocator.NavigationService.NavigateTo<ProjectImportViewModel>();
             }
             else
-                ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
+                ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
         }
     }
 }
