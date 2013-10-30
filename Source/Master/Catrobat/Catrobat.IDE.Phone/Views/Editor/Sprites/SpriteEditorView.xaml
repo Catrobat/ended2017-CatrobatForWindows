@@ -104,7 +104,7 @@
           Foreground="White" >
               <reorderableListbox:ReorderListBox.ItemTemplate>
                 <DataTemplate>
-                  <Grid Background="{StaticResource CostumesBrush}" 
+                  <Grid Background="{Binding StaticTheme.CostumesBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                         Margin="0 5 0 5" Height="90" DataContext="{Binding}">
                     <Grid.ColumnDefinitions>
                       <ColumnDefinition Width="1*" />
@@ -147,7 +147,7 @@
             Foreground="White">
               <reorderableListbox:ReorderListBox.ItemTemplate>
                 <DataTemplate>
-                  <Grid Background="{StaticResource SoundsBrush}" Margin="0 5 0 5">
+                  <Grid Background="{Binding StaticTheme.SoundsBrush.NativeBrush, Source={StaticResource ThemeChooser}}" Margin="0 5 0 5">
                     <Grid.ColumnDefinitions>
                       <ColumnDefinition Width="1*" />
                       <ColumnDefinition Width="3*" />

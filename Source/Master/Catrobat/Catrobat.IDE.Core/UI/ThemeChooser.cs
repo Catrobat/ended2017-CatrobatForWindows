@@ -31,6 +31,12 @@ namespace Catrobat.IDE.Core.UI
             }
         }
 
+        private readonly StaticTheme _staticTheme = new StaticTheme();
+        public StaticTheme StaticTheme
+        {
+            get { return _staticTheme; }
+        }
+
         public int SelectedThemeIndex
         {
             get

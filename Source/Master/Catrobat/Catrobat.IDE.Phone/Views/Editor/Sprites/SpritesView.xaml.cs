@@ -1,4 +1,5 @@
-﻿using System.Windows.Navigation;
+﻿using System.ComponentModel;
+using System.Windows.Navigation;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
@@ -17,9 +18,11 @@ namespace Catrobat.IDE.Phone.Views.Editor.Sprites
             //_viewModel.PropertyChanged += ViewModelOnPropertyChanged;
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected override void OnBackKeyPress(CancelEventArgs e)
         {
             _viewModel.GoBackCommand.Execute(null);
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
         }
 
         //private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs args)

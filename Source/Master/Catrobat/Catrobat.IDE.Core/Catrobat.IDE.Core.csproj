@@ -223,6 +223,7 @@
     <Compile Include="UI\ImageSizeEntry.cs" />
     <Compile Include="UI\ImageSizeEntryCollection.cs" />
     <Compile Include="UI\NullItemCollection.cs" />
+    <Compile Include="UI\StaticTheme.cs" />
     <Compile Include="UI\Theme.cs" />
     <Compile Include="UI\ThemeChooser.cs" />
     <Compile Include="UI\VariableConteiner.cs" />

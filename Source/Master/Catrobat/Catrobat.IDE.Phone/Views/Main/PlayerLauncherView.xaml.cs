@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Navigation;
 using Catrobat.IDE.Core.Services;
@@ -20,9 +21,11 @@ namespace Catrobat.IDE.Phone.Views.Main
             InitializeComponent();
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected override void OnBackKeyPress(CancelEventArgs e)
         {
             _viewModel.GoBackCommand.Execute(null);
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
         }
 
         private readonly Direct3DBackground _d3DBackground = new Direct3DBackground();

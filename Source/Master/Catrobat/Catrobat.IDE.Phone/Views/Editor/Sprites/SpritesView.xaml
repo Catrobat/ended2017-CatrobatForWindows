@@ -46,7 +46,7 @@
           Foreground="White" >
         <reorderableListbox:ReorderListBox.ItemTemplate>
           <DataTemplate>
-            <Grid Background="{StaticResource ObjectsBrush}" Margin="0 5 0 5" Height="90">
+            <Grid Background="{Binding StaticTheme.ObjectsBrush.NativeBrush, Source={StaticResource ThemeChooser}}" Margin="0 5 0 5" Height="90">
               <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>

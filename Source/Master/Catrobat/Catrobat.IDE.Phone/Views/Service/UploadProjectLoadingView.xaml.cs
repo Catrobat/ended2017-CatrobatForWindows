@@ -31,6 +31,8 @@ namespace Catrobat.IDE.Phone.Views.Service
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
             _viewModel.GoBackCommand.Execute(null);
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
         }
     }
 }

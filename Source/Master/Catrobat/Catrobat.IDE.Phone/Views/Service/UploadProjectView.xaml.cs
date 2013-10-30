@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
@@ -21,9 +22,12 @@ namespace Catrobat.IDE.Phone.Views.Service
         {
             _viewModel.InitializeCommand.Execute(null);
         }
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
         {
             _viewModel.GoBackCommand.Execute(null);
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
