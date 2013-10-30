@@ -91,6 +91,10 @@ namespace Catrobat.IDE.Phone.Services.Storage
             var stream = OpenResourceStream(resourceScope, path);
             var image = new PortableImage();
             var memoryStream = new MemoryStream();
+
+            if (stream == null)
+                return null;
+
             stream.CopyTo(memoryStream);
             image.EncodedData = memoryStream;
             return image;

@@ -2,9 +2,9 @@
 using System.Reflection;
 using System.Windows;
 using Catrobat.IDE.Core.Services;
-using GalaSoft.MvvmLight;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
+using ViewModelBase = Catrobat.IDE.Core.ViewModel.ViewModelBase;
 
 namespace Catrobat.IDE.Phone.Services
 {
