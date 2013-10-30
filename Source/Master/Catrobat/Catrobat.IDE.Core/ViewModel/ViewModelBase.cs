@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.Services;
+﻿using System;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.Converters;
 using GalaSoft.MvvmLight.Command;
 
@@ -11,7 +12,7 @@ namespace Catrobat.IDE.Core.ViewModel
 
         public object NavigationObject { protected get; set; }
 
-        public ViewModelBase SkipOnNavigation { protected get; set; }
+        public Type SkipAndNavigateTo { protected get; set; }
 
         #endregion
 
