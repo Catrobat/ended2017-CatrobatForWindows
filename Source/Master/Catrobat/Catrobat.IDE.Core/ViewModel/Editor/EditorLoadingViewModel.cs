@@ -1,5 +1,6 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Core.ViewModel.Editor
@@ -57,6 +58,8 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
 
         public EditorLoadingViewModel()
         {
+            SkipAndNavigateTo = typeof (SpritesViewModel);
+
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
