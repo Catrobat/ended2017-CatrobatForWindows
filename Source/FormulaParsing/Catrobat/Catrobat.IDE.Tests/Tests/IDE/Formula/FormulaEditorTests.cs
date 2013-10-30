@@ -450,14 +450,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var nodeD = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "AND",
+                VariableValue = "LOGICAL_AND",
                 LeftChild = nodeC,
                 RightChild = nodeC
             };
             var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "OR",
+                VariableValue = "LOGICAL_OR",
                 LeftChild = nodeD,
                 RightChild = nodeD
             };
@@ -633,7 +633,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "GREATEREQUAL",
+                VariableValue = "GREATER_OR_EQUAL",
                 RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
@@ -642,7 +642,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
-                    VariableValue = "GREATER",
+                    VariableValue = "GREATER_THAN",
                     RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
@@ -651,7 +651,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                     LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
-                        VariableValue = "SMALLEREQUAL",
+                        VariableValue = "SMALLER_OR_EQUAL",
                         RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
@@ -660,7 +660,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                         LeftChild = new XmlFormulaTree
                         {
                             VariableType = "OPERATOR",
-                            VariableValue = "SMALLER",
+                            VariableValue = "SMALLER_THAN",
                             RightChild = new XmlFormulaTree
                             {
                                 VariableType = "NUMBER",
@@ -737,7 +737,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
-                    VariableValue = "DEVIDE",
+                    VariableValue = "DIVIDE",
                     RightChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
@@ -862,7 +862,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "OR",
+                VariableValue = "LOGICAL_OR",
                 LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
@@ -881,7 +881,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
-                    VariableValue = "AND",
+                    VariableValue = "LOGICAL_AND",
                     LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
@@ -948,11 +948,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "OR",
+                VariableValue = "LOGICAL_OR",
                 LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
-                    VariableValue = "AND",
+                    VariableValue = "LOGICAL_AND",
                     LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
@@ -967,7 +967,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
-                    VariableValue = "AND",
+                    VariableValue = "LOGICAL_AND",
                     LeftChild = new XmlFormulaTree
                     {
                         VariableType = "NUMBER",
@@ -1010,7 +1010,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "OR",
+                VariableValue = "LOGICAL_OR",
                 RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
@@ -1029,7 +1029,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
-                    VariableValue = "AND",
+                    VariableValue = "LOGICAL_AND",
                     RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
@@ -1166,7 +1166,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "AND",
+                VariableValue = "LOGICAL_AND",
                 RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
@@ -1267,7 +1267,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "AND",
+                VariableValue = "LOGICAL_AND",
                 RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
@@ -1437,10 +1437,10 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "OR",
+                VariableValue = "LOGICAL_OR",
                 LeftChild = new XmlFormulaTree
                 {
-                    VariableType = "OPERATOR",
+                    VariableType = "FUNCTION",
                     VariableValue = "FALSE"
                 },
                 RightChild = new XmlFormulaTree
@@ -1449,7 +1449,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                     VariableValue = "MINUS",
                     RightChild = new XmlFormulaTree
                     {
-                        VariableType = "OPERATOR",
+                        VariableType = "FUNCTION",
                         VariableValue = "TRUE"
                     }
                 }
@@ -1489,28 +1489,28 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "OR",
+                VariableValue = "LOGICAL_OR",
                 RightChild = new XmlFormulaTree
                 {
-                    VariableType = "OPERATOR",
+                    VariableType = "FUNCTION",
                     VariableValue = "TRUE"
                 },
                 LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
-                    VariableValue = "AND",
+                    VariableValue = "LOGICAL_AND",
                     RightChild = new XmlFormulaTree
                     {
-                        VariableType = "OPERATOR",
+                        VariableType = "FUNCTION",
                         VariableValue = "FALSE"
                     },
                     LeftChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
-                        VariableValue = "SMALLER",
+                        VariableValue = "SMALLER_THAN",
                         RightChild = new XmlFormulaTree
                         {
-                            VariableType = "OPERATOR",
+                            VariableType = "FUNCTION",
                             VariableValue = "TRUE"
                         },
                         LeftChild = new XmlFormulaTree
@@ -1519,7 +1519,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                             VariableValue = "MINUS",
                             RightChild = new XmlFormulaTree
                             {
-                                VariableType = "OPERATOR",
+                                VariableType = "FUNCTION",
                                 VariableValue = "FALSE"
                             },
                             LeftChild = new XmlFormulaTree
@@ -1528,7 +1528,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                                 VariableValue = "PLUS",
                                 RightChild = new XmlFormulaTree
                                 {
-                                    VariableType = "OPERATOR",
+                                    VariableType = "FUNCTION",
                                     VariableValue = "TRUE"
                                 },
                                 LeftChild = new XmlFormulaTree
@@ -1537,12 +1537,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                                     VariableValue = "MULT",
                                     RightChild = new XmlFormulaTree
                                     {
-                                        VariableType = "OPERATOR",
+                                        VariableType = "FUNCTION",
                                         VariableValue = "FALSE"
                                     },
                                     LeftChild = new XmlFormulaTree
                                     {
-                                        VariableType = "OPERATOR",
+                                        VariableType = "FUNCTION",
                                         VariableValue = "TRUE"
                                     }
                                 }
@@ -1606,15 +1606,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             selectedFromula.FormulaRoot.FormulaTree = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "AND",
+                VariableValue = "LOGICAL_AND",
                 LeftChild = new XmlFormulaTree
                 {
-                    VariableType = "OPERATOR",
+                    VariableType = "FUNCTION",
                     VariableValue = "FALSE"
                 },
                 RightChild = new XmlFormulaTree
                 {
-                    VariableType = "OPERATOR",
+                    VariableType = "FUNCTION",
                     VariableValue = "TRUE"
                 }
             };
@@ -1627,7 +1627,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "AND",
+                VariableValue = "LOGICAL_AND",
                 LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
@@ -1635,7 +1635,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 },
                 RightChild = new XmlFormulaTree
                 {
-                    VariableType = "OPERATOR",
+                    VariableType = "FUNCTION",
                     VariableValue = "TRUE"
                 }
             };
@@ -1973,24 +1973,24 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var expectedFormula = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "OR",
+                VariableValue = "LOGICAL_OR",
                 LeftChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
-                    VariableValue = "NOT",
+                    VariableValue = "LOGICAL_NOT",
                     RightChild = new XmlFormulaTree
                     {
-                        VariableType = "OPERATOR",
+                        VariableType = "FUNCTION",
                         VariableValue = "FALSE"
                     }
                 },
                 RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
-                        VariableValue = "NOT",
+                        VariableValue = "LOGICAL_NOT",
                         RightChild = new XmlFormulaTree
                         {
-                            VariableType = "OPERATOR",
+                            VariableType = "FUNCTION",
                             VariableValue = "TRUE"
                         }
                     }
@@ -2038,16 +2038,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var expectedFormula = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
-                    VariableValue = "OR",
+                    VariableValue = "LOGICAL_OR",
                     LeftChild = new XmlFormulaTree
                             {
-                                VariableType = "OPERATOR",
+                                VariableType = "FUNCTION",
                                 VariableValue = "FALSE"
                             },
                     RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
-                        VariableValue = "NOT",
+                        VariableValue = "LOGICAL_NOT",
                         RightChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
@@ -2269,7 +2269,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "FUNCTION",
-                VariableValue = "RANDOM",
+                VariableValue = "RAND",
                 LeftChild = new XmlFormulaTree()
                 {
                     VariableType = "NUMBER",
@@ -2558,7 +2558,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var node1 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "OR",
+                VariableValue = "LOGICAL_OR",
                 LeftChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
@@ -2573,7 +2573,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var node2 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "AND",
+                VariableValue = "LOGICAL_AND",
                 LeftChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
@@ -2589,7 +2589,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var node3 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "SMALLER",
+                VariableValue = "SMALLER_THAN",
                 LeftChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
@@ -2688,7 +2688,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                     RightChild = new XmlFormulaTree
                     {
                         VariableType = "OPERATOR",
-                        VariableValue = "AND",
+                        VariableValue = "LOGICAL_AND",
                         LeftChild = new XmlFormulaTree
                         {
                             VariableType = "NUMBER",
@@ -2744,7 +2744,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var node1 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "OR",
+                VariableValue = "LOGICAL_OR",
                 RightChild = new XmlFormulaTree
                 {
                     VariableType = "NUMBER",
@@ -2759,7 +2759,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var node2 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "AND",
+                VariableValue = "LOGICAL_AND",
                 RightChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
@@ -2775,7 +2775,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var node3 = new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "SMALLER",
+                VariableValue = "SMALLER_THAN",
                 RightChild = new XmlFormulaTree
                 {
                     VariableType = "BRACKET",
@@ -3607,7 +3607,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             expectedFormula = new XmlFormulaTree()
             {
                 VariableType = "OPERATOR",
-                VariableValue = "NOT"
+                VariableValue = "LOGICAL_NOT"
             };
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicNot));
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
@@ -3615,7 +3615,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
             expectedFormula = new XmlFormulaTree()
             {
-                VariableType = "OPERATOR",
+                VariableType = "FUNCTION",
                 VariableValue = "TRUE"
             };
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicTrue));
@@ -3624,7 +3624,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
             expectedFormula = new XmlFormulaTree()
             {
-                VariableType = "OPERATOR",
+                VariableType = "FUNCTION",
                 VariableValue = "FALSE"
             };
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.LogicFalse));

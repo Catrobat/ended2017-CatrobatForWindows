@@ -10,29 +10,32 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
     class FormulaParser
     {
 
-        public bool Parse(string input, out XmlFormulaTree formula, out IEnumerable<string> parsingErrors)
+        public bool Parse(string input, out IFormulaTree formula, out IEnumerable<string> parsingErrors)
         {
             // TODO: how to translate parsing errors?
             var parsingErrors2 = new List<string>();
             parsingErrors = parsingErrors2;
             if (string.IsNullOrWhiteSpace(input))
             {
-                formula = XmlFormulaTreeFactory.CreateDefaultNode(FormulaEditorKey.Number0);
+                formula = FormulaTreeFactory.CreateFormulaTree();
                 return true;
             }
             throw new NotImplementedException();
         }
 
-        private bool ParseNumber(string input, out XmlFormulaTree numberNode, ref List<string> parsingErrors)
+        private bool ParseNumber(string input, out IFormulaTree numberNode, ref List<string> parsingErrors)
         {
-            numberNode = XmlFormulaTreeFactory.CreateNumber(0);
-            return false;
+            numberNode = FormulaTreeFactory.CreateNumberNode(0);
+            throw new NotImplementedException();
+            return true;
         }
 
-        private bool ParseOperator(string input, out XmlFormulaTree operatorNode, ref List<string> parsingErrors)
+        private bool ParseOperator(string input, out IFormulaTree operatorNode, ref List<string> parsingErrors)
         {
-            operatorNode = XmlFormulaTreeFactory.CreateDefaultNode(FormulaEditorKey.MathExp);
-            return false;
+            throw new NotImplementedException();
+            //operatorNode = FormulaTreeFactory.CreateExponentialNode();
+            //operatorNode = FormulaTreeFactory.CreateSineNode();
+            return true;
         }
 
     }

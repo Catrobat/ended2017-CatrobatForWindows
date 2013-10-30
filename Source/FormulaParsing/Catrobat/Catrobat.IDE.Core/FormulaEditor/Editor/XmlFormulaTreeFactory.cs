@@ -98,10 +98,10 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
                 case FormulaEditorKey.NumberEquals:
                     return CreateOperator("EQUAL");
-                case FormulaEditorKey.Undo:
-                    return CreateOperator("UNDO");
-                case FormulaEditorKey.Redo:
-                    return CreateOperator("REDO");
+                //case FormulaEditorKey.Undo:
+                //    return CreateOperator("UNDO");
+                //case FormulaEditorKey.Redo:
+                //    return CreateOperator("REDO");
                 case FormulaEditorKey.Plus:
                     return CreateOperator("PLUS");
                 case FormulaEditorKey.Minus:
@@ -109,29 +109,29 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 case FormulaEditorKey.Multiply:
                     return CreateOperator("MULT");
                 case FormulaEditorKey.Divide:
-                    return CreateOperator("DEVIDE");
+                    return CreateOperator("DIVIDE");
                 case FormulaEditorKey.LogicEqual:
                     return CreateOperator("EQUAL");
                 case FormulaEditorKey.LogicNotEqual:
                     return CreateOperator("NOTEQUAL");
                 case FormulaEditorKey.LogicSmaller:
-                    return CreateOperator("SMALLER");
+                    return CreateOperator("SMALLER_THAN");
                 case FormulaEditorKey.LogicSmallerEqual:
-                    return CreateOperator("SMALLEREQUAL");
+                    return CreateOperator("SMALLER_OR_EQUAL");
                 case FormulaEditorKey.LogicGreater:
-                    return CreateOperator("GREATER");
+                    return CreateOperator("GREATER_THAN");
                 case FormulaEditorKey.LogicGreaterEqual:
-                    return CreateOperator("GREATEREQUAL");
+                    return CreateOperator("GREATER_OR_EQUAL");
                 case FormulaEditorKey.LogicAnd:
-                    return CreateOperator("AND");
+                    return CreateOperator("LOGICAL_AND");
                 case FormulaEditorKey.LogicOr:
-                    return CreateOperator("OR");
+                    return CreateOperator("LOGICAL_OR");
                 case FormulaEditorKey.LogicNot:
-                    return CreateOperator("NOT");
+                    return CreateOperator("LOGICAL_NOT");
                 case FormulaEditorKey.LogicTrue:
-                    return CreateOperator("TRUE");
+                    return CreateFunction("TRUE");
                 case FormulaEditorKey.LogicFalse:
-                    return CreateOperator("FALSE");
+                    return CreateFunction("FALSE");
 
                 case FormulaEditorKey.MathSin:
                     return CreateFunction("SIN", 0);
@@ -166,8 +166,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 case FormulaEditorKey.MathPi:
                     return CreateFunction("PI");
                 case FormulaEditorKey.MathRandom:
-                    return CreateFunction("RANDOM", 0, 1);
-
+                    return CreateFunction("RAND", 0, 1);
                 case FormulaEditorKey.OpenBracket:
                     return new XmlFormulaTree
                     {
@@ -213,9 +212,9 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 case SensorVariable.CompassDirection:
                     return CreateSensor("COMPASSDIRECTION");
                 case SensorVariable.InclinationX:
-                    return CreateSensor("INCLINATION_X");
+                    return CreateSensor("X_INCLINATION");
                 case SensorVariable.InclinationY:
-                    return CreateSensor("INCLINATION_Y");
+                    return CreateSensor("Y_INCLINATION");
                 default:
                     throw new NotImplementedException("Unknown sensor variable " + variable + ". ");
             }
@@ -229,12 +228,16 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                     return CreateSensor("BRIGHTNESS");
                 case ObjectVariable.Direction:
                     return CreateSensor("DIRECTION");
+                case ObjectVariable.GhostEffect:
+                    return CreateSensor("OBJECT_GHOSTEFFECT");
                 case ObjectVariable.Layer:
-                    return CreateSensor("LAYER");
+                    return CreateSensor("OBJECT_LAYER");
                 case ObjectVariable.PositionX:
                     return CreateSensor("OBJECT_X");
                 case ObjectVariable.PositionY:
                     return CreateSensor("OBJECT_Y");
+                case ObjectVariable.Rotation:
+                    return CreateSensor("OBJECT_ROTATION");
                 case ObjectVariable.Size:
                     return CreateSensor("SIZE");
                 case ObjectVariable.Transparency:

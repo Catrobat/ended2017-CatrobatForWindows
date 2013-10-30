@@ -19,8 +19,14 @@
 
     public enum ObjectVariable
     {
-        PositionX, PositionY, Transparency, Brightness,
-        Size, Direction, Layer
+        Brightness, 
+        Direction, 
+        GhostEffect, 
+        Layer, 
+        PositionX, PositionY, 
+        Transparency, 
+        Size, 
+        Rotation
     }
 
     public enum SensorVariable

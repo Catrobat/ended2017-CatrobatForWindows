@@ -13,6 +13,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         public string Serialize(IFormulaTree formula)
         {
             if (formula == null) return null;
+
             throw new NotImplementedException();
         }
 

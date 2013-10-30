@@ -544,7 +544,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             var operatorName = node.VariableValue;
             return 
                 operatorName == "MULT" || 
-                operatorName == "DEVIDE";
+                operatorName == "DIVIDE";
         }
 
         private static bool IsSucceedingOperator(XmlFormulaTree node)
@@ -561,20 +561,20 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             return
                 operatorName == "EQUAL" ||
                 operatorName == "NOTEQUAL" ||
-                operatorName == "SMALLER" ||
-                operatorName == "SMALLEREQUAL" ||
-                operatorName == "GREATER" ||
-                operatorName == "GREATEREQUAL";
+                operatorName == "SMALLER_THAN" ||
+                operatorName == "SMALLER_OR_EQUAL" ||
+                operatorName == "GREATER_THAN" ||
+                operatorName == "GREATER_OR_EQUAL";
         }
 
         private static bool IsLogicAnd(XmlFormulaTree node)
         {
-            return (node.VariableValue == "AND");
+            return (node.VariableValue == "LOGICAL_AND");
         }
 
         private static bool IsLogicOr(XmlFormulaTree node)
         {
-            return (node.VariableValue == "OR");
+            return (node.VariableValue == "LOGICAL_OR");
         }
 
         private static bool IsMinusOperator(XmlFormulaTree node)

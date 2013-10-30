@@ -1,9 +1,9 @@
-﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
+﻿using System.Collections.Generic;
+
+namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 {
     interface IFormulaTree
     {
-        IFormulaTree LeftChild { get; }
-
-        IFormulaTree RightChild { get; }
+        IEnumerable<IFormulaTree> Children { get; }
     }
 }
