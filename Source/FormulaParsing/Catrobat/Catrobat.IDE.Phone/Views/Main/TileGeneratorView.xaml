@@ -73,7 +73,7 @@
                       <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid Background="#AA000000">
-                      <TextBlock Grid.Row="0" Text="ProjectName" Name="TextBlockTiteNormal" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" FontSize="14"></TextBlock>
+                      <TextBlock Grid.Row="0" Text="Default Project" Name="TextBlockTiteNormal" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" FontSize="14"></TextBlock>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -97,7 +97,7 @@
                   <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Margin="10">
-                  <TextBlock Name="TextBlockTiteWide" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="30"></TextBlock>
+                  <TextBlock Name="TextBlockTiteWide" Text="Default Project" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="30"></TextBlock>
                 </Grid>
                 <Image Grid.Column="1" Height="168" Name="ImageWideTile" Source="/Content/Resources/DesignTime/screenshot.png"></Image>
               </Grid>

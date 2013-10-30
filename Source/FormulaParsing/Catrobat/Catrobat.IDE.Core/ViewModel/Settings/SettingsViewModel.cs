@@ -1,10 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
-using System.Windows;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Resources.Localization;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -67,17 +65,22 @@ namespace Catrobat.IDE.Core.ViewModel.Settings
 
         private static void ShowDesignSettingsAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsThemeViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SettingsThemeViewModel>();
         }
 
         private static void ShowBrickSettingsAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsBrickViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SettingsBrickViewModel>();
         }
 
         private static void ShowLanguageSettingsAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsLanguageViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SettingsLanguageViewModel>();
+        }
+
+        protected override void GoBackAction()
+        {
+            base.GoBackAction();
         }
 
         #endregion

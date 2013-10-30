@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Sounds
@@ -40,19 +41,19 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Sounds
             return xRoot;
         }
 
-        public DataObject Copy()
+        public async Task<DataObject> Copy()
         {
             var newSoundList = new SoundList();
             foreach (Sound info in Sounds)
-                newSoundList.Sounds.Add(info.Copy() as Sound);
+                newSoundList.Sounds.Add(await info.Copy() as Sound);
 
             return newSoundList;
         }
 
-        public void Delete()
+        public async Task Delete()
         {
             foreach (Sound sound in Sounds)
-                sound.Delete();
+                await sound.Delete();
         }
 
         public override bool Equals(DataObject other)

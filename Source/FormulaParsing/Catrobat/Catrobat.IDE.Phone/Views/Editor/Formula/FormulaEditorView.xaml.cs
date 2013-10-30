@@ -29,6 +29,17 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             FormulaKeyboard.EvaluatePresed += EvaluatePresed;
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            _viewModel.Cleanup();
+        }
+
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            _viewModel.GoBackCommand.Execute(null);
+        }
+
         private void ErrorOccurred()
         {
             ShowKeyErrorAnimation();
@@ -62,12 +73,6 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
         {
             //TODO: implement me
             //throw new NotImplementedException();
-        }
-
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            _viewModel.Cleanup();
         }
     }
 }

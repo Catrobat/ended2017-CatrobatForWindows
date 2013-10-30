@@ -15,7 +15,6 @@ namespace Catrobat.IDE.Core.Resources
     {
         private readonly Dictionary<string, string> _sampleProjectNames = new Dictionary<string, string>
         {
-            {"Whack_A_Mole.catrobat", "Whack A Mole"},
             {"stick.catrobat", "stick"}
         };
 
@@ -23,7 +22,7 @@ namespace Catrobat.IDE.Core.Resources
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                storage.DeleteDirectory("");
+                await storage.DeleteDirectoryAsync("");
             }
 
             foreach (KeyValuePair<string, string> pair in _sampleProjectNames)
@@ -37,7 +36,7 @@ namespace Catrobat.IDE.Core.Resources
                 try
                 {
                     var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader();
-                    resourceStream = resourceLoader.OpenResourceStream(ResourceScope.Resources, path);
+                    resourceStream = await resourceLoader.OpenResourceStreamAsync(ResourceScope.Resources, path);
                     
 
                     if (resourceStream != null)
@@ -46,7 +45,7 @@ namespace Catrobat.IDE.Core.Resources
 
                         using (var storage = StorageSystem.GetStorage())
                         {
-                            if (!storage.DirectoryExists(projectFolderPath))
+                            if (!await storage.DirectoryExistsAsync(projectFolderPath))
                             {
                                 await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContextBase.ProjectsPath + "/" + projectName);
                             }

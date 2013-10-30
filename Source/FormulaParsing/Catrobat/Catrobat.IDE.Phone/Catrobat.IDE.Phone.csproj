@@ -101,6 +101,7 @@
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\NativeConverters\NativeImageSquareConverter.cs" />
     <Compile Include="Converters\PortableConverters.cs" />
     <Compile Include="Converters\PortableValueConverterPhone.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -166,6 +167,7 @@
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ActionTemplateServicePhone.cs" />
     <Compile Include="Services\ColorConversionServicePhone.cs" />
     <Compile Include="Services\CultureServicePhone.cs" />
     <Compile Include="Services\DispatcherServicePhone.cs" />
@@ -187,6 +189,8 @@
     <Compile Include="Services\Storage\StoragePhone.cs" />
     <Compile Include="Services\SystemInformationServicePhone.cs" />
     <Compile Include="Utilities\AssociationUriMapper.cs" />
+    <Compile Include="Utilities\AsyncRunner.cs" />
+    <Compile Include="Utilities\Semaphore.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
     <Compile Include="Views\Editor\Costumes\ChangeCostumeView.xaml.cs">
@@ -775,7 +779,6 @@
   <ItemGroup>
     <Folder Include="Content\Libs\" />
     <Folder Include="Content\Programs\Default\Sounds\" />
-    <Folder Include="Converters\NativeConverters\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

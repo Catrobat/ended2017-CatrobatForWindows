@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core;
+﻿using System.Threading.Tasks;
+using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
@@ -19,7 +20,7 @@ namespace Catrobat.IDE.Phone.Tests.SampleData
       using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
       {
         Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestsPhone, path + sampleName + ".xml");
-        StreamReader reader = new StreamReader(stream);
+        var reader = new StreamReader(stream);
 
         xml = reader.ReadToEnd();
         reader.Close();
@@ -36,7 +37,7 @@ namespace Catrobat.IDE.Phone.Tests.SampleData
       using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
       {
         Stream stream = resourceLoader.OpenResourceStream(ResourceScope.TestsPhone, path + sampleName + ".xml");
-        StreamReader reader = new StreamReader(stream);
+        var reader = new StreamReader(stream);
 
         xml = reader.ReadToEnd();
         reader.Close();
@@ -47,16 +48,16 @@ namespace Catrobat.IDE.Phone.Tests.SampleData
       return XDocument.Load(new StringReader(xml));
     }
 
-    public static Project LoadSampleProject(string sampleName, string sampleProjectName)
+    public static async Task<Project> LoadSampleProject(string sampleName, string sampleProjectName)
     {
         using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
         {
             var stream = resourceLoader.OpenResourceStream(ResourceScope.TestsPhone, path + sampleName);
-            CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
+            await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, CatrobatContextBase.ProjectsPath + "/" + sampleProjectName);
             stream.Close();
             stream.Dispose();
         }
-        return CatrobatContext.LoadNewProjectByNameStatic(sampleProjectName);
+        return await CatrobatContext.LoadNewProjectByNameStatic(sampleProjectName);
     }
   }
 }

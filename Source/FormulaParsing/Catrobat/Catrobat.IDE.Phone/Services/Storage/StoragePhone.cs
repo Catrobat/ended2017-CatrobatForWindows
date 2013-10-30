@@ -6,10 +6,12 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Phone.Utilities;
 using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDE.Phone.Services.Storage
@@ -242,8 +244,6 @@ namespace Catrobat.IDE.Phone.Services.Storage
             {
                 try
                 {
-                    //var bitmapImage = new BitmapImage();
-
                     using (var storageFileStream = _iso.OpenFile(pathToImage,
                                                                  FileMode.Open,
                                                                  FileAccess.Read))
@@ -253,16 +253,6 @@ namespace Catrobat.IDE.Phone.Services.Storage
                         storageFileStream.CopyTo(memoryStream);
                         image.EncodedData = memoryStream;
                         return image;
-
-                        //bitmapImage.SetSource(storageFileStream);
-                        //storageFileStream.Close();
-                        //storageFileStream.Dispose();
-
-
-                        //var writeableBitmap = new WriteableBitmap(bitmapImage);
-                        //var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
-                        //    writeableBitmap.PixelHeight);
-                        //return portableImage;
                     }
                 }
                 catch {} //TODO: Exception message. Maybe logging?
@@ -325,9 +315,8 @@ namespace Catrobat.IDE.Phone.Services.Storage
             try
             {
                 stream = _iso.OpenFile(path, FileMode.CreateNew, FileAccess.Write);
-
-                var writeableBitmap = new WriteableBitmap(image.Width, image.Height);
-                writeableBitmap.FromByteArray(image.Data);
+                WriteableBitmap writeableBitmap = null;
+                writeableBitmap = new WriteableBitmap((BitmapSource) image.ImageSource);
 
                 switch (format)
                 {
@@ -483,7 +472,8 @@ namespace Catrobat.IDE.Phone.Services.Storage
 
         public PortableImage CreateThumbnail(PortableImage image)
         {
-            return ServiceLocator.ImageResizeService.ResizeImage(image, _imageThumbnailDefaultMaxWidthHeight);
+            return image;
+            //return ServiceLocator.ImageResizeService.ResizeImage(image, _imageThumbnailDefaultMaxWidthHeight);
         }
 
 
@@ -574,7 +564,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
 
         public Task SaveImageAsync(string path, PortableImage image, bool deleteExisting, ImageFormat format)
         {
-            return Task.Run(() => SaveImage(path, image, deleteExisting, format));
+            return AsyncRunner.RunAsyncOnMainThread(() => SaveImage(path, image, deleteExisting, format));
         }
 
         public Task<string> ReadTextFileAsync(string path)

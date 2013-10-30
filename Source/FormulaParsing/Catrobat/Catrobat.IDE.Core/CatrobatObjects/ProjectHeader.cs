@@ -208,7 +208,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    storage.RenameDirectory("Projects/" + _programName, value);
+                    storage.RenameDirectory("Projects/" + _programName, value); // TODO: async, remove that and move it to async methode
                 }
 
                 _programName = value;

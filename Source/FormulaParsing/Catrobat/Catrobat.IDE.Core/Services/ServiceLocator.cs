@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Core.Services
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
         public static INavigationService NavigationService
-        { get { return GetInstance<INavigationService>(); } }
+        { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
@@ -118,6 +118,14 @@ namespace Catrobat.IDE.Core.Services
         public static IPortableUIElementConversionService PortableUIElementConversionService
         { get { return GetInstance<IPortableUIElementConversionService>(); } }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IActionTemplateService ActionTemplateService
+        { get { return GetInstance<IActionTemplateService>(); } }
+
+
+
         public static object ViewModelLocator { get; set; }
 
         public static object ThemeChooser { get; set; }
@@ -143,7 +151,7 @@ namespace Catrobat.IDE.Core.Services
             }
         }
 
-        public static T GetInstance<T>()
+        public static object GetInstance(Type type)
         {
             lock (Instances)
             {
@@ -152,9 +160,9 @@ namespace Catrobat.IDE.Core.Services
 
                 foreach (var pair in Instances)
                 {
-                    if (pair.Key.GetTypeInfo().BaseType == typeof(T)
-                        || pair.Key == typeof(T)
-                        || pair.Key.GetTypeInfo().ImplementedInterfaces.Contains(typeof(T)))
+                    if (pair.Key.GetTypeInfo().BaseType == type
+                        || pair.Key == type
+                        || pair.Key.GetTypeInfo().ImplementedInterfaces.Contains(type))
                     {
                         instance = pair.Value;
 
@@ -168,16 +176,19 @@ namespace Catrobat.IDE.Core.Services
                 }
 
                 if (instance == null)
-                    throw new Exception("Type " + typeof(T).GetTypeInfo().Name + " is not registered.");
+                    throw new Exception("Type " + type.GetTypeInfo().Name + " is not registered.");
 
                 if (!isInDictionary)
-                    Instances[typeof(T)] = instance;
+                    Instances[type] = instance;
 
-                return (T)instance;
+                return instance;
             }
         }
 
-
+        public static T GetInstance<T>()
+        {
+            return (T) GetInstance(typeof (T));
+        }
 
         internal static void UnRegisterAll()
         {

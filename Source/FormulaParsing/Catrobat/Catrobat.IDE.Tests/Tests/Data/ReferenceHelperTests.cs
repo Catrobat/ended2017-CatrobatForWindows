@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public async void GetCostumeObjectTest()
+        public void GetCostumeObjectTest()
         {
             var project = ProjectGenerator.GenerateProject();
 
@@ -379,7 +379,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[0];
-            var newSprite = oldSprite.Copy() as Sprite;
+            var newSprite = await oldSprite.Copy() as Sprite;
             Assert.IsNotNull(newSprite);
 
             var oldCostume = oldSprite.Costumes.Costumes[0];
@@ -399,7 +399,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[1];
-            var newSprite = oldSprite.Copy() as Sprite;
+            var newSprite = await oldSprite.Copy() as Sprite;
             Assert.IsNotNull(newSprite);
 
             var oldSound = oldSprite.Sounds.Sounds[0];
@@ -419,7 +419,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[0];
-            var newSprite = oldSprite.Copy() as Sprite;
+            var newSprite = await oldSprite.Copy() as Sprite;
             Assert.IsNotNull(newSprite);
 
             var oldVariable = project.VariableList.ObjectVariableList.ObjectVariableEntries[0].VariableList.UserVariables[0];
@@ -435,7 +435,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
 
             oldSprite = project.SpriteList.Sprites[1];
-            newSprite = oldSprite.Copy() as Sprite;
+            newSprite = await oldSprite.Copy() as Sprite;
             Assert.IsNotNull(newSprite);
 
             oldVariable = project.VariableList.ProgramVariableList.UserVariables[0];
@@ -455,7 +455,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[1];
-            var newSprite = oldSprite.Copy() as Sprite;
+            var newSprite = await oldSprite.Copy() as Sprite;
 
             Assert.IsNotNull(newSprite);
 
@@ -488,7 +488,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[1];
-            var newSprite = oldSprite.Copy() as Sprite;
+            var newSprite = await oldSprite.Copy() as Sprite;
 
             Assert.IsNotNull(newSprite);
 
@@ -521,7 +521,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[0];
-            var newSprite = oldSprite.Copy() as Sprite;
+            var newSprite = await oldSprite.Copy() as Sprite;
 
             Assert.IsNotNull(newSprite);
 
@@ -571,7 +571,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[0];
-            var newSprite = oldSprite.Copy() as Sprite;
+            var newSprite = await oldSprite.Copy() as Sprite;
 
             Assert.IsNotNull(newSprite);
 
@@ -621,7 +621,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         {
             var project = await SampleLoader.LoadSampleProject("default.catroid", "default");
             var oldSprite = project.SpriteList.Sprites[0];
-            var newSprite = oldSprite.Copy() as Sprite;
+            var newSprite = await oldSprite.Copy() as Sprite;
 
             Assert.IsNotNull(newSprite);
 

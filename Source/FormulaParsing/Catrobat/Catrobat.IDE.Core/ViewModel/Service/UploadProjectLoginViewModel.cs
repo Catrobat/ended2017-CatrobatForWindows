@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Globalization;
-using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Utilities.JSON;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Resources.Localization;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -86,8 +84,6 @@ namespace Catrobat.IDE.Core.ViewModel.Service
 
         public RelayCommand ForgottenCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand { get; private set; }
-
         #endregion
 
         #region Actions
@@ -116,9 +112,10 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             // TODO: Implement.
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            base.GoBackAction();
         }
 
         #endregion
@@ -134,7 +131,6 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             // Commands
             LoginCommand = new RelayCommand(LoginAction);
             ForgottenCommand = new RelayCommand(ForgottenAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedAction);
@@ -146,7 +142,7 @@ namespace Catrobat.IDE.Core.ViewModel.Service
 
         private void navigationCallback()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectViewModel));
+            ServiceLocator.NavigationService.NavigateTo<UploadProjectViewModel>();
         }
 
         private void MissingLoginDataCallback(MessageboxResult result)

@@ -516,7 +516,7 @@
                       DataContext="{StaticResource ObjectVariableTransparency}" 
                       Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
                   <Button Grid.Row="3" Grid.Column="1" Content="Brush" 
-                      DataContext="{StaticResource ObjectsBrush}" 
+                      DataContext="{Binding StaticTheme.ObjectsBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                       Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
                 </Grid>
               </Grid>

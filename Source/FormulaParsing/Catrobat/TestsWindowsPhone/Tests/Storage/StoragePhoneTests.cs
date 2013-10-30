@@ -277,11 +277,11 @@ namespace Catrobat.IDE.Phone.Tests.Tests.Storage
             //TestHelper.InitializeAndClearCatrobatContext();
             IStorage storage = new StoragePhone();
 
-            LocalSettings settingsWrite = new LocalSettings();
+            var settingsWrite = new LocalSettings();
             settingsWrite.CurrentProjectName = "ProjectName";
 
             storage.WriteSerializableObject("testobject", settingsWrite);
-            LocalSettings settingsRead = (LocalSettings)storage.ReadSerializableObject("testobject", settingsWrite.GetType());
+            var settingsRead = (LocalSettings)storage.ReadSerializableObject("testobject", settingsWrite.GetType());
 
             Assert.AreEqual("ProjectName", settingsRead.CurrentProjectName);
         }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Navigation;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Main;
@@ -11,43 +13,50 @@ namespace Catrobat.IDE.Phone.Views.Main
 {
     public partial class PlayerLauncherView : PhoneApplicationPage
     {
-        //TODO: maybe delete viewmodel
         private readonly PlayerLauncherViewModel _viewModel = 
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).PlayerLauncherViewModel;
+
         public PlayerLauncherView()
         {
             InitializeComponent();
         }
 
-        private readonly Direct3DBackground m_d3dBackground = new Direct3DBackground();
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            _viewModel.GoBackCommand.Execute(null);
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
+        }
+
+        private readonly Direct3DBackground _d3DBackground = new Direct3DBackground();
 
         private void DrawingSurfaceBackground_Loaded(object sender, RoutedEventArgs e)
         {
             // Set window bounds in dips
-            m_d3dBackground.WindowBounds = new Size(
+            _d3DBackground.WindowBounds = new Size(
                 (float)Application.Current.Host.Content.ActualWidth,
                 (float)Application.Current.Host.Content.ActualHeight
                 );
 
             // Set native resolution in pixels
-            m_d3dBackground.NativeResolution = new Size(
+            _d3DBackground.NativeResolution = new Size(
                 (float)Math.Floor(Application.Current.Host.Content.ActualWidth * Application.Current.Host.Content.ScaleFactor / 100.0f + 0.5f),
                 (float)Math.Floor(Application.Current.Host.Content.ActualHeight * Application.Current.Host.Content.ScaleFactor / 100.0f + 0.5f)
                 );
 
             // Set render resolution to the full native resolution
-            m_d3dBackground.RenderResolution = m_d3dBackground.NativeResolution;
+            _d3DBackground.RenderResolution = _d3DBackground.NativeResolution;
 
             // Set ProjectName to load
             var projectName = "";
             if (NavigationContext.QueryString.TryGetValue("ProjectName", out projectName))
             {
-                m_d3dBackground.ProjectName = projectName;
+                _d3DBackground.ProjectName = projectName;
             }
 
             // Hook-up native component to DrawingSurfaceBackgroundGrid
-            DrawingSurfaceBackground.SetBackgroundContentProvider(m_d3dBackground.CreateContentProvider());
-            DrawingSurfaceBackground.SetBackgroundManipulationHandler(m_d3dBackground);
+            DrawingSurfaceBackground.SetBackgroundContentProvider(_d3DBackground.CreateContentProvider());
+            DrawingSurfaceBackground.SetBackgroundManipulationHandler(_d3DBackground);
         }
     }
 }

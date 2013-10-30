@@ -22,6 +22,11 @@ namespace Catrobat.IDE.Phone.Views.Editor.Sounds
                 });
         }
 
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            _viewModel.GoBackCommand.Execute(null);
+        }
+
         private void TextBoxSoundName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _viewModel.SoundName = TextBoxSoundName.Text;

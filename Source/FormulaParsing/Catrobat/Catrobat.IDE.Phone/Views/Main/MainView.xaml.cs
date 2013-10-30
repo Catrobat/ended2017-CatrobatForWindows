@@ -30,8 +30,8 @@ namespace Catrobat.IDE.Phone.Views.Main
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (Core.Services.ServiceLocator.NavigationService.CanGoBack)
-                Core.Services.ServiceLocator.NavigationService.RemoveBackEntry();
+            if (ServiceLocator.NavigationService.CanGoBack)
+                ServiceLocator.NavigationService.RemoveBackEntry();
 
                 _viewModel.ShowMessagesCommand.Execute(null);
                 base.OnNavigatedTo(e);
@@ -40,15 +40,14 @@ namespace Catrobat.IDE.Phone.Views.Main
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
             while (NavigationService.CanGoBack)
-                Core.Services.ServiceLocator.NavigationService.RemoveBackEntry();
+                ServiceLocator.NavigationService.RemoveBackEntry();
 
             var result = MessageBox.Show(AppResources.Main_ReallyCloseApplicationText, AppResources.Main_ReallyCloseApplicationCaption,
                             MessageBoxButton.OKCancel);
 
             if (result == MessageBoxResult.OK)
             {
-                _viewModel.ResetViewModelCommand.Execute(null);
-                base.OnBackKeyPress(e);
+                _viewModel.GoBackCommand.Execute(null);
             }
             else
                 e.Cancel = true;
@@ -176,6 +175,7 @@ namespace Catrobat.IDE.Phone.Views.Main
         //        }
         //    }
         //}
+
         private void NavigateToCatrobatWebsite_OnClick(object sender, RoutedEventArgs e)
         {
             ServiceLocator.NavigationService.NavigateToWebPage("http://www.pocketcode.org");

@@ -19,17 +19,6 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         private object _nativeImageSource;
         private MemoryStream _encodedData;
 
-        public byte[] Data
-        {
-            get { return _data; }
-            private set
-            {
-                _data = value;
-                RaisePropertyChanged(() => Data);
-                RaisePropertyChanged(() => ImageSource);
-            }
-        }
-
         public MemoryStream EncodedData
         {
             get { return _encodedData; }
@@ -39,16 +28,27 @@ namespace Catrobat.IDE.Core.UI.PortableUI
             }
         }
 
+        //public byte[] Data
+        //{
+        //    get { return _data; }
+        //    set
+        //    {
+        //        _data = value;
+        //        RaisePropertyChanged(() => Data);
+        //        RaisePropertyChanged(() => ImageSource);
+        //    }
+        //}
+
         public int Width
         {
             get { return _width; }
-            private set { _width = value; }
+            set { _width = value; }
         }
 
         public int Height
         {
             get { return _height; }
-            private set { _height = value; }
+            set { _height = value; }
         }
 
         public object ImageSource
@@ -58,8 +58,13 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 if (!IsLoaded)
                     return ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStreeam(null);
 
-                if (EncodedData != null)
-                    return _nativeImageSource = ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStreeam(EncodedData);
+                if (EncodedData != null && _nativeImageSource == null)
+                    _nativeImageSource = ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStreeam(EncodedData);
+
+                if (_nativeImageSource != null)
+                    return _nativeImageSource;
+
+
 
                 if (_data != null)
                     return ServiceLocator.ImageSourceConversionService.ConvertToLocalImageSource(_data, _width, _height);
@@ -118,7 +123,7 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 }
                 catch (Exception)
                 {
-                    
+
                 }
 
                 IsLoaded = true;
@@ -127,14 +132,14 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 if (image != null)
                 {
                     EncodedData = image.EncodedData;
-                    Data = image.Data;
+                    //Data = image.Data;
                     Width = image.Width;
                     Height = image.Height;
                     _nativeImageSource = image._nativeImageSource;
                 }
 
                 RaisePropertyChanged(() => ImageSource);
-                RaisePropertyChanged(() => Data);
+                //RaisePropertyChanged(() => Data);
                 RaisePropertyChanged(() => Width);
                 RaisePropertyChanged(() => Height);
                 RaisePropertyChanged(() => IsLoaded);
@@ -145,19 +150,19 @@ namespace Catrobat.IDE.Core.UI.PortableUI
 
         public bool IsLoading { get; private set; }
 
-        public void WriateAsPng(string path)
+        public async Task WriateAsPng(string path)
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                storage.SaveImage(path, this, true, ImageFormat.Png);
+                await storage.SaveImageAsync(path, this, true, ImageFormat.Png);
             }
         }
 
-        public void WriteAsJpg(string path)
+        public async Task WriteAsJpg(string path)
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                storage.SaveImage(path, this, true, ImageFormat.Jpg);
+                await storage.SaveImageAsync(path, this, true, ImageFormat.Jpg);
             }
         }
 
@@ -192,7 +197,7 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         {
             get
             {
-                return Data == null && _nativeImageSource == null;
+                return _nativeImageSource == null && EncodedData == null;
             }
         }
     }

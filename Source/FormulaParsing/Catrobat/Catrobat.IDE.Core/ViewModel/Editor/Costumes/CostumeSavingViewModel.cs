@@ -1,5 +1,6 @@
-﻿using Catrobat.IDE.Core.UI.PortableUI;
-using GalaSoft.MvvmLight;
+﻿using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
@@ -38,7 +39,10 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         #region Actions
 
-        
+        protected override void GoBackAction()
+        {
+            base.GoBackAction();
+        }
 
         #endregion
 
@@ -53,7 +57,8 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         public CostumeSavingViewModel()
         {
-            
+            SkipAndNavigateTo = typeof(SpriteEditorViewModel);
+
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,
                 ViewModelMessagingToken.CostumeImageToSaveListener, CostumeImageReceivedMessageAction);
         }

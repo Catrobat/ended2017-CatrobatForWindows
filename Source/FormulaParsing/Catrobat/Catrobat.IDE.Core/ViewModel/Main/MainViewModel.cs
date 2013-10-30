@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
@@ -12,7 +11,6 @@ using Catrobat.IDE.Core.ViewModel.Editor;
 using Catrobat.IDE.Core.ViewModel.Service;
 using Catrobat.IDE.Core.ViewModel.Settings;
 using Catrobat.IDE.Core.ViewModel.Share;
-using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
 using System;
 using System.Collections.Generic;
@@ -241,12 +239,6 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             private set;
         }
 
-        public RelayCommand ResetViewModelCommand
-        {
-            get;
-            private set;
-        }
-
         public ICommand ShowMessagesCommand
         {
             get;
@@ -262,7 +254,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             var message = new GenericMessage<ProjectDummyHeader>(project);
             Messenger.Default.Send(message, ViewModelMessagingToken.ChangeLocalProjectListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ProjectSettingsViewModel));
+            ServiceLocator.NavigationService.NavigateTo<ProjectSettingsViewModel>();
         }
 
         private void DeleteLocalProjectAction(string projectName)
@@ -288,7 +280,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             var message = new GenericMessage<ProjectDummyHeader>(PinProjectHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.PinProjectHeaderListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(TileGeneratorViewModel));
+            ServiceLocator.NavigationService.NavigateTo<TileGeneratorViewModel>();
         }
 
         private async void ShareLocalProjectAction(ProjectDummyHeader project)
@@ -301,7 +293,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             var message = new GenericMessage<ProjectDummyHeader>(PinProjectHeader);
             Messenger.Default.Send(message, ViewModelMessagingToken.ShareProjectHeaderListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ShareProjectServiceSelectionViewModel));
+            ServiceLocator.NavigationService.NavigateTo<ShareProjectServiceSelectionViewModel>();
         }
 
         private void LazyLoadOnlineProjectsAction()
@@ -324,7 +316,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             DateTime startTime = DateTime.UtcNow;
 
             await CurrentProject.Save();
-            var newProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
+            var newProject = await CatrobatContext.LoadNewProjectByNameStatic(projectName);
 
             if (newProject != null)
             {
@@ -359,23 +351,23 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         private void CreateNewProjectAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewProjectViewModel));
+            ServiceLocator.NavigationService.NavigateTo<AddNewProjectViewModel>();
         }
 
         private void EditCurrentProjectAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(EditorLoadingViewModel));
+            ServiceLocator.NavigationService.NavigateTo<EditorLoadingViewModel>();
         }
 
         private void SettingsAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SettingsViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SettingsViewModel>();
         }
 
         private void OnlineProjectTapAction(OnlineProjectHeader project)
         {
             SelectedOnlineProject = project;
-            ServiceLocator.NavigationService.NavigateTo(typeof(OnlineProjectViewModel));
+            ServiceLocator.NavigationService.NavigateTo<OnlineProjectViewModel>();
         }
 
         private void PlayCurrentProjectAction()
@@ -385,15 +377,16 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         private void UploadCurrentProjectAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectLoadingViewModel));
+            ServiceLocator.NavigationService.NavigateTo<UploadProjectLoadingViewModel>();
 
             // Determine which page to open
             Task.Run(() => CatrobatWebCommunicationService.CheckToken(Context.CurrentToken, CheckTokenEvent));
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            //base.GoBackAction();
         }
 
         private async void ShowMessagesAction()
@@ -426,9 +419,9 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         #region MessageActions
 
-        private void LocalProjectsChangedMessageAction(MessageBase message)
+        private async void LocalProjectsChangedMessageAction(MessageBase message)
         {
-            UpdateLocalProjects();
+            await UpdateLocalProjects();
         }
 
         private void DownloadProjectStartedMessageAction(MessageBase message)
@@ -475,7 +468,6 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             EditCurrentProjectCommand = new RelayCommand(EditCurrentProjectAction);
             PlayCurrentProjectCommand = new RelayCommand(PlayCurrentProjectAction);
             UploadCurrentProjectCommand = new RelayCommand(UploadCurrentProjectAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
             ShowMessagesCommand = new RelayCommand(ShowMessagesAction);
 
 
@@ -518,7 +510,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             }
         }
 
-        private async void DeleteProjectMessageCallback(MessageboxResult result)// TODO: async, should this be awaitable?
+        private async void DeleteProjectMessageCallback(MessageboxResult result)
         {
             _dialogResult = result;
 
@@ -526,7 +518,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             {
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    storage.DeleteDirectory(CatrobatContextBase.ProjectsPath + "/" + _deleteProjectName);
+                    await storage.DeleteDirectoryAsync(CatrobatContextBase.ProjectsPath + "/" + _deleteProjectName);
                 }
 
                 if (CurrentProject.ProjectHeader.ProgramName == _deleteProjectName)
@@ -534,13 +526,13 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                     if (LocalProjects.Count > 0)
                     {
                         var projectName = LocalProjects[0].ProjectName;
-                        CurrentProject = CatrobatContext.LoadNewProjectByNameStatic(projectName);
+                        CurrentProject = await CatrobatContext.LoadNewProjectByNameStatic(projectName);
                     }
                     else
                         CurrentProject = await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
                 }
                 else
-                    UpdateLocalProjects();
+                    await UpdateLocalProjects();
 
 
                 _deleteProjectName = null;
@@ -561,7 +553,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                 await CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName,
                     CurrentProject.ProjectHeader.ProgramName);
 
-                UpdateLocalProjects();
+                await UpdateLocalProjects();
                 _copyProjectName = null;
             }
         }
@@ -590,7 +582,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             {
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
-                    ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectViewModel));
+                    ServiceLocator.NavigationService.NavigateTo<UploadProjectViewModel>();
                     ServiceLocator.NavigationService.RemoveBackEntry();
                 });
             }
@@ -598,7 +590,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             {
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
-                    ServiceLocator.NavigationService.NavigateTo(typeof(UploadProjectLoginViewModel));
+                    ServiceLocator.NavigationService.NavigateTo<UploadProjectLoginViewModel>();
                     ServiceLocator.NavigationService.RemoveBackEntry();
                 });
             }
@@ -618,7 +610,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
         {
         }
 
-        private void UpdateLocalProjects()
+        private async Task UpdateLocalProjects()
         {
             if (IsInDesignMode) return;
 
@@ -636,7 +628,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
             using (var storage = StorageSystem.GetStorage())
             {
-                var projectNames = storage.GetDirectoryNames(CatrobatContextBase.ProjectsPath);
+                var projectNames = await storage.GetDirectoryNamesAsync(CatrobatContextBase.ProjectsPath);
 
                 //var projects = new List<ProjectDummyHeader>();
 

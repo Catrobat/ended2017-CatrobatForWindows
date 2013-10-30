@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -35,13 +36,7 @@ namespace Catrobat.IDE.Phone.Views.Main
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var screenshot = _viewModel.PinProjectHeader.Screenshot;
-            var writeableScreenshot = new WriteableBitmap(screenshot.Width, screenshot.Height);
-
-            if (screenshot.Data != null)
-            {
-                writeableScreenshot.FromByteArray(screenshot.Data);
-                writeableScreenshot.Invalidate();
-            }
+            var writeableScreenshot = new WriteableBitmap((BitmapSource)screenshot.ImageSource);
 
             var croppedScreenshot = writeableScreenshot.Crop(new Rect(
                 new Point(0, (writeableScreenshot.PixelHeight - writeableScreenshot.PixelWidth) / 2.0),
@@ -57,6 +52,11 @@ namespace Catrobat.IDE.Phone.Views.Main
             BuildApplicationBar();
 
             base.OnNavigatedTo(e);
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            _viewModel.GoBackCommand.Execute(null);
         }
 
         private void AddTile()
@@ -111,7 +111,7 @@ namespace Catrobat.IDE.Phone.Views.Main
                 WideBackgroundImage = new Uri(TileAbsolutSavePathPrefix + wideTilePath, UriKind.Absolute)
             };
 
-            var path = "/Views/Main/PlayerLauncherView.xaml?ProjectName=" + _viewModel.PinProjectHeader.ProjectName;
+            var path = "/Controls/SplashScreen/SplashScreen.xaml?ProjectName=" + _viewModel.PinProjectHeader.ProjectName;
 
             path += "&Dummy=" + DateTime.UtcNow.Ticks;
 
@@ -130,7 +130,7 @@ namespace Catrobat.IDE.Phone.Views.Main
 
             var buttonCancel = new ApplicationBarIconButton(new Uri("/Content/Images/ApplicationBar/dark/appbar.cancel.rest.png", UriKind.Relative));
             buttonCancel.Text = AppResources.Editor_ButtonCancel;
-            buttonCancel.Click += (sender, args) => Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.NavigateBack();
+            buttonCancel.Click += (sender, args) => ServiceLocator.NavigationService.NavigateBack();
             ApplicationBar.Buttons.Add(buttonCancel);
         }
     }

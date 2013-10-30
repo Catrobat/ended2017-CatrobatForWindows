@@ -1,7 +1,6 @@
 ﻿using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -61,6 +60,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             }
         }
 
+        protected override void GoBackAction()
+        {
+            base.GoBackAction();
+        }
+
         #endregion
 
         #region MessageActions
@@ -83,7 +87,8 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             var message = new GenericMessage<PortableImage>(image);
             Messenger.Default.Send(message, ViewModelMessagingToken.CostumeImageListener);
 
-            ServiceLocator.DispatcherService.RunOnMainThread(() => ServiceLocator.NavigationService.NavigateTo(typeof(CostumeNameChooserViewModel)));
+            ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                ServiceLocator.NavigationService.NavigateTo<CostumeNameChooserViewModel>());
         }
 
         private void PictureCanceled()
@@ -104,10 +109,9 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         private void WrongImageFormatResult(MessageboxResult result)
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         #endregion
-
     }
 }

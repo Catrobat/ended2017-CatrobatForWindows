@@ -31,7 +31,7 @@
       </VisualStateManager.VisualStateGroups>
       <Grid Background="Transparent" Margin="8">
         <Grid Name="gridCircle" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0">
-          <Ellipse Fill="#00F4F4F5" Height="112" Grid.Row="1" Stroke="White" VerticalAlignment="Center" StrokeThickness="6" HorizontalAlignment="Center" Width="112"/>
+          <Ellipse Fill="{StaticResource PhoneAccentBrush}" Height="112" Stroke="White" VerticalAlignment="Center" StrokeThickness="6" HorizontalAlignment="Center" Width="112"/>
         </Grid>
         <Grid Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
           <Canvas VerticalAlignment="Center" HorizontalAlignment="Center" Width="18.925" Height="18.6844" Clip="F1 M 0,0L 18.925,0L 18.925,18.6844L 0,18.6844L 0,0">

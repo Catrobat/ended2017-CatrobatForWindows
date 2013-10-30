@@ -5,7 +5,6 @@ using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Resources.Localization;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -52,8 +51,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
 
         public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand { get; private set; }
-
         #endregion
 
         #region CommandCanExecute
@@ -67,14 +64,14 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
 
         #region Actions
 
-        private void SaveAction()
+        private async void SaveAction()
         {
             var sound = new Sound(SoundName);
             var path = CurrentProject.BasePath + "/" + Project.SoundsPath + "/" + sound.FileName;
 
             using (var storage = StorageSystem.GetStorage())
             {
-                using (var stream = storage.OpenFile(path, StorageFileMode.Create, StorageFileAccess.Write))
+                using (var stream = await storage.OpenFileAsync(path, StorageFileMode.Create, StorageFileAccess.Write))
                 {
                     var writer = new BinaryWriter(stream);
 
@@ -91,19 +88,20 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
             ResetViewModel();
             ServiceLocator.NavigationService.RemoveBackEntry();
             ServiceLocator.NavigationService.RemoveBackEntry();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void CancelAction()
         {
             SoundName = null;
 
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            base.GoBackAction();
         }
 
         #endregion
@@ -125,7 +123,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
         {
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
