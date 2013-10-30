@@ -32,7 +32,7 @@
       <Button BorderThickness="0" Command="{Binding MovementCommand}">
         <Button.Template>
           <ControlTemplate>
-            <bricks:NormalBrick Grid.Row="0" Background="{StaticResource MotionBrickBrush}" 
+            <bricks:NormalBrick Grid.Row="0" Background="{Binding StaticTheme.MotionBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                           BorderBrush="{StaticResource BrickBorderBrush}" 
                           Margin="10 0 10 0">
               <TextBlock VerticalAlignment="Center" 
@@ -46,7 +46,7 @@
       <Button BorderThickness="0" Command="{Binding LooksCommand}">
         <Button.Template>
           <ControlTemplate>
-        <bricks:NormalBrick Grid.Row="1" Background="{StaticResource LooksBrickBrush}" 
+            <bricks:NormalBrick Grid.Row="1" Background="{Binding StaticTheme.LooksBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                           BorderBrush="{StaticResource BrickBorderBrush}" 
                           Margin="10 10 10 0">
           <TextBlock VerticalAlignment="Center" 
@@ -60,7 +60,7 @@
       <Button BorderThickness="0" Command="{Binding SoundCommand}">
         <Button.Template>
           <ControlTemplate>
-        <bricks:NormalBrick Grid.Row="2" Background="{StaticResource SoundBrickBrush}" 
+            <bricks:NormalBrick Grid.Row="2" Background="{Binding StaticTheme.SoundBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                           BorderBrush="{StaticResource BrickBorderBrush}" 
                           Margin="10 10 10 0">
           <TextBlock VerticalAlignment="Center" 
@@ -74,7 +74,7 @@
       <Button BorderThickness="0" Command="{Binding ControlCommand}">
         <Button.Template>
           <ControlTemplate>
-        <bricks:NormalBrick Grid.Row="3" Background="{StaticResource ControlBrickBrush}" 
+            <bricks:NormalBrick Grid.Row="3" Background="{Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                           BorderBrush="{StaticResource BrickBorderBrush}" 
                           Margin="10 10 10 0">
           <TextBlock VerticalAlignment="Center" 
@@ -89,7 +89,7 @@
       <Button BorderThickness="0" Command="{Binding VariablesCommand}">
         <Button.Template>
           <ControlTemplate>
-        <bricks:NormalBrick Grid.Row="4" Background="{StaticResource VariableBrickBrush}" 
+            <bricks:NormalBrick Grid.Row="4" Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                             BorderBrush="{StaticResource BrickBorderBrush}" 
                             Margin="10 10 10 0">
           <TextBlock VerticalAlignment="Center" 

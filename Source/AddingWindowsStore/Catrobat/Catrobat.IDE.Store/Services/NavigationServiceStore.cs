@@ -17,11 +17,20 @@ namespace Catrobat.IDE.Store.Services
             _frame = frame;
         }
 
+        public void NavigateTo<T>()
+        {
+            NavigateTo(typeof (T));
+        }
 
         public void NavigateTo(Type type)
         {
-            if (type.GetTypeInfo().BaseType == typeof (ViewModelBase))
+            if (type.GetTypeInfo().BaseType == typeof (Core.ViewModel.ViewModelBase))
             {
+                var viewModelInstance = (Core.ViewModel.ViewModelBase)ServiceLocator.GetInstance(type);
+
+                if (viewModelInstance.SkipAndNavigateTo != null)
+                    type = viewModelInstance.SkipAndNavigateTo;
+
                 var viewModelName = type.GetTypeInfo().AssemblyQualifiedName.Split(',').First();
                 var viewType = viewModelName.Replace("Catrobat.IDE.Core.ViewModel", "Catrobat.IDE.Store.Views");
                 viewType = viewType.Replace("ViewModel", "View");
@@ -32,9 +41,13 @@ namespace Catrobat.IDE.Store.Services
             _frame.Navigate(type);
         }
 
-        public void NavigateBack()
+        public void NavigateBack(object navigationObject)
         {
-            _frame.GoBack();
+            var flyout = navigationObject as Flyout;
+            if (flyout != null)
+                flyout.Hide();
+            else
+                _frame.GoBack();
         }
 
         public void RemoveBackEntry()

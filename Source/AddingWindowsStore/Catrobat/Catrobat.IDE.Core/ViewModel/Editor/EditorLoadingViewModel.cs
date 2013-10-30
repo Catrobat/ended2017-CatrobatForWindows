@@ -1,5 +1,6 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects;
-using GalaSoft.MvvmLight;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Core.ViewModel.Editor
@@ -39,7 +40,10 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
 
         #region Actions
 
-      
+        protected override void GoBackAction()
+        {
+            base.GoBackAction();
+        }
 
         #endregion
 
@@ -54,6 +58,8 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
 
         public EditorLoadingViewModel()
         {
+            SkipAndNavigateTo = typeof (SpritesViewModel);
+
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }

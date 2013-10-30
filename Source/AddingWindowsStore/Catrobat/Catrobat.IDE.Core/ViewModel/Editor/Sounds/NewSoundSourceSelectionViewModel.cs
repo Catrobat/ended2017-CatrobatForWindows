@@ -1,6 +1,5 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -41,13 +40,19 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
             var message = new GenericMessage<Sprite>(_receivedSelectedSprite);
             Messenger.Default.Send(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(SoundRecorderViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SoundRecorderViewModel>();
         }
 
         private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
         {
             _receivedSelectedSprite = message.Content;
         }
+
+        protected override void GoBackAction()
+        {
+            base.GoBackAction();
+        }
+
 
         #endregion
 

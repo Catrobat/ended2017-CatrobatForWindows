@@ -1,7 +1,4 @@
-﻿using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
-using Catrobat.IDE.Core.ViewModel.Main;
-using Catrobat.IDE.Store.Common;
+﻿using Catrobat.IDE.Store.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,10 +21,8 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class SpritesView : Page
+    public sealed partial class ChangeSpriteView : Page
     {
-        private readonly SpritesViewModel _viewModel = ServiceLocator.GetInstance<SpritesViewModel>();
-
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -50,7 +45,7 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
         }
 
 
-        public SpritesView()
+        public ChangeSpriteView()
         {
             this.InitializeComponent();
             this.navigationHelper = new NavigationHelper(this);
@@ -107,12 +102,5 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
         }
 
         #endregion
-
-        private void FlyoutNew_OnClose(object sender, object e)
-        {
-            var viewModel = ServiceLocator.GetInstance<AddNewSpriteViewModel>();
-            viewModel.NavigationObject = (Flyout)sender;
-
-        }
     }
 }

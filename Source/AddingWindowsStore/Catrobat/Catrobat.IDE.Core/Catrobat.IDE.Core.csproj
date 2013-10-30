@@ -223,6 +223,7 @@
     <Compile Include="UI\ImageSizeEntry.cs" />
     <Compile Include="UI\ImageSizeEntryCollection.cs" />
     <Compile Include="UI\NullItemCollection.cs" />
+    <Compile Include="UI\StaticTheme.cs" />
     <Compile Include="UI\Theme.cs" />
     <Compile Include="UI\ThemeChooser.cs" />
     <Compile Include="UI\VariableConteiner.cs" />
@@ -287,6 +288,7 @@
     <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Share\ShareProjectServiceSelectionViewModel.cs" />
     <Compile Include="ViewModel\Share\UploadToSkyDriveViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ViewModelMessagingToken.cs" />
   </ItemGroup>

@@ -2,7 +2,6 @@
 using Catrobat.IDE.Core.CatrobatObjects.Bricks;
 using Catrobat.IDE.Core.CatrobatObjects.Scripts;
 using Catrobat.IDE.Core.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -42,8 +41,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
 
         public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand { get; private set; }
-
         #endregion
 
         #region CommandCanExecute
@@ -75,7 +72,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
                 (_broadcastObject as BroadcastWaitBrick).BroadcastMessage = BroadcastMessage;
             }
 
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void ReceiveBroadcastObjectAction(GenericMessage<DataObject> message)
@@ -85,12 +82,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
 
         private void CancelAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            base.GoBackAction();
         }
 
         #endregion
@@ -100,7 +98,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
             // Commands
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<DataObject>>(this, ViewModelMessagingToken.BroadcastObjectListener, ReceiveBroadcastObjectAction);
         }

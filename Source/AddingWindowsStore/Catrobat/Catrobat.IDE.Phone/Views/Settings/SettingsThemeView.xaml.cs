@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModel;
@@ -16,6 +17,11 @@ namespace Catrobat.IDE.Phone.Views.Settings
         public SettingsThemeView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            _viewModel.GoBackCommand.Execute(null);
         }
 
         private void Item_Tap(object sender, GestureEventArgs e)

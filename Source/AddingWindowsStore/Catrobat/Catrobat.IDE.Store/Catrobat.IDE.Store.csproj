@@ -125,6 +125,9 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Controls\AppBar\EditorAppBar.xaml.cs">
+      <DependentUpon>EditorAppBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
     <Compile Include="Controls\Projects\LocalProjectControl.xaml.cs">
       <DependentUpon>LocalProjectControl.xaml</DependentUpon>
@@ -161,6 +164,12 @@
     <Compile Include="Views\Editor\EditorLoadingView.xaml.cs">
       <DependentUpon>EditorLoadingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Editor\Sprites\AddNewSpriteView.xaml.cs">
+      <DependentUpon>AddNewSpriteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sprites\ChangeSpriteView.xaml.cs">
+      <DependentUpon>ChangeSpriteView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Editor\Sprites\SpriteEditorView.xaml.cs">
       <DependentUpon>SpriteEditorView.xaml</DependentUpon>
     </Compile>
@@ -176,7 +185,6 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="Catrobat.IDE.Store_TemporaryKey.pfx" />
-    <Content Include="Common\ReadMe.txt" />
     <Content Include="Content\Images\Application\pocketcode01.png" />
     <Content Include="Content\Images\Pocketcode.svg" />
     <Content Include="Content\Images\Screenshot\NoScreenshot.png" />
@@ -208,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\AppBar\EditorAppBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Buttons\ScreenshotButtonTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -228,13 +240,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Editor\Sprites\AddNewSpriteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editor\Sprites\ChangeSpriteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Editor\Sprites\SpriteEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Editor\Sprites\SpritesView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -268,6 +288,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Programs\Default\Sounds\" />
+    <Folder Include="Content\Templates\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

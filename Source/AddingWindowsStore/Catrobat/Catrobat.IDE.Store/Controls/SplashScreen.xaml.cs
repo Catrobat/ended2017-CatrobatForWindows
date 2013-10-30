@@ -21,6 +21,7 @@ using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Main;
 using Catrobat.IDE.Store.Services;
 using GalaSoft.MvvmLight;
+using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;
 
 namespace Catrobat.IDE.Store.Controls
 {

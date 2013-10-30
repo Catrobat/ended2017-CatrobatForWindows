@@ -89,25 +89,9 @@ namespace Catrobat.IDE.Core.ViewModel.Share
                     ServiceLocator.ShareService.UploadProjectToSkydrive(arguments, ProjectToShare, Success, Error)));
         }
 
-        private void Error()
+        protected override void GoBackAction()
         {
-            ServiceLocator.DispatcherService.RunOnMainThread(() =>
-            {
-                IsUploading = false;
-                IsUploadSuccess = false;
-                IsUploadError = true;
-            });
-
-        }
-
-        private void Success()
-        {
-            ServiceLocator.DispatcherService.RunOnMainThread(() =>
-            {
-                IsUploading = false;
-                IsUploadSuccess = true;
-                IsUploadError = false;
-            });
+            base.GoBackAction();
         }
 
         #endregion
@@ -128,6 +112,27 @@ namespace Catrobat.IDE.Core.ViewModel.Share
 
             Messenger.Default.Register<GenericMessage<ProjectDummyHeader>>(this,
                  ViewModelMessagingToken.ShareProjectHeaderListener, ProjectToShareChangedMessageAction);
+        }
+
+        private void Error()
+        {
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                IsUploading = false;
+                IsUploadSuccess = false;
+                IsUploadError = true;
+            });
+
+        }
+
+        private void Success()
+        {
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                IsUploading = false;
+                IsUploadSuccess = true;
+                IsUploadError = false;
+            });
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Navigation;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
@@ -18,10 +19,11 @@ namespace Catrobat.IDE.Phone.Views.Service
             InitializeComponent();
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            _viewModel.ResetViewModelCommand.Execute(null);
-            base.OnNavigatedFrom(e);
+            _viewModel.GoBackCommand.Execute(null);
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)

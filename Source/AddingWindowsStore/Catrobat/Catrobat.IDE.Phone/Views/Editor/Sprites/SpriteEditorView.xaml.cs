@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
+using System.Windows.Navigation;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
@@ -14,6 +16,13 @@ namespace Catrobat.IDE.Phone.Views.Editor.Sprites
         public SpriteEditorView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            _viewModel.GoBackCommand.Execute(null);
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
         }
 
         private void reorderListBoxScriptBricks_Loaded(object sender, RoutedEventArgs e)

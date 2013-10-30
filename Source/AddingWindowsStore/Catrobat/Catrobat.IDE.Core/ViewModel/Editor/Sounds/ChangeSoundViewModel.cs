@@ -1,6 +1,5 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Catrobat.IDE.Core.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -56,8 +55,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
 
         public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand { get; private set; }
-
         #endregion
 
         #region CommandCanExecute
@@ -74,12 +71,12 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
         private void SaveAction()
         {
             ReceivedSound.Name = SoundName;
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void CancelAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void EditSoundAction()
@@ -87,15 +84,20 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
             //TODO: navigate to App that can change sounds
         }
 
+        protected override void GoBackAction()
+        {
+            ResetViewModel();
+            base.GoBackAction();
+        }
+
+        #endregion
+
+        #region MessageActions
+
         private void ChangeSoundNameMessageAction(GenericMessage<Sound> message)
         {
             ReceivedSound = message.Content;
             SoundName = ReceivedSound.Name;
-        }
-
-        private void ResetViewModelAction()
-        {
-            ResetViewModel();
         }
 
         #endregion
@@ -105,7 +107,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
             EditSoundCommand = new RelayCommand(EditSoundAction);
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sound>>(this, ViewModelMessagingToken.SoundNameListener, ChangeSoundNameMessageAction);
         }

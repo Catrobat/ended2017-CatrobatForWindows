@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
@@ -23,10 +24,11 @@ namespace Catrobat.IDE.Phone.Views.Editor.Sounds
                 });
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            _viewModel.ResetViewModelCommand.Execute(null);
-            base.OnNavigatedFrom(e);
+            _viewModel.GoBackCommand.Execute(null);
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
         }
 
         private void TextBoxSoundName_OnTextChanged(object sender, TextChangedEventArgs e)

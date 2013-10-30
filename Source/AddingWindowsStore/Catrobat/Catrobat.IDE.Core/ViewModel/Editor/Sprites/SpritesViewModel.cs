@@ -6,7 +6,6 @@ using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Resources.Localization;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -150,6 +149,12 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             private set;
         }
 
+        public RelayCommand StartPlayerCommand
+        {
+            get;
+            private set;
+        }
+
         # endregion
 
         #region CanCommandsExecute
@@ -170,14 +175,14 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
 
         #region Actions
 
-        private void AddNewSpriteAction()
+        private static void AddNewSpriteAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(AddNewSpriteViewModel));
+            ServiceLocator.NavigationService.NavigateTo<AddNewSpriteViewModel>();
         }
 
-        private void EditSpriteAction()
+        private static void EditSpriteAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SpriteEditorViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SpriteEditorViewModel>();
         }
 
         private async void CopySpriteAction()
@@ -220,10 +225,9 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             CurrentProject.Redo();
         }
 
-        public RelayCommand StartPlayerCommand
+        protected override void GoBackAction()
         {
-            get;
-            private set;
+            base.GoBackAction();
         }
 
         #endregion

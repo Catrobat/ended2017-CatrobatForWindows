@@ -3,7 +3,6 @@ using System.Windows.Input;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -163,8 +162,6 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         public ICommand OnLoadCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand { get; private set; }
-
         #endregion
 
         #region CommandCanExecute
@@ -210,7 +207,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                         Messenger.Default.Send(localProjectsChangedMessage, ViewModelMessagingToken.LocalProjectsChangedListener);
                     }
 
-                ServiceLocator.DispatcherService.RunOnMainThread(() => ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel)));
+                ServiceLocator.DispatcherService.RunOnMainThread(() => ServiceLocator.NavigationService.NavigateTo<MainViewModel>());
             }
             catch
             {
@@ -220,10 +217,10 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             _isWorking = false;
         }
 
-        private void CancelAction()
+        private static void CancelAction()
         {
             ServiceLocator.ProjectImporterService.CancelImport();
-            ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
+            ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
         }
 
         private async void OnLoadAction(string fileToken)
@@ -249,9 +246,11 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             _isWorking = false;
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
+            ServiceLocator.ProjectImporterService.CancelImport();
             ResetViewModel();
+            base.GoBackAction();
         }
 
         #endregion
@@ -262,7 +261,6 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             AddCommand = new RelayCommand(AddAction, AddCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction, CancelCommand_CanExecute);
             OnLoadCommand = new RelayCommand<string>(OnLoadAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
         }
 
         private enum VisiblePanel { Error, Content, Loading }

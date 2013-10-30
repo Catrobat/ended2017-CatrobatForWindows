@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Resources.Localization;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
 namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
@@ -175,8 +174,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
 
         public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand { get; private set; }
-
         #endregion
 
         #region CommandCanExecute
@@ -315,7 +312,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
 
         private static void SaveAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(SoundNameChooserViewModel));
+            ServiceLocator.NavigationService.NavigateTo<SoundNameChooserViewModel>();
         }
 
         private void CancelAction()
@@ -324,12 +321,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
             ServiceLocator.SoundRecorderService.StopRecording();
 
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            base.GoBackAction();
         }
 
         #endregion
@@ -346,7 +344,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
             PlayPauseCommand = new RelayCommand(PlayPauseAction);
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             UpdateTextProperties();
 

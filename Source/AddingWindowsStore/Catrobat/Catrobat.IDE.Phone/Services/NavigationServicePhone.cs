@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using Catrobat.IDE.Core.Services;
-using GalaSoft.MvvmLight;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
+using ViewModelBase = Catrobat.IDE.Core.ViewModel.ViewModelBase;
 
 namespace Catrobat.IDE.Phone.Services
 {
@@ -42,16 +43,21 @@ namespace Catrobat.IDE.Phone.Services
 
             try
             {
-                ((PhoneApplicationFrame) Application.Current.RootVisual).Navigate(new Uri(pathToXaml, UriKind.Relative));
+                ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri(pathToXaml, UriKind.Relative));
             }
             catch
             {
                 throw new Exception("Navigation not possible: " + pathToXaml);
             }
-            
         }
 
-        public void NavigateBack()
+        public void NavigateTo<T>()
+        {
+            var type = typeof (T);
+            NavigateTo(type);
+        }
+
+        public void NavigateBack(object navigationObject)
         {
             ((PhoneApplicationFrame) Application.Current.RootVisual).GoBack();
         }

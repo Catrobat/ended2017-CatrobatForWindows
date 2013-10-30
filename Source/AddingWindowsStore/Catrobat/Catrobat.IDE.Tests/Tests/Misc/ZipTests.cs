@@ -85,7 +85,7 @@ namespace Catrobat.IDE.Tests.Tests.Misc
 
                 using (Stream fileStream = storage.OpenFile(writePath, StorageFileMode.Create, StorageFileAccess.Write))
                 {
-                    CatrobatZipService.ZipCatrobatPackage(fileStream, sourcePath);
+                    await CatrobatZipService.ZipCatrobatPackage(fileStream, sourcePath);
                     fileStream.Close();
                     fileStream.Dispose();
                 }
