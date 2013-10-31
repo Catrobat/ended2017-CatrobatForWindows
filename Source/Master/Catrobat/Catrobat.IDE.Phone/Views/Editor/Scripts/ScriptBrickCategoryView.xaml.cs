@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.Services;
+﻿using System.ComponentModel;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Editor.Scripts;
 using Microsoft.Phone.Controls;
@@ -15,9 +16,11 @@ namespace Catrobat.IDE.Phone.Views.Editor.Scripts
             InitializeComponent();
         }
 
-        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnBackKeyPress(CancelEventArgs e)
         {
             _viewModel.GoBackCommand.Execute(null);
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
         }
     }
 }
