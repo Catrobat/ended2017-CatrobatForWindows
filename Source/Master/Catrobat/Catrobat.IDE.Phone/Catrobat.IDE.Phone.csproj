@@ -98,6 +98,9 @@
   <ItemGroup>
     <Compile Include="AppDesignStatic.cs" />
     <Compile Include="AppPhone.cs" />
+    <Compile Include="Content\Images\Application\Logo.xaml.cs">
+      <DependentUpon>Logo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
@@ -311,6 +314,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Content\Images\Application\Logo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\Resources.xaml">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
