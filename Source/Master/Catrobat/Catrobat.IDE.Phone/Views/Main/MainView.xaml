@@ -11,10 +11,8 @@
   xmlns:statusIcons="clr-namespace:Catrobat.IDE.Phone.Controls.StatusIcons"
   xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
   xmlns:codung4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
-  xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-  xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform.WP8"
-                            xmlns:application="clr-namespace:Catrobat.IDE.Phone.Content.Images.Application"
-                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
+  xmlns:application="clr-namespace:Catrobat.IDE.Phone.Content.Images.Application"
+  FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
   SupportedOrientations="Portrait"
@@ -71,7 +69,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="30"/>
           </Grid.RowDefinitions>
-          
+
           <Grid Grid.Row="2" Width="280" VerticalAlignment="Center"
               HorizontalAlignment="Center">
             <buttons:ScreenshotButton VerticalAlignment="Center" 
@@ -263,7 +261,7 @@
 
                   <projectControls:LocalProjectControl Width="188" Height="188" Margin="10" Project="{Binding}" />
                 </Grid>
-                
+
               </DataTemplate>
             </ListBox.ItemTemplate>
           </ListBox>
@@ -274,14 +272,14 @@
       <controls:PanoramaItem Name="PanoramaItemOnlineProjects" Header="{Binding Resources.Main_HeaderOnlineProjects, Source={StaticResource LocalizedStrings}}">
         <Grid>
           <StackPanel>
-          <TextBlock FontSize="34" VerticalAlignment="Center" TextAlignment="Center"> Download programs from</TextBlock>
+            <TextBlock FontSize="34" VerticalAlignment="Center" TextAlignment="Center"> Download programs from</TextBlock>
             <HyperlinkButton FontSize="44" Click="NavigateToCatrobatWebsite_OnClick">
               PocketCode
             </HyperlinkButton>
             <TextBlock FontSize="34" VerticalAlignment="Center" TextAlignment="Center">website</TextBlock>
           </StackPanel>
         </Grid>
-        
+
         <!--<Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

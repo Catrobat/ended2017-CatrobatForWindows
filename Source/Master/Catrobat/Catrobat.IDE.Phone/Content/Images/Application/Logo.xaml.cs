@@ -8,11 +8,11 @@ namespace Catrobat.IDE.Phone.Content.Images.Application
     {
         public Visibility TextVisibility
         {
-            get { return (Visibility)GetValue(IsTextVisibleProperty); }
-            set { SetValue(IsTextVisibleProperty, value); }
+            get { return (Visibility)GetValue(TextVisibilityProperty); }
+            set { SetValue(TextVisibilityProperty, value); }
         }
 
-        public static readonly DependencyProperty IsTextVisibleProperty = DependencyProperty.Register(
+        public static readonly DependencyProperty TextVisibilityProperty = DependencyProperty.Register(
             "TextVisibility", typeof(Visibility), typeof(Logo), new PropertyMetadata(TextVisibilityChanged));
 
         private static void TextVisibilityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

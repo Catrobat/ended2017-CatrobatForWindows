@@ -6,6 +6,7 @@
   xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:misc="clr-namespace:Catrobat.IDE.Phone.Content.Images.Misc"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
@@ -37,7 +38,7 @@
                   <ColumnDefinition Width="Auto"/>
                   <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Image Source="/Content/Images/Misc/Gallery.png" Margin="30 15 15 15"></Image>
+                <misc:ImageGallery ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
                 <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_ImageGallery, Source={StaticResource LocalizedStrings}}" 
                            Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
@@ -56,7 +57,7 @@
                   <ColumnDefinition Width="Auto"/>
                   <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Image Source="/Content/Images/Misc/Camera.png" Margin="30 15 15 15"></Image>
+                <misc:Camera ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
                 <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_Camera, Source={StaticResource LocalizedStrings}}" 
                            Style="{StaticResource PhoneTextExtraLargeStyle}" />
@@ -75,7 +76,7 @@
                   <ColumnDefinition Width="Auto"/>
                   <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Image Source="/Content/Images/Misc/EditImage.png" Margin="30 15 15 15"></Image>
+                <misc:EditImage ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
                 <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" 
                            HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_ImageEditingProgram, Source={StaticResource LocalizedStrings}}" 

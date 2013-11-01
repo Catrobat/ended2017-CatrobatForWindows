@@ -131,6 +131,21 @@
     <Compile Include="Content\Images\Application\Logo.xaml.cs">
       <DependentUpon>Logo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Images\Misc\AudioRecorder.xaml.cs">
+      <DependentUpon>AudioRecorder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Images\Misc\Camera.xaml.cs">
+      <DependentUpon>Camera.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Images\Misc\AudioLibrary.xaml.cs">
+      <DependentUpon>AudioLibrary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Images\Misc\EditImage.xaml.cs">
+      <DependentUpon>EditImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Images\Misc\ImageGallery.xaml.cs">
+      <DependentUpon>ImageGallery.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
@@ -347,6 +362,26 @@
     <Page Include="Content\Images\Application\Logo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Images\Misc\AudioRecorder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Images\Misc\Camera.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Images\Misc\AudioLibrary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Images\Misc\EditImage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Images\Misc\ImageGallery.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\Resources.xaml">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -734,11 +769,6 @@
     <Content Include="Content\Images\ImageButtons\upload_light.png" />
     <Content Include="Content\Images\ImageButtons\upload_pressed_dark.png" />
     <Content Include="Content\Images\ImageButtons\upload_pressed_light.png" />
-    <Content Include="Content\Images\Misc\AudioLibrary.png" />
-    <Content Include="Content\Images\Misc\AudioRecorder.png" />
-    <Content Include="Content\Images\Misc\camera.png" />
-    <Content Include="Content\Images\Misc\EditImage.png" />
-    <Content Include="Content\Images\Misc\Gallery.png" />
     <Content Include="Content\Images\Misc\InProcess.png" />
     <Content Include="Content\Images\Screenshot\NoScreenshot.png" />
   </ItemGroup>

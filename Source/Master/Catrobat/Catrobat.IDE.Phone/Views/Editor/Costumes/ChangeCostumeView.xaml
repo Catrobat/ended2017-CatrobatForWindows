@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
+    xmlns:misc="clr-namespace:Catrobat.IDE.Phone.Content.Images.Misc"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -44,7 +45,7 @@
               <ColumnDefinition Width="Auto"/>
               <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Source="/Content/Images/Misc/EditImage.png" Margin="30 15 15 15"></Image>
+            <misc:EditImage ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
             <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" 
                            HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_ImageEditingProgram, Source={StaticResource LocalizedStrings}}" 

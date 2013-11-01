@@ -6,6 +6,7 @@
   xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:misc="clr-namespace:Catrobat.IDE.Phone.Content.Images.Misc"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
@@ -34,7 +35,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
               </Grid.ColumnDefinitions>
-              <Image Source="/Content/Images/Misc/AudioLibrary.png" Margin="30 15 15 15"></Image>
+              <misc:AudioLibrary ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
               <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Resources.Editor_MediaLibrary, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
             </Grid>
           </ControlTemplate>
@@ -51,9 +52,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
               </Grid.ColumnDefinitions>
-              <Image Grid.Column="0"
-                     Source="/Content/Images/Misc/AudioRecorder.png" 
-                     Margin="30 15 15 15" />
+              <misc:AudioRecorder ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
               <TextBlock Grid.Column="1" Margin="10" 
                          VerticalAlignment="Center" 
                          HorizontalAlignment="Left" 
