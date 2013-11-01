@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.UI;

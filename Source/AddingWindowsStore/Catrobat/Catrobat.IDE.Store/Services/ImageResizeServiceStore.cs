@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;

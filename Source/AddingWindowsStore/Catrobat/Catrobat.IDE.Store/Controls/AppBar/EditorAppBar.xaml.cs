@@ -151,8 +151,7 @@ namespace Catrobat.IDE.Store.Controls.AppBar
             new PropertyMetadata(new RelayCommand(() => {/* empty */}), NewCommandChanged));
         private static void NewCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (((EditorAppBar)d).NewFlyout == null)
-              ((EditorAppBar)d).ButtonNew.Command = e.NewValue as ICommand;
+              //((EditorAppBar)d).ButtonNew.Command = e.NewValue as ICommand;
         }
 
 
@@ -186,6 +185,24 @@ namespace Catrobat.IDE.Store.Controls.AppBar
         private static void NewFlyoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((EditorAppBar) d).ButtonNew.Flyout = (Flyout) e.NewValue;
+            ((Flyout)e.NewValue).Opening += (sender, o) => ((EditorAppBar)d).NewCommand.Execute(null);
+        }
+
+
+
+        public Flyout EditFlyout
+        {
+            get { return (Flyout)GetValue(EditFlyoutProperty); }
+            set { SetValue(EditFlyoutProperty, value); }
+        }
+
+        public static readonly DependencyProperty EditFlyoutProperty = DependencyProperty.Register(
+            "EditFlyout", typeof(Flyout), typeof(EditorAppBar), new PropertyMetadata(null, EditFlyoutChanged));
+
+        private static void EditFlyoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((EditorAppBar)d).ButtonEdit.Flyout = (Flyout)e.NewValue;
+            ((Flyout) e.NewValue).Opening += (sender, o) => ((EditorAppBar) d).EditCommand.Execute(null);
         }
 
         #endregion

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Reflection;
-using Windows.Storage.Streams;
+﻿using System.Reflection;
 using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Buffer = System.Buffer;
 
 namespace Catrobat.IDE.Store.Services
 {

@@ -4,7 +4,6 @@ using System.Reflection;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
-using GalaSoft.MvvmLight;
 
 namespace Catrobat.IDE.Store.Services
 {
@@ -38,7 +37,8 @@ namespace Catrobat.IDE.Store.Services
                 type = Type.GetType(viewType);
             }
 
-            _frame.Navigate(type);
+            if (type.GetTypeInfo().BaseType == typeof(Page)) // this is not true for flyouts (UserControls)
+                _frame.Navigate(type);
         }
 
         public void NavigateBack(object navigationObject)

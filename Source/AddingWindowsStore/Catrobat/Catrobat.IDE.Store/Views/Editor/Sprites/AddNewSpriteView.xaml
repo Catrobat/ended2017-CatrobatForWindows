@@ -9,9 +9,9 @@
   d:DesignHeight="200" d:DesignWidth="500">
 
   <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid  Margin="20">
+    <Grid>
       <Grid.ColumnDefinitions>
-        <ColumnDefinition/>
+        <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="Auto"/>
       </Grid.ColumnDefinitions>
       <Grid>
@@ -21,21 +21,35 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-          <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleNewSprite, Source={StaticResource LocalizedStrings}}" />
+          <TextBlock Margin="10" Style="{StaticResource SubheaderTextBlockStyle}"
+                     Text="{Binding Resources.Editor_TitleChangeSpriteName, Source={StaticResource LocalizedStrings}}" />
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Margin="10 0 0 15">
-          <TextBlock Margin="0" Text="{Binding Resources.Editor_SpriteName, Source={StaticResource LocalizedStrings}}" />
-          <TextBox Margin="-10 0 10 0" Width="300" Name="TextBoxSpriteName" Text="{Binding SpriteName, Mode=TwoWay}" 
+        <Grid Grid.Row="1" Margin="10 0 0 15" HorizontalAlignment="Stretch">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+          </Grid.RowDefinitions>
+
+          <TextBlock Grid.Row="0" Margin="10" Style="{StaticResource TitleTextBlockStyle}"
+                     Text="{Binding Resources.Editor_SpriteName, Source={StaticResource LocalizedStrings}}" />
+          <TextBox Grid.Row="1" Margin="10" Name="TextBoxSpriteName"
+                   Text="{Binding SpriteName, Mode=TwoWay}" 
                  HorizontalAlignment="Stretch" TextChanged="TextBoxSpriteName_OnTextChanged" />
-        </StackPanel>
+        </Grid>
       </Grid>
-      <StackPanel Grid.Column="1" Orientation="Vertical">
-        <AppBarButton Icon="Save" Label="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}" 
+      <Grid Grid.Column="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <AppBarButton Grid.Row="0" VerticalAlignment="Center" Icon="Save" Label="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}" 
                     Command="{Binding SaveCommand}"/>
-        <AppBarButton Icon="Cancel" Label="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}" 
+        <AppBarButton Grid.Row="1" VerticalAlignment="Center" Icon="Cancel" Label="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}" 
                     Command="{Binding CancelCommand}"/>
-      </StackPanel>
+      </Grid>
     </Grid>
   </Grid>
 </UserControl>

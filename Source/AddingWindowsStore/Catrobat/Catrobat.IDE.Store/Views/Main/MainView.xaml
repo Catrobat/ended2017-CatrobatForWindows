@@ -27,12 +27,6 @@
     <pages:PageHeaderControl ShowBackButton="False" Grid.Row="0"/>
 
     <Hub Grid.Row="1" Margin="0 -120 0 0">
-
-      <!--<HubSection Width="780" Margin="0,0,80,0">
-                <HubSection.Background>
-                    <ImageBrush Stretch="UniformToFill" />
-                </HubSection.Background>
-            </HubSection>-->
       <HubSection Width="500" Header="{Binding Resources.Main_HeaderCurrentProject, Source={StaticResource LocalizedStrings}}">
         <DataTemplate>
           <Grid Row="1">

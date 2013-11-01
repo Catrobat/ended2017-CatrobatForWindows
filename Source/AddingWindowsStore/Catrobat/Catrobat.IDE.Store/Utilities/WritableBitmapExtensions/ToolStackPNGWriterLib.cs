@@ -20,9 +20,7 @@
 using System;
 using System.IO;
 using Windows.UI;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Shapes;
 using ToolStackCRCLib;
 
 namespace ToolStackPNGWriterLib

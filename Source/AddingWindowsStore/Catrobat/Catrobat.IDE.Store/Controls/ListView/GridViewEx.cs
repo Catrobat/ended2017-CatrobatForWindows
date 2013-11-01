@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
-
 // From http://www.codeproject.com/Articles/536519/Extending-GridView-with-Drag-and-Drop-for-Grouping
+using Catrobat.IDE.Core.CatrobatObjects.Scripts;
+using Catrobat.IDE.Store.Controls.ListView;
+
 namespace GridViewSamples.Controls
 {
     /// <summary>
@@ -101,6 +103,7 @@ namespace GridViewSamples.Controls
         {
             DefaultStyleKey = typeof(GridViewEx);
             this.DragItemsStarting += GridViewEx_DragItemsStarting;
+            //base.SelectionChanged += OnSelectionChanged;
         }
 
         protected override void OnApplyTemplate()
@@ -457,6 +460,180 @@ namespace GridViewSamples.Controls
             return -1;
         }
         #endregion
+
+
+        //#region This fixes TwoWay binding to selectedItems
+
+        //public static readonly DependencyProperty SmartSelectedItemsProperty = DependencyProperty.Register(
+        //    "SmartSelectedItems", typeof(INotifyCollectionChanged), typeof(GridViewEx),
+        //    new PropertyMetadata(null, OnSmartSelectedItemsPropertyChanged));
+
+        //public INotifyCollectionChanged SmartSelectedItems
+        //{
+        //    get { return (INotifyCollectionChanged)GetValue(SmartSelectedItemsProperty); }
+        //    set { SetValue(SmartSelectedItemsProperty, value); }
+        //}
+
+        //private static void OnSmartSelectedItemsPropertyChanged(DependencyObject target, DependencyPropertyChangedEventArgs args)
+        //{
+        //    var collection = args.NewValue as INotifyCollectionChanged;
+        //    if (collection != null)
+        //    {
+        //        // unsubscribe, before subscribe to make sure not to have multiple subscription
+        //        collection.CollectionChanged -= ((GridViewEx)target).SmartSelectedItemsCollectionChanged;
+        //        collection.CollectionChanged += ((GridViewEx)target).SmartSelectedItemsCollectionChanged;
+        //    }
+        //}
+
+        //void SmartSelectedItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        //{
+        //    //Need to unsubscribe from the events so we don't override the transfer
+        //    UnsubscribeFromEvents();
+
+        //    //Move items from the selected items list to the list box selection
+        //    Transfer(SmartSelectedItems as IList, SelectedItems as IList);
+
+        //    //subscribe to the events again so we know when changes are made
+        //    SubscribeToEvents();
+        //}
+
+        //void BaseListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    //Need to unsubscribe from the events so we don't override the transfer
+        //    UnsubscribeFromEvents();
+
+        //    //Move items from the selected items list to the list box selection
+        //    Transfer(SelectedItems as IList, SmartSelectedItems as IList);
+
+        //    //subscribe to the events again so we know when changes are made
+        //    SubscribeToEvents();
+        //}
+
+        //private void SubscribeToEvents()
+        //{
+        //    SelectionChanged += BaseListBoxSelectionChanged;
+
+        //    if (SmartSelectedItems != null)
+        //    {
+        //        SmartSelectedItems.CollectionChanged += SmartSelectedItemsCollectionChanged;
+        //    }
+        //}
+
+        //private void Transfer(IList source, IList target)
+        //{
+        //    if (source == null || target == null)
+        //    {
+        //        return;
+        //    }
+
+        //    target.Clear();
+
+        //    foreach (var o in source)
+        //    {
+        //        if (!(o is EmptyDummyBrick)) // This if is used for preventing the EmptyDummyBrick to get selected
+        //            target.Add(o);
+        //    }
+        //}
+
+        //private void UnsubscribeFromEvents()
+        //{
+        //    SelectionChanged -= BaseListBoxSelectionChanged;
+
+        //    if (SmartSelectedItems != null)
+        //    {
+        //        SmartSelectedItems.CollectionChanged -= SmartSelectedItemsCollectionChanged;
+        //    }
+        //}
+
+        //#endregion
+
+
+
+
+        //      public INotifyCollectionChanged BindableSelectedItems
+        //{
+        //    get { return (INotifyCollectionChanged)GetValue(BindableSelectedItemsProperty); }
+        //    set { SetValue(BindableSelectedItemsProperty, value); }
+        //}
+
+        //public static readonly DependencyProperty BindableSelectedItemsProperty = DependencyProperty.Register(
+        //    "BindableSelectedItems", typeof(INotifyCollectionChanged), typeof(GridViewEx), 
+        //    new PropertyMetadata(null, BindableSelectedItemsChanged));
+
+        //private static void BindableSelectedItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        //{
+        //    var oldBindableSelectedItems = ((INotifyCollectionChanged)e.NewValue);
+        //    var newBindableSelectedItems = ((INotifyCollectionChanged) e.NewValue);
+
+        //    if (oldBindableSelectedItems != null)
+        //        oldBindableSelectedItems.CollectionChanged -= ((GridViewEx)d).BindableSelectedItemsOnCollectionChanged;
+
+
+        //    if (newBindableSelectedItems != null)
+        //        newBindableSelectedItems.CollectionChanged += ((GridViewEx)d).BindableSelectedItemsOnCollectionChanged;
+        //}
+
+
+        //private void BindableSelectedItemsOnCollectionChanged(object sender, 
+        //    NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        //{
+        //    if (BindableSelectedItems == null)
+        //        return;
+
+        //    var list = BindableSelectedItems as ObservableCollection<object>;
+
+        //    var itemsToRemove = new List<object>();
+
+        //    foreach (var item in SelectedItems)
+        //    {
+        //        if (!list.Contains(item))
+        //            itemsToRemove.Add(item);
+        //    }
+
+        //    foreach (var item in itemsToRemove)
+        //    {
+        //        SelectedItems.Remove(item);
+        //    }
+
+        //    foreach (var item in list)
+        //    {
+        //        if (!SelectedItems.Contains(item))
+        //        {
+        //            var index = list.IndexOf(item);
+        //            SelectedItems.Insert(index, item);
+        //        }
+        //    }
+        //}
+
+        //private void OnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
+        //{
+        //    if (BindableSelectedItems == null)
+        //        return;
+
+        //    var list = BindableSelectedItems as ObservableCollection<object>;
+
+        //    var itemsToRemove = new List<object>();
+
+        //    foreach (var item in list)
+        //    {
+        //        if (!SelectedItems.Contains(item))
+        //            itemsToRemove.Add(item);
+        //    }
+
+        //    foreach (var item in itemsToRemove)
+        //    {
+        //        list.Remove(item);
+        //    }
+
+        //    foreach (var item in SelectedItems)
+        //    {
+        //        if (!list.Contains(item))
+        //        {
+        //            var index = SelectedItems.IndexOf(item);
+        //            list.Insert(index, item);
+        //        }
+        //    }
+        //}
     }
 
     /// <summary>

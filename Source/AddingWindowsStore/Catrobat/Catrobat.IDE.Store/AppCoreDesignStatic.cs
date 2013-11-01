@@ -4,8 +4,9 @@
     {
         static AppStoreDesignStatic()
         {
-            Core.App.SetNativeApp(new AppStore());
-            Core.App.Initialize();
+            var app = new AppStore();
+            app.InitializeInterfaces();
+            Core.App.SetNativeApp(app);
         }
     }
 }

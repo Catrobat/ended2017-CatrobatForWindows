@@ -9,6 +9,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:appBar="using:Catrobat.IDE.Store.Controls.AppBar"
   xmlns:pages="using:Catrobat.IDE.Store.Controls.Pages"
+  xmlns:costumes="using:Catrobat.IDE.Store.Views.Editor.Costumes"
   DataContext="{Binding SpritesViewModel, Source={ StaticResource Locator }}"
   mc:Ignorable="d">
 
@@ -61,7 +62,7 @@
           VerticalAlignment="Stretch"
           ItemsSource="{Binding Sprites}"
           SelectedItem="{Binding SelectedSprite, Mode=TwoWay}"
-          Foreground="White" >
+          Foreground="White">
           <GridView.ItemTemplate>
             <DataTemplate>
               <Grid Margin="0 5 0 5" Height="300" Width="600" 
@@ -134,15 +135,11 @@
           NumberOfSelectedItems="{Binding SelectedSprite, Converter={StaticResource NullIntCountConverter}}">
           <appBar:EditorAppBar.NewFlyout>
             <Flyout Opened="FlyoutNew_OnClose">
-              <local:AddNewSpriteView/>
+              <local:AddNewSpriteView Width="400"/>
             </Flyout>
           </appBar:EditorAppBar.NewFlyout>
-
-
         </appBar:EditorAppBar>
       </Grid>
-
-
     </Grid>
   </Grid>
 </Page>
