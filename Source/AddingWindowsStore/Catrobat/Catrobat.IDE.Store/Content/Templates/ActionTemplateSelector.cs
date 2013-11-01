@@ -20,7 +20,6 @@ namespace Catrobat.IDE.Store.Content.Templates
 
         public DataTemplate BroadcastBrick { get; set; }
 
-
         public DataTemplate BroadcastReceiverBrick { get; set; }
 
         public DataTemplate BroadcastWaitBrick { get; set; }
