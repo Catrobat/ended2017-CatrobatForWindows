@@ -37,7 +37,14 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         {
             get
             {
-                return ServiceLocator.ColorConversionService.ConvertToLocalSolidColorBrush(this);
+                try
+                {
+                    return ServiceLocator.ColorConversionService.ConvertToLocalSolidColorBrush(this);
+                }
+                catch
+                {
+                    return null;
+                }
             }
             set
             {

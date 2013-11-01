@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Catrobat.IDE.Store.Views.Editor.Costumes.NewCostumeSourceSelectionView"
+  x:Name="PageRoot"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d"
+  DataContext="{Binding NewCostumeSourceSelectionViewModel, Source={StaticResource Locator}}"
+  d:DesignHeight="500" d:DesignWidth="500">
+
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
+          <TextBlock Margin="10" Style="{StaticResource SubheaderTextBlockStyle}"
+                     Text="{Binding Resources.Editor_TitleNewCostume, Source={StaticResource LocalizedStrings}}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="10 0 0 15" HorizontalAlignment="Stretch">
+          <Button Margin="0 0 10 10" Command="{Binding OpenGalleryCommand}">
+            <Button.Template>
+              <ControlTemplate>
+                <Grid Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                    HorizontalAlignment="Stretch" 
+                    Height="140">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <Image Source="/Content/Images/Misc/Gallery.png" Margin="30 15 15 15"></Image>
+                  <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                           Text="{Binding Resources.Editor_ImageGallery, Source={StaticResource LocalizedStrings}}" 
+                           Name="tbGallery" Style="{StaticResource HeaderTextBlockStyle}"/>
+                </Grid>
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
+
+          <Button Margin="0 0 10 10" Command="{Binding OpenCameraCommand}">
+            <Button.Template>
+              <ControlTemplate>
+                <Grid Background="{Binding Path=SelectedTheme.AccentColor2.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                    HorizontalAlignment="Stretch" 
+                    Height="140">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <Image Source="/Content/Images/Misc/Camera.png" Margin="30 15 15 15"></Image>
+                  <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                           Text="{Binding Resources.Editor_Camera, Source={StaticResource LocalizedStrings}}" 
+                           Style="{StaticResource HeaderTextBlockStyle}" />
+                </Grid>
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
+
+          <Button Margin="0 0 10 10" Command="{Binding OpenPaintCommand}">
+            <Button.Template>
+              <ControlTemplate>
+                <Grid Background="{Binding Path=SelectedTheme.AccentColor3.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                    HorizontalAlignment="Stretch" 
+                    Height="140">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                  </Grid.ColumnDefinitions>
+                  <Image Source="/Content/Images/Misc/EditImage.png" Margin="30 15 15 15"></Image>
+                  <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" 
+                           HorizontalAlignment="Left" 
+                           Text="{Binding Resources.Editor_ImageEditingProgram, Source={StaticResource LocalizedStrings}}" 
+                           TextAlignment="Left"
+                           TextWrapping="Wrap"
+                           Name="tbGallery" Style="{StaticResource HeaderTextBlockStyle}" />
+                </Grid>
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
+        </StackPanel>
+      </Grid>
+    </Grid>
+  </Grid>
+</UserControl>

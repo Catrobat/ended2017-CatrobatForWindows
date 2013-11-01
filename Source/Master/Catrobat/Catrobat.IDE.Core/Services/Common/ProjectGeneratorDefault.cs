@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
+using Catrobat.IDE.Core.CatrobatObjects.Scripts;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.Converters;
@@ -56,9 +57,6 @@ namespace Catrobat.IDE.Core.Services.Common
                     outputStream.Dispose();
                 }
             }
-
-
-
 
             if (writeToDisk)
                 await WriteLooksToDisk(Path.Combine(project.BasePath, Project.ImagesPath));
@@ -120,7 +118,12 @@ namespace Catrobat.IDE.Core.Services.Common
                 Name = AppResources.DefaultProject_Background,
                 FileName = LookFileNameBackground
             });
-            var image = objectBackground.Costumes.Costumes[0].Image;
+
+            objectBackground.Scripts.Scripts.Add(new StartScript());
+            objectBackground.Scripts.Scripts.Add(new WhenScript());
+            objectBackground.Scripts.Scripts.Add(new BroadcastScript());
+            objectBackground.Scripts.Scripts.Add(new StartScript());
+
 
             objectCat.Costumes.Costumes.Add(new Costume
             {
