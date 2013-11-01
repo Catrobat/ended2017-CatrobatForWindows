@@ -128,6 +128,9 @@
   <ItemGroup>
     <Compile Include="AppPhoneDesignStatic.cs" />
     <Compile Include="AppPhone.cs" />
+    <Compile Include="Content\Images\Application\Logo.xaml.cs">
+      <DependentUpon>Logo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
@@ -341,6 +344,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Content\Images\Application\Logo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\Resources.xaml">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -579,7 +586,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Images\Application\pocketcode01.png" />
     <Content Include="Content\Images\Share\skydrive.jpg" />
     <Content Include="Content\Programs\Default\automatic_screenshot.png" />
     <Content Include="Content\Programs\Default\Looks\28226cf909b0e5deb2d275b73a96fbec_rain.png">

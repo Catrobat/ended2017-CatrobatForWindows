@@ -13,7 +13,8 @@
   xmlns:codung4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
   xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
   xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform.WP8"
-  FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                            xmlns:application="clr-namespace:Catrobat.IDE.Phone.Content.Images.Application"
+                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
   SupportedOrientations="Portrait"
@@ -331,8 +332,11 @@
       <!--About panorama item-->
       <controls:PanoramaItem Name="PanoramaItemHelp" Header="{Binding Resources.Main_HeaderAbout, Source={StaticResource LocalizedStrings}}">
         <StackPanel>
-          <Image Grid.Row="1" Margin="-10,-70,-30,-50" Source="/Content/Images/Application/pocketcode01.png"></Image>
-          <TextBlock FontSize="24" TextWrapping="Wrap" Text="{Binding Resources.Main_AboutText, Source={StaticResource LocalizedStrings}}" Margin="10 0 0 15" />
+          <application:Logo Margin="0 0 0 15" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                            TextVisibility="Visible" ScaleFactor="0.6"/>
+          <TextBlock FontSize="24" TextWrapping="Wrap" 
+                     Text="{Binding Resources.Main_AboutText, Source={StaticResource LocalizedStrings}}" 
+                     Margin="10 0 0 15" />
           <Grid>
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="Auto" />
