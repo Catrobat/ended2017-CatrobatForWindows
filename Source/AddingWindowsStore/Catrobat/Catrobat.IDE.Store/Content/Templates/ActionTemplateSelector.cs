@@ -8,6 +8,7 @@ namespace Catrobat.IDE.Store.Content.Templates
 {
     public class ActionTemplateSelector : DataTemplateSelector
     {
+
         //#### Scripts #######################################################################
 
         public DataTemplate StartScript { get; set; }
