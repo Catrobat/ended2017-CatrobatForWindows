@@ -168,8 +168,13 @@ namespace Catrobat.IDE.Core.CatrobatObjects
         }
 
 
-        public void SetProgramName(string newProgramName)
+        public async Task SetProgramNameAndRenameDirectory(string newProgramName)
         {
+            using (var storage = StorageSystem.GetStorage())
+            {
+                await storage.RenameDirectoryAsync("Projects/" + ProjectHeader.ProgramName, newProgramName);
+            }
+
             ProjectHeader.SetProgramName(newProgramName);
             RaisePropertyChanged(() => ProjectHeader);
         }

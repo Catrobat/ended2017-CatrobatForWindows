@@ -110,7 +110,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         #region Commands
 
-        public RelayCommand SaveCommand { get; private set; }
+        public AsyncCommand SaveCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
 
@@ -184,7 +184,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         public CostumeNameChooserViewModel()
         {
-            SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
+            SaveCommand = new AsyncCommand(SaveAction, () => { /* no action */ }, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,

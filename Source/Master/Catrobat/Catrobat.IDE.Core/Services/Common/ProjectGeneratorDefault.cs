@@ -1,18 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.CatrobatObjects.Scripts;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.UI.Converters;
-using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.Utilities.Helpers;
-using SharpCompress.Archive.Zip;
-using SharpCompress.Common;
-using SharpCompress.Reader;
 
 namespace Catrobat.IDE.Core.Services.Common
 {
@@ -37,7 +30,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 ProjectHeader = new ProjectHeader()
             };
 
-            project.SetProgramName(AppResources.Main_DefaultProjectName);
+            project.ProjectHeader.ProgramName = AppResources.Main_DefaultProjectName;
 
             using (var storage = StorageSystem.GetStorage())
             {

@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Core.Resources
                             var xml = await storage.ReadTextFileAsync(textFilePath);
 
                             var project = new Project(xml);
-                            project.SetProgramName(projectName);
+                            project.ProjectHeader.ProgramName = projectName;
 
                             await project.Save();
                         }

@@ -106,9 +106,9 @@ namespace Catrobat.IDE.Core.ViewModel.Service
                 ProjectName = "";
         }
 
-        private void UploadAction()
+        private async void UploadAction()
         {
-            CurrentProject.ProjectHeader.ProgramName = ProjectName;
+            await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
 
             CatrobatWebCommunicationService.UploadProject(_projectName, _projectDescription,
                                               Context.CurrentUserEmail,

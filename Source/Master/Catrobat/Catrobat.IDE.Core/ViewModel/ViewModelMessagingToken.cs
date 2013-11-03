@@ -2,7 +2,7 @@
 {
     public enum ViewModelMessagingToken
     {
-        CostumeNameListener,
+        CostumeListener,
         SoundNameListener,
         CurrentSpriteChangedListener,
         SpriteNameListener,

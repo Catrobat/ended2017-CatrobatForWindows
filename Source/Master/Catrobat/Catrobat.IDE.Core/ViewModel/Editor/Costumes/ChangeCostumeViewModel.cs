@@ -97,58 +97,9 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         private void EditCostumeAction()
         {
-            
-            ServiceLocator.PictureService.DrawPicture(ChangedPictureSuccess, () => {/* No action here */}, () => {/* No action here */},
-                ReceivedCostume.Image);
-            //ServiceLocator.NavigationService.RemoveBackEntry();
-
-            //var writeableBitmap = new WriteableBitmap(ReceivedCostume.Image.Width, ReceivedCostume.Image.Height);
-            //writeableBitmap.FromByteArray(ReceivedCostume.Image.Data);
-
-            //var task = new PaintLauncherTask { CurrentImage = new WriteableBitmap(writeableBitmap) };
-            //task.OnImageChanged += OnPaintLauncherTaskImageChanged;
-            //PaintLauncher.Launche(task);
+            ServiceLocator.PictureService.DrawPicture(ChangedPictureSuccess, () => 
+            {/* No action here */}, () => {/* No action here */}, ReceivedCostume.Image);
         }
-
-        private async void ChangedPictureSuccess(PortableImage image)
-        {
-            try
-            {
-                
-                await CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, image);
-            }
-            catch (Exception)
-            {
-                // TODO: fix error on changing the same costume twice in a short time
-
-                if (Debugger.IsAttached)
-                    Debugger.Break();
-            }
-
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            base.GoBackAction();
-        }
-
-        //private void OnPaintLauncherTaskImageChanged(PaintLauncherTask task)
-        //{
-        //    try
-        //    {
-        //        var writeableBitmap = new WriteableBitmap(task.CurrentImage);
-        //        var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
-        //            writeableBitmap.PixelHeight);
-        //        CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, portableImage);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        // TODO: fix error on changing the same costume twice in a short time
-
-        //        if (Debugger.IsAttached)
-        //            Debugger.Break();
-        //    }
-
-        //    ServiceLocator.NavigationService.RemoveBackEntry();
-        //    base.GoBackAction();
-        //}
 
         protected override void GoBackAction()
         {
@@ -180,7 +131,24 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
-            Messenger.Default.Register<GenericMessage<Costume>>(this, ViewModelMessagingToken.CostumeNameListener, ChangeCostumeNameMessageAction);
+            Messenger.Default.Register<GenericMessage<Costume>>(this, ViewModelMessagingToken.CostumeListener, ChangeCostumeNameMessageAction);
+        }
+
+
+        private async void ChangedPictureSuccess(PortableImage image)
+        {
+            try
+            {
+                await CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, image);
+            }
+            catch (Exception)
+            {
+                if (Debugger.IsAttached)
+                    Debugger.Break();
+            }
+
+            ServiceLocator.NavigationService.RemoveBackEntry();
+            base.GoBackAction();
         }
 
         private void ResetViewModel()

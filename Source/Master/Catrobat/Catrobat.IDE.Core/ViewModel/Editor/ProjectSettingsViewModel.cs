@@ -106,13 +106,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
             if (CurrentProject.ProjectDummyHeader == SelectedProjectHeader)
             {
                 CurrentProject.ProjectDummyHeader.ProjectName = ProjectName;
-                CurrentProject.ProjectHeader.ProgramName = ProjectName;
+                await CurrentProject.SetProgramNameAndRenameDirectory(ProjectName);
                 CurrentProject.ProjectHeader.Description = ProjectDescription;
             }
             else
             {
                 SelectedProjectHeader.ProjectName = ProjectName;
-                SelectedProject.ProjectHeader.ProgramName = ProjectName;
+                await SelectedProject.SetProgramNameAndRenameDirectory(ProjectName);
                 SelectedProject.ProjectHeader.Description = ProjectDescription;
                 await SelectedProject.Save();
             }

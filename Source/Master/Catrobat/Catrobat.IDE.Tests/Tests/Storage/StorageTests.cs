@@ -1,14 +1,11 @@
-﻿using System;
-using System.IO;
-using System.IO.IsolatedStorage;
+﻿using System.IO;
 using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.Misc.Storage;
+using Catrobat.IDE.Tests.Services.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Reflection;
 using Catrobat.IDE.Core;
 
 namespace Catrobat.IDE.Tests.Tests.Storage
@@ -16,7 +13,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
     [TestClass]
     public class StorageWindowsStoreTests
     {
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
         {
             TestHelper.InitializeTests();

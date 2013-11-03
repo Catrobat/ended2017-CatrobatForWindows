@@ -1,5 +1,4 @@
-﻿using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.UI.PortableUI;
+﻿using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -39,10 +38,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         #region Actions
 
-        protected override void GoBackAction()
-        {
-            base.GoBackAction();
-        }
+
 
         #endregion
 

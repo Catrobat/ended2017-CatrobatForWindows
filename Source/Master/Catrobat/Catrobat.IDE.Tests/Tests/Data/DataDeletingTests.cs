@@ -32,7 +32,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project = projectgenerator.GenerateProject();
-            project.SetProgramName(programName);
+            project.SetProgramNameAndRenameDirectory(programName);
             // TODO: write dummy costume files to disk
 
             using (IStorage storage = StorageSystem.GetStorage())

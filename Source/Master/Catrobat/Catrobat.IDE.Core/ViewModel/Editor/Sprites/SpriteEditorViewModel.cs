@@ -631,7 +631,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             foreach (var costume in SelectedCostumes)
             {
                 var message = new GenericMessage<Costume>(costume);
-                Messenger.Default.Send(message, ViewModelMessagingToken.CostumeNameListener);
+                Messenger.Default.Send(message, ViewModelMessagingToken.CostumeListener);
 
                 ServiceLocator.NavigationService.NavigateTo<ChangeCostumeViewModel>();
             }
