@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System.Threading.Tasks;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.PortableUI;
@@ -27,7 +28,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
         }
 
         [TestMethod] //, TestCategory("GatedTests")]
-        public async void SaveActionTest()
+        public async Task SaveActionTest()
         {
             _imageToSave = null;
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,
@@ -53,10 +54,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             var messageContext3 = new GenericMessage<PortableImage>(new PortableImage());
             Messenger.Default.Send(messageContext3, ViewModelMessagingToken.CostumeImageListener);
 
-
-            viewModel.SaveCommand.Execute(null); //TODO: await methodcall
-
-
+            await viewModel.SaveCommand.ExecuteAsync(null);
 
             Assert.IsNotNull(_imageToSave);
             Assert.AreEqual(1, sprite.Costumes.Costumes.Count);

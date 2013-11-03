@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
@@ -110,7 +111,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         #region Commands
 
-        public AsyncCommand SaveCommand { get; private set; }
+        public AsyncRelayCommand SaveCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
 
@@ -127,7 +128,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         #region Actions
 
-        private async void SaveAction()
+        private async Task SaveAction()
         {
             var message = new GenericMessage<PortableImage>(Image);
             Messenger.Default.Send(message, ViewModelMessagingToken.CostumeImageToSaveListener);
@@ -184,7 +185,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         public CostumeNameChooserViewModel()
         {
-            SaveCommand = new AsyncCommand(SaveAction, () => { /* no action */ }, SaveCommand_CanExecute);
+            SaveCommand = new AsyncRelayCommand(SaveAction, () => { /* no action  */ }, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,

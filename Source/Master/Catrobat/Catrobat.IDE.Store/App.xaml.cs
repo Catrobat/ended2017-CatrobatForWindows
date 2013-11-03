@@ -30,12 +30,12 @@ namespace Catrobat.IDE.Store
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                this.DebugSettings.EnableFrameRateCounter = true;
-            }
-#endif
+            #if DEBUG
+                        if (System.Diagnostics.Debugger.IsAttached)
+                        {
+                            this.DebugSettings.EnableFrameRateCounter = true;
+                        }
+            #endif
 
             Frame rootFrame = Window.Current.Content as Frame;
 

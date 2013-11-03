@@ -260,7 +260,7 @@
     <Compile Include="VersionConverter\VersionConverterResult.cs" />
     <Compile Include="VersionConverter\Versions\CatrobatVersion091ToWin091.cs" />
     <Compile Include="Utilities\Helpers\XElementExtensions.cs" />
-    <Compile Include="ViewModel\AsyncCommand.cs" />
+    <Compile Include="ViewModel\AsyncRelayCommand.cs" />
     <Compile Include="ViewModel\Editor\Costumes\ChangeCostumeViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\CostumeNameChooserViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\CostumeSavingViewModel.cs" />
