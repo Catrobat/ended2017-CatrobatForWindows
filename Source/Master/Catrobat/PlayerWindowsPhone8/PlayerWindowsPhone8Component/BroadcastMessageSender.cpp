@@ -1,9 +1,7 @@
 #include "pch.h"
 #include "BroadcastMessageSender.h"
 
-BroadcastMessageSender::BroadcastMessageSender()
-{
-}
+BroadcastMessageSender::BroadcastMessageSender() { }
 
 void BroadcastMessageSender::SendBroadcastMessage(Platform::String ^message)
 {

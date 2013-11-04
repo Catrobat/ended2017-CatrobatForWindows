@@ -138,9 +138,6 @@
   <data name="Redo" xml:space="preserve">
     <value>Wiederherstellen</value>
   </data>
-  <data name="SaveToCatrobat" xml:space="preserve">
-    <value>Speichern für Catrobat</value>
-  </data>
   <data name="Undo" xml:space="preserve">
     <value>Rückgängig</value>
   </data>

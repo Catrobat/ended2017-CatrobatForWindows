@@ -29,9 +29,7 @@ void Renderer::CreateWindowSizeDependentResources()
 	Direct3DBase::CreateWindowSizeDependentResources();
 }
 
-void Renderer::Update(float timeTotal, float timeDelta)
-{
-}
+void Renderer::Update(float timeTotal, float timeDelta)  { }
 
 void Renderer::Render()
 {

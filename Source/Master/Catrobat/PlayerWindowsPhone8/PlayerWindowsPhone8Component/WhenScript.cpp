@@ -10,8 +10,10 @@ using namespace Windows::Foundation;
 WhenScript::WhenScript(string action, Object *parent) :
 	Script(TypeOfScript::WhenScript, parent)
 {
-	if (action == "Tapped")
-		m_action = Action::Tapped;
+    if (action == "Tapped")
+    {
+        m_action = Action::Tapped;
+    }
 }
 
 int WhenScript::GetAction()

@@ -12,8 +12,5 @@ TurnLeftBrick::TurnLeftBrick(FormulaTree *rotation, Script *parent) :
 
 void TurnLeftBrick::Execute()
 {
-    //m_parent->GetParent()->SetRotation(Interpreter::Instance()->GetRotationProvider(m_rotation, m_parent->GetParent()));
-
-    m_parent->GetParent()->GetRotationProvider()->AddRotation((-1) * Interpreter::Instance()->EvaluateFormulaToFloat(m_rotation, m_parent->GetParent()));
-	//m_parent->GetParent()->SetRotation(m_parent->GetParent()->GetRotation() - Interpreter::Instance()->GetRotationProvider(m_rotation, m_parent->GetParent())->GetRotation());
+	m_parent->GetParent()->SetRotation(m_parent->GetParent()->GetRotation() - Interpreter::Instance()->EvaluateFormulaToFloat(m_rotation, m_parent->GetParent()));
 }

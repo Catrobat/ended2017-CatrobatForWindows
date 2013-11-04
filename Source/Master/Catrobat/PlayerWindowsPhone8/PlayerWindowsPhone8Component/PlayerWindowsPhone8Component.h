@@ -5,7 +5,7 @@
 #include "Renderer.h"
 #include "SoundManager.h"
 #include "ProjectRenderer.h"
-
+#include "WhenScript.h"
 #include <DrawingSurfaceNative.h>
 
 namespace PhoneDirect3DXamlAppComponent
@@ -52,6 +52,7 @@ private:
 	Windows::Foundation::Rect m_originalWindowsBounds;
 	bool m_renderingErrorOccured;
     bool m_initialized;
+    WhenScript* m_lastTappedWhenScript;
 };
 
 }

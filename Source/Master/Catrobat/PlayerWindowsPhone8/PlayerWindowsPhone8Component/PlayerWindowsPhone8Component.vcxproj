@@ -253,9 +253,7 @@
     <ClInclude Include="Direct3DContentProvider.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RepeatBrick.h" />
-    <ClInclude Include="RotationProvider.h" />
     <ClInclude Include="Script.h" />
-    <ClInclude Include="ScriptHandler.h" />
     <ClInclude Include="SetGhostEffectBrick.h" />
     <ClInclude Include="SetSizeToBrick.h" />
     <ClInclude Include="SetVariableBrick.h" />
@@ -326,9 +324,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="RepeatBrick.cpp" />
-    <ClCompile Include="RotationProvider.cpp" />
     <ClCompile Include="Script.cpp" />
-    <ClCompile Include="ScriptHandler.cpp" />
     <ClCompile Include="SetGhostEffectBrick.cpp" />
     <ClCompile Include="SetSizeToBrick.cpp" />
     <ClCompile Include="SetVariableBrick.cpp" />

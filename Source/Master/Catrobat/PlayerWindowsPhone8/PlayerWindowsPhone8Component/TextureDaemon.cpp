@@ -15,8 +15,11 @@ TextureDaemon *TextureDaemon::__instance = NULL;
 
 TextureDaemon *TextureDaemon::Instance()
 {
-	if (!__instance)
-		__instance = new TextureDaemon();
+    if (!__instance)
+    {
+        __instance = new TextureDaemon();
+    }
+
 	return __instance;
 }
 
@@ -43,7 +46,7 @@ void TextureDaemon::LoadTexture(ID3D11Device *d3dDevice, CatrobatTexture **textu
         oldFileSize = existingTexture->second->fileSize;
     }
 
-    if (existingTexture == m_textures->end() && currentFileSize != oldFileSize)
+    if (existingTexture == m_textures->end() && currentFileSize != oldFileSize || existingTexture->second == NULL)
 	{
 		CatrobatTexture *newTexture = new CatrobatTexture();
         DDSLoader::LoadTexture(d3dDevice, path, &(newTexture->texture), &(newTexture->width), &(newTexture->height));
