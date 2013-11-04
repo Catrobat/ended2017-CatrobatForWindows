@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
@@ -33,11 +34,14 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
         {
             var path = Path.Combine(project.BasePath, Project.ImagesPath, costume.FileName);
 
-            using (var storage = StorageSystem.GetStorage())
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
-                await storage.SaveImageAsync(path, newImage, true, ImageFormat.Png);
-                costume.Image = await storage.CreateThumbnailAsync(newImage);
-            }
+                using (var storage = StorageSystem.GetStorage())
+                {
+                    storage.SaveImage(path, newImage, true, ImageFormat.Png);
+                    costume.Image = storage.CreateThumbnail(newImage);
+                }
+            });
         }
     }
 }

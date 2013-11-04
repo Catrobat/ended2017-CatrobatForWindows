@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Core.Services
         Short, Medeum, Long
     };
 
-    public interface INotifictionService
+    public interface INotificationService
     {
         void ShowToastNotification(PortableImage image, string title, string message, ToastNotificationTime timeTillHide);
 

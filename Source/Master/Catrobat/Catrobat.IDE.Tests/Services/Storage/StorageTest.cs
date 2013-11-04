@@ -341,7 +341,7 @@ namespace Catrobat.IDE.Tests.Services.Storage
 
         public PortableImage CreateThumbnail(PortableImage image)
         {
-            throw new NotImplementedException();
+            return new PortableImage();
         }
 
 

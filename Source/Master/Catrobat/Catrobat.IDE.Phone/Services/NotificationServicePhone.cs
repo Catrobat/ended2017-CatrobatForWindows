@@ -8,7 +8,7 @@ using Coding4Fun.Toolkit.Controls;
 
 namespace Catrobat.IDE.Phone.Services
 {
-    class NotificationServicePhone : INotifictionService
+    class NotificationServicePhone : INotificationService
     {
         public void ShowToastNotification(PortableImage image, string title, string message, ToastNotificationTime timeTillHide)
         {

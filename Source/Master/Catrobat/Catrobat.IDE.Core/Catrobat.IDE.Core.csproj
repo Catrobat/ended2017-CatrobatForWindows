@@ -214,7 +214,7 @@
     <Compile Include="Services\IImageResizeService.cs" />
     <Compile Include="Services\IImageSourceConversionService.cs" />
     <Compile Include="Services\INavigationService.cs" />
-    <Compile Include="Services\INotifictionService.cs" />
+    <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Services\IPictureService.cs" />
     <Compile Include="Services\IPlayerLauncherService.cs" />
     <Compile Include="Services\IProjectImporterService.cs" />

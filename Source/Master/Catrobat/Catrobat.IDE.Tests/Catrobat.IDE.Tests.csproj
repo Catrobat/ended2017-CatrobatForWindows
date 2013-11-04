@@ -93,7 +93,9 @@
     <Compile Include="Misc\ProjectGeneratorForScriptBrickCollectionTests.cs" />
     <Compile Include="Misc\ProjectGeneratorReflection.cs" />
     <Compile Include="Misc\Storage\BasePathHelper.cs" />
+    <Compile Include="Services\DispatcherServiceTest.cs" />
     <Compile Include="Services\ImageResizeServiceTest.cs" />
+    <Compile Include="Services\Storage\NotificationServiceTest.cs" />
     <Compile Include="Services\Storage\ResourceLoaderFactoryTest.cs" />
     <Compile Include="Services\Storage\ResourcesTest.cs" />
     <Compile Include="Services\Storage\StorageFactoryTest.cs" />
@@ -132,6 +134,7 @@
     <Compile Include="Tests\Misc\ZipTests.cs" />
     <Compile Include="Tests\Storage\StorageTests.cs" />
     <Compile Include="Tests\ViewModel\Editor\Costumes\ChangeCostumeViewModelTests.cs" />
+    <Compile Include="Tests\ViewModel\Editor\Costumes\NewCostumeSourceSelectionViewModelTests.cs" />
     <Compile Include="Tests\ViewModel\Editor\Costumes\CostumeNameChooserViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>

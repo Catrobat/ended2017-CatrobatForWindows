@@ -33,6 +33,6 @@ namespace Catrobat.Paint
                 OnImageChanged.Invoke(this);
         }
 
-        public WriteableBitmap CurrentImage { get; set; }
+        public BitmapSource CurrentImage { get; set; }
     }
 }

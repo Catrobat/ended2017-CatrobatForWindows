@@ -91,8 +91,8 @@ namespace Catrobat.IDE.Core.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public static INotifictionService NotifictionService
-        { get { return GetInstance<INotifictionService>(); } }
+        public static INotificationService NotifictionService
+        { get { return GetInstance<INotificationService>(); } }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",

@@ -58,7 +58,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
 
             Assert.IsNotNull(_imageToSave);
             Assert.AreEqual(1, sprite.Costumes.Costumes.Count);
-            Assert.AreEqual(_imageToSave, sprite.Costumes.Costumes[0]);
+            Assert.IsNotNull(sprite.Costumes.Costumes[0].Image);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateBack, navigationService.CurrentNavigationType);
             Assert.AreEqual(null, navigationService.CurrentView);
             Assert.AreEqual(0, navigationService.PageStackCount);

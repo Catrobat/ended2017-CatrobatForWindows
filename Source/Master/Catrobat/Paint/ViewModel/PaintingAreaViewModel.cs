@@ -86,7 +86,14 @@ namespace Catrobat.Paint.ViewModel
 
         private void GetCurrentImage()
         {
-            _currentImage = PaintLauncher.Task.CurrentImage;
+            _currentImage = new WriteableBitmap(PaintLauncher.Task.CurrentImage);
+
+            var width = (int)Application.Current.Host.Content.ActualWidth;
+            var height = (int)Application.Current.Host.Content.ActualHeight;
+
+            if(_currentImage == null)
+                _currentImage = new WriteableBitmap(width, height);
+
             _task = PaintLauncher.Task;
         }
 

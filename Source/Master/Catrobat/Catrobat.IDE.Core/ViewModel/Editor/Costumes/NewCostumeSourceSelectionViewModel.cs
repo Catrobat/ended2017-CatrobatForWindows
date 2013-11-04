@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.Resources.Localization;
+﻿using System.Threading.Tasks;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 using GalaSoft.MvvmLight.Command;
@@ -58,11 +59,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
                 ServiceLocator.PictureService.DrawPicture(PictureSuccess, PictureCanceled, PictureError);
                 ServiceLocator.NavigationService.RemoveBackEntry();
             }
-        }
-
-        protected override void GoBackAction()
-        {
-            base.GoBackAction();
         }
 
         #endregion

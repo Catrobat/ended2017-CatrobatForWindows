@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.Services;
@@ -65,7 +66,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         #region Commands
 
-        public RelayCommand EditCostumeCommand { get; private set; }
+        public AsyncRelayCommand EditCostumeCommand { get; private set; }
 
         public RelayCommand SaveCommand { get; private set; }
 
@@ -95,10 +96,19 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             base.GoBackAction();
         }
 
-        private void EditCostumeAction()
+        private async Task EditCostumeAction()
         {
-            ServiceLocator.PictureService.DrawPicture(ChangedPictureSuccess, () => 
-            {/* No action here */}, () => {/* No action here */}, ReceivedCostume.Image);
+            var result = await ServiceLocator.PictureService.DrawPictureAsync(ReceivedCostume.Image);
+
+            if (result.Status == PictureServiceStatus.Success)
+            {
+                await CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, result.Image);
+
+                ServiceLocator.DispatcherService.RunOnMainThread(() => {
+                    ServiceLocator.NavigationService.RemoveBackEntry();
+                    base.GoBackAction();
+                });
+            }
         }
 
         protected override void GoBackAction()
@@ -126,29 +136,14 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         public ChangeCostumeViewModel()
         {
-            EditCostumeCommand = new RelayCommand(EditCostumeAction);
+            EditCostumeCommand = new AsyncRelayCommand(EditCostumeAction, () => { /* no action  */ });
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
-            Messenger.Default.Register<GenericMessage<Costume>>(this, ViewModelMessagingToken.CostumeListener, ChangeCostumeNameMessageAction);
-        }
-
-
-        private async void ChangedPictureSuccess(PortableImage image)
-        {
-            try
-            {
-                await CostumeHelper.ReplaceImageInStorage(CurrentProject, ReceivedCostume, image);
-            }
-            catch (Exception)
-            {
-                if (Debugger.IsAttached)
-                    Debugger.Break();
-            }
-
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            base.GoBackAction();
+            Messenger.Default.Register<GenericMessage<Project>>(this, 
+                ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<Costume>>(this, 
+                ViewModelMessagingToken.CostumeListener, ChangeCostumeNameMessageAction);
         }
 
         private void ResetViewModel()
