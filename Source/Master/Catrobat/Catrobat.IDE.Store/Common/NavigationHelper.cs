@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModel;
 
 namespace Catrobat.IDE.Store.Common
 {
@@ -56,6 +59,9 @@ namespace Catrobat.IDE.Store.Common
     public class NavigationHelper : DependencyObject
     {
         private Page Page { get; set; }
+
+        private IEnumerable<ViewModelBase> ViewModels { get; set; }
+
         private Frame Frame { get { return this.Page.Frame; } }
 
         /// <summary>
@@ -64,9 +70,15 @@ namespace Catrobat.IDE.Store.Common
         /// <param name="page">A reference to the current page used for navigation.  
         /// This reference allows for frame manipulation and to ensure that keyboard 
         /// navigation requests only occur when the page is occupying the entire window.</param>
-        public NavigationHelper(Page page)
+        public NavigationHelper(Page page, IEnumerable<Type> viewModelTypes)
         {
             this.Page = page;
+            this.ViewModels = new List<ViewModelBase>();
+            foreach (var viewModelType in viewModelTypes)
+            {
+                ((List<ViewModelBase>)ViewModels).Add((ViewModelBase)ServiceLocator.GetInstance(viewModelType));
+            }
+            
 
             // When this page is part of the visual tree make two changes:
             // 1) Map application view state to visual state for the page
@@ -304,6 +316,10 @@ namespace Catrobat.IDE.Store.Common
                 }
 
                 // Pass the navigation parameter to the new page
+
+                foreach(var viewModel in ViewModels)
+                    viewModel.LoadState(null);
+
                 if (this.LoadState != null)
                 {
                     this.LoadState(this, new LoadStateEventArgs(e.Parameter, null));
@@ -314,6 +330,14 @@ namespace Catrobat.IDE.Store.Common
                 // Pass the navigation parameter and preserved page state to the page, using
                 // the same strategy for loading suspended state and recreating pages discarded
                 // from cache
+                foreach (var viewModel in ViewModels)
+                {
+                    var viewModelName = viewModel.GetType().FullName;
+                    viewModel.LoadState((Dictionary<String, Object>)frameState["ViewModel_" + viewModelName]);
+                }
+
+                
+                
                 if (this.LoadState != null)
                 {
                     this.LoadState(this, new LoadStateEventArgs(e.Parameter, (Dictionary<String, Object>)frameState[this._pageKey]));
@@ -332,6 +356,16 @@ namespace Catrobat.IDE.Store.Common
         {
             var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
             var pageState = new Dictionary<String, Object>();
+
+            foreach (var viewModel in ViewModels)
+            {
+                var viewModelName = viewModel.GetType().FullName;
+                viewModel.SaveState(pageState);
+
+                frameState["ViewModel_" + viewModelName] = pageState;
+            }
+
+
             if (this.SaveState != null)
             {
                 this.SaveState(this, new SaveStateEventArgs(pageState));

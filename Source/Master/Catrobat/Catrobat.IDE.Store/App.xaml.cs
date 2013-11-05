@@ -4,6 +4,9 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModel.Main;
+using Catrobat.IDE.Store.Common;
 
 namespace Catrobat.IDE.Store
 {
@@ -27,8 +30,9 @@ namespace Catrobat.IDE.Store
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
+            Controls.SplashScreen.PreviousExecutionState = e.PreviousExecutionState;
 
             #if DEBUG
                         if (System.Diagnostics.Debugger.IsAttached)
@@ -48,25 +52,28 @@ namespace Catrobat.IDE.Store
                 // Set the default language
                 rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    //TODO: Load state from previously suspended application
-                }
-
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
 
-            if (rootFrame.Content == null)
+
+            if (!rootFrame.Navigate(typeof(Controls.SplashScreen), e.Arguments))
             {
-                // When the navigation stack isn't restored navigate to the first page,
-                // configuring the new page by passing required information as a navigation
-                // parameter
-                if (!rootFrame.Navigate(typeof(Controls.SplashScreen), e.Arguments))
-                {
-                    throw new Exception("Failed to create initial page");
-                }
+                throw new Exception("Failed to create initial page");
             }
+
+
+
+            //if (rootFrame.Content == null)
+            //{
+            //    // When the navigation stack isn't restored navigate to the first page,
+            //    // configuring the new page by passing required information as a navigation
+            //    // parameter
+            //    if (!rootFrame.Navigate(typeof(Controls.SplashScreen), e.Arguments))
+            //    {
+            //        throw new Exception("Failed to create initial page");
+            //    }
+            //}
             // Ensure the current window is active
             Window.Current.Activate();
         }
@@ -78,10 +85,13 @@ namespace Catrobat.IDE.Store
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+            await SuspensionManager.SaveAsync();
+            var mainViewModel = ServiceLocator.GetInstance<MainViewModel>();
+            await Core.App.SaveContext(mainViewModel.CurrentProject);
+
             deferral.Complete();
         }
     }

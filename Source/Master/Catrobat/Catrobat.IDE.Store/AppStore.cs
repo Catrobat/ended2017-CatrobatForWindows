@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Store.Services;
@@ -10,6 +11,8 @@ namespace Catrobat.IDE.Store
     {
         public void InitializeInterfaces()
         {
+            ServiceLocator.UnRegisterAll();
+
             ServiceLocator.ViewModelLocator = Application.Current.Resources["Locator"];
             ServiceLocator.ThemeChooser = Application.Current.Resources["ThemeChooser"];
             ServiceLocator.LocalizedStrings = Application.Current.Resources["LocalizedStrings"];

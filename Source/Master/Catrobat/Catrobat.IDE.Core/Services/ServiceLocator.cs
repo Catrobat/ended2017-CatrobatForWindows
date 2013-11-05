@@ -190,7 +190,7 @@ namespace Catrobat.IDE.Core.Services
             return (T) GetInstance(typeof (T));
         }
 
-        internal static void UnRegisterAll()
+        public static void UnRegisterAll()
         {
             Instances.Clear();
         }

@@ -252,8 +252,8 @@ namespace Catrobat.IDE.Store.Services.Storage
                 var sourceFolderPath = Path.Combine(sourcePath, folder.Name);
                 var destinationFolderPath = Path.Combine(destinationPath, folder.Name);
 
-                CreateDirectory(destinationFolderPath);
-                CopyDirectory(sourceFolderPath, destinationFolderPath);
+                await CreateDirectoryAsync(destinationFolderPath);
+                await CopyDirectoryAsync(sourceFolderPath, destinationFolderPath);
             }
 
             var sourceDirectory = "";
@@ -268,7 +268,7 @@ namespace Catrobat.IDE.Store.Services.Storage
 
                     sourceDirectory = Path.Combine(sourcePath, file.Name);
                     destinationDirectory = Path.Combine(destinationPath, file.Name);
-                    CopyFile(sourceDirectory, destinationDirectory);
+                    await CopyFileAsync(sourceDirectory, destinationDirectory);
                 }
             }
             catch (Exception)
@@ -404,7 +404,7 @@ namespace Catrobat.IDE.Store.Services.Storage
 
                 if (await FileExistsAsync(thumbnailPath))
                 {
-                    retVal = LoadImage(thumbnailPath);
+                    retVal = await LoadImageAsync(thumbnailPath);
                 }
                 else
                 {
@@ -425,13 +425,14 @@ namespace Catrobat.IDE.Store.Services.Storage
 
                             var encoderId = BitmapEncoder.PngEncoderId;
                             var encoder = await  BitmapEncoder.CreateAsync(encoderId, fileStream.AsRandomAccessStream());
-                            encoder.SetPixelData(BitmapPixelFormat.Rgba8,
+                            encoder.SetPixelData(BitmapPixelFormat.Bgra8,
                                                                  BitmapAlphaMode.Ignore,
                                                                  (uint)bitmap.PixelWidth,
                                                                  (uint)bitmap.PixelHeight,
                                                                  resolution,
                                                                  resolution,
                                                                  bitmap.ToByteArray());
+                            await encoder.FlushAsync();
                         }
 
                         catch
@@ -463,10 +464,10 @@ namespace Catrobat.IDE.Store.Services.Storage
 
             if (deleteExisting)
             {
-                if (FileExists(path))
+                if (await FileExistsAsync(path))
                     await DeleteFileAsync(path);
 
-                if (FileExists(thumbnailPath))
+                if (await FileExistsAsync(thumbnailPath))
                     await DeleteFileAsync(thumbnailPath);
             }
 

@@ -58,7 +58,7 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
+                    if (await storage.FileExistsAsync(CatrobatContextBase.TempProjectImportZipPath))
                     {
                         await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
                     }
@@ -68,7 +68,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var storage = StorageSystem.GetStorage())
             {
-                if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
+                if (await storage.FileExistsAsync(CatrobatContextBase.TempProjectImportZipPath))
                 {
                     await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
                 }

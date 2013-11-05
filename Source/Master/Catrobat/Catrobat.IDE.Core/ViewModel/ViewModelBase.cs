@@ -36,5 +36,15 @@ namespace Catrobat.IDE.Core.ViewModel
         {
             GoBackCommand = new RelayCommand(GoBackAction);
         }
+
+        public void SaveState(System.Collections.Generic.Dictionary<string, object> pageState)
+        {
+            /* implemented in ViewModels */
+        }
+
+        public void LoadState(System.Collections.Generic.Dictionary<string, object> pageState)
+        {
+            /* implemented in ViewModels */
+        }
     }
 }
