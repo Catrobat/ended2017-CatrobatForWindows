@@ -43,7 +43,7 @@ namespace Catrobat.IDE.Core
                 var tempPath = Path.Combine(ProjectsPath, projectName, Project.ProjectCodePath);
                 var xml = await storage.ReadTextFileAsync(tempPath);
                 var newProject = new Project(xml);
-                newProject.SetProgramName(projectName);
+                newProject.ProjectHeader.ProgramName = projectName;
                 return newProject;
             }
         }
@@ -76,7 +76,7 @@ namespace Catrobat.IDE.Core
             newProject.SpriteList = new SpriteList();
             newProject.VariableList.ObjectVariableList = new ObjectVariableList();
             newProject.VariableList.ProgramVariableList = new ProgramVariableList();
-            newProject.SetProgramName(newProjectName);
+            newProject.ProjectHeader.ProgramName = newProjectName;
             await newProject.Save();
 
             return newProject;
@@ -102,7 +102,7 @@ namespace Catrobat.IDE.Core
                 var tempXmlPath = Path.Combine(destinationPath, Project.ProjectCodePath);
                 var xml = await storage.ReadTextFileAsync(tempXmlPath);
                 var newProject = new Project(xml);
-                newProject.SetProgramName(newProjectName);
+                newProject.ProjectHeader.ProgramName = newProjectName;
                 await newProject.Save();
 
                 return newProject;

@@ -5,7 +5,10 @@ using namespace Windows::UI::Core;
 using namespace Windows::Devices::Sensors;
 using namespace Windows::Foundation;
 
-CompassProvider::CompassProvider() { }
+CompassProvider::CompassProvider() 
+{
+    Init();
+}
 
 CompassProvider::~CompassProvider()
 {
@@ -32,6 +35,6 @@ bool CompassProvider::Init()
 
 float CompassProvider::GetDirection()
 {
-    float retVal = m_compass->GetCurrentReading()->HeadingMagneticNorth;
+    float retVal = 360.0f -  m_compass->GetCurrentReading()->HeadingMagneticNorth;
     return retVal;
 }

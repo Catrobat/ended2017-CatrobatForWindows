@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.ExtensionMethods;
@@ -61,7 +58,7 @@ namespace Catrobat.IDE.Core.Services.Common
             {
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
+                    if (await storage.FileExistsAsync(CatrobatContextBase.TempProjectImportZipPath))
                     {
                         await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
                     }
@@ -71,7 +68,7 @@ namespace Catrobat.IDE.Core.Services.Common
 
             using (var storage = StorageSystem.GetStorage())
             {
-                if (storage.FileExists(CatrobatContextBase.TempProjectImportZipPath))
+                if (await storage.FileExistsAsync(CatrobatContextBase.TempProjectImportZipPath))
                 {
                     await storage.DeleteDirectoryAsync(CatrobatContextBase.TempProjectImportZipPath);
                 }
@@ -110,7 +107,7 @@ namespace Catrobat.IDE.Core.Services.Common
                 if (counter != 0)
                 {
                     newProjectName = _tempProjectHeader.ProjectName + counter;
-                    _project.SetProgramName(newProjectName);
+                    _project.ProjectHeader.ProgramName = newProjectName;
                     var saveToPath = Path.Combine(CatrobatContextBase.TempProjectImportPath, Project.ProjectCodePath);
                     await _project.Save(saveToPath);
                 }

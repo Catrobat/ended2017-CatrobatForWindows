@@ -24,8 +24,8 @@
   <SolidColorBrush x:Key="MotionBrickBrush" Color="#FF2E2BD7" />
   <SolidColorBrush x:Key="SoundBrickBrush" Color="#FFE035D5" />
   <SolidColorBrush x:Key="ControlBrickBrush" Color="#FFEBB613" />
-  <SolidColorBrush x:Key="VariableBrickBrush" Color="DarkGreen" />
-  <SolidColorBrush x:Key="BrickBorderBrush" Color="White" />-->
+  <SolidColorBrush x:Key="VariableBrickBrush" Color="DarkGreen" />-->
+  <SolidColorBrush x:Key="BrickBorderBrush" Color="{StaticResource PhoneBorderColor}" />
 
   
 

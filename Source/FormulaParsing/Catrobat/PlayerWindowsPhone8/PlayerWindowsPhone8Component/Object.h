@@ -7,8 +7,6 @@
 #include "Script.h"
 #include "SoundInfo.h"
 #include "UserVariable.h"
-#include "Interpreter.h"
-#include "RotationProvider.h"
 
 using namespace std;
 
@@ -55,13 +53,12 @@ public:
 
 	void SetTransparency(float transparency);
 	float GetTransparency();
-
-    void SetRotation(RotationProvider* rotation);
+	void SetRotation(float rotation);
 	float GetRotation();
-    RotationProvider* GetRotationProvider();
-
 	void SetScale(float scale);
 	float GetScale();
+
+    bool IsTapPointHitting(int xPosition, int yPosition, int xNormalized, int yNormalized);
 
 private:
 	Look *m_look;
@@ -71,5 +68,5 @@ private:
 	std::map<std::string, UserVariable*> *m_variableList;
 	string m_name;
 	float m_opacity;
-    RotationProvider* m_rotation;
+	float m_rotation;
 };

@@ -1601,7 +1601,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to accelerationX.
+        ///   Looks up a localized string similar to acceleration_X.
         /// </summary>
         public static string Formula_ACCELERATION_X {
             get {
@@ -1610,7 +1610,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to accelerationY.
+        ///   Looks up a localized string similar to acceleration_Y.
         /// </summary>
         public static string Formula_ACCELERATION_Y {
             get {
@@ -1619,7 +1619,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to accelerationZ.
+        ///   Looks up a localized string similar to acceleration_Z.
         /// </summary>
         public static string Formula_ACCELERATION_Z {
             get {
@@ -1646,7 +1646,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to compassdirection.
+        ///   Looks up a localized string similar to compass_direction.
         /// </summary>
         public static string Formula_COMPASSDIRECTION {
             get {
@@ -1835,7 +1835,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to inclinationX.
+        ///   Looks up a localized string similar to inclination_X.
         /// </summary>
         public static string Formula_INCLINATION_X {
             get {
@@ -1844,7 +1844,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to inclinationY.
+        ///   Looks up a localized string similar to inclination_Y.
         /// </summary>
         public static string Formula_INCLINATION_Y {
             get {
@@ -1979,7 +1979,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to objectX.
+        ///   Looks up a localized string similar to object_X.
         /// </summary>
         public static string Formula_OBJECT_X {
             get {
@@ -1988,7 +1988,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to objectY.
+        ///   Looks up a localized string similar to object_Y.
         /// </summary>
         public static string Formula_OBJECT_Y {
             get {

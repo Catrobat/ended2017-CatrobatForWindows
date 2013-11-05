@@ -263,6 +263,9 @@
     <ClCompile Include="XMLParserTests.cpp">
       <Filter>XMLParserTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\CompassProvider.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -467,6 +470,9 @@
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClInclude>
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\XMLParserSevereException.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\CompassProvider.h">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -70,7 +70,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                 return _currentProject;
             }
             set
-            {
+            {               
                 if (value == _currentProject) return;
 
                 _currentProject = value;

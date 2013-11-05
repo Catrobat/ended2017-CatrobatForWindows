@@ -5,22 +5,15 @@ using namespace DirectX;
 using namespace Microsoft::WRL;
 using namespace Windows::Foundation;
 
-// Constructor.
-Direct3DBase::Direct3DBase()
-{
-}
+Direct3DBase::Direct3DBase() { }
 
-// Initialize the Direct3D resources required to run.
 void Direct3DBase::Initialize(_In_ ID3D11Device1* device)
 {
 	m_d3dDevice = device;
 	CreateDeviceResources();
 }
 
-// These are the resources that depend on the device.
-void Direct3DBase::CreateDeviceResources()
-{
-}
+void Direct3DBase::CreateDeviceResources() { }
 
 void Direct3DBase::UpdateDevice(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView)
 {

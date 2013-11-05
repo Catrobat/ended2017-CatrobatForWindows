@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Phone
             ServiceLocator.ThemeChooser = Application.Current.Resources["ThemeChooser"];
             ServiceLocator.LocalizedStrings = Application.Current.Resources["LocalizedStrings"];
 
-            ServiceLocator.Register<SystemInformationServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SystemInformationServicePhone>(TypeCreationMode.Normal);
             ServiceLocator.Register<CultureServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ImageResizeServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<PlayerLauncherServicePhone>(TypeCreationMode.Lazy);

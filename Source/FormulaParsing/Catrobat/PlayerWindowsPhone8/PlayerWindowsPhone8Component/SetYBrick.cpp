@@ -14,5 +14,6 @@ void SetYBrick::Execute()
 {
 	float currentX, currentY;
 	m_parent->GetParent()->GetPosition(currentX, currentY);
-	m_parent->GetParent()->SetPosition(currentX, Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY, m_parent->GetParent()));
+    auto newYPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY, m_parent->GetParent());
+	m_parent->GetParent()->SetPosition(currentX, newYPosition * (-1));
 }

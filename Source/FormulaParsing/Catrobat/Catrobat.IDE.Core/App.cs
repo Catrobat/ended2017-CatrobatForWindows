@@ -28,6 +28,8 @@ namespace Catrobat.IDE.Core
                 return;
 
             _app.InitializeInterfaces();
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).RegisterViewModels();
+            ((ViewModelLocator)ServiceLocator.ViewModelLocator).RaiseAppPropertiesChanged();
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -74,8 +76,10 @@ namespace Catrobat.IDE.Core
         private static async Task LoadContext()
         {
             _context = new CatrobatContext();
-            var currentProject = await InitializeFirstTimeUse(_context) ??
-                                 await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
+            var currentProject = await InitializeFirstTimeUse(_context);
+
+            if (currentProject == null)
+                await CatrobatContext.RestoreDefaultProjectStatic(CatrobatContextBase.DefaultProjectName);
 
             if (_context.LocalSettings.CurrentLanguageString == null)
                 _context.LocalSettings.CurrentLanguageString =

@@ -91,8 +91,8 @@ namespace Catrobat.IDE.Core.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public static INotifictionService NotifictionService
-        { get { return GetInstance<INotifictionService>(); } }
+        public static INotificationService NotifictionService
+        { get { return GetInstance<INotificationService>(); } }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
@@ -146,7 +146,8 @@ namespace Catrobat.IDE.Core.Services
                 }
                 else if (mode == TypeCreationMode.Normal)
                 {
-                    Instances.Add(typeof(T), Activator.CreateInstance<T>());
+                    if(!Instances.ContainsKey(typeof(T)))
+                        Instances.Add(typeof(T), Activator.CreateInstance<T>());
                 }
             }
         }
@@ -190,7 +191,7 @@ namespace Catrobat.IDE.Core.Services
             return (T) GetInstance(typeof (T));
         }
 
-        internal static void UnRegisterAll()
+        public static void UnRegisterAll()
         {
             Instances.Clear();
         }

@@ -2,17 +2,19 @@
 
 #include <wrl.h>
 
-// Helper class for basic timing.
 ref class BasicTimer sealed
 {
 public:
 	// Initializes internal timer values.
 	BasicTimer()
 	{
-		if (!QueryPerformanceFrequency(&m_frequency))
+        auto performanceFrequency = QueryPerformanceFrequency(&m_frequency);
+
+		if (!performanceFrequency)
 		{
 			throw ref new Platform::FailureException();
 		}
+
 		Reset();
 	}
 	

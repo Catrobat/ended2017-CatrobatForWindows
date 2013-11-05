@@ -24,6 +24,7 @@ Interpreter *Interpreter::Instance()
 Interpreter::Interpreter()
 {
     m_accelerometer = Windows::Devices::Sensors::Accelerometer::GetDefault();
+    m_compassProvider = new CompassProvider();
 }
 
 double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
@@ -43,20 +44,18 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
                 return atof(var->GetValue().c_str());
             var = ProjectDaemon::Instance()->GetProject()->GetVariable(varName);
             if (var)
-            {
-
                 return atof(var->GetValue().c_str());
-            }
 
             // TODO: Check logic here (What should we do when variable is not found)
             return 0;
-         }
+        }
+        break;
     case BRACKET:
         return this->EvaluateFormula(tree->GetRightChild(), object);
     case FUNCTION:
         return InterpretFunction(tree, object);
     case SENSOR:
-        return ReadSensor();
+        return (double)ReadCompass();
     default:
         break;
     }
@@ -66,30 +65,12 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
 
 int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 {
-    return (int)(this->EvaluateFormula(tree, object));
+    return (int) (this->EvaluateFormula(tree, object));
 }
 
 float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 {
-    return (float)(this->EvaluateFormula(tree, object));
-}
-
-RotationProvider* Interpreter::GetRotationProvider(FormulaTree *tree, Object *object)
-{
-    float rotationValue = 0.0f;
-    RotationProvider* rotationProvider;
-
-    if (tree->GetType() != SENSOR)
-    {
-        rotationValue = (float)(this->EvaluateFormula(tree, object));
-        rotationProvider = new RotationProvider(STATIC, rotationValue);
-    }
-    else
-    {
-        rotationProvider = new RotationProvider(COMPASS, rotationValue);
-    }
-    
-    return rotationProvider;
+    return (float) (this->EvaluateFormula(tree, object));
 }
 
 bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object *object)
@@ -112,7 +93,7 @@ void Interpreter::ReadAcceleration()
             m_accReading = m_accelerometer->GetCurrentReading();
             Platform::String ^acceleration = L"Acceleration: " + "X: " + m_accReading->AccelerationX + " Y: " + m_accReading->AccelerationY + " Z: " + m_accReading->AccelerationZ;
         }
-        catch (Platform::Exception^ e)
+        catch(Platform::Exception^ e)
         {
             // there is a bug tracking this issue already
             // we need to remove this try\catch once the bug # 158858 hits our branch
@@ -122,9 +103,9 @@ void Interpreter::ReadAcceleration()
     }
 }
 
-double Interpreter::ReadSensor()
+float Interpreter::ReadCompass()
 {
-    return 0.0;
+    return m_compassProvider->GetDirection();
 }
 
 double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
@@ -138,52 +119,52 @@ double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
 
     double returnValue = 0.0;
 
-    switch (tree->GetOperator())
-    {
-    case Operator::PLUS:
-        if (this->TestChilds(tree, Childs::LeftAndRightChild))
-            returnValue = leftValue + rightValue;
-        break;
-    case Operator::MINUS:
-        if (this->TestChilds(tree, Childs::LeftAndRightChild) ||
-            this->TestChilds(tree, Childs::RightChild))
-            returnValue = leftValue - rightValue;
-        break;
-    case Operator::MULT:
-        if (this->TestChilds(tree, Childs::LeftAndRightChild))
-            returnValue = leftValue * rightValue;
-        break;
-    case Operator::DIVIDE:
-        if (this->TestChilds(tree, Childs::LeftAndRightChild))
-        {
-            if (rightValue == 0)
-                return 0.0f;
-            returnValue = leftValue / rightValue;
-        }
-        break;
-    case Operator::POW:
-        if (this->TestChilds(tree, Childs::LeftAndRightChild))
-            returnValue = pow(leftValue, rightValue);
-        break;
-    case Operator::LOGICAL_AND:
-        if (this->TestChilds(tree, Childs::LeftAndRightChild))
-            returnValue = leftValue && rightValue;
-        break;
-    case Operator::LOGICAL_OR:
-        if (this->TestChilds(tree, Childs::LeftAndRightChild))
-            returnValue = leftValue || rightValue;
-        break;
-    case Operator::EQUAL:
-        if (this->TestChilds(tree, Childs::LeftAndRightChild))
-            returnValue = leftValue == rightValue;
-        break;
-    case Operator::NOT_EQUAL:
-        if (this->TestChilds(tree, Childs::LeftAndRightChild))
-            returnValue = leftValue != rightValue;
-        break;
-    default:
-        break;
-    }
+	switch (tree->GetOperator())
+	{
+	case Operator::PLUS:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue + rightValue;
+		break;
+	case Operator::MINUS:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild) ||
+			this->TestChilds(tree, Childs::RightChild))  
+			returnValue = leftValue - rightValue;
+		break;
+	case Operator::MULT:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue * rightValue;
+		break;
+	case Operator::DIVIDE:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+		{
+			if (rightValue == 0)
+				return 0.0f;
+			returnValue = leftValue / rightValue;
+		}
+		break;
+	case Operator::POW:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = pow(leftValue, rightValue);
+		break;
+	case Operator::LOGICAL_AND:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue && rightValue;
+		break;
+	case Operator::LOGICAL_OR:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue || rightValue;
+		break;
+	case Operator::EQUAL:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue == rightValue;
+		break;
+	case Operator::NOT_EQUAL:
+		if (this->TestChilds(tree, Childs::LeftAndRightChild))
+			returnValue = leftValue != rightValue;
+		break;
+	default:
+		break;
+	}
 
     return returnValue;
 }
@@ -208,7 +189,7 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
         if (this->TestChilds(tree, Childs::NoChild))
             returnValue = 1.0;
         break;
-    case Function::L_FALSE:
+    case Function::L_FALSE: 
         if (this->TestChilds(tree, Childs::NoChild))
             returnValue = 0.0;
         break;
@@ -216,15 +197,15 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
         if (this->TestChilds(tree, Childs::LeftChild))
             returnValue = sin(leftValue * pi / 180.0);
         break;
-    case Function::COS:
+    case Function::COS: 
         if (this->TestChilds(tree, Childs::LeftChild))
             returnValue = this->CalculateCosinus(leftValue);
         break;
-    case Function::TAN:
+    case Function::TAN: 
         if (this->TestChilds(tree, Childs::LeftChild))
             returnValue = tan(leftValue * pi / 180.0);
         break;
-    case Function::LN:
+    case Function::LN: 
         if (this->TestChilds(tree, Childs::LeftChild))
         {
             if (leftValue <= 0)
@@ -250,43 +231,43 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
         if (this->TestChilds(tree, Childs::LeftAndRightChild))
             returnValue = this->CalculateRand(leftValue, rightValue);
         break;
-    case Function::ABS:
+    case Function::ABS: 
         if (this->TestChilds(tree, Childs::LeftChild))
             returnValue = abs(leftValue);
         break;
-    case Function::ROUND:
+    case Function::ROUND: 
         if (this->TestChilds(tree, Childs::LeftChild))
             returnValue = this->RoundDoubleToInt(leftValue);
         break;
-    case Function::PI:
+    case Function::PI: 
         if (this->TestChilds(tree, Childs::NoChild))
             returnValue = 4.0 * std::atan(1.0);
         break;
-    case Function::MOD:
+    case Function::MOD: 
         if (this->TestChilds(tree, Childs::LeftAndRightChild))
             returnValue = this->CalculateModulo(leftValue, rightValue);
         break;
-    case Function::ARCSIN:
+    case Function::ARCSIN: 
         if (this->TestChilds(tree, Childs::LeftChild))
             returnValue = asin(leftValue) * 180 / pi;
         break;
-    case Function::ARCCOS:
+    case Function::ARCCOS: 
         if (this->TestChilds(tree, Childs::LeftChild))
             returnValue = acos(leftValue) * 180 / pi;
         break;
-    case Function::ARCTAN:
+    case Function::ARCTAN: 
         if (this->TestChilds(tree, Childs::LeftChild))
             returnValue = atan(leftValue) * 180 / pi;
         break;
-    case Function::EXP:
-        if (this->TestChilds(tree, Childs::LeftChild))
-            returnValue = exp(leftValue);
+    case Function::EXP: 
+		if (this->TestChilds(tree, Childs::LeftChild))
+			returnValue = exp(leftValue);
         break;
-    case Function::MAX:
+    case Function::MAX: 
         if (this->TestChilds(tree, Childs::LeftAndRightChild))
             returnValue = this->CalculateMax(leftValue, rightValue);
         break;
-    case Function::MIN:
+    case Function::MIN: 
         if (this->TestChilds(tree, Childs::LeftAndRightChild))
             returnValue = this->CalculateMin(leftValue, rightValue);
         break;
@@ -297,7 +278,7 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
     return returnValue;
 }
 
-bool Interpreter::TestChilds(FormulaTree *tree, Childs childs)
+bool Interpreter::TestChilds(FormulaTree *tree, Childs childs) 
 {
     bool returnValue = false;
 
@@ -339,7 +320,7 @@ double Interpreter::CalculateMin(double value1, double value2)
 {
     if (value1 < value2)
         return value1;
-    else
+    else 
         return value2;
 }
 
@@ -350,7 +331,7 @@ double Interpreter::CalculateRand(double value1, double value2)
 
     double diff = max - min;
 
-    srand(time(NULL));
+    srand (time(NULL));
     double percentOfMaxValue = (double)rand() / RAND_MAX;
     double random_num = min + percentOfMaxValue * diff;
     return random_num;
@@ -358,12 +339,12 @@ double Interpreter::CalculateRand(double value1, double value2)
 
 double Interpreter::CalculateModulo(double dividend, double divisor)
 {
-    int integerQuotient = (int)(dividend / divisor);
+    int integerQuotient = (int)(dividend/divisor);
     if ((dividend < 0 || divisor < 0) && !(dividend < 0 && divisor < 0) && fmod(dividend, divisor) != 0)
         integerQuotient -= 1;
     double returnValue = dividend - (double)(divisor * integerQuotient);
 
-    return returnValue;
+    return returnValue; 
 }
 
 double Interpreter::CalculateCosinus(double degree)
@@ -380,7 +361,7 @@ double Interpreter::RoundDoubleToInt(double value)
 {
     double roundedNumber;
 
-    if (value >= 0)
+    if(value >= 0)
         roundedNumber = (int)(value + 0.5);
     else
         roundedNumber = (int)(value - 0.5);

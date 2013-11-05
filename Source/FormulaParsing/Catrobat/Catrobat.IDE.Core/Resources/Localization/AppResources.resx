@@ -499,13 +499,13 @@
     <value>RECORD SOUND</value>
   </data>
   <data name="Formula_ACCELERATION_X" xml:space="preserve">
-    <value>accelerationX</value>
+    <value>acceleration_X</value>
   </data>
   <data name="Formula_ACCELERATION_Y" xml:space="preserve">
-    <value>accelerationY</value>
+    <value>acceleration_Y</value>
   </data>
   <data name="Formula_ACCELERATION_Z" xml:space="preserve">
-    <value>accelerationZ</value>
+    <value>acceleration_Z</value>
   </data>
   <data name="Formula_BRIGHTNESS" xml:space="preserve">
     <value>brightness</value>
@@ -514,7 +514,7 @@
     <value>)</value>
   </data>
   <data name="Formula_COMPASSDIRECTION" xml:space="preserve">
-    <value>compassdirection</value>
+    <value>compass_direction</value>
   </data>
   <data name="Formula_DecimalPointCharacter" xml:space="preserve">
     <value>.</value>
@@ -523,10 +523,10 @@
     <value>direction</value>
   </data>
   <data name="Formula_INCLINATION_X" xml:space="preserve">
-    <value>inclinationX</value>
+    <value>inclination_X</value>
   </data>
   <data name="Formula_INCLINATION_Y" xml:space="preserve">
-    <value>inclinationY</value>
+    <value>inclination_Y</value>
   </data>
   <data name="Formula_LAYER" xml:space="preserve">
     <value>layer</value>
@@ -538,10 +538,10 @@
     <value>OR</value>
   </data>
   <data name="Formula_OBJECT_X" xml:space="preserve">
-    <value>objectX</value>
+    <value>object_X</value>
   </data>
   <data name="Formula_OBJECT_Y" xml:space="preserve">
-    <value>objectY</value>
+    <value>object_Y</value>
   </data>
   <data name="Formula_OpenBrecket" xml:space="preserve">
     <value>(</value>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
@@ -110,7 +111,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         #region Commands
 
-        public RelayCommand SaveCommand { get; private set; }
+        public AsyncRelayCommand SaveCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
 
@@ -127,12 +128,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         #region Actions
 
-        private async void SaveAction()
+        private async Task SaveAction()
         {
             var message = new GenericMessage<PortableImage>(Image);
             Messenger.Default.Send(message, ViewModelMessagingToken.CostumeImageToSaveListener);
 
-            ServiceLocator.NavigationService.NavigateTo<CostumeSavingViewModel>();
+            ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                ServiceLocator.NavigationService.NavigateTo<CostumeSavingViewModel>());
 
             var newDimention = new ImageDimension
             {
@@ -141,15 +143,19 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             };
 
             var costume = await CostumeHelper.Save(Image, CostumeName, newDimention, CurrentProject.BasePath);
-            _receivedSelectedSprite.Costumes.Costumes.Add(costume);
 
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            base.GoBackAction();
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                _receivedSelectedSprite.Costumes.Costumes.Add(costume);
+                ServiceLocator.NavigationService.RemoveBackEntry();
+                ServiceLocator.NavigationService.RemoveBackEntry();
+                base.GoBackAction();
+            });
         }
 
         private void CancelAction()
         {
+            ServiceLocator.NavigationService.RemoveBackEntry();
             base.GoBackAction();
         }
 
@@ -184,7 +190,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         public CostumeNameChooserViewModel()
         {
-            SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
+            SaveCommand = new AsyncRelayCommand(SaveAction, () => { /* no action  */ }, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,

@@ -115,7 +115,7 @@ namespace Catrobat.Paint.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save changes to catrobat? On cancel all changes will be lost!.
+        ///   Looks up a localized string similar to Save changes to Pocket Code?On cancel all changes will be lost!.
         /// </summary>
         public static string SaveChangesToCatrobatMessageContent {
             get {
@@ -133,7 +133,7 @@ namespace Catrobat.Paint.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save for Catrobat.
+        ///   Looks up a localized string similar to Save to Pocket Code.
         /// </summary>
         public static string SaveToCatrobat {
             get {

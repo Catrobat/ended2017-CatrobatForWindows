@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
@@ -10,57 +13,63 @@ namespace Catrobat.IDE.Phone.Services
 {
     public class PictureServicePhone : IPictureService
     {
-        private Action<PortableImage> _successCallback;
-        private Action _errorCallback;
-        private Action _cancelleCallback;
+        private readonly Semaphore _semaphore = new Semaphore(0, 1);
+        private PictureServiceResult _result;
 
-        public void ChoosePictureFromLibrary(Action<PortableImage> success, Action cancelled, Action error)
+        public Task<PictureServiceResult> ChoosePictureFromLibraryAsync()
         {
-            _successCallback = success;
-            _cancelleCallback = cancelled;
-            _errorCallback = error;
+            var task = Task.Run(() =>
+            {
+                _semaphore.WaitOne();
+                return _result;
+            });
 
             var photoChooserTask = new PhotoChooserTask();
-            photoChooserTask.Completed -= Task_Completed;
-            photoChooserTask.Completed += Task_Completed;
+            photoChooserTask.Completed -= Task_CompletedAsync;
+            photoChooserTask.Completed += Task_CompletedAsync;
             photoChooserTask.Show();
+
+            return task;
         }
 
-        public void TakePicture(Action<PortableImage> success, Action cancelled, Action error)
+        public Task<PictureServiceResult> TakePictureAsync()
         {
-            _successCallback = success;
-            _cancelleCallback = cancelled;
-            _errorCallback = error;
+            var task = Task.Run(() =>
+            {
+                _semaphore.WaitOne();
+                return _result;
+            });
 
             var cameraCaptureTask = new CameraCaptureTask();
-            cameraCaptureTask.Completed -= Task_Completed;
-            cameraCaptureTask.Completed += Task_Completed;
+            cameraCaptureTask.Completed -= Task_CompletedAsync;
+            cameraCaptureTask.Completed += Task_CompletedAsync;
             cameraCaptureTask.Show();
+
+            return task;
         }
 
-        public void DrawPicture(Action<PortableImage> success, Action cancelled, Action error, PortableImage imageToEdit = null)
+        public Task<PictureServiceResult> DrawPictureAsync(PortableImage imageToEdit = null)
         {
-            _successCallback = success;
-            _cancelleCallback = cancelled;
-            _errorCallback = error;
+            BitmapSource bitmap = null;
 
-            WriteableBitmap bitmap = null;
+            if (imageToEdit != null)
+                bitmap = (BitmapSource)imageToEdit.ImageSource;
 
-            if (imageToEdit == null)
+            var task = Task.Run(() =>
             {
-                bitmap = new WriteableBitmap(
-                  ServiceLocator.SystemInformationService.ScreenWidth, ServiceLocator.SystemInformationService.ScreenHeight);
-            }
-            else
-            {
-                bitmap = new WriteableBitmap((BitmapSource) imageToEdit.ImageSource);
-                //bitmap.FromByteArray(imageToEdit.Data);
-            }
+                _semaphore.WaitOne();
+                return _result;
+            });
 
-            var task = new PaintLauncherTask { CurrentImage = bitmap };
-            task.OnImageChanged += OnPaintLauncherImageChanged;
-            PaintLauncher.Launche(task);
+            var paintLauncherTask = new PaintLauncherTask { CurrentImage = bitmap };
+            paintLauncherTask.OnImageChanged += OnPaintLauncherImageChanged;
+
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                PaintLauncher.Launche(paintLauncherTask));
+
+            return task;
         }
+
 
         private void OnPaintLauncherImageChanged(PaintLauncherTask task)
         {
@@ -71,10 +80,16 @@ namespace Catrobat.IDE.Phone.Services
                 Height = image.PixelHeight
             };
 
-            _successCallback.Invoke(portableImage);
+            _result = new PictureServiceResult
+            {
+                Image = portableImage,
+                Status = PictureServiceStatus.Success
+            };
+
+            _semaphore.Release(1);
         }
 
-        private void Task_Completed(object sender, PhotoResult e)
+        private void Task_CompletedAsync(object sender, PhotoResult e)
         {
             if (e.TaskResult == TaskResult.OK)
             {
@@ -83,19 +98,33 @@ namespace Catrobat.IDE.Phone.Services
                     var image = new BitmapImage();
                     image.SetSource(e.ChosenPhoto);
                     var writeableBitmap = new WriteableBitmap(image);
-                    var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
-
-                    _successCallback.Invoke(portableImage);
+                    var portableImage = new PortableImage(
+                        writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
+                    _result = new PictureServiceResult
+                    {
+                        Image = portableImage,
+                        Status = PictureServiceStatus.Success
+                    };
                 }
                 catch (Exception)
                 {
-                    _errorCallback.Invoke();
+                    _result = new PictureServiceResult
+                    {
+                        Image = null,
+                        Status = PictureServiceStatus.Error
+                    };
                 }
             }
             else
             {
-                _cancelleCallback.Invoke();
+                _result = new PictureServiceResult
+                {
+                    Image = null,
+                    Status = PictureServiceStatus.Cancelled
+                };
             }
+
+            _semaphore.Release(1);
         }
     }
 }

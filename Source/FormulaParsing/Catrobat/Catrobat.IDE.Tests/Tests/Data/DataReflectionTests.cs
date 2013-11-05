@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Xml.Linq;
-using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Utilities.Helpers;
+﻿using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Tests.Misc;
-using Catrobat.IDE.Tests.Misc.Storage;
+using Catrobat.IDE.Tests.Services.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Tests.Tests.Data

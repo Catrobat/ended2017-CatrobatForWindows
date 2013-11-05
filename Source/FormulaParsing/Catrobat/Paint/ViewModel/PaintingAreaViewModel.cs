@@ -86,7 +86,16 @@ namespace Catrobat.Paint.ViewModel
 
         private void GetCurrentImage()
         {
-            _currentImage = PaintLauncher.Task.CurrentImage;
+            if(PaintLauncher.Task.CurrentImage != null)
+                _currentImage = new WriteableBitmap(PaintLauncher.Task.CurrentImage);
+
+            if (_currentImage == null)
+            {
+                var width = (int)Application.Current.Host.Content.ActualWidth;
+                var height = (int)Application.Current.Host.Content.ActualHeight;
+                _currentImage = new WriteableBitmap(width, height);
+            }
+
             _task = PaintLauncher.Task;
         }
 
@@ -101,7 +110,8 @@ namespace Catrobat.Paint.ViewModel
         public ICommand BackPressedCommand { get; private set; }
         private void BackPressedExecute(WriteableBitmap wb)
         {
-            MessageBoxResult result = MessageBox.Show(AppResources.SaveChangesToCatrobatMessageContent, AppResources.SaveChangesToCatrobatMessageTitle, MessageBoxButton.OKCancel);
+            MessageBoxResult result = MessageBox.Show(AppResources.SaveChangesToCatrobatMessageContent, 
+                AppResources.SaveChangesToCatrobatMessageTitle, MessageBoxButton.OKCancel);
 
             if (result == MessageBoxResult.OK)
             {
@@ -114,7 +124,6 @@ namespace Catrobat.Paint.ViewModel
             }
 
             _strokes.Clear();
-            
         }
 
         public ICommand ToColorPickerCommand { get; private set; }

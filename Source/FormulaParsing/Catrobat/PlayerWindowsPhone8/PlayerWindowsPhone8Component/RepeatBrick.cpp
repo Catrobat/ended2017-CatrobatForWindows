@@ -20,6 +20,7 @@ void RepeatBrick::Execute()
 	unsigned int i = 0;
 	int global = 0;
 	int times = Interpreter::Instance()->EvaluateFormulaToInt(m_timesToRepeat, GetParent()->GetParent());
+
 	while (global < times)
 	{
 		GetBrick(i)->Execute();
@@ -29,6 +30,8 @@ void RepeatBrick::Execute()
 			i = 0; // Reset counter
 			global++;
 		}
+
+        Concurrency::wait(20);
 	}
 }
 

@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
 using System.Windows;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -23,9 +25,11 @@ using ServiceLocator = Microsoft.Practices.ServiceLocation.ServiceLocator;
 
 namespace Catrobat.IDE.Core.ViewModel
 {
-    public class ViewModelLocator
+    public class ViewModelLocator : INotifyPropertyChanged
     {
-        static ViewModelLocator()
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void RegisterViewModels()
         {
             Core.Services.ServiceLocator.Register<MainViewModel>(TypeCreationMode.Normal);
             Core.Services.ServiceLocator.Register<AddNewProjectViewModel>(TypeCreationMode.Normal);
@@ -64,8 +68,18 @@ namespace Catrobat.IDE.Core.ViewModel
             Core.Services.ServiceLocator.Register<NewCostumeSourceSelectionViewModel>(TypeCreationMode.Normal);
             Core.Services.ServiceLocator.Register<CostumeSavingViewModel>(TypeCreationMode.Normal);
             Core.Services.ServiceLocator.Register<EditorLoadingViewModel>(TypeCreationMode.Normal);
-            
         }
+
+        public void RaiseAppPropertiesChanged()
+        {
+            if (PropertyChanged != null)
+            {
+                var props = typeof(ViewModelLocator).GetRuntimeProperties();
+                    foreach (var prop in props)
+                        PropertyChanged.Invoke(this, new PropertyChangedEventArgs(prop.Name));
+            }
+        }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
@@ -481,5 +495,6 @@ namespace Catrobat.IDE.Core.ViewModel
         public static void Cleanup()
         {
         }
+
     }
 }

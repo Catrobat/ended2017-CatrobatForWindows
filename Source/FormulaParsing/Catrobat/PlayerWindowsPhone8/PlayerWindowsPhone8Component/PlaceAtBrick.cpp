@@ -12,5 +12,7 @@ PlaceAtBrick::PlaceAtBrick(FormulaTree *positionX, FormulaTree *positionY, Scrip
 
 void PlaceAtBrick::Execute()
 {
-	m_parent->GetParent()->SetPosition(Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX, m_parent->GetParent()), Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY, m_parent->GetParent()));
+    auto xPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionX, m_parent->GetParent());
+    auto yPosition = Interpreter::Instance()->EvaluateFormulaToFloat(m_positionY, m_parent->GetParent());
+	m_parent->GetParent()->SetPosition(xPosition, yPosition * (-1));
 }

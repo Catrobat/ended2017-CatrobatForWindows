@@ -34,9 +34,6 @@
     <ClCompile Include="SoundInfo.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="ScriptHandler.cpp">
-      <Filter>Objects\Scripts</Filter>
-    </ClCompile>
     <ClCompile Include="lodepng.cpp">
       <Filter>Core\ddsConverter</Filter>
     </ClCompile>
@@ -202,12 +199,7 @@
     <ClCompile Include="XMLParserSevereException.cpp">
       <Filter>Exceptions</Filter>
     </ClCompile>
-    <ClCompile Include="CompassProvider.cpp">
-      <Filter>Formula</Filter>
-    </ClCompile>
-    <ClCompile Include="RotationProvider.cpp">
-      <Filter>Formula</Filter>
-    </ClCompile>
+    <ClCompile Include="CompassProvider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -242,9 +234,6 @@
     </ClInclude>
     <ClInclude Include="SoundInfo.h">
       <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="ScriptHandler.h">
-      <Filter>Objects\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="lodepng.h">
       <Filter>Core\ddsConverter</Filter>
@@ -420,12 +409,7 @@
     <ClInclude Include="XMLParserSevereException.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
-    <ClInclude Include="CompassProvider.h">
-      <Filter>Formula</Filter>
-    </ClInclude>
-    <ClInclude Include="RotationProvider.h">
-      <Filter>Formula</Filter>
-    </ClInclude>
+    <ClInclude Include="CompassProvider.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">

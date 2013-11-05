@@ -136,13 +136,13 @@
     <value>Redo</value>
   </data>
   <data name="SaveChangesToCatrobatMessageContent" xml:space="preserve">
-    <value>Save changes to catrobat? On cancel all changes will be lost!</value>
+    <value>Save changes to Pocket Code?On cancel all changes will be lost!</value>
   </data>
   <data name="SaveChangesToCatrobatMessageTitle" xml:space="preserve">
     <value>Save changes?</value>
   </data>
   <data name="SaveToCatrobat" xml:space="preserve">
-    <value>Save for Catrobat</value>
+    <value>Save to Pocket Code</value>
   </data>
   <data name="Test1" xml:space="preserve">
     <value>Test1en</value>

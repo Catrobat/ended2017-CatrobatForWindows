@@ -195,21 +195,13 @@ namespace Catrobat.IDE.Core.CatrobatObjects
         }
 
         private string _programName;
-
         public string ProgramName
         {
             get { return _programName; }
             set
             {
                 if (_programName == value)
-                {
                     return;
-                }
-
-                using (var storage = StorageSystem.GetStorage())
-                {
-                    storage.RenameDirectory("Projects/" + _programName, value); // TODO: async, remove that and move it to async methode
-                }
 
                 _programName = value;
                 RaisePropertyChanged();

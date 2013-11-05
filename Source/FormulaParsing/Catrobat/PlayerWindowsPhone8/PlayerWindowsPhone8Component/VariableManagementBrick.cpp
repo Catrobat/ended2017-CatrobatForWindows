@@ -8,6 +8,8 @@ VariableManagementBrick::VariableManagementBrick(TypeOfBrick brickType, FormulaT
 
 void VariableManagementBrick::SetVariable(UserVariable *variable)
 {
-	if (variable != NULL)
-		m_variable = variable;
+    if (variable != NULL)
+    {
+        m_variable = variable;
+    }
 }

@@ -16,8 +16,10 @@ ScriptHandler::ScriptHandler()
 		int x = 0;
 		while(true)
 		{
-			if (workItem->Status == Windows::Foundation::AsyncStatus::Canceled)
-				break;
+            if (workItem->Status == Windows::Foundation::AsyncStatus::Canceled)
+            {
+                break;
+            }
 
 			x += 1;
 		}

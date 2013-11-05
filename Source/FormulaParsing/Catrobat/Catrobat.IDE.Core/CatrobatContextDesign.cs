@@ -70,6 +70,7 @@ namespace Catrobat.IDE.Core
                     Platform = "Windows Phone",
                     PlatformVersion = "8.0",
                     ProgramLicense = "http://developer.catrobat.org/agpl_v3",
+                    ProgramName = "Project 1 with very very very very very long name",
                     RemixOf = "",
                     ScreenHeight = 1280,
                     ScreenWidth = 720,
@@ -78,8 +79,6 @@ namespace Catrobat.IDE.Core
                     UserHandle = "Username"
                 }
             };
-
-            project.SetProgramName("Project 1 with very very very very very long name");
 
             project.SpriteList = new SpriteList();
 

@@ -39,10 +39,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         #region Actions
 
-        protected override void GoBackAction()
-        {
-            base.GoBackAction();
-        }
+
 
         #endregion
 
@@ -50,7 +47,10 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         private void CostumeImageReceivedMessageAction(GenericMessage<PortableImage> message)
         {
-            Image = message.Content;
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                Image = message.Content;
+            });
         }
 
         #endregion
