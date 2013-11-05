@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
@@ -96,8 +97,9 @@ namespace Catrobat.IDE.Phone
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            //var mainViewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).MainViewModel;
-            //Core.App.SaveContext(mainViewModel.CurrentProject);
+            var mainViewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).MainViewModel;
+            var task = Task.Run(async () => { await Core.App.SaveContext(mainViewModel.CurrentProject); });
+            task.Wait();
             ViewModelLocator.Cleanup();
         }
 

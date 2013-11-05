@@ -8,6 +8,8 @@ namespace Catrobat.IDE.Phone.Services
 {
     public class SystemInformationServicePhone : ISystemInformationService
     {
+        private readonly int _screenWidth;
+        private readonly int _screenHeight;
         public string PlatformName
         {
             get
@@ -46,7 +48,7 @@ namespace Catrobat.IDE.Phone.Services
         {
             get
             {
-                return (int)Application.Current.Host.Content.ActualWidth;
+                return _screenWidth;
             }
         }
 
@@ -54,7 +56,7 @@ namespace Catrobat.IDE.Phone.Services
         {
             get
             {
-                return (int)Application.Current.Host.Content.ActualHeight;
+                return _screenHeight;
             }
         }
 
@@ -74,6 +76,12 @@ namespace Catrobat.IDE.Phone.Services
             {
                 return new PortableSolidColorBrush {NativeBrush = Application.Current.Resources["PhoneAccentBrush"]};
             }
+        }
+
+        public SystemInformationServicePhone()
+        {
+            _screenHeight = (int) Application.Current.Host.Content.ActualHeight;
+            _screenWidth = (int) Application.Current.Host.Content.ActualWidth;
         }
     }
 }
