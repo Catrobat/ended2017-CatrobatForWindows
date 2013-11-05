@@ -1,7 +1,9 @@
-﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
+﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
+
+namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
     class FormulaNodeUserVariable : FormulaNodeVariable
     {
-        public string VariableName { get; set; }
+        public UserVariable Variable { get; set; }
     }
 }

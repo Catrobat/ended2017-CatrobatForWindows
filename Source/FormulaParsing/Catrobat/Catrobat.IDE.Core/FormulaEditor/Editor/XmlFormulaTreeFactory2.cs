@@ -1,5 +1,6 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using System.Globalization;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
@@ -35,7 +36,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region arithmetic
 
-        public static XmlFormulaTree CreateAddNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateAddNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -46,7 +47,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateSubtractNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateSubtractNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -57,7 +58,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateMultiplyNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateMultiplyNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -68,7 +69,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateDivideNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateDivideNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -83,7 +84,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region relational operators
 
-        public static XmlFormulaTree CreateEqualsNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateEqualsNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -94,7 +95,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateNotEqualsNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateNotEqualsNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -105,7 +106,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateLessNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateLessNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -116,7 +117,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateLessEqualNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateLessEqualNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -127,7 +128,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateGreaterNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateGreaterNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -138,7 +139,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateGreaterEqualNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateGreaterEqualNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -175,7 +176,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateAndNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateAndNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -186,7 +187,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateOrNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateOrNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -197,7 +198,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateNotNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateNotNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {
@@ -213,7 +214,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region min/max
 
-        public static XmlFormulaTree CreateMinNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateMinNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -224,7 +225,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateMaxNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateMaxNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -239,7 +240,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region exponential function and logarithms
 
-        public static XmlFormulaTree CreateExpNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateExpNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {
@@ -250,7 +251,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateLogNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateLogNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {
@@ -261,7 +262,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateLnNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateLnNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {
@@ -276,7 +277,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region trigonometric functions
 
-        public static XmlFormulaTree CreateSinNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateSinNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {
@@ -287,7 +288,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateCosNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateCosNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {
@@ -298,7 +299,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateTanNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateTanNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {
@@ -309,7 +310,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateArcsinNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateArcsinNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {
@@ -320,7 +321,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateArccosNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateArccosNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {
@@ -331,7 +332,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateArctanNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateArctanNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {
@@ -346,7 +347,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region miscellaneous functions
 
-        public static XmlFormulaTree CreateSqrtNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateSqrtNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {
@@ -357,7 +358,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateAbsNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateAbsNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {
@@ -368,7 +369,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateModNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateModNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -379,7 +380,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateRoundNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateRoundNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {
@@ -390,7 +391,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             };
         }
 
-        public static XmlFormulaTree CreateRandomNode(XmlFormulaTree leftChild = null, XmlFormulaTree rightChild = null)
+        public static XmlFormulaTree CreateRandomNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
@@ -577,20 +578,24 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #endregion
 
-        public static XmlFormulaTree CreateUserVariableNode(string variableName)
+        #region user variables
+
+        public static XmlFormulaTree CreateUserVariableNode(UserVariable variable)
         {
             return new XmlFormulaTree
             {
                 VariableType = "USER_VARIABLE",
-                VariableValue = variableName, 
+                VariableValue = variable.Name, 
                 LeftChild = null,
                 RightChild = null
             };
         }
 
+        #endregion
+
         #region brackets
 
-        public static XmlFormulaTree CreateParenthesesNode(XmlFormulaTree child = null)
+        public static XmlFormulaTree CreateParenthesesNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
             {

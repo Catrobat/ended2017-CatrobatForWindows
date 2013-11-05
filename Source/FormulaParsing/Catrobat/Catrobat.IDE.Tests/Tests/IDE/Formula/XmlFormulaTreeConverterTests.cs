@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.FormulaEditor.Editor;
 using Catrobat.IDE.Core.VersionConverter;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.SampleData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 {
@@ -18,12 +19,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
         {
+            //  needed for SampleLoader.LoadSampleXDocument
             TestHelper.InitializeTests();
         }
 
         [TestMethod]
         public void XmlFormulaTreeConverterTests_DefaultNodes()
         {
+            var userVariables = new[] { new UserVariable { Name = "userVariable1" } };
+            
             var keyFormulas = EnumExtensions.AsEnumerable<FormulaEditorKey>().
                 Except(new[]
                 {
@@ -39,9 +43,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 Select(XmlFormulaTreeFactory.CreateDefaultNode);
             var variableFormulas = EnumExtensions.AsEnumerable<ObjectVariable>().
                 Select(XmlFormulaTreeFactory.CreateDefaultNode).
-                Concat(Enumerable.Repeat(XmlFormulaTreeFactory2.CreateUserVariableNode("variableName"), 1));
-            var bracketFormulas = Enumerable.Repeat(XmlFormulaTreeFactory2.CreateParenthesesNode(), 1);
-            TestXml(keyFormulas.Concat(sensorFormulas).Concat(variableFormulas).Concat(bracketFormulas));
+                Concat(userVariables.Select(XmlFormulaTreeFactory2.CreateUserVariableNode));
+            var bracketFormulas = Enumerable.Repeat(XmlFormulaTreeFactory2.CreateParenthesesNode(null), 1);
+
+            TestXml(
+                converter: new XmlFormulaTreeConverter(userVariables, null), 
+                formulas: keyFormulas.Concat(sensorFormulas).Concat(variableFormulas).Concat(bracketFormulas));
             Assert.Inconclusive("Rewrite to use XmlFormulaTreeFactory2 Members via reflection. ");
         }
 
@@ -65,14 +72,20 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                         Select(property => property.GetValue(brick)).
                         Cast<Core.CatrobatObjects.Formulas.Formula>()).
                     Select(formula => formula.FormulaTree);
-                TestXml(formulas);
+                var userVariables = project.VariableList.ProgramVariableList.UserVariables.
+                    Concat(project.VariableList.ObjectVariableList.ObjectVariableEntries.
+                        SelectMany(variable => variable.VariableList.UserVariables)).
+                    Distinct(variable => variable.Name);
+                var objectVariable = project.VariableList.ObjectVariableList.ObjectVariableEntries.FirstOrDefault();
+                TestXml(
+                    converter: new XmlFormulaTreeConverter(userVariables, objectVariable), 
+                    formulas: formulas);
             }
             Assert.Inconclusive("Add additional samples using all formula nodes. ");
         }
 
-        private static void TestXml(IEnumerable<XmlFormulaTree> formulas)
+        private static void TestXml(XmlFormulaTreeConverter converter, IEnumerable<XmlFormulaTree> formulas)
         {
-            var converter = new XmlFormulaTreeConverter();
             foreach (var formula in formulas)
             {
                 var convertedFormula = converter.ConvertBack(converter.Convert(formula));

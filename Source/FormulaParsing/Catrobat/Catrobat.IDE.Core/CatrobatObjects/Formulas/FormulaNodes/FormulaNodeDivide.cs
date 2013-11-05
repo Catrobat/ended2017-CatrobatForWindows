@@ -1,6 +1,6 @@
 ﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
-    class FormulaNodeDivide : BinaryFormulaTree
+    class FormulaNodeDivide : FormulaNodeInfixOperator
     {
     }
 }

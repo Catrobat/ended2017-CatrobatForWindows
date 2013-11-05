@@ -1,13 +1,24 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+﻿using System.Collections.Generic;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;
 using System;
 using System.Globalization;
 using System.Linq;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
     class XmlFormulaTreeConverter
     {
+
+        private readonly IDictionary<string, UserVariable> _userVariables;
+        private readonly ObjectVariableEntry _objectVariable;
+
+        public XmlFormulaTreeConverter(IEnumerable<UserVariable> userVariables, ObjectVariableEntry objectVariable)
+        {
+            _userVariables = userVariables.ToDictionary(variable => variable.Name);
+            _objectVariable = objectVariable;
+        }
 
         #region Convert
 
@@ -110,7 +121,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         private IFormulaTree ConvertUserVariableNode(XmlFormulaTree node)
         {
-            return FormulaTreeFactory.CreateUserVariableNode(node.VariableValue);
+            var variable = _userVariables[node.VariableValue];
+            return FormulaTreeFactory.CreateUserVariableNode(variable);
         }
 
         private IFormulaTree ConvertParenthesesNode(XmlFormulaTree node)
@@ -121,6 +133,11 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         private TNode Convert<TNode>(XmlFormulaTree node, Func<TNode> creator) where TNode : ConstantFormulaTree
         {
             return creator();
+        }
+
+        private TNode Convert<TNode>(XmlFormulaTree node, Func<ObjectVariableEntry, TNode> creator) where TNode : ConstantFormulaTree
+        {
+            return creator(_objectVariable);
         }
 
         private TNode Convert<TNode>(XmlFormulaTree node, Func<IFormulaTree, TNode> creator, bool leftChild = true) where TNode : UnaryFormulaTree
@@ -211,7 +228,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             if (formulaType == typeof(FormulaNodeOpacity)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateOpacityNode);
 
             // user variables
-            if (formulaType == typeof(FormulaNodeUserVariable)) return XmlFormulaTreeFactory2.CreateUserVariableNode(((FormulaNodeUserVariable)formula).VariableName);
+            if (formulaType == typeof(FormulaNodeUserVariable)) return XmlFormulaTreeFactory2.CreateUserVariableNode(((FormulaNodeUserVariable)formula).Variable);
 
             // brackets
             if (formulaType == typeof(FormulaNodeParentheses)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateParenthesesNode);

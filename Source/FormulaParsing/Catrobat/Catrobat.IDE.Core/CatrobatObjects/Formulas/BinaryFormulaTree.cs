@@ -5,9 +5,9 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
     abstract class BinaryFormulaTree : IFormulaTree
     {
 
-        public IFormulaTree LeftChild { get; set; }
+        public IFormulaTree FirstChild { get; set; }
 
-        public IFormulaTree RightChild { get; set; }
+        public IFormulaTree SecondChild { get; set; }
 
         #region implements IFormulaTree
 
@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
         {
             get
             {
-                return new[] { LeftChild, RightChild };
+                return new[] { FirstChild, SecondChild };
             }
         }
 
@@ -35,7 +35,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
         protected bool Equals(BinaryFormulaTree other)
         {
             // auto-implemented by ReSharper
-            return Equals(LeftChild, other.LeftChild) && Equals(RightChild, other.RightChild);
+            return Equals(FirstChild, other.FirstChild) && Equals(SecondChild, other.SecondChild);
         }
 
         public override int GetHashCode()
@@ -43,7 +43,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
             // auto-implemented by ReSharper
             unchecked
             {
-                return ((LeftChild != null ? LeftChild.GetHashCode() : 0) * 397) ^ (RightChild != null ? RightChild.GetHashCode() : 0);
+                return ((FirstChild != null ? FirstChild.GetHashCode() : 0) * 397) ^ (SecondChild != null ? SecondChild.GetHashCode() : 0);
             }
         }
 

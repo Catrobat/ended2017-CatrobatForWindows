@@ -105,6 +105,7 @@
     <Compile Include="Tests\IDE\Converter\NoScreenshotConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\NullIntCountConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\SecondStringMillisecondConverterTests.cs" />
+    <Compile Include="Tests\IDE\Formula\FormulaEvaluationTests.cs" />
     <Compile Include="Tests\IDE\Formula\XmlFormulaTreeConverterTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaSerializerTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaParserTests.cs" />

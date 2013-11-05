@@ -52,6 +52,15 @@
     <Compile Include="CatrobatObjects\Bricks\BrickList.cs" />
     <Compile Include="CatrobatObjects\Formulas\ConstantFormulaTree.cs" />
     <Compile Include="CatrobatObjects\Formulas\BinaryFormulaTree.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeBinaryFunction.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeUnaryFunction.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaToken\FormulaTokenArgumentSeparator.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaToken\FormulaTokenVerticalBar.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaToken\FormulaTokenSquareBracket.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaToken\FormulaTokenCurlyBrace.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaToken\FormulaTokenBracket.cs" />
+    <Compile Include="CatrobatObjects\Formulas\IFormulaToken.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeInfixOperator.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeGhostEffect.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeRotation.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeParentheses.cs" />
@@ -68,8 +77,9 @@
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeLayer.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeAccelerationY.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeOpacity.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaNodeVariable.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaNodeSensor.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeObjectVariable.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeVariable.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeSensor.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeAccelerationX.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeUserVariable.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeRandom.cs" />
@@ -103,6 +113,8 @@
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeSin.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeAdd.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodePi.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaToken\FormulaTokenParenthesis.cs" />
+    <Compile Include="ExtensionMethods\LinqExtensions.cs" />
     <Compile Include="ExtensionMethods\EnumExtensions.cs" />
     <Compile Include="ExtensionMethods\FormulaTreeExtensions.cs" />
     <Compile Include="CatrobatObjects\Formulas\UnaryFormulaTree.cs" />
@@ -176,6 +188,8 @@
     <Compile Include="CatrobatObjects\ProjectHeader.cs" />
     <Compile Include="CatrobatObjects\Scripts\BroadcastScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\Script.cs" />
+    <Compile Include="FormulaEditor\Editor\FormulaTokenFactory.cs" />
+    <Compile Include="FormulaEditor\Editor\FormulaEvaluator.cs" />
     <Compile Include="FormulaEditor\Editor\XmlFormulaTreeFactory2.cs" />
     <Compile Include="FormulaEditor\Editor\FormulaTreeFactory.cs" />
     <Compile Include="FormulaEditor\Editor\FormulaSerializer.cs" />

@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 {
-    interface IFormulaTree
+    interface IFormulaTree : IFormulaToken
     {
         IEnumerable<IFormulaTree> Children { get; }
     }
