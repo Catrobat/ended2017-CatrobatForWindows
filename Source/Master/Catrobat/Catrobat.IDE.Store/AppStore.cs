@@ -1,7 +1,10 @@
 ﻿using System;
 using Windows.UI.Xaml;
 using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Store.Services;
 using Catrobat.IDE.Store.Services.Storage;
 
@@ -13,9 +16,9 @@ namespace Catrobat.IDE.Store
         {
             ServiceLocator.UnRegisterAll();
 
-            ServiceLocator.ViewModelLocator = Application.Current.Resources["Locator"];
-            ServiceLocator.ThemeChooser = Application.Current.Resources["ThemeChooser"];
-            ServiceLocator.LocalizedStrings = Application.Current.Resources["LocalizedStrings"];
+            ServiceLocator.ViewModelLocator = (ViewModelLocator) Application.Current.Resources["Locator"];
+            ServiceLocator.ThemeChooser = (ThemeChooser) Application.Current.Resources["ThemeChooser"];
+            ServiceLocator.LocalizedStrings = (LocalizedStrings) Application.Current.Resources["LocalizedStrings"];
 
             ServiceLocator.Register<NavigationServiceStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SystemInformationServiceStore>(TypeCreationMode.Lazy);

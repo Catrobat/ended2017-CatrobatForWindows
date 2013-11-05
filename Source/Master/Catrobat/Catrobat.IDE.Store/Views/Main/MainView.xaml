@@ -52,7 +52,13 @@
               </Grid.ColumnDefinitions>
               <Button Grid.Column="0" Margin="0 0 0 -5" HorizontalAlignment="Center" Command="{Binding CreateNewProjectCommand}"
                         Content="{ Binding Resources.Main_ButtonCreate, 
-                        Source={StaticResource LocalizedStrings}}"/>
+                        Source={StaticResource LocalizedStrings}}">
+                <Button.Flyout>
+                  <Flyout Opened="FlyoutNewProject_OnOpened">
+                    <local:AddNewProjectView Width="400"/>
+                  </Flyout>
+                </Button.Flyout>
+                </Button>
 
               <Button Grid.Column="1" Margin="0 0 0 -5" HorizontalAlignment="Center" Command="{Binding EditCurrentProjectCommand}"
                         Content="{Binding Resources.Main_ButtonEdit, 
@@ -85,40 +91,12 @@
               <RowDefinition Height="Auto" />
               <RowDefinition />
             </Grid.RowDefinitions>
-            <GridView Grid.Row="1" Name="ListBoxLocalProjects" ItemsSource="{Binding LocalProjects}" SelectedItem="{Binding CurrentProject}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <GridView Grid.Row="1" Name="ListBoxLocalProjects" ItemsSource="{Binding LocalProjects}" 
+                      SelectedItem="{Binding SelectedLocalProject, Mode=TwoWay}" 
+                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
               <GridView.ItemTemplate>
                 <DataTemplate>
                   <Grid>
-                    <!--<toolkit:ContextMenuService.ContextMenu>
-                      <toolkit:ContextMenu>
-                        <toolkit:MenuItem Header="{Binding Resources.Main_CopyProject, 
-                        Source={StaticResource LocalizedStrings}}"
-                        Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding ProjectName}" />
-                        <toolkit:MenuItem Header="{Binding Resources.Main_DeleteProject, 
-                        Source={StaticResource LocalizedStrings}}"
-                        Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding ProjectName}" />
-                        <toolkit:MenuItem Header="{Binding Resources.Main_ChangeProjectNameAndDescription, 
-                        Source={StaticResource LocalizedStrings}}" 
-                        Command="{Binding MainViewModel.RenameLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}"
-                        CommandParameter="{Binding}" />
-                        <toolkit:MenuItem Header="{Binding Resources.Main_PinProjectToStart, 
-                        Source={StaticResource LocalizedStrings}}"
-                        Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding}" />
-                        <toolkit:MenuItem Header="{Binding Resources.Main_ShareProject, 
-                        Source={StaticResource LocalizedStrings}}"
-                        Command="{Binding MainViewModel.ShareLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding}" />
-                      </toolkit:ContextMenu>
-                    </toolkit:ContextMenuService.ContextMenu>-->
-
                     <projects:LocalProjectControl Width="188" Height="188" Margin="10" Project="{Binding}" />
                   </Grid>
 
@@ -153,4 +131,40 @@
       </HubSection>
     </Hub>
   </Grid>
+
+  <Page.BottomAppBar>
+    <AppBar Name="AppBarBottomn" Padding="10,0,10,0" Background="Gray">
+      <Grid Visibility="{Binding SelectedLocalProject, Converter={StaticResource NullVisibilityConverter}}">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <AppBarButton Icon="Copy"  
+            Label="{Binding Resources.Main_CopyProject, Source={StaticResource LocalizedStrings}}"
+            Command="{Binding CopyLocalProjectCommand}"/>
+          <AppBarButton Icon="Delete"  
+            Label="{Binding Resources.Main_DeleteProject, Source={StaticResource LocalizedStrings}}"
+            Command="{Binding DeleteLocalProjectCommand}"/>
+          <AppBarButton Icon="Rename"  
+            Label="{Binding Resources.Main_ChangeProjectNameAndDescription, Source={StaticResource LocalizedStrings}}"
+            Command="{Binding RenameLocalProjectCommand}">
+            <AppBarButton.Flyout>
+              <Flyout Opened="ChangeProjectFlyout_OnOpened">
+                <local:ProjectSettingsView/>
+              </Flyout>
+            </AppBarButton.Flyout>
+            </AppBarButton>
+          <AppBarButton Icon="SetTile"  
+            Label="{Binding Resources.Main_PinProjectToStart, Source={StaticResource LocalizedStrings}}"
+            Command="{Binding PinLocalProjectCommand}">
+            <AppBarButton.Flyout>
+              <Flyout Opened="TileGeneratorFlyout_OnOpened">
+                <local:TileGeneratorView/>
+              </Flyout>
+            </AppBarButton.Flyout>
+          </AppBarButton>
+          <!--<AppBarButton Icon="Share"  
+            Label="{Binding Resources.Main_ShareProject, Source={StaticResource LocalizedStrings}}"
+            Command="{Binding ShareLocalProjectCommand}"/>--> 
+        </StackPanel>
+      </Grid>
+    </AppBar>
+  </Page.BottomAppBar>
 </Page>

@@ -201,6 +201,18 @@
       <DependentUpon>SpritesView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\Main\TileGeneratorView.xaml.cs">
+      <DependentUpon>TileGeneratorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\PlayerLauncherView.xaml.cs">
+      <DependentUpon>PlayerLauncherView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\ProjectSettingsView.xaml.cs">
+      <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\AddNewProjectView.xaml.cs">
+      <DependentUpon>AddNewProjectView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -422,6 +434,22 @@
     <Page Include="Views\Editor\Sprites\SpritesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\TileGeneratorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\PlayerLauncherView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\ProjectSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Main\AddNewProjectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>

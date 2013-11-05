@@ -37,6 +37,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
         private ObservableCollection<ProjectDummyHeader> _localProjects;
         private CatrobatContextBase _context;
         private ObservableCollection<OnlineProjectHeader> _onlineProjects;
+        private ProjectDummyHeader _selectdLocalProject;
 
         #endregion
 
@@ -70,7 +71,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                 return _currentProject;
             }
             set
-            {               
+            {
                 if (value == _currentProject) return;
 
                 _currentProject = value;
@@ -100,6 +101,17 @@ namespace Catrobat.IDE.Core.ViewModel.Main
         }
 
         public OnlineProjectHeader SelectedOnlineProject { get; set; }
+
+        public ProjectDummyHeader SelectedLocalProject
+        {
+            get { return _selectdLocalProject; }
+            set
+            {
+                _selectdLocalProject = value;
+                RaisePropertyChanged(() => SelectedLocalProject);
+            }
+        }
+
 
         public ObservableCollection<OnlineProjectHeader> OnlineProjects
         {
@@ -251,6 +263,9 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         private void RenameLocalProjectAction(ProjectDummyHeader project)
         {
+            if (project == null)
+                project = SelectedLocalProject;
+
             var message = new GenericMessage<ProjectDummyHeader>(project);
             Messenger.Default.Send(message, ViewModelMessagingToken.ChangeLocalProjectListener);
 
@@ -259,6 +274,9 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         private void DeleteLocalProjectAction(string projectName)
         {
+            if (projectName == null)
+                projectName = SelectedLocalProject.ProjectName;
+
             _deleteProjectName = projectName;
 
             ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_MainDeleteProjectDialogTitle,
@@ -267,6 +285,9 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         private void CopyLocalProjectAction(string projectName)
         {
+            if (projectName == null)
+                projectName = SelectedLocalProject.ProjectName;
+
             _copyProjectName = projectName;
 
             ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Main_MainCopyProjectDialogTitle,
@@ -275,6 +296,9 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         private void PinLocalProjectAction(ProjectDummyHeader project)
         {
+            if (project == null)
+                project = SelectedLocalProject;
+
             PinProjectHeader = project;
 
             var message = new GenericMessage<ProjectDummyHeader>(PinProjectHeader);
@@ -285,6 +309,9 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         private async void ShareLocalProjectAction(ProjectDummyHeader project)
         {
+            if (project == null)
+                project = SelectedLocalProject;
+
             if (CurrentProject.ProjectDummyHeader == project)
                 await CurrentProject.Save();
 
@@ -665,8 +692,8 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
                     foreach (var header in _localProjects)
                     {
-                            if (header.ProjectName == projectName)
-                                exists = true;
+                        if (header.ProjectName == projectName)
+                            exists = true;
                     }
 
                     if (!exists && projectName != CurrentProject.ProjectDummyHeader.ProjectName)

@@ -10,6 +10,7 @@
   xmlns:appBar="using:Catrobat.IDE.Store.Controls.AppBar"
   xmlns:pages="using:Catrobat.IDE.Store.Controls.Pages"
   xmlns:costumes="using:Catrobat.IDE.Store.Views.Editor.Costumes"
+  xmlns:main="using:Catrobat.IDE.Store.Views.Main"
   DataContext="{Binding SpritesViewModel, Source={ StaticResource Locator }}"
   mc:Ignorable="d">
 
@@ -134,7 +135,7 @@
           NewCommand="{Binding AddNewSpriteCommand}"
           NumberOfSelectedItems="{Binding SelectedSprite, Converter={StaticResource NullIntCountConverter}}">
           <appBar:EditorAppBar.NewFlyout>
-            <Flyout Opened="FlyoutNew_OnClose">
+            <Flyout Opened="FlyoutNew_OnOpen">
               <local:AddNewSpriteView Width="400"/>
             </Flyout>
           </appBar:EditorAppBar.NewFlyout>

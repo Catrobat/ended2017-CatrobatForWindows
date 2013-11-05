@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Main;
 using Catrobat.IDE.Store.Common;
@@ -26,6 +29,34 @@ namespace Catrobat.IDE.Store.Views.Main
             };
 
             this._navigationHelper = new NavigationHelper(this, viewModelsOnPage);
+
+            _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
+        }
+
+        private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (propertyChangedEventArgs.PropertyName ==
+                PropertyHelper.GetPropertyName(() => _viewModel.SelectedLocalProject))
+                AppBarBottomn.IsOpen = _viewModel.SelectedLocalProject != null;
+        }
+
+        private void FlyoutNewProject_OnOpened(object sender, object e)
+        {
+            var viewModel = ServiceLocator.GetInstance<AddNewProjectViewModel>();
+            viewModel.NavigationObject = (Flyout)sender;
+            viewModel.ResetViewModel();
+        }
+
+        private void ChangeProjectFlyout_OnOpened(object sender, object e)
+        {
+            var viewModel = ServiceLocator.GetInstance<ProjectSettingsViewModel>();
+            viewModel.NavigationObject = (Flyout)sender;
+        }
+
+        private void TileGeneratorFlyout_OnOpened(object sender, object e)
+        {
+            var viewModel = ServiceLocator.GetInstance<TileGeneratorViewModel>();
+            viewModel.NavigationObject = (Flyout)sender;
         }
 
         #region NavigationHelper registration

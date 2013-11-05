@@ -78,24 +78,21 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         private async void SaveAction()
         {
-            //ServiceLocator.DispatcherService.RunOnMainThread(() =>
-            //{
+            await CurrentProject.Save();
+
+            CurrentProject = CopyCurrentProjectAsTemplate ?
+                await CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName, _projectName) :
+                await CatrobatContext.CreateEmptyProject(_projectName);
+
+            if (CurrentProject != null)
+            {
                 await CurrentProject.Save();
 
-                CurrentProject = CopyCurrentProjectAsTemplate ?
-                    await CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName, _projectName) :
-                    await CatrobatContext.CreateEmptyProject(_projectName);
+                var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
+                Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+            }
 
-                if (CurrentProject != null)
-                {
-                    await CurrentProject.Save();
-
-                    var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
-                    Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
-                }
-
-                base.GoBackAction();
-            //});
+            base.GoBackAction();
         }
 
         private void CancelAction()
@@ -130,9 +127,10 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
 
-        private void ResetViewModel()
+        public void ResetViewModel()
         {
             ProjectName = "";
+            CopyCurrentProjectAsTemplate = false;
         }
     }
 }

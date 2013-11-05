@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.ViewModel;
 
 namespace Catrobat.IDE.Core.Services
 {
@@ -126,11 +129,11 @@ namespace Catrobat.IDE.Core.Services
 
 
 
-        public static object ViewModelLocator { get; set; }
+        public static ViewModelLocator ViewModelLocator { get; set; }
 
-        public static object ThemeChooser { get; set; }
+        public static ThemeChooser ThemeChooser { get; set; }
 
-        public static object LocalizedStrings { get; set; }
+        public static LocalizedStrings LocalizedStrings { get; set; }
 
         
 

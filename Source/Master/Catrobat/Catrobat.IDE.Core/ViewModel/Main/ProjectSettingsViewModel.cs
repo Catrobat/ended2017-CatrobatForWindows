@@ -1,9 +1,8 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
-namespace Catrobat.IDE.Core.ViewModel.Editor
+namespace Catrobat.IDE.Core.ViewModel.Main
 {
     public class ProjectSettingsViewModel : ViewModelBase
     {
@@ -167,6 +166,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
         private void ResetViewModel()
         {
             ProjectName = "";
+            ProjectDescription = "";
         }
     }
 }

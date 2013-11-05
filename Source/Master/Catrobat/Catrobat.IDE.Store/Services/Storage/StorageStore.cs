@@ -288,9 +288,10 @@ namespace Catrobat.IDE.Store.Services.Storage
         public async Task CopyFileAsync(string sourcePath, string destinationPath)
         {
             var file = await GetFileAsync(sourcePath);
-            var destinationFolderPath = Path.GetPathRoot(destinationPath);
+            var destinationFolderPath = Path.GetDirectoryName(destinationPath);
             var destinationFolder = await GetFolderAsync(destinationFolderPath);
-            await file.CopyAsync(destinationFolder);
+
+            await file.CopyAsync(destinationFolder, file.Name, NameCollisionOption.ReplaceExisting);
         }
 
         public async Task MoveFileAsync(string sourcePath, string destinationPath)
@@ -357,7 +358,7 @@ namespace Catrobat.IDE.Store.Services.Storage
 
         public async Task RenameDirectoryAsync(string directoryPath, string newDirectoryName)
         {
-            var directory = await GetFileAsync(directoryPath);
+            var directory = await GetFolderAsync(directoryPath);
             await directory.RenameAsync(newDirectoryName);
         }
 
@@ -426,7 +427,7 @@ namespace Catrobat.IDE.Store.Services.Storage
                             var encoderId = BitmapEncoder.PngEncoderId;
                             var encoder = await  BitmapEncoder.CreateAsync(encoderId, fileStream.AsRandomAccessStream());
                             encoder.SetPixelData(BitmapPixelFormat.Bgra8,
-                                                                 BitmapAlphaMode.Ignore,
+                                                                 BitmapAlphaMode.Straight,
                                                                  (uint)bitmap.PixelWidth,
                                                                  (uint)bitmap.PixelHeight,
                                                                  resolution,
@@ -512,7 +513,7 @@ namespace Catrobat.IDE.Store.Services.Storage
 
         public async Task WriteTextFileAsync(string path, string content)
         {
-            var file = await GetFileAsync(path);
+            var file = await GetFileAsync(path, true);
             await FileIO.WriteTextAsync(file, content);
         }
 
@@ -621,16 +622,20 @@ namespace Catrobat.IDE.Store.Services.Storage
             }
         }
 
-        public async Task<StorageFile> GetFileAsync(string path, bool createIfExists = true)
+        public async Task<StorageFile> GetFileAsync(string path, bool createIfNotExists = true)
         {
             var fileName = Path.GetFileName(path);
             var directoryName = Path.GetDirectoryName(path);
+
+            if (createIfNotExists)
+                await CreateFolderPath(directoryName);
+
             var folder = await GetFolderAsync(directoryName);
 
             if (folder == null)
-                return null;
+                    return null;
 
-            if (createIfExists)
+            if (createIfNotExists)
                 return await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
 
             return await folder.GetFileAsync(fileName);
