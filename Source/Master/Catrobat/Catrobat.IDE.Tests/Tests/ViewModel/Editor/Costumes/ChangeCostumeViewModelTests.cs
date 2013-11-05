@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
         }
 
-        [TestMethod] //, TestCategory("GatedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void SaveActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -50,7 +50,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod] //, TestCategory("GatedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -66,7 +66,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod] //, TestCategory("GatedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public async Task EditCostumeActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
@@ -94,7 +94,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod] //, TestCategory("GatedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public void GoBackActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;

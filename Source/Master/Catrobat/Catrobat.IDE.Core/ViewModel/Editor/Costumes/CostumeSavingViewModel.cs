@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.UI.PortableUI;
+﻿using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -46,7 +47,10 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         private void CostumeImageReceivedMessageAction(GenericMessage<PortableImage> message)
         {
-            Image = message.Content;
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                Image = message.Content;
+            });
         }
 
         #endregion

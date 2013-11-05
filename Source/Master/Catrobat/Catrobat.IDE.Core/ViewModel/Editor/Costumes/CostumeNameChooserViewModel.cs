@@ -143,14 +143,14 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             };
 
             var costume = await CostumeHelper.Save(Image, CostumeName, newDimention, CurrentProject.BasePath);
-            _receivedSelectedSprite.Costumes.Costumes.Add(costume);
 
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                {
-                    ServiceLocator.NavigationService.RemoveBackEntry();
-                    ServiceLocator.NavigationService.RemoveBackEntry();
-                    base.GoBackAction();
-                });
+            {
+                _receivedSelectedSprite.Costumes.Costumes.Add(costume);
+                ServiceLocator.NavigationService.RemoveBackEntry();
+                ServiceLocator.NavigationService.RemoveBackEntry();
+                base.GoBackAction();
+            });
         }
 
         private void CancelAction()

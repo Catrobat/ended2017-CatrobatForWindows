@@ -1,6 +1,8 @@
-﻿using System.Windows.Media.Imaging;
+﻿using System.Threading;
+using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Phone.Controls.FormulaControls;
 
 namespace Catrobat.IDE.Phone.Services
 {
@@ -18,18 +20,28 @@ namespace Catrobat.IDE.Phone.Services
             return resizedPortableImage;
         }
 
+
+        private readonly Semaphore _semaphore = new Semaphore(0, 1);
+        private PortableImage _resizedImage = null;
         public PortableImage ResizeImage(PortableImage image, int newWidth, int newHeight)
         {
-            var bitmapSource = (BitmapSource)image.ImageSource;
-            var bitmap = new WriteableBitmap(bitmapSource);
-            //var bitmap = new WriteableBitmap(image.Width, image.Height);
-            //bitmap.FromByteArray(image.Data);
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                var bitmapSource = (BitmapSource)image.ImageSource;
+                var bitmap = new WriteableBitmap(bitmapSource);
 
-            var resizedImage = bitmap.Resize(newWidth, newHeight, WriteableBitmapExtensions.Interpolation.Bilinear);
+                var resizedImage = bitmap.Resize(newWidth, newHeight, WriteableBitmapExtensions.Interpolation.Bilinear);
 
-            var resizedPortableImage = new PortableImage(resizedImage.ToByteArray(), resizedImage.PixelWidth, resizedImage.PixelHeight);
+                var resizedPortableImage = new PortableImage(resizedImage.ToByteArray(), resizedImage.PixelWidth, resizedImage.PixelHeight);
 
-            return resizedPortableImage;
+                _resizedImage = resizedPortableImage;
+
+                _semaphore.Release();
+            });
+
+            _semaphore.WaitOne();
+
+            return _resizedImage;
         }
 
         private static WriteableBitmap ResizeImage(WriteableBitmap image, int maxWidthHeight)

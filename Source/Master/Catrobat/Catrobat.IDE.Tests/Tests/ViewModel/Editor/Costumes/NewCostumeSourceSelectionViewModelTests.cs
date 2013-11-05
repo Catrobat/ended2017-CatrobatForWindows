@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
         }
 
-        [TestMethod] //, TestCategory("GatedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public async Task OpenGalleryActionTest()
         {
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,
@@ -75,7 +75,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod] //, TestCategory("GatedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public async Task OpenCameraActionTest()
         {
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,
@@ -126,7 +126,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             Assert.AreEqual(0, navigationService.PageStackCount);
         }
 
-        [TestMethod] //, TestCategory("GatedTests")]
+        [TestMethod, TestCategory("GatedTests")]
         public async Task OpenPaintActionTest()
         {
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,

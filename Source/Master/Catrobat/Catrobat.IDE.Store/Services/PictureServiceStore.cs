@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.Media.Capture;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -11,28 +12,20 @@ namespace Catrobat.IDE.Store.Services
 {
     public class PictureServiceStore : IPictureService
     {
-        private static List<string> _supportedFileNames = new List<string>
+        private static readonly List<string> SupportedFileNames = new List<string>
         {
             ".jpg", ".jpeg", ".png"
         };
 
-        private Action<PortableImage> _successCallback;
-        private Action _errorCallback;
-        private Action _cancelleCallback;
-
-        public async void ChoosePictureFromLibrary(Action<PortableImage> success, Action cancelled, Action error)
+        public async Task<PictureServiceResult> ChoosePictureFromLibraryAsync()
         {
-            _successCallback = success;
-            _cancelleCallback = cancelled;
-            _errorCallback = error;
-
             var openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.Thumbnail;
             openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            
-            foreach(var extension in _supportedFileNames)
+
+            foreach (var extension in SupportedFileNames)
                 openPicker.FileTypeFilter.Add(extension);
-            
+
             StorageFile file = await openPicker.PickSingleFileAsync();
 
             if (file != null)
@@ -44,20 +37,23 @@ namespace Catrobat.IDE.Store.Services
                 await writeableBuitmap.FromStream(filestream);
                 var portableImage = new PortableImage(writeableBuitmap);
 
-                success(portableImage);
+                return new PictureServiceResult
+                {
+                    Status = PictureServiceStatus.Success,
+                    Image = portableImage
+                };
             }
             else
             {
-                cancelled();
+                return new PictureServiceResult
+                {
+                    Status = PictureServiceStatus.Cancelled
+                };
             }
         }
 
-        public async void TakePicture(Action<PortableImage> success, Action cancelled, Action error)
+        public async Task<PictureServiceResult> TakePictureAsync()
         {
-            _successCallback = success;
-            _cancelleCallback = cancelled;
-            _errorCallback = error;
-
             var cam = new CameraCaptureUI();
             var file = await cam.CaptureFileAsync(CameraCaptureUIMode.Photo);
 
@@ -70,37 +66,25 @@ namespace Catrobat.IDE.Store.Services
                 await writeableBuitmap.FromStream(filestream);
                 var portableImage = new PortableImage(writeableBuitmap);
 
-                success(portableImage);
+                return new PictureServiceResult
+                {
+                    Status = PictureServiceStatus.Success,
+                    Image = portableImage
+                };
             }
             else
             {
-                cancelled();
+                return new PictureServiceResult
+                {
+                    Status = PictureServiceStatus.Cancelled
+                };
             }
         }
 
-        public void DrawPicture(Action<PortableImage> success, Action cancelled, Action error, PortableImage imageToEdit = null)
-        {
-            _successCallback = success;
-            _cancelleCallback = cancelled;
-            _errorCallback = error;
-
-            throw new NotImplementedException();
-        }
-
-
-        public void ChoosePictureFromLibraryAsync(Func<PortableImage, System.Threading.Tasks.Task> success, Action cancelled, Action error)
+        public Task<PictureServiceResult> DrawPictureAsync(PortableImage imageToEdit = null)
         {
             throw new NotImplementedException();
         }
 
-        public void TakePictureAsync(Func<PortableImage, System.Threading.Tasks.Task> success, Action cancelled, Action error)
-        {
-            throw new NotImplementedException();
-        }
-
-        public System.Threading.Tasks.Task<PictureServiceResult> DrawPictureAsync(PortableImage imageToEdit = null)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
