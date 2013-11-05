@@ -86,5 +86,21 @@ namespace Catrobat.IDE.Store.Services
 
             throw new NotImplementedException();
         }
+
+
+        public void ChoosePictureFromLibraryAsync(Func<PortableImage, System.Threading.Tasks.Task> success, Action cancelled, Action error)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TakePictureAsync(Func<PortableImage, System.Threading.Tasks.Task> success, Action cancelled, Action error)
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.Threading.Tasks.Task<PictureServiceResult> DrawPictureAsync(PortableImage imageToEdit = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Store.Services
         ErrorMessage
     };
 
-    public class NotificationServiceStore : INotifictionService
+    public class NotificationServiceStore : INotificationService
     {
         private Page _rootPage;
 
