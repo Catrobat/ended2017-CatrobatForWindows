@@ -146,7 +146,8 @@ namespace Catrobat.IDE.Core.Services
                 }
                 else if (mode == TypeCreationMode.Normal)
                 {
-                    Instances.Add(typeof(T), Activator.CreateInstance<T>());
+                    if(!Instances.ContainsKey(typeof(T)))
+                        Instances.Add(typeof(T), Activator.CreateInstance<T>());
                 }
             }
         }

@@ -9,90 +9,30 @@ namespace Catrobat.IDE.Tests.Services
     {
         public PictureServiceStatus NextMethodAction { get; set; }
 
-        public void ChoosePictureFromLibrary(Action<PortableImage> success, Action cancelled, Action error)
+        public Task<PictureServiceResult> ChoosePictureFromLibraryAsync()
         {
-            switch (NextMethodAction)
+            var result = new PictureServiceResult
             {
-                case PictureServiceStatus.Success:
-                    var picture = new PortableImage();
-                    success.Invoke(picture);
-                    break;
-                case PictureServiceStatus.Cancelled:
-                    cancelled.Invoke();
-                    break;
-                case PictureServiceStatus.Error:
-                    error.Invoke();
-                    break;
-            } 
+                Status = NextMethodAction
+            };
+
+            if (result.Status == PictureServiceStatus.Success)
+                result.Image = new PortableImage();
+
+            return Task.Run(() => result);
         }
 
-        public void TakePicture(Action<PortableImage> success, Action cancelled, Action error)
+        public Task<PictureServiceResult> TakePictureAsync()
         {
-            switch (NextMethodAction)
+            var result = new PictureServiceResult
             {
-                case PictureServiceStatus.Success:
-                    var picture = new PortableImage();
-                    success.Invoke(picture);
-                    break;
-                case PictureServiceStatus.Cancelled:
-                    cancelled.Invoke();
-                    break;
-                case PictureServiceStatus.Error:
-                    error.Invoke();
-                    break;
-            }  
-        }
+                Status = NextMethodAction
+            };
 
-        public void DrawPicture(Action<PortableImage> success, Action cancelled, Action error, PortableImage imageToEdit = null)
-        {
-            switch (NextMethodAction)
-            {
-                case PictureServiceStatus.Success:
-                    var picture = new PortableImage();
-                    success.Invoke(picture);
-                    break;
-                case PictureServiceStatus.Cancelled:
-                    cancelled.Invoke();
-                    break;
-                case PictureServiceStatus.Error:
-                    error.Invoke();
-                    break;
-            } 
-        }
+            if (result.Status == PictureServiceStatus.Success)
+                result.Image = new PortableImage();
 
-
-        public void ChoosePictureFromLibraryAsync(Func<PortableImage, Task> success, Action cancelled, Action error)
-        {
-            switch (NextMethodAction)
-            {
-                case PictureServiceStatus.Success:
-                    var picture = new PortableImage();
-                    success.Invoke(picture);
-                    break;
-                case PictureServiceStatus.Cancelled:
-                    cancelled.Invoke();
-                    break;
-                case PictureServiceStatus.Error:
-                    error.Invoke();
-                    break;
-            } 
-        }
-
-        public void TakePictureAsync(Func<PortableImage, Task> success, Action cancelled, Action error)
-        {
-            switch (NextMethodAction)
-            {
-                case PictureServiceStatus.Success:
-                    var picture = new PortableImage();
-                    success.Invoke(picture);
-                    break;
-                case PictureServiceStatus.Cancelled:
-                    cancelled.Invoke();
-                    break;
-                case PictureServiceStatus.Error:
-                    error.Invoke();
-                    break;
-            } 
+            return Task.Run(() => result);
         }
 
         public Task<PictureServiceResult> DrawPictureAsync(PortableImage imageToEdit = null)

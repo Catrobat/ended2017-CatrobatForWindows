@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.Services;
+﻿using System.Threading.Tasks;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
@@ -17,7 +18,6 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
         {
-            ServiceLocator.UnRegisterAll();
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.Register<PictureServiceTest>(TypeCreationMode.Normal);
             ServiceLocator.Register<NotificationServiceTest>(TypeCreationMode.Normal);
@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
         }
 
         [TestMethod] //, TestCategory("GatedTests")]
-        public void OpenGalleryActionTest()
+        public async Task OpenGalleryActionTest()
         {
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,
                 ViewModelMessagingToken.CostumeImageListener, CostumeImageReceivedMessageAction);
@@ -44,7 +44,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             pictureService.NextMethodAction = PictureServiceStatus.Success;
             _imageToSave = null;
 
-            viewModel.OpenGalleryCommand.Execute(null);
+            await viewModel.OpenGalleryCommand.ExecuteAsync(null);
 
             Assert.IsNotNull(_imageToSave);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
@@ -64,7 +64,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             navigationService.CurrentView = typeof(NewCostumeSourceSelectionViewModel);
             _imageToSave = null;
 
-            viewModel.OpenGalleryCommand.Execute(null);
+            await viewModel.OpenGalleryCommand.ExecuteAsync(null);
 
             Assert.IsNull(_imageToSave);
             Assert.AreEqual(1, notificationService.SentMessageBoxes);
@@ -76,7 +76,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
         }
 
         [TestMethod] //, TestCategory("GatedTests")]
-        public void OpenCameraAction()
+        public async Task OpenCameraActionTest()
         {
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,
                 ViewModelMessagingToken.CostumeImageListener, CostumeImageReceivedMessageAction);
@@ -95,7 +95,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             pictureService.NextMethodAction = PictureServiceStatus.Success;
             _imageToSave = null;
 
-            viewModel.OpenCameraCommand.Execute(null);
+            await viewModel.OpenCameraCommand.ExecuteAsync(null);
 
             Assert.IsNotNull(_imageToSave);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
@@ -115,7 +115,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             navigationService.CurrentView = typeof(NewCostumeSourceSelectionViewModel);
             _imageToSave = null;
 
-            viewModel.OpenCameraCommand.Execute(null);
+            await viewModel.OpenCameraCommand.ExecuteAsync(null);
 
             Assert.IsNull(_imageToSave);
             Assert.AreEqual(1, notificationService.SentMessageBoxes);
@@ -127,7 +127,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
         }
 
         [TestMethod] //, TestCategory("GatedTests")]
-        public void OpenPaintAction()
+        public async Task OpenPaintActionTest()
         {
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,
                 ViewModelMessagingToken.CostumeImageListener, CostumeImageReceivedMessageAction);
@@ -146,7 +146,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             pictureService.NextMethodAction = PictureServiceStatus.Success;
             _imageToSave = null;
 
-            viewModel.OpenPaintCommand.Execute(null);
+            await viewModel.OpenPaintCommand.ExecuteAsync(null);
 
             Assert.IsNotNull(_imageToSave);
             Assert.AreEqual(NavigationServiceTest.NavigationType.NavigateTo, navigationService.CurrentNavigationType);
@@ -166,7 +166,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             navigationService.CurrentView = typeof(NewCostumeSourceSelectionViewModel);
             _imageToSave = null;
 
-            viewModel.OpenPaintCommand.Execute(null);
+            await viewModel.OpenPaintCommand.ExecuteAsync(null);
 
             Assert.IsNull(_imageToSave);
             Assert.AreEqual(1, notificationService.SentMessageBoxes);

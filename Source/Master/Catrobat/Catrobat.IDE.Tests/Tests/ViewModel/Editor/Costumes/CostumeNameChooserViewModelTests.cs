@@ -20,7 +20,6 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
         [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
         {
-            ServiceLocator.UnRegisterAll();
             ServiceLocator.NavigationService = new NavigationServiceTest();
             ServiceLocator.Register<StorageFactoryTest>(TypeCreationMode.Normal);
             ServiceLocator.Register<StorageTest>(TypeCreationMode.Normal);
@@ -68,7 +67,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
         public void CancelActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
-            navigationService.PageStackCount = 1;
+            navigationService.PageStackCount = 2;
             navigationService.CurrentNavigationType = NavigationServiceTest.NavigationType.Initial;
             navigationService.CurrentView = typeof(CostumeNameChooserViewModel);
 

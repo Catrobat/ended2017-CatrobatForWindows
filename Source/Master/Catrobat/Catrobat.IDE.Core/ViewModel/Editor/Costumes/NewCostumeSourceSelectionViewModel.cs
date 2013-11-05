@@ -15,50 +15,58 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         #region Properties
 
-       
+
 
         #endregion
 
         #region Commands
 
-        public RelayCommand OpenGalleryCommand { get; private set; }
+        public AsyncRelayCommand OpenGalleryCommand { get; private set; }
 
-        public RelayCommand OpenCameraCommand { get; private set; }
+        public AsyncRelayCommand OpenCameraCommand { get; private set; }
 
-        public RelayCommand OpenPaintCommand { get; private set; }
+        public AsyncRelayCommand OpenPaintCommand { get; private set; }
 
         #endregion
 
         #region CommandCanExecute
 
-      
+
         #endregion
 
         #region Actions
 
-        private void OpenGalleryAction()
+        private async Task OpenGalleryAction()
         {
-            lock (this)
-            {
-                ServiceLocator.PictureService.ChoosePictureFromLibrary(PictureSuccess, PictureCanceled, PictureError);
-            }
+            var result = await ServiceLocator.PictureService.ChoosePictureFromLibraryAsync();
+            if (result.Status == PictureServiceStatus.Success)
+                PictureSuccess(result.Image);
+            else if (result.Status == PictureServiceStatus.Error)
+                PictureError();
         }
 
-        private void OpenCameraAction()
+        private async Task OpenCameraAction()
         {
-            lock (this)
-            {
-                ServiceLocator.PictureService.TakePicture(PictureSuccess, PictureCanceled, PictureError);
-            }
+            var result = await ServiceLocator.PictureService.TakePictureAsync();
+            if (result.Status == PictureServiceStatus.Success)
+                PictureSuccess(result.Image);
+            else if (result.Status == PictureServiceStatus.Error)
+                PictureError();
         }
 
-        private void OpenPaintAction()
+        private async Task OpenPaintAction()
         {
-            lock (this)
-            {
-                ServiceLocator.PictureService.DrawPicture(PictureSuccess, PictureCanceled, PictureError);
-                ServiceLocator.NavigationService.RemoveBackEntry();
-            }
+            var result = await ServiceLocator.PictureService.DrawPictureAsync();
+
+            ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                ServiceLocator.NavigationService.RemoveBackEntry());
+            
+            if (result.Status == PictureServiceStatus.Success)
+                PictureSuccess(result.Image);
+            else if (result.Status == PictureServiceStatus.Error)
+                PictureError();
+
+            
         }
 
         #endregion
@@ -70,9 +78,9 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         public NewCostumeSourceSelectionViewModel()
         {
-            OpenGalleryCommand = new RelayCommand(OpenGalleryAction);
-            OpenCameraCommand = new RelayCommand(OpenCameraAction);
-            OpenPaintCommand = new RelayCommand(OpenPaintAction);
+            OpenGalleryCommand = new AsyncRelayCommand(OpenGalleryAction, () => { /* no action  */ });
+            OpenCameraCommand = new AsyncRelayCommand(OpenCameraAction, () => { /* no action  */ });
+            OpenPaintCommand = new AsyncRelayCommand(OpenPaintAction, () => { /* no action  */ });
         }
 
 
@@ -83,21 +91,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             var message = new GenericMessage<PortableImage>(image);
             Messenger.Default.Send(message, ViewModelMessagingToken.CostumeImageListener);
 
-            ServiceLocator.DispatcherService.RunOnMainThread(() => 
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 ServiceLocator.NavigationService.NavigateTo<CostumeNameChooserViewModel>());
         }
 
-        private void PictureCanceled()
-        {
-            // No action here
-        }
-
         private void PictureError()
-        {
-            ShowLoadingImageFailure();
-        }
-
-        private void ShowLoadingImageFailure()
         {
             ServiceLocator.NotifictionService.ShowMessageBox(AppResources.Editor_MessageBoxWrongImageFormatHeader,
                 AppResources.Editor_MessageBoxWrongImageFormatText, WrongImageFormatResult, MessageBoxOptions.Ok);

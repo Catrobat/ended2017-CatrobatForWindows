@@ -133,7 +133,8 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             var message = new GenericMessage<PortableImage>(Image);
             Messenger.Default.Send(message, ViewModelMessagingToken.CostumeImageToSaveListener);
 
-            ServiceLocator.NavigationService.NavigateTo<CostumeSavingViewModel>();
+            ServiceLocator.DispatcherService.RunOnMainThread(() => 
+                ServiceLocator.NavigationService.NavigateTo<CostumeSavingViewModel>());
 
             var newDimention = new ImageDimension
             {
@@ -144,13 +145,17 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             var costume = await CostumeHelper.Save(Image, CostumeName, newDimention, CurrentProject.BasePath);
             _receivedSelectedSprite.Costumes.Costumes.Add(costume);
 
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            ServiceLocator.NavigationService.RemoveBackEntry();
-            base.GoBackAction();
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    ServiceLocator.NavigationService.RemoveBackEntry();
+                    ServiceLocator.NavigationService.RemoveBackEntry();
+                    base.GoBackAction();
+                });
         }
 
         private void CancelAction()
         {
+            ServiceLocator.NavigationService.RemoveBackEntry();
             base.GoBackAction();
         }
 
