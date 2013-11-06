@@ -155,6 +155,14 @@ namespace Catrobat.IDE.Core.Services
             }
         }
 
+        public static void Register(object objectToRegister)
+        {
+            lock (Instances)
+            {
+                Instances.Add(objectToRegister.GetType(), objectToRegister);
+            }
+        }
+
         public static object GetInstance(Type type)
         {
             lock (Instances)

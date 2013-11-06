@@ -16,8 +16,6 @@
     <Grid Grid.Column="0">
       <StackPanel Grid.Column="0" Margin="5 15 0 0" Grid.RowSpan="2">
         <AppBarButton Name="ButtonNew" Icon="Add" Label="SymbolIcon" />
-        <TextBlock Margin="0" Name="TextBlockAdd" HorizontalAlignment="Center" TextAlignment="Center" 
-          TextWrapping="Wrap">new costume</TextBlock>
       </StackPanel>
     </Grid>
     <Grid Grid.Column="1">

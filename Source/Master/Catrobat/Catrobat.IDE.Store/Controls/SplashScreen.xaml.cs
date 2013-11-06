@@ -39,6 +39,7 @@ namespace Catrobat.IDE.Store.Controls
             {
                 Core.App.SetNativeApp(new AppStore());
                 await Core.App.Initialize();
+                ServiceLocator.Register(new DispatcherServiceStore(Dispatcher));
 
                 var image = new BitmapImage(new Uri("ms-appx:///Content/Images/Screenshot/NoScreenshot.png", UriKind.Absolute))
                 {

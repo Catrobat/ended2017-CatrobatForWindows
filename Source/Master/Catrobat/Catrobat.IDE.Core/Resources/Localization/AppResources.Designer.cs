@@ -953,7 +953,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Image editing program.
+        ///   Looks up a localized string similar to Draw.
         /// </summary>
         public static string Editor_ImageEditingProgram {
             get {
@@ -962,7 +962,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Image Gallery.
+        ///   Looks up a localized string similar to Gallery.
         /// </summary>
         public static string Editor_ImageGallery {
             get {

@@ -50,6 +50,7 @@ namespace Catrobat.IDE.Store.Services
                     Status = PictureServiceStatus.Cancelled
                 };
             }
+
         }
 
         public async Task<PictureServiceResult> TakePictureAsync()

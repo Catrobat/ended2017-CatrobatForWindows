@@ -10,6 +10,7 @@
   xmlns:sprites="using:Catrobat.IDE.Store.Views.Editor.Sprites"
   xmlns:appBar="using:Catrobat.IDE.Store.Controls.AppBar"
   xmlns:listView="using:Catrobat.IDE.Store.Controls.ListView"
+  xmlns:costumes="using:Catrobat.IDE.Store.Views.Editor.Costumes"
   DataContext="{Binding SpriteEditorViewModel, Source={ StaticResource Locator }}"
   mc:Ignorable="d">
 
@@ -111,17 +112,20 @@
       </pages:PageHeaderControl.HeaderContent>
     </pages:PageHeaderControl>
 
-
     <appBar:EditorAppBar Grid.Row="2"
-          VerticalAlignment="Bottom"
-          TargetType="Object"
-          ClearSelectionCommand="{Binding ClearCostumesSelectionCommand}"
-          CopyCommand="{Binding CopyCostumeCommand}"
-          DeleteCommand="{Binding DeleteCostumeCommand}"
-          EditCommand="{Binding EditCostumeCommand}"
-          PlayCommand="{Binding StartPlayerCommand}"
-          NewCommand="{Binding AddNewCostumeCommand}"
-          NumberOfSelectedItems="{Binding SelectedCostumes.Count}">
+      VerticalAlignment="Bottom"
+      TargetType="Costume"
+      ClearSelectionCommand="{Binding ClearCostumesSelectionCommand}"
+      CopyCommand="{Binding CopyCostumeCommand}"
+      DeleteCommand="{Binding DeleteCostumeCommand}"
+      EditCommand="{Binding EditCostumeCommand}"
+      PlayCommand="{Binding StartPlayerCommand}"
+      NumberOfSelectedItems="{Binding SelectedCostumes.Count}">
+      <appBar:EditorAppBar.NewFlyout>
+        <Flyout Opening="NewLookFlyout_OnOpening" >
+          <costumes:NewCostumeSourceSelectionView />
+        </Flyout>
+      </appBar:EditorAppBar.NewFlyout>
     </appBar:EditorAppBar>
   </Grid>
 </Page>

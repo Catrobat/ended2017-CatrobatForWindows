@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         #region Actions
 
-        private async Task OpenGalleryAction()
+        public async Task OpenGalleryAction()
         {
             var result = await ServiceLocator.PictureService.ChoosePictureFromLibraryAsync();
             if (result.Status == PictureServiceStatus.Success)
@@ -45,7 +45,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
                 PictureError();
         }
 
-        private async Task OpenCameraAction()
+        public async Task OpenCameraAction()
         {
             var result = await ServiceLocator.PictureService.TakePictureAsync();
             if (result.Status == PictureServiceStatus.Success)

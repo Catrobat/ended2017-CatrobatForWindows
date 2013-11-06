@@ -36,7 +36,6 @@ namespace Catrobat.IDE.Store
             ServiceLocator.Register<NotificationServiceStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ColorConversionServiceStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ShareServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<DispatcherServiceStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<PortableUIElementsConvertionServiceStore>(TypeCreationMode.Lazy);
         }
     }

@@ -334,7 +334,7 @@
     <value>Image</value>
   </data>
   <data name="Editor_ImageGallery" xml:space="preserve">
-    <value>Image Gallery</value>
+    <value>Gallery</value>
   </data>
   <data name="Editor_ImageSizeFullSize" xml:space="preserve">
     <value>full size</value>
@@ -979,7 +979,7 @@
     <value>Click '+' to add a new sound.</value>
   </data>
   <data name="Editor_ImageEditingProgram" xml:space="preserve">
-    <value>Image editing program</value>
+    <value>Draw</value>
   </data>
   <data name="Editor_Recorded" xml:space="preserve">
     <value>Recorded</value>
