@@ -29,6 +29,11 @@ namespace Catrobat.IDE.Core.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public ViewModelLocator()
+        {
+            RegisterViewModels();
+        }
+
         public void RegisterViewModels()
         {
             Core.Services.ServiceLocator.Register<MainViewModel>(TypeCreationMode.Normal);

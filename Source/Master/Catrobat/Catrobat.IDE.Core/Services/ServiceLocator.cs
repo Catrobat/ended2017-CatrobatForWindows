@@ -135,7 +135,7 @@ namespace Catrobat.IDE.Core.Services
 
         public static LocalizedStrings LocalizedStrings { get; set; }
 
-        
+
 
         private static readonly Dictionary<Type, object> Instances = new Dictionary<Type, object>();
 
@@ -145,12 +145,15 @@ namespace Catrobat.IDE.Core.Services
             {
                 if (mode == TypeCreationMode.Lazy)
                 {
-                    Instances.Add(typeof(T), null);
+                    if (!Instances.ContainsKey(typeof(T)))
+                        Instances.Add(typeof(T), null);
                 }
                 else if (mode == TypeCreationMode.Normal)
                 {
-                    if(!Instances.ContainsKey(typeof(T)))
-                        Instances.Add(typeof(T), Activator.CreateInstance<T>());
+                    if (Instances.ContainsKey(typeof(T)))
+                        Instances.Remove(typeof(T));
+
+                    Instances.Add(typeof(T), Activator.CreateInstance<T>());
                 }
             }
         }
@@ -159,7 +162,11 @@ namespace Catrobat.IDE.Core.Services
         {
             lock (Instances)
             {
-                Instances.Add(objectToRegister.GetType(), objectToRegister);
+                var type = objectToRegister.GetType();
+                if (Instances.ContainsKey(type))
+                    Instances.Remove(type);
+
+                Instances.Add(type, objectToRegister);
             }
         }
 
@@ -199,7 +206,7 @@ namespace Catrobat.IDE.Core.Services
 
         public static T GetInstance<T>()
         {
-            return (T) GetInstance(typeof (T));
+            return (T)GetInstance(typeof(T));
         }
 
         public static void UnRegisterAll()
