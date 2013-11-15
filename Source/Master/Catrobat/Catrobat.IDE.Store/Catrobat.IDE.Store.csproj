@@ -183,6 +183,9 @@
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Editor\Costumes\CostumeNameChooserView.xaml.cs">
+      <DependentUpon>CostumeNameChooserView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml.cs">
       <DependentUpon>NewCostumeSourceSelectionView.xaml</DependentUpon>
     </Compile>
@@ -415,6 +418,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\Templates\ScriptBrickTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\CostumeNameChooserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

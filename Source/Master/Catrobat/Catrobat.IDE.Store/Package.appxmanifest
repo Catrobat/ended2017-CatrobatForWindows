@@ -31,5 +31,6 @@
     <Capability Name="internetClient" />
     <Capability Name="picturesLibrary" />
     <Capability Name="musicLibrary" />
+    <DeviceCapability Name="webcam" />
   </Capabilities>
 </Package>

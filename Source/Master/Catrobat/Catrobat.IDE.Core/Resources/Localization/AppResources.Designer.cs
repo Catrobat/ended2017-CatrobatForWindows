@@ -2564,6 +2564,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set active.
+        /// </summary>
+        public static string Main_SetActive {
+            get {
+                return ResourceManager.GetString("Main_SetActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to enable/disable bricks.
         /// </summary>
         public static string Main_SettingsBricks {

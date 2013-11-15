@@ -965,4 +965,7 @@
   <data name="Editor_ClickPlusToAddSprite" xml:space="preserve">
     <value>Drücke '+' um ein neues Objekt hinzuzufügen.</value>
   </data>
+  <data name="Main_SetActive" xml:space="preserve">
+    <value>Auswählen</value>
+  </data>
 </root>

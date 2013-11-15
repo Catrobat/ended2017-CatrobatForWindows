@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
@@ -17,7 +19,7 @@ namespace Catrobat.IDE.Store.Views.Main
     public sealed partial class MainView : Page
     {
         private readonly NavigationHelper _navigationHelper;
-        private MainViewModel _viewModel = ServiceLocator.GetInstance<MainViewModel>();
+        private readonly MainViewModel _viewModel = ServiceLocator.GetInstance<MainViewModel>();
 
         public MainView()
         {
@@ -72,5 +74,11 @@ namespace Catrobat.IDE.Store.Views.Main
         }
 
         #endregion
+
+        private void AppBarBottomn_OnOpened(object sender, object e)
+        {
+            if (_viewModel.SelectedLocalProject == null)
+                AppBarBottomn.IsOpen = false;
+        }
     }
 }

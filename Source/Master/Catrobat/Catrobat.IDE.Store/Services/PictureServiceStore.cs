@@ -33,9 +33,13 @@ namespace Catrobat.IDE.Store.Services
                 var filestream = await file.OpenAsync(FileAccessMode.Read);
                 var imagetobind = new BitmapImage();
                 imagetobind.SetSource(filestream);
-                var writeableBuitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
-                await writeableBuitmap.FromStream(filestream);
-                var portableImage = new PortableImage(writeableBuitmap);
+                var writeableBitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
+                await writeableBitmap.FromStream(filestream);
+                var portableImage = new PortableImage(writeableBitmap)
+                {
+                    Width = writeableBitmap.PixelWidth,
+                    Height = writeableBitmap.PixelHeight
+                };
 
                 return new PictureServiceResult
                 {
@@ -63,9 +67,13 @@ namespace Catrobat.IDE.Store.Services
                 var filestream = await file.OpenAsync(FileAccessMode.Read);
                 var imagetobind = new BitmapImage();
                 imagetobind.SetSource(filestream);
-                var writeableBuitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
-                await writeableBuitmap.FromStream(filestream);
-                var portableImage = new PortableImage(writeableBuitmap);
+                var writeableBitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
+                await writeableBitmap.FromStream(filestream);
+                var portableImage = new PortableImage(writeableBitmap)
+                {
+                    Width = writeableBitmap.PixelWidth,
+                    Height = writeableBitmap.PixelHeight
+                };
 
                 return new PictureServiceResult
                 {

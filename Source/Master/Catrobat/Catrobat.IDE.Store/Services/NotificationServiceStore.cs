@@ -113,7 +113,7 @@ namespace Catrobat.IDE.Store.Services
 
             switch (options)
             {
-                case MessageBoxOptions.Ok:
+                case MessageBoxOptions.OkCancel:
                     messageDialog.Commands.Add(new UICommand(
                         "OK", CommandInvokedHandler, "Ok"));
                     messageDialog.Commands.Add(new UICommand(
@@ -122,7 +122,7 @@ namespace Catrobat.IDE.Store.Services
                     messageDialog.DefaultCommandIndex = 0;
                     messageDialog.CancelCommandIndex = 1;
                     break;
-                case MessageBoxOptions.OkCancel:
+                case MessageBoxOptions.Ok:
                     messageDialog.Commands.Add(new UICommand(
                         "OK", CommandInvokedHandler, "OK"));
 

@@ -1023,4 +1023,7 @@
   <data name="Editor_ClickPlusToAddSprite" xml:space="preserve">
     <value>Click '+' to add a new object.</value>
   </data>
+  <data name="Main_SetActive" xml:space="preserve">
+    <value>Set active</value>
+  </data>
 </root>

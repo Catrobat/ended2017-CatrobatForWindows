@@ -52,7 +52,8 @@ namespace Catrobat.IDE.Store.Services
 
         public void RemoveBackEntry()
         {
-            _frame.RemoveBackEntry();
+            NavigateBack(null);
+            //_frame.RemoveBackEntry();
         }
 
         public bool CanGoBack
