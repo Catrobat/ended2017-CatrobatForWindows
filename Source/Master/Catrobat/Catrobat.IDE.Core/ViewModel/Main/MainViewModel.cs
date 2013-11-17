@@ -8,6 +8,7 @@ using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.ViewModel.Editor;
+using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModel.Service;
 using Catrobat.IDE.Core.ViewModel.Settings;
 using Catrobat.IDE.Core.ViewModel.Share;
@@ -383,7 +384,7 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         private void EditCurrentProjectAction()
         {
-            ServiceLocator.NavigationService.NavigateTo<EditorLoadingViewModel>();
+            ServiceLocator.NavigationService.NavigateTo<SpritesViewModel>();
         }
 
         private void SettingsAction()

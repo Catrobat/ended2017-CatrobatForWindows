@@ -37,7 +37,7 @@
           </StackPanel>
         </Button.Content>
       </Button>
-      <Button Command="{Binding ShowDesignSettingsCommand}" BorderThickness="0">
+      <!--<Button Command="{Binding ShowDesignSettingsCommand}" BorderThickness="0">
         <Button.Content>
           <Grid>
             <Grid.RowDefinitions>
@@ -101,7 +101,7 @@
           </Grid>
 
         </Button.Content>
-      </Button>
+      </Button>-->
     </StackPanel>
   </Grid>
 </phone:PhoneApplicationPage>

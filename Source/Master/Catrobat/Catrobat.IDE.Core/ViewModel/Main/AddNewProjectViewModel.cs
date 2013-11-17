@@ -92,12 +92,12 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                 Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
             }
 
-            base.GoBackAction();
+            GoBackAction();
         }
 
         private void CancelAction()
         {
-            base.GoBackAction();
+            GoBackAction();
         }
 
         protected override void GoBackAction()

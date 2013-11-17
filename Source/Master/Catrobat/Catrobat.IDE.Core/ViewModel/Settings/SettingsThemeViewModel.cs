@@ -41,7 +41,6 @@ namespace Catrobat.IDE.Core.ViewModel.Settings
         private void ActiveThemeChangedAction(Theme newTheme)
         {
             ThemeChooser.SelectedTheme = newTheme;
-            base.GoBackAction();
         }
 
         protected override void GoBackAction()

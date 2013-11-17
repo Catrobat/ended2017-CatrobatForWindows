@@ -24,6 +24,9 @@ namespace Catrobat.IDE.Core.UI.PortableUI
             get { return _encodedData; }
             set
             {
+                if (value != null)
+                    IsLoaded = true;
+
                 _encodedData = value;
             }
         }
@@ -55,6 +58,9 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         {
             get
             {
+                if (EncodedData != null)
+                    IsLoaded = true;
+
                 if (!IsLoaded)
                     return ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStreeam(null);
 
@@ -189,7 +195,10 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         {
             using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
-                _nativeImageSource = await loader.LoadImageAsync(scope, path);
+               var image = await loader.LoadImageAsync(scope, path);
+
+                _nativeImageSource = image.ImageSource;
+                _encodedData = image._encodedData;
             }
         }
 
