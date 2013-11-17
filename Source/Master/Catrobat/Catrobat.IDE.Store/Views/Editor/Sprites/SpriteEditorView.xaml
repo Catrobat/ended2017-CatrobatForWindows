@@ -21,77 +21,6 @@
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
-
-    <Hub Grid.Row="1" Margin="0 -120 0 0">
-      <HubSection Width="500" Header="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}">
-        <DataTemplate>
-          <Grid>
-            <listView:BindableGridView CanReorderItems="True" ItemsSource="{Binding ScriptBricks }"
-                ItemTemplateSelector="{StaticResource ActionTemplate}" SelectedItems="{Binding SelectedActions}" />
-          </Grid>
-        </DataTemplate>
-      </HubSection>
-
-      <HubSection Header="{Binding Resources.Editor_PivotCostumes, Source={StaticResource LocalizedStrings}}">
-        <DataTemplate>
-          <Grid>
-            <TextBlock Name="Test"/>
-
-            <listView:BindableGridView Name="GridViewLooks"  AllowDrop="True" CanReorderItems="True"
-                ItemTemplateSelector="{StaticResource ActionTemplate}" ItemsSource="{Binding Costumes }" 
-                                       SelectedItems="{Binding SelectedCostumes}"
-                SelectionMode="Multiple">
-              <listView:BindableGridView.ItemTemplate>
-                <DataTemplate>
-                  <Grid Background="{Binding StaticTheme.CostumesBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
-                        Margin="0 5 0 5" Height="90" DataContext="{Binding}">
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="1*" />
-                      <ColumnDefinition Width="3*" />
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Source="{Binding Image.ImageSource}" 
-                       MaxWidth="120" MaxHeight="120" Margin="10 10 5 10" VerticalAlignment="Stretch" />
-                    <Grid Grid.Column="1" Margin="5">
-                      <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
-                             VerticalAlignment="Center" />
-                    </Grid>
-                  </Grid>
-                </DataTemplate>
-              </listView:BindableGridView.ItemTemplate>
-            </listView:BindableGridView>
-          </Grid>
-        </DataTemplate>
-      </HubSection>
-
-      <HubSection Width="520" Header="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}">
-        <DataTemplate>
-          <Grid>
-            <listView:BindableGridView AllowDrop="True" CanReorderItems="True"
-              ItemsSource="{Binding Sounds }" SelectedItems="{Binding SelectedSounds}">
-              <listView:BindableGridView.ItemTemplate>
-                <DataTemplate>
-                  <Grid Background="{Binding StaticTheme.SoundsBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
-                        Margin="0 5 0 5">
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="1*" />
-                      <ColumnDefinition Width="3*" />
-                    </Grid.ColumnDefinitions>
-                    <!--<buttons:PlayPauseButton Group="{StaticResource PlayPauseButtonGroupSounds}" 
-                                           RoundBorderThickness="6" Margin="0 12 0 12"
-                                         Grid.Column="0" Height="80" Width="80" />-->
-                    <!--<Grid Grid.Column="1" Margin="5">
-                      <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
-                               VerticalAlignment="Center" />
-                    </Grid>-->
-                  </Grid>
-                </DataTemplate>
-              </listView:BindableGridView.ItemTemplate>
-            </listView:BindableGridView >
-          </Grid>
-        </DataTemplate>
-      </HubSection>
-    </Hub>
-
     <pages:PageHeaderControl Grid.Row="0" BackCommand="{Binding GoBackCommand}">
       <pages:PageHeaderControl.HeaderContent>
         <StackPanel Grid.Column="1" Orientation="Horizontal">
@@ -112,20 +41,148 @@
       </pages:PageHeaderControl.HeaderContent>
     </pages:PageHeaderControl>
 
-    <appBar:EditorAppBar Grid.Row="2"
-      VerticalAlignment="Bottom"
-      TargetType="Costume"
-      ClearSelectionCommand="{Binding ClearCostumesSelectionCommand}"
-      CopyCommand="{Binding CopyCostumeCommand}"
-      DeleteCommand="{Binding DeleteCostumeCommand}"
-      EditCommand="{Binding EditCostumeCommand}"
-      PlayCommand="{Binding StartPlayerCommand}"
-      NumberOfSelectedItems="{Binding SelectedCostumes.Count}">
-      <appBar:EditorAppBar.NewFlyout>
-        <Flyout Opening="NewLookFlyout_OnOpening" >
-          <costumes:NewCostumeSourceSelectionView />
-        </Flyout>
-      </appBar:EditorAppBar.NewFlyout>
-    </appBar:EditorAppBar>
+
+    <Hub Grid.Row="1" Margin="0 -120 0 0">
+      <HubSection Width="500" >
+        <DataTemplate>
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+              <TextBlock VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}"
+                         Text="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}" />
+              <AppBarButton Icon="Add"  Margin="10 0 0 0"
+                        Command="{Binding AddNewSpriteCommand}"
+                        Label="{ Binding Resources.Editor_AppbarAdd , Source={StaticResource LocalizedStrings} }" >
+                <AppBarButton.Flyout>
+                  <Flyout Opening="NewLookFlyout_OnOpening" >
+                    <costumes:NewCostumeSourceSelectionView />
+                  </Flyout>
+                </AppBarButton.Flyout>
+              </AppBarButton>
+            </StackPanel>
+            <listView:BindableGridView Grid.Row="1" CanReorderItems="True" ItemsSource="{Binding ScriptBricks }"
+                ItemTemplateSelector="{StaticResource ActionTemplate}" SelectedItems="{Binding SelectedActions}" />
+          </Grid>
+        </DataTemplate>
+      </HubSection>
+
+      <HubSection >
+        <DataTemplate>
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+              <TextBlock VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}"
+                         Text="{Binding Resources.Editor_PivotCostumes, Source={StaticResource LocalizedStrings}}" />
+              <AppBarButton Icon="Add"  Margin="10 0 0 0"
+                        Command="{Binding AddNewSpriteCommand}"
+                        Label="{ Binding Resources.Editor_AppbarAdd , Source={StaticResource LocalizedStrings} }" >
+                <AppBarButton.Flyout>
+                  <Flyout Opening="NewLookFlyout_OnOpening" >
+                    <costumes:NewCostumeSourceSelectionView />
+                  </Flyout>
+                </AppBarButton.Flyout>
+              </AppBarButton>
+            </StackPanel>
+            <Grid Grid.Row="1">
+              <TextBlock Name="Test"/>
+
+              <listView:BindableGridView Name="GridViewLooks" VerticalAlignment="Stretch" AllowDrop="True" CanReorderItems="True"
+                ItemTemplateSelector="{StaticResource ActionTemplate}" ItemsSource="{Binding Costumes }" 
+                                       SelectedItems="{Binding SelectedCostumes}"
+                SelectionMode="Multiple">
+                <listView:BindableGridView.ItemTemplate>
+                  <DataTemplate>
+                    <Grid Background="{Binding StaticTheme.CostumesBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                        Margin="0 5 0 5" Height="90" DataContext="{Binding}">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="3*" />
+                      </Grid.ColumnDefinitions>
+                      <Image Grid.Column="0" Source="{Binding Image.ImageSource}" 
+                       MaxWidth="120" MaxHeight="120" Margin="10 10 5 10" VerticalAlignment="Stretch" />
+                      <Grid Grid.Column="1" Margin="5">
+                        <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
+                             VerticalAlignment="Center" />
+                      </Grid>
+                    </Grid>
+                  </DataTemplate>
+                </listView:BindableGridView.ItemTemplate>
+              </listView:BindableGridView>
+            </Grid>
+          </Grid>
+        </DataTemplate>
+      </HubSection>
+
+      <HubSection Width="520" >
+        <DataTemplate>
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+              <TextBlock VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}"
+                         Text="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}" />
+              <AppBarButton Icon="Add"  Margin="10 0 0 0"
+                        Command="{Binding AddNewSpriteCommand}"
+                        Label="{ Binding Resources.Editor_AppbarAdd , Source={StaticResource LocalizedStrings} }" >
+                <AppBarButton.Flyout>
+                  <Flyout Opening="NewLookFlyout_OnOpening" >
+                    <costumes:NewCostumeSourceSelectionView />
+                  </Flyout>
+                </AppBarButton.Flyout>
+              </AppBarButton>
+            </StackPanel>
+            <Grid Grid.Row="1">
+              <listView:BindableGridView AllowDrop="True" CanReorderItems="True"
+              ItemsSource="{Binding Sounds }" SelectedItems="{Binding SelectedSounds}">
+                <listView:BindableGridView.ItemTemplate>
+                  <DataTemplate>
+                    <Grid Background="{Binding StaticTheme.SoundsBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                        Margin="0 5 0 5">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="3*" />
+                      </Grid.ColumnDefinitions>
+                      <!--<buttons:PlayPauseButton Group="{StaticResource PlayPauseButtonGroupSounds}" 
+                                           RoundBorderThickness="6" Margin="0 12 0 12"
+                                         Grid.Column="0" Height="80" Width="80" />-->
+                      <!--<Grid Grid.Column="1" Margin="5">
+                      <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
+                               VerticalAlignment="Center" />
+                    </Grid>-->
+                    </Grid>
+                  </DataTemplate>
+                </listView:BindableGridView.ItemTemplate>
+              </listView:BindableGridView >
+            </Grid>
+          </Grid>
+        </DataTemplate>
+      </HubSection>
+    </Hub>
   </Grid>
+  
+  <Page.BottomAppBar>
+    <AppBar Name="AppBarBottomn" Padding="10,0,10,0" Background="Gray" IsSticky="True">
+      <appBar:EditorAppBar Grid.Row="2"
+          VerticalAlignment="Bottom"
+          TargetType="Costume"
+          ClearSelectionCommand="{Binding ClearCostumesSelectionCommand}"
+          CopyCommand="{Binding CopyCostumeCommand}"
+          DeleteCommand="{Binding DeleteCostumeCommand}"
+          EditCommand="{Binding EditCostumeCommand}"
+          PlayCommand="{Binding StartPlayerCommand}"
+          NumberOfSelectedItems="{Binding SelectedCostumes.Count}">
+      </appBar:EditorAppBar>
+    </AppBar >
+  </Page.BottomAppBar>
 </Page>

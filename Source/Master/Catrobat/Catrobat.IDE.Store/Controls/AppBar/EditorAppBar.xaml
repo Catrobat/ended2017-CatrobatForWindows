@@ -8,15 +8,32 @@
 
   <Grid x:Name="LayoutRoot" Height="130" Background="{Binding Path=SelectedTheme.AppBarColor, Source={StaticResource ThemeChooser}}">
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="90"/>
+      <ColumnDefinition Width="Auto"/>
       <ColumnDefinition/>
       <ColumnDefinition Width="110"/>
     </Grid.ColumnDefinitions>
 
     <Grid Grid.Column="0">
-      <StackPanel Grid.Column="0" Margin="5 15 0 0" Grid.RowSpan="2">
-        <AppBarButton Name="ButtonNew" Icon="Add" Label="SymbolIcon" />
+      <StackPanel Orientation="Vertical" Margin="50 20 15 0" HorizontalAlignment="Left">
+        <StackPanel Name="StackPanelNew" Orientation="Horizontal"
+                    HorizontalAlignment="Left" Margin="0 0 0 0" Width="100">
+          <TextBlock Name="TextBlockNumberOfSelectedItemsNumber" VerticalAlignment="Center" 
+                       FontSize="25" TextAlignment="Right" MinWidth="30" Margin="0 0 7 0">0</TextBlock>
+          <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
+            <TextBlock Name="TextBlockNumberOfSelectedItemsText" TextWrapping="Wrap" FontSize="12" VerticalAlignment="Center" 
+                       >OBJECTS</TextBlock>
+            <TextBlock TextWrapping="Wrap" FontSize="12" VerticalAlignment="Center"
+                         Text="{Binding Resources.Editor_Selected, Source={StaticResource LocalizedStrings}}" />
+          </StackPanel>
+        </StackPanel>
+        <HyperlinkButton FontSize="16" Margin="0 0 0 0" Name="ButtonClearSelection" VerticalAlignment="Stretch"
+                           Content="{Binding Resources.Editor_ClearSelection, Source={StaticResource LocalizedStrings}}" />
       </StackPanel>
+
+
+      <!--<StackPanel Grid.Column="0" Margin="5 15 0 0" Grid.RowSpan="2">
+        <AppBarButton Name="ButtonNew" Icon="Add" Label="SymbolIcon" />
+      </StackPanel>-->
     </Grid>
     <Grid Grid.Column="1">
       <Grid.RowDefinitions>
@@ -28,22 +45,6 @@
           <RowDefinition Height="Auto"/>
           <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <StackPanel Orientation="Horizontal" Margin="30 0 0 0" Height="50" HorizontalAlignment="Left">
-          <StackPanel Name="StackPanelNew" Orientation="Horizontal"
-                    HorizontalAlignment="Left" Margin="0 0 0 0" Width="100">
-            <TextBlock Name="TextBlockNumberOfSelectedItemsNumber" VerticalAlignment="Center" 
-                       FontSize="25" TextAlignment="Right" MinWidth="30" Margin="0 0 7 0">0</TextBlock>
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-              <TextBlock Name="TextBlockNumberOfSelectedItemsText" TextWrapping="Wrap" FontSize="12" VerticalAlignment="Center" 
-                       >OBJECTS</TextBlock>
-              <TextBlock TextWrapping="Wrap" FontSize="12" VerticalAlignment="Center"
-                         Text="{Binding Resources.Editor_Selected, Source={StaticResource LocalizedStrings}}" />
-            </StackPanel>
-          </StackPanel>
-          <HyperlinkButton FontSize="16" Margin="0 0 0 0" Name="ButtonClearSelection" VerticalAlignment="Stretch"
-                           Content="{Binding Resources.Editor_ClearSelection, Source={StaticResource LocalizedStrings}}" />
-        </StackPanel>
 
         <Grid Grid.Row="1" HorizontalAlignment="Left" Margin="0 0 0 5">
           <Grid.ColumnDefinitions>

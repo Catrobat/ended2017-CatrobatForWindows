@@ -184,7 +184,7 @@ namespace Catrobat.IDE.Store.Controls.AppBar
 
         private static void NewFlyoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((EditorAppBar) d).ButtonNew.Flyout = (Flyout) e.NewValue;
+            //((EditorAppBar) d).ButtonNew.Flyout = (Flyout) e.NewValue;
             ((Flyout)e.NewValue).Opening += (sender, o) => ((EditorAppBar)d).NewCommand.Execute(null);
         }
 
@@ -268,7 +268,7 @@ namespace Catrobat.IDE.Store.Controls.AppBar
                     break;
             }
 
-            ButtonNew.Label =  text;
+            //ButtonNew.Label =  text;
         }
     }
 }

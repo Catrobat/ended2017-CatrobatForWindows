@@ -23,6 +23,7 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="140"/>
       <RowDefinition Height="*"/>
+      <RowDefinition Height="180"/>
     </Grid.RowDefinitions>
 
     <!-- Back button and page title -->
@@ -50,9 +51,19 @@
           <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid Margin="10 5 10 25">
-          <TextBlock Text="{Binding CurrentProject.ProjectHeader.ProgramName}" FontSize="36"/>
-        </Grid>
+        <StackPanel Margin="10 5 10 0" Orientation="Horizontal">
+          <TextBlock Text="{Binding CurrentProject.ProjectHeader.ProgramName}"
+                     VerticalAlignment="Center" FontSize="36"/>
+          <AppBarButton Icon="Add"  Margin="40 0 40 0"
+                        Command="{Binding AddNewSpriteCommand}"
+                        Label="{ Binding Resources.Editor_AppbarAdd , Source={StaticResource LocalizedStrings} }" >
+          <AppBarButton.Flyout>
+              <Flyout Opened="FlyoutNew_OnOpen">
+                <local:AddNewSpriteView Width="400"/>
+              </Flyout>
+            </AppBarButton.Flyout>
+          </AppBarButton>
+        </StackPanel>
 
         <!--Pivot item sprites-->
         <GridView
@@ -66,7 +77,7 @@
           Foreground="White">
           <GridView.ItemTemplate>
             <DataTemplate>
-              <Grid Margin="0 5 0 5" Height="300" Width="600" 
+              <Grid Margin="0 5 0 5" Height="150" Width="400" 
                     Background="{Binding StaticTheme.ObjectsBrush.NativeBrush, Source ={StaticResource ThemeChooser}}">
                 <Grid.RowDefinitions>
                   <RowDefinition/>
@@ -123,24 +134,28 @@
               TextAlignment="Center"
               VerticalAlignment="Center"
               HorizontalAlignment="Center" />
-
-        <appBar:EditorAppBar Grid.Row="2"
-          VerticalAlignment="Bottom"
-          TargetType="Object"
-          ClearSelectionCommand="{Binding ClearObjectsSelectionCommand}"
-          CopyCommand="{Binding CopySpriteCommand}"
-          DeleteCommand="{Binding DeleteSpriteCommand}"
-          EditCommand="{Binding EditSpriteCommand}"
-          PlayCommand="{Binding StartPlayerCommand}"
-          NewCommand="{Binding AddNewSpriteCommand}"
-          NumberOfSelectedItems="{Binding SelectedSprite, Converter={StaticResource NullIntCountConverter}}">
-          <appBar:EditorAppBar.NewFlyout>
-            <Flyout Opened="FlyoutNew_OnOpen">
-              <local:AddNewSpriteView Width="400"/>
-            </Flyout>
-          </appBar:EditorAppBar.NewFlyout>
-        </appBar:EditorAppBar>
       </Grid>
     </Grid>
   </Grid>
+
+  <Page.BottomAppBar>
+    <AppBar Name="AppBarBottomn" Padding="10,0,10,0" Background="Gray" IsSticky="True">
+      <appBar:EditorAppBar Grid.Row="2"
+              VerticalAlignment="Bottom"
+              TargetType="Object"
+              ClearSelectionCommand="{Binding ClearObjectsSelectionCommand}"
+              CopyCommand="{Binding CopySpriteCommand}"
+              DeleteCommand="{Binding DeleteSpriteCommand}"
+              EditCommand="{Binding EditSpriteCommand}"
+              PlayCommand="{Binding StartPlayerCommand}"
+              NewCommand="{Binding AddNewSpriteCommand}"
+              NumberOfSelectedItems="{Binding SelectedSprite, Converter={StaticResource NullIntCountConverter}}">
+        <appBar:EditorAppBar.NewFlyout>
+          <Flyout Opened="FlyoutNew_OnOpen">
+            <local:AddNewSpriteView Width="400"/>
+          </Flyout>
+        </appBar:EditorAppBar.NewFlyout>
+      </appBar:EditorAppBar>
+      </AppBar >
+  </Page.BottomAppBar>
 </Page>

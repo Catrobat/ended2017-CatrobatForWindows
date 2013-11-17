@@ -150,7 +150,7 @@ namespace Catrobat.IDE.Core.Services
                 }
                 else if (mode == TypeCreationMode.Normal)
                 {
-                    if (Instances.ContainsKey(typeof(T)))
+                    if (!Instances.ContainsKey(typeof(T)))
                         Instances.Remove(typeof(T));
 
                     Instances.Add(typeof(T), Activator.CreateInstance<T>());
