@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
@@ -201,7 +202,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public async void LoadImageTest()
+        public async Task LoadImageTest()
         {
             using (IStorage storage = new StorageTest())
             {
@@ -244,7 +245,7 @@ namespace Catrobat.IDE.Tests.Tests.Storage
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public async void ReadWriteSerializableObjectTest()
+        public async Task ReadWriteSerializableObjectTest()
         {
             using (var storage = StorageSystem.GetStorage())
             {

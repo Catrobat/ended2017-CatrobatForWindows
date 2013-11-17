@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Services;
@@ -18,7 +19,7 @@ namespace Catrobat.IDE.Tests.Tests.Misc
         }
 
         [TestMethod,TestCategory("GatedTests")]
-        public async void UnZipSimpleTest()
+        public async Task UnZipSimpleTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();
             const string path = "SampleData/SampleProjects/test.catroid";
@@ -62,7 +63,7 @@ namespace Catrobat.IDE.Tests.Tests.Misc
         }
 
         [TestMethod,TestCategory("GatedTests")]
-        public async void ZipSimpleTest()
+        public async Task ZipSimpleTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();
             const string path = "SampleData/SampleProjects/test.catroid";
