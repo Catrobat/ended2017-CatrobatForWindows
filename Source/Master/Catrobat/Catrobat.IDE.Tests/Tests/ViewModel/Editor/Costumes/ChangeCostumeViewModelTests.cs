@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             ServiceLocator.Register<DispatcherServiceTest>(TypeCreationMode.Normal);
         }
 
-        [TestMethod, TestCategory("GatedTests")]
+        [TestMethod] // , TestCategory("GatedTests") // TODO: fix test takes very long time on server
         public void SaveActionTest()
         {
             var navigationService = (NavigationServiceTest)ServiceLocator.NavigationService;
