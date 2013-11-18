@@ -11,6 +11,7 @@
   xmlns:appBar="using:Catrobat.IDE.Store.Controls.AppBar"
   xmlns:listView="using:Catrobat.IDE.Store.Controls.ListView"
   xmlns:costumes="using:Catrobat.IDE.Store.Views.Editor.Costumes"
+  xmlns:sounds="using:Catrobat.IDE.Store.Views.Editor.Sounds"
   DataContext="{Binding SpriteEditorViewModel, Source={ StaticResource Locator }}"
   mc:Ignorable="d">
 
@@ -22,7 +23,7 @@
     </Grid.RowDefinitions>
 
     <Hub Grid.Row="1" Margin="0 -120 0 0">
-      <HubSection Width="500" >
+      <HubSection>
         <DataTemplate>
           <Grid>
             <Grid.RowDefinitions>
@@ -33,9 +34,8 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal">
               <TextBlock VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}"
                          Text="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}" />
-              <AppBarButton Icon="Add"  Margin="10 0 0 0"
-                        Command="{Binding AddNewSpriteCommand}"
-                        Label="{ Binding Resources.Editor_AppbarAdd , Source={StaticResource LocalizedStrings} }" >
+              <AppBarButton Icon="Add"  Margin="0 20 0 0" VerticalAlignment="Center"
+                        Command="{Binding AddNewSpriteCommand}" >
                 <AppBarButton.Flyout>
                   <Flyout Opening="NewLookFlyout_OnOpening" >
                     <costumes:NewCostumeSourceSelectionView />
@@ -59,11 +59,10 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-              <TextBlock VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}"
-                         Text="{Binding Resources.Editor_PivotCostumes, Source={StaticResource LocalizedStrings}}" />
-              <AppBarButton Icon="Add"  Margin="10 0 0 0"
-                        Command="{Binding AddNewSpriteCommand}"
-                        Label="{ Binding Resources.Editor_AppbarAdd , Source={StaticResource LocalizedStrings} }" >
+              <TextBlock VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" 
+                         Text="{Binding Resources.Editor_PivotCostumes, Source={StaticResource LocalizedStrings}}"/>
+              <AppBarButton Icon="Add"  Margin="0 20 0 0" VerticalAlignment="Center"
+                        Command="{Binding AddNewSpriteCommand}" >
                 <AppBarButton.Flyout>
                   <Flyout Opening="NewLookFlyout_OnOpening" >
                     <costumes:NewCostumeSourceSelectionView />
@@ -101,7 +100,7 @@
         </DataTemplate>
       </HubSection>
 
-      <HubSection Width="520" >
+      <HubSection>
         <DataTemplate>
           <Grid>
             <Grid.RowDefinitions>
@@ -112,12 +111,11 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal">
               <TextBlock VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}"
                          Text="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}" />
-              <AppBarButton Icon="Add"  Margin="10 0 0 0"
-                        Command="{Binding AddNewSpriteCommand}"
-                        Label="{ Binding Resources.Editor_AppbarAdd , Source={StaticResource LocalizedStrings} }" >
+              <AppBarButton Icon="Add"  Margin="0 20 0 0" VerticalAlignment="Center"
+                        Command="{Binding AddNewSpriteCommand}" >
                 <AppBarButton.Flyout>
                   <Flyout Opening="NewLookFlyout_OnOpening" >
-                    <costumes:NewCostumeSourceSelectionView />
+                    <sounds:NewSoundSourceSelectionView />
                   </Flyout>
                 </AppBarButton.Flyout>
               </AppBarButton>
@@ -205,6 +203,11 @@
             DeleteCommand="{Binding DeleteCostumeCommand}"
             EditCommand="{Binding EditCostumeCommand}"
             NumberOfSelectedItems="{Binding SelectedCostumes.Count}">
+            <appBar:EditorAppBar.EditFlyout>
+              <Flyout Opened="TileGeneratorFlyout_OnOpened">
+                <costumes:ChangeCostumeView Width="400"/>
+              </Flyout>
+            </appBar:EditorAppBar.EditFlyout>
           </appBar:EditorAppBar>
         </Border>
 

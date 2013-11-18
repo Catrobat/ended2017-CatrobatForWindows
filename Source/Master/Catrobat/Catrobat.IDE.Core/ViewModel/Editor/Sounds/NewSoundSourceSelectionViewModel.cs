@@ -53,7 +53,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
             base.GoBackAction();
         }
 
-
         #endregion
 
         public NewSoundSourceSelectionViewModel()

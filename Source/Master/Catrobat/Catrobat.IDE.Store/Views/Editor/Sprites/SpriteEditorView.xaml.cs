@@ -62,5 +62,11 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
 
             AppBarBottomn.IsOpen = showAppbar;
         }
+
+        private void TileGeneratorFlyout_OnOpened(object sender, object e)
+        {
+            var viewModel = ServiceLocator.GetInstance<ChangeCostumeViewModel>();
+            viewModel.NavigationObject = (Flyout)sender;
+        }
     }
 }

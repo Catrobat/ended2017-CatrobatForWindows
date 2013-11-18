@@ -128,6 +128,21 @@
     <Compile Include="Content\Images\Application\Logo.xaml.cs">
       <DependentUpon>Logo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Images\Misc\AudioLibrary.xaml.cs">
+      <DependentUpon>AudioLibrary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Images\Misc\AudioRecorder.xaml.cs">
+      <DependentUpon>AudioRecorder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Images\Misc\Camera.xaml.cs">
+      <DependentUpon>Camera.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Images\Misc\EditImage.xaml.cs">
+      <DependentUpon>EditImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Images\Misc\ImageGallery.xaml.cs">
+      <DependentUpon>ImageGallery.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AppBar\AppBarPlayButton.xaml.cs">
       <DependentUpon>AppBarPlayButton.xaml</DependentUpon>
     </Compile>
@@ -192,11 +207,23 @@
     <Compile Include="Views\Editor\Costumes\CostumeNameChooserView.xaml.cs">
       <DependentUpon>CostumeNameChooserView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Editor\Costumes\ChangeCostumeView.xaml.cs">
+      <DependentUpon>ChangeCostumeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml.cs">
       <DependentUpon>NewCostumeSourceSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\EditorLoadingView.xaml.cs">
       <DependentUpon>EditorLoadingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\ChangeSoundView.xaml.cs">
+      <DependentUpon>ChangeSoundView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\SoundNameChooserView.xaml.cs">
+      <DependentUpon>SoundNameChooserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sounds\NewSoundSourceSelectionView.xaml.cs">
+      <DependentUpon>NewSoundSourceSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Sprites\AddNewSpriteView.xaml.cs">
       <DependentUpon>AddNewSpriteView.xaml</DependentUpon>
@@ -337,11 +364,6 @@
     <Content Include="Content\Images\ImageButtons\upload_light.png" />
     <Content Include="Content\Images\ImageButtons\upload_pressed_dark.png" />
     <Content Include="Content\Images\ImageButtons\upload_pressed_light.png" />
-    <Content Include="Content\Images\Misc\AudioLibrary.png" />
-    <Content Include="Content\Images\Misc\AudioRecorder.png" />
-    <Content Include="Content\Images\Misc\camera.png" />
-    <Content Include="Content\Images\Misc\EditImage.png" />
-    <Content Include="Content\Images\Misc\Gallery.png" />
     <Content Include="Content\Images\Misc\InProcess.png" />
     <Content Include="Content\Images\Pocketcode.svg" />
     <Content Include="Content\Images\Screenshot\NoScreenshot.png" />
@@ -371,6 +393,26 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Content\Images\Application\Logo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Images\Misc\AudioLibrary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Images\Misc\AudioRecorder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Images\Misc\Camera.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Images\Misc\EditImage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Images\Misc\ImageGallery.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -439,6 +481,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Editor\Costumes\ChangeCostumeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -446,6 +492,18 @@
     <Page Include="Views\Editor\EditorLoadingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editor\Sounds\ChangeSoundView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\SoundNameChooserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sounds\NewSoundSourceSelectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Editor\Sprites\AddNewSpriteView.xaml">
       <SubType>Designer</SubType>
@@ -516,7 +574,6 @@
   <ItemGroup>
     <Folder Include="Content\Programs\Default\Sounds\" />
     <Folder Include="Views\Editor\Scripts\" />
-    <Folder Include="Views\Editor\Sounds\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
