@@ -221,6 +221,7 @@
     <Compile Include="Services\DispatcherServicePhone.cs" />
     <Compile Include="Services\ImageResizeServicePhone.cs" />
     <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
+    <Compile Include="Services\SoundServicePhone.cs" />
     <Compile Include="Services\ProjectImporterServicePhone.cs" />
     <Compile Include="Services\NavigationServicePhone.cs" />
     <Compile Include="Services\NotificationServicePhone.cs" />
@@ -850,6 +851,7 @@
   <ItemGroup>
     <Folder Include="Content\Libs\" />
     <Folder Include="Content\Programs\Default\Sounds\" />
+    <Folder Include="Services\LocalServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

@@ -37,6 +37,7 @@ namespace Catrobat.IDE.Store
             ServiceLocator.Register<ColorConversionServiceStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ShareServiceStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<PortableUIElementsConvertionServiceStore>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SoundServiceStore>(TypeCreationMode.Lazy);
         }
     }
 }

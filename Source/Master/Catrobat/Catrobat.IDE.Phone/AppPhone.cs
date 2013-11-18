@@ -41,6 +41,7 @@ namespace Catrobat.IDE.Phone
             ServiceLocator.Register<DispatcherServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<PortableUIElementsConvertionServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ActionTemplateServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SoundServicePhone>(TypeCreationMode.Lazy);
 
             ServiceLocator.NavigationService = new NavigationServicePhone();
         }

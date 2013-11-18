@@ -87,7 +87,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
 
             ResetViewModel();
             ServiceLocator.NavigationService.RemoveBackEntry();
-            ServiceLocator.NavigationService.RemoveBackEntry();
+            //ServiceLocator.NavigationService.RemoveBackEntry();
             base.GoBackAction();
         }
 
@@ -133,7 +133,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
 
         private void ResetViewModel()
         {
-            //SoundName = null;
+            SoundName = AppResources.Editor_SoundSingular;
         }
     }
 }

@@ -24,6 +24,7 @@
         ChangeLocalProjectListener,
         CostumeImageListener,
         CostumeImageToSaveListener,
-        ScriptBrickCategoryListener
+        ScriptBrickCategoryListener,
+        SoundStreamListener
     }
 }

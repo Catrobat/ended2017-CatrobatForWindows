@@ -195,6 +195,7 @@
     <Compile Include="Services\ShareServiceStore.cs" />
     <Compile Include="Services\SoundPlayerServiceStore.cs" />
     <Compile Include="Services\SoundRecorderServiceStore.cs" />
+    <Compile Include="Services\SoundServiceStore.cs" />
     <Compile Include="Services\Storage\ResourceLoaderFactoryStore.cs" />
     <Compile Include="Services\Storage\ResourcesStore.cs" />
     <Compile Include="Services\Storage\StorageFactoryStore.cs" />

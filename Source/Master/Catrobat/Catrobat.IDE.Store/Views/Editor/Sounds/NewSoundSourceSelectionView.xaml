@@ -27,7 +27,7 @@
         </StackPanel>-->
 
         <StackPanel Grid.Row="1" Margin="0 0 0 0" HorizontalAlignment="Stretch">
-          <Button Margin="0 0 0 0" HorizontalAlignment="Stretch" Command="{Binding RecorderCommand}">
+          <Button Margin="0 0 0 0" HorizontalAlignment="Stretch" Command="{Binding AudioLibraryCommand}">
             <Button.Template>
               <ControlTemplate>
                 <Grid Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" 

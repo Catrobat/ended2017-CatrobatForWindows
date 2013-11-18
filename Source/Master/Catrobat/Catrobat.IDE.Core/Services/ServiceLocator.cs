@@ -127,6 +127,11 @@ namespace Catrobat.IDE.Core.Services
         public static IActionTemplateService ActionTemplateService
         { get { return GetInstance<IActionTemplateService>(); } }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static ISoundService SoundService
+        { get { return GetInstance<ISoundService>(); } }
 
 
         public static ViewModelLocator ViewModelLocator { get; set; }
@@ -176,19 +181,24 @@ namespace Catrobat.IDE.Core.Services
             {
                 object instance = null;
                 bool isInDictionary = false;
+                Type registeredType = type;
+
 
                 foreach (var pair in Instances)
                 {
-                    if (pair.Key.GetTypeInfo().BaseType == type
-                        || pair.Key == type
-                        || pair.Key.GetTypeInfo().ImplementedInterfaces.Contains(type))
+                    if (pair.Key.GetTypeInfo().BaseType == type ||
+                        pair.Key == type || 
+                        pair.Key.GetTypeInfo().ImplementedInterfaces.Contains(type))
                     {
                         instance = pair.Value;
 
                         isInDictionary = instance != null;
 
                         if (!isInDictionary)
-                            instance = Activator.CreateInstance(pair.Key);
+                        {
+                            registeredType = pair.Key;
+                            instance = Activator.CreateInstance(registeredType);
+                        }
 
                         break;
                     }
@@ -198,7 +208,7 @@ namespace Catrobat.IDE.Core.Services
                     throw new Exception("Type " + type.GetTypeInfo().Name + " is not registered.");
 
                 if (!isInDictionary)
-                    Instances[type] = instance;
+                    Instances[registeredType] = instance;
 
                 return instance;
             }

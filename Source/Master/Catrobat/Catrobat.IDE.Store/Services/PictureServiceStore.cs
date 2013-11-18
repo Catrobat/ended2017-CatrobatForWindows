@@ -19,9 +19,11 @@ namespace Catrobat.IDE.Store.Services
 
         public async Task<PictureServiceResult> ChoosePictureFromLibraryAsync()
         {
-            var openPicker = new FileOpenPicker();
-            openPicker.ViewMode = PickerViewMode.Thumbnail;
-            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            var openPicker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = PickerLocationId.PicturesLibrary
+            };
 
             foreach (var extension in SupportedFileNames)
                 openPicker.FileTypeFilter.Add(extension);
@@ -54,7 +56,6 @@ namespace Catrobat.IDE.Store.Services
                     Status = PictureServiceStatus.Cancelled
                 };
             }
-
         }
 
         public async Task<PictureServiceResult> TakePictureAsync()
