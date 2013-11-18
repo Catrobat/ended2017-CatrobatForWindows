@@ -128,6 +128,12 @@
     <Compile Include="Content\Images\Application\Logo.xaml.cs">
       <DependentUpon>Logo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AppBar\AppBarPlayButton.xaml.cs">
+      <DependentUpon>AppBarPlayButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AppBar\EditorAppBarSprites.xaml.cs">
+      <DependentUpon>EditorAppBarSprites.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AppBar\EditorAppBar.xaml.cs">
       <DependentUpon>EditorAppBar.xaml</DependentUpon>
     </Compile>
@@ -376,6 +382,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Controls\AppBar\AppBarPlayButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AppBar\EditorAppBarSprites.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\AppBar\EditorAppBar.xaml">
       <Generator>MSBuild:Compile</Generator>

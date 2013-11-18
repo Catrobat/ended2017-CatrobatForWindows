@@ -21,27 +21,6 @@
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
-    <pages:PageHeaderControl Grid.Row="0" BackCommand="{Binding GoBackCommand}">
-      <pages:PageHeaderControl.HeaderContent>
-        <StackPanel Grid.Column="1" Orientation="Horizontal">
-          <TextBlock Text="{Binding SelectedSprite.Name}" 
-                   Style="{StaticResource HeaderTextBlockStyle}"
-                   IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-          <HyperlinkButton>
-            <AppBarButton Icon="Edit" Command="{Binding RenameSpriteCommand}"
-                          Label="{Binding Resources.Editor_Rename, Source={StaticResource LocalizedStrings}}">
-              <AppBarButton.Flyout>
-                <Flyout Opening="FlyoutChangeName_OnOpening">
-                  <sprites:ChangeSpriteView Width="400"/>
-                </Flyout>
-              </AppBarButton.Flyout>
-            </AppBarButton>
-          </HyperlinkButton>
-        </StackPanel>
-      </pages:PageHeaderControl.HeaderContent>
-    </pages:PageHeaderControl>
-
-
     <Hub Grid.Row="1" Margin="0 -120 0 0">
       <HubSection Width="500" >
         <DataTemplate>
@@ -50,7 +29,7 @@
               <RowDefinition Height="Auto"/>
               <RowDefinition/>
             </Grid.RowDefinitions>
-            
+
             <StackPanel Grid.Row="0" Orientation="Horizontal">
               <TextBlock VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}"
                          Text="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}" />
@@ -64,8 +43,9 @@
                 </AppBarButton.Flyout>
               </AppBarButton>
             </StackPanel>
-            <listView:BindableGridView Grid.Row="1" CanReorderItems="True" ItemsSource="{Binding ScriptBricks }"
-                ItemTemplateSelector="{StaticResource ActionTemplate}" SelectedItems="{Binding SelectedActions}" />
+            <listView:BindableGridView x:Name="GridViewActions" Grid.Row="1" CanReorderItems="True" ItemsSource="{Binding ScriptBricks }" 
+                ItemTemplateSelector="{StaticResource ActionTemplate}" SelectedItems="{Binding SelectedActions}" 
+                SelectionChanged="GridViewActions_OnSelectionChanged" />
           </Grid>
         </DataTemplate>
       </HubSection>
@@ -94,10 +74,10 @@
             <Grid Grid.Row="1">
               <TextBlock Name="Test"/>
 
-              <listView:BindableGridView Name="GridViewLooks" VerticalAlignment="Stretch" AllowDrop="True" CanReorderItems="True"
+              <listView:BindableGridView x:Name="GridViewLooks" VerticalAlignment="Stretch" AllowDrop="True" CanReorderItems="True"
                 ItemTemplateSelector="{StaticResource ActionTemplate}" ItemsSource="{Binding Costumes }" 
-                                       SelectedItems="{Binding SelectedCostumes}"
-                SelectionMode="Multiple">
+                SelectedItems="{Binding SelectedCostumes}" SelectionMode="Multiple"
+                SelectionChanged="GridViewLooks_OnSelectionChanged">
                 <listView:BindableGridView.ItemTemplate>
                   <DataTemplate>
                     <Grid Background="{Binding StaticTheme.CostumesBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
@@ -128,7 +108,7 @@
               <RowDefinition Height="Auto"/>
               <RowDefinition/>
             </Grid.RowDefinitions>
-            
+
             <StackPanel Grid.Row="0" Orientation="Horizontal">
               <TextBlock VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}"
                          Text="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}" />
@@ -143,8 +123,9 @@
               </AppBarButton>
             </StackPanel>
             <Grid Grid.Row="1">
-              <listView:BindableGridView AllowDrop="True" CanReorderItems="True"
-              ItemsSource="{Binding Sounds }" SelectedItems="{Binding SelectedSounds}">
+              <listView:BindableGridView x:Name="GridViewSounds" AllowDrop="True" CanReorderItems="True"
+              ItemsSource="{Binding Sounds }" SelectedItems="{Binding SelectedSounds}"
+              SelectionChanged="GridViewSounds_OnSelectionChanged">
                 <listView:BindableGridView.ItemTemplate>
                   <DataTemplate>
                     <Grid Background="{Binding StaticTheme.SoundsBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
@@ -169,20 +150,78 @@
         </DataTemplate>
       </HubSection>
     </Hub>
+
+    <pages:PageHeaderControl Grid.Row="0" BackCommand="{Binding GoBackCommand}">
+      <pages:PageHeaderControl.HeaderContent>
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+          <TextBlock Text="{Binding SelectedSprite.Name}" 
+                   Style="{StaticResource HeaderTextBlockStyle}"
+                   IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+          <HyperlinkButton>
+            <AppBarButton Icon="Edit" Command="{Binding RenameSpriteCommand}"
+                          Label="{Binding Resources.Editor_Rename, Source={StaticResource LocalizedStrings}}">
+              <AppBarButton.Flyout>
+                <Flyout Opening="FlyoutChangeName_OnOpening">
+                  <sprites:ChangeSpriteView Width="400"/>
+                </Flyout>
+              </AppBarButton.Flyout>
+            </AppBarButton>
+          </HyperlinkButton>
+        </StackPanel>
+      </pages:PageHeaderControl.HeaderContent>
+    </pages:PageHeaderControl>
+
+    <Grid Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140">
+      <appBar:AppBarPlayButton PlayCommand="{Binding StartPlayerCommand}"></appBar:AppBarPlayButton>
+    </Grid>
   </Grid>
-  
+
   <Page.BottomAppBar>
-    <AppBar Name="AppBarBottomn" Padding="10,0,10,0" Background="Gray" IsSticky="True">
-      <appBar:EditorAppBar Grid.Row="2"
-          VerticalAlignment="Bottom"
-          TargetType="Costume"
-          ClearSelectionCommand="{Binding ClearCostumesSelectionCommand}"
-          CopyCommand="{Binding CopyCostumeCommand}"
-          DeleteCommand="{Binding DeleteCostumeCommand}"
-          EditCommand="{Binding EditCostumeCommand}"
-          PlayCommand="{Binding StartPlayerCommand}"
-          NumberOfSelectedItems="{Binding SelectedCostumes.Count}">
-      </appBar:EditorAppBar>
+    <AppBar Name="AppBarBottomn" Margin="0 0 110 0" Padding="0 0 10 0" HorizontalAlignment="Left" Height="140"
+            Background="{Binding SelectedTheme.AppBarColor ,Source={StaticResource ThemeChooser}}" IsSticky="True" >
+      <StackPanel Orientation="Horizontal">
+        <Border Background="{Binding Path=StaticTheme.ActionsBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                BorderThickness="0 0 1 0" 
+                BorderBrush="{Binding Path=StaticTheme.AppBarBorderBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+          <appBar:EditorAppBar Margin="0 0 10 0"
+            VerticalAlignment="Bottom"
+            TargetType="Script"
+            ClearSelectionCommand="{Binding ClearScriptsSelectionCommand}"
+            CopyCommand="{Binding CopyScriptBrickCommand}"
+            DeleteCommand="{Binding DeleteScriptBrickCommand}"
+            EditCommand="{Binding EditCostumeCommand}"
+            NumberOfSelectedItems="{Binding SelectedActions.Count}">
+          </appBar:EditorAppBar>
+        </Border>
+
+        <Border Background="{Binding Path=StaticTheme.CostumesBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                BorderThickness="1 0 1 0" 
+                BorderBrush="{Binding Path=StaticTheme.AppBarBorderBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+          <appBar:EditorAppBar Margin="10 0 10 0"
+            VerticalAlignment="Bottom"
+            TargetType="Costume"
+            ClearSelectionCommand="{Binding ClearCostumesSelectionCommand}"
+            CopyCommand="{Binding CopyCostumeCommand}"
+            DeleteCommand="{Binding DeleteCostumeCommand}"
+            EditCommand="{Binding EditCostumeCommand}"
+            NumberOfSelectedItems="{Binding SelectedCostumes.Count}">
+          </appBar:EditorAppBar>
+        </Border>
+
+        <Border Background="{Binding Path=StaticTheme.SoundsBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                BorderThickness="1 0 2 0" 
+                BorderBrush="{Binding Path=StaticTheme.AppBarBorderBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+          <appBar:EditorAppBar Margin="10 0 10 0"
+            VerticalAlignment="Bottom"
+            TargetType="Sound"
+            ClearSelectionCommand="{Binding ClearSoundsSelectionCommand}"
+ 
+            DeleteCommand="{Binding DeleteSoundCommand}"
+            EditCommand="{Binding EditSoundCommand}"
+            NumberOfSelectedItems="{Binding SelectedSounds.Count}">
+          </appBar:EditorAppBar>
+        </Border>
+      </StackPanel>
     </AppBar >
   </Page.BottomAppBar>
 </Page>

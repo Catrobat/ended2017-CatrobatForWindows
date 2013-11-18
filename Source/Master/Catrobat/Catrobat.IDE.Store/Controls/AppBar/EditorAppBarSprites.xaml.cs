@@ -8,9 +8,7 @@ using Catrobat.IDE.Store.Common;
 
 namespace Catrobat.IDE.Store.Controls.AppBar
 {
-    public enum AppBarTargetType { Object, Script, Costume, Sound }
-
-    public partial class EditorAppBar : UserControl
+    public partial class EditorAppBarSprites : UserControl
     {
         #region DependancyProperties
 
@@ -21,11 +19,11 @@ namespace Catrobat.IDE.Store.Controls.AppBar
         }
 
         public static readonly DependencyProperty TargetTypeProperty = DependencyProperty.Register("TargetType",
-            typeof(AppBarTargetType), typeof(EditorAppBar), new PropertyMetadata(AppBarTargetType.Object, TargetTypeChanged));
+            typeof(AppBarTargetType), typeof(EditorAppBarSprites), new PropertyMetadata(AppBarTargetType.Object, TargetTypeChanged));
 
         private static void TargetTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var that = (d as EditorAppBar);
+            var that = (d as EditorAppBarSprites);
             if (that == null) return;
 
             Debug.Assert(e.NewValue != null, "e.NewValue != null");
@@ -72,10 +70,10 @@ namespace Catrobat.IDE.Store.Controls.AppBar
         }
 
         public static readonly DependencyProperty NumberOfSelectedItemsProperty = DependencyProperty.Register(
-            "NumberOfSelectedItems", typeof(int), typeof(EditorAppBar), new PropertyMetadata(0, NumberOfSelectedItemsChanged));
+            "NumberOfSelectedItems", typeof(int), typeof(EditorAppBarSprites), new PropertyMetadata(0, NumberOfSelectedItemsChanged));
         private static void NumberOfSelectedItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((EditorAppBar)d).UpdateSelectedItemsNumberUI(((EditorAppBar)d).TargetType);
+            ((EditorAppBarSprites)d).UpdateSelectedItemsNumberUI(((EditorAppBarSprites)d).TargetType);
         }
 
 
@@ -85,11 +83,11 @@ namespace Catrobat.IDE.Store.Controls.AppBar
             set { SetValue(ClearSelectionCommandProperty, value); }
         }
         public static readonly DependencyProperty ClearSelectionCommandProperty = DependencyProperty.Register(
-            "ClearSelectionCommand", typeof(ICommand), typeof(EditorAppBar), 
+            "ClearSelectionCommand", typeof(ICommand), typeof(EditorAppBarSprites), 
             new PropertyMetadata(new RelayCommand(() => {/* empty */}), ClearSelectionCommandChanged));
         private static void ClearSelectionCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((EditorAppBar)d).ButtonClearSelection.Command = e.NewValue as ICommand;
+            ((EditorAppBarSprites)d).ButtonClearSelection.Command = e.NewValue as ICommand;
         }
 
 
@@ -99,11 +97,11 @@ namespace Catrobat.IDE.Store.Controls.AppBar
             set { SetValue(CopyCommandProperty, value); }
         }
         public static readonly DependencyProperty CopyCommandProperty = DependencyProperty.Register(
-            "CopyCommand", typeof(ICommand), typeof(EditorAppBar), 
+            "CopyCommand", typeof(ICommand), typeof(EditorAppBarSprites), 
             new PropertyMetadata(new RelayCommand(() => {/* empty */}), CopyCommandChanged));
         private static void CopyCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((EditorAppBar)d).ButtonCopy.Command = e.NewValue as ICommand;
+            ((EditorAppBarSprites)d).ButtonCopy.Command = e.NewValue as ICommand;
         }
 
 
@@ -115,11 +113,11 @@ namespace Catrobat.IDE.Store.Controls.AppBar
             set { SetValue(EditCommandProperty, value); }
         }
         public static readonly DependencyProperty EditCommandProperty = DependencyProperty.Register(
-            "EditCommand", typeof(ICommand), typeof(EditorAppBar), 
+            "EditCommand", typeof(ICommand), typeof(EditorAppBarSprites), 
             new PropertyMetadata(new RelayCommand(() => {/* empty */}), EditCommandChanged));
         private static void EditCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((EditorAppBar)d).ButtonEdit.Command = e.NewValue as ICommand;
+            ((EditorAppBarSprites)d).ButtonEdit.Command = e.NewValue as ICommand;
         }
 
 
@@ -131,11 +129,11 @@ namespace Catrobat.IDE.Store.Controls.AppBar
             set { SetValue(DeleteCommandProperty, value); }
         }
         public static readonly DependencyProperty DeleteCommandProperty = DependencyProperty.Register(
-            "DeleteCommand", typeof(ICommand), typeof(EditorAppBar), 
+            "DeleteCommand", typeof(ICommand), typeof(EditorAppBarSprites), 
             new PropertyMetadata(new RelayCommand(() => {/* empty */}), DeleteCommandChanged));
         private static void DeleteCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((EditorAppBar)d).ButtonDelete.Command = e.NewValue as ICommand;
+            ((EditorAppBarSprites)d).ButtonDelete.Command = e.NewValue as ICommand;
         }
 
 
@@ -147,11 +145,11 @@ namespace Catrobat.IDE.Store.Controls.AppBar
             set { SetValue(NewCommandProperty, value); }
         }
         public static readonly DependencyProperty NewCommandProperty = DependencyProperty.Register(
-            "NewCommand", typeof(ICommand), typeof(EditorAppBar), 
+            "NewCommand", typeof(ICommand), typeof(EditorAppBarSprites), 
             new PropertyMetadata(new RelayCommand(() => {/* empty */}), NewCommandChanged));
         private static void NewCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-              //((EditorAppBar)d).ButtonNew.Command = e.NewValue as ICommand;
+              //((EditorAppBarSprites)d).ButtonNew.Command = e.NewValue as ICommand;
         }
 
 
@@ -162,12 +160,12 @@ namespace Catrobat.IDE.Store.Controls.AppBar
         }
 
         public static readonly DependencyProperty NewFlyoutProperty = DependencyProperty.Register(
-            "NewFlyout", typeof(Flyout), typeof(EditorAppBar), new PropertyMetadata(null, NewFlyoutChanged));
+            "NewFlyout", typeof(Flyout), typeof(EditorAppBarSprites), new PropertyMetadata(null, NewFlyoutChanged));
 
         private static void NewFlyoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            //((EditorAppBar) d).ButtonNew.Flyout = (Flyout) e.NewValue;
-            ((Flyout)e.NewValue).Opening += (sender, o) => ((EditorAppBar)d).NewCommand.Execute(null);
+            //((EditorAppBarSprites) d).ButtonNew.Flyout = (Flyout) e.NewValue;
+            ((Flyout)e.NewValue).Opening += (sender, o) => ((EditorAppBarSprites)d).NewCommand.Execute(null);
         }
 
 
@@ -179,18 +177,18 @@ namespace Catrobat.IDE.Store.Controls.AppBar
         }
 
         public static readonly DependencyProperty EditFlyoutProperty = DependencyProperty.Register(
-            "EditFlyout", typeof(Flyout), typeof(EditorAppBar), new PropertyMetadata(null, EditFlyoutChanged));
+            "EditFlyout", typeof(Flyout), typeof(EditorAppBarSprites), new PropertyMetadata(null, EditFlyoutChanged));
 
         private static void EditFlyoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((EditorAppBar)d).ButtonEdit.Flyout = (Flyout)e.NewValue;
-            ((Flyout) e.NewValue).Opening += (sender, o) => ((EditorAppBar) d).EditCommand.Execute(null);
+            ((EditorAppBarSprites)d).ButtonEdit.Flyout = (Flyout)e.NewValue;
+            ((Flyout) e.NewValue).Opening += (sender, o) => ((EditorAppBarSprites) d).EditCommand.Execute(null);
         }
 
         #endregion
 
 
-        public EditorAppBar()
+        public EditorAppBarSprites()
         {
             InitializeComponent();
             UpdateAddText(TargetType);

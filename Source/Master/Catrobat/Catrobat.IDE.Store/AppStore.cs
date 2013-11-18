@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Store
     {
         public void InitializeInterfaces()
         {
-            ServiceLocator.UnRegisterAll();
+            //ServiceLocator.UnRegisterAll();
 
             ServiceLocator.ViewModelLocator = (ViewModelLocator) Application.Current.Resources["Locator"];
             ServiceLocator.ThemeChooser = (ThemeChooser) Application.Current.Resources["ThemeChooser"];

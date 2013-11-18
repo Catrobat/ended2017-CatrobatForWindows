@@ -11,7 +11,7 @@
     d:DesignWidth="400">
     
     <Grid>
-      <GridView Name="GridView">
+      <GridView Name="GridView" SelectionChanged="GridView_OnSelectionChanged">
         
       </GridView>
     </Grid>

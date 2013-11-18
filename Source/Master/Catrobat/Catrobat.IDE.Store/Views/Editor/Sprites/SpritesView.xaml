@@ -23,7 +23,7 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="140"/>
       <RowDefinition Height="*"/>
-      <RowDefinition Height="180"/>
+      <RowDefinition Height="140"/>
     </Grid.RowDefinitions>
 
     <!-- Back button and page title -->
@@ -77,7 +77,7 @@
           Foreground="White">
           <GridView.ItemTemplate>
             <DataTemplate>
-              <Grid Margin="0 5 0 5" Height="150" Width="400" 
+              <Grid Margin="0 5 0 5" Height="150" Width="330" 
                     Background="{Binding StaticTheme.ObjectsBrush.NativeBrush, Source ={StaticResource ThemeChooser}}">
                 <Grid.RowDefinitions>
                   <RowDefinition/>
@@ -127,27 +127,33 @@
           </GridView.ItemTemplate>
         </GridView>
 
-        <TextBlock Grid.Row="1"
+        <TextBlock Grid.Row="1" 
               Text ="{Binding Resources.Editor_ClickPlusToAddSprite, Source={StaticResource LocalizedStrings}}"
+              FontSize="40"
               Visibility="{Binding IsSpritesEmpty, Converter={StaticResource BoolVisibilityConverter}}"
+              Margin="40 40 0 0"
               TextWrapping="Wrap"
               TextAlignment="Center"
-              VerticalAlignment="Center"
-              HorizontalAlignment="Center" />
+              VerticalAlignment="Top"
+              HorizontalAlignment="Left" />
       </Grid>
+    </Grid>
+
+    <Grid Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140">
+      <appBar:AppBarPlayButton PlayCommand="{Binding StartPlayerCommand}"></appBar:AppBarPlayButton>
     </Grid>
   </Grid>
 
   <Page.BottomAppBar>
-    <AppBar Name="AppBarBottomn" Padding="10,0,10,0" Background="Gray" IsSticky="True">
-      <appBar:EditorAppBar Grid.Row="2"
+    <AppBar Name="AppBarBottomn" Margin="0 0 110 0" Padding="10,0,10,0" HorizontalAlignment="Left" Height="140"
+            Background="{Binding SelectedTheme.AppBarColor ,Source={StaticResource ThemeChooser}}" IsSticky="True" >
+      <appBar:EditorAppBar
               VerticalAlignment="Bottom"
               TargetType="Object"
               ClearSelectionCommand="{Binding ClearObjectsSelectionCommand}"
               CopyCommand="{Binding CopySpriteCommand}"
               DeleteCommand="{Binding DeleteSpriteCommand}"
               EditCommand="{Binding EditSpriteCommand}"
-              PlayCommand="{Binding StartPlayerCommand}"
               NewCommand="{Binding AddNewSpriteCommand}"
               NumberOfSelectedItems="{Binding SelectedSprite, Converter={StaticResource NullIntCountConverter}}">
         <appBar:EditorAppBar.NewFlyout>
@@ -156,6 +162,6 @@
           </Flyout>
         </appBar:EditorAppBar.NewFlyout>
       </appBar:EditorAppBar>
-      </AppBar >
+    </AppBar >
   </Page.BottomAppBar>
 </Page>

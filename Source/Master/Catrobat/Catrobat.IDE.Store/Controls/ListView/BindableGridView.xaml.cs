@@ -28,6 +28,8 @@ namespace Catrobat.IDE.Store.Controls.ListView
 
         # region dependancy properties
 
+        public event SelectionChangedEventHandler SelectionChanged;
+
         public IList ItemsSource
         {
             get { return (IList)GetValue(ItemsSourceProperty); }
@@ -195,6 +197,13 @@ namespace Catrobat.IDE.Store.Controls.ListView
                     list.Insert(index, item);
                 }
             }
+        }
+
+
+        private void GridView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(SelectionChanged!= null)
+                SelectionChanged.Invoke(this, e);
         }
     }
 }

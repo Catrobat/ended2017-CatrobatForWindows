@@ -7,10 +7,10 @@ namespace Catrobat.IDE.Store
     {
         static AppStoreDesignStatic()
         {
-            var app = new AppStore();
-            app.InitializeInterfaces();
-            ((ViewModelLocator)ServiceLocator.ViewModelLocator).RegisterViewModels();
-            Core.App.SetNativeApp(app);
+            //var app = new AppStore();
+            //app.InitializeInterfaces();
+            //((ViewModelLocator)ServiceLocator.ViewModelLocator).RegisterViewModels();
+            //Core.App.SetNativeApp(app);
         }
     }
 }

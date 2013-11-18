@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Core.ViewModel
             RegisterViewModels();
         }
 
-        public void RegisterViewModels()
+        private void RegisterViewModels()
         {
             Core.Services.ServiceLocator.Register<MainViewModel>(TypeCreationMode.Normal);
             Core.Services.ServiceLocator.Register<AddNewProjectViewModel>(TypeCreationMode.Normal);
