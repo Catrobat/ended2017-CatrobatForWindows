@@ -1035,7 +1035,7 @@
       <sb:ScriptBrickContentTemplateSelector.SetVariableBrick>
         <DataTemplate>
           <Grid Margin="0" d:DataContext="{d:DesignInstance bricks:SetVariableBrick}">
-            <rlb:NormalBrick Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
+            <rlb:NormalBrick Background="{Binding StaticTheme.VariableBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}" BorderBrush="{StaticResource BrickBorderBrush}">
               <!--<Grid>
                 <Grid.RowDefinitions>
                   <RowDefinition />
