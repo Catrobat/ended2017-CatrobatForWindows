@@ -25,6 +25,8 @@
         CostumeImageListener,
         CostumeImageToSaveListener,
         ScriptBrickCategoryListener,
-        SoundStreamListener
+        SoundStreamListener,
+        PlayProjectNameListener,
+        IsPlayerStartFromTileListener
     }
 }
