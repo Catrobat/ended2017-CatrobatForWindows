@@ -6,7 +6,7 @@
     mc:Ignorable="d"
     d:DesignHeight="130" d:DesignWidth="780">
 
-  <Grid x:Name="LayoutRoot" Background="{Binding Path=SelectedTheme.AppBarColor, Source={StaticResource ThemeChooser}}">
+  <Grid x:Name="LayoutRoot" >
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="Auto"/>
       <ColumnDefinition/>

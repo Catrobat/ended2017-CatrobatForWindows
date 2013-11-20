@@ -54,9 +54,12 @@
         <StackPanel Margin="10 5 10 0" Orientation="Horizontal">
           <TextBlock Text="{Binding CurrentProject.ProjectHeader.ProgramName}"
                      VerticalAlignment="Center" FontSize="36"/>
-          <AppBarButton Icon="Add"  Margin="40 0 40 0"
-                        Command="{Binding AddNewSpriteCommand}"
-                        Label="{ Binding Resources.Editor_AppbarAdd , Source={StaticResource LocalizedStrings} }" >
+          <TextBlock Text="-" Margin="5 0 5 0" VerticalAlignment="Center" FontSize="36"/>
+          <TextBlock Text="{Binding Resources.Editor_ObjectPlural, Source={StaticResource LocalizedStrings}}"
+                     VerticalAlignment="Center" FontSize="36"/>
+          
+          <AppBarButton Icon="Add"  Margin="-18 17 0 0"
+                        Command="{Binding AddNewSpriteCommand}" >
           <AppBarButton.Flyout>
               <Flyout Opened="FlyoutNew_OnOpen">
                 <local:AddNewSpriteView Width="400"/>
@@ -139,14 +142,15 @@
       </Grid>
     </Grid>
 
-    <Grid Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140">
+    <Grid Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="140" Width="140"
+          Background="{Binding SelectedTheme.AppBarColor.NativeBrush ,Source={StaticResource ThemeChooser}}">
       <appBar:AppBarPlayButton PlayCommand="{Binding StartPlayerCommand}"></appBar:AppBarPlayButton>
     </Grid>
   </Grid>
 
   <Page.BottomAppBar>
-    <AppBar Name="AppBarBottomn" Margin="0 0 110 0" Padding="10,0,10,0" HorizontalAlignment="Left" Height="140"
-            Background="{Binding SelectedTheme.AppBarColor ,Source={StaticResource ThemeChooser}}" IsSticky="True" >
+    <AppBar Name="AppBarBottomn" Margin="0 0 140 0" Padding="10,0,10,0" HorizontalAlignment="Left" Height="140"
+            Background="{Binding SelectedTheme.AppBarColor.NativeBrush ,Source={StaticResource ThemeChooser}}" IsSticky="True" >
       <appBar:EditorAppBar
               VerticalAlignment="Bottom"
               TargetType="Object"

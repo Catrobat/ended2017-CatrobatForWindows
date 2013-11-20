@@ -27,7 +27,7 @@
         </StackPanel>-->
 
         <StackPanel Grid.Row="1" Margin="0 0 0 0" HorizontalAlignment="Stretch">
-          <Button Margin="0 0 0 0" HorizontalAlignment="Stretch" Command="{Binding OpenGalleryCommand}">
+          <Button Margin="0 0 0 0" HorizontalAlignment="Stretch" Click="ButtonOpenGallery_OnClick">
             <Button.Template>
               <ControlTemplate>
                 <Grid Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" 
@@ -45,7 +45,7 @@
             </Button.Template>
           </Button>
 
-          <Button Margin="0 5 0 0" HorizontalAlignment="Stretch" Command="{Binding OpenCameraCommand}">
+          <Button Margin="0 5 0 0" HorizontalAlignment="Stretch" Click="ButtonCamera_OnClick">
             <Button.Template>
               <ControlTemplate>
                 <Grid Background="{Binding Path=SelectedTheme.AccentColor2.NativeBrush, Source={StaticResource ThemeChooser}}" 

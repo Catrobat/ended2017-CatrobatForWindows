@@ -22,7 +22,7 @@
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
           <TextBlock Margin="10" Style="{StaticResource SubheaderTextBlockStyle}"
-                     Text="{Binding Resources.Editor_TitleChangeSpriteName, Source={StaticResource LocalizedStrings}}" />
+                     Text="{Binding Resources.Editor_TitleNewSprite, Source={StaticResource LocalizedStrings}}" />
         </StackPanel>
 
         <Grid Grid.Row="1" Margin="10 0 0 15" HorizontalAlignment="Stretch">
@@ -45,10 +45,10 @@
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <AppBarButton Grid.Row="0" VerticalAlignment="Center" Icon="Save" Label="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}" 
+        <AppBarButton Grid.Row="1" VerticalAlignment="Center" Icon="Save" Label="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}" 
                     Command="{Binding SaveCommand}"/>
-        <AppBarButton Grid.Row="1" VerticalAlignment="Center" Icon="Cancel" Label="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}" 
-                    Command="{Binding CancelCommand}"/>
+        <!--<AppBarButton Grid.Row="1" VerticalAlignment="Center" Icon="Cancel" Label="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}" 
+                    Command="{Binding CancelCommand}"/>-->
       </Grid>
     </Grid>
   </Grid>

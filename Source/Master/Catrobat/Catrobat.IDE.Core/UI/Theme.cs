@@ -1,9 +1,17 @@
-﻿using Catrobat.IDE.Core.Services.Storage;
+﻿using System;
+using System.ComponentModel;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using Catrobat.IDE.Core.Annotations;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Core.Utilities.Helpers;
 
 namespace Catrobat.IDE.Core.UI
 {
-    public class Theme
+    public class Theme : INotifyPropertyChanged
     {
         private readonly string _backgroundPath;
         private readonly string _croppedPath;
@@ -17,7 +25,12 @@ namespace Catrobat.IDE.Core.UI
                 if (_background == null)
                 {
                     _background = new PortableImage();
-                    _background.LoadFromResources(ResourceScope.IdePhone, _backgroundPath);
+
+                    Task.Run(async () =>
+                    {
+                        await _background.LoadFromResources(ResourceScope.IdePhone, _backgroundPath);
+                        ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(() => CroppedBackground));
+                    });
                 }
 
                 return _background;
@@ -25,6 +38,7 @@ namespace Catrobat.IDE.Core.UI
         }
 
         private PortableImage _croppedBackground;
+        private PortableSolidColorBrush _appBarColor;
 
         public PortableImage CroppedBackground
         {
@@ -33,7 +47,12 @@ namespace Catrobat.IDE.Core.UI
                 if (_croppedBackground == null)
                 {
                     _croppedBackground = new PortableImage();
-                    _croppedBackground.LoadFromResources(ResourceScope.IdePhone, _croppedPath);
+
+                    Task.Run(async () =>
+                    {
+                        await _croppedBackground.LoadFromResources(ResourceScope.IdePhone, _croppedPath);
+                        ServiceLocator.DispatcherService.RunOnMainThread(() => RaisePropertyChanged(()=> CroppedBackground));
+                    });
                 }
 
                 return _croppedBackground;
@@ -43,12 +62,37 @@ namespace Catrobat.IDE.Core.UI
         public PortableSolidColorBrush AccentColor1 { get; set; }
         public PortableSolidColorBrush AccentColor2 { get; set; }
         public PortableSolidColorBrush AccentColor3 { get; set; }
-        public PortableSolidColorBrush AppBarColor { get; set; }
+
+        public PortableSolidColorBrush AppBarColor
+        {
+            get
+            {
+                return _appBarColor;
+            }
+            set
+            {
+                _appBarColor = value;
+            }
+        }
 
         public Theme(string backgroundPath, string croppedPath)
         {
             _backgroundPath = backgroundPath;
             _croppedPath = croppedPath;
         }
+
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void RaisePropertyChanged<T>(Expression<Func<T>> selector)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyHelper.GetPropertyName(selector)));
+            }
+        }
+
+        #endregion
     }
 }
