@@ -45,12 +45,9 @@
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <AppBarButton Grid.Row="0" VerticalAlignment="Center" Icon="Save" 
+        <AppBarButton Grid.Row="1" VerticalAlignment="Center" Icon="Save" 
                       Label="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}" 
                     Command="{Binding SaveCommand}"/>
-        <AppBarButton Grid.Row="1" VerticalAlignment="Center" Icon="Cancel" 
-                      Label="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}" 
-                    Command="{Binding CancelCommand}"/>
       </Grid>
     </Grid>
   </Grid>

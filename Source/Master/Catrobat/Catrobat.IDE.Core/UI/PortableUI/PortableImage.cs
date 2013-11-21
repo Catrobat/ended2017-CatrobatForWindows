@@ -13,7 +13,6 @@ namespace Catrobat.IDE.Core.UI.PortableUI
 {
     public sealed class PortableImage : INotifyPropertyChanged
     {
-        private byte[] _data;
         private int _width;
         private int _height;
         private object _nativeImageSource;
@@ -30,17 +29,6 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 _encodedData = value;
             }
         }
-
-        //public byte[] Data
-        //{
-        //    get { return _data; }
-        //    set
-        //    {
-        //        _data = value;
-        //        RaisePropertyChanged(() => Data);
-        //        RaisePropertyChanged(() => ImageSource);
-        //    }
-        //}
 
         public int Width
         {
@@ -70,17 +58,11 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                 if (_nativeImageSource != null)
                     return _nativeImageSource;
 
-
-
-                if (_data != null)
-                    return ServiceLocator.ImageSourceConversionService.ConvertToLocalImageSource(_data, _width, _height);
-
                 return null;
             }
 
             set
             {
-                Services.ServiceLocator.ImageSourceConversionService.ConvertToBytes(value, out _data, out _height, out _height);
                 RaisePropertyChanged(() => ImageSource);
             }
         }
@@ -90,10 +72,9 @@ namespace Catrobat.IDE.Core.UI.PortableUI
 
         }
 
-        public PortableImage(byte[] data, int width, int height)
+        public PortableImage(int width, int height)
         {
             this.IsLoaded = true;
-            _data = data;
             _width = width;
             _height = height;
         }
@@ -152,9 +133,9 @@ namespace Catrobat.IDE.Core.UI.PortableUI
             }
         }
 
-        public bool IsLoaded { get; private set; }
+        private bool IsLoaded { get; set; }
 
-        public bool IsLoading { get; private set; }
+        private bool IsLoading { get; set; }
 
         public async Task WriateAsPng(string path)
         {
@@ -169,6 +150,17 @@ namespace Catrobat.IDE.Core.UI.PortableUI
             using (var storage = StorageSystem.GetStorage())
             {
                 await storage.SaveImageAsync(path, this, true, ImageFormat.Jpg);
+            }
+        }
+
+        public async Task LoadFromResources(ResourceScope scope, string path)
+        {
+            using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
+            {
+                var image = await loader.LoadImageAsync(scope, path);
+
+                _nativeImageSource = image.ImageSource;
+                _encodedData = image._encodedData;
             }
         }
 
@@ -191,23 +183,6 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         }
         #endregion
 
-        public async Task LoadFromResources(ResourceScope scope, string path)
-        {
-            using (var loader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
-            {
-               var image = await loader.LoadImageAsync(scope, path);
 
-                _nativeImageSource = image.ImageSource;
-                _encodedData = image._encodedData;
-            }
-        }
-
-        public bool IsEmpty
-        {
-            get
-            {
-                return _nativeImageSource == null && EncodedData == null;
-            }
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Windows.Media.Capture;
 using Windows.Storage;
@@ -32,15 +33,21 @@ namespace Catrobat.IDE.Store.Services
 
             if (file != null)
             {
-                var filestream = await file.OpenAsync(FileAccessMode.Read);
+                var fileStream = await file.OpenAsync(FileAccessMode.Read);
+                var memoryStream = new MemoryStream();
+                fileStream.AsStreamForRead().CopyTo(memoryStream);
+
+                fileStream.Seek(0);
                 var imagetobind = new BitmapImage();
-                imagetobind.SetSource(filestream);
+                imagetobind.SetSource(fileStream);
                 var writeableBitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
-                await writeableBitmap.FromStream(filestream);
+                await writeableBitmap.FromStream(memoryStream.AsRandomAccessStream());
+                memoryStream.Seek(0, SeekOrigin.Begin);
                 var portableImage = new PortableImage(writeableBitmap)
                 {
                     Width = writeableBitmap.PixelWidth,
-                    Height = writeableBitmap.PixelHeight
+                    Height = writeableBitmap.PixelHeight,
+                    EncodedData = memoryStream
                 };
 
                 return new PictureServiceResult
@@ -65,15 +72,21 @@ namespace Catrobat.IDE.Store.Services
 
             if (file != null)
             {
-                var filestream = await file.OpenAsync(FileAccessMode.Read);
+                var fileStream = await file.OpenAsync(FileAccessMode.Read);
+                var memoryStream = new MemoryStream();
+                fileStream.AsStreamForRead().CopyTo(memoryStream);
+
+                fileStream.Seek(0);
                 var imagetobind = new BitmapImage();
-                imagetobind.SetSource(filestream);
+                imagetobind.SetSource(fileStream);
                 var writeableBitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
-                await writeableBitmap.FromStream(filestream);
+                await writeableBitmap.FromStream(memoryStream.AsRandomAccessStream());
+                memoryStream.Seek(0, SeekOrigin.Begin);
                 var portableImage = new PortableImage(writeableBitmap)
                 {
                     Width = writeableBitmap.PixelWidth,
-                    Height = writeableBitmap.PixelHeight
+                    Height = writeableBitmap.PixelHeight,
+                    EncodedData = memoryStream
                 };
 
                 return new PictureServiceResult

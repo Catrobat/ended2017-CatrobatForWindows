@@ -28,6 +28,8 @@ namespace Catrobat.IDE.Store.Controls
             if (ViewModelBase.IsInDesignModeStatic)
                 return;
 
+            
+
             if (PreviousExecutionState == ApplicationExecutionState.Terminated)
             {
                 await SuspensionManager.RestoreAsync();
@@ -40,6 +42,9 @@ namespace Catrobat.IDE.Store.Controls
                 Core.App.SetNativeApp(new AppStore());
                 await Core.App.Initialize();
                 ServiceLocator.Register(new DispatcherServiceStore(Dispatcher));
+
+                var width = ServiceLocator.SystemInformationService.ScreenWidth; // preload width
+                var height = ServiceLocator.SystemInformationService.ScreenHeight; // preload height
 
                 var image = new BitmapImage(new Uri("ms-appx:///Content/Images/Screenshot/NoScreenshot.png", UriKind.Absolute))
                 {

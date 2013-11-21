@@ -368,19 +368,42 @@ namespace Catrobat.IDE.Store.Services.Storage
             {
                 try
                 {
+                    //var bitmapImage = new BitmapImage();
+
+                    //var file = await GetFileAsync(pathToImage);
+                    //var stream = await file.OpenAsync(FileAccessMode.Read);
+                    //bitmapImage.SetSource(stream);
+
+                    //var writeableBitmap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
+                    //stream.Seek(0);
+                    //writeableBitmap.SetSource(stream);
+                    //var portableImage = new PortableImage(writeableBitmap);
+                    //// TODO: Dispose Stream?
+                    //return portableImage;
+
+
+
+
                     var bitmapImage = new BitmapImage();
 
                     var file = await GetFileAsync(pathToImage);
                     var stream = await file.OpenAsync(FileAccessMode.Read);
+                    var memoryStream = new MemoryStream();
+                    stream.GetInputStreamAt(0).AsStreamForRead().CopyTo(memoryStream);
+
+                    stream.Seek(0);
                     bitmapImage.SetSource(stream);
 
                     var writeableBitmap = new WriteableBitmap(bitmapImage.PixelWidth, bitmapImage.PixelHeight);
-                    stream.Seek(0);
-                    writeableBitmap.SetSource(stream);
-                    var portableImage = new PortableImage(writeableBitmap);
-                    // TODO: Dispose Stream?
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    writeableBitmap.SetSource(memoryStream.AsRandomAccessStream());
+                    var portableImage = new PortableImage(writeableBitmap)
+                    {
+                        Width = bitmapImage.PixelWidth,
+                        Height = bitmapImage.PixelHeight,
+                        EncodedData = memoryStream
+                    };
                     return portableImage;
-
                 }
                 catch
                 {
@@ -413,7 +436,7 @@ namespace Catrobat.IDE.Store.Services.Storage
 
                     if (fullSizePortableImage != null)
                     {
-                        var thumbnailImage = ServiceLocator.ImageResizeService.ResizeImage(fullSizePortableImage,
+                        var thumbnailImage = await ServiceLocator.ImageResizeService.ResizeImage(fullSizePortableImage,
                             _imageThumbnailDefaultMaxWidthHeight);
                         retVal = thumbnailImage;
 

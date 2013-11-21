@@ -52,17 +52,17 @@
         </Grid>
       </Grid>
       <Grid Grid.Column="1">
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
           <RowDefinition Height="*"/>
           <RowDefinition Height="Auto"/>
           <RowDefinition Height="Auto"/>
           <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        </Grid.RowDefinitions>-->
 
-        <AppBarButton Grid.Row="1" VerticalAlignment="Center" Icon="Save" Label="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}" 
+        <AppBarButton Grid.Row="2" VerticalAlignment="Bottom" Icon="Save" Label="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}" 
                     Command="{Binding SaveCommand}"/>
-        <AppBarButton Grid.Row="2" VerticalAlignment="Center" Icon="Cancel" Label="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}" 
-                    Command="{Binding CancelCommand}"/>
+        <!--<AppBarButton Grid.Row="2" VerticalAlignment="Center" Icon="Cancel" Label="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}" 
+                    Command="{Binding CancelCommand}"/>-->
       </Grid>
     </Grid>
   </Grid>

@@ -34,7 +34,7 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal">
               <TextBlock VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}"
                          Text="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}" />
-              <AppBarButton Icon="Add"  Margin="0 20 0 0" VerticalAlignment="Center"
+              <AppBarButton Icon="Add"  Margin="10 0 0 0" IsCompact="True" VerticalAlignment="Center"
                         Command="{Binding AddNewSpriteCommand}" >
                 <AppBarButton.Flyout>
                   <Flyout Opening="NewLookFlyout_OnOpening" >
@@ -61,7 +61,7 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal">
               <TextBlock VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" 
                          Text="{Binding Resources.Editor_PivotCostumes, Source={StaticResource LocalizedStrings}}"/>
-              <AppBarButton Icon="Add"  Margin="0 20 0 0" VerticalAlignment="Center"
+              <AppBarButton Icon="Add" Margin="10 0 0 0" IsCompact="True" VerticalAlignment="Center"
                         Command="{Binding AddNewSpriteCommand}" >
                 <AppBarButton.Flyout>
                   <Flyout Opening="NewLookFlyout_OnOpening" >
@@ -80,9 +80,9 @@
                 <listView:BindableGridView.ItemTemplate>
                   <DataTemplate>
                     <Grid Background="{Binding StaticTheme.CostumesBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
-                        Margin="0 5 0 5" Height="90" DataContext="{Binding}">
+                        Margin="0 5 0 5" Height="90" Width="300"  DataContext="{Binding}">
                       <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="100" />
                         <ColumnDefinition Width="3*" />
                       </Grid.ColumnDefinitions>
                       <Image Grid.Column="0" Source="{Binding Image.ImageSource}" 
@@ -111,7 +111,7 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal">
               <TextBlock VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}"
                          Text="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}" />
-              <AppBarButton Icon="Add"  Margin="0 20 0 0" VerticalAlignment="Center"
+              <AppBarButton Icon="Add" Margin="10 0 0 0" IsCompact="True" VerticalAlignment="Center"
                         Command="{Binding AddNewSpriteCommand}" >
                 <AppBarButton.Flyout>
                   <Flyout Opening="NewLookFlyout_OnOpening" >

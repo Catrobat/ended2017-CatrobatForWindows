@@ -46,7 +46,8 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         protected override void GoBackAction()
         {
-            //base.GoBackAction();
+            if(!IsLauncheFromTile)
+              base.GoBackAction();
         }
 
         #endregion

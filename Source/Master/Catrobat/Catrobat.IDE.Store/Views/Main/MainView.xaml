@@ -118,7 +118,7 @@
   </Grid>
 
   <Page.BottomAppBar>
-    <AppBar Name="AppBarBottomn" Padding="10,0,10,0" Background="Gray" IsSticky="True" Opened="AppBarBottomn_OnOpened">
+    <AppBar Name="AppBarBottomn" Padding="10,0,10,0" Background="{Binding SelectedTheme.AppBarColor.NativeBrush, Source={StaticResource ThemeChooser}}" IsSticky="True" Opened="AppBarBottomn_OnOpened">
       <Grid Visibility="{Binding SelectedLocalProject, Converter={StaticResource NullVisibilityConverter}}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
           <AppBarButton Icon="Accept" 
