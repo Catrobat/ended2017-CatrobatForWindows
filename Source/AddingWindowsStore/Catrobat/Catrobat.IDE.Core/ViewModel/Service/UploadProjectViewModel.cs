@@ -1,9 +1,7 @@
-﻿using Catrobat.IDE.Core;
-using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.Resources.Localization;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -82,11 +80,10 @@ namespace Catrobat.IDE.Core.ViewModel.Service
         #region Commands
 
         public RelayCommand InitializeCommand { get; private set; }
+
         public RelayCommand UploadCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
-
-        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -108,6 +105,7 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             else
                 ProjectName = "";
         }
+
         private void UploadAction()
         {
             CurrentProject.ProjectHeader.ProgramName = ProjectName;
@@ -121,18 +119,19 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             Messenger.Default.Send(message, ViewModelMessagingToken.UploadProjectStartedListener);
 
             ServiceLocator.NavigationService.RemoveBackEntry();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void CancelAction()
         {
             ServiceLocator.NavigationService.RemoveBackEntry();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            base.GoBackAction();
         }
 
         #endregion
@@ -155,8 +154,6 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             InitializeCommand = new RelayCommand(InitializeAction);
             UploadCommand = new RelayCommand(UploadAction, UploadCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
-
 
             Messenger.Default.Register<GenericMessage<CatrobatContextBase>>(this,
                  ViewModelMessagingToken.ContextListener, ContextChangedAction);

@@ -9,6 +9,8 @@ namespace Catrobat.IDE.Core.Services
 {
     public interface IPlayerLauncherService
     {
-        void LaunchPlayer(Project project);
+        Task LaunchPlayer(Project project, bool isLaunchedFromTile = false);
+
+        Task LaunchPlayer(string projectName, bool isLaunchedFromTile = false);
     }
 }

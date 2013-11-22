@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Main;
-using GalaSoft.MvvmLight;
 using Microsoft.Phone.Controls;
+using ViewModelBase = Catrobat.IDE.Core.ViewModel.ViewModelBase;
 
 namespace Catrobat.IDE.Phone.Controls.SplashScreen
 {
@@ -18,32 +20,41 @@ namespace Catrobat.IDE.Phone.Controls.SplashScreen
 
         private async void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            var frame = (PhoneApplicationFrame)Application.Current.RootVisual;
+            string projectName = null;
+            if (NavigationContext.QueryString.ContainsKey("ProjectName"))
+                projectName = NavigationContext.QueryString["ProjectName"];
+
             string fileToken;
             NavigationContext.QueryString.TryGetValue("fileToken", out fileToken);
 
-            await Task.Run(() =>
+            if (!GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                Core.App.SetNativeApp(new AppPhone());
+                await Core.App.Initialize();
+
+                var image = new BitmapImage(new Uri("Content/Images/Screenshot/NoScreenshot.png", UriKind.Relative))
                 {
-                    if (!ViewModelBase.IsInDesignModeStatic)
-                    {
-                        Core.App.SetNativeApp(new AppPhone());
-                        Core.App.Initialize();
-                    }
+                    CreateOptions = BitmapCreateOptions.None
+                };
 
-                    if (fileToken != null)
-                    {
-                        var viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).ProjectImportViewModel;
-                        viewModel.OnLoadCommand.Execute(fileToken);
-                        ServiceLocator.NavigationService.NavigateTo(typeof(ProjectImportViewModel));
-                    }
-                    else
-                        ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
+                ManualImageCache.NoScreenshotImage = image;
+            }
 
-                });
-            });
+            if (projectName != null)
+            {
+                await ServiceLocator.PlayerLauncherService.LaunchPlayer(projectName, true);
+                //((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri("Views/Main/PlayerLauncherView#ProjectName=", UriKind.Relative));
+                //ServiceLocator.NavigationService.NavigateTo<PlayerLauncherViewModel>();
+            }
 
+            if (fileToken != null)
+            {
+                var viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).ProjectImportViewModel;
+                viewModel.OnLoadCommand.Execute(fileToken);
+                ServiceLocator.NavigationService.NavigateTo<ProjectImportViewModel>();
+            }
+            else
+                ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
         }
     }
 }

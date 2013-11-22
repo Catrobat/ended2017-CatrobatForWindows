@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services.Storage;
 using SharpCompress.Archive.Zip;
 using SharpCompress.Common;
@@ -8,7 +9,7 @@ namespace Catrobat.IDE.Core.Services.Common
 {
     public static class CatrobatZipService
     {
-        public static void UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
+        public static async Task UnzipCatrobatPackageIntoIsolatedStorage(Stream zipStream, string localStoragePath)
         {
             if (zipStream != null)
             {
@@ -23,12 +24,12 @@ namespace Catrobat.IDE.Core.Services.Common
 
                         if (!reader.Entry.IsDirectory)
                         {
-                            if (storage.FileExists(absolutPath))
+                            if (await storage.FileExistsAsync(absolutPath))
                             {
-                                storage.DeleteFile(absolutPath);
+                                await storage.DeleteFileAsync(absolutPath);
                             }
 
-                            var fileStream = storage.OpenFile(absolutPath,
+                            var fileStream = await storage.OpenFileAsync(absolutPath,
                                                               StorageFileMode.Create,
                                                               StorageFileAccess.Write);
                             reader.WriteEntryTo(fileStream);
@@ -39,26 +40,25 @@ namespace Catrobat.IDE.Core.Services.Common
 
                 reader.Dispose();
             }
-            //TODO: Error message? Why is the stream every restart null?
         }
 
-        public static void ZipCatrobatPackage(Stream zipStream, string localStoragePath)
+        public static async Task ZipCatrobatPackage(Stream zipStream, string localStoragePath)
         {
             using (var storage = StorageSystem.GetStorage())
             {
                 using (var archive = ZipArchive.Create())
                 {
-                    WriteFilesRecursiveToZip(archive, storage, localStoragePath, "");
+                    await WriteFilesRecursiveToZip(archive, storage, localStoragePath, "");
                     archive.SaveTo(zipStream, CompressionType.None);
                 }
             }
         }
 
-        private static void WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage, 
+        private static async Task WriteFilesRecursiveToZip(ZipArchive archive, IStorage storage, 
             string sourceBasePath, string destinationBasePath)
         {
             var searchPattern = sourceBasePath;
-            var fileNames = storage.GetFileNames(searchPattern);
+            var fileNames = await storage.GetFileNamesAsync(searchPattern);
 
             foreach (string fileName in fileNames)
             {
@@ -66,17 +66,17 @@ namespace Catrobat.IDE.Core.Services.Common
                     continue;
 
                 var tempPath = Path.Combine(sourceBasePath, fileName);
-                var fileStream = storage.OpenFile(tempPath, StorageFileMode.Open, StorageFileAccess.Read);
+                var fileStream = await storage.OpenFileAsync(tempPath, StorageFileMode.Open, StorageFileAccess.Read);
                 var destinationPath = Path.Combine(destinationBasePath, fileName);
                 archive.AddEntry(destinationPath, fileStream);
             }
 
-            var directrryNames = storage.GetDirectoryNames(searchPattern);
+            var directrryNames = await storage.GetDirectoryNamesAsync(searchPattern);
             foreach (string directoryName in directrryNames)
             {
                 var tempZipPath = Path.Combine(sourceBasePath, directoryName);
                 var nextDestinationBasePath = Path.Combine(destinationBasePath, directoryName);
-                WriteFilesRecursiveToZip(archive, storage, tempZipPath, nextDestinationBasePath);
+                await WriteFilesRecursiveToZip(archive, storage, tempZipPath, nextDestinationBasePath);
             }
         }
     }

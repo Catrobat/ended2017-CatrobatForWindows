@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.Services;
@@ -10,33 +12,36 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
 {
     public static class CostumeHelper
     {
-        public static Costume Save(PortableImage image, string name, ImageDimension dimension, string projectPath)
+        public static async Task<Costume> Save(PortableImage image, string name, ImageDimension dimension, string projectPath)
         {
             using (var storage = StorageSystem.GetStorage())
             {
                 var imagePath = Path.Combine(projectPath, Project.ImagesPath);
-                if (!storage.DirectoryExists(imagePath))
-                    storage.CreateDirectory(imagePath);
+                if (!await storage.DirectoryExistsAsync(imagePath))
+                    await storage.CreateDirectoryAsync(imagePath);
             }
 
-            var resizedImage = ServiceLocator.ImageResizeService.ResizeImage(image, dimension.Width, dimension.Height);
+            var resizedImage = await ServiceLocator.ImageResizeService.ResizeImage(image, dimension.Width, dimension.Height);
             var costume = new Costume(name);
             var absoluteFileName = Path.Combine(projectPath, Project.ImagesPath, costume.FileName);
-            resizedImage.WriateAsPng(absoluteFileName);
+            await resizedImage.WriateAsPng(absoluteFileName);
             costume.Image = resizedImage;
 
             return costume;
         }
 
-        public static void ReplaceImageInStorage(Project project, Costume costume, PortableImage newImage)
+        public static async Task ReplaceImageInStorage(Project project, Costume costume, PortableImage newImage)
         {
             var path = Path.Combine(project.BasePath, Project.ImagesPath, costume.FileName);
 
-            using (var storage = StorageSystem.GetStorage())
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
             {
-                storage.SaveImage(path, newImage, true, ImageFormat.Png);
-                costume.Image = storage.CreateThumbnail(newImage);
-            }
+                using (var storage = StorageSystem.GetStorage())
+                {
+                    storage.SaveImage(path, newImage, true, ImageFormat.Png);
+                    costume.Image = storage.CreateThumbnail(newImage);
+                }
+            });
         }
     }
 }

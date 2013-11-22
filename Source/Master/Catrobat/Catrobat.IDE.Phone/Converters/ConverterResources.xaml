@@ -30,4 +30,6 @@
   <converters:ActiveThemeBrushConverterBootstrap x:Key="ActiveThemeBrushConverter"/>
   <converters:VariableButtonVisibilityConverterBootstrap x:Key="VariableButtonVisibilityConverter"/>
 
+  <nativeConverters:NativeImageSquareConverter x:Key="ImageSquareConverter" />
+
 </ResourceDictionary>

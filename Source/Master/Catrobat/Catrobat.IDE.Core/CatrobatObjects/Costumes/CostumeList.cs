@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Costumes
@@ -39,22 +40,22 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Costumes
             return xRoot;
         }
 
-        public DataObject Copy()
+        public async Task<DataObject> Copy()
         {
             var newCostumeList = new CostumeList();
             foreach (Costume costume in Costumes)
             {
-                newCostumeList.Costumes.Add(costume.Copy() as Costume);
+                newCostumeList.Costumes.Add(await costume.Copy() as Costume);
             }
 
             return newCostumeList;
         }
 
-        public void Delete()
+        public async Task Delete()
         {
             foreach (Costume costume in Costumes)
             {
-                costume.Delete();
+                await costume.Delete();
             }
         }
 

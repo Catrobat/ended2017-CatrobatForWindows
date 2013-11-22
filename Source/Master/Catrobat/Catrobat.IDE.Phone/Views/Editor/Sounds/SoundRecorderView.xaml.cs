@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Phone.Views.Editor.Sounds
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            _viewModel.ResetViewModelCommand.Execute(null);
+            _viewModel.GoBackCommand.Execute(null);
             base.OnBackKeyPress(e);
         }
 

@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModel.Main;
 
 namespace Catrobat.IDE.Core.ViewModel.Service
 {
@@ -23,7 +24,10 @@ namespace Catrobat.IDE.Core.ViewModel.Service
 
         #region Actions
 
-
+        protected override void GoBackAction()
+        {
+            base.GoBackAction();
+        }
 
         #endregion
 
@@ -35,7 +39,7 @@ namespace Catrobat.IDE.Core.ViewModel.Service
 
         public UploadProjectLoadingViewModel()
         {
-
+            SkipAndNavigateTo = typeof(MainViewModel);
         }
     }
 }

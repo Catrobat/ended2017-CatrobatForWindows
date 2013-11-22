@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.Services;
@@ -18,15 +19,15 @@ namespace Catrobat.IDE.Tests.Tests.Misc
         }
 
         [TestMethod,TestCategory("GatedTests")]
-        public void UnZipSimpleTest()
+        public async Task UnZipSimpleTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();
-            string path = "SampleData/SampleProjects/test.catroid";
+            const string path = "SampleData/SampleProjects/test.catroid";
 
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
-                Stream originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path);
-                CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
+                var originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path);
+                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
                 originalStream.Close();
                 originalStream.Dispose();
             }
@@ -62,40 +63,40 @@ namespace Catrobat.IDE.Tests.Tests.Misc
         }
 
         [TestMethod,TestCategory("GatedTests")]
-        public void ZipSimpleTest()
+        public async Task ZipSimpleTest()
         {
             TestHelper.InitializeAndClearCatrobatContext();
-            string path = "SampleData/SampleProjects/test.catroid";
+            const string path = "SampleData/SampleProjects/test.catroid";
 
             using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
             {
                 Stream originalStream = resourceLoader.OpenResourceStream(ResourceScope.TestCommon, path);
-                CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
+                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject");
                 originalStream.Close();
                 originalStream.Dispose();
             }
 
             using (IStorage storage = StorageSystem.GetStorage())
             {
-                string writePath = "/Projects/TestProjectZipped/test.catroid";
-                string sourcePath = "Projects/TestProject";
+                const string writePath = "/Projects/TestProjectZipped/test.catroid";
+                const string sourcePath = "Projects/TestProject";
 
                 if (storage.FileExists(writePath))
                     storage.DeleteFile(writePath);
 
                 using (Stream fileStream = storage.OpenFile(writePath, StorageFileMode.Create, StorageFileAccess.Write))
                 {
-                    CatrobatZipService.ZipCatrobatPackage(fileStream, sourcePath);
+                    await CatrobatZipService.ZipCatrobatPackage(fileStream, sourcePath);
                     fileStream.Close();
                     fileStream.Dispose();
                 }
 
-                string newPath = "/Projects/TestProjectZipped/test.catroid";
+                const string newPath = "/Projects/TestProjectZipped/test.catroid";
                 Assert.IsTrue(storage.FileExists(newPath));
 
 
                     Stream originalStream = storage.OpenFile(newPath, StorageFileMode.Open, StorageFileAccess.Read);
-                    CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject1");
+                    await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(originalStream, "Projects/TestProject1");
                     originalStream.Close();
                     originalStream.Dispose();
 

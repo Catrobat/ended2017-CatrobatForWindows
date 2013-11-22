@@ -1,10 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Windows;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Resources.Localization;
-using GalaSoft.MvvmLight;
 
 namespace Catrobat.IDE.Core.ViewModel.Settings
 {
@@ -49,7 +47,10 @@ namespace Catrobat.IDE.Core.ViewModel.Settings
 
         #region Actions
 
-       
+        protected override void GoBackAction()
+        {
+            base.GoBackAction();
+        }
 
         #endregion
 

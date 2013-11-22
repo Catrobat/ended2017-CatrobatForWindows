@@ -1,7 +1,6 @@
 ﻿using System.Windows.Input;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -44,9 +43,13 @@ namespace Catrobat.IDE.Core.ViewModel.Share
 
         private void ShareWithSkydriveAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(UploadToSkyDriveViewModel));
+            ServiceLocator.NavigationService.NavigateTo<UploadToSkyDriveViewModel>();
         }
 
+        protected override void GoBackAction()
+        {
+            base.GoBackAction();
+        }
 
         #endregion
 

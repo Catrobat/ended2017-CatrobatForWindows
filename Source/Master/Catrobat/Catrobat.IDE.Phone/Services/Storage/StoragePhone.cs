@@ -4,11 +4,14 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Phone.Utilities;
 using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDE.Phone.Services.Storage
@@ -18,6 +21,8 @@ namespace Catrobat.IDE.Phone.Services.Storage
         private static int _imageThumbnailDefaultMaxWidthHeight = 200;
         private readonly IsolatedStorageFile _iso = IsolatedStorageFile.GetUserStoreForApplication();
         private readonly List<Stream> _openedStreams = new List<Stream>();
+
+        #region Synchron
 
         public bool FileExists(string path)
         {
@@ -239,21 +244,15 @@ namespace Catrobat.IDE.Phone.Services.Storage
             {
                 try
                 {
-                    var bitmapImage = new BitmapImage();
-
                     using (var storageFileStream = _iso.OpenFile(pathToImage,
                                                                  FileMode.Open,
                                                                  FileAccess.Read))
                     {
-                        bitmapImage.SetSource(storageFileStream);
-                        storageFileStream.Close();
-                        storageFileStream.Dispose();
-
-
-                        var writeableBitmap = new WriteableBitmap(bitmapImage);
-                        var portableImage = new PortableImage(writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth,
-                            writeableBitmap.PixelHeight);
-                        return portableImage;
+                        var image = new PortableImage();
+                        var memoryStream = new MemoryStream();
+                        storageFileStream.CopyTo(memoryStream);
+                        image.EncodedData = memoryStream;
+                        return image;
                     }
                 }
                 catch {} //TODO: Exception message. Maybe logging?
@@ -288,37 +287,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
                 else
                 {
                     var fullSizePortableImage = LoadImage(pathToImage);
-
-                    if (fullSizePortableImage != null)
-                    {
-                        var thumbnailImage = ServiceLocator.ImageResizeService.ResizeImage(fullSizePortableImage,
-                            _imageThumbnailDefaultMaxWidthHeight);
-                        retVal = thumbnailImage;
-
-                        //var fullSizeImage = new WriteableBitmap(fullSizePortableImage.Width, fullSizePortableImage.Height);
-                        //fullSizeImage.FromByteArray(fullSizePortableImage.Data);
-
-                        //var thumbnailImage =  ImageResizeServicePhone.ResizeImage(fullSizeImage, _imageThumbnailDefaultMaxWidthHeight);
-                        //retVal = thumbnailImage;
-                    
-                        try
-                        {
-                            //SaveImage(thumbnailPath, thumbnailImage, true, ImageFormat.Png);
-
-                            var fileStream = OpenFile(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
-                            var writeableBitmap = new WriteableBitmap(thumbnailImage.Width, thumbnailImage.Height);
-                            writeableBitmap.FromByteArray(thumbnailImage.Data);
-
-
-                            //writeableBitmap.SaveJpeg(fileStream, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, 0, 95);
-                            PNGWriter.WritePNG(writeableBitmap, fileStream, 95);
-                        }
-
-                        catch
-                        {
-                            retVal = null;
-                        }
-                    }
+                    return fullSizePortableImage;
                 }
             }
 
@@ -346,9 +315,8 @@ namespace Catrobat.IDE.Phone.Services.Storage
             try
             {
                 stream = _iso.OpenFile(path, FileMode.CreateNew, FileAccess.Write);
-
-                var writeableBitmap = new WriteableBitmap(image.Width, image.Height);
-                writeableBitmap.FromByteArray(image.Data);
+                WriteableBitmap writeableBitmap = null;
+                writeableBitmap = new WriteableBitmap((BitmapSource) image.ImageSource);
 
                 switch (format)
                 {
@@ -391,6 +359,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
 
         private void CreateFoldersIfNotExist(string path, bool isFilePath)
         {
+            path = path.Replace("\\", "/");
             var splitPath = path.Split('/');
             var offset = isFilePath ? 1 : 0;
             for (var index = 0; index < splitPath.Length - 1; index++)
@@ -496,9 +465,128 @@ namespace Catrobat.IDE.Phone.Services.Storage
             fileStream.Dispose();
         }
 
+        #endregion
+
+
+        #region Async
+
         public PortableImage CreateThumbnail(PortableImage image)
         {
-            return ServiceLocator.ImageResizeService.ResizeImage(image, _imageThumbnailDefaultMaxWidthHeight);
+            return image;
+            //return ServiceLocator.ImageResizeService.ResizeImage(image, _imageThumbnailDefaultMaxWidthHeight);
         }
+
+
+        public Task CreateDirectoryAsync(string path)
+        {
+            return Task.Run(() => CreateDirectory(path));
+        }
+
+        public Task<bool> DirectoryExistsAsync(string path)
+        {
+            return Task.Run(() => DirectoryExists(path));
+        }
+
+        public Task<bool> FileExistsAsync(string path)
+        {
+            return Task.Run(() => FileExists(path));
+        }
+
+        public Task<string[]> GetDirectoryNamesAsync(string path)
+        {
+            return Task.Run(() => GetDirectoryNames(path));
+        }
+
+        public Task<string[]> GetFileNamesAsync(string path)
+        {
+            return Task.Run(() => GetFileNames(path));
+        }
+
+        public Task DeleteDirectoryAsync(string path)
+        {
+            return Task.Run(() => DeleteDirectory(path));
+        }
+
+        public Task DeleteFileAsync(string path)
+        {
+            return Task.Run(() => DeleteFile(path));
+        }
+
+        public Task CopyDirectoryAsync(string sourcePath, string destinationPath)
+        {
+            return Task.Run(() => CopyDirectory(sourcePath, destinationPath));
+        }
+
+        public Task MoveDirectoryAsync(string sourcePath, string destinationPath)
+        {
+            return Task.Run(() => MoveDirectory(sourcePath, destinationPath));
+        }
+
+        public Task CopyFileAsync(string sourcePath, string destinationPath)
+        {
+            return Task.Run(() => CopyFile(sourcePath, destinationPath));
+        }
+
+        public Task MoveFileAsync(string sourcePath, string destinationPath)
+        {
+            return Task.Run(() => MoveFile(sourcePath, destinationPath));
+        }
+
+        public Task<Stream> OpenFileAsync(string path, StorageFileMode mode, StorageFileAccess access)
+        {
+            return Task.Run(() => OpenFile(path, mode, access));
+        }
+
+        public Task RenameDirectoryAsync(string directoryPath, string newDirectoryName)
+        {
+            return Task.Run(() => RenameDirectory(directoryPath, newDirectoryName));
+        }
+
+        public Task<PortableImage> LoadImageAsync(string pathToImage)
+        {
+            return Task.Run(() => LoadImage(pathToImage));
+        }
+
+        public Task<PortableImage> LoadImageThumbnailAsync(string pathToImage)
+        {
+            return Task.Run(() => LoadImageThumbnail(pathToImage));
+        }
+
+        public Task<PortableImage> CreateThumbnailAsync(PortableImage image)
+        {
+            return Task.Run(() => CreateThumbnail(image));
+        }
+
+        public Task DeleteImageAsync(string pathToImage)
+        {
+            return Task.Run(() => DeleteImage(pathToImage));
+        }
+
+        public Task SaveImageAsync(string path, PortableImage image, bool deleteExisting, ImageFormat format)
+        {
+            return AsyncRunner.RunAsyncOnMainThread(() => SaveImage(path, image, deleteExisting, format));
+        }
+
+        public Task<string> ReadTextFileAsync(string path)
+        {
+            return Task.Run(() => ReadTextFile(path));
+        }
+
+        public Task WriteTextFileAsync(string path, string content)
+        {
+            return Task.Run(() => WriteTextFile(path, content));
+        }
+
+        public Task<object> ReadSerializableObjectAsync(string path, Type type)
+        {
+            return Task.Run(() => ReadSerializableObject(path, type));
+        }
+
+        public Task WriteSerializableObjectAsync(string path, object serializableObject)
+        {
+            return Task.Run(() => WriteSerializableObject(path, serializableObject));
+        }
+
+        #endregion
     }
 }

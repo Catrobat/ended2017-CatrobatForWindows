@@ -2,7 +2,7 @@
 {
     public enum ViewModelMessagingToken
     {
-        CostumeNameListener,
+        CostumeListener,
         SoundNameListener,
         CurrentSpriteChangedListener,
         SpriteNameListener,
@@ -24,6 +24,9 @@
         ChangeLocalProjectListener,
         CostumeImageListener,
         CostumeImageToSaveListener,
-        ScriptBrickCategoryListener
+        ScriptBrickCategoryListener,
+        SoundStreamListener,
+        PlayProjectNameListener,
+        IsPlayerStartFromTileListener
     }
 }

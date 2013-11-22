@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml.Linq;
-using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Tests.Misc;
-using Catrobat.IDE.Tests.Misc.Storage;
-using Catrobat.IDE.Tests.Tests.Misc;
+using Catrobat.IDE.Tests.Services.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Tests.Tests.Data
@@ -25,7 +22,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
 
         [TestMethod, TestCategory("GatedTests")]
-        public void CopySprite()
+        public async Task CopySprite()
         {
             const string savePath1 = "/CopyTest1/project.xml";
             const string savePath2 = "/CopyTest1/project.xml";
@@ -40,7 +37,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             var sprites = project1.SpriteList.Sprites;
             var spritesToAdd = new List<Sprite>();
             foreach (var sprite in sprites)
-                spritesToAdd.Add(sprite.Copy() as Sprite);
+                spritesToAdd.Add(await sprite.Copy() as Sprite);
 
             foreach (var sprite in spritesToAdd)
                 project2.SpriteList.Sprites.Add(sprite);
@@ -48,9 +45,9 @@ namespace Catrobat.IDE.Tests.Tests.Data
             project2.VariableList = project1.VariableList;
 
             XmlParserTempProjectHelper.Project = project1;
-            project1.Save(savePath1);
+            await project1.Save(savePath1);
             XmlParserTempProjectHelper.Project = project2;
-            project2.Save(savePath2);
+            await project2.Save(savePath2);
 
             string xml1;
             string xml2;

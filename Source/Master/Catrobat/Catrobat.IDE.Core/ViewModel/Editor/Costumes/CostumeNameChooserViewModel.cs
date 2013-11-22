@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
@@ -6,7 +7,6 @@ using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Resources.Localization;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -67,32 +67,42 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             get { return _dimension; }
             set
             {
+                InitImageSizes();
                 _dimension = value;
 
                 int visibleCounter = 0;
-                foreach (var size in ImageSizes)
+                foreach (var size in AllImageSizes)
                 {
                     size.Dimension = Dimension;
                     if (size.IsVisible)
                         visibleCounter++;
                 }
 
-                switch (visibleCounter)
+                //switch (visibleCounter)
+                //{
+                //    case 1:
+                //        SelectedSize = AllImageSizes[3];
+                //        break;
+                //    case 2:
+                //        SelectedSize = AllImageSizes[3];
+                //        break;
+                //    case 3:
+                //        SelectedSize = AllImageSizes[1];
+                //        break;
+                //    case 4:
+                //        SelectedSize = AllImageSizes[1];
+                //        break;
+                //}
+
+
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
-                    case 1:
-                        SelectedSize = ImageSizes[3];
-                        break;
-                    case 2:
-                        SelectedSize = ImageSizes[3];
-                        break;
-                    case 3:
-                        SelectedSize = ImageSizes[1];
-                        break;
-                    case 4:
-                        SelectedSize = ImageSizes[1];
-                        break;
-                }
-                RaisePropertyChanged(() => Dimension);
+                    RaisePropertyChanged(() => Dimension);
+                    RaisePropertyChanged(() => ImageSizes);
+
+                    SelectedSize = visibleCounter >= 2 ? ImageSizes[1] : ImageSizes[0]; 
+                });
+
             }
         }
 
@@ -103,20 +113,32 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             {
                 _selectedSize = value;
                 RaisePropertyChanged(() => SelectedSize);
+                SaveCommand.RaiseCanExecuteChanged();
             }
         }
 
-        public ObservableCollection<ImageSizeEntry> ImageSizes { get; set; }
+        public ObservableCollection<ImageSizeEntry> ImageSizes
+        {
+            get
+            {
+                var availableSizes = new ObservableCollection<ImageSizeEntry>();
+                foreach (var entry in AllImageSizes)
+                    if (entry.IsVisible)
+                        availableSizes.Add(entry);
+
+                return availableSizes;
+            }
+        }
+
+        public ObservableCollection<ImageSizeEntry> AllImageSizes { get; set; }
 
         #endregion
 
         #region Commands
 
-        public RelayCommand SaveCommand { get; private set; }
+        public AsyncRelayCommand SaveCommand { get; private set; }
 
         public RelayCommand CancelCommand { get; private set; }
-
-        public RelayCommand ResetViewModelCommand { get; private set; }
 
         #endregion
 
@@ -124,45 +146,63 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         private bool SaveCommand_CanExecute()
         {
-            return CostumeName != null && CostumeName.Length >= 2;
+            var saveEnabled = CostumeName != null && CostumeName.Length >= 2;
+            saveEnabled &= SelectedSize != null;
+
+            return saveEnabled;
         }
 
         #endregion
 
         #region Actions
 
-        private async void SaveAction()
+        private async Task SaveAction()
         {
             var message = new GenericMessage<PortableImage>(Image);
             Messenger.Default.Send(message, ViewModelMessagingToken.CostumeImageToSaveListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(CostumeSavingViewModel));
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                ServiceLocator.NavigationService.NavigateTo<CostumeSavingViewModel>());
 
-            await Task.Run(() => ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            var newDimention = new ImageDimension
             {
-                var newDimention = new ImageDimension
-                {
-                    Height = SelectedSize.NewHeight,
-                    Width = SelectedSize.NewWidth
-                };
-                var costume = CostumeHelper.Save(Image, CostumeName, newDimention, CurrentProject.BasePath);
-                _receivedSelectedSprite.Costumes.Costumes.Add(costume);
+                Height = SelectedSize.NewHeight,
+                Width = SelectedSize.NewWidth
+            };
 
-                ServiceLocator.NavigationService.RemoveBackEntry();
-                ServiceLocator.NavigationService.RemoveBackEntry();
-                ServiceLocator.NavigationService.NavigateBack();
-            }));
+            try
+            {
+                var costume = await CostumeHelper.Save(Image, CostumeName, newDimention, CurrentProject.BasePath);
+
+                ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                {
+                    _receivedSelectedSprite.Costumes.Costumes.Add(costume);
+                    ServiceLocator.NavigationService.RemoveBackEntry();
+                    ServiceLocator.NavigationService.RemoveBackEntry();
+                    GoBackAction();
+                });
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+
+
         }
 
         private void CancelAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            ServiceLocator.NavigationService.RemoveBackEntry();
+            GoBackAction();
         }
-       
 
-        private void ResetViewModelAction()
+
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            base.GoBackAction();
         }
 
         #endregion
@@ -189,9 +229,8 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         public CostumeNameChooserViewModel()
         {
-            SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
+            SaveCommand = new AsyncRelayCommand(SaveAction, () => { /* no action  */ }, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
@@ -202,7 +241,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,
                 ViewModelMessagingToken.CostumeImageListener, CostumeImageReceivedMessageAction);
 
-            InitImageSizes();
             if (IsInDesignMode)
                 InitDesignData();
         }
@@ -215,7 +253,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         private void InitImageSizes()
         {
-            ImageSizes = new ObservableCollection<ImageSizeEntry>
+            AllImageSizes = new ObservableCollection<ImageSizeEntry>
             {
                 new ImageSizeEntry {Size = ImageSize.Small},
                 new ImageSizeEntry {Size = ImageSize.Medium},
@@ -223,11 +261,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
                 new ImageSizeEntry {Size = ImageSize.FullSize}
             };
 
-            Dimension = new ImageDimension { Width = 0, Height = 0 };
+            //Dimension = new ImageDimension { Width = 0, Height = 0 };
         }
 
         private void ResetViewModel()
         {
+            InitImageSizes();
+
             //CostumeName = AppResources.Editor_Image;
 
             //InitImageSizes();

@@ -38,6 +38,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TFSBuild|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\TFSBuild\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <None Include="Fonts\LiveSymbol.ttf" />
@@ -123,6 +132,7 @@
     <Compile Include="Services\IDispatcherService.cs" />
     <Compile Include="Services\IProjectGenerator.cs" />
     <Compile Include="Services\IShareService.cs" />
+    <Compile Include="Services\IActionTemplateService.cs" />
     <Compile Include="UI\Converters\ActiveThemeBrushConverter.cs" />
     <Compile Include="UI\Converters\BoolOpacityConverter.cs" />
     <Compile Include="UI\Converters\BoolPlayButtonStateConverter.cs" />
@@ -140,6 +150,7 @@
     <Compile Include="UI\Converters\VariableButtonVisibilityConverter.cs" />
     <Compile Include="UI\Formula\IPortableFormulaButton.cs" />
     <Compile Include="UI\Formula\IPortableUIFormula.cs" />
+    <Compile Include="UI\ManualImageCache.cs" />
     <Compile Include="UI\PortableUI\IPortableValueConverter.cs" />
     <Compile Include="UI\IPlayPauseButton.cs" />
     <Compile Include="UI\PlayPauseStateCommandArguments.cs" />
@@ -221,6 +232,7 @@
     <Compile Include="UI\ImageSizeEntry.cs" />
     <Compile Include="UI\ImageSizeEntryCollection.cs" />
     <Compile Include="UI\NullItemCollection.cs" />
+    <Compile Include="UI\StaticTheme.cs" />
     <Compile Include="UI\Theme.cs" />
     <Compile Include="UI\ThemeChooser.cs" />
     <Compile Include="UI\VariableConteiner.cs" />
@@ -245,6 +257,7 @@
     <Compile Include="VersionConverter\CatrobatVersionElementRenameEntry.cs" />
     <Compile Include="VersionConverter\CatrobatVersionPair.cs" />
     <Compile Include="VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
+    <Compile Include="VersionConverter\VersionConverterResult.cs" />
     <Compile Include="VersionConverter\Versions\CatrobatVersion091ToWin091.cs" />
     <Compile Include="Utilities\Helpers\XElementExtensions.cs" />
     <Compile Include="ViewModel\Editor\Costumes\ChangeCostumeViewModel.cs" />
@@ -284,6 +297,7 @@
     <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Share\ShareProjectServiceSelectionViewModel.cs" />
     <Compile Include="ViewModel\Share\UploadToSkyDriveViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ViewModelMessagingToken.cs" />
   </ItemGroup>
@@ -321,7 +335,9 @@
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />

@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="Catrobat.IDE.Store.Views.Main.ProjectSettingsView"
+  x:Name="PageRoot"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d"
+  DataContext="{Binding ProjectSettingsViewModel, Source={StaticResource Locator}}"
+  d:DesignHeight="350" d:DesignWidth="500">
+
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
+          <TextBlock Margin="10" Style="{StaticResource SubheaderTextBlockStyle}"
+                     Text="{Binding Resources.Main_TitleNewProject, Source={StaticResource LocalizedStrings}}" />
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="10 0 0 15" HorizontalAlignment="Stretch">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+
+          <TextBlock Grid.Row="0" Margin="10" Style="{StaticResource TitleTextBlockStyle}"
+                     Text="{Binding Resources.Editor_ProjectName, Source={StaticResource LocalizedStrings}}" />
+          
+          <TextBox Name="TextBoxProgramName" Grid.Row="1" Margin="10" 
+                   Text="{Binding ProjectName, Mode=TwoWay}" 
+                   HorizontalAlignment="Stretch" TextChanged="TextBoxProgramName_OnTextChanged" />
+
+          <TextBlock Grid.Row="3" Margin="10" Style="{StaticResource TitleTextBlockStyle}"
+                   Text="{Binding Resources.Editor_Description, Source={StaticResource LocalizedStrings}}" />
+
+          <TextBox Grid.Row="4" Margin="10"
+                   Height="120"
+                   Text="{Binding ProjectDescription, Mode=TwoWay}"
+                   TextWrapping="Wrap"
+                   HorizontalAlignment="Stretch"/>
+        </Grid>
+      </Grid>
+      <Grid Grid.Column="1">
+        <!--<Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>-->
+
+        <AppBarButton Grid.Row="2" VerticalAlignment="Bottom" Icon="Save" Label="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}" 
+                    Command="{Binding SaveCommand}"/>
+        <!--<AppBarButton Grid.Row="2" VerticalAlignment="Center" Icon="Cancel" Label="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}" 
+                    Command="{Binding CancelCommand}"/>-->
+      </Grid>
+    </Grid>
+  </Grid>
+</UserControl>

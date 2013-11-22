@@ -7,7 +7,6 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.VersionConverter;
 using Catrobat.IDE.Core.Resources.Localization;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -115,8 +114,6 @@ namespace Catrobat.IDE.Core.ViewModel.Service
 
         public ICommand LicenseCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand { get; private set; }
-
         #endregion
 
         #region CommandCanExecute
@@ -147,7 +144,7 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             var projectChangedMessage = new MessageBase();
             Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.DownloadProjectStartedListener);
 
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void ReportAction()
@@ -160,9 +157,10 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             ServiceLocator.NavigationService.NavigateToWebPage(ApplicationResources.ProjectLicenseUrl);
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            base.GoBackAction();
         }
 
         #endregion
@@ -181,7 +179,6 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             DownloadCommand = new RelayCommand<OnlineProjectHeader>(DownloadAction, DownloadCommand_CanExecute);
             ReportCommand = new RelayCommand(ReportAction);
             LicenseCommand = new RelayCommand(LicenseAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);

@@ -15,7 +15,6 @@ using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
 using Catrobat.IDE.Core.ViewModel.Editor.Scripts;
 using Catrobat.IDE.Core.ViewModel.Editor.Sounds;
 using Catrobat.IDE.Core.ViewModel.Main;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -474,7 +473,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             var message = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send(message, ViewModelMessagingToken.SpriteNameListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ChangeSpriteViewModel));
+            ServiceLocator.NavigationService.NavigateTo<ChangeSpriteViewModel>();
         }
 
         private void AddNewScriptBrickAction()
@@ -484,7 +483,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             var message = new GenericMessage<List<Object>>(objects);
             Messenger.Default.Send(message, ViewModelMessagingToken.ScriptBrickCollectionListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ScriptBrickCategoryViewModel));
+            ServiceLocator.NavigationService.NavigateTo<ScriptBrickCategoryViewModel>();
         }
 
         private void CopyScriptBrickAction()
@@ -586,7 +585,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             var message = new GenericMessage<DataObject>(broadcastObject);
             Messenger.Default.Send(message, ViewModelMessagingToken.BroadcastObjectListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(NewBroadcastMessageViewModel));
+            ServiceLocator.NavigationService.NavigateTo<NewBroadcastMessageViewModel>();
         }
 
 
@@ -595,7 +594,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             var message = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(NewSoundSourceSelectionViewModel));
+            ServiceLocator.NavigationService.NavigateTo<NewSoundSourceSelectionViewModel>();
         }
 
         private void EditSoundAction()
@@ -605,7 +604,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
                 var message = new GenericMessage<Sound>(sound);
                 Messenger.Default.Send(message, ViewModelMessagingToken.SoundNameListener);
 
-                ServiceLocator.NavigationService.NavigateTo(typeof(ChangeSoundViewModel));
+                ServiceLocator.NavigationService.NavigateTo<ChangeSoundViewModel>();
             }
         }
 
@@ -624,7 +623,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             var message = new GenericMessage<Sprite>(SelectedSprite);
             Messenger.Default.Send(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(NewCostumeSourceSelectionViewModel));
+            ServiceLocator.NavigationService.NavigateTo<NewCostumeSourceSelectionViewModel>();
         }
 
         private void EditCostumeAction()
@@ -634,15 +633,15 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
                 var message = new GenericMessage<Costume>(costume);
                 Messenger.Default.Send(message, ViewModelMessagingToken.CostumeNameListener);
 
-                ServiceLocator.NavigationService.NavigateTo(typeof(ChangeCostumeViewModel));
+                ServiceLocator.NavigationService.NavigateTo<ChangeCostumeViewModel>();
             }
         }
 
-        private void CopyCostumeAction()
+        private async void CopyCostumeAction()
         {
             foreach (var costume in SelectedCostumes)
             {
-                var newCostume = costume.Copy() as Costume;
+                var newCostume = await costume.Copy() as Costume;
                 if (newCostume != null)
                     Costumes.Insert(Costumes.IndexOf(costume) + 1, newCostume);
             }
@@ -720,7 +719,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
 
         private void GoToMainViewAction()
         {
-            ServiceLocator.NavigationService.NavigateTo(typeof(MainViewModel));
+            ServiceLocator.NavigationService.NavigateTo<MainViewModel>();
         }
 
         private void ProjectSettingsAction()
@@ -728,7 +727,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             var message = new GenericMessage<Project>(CurrentProject);
             Messenger.Default.Send(message, ViewModelMessagingToken.ChangeLocalProjectListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ProjectSettingsViewModel));
+            ServiceLocator.NavigationService.NavigateTo<ProjectSettingsViewModel>();
         }
 
 
@@ -795,6 +794,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
                 }
                 ServiceLocator.SoundPlayerService.Play();
             }
+        }
+
+        protected override void GoBackAction()
+        {
+            base.GoBackAction();
         }
 
         #endregion
@@ -920,7 +924,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
 
         #region MessageBoxResult
 
-        private void DeleteCostumeMessageBoxResult(MessageboxResult result)
+        private async void DeleteCostumeMessageBoxResult(MessageboxResult result)
         {
             if (result == MessageboxResult.Ok)
             {
@@ -930,13 +934,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
                 {
                     ReferenceHelper.CleanUpReferencesAfterDelete(costume, SelectedSprite);
 
-                    costume.Delete();
+                    await costume.Delete();
                     Costumes.Remove(costume);
                 }
             }
         }
 
-        private void DeleteSoundMessageBoxResult(MessageboxResult result)
+        private async void DeleteSoundMessageBoxResult(MessageboxResult result)
         {
             if (result == MessageboxResult.Ok)
             {
@@ -946,7 +950,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
                 {
                     ReferenceHelper.CleanUpReferencesAfterDelete(sound, SelectedSprite);
 
-                    sound.Delete();
+                    await sound.Delete();
                     Sounds.Remove(sound);
                 }
             }
@@ -954,10 +958,5 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
 
 
         #endregion
-
-        public override void Cleanup()
-        {
-            base.Cleanup();
-        }
     }
 }

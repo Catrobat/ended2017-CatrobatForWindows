@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.Services;
+﻿using System.Globalization;
+using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Core.UI.PortableUI
 {
@@ -10,6 +11,19 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         public byte A { get; set; }
 
         public PortableSolidColorBrush() { }
+
+        public PortableSolidColorBrush(string rgbCode)
+        {
+            var a = rgbCode.Substring(1, 2);
+            var r = rgbCode.Substring(3, 2);
+            var g = rgbCode.Substring(5, 2);
+            var b = rgbCode.Substring(7, 2);
+
+            A = byte.Parse(a, NumberStyles.HexNumber);
+            R = byte.Parse(r, NumberStyles.HexNumber);
+            G = byte.Parse(g, NumberStyles.HexNumber);
+            B = byte.Parse(b, NumberStyles.HexNumber);
+        }
 
         public PortableSolidColorBrush(byte a, byte r, byte g, byte b)
         {
@@ -23,7 +37,14 @@ namespace Catrobat.IDE.Core.UI.PortableUI
         {
             get
             {
-                return ServiceLocator.ColorConversionService.ConvertToLocalSolidColorBrush(this);
+                try
+                {
+                    return ServiceLocator.ColorConversionService.ConvertToLocalSolidColorBrush(this);
+                }
+                catch
+                {
+                    return null;
+                }
             }
             set
             {

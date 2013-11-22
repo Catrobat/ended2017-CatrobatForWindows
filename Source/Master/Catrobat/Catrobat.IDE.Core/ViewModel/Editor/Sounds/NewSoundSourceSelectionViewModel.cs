@@ -1,6 +1,6 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System.IO;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -28,25 +28,43 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
 
         #region Actions
 
-        private void AudioLibraryAction()
+        private async void AudioLibraryAction()
         {
-            var message = new GenericMessage<Sprite>(_receivedSelectedSprite);
-            Messenger.Default.Send(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
+            var spriteMessage = new GenericMessage<Sprite>(_receivedSelectedSprite);
+            Messenger.Default.Send(spriteMessage, ViewModelMessagingToken.CurrentSpriteChangedListener);
 
-            //ServiceLocator.NavigationService.NavigateTo(typeof (AudioLibrary));
+            var result = await ServiceLocator.SoundService.CreateSoundFromMediaLibrary(_receivedSelectedSprite);
+
+            if (result.Status == SoundServiceStatus.Success)
+            {
+                var message = new GenericMessage<Stream>(result.Result);
+                Messenger.Default.Send(message, ViewModelMessagingToken.SoundStreamListener);
+
+                ServiceLocator.NavigationService.NavigateTo<SoundNameChooserViewModel>();
+            }
         }
 
-        private void RecorderAction()
+        private async void RecorderAction()
         {
-            var message = new GenericMessage<Sprite>(_receivedSelectedSprite);
-            Messenger.Default.Send(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
+            var result = await ServiceLocator.SoundService.CreateSoundFromRecorder(_receivedSelectedSprite);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(SoundRecorderViewModel));
+            if (result.Status == SoundServiceStatus.Success)
+            {
+                var message = new GenericMessage<Stream>(result.Result);
+                Messenger.Default.Send(message, ViewModelMessagingToken.SoundStreamListener);
+            
+                ServiceLocator.NavigationService.NavigateTo<SoundNameChooserViewModel>();
+            }
         }
 
         private void ReceiveSelectedSpriteMessageAction(GenericMessage<Sprite> message)
         {
             _receivedSelectedSprite = message.Content;
+        }
+
+        protected override void GoBackAction()
+        {
+            base.GoBackAction();
         }
 
         #endregion

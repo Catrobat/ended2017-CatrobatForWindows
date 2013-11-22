@@ -95,12 +95,60 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TFSBuild|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\TFSBuild\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TFSBuild|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\TFSBuild\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TFSBuild|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\TFSBuild\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AppDesignStatic.cs" />
     <Compile Include="AppPhone.cs" />
+    <Compile Include="Content\Images\Application\Logo.xaml.cs">
+      <DependentUpon>Logo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Images\Misc\AudioRecorder.xaml.cs">
+      <DependentUpon>AudioRecorder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Images\Misc\Camera.xaml.cs">
+      <DependentUpon>Camera.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Images\Misc\AudioLibrary.xaml.cs">
+      <DependentUpon>AudioLibrary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Images\Misc\EditImage.xaml.cs">
+      <DependentUpon>EditImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Images\Misc\ImageGallery.xaml.cs">
+      <DependentUpon>ImageGallery.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\NativeConverters\NativeImageSquareConverter.cs" />
     <Compile Include="Converters\PortableConverters.cs" />
     <Compile Include="Converters\PortableValueConverterPhone.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -166,11 +214,13 @@
       <DependentUpon>ProcessIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ActionTemplateServicePhone.cs" />
     <Compile Include="Services\ColorConversionServicePhone.cs" />
     <Compile Include="Services\CultureServicePhone.cs" />
     <Compile Include="Services\DispatcherServicePhone.cs" />
     <Compile Include="Services\ImageResizeServicePhone.cs" />
     <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
+    <Compile Include="Services\SoundServicePhone.cs" />
     <Compile Include="Services\ProjectImporterServicePhone.cs" />
     <Compile Include="Services\NavigationServicePhone.cs" />
     <Compile Include="Services\NotificationServicePhone.cs" />
@@ -187,6 +237,8 @@
     <Compile Include="Services\Storage\StoragePhone.cs" />
     <Compile Include="Services\SystemInformationServicePhone.cs" />
     <Compile Include="Utilities\AssociationUriMapper.cs" />
+    <Compile Include="Utilities\AsyncRunner.cs" />
+    <Compile Include="Utilities\Semaphore.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
     <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
     <Compile Include="Views\Editor\Costumes\ChangeCostumeView.xaml.cs">
@@ -219,7 +271,7 @@
     <Compile Include="Views\Editor\Formula\VariableSelectionView.xaml.cs">
       <DependentUpon>VariableSelectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\ProjectSettingsView.xaml.cs">
+    <Compile Include="Views\Main\ProjectSettingsView.xaml.cs">
       <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Scripts\AddNewScriptBrickView.xaml.cs">
@@ -307,6 +359,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Content\Images\Application\Logo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Images\Misc\AudioRecorder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Images\Misc\Camera.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Images\Misc\AudioLibrary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Images\Misc\EditImage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Images\Misc\ImageGallery.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Content\Resources.xaml">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -423,7 +499,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\ProjectSettingsView.xaml">
+    <Page Include="Views\Main\ProjectSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -546,6 +622,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\Share\skydrive.jpg" />
+    <Content Include="Content\Programs\Default\automatic_screenshot.png" />
+    <Content Include="Content\Programs\Default\Looks\28226cf909b0e5deb2d275b73a96fbec_rain.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Programs\Default\Looks\52fb8540d8d751880ab012e26c86e1f5_background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Programs\Default\Looks\5c8b67f427443c1bb5c50a4aeb007949_sun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Programs\Default\Looks\7fe260ebb6c78fa3f0d6afaffb5a7759_water.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Programs\Default\Looks\c96b5d3adc1d4b199fc76fc518deae86_cloud2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Programs\Default\Looks\cd8435e8bf34b6be6c0fdf700f03e01e_cat.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Programs\Default\Looks\e8b139ca83c443159b464c26d8483bae_cloud1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Resources\DesignTime\screenshot.png" />
     <Content Include="Content\Tiles\FlipCycleTileLarge.png" />
     <Content Include="Content\Tiles\FlipCycleTileMedium.png" />
@@ -671,11 +769,6 @@
     <Content Include="Content\Images\ImageButtons\upload_light.png" />
     <Content Include="Content\Images\ImageButtons\upload_pressed_dark.png" />
     <Content Include="Content\Images\ImageButtons\upload_pressed_light.png" />
-    <Content Include="Content\Images\Misc\AudioLibrary.png" />
-    <Content Include="Content\Images\Misc\AudioRecorder.png" />
-    <Content Include="Content\Images\Misc\camera.png" />
-    <Content Include="Content\Images\Misc\EditImage.png" />
-    <Content Include="Content\Images\Misc\Gallery.png" />
     <Content Include="Content\Images\Misc\InProcess.png" />
     <Content Include="Content\Images\Screenshot\NoScreenshot.png" />
   </ItemGroup>
@@ -686,11 +779,16 @@
     <Reference Include="Coding4Fun.Toolkit.Controls">
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight">
-      <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\wp8\GalaSoft.MvvmLight.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight, Version=4.2.30.16997, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.2.30.1\lib\wp8\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras">
-      <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\wp8\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=4.2.30.16998, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.2.30.1\lib\wp8\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform">
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.2.30.1\lib\wp8\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Platform.WP8">
       <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\wp8\GalaSoft.MvvmLight.Platform.WP8.dll</HintPath>
@@ -751,7 +849,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Libs\" />
-    <Folder Include="Converters\NativeConverters\" />
+    <Folder Include="Content\Programs\Default\Sounds\" />
+    <Folder Include="Services\LocalServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities;
@@ -16,17 +17,17 @@ namespace Catrobat.IDE.Core
     {
         #region Static methods
 
-        public static Project LoadNewProjectByNameStatic(string projectName)
+        public static async Task<Project> LoadNewProjectByNameStatic(string projectName)
         {
             if (Debugger.IsAttached)
             {
-                return LoadNewProjectByNameStaticWithoutTryCatch(projectName);
+                return await LoadNewProjectByNameStaticWithoutTryCatch(projectName);
             }
             else
             {
                 try
                 {
-                    return LoadNewProjectByNameStaticWithoutTryCatch(projectName);
+                    return await LoadNewProjectByNameStaticWithoutTryCatch(projectName);
                 }
                 catch
                 {
@@ -35,49 +36,26 @@ namespace Catrobat.IDE.Core
             }
         }
 
-        private static Project LoadNewProjectByNameStaticWithoutTryCatch(string projectName)
+        private static async Task<Project> LoadNewProjectByNameStaticWithoutTryCatch(string projectName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
                 var tempPath = Path.Combine(ProjectsPath, projectName, Project.ProjectCodePath);
-                var xml = storage.ReadTextFile(tempPath);
+                var xml = await storage.ReadTextFileAsync(tempPath);
                 var newProject = new Project(xml);
                 newProject.SetProgramName(projectName);
                 return newProject;
             }
         }
 
-        public static Project RestoreDefaultProjectStatic(string projectName)
+        public static async Task<Project> RestoreDefaultProjectStatic(string projectName)
         {
             IProjectGenerator projectGenerator = new ProjectGeneratorDefault();
 
-            return projectGenerator.GenerateProject(ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName, true);
-
-            //using (var storage = StorageSystem.GetStorage())
-            //{
-            //    var projectCodeFile = Path.Combine(ProjectsPath, projectName);
-
-            //    if (!storage.FileExists(projectCodeFile))
-            //    {
-            //        using (var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader())
-            //        {
-            //            var stream = resourceLoader.OpenResourceStream(ResourceScope.Resources, DefaultProjectPath);
-            //            CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(stream, projectCodeFile);
-            //            stream.Dispose();
-            //        }
-            //    }
-
-            //    var tempXmlPath = Path.Combine(projectCodeFile, Project.ProjectCodePath);
-            //    var xml = storage.ReadTextFile(tempXmlPath);
-
-            //    var project = new Project(xml);
-            //    project.SetProgramName(projectName);
-            //    //project.Save();
-            //    return project;
-            //}
+            return await projectGenerator.GenerateProject(ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName, true);
         }
 
-        public static Project CreateEmptyProject(string newProjectName)
+        public static async Task<Project> CreateEmptyProject(string newProjectName)
         {
             var newProject = new Project();
 
@@ -86,7 +64,7 @@ namespace Catrobat.IDE.Core
                 var destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
 
                 var counter = 1;
-                while (storage.DirectoryExists(destinationPath))
+                while (await storage.DirectoryExistsAsync(destinationPath))
                 {
                     newProjectName = newProjectName + counter;
                     destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
@@ -99,12 +77,12 @@ namespace Catrobat.IDE.Core
             newProject.VariableList.ObjectVariableList = new ObjectVariableList();
             newProject.VariableList.ProgramVariableList = new ProgramVariableList();
             newProject.SetProgramName(newProjectName);
-            newProject.Save();
+            await newProject.Save();
 
             return newProject;
         }
 
-        public static Project CopyProject(string sourceProjectName, string newProjectName)
+        public static async Task<Project> CopyProject(string sourceProjectName, string newProjectName)
         {
             using (var storage = StorageSystem.GetStorage())
             {
@@ -112,34 +90,34 @@ namespace Catrobat.IDE.Core
                 var destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
 
                 var counter = 1;
-                while (storage.DirectoryExists(destinationPath))
+                while (await storage.DirectoryExistsAsync(destinationPath))
                 {
                     newProjectName = newProjectName + counter;
                     destinationPath = Path.Combine(CatrobatContextBase.ProjectsPath, newProjectName);
                     counter++;
                 }
 
-                storage.CopyDirectory(sourcePath, destinationPath);
+                await storage.CopyDirectoryAsync(sourcePath, destinationPath);
 
                 var tempXmlPath = Path.Combine(destinationPath, Project.ProjectCodePath);
-                var xml = storage.ReadTextFile(tempXmlPath);
+                var xml = await storage.ReadTextFileAsync(tempXmlPath);
                 var newProject = new Project(xml);
                 newProject.SetProgramName(newProjectName);
-                newProject.Save();
+                await newProject.Save();
 
                 return newProject;
             }
         }
 
-        public static void StoreLocalSettingsStatic(LocalSettings localSettings)
+        public static async Task StoreLocalSettingsStatic(LocalSettings localSettings)
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                storage.WriteSerializableObject(LocalSettingsFilePath, localSettings);
+                await storage.WriteSerializableObjectAsync(LocalSettingsFilePath, localSettings);
             }
         }
 
-        public static LocalSettings RestoreLocalSettingsStatic()
+        public static async Task<LocalSettings> RestoreLocalSettingsStatic()
         {
             try
             {
@@ -147,9 +125,9 @@ namespace Catrobat.IDE.Core
 
                 using (var storage = StorageSystem.GetStorage())
                 {
-                    if (storage.FileExists(LocalSettingsFilePath))
+                    if (await storage.FileExistsAsync(LocalSettingsFilePath))
                     {
-                        localSettings = storage.ReadSerializableObject(LocalSettingsFilePath, typeof(LocalSettings)) as LocalSettings;
+                        localSettings = await storage.ReadSerializableObjectAsync(LocalSettingsFilePath, typeof(LocalSettings)) as LocalSettings;
                     }
 
                     return localSettings;

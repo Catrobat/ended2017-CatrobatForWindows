@@ -1,9 +1,7 @@
 ﻿using System;
-using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Resources.Localization;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -65,8 +63,6 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand { get; private set; }
-
         #endregion
 
         #region CommandCanExecute
@@ -80,36 +76,34 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         #region Actions
 
-        private void SaveAction()
+        private async void SaveAction()
         {
-            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            await CurrentProject.Save();
+
+            CurrentProject = CopyCurrentProjectAsTemplate ?
+                await CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName, _projectName) :
+                await CatrobatContext.CreateEmptyProject(_projectName);
+
+            if (CurrentProject != null)
             {
-                CurrentProject.Save();
+                await CurrentProject.Save();
 
-                CurrentProject = CopyCurrentProjectAsTemplate ?
-                    CatrobatContext.CopyProject(CurrentProject.ProjectHeader.ProgramName, _projectName) :
-                    CatrobatContext.CreateEmptyProject(_projectName);
+                var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
+                Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+            }
 
-                if (CurrentProject != null)
-                {
-                    CurrentProject.Save();
-
-                    var projectChangedMessage = new GenericMessage<Project>(CurrentProject);
-                    Messenger.Default.Send<GenericMessage<Project>>(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
-                }
-
-                ServiceLocator.NavigationService.NavigateBack();
-            });
+            GoBackAction();
         }
 
         private void CancelAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            GoBackAction();
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            base.GoBackAction();
         }
 
         #endregion
@@ -128,15 +122,15 @@ namespace Catrobat.IDE.Core.ViewModel.Main
             // Commands
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
         }
 
-        private void ResetViewModel()
+        public void ResetViewModel()
         {
             ProjectName = "";
+            CopyCurrentProjectAsTemplate = false;
         }
     }
 }

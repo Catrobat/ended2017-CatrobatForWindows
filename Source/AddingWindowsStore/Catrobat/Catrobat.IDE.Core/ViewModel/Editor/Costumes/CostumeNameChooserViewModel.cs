@@ -1,12 +1,10 @@
 ﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.PortableUI;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.Resources.Localization;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -116,8 +114,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
 
         public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand { get; private set; }
-
         #endregion
 
         #region CommandCanExecute
@@ -136,33 +132,32 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             var message = new GenericMessage<PortableImage>(Image);
             Messenger.Default.Send(message, ViewModelMessagingToken.CostumeImageToSaveListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(CostumeSavingViewModel));
+            ServiceLocator.NavigationService.NavigateTo<CostumeSavingViewModel>();
 
-            await Task.Run(() => ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            var newDimention = new ImageDimension
             {
-                var newDimention = new ImageDimension
-                {
-                    Height = SelectedSize.NewHeight,
-                    Width = SelectedSize.NewWidth
-                };
-                var costume = CostumeHelper.Save(Image, CostumeName, newDimention, CurrentProject.BasePath);
-                _receivedSelectedSprite.Costumes.Costumes.Add(costume);
+                Height = SelectedSize.NewHeight,
+                Width = SelectedSize.NewWidth
+            };
 
-                ServiceLocator.NavigationService.RemoveBackEntry();
-                ServiceLocator.NavigationService.RemoveBackEntry();
-                ServiceLocator.NavigationService.NavigateBack();
-            }));
+            var costume = await CostumeHelper.Save(Image, CostumeName, newDimention, CurrentProject.BasePath);
+            _receivedSelectedSprite.Costumes.Costumes.Add(costume);
+
+            ServiceLocator.NavigationService.RemoveBackEntry();
+            ServiceLocator.NavigationService.RemoveBackEntry();
+            base.GoBackAction();
         }
 
         private void CancelAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
-       
 
-        private void ResetViewModelAction()
+
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            base.GoBackAction();
         }
 
         #endregion
@@ -191,7 +186,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
         {
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);

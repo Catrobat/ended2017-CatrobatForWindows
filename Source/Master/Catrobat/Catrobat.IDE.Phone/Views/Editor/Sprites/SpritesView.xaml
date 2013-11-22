@@ -6,14 +6,8 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:reorderableListbox="clr-namespace:Catrobat.IDE.Phone.Controls.ReorderableListbox"
-  xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
-  xmlns:buttons="clr-namespace:Catrobat.IDE.Phone.Controls.Buttons"
-  xmlns:converters="clr-namespace:Catrobat.IDE.Phone.Converters" 
   mc:Ignorable="d"
-  xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
   xmlns:appBar="clr-namespace:Catrobat.IDE.Phone.Controls.AppBar"
-  xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
-    xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
   d:DesignWidth="480"
   d:DesignHeight="768"
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -52,7 +46,7 @@
           Foreground="White" >
         <reorderableListbox:ReorderListBox.ItemTemplate>
           <DataTemplate>
-            <Grid Background="{StaticResource ObjectsBrush}" Margin="0 5 0 5" Height="90">
+            <Grid Background="{Binding StaticTheme.ObjectsBrush.NativeBrush, Source={StaticResource ThemeChooser}}" Margin="0 5 0 5" Height="90">
               <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -110,7 +104,7 @@
       </reorderableListbox:ReorderListBox>
 
       <TextBlock Grid.Row="1"
-              Text ="{Binding Resources.Editor_ClickPlusToAddAction, Source={StaticResource LocalizedStrings}}"
+              Text ="{Binding Resources.Editor_ClickPlusToAddSprite, Source={StaticResource LocalizedStrings}}"
               Visibility="{Binding IsSpritesEmpty, Converter={StaticResource BoolVisibilityConverter}}"
               Style="{StaticResource PhoneTextLargeStyle}"
               TextWrapping="Wrap"

@@ -1,11 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Xml.Linq;
+﻿using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Tests.Misc;
-using Catrobat.IDE.Tests.Misc.Storage;
+using Catrobat.IDE.Tests.Services.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Tests.Tests.Data
@@ -20,14 +17,14 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void ReflectionWriteReadTest1()
+        public async Task ReflectionWriteReadTest1()
         {
             const string savePath = "/ReflectionWriteReadTest1/project.xml";
 
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
 
-            project1.Save(savePath);
+            await project1.Save(savePath);
 
             string xml1;
             using (IStorage storage = new StorageTest())

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Core.Services
 {
     public interface IImageResizeService
     {
-        PortableImage ResizeImage(PortableImage image, int maxWidthHeight);
+        Task<PortableImage> ResizeImage(PortableImage image, int maxWidthHeight);
 
-        PortableImage ResizeImage(PortableImage image, int newWidth, int newHeight);
+        Task<PortableImage> ResizeImage(PortableImage image, int newWidth, int newHeight);
     }
 }

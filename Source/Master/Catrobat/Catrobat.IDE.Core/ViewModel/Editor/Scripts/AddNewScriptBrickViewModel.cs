@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Bricks;
 using Catrobat.IDE.Core.CatrobatObjects.Scripts;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
 
         private BrickCategory _selectedBrickCategory;
         private ScriptBrickCollection _receivedScriptBrickCollection;
-        
+
         private BrickCollection _brickCollection;
         private int _firstVisibleScriptBrickIndex, _lastVisibleScriptBrickIndex;
         private DataObject _selectedBrick;
@@ -106,8 +106,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
 
         public RelayCommand OnLoadBrickViewCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand { get; private set; }
-
         #endregion
 
         #region Actions
@@ -170,56 +168,49 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
 
 
                 ServiceLocator.NavigationService.RemoveBackEntry();
-                ServiceLocator.NavigationService.NavigateBack();
+                base.GoBackAction();
 
                 _isAdding = false;
             }
         }
 
-        private void OnLoadBrickViewAction()
+        private async void OnLoadBrickViewAction()
         {
-            //var app = (App)Application.Current;
+            var actions = ServiceLocator.ActionTemplateService.GetActionTemplatesForCategry(_selectedBrickCategory);
 
-            IsControlVisible = false;
-            IsLookVisible = false;
-            IsMovementVisible = false;
-            IsSoundVisible = false;
-            IsVariableVisible = false;
+            BrickCollection = new BrickCollection();
 
-            switch (_selectedBrickCategory)
+            var actionsToLoadAsync = new BrickCollection();
+            var actionsToLoadImmediately = new BrickCollection();
+
+            int count = 0;
+            foreach (var action in actions)
             {
-                case BrickCategory.Control:
-                    IsControlVisible = true;
-                    //BrickCollection = app.Resources["ScriptBrickAddDataControl"] as BrickCollection;
-                    break;
+                if (count <= 6)
+                    actionsToLoadImmediately.Add(action);
+                else
+                    actionsToLoadAsync.Add(action);
+            }
 
-                case BrickCategory.Looks:
-                    IsLookVisible = true;
+            await Task.Run(() => ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                foreach (var action in actionsToLoadImmediately)
+                {
+                    BrickCollection.Add(action);
+                }
+            }));
 
-                    //BrickCollection = app.Resources["ScriptBrickAddDataLook"] as BrickCollection;
-                    break;
-
-                case BrickCategory.Motion:
-                    IsMovementVisible = true;
-
-                    //BrickCollection = app.Resources["ScriptBrickAddDataMovement"] as BrickCollection;
-                    break;
-
-                case BrickCategory.Sounds:
-                    IsSoundVisible = true;
-
-                    //BrickCollection = app.Resources["ScriptBrickAddDataSound"] as BrickCollection;
-                    break;
-                case BrickCategory.Variables:
-                    IsVariableVisible = true;
-                    //BrickCollection = app.Resources["ScriptBrickAddDataVariables"] as BrickCollection;
-                    break;
+            foreach (var action in actionsToLoadAsync)
+            {
+                await Task.Run(() => ServiceLocator.DispatcherService.RunOnMainThread(() =>
+                    BrickCollection.Add(action)));
             }
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            base.GoBackAction();
         }
 
         #endregion
@@ -244,7 +235,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Scripts
         {
             AddNewScriptBrickCommand = new RelayCommand<DataObject>(AddNewScriptBrickAction);
             OnLoadBrickViewCommand = new RelayCommand(OnLoadBrickViewAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<List<Object>>>(this, ViewModelMessagingToken.ScriptBrickCollectionListener, ReceiveScriptBrickCollectionMessageAction);
             Messenger.Default.Register<GenericMessage<BrickCategory>>(this, ViewModelMessagingToken.ScriptBrickCategoryListener, ScriptBrickCategoryReceivedMessageAction);

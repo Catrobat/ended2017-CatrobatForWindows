@@ -1,23 +1,22 @@
-﻿using System.Linq;
-using System.Xml.Linq;
-using Catrobat.IDE.Core.Utilities.Helpers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.SampleData;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace Catrobat.IDE.Tests.Tests.Data
 {
     [TestClass]
     public class XPathHelperTests
     {
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
         {
             TestHelper.InitializeTests();
         }
 
         [TestMethod,TestCategory("GatedTests")]
-        public void GetElementTest()
+        public void XPathHelperTests_GetElement()
         {
             var document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");
 
@@ -37,7 +36,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod,TestCategory("GatedTests")]
-        public void GetXPathTest()
+        public void XPathHelperTests_GetXPath()
         {
             var document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");
 

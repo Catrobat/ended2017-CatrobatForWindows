@@ -4,7 +4,6 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -221,15 +220,15 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             }
 
             ResetViewModel();
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
         private void AddVariableAction()
         {
             if (IsLocalView)
-                ServiceLocator.NavigationService.NavigateTo(typeof(AddNewLocalVariableViewModel));
+                ServiceLocator.NavigationService.NavigateTo<AddNewLocalVariableViewModel>();
             else
-                ServiceLocator.NavigationService.NavigateTo(typeof(AddNewGlobalVariableViewModel));
+                ServiceLocator.NavigationService.NavigateTo<AddNewGlobalVariableViewModel>();
         }
 
         private void DeleteVariableAction()
@@ -252,7 +251,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             var message = new GenericMessage<UserVariable>(selectedVariable);
             Messenger.Default.Send(message, ViewModelMessagingToken.SelectedUserVariableChangedListener);
 
-            ServiceLocator.NavigationService.NavigateTo(typeof(ChangeVariableViewModel));
+            ServiceLocator.NavigationService.NavigateTo<ChangeVariableViewModel>();
+        }
+
+        protected override void GoBackAction()
+        {
+            ResetViewModel();
+            base.GoBackAction();
         }
 
         #endregion

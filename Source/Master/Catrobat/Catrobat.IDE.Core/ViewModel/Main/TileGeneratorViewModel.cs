@@ -1,5 +1,5 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects;
-using GalaSoft.MvvmLight;
+using Catrobat.IDE.Core.Services;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace Catrobat.IDE.Core.ViewModel.Main
@@ -38,6 +38,11 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         #region Actions
 
+        protected override void GoBackAction()
+        {
+            ResetViewModel();
+            base.GoBackAction();
+        }
 
         #endregion
 
@@ -52,7 +57,6 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         public TileGeneratorViewModel()
         {
-
             Messenger.Default.Register<GenericMessage<ProjectDummyHeader>>(this,
                  ViewModelMessagingToken.PinProjectHeaderListener, PinProjectHeaderChangedAction);
         }

@@ -1,33 +1,51 @@
-﻿using System.Windows.Media.Imaging;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Phone.Controls.FormulaControls;
 
 namespace Catrobat.IDE.Phone.Services
 {
     public class ImageResizeServicePhone : IImageResizeService
     {
-        public PortableImage ResizeImage(PortableImage image, int maxWidthHeight)
+        public Task<PortableImage> ResizeImage(PortableImage image, int maxWidthHeight)
         {
-            var bitmap = new WriteableBitmap(image.Width, image.Height);
-            bitmap.FromByteArray(image.Data);
+            var bitmapSource = (BitmapSource)image.ImageSource;
+            var bitmap = new WriteableBitmap(bitmapSource);
+            //bitmap.FromByteArray(image.Data);
 
             var resizedImage = ResizeImage(bitmap, maxWidthHeight);
-            var resizedPortableImage = new PortableImage(resizedImage.ToByteArray(), resizedImage.PixelWidth, resizedImage.PixelHeight);
+            var resizedPortableImage = new PortableImage(resizedImage.PixelWidth, resizedImage.PixelHeight);
 
-            return resizedPortableImage;
+            return Task.Run(() => resizedPortableImage);
         }
 
-        public PortableImage ResizeImage(PortableImage image, int newWidth, int newHeight)
+
+        private readonly Semaphore _semaphore = new Semaphore(0, 1);
+        private PortableImage _resizedImage = null;
+        public Task<PortableImage> ResizeImage(PortableImage image, int newWidth, int newHeight)
         {
+            ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            {
+                var bitmapSource = (BitmapSource)image.ImageSource;
+                var bitmap = new WriteableBitmap(bitmapSource);
 
-            var bitmap = new WriteableBitmap(image.Width, image.Height);
-            bitmap.FromByteArray(image.Data);
+                var resizedImage = bitmap.Resize(newWidth, newHeight, WriteableBitmapExtensions.Interpolation.Bilinear);
+                var resizedPortableImage = new PortableImage(resizedImage)
+                {
+                    Width = resizedImage.PixelWidth,
+                    Height = resizedImage.PixelHeight
+                };
 
-            var resizedImage = bitmap.Resize(newWidth, newHeight, WriteableBitmapExtensions.Interpolation.Bilinear);
+                _resizedImage = resizedPortableImage;
 
-            var resizedPortableImage = new PortableImage(resizedImage.ToByteArray(), resizedImage.PixelWidth, resizedImage.PixelHeight);
+                _semaphore.Release();
+            });
 
-            return resizedPortableImage;
+            _semaphore.WaitOne();
+
+            return Task.Run(() => _resizedImage);
         }
 
         private static WriteableBitmap ResizeImage(WriteableBitmap image, int maxWidthHeight)

@@ -20,14 +20,14 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void ReflectionWriteReadTest1()
+        public async void ReflectionWriteReadTest1()
         {
             const string savePath = "/ReflectionWriteReadTest1/project.xml";
 
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project1 = projectgenerator.GenerateProject();
 
-            project1.Save(savePath);
+            await project1.Save(savePath);
 
             string xml1;
             using (IStorage storage = new StorageTest())

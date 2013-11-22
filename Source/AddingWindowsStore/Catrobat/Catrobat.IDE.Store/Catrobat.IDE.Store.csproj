@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Catrobat.IDE.Store</RootNamespace>
     <AssemblyName>Catrobat.IDE.Store</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -112,12 +112,50 @@
     <ProjectReference Include="..\Catrobat.IDE.Core\Catrobat.IDE.Core.csproj">
       <Project>{bca5086e-499a-4507-aa9b-a55d7e534ef7}</Project>
       <Name>Catrobat.IDE.Core</Name>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppStore.cs" />
+    <Compile Include="AppCoreDesignStatic.cs" />
+    <Compile Include="Common\NavigationHelper.cs" />
+    <Compile Include="Common\ObservableDictionary.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Controls\AppBar\EditorAppBar.xaml.cs">
+      <DependentUpon>EditorAppBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BricksControls\MasterBrick.cs" />
+    <Compile Include="Controls\BricksControls\NormalBrick.cs" />
+    <Compile Include="Controls\Buttons\ScreenshotButton.cs" />
+    <Compile Include="Controls\FormulaControls\FormulaButton.xaml.cs">
+      <DependentUpon>FormulaButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FormulaControls\VariableButton.xaml.cs">
+      <DependentUpon>VariableButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ListView\BindableGridView.xaml.cs">
+      <DependentUpon>BindableGridView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ListView\GridViewEx.cs" />
+    <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
+      <DependentUpon>ListPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Pages\PageHeaderControl.xaml.cs">
+      <DependentUpon>PageHeaderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Projects\LocalProjectControl.xaml.cs">
+      <DependentUpon>LocalProjectControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\NativeConverters\NativeImageSquareConverter.cs" />
+    <Compile Include="Converters\PortableConverters.cs" />
+    <Compile Include="Converters\PortableValueConverterStore.cs" />
     <Compile Include="Services\ColorConversionServiceStore.cs" />
     <Compile Include="Services\CultureServiceStore.cs" />
     <Compile Include="Services\DispatcherServiceStore.cs" />
@@ -133,18 +171,168 @@
     <Compile Include="Services\ShareServiceStore.cs" />
     <Compile Include="Services\SoundPlayerServiceStore.cs" />
     <Compile Include="Services\SoundRecorderServiceStore.cs" />
+    <Compile Include="Services\Storage\ResourceLoaderFactoryStore.cs" />
+    <Compile Include="Services\Storage\ResourcesStore.cs" />
+    <Compile Include="Services\Storage\StorageFactoryStore.cs" />
+    <Compile Include="Services\Storage\StorageStore.cs" />
     <Compile Include="Services\SystemInformationServiceStore.cs" />
-    <Compile Include="Videos\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Content\Templates\ActionTemplateSelector.cs" />
+    <Compile Include="Utilities\WritableBitmapExtensions\ToolStackCRCLib.cs" />
+    <Compile Include="Utilities\WritableBitmapExtensions\ToolStackPNGWriterLib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml.cs">
+      <DependentUpon>NewCostumeSourceSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\EditorLoadingView.xaml.cs">
+      <DependentUpon>EditorLoadingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sprites\AddNewSpriteView.xaml.cs">
+      <DependentUpon>AddNewSpriteView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Editor\Sprites\ChangeSpriteView.xaml.cs">
+      <DependentUpon>ChangeSpriteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Editor\Sprites\SpriteEditorView.xaml.cs">
+      <DependentUpon>SpriteEditorView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Editor\Sprites\SpritesView.xaml.cs">
+      <DependentUpon>SpritesView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Main\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="Catrobat.IDE.Store_TemporaryKey.pfx" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.add.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.back.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.basecircle.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.cancel.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.check.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.close.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.copy.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.delete.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.download.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.edit.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.favs.addto.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.favs.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.camera.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.email.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.search.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.settings.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.feature.video.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.folder.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.home.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.minus.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.new.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.next.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.overflowdots.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.questionmark.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.refresh.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.save.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.share.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.stop.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.sync.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.transport.ff.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.transport.pause.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.transport.play.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.transport.rew.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\appbar.upload.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\dark\DarkIcons.dll" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.add.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.back.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.basecircle.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.cancel.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.check.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.close.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.copy.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.delete.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.download.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.edit.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.favs.addto.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.favs.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.camera.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.email.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.search.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.settings.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.feature.video.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.folder.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.home.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.minus.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.new.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.next.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.overflowdots.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.questionmark.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.refresh.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.save.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.share.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.stop.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.sync.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.transport.ff.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.transport.pause.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.transport.play.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.transport.rew.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\appbar.upload.rest.png" />
+    <Content Include="Content\Images\ApplicationBar\light\LightIcons.dll" />
+    <Content Include="Content\Images\Application\ApplicationIcon.png" />
+    <Content Include="Content\Images\Application\Background.png" />
+    <Content Include="Content\Images\Application\Indicators\check.png" />
+    <Content Include="Content\Images\Application\Indicators\circle.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\CroppedImages\MainViewPanorama_cats_blue_small.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\CroppedImages\MainViewPanorama_cats_pink_small.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\CroppedImages\MainViewPanorama_strings_small.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\empty_background.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_blue.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_cats_pink.png" />
+    <Content Include="Content\Images\Application\MainViewPanoramaBackgrounds\MainViewPanorama_strings.png" />
+    <Content Include="Content\Images\Application\pocketcode01.png" />
+    <Content Include="Content\Images\Application\Search.png" />
+    <Content Include="Content\Images\ImageButtons\add_dark.png" />
+    <Content Include="Content\Images\ImageButtons\add_light.png" />
+    <Content Include="Content\Images\ImageButtons\add_pressed_dark.png" />
+    <Content Include="Content\Images\ImageButtons\add_pressed_light.png" />
+    <Content Include="Content\Images\ImageButtons\copy_dark.png" />
+    <Content Include="Content\Images\ImageButtons\copy_light.png" />
+    <Content Include="Content\Images\ImageButtons\copy_pressed_dark.png" />
+    <Content Include="Content\Images\ImageButtons\copy_pressed_light.png" />
+    <Content Include="Content\Images\ImageButtons\delete_dark.png" />
+    <Content Include="Content\Images\ImageButtons\delete_light.png" />
+    <Content Include="Content\Images\ImageButtons\delete_pressed_dark.png" />
+    <Content Include="Content\Images\ImageButtons\delete_pressed_light.png" />
+    <Content Include="Content\Images\ImageButtons\edit_dark.png" />
+    <Content Include="Content\Images\ImageButtons\edit_light.png" />
+    <Content Include="Content\Images\ImageButtons\edit_pressed_dark.png" />
+    <Content Include="Content\Images\ImageButtons\edit_pressed_light.png" />
+    <Content Include="Content\Images\ImageButtons\upload_dark.png" />
+    <Content Include="Content\Images\ImageButtons\upload_light.png" />
+    <Content Include="Content\Images\ImageButtons\upload_pressed_dark.png" />
+    <Content Include="Content\Images\ImageButtons\upload_pressed_light.png" />
+    <Content Include="Content\Images\Misc\AudioLibrary.png" />
+    <Content Include="Content\Images\Misc\AudioRecorder.png" />
+    <Content Include="Content\Images\Misc\camera.png" />
+    <Content Include="Content\Images\Misc\EditImage.png" />
+    <Content Include="Content\Images\Misc\Gallery.png" />
+    <Content Include="Content\Images\Misc\InProcess.png" />
+    <Content Include="Content\Images\Pocketcode.svg" />
+    <Content Include="Content\Images\Screenshot\NoScreenshot.png" />
+    <Content Include="Content\Images\Share\skydrive.jpg" />
+    <Content Include="Content\Programs\Default\automatic_screenshot.png" />
+    <Content Include="Content\Programs\Default\Looks\28226cf909b0e5deb2d275b73a96fbec_rain.png" />
+    <Content Include="Content\Programs\Default\Looks\52fb8540d8d751880ab012e26c86e1f5_background.png" />
+    <Content Include="Content\Programs\Default\Looks\5c8b67f427443c1bb5c50a4aeb007949_sun.png" />
+    <Content Include="Content\Programs\Default\Looks\7fe260ebb6c78fa3f0d6afaffb5a7759_water.png" />
+    <Content Include="Content\Programs\Default\Looks\c96b5d3adc1d4b199fc76fc518deae86_cloud2.png" />
+    <Content Include="Content\Programs\Default\Looks\cd8435e8bf34b6be6c0fdf700f03e01e_cat.png" />
+    <Content Include="Content\Programs\Default\Looks\e8b139ca83c443159b464c26d8483bae_cloud1.png" />
+    <Content Include="Content\Resources\DesignTime\screenshot.png" />
     <Content Include="Fonts\LiveSymbol.ttf" />
+    <Content Include="Content\Resources\SampleProjects\stick.catrobat" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -158,25 +346,101 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Videos\MainPage.xaml">
+    <Page Include="Content\Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Templates\DefaultStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Controls\AppBar\EditorAppBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Buttons\ScreenshotButtonTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\FormulaButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\VariableButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ListPicker\ListPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ListView\BindableGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Pages\PageHeaderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Projects\LocalProjectControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Converters\ConverterResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Templates\ScriptBrickTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Costumes\NewCostumeSourceSelectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\EditorLoadingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editor\Sprites\AddNewSpriteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editor\Sprites\ChangeSpriteView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Editor\Sprites\SpriteEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Editor\Sprites\SpritesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="GalaSoft.MvvmLight">
-      <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\netcore45\GalaSoft.MvvmLight.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight, Version=4.1.27.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\portable-net45+sl4+wp71+win8\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras">
-      <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\netcore45\GalaSoft.MvvmLight.Extras.dll</HintPath>
-    </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Platform.NetCore45">
-      <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\netcore45\GalaSoft.MvvmLight.Platform.NetCore45.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight.Platform">
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.2.0-rc1\lib\win81\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Live">
       <HintPath>..\packages\LiveSDK.5.5\WindowsXAML\Microsoft.Live.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Portable.CommonServiceLocator.1.2.2\lib\portable-net4+sl4+wp7+win8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
@@ -185,16 +449,68 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\win8\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Windows.UI.Interactivity">
-      <HintPath>..\packages\Windows.UI.Interactivity.1.3.0.0\lib\win8\Windows.UI.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="WriteableBitmapEx.WinRT">
       <HintPath>..\packages\WriteableBitmapEx.1.0.8.0\lib\NetCore45\WriteableBitmapEx.WinRT.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\Programs\Default\Sounds\" />
+    <Folder Include="Views\Editor\Scripts\" />
+    <Folder Include="Views\Editor\Sounds\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TFSBuild|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\TFSBuild\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TFSBuild|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\TFSBuild\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TFSBuild|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\TFSBuild\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TFSBuild|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\TFSBuild\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

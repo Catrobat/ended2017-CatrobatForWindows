@@ -38,6 +38,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TFSBuild|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\TFSBuild\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <None Include="Fonts\LiveSymbol.ttf" />
@@ -123,6 +132,8 @@
     <Compile Include="Services\IDispatcherService.cs" />
     <Compile Include="Services\IProjectGenerator.cs" />
     <Compile Include="Services\IShareService.cs" />
+    <Compile Include="Services\IActionTemplateService.cs" />
+    <Compile Include="Services\ISoundService.cs" />
     <Compile Include="UI\Converters\ActiveThemeBrushConverter.cs" />
     <Compile Include="UI\Converters\BoolOpacityConverter.cs" />
     <Compile Include="UI\Converters\BoolPlayButtonStateConverter.cs" />
@@ -134,12 +145,15 @@
     <Compile Include="UI\Converters\IntPixelConverter.cs" />
     <Compile Include="UI\Converters\IntStringConverter.cs" />
     <Compile Include="UI\Converters\NoScreenshotConverter.cs" />
+    <Compile Include="UI\Converters\NullVisibilityConverter.cs" />
     <Compile Include="UI\Converters\NullIntCountConverter.cs" />
     <Compile Include="UI\Converters\NullVariableConverter.cs" />
     <Compile Include="UI\Converters\SecondStringMillisecondConverter.cs" />
     <Compile Include="UI\Converters\VariableButtonVisibilityConverter.cs" />
     <Compile Include="UI\Formula\IPortableFormulaButton.cs" />
     <Compile Include="UI\Formula\IPortableUIFormula.cs" />
+    <Compile Include="UI\ManualImageCache.cs" />
+    <Compile Include="UI\NullBoolConverter.cs" />
     <Compile Include="UI\PortableUI\IPortableValueConverter.cs" />
     <Compile Include="UI\IPlayPauseButton.cs" />
     <Compile Include="UI\PlayPauseStateCommandArguments.cs" />
@@ -203,7 +217,7 @@
     <Compile Include="Services\IImageResizeService.cs" />
     <Compile Include="Services\IImageSourceConversionService.cs" />
     <Compile Include="Services\INavigationService.cs" />
-    <Compile Include="Services\INotifictionService.cs" />
+    <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Services\IPictureService.cs" />
     <Compile Include="Services\IPlayerLauncherService.cs" />
     <Compile Include="Services\IProjectImporterService.cs" />
@@ -221,6 +235,7 @@
     <Compile Include="UI\ImageSizeEntry.cs" />
     <Compile Include="UI\ImageSizeEntryCollection.cs" />
     <Compile Include="UI\NullItemCollection.cs" />
+    <Compile Include="UI\StaticTheme.cs" />
     <Compile Include="UI\Theme.cs" />
     <Compile Include="UI\ThemeChooser.cs" />
     <Compile Include="UI\VariableConteiner.cs" />
@@ -245,8 +260,10 @@
     <Compile Include="VersionConverter\CatrobatVersionElementRenameEntry.cs" />
     <Compile Include="VersionConverter\CatrobatVersionPair.cs" />
     <Compile Include="VersionConverter\CatrobatVersionPropertyRenameEntry.cs" />
+    <Compile Include="VersionConverter\VersionConverterResult.cs" />
     <Compile Include="VersionConverter\Versions\CatrobatVersion091ToWin091.cs" />
     <Compile Include="Utilities\Helpers\XElementExtensions.cs" />
+    <Compile Include="ViewModel\AsyncRelayCommand.cs" />
     <Compile Include="ViewModel\Editor\Costumes\ChangeCostumeViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\CostumeNameChooserViewModel.cs" />
     <Compile Include="ViewModel\Editor\Costumes\CostumeSavingViewModel.cs" />
@@ -257,7 +274,7 @@
     <Compile Include="ViewModel\Editor\Formula\ChangeVariableViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\FormulaEditorViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\VariableSelectionViewModel.cs" />
-    <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
+    <Compile Include="ViewModel\Main\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\AddNewScriptBrickViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\NewBroadcastMessageViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\ScriptBrickCategoryViewModel.cs" />
@@ -284,15 +301,16 @@
     <Compile Include="ViewModel\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModel\Share\ShareProjectServiceSelectionViewModel.cs" />
     <Compile Include="ViewModel\Share\UploadToSkyDriveViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\ViewModelMessagingToken.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">
-      <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\portable-net45+sl4+wp71+win8\GalaSoft.MvvmLight.dll</HintPath>
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.2.30.1\lib\portable-net45+sl5+wp8+win8\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Extras">
-      <HintPath>..\packages\Portable.MvvmLightLibs.4.1.27.6\lib\portable-net45+sl4+wp71+win8\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.2.30.1\lib\portable-net45+sl5+wp8+win8\GalaSoft.MvvmLight.Extras.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\Portable.CommonServiceLocator.1.2.2\lib\portable-net4+sl4+wp7+win8\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -321,7 +339,9 @@
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />

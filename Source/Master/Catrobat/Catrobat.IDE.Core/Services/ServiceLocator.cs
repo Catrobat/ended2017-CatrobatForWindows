@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.ViewModel;
 
 namespace Catrobat.IDE.Core.Services
 {
@@ -14,7 +17,7 @@ namespace Catrobat.IDE.Core.Services
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
         public static INavigationService NavigationService
-        { get { return GetInstance<INavigationService>(); } }
+        { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
@@ -91,8 +94,8 @@ namespace Catrobat.IDE.Core.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public static INotifictionService NotifictionService
-        { get { return GetInstance<INotifictionService>(); } }
+        public static INotificationService NotifictionService
+        { get { return GetInstance<INotificationService>(); } }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
@@ -118,13 +121,26 @@ namespace Catrobat.IDE.Core.Services
         public static IPortableUIElementConversionService PortableUIElementConversionService
         { get { return GetInstance<IPortableUIElementConversionService>(); } }
 
-        public static object ViewModelLocator { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static IActionTemplateService ActionTemplateService
+        { get { return GetInstance<IActionTemplateService>(); } }
 
-        public static object ThemeChooser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static ISoundService SoundService
+        { get { return GetInstance<ISoundService>(); } }
 
-        public static object LocalizedStrings { get; set; }
 
-        
+        public static ViewModelLocator ViewModelLocator { get; set; }
+
+        public static ThemeChooser ThemeChooser { get; set; }
+
+        public static LocalizedStrings LocalizedStrings { get; set; }
+
+
 
         private static readonly Dictionary<Type, object> Instances = new Dictionary<Type, object>();
 
@@ -134,52 +150,76 @@ namespace Catrobat.IDE.Core.Services
             {
                 if (mode == TypeCreationMode.Lazy)
                 {
-                    Instances.Add(typeof(T), null);
+                    if (!Instances.ContainsKey(typeof(T)))
+                        Instances.Add(typeof(T), null);
                 }
                 else if (mode == TypeCreationMode.Normal)
                 {
+                    if (!Instances.ContainsKey(typeof(T)))
+                        Instances.Remove(typeof(T));
+
                     Instances.Add(typeof(T), Activator.CreateInstance<T>());
                 }
             }
         }
 
-        public static T GetInstance<T>()
+        public static void Register(object objectToRegister)
+        {
+            lock (Instances)
+            {
+                var type = objectToRegister.GetType();
+                if (Instances.ContainsKey(type))
+                    Instances.Remove(type);
+
+                Instances.Add(type, objectToRegister);
+            }
+        }
+
+        public static object GetInstance(Type type)
         {
             lock (Instances)
             {
                 object instance = null;
                 bool isInDictionary = false;
+                Type registeredType = type;
+
 
                 foreach (var pair in Instances)
                 {
-                    if (pair.Key.GetTypeInfo().BaseType == typeof(T)
-                        || pair.Key == typeof(T)
-                        || pair.Key.GetTypeInfo().ImplementedInterfaces.Contains(typeof(T)))
+                    if (pair.Key.GetTypeInfo().BaseType == type ||
+                        pair.Key == type || 
+                        pair.Key.GetTypeInfo().ImplementedInterfaces.Contains(type))
                     {
                         instance = pair.Value;
 
                         isInDictionary = instance != null;
 
                         if (!isInDictionary)
-                            instance = Activator.CreateInstance(pair.Key);
+                        {
+                            registeredType = pair.Key;
+                            instance = Activator.CreateInstance(registeredType);
+                        }
 
                         break;
                     }
                 }
 
                 if (instance == null)
-                    throw new Exception("Type " + typeof(T).GetTypeInfo().Name + " is not registered.");
+                    throw new Exception("Type " + type.GetTypeInfo().Name + " is not registered.");
 
                 if (!isInDictionary)
-                    Instances[typeof(T)] = instance;
+                    Instances[registeredType] = instance;
 
-                return (T)instance;
+                return instance;
             }
         }
 
+        public static T GetInstance<T>()
+        {
+            return (T)GetInstance(typeof(T));
+        }
 
-
-        internal static void UnRegisterAll()
+        public static void UnRegisterAll()
         {
             Instances.Clear();
         }

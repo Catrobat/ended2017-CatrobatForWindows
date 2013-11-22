@@ -1,7 +1,5 @@
-﻿using Catrobat.IDE.Core;
-using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -11,8 +9,8 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
     {
         #region Private Members
 
-        private Project _selectedProjectToEdit;
-        private ProjectDummyHeader _selectedProjectHeaderToEdit;
+        private Project _selectedProject;
+        private ProjectDummyHeader _selectedProjectHeader;
         private string _projectName;
         private string _projectDescription;
         private Project _currentProject;
@@ -31,31 +29,31 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
             }
         }
 
-        public Project SelectedProjectToEdit
+        public Project SelectedProject
         {
-            get { return _selectedProjectToEdit; }
+            get { return _selectedProject; }
             set
             {
-                if (value == _selectedProjectToEdit)
+                if (value == _selectedProject)
                 {
                     return;
                 }
-                _selectedProjectToEdit = value;
-                RaisePropertyChanged(() => SelectedProjectToEdit);
+                _selectedProject = value;
+                RaisePropertyChanged(() => SelectedProject);
             }
         }
 
-        public ProjectDummyHeader SelectedProjectHeaderToEdit
+        public ProjectDummyHeader SelectedProjectHeader
         {
-            get { return _selectedProjectHeaderToEdit; }
+            get { return _selectedProjectHeader; }
             set
             {
-                if (value == _selectedProjectHeaderToEdit)
+                if (value == _selectedProjectHeader)
                 {
                     return;
                 }
-                _selectedProjectHeaderToEdit = value;
-                RaisePropertyChanged(() => SelectedProjectHeaderToEdit);
+                _selectedProjectHeader = value;
+                RaisePropertyChanged(() => SelectedProjectHeader);
             }
         }
 
@@ -90,8 +88,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
 
         public RelayCommand CancelCommand { get; private set; }
 
-        public RelayCommand ResetViewModelCommand { get; private set; }
-
         #endregion
 
         #region CommandCanExecute
@@ -105,34 +101,36 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
 
         #region Actions
 
-        private void SaveAction()
+        private async void SaveAction()
         {
-            if (CurrentProject.ProjectDummyHeader == SelectedProjectHeaderToEdit)
+            if (CurrentProject.ProjectDummyHeader == SelectedProjectHeader)
             {
+                CurrentProject.ProjectDummyHeader.ProjectName = ProjectName;
                 CurrentProject.ProjectHeader.ProgramName = ProjectName;
                 CurrentProject.ProjectHeader.Description = ProjectDescription;
             }
             else
             {
-                SelectedProjectHeaderToEdit.ProjectName = ProjectName;
-                SelectedProjectToEdit.ProjectHeader.ProgramName = ProjectName;
-                SelectedProjectToEdit.ProjectHeader.Description = ProjectDescription;
-                SelectedProjectToEdit.Save();
+                SelectedProjectHeader.ProjectName = ProjectName;
+                SelectedProject.ProjectHeader.ProgramName = ProjectName;
+                SelectedProject.ProjectHeader.Description = ProjectDescription;
+                await SelectedProject.Save();
             }
 
+            base.GoBackAction();
 
-
-            ServiceLocator.NavigationService.NavigateBack();
+            await App.SaveContext(CurrentProject);
         }
 
         private void CancelAction()
         {
-            ServiceLocator.NavigationService.NavigateBack();
+            base.GoBackAction();
         }
 
-        private void ResetViewModelAction()
+        protected override void GoBackAction()
         {
             ResetViewModel();
+            base.GoBackAction();
         }
 
         #endregion
@@ -144,13 +142,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
             CurrentProject = message.Content;
         }
 
-        private void ChangeProjectNameMessageAction(GenericMessage<ProjectDummyHeader> message)
+        private async void ChangeProjectNameMessageAction(GenericMessage<ProjectDummyHeader> message)
         {
-            SelectedProjectHeaderToEdit = message.Content;
+            SelectedProjectHeader = message.Content;
 
-            SelectedProjectToEdit = CatrobatContext.LoadNewProjectByNameStatic(SelectedProjectHeaderToEdit.ProjectName);
-            ProjectName = SelectedProjectToEdit.ProjectHeader.ProgramName;
-            ProjectDescription = SelectedProjectToEdit.ProjectHeader.Description;
+            SelectedProject = await CatrobatContext.LoadNewProjectByNameStatic(SelectedProjectHeader.ProjectName);
+            ProjectName = SelectedProject.ProjectHeader.ProgramName;
+            ProjectDescription = SelectedProject.ProjectHeader.Description;
         }
 
         #endregion
@@ -159,7 +157,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor
         {
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
-            ResetViewModelCommand = new RelayCommand(ResetViewModelAction);
 
             Messenger.Default.Register<GenericMessage<ProjectDummyHeader>>(this, 
                 ViewModelMessagingToken.ChangeLocalProjectListener, ChangeProjectNameMessageAction);

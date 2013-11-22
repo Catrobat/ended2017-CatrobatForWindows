@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -14,15 +15,14 @@ namespace Catrobat.IDE.Core.Resources
     {
         private readonly Dictionary<string, string> _sampleProjectNames = new Dictionary<string, string>
         {
-            {"Whack_A_Mole.catrobat", "Whack A Mole"},
             {"stick.catrobat", "stick"}
         };
 
-        public void LoadSampleProjects()
+        public async Task LoadSampleProjects()
         {
             using (var storage = StorageSystem.GetStorage())
             {
-                storage.DeleteDirectory("");
+                await storage.DeleteDirectoryAsync("");
             }
 
             foreach (KeyValuePair<string, string> pair in _sampleProjectNames)
@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Core.Resources
                 try
                 {
                     var resourceLoader = ServiceLocator.ResourceLoaderFactory.CreateResourceLoader();
-                    resourceStream = resourceLoader.OpenResourceStream(ResourceScope.Resources, path);
+                    resourceStream = await resourceLoader.OpenResourceStreamAsync(ResourceScope.Resources, path);
                     
 
                     if (resourceStream != null)
@@ -45,21 +45,21 @@ namespace Catrobat.IDE.Core.Resources
 
                         using (var storage = StorageSystem.GetStorage())
                         {
-                            if (!storage.DirectoryExists(projectFolderPath))
+                            if (!await storage.DirectoryExistsAsync(projectFolderPath))
                             {
-                                CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContextBase.ProjectsPath + "/" + projectName);
+                                await CatrobatZipService.UnzipCatrobatPackageIntoIsolatedStorage(resourceStream, CatrobatContextBase.ProjectsPath + "/" + projectName);
                             }
                         }
 
                         using (var storage = StorageSystem.GetStorage())
                         {
                             var textFilePath = Path.Combine(CatrobatContextBase.ProjectsPath, projectName, Project.ProjectCodePath);
-                            var xml = storage.ReadTextFile(textFilePath);
+                            var xml = await storage.ReadTextFileAsync(textFilePath);
 
                             var project = new Project(xml);
                             project.SetProgramName(projectName);
 
-                            project.Save();
+                            await project.Save();
                         }
                     }
                 }

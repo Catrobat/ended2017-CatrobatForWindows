@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
 using System.Windows;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -23,48 +25,73 @@ using ServiceLocator = Microsoft.Practices.ServiceLocation.ServiceLocator;
 
 namespace Catrobat.IDE.Core.ViewModel
 {
-    public class ViewModelLocator
+    public class ViewModelLocator : INotifyPropertyChanged
     {
-        static ViewModelLocator()
+        public event PropertyChangedEventHandler PropertyChanged;
+        public static bool IsInitialized = false;
+
+        public ViewModelLocator()
         {
-            Core.Services.ServiceLocator.Register<MainViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<AddNewProjectViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<UploadProjectViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<UploadProjectLoadingViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<UploadProjectLoginViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<SoundRecorderViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<SettingsViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<SettingsBrickViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<SettingsLanguageViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<SettingsThemeViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<CostumeNameChooserViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<ChangeCostumeViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<NewSoundSourceSelectionViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<ChangeSoundViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<SoundNameChooserViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<AddNewSpriteViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<ChangeSpriteViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<ProjectSettingsViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<ProjectImportViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<OnlineProjectViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<NewBroadcastMessageViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<ScriptBrickCategoryViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<AddNewScriptBrickViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<FormulaEditorViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<PlayerLauncherViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<TileGeneratorViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<VariableSelectionViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<AddNewGlobalVariableViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<AddNewLocalVariableViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<ChangeVariableViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<SpritesViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<SpriteEditorViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<ShareProjectServiceSelectionViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<UploadToSkyDriveViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<NewCostumeSourceSelectionViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<CostumeSavingViewModel>(TypeCreationMode.Normal);
-            Core.Services.ServiceLocator.Register<EditorLoadingViewModel>(TypeCreationMode.Normal);
+            RegisterViewModels();
         }
+
+        private void RegisterViewModels()
+        {
+            if (!IsInitialized)
+            {
+                IsInitialized = true;
+
+                Core.Services.ServiceLocator.Register<MainViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<AddNewProjectViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<UploadProjectViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<UploadProjectLoadingViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<UploadProjectLoginViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<SoundRecorderViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<SettingsViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<SettingsBrickViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<SettingsLanguageViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<SettingsThemeViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<CostumeNameChooserViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<ChangeCostumeViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<NewSoundSourceSelectionViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<ChangeSoundViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<SoundNameChooserViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<AddNewSpriteViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<ChangeSpriteViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<ProjectSettingsViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<ProjectImportViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<OnlineProjectViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<NewBroadcastMessageViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<ScriptBrickCategoryViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<AddNewScriptBrickViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<FormulaEditorViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<PlayerLauncherViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<TileGeneratorViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<VariableSelectionViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<AddNewGlobalVariableViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<AddNewLocalVariableViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<ChangeVariableViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<SpritesViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<SpriteEditorViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<ShareProjectServiceSelectionViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<UploadToSkyDriveViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<NewCostumeSourceSelectionViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<CostumeSavingViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<EditorLoadingViewModel>(TypeCreationMode.Normal);
+            }
+            
+        }
+
+        public void RaiseAppPropertiesChanged()
+        {
+            if (PropertyChanged != null)
+            {
+                var props = typeof(ViewModelLocator).GetRuntimeProperties();
+                    foreach (var prop in props)
+                        PropertyChanged.Invoke(this, new PropertyChangedEventArgs(prop.Name));
+            }
+        }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
@@ -480,5 +507,6 @@ namespace Catrobat.IDE.Core.ViewModel
         public static void Cleanup()
         {
         }
+
     }
 }
