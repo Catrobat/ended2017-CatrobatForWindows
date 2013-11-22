@@ -504,7 +504,10 @@ namespace Catrobat.IDE.Store.Services.Storage
                 switch (format)
                 {
                     case ImageFormat.Png:
-                        PNGWriter.WritePNG((WriteableBitmap)image.ImageSource, stream, 95);
+                            if (image.EncodedData != null)
+                                await image.EncodedData.CopyToAsync(stream);
+                            else
+                                PNGWriter.WritePNG((WriteableBitmap)image.ImageSource, stream, 95);
                         break;
                     case ImageFormat.Jpg:
                         throw new NotImplementedException();

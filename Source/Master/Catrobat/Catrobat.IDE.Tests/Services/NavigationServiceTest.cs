@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Tests.Services
@@ -37,7 +38,19 @@ namespace Catrobat.IDE.Tests.Services
             PageStackCount--;
         }
 
+        public void NavigateBackForPlatform(NavigationPlatform platform)
+        {
+            CurrentNavigationType = NavigationType.NavigateBack;
+            CurrentView = null;
+            PageStackCount--;
+        }
+
         public void RemoveBackEntry()
+        {
+            PageStackCount--;
+        }
+
+        public void RemoveBackEntryForPlatform(NavigationPlatform platform)
         {
             PageStackCount--;
         }

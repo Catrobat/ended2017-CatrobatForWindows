@@ -50,10 +50,10 @@ namespace Catrobat.IDE.Core.UI.PortableUI
                     IsLoaded = true;
 
                 if (!IsLoaded)
-                    return ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStreeam(null);
+                    return ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStream(null);
 
                 if (EncodedData != null && _nativeImageSource == null)
-                    _nativeImageSource = ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStreeam(EncodedData);
+                    _nativeImageSource = ServiceLocator.ImageSourceConversionService.ConvertFromEncodedStream(EncodedData);
 
                 if (_nativeImageSource != null)
                     return _nativeImageSource;
@@ -137,7 +137,7 @@ namespace Catrobat.IDE.Core.UI.PortableUI
 
         private bool IsLoading { get; set; }
 
-        public async Task WriateAsPng(string path)
+        public async Task WriteAsPng(string path)
         {
             using (var storage = StorageSystem.GetStorage())
             {

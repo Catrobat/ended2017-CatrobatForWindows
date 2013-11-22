@@ -3,9 +3,11 @@ using System.Collections.ObjectModel;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModel.Editor.Scripts;
 using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Store.Controls.ListView;
+using Catrobat.IDE.Store.Views.Editor.Scripts;
 
 namespace Catrobat.IDE.Store.Views.Editor.Sprites
 {
@@ -66,6 +68,12 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
         private void TileGeneratorFlyout_OnOpened(object sender, object e)
         {
             var viewModel = ServiceLocator.GetInstance<ChangeCostumeViewModel>();
+            viewModel.NavigationObject = (Flyout)sender;
+        }
+
+        private void NewAction_OnOpening(object sender, object e)
+        {
+            var viewModel = ServiceLocator.GetInstance<ScriptBrickCategoryViewModel>();
             viewModel.NavigationObject = (Flyout)sender;
         }
     }

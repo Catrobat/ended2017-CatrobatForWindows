@@ -45,19 +45,22 @@
             </Button.Template>
           </Button>
 
-          <Button Margin="0 5 0 0" HorizontalAlignment="Stretch" Command="{Binding RecorderCommand}">
+          <Button Margin="0 5 0 0" HorizontalAlignment="Stretch">
             <Button.Template>
               <ControlTemplate>
-                <Grid Background="{Binding Path=SelectedTheme.AccentColor2.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                <Grid>
+                  <Grid Background="{Binding Path=SelectedTheme.AccentColor2.NativeBrush, Source={StaticResource ThemeChooser}}" 
                     HorizontalAlignment="Stretch">
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                  </Grid.ColumnDefinitions>
-                  <misc:AudioRecorder ScaleFactor="0.10" Margin="30 15 15 15"></misc:AudioRecorder>
-                  <TextBlock Grid.Column="1" Margin="20 10 50 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <misc:AudioRecorder ScaleFactor="0.10" Margin="30 15 15 15"></misc:AudioRecorder>
+                    <TextBlock Grid.Column="1" Margin="20 10 50 10" VerticalAlignment="Center" HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_Recorded, Source={StaticResource LocalizedStrings}}" 
                            Style="{StaticResource SubheaderTextBlockStyle}" Foreground="White" />
+                  </Grid>
+                  <Grid Name="DisableButtonGrid" Background="#FF555555" Opacity="0.75"/>
                 </Grid>
               </ControlTemplate>
             </Button.Template>

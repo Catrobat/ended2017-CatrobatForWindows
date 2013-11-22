@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -177,9 +178,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
                 ServiceLocator.DispatcherService.RunOnMainThread(() =>
                 {
                     _receivedSelectedSprite.Costumes.Costumes.Add(costume);
+                    ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);
                     ServiceLocator.NavigationService.RemoveBackEntry();
-                    ServiceLocator.NavigationService.RemoveBackEntry();
-                    GoBackAction();
+                    ResetViewModel();
+                    ServiceLocator.NavigationService.NavigateBack(
+                        new List<NavigationPlatform>{NavigationPlatform.WindowsStore});
                 });
             }
             catch (Exception)

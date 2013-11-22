@@ -216,6 +216,9 @@
     <Compile Include="Views\Editor\EditorLoadingView.xaml.cs">
       <DependentUpon>EditorLoadingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Editor\Scripts\ScriptBrickCategoryView.xaml.cs">
+      <DependentUpon>ScriptBrickCategoryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Editor\Sounds\ChangeSoundView.xaml.cs">
       <DependentUpon>ChangeSoundView.xaml</DependentUpon>
     </Compile>
@@ -493,6 +496,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Editor\Scripts\ScriptBrickCategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Editor\Sounds\ChangeSoundView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -573,7 +580,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Programs\Default\Sounds\" />
-    <Folder Include="Views\Editor\Scripts\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

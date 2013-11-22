@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Windows.System;
@@ -10,6 +11,7 @@ namespace Catrobat.IDE.Store.Services
     public class NavigationServiceStore : INavigationService
     {
         private Frame _frame;
+        private int _removedBackEntryCount;
 
         public NavigationServiceStore(Frame frame)
         {
@@ -18,12 +20,14 @@ namespace Catrobat.IDE.Store.Services
 
         public void NavigateTo<T>()
         {
-            NavigateTo(typeof (T));
+            NavigateTo(typeof(T));
         }
 
         public void NavigateTo(Type type)
         {
-            if (type.GetTypeInfo().BaseType == typeof (Core.ViewModel.ViewModelBase))
+            NavigateBack();
+
+            if (type.GetTypeInfo().BaseType == typeof(Core.ViewModel.ViewModelBase))
             {
                 var viewModelInstance = (Core.ViewModel.ViewModelBase)ServiceLocator.GetInstance(type);
 
@@ -47,14 +51,43 @@ namespace Catrobat.IDE.Store.Services
             if (flyout != null)
                 flyout.Hide();
             else
-                _frame.GoBack();
+            {
+                _removedBackEntryCount++;
+                NavigateBack();
+            }
+        }
+
+        public void NavigateBackForPlatform(NavigationPlatform platform)
+        {
+            if (platform == NavigationPlatform.WindowsStore)
+            {
+                _removedBackEntryCount++;
+                NavigateBack();
+            }
+        }
+
+        private void NavigateBack()
+        {
+            while (_removedBackEntryCount > 0)
+            {
+                _removedBackEntryCount--;
+                if (CanGoBack)
+                    _frame.GoBack();
+            }
         }
 
         public void RemoveBackEntry()
         {
-            NavigateBack(null);
-            //_frame.RemoveBackEntry();
+            _removedBackEntryCount++;
         }
+
+
+        public void RemoveBackEntryForPlatform(NavigationPlatform platform)
+        {
+            if (platform == NavigationPlatform.WindowsStore)
+                _removedBackEntryCount++;
+        }
+
 
         public bool CanGoBack
         {
