@@ -1026,4 +1026,7 @@
   <data name="Main_SetActive" xml:space="preserve">
     <value>Set active</value>
   </data>
+  <data name="Main_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

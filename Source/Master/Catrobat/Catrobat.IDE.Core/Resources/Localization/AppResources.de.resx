@@ -968,4 +968,7 @@
   <data name="Main_SetActive" xml:space="preserve">
     <value>Auswählen</value>
   </data>
+  <data name="Main_Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
 </root>

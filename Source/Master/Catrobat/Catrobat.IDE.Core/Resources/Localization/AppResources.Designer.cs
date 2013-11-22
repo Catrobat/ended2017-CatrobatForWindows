@@ -2573,6 +2573,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Main_Settings {
+            get {
+                return ResourceManager.GetString("Main_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to enable/disable bricks.
         /// </summary>
         public static string Main_SettingsBricks {
