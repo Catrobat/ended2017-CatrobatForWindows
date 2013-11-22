@@ -9,7 +9,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-  <Border BorderThickness="2 2 0 0" BorderBrush="Black">
+  <Border BorderThickness="0 0 0 0" BorderBrush="Black">
     <Grid Grid.Column="2" Margin="20 10 20 10">
       <Grid.RowDefinitions>
         <RowDefinition />

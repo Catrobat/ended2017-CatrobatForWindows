@@ -16,6 +16,11 @@ namespace Catrobat.IDE.Core.ViewModel
 
         #endregion
 
+        #region Properties
+
+        public Type PresenterType { get; set; }
+
+        #endregion
 
         #region Commands
 
