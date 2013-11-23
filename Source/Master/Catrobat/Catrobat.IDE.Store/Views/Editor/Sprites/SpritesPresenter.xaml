@@ -14,6 +14,8 @@
   xmlns:listView="using:Catrobat.IDE.Store.Controls.ListView"
   xmlns:scripts="using:Catrobat.IDE.Store.Views.Editor.Scripts"
   xmlns:application="using:Catrobat.IDE.Store.Content.Images.Application"
+  xmlns:controls="using:GridViewSamples.Controls"
+  xmlns:sounds="using:Catrobat.IDE.Store.Views.Editor.Sounds"
   mc:Ignorable="d">
   <Page.Resources>
     <Style x:Key="RadioButtonTabsTemplate" TargetType="RadioButton">
@@ -35,47 +37,20 @@
                   <VisualState x:Name="Normal"/>
                   <VisualState x:Name="PointerOver">
                     <Storyboard>
-                      <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="GridBackground">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonPointerOverBackgroundThemeBrush}"/>
-                      </ObjectAnimationUsingKeyFrames>-->
                       <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="#888888"/>
-                      </ObjectAnimationUsingKeyFrames>
-                      <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="BackgroundEllipse">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonPointerOverBorderThemeBrush}"/>
-                      </ObjectAnimationUsingKeyFrames>
-                      <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckGlyph">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonPointerOverForegroundThemeBrush}"/>
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonContentDisabledForegroundThemeBrush}"/>
                       </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                   </VisualState>
                   <VisualState x:Name="Pressed">
                     <Storyboard>
-                      <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="GridBackground">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonPressedBackgroundThemeBrush}"/>
-                      </ObjectAnimationUsingKeyFrames>-->
                       <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
                         <DiscreteObjectKeyFrame KeyTime="0" Value="#3366CC"/>
-                      </ObjectAnimationUsingKeyFrames>
-                      <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="BackgroundEllipse">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonPressedBorderThemeBrush}"/>
-                      </ObjectAnimationUsingKeyFrames>
-                      <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckGlyph">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonPressedForegroundThemeBrush}"/>
                       </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                   </VisualState>
                   <VisualState x:Name="Disabled">
                     <Storyboard>
-                      <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="GridBackground">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonDisabledBackgroundThemeBrush}"/>
-                      </ObjectAnimationUsingKeyFrames>-->
-                      <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="BackgroundEllipse">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonDisabledBorderThemeBrush}"/>
-                      </ObjectAnimationUsingKeyFrames>
-                      <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckGlyph">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonDisabledForegroundThemeBrush}"/>
-                      </ObjectAnimationUsingKeyFrames>
                       <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
                         <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonContentDisabledForegroundThemeBrush}"/>
                       </ObjectAnimationUsingKeyFrames>
@@ -91,9 +66,85 @@
                       </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                   </VisualState>
-                  <VisualState x:Name="Unchecked"/>
-                  <VisualState x:Name="Indeterminate"/>
+                  <VisualState x:Name="Unchecked" >
+                    <!--<Storyboard>
+                      <DoubleAnimation Duration="0" To="40.0" Storyboard.TargetProperty="FontSize" Storyboard.TargetName="ContentPresenter"/>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonContentDisabledForegroundThemeBrush}"/>
+                      </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>-->
+                  </VisualState>
+                  <VisualState x:Name="Indeterminate" >
+                    <!--<Storyboard>
+                      <DoubleAnimation Duration="0" To="40.0" Storyboard.TargetProperty="FontSize" Storyboard.TargetName="ContentPresenter"/>
+                      <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonContentDisabledForegroundThemeBrush}"/>
+                      </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>-->
+                  </VisualState>
                 </VisualStateGroup>
+                <VisualStateGroup x:Name="FocusStates">
+                  <VisualState x:Name="Focused">
+                    <Storyboard>
+                      <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="#3366CC"/>
+                      </ObjectAnimationUsingKeyFrames>-->
+                      <!--<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualWhite"/>
+                      <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualBlack"/>-->
+                    </Storyboard>
+                  </VisualState>
+                  <VisualState x:Name="Unfocused"/>
+                  <VisualState x:Name="PointerFocused"/>
+                </VisualStateGroup>
+              </VisualStateManager.VisualStateGroups>
+              <Grid x:Name="GridRoot" Margin="5 20 5 0">
+                <Grid x:Name="GridBackground">
+                  <Grid Margin="10 5 10 5">
+                    <!--<Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="0"/>
+                      <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>-->
+                    <!--<Grid VerticalAlignment="Top">
+                      <Ellipse x:Name="BackgroundEllipse" Visibility="Collapsed" Fill="{ThemeResource RadioButtonBackgroundThemeBrush}" Height="23" Stroke="{ThemeResource RadioButtonBorderThemeBrush}" StrokeThickness="{ThemeResource RadioButtonBorderThemeThickness}" UseLayoutRounding="False" Width="23"/>
+                      <Ellipse x:Name="CheckGlyph" Visibility="Collapsed" Fill="{ThemeResource RadioButtonForegroundThemeBrush}" Height="13" Opacity="0" UseLayoutRounding="False" Width="13"/>
+                      <Rectangle x:Name="FocusVisualWhite" Height="29" Opacity="0" StrokeDashOffset="1.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}" StrokeDashArray="1,1" Width="29"/>
+                      <Rectangle x:Name="FocusVisualBlack" Height="29" Opacity="0" StrokeDashOffset="0.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}" StrokeDashArray="1,1" Width="29"/>
+                    </Grid>-->
+                    <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" FontSize="40" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="FlipViewTabsStyle" TargetType="FlipView">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="TabNavigation" Value="Once"/>
+      <Setter Property="IsTabStop" Value="False"/>
+      <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+      <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+      <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False"/>
+      <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="False"/>
+      <Setter Property="ScrollViewer.IsHorizontalScrollChainingEnabled" Value="True"/>
+      <Setter Property="ScrollViewer.IsVerticalScrollChainingEnabled" Value="True"/>
+      <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
+      <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True"/>
+      <Setter Property="ItemsPanel">
+        <Setter.Value>
+          <ItemsPanelTemplate>
+            <VirtualizingStackPanel AreScrollSnapPointsRegular="True" Orientation="Horizontal"/>
+          </ItemsPanelTemplate>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="FlipView">
+            <Grid>
+              <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup x:Name="FocusStates">
                   <VisualState x:Name="Focused">
                     <Storyboard>
@@ -105,24 +156,34 @@
                   <VisualState x:Name="PointerFocused"/>
                 </VisualStateGroup>
               </VisualStateManager.VisualStateGroups>
-              <Grid x:Name="GridRoot" Margin="5 20 5 0">
-                <Grid x:Name="GridBackground">
-                  <Grid Margin="10 5 10 5">
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition Width="0"/>
-                      <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid VerticalAlignment="Top">
-                      <Ellipse x:Name="BackgroundEllipse" Visibility="Collapsed" Fill="{ThemeResource RadioButtonBackgroundThemeBrush}" Height="23" Stroke="{ThemeResource RadioButtonBorderThemeBrush}" StrokeThickness="{ThemeResource RadioButtonBorderThemeThickness}" UseLayoutRounding="False" Width="23"/>
-                      <Ellipse x:Name="CheckGlyph" Visibility="Collapsed" Fill="{ThemeResource RadioButtonForegroundThemeBrush}" Height="13" Opacity="0" UseLayoutRounding="False" Width="13"/>
-                      <Rectangle x:Name="FocusVisualWhite" Height="29" Opacity="0" StrokeDashOffset="1.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}" StrokeDashArray="1,1" Width="29"/>
-                      <Rectangle x:Name="FocusVisualBlack" Height="29" Opacity="0" StrokeDashOffset="0.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}" StrokeDashArray="1,1" Width="29"/>
-                    </Grid>
-                    <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" FontSize="40" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                  </Grid>
+              <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="3">
+                <Border.Resources>
+                  <ControlTemplate x:Key="HorizontalNextTemplate" TargetType="Button">
+                    <Grid Width="0" Height="0"></Grid>
+                  </ControlTemplate>
+                  <ControlTemplate x:Key="HorizontalPreviousTemplate" TargetType="Button">
+                    <Grid Width="0" Height="0"></Grid>
+                  </ControlTemplate>
+                  <ControlTemplate x:Key="VerticalNextTemplate" TargetType="Button">
+                    <Grid Width="0" Height="0"></Grid>
+                  </ControlTemplate>
+                  <ControlTemplate x:Key="VerticalPreviousTemplate" TargetType="Button">
+                    <Grid Width="0" Height="0"></Grid>
+                  </ControlTemplate>
+                </Border.Resources>
+                <Grid>
+                  <ScrollViewer x:Name="ScrollingHost" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalSnapPointsType="MandatorySingle" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsTabStop="False" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" Padding="{TemplateBinding Padding}" TabNavigation="{TemplateBinding TabNavigation}" VerticalSnapPointsType="MandatorySingle" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="Disabled">
+                    <ItemsPresenter/>
+                  </ScrollViewer>
+                  <Button x:Name="PreviousButtonHorizontal" HorizontalAlignment="Left" Height="40" IsTabStop="False" Template="{ThemeResource HorizontalPreviousTemplate}" VerticalAlignment="Center" Width="70"/>
+                  <Button x:Name="NextButtonHorizontal" HorizontalAlignment="Right" Height="40" IsTabStop="False" Template="{StaticResource HorizontalNextTemplate}" VerticalAlignment="Center" Width="70"/>
+                  <Button x:Name="PreviousButtonVertical" HorizontalAlignment="Center" Height="40" IsTabStop="False" Template="{StaticResource VerticalPreviousTemplate}" VerticalAlignment="Top" Width="70"/>
+                  <Button x:Name="NextButtonVertical" HorizontalAlignment="Center" Height="40" IsTabStop="False" Template="{StaticResource VerticalNextTemplate}" VerticalAlignment="Bottom" Width="70"/>
                 </Grid>
-              </Grid>
-            </Border>
+              </Border>
+              <Rectangle x:Name="FocusVisualWhite" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="1.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}" StrokeDashArray="1,1"/>
+              <Rectangle x:Name="FocusVisualBlack" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="0.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}" StrokeDashArray="1,1"/>
+            </Grid>
           </ControlTemplate>
         </Setter.Value>
       </Setter>
@@ -130,18 +191,13 @@
   </Page.Resources>
 
   <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid.ChildrenTransitions>
-      <TransitionCollection>
-        <EntranceThemeTransition/>
-      </TransitionCollection>
-    </Grid.ChildrenTransitions>
     <Grid.RowDefinitions>
       <RowDefinition Height="140"/>
       <RowDefinition Height="*"/>
-      <RowDefinition Height="140"/>
+      <!--<RowDefinition Height="190"/>-->
     </Grid.RowDefinitions>
 
-    <Grid Height="180">
+    <Grid Height="180" DataContext="{Binding SpriteEditorViewModel, Source={ StaticResource Locator }}">
       <Grid.ChildrenTransitions>
         <TransitionCollection>
           <EntranceThemeTransition/>
@@ -174,7 +230,7 @@
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
-       <Grid Grid.Row="1" DataContext="{Binding SpriteEditorViewModel, Source={ StaticResource Locator }}">
+      <Grid Grid.Row="1" DataContext="{Binding SpriteEditorViewModel, Source={ StaticResource Locator }}">
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -182,18 +238,19 @@
           </Grid.RowDefinitions>
 
           <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0 -30 0 0">
-            <RadioButton Content="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}"
+            <RadioButton x:Name="RadioButtonActions" Content="{Binding Resources.Editor_PivotActions, Source={StaticResource LocalizedStrings}}"
                          Click="RadioButtonTabs_Click" Style="{StaticResource RadioButtonTabsTemplate}"
                          Tag="0" Margin="5" IsChecked="True"  />
-            <RadioButton Content="{Binding Resources.Editor_PivotCostumes, Source={StaticResource LocalizedStrings}}"
+            <RadioButton x:Name="RadioButtonLooks" Content="{Binding Resources.Editor_PivotCostumes, Source={StaticResource LocalizedStrings}}"
                          Click="RadioButtonTabs_Click" Style="{StaticResource RadioButtonTabsTemplate}"
                          Tag="1" Margin="5" />
-            <RadioButton Content="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}"
+            <RadioButton x:Name="RadioButtonSounds" Content="{Binding Resources.Editor_PivotSounds, Source={StaticResource LocalizedStrings}}"
                          Click="RadioButtonTabs_Click" Style="{StaticResource RadioButtonTabsTemplate}"
                          Tag="2" Margin="5" />
           </StackPanel>
 
-          <FlipView x:Name="FlipViewTabs"
+          <FlipView x:Name="FlipViewTabs" Style="{StaticResource FlipViewTabsStyle}"
+                  SelectionChanged="FlipViewTabs_OnSelectionChanged"
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                   UseTouchAnimationsForAllNavigation="False"
                   Grid.Row="1">
@@ -204,9 +261,11 @@
                   <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <listView:BindableGridView x:Name="GridViewActions" Grid.Row="1" CanReorderItems="True" ItemsSource="{Binding ScriptBricks }" 
-                ItemTemplateSelector="{StaticResource ActionTemplate}" SelectedItems="{Binding SelectedActions}" 
-                SelectionChanged="GridViewActions_OnSelectionChanged" />
+                <listView:BindableGridView x:Name="GridViewActions" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                          Grid.Row="1" CanReorderItems="True" ItemsSource="{Binding ScriptBricks }" 
+                  ItemTemplateSelector="{StaticResource ActionTemplate}" 
+                  SelectionChanged="GridViewActions_OnSelectionChanged" SelectedItems="{Binding SelectedActions}">
+                </listView:BindableGridView>
               </Grid>
             </FlipViewItem>
             <FlipViewItem>
@@ -219,10 +278,28 @@
                 <Grid Grid.Row="1">
                   <TextBlock Name="Test"/>
 
-                  <listView:BindableGridView x:Name="GridViewLooks" VerticalAlignment="Stretch" AllowDrop="True" CanReorderItems="True"
-                ItemTemplateSelector="{StaticResource ActionTemplate}" ItemsSource="{Binding Costumes }" 
-                SelectedItems="{Binding SelectedCostumes}" SelectionMode="Multiple"
-                SelectionChanged="GridViewLooks_OnSelectionChanged">
+                  <listView:BindableGridView x:Name="GridViewLooks" 
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            AllowDrop="True" CanReorderItems="True"
+                            ItemTemplateSelector="{StaticResource ActionTemplate}" ItemsSource="{Binding Costumes }" 
+                            SelectionMode="Multiple" SelectionChanged="GridViewLooks_OnSelectionChanged"
+                            SelectedItems="{Binding SelectedCostumes}">
+                    <listView:BindableGridView.Footer>
+                      <Button >
+                        <Button.Template>
+                          <ControlTemplate>
+                            <Grid Background="BlueViolet" Height="90" Width="300"  >
+                              <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="+" FontSize="50" Margin="0 0 0 12"/>
+                            </Grid>
+                          </ControlTemplate>
+                        </Button.Template>
+                        <Button.Flyout>
+                          <Flyout Opened="NewLookFlyout_OnOpening">
+                            <costumes:NewCostumeSourceSelectionView Width="400"/>
+                          </Flyout>
+                        </Button.Flyout>
+                      </Button>
+                    </listView:BindableGridView.Footer>
                     <listView:BindableGridView.ItemTemplate>
                       <DataTemplate>
                         <Grid Background="{Binding StaticTheme.CostumesBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
@@ -252,13 +329,41 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="1">
-                  <listView:BindableGridView x:Name="GridViewSounds" AllowDrop="True" CanReorderItems="True"
-                    ItemsSource="{Binding Sounds }" SelectedItems="{Binding SelectedSounds}" SelectionMode="Multiple"
-                    SelectionChanged="GridViewSounds_OnSelectionChanged">
+                  <listView:BindableGridView x:Name="GridViewSounds" HorizontalAlignment="Left" VerticalAlignment="Top" AllowDrop="True" CanReorderItems="True"
+                    ItemsSource="{Binding Sounds }" SelectionMode="Multiple"
+                    SelectionChanged="GridViewSounds_OnSelectionChanged"
+                    SelectedItems="{Binding SelectedSounds}">
+                    <listView:BindableGridView.Footer>
+                      <Button>
+                        <Button.Template>
+                          <ControlTemplate>
+                            <Grid Background="BlueViolet" Height="90" Width="300"  >
+                              <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="+" FontSize="50" Margin="0 0 0 12"/>
+                            </Grid>
+                          </ControlTemplate>
+                        </Button.Template>
+                        <Button.Flyout>
+                          <Flyout Opened="NewSoundFlyout_OnOpening">
+                            <sounds:NewSoundSourceSelectionView Width="400"/>
+                          </Flyout>
+                        </Button.Flyout>
+                      </Button>
+                    </listView:BindableGridView.Footer>
                     <listView:BindableGridView.ItemTemplate>
                       <DataTemplate>
                         <Grid Background="{Binding StaticTheme.SoundsBrush.NativeBrush, Source={StaticResource ThemeChooser}}" 
                           Margin="0 5 0 5" Height="90" Width="300" DataContext="{Binding}">
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                          </Grid.ColumnDefinitions>
+                          <!--<buttons:PlayPauseButton Group="{StaticResource PlayPauseButtonGroupSounds}" 
+                                           RoundBorderThickness="6" Margin="0 12 0 12"
+                                         Grid.Column="0" Height="80" Width="80" />-->
+                          <Grid Grid.Column="1" Margin="5">
+                            <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
+                               VerticalAlignment="Center" />
+                          </Grid>
                         </Grid>
                       </DataTemplate>
                     </listView:BindableGridView.ItemTemplate>
@@ -267,6 +372,8 @@
               </Grid>
             </FlipViewItem>
           </FlipView>
+
+          <!--<TextBlock Text="{Binding Resources.Editor_SelectObjectToEditSprites, Source={StaticResource LocalizedStrings}}"></TextBlock>-->
         </Grid>
       </Grid>
 
@@ -283,15 +390,16 @@
         </StackPanel>
 
         <GridView
-          x:Name="ReorderListBoxSprites"
+          x:Name="GridViewSprites"
           Grid.Row="1"
           Margin="10 0 10 0"
           Height="110"
-          HorizontalAlignment="Left"
+          IsSwipeEnabled="True"
+          HorizontalAlignment="Left" VerticalAlignment="Top"
           SelectionMode="Single"
-          VerticalAlignment="Top"
           ItemsSource="{Binding Sprites}"
           SelectedItem="{Binding SelectedSprite, Mode=TwoWay}"
+          SelectionChanged="GridViewSprites_OnSelectionChanged"
           Foreground="White">
           <GridView.ItemTemplate>
             <DataTemplate>
@@ -332,7 +440,7 @@
             </DataTemplate>
           </GridView.ItemTemplate>
           <GridView.Footer>
-            <Button Command="{ Binding AddNewSpriteCommand }" >
+            <Button>
               <Button.Template>
                 <ControlTemplate>
                   <Grid Background="BlueViolet" Height="90" Width="90"  >
@@ -340,15 +448,35 @@
                   </Grid>
                 </ControlTemplate>
               </Button.Template>
+              <Button.Flyout>
+                <Flyout Opened="NewSpriteFlyout_OnOpen">
+                  <local:AddNewSpriteView Width="400"/>
+                </Flyout>
+              </Button.Flyout>
             </Button>
           </GridView.Footer>
         </GridView>
       </Grid>
     </Grid>
+
+    <!--<Grid Grid.Row="2">
+      <StackPanel Orientation="Horizontal">
+        <Grid Name="GridDelete" Width="190" Height="190" Margin="5" Background="DarkSlateGray" AllowDrop="True" DragEnter="GridBasket_OnDragEnter" DragLeave="GridBasket_OnDragLeave" Drop="GridBasket_OnDrop">
+          <TextBlock Text="Delete" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+        <Grid Name="GridCopy" Width="190" Height="190" Margin="5" Background="DarkSlateGray" AllowDrop="True" DragEnter="GridBasket_OnDragEnter" DragLeave="GridBasket_OnDragLeave" Drop="GridBasket_OnDrop">
+          <TextBlock Text="Copy" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+        <Grid Name="GridEdit" Width="190" Height="190" Margin="5" Background="DarkSlateGray" AllowDrop="True" DragEnter="GridBasket_OnDragEnter" DragLeave="GridBasket_OnDragLeave" Drop="GridBasket_OnDrop">
+          <TextBlock Text="Edit" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+      </StackPanel>
+
+    </Grid>-->
   </Grid>
 
   <Page.BottomAppBar>
-    <AppBar Name="AppBarBottomn" Margin="0 0 0 0" Padding="0 0 10 0" HorizontalAlignment="Left"
+    <AppBar Name="AppBarBottomn" Margin="0 0 0 -2" Padding="0 0 0 0" HorizontalAlignment="Left"
             Background="{Binding SelectedTheme.AppBarColor.NativeBrush ,Source={StaticResource ThemeChooser}}" IsSticky="True" >
       <Grid>
         <Grid>
@@ -357,38 +485,42 @@
             <ColumnDefinition Width="Auto" />
           </Grid.ColumnDefinitions>
 
-          <GridView SelectionMode="None">
-            <GridView.ItemsPanel>
+          <ItemsControl x:Name="ItemsControlAppBars" Grid.Column="0" Margin="2">
+            <ItemsControl.ItemsPanel>
               <ItemsPanelTemplate>
                 <WrapGrid Orientation="Horizontal"/>
               </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
-            <GridView.Items>
-              <Border DataContext="{Binding SpritesViewModel, Source={ StaticResource Locator }}"
-              Background="{Binding Path=StaticTheme.ObjectsBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-              BorderThickness="0 0 1 0" Margin="0 0 0 -10"
-              BorderBrush="{Binding Path=StaticTheme.AppBarBorderBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
-                <appBar:EditorAppBar
+            </ItemsControl.ItemsPanel>
+            <Border Name="AppbarObjects" DataContext="{Binding SpritesViewModel, Source={ StaticResource Locator }}"
+                Background="{Binding Path=StaticTheme.ObjectsBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                BorderThickness="0" Margin="2"
+                BorderBrush="{Binding Path=StaticTheme.AppBarBorderBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+              <appBar:EditorAppBar
                 VerticalAlignment="Bottom"
                 TargetType="Object"
                 ClearSelectionCommand="{Binding ClearObjectsSelectionCommand}"
                 CopyCommand="{Binding CopySpriteCommand}"
                 DeleteCommand="{Binding DeleteSpriteCommand}"
-                EditCommand="{Binding EditSpriteCommand}"
                 NewCommand="{Binding AddNewSpriteCommand}"
                 NumberOfSelectedItems="{Binding SelectedSprite, Converter={StaticResource NullIntCountConverter}}">
-                  <appBar:EditorAppBar.NewFlyout>
-                    <Flyout Opened="FlyoutNew_OnOpen">
-                      <local:AddNewSpriteView Width="400"/>
-                    </Flyout>
-                  </appBar:EditorAppBar.NewFlyout>
-                </appBar:EditorAppBar>
-              </Border>
+                <appBar:EditorAppBar.NewFlyout>
+                  <Flyout Opened="NewSpriteFlyout_OnOpen">
+                    <local:AddNewSpriteView Width="400"/>
+                  </Flyout>
+                </appBar:EditorAppBar.NewFlyout>
+                <appBar:EditorAppBar.EditFlyout>
+                  <Flyout Opened="FlyoutChangeSprite_OnOpening">
+                    <local:ChangeSpriteView Width="400"/>
+                  </Flyout>
+                </appBar:EditorAppBar.EditFlyout>
+              </appBar:EditorAppBar>
+            </Border>
 
-              <Border Background="{Binding Path=StaticTheme.ActionsBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                BorderThickness="0 0 1 0" DataContext="{Binding SpriteEditorViewModel, Source={ StaticResource Locator }}"
+            <Border Name="AppbarActions" Background="{Binding Path=StaticTheme.ActionsBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                BorderThickness="0" Margin="2"
+                DataContext="{Binding SpriteEditorViewModel, Source={ StaticResource Locator }}"
                 BorderBrush="{Binding Path=StaticTheme.AppBarBorderBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
-                <appBar:EditorAppBar Margin="0 0 10 0"
+              <appBar:EditorAppBar
               VerticalAlignment="Bottom"
               TargetType="Script"
               ClearSelectionCommand="{Binding ClearScriptsSelectionCommand}"
@@ -396,13 +528,13 @@
               DeleteCommand="{Binding DeleteScriptBrickCommand}"
               EditCommand="{Binding EditCostumeCommand}"
               NumberOfSelectedItems="{Binding SelectedActions.Count}">
-                </appBar:EditorAppBar>
-              </Border>
+              </appBar:EditorAppBar>
+            </Border>
 
-              <Border Background="{Binding Path=StaticTheme.CostumesBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                BorderThickness="1 0 1 0" DataContext="{Binding SpriteEditorViewModel, Source={ StaticResource Locator }}"
+            <Border Name="AppbarLooks" Background="{Binding Path=StaticTheme.CostumesBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                BorderThickness="0" Margin="2" DataContext="{Binding SpriteEditorViewModel, Source={ StaticResource Locator }}"
                 BorderBrush="{Binding Path=StaticTheme.AppBarBorderBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
-                <appBar:EditorAppBar Margin="10 0 10 0"
+              <appBar:EditorAppBar
                 VerticalAlignment="Bottom"
                 TargetType="Costume"
                 ClearSelectionCommand="{Binding ClearCostumesSelectionCommand}"
@@ -410,28 +542,27 @@
                 DeleteCommand="{Binding DeleteCostumeCommand}"
                 EditCommand="{Binding EditCostumeCommand}"
                 NumberOfSelectedItems="{Binding SelectedCostumes.Count}">
-                  <appBar:EditorAppBar.EditFlyout>
-                    <Flyout Opened="TileGeneratorFlyout_OnOpened">
-                      <costumes:ChangeCostumeView Width="400"/>
-                    </Flyout>
-                  </appBar:EditorAppBar.EditFlyout>
-                </appBar:EditorAppBar>
-              </Border>
+                <appBar:EditorAppBar.EditFlyout>
+                  <Flyout Opened="TileGeneratorFlyout_OnOpened">
+                    <costumes:ChangeCostumeView Width="400"/>
+                  </Flyout>
+                </appBar:EditorAppBar.EditFlyout>
+              </appBar:EditorAppBar>
+            </Border>
 
-              <Border Background="{Binding Path=StaticTheme.SoundsBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
-                BorderThickness="1 0 2 0" DataContext="{Binding SpriteEditorViewModel, Source={ StaticResource Locator }}"
+            <Border Name="AppbarSounds" Background="{Binding Path=StaticTheme.SoundsBrush.NativeBrush, Source={StaticResource ThemeChooser}}"
+                BorderThickness="0" Margin="2" DataContext="{Binding SpriteEditorViewModel, Source={ StaticResource Locator }}"
                 BorderBrush="{Binding Path=StaticTheme.AppBarBorderBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
-                <appBar:EditorAppBar Margin="10 0 10 0"
+              <appBar:EditorAppBar 
                 VerticalAlignment="Bottom"
                 TargetType="Sound"
                 ClearSelectionCommand="{Binding ClearSoundsSelectionCommand}"
                 DeleteCommand="{Binding DeleteSoundCommand}"
                 EditCommand="{Binding EditSoundCommand}"
                 NumberOfSelectedItems="{Binding SelectedSounds.Count}">
-                </appBar:EditorAppBar>
-              </Border>
-            </GridView.Items>
-          </GridView>
+              </appBar:EditorAppBar>
+            </Border>
+          </ItemsControl>
 
           <Grid Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="140" Height="140"
             DataContext="{Binding SpritesViewModel, Source={ StaticResource Locator }}"
@@ -439,10 +570,6 @@
             <appBar:AppBarPlayButton PlayCommand="{Binding StartPlayerCommand}"></appBar:AppBarPlayButton>
           </Grid>
         </Grid>
-        <StackPanel Orientation="Horizontal">
-
-        </StackPanel>
-
       </Grid>
     </AppBar >
   </Page.BottomAppBar>
