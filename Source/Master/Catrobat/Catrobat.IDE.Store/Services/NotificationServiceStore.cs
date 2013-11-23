@@ -21,7 +21,12 @@ namespace Catrobat.IDE.Store.Services
         //    _rootPage = rootPage;
         //}
 
-        public void ShowToastNotification(PortableImage image, string title, string message, ToastNotificationTime timeTillHide)
+        public void ShowToastNotification(string title, string message, ToastNotificationTime timeTillHide, PortableImage image = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowToastNotification(string title, string message, TimeSpan timeTillHide, PortableImage image = null)
         {
             throw new NotImplementedException();
         }

@@ -4,20 +4,49 @@ using System.Windows.Media;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
+using Catrobat.IDE.Phone.Utilities;
 using Coding4Fun.Toolkit.Controls;
 
 namespace Catrobat.IDE.Phone.Services
 {
     class NotificationServicePhone : INotificationService
     {
-        public void ShowToastNotification(PortableImage image, string title, string message, ToastNotificationTime timeTillHide)
+        public void ShowToastNotification(string title, string message, ToastNotificationTime timeTillHide, PortableImage image)
+        {
+            TimeSpan timeSpan;
+
+            switch (timeTillHide)
+            {
+                case ToastNotificationTime.Short:
+                    timeSpan = new TimeSpan(0, 0, 0, 1);
+                    break;
+                case ToastNotificationTime.Medeum:
+                    timeSpan = new TimeSpan(0, 0, 0, 2);
+                    break;
+                case ToastNotificationTime.Long:
+                    timeSpan = new TimeSpan(0, 0, 0, 3);
+                    break;
+                default:
+                    timeSpan = new TimeSpan(0, 0, 0, 1);
+                    break;
+            }
+
+            ShowToastNotification(title, message, timeSpan, image);
+        }
+
+        public void ShowToastNotification(string title, string message, TimeSpan timeTillHide, PortableImage image)
         {
             var toast = new ToastPrompt
             {
-                ImageSource = (ImageSource)image.ImageSource,
-                Message = AppResources.Main_DownloadQueueMessage,
+                Message = message,
                 Title = title,
+                IsTimerEnabled = true,
+                MillisecondsUntilHidden = (int) timeTillHide.TotalMilliseconds
             };
+
+            if (image != null)
+                toast.ImageSource = (ImageSource) image.ImageSource;
+
             toast.Show();
         }
 

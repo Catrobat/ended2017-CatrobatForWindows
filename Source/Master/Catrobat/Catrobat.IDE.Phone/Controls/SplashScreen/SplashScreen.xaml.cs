@@ -32,12 +32,15 @@ namespace Catrobat.IDE.Phone.Controls.SplashScreen
                 Core.App.SetNativeApp(new AppPhone());
                 await Core.App.Initialize();
 
-                var image = new BitmapImage(new Uri("Content/Images/Screenshot/NoScreenshot.png", UriKind.Relative))
+                ManualImageCache.NoScreenshotImage = new BitmapImage(new Uri("Content/Images/Screenshot/NoScreenshot.png", UriKind.Relative))
                 {
                     CreateOptions = BitmapCreateOptions.None
                 };
 
-                ManualImageCache.NoScreenshotImage = image;
+                ManualImageCache.NoScreenshotImageSquare = new BitmapImage(new Uri("Content/Images/Screenshot/NoScreenshotSquare.png", UriKind.Relative))
+                {
+                    CreateOptions = BitmapCreateOptions.None
+                };
             }
 
             if (projectName != null)
