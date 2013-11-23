@@ -1,13 +1,14 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModel.Editor.Sounds;
 
 namespace Catrobat.IDE.Store.Views.Editor.Sounds
 {
     public sealed partial class SoundNameChooserView : Page
     {
-        private readonly CostumeNameChooserViewModel _viewModel = 
-            (ServiceLocator.ViewModelLocator).CostumeNameChooserViewModel;
+        private readonly SoundNameChooserViewModel _viewModel =
+            ServiceLocator.ViewModelLocator.SoundNameChooserViewModel;
 
         public SoundNameChooserView()
         {
@@ -16,7 +17,7 @@ namespace Catrobat.IDE.Store.Views.Editor.Sounds
 
         private void TextBoxSoundName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            _viewModel.CostumeName = TextBoxCostumeName.Text;
+            _viewModel.SoundName = TextBoxSoundName.Text;
         }
     }
 }

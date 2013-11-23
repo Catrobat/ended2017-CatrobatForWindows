@@ -963,11 +963,8 @@
   <data name="Main_ProjectGettingActivated" xml:space="preserve">
     <value>Please wait, while the program is being activated.</value>
   </data>
-  <data name="Main_ReallyCloseApplicationCaption" xml:space="preserve">
-    <value>Close application</value>
-  </data>
   <data name="Main_ReallyCloseApplicationText" xml:space="preserve">
-    <value>Do you really want to close the application?</value>
+    <value>Press "back" again to close the app?</value>
   </data>
   <data name="Editor_ClickPlusToAddAction" xml:space="preserve">
     <value>Click '+' to add a new action.</value>

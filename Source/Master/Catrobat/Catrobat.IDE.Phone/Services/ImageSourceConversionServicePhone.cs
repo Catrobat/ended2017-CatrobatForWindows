@@ -47,7 +47,7 @@ namespace Catrobat.IDE.Phone.Services
             outputHeight = writableBitmap.PixelWidth;
         }
 
-        public object ConvertFromEncodedStreeam(MemoryStream encodedStream)
+        public object ConvertFromEncodedStream(MemoryStream encodedStream)
         {
             var image = new BitmapImage {CreateOptions = BitmapCreateOptions.None};
 

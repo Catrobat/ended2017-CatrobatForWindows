@@ -24,8 +24,10 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
             var resizedImage = await ServiceLocator.ImageResizeService.ResizeImage(image, dimension.Width, dimension.Height);
             var costume = new Costume(name);
             var absoluteFileName = Path.Combine(projectPath, Project.ImagesPath, costume.FileName);
-            await resizedImage.WriateAsPng(absoluteFileName);
-            costume.Image = resizedImage;
+
+            await resizedImage.WriteAsPng(absoluteFileName);
+
+            //costume.Image = resizedImage;
 
             return costume;
         }

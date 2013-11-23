@@ -908,11 +908,8 @@
   <data name="Brick_ForeverLoopEnd" xml:space="preserve">
     <value>Wiederholen beenden</value>
   </data>
-  <data name="Main_ReallyCloseApplicationCaption" xml:space="preserve">
-    <value>Programm schließen</value>
-  </data>
   <data name="Main_ReallyCloseApplicationText" xml:space="preserve">
-    <value>Programm wirklich schließen?</value>
+    <value>Erneut auf "zurück" um die App zu schließen?</value>
   </data>
   <data name="Editor_ClickPlusToAddAction" xml:space="preserve">
     <value>Drücke '+' um eine neue Aktion hinzuzufügen.</value>

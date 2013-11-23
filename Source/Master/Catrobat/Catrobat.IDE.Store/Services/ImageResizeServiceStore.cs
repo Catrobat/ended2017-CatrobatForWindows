@@ -46,6 +46,8 @@ namespace Catrobat.IDE.Store.Services
 
         public async Task<PortableImage> ResizeImage(PortableImage image, int newWidth, int newHeight)
         {
+            return image; // TODO: fix resize code and reove this
+
 
             //// hard coded image location
             //string filePath = "C:\\Users\\Public\\Pictures\\Sample Pictures\\fantasy-dragons-wallpaper.jpg";
@@ -94,9 +96,13 @@ namespace Catrobat.IDE.Store.Services
             //var bitmap = new BitmapImage();
             //bitmap.SetSource(ras);
 
+            var memoryStream = new MemoryStream();
+            ras.AsStream().CopyTo(memoryStream);
+
+
             return new PortableImage()
             {
-                EncodedData = (MemoryStream) ras.AsStream(),
+                EncodedData = memoryStream,
                 //Width = bitmap.PixelWidth,
                 //Height = bitmap.PixelHeight
             };

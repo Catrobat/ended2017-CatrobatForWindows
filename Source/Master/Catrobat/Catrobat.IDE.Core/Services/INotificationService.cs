@@ -22,7 +22,9 @@ namespace Catrobat.IDE.Core.Services
 
     public interface INotificationService
     {
-        void ShowToastNotification(PortableImage image, string title, string message, ToastNotificationTime timeTillHide);
+        void ShowToastNotification(string title, string message, ToastNotificationTime timeTillHide, PortableImage image = null);
+
+        void ShowToastNotification(string title, string message, TimeSpan timeTillHide, PortableImage image = null);
 
         void ShowMessageBox(string title, string message, Action<MessageboxResult> callback, MessageBoxOptions options);
     }

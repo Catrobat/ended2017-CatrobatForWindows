@@ -66,19 +66,22 @@
           <Button Margin="0 5 0 0" Command="{Binding OpenPaintCommand}" HorizontalAlignment="Stretch">
             <Button.Template>
               <ControlTemplate>
-                <Grid Background="{Binding Path=SelectedTheme.AccentColor3.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                <Grid>
+                  <Grid Background="{Binding Path=SelectedTheme.AccentColor3.NativeBrush, Source={StaticResource ThemeChooser}}" 
                     HorizontalAlignment="Stretch">
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                  </Grid.ColumnDefinitions>
-                  <misc:EditImage ScaleFactor="0.10" Margin="30 15 15 15"></misc:EditImage>
-                  <TextBlock Grid.Column="1" Margin="20 10 50 10" VerticalAlignment="Center" 
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <misc:EditImage ScaleFactor="0.10" Margin="30 15 15 15"></misc:EditImage>
+                    <TextBlock Grid.Column="1" Margin="20 10 50 10" VerticalAlignment="Center" 
                            HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_ImageEditingProgram, Source={StaticResource LocalizedStrings}}" 
                            TextAlignment="Left"
                            TextWrapping="Wrap"
                            Name="tbGallery" Style="{StaticResource SubheaderTextBlockStyle}" Foreground="White" />
+                  </Grid>
+                  <Grid Name="DisableButtonGrid" Background="#FF555555" Opacity="0.75"/>
                 </Grid>
               </ControlTemplate>
             </Button.Template>

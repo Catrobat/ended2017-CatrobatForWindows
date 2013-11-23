@@ -11,7 +11,12 @@ namespace Catrobat.IDE.Tests.Services.Storage
         public MessageboxResult NextMessageboxResult { get; set; }
         public MessageBoxOptions LastMessageboxOption { get; set; }
 
-        public void ShowToastNotification(PortableImage image, string title, string message, ToastNotificationTime timeTillHide)
+        public void ShowToastNotification(string title, string message, ToastNotificationTime timeTillHide, PortableImage image = null)
+        {
+            SentToastNotifications++;
+        }
+
+        public void ShowToastNotification(string title, string message, TimeSpan timeTillHide, PortableImage image = null)
         {
             SentToastNotifications++;
         }
@@ -22,5 +27,7 @@ namespace Catrobat.IDE.Tests.Services.Storage
             LastMessageboxOption = options;
             callback.Invoke(NextMessageboxResult);
         }
+
+
     }
 }

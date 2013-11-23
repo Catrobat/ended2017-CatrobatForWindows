@@ -43,16 +43,12 @@ namespace Catrobat.IDE.Phone.Services
                     string fileName = project.ProjectName + CatrobatFileExtension;
                     var stream = new MemoryStream();
 
+                    await CatrobatZipService.ZipCatrobatPackage(stream, projectPath);
+                    stream.Seek(0, SeekOrigin.Begin);
 
-                        CatrobatZipService.ZipCatrobatPackage(stream, projectPath);
+                    await ((LiveConnectClient)client).UploadAsync("me/skydrive", fileName, stream, OverwriteOption.Rename);
+                    success();
 
-                        stream.Seek(0, SeekOrigin.Begin);
-
-
-                        await ((LiveConnectClient)client).UploadAsync("me/skydrive", fileName, stream, OverwriteOption.Rename);
-
-                        success();
-                    
                 }
             }
             catch (Exception)

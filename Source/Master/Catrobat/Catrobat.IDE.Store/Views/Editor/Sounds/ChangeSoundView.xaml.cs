@@ -2,22 +2,23 @@
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
+using Catrobat.IDE.Core.ViewModel.Editor.Sounds;
 
 namespace Catrobat.IDE.Store.Views.Editor.Sounds
 {
     public sealed partial class ChangeSoundView : UserControl
     {
-        private readonly ChangeCostumeViewModel _viewModel =
-            ((ViewModelLocator)ServiceLocator.ViewModelLocator).ChangeCostumeViewModel;
+        private readonly ChangeSoundViewModel _viewModel =
+            ServiceLocator.ViewModelLocator.ChangeSoundViewModel;
 
         public ChangeSoundView()
         {
             this.InitializeComponent();
         }
 
-        private void TextBoxCostumeName_OnTextChanged(object sender, TextChangedEventArgs e)
+        private void TextBoxSoundName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            _viewModel.CostumeName = TextBoxCostumeName.Text;
+            _viewModel.SoundName = TextBoxSoundName.Text;
         }
     }
 }

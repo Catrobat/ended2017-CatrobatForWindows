@@ -6,7 +6,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:misc="using:Catrobat.IDE.Store.Content.Images.Misc"
   mc:Ignorable="d"
-  DataContext="{Binding ChangeCostumeViewModel, Source={StaticResource Locator}}"
+  DataContext="{Binding ChangeSoundViewModel, Source={StaticResource Locator}}"
   d:DesignHeight="240" d:DesignWidth="400">
 
   <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -44,10 +44,10 @@
               <TextBlock Margin="20 10 20 10" Text="{Binding Resources.Editor_CostumeName, 
               Source={StaticResource LocalizedStrings}}" 
                Style="{StaticResource SubheaderTextBlockStyle}" />
-              <TextBox Margin="20 0 20 0" Name="TextBoxCostumeName" 
-               Text="{Binding CostumeName, Mode=TwoWay}" 
+              <TextBox Margin="20 0 20 0" Name="TextBoxSoundName" 
+               Text="{Binding SoundName, Mode=TwoWay}" 
                HorizontalAlignment="Stretch" 
-               TextChanged="TextBoxCostumeName_OnTextChanged" />
+               TextChanged="TextBoxSoundName_OnTextChanged" />
             </StackPanel>
 
             <Button  Grid.Row="1" Margin="0 0 10 10" 

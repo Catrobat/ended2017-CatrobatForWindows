@@ -425,8 +425,8 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                 await portbleImage.LoadFromResources(ResourceScope.IdePhone,
                     "Content/Images/ApplicationBar/dark/appbar.download.rest.png");
 
-                ServiceLocator.NotifictionService.ShowToastNotification(portbleImage, null,
-                    AppResources.Main_DownloadQueueMessage, ToastNotificationTime.Short);
+                ServiceLocator.NotifictionService.ShowToastNotification(null,
+                    AppResources.Main_DownloadQueueMessage, ToastNotificationTime.Short, portbleImage);
 
                 _showDownloadMessage = false;
             }
@@ -436,8 +436,8 @@ namespace Catrobat.IDE.Core.ViewModel.Main
                 await portbleImage.LoadFromResources(ResourceScope.IdePhone,
                     "Content/Images/ApplicationBar/dark/appbar.upload.rest.png");
 
-                ServiceLocator.NotifictionService.ShowToastNotification(portbleImage, null,
-                    AppResources.Main_UploadQueueMessage, ToastNotificationTime.Short);
+                ServiceLocator.NotifictionService.ShowToastNotification(null,
+                    AppResources.Main_UploadQueueMessage, ToastNotificationTime.Short, portbleImage);
 
                 _showUploadMessage = false;
             }

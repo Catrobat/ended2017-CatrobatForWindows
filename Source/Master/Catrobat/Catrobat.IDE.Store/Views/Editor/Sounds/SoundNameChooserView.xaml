@@ -42,8 +42,8 @@
         <TextBlock Margin="20 10 20 10" Text="{Binding Resources.Editor_SoundName, 
               Source={StaticResource LocalizedStrings}}" 
                Style="{StaticResource SubheaderTextBlockStyle}" />
-        <TextBox Margin="20 0 20 0" Name="TextBoxCostumeName" 
-               Text="{Binding CostumeName, Mode=TwoWay}" 
+        <TextBox Margin="20 0 20 0" Name="TextBoxSoundName" 
+               Text="{Binding SoundName, Mode=TwoWay}" 
                HorizontalAlignment="Stretch" 
                TextChanged="TextBoxSoundName_OnTextChanged" />
       </StackPanel>

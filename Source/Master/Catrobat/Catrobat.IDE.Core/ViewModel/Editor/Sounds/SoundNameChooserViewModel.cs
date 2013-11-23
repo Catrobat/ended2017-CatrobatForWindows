@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects;
@@ -17,6 +18,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
         private string _soundName = AppResources.Editor_NameOfSound;
         private Project _currentProject;
         private Sprite _receivedSelectedSprite;
+        private Stream _soundStream;
 
         #endregion
 
@@ -40,6 +42,16 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
                 _soundName = value;
                 RaisePropertyChanged(() => SoundName);
                 SaveCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public Stream SoundStream
+        {
+            get { return _soundStream; }
+            set
+            {
+                _soundStream = value; 
+                RaisePropertyChanged(()=> SoundStream);
             }
         }
 
@@ -73,20 +85,29 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
             {
                 using (var stream = await storage.OpenFileAsync(path, StorageFileMode.Create, StorageFileAccess.Write))
                 {
-                    var writer = new BinaryWriter(stream);
-
-                    WaveHeaderHelper.WriteHeader(writer.BaseStream, ServiceLocator.SoundRecorderService.SampleRate);
-                    var dataBuffer = ServiceLocator.SoundRecorderService.GetSoundAsStream().ToArray();
-                    writer.Write(dataBuffer, 0, (int)ServiceLocator.SoundRecorderService.GetSoundAsStream().Length);
-                    writer.Flush();
-                    writer.Dispose();
+                    if(SoundStream != null)
+                        SoundStream.CopyTo(stream);
+                    else
+                    {
+                        if(Debugger.IsAttached)
+                            Debugger.Break();
+                    }
+                    //else
+                    //{
+                    //    var writer = new BinaryWriter(stream);
+                    //    WaveHeaderHelper.WriteHeader(writer.BaseStream, ServiceLocator.SoundRecorderService.SampleRate);
+                    //    var dataBuffer = ServiceLocator.SoundRecorderService.GetSoundAsStream().ToArray();
+                    //    writer.Write(dataBuffer, 0, (int)ServiceLocator.SoundRecorderService.GetSoundAsStream().Length);
+                    //    writer.Flush();
+                    //    writer.Dispose();
+                    //}
                 }
             }
 
             _receivedSelectedSprite.Sounds.Sounds.Add(sound);
 
             ResetViewModel();
-            ServiceLocator.NavigationService.RemoveBackEntry();
+            ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);
             //ServiceLocator.NavigationService.RemoveBackEntry();
             base.GoBackAction();
         }
@@ -113,10 +134,16 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
             _receivedSelectedSprite = message.Content;
         }
 
-        private void CurrentProjectChangedAction(GenericMessage<Project> message)
+        private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
         {
             CurrentProject = message.Content;
         }
+
+        private void SoundStreamChangedMessageAction(GenericMessage<Stream> message)
+        {
+            SoundStream = message.Content;
+        }
+
         #endregion
 
         public SoundNameChooserViewModel()
@@ -128,7 +155,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
                 ViewModelMessagingToken.CurrentSpriteChangedListener, ReceiveSelectedSpriteMessageAction);
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
+                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
+
+            Messenger.Default.Register<GenericMessage<Stream>>(this,
+                 ViewModelMessagingToken.SoundStreamListener, SoundStreamChangedMessageAction);
+            
         }
 
         private void ResetViewModel()
