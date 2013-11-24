@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Phone.Controls.SplashScreen
 
             if (!GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
-                Core.App.SetNativeApp(new AppPhone());
+                //Core.App.SetNativeApp(new AppPhone());
                 await Core.App.Initialize();
 
                 ManualImageCache.NoScreenshotImage = new BitmapImage(new Uri("Content/Images/Screenshot/NoScreenshot.png", UriKind.Relative))

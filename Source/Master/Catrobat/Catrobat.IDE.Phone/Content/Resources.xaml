@@ -6,9 +6,12 @@
   xmlns:localization="clr-namespace:Catrobat.IDE.Core.Resources.Localization;assembly=Catrobat.IDE.Core"
   xmlns:ui="clr-namespace:Catrobat.IDE.Core.UI;assembly=Catrobat.IDE.Core"
   xmlns:viewModel="clr-namespace:Catrobat.IDE.Core.ViewModel;assembly=Catrobat.IDE.Core"
+  xmlns:phone="clr-namespace:Catrobat.IDE.Phone"
   mc:Ignorable="d">
   
-  <localization:LocalizedStrings x:Key="LocalizedStrings" />
+  <localization:LocalizedStrings x:Key="LocalizedStrings" d:IsDataSource="True"/>
   <viewModel:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
-  <ui:ThemeChooser x:Key="ThemeChooser" />
+  <ui:ThemeChooser x:Key="ThemeChooser" d:IsDataSource="True"/>
+
+  <phone:AppPhone x:Key="AppPhone" d:IsDataSource="True"/>
 </ResourceDictionary>

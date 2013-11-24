@@ -28,9 +28,9 @@
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
 
-    <application:Logo Grid.Column="1" Margin="20 30 10 30" ScaleFactor="0.75" Width="65" TextVisibility="Collapsed"></application:Logo>
+    <application:Logo x:Name="Logo" Grid.Column="1" Margin="20 30 10 30" ScaleFactor="0.75" Width="65" TextVisibility="Collapsed"></application:Logo>
     <Grid x:Name="GridHeaderContent" Visibility="Visible" Margin="0 0 0 0" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Left">
-      <TextBlock Text="Header" FontSize="50"></TextBlock>
+      <TextBlock Text="" FontSize="50"></TextBlock>
     </Grid>
   </Grid>
 </UserControl>
