@@ -133,6 +133,21 @@ namespace Catrobat.IDE.Store.Controls.ListView
             ((BindableGridView) d).GridView.ItemTemplate = (DataTemplate)e.NewValue;
         }
 
+
+        public FrameworkElement Footer
+        {
+            get { return (FrameworkElement)GetValue(FooterProperty); }
+            set { SetValue(FooterProperty, value); }
+        }
+
+        public static readonly DependencyProperty FooterProperty = DependencyProperty.Register("Footer", 
+            typeof(FrameworkElement), typeof(BindableGridView), new PropertyMetadata(null, FooterChanged));
+
+        private static void FooterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((BindableGridView) d).GridView.Footer = e.NewValue;
+        }
+
         #endregion
 
 

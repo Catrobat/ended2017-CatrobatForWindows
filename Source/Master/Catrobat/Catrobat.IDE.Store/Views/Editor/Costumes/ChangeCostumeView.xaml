@@ -7,7 +7,7 @@
   xmlns:misc="using:Catrobat.IDE.Store.Content.Images.Misc"
   mc:Ignorable="d"
   DataContext="{Binding ChangeCostumeViewModel, Source={StaticResource Locator}}"
-  d:DesignHeight="500" d:DesignWidth="600">
+  d:DesignHeight="400" d:DesignWidth="400">
 
   <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
@@ -21,65 +21,62 @@
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-          <TextBlock Margin="10" Style="{StaticResource SubheaderTextBlockStyle}"
-                     Text="{Binding Resources.Editor_TitleChangeCostumeName, Source={StaticResource LocalizedStrings}}" />
-        </StackPanel>
+        <Grid Grid.Column="0">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="1" Margin="10 0 0 15" HorizontalAlignment="Stretch">
-          <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="Auto" />
-          </Grid.RowDefinitions>
-          
-          <StackPanel Grid.Row="0" Margin="10 0 0 45" >
-            <TextBlock Margin="20 10 20 10" Text="{Binding Resources.Editor_CostumeName, 
+          <Grid Grid.Row="1" Margin="10 0 0 15" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="10 0 0 45" >
+              <TextBlock Margin="20 10 20 10" Text="{Binding Resources.Editor_CostumeName, 
               Source={StaticResource LocalizedStrings}}" 
                Style="{StaticResource SubheaderTextBlockStyle}" />
-            <TextBox Margin="20 0 20 0" Name="TextBoxCostumeName" 
+              <TextBox Margin="20 0 20 0" Name="TextBoxCostumeName" 
                Text="{Binding CostumeName, Mode=TwoWay}" 
                HorizontalAlignment="Stretch" 
                TextChanged="TextBoxCostumeName_OnTextChanged" />
-          </StackPanel>
+            </StackPanel>
 
-          <Button  Grid.Row="1" Margin="0 0 10 10" 
+            <Button  Grid.Row="1" Margin="0 0 10 10" 
             Command="{Binding EditCostumeCommand}" 
             VerticalAlignment="Top" HorizontalAlignment="Stretch">
-            <Button.Template>
-              <ControlTemplate>
-                <Grid Background="{Binding Path=SelectedTheme.AccentColor3.NativeBrush, Source={StaticResource ThemeChooser}}" 
-                    HorizontalAlignment="Stretch" 
-                    Height="140">
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                  </Grid.ColumnDefinitions>
-                  <misc:EditImage ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
-                  <TextBlock Grid.Column="1" Margin="20 10 10 10" VerticalAlignment="Center" 
+              <Button.Template>
+                <ControlTemplate>
+                  <Grid Background="{Binding Path=SelectedTheme.AccentColor3.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                    HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <misc:EditImage ScaleFactor="0.1" Grid.Column="0" Margin="30 15 15 15" />
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center" 
                            HorizontalAlignment="Left" 
                            Text="{Binding Resources.Editor_ImageEditingProgram, Source={StaticResource LocalizedStrings}}" 
                            TextAlignment="Left"
                            TextWrapping="Wrap"
-                           Name="tbGallery" Style="{StaticResource HeaderTextBlockStyle}" />
-                </Grid>
-              </ControlTemplate>
-            </Button.Template>
-          </Button>
-          <Grid  Grid.Row="3">
-            <Grid.ColumnDefinitions>
+                           Name="tbGallery" Style="{StaticResource SubheaderTextBlockStyle}" />
+                  </Grid>
+                </ControlTemplate>
+              </Button.Template>
+            </Button>
+          </Grid>
+          <Grid  Grid.Column="1">
+            <!--<Grid.ColumnDefinitions>
               <ColumnDefinition Width="*"/>
               <ColumnDefinition Width="Auto"/>
               <ColumnDefinition Width="50"/>
               <ColumnDefinition Width="Auto"/>
               <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>-->
 
-            <AppBarButton Grid.Column="1" VerticalAlignment="Center" Icon="Save" Label="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}" 
+            <AppBarButton VerticalAlignment="Bottom" Icon="Save" Label="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}" 
                     Command="{Binding SaveCommand}"/>
-            <AppBarButton Grid.Column="3" VerticalAlignment="Center" Icon="Cancel" Label="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}" 
-                    Command="{Binding CancelCommand}"/>
           </Grid>
         </Grid>
       </Grid>

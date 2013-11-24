@@ -164,6 +164,7 @@
     <Compile Include="Controls\ListView\BindableGridView.xaml.cs">
       <DependentUpon>BindableGridView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ListView\BindableGridViewEx.cs" />
     <Compile Include="Controls\ListView\GridViewEx.cs" />
     <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
       <DependentUpon>ListPicker.xaml</DependentUpon>

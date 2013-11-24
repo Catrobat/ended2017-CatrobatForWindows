@@ -11,7 +11,7 @@
     d:DesignWidth="400">
     
     <Grid>
-      <GridView Name="GridView" SelectionChanged="GridView_OnSelectionChanged">
+    <GridView Name="GridView" SelectionChanged="GridView_OnSelectionChanged" CanReorderItems="True" AllowDrop="True" CanDragItems="True">
         
       </GridView>
     </Grid>

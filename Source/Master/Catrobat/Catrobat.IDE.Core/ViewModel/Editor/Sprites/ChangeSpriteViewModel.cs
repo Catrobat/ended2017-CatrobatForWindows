@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
 
         #region Properties
 
-        public Sprite ReceivedSprite
+        public Sprite SelectedSprite
         {
             get { return _receivedSprite; }
             set
@@ -26,7 +26,9 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
                     return;
                 }
                 _receivedSprite = value;
-                RaisePropertyChanged(() => ReceivedSprite);
+                SaveCommand.RaiseCanExecuteChanged();
+
+                RaisePropertyChanged(() => SelectedSprite);
             }
         }
 
@@ -68,7 +70,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
 
         private void SaveAction()
         {
-            ReceivedSprite.Name = SpriteName;
+            SelectedSprite.Name = SpriteName;
 
             ResetViewModel();
             base.GoBackAction();
@@ -80,16 +82,20 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             base.GoBackAction();
         }
 
-        private void ChangeSpriteNameMessageAction(GenericMessage<Sprite> message)
-        {
-            ReceivedSprite = message.Content;
-            SpriteName = ReceivedSprite.Name;
-        }
-
         protected override void GoBackAction()
         {
             ResetViewModel();
             base.GoBackAction();
+        }
+
+        #endregion
+
+        #region Message Actions
+
+        private void CurrentSpriteChangedMessageAction(GenericMessage<Sprite> message)
+        {
+            SelectedSprite = message.Content;
+            SpriteName = SelectedSprite.Name;
         }
 
         #endregion
@@ -99,12 +105,12 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             SaveCommand = new RelayCommand(SaveAction, SaveCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelAction);
 
-            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.SpriteNameListener, ChangeSpriteNameMessageAction);
+            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
         }
 
-        private void ResetViewModel()
+        public void ResetViewModel()
         {
-            SpriteName = "";
+            SpriteName = SelectedSprite.Name;
         }
     }
 }
