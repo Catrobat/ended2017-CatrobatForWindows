@@ -43,13 +43,13 @@
     <Hub Grid.Row="1" Margin="0 -120 0 0">
       <HubSection Header="{Binding CurrentProject.ProjectHeader.ProgramName }">
         <DataTemplate>
-          <Grid Margin="0 0 0 0">
+          <Grid VerticalAlignment="Stretch" Margin="0 0 0 0">
             <Grid.RowDefinitions>
               <RowDefinition Height="Auto"/>
               <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-              <Image Name="ImageCurrentProjectScreenshot" MaxWidth="550" MaxHeight="550"
+            <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Center">
+              <Image Name="ImageCurrentProjectScreenshot" MaxWidth="650" MaxHeight="500"
                 Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, 
                 Converter={StaticResource NoScreenshotConverter}}" />
               <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="ButtonPlayCurrentProject"          
