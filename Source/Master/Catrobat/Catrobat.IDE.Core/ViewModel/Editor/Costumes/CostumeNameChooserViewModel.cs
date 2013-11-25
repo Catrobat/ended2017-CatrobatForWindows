@@ -244,8 +244,8 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             Messenger.Default.Register<GenericMessage<PortableImage>>(this,
                 ViewModelMessagingToken.CostumeImageListener, CostumeImageReceivedMessageAction);
 
-            if (IsInDesignMode)
-                InitDesignData();
+            //if (IsInDesignMode)
+            //    InitDesignData();
         }
 
         private void InitDesignData()

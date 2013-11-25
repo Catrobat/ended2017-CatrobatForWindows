@@ -11,18 +11,21 @@ using Catrobat.IDE.Core.ViewModel.Main;
 using Catrobat.IDE.Store.Services;
 using Catrobat.IDE.Store.Services.Storage;
 using Catrobat.IDE.Store.Views.Editor.Sprites;
+using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;
 
 namespace Catrobat.IDE.Store
 {
     public class AppStore : INativeApp
     {
+        public AppStore()
+        {
+            InitializeInterfaces();
+        }
+
         public void InitializeInterfaces()
         {
-            //ServiceLocator.UnRegisterAll();
-
-            ServiceLocator.ViewModelLocator = (ViewModelLocator) Application.Current.Resources["Locator"];
-            ServiceLocator.ThemeChooser = (ThemeChooser) Application.Current.Resources["ThemeChooser"];
-            ServiceLocator.LocalizedStrings = (LocalizedStrings) Application.Current.Resources["LocalizedStrings"];
+            if(ViewModelBase.IsInDesignModeStatic)
+                ServiceLocator.Register(new DispatcherServiceStore(null));
 
             ServiceLocator.Register<NavigationServiceStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SystemInformationServiceStore>(TypeCreationMode.Lazy);
@@ -43,7 +46,18 @@ namespace Catrobat.IDE.Store
             ServiceLocator.Register<PortableUIElementsConvertionServiceStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SoundServiceStore>(TypeCreationMode.Lazy);
 
-            InitPresenters();
+            ServiceLocator.ViewModelLocator = new ViewModelLocator();
+            ServiceLocator.ViewModelLocator.RegisterViewModels();
+
+            ServiceLocator.ThemeChooser = new ThemeChooser();
+            ServiceLocator.LocalizedStrings = new LocalizedStrings();
+
+            Application.Current.Resources["Locator"] = ServiceLocator.ViewModelLocator;
+            Application.Current.Resources["ThemeChooser"] = ServiceLocator.ThemeChooser;
+            Application.Current.Resources["LocalizedStrings"] = ServiceLocator.LocalizedStrings;
+
+            if (!ViewModelBase.IsInDesignModeStatic)
+                InitPresenters();
         }
 
         private void InitPresenters()

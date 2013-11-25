@@ -17,12 +17,13 @@ namespace Catrobat.IDE.Phone
 {
     public class AppPhone : INativeApp
     {
+        public AppPhone()
+        {
+            InitializeInterfaces();
+        }
+
         public void InitializeInterfaces()
         {
-            ServiceLocator.ViewModelLocator = (ViewModelLocator) Application.Current.Resources["Locator"];
-            ServiceLocator.ThemeChooser = (ThemeChooser) Application.Current.Resources["ThemeChooser"];
-            ServiceLocator.LocalizedStrings = (LocalizedStrings) Application.Current.Resources["LocalizedStrings"];
-
             ServiceLocator.Register<SystemInformationServicePhone>(TypeCreationMode.Normal);
             ServiceLocator.Register<CultureServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ImageResizeServicePhone>(TypeCreationMode.Lazy);
@@ -44,6 +45,27 @@ namespace Catrobat.IDE.Phone
             ServiceLocator.Register<SoundServicePhone>(TypeCreationMode.Lazy);
 
             ServiceLocator.NavigationService = new NavigationServicePhone();
+
+            ServiceLocator.ViewModelLocator = new ViewModelLocator();
+            ServiceLocator.ViewModelLocator.RegisterViewModels();
+
+            ServiceLocator.ThemeChooser = new ThemeChooser();
+            ServiceLocator.LocalizedStrings = new LocalizedStrings();
+
+            if (Application.Current.Resources["Locator"] != null)
+                Application.Current.Resources["Locator"] = ServiceLocator.ViewModelLocator;
+            else
+                Application.Current.Resources.Add("Locator", ServiceLocator.ViewModelLocator);
+
+            if (Application.Current.Resources["ThemeChooser"] != null)
+                Application.Current.Resources["ThemeChooser"] = ServiceLocator.ThemeChooser;
+            else
+                Application.Current.Resources.Add("ThemeChooser", ServiceLocator.ViewModelLocator);
+
+            if (Application.Current.Resources["LocalizedStrings"] != null)
+                Application.Current.Resources["LocalizedStrings"] = ServiceLocator.LocalizedStrings;
+            else
+                Application.Current.Resources.Add("LocalizedStrings", ServiceLocator.ViewModelLocator);
         }
     }
 }

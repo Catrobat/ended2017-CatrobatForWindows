@@ -24,46 +24,67 @@
       </TransitionCollection>
     </Grid.ChildrenTransitions>
 
-    <pages:PageHeaderControl ShowBackButton="False" Grid.Row="0"/>
+    <pages:PageHeaderControl ShowBackButton="False" ShowApplicationName="True" Grid.Row="0"/>
 
+    <ScrollViewer  Grid.Row="1">
+      <ItemsControl >
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <WrapGrid Orientation="Horizontal"/>
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+
+
+
+
+
+      </ItemsControl>
+    </ScrollViewer>
     <Hub Grid.Row="1" Margin="0 -120 0 0">
-      <HubSection Width="500" Header="{Binding CurrentProject.ProjectHeader.ProgramName }">
+      <HubSection Header="{Binding CurrentProject.ProjectHeader.ProgramName }">
         <DataTemplate>
-          <Grid Row="1">
+          <Grid VerticalAlignment="Stretch" Margin="0 0 0 0">
             <Grid.RowDefinitions>
               <RowDefinition Height="Auto"/>
               <RowDefinition/>
-              <RowDefinition Height="Auto"/>
-              <RowDefinition Height="130"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-              <Image Name="ImageCurrentProjectScreenshot" MaxWidth="400" MaxHeight="400"
+            <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Center">
+              <Image Name="ImageCurrentProjectScreenshot" MaxWidth="650" MaxHeight="500"
                 Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, 
                 Converter={StaticResource NoScreenshotConverter}}" />
               <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="ButtonPlayCurrentProject"          
                 Template="{StaticResource ScreenshotButtonControlTemplate}"
                 Margin="0,0,0,0" Command="{Binding PlayCurrentProjectCommand}" Width="130" />
-            </Grid>
-            <Grid Grid.Row="1" HorizontalAlignment="Center" Width="340" Margin="0 15 0 0">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-              </Grid.ColumnDefinitions>
-              <Button Grid.Column="0" Margin="0 0 0 -5" HorizontalAlignment="Center" Command="{Binding CreateNewProjectCommand}"
-                        Content="{ Binding Resources.Main_ButtonCreate, 
-                        Source={StaticResource LocalizedStrings}}">
-                <Button.Flyout>
-                  <Flyout Opened="FlyoutNewProject_OnOpened">
-                    <Grid>
-                      <local:AddNewProjectView Width="400"/>
-                    </Grid>
-                  </Flyout>
-                </Button.Flyout>
+
+              <Grid HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0 0 0 0">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto"/>
+                  <ColumnDefinition/>
+                  <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" BorderThickness="0" Margin="-3" Background="#F93377CC"
+                      HorizontalAlignment="Center" Command="{Binding CreateNewProjectCommand}">
+                  <Button.Flyout>
+                    <Flyout Opened="FlyoutNewProject_OnOpened">
+                      <Grid>
+                        <local:AddNewProjectView Width="400" />
+                      </Grid>
+                    </Flyout>
+                  </Button.Flyout>
+                  <Grid>
+                    <TextBlock Text="{ Binding Resources.Main_ButtonCreate, 
+                        Source={StaticResource LocalizedStrings}}" FontSize="45"/>
+                  </Grid>
                 </Button>
 
-              <Button Grid.Column="1" Margin="0 0 0 -5" HorizontalAlignment="Center" 
-                      Command="{Binding EditCurrentProjectCommand}" Content="{Binding Resources.Main_ButtonEdit, 
-                      Source={StaticResource LocalizedStrings}}"/>
+                <Button Grid.Column="2" Margin="-3" BorderThickness="0" HorizontalAlignment="Center" Background="#F93377CC"
+                      Command="{Binding EditCurrentProjectCommand}">
+                  <Grid>
+                    <TextBlock Text="{Binding Resources.Main_ButtonEdit, 
+                      Source={StaticResource LocalizedStrings}}" FontSize="45"/>
+                  </Grid>
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
         </DataTemplate>
@@ -92,7 +113,7 @@
         </DataTemplate>
       </HubSection>
 
-      <HubSection Width="520" Header="{Binding Resources.Main_HeaderAbout, Source={StaticResource LocalizedStrings}}">
+      <HubSection Width="480" Header="{Binding Resources.Main_HeaderAbout, Source={StaticResource LocalizedStrings}}">
         <DataTemplate>
           <Grid>
             <StackPanel>
@@ -107,7 +128,7 @@
               Command="{Binding SettingsCommand}"  
               Margin="0 0 0 0" />-->
                 <StackPanel Grid.Column="1" HorizontalAlignment="Left" Orientation="Vertical">
-                  <TextBlock Text="{Binding ApplicationVersionName}" Margin="30" TextWrapping="Wrap" />
+                  <TextBlock Text="{Binding ApplicationVersionName}" Margin="30" FontSize="30" TextWrapping="Wrap" />
                 </StackPanel>
               </Grid>
             </StackPanel>
@@ -138,7 +159,7 @@
                 <local:ProjectSettingsView/>
               </Flyout>
             </AppBarButton.Flyout>
-            </AppBarButton>
+          </AppBarButton>
           <AppBarButton Icon="SetTile"  
             Label="{Binding Resources.Main_PinProjectToStart, Source={StaticResource LocalizedStrings}}"
             Command="{Binding PinLocalProjectCommand}">
@@ -150,7 +171,7 @@
           </AppBarButton>
           <!--<AppBarButton Icon="Share"  
             Label="{Binding Resources.Main_ShareProject, Source={StaticResource LocalizedStrings}}"
-            Command="{Binding ShareLocalProjectCommand}"/>--> 
+            Command="{Binding ShareLocalProjectCommand}"/>-->
         </StackPanel>
       </Grid>
     </AppBar>

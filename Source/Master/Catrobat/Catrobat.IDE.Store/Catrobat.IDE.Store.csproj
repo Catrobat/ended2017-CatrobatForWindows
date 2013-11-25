@@ -143,6 +143,12 @@
     <Compile Include="Content\Images\Misc\ImageGallery.xaml.cs">
       <DependentUpon>ImageGallery.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Actions\ActionsControl.xaml.cs">
+      <DependentUpon>ActionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Actions\ScriptControl.xaml.cs">
+      <DependentUpon>ScriptControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AppBar\AppBarPlayButton.xaml.cs">
       <DependentUpon>AppBarPlayButton.xaml</DependentUpon>
     </Compile>
@@ -237,16 +243,8 @@
     <Compile Include="Views\Editor\Sprites\ChangeSpriteView.xaml.cs">
       <DependentUpon>ChangeSpriteView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\Sprites\SpriteEditorView.xaml.cs">
-      <DependentUpon>SpriteEditorView.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Views\Editor\Sprites\SpritesPresenter.xaml.cs">
       <DependentUpon>SpritesPresenter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Editor\Sprites\SpritesView.xaml.cs">
-      <DependentUpon>SpritesView.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\Main\TileGeneratorView.xaml.cs">
       <DependentUpon>TileGeneratorView.xaml</DependentUpon>
@@ -433,6 +431,14 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Controls\Actions\ActionsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Actions\ScriptControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AppBar\AppBarPlayButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -530,17 +536,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\Sprites\SpriteEditorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Editor\Sprites\SpritesPresenter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Editor\Sprites\SpritesView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\TileGeneratorView.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -30,12 +30,7 @@ namespace Catrobat.IDE.Core.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public static bool IsInitialized = false;
 
-        public ViewModelLocator()
-        {
-            RegisterViewModels();
-        }
-
-        private void RegisterViewModels()
+        public void RegisterViewModels()
         {
             if (!IsInitialized)
             {
@@ -51,7 +46,6 @@ namespace Catrobat.IDE.Core.ViewModel
                 Core.Services.ServiceLocator.Register<SettingsBrickViewModel>(TypeCreationMode.Normal);
                 Core.Services.ServiceLocator.Register<SettingsLanguageViewModel>(TypeCreationMode.Normal);
                 Core.Services.ServiceLocator.Register<SettingsThemeViewModel>(TypeCreationMode.Normal);
-                Core.Services.ServiceLocator.Register<CostumeNameChooserViewModel>(TypeCreationMode.Normal);
                 Core.Services.ServiceLocator.Register<ChangeCostumeViewModel>(TypeCreationMode.Normal);
                 Core.Services.ServiceLocator.Register<NewSoundSourceSelectionViewModel>(TypeCreationMode.Normal);
                 Core.Services.ServiceLocator.Register<ChangeSoundViewModel>(TypeCreationMode.Normal);
@@ -78,6 +72,7 @@ namespace Catrobat.IDE.Core.ViewModel
                 Core.Services.ServiceLocator.Register<NewCostumeSourceSelectionViewModel>(TypeCreationMode.Normal);
                 Core.Services.ServiceLocator.Register<CostumeSavingViewModel>(TypeCreationMode.Normal);
                 Core.Services.ServiceLocator.Register<EditorLoadingViewModel>(TypeCreationMode.Normal);
+                Core.Services.ServiceLocator.Register<CostumeNameChooserViewModel>(TypeCreationMode.Normal);
             }
             
         }

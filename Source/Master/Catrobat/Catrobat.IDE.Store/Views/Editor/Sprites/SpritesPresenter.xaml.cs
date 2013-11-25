@@ -92,16 +92,16 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
 
         private void GridViewActions_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            AppBarBottomn.IsOpen = GridViewActions.SelectedItems.Count -
-                e.RemovedItems.Count + e.AddedItems.Count > 0;
+            //AppBarBottomn.IsOpen = GridViewActions.SelectedItems.Count -
+            //    e.RemovedItems.Count + e.AddedItems.Count > 0;
 
-            if (ItemsControlAppBars.Items != null)
-            {
-                ItemsControlAppBars.Items.Remove(_appBarActions);
-                ItemsControlAppBars.Items.Remove(_appBarLooks);
-                ItemsControlAppBars.Items.Remove(_appBarSounds);
-                ItemsControlAppBars.Items.Add(_appBarActions);
-            }
+            //if (ItemsControlAppBars.Items != null)
+            //{
+            //    ItemsControlAppBars.Items.Remove(_appBarActions);
+            //    ItemsControlAppBars.Items.Remove(_appBarLooks);
+            //    ItemsControlAppBars.Items.Remove(_appBarSounds);
+            //    ItemsControlAppBars.Items.Add(_appBarActions);
+            //}
         }
 
         private void GridViewLooks_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

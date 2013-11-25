@@ -28,8 +28,6 @@ namespace Catrobat.IDE.Store.Controls
             if (ViewModelBase.IsInDesignModeStatic)
                 return;
 
-            
-
             if (PreviousExecutionState == ApplicationExecutionState.Terminated)
             {
                 await SuspensionManager.RestoreAsync();
@@ -39,7 +37,7 @@ namespace Catrobat.IDE.Store.Controls
                 PreviousExecutionState == ApplicationExecutionState.ClosedByUser ||
                 PreviousExecutionState == ApplicationExecutionState.Terminated)
             {
-                Core.App.SetNativeApp(new AppStore());
+                Core.App.SetNativeApp(Application.Current.Resources["App"] as AppStore);
                 await Core.App.Initialize();
                 ServiceLocator.Register(new DispatcherServiceStore(Dispatcher));
 

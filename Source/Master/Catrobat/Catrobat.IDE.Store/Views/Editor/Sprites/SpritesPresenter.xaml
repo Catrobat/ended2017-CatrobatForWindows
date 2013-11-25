@@ -16,6 +16,7 @@
   xmlns:application="using:Catrobat.IDE.Store.Content.Images.Application"
   xmlns:controls="using:GridViewSamples.Controls"
   xmlns:sounds="using:Catrobat.IDE.Store.Views.Editor.Sounds"
+  xmlns:actions="using:Catrobat.IDE.Store.Controls.Actions"
   mc:Ignorable="d">
   <Page.Resources>
     <Style x:Key="RadioButtonTabsTemplate" TargetType="RadioButton">
@@ -254,18 +255,60 @@
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                   UseTouchAnimationsForAllNavigation="False"
                   Grid.Row="1">
-            <FlipViewItem>
+            <FlipViewItem Height="370" VerticalAlignment="Top">
               <Grid>
                 <Grid.RowDefinitions>
                   <RowDefinition Height="Auto"/>
                   <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <listView:BindableGridView x:Name="GridViewActions" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                <!--<actions:ActionsControl Actions="{ Binding SelectedSprite.Scripts }" >
+
+                </actions:ActionsControl>-->
+
+                <GridView Grid.Row="1" Name="ItemsControlScripts" ItemsSource="{Binding SelectedSprite.Scripts.Scripts}">
+                  <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <WrapGrid Orientation="Vertical" MaximumRowsOrColumns="1" />
+                    </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                      <Grid DataContext="{Binding}" Width="500" Height="300" Margin="10" Background="Goldenrod">
+                        <Grid>
+                          <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                          </Grid.RowDefinitions>
+
+                          <Grid Grid.Row="0">
+                            <ContentControl Name="ContentControlScript" Content="{Binding}" ContentTemplateSelector="{ StaticResource ActionTemplate }" />
+                          </Grid>
+
+                          <Grid Grid.Row="1">
+                            <ItemsControl Name="ItemsControlBricks" ItemsSource="{Binding Bricks.Bricks}" ItemTemplateSelector="{ StaticResource ActionTemplate }">
+                              <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                  <WrapGrid Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                              </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </GridView>
+
+
+
+
+
+                <!--<listView:BindableGridView x:Name="GridViewActions" HorizontalAlignment="Left" VerticalAlignment="Top" 
                           Grid.Row="1" CanReorderItems="True" ItemsSource="{Binding ScriptBricks }" 
                   ItemTemplateSelector="{StaticResource ActionTemplate}" 
                   SelectionChanged="GridViewActions_OnSelectionChanged" SelectedItems="{Binding SelectedActions}">
-                </listView:BindableGridView>
+                </listView:BindableGridView>-->
               </Grid>
             </FlipViewItem>
             <FlipViewItem>
@@ -417,11 +460,11 @@
                       <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="0" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes.Costumes[0].Image.ImageSource}" />
+                         Source="{Binding Costumes.Costumes[0].Image.ImageSource}" MaxWidth="50" />
                     <Image Grid.Column="1" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes.Costumes[1].Image.ImageSource}" />
+                         Source="{Binding Costumes.Costumes[1].Image.ImageSource}"  MaxWidth="50" />
                     <Image Grid.Column="2" Margin="5 0 5 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Source="{Binding Costumes.Costumes[2].Image.ImageSource}" />
+                         Source="{Binding Costumes.Costumes[2].Image.ImageSource}"  MaxWidth="50" />
                   </Grid>
                 </Grid>
                 <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 0 15 0"

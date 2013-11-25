@@ -6,7 +6,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d"
   DataContext="{Binding AddNewProjectViewModel, Source={StaticResource Locator}}"
-  d:DesignHeight="250" d:DesignWidth="500">
+  d:DesignHeight="150" d:DesignWidth="500">
 
   <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
@@ -20,10 +20,10 @@
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
+        <!--<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
           <TextBlock Margin="10" Style="{StaticResource SubheaderTextBlockStyle}"
                      Text="{Binding Resources.Main_TitleNewProject, Source={StaticResource LocalizedStrings}}" />
-        </StackPanel>
+        </StackPanel>-->
 
         <Grid Grid.Row="1" Margin="10 0 0 15" HorizontalAlignment="Stretch">
           <Grid.RowDefinitions>
@@ -46,19 +46,9 @@
         </Grid>
       </Grid>
       <Grid Grid.Column="1">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <AppBarButton Grid.Row="1" VerticalAlignment="Center" Icon="Save" 
+        <AppBarButton VerticalAlignment="Bottom" Icon="Save" 
                       Label="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}" 
                       Command="{Binding SaveCommand}"/>
-        <AppBarButton Grid.Row="2" VerticalAlignment="Center" Icon="Cancel" 
-                      Label="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}" 
-                      Command="{Binding CancelCommand}"/>
       </Grid>
     </Grid>
   </Grid>
