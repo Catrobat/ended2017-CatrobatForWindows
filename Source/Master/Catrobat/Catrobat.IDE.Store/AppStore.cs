@@ -8,6 +8,7 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
 using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModel.Main;
 using Catrobat.IDE.Store.Services;
@@ -80,6 +81,9 @@ namespace Catrobat.IDE.Store
 
             var spriteEditorViewModel = ServiceLocator.GetInstance<SpriteEditorViewModel>();
             spriteEditorViewModel.PresenterType = typeof(SpritesPresenter);
+
+            //var costumeSavingViewModel = ServiceLocator.GetInstance<CostumeSavingViewModel>();
+            //costumeSavingViewModel.PresenterType = typeof(SpritesPresenter);
         }
     }
 }

@@ -57,6 +57,8 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
         {
             this.InitializeComponent();
 
+            FlipViewTabs.SelectedIndex = _spriteEditorViewModel.SelectedTabIndex;
+
             Window.Current.SizeChanged += WindowOnSizeChanged;
 
             if (ItemsControlAppBars.Items != null)
@@ -91,6 +93,7 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
             if (radioButton != null)
             {
                 int index = Convert.ToInt32(radioButton.Tag);
+                _spriteEditorViewModel.SelectedTabIndex = index;
                 FlipViewTabs.SelectedIndex = index;
             }
         }

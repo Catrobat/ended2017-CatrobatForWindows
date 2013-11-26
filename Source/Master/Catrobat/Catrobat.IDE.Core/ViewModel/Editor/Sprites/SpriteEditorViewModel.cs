@@ -37,10 +37,21 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
         private ObservableCollection<Costume> _selectedCostumes;
         private ObservableCollection<DataObject> _SelectedActions;
         private ObservableCollection<Sound> _selectedSounds;
+        private int _selectedTabIndex;
 
         #endregion
 
         # region Properties
+
+        public int SelectedTabIndex
+        {
+            get { return _selectedTabIndex; }
+            set
+            {
+                _selectedTabIndex = value;
+                RaisePropertyChanged(() => SelectedTabIndex);
+            }
+        }
 
         public Project CurrentProject
         {
@@ -139,7 +150,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             {
                 if (_selectedSprite != null)
                     return _selectedSprite.Costumes.Costumes;
-                
+
                 return null;
             }
         }
@@ -544,7 +555,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
                     endBrick = scriptBrick;
                 }
 
-                if(scriptBrick is Script && !scriptsToRemove.Contains(scriptBrick as Script))
+                if (scriptBrick is Script && !scriptsToRemove.Contains(scriptBrick as Script))
                     scriptsToRemove.Add(scriptBrick as Script);
 
                 if (scriptBrick is Brick && !bricksToRemove.Contains(scriptBrick as Brick))
@@ -561,7 +572,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
                         if (isToDelete && !bricksToRemove.Contains(scriptBrickToRemove as Brick))
                         {
                             bricksToRemove.Add(scriptBrickToRemove as Brick);
-                }
+                        }
 
                         if (scriptBrickToRemove == endBrick)
                             break;
@@ -614,7 +625,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             var messageContent = String.Format(AppResources.Editor_MessageBoxDeleteText, SelectedSounds.Count, sound);
             var messageHeader = String.Format(AppResources.Editor_MessageBoxDeleteHeader, sound);
 
-            ServiceLocator.NotifictionService.ShowMessageBox(messageHeader, 
+            ServiceLocator.NotifictionService.ShowMessageBox(messageHeader,
                 messageContent, DeleteSoundMessageBoxResult, MessageBoxOptions.OkCancel);
         }
 
@@ -882,9 +893,9 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
 
-            Messenger.Default.Register<GenericMessage<string>>(this, 
+            Messenger.Default.Register<GenericMessage<string>>(this,
                 ViewModelMessagingToken.BroadcastMessageListener, ReceiveNewBroadcastMessageAction);
-            Messenger.Default.Register<GenericMessage<DataObject>>(this, 
+            Messenger.Default.Register<GenericMessage<DataObject>>(this,
                 ViewModelMessagingToken.SelectedBrickListener, ReceiveSelectedBrickMessageAction);
         }
 
