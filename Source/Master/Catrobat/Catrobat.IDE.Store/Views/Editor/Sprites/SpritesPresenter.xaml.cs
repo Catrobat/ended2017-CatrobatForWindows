@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.CatrobatObjects.Sounds;
@@ -17,12 +22,30 @@ using Catrobat.IDE.Core.ViewModel.Editor.Scripts;
 using Catrobat.IDE.Core.ViewModel.Editor.Sounds;
 using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using Windows.UI.Xaml.Controls;
+using Catrobat.IDE.Store.Common;
 using Catrobat.IDE.Store.Views.Editor.Sounds;
 
 namespace Catrobat.IDE.Store.Views.Editor.Sprites
 {
-    public sealed partial class SpritesPresenter : Page
+    public sealed partial class SpritesPresenter : Page, INotifyPropertyChanged
     {
+        //private readonly ObservableDictionary _localViewModel = new ObservableDictionary();
+
+        //public ObservableDictionary LocalViewModel
+        //{
+        //    get { return this._localViewModel; }
+        //}
+
+        public double ActionsHeight
+        {
+            get { return Window.Current.Bounds.Height - 390; }
+        }
+
+        public double ActionsInnerHeight
+        {
+            get { return ActionsHeight - 20; }
+        }
+
         private readonly SpritesViewModel _spritesViewModel = ServiceLocator.GetInstance<SpritesViewModel>();
         private readonly SpriteEditorViewModel _spriteEditorViewModel = ServiceLocator.GetInstance<SpriteEditorViewModel>();
         private readonly FrameworkElement _appBarObjects;
@@ -34,6 +57,10 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
         {
             this.InitializeComponent();
 
+            FlipViewTabs.SelectedIndex = _spriteEditorViewModel.SelectedTabIndex;
+
+            Window.Current.SizeChanged += WindowOnSizeChanged;
+
             if (ItemsControlAppBars.Items != null)
             {
                 _appBarObjects = (FrameworkElement) ItemsControlAppBars.Items[0];
@@ -43,6 +70,11 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
             }
 
             _spritesViewModel.PropertyChanged += ViewModelOnPropertyChanged;
+        }
+
+        private void WindowOnSizeChanged(object sender, WindowSizeChangedEventArgs windowSizeChangedEventArgs)
+        {
+            // TODO: update size of GridView
         }
 
         private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -61,6 +93,7 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
             if (radioButton != null)
             {
                 int index = Convert.ToInt32(radioButton.Tag);
+                _spriteEditorViewModel.SelectedTabIndex = index;
                 FlipViewTabs.SelectedIndex = index;
             }
         }
@@ -235,5 +268,20 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
                     break;
             }
         }
+
+
+
+        #region PropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        [NotifyPropertyChangedInvocator]
+
+        public void RaisePropertyChanged<T>(Expression<Func<T>> selector)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyHelper.GetPropertyName(selector)));
+            }
+        }
+        #endregion
     }
 }

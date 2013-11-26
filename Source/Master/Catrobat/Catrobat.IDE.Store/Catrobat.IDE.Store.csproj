@@ -175,6 +175,7 @@
     <Compile Include="Controls\ListPicker\ListPicker.xaml.cs">
       <DependentUpon>ListPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ListView\VariableSizedGridView.cs" />
     <Compile Include="Controls\Pages\PageHeaderControl.xaml.cs">
       <DependentUpon>PageHeaderControl.xaml</DependentUpon>
     </Compile>
@@ -184,6 +185,7 @@
     <Compile Include="Controls\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\NativeConverters\NativeScriptSpanConverter.cs" />
     <Compile Include="Converters\NativeConverters\NativeImageSquareConverter.cs" />
     <Compile Include="Converters\PortableConverters.cs" />
     <Compile Include="Converters\PortableValueConverterStore.cs" />

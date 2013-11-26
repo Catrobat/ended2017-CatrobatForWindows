@@ -163,7 +163,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
             Messenger.Default.Send(message, ViewModelMessagingToken.CostumeImageToSaveListener);
 
             ServiceLocator.DispatcherService.RunOnMainThread(() =>
-                ServiceLocator.NavigationService.NavigateTo<CostumeSavingViewModel>());
+            {
+                ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);
+                ServiceLocator.NavigationService.NavigateBack();
+            });
+
+            //ServiceLocator.DispatcherService.RunOnMainThread(() =>
+            //    ServiceLocator.NavigationService.NavigateTo<CostumeSavingViewModel>());
 
             var newDimention = new ImageDimension
             {
@@ -179,10 +185,10 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Costumes
                 {
                     _receivedSelectedSprite.Costumes.Costumes.Add(costume);
                     ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);
-                    ServiceLocator.NavigationService.RemoveBackEntry();
+                    ServiceLocator.NavigationService.RemoveBackEntryForPlatform(NavigationPlatform.WindowsPhone);
                     ResetViewModel();
-                    ServiceLocator.NavigationService.NavigateBack(
-                        new List<NavigationPlatform>{NavigationPlatform.WindowsStore});
+                    //ServiceLocator.NavigationService.NavigateBack(
+                    //    new List<NavigationPlatform>{NavigationPlatform.WindowsStore});
                 });
             }
             catch (Exception)
