@@ -9,10 +9,11 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    
-    <Grid>
-    <GridView Name="GridView" SelectionChanged="GridView_OnSelectionChanged" CanReorderItems="True" AllowDrop="True" CanDragItems="True">
-        
-      </GridView>
-    </Grid>
+
+  <Grid>
+    <GridView Name="GridView" SelectionChanged="GridView_OnSelectionChanged" 
+              SelectionMode="Multiple" CanReorderItems="True" AllowDrop="True" CanDragItems="True">
+
+    </GridView>
+  </Grid>
 </UserControl>

@@ -25,7 +25,7 @@
   <converters:VariableButtonVisibilityConverterBootstrap x:Key="VariableButtonVisibilityConverter"/>-->
 
   <nativeConverters:NativeImageSquareConverter x:Key="ImageSquareConverter" />
-  <nativeConverters:NativeScriptSpanConverter x:Key="NativeScriptSpanConverter" />
+  <nativeConverters:NativeColorOpacityConverter x:Key="ColorOpacityConverter" />
   
 
 </ResourceDictionary>

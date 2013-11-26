@@ -262,12 +262,8 @@
                   <RowDefinition Height="Auto"/>
                   <RowDefinition/>
                 </Grid.RowDefinitions>
-
-                <!--<actions:ActionsControl Actions="{ Binding SelectedSprite.Scripts }" >
-
-                </actions:ActionsControl>-->
-
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" 
+                              VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled">
                   <listView:VariableSizedGridView Grid.Row="1" Name="ItemsControlScripts" 
                                                 Height="{Binding ActionsHeight, ElementName=PageRoot}"
                                                 ItemsSource="{Binding SelectedSprite.Scripts.Scripts}">
@@ -278,8 +274,9 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                       <DataTemplate>
-                        <Grid  DataContext="{Binding}" Margin="0 0 10 0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                             Background="{ Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+                        <Grid  DataContext="{Binding}" Margin="10 0 10 0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                             Background="{ Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}, 
+                             Converter={StaticResource ColorOpacityConverter}, ConverterParameter='0.8' }">
                           <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                             <Grid.RowDefinitions>
                               <RowDefinition Height="Auto"/>
@@ -292,9 +289,9 @@
                             </Grid>
 
                             <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                              <listView:BindableGridView Name="ItemsControlBricks" ItemsSource="{Binding Bricks.Bricks}" 
-                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                                                       CanReorderItems="True" ItemTemplateSelector="{ StaticResource ActionTemplate }">
+                              <listView:BindableGridView Name="ItemsControlBricks" ItemsSource="{Binding Bricks.Bricks}"  
+                                                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                                        CanReorderItems="True" ItemTemplateSelector="{ StaticResource ActionTemplate }">
                                 <!--<ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                   <WrapGrid Orientation="Vertical" />
@@ -332,6 +329,7 @@
                   <listView:BindableGridView x:Name="GridViewLooks" 
                             HorizontalAlignment="Left" VerticalAlignment="Top"
                             AllowDrop="True" CanReorderItems="True"
+                            Height="{Binding ActionsHeight, ElementName=PageRoot}"
                             ItemTemplateSelector="{StaticResource ActionTemplate}" ItemsSource="{Binding Costumes }" 
                             SelectionMode="Multiple" SelectionChanged="GridViewLooks_OnSelectionChanged"
                             SelectedItems="{Binding SelectedCostumes}">
@@ -380,7 +378,9 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="1">
-                  <listView:BindableGridView x:Name="GridViewSounds" HorizontalAlignment="Left" VerticalAlignment="Top" AllowDrop="True" CanReorderItems="True"
+                  <listView:BindableGridView x:Name="GridViewSounds" HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" AllowDrop="True" CanReorderItems="True"
+                    Height="{Binding ActionsHeight, ElementName=PageRoot}"
                     ItemsSource="{Binding Sounds }" SelectionMode="Multiple"
                     SelectionChanged="GridViewSounds_OnSelectionChanged"
                     SelectedItems="{Binding SelectedSounds}">
@@ -435,10 +435,10 @@
           <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Margin="30 5 10 0" Orientation="Horizontal">
+        <!--<StackPanel Margin="30 5 10 0" Orientation="Horizontal">
           <TextBlock Text="{Binding Resources.Editor_ObjectPlural, Source={StaticResource LocalizedStrings}}"
                      VerticalAlignment="Center" FontSize="36"/>
-        </StackPanel>
+        </StackPanel>-->
 
         <GridView
           x:Name="GridViewSprites"

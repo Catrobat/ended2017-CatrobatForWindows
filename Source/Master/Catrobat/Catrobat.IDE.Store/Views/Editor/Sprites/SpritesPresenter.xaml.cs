@@ -38,7 +38,7 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
 
         public double ActionsHeight
         {
-            get { return Window.Current.Bounds.Height - 390; }
+            get { return Window.Current.Bounds.Height - 350; }
         }
 
         public double ActionsInnerHeight

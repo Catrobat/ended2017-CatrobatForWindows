@@ -185,7 +185,7 @@
     <Compile Include="Controls\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\NativeConverters\NativeScriptSpanConverter.cs" />
+    <Compile Include="Converters\NativeConverters\NativeColorOpacityConverter.cs" />
     <Compile Include="Converters\NativeConverters\NativeImageSquareConverter.cs" />
     <Compile Include="Converters\PortableConverters.cs" />
     <Compile Include="Converters\PortableValueConverterStore.cs" />

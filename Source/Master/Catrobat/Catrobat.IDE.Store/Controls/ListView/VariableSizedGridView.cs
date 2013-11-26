@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Store.Controls.ListView
         {
             try
             {
-                var height = Window.Current.Bounds.Height - 390;
+                var height = Window.Current.Bounds.Height - 350;
                 var rows = (int) height / 110;
 
                 dynamic _Item = item;

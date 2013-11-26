@@ -231,7 +231,7 @@ namespace Catrobat.IDE.Store.Services.Storage
                 await file.DeleteAsync();
             }
 
-            if(path != "")
+            if (path != "")
                 await directory.DeleteAsync();
         }
 
@@ -291,7 +291,9 @@ namespace Catrobat.IDE.Store.Services.Storage
             var destinationFolderPath = Path.GetDirectoryName(destinationPath);
             var destinationFolder = await GetFolderAsync(destinationFolderPath);
 
-            await file.CopyAsync(destinationFolder, file.Name, NameCollisionOption.ReplaceExisting);
+            var newFileName = Path.GetFileName(destinationPath);
+
+            await file.CopyAsync(destinationFolder, newFileName, NameCollisionOption.ReplaceExisting);
         }
 
         public async Task MoveFileAsync(string sourcePath, string destinationPath)
@@ -339,7 +341,7 @@ namespace Catrobat.IDE.Store.Services.Storage
                 case StorageFileMode.Create:
                 case StorageFileMode.CreateNew:
                     {
-                        var folder =  await CreateFolderPath(Path.GetDirectoryName(path));
+                        var folder = await CreateFolderPath(Path.GetDirectoryName(path));
                         //var folder = await GetFolderAsync(folderPath);
                         file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
                         break;
@@ -442,13 +444,13 @@ namespace Catrobat.IDE.Store.Services.Storage
 
                         try
                         {
-                            var bitmap = ((WriteableBitmap) thumbnailImage.ImageSource);
+                            var bitmap = ((WriteableBitmap)thumbnailImage.ImageSource);
                             var resolution = 100;
 
                             var fileStream = await OpenFileAsync(thumbnailPath, StorageFileMode.Create, StorageFileAccess.Write);
 
                             var encoderId = BitmapEncoder.PngEncoderId;
-                            var encoder = await  BitmapEncoder.CreateAsync(encoderId, fileStream.AsRandomAccessStream());
+                            var encoder = await BitmapEncoder.CreateAsync(encoderId, fileStream.AsRandomAccessStream());
                             encoder.SetPixelData(BitmapPixelFormat.Bgra8,
                                                                  BitmapAlphaMode.Straight,
                                                                  (uint)bitmap.PixelWidth,
@@ -504,10 +506,10 @@ namespace Catrobat.IDE.Store.Services.Storage
                 switch (format)
                 {
                     case ImageFormat.Png:
-                            if (image.EncodedData != null)
-                                await image.EncodedData.CopyToAsync(stream);
-                            else
-                                PNGWriter.WritePNG((WriteableBitmap)image.ImageSource, stream, 95);
+                        if (image.EncodedData != null)
+                            await image.EncodedData.CopyToAsync(stream);
+                        else
+                            PNGWriter.WritePNG((WriteableBitmap)image.ImageSource, stream, 95);
                         break;
                     case ImageFormat.Jpg:
                         throw new NotImplementedException();
@@ -599,7 +601,7 @@ namespace Catrobat.IDE.Store.Services.Storage
 
             foreach (var folder in folders)
             {
-                
+
             }
 
             await parentFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
@@ -659,7 +661,7 @@ namespace Catrobat.IDE.Store.Services.Storage
             var folder = await GetFolderAsync(directoryName);
 
             if (folder == null)
-                    return null;
+                return null;
 
             if (createIfNotExists)
                 return await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
