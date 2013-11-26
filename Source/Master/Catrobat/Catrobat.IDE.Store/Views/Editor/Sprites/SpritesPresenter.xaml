@@ -17,6 +17,7 @@
   xmlns:controls="using:GridViewSamples.Controls"
   xmlns:sounds="using:Catrobat.IDE.Store.Views.Editor.Sounds"
   xmlns:actions="using:Catrobat.IDE.Store.Controls.Actions"
+
   mc:Ignorable="d">
   <Page.Resources>
     <Style x:Key="RadioButtonTabsTemplate" TargetType="RadioButton">
@@ -130,8 +131,8 @@
       <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
       <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False"/>
       <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="False"/>
-      <Setter Property="ScrollViewer.IsHorizontalScrollChainingEnabled" Value="True"/>
-      <Setter Property="ScrollViewer.IsVerticalScrollChainingEnabled" Value="True"/>
+      <Setter Property="ScrollViewer.IsHorizontalScrollChainingEnabled" Value="False"/>
+      <Setter Property="ScrollViewer.IsVerticalScrollChainingEnabled" Value="False"/>
       <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
       <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True"/>
       <Setter Property="ItemsPanel">
@@ -251,7 +252,7 @@
           </StackPanel>
 
           <FlipView x:Name="FlipViewTabs" Style="{StaticResource FlipViewTabsStyle}"
-                  SelectionChanged="FlipViewTabs_OnSelectionChanged"
+                  SelectionChanged="FlipViewTabs_OnSelectionChanged" 
                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                   UseTouchAnimationsForAllNavigation="False"
                   Grid.Row="1">
@@ -266,40 +267,47 @@
 
                 </actions:ActionsControl>-->
 
-                <GridView Grid.Row="1" Name="ItemsControlScripts" ItemsSource="{Binding SelectedSprite.Scripts.Scripts}">
-                  <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                      <WrapGrid Orientation="Vertical" MaximumRowsOrColumns="1" />
-                    </ItemsPanelTemplate>
-                  </ItemsControl.ItemsPanel>
-                  <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                      <Grid DataContext="{Binding}" Width="500" Height="300" Margin="10" Background="Goldenrod">
-                        <Grid>
-                          <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                          </Grid.RowDefinitions>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled">
+                  <listView:VariableSizedGridView Grid.Row="1" Name="ItemsControlScripts" 
+                                                Height="{Binding ActionsHeight, ElementName=PageRoot}"
+                                                ItemsSource="{Binding SelectedSprite.Scripts.Scripts}">
+                    <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <VariableSizedWrapGrid ItemHeight="{Binding ActionsInnerHeight, ElementName=PageRoot}" ItemWidth="345" Orientation="Vertical" MaximumRowsOrColumns="1" />
+                      </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate>
+                        <Grid  DataContext="{Binding}" Margin="0 0 10 0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                             Background="{ Binding StaticTheme.ControlBrickBrush.NativeBrush, Source={StaticResource ThemeChooser}}">
+                          <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                              <RowDefinition Height="Auto"/>
+                              <RowDefinition/>
+                            </Grid.RowDefinitions>
 
-                          <Grid Grid.Row="0">
-                            <ContentControl Name="ContentControlScript" Content="{Binding}" ContentTemplateSelector="{ StaticResource ActionTemplate }" />
-                          </Grid>
+                            <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                              <ContentControl Name="ContentControlScript" Content="{Binding}" 
+                                            ContentTemplateSelector="{ StaticResource ActionTemplate }" />
+                            </Grid>
 
-                          <Grid Grid.Row="1">
-                            <ItemsControl Name="ItemsControlBricks" ItemsSource="{Binding Bricks.Bricks}" ItemTemplateSelector="{ StaticResource ActionTemplate }">
-                              <ItemsControl.ItemsPanel>
+                            <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                              <listView:BindableGridView Name="ItemsControlBricks" ItemsSource="{Binding Bricks.Bricks}" 
+                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                                       CanReorderItems="True" ItemTemplateSelector="{ StaticResource ActionTemplate }">
+                                <!--<ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                   <WrapGrid Orientation="Vertical" />
                                 </ItemsPanelTemplate>
-                              </ItemsControl.ItemsPanel>
-                            </ItemsControl>
+                              </ItemsControl.ItemsPanel>-->
+                              </listView:BindableGridView>
+                            </Grid>
                           </Grid>
                         </Grid>
-                      </Grid>
-                    </DataTemplate>
-                  </ItemsControl.ItemTemplate>
-                </GridView>
-
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </listView:VariableSizedGridView>
+                </ScrollViewer>
 
 
 
@@ -352,10 +360,10 @@
                             <ColumnDefinition Width="3*" />
                           </Grid.ColumnDefinitions>
                           <Image Grid.Column="0" Source="{Binding Image.ImageSource}" 
-                       MaxWidth="120" MaxHeight="120" Margin="10 10 5 10" VerticalAlignment="Stretch" />
+                            MaxWidth="120" MaxHeight="120" Margin="10 10 5 10" VerticalAlignment="Stretch" />
                           <Grid Grid.Column="1" Margin="5">
                             <TextBlock Grid.Row="0" FontSize="28" Margin="15 5 5 5" Text="{Binding Name}" 
-                             VerticalAlignment="Center" />
+                              VerticalAlignment="Center" />
                           </Grid>
                         </Grid>
                       </DataTemplate>
