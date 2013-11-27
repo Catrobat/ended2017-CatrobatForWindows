@@ -167,6 +167,8 @@
     <Compile Include="Controls\FormulaControls\VariableButton.xaml.cs">
       <DependentUpon>VariableButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ListView\ActionsGridView.cs" />
+    <Compile Include="Controls\ListView\AddItemCollection.cs" />
     <Compile Include="Controls\ListView\BindableGridView.xaml.cs">
       <DependentUpon>BindableGridView.xaml</DependentUpon>
     </Compile>
@@ -176,6 +178,7 @@
       <DependentUpon>ListPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListView\VariableSizedGridView.cs" />
+    <Compile Include="Controls\ListView\VisibilityConverter.cs" />
     <Compile Include="Controls\Pages\PageHeaderControl.xaml.cs">
       <DependentUpon>PageHeaderControl.xaml</DependentUpon>
     </Compile>
@@ -185,7 +188,8 @@
     <Compile Include="Controls\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\NativeConverters\NativeScriptSpanConverter.cs" />
+    <Compile Include="Converters\NativeConverters\NativeGridViewExVisibilityConverter.cs" />
+    <Compile Include="Converters\NativeConverters\NativeColorOpacityConverter.cs" />
     <Compile Include="Converters\NativeConverters\NativeImageSquareConverter.cs" />
     <Compile Include="Converters\PortableConverters.cs" />
     <Compile Include="Converters\PortableValueConverterStore.cs" />
@@ -472,6 +476,10 @@
     <Page Include="Controls\ListView\BindableGridView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ListView\GridViewExTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Pages\PageHeaderControl.xaml">
       <SubType>Designer</SubType>

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
-using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.IDE.Core.Services;

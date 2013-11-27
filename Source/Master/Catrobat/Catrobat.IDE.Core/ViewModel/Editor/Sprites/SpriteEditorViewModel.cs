@@ -69,7 +69,18 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
 
         public Sprite SelectedSprite
         {
-            get { return _selectedSprite; }
+            get
+            {
+
+                if (IsInDesignModeStatic)
+                {
+                    var sprite = new Sprite();
+                    sprite.Scripts = new ScriptList{ Scripts = new ObservableCollection<Script>()};
+                }
+
+                return _selectedSprite;
+
+            }
             set
             {
                 _selectedSprite = value;

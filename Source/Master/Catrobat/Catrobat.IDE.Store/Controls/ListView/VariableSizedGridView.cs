@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -28,7 +24,7 @@ namespace Catrobat.IDE.Store.Controls.ListView
         {
             try
             {
-                var height = Window.Current.Bounds.Height - 390;
+                var height = Window.Current.Bounds.Height - 350;
                 var rows = (int) height / 110;
 
                 dynamic _Item = item;

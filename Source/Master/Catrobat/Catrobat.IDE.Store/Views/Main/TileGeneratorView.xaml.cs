@@ -1,5 +1,4 @@
-﻿using System;
-using Windows.Foundation;
+﻿using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -7,9 +6,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using Catrobat.IDE.Core.ViewModel.Main;
-using ToolStackPNGWriterLib;
 
 namespace Catrobat.IDE.Store.Views.Main
 {

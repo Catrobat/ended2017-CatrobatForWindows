@@ -6,7 +6,9 @@ namespace Catrobat.IDE.Core.Utilities.Helpers
     {
         public static string Generate()
         {
-            return Guid.NewGuid().ToString();
+            var uuid = Guid.NewGuid().ToString().Replace("-", "1");
+
+            return uuid;
 
             //var randomFileName = DateTime.UtcNow.Ticks.ToString("X");
             //var random = new Random();

@@ -68,6 +68,9 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             }
             set
             {
+                if (_selectedSprite == value)
+                    return;
+
                 _selectedSprite = value;
 
                 RaisePropertyChanged(() => SelectedSprite);
@@ -239,6 +242,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
             CurrentProject = message.Content;
         }
 
+        private void CurrentSpriteChangedMessageAction(GenericMessage<Sprite> message)
+        {
+            SelectedSprite = message.Content;
+        }
+
         #endregion
 
         #region MessageBoxResult
@@ -287,6 +295,9 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sprites
 
             Messenger.Default.Register<GenericMessage<Project>>(this,
                  ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedAction);
+
+            Messenger.Default.Register<GenericMessage<Sprite>>(this,
+                ViewModelMessagingToken.CurrentSpriteChangedListener, CurrentSpriteChangedMessageAction);
         }
 
         private void SpritesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

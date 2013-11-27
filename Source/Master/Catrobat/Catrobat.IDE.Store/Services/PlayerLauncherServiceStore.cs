@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
+﻿using System.Threading.Tasks;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel.Main;
