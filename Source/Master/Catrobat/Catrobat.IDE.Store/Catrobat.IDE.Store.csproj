@@ -168,6 +168,7 @@
       <DependentUpon>VariableButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ListView\ActionsGridView.cs" />
+    <Compile Include="Controls\ListView\AddItemCollection.cs" />
     <Compile Include="Controls\ListView\BindableGridView.xaml.cs">
       <DependentUpon>BindableGridView.xaml</DependentUpon>
     </Compile>

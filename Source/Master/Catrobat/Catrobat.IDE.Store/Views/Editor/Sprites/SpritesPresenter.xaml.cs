@@ -176,7 +176,9 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (_spritesViewModel.SelectedSprite == null && _spriteEditorViewModel.Sprites.Count > 0)
+            if ((_spritesViewModel.SelectedSprite == null && _spriteEditorViewModel.Sprites.Count > 0) ||
+                (_spritesViewModel.SelectedSprite != null && !_spriteEditorViewModel.Sprites.Contains(_spritesViewModel.SelectedSprite)
+                && _spriteEditorViewModel.Sprites.Count > 0))
             {
                 var message = new GenericMessage<Sprite>(_spriteEditorViewModel.Sprites[0]);
                 Messenger.Default.Send(message, ViewModelMessagingToken.CurrentSpriteChangedListener);

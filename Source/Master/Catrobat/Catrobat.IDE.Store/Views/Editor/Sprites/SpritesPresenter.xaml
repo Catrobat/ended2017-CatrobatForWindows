@@ -355,6 +355,11 @@
                                                 <EntranceThemeTransition IsStaggeringEnabled="False" />
                                               </TransitionCollection>
                                             </ItemsControl.ItemContainerTransitions>
+                                            <Button Command="{Binding AddNewScriptBrickCommand}">
+                                              <Grid Background="Red" Width="330" Height="100">
+
+                                              </Grid>
+                                            </Button>
                                           </ItemsControl>
                                         </Grid>
                                       </Border>
