@@ -26,6 +26,8 @@
 
   <nativeConverters:NativeImageSquareConverter x:Key="ImageSquareConverter" />
   <nativeConverters:NativeColorOpacityConverter x:Key="ColorOpacityConverter" />
+
+  <!--<nativeConverters:NativeGridViewExVisibilityConverter x:Key="VisibilityConverter" />-->
   
 
 </ResourceDictionary>

@@ -1,29 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Navigation;
 using Catrobat.IDE.Core.Annotations;
 using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Costumes;
-using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
 using Catrobat.IDE.Core.ViewModel.Editor.Scripts;
 using Catrobat.IDE.Core.ViewModel.Editor.Sounds;
 using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using Windows.UI.Xaml.Controls;
-using Catrobat.IDE.Store.Common;
-using Catrobat.IDE.Store.Views.Editor.Sounds;
+using GalaSoft.MvvmLight.Messaging;
+
 
 namespace Catrobat.IDE.Store.Views.Editor.Sprites
 {
@@ -63,14 +56,14 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
 
             if (ItemsControlAppBars.Items != null)
             {
-                _appBarObjects = (FrameworkElement) ItemsControlAppBars.Items[0];
+                _appBarObjects = (FrameworkElement)ItemsControlAppBars.Items[0];
                 _appBarActions = (FrameworkElement)ItemsControlAppBars.Items[1];
                 _appBarLooks = (FrameworkElement)ItemsControlAppBars.Items[2];
                 _appBarSounds = (FrameworkElement)ItemsControlAppBars.Items[3];
             }
-
-            _spritesViewModel.PropertyChanged += ViewModelOnPropertyChanged;
+            _spriteEditorViewModel.PropertyChanged += ViewModelOnPropertyChanged;
         }
+
 
         private void WindowOnSizeChanged(object sender, WindowSizeChangedEventArgs windowSizeChangedEventArgs)
         {
@@ -79,11 +72,23 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
 
         private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            //if (propertyChangedEventArgs.PropertyName ==
-            //    PropertyHelper.GetPropertyName(() => _spritesViewModel.SelectedSprite))
-            //{
-            //    AppBarBottomn.IsOpen = _spritesViewModel.SelectedSprite != null;
-            //}
+            if (propertyChangedEventArgs.PropertyName ==
+                PropertyHelper.GetPropertyName(() => _spriteEditorViewModel.SelectedSprite))
+            {
+                UpdateDataContext();
+            }
+        }
+
+        private void UpdateDataContext()
+        {
+            if (_spriteEditorViewModel.SelectedSprite != null)
+            {
+                var source = new CollectionViewSource();
+                source.Source = _spriteEditorViewModel.SelectedSprite.Scripts.Scripts;
+                source.ItemsPath = new PropertyPath("Bricks.Bricks");
+                source.IsSourceGrouped = true;
+                GridViewActions.DataContext = source;
+            }
         }
 
         private void RadioButtonTabs_Click(object sender, RoutedEventArgs e)
@@ -122,24 +127,9 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
             viewModel.NavigationObject = (Flyout)sender;
         }
 
-
-        private void GridViewActions_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //AppBarBottomn.IsOpen = GridViewActions.SelectedItems.Count -
-            //    e.RemovedItems.Count + e.AddedItems.Count > 0;
-
-            //if (ItemsControlAppBars.Items != null)
-            //{
-            //    ItemsControlAppBars.Items.Remove(_appBarActions);
-            //    ItemsControlAppBars.Items.Remove(_appBarLooks);
-            //    ItemsControlAppBars.Items.Remove(_appBarSounds);
-            //    ItemsControlAppBars.Items.Add(_appBarActions);
-            //}
-        }
-
         private void GridViewLooks_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            AppBarBottomn.IsOpen = _spriteEditorViewModel.SelectedCostumes.Count - 
+            AppBarBottomn.IsOpen = _spriteEditorViewModel.SelectedCostumes.Count -
                 e.RemovedItems.Count + e.AddedItems.Count > 0;
 
             if (ItemsControlAppBars.Items != null)
@@ -187,7 +177,10 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (_spritesViewModel.SelectedSprite == null && _spriteEditorViewModel.Sprites.Count > 0)
-                _spritesViewModel.SelectedSprite = _spriteEditorViewModel.Sprites[0];
+            {
+                var message = new GenericMessage<Sprite>(_spriteEditorViewModel.Sprites[0]);
+                Messenger.Default.Send(message, ViewModelMessagingToken.CurrentSpriteChangedListener);
+            }
 
             base.OnNavigatedTo(e);
         }
@@ -197,53 +190,6 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
             if (e.RemovedItems.Count > 0 && e.AddedItems.Count == 0)
                 _spritesViewModel.SelectedSprite = (Sprite)e.RemovedItems[0];
         }
-
-        //#region Drag operations
-
-        //private void GridViewLooks_OnDragItemsStarting(object sender, DragItemsStartingEventArgs e)
-        //{
-        //    _spriteEditorViewModel.SelectedCostumes = new ObservableCollection<Costume>();
-
-        //    foreach (Costume item in e.Items)
-        //    {
-        //        _spriteEditorViewModel.SelectedCostumes.Add(item);
-        //    }
-        //}
-
-        //private void GridBasket_OnDragEnter(object sender, DragEventArgs e)
-        //{
-        //    GridDelete.Background = new SolidColorBrush(Colors.Green);
-        //}
-
-        //private void GridBasket_OnDragLeave(object sender, DragEventArgs e)
-        //{
-        //    GridDelete.Background = new SolidColorBrush(Colors.DarkSlateGray);
-        //}
-
-        //private void GridBasket_OnDrop(object sender, DragEventArgs e)
-        //{
-        //    var f = e.Data.GetView().AvailableFormats;
-
-        //    GridDelete.Background = new SolidColorBrush(Colors.DarkSlateGray);
-
-        //    switch (FlipViewTabs.SelectedIndex)
-        //    {
-        //        case 0:
-        //            _spriteEditorViewModel.DeleteScriptBrickCommand.Execute(null);
-        //            break;
-
-        //        case 1:
-
-        //            _spriteEditorViewModel.DeleteCostumeCommand.Execute(null);
-        //            break;
-
-        //        case 2:
-        //            _spriteEditorViewModel.DeleteSoundCommand.Execute(null);
-        //            break;
-        //    }
-        //}
-
-        //#endregion
 
         private void FlipViewTabs_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -283,5 +229,35 @@ namespace Catrobat.IDE.Store.Views.Editor.Sprites
             }
         }
         #endregion
+
+        // creates new group in the data source, if end-user drags item to the new group placeholder
+        private void MyGridView_BeforeDrop(object sender, GridViewSamples.Controls.BeforeDropItemsEventArgs e)
+        {
+            if (e.RequestCreateNewGroup)
+            {
+                //// create new group and re-assign datasource 
+                //Group group = Group.GetNewGroup();
+                //_groups.Insert(e.NewGroupIndex, group);
+                //UpdateDataContext();
+            }
+        }
+
+        // removes empty groups (except the last one)
+        private void MyGridView_Drop(object sender, DragEventArgs e)
+        {
+            //bool needReset = false;
+            //for (int i = _groups.Count - 1; i >= 0; i--)
+            //{
+            //    if (_groups[i].Items.Count == 0 && _groups.Count > 1)
+            //    {
+            //        _groups.RemoveAt(i);
+            //        needReset = true;
+            //    }
+            //}
+            //if (needReset)
+            //{
+            //    UpdateDataContext();
+            //}
+        }
     }
 }

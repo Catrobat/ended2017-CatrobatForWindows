@@ -1,20 +1,13 @@
-﻿using System;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Catrobat.IDE.Core;
-using Catrobat.IDE.Core.Annotations;
-using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.Services.Common;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Editor.Costumes;
 using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
-using Catrobat.IDE.Core.ViewModel.Main;
 using Catrobat.IDE.Store.Services;
 using Catrobat.IDE.Store.Services.Storage;
 using Catrobat.IDE.Store.Views.Editor.Sprites;
-using GalaSoft.MvvmLight.Messaging;
 using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;
 
 namespace Catrobat.IDE.Store
@@ -77,7 +70,7 @@ namespace Catrobat.IDE.Store
         private void InitPresenters()
         {
             var spritesViewModel = ServiceLocator.GetInstance<SpritesViewModel>();
-            spritesViewModel.PresenterType = typeof (SpritesPresenter);
+            spritesViewModel.PresenterType = typeof(SpritesPresenter);
 
             var spriteEditorViewModel = ServiceLocator.GetInstance<SpriteEditorViewModel>();
             spriteEditorViewModel.PresenterType = typeof(SpritesPresenter);

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections;
-using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace Catrobat.IDE.Store.Converters.NativeConverters
 {

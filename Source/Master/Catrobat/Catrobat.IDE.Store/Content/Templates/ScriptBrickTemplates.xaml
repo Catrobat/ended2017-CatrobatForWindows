@@ -91,7 +91,7 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="brickControls:NormalBrick">
-          <Grid Margin="5 5 5 5" Height="100" Width="305" >
+          <Grid >
             <Grid Background="{TemplateBinding Background}">
               <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="0 0 0 0"  />
             </Grid>
