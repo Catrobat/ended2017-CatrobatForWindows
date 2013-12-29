@@ -220,7 +220,6 @@
     <Compile Include="Services\DispatcherServicePhone.cs" />
     <Compile Include="Services\ImageResizeServicePhone.cs" />
     <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
-    <Compile Include="Services\SoundServicePhone.cs" />
     <Compile Include="Services\ProjectImporterServicePhone.cs" />
     <Compile Include="Services\NavigationServicePhone.cs" />
     <Compile Include="Services\NotificationServicePhone.cs" />
@@ -621,7 +620,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Images\Screenshot\NoScreenshotSquare.png" />
     <Content Include="Content\Images\Share\skydrive.jpg" />
     <Content Include="Content\Programs\Default\automatic_screenshot.png" />
     <Content Include="Content\Programs\Default\Looks\28226cf909b0e5deb2d275b73a96fbec_rain.png">
