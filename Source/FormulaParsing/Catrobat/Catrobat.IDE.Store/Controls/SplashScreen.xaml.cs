@@ -37,8 +37,12 @@ namespace Catrobat.IDE.Store.Controls
                 PreviousExecutionState == ApplicationExecutionState.ClosedByUser ||
                 PreviousExecutionState == ApplicationExecutionState.Terminated)
             {
-                Core.App.SetNativeApp(new AppStore());
+                Core.App.SetNativeApp(Application.Current.Resources["App"] as AppStore);
                 await Core.App.Initialize();
+                ServiceLocator.Register(new DispatcherServiceStore(Dispatcher));
+
+                var width = ServiceLocator.SystemInformationService.ScreenWidth; // preload width
+                var height = ServiceLocator.SystemInformationService.ScreenHeight; // preload height
 
                 var image = new BitmapImage(new Uri("ms-appx:///Content/Images/Screenshot/NoScreenshot.png", UriKind.Absolute))
                 {

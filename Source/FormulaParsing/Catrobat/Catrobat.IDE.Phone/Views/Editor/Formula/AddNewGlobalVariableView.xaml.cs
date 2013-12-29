@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.ComponentModel;
+using System.Windows.Controls;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Editor.Formula;
@@ -21,11 +22,12 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             });
         }
 
-        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnBackKeyPress(CancelEventArgs e)
         {
             _viewModel.GoBackCommand.Execute(null);
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
         }
-
 
         private void TextBoxVariableName_OnTextChanged(object sender, TextChangedEventArgs e)
         {

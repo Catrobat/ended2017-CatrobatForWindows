@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Catrobat.IDE.Core.UI;
 
 namespace Catrobat.IDE.Phone.Converters.NativeConverters
 {
@@ -15,7 +16,7 @@ namespace Catrobat.IDE.Phone.Converters.NativeConverters
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (!(value is BitmapSource))
-                return null;
+                return ManualImageCache.NoScreenshotImageSquare;
 
             try
             {
@@ -34,7 +35,7 @@ namespace Catrobat.IDE.Phone.Converters.NativeConverters
             }
             catch (Exception)
             {
-                return null;
+                return ManualImageCache.NoScreenshotImageSquare;
             }
 
         }

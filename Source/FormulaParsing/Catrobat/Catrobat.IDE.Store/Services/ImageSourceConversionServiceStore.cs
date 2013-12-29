@@ -51,7 +51,7 @@ namespace Catrobat.IDE.Store.Services
         }
 
 
-        public object ConvertFromEncodedStreeam(System.IO.MemoryStream encodedStream)
+        public object ConvertFromEncodedStream(System.IO.MemoryStream encodedStream)
         {
             if (encodedStream == null)
                 return null;

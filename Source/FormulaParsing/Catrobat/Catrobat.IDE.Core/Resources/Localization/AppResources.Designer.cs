@@ -953,7 +953,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Image editing program.
+        ///   Looks up a localized string similar to Draw.
         /// </summary>
         public static string Editor_ImageEditingProgram {
             get {
@@ -962,7 +962,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Image Gallery.
+        ///   Looks up a localized string similar to Gallery.
         /// </summary>
         public static string Editor_ImageGallery {
             get {
@@ -2528,16 +2528,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Close application.
-        /// </summary>
-        public static string Main_ReallyCloseApplicationCaption {
-            get {
-                return ResourceManager.GetString("Main_ReallyCloseApplicationCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Do you really want to close the application?.
+        ///   Looks up a localized string similar to Press &quot;back&quot; again to close the app?.
         /// </summary>
         public static string Main_ReallyCloseApplicationText {
             get {
@@ -2560,6 +2551,24 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         public static string Main_SelectedProjectNotValidMessage {
             get {
                 return ResourceManager.GetString("Main_SelectedProjectNotValidMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set active.
+        /// </summary>
+        public static string Main_SetActive {
+            get {
+                return ResourceManager.GetString("Main_SetActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Main_Settings {
+            get {
+                return ResourceManager.GetString("Main_Settings", resourceCulture);
             }
         }
         

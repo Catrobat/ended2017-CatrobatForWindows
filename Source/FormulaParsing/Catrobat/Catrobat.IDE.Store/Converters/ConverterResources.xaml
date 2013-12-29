@@ -19,10 +19,15 @@
   <converters:BoolVisibilityNegativeConverterBootstrap x:Key="BoolVisibilityNegativeConverter"/>
   <converters:BoolToSelectedPivotItemConverterBootstrap x:Key="BoolToSelectedPivotItemConverter"/>
   <converters:NullVariableConverterBootstrap x:Key="NullVariableConverter"/>
-
+  <converters:NullBoolConverterBootstrap x:Key="NullBoolConverter"/>
+  <converters:NullVisibilityConverterBootstrap x:Key="NullVisibilityConverter"/>
   <!--<converters:ActiveThemeBrushConverterBootstrap x:Key="ActiveThemeBrushConverter"/>
   <converters:VariableButtonVisibilityConverterBootstrap x:Key="VariableButtonVisibilityConverter"/>-->
 
   <nativeConverters:NativeImageSquareConverter x:Key="ImageSquareConverter" />
+  <nativeConverters:NativeColorOpacityConverter x:Key="ColorOpacityConverter" />
+
+  <!--<nativeConverters:NativeGridViewExVisibilityConverter x:Key="VisibilityConverter" />-->
+  
 
 </ResourceDictionary>

@@ -16,7 +16,7 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Catrobat.IDE.Store.App">
       <m2:VisualElements DisplayName="Pocket Code" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="Catrobat.IDE.Store" ForegroundText="light" BackgroundColor="#464646" ToastCapable="true">
-        <m2:SplashScreen Image="Content\Assets\SplashScreen.png" />
+        <m2:SplashScreen Image="Content\Assets\SplashScreen.png" BackgroundColor="#000000" />
         <m2:InitialRotationPreference>
           <m2:Rotation Preference="portrait" />
           <m2:Rotation Preference="landscape" />
@@ -29,5 +29,8 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <Capability Name="picturesLibrary" />
+    <Capability Name="musicLibrary" />
+    <DeviceCapability Name="webcam" />
   </Capabilities>
 </Package>

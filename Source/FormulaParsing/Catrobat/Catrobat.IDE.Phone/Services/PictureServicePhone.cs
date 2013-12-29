@@ -96,10 +96,19 @@ namespace Catrobat.IDE.Phone.Services
                 try
                 {
                     var image = new BitmapImage();
-                    image.SetSource(e.ChosenPhoto);
+                    var memoryStream = new MemoryStream();
+                    e.ChosenPhoto.CopyTo(memoryStream);
+                    image.SetSource(memoryStream);
+
                     var writeableBitmap = new WriteableBitmap(image);
-                    var portableImage = new PortableImage(
-                        writeableBitmap.ToByteArray(), writeableBitmap.PixelWidth, writeableBitmap.PixelHeight);
+                    var portableImage = new PortableImage(writeableBitmap)
+                    {
+                        Width = writeableBitmap.PixelWidth, 
+                        Height = writeableBitmap.PixelHeight,
+                        EncodedData = memoryStream
+                    };
+
+
                     _result = new PictureServiceResult
                     {
                         Image = portableImage,

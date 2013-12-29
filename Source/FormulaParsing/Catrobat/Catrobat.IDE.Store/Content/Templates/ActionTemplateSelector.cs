@@ -373,7 +373,7 @@ namespace Catrobat.IDE.Store.Content.Templates
                 return UnknownBrick;
             }
 
-            return base.SelectTemplate(item, container);
+            return null;
         }
     }
 }

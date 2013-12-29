@@ -126,7 +126,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AppPhoneDesignStatic.cs" />
     <Compile Include="AppPhone.cs" />
     <Compile Include="Content\Images\Application\Logo.xaml.cs">
       <DependentUpon>Logo.xaml</DependentUpon>
@@ -271,7 +270,7 @@
     <Compile Include="Views\Editor\Formula\VariableSelectionView.xaml.cs">
       <DependentUpon>VariableSelectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\ProjectSettingsView.xaml.cs">
+    <Compile Include="Views\Main\ProjectSettingsView.xaml.cs">
       <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Scripts\AddNewScriptBrickView.xaml.cs">
@@ -499,7 +498,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\ProjectSettingsView.xaml">
+    <Page Include="Views\Main\ProjectSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -850,6 +849,7 @@
   <ItemGroup>
     <Folder Include="Content\Libs\" />
     <Folder Include="Content\Programs\Default\Sounds\" />
+    <Folder Include="Services\LocalServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

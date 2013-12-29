@@ -35,17 +35,28 @@ namespace Catrobat.IDE.Store.Services
             }
         }
 
+        private int? _screenWidth;
         public int ScreenWidth
         {
             get
             {
-                return (int) Window.Current.Bounds.Width;
+                if (_screenWidth == null)
+                    _screenWidth = (int)Window.Current.Bounds.Width;
+
+                return _screenWidth.Value;
             }
         }
 
+        private int? _screenHeight;
         public int ScreenHeight
         {
-            get { return (int) Window.Current.Bounds.Height; }
+            get
+            {
+                if (_screenHeight == null)
+                    _screenHeight = (int) Window.Current.Bounds.Height;
+
+                return _screenHeight.Value;
+            }
         }
 
         public string CurrentApplicationVersion

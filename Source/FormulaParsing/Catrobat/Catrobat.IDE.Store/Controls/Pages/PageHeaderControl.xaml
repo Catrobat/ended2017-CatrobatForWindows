@@ -5,6 +5,7 @@
     xmlns:local="using:Catrobat.IDE.Store.Controls.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:application="using:Catrobat.IDE.Store.Content.Images.Application"
     mc:Ignorable="d"
     d:DesignHeight="180"
     d:DesignWidth="800">
@@ -27,9 +28,9 @@
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
 
-    <Image Grid.Column="1" VerticalAlignment="Center" Source="/Content/Images/Application/pocketcode01.png" Height="230" Margin="0 -170 -40 -150"></Image>
-    <Grid x:Name="GridHeaderContent" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Left">
-      
+    <application:Logo x:Name="Logo" Grid.Column="1" Margin="20 30 10 30" ScaleFactor="0.75" Width="65" TextVisibility="Collapsed"></application:Logo>
+    <Grid x:Name="GridHeaderContent" Visibility="Visible" Margin="0 0 0 0" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Left">
+      <TextBlock Text="" FontSize="50"></TextBlock>
     </Grid>
   </Grid>
 </UserControl>

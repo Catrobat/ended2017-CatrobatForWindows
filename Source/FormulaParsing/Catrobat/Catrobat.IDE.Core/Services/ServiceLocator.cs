@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
+using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.ViewModel;
 
 namespace Catrobat.IDE.Core.Services
 {
@@ -124,15 +127,20 @@ namespace Catrobat.IDE.Core.Services
         public static IActionTemplateService ActionTemplateService
         { get { return GetInstance<IActionTemplateService>(); } }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static ISoundService SoundService
+        { get { return GetInstance<ISoundService>(); } }
 
 
-        public static object ViewModelLocator { get; set; }
+        public static ViewModelLocator ViewModelLocator { get; set; }
 
-        public static object ThemeChooser { get; set; }
+        public static ThemeChooser ThemeChooser { get; set; }
 
-        public static object LocalizedStrings { get; set; }
+        public static LocalizedStrings LocalizedStrings { get; set; }
 
-        
+
 
         private static readonly Dictionary<Type, object> Instances = new Dictionary<Type, object>();
 
@@ -142,13 +150,28 @@ namespace Catrobat.IDE.Core.Services
             {
                 if (mode == TypeCreationMode.Lazy)
                 {
-                    Instances.Add(typeof(T), null);
+                    if (!Instances.ContainsKey(typeof(T)))
+                        Instances.Add(typeof(T), null);
                 }
                 else if (mode == TypeCreationMode.Normal)
                 {
-                    if(!Instances.ContainsKey(typeof(T)))
-                        Instances.Add(typeof(T), Activator.CreateInstance<T>());
+                    if (!Instances.ContainsKey(typeof(T)))
+                        Instances.Remove(typeof(T));
+
+                    Instances.Add(typeof(T), Activator.CreateInstance<T>());
                 }
+            }
+        }
+
+        public static void Register(object objectToRegister)
+        {
+            lock (Instances)
+            {
+                var type = objectToRegister.GetType();
+                if (Instances.ContainsKey(type))
+                    Instances.Remove(type);
+
+                Instances.Add(type, objectToRegister);
             }
         }
 
@@ -158,19 +181,24 @@ namespace Catrobat.IDE.Core.Services
             {
                 object instance = null;
                 bool isInDictionary = false;
+                Type registeredType = type;
+
 
                 foreach (var pair in Instances)
                 {
-                    if (pair.Key.GetTypeInfo().BaseType == type
-                        || pair.Key == type
-                        || pair.Key.GetTypeInfo().ImplementedInterfaces.Contains(type))
+                    if (pair.Key.GetTypeInfo().BaseType == type ||
+                        pair.Key == type || 
+                        pair.Key.GetTypeInfo().ImplementedInterfaces.Contains(type))
                     {
                         instance = pair.Value;
 
                         isInDictionary = instance != null;
 
                         if (!isInDictionary)
-                            instance = Activator.CreateInstance(pair.Key);
+                        {
+                            registeredType = pair.Key;
+                            instance = Activator.CreateInstance(registeredType);
+                        }
 
                         break;
                     }
@@ -180,7 +208,7 @@ namespace Catrobat.IDE.Core.Services
                     throw new Exception("Type " + type.GetTypeInfo().Name + " is not registered.");
 
                 if (!isInDictionary)
-                    Instances[type] = instance;
+                    Instances[registeredType] = instance;
 
                 return instance;
             }
@@ -188,7 +216,7 @@ namespace Catrobat.IDE.Core.Services
 
         public static T GetInstance<T>()
         {
-            return (T) GetInstance(typeof (T));
+            return (T)GetInstance(typeof(T));
         }
 
         public static void UnRegisterAll()

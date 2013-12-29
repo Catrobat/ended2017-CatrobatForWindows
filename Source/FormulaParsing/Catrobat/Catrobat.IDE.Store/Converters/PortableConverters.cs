@@ -31,4 +31,8 @@ namespace Catrobat.IDE.Store.Converters
     public class SecondStringMillisecondConverterBootstrap : PortableValueConverterStore<SecondStringMillisecondConverter> { }
 
     public class VariableButtonVisibilityConverterBootstrap : PortableValueConverterStore<VariableButtonVisibilityConverter> { }
+
+    public class NullBoolConverterBootstrap : PortableValueConverterStore<NullBoolConverter> { }
+
+    public class NullVisibilityConverterBootstrap : PortableValueConverterStore<NullVisibilityConverter> { }
 }

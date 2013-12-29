@@ -5,9 +5,10 @@
     xmlns:local="using:Catrobat.IDE.Store.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:application="using:Catrobat.IDE.Store.Content.Images.Application"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-      <Image Source="/Content/Images/Application/pocketcode01.png" Width="800" Height="400"></Image>
+  <Grid Background="#000000">
+      <application:Logo ScaleFactor="2"></application:Logo>
     </Grid>
 </Page>

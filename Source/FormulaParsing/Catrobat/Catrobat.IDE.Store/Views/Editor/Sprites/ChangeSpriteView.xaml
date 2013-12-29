@@ -6,7 +6,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d"
   DataContext="{Binding ChangeSpriteViewModel, Source={StaticResource Locator}}"
-  d:DesignHeight="200" d:DesignWidth="500">
+  d:DesignHeight="170" d:DesignWidth="400">
 
   <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
@@ -20,10 +20,7 @@
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
-          <TextBlock Margin="10" Style="{StaticResource SubheaderTextBlockStyle}"
-                     Text="{Binding Resources.Editor_TitleChangeSpriteName, Source={StaticResource LocalizedStrings}}" />
-        </StackPanel>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20"/>
 
         <Grid Grid.Row="1" Margin="10 0 0 15" HorizontalAlignment="Stretch">
           <Grid.RowDefinitions>
@@ -36,21 +33,13 @@
                      Text="{Binding Resources.Editor_SpriteName, Source={StaticResource LocalizedStrings}}" />
           <TextBox Grid.Row="1" Margin="10" Name="TextBoxSpriteName"
                    Text="{Binding SpriteName, Mode=TwoWay}" 
-                 HorizontalAlignment="Stretch" TextChanged="TextBoxSpriteName_OnTextChanged" />
+                   HorizontalAlignment="Stretch" TextChanged="TextBoxSpriteName_OnTextChanged" />
         </Grid>
       </Grid>
       <Grid Grid.Column="1">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <AppBarButton Grid.Row="0" VerticalAlignment="Center" Icon="Save" 
+        <AppBarButton Grid.Row="1" VerticalAlignment="Bottom" Icon="Save" 
                       Label="{Binding Resources.Editor_ButtonSave, Source={StaticResource LocalizedStrings}}" 
                     Command="{Binding SaveCommand}"/>
-        <AppBarButton Grid.Row="1" VerticalAlignment="Center" Icon="Cancel" 
-                      Label="{Binding Resources.Editor_ButtonCancel, Source={StaticResource LocalizedStrings}}" 
-                    Command="{Binding CancelCommand}"/>
       </Grid>
     </Grid>
   </Grid>

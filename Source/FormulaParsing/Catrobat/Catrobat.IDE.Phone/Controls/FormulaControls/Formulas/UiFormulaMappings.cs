@@ -17,14 +17,13 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.Formulas
             if (_mappings == null)
                 InitMappings();
 
-            if (formula == null) return null;
+            if (formula == null || formula.Equals(new XmlFormulaTree())) return null;
 
             Debug.Assert(_mappings != null, "Mappings != null");
-            var type = formula.VariableType.ToLower();
-            var value = formula.VariableValue.ToLower();
+            var type = (formula.VariableType ?? string.Empty).ToLower();
+            var value = (formula.VariableValue ?? string.Empty).ToLower();
 
-
-            if (!_mappings.ContainsKey(formula.VariableType.ToLower()))
+            if (!_mappings.ContainsKey(type))
             {
                 type = "unknown";
                 value = UniversialValueDummy;

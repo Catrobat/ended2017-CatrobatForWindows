@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModel.Main;
 using Catrobat.IDE.Store.Common;
 using Windows.UI.Xaml.Controls;
@@ -14,7 +15,7 @@ namespace Catrobat.IDE.Store.Views.Main
     public sealed partial class MainView : Page
     {
         private readonly NavigationHelper _navigationHelper;
-        private MainViewModel _viewModel = ServiceLocator.GetInstance<MainViewModel>();
+        private readonly MainViewModel _viewModel = ServiceLocator.GetInstance<MainViewModel>();
 
         public MainView()
         {
@@ -26,6 +27,34 @@ namespace Catrobat.IDE.Store.Views.Main
             };
 
             this._navigationHelper = new NavigationHelper(this, viewModelsOnPage);
+
+            _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
+        }
+
+        private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (propertyChangedEventArgs.PropertyName ==
+                PropertyHelper.GetPropertyName(() => _viewModel.SelectedLocalProject))
+                AppBarBottomn.IsOpen = _viewModel.SelectedLocalProject != null;
+        }
+
+        private void FlyoutNewProject_OnOpened(object sender, object e)
+        {
+            var viewModel = ServiceLocator.GetInstance<AddNewProjectViewModel>();
+            viewModel.NavigationObject = (Flyout)sender;
+            viewModel.ResetViewModel();
+        }
+
+        private void ChangeProjectFlyout_OnOpened(object sender, object e)
+        {
+            var viewModel = ServiceLocator.GetInstance<ProjectSettingsViewModel>();
+            viewModel.NavigationObject = (Flyout)sender;
+        }
+
+        private void TileGeneratorFlyout_OnOpened(object sender, object e)
+        {
+            var viewModel = ServiceLocator.GetInstance<TileGeneratorViewModel>();
+            viewModel.NavigationObject = (Flyout)sender;
         }
 
         #region NavigationHelper registration
@@ -41,5 +70,11 @@ namespace Catrobat.IDE.Store.Views.Main
         }
 
         #endregion
+
+        private void AppBarBottomn_OnOpened(object sender, object e)
+        {
+            if (_viewModel.SelectedLocalProject == null)
+                AppBarBottomn.IsOpen = false;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities.Helpers;
@@ -21,7 +22,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public async void DeleteSprite()
+        public async Task DeleteSprite()
         {
             const string programName = "DataDeletingTests.DeleteSprite";
 
@@ -32,7 +33,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
             ITestProjectGenerator projectgenerator = new ProjectGeneratorReflection();
             var project = projectgenerator.GenerateProject();
-            project.SetProgramNameAndRenameDirectory(programName);
+            await project.SetProgramNameAndRenameDirectory(programName);
             // TODO: write dummy costume files to disk
 
             using (IStorage storage = StorageSystem.GetStorage())

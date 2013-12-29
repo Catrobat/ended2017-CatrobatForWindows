@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using Windows.Networking.Proximity;
 using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Phone.Services;
 using Catrobat.IDE.Phone.Services.Storage;
 
@@ -14,12 +17,13 @@ namespace Catrobat.IDE.Phone
 {
     public class AppPhone : INativeApp
     {
+        public AppPhone()
+        {
+            InitializeInterfaces();
+        }
+
         public void InitializeInterfaces()
         {
-            ServiceLocator.ViewModelLocator = Application.Current.Resources["Locator"];
-            ServiceLocator.ThemeChooser = Application.Current.Resources["ThemeChooser"];
-            ServiceLocator.LocalizedStrings = Application.Current.Resources["LocalizedStrings"];
-
             ServiceLocator.Register<SystemInformationServicePhone>(TypeCreationMode.Normal);
             ServiceLocator.Register<CultureServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ImageResizeServicePhone>(TypeCreationMode.Lazy);
@@ -38,8 +42,30 @@ namespace Catrobat.IDE.Phone
             ServiceLocator.Register<DispatcherServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<PortableUIElementsConvertionServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ActionTemplateServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SoundServicePhone>(TypeCreationMode.Lazy);
 
             ServiceLocator.NavigationService = new NavigationServicePhone();
+
+            ServiceLocator.ViewModelLocator = new ViewModelLocator();
+            ServiceLocator.ViewModelLocator.RegisterViewModels();
+
+            ServiceLocator.ThemeChooser = new ThemeChooser();
+            ServiceLocator.LocalizedStrings = new LocalizedStrings();
+
+            if (Application.Current.Resources["Locator"] != null)
+                Application.Current.Resources["Locator"] = ServiceLocator.ViewModelLocator;
+            else
+                Application.Current.Resources.Add("Locator", ServiceLocator.ViewModelLocator);
+
+            if (Application.Current.Resources["ThemeChooser"] != null)
+                Application.Current.Resources["ThemeChooser"] = ServiceLocator.ThemeChooser;
+            else
+                Application.Current.Resources.Add("ThemeChooser", ServiceLocator.ViewModelLocator);
+
+            if (Application.Current.Resources["LocalizedStrings"] != null)
+                Application.Current.Resources["LocalizedStrings"] = ServiceLocator.LocalizedStrings;
+            else
+                Application.Current.Resources.Add("LocalizedStrings", ServiceLocator.ViewModelLocator);
         }
     }
 }

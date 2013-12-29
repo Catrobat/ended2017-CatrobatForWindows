@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel;
@@ -17,9 +18,16 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             InitializeComponent();
         }
 
-        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnBackKeyPress(CancelEventArgs e)
         {
             _viewModel.GoBackCommand.Execute(null);
+            e.Cancel = true;
+            base.OnBackKeyPress(e);
+        }
+
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            
         }
 
         private void TextBoxLocalVariableName_KeyDown(object sender, KeyEventArgs e)

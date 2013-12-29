@@ -14,6 +14,6 @@ namespace Catrobat.IDE.Core.Services
 
         void ConvertToBytes(object inputData, out byte[] outputData, out int outputWidth, out int outputHeight);
 
-        object ConvertFromEncodedStreeam(MemoryStream encodedStream);
+        object ConvertFromEncodedStream(MemoryStream encodedStream);
     }
 }

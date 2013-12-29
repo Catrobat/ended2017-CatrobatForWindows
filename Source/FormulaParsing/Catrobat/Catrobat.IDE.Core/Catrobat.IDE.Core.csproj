@@ -348,7 +348,7 @@
     <Compile Include="ViewModel\Editor\Formula\ChangeVariableViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\FormulaEditorViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\VariableSelectionViewModel.cs" />
-    <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
+    <Compile Include="ViewModel\Main\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\AddNewScriptBrickViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\NewBroadcastMessageViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\ScriptBrickCategoryViewModel.cs" />

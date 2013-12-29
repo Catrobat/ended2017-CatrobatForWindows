@@ -20,11 +20,10 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.Formulas
             if (formula == null) return null;
 
             Debug.Assert(_mappings != null, "Mappings != null");
-            var type = formula.VariableType.ToLower();
-            var value = formula.VariableValue.ToLower();
+            var type = (formula.VariableType ?? string.Empty).ToLower();
+            var value = (formula.VariableValue ?? string.Empty).ToLower();
 
-
-            if (!_mappings.ContainsKey(formula.VariableType.ToLower()))
+            if (!_mappings.ContainsKey(type))
             {
                 type = "unknown";
                 value = UniversialValueDummy;

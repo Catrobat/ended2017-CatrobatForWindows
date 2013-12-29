@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Windows.Media.Capture;
 using Windows.Storage;
@@ -19,9 +20,11 @@ namespace Catrobat.IDE.Store.Services
 
         public async Task<PictureServiceResult> ChoosePictureFromLibraryAsync()
         {
-            var openPicker = new FileOpenPicker();
-            openPicker.ViewMode = PickerViewMode.Thumbnail;
-            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            var openPicker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = PickerLocationId.PicturesLibrary
+            };
 
             foreach (var extension in SupportedFileNames)
                 openPicker.FileTypeFilter.Add(extension);
@@ -30,12 +33,22 @@ namespace Catrobat.IDE.Store.Services
 
             if (file != null)
             {
-                var filestream = await file.OpenAsync(FileAccessMode.Read);
+                var fileStream = await file.OpenAsync(FileAccessMode.Read);
+                var memoryStream = new MemoryStream();
+                fileStream.AsStreamForRead().CopyTo(memoryStream);
+
+                fileStream.Seek(0);
                 var imagetobind = new BitmapImage();
-                imagetobind.SetSource(filestream);
-                var writeableBuitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
-                await writeableBuitmap.FromStream(filestream);
-                var portableImage = new PortableImage(writeableBuitmap);
+                imagetobind.SetSource(fileStream);
+                var writeableBitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
+                await writeableBitmap.FromStream(memoryStream.AsRandomAccessStream());
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                var portableImage = new PortableImage(writeableBitmap)
+                {
+                    Width = writeableBitmap.PixelWidth,
+                    Height = writeableBitmap.PixelHeight,
+                    EncodedData = memoryStream
+                };
 
                 return new PictureServiceResult
                 {
@@ -59,12 +72,22 @@ namespace Catrobat.IDE.Store.Services
 
             if (file != null)
             {
-                var filestream = await file.OpenAsync(FileAccessMode.Read);
+                var fileStream = await file.OpenAsync(FileAccessMode.Read);
+                var memoryStream = new MemoryStream();
+                fileStream.AsStreamForRead().CopyTo(memoryStream);
+
+                fileStream.Seek(0);
                 var imagetobind = new BitmapImage();
-                imagetobind.SetSource(filestream);
-                var writeableBuitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
-                await writeableBuitmap.FromStream(filestream);
-                var portableImage = new PortableImage(writeableBuitmap);
+                imagetobind.SetSource(fileStream);
+                var writeableBitmap = new WriteableBitmap(imagetobind.PixelWidth, imagetobind.PixelHeight);
+                await writeableBitmap.FromStream(memoryStream.AsRandomAccessStream());
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                var portableImage = new PortableImage(writeableBitmap)
+                {
+                    Width = writeableBitmap.PixelWidth,
+                    Height = writeableBitmap.PixelHeight,
+                    EncodedData = memoryStream
+                };
 
                 return new PictureServiceResult
                 {

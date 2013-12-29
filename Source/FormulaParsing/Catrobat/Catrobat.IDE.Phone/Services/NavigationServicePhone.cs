@@ -62,9 +62,26 @@ namespace Catrobat.IDE.Phone.Services
             ((PhoneApplicationFrame) Application.Current.RootVisual).GoBack();
         }
 
+        public void NavigateBack(List<NavigationPlatform> skipOnPlatforms)
+        {
+
+        }
+
+        public void NavigateBackForPlatform(NavigationPlatform platform)
+        {
+            if (platform == NavigationPlatform.WindowsPhone)
+                ((PhoneApplicationFrame)Application.Current.RootVisual).GoBack();
+        }
+
         public void RemoveBackEntry()
         {
             ((PhoneApplicationFrame) Application.Current.RootVisual).RemoveBackEntry();
+        }
+
+        public void RemoveBackEntryForPlatform(NavigationPlatform platform)
+        {
+            if (platform == NavigationPlatform.WindowsPhone)
+                ((PhoneApplicationFrame)Application.Current.RootVisual).RemoveBackEntry();
         }
 
         public bool CanGoBack

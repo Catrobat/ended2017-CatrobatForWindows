@@ -309,7 +309,7 @@ namespace Catrobat.IDE.Tests.Services.Storage
                     await image.WriteAsJpg(BasePath + path);
                     break;
                 case ImageFormat.Png:
-                    await image.WriateAsPng(BasePath + path);
+                    await image.WriteAsPng(BasePath + path);
                     break;
             }
         }

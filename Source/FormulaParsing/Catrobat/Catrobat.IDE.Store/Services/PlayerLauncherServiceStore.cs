@@ -1,14 +1,22 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System.Threading.Tasks;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.ViewModel.Main;
 
 namespace Catrobat.IDE.Store.Services
 {
-    public class PlayerLauncherServiceStore :IPlayerLauncherService
+    public class PlayerLauncherServiceStore : IPlayerLauncherService
     {
-        public void LaunchPlayer(Project project)
+        // ReSharper disable once CSharpWarnings::CS1998
+        public async Task LaunchPlayer(Project project, bool isLaunchedFromTile)
         {
-            //var navigationUri = "/Views/Main/PlayerLauncherView.xaml?ProjectName=" + project.ProjectHeader.ProgramName;
-            //((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri(navigationUri, UriKind.Relative));
+            ServiceLocator.NavigationService.NavigateTo<PlayerLauncherViewModel>();
+        }
+
+        // ReSharper disable once CSharpWarnings::CS1998
+        public async Task LaunchPlayer(string projectName, bool isLaunchedFromTile)
+        {
+            ServiceLocator.NavigationService.NavigateTo<PlayerLauncherViewModel>();
         }
     }
 }

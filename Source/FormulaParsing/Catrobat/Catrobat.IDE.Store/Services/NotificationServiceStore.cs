@@ -21,7 +21,12 @@ namespace Catrobat.IDE.Store.Services
         //    _rootPage = rootPage;
         //}
 
-        public void ShowToastNotification(PortableImage image, string title, string message, ToastNotificationTime timeTillHide)
+        public void ShowToastNotification(string title, string message, ToastNotificationTime timeTillHide, PortableImage image = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowToastNotification(string title, string message, TimeSpan timeTillHide, PortableImage image = null)
         {
             throw new NotImplementedException();
         }
@@ -113,18 +118,18 @@ namespace Catrobat.IDE.Store.Services
 
             switch (options)
             {
-                case MessageBoxOptions.Ok:
+                case MessageBoxOptions.OkCancel:
                     messageDialog.Commands.Add(new UICommand(
-                        "OK", CommandInvokedHandler, "Ok"));
+                        "OK", CommandInvokedHandler, MessageboxResult.Ok));
                     messageDialog.Commands.Add(new UICommand(
-                        "Cancel", CommandInvokedHandler, "Cancel"));
+                        "Cancel", CommandInvokedHandler, MessageboxResult.Cancel));
 
                     messageDialog.DefaultCommandIndex = 0;
                     messageDialog.CancelCommandIndex = 1;
                     break;
-                case MessageBoxOptions.OkCancel:
+                case MessageBoxOptions.Ok:
                     messageDialog.Commands.Add(new UICommand(
-                        "OK", CommandInvokedHandler, "OK"));
+                        "OK", CommandInvokedHandler, MessageboxResult.Ok));
 
                     messageDialog.DefaultCommandIndex = 0;
                     break;
@@ -139,13 +144,10 @@ namespace Catrobat.IDE.Store.Services
         {
             var result = MessageboxResult.Cancel;
 
-            if ((string) command.Id == "OK")
-            {
+            if ((MessageboxResult)command.Id == MessageboxResult.Ok)
                 result = MessageboxResult.Ok;
-            }else if ((string)command.Id == "Cancel")
-            {
+            else if ((MessageboxResult)command.Id == MessageboxResult.Cancel)
                 result = MessageboxResult.Cancel;
-            }
 
             if (_messageBoxCallback != null)
                 _messageBoxCallback(result);

@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.Services.Storage;
+﻿using System.Threading.Tasks;
+using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.Services.Storage;
@@ -16,7 +17,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public async void ReflectionWriteReadTest1()
+        public async Task ReflectionWriteReadTest1()
         {
             const string savePath = "/ReflectionWriteReadTest1/project.xml";
 
