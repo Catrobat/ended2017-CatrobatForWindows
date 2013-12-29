@@ -17,7 +17,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.Formulas
             if (_mappings == null)
                 InitMappings();
 
-            if (formula == null) return null;
+            if (formula == null || formula.Equals(new FormulaTree())) return null;
 
             Debug.Assert(_mappings != null, "Mappings != null");
             var type = formula.VariableType.ToLower();

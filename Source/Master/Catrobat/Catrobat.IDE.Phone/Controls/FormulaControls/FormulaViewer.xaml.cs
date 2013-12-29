@@ -180,7 +180,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public void FormulaChanged()
         {
-            if (Formula == null)
+            if (Formula == null || Formula.FormulaTree.Equals(new FormulaTree()))
                 return;
 
             _uiFormula = UiFormulaMappings.CreateFormula(Formula, this, Formula.FormulaTree, IsEditEnabled, _selectedFormula);
