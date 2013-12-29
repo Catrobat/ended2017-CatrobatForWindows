@@ -32,8 +32,12 @@ namespace Catrobat.IDE.Phone.Services.Storage
                         return stream;
                     }
                 case ResourceScope.IdePhone:
-                {
-                    projectPath = "";// "/Catrobat.IDE.Phone;component";
+                    {
+                        projectPath = "";// "/Catrobat.IDE.Phone;component";
+
+                        if(uri.StartsWith("/"))
+                            uri = uri.Substring(1, uri.Length - 1);
+
                         var resourceUri = new Uri(projectPath + uri, UriKind.Relative);
                         var resource = Application.GetResourceStream(resourceUri);
 
@@ -111,7 +115,7 @@ namespace Catrobat.IDE.Phone.Services.Storage
             //    return new BitmapImage(new Uri(path, UriKind.Relative));
             //    //return null;
             //}
-            
+
         }
 
         public Task<Stream> OpenResourceStreamAsync(ResourceScope resourceScope, string uri)

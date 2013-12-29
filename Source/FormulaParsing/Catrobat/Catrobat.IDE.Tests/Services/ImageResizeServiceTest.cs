@@ -1,18 +1,19 @@
-﻿using Catrobat.IDE.Core.Services;
+﻿using System.Threading.Tasks;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
 
 namespace Catrobat.IDE.Tests.Services
 {
     public class ImageResizeServiceTest : IImageResizeService
     {
-        public PortableImage ResizeImage(PortableImage image, int maxWidthHeight)
+        public Task<PortableImage> ResizeImage(PortableImage image, int maxWidthHeight)
         {
-            return new PortableImage(null, maxWidthHeight, maxWidthHeight);
+            return Task.Run(() => new PortableImage(maxWidthHeight, maxWidthHeight));
         }
 
-        public PortableImage ResizeImage(PortableImage image, int newWidth, int newHeight)
+        public Task<PortableImage> ResizeImage(PortableImage image, int newWidth, int newHeight)
         {
-            return new PortableImage(null, newWidth, newHeight);
+            return Task.Run(()=> new PortableImage(newWidth, newHeight));
         }
     }
 }

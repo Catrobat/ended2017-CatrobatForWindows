@@ -195,19 +195,19 @@ namespace Catrobat.IDE.Core.ViewModel.Service
                 switch (error)
                 {
                     case CatrobatVersionConverter.VersionConverterError.VersionNotSupported:
-                        ServiceLocator.NotifictionService.ShowToastNotification(null, null,
+                        ServiceLocator.NotifictionService.ShowToastNotification(null,
                             AppResources.Main_VersionIsNotSupported, ToastNotificationTime.Medeum);
 
                         break;
                     case CatrobatVersionConverter.VersionConverterError.ProjectCodeNotValid:
-                        ServiceLocator.NotifictionService.ShowToastNotification(null, null,
+                        ServiceLocator.NotifictionService.ShowToastNotification(null,
                             AppResources.Main_ProjectNotValid, ToastNotificationTime.Medeum);
                         break;
                 }
             }
             else
             {
-                ServiceLocator.NotifictionService.ShowToastNotification(null, null,
+                ServiceLocator.NotifictionService.ShowToastNotification(null,
                     AppResources.Main_NoDownloadsPending, ToastNotificationTime.Short);
             }
         }

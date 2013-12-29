@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 // From http://www.codeproject.com/Articles/536519/Extending-GridView-with-Drag-and-Drop-for-Grouping
-using Catrobat.IDE.Core.CatrobatObjects.Scripts;
-using Catrobat.IDE.Store.Controls.ListView;
 
 namespace GridViewSamples.Controls
 {

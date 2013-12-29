@@ -29,16 +29,16 @@
 
     <StackPanel Grid.Row="1" Margin="10 0 0 15">
       <StackPanel>
-      <TextBlock Margin="0" Text="{Binding Resources.Main_ProjectName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
-      <TextBox Name="TextBoxProjectName" Margin="-10 0 10 0" HorizontalAlignment="Stretch" TextChanged="TextBoxProjectName_OnTextChanged" Text="{Binding Path=ProjectName, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
+        <TextBlock Margin="0" Text="{Binding Resources.Main_ProjectName, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextSmallStyle}" />
+        <TextBox Name="TextBoxProjectName" Margin="-10 0 10 0" HorizontalAlignment="Stretch" TextChanged="TextBoxProjectName_OnTextChanged" Text="{Binding Path=ProjectName, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
       </StackPanel>
       <StackPanel>
         <CheckBox IsChecked="{Binding CopyCurrentProjectAsTemplate, Mode=TwoWay}" >
           <TextBlock TextWrapping="Wrap" Text="{Binding TextCopyCurrentProjectAsTemplate }"></TextBlock>
-          </CheckBox>
+        </CheckBox>
       </StackPanel>
     </StackPanel>
-    
+
 
 
     <i:Interaction.Triggers>

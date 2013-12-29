@@ -155,24 +155,6 @@ namespace Catrobat.IDE.Store.Controls.AppBar
         }
 
 
-
-
-        public ICommand PlayCommand
-        {
-            get { return (ICommand)GetValue(PlayCommandProperty); }
-            set { SetValue(PlayCommandProperty, value); }
-        }
-        public static readonly DependencyProperty PlayCommandProperty = DependencyProperty.Register(
-            "PlayCommand", typeof(ICommand), typeof(EditorAppBar), 
-            new PropertyMetadata(new RelayCommand(() => {/* empty */}), PlayCommandChanged));
-        private static void PlayCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((EditorAppBar)d).ButtonPlay.Command = e.NewValue as ICommand;
-        }
-
-
-
-
         public Flyout NewFlyout
         {
             get { return (Flyout)GetValue(NewFlyoutProperty); }
@@ -184,7 +166,7 @@ namespace Catrobat.IDE.Store.Controls.AppBar
 
         private static void NewFlyoutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((EditorAppBar) d).ButtonNew.Flyout = (Flyout) e.NewValue;
+            //((EditorAppBar) d).ButtonNew.Flyout = (Flyout) e.NewValue;
             ((Flyout)e.NewValue).Opening += (sender, o) => ((EditorAppBar)d).NewCommand.Execute(null);
         }
 
@@ -268,7 +250,7 @@ namespace Catrobat.IDE.Store.Controls.AppBar
                     break;
             }
 
-            ButtonNew.Label =  text;
+            //ButtonNew.Label =  text;
         }
     }
 }

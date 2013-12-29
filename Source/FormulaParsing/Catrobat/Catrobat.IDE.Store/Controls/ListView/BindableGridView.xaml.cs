@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace Catrobat.IDE.Store.Controls.ListView
 {
@@ -27,6 +16,8 @@ namespace Catrobat.IDE.Store.Controls.ListView
         }
 
         # region dependancy properties
+
+        public event SelectionChangedEventHandler SelectionChanged;
 
         public IList ItemsSource
         {
@@ -131,6 +122,21 @@ namespace Catrobat.IDE.Store.Controls.ListView
             ((BindableGridView) d).GridView.ItemTemplate = (DataTemplate)e.NewValue;
         }
 
+
+        public FrameworkElement Footer
+        {
+            get { return (FrameworkElement)GetValue(FooterProperty); }
+            set { SetValue(FooterProperty, value); }
+        }
+
+        public static readonly DependencyProperty FooterProperty = DependencyProperty.Register("Footer", 
+            typeof(FrameworkElement), typeof(BindableGridView), new PropertyMetadata(null, FooterChanged));
+
+        private static void FooterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((BindableGridView) d).GridView.Footer = e.NewValue;
+        }
+
         #endregion
 
 
@@ -195,6 +201,13 @@ namespace Catrobat.IDE.Store.Controls.ListView
                     list.Insert(index, item);
                 }
             }
+        }
+
+
+        private void GridView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(SelectionChanged!= null)
+                SelectionChanged.Invoke(this, e);
         }
     }
 }

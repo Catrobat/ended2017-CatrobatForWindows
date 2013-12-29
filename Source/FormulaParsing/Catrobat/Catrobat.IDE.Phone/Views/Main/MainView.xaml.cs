@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -16,7 +17,7 @@ namespace Catrobat.IDE.Phone.Views.Main
 {
     public partial class MainView : PhoneApplicationPage
     {
-        private readonly MainViewModel _viewModel = 
+        private readonly MainViewModel _viewModel =
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).MainViewModel;
 
         private const int _offsetKnob = 5;
@@ -33,24 +34,37 @@ namespace Catrobat.IDE.Phone.Views.Main
             if (ServiceLocator.NavigationService.CanGoBack)
                 ServiceLocator.NavigationService.RemoveBackEntry();
 
-                _viewModel.ShowMessagesCommand.Execute(null);
-                base.OnNavigatedTo(e);
+            _viewModel.ShowMessagesCommand.Execute(null);
+            base.OnNavigatedTo(e);
         }
+
+        private bool _firstBackPressed = true;
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
             while (NavigationService.CanGoBack)
                 ServiceLocator.NavigationService.RemoveBackEntry();
 
-            var result = MessageBox.Show(AppResources.Main_ReallyCloseApplicationText, AppResources.Main_ReallyCloseApplicationCaption,
-                            MessageBoxButton.OKCancel);
-
-            if (result == MessageBoxResult.OK)
+            if (_firstBackPressed == false)
             {
                 _viewModel.GoBackCommand.Execute(null);
             }
             else
+            {
                 e.Cancel = true;
+                _firstBackPressed = false;
+
+                var timeToAct = new TimeSpan(0, 0, 0, 0, 1000);
+
+                ServiceLocator.NotifictionService.ShowToastNotification("", // AppResources.Main_ReallyCloseApplicationCaption
+                    AppResources.Main_ReallyCloseApplicationText, timeToAct);
+
+                Task.Run(async () =>
+                {
+                    await Task.Delay(timeToAct);
+                    _firstBackPressed = true;
+                });
+            }
         }
 
         private void FilterTextBox_TextChanged(object sender, TextChangedEventArgs e)

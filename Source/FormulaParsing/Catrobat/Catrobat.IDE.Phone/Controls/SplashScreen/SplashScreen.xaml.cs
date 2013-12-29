@@ -20,27 +20,34 @@ namespace Catrobat.IDE.Phone.Controls.SplashScreen
 
         private async void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
-            var isDirectPlayerLaunche = NavigationContext.QueryString.ContainsKey("ProjectName");
+            string projectName = null;
+            if (NavigationContext.QueryString.ContainsKey("ProjectName"))
+                projectName = NavigationContext.QueryString["ProjectName"];
 
             string fileToken;
             NavigationContext.QueryString.TryGetValue("fileToken", out fileToken);
 
             if (!GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
-                Core.App.SetNativeApp(new AppPhone());
+                //Core.App.SetNativeApp(new AppPhone());
                 await Core.App.Initialize();
 
-                var image = new BitmapImage(new Uri("Content/Images/Screenshot/NoScreenshot.png", UriKind.Relative))
+                ManualImageCache.NoScreenshotImage = new BitmapImage(new Uri("Content/Images/Screenshot/NoScreenshot.png", UriKind.Relative))
                 {
                     CreateOptions = BitmapCreateOptions.None
                 };
 
-                ManualImageCache.NoScreenshotImage = image;
+                ManualImageCache.NoScreenshotImageSquare = new BitmapImage(new Uri("Content/Images/Screenshot/NoScreenshotSquare.png", UriKind.Relative))
+                {
+                    CreateOptions = BitmapCreateOptions.None
+                };
             }
 
-            if (isDirectPlayerLaunche)
+            if (projectName != null)
             {
-                ServiceLocator.NavigationService.NavigateTo<PlayerLauncherViewModel>();
+                await ServiceLocator.PlayerLauncherService.LaunchPlayer(projectName, true);
+                //((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri("Views/Main/PlayerLauncherView#ProjectName=", UriKind.Relative));
+                //ServiceLocator.NavigationService.NavigateTo<PlayerLauncherViewModel>();
             }
 
             if (fileToken != null)

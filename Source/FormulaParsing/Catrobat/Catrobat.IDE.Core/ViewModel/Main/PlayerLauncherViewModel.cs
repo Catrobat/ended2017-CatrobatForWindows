@@ -8,23 +8,30 @@ namespace Catrobat.IDE.Core.ViewModel.Main
     {
         #region private Members
 
-        private Project _currentProject;
+        private string _playProjectName;
+        private bool _isLauncheFromTile;
 
         #endregion
 
         #region Properties
 
-        public Project CurrentProject
+        public string PlayProjectName
         {
-            get
+            get { return _playProjectName; }
+            set
             {
-                return _currentProject;
+                _playProjectName = value;
+                RaisePropertyChanged(() => PlayProjectName);
             }
-            private set
+        }
+
+        public bool IsLauncheFromTile
+        {
+            get { return _isLauncheFromTile; }
+            set
             {
-                if (value == _currentProject) return;
-                _currentProject = value;
-                RaisePropertyChanged(() => CurrentProject);
+                _isLauncheFromTile = value;
+                RaisePropertyChanged(() => IsLauncheFromTile);
             }
         }
 
@@ -39,32 +46,33 @@ namespace Catrobat.IDE.Core.ViewModel.Main
 
         protected override void GoBackAction()
         {
-            ResetViewModel();
-            base.GoBackAction();
+            if(!IsLauncheFromTile)
+              base.GoBackAction();
         }
 
         #endregion
 
         #region MessageActions
 
-        private void CurrentProjectChangedChangedAction(GenericMessage<Project> message)
+        private void IsPlayerStartFromTileMessageAction(GenericMessage<bool> message)
         {
-            CurrentProject = message.Content;
+            IsLauncheFromTile = message.Content;
+        }
+
+        private void PlayProjectNameMessageAction(GenericMessage<string> message)
+        {
+            PlayProjectName = message.Content;
         }
 
         #endregion
 
         public PlayerLauncherViewModel()
         {
+            Messenger.Default.Register<GenericMessage<string>>(this,
+                ViewModelMessagingToken.PlayProjectNameListener, PlayProjectNameMessageAction);
 
-            Messenger.Default.Register<GenericMessage<Project>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedChangedAction);
-        }
-
-
-        private void ResetViewModel()
-        {
-            
+            Messenger.Default.Register<GenericMessage<bool>>(this,
+                 ViewModelMessagingToken.IsPlayerStartFromTileListener, IsPlayerStartFromTileMessageAction);
         }
     }
 }

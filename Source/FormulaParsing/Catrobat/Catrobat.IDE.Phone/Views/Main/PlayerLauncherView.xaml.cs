@@ -21,12 +21,12 @@ namespace Catrobat.IDE.Phone.Views.Main
             InitializeComponent();
         }
 
-        protected override void OnBackKeyPress(CancelEventArgs e)
-        {
-            _viewModel.GoBackCommand.Execute(null);
-            e.Cancel = true;
-            base.OnBackKeyPress(e);
-        }
+        //protected override void OnBackKeyPress(CancelEventArgs e)
+        //{
+        //    _viewModel.GoBackCommand.Execute(null);
+        //    e.Cancel = true;
+        //    base.OnBackKeyPress(e);
+        //}
 
         private readonly Direct3DBackground _d3DBackground = new Direct3DBackground();
 
@@ -48,15 +48,25 @@ namespace Catrobat.IDE.Phone.Views.Main
             _d3DBackground.RenderResolution = _d3DBackground.NativeResolution;
 
             // Set ProjectName to load
-            var projectName = "";
-            if (NavigationContext.QueryString.TryGetValue("ProjectName", out projectName))
-            {
-                _d3DBackground.ProjectName = projectName;
-            }
+            //var projectName = "";
+            //if (NavigationContext.QueryString.TryGetValue("ProjectName", out projectName))
+            //{
+            //    _d3DBackground.ProjectName = projectName;
+            //}
+
+            _d3DBackground.ProjectName = _viewModel.PlayProjectName;
 
             // Hook-up native component to DrawingSurfaceBackgroundGrid
-            DrawingSurfaceBackground.SetBackgroundContentProvider(_d3DBackground.CreateContentProvider());
+            DrawingSurfaceBackground.SetBackgroundContentProvider(_d3DBackground.CreateContentProvider()); // TODO: Chrashes if launched from an pinned project tile
             DrawingSurfaceBackground.SetBackgroundManipulationHandler(_d3DBackground);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if(_viewModel.IsLauncheFromTile && ServiceLocator.NavigationService.CanGoBack)
+                ServiceLocator.NavigationService.RemoveBackEntry();
+
+            base.OnNavigatedTo(e);
         }
     }
 }

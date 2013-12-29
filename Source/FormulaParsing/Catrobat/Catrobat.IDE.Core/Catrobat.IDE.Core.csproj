@@ -210,6 +210,7 @@
     <Compile Include="Services\IProjectGenerator.cs" />
     <Compile Include="Services\IShareService.cs" />
     <Compile Include="Services\IActionTemplateService.cs" />
+    <Compile Include="Services\ISoundService.cs" />
     <Compile Include="UI\Converters\ActiveThemeBrushConverter.cs" />
     <Compile Include="UI\Converters\BoolOpacityConverter.cs" />
     <Compile Include="UI\Converters\BoolPlayButtonStateConverter.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="UI\Converters\IntPixelConverter.cs" />
     <Compile Include="UI\Converters\IntStringConverter.cs" />
     <Compile Include="UI\Converters\NoScreenshotConverter.cs" />
+    <Compile Include="UI\Converters\NullVisibilityConverter.cs" />
     <Compile Include="UI\Converters\NullIntCountConverter.cs" />
     <Compile Include="UI\Converters\NullVariableConverter.cs" />
     <Compile Include="UI\Converters\SecondStringMillisecondConverter.cs" />
@@ -228,6 +230,7 @@
     <Compile Include="UI\Formula\IPortableFormulaButton.cs" />
     <Compile Include="UI\Formula\IPortableUIFormula.cs" />
     <Compile Include="UI\ManualImageCache.cs" />
+    <Compile Include="UI\NullBoolConverter.cs" />
     <Compile Include="UI\PortableUI\IPortableValueConverter.cs" />
     <Compile Include="UI\IPlayPauseButton.cs" />
     <Compile Include="UI\PlayPauseStateCommandArguments.cs" />
@@ -348,7 +351,7 @@
     <Compile Include="ViewModel\Editor\Formula\ChangeVariableViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\FormulaEditorViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\VariableSelectionViewModel.cs" />
-    <Compile Include="ViewModel\Editor\ProjectSettingsViewModel.cs" />
+    <Compile Include="ViewModel\Main\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\AddNewScriptBrickViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\NewBroadcastMessageViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\ScriptBrickCategoryViewModel.cs" />

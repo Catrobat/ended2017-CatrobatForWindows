@@ -12,6 +12,81 @@
   xmlns:pages="using:Catrobat.IDE.Store.Controls.Pages"
   DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
   mc:Ignorable="d">
+	<Page.Resources>
+		<Style x:Key="CurrentProjectButtonStyle" TargetType="Button">
+			<Setter Property="Background" Value="{ThemeResource ButtonBackgroundThemeBrush}"/>
+			<Setter Property="Foreground" Value="{ThemeResource ButtonForegroundThemeBrush}"/>
+			<Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderThemeBrush}"/>
+			<Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+			<Setter Property="Padding" Value="12,4,12,4"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="PointerOver">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="#FF3377CC"/>
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonPointerOverForegroundThemeBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Pressed">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                        <DiscreteObjectKeyFrame KeyTime="0" Value="#FF5599DD"/>
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonPressedForegroundThemeBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Disabled">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBackgroundThemeBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBorderThemeBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+								<VisualStateGroup x:Name="FocusStates">
+									<VisualState x:Name="Focused">
+										<Storyboard>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualWhite"/>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualBlack"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Unfocused"/>
+									<VisualState x:Name="PointerFocused"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+              <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"  Background="#F13377CC" Margin="3">
+								<ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+							</Border>
+							<Rectangle x:Name="FocusVisualWhite" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="1.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}" StrokeDashArray="1,1"/>
+							<Rectangle x:Name="FocusVisualBlack" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="0.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}" StrokeDashArray="1,1"/>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Page.Resources>
 
   <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid.RowDefinitions>
@@ -24,57 +99,71 @@
       </TransitionCollection>
     </Grid.ChildrenTransitions>
 
-    <pages:PageHeaderControl ShowBackButton="False" Grid.Row="0"/>
+    <pages:PageHeaderControl ShowBackButton="False" ShowApplicationName="True" Grid.Row="0"/>
 
+    <ScrollViewer  Grid.Row="1">
+      <ItemsControl >
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <WrapGrid Orientation="Horizontal"/>
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+
+
+
+
+
+      </ItemsControl>
+    </ScrollViewer>
     <Hub Grid.Row="1" Margin="0 -120 0 0">
-      <HubSection Width="500" Header="{Binding Resources.Main_HeaderCurrentProject, Source={StaticResource LocalizedStrings}}">
+      <HubSection Header="{Binding CurrentProject.ProjectHeader.ProgramName }">
         <DataTemplate>
-          <Grid Row="1">
+          <Grid VerticalAlignment="Stretch" Margin="0 0 0 0">
             <Grid.RowDefinitions>
               <RowDefinition Height="Auto"/>
               <RowDefinition/>
-              <RowDefinition Height="Auto"/>
-              <RowDefinition Height="130"/>
             </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-              <Image Name="ImageCurrentProjectScreenshot" MaxWidth="400" MaxHeight="400"
-               Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, 
-          Converter={StaticResource NoScreenshotConverter}}" />
+            <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Center">
+              <Image Name="ImageCurrentProjectScreenshot" MaxWidth="650" MaxHeight="500"
+                Source="{Binding CurrentProject.ProjectScreenshot.ImageSource, 
+                Converter={StaticResource NoScreenshotConverter}}" />
               <buttons:ScreenshotButton VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="ButtonPlayCurrentProject"          
                 Template="{StaticResource ScreenshotButtonControlTemplate}"
                 Margin="0,0,0,0" Command="{Binding PlayCurrentProjectCommand}" Width="130" />
-            </Grid>
-            <Grid Grid.Row="1" HorizontalAlignment="Center" Width="340" Margin="0 15 0 0">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-              </Grid.ColumnDefinitions>
-              <Button Grid.Column="0" Margin="0 0 0 -5" HorizontalAlignment="Center" Command="{Binding CreateNewProjectCommand}"
-                        Content="{ Binding Resources.Main_ButtonCreate, 
-                        Source={StaticResource LocalizedStrings}}"/>
 
-              <Button Grid.Column="1" Margin="0 0 0 -5" HorizontalAlignment="Center" Command="{Binding EditCurrentProjectCommand}"
-                        Content="{Binding Resources.Main_ButtonEdit, 
-                  Source={StaticResource LocalizedStrings}}"/>
+              <Grid HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0 0 0 0">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto"/>
+                  <ColumnDefinition/>
+                  <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" BorderThickness="0" Margin="-3"
+                      HorizontalAlignment="Center" Command="{Binding CreateNewProjectCommand}" 
+                      Style="{StaticResource CurrentProjectButtonStyle}">
+                  <Button.Flyout>
+                    <Flyout Opened="FlyoutNewProject_OnOpened">
+                      <Grid>
+                        <local:AddNewProjectView Width="400" />
+                      </Grid>
+                    </Flyout>
+                  </Button.Flyout>
+                  <Grid>
+                    <TextBlock Text="{ Binding Resources.Main_ButtonCreate, 
+                        Source={StaticResource LocalizedStrings}}" FontSize="45"/>
+                  </Grid>
+                </Button>
+
+                <Button Grid.Column="2" Margin="-3" BorderThickness="0" HorizontalAlignment="Center"
+                      Command="{Binding EditCurrentProjectCommand}"
+                      Style="{StaticResource CurrentProjectButtonStyle}">
+                  <Grid>
+                    <TextBlock Text="{Binding Resources.Main_ButtonEdit, 
+                      Source={StaticResource LocalizedStrings}}" FontSize="45"/>
+                  </Grid>
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
-
-          <!--<Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Image Stretch="Fill" Width="420" Height="280"/>
-                        <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Grid.Row="1" Margin="0,10,0,0" TextWrapping="Wrap" 
-                                   Text="Lorem ipsum dolor sit nonumy sed consectetuer ising elit, sed diam"/>
-                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Grid.Row="2" Margin="0,10,0,0"
-                                   Text="Description text:"/>
-                        <TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="3" 
-                                   Text="Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. "/>
-                    </Grid>-->
         </DataTemplate>
       </HubSection>
 
@@ -85,40 +174,12 @@
               <RowDefinition Height="Auto" />
               <RowDefinition />
             </Grid.RowDefinitions>
-            <GridView Grid.Row="1" Name="ListBoxLocalProjects" ItemsSource="{Binding LocalProjects}" SelectedItem="{Binding CurrentProject}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <GridView Grid.Row="1" Name="ListBoxLocalProjects" ItemsSource="{Binding LocalProjects}" 
+                      SelectedItem="{Binding SelectedLocalProject, Mode=TwoWay}" 
+                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
               <GridView.ItemTemplate>
                 <DataTemplate>
                   <Grid>
-                    <!--<toolkit:ContextMenuService.ContextMenu>
-                      <toolkit:ContextMenu>
-                        <toolkit:MenuItem Header="{Binding Resources.Main_CopyProject, 
-                        Source={StaticResource LocalizedStrings}}"
-                        Command="{Binding MainViewModel.CopyLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding ProjectName}" />
-                        <toolkit:MenuItem Header="{Binding Resources.Main_DeleteProject, 
-                        Source={StaticResource LocalizedStrings}}"
-                        Command="{Binding MainViewModel.DeleteLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding ProjectName}" />
-                        <toolkit:MenuItem Header="{Binding Resources.Main_ChangeProjectNameAndDescription, 
-                        Source={StaticResource LocalizedStrings}}" 
-                        Command="{Binding MainViewModel.RenameLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}"
-                        CommandParameter="{Binding}" />
-                        <toolkit:MenuItem Header="{Binding Resources.Main_PinProjectToStart, 
-                        Source={StaticResource LocalizedStrings}}"
-                        Command="{Binding MainViewModel.PinLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding}" />
-                        <toolkit:MenuItem Header="{Binding Resources.Main_ShareProject, 
-                        Source={StaticResource LocalizedStrings}}"
-                        Command="{Binding MainViewModel.ShareLocalProjectCommand, Mode=OneWay, 
-                        Source={StaticResource Locator}}" 
-                        CommandParameter="{Binding}" />
-                      </toolkit:ContextMenu>
-                    </toolkit:ContextMenuService.ContextMenu>-->
-
                     <projects:LocalProjectControl Width="188" Height="188" Margin="10" Project="{Binding}" />
                   </Grid>
 
@@ -129,7 +190,7 @@
         </DataTemplate>
       </HubSection>
 
-      <HubSection Width="520" Header="{Binding Resources.Main_HeaderAbout, Source={StaticResource LocalizedStrings}}">
+      <HubSection Width="480" Header="{Binding Resources.Main_HeaderAbout, Source={StaticResource LocalizedStrings}}">
         <DataTemplate>
           <Grid>
             <StackPanel>
@@ -144,7 +205,7 @@
               Command="{Binding SettingsCommand}"  
               Margin="0 0 0 0" />-->
                 <StackPanel Grid.Column="1" HorizontalAlignment="Left" Orientation="Vertical">
-                  <TextBlock Text="{Binding ApplicationVersionName}" Margin="30" TextWrapping="Wrap" />
+                  <TextBlock Text="{Binding ApplicationVersionName}" Margin="30" FontSize="30" TextWrapping="Wrap" />
                 </StackPanel>
               </Grid>
             </StackPanel>
@@ -153,4 +214,43 @@
       </HubSection>
     </Hub>
   </Grid>
+
+  <Page.BottomAppBar>
+    <AppBar Name="AppBarBottomn" Padding="10,0,10,0" Background="{Binding SelectedTheme.AppBarColor.NativeBrush, Source={StaticResource ThemeChooser}}" IsSticky="True" Opened="AppBarBottomn_OnOpened">
+      <Grid Visibility="{Binding SelectedLocalProject, Converter={StaticResource NullVisibilityConverter}}">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <AppBarButton Icon="Accept" 
+            Label="{Binding Resources.Main_SetActive, Source={StaticResource LocalizedStrings}}"
+            Command="{Binding SetCurrentProjectCommand}" CommandParameter="{Binding SelectedLocalProject.ProjectName}" />
+          <AppBarButton Icon="Copy"  
+            Label="{Binding Resources.Main_CopyProject, Source={StaticResource LocalizedStrings}}"
+            Command="{Binding CopyLocalProjectCommand}"/>
+          <AppBarButton Icon="Delete"  
+            Label="{Binding Resources.Main_DeleteProject, Source={StaticResource LocalizedStrings}}"
+            Command="{Binding DeleteLocalProjectCommand}"/>
+          <AppBarButton Icon="Rename"  
+            Label="{Binding Resources.Main_ChangeProjectNameAndDescription, Source={StaticResource LocalizedStrings}}"
+            Command="{Binding RenameLocalProjectCommand}">
+            <AppBarButton.Flyout>
+              <Flyout Opened="ChangeProjectFlyout_OnOpened">
+                <local:ProjectSettingsView/>
+              </Flyout>
+            </AppBarButton.Flyout>
+          </AppBarButton>
+          <AppBarButton Icon="SetTile"  
+            Label="{Binding Resources.Main_PinProjectToStart, Source={StaticResource LocalizedStrings}}"
+            Command="{Binding PinLocalProjectCommand}">
+            <AppBarButton.Flyout>
+              <Flyout Opened="TileGeneratorFlyout_OnOpened">
+                <local:TileGeneratorView/>
+              </Flyout>
+            </AppBarButton.Flyout>
+          </AppBarButton>
+          <!--<AppBarButton Icon="Share"  
+            Label="{Binding Resources.Main_ShareProject, Source={StaticResource LocalizedStrings}}"
+            Command="{Binding ShareLocalProjectCommand}"/>-->
+        </StackPanel>
+      </Grid>
+    </AppBar>
+  </Page.BottomAppBar>
 </Page>

@@ -27,8 +27,8 @@ namespace Catrobat.IDE.Core
             if (_context != null)
                 return;
 
-            _app.InitializeInterfaces();
-            ((ViewModelLocator)ServiceLocator.ViewModelLocator).RegisterViewModels();
+            //_app.InitializeInterfaces();
+            //((ViewModelLocator)ServiceLocator.ViewModelLocator).RegisterViewModels();
             ((ViewModelLocator)ServiceLocator.ViewModelLocator).RaiseAppPropertiesChanged();
 
             if (ViewModelBase.IsInDesignModeStatic)

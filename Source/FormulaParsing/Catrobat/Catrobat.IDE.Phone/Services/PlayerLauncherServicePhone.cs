@@ -1,19 +1,34 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Main;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDE.Phone.Services
 {
-    public class PlayerLauncherServicePhone :IPlayerLauncherService
+    public class PlayerLauncherServicePhone : IPlayerLauncherService
     {
-        public void LaunchPlayer(Project project)
+        public async Task LaunchPlayer(Project project, bool isLaunchedFromTile)
         {
-            project.Save();
+            await project.Save();
+            await LaunchPlayer(project.ProjectHeader.ProgramName, isLaunchedFromTile);
+        }
 
-            var navigationUri = "/Views/Main/PlayerLauncherView.xaml?ProjectName=" + project.ProjectHeader.ProgramName;
-            ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri(navigationUri, UriKind.Relative));
+        // ReSharper disable once CSharpWarnings::CS1998
+        public async Task LaunchPlayer(string projectName, bool isLaunchedFromTile)
+        {
+            var messageProjectName = new GenericMessage<string>(projectName);
+            Messenger.Default.Send(messageProjectName, ViewModelMessagingToken.PlayProjectNameListener);
+
+            var messageIsStartFromTile = new GenericMessage<bool>(isLaunchedFromTile);
+            Messenger.Default.Send(messageIsStartFromTile, ViewModelMessagingToken.IsPlayerStartFromTileListener);
+
+            ServiceLocator.NavigationService.NavigateTo<PlayerLauncherViewModel>();
         }
     }
 }

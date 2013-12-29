@@ -27,6 +27,27 @@ namespace Catrobat.IDE.Store.Controls.Pages
         }
 
 
+        public bool ShowApplicationName
+        {
+            get { return (bool)GetValue(ShowApplicationNameProperty); }
+            set { SetValue(ShowApplicationNameProperty, value); }
+        }
+
+        public static readonly DependencyProperty ShowApplicationNameProperty = DependencyProperty.Register("ShowApplicationName", 
+            typeof(bool), typeof(PageHeaderControl), new PropertyMetadata(false, ShowApplicationNameChanged));
+
+        private static void ShowApplicationNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((PageHeaderControl) d).Logo.TextVisibility = ((bool) e.NewValue)
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+
+            ((PageHeaderControl)d).Logo.Width = ((bool)e.NewValue)
+                ? 470
+                : 65;
+            // Code for dealing with your property changes
+        }
+
         public ICommand BackCommand
         {
             get { return (ICommand)GetValue(BackCommandProperty); }

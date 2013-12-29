@@ -1,21 +1,28 @@
-﻿using System;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Catrobat.IDE.Core;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModel.Editor.Sprites;
 using Catrobat.IDE.Store.Services;
 using Catrobat.IDE.Store.Services.Storage;
+using Catrobat.IDE.Store.Views.Editor.Sprites;
+using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;
 
 namespace Catrobat.IDE.Store
 {
     public class AppStore : INativeApp
     {
+        public AppStore()
+        {
+            InitializeInterfaces();
+        }
+
         public void InitializeInterfaces()
         {
-            ServiceLocator.UnRegisterAll();
-
-            ServiceLocator.ViewModelLocator = Application.Current.Resources["Locator"];
-            ServiceLocator.ThemeChooser = Application.Current.Resources["ThemeChooser"];
-            ServiceLocator.LocalizedStrings = Application.Current.Resources["LocalizedStrings"];
+            if(ViewModelBase.IsInDesignModeStatic)
+                ServiceLocator.Register(new DispatcherServiceStore(null));
 
             ServiceLocator.Register<NavigationServiceStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SystemInformationServiceStore>(TypeCreationMode.Lazy);
@@ -33,8 +40,43 @@ namespace Catrobat.IDE.Store
             ServiceLocator.Register<NotificationServiceStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ColorConversionServiceStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ShareServiceStore>(TypeCreationMode.Lazy);
-            ServiceLocator.Register<DispatcherServiceStore>(TypeCreationMode.Lazy);
             ServiceLocator.Register<PortableUIElementsConvertionServiceStore>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SoundServiceStore>(TypeCreationMode.Lazy);
+
+            ServiceLocator.ViewModelLocator = new ViewModelLocator();
+            ServiceLocator.ViewModelLocator.RegisterViewModels();
+
+            ServiceLocator.ThemeChooser = new ThemeChooser();
+            ServiceLocator.LocalizedStrings = new LocalizedStrings();
+
+            Application.Current.Resources["Locator"] = ServiceLocator.ViewModelLocator;
+            Application.Current.Resources["ThemeChooser"] = ServiceLocator.ThemeChooser;
+            Application.Current.Resources["LocalizedStrings"] = ServiceLocator.LocalizedStrings;
+
+            if (!ViewModelBase.IsInDesignModeStatic)
+                InitPresenters();
+
+            if (ViewModelBase.IsInDesignModeStatic)
+            {
+                //var task = new ProjectGeneratorDefault().GenerateProject("de", false);
+                //task.Wait();
+
+                //var defaultProject = task.Result;
+                //var projectChangedMessage = new GenericMessage<Project>(defaultProject);
+                //Messenger.Default.Send(projectChangedMessage, ViewModelMessagingToken.CurrentProjectChangedListener);
+            }
+        }
+
+        private void InitPresenters()
+        {
+            var spritesViewModel = ServiceLocator.GetInstance<SpritesViewModel>();
+            spritesViewModel.PresenterType = typeof(SpritesPresenter);
+
+            var spriteEditorViewModel = ServiceLocator.GetInstance<SpriteEditorViewModel>();
+            spriteEditorViewModel.PresenterType = typeof(SpritesPresenter);
+
+            //var costumeSavingViewModel = ServiceLocator.GetInstance<CostumeSavingViewModel>();
+            //costumeSavingViewModel.PresenterType = typeof(SpritesPresenter);
         }
     }
 }

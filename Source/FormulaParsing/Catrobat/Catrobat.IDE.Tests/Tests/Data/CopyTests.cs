@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities.Helpers;
@@ -21,7 +22,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
 
 
         [TestMethod, TestCategory("GatedTests")]
-        public async void CopySprite()
+        public async Task CopySprite()
         {
             const string savePath1 = "/CopyTest1/project.xml";
             const string savePath2 = "/CopyTest1/project.xml";

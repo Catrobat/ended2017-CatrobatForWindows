@@ -28,16 +28,16 @@
       <Button Command="{Binding ShowLanguageSettingsCommand}" BorderThickness="0">
         <Button.Content>
           <StackPanel Name="StackPanelSettingsLanguage" Margin="10 0 10 10" >
-            <TextBlock Margin="0 0 10 10"
+            <TextBlock Margin="0 0 10 10" HorizontalAlignment="Center"
                        Text="{Binding Resources.Main_ListLanguage, Source={StaticResource LocalizedStrings}}" 
                        Style="{StaticResource PhoneTextLargeStyle}" />
-            <TextBlock Margin="0 -5 10 10" 
+            <TextBlock Margin="0 -5 10 10" HorizontalAlignment="Center"
                        Text="{Binding CurrentCulture.NativeName}" 
                        Style="{StaticResource PhoneTextNormalStyle}"/>
           </StackPanel>
         </Button.Content>
       </Button>
-      <Button Command="{Binding ShowDesignSettingsCommand}" BorderThickness="0">
+      <!--<Button Command="{Binding ShowDesignSettingsCommand}" BorderThickness="0">
         <Button.Content>
           <Grid>
             <Grid.RowDefinitions>
@@ -101,7 +101,7 @@
           </Grid>
 
         </Button.Content>
-      </Button>
+      </Button>-->
     </StackPanel>
   </Grid>
 </phone:PhoneApplicationPage>

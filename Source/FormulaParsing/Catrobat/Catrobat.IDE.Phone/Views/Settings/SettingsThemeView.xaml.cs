@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Navigation;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.ViewModel;
@@ -32,6 +34,19 @@ namespace Catrobat.IDE.Phone.Views.Settings
                 var theme = frameworkElement.DataContext as Theme;
                 _viewModel.ActiveThemeChangedCommand.Execute(theme);
             }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ListBoxDesings.ItemsSource = null;
+            ListBoxDesings.ItemsSource = _viewModel.ThemeChooser.Themes;
+            base.OnNavigatedTo(e);
+        }
+
+        private void ListBoxDesings_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBoxDesings.ItemsSource = null;
+            ListBoxDesings.ItemsSource = _viewModel.ThemeChooser.Themes;
         }
     }
 }

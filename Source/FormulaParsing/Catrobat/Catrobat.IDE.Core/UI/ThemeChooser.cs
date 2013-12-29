@@ -66,7 +66,7 @@ namespace Catrobat.IDE.Core.UI
                 AccentColor1 = new PortableSolidColorBrush(255, 128, 0, 128),
                 AccentColor2 = new PortableSolidColorBrush(255, 0, 128, 0),
                 AccentColor3 = new PortableSolidColorBrush(255, 155, 165, 0),
-                AppBarColor = new PortableSolidColorBrush(255, 50, 50, 50)
+                AppBarColor = new PortableSolidColorBrush(255, 0xEE, 0x76, 0x21)
             };
 
 

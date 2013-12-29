@@ -310,15 +310,28 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Sounds
             }
         }
 
-        private static void SaveAction()
+        private void SaveAction()
         {
-            ServiceLocator.NavigationService.NavigateTo<SoundNameChooserViewModel>();
+            ServiceLocator.SoundService.Finished( new SoundServiceResult
+            {
+                Status = SoundServiceStatus.Success,
+                Result = ServiceLocator.SoundRecorderService.GetSoundAsStream()
+            });
+
+            ResetViewModel();
+            //ServiceLocator.NavigationService.NavigateTo<SoundNameChooserViewModel>();
         }
 
         private void CancelAction()
         {
             ServiceLocator.SoundRecorderService.StopPlayingRecordedSound();
             ServiceLocator.SoundRecorderService.StopRecording();
+
+            ServiceLocator.SoundService.Finished(new SoundServiceResult
+            {
+                Status = SoundServiceStatus.Cancelled,
+                Result = null
+            });
 
             ResetViewModel();
             base.GoBackAction();

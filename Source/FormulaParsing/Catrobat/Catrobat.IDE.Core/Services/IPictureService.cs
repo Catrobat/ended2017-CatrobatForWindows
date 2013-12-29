@@ -15,7 +15,6 @@ namespace Catrobat.IDE.Core.Services
     {
         public PictureServiceStatus Status { get; set; }
         public PortableImage Image { get; set; }
-
     }
 
     public interface IPictureService

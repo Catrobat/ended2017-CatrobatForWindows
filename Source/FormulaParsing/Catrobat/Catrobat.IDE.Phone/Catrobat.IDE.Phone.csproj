@@ -126,7 +126,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AppPhoneDesignStatic.cs" />
     <Compile Include="AppPhone.cs" />
     <Compile Include="Content\Images\Application\Logo.xaml.cs">
       <DependentUpon>Logo.xaml</DependentUpon>
@@ -221,6 +220,7 @@
     <Compile Include="Services\DispatcherServicePhone.cs" />
     <Compile Include="Services\ImageResizeServicePhone.cs" />
     <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
+    <Compile Include="Services\SoundServicePhone.cs" />
     <Compile Include="Services\ProjectImporterServicePhone.cs" />
     <Compile Include="Services\NavigationServicePhone.cs" />
     <Compile Include="Services\NotificationServicePhone.cs" />
@@ -271,7 +271,7 @@
     <Compile Include="Views\Editor\Formula\VariableSelectionView.xaml.cs">
       <DependentUpon>VariableSelectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Editor\ProjectSettingsView.xaml.cs">
+    <Compile Include="Views\Main\ProjectSettingsView.xaml.cs">
       <DependentUpon>ProjectSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Editor\Scripts\AddNewScriptBrickView.xaml.cs">
@@ -499,7 +499,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Editor\ProjectSettingsView.xaml">
+    <Page Include="Views\Main\ProjectSettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -621,6 +621,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\Screenshot\NoScreenshotSquare.png" />
     <Content Include="Content\Images\Share\skydrive.jpg" />
     <Content Include="Content\Programs\Default\automatic_screenshot.png" />
     <Content Include="Content\Programs\Default\Looks\28226cf909b0e5deb2d275b73a96fbec_rain.png">
@@ -850,6 +851,7 @@
   <ItemGroup>
     <Folder Include="Content\Libs\" />
     <Folder Include="Content\Programs\Default\Sounds\" />
+    <Folder Include="Services\LocalServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
