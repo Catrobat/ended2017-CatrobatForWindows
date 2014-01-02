@@ -8,7 +8,7 @@ using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
-    class XmlFormulaTreeConverter
+    public class XmlFormulaTreeConverter
     {
 
         private readonly IDictionary<string, UserVariable> _userVariables;
@@ -25,6 +25,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         public IFormulaTree Convert(XmlFormulaTree formula)
         {
             if (formula == null) return null;
+
+
             if (formula.VariableType == "NUMBER") return FormulaTreeFactory.CreateNumberNode(double.Parse(formula.VariableValue, CultureInfo.InvariantCulture));
             if (formula.VariableType == "OPERATOR") return ConvertOperatorNode(formula);
             if (formula.VariableType == "FUNCTION") return ConvertFunctionNode(formula);
@@ -32,6 +34,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             if (formula.VariableType == "USER_VARIABLE") return ConvertUserVariableNode(formula);
             if (formula.VariableType == "BRACKET") return ConvertParenthesesNode(formula);
 
+            if (String.IsNullOrEmpty(formula.VariableType)) return null;
             throw new NotImplementedException();
         }
 

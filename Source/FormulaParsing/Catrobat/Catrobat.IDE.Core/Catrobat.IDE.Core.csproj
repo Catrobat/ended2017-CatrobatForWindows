@@ -197,6 +197,7 @@
     <Compile Include="CatrobatObjects\ProjectHeader.cs" />
     <Compile Include="CatrobatObjects\Scripts\BroadcastScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\Script.cs" />
+    <Compile Include="FormulaEditor\Editor\FormulaEditor2.cs" />
     <Compile Include="FormulaEditor\Editor\FormulaTokenFactory.cs" />
     <Compile Include="FormulaEditor\Editor\FormulaEvaluator.cs" />
     <Compile Include="FormulaEditor\Editor\XmlFormulaTreeFactory2.cs" />
@@ -210,12 +211,14 @@
     <Compile Include="Services\IProjectGenerator.cs" />
     <Compile Include="Services\IShareService.cs" />
     <Compile Include="Services\IActionTemplateService.cs" />
+    <Compile Include="Services\ISoundService.cs" />
     <Compile Include="UI\Converters\ActiveThemeBrushConverter.cs" />
     <Compile Include="UI\Converters\BoolOpacityConverter.cs" />
     <Compile Include="UI\Converters\BoolPlayButtonStateConverter.cs" />
     <Compile Include="UI\Converters\BoolToSelectedPivotItemConverter.cs" />
     <Compile Include="UI\Converters\BoolVisibilityConverter.cs" />
     <Compile Include="UI\Converters\BoolVisibilityNegativeConverter.cs" />
+    <Compile Include="UI\Converters\FormulaStringConverter.cs" />
     <Compile Include="UI\Converters\DoubleStringConverter.cs" />
     <Compile Include="UI\Converters\FloatStringConverter.cs" />
     <Compile Include="UI\Converters\IntPixelConverter.cs" />
@@ -223,11 +226,13 @@
     <Compile Include="UI\Converters\NoScreenshotConverter.cs" />
     <Compile Include="UI\Converters\NullIntCountConverter.cs" />
     <Compile Include="UI\Converters\NullVariableConverter.cs" />
+    <Compile Include="UI\Converters\NullVisibilityConverter.cs" />
     <Compile Include="UI\Converters\SecondStringMillisecondConverter.cs" />
     <Compile Include="UI\Converters\VariableButtonVisibilityConverter.cs" />
     <Compile Include="UI\Formula\IPortableFormulaButton.cs" />
     <Compile Include="UI\Formula\IPortableUIFormula.cs" />
     <Compile Include="UI\ManualImageCache.cs" />
+    <Compile Include="UI\Converters\NullBoolConverter.cs" />
     <Compile Include="UI\PortableUI\IPortableValueConverter.cs" />
     <Compile Include="UI\IPlayPauseButton.cs" />
     <Compile Include="UI\PlayPauseStateCommandArguments.cs" />

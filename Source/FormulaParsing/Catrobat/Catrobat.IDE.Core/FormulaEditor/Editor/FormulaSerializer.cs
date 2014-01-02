@@ -5,13 +5,11 @@ using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;
 
 namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
-    class FormulaSerializer
+    public class FormulaSerializer
     {
 
         public string Serialize(IFormulaTree formula)
         {
-            if (formula == null) return null;
-
             var sb = new StringBuilder();
             Serialize(sb, formula);
             return sb.ToString();
@@ -19,6 +17,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         private void Serialize(StringBuilder sb, IFormulaTree formula)
         {
+            if (formula == null) return;
+
             // TODO: tight (1+2) or loose (1 + 2)? 
 
             var type = formula.GetType();

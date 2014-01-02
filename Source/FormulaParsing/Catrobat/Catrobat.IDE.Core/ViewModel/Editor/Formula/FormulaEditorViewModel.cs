@@ -1,33 +1,21 @@
-﻿using Catrobat.IDE.Core.FormulaEditor.Editor;
-using Catrobat.IDE.Core.Services;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.FormulaEditor.Editor;
 using Catrobat.IDE.Core.UI.Formula;
 using Catrobat.IDE.Core.Utilities.Helpers;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using System.Collections.Generic;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 
 namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 {
-    public delegate void FormulaChanged(SelectedFormulaInformation formulaInformation);
-
     public delegate void ErrorOccurred();
 
     public class FormulaEditorViewModel : ViewModelBase
     {
         #region Events
 
-        public FormulaChanged FormulaChanged;
-
         public ErrorOccurred ErrorOccurred;
-
-        private void RaiseFormulaChanged(SelectedFormulaInformation formulaInformation)
-        {
-            if (FormulaChanged != null)
-                FormulaChanged.Invoke(formulaInformation);
-        }
 
         private void RaiseKeyError()
         {
@@ -37,16 +25,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
         #endregion
 
-        #region Private Members
+        #region Members
 
-        private Core.CatrobatObjects.Formulas.Formula _formula;
+        private readonly FormulaEditor2 _editor = new FormulaEditor2();
         private Sprite _selectedSprite;
         private IPortableFormulaButton _formulaButton;
         private Project _currentProject;
-        private SelectedFormulaInformation _selectedFormulaInformation;
-        private readonly Stack<XmlFormulaTree> _undoStack = new Stack<XmlFormulaTree>();
-        private readonly Stack<XmlFormulaTree> _redoStack = new Stack<XmlFormulaTree>(); 
-
+        
         #endregion
 
         #region Properties
@@ -54,7 +39,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         public Project CurrentProject
         {
             get { return _currentProject; }
-            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
+            private set
+            {
+                _currentProject = value; 
+                RaisePropertyChanged(() => CurrentProject);
+            }
         }
 
         public IPortableFormulaButton FormulaButton
@@ -64,16 +53,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             {
                 _formulaButton = value;
                 RaisePropertyChanged(() => FormulaButton);
-            }
-        }
-
-        public SelectedFormulaInformation SelectedFormulaInformation
-        {
-            get { return _selectedFormulaInformation; }
-            set
-            {
-                _selectedFormulaInformation = value;
-                RaisePropertyChanged(() => SelectedFormulaInformation);
             }
         }
 
@@ -87,23 +66,55 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             }
         }
 
-        public Core.CatrobatObjects.Formulas.Formula Formula
+        public IFormulaTree Formula
         {
-            get { return _formula; }
-            set
+            get { return _editor.Formula; }
+            set { _editor.Formula = value; }
+        }
+
+        private void InitFormulaBinding()
+        {
+            _editor.PropertyChanged += (sender, args) =>
             {
-                _formula = value;
-                RaisePropertyChanged(() => Formula);
-            }
+                if (args.PropertyName == GetPropertyName(() => _editor.Formula))
+                {
+                    if (FormulaButton != null) FormulaButton.FormulaChanged();
+                    RaisePropertyChanged(() => Formula);
+                }
+            };
+        }
+
+        public string FormulaString
+        {
+            get { return _editor.FormulaString; }
+            set { _editor.FormulaString = value; }
+        }
+
+        private void InitFormulaStringBinding()
+        {
+            _editor.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == GetPropertyName(() => _editor.FormulaString)) RaisePropertyChanged(() => FormulaString);
+            };
+        }
+
+        public int CaretIndex
+        {
+            get { return _editor.CaretIndex; }
+            set { _editor.CaretIndex = value; }
+        }
+
+        private void InitCaretIndexBinding()
+        {
+            _editor.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == GetPropertyName(() => _editor.CaretIndex)) RaisePropertyChanged(() => CaretIndex);
+            };
         }
 
         #endregion
 
         #region Commands
-
-        public RelayCommand<IPortableUIFormula> FormulaPartSelectedComand { get; private set; }
-
-        public RelayCommand FormulaChangedCommand { get; private set; }
 
         public RelayCommand<SensorVariable> SensorVariableSelectedCommand { get; private set; }
 
@@ -115,65 +126,22 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
         #region Actions
 
-        private static void FormulaPartSelectedAction(IPortableUIFormula formula)
-        {
-            bool wasSelected = formula.IsSelected;
-
-            formula.ClearAllSelection();
-
-            if (formula.IsEditEnabled)
-                formula.IsSelected = !wasSelected;
-        }
-
-        private void FormulaChangedAction()
-        {
-            if (FormulaButton != null)
-                FormulaButton.FormulaChanged();
-        }
-
         private void KeyPressedCommandAction(FormulaEditorKey key)
         {
-            var formulaEditor = new FormulaEditor.Editor.FormulaEditor
-            {
-                SelectedFormula = SelectedFormulaInformation,
-                UndoStack = _undoStack,
-                RedoStack = _redoStack
-            };
-            if (!formulaEditor.KeyPressed(key))
+            if (!_editor.KeyPressed(key))
                 RaiseKeyError();
-
-            FormulaButton.FormulaChanged();
-            RaiseFormulaChanged(SelectedFormulaInformation);
         }
 
         private void ObjectVariableSelectedAction(ObjectVariable variable)
         {
-            var formulaEditor = new FormulaEditor.Editor.FormulaEditor
-            {
-                SelectedFormula = SelectedFormulaInformation,
-                UndoStack = _undoStack,
-                RedoStack = _redoStack
-            };
-            if (!formulaEditor.ObjectVariableSelected(variable))
+            if (!_editor.ObjectVariableSelected(variable))
                 RaiseKeyError();
-
-            FormulaButton.FormulaChanged();
-            RaiseFormulaChanged(SelectedFormulaInformation);
         }
 
         private void SensorVariableSelectedAction(SensorVariable variable)
         {
-            var formulaEditor = new FormulaEditor.Editor.FormulaEditor
-            {
-                SelectedFormula = SelectedFormulaInformation,
-                UndoStack = _undoStack,
-                RedoStack = _redoStack
-            };
-            if (!formulaEditor.SensorVariableSelected(variable))
+            if (!_editor.SensorVariableSelected(variable))
                 RaiseKeyError();
-
-            FormulaButton.FormulaChanged();
-            RaiseFormulaChanged(SelectedFormulaInformation);
         }
 
         protected override void GoBackAction()
@@ -198,34 +166,27 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
         private void SelectedUserVariableChangedMessageAction(GenericMessage<UserVariable> message)
         {
-            var formulaEditor = new FormulaEditor.Editor.FormulaEditor { SelectedFormula = SelectedFormulaInformation };
             var variable = message.Content;
 
             if (VariableHelper.IsVariableLocal(CurrentProject, variable))
             {
-                if (!formulaEditor.LocalVariableSelected(variable))
+                if (!_editor.LocalVariableSelected(variable))
                     RaiseKeyError();
             }
             else
             {
-                if (!formulaEditor.GlobalVariableSelected(variable))
+                if (!_editor.GlobalVariableSelected(variable))
                     RaiseKeyError();
             }
-
-            RaiseFormulaChanged(SelectedFormulaInformation);
         }
 
         #endregion
 
         public FormulaEditorViewModel()
         {
-            FormulaPartSelectedComand = new RelayCommand<IPortableUIFormula>(FormulaPartSelectedAction);
-            FormulaChangedCommand = new RelayCommand(FormulaChangedAction);
-
             SensorVariableSelectedCommand = new RelayCommand<SensorVariable>(SensorVariableSelectedAction);
             ObjectVariableSelectedCommand = new RelayCommand<ObjectVariable>(ObjectVariableSelectedAction);
             KeyPressedCommand = new RelayCommand<FormulaEditorKey>(KeyPressedCommandAction);
-
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
@@ -235,17 +196,18 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
 
             Messenger.Default.Register<GenericMessage<UserVariable>>(this,
-                 ViewModelMessagingToken.SelectedUserVariableChangedListener, SelectedUserVariableChangedMessageAction); 
+                 ViewModelMessagingToken.SelectedUserVariableChangedListener, SelectedUserVariableChangedMessageAction);
+
+            InitFormulaBinding();
+            InitFormulaStringBinding();
+            InitCaretIndexBinding();
         }
 
 
-        private void ResetViewModel() { }
-
-        public override void Cleanup()
+        private void ResetViewModel()
         {
-            base.Cleanup();
-            _undoStack.Clear();
-            _redoStack.Clear();
+            _editor.ResetViewModel();
+            _formulaButton = null;
         }
     }
 }
