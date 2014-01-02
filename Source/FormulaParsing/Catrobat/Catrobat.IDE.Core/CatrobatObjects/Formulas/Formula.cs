@@ -1,10 +1,28 @@
-﻿using System;
+﻿using System.Linq;
 using System.Xml.Linq;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.FormulaEditor.Editor;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 {
     public class Formula : DataObject
     {
+        private readonly XmlFormulaTreeConverter _converter = new XmlFormulaTreeConverter(Enumerable.Empty<UserVariable>(), null);
+
+        private IFormulaTree _formulaTree2;
+        public IFormulaTree FormulaTree2
+        {
+            get { return _formulaTree2; }
+            set
+            {
+                if (_formulaTree2 == null && value == null) return;
+                if (_formulaTree2 != null && _formulaTree2.Equals(value)) return;
+                _formulaTree2 = value;
+                FormulaTree = _converter.ConvertBack(_formulaTree2);
+                RaisePropertyChanged();
+            }
+        }
+
         private XmlFormulaTree _formulaTree;
         public XmlFormulaTree FormulaTree
         {
@@ -17,6 +35,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 }
 
                 _formulaTree = value;
+                FormulaTree2 = _converter.Convert(_formulaTree);
                 RaisePropertyChanged();
             }
         }
@@ -31,7 +50,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("formulaTree") != null)
-                _formulaTree = new XmlFormulaTree(xRoot.Element("formulaTree"));
+                FormulaTree = new XmlFormulaTree(xRoot.Element("formulaTree"));
         }
 
         internal override XElement CreateXML()
@@ -41,10 +60,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 
         public DataObject Copy()
         {
-            var newFormula = new Formula();
-            newFormula._formulaTree = _formulaTree.Copy() as XmlFormulaTree;
-
-            return newFormula;
+            var newFormulaTree = _formulaTree.Copy() as XmlFormulaTree;
+            return new Formula()
+            {
+                _formulaTree = newFormulaTree, 
+                _formulaTree2 = _converter.Convert(newFormulaTree)
+            };
         }
 
         public override bool Equals(DataObject other)

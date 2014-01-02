@@ -17,7 +17,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         [TestMethod]
         public void FormulaSerializerTests_Null()
         {
-            Assert.AreEqual(null, _serializer.Serialize(null));
+            Assert.AreEqual(string.Empty, _serializer.Serialize(null));
         }
 
         #region numbers

@@ -1,9 +1,9 @@
-﻿using System.Windows;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.Formula;
 using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Editor.Formula;
+using System.Windows;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {
@@ -17,12 +17,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             set { SetValue(FormulaProperty, value); }
         }
 
-        public static readonly DependencyProperty FormulaProperty = DependencyProperty.Register("Formula", typeof(Formula), typeof(FormulaButton), new PropertyMetadata(FormulaChanged));
-
-        private static void FormulaChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((FormulaButton)d).FormulaViewer.Formula = e.NewValue as Formula;
-        }
+        public static readonly DependencyProperty FormulaProperty = DependencyProperty.Register("Formula", typeof(Formula), typeof(FormulaButton), new PropertyMetadata(null));
 
         #endregion
 
@@ -38,15 +33,17 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public void FormulaChanged()
         {
-            FormulaViewer.Formula = Formula;
+            var viewModel = ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
+            Formula.FormulaTree2 = viewModel.Formula;
         }
 
         private void ButtonFormula_OnClick(object sender, RoutedEventArgs e)
         {
-            var viewModel = ((ViewModelLocator)ServiceLocator.ViewModelLocator).FormulaEditorViewModel;
-            viewModel.Formula = Formula;
+            var viewModel = ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
+            viewModel.Formula = Formula.FormulaTree2;
+            viewModel.CaretIndex = viewModel.FormulaString.Length;
             viewModel.FormulaButton = this;
-            Catrobat.IDE.Core.Services.ServiceLocator.NavigationService.NavigateTo(typeof(FormulaEditorViewModel));
+            ServiceLocator.NavigationService.NavigateTo(typeof(FormulaEditorViewModel));
         }
     }
 }
