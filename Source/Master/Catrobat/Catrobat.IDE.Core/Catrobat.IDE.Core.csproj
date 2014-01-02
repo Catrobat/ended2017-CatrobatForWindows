@@ -153,7 +153,7 @@
     <Compile Include="UI\Formula\IPortableFormulaButton.cs" />
     <Compile Include="UI\Formula\IPortableUIFormula.cs" />
     <Compile Include="UI\ManualImageCache.cs" />
-    <Compile Include="UI\NullBoolConverter.cs" />
+    <Compile Include="UI\Converters\NullBoolConverter.cs" />
     <Compile Include="UI\PortableUI\IPortableValueConverter.cs" />
     <Compile Include="UI\IPlayPauseButton.cs" />
     <Compile Include="UI\PlayPauseStateCommandArguments.cs" />
