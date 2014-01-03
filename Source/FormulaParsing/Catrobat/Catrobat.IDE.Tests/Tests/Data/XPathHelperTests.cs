@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod,TestCategory("GatedTests")]
-        public void XPathHelperTests_GetElement()
+        public void GetElement()
         {
             var document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");
 
@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
         }
 
         [TestMethod,TestCategory("GatedTests")]
-        public void XPathHelperTests_GetXPath()
+        public void GetXPath()
         {
             var document = SampleLoader.LoadSampleXDocument("Converter/XPathHelperTestInput");
 

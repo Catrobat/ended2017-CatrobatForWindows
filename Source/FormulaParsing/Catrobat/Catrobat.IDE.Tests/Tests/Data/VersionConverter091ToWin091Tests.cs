@@ -8,65 +8,65 @@ namespace Catrobat.IDE.Tests.Tests.Data
     [TestClass]
     public class VersionConverter091ToWin091Tests
     {
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void TestClassInitialize(TestContext testContext)
         {
             TestHelper.InitializeTests();
         }
 
-        [TestMethod,TestCategory("GatedTests")]
-        public void CatrobatVersionConverterTest_Convert_ObjectReferences()
+        [TestMethod, TestCategory("GatedTests")]
+        public void ObjectReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_ObjectReferences");
         }
 
-        [TestMethod,TestCategory("GatedTests")]
-        public void CatrobatVersionConverterTest_Convert_SoundReferences()
+        [TestMethod, TestCategory("GatedTests")]
+        public void SoundReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_SoundReferences");
         }
 
-        [TestMethod,TestCategory("GatedTests")]
-        public void CatrobatVersionConverterTest_Convert_LookReferences()
+        [TestMethod, TestCategory("GatedTests")]
+        public void LookReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_LookReferences");
         }
 
-        [TestMethod,TestCategory("GatedTests")]
-        public void CatrobatVersionConverterTest_Convert_GlobalVariableReferences()
+        [TestMethod, TestCategory("GatedTests")]
+        public void GlobalVariableReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_GlobalVariableReferences");
         }
 
-        [TestMethod,TestCategory("GatedTests")]
-        public void CatrobatVersionConverterTest_Convert_LocalVariableReferences()
+        [TestMethod, TestCategory("GatedTests")]
+        public void LocalVariableReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_LocalVariableReferences");
         }
 
         #region References in Bricks
 
-        [TestMethod,TestCategory("GatedTests")]
-        public void CatrobatVersionConverterTest_Convert_PointToBrickReferences()
+        [TestMethod, TestCategory("GatedTests")]
+        public void PointToBrickReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_PointTo");
         }
 
 
-        [TestMethod,TestCategory("GatedTests")]
-        public void CatrobatVersionConverterTest_Convert_ForeverBrickReferences()
+        [TestMethod, TestCategory("GatedTests")]
+        public void ForeverBrickReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_Forever");
         }
 
-        [TestMethod,TestCategory("GatedTests")]
-        public void CatrobatVersionConverterTest_Convert_RepeatBrickReferences()
+        [TestMethod, TestCategory("GatedTests")]
+        public void RepeatBrickReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_Repeat");
         }
 
-        [TestMethod,TestCategory("GatedTests")]
-        public void CatrobatVersionConverterTest_Convert_IfLoginBeginBrickReferences()
+        [TestMethod, TestCategory("GatedTests")]
+        public void IfLoginBeginBrickReferences()
         {
             TestSampleData("Converter/091_Win091/VersionConverterTest_08_to_Win08_IfLogicBegin");
         }

@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
     {
 
         [TestMethod]
-        public void FormulaEditorTests_TestCommonKeys()
+        public void TestCommonKeys()
         {
             TestKey(FormulaEditorKey.Number0, FormulaTreeFactory.CreateNumberNode(0));
             TestKey(FormulaEditorKey.Number1, FormulaTreeFactory.CreateNumberNode(1));
@@ -63,13 +63,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaEditorTests_TestUndoRedo()
+        public void TestUndoRedo()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void FormulaEditorTests_TestBrackets()
+        public void TestBrackets()
         {
             Assert.Inconclusive();
         }
@@ -120,7 +120,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_NumberTypingTest_01()
+        public void NumberTypingTest_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -153,7 +153,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_TypingTest_02()
+        public void TypingTest_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -220,7 +220,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_DecimalSeparatorTest_01()
+        public void DecimalSeparatorTest_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -248,7 +248,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_DecimalSeparatorTest_02()
+        public void DecimalSeparatorTest_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -288,7 +288,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Tree_01()
+        public void Tree_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -371,7 +371,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Tree_02()
+        public void Tree_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -432,7 +432,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Tree_03()
+        public void Tree_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -580,7 +580,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Tree_04()
+        public void Tree_04()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -630,7 +630,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_EqualsTest_01()
+        public void EqualsTest_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -721,7 +721,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_RelationalOperator_01()
+        public void RelationalOperator_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -828,7 +828,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_RelationalOperator_02()
+        public void RelationalOperator_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -899,7 +899,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_RelationalOperator_03()
+        public void RelationalOperator_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -957,7 +957,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_LogicalOperator_01()
+        public void LogicalOperator_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1040,7 +1040,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_LogicalOprator_02()
+        public void LogicalOprator_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1107,7 +1107,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_LogicalOperator_03()
+        public void LogicalOperator_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1194,7 +1194,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_SignedNumber_01()
+        public void SignedNumber_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1260,7 +1260,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_SignedNumber_02()
+        public void SignedNumber_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1368,7 +1368,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_SignedNumber_03()
+        public void SignedNumber_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1440,7 +1440,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_SignedNumber_05()
+        public void SignedNumber_05()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1493,7 +1493,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_SignedNumber_06()
+        public void SignedNumber_06()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1547,7 +1547,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_SignedNumber_07()
+        public void SignedNumber_07()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1591,7 +1591,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_LogicValue_01()
+        public void LogicValue_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1685,7 +1685,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_LogicValue_02()
+        public void LogicValue_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1725,7 +1725,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_LogicValue_03()
+        public void LogicValue_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1778,7 +1778,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Deletion_01()
+        public void Deletion_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1804,7 +1804,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Deletion_02()
+        public void Deletion_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1832,7 +1832,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Deletion_03()
+        public void Deletion_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1988,7 +1988,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Deletion_04()
+        public void Deletion_04()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2018,7 +2018,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Deletion_05()
+        public void Deletion_05()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2046,7 +2046,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Deletion_06()
+        public void Deletion_06()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2092,7 +2092,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_LogicNot_01()
+        public void LogicNot_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2138,7 +2138,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_LogicNot_02()
+        public void LogicNot_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2160,7 +2160,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_LogicNot_04()
+        public void LogicNot_04()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2200,7 +2200,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_LogicNot_05()
+        public void LogicNot_05()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2226,7 +2226,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Function_DefaultValues()
+        public void Function_DefaultValues()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2480,7 +2480,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Function_02()
+        public void Function_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2549,7 +2549,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Function_03()
+        public void Function_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2616,7 +2616,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
  
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Function_04()
+        public void Function_04()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2666,7 +2666,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Bracket_01()
+        public void Bracket_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2801,7 +2801,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Bracket_02()
+        public void Bracket_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2854,7 +2854,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Bracket_03()
+        public void Bracket_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2989,7 +2989,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Bracket_04()
+        public void Bracket_04()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3025,7 +3025,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Bracket_05()
+        public void Bracket_05()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3059,7 +3059,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Bracket_06()
+        public void Bracket_06()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3091,7 +3091,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Bracket_07()
+        public void Bracket_07()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3113,7 +3113,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Bracket_08()
+        public void Bracket_08()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3179,7 +3179,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Bracket_09()
+        public void Bracket_09()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3222,7 +3222,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Variable_01()
+        public void Variable_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3260,7 +3260,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Variable_02()
+        public void Variable_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3298,7 +3298,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Variable_03()
+        public void Variable_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3340,7 +3340,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Variable_04()
+        public void Variable_04()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3386,7 +3386,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Selection_NoSelection()
+        public void Selection_NoSelection()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3427,7 +3427,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Selection_01()
+        public void Selection_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3477,7 +3477,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Selection_02()
+        public void Selection_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3527,7 +3527,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Selection_03()
+        public void Selection_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3589,7 +3589,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Selection_Number()
+        public void Selection_Number()
         {
             var editor = new FormulaEditor
             {
@@ -3635,7 +3635,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Selection_Operator()
+        public void Selection_Operator()
         {
             var editor = new FormulaEditor
             {
@@ -3684,7 +3684,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Selection_Sensor()
+        public void Selection_Sensor()
         {
             var editor = new FormulaEditor
             {
@@ -3728,7 +3728,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_TerminalZero_01()
+        public void TerminalZero_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3804,7 +3804,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_EmptyChilds()
+        public void EmptyChilds()
         {
 
             var editor = new FormulaEditor
@@ -3840,7 +3840,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Undo_01()
+        public void Undo_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3885,7 +3885,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         [TestMethod]
         [Obsolete("Rewrite for FormulaEditor2")]
-        public void FormulaEditorTests_Undo_02()
+        public void Undo_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation

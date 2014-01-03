@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private readonly Random _random = new Random();
 
         [TestMethod]
-        public void FormulaEvaluationTests_Null()
+        public void Null()
         {
             Assert.AreEqual(null, _evaluator.Evaluate(null));
         }
@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region numbers
 
         [TestMethod]
-        public void FormulaEvaluationTests_Number()
+        public void Number()
         {
             foreach (var value in new[] { 0, _random.NextDouble(), -_random.NextDouble() })
             {
@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaEvaluationTests_Pi()
+        public void Pi()
         {
             Assert.AreEqual(Math.PI, _evaluator.Evaluate(FormulaTreeFactory.CreatePiNode()));
         }
@@ -39,7 +39,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region arithmetic
 
         [TestMethod]
-        public void FormulaEvaluationTests_Add()
+        public void Add()
         {
             Assert.Inconclusive();
         }

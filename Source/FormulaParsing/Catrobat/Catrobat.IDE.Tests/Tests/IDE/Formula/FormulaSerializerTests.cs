@@ -15,15 +15,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private readonly IFormulaTree _nodeOne = FormulaTreeFactory.CreateNumberNode(1);
 
         [TestMethod]
-        public void FormulaSerializerTests_Null()
+        public void TestNull()
         {
             Assert.AreEqual(string.Empty, _serializer.Serialize(null));
         }
-
+        
         #region numbers
 
         [TestMethod]
-        public void FormulaSerializerTests_Number()
+        public void TestNumber()
         {
             foreach (var value in new[] { 0, _random.NextDouble(), -_random.NextDouble() })
             {
@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Pi()
+        public void TestPi()
         {
             Assert.AreEqual(
                 expected: "pi",
@@ -46,7 +46,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region arithmetic
 
         [TestMethod]
-        public void FormulaSerializerTests_Add()
+        public void TestAdd()
         {
             Assert.AreEqual(
                 expected: "0+1",
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Subtract()
+        public void TestSubtract()
         {
             Assert.AreEqual(
                 expected: "0-1",
@@ -68,7 +68,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Multiply()
+        public void TestMultiply()
         {
             Assert.AreEqual(
                 expected: "0*1",
@@ -77,7 +77,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Divide()
+        public void TestDivide()
         {
             Assert.AreEqual(
                 expected: "0/1",
@@ -90,21 +90,21 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region relational operators
 
         [TestMethod]
-        public void FormulaSerializerTests_Equals()
+        public void TestEquals()
         {
             Assert.Inconclusive();
             Assert.Inconclusive("Loose or tight?");
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_NotEquals()
+        public void TestNotEquals()
         {
             Assert.Inconclusive();
             Assert.Inconclusive("Loose or tight?");
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Less()
+        public void TestLess()
         {
             Assert.AreEqual(
                 expected: "0<1",
@@ -113,7 +113,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_LessEqual()
+        public void TestLessEqual()
         {
             Assert.AreEqual(
                 expected: "0<=1",
@@ -122,7 +122,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Greater()
+        public void TestGreater()
         {
             Assert.AreEqual(
                 expected: "0>1",
@@ -131,7 +131,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_GreaterEqual()
+        public void TestGreaterEqual()
         {
             Assert.AreEqual(
                 expected: "0>=1",
@@ -144,31 +144,31 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region logic
 
         [TestMethod]
-        public void FormulaSerializerTests_True()
+        public void TestTrue()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_False()
+        public void TestFalse()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_And()
+        public void TestAnd()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Or()
+        public void TestOr()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Not()
+        public void TestNot()
         {
             Assert.Inconclusive();
         }
@@ -178,7 +178,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region min/max
 
         [TestMethod]
-        public void FormulaSerializerTests_Min()
+        public void TestMin()
         {
             Assert.AreEqual(
                 expected: "min{0,1}",
@@ -187,7 +187,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Max()
+        public void TestMax()
         {
             Assert.AreEqual(
                 expected: "max{0,1}",
@@ -200,7 +200,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region exponential function and logarithms
 
         [TestMethod]
-        public void FormulaSerializerTests_Exp()
+        public void TestExp()
         {
             Assert.AreEqual(
                 expected: "exp(0)",
@@ -208,7 +208,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Log()
+        public void TestLog()
         {
             Assert.AreEqual(
                 expected: "log(0)",
@@ -216,7 +216,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Ln()
+        public void TestLn()
         {
             Assert.AreEqual(
                 expected: "ln(0)",
@@ -228,7 +228,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region trigonometric functions
 
         [TestMethod]
-        public void FormulaSerializerTests_Sin()
+        public void TestSin()
         {
             Assert.AreEqual(
                 expected: "sin(0)",
@@ -236,7 +236,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Cos()
+        public void TestCos()
         {
             Assert.AreEqual(
                 expected: "cos(0)",
@@ -244,7 +244,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Tan()
+        public void TestTan()
         {
             Assert.AreEqual(
                 expected: "tan(0)",
@@ -252,7 +252,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Arcsin()
+        public void TestArcsin()
         {
             Assert.AreEqual(
                 expected: "arcsin(0)",
@@ -260,7 +260,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Arccos()
+        public void TestArccos()
         {
             Assert.AreEqual(
                 expected: "arccos(0)",
@@ -268,7 +268,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_ArcTan()
+        public void TestArcTan()
         {
             Assert.AreEqual(
                 expected: "arctan(0)",
@@ -281,7 +281,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region miscellaneous functions
 
         [TestMethod]
-        public void FormulaSerializerTests_Sqrt()
+        public void TestSqrt()
         {
             Assert.AreEqual(
                 expected: "sqrt(0)",
@@ -289,7 +289,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Abs()
+        public void TestAbs()
         {
             Assert.AreEqual(
                 expected: "|0|",
@@ -297,7 +297,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Mod()
+        public void TestMod()
         {
             Assert.AreEqual(
                 expected: "0 mod 1",
@@ -305,13 +305,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Round()
+        public void TestRound()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void FormulaSerializerTests_Random()
+        public void TestRandom()
         {
             Assert.Inconclusive();
         }
@@ -321,7 +321,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region sensors
 
         [TestMethod]
-        public void FormulaSerializerTests_Sensors()
+        public void TestSensors()
         {
             Assert.Inconclusive();
         }
@@ -331,7 +331,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region object variables
 
         [TestMethod]
-        public void FormulaSerializerTests_ObjectVariables()
+        public void TestObjectVariables()
         {
             Assert.Inconclusive();
         }
@@ -341,7 +341,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region user variables
 
         [TestMethod]
-        public void FormulaSerializerTests_UserVariable()
+        public void TestUserVariable()
         {
             Assert.Inconclusive();
         }
@@ -351,7 +351,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region brackets
 
         [TestMethod]
-        public void FormulaSerializerTests_Parentheses()
+        public void TestParentheses()
         {
             Assert.AreEqual(
                  expected: "(0)",

@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using NUnit.Framework.Constraints;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 {
@@ -24,7 +23,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private readonly IFormulaTree _nodeOne = FormulaTreeFactory.CreateNumberNode(1);
 
         [TestMethod]
-        public void FormulaParserTests_NullOrWhitespace()
+        public void TestNullOrWhitespace()
         {
             foreach (var input in new[] { null, string.Empty, " ", "  " })
             {
@@ -39,7 +38,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region numbers
 
         [TestMethod]
-        public void FormulaParserTests_Number()
+        public void TestNumber()
         {
             foreach (var value in new[] { 0, _random.Next(), -_random.Next(), _random.NextDouble() })
             {
@@ -54,7 +53,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Pi()
+        public void TestPi()
         {
             foreach (var input in new[] { "pi", "PI", "Pi" })
             {
@@ -72,7 +71,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region arithmetic
 
         [TestMethod]
-        public void FormulaParserTests_Add()
+        public void TestAdd()
         {
             var expected = FormulaTreeFactory.CreateAddNode(_nodeZero, _nodeOne);
             foreach (var input in new[] { "0+1", "0 + 1" })
@@ -87,7 +86,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Subtract()
+        public void TestSubtract()
         {
             var expected = FormulaTreeFactory.CreateSubtractNode(_nodeZero, _nodeOne);
             foreach (var input in new[] { "0-1", "0 - 1" })
@@ -102,7 +101,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Multiply()
+        public void TestMultiply()
         {
             var expected = FormulaTreeFactory.CreateMultiplyNode(_nodeZero, _nodeOne);
             foreach (var input in new[] { "0*1", "0 * 1" })
@@ -116,7 +115,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Divide()
+        public void TestDivide()
         {
             var expected = FormulaTreeFactory.CreateDivideNode(_nodeZero, _nodeOne);
             foreach (var input in new[] { "0/1", "0 / 1", "0:1" })
@@ -134,19 +133,19 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region relational operators
 
         [TestMethod]
-        public void FormulaParserTests_Equals()
+        public void TestEquals()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void FormulaParserTests_NotEquals()
+        public void TestNotEquals()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void FormulaParserTests_Less()
+        public void TestLess()
         {
             var expected = FormulaTreeFactory.CreateLessNode(_nodeZero, _nodeOne);
             foreach (var input in new[] { "0<1", "0 < 1" })
@@ -160,7 +159,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_LessEqual()
+        public void TestLessEqual()
         {
             var expected = FormulaTreeFactory.CreateLessEqualNode(_nodeZero, _nodeOne);
             foreach (var input in new[] { "0<=1", "0 <= 1" })
@@ -174,7 +173,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Greater()
+        public void TestGreater()
         {
             var expected = FormulaTreeFactory.CreateGreaterNode(_nodeZero, _nodeOne);
             foreach (var input in new[] { "0>1", "0 > 1" })
@@ -188,7 +187,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_GreaterEqual()
+        public void TestGreaterEqual()
         {
             var expected = FormulaTreeFactory.CreateGreaterEqualNode(_nodeZero, _nodeOne);
             foreach (var input in new[] { "0>=1", "0 >= 1" })
@@ -206,31 +205,31 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region logic
 
         [TestMethod]
-        public void FormulaParserTests_True()
+        public void TestTrue()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void FormulaParserTests_False()
+        public void TestFalse()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void FormulaParserTests_And()
+        public void TestAnd()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void FormulaParserTests_Or()
+        public void TestOr()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void FormulaParserTests_Not()
+        public void TestNot()
         {
             Assert.Inconclusive();
         }
@@ -240,7 +239,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region min/max
 
         [TestMethod]
-        public void FormulaParserTests_Min()
+        public void TestMin()
         {
             var expected = FormulaTreeFactory.CreateMinNode(_nodeZero, _nodeOne);
             foreach (var input in new[] { "min{0,1}", "Min{0,1}", "min{0, 1}", "min(0, 1)", "min 0, 1" })
@@ -254,7 +253,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Max()
+        public void TestMax()
         {
             var expected = FormulaTreeFactory.CreateMaxNode(_nodeZero, _nodeOne);
             foreach (var input in new[] { "max{0,1}", "Max{0,1}", "max{0, 1}", "max(0, 1)", "max 0, 1" })
@@ -272,7 +271,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region exponential function and logarithms
 
         [TestMethod]
-        public void FormulaParserTests_Exp()
+        public void TestExp()
         {
             var expected = FormulaTreeFactory.CreateExpNode(_nodeZero);
             foreach (var input in new[] { "exp(0)", "Exp(0)", "exp 0", "e^0", "exp{0}" })
@@ -286,7 +285,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Log()
+        public void TestLog()
         {
             var expected = FormulaTreeFactory.CreateLogNode(_nodeZero);
             foreach (var input in new[] { "log(0)", "Log(0)", "log 0" })
@@ -300,7 +299,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Ln()
+        public void TestLn()
         {
             var expected = FormulaTreeFactory.CreateLnNode(_nodeZero);
             foreach (var input in new[] { "ln(0)", "ln(0)", "ln 0" })
@@ -318,7 +317,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region trigonometric functions
 
         [TestMethod]
-        public void FormulaParserTests_Sin()
+        public void TestSin()
         {
             var expected = FormulaTreeFactory.CreateSinNode(_nodeZero);
             foreach (var input in new[] { "sin(0)", "Sin(0)", "sin 0", "sin{0}" })
@@ -332,7 +331,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Cos()
+        public void TestCos()
         {
             var expected = FormulaTreeFactory.CreateCosNode(_nodeZero);
             foreach (var input in new[] { "cos(0)", "Cos(0)", "cos 0", "cos{0}" })
@@ -346,7 +345,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Tan()
+        public void TestTan()
         {
             var expected = FormulaTreeFactory.CreateTanNode(_nodeZero);
             foreach (var input in new[] { "tan(0)", "Tan(0)", "tan 0", "tan{0}" })
@@ -360,7 +359,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Arcsin()
+        public void TestArcsin()
         {
             var expected = FormulaTreeFactory.CreateArcsinNode(_nodeZero);
             foreach (var input in new[] { "arcsin(0)", "Arcsin(0)", "ArcSin(0)", "arcsin 0" })
@@ -374,7 +373,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Arccos()
+        public void TestArccos()
         {
             var expected = FormulaTreeFactory.CreateArccosNode(_nodeZero);
             foreach (var input in new[] { "arccos(0)", "Arccos(0)", "ArcCos(0)", "arccos 0" })
@@ -388,7 +387,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_ArcTan()
+        public void TestArcTan()
         {
             var expected = FormulaTreeFactory.CreateArctanNode(_nodeZero);
             foreach (var input in new[] { "arctan(0)", "Arctan(0)", "ArcTan(0)", "arctan 0" })
@@ -406,7 +405,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region miscellaneous functions
 
         [TestMethod]
-        public void FormulaParserTests_Sqrt()
+        public void TestSqrt()
         {
             var expected = FormulaTreeFactory.CreateSqrtNode(_nodeZero);
             foreach (var input in new[] { "sqrt(0)", "Sqrt(0)", "sqrt 0", "sqrt{0}" })
@@ -420,7 +419,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Abs()
+        public void TestAbs()
         {
             var expected = FormulaTreeFactory.CreateAbsNode(_nodeZero);
             foreach (var input in new[] { "|0|", "abs(0)", "Abs(0)", "abs 0", "abs{0}" })
@@ -434,7 +433,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Mod()
+        public void TestMod()
         {
             var expected = FormulaTreeFactory.CreateModNode(_nodeZero, _nodeOne);
             foreach (var input in new[] { "0 mod 1", "0 Mod 1" })
@@ -448,13 +447,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void FormulaParserTests_Round()
+        public void TestRound()
         {
             Assert.Inconclusive();
         }
 
         [TestMethod]
-        public void FormulaParserTests_Random()
+        public void TestRandom()
         {
             Assert.Inconclusive();
         }
@@ -464,7 +463,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region sensors
 
         [TestMethod]
-        public void FormulaParserTests_Sensors()
+        public void TestSensors()
         {
             Assert.Inconclusive();
         }
@@ -474,7 +473,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region object variables
 
         [TestMethod]
-        public void FormulaParserTests_ObjectVariables()
+        public void TestObjectVariables()
         {
             Assert.Inconclusive();
         }
@@ -484,7 +483,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region user variables
 
         [TestMethod]
-        public void FormulaParserTests_UserVariable()
+        public void TestUserVariable()
         {
             Assert.Inconclusive();
         }
@@ -494,7 +493,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region brackets
 
         [TestMethod]
-        public void FormulaParserTests_Parentheses()
+        public void TestParentheses()
         {
             var expected = FormulaTreeFactory.CreateParenthesesNode(_nodeZero);
             foreach (var input in new[] { "(0)", "( 0 )", "{0}", "[0]", "((0))", "(((0)))" })
