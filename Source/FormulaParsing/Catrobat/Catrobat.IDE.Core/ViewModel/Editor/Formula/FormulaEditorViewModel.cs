@@ -10,17 +10,26 @@ using GalaSoft.MvvmLight.Messaging;
 namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 {
     public delegate void ErrorOccurred();
+    public delegate void Reset();
 
     public class FormulaEditorViewModel : ViewModelBase
     {
         #region Events
 
-        public ErrorOccurred ErrorOccurred;
+        public event ErrorOccurred ErrorOccurred;
 
         private void RaiseKeyError()
         {
             if (ErrorOccurred != null)
                 ErrorOccurred.Invoke();
+        }
+
+        public event Reset Reset;
+
+        private void RaiseReset()
+        {
+            if (Reset != null)
+                Reset.Invoke();
         }
 
         #endregion
@@ -76,11 +85,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         {
             _editor.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName == GetPropertyName(() => _editor.Formula))
-                {
-                    if (FormulaButton != null) FormulaButton.FormulaChanged();
-                    RaisePropertyChanged(() => Formula);
-                }
+                if (args.PropertyName == GetPropertyName(() => _editor.Formula)) RaisePropertyChanged(() => Formula);
             };
         }
 
@@ -203,9 +208,9 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             InitCaretIndexBinding();
         }
 
-
         private void ResetViewModel()
         {
+            RaiseReset();
             _editor.ResetViewModel();
             _formulaButton = null;
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -11,6 +12,7 @@ using Catrobat.IDE.Phone.Controls.FormulaControls.PartControls;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.Formulas
 {
+    [Obsolete]
     public class UiFormula : INotifyPropertyChanged, IPortableUIFormula
     {
         private bool _isSelected;

@@ -1,10 +1,12 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+﻿using System;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
+    [Obsolete("Use FormulaEditor2 instead. ")]
     public class FormulaEditor
     {
 
