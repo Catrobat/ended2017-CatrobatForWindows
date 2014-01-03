@@ -1,9 +1,11 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {
+    [Obsolete]
     public class FormulaPartControlDynamicLocalizedText : FormulaPartControl
     {
         private static LocalizedStrings _localizedStrings;

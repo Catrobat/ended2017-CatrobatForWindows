@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void XmlFormulaTreeConverterTests_DefaultNodes()
+        public void TestDefaultNodes()
         {
             var userVariables = new[] { new UserVariable { Name = "userVariable1" } };
             
@@ -53,7 +53,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod]
-        public void XmlFormulaTreeConverterTests_PocketCodeFormulas()
+        public void TestPocketCodeFormulas()
         {
             var documents = Enumerable.Range(1, 16).
                 Select(i => "Converter/091_Win091/PracticalTests/Test" + i + "Input").

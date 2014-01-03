@@ -77,12 +77,17 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 else if (Tokenize(input, ref index, ":", FormulaTokenFactory.CreateDivideToken, ref tokens)) { }
 
                 // relational operators
+                else if (Tokenize(input, ref index, "==", FormulaTokenFactory.CreateEqualsToken, ref tokens)) { }
+                else if (Tokenize(input, ref index, "=", FormulaTokenFactory.CreateEqualsToken, ref tokens)) { }
+                else if (Tokenize(input, ref index, "<>", FormulaTokenFactory.CreateNotEqualsToken, ref tokens)) { }
+                else if (Tokenize(input, ref index, "!=", FormulaTokenFactory.CreateNotEqualsToken, ref tokens)) { }
                 else if (Tokenize(input, ref index, "<=", FormulaTokenFactory.CreateLessEqualToken, ref tokens)) { }
                 else if (Tokenize(input, ref index, "<", FormulaTokenFactory.CreateLessToken, ref tokens)) { }
                 else if (Tokenize(input, ref index, ">=", FormulaTokenFactory.CreateGreaterEqualToken, ref tokens)) { }
                 else if (Tokenize(input, ref index, ">", FormulaTokenFactory.CreateGreaterToken, ref tokens)) { }
                 
                 // logic
+                // TODO
 
                 // min/max
                 else if (Tokenize(input, ref index, "min", FormulaTokenFactory.CreateMinToken, ref tokens)) { }
@@ -109,8 +114,10 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 else if (Tokenize(input, ref index, "mod", FormulaTokenFactory.CreateModToken, ref tokens)) { }
 
                 // sensors
+                // TODO
 
                 // object variables
+                // TODO
 
                 // user variables
 
@@ -140,17 +147,21 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             double value = 0;
             for (length = 1; startIndex + length <= input.Length; length++)
             {
-                if (input[startIndex + length - 1] == '+' || 
-                    input[startIndex + length - 1] == '-' || 
-                    !double.TryParse(
-                    s: input.Substring(startIndex, length),
-                    style: NumberStyles.Number,
-                    provider: CultureInfo.CurrentCulture,
-                    result: out value))
+                double parsedValue = 0;
+                if (input[startIndex + length - 1] != '+' &&
+                    input[startIndex + length - 1] != '-' &&
+                    double.TryParse(
+                        s: input.Substring(startIndex, length),
+                        style: NumberStyles.Number,
+                        provider: CultureInfo.CurrentCulture,
+                        result: out parsedValue))
+                {
+                    value = parsedValue;
+                } else
                 {
                     length--;
                     break;
-                };
+                }
             }
             if (length == 0) return false;
             tokens.Add(FormulaTokenFactory.CreateNumberToken(value));
@@ -251,7 +262,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             while (currentNode != null)
             {
                 var index = nodes.IndexOf(currentNode);
-                if (index == nodes.Count)
+                if (index == nodes.Count - 1)
                 {
                     // TODO: add parsing error like "missing value for function"
                     parsingErrors.Add("An error occured. ");
@@ -279,7 +290,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                     parsingErrors.Add("An error occured. ");
                     return false;
                 }
-                if (index == nodes.Count)
+                if (index == nodes.Count - 1)
                 {
                     // TODO: add parsing error like "missing value after operator"
                     parsingErrors.Add("An error occured. ");
@@ -304,7 +315,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                     parsingErrors.Add("An error occured. ");
                     return false;
                 }
-                if (index == nodes.Count)
+                if (index == nodes.Count - 1)
                 {
                     // TODO: add parsing error like "missing value after operator"
                     parsingErrors.Add("An error occured. ");

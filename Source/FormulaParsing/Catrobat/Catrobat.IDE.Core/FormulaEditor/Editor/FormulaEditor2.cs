@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
@@ -9,6 +10,11 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
     public class FormulaEditor2 : ViewModelBase
     {
+        private class EditorState
+        {
+            public string FormulaString { get; set; }
+            public int CaretIndex { get; set; }
+        }
 
         #region members
 
@@ -51,12 +57,10 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             get { return _parsingErrors; }
         }
 
-        private Stack<string> _undoStack = new Stack<string>();
-
-        private Stack<string> _redoStack = new Stack<string>();
+        private readonly Stack<EditorState> _undoStack = new Stack<EditorState>();
+        private readonly Stack<EditorState> _redoStack = new Stack<EditorState>();
 
         private int _caretIndex;
-
         public int CaretIndex
         {
             get { return _caretIndex;  }
@@ -70,52 +74,72 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #endregion
 
-        #region key handlers
+        public void ResetViewModel()
+        {
+            _undoStack.Clear();
+            _redoStack.Clear();
+        }
 
         public bool KeyPressed(FormulaEditorKey key)
         {
-            if (key == FormulaEditorKey.Undo) return HandleUndoCommand();
-            if (key == FormulaEditorKey.Redo) return HandleRedoCommand();
-
-            _undoStack.Push(FormulaString);
-            HandleKey(key);
-            _redoStack.Clear();
-            return true;
+            switch (key)
+            {
+                case FormulaEditorKey.Undo:
+                    if (_undoStack.Count == 0) return false;
+                    PushState(_redoStack);
+                    PopState(_undoStack);
+                    return true;
+                case FormulaEditorKey.Redo:
+                    if (_redoStack.Count == 0) return false;
+                    PushState(_undoStack);
+                    PopState(_redoStack);
+                    return true;
+                case FormulaEditorKey.Delete:
+                    if (CaretIndex == 0) return false;
+                    PushState(_redoStack);
+                    _redoStack.Clear();
+                    FormulaString = FormulaString.Remove(CaretIndex - 1, 1);
+                    CaretIndex--;
+                    return true;
+                default:
+                    PushState(_undoStack);
+                    _redoStack.Clear();
+                    InsertText(GetText(key));
+                    return true;
+            }
         }
 
         public bool SensorVariableSelected(SensorVariable variable)
         {
-            _undoStack.Push(FormulaString);
-            InsertText(variable.ToString());
+            PushState(_undoStack);
             _redoStack.Clear();
+            InsertText(variable.ToString());
             return true;
         }
 
         public bool ObjectVariableSelected(ObjectVariable variable)
         {
-            _undoStack.Push(FormulaString);
-            InsertText(variable.ToString());
+            PushState(_undoStack);
             _redoStack.Clear();
+            InsertText(variable.ToString());
             return true;
         }
 
         public bool GlobalVariableSelected(UserVariable variable)
         {
-            _undoStack.Push(FormulaString);
-            InsertText(variable.ToString());
+            PushState(_undoStack);
             _redoStack.Clear();
+            InsertText(variable.ToString());
             return true;
         }
 
         public bool LocalVariableSelected(UserVariable variable)
         {
-            _undoStack.Push(FormulaString);
-            InsertText(variable.ToString());
+            PushState(_undoStack);
             _redoStack.Clear();
+            InsertText(variable.ToString());
             return true;
         }
-
-        #endregion
 
         void InsertText(string value)
         {
@@ -123,160 +147,76 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             CaretIndex += value.Length;
         }
 
-        public void ResetViewModel()
+        private void PushState(Stack<EditorState> stack)
         {
-            _undoStack.Clear();
-            _redoStack.Clear();
+            stack.Push(new EditorState
+            {
+                CaretIndex = CaretIndex,
+                FormulaString = FormulaString
+            });
         }
 
-        #region specific key handlers
+        private void PopState(Stack<EditorState> stack)
+        {
+            var state = stack.Pop();
+            CaretIndex = state.CaretIndex;
+            FormulaString = state.FormulaString;
+        }
 
-        private void HandleKey(FormulaEditorKey key)
+        private static string GetText(FormulaEditorKey key)
         {
             switch (key)
             {
-                case FormulaEditorKey.Number0:
-                    InsertText("0");
-                    break;
-                case FormulaEditorKey.Number1:
-                    InsertText("1");
-                    break;
-                case FormulaEditorKey.Number2:
-                    InsertText("2");
-                    break;
-                case FormulaEditorKey.Number3:
-                    InsertText("3");
-                    break;
-                case FormulaEditorKey.Number4:
-                    InsertText("4");
-                    break;
-                case FormulaEditorKey.Number5:
-                    InsertText("5");
-                    break;
-                case FormulaEditorKey.Number6:
-                    InsertText("6");
-                    break;
-                case FormulaEditorKey.Number7:
-                    InsertText("7");
-                    break;
-                case FormulaEditorKey.Number8:
-                    InsertText("8");
-                    break;
-                case FormulaEditorKey.Number9:
-                    InsertText("9");
-                    break;
-                case FormulaEditorKey.NumberDot:
-                    InsertText(".");
-                    break;
-                case FormulaEditorKey.NumberEquals:
-                    InsertText("=");
-                    break;
-                case FormulaEditorKey.Delete:
-                    break;
-                case FormulaEditorKey.OpenBracket:
-                    InsertText("(");
-                    break;
-                case FormulaEditorKey.CloseBracket:
-                    InsertText(")");
-                    break;
-                case FormulaEditorKey.Plus:
-                    InsertText("+");
-                    break;
-                case FormulaEditorKey.Minus:
-                    InsertText("-");
-                    break;
-                case FormulaEditorKey.Multiply:
-                    InsertText("*");
-                    break;
-                case FormulaEditorKey.Divide:
-                    InsertText("/");
-                    break;
-                case FormulaEditorKey.LogicEqual:
-                    InsertText("=");
-                    break;
-                case FormulaEditorKey.LogicNotEqual:
-                    // TODO
-                    break;
-                case FormulaEditorKey.LogicSmaller:
-                    InsertText("<");
-                    break;
-                case FormulaEditorKey.LogicSmallerEqual:
-                    InsertText("<=");
-                    break;
-                case FormulaEditorKey.LogicGreater:
-                    InsertText(">");
-                    break;
-                case FormulaEditorKey.LogicGreaterEqual:
-                    InsertText(">=");
-                    break;
-                case FormulaEditorKey.LogicAnd:
-                    break;
-                case FormulaEditorKey.LogicOr:
-                    break;
-                case FormulaEditorKey.LogicNot:
-                    break;
-                case FormulaEditorKey.LogicTrue:
-                    break;
-                case FormulaEditorKey.LogicFalse:
-                    break;
-                case FormulaEditorKey.MathSin:
-                    break;
-                case FormulaEditorKey.MathCos:
-                    break;
-                case FormulaEditorKey.MathTan:
-                    break;
-                case FormulaEditorKey.MathArcSin:
-                    break;
-                case FormulaEditorKey.MathArcCos:
-                    break;
-                case FormulaEditorKey.MathArcTan:
-                    break;
-                case FormulaEditorKey.MathExp:
-                    break;
-                case FormulaEditorKey.MathLn:
-                    break;
-                case FormulaEditorKey.MathLog:
-                    break;
-                case FormulaEditorKey.MathAbs:
-                    break;
-                case FormulaEditorKey.MathRound:
-                    break;
-                case FormulaEditorKey.MathMod:
-                    break;
-                case FormulaEditorKey.MathMin:
-                    break;
-                case FormulaEditorKey.MathMax:
-                    break;
-                case FormulaEditorKey.MathSqrt:
-                    break;
-                case FormulaEditorKey.MathPi:
-                    break;
-                case FormulaEditorKey.MathRandom:
-                    break;
+                case FormulaEditorKey.Number0: return 0.ToString();
+                case FormulaEditorKey.Number1: return 1.ToString();
+                case FormulaEditorKey.Number2: return 2.ToString();
+                case FormulaEditorKey.Number3: return 3.ToString();
+                case FormulaEditorKey.Number4: return 4.ToString();
+                case FormulaEditorKey.Number5: return 5.ToString();
+                case FormulaEditorKey.Number6: return 6.ToString();
+                case FormulaEditorKey.Number7: return 7.ToString();
+                case FormulaEditorKey.Number8: return 8.ToString();
+                case FormulaEditorKey.Number9: return 9.ToString();
+                case FormulaEditorKey.NumberDot: return CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
+                case FormulaEditorKey.NumberEquals: return "=";
+                case FormulaEditorKey.OpenBracket: return "(";
+                case FormulaEditorKey.CloseBracket: return ")";
+                case FormulaEditorKey.Plus: return "+";
+                case FormulaEditorKey.Minus: return "-";
+                case FormulaEditorKey.Multiply: return "*";
+                case FormulaEditorKey.Divide: return "/";
+                case FormulaEditorKey.LogicEqual: return "=";
+                case FormulaEditorKey.LogicNotEqual: return "<>";
+                case FormulaEditorKey.LogicSmaller: return "<";
+                case FormulaEditorKey.LogicSmallerEqual: return "<=";
+                case FormulaEditorKey.LogicGreater: return ">";
+                case FormulaEditorKey.LogicGreaterEqual: return ">=";
+                case FormulaEditorKey.LogicAnd: return " and ";
+                case FormulaEditorKey.LogicOr: return " or ";
+                case FormulaEditorKey.LogicNot: return "not ";
+                case FormulaEditorKey.LogicTrue: return "True";
+                case FormulaEditorKey.LogicFalse: return "False";
+                case FormulaEditorKey.MathSin: return "sin(";
+                case FormulaEditorKey.MathCos: return "cos(";
+                case FormulaEditorKey.MathTan: return "tan(";
+                case FormulaEditorKey.MathArcSin: return "arcsin(";
+                case FormulaEditorKey.MathArcCos: return "arccos(";
+                case FormulaEditorKey.MathArcTan: return "arctan(";
+                case FormulaEditorKey.MathExp: return "exp(";
+                case FormulaEditorKey.MathLn: return "ln(";
+                case FormulaEditorKey.MathLog: return "log(";
+                case FormulaEditorKey.MathAbs: return "|";
+                case FormulaEditorKey.MathRound: return "round(";
+                case FormulaEditorKey.MathMod: return "mod(";
+                case FormulaEditorKey.MathMin: return "min(";
+                case FormulaEditorKey.MathMax: return "max(";
+                case FormulaEditorKey.MathSqrt: return "sqrt(";
+                case FormulaEditorKey.MathPi: return "pi";
+                case FormulaEditorKey.MathRandom: return "rand(";
                 default:
                     throw new ArgumentOutOfRangeException("key");
             }
         }
-
-        private bool HandleUndoCommand()
-        {
-            if (_undoStack.Count == 0) return false;
-            _redoStack.Push(FormulaString);
-            FormulaString = _undoStack.Pop();
-            CaretIndex = 0;
-            return true;
-        }
-
-        private bool HandleRedoCommand()
-        {
-            if (_redoStack.Count == 0) return false;
-            _undoStack.Push(FormulaString);
-            FormulaString = _redoStack.Pop();
-            CaretIndex = 0;
-            return true;
-        }
-
-        #endregion
 
     }
 }

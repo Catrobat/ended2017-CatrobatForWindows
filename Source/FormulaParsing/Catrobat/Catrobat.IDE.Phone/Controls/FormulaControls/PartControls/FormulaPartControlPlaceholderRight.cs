@@ -1,7 +1,9 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {
+    [Obsolete]
     public class FormulaPartControlPlaceholderRight : FormulaPartControl
     {
         protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected, bool isError)

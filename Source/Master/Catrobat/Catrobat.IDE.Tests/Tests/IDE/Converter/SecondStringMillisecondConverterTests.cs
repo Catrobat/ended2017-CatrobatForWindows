@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
         public void TestSecondStringToMillisecondConversion()
         {
             var conv = new SecondStringMillisecondConverter();
-            object output = conv.ConvertBack((object)"4.2", null, null, null);
+            var output = conv.ConvertBack((object)"4.2", null, null, null);
             Assert.IsNotNull(output);
             Assert.IsTrue(output is int);
             Assert.AreEqual(4200, (int)output);
@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
         public void TestMillisecondToSecondStringConversion()
         {
             var conv = new SecondStringMillisecondConverter();
-            object output = conv.Convert((object)4200, null, null, null);
+            var output = conv.Convert((object)4200, null, null, null);
             Assert.IsNotNull(output);
             Assert.IsTrue(output is string);
             Assert.AreEqual("4.2", (string)output);
@@ -30,7 +30,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Converter
         public void TestFaultySecondStringToMillisecondConversion()
         {
             var conv = new SecondStringMillisecondConverter();
-            object output = conv.ConvertBack((object)"4d2", null, 4200, null);
+            var output = conv.ConvertBack((object)"4d2", null, 4200, null);
             Assert.IsNotNull(output);
             Assert.IsTrue(output is int);
             Assert.AreEqual(4200, (int)output);

@@ -13,7 +13,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region typing
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_NumberTypingTest_01()
+        public void NumberTypingTest_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -45,7 +45,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_TypingTest_02()
+        public void TypingTest_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -111,7 +111,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region decimal separator
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_DecimalSeparatorTest_01()
+        public void DecimalSeparatorTest_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -138,7 +138,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_DecimalSeparatorTest_02()
+        public void DecimalSeparatorTest_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -177,7 +177,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region tree
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Tree_01()
+        public void Tree_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -259,7 +259,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Tree_02()
+        public void Tree_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -319,7 +319,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Tree_03()
+        public void Tree_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -466,7 +466,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Tree_04()
+        public void Tree_04()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -515,7 +515,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region equals
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_EqualsTest_01()
+        public void EqualsTest_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -605,7 +605,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region relational operator
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_RelationalOperator_01()
+        public void RelationalOperator_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -711,7 +711,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_RelationalOperator_02()
+        public void RelationalOperator_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -781,7 +781,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_RelationalOperator_03()
+        public void RelationalOperator_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -838,7 +838,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region logical operator
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_LogicalOperator_01()
+        public void LogicalOperator_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -920,7 +920,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_LogicalOprator_02()
+        public void LogicalOprator_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -986,7 +986,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_LogicalOperator_03()
+        public void LogicalOperator_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1072,7 +1072,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region signed number
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_SignedNumber_01()
+        public void SignedNumber_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1137,7 +1137,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_SignedNumber_02()
+        public void SignedNumber_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1244,7 +1244,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_SignedNumber_03()
+        public void SignedNumber_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1315,7 +1315,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_SignedNumber_05()
+        public void SignedNumber_05()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1367,7 +1367,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_SignedNumber_06()
+        public void SignedNumber_06()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1420,7 +1420,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_SignedNumber_07()
+        public void SignedNumber_07()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1463,7 +1463,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region logical value
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_LogicValue_01()
+        public void LogicValue_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1556,7 +1556,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_LogicValue_02()
+        public void LogicValue_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1586,7 +1586,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -1595,7 +1595,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_LogicValue_03()
+        public void LogicValue_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1647,7 +1647,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region deletion
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Deletion_01()
+        public void Deletion_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1672,7 +1672,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Deletion_02()
+        public void Deletion_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1699,7 +1699,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Deletion_03()
+        public void Deletion_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1854,7 +1854,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Deletion_04()
+        public void Deletion_04()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1883,7 +1883,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Deletion_05()
+        public void Deletion_05()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1910,7 +1910,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Deletion_06()
+        public void Deletion_06()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -1955,7 +1955,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region logic not
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_LogicNot_01()
+        public void LogicNot_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2000,7 +2000,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_LogicNot_02()
+        public void LogicNot_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2021,7 +2021,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_LogicNot_04()
+        public void LogicNot_04()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2060,7 +2060,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_LogicNot_05()
+        public void LogicNot_05()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2068,7 +2068,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
 
                 VariableType = "NUMBER",
@@ -2085,7 +2085,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region function
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Function_DefaultValues()
+        public void Function_DefaultValues()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2093,18 +2093,18 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
             };
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathAbs));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "ABS",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2113,11 +2113,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathArcCos));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "ARCCOS",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2126,11 +2126,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathArcSin));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "ARCSIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2139,11 +2139,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathArcTan));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "ARCTAN",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2152,11 +2152,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathCos));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "COS",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2165,11 +2165,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathExp));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "EXP",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2178,11 +2178,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathLn));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "LN",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2191,11 +2191,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathLog));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "LOG",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2204,16 +2204,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathMax));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MAX",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2222,16 +2222,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathMin));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2240,16 +2240,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathMod));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MOD",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2258,7 +2258,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathPi));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "PI",
@@ -2266,16 +2266,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathRandom));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "RANDOM",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2284,11 +2284,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathRound));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "ROUND",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2297,11 +2297,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathSin));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "SIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2310,11 +2310,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathSqrt));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "SQRT",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2323,11 +2323,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathTan));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "TAN",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -2338,7 +2338,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Function_02()
+        public void Function_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2346,7 +2346,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2357,30 +2357,30 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathCos));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MULT",
-                    LeftChild = new FormulaTree()
+                    LeftChild = new FormulaTree
                     {
                         VariableType = "FUNCTION",
                         VariableValue = "COS",
-                        LeftChild = new FormulaTree()
+                        LeftChild = new FormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0"
                         }
                     },
-                    RightChild = new FormulaTree()
+                    RightChild = new FormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "3"
@@ -2391,11 +2391,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2406,7 +2406,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Function_03()
+        public void Function_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2414,7 +2414,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2427,38 +2427,38 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.MathCos));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "BRACKET",
                     VariableValue = "",
-                    RightChild = new FormulaTree()
+                    RightChild = new FormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "PLUS",
-                        LeftChild = new FormulaTree()
+                        LeftChild = new FormulaTree
                         {
                             VariableType = "FUNCTION",
                             VariableValue = "SIN",
-                            LeftChild = new FormulaTree()
+                            LeftChild = new FormulaTree
                             {
                                 VariableType = "NUMBER",
                                 VariableValue = "0"
                             }
                         },
-                        RightChild = new FormulaTree()
+                        RightChild = new FormulaTree
                         {
                             VariableType = "FUNCTION",
                             VariableValue = "COS",
-                            LeftChild = new FormulaTree()
+                            LeftChild = new FormulaTree
                             {
                                 VariableType = "NUMBER",
                                 VariableValue = "0"
@@ -2472,7 +2472,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
  
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Function_04()
+        public void Function_04()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2480,25 +2480,25 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MAX",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "FUNCTION",
                     VariableValue = "SIN",
-                    LeftChild = new FormulaTree()
+                    LeftChild = new FormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "0"
                     }
                 },
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "FUNCTION",
                     VariableValue = "COS",
-                    LeftChild = new FormulaTree()
+                    LeftChild = new FormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "0"
@@ -2507,7 +2507,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             };
             editor.SelectedFormula = selectedFromula;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2521,7 +2521,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region bracket
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Bracket_01()
+        public void Bracket_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2655,7 +2655,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Bracket_02()
+        public void Bracket_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2707,7 +2707,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Bracket_03()
+        public void Bracket_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2841,7 +2841,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Bracket_04()
+        public void Bracket_04()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2849,7 +2849,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2861,11 +2861,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "BRACKET",
                 VariableValue = "OPEN",
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "123"
@@ -2876,7 +2876,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Bracket_05()
+        public void Bracket_05()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2884,7 +2884,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2894,11 +2894,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "PLUS",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -2909,7 +2909,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Bracket_06()
+        public void Bracket_06()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2917,7 +2917,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2926,11 +2926,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.OpenBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.NumberDot));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "BRACKET",
                 VariableValue = "",
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0."
@@ -2940,7 +2940,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Bracket_07()
+        public void Bracket_07()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2948,7 +2948,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
 
                 VariableType = "NUMBER",
@@ -2961,7 +2961,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Bracket_08()
+        public void Bracket_08()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -2969,7 +2969,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -2986,33 +2986,33 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             //Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.KeyDelete));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "BRACKET",
                 VariableValue = "OPEN",
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MULT",
-                    LeftChild = new FormulaTree()
+                    LeftChild = new FormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "1"
                     },
-                    RightChild = new FormulaTree()
+                    RightChild = new FormulaTree
                     {
                         VariableType = "BRACKET",
                         VariableValue = "",
-                        RightChild = new FormulaTree()
+                        RightChild = new FormulaTree
                         {
                             VariableType = "OPERATOR",
                             VariableValue = "PLUS",
-                            LeftChild = new FormulaTree()
+                            LeftChild = new FormulaTree
                             {
                                 VariableType = "NUMBER",
                                 VariableValue = "2"
                             },
-                            RightChild = new FormulaTree()
+                            RightChild = new FormulaTree
                             {
                                 VariableType = "NUMBER",
                                 VariableValue = "3"
@@ -3026,7 +3026,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Bracket_09()
+        public void Bracket_09()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3034,7 +3034,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -3044,15 +3044,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Minus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "BRACKET",
                 VariableValue = "",
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "MINUS",
-                    RightChild = new FormulaTree()
+                    RightChild = new FormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "1"
@@ -3068,7 +3068,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region variable
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Variable_01()
+        public void Variable_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3076,7 +3076,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -3085,16 +3085,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.SensorVariableSelected(SensorVariable.AccelerationX));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "SENSOR",
                     VariableValue = "ACCELERATION_X"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -3105,7 +3105,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Variable_02()
+        public void Variable_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3113,7 +3113,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -3122,16 +3122,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.ObjectVariableSelected(ObjectVariable.PositionX));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "SENSOR",
                     VariableValue = "OBJECT_X"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -3142,7 +3142,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Variable_03()
+        public void Variable_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3150,29 +3150,29 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
             };
             editor.SelectedFormula = selectedFromula;
-            var variable = new UserVariable()
+            var variable = new UserVariable
             {
                 Name = "MyVar"
             };
             Assert.IsTrue(editor.GlobalVariableSelected(variable));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "USER_VARIABLE",
                     VariableValue = "MyVar"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -3183,7 +3183,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Variable_04()
+        public void Variable_04()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3191,29 +3191,29 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
             };
             editor.SelectedFormula = selectedFromula;
-            var variable = new UserVariable()
+            var variable = new UserVariable
             {
                 Name = "MyVar"
             };
             Assert.IsTrue(editor.LocalVariableSelected(variable));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Multiply));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MULT",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "USER_VARIABLE",
                     VariableValue = "MyVar"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -3228,7 +3228,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region selection
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Selection_NoSelection()
+        public void Selection_NoSelection()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3268,7 +3268,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Selection_01()
+        public void Selection_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3317,7 +3317,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Selection_02()
+        public void Selection_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3325,16 +3325,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "1"
@@ -3346,16 +3346,16 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             selectedFromula.SelectedFormula = selectedFromula.FormulaRoot.FormulaTree.RightChild;
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "MIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
                 },
-                RightChild = new FormulaTree()
+                RightChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -3366,7 +3366,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Selection_03()
+        public void Selection_03()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3374,11 +3374,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "SIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "NUMBER",
                     VariableValue = "0"
@@ -3392,30 +3392,30 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "FUNCTION",
                 VariableValue = "SIN",
-                LeftChild = new FormulaTree()
+                LeftChild = new FormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "PLUS",
-                    LeftChild = new FormulaTree()
+                    LeftChild = new FormulaTree
                     {
                         VariableType = "OPERATOR",
                         VariableValue = "PLUS",
-                        LeftChild = new FormulaTree()
+                        LeftChild = new FormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "1"
                         },
-                        RightChild = new FormulaTree()
+                        RightChild = new FormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "2"
                         }
                     },
-                    RightChild = new FormulaTree()
+                    RightChild = new FormulaTree
                     {
                         VariableType = "NUMBER",
                         VariableValue = "3"
@@ -3427,15 +3427,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Selection_Number()
+        public void Selection_Number()
         {
             var editor = new FormulaEditor
             {
                 SelectedFormula = new SelectedFormulaInformation
                 {
-                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
+                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula
                     {
-                        FormulaTree = new FormulaTree()
+                        FormulaTree = new FormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0",
@@ -3446,7 +3446,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
 
-            var selections = new FormulaTree[]
+            var selections = new[]
             {
                 editor.SelectedFormula.FormulaRoot.FormulaTree.LeftChild, 
                 editor.SelectedFormula.FormulaRoot.FormulaTree.RightChild, 
@@ -3472,15 +3472,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Selection_Operator()
+        public void Selection_Operator()
         {
             var editor = new FormulaEditor
             {
                 SelectedFormula = new SelectedFormulaInformation
                 {
-                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
+                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula
                     {
-                        FormulaTree = new FormulaTree()
+                        FormulaTree = new FormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0",
@@ -3491,7 +3491,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
 
-            var selections = new FormulaTree[]
+            var selections = new[]
             {
                 editor.SelectedFormula.FormulaRoot.FormulaTree.LeftChild, 
                 editor.SelectedFormula.FormulaRoot.FormulaTree.RightChild, 
@@ -3520,15 +3520,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Selection_Sensor()
+        public void Selection_Sensor()
         {
             var editor = new FormulaEditor
             {
                 SelectedFormula = new SelectedFormulaInformation
                 {
-                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
+                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula
                     {
-                        FormulaTree = new FormulaTree()
+                        FormulaTree = new FormulaTree
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0",
@@ -3539,7 +3539,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 }
             };
 
-            var selections = new FormulaTree[]
+            var selections = new[]
             {
                 editor.SelectedFormula.FormulaRoot.FormulaTree.LeftChild, 
                 editor.SelectedFormula.FormulaRoot.FormulaTree.RightChild, 
@@ -3563,21 +3563,21 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region terminal zero
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_TerminalZero_01()
+        public void TerminalZero_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
             {
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
-            var terminalZero = new FormulaTree()
+            var terminalZero = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
             };
             selectedFromula.FormulaRoot.FormulaTree = terminalZero;
             editor.SelectedFormula = selectedFromula;
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "1"
@@ -3586,7 +3586,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "BRACKET",
                 VariableValue = "OPEN"
@@ -3595,7 +3595,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "MINUS"
@@ -3604,7 +3604,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "NOT"
@@ -3613,7 +3613,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "TRUE"
@@ -3622,7 +3622,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Delete));
             FormulaComparer.CompareFormulas(terminalZero, selectedFromula.FormulaRoot.FormulaTree);
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "OPERATOR",
                 VariableValue = "FALSE"
@@ -3638,14 +3638,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region node with empty childs
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_EmptyChilds()
+        public void EmptyChilds()
         {
 
             var editor = new FormulaEditor
             {
                 SelectedFormula = new SelectedFormulaInformation
                 {
-                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
+                    FormulaRoot = new Core.CatrobatObjects.Formulas.Formula
                     {
                         FormulaTree = FormulaTreeFactory.CreateNumber("0.0")
                     }
@@ -3673,7 +3673,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         #region undo
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Undo_01()
+        public void Undo_01()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3681,7 +3681,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -3692,7 +3692,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number3));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Undo));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Undo));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "1"
@@ -3704,7 +3704,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Redo));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Redo));
             Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Redo));
-            expectedFormula = new FormulaTree()
+            expectedFormula = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "123"
@@ -3717,7 +3717,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
 
         [TestMethod, TestCategory("GatedTests")]
-        public void FormulaEditorTests_Undo_02()
+        public void Undo_02()
         {
             var editor = new FormulaEditor();
             var selectedFromula = new SelectedFormulaInformation
@@ -3725,7 +3725,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 FormulaRoot = new Core.CatrobatObjects.Formulas.Formula()
             };
 
-            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree()
+            selectedFromula.FormulaRoot.FormulaTree = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "0"
@@ -3735,7 +3735,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsFalse(editor.KeyPressed(FormulaEditorKey.Plus));
             Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Undo));
-            var expectedFormula = new FormulaTree()
+            var expectedFormula = new FormulaTree
             {
                 VariableType = "NUMBER",
                 VariableValue = "1"

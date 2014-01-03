@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Phone.Controls.FormulaControls.PartControls;
@@ -6,6 +7,7 @@ using System.Windows;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.Formulas
 {
+    [Obsolete]
     public static class UiFormulaMappings
     {
         private const string UniversialValueDummy = "#universal#";

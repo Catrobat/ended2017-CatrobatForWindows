@@ -1,10 +1,12 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Catrobat.IDE.Phone.Controls.FormulaControls.Formulas;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {
+    [Obsolete]
     public abstract class FormulaPartControl
     {
         public FormulaPartStyleCollection Style { get; set; }

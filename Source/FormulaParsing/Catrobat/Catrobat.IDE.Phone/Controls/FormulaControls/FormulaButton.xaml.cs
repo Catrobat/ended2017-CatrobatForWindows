@@ -1,4 +1,6 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+﻿using System;
+using System.ComponentModel;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.Formula;
 using Catrobat.IDE.Core.ViewModel;
@@ -33,8 +35,8 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public void FormulaChanged()
         {
-            var viewModel = ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
-            Formula.FormulaTree2 = viewModel.Formula;
+            //var viewModel = ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
+            //Formula.FormulaTree2 = viewModel.Formula;
         }
 
         private void ButtonFormula_OnClick(object sender, RoutedEventArgs e)
@@ -43,7 +45,35 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             viewModel.Formula = Formula.FormulaTree2;
             viewModel.CaretIndex = viewModel.FormulaString.Length;
             viewModel.FormulaButton = this;
+            SetFormulaBinding();
             ServiceLocator.NavigationService.NavigateTo(typeof(FormulaEditorViewModel));
+        }
+
+        private void SetFormulaBinding()
+        {
+            var viewModel = ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
+            viewModel.PropertyChanged += ViewModelOnPropertyChanged;
+            viewModel.Reset += ViewModelOnReset;
+        }
+
+        private void UnsetFormulaBinding()
+        {
+            var viewModel = ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
+            viewModel.PropertyChanged -= ViewModelOnPropertyChanged;
+            viewModel.Reset -= ViewModelOnReset;
+        }
+
+        private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs arg)
+        {
+            if (arg.PropertyName == "Formula")
+            {
+                Formula.FormulaTree2 = ((FormulaEditorViewModel)sender).Formula;
+            }
+        }
+
+        private void ViewModelOnReset()
+        {
+            UnsetFormulaBinding();
         }
     }
 }

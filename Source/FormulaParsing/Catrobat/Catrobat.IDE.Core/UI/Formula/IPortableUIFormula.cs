@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Catrobat.IDE.Core.UI.Formula
 {
+    [Obsolete]
     public interface IPortableUIFormula
     {
         bool IsSelected { get; set; }

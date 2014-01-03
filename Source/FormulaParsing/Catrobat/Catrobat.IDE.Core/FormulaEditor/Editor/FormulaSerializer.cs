@@ -34,12 +34,19 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             else if (type == typeof(FormulaNodeDivide)) Serialize(sb, (FormulaNodeDivide)formula);
 
             // relational operators
+            else if (type == typeof(FormulaNodeEquals)) Serialize(sb, (FormulaNodeEquals)formula);
+            else if (type == typeof(FormulaNodeNotEquals)) Serialize(sb, (FormulaNodeNotEquals)formula);
             else if (type == typeof(FormulaNodeLess)) Serialize(sb, (FormulaNodeLess)formula);
             else if (type == typeof(FormulaNodeLessEqual)) Serialize(sb, (FormulaNodeLessEqual)formula);
             else if (type == typeof(FormulaNodeGreater)) Serialize(sb, (FormulaNodeGreater)formula);
             else if (type == typeof(FormulaNodeGreaterEqual)) Serialize(sb, (FormulaNodeGreaterEqual)formula);
 
             // logic
+            else if (type == typeof(FormulaNodeTrue)) Serialize(sb, (FormulaNodeTrue)formula);
+            else if (type == typeof(FormulaNodeFalse)) Serialize(sb, (FormulaNodeFalse)formula);
+            else if (type == typeof(FormulaNodeAnd)) Serialize(sb, (FormulaNodeAnd)formula);
+            else if (type == typeof(FormulaNodeOr)) Serialize(sb, (FormulaNodeOr)formula);
+            else if (type == typeof(FormulaNodeNot)) Serialize(sb, (FormulaNodeNot)formula);
 
             // min/max
             else if (type == typeof(FormulaNodeMin)) Serialize(sb, (FormulaNodeMin)formula);
@@ -122,6 +129,18 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region relational operators
 
+        private void Serialize(StringBuilder sb, FormulaNodeEquals formula)
+        {
+            // TODO: discuss = ==
+            Serialize(sb, formula, "=");
+        }
+
+        private void Serialize(StringBuilder sb, FormulaNodeNotEquals formula)
+        {
+            // TODO: discuss <> != not equals
+            Serialize(sb, formula, "<>");
+        }
+
         private void Serialize(StringBuilder sb, FormulaNodeLess formula)
         {
             Serialize(sb, formula, "<");
@@ -148,12 +167,33 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         private void Serialize(StringBuilder sb, FormulaNodeTrue formula)
         {
-            throw new NotImplementedException();
+            // TODO: translate
+            sb.Append("True");
         }
 
         private void Serialize(StringBuilder sb, FormulaNodeFalse formula)
         {
-            throw new NotImplementedException();
+            // TODO: translate
+            sb.Append("False");
+        }
+
+        private void Serialize(StringBuilder sb, FormulaNodeAnd formula)
+        {
+            // TODO: translate
+            Serialize(sb, formula, " And ");
+        }
+
+        private void Serialize(StringBuilder sb, FormulaNodeOr formula)
+        {
+            // TODO: translate
+            Serialize(sb, formula, " Or ");
+        }
+
+        private void Serialize(StringBuilder sb, FormulaNodeNot formula)
+        {
+            // TODO: discuss ! not
+            sb.Append("Not ");
+            Serialize(sb, formula.Child);
         }
 
         #endregion

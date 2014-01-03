@@ -1,9 +1,8 @@
-﻿using System;
-using System.Globalization;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.FormulaEditor.Editor;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.IDE.Core.Utilities.Helpers;
+using System;
+using System.Globalization;
 
 namespace Catrobat.IDE.Core.UI.Converters
 {

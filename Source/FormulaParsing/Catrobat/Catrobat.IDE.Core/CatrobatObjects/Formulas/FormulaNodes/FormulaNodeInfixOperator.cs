@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
+namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
     abstract class FormulaNodeInfixOperator : BinaryFormulaTree
     {

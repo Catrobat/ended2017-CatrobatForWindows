@@ -3,8 +3,5 @@
     public interface IPortableFormulaButton
     {
         CatrobatObjects.Formulas.Formula Formula { get; set; }
-
-        void FormulaChanged();
-
     }
 }
