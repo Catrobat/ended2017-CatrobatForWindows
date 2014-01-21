@@ -166,6 +166,10 @@ namespace Catrobat.Paint.ViewModel
         {
             if (CursorMode == CursorMode.Ink)
             {
+                if (_undoneStrokes.Count > 0)
+                {
+                    _undoneStrokes.Clear();
+                }
                 _stroke = new Stroke();
                 _stroke.StylusPoints.Add(ConvertToStylusPoint(point));
                 _stroke.DrawingAttributes.Color = GlobalValues.Instance.SelectedColorAsColor;
