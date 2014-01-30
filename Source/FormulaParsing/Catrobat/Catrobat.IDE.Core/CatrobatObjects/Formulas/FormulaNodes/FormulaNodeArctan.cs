@@ -1,6 +1,6 @@
 ﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
-    class FormulaNodeArctan : FormulaNodeUnaryFunction
+    public class FormulaNodeArctan : FormulaNodeUnaryFunction
     {
     }
 }

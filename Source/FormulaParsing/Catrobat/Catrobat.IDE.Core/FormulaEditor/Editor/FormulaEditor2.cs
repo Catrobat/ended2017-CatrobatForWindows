@@ -8,6 +8,7 @@ using Catrobat.IDE.Core.ViewModel;
 
 namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
+    [Obsolete("Use FormulaEditor3 instead. ")]
     public class FormulaEditor2 : ViewModelBase
     {
         private class EditorState

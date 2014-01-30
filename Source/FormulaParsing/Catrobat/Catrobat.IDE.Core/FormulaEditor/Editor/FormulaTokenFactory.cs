@@ -1,5 +1,5 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTokens;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDE.Core.FormulaEditor.Editor
@@ -8,9 +8,24 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
     {
         #region numbers
 
+        public static FormulaNodeNumber CreateDigitToken(int value)
+        {
+            return FormulaTreeFactory.CreateNumberNode(value);
+        }
+
         public static FormulaNodeNumber CreateNumberToken(double value)
         {
             return FormulaTreeFactory.CreateNumberNode(value);
+        }
+
+        public static FormulaTokenDecimalSpearator CreateDecimalSeparatorToken()
+        {
+            return new FormulaTokenDecimalSpearator();
+        }
+
+        public static FormulaTokenParameterSpearator CreateArgumentSeparatorToken()
+        {
+            return new FormulaTokenParameterSpearator();
         }
 
         public static FormulaNodePi CreatePiToken()
@@ -247,58 +262,58 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region object variables
 
-        public static FormulaNodeBrightness CreateBrightnessToken(ObjectVariableEntry variable)
+        public static FormulaNodeBrightness CreateBrightnessToken()
         {
-            return FormulaTreeFactory.CreateBrightnessNode(variable);
+            return FormulaTreeFactory.CreateBrightnessNode(null);
         }
 
-        public static FormulaNodeDirection CreateDirectionToken(ObjectVariableEntry variable)
+        public static FormulaNodeDirection CreateDirectionToken()
         {
-            return FormulaTreeFactory.CreateDirectionNode(variable);
+            return FormulaTreeFactory.CreateDirectionNode(null);
         }
 
-        public static FormulaNodeGhostEffect CreateGhostEffectToken(ObjectVariableEntry variable)
+        public static FormulaNodeGhostEffect CreateGhostEffectToken()
         {
-            return FormulaTreeFactory.CreateGhostEffectNode(variable);
+            return FormulaTreeFactory.CreateGhostEffectNode(null);
         }
 
-        public static FormulaNodeLayer CreateLayerToken(ObjectVariableEntry variable)
+        public static FormulaNodeLayer CreateLayerToken()
         {
-            return FormulaTreeFactory.CreateLayerNode(variable);
+            return FormulaTreeFactory.CreateLayerNode(null);
         }
 
-        public static FormulaNodePositionX CreatePositionXToken(ObjectVariableEntry variable)
+        public static FormulaNodeOpacity CreateOpacityToken()
         {
-            return FormulaTreeFactory.CreatePositionXNode(variable);
+            return FormulaTreeFactory.CreateOpacityNode(null);
         }
 
-        public static FormulaNodePositionY CreatePositionYToken(ObjectVariableEntry variable)
+        public static FormulaNodePositionX CreatePositionXToken()
         {
-            return FormulaTreeFactory.CreatePositionYNode(variable);
+            return FormulaTreeFactory.CreatePositionXNode(null);
         }
 
-        public static FormulaNodeRotation CreateRotationToken(ObjectVariableEntry variable)
+        public static FormulaNodePositionY CreatePositionYToken()
         {
-            return FormulaTreeFactory.CreateRotationNode(variable);
+            return FormulaTreeFactory.CreatePositionYNode(null);
         }
 
-        public static FormulaNodeSize CreateSizeToken(ObjectVariableEntry variable)
+        public static FormulaNodeRotation CreateRotationToken()
         {
-            return FormulaTreeFactory.CreateSizeNode(variable);
+            return FormulaTreeFactory.CreateRotationNode(null);
         }
 
-        public static FormulaNodeOpacity CreateOpacityToken(ObjectVariableEntry variable)
+        public static FormulaNodeSize CreateSizeToken()
         {
-            return FormulaTreeFactory.CreateOpacityNode(variable);
+            return FormulaTreeFactory.CreateSizeNode(null);
         }
 
         #endregion
 
         #region user variables
         
-        public static FormulaNodeUserVariable CreateUserVariableToken(UserVariable variable)
+        public static FormulaNodeUserVariable CreateUserVariableToken()
         {
-            return FormulaTreeFactory.CreateUserVariableNode(variable);
+            return FormulaTreeFactory.CreateUserVariableNode(null);
         }
 
         #endregion

@@ -1,4 +1,4 @@
-﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
+﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTokens
 {
     class FormulaTokenCurlyBrace : FormulaTokenBracket
     {

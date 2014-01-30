@@ -6,7 +6,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
     [Obsolete]
     public class FormulaPartControlPlaceholderLeft : FormulaPartControl
     {
-        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected, bool isError)
+        protected override Grid CreateControls(double fontSize, bool isParentSelected, bool isSelected, bool isError)
         {
             return null;
         }

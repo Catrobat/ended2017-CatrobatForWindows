@@ -33,17 +33,11 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             InitializeComponent();
         }
 
-        public void FormulaChanged()
-        {
-            //var viewModel = ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
-            //Formula.FormulaTree2 = viewModel.Formula;
-        }
-
         private void ButtonFormula_OnClick(object sender, RoutedEventArgs e)
         {
             var viewModel = ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
             viewModel.Formula = Formula.FormulaTree2;
-            viewModel.CaretIndex = viewModel.FormulaString.Length;
+            viewModel.CaretIndex = viewModel.Tokens.Count;
             viewModel.FormulaButton = this;
             SetFormulaBinding();
             ServiceLocator.NavigationService.NavigateTo(typeof(FormulaEditorViewModel));

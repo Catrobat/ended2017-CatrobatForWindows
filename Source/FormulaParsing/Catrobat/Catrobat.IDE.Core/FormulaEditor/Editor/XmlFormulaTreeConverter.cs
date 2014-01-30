@@ -160,81 +160,81 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         public XmlFormulaTree ConvertBack(IFormulaTree formula)
         {
             if (formula == null) return null;
-            var formulaType = formula.GetType();
+            var type = formula.GetType();
 
             // numbers
-            if (formulaType == typeof(FormulaNodeNumber)) return XmlFormulaTreeFactory2.CreateNumberNode(((FormulaNodeNumber)formula).Value);
-            if (formulaType == typeof(FormulaNodePi)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreatePiNode);
+            if (type == typeof(FormulaNodeNumber)) return XmlFormulaTreeFactory2.CreateNumberNode(((FormulaNodeNumber)formula).Value);
+            if (type == typeof(FormulaNodePi)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreatePiNode);
 
             // arithmetic
-            if (formulaType == typeof(FormulaNodeAdd)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateAddNode);
-            if (formulaType == typeof(FormulaNodeSubtract)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateSubtractNode);
-            if (formulaType == typeof(FormulaNodeMultiply)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateMultiplyNode);
-            if (formulaType == typeof(FormulaNodeDivide)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateDivideNode);
+            if (type == typeof(FormulaNodeAdd)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateAddNode);
+            if (type == typeof(FormulaNodeSubtract)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateSubtractNode);
+            if (type == typeof(FormulaNodeMultiply)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateMultiplyNode);
+            if (type == typeof(FormulaNodeDivide)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateDivideNode);
 
             // relational operators
-            if (formulaType == typeof(FormulaNodeEquals)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateEqualsNode);
-            if (formulaType == typeof(FormulaNodeNotEquals)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateNotEqualsNode);
-            if (formulaType == typeof(FormulaNodeLess)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateLessNode);
-            if (formulaType == typeof(FormulaNodeLessEqual)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateLessEqualNode);
-            if (formulaType == typeof(FormulaNodeGreater)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateGreaterNode);
-            if (formulaType == typeof(FormulaNodeGreaterEqual)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateGreaterEqualNode);
+            if (type == typeof(FormulaNodeEquals)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateEqualsNode);
+            if (type == typeof(FormulaNodeNotEquals)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateNotEqualsNode);
+            if (type == typeof(FormulaNodeLess)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateLessNode);
+            if (type == typeof(FormulaNodeLessEqual)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateLessEqualNode);
+            if (type == typeof(FormulaNodeGreater)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateGreaterNode);
+            if (type == typeof(FormulaNodeGreaterEqual)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateGreaterEqualNode);
 
             // logic
-            if (formulaType == typeof(FormulaNodeAnd)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateAndNode);
-            if (formulaType == typeof(FormulaNodeOr)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateOrNode);
-            if (formulaType == typeof(FormulaNodeNot)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateNotNode);
-            if (formulaType == typeof(FormulaNodeTrue)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateTrueNode);
-            if (formulaType == typeof(FormulaNodeFalse)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateFalseNode);
+            if (type == typeof(FormulaNodeAnd)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateAndNode);
+            if (type == typeof(FormulaNodeOr)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateOrNode);
+            if (type == typeof(FormulaNodeNot)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateNotNode);
+            if (type == typeof(FormulaNodeTrue)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateTrueNode);
+            if (type == typeof(FormulaNodeFalse)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateFalseNode);
 
             // min/max
-            if (formulaType == typeof(FormulaNodeMin)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateMinNode);
-            if (formulaType == typeof(FormulaNodeMax)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateMaxNode);
+            if (type == typeof(FormulaNodeMin)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateMinNode);
+            if (type == typeof(FormulaNodeMax)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateMaxNode);
 
             // exponential function and logarithms
-            if (formulaType == typeof(FormulaNodeExp)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateExpNode);
-            if (formulaType == typeof(FormulaNodeLog)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateLogNode);
-            if (formulaType == typeof(FormulaNodeLn)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateLnNode);
+            if (type == typeof(FormulaNodeExp)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateExpNode);
+            if (type == typeof(FormulaNodeLog)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateLogNode);
+            if (type == typeof(FormulaNodeLn)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateLnNode);
 
             // trigonometric functions
-            if (formulaType == typeof(FormulaNodeSin)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateSinNode);
-            if (formulaType == typeof(FormulaNodeCos)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateCosNode);
-            if (formulaType == typeof(FormulaNodeTan)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateTanNode);
-            if (formulaType == typeof(FormulaNodeArcsin)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateArcsinNode);
-            if (formulaType == typeof(FormulaNodeArccos)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateArccosNode);
-            if (formulaType == typeof(FormulaNodeArctan)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateArctanNode);
+            if (type == typeof(FormulaNodeSin)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateSinNode);
+            if (type == typeof(FormulaNodeCos)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateCosNode);
+            if (type == typeof(FormulaNodeTan)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateTanNode);
+            if (type == typeof(FormulaNodeArcsin)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateArcsinNode);
+            if (type == typeof(FormulaNodeArccos)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateArccosNode);
+            if (type == typeof(FormulaNodeArctan)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateArctanNode);
 
             // miscellaneous functions
-            if (formulaType == typeof(FormulaNodeSqrt)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateSqrtNode);
-            if (formulaType == typeof(FormulaNodeAbs)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateAbsNode);
-            if (formulaType == typeof(FormulaNodeMod)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateModNode);
-            if (formulaType == typeof(FormulaNodeRound)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateRoundNode);
-            if (formulaType == typeof(FormulaNodeRandom)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateRandomNode);
+            if (type == typeof(FormulaNodeSqrt)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateSqrtNode);
+            if (type == typeof(FormulaNodeAbs)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateAbsNode);
+            if (type == typeof(FormulaNodeMod)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateModNode);
+            if (type == typeof(FormulaNodeRound)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateRoundNode);
+            if (type == typeof(FormulaNodeRandom)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateRandomNode);
 
             // sensors
-            if (formulaType == typeof(FormulaNodeAccelerationX)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateAccelerationXNode);
-            if (formulaType == typeof(FormulaNodeAccelerationY)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateAccelerationYNode);
-            if (formulaType == typeof(FormulaNodeAccelerationZ)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateAccelerationZNode);
-            if (formulaType == typeof(FormulaNodeCompass)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateCompassNode);
-            if (formulaType == typeof(FormulaNodeInclinationX)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateInclinationXNode);
-            if (formulaType == typeof(FormulaNodeInclinationY)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateInclinationYNode);
+            if (type == typeof(FormulaNodeAccelerationX)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateAccelerationXNode);
+            if (type == typeof(FormulaNodeAccelerationY)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateAccelerationYNode);
+            if (type == typeof(FormulaNodeAccelerationZ)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateAccelerationZNode);
+            if (type == typeof(FormulaNodeCompass)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateCompassNode);
+            if (type == typeof(FormulaNodeInclinationX)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateInclinationXNode);
+            if (type == typeof(FormulaNodeInclinationY)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateInclinationYNode);
 
             // object variables
-            if (formulaType == typeof(FormulaNodeBrightness)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateBrightnessNode);
-            if (formulaType == typeof(FormulaNodeDirection)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateDirectionNode);
-            if (formulaType == typeof(FormulaNodeGhostEffect)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateGhostEffectNode);
-            if (formulaType == typeof(FormulaNodeLayer)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateLayerNode);
-            if (formulaType == typeof(FormulaNodePositionX)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreatePositionXNode);
-            if (formulaType == typeof(FormulaNodePositionY)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreatePositionYNode);
-            if (formulaType == typeof(FormulaNodeRotation)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateRotationNode);
-            if (formulaType == typeof(FormulaNodeSize)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateSizeNode);
-            if (formulaType == typeof(FormulaNodeOpacity)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateOpacityNode);
+            if (type == typeof(FormulaNodeBrightness)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateBrightnessNode);
+            if (type == typeof(FormulaNodeDirection)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateDirectionNode);
+            if (type == typeof(FormulaNodeGhostEffect)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateGhostEffectNode);
+            if (type == typeof(FormulaNodeLayer)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateLayerNode);
+            if (type == typeof(FormulaNodePositionX)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreatePositionXNode);
+            if (type == typeof(FormulaNodePositionY)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreatePositionYNode);
+            if (type == typeof(FormulaNodeRotation)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateRotationNode);
+            if (type == typeof(FormulaNodeSize)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateSizeNode);
+            if (type == typeof(FormulaNodeOpacity)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateOpacityNode);
 
             // user variables
-            if (formulaType == typeof(FormulaNodeUserVariable)) return XmlFormulaTreeFactory2.CreateUserVariableNode(((FormulaNodeUserVariable)formula).Variable);
+            if (type == typeof(FormulaNodeUserVariable)) return XmlFormulaTreeFactory2.CreateUserVariableNode(((FormulaNodeUserVariable)formula).Variable);
 
             // brackets
-            if (formulaType == typeof(FormulaNodeParentheses)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateParenthesesNode);
+            if (type == typeof(FormulaNodeParentheses)) return ConvertBack(formula, XmlFormulaTreeFactory2.CreateParenthesesNode);
 
             throw new NotImplementedException();
         }

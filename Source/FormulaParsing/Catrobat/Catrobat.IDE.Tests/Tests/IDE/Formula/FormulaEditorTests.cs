@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
@@ -76,42 +77,42 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         private void TestKey(FormulaEditorKey key, IFormulaTree expectedFormula)
         {
-            var editor = new FormulaEditor2();
-            Assert.IsTrue(editor.KeyPressed(key));
+            var editor = new FormulaEditor3(Enumerable.Empty<UserVariable>(), null);
+            Assert.IsTrue(editor.HandleKey(key));
             Assert.AreEqual(expectedFormula, editor.Formula);
         }
 
         private void TestKey(FormulaEditorKey key, Func<IFormulaTree> expectedFormula)
         {
-            var editor = new FormulaEditor2();
-            Assert.IsTrue(editor.KeyPressed(key));
+            var editor = new FormulaEditor3(Enumerable.Empty<UserVariable>(), null);
+            Assert.IsTrue(editor.HandleKey(key));
             Assert.AreEqual(expectedFormula(), editor.Formula);
         }
 
         private void TestKey(FormulaEditorKey key, Func<IFormulaTree, FormulaNodeUnaryFunction> expectedFormula)
         {
-            var editor = new FormulaEditor2();
-            Assert.IsTrue(editor.KeyPressed(key));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.CloseBracket));
+            var editor = new FormulaEditor3(Enumerable.Empty<UserVariable>(), null);
+            Assert.IsTrue(editor.HandleKey(key));
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Number1));
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.CloseBracket));
             Assert.AreEqual(expectedFormula(FormulaTreeFactory.CreateNumberNode(1)), editor.Formula);
         }
 
         private void TestKey(FormulaEditorKey key, Func<IFormulaTree, IFormulaTree, FormulaNodeInfixOperator> expectedFormula)
         {
-            var editor = new FormulaEditor2();
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number1));
-            Assert.IsTrue(editor.KeyPressed(key));
-            Assert.IsTrue(editor.KeyPressed(FormulaEditorKey.Number2));
+            var editor = new FormulaEditor3(Enumerable.Empty<UserVariable>(), null);
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Number1));
+            Assert.IsTrue(editor.HandleKey(key));
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Number2));
             Assert.AreEqual(expectedFormula(FormulaTreeFactory.CreateNumberNode(1), FormulaTreeFactory.CreateNumberNode(2)), editor.Formula);
         }
 
         private void TestKey(IEnumerable<FormulaEditorKey> keys, IFormulaTree expectedFormula)
         {
-            var editor = new FormulaEditor2();
+            var editor = new FormulaEditor3(Enumerable.Empty<UserVariable>(), null);
             foreach (var key in keys)
             {
-                Assert.IsTrue(editor.KeyPressed(key));
+                Assert.IsTrue(editor.HandleKey(key));
             }
             Assert.AreEqual(expectedFormula, editor.Formula);
         }

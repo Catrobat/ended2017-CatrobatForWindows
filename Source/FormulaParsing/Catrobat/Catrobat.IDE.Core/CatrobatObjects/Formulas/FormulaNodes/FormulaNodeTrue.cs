@@ -1,6 +1,6 @@
 ﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
-    class FormulaNodeTrue : ConstantFormulaTree
+    public class FormulaNodeTrue : ConstantFormulaTree
     {
     }
 }

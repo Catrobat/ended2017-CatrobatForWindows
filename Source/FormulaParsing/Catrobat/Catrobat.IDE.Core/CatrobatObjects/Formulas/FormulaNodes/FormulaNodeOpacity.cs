@@ -1,6 +1,6 @@
 ﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
-    class FormulaNodeOpacity : FormulaNodeObjectVariable
+    public class FormulaNodeOpacity : FormulaNodeObjectVariable
     {
     }
 }

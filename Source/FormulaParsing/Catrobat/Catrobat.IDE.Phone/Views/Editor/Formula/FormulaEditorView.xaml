@@ -21,40 +21,34 @@
 
   </phone:PhoneApplicationPage.Resources>
 
-  <Grid x:Name="LayoutRoot"
-          Background="Transparent">
+  <Grid x:Name="LayoutRoot" Background="Transparent">
     <Grid.RowDefinitions>
       <RowDefinition Height="*" />
       <RowDefinition Height="480" />
     </Grid.RowDefinitions>
     <ScrollViewer Grid.Row="0">
-      <!--<TextBox Name="FormulaViewer"
-               IsEnabled ="True"
-               Text="{Binding FormulaString}"
-               VerticalAlignment="Stretch"
-               Height="290"
-               Grid.Row="0"               
-               FontFamily="{StaticResource PhoneFontFamilyNormal}"
-               FontSize="50"
-               Foreground="{StaticResource PhoneForegroundBrush}"
-               BorderThickness="0"
-               Background="{x:Null}"
-               IsHitTestVisible="False"
-               />-->
-      <formulaControls:FormulaViewer2 Name="FormulaViewer" 
-                                     FontSize="50"
-                                     Text="{Binding FormulaString}"
-                                     CaretIndex="{Binding CaretIndex}"
-                                     VerticalAlignment="Stretch" 
-                                     Height="290"
-                                     Grid.Row="0"/>
+      <formulaControls:FormulaViewer3
+          Name="FormulaViewer"
+          CharactersInOneLineNormalFontSize="15"
+          LinesNormalFontSize="4"
+          NormalFontSize="50"
+          MinFontSize="26"
+          MaxFontSize="70"
+          IsAutoFontSize="True"
+          IsEditEnabled="True"
+          IsMultiline="True"
+          Tokens="{Binding Tokens, Mode=TwoWay}" 
+          CaretIndex="{Binding CaretIndex, Mode=TwoWay}" 
+          VerticalAlignment="Stretch"
+          Height="290"
+          Grid.Row="0"/>
     </ScrollViewer>
     <Grid Grid.Row="1">
-      <formulaControls:FormulaKeyboard Name="FormulaKeyboard" 
-                                     LocalVariables="{Binding LocalVariables}" 
-                                     GlobalVariables="{Binding GlobalVariables}" 
-                                     />
-      
+      <formulaControls:FormulaKeyboard
+        Name="FormulaKeyboard" 
+        LocalVariables="{Binding LocalVariables}" 
+        GlobalVariables="{Binding GlobalVariables}" />
+
       <Grid Name="GridError" Background="Tomato" Opacity="0.0" Height="10" VerticalAlignment="Top">
         <Grid.Resources>
           <Storyboard x:Name="KeyErrorAnimation">

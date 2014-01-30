@@ -63,11 +63,12 @@
     <Compile Include="CatrobatObjects\Formulas\BinaryFormulaTree.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeBinaryFunction.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeUnaryFunction.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaToken\FormulaTokenArgumentSeparator.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaToken\FormulaTokenVerticalBar.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaToken\FormulaTokenSquareBracket.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaToken\FormulaTokenCurlyBrace.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaToken\FormulaTokenBracket.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaTokens\FormulaTokenDecimalSeparator.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaTokens\FormulaTokenParameterSpearator.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaTokens\FormulaTokenVerticalBar.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaTokens\FormulaTokenSquareBracket.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaTokens\FormulaTokenCurlyBrace.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaTokens\FormulaTokenBracket.cs" />
     <Compile Include="CatrobatObjects\Formulas\IFormulaToken.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeInfixOperator.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeGhostEffect.cs" />
@@ -122,7 +123,7 @@
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeSin.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeAdd.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodePi.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaToken\FormulaTokenParenthesis.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaTokens\FormulaTokenParenthesis.cs" />
     <Compile Include="ExtensionMethods\LinqExtensions.cs" />
     <Compile Include="ExtensionMethods\EnumExtensions.cs" />
     <Compile Include="ExtensionMethods\FormulaTreeExtensions.cs" />
@@ -197,7 +198,10 @@
     <Compile Include="CatrobatObjects\ProjectHeader.cs" />
     <Compile Include="CatrobatObjects\Scripts\BroadcastScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\Script.cs" />
+    <Compile Include="FormulaEditor\Editor\FormulaEditor3.cs" />
     <Compile Include="FormulaEditor\Editor\FormulaEditor2.cs" />
+    <Compile Include="FormulaEditor\Editor\FormulaInterpreter.cs" />
+    <Compile Include="FormulaEditor\Editor\FormulaTokenizer.cs" />
     <Compile Include="FormulaEditor\Editor\FormulaTokenFactory.cs" />
     <Compile Include="FormulaEditor\Editor\FormulaEvaluator.cs" />
     <Compile Include="FormulaEditor\Editor\XmlFormulaTreeFactory2.cs" />

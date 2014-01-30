@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using Catrobat.IDE.Core.Resources.Localization;
@@ -10,7 +11,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
     {
         private static LocalizedStrings _localizedStrings;
 
-        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected, bool isError)
+        protected override Grid CreateControls(double fontSize, bool isParentSelected, bool isSelected, bool isError)
         {
             string text = GetText() ?? "?";
 
@@ -30,6 +31,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
         {
             if (_localizedStrings == null)
                 _localizedStrings = Application.Current.Resources["LocalizedStrings"] as LocalizedStrings;
+            Debug.Assert(_localizedStrings != null);
 
             var property = typeof(AppResources).GetProperty("Formula_" + UiFormula.FormulaValue);
 

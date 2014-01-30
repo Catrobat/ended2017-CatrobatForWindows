@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 {
-    abstract class UnaryFormulaTree : IFormulaTree
+    public abstract class UnaryFormulaTree : IFormulaTree
     {
 
         public IFormulaTree Child { get; set; }
