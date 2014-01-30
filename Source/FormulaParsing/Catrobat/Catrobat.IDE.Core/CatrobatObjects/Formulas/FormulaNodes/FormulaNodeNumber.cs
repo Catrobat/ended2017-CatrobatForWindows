@@ -1,6 +1,9 @@
-﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
+﻿using System.Diagnostics;
+
+namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
-    class FormulaNodeNumber : ConstantFormulaTree<double>
+    [DebuggerDisplay("{Value}")]
+    public class FormulaNodeNumber : ConstantFormulaTree<double>
     {
     }
 }

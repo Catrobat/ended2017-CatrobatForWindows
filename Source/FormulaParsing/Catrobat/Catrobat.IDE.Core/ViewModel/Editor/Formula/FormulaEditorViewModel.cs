@@ -6,6 +6,8 @@ using Catrobat.IDE.Core.UI.Formula;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 {
@@ -36,7 +38,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
         #region Members
 
-        private readonly FormulaEditor2 _editor = new FormulaEditor2();
+        private readonly FormulaEditor3 _editor = new FormulaEditor3(Enumerable.Empty<UserVariable>(), null);
         private Sprite _selectedSprite;
         private IPortableFormulaButton _formulaButton;
         private Project _currentProject;
@@ -81,25 +83,23 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             set { _editor.Formula = value; }
         }
 
-        private void InitFormulaBinding()
+        public ObservableCollection<IFormulaToken> Tokens
+        {
+            get { return _editor.Tokens; }
+        }
+
+        private void InitEditorBindings()
         {
             _editor.PropertyChanged += (sender, args) =>
             {
                 if (args.PropertyName == GetPropertyName(() => _editor.Formula)) RaisePropertyChanged(() => Formula);
+            }; _editor.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == GetPropertyName(() => _editor.Tokens)) RaisePropertyChanged(() => Tokens);
             };
-        }
-
-        public string FormulaString
-        {
-            get { return _editor.FormulaString; }
-            set { _editor.FormulaString = value; }
-        }
-
-        private void InitFormulaStringBinding()
-        {
             _editor.PropertyChanged += (sender, args) =>
             {
-                if (args.PropertyName == GetPropertyName(() => _editor.FormulaString)) RaisePropertyChanged(() => FormulaString);
+                if (args.PropertyName == GetPropertyName(() => _editor.CaretIndex)) RaisePropertyChanged(() => CaretIndex);
             };
         }
 
@@ -107,14 +107,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         {
             get { return _editor.CaretIndex; }
             set { _editor.CaretIndex = value; }
-        }
-
-        private void InitCaretIndexBinding()
-        {
-            _editor.PropertyChanged += (sender, args) =>
-            {
-                if (args.PropertyName == GetPropertyName(() => _editor.CaretIndex)) RaisePropertyChanged(() => CaretIndex);
-            };
         }
 
         #endregion
@@ -133,20 +125,17 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
         private void KeyPressedCommandAction(FormulaEditorKey key)
         {
-            if (!_editor.KeyPressed(key))
-                RaiseKeyError();
+            if (!_editor.HandleKey(key)) RaiseKeyError();
         }
 
         private void ObjectVariableSelectedAction(ObjectVariable variable)
         {
-            if (!_editor.ObjectVariableSelected(variable))
-                RaiseKeyError();
+            if (!_editor.HandleKey(variable)) RaiseKeyError();
         }
 
         private void SensorVariableSelectedAction(SensorVariable variable)
         {
-            if (!_editor.SensorVariableSelected(variable))
-                RaiseKeyError();
+            if (!_editor.HandleKey(variable)) RaiseKeyError();
         }
 
         protected override void GoBackAction()
@@ -175,13 +164,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
             if (VariableHelper.IsVariableLocal(CurrentProject, variable))
             {
-                if (!_editor.LocalVariableSelected(variable))
-                    RaiseKeyError();
+                if (!_editor.HandleKey(variable)) RaiseKeyError();
             }
             else
             {
-                if (!_editor.GlobalVariableSelected(variable))
-                    RaiseKeyError();
+                if (!_editor.HandleKey(variable)) RaiseKeyError();
             }
         }
 
@@ -203,9 +190,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             Messenger.Default.Register<GenericMessage<UserVariable>>(this,
                  ViewModelMessagingToken.SelectedUserVariableChangedListener, SelectedUserVariableChangedMessageAction);
 
-            InitFormulaBinding();
-            InitFormulaStringBinding();
-            InitCaretIndexBinding();
+            InitEditorBindings();
         }
 
         private void ResetViewModel()

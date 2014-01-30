@@ -1,6 +1,6 @@
-﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
+﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
-    abstract class FormulaNodeSensor : ConstantFormulaTree
+    public abstract class FormulaNodeSensor : ConstantFormulaTree
     {
     }
 }

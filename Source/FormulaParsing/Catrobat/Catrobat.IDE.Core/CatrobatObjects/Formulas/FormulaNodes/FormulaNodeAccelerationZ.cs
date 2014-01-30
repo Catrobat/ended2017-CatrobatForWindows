@@ -1,6 +1,6 @@
 ﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
-    class FormulaNodeAccelerationZ : FormulaNodeSensor
+    public class FormulaNodeAccelerationZ : FormulaNodeSensor
     {
     }
 }

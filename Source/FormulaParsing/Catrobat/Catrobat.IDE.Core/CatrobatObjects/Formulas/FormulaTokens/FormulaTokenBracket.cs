@@ -1,6 +1,6 @@
-﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
+﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTokens
 {
-    abstract class FormulaTokenBracket : IFormulaToken
+    public abstract class FormulaTokenBracket : IFormulaToken
     {
         public bool IsOpening { get; set; }
 

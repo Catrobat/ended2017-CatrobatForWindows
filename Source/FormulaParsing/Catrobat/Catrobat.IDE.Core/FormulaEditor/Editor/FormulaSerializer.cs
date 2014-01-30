@@ -20,6 +20,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             if (formula == null) return;
 
             // TODO: tight (1+2) or loose (1 + 2)? 
+            // TODO: localize serialization
 
             var type = formula.GetType();
 
@@ -71,14 +72,30 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             else if (type == typeof(FormulaNodeMod)) Serialize(sb, (FormulaNodeMod)formula);
 
             // sensors
+            else if (type == typeof(FormulaNodeAccelerationX)) Serialize(sb, (FormulaNodeAccelerationX)formula);
+            else if (type == typeof(FormulaNodeAccelerationY)) Serialize(sb, (FormulaNodeAccelerationY)formula);
+            else if (type == typeof(FormulaNodeAccelerationZ)) Serialize(sb, (FormulaNodeAccelerationZ)formula);
+            else if (type == typeof(FormulaNodeCompass)) Serialize(sb, (FormulaNodeCompass)formula);
+            else if (type == typeof(FormulaNodeInclinationX)) Serialize(sb, (FormulaNodeInclinationX)formula);
+            else if (type == typeof(FormulaNodeInclinationY)) Serialize(sb, (FormulaNodeInclinationY)formula);
 
             // object variables
+            else if (type == typeof(FormulaNodeBrightness)) Serialize(sb, (FormulaNodeBrightness)formula);
+            else if (type == typeof(FormulaNodeDirection)) Serialize(sb, (FormulaNodeDirection)formula);
+            else if (type == typeof(FormulaNodeGhostEffect)) Serialize(sb, (FormulaNodeGhostEffect)formula);
+            else if (type == typeof(FormulaNodeLayer)) Serialize(sb, (FormulaNodeLayer)formula);
+            else if (type == typeof(FormulaNodePositionX)) Serialize(sb, (FormulaNodePositionX)formula);
+            else if (type == typeof(FormulaNodePositionY)) Serialize(sb, (FormulaNodePositionY)formula);
+            else if (type == typeof(FormulaNodeRotation)) Serialize(sb, (FormulaNodeRotation)formula);
+            else if (type == typeof(FormulaNodeSize)) Serialize(sb, (FormulaNodeSize)formula);
+            else if (type == typeof(FormulaNodeOpacity)) Serialize(sb, (FormulaNodeOpacity)formula);
 
             // user variables
-            else if (type == typeof(FormulaNodeUserVariable)) Serialize(sb, (FormulaNodeUserVariable)formula);
+            else if (type == typeof (FormulaNodeUserVariable)) Serialize(sb, (FormulaNodeUserVariable) formula);
 
             // brackets
             else if (type == typeof(FormulaNodeParentheses)) Serialize(sb, (FormulaNodeParentheses)formula);
+
             else throw new NotImplementedException();
         }
 
@@ -317,12 +334,20 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region sensors
 
+        private void Serialize(StringBuilder sb, FormulaNodeSensor formula)
+        {
+            throw new NotImplementedException();
+        }
 
 
         #endregion
 
         #region object variables
 
+        private void Serialize(StringBuilder sb, FormulaNodeObjectVariable formula)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
 

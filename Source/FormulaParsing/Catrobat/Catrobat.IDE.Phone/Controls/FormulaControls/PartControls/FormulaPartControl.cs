@@ -2,16 +2,16 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Phone.Controls.FormulaControls.Formulas;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {
-    [Obsolete]
     public abstract class FormulaPartControl
     {
         public FormulaPartStyleCollection Style { get; set; }
 
-        public Grid CreateUiControls(int fontSize, bool isSelected, bool isParentSelected, bool isError)
+        public Grid CreateUiControls(double fontSize, bool isSelected, bool isParentSelected, bool isError)
         {
             var control = CreateControls(fontSize, isSelected, isParentSelected, isError);
 
@@ -27,41 +27,32 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 
             if (control != null)
             {
-                control.Tap += ControlOnTap;
-                UiFormula.UiControls.Add(control);
+                control.Tap += (sender, gestureEventArgs) => Viewer.SetCaretIndex((Grid) sender);
             }
 
             return control;
         }
 
-        protected abstract Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected, bool isError);
-
-        protected void ControlOnTap(object sender, GestureEventArgs gestureEventArgs)
-        {
-            if (UiFormula.IsEditEnabled)
-            {
-                bool wasSelected = UiFormula.IsSelected;
-
-                UiFormula.ClearAllSelection();
-                UiFormula.ClearAllBackground();
-                UiFormula.IsSelected = !wasSelected;
-                
-                if(UiFormula.IsSelected)
-                    UiFormula.Viewer.SelectedFormulaChanged(UiFormula.TreeItem);
-                else
-                    UiFormula.Viewer.SelectedFormulaChanged(null);
-
-                if (UiFormula.IsSelected)
-                    UiFormula.SetStyle(true, false);
-            }
-
-            gestureEventArgs.Handled = true;
-        }
+        protected abstract Grid CreateControls(double fontSize, bool isParentSelected, bool isSelected, bool isError);
 
         public abstract int GetCharacterWidth();
 
+        public IFormulaToken Token { get; set; }
+
+        public FormulaViewer3 Viewer { get; set; }
+
+        [Obsolete]
         public UiFormula UiFormula { get; set; }
 
+        [Obsolete]
         public abstract FormulaPartControl Copy();
+
+        public virtual FormulaPartControl CreateUiTokenTemplate(IFormulaToken token)
+        {
+            // TODO: implement CreateUiTokenTemplate in derived classes
+            var template = Copy();
+            template.Token = token;
+            return template;
+        }
     }
 }

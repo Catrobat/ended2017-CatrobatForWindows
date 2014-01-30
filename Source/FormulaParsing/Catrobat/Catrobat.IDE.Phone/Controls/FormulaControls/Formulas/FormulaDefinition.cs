@@ -1,7 +1,9 @@
-﻿using Catrobat.IDE.Phone.Controls.FormulaControls.PartControls;
+﻿using System;
+using Catrobat.IDE.Phone.Controls.FormulaControls.PartControls;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.Formulas
 {
+    [Obsolete]
     public class FormulaDefinition
     {
         public string Type { get; set; }

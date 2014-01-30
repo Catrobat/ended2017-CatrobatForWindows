@@ -6,30 +6,21 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
     [Obsolete]
     public class FormulaPartControlText : FormulaPartControl
     {
-        public string GetText()
+        protected override Grid CreateControls(double fontSize, bool isParentSelected, bool isSelected, bool isError)
         {
-            if (string.IsNullOrEmpty(UiFormula.FormulaValue))
-            {
-                return " ";
-            }
-            else
-            {
-                return UiFormula.FormulaValue;
-            }
-        }
-
-        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected, bool isError)
-        {
-            var textBlock = new TextBlock
+            var grid = new Grid {DataContext = this};
+            grid.Children.Add(new TextBlock
             {
                 Text = GetText(),
                 FontSize = fontSize
-            };
-
-            var grid = new Grid {DataContext = this};
-            grid.Children.Add(textBlock);
+            });
 
             return grid;
+        }
+
+        public string GetText()
+        {
+            return string.IsNullOrEmpty(UiFormula.FormulaValue) ? " " : UiFormula.FormulaValue;
         }
 
         public override int GetCharacterWidth()

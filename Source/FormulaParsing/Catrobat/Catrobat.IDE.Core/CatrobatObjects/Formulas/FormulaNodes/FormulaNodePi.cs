@@ -1,6 +1,9 @@
-﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
+﻿using System.Diagnostics;
+
+namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
-    class FormulaNodePi : ConstantFormulaTree
+    [DebuggerDisplay("pi")]
+    public class FormulaNodePi : ConstantFormulaTree
     {
     }
 }

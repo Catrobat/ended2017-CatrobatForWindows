@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
-    abstract class FormulaNodeInfixOperator : BinaryFormulaTree
+    public abstract class FormulaNodeInfixOperator : BinaryFormulaTree
     {
         #region rename First- and SecondChild to Left- and RightChild
 

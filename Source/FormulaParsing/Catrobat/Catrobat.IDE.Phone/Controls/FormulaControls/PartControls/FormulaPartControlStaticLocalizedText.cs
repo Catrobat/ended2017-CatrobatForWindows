@@ -12,7 +12,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 
         public string LocalizedResourceName { get; set; }
 
-        protected override Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected, bool isError)
+        protected override Grid CreateControls(double fontSize, bool isParentSelected, bool isSelected, bool isError)
         {
             string text = LocalizedResourceName != null ? GetText() : "RESOURCE MISSING";
 

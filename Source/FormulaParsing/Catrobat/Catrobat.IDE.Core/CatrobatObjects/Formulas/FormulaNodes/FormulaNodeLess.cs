@@ -1,6 +1,6 @@
 ﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
-    class FormulaNodeLess : FormulaNodeInfixOperator
+    public class FormulaNodeLess : FormulaNodeInfixOperator
     {
     }
 }

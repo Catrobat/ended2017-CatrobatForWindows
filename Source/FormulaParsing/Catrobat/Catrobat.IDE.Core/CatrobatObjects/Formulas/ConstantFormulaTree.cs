@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 {
-    abstract class ConstantFormulaTree : IFormulaTree
+    public abstract class ConstantFormulaTree : IFormulaTree
     {
 
         #region implements IFormulaTree
@@ -43,7 +44,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 
     }
 
-    class ConstantFormulaTree<TValue> : ConstantFormulaTree
+    [DebuggerDisplay("Value = {Value}")]
+    public class ConstantFormulaTree<TValue> : ConstantFormulaTree
     {
 
         public TValue Value { get; set; }

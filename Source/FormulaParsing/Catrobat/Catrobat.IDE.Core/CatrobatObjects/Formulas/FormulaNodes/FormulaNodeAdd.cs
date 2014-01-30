@@ -1,6 +1,9 @@
-﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
+﻿using System.Diagnostics;
+
+namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
-    class FormulaNodeAdd : FormulaNodeInfixOperator
+    [DebuggerDisplay("{LeftChild} + {RightChild}")]
+    public class FormulaNodeAdd : FormulaNodeInfixOperator
     {
     }
 }

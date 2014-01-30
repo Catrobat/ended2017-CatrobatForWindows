@@ -145,9 +145,19 @@
     <Compile Include="Content\Images\Misc\ImageGallery.xaml.cs">
       <DependentUpon>ImageGallery.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaControls\Formulas\UiFormulaTokenDefinitionCollection.cs" />
+    <Compile Include="Controls\FormulaControls\Formulas\UiFormulaTokenList.cs" />
+    <Compile Include="Controls\FormulaControls\Formulas\UiFormulaTokenDefinition.cs" />
+    <Compile Include="Controls\FormulaControls\FormulaViewer3.xaml.cs">
+      <DependentUpon>FormulaViewer3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FormulaControls\FormulaViewer2.xaml.cs">
       <DependentUpon>FormulaViewer2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlNumber.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlUserVariable.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlParenthesis.cs" />
+    <Compile Include="Converters\NamespaceTypeConverter.cs" />
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
@@ -414,11 +424,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\FormulaControls\FormulaViewer3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\FormulaControls\FormulaViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\FormulaControls\FormulaViewer2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FormulaControls\Templates\FormulaTokenTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 {
-    abstract class BinaryFormulaTree : IFormulaTree
+    public abstract class BinaryFormulaTree : IFormulaTree
     {
 
         public IFormulaTree FirstChild { get; set; }

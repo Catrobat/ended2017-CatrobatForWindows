@@ -1,6 +1,6 @@
 ﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
-    class FormulaNodeInclinationY : FormulaNodeSensor
+    public class FormulaNodeInclinationY : FormulaNodeSensor
     {
     }
 }

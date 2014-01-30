@@ -1,8 +1,8 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
-namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
+namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
-    abstract class FormulaNodeObjectVariable : FormulaNodeVariable
+    public abstract class FormulaNodeObjectVariable : FormulaNodeVariable
     {
         public ObjectVariableEntry Variable { get; set; }
     }
