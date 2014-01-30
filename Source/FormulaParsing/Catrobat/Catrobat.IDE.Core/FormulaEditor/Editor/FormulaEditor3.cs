@@ -81,11 +81,16 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         private void InterpretTokens()
         {
+            IFormulaTree interpretedFormula;
             IEnumerable<string> parsingErrors;
-            _interpreter.Interpret(_tokens, out _formula, out parsingErrors);
-            RaisePropertyChanged(() => Formula);
+            if (_interpreter.Interpret(_tokens, out interpretedFormula, out parsingErrors))
+            {
+                _formula = interpretedFormula;
+                RaisePropertyChanged(() => Formula);
+            }
             _parsingErrors = parsingErrors.ToList();
             RaisePropertyChanged(() => ParsingErrors);
+
         }
 
         public FormulaEditor3(IEnumerable<UserVariable> userVariables, ObjectVariableEntry objectVariable)

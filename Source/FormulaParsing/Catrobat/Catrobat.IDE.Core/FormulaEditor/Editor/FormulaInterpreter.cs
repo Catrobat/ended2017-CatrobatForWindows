@@ -141,7 +141,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                   InterpretInfixOperators(nodes, ref parsingErrors))) return false;
 
             var openNodes = nodes.Where(node => node.Children.Any(child => child == null));
-            if (openNodes.Any()) throw new NotImplementedException();
+            if (openNodes.Any()) return false; // throw new NotImplementedException();
 
             if (nodes.Count > 1)
             {
@@ -187,12 +187,12 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         [Obsolete("Rewrite into a single function with two lists (interpreted and not interpreted yet)")]
         private bool InterpretBinaryFunctions(List<IFormulaTree> nodes, ref List<string> parsingErrors)
         {
-            throw new NotImplementedException();
+            return false; // throw new NotImplementedException();
         }
         [Obsolete("Rewrite into a single function with two lists (interpreted and not interpreted yet)")]
         private bool InterpretUnaryFormulaTrees(List<IFormulaTree> nodes, ref List<string> parsingErrors)
         {
-            throw new NotImplementedException();
+            return false; // throw new NotImplementedException();
         }
 
         /// <summary>Sets <see cref="FormulaNodeInfixOperator.LeftChild"/> and <see cref="FormulaNodeInfixOperator.RightChild"/> to the adjacent nodes. </summary>
