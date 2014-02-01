@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 {
@@ -9,52 +8,28 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes
 
         public IFormulaTree LeftChild
         {
-            get
-            {
-                return base.FirstChild;
-            }
-            set
-            {
-                base.FirstChild = value;
-            }
+            get { return base.FirstChild; }
+            set { base.FirstChild = value; }
         }
 
         [Obsolete("Use LeftChild instead. ", false)]
         public new IFormulaTree FirstChild
         {
-            get
-            {
-                return base.FirstChild;
-            }
-            set
-            {
-                base.FirstChild = value;
-            }
+            get { return base.FirstChild; }
+            set { base.FirstChild = value; }
         }
 
         public IFormulaTree RightChild
         {
-            get
-            {
-                return base.SecondChild;
-            }
-            set
-            {
-                base.SecondChild = value;
-            }
+            get { return base.SecondChild; }
+            set { base.SecondChild = value; }
         }
 
         [Obsolete("Use RightChild instead. ", false)]
         public new IFormulaTree SecondChild
         {
-            get
-            {
-                return base.SecondChild;
-            }
-            set
-            {
-                base.SecondChild = value;
-            }
+            get { return base.SecondChild; }
+            set { base.SecondChild = value; }
         }
 
         #endregion

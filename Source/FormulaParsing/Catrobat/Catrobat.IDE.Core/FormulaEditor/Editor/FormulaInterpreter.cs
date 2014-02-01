@@ -13,6 +13,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         public bool Interpret(IEnumerable<IFormulaToken> tokens, out IFormulaTree formula,
             out IEnumerable<string> parsingErrors)
         {
+            // TODO: add also parsingErrors for formulas like sin(True + 2.3)
             var parsingErrors2 = new List<string>();
             parsingErrors = parsingErrors2;
             return Interpret(tokens.ToList(), out formula, ref parsingErrors2);
