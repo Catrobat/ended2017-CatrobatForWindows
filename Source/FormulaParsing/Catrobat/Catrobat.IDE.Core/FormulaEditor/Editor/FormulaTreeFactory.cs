@@ -139,6 +139,11 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             return new FormulaNodeFalse();
         }
 
+        public static ConstantFormulaTree CreateTruthValueNode(bool value)
+        {
+            return value ? (ConstantFormulaTree) CreateTrueNode() : CreateFalseNode();
+        }
+
         public static FormulaNodeAnd CreateAndNode(IFormulaTree leftChild, IFormulaTree rightChild)
         {
             return new FormulaNodeAnd

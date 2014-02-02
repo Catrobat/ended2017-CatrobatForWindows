@@ -27,10 +27,15 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
             IEnumerable<IFormulaToken> tokens;
             IEnumerable<string> parsingErrors1;
-            var parsingErrors2 = Enumerable.Empty<string>();
-            var result = _tokenizer.Tokenize(input, out tokens, out parsingErrors1) && _interpreter.Interpret(tokens, out formula, out parsingErrors2);
-            parsingErrors = parsingErrors1.Concat(parsingErrors2);
-            return result;
+            if (!_tokenizer.Tokenize(input, out tokens, out parsingErrors1)) return false;
+            string parsingError2;
+            formula = _interpreter.Interpret(tokens, out parsingError2);
+            if (parsingError2 != null)
+            {
+                parsingErrors = Enumerable.Repeat(parsingError2, 1);
+                return false;
+            }
+            return true;
         }
 
     }

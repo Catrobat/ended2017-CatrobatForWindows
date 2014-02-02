@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTokens;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
@@ -105,6 +106,11 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             return FormulaTreeFactory.CreateFalseNode();
         }
 
+        public static ConstantFormulaTree CreateTruthValueToken(bool value)
+        {
+            return value ? (ConstantFormulaTree) CreateTrueToken() : CreateFalseToken();
+        }
+
         public static FormulaNodeAnd CreateAndToken()
         {
 
@@ -196,11 +202,6 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         public static FormulaNodeSqrt CreateSqrtToken()
         {
             return FormulaTreeFactory.CreateSqrtNode(null);
-        }
-
-        public static FormulaTokenVerticalBar CreateVerticalBarToken()
-        {
-            return new FormulaTokenVerticalBar();
         }
 
         public static FormulaNodeAbs CreateAbsToken()
@@ -323,22 +324,6 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         public static FormulaTokenParenthesis CreateParenthesisToken(bool isOpening)
         {
             return new FormulaTokenParenthesis
-            {
-                IsOpening = isOpening
-            };
-        }
-
-        public static FormulaTokenSquareBracket CreateSquareBracketToken(bool isOpening)
-        {
-            return new FormulaTokenSquareBracket
-            {
-                IsOpening = isOpening
-            };
-        }
-
-        public static FormulaTokenCurlyBrace CreateCurlyBraceToken(bool isOpening)
-        {
-            return new FormulaTokenCurlyBrace
             {
                 IsOpening = isOpening
             };

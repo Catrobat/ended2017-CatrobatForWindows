@@ -1,35 +1,26 @@
-﻿using System.Globalization;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTokens;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
     internal class FormulaInterpreter
     {
-        public bool Interpret(IEnumerable<IFormulaToken> tokens, out IFormulaTree formula,
-            out IEnumerable<string> parsingErrors)
+        public IFormulaTree Interpret(IEnumerable<IFormulaToken> tokens, out string parsingError)
         {
             // TODO: add also parsingErrors for formulas like sin(True + 2.3)
-            var parsingErrors2 = new List<string>();
-            parsingErrors = parsingErrors2;
-            return Interpret(tokens.ToList(), out formula, ref parsingErrors2);
+            parsingError = null;
+            var tokens2 = tokens.ToList();
+            InterpretNumbers(ref tokens2);
+            InterpretBrackets(ref tokens2, out parsingError);
+            return parsingError != null ? null : InterpretNodes(tokens2.Cast<IFormulaTree>().ToList(), out parsingError);
         }
 
-        private bool Interpret(List<IFormulaToken> tokens, out IFormulaTree formula, ref List<string> parsingErrors)
-        {
-            formula = null;
-            if (!(InterpretNumbers(ref tokens) &&
-                  InterpretBrackets(ref tokens, ref parsingErrors) &&
-                  InterpretVerticalBar(ref tokens, ref parsingErrors))) return false;
-
-            return InterpretNodes(tokens.Cast<IFormulaTree>().ToList(), out formula, ref parsingErrors);
-        }
-
-        private bool InterpretNumbers(ref List<IFormulaToken> tokens)
+        private void InterpretNumbers(ref List<IFormulaToken> tokens)
         {
             for (var i = 0; i < tokens.Count; i++)
             {
@@ -51,11 +42,10 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 tokens.RemoveRange(i, numberTokens.Count);
                 tokens.Insert(i, numberToken);
             }
-            return true;
         }
 
         [Obsolete("Rewrite into a single function with two lists (interpreted and not interpreted yet)")]
-        private bool InterpretBrackets(ref List<IFormulaToken> tokens, ref List<string> parsingErrors)
+        private void InterpretBrackets(ref List<IFormulaToken> tokens, out string parsingError)
         {
             // changing the collection using IEnumerator is not supported
             var index = 0;
@@ -68,8 +58,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                     if (openingBracket.IsClosing)
                     {
                         // TODO: add parsing error like "Remove unmatched closing bracket. "
-                        parsingErrors.Add("An error occured. ");
-                        return false;
+                        parsingError = "An error occured. ";
+                        return;
                     }
 
                     // find corresponding closing bracket
@@ -91,14 +81,14 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                     if (balance != 0)
                     {
                         // TODO: add parsing error like "Remove unmatched opening bracket. "
-                        parsingErrors.Add("An error occured. ");
-                        return false;
+                        parsingError = "An error occured. ";
+                        return;
                     }
 
                     // interpret tokens between parentheses
                     var childTokens = tokens.Skip(index + 1).Take(childTokensCount).ToList();
-                    IFormulaTree child;
-                    if (!Interpret(childTokens, out child, ref parsingErrors)) return false;
+                    var child = Interpret(childTokens, out parsingError);
+                    if (parsingError != null) return;
                     tokens.RemoveRange(index, childTokensCount + 2);
 
                     // remove redundant parentheses
@@ -112,51 +102,33 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
 
             // TODO: enumerate second time reverse to enhance the parsing error for the case of too less closing brackets
-
-            return true;
+            parsingError = null;
         }
 
         [Obsolete("Rewrite into a single function with two lists (interpreted and not interpreted yet)")]
-        private bool InterpretVerticalBar(ref List<IFormulaToken> tokens, ref List<string> parsingErrors)
+        private IFormulaTree InterpretNodes(List<IFormulaTree> nodes, out string parsingError)
         {
-            // changing the collection using IEnumerator is not supported
-            var index = 0;
-            while (index < tokens.Count)
-            {
-                var verticalBar = tokens[index] as FormulaTokenVerticalBar;
-                if (verticalBar != null)
-                {
-                    throw new NotImplementedException();
-                }
-                index++;
-            }
-            return true;
-        }
+            InterpretUnaryFunctions(nodes, out parsingError);
+            if (parsingError != null) return null;
 
-        [Obsolete("Rewrite into a single function with two lists (interpreted and not interpreted yet)")]
-        private bool InterpretNodes(List<IFormulaTree> nodes, out IFormulaTree formula, ref List<string> parsingErrors)
-        {
-            formula = null;
-
-            if (!(InterpretUnaryFunctions(nodes, ref parsingErrors) &&
-                  InterpretInfixOperators(nodes, ref parsingErrors))) return false;
+            InterpretInfixOperators(nodes, out parsingError);
+            if (parsingError != null) return null;
 
             var openNodes = nodes.Where(node => node.Children.Any(child => child == null));
-            if (openNodes.Any()) return false; // throw new NotImplementedException();
+            if (openNodes.Any()) return null; // throw new NotImplementedException();
 
             if (nodes.Count > 1)
             {
                 // TODO: add parsing error
-                return false;
+                return null;
             }
 
-            formula = nodes.Single();
-            return true;
+            return nodes.Single();
         }
 
         /// <summary>Sets <see cref="FormulaNodeUnaryFunction.Child"/> to the next node. </summary>
         [Obsolete("Rewrite into a single function with two lists (interpreted and not interpreted yet)")]
-        private bool InterpretUnaryFunctions(List<IFormulaTree> nodes, ref List<string> parsingErrors)
+        private void InterpretUnaryFunctions(List<IFormulaTree> nodes, out string parsingError)
         {
             for (var index = 0; index < nodes.Count; index++)
             {
@@ -170,8 +142,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 if (childIndex == nodes.Count)
                 {
                     // TODO: add parsing error like "missing value for function"
-                    parsingErrors.Add("An error occured. ");
-                    return false;
+                    parsingError = "An error occured. ";
+                    return;
                 }
                 node.Child = nodes[childIndex];
                 nodes.RemoveAt(childIndex);
@@ -182,23 +154,12 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                     node.Child = ((FormulaNodeParentheses)node.Child).Child;
                 }
             }
-            return true;
-        }
-
-        [Obsolete("Rewrite into a single function with two lists (interpreted and not interpreted yet)")]
-        private bool InterpretBinaryFunctions(List<IFormulaTree> nodes, ref List<string> parsingErrors)
-        {
-            return false; // throw new NotImplementedException();
-        }
-        [Obsolete("Rewrite into a single function with two lists (interpreted and not interpreted yet)")]
-        private bool InterpretUnaryFormulaTrees(List<IFormulaTree> nodes, ref List<string> parsingErrors)
-        {
-            return false; // throw new NotImplementedException();
+            parsingError = null;
         }
 
         /// <summary>Sets <see cref="FormulaNodeInfixOperator.LeftChild"/> and <see cref="FormulaNodeInfixOperator.RightChild"/> to the adjacent nodes. </summary>
         [Obsolete("Rewrite into a single function with two lists (interpreted and not interpreted yet)")]
-        private bool InterpretInfixOperators(List<IFormulaTree> nodes, ref List<string> parsingErrors)
+        private void InterpretInfixOperators(List<IFormulaTree> nodes, out string parsingError)
         {
             var openNodes = nodes.Where(node => node.Children.Any(child => child == null));
 
@@ -215,16 +176,16 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 if (index + 1 == nodes.Count)
                 {
                     // TODO: add parsing error like "missing value after operator"
-                    parsingErrors.Add("An error occured. ");
-                    return false;
+                    parsingError = "An error occured. ";
+                    return;
                 }
                 node.RightChild = nodes[index + 1];
                 nodes.RemoveAt(index + 1);
                 if (index == 0)
                 {
                     // TODO: add parsing error like "missing value before operator"
-                    parsingErrors.Add("An error occured. ");
-                    return false;
+                    parsingError = "An error occured. ";
+                    return;
                 }
                 node.LeftChild = nodes[index - 1];
                 nodes.RemoveAt(index - 1);
@@ -243,21 +204,21 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 if (index + 1 == nodes.Count)
                 {
                     // TODO: add parsing error like "missing value after operator"
-                    parsingErrors.Add("An error occured. ");
-                    return false;
+                    parsingError = "An error occured. ";
+                    return;
                 }
                 node.RightChild = nodes[index + 1];
                 nodes.RemoveAt(index + 1);
                 if (index == 0)
                 {
                     // TODO: add parsing error like "missing value before operator"
-                    parsingErrors.Add("An error occured. ");
-                    return false;
+                    parsingError = "An error occured. ";
+                    return;
                 }
                 node.LeftChild = nodes[index - 1];
                 nodes.RemoveAt(index - 1);
             }
-            return true;
+            parsingError = null;
         }
    
 

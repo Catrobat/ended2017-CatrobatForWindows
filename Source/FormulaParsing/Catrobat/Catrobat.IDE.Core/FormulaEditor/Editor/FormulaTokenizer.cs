@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
@@ -44,10 +43,6 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 // brackets
                 else if (Tokenize(input, ref index, "(", () => FormulaTokenFactory.CreateParenthesisToken(true), ref tokens)) { }
                 else if (Tokenize(input, ref index, ")", () => FormulaTokenFactory.CreateParenthesisToken(false), ref tokens)) { }
-                else if (Tokenize(input, ref index, "[", () => FormulaTokenFactory.CreateSquareBracketToken(true), ref tokens)) { }
-                else if (Tokenize(input, ref index, "]", () => FormulaTokenFactory.CreateSquareBracketToken(false), ref tokens)) { }
-                else if (Tokenize(input, ref index, "{", () => FormulaTokenFactory.CreateCurlyBraceToken(true), ref tokens)) { }
-                else if (Tokenize(input, ref index, "}", () => FormulaTokenFactory.CreateCurlyBraceToken(false), ref tokens)) { }
 
                 // numbers
                 else if (Tokenize(input, ref index, "pi", FormulaTokenFactory.CreatePiToken, ref tokens)) { }
@@ -92,8 +87,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
                 // miscellaneous functions
                 else if (Tokenize(input, ref index, "sqrt", FormulaTokenFactory.CreateSqrtToken, ref tokens)) { }
-                else if (Tokenize(input, ref index, "|", FormulaTokenFactory.CreateVerticalBarToken, ref tokens)) { }
-                else if (Tokenize(input, ref index, "abs", FormulaTokenFactory.CreateVerticalBarToken, ref tokens)) { }
+                else if (Tokenize(input, ref index, "abs", FormulaTokenFactory.CreateAbsToken, ref tokens)) { }
                 else if (Tokenize(input, ref index, "mod", FormulaTokenFactory.CreateModToken, ref tokens)) { }
 
                 // sensors
