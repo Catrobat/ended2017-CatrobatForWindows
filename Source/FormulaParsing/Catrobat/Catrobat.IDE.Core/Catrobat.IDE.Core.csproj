@@ -65,9 +65,6 @@
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeUnaryFunction.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTokens\FormulaTokenDecimalSeparator.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTokens\FormulaTokenParameterSpearator.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaTokens\FormulaTokenVerticalBar.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaTokens\FormulaTokenSquareBracket.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaTokens\FormulaTokenCurlyBrace.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTokens\FormulaTokenBracket.cs" />
     <Compile Include="CatrobatObjects\Formulas\IFormulaToken.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaNodes\FormulaNodeInfixOperator.cs" />
@@ -198,6 +195,7 @@
     <Compile Include="CatrobatObjects\ProjectHeader.cs" />
     <Compile Include="CatrobatObjects\Scripts\BroadcastScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\Script.cs" />
+    <Compile Include="ExtensionMethods\RandomExtensions.cs" />
     <Compile Include="FormulaEditor\Editor\FormulaEditor3.cs" />
     <Compile Include="FormulaEditor\Editor\FormulaEditor2.cs" />
     <Compile Include="FormulaEditor\Editor\FormulaInterpreter.cs" />

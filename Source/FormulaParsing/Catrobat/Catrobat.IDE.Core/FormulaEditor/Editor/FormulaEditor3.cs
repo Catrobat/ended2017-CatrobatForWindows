@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Catrobat.IDE.Core.FormulaEditor.Editor
@@ -56,10 +56,10 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        private List<string> _parsingErrors = new List<string>();
-        public List<string> ParsingErrors
+        private string _parsingError = null;
+        public string ParsingError
         {
-            get { return _parsingErrors; }
+            get { return _parsingError; }
         }
 
         private readonly Stack<EditorState> _undoStack = new Stack<EditorState>();
@@ -81,15 +81,13 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         private void InterpretTokens()
         {
-            IFormulaTree interpretedFormula;
-            IEnumerable<string> parsingErrors;
-            if (_interpreter.Interpret(_tokens, out interpretedFormula, out parsingErrors))
+            var interpretedFormula = _interpreter.Interpret(_tokens, out _parsingError);
+            if (interpretedFormula != null)
             {
                 _formula = interpretedFormula;
                 RaisePropertyChanged(() => Formula);
             }
-            _parsingErrors = parsingErrors.ToList();
-            RaisePropertyChanged(() => ParsingErrors);
+            RaisePropertyChanged(() => ParsingError);
 
         }
 
@@ -116,11 +114,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                     PushUndo();
                     var token = CreateToken(key);
                     InsertToken(token);
-                    if (token.GetType() == typeof(FormulaNodeUnaryFunction))
-                    {
-                        InsertToken(FormulaTokenFactory.CreateParenthesisToken(true));
-                    }
-                    if (token.GetType() == typeof(FormulaNodeBinaryFunction))
+                    if (token is FormulaNodeUnaryFunction || token is FormulaNodeBinaryFunction)
                     {
                         InsertToken(FormulaTokenFactory.CreateParenthesisToken(true));
                     }

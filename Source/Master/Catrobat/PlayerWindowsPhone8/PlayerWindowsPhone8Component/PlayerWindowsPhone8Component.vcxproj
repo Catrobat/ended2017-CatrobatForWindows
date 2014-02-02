@@ -235,6 +235,7 @@
     <ClInclude Include="Helper.h" />
     <ClInclude Include="HideBrick.h" />
     <ClInclude Include="IfBrick.h" />
+    <ClInclude Include="InclinationProvider.h" />
     <ClInclude Include="Interpreter.h" />
     <ClInclude Include="lodepng.h" />
     <ClInclude Include="lodepng_util.h" />
@@ -305,6 +306,7 @@
     <ClCompile Include="Helper.cpp" />
     <ClCompile Include="HideBrick.cpp" />
     <ClCompile Include="IfBrick.cpp" />
+    <ClCompile Include="InclinationProvider.cpp" />
     <ClCompile Include="Interpreter.cpp" />
     <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="lodepng_util.cpp" />

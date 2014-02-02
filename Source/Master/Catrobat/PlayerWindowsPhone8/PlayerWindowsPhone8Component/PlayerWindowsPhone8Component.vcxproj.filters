@@ -200,6 +200,7 @@
       <Filter>Exceptions</Filter>
     </ClCompile>
     <ClCompile Include="CompassProvider.cpp" />
+    <ClCompile Include="InclinationProvider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -410,6 +411,7 @@
       <Filter>Exceptions</Filter>
     </ClInclude>
     <ClInclude Include="CompassProvider.h" />
+    <ClInclude Include="InclinationProvider.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
