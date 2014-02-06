@@ -3,6 +3,7 @@
 #include <map>
 #include "Object.h"
 #include "CompassProvider.h"
+#include <InclinationProvider.h>
 
 class FormulaTree;
 
@@ -11,6 +12,12 @@ enum Childs {
     RightChild, 
     LeftAndRightChild, 
     NoChild
+};
+
+enum Inclination {
+	Pitch,
+	Roll,
+	Yaw
 };
 
 class Interpreter
@@ -31,6 +38,7 @@ public:
 
     void ReadAcceleration();
     float ReadCompass();
+	float ReadInclination(Inclination inclinationType);
 
 private:
     // Sensors
@@ -49,4 +57,5 @@ private:
     double RoundDoubleToInt(double value);
 
     CompassProvider* m_compassProvider;
+	InclinationProvider* m_inclinationProvider;
 };
