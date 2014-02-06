@@ -25,6 +25,7 @@ Interpreter::Interpreter()
 {
     m_accelerometer = Windows::Devices::Sensors::Accelerometer::GetDefault();
     m_compassProvider = new CompassProvider();
+	m_inclinationProvider = new InclinationProvider();
 }
 
 double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
@@ -106,6 +107,22 @@ void Interpreter::ReadAcceleration()
 float Interpreter::ReadCompass()
 {
     return m_compassProvider->GetDirection();
+}
+
+float Interpreter::ReadInclination(Inclination inclinationType)
+{
+	if (inclinationType == Inclination::Pitch)
+	{
+		return m_inclinationProvider->GetPitch();
+	}
+	else if (inclinationType == Inclination::Roll)
+	{
+		return m_inclinationProvider->GetRoll();
+	}
+	else
+	{
+		return m_inclinationProvider->GetYaw();
+	}
 }
 
 double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
