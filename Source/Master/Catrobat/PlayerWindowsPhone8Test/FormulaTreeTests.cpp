@@ -94,5 +94,18 @@ namespace PlayerWindowsPhone8Test
 			Assert::IsTrue(tree->GetRightChild() == NULL);
 		}
 
+		TEST_METHOD(FormulaTree_Sensor)
+		{
+			FormulaTree *tree = new FormulaTree("SENSOR", "COMPASS_DIRECTION");
+
+			Assert::IsTrue(tree->GetType() == Type::SENSOR);
+			Assert::IsTrue(tree->GetSensor() == Sensor::COMPASS_DIRECTION);
+
+			tree = new FormulaTree("SENSOR", "X_INCLINATION");
+
+			Assert::IsTrue(tree->GetType() == Type::SENSOR);
+			Assert::IsTrue(tree->GetSensor() == Sensor::X_INCLINATION);
+		}
+
 	};
 }

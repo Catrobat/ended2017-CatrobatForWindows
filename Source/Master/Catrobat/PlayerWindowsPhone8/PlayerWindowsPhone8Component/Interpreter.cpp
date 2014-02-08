@@ -3,6 +3,7 @@
 #include "FormulaTree.h"
 #include "ProjectDaemon.h"
 #include "CompassProvider.h"
+//#include "InclinationProvider.h"
 #include "string"
 #include <sstream>
 //#include <cmath>
@@ -25,7 +26,7 @@ Interpreter::Interpreter()
 {
     m_accelerometer = Windows::Devices::Sensors::Accelerometer::GetDefault();
     m_compassProvider = new CompassProvider();
-	m_inclinationProvider = new InclinationProvider();
+	//m_inclinationProvider = ref new InclinationProvider();
 }
 
 double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
@@ -56,7 +57,7 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
     case FUNCTION:
         return InterpretFunction(tree, object);
     case SENSOR:
-        return (double)ReadCompass();
+		return InterpretSensor(tree, object);
     default:
         break;
     }
@@ -109,21 +110,21 @@ float Interpreter::ReadCompass()
     return m_compassProvider->GetDirection();
 }
 
-float Interpreter::ReadInclination(Inclination inclinationType)
-{
-	if (inclinationType == Inclination::Pitch)
-	{
-		return m_inclinationProvider->GetPitch();
-	}
-	else if (inclinationType == Inclination::Roll)
-	{
-		return m_inclinationProvider->GetRoll();
-	}
-	else
-	{
-		return m_inclinationProvider->GetYaw();
-	}
-}
+//float Interpreter::ReadInclination(Inclination inclinationType)
+//{
+//	if (inclinationType == Inclination::Pitch)
+//	{
+//		return m_inclinationProvider->GetPitch();
+//	}
+//	else if (inclinationType == Inclination::Roll)
+//	{
+//		return m_inclinationProvider->GetRoll();
+//	}
+//	else
+//	{
+//		return m_inclinationProvider->GetYaw();
+//	}
+//}
 
 double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
 {
@@ -293,6 +294,29 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
     }
 
     return returnValue;
+}
+
+double Interpreter::InterpretSensor(FormulaTree *tree, Object *object)
+{
+	double returnValue = 0;
+
+	switch (tree->GetSensor())
+	{
+	case Sensor::COMPASS_DIRECTION:
+		returnValue = static_cast<double>(this->ReadCompass());
+		break;
+	//case Sensor::X_INCLINATION:
+	//	returnValue = static_cast<double>(this->ReadInclination(Inclination::Pitch));
+	//	break;
+	//case Sensor::Y_INCLINATION:
+	//	returnValue = static_cast<double>(this->ReadInclination(Inclination::Roll));
+	//	break;
+	default:
+		returnValue = 0;
+		break;
+	}
+
+	return returnValue;
 }
 
 bool Interpreter::TestChilds(FormulaTree *tree, Childs childs) 

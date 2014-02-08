@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "InclinationProvider.h"
+#include "PlayerException.h"
 
 using namespace Windows::UI::Core;
 using namespace Windows::Devices::Sensors;
@@ -7,7 +8,8 @@ using namespace Windows::Foundation;
 
 InclinationProvider::InclinationProvider()
 {
-	Init();
+	if (Init() != true)
+		throw new PlayerException("init inclination provider failed");
 }
 
 InclinationProvider::~InclinationProvider()
@@ -35,19 +37,19 @@ bool InclinationProvider::Init()
 
 float InclinationProvider::GetPitch()
 {
-	float retVal = m_inclinometer->GetCurrentReading()->PitchDegrees;
+	float retVal = 0;// m_inclinometer->GetCurrentReading()->PitchDegrees;
 	return retVal;
 }
 
 float InclinationProvider::GetRoll()
 {
-	float retVal = m_inclinometer->GetCurrentReading()->RollDegrees;
-		return retVal;
+	float retVal = 0;// m_inclinometer->GetCurrentReading()->RollDegrees;
+	return retVal;
 }
 
 float InclinationProvider::GetYaw()
 {
-	float retVal = m_inclinometer->GetCurrentReading()->YawDegrees;
-		return retVal;
+	float retVal = 0;// m_inclinometer->GetCurrentReading()->YawDegrees;
+	return retVal;
 }
 
