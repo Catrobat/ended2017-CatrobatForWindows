@@ -63,7 +63,13 @@ enum Function
 
 enum Sensor
 {
-    COMPASS_DIRECTION, 
+	COMPASS_DIRECTION,
+	X_ACCELERATION,
+	Y_ACCELERATION,
+	Z_ACCELERATION,
+	X_INCLINATION,
+	Y_INCLINATION,
+	LOUDNESS,
 
     NO_SENSOR
 };
@@ -85,6 +91,9 @@ public:
 
 	//returns Function if m_type is set to FUNCTION, instead NO_FUNCTION
 	Function GetFunction();
+
+	//returns Sensor if m_type is set to SENSOR, instead NO_SENSOR
+	Sensor GetSensor();
 
 private:
 	FormulaTree *m_rightChild;

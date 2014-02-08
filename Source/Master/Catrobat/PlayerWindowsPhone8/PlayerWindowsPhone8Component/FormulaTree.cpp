@@ -101,10 +101,20 @@ FormulaTree::FormulaTree(string type, string value)
 
     if (m_type == Type::SENSOR)
     {
-        if (m_value == "COMPASS_DIRECTION")
-        {
-            m_sensor = Sensor::COMPASS_DIRECTION;
-        }
+		if (m_value == "COMPASS_DIRECTION")
+			m_sensor = Sensor::COMPASS_DIRECTION;
+		else if (m_value == "X_ACCELERATION")
+			m_sensor = Sensor::X_ACCELERATION;
+		else if (m_value == "Y_ACCELERATION")
+			m_sensor = Sensor::Y_ACCELERATION;
+		else if (m_value == "Z_ACCELERATION")
+			m_sensor = Sensor::Z_ACCELERATION;
+		else if (m_value == "X_INCLINATION")
+			m_sensor = Sensor::X_INCLINATION;
+		else if (m_value == "Y_INCLINATION")
+			m_sensor = Sensor::Y_INCLINATION;
+		else if (m_value == "LOUDNESS")
+			m_sensor = Sensor::LOUDNESS;
     }
     else
     {
@@ -151,3 +161,9 @@ Function FormulaTree::GetFunction()
 {
     return this->m_function;
 }
+
+Sensor FormulaTree::GetSensor()
+{
+	return this->m_sensor;
+}
+

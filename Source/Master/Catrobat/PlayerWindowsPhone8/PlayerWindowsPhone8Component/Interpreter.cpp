@@ -3,6 +3,7 @@
 #include "FormulaTree.h"
 #include "ProjectDaemon.h"
 #include "CompassProvider.h"
+//#include "InclinationProvider.h"
 #include "string"
 #include <sstream>
 //#include <cmath>
@@ -12,7 +13,7 @@
 using namespace std;
 using namespace Windows::Devices::Sensors;
 
-Interpreter *Interpreter::__instance = NULL;
+Interpreter *Interpreter::__instance = nullptr;
 
 Interpreter *Interpreter::Instance()
 {
@@ -25,7 +26,7 @@ Interpreter::Interpreter()
 {
     m_accelerometer = Windows::Devices::Sensors::Accelerometer::GetDefault();
     m_compassProvider = new CompassProvider();
-	m_inclinationProvider = new InclinationProvider();
+	//m_inclinationProvider = ref new InclinationProvider();
 }
 
 double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
@@ -56,7 +57,7 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
     case FUNCTION:
         return InterpretFunction(tree, object);
     case SENSOR:
-        return (double)ReadCompass();
+		return InterpretSensor(tree, object);
     default:
         break;
     }
@@ -66,12 +67,12 @@ double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
 
 int Interpreter::EvaluateFormulaToInt(FormulaTree *tree, Object *object)
 {
-    return (int) (this->EvaluateFormula(tree, object));
+    return static_cast<int>(this->EvaluateFormula(tree, object));
 }
 
 float Interpreter::EvaluateFormulaToFloat(FormulaTree *tree, Object *object)
 {
-    return (float) (this->EvaluateFormula(tree, object));
+    return static_cast<float>(this->EvaluateFormula(tree, object));
 }
 
 bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object *object)
@@ -109,32 +110,32 @@ float Interpreter::ReadCompass()
     return m_compassProvider->GetDirection();
 }
 
-float Interpreter::ReadInclination(Inclination inclinationType)
-{
-	if (inclinationType == Inclination::Pitch)
-	{
-		return m_inclinationProvider->GetPitch();
-	}
-	else if (inclinationType == Inclination::Roll)
-	{
-		return m_inclinationProvider->GetRoll();
-	}
-	else
-	{
-		return m_inclinationProvider->GetYaw();
-	}
-}
+//float Interpreter::ReadInclination(Inclination inclinationType)
+//{
+//	if (inclinationType == Inclination::Pitch)
+//	{
+//		return m_inclinationProvider->GetPitch();
+//	}
+//	else if (inclinationType == Inclination::Roll)
+//	{
+//		return m_inclinationProvider->GetRoll();
+//	}
+//	else
+//	{
+//		return m_inclinationProvider->GetYaw();
+//	}
+//}
 
 double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
 {
     FormulaTree *leftChild = tree->GetLeftChild();
-    double leftValue = 0.0;
+    auto leftValue = 0.0;
     if (tree->GetLeftChild() != NULL)
         leftValue = this->EvaluateFormula(leftChild, object);
     FormulaTree *rightChild = tree->GetRightChild();
     double rightValue = this->EvaluateFormula(rightChild, object);
 
-    double returnValue = 0.0;
+    auto returnValue = 0.0;
 
 	switch (tree->GetOperator())
 	{
@@ -191,12 +192,12 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
     double returnValue = 0.0;
     FormulaTree *leftChild = tree->GetLeftChild();
     FormulaTree *rightChild = tree->GetRightChild();
-    double pi = 4.0 * std::atan(1.0);
+    auto pi = 4.0 * std::atan(1.0);
 
-    double leftValue = 0.0;
+    auto leftValue = 0.0;
     if (leftChild != NULL)
         leftValue = this->EvaluateFormula(leftChild, object);
-    double rightValue = 0.0;
+    auto rightValue = 0.0;
     if (rightChild != NULL)
         rightValue = this->EvaluateFormula(rightChild, object);
 
@@ -295,9 +296,32 @@ double Interpreter::InterpretFunction(FormulaTree *tree, Object *object)
     return returnValue;
 }
 
+double Interpreter::InterpretSensor(FormulaTree *tree, Object *object)
+{
+	double returnValue = 0;
+
+	switch (tree->GetSensor())
+	{
+	case Sensor::COMPASS_DIRECTION:
+		returnValue = static_cast<double>(this->ReadCompass());
+		break;
+	//case Sensor::X_INCLINATION:
+	//	returnValue = static_cast<double>(this->ReadInclination(Inclination::Pitch));
+	//	break;
+	//case Sensor::Y_INCLINATION:
+	//	returnValue = static_cast<double>(this->ReadInclination(Inclination::Roll));
+	//	break;
+	default:
+		returnValue = 0;
+		break;
+	}
+
+	return returnValue;
+}
+
 bool Interpreter::TestChilds(FormulaTree *tree, Childs childs) 
 {
-    bool returnValue = false;
+    auto returnValue = false;
 
     switch (childs)
     {
@@ -348,25 +372,25 @@ double Interpreter::CalculateRand(double value1, double value2)
 
     double diff = max - min;
 
-    srand (time(NULL));
-    double percentOfMaxValue = (double)rand() / RAND_MAX;
+    srand (static_cast<unsigned>(time(nullptr)));
+	double percentOfMaxValue = static_cast<double>(rand()) / RAND_MAX;
     double random_num = min + percentOfMaxValue * diff;
     return random_num;
 }
 
 double Interpreter::CalculateModulo(double dividend, double divisor)
 {
-    int integerQuotient = (int)(dividend/divisor);
+	int integerQuotient = static_cast<int>(dividend / divisor);
     if ((dividend < 0 || divisor < 0) && !(dividend < 0 && divisor < 0) && fmod(dividend, divisor) != 0)
         integerQuotient -= 1;
-    double returnValue = dividend - (double)(divisor * integerQuotient);
+	double returnValue = dividend - static_cast<double>(divisor * integerQuotient);
 
     return returnValue; 
 }
 
 double Interpreter::CalculateCosinus(double degree)
 {
-    double pi = 4.0 * std::atan(1.0);
+    auto pi = 4.0 * std::atan(1.0);
 
     if (this->CalculateModulo(degree + 90.0, 180) == 0.0)
         return 0.0;
@@ -376,11 +400,11 @@ double Interpreter::CalculateCosinus(double degree)
 
 double Interpreter::RoundDoubleToInt(double value)
 {
-    double roundedNumber;
+	auto roundedNumber = 0.0;
 
     if(value >= 0)
-        roundedNumber = (int)(value + 0.5);
+		roundedNumber = static_cast<int>(value + 0.5);
     else
-        roundedNumber = (int)(value - 0.5);
+		roundedNumber = static_cast<int>(value - 0.5);
     return roundedNumber;
 }
