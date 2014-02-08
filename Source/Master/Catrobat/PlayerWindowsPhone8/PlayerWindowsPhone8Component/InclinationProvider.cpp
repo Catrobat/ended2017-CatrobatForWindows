@@ -22,7 +22,7 @@ InclinationProvider::~InclinationProvider()
 
 bool InclinationProvider::Init()
 {
-	bool success = false;
+	auto success = false;
 	m_inclinometer = Inclinometer::GetDefault();
 
 	if (m_inclinometer != nullptr)
