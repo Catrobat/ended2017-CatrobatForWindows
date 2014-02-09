@@ -208,6 +208,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AccelerometerProvider.h" />
     <ClInclude Include="BaseException.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="BasicTimer.h" />
@@ -281,6 +282,7 @@
     <ClInclude Include="XMLParserSevereException.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AccelerometerProvider.cpp" />
     <ClCompile Include="BaseException.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Brick.cpp" />
@@ -356,9 +358,6 @@
     <ProjectReference Include="..\..\DirectXTK\DirectXTK_WindowsPhone8.vcxproj">
       <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsPhone\v$(TargetPlatformVersion)\Microsoft.Cpp.WindowsPhone.$(TargetPlatformVersion).targets" />

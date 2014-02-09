@@ -3,7 +3,8 @@
 #include <map>
 #include "Object.h"
 #include "CompassProvider.h"
-//#include "InclinationProvider.h"
+#include "InclinationProvider.h"
+#include "AccelerometerProvider.h"
 
 class FormulaTree;
 
@@ -38,12 +39,12 @@ public:
 
     void ReadAcceleration();
     float ReadCompass();
-	//float ReadInclination(Inclination inclinationType);
+	float ReadInclination(Inclination inclinationType);
 
 private:
     // Sensors
-    Windows::Devices::Sensors::Accelerometer^ m_accelerometer;
-    Windows::Devices::Sensors::AccelerometerReading^ m_accReading;
+    //Windows::Devices::Sensors::Accelerometer^ m_accelerometer;
+    //Windows::Devices::Sensors::AccelerometerReading^ m_accReading;
 
     // HelperFunctions
     double InterpretOperator(FormulaTree *tree, Object *object);
@@ -58,5 +59,6 @@ private:
     double RoundDoubleToInt(double value);
 
     CompassProvider* m_compassProvider;
-	//InclinationProvider^ m_inclinationProvider;
+	InclinationProvider^ m_inclinationProvider;
+	AccelerometerProvider* m_accelerometerProvider;
 };

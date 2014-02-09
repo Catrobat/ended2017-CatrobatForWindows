@@ -3,7 +3,6 @@
 #include "FormulaTree.h"
 #include "ProjectDaemon.h"
 #include "CompassProvider.h"
-//#include "InclinationProvider.h"
 #include "string"
 #include <sstream>
 //#include <cmath>
@@ -24,9 +23,9 @@ Interpreter *Interpreter::Instance()
 
 Interpreter::Interpreter()
 {
-    m_accelerometer = Windows::Devices::Sensors::Accelerometer::GetDefault();
+	m_accelerometerProvider = new AccelerometerProvider();
     m_compassProvider = new CompassProvider();
-	//m_inclinationProvider = ref new InclinationProvider();
+	m_inclinationProvider = ref new InclinationProvider();
 }
 
 double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
@@ -85,46 +84,46 @@ bool Interpreter::EvaluateFormulaToBool(FormulaTree *tree, Object *object)
         return false;
 }
 
-void Interpreter::ReadAcceleration()
-{
-    // Reading Accelerometer Data
-    if (m_accelerometer != nullptr)
-    {
-        try
-        {
-            m_accReading = m_accelerometer->GetCurrentReading();
-            Platform::String ^acceleration = L"Acceleration: " + "X: " + m_accReading->AccelerationX + " Y: " + m_accReading->AccelerationY + " Z: " + m_accReading->AccelerationZ;
-        }
-        catch(Platform::Exception^ e)
-        {
-            // there is a bug tracking this issue already
-            // we need to remove this try\catch once the bug # 158858 hits our branch
-            // For now, to make this App work, catching the exception
-            // The reverting is tracked by WP8 # 159660
-        }
-    }
-}
+//void Interpreter::ReadAcceleration()
+//{
+//    // Reading Accelerometer Data
+//    if (m_accelerometer != nullptr)
+//    {
+//        try
+//        {
+//            m_accReading = m_accelerometer->GetCurrentReading();
+//            Platform::String ^acceleration = L"Acceleration: " + "X: " + m_accReading->AccelerationX + " Y: " + m_accReading->AccelerationY + " Z: " + m_accReading->AccelerationZ;
+//        }
+//        catch(Platform::Exception^ e)
+//        {
+//            // there is a bug tracking this issue already
+//            // we need to remove this try\catch once the bug # 158858 hits our branch
+//            // For now, to make this App work, catching the exception
+//            // The reverting is tracked by WP8 # 159660
+//        }
+//    }
+//}
 
 float Interpreter::ReadCompass()
 {
     return m_compassProvider->GetDirection();
 }
 
-//float Interpreter::ReadInclination(Inclination inclinationType)
-//{
-//	if (inclinationType == Inclination::Pitch)
-//	{
-//		return m_inclinationProvider->GetPitch();
-//	}
-//	else if (inclinationType == Inclination::Roll)
-//	{
-//		return m_inclinationProvider->GetRoll();
-//	}
-//	else
-//	{
-//		return m_inclinationProvider->GetYaw();
-//	}
-//}
+float Interpreter::ReadInclination(Inclination inclinationType)
+{
+	if (inclinationType == Inclination::Pitch)
+	{
+		return m_inclinationProvider->GetPitch();
+	}
+	else if (inclinationType == Inclination::Roll)
+	{
+		return m_inclinationProvider->GetRoll();
+	}
+	else
+	{
+		return m_inclinationProvider->GetYaw();
+	}
+}
 
 double Interpreter::InterpretOperator(FormulaTree *tree, Object *object)
 {
@@ -305,12 +304,21 @@ double Interpreter::InterpretSensor(FormulaTree *tree, Object *object)
 	case Sensor::COMPASS_DIRECTION:
 		returnValue = static_cast<double>(this->ReadCompass());
 		break;
-	//case Sensor::X_INCLINATION:
-	//	returnValue = static_cast<double>(this->ReadInclination(Inclination::Pitch));
-	//	break;
-	//case Sensor::Y_INCLINATION:
-	//	returnValue = static_cast<double>(this->ReadInclination(Inclination::Roll));
-	//	break;
+	case Sensor::X_INCLINATION:
+		returnValue = static_cast<double>(m_inclinationProvider->GetPitch());
+		break;
+	case Sensor::Y_INCLINATION:
+		returnValue = static_cast<double>(m_inclinationProvider->GetRoll());
+		break;
+	case Sensor::X_ACCELERATION:
+		returnValue = m_accelerometerProvider->GetX();
+		break;
+	case Sensor::Y_ACCELERATION:
+		returnValue = m_accelerometerProvider->GetY();
+		break;
+	case Sensor::Z_ACCELERATION:
+		returnValue = m_accelerometerProvider->GetZ();
+		break;
 	default:
 		returnValue = 0;
 		break;

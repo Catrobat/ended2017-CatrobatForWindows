@@ -202,6 +202,9 @@
     <ClCompile Include="CompassProvider.cpp">
       <Filter>Formula</Filter>
     </ClCompile>
+    <ClCompile Include="AccelerometerProvider.cpp">
+      <Filter>Formula</Filter>
+    </ClCompile>
     <ClCompile Include="InclinationProvider.cpp">
       <Filter>Formula</Filter>
     </ClCompile>
@@ -417,6 +420,9 @@
     <ClInclude Include="CompassProvider.h">
       <Filter>Formula</Filter>
     </ClInclude>
+    <ClInclude Include="AccelerometerProvider.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
     <ClInclude Include="InclinationProvider.h">
       <Filter>Formula</Filter>
     </ClInclude>
@@ -470,8 +476,5 @@
     <Filter Include="Constants">
       <UniqueIdentifier>{ce7b0719-c9ad-4ada-af45-01f6a36733a3}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

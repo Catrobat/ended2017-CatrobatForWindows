@@ -27,8 +27,6 @@ bool InclinationProvider::Init()
 
 	if (m_inclinometer != nullptr)
 	{
-		uint32 minReportInterval = m_inclinometer->MinimumReportInterval;
-		m_inclinometer->ReportInterval = minReportInterval > 16 ? minReportInterval : 16; //TODO: introduce constant...
 		success = true;
 	}
 
@@ -37,19 +35,19 @@ bool InclinationProvider::Init()
 
 float InclinationProvider::GetPitch()
 {
-	float retVal = 0;// m_inclinometer->GetCurrentReading()->PitchDegrees;
+	float retVal = m_inclinometer->GetCurrentReading()->PitchDegrees;
 	return retVal;
 }
 
 float InclinationProvider::GetRoll()
 {
-	float retVal = 0;// m_inclinometer->GetCurrentReading()->RollDegrees;
+	float retVal = m_inclinometer->GetCurrentReading()->RollDegrees;
 	return retVal;
 }
 
 float InclinationProvider::GetYaw()
 {
-	float retVal = 0;// m_inclinometer->GetCurrentReading()->YawDegrees;
+	float retVal = m_inclinometer->GetCurrentReading()->YawDegrees;
 	return retVal;
 }
 
