@@ -211,6 +211,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\AccelerometerProvider.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseException.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseObject.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BasicTimer.h" />
@@ -241,6 +242,7 @@
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Helper.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\HideBrick.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\IfBrick.h" />
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\InclinationProvider.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Interpreter.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\lodepng.h" />
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\lodepng_util.h" />
@@ -284,6 +286,7 @@
     <ClInclude Include="TestHelper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\AccelerometerProvider.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseException.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\BaseObject.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Brick.cpp" />
@@ -311,6 +314,7 @@
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Helper.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\HideBrick.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\IfBrick.cpp" />
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\InclinationProvider.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\Interpreter.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\lodepng.cpp" />
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\lodepng_util.cpp" />

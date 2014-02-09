@@ -266,6 +266,12 @@
     <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\CompassProvider.cpp">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\AccelerometerProvider.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\InclinationProvider.cpp">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -473,6 +479,12 @@
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClInclude>
     <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\CompassProvider.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\AccelerometerProvider.h">
+      <Filter>PlayerWindowsPhone8Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\InclinationProvider.h">
       <Filter>PlayerWindowsPhone8Files</Filter>
     </ClInclude>
   </ItemGroup>
