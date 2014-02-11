@@ -186,7 +186,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Catrobat.Player.Component\PlayerWindowsPhone8Component.vcxproj">
+    <ProjectReference Include="..\Catrobat.Player.Component\Catrobat.Player.Component.vcxproj">
       <Project>{A1D92942-96B3-455F-BDCC-5D32214804B6}</Project>
       <Name>Catrobat.Player.Component</Name>
     </ProjectReference>

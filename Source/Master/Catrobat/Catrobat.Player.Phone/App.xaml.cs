@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace PhoneDirect3DXamlAppInterop
+namespace Catrobat.Player.Phone
 {
     public partial class App : Application
     {

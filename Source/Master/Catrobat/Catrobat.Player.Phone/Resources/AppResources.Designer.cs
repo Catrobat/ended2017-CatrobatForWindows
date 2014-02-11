@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PhoneDirect3DXamlAppInterop.Resources
+namespace Catrobat.Player.Phone.Resources
 {
     using System;
 
@@ -45,7 +45,7 @@ namespace PhoneDirect3DXamlAppInterop.Resources
             {
                 if (object.ReferenceEquals(resourceMan, null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PhoneDirect3DXamlAppInterop.Resources.AppResources", typeof(AppResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Catrobat.Player.Phone.Resources.AppResources", typeof(AppResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{60c5d6b8-9b12-458f-b1a8-7150f7b396a4}" Title="PhoneDirect3DXamlAppInterop" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="PhoneDirect3DXamlAppInterop author" Description="Sample description" Publisher="PhoneDirect3DXamlAppInterop" PublisherID="{c36d7fb9-e40a-4295-8fb6-7121d0028d04}">
+  <App xmlns="" ProductID="{60c5d6b8-9b12-458f-b1a8-7150f7b396a4}" Title="Catrobat.Player.Phone" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="Catrobat.Player.Phone author" Description="Sample description" Publisher="Catrobat.Player.Phone" PublisherID="{c36d7fb9-e40a-4295-8fb6-7121d0028d04}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING"/>
@@ -19,7 +19,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>PhoneDirect3DXamlAppInterop</Title>
+          <Title>Catrobat.Player.Phone</Title>
           <BackContent></BackContent>
           <BackBackgroundImageURI></BackBackgroundImageURI>
           <BackTitle></BackTitle>

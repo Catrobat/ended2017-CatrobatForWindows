@@ -1,6 +1,6 @@
-﻿using PhoneDirect3DXamlAppInterop.Resources;
+﻿using Catrobat.Player.Phone.Resources;
 
-namespace PhoneDirect3DXamlAppInterop
+namespace Catrobat.Player.Phone
 {
     /// <summary>
     /// Provides access to string resources.

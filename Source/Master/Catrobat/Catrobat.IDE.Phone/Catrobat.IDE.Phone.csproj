@@ -846,7 +846,7 @@
       <Project>{39B2B796-72DF-4619-B6BA-8C98D809E5E6}</Project>
       <Name>Catrobat.Paint.Phone</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Catrobat.Player.Component\PlayerWindowsPhone8Component.vcxproj">
+    <ProjectReference Include="..\Catrobat.Player.Component\Catrobat.Player.Component.vcxproj">
       <Project>{A1D92942-96B3-455F-BDCC-5D32214804B6}</Project>
       <Name>Catrobat.Player.Component</Name>
     </ProjectReference>
