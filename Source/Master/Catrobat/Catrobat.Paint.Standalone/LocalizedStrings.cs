@@ -1,6 +1,6 @@
-﻿using Catrobat.PaintStandAloneApp.Resources;
+﻿using Catrobat.Paint.Standalone.Resources;
 
-namespace Catrobat.PaintStandAloneApp
+namespace Catrobat.Paint.Standalone
 {
     /// <summary>
     /// Provides access to string resources.

@@ -4,11 +4,11 @@ using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
-using Catrobat.PaintStandAloneApp.Resources;
+using Catrobat.Paint.Standalone.Resources;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace PaintStandAloneApp
+namespace Catrobat.Paint.Standalone
 {
     public partial class App : Application
     {

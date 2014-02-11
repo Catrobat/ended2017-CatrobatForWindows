@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 using Catrobat.Paint;
 using Microsoft.Phone.Controls;
 
-namespace Catrobat.PaintStandAloneApp
+namespace Catrobat.Paint.Standalone
 {
     public partial class MainPage : PhoneApplicationPage
     {

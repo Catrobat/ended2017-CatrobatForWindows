@@ -1,6 +1,6 @@
-﻿using TestsPaint.Resources;
+﻿using Catrobat.Paint.Tests.Resources;
 
-namespace TestsPaint
+namespace Catrobat.Paint.Tests
 {
     /// <summary>
     /// Provides access to string resources.

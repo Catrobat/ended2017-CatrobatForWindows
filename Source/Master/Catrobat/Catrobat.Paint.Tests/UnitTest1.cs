@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
-namespace TestsPaint
+namespace Catrobat.Paint.Tests
 {
     [TestClass]
     public class UnitTest1

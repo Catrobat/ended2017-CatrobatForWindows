@@ -2,7 +2,7 @@
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US"/>
-  <App xmlns="" ProductID="{6b88605d-0998-477b-ac57-5688e60169c9}" Title="TestsPaint" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="TestsPaint author" Description="Sample description" Publisher="TestsPaint" PublisherID="{91681842-fcdc-4557-aa44-52075c2547d0}">
+  <App xmlns="" ProductID="{6b88605d-0998-477b-ac57-5688e60169c9}" Title="Catrobat.Paint.Tests" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="TestsPaint author" Description="Sample description" Publisher="TestsPaint" PublisherID="{91681842-fcdc-4557-aa44-52075c2547d0}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING"/>

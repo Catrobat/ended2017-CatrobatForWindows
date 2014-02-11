@@ -6,9 +6,9 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using TestsPaint.Resources;
+using Catrobat.Paint.Tests.Resources;
 
-namespace TestsPaint
+namespace Catrobat.Paint.Tests
 {
     public partial class App : Application
     {
