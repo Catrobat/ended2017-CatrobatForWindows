@@ -842,13 +842,13 @@
       <Project>{BCA5086E-499A-4507-AA9B-A55D7E534EF7}</Project>
       <Name>Catrobat.IDE.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Catrobat.Player.Component\PlayerWindowsPhone8Component.vcxproj">
+      <Project>{A1D92942-96B3-455F-BDCC-5D32214804B6}</Project>
+      <Name>Catrobat.Player.Component</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Paint\Paint.csproj">
       <Project>{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}</Project>
       <Name>Paint</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlayerWindowsPhone8Component.vcxproj">
-      <Project>{A1D92942-96B3-455F-BDCC-5D32214804B6}</Project>
-      <Name>PlayerWindowsPhone8Component</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
