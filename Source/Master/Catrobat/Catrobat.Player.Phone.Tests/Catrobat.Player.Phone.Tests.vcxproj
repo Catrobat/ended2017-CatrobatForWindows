@@ -9,6 +9,14 @@
       <Configuration>Debug</Configuration>
       <Platform>ARM</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
@@ -99,7 +107,7 @@
       <PreprocessorDefinitions>PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\DirectXTK\Inc;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\FMOD\lib;$(VCInstallDir)UnitTest\WindowsPhone\include;$(ProjectDir);$(IntermediateOutputPath);$(ProjectDir)\..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\Catrobat.Player.DirectXToolkit\Inc;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\FMOD\lib;$(VCInstallDir)UnitTest\WindowsPhone\include;$(ProjectDir);$(IntermediateOutputPath);$(ProjectDir)\..\Catrobat.Player.Component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAsWinRT>true</CompileAsWinRT>
     </ClCompile>
     <Link>
@@ -114,11 +122,11 @@
       <PreprocessorDefinitions>PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\WindowsPhone\include;$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\Catrobat.Player.DirectXToolkit\Inc;$(ProjectDir)\..\FMOD\inc;$(ProjectDir)\..\FMOD\lib;$(VCInstallDir)UnitTest\WindowsPhone\include;$(ProjectDir);$(IntermediateOutputPath);$(ProjectDir)\..\Catrobat.Player.Component;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAsWinRT>true</CompileAsWinRT>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\WindowsPhone\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\WindowsPhone\lib;$(ProjectDir)\..\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
       <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
