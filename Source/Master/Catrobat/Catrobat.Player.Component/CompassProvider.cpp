@@ -35,6 +35,6 @@ bool CompassProvider::Init()
 
 float CompassProvider::GetDirection()
 {
-    float retVal = 360.0f -  m_compass->GetCurrentReading()->HeadingMagneticNorth;
+    float retVal = 360.0f - static_cast<float>(m_compass->GetCurrentReading()->HeadingMagneticNorth);
     return retVal;
 }
