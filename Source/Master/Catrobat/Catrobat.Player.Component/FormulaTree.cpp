@@ -103,6 +103,8 @@ FormulaTree::FormulaTree(string type, string value)
     {
 		if (m_value == "COMPASS_DIRECTION")
 			m_sensor = Sensor::COMPASS_DIRECTION;
+		else if (m_value == "COMPASSDIRECTION") //has to be removed; workaround for testing [Bug: 407]
+			m_sensor = Sensor::COMPASS_DIRECTION; //--
 		else if (m_value == "X_ACCELERATION")
 			m_sensor = Sensor::X_ACCELERATION;
 		else if (m_value == "Y_ACCELERATION")
@@ -113,8 +115,18 @@ FormulaTree::FormulaTree(string type, string value)
 			m_sensor = Sensor::X_INCLINATION;
 		else if (m_value == "Y_INCLINATION")
 			m_sensor = Sensor::Y_INCLINATION;
+		else if (m_value == "INCLINATION_X") //has to be removed; workaround for testing [Bug: 409]
+			m_sensor = Sensor::X_INCLINATION; //--
+		else if (m_value == "INCLINATION_Y") //has to be removed; workaround for testing [Bug: 409]
+			m_sensor = Sensor::Y_INCLINATION; //--
 		else if (m_value == "LOUDNESS")
 			m_sensor = Sensor::LOUDNESS;
+		else if (m_value == "ACCELERATION_X") //has to be removed; workaround for testing [Bug: 408]
+			m_sensor = Sensor::X_ACCELERATION; //--
+		else if (m_value == "ACCELERATION_Y") //has to be removed; workaround for testing [Bug: 408]
+			m_sensor = Sensor::Y_ACCELERATION; //--
+		else if (m_value == "ACCELERATION_Z") //has to be removed; workaround for testing [Bug: 408]
+			m_sensor = Sensor::Z_ACCELERATION; //--
     }
     else
     {

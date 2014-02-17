@@ -42,6 +42,7 @@ float InclinationProvider::GetPitch()
 float InclinationProvider::GetRoll()
 {
 	float retVal = m_inclinometer->GetCurrentReading()->RollDegrees;
+	retVal = -retVal; // to be compatible with android version
 	return retVal;
 }
 

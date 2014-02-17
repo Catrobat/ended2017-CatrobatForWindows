@@ -305,10 +305,10 @@ double Interpreter::InterpretSensor(FormulaTree *tree, Object *object)
 		returnValue = static_cast<double>(this->ReadCompass());
 		break;
 	case Sensor::X_INCLINATION:
-		returnValue = static_cast<double>(m_inclinationProvider->GetPitch());
+		returnValue = static_cast<double>(m_inclinationProvider->GetRoll());
 		break;
 	case Sensor::Y_INCLINATION:
-		returnValue = static_cast<double>(m_inclinationProvider->GetRoll());
+		returnValue = static_cast<double>(m_inclinationProvider->GetPitch());
 		break;
 	case Sensor::X_ACCELERATION:
 		returnValue = m_accelerometerProvider->GetX();
