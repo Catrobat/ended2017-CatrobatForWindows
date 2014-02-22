@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "InclinationProvider.h"
 #include "PlayerException.h"
-#include "Helper.h"
+#include "DeviceInformation.h"
 
 using namespace Windows::UI::Core;
 using namespace Windows::Devices::Sensors;
@@ -9,7 +9,7 @@ using namespace Windows::Foundation;
 
 InclinationProvider::InclinationProvider()
 {
-    if (Helper::IsRunningOnDevice() && Init() != true)
+    if (DeviceInformation::IsRunningOnDevice() && Init() != true)
         throw new PlayerException("init inclination provider failed");
 }
 

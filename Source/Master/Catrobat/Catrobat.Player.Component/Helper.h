@@ -10,7 +10,5 @@ public:
     static string ConvertPlatformStringToString(String^ input);
     static String^ ConvertStringToPlatformString(string input);
     static string RetrieveClassName(string input);
-    static String^ GetProcessorArchitecture(void);
-    static bool IsRunningOnDevice(void);
 };
 
