@@ -208,6 +208,9 @@
     <ClCompile Include="InclinationProvider.cpp">
       <Filter>Formula</Filter>
     </ClCompile>
+    <ClCompile Include="DeviceInformation.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -425,6 +428,9 @@
     </ClInclude>
     <ClInclude Include="InclinationProvider.h">
       <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceInformation.h">
+      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
