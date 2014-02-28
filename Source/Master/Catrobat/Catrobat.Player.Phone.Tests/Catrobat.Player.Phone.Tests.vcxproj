@@ -240,6 +240,7 @@
     <ClInclude Include="..\Catrobat.Player.Component\ContainerBrick.h" />
     <ClInclude Include="..\Catrobat.Player.Component\CostumeBrick.h" />
     <ClInclude Include="..\Catrobat.Player.Component\DDSLoader.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\DeviceInformation.h" />
     <ClInclude Include="..\Catrobat.Player.Component\Direct3DBase.h" />
     <ClInclude Include="..\Catrobat.Player.Component\Direct3DContentProvider.h" />
     <ClInclude Include="..\Catrobat.Player.Component\DirectXHelper.h" />
@@ -315,6 +316,7 @@
     <ClCompile Include="..\Catrobat.Player.Component\ContainerBrick.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\CostumeBrick.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\DDSLoader.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\DeviceInformation.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\Direct3DBase.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\Direct3DContentProvider.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\ExceptionLogger.cpp" />
