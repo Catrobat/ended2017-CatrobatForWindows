@@ -1,0 +1,1625 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+  <header>
+    <applicationBuildName/>
+    <applicationBuildNumber>0</applicationBuildNumber>
+    <applicationName>Pocket Code</applicationName>
+    <applicationVersion>0.9.4</applicationVersion>
+    <catrobatLanguageVersion>0.91</catrobatLanguageVersion>
+    <dateTimeUpload/>
+    <description>
+      I mean...
+      Seriously...
+      Everyone likes wafflez! Whoop whoop!
+    </description>
+    <deviceName>HTC One</deviceName>
+    <mediaLicense>http://developer.catrobat.org/ccbysa_v3</mediaLicense>
+    <platform>Android</platform>
+    <platformVersion>18</platformVersion>
+    <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
+    <programName>Do ya like Wafflez</programName>
+    <remixOf/>
+    <screenHeight>1920</screenHeight>
+    <screenWidth>1080</screenWidth>
+    <tags/>
+    <url>http://pocketcode.org/details/998</url>
+    <userHandle>Jonny</userHandle>
+  </header>
+  <objectList>
+    <object>
+      <lookList>
+        <look>
+          <fileName>93aaa59fe00a9376de7f501778eab07e_background2.png</fileName>
+          <name>background2</name>
+        </look>
+        <look>
+          <fileName>acc27a776230e8a90c1d2fcc6f8ef0b6_Aussehen.png</fileName>
+          <name>Aussehen</name>
+        </look>
+        <look>
+          <fileName>95e29b20768ed5a05dbfe8cfd18cd340_Aussehen.png</fileName>
+          <name>Aussehen1</name>
+        </look>
+        <look>
+          <fileName>40aff0e457ad6ce6c694b141f50661b4_all-sports-mural.jpg</fileName>
+          <name>all-sports-mural</name>
+        </look>
+      </lookList>
+      <name>Hintergrund</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[3]"/>
+            </setLookBrick>
+            <playSoundBrick>
+              <object reference="../../../../.."/>
+              <sound>
+                <fileName>1d31c75551a0ca255976425f1dc9d2f7_Do You Like Waff.wma</fileName>
+                <name>Do You Like Waff</name>
+              </sound>
+            </playSoundBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.7</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>200</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[3]"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Was.. dididi Wait to get a mouthful</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>100</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>fin</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList>
+        <sound reference="../../scriptList/startScript/brickList/playSoundBrick/sound"/>
+      </soundList>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>bacb0cf3cd9c6842f8de2201fab4f22b_costume1.png</fileName>
+          <name>costume1</name>
+        </look>
+        <look>
+          <fileName>2009fb29f0459c8a70ca744277bf9d34_costume2.png</fileName>
+          <name>costume2</name>
+        </look>
+        <look>
+          <fileName>ab79abddfa5f9d94099fdbb539b45af5_costume3.png</fileName>
+          <name>costume3</name>
+        </look>
+        <look>
+          <fileName>4703b0817cfff60ec7ad502fe279d6c1_costume4.png</fileName>
+          <name>costume4</name>
+        </look>
+        <look>
+          <fileName>2ed643b9b7abb114901e12d1a60bd691_costume5.png</fileName>
+          <name>costume5</name>
+        </look>
+        <look>
+          <fileName>4493fdb15a9d8d1e4641e068db2b4ede_costume6.png</fileName>
+          <name>costume6</name>
+        </look>
+        <look>
+          <fileName>a800cd04d047800e09cc0d0f1ce3031d_costume7.png</fileName>
+          <name>costume7</name>
+        </look>
+        <look>
+          <fileName>d26096f4d11d954532d6ee8ea10c293c_costume8.png</fileName>
+          <name>costume8</name>
+        </look>
+        <look>
+          <fileName>39234f49db5a54b0ca28d4611a71423e_costume9.png</fileName>
+          <name>costume9</name>
+        </look>
+        <look>
+          <fileName>9c861f7f317ad6a99b31f6fa1fbed9e9_costume10.png</fileName>
+          <name>costume10</name>
+        </look>
+        <look>
+          <fileName>355facc43136da712a394a73fdb16511_costume11.png</fileName>
+          <name>costume11</name>
+        </look>
+        <look>
+          <fileName>0475c37d62e8fbe0a25a533e197fba93_costume12.png</fileName>
+          <name>costume12</name>
+        </look>
+        <look>
+          <fileName>ceb3bf6e72f984179310753f5633d480_costume13.png</fileName>
+          <name>costume13</name>
+        </look>
+        <look>
+          <fileName>d0c8c4dcddcaf62b2298be517a4e3cca_costume14.png</fileName>
+          <name>costume14</name>
+        </look>
+        <look>
+          <fileName>1d526fdaf8efcf9e27f29102e3eeadb6_costume15.png</fileName>
+          <name>costume15</name>
+        </look>
+        <look>
+          <fileName>405e37fe2a492a80732ebb5556a85173_costume16.png</fileName>
+          <name>costume16</name>
+        </look>
+      </lookList>
+      <name>blueGuy</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>400</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>40</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>80</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.05</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Yeah We Like Wafflez!</broadcastMessage>
+            </broadcastBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[7]"/>
+            </setLookBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.05</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Yeah We Like Pancakes!</broadcastMessage>
+            </broadcastBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Do Ya Like Pancakes?</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[12]"/>
+            </setLookBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.0</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.05</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Yeah We Like French Toast!</broadcastMessage>
+            </broadcastBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Do Ya Like French Toast?</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.0</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.05</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Yeah We Like W2</broadcastMessage>
+            </broadcastBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Do Ya Like W2</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[7]"/>
+            </setLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.0</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.05</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Yeah We Like P2</broadcastMessage>
+            </broadcastBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Do You Like p2</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[12]"/>
+            </setLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.0</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.05</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Yeah We Like ft2</broadcastMessage>
+            </broadcastBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Do You Like ft2</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>3e9a61882fb805d5b1f2e140317f7b18_costume2.png</fileName>
+          <name>costume2</name>
+        </look>
+        <look>
+          <fileName>3b126f81f8d12e83259f5c53fd01a275_costume3.png</fileName>
+          <name>costume3</name>
+        </look>
+        <look>
+          <fileName>cfc9a630385e5931b3bcd3619f4b1bd4_costume4.png</fileName>
+          <name>costume4</name>
+        </look>
+      </lookList>
+      <name>yellowGuys</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <foreverBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick class="loopEndlessBrick">
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="foreverBrick" reference="../.."/>
+              </loopEndBrick>
+            </foreverBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.06</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <loopEndlessBrick reference="../foreverBrick/loopEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Yeah We Like Wafflez!</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.0</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Do Ya Like Pancakes?</broadcastMessage>
+            </broadcastBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Yeah We Like Wafflez!</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.0</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Do Ya Like French Toast?</broadcastMessage>
+            </broadcastBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Yeah We Like Pancakes!</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.0</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>dididi!</broadcastMessage>
+            </broadcastBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Yeah We Like French Toast!</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.0</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Do You Like p2</broadcastMessage>
+            </broadcastBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Yeah We Like W2</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.0</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Do You Like ft2</broadcastMessage>
+            </broadcastBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Yeah We Like P2</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.0</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>fin</broadcastMessage>
+            </broadcastBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Yeah We Like ft2</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>0169962f2ec09d6166251127f182ff18_costume1.png</fileName>
+          <name>costume1</name>
+        </look>
+        <look>
+          <fileName>f680a2fadaf12510c4549e84aee541fa_costume2.png</fileName>
+          <name>costume2</name>
+        </look>
+      </lookList>
+      <name>bigHead</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>300</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <repeatBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick>
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="repeatBrick" reference="../.."/>
+              </loopEndBrick>
+              <timesToRepeat>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>3.5</value>
+                </formulaTree>
+              </timesToRepeat>
+            </repeatBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <loopEndBrick reference="../repeatBrick/loopEndBrick"/>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>WAFFELZ1</broadcastMessage>
+            </broadcastBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>dididi!</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>85b9fde6046f6c3d1b00b28b1680d8b8_costume1.png</fileName>
+          <name>costume1</name>
+        </look>
+        <look>
+          <fileName>d750b143412d6faad3ededde865a853e_costume2.png</fileName>
+          <name>costume2</name>
+        </look>
+      </lookList>
+      <name>yellowGuy</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>50</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>200</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>200</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>WAFFELZ1</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.7</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Was.. dididi Wait to get a mouthful</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>0aac1802810f96f1a5b5dbab06dd18ef_costume1.png</fileName>
+          <name>costume1</name>
+        </look>
+        <look>
+          <fileName>6e819e4fb56f9fba485d1e1ccf4aca13_costume2.png</fileName>
+          <name>costume2</name>
+        </look>
+      </lookList>
+      <name>pancakes</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1200</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>300</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.2</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>WAFFELZ2</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>WAFFELZ1</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.6</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>500</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1500</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Was.. dididi Wait to get a mouthful</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>WAFFELZ3</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>2516f7f25926de89e987703a8dc8d175_costume1.png</fileName>
+          <name>costume1</name>
+        </look>
+      </lookList>
+      <name>yummiGuy</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <comeToFrontBrick>
+              <object reference="../../../../.."/>
+            </comeToFrontBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>300</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>1000</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.5</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.7</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>50</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.5</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>100</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.5</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>2000</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>WAFFELZ3</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>WAFFELZ2</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>75977da96c5a6e0412149f7b39b19d17_costume1.png</fileName>
+          <name>costume1</name>
+        </look>
+        <look>
+          <fileName>6c773b9b89aa0d129594f5d5657f736a_costume2.png</fileName>
+          <name>costume2</name>
+        </look>
+      </lookList>
+      <name>waffle</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>300</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <foreverBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick class="loopEndlessBrick">
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="foreverBrick" reference="../.."/>
+              </loopEndBrick>
+            </foreverBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.3</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <nextLookBrick>
+              <object reference="../../../../.."/>
+            </nextLookBrick>
+            <loopEndlessBrick reference="../foreverBrick/loopEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.7</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>2</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Was.. dididi Wait to get a mouthful</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>5fbb604a5942d1bca271fd586ac6a7bd_costume1.png</fileName>
+          <name>costume1</name>
+        </look>
+        <look>
+          <fileName>c9c337763feba0951f55fc3fe274f93c_costume2.png</fileName>
+          <name>costume2</name>
+        </look>
+        <look>
+          <fileName>1d6333f0d7f31df5c89619ea9431fae5_costume3.png</fileName>
+          <name>costume3</name>
+        </look>
+      </lookList>
+      <name>yum</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <placeAtBrick>
+              <object reference="../../../../.."/>
+              <xPosition>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>800</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xPosition>
+              <yPosition>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </yPosition>
+            </placeAtBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look"/>
+            </setLookBrick>
+            <setSizeToBrick>
+              <object reference="../../../../.."/>
+              <size>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>400</value>
+                </formulaTree>
+              </size>
+            </setSizeToBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+        <broadcastScript>
+          <brickList>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>2.4</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <showBrick>
+              <object reference="../../../../.."/>
+            </showBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.0</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>200</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>MINUS</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[2]"/>
+            </setLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <setLookBrick>
+              <object reference="../../../../.."/>
+              <look reference="../../../../../lookList/look[3]"/>
+            </setLookBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <hideBrick>
+              <object reference="../../../../.."/>
+            </hideBrick>
+            <broadcastBrick>
+              <object reference="../../../../.."/>
+              <broadcastMessage>Do Ya Like W2</broadcastMessage>
+            </broadcastBrick>
+          </brickList>
+          <object reference="../../.."/>
+          <receivedMessage>Was.. dididi Wait to get a mouthful</receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList/>
+    </object>
+  </objectList>
+  <variables>
+    <objectVariableList/>
+    <programVariableList/>
+  </variables>
+</program>
