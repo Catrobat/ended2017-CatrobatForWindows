@@ -245,6 +245,7 @@
     <ClInclude Include="..\Catrobat.Player.Component\Direct3DContentProvider.h" />
     <ClInclude Include="..\Catrobat.Player.Component\DirectXHelper.h" />
     <ClInclude Include="..\Catrobat.Player.Component\ExceptionLogger.h" />
+    <ClInclude Include="..\Catrobat.Player.Component\FmodMicrophoneProvider.h" />
     <ClInclude Include="..\Catrobat.Player.Component\ForeverBrick.h" />
     <ClInclude Include="..\Catrobat.Player.Component\FormulaTree.h" />
     <ClInclude Include="..\Catrobat.Player.Component\FormulaTreeException.h" />
@@ -320,6 +321,7 @@
     <ClCompile Include="..\Catrobat.Player.Component\Direct3DBase.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\Direct3DContentProvider.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\ExceptionLogger.cpp" />
+    <ClCompile Include="..\Catrobat.Player.Component\FmodMicrophoneProvider.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\ForeverBrick.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\FormulaTree.cpp" />
     <ClCompile Include="..\Catrobat.Player.Component\FormulaTreeException.cpp" />

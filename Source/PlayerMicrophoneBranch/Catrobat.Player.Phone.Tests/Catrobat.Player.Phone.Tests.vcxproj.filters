@@ -282,6 +282,9 @@
     <ClCompile Include="..\Catrobat.Player.Component\DeviceInformation.cpp">
       <Filter>Catrobat.Player.Phone - Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Catrobat.Player.Component\FmodMicrophoneProvider.cpp">
+      <Filter>Catrobat.Player.Phone - Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestHelper.h" />
@@ -506,6 +509,9 @@
       <Filter>Catrobat.Player.Phone - Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Catrobat.Player.Component\DeviceInformation.h">
+      <Filter>Catrobat.Player.Phone - Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Catrobat.Player.Component\FmodMicrophoneProvider.h">
       <Filter>Catrobat.Player.Phone - Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -214,6 +214,9 @@
     <ClCompile Include="MicrophoneProvider.cpp">
       <Filter>Formula</Filter>
     </ClCompile>
+    <ClCompile Include="FmodMicrophoneProvider.cpp">
+      <Filter>Formula</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h">
@@ -436,6 +439,9 @@
       <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="MicrophoneProvider.h">
+      <Filter>Formula</Filter>
+    </ClInclude>
+    <ClInclude Include="FmodMicrophoneProvider.h">
       <Filter>Formula</Filter>
     </ClInclude>
   </ItemGroup>
