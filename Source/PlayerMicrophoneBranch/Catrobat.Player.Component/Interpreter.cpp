@@ -26,6 +26,8 @@ Interpreter::Interpreter()
 	m_accelerometerProvider = new AccelerometerProvider();
     m_compassProvider = new CompassProvider();
 	m_inclinationProvider = ref new InclinationProvider();
+
+	m_fmodMicrophoneProvider = FmodMicrophoneProvider::Instance();
 }
 
 double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
@@ -318,6 +320,10 @@ double Interpreter::InterpretSensor(FormulaTree *tree, Object *object)
 		break;
 	case Sensor::Z_ACCELERATION:
 		returnValue = m_accelerometerProvider->GetZ();
+		break;
+	case Sensor::LOUDNESS:
+		returnValue = m_fmodMicrophoneProvider->StartRecordingFiveSeconds();
+		m_fmodMicrophoneProvider->PlayRecordedFiveSeconds();
 		break;
 	default:
 		returnValue = 0;

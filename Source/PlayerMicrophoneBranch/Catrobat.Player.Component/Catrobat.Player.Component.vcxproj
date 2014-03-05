@@ -324,6 +324,7 @@
     <ClInclude Include="BroadcastMessageSender.h" />
     <ClInclude Include="BroadcastMessageListener.h" />
     <ClInclude Include="DeviceInformation.h" />
+    <ClInclude Include="FmodMicrophoneProvider.h" />
     <ClInclude Include="ForeverBrick.h" />
     <ClInclude Include="FormulaTree.h" />
     <ClInclude Include="FormulaTreeException.h" />
@@ -398,6 +399,7 @@
     <ClCompile Include="BroadcastMessageSender.cpp" />
     <ClCompile Include="BroadcastMessageListener.cpp" />
     <ClCompile Include="DeviceInformation.cpp" />
+    <ClCompile Include="FmodMicrophoneProvider.cpp" />
     <ClCompile Include="ForeverBrick.cpp" />
     <ClCompile Include="FormulaTree.cpp" />
     <ClCompile Include="FormulaTreeException.cpp" />

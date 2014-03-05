@@ -6,6 +6,8 @@
 #include "InclinationProvider.h"
 #include "AccelerometerProvider.h"
 
+#include "FmodMicrophoneProvider.h"
+
 class FormulaTree;
 
 enum Childs {
@@ -61,4 +63,6 @@ private:
     CompassProvider* m_compassProvider;
 	InclinationProvider^ m_inclinationProvider;
 	AccelerometerProvider* m_accelerometerProvider;
+
+	FmodMicrophoneProvider* m_fmodMicrophoneProvider;
 };
