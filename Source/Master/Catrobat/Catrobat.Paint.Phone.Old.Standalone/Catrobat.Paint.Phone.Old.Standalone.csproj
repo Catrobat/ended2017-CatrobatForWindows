@@ -9,7 +9,7 @@
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Catrobat.Paint.Standalone</RootNamespace>
+    <RootNamespace>Catrobat.Paint.Phone.Old.Standalone</RootNamespace>
     <AssemblyName>Catrobat.Paint.Standalone</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
@@ -214,9 +214,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Catrobat.Paint.Phone\Catrobat.Paint.Phone.csproj">
+    <ProjectReference Include="..\Catrobat.Paint.Phone.Old\Catrobat.Paint.Phone.Old.csproj">
       <Project>{39B2B796-72DF-4619-B6BA-8C98D809E5E6}</Project>
-      <Name>Catrobat.Paint.Phone</Name>
+      <Name>Catrobat.Paint.Phone.Old</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

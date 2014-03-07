@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EB6B4FF2-8CB6-46FB-B50E-D001C863762D}"
 	ProjectSection(SolutionItems) = preProject
@@ -28,9 +28,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Catrobat.Player.Phone.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.Tests", "Catrobat.Paint.Tests\Catrobat.Paint.Tests.csproj", "{C8B2DF4B-A19C-4B91-969A-C8220D346513}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.Standalone", "Catrobat.Paint.Standalone\Catrobat.Paint.Standalone.csproj", "{D87F8BC3-FCBB-4A74-B175-9BA6554FC94F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.Phone.Old.Standalone", "Catrobat.Paint.Phone.Old.Standalone\Catrobat.Paint.Phone.Old.Standalone.csproj", "{D87F8BC3-FCBB-4A74-B175-9BA6554FC94F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.Phone", "Catrobat.Paint.Phone\Catrobat.Paint.Phone.csproj", "{39B2B796-72DF-4619-B6BA-8C98D809E5E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.Phone.Old", "Catrobat.Paint.Phone.Old\Catrobat.Paint.Phone.Old.csproj", "{39B2B796-72DF-4619-B6BA-8C98D809E5E6}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Catrobat.Player.Component", "Catrobat.Player.Component\Catrobat.Player.Component.vcxproj", "{A1D92942-96B3-455F-BDCC-5D32214804B6}"
 EndProject
@@ -73,24 +73,24 @@ Global
 		SccProjectUniqueName9 = Catrobat.Paint.Tests\\Catrobat.Paint.Tests.csproj
 		SccProjectName9 = Catrobat.Paint.Tests
 		SccLocalPath9 = Catrobat.Paint.Tests
-		SccProjectUniqueName10 = Catrobat.Paint.Standalone\\Catrobat.Paint.Standalone.csproj
-		SccProjectName10 = Catrobat.Paint.Standalone
-		SccLocalPath10 = Catrobat.Paint.Standalone
-		SccProjectUniqueName11 = Catrobat.Paint.Phone\\Catrobat.Paint.Phone.csproj
-		SccProjectName11 = Catrobat.Paint.Phone
-		SccLocalPath11 = Catrobat.Paint.Phone
-		SccProjectUniqueName12 = Catrobat.Player.Component\\Catrobat.Player.Component.vcxproj
-		SccProjectName12 = Catrobat.Player.Component
-		SccLocalPath12 = Catrobat.Player.Component
-		SccProjectUniqueName13 = Catrobat.Player.Phone\\Catrobat.Player.Phone.csproj
-		SccProjectName13 = Catrobat.Player.Phone
-		SccLocalPath13 = Catrobat.Player.Phone
-		SccProjectUniqueName14 = Catrobat.IDE.Phone.Tests\\Catrobat.IDE.Phone.Tests.csproj
-		SccProjectName14 = Catrobat.IDE.Phone.Tests
-		SccLocalPath14 = Catrobat.IDE.Phone.Tests
-		SccProjectUniqueName15 = Catrobat.Player.DirectXToolkit\\Catrobat.Player.DirectXToolkit.vcxproj
-		SccProjectName15 = Catrobat.Player.DirectXToolkit
-		SccLocalPath15 = Catrobat.Player.DirectXToolkit
+		SccProjectUniqueName10 = Catrobat.Player.Component\\Catrobat.Player.Component.vcxproj
+		SccProjectName10 = Catrobat.Player.Component
+		SccLocalPath10 = Catrobat.Player.Component
+		SccProjectUniqueName11 = Catrobat.Player.Phone\\Catrobat.Player.Phone.csproj
+		SccProjectName11 = Catrobat.Player.Phone
+		SccLocalPath11 = Catrobat.Player.Phone
+		SccProjectUniqueName12 = Catrobat.IDE.Phone.Tests\\Catrobat.IDE.Phone.Tests.csproj
+		SccProjectName12 = Catrobat.IDE.Phone.Tests
+		SccLocalPath12 = Catrobat.IDE.Phone.Tests
+		SccProjectUniqueName13 = Catrobat.Player.DirectXToolkit\\Catrobat.Player.DirectXToolkit.vcxproj
+		SccProjectName13 = Catrobat.Player.DirectXToolkit
+		SccLocalPath13 = Catrobat.Player.DirectXToolkit
+		SccProjectUniqueName14 = Catrobat.Paint.Phone.Old\\Catrobat.Paint.Phone.Old.csproj
+		SccProjectName14 = Catrobat.Paint.Phone.Old
+		SccLocalPath14 = Catrobat.Paint.Phone.Old
+		SccProjectUniqueName15 = Catrobat.Paint.Phone.Old.Standalone\\Catrobat.Paint.Phone.Old.Standalone.csproj
+		SccProjectName15 = Catrobat.Paint.Phone.Old.Standalone
+		SccLocalPath15 = Catrobat.Paint.Phone.Old.Standalone
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

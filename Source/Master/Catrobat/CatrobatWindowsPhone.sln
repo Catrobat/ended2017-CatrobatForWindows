@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.IDE.Core", "Catrob
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.IDE.Phone", "Catrobat.IDE.Phone\Catrobat.IDE.Phone.csproj", "{6AC4FF1D-1995-4F04-B91D-4644CE964368}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.Phone", "Catrobat.Paint.Phone\Catrobat.Paint.Phone.csproj", "{39B2B796-72DF-4619-B6BA-8C98D809E5E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.Phone.Old", "Catrobat.Paint.Phone.Old\Catrobat.Paint.Phone.Old.csproj", "{39B2B796-72DF-4619-B6BA-8C98D809E5E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.Standalone", "Catrobat.Paint.Standalone\Catrobat.Paint.Standalone.csproj", "{D87F8BC3-FCBB-4A74-B175-9BA6554FC94F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.Phone.Old.Standalone", "Catrobat.Paint.Phone.Old.Standalone\Catrobat.Paint.Phone.Old.Standalone.csproj", "{D87F8BC3-FCBB-4A74-B175-9BA6554FC94F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catrobat.Paint.Tests", "Catrobat.Paint.Tests\Catrobat.Paint.Tests.csproj", "{C8B2DF4B-A19C-4B91-969A-C8220D346513}"
 EndProject
@@ -47,12 +47,12 @@ Global
 		SccProjectUniqueName3 = Catrobat.IDE.Phone\\Catrobat.IDE.Phone.csproj
 		SccProjectName3 = Catrobat.IDE.Phone
 		SccLocalPath3 = Catrobat.IDE.Phone
-		SccProjectUniqueName4 = Catrobat.Paint.Phone\\Catrobat.Paint.Phone.csproj
-		SccProjectName4 = Catrobat.Paint.Phone
-		SccLocalPath4 = Catrobat.Paint.Phone
-		SccProjectUniqueName5 = Catrobat.Paint.Standalone\\Catrobat.Paint.Standalone.csproj
-		SccProjectName5 = Catrobat.Paint.Standalone
-		SccLocalPath5 = Catrobat.Paint.Standalone
+		SccProjectUniqueName4 = Catrobat.Paint.Phone.Old\\Catrobat.Paint.Phone.Old.csproj
+		SccProjectName4 = Catrobat.Paint.Phone.Old
+		SccLocalPath4 = Catrobat.Paint.Phone.Old
+		SccProjectUniqueName5 = Catrobat.Paint.Phone.Old.Standalone\\Catrobat.Paint.Phone.Old.Standalone.csproj
+		SccProjectName5 = Catrobat.Paint.Phone.Old.Standalone
+		SccLocalPath5 = Catrobat.Paint.Phone.Old.Standalone
 		SccProjectUniqueName6 = Catrobat.Paint.Tests\\Catrobat.Paint.Tests.csproj
 		SccProjectName6 = Catrobat.Paint.Tests
 		SccLocalPath6 = Catrobat.Paint.Tests
