@@ -1,12 +1,12 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="Catrobat.Paint.View.PaintingAreaView"
+    x:Class="Catrobat.Paint.Phone.Old.View.PaintingAreaView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:Catrobat.Paint.ViewModel"
+    xmlns:viewModel="clr-namespace:Catrobat.Paint.Phone.Old.ViewModel"
 
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -17,7 +17,7 @@
 
   <phone:PhoneApplicationPage.Resources>
     <ResourceDictionary>
-      <vm:ViewModelLocator x:Key="Locator" />
+      <viewModel:ViewModelLocator x:Key="Locator" />
 
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Converters/ConverterResources.xaml" />

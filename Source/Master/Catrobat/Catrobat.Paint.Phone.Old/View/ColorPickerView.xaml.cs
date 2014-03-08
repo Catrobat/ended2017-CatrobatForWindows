@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Navigation;
-using Catrobat.Paint.ViewModel;
+﻿using System.Windows.Media;
+using Catrobat.Paint.Phone.Old.ViewModel;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 
-namespace Catrobat.Paint.View
+namespace Catrobat.Paint.Phone.Old.View
 {
     public partial class ColorPickerView : PhoneApplicationPage
     {

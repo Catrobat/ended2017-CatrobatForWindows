@@ -1,12 +1,11 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Phone.Controls;
 
-namespace Catrobat.Paint.ViewModel
+namespace Catrobat.Paint.Phone.Old.ViewModel
 {
     /// <summary>
     /// This class contains properties that a View can data bind to.

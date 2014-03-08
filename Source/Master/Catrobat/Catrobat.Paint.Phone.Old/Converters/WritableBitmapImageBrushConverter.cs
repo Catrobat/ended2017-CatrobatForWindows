@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
-using Microsoft.Practices.ServiceLocation;
 using System.Windows.Media.Imaging;
 
-namespace Catrobat.Paint.Converters
+namespace Catrobat.Paint.Phone.Old.Converters
 {
     public class WritableBitmapImageBrushConverter : IValueConverter
     {

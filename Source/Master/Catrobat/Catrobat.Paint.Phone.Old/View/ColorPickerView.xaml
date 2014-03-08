@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="Catrobat.Paint.View.ColorPickerView"
+    x:Class="Catrobat.Paint.Phone.Old.View.ColorPickerView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
-    xmlns:vm="clr-namespace:Catrobat.Paint.ViewModel"
+    xmlns:viewModel="clr-namespace:Catrobat.Paint.Phone.Old.ViewModel"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -18,7 +18,7 @@
 
   <phone:PhoneApplicationPage.Resources>
     <ResourceDictionary>
-      <vm:ViewModelLocator x:Key="Locator" />
+      <viewModel:ViewModelLocator x:Key="Locator" />
       <SolidColorBrush x:Key="ColorButton11" Color="Blue"/> 
       <SolidColorBrush x:Key="ColorButton12" Color="#FF006D91"/>
       <SolidColorBrush x:Key="ColorButton13" Color="#FF16C2F5"/>

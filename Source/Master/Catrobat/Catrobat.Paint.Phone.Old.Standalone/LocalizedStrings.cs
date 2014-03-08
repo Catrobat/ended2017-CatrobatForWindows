@@ -1,6 +1,9 @@
-﻿using Catrobat.Paint.Standalone.Resources;
+﻿
 
-namespace Catrobat.Paint.Standalone
+
+using Catrobat.Paint.Phone.Old.Standalone.Resources;
+
+namespace Catrobat.Paint.Phone.Old.Standalone
 {
     /// <summary>
     /// Provides access to string resources.

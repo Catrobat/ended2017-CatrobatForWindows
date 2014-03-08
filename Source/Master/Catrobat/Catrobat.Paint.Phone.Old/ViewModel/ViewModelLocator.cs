@@ -19,16 +19,14 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Catrobat.Paint.Annotations;
-using Catrobat.Paint.Resources;
-using GalaSoft.MvvmLight;
+using Catrobat.Paint.Phone.Old.Properties;
+using Catrobat.Paint.Phone.Old.Resources;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
-namespace Catrobat.Paint.ViewModel
+namespace Catrobat.Paint.Phone.Old.ViewModel
 {
     /// <summary>
     /// This class contains static references to all the view models in the

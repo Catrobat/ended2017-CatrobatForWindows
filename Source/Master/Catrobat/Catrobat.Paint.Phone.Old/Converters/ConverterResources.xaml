@@ -3,9 +3,9 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:converters="clr-namespace:Catrobat.Paint.Converters"
-  xmlns:system="clr-namespace:System;assembly=mscorlib"
-  mc:Ignorable="d">
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:converters="clr-namespace:Catrobat.Paint.Phone.Old.Converters"
+    mc:Ignorable="d">
   
   <system:Boolean x:Key="BooleanFalse">False</system:Boolean>
   <system:Boolean x:Key="BooleanTrue">True</system:Boolean>

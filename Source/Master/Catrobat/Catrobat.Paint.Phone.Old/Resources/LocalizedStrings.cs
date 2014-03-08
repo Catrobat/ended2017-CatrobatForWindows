@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using Catrobat.Paint.Misc;
+using Catrobat.Paint.Phone.Old.Misc;
 
-namespace Catrobat.Paint.Resources
+namespace Catrobat.Paint.Phone.Old.Resources
 {
   public class LocalizedStrings : INotifyPropertyChanged
   {

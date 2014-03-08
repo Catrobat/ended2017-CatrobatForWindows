@@ -1,7 +1,6 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
-namespace Catrobat.Paint.View
+namespace Catrobat.Paint.Phone.Old.View
 {
     /// <summary>
     /// Description for MvvmView1.

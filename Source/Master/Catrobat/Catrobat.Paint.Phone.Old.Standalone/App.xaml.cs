@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
-using Catrobat.Paint.Standalone.Resources;
+using Catrobat.Paint.Phone.Old.Standalone.Resources;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace Catrobat.Paint.Standalone
+namespace Catrobat.Paint.Phone.Old.Standalone
 {
     public partial class App : Application
     {

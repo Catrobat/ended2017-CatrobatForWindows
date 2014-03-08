@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
-using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Windows;
 using System.Windows.Ink;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using Catrobat.Paint.Data;
-using Catrobat.Paint.Misc;
-using Catrobat.Paint.Resources;
-using Coding4Fun.Toolkit.Controls.Common;
+using Catrobat.Paint.Phone.Old.Data;
+using Catrobat.Paint.Phone.Old.Misc;
+using Catrobat.Paint.Phone.Old.Resources;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Phone.Controls;
 
-namespace Catrobat.Paint.ViewModel
+namespace Catrobat.Paint.Phone.Old.ViewModel
 {
     public class PaintingAreaViewModel : ViewModelBase
     {
@@ -131,7 +125,7 @@ namespace Catrobat.Paint.ViewModel
         {
             var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
             if (phoneApplicationFrame != null)
-                phoneApplicationFrame.Navigate(new Uri("/Paint;component/View/ColorPickerView.xaml", UriKind.RelativeOrAbsolute));
+                phoneApplicationFrame.Navigate(new Uri("/Catrobat.Paint.Phone.Old;component/View/ColorPickerView.xaml", UriKind.RelativeOrAbsolute));
         }
 
         public ICommand SaveCommand { get; private set; }

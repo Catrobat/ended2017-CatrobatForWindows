@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 
-namespace Catrobat.Paint
+namespace Catrobat.Paint.Phone.Old
 {
     public static class PaintLauncher
     {
@@ -17,7 +12,7 @@ namespace Catrobat.Paint
         public static void Launche(PaintLauncherTask task)
         {
             Task = task;
-            ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri("/Paint;component/View/PaintingAreaView.xaml", UriKind.RelativeOrAbsolute));
+            ((PhoneApplicationFrame)Application.Current.RootVisual).Navigate(new Uri("/Catrobat.Paint.Phone.Old;component/View/PaintingAreaView.xaml", UriKind.RelativeOrAbsolute));
         }
     }
 

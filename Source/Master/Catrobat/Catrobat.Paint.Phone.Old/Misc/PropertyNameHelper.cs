@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Catrobat.Paint.Misc
+namespace Catrobat.Paint.Phone.Old.Misc
 {
     public class PropertyNameHelper
     {

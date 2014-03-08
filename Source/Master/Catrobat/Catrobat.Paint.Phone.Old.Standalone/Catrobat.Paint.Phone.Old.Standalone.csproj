@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Catrobat.Paint.Phone.Old.Standalone</RootNamespace>
-    <AssemblyName>Catrobat.Paint.Standalone</AssemblyName>
+    <AssemblyName>Catrobat.Paint.Phone.Old.Standalone</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
@@ -18,9 +18,9 @@
     <SupportedCultures>en%3bde</SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>Catrobat.Paint.Standalone_Debug_x86.xap</XapFilename>
+    <XapFilename>Catrobat.Paint.Phone.Old.Standalone_Debug_x86.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>PaintStandAloneApp.App</SilverlightAppEntry>
+    <SilverlightAppEntry>Catrobat.Paint.Phone.Old.Standalone.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
