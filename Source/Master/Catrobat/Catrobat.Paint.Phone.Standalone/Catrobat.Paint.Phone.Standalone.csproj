@@ -144,6 +144,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\TestImage.png" />
+    <Content Include="ic_launcher.png" />
+    <Content Include="ic_launcher_tile.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.de.resx" />

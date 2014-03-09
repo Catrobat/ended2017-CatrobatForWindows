@@ -4,8 +4,8 @@
   <Languages xmlns="">
     <Language code="de" />
   </Languages>
-  <App xmlns="" ProductID="{db78523a-c16e-44dc-881a-3eae94d0ae91}" Title="Catrobat.Paint.Phone.Standalone" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Catrobat.Paint.Phone.Standalone author" Description="Sample description" Publisher="Catrobat.Paint.Phone.Standalone" PublisherID="{a2266028-3be9-4ab8-95fa-7576baff6cdf}">
-    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
+  <App xmlns="" ProductID="{db78523a-c16e-44dc-881a-3eae94d0ae91}" Title="Pocket Paint" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Catrobat.Paint.Phone.Standalone author" Description="Sample description" Publisher="Catrobat.Paint.Phone.Standalone" PublisherID="{a2266028-3be9-4ab8-95fa-7576baff6cdf}">
+    <IconPath IsRelative="true" IsResource="false">ic_launcher.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
@@ -19,15 +19,19 @@
     <Tokens>
       <PrimaryToken TokenID="Catrobat.Paint.Phone.StandaloneToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">ic_launcher_tile.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>Catrobat.Paint.Phone.Standalone</Title>
-          <BackContent></BackContent>
-          <BackBackgroundImageURI></BackBackgroundImageURI>
-          <BackTitle></BackTitle>
-          <DeviceLockImageURI></DeviceLockImageURI>
-          <HasLarge></HasLarge>
+          <BackgroundImageURI IsRelative="true" IsResource="false">ic_launcher_tile.png</BackgroundImageURI>
+          <Title>Pocket Paint</Title>
+          <BackContent>
+          </BackContent>
+          <BackBackgroundImageURI>
+          </BackBackgroundImageURI>
+          <BackTitle>
+          </BackTitle>
+          <DeviceLockImageURI>
+          </DeviceLockImageURI>
+          <HasLarge>False</HasLarge>
         </TemplateFlip>
       </PrimaryToken>
     </Tokens>
