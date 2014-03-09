@@ -99,7 +99,7 @@ namespace Catrobat.Paint.Phone.View
 
         private void BtnTools_OnClick(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/ToolPickerView.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Catrobat.Paint.Phone;component/View/ToolPickerView.xaml", UriKind.RelativeOrAbsolute));
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

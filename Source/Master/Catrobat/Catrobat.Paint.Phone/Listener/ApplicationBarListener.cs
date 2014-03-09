@@ -22,7 +22,7 @@ namespace Catrobat.Paint.Phone.Listener
         {
             var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
             if (phoneApplicationFrame != null)
-                phoneApplicationFrame.Navigate(new Uri("/ColorPickerView.xaml", UriKind.Relative));
+                phoneApplicationFrame.Navigate(new Uri("/Catrobat.Paint.Phone;component/View/ColorPickerView.xaml", UriKind.RelativeOrAbsolute));
         }
 
  
@@ -37,7 +37,7 @@ namespace Catrobat.Paint.Phone.Listener
         {
             var phoneApplicationFrame = Application.Current.RootVisual as PhoneApplicationFrame;
             if (phoneApplicationFrame != null)
-                phoneApplicationFrame.Navigate(new Uri("/ColorPickerView.xaml", UriKind.Relative));
+                phoneApplicationFrame.Navigate(new Uri("/Catrobat.Paint.Phone;component/View/ColorPickerView.xaml", UriKind.RelativeOrAbsolute));
         }
 
         public void BtnMoveScreen_OnClick(object sender, EventArgs e)
