@@ -20,7 +20,7 @@ namespace Catrobat.Paint.Phone.View
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Brush);
                     NavigationService.GoBack();
                     break;
-                case "Cursorx":
+                case "Cursor":
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Cursor);
                     NavigationService.GoBack();
                     break;
