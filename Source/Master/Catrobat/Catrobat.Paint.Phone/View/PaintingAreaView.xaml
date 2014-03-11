@@ -84,11 +84,20 @@
                 <Grid.Background>
                     <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None" />
                 </Grid.Background>
-                
+
                 <Canvas x:Name="PaintingAreaCanvasUnderlaying"  Background="Transparent"/>
-                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" />               
+
+
             </Grid>
-            <Slider x:Name="SliderThickness" Background="Red" Maximum="50" Minimum="1" Visibility="Collapsed" Margin="0,490,0,0"/>
+            <Grid x:Name="SliderThicknessGrid" Background="Transparent" Visibility="Visible">
+                <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" >
+                    <Border BorderBrush="Black" BorderThickness="1" Height="100" Canvas.Top="500" Canvas.Left="0"  Background="White" Width="450"/>
+                </Canvas>
+                <Slider x:Name="SliderThickness" Background="Red" Maximum="50" Minimum="1" Margin="0,490,0,18"/>
+                <RadioButton x:Name="RoundRadioButton" Content="Round" HorizontalAlignment="Left" Margin="23,520,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" IsChecked="true" Click="RoundRadioButon_OnClick"/>
+                <RadioButton x:Name="SquareRadioButton" Content="Square" HorizontalAlignment="Left" Margin="162,520,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="SquareRadioButon_OnClick"/>
+                <RadioButton x:Name="TriangleRadioButton" Content="Triangle" HorizontalAlignment="Left" Margin="301,520,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="TriangleRadioButon_OnClick"/>
+            </Grid>
         </Grid>
 
         <Grid x:Name="SpinnerGrid" Grid.Row="0" Visibility="Collapsed"  Grid.RowSpan="2"  Margin="12,12,12,12" Background="#FFB6B6B6" Opacity="0.7">

@@ -7,6 +7,7 @@ using Catrobat.Paint.Phone.Command;
 using Catrobat.Paint.Phone.Ui;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.Windows.Media;
 
 namespace Catrobat.Paint.Phone.View
 {
@@ -64,9 +65,13 @@ namespace Catrobat.Paint.Phone.View
 
         private void BtnThickness_OnClick(object sender, EventArgs e)
         {
-            SliderThickness.Visibility = SliderThickness.Visibility == Visibility.Collapsed
+            SliderThicknessGrid.Visibility = SliderThicknessGrid.Visibility == Visibility.Collapsed
                 ? Visibility.Visible
                 : Visibility.Collapsed;
+
+            //SliderThickness.Visibility = SliderThickness.Visibility == Visibility.Collapsed
+            //    ? Visibility.Visible
+            //    : Visibility.Collapsed;
         }
 
         private void ApplicationBarMenuItem_OnClick(object sender, EventArgs e)
@@ -106,6 +111,21 @@ namespace Catrobat.Paint.Phone.View
         {
             base.OnNavigatedFrom(e);
             PaintingAreaCanvas.CaptureMouse();
+        }
+
+        private void TriangleRadioButon_OnClick(object sender, EventArgs e)
+        {
+            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Triangle;
+        }
+
+        public void RoundRadioButon_OnClick(object sender, EventArgs e)
+        {
+            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Round;
+        }
+
+        public void SquareRadioButon_OnClick(object sender, EventArgs e)
+        {
+            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Square;
         }
 
         // TODO defining this handler solves issue that first tap after toolpicker page was open is not recognized by 
