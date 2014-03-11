@@ -31,9 +31,12 @@ namespace Catrobat.Paint.Phone.View
             PaintingAreaCheckeredGrid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
             PaintingAreaCheckeredGrid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
             PaintingAreaCheckeredGrid.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
-            foreach (ApplicationBarIconButton btn in ApplicationBar.Buttons.Cast<ApplicationBarIconButton>().Where(btn => btn.Text.Contains("color")))
+            foreach (ApplicationBarIconButton btn in ApplicationBar.Buttons)
             {
-                btn.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
+                if (btn.Text.Contains("color"))
+                {
+                    btn.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;                    
+                }
             }
 
             SliderThickness.ValueChanged +=
@@ -44,6 +47,11 @@ namespace Catrobat.Paint.Phone.View
             BackKeyPress += OnBackKeyPressed;
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
+        }
+
+        private void ChangeIconBtnColor()
+        {
+            
         }
 
         // Sample code for building a localized ApplicationBar
@@ -69,9 +77,13 @@ namespace Catrobat.Paint.Phone.View
                 ? Visibility.Visible
                 : Visibility.Collapsed;
 
-            //SliderThickness.Visibility = SliderThickness.Visibility == Visibility.Collapsed
-            //    ? Visibility.Visible
-            //    : Visibility.Collapsed;
+            foreach (var child in SliderThicknessGrid.Children)
+            {
+                child.Visibility = SliderThicknessGrid.Visibility;
+            }
+
+            //ApplicationBar = (IApplicationBar)this.Resources["bar2"];
+             
         }
 
         private void ApplicationBarMenuItem_OnClick(object sender, EventArgs e)
