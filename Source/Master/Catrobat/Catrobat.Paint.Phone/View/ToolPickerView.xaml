@@ -83,7 +83,7 @@
                     <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_flip_horizontal.png" Stretch="None" AlignmentX="Left"></ImageBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="Move" IsEnabled="false" Content="Bewegen" Click="Button_OnClick" HorizontalContentAlignment="Left" FontSize="20" Padding="45,0, 0, 0" HorizontalAlignment="Left" Margin="228,372,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Width="225" Grid.Row="6" Grid.Column="2">
+            <Button x:Name="Move" IsEnabled="true" Content="Bewegen" Click="Button_OnClick" HorizontalContentAlignment="Left" FontSize="20" Padding="45,0, 0, 0" HorizontalAlignment="Left" Margin="228,372,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Width="225" Grid.Row="6" Grid.Column="2">
                 <Button.Background>
                     <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_move.png" Stretch="None" AlignmentX="Left"></ImageBrush>
                 </Button.Background>

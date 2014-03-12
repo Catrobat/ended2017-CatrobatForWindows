@@ -7,6 +7,7 @@ using Catrobat.Paint.Phone.Command;
 using Catrobat.Paint.Phone.Ui;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.Windows.Media;
 
 namespace Catrobat.Paint.Phone.View
 {
@@ -30,9 +31,12 @@ namespace Catrobat.Paint.Phone.View
             PaintingAreaCheckeredGrid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
             PaintingAreaCheckeredGrid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
             PaintingAreaCheckeredGrid.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
-            foreach (ApplicationBarIconButton btn in ApplicationBar.Buttons.Cast<ApplicationBarIconButton>().Where(btn => btn.Text.Contains("color")))
+            foreach (ApplicationBarIconButton btn in ApplicationBar.Buttons)
             {
-                btn.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
+                if (btn.Text.Contains("color"))
+                {
+                    btn.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;                    
+                }
             }
 
             SliderThickness.ValueChanged +=
@@ -43,6 +47,11 @@ namespace Catrobat.Paint.Phone.View
             BackKeyPress += OnBackKeyPressed;
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
+        }
+
+        private void ChangeIconBtnColor()
+        {
+            
         }
 
         // Sample code for building a localized ApplicationBar
@@ -64,9 +73,17 @@ namespace Catrobat.Paint.Phone.View
 
         private void BtnThickness_OnClick(object sender, EventArgs e)
         {
-            SliderThickness.Visibility = SliderThickness.Visibility == Visibility.Collapsed
+            SliderThicknessGrid.Visibility = SliderThicknessGrid.Visibility == Visibility.Collapsed
                 ? Visibility.Visible
                 : Visibility.Collapsed;
+
+            foreach (var child in SliderThicknessGrid.Children)
+            {
+                child.Visibility = SliderThicknessGrid.Visibility;
+            }
+
+            //ApplicationBar = (IApplicationBar)this.Resources["bar2"];
+             
         }
 
         private void ApplicationBarMenuItem_OnClick(object sender, EventArgs e)
@@ -106,6 +123,21 @@ namespace Catrobat.Paint.Phone.View
         {
             base.OnNavigatedFrom(e);
             PaintingAreaCanvas.CaptureMouse();
+        }
+
+        private void TriangleRadioButon_OnClick(object sender, EventArgs e)
+        {
+            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Triangle;
+        }
+
+        public void RoundRadioButon_OnClick(object sender, EventArgs e)
+        {
+            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Round;
+        }
+
+        public void SquareRadioButon_OnClick(object sender, EventArgs e)
+        {
+            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Square;
         }
 
         // TODO defining this handler solves issue that first tap after toolpicker page was open is not recognized by 
