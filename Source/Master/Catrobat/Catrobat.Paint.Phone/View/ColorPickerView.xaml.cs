@@ -15,6 +15,22 @@ namespace Catrobat.Paint.Phone.View
             InitializeComponent();
             SelectedColorRectangle.Fill = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
             PocketPaintApplication.GetInstance().PaintData.ColorChanged += PaintDataOnColorChanged;
+
+            if (PocketPaintApplication.GetInstance().PaintData.ColorSelected != null)
+            {
+                var selected_color = PocketPaintApplication.GetInstance().PaintData.ColorSelected;
+                if (selected_color.Color == Colors.White || selected_color.Color == Color.FromArgb(255, 173, 216, 230) ||
+                selected_color.Color == Color.FromArgb(255, 255, 255, 0) || selected_color.Color == Color.FromArgb(255, 255, 173, 251) ||
+                selected_color.Color == Color.FromArgb(255, 196, 169, 169) || selected_color.Color == Color.FromArgb(255, 138, 234, 57))
+                {
+                    BtnSelectedColor.Foreground = new SolidColorBrush(Colors.Black);
+                }
+                else
+                {
+                    BtnSelectedColor.Foreground = new SolidColorBrush(Colors.White);
+                }
+            }
+            
         }
 
         private void PaintDataOnColorChanged(SolidColorBrush color)
@@ -23,12 +39,14 @@ namespace Catrobat.Paint.Phone.View
             if (color.Color == Colors.White || color.Color == Color.FromArgb(255, 173, 216, 230) ||
                 color.Color == Color.FromArgb(255, 255, 255, 0) || color.Color == Color.FromArgb(255, 255, 173, 251) ||
                 color.Color == Color.FromArgb(255, 196, 169, 169) || color.Color == Color.FromArgb(255, 138, 234, 57))
-
+            {
                 BtnSelectedColor.Foreground = new SolidColorBrush(Colors.Black);
+            }
             else
             {
                 BtnSelectedColor.Foreground = new SolidColorBrush(Colors.White);
             }
+
             if (color.Color == Colors.Transparent)
             {
                 BtnSelectedColor.Background  = new ImageBrush
@@ -36,7 +54,7 @@ namespace Catrobat.Paint.Phone.View
                     ImageSource = new BitmapImage(new Uri("Assets/checkeredbgWXGA.png", UriKind.Relative))
                 };
  
-                BtnSelectedColor.Foreground = new SolidColorBrush(Colors.Black);
+                BtnSelectedColor.Foreground = new SolidColorBrush(Colors.White);
             }
             else
             {
@@ -60,7 +78,6 @@ namespace Catrobat.Paint.Phone.View
 
             }
             PocketPaintApplication.GetInstance().PaintData.ColorSelected = colorBrush;
-            
 
         }
 
@@ -68,7 +85,6 @@ namespace Catrobat.Paint.Phone.View
         {
             var colorBrush = new SolidColorBrush(color);
             PocketPaintApplication.GetInstance().PaintData.ColorSelected = colorBrush;
-
         }
 
         private void BtnSelectedColor_OnClick(object sender, RoutedEventArgs e)
