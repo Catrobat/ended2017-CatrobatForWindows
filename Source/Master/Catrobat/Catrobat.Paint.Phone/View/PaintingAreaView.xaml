@@ -13,8 +13,9 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
- 
-    
+
+
+
     <phone:PhoneApplicationPage.Resources>
         <Storyboard x:Name="SpinningStoryboard">
             <DoubleAnimation AutoReverse="False"
@@ -31,21 +32,21 @@
         </shell:ApplicationBarIconButton>
 
 
-        
-            <shell:ApplicationBar x:Key="bar1" IsVisible="True">
-                <shell:ApplicationBar.MenuItems>
-                    <shell:ApplicationBarMenuItem Text="Speichern" Click="ApplicationBarMenuItem_OnClick"/>
-                    <shell:ApplicationBarMenuItem Text="Kopie speichern"/>
-                    <shell:ApplicationBarMenuItem Text="Neues Bild"/>
-                    <shell:ApplicationBarMenuItem Text="Laden"/>
-                    <shell:ApplicationBarMenuItem Text="Vollbild"/>
-                    <shell:ApplicationBarMenuItem Text="Über"/>
-                </shell:ApplicationBar.MenuItems>
 
-                <shell:ApplicationBarIconButton x:Name="BtnThickness"  IconUri="/Assets/ColorPicker/icon_menu_strokes.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
-                <shell:ApplicationBarIconButton x:Name="BtnColor" IconUri="/Assets/ColorPicker/icon_menu_color_palette.png" IsEnabled="True" Text="color" />
-                <shell:ApplicationBarIconButton x:Name="BtnTools" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
-            </shell:ApplicationBar>
+        <shell:ApplicationBar x:Key="bar1" IsVisible="True">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Speichern" Click="ApplicationBarMenuItem_OnClick"/>
+                <shell:ApplicationBarMenuItem Text="Kopie speichern"/>
+                <shell:ApplicationBarMenuItem Text="Neues Bild"/>
+                <shell:ApplicationBarMenuItem Text="Laden"/>
+                <shell:ApplicationBarMenuItem Text="Vollbild"/>
+                <shell:ApplicationBarMenuItem Text="Über"/>
+            </shell:ApplicationBar.MenuItems>
+
+            <shell:ApplicationBarIconButton x:Name="BtnThickness"  IconUri="/Assets/ColorPicker/icon_menu_strokes.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
+            <shell:ApplicationBarIconButton x:Name="BtnColor" IconUri="/Assets/ColorPicker/icon_menu_color_palette.png" IsEnabled="True" Text="color" />
+            <shell:ApplicationBarIconButton x:Name="BtnTools" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
+        </shell:ApplicationBar>
 
         <shell:ApplicationBar x:Key="bar2" IsVisible="True">
             <shell:ApplicationBar.MenuItems>
@@ -57,18 +58,18 @@
                 <shell:ApplicationBarMenuItem Text="Über"/>
             </shell:ApplicationBar.MenuItems>
 
-             
+
             <shell:ApplicationBarIconButton x:Name="cccc" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.Resources>
 
-    
-    
+
+
     <phone:PhoneApplicationPage.ApplicationBar>
         <StaticResource ResourceKey="bar1" />
     </phone:PhoneApplicationPage.ApplicationBar>
 
-    
+
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent" >
         <Grid.RowDefinitions>
@@ -117,15 +118,18 @@
                 <Canvas x:Name="PaintingAreaCanvas" Background="Transparent" >
                 </Canvas>
             </Grid>
-            
-            <Grid x:Name="SliderThicknessGrid" Background="Transparent" Visibility="Collapsed">
+
+            <Grid x:Name="SliderThicknessGrid" Background="Transparent" Visibility="Visible">
                 <Canvas>
-                    <Border BorderBrush="Black" BorderThickness="1" Height="100" Canvas.Top="500" Canvas.Left="0"  Background="White" Width="450"/>
+                    <Border BorderBrush="Black" BorderThickness="1" Height="128" Canvas.Top="464" Canvas.Left="0"  Background="#1F1F1F" Width="456"/>
                 </Canvas>
-                <Slider x:Name="SliderThickness" Background="Red" Maximum="50" Minimum="1" Margin="0,490,0,18"/>
-                <RadioButton x:Name="RoundRadioButton" Content="Round" HorizontalAlignment="Left" Margin="23,520,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" IsChecked="true" Click="RoundRadioButon_OnClick"/>
-                <RadioButton x:Name="SquareRadioButton" Content="Square" HorizontalAlignment="Left" Margin="162,520,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="SquareRadioButon_OnClick"/>
-                <RadioButton x:Name="TriangleRadioButton" Content="Triangle" HorizontalAlignment="Left" Margin="301,520,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="TriangleRadioButon_OnClick"/>
+                <Slider x:Name="SliderThickness" Background="Red" Maximum="50"  Minimum="1" Margin="0,486,111,22" ValueChanged="SliderThickness_ValueChanged"/>
+                <RadioButton x:Name="RoundRadioButton" Content="" HorizontalAlignment="Left"  Margin="23,530,0,-10"  VerticalAlignment="Top" Foreground="Black" Click="RoundRadioButon_OnClick" IsChecked="True" UseLayoutRounding="True" Background="Black" GroupName="BrushStyle"/>
+                <RadioButton x:Name="SquareRadioButton" Content="" HorizontalAlignment="Left" Margin="162,530,0,-10" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="SquareRadioButon_OnClick" GroupName="BrushStyle"/>
+                <RadioButton x:Name="TriangleRadioButton" Content="" HorizontalAlignment="Left" Margin="301,530,0,-10" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="TriangleRadioButon_OnClick" GroupName="BrushStyle"/>
+                <TextBox x:Name="SliderThicknessTextBox"  Foreground="Black" Background="Transparent" Text="1" HorizontalAlignment="Left" Height="69" Margin="356,480,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" IsReadOnly="True" RenderTransformOrigin="0.11,0.493"/>
+
+
             </Grid>
         </Grid>
 

@@ -42,6 +42,7 @@ namespace Catrobat.Paint.Phone.View
             SliderThickness.ValueChanged +=
                 PocketPaintApplication.GetInstance().ApplicationBarListener.SliderThickness_ValueChanged;
             SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
+            SliderThicknessTextBox.Text = SliderThickness.Value.ToString();
 
             UndoRedoActionbarManager.GetInstance().ApplicationBarTop = ApplicationBarTopX;
             BackKeyPress += OnBackKeyPressed;
@@ -138,6 +139,14 @@ namespace Catrobat.Paint.Phone.View
         public void SquareRadioButon_OnClick(object sender, EventArgs e)
         {
             PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Square;
+        }
+
+        private void SliderThickness_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (SliderThickness != null)
+            {
+                SliderThicknessTextBox.Text = Convert.ToInt32(SliderThickness.Value).ToString();
+            }
         }
 
         // TODO defining this handler solves issue that first tap after toolpicker page was open is not recognized by 
