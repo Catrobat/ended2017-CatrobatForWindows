@@ -13,8 +13,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
- 
-    
+
     <phone:PhoneApplicationPage.Resources>
         <Storyboard x:Name="SpinningStoryboard">
             <DoubleAnimation AutoReverse="False"
@@ -25,7 +24,7 @@
                        Storyboard.TargetProperty="Angle"
                        To="360" />
         </Storyboard>
-
+        
         <shell:ApplicationBarIconButton x:Key="ChooseButton" IconUri="/Assets/ToolMenu/icon_menu_crop.png" Text="choose">
 
         </shell:ApplicationBarIconButton>
@@ -118,17 +117,24 @@
                 </Canvas>
             </Grid>
             
-            <Grid x:Name="SliderThicknessGrid" Background="Transparent" Visibility="Collapsed">
-                <Canvas>
-                    <Border BorderBrush="Black" BorderThickness="1" Height="100" Canvas.Top="500" Canvas.Left="0"  Background="White" Width="450"/>
-                </Canvas>
-                <Slider x:Name="SliderThickness" Background="Red" Maximum="50" Minimum="1" Margin="0,490,0,18"/>
-                <RadioButton x:Name="RoundRadioButton" Content="Round" HorizontalAlignment="Left" Margin="23,520,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" IsChecked="true" Click="RoundRadioButon_OnClick"/>
-                <RadioButton x:Name="SquareRadioButton" Content="Square" HorizontalAlignment="Left" Margin="162,520,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="SquareRadioButon_OnClick"/>
-                <RadioButton x:Name="TriangleRadioButton" Content="Triangle" HorizontalAlignment="Left" Margin="301,520,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="TriangleRadioButon_OnClick"/>
-            </Grid>
+            <UserControl x:Name="SliderThicknessControl" Height="auto" Width="auto" >
+                <Grid x:Name="SliderThicknessGrid" Background="#1F1F1F" Visibility="Collapsed" MinHeight="120" VerticalAlignment="Bottom" RenderTransformOrigin="0.502,-0.04">
+                    <Slider x:Name="SliderThickness" Background="Red" Maximum="50"  Minimum="1" Margin="0,5,111,22" ValueChanged="SliderThickness_ValueChanged"/>
+                    <RadioButton x:Name="RoundRadioButton" Content="" HorizontalAlignment="Left"  Margin="23,58,0,-10"  VerticalAlignment="Top" Foreground="Black" Click="RoundRadioButon_OnClick" IsChecked="True" UseLayoutRounding="True" Background="Black" GroupName="BrushStyle"/>
+                    <RadioButton x:Name="SquareRadioButton" Content="" HorizontalAlignment="Left" Margin="162,58,0,-10" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="SquareRadioButon_OnClick" GroupName="BrushStyle"/>
+                    <RadioButton x:Name="TriangleRadioButton" Content="" HorizontalAlignment="Left" Margin="301,58,0,-10" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="TriangleRadioButon_OnClick" GroupName="BrushStyle"/>
+                    <TextBox x:Name="SliderThicknessTextBox" BorderBrush="White" TextAlignment="Center" BorderThickness="3" Text="1" HorizontalAlignment="Left" MinHeight="69" Margin="350,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="75" Foreground="White" Background="Transparent" RenderTransformOrigin="0.11,0.493" IsHitTestVisible="False"/>
+                    <Image x:Name="RoundImage" Source="/Assets/ToolMenu/icon_menu_ellipse.png" HorizontalAlignment="Left" Height="40" Margin="87,74,0,0" VerticalAlignment="Top" Width="40"/>
+                    <Image x:Name="SquareImage" Source="/Assets/ToolMenu/icon_menu_rectangle.png" HorizontalAlignment="Left" Height="40" Margin="227,74,0,0" VerticalAlignment="Top" Width="40"/>
+                    <Image x:Name="TriangleImage" Source="/Assets/ToolMenu/icon_menu_rectangle.png"  HorizontalAlignment="Left" Height="40" Margin="367,74,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <CompositeTransform Rotation="45"/>
+                        </Image.RenderTransform>
+                    </Image>
+                </Grid>
+            </UserControl>
         </Grid>
-
+        
         <Grid x:Name="SpinnerGrid" Grid.Row="0" Visibility="Collapsed"  Grid.RowSpan="2"  Margin="12,12,12,12" Background="#FFB6B6B6" Opacity="0.7">
             <Image Grid.Row="0" Height="50" Source="/Assets/Spinner.png" Stretch="Uniform" Width="50" Canvas.ZIndex="100" Margin="10,10">
                 <Image.RenderTransform>
