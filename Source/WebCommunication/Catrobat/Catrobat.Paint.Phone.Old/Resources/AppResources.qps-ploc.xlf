@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" ">
+  <file datatype="xml" source-language="en" target-language="qps-ploc" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="Catrobat.Paint.Phone.Old" product-version="1.0.0.0" build-num="0">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="2.2.1212.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="Resx">
+        <trans-unit translate="yes" id="Resx/Clear" xml:space="preserve">
+          <source>Clear</source>
+          <target state="translated">Clear</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/ColorPickerPageTitle" xml:space="preserve">
+          <source>Color Picker</source>
+          <target state="new">Color Picker</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/ColorPickerSelectedColor" xml:space="preserve">
+          <source>Selected Color</source>
+          <target state="new">Selected Color</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PaintAreaTitle" xml:space="preserve">
+          <source>Painting Area</source>
+          <target state="new">Painting Area</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PaintingAreaMessageBoxImageSaved" xml:space="preserve">
+          <source>Saved file as</source>
+          <target state="new">Saved file as</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Redo" xml:space="preserve">
+          <source>Redo</source>
+          <target state="new">Redo</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/SaveChangesToCatrobatMessageTitle" xml:space="preserve">
+          <source>Save changes?</source>
+          <target state="new">Save changes?</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/SaveChangesToCatrobatMessageContent" xml:space="preserve">
+          <source>Save changes to Pocket Code?On cancel all changes will be lost!</source>
+          <target state="new">Save changes to Pocket Code?On cancel all changes will be lost!</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/SaveToCatrobat" xml:space="preserve">
+          <source>Save to Pocket Code</source>
+          <target state="new">Save to Pocket Code</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Test1" xml:space="preserve">
+          <source>Test1en</source>
+          <target state="new">Test1en</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Undo" xml:space="preserve">
+          <source>Undo</source>
+          <target state="new">Undo</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

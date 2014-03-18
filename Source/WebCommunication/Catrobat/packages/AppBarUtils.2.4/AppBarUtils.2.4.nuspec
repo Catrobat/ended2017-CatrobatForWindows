@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>AppBarUtils</id>
+    <version>2.4</version>
+    <title>AppBarUtils</title>
+    <authors>Allen Lee</authors>
+    <owners>Allen Lee</owners>
+    <licenseUrl>http://appbarutils.codeplex.com/license</licenseUrl>
+    <projectUrl>http://appbarutils.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>AppBarUtils provides out-of-box app bar behaviors/triggers/actions for Windows Phone SDK 7.1/8.0. They enable you to do command binding (also binding for other properties) for app bar buttons/menu items, make use of the built-in Blend SDK and 3rd party behaviors, and dynamically show different app bars for different pano/pivot items or based on different page states.</description>
+    <releaseNotes>Previously buttons and menu items in dynamic app bar can only execute code via command binding. It's a pity not to take advantage of existing well tested actions from Blend SDK, which is what this release tries to address.
+
+See the demo code from CodePlex for how to use this new feature.</releaseNotes>
+    <copyright />
+  </metadata>
+</package>

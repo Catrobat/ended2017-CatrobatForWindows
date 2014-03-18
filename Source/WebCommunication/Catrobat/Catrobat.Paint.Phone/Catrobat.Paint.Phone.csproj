@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0EE4DAC6-349C-4DB2-ABC2-2FDABFBAC0B3}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Catrobat.Paint.Phone</RootNamespace>
+    <AssemblyName>Catrobat.Paint.Phone</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Command\BrushCommand.cs" />
+    <Compile Include="Command\CommandBase.cs" />
+    <Compile Include="Command\CommandManager.cs" />
+    <Compile Include="Command\EraserCommand.cs" />
+    <Compile Include="Command\UndoRedoActionbarManager.cs" />
+    <Compile Include="Controls\AppBar\ApplicationBarTop.xaml.cs">
+      <DependentUpon>ApplicationBarTop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PaintData.cs" />
+    <Compile Include="Data\StorageIO.cs" />
+    <Compile Include="Listener\ApplicationBarListener.cs" />
+    <Compile Include="Listener\PaintingAreaManipulationListener.cs" />
+    <Compile Include="PaintLauncher.cs" />
+    <Compile Include="PocketPaintApplication.cs" />
+    <Compile Include="Resources\AppResources.Designer.cs" />
+    <Compile Include="Resources\LocalizedStrings.cs" />
+    <Compile Include="Tool\BrushTool.cs" />
+    <Compile Include="Tool\EraserTool.cs" />
+    <Compile Include="Tool\MoveZoomTool.cs" />
+    <Compile Include="Tool\PipetteTool.cs" />
+    <Compile Include="Tool\ToolBase.cs" />
+    <Compile Include="Tool\ToolType.cs" />
+    <Compile Include="Ui\Spinner.cs" />
+    <Compile Include="View\ColorPickerView.xaml.cs">
+      <DependentUpon>ColorPickerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PaintingAreaView.xaml.cs">
+      <DependentUpon>PaintingAreaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ToolPickerView.xaml.cs">
+      <DependentUpon>ToolPickerView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\AlignmentGrid.png" />
+    <Content Include="Assets\AppBar\add.png" />
+    <Content Include="Assets\AppBar\dark\add.png" />
+    <Content Include="Assets\AppBar\dark\appbar.add.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.back.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.basecircle.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.cancel.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.check.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.close.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.copy.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.delete.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.download.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.edit.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.favs.addto.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.favs.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.feature.camera.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.feature.email.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.feature.search.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.feature.settings.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.feature.video.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.folder.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.home.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.minus.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.new.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.next.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.overflowdots.png" />
+    <Content Include="Assets\AppBar\dark\appbar.questionmark.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.refresh.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.save.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.share.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.stop.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.sync.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.transport.ff.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.transport.pause.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.transport.play.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.transport.rew.rest.png" />
+    <Content Include="Assets\AppBar\dark\appbar.upload.rest.png" />
+    <Content Include="Assets\AppBar\dark\DarkIcons.dll" />
+    <Content Include="Assets\AppBar\empty.png" />
+    <Content Include="Assets\AppBar\feature.settings.png" />
+    <Content Include="Assets\AppBar\menu_tools.png" />
+    <Content Include="Assets\AppBar\menu_tools_.png" />
+    <Content Include="Assets\ApplicationBar\Dark\appbar.page.new.png" />
+    <Content Include="Assets\ApplicationBar\Dark\appbar.redo.curve.png" />
+    <Content Include="Assets\ApplicationBar\Dark\appbar.undo.curve.png" />
+    <Content Include="Assets\ApplicationIcon.png" />
+    <Content Include="Assets\checkeredbg.png" />
+    <Content Include="Assets\checkeredbgWXGA.png" />
+    <Content Include="Assets\ColorPicker\checkeredbg.png" />
+    <Content Include="Assets\ColorPicker\icon_color_chooser_tab_palette.png" />
+    <Content Include="Assets\ColorPicker\icon_color_chooser_tab_rgba.png" />
+    <Content Include="Assets\ColorPicker\icon_menu_color_palette.png" />
+    <Content Include="Assets\ColorPicker\icon_menu_strokes.png" />
+    <Content Include="Assets\ic_launcher.png" />
+    <Content Include="Assets\ic_launcher_tile.png" />
+    <Content Include="Assets\Spinner.png" />
+    <Content Include="Assets\Tiles\FlipCycleTileLarge.png" />
+    <Content Include="Assets\Tiles\FlipCycleTileMedium.png" />
+    <Content Include="Assets\Tiles\FlipCycleTileSmall.png" />
+    <Content Include="Assets\Tiles\IconicTileMediumLarge.png" />
+    <Content Include="Assets\Tiles\IconicTileSmall.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_brush.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_bucket.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_crop.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_cursor.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_ellipse.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_eraser.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_flip_horizontal.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_import_image.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_move.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_pipette.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_rectangle.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_stamp.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_zoom.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\ic_launcher_tile.psd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\AppBar\ApplicationBarTop.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ColorPickerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\PaintingAreaView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ToolPickerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AppResources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Coding4Fun.Toolkit.Controls">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZLib.Phone">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ICSharpCode.SharpZLib.Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools.Controls">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools.Filtering">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.Filtering.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools.IO.Bmp">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.IO.Bmp.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools.IO.Gif">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.IO.Gif.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools.IO.Png">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.IO.Png.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageTools.Utils">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\ImageTools.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="PhoneCodeContractsAssemblies">
+      <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\PhoneCodeContractsAssemblies.dll</HintPath>
+    </Reference>
+    <Reference Include="WriteableBitmapExWinPhone">
+      <HintPath>..\packages\WriteableBitmapEx.1.0.12.0\lib\WindowsPhone8\WriteableBitmapExWinPhone.dll</HintPath>
+    </Reference>
+    <Reference Include="WriteableBitmapExWinPhoneXnaDependant">
+      <HintPath>..\packages\WriteableBitmapEx.1.0.12.0\lib\WindowsPhone8\WriteableBitmapExWinPhoneXnaDependant.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <ProjectExtensions />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
