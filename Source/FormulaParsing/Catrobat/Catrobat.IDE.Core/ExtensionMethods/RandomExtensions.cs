@@ -8,5 +8,10 @@ namespace Catrobat.IDE.Core.ExtensionMethods
         {
             return random.NextDouble() < 0.5;
         }
+    
+        public static double NextSignedDouble(this Random random)
+        {
+            return -random.NextDouble();
+        }
     }
 }

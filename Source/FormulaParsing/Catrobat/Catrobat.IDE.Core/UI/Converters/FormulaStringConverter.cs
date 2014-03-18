@@ -1,5 +1,5 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
-using Catrobat.IDE.Core.FormulaEditor.Editor;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+using Catrobat.IDE.Core.FormulaEditor;
 using Catrobat.IDE.Core.UI.PortableUI;
 using System;
 using System.Globalization;

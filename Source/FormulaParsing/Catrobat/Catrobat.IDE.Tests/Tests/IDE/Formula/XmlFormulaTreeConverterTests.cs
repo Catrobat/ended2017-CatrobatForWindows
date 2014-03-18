@@ -3,6 +3,7 @@ using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.FormulaEditor.Editor;
+using Catrobat.IDE.Core.FormulaEditor;
 using Catrobat.IDE.Core.VersionConverter;
 using Catrobat.IDE.Tests.Misc;
 using Catrobat.IDE.Tests.SampleData;
@@ -38,18 +39,18 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                     FormulaEditorKey.CloseBracket, 
                     FormulaEditorKey.NumberDot
                 }).
-                Select(XmlFormulaTreeFactory.CreateDefaultNode);
+                Select(Core.FormulaEditor.Editor.XmlFormulaTreeFactory.CreateDefaultNode);
             var sensorFormulas = EnumExtensions.AsEnumerable<SensorVariable>().
-                Select(XmlFormulaTreeFactory.CreateDefaultNode);
+                Select(Core.FormulaEditor.Editor.XmlFormulaTreeFactory.CreateDefaultNode);
             var variableFormulas = EnumExtensions.AsEnumerable<ObjectVariable>().
-                Select(XmlFormulaTreeFactory.CreateDefaultNode).
-                Concat(userVariables.Select(XmlFormulaTreeFactory2.CreateUserVariableNode));
-            var bracketFormulas = Enumerable.Repeat(XmlFormulaTreeFactory2.CreateParenthesesNode(null), 1);
+                Select(Core.FormulaEditor.Editor.XmlFormulaTreeFactory.CreateDefaultNode).
+                Concat(userVariables.Select(Core.CatrobatObjects.Formulas.XmlFormulaTreeFactory.CreateUserVariableNode));
+            var bracketFormulas = Enumerable.Repeat(Core.CatrobatObjects.Formulas.XmlFormulaTreeFactory.CreateParenthesesNode(null), 1);
 
             TestXml(
                 converter: new XmlFormulaTreeConverter(userVariables, null), 
                 formulas: keyFormulas.Concat(sensorFormulas).Concat(variableFormulas).Concat(bracketFormulas));
-            Assert.Inconclusive("Rewrite to use XmlFormulaTreeFactory2 Members via reflection. ");
+            Assert.Inconclusive("Rewrite to use Core.CatrobatObjects.Formulas.XmlFormulaTreeFactory Members via reflection. ");
         }
 
         [TestMethod]

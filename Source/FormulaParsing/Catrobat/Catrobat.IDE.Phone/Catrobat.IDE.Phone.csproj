@@ -154,6 +154,7 @@
     <Compile Include="Controls\FormulaControls\FormulaViewer2.xaml.cs">
       <DependentUpon>FormulaViewer2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlDecimalSeparator.cs" />
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlNumber.cs" />
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlUserVariable.cs" />
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlParenthesis.cs" />

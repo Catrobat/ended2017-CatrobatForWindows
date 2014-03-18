@@ -1,6 +1,6 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Core.FormulaEditor.Editor;
+using Catrobat.IDE.Core.FormulaEditor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -274,7 +274,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         public void TestExp()
         {
             var expected = FormulaTreeFactory.CreateExpNode(_nodeZero);
-            foreach (var input in new[] { "exp(0)", "Exp(0)", "exp 0", "e^0", "exp{0}" })
+            foreach (var input in new[] { "exp(0)", "Exp(0)", "exp 0", "e^0" })
             {
                 IFormulaTree result;
                 IEnumerable<string> parsingErrors;
@@ -320,7 +320,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         public void TestSin()
         {
             var expected = FormulaTreeFactory.CreateSinNode(_nodeZero);
-            foreach (var input in new[] { "sin(0)", "Sin(0)", "sin 0", "sin{0}" })
+            foreach (var input in new[] { "sin(0)", "Sin(0)", "sin 0" })
             {
                 IFormulaTree result;
                 IEnumerable<string> parsingErrors;
@@ -334,7 +334,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         public void TestCos()
         {
             var expected = FormulaTreeFactory.CreateCosNode(_nodeZero);
-            foreach (var input in new[] { "cos(0)", "Cos(0)", "cos 0", "cos{0}" })
+            foreach (var input in new[] { "cos(0)", "Cos(0)", "cos 0" })
             {
                 IFormulaTree result;
                 IEnumerable<string> parsingErrors;
@@ -348,7 +348,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         public void TestTan()
         {
             var expected = FormulaTreeFactory.CreateTanNode(_nodeZero);
-            foreach (var input in new[] { "tan(0)", "Tan(0)", "tan 0", "tan{0}" })
+            foreach (var input in new[] { "tan(0)", "Tan(0)", "tan 0" })
             {
                 IFormulaTree result;
                 IEnumerable<string> parsingErrors;

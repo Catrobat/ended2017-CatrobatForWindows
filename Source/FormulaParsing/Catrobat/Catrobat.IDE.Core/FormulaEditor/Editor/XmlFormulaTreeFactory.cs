@@ -5,6 +5,7 @@ using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDE.Core.FormulaEditor.Editor
 {
+    [Obsolete("Use XmlFormulaTreeFactory in CatrobatObjects instead. ")]
     public static class XmlFormulaTreeFactory
     {
         public static XmlFormulaTree CreateNumber(double value)

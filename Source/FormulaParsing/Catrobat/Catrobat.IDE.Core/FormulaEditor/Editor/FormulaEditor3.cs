@@ -1,5 +1,5 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ViewModel;
 using System;
@@ -283,7 +283,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         private static IFormulaToken CreateToken(UserVariable variable)
         {
-            return FormulaTokenFactory.CreateUserVariableToken();
+            return FormulaTokenFactory.CreateUserVariableToken(variable);
         }
 
         private IFormulaToken CreateToken(ObjectVariable variable)

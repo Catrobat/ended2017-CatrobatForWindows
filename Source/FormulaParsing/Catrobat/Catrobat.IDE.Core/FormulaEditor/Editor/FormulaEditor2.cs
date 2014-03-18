@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using System.Collections.Generic;
+using Catrobat.IDE.Core.FormulaEditor;
 using Catrobat.IDE.Core.ViewModel;
 
 namespace Catrobat.IDE.Core.FormulaEditor.Editor
