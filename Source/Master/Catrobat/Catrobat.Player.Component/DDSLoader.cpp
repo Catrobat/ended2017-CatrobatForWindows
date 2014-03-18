@@ -135,7 +135,12 @@ void DDSLoader::LoadTexture(ID3D11Device* d3dDevice, string filename, ID3D11Shad
 			BYTE *stream = nullptr;
 			unsigned int streamSize;
 			ConvertToDDS(image, *width, *height, &stream, &streamSize);
-			CreateDDSTextureFromMemory(d3dDevice, stream, streamSize, nullptr, texture, MAXSIZE_T);
+            HRESULT hr = CreateDDSTextureFromMemory(d3dDevice, stream, streamSize, nullptr, texture, MAXSIZE_T);
+            
+            if (hr != S_OK)
+            {
+                throw new PlayerException("LoadPNG Error. CreateDDSTextureFromMemory failed.");
+            }
 			break;
 		}
 	case 48:
