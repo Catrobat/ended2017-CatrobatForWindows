@@ -2,9 +2,8 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTokens;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Phone.Converters
 {
@@ -26,7 +25,7 @@ namespace Catrobat.IDE.Phone.Converters
         private static string _nodesNamespace;
         private static string NodesNamespace
         {
-            get { return _nodesNamespace ?? (_nodesNamespace = typeof(FormulaNodeAdd).Namespace); }
+            get { return _nodesNamespace ?? (_nodesNamespace = typeof(FormulaNodeNumber).Namespace); }
         }
 
         private static string _tokensNamespace;
@@ -39,11 +38,11 @@ namespace Catrobat.IDE.Phone.Converters
 
         private static Type GetType(string prefix, string name)
         {
-            if (prefix == "nodes")
+            if (prefix == "formulaTree")
             {
                 return Core.GetType(NodesNamespace + "." + name);
             }
-            if (prefix == "tokens")
+            if (prefix == "formulaToken")
             {
                 return Core.GetType(TokensNamespace + "." + name);
             }

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.FormulaEditor.Editor;
 using Catrobat.IDE.Tests.Misc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using XmlFormulaTreeFactory = Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormulaTreeFactory;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 {
@@ -3399,13 +3400,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 VariableType = "OPERATOR",
                 VariableValue = "EQUAL",
-                LeftChild = XmlFormulaTreeFactory.CreateNumber(42),
+                LeftChild = XmlFormulaTreeFactory.CreateNumberNode(42),
                 RightChild = new XmlFormulaTree
                 {
                     VariableType = "OPERATOR",
                     VariableValue = "PLUS",
-                    LeftChild = XmlFormulaTreeFactory.CreateNumber(31),
-                    RightChild = XmlFormulaTreeFactory.CreateNumber(11)
+                    LeftChild = XmlFormulaTreeFactory.CreateNumberNode(31),
+                    RightChild = XmlFormulaTreeFactory.CreateNumberNode(11)
                 }
             };
 
@@ -3418,8 +3419,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 VariableType = "OPERATOR",
                 VariableValue = "EQUAL",
-                LeftChild = XmlFormulaTreeFactory.CreateNumber(42),
-                RightChild = XmlFormulaTreeFactory.CreateNumber(31)
+                LeftChild = XmlFormulaTreeFactory.CreateNumberNode(42),
+                RightChild = XmlFormulaTreeFactory.CreateNumberNode(31)
             };
 
             FormulaComparer.CompareFormulas(expectedFormula, selectedFromula.FormulaRoot.FormulaTree);
@@ -3602,8 +3603,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0",
-                            LeftChild = XmlFormulaTreeFactory.CreateNumber(0),
-                            RightChild = XmlFormulaTreeFactory.CreateNumber(0)
+                            LeftChild = XmlFormulaTreeFactory.CreateNumberNode(0),
+                            RightChild = XmlFormulaTreeFactory.CreateNumberNode(0)
                         }
                     }
                 }
@@ -3648,8 +3649,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0",
-                            LeftChild = XmlFormulaTreeFactory.CreateNumber(0),
-                            RightChild = XmlFormulaTreeFactory.CreateNumber(0)
+                            LeftChild = XmlFormulaTreeFactory.CreateNumberNode(0),
+                            RightChild = XmlFormulaTreeFactory.CreateNumberNode(0)
                         }
                     }
                 }
@@ -3697,8 +3698,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                         {
                             VariableType = "NUMBER",
                             VariableValue = "0",
-                            LeftChild = XmlFormulaTreeFactory.CreateNumber(0),
-                            RightChild = XmlFormulaTreeFactory.CreateNumber(0)
+                            LeftChild = XmlFormulaTreeFactory.CreateNumberNode(0),
+                            RightChild = XmlFormulaTreeFactory.CreateNumberNode(0)
                         }
                     }
                 }
@@ -3814,7 +3815,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 {
                     FormulaRoot = new Core.CatrobatObjects.Formulas.Formula
                     {
-                        FormulaTree = XmlFormulaTreeFactory.CreateNumber("0.0")
+                        FormulaTree = XmlFormulaTreeFactory.CreateNumberNode(0)
                     }
                 }
             };
@@ -3823,7 +3824,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             const SensorVariable variable = SensorVariable.CompassDirection;
             Assert.IsTrue(editor.SensorVariableSelected(variable));
             FormulaComparer.CompareFormulas(
-                expectedFormula: XmlFormulaTreeFactory.CreateDefaultNode(variable), 
+                expectedFormula: Core.FormulaEditor.Editor.XmlFormulaTreeFactory.CreateDefaultNode(variable), 
                 actualFormula: editor.SelectedFormula.FormulaRoot.FormulaTree);
 
 
@@ -3831,7 +3832,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             const FormulaEditorKey numberKey = FormulaEditorKey.Number0;
             Assert.IsTrue(editor.KeyPressed(numberKey));
             FormulaComparer.CompareFormulas(
-                expectedFormula: XmlFormulaTreeFactory.CreateDefaultNode(numberKey),
+                expectedFormula: Core.FormulaEditor.Editor.XmlFormulaTreeFactory.CreateDefaultNode(numberKey),
                 actualFormula: editor.SelectedFormula.FormulaRoot.FormulaTree);
         }
 

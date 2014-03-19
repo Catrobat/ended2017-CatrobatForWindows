@@ -5,7 +5,6 @@ using Catrobat.IDE.Core.Resources.Localization;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {
-    [Obsolete]
     public class FormulaPartControlStaticLocalizedText : FormulaPartControl
     {
         private static LocalizedStrings _localizedStrings;

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.ExtensionMethods;
-using Catrobat.IDE.Core.FormulaEditor.Editor;
+using Catrobat.IDE.Core.FormulaEditor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
@@ -16,11 +16,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private readonly Random _random = new Random();
 
         [TestMethod]
-        public void TestEmpty()
+        public void TestNullOrEmpty()
         {
-            TestInterpreter(
-              expected: null,
-              tokens: Enumerable.Empty<IFormulaToken>());
+            IFormulaToken formula;
+            string parsingError;
+            Assert.AreEqual(null, _interpreter.Interpret(null, out parsingError));
+            Assert.IsNull(parsingError);
+            Assert.AreEqual(null, _interpreter.Interpret(Enumerable.Empty<IFormulaToken>(), out parsingError));
+            Assert.IsNotNull(parsingError);
         }
 
         [TestMethod]
@@ -56,11 +59,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         public void TestRelationalOperators()
         {
             TestBoolInfixOperator(FormulaTreeFactory.CreateEqualsNode, FormulaTokenFactory.CreateEqualsToken);
+            TestDoubleInfixOperator(FormulaTreeFactory.CreateEqualsNode, FormulaTokenFactory.CreateEqualsToken);
             TestBoolInfixOperator(FormulaTreeFactory.CreateNotEqualsNode, FormulaTokenFactory.CreateNotEqualsToken);
-            TestBoolInfixOperator(FormulaTreeFactory.CreateLessNode, FormulaTokenFactory.CreateLessToken);
-            TestBoolInfixOperator(FormulaTreeFactory.CreateLessEqualNode, FormulaTokenFactory.CreateLessEqualToken);
-            TestBoolInfixOperator(FormulaTreeFactory.CreateGreaterNode, FormulaTokenFactory.CreateGreaterToken);
-            TestBoolInfixOperator(FormulaTreeFactory.CreateGreaterEqualNode, FormulaTokenFactory.CreateGreaterEqualToken);
+            TestDoubleInfixOperator(FormulaTreeFactory.CreateNotEqualsNode, FormulaTokenFactory.CreateNotEqualsToken);
+            TestDoubleInfixOperator(FormulaTreeFactory.CreateLessNode, FormulaTokenFactory.CreateLessToken);
+            TestDoubleInfixOperator(FormulaTreeFactory.CreateLessEqualNode, FormulaTokenFactory.CreateLessEqualToken);
+            TestDoubleInfixOperator(FormulaTreeFactory.CreateGreaterNode, FormulaTokenFactory.CreateGreaterToken);
+            TestDoubleInfixOperator(FormulaTreeFactory.CreateGreaterEqualNode, FormulaTokenFactory.CreateGreaterEqualToken);
         }
 
 
@@ -69,11 +74,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         {
             TestConstant(FormulaTreeFactory.CreateTrueNode, FormulaTokenFactory.CreateTrueToken);
             TestConstant(FormulaTreeFactory.CreateFalseNode, FormulaTokenFactory.CreateFalseToken);
-            TestBoolInfixOperator(FormulaTreeFactory.CreateAndNode, FormulaTokenFactory.CreateAndToken);
             TestDoubleInfixOperator(FormulaTreeFactory.CreateAndNode, FormulaTokenFactory.CreateAndToken);
-            TestBoolInfixOperator(FormulaTreeFactory.CreateOrNode, FormulaTokenFactory.CreateOrToken);
+            TestBoolInfixOperator(FormulaTreeFactory.CreateAndNode, FormulaTokenFactory.CreateAndToken);
             TestDoubleInfixOperator(FormulaTreeFactory.CreateOrNode, FormulaTokenFactory.CreateOrToken);
-            Assert.Inconclusive("Not");
+            TestBoolInfixOperator(FormulaTreeFactory.CreateOrNode, FormulaTokenFactory.CreateOrToken);
+            TestDoublePrefixOperator(FormulaTreeFactory.CreateNotNode, FormulaTokenFactory.CreateNotToken);
+            TestBoolPrefixOperator(FormulaTreeFactory.CreateNotNode, FormulaTokenFactory.CreateNotToken);
         }
 
         [TestMethod]
@@ -109,7 +115,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestDoubleUnaryFunction(FormulaTreeFactory.CreateSqrtNode, FormulaTokenFactory.CreateSqrtToken);
             TestDoubleUnaryFunction(FormulaTreeFactory.CreateRoundNode, FormulaTokenFactory.CreateRoundToken);
             TestDoubleBinaryFunction(FormulaTreeFactory.CreateRandomNode, FormulaTokenFactory.CreateRandomToken);
-            Assert.Inconclusive("Abs");
+            TestDoubleUnaryFunction(FormulaTreeFactory.CreateAbsNode, FormulaTokenFactory.CreateAbsToken);
+            TestDoubleInfixOperator(FormulaTreeFactory.CreateModNode, FormulaTokenFactory.CreateModToken);
         }
 
         [TestMethod]
@@ -133,8 +140,81 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         [TestMethod]
         public void TestBrackets()
         {
+            var x = _random.NextDouble();
+            TestInterpreter(
+                expected:
+                    FormulaTreeFactory.CreateParenthesesNode(
+                        FormulaTreeFactory.CreateNumberNode(x)), 
+                tokens: new IFormulaToken[]
+                {
+                    FormulaTokenFactory.CreateParenthesisToken(true), 
+                    FormulaTokenFactory.CreateNumberToken(x), 
+                    FormulaTokenFactory.CreateParenthesisToken(false), 
+                });
             Assert.Inconclusive();
         }
+
+        [TestMethod]
+        public void TestOperatorOrder()
+        {
+            var x = _random.NextDouble();
+            var y = _random.NextDouble();
+            var z = _random.NextDouble();
+            TestInterpreter(
+                expected:
+                    FormulaTreeFactory.CreateAddNode(
+                        FormulaTreeFactory.CreateNumberNode(x),
+                        FormulaTreeFactory.CreateMultiplyNode(
+                            FormulaTreeFactory.CreateNumberNode(y), 
+                            FormulaTreeFactory.CreateNumberNode(z))),
+                tokens: new IFormulaToken[]
+                {
+                    FormulaTokenFactory.CreateNumberToken(x), 
+                    FormulaTokenFactory.CreatePlusToken(), 
+                    FormulaTokenFactory.CreateNumberToken(y), 
+                    FormulaTokenFactory.CreateMultiplyToken(), 
+                    FormulaTokenFactory.CreateNumberToken(z), 
+                });
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void TestWrongParameter()
+        {
+            string parsingError;
+            Assert.IsNull(_interpreter.Interpret(
+                tokens: new IFormulaToken[]
+                {
+                    FormulaTokenFactory.CreateSinToken(), 
+                    FormulaTokenFactory.CreateParenthesisToken(true), 
+                    FormulaTokenFactory.CreateNumberToken(0), 
+                    FormulaTokenFactory.CreateParameterSeparatorToken(), 
+                    FormulaTokenFactory.CreateNumberToken(0), 
+                    FormulaTokenFactory.CreateParenthesisToken(false)
+                },
+                parsingError: out parsingError));
+            Assert.IsNotNull(parsingError);
+            Assert.Inconclusive();
+        }
+
+        [TestMethod]
+        public void TestSemanticError()
+        {
+            string parsingError;
+            Assert.IsNull(_interpreter.Interpret(
+                tokens: new IFormulaToken[]
+                {
+                    FormulaTokenFactory.CreateSinToken(), 
+                    FormulaTokenFactory.CreateParenthesisToken(true), 
+                    FormulaTokenFactory.CreateTrueToken(), 
+                    FormulaTokenFactory.CreateParenthesisToken(false)
+                }, 
+                parsingError:out parsingError));
+            Assert.IsNotNull(parsingError);
+            Assert.Inconclusive();
+        }
+
+        #region Helpers
 
         private void TestInterpreter(IFormulaTree expected, IEnumerable<IFormulaToken> tokens)
         {
@@ -148,6 +228,22 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestInterpreter(
                 expected: expected.Invoke(),
                 tokens: new[] {token.Invoke()});
+        }
+
+        private void TestBoolPrefixOperator(Func<IFormulaTree, FormulaNodePrefixOperator> expected, Func<IFormulaToken> token)
+        {
+            var x = _random.NextBool();
+            TestInterpreter(
+                expected: expected.Invoke(FormulaTreeFactory.CreateTruthValueNode(x)),
+                tokens: new[] { token.Invoke(), FormulaTokenFactory.CreateTruthValueToken(x) });
+        }
+
+        private void TestDoublePrefixOperator(Func<IFormulaTree, FormulaNodePrefixOperator> expected, Func<IFormulaToken> token)
+        {
+            var x = _random.Next(0, 10);
+            TestInterpreter(
+                expected: expected.Invoke(FormulaTreeFactory.CreateNumberNode(x)),
+                tokens: new[] { token.Invoke(), FormulaTokenFactory.CreateDigitToken(x) });
         }
 
         private void TestBoolInfixOperator(Func<IFormulaTree, IFormulaTree, FormulaNodeInfixOperator> expected, Func<IFormulaToken> token)
@@ -187,5 +283,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 expected: expected.Invoke(FormulaTreeFactory.CreateNumberNode(x), FormulaTreeFactory.CreateNumberNode(y)),
                 tokens: new[] { token.Invoke(), FormulaTokenFactory.CreateParenthesisToken(true), FormulaTokenFactory.CreateDigitToken(x), FormulaTokenFactory.CreateArgumentSeparatorToken(), FormulaTokenFactory.CreateDigitToken(y), FormulaTokenFactory.CreateParenthesisToken(false) });
         }
+
+        #endregion
     }
 }

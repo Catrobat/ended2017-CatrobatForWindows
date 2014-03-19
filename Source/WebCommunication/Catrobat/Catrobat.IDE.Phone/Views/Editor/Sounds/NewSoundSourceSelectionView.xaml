@@ -1,0 +1,67 @@
+﻿<phone:PhoneApplicationPage 
+  x:Class="Catrobat.IDE.Phone.Views.Editor.Sounds.NewSoundSourceSelectionView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+  xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:misc="clr-namespace:Catrobat.IDE.Phone.Content.Images.Misc"
+  FontFamily="{StaticResource PhoneFontFamilyNormal}"
+  FontSize="{StaticResource PhoneFontSizeNormal}"
+  Foreground="{StaticResource PhoneForegroundBrush}"
+  SupportedOrientations="Portrait" Orientation="Portrait"
+  mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+  DataContext="{Binding NewSoundSourceSelectionViewModel, Source={StaticResource Locator}}"
+  shell:SystemTray.IsVisible="True">
+
+  <Grid x:Name="LayoutRoot"
+          Background="Transparent">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10 0 10 20">
+      <TextBlock Margin="0" Text="{Binding Resources.Editor_TitleNewSound, Source={StaticResource LocalizedStrings}}" Name="Headline" Style="{StaticResource PhoneTextNormalStyle}" />
+    </StackPanel>
+
+    <StackPanel Grid.Row="1" Margin="10 20 0 15">
+      <!--<Button Margin="0 0 10 10" Command="{Binding AudioLibraryCommand}">
+        <Button.Template>
+          <ControlTemplate>
+            <Grid Margin="0 10 0 10" Background="{Binding Path=SelectedTheme.AccentColor1.NativeBrush, Source={StaticResource ThemeChooser}}" HorizontalAlignment="Stretch" Height="120">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+              </Grid.ColumnDefinitions>
+              <misc:AudioLibrary ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
+              <TextBlock Grid.Column="1" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Resources.Editor_MediaLibrary, Source={StaticResource LocalizedStrings}}" Name="tbGallery" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+            </Grid>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>-->
+      
+      <Button Margin="0 0 10 0" Command="{Binding RecorderCommand}">
+        <Button.Template>
+          <ControlTemplate>
+            <Grid Background="{Binding Path=SelectedTheme.AccentColor2.NativeBrush, Source={StaticResource ThemeChooser}}" 
+                    HorizontalAlignment="Stretch" 
+                    Height="140">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+              </Grid.ColumnDefinitions>
+              <misc:AudioRecorder ScaleFactor="0.2" Grid.Column="0" Margin="30 15 15 15" />
+              <TextBlock Grid.Column="1" Margin="10" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="Left" 
+                           Text="{Binding Resources.Editor_Recorder, Source={StaticResource LocalizedStrings}}" 
+                           Style="{StaticResource PhoneTextExtraLargeStyle}" />
+            </Grid>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+    </StackPanel>
+  </Grid>
+</phone:PhoneApplicationPage>

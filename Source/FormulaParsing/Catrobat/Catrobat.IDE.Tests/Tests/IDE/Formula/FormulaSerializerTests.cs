@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
-using Catrobat.IDE.Core.FormulaEditor.Editor;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+using Catrobat.IDE.Core.FormulaEditor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formula
@@ -181,7 +181,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         public void TestMin()
         {
             Assert.AreEqual(
-                expected: "min{0,1}",
+                expected: "min(0, 1)",
                 actual: _serializer.Serialize(FormulaTreeFactory.CreateMinNode(_nodeZero, _nodeOne)));
             Assert.Inconclusive("Loose or tight?");
         }
@@ -190,7 +190,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         public void TestMax()
         {
             Assert.AreEqual(
-                expected: "max{0,1}",
+                expected: "max(0, 1)",
                 actual: _serializer.Serialize(FormulaTreeFactory.CreateMaxNode(_nodeZero, _nodeOne)));
             Assert.Inconclusive("Loose or tight?");
         }
@@ -292,7 +292,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         public void TestAbs()
         {
             Assert.AreEqual(
-                expected: "|0|",
+                expected: "abs(0)",
                 actual: _serializer.Serialize(FormulaTreeFactory.CreateAbsNode(_nodeZero)));
         }
 

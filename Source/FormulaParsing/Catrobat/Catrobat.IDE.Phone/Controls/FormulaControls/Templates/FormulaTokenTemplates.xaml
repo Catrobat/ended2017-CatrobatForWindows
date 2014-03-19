@@ -5,8 +5,8 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:f="clr-namespace:Catrobat.IDE.Phone.Controls.FormulaControls.Formulas"
   xmlns:partControls="clr-namespace:Catrobat.IDE.Phone.Controls.FormulaControls.PartControls"
-  xmlns:nodes="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaNodes;assembly=Catrobat.IDE.Core"
-  xmlns:tokens="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTokens;assembly=Catrobat.IDE.Core"
+  xmlns:formulaTree="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;assembly=Catrobat.IDE.Core"
+  xmlns:formulaToken="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;assembly=Catrobat.IDE.Core"
   mc:Ignorable="d">
 
   <SolidColorBrush x:Key="FormulaSelectedBackground" Color="Orange" />
@@ -423,135 +423,140 @@
         </f:UiFormulaTokenDefinition>-->
 
     <!-- ### Number Formulas ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeNumber">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeNumber">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlNumber Style="{StaticResource PartStyleNumber}" />
+      </f:UiFormulaTokenDefinition.Template>
+    </f:UiFormulaTokenDefinition>
+    <f:UiFormulaTokenDefinition TokenType="formulaToken:FormulaTokenDecimalSeparator">
+      <f:UiFormulaTokenDefinition.Template>
+        <partControls:FormulaPartControlDecimalSeparator Style="{StaticResource PartStyleNumber}" />
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
 
 
     <!-- ### Binary Functions ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="tokens:FormulaTokenParameterSpearator">
+    <f:UiFormulaTokenDefinition TokenType="formulaToken:FormulaTokenParameterSeparator">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ParameterSeperator" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeRandom">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeRandom">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionRandom" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeMod">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMod">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionMod" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeMax">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMax">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionMax" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeMin">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMin">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionMin" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
     <!-- ### Unary Functions ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeSin">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSin">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionSin" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeCos">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeCos">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionCos" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeTan">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeTan">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionTan" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeLn">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLn">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionLn" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeLog">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLog">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionLog" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeSqrt">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSqrt">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionSqrt" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeAbs">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAbs">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionAbs" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeRound">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeRound">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionRound" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeArcsin">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeArcsin">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionArcSin" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeArccos">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeArccos">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionArcCos" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeArctan">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeArctan">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionArcTan" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeExp">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeExp">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionExp" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
     <!-- ### Literal Functions ##########################################################################################################-->
 
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodePi">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePi">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionPi" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
 
     <!-- ### Logic Equality Formulas ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeEquals">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeEquals">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlPlaceholderLeft/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeNotEquals">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeNotEquals">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicNotEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeLess">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLess">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicSmaller" Style="{StaticResource PartStyleOperatorEquality}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeLessEqual">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLessEqual">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicSmallerEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeGreater">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeGreater">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicGreater" Style="{StaticResource PartStyleOperatorEquality}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeGreaterEqual">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeGreaterEqual">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicGreaterEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
       </f:UiFormulaTokenDefinition.Template>
@@ -559,53 +564,53 @@
 
 
     <!-- ### Logic Formulas ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeOr">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeOr">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicOr" Style="{StaticResource PartStyleOperatorLogic}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
 
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeAnd">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAnd">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicAnd" Style="{StaticResource PartStyleOperatorLogic}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
 
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeTrue">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeTrue">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicTrue" Style="{StaticResource PartStyleOperatorLogic}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeFalse">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeFalse">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicFalse" Style="{StaticResource PartStyleOperatorLogic}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeNot">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeNot">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicNot" Style="{StaticResource PartStyleOperatorLogic}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
     <!-- ### Algebraic Formulas ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeAdd">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAdd">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Plus" Style="{StaticResource PartStyleOperatorLogic}"/>
         <!-- TODO: Change Style Resource-->
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeSubtract">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSubtract">
       <f:UiFormulaTokenDefinition.Template>
         <!-- TODO: Change Style Resource-->
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Minus" Style="{StaticResource PartStyleOperatorLogic}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeMultiply">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMultiply">
       <f:UiFormulaTokenDefinition.Template>
         <!-- TODO: Change Style Resource-->
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Mult" Style="{StaticResource PartStyleOperatorLogic}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeDivide">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeDivide">
       <f:UiFormulaTokenDefinition.Template>
         <!-- TODO: Change Style Resource-->
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Divide" Style="{StaticResource PartStyleOperatorLogic}"/>
@@ -613,7 +618,7 @@
     </f:UiFormulaTokenDefinition>
 
     <!-- ### Brackets ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="tokens:FormulaTokenParenthesis">
+    <f:UiFormulaTokenDefinition TokenType="formulaToken:FormulaTokenParenthesis">
       <f:UiFormulaTokenDefinition.Template>
         <!-- TODO: Change Style Resource-->
         <partControls:FormulaPartControlParenthesis Style="{StaticResource PartStyleOperatorLogic}"/>
@@ -621,79 +626,79 @@
     </f:UiFormulaTokenDefinition>
 
     <!-- ### object variables ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeBrightness">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeBrightness">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeDirection">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeDirection">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeGhostEffect">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeGhostEffect">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeLayer">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLayer">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeOpacity">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeOpacity">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodePositionX">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePositionX">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodePositionY">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePositionY">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_Y" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeRotation">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeRotation">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeSize">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSize">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
 
     <!-- ### sensors ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeAccelerationX">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAccelerationX">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ACCELERATION_X" Style="{StaticResource PartStyleSensorVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeAccelerationY">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAccelerationY">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ACCELERATION_Y" Style="{StaticResource PartStyleSensorVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeAccelerationZ">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAccelerationZ">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ACCELERATION_Z" Style="{StaticResource PartStyleSensorVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeCompass">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeCompass">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="COMPASSDIRECTION" Style="{StaticResource PartStyleSensorVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeInclinationY">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeInclinationY">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="INCLINATION_X" Style="{StaticResource PartStyleSensorVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeInclinationX">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeInclinationX">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="INCLINATION_Y" Style="{StaticResource PartStyleSensorVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
@@ -701,7 +706,7 @@
 
 
     <!-- ### user variables ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="nodes:FormulaNodeUserVariable">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeUserVariable">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlUserVariable Style="{StaticResource PartStyleVariable}"/>
       </f:UiFormulaTokenDefinition.Template>

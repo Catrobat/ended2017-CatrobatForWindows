@@ -1,5 +1,5 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTokens;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Resources.Localization;
 using System.Diagnostics;
 using System.Windows;
