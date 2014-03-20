@@ -38,11 +38,6 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             _viewModel.Cleanup();
         }
 
-        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            _viewModel.GoBackCommand.Execute(null);
-        }
-
         private void ErrorOccurred()
         {
             ShowKeyErrorAnimation();

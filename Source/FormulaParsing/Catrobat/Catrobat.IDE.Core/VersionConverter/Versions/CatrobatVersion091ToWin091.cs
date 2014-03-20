@@ -283,15 +283,12 @@ namespace Catrobat.IDE.Core.VersionConverter.Versions
         /// <param name="body">The loop's body. </param>
         protected static void AdaptiveForEach<TElement>(IEnumerable<TElement> elements, Action<TElement> body) where TElement : class
         {
-            // ReSharper disable once PossibleMultipleEnumeration
-            var element = elements.FirstOrDefault();
-
-            while (element != null)
+            while (true)
             {
-                body(element);
-
                 // ReSharper disable once PossibleMultipleEnumeration
-                element = elements.FirstOrDefault();
+                var element = elements.FirstOrDefault();
+                if (element == null) break;
+                body(element);
             }
         }
 
