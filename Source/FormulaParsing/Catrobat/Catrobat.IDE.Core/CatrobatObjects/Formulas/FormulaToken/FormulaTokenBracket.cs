@@ -2,21 +2,16 @@
 {
     public abstract partial class FormulaTokenBracket : IFormulaToken
     {
-        public bool IsOpening { get; set; }
+        public virtual bool IsOpening { get; set; }
 
-        public bool IsClosing {
-            get
-            {
-                return !IsOpening;
-            }
-            set
-            {
-                IsOpening = !value;
-            }
+        public virtual bool IsClosing
+        {
+            get { return !IsOpening; }
+            set { IsOpening = !value; }
         }
     }
 
-    #region Imeplementations
+    #region Implementations
 
     public partial class FormulaTokenParenthesis : FormulaTokenBracket
     {

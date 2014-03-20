@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EB6B4FF2-8CB6-46FB-B50E-D001C863762D}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -276,7 +278,6 @@ Global
 		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|Any CPU.Build.0 = Debug|x86
 		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|ARM.ActiveCfg = Debug|ARM
-		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|ARM.Build.0 = Debug|ARM
 		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{45D87D93-B00E-403C-8D35-609186BA2376}.Debug|Win32.ActiveCfg = Debug|x86
@@ -479,7 +480,6 @@ Global
 		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|ARM.Build.0 = Debug|Any CPU
 		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{900D7440-4758-495A-A974-081C3BEBA044}.Debug|Win32.ActiveCfg = Debug|Any CPU
