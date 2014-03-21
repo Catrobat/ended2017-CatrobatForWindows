@@ -37,7 +37,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         {
             var viewModel = ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
             viewModel.Formula = Formula.FormulaTree2;
-            viewModel.CaretIndex = viewModel.Tokens.Count;
+            viewModel.CaretIndex = viewModel.Tokens == null ? 0 : viewModel.Tokens.Count;
             viewModel.FormulaButton = this;
             SetFormulaBinding();
             ServiceLocator.NavigationService.NavigateTo(typeof(FormulaEditorViewModel));

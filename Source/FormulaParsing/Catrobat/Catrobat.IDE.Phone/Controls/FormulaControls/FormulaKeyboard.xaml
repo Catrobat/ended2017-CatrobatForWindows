@@ -13,7 +13,8 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" d:DesignWidth="480">
+    d:DesignHeight="480" d:DesignWidth="480"
+    x:Name="FormulaKeyboardXaml">
 
   <UserControl.Resources>
     <Style x:Key="StyleButtonNumbers" TargetType="Button" >
@@ -230,17 +231,17 @@
           <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button Grid.Row="0" Grid.Column="0" Content="Del" DataContext="{StaticResource FormulaKeyDelete}" 
-              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanDelete, ElementName=FormulaKeyboardXaml}" />
         <Button Grid.Row="0" Grid.Column="1" Content="&lt;-" DataContext="{StaticResource FormulaKeyUndo}" 
-              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanUndo, ElementName=FormulaKeyboardXaml}" />
         <Button Grid.Row="0" Grid.Column="2" Content="-&gt;" DataContext="{StaticResource FormulaKeyRedo}" 
-              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanRedo, ElementName=FormulaKeyboardXaml}" />
         <Button Grid.Row="1" Grid.Column="0" Content="(" DataContext="{StaticResource FormulaKeyOpenBrecket}" 
-              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" />
         <Button Grid.Row="1" Grid.Column="1" Content=")" DataContext="{StaticResource FormulaKeyClosedBrecket}" 
-              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" />
         <Button Grid.Row="1" Grid.Column="2" Content="=" DataContext="{StaticResource FormulaKeyEquals}" 
-              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+              Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" />
       </Grid>
       <Grid Column="1" Row="0">
         <Grid.RowDefinitions>
@@ -278,7 +279,8 @@
                 Click="ButtonVariable_OnClick"/>
         <Button Grid.Row="3" Grid.Column="0" Content="Evaluate"  
               Style="{StaticResource StyleButtonEvaluate}" 
-              Background="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1.NativeBrush}"/>
+              Background="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1.NativeBrush}"
+              Click ="ButtonEvaluate_OnClick" IsEnabled="{Binding CanEvaluate, ElementName=FormulaKeyboardXaml}" />
       </Grid>
       <Grid Name="GridNumbers" Column="0" Row="1">
         <Grid.RowDefinitions>

@@ -1,7 +1,11 @@
-﻿using Catrobat.IDE.Core.FormulaEditor.Editor;
+﻿using System;
+using Catrobat.IDE.Core.FormulaEditor.Editor;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel.Editor.Formula;
+using Coding4Fun.Toolkit.Controls;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Formula
 {
@@ -24,18 +28,14 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             FormulaKeyboard.KeyPressed += KeyPressed;
             FormulaKeyboard.ObjectVariableSelected += ObjectVariableSelected;
             FormulaKeyboard.SensorVariableSelected += SensorVariableSelected;
-            FormulaKeyboard.EvaluatePresed += EvaluatePresed;
+            FormulaKeyboard.EvaluatePressed += EvaluatePressed;
+            _viewModel.EvaluatePressed += EvaluatePressed;
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             _viewModel.Cleanup();
-        }
-
-        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            _viewModel.GoBackCommand.Execute(null);
         }
 
         private void ErrorOccurred()
@@ -58,10 +58,16 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             _viewModel.KeyPressedCommand.Execute(key);
         }
 
-        private void EvaluatePresed()
+        private void EvaluatePressed()
         {
-            //TODO: implement me
-            //throw new NotImplementedException();
+            _viewModel.EvaluatePressedCommand.Execute(null);
+        }
+
+        private void EvaluatePressed(object value)
+        {
+            // TODO: pretty up toast notification
+            var message = value == null ? string.Empty : value.ToString();
+            ServiceLocator.NotifictionService.ShowToastNotification("", message, ToastNotificationTime.Medeum);
         }
     }
 }

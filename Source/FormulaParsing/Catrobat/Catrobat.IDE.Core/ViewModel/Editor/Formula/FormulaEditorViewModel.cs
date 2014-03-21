@@ -1,7 +1,10 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System.Collections.Specialized;
+using System.ComponentModel;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.FormulaEditor;
 using Catrobat.IDE.Core.FormulaEditor.Editor;
 using Catrobat.IDE.Core.UI.Formula;
 using Catrobat.IDE.Core.Utilities.Helpers;
@@ -14,13 +17,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 {
     public delegate void ErrorOccurred();
     public delegate void Reset();
+    public delegate void EvaluatePressed(object value);
 
     public class FormulaEditorViewModel : ViewModelBase
     {
         #region Events
 
         public event ErrorOccurred ErrorOccurred;
-
         private void RaiseKeyError()
         {
             if (ErrorOccurred != null)
@@ -28,11 +31,17 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         }
 
         public event Reset Reset;
-
         private void RaiseReset()
         {
             if (Reset != null)
                 Reset.Invoke();
+        }
+
+        public event EvaluatePressed EvaluatePressed;
+        private void RaiseEvaluatePressed(object value)
+        {
+            if (EvaluatePressed != null)
+                EvaluatePressed.Invoke(value);
         }
 
         #endregion
@@ -91,18 +100,36 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
         private void InitEditorBindings()
         {
-            _editor.PropertyChanged += (sender, args) =>
+            _editor.PropertyChanged += (sender, e) => 
             {
-                if (args.PropertyName == GetPropertyName(() => _editor.Formula)) RaisePropertyChanged(() => Formula);
-            }; _editor.PropertyChanged += (sender, args) =>
-            {
-                if (args.PropertyName == GetPropertyName(() => _editor.Tokens)) RaisePropertyChanged(() => Tokens);
+                if (e.PropertyName == GetPropertyName(() => _editor.Formula)) RaisePropertyChanged(() => Formula);
             };
-            _editor.PropertyChanged += (sender, args) =>
+            _editor.PropertyChanged += (sender, e) =>
             {
-                if (args.PropertyName == GetPropertyName(() => _editor.CaretIndex)) RaisePropertyChanged(() => CaretIndex);
+                if (e.PropertyName == GetPropertyName(() => _editor.Tokens)) RaisePropertyChanged(() => Tokens);
+            };
+            _editor.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == GetPropertyName(() => _editor.CaretIndex)) RaisePropertyChanged(() => CaretIndex);
+            };
+            _editor.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == GetPropertyName(() => _editor.CanDelete)) RaisePropertyChanged(() => CanDelete);
+            };
+            _editor.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == GetPropertyName(() => _editor.CanUndo)) RaisePropertyChanged(() => CanUndo);
+            };
+            _editor.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == GetPropertyName(() => _editor.CanRedo)) RaisePropertyChanged(() => CanRedo);
+            };
+             _editor.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == GetPropertyName(() => _editor.ParsingError)) RaisePropertyChanged(() => CanEvaluate);
             };
         }
+
 
         public int CaretIndex
         {
@@ -110,42 +137,63 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             set { _editor.CaretIndex = value; }
         }
 
+        public bool CanDelete
+        {
+            get { return _editor.CanDelete; }
+        }
+
+        public bool CanUndo
+        {
+            get { return _editor.CanUndo; }
+        }
+
+        public bool CanRedo
+        {
+            get { return _editor.CanRedo; }
+        }
+
+        public bool CanEvaluate
+        {
+            get { return _editor.ParsingError == null; }
+        }
+
         #endregion
 
         #region Commands
 
-        public RelayCommand<SensorVariable> SensorVariableSelectedCommand { get; private set; }
-
-        public RelayCommand<ObjectVariable> ObjectVariableSelectedCommand { get; private set; }
-
         public RelayCommand<FormulaEditorKey> KeyPressedCommand { get; private set; }
-
-        #endregion
-
-        #region Actions
-
-        private void KeyPressedCommandAction(FormulaEditorKey key)
+        private void KeyPressedAction(FormulaEditorKey key)
         {
             if (!_editor.HandleKey(key)) RaiseKeyError();
         }
 
+        public RelayCommand<ObjectVariable> ObjectVariableSelectedCommand { get; private set; }
         private void ObjectVariableSelectedAction(ObjectVariable variable)
         {
             if (!_editor.HandleKey(variable)) RaiseKeyError();
         }
 
+        public RelayCommand<SensorVariable> SensorVariableSelectedCommand { get; private set; }
         private void SensorVariableSelectedAction(SensorVariable variable)
         {
             if (!_editor.HandleKey(variable)) RaiseKeyError();
         }
+
+        public RelayCommand EvaluatePressedCommand { get; private set; }
+
+        private void EvaluatePressedAction()
+        {
+            var value = new FormulaEvaluator().Evaluate(Formula);
+            RaiseEvaluatePressed(value);
+        }
+
+        #endregion
 
         protected override void GoBackAction()
         {
             ResetViewModel();
             base.GoBackAction();
         }
-
-        #endregion
 
         #region MessageActions
 
@@ -179,7 +227,9 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         {
             SensorVariableSelectedCommand = new RelayCommand<SensorVariable>(SensorVariableSelectedAction);
             ObjectVariableSelectedCommand = new RelayCommand<ObjectVariable>(ObjectVariableSelectedAction);
-            KeyPressedCommand = new RelayCommand<FormulaEditorKey>(KeyPressedCommandAction);
+            KeyPressedCommand = new RelayCommand<FormulaEditorKey>(KeyPressedAction);
+            EvaluatePressedCommand = new RelayCommand(EvaluatePressedAction);
+            
 
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);

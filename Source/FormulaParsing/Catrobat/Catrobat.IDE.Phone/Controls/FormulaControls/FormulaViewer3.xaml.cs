@@ -1,5 +1,4 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Phone.Annotations;
 using Catrobat.IDE.Phone.Controls.FormulaControls.Formulas;
 using Catrobat.IDE.Phone.Controls.FormulaControls.PartControls;
@@ -23,9 +22,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty TokensProperty = DependencyProperty.Register(
             name: "Tokens",
-            propertyType: typeof(ObservableCollection<IFormulaToken>), 
-            ownerType: typeof(FormulaViewer3),
-            typeMetadata: new PropertyMetadata(new ObservableCollection<IFormulaToken>(), (d, e) => ((FormulaViewer3)d).TokensPropertyChanged(e)));
+            propertyType: typeof (ObservableCollection<IFormulaToken>),
+            ownerType: typeof (FormulaViewer3),
+            typeMetadata: new PropertyMetadata(null, (d, e) => ((FormulaViewer3) d).TokensPropertyChanged(e)));
         public ObservableCollection<IFormulaToken> Tokens
         {
             get { return (ObservableCollection<IFormulaToken>)GetValue(TokensProperty); }
@@ -38,8 +37,8 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
             UpdateControls();
 
-            oldValue.CollectionChanged -= Tokens_CollectionChanged;
-            newValue.CollectionChanged += Tokens_CollectionChanged;
+            if (oldValue != null) oldValue.CollectionChanged -= Tokens_CollectionChanged;
+            if (newValue != null) newValue.CollectionChanged += Tokens_CollectionChanged;
 
         }
         private void Tokens_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -51,7 +50,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             name: "CaretIndex",
             propertyType: typeof (int),
             ownerType: typeof (FormulaViewer3),
-            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3)d).CaretIndexChanged(e)));
+            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3) d).CaretIndexChanged(e)));
         public int CaretIndex
         {
             get { return (int)GetValue(CaretIndexProperty); }
@@ -79,9 +78,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty SelectionStartProperty = DependencyProperty.Register(
             name: "SelectionStart",
-            propertyType: typeof(int),
-            ownerType: typeof(FormulaViewer3),
-            typeMetadata: new PropertyMetadata(-1, (d, e) => ((FormulaViewer3)d).SetSelection()));
+            propertyType: typeof (int),
+            ownerType: typeof (FormulaViewer3),
+            typeMetadata: new PropertyMetadata(-1, (d, e) => ((FormulaViewer3) d).SetSelection()));
         public int SelectionStart
         {
             get { return (int)GetValue(SelectionStartProperty); }
@@ -90,9 +89,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty SelectionLengthProperty = DependencyProperty.Register(
             name: "SelectionLength",
-            propertyType: typeof(int),
-            ownerType: typeof(FormulaViewer3),
-            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3)d).SetSelection()));
+            propertyType: typeof (int),
+            ownerType: typeof (FormulaViewer3),
+            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3) d).SetSelection()));
         public int SelectionLength
         {
             get { return (int)GetValue(SelectionLengthProperty); }
@@ -104,9 +103,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty IsEditEnabledProperty = DependencyProperty.Register(
             name: "IsEditEnabled",
-            propertyType: typeof(bool),
-            ownerType: typeof(FormulaViewer3),
-            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer3)d).UpdateControls()));
+            propertyType: typeof (bool),
+            ownerType: typeof (FormulaViewer3),
+            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer3) d).UpdateControls()));
         public bool IsEditEnabled
         {
             get { return (bool)GetValue(IsEditEnabledProperty); }
@@ -115,9 +114,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty IsMultilineProperty = DependencyProperty.Register(
             name: "IsMultiline",
-            propertyType: typeof(bool),
-            ownerType: typeof(FormulaViewer3),
-            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer3)d).UpdateControls()));
+            propertyType: typeof (bool),
+            ownerType: typeof (FormulaViewer3),
+            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer3) d).UpdateControls()));
         public bool IsMultiline
         {
             get { return (bool)GetValue(IsMultilineProperty); }
@@ -126,9 +125,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty NormalFontSizeProperty = DependencyProperty.Register(
             name: "NormalFontSize",
-            propertyType: typeof(int),
-            ownerType: typeof(FormulaViewer3),
-            typeMetadata: new PropertyMetadata(1, (d, e) => ((FormulaViewer3)d).UpdateControls()));
+            propertyType: typeof (int),
+            ownerType: typeof (FormulaViewer3),
+            typeMetadata: new PropertyMetadata(1, (d, e) => ((FormulaViewer3) d).UpdateControls()));
         public int NormalFontSize
         {
             get { return (int)GetValue(NormalFontSizeProperty); }
@@ -137,9 +136,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty MinFontSizeProperty = DependencyProperty.Register(
             name: "MinFontSize",
-            propertyType: typeof(int),
-            ownerType: typeof(FormulaViewer3),
-            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3)d).UpdateControls()));
+            propertyType: typeof (int),
+            ownerType: typeof (FormulaViewer3),
+            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3) d).UpdateControls()));
         public int MinFontSize
         {
             get { return (int)GetValue(MinFontSizeProperty); }
@@ -148,9 +147,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty MaxFontSizeProperty = DependencyProperty.Register(
             name: "MaxFontSize",
-            propertyType: typeof(int),
-            ownerType: typeof(FormulaViewer3),
-            typeMetadata: new PropertyMetadata(42, (d, e) => ((FormulaViewer3)d).UpdateControls()));
+            propertyType: typeof (int),
+            ownerType: typeof (FormulaViewer3),
+            typeMetadata: new PropertyMetadata(42, (d, e) => ((FormulaViewer3) d).UpdateControls()));
         public int MaxFontSize
         {
             get { return (int)GetValue(MaxFontSizeProperty); }
@@ -158,10 +157,10 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         }
 
         public static readonly DependencyProperty CharactersInOneLineNormalFontSizeProperty = DependencyProperty.Register(
-            name: "CharactersInOneLineNormalFontSize",
-            propertyType: typeof(int),
-            ownerType: typeof(FormulaViewer3),
-            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3)d).UpdateControls()));
+                name: "CharactersInOneLineNormalFontSize",
+                propertyType: typeof (int),
+                ownerType: typeof (FormulaViewer3),
+                typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3) d).UpdateControls()));
         public int CharactersInOneLineNormalFontSize
         {
             get { return (int)GetValue(CharactersInOneLineNormalFontSizeProperty); }
@@ -170,9 +169,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty LinesNormalFontSizeProperty = DependencyProperty.Register(
             name: "LinesNormalFontSize",
-            propertyType: typeof(int),
-            ownerType: typeof(FormulaViewer3),
-            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3)d).UpdateControls()));
+            propertyType: typeof (int),
+            ownerType: typeof (FormulaViewer3),
+            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3) d).UpdateControls()));
         public int LinesNormalFontSize
         {
             get { return (int)GetValue(LinesNormalFontSizeProperty); }
@@ -181,9 +180,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty IsAutoFontSizeProperty = DependencyProperty.Register(
             name: "IsAutoFontSize",
-            propertyType: typeof(bool),
-            ownerType: typeof(FormulaViewer3),
-            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer3)d).UpdateControls()));
+            propertyType: typeof (bool),
+            ownerType: typeof (FormulaViewer3),
+            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer3) d).UpdateControls()));
         public bool IsAutoFontSize
         {
             get { return (bool)GetValue(IsAutoFontSizeProperty); }
@@ -233,7 +232,11 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private void UpdateControls()
         {
-            if (Tokens == null) return;
+            if (Tokens == null)
+            {
+                GetPanel().Children.Clear();
+                return;
+            }
 
             _templates = Tokens.Select(token =>
             {

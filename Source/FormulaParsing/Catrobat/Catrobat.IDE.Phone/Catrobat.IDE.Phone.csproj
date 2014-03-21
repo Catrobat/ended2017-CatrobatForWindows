@@ -63,6 +63,7 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -122,6 +123,36 @@
     <NoStdLib>true</NoStdLib>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TFSBuild|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\TFSBuild\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -867,13 +898,13 @@
       <Project>{BCA5086E-499A-4507-AA9B-A55D7E534EF7}</Project>
       <Name>Catrobat.IDE.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Paint\Paint.csproj">
-      <Project>{BA0C8067-CD1A-4F6D-8956-C28EF97E3142}</Project>
-      <Name>Paint</Name>
+    <ProjectReference Include="..\Catrobat.Paint.Phone.Old\Catrobat.Paint.Phone.Old.csproj">
+      <Project>{39B2B796-72DF-4619-B6BA-8C98D809E5E6}</Project>
+      <Name>Catrobat.Paint.Phone.Old</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PlayerWindowsPhone8\PlayerWindowsPhone8Component\PlayerWindowsPhone8Component.vcxproj">
+    <ProjectReference Include="..\Catrobat.Player.Component\Catrobat.Player.Component.vcxproj">
       <Project>{A1D92942-96B3-455F-BDCC-5D32214804B6}</Project>
-      <Name>PlayerWindowsPhone8Component</Name>
+      <Name>Catrobat.Player.Component</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

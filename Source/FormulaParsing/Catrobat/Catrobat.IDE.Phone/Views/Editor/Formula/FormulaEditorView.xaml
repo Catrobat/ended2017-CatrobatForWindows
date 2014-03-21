@@ -47,7 +47,11 @@
       <formulaControls:FormulaKeyboard
         Name="FormulaKeyboard" 
         LocalVariables="{Binding LocalVariables}" 
-        GlobalVariables="{Binding GlobalVariables}" />
+        GlobalVariables="{Binding GlobalVariables}"
+        CanDelete="{Binding CanDelete}"
+        CanUndo="{Binding CanUndo}"
+        CanRedo="{Binding CanRedo}"
+        CanEvaluate="{Binding CanEvaluate}"/>
 
       <Grid Name="GridError" Background="Tomato" Opacity="0.0" Height="10" VerticalAlignment="Top">
         <Grid.Resources>
