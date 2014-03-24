@@ -113,22 +113,25 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region Key handler
 
-        public bool HandleKey(FormulaEditorKey key)
+        public bool HandleKey(FormulaEditorKey key, ObjectVariableEntry objectVariable, UserVariable userVariable)
         {
             switch (key)
             {
-                case FormulaEditorKey.Undo:
-                    return Undo();
-                case FormulaEditorKey.Redo:
-                    return Redo();
+                case FormulaEditorKey.Left:
+                    throw new NotImplementedException();
+                case FormulaEditorKey.Right:
+                    throw new NotImplementedException();
                 case FormulaEditorKey.Delete:
                     if (CaretIndex == 0) return false;
                     PushUndo();
                     return RemoveToken();
-                    return true;
+                case FormulaEditorKey.Undo:
+                    return Undo();
+                case FormulaEditorKey.Redo:
+                    return Redo();
                 default:
                     PushUndo();
-                    var token = CreateToken(key);
+                    var token = CreateToken(key, objectVariable, userVariable);
                     InsertToken(token);
                     if (token is FormulaNodeUnaryFunction || token is FormulaNodeBinaryFunction)
                     {
@@ -138,25 +141,98 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        public bool HandleKey(SensorVariable variable)
+        private static IFormulaToken CreateToken(FormulaEditorKey key, ObjectVariableEntry objectVariable, UserVariable userVariable)
         {
-            PushUndo();
-            InsertToken(CreateToken(variable));
-            return true;
-        }
+            switch (key)
+            {
+                // numbers
+                case FormulaEditorKey.D0: return FormulaTokenFactory.CreateDigitToken(0);
+                case FormulaEditorKey.D1: return FormulaTokenFactory.CreateDigitToken(1);
+                case FormulaEditorKey.D2: return FormulaTokenFactory.CreateDigitToken(2);
+                case FormulaEditorKey.D3: return FormulaTokenFactory.CreateDigitToken(3);
+                case FormulaEditorKey.D4: return FormulaTokenFactory.CreateDigitToken(4);
+                case FormulaEditorKey.D5: return FormulaTokenFactory.CreateDigitToken(5);
+                case FormulaEditorKey.D6: return FormulaTokenFactory.CreateDigitToken(6);
+                case FormulaEditorKey.D7: return FormulaTokenFactory.CreateDigitToken(7);
+                case FormulaEditorKey.D8: return FormulaTokenFactory.CreateDigitToken(8);
+                case FormulaEditorKey.D9: return FormulaTokenFactory.CreateDigitToken(9);
+                case FormulaEditorKey.DecimalSeparator: return FormulaTokenFactory.CreateDecimalSeparatorToken();
+                case FormulaEditorKey.ArgumentSeparator: return FormulaTokenFactory.CreateArgumentSeparatorToken();
+                case FormulaEditorKey.Pi: return FormulaTokenFactory.CreatePiToken();
 
-        public bool HandleKey(UserVariable variable)
-        {
-            PushUndo();
-            InsertToken(CreateToken(variable));
-            return true;
-        }
+                // arithemtic
+                case FormulaEditorKey.Plus: return FormulaTokenFactory.CreatePlusToken();
+                case FormulaEditorKey.Minus: return FormulaTokenFactory.CreateMinusToken();
+                case FormulaEditorKey.Multiply: return FormulaTokenFactory.CreateMultiplyToken();
+                case FormulaEditorKey.Divide: return FormulaTokenFactory.CreateDivideToken();
 
-        public bool HandleKey(ObjectVariable variable)
-        {
-            PushUndo();
-            InsertToken(CreateToken(variable));
-            return true;
+                // relational operators
+                case FormulaEditorKey.Equals: return FormulaTokenFactory.CreateEqualsToken();
+                case FormulaEditorKey.NotEquals: return FormulaTokenFactory.CreateNotEqualsToken();
+                case FormulaEditorKey.Greater: return FormulaTokenFactory.CreateGreaterToken();
+                case FormulaEditorKey.GreaterEqual: return FormulaTokenFactory.CreateGreaterEqualToken();
+                case FormulaEditorKey.Less: return FormulaTokenFactory.CreateLessToken();
+                case FormulaEditorKey.LessEqual: return FormulaTokenFactory.CreateLessEqualToken();
+
+                // logic
+                case FormulaEditorKey.True: return FormulaTokenFactory.CreateTrueToken();
+                case FormulaEditorKey.False: return FormulaTokenFactory.CreateFalseToken();
+                case FormulaEditorKey.And: return FormulaTokenFactory.CreateAndToken();
+                case FormulaEditorKey.Or: return FormulaTokenFactory.CreateOrToken();
+                case FormulaEditorKey.Not: return FormulaTokenFactory.CreateNotToken();
+
+                // min/max
+                case FormulaEditorKey.Min: return FormulaTokenFactory.CreateMinToken();
+                case FormulaEditorKey.Max: return FormulaTokenFactory.CreateMaxToken();
+
+                // exponential function and logarithms
+                case FormulaEditorKey.Exp: return FormulaTokenFactory.CreateExpToken();
+                case FormulaEditorKey.Log: return FormulaTokenFactory.CreateLogToken();
+                case FormulaEditorKey.Ln: return FormulaTokenFactory.CreateLnToken();
+
+                // trigonometric functions
+                case FormulaEditorKey.Sin: return FormulaTokenFactory.CreateSinToken();
+                case FormulaEditorKey.Cos: return FormulaTokenFactory.CreateCosToken();
+                case FormulaEditorKey.Tan: return FormulaTokenFactory.CreateTanToken();
+                case FormulaEditorKey.Arcsin: return FormulaTokenFactory.CreateArcsinToken();
+                case FormulaEditorKey.Arccos: return FormulaTokenFactory.CreateArccosToken();
+                case FormulaEditorKey.Arctan: return FormulaTokenFactory.CreateArctanToken();
+
+                // miscellaneous functions
+                case FormulaEditorKey.Sqrt: return FormulaTokenFactory.CreateSqrtToken();
+                case FormulaEditorKey.Abs: return FormulaTokenFactory.CreateAbsToken();
+                case FormulaEditorKey.Mod: return FormulaTokenFactory.CreateModToken();
+                case FormulaEditorKey.Round: return FormulaTokenFactory.CreateRoundToken();
+                case FormulaEditorKey.Random: return FormulaTokenFactory.CreateRandomToken();
+
+                // sensors
+                case FormulaEditorKey.AccelerationX: return FormulaTokenFactory.CreateAccelerationXToken();
+                case FormulaEditorKey.AccelerationY: return FormulaTokenFactory.CreateAccelerationYToken();
+                case FormulaEditorKey.AccelerationZ: return FormulaTokenFactory.CreateAccelerationZToken();
+                case FormulaEditorKey.Compass: return FormulaTokenFactory.CreateCompassToken();
+                case FormulaEditorKey.InclinationX: return FormulaTokenFactory.CreateInclinationXToken();
+                case FormulaEditorKey.InclinationY: return FormulaTokenFactory.CreateInclinationYToken();
+
+                // object variables
+                case FormulaEditorKey.Brightness: return FormulaTokenFactory.CreateBrightnessToken();
+                case FormulaEditorKey.Direction: return FormulaTokenFactory.CreateDirectionToken();
+                case FormulaEditorKey.GhostEffect: return FormulaTokenFactory.CreateGhostEffectToken();
+                case FormulaEditorKey.Layer: return FormulaTokenFactory.CreateLayerToken();
+                case FormulaEditorKey.Opacity: return FormulaTokenFactory.CreateOpacityToken();
+                case FormulaEditorKey.PositionX: return FormulaTokenFactory.CreatePositionXToken();
+                case FormulaEditorKey.PositionY: return FormulaTokenFactory.CreatePositionYToken();
+                case FormulaEditorKey.Rotation: return FormulaTokenFactory.CreateRotationToken();
+                case FormulaEditorKey.Size: return FormulaTokenFactory.CreateSizeToken();
+
+                // user variables
+                case FormulaEditorKey.UserVariable: return FormulaTokenFactory.CreateUserVariableToken(userVariable);
+
+                // brackets
+                case FormulaEditorKey.OpeningParenthesis: return FormulaTokenFactory.CreateParenthesisToken(true);
+                case FormulaEditorKey.ClosingParenthesis: return FormulaTokenFactory.CreateParenthesisToken(false);
+
+                default: throw new ArgumentOutOfRangeException("key");
+            }
         }
 
         #endregion
@@ -249,99 +325,5 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             RaisePropertyChanged(() => CanDelete);
             return true;
         }
-
-        #region Key mappings
-
-        private static IFormulaToken CreateToken(FormulaEditorKey key)
-        {
-            switch (key)
-            {
-                case FormulaEditorKey.Number0: return FormulaTokenFactory.CreateDigitToken(0);
-                case FormulaEditorKey.Number1: return FormulaTokenFactory.CreateDigitToken(1);
-                case FormulaEditorKey.Number2: return FormulaTokenFactory.CreateDigitToken(2);
-                case FormulaEditorKey.Number3: return FormulaTokenFactory.CreateDigitToken(3);
-                case FormulaEditorKey.Number4: return FormulaTokenFactory.CreateDigitToken(4);
-                case FormulaEditorKey.Number5: return FormulaTokenFactory.CreateDigitToken(5);
-                case FormulaEditorKey.Number6: return FormulaTokenFactory.CreateDigitToken(6);
-                case FormulaEditorKey.Number7: return FormulaTokenFactory.CreateDigitToken(7);
-                case FormulaEditorKey.Number8: return FormulaTokenFactory.CreateDigitToken(8);
-                case FormulaEditorKey.Number9: return FormulaTokenFactory.CreateDigitToken(9);
-                case FormulaEditorKey.NumberDot: return FormulaTokenFactory.CreateDecimalSeparatorToken();
-                case FormulaEditorKey.NumberEquals: return FormulaTokenFactory.CreateEqualsToken();
-                case FormulaEditorKey.OpenBracket: return FormulaTokenFactory.CreateParenthesisToken(true);
-                case FormulaEditorKey.CloseBracket: return FormulaTokenFactory.CreateParenthesisToken(false);
-                case FormulaEditorKey.Plus: return FormulaTokenFactory.CreatePlusToken();
-                case FormulaEditorKey.Minus: return FormulaTokenFactory.CreateMinusToken();
-                case FormulaEditorKey.Multiply: return FormulaTokenFactory.CreateMultiplyToken();
-                case FormulaEditorKey.Divide: return FormulaTokenFactory.CreateDivideToken();
-                case FormulaEditorKey.LogicEqual: return FormulaTokenFactory.CreateEqualsToken();
-                case FormulaEditorKey.LogicNotEqual: return FormulaTokenFactory.CreateNotEqualsToken();
-                case FormulaEditorKey.LogicSmaller: return FormulaTokenFactory.CreateLessToken();
-                case FormulaEditorKey.LogicSmallerEqual: return FormulaTokenFactory.CreateLessEqualToken();
-                case FormulaEditorKey.LogicGreater: return FormulaTokenFactory.CreateGreaterToken();
-                case FormulaEditorKey.LogicGreaterEqual: return FormulaTokenFactory.CreateGreaterEqualToken();
-                case FormulaEditorKey.LogicAnd: return FormulaTokenFactory.CreateAndToken();
-                case FormulaEditorKey.LogicOr: return FormulaTokenFactory.CreateOrToken();
-                case FormulaEditorKey.LogicNot: return FormulaTokenFactory.CreateNotToken();
-                case FormulaEditorKey.LogicTrue: return FormulaTokenFactory.CreateTrueToken();
-                case FormulaEditorKey.LogicFalse: return FormulaTokenFactory.CreateFalseToken();
-                case FormulaEditorKey.MathSin: return FormulaTokenFactory.CreateSinToken();
-                case FormulaEditorKey.MathCos: return FormulaTokenFactory.CreateCosToken();
-                case FormulaEditorKey.MathTan: return FormulaTokenFactory.CreateTanToken();
-                case FormulaEditorKey.MathArcSin: return FormulaTokenFactory.CreateArcsinToken();
-                case FormulaEditorKey.MathArcCos: return FormulaTokenFactory.CreateArccosToken();
-                case FormulaEditorKey.MathArcTan: return FormulaTokenFactory.CreateArctanToken();
-                case FormulaEditorKey.MathExp: return FormulaTokenFactory.CreateExpToken();
-                case FormulaEditorKey.MathLn: return FormulaTokenFactory.CreateLnToken();
-                case FormulaEditorKey.MathLog: return FormulaTokenFactory.CreateLogToken();
-                case FormulaEditorKey.MathAbs: return FormulaTokenFactory.CreateAbsToken();
-                case FormulaEditorKey.MathRound: return FormulaTokenFactory.CreateRoundToken();
-                case FormulaEditorKey.MathMod: return FormulaTokenFactory.CreateModToken();
-                case FormulaEditorKey.MathMin: return FormulaTokenFactory.CreateMinToken();
-                case FormulaEditorKey.MathMax: return FormulaTokenFactory.CreateMaxToken();
-                case FormulaEditorKey.MathSqrt: return FormulaTokenFactory.CreateSqrtToken();
-                case FormulaEditorKey.MathPi: return FormulaTokenFactory.CreatePiToken();
-                case FormulaEditorKey.MathRandom: return FormulaTokenFactory.CreateRandomToken();
-                default: throw new ArgumentOutOfRangeException("key");
-            }
-        }
-
-        private static IFormulaToken CreateToken(SensorVariable variable)
-        {
-            switch (variable)
-            {
-                case SensorVariable.AccelerationX: return FormulaTokenFactory.CreateAccelerationXToken();
-                case SensorVariable.AccelerationY: return FormulaTokenFactory.CreateAccelerationYToken();
-                case SensorVariable.AccelerationZ: return FormulaTokenFactory.CreateAccelerationZToken();
-                case SensorVariable.CompassDirection: return FormulaTokenFactory.CreateCompassToken();
-                case SensorVariable.InclinationX: return FormulaTokenFactory.CreateInclinationXToken();
-                case SensorVariable.InclinationY: return FormulaTokenFactory.CreateInclinationYToken();
-                default: throw new ArgumentOutOfRangeException("variable");
-            }
-        }
-
-        private static IFormulaToken CreateToken(UserVariable variable)
-        {
-            return FormulaTokenFactory.CreateUserVariableToken(variable);
-        }
-
-        private static IFormulaToken CreateToken(ObjectVariable variable)
-        {
-            switch (variable)
-            {
-                case ObjectVariable.Brightness: return FormulaTokenFactory.CreateBrightnessToken();
-                case ObjectVariable.Direction: return FormulaTokenFactory.CreateDirectionToken();
-                case ObjectVariable.GhostEffect: return FormulaTokenFactory.CreateGhostEffectToken();
-                case ObjectVariable.Layer: return FormulaTokenFactory.CreateLayerToken();
-                case ObjectVariable.PositionX: return FormulaTokenFactory.CreatePositionXToken();
-                case ObjectVariable.PositionY: return FormulaTokenFactory.CreatePositionYToken();
-                case ObjectVariable.Transparency: return FormulaTokenFactory.CreateOpacityToken();
-                case ObjectVariable.Size: return FormulaTokenFactory.CreateSizeToken();
-                case ObjectVariable.Rotation: return FormulaTokenFactory.CreateRotationToken();
-                default: throw new ArgumentOutOfRangeException("variable");
-            }
-        }
-
-        #endregion
     }
 }

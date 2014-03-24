@@ -1,6 +1,4 @@
-﻿using System.Collections.Specialized;
-using System.ComponentModel;
-using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
@@ -161,22 +159,10 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
         #region Commands
 
-        public RelayCommand<FormulaEditorKey> KeyPressedCommand { get; private set; }
-        private void KeyPressedAction(FormulaEditorKey key)
+        public RelayCommand<FormulaKeyEventArgs> KeyPressedCommand { get; private set; }
+        private void KeyPressedAction(FormulaKeyEventArgs e)
         {
-            if (!_editor.HandleKey(key)) RaiseKeyError();
-        }
-
-        public RelayCommand<ObjectVariable> ObjectVariableSelectedCommand { get; private set; }
-        private void ObjectVariableSelectedAction(ObjectVariable variable)
-        {
-            if (!_editor.HandleKey(variable)) RaiseKeyError();
-        }
-
-        public RelayCommand<SensorVariable> SensorVariableSelectedCommand { get; private set; }
-        private void SensorVariableSelectedAction(SensorVariable variable)
-        {
-            if (!_editor.HandleKey(variable)) RaiseKeyError();
+            if (!_editor.HandleKey(e.Key, e.ObjectVariable, e.UserVariable)) RaiseKeyError();
         }
 
         public RelayCommand EvaluatePressedCommand { get; private set; }
@@ -213,11 +199,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
             if (VariableHelper.IsVariableLocal(CurrentProject, variable))
             {
-                if (!_editor.HandleKey(variable)) RaiseKeyError();
+                if (!_editor.HandleKey(FormulaEditorKey.UserVariable, null, variable)) RaiseKeyError();
             }
             else
             {
-                if (!_editor.HandleKey(variable)) RaiseKeyError();
+                if (!_editor.HandleKey(FormulaEditorKey.UserVariable, null, variable)) RaiseKeyError();
             }
         }
 
@@ -225,9 +211,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
         public FormulaEditorViewModel()
         {
-            SensorVariableSelectedCommand = new RelayCommand<SensorVariable>(SensorVariableSelectedAction);
-            ObjectVariableSelectedCommand = new RelayCommand<ObjectVariable>(ObjectVariableSelectedAction);
-            KeyPressedCommand = new RelayCommand<FormulaEditorKey>(KeyPressedAction);
+            KeyPressedCommand = new RelayCommand<FormulaKeyEventArgs>(KeyPressedAction);
             EvaluatePressedCommand = new RelayCommand(EvaluatePressedAction);
             
 

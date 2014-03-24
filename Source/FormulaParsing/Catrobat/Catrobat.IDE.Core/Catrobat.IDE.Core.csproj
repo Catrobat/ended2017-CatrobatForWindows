@@ -187,7 +187,6 @@
     <Compile Include="FormulaEditor\IFormulaEvaluation.cs" />
     <Compile Include="FormulaEditor\IFormulaSerialization.cs" />
     <Compile Include="FormulaEditor\Editor\FormulaEditor3.cs" />
-    <Compile Include="FormulaEditor\Editor\FormulaEditor2.cs" />
     <Compile Include="FormulaEditor\FormulaTree\BinaryFormulaTree.cs" />
     <Compile Include="FormulaEditor\FormulaTree\ConstantFormulaTree.cs" />
     <Compile Include="FormulaEditor\FormulaInterpreter.cs" />
@@ -265,9 +264,7 @@
     <Compile Include="CatrobatObjects\Variables\VariableList.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
-    <Compile Include="FormulaEditor\Editor\XmlFormulaTreeFactory.cs" />
-    <Compile Include="FormulaEditor\Editor\FormulaEditor.cs" />
-    <Compile Include="FormulaEditor\Editor\FormulaKeys.cs" />
+    <Compile Include="FormulaEditor\Editor\FormulaEditorKey.cs" />
     <Compile Include="FormulaEditor\Editor\SelectedFormulaInformation.cs" />
     <Compile Include="LocalSettings.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -358,6 +355,7 @@
     <Compile Include="ViewModel\Editor\Formula\AddNewLocalVariableViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\ChangeVariableViewModel.cs" />
     <Compile Include="ViewModel\Editor\Formula\FormulaEditorViewModel.cs" />
+    <Compile Include="ViewModel\Editor\Formula\FormulaKeyEventArgs.cs" />
     <Compile Include="ViewModel\Editor\Formula\VariableSelectionViewModel.cs" />
     <Compile Include="ViewModel\Main\ProjectSettingsViewModel.cs" />
     <Compile Include="ViewModel\Editor\Scripts\AddNewScriptBrickViewModel.cs" />

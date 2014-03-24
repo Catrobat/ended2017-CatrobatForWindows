@@ -1,11 +1,5 @@
-﻿using System;
-using Catrobat.IDE.Core.FormulaEditor.Editor;
-using Catrobat.IDE.Core.Resources.Localization;
-using Catrobat.IDE.Core.Services;
+﻿using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel.Editor.Formula;
-using Coding4Fun.Toolkit.Controls;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Formula
 {
@@ -26,8 +20,6 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             _viewModel.ErrorOccurred += ErrorOccurred;
 
             FormulaKeyboard.KeyPressed += KeyPressed;
-            FormulaKeyboard.ObjectVariableSelected += ObjectVariableSelected;
-            FormulaKeyboard.SensorVariableSelected += SensorVariableSelected;
             FormulaKeyboard.EvaluatePressed += EvaluatePressed;
             _viewModel.EvaluatePressed += EvaluatePressed;
         }
@@ -43,19 +35,9 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             ShowKeyErrorAnimation();
         }
 
-        private void SensorVariableSelected(SensorVariable variable)
+        private void KeyPressed(FormulaKeyEventArgs e)
         {
-            _viewModel.SensorVariableSelectedCommand.Execute(variable);           
-        }
-
-        private void ObjectVariableSelected(ObjectVariable variable)
-        {
-            _viewModel.ObjectVariableSelectedCommand.Execute(variable);
-        }
-
-        private void KeyPressed(FormulaEditorKey key)
-        {
-            _viewModel.KeyPressedCommand.Execute(key);
+            _viewModel.KeyPressedCommand.Execute(e);
         }
 
         private void EvaluatePressed()
