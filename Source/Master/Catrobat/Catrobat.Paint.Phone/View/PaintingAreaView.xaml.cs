@@ -3,7 +3,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Navigation;
+using Windows.Foundation.Metadata;
+using Windows.Phone.Media.Capture;
 using Catrobat.Paint.Phone.Command;
+using Catrobat.Paint.Phone.Tool;
 using Catrobat.Paint.Phone.Ui;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -31,11 +34,13 @@ namespace Catrobat.Paint.Phone.View
             PaintingAreaCheckeredGrid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
             PaintingAreaCheckeredGrid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
             PaintingAreaCheckeredGrid.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
+            PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
+
             foreach (ApplicationBarIconButton btn in ApplicationBar.Buttons)
             {
                 if (btn.Text.Contains("color"))
                 {
-                    btn.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;                    
+                    btn.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;
                 }
             }
 
@@ -52,7 +57,7 @@ namespace Catrobat.Paint.Phone.View
 
         private void ChangeIconBtnColor()
         {
-            
+
         }
 
         // Sample code for building a localized ApplicationBar
@@ -83,8 +88,7 @@ namespace Catrobat.Paint.Phone.View
                 child.Visibility = SliderThicknessGrid.Visibility;
             }
 
-            //ApplicationBar = (IApplicationBar)this.Resources["bar2"];
-             
+
         }
 
         private void ApplicationBarMenuItem_OnClick(object sender, EventArgs e)
@@ -149,12 +153,38 @@ namespace Catrobat.Paint.Phone.View
             }
         }
 
+
+        private void ToolChangedHere(ToolBase tool)
+        {
+            switch (tool.GetToolType())
+            {
+                case ToolType.Brush:
+                    ApplicationBar = (IApplicationBar)this.Resources["barStandard"];
+                    break;
+
+                case ToolType.Pipette:
+                    ApplicationBar = (IApplicationBar)this.Resources["barPipette"];
+                    break;
+
+                case ToolType.Eraser:
+                    ApplicationBar = (IApplicationBar)this.Resources["barEraser"];
+                    break;
+
+
+            }
+
+
+
+
+
+        }
+
         // TODO defining this handler solves issue that first tap after toolpicker page was open is not recognized by 
         // PaintingAreaCanvas Eventhandler... 
         // PaintingAreaCheckeredGrid handles now and this seems to be resolved.
-//        private void PaintingAreaContentPanelGrid_OnManipulationStarted(object sender, ManipulationStartedEventArgs e)
-//        {
-//            //System.Diagnostics.Debug.WriteLine("--PaintingAreaContentPanelGrid--");
-//        }
+        //        private void PaintingAreaContentPanelGrid_OnManipulationStarted(object sender, ManipulationStartedEventArgs e)
+        //        {
+        //            //System.Diagnostics.Debug.WriteLine("--PaintingAreaContentPanelGrid--");
+        //        }
     }
 }
