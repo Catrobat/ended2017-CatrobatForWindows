@@ -60,7 +60,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         private readonly Stack<EditorState> _undoStack = new Stack<EditorState>();
         private readonly Stack<EditorState> _redoStack = new Stack<EditorState>();
 
-        private int _caretIndex;
+        private int _caretIndex = 0;
 
         public int CaretIndex
         {
@@ -310,7 +310,6 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             if (Tokens == null) Tokens = new ObservableCollection<IFormulaToken>();
             Tokens.Insert(CaretIndex, token);
             InterpretTokens();
-            CaretIndex++;
             RaisePropertyChanged(() => CanDelete);
         }
 
@@ -319,9 +318,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             if (Tokens == null) return false;
             var index = CaretIndex - 1;
             if (!(0 <= index && index < Tokens.Count)) return false;
-            Tokens.RemoveAt(CaretIndex - 1);
+            Tokens.RemoveAt(index);
             InterpretTokens();
-            CaretIndex--;
             RaisePropertyChanged(() => CanDelete);
             return true;
         }

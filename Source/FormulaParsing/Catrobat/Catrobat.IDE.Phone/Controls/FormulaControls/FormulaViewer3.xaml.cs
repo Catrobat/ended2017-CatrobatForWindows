@@ -1,4 +1,7 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+﻿using System.Windows.Media;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 using Catrobat.IDE.Phone.Annotations;
 using Catrobat.IDE.Phone.Controls.FormulaControls.Formulas;
 using Catrobat.IDE.Phone.Controls.FormulaControls.PartControls;
@@ -16,15 +19,15 @@ using System.Windows.Media.Animation;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {
-    public partial class FormulaViewer3: INotifyPropertyChanged
+    public partial class FormulaViewer3 : INotifyPropertyChanged
     {
         #region DependencyProperties
 
         public static readonly DependencyProperty TokensProperty = DependencyProperty.Register(
             name: "Tokens",
-            propertyType: typeof (ObservableCollection<IFormulaToken>),
-            ownerType: typeof (FormulaViewer3),
-            typeMetadata: new PropertyMetadata(null, (d, e) => ((FormulaViewer3) d).TokensPropertyChanged(e)));
+            propertyType: typeof(ObservableCollection<IFormulaToken>),
+            ownerType: typeof(FormulaViewer3),
+            typeMetadata: new PropertyMetadata(null, (d, e) => ((FormulaViewer3)d).TokensPropertyChanged(e)));
         public ObservableCollection<IFormulaToken> Tokens
         {
             get { return (ObservableCollection<IFormulaToken>)GetValue(TokensProperty); }
@@ -43,14 +46,57 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         }
         private void Tokens_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            UpdateControls();
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    for (var relativeIndex = 0; relativeIndex < e.NewItems.Count; relativeIndex++)
+                    {
+                        var absoluteIndex = e.NewStartingIndex + relativeIndex;
+                        var template = CreateTemplate((IFormulaToken) e.NewItems[relativeIndex]);
+                        _templates.Insert(absoluteIndex, template);
+                        if (absoluteIndex > CaretIndex)
+                        {
+                            absoluteIndex++;
+                        }
+                        else
+                        {
+                            CaretIndex++;
+                        }
+                        Children.Insert(absoluteIndex, CreateUiControl(template));
+                    }
+                    UpdateFontSize();
+                    UpdateStyles();
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    for (var relativeIndex = 0; relativeIndex < e.OldItems.Count; relativeIndex++)
+                    {
+                        var absoluteIndex = e.OldStartingIndex + relativeIndex;
+                        _templates.RemoveAt(absoluteIndex);
+                        if (absoluteIndex >= CaretIndex)
+                        {
+                            absoluteIndex++;
+                        }
+                        else
+                        {
+                            CaretIndex--;
+                        }
+                        Children.RemoveAt(absoluteIndex);
+                    }
+                    UpdateFontSize();
+                    UpdateStyles();
+                    break;
+                default:
+                    Debug.Assert(false, "NotifyCollectionChangedAction \"" + e.Action.ToString() + "\" not implemented. ");
+                    UpdateControls();
+                    break;
+            }
         }
 
         public static readonly DependencyProperty CaretIndexProperty = DependencyProperty.Register(
             name: "CaretIndex",
-            propertyType: typeof (int),
-            ownerType: typeof (FormulaViewer3),
-            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3) d).CaretIndexChanged(e)));
+            propertyType: typeof(int),
+            ownerType: typeof(FormulaViewer3),
+            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3)d).CaretIndexChanged(e)));
         public int CaretIndex
         {
             get { return (int)GetValue(CaretIndexProperty); }
@@ -64,23 +110,31 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
             // CoerceValueCallback in Windows Phone not available (FrameworkPropertyMetadata is not available)
             if (!(0 <= oldIndex && oldIndex <= Tokens.Count)) return;
-            if (!(0 <= newIndex && newIndex <= Tokens.Count))
+            if (!(0 <= newIndex))
             {
+                return;
                 CaretIndex = 0;
-                if (oldIndex == 0) return;
-                newIndex = 0;
+                //if (oldIndex == 0) return;
+                //newIndex = 0;
+            }
+            if (!(newIndex <= Tokens.Count))
+            {
+                return;
+                CaretIndex = Tokens.Count;
             }
 
-            var caret = _children[oldIndex];
-            _children.RemoveAt(oldIndex);
-            _children.Insert(newIndex, caret);
+            var caret = (Grid)Children[oldIndex];
+            if (caret.DataContext != null) return;
+
+            Children.RemoveAt(oldIndex);
+            Children.Insert(newIndex, caret);
         }
 
         public static readonly DependencyProperty SelectionStartProperty = DependencyProperty.Register(
             name: "SelectionStart",
-            propertyType: typeof (int),
-            ownerType: typeof (FormulaViewer3),
-            typeMetadata: new PropertyMetadata(-1, (d, e) => ((FormulaViewer3) d).SetSelection()));
+            propertyType: typeof(int),
+            ownerType: typeof(FormulaViewer3),
+            typeMetadata: new PropertyMetadata(-1, (d, e) => ((FormulaViewer3)d).SetSelection()));
         public int SelectionStart
         {
             get { return (int)GetValue(SelectionStartProperty); }
@@ -89,9 +143,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty SelectionLengthProperty = DependencyProperty.Register(
             name: "SelectionLength",
-            propertyType: typeof (int),
-            ownerType: typeof (FormulaViewer3),
-            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3) d).SetSelection()));
+            propertyType: typeof(int),
+            ownerType: typeof(FormulaViewer3),
+            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3)d).SetSelection()));
         public int SelectionLength
         {
             get { return (int)GetValue(SelectionLengthProperty); }
@@ -103,9 +157,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty IsEditEnabledProperty = DependencyProperty.Register(
             name: "IsEditEnabled",
-            propertyType: typeof (bool),
-            ownerType: typeof (FormulaViewer3),
-            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer3) d).UpdateControls()));
+            propertyType: typeof(bool),
+            ownerType: typeof(FormulaViewer3),
+            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer3)d).UpdateControls()));
         public bool IsEditEnabled
         {
             get { return (bool)GetValue(IsEditEnabledProperty); }
@@ -114,9 +168,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty IsMultilineProperty = DependencyProperty.Register(
             name: "IsMultiline",
-            propertyType: typeof (bool),
-            ownerType: typeof (FormulaViewer3),
-            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer3) d).UpdateControls()));
+            propertyType: typeof(bool),
+            ownerType: typeof(FormulaViewer3),
+            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer3)d).UpdateControls()));
         public bool IsMultiline
         {
             get { return (bool)GetValue(IsMultilineProperty); }
@@ -125,42 +179,42 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty NormalFontSizeProperty = DependencyProperty.Register(
             name: "NormalFontSize",
-            propertyType: typeof (int),
-            ownerType: typeof (FormulaViewer3),
-            typeMetadata: new PropertyMetadata(1, (d, e) => ((FormulaViewer3) d).UpdateControls()));
-        public int NormalFontSize
+            propertyType: typeof(double),
+            ownerType: typeof(FormulaViewer3),
+            typeMetadata: new PropertyMetadata(1.0, (d, e) => ((FormulaViewer3)d).UpdateControls()));
+        public double NormalFontSize
         {
-            get { return (int)GetValue(NormalFontSizeProperty); }
+            get { return (double)GetValue(NormalFontSizeProperty); }
             set { SetValue(NormalFontSizeProperty, value); }
         }
 
         public static readonly DependencyProperty MinFontSizeProperty = DependencyProperty.Register(
             name: "MinFontSize",
-            propertyType: typeof (int),
-            ownerType: typeof (FormulaViewer3),
-            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3) d).UpdateControls()));
-        public int MinFontSize
+            propertyType: typeof(double),
+            ownerType: typeof(FormulaViewer3),
+            typeMetadata: new PropertyMetadata(0.0, (d, e) => ((FormulaViewer3)d).UpdateControls()));
+        public double MinFontSize
         {
-            get { return (int)GetValue(MinFontSizeProperty); }
+            get { return (double)GetValue(MinFontSizeProperty); }
             set { SetValue(MinFontSizeProperty, value); }
         }
 
         public static readonly DependencyProperty MaxFontSizeProperty = DependencyProperty.Register(
             name: "MaxFontSize",
-            propertyType: typeof (int),
-            ownerType: typeof (FormulaViewer3),
-            typeMetadata: new PropertyMetadata(42, (d, e) => ((FormulaViewer3) d).UpdateControls()));
-        public int MaxFontSize
+            propertyType: typeof(double),
+            ownerType: typeof(FormulaViewer3),
+            typeMetadata: new PropertyMetadata(42.0, (d, e) => ((FormulaViewer3)d).UpdateControls()));
+        public double MaxFontSize
         {
-            get { return (int)GetValue(MaxFontSizeProperty); }
+            get { return (double)GetValue(MaxFontSizeProperty); }
             set { SetValue(MaxFontSizeProperty, value); }
         }
 
         public static readonly DependencyProperty CharactersInOneLineNormalFontSizeProperty = DependencyProperty.Register(
                 name: "CharactersInOneLineNormalFontSize",
-                propertyType: typeof (int),
-                ownerType: typeof (FormulaViewer3),
-                typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3) d).UpdateControls()));
+                propertyType: typeof(int),
+                ownerType: typeof(FormulaViewer3),
+                typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3)d).UpdateControls()));
         public int CharactersInOneLineNormalFontSize
         {
             get { return (int)GetValue(CharactersInOneLineNormalFontSizeProperty); }
@@ -169,9 +223,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty LinesNormalFontSizeProperty = DependencyProperty.Register(
             name: "LinesNormalFontSize",
-            propertyType: typeof (int),
-            ownerType: typeof (FormulaViewer3),
-            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3) d).UpdateControls()));
+            propertyType: typeof(int),
+            ownerType: typeof(FormulaViewer3),
+            typeMetadata: new PropertyMetadata(0, (d, e) => ((FormulaViewer3)d).UpdateControls()));
         public int LinesNormalFontSize
         {
             get { return (int)GetValue(LinesNormalFontSizeProperty); }
@@ -180,9 +234,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public static readonly DependencyProperty IsAutoFontSizeProperty = DependencyProperty.Register(
             name: "IsAutoFontSize",
-            propertyType: typeof (bool),
-            ownerType: typeof (FormulaViewer3),
-            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer3) d).UpdateControls()));
+            propertyType: typeof(bool),
+            ownerType: typeof(FormulaViewer3),
+            typeMetadata: new PropertyMetadata(false, (d, e) => ((FormulaViewer3)d).UpdateControls()));
         public bool IsAutoFontSize
         {
             get { return (bool)GetValue(IsAutoFontSizeProperty); }
@@ -195,6 +249,13 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         #endregion
 
         #region Members
+
+        private double _actualFontSize;
+        public double ActualFontSize
+        {
+            get { return _actualFontSize; }
+            private set { _actualFontSize = value; }
+        }
 
         private static Dictionary<Type, FormulaPartControl> _formulaTokenDefinitions;
         private static Dictionary<Type, FormulaPartControl> FormulaTokenDefinitions
@@ -216,8 +277,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private List<FormulaPartControl> _templates;
 
-        private List<Grid> _children;
-
         #endregion
 
         public FormulaViewer3()
@@ -230,87 +289,113 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             return IsMultiline ? (Panel)MultilinePanelContent : SingleLinePanelContent;
         }
 
+        private UIElementCollection Children
+        {
+            get { return GetPanel().Children; }
+        }
+
+        private FormulaPartControl CreateTemplate(IFormulaToken token)
+        {
+            var template = FormulaTokenDefinitions[token.GetType()];
+            Debug.Assert(template != null, "Please add template for \"" + token.GetType().Name + "\" to FormulaTokenTemplates.xaml. ");
+            return template.CreateUiTokenTemplate(token);
+        }
+
+        private Grid CreateUiControl(FormulaPartControl template)
+        {
+            return template.CreateUiControls(ActualFontSize, false, false, false);
+        }
+
         private void UpdateControls()
         {
             if (Tokens == null)
             {
-                GetPanel().Children.Clear();
+                Children.Clear();
                 return;
             }
 
-            _templates = Tokens.Select(token =>
+            _templates = Tokens.Select(CreateTemplate).ToList();
+
+            UpdateActualFontSize();
+
+            Children.Clear();
+            foreach (var child in _templates.Select(CreateUiControl))
             {
-                var template = FormulaTokenDefinitions[token.GetType()];
-                Debug.Assert(template != null, "Please add template for \"" + token.GetType().Name + "\" to FormulaTokenTemplates.xaml. ");
-                return template.CreateUiTokenTemplate(token);
-            }).ToList();
+                Children.Add(child);
+            }
 
-            var fontSize = IsAutoFontSize ? GetAutoFontSize() : NormalFontSize;
-            _children = _templates.Select(template => template.CreateUiControls(fontSize, false, false, false)).ToList();
+            if (0 <= CaretIndex && CaretIndex <= Children.Count) Children.Insert(CaretIndex, CreateCaret(ActualFontSize));
 
-            if (0 <= CaretIndex && CaretIndex <= _children.Count) _children.Insert(CaretIndex, CreateCaret(fontSize));
+            UpdateStyles();
+        }
 
+        private void UpdateStyles()
+        {
             // TODO: set selection
             SetSelection(SelectionStart, SelectionLength);
 
             // TODO: set error
-
-            GetPanel().Children.Clear();
-            foreach (var child in _children)
-            {
-                GetPanel().Children.Add(child);
-            }
         }
 
-        private double GetAutoFontSize()
+        private void UpdateActualFontSize()
         {
-            double fontSize = NormalFontSize;
-            double oldFontSize;
-            double maxSinglePartWidth;
-            var trials = 0;
-            do
+            var fontSize = NormalFontSize;
+            if (IsAutoFontSize)
             {
-                trials++;
-                double linesUsedWithCurrentFontSize = 1;
-                double currentLineCharacters = 0;
-                maxSinglePartWidth = 0;
-                oldFontSize = fontSize;
-
-                var oldMaxLinesUsed = LinesNormalFontSize * (NormalFontSize / fontSize);
-
-                var currentCharactersPerLine = CharactersInOneLineNormalFontSize * (NormalFontSize / fontSize);
-                foreach (var template in _templates)
+                double oldFontSize;
+                int maxSinglePartWidth;
+                var trials = 0;
+                do
                 {
-                    var width = template.GetCharacterWidth();
+                    trials++;
+                    maxSinglePartWidth = 0;
+                    oldFontSize = fontSize;
 
-                    currentLineCharacters += width;
+                    var oldMaxLinesUsed = LinesNormalFontSize * (NormalFontSize / fontSize);
 
-                    if (currentLineCharacters > currentCharactersPerLine)
+                    var currentCharactersPerLine = CharactersInOneLineNormalFontSize * (NormalFontSize / fontSize);
+                    double linesUsedWithCurrentFontSize = 1;
+                    double currentLineCharacters = 0;
+                    foreach (var template in _templates)
                     {
-                        currentLineCharacters = width;
-                        linesUsedWithCurrentFontSize++;
+                        var width = template.GetCharacterWidth();
+
+                        currentLineCharacters += width;
+
+                        if (currentLineCharacters > currentCharactersPerLine)
+                        {
+                            currentLineCharacters = width;
+                            linesUsedWithCurrentFontSize++;
+                        }
+
+                        maxSinglePartWidth = Math.Max(maxSinglePartWidth, width);
                     }
 
-                    maxSinglePartWidth = Math.Max(maxSinglePartWidth, width);
-                }
+                    fontSize = (0.5) * oldFontSize + 0.5 * (oldFontSize * (oldMaxLinesUsed / linesUsedWithCurrentFontSize));
 
-                fontSize = (0.5) * oldFontSize + 0.5 * (oldFontSize * (oldMaxLinesUsed / linesUsedWithCurrentFontSize));
+                } while (Math.Abs(fontSize - oldFontSize) > 7.0 && trials < 10);
 
-            } while (Math.Abs(fontSize - oldFontSize) > 7.0 && trials < 10);
+                var singleLineFontSize = maxSinglePartWidth == 0 ? MaxFontSize : NormalFontSize * (((double) CharactersInOneLineNormalFontSize) / maxSinglePartWidth);
 
-            var singleLineFontSize = (int)(NormalFontSize * (CharactersInOneLineNormalFontSize / maxSinglePartWidth));
+                fontSize = Math.Min(fontSize, singleLineFontSize);
 
-            fontSize = Math.Min(fontSize, singleLineFontSize);
+                if (fontSize < MinFontSize) fontSize = MinFontSize;
+                if (fontSize > MaxFontSize) fontSize = MaxFontSize;
+            }
+            ActualFontSize = fontSize;
+        }
 
-            if (fontSize < MinFontSize) fontSize = MinFontSize;
-            if (fontSize > MaxFontSize) fontSize = MaxFontSize;
-
-            return fontSize;
+        private void UpdateFontSize()
+        {
+            var oldFontSize = ActualFontSize;
+            UpdateActualFontSize();
+            if (Math.Abs(ActualFontSize - oldFontSize) <= double.Epsilon) return;
+            UpdateControls();
         }
 
         public void SetCaretIndex(Grid sender)
         {
-            CaretIndex = _children.IndexOf(sender);
+            CaretIndex = Children.IndexOf(sender);
         }
 
         private void SetSelection()
@@ -321,9 +406,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         private void SetSelection(int startIndex, int count)
         {
             var endIndex = startIndex + count;
-            for (var i = 0; i < _children.Count; i++)
+            for (var i = 0; i < Children.Count; i++)
             {
-                var child = _children[i];
+                var child = (Grid)Children[i];
                 var partControl = child.DataContext as FormulaPartControl;
                 if (partControl == null) continue;
 
@@ -343,9 +428,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             throw new NotImplementedException();
             // TODO: create error styles
             var endIndex = startIndex + count;
-            for (var i = 0; i < _children.Count; i++)
+            for (var i = 0; i < Children.Count; i++)
             {
-                var child = _children[i];
+                var child = (Grid)Children[i];
                 var partControl = child.DataContext as FormulaPartControl;
                 if (partControl == null) continue;
 
@@ -405,10 +490,18 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             return storyboard;
         }
 
-        private static Grid CreateCaret(double fontSize)
+        private Grid CreateCaret(double fontSize)
         {
             //<Grid>
             //  <TextBlock Name="Caret" Text="|" Margin="-7,0,-7,0">
+            //    <TextBlock.Style>
+            //      <Style TargetType="TextBlock">
+            //        <Style.Setters>
+            //          <Setter Property="FontFamily" Value="Courier New"/>
+            //          <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+            //        </Style.Setters>
+            //      </Style>
+            //    </TextBlock.Style>
             //    <!-- blinking effect -->
             //    <TextBlock.Triggers>
             //      <EventTrigger RoutedEvent="TextBlock.Loaded">
@@ -424,12 +517,17 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
             var container = new Grid();
 
-            // TODO: adapt margin with fontSize
+            var style = new Style(typeof(TextBlock));
+            style.Setters.Add(new Setter(TextBlock.FontFamilyProperty, new FontFamily("Courier New")));
+            style.Setters.Add(new Setter(TextBlock.ForegroundProperty, Application.Current.Resources["PhoneForegroundBrush"]));
+
             var textBlock = new TextBlock
             {
+                Style = style,
                 FontSize = fontSize,
-                Margin = new Thickness(-7, 0, -7, 0)
+                Text = "|"
             };
+            textBlock.Margin = new Thickness(-textBlock.ActualWidth / 2, 0, -textBlock.ActualWidth / 2, 0);
 
             var storyboard = CreateBlinkingEffect(textBlock);
             textBlock.Loaded += (sender, e) => storyboard.Begin();
