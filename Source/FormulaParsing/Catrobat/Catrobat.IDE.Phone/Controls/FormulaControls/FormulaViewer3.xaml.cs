@@ -1,7 +1,5 @@
 ﻿using System.Windows.Media;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
-using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 using Catrobat.IDE.Phone.Annotations;
 using Catrobat.IDE.Phone.Controls.FormulaControls.Formulas;
 using Catrobat.IDE.Phone.Controls.FormulaControls.PartControls;
@@ -19,7 +17,7 @@ using System.Windows.Media.Animation;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {
-    public partial class FormulaViewer3 : INotifyPropertyChanged
+    public partial class FormulaViewer3
     {
         #region DependencyProperties
 
@@ -52,17 +50,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
                     for (var relativeIndex = 0; relativeIndex < e.NewItems.Count; relativeIndex++)
                     {
                         var absoluteIndex = e.NewStartingIndex + relativeIndex;
-                        var template = CreateTemplate((IFormulaToken) e.NewItems[relativeIndex]);
-                        _templates.Insert(absoluteIndex, template);
-                        if (absoluteIndex > CaretIndex)
-                        {
-                            absoluteIndex++;
-                        }
-                        else
-                        {
-                            CaretIndex++;
-                        }
-                        Children.Insert(absoluteIndex, CreateUiControl(template));
+                        AddControl((IFormulaToken)e.NewItems[relativeIndex], absoluteIndex);
                     }
                     UpdateFontSize();
                     UpdateStyles();
@@ -71,16 +59,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
                     for (var relativeIndex = 0; relativeIndex < e.OldItems.Count; relativeIndex++)
                     {
                         var absoluteIndex = e.OldStartingIndex + relativeIndex;
-                        _templates.RemoveAt(absoluteIndex);
-                        if (absoluteIndex >= CaretIndex)
-                        {
-                            absoluteIndex++;
-                        }
-                        else
-                        {
-                            CaretIndex--;
-                        }
-                        Children.RemoveAt(absoluteIndex);
+                        RemoveControl(absoluteIndex);
                     }
                     UpdateFontSize();
                     UpdateStyles();
@@ -112,22 +91,17 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             if (!(0 <= oldIndex && oldIndex <= Tokens.Count)) return;
             if (!(0 <= newIndex))
             {
-                return;
                 CaretIndex = 0;
-                //if (oldIndex == 0) return;
-                //newIndex = 0;
+                newIndex = 0;
             }
             if (!(newIndex <= Tokens.Count))
             {
-                return;
                 CaretIndex = Tokens.Count;
+                newIndex = Tokens.Count;
             }
+            if (oldIndex == newIndex) return;
 
-            var caret = (Grid)Children[oldIndex];
-            if (caret.DataContext != null) return;
-
-            Children.RemoveAt(oldIndex);
-            Children.Insert(newIndex, caret);
+            MoveCaret(oldIndex, newIndex);
         }
 
         public static readonly DependencyProperty SelectionStartProperty = DependencyProperty.Register(
@@ -279,11 +253,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         #endregion
 
-        public FormulaViewer3()
-        {
-            InitializeComponent();
-        }
-
         private Panel GetPanel()
         {
             return IsMultiline ? (Panel)MultilinePanelContent : SingleLinePanelContent;
@@ -304,6 +273,48 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         private Grid CreateUiControl(FormulaPartControl template)
         {
             return template.CreateUiControls(ActualFontSize, false, false, false);
+        }
+
+        private void MoveCaret(int oldIndex, int newIndex)
+        {
+            // check if already at the right position
+            if (((Grid) Children[newIndex]).Name == "Caret") return;
+
+            var caret = (Grid)Children[oldIndex];
+            Debug.Assert(caret.Name == "Caret");
+
+            Children.RemoveAt(oldIndex);
+            Children.Insert(newIndex, caret);
+            Debug.Assert(((Grid)Children[newIndex]).Name == "Caret");
+        }
+
+        private void AddControl(IFormulaToken token, int index)
+        {
+            var template = CreateTemplate(token);
+            _templates.Insert(index, template);
+            if (index > CaretIndex)
+            {
+                index++;
+            }
+            Children.Insert(index, CreateUiControl(template));
+            if (index <= CaretIndex)
+            {
+                CaretIndex++;
+            }
+        }
+
+        private void RemoveControl(int index)
+        {
+            _templates.RemoveAt(index);
+            if (index >= CaretIndex)
+            {
+                index++;
+            }
+            Children.RemoveAt(index);
+            if (index < CaretIndex)
+            {
+                CaretIndex--;
+            }
         }
 
         private void UpdateControls()
@@ -515,7 +526,10 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             //  </TextBlock>
             //</Grid>
 
-            var container = new Grid();
+            var container = new Grid
+            {
+                Name = "Caret"
+            };
 
             var style = new Style(typeof(TextBlock));
             style.Setters.Add(new Setter(TextBlock.FontFamilyProperty, new FontFamily("Courier New")));

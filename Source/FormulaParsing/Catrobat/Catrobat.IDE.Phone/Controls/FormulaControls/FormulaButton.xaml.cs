@@ -1,15 +1,12 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.UI.Formula;
-using Catrobat.IDE.Core.ViewModel;
 using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 using System.Windows;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {
-    public partial class FormulaButton : IPortableFormulaButton
+    public partial class FormulaButton
     {
         #region DependencyProperties
 
@@ -37,8 +34,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         {
             var viewModel = ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
             viewModel.Formula = Formula.FormulaTree2;
-            viewModel.CaretIndex = viewModel.Tokens == null ? 0 : viewModel.Tokens.Count;
-            viewModel.FormulaButton = this;
             SetFormulaBinding();
             ServiceLocator.NavigationService.NavigateTo(typeof(FormulaEditorViewModel));
         }

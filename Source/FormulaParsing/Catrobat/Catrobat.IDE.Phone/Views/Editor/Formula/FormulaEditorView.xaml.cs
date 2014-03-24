@@ -1,7 +1,8 @@
-﻿using System.Windows.Media.Animation;
-using System.Windows.Navigation;
-using Catrobat.IDE.Core.Services;
+﻿using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel.Editor.Formula;
+using System.Windows;
+using System.Windows.Media.Animation;
+using System.Windows.Navigation;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Formula
 {
@@ -9,37 +10,44 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
     {
         private readonly FormulaEditorViewModel _viewModel = ServiceLocator.ViewModelLocator.FormulaEditorViewModel;
 
-        private void ShowKeyErrorAnimation()
-        {
-            KeyErrorAnimation.Stop();
-            KeyErrorAnimation.Begin();
-        }
-
         public FormulaEditorView()
         {
             InitializeComponent();
 
-            _viewModel.ErrorOccurred += ErrorOccurred;
-            
-
             FormulaKeyboard.KeyPressed += KeyPressed;
             FormulaKeyboard.EvaluatePressed += EvaluatePressed;
-            _viewModel.EvaluatePressed += EvaluatePressed;
+            _viewModel.ErrorOccurred += ErrorOccurred;
+            _viewModel.Evaluated += Evaluated;
         }
+
+        #region Transition animations
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                var animation = FormulaKeyboard.Resources["ExitTransition"] as Storyboard;
+                if (animation != null) animation.Begin();
+            }
             base.OnNavigatingFrom(e);
-            var animation = FormulaKeyboard.Resources["ExitTransition"] as Storyboard;
-            if (animation != null) animation.Begin();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            _viewModel.Cleanup();
-            var animation = FormulaKeyboard.Resources["EnterTransition"] as Storyboard;
-            if (animation != null) animation.Begin();
+            if (e.NavigationMode == NavigationMode.New)
+            {
+                var animation = FormulaKeyboard.Resources["EnterTransition"] as Storyboard;
+                if (animation != null) animation.Begin();
+            } 
+        }
+
+        #endregion
+
+        private void ShowKeyErrorAnimation()
+        {
+            KeyErrorAnimation.Stop();
+            KeyErrorAnimation.Begin();
         }
 
         private void ErrorOccurred()
@@ -57,11 +65,16 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             _viewModel.EvaluatePressedCommand.Execute(null);
         }
 
-        private void EvaluatePressed(object value)
+        private void Evaluated(object value)
         {
             // TODO: pretty up toast notification
             var message = value == null ? string.Empty : value.ToString();
             ServiceLocator.NotifictionService.ShowToastNotification("", message, ToastNotificationTime.Medeum);
+        }
+
+        private void FormulaEditorView_OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            _viewModel.Cleanup();
         }
     }
 }

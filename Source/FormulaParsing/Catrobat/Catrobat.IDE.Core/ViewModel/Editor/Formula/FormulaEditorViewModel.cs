@@ -4,7 +4,6 @@ using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.FormulaEditor;
 using Catrobat.IDE.Core.FormulaEditor.Editor;
-using Catrobat.IDE.Core.UI.Formula;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -15,7 +14,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 {
     public delegate void ErrorOccurred();
     public delegate void Reset();
-    public delegate void EvaluatePressed(object value);
+    public delegate void Evaluated(object value);
 
     public class FormulaEditorViewModel : ViewModelBase
     {
@@ -35,11 +34,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
                 Reset.Invoke();
         }
 
-        public event EvaluatePressed EvaluatePressed;
-        private void RaiseEvaluatePressed(object value)
+        public event Evaluated Evaluated;
+        private void RaiseEvaluated(object value)
         {
-            if (EvaluatePressed != null)
-                EvaluatePressed.Invoke(value);
+            if (Evaluated != null)
+                Evaluated.Invoke(value);
         }
 
         #endregion
@@ -48,7 +47,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
         private readonly FormulaEditor3 _editor = new FormulaEditor3(Enumerable.Empty<UserVariable>(), null);
         private Sprite _selectedSprite;
-        private IPortableFormulaButton _formulaButton;
         private Project _currentProject;
         
         #endregion
@@ -62,16 +60,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             {
                 _currentProject = value; 
                 RaisePropertyChanged(() => CurrentProject);
-            }
-        }
-
-        public IPortableFormulaButton FormulaButton
-        {
-            get { return _formulaButton; }
-            set
-            {
-                _formulaButton = value;
-                RaisePropertyChanged(() => FormulaButton);
             }
         }
 
@@ -101,29 +89,13 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             _editor.PropertyChanged += (sender, e) => 
             {
                 if (e.PropertyName == GetPropertyName(() => _editor.Formula)) RaisePropertyChanged(() => Formula);
-            };
-            _editor.PropertyChanged += (sender, e) =>
-            {
                 if (e.PropertyName == GetPropertyName(() => _editor.Tokens)) RaisePropertyChanged(() => Tokens);
-            };
-            _editor.PropertyChanged += (sender, e) =>
-            {
                 if (e.PropertyName == GetPropertyName(() => _editor.CaretIndex)) RaisePropertyChanged(() => CaretIndex);
-            };
-            _editor.PropertyChanged += (sender, e) =>
-            {
-                if (e.PropertyName == GetPropertyName(() => _editor.CanDelete)) RaisePropertyChanged(() => CanDelete);
-            };
-            _editor.PropertyChanged += (sender, e) =>
-            {
                 if (e.PropertyName == GetPropertyName(() => _editor.CanUndo)) RaisePropertyChanged(() => CanUndo);
-            };
-            _editor.PropertyChanged += (sender, e) =>
-            {
                 if (e.PropertyName == GetPropertyName(() => _editor.CanRedo)) RaisePropertyChanged(() => CanRedo);
-            };
-             _editor.PropertyChanged += (sender, e) =>
-            {
+                if (e.PropertyName == GetPropertyName(() => _editor.CanLeft)) RaisePropertyChanged(() => CanLeft);
+                if (e.PropertyName == GetPropertyName(() => _editor.CanRight)) RaisePropertyChanged(() => CanRight);
+                if (e.PropertyName == GetPropertyName(() => _editor.CanDelete)) RaisePropertyChanged(() => CanDelete);
                 if (e.PropertyName == GetPropertyName(() => _editor.ParsingError)) RaisePropertyChanged(() => CanEvaluate);
             };
         }
@@ -133,6 +105,16 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         {
             get { return _editor.CaretIndex; }
             set { _editor.CaretIndex = value; }
+        }
+
+        public bool CanLeft
+        {
+            get { return _editor.CanLeft; }
+        }
+
+        public bool CanRight
+        {
+            get { return _editor.CanRight; }
         }
 
         public bool CanDelete
@@ -170,15 +152,16 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         private void EvaluatePressedAction()
         {
             var value = new FormulaEvaluator().Evaluate(Formula);
-            RaiseEvaluatePressed(value);
+            RaiseEvaluated(value);
         }
 
         #endregion
 
-        protected override void GoBackAction()
+        public override void Cleanup()
         {
-            ResetViewModel();
-            base.GoBackAction();
+            RaiseReset();
+            _editor.ResetViewModel();
+            base.Cleanup();
         }
 
         #region MessageActions
@@ -226,13 +209,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
                  ViewModelMessagingToken.SelectedUserVariableChangedListener, SelectedUserVariableChangedMessageAction);
 
             InitEditorBindings();
-        }
-
-        private void ResetViewModel()
-        {
-            RaiseReset();
-            _editor.ResetViewModel();
-            _formulaButton = null;
         }
     }
 }
