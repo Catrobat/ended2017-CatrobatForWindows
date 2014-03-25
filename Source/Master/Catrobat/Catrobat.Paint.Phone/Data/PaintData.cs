@@ -21,7 +21,7 @@ namespace Catrobat.Paint.Phone.Data
         public event CapChangedEventHandler CapChanged;
         public event ToolCurrentChangedEventHandler ToolCurrentChanged;
 
-        private SolidColorBrush _colorSelected = new SolidColorBrush(Colors.Black);
+        private static SolidColorBrush _colorSelected = new SolidColorBrush(Colors.Black);
         private int _thicknessSelected = 5;
         private PenLineCap _capSelected = PenLineCap.Round;
         private ToolBase _toolCurrentSelected = new BrushTool();

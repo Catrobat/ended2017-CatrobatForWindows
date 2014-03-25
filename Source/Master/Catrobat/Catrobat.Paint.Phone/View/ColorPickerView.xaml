@@ -15,154 +15,168 @@
     shell:SystemTray.IsVisible="True">
 
 
-  <phone:PhoneApplicationPage.Resources>
-    <ResourceDictionary>
+    <phone:PhoneApplicationPage.Resources>
+        <ResourceDictionary>
             <!--<vm:ViewModelLocator x:Key="Locator" />-->
-      <SolidColorBrush x:Key="ColorButton11" Color="Blue"/> 
-      <SolidColorBrush x:Key="ColorButton12" Color="#FF006D91"/>
-      <SolidColorBrush x:Key="ColorButton13" Color="#FF16C2F5"/>
-      <SolidColorBrush x:Key="ColorButton14" Color="LightBlue"/>
+            <SolidColorBrush x:Key="ColorButton11" Color="Blue"/>
+            <SolidColorBrush x:Key="ColorButton12" Color="#FF006D91"/>
+            <SolidColorBrush x:Key="ColorButton13" Color="#FF16C2F5"/>
+            <SolidColorBrush x:Key="ColorButton14" Color="LightBlue"/>
 
-      <SolidColorBrush x:Key="ColorButton21" Color="Red"/>
-      <SolidColorBrush x:Key="ColorButton22" Color="OrangeRed"/>
-      <SolidColorBrush x:Key="ColorButton23" Color="Orange"/>
-      <SolidColorBrush x:Key="ColorButton24" Color="Yellow"/>
+            <SolidColorBrush x:Key="ColorButton21" Color="Red"/>
+            <SolidColorBrush x:Key="ColorButton22" Color="OrangeRed"/>
+            <SolidColorBrush x:Key="ColorButton23" Color="Orange"/>
+            <SolidColorBrush x:Key="ColorButton24" Color="Yellow"/>
 
-      <SolidColorBrush x:Key="ColorButton31" Color="#FF7C00AA"/>
-      <SolidColorBrush x:Key="ColorButton32" Color="#FFFF0080"/>
-      <SolidColorBrush x:Key="ColorButton33" Color="Magenta"/>
-      <SolidColorBrush x:Key="ColorButton34" Color="#FFFFADFB"/>
+            <SolidColorBrush x:Key="ColorButton31" Color="#FF7C00AA"/>
+            <SolidColorBrush x:Key="ColorButton32" Color="#FFFF0080"/>
+            <SolidColorBrush x:Key="ColorButton33" Color="Magenta"/>
+            <SolidColorBrush x:Key="ColorButton34" Color="#FFFFADFB"/>
 
-      <SolidColorBrush x:Key="ColorButton41" Color="#FF146C01"/>
-      <SolidColorBrush x:Key="ColorButton42" Color="#FF009C00"/>
-      <SolidColorBrush x:Key="ColorButton43" Color="#FF4E8739"/>
-      <SolidColorBrush x:Key="ColorButton44" Color="#FF8AEA39"/>
+            <SolidColorBrush x:Key="ColorButton41" Color="#FF146C01"/>
+            <SolidColorBrush x:Key="ColorButton42" Color="#FF009C00"/>
+            <SolidColorBrush x:Key="ColorButton43" Color="#FF4E8739"/>
+            <SolidColorBrush x:Key="ColorButton44" Color="#FF8AEA39"/>
 
-      <SolidColorBrush x:Key="ColorButton51" Color="Black"/>
-      <SolidColorBrush x:Key="ColorButton52" Color="DarkGray"/>
-      <SolidColorBrush x:Key="ColorButton53" Color="White"/>
-      <SolidColorBrush x:Key="ColorButton54" Color="Transparent"/>
+            <SolidColorBrush x:Key="ColorButton51" Color="Black"/>
+            <SolidColorBrush x:Key="ColorButton52" Color="DarkGray"/>
+            <SolidColorBrush x:Key="ColorButton53" Color="White"/>
+            <SolidColorBrush x:Key="ColorButton54" Color="Transparent"/>
 
-    </ResourceDictionary>
-  </phone:PhoneApplicationPage.Resources>
-
-
-  <phone:PhoneApplicationPage.DataContext>
-    <Binding Path="ColorPicker" />
-  </phone:PhoneApplicationPage.DataContext>
+        </ResourceDictionary>
+    </phone:PhoneApplicationPage.Resources>
 
 
-
-
-  <!--LayoutRoot is the root grid where all page content is placed-->
-  <Grid x:Name="LayoutRoot" Background="Transparent">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="*"/>
-    </Grid.RowDefinitions>
-
-
-    <!--Pivot Control-->
-    <phone:Pivot x:Name="HeaderTemplate" Title="{Binding Path=Resources.ColorPickerPageTitle}" >
-      <!--Pivot item one-->
-      <phone:Pivot.HeaderTemplate>
-        <DataTemplate>
-          <Image x:Name="Palette" Source="{Binding}" Width="60" Margin="0,20,0,0" />
-        </DataTemplate>
-      </phone:Pivot.HeaderTemplate>
-      <phone:PivotItem Header="/Assets/ColorPicker/icon_color_chooser_tab_palette.png" Margin="12,28,12,3">
-
-        <Grid Background="#FF171717" >
-          <Button x:Name="Button11" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton11}" Margin="14,47,341,430" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN"  Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton11}"  />
-          </Button>
-          <Button x:Name="Button12" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton12}" Margin="120,47,236,430" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton12}"  />
-          </Button>
-          <Button x:Name="Button13" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton13}" Margin="225,47,132,430" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton13}"  />
-          </Button>
-          <Button x:Name="Button14" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton14}" Margin="330,47,28,430" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton14}"  />
-          </Button>
-
-          <Button x:Name="Button21" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton21}" Margin="15,119,341,360" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton21}"  />
-          </Button>
-          <Button x:Name="Button22" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton22}" Margin="120,119,236,360" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton22}"  />
-          </Button>
-          <Button x:Name="Button23" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton23}" Margin="225,119,132,360" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton23}"  />
-          </Button>
-          <Button x:Name="Button24" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton24}" Margin="330,119,28,360" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton24}"  />
-          </Button>
-
-
-          <Button x:Name="Button31" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton31}" Margin="15,191,341,288" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton31}"  />
-          </Button>
-          <Button x:Name="Button32" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton32}" Margin="120,191,236,288" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton32}"  />
-          </Button>
-          <Button x:Name="Button33" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton33}" Margin="225,191,132,288" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton33}"  />
-          </Button>
-          <Button x:Name="Button34" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton34}" Margin="330,191,28,288" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton34}"  />
-          </Button>
-
-
-          <Button x:Name="Button41" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton41}" Margin="15,263,341,216" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton41}"  />
-          </Button>
-          <Button x:Name="Button42" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton42}" Margin="120,263,236,216" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton42}"  />
-          </Button>
-          <Button x:Name="Button43" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton43}" Margin="225,263,132,216" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton43}"  />
-          </Button>
-          <Button x:Name="Button44" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton44}" Margin="330,263,28,216" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton44}"  />
-          </Button>
-
-
-          <Button x:Name="Button51" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton51}" Margin="15,337,341,142" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton51}"  />
-          </Button>
-          <Button x:Name="Button52" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton52}" Margin="120,337,236,142" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton52}"  />
-          </Button>
-          <Button x:Name="Button53" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton53}" Margin="225,337,132,142" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton53}"  />
-          </Button>
-          <Button x:Name="Button54" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton54}" Margin="330,337,28,142" Width="100" Height="65">
-            <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0"   >
-              <Rectangle.Fill>
-                <ImageBrush ImageSource="/Assets/ColorPicker/checkeredbg.png" Stretch="None"/>
-              </Rectangle.Fill>
-            </Rectangle>
-          </Button>
-
-
-          <Rectangle x:Name="SelectedColorRectangle" Height="65" Stroke="Black" VerticalAlignment="Top" Width="269" HorizontalAlignment="Center" Margin="100,430,100,0"/>
-          <Button x:Name="BtnSelectedColor" Click="BtnSelectedColor_OnClick"  Command="{Binding SelectColorDone}" Content="Fertig" HorizontalAlignment="Left" Margin="78,417,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.208,0.153" Width="300" Height="89" BorderThickness="0"/>
-        </Grid>
-      </phone:PivotItem>
-            
-      <!--Pivot item two-->
-      <phone:PivotItem Header="/Assets/ColorPicker/icon_color_chooser_tab_rgba.png">
-        <Grid>
-          <coding4Fun:ColorPicker ColorChanged="ColorChanged"  HorizontalAlignment="Left" Margin="6,6,0,0" Name="Coding4FunColorPicker" VerticalAlignment="Top" Height="532" Width="444"  />
-
-        </Grid>
-      </phone:PivotItem>
-    </phone:Pivot>
+    <phone:PhoneApplicationPage.DataContext>
+        <Binding Path="ColorPicker" />
+    </phone:PhoneApplicationPage.DataContext>
 
 
 
 
-  </Grid>
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <!--Pivot Control-->
+        <phone:Pivot x:Name="HeaderTemplate" Title="{Binding Path=Resources.ColorPickerPageTitle}" >
+            <!--Pivot item one-->
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <Image x:Name="Palette" Source="{Binding}" Width="60" Margin="0,20,0,0" />
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
+            <phone:PivotItem Header="/Assets/ColorPicker/icon_color_chooser_tab_palette.png" Margin="12,28,12,3">
+
+                <Grid Background="#FF171717" >
+                    <Button x:Name="Button11" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton11}" Margin="14,47,341,430" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN"  Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton11}"  />
+                    </Button>
+                    <Button x:Name="Button12" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton12}" Margin="120,47,236,430" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton12}"  />
+                    </Button>
+                    <Button x:Name="Button13" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton13}" Margin="225,47,132,430" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton13}"  />
+                    </Button>
+                    <Button x:Name="Button14" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton14}" Margin="330,47,28,430" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton14}"  />
+                    </Button>
+
+                    <Button x:Name="Button21" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton21}" Margin="15,119,341,360" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton21}"  />
+                    </Button>
+                    <Button x:Name="Button22" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton22}" Margin="120,119,236,360" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton22}"  />
+                    </Button>
+                    <Button x:Name="Button23" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton23}" Margin="225,119,132,360" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton23}"  />
+                    </Button>
+                    <Button x:Name="Button24" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton24}" Margin="330,119,28,360" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton24}"  />
+                    </Button>
+
+
+                    <Button x:Name="Button31" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton31}" Margin="15,191,341,288" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton31}"  />
+                    </Button>
+                    <Button x:Name="Button32" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton32}" Margin="120,191,236,288" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton32}"  />
+                    </Button>
+                    <Button x:Name="Button33" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton33}" Margin="225,191,132,288" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton33}"  />
+                    </Button>
+                    <Button x:Name="Button34" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton34}" Margin="330,191,28,288" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton34}"  />
+                    </Button>
+
+
+                    <Button x:Name="Button41" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton41}" Margin="15,263,341,216" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton41}"  />
+                    </Button>
+                    <Button x:Name="Button42" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton42}" Margin="120,263,236,216" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton42}"  />
+                    </Button>
+                    <Button x:Name="Button43" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton43}" Margin="225,263,132,216" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton43}"  />
+                    </Button>
+                    <Button x:Name="Button44" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton44}" Margin="330,263,28,216" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton44}"  />
+                    </Button>
+
+
+                    <Button x:Name="Button51" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton51}" Margin="15,337,341,142" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton51}"  />
+                    </Button>
+                    <Button x:Name="Button52" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton52}" Margin="120,337,236,142" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton52}"  />
+                    </Button>
+                    <Button x:Name="Button53" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton53}" Margin="225,337,132,142" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0" Fill="{StaticResource ColorButton53}"  />
+                    </Button>
+                    <Button x:Name="Button54" BorderThickness="0" Padding="0" Command="{Binding SelectColorValue}" CommandParameter="{StaticResource ColorButton54}" Margin="330,337,28,142" Width="100" Height="65">
+                        <Rectangle ManipulationStarted="ColorChangedN" Margin="-20" Width="100" Height="65"  Stroke="Black"  StrokeThickness="0"   >
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="/Assets/ColorPicker/checkeredbg.png" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+
+                    <Button x:Name="btnTransparence" Visibility="Visible" BorderThickness="0" Margin="70,448,74,17">
+                        <Rectangle Width="269" Height="65"  Stroke="Transparent"  StrokeThickness="0"   >
+                            <Rectangle.Fill>
+                                <!--ImageBrush ImageSource="/Assets/ColorPicker/checkeredbg.png" Stretch="Fill"/-->
+                                <ImageBrush ImageSource="/Assets/ColorPicker/btn_checkeredbg.png" Stretch="Fill"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+
+                    <Rectangle x:Name="SelectedColorRectangle" Visibility="Collapsed" Height="65" Stroke="Black" VerticalAlignment="Top" Width="269" HorizontalAlignment="Center" Margin="92,465,95,0" />
+                        <!--Rectangle.Fill>
+                            <ImageBrush ImageSource="/Assets/ColorPicker/btn_checkeredbg.png" Stretch="None"></ImageBrush>
+                        </Rectangle-->
+                    <!--Image x:Name="ImgBtnTransparence" Source="/Assets/ColorPicker/btn_checkeredbg.png" Visibility="Collapsed" Height="65" Width="269" Stretch="UniformToFill" Margin="93,430,94,49"/-->
+                    <Button x:Name="BtnSelectedColor" Visibility="Collapsed" Background="BlueViolet" Click="BtnSelectedColor_OnClick" Content="Fertig" Command="{Binding SelectColorDone}" HorizontalAlignment="Left" Margin="78,453,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.208,0.153" Width="300" Height="89" BorderThickness="0">
+                    </Button>
+
+                </Grid>
+            </phone:PivotItem>
+
+            <!--Pivot item two-->
+            <phone:PivotItem Header="/Assets/ColorPicker/icon_color_chooser_tab_rgba.png">
+                <Grid>
+                    <coding4Fun:ColorPicker ColorChanged="ColorChanged"  HorizontalAlignment="Left" Margin="6,6,0,0" Name="Coding4FunColorPicker" VerticalAlignment="Top" Height="532" Width="444"  />
+
+                </Grid>
+            </phone:PivotItem>
+        </phone:Pivot>
+
+
+
+
+    </Grid>
 
 </phone:PhoneApplicationPage>
