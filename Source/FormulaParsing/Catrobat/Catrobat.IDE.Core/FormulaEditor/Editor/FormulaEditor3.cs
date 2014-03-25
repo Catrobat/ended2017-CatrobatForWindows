@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        private ObservableCollection<IFormulaToken> _tokens = null;
+        private ObservableCollection<IFormulaToken> _tokens;
         public ObservableCollection<IFormulaToken> Tokens
         {
             get { return _tokens; }
@@ -52,7 +52,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             InterpretTokens();
         }
 
-        private string _parsingError = null;
+        private string _parsingError;
         public string ParsingError
         {
             get { return _parsingError; }
@@ -61,7 +61,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         private readonly Stack<EditorState> _undoStack = new Stack<EditorState>();
         private readonly Stack<EditorState> _redoStack = new Stack<EditorState>();
 
-        private int _caretIndex = 0;
+        private int _caretIndex;
 
         public int CaretIndex
         {
@@ -323,7 +323,6 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         {
             if (Tokens == null) Tokens = new ObservableCollection<IFormulaToken>();
             Tokens.Insert(CaretIndex, token);
-            //CaretIndex++;
             InterpretTokens();
             RaisePropertyChanged(() => CanDelete);
         }
@@ -334,7 +333,6 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             var index = CaretIndex - 1;
             if (!(0 <= index && index < Tokens.Count)) return false;
             Tokens.RemoveAt(index);
-            //CaretIndex--;
             InterpretTokens();
             RaisePropertyChanged(() => CanDelete);
             return true;

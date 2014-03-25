@@ -1,18 +1,15 @@
-﻿using System.Windows.Media;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
-using Catrobat.IDE.Phone.Annotations;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Phone.Controls.FormulaControls.Formulas;
 using Catrobat.IDE.Phone.Controls.FormulaControls.PartControls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
@@ -84,24 +81,11 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private void CaretIndexChanged(DependencyPropertyChangedEventArgs e)
         {
-            var oldIndex = (int)e.OldValue;
-            var newIndex = (int)e.NewValue;
+            if (Tokens == null) return;
 
             // CoerceValueCallback in Windows Phone not available (FrameworkPropertyMetadata is not available)
-            if (!(0 <= oldIndex && oldIndex <= Tokens.Count)) return;
-            if (!(0 <= newIndex))
-            {
-                CaretIndex = 0;
-                newIndex = 0;
-            }
-            if (!(newIndex <= Tokens.Count))
-            {
-                CaretIndex = Tokens.Count;
-                newIndex = Tokens.Count;
-            }
-            if (oldIndex == newIndex) return;
-
-            MoveCaret(oldIndex, newIndex);
+ 
+            MoveCaret((int)e.OldValue, (int)e.NewValue);
         }
 
         public static readonly DependencyProperty SelectionStartProperty = DependencyProperty.Register(
@@ -222,7 +206,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         #endregion
 
-        #region Members
+        #region Properties
 
         private double _actualFontSize;
         public double ActualFontSize
@@ -249,9 +233,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             }
         }
 
-        private List<FormulaPartControl> _templates;
-
-        #endregion
 
         private Panel GetPanel()
         {
@@ -261,6 +242,15 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         private UIElementCollection Children
         {
             get { return GetPanel().Children; }
+        }
+
+        #endregion
+
+        private List<FormulaPartControl> _templates;
+
+        public FormulaViewer3()
+        {
+            InitializeComponent();
         }
 
         private FormulaPartControl CreateTemplate(IFormulaToken token)
@@ -277,14 +267,16 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private void MoveCaret(int oldIndex, int newIndex)
         {
-            // check if already at the right position
-            if (((Grid) Children[newIndex]).Name == "Caret") return;
+            // already at the right position (see AddControl, RemoveControl)
+            if (0 <= newIndex && newIndex < Children.Count && ((Grid)Children[newIndex]).Name == "Caret") return;
 
+            Debug.Assert(0 <= oldIndex && oldIndex < Children.Count);
             var caret = (Grid)Children[oldIndex];
             Debug.Assert(caret.Name == "Caret");
-
             Children.RemoveAt(oldIndex);
-            Children.Insert(newIndex, caret);
+
+            Debug.Assert(0 <= newIndex && newIndex <= Children.Count);
+            Children.Insert(newIndex, CreateCaret(ActualFontSize));
             Debug.Assert(((Grid)Children[newIndex]).Name == "Caret");
         }
 
@@ -466,6 +458,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             }
         }
 
+        #region Caret definition
 
         private static Storyboard CreateBlinkingEffect(DependencyObject target)
         {
@@ -549,17 +542,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             container.Children.Add(textBlock);
 
             return container;
-        }
-
-        #region PropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

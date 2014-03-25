@@ -84,23 +84,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             get { return _editor.Tokens; }
         }
 
-        private void InitEditorBindings()
-        {
-            _editor.PropertyChanged += (sender, e) => 
-            {
-                if (e.PropertyName == GetPropertyName(() => _editor.Formula)) RaisePropertyChanged(() => Formula);
-                if (e.PropertyName == GetPropertyName(() => _editor.Tokens)) RaisePropertyChanged(() => Tokens);
-                if (e.PropertyName == GetPropertyName(() => _editor.CaretIndex)) RaisePropertyChanged(() => CaretIndex);
-                if (e.PropertyName == GetPropertyName(() => _editor.CanUndo)) RaisePropertyChanged(() => CanUndo);
-                if (e.PropertyName == GetPropertyName(() => _editor.CanRedo)) RaisePropertyChanged(() => CanRedo);
-                if (e.PropertyName == GetPropertyName(() => _editor.CanLeft)) RaisePropertyChanged(() => CanLeft);
-                if (e.PropertyName == GetPropertyName(() => _editor.CanRight)) RaisePropertyChanged(() => CanRight);
-                if (e.PropertyName == GetPropertyName(() => _editor.CanDelete)) RaisePropertyChanged(() => CanDelete);
-                if (e.PropertyName == GetPropertyName(() => _editor.ParsingError)) RaisePropertyChanged(() => CanEvaluate);
-            };
-        }
-
-
         public int CaretIndex
         {
             get { return _editor.CaretIndex; }
@@ -157,13 +140,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
         #endregion
 
-        public override void Cleanup()
-        {
-            RaiseReset();
-            _editor.ResetViewModel();
-            base.Cleanup();
-        }
-
         #region MessageActions
 
         private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
@@ -197,7 +173,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             KeyPressedCommand = new RelayCommand<FormulaKeyEventArgs>(KeyPressedAction);
             EvaluatePressedCommand = new RelayCommand(EvaluatePressedAction);
             
-
             Messenger.Default.Register<GenericMessage<Sprite>>(this,
                 ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
 
@@ -209,6 +184,29 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
                  ViewModelMessagingToken.SelectedUserVariableChangedListener, SelectedUserVariableChangedMessageAction);
 
             InitEditorBindings();
+        }
+
+        private void InitEditorBindings()
+        {
+            _editor.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == GetPropertyName(() => _editor.Formula)) RaisePropertyChanged(() => Formula);
+                if (e.PropertyName == GetPropertyName(() => _editor.Tokens)) RaisePropertyChanged(() => Tokens);
+                if (e.PropertyName == GetPropertyName(() => _editor.CaretIndex)) RaisePropertyChanged(() => CaretIndex);
+                if (e.PropertyName == GetPropertyName(() => _editor.CanUndo)) RaisePropertyChanged(() => CanUndo);
+                if (e.PropertyName == GetPropertyName(() => _editor.CanRedo)) RaisePropertyChanged(() => CanRedo);
+                if (e.PropertyName == GetPropertyName(() => _editor.CanLeft)) RaisePropertyChanged(() => CanLeft);
+                if (e.PropertyName == GetPropertyName(() => _editor.CanRight)) RaisePropertyChanged(() => CanRight);
+                if (e.PropertyName == GetPropertyName(() => _editor.CanDelete)) RaisePropertyChanged(() => CanDelete);
+                if (e.PropertyName == GetPropertyName(() => _editor.ParsingError)) RaisePropertyChanged(() => CanEvaluate);
+            };
+        }
+
+        public override void Cleanup()
+        {
+            RaiseReset();
+            _editor.ResetViewModel();
+            base.Cleanup();
         }
     }
 }
