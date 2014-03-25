@@ -132,7 +132,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
             return FormulaTreeFactory.CreateNotNode(null);
         }
 
-
         #endregion
 
         #region min/max
@@ -263,7 +262,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
             return FormulaTreeFactory.CreateInclinationYNode();
         }
 
-
         #endregion
 
         #region object variables
@@ -343,11 +341,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
         }
 
         #endregion
-
-        public static FormulaTokenParameterSeparator CreateParameterSeparatorToken()
-        {
-            return new FormulaTokenParameterSeparator();
-        }
 
     }
 }

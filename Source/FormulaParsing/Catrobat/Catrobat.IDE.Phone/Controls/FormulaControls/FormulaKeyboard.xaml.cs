@@ -1,14 +1,11 @@
 ﻿using System.Windows;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.FormulaEditor.Editor;
+using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {
-    public delegate void KeyPressed(FormulaEditorKey key);
-    public delegate void ObjectVariableSelected(ObjectVariable variable);
-    public delegate void SensorVariableSelected(SensorVariable variable);
-    public delegate void LocalUserVariableSelected(UserVariable variable);
-    public delegate void GlobalUserVariableSelected(UserVariable variable);
+    public delegate void KeyPressed(FormulaKeyEventArgs e);
     public delegate void EvaluatePressed();
 
     public partial class FormulaKeyboard
@@ -94,42 +91,25 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         #region events
 
         public KeyPressed KeyPressed;
+        private void RaiseKeyPressed(FormulaKeyEventArgs e)
+        {
+            if(KeyPressed != null) KeyPressed.Invoke(e);
+        }
         public void RaiseKeyPressed(FormulaEditorKey key)
         {
-            if(KeyPressed != null)
-                KeyPressed.Invoke(key);
-        }
-
-        public ObjectVariableSelected ObjectVariableSelected;
-        public void RaiseObjectVariableSelected(ObjectVariable variable)
+            RaiseKeyPressed(new FormulaKeyEventArgs(key, null, null));
+       }
+        public void RaiseKeyPressed(FormulaEditorKey key, ObjectVariableEntry objectVariable)
         {
-            if (ObjectVariableSelected != null)
-                ObjectVariableSelected.Invoke(variable);
-        }
-
-        public SensorVariableSelected SensorVariableSelected;
-        public void RaiseSensorVariableSelected(SensorVariable variable)
+            RaiseKeyPressed(new FormulaKeyEventArgs(key, objectVariable, null));
+       }
+        public void RaiseKeyPressed(UserVariable userVariable)
         {
-            if (SensorVariableSelected != null)
-                SensorVariableSelected.Invoke(variable);
-        }
-
-        public LocalUserVariableSelected LocalUserVariableSelected;
-        public void RaiseLocalUserVariableSelected(UserVariable variable)
-        {
-            if (LocalUserVariableSelected != null)
-                LocalUserVariableSelected.Invoke(variable);
-        }
-
-        public GlobalUserVariableSelected GlobalUserVariableSelected;
-        public void RaiseGlobalUserVariableSelected(UserVariable variable)
-        {
-            if (GlobalUserVariableSelected != null)
-                GlobalUserVariableSelected.Invoke(variable);
+            RaiseKeyPressed(new FormulaKeyEventArgs(FormulaEditorKey.UserVariable, null, userVariable));
         }
 
         public EvaluatePressed EvaluatePressed;
-        public void RaiseEvaluatePressed()
+        private void RaiseEvaluatePressed()
         {
             if (EvaluatePressed != null)
                 EvaluatePressed.Invoke();
@@ -176,16 +156,16 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private void SensorButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var variable = (SensorVariable)(uint)((FrameworkElement)sender).DataContext;
+            var key = (FormulaEditorKey)(uint)((FrameworkElement)sender).DataContext;
             ShowMain();
-            RaiseSensorVariableSelected(variable);
+            RaiseKeyPressed(key);
         }
 
         private void ObjectButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var variable = (ObjectVariable)(uint)((FrameworkElement)sender).DataContext;
+            var key = (FormulaEditorKey)(uint)((FrameworkElement)sender).DataContext;
             ShowMain();
-            RaiseObjectVariableSelected(variable);
+            RaiseKeyPressed(key);
         }
 
         private void ButtonEvaluate_OnClick(object sender, RoutedEventArgs e)

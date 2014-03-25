@@ -12,6 +12,7 @@
   FontFamily="{StaticResource PhoneFontFamilyNormal}"
   FontSize="{StaticResource PhoneFontSizeNormal}"
   Foreground="{StaticResource PhoneForegroundBrush}"
+  Unloaded="FormulaEditorView_OnUnloaded"
   SupportedOrientations="Portrait" Orientation="Portrait"
   mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
   DataContext="{Binding FormulaEditorViewModel, Source={StaticResource Locator}}"
@@ -37,7 +38,7 @@
           IsAutoFontSize="True"
           IsEditEnabled="True"
           IsMultiline="True"
-          Tokens="{Binding Tokens, Mode=TwoWay}" 
+          Tokens="{Binding Tokens, Mode=OneWay}" 
           CaretIndex="{Binding CaretIndex, Mode=TwoWay}" 
           VerticalAlignment="Stretch"
           Height="290"
@@ -51,7 +52,36 @@
         CanDelete="{Binding CanDelete}"
         CanUndo="{Binding CanUndo}"
         CanRedo="{Binding CanRedo}"
-        CanEvaluate="{Binding CanEvaluate}"/>
+        CanEvaluate="{Binding CanEvaluate}">
+        <formulaControls:FormulaKeyboard.RenderTransform>
+          <TranslateTransform X="0" Y="500" x:Name="Translation" />
+        </formulaControls:FormulaKeyboard.RenderTransform>
+        <formulaControls:FormulaKeyboard.Resources>
+          <Storyboard x:Name="EnterTransition">
+            <DoubleAnimation
+              Storyboard.TargetName="Translation"
+              Storyboard.TargetProperty="Y"
+              To="0"
+              Duration="0:0:0.3" >
+              <DoubleAnimation.EasingFunction>
+                <QuadraticEase EasingMode="EaseOut"/>
+              </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+          </Storyboard>
+          <Storyboard x:Name="ExitTransition">
+            <DoubleAnimation
+        Storyboard.TargetName="Translation"
+        Storyboard.TargetProperty="Y"
+        To="500"
+        Duration="0:0:0.3" >
+              <DoubleAnimation.EasingFunction>
+                <QuadraticEase EasingMode="EaseIn"/>
+              </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+          </Storyboard>
+
+        </formulaControls:FormulaKeyboard.Resources>
+        </formulaControls:FormulaKeyboard>
 
       <Grid Name="GridError" Background="Tomato" Opacity="0.0" Height="10" VerticalAlignment="Top">
         <Grid.Resources>

@@ -25,7 +25,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
             }
             catch (NotSupportedException)
             {
-                return formula.EvaluateNumber();
+                return formula.EvaluateLogic();
             }
         }
     }

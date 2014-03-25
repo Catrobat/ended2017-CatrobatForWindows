@@ -205,7 +205,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            sb.Append("!=");
+            sb.Append("≠");
         }
 
         public override bool IsNumber()
@@ -261,7 +261,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            sb.Append(">=");
+            sb.Append("≥");
         }
 
         public override bool IsNumber()
@@ -317,7 +317,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         protected override void SerializeToken(StringBuilder sb)
         {
-            sb.Append("<=");
+            sb.Append("≤");
         }
 
         public override bool IsNumber()
