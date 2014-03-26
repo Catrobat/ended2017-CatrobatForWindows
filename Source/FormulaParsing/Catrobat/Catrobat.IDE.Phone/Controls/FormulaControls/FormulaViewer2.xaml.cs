@@ -1,10 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using Catrobat.IDE.Phone.Annotations;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {
+    [Obsolete("Use FormulaViewer3 instead. ", true)]
     public partial class FormulaViewer2 : INotifyPropertyChanged
     {
 

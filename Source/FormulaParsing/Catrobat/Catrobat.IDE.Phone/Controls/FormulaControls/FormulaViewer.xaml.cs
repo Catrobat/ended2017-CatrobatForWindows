@@ -11,7 +11,7 @@ using Catrobat.IDE.Phone.Controls.FormulaControls.Formulas;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {
-    [Obsolete("Use FormulaViewer3 instead")]
+    [Obsolete("Use FormulaViewer3 instead", true)]
     public partial class FormulaViewer : UserControl, INotifyPropertyChanged
     {
         private UiFormula _uiFormula;
