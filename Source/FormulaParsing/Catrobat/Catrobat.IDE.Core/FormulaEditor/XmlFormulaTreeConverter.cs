@@ -8,6 +8,7 @@ using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Core.FormulaEditor
 {
+    /// <see cref="XmlFormulaTreeFactory"/>
     public class XmlFormulaTreeConverter
     {
         private readonly IDictionary<string, UserVariable> _userVariables;
@@ -44,10 +45,11 @@ namespace Catrobat.IDE.Core.FormulaEditor
             if (node.VariableValue == "MINUS") return Convert(node, FormulaTreeFactory.CreateSubtractNode);
             if (node.VariableValue == "MULT") return Convert(node, FormulaTreeFactory.CreateMultiplyNode);
             if (node.VariableValue == "DIVIDE") return Convert(node, FormulaTreeFactory.CreateDivideNode);
+            if (node.VariableValue == "POW") return Convert(node, FormulaTreeFactory.CreatePowerNode);
 
             // relational operators
             if (node.VariableValue == "EQUAL") return Convert(node, FormulaTreeFactory.CreateEqualsNode);
-            if (node.VariableValue == "NOTEQUAL") return Convert(node, FormulaTreeFactory.CreateNotEqualsNode);
+            if (node.VariableValue == "NOT_EQUAL") return Convert(node, FormulaTreeFactory.CreateNotEqualsNode);
             if (node.VariableValue == "SMALLER_THAN") return Convert(node, FormulaTreeFactory.CreateLessNode);
             if (node.VariableValue == "SMALLER_OR_EQUAL") return Convert(node, FormulaTreeFactory.CreateLessEqualNode);
             if (node.VariableValue == "GREATER_THAN") return Convert(node, FormulaTreeFactory.CreateGreaterNode);
@@ -90,7 +92,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
             // miscellaneous functions
             if (node.VariableValue == "SQRT") return Convert(node, FormulaTreeFactory.CreateSqrtNode);
             if (node.VariableValue == "ABS") return Convert(node, FormulaTreeFactory.CreateAbsNode);
-            if (node.VariableValue == "MOD") return Convert(node, FormulaTreeFactory.CreateModNode);
+            if (node.VariableValue == "MOD") return Convert(node, FormulaTreeFactory.CreateModuloNode);
             if (node.VariableValue == "ROUND") return Convert(node, FormulaTreeFactory.CreateRoundNode);
             if (node.VariableValue == "RAND") return Convert(node, FormulaTreeFactory.CreateRandomNode);
             
@@ -100,23 +102,22 @@ namespace Catrobat.IDE.Core.FormulaEditor
         private IFormulaTree ConvertSensorOrObjectVariableNode(XmlFormulaTree node)
         {
             // sensors
-            if (node.VariableValue == "ACCELERATION_X") return Convert(node, FormulaTreeFactory.CreateAccelerationXNode);
-            if (node.VariableValue == "ACCELERATION_Y") return Convert(node, FormulaTreeFactory.CreateAccelerationYNode);
-            if (node.VariableValue == "ACCELERATION_Z") return Convert(node, FormulaTreeFactory.CreateAccelerationZNode);
-            if (node.VariableValue == "COMPASSDIRECTION") return Convert(node, FormulaTreeFactory.CreateCompassNode);
+            if (node.VariableValue == "X_ACCELERATION") return Convert(node, FormulaTreeFactory.CreateAccelerationXNode);
+            if (node.VariableValue == "Y_ACCELERATION") return Convert(node, FormulaTreeFactory.CreateAccelerationYNode);
+            if (node.VariableValue == "Z_ACCELERATION") return Convert(node, FormulaTreeFactory.CreateAccelerationZNode);
+            if (node.VariableValue == "COMPASS_DIRECTION") return Convert(node, FormulaTreeFactory.CreateCompassNode);
             if (node.VariableValue == "X_INCLINATION") return Convert(node, FormulaTreeFactory.CreateInclinationXNode);
             if (node.VariableValue == "Y_INCLINATION") return Convert(node, FormulaTreeFactory.CreateInclinationYNode);
+            if (node.VariableValue == "LOUDNESS") return Convert(node, FormulaTreeFactory.CreateLoudnessNode);
 
             // object variables
-            if (node.VariableValue == "BRIGHTNESS") return Convert(node, FormulaTreeFactory.CreateBrightnessNode);
-            if (node.VariableValue == "DIRECTION") return Convert(node, FormulaTreeFactory.CreateDirectionNode);
-            if (node.VariableValue == "OBJECT_GHOSTEFFECT") return Convert(node, FormulaTreeFactory.CreateGhostEffectNode);
+            if (node.VariableValue == "OBJECT_BRIGHTNESS") return Convert(node, FormulaTreeFactory.CreateBrightnessNode);
             if (node.VariableValue == "OBJECT_LAYER") return Convert(node, FormulaTreeFactory.CreateLayerNode);
             if (node.VariableValue == "OBJECT_X") return Convert(node, FormulaTreeFactory.CreatePositionXNode);
             if (node.VariableValue == "OBJECT_Y") return Convert(node, FormulaTreeFactory.CreatePositionYNode);
             if (node.VariableValue == "OBJECT_ROTATION") return Convert(node, FormulaTreeFactory.CreateRotationNode);
-            if (node.VariableValue == "SIZE") return Convert(node, FormulaTreeFactory.CreateSizeNode);
-            if (node.VariableValue == "TRANSPARENCY") return Convert(node, FormulaTreeFactory.CreateOpacityNode);
+            if (node.VariableValue == "OBJECT_SIZE") return Convert(node, FormulaTreeFactory.CreateSizeNode);
+            if (node.VariableValue == "OBJECT_GHOSTEFFECT") return Convert(node, FormulaTreeFactory.CreateOpacityNode);
 
             throw new NotImplementedException();
         }

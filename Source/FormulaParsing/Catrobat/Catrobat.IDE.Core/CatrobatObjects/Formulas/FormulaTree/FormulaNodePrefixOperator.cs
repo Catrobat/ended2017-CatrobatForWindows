@@ -1,5 +1,6 @@
 ﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 {
+    /// <remarks>See /catroid/src/org/catrobat/catroid/formulaeditor/Operators.java</remarks>
     public abstract partial class FormulaNodePrefixOperator : UnaryFormulaTree, IFormulaOperator
     {
         public abstract int Order { get; }
@@ -11,7 +12,7 @@
     {
         public override int Order
         {
-            get { return 1; }
+            get { return 4; }
         }
     }
 
@@ -20,7 +21,7 @@
         /// <remarks>Must be the same as <see cref="FormulaNodeSubtract.Order"/></remarks>
         public override int Order
         {
-            get { return 1; }
+            get { return 5; }
         }
     }
 

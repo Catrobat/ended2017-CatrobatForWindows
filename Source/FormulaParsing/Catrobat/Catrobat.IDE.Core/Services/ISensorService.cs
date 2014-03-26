@@ -11,5 +11,6 @@
         double GetCompass();
         double GetInclinationX();
         double GetInclinationY();
+        double GetLoudness();
     }
 }

@@ -174,5 +174,29 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         }
     }
 
+    partial class FormulaNodeLoudness
+    {
+        protected override IFormulaToken CreateToken()
+        {
+            return FormulaTokenFactory.CreateLoudnessToken();
+        }
+
+        public override double EvaluateNumber()
+        {
+            return ServiceLocator.SensorService.GetLoudness();
+        }
+
+        internal override void Serialize(StringBuilder sb)
+        {
+            // TODO: translate
+            sb.Append("Loudness");
+        }
+
+        public override XmlFormulaTree ToXmlFormula()
+        {
+            return XmlFormulaTreeFactory.CreateLoudnessNode();
+        }
+    }
+
     #endregion
 }

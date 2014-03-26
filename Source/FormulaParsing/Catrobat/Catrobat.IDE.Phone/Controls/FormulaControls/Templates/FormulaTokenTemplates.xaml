@@ -446,7 +446,7 @@
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionRandom" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMod">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeModulo">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionMod" Style="{StaticResource PartStyleMath}"/>
       </f:UiFormulaTokenDefinition.Template>
@@ -616,6 +616,12 @@
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Divide" Style="{StaticResource PartStyleOperatorLogic}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePower">
+      <f:UiFormulaTokenDefinition.Template>
+        <!-- TODO: Change Style Resource-->
+        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Power" Style="{StaticResource PartStyleOperatorLogic}"/>
+      </f:UiFormulaTokenDefinition.Template>
+    </f:UiFormulaTokenDefinition>
 
     <!-- ### Brackets ##########################################################################################################-->
     <f:UiFormulaTokenDefinition TokenType="formulaToken:FormulaTokenParenthesis">
@@ -627,16 +633,6 @@
 
     <!-- ### object variables ##########################################################################################################-->
     <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeBrightness">
-      <f:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeDirection">
-      <f:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeGhostEffect">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
@@ -701,6 +697,11 @@
     <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeInclinationX">
       <f:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="INCLINATION_Y" Style="{StaticResource PartStyleSensorVariable}"/>
+      </f:UiFormulaTokenDefinition.Template>
+    </f:UiFormulaTokenDefinition>
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLoudness">
+      <f:UiFormulaTokenDefinition.Template>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LOUDNESS" Style="{StaticResource PartStyleSensorVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
 

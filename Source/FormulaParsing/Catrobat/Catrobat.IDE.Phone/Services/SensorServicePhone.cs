@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using Catrobat.IDE.Core.Services;
 using Microsoft.Devices.Sensors;
-using Catrobat.IDE.Core.ExtensionMethods;
 
 namespace Catrobat.IDE.Phone.Services
 {
@@ -11,6 +10,7 @@ namespace Catrobat.IDE.Phone.Services
         private readonly Accelerometer _accelerometer = new Accelerometer();
         private readonly Compass _compass = new Compass();
         private readonly Motion _motion = new Motion();
+        private readonly Microphone2 _microphone = new Microphone2();
 
         public void Start()
         {
@@ -29,6 +29,8 @@ namespace Catrobat.IDE.Phone.Services
                 try { _motion.Start(); }
                 catch (Exception) { Debugger.Break(); }
             }
+            try { _microphone.Start(); }
+            catch (Exception) { Debugger.Break(); }
         }
 
         public void Stop()
@@ -36,6 +38,7 @@ namespace Catrobat.IDE.Phone.Services
             _accelerometer.Stop();
             _compass.Stop();
             _motion.Stop();
+            _microphone.Stop();
         }
 
         public double GetAccelerationX()
@@ -66,6 +69,11 @@ namespace Catrobat.IDE.Phone.Services
         public double GetInclinationY()
         {
             return _motion.IsDataValid ? _motion.CurrentValue.Attitude.Pitch : 0;
+        }
+
+        public double GetLoudness()
+        {
+            return _microphone.IsDataValid ? _microphone.CurrentValue.Loudness : 0;
         }
     }
 }

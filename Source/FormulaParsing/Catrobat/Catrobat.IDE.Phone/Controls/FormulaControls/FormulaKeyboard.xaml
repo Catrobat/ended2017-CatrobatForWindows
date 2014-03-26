@@ -160,6 +160,7 @@
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyMinus">Minus</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyMultiply">Multiply</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyDivide">Divide</editor:FormulaEditorKey>
+    <editor:FormulaEditorKey x:Key="FormulaEditorKeyPower">Caret</editor:FormulaEditorKey>
 
     <!-- relational operators -->
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyEquals">Equals</editor:FormulaEditorKey>
@@ -207,11 +208,10 @@
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyCompass">Compass</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyInclinationX">InclinationX</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyInclinationY">InclinationY</editor:FormulaEditorKey>
+    <editor:FormulaEditorKey x:Key="FormulaEditorKeyLoudness">Loudness</editor:FormulaEditorKey>
 
     <!-- object variables -->
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyBrightness">Brightness</editor:FormulaEditorKey>
-    <editor:FormulaEditorKey x:Key="FormulaEditorKeyDirection">Direction</editor:FormulaEditorKey>
-    <editor:FormulaEditorKey x:Key="FormulaEditorKeyGhostEffect">GhostEffect</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyLayer">Layer</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyOpacity">Opacity</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyPositionX">PositionX</editor:FormulaEditorKey>
@@ -277,7 +277,7 @@
         <Button Grid.Row="1" Grid.Column="1" Content="-&gt;" DataContext="{StaticResource FormulaEditorKeyRedo}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanRedo, ElementName=FormulaKeyboardXaml}" />
         <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"  Content="Math" Style="{StaticResource StyleButtonAditional}" Click="ButtonMath_OnClick"/>
       </Grid>
-      <Grid Column="1" Row="4">
+      <Grid Column="1" Row="3">
         <Grid.RowDefinitions>
           <RowDefinition />
           <RowDefinition />
@@ -294,7 +294,7 @@
         <Button Grid.Row="3" Grid.Column="0" Content="&lt;" DataContext="{StaticResource FormulaEditorKeyLeft}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" />
         <Button Grid.Row="3" Grid.Column="1" Content="&gt;" DataContext="{StaticResource FormulaEditorKeyRight}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" />
       </Grid>
-      <Grid Name="GridNumbers" Column="0" Row="4">
+      <Grid Name="GridNumbers" Column="0" Row="3">
         <Grid.RowDefinitions>
           <RowDefinition/>
           <RowDefinition/>
@@ -461,7 +461,6 @@
                     <ColumnDefinition/>
                   </Grid.ColumnDefinitions>
                   <Button Grid.Row="0" Grid.Column="0" Content="Brightness" DataContext="{StaticResource FormulaEditorKeyBrightness}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
-                  <Button Grid.Row="0" Grid.Column="1" Content="Direction" DataContext="{StaticResource FormulaEditorKeyDirection}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
                   <Button Grid.Row="1" Grid.Column="0" Content="Layer" DataContext="{StaticResource FormulaEditorKeyLayer}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
                   <Button Grid.Row="1" Grid.Column="1" Content="Size" DataContext="{StaticResource FormulaEditorKeySize}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
                   <Button Grid.Row="2" Grid.Column="0" Content="PositionX" DataContext="{StaticResource FormulaEditorKeyPositionX}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>

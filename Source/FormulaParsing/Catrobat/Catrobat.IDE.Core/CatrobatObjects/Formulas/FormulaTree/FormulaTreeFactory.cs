@@ -4,13 +4,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 {
     class FormulaTreeFactory
     {
-        public static IFormulaTree CreateFormulaTree()
-        {
-            // default formula is a 0
-            return CreateNumberNode(0);
-        }
-
-        #region numbers
+        #region Constants
 
         public static FormulaNodeNumber CreateNumberNode(double value)
         {
@@ -25,9 +19,22 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
             return new FormulaNodePi();
         }
 
+        public static FormulaNodeTrue CreateTrueNode()
+        {
+            return new FormulaNodeTrue();
+        }
+        public static FormulaNodeFalse CreateFalseNode()
+        {
+            return new FormulaNodeFalse();
+        }
+        public static ConstantFormulaTree CreateTruthValueNode(bool value)
+        {
+            return value ? (ConstantFormulaTree)CreateTrueNode() : CreateFalseNode();
+        }
+
         #endregion
 
-        #region arithmetic
+        #region Operators
 
         public static FormulaNodeAdd CreateAddNode(IFormulaTree leftChild, IFormulaTree rightChild)
         {
@@ -46,7 +53,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 RightChild = rightChild
             };
         }
-
         public static FormulaNodeNegativeSign CreateNegativeSignNode(IFormulaTree child)
         {
             return new FormulaNodeNegativeSign
@@ -54,7 +60,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 Child = child
             };
         }
-
         public static FormulaNodeMultiply CreateMultiplyNode(IFormulaTree leftChild, IFormulaTree rightChild)
         {
             return new FormulaNodeMultiply
@@ -63,7 +68,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 RightChild = rightChild
             };
         }
-
         public static FormulaNodeDivide CreateDivideNode(IFormulaTree leftChild, IFormulaTree rightChild)
         {
             return new FormulaNodeDivide
@@ -72,10 +76,15 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 RightChild = rightChild
             };
         }
+        public static FormulaNodePower CreatePowerNode(IFormulaTree leftChild, IFormulaTree rightChild)
+        {
+            return new FormulaNodePower
+            {
+                LeftChild = leftChild,
+                RightChild = rightChild
+            };
+        }
 
-        #endregion
-
-        #region relational operators
 
         public static FormulaNodeEquals CreateEqualsNode(IFormulaTree leftChild, IFormulaTree rightChild)
         {
@@ -85,28 +94,9 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 RightChild = rightChild
             };
         }
-
         public static FormulaNodeNotEquals CreateNotEqualsNode(IFormulaTree leftChild, IFormulaTree rightChild)
         {
             return new FormulaNodeNotEquals
-            {
-                LeftChild = leftChild,
-                RightChild = rightChild
-            };
-        }
-
-        public static FormulaNodeGreater CreateGreaterNode(IFormulaTree leftChild, IFormulaTree rightChild)
-        {
-            return new FormulaNodeGreater
-            {
-                LeftChild = leftChild,
-                RightChild = rightChild
-            };
-        }
-
-        public static FormulaNodeGreaterEqual CreateGreaterEqualNode(IFormulaTree leftChild, IFormulaTree rightChild)
-        {
-            return new FormulaNodeGreaterEqual
             {
                 LeftChild = leftChild,
                 RightChild = rightChild
@@ -121,7 +111,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 RightChild = rightChild
             };
         }
-
         public static FormulaNodeLessEqual CreateLessEqualNode(IFormulaTree leftChild, IFormulaTree rightChild)
         {
             return new FormulaNodeLessEqual
@@ -130,24 +119,21 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 RightChild = rightChild
             };
         }
-
-        #endregion
-
-        #region logic
-
-        public static FormulaNodeTrue CreateTrueNode()
+        public static FormulaNodeGreater CreateGreaterNode(IFormulaTree leftChild, IFormulaTree rightChild)
         {
-            return new FormulaNodeTrue();
+            return new FormulaNodeGreater
+            {
+                LeftChild = leftChild,
+                RightChild = rightChild
+            };
         }
-
-        public static FormulaNodeFalse CreateFalseNode()
+        public static FormulaNodeGreaterEqual CreateGreaterEqualNode(IFormulaTree leftChild, IFormulaTree rightChild)
         {
-            return new FormulaNodeFalse();
-        }
-
-        public static ConstantFormulaTree CreateTruthValueNode(bool value)
-        {
-            return value ? (ConstantFormulaTree) CreateTrueNode() : CreateFalseNode();
+            return new FormulaNodeGreaterEqual
+            {
+                LeftChild = leftChild,
+                RightChild = rightChild
+            };
         }
 
         public static FormulaNodeAnd CreateAndNode(IFormulaTree leftChild, IFormulaTree rightChild)
@@ -158,7 +144,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 RightChild = rightChild
             };
         }
-
         public static FormulaNodeOr CreateOrNode(IFormulaTree leftChild, IFormulaTree rightChild)
         {
             return new FormulaNodeOr
@@ -176,10 +161,32 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
             };
         }
 
-
         #endregion
 
-        #region min/max
+        #region Functions
+
+        public static FormulaNodeExp CreateExpNode(IFormulaTree child)
+        {
+            return new FormulaNodeExp
+            {
+                Child = child
+            };
+        }
+        public static FormulaNodeLog CreateLogNode(IFormulaTree child)
+        {
+            return new FormulaNodeLog
+            {
+                Child = child
+            };
+        }
+        public static FormulaNodeLn CreateLnNode(IFormulaTree child)
+        {
+            return new FormulaNodeLn
+            {
+                Child = child
+            };
+        }
+
 
         public static FormulaNodeMin CreateMinNode(IFormulaTree firstChild, IFormulaTree secondChild)
         {
@@ -189,7 +196,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 SecondChild = secondChild
             };
         }
-
         public static FormulaNodeMax CreateMaxNode(IFormulaTree firstChild, IFormulaTree secondChild)
         {
             return new FormulaNodeMax
@@ -199,38 +205,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
             };
         }
 
-        #endregion
-
-        #region exponential function and logarithms
-
-        public static FormulaNodeExp CreateExpNode(IFormulaTree child)
-        {
-            return new FormulaNodeExp
-            {
-                Child = child
-            };
-        }
-
-        public static FormulaNodeLog CreateLogNode(IFormulaTree child)
-        {
-            return new FormulaNodeLog
-            {
-                Child = child
-            };
-        }
-
-        public static FormulaNodeLn CreateLnNode(IFormulaTree child)
-        {
-            return new FormulaNodeLn
-            {
-                Child = child
-            };
-        }
-
-        #endregion
-
-        #region trigonometric functions
-
         public static FormulaNodeSin CreateSinNode(IFormulaTree child)
         {
             return new FormulaNodeSin
@@ -238,7 +212,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 Child = child
             };
         }
-
         public static FormulaNodeCos CreateCosNode(IFormulaTree child)
         {
             return new FormulaNodeCos
@@ -246,7 +219,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 Child = child
             };
         }
-
         public static FormulaNodeTan CreateTanNode(IFormulaTree child)
         {
             return new FormulaNodeTan
@@ -254,7 +226,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 Child = child
             };
         }
-
         public static FormulaNodeArcsin CreateArcsinNode(IFormulaTree child)
         {
             return new FormulaNodeArcsin
@@ -262,7 +233,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 Child = child
             };
         }
-
         public static FormulaNodeArccos CreateArccosNode(IFormulaTree child)
         {
             return new FormulaNodeArccos
@@ -270,7 +240,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 Child = child
             };
         }
-
         public static FormulaNodeArctan CreateArctanNode(IFormulaTree child)
         {
             return new FormulaNodeArctan
@@ -278,10 +247,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 Child = child
             };
         }
-
-        #endregion
-
-        #region miscellaneous functions
 
         public static FormulaNodeSqrt CreateSqrtNode(IFormulaTree child)
         {
@@ -299,9 +264,9 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
             };
         }
 
-        public static FormulaNodeMod CreateModNode(IFormulaTree leftChild, IFormulaTree rightChild)
+        public static FormulaNodeModulo CreateModuloNode(IFormulaTree leftChild, IFormulaTree rightChild)
         {
-            return new FormulaNodeMod
+            return new FormulaNodeModulo
             {
                 LeftChild = leftChild,
                 RightChild = rightChild
@@ -327,42 +292,40 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         #endregion
 
-        #region sensors
+        #region Sensors
 
         public static FormulaNodeAccelerationX CreateAccelerationXNode()
         {
             return new FormulaNodeAccelerationX();
         }
-
         public static FormulaNodeAccelerationY CreateAccelerationYNode()
         {
             return new FormulaNodeAccelerationY();
         }
-
         public static FormulaNodeAccelerationZ CreateAccelerationZNode()
         {
             return new FormulaNodeAccelerationZ();
         }
-
         public static FormulaNodeCompass CreateCompassNode()
         {
             return new FormulaNodeCompass();
         }
-
         public static FormulaNodeInclinationX CreateInclinationXNode()
         {
             return new FormulaNodeInclinationX();
         }
-
         public static FormulaNodeInclinationY CreateInclinationYNode()
         {
             return new FormulaNodeInclinationY();
         }
-
+        public static FormulaNodeLoudness CreateLoudnessNode()
+        {
+            return new FormulaNodeLoudness();
+        }
 
         #endregion
 
-        #region object variables
+        #region Object variables
 
         public static FormulaNodeBrightness CreateBrightnessNode(ObjectVariableEntry variable)
         {
@@ -371,23 +334,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 Variable = variable
             };
         }
-
-        public static FormulaNodeDirection CreateDirectionNode(ObjectVariableEntry variable)
-        {
-            return new FormulaNodeDirection
-            {
-                Variable = variable
-            };
-        }
-
-        public static FormulaNodeGhostEffect CreateGhostEffectNode(ObjectVariableEntry variable)
-        {
-            return new FormulaNodeGhostEffect
-            {
-                Variable = variable
-            };
-        }
-
         public static FormulaNodeLayer CreateLayerNode(ObjectVariableEntry variable)
         {
             return new FormulaNodeLayer
@@ -395,7 +341,13 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 Variable = variable
             };
         }
-
+        public static FormulaNodeOpacity CreateOpacityNode(ObjectVariableEntry variable)
+        {
+            return new FormulaNodeOpacity
+            {
+                Variable = variable
+            };
+        }
         public static FormulaNodePositionX CreatePositionXNode(ObjectVariableEntry variable)
         {
             return new FormulaNodePositionX
@@ -403,7 +355,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 Variable = variable
             };
         }
-
         public static FormulaNodePositionY CreatePositionYNode(ObjectVariableEntry variable)
         {
             return new FormulaNodePositionY
@@ -411,7 +362,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 Variable = variable
             };
         }
-
         public static FormulaNodeRotation CreateRotationNode(ObjectVariableEntry variable)
         {
             return new FormulaNodeRotation
@@ -419,7 +369,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                 Variable = variable
             };
         }
-
         public static FormulaNodeSize CreateSizeNode(ObjectVariableEntry variable)
         {
             return new FormulaNodeSize
@@ -428,17 +377,9 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
             };
         }
 
-        public static FormulaNodeOpacity CreateOpacityNode(ObjectVariableEntry variable)
-        {
-            return new FormulaNodeOpacity
-            {
-                Variable = variable
-            };
-        }
-
         #endregion
 
-        #region user variables
+        #region User variables
         
         public static FormulaNodeUserVariable CreateUserVariableNode(UserVariable variable)
         {
@@ -450,7 +391,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         #endregion
 
-        #region brackets
+        #region Brackets
 
         public static FormulaNodeParentheses CreateParenthesesNode(IFormulaTree child)
         {
@@ -461,6 +402,5 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         }
 
         #endregion
-
     }
 }
