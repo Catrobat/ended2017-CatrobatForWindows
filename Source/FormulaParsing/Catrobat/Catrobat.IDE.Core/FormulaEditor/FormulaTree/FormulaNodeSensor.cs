@@ -1,22 +1,13 @@
 ﻿using System;
 using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Services;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 {
     abstract partial class FormulaNodeSensor
     {
-        #region Implements IFormulaEvaluation
-
-        public override double EvaluateNumber()
-        {
-            // TODO: evaluate object variables
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
         #region Implements IFormulaSerialization
 
         protected override void SerializeToken(StringBuilder sb)
@@ -46,6 +37,11 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
             return FormulaTokenFactory.CreateAccelerationXToken();
         }
 
+        public override double EvaluateNumber()
+        {
+            return ServiceLocator.SensorService.GetAccelerationX();
+        }
+
         internal override void Serialize(StringBuilder sb)
         {
             // TODO: translate
@@ -63,6 +59,11 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreateAccelerationYToken();
+        }
+
+        public override double EvaluateNumber()
+        {
+            return ServiceLocator.SensorService.GetAccelerationY();
         }
 
         internal override void Serialize(StringBuilder sb)
@@ -84,6 +85,11 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
             return FormulaTokenFactory.CreateAccelerationZToken();
         }
 
+        public override double EvaluateNumber()
+        {
+            return ServiceLocator.SensorService.GetAccelerationZ();
+        }
+
         internal override void Serialize(StringBuilder sb)
         {
             // TODO: translate
@@ -101,6 +107,11 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreateCompassToken();
+        }
+
+        public override double EvaluateNumber()
+        {
+            return ServiceLocator.SensorService.GetCompass();
         }
 
         internal override void Serialize(StringBuilder sb)
@@ -122,6 +133,11 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
             return FormulaTokenFactory.CreateInclinationXToken();
         }
 
+        public override double EvaluateNumber()
+        {
+            return ServiceLocator.SensorService.GetInclinationX();
+        }
+
         internal override void Serialize(StringBuilder sb)
         {
             // TODO: translate
@@ -139,6 +155,11 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreateInclinationYToken();
+        }
+
+        public override double EvaluateNumber()
+        {
+            return ServiceLocator.SensorService.GetInclinationY();
         }
 
         internal override void Serialize(StringBuilder sb)

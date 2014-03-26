@@ -275,6 +275,7 @@
     <Compile Include="Services\ShareServicePhone.cs" />
     <Compile Include="Services\SoundPlayerServicePhone.cs" />
     <Compile Include="Services\SoundRecorderServicePhone.cs" />
+    <Compile Include="Services\SensorServicePhone.cs" />
     <Compile Include="Services\SoundServicePhone.cs" />
     <Compile Include="Services\Storage\ResourceLoaderFactoryPhone.cs" />
     <Compile Include="Services\Storage\ResourcesPhone.cs" />

@@ -91,5 +91,14 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
 
             _viewModel.Cleanup();
         }
+
+        private void ApplicationBarMenuItemStart_OnClick(object sender, EventArgs e)
+        {
+            ServiceLocator.SensorService.Start();
+        }
+        private void ApplicationBarMenuItemStop_OnClick(object sender, EventArgs e)
+        {
+            ServiceLocator.SensorService.Stop();
+        }
     }
 }
