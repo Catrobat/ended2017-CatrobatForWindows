@@ -19,6 +19,8 @@ namespace Catrobat.IDE.Core.Services
         public static INavigationService NavigationService
         { get; set; }
 
+        #region Service instances
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
@@ -133,6 +135,13 @@ namespace Catrobat.IDE.Core.Services
         public static ISoundService SoundService
         { get { return GetInstance<ISoundService>(); } }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+        "CA1822:MarkMembersAsStatic",
+        Justification = "This non-static member is needed for data binding purposes.")]
+        public static ISensorService SensorService
+        { get { return GetInstance<ISensorService>(); } }
+
+        #endregion
 
         public static ViewModelLocator ViewModelLocator { get; set; }
 

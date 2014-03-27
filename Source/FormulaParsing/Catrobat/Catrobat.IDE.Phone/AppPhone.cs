@@ -43,6 +43,7 @@ namespace Catrobat.IDE.Phone
             ServiceLocator.Register<PortableUIElementsConvertionServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<ActionTemplateServicePhone>(TypeCreationMode.Lazy);
             ServiceLocator.Register<SoundServicePhone>(TypeCreationMode.Lazy);
+            ServiceLocator.Register<SensorServicePhone>(TypeCreationMode.Lazy);
 
             ServiceLocator.NavigationService = new NavigationServicePhone();
 

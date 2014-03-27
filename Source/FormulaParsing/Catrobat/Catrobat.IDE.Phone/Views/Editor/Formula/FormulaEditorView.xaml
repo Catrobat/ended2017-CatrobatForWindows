@@ -98,4 +98,14 @@
       </Grid>
     </Grid>
   </Grid>
+  
+  <phone:PhoneApplicationPage.ApplicationBar>
+    <shell:ApplicationBar>
+      <shell:ApplicationBar.MenuItems>
+        <shell:ApplicationBarMenuItem Text="Start sensors" Click="ApplicationBarMenuItemStart_OnClick"/>
+        <shell:ApplicationBarMenuItem Text="Stop sensors" Click="ApplicationBarMenuItemStop_OnClick"/>
+      </shell:ApplicationBar.MenuItems>
+    </shell:ApplicationBar>
+  </phone:PhoneApplicationPage.ApplicationBar>
+  
 </phone:PhoneApplicationPage>

@@ -2,6 +2,7 @@
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 {
+    /// <remarks>See /catroid/src/org/catrobat/catroid/formulaeditor/Sensors.java</remarks>
     public abstract partial class FormulaNodeSensor : ConstantFormulaTree
     {
     }
@@ -35,6 +36,11 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
     [DebuggerDisplay("Sensor = InclinationY")]
     public partial class FormulaNodeInclinationY : FormulaNodeSensor
+    {
+    }
+
+    [DebuggerDisplay("Sensor = Loudness")]
+    public partial class FormulaNodeLoudness : FormulaNodeSensor
     {
     }
 

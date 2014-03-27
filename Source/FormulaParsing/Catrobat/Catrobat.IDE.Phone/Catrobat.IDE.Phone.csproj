@@ -265,6 +265,8 @@
     <Compile Include="Services\DispatcherServicePhone.cs" />
     <Compile Include="Services\ImageResizeServicePhone.cs" />
     <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
+    <Compile Include="Services\Microphone.cs" />
+    <Compile Include="Services\MicrophoneReading.cs" />
     <Compile Include="Services\ProjectImporterServicePhone.cs" />
     <Compile Include="Services\NavigationServicePhone.cs" />
     <Compile Include="Services\NotificationServicePhone.cs" />
@@ -275,6 +277,7 @@
     <Compile Include="Services\ShareServicePhone.cs" />
     <Compile Include="Services\SoundPlayerServicePhone.cs" />
     <Compile Include="Services\SoundRecorderServicePhone.cs" />
+    <Compile Include="Services\SensorServicePhone.cs" />
     <Compile Include="Services\SoundServicePhone.cs" />
     <Compile Include="Services\Storage\ResourceLoaderFactoryPhone.cs" />
     <Compile Include="Services\Storage\ResourcesPhone.cs" />

@@ -109,7 +109,6 @@
     <Compile Include="CatrobatObjects\Formulas\XmlFormulaTreeFactory.cs" />
     <Compile Include="ExtensionMethods\LinqExtensions.cs" />
     <Compile Include="ExtensionMethods\EnumExtensions.cs" />
-    <Compile Include="ExtensionMethods\FormulaTreeExtensions.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\UnaryFormulaTree.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\IFormulaTree.cs" />
     <Compile Include="CatrobatObjects\Scripts\EmptyDummyBrick.cs" />
@@ -216,6 +215,7 @@
     <Compile Include="Services\IProjectGenerator.cs" />
     <Compile Include="Services\IShareService.cs" />
     <Compile Include="Services\IActionTemplateService.cs" />
+    <Compile Include="Services\ISensorService.cs" />
     <Compile Include="Services\ISoundService.cs" />
     <Compile Include="UI\Converters\ActiveThemeBrushConverter.cs" />
     <Compile Include="UI\Converters\BoolOpacityConverter.cs" />
@@ -424,6 +424,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -3,6 +3,7 @@ using System.Diagnostics;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 {
+    /// <remarks>See /catroid/src/org/catrobat/catroid/formulaeditor/Operators.java</remarks>
     public abstract partial class FormulaNodeInfixOperator : BinaryFormulaTree, IFormulaOperator
     {
         #region rename First- and SecondChild to Left- and RightChild
@@ -45,7 +46,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         public override int Order
         {
-            get { return 1; }
+            get { return 5; }
         }
     }
 
@@ -55,7 +56,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         /// <remarks>Must be the same as <see cref="FormulaNodeNegativeSign.Order"/></remarks>
         public override int Order
         {
-            get { return 1; }
+            get { return 5; }
         }
     }
 
@@ -64,7 +65,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         public override int Order
         {
-            get { return 2; }
+            get { return 6; }
         }
     }
 
@@ -73,7 +74,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         public override int Order
         {
-            get { return 2; }
+            get { return 6; }
         }
     }
 
@@ -82,7 +83,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         public override int Order
         {
-            get { return 0; }
+            get { return 3; }
         }
     }
 
@@ -91,7 +92,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         public override int Order
         {
-            get { return 0; }
+            get { return 3; }
         }
     }
 
@@ -100,7 +101,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         public override int Order
         {
-            get { return 0; }
+            get { return 4; }
         }
     }
 
@@ -109,7 +110,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         public override int Order
         {
-            get { return 0; }
+            get { return 4; }
         }
     }
 
@@ -118,7 +119,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         public override int Order
         {
-            get { return 0; }
+            get { return 4; }
         }
     }
 
@@ -127,16 +128,17 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         public override int Order
         {
-            get { return 0; }
+            get { return 4; }
         }
     }
+
 
     [DebuggerDisplay("{LeftChild} and {RightChild}")]
     public partial class FormulaNodeAnd : FormulaNodeInfixOperator
     {
         public override int Order
         {
-            get { return 0; }
+            get { return 2; }
         }
     }
 
@@ -145,16 +147,25 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         public override int Order
         {
-            get { return 0; }
+            get { return 1; }
         }
     }
 
     [DebuggerDisplay("{LeftChild} mod {RightChild}")]
-    public partial class FormulaNodeMod : FormulaNodeInfixOperator
+    public partial class FormulaNodeModulo : FormulaNodeInfixOperator
     {
         public override int Order
         {
-            get { return 0; }
+            get { return 6; }
+        }
+    }
+
+    [DebuggerDisplay("{LeftChild} ^ {RightChild}")]
+    public partial class FormulaNodePower : FormulaNodeInfixOperator
+    {
+        public override int Order
+        {
+            get { return 7; }
         }
     }
 

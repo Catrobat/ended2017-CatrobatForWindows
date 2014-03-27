@@ -85,11 +85,20 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
 
         private void FormulaEditorView_OnUnloaded(object sender, RoutedEventArgs e)
         {
-            // XAML bindings are not removed itself! hopefully this changes in Windows Phone 8.1
+            // XAML bindings are not removed themselves! hopefully this changes in Windows Phone 8.1
             FormulaViewer.ClearValue(FormulaViewer3.TokensProperty);
             FormulaViewer.ClearValue(FormulaViewer3.CaretIndexProperty);
 
             _viewModel.Cleanup();
+        }
+
+        private void ApplicationBarMenuItemStart_OnClick(object sender, EventArgs e)
+        {
+            ServiceLocator.SensorService.Start();
+        }
+        private void ApplicationBarMenuItemStop_OnClick(object sender, EventArgs e)
+        {
+            ServiceLocator.SensorService.Stop();
         }
     }
 }

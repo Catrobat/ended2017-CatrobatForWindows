@@ -179,6 +179,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 case FormulaEditorKey.Minus: return FormulaTokenFactory.CreateMinusToken();
                 case FormulaEditorKey.Multiply: return FormulaTokenFactory.CreateMultiplyToken();
                 case FormulaEditorKey.Divide: return FormulaTokenFactory.CreateDivideToken();
+                case FormulaEditorKey.Caret: return FormulaTokenFactory.CreateCaretToken();
 
                 // relational operators
                 case FormulaEditorKey.Equals: return FormulaTokenFactory.CreateEqualsToken();
@@ -226,11 +227,10 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 case FormulaEditorKey.Compass: return FormulaTokenFactory.CreateCompassToken();
                 case FormulaEditorKey.InclinationX: return FormulaTokenFactory.CreateInclinationXToken();
                 case FormulaEditorKey.InclinationY: return FormulaTokenFactory.CreateInclinationYToken();
+                case FormulaEditorKey.Loudness: return FormulaTokenFactory.CreateLoudnessToken();
 
                 // object variables
                 case FormulaEditorKey.Brightness: return FormulaTokenFactory.CreateBrightnessToken();
-                case FormulaEditorKey.Direction: return FormulaTokenFactory.CreateDirectionToken();
-                case FormulaEditorKey.GhostEffect: return FormulaTokenFactory.CreateGhostEffectToken();
                 case FormulaEditorKey.Layer: return FormulaTokenFactory.CreateLayerToken();
                 case FormulaEditorKey.Opacity: return FormulaTokenFactory.CreateOpacityToken();
                 case FormulaEditorKey.PositionX: return FormulaTokenFactory.CreatePositionXToken();

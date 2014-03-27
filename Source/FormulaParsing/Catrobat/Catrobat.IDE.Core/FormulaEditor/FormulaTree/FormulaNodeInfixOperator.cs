@@ -149,6 +149,34 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         }
     }
 
+    partial class FormulaNodePower
+    {
+        protected override IFormulaToken CreateToken()
+        {
+            return FormulaTokenFactory.CreateCaretToken();
+        }
+
+        public override double EvaluateNumber()
+        {
+            return Math.Pow(LeftChild.EvaluateNumber(), RightChild.EvaluateNumber());
+        }
+
+        protected override void SerializeToken(StringBuilder sb)
+        {
+            sb.Append("^");
+        }
+
+        public override bool IsNumber()
+        {
+            return IsNumberN2N();
+        }
+
+        protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
+        {
+            return XmlFormulaTreeFactory.CreatePowerNode(leftChild, rightChild);
+        }
+    }
+
     partial class FormulaNodeEquals
     {
         protected override IFormulaToken CreateToken()
@@ -399,7 +427,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         }
     }
 
-    partial class FormulaNodeMod
+    partial class FormulaNodeModulo
     {
         protected override IFormulaToken CreateToken()
         {

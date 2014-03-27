@@ -58,44 +58,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         }
     }
 
-    partial class FormulaNodeDirection
-    {
-        protected override IFormulaToken CreateToken()
-        {
-            return FormulaTokenFactory.CreateDirectionToken();
-        }
-
-        internal override void Serialize(StringBuilder sb)
-        {
-            // TODO: translate
-            sb.Append("Direction");
-        }
-
-        public override XmlFormulaTree ToXmlFormula()
-        {
-            return XmlFormulaTreeFactory.CreateDirectionNode();
-        }
-    }
-
-    partial class FormulaNodeGhostEffect
-    {
-        protected override IFormulaToken CreateToken()
-        {
-            return FormulaTokenFactory.CreateGhostEffectToken();
-        }
-
-        internal override void Serialize(StringBuilder sb)
-        {
-            // TODO: translate
-            sb.Append("GhostEffect");
-        }
-
-        public override XmlFormulaTree ToXmlFormula()
-        {
-            return XmlFormulaTreeFactory.CreateGhostEffectNode();
-        }
-    }
-
     partial class FormulaNodeLayer
     {
         protected override IFormulaToken CreateToken()

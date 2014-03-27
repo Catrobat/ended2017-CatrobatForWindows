@@ -4,6 +4,7 @@ using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 {
+    /// <remarks> See /catroid/src/org/catrobat/catroid/formulaeditor</remarks>
     class XmlFormulaTreeFactory
     {
         public static XmlFormulaTree CreateFormulaTree()
@@ -12,7 +13,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
             return CreateNumberNode(0);
         }
 
-        #region numbers
+        #region Constants
 
         public static XmlFormulaTree CreateNumberNode(double value)
         {
@@ -30,23 +31,44 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 VariableType = "FUNCTION", 
                 VariableValue = "PI"
             };
-       }
+        }
+
+        public static XmlFormulaTree CreateTrueNode()
+        {
+            return new XmlFormulaTree
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "TRUE",
+                LeftChild = null,
+                RightChild = null
+            };
+        }
+        public static XmlFormulaTree CreateFalseNode()
+        {
+            return new XmlFormulaTree
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "FALSE",
+                LeftChild = null,
+                RightChild = null
+            };
+        }
+
 
         #endregion
 
-        #region arithmetic
+        #region Operators
 
         public static XmlFormulaTree CreateAddNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
-                VariableType = "OPERATOR", 
-                VariableValue = "PLUS", 
-                LeftChild = leftChild, 
+                VariableType = "OPERATOR",
+                VariableValue = "PLUS",
+                LeftChild = leftChild,
                 RightChild = rightChild
             };
         }
-
         public static XmlFormulaTree CreateSubtractNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
@@ -57,7 +79,10 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = rightChild
             };
         }
-
+        public static XmlFormulaTree CreateNegativeSignNode(XmlFormulaTree child)
+        {
+            throw new NotImplementedException();
+        }
         public static XmlFormulaTree CreateMultiplyNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
@@ -68,7 +93,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = rightChild
             };
         }
-
         public static XmlFormulaTree CreateDivideNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
@@ -79,10 +103,16 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = rightChild
             };
         }
-
-        #endregion
-
-        #region relational operators
+        public static XmlFormulaTree CreatePowerNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
+        {
+            return new XmlFormulaTree
+            {
+                VariableType = "OPERATOR",
+                VariableValue = "POW",
+                LeftChild = leftChild,
+                RightChild = rightChild
+            };
+        }
 
         public static XmlFormulaTree CreateEqualsNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
@@ -94,13 +124,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = rightChild
             };
         }
-
         public static XmlFormulaTree CreateNotEqualsNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
             {
                 VariableType = "OPERATOR",
-                VariableValue = "NOTEQUAL",
+                VariableValue = "NOT_EQUAL",
                 LeftChild = leftChild,
                 RightChild = rightChild
             };
@@ -116,7 +145,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = rightChild
             };
         }
-
         public static XmlFormulaTree CreateLessEqualNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
@@ -127,7 +155,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = rightChild
             };
         }
-
         public static XmlFormulaTree CreateGreaterNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
@@ -138,7 +165,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = rightChild
             };
         }
-
         public static XmlFormulaTree CreateGreaterEqualNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
@@ -147,32 +173,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 VariableValue = "GREATER_OR_EQUAL",
                 LeftChild = leftChild,
                 RightChild = rightChild
-            };
-        }
-
-        #endregion
-
-        #region logic
-
-        public static XmlFormulaTree CreateTrueNode()
-        {
-            return new XmlFormulaTree
-            {
-                VariableType = "FUNCTION",
-                VariableValue = "TRUE",
-                LeftChild = null,
-                RightChild = null
-            };
-        }
-
-        public static XmlFormulaTree CreateFalseNode()
-        {
-            return new XmlFormulaTree
-            {
-                VariableType = "FUNCTION",
-                VariableValue = "FALSE",
-                LeftChild = null,
-                RightChild = null
             };
         }
 
@@ -186,7 +186,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = rightChild
             };
         }
-
         public static XmlFormulaTree CreateOrNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
         {
             return new XmlFormulaTree
@@ -209,36 +208,9 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
             };
         }
 
-
         #endregion
 
-        #region min/max
-
-        public static XmlFormulaTree CreateMinNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
-        {
-            return new XmlFormulaTree
-            {
-                VariableType = "FUNCTION",
-                VariableValue = "MIN",
-                LeftChild = leftChild,
-                RightChild = rightChild
-            };
-        }
-
-        public static XmlFormulaTree CreateMaxNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
-        {
-            return new XmlFormulaTree
-            {
-                VariableType = "FUNCTION",
-                VariableValue = "MAX",
-                LeftChild = leftChild,
-                RightChild = rightChild
-            };
-        }
-
-        #endregion
-
-        #region exponential function and logarithms
+        #region Functions
 
         public static XmlFormulaTree CreateExpNode(XmlFormulaTree child)
         {
@@ -250,7 +222,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = null
             };
         }
-
         public static XmlFormulaTree CreateLogNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
@@ -261,7 +232,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = null
             };
         }
-
         public static XmlFormulaTree CreateLnNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
@@ -273,9 +243,26 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
             };
         }
 
-        #endregion
-
-        #region trigonometric functions
+        public static XmlFormulaTree CreateMinNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
+        {
+            return new XmlFormulaTree
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "MIN",
+                LeftChild = leftChild,
+                RightChild = rightChild
+            };
+        }
+        public static XmlFormulaTree CreateMaxNode(XmlFormulaTree leftChild, XmlFormulaTree rightChild)
+        {
+            return new XmlFormulaTree
+            {
+                VariableType = "FUNCTION",
+                VariableValue = "MAX",
+                LeftChild = leftChild,
+                RightChild = rightChild
+            };
+        }
 
         public static XmlFormulaTree CreateSinNode(XmlFormulaTree child)
         {
@@ -287,7 +274,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = null
             };
         }
-
         public static XmlFormulaTree CreateCosNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
@@ -298,7 +284,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = null
             };
         }
-
         public static XmlFormulaTree CreateTanNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
@@ -309,7 +294,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = null
             };
         }
-
         public static XmlFormulaTree CreateArcsinNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
@@ -320,7 +304,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = null
             };
         }
-
         public static XmlFormulaTree CreateArccosNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
@@ -331,7 +314,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = null
             };
         }
-
         public static XmlFormulaTree CreateArctanNode(XmlFormulaTree child)
         {
             return new XmlFormulaTree
@@ -342,10 +324,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = null
             };
         }
-
-        #endregion
-
-        #region miscellaneous functions
 
         public static XmlFormulaTree CreateSqrtNode(XmlFormulaTree child)
         {
@@ -404,36 +382,34 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 
         #endregion
 
-        #region sensors
+        #region Sensors
 
         public static XmlFormulaTree CreateAccelerationXNode()
         {
             return new XmlFormulaTree
             {
                 VariableType = "SENSOR",
-                VariableValue = "ACCELERATION_X",
+                VariableValue = "X_ACCELERATION",
                 LeftChild = null,
                 RightChild = null
             };
         }
-
         public static XmlFormulaTree CreateAccelerationYNode()
         {
             return new XmlFormulaTree
             {
                 VariableType = "SENSOR",
-                VariableValue = "ACCELERATION_Y",
+                VariableValue = "Y_ACCELERATION",
                 LeftChild = null,
                 RightChild = null
             };
         }
-
         public static XmlFormulaTree CreateAccelerationZNode()
         {
             return new XmlFormulaTree
             {
                 VariableType = "SENSOR",
-                VariableValue = "ACCELERATION_Z",
+                VariableValue = "Z_ACCELERATION",
                 LeftChild = null,
                 RightChild = null
             };
@@ -444,7 +420,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
             return new XmlFormulaTree
             {
                 VariableType = "SENSOR",
-                VariableValue = "COMPASSDIRECTION",
+                VariableValue = "COMPASS_DIRECTION",
                 LeftChild = null,
                 RightChild = null
             };
@@ -460,7 +436,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RightChild = null
             };
         }
-
         public static XmlFormulaTree CreateInclinationYNode()
         {
             return new XmlFormulaTree
@@ -472,39 +447,27 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
             };
         }
 
+        public static XmlFormulaTree CreateLoudnessNode()
+        {
+            return new XmlFormulaTree
+            {
+                VariableType = "SENSOR",
+                VariableValue = "LOUDNESS",
+                LeftChild = null,
+                RightChild = null
+            };
+        }
 
         #endregion
 
-        #region object variables
+        #region Object variables
 
         public static XmlFormulaTree CreateBrightnessNode()
         {
             return new XmlFormulaTree
             {
                 VariableType = "SENSOR",
-                VariableValue = "BRIGHTNESS",
-                LeftChild = null,
-                RightChild = null
-            };
-        }
-
-        public static XmlFormulaTree CreateDirectionNode()
-        {
-            return new XmlFormulaTree
-            {
-                VariableType = "SENSOR",
-                VariableValue = "DIRECTION",
-                LeftChild = null,
-                RightChild = null
-            };
-        }
-
-        public static XmlFormulaTree CreateGhostEffectNode()
-        {
-            return new XmlFormulaTree
-            {
-                VariableType = "SENSOR",
-                VariableValue = "OBJECT_GHOSTEFFECT",
+                VariableValue = "OBJECT_BRIGHTNESS",
                 LeftChild = null,
                 RightChild = null
             };
@@ -516,6 +479,17 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
             {
                 VariableType = "SENSOR",
                 VariableValue = "OBJECT_LAYER",
+                LeftChild = null,
+                RightChild = null
+            };
+        }
+
+        public static XmlFormulaTree CreateOpacityNode()
+        {
+            return new XmlFormulaTree
+            {
+                VariableType = "SENSOR",
+                VariableValue = "OBJECT_GHOSTEFFECT",
                 LeftChild = null,
                 RightChild = null
             };
@@ -559,18 +533,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
             return new XmlFormulaTree
             {
                 VariableType = "SENSOR",
-                VariableValue = "SIZE",
-                LeftChild = null,
-                RightChild = null
-            };
-        }
-
-        public static XmlFormulaTree CreateOpacityNode()
-        {
-            return new XmlFormulaTree
-            {
-                VariableType = "SENSOR",
-                VariableValue = "TRANSPARENCY",
+                VariableValue = "OBJECT_SIZE",
                 LeftChild = null,
                 RightChild = null
             };
@@ -578,7 +541,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 
         #endregion
 
-        #region user variables
+        #region User variables
 
         public static XmlFormulaTree CreateUserVariableNode(UserVariable variable)
         {
@@ -593,7 +556,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 
         #endregion
 
-        #region brackets
+        #region Brackets
 
         public static XmlFormulaTree CreateParenthesesNode(XmlFormulaTree child)
         {
@@ -607,10 +570,5 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
         }
 
         #endregion
-
-        public static XmlFormulaTree CreateNegativeSignNode(XmlFormulaTree child)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

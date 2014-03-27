@@ -3,6 +3,8 @@ using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 {
+    /// <remarks>See /catroid/src/org/catrobat/catroid/formulaeditor/Sensors.java</remarks>
+   
     public abstract partial class FormulaNodeObjectVariable : FormulaNodeVariable
     {
         public ObjectVariableEntry Variable { get; set; }
@@ -12,16 +14,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
     [DebuggerDisplay("ObjectVariable = Brightness")]
     public partial class FormulaNodeBrightness : FormulaNodeObjectVariable
-    {
-    }
-
-    [DebuggerDisplay("ObjectVariable = Direction")]
-    public partial class FormulaNodeDirection : FormulaNodeObjectVariable
-    {
-    }
-
-    [DebuggerDisplay("ObjectVariable = GhostEffect")]
-    public partial class FormulaNodeGhostEffect : FormulaNodeObjectVariable
     {
     }
 

@@ -22,6 +22,7 @@
         Minus, 
         Multiply, 
         Divide, 
+        Caret, 
 
         // relational operators
         Equals, 
@@ -68,12 +69,11 @@
         AccelerationZ,
         Compass,
         InclinationX,
-        InclinationY, 
+        InclinationY,
+        Loudness, 
 
         // object variables
         Brightness,
-        Direction,
-        GhostEffect,
         Layer,
         Opacity, 
         PositionX, 
