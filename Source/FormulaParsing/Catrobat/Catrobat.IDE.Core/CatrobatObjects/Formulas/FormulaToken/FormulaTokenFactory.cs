@@ -225,44 +225,48 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
 
         #endregion
 
-        #region Object variables
+        #region Properties
 
         public static FormulaNodeBrightness CreateBrightnessToken()
         {
-            return FormulaTreeFactory.CreateBrightnessNode(null);
+            return FormulaTreeFactory.CreateBrightnessNode();
         }
         public static FormulaNodeLayer CreateLayerToken()
         {
-            return FormulaTreeFactory.CreateLayerNode(null);
+            return FormulaTreeFactory.CreateLayerNode();
         }
         public static FormulaNodeOpacity CreateOpacityToken()
         {
-            return FormulaTreeFactory.CreateOpacityNode(null);
+            return FormulaTreeFactory.CreateOpacityNode();
         }
         public static FormulaNodePositionX CreatePositionXToken()
         {
-            return FormulaTreeFactory.CreatePositionXNode(null);
+            return FormulaTreeFactory.CreatePositionXNode();
         }
         public static FormulaNodePositionY CreatePositionYToken()
         {
-            return FormulaTreeFactory.CreatePositionYNode(null);
+            return FormulaTreeFactory.CreatePositionYNode();
         }
         public static FormulaNodeRotation CreateRotationToken()
         {
-            return FormulaTreeFactory.CreateRotationNode(null);
+            return FormulaTreeFactory.CreateRotationNode();
         }
         public static FormulaNodeSize CreateSizeToken()
         {
-            return FormulaTreeFactory.CreateSizeNode(null);
+            return FormulaTreeFactory.CreateSizeNode();
         }
 
         #endregion
 
-        #region User variables
+        #region Variables
         
-        public static FormulaNodeUserVariable CreateUserVariableToken(UserVariable variable)
+        public static FormulaNodeLocalVariable CreateLocalVariableToken(UserVariable variable)
         {
-            return FormulaTreeFactory.CreateUserVariableNode(variable);
+            return FormulaTreeFactory.CreateLocalVariableNode(variable);
+        }
+        public static FormulaNodeGlobalVariable CreateGlobalVariableToken(UserVariable variable)
+        {
+            return FormulaTreeFactory.CreateGlobalVariableNode(variable);
         }
 
         #endregion

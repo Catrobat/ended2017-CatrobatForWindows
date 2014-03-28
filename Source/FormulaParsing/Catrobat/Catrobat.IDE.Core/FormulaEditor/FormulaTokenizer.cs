@@ -11,17 +11,16 @@ namespace Catrobat.IDE.Core.FormulaEditor
 {
     class FormulaTokenizer
     {
+        #region tokenize string
 
-        private readonly IDictionary<string, UserVariable> _userVariables;
-        private readonly ObjectVariableEntry _objectVariable;
+        private readonly IDictionary<string, UserVariable> _userVariables = null;
+        private readonly IEnumerable<UserVariable> _objectVariable = null;
 
-        public FormulaTokenizer(IEnumerable<UserVariable> userVariables, ObjectVariableEntry objectVariable)
+        public FormulaTokenizer(IEnumerable<UserVariable> userVariables, IEnumerable<UserVariable> objectVariable)
         {
             _userVariables = userVariables.ToDictionary(variable => variable.Name);
             _objectVariable = objectVariable;
         }
-
-        #region tokenize string
 
         public bool Tokenize(string input, out IEnumerable<IFormulaToken> tokens, out IEnumerable<string> parsingErrors)
         {
@@ -150,6 +149,9 @@ namespace Catrobat.IDE.Core.FormulaEditor
         #endregion
 
         #region tokenize formula
+        public FormulaTokenizer()
+        {
+        }
 
         public IEnumerable<IFormulaToken> Tokenize(IFormulaTree formula)
         {

@@ -2,7 +2,7 @@
 {
     public enum FormulaEditorKey
     {
-        // numbers
+        // Constants
         D0, 
         D1, 
         D2, 
@@ -15,55 +15,45 @@
         D9, 
         DecimalSeparator,
         ArgumentSeparator, 
-        Pi, 
-        
-        // arithemtic
+        Pi,
+        True,
+        False, 
+   
+        // Operators
         Plus, 
         Minus, 
         Multiply, 
         Divide, 
         Caret, 
-
-        // relational operators
         Equals, 
         NotEquals, 
         Greater, 
         GreaterEqual, 
         Less, 
-        LessEqual, 
-
-        // logic
-        True, 
-        False, 
+        LessEqual,
         And, 
         Or, 
-        Not, 
+        Not,
+        Mod, 
 
-        // min/max
-        Min, 
-        Max, 
-
-        // exponential function and logarithms
+        // Functions
         Exp, 
         Log, 
-        Ln, 
-
-        // trigonometric functions
+        Ln,
+        Min,
+        Max,
         Sin, 
         Cos, 
         Tan, 
         Arcsin, 
         Arccos, 
         Arctan, 
-
-        // miscellaneous functions
         Sqrt, 
         Abs, 
-        Mod, 
         Round, 
         Random, 
 
-        // sensors
+        // Sensors
         AccelerationX,
         AccelerationY,
         AccelerationZ,
@@ -72,7 +62,7 @@
         InclinationY,
         Loudness, 
 
-        // object variables
+        // Properties
         Brightness,
         Layer,
         Opacity, 
@@ -81,14 +71,15 @@
         Rotation,
         Size,
 
-        // user variables
-        UserVariable, 
+        // Variables
+        LocalVariable,
+        GlobalVariable, 
 
-        // brackets
+        // Brackets
         OpeningParenthesis, 
         ClosingParenthesis, 
 
-        // keyboard
+        // Keyboard
         Left, 
         Right, 
         Delete, 

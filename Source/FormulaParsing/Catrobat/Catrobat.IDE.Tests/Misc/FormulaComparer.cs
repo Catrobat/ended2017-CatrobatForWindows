@@ -1,4 +1,4 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Globalization;
 
@@ -49,8 +49,7 @@ namespace Catrobat.IDE.Tests.Misc
             if (double.TryParse(expected, NumberStyles.Number, CultureInfo.InvariantCulture, out expectedNumber))
             {
                 double actualNumber;
-                Assert.IsTrue(double.TryParse(actual, NumberStyles.Number, CultureInfo.InvariantCulture,
-                    out actualNumber));
+                Assert.IsTrue(double.TryParse(actual, NumberStyles.Number, CultureInfo.InvariantCulture, out actualNumber));
                 Assert.AreEqual(expectedNumber, actualNumber);
                 return;
             }

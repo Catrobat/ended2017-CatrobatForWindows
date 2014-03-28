@@ -1,7 +1,9 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 {
+    /// <seealso cref="XmlFormulaTreeFactory"/>
     class FormulaTreeFactory
     {
         #region Constants
@@ -325,65 +327,51 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         #endregion
 
-        #region Object variables
+        #region Properties
 
-        public static FormulaNodeBrightness CreateBrightnessNode(ObjectVariableEntry variable)
+        public static FormulaNodeBrightness CreateBrightnessNode()
         {
-            return new FormulaNodeBrightness
-            {
-                Variable = variable
-            };
+            return new FormulaNodeBrightness();
         }
-        public static FormulaNodeLayer CreateLayerNode(ObjectVariableEntry variable)
+        public static FormulaNodeLayer CreateLayerNode()
         {
-            return new FormulaNodeLayer
-            {
-                Variable = variable
-            };
+            return new FormulaNodeLayer();
         }
-        public static FormulaNodeOpacity CreateOpacityNode(ObjectVariableEntry variable)
+        public static FormulaNodeOpacity CreateOpacityNode()
         {
-            return new FormulaNodeOpacity
-            {
-                Variable = variable
-            };
+            return new FormulaNodeOpacity();
         }
-        public static FormulaNodePositionX CreatePositionXNode(ObjectVariableEntry variable)
+        public static FormulaNodePositionX CreatePositionXNode()
         {
-            return new FormulaNodePositionX
-            {
-                Variable = variable
-            };
+            return new FormulaNodePositionX();
         }
-        public static FormulaNodePositionY CreatePositionYNode(ObjectVariableEntry variable)
+        public static FormulaNodePositionY CreatePositionYNode()
         {
-            return new FormulaNodePositionY
-            {
-                Variable = variable
-            };
+            return new FormulaNodePositionY();
         }
-        public static FormulaNodeRotation CreateRotationNode(ObjectVariableEntry variable)
+        public static FormulaNodeRotation CreateRotationNode()
         {
-            return new FormulaNodeRotation
-            {
-                Variable = variable
-            };
+            return new FormulaNodeRotation();
         }
-        public static FormulaNodeSize CreateSizeNode(ObjectVariableEntry variable)
+        public static FormulaNodeSize CreateSizeNode()
         {
-            return new FormulaNodeSize
-            {
-                Variable = variable
-            };
+            return new FormulaNodeSize();
         }
 
         #endregion
 
-        #region User variables
+        #region Variables
         
-        public static FormulaNodeUserVariable CreateUserVariableNode(UserVariable variable)
+        public static FormulaNodeLocalVariable CreateLocalVariableNode(UserVariable variable)
         {
-            return new FormulaNodeUserVariable
+            return new FormulaNodeLocalVariable
+            {
+                Variable = variable
+            };
+        }
+        public static FormulaNodeGlobalVariable CreateGlobalVariableNode(UserVariable variable)
+        {
+            return new FormulaNodeGlobalVariable
             {
                 Variable = variable
             };

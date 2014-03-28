@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.FormulaEditor;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
+using Catrobat.IDE.Core.FormulaEditor;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree

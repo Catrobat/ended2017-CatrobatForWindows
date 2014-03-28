@@ -301,7 +301,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         {
             Assert.AreEqual(
                 expected: "0 mod 1",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateModNode(_nodeZero, _nodeOne)));
+                actual: _serializer.Serialize(FormulaTreeFactory.CreateModuloNode(_nodeZero, _nodeOne)));
         }
 
         [TestMethod]

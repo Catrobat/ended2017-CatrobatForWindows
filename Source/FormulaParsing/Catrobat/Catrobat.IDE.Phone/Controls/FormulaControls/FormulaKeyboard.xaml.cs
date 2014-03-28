@@ -98,14 +98,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         public void RaiseKeyPressed(FormulaEditorKey key)
         {
             RaiseKeyPressed(new FormulaKeyEventArgs(key, null, null));
-       }
-        public void RaiseKeyPressed(FormulaEditorKey key, ObjectVariableEntry objectVariable)
-        {
-            RaiseKeyPressed(new FormulaKeyEventArgs(key, objectVariable, null));
-       }
-        public void RaiseKeyPressed(UserVariable userVariable)
-        {
-            RaiseKeyPressed(new FormulaKeyEventArgs(FormulaEditorKey.UserVariable, null, userVariable));
         }
 
         public EvaluatePressed EvaluatePressed;

@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 {
-    partial class FormulaNodeUserVariable
+    partial class FormulaNodeVariable
     {
-        #region Implements IFormulaTokenizer
-
-        protected override IFormulaToken CreateToken()
-        {
-            return FormulaTokenFactory.CreateUserVariableToken(Variable);
-        }
-
-        #endregion
-
         #region Implements IFormulaEvaluation
 
         public override double EvaluateNumber()
@@ -49,14 +41,35 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         }
 
         #endregion
+    }
 
-        #region Implements IXmlFormulaConvertible
+    #region Implementations
+
+    partial class FormulaNodeLocalVariable
+    {
+        protected override IFormulaToken CreateToken()
+        {
+            return FormulaTokenFactory.CreateLocalVariableToken(Variable);
+        }
 
         public override XmlFormulaTree ToXmlFormula()
         {
-            return XmlFormulaTreeFactory.CreateUserVariableNode(Variable);
+            return XmlFormulaTreeFactory.CreateLocalVariableNode(Variable);
+        }
+    }
+
+    partial class FormulaNodeGlobalVariable
+    {
+        protected override IFormulaToken CreateToken()
+        {
+            return FormulaTokenFactory.CreateGlobalVariableToken(Variable);
         }
 
-        #endregion
+        public override XmlFormulaTree ToXmlFormula()
+        {
+            return XmlFormulaTreeFactory.CreateGlobalVariableNode(Variable);
+        }
     }
+
+    #endregion
 }

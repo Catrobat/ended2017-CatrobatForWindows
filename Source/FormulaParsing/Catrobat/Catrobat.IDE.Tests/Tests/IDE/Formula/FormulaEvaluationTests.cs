@@ -105,7 +105,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         {
             TestEvaluator(Math.Sqrt, FormulaTreeFactory.CreateSqrtNode);
             TestEvaluator(Math.Abs, FormulaTreeFactory.CreateAbsNode);
-            TestEvaluator((x, y) => x % y, FormulaTreeFactory.CreateModNode);
+            TestEvaluator((x, y) => x % y, FormulaTreeFactory.CreateModuloNode);
             TestEvaluator((x, y, result) => (x <= y && x <= result && result < y) || (x >= y && x >= result && result > y), FormulaTreeFactory.CreateRandomNode);
             TestEvaluator(Math.Round, FormulaTreeFactory.CreateRoundNode);
         }

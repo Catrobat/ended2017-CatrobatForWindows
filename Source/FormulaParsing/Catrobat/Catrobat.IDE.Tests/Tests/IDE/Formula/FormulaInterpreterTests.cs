@@ -116,7 +116,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestDoubleUnaryFunction(FormulaTreeFactory.CreateRoundNode, FormulaTokenFactory.CreateRoundToken);
             TestDoubleBinaryFunction(FormulaTreeFactory.CreateRandomNode, FormulaTokenFactory.CreateRandomToken);
             TestDoubleUnaryFunction(FormulaTreeFactory.CreateAbsNode, FormulaTokenFactory.CreateAbsToken);
-            TestDoubleInfixOperator(FormulaTreeFactory.CreateModNode, FormulaTokenFactory.CreateModToken);
+            TestDoubleInfixOperator(FormulaTreeFactory.CreateModuloNode, FormulaTokenFactory.CreateModToken);
         }
 
         [TestMethod]
@@ -188,7 +188,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                     FormulaTokenFactory.CreateSinToken(), 
                     FormulaTokenFactory.CreateParenthesisToken(true), 
                     FormulaTokenFactory.CreateNumberToken(0), 
-                    FormulaTokenFactory.CreateParameterSeparatorToken(), 
+                    FormulaTokenFactory.CreateArgumentSeparatorToken(), 
                     FormulaTokenFactory.CreateNumberToken(0), 
                     FormulaTokenFactory.CreateParenthesisToken(false)
                 },

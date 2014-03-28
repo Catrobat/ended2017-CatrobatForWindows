@@ -8,7 +8,6 @@ using Catrobat.IDE.Core.Utilities.Helpers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 {
@@ -45,7 +44,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
         #region Members
 
-        private readonly FormulaEditor3 _editor = new FormulaEditor3(Enumerable.Empty<UserVariable>(), null);
+        private readonly FormulaEditor3 _editor = new FormulaEditor3();
         private Sprite _selectedSprite;
         private Project _currentProject;
         
@@ -158,11 +157,11 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
             if (VariableHelper.IsVariableLocal(CurrentProject, variable))
             {
-                if (!_editor.HandleKey(FormulaEditorKey.UserVariable, null, variable)) RaiseKeyError();
+                if (!_editor.HandleKey(FormulaEditorKey.LocalVariable, null, variable)) RaiseKeyError();
             }
             else
             {
-                if (!_editor.HandleKey(FormulaEditorKey.UserVariable, null, variable)) RaiseKeyError();
+                if (!_editor.HandleKey(FormulaEditorKey.GlobalVariable, null, variable)) RaiseKeyError();
             }
         }
 

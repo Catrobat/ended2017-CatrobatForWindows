@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.Services;
 
 // ReSharper disable once CheckNamespace

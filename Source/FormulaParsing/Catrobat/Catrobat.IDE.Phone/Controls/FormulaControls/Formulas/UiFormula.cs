@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.FormulaEditor.Editor;
 using Catrobat.IDE.Core.UI.Formula;
 using Catrobat.IDE.Phone.Controls.FormulaControls.PartControls;

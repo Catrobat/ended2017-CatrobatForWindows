@@ -435,7 +435,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         [TestMethod]
         public void TestMod()
         {
-            var expected = FormulaTreeFactory.CreateModNode(_nodeZero, _nodeOne);
+            var expected = FormulaTreeFactory.CreateModuloNode(_nodeZero, _nodeOne);
             foreach (var input in new[] { "0 mod 1", "0 Mod 1" })
             {
                 IFormulaTree result;

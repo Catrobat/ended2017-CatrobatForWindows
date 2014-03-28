@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
+namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula
 {
     public class XmlFormulaTree : DataObject
     {
