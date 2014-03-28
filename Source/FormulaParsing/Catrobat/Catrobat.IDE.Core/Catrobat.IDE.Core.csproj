@@ -104,7 +104,7 @@
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeInfixOperator.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeBrackets.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeSensor.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeVariable2.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeVariable.cs" />
     <Compile Include="CatrobatObjects\Formulas\XmlFormula\XmlFormulaTreeFactory.cs" />
     <Compile Include="ExtensionMethods\LinqExtensions.cs" />
     <Compile Include="ExtensionMethods\EnumExtensions.cs" />
@@ -198,7 +198,7 @@
     <Compile Include="FormulaEditor\FormulaTree\FormulaNodePrefixOperator.cs" />
     <Compile Include="FormulaEditor\FormulaTree\FormulaNodeSensor.cs" />
     <Compile Include="FormulaEditor\FormulaTree\FormulaNodeUnaryFunction.cs" />
-    <Compile Include="FormulaEditor\FormulaTree\FormulaNodeVariable2.cs" />
+    <Compile Include="FormulaEditor\FormulaTree\FormulaNodeVariable.cs" />
     <Compile Include="FormulaEditor\IFormulaTokenizer.cs" />
     <Compile Include="FormulaEditor\FormulaTree\IFormulaTree.cs" />
     <Compile Include="FormulaEditor\FormulaTree\UnaryFormulaTree.cs" />
