@@ -166,6 +166,12 @@
     <Content Include="Assets\AppBar\dark\DarkIcons.dll" />
     <Content Include="Assets\AppBar\empty.png" />
     <Content Include="Assets\AppBar\feature.settings.png" />
+    <Content Include="Assets\AppBar\icon_menu_crop_adjust.png" />
+    <Content Include="Assets\AppBar\icon_menu_crop_cut.png" />
+    <Content Include="Assets\AppBar\icon_menu_rotate_left.png" />
+    <Content Include="Assets\AppBar\icon_menu_rotate_right.png" />
+    <Content Include="Assets\AppBar\icon_zoom_in.png" />
+    <Content Include="Assets\AppBar\icon_zoom_out.png" />
     <Content Include="Assets\AppBar\menu_tools.png" />
     <Content Include="Assets\AppBar\menu_tools_.png" />
     <Content Include="Assets\ApplicationBar\Dark\appbar.page.new.png" />
@@ -198,7 +204,9 @@
     <Content Include="Assets\ToolMenu\icon_menu_move.png" />
     <Content Include="Assets\ToolMenu\icon_menu_pipette.png" />
     <Content Include="Assets\ToolMenu\icon_menu_rectangle.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_rotate_left.png" />
     <Content Include="Assets\ToolMenu\icon_menu_stamp.png" />
+    <Content Include="Assets\ToolMenu\icon_menu_straight_line.png" />
     <Content Include="Assets\ToolMenu\icon_menu_zoom.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
