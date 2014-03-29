@@ -20,7 +20,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 
         private string GetText()
         {
-            var node = Token as FormulaNodeUserVariable;
+            var node = Token as FormulaNodeVariable;
             return node == null ? null : node.Variable.Name;
         }
 

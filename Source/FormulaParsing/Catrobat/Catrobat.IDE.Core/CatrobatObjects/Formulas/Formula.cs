@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.FormulaEditor;
 
@@ -8,7 +9,10 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 {
     public class Formula : DataObject
     {
-        private readonly XmlFormulaTreeConverter _converter = new XmlFormulaTreeConverter(Enumerable.Empty<UserVariable>(), null);
+        // TODO: pass local and global variables
+        private readonly XmlFormulaTreeConverter _converter = new XmlFormulaTreeConverter(Enumerable.Empty<UserVariable>(), Enumerable.Empty<UserVariable>());
+
+        #region Properties
 
         private IFormulaTree _formulaTree2;
         public IFormulaTree FormulaTree2
@@ -40,6 +44,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 RaisePropertyChanged();
             }
         }
+
+        #endregion
 
         public Formula() {}
 

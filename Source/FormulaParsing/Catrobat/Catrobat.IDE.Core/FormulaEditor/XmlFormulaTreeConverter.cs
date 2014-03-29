@@ -1,23 +1,24 @@
-﻿using System;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Core.FormulaEditor
 {
-    /// <see cref="XmlFormulaTreeFactory"/>
+    /// <summary>Converts between <see cref="XmlFormulaTree"/> and <see cref="IFormulaTree"/>. 
+    /// See <see cref="XmlFormulaTreeFactory"/> and <see cref="FormulaTreeFactory"/> for types to implement. </summary>
     public class XmlFormulaTreeConverter
     {
-        private readonly IDictionary<string, UserVariable> _userVariables;
-        private readonly ObjectVariableEntry _objectVariable;
+        private readonly IDictionary<string, UserVariable> _localVariables;
+        private readonly IDictionary<string, UserVariable> _globalVariables;
 
-        public XmlFormulaTreeConverter(IEnumerable<UserVariable> userVariables, ObjectVariableEntry objectVariable)
+        public XmlFormulaTreeConverter(IEnumerable<UserVariable> localVariables, IEnumerable<UserVariable> globalVariables) 
         {
-            _userVariables = userVariables.ToDictionary(variable => variable.Name);
-            _objectVariable = objectVariable;
+            _localVariables = localVariables.ToDictionary(variable => variable.Name);
+            _globalVariables = globalVariables.ToDictionary(variable => variable.Name);
         }
 
         #region Convert
@@ -30,8 +31,8 @@ namespace Catrobat.IDE.Core.FormulaEditor
             if (formula.VariableType == "NUMBER") return FormulaTreeFactory.CreateNumberNode(double.Parse(formula.VariableValue, CultureInfo.InvariantCulture));
             if (formula.VariableType == "OPERATOR") return ConvertOperatorNode(formula);
             if (formula.VariableType == "FUNCTION") return ConvertFunctionNode(formula);
-            if (formula.VariableType == "SENSOR") return ConvertSensorOrObjectVariableNode(formula);
-            if (formula.VariableType == "USER_VARIABLE") return ConvertUserVariableNode(formula);
+            if (formula.VariableType == "SENSOR") return ConvertSensorOrPropertiesNode(formula);
+            if (formula.VariableType == "USER_VARIABLE") return ConvertVariableNode(formula);
             if (formula.VariableType == "BRACKET") return ConvertParenthesesNode(formula);
 
             if (String.IsNullOrEmpty(formula.VariableType)) return null;
@@ -42,6 +43,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
         {
             // arithmetic
             if (node.VariableValue == "PLUS") return Convert(node, FormulaTreeFactory.CreateAddNode);
+            if (node.VariableValue == "MINUS" && node.LeftChild == null) return Convert(node, FormulaTreeFactory.CreateNegativeSignNode, false);
             if (node.VariableValue == "MINUS") return Convert(node, FormulaTreeFactory.CreateSubtractNode);
             if (node.VariableValue == "MULT") return Convert(node, FormulaTreeFactory.CreateMultiplyNode);
             if (node.VariableValue == "DIVIDE") return Convert(node, FormulaTreeFactory.CreateDivideNode);
@@ -99,7 +101,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
             throw new NotImplementedException();
         }
 
-        private IFormulaTree ConvertSensorOrObjectVariableNode(XmlFormulaTree node)
+        private IFormulaTree ConvertSensorOrPropertiesNode(XmlFormulaTree node)
         {
             // sensors
             if (node.VariableValue == "X_ACCELERATION") return Convert(node, FormulaTreeFactory.CreateAccelerationXNode);
@@ -110,7 +112,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
             if (node.VariableValue == "Y_INCLINATION") return Convert(node, FormulaTreeFactory.CreateInclinationYNode);
             if (node.VariableValue == "LOUDNESS") return Convert(node, FormulaTreeFactory.CreateLoudnessNode);
 
-            // object variables
+            // properties
             if (node.VariableValue == "OBJECT_BRIGHTNESS") return Convert(node, FormulaTreeFactory.CreateBrightnessNode);
             if (node.VariableValue == "OBJECT_LAYER") return Convert(node, FormulaTreeFactory.CreateLayerNode);
             if (node.VariableValue == "OBJECT_X") return Convert(node, FormulaTreeFactory.CreatePositionXNode);
@@ -122,10 +124,15 @@ namespace Catrobat.IDE.Core.FormulaEditor
             throw new NotImplementedException();
         }
 
-        private IFormulaTree ConvertUserVariableNode(XmlFormulaTree node)
+        private IFormulaTree ConvertVariableNode(XmlFormulaTree node)
         {
-            var variable = _userVariables[node.VariableValue];
-            return FormulaTreeFactory.CreateUserVariableNode(variable);
+            if (node.VariableValue != null)
+            {
+                UserVariable variable;
+                if (_localVariables.TryGetValue(node.VariableValue, out variable)) return FormulaTreeFactory.CreateLocalVariableNode(variable);
+                if (_globalVariables.TryGetValue(node.VariableValue, out variable)) return FormulaTreeFactory.CreateGlobalVariableNode(variable);
+            }
+            return FormulaTreeFactory.CreateGlobalVariableNode(null);
         }
 
         private IFormulaTree ConvertParenthesesNode(XmlFormulaTree node)
@@ -136,11 +143,6 @@ namespace Catrobat.IDE.Core.FormulaEditor
         private TNode Convert<TNode>(XmlFormulaTree node, Func<TNode> creator) where TNode : ConstantFormulaTree
         {
             return creator();
-        }
-
-        private TNode Convert<TNode>(XmlFormulaTree node, Func<ObjectVariableEntry, TNode> creator) where TNode : ConstantFormulaTree
-        {
-            return creator(_objectVariable);
         }
 
         private TNode Convert<TNode>(XmlFormulaTree node, Func<IFormulaTree, TNode> creator, bool leftChild = true) where TNode : UnaryFormulaTree
@@ -157,6 +159,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
 
         #region ConvertBack
 
+        /// <remarks>Implemented by <see cref="IXmlFormulaConvertible" />.</remarks>
         public XmlFormulaTree ConvertBack(IFormulaTree formula)
         {
             return formula == null ? null : formula.ToXmlFormula();

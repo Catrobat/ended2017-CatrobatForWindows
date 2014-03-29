@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree

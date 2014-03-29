@@ -3,11 +3,15 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Navigation;
+using Windows.Foundation.Metadata;
+using Windows.Phone.Media.Capture;
 using Catrobat.Paint.Phone.Command;
+using Catrobat.Paint.Phone.Tool;
 using Catrobat.Paint.Phone.Ui;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Media;
+using System.Windows.Input;
 
 namespace Catrobat.Paint.Phone.View
 {
@@ -31,6 +35,8 @@ namespace Catrobat.Paint.Phone.View
             PaintingAreaCheckeredGrid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
             PaintingAreaCheckeredGrid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
             PaintingAreaCheckeredGrid.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
+            PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
+
             foreach (ApplicationBarIconButton btn in ApplicationBar.Buttons)
             {
                 if (btn.Text.Contains("color"))
@@ -45,9 +51,11 @@ namespace Catrobat.Paint.Phone.View
             SliderThicknessTextBox.Text = SliderThickness.Value.ToString();
 
             UndoRedoActionbarManager.GetInstance().ApplicationBarTop = ApplicationBarTopX;
-            BackKeyPress += OnBackKeyPressed;
+           // BackKeyPress += OnBackKeyPressed;
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
+
+
         }
 
         private void ChangeIconBtnColor()
@@ -71,6 +79,25 @@ namespace Catrobat.Paint.Phone.View
         //    ApplicationBar.MenuItems.Add(appBarMenuItem);
         //}
 
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            var result = MessageBoxResult.Cancel;
+
+            if (PocketPaintApplication.GetInstance().UnsavedChangesMade)
+            {
+                result = MessageBox.Show("Are you sure you want to exit and discard unsaved changes?", "Confirm Exit?",
+                                MessageBoxButton.OKCancel);
+
+                if (result == MessageBoxResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+
+                }
+            }
+            Application.Current.Terminate();
+        }
+
 
         private void BtnThickness_OnClick(object sender, EventArgs e)
         {
@@ -83,7 +110,6 @@ namespace Catrobat.Paint.Phone.View
                 child.Visibility = SliderThicknessGrid.Visibility;
             }
 
-            //ApplicationBar = (IApplicationBar)this.Resources["bar2"];
              
         }
 
@@ -122,6 +148,11 @@ namespace Catrobat.Paint.Phone.View
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+          /*  if (e.NavigationMode == NavigationMode.Back)
+            {
+                //e.Uri = "";
+            }*/
+
             base.OnNavigatedFrom(e);
             PaintingAreaCanvas.CaptureMouse();
         }
@@ -147,6 +178,74 @@ namespace Catrobat.Paint.Phone.View
             {
                 SliderThicknessTextBox.Text = Convert.ToInt32(SliderThickness.Value).ToString();
             }
+        }
+
+        private void RoundImage_Click(object sender, RoutedEventArgs e)
+        {
+            RoundRadioButton.IsChecked = true;
+            RoundRadioButon_OnClick(sender, e);
+        }
+
+        private void SquareImage_Click(object sender, RoutedEventArgs e)
+        {
+            SquareRadioButton.IsChecked = true;
+            SquareRadioButon_OnClick(sender, e);
+        }
+
+        private void TriangleImage_Click(object sender, RoutedEventArgs e)
+        {
+            TriangleRadioButton.IsChecked = true;
+            TriangleRadioButon_OnClick(sender, e);
+        }
+
+        private void SliderThicknessTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            string current_value = SliderThicknessTextBox.Text;
+            //MessageBox.Show("SliderThicknessTextBox was called");
+
+
+        }
+
+        private void SliderThicknessTextBox_MouseEnter(object sender, MouseEventArgs e)
+        {
+            SliderThicknessTextBox.Foreground = new SolidColorBrush(Colors.Black);
+            MessageBox.Show("SliderThicknessTextBox was called");
+        }
+
+        private void SliderThicknessTextBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+           /* if(SliderThicknessTextBox.Text.Length == 2)
+            {
+                if(SliderThicknessTextBox.Text[0].ToString().Contains)
+            }
+            SliderThicknessTextBox.Foreground = new SolidColorBrush(Colors.White);
+            MessageBox.Show(Convert.ToInt32(SliderThicknessTextBox.Text).ToString());*/
+
+        }
+
+        private void ToolChangedHere(ToolBase tool)
+        {
+            switch (tool.GetToolType())
+            {
+                case ToolType.Brush:
+                    ApplicationBar = (IApplicationBar)this.Resources["barStandard"];
+                    break;
+
+                case ToolType.Pipette:
+                    ApplicationBar = (IApplicationBar)this.Resources["barPipette"];
+                    break;
+
+                case ToolType.Eraser:
+                    ApplicationBar = (IApplicationBar)this.Resources["barEraser"];
+                    break;
+
+
+            }
+
+
+
+
+
         }
 
         // TODO defining this handler solves issue that first tap after toolpicker page was open is not recognized by 

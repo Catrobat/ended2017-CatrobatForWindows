@@ -8,13 +8,12 @@ namespace Catrobat.IDE.Core.FormulaEditor
 {
     class FormulaParser
     {
-
         private readonly FormulaTokenizer _tokenizer;
         private readonly FormulaInterpreter _interpreter = new FormulaInterpreter();
 
-        public FormulaParser(IEnumerable<UserVariable> userVariables, ObjectVariableEntry objectVariable)
+        public FormulaParser(IEnumerable<UserVariable> localVariables, IEnumerable<UserVariable> globalVariables)
         {
-            _tokenizer = new FormulaTokenizer(userVariables, objectVariable);
+            _tokenizer = new FormulaTokenizer(localVariables, globalVariables);
         }
 
         public bool Parse(string input, out IFormulaTree formula, out IEnumerable<string> parsingErrors)

@@ -91,6 +91,7 @@
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\ConstantFormulaTree.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\BinaryFormulaTree.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\BaseFormulaTree.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeProperty.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\IFormulaOperator.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\IFormulaFunction.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeBinaryFunction.cs" />
@@ -102,11 +103,9 @@
     <Compile Include="CatrobatObjects\Formulas\FormulaToken\IFormulaToken.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeInfixOperator.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeBrackets.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeObjectVariable.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeVariable.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeSensor.cs" />
-    <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeUserVariable.cs" />
-    <Compile Include="CatrobatObjects\Formulas\XmlFormulaTreeFactory.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeVariable.cs" />
+    <Compile Include="CatrobatObjects\Formulas\XmlFormula\XmlFormulaTreeFactory.cs" />
     <Compile Include="ExtensionMethods\LinqExtensions.cs" />
     <Compile Include="ExtensionMethods\EnumExtensions.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\UnaryFormulaTree.cs" />
@@ -172,7 +171,7 @@
     <Compile Include="CatrobatObjects\DataObject.cs" />
     <Compile Include="CatrobatObjects\DataRootObject.cs" />
     <Compile Include="CatrobatObjects\Formulas\Formula.cs" />
-    <Compile Include="CatrobatObjects\Formulas\XmlFormulaTree.cs" />
+    <Compile Include="CatrobatObjects\Formulas\XmlFormula\XmlFormulaTree.cs" />
     <Compile Include="CatrobatObjects\OnlineProjectHeader.cs" />
     <Compile Include="CatrobatObjects\Project.cs" />
     <Compile Include="CatrobatObjects\ProjectDummyHeader.cs" />
@@ -195,11 +194,10 @@
     <Compile Include="FormulaEditor\FormulaTree\FormulaNodeBinaryFunction.cs" />
     <Compile Include="FormulaEditor\FormulaTree\FormulaNodeBrackets.cs" />
     <Compile Include="FormulaEditor\FormulaTree\FormulaNodeInfixOperator.cs" />
-    <Compile Include="FormulaEditor\FormulaTree\FormulaNodeObjectVariable.cs" />
+    <Compile Include="FormulaEditor\FormulaTree\FormulaNodeProperty.cs" />
     <Compile Include="FormulaEditor\FormulaTree\FormulaNodePrefixOperator.cs" />
     <Compile Include="FormulaEditor\FormulaTree\FormulaNodeSensor.cs" />
     <Compile Include="FormulaEditor\FormulaTree\FormulaNodeUnaryFunction.cs" />
-    <Compile Include="FormulaEditor\FormulaTree\FormulaNodeUserVariable.cs" />
     <Compile Include="FormulaEditor\FormulaTree\FormulaNodeVariable.cs" />
     <Compile Include="FormulaEditor\IFormulaTokenizer.cs" />
     <Compile Include="FormulaEditor\FormulaTree\IFormulaTree.cs" />

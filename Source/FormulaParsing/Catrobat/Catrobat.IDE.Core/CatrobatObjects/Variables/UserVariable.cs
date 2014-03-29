@@ -2,6 +2,7 @@
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Variables
 {
+    /// <summary>Local or global variable</summary>
     public class UserVariable : DataObject
     {
         private string _name;

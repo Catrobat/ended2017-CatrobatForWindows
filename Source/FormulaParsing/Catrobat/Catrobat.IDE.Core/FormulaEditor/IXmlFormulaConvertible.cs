@@ -1,4 +1,4 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 
 namespace Catrobat.IDE.Core.FormulaEditor
 {

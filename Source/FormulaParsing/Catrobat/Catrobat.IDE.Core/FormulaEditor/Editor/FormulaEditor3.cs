@@ -15,8 +15,6 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
  
         #region Members
 
-        private readonly ObjectVariableEntry _objectVariable;
-
         private readonly FormulaTokenizer _tokenizer;
         private IFormulaTree _formula;
         public IFormulaTree Formula
@@ -105,10 +103,9 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #endregion
 
-        public FormulaEditor3(IEnumerable<UserVariable> userVariables, ObjectVariableEntry objectVariable)
+        public FormulaEditor3()
         {
-            _objectVariable = objectVariable;
-            _tokenizer = new FormulaTokenizer(userVariables, objectVariable);
+            _tokenizer = new FormulaTokenizer();
         }
 
         public void ResetViewModel()
@@ -123,7 +120,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region Key handler
 
-        public bool HandleKey(FormulaEditorKey key, ObjectVariableEntry objectVariable, UserVariable userVariable)
+        public bool HandleKey(FormulaEditorKey key, ObjectVariableEntry objectVariable, UserVariable variable)
         {
             switch (key)
             {
@@ -145,7 +142,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                     return Redo();
                 default:
                     PushUndo();
-                    var token = CreateToken(key, objectVariable, userVariable);
+                    var token = CreateToken(key, variable);
                     InsertToken(token);
                     if (token is FormulaNodeUnaryFunction || token is FormulaNodeBinaryFunction)
                     {
@@ -155,11 +152,11 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             }
         }
 
-        private static IFormulaToken CreateToken(FormulaEditorKey key, ObjectVariableEntry objectVariable, UserVariable userVariable)
+        private static IFormulaToken CreateToken(FormulaEditorKey key, UserVariable variable)
         {
             switch (key)
             {
-                // numbers
+                // Constants
                 case FormulaEditorKey.D0: return FormulaTokenFactory.CreateDigitToken(0);
                 case FormulaEditorKey.D1: return FormulaTokenFactory.CreateDigitToken(1);
                 case FormulaEditorKey.D2: return FormulaTokenFactory.CreateDigitToken(2);
@@ -173,54 +170,44 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 case FormulaEditorKey.DecimalSeparator: return FormulaTokenFactory.CreateDecimalSeparatorToken();
                 case FormulaEditorKey.ArgumentSeparator: return FormulaTokenFactory.CreateArgumentSeparatorToken();
                 case FormulaEditorKey.Pi: return FormulaTokenFactory.CreatePiToken();
+                case FormulaEditorKey.True: return FormulaTokenFactory.CreateTrueToken();
+                case FormulaEditorKey.False: return FormulaTokenFactory.CreateFalseToken();
 
-                // arithemtic
+                // Operators
                 case FormulaEditorKey.Plus: return FormulaTokenFactory.CreatePlusToken();
                 case FormulaEditorKey.Minus: return FormulaTokenFactory.CreateMinusToken();
                 case FormulaEditorKey.Multiply: return FormulaTokenFactory.CreateMultiplyToken();
                 case FormulaEditorKey.Divide: return FormulaTokenFactory.CreateDivideToken();
                 case FormulaEditorKey.Caret: return FormulaTokenFactory.CreateCaretToken();
-
-                // relational operators
                 case FormulaEditorKey.Equals: return FormulaTokenFactory.CreateEqualsToken();
                 case FormulaEditorKey.NotEquals: return FormulaTokenFactory.CreateNotEqualsToken();
                 case FormulaEditorKey.Greater: return FormulaTokenFactory.CreateGreaterToken();
                 case FormulaEditorKey.GreaterEqual: return FormulaTokenFactory.CreateGreaterEqualToken();
                 case FormulaEditorKey.Less: return FormulaTokenFactory.CreateLessToken();
                 case FormulaEditorKey.LessEqual: return FormulaTokenFactory.CreateLessEqualToken();
-
-                // logic
-                case FormulaEditorKey.True: return FormulaTokenFactory.CreateTrueToken();
-                case FormulaEditorKey.False: return FormulaTokenFactory.CreateFalseToken();
                 case FormulaEditorKey.And: return FormulaTokenFactory.CreateAndToken();
                 case FormulaEditorKey.Or: return FormulaTokenFactory.CreateOrToken();
                 case FormulaEditorKey.Not: return FormulaTokenFactory.CreateNotToken();
+                case FormulaEditorKey.Mod: return FormulaTokenFactory.CreateModToken();
 
-                // min/max
-                case FormulaEditorKey.Min: return FormulaTokenFactory.CreateMinToken();
-                case FormulaEditorKey.Max: return FormulaTokenFactory.CreateMaxToken();
-
-                // exponential function and logarithms
+                // Functions
                 case FormulaEditorKey.Exp: return FormulaTokenFactory.CreateExpToken();
                 case FormulaEditorKey.Log: return FormulaTokenFactory.CreateLogToken();
                 case FormulaEditorKey.Ln: return FormulaTokenFactory.CreateLnToken();
-
-                // trigonometric functions
+                case FormulaEditorKey.Min: return FormulaTokenFactory.CreateMinToken();
+                case FormulaEditorKey.Max: return FormulaTokenFactory.CreateMaxToken();
                 case FormulaEditorKey.Sin: return FormulaTokenFactory.CreateSinToken();
                 case FormulaEditorKey.Cos: return FormulaTokenFactory.CreateCosToken();
                 case FormulaEditorKey.Tan: return FormulaTokenFactory.CreateTanToken();
                 case FormulaEditorKey.Arcsin: return FormulaTokenFactory.CreateArcsinToken();
                 case FormulaEditorKey.Arccos: return FormulaTokenFactory.CreateArccosToken();
                 case FormulaEditorKey.Arctan: return FormulaTokenFactory.CreateArctanToken();
-
-                // miscellaneous functions
                 case FormulaEditorKey.Sqrt: return FormulaTokenFactory.CreateSqrtToken();
                 case FormulaEditorKey.Abs: return FormulaTokenFactory.CreateAbsToken();
-                case FormulaEditorKey.Mod: return FormulaTokenFactory.CreateModToken();
                 case FormulaEditorKey.Round: return FormulaTokenFactory.CreateRoundToken();
                 case FormulaEditorKey.Random: return FormulaTokenFactory.CreateRandomToken();
 
-                // sensors
+                // Sensors
                 case FormulaEditorKey.AccelerationX: return FormulaTokenFactory.CreateAccelerationXToken();
                 case FormulaEditorKey.AccelerationY: return FormulaTokenFactory.CreateAccelerationYToken();
                 case FormulaEditorKey.AccelerationZ: return FormulaTokenFactory.CreateAccelerationZToken();
@@ -229,7 +216,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 case FormulaEditorKey.InclinationY: return FormulaTokenFactory.CreateInclinationYToken();
                 case FormulaEditorKey.Loudness: return FormulaTokenFactory.CreateLoudnessToken();
 
-                // object variables
+                // Properties
                 case FormulaEditorKey.Brightness: return FormulaTokenFactory.CreateBrightnessToken();
                 case FormulaEditorKey.Layer: return FormulaTokenFactory.CreateLayerToken();
                 case FormulaEditorKey.Opacity: return FormulaTokenFactory.CreateOpacityToken();
@@ -238,8 +225,9 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 case FormulaEditorKey.Rotation: return FormulaTokenFactory.CreateRotationToken();
                 case FormulaEditorKey.Size: return FormulaTokenFactory.CreateSizeToken();
 
-                // user variables
-                case FormulaEditorKey.UserVariable: return FormulaTokenFactory.CreateUserVariableToken(userVariable);
+                // Variables
+                case FormulaEditorKey.LocalVariable: return FormulaTokenFactory.CreateLocalVariableToken(variable);
+                case FormulaEditorKey.GlobalVariable: return FormulaTokenFactory.CreateGlobalVariableToken(variable);
 
                 // brackets
                 case FormulaEditorKey.OpeningParenthesis: return FormulaTokenFactory.CreateParenthesisToken(true);

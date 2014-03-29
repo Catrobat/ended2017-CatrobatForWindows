@@ -5,21 +5,22 @@
   xmlns:scripts="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Scripts;assembly=Catrobat.IDE.Core"
   xmlns:formulas="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas;assembly=Catrobat.IDE.Core"
   xmlns:bricks="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Bricks;assembly=Catrobat.IDE.Core"
-  xmlns:ui="clr-namespace:Catrobat.IDE.Core.UI;assembly=Catrobat.IDE.Core">
+  xmlns:ui="clr-namespace:Catrobat.IDE.Core.UI;assembly=Catrobat.IDE.Core"
+  xmlns:xmlFormula="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;assembly=Catrobat.IDE.Core">
 
   <ui:BrickCollection x:Key="ScriptBrickAddDataMovement">
     <bricks:PlaceAtBrick IsRealObject="False">
       <bricks:PlaceAtBrick.XPosition>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:PlaceAtBrick.XPosition>
       <bricks:PlaceAtBrick.YPosition>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:PlaceAtBrick.YPosition>
@@ -29,7 +30,7 @@
       <bricks:SetXBrick.XPosition>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:SetXBrick.XPosition>
@@ -39,7 +40,7 @@
       <bricks:SetYBrick.YPosition>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:SetYBrick.YPosition>
@@ -49,7 +50,7 @@
       <bricks:ChangeXByBrick.XMovement>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:ChangeXByBrick.XMovement>
@@ -59,7 +60,7 @@
       <bricks:ChangeYByBrick.YMovement>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:ChangeYByBrick.YMovement>
@@ -71,7 +72,7 @@
       <bricks:MoveNStepsBrick.Steps>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="1" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="1" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:MoveNStepsBrick.Steps>
@@ -81,7 +82,7 @@
       <bricks:TurnLeftBrick.Degrees>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="15" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="15" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:TurnLeftBrick.Degrees>
@@ -91,7 +92,7 @@
       <bricks:TurnRightBrick.Degrees>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="15" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="15" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:TurnRightBrick.Degrees>
@@ -101,7 +102,7 @@
       <bricks:PointInDirectionBrick.Degrees>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="90" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="90" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:PointInDirectionBrick.Degrees>
@@ -113,7 +114,7 @@
       <bricks:GlideToBrick.DurationInSeconds>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="3" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="3" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:GlideToBrick.DurationInSeconds>
@@ -121,7 +122,7 @@
       <bricks:GlideToBrick.XDestination>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:GlideToBrick.XDestination>
@@ -129,7 +130,7 @@
       <bricks:GlideToBrick.YDestination>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:GlideToBrick.YDestination>
@@ -139,7 +140,7 @@
       <bricks:GoNStepsBackBrick.Steps>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="1" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="1" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:GoNStepsBackBrick.Steps>
@@ -159,7 +160,7 @@
       <bricks:SetVolumeToBrick.Volume>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="100" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="100" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:SetVolumeToBrick.Volume>
@@ -169,7 +170,7 @@
       <bricks:ChangeVolumeByBrick.Volume>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="100" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="100" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:ChangeVolumeByBrick.Volume>
@@ -189,7 +190,7 @@
       <bricks:SetSizeToBrick.Size>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="100" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="100" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:SetSizeToBrick.Size>
@@ -199,7 +200,7 @@
       <bricks:ChangeSizeByNBrick.Size>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="20" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="20" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:ChangeSizeByNBrick.Size>
@@ -212,7 +213,7 @@
       <bricks:SetGhostEffectBrick.Transparency>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:SetGhostEffectBrick.Transparency>
@@ -222,7 +223,7 @@
       <bricks:ChangeGhostEffectBrick.ChangeGhostEffect>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="25" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="25" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:ChangeGhostEffectBrick.ChangeGhostEffect>
@@ -232,7 +233,7 @@
       <bricks:SetBrightnessBrick.Brightness>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:SetBrightnessBrick.Brightness>
@@ -242,7 +243,7 @@
       <bricks:ChangeBrightnessBrick.ChangeBrightness>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="25" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="25" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:ChangeBrightnessBrick.ChangeBrightness>
@@ -261,7 +262,7 @@
       <bricks:WaitBrick.TimeToWaitInSeconds>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="1" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="1" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:WaitBrick.TimeToWaitInSeconds>
@@ -277,7 +278,7 @@
       <bricks:RepeatBrick.TimesToRepeat>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="3" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="3" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:RepeatBrick.TimesToRepeat>
@@ -287,7 +288,7 @@
       <bricks:IfLogicBeginBrick.IfCondition>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="1" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="1" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:IfLogicBeginBrick.IfCondition>
@@ -301,7 +302,7 @@
       <bricks:SetVariableBrick.VariableFormula>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="0.0" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="0.0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:SetVariableBrick.VariableFormula>
@@ -311,7 +312,7 @@
       <bricks:ChangeVariableBrick.VariableFormula>
         <formulas:Formula>
           <formulas:Formula.FormulaTree>
-            <formulas:XmlFormulaTree VariableType="NUMBER" VariableValue="0.0" />
+            <xmlFormula:XmlFormulaTree VariableType="NUMBER" VariableValue="0.0" />
           </formulas:Formula.FormulaTree>
         </formulas:Formula>
       </bricks:ChangeVariableBrick.VariableFormula>
