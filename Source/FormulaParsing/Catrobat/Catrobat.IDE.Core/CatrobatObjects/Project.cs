@@ -218,7 +218,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
         {
             _variableList.LoadReference();
             _spriteList.LoadReference();
-        }
+        }          
 
         internal void LoadBroadcastMessages()
         {

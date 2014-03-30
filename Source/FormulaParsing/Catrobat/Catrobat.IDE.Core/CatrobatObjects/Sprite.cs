@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Xml.Linq;
+using Catrobat.IDE.Core.FormulaEditor;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.CatrobatObjects.Scripts;
@@ -135,9 +137,13 @@ namespace Catrobat.IDE.Core.CatrobatObjects
 
         internal override void LoadReference()
         {
-            foreach (var script in Scripts.Scripts)
-                foreach (var brick in script.Bricks.Bricks)
-                        brick.LoadReference();
+            var localVariables = VariableHelper.GetLocalVariableList(XmlParserTempProjectHelper.Project, this);
+            var globalVariables = XmlParserTempProjectHelper.Project.VariableList.ProgramVariableList.UserVariables;
+            var converter = new XmlFormulaTreeConverter(localVariables, globalVariables);
+            foreach (var brick in Scripts.Scripts.SelectMany(script => script.Bricks.Bricks))
+            {
+                brick.LoadReference(converter);
+            }
         }
 
         public async Task<DataObject> Copy()

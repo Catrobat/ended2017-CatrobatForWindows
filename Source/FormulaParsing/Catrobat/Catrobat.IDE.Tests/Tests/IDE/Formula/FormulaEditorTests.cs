@@ -74,32 +74,32 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private void TestKey(FormulaEditorKey key, IFormulaTree expectedFormula)
         {
             var editor = new FormulaEditor3();
-            Assert.IsTrue(editor.HandleKey(key, null, null));
+            Assert.IsTrue(editor.HandleKey(key, null));
             Assert.AreEqual(expectedFormula, editor.Formula);
         }
 
         private void TestKey(FormulaEditorKey key, Func<IFormulaTree> expectedFormula)
         {
             var editor = new FormulaEditor3();
-            Assert.IsTrue(editor.HandleKey(key, null, null));
+            Assert.IsTrue(editor.HandleKey(key, null));
             Assert.AreEqual(expectedFormula(), editor.Formula);
         }
 
         private void TestKey(FormulaEditorKey key, Func<IFormulaTree, FormulaNodeUnaryFunction> expectedFormula)
         {
             var editor = new FormulaEditor3();
-            Assert.IsTrue(editor.HandleKey(key, null, null));
-            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.D1, null, null));
-            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.ClosingParenthesis, null, null));
+            Assert.IsTrue(editor.HandleKey(key, null));
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.D1, null));
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.ClosingParenthesis, null));
             Assert.AreEqual(expectedFormula(FormulaTreeFactory.CreateNumberNode(1)), editor.Formula);
         }
 
         private void TestKey(FormulaEditorKey key, Func<IFormulaTree, IFormulaTree, FormulaNodeInfixOperator> expectedFormula)
         {
             var editor = new FormulaEditor3();
-            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.D1, null, null));
-            Assert.IsTrue(editor.HandleKey(key, null, null));
-            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.D2, null, null));
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.D1, null));
+            Assert.IsTrue(editor.HandleKey(key, null));
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.D2, null));
             Assert.AreEqual(expectedFormula(FormulaTreeFactory.CreateNumberNode(1), FormulaTreeFactory.CreateNumberNode(2)), editor.Formula);
         }
 
@@ -108,7 +108,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var editor = new FormulaEditor3();
             foreach (var key in keys)
             {
-                Assert.IsTrue(editor.HandleKey(key, null, null));
+                Assert.IsTrue(editor.HandleKey(key, null));
             }
             Assert.AreEqual(expectedFormula, editor.Formula);
         }

@@ -66,7 +66,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestXml<FormulaNodeNot>(directory + "not");
             TestXml<FormulaNodeNotEquals>(directory + "notequals");
             TestXml<FormulaNodeNumber>(directory + "number");
-            TestXml<FormulaNodeOpacity>(directory + "opacity");
+            TestXml<FormulaNodeTransparency>(directory + "transparency");
             TestXml<FormulaNodeOr>(directory + "or");
             TestXml<FormulaNodeParentheses>(directory + "parentheses");
             TestXml<FormulaNodePi>(directory + "pi");
@@ -160,25 +160,20 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 var globalVariables = project.VariableList.ProgramVariableList.UserVariables;
                 foreach (var sprite in project.SpriteList.Sprites)
                 {
+                    var localVariables = project.VariableList.ObjectVariableList.ObjectVariableEntries
+                        .Where(entry => entry.Sprite == sprite)
+                        .SelectMany(variable => variable.VariableList.UserVariables);
                     var formulas = sprite.Scripts.Scripts.SelectMany(script => script.Bricks.Bricks)
                         .SelectMany(brick => brick.GetType().GetProperties()
                             .Where(property => property.PropertyType == typeof(Core.CatrobatObjects.Formulas.Formula))
                             .Select(property => (Core.CatrobatObjects.Formulas.Formula) property.GetValue(brick)))
-                        .Select(formula => formula.FormulaTree);
-                    var localVariables = project.VariableList.ObjectVariableList.ObjectVariableEntries
-                        .Where(entry => entry.Sprite == sprite)
-                        .SelectMany(variable => variable.VariableList.UserVariables);
-                    var userVariables = project.VariableList.ProgramVariableList.UserVariables
-                        .Concat(project.VariableList.ObjectVariableList.ObjectVariableEntries
-                            .SelectMany(variable => variable.VariableList.UserVariables));
-                    var objectVariable = project.VariableList.ObjectVariableList.ObjectVariableEntries.FirstOrDefault(variable => variable.Sprite == sprite);
+                        .Select(formula => formula.FormulaTree2);
 
                     TestFormulas(
                         converter: new XmlFormulaTreeConverter(localVariables, globalVariables),
                         formulas: formulas);
                 }
             }
-            Assert.Inconclusive("Add additional samples using all formula nodes. ");
         }
 
         #region Helpers
@@ -194,13 +189,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var formula = brick.GetType().GetProperties()
                     .Where(property => property.PropertyType == typeof(Core.CatrobatObjects.Formulas.Formula))
                     .Select(property => (Core.CatrobatObjects.Formulas.Formula) property.GetValue(brick))
-                    .Select(formula2 => formula2.FormulaTree).Single();
+                    .Select(formula2 => formula2.FormulaTree2).Single();
             var localVariables = project.VariableList.ObjectVariableList.ObjectVariableEntries
                 .Where(entry => entry.Sprite == sprite)
                 .SelectMany(variable => variable.VariableList.UserVariables);
             var globalVariables = project.VariableList.ProgramVariableList.UserVariables;
             var converter = new XmlFormulaTreeConverter(localVariables, globalVariables);
-            Assert.AreEqual(converter.Convert(formula).GetType(), typeof(TExpected));
+            Assert.IsInstanceOfType(formula, typeof(TExpected));
         }
 
         private static void TestFormulas(XmlFormulaTreeConverter converter, IEnumerable<IFormulaTree> formulas)

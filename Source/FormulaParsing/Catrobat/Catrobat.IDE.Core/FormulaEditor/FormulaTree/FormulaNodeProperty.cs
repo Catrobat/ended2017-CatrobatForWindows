@@ -78,22 +78,22 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         }
     }
 
-    partial class FormulaNodeOpacity
+    partial class FormulaNodeTransparency
     {
         protected override IFormulaToken CreateToken()
         {
-            return FormulaTokenFactory.CreateOpacityToken();
+            return FormulaTokenFactory.CreateTransparencyToken();
         }
 
         internal override void Serialize(StringBuilder sb)
         {
             // TODO: translate
-            sb.Append("Opacity");
+            sb.Append("Transparency");
         }
 
         public override XmlFormulaTree ToXmlFormula()
         {
-            return XmlFormulaTreeFactory.CreateOpacityNode();
+            return XmlFormulaTreeFactory.CreateTransparencyNode();
         }
     }
 

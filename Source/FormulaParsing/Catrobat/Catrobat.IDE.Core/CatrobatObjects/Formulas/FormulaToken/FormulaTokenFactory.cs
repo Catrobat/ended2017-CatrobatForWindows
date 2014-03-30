@@ -235,9 +235,9 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
         {
             return FormulaTreeFactory.CreateLayerNode();
         }
-        public static FormulaNodeOpacity CreateOpacityToken()
+        public static FormulaNodeTransparency CreateTransparencyToken()
         {
-            return FormulaTreeFactory.CreateOpacityNode();
+            return FormulaTreeFactory.CreateTransparencyNode();
         }
         public static FormulaNodePositionX CreatePositionXToken()
         {

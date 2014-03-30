@@ -12,8 +12,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         public override double EvaluateNumber()
         {
-            // TODO: evaluate object variables
-            throw new NotImplementedException();
+            return 0;
         }
 
         #endregion

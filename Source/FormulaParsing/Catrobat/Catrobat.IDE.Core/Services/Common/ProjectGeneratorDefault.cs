@@ -116,20 +116,10 @@ namespace Catrobat.IDE.Core.Services.Common
             });
 
             objectBackground.Scripts.Scripts.Add(new StartScript());
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick{YPosition = new Formula{FormulaTree = new XmlFormulaTree()}});
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new XmlFormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new XmlFormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new XmlFormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new XmlFormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new XmlFormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new XmlFormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new XmlFormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new XmlFormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new XmlFormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new XmlFormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new XmlFormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new XmlFormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new XmlFormulaTree() } });
+            for (var i = 1; i <= 14; i++)
+            {
+                objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick {YPosition = new Formula {FormulaTree2 = null}});
+            }
 
             objectBackground.Scripts.Scripts.Add(new WhenScript());
             objectBackground.Scripts.Scripts.Add(new BroadcastScript());

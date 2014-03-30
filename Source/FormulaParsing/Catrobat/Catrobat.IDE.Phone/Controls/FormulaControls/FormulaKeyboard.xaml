@@ -13,6 +13,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
+    Unloaded="FormulaKeyboard_OnUnloaded"
     d:DesignHeight="480" d:DesignWidth="480"
     x:Name="FormulaKeyboardXaml">
 
@@ -213,7 +214,7 @@
     <!-- object variables -->
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyBrightness">Brightness</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyLayer">Layer</editor:FormulaEditorKey>
-    <editor:FormulaEditorKey x:Key="FormulaEditorKeyOpacity">Opacity</editor:FormulaEditorKey>
+    <editor:FormulaEditorKey x:Key="FormulaEditorKeyTransparency">Transparency</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyPositionX">PositionX</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyPositionY">PositionY</editor:FormulaEditorKey>
     <editor:FormulaEditorKey x:Key="FormulaEditorKeyRotation">Rotation</editor:FormulaEditorKey>
@@ -291,8 +292,8 @@
         <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Sensors" Style="{StaticResource StyleButtonAditional}" Click="ButtonSensors_OnClick"/>
         <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Variables" Style="{StaticResource StyleButtonAditional}" Click="ButtonVariable_OnClick"/>
         <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Evaluate" Style="{StaticResource StyleButtonEvaluate}" Click ="ButtonEvaluate_OnClick" Background="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1.NativeBrush}" IsEnabled="{Binding CanEvaluate, ElementName=FormulaKeyboardXaml}" />
-        <Button Grid.Row="3" Grid.Column="0" Content="&lt;" DataContext="{StaticResource FormulaEditorKeyLeft}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" />
-        <Button Grid.Row="3" Grid.Column="1" Content="&gt;" DataContext="{StaticResource FormulaEditorKeyRight}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" />
+        <Button Grid.Row="3" Grid.Column="0" Content="&lt;" DataContext="{StaticResource FormulaEditorKeyLeft}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanLeft, ElementName=FormulaKeyboardXaml}" />
+        <Button Grid.Row="3" Grid.Column="1" Content="&gt;" DataContext="{StaticResource FormulaEditorKeyRight}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanRight, ElementName=FormulaKeyboardXaml}" />
       </Grid>
       <Grid Name="GridNumbers" Column="0" Row="3">
         <Grid.RowDefinitions>
@@ -465,7 +466,7 @@
                   <Button Grid.Row="1" Grid.Column="1" Content="Size" DataContext="{StaticResource FormulaEditorKeySize}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
                   <Button Grid.Row="2" Grid.Column="0" Content="PositionX" DataContext="{StaticResource FormulaEditorKeyPositionX}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
                   <Button Grid.Row="2" Grid.Column="1" Content="PositionY" DataContext="{StaticResource FormulaEditorKeyPositionY}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
-                  <Button Grid.Row="3" Grid.Column="0" Content="Transparency" DataContext="{StaticResource FormulaEditorKeyOpacity}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="3" Grid.Column="0" Content="Transparency" DataContext="{StaticResource FormulaEditorKeyTransparency}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
                   <Button Grid.Row="3" Grid.Column="1" Content="Brush" DataContext="{Binding StaticTheme.ObjectsBrush.NativeBrush, Source={StaticResource ThemeChooser}}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
                 </Grid>
               </Grid>

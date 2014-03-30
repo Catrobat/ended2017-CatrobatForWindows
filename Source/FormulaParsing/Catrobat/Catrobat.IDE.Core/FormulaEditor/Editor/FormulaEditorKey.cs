@@ -65,7 +65,7 @@
         // Properties
         Brightness,
         Layer,
-        Opacity, 
+        Transparency, 
         PositionX, 
         PositionY,
         Rotation,

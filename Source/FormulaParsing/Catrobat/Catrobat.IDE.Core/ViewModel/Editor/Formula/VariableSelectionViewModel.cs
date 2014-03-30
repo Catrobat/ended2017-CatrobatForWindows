@@ -267,7 +267,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         private void CurrentProjectChangedMessageAction(GenericMessage<Project> message)
         {
             CurrentProject = message.Content;
-            GlobalVariables = CurrentProject.VariableList.ProgramVariableList.UserVariables;
+            GlobalVariables = VariableHelper.GetGlobalVariableList(CurrentProject);
 
             if (CurrentSprite == null) return;
 

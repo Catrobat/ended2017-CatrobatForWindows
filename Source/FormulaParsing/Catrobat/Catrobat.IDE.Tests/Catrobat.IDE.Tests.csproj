@@ -208,7 +208,7 @@
     <Content Include="SampleData\SampleProjects\FormulaEditor\not.xml" />
     <Content Include="SampleData\SampleProjects\FormulaEditor\notequals.xml" />
     <Content Include="SampleData\SampleProjects\FormulaEditor\number.xml" />
-    <Content Include="SampleData\SampleProjects\FormulaEditor\opacity.xml" />
+    <Content Include="SampleData\SampleProjects\FormulaEditor\transparency.xml" />
     <Content Include="SampleData\SampleProjects\FormulaEditor\or.xml" />
     <Content Include="SampleData\SampleProjects\FormulaEditor\parentheses.xml" />
     <Content Include="SampleData\SampleProjects\FormulaEditor\pi.xml" />

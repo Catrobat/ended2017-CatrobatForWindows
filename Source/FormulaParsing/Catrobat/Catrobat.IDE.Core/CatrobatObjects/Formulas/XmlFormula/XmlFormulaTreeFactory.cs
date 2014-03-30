@@ -487,7 +487,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula
                 RightChild = null
             };
         }
-        public static XmlFormulaTree CreateOpacityNode()
+        public static XmlFormulaTree CreateTransparencyNode()
         {
             return new XmlFormulaTree
             {

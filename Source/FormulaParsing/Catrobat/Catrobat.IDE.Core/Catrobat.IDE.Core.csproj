@@ -92,6 +92,7 @@
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\BinaryFormulaTree.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\BaseFormulaTree.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeProperty.cs" />
+    <Compile Include="CatrobatObjects\Formulas\FormulaTree\ICloneable.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\IFormulaOperator.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\IFormulaFunction.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeBinaryFunction.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="CatrobatObjects\Scripts\BroadcastScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\Script.cs" />
     <Compile Include="ExtensionMethods\RandomExtensions.cs" />
+    <Compile Include="ExtensionMethods\FormulaTreeExtensions.cs" />
     <Compile Include="FormulaEditor\IXmlFormulaConvertible.cs" />
     <Compile Include="FormulaEditor\FormulaTree\BaseFormulaTree.cs" />
     <Compile Include="FormulaEditor\IFormulaInterpreter.cs" />

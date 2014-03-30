@@ -182,10 +182,11 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         public void FormulaChanged()
         {
-            if (Formula == null || Formula.FormulaTree.Equals(new XmlFormulaTree()))
-                return;
+            // commented out because this class is no longer used!
+            //if (Formula == null || Formula.FormulaTree.Equals(new XmlFormulaTree()))
+            //    return;
 
-            _uiFormula = UiFormulaMappings.CreateFormula(Formula, this, Formula.FormulaTree, IsEditEnabled, _selectedFormula);
+            //_uiFormula = UiFormulaMappings.CreateFormula(Formula, this, Formula.FormulaTree, IsEditEnabled, _selectedFormula);
             var allParts = _uiFormula.GetAllParts();
 
             double fontSize = NormalFontSize;

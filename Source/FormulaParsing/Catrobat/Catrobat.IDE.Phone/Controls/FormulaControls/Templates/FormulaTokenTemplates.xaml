@@ -625,17 +625,17 @@
     <!-- ### Properties ##########################################################################################################-->
     <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeBrightness">
       <f:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_BRIGHTNESS" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
     <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLayer">
       <f:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_LAYER" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeOpacity">
+    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeTransparency">
       <f:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_TRANSPARENCY" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
     <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePositionX">
@@ -650,12 +650,12 @@
     </f:UiFormulaTokenDefinition>
     <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeRotation">
       <f:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_DIRECTION" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
     <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSize">
       <f:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_SIZE" Style="{StaticResource PartStyleObjectVariable}"/>
       </f:UiFormulaTokenDefinition.Template>
     </f:UiFormulaTokenDefinition>
 
