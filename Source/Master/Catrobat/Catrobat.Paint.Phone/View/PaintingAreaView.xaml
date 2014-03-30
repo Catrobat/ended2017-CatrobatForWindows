@@ -76,6 +76,58 @@
             <shell:ApplicationBarIconButton x:Name="BtnTools3" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
 
         </shell:ApplicationBar>
+
+
+        <shell:ApplicationBar x:Key="barMove" IsVisible="True">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Speichern" Click="ApplicationBarMenuItem_OnClick"/>
+                <shell:ApplicationBarMenuItem Text="Kopie speichern"/>
+                <shell:ApplicationBarMenuItem Text="Neues Bild"/>
+                <shell:ApplicationBarMenuItem Text="Laden"/>
+                <shell:ApplicationBarMenuItem Text="Vollbild"/>
+                <shell:ApplicationBarMenuItem Text="Über"/>
+            </shell:ApplicationBar.MenuItems>
+
+            <shell:ApplicationBarIconButton x:Name="zoomOut"  IconUri="/Assets/AppBar/icon_zoom_out.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
+            <shell:ApplicationBarIconButton x:Name="zoomIn"  IconUri="/Assets/AppBar/icon_zoom_in.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
+            <shell:ApplicationBarIconButton x:Name="BtnTools4" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
+
+        </shell:ApplicationBar>
+
+        <shell:ApplicationBar x:Key="barCrop" IsVisible="True">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Speichern" Click="ApplicationBarMenuItem_OnClick"/>
+                <shell:ApplicationBarMenuItem Text="Kopie speichern"/>
+                <shell:ApplicationBarMenuItem Text="Neues Bild"/>
+                <shell:ApplicationBarMenuItem Text="Laden"/>
+                <shell:ApplicationBarMenuItem Text="Vollbild"/>
+                <shell:ApplicationBarMenuItem Text="Über"/>
+            </shell:ApplicationBar.MenuItems>
+
+            <shell:ApplicationBarIconButton x:Name="zoomadjust"  IconUri="/Assets/AppBar/icon_menu_crop_adjust.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
+            <shell:ApplicationBarIconButton x:Name="cut"  IconUri="/Assets/AppBar/icon_menu_crop_cut.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
+            <shell:ApplicationBarIconButton x:Name="BtnTools5" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
+
+        </shell:ApplicationBar>
+
+        <shell:ApplicationBar x:Key="barRotate" IsVisible="True">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Speichern" Click="ApplicationBarMenuItem_OnClick"/>
+                <shell:ApplicationBarMenuItem Text="Kopie speichern"/>
+                <shell:ApplicationBarMenuItem Text="Neues Bild"/>
+                <shell:ApplicationBarMenuItem Text="Laden"/>
+                <shell:ApplicationBarMenuItem Text="Vollbild"/>
+                <shell:ApplicationBarMenuItem Text="Über"/>
+            </shell:ApplicationBar.MenuItems>
+
+            <shell:ApplicationBarIconButton x:Name="left"  IconUri="/Assets/AppBar/icon_menu_rotate_left.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
+            <shell:ApplicationBarIconButton x:Name="right"  IconUri="/Assets/AppBar/icon_menu_rotate_right.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
+            <shell:ApplicationBarIconButton x:Name="BtnTools6" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
+
+        </shell:ApplicationBar>
+
+
+
     </phone:PhoneApplicationPage.Resources>
 
     
