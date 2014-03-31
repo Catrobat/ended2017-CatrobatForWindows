@@ -145,21 +145,20 @@
                         </Rectangle>
                     </Button>
 
-                    <Button x:Name="btnTransparence" Visibility="Visible" BorderThickness="0" Margin="70,448,74,17">
-                        <Rectangle Width="269" Height="65"  Stroke="Transparent"  StrokeThickness="0"   >
+                    <Button x:Name="btnTransparence" Visibility="Collapsed" BorderThickness="0" Margin="70,448,74,17">
+                        <Rectangle Width="269" Height="65"  StrokeThickness="0">
                             <Rectangle.Fill>
-                                <!--ImageBrush ImageSource="/Assets/ColorPicker/checkeredbg.png" Stretch="Fill"/-->
-                                <ImageBrush ImageSource="/Assets/ColorPicker/btn_checkeredbg.png" Stretch="Fill"/>
+                                <ImageBrush ImageSource="/Assets/checkeredbgWXGA.png" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
                     </Button>
 
-                    <Rectangle x:Name="SelectedColorRectangle" Visibility="Collapsed" Height="65" Stroke="Black" VerticalAlignment="Top" Width="269" HorizontalAlignment="Center" Margin="92,465,95,0" />
+                    <Rectangle x:Name="SelectedColorRectangle" Visibility="Visible" Height="65" Stroke="Black" VerticalAlignment="Top" Width="269" HorizontalAlignment="Center" Margin="92,465,95,0" />
                         <!--Rectangle.Fill>
                             <ImageBrush ImageSource="/Assets/ColorPicker/btn_checkeredbg.png" Stretch="None"></ImageBrush>
                         </Rectangle-->
                     <!--Image x:Name="ImgBtnTransparence" Source="/Assets/ColorPicker/btn_checkeredbg.png" Visibility="Collapsed" Height="65" Width="269" Stretch="UniformToFill" Margin="93,430,94,49"/-->
-                    <Button x:Name="BtnSelectedColor" Visibility="Collapsed" Background="BlueViolet" Click="BtnSelectedColor_OnClick" Content="Fertig" Command="{Binding SelectColorDone}" HorizontalAlignment="Left" Margin="78,453,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.208,0.153" Width="300" Height="89" BorderThickness="0">
+                    <Button x:Name="BtnSelectedColor" Visibility="Visible" Click="BtnSelectedColor_OnClick" Content="Fertig" Command="{Binding SelectColorDone}" HorizontalAlignment="Left" Margin="78,453,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.208,0.153" Width="300" Height="89" BorderThickness="0">
                     </Button>
 
                 </Grid>

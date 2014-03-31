@@ -22,15 +22,19 @@ namespace Catrobat.Paint.Phone.View
                 Color selected_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.ColorSelected).Color;
                 int reference_color = (selected_color.R + selected_color.G + selected_color.B) / 3;
                 if (reference_color <= 128 && selected_color.A > 5)
-                /*selected_color.Color == Color.FromArgb(255, 255, 255, 0) || selected_color.Color == Color.FromArgb(255, 255, 173, 251) ||
-                selected_color.Color == Color.FromArgb(255, 196, 169, 169) || selected_color.Color == Color.FromArgb(255, 138, 234, 57) ||
-                    selected_color.Color == Colors.Transparent)*/
                 {
                     BtnSelectedColor.Foreground = new SolidColorBrush(Colors.White);
                 }
                 else
                 {
                     BtnSelectedColor.Foreground = new SolidColorBrush(Colors.Black);
+                }
+
+                if (selected_color == Colors.Transparent)
+                {
+                    btnTransparence.Visibility = Visibility.Visible;
+                    SelectedColorRectangle.Visibility = Visibility.Collapsed;
+                    BtnSelectedColor.Background = new SolidColorBrush(Colors.Transparent);
                 }
             }            
         }
@@ -41,10 +45,6 @@ namespace Catrobat.Paint.Phone.View
             Color current_color = ((SolidColorBrush)color).Color;
             int reference_color = (current_color.R + current_color.G + current_color.B) / 3;
             if (reference_color <= 128 && current_color.A > 5)
-            /*if (color.Color == Colors.White || color.Color == Color.FromArgb(255, 173, 216, 230) ||
-                color.Color == Color.FromArgb(255, 255, 255, 0) || color.Color == Color.FromArgb(255, 255, 173, 251) ||
-                color.Color == Color.FromArgb(255, 196, 169, 169) || color.Color == Color.FromArgb(255, 138, 234, 57) ||
-                color.Color == Colors.Transparent)*/
             {
                 BtnSelectedColor.Foreground = new SolidColorBrush(Colors.White);
             }
@@ -72,7 +72,7 @@ namespace Catrobat.Paint.Phone.View
                 {
                     ImageSource = new BitmapImage(new Uri("Assets/checkeredbgWXGA.png", UriKind.Relative))
                 };*/
-                //btnTransparence.Visibility = Visibility.Visible;
+                btnTransparence.Visibility = Visibility.Visible;
                 SelectedColorRectangle.Visibility = Visibility.Collapsed;
                 BtnSelectedColor.Background = new SolidColorBrush(Colors.Transparent);
 
@@ -80,7 +80,7 @@ namespace Catrobat.Paint.Phone.View
             else
             {
                 BtnSelectedColor.Background = color;
-                //btnTransparence.Visibility = Visibility.Collapsed;
+                btnTransparence.Visibility = Visibility.Collapsed;
                 SelectedColorRectangle.Visibility = Visibility.Visible;
             }
 
@@ -112,12 +112,9 @@ namespace Catrobat.Paint.Phone.View
 
         private void BtnSelectedColor_OnClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.ColorSelected).Color.ToString());
-            
             Color current_color = ((SolidColorBrush)PocketPaintApplication.GetInstance().PaintData.ColorSelected).Color;
-            if( current_color ==Colors.Transparent)
+            if( current_color == Colors.Transparent)
             {
-                MessageBox.Show("Transparence");
                 PocketPaintApplication.GetInstance().SwitchTool(Catrobat.Paint.Phone.Tool.ToolType.Eraser);
             }
             else
