@@ -1,10 +1,9 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.FormulaEditor;
 using Catrobat.IDE.Core.FormulaEditor.Editor;
-using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.UI;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Collections.ObjectModel;
@@ -47,6 +46,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         private readonly FormulaEditor3 _editor = new FormulaEditor3();
         private Sprite _selectedSprite;
         private Project _currentProject;
+        private VariableConteiner _variableContainer;
         
         #endregion
 
@@ -126,7 +126,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         public RelayCommand<FormulaKeyEventArgs> KeyPressedCommand { get; private set; }
         private void KeyPressedAction(FormulaKeyEventArgs e)
         {
-            if (!_editor.HandleKey(e.Key, e.ObjectVariable, e.UserVariable)) RaiseKeyError();
+            if (!_editor.HandleKey(e.Key, e.UserVariable)) RaiseKeyError();
         }
 
         public RelayCommand EvaluatePressedCommand { get; private set; }
@@ -151,20 +151,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             SelectedSprite = message.Content;
         }
 
-        private void SelectedUserVariableChangedMessageAction(GenericMessage<UserVariable> message)
-        {
-            var variable = message.Content;
-
-            if (VariableHelper.IsVariableLocal(CurrentProject, variable))
-            {
-                if (!_editor.HandleKey(FormulaEditorKey.LocalVariable, null, variable)) RaiseKeyError();
-            }
-            else
-            {
-                if (!_editor.HandleKey(FormulaEditorKey.GlobalVariable, null, variable)) RaiseKeyError();
-            }
-        }
-
         #endregion
 
         public FormulaEditorViewModel()
@@ -172,15 +158,8 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             KeyPressedCommand = new RelayCommand<FormulaKeyEventArgs>(KeyPressedAction);
             EvaluatePressedCommand = new RelayCommand(EvaluatePressedAction);
             
-            Messenger.Default.Register<GenericMessage<Sprite>>(this,
-                ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
-
-            Messenger.Default.Register<GenericMessage<Project>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
-
-
-            Messenger.Default.Register<GenericMessage<UserVariable>>(this,
-                 ViewModelMessagingToken.SelectedUserVariableChangedListener, SelectedUserVariableChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
 
             InitEditorBindings();
         }

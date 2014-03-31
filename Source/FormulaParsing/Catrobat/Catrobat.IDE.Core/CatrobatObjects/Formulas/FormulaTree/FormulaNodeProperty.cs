@@ -20,8 +20,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
     }
 
-    [DebuggerDisplay("Property = Sprite.Opacity")]
-    public partial class FormulaNodeOpacity : FormulaNodeProperty
+    [DebuggerDisplay("Property = Sprite.Transparency")]
+    public partial class FormulaNodeTransparency : FormulaNodeProperty
     {
     }
 

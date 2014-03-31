@@ -1,6 +1,12 @@
-﻿using System.Windows;
+﻿using System;
+using System.ComponentModel;
+using System.Windows;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.FormulaEditor.Editor;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
@@ -10,36 +16,20 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
     public partial class FormulaKeyboard
     {
-        #region DependancyProperties
+        #region Dependency properties
 
-        public static readonly DependencyProperty GlobalVariablesProperty = DependencyProperty.Register(
-            name: "GlobalVariables", 
-            propertyType: typeof(UserVariable), 
-            ownerType: typeof(FormulaKeyboard),  
-            typeMetadata: new PropertyMetadata((d, e) => ((FormulaKeyboard) d).GlobalVariablesChanged(e)));
-        public UserVariable GlobalVariables
+        public static readonly DependencyProperty ProjectProperty = DependencyProperty.Register(
+            name: "Project",
+            propertyType: typeof(Project),
+            ownerType: typeof(FormulaKeyboard),
+            typeMetadata: new PropertyMetadata((d, e) => ((FormulaKeyboard)d).ProjectChanged(e)));
+        public Project Project
         {
-            get { return (UserVariable)GetValue(GlobalVariablesProperty); }
-            set { SetValue(GlobalVariablesProperty, value); }
+            get { return (Project)GetValue(ProjectProperty); }
+            set { SetValue(ProjectProperty, value); }
         }
-        private void GlobalVariablesChanged(DependencyPropertyChangedEventArgs e)
+        private void ProjectChanged(DependencyPropertyChangedEventArgs e)
         {
-            //((FormulaKeyboard) d).ListBoxGlobalVariables.ItemsSource = e.NewValue as IEnumerable;
-        }
-
-        public static readonly DependencyProperty LocalVariablesProperty = DependencyProperty.Register(
-            name: "LocalVariables", 
-            propertyType:  typeof(UserVariable), 
-            ownerType: typeof(FormulaKeyboard), 
-            typeMetadata: new PropertyMetadata((d, e) => ((FormulaKeyboard) d).LocalVariablesChanged(e)));
-        public UserVariable LocalVariables
-        {
-            get { return (UserVariable)GetValue(LocalVariablesProperty); }
-            set { SetValue(LocalVariablesProperty, value); }
-        }
-        private void LocalVariablesChanged(DependencyPropertyChangedEventArgs e)
-        {
-            //((FormulaKeyboard)d).ListBoxLocalVariables.ItemsSource = e.NewValue as IEnumerable;
         }
 
         public static readonly DependencyProperty CanDeleteProperty = DependencyProperty.Register(
@@ -75,6 +65,28 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             set { SetValue(CanRedoProperty, value); }
         }
 
+        public static readonly DependencyProperty CanLeftProperty = DependencyProperty.Register(
+            name: "CanLeft",
+            propertyType: typeof(bool),
+            ownerType: typeof(FormulaKeyboard),
+            typeMetadata: new PropertyMetadata(false));
+        public bool CanLeft
+        {
+            get { return (bool)GetValue(CanLeftProperty); }
+            set { SetValue(CanLeftProperty, value); }
+        }
+
+        public static readonly DependencyProperty CanRightProperty = DependencyProperty.Register(
+            name: "CanRight",
+            propertyType: typeof(bool),
+            ownerType: typeof(FormulaKeyboard),
+            typeMetadata: new PropertyMetadata(false));
+        public bool CanRight
+        {
+            get { return (bool)GetValue(CanRightProperty); }
+            set { SetValue(CanRightProperty, value); }
+        }
+
         public static readonly DependencyProperty CanEvaluateProperty = DependencyProperty.Register(
             name: "CanEvaluate",
             propertyType: typeof(bool),
@@ -88,18 +100,18 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         #endregion
 
-        #region events
+        #region Events
 
         public KeyPressed KeyPressed;
         private void RaiseKeyPressed(FormulaKeyEventArgs e)
         {
             if(KeyPressed != null) KeyPressed.Invoke(e);
         }
-        public void RaiseKeyPressed(FormulaEditorKey key)
+        public void RaiseKeyPressed(FormulaEditorKey key, UserVariable  variable = null)
         {
-            RaiseKeyPressed(new FormulaKeyEventArgs(key, null, null));
+            RaiseKeyPressed(new FormulaKeyEventArgs(key, variable));
         }
-
+ 
         public EvaluatePressed EvaluatePressed;
         private void RaiseEvaluatePressed()
         {
@@ -109,9 +121,29 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         #endregion
 
+        private readonly VariableConteiner _variableContainer = new VariableConteiner();
+
         public FormulaKeyboard()
         {
             InitializeComponent();
+
+            _variableContainer.PropertyChanged += VariableContainer_OnPropertyChanged;
+            ServiceLocator.ViewModelLocator.VariableSelectionViewModel.SelectedVariableContainer = _variableContainer;
+        }
+        private void FormulaKeyboard_OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            ServiceLocator.ViewModelLocator.VariableSelectionViewModel.SelectedVariableContainer = null;
+            _variableContainer.PropertyChanged -= VariableContainer_OnPropertyChanged;
+        }
+
+        private void VariableContainer_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var variable = _variableContainer.Variable;
+            if (variable == null) return;
+            ShowMain();
+            RaiseKeyPressed(
+                key: VariableHelper.IsVariableLocal(Project, variable) ? FormulaEditorKey.LocalVariable : FormulaEditorKey.GlobalVariable,
+                variable: variable);
         }
 
         private void ButtonVariable_OnClick(object sender, RoutedEventArgs e)
@@ -182,6 +214,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private void ShowVariable()
         {
+            var variableSelectionViewModel = ServiceLocator.ViewModelLocator.VariableSelectionViewModel;
+            variableSelectionViewModel.SelectedLocalVariable = null;
+            variableSelectionViewModel.SelectedGlobalVariable = null;
             GridMain.Visibility = Visibility.Collapsed;
             GridMath.Visibility = Visibility.Collapsed;
             GridVariable.Visibility = Visibility.Visible;

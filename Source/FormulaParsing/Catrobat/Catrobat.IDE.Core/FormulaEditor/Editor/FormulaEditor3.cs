@@ -69,6 +69,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 if (_caretIndex == value) return;
                 _caretIndex = value;
                 RaisePropertyChanged(() => CaretIndex);
+                RaisePropertyChanged(() => CanLeft);
+                RaisePropertyChanged(() => CanRight);
             }
         }
 
@@ -120,7 +122,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region Key handler
 
-        public bool HandleKey(FormulaEditorKey key, ObjectVariableEntry objectVariable, UserVariable variable)
+        public bool HandleKey(FormulaEditorKey key, UserVariable variable)
         {
             switch (key)
             {
@@ -219,7 +221,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 // Properties
                 case FormulaEditorKey.Brightness: return FormulaTokenFactory.CreateBrightnessToken();
                 case FormulaEditorKey.Layer: return FormulaTokenFactory.CreateLayerToken();
-                case FormulaEditorKey.Opacity: return FormulaTokenFactory.CreateOpacityToken();
+                case FormulaEditorKey.Transparency: return FormulaTokenFactory.CreateTransparencyToken();
                 case FormulaEditorKey.PositionX: return FormulaTokenFactory.CreatePositionXToken();
                 case FormulaEditorKey.PositionY: return FormulaTokenFactory.CreatePositionYToken();
                 case FormulaEditorKey.Rotation: return FormulaTokenFactory.CreateRotationToken();
@@ -255,6 +257,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             RaisePropertyChanged(() => CanDelete);
             RaisePropertyChanged(() => CanUndo);
             RaisePropertyChanged(() => CanRedo);
+            RaisePropertyChanged(() => CanLeft);
+            RaisePropertyChanged(() => CanRight);
             return true;
         }
 
@@ -266,6 +270,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             RaisePropertyChanged(() => CanDelete);
             RaisePropertyChanged(() => CanUndo);
             RaisePropertyChanged(() => CanRedo);
+            RaisePropertyChanged(() => CanLeft);
+            RaisePropertyChanged(() => CanRight);
             return true;
         }
 
@@ -312,6 +318,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             if (Tokens == null) Tokens = new ObservableCollection<IFormulaToken>();
             Tokens.Insert(CaretIndex, token);
             InterpretTokens();
+            RaisePropertyChanged(() => CanLeft);
             RaisePropertyChanged(() => CanDelete);
         }
 
@@ -322,6 +329,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             if (!(0 <= index && index < Tokens.Count)) return false;
             Tokens.RemoveAt(index);
             InterpretTokens();
+            RaisePropertyChanged(() => CanLeft);
             RaisePropertyChanged(() => CanDelete);
             return true;
         }

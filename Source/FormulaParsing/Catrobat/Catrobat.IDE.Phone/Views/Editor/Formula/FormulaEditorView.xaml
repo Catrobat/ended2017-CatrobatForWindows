@@ -47,11 +47,12 @@
     <Grid Grid.Row="1">
       <formulaControls:FormulaKeyboard
         Name="FormulaKeyboard" 
-        LocalVariables="{Binding LocalVariables}" 
-        GlobalVariables="{Binding GlobalVariables}"
+        Project="{Binding CurrentProject}"
         CanDelete="{Binding CanDelete}"
         CanUndo="{Binding CanUndo}"
         CanRedo="{Binding CanRedo}"
+        CanLeft="{Binding CanLeft}"
+        CanRight="{Binding CanRight}"
         CanEvaluate="{Binding CanEvaluate}">
         <formulaControls:FormulaKeyboard.RenderTransform>
           <TranslateTransform X="0" Y="500" x:Name="Translation" />

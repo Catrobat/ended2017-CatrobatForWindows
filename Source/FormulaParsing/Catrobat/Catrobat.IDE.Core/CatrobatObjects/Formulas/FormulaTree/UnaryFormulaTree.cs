@@ -19,6 +19,17 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         #endregion
 
+        #region Implements ICloneable
+
+        public override object Clone()
+        {
+            var clone = (UnaryFormulaTree) base.Clone();
+            clone.Child = (IFormulaTree) Child.Clone();
+            return clone;
+        }
+
+        #endregion
+
         #region Overrides Equals
 
         public override bool Equals(object obj)

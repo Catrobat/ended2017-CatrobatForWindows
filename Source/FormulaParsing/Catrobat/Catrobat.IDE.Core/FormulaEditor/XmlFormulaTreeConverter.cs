@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+﻿using System.Diagnostics;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using System;
@@ -12,21 +13,23 @@ namespace Catrobat.IDE.Core.FormulaEditor
     /// See <see cref="XmlFormulaTreeFactory"/> and <see cref="FormulaTreeFactory"/> for types to implement. </summary>
     public class XmlFormulaTreeConverter
     {
+
+        #region Convert
+
         private readonly IDictionary<string, UserVariable> _localVariables;
         private readonly IDictionary<string, UserVariable> _globalVariables;
 
-        public XmlFormulaTreeConverter(IEnumerable<UserVariable> localVariables, IEnumerable<UserVariable> globalVariables) 
+        public XmlFormulaTreeConverter(IEnumerable<UserVariable> localVariables, IEnumerable<UserVariable> globalVariables)
         {
+            if (localVariables == null) throw new ArgumentNullException("localVariables");
+            if (globalVariables == null) throw new ArgumentNullException("globalVariables");
             _localVariables = localVariables.ToDictionary(variable => variable.Name);
             _globalVariables = globalVariables.ToDictionary(variable => variable.Name);
         }
 
-        #region Convert
-
         public IFormulaTree Convert(XmlFormulaTree formula)
         {
             if (formula == null) return null;
-
 
             if (formula.VariableType == "NUMBER") return FormulaTreeFactory.CreateNumberNode(double.Parse(formula.VariableValue, CultureInfo.InvariantCulture));
             if (formula.VariableType == "OPERATOR") return ConvertOperatorNode(formula);
@@ -36,6 +39,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
             if (formula.VariableType == "BRACKET") return ConvertParenthesesNode(formula);
 
             if (String.IsNullOrEmpty(formula.VariableType)) return null;
+            Debugger.Break();
             throw new NotImplementedException();
         }
 
@@ -119,7 +123,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
             if (node.VariableValue == "OBJECT_Y") return Convert(node, FormulaTreeFactory.CreatePositionYNode);
             if (node.VariableValue == "OBJECT_ROTATION") return Convert(node, FormulaTreeFactory.CreateRotationNode);
             if (node.VariableValue == "OBJECT_SIZE") return Convert(node, FormulaTreeFactory.CreateSizeNode);
-            if (node.VariableValue == "OBJECT_GHOSTEFFECT") return Convert(node, FormulaTreeFactory.CreateOpacityNode);
+            if (node.VariableValue == "OBJECT_GHOSTEFFECT") return Convert(node, FormulaTreeFactory.CreateTransparencyNode);
 
             throw new NotImplementedException();
         }
@@ -132,7 +136,8 @@ namespace Catrobat.IDE.Core.FormulaEditor
                 if (_localVariables.TryGetValue(node.VariableValue, out variable)) return FormulaTreeFactory.CreateLocalVariableNode(variable);
                 if (_globalVariables.TryGetValue(node.VariableValue, out variable)) return FormulaTreeFactory.CreateGlobalVariableNode(variable);
             }
-            return FormulaTreeFactory.CreateGlobalVariableNode(null);
+            Debug.Assert(false, "Invalid project");
+            return null;
         }
 
         private IFormulaTree ConvertParenthesesNode(XmlFormulaTree node)
@@ -158,6 +163,11 @@ namespace Catrobat.IDE.Core.FormulaEditor
         #endregion
 
         #region ConvertBack
+
+        /// <summary>Use this constructor when <see cref="ConvertBack"/> is needed only. </summary>
+        public XmlFormulaTreeConverter()
+        {
+        }
 
         /// <remarks>Implemented by <see cref="IXmlFormulaConvertible" />.</remarks>
         public XmlFormulaTree ConvertBack(IFormulaTree formula)

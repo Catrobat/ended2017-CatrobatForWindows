@@ -337,9 +337,9 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         {
             return new FormulaNodeLayer();
         }
-        public static FormulaNodeOpacity CreateOpacityNode()
+        public static FormulaNodeTransparency CreateTransparencyNode()
         {
-            return new FormulaNodeOpacity();
+            return new FormulaNodeTransparency();
         }
         public static FormulaNodePositionX CreatePositionXNode()
         {

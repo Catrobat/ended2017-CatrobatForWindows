@@ -179,11 +179,11 @@
     <Compile Include="Controls\FormulaControls\Formulas\UiFormulaTokenDefinitionCollection.cs" />
     <Compile Include="Controls\FormulaControls\Formulas\UiFormulaTokenList.cs" />
     <Compile Include="Controls\FormulaControls\Formulas\UiFormulaTokenDefinition.cs" />
+    <Compile Include="Controls\FormulaControls\FormulaViewer.xaml.cs">
+      <DependentUpon>FormulaViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FormulaControls\FormulaViewer3.xaml.cs">
       <DependentUpon>FormulaViewer3.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\FormulaControls\FormulaViewer2.xaml.cs">
-      <DependentUpon>FormulaViewer2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlDecimalSeparator.cs" />
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlNumber.cs" />
@@ -225,9 +225,6 @@
     <Compile Include="Controls\FormulaControls\Formulas\StringList.cs" />
     <Compile Include="Controls\FormulaControls\Formulas\UiFormula.cs" />
     <Compile Include="Controls\FormulaControls\Formulas\UiFormulaMappings.cs" />
-    <Compile Include="Controls\FormulaControls\FormulaViewer.xaml.cs">
-      <DependentUpon>FormulaViewer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControl.cs" />
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlDynamicLocalizedText.cs" />
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlList.cs" />
@@ -459,15 +456,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\FormulaControls\FormulaViewer3.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\FormulaControls\FormulaViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\FormulaControls\FormulaViewer2.xaml">
+    <Page Include="Controls\FormulaControls\FormulaViewer3.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

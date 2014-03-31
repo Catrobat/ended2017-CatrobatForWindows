@@ -11,18 +11,14 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         private readonly FormulaEditorKey _key;
         public FormulaEditorKey Key { get { return _key; } }
 
-        private readonly ObjectVariableEntry _objectVariable;
-        public ObjectVariableEntry ObjectVariable { get { return _objectVariable; } }
-
         private readonly UserVariable _userVariable;
         public UserVariable UserVariable { get { return _userVariable; } }
 
         #endregion
 
-        public FormulaKeyEventArgs(FormulaEditorKey key, ObjectVariableEntry objectVariable, UserVariable userVariable)
+        public FormulaKeyEventArgs(FormulaEditorKey key, UserVariable userVariable)
         {
             _key = key;
-            _objectVariable = objectVariable;
             _userVariable = userVariable;
         }
 

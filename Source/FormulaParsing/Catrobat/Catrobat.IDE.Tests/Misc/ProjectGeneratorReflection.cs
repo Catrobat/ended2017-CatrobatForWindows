@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.Services.Storage;
 using Catrobat.IDE.Core.Utilities.Helpers;
@@ -176,7 +178,7 @@ namespace Catrobat.IDE.Tests.Misc
 
             if (type == typeof(Formula))
             {
-                return GenerateFormula();
+                return GenerateFormula(project, sprite);
             }
 
             if (type == typeof(Sprite))
@@ -240,42 +242,15 @@ namespace Catrobat.IDE.Tests.Misc
             return null;
         }
 
-        private Formula GenerateFormula()
+        private Formula GenerateFormula(Project project, Sprite sprite)
         {
-            var formula = new Formula
+            return new Formula
             {
-                FormulaTree = new XmlFormulaTree
-                {
-                    LeftChild = new XmlFormulaTree
-                    {
-                        LeftChild = new XmlFormulaTree
-                        {
-                            VariableType = "OPERATOR",
-                            VariableValue = "MINUS"
-                        },
-                        RightChild = new XmlFormulaTree
-                        {
-                            LeftChild = new XmlFormulaTree
-                            {
-                                VariableType = "FUNCTION",
-                                VariableValue = "0"
-                            },
-                            VariableType = "USER_VARIABLE",
-                            VariableValue = "LocalTestVariable1"
-                        },
-                        VariableType = "NUMBER",
-                        VariableValue = "1"
-                    },
-                    RightChild = new XmlFormulaTree
-                    {
-                        VariableType = "FUNCTION",
-                        VariableValue = "0"
-                    },
-                    VariableType = "NUMBER",
-                    VariableValue = "6"
-                }
+                FormulaTree2 = FormulaTreeFactory.CreateSubtractNode(
+                    leftChild: FormulaTreeFactory.CreateSinNode(
+                        child: FormulaTreeFactory.CreateNumberNode(0)), 
+                    rightChild: FormulaTreeFactory.CreateLocalVariableNode(VariableHelper.GetLocalVariableList(project, sprite).FirstOrDefault())), 
             };
-            return formula;
         }
 
         private Costume GenerateCostume(int index, Project project)
@@ -366,16 +341,12 @@ namespace Catrobat.IDE.Tests.Misc
             bricks.Add(foreverBrick);
 
             var repeatBrick = new RepeatBrick
+            {
+                TimesToRepeat = new Formula
                 {
-                    TimesToRepeat = new Formula
-                        {
-                            FormulaTree = new XmlFormulaTree
-                                {
-                                    VariableType = "NUMBER",
-                                    VariableValue = "2"
-                                }
-                        }
-                };
+                    FormulaTree2 = FormulaTreeFactory.CreateNumberNode(2)
+                }
+            };
             bricks.Add(repeatBrick);
 
             var loopEndBrickForever = new ForeverLoopEndBrick();
@@ -396,11 +367,7 @@ namespace Catrobat.IDE.Tests.Misc
             {
                 IfCondition = new Formula
                 {
-                    FormulaTree = new XmlFormulaTree
-                    {
-                        VariableType = "BOOL",
-                        VariableValue = "1"
-                    }
+                    FormulaTree2 = FormulaTreeFactory.CreateTrueNode()
                 }
             };
             bricks.Add(ifLogicBeginBrick);

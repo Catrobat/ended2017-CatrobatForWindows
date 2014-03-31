@@ -1,20 +1,20 @@
-﻿using System.Linq;
-using System.Xml.Linq;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.FormulaEditor;
+using System;
+using System.Xml.Linq;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 {
     public class Formula : DataObject
     {
-        // TODO: pass local and global variables
-        private readonly XmlFormulaTreeConverter _converter = new XmlFormulaTreeConverter(Enumerable.Empty<UserVariable>(), Enumerable.Empty<UserVariable>());
-
         #region Properties
 
+        private XmlFormulaTree _xmlFormulaTree;
+
+        // TODO: rename to _formulaTree
         private IFormulaTree _formulaTree2;
+        // TODO: rename to FormulaTree
         public IFormulaTree FormulaTree2
         {
             get { return _formulaTree2; }
@@ -23,31 +23,15 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
                 if (_formulaTree2 == null && value == null) return;
                 if (_formulaTree2 != null && _formulaTree2.Equals(value)) return;
                 _formulaTree2 = value;
-                FormulaTree = _converter.ConvertBack(_formulaTree2);
-                RaisePropertyChanged();
-            }
-        }
-
-        private XmlFormulaTree _formulaTree;
-        public XmlFormulaTree FormulaTree
-        {
-            get { return _formulaTree; }
-            set
-            {
-                if (_formulaTree == value)
-                {
-                    return;
-                }
-
-                _formulaTree = value;
-                FormulaTree2 = _converter.Convert(_formulaTree);
                 RaisePropertyChanged();
             }
         }
 
         #endregion
 
-        public Formula() {}
+        public Formula()
+        {
+        }
 
         public Formula(XElement xElement)
         {
@@ -57,21 +41,33 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
         internal override void LoadFromXML(XElement xRoot)
         {
             if (xRoot.Element("formulaTree") != null)
-                FormulaTree = new XmlFormulaTree(xRoot.Element("formulaTree"));
+            {
+                _xmlFormulaTree = new XmlFormulaTree(xRoot.Element("formulaTree"));
+                // FormulaTree is converted afterwards (see LoadReference)
+            }
         }
 
         internal override XElement CreateXML()
         {
-            return _formulaTree.CreateXML();
+            var converter = new XmlFormulaTreeConverter();
+            return (converter.ConvertBack(_formulaTree2) ?? new XmlFormulaTree()).CreateXML();
+        }
+
+        [Obsolete("Use overload with converter instead. ", true)]
+        internal new void LoadReference() { base.LoadReference(); }
+
+        /// <summary>Converts <see cref="FormulaTree2"/> from <see cref="XmlFormulaTree" />. </summary>
+        /// <param name="converter">The <see cref="XmlFormulaTreeConverter"/> holding the local and global variables. </param>
+        internal void LoadReference(XmlFormulaTreeConverter converter)
+        {
+            FormulaTree2 = converter.Convert(_xmlFormulaTree);
         }
 
         public DataObject Copy()
         {
-            var newFormulaTree = _formulaTree.Copy() as XmlFormulaTree;
-            return new Formula()
+            return new Formula
             {
-                _formulaTree = newFormulaTree, 
-                _formulaTree2 = _converter.Convert(newFormulaTree)
+                _formulaTree2 = (IFormulaTree) _formulaTree2.Clone()
             };
         }
 
@@ -82,10 +78,10 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
             if (otherFormula == null)
                 return false;
 
-            if (FormulaTree != null && otherFormula.FormulaTree != null)
-                return FormulaTree.Equals(otherFormula.FormulaTree);
+            if (FormulaTree2 != null && otherFormula.FormulaTree2 != null)
+                return FormulaTree2.Equals(otherFormula.FormulaTree2);
 
-            if (!(FormulaTree == null && otherFormula.FormulaTree == null))
+            if (!(FormulaTree2 == null && otherFormula.FormulaTree2 == null))
                 return false;
 
             return true;
