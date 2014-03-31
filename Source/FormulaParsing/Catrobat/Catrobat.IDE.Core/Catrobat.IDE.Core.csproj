@@ -180,7 +180,6 @@
     <Compile Include="CatrobatObjects\Scripts\BroadcastScript.cs" />
     <Compile Include="CatrobatObjects\Scripts\Script.cs" />
     <Compile Include="ExtensionMethods\RandomExtensions.cs" />
-    <Compile Include="ExtensionMethods\FormulaTreeExtensions.cs" />
     <Compile Include="FormulaEditor\IXmlFormulaConvertible.cs" />
     <Compile Include="FormulaEditor\FormulaTree\BaseFormulaTree.cs" />
     <Compile Include="FormulaEditor\IFormulaInterpreter.cs" />
