@@ -1,32 +1,12 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
-using Catrobat.Paint.Misc;
-
-namespace Catrobat.Paint.Resources
+﻿namespace Catrobat.Paint.Phone.Resources
 {
-  public class LocalizedStrings : INotifyPropertyChanged
-  {
-      private static readonly AppResources ResourcesField = new AppResources();
-    public AppResources Resources { get { return ResourcesField; } }
-
-    public void Reset()
+    /// <summary>
+    /// Provides access to string resources.
+    /// </summary>
+    public class LocalizedStrings
     {
-        RaisePropertyChanged(() => Resources);
+        private static AppResources _localizedResources = new AppResources();
+
+        public AppResources LocalizedResources { get { return _localizedResources; } }
     }
-
-    #region INotifyPropertyChanged
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    public void RaisePropertyChanged<T>(Expression<Func<T>> selector)
-    {
-      if (PropertyChanged != null)
-      {
-          PropertyChanged(this, new PropertyChangedEventArgs(PropertyNameHelper.GetPropertyNameFromExpression(selector)));
-      }
-    }
-
-    #endregion
-  }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI.PortableUI;
-using Catrobat.Paint;
+using Catrobat.Paint.Phone.Old;
 using Coding4Fun.Toolkit.Controls.Common;
 using Microsoft.Phone.Tasks;
 
