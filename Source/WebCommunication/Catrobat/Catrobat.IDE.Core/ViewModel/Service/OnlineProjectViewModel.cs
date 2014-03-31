@@ -129,7 +129,9 @@ namespace Catrobat.IDE.Core.ViewModel.Service
 
         private void OnLoadAction(OnlineProjectHeader dataContext)
         {
-            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectUploadedBy, dataContext.Uploaded);
+            // TODO move unix time stamp conversion somewhere else
+            //UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectUploadedBy, dataContext.UploadedString);
+            UploadedLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectUploadedBy, CatrobatWebCommunicationService.ConvertUnixTimeStamp(Convert.ToDouble(dataContext.Uploaded.Split('.')[0])));
             VersionLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectVersion, dataContext.Version);
             ViewsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectViews, dataContext.Views);
             DownloadsLabelText = String.Format(CultureInfo.InvariantCulture, AppResources.Main_OnlineProjectDownloads, dataContext.Downloads);

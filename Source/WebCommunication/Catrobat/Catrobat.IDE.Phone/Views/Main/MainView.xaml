@@ -292,6 +292,7 @@
 
       <!--Online Projects panorama item-->
       <controls:PanoramaItem Name="PanoramaItemOnlineProjects" Header="{Binding Resources.Main_HeaderOnlineProjects, Source={StaticResource LocalizedStrings}}">
+        <!--
         <Grid Margin="0 -20 0 0">
           <StackPanel>
             <TextBlock FontSize="34" VerticalAlignment="Center" TextAlignment="Center"> Download programs from</TextBlock>
@@ -300,9 +301,9 @@
             </HyperlinkButton>
             <TextBlock FontSize="34" VerticalAlignment="Center" TextAlignment="Center">website</TextBlock>
           </StackPanel>
-        </Grid>
+        </Grid>-->
 
-        <!--<Grid>
+        <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -319,8 +320,7 @@
                       DataContext="{Binding}">
                   <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Tap">
-                      <command:EventToCommand Command="{Binding MainViewModel.OnlineProjectTapCommand, Mode=OneWay, Source={StaticResource Locator}}"
-                                              CommandParameter="{Binding}" />
+                      <i:InvokeCommandAction Command="{Binding MainViewModel.OnlineProjectTapCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding}"/>
                     </i:EventTrigger>
                   </i:Interaction.Triggers>
                   <Grid>
@@ -328,7 +328,7 @@
                       <ColumnDefinition Width="Auto"/>
                       <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Source="{Binding ScreenshotSmallUrl}" Width="60" Height="100" Margin="5" />
+                    <Image Grid.Column="0" Source="{Binding ScreenshotSmall}" Width="60" Height="100" Margin="5" />
                     <StackPanel Grid.Column="1">
                       <TextBlock Margin="15 0 0 5" Text="{Binding ProjectName}" TextTrimming="WordEllipsis" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" />
                       <TextBlock Margin="15 0 0 5" Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" />
@@ -346,7 +346,7 @@
               </Grid>
             </phone:LongListSelector.ListFooter>
           </phone:LongListSelector>
-        </Grid>-->
+        </Grid>
       </controls:PanoramaItem>
 
       <!--About panorama item-->
