@@ -228,6 +228,8 @@ namespace Catrobat.Paint.Phone.View
             switch (tool.GetToolType())
             {
                 case ToolType.Brush:
+                case ToolType.Cursor:
+                case ToolType.Line:
                     ApplicationBar = (IApplicationBar)this.Resources["barStandard"];
                     break;
 
@@ -238,6 +240,20 @@ namespace Catrobat.Paint.Phone.View
                 case ToolType.Eraser:
                     ApplicationBar = (IApplicationBar)this.Resources["barEraser"];
                     break;
+
+                case ToolType.Move:
+                case ToolType.Zoom:
+                    ApplicationBar = (IApplicationBar)this.Resources["barMove"];
+                    break;
+
+                case ToolType.Crop:
+                    ApplicationBar = (IApplicationBar)this.Resources["barCrop"];
+                    break;
+
+                case ToolType.Rotate:
+                    ApplicationBar = (IApplicationBar) this.Resources["barRotate"];
+                    break;
+
 
 
             }
