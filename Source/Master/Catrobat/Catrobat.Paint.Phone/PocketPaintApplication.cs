@@ -128,6 +128,12 @@ namespace Catrobat.Paint.Phone
                 case ToolType.Pipette:
                     ToolCurrent = new PipetteTool();
                     break;
+                case ToolType.Rotate:
+                    ToolCurrent = new RotateTool();
+                    break;
+                case ToolType.Line:
+                    ToolCurrent = new LineTool();
+                    break;
                 default:
                     break;
             }

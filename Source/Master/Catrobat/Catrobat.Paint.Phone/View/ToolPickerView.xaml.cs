@@ -68,6 +68,15 @@ namespace Catrobat.Paint.Phone.View
                     PocketPaintApplication.GetInstance().SwitchTool(ToolType.Zoom);
                     NavigationService.GoBack();
                     break;
+                case "Rotate":
+                    PocketPaintApplication.GetInstance().SwitchTool(ToolType.Rotate);
+                    NavigationService.GoBack();
+                    break;
+                case "Line":
+                    PocketPaintApplication.GetInstance().SwitchTool((ToolType.Line));
+                    NavigationService.GoBack();
+                    break;
+
 
             }
         }
