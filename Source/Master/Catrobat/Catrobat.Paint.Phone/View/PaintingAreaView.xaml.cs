@@ -31,6 +31,7 @@ namespace Catrobat.Paint.Phone.View
             PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
             PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
             PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
+            PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid = PaintingAreaContentPanelGrid;
 
             Spinner.SpinnerGrid = SpinnerGrid;
             Spinner.SpinnerStoryboard = SpinningStoryboard;
@@ -287,7 +288,8 @@ namespace Catrobat.Paint.Phone.View
         {
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rotate)
             {
-                PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(null);
+                var rotateTool = (RotateTool) PocketPaintApplication.GetInstance().ToolCurrent;
+                rotateTool.RotateLeft();
             }
             else
                 return;
@@ -298,7 +300,8 @@ namespace Catrobat.Paint.Phone.View
         {
             if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rotate)
             {
-                PocketPaintApplication.GetInstance().ToolCurrent.HandleDown(null);
+                var rotateTool = (RotateTool)PocketPaintApplication.GetInstance().ToolCurrent;
+                rotateTool.RotateRight();
             }
             else
                 return;
