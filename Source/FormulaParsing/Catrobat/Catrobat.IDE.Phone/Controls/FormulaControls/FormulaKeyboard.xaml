@@ -327,7 +327,16 @@
           <RowDefinition Height="Auto"/>
           <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <phone:Pivot Grid.Row="1" Margin="70 -100 0 0">
+        <Grid Grid.Row="0">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+          </Grid.ColumnDefinitions>
+          <coding4Fun:RoundButton Grid.Column="0" Margin="15" 
+            Click="ButtonMathBack_Click"
+            ImageSource="/Content/Images/ApplicationBar/dark/appbar.back.rest.png"/>
+        </Grid>
+        <phone:Pivot Grid.Row="1" Margin="0 0 0 0">
           <phone:PivotItem Header="Math1">
             <Grid Margin="0 0 0 0">
               <Grid.RowDefinitions>
@@ -420,6 +429,14 @@
             </Grid>
           </phone:PivotItem>
         </phone:Pivot>
+      </Grid>
+    </Grid>
+    <Grid Name="GridVariable" Visibility="Collapsed">
+      <Grid Margin="0 10 0 0">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
         <Grid Grid.Row="0">
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -429,15 +446,7 @@
             Click="ButtonVariablesBack_Click"
             ImageSource="/Content/Images/ApplicationBar/dark/appbar.back.rest.png"/>
         </Grid>
-      </Grid>
-    </Grid>
-    <Grid Name="GridVariable" Visibility="Collapsed">
-      <Grid Margin="0 10 0 0">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="5*"/>
-        </Grid.RowDefinitions>
-        <formula:VariableSelectionView VerticalAlignment="Stretch" />
+        <formula:VariableSelectionView Grid.Row="1" VerticalAlignment="Stretch" />
       </Grid>
     </Grid>
     <Grid Name="GridSensors" Visibility="Collapsed">
@@ -462,12 +471,12 @@
                     <ColumnDefinition/>
                   </Grid.ColumnDefinitions>
                   <Button Grid.Row="0" Grid.Column="0" Content="Brightness" DataContext="{StaticResource FormulaEditorKeyBrightness}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
-                  <Button Grid.Row="1" Grid.Column="0" Content="Layer" DataContext="{StaticResource FormulaEditorKeyLayer}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
-                  <Button Grid.Row="1" Grid.Column="1" Content="Size" DataContext="{StaticResource FormulaEditorKeySize}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
-                  <Button Grid.Row="2" Grid.Column="0" Content="PositionX" DataContext="{StaticResource FormulaEditorKeyPositionX}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
-                  <Button Grid.Row="2" Grid.Column="1" Content="PositionY" DataContext="{StaticResource FormulaEditorKeyPositionY}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="0" Grid.Column="1" Content="Layer" DataContext="{StaticResource FormulaEditorKeyLayer}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="1" Grid.Column="0" Content="PositionX" DataContext="{StaticResource FormulaEditorKeyPositionX}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="1" Grid.Column="1" Content="PositionY" DataContext="{StaticResource FormulaEditorKeyPositionY}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="2" Grid.Column="0" Content="Rotation" DataContext="{StaticResource FormulaEditorKeyRotation}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
+                  <Button Grid.Row="2" Grid.Column="1" Content="Size" DataContext="{StaticResource FormulaEditorKeySize}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
                   <Button Grid.Row="3" Grid.Column="0" Content="Transparency" DataContext="{StaticResource FormulaEditorKeyTransparency}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
-                  <Button Grid.Row="3" Grid.Column="1" Content="Brush" DataContext="{Binding StaticTheme.ObjectsBrush.NativeBrush, Source={StaticResource ThemeChooser}}" Style="{StaticResource StyleButtonNumbers}" Click="ObjectButton_OnClick"/>
                 </Grid>
               </Grid>
             </Grid>
@@ -492,6 +501,7 @@
                   <Button Grid.Row="1" Grid.Column="1" Content="CompassDirection" DataContext="{StaticResource FormulaEditorKeyCompass}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
                   <Button Grid.Row="2" Grid.Column="0" Content="InclinationX" DataContext="{StaticResource FormulaEditorKeyInclinationX}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
                   <Button Grid.Row="2" Grid.Column="1" Content="InclinationY" DataContext="{StaticResource FormulaEditorKeyInclinationY}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
+                  <Button Grid.Row="3" Grid.Column="0" Content="Loudness" DataContext="{StaticResource FormulaEditorKeyLoudness}" Style="{StaticResource StyleButtonNumbers}" Click="SensorButton_OnClick"/>
                 </Grid>
               </Grid>
             </Grid>

@@ -968,4 +968,7 @@
   <data name="Main_Settings" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
+  <data name="Formula_LOUDNESS" xml:space="preserve">
+    <value>Lautstärke</value>
+  </data>
 </root>

@@ -3,6 +3,9 @@
 #include "fmod.hpp"
 #include "fmod_errors.h"
 
+#include <stdio.h>
+#include <share.h>
+
 using namespace FMOD;
 
 class FmodMicrophoneProvider 
@@ -12,6 +15,7 @@ public:
 	static FmodMicrophoneProvider* Instance();
 	double StartRecordingFiveSeconds();
 	void PlayRecordedFiveSeconds();
+	void SaveToWave();
 
 private:
 

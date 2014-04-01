@@ -12,8 +12,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         public override double EvaluateNumber()
         {
-            // TODO: evaluate object variables
-            throw new NotImplementedException();
+            // TODO: evaluate properties with default values like in Catroid
+            return 0;
         }
 
         #endregion

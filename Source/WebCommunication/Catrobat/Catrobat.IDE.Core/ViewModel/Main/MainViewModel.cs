@@ -19,6 +19,9 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Windows.Input;
 
+// TODO
+using System.Diagnostics;
+
 namespace Catrobat.IDE.Core.ViewModel.Main
 {
     public class MainViewModel : ViewModelBase

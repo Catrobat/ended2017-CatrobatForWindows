@@ -17,6 +17,8 @@ namespace Catrobat.Paint.Phone.View
 {
     public partial class PaintingAreaView : PhoneApplicationPage
     {
+        Int32 slider_thickness_textbox_last_value = 1;
+
 
         // Constructor
         public PaintingAreaView()
@@ -177,6 +179,7 @@ namespace Catrobat.Paint.Phone.View
             if (SliderThickness != null)
             {
                 SliderThicknessTextBox.Text = Convert.ToInt32(SliderThickness.Value).ToString();
+                slider_thickness_textbox_last_value = Convert.ToInt32(SliderThickness.Value);
             }
         }
 
@@ -198,29 +201,36 @@ namespace Catrobat.Paint.Phone.View
             TriangleRadioButon_OnClick(sender, e);
         }
 
-        private void SliderThicknessTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            string current_value = SliderThicknessTextBox.Text;
-            //MessageBox.Show("SliderThicknessTextBox was called");
-
-
-        }
-
         private void SliderThicknessTextBox_MouseEnter(object sender, MouseEventArgs e)
         {
             SliderThicknessTextBox.Foreground = new SolidColorBrush(Colors.Black);
-            MessageBox.Show("SliderThicknessTextBox was called");
         }
 
         private void SliderThicknessTextBox_MouseLeave(object sender, MouseEventArgs e)
         {
-           /* if(SliderThicknessTextBox.Text.Length == 2)
-            {
-                if(SliderThicknessTextBox.Text[0].ToString().Contains)
-            }
-            SliderThicknessTextBox.Foreground = new SolidColorBrush(Colors.White);
-            MessageBox.Show(Convert.ToInt32(SliderThicknessTextBox.Text).ToString());*/
+            string slider_thickness_text_box_value = SliderThicknessTextBox.Text.ToString();
+            Int32 slider_thickness_text_box_int_value;
 
+            if (!slider_thickness_text_box_value.Equals(""))
+            {
+                slider_thickness_text_box_int_value = Convert.ToInt32(slider_thickness_text_box_value);
+
+                if (!(slider_thickness_text_box_int_value >= 1 && slider_thickness_text_box_int_value <= 50))
+                {
+                    SliderThicknessTextBox.Text = slider_thickness_textbox_last_value.ToString();
+                }
+                else
+                {
+                    slider_thickness_textbox_last_value = slider_thickness_text_box_int_value;
+                    SliderThickness.Value = slider_thickness_text_box_int_value;
+                }                    
+            }
+            else
+            {
+                SliderThicknessTextBox.Text = slider_thickness_textbox_last_value.ToString();
+            }
+
+            SliderThicknessTextBox.Foreground = new SolidColorBrush(Colors.White);
         }
 
         private void ToolChangedHere(ToolBase tool)
@@ -238,7 +248,8 @@ namespace Catrobat.Paint.Phone.View
                     break;
 
                 case ToolType.Eraser:
-                    ApplicationBar = (IApplicationBar)this.Resources["barEraser"];
+                    ApplicationBar = (IApplicationBar)this.Resources["barStandard"];
+                    //ApplicationBar = (IApplicationBar)this.Resources["barEraser"];
                     break;
 
                 case ToolType.Move:

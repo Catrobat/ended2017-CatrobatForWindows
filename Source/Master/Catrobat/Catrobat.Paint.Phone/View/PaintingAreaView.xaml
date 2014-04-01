@@ -187,13 +187,13 @@
             </Grid>
             
             <UserControl x:Name="SliderThicknessControl" Height="auto" Width="auto" >
-                <Grid x:Name="SliderThicknessGrid" Background="#1F1F1F" Visibility="Visible" MinHeight="120" VerticalAlignment="Bottom" RenderTransformOrigin="0.502,-0.04">
+                <Grid x:Name="SliderThicknessGrid" Background="#1F1F1F" Visibility="Collapsed" MinHeight="120" VerticalAlignment="Bottom" RenderTransformOrigin="0.502,-0.04">
                     <Slider x:Name="SliderThickness" Background="Red" Maximum="50"  Minimum="1" Margin="0,0,111,27" ValueChanged="SliderThickness_ValueChanged"/>
                     <RadioButton x:Name="RoundRadioButton" Content="" HorizontalAlignment="Left"  Margin="23,60,0,-10"  VerticalAlignment="Top" Foreground="Black" Click="RoundRadioButon_OnClick" IsChecked="True" UseLayoutRounding="True" Background="Black" GroupName="BrushStyle"/>
                     <RadioButton x:Name="SquareRadioButton" Content="" HorizontalAlignment="Left" Margin="162,60,0,-10" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="SquareRadioButon_OnClick" GroupName="BrushStyle"/>
                     <RadioButton x:Name="TriangleRadioButton" Content="" HorizontalAlignment="Left" Margin="301,60,0,-10" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="TriangleRadioButon_OnClick" GroupName="BrushStyle"/>
-                    <TextBox x:Name="SliderThicknessTextBox" BorderBrush="White" TextAlignment="Center" BorderThickness="3" Text="1" HorizontalAlignment="Left" MinHeight="69" Margin="350,-3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="75" Foreground="White" Background="Transparent" RenderTransformOrigin="0.11,0.493" TextChanged="SliderThicknessTextBox_TextChanged" IsHitTestVisible="true"
-                             MouseEnter="SliderThicknessTextBox_MouseEnter" MouseLeave="SliderThicknessTextBox_MouseLeave" MaxLength="2" />
+                    <TextBox x:Name="SliderThicknessTextBox" BorderBrush="White" TextAlignment="Center" BorderThickness="3" Text="1" HorizontalAlignment="Left" MinHeight="69" Margin="350,-3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" MinWidth="75" Foreground="White" Background="Transparent" RenderTransformOrigin="0.11,0.493" IsHitTestVisible="true"
+                             MouseEnter="SliderThicknessTextBox_MouseEnter" MouseLeave="SliderThicknessTextBox_MouseLeave" MaxLength="2" InputScope="Number" />
                    
                     <Button x:Name="RoundImage" BorderThickness="0"  HorizontalAlignment="Left" Height="80" Margin="70,57,0,0" VerticalAlignment="Top" Width="80" Click="RoundImage_Click">
                         <Image Source="/Assets/ToolMenu/icon_menu_ellipse.png" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>

@@ -6,7 +6,6 @@ using namespace Windows::Phone::Media::Capture;
 using namespace Windows::Storage::Streams;
 
 
-
 MicrophoneProvider::MicrophoneProvider()
 {
 	Init();
@@ -55,3 +54,4 @@ bool MicrophoneProvider::Init()
 	}
 	return success;
 }
+

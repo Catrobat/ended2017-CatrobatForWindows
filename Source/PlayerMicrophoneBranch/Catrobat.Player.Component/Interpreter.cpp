@@ -27,7 +27,7 @@ Interpreter::Interpreter()
     m_compassProvider = new CompassProvider();
 	m_inclinationProvider = ref new InclinationProvider();
 
-	m_fmodMicrophoneProvider = FmodMicrophoneProvider::Instance();
+	//m_fmodMicrophoneProvider = FmodMicrophoneProvider::Instance();
 }
 
 double Interpreter::EvaluateFormula(FormulaTree *tree, Object *object)
@@ -322,8 +322,9 @@ double Interpreter::InterpretSensor(FormulaTree *tree, Object *object)
 		returnValue = m_accelerometerProvider->GetZ();
 		break;
 	case Sensor::LOUDNESS:
-		returnValue = m_fmodMicrophoneProvider->StartRecordingFiveSeconds();
-		m_fmodMicrophoneProvider->PlayRecordedFiveSeconds();
+		//returnValue = m_fmodMicrophoneProvider->StartRecordingFiveSeconds();
+		//m_fmodMicrophoneProvider->SaveToWave();
+		//m_fmodMicrophoneProvider->PlayRecordedFiveSeconds();
 		break;
 	default:
 		returnValue = 0;

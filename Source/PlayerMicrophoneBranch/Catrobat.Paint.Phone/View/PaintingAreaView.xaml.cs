@@ -1,134 +1,275 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Data.Linq;
-using System.Diagnostics;
-using System.IO;
-using System.IO.IsolatedStorage;
+using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using Catrobat.Paint.ViewModel;
+using System.Windows.Navigation;
+using Windows.Foundation.Metadata;
+using Windows.Phone.Media.Capture;
+using Catrobat.Paint.Phone.Command;
+using Catrobat.Paint.Phone.Tool;
+using Catrobat.Paint.Phone.Ui;
 using Microsoft.Phone.Controls;
-using Microsoft.Xna.Framework.Media;
-using Windows.Storage;
+using Microsoft.Phone.Shell;
+using System.Windows.Media;
+using System.Windows.Input;
 
-namespace Catrobat.Paint.View
+namespace Catrobat.Paint.Phone.View
 {
-    /// <summary>
-    /// Description for PaintingAreaView.
-    /// </summary>
     public partial class PaintingAreaView : PhoneApplicationPage
     {
-        /// <summary>
-        /// Initializes a new instance of the PaintingAreaView class.
-        /// </summary>
+
+        // Constructor
         public PaintingAreaView()
         {
             InitializeComponent();
-         
-//            if (PaintLauncher.Task.CurrentImage != null)
-//            {
-//                SetBackground(PaintLauncher.Task.CurrentImage);
-//            }
+            PocketPaintApplication.GetInstance();
 
-            SetBoundary();
-        }
+            PocketPaintApplication.GetInstance().PaintingAreaCanvas = PaintingAreaCanvas;
+            PocketPaintApplication.GetInstance().PaintingAreaLayoutRoot = LayoutRoot;
+            PocketPaintApplication.GetInstance().PaintingAreaCanvasUnderlaying = PaintingAreaCanvasUnderlaying;
+            PocketPaintApplication.GetInstance().PaintingAreaCheckeredGrid = PaintingAreaCheckeredGrid;
 
-        ~PaintingAreaView()
-        {
-            Debug.WriteLine("PaintingAreaView: Destructor called.");
-        }
+            Spinner.SpinnerGrid = SpinnerGrid;
+            Spinner.SpinnerStoryboard = SpinningStoryboard;
 
-        //Set the Clip property of the inkpresenter so that the strokes
-        //are contained within the boundary of the inkpresenter
-        //But do we really need this?
-        private void SetBoundary()
-        {
-            var clip = new RectangleGeometry
-                {
-                    Rect = new Rect(0, 0, InkPresenter.ActualWidth, InkPresenter.ActualHeight)
-                };
-            InkPresenter.Clip = clip;
-        }
+            PaintingAreaCheckeredGrid.ManipulationStarted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationStarted;
+            PaintingAreaCheckeredGrid.ManipulationDelta += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationDelta;
+            PaintingAreaCheckeredGrid.ManipulationCompleted += PocketPaintApplication.GetInstance().PaintingAreaManipulationListener.ManipulationCompleted;
+            PocketPaintApplication.GetInstance().PaintData.ToolCurrentChanged += ToolChangedHere;
 
-        private PaintingAreaViewModel ViewModel
-        {
-            get
+            foreach (ApplicationBarIconButton btn in ApplicationBar.Buttons)
             {
-                return (PaintingAreaViewModel)DataContext;
+                if (btn.Text.Contains("color"))
+                {
+                    btn.Click += PocketPaintApplication.GetInstance().ApplicationBarListener.BtnColor_Click;                    
+                }
+            }
+
+            SliderThickness.ValueChanged +=
+                PocketPaintApplication.GetInstance().ApplicationBarListener.SliderThickness_ValueChanged;
+            SliderThickness.Value = PocketPaintApplication.GetInstance().PaintData.ThicknessSelected;
+            SliderThicknessTextBox.Text = SliderThickness.Value.ToString();
+
+            UndoRedoActionbarManager.GetInstance().ApplicationBarTop = ApplicationBarTopX;
+           // BackKeyPress += OnBackKeyPressed;
+            // Sample code to localize the ApplicationBar
+            //BuildLocalizedApplicationBar();
+
+
+        }
+
+        private void ChangeIconBtnColor()
+        {
+            
+        }
+
+        // Sample code for building a localized ApplicationBar
+        //private void BuildLocalizedApplicationBar()
+        //{
+        //    // Set the page's ApplicationBar to a new instance of ApplicationBar.
+        //    ApplicationBar = new ApplicationBar();
+
+        //    // Create a new button and set the text value to the localized string from AppResources.
+        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
+        //    appBarButton.Text = AppResources.AppBarButtonText;
+        //    ApplicationBar.Buttons.Add(appBarButton);
+
+        //    // Create a new menu item with the localized string from AppResources.
+        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
+        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
+        //}
+
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            var result = MessageBoxResult.Cancel;
+
+            if (PocketPaintApplication.GetInstance().UnsavedChangesMade)
+            {
+                result = MessageBox.Show("Are you sure you want to exit and discard unsaved changes?", "Confirm Exit?",
+                                MessageBoxButton.OKCancel);
+
+                if (result == MessageBoxResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+
+                }
+            }
+            Application.Current.Terminate();
+        }
+
+
+        private void BtnThickness_OnClick(object sender, EventArgs e)
+        {
+            SliderThicknessGrid.Visibility = SliderThicknessGrid.Visibility == Visibility.Collapsed
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+
+            foreach (var child in SliderThicknessGrid.Children)
+            {
+                child.Visibility = SliderThicknessGrid.Visibility;
+            }
+
+             
+        }
+
+        private void ApplicationBarMenuItem_OnClick(object sender, EventArgs e)
+        {
+
+            //ACHTUNG: http://stackoverflow.com/questions/17477675/delete-an-image-in-the-medialibrary
+            // sobald ein bild einmal in der medialibrary ist kann es programmatisch nicht mehr gelöscht oder ersetzt werden.
+            // analog zu paintroid sollte mit dem Knopf "Speichern" pro Session immer das selbe Bild (bei uns anhand des DateTimeAppStarted definiert) überschrieben und
+            // somit nur ein Bild in MediaLibrary landen
+            // Think about it and change usecase for WP!
+
+            PocketPaintApplication.GetInstance().SaveAsPng(PocketPaintApplication.GetInstance().DateTimeAppStarted);
+        }
+
+        static void OnBackKeyPressed(object sender, CancelEventArgs e)
+        {
+            if (PocketPaintApplication.GetInstance().UnsavedChangesMade)
+            {
+                var result = MessageBox.Show("Nicht gespeicherte Änderungen verwerfen und beenden?", "Beenden",
+                                              MessageBoxButton.OKCancel);
+
+
+                if (result == MessageBoxResult.OK)
+                {
+                    return;
+                }
+                e.Cancel = true;
             }
         }
 
-
-        #region EventHandlers  // Hell yeah MVVM, I use Eventhandlers here because they are propably faster
-
-
-        private void InkPresenter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void BtnTools_OnClick(object sender, EventArgs e)
         {
-            SliderThickness.Visibility = Visibility.Collapsed;
-            ViewModel.BeginStrokeCommand.Execute(e.GetPosition((InkPresenter)sender));
+            NavigationService.Navigate(new Uri("/Catrobat.Paint.Phone;component/View/ToolPickerView.xaml", UriKind.RelativeOrAbsolute));
         }
 
-        private void InkPresenter_MouseMove(object sender, MouseEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            ViewModel.SetStrokePointCommand.Execute(e.GetPosition((InkPresenter)sender));
+          /*  if (e.NavigationMode == NavigationMode.Back)
+            {
+                //e.Uri = "";
+            }*/
+
+            base.OnNavigatedFrom(e);
+            PaintingAreaCanvas.CaptureMouse();
         }
 
-        private void InkPresenter_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void TriangleRadioButon_OnClick(object sender, EventArgs e)
         {
-            ViewModel.EndStrokeCommand.Execute(null);
+            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Triangle;
         }
 
-        private void ButtonUndo_Click(object sender, System.EventArgs e)
+        public void RoundRadioButon_OnClick(object sender, EventArgs e)
         {
-            ViewModel.UndoCommand.Execute(null);
+            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Round;
         }
 
-        private void ButtonRedo_Click(object sender, System.EventArgs e)
+        public void SquareRadioButon_OnClick(object sender, EventArgs e)
         {
-            ViewModel.RedoCommand.Execute(null);
+            PocketPaintApplication.GetInstance().PaintData.CapSelected = PenLineCap.Square;
         }
 
-        private void ButtonClear_Click(object sender, System.EventArgs e)
+        private void SliderThickness_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            ViewModel.ClearCommand.Execute(null);
+            if (SliderThickness != null)
+            {
+                SliderThicknessTextBox.Text = Convert.ToInt32(SliderThickness.Value).ToString();
+            }
         }
 
-        private void ButtonSaveToCatrobat_Click(object sender, System.EventArgs e)
+        private void RoundImage_Click(object sender, RoutedEventArgs e)
         {
-            var wb = new WriteableBitmap(InkPresenter, new TranslateTransform());
-
-            ViewModel.SaveCommand.Execute(wb);
+            RoundRadioButton.IsChecked = true;
+            RoundRadioButon_OnClick(sender, e);
         }
 
-        private void ButtonColorpicker_Click(object sender, EventArgs e)
+        private void SquareImage_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.ToColorPickerCommand.Execute(null);
+            SquareRadioButton.IsChecked = true;
+            SquareRadioButon_OnClick(sender, e);
         }
 
-
-        private void ButtonInkEraserToggle_Click(object sender, EventArgs e)
+        private void TriangleImage_Click(object sender, RoutedEventArgs e)
         {
-             ViewModel.ToggleInkEraserCommand.Execute(null);
+            TriangleRadioButton.IsChecked = true;
+            TriangleRadioButon_OnClick(sender, e);
         }
 
-        protected override void OnBackKeyPress(CancelEventArgs e)
+        private void SliderThicknessTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            var wb = new WriteableBitmap(InkPresenter, new TranslateTransform());
-            ViewModel.BackPressedCommand.Execute(wb);
+            string current_value = SliderThicknessTextBox.Text;
+            //MessageBox.Show("SliderThicknessTextBox was called");
 
-            e.Cancel = true;
 
-            base.OnBackKeyPress(e);
         }
 
-        #endregion
-
-        private void ButtonThickness_Click(object sender, EventArgs e)
+        private void SliderThicknessTextBox_MouseEnter(object sender, MouseEventArgs e)
         {
-            SliderThickness.Visibility = SliderThickness.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+            SliderThicknessTextBox.Foreground = new SolidColorBrush(Colors.Black);
+            MessageBox.Show("SliderThicknessTextBox was called");
         }
+
+        private void SliderThicknessTextBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+           /* if(SliderThicknessTextBox.Text.Length == 2)
+            {
+                if(SliderThicknessTextBox.Text[0].ToString().Contains)
+            }
+            SliderThicknessTextBox.Foreground = new SolidColorBrush(Colors.White);
+            MessageBox.Show(Convert.ToInt32(SliderThicknessTextBox.Text).ToString());*/
+
+        }
+
+        private void ToolChangedHere(ToolBase tool)
+        {
+            switch (tool.GetToolType())
+            {
+                case ToolType.Brush:
+                case ToolType.Cursor:
+                case ToolType.Line:
+                    ApplicationBar = (IApplicationBar)this.Resources["barStandard"];
+                    break;
+
+                case ToolType.Pipette:
+                    ApplicationBar = (IApplicationBar)this.Resources["barPipette"];
+                    break;
+
+                case ToolType.Eraser:
+                    ApplicationBar = (IApplicationBar)this.Resources["barEraser"];
+                    break;
+
+                case ToolType.Move:
+                case ToolType.Zoom:
+                    ApplicationBar = (IApplicationBar)this.Resources["barMove"];
+                    break;
+
+                case ToolType.Crop:
+                    ApplicationBar = (IApplicationBar)this.Resources["barCrop"];
+                    break;
+
+                case ToolType.Rotate:
+                    ApplicationBar = (IApplicationBar) this.Resources["barRotate"];
+                    break;
+
+
+
+            }
+
+
+
+
+
+        }
+
+        // TODO defining this handler solves issue that first tap after toolpicker page was open is not recognized by 
+        // PaintingAreaCanvas Eventhandler... 
+        // PaintingAreaCheckeredGrid handles now and this seems to be resolved.
+//        private void PaintingAreaContentPanelGrid_OnManipulationStarted(object sender, ManipulationStartedEventArgs e)
+//        {
+//            //System.Diagnostics.Debug.WriteLine("--PaintingAreaContentPanelGrid--");
+//        }
     }
 }

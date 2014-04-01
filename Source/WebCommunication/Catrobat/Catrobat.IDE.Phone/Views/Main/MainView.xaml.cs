@@ -190,9 +190,9 @@ namespace Catrobat.IDE.Phone.Views.Main
         //    }
         //}
 
-        private void NavigateToCatrobatWebsite_OnClick(object sender, RoutedEventArgs e)
-        {
-            ServiceLocator.NavigationService.NavigateToWebPage("http://www.pocketcode.org");
-        }
+        //private void NavigateToCatrobatWebsite_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    ServiceLocator.NavigationService.NavigateToWebPage("http://www.pocketcode.org");
+        //}
     }
 }

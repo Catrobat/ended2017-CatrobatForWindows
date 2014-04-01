@@ -21,7 +21,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
             if (!InterpretSyntax(tokens2, out parsingError)) return null;
 
             IFormulaTree formula;
-            if (!InterpretSemantic(tokens2.Cast<IFormulaTree>().ToList(), out formula, out parsingError)) return null;
+            if (!InterpretSemantic(tokens2, out formula, out parsingError)) return null;
 
             return formula;
         }
@@ -384,8 +384,18 @@ namespace Catrobat.IDE.Core.FormulaEditor
         #region Semantic
 
         /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
-        private bool InterpretSemantic(List<IFormulaTree> nodes, out IFormulaTree formula, out string parsingError)
+        private bool InterpretSemantic(List<IFormulaToken> tokens, out IFormulaTree formula, out string parsingError)
         {
+            if (tokens.OfType<FormulaTokenParameterSeparator>().Any())
+            {
+                // TODO: add translated error like 'Remove superfluous parameter separator'
+                parsingError = "An error occured. ";
+                formula = null;
+                return false;
+            }
+
+            var nodes = tokens.Cast<IFormulaTree>().ToList();
+
             switch (nodes.Count)
             {
                 case 0:

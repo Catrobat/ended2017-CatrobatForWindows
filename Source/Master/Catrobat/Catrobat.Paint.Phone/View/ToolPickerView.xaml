@@ -98,7 +98,7 @@
                     <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_rotate_left.png" Stretch="None" AlignmentX="Left"></ImageBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="Line" Content="Linie" IsEnabled="false" Click="Button_OnClick" HorizontalContentAlignment="Left"  FontSize="20" Padding="45,0, 0, 0" HorizontalAlignment="Left" Margin="3,506,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Width="225" Grid.Row="7" Grid.Column="5">
+            <Button x:Name="Line" Content="Linie"  Click="Button_OnClick" HorizontalContentAlignment="Left"  FontSize="20" Padding="45,0, 0, 0" HorizontalAlignment="Left" Margin="3,506,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Width="225" Grid.Row="7" Grid.Column="5">
                 <Button.Background>
                     <ImageBrush ImageSource="/Assets/ToolMenu/icon_menu_straight_line.png" Stretch="None" AlignmentX="Left"></ImageBrush>
                 </Button.Background>
