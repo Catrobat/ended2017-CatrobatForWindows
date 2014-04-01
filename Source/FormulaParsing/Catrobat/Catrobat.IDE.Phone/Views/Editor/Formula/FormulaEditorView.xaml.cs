@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 using System.Windows;
@@ -30,7 +31,7 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            var animation = FormulaKeyboard.Resources["EnterTransition"] as Storyboard;
+                var animation = FormulaKeyboard.Resources["EnterTransition"] as Storyboard;
             if (animation != null)
             {
                 await Task.Delay(TimeSpan.FromSeconds(0.1));
@@ -39,8 +40,8 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
         }
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
-        {
-            var animation = FormulaKeyboard.Resources["ExitTransition"] as Storyboard;
+            {
+                var animation = FormulaKeyboard.Resources["ExitTransition"] as Storyboard;
             if (animation != null)
             {
                 animation.Begin();
@@ -79,11 +80,31 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             ServiceLocator.NotifictionService.ShowToastNotification("", message, ToastNotificationTime.Medeum);
         }
 
+        private bool _firstBackPressed = true;
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            _viewModel.GoBackCommand.Execute(null);
-            e.Cancel = true;
-            base.OnBackKeyPress(e);
+            if (_viewModel.HasError && _firstBackPressed)
+            {
+                e.Cancel = true;
+                _firstBackPressed = false;
+
+                var timeToAct = TimeSpan.FromSeconds(1);
+                ServiceLocator.NotifictionService.ShowToastNotification(
+                    title: "",
+                    message: AppResources.Editor_ReallyDismissFormula,
+                    timeTillHide: timeToAct);
+                Task.Run(async () =>
+                {
+                    await Task.Delay(timeToAct);
+                    _firstBackPressed = true;
+                });
+            }
+            else
+            {
+                _viewModel.GoBackCommand.Execute(null);
+                e.Cancel = true;
+                base.OnBackKeyPress(e);
+            }
         }
 
         private void FormulaEditorView_OnUnloaded(object sender, RoutedEventArgs e)
@@ -97,11 +118,11 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
 
         private void ApplicationBarMenuItemStart_OnClick(object sender, EventArgs e)
         {
-            ServiceLocator.SensorService.Start();
+            _viewModel.StartSensorsCommand.Execute(null);
         }
         private void ApplicationBarMenuItemStop_OnClick(object sender, EventArgs e)
         {
-            ServiceLocator.SensorService.Stop();
+            _viewModel.StopSensorsCommand.Execute(null);
         }
     }
 }

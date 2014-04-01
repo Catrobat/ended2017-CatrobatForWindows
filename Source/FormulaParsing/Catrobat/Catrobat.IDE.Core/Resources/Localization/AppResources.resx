@@ -1032,4 +1032,7 @@
   <data name="Formula_LOUDNESS" xml:space="preserve">
     <value>loudness</value>
   </data>
+  <data name="Editor_ReallyDismissFormula" xml:space="preserve">
+    <value>Press "back" again to dismiss your changes?</value>
+  </data>
 </root>

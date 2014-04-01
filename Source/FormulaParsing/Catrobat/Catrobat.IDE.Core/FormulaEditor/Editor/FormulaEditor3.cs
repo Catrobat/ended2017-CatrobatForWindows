@@ -60,7 +60,6 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         private readonly Stack<EditorState> _redoStack = new Stack<EditorState>();
 
         private int _caretIndex;
-
         public int CaretIndex
         {
             get { return _caretIndex; }
@@ -71,6 +70,18 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 RaisePropertyChanged(() => CaretIndex);
                 RaisePropertyChanged(() => CanLeft);
                 RaisePropertyChanged(() => CanRight);
+            }
+        }
+
+        private int _selectionLength;
+        public int SelectionLength
+        {
+            get { return _selectionLength; }
+            set
+            {
+                if (_selectionLength == value) return;
+                _selectionLength = value;
+                RaisePropertyChanged(() => SelectionLength);
             }
         }
 
@@ -101,6 +112,11 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         public bool CanDelete
         {
             get { return CaretIndex > 0; }
+        }
+
+        public bool HasError
+        {
+            get { return _parsingError != null; }
         }
 
         #endregion
@@ -145,12 +161,9 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 default:
                     PushUndo();
                     var token = CreateToken(key, variable);
-                    InsertToken(token);
-                    if (token is FormulaNodeUnaryFunction || token is FormulaNodeBinaryFunction)
-                    {
-                        InsertToken(FormulaTokenFactory.CreateParenthesisToken(true));
-                    }
-                    return true;
+                    return InsertToken(token) && 
+                        (!(token is FormulaNodeUnaryFunction || token is FormulaNodeBinaryFunction) || 
+                            InsertToken(FormulaTokenFactory.CreateParenthesisToken(true)));
             }
         }
 
@@ -311,15 +324,23 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 RaisePropertyChanged(() => Formula);
             }
             RaisePropertyChanged(() => ParsingError);
+            RaisePropertyChanged(() => HasError);
         }
 
-        private void InsertToken(IFormulaToken token)
+        private bool InsertToken(IFormulaToken token)
         {
+            var index = CaretIndex;
+            if (!(0 <= index && index <= Tokens.Count)) return false;
             if (Tokens == null) Tokens = new ObservableCollection<IFormulaToken>();
-            Tokens.Insert(CaretIndex, token);
+            if (0 <= index && index < Tokens.Count)
+            {
+                while (SelectionLength > 0) Tokens.RemoveAt(index);
+            }
+            Tokens.Insert(index, token);
             InterpretTokens();
             RaisePropertyChanged(() => CanLeft);
             RaisePropertyChanged(() => CanDelete);
+            return true;
         }
 
         private bool RemoveToken()

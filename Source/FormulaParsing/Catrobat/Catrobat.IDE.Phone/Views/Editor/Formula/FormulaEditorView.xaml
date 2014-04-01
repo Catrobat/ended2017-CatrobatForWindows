@@ -71,18 +71,17 @@
           </Storyboard>
           <Storyboard x:Name="ExitTransition">
             <DoubleAnimation
-        Storyboard.TargetName="Translation"
-        Storyboard.TargetProperty="Y"
-        To="500"
-        Duration="0:0:0.3" >
+              Storyboard.TargetName="Translation"
+              Storyboard.TargetProperty="Y"
+              To="500"
+              Duration="0:0:0.3" >
               <DoubleAnimation.EasingFunction>
                 <QuadraticEase EasingMode="EaseIn"/>
               </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
           </Storyboard>
-
         </formulaControls:FormulaKeyboard.Resources>
-        </formulaControls:FormulaKeyboard>
+      </formulaControls:FormulaKeyboard>
 
       <Grid Name="GridError" Background="Tomato" Opacity="0.0" Height="10" VerticalAlignment="Top">
         <Grid.Resources>
