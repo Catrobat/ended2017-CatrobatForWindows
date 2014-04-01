@@ -262,7 +262,7 @@
     <Compile Include="Services\DispatcherServicePhone.cs" />
     <Compile Include="Services\ImageResizeServicePhone.cs" />
     <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
-    <Compile Include="Services\Microphone.cs" />
+    <Compile Include="Services\Microphone2.cs" />
     <Compile Include="Services\MicrophoneReading.cs" />
     <Compile Include="Services\ProjectImporterServicePhone.cs" />
     <Compile Include="Services\NavigationServicePhone.cs" />
