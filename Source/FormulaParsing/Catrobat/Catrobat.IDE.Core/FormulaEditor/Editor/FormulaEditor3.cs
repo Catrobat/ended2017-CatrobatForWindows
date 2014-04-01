@@ -2,6 +2,7 @@
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -335,9 +336,12 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             if (Tokens == null) Tokens = new ObservableCollection<IFormulaToken>();
             if (0 <= index && index < Tokens.Count)
             {
-                while (SelectionLength > 0) Tokens.RemoveAt(index);
+                Tokens.ReplaceRange(index, SelectionLength, token);
             }
-            Tokens.Insert(index, token);
+            else
+            {
+                Tokens.Insert(index, token);
+            }
             InterpretTokens();
             RaisePropertyChanged(() => CanLeft);
             RaisePropertyChanged(() => CanDelete);

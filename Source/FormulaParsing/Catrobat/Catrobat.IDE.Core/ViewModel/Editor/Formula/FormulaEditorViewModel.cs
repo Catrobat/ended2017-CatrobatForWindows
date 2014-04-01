@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Catrobat.IDE.Core.CatrobatObjects;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.FormulaEditor;

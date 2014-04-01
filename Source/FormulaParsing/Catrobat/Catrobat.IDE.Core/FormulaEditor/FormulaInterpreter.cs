@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+using Catrobat.IDE.Core.ExtensionMethods;
 
 namespace Catrobat.IDE.Core.FormulaEditor
 {
@@ -88,8 +89,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                     parsingError = new ParsingError("Overflow error. ");
                     return false;
                 }
-                tokens.RemoveRange(index, numberTokens.Count);
-                tokens.Insert(index, FormulaTokenFactory.CreateNumberToken(value));
+                tokens.ReplaceRange(index, numberTokens.Count, FormulaTokenFactory.CreateNumberToken(value));
             }
             parsingError = null;
             return true;
@@ -123,8 +123,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                     var openingIndex = openingIndices.Pop();
                     var closingIndex = index;
                     var children = tokens.GetRange(openingIndex + 1, closingIndex - openingIndex - 1);
-                    tokens.RemoveRange(openingIndex, closingIndex - openingIndex + 1);
-                    tokens.Insert(openingIndex, FormulaTokenFactory.CreateParenthesesToken(children));
+                    tokens.ReplaceRange(openingIndex, closingIndex - openingIndex + 1, FormulaTokenFactory.CreateParenthesesToken(children));
                     index -= closingIndex - openingIndex;
                 }
             }

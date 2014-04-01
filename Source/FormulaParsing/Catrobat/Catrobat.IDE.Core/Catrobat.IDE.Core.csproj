@@ -107,6 +107,7 @@
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeSensor.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaNodeVariable.cs" />
     <Compile Include="CatrobatObjects\Formulas\XmlFormula\XmlFormulaTreeFactory.cs" />
+    <Compile Include="ExtensionMethods\ListExtensions.cs" />
     <Compile Include="ExtensionMethods\LinqExtensions.cs" />
     <Compile Include="ExtensionMethods\EnumExtensions.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\UnaryFormulaTree.cs" />

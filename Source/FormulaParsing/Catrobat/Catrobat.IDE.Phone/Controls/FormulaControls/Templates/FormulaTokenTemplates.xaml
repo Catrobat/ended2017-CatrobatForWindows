@@ -3,18 +3,18 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:f="clr-namespace:Catrobat.IDE.Phone.Controls.FormulaControls.Formulas"
   xmlns:partControls="clr-namespace:Catrobat.IDE.Phone.Controls.FormulaControls.PartControls"
   xmlns:formulaTree="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;assembly=Catrobat.IDE.Core"
   xmlns:formulaToken="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;assembly=Catrobat.IDE.Core"
+  xmlns:templates="clr-namespace:Catrobat.IDE.Phone.Controls.FormulaControls.Templates"
   mc:Ignorable="d">
 
   <SolidColorBrush x:Key="FormulaSelectedBackground" Color="Orange" />
   <SolidColorBrush x:Key="FormulaNotSelectedBackground" Color="Transparent" />
 
   <!--Styles from this collection will be used if they are not specified in the used collection-->
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleDefault">
-    <partControls:FormulaPartStyleCollection.TextStyle>
+  <templates:FormulaPartStyleCollection x:Key="PartStyleDefault">
+    <templates:FormulaPartStyleCollection.TextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -22,9 +22,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
+    </templates:FormulaPartStyleCollection.TextStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    <templates:FormulaPartStyleCollection.SelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -32,9 +32,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    </templates:FormulaPartStyleCollection.SelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -42,35 +42,35 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    </templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
+    <templates:FormulaPartStyleCollection.ContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="Transparent"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
+    </templates:FormulaPartStyleCollection.ContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.SelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="LightGreen"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    </templates:FormulaPartStyleCollection.SelectedContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
+    </templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+  </templates:FormulaPartStyleCollection>
 
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleNumber" DefaultStyles="{StaticResource PartStyleDefault}">
-    <partControls:FormulaPartStyleCollection.TextStyle>
+  <templates:FormulaPartStyleCollection x:Key="PartStyleNumber" DefaultStyles="{StaticResource PartStyleDefault}">
+    <templates:FormulaPartStyleCollection.TextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -78,9 +78,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
+    </templates:FormulaPartStyleCollection.TextStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    <templates:FormulaPartStyleCollection.SelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -88,9 +88,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    </templates:FormulaPartStyleCollection.SelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -98,35 +98,35 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    </templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
+    <templates:FormulaPartStyleCollection.ContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="Transparent"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
+    </templates:FormulaPartStyleCollection.ContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.SelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="LightGreen"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    </templates:FormulaPartStyleCollection.SelectedContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
+    </templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+  </templates:FormulaPartStyleCollection>
 
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleMath" DefaultStyles="{StaticResource PartStyleDefault}">
-    <partControls:FormulaPartStyleCollection.TextStyle>
+  <templates:FormulaPartStyleCollection x:Key="PartStyleMath" DefaultStyles="{StaticResource PartStyleDefault}">
+    <templates:FormulaPartStyleCollection.TextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -134,9 +134,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
+    </templates:FormulaPartStyleCollection.TextStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    <templates:FormulaPartStyleCollection.SelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -144,9 +144,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    </templates:FormulaPartStyleCollection.SelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -154,39 +154,39 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    </templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
+    <templates:FormulaPartStyleCollection.ContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="Transparent"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
+    </templates:FormulaPartStyleCollection.ContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.SelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    </templates:FormulaPartStyleCollection.SelectedContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
+    </templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+  </templates:FormulaPartStyleCollection>
 
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleEmpty" DefaultStyles="{StaticResource PartStyleDefault}">
+  <templates:FormulaPartStyleCollection x:Key="PartStyleEmpty" DefaultStyles="{StaticResource PartStyleDefault}">
 
-  </partControls:FormulaPartStyleCollection>
+  </templates:FormulaPartStyleCollection>
 
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleOperatorEquality" DefaultStyles="{StaticResource PartStyleDefault}">
-    <partControls:FormulaPartStyleCollection.TextStyle>
+  <templates:FormulaPartStyleCollection x:Key="PartStyleOperatorEquality" DefaultStyles="{StaticResource PartStyleDefault}">
+    <templates:FormulaPartStyleCollection.TextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -194,9 +194,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
+    </templates:FormulaPartStyleCollection.TextStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    <templates:FormulaPartStyleCollection.SelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -204,9 +204,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    </templates:FormulaPartStyleCollection.SelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -214,35 +214,35 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    </templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
+    <templates:FormulaPartStyleCollection.ContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="Transparent"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
+    </templates:FormulaPartStyleCollection.ContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.SelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    </templates:FormulaPartStyleCollection.SelectedContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
+    </templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+  </templates:FormulaPartStyleCollection>
 
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleOperatorLogic" DefaultStyles="{StaticResource PartStyleDefault}">
-    <partControls:FormulaPartStyleCollection.TextStyle>
+  <templates:FormulaPartStyleCollection x:Key="PartStyleOperatorLogic" DefaultStyles="{StaticResource PartStyleDefault}">
+    <templates:FormulaPartStyleCollection.TextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -250,9 +250,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
+    </templates:FormulaPartStyleCollection.TextStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    <templates:FormulaPartStyleCollection.SelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -260,9 +260,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    </templates:FormulaPartStyleCollection.SelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -270,35 +270,35 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    </templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
+    <templates:FormulaPartStyleCollection.ContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="Transparent"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
+    </templates:FormulaPartStyleCollection.ContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.SelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    </templates:FormulaPartStyleCollection.SelectedContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
+    </templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+  </templates:FormulaPartStyleCollection>
 
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleVariable" DefaultStyles="{StaticResource PartStyleDefault}">
-    <partControls:FormulaPartStyleCollection.TextStyle>
+  <templates:FormulaPartStyleCollection x:Key="PartStyleVariable" DefaultStyles="{StaticResource PartStyleDefault}">
+    <templates:FormulaPartStyleCollection.TextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -306,9 +306,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
+    </templates:FormulaPartStyleCollection.TextStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    <templates:FormulaPartStyleCollection.SelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -316,9 +316,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    </templates:FormulaPartStyleCollection.SelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -326,35 +326,35 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    </templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
+    <templates:FormulaPartStyleCollection.ContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="Transparent"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
+    </templates:FormulaPartStyleCollection.ContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.SelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    </templates:FormulaPartStyleCollection.SelectedContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
+    </templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+  </templates:FormulaPartStyleCollection>
 
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleSensorVariable" DefaultStyles="{StaticResource PartStyleDefault}">
-    <partControls:FormulaPartStyleCollection.TextStyle>
+  <templates:FormulaPartStyleCollection x:Key="PartStyleSensorVariable" DefaultStyles="{StaticResource PartStyleDefault}">
+    <templates:FormulaPartStyleCollection.TextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -362,9 +362,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.TextStyle>
+    </templates:FormulaPartStyleCollection.TextStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    <templates:FormulaPartStyleCollection.SelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -372,9 +372,9 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedTextStyle>
+    </templates:FormulaPartStyleCollection.SelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
       <Style TargetType="TextBlock">
         <Style.Setters>
           <Setter Property="FontFamily" Value="Courier New"/>
@@ -382,332 +382,325 @@
           <Setter Property="FontWeight" Value="Bold"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedTextStyle>
+    </templates:FormulaPartStyleCollection.ParentSelectedTextStyle>
 
-    <partControls:FormulaPartStyleCollection.ContainerStyle>
+    <templates:FormulaPartStyleCollection.ContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="Transparent"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ContainerStyle>
+    </templates:FormulaPartStyleCollection.ContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.SelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.SelectedContainerStyle>
+    </templates:FormulaPartStyleCollection.SelectedContainerStyle>
 
-    <partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+    <templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
       <Style TargetType="Grid">
         <Style.Setters>
           <Setter Property="Background" Value="{StaticResource FormulaSelectedBackground}"/>
         </Style.Setters>
       </Style>
-    </partControls:FormulaPartStyleCollection.ParentSelectedContainerStyle>
-  </partControls:FormulaPartStyleCollection>
+    </templates:FormulaPartStyleCollection.ParentSelectedContainerStyle>
+  </templates:FormulaPartStyleCollection>
 
-  <partControls:FormulaPartStyleCollection x:Key="PartStyleObjectVariable" DefaultStyles="{StaticResource PartStyleDefault}">
+  <templates:FormulaPartStyleCollection x:Key="PartStyleObjectVariable" DefaultStyles="{StaticResource PartStyleDefault}">
 
-  </partControls:FormulaPartStyleCollection>
+  </templates:FormulaPartStyleCollection>
 
 
-  <f:UiFormulaTokenDefinitionCollection x:Key="FormulaTokenDefinitions">
-    <!-- ### default template ##########################################################################################################-->
-    <!--<f:UiFormulaTokenDefinition TokenType="{x:Null}">
-            <f:UiFormulaTokenDefinition.Template>
-                <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Unknown" Style="{StaticResource PartStyleMath}"/>
-            </f:UiFormulaTokenDefinition.Template>
-        </f:UiFormulaTokenDefinition>-->
-
+  <templates:UiFormulaTokenDefinitionCollection x:Key="FormulaTokenDefinitions">
     <!-- ### Constants ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeNumber">
-      <f:UiFormulaTokenDefinition.Template>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeNumber">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlNumber Style="{StaticResource PartStyleNumber}" />
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaToken:FormulaTokenDecimalSeparator">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaToken:FormulaTokenDecimalSeparator">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlDecimalSeparator Style="{StaticResource PartStyleNumber}" />
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
 
 
     <!-- ### Functions ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="formulaToken:FormulaTokenParameterSeparator">
-      <f:UiFormulaTokenDefinition.Template>
+    <templates:UiFormulaTokenDefinition TokenType="formulaToken:FormulaTokenParameterSeparator">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ParameterSeperator" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeRandom">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeRandom">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionRandom" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeModulo">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeModulo">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionMod" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMax">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMax">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionMax" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMin">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMin">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionMin" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSin">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSin">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionSin" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeCos">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeCos">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionCos" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeTan">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeTan">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionTan" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLn">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLn">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionLn" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLog">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLog">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionLog" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSqrt">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSqrt">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionSqrt" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAbs">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAbs">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionAbs" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeRound">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeRound">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionRound" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeArcsin">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeArcsin">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionArcSin" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeArccos">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeArccos">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionArcCos" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeArctan">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeArctan">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionArcTan" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeExp">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeExp">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionExp" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePi">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePi">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="FunctionPi" Style="{StaticResource PartStyleMath}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeEquals">
-      <f:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlPlaceholderLeft/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeNotEquals">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeEquals">
+      <templates:UiFormulaTokenDefinition.Template>
+        <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeNotEquals">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicNotEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLess">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLess">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicSmaller" Style="{StaticResource PartStyleOperatorEquality}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLessEqual">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLessEqual">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicSmallerEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeGreater">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeGreater">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicGreater" Style="{StaticResource PartStyleOperatorEquality}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeGreaterEqual">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeGreaterEqual">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicGreaterEqual" Style="{StaticResource PartStyleOperatorEquality}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeOr">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeOr">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicOr" Style="{StaticResource PartStyleOperatorLogic}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
 
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAnd">
-      <f:UiFormulaTokenDefinition.Template>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAnd">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicAnd" Style="{StaticResource PartStyleOperatorLogic}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
 
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeTrue">
-      <f:UiFormulaTokenDefinition.Template>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeTrue">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicTrue" Style="{StaticResource PartStyleOperatorLogic}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeFalse">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeFalse">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicFalse" Style="{StaticResource PartStyleOperatorLogic}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeNot">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeNot">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LogicNot" Style="{StaticResource PartStyleOperatorLogic}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAdd">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAdd">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Plus" Style="{StaticResource PartStyleOperatorLogic}"/>
         <!-- TODO: Change Style Resource-->
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSubtract">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSubtract">
+      <templates:UiFormulaTokenDefinition.Template>
         <!-- TODO: Change Style Resource-->
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Minus" Style="{StaticResource PartStyleOperatorLogic}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMultiply">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeMultiply">
+      <templates:UiFormulaTokenDefinition.Template>
         <!-- TODO: Change Style Resource-->
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Mult" Style="{StaticResource PartStyleOperatorLogic}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeDivide">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeDivide">
+      <templates:UiFormulaTokenDefinition.Template>
         <!-- TODO: Change Style Resource-->
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Divide" Style="{StaticResource PartStyleOperatorLogic}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePower">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePower">
+      <templates:UiFormulaTokenDefinition.Template>
         <!-- TODO: Change Style Resource-->
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="Power" Style="{StaticResource PartStyleOperatorLogic}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
 
     <!-- ### Brackets ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="formulaToken:FormulaTokenParenthesis">
-      <f:UiFormulaTokenDefinition.Template>
+    <templates:UiFormulaTokenDefinition TokenType="formulaToken:FormulaTokenParenthesis">
+      <templates:UiFormulaTokenDefinition.Template>
         <!-- TODO: Change Style Resource-->
         <partControls:FormulaPartControlParenthesis Style="{StaticResource PartStyleOperatorLogic}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
 
     <!-- ### Properties ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeBrightness">
-      <f:UiFormulaTokenDefinition.Template>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeBrightness">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="BRIGHTNESS" Style="{StaticResource PartStyleObjectVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLayer">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLayer">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LAYER" Style="{StaticResource PartStyleObjectVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeTransparency">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeTransparency">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="TRANSPARENCY" Style="{StaticResource PartStyleObjectVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePositionX">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePositionX">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_X" Style="{StaticResource PartStyleObjectVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePositionY">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodePositionY">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="OBJECT_Y" Style="{StaticResource PartStyleObjectVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeRotation">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeRotation">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="DIRECTION" Style="{StaticResource PartStyleObjectVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSize">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeSize">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="SIZE" Style="{StaticResource PartStyleObjectVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
 
     <!-- ### Sensors ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAccelerationX">
-      <f:UiFormulaTokenDefinition.Template>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAccelerationX">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ACCELERATION_X" Style="{StaticResource PartStyleSensorVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAccelerationY">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAccelerationY">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ACCELERATION_Y" Style="{StaticResource PartStyleSensorVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAccelerationZ">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeAccelerationZ">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="ACCELERATION_Z" Style="{StaticResource PartStyleSensorVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeCompass">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeCompass">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="COMPASSDIRECTION" Style="{StaticResource PartStyleSensorVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeInclinationX">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeInclinationX">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="INCLINATION_X" Style="{StaticResource PartStyleSensorVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeInclinationY">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeInclinationY">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="INCLINATION_Y" Style="{StaticResource PartStyleSensorVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLoudness">
-      <f:UiFormulaTokenDefinition.Template>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLoudness">
+      <templates:UiFormulaTokenDefinition.Template>
         <partControls:FormulaPartControlStaticLocalizedText LocalizedResourceName="LOUDNESS" Style="{StaticResource PartStyleSensorVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
 
 
     <!-- ### Variables ##########################################################################################################-->
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLocalVariable">
-      <f:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlUserVariable Style="{StaticResource PartStyleVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-    <f:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeGlobalVariable">
-      <f:UiFormulaTokenDefinition.Template>
-        <partControls:FormulaPartControlUserVariable Style="{StaticResource PartStyleVariable}"/>
-      </f:UiFormulaTokenDefinition.Template>
-    </f:UiFormulaTokenDefinition>
-  </f:UiFormulaTokenDefinitionCollection>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeLocalVariable">
+      <templates:UiFormulaTokenDefinition.Template>
+        <partControls:FormulaPartControlVariable Style="{StaticResource PartStyleVariable}"/>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+    <templates:UiFormulaTokenDefinition TokenType="formulaTree:FormulaNodeGlobalVariable">
+      <templates:UiFormulaTokenDefinition.Template>
+        <partControls:FormulaPartControlVariable Style="{StaticResource PartStyleVariable}"/>
+      </templates:UiFormulaTokenDefinition.Template>
+    </templates:UiFormulaTokenDefinition>
+  </templates:UiFormulaTokenDefinitionCollection>
 
 </ResourceDictionary>

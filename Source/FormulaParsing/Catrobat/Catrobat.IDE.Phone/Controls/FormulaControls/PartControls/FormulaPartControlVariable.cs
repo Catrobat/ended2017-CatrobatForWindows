@@ -1,37 +1,39 @@
 ﻿using System;
 using System.Windows.Controls;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {
-    [Obsolete]
-    public class FormulaPartControlText : FormulaPartControl
+    public class FormulaPartControlVariable : FormulaPartControl
     {
         protected override Grid CreateControls(double fontSize, bool isParentSelected, bool isSelected, bool isError)
         {
-            var grid = new Grid {DataContext = this};
+            var grid = new Grid { DataContext = this };
             grid.Children.Add(new TextBlock
             {
-                Text = GetText(),
+                Text = GetText() ?? "?",
                 FontSize = fontSize
             });
-
             return grid;
         }
 
-        public string GetText()
+        private string GetText()
         {
-            return string.IsNullOrEmpty(UiFormula.FormulaValue) ? " " : UiFormula.FormulaValue;
+            var node = Token as FormulaNodeVariable;
+            return node == null ? null : node.Variable.Name;
         }
 
         public override int GetCharacterWidth()
         {
-            return GetText().Length;
+            var text = GetText();
+            return text == null ? 1 : text.Length;
         }
 
         public override FormulaPartControl Copy()
         {
-            return new FormulaPartControlText
+            return new FormulaPartControlVariable
             {
+                Token = Token, 
                 Style = Style
             };
         }

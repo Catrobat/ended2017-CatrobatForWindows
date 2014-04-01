@@ -1,14 +1,13 @@
-﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Catrobat.IDE.Core.Resources.Localization;
+﻿using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel.Editor.Formula;
+using Catrobat.IDE.Phone.Controls.FormulaControls;
+using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
-using Catrobat.IDE.Phone.Controls.FormulaControls;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Formula
 {
@@ -112,13 +111,14 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             // XAML bindings are not removed themselves! hopefully this changes in Windows Phone 8.1
             FormulaViewer.ClearValue(FormulaViewer3.TokensProperty);
             FormulaViewer.ClearValue(FormulaViewer3.CaretIndexProperty);
-            FormulaViewer.ClearValue(FormulaKeyboard.CanDeleteProperty);
-            FormulaViewer.ClearValue(FormulaKeyboard.CanUndoProperty);
-            FormulaViewer.ClearValue(FormulaKeyboard.CanRedoProperty);
-            FormulaViewer.ClearValue(FormulaKeyboard.CanLeftProperty);
-            FormulaViewer.ClearValue(FormulaKeyboard.CanRightProperty);
-            FormulaViewer.ClearValue(FormulaKeyboard.CanEvaluateProperty);
-            FormulaViewer.ClearValue(FormulaKeyboard.ParsingErrorProperty);
+            FormulaViewer.ClearValue(FormulaViewer3.SelectionLengthProperty);
+            FormulaKeyboard.ClearValue(FormulaKeyboard.CanDeleteProperty);
+            FormulaKeyboard.ClearValue(FormulaKeyboard.CanUndoProperty);
+            FormulaKeyboard.ClearValue(FormulaKeyboard.CanRedoProperty);
+            FormulaKeyboard.ClearValue(FormulaKeyboard.CanLeftProperty);
+            FormulaKeyboard.ClearValue(FormulaKeyboard.CanRightProperty);
+            FormulaKeyboard.ClearValue(FormulaKeyboard.CanEvaluateProperty);
+            FormulaKeyboard.ClearValue(FormulaKeyboard.ParsingErrorProperty);
 
             _viewModel.ErrorOccurred -= ErrorOccurred;
             _viewModel.Evaluated -= Evaluated;

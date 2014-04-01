@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Phone.Controls.FormulaControls.Templates;
+using System;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
-using Catrobat.IDE.Phone.Controls.FormulaControls.Formulas;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {
@@ -12,9 +11,10 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
     {
         public FormulaPartStyleCollection Style { get; set; }
 
-        public Grid CreateUiControls(double fontSize, bool isSelected, bool isParentSelected, bool isError)
+        public Grid CreateUiControls(double fontSize, bool isSelected, bool isParentSelected, bool isError, Action<Grid, GestureEventArgs> onTap, Action<Grid, GestureEventArgs> onDoubleTap)
         {
             var control = CreateControls(fontSize, isSelected, isParentSelected, isError);
+            if (control == null) return null;
 
             if (isError)
             {
@@ -26,10 +26,8 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
                 control.Children.Add(errorGrid);
             }
 
-            if (control != null)
-            {
-                control.Tap += (sender, gestureEventArgs) => Viewer.SetCaretIndex((Grid) sender);
-            }
+            control.Tap += (sender, e) => onTap((Grid) sender, e);
+            control.DoubleTap += (sender, e) => onDoubleTap((Grid) sender, e);
 
             return control;
         }
@@ -39,11 +37,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
         public abstract int GetCharacterWidth();
 
         public IFormulaToken Token { get; set; }
-
-        public FormulaViewer3 Viewer { get; set; }
-
-        [Obsolete]
-        public UiFormula UiFormula { get; set; }
 
         [Obsolete]
         public abstract FormulaPartControl Copy();
