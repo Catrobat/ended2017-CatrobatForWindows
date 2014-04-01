@@ -120,8 +120,8 @@
                 <shell:ApplicationBarMenuItem Text="Über"/>
             </shell:ApplicationBar.MenuItems>
 
-            <shell:ApplicationBarIconButton x:Name="left"  IconUri="/Assets/AppBar/icon_menu_rotate_left.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
-            <shell:ApplicationBarIconButton x:Name="right"  IconUri="/Assets/AppBar/icon_menu_rotate_right.png" IsEnabled="True" Text="Thickness" Click="BtnThickness_OnClick" />
+            <shell:ApplicationBarIconButton x:Name="BtnLeft"  IconUri="/Assets/AppBar/icon_menu_rotate_left.png" IsEnabled="True" Text="Thickness" Click="BtnLeft_OnClick" />
+            <shell:ApplicationBarIconButton x:Name="BtnRight"  IconUri="/Assets/AppBar/icon_menu_rotate_right.png" IsEnabled="True" Text="Thickness" Click="BtnRight_OnClick" />
             <shell:ApplicationBarIconButton x:Name="BtnTools6" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
 
         </shell:ApplicationBar>

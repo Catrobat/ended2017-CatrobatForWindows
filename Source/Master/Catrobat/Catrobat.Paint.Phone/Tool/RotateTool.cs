@@ -26,7 +26,7 @@ namespace Catrobat.Paint.Phone.Tool
 
         public override void HandleUp(object arg)
         {
-            
+            ;
         }
 
         public override void Draw(object o)

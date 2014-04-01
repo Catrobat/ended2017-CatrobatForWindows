@@ -8,6 +8,7 @@ using Windows.Phone.Media.Capture;
 using Catrobat.Paint.Phone.Command;
 using Catrobat.Paint.Phone.Tool;
 using Catrobat.Paint.Phone.Ui;
+using Coding4Fun.Toolkit.Controls;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Media;
@@ -111,8 +112,7 @@ namespace Catrobat.Paint.Phone.View
             {
                 child.Visibility = SliderThicknessGrid.Visibility;
             }
-
-             
+        
         }
 
         private void ApplicationBarMenuItem_OnClick(object sender, EventArgs e)
@@ -275,6 +275,7 @@ namespace Catrobat.Paint.Phone.View
 
         }
 
+
         // TODO defining this handler solves issue that first tap after toolpicker page was open is not recognized by 
         // PaintingAreaCanvas Eventhandler... 
         // PaintingAreaCheckeredGrid handles now and this seems to be resolved.
@@ -282,5 +283,25 @@ namespace Catrobat.Paint.Phone.View
 //        {
 //            //System.Diagnostics.Debug.WriteLine("--PaintingAreaContentPanelGrid--");
 //        }
+        private void BtnLeft_OnClick(object sender, EventArgs e)
+        {
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rotate)
+            {
+                PocketPaintApplication.GetInstance().ToolCurrent.HandleUp(null);
+            }
+            else
+                return;
+           
+        }
+
+        private void BtnRight_OnClick(object sender, EventArgs e)
+        {
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Rotate)
+            {
+                PocketPaintApplication.GetInstance().ToolCurrent.HandleDown(null);
+            }
+            else
+                return;
+        }
     }
 }
