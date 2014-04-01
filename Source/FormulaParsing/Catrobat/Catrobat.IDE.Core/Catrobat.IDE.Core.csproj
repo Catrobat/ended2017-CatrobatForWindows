@@ -203,6 +203,7 @@
     <Compile Include="FormulaEditor\IFormulaTokenizer.cs" />
     <Compile Include="FormulaEditor\FormulaTree\IFormulaTree.cs" />
     <Compile Include="FormulaEditor\FormulaTree\UnaryFormulaTree.cs" />
+    <Compile Include="FormulaEditor\ParsingError.cs" />
     <Compile Include="FormulaEditor\SemanticErrorException.cs" />
     <Compile Include="CatrobatObjects\Formulas\FormulaTree\FormulaTreeFactory.cs" />
     <Compile Include="FormulaEditor\FormulaSerializer.cs" />

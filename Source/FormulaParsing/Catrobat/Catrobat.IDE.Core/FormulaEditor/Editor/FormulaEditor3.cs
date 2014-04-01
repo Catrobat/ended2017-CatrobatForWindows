@@ -50,8 +50,8 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             InterpretTokens();
         }
 
-        private string _parsingError;
-        public string ParsingError
+        private ParsingError _parsingError;
+        public ParsingError ParsingError
         {
             get { return _parsingError; }
         }
@@ -70,6 +70,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 RaisePropertyChanged(() => CaretIndex);
                 RaisePropertyChanged(() => CanLeft);
                 RaisePropertyChanged(() => CanRight);
+                RaisePropertyChanged(() => CanDelete);
             }
         }
 

@@ -53,7 +53,9 @@
         CanRedo="{Binding CanRedo}"
         CanLeft="{Binding CanLeft}"
         CanRight="{Binding CanRight}"
-        CanEvaluate="{Binding CanEvaluate}">
+        CanEvaluate="{Binding CanEvaluate}"
+        HasError="{Binding HasError}" 
+        ParsingError="{Binding ParsingError.Message}">
         <formulaControls:FormulaKeyboard.RenderTransform>
           <TranslateTransform X="0" Y="500" x:Name="Translation" />
         </formulaControls:FormulaKeyboard.RenderTransform>

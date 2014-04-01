@@ -9,7 +9,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
 {
     internal class FormulaInterpreter
     {
-        public IFormulaTree Interpret(IEnumerable<IFormulaToken> tokens, out string parsingError)
+        public IFormulaTree Interpret(IEnumerable<IFormulaToken> tokens, out ParsingError parsingError)
         {
             if (tokens == null)
             {
@@ -29,7 +29,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
         #region Syntax
 
         /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
-        private bool InterpretSyntax(List<IFormulaToken> tokens, out string parsingError)
+        private bool InterpretSyntax(List<IFormulaToken> tokens, out ParsingError parsingError)
         {
             return InterpretBrackets(tokens, out parsingError) &&
                    InterpretNumbers(tokens, out parsingError) &&
@@ -42,7 +42,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
         /// </summary>
         /// <remarks>Running time O(n). </remarks>
         /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
-        private bool InterpretMinus(List<IFormulaToken> tokens, out string parsingError)
+        private bool InterpretMinus(List<IFormulaToken> tokens, out ParsingError parsingError)
         {
             IFormulaToken previousToken = null;
             for (var index = 0; index < tokens.Count; index++)
@@ -67,7 +67,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
         /// </summary>
         /// <remarks>Running time O(n). </remarks>
         /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
-        private bool InterpretNumbers(List<IFormulaToken> tokens, out string parsingError)
+        private bool InterpretNumbers(List<IFormulaToken> tokens, out ParsingError parsingError)
         {
             for (var index = 0; index < tokens.Count; index++)
             {
@@ -85,8 +85,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                 double value;
                 if (!double.TryParse(valueString, out value))
                 {
-                    // TODO: Add translated error like Overflow error
-                    parsingError = "An error occured. ";
+                    parsingError = new ParsingError("Overflow error. ");
                     return false;
                 }
                 tokens.RemoveRange(index, numberTokens.Count);
@@ -101,7 +100,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
         /// </summary>
         /// <remarks>Running time O(n). </remarks>
         /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
-        private bool InterpretBrackets(List<IFormulaToken> tokens, out string parsingError)
+        private bool InterpretBrackets(List<IFormulaToken> tokens, out ParsingError parsingError)
         {
             var openingIndices = new Stack<int>();
             for (var index = 0; index < tokens.Count; index++)
@@ -118,8 +117,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                 {
                     if (openingIndices.Count == 0)
                     {
-                        // TODO: add parsing error like 'Remove unmatched closing bracket. '
-                        parsingError = "An error occured. ";
+                        parsingError = new ParsingError("Remove unmatched closing bracket. ");
                         return false;
                     }
                     var openingIndex = openingIndices.Pop();
@@ -132,8 +130,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
             }
             if (openingIndices.Count != 0)
             {
-                // TODO: add parsing error like 'Remove unmatched opening bracket. '
-                parsingError = "An error occured. ";
+                parsingError = new ParsingError("Remove unmatched opening bracket. ");
                 return false;
             }
             parsingError = null;
@@ -145,7 +142,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
         /// <remarks>Running time O(n). </remarks>
         /// </summary>
         /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
-        private bool InterpretChildren(List<IFormulaToken> tokens, out string parsingError)
+        private bool InterpretChildren(List<IFormulaToken> tokens, out ParsingError parsingError)
         {
             // number of elements waiting for children
             var pending = 0;
@@ -203,13 +200,12 @@ namespace Catrobat.IDE.Core.FormulaEditor
                             if (parenthesesToken != null)
                             {
                                 // TODO: add translated error like 'Remove parameters'
-                                parsingError = "An error occured. ";
+                                parsingError = new ParsingError("An error occured. ");
                                 return false;
                             }
                             if (index - 2 < 0)
                             {
-                                // TODO: add translated error like 'Missing left value'
-                                parsingError = "An error occured. ";
+                                parsingError = new ParsingError("Missing left value of infix operator. ");
                                 return false;
                             }
 
@@ -227,7 +223,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                             if (parenthesesToken != null)
                             {
                                 // TODO: add translated error like 'Remove parameters'
-                                parsingError = "An error occured. ";
+                                parsingError = new ParsingError("An error occured. ");
                                 return false;
                             }
                             if (prefixOperator is FormulaNodeNegativeSign && element is FormulaNodeNumber)
@@ -249,14 +245,12 @@ namespace Catrobat.IDE.Core.FormulaEditor
                         {
                             if (parenthesesToken == null)
                             {
-                                // TODO: add translated error like 'Missing parameters'
-                                parsingError = "An error occured. ";
+                                parsingError = new ParsingError("Too few parameters. ");
                                 return false;
                             }
                             if (parenthesesToken.Children.Count != 2)
                             {
-                                // TODO: add translated error like 'Too many parameters'
-                                parsingError = "An error occured. ";
+                                parsingError = new ParsingError("Too many parameters. ");
                                 return false;
                             }
                             binaryFunction.FirstChild = (IFormulaTree) parenthesesToken.Children[0];
@@ -269,8 +263,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                         {
                             if (parenthesesToken != null)
                             {
-                                // TODO: add translated error like 'Too many parameters'
-                                parsingError = "An error occured. ";
+                                parsingError = new ParsingError("Too many parameters. ");
                                 return false;
                             }
                             if (parenthesesNode != null)
@@ -300,7 +293,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
             if (tokens.OfType<FormulaTokenParentheses>().Any())
             {
                 // TODO: add translated error like 'Missing binary function name'
-                parsingError = "An error occured. ";
+                parsingError = new ParsingError("An error occured. ");
                 return false;
             }
 
@@ -313,7 +306,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
         /// Interprets the children of <see cref="FormulaTokenParentheses"/> and when possible converts to <see cref="FormulaNodeParentheses"/>. 
         /// </summary>
         /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
-        private bool InterpretParentheses(List<IFormulaToken> tokens, int index, FormulaTokenParentheses parentheses, out string parsingError)
+        private bool InterpretParentheses(List<IFormulaToken> tokens, int index, FormulaTokenParentheses parentheses, out ParsingError parsingError)
         {
             if (!(InterpretSyntax(parentheses.Children, out parsingError) &&
                   InterpretParameters(parentheses.Children, out parsingError))) return false;
@@ -321,8 +314,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
             switch (parentheses.Children.Count)
             {
                 case 0:
-                    // TODO: add translated error like 'Missing argument'
-                    parsingError = "An error occured. ";
+                    parsingError = new ParsingError("Missing parentheses' content. ");
                     return false;
                 case 1:
                     tokens[index] = FormulaTreeFactory.CreateParenthesesNode(
@@ -336,7 +328,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
         /// Ensures all tokens are separated by exactly one <see cref="FormulaTokenParameterSeparator"/> and removes them. 
         /// </summary>
         /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
-        private bool InterpretParameters(List<IFormulaToken> tokens, out string parsingError)
+        private bool InterpretParameters(List<IFormulaToken> tokens, out ParsingError parsingError)
         {
             var expectSeparator = false;
             for (var index = 0; index < tokens.Count; index++)
@@ -346,20 +338,17 @@ namespace Catrobat.IDE.Core.FormulaEditor
                 {
                     if (index == 0)
                     {
-                        // TODO: add translated error like 'Delete leading parameter separator'
-                        parsingError = "An error occured. ";
+                        parsingError = new ParsingError("Delete leading parameter separator. ");
                         return false;  
                     }
                     if (index == tokens.Count - 1)
                     {
-                        // TODO: add translated error like 'Delete trailing separator'
-                        parsingError = "An error occured. ";
+                        parsingError = new ParsingError("Delete trailing parameter separator. ");
                         return false;
                     }
                     if (!expectSeparator)
                     {
-                        // TODO: add translated error like 'Delete duplicate parameter separator'
-                        parsingError = "An error occured. ";
+                        parsingError = new ParsingError("Delete duplicate parameter separator. ");
                         return false;
                     }
                     tokens.RemoveAt(index);
@@ -368,8 +357,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                 {
                     if (expectSeparator)
                     {
-                        // TODO: add translated error like 'Missing parameter separator'
-                        parsingError = "An error occured. ";
+                        parsingError = new ParsingError("Missing parameter separator. ");
                         return false;
                     }
                 }
@@ -384,32 +372,30 @@ namespace Catrobat.IDE.Core.FormulaEditor
         #region Semantic
 
         /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
-        private bool InterpretSemantic(List<IFormulaToken> tokens, out IFormulaTree formula, out string parsingError)
+        private bool InterpretSemantic(List<IFormulaToken> tokens, out IFormulaTree formula, out ParsingError parsingError)
         {
-            if (tokens.OfType<FormulaTokenParameterSeparator>().Any())
-            {
-                // TODO: add translated error like 'Remove superfluous parameter separator'
-                parsingError = "An error occured. ";
-                formula = null;
-                return false;
-            }
 
-            var nodes = tokens.Cast<IFormulaTree>().ToList();
 
-            switch (nodes.Count)
+            switch (tokens.Count)
             {
                 case 0:
                     // TODO: add translated error like 'Type something'
-                    parsingError = "An error occured. ";
+                    parsingError = new ParsingError("An error occured. ");
                     formula = null;
                     return false;
                 case 1:
-                    formula = nodes.Single();
+                    if (tokens.OfType<FormulaTokenParameterSeparator>().Any())
+                    {
+                        parsingError = new ParsingError("Remove parameter separator. ");
+                        formula = null;
+                        return false;
+                    }
+                    formula = tokens.Cast<IFormulaTree>().Single();
                     break;
                 default:
                     // TODO: add translated error like 'Missing value between operators'
                     // TODO: add translated error like 'Missing operator between values'
-                    parsingError = "An error occured. ";
+                    parsingError = new ParsingError("An error occured. ");
                     formula = null;
                     return false;
             }
@@ -422,7 +408,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
             catch (Exception ex)
             {
                 // TODO: translate
-                parsingError = ex.Message;
+                parsingError = new ParsingError(ex.Message);
                 return false;
             }
             parsingError = null;

@@ -98,6 +98,28 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             set { SetValue(CanEvaluateProperty, value); }
         }
 
+        public static readonly DependencyProperty HasErrorProperty = DependencyProperty.Register(
+            name: "HasError",
+            propertyType: typeof(bool),
+            ownerType: typeof(FormulaKeyboard),
+            typeMetadata: new PropertyMetadata(false));
+        public bool HasError
+        {
+            get { return (bool)GetValue(HasErrorProperty); }
+            set { SetValue(HasErrorProperty, value); }
+        }
+
+        public static readonly DependencyProperty ParsingErrorProperty = DependencyProperty.Register(
+            name: "ParsingError",
+            propertyType: typeof(string),
+            ownerType: typeof(FormulaKeyboard),
+            typeMetadata: new PropertyMetadata(null));
+        public string ParsingError
+        {
+            get { return (string)GetValue(ParsingErrorProperty); }
+            set { SetValue(ParsingErrorProperty, value); }
+        }
+
         #endregion
 
         #region Events
@@ -195,6 +217,15 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         private void ButtonEvaluate_OnClick(object sender, RoutedEventArgs e)
         {
             RaiseEvaluatePressed();
+        }
+
+        private void ButtonError_OnClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: pretty up toast notification
+            ServiceLocator.NotifictionService.ShowToastNotification(
+                title: "", 
+                message: ParsingError,  
+                timeTillHide:ToastNotificationTime.Medeum);
         }
 
         private void ShowMain()

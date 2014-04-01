@@ -98,7 +98,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             set { _editor.SelectionLength = value; }
         }
 
-        public string ParsingError
+        public ParsingError ParsingError
         {
             get { return _editor.ParsingError; }
         }
