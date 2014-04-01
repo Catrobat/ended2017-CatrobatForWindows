@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 using System.Windows;
@@ -26,24 +27,26 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
 
         #region Transition animations
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (e.NavigationMode == NavigationMode.New)
+            var animation = FormulaKeyboard.Resources["EnterTransition"] as Storyboard;
+            if (animation != null)
             {
-                var animation = FormulaKeyboard.Resources["EnterTransition"] as Storyboard;
-                if (animation != null) animation.Begin();
+                await Task.Delay(TimeSpan.FromSeconds(0.1));
+                animation.Begin();
             }
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            if (e.NavigationMode == NavigationMode.Back)
+            var animation = FormulaKeyboard.Resources["ExitTransition"] as Storyboard;
+            if (animation != null)
             {
-                var animation = FormulaKeyboard.Resources["ExitTransition"] as Storyboard;
-                if (animation != null) animation.Begin();
+                animation.Begin();
+                await Task.Delay(TimeSpan.FromSeconds(0.3));
             }
-            base.OnNavigatedFrom(e);
+            base.OnNavigatingFrom(e);
         }
 
         #endregion
