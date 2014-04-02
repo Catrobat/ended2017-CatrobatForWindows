@@ -3,7 +3,7 @@
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
 {
     [DebuggerDisplay(",")]
-    public partial class FormulaTokenParameterSeparator : IFormulaToken
+    public partial class FormulaTokenParameterSeparator : BaseFormulaToken
     {
     }
 }

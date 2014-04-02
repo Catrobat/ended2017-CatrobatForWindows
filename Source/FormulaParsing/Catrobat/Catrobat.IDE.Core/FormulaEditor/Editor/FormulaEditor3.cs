@@ -149,7 +149,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                     CaretIndex--;
                     return true;
                 case FormulaEditorKey.Right:
-                    if (CaretIndex >= Tokens.Count) return false;
+                    if (!(Tokens != null && CaretIndex < Tokens.Count)) return false;
                     CaretIndex++;
                     return true;
                 case FormulaEditorKey.Delete:
@@ -331,9 +331,9 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         private bool InsertToken(IFormulaToken token)
         {
+            if (Tokens == null) Tokens = new ObservableCollection<IFormulaToken>();
             var index = CaretIndex;
             if (!(0 <= index && index <= Tokens.Count)) return false;
-            if (Tokens == null) Tokens = new ObservableCollection<IFormulaToken>();
             if (0 <= index && index < Tokens.Count)
             {
                 Tokens.ReplaceRange(index, SelectionLength, token);
@@ -342,6 +342,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             {
                 Tokens.Insert(index, token);
             }
+            CaretIndex = index + 1;
             InterpretTokens();
             RaisePropertyChanged(() => CanLeft);
             RaisePropertyChanged(() => CanDelete);
@@ -354,6 +355,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             var index = CaretIndex - 1;
             if (!(0 <= index && index < Tokens.Count)) return false;
             Tokens.RemoveAt(index);
+            CaretIndex = index;
             InterpretTokens();
             RaisePropertyChanged(() => CanLeft);
             RaisePropertyChanged(() => CanDelete);

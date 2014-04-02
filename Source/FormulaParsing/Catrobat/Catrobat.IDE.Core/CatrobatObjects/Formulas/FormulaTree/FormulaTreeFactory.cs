@@ -163,6 +163,15 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
             };
         }
 
+        public static FormulaNodeModulo CreateModuloNode(IFormulaTree leftChild, IFormulaTree rightChild)
+        {
+            return new FormulaNodeModulo
+            {
+                LeftChild = leftChild,
+                RightChild = rightChild
+            };
+        }
+
         #endregion
 
         #region Functions
@@ -263,15 +272,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
             return new FormulaNodeAbs
             {
                 Child = child
-            };
-        }
-
-        public static FormulaNodeModulo CreateModuloNode(IFormulaTree leftChild, IFormulaTree rightChild)
-        {
-            return new FormulaNodeModulo
-            {
-                LeftChild = leftChild,
-                RightChild = rightChild
             };
         }
 

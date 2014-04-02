@@ -383,13 +383,19 @@ namespace Catrobat.IDE.Core.FormulaEditor
                     formula = null;
                     return false;
                 case 1:
+                    if (tokens.OfType<FormulaTokenDecimalSeparator>().Any())
+                    {
+                        parsingError = new ParsingError("Remove decimal separator. ");
+                        formula = null;
+                        return false;
+                    }
                     if (tokens.OfType<FormulaTokenParameterSeparator>().Any())
                     {
                         parsingError = new ParsingError("Remove parameter separator. ");
                         formula = null;
                         return false;
                     }
-                    formula = tokens.Cast<IFormulaTree>().Single();
+                    formula = (IFormulaTree) tokens.Single();
                     break;
                 default:
                     // TODO: add translated error like 'Missing value between operators'
