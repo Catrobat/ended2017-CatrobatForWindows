@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Phone.Services
 {
-    /// <see cref="Microphone"/>
+    /// <see cref="Microphone2"/>
     struct MicrophoneReading
     {
         public byte[] Raw;

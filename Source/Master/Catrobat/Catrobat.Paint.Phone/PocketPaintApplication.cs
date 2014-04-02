@@ -26,6 +26,8 @@ namespace Catrobat.Paint.Phone
 
         public Grid PaintingAreaLayoutRoot { get; set; }
 
+        public Grid PaintingAreaContentPanelGrid { get; set; }
+
         public WriteableBitmap Bitmap { get; private set; }
 
         private readonly PaintData _paintData = new PaintData();

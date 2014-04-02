@@ -291,7 +291,8 @@
         </Grid.ColumnDefinitions>
         <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Sensors" Style="{StaticResource StyleButtonAditional}" Click="ButtonSensors_OnClick"/>
         <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Variables" Style="{StaticResource StyleButtonAditional}" Click="ButtonVariable_OnClick"/>
-        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Evaluate" Style="{StaticResource StyleButtonEvaluate}" Click ="ButtonEvaluate_OnClick" Background="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1.NativeBrush}" IsEnabled="{Binding CanEvaluate, ElementName=FormulaKeyboardXaml}" />
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="!" Style="{StaticResource StyleButtonEvaluate}" Click ="ButtonError_OnClick" Background="DarkRed" Visibility="{Binding HasError, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Evaluate" Style="{StaticResource StyleButtonEvaluate}" Click ="ButtonEvaluate_OnClick" Background="{Binding Source={StaticResource ThemeChooser}, Path=SelectedTheme.AccentColor1.NativeBrush}" Visibility="{Binding CanEvaluate, ElementName=FormulaKeyboardXaml, Converter={StaticResource BoolVisibilityConverter}}" />
         <Button Grid.Row="3" Grid.Column="0" Content="&lt;" DataContext="{StaticResource FormulaEditorKeyLeft}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanLeft, ElementName=FormulaKeyboardXaml}" />
         <Button Grid.Row="3" Grid.Column="1" Content="&gt;" DataContext="{StaticResource FormulaEditorKeyRight}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick" IsEnabled="{Binding CanRight, ElementName=FormulaKeyboardXaml}" />
       </Grid>

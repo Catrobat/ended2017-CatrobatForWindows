@@ -16,26 +16,24 @@ namespace Catrobat.IDE.Core.FormulaEditor
             _tokenizer = new FormulaTokenizer(localVariables, globalVariables);
         }
 
-        public bool Parse(string input, out IFormulaTree formula, out IEnumerable<string> parsingErrors)
+        public bool Parse(string input, out IFormulaTree formula, out ParsingError parsingError)
         {
             // TODO: how to translate parsing errors?
 
             formula = null;
-            parsingErrors = Enumerable.Empty<string>();
+            parsingError = null;
 
             if (string.IsNullOrWhiteSpace(input)) return true;
 
             IEnumerable<IFormulaToken> tokens;
             IEnumerable<string> parsingErrors1;
-            if (!_tokenizer.Tokenize(input, out tokens, out parsingErrors1)) return false;
-            string parsingError2;
-            formula = _interpreter.Interpret(tokens, out parsingError2);
-            if (parsingError2 != null)
+            if (!_tokenizer.Tokenize(input, out tokens, out parsingErrors1))
             {
-                parsingErrors = Enumerable.Repeat(parsingError2, 1);
+                parsingError = new ParsingError(parsingErrors1.FirstOrDefault());
                 return false;
             }
-            return true;
+            formula = _interpreter.Interpret(tokens, out parsingError);
+            return parsingError == null;
         }
 
     }

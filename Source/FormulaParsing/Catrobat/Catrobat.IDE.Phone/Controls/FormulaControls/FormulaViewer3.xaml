@@ -13,10 +13,10 @@
     x:Name="FormulaViewer3Xaml">
 
   <Grid x:Name="LayoutRoot" VerticalAlignment="Stretch">
-    <ScrollViewer Name="ScrollViewerContent" VerticalAlignment="Stretch">
+    <ScrollViewer Name="ScrollViewerContent" VerticalAlignment="Stretch" Tap="Panel_OnTap">
         <toolkit:WrapPanel Name="MultilinePanelContent"/>
     </ScrollViewer>
-    <StackPanel Name="SingleLinePanelContent" Orientation="Horizontal"/>
+    <StackPanel Name="SingleLinePanelContent" Orientation="Horizontal" Tap="Panel_OnTap"/>
     <TextBlock 
       Text="{Binding Resources.Editor_TypeSomething, Source={StaticResource LocalizedStrings}}"
       Visibility="{Binding IsTokensEmpty, Converter={StaticResource BoolVisibilityConverter}, ElementName=FormulaViewer3Xaml}"

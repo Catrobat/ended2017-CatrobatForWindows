@@ -1,6 +1,6 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
-using Catrobat.IDE.Phone.Controls.FormulaControls.Formulas;
 using Catrobat.IDE.Phone.Controls.FormulaControls.PartControls;
+using Catrobat.IDE.Phone.Controls.FormulaControls.Templates;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -90,7 +91,11 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         public int CaretIndex
         {
             get { return (int)GetValue(CaretIndexProperty); }
-            set { SetValue(CaretIndexProperty, value); }
+            set
+            { 
+                SetValue(CaretIndexProperty, value);
+                SelectionLength = 0;
+            }
         }
 
         private void CaretIndexChanged(DependencyPropertyChangedEventArgs e)
@@ -100,17 +105,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             // CoerceValueCallback in Windows Phone not available (FrameworkPropertyMetadata is not available)
  
             MoveCaret((int)e.OldValue, (int)e.NewValue);
-        }
-
-        public static readonly DependencyProperty SelectionStartProperty = DependencyProperty.Register(
-            name: "SelectionStart",
-            propertyType: typeof(int),
-            ownerType: typeof(FormulaViewer3),
-            typeMetadata: new PropertyMetadata(-1, (d, e) => ((FormulaViewer3)d).SetSelection()));
-        public int SelectionStart
-        {
-            get { return (int)GetValue(SelectionStartProperty); }
-            set { SetValue(SelectionStartProperty, value); }
         }
 
         public static readonly DependencyProperty SelectionLengthProperty = DependencyProperty.Register(
@@ -276,7 +270,37 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private Grid CreateUiControl(FormulaPartControl template)
         {
-            return template.CreateUiControls(ActualFontSize, false, false, false);
+            return template.CreateUiControls(
+                fontSize: ActualFontSize, 
+                isSelected: false, 
+                isParentSelected: false, 
+                isError: false,
+                onTap: (sender, e) => Control_OnTap(sender, e, template), 
+                onDoubleTap: (sender, e) => Control_OnDoubleTap(sender, e, template));
+        }
+
+        private void Control_OnTap(Grid sender, GestureEventArgs e, FormulaPartControl template)
+        {
+            var index = Children.IndexOf(sender);
+            if (index == -1) return;
+            if (CaretIndex < index) index--;
+            CaretIndex = index;
+            e.Handled = true;
+        }
+
+        private void Control_OnDoubleTap(Grid sender, GestureEventArgs e, FormulaPartControl template)
+        {
+            var index = Children.IndexOf(sender);
+            if (index == -1) return;
+            if (CaretIndex < index) index--;
+            // TODO: select whole part
+            CaretIndex = index;
+            SelectionLength = 1;
+        }
+
+        private void Panel_OnTap(object sender, GestureEventArgs e)
+        {
+            CaretIndex = Tokens.Count;
         }
 
         private void MoveCaret(int oldIndex, int newIndex)
@@ -349,7 +373,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         private void UpdateStyles()
         {
             // TODO: set selection
-            SetSelection(SelectionStart, SelectionLength);
+            SetSelection(CaretIndex, SelectionLength);
 
             // TODO: set error
         }
@@ -417,7 +441,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private void SetSelection()
         {
-            SetSelection(SelectionStart, SelectionLength);
+            SetSelection(CaretIndex, SelectionLength);
         }
 
         private void SetSelection(int startIndex, int count)

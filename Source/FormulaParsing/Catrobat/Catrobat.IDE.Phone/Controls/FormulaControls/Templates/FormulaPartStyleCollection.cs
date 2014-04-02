@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
+namespace Catrobat.IDE.Phone.Controls.FormulaControls.Templates
 {
     public class FormulaPartStyleCollection
     {

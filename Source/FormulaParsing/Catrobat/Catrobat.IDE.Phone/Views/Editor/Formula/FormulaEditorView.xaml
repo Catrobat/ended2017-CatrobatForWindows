@@ -29,20 +29,21 @@
     </Grid.RowDefinitions>
     <ScrollViewer Grid.Row="0">
       <formulaControls:FormulaViewer3
-          Name="FormulaViewer"
-          CharactersInOneLineNormalFontSize="15"
-          LinesNormalFontSize="3"
-          NormalFontSize="50"
-          MinFontSize="26"
-          MaxFontSize="70"
-          IsAutoFontSize="True"
-          IsEditEnabled="True"
-          IsMultiline="True"
-          Tokens="{Binding Tokens, Mode=OneWay}" 
-          CaretIndex="{Binding CaretIndex, Mode=TwoWay}" 
-          VerticalAlignment="Top"
-          HorizontalAlignment="Stretch"
-          Height="216" />
+        Name="FormulaViewer"
+        CharactersInOneLineNormalFontSize="15"
+        LinesNormalFontSize="3"
+        NormalFontSize="50"
+        MinFontSize="26"
+        MaxFontSize="70"
+        IsAutoFontSize="True"
+        IsEditEnabled="True"
+        IsMultiline="True"
+        Tokens="{Binding Tokens, Mode=OneWay}" 
+        CaretIndex="{Binding CaretIndex, Mode=TwoWay}" 
+        SelectionLength="{Binding SelectionLength, Mode=TwoWay}"
+        VerticalAlignment="Top"
+        HorizontalAlignment="Stretch"
+        Height="216" />
     </ScrollViewer>
     <Grid Grid.Row="1">
       <formulaControls:FormulaKeyboard
@@ -53,7 +54,9 @@
         CanRedo="{Binding CanRedo}"
         CanLeft="{Binding CanLeft}"
         CanRight="{Binding CanRight}"
-        CanEvaluate="{Binding CanEvaluate}">
+        CanEvaluate="{Binding CanEvaluate}"
+        HasError="{Binding HasError}" 
+        ParsingError="{Binding ParsingError.Message}">
         <formulaControls:FormulaKeyboard.RenderTransform>
           <TranslateTransform X="0" Y="500" x:Name="Translation" />
         </formulaControls:FormulaKeyboard.RenderTransform>
@@ -71,18 +74,17 @@
           </Storyboard>
           <Storyboard x:Name="ExitTransition">
             <DoubleAnimation
-        Storyboard.TargetName="Translation"
-        Storyboard.TargetProperty="Y"
-        To="500"
-        Duration="0:0:0.3" >
+              Storyboard.TargetName="Translation"
+              Storyboard.TargetProperty="Y"
+              To="500"
+              Duration="0:0:0.3" >
               <DoubleAnimation.EasingFunction>
                 <QuadraticEase EasingMode="EaseIn"/>
               </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
           </Storyboard>
-
         </formulaControls:FormulaKeyboard.Resources>
-        </formulaControls:FormulaKeyboard>
+      </formulaControls:FormulaKeyboard>
 
       <Grid Name="GridError" Background="Tomato" Opacity="0.0" Height="10" VerticalAlignment="Top">
         <Grid.Resources>

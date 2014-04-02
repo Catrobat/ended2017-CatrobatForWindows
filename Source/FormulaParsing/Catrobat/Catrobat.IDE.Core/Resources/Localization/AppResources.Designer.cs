@@ -1250,6 +1250,15 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Press &quot;back&quot; again to dismiss your changes?.
+        /// </summary>
+        public static string Editor_ReallyDismissFormula {
+            get {
+                return ResourceManager.GetString("Editor_ReallyDismissFormula", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recorded.
         /// </summary>
         public static string Editor_Recorded {
