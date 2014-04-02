@@ -93,6 +93,7 @@
     <Compile Include="Command\CommandBase.cs" />
     <Compile Include="Command\CommandManager.cs" />
     <Compile Include="Command\EraserCommand.cs" />
+    <Compile Include="Command\LineCommand.cs" />
     <Compile Include="Command\UndoRedoActionbarManager.cs" />
     <Compile Include="Controls\AppBar\ApplicationBarTop.xaml.cs">
       <DependentUpon>ApplicationBarTop.xaml</DependentUpon>
@@ -107,8 +108,10 @@
     <Compile Include="Resources\LocalizedStrings.cs" />
     <Compile Include="Tool\BrushTool.cs" />
     <Compile Include="Tool\EraserTool.cs" />
+    <Compile Include="Tool\LineTool.cs" />
     <Compile Include="Tool\MoveZoomTool.cs" />
     <Compile Include="Tool\PipetteTool.cs" />
+    <Compile Include="Tool\RotateTool.cs" />
     <Compile Include="Tool\ToolBase.cs" />
     <Compile Include="Tool\ToolType.cs" />
     <Compile Include="Ui\Spinner.cs" />
