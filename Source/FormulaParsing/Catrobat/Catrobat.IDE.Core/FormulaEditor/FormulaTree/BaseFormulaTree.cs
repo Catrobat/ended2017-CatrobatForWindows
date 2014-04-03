@@ -48,6 +48,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         #region Implements IFormulaInterpreter
 
+        public abstract void ClearChildren();
+
         public abstract bool IsNumber();
 
         #endregion

@@ -8,6 +8,11 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         #region Implements IFormulaInterpreter
 
+        public override void ClearChildren()
+        {
+            Child = null;
+        }
+
         protected bool IsNumberN1N()
         {
             // TODO: meaningful (translated?) error message

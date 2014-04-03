@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.FormulaEditor.Editor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 {
@@ -116,18 +117,95 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         public void TestDelete()
         {
             var editor = new FormulaEditor3();
-            Assert.IsFalse(editor.HandleKey(FormulaEditorKey.Delete, null));
-            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Exp, null));
-            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Delete, null));
-            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Delete, null));
-            Assert.IsFalse(editor.HandleKey(FormulaEditorKey.Delete, null));
-            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Exp, null));
+            Assert.IsFalse(editor.HandleKey(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Exp));
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Delete));
+            Assert.IsFalse(editor.HandleKey(FormulaEditorKey.Delete));
+            Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Exp));
         }
 
         [TestMethod]
         public void TestUndoRedo()
         {
-            Assert.Inconclusive();
+            var editor = new FormulaEditor3();
+            Assert.IsFalse(editor.CanUndo);
+            Assert.IsFalse(editor.CanRedo);
+
+            editor.HandleKey(FormulaEditorKey.D2);
+            Assert.IsTrue(editor.CanUndo);
+            Assert.IsFalse(editor.CanRedo);
+
+            editor.HandleKey(FormulaEditorKey.Left);
+            Assert.IsTrue(editor.CanUndo);
+            Assert.IsFalse(editor.CanRedo);
+            editor.SelectionLength = 1;
+
+            editor.HandleKey(FormulaEditorKey.D4);
+            Assert.IsTrue(editor.CanUndo);
+            Assert.IsFalse(editor.CanRedo);
+
+            editor.HandleKey(FormulaEditorKey.Undo);
+            EnumerableAssert.AreEqual(new IFormulaToken[] { FormulaTokenFactory.CreateNumberToken(2) }, editor.Tokens);
+            Assert.AreEqual(0, editor.CaretIndex);
+            Assert.AreEqual(1, editor.SelectionLength);
+            Assert.IsTrue(editor.CanUndo);
+            Assert.IsTrue(editor.CanRedo);
+
+            editor.HandleKey(FormulaEditorKey.Undo);
+            Assert.IsNull(editor.Tokens);
+            Assert.AreEqual(0, editor.CaretIndex);
+            Assert.AreEqual(0, editor.SelectionLength);
+            Assert.IsFalse(editor.CanUndo);
+            Assert.IsTrue(editor.CanRedo);
+
+            editor.HandleKey(FormulaEditorKey.Redo);
+            EnumerableAssert.AreEqual(new IFormulaToken[] { FormulaTokenFactory.CreateNumberToken(2) }, editor.Tokens);
+            Assert.AreEqual(0, editor.CaretIndex);
+            Assert.AreEqual(1, editor.SelectionLength);
+            Assert.IsTrue(editor.CanUndo);
+            Assert.IsTrue(editor.CanRedo);
+
+            editor.HandleKey(FormulaEditorKey.Redo);
+            EnumerableAssert.AreEqual(new IFormulaToken[] { FormulaTokenFactory.CreateNumberToken(4) }, editor.Tokens);
+            Assert.AreEqual(1, editor.CaretIndex);
+            Assert.AreEqual(0, editor.SelectionLength);
+            Assert.IsTrue(editor.CanUndo);
+            Assert.IsFalse(editor.CanRedo);
+        }
+
+        [TestMethod]
+        public void TestBindings()
+        {
+            var editor = new FormulaEditor3
+            {
+                Formula = FormulaTreeFactory.CreateNumberNode(4)
+            };
+            EnumerableAssert.AreEqual(new IFormulaToken[] { FormulaTokenFactory.CreateNumberToken(4) }, editor.Tokens);
+            editor.HandleKey(FormulaEditorKey.D2);
+            Assert.AreEqual(FormulaTreeFactory.CreateNumberNode(42), editor.Formula);
+            Assert.IsNull(editor.ParsingError);
+            editor.HandleKey(FormulaEditorKey.Plus);
+            Assert.AreEqual(FormulaTreeFactory.CreateNumberNode(42), editor.Formula);
+            Assert.IsNotNull(editor.ParsingError);
+            editor.HandleKey(FormulaEditorKey.D1);
+            Assert.AreEqual(FormulaTreeFactory.CreateAddNode(FormulaTreeFactory.CreateNumberNode(42), FormulaTreeFactory.CreateNumberNode(1)), editor.Formula);
+            Assert.IsNull(editor.ParsingError);
+        }
+
+        [TestMethod]
+        public void TestSelection()
+        {
+            var editor = new FormulaEditor3();
+            editor.HandleKey(FormulaEditorKey.D4);
+            editor.CaretIndex = 0;
+            editor.SelectionLength = 1;
+            editor.HandleKey(FormulaEditorKey.D2);
+            EnumerableAssert.AreEqual(new IFormulaToken[] { FormulaTokenFactory.CreateNumberToken(2) }, editor.Tokens);
+            Assert.AreEqual(0, editor.SelectionLength);
+            editor.HandleKey(FormulaEditorKey.D4);
+            EnumerableAssert.AreEqual(new IFormulaToken[] { FormulaTokenFactory.CreateNumberToken(2), FormulaTokenFactory.CreateNumberToken(4) }, editor.Tokens);
+            Assert.AreEqual(0, editor.SelectionLength);
         }
 
         [TestMethod]
@@ -143,7 +221,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 for (var i = 1; i <= pressedKeys; i++)
                 {
                     var randomKey = keys.ElementAt(random.Next(0, keys.Count));
-                    editor.HandleKey(randomKey, null);
+                    editor.HandleKey(randomKey);
                 }
             }
         }
@@ -153,7 +231,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private void TestKey(FormulaEditorKey key, IFormulaToken expectedToken)
         {
             var editor = new FormulaEditor3();
-            Assert.IsTrue(editor.HandleKey(key, null));
+            Assert.IsTrue(editor.HandleKey(key));
             Assert.AreEqual(expectedToken, editor.Tokens.Single());
         }
 
