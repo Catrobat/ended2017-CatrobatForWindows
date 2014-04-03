@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Globalization;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.FormulaEditor;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Catrobat.IDE.Core.ExtensionMethods;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 {
@@ -11,8 +13,6 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
     {
         private readonly FormulaSerializer _serializer = new FormulaSerializer();
         private readonly Random _random = new Random();
-        private readonly IFormulaTree _nodeZero = FormulaTreeFactory.CreateNumberNode(0);
-        private readonly IFormulaTree _nodeOne = FormulaTreeFactory.CreateNumberNode(1);
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNull()
@@ -20,345 +20,199 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.AreEqual(string.Empty, _serializer.Serialize(null));
         }
         
-        #region numbers
-
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestNumber()
+        public void TestConstants()
         {
-            foreach (var value in new[] { 0, _random.NextDouble(), -_random.NextDouble() })
-            {
-                Assert.AreEqual(
-                    expected: value.ToString(CultureInfo.CurrentCulture),
-                    actual: _serializer.Serialize(FormulaTreeFactory.CreateNumberNode(value)));
-            }
+            TestSerializer(
+                expectedValue: x => x.ToString(CultureInfo.CurrentCulture), 
+                formulaCreator: FormulaTreeFactory.CreateNumberNode);
+
+            TestSerializer("pi", FormulaTreeFactory.CreatePiNode);
+
+            TestSerializer("True", FormulaTreeFactory.CreateTrueNode);
+            TestSerializer("False", FormulaTreeFactory.CreateFalseNode);
+
+            Assert.Inconclusive("Translations");
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestPi()
+        public void TestOperators()
         {
-            Assert.AreEqual(
-                expected: "pi",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreatePiNode()));
-        }
+            TestSerializerN("{0}+{1}", FormulaTreeFactory.CreateAddNode);
+            TestSerializerN("{0}-{1}", FormulaTreeFactory.CreateSubtractNode);
+            TestSerializerN("-{0}", FormulaTreeFactory.CreateNegativeSignNode);
+            TestSerializerN("{0}*{1}", FormulaTreeFactory.CreateMultiplyNode);
+            TestSerializerN("{0}/{1}", FormulaTreeFactory.CreateDivideNode);
+            TestSerializerN("{0}^{1}", FormulaTreeFactory.CreatePowerNode);
 
-        #endregion
+            TestSerializer("{0}={1}", FormulaTreeFactory.CreateEqualsNode);
+            TestSerializer("{0}≠{1}", FormulaTreeFactory.CreateNotEqualsNode);
 
-        #region arithmetic
+            TestSerializerN("{0}<{1}", FormulaTreeFactory.CreateLessNode);
+            TestSerializerN("{0}≤{1}", FormulaTreeFactory.CreateLessEqualNode);
+            TestSerializerN("{0}>{1}", FormulaTreeFactory.CreateGreaterNode);
+            TestSerializerN("{0}≥{1}", FormulaTreeFactory.CreateGreaterEqualNode);
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestAdd()
-        {
-            Assert.AreEqual(
-                expected: "0+1",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateAddNode(_nodeZero, _nodeOne)));
+            TestSerializer("{0} And {1}", FormulaTreeFactory.CreateAndNode);
+            TestSerializer("{0} Or {1}", FormulaTreeFactory.CreateOrNode);
 
-            Assert.Inconclusive("Loose or tight?");
-            Assert.Inconclusive("TODO: what to do in the case +5 ? new class FormulaNodeSign?");
-        }
+            TestSerializer("Not {0}", FormulaTreeFactory.CreateNotNode);
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestSubtract()
-        {
-            Assert.AreEqual(
-                expected: "0-1",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateSubtractNode(_nodeZero, _nodeOne)));
+            TestSerializerN("{0} mod {1}", FormulaTreeFactory.CreateModuloNode);
 
-            Assert.Inconclusive("Loose or tight?");
-            Assert.Inconclusive("TODO: what to do in the case -5 ? new class FormulaNodeSign?");
+            Assert.Inconclusive("Translations");
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestMultiply()
+        public void TestFunctions()
         {
-            Assert.AreEqual(
-                expected: "0*1",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateMultiplyNode(_nodeZero, _nodeOne)));
-            Assert.Inconclusive("Loose or tight?");
+            TestSerializerN("exp({0})", FormulaTreeFactory.CreateExpNode);
+            TestSerializerN("log({0})", FormulaTreeFactory.CreateLogNode);
+            TestSerializerN("ln({0})", FormulaTreeFactory.CreateLnNode);
+
+            TestSerializerN("min({0}, {1})", FormulaTreeFactory.CreateMinNode);
+            TestSerializerN("max({0}, {1})", FormulaTreeFactory.CreateMaxNode);
+
+            // TODO
+            TestSerializerN("sin({0})", FormulaTreeFactory.CreateSinNode);
+            TestSerializerN("cos({0})", FormulaTreeFactory.CreateCosNode);
+            TestSerializerN("tan({0})", FormulaTreeFactory.CreateTanNode);
+            TestSerializerN("arcsin({0})", FormulaTreeFactory.CreateArcsinNode);
+            TestSerializerN("arccos({0})", FormulaTreeFactory.CreateArccosNode);
+            TestSerializerN("arctan({0})", FormulaTreeFactory.CreateArctanNode);
+
+            TestSerializerN("sqrt({0})", FormulaTreeFactory.CreateSqrtNode);
+
+            TestSerializerN("abs({0})", FormulaTreeFactory.CreateAbsNode);
+            TestSerializerN("round({0})", FormulaTreeFactory.CreateRoundNode);
+            TestSerializer("random({0}, {1})", FormulaTreeFactory.CreateRandomNode);
+
+            Assert.Inconclusive("Translations");
         }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestDivide()
-        {
-            Assert.AreEqual(
-                expected: "0/1",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateDivideNode(_nodeZero, _nodeOne)));
-            Assert.Inconclusive("Loose or tight?");
-        }
-
-        #endregion
-
-        #region relational operators
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestEquals()
-        {
-            Assert.Inconclusive();
-            Assert.Inconclusive("Loose or tight?");
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestNotEquals()
-        {
-            Assert.Inconclusive();
-            Assert.Inconclusive("Loose or tight?");
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestLess()
-        {
-            Assert.AreEqual(
-                expected: "0<1",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateLessNode(_nodeZero, _nodeOne)));
-            Assert.Inconclusive("Loose or tight?");
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestLessEqual()
-        {
-            Assert.AreEqual(
-                expected: "0<=1",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateLessEqualNode(_nodeZero, _nodeOne)));
-            Assert.Inconclusive("Loose or tight?");
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestGreater()
-        {
-            Assert.AreEqual(
-                expected: "0>1",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateGreaterNode(_nodeZero, _nodeOne)));
-            Assert.Inconclusive("Loose or tight?");
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestGreaterEqual()
-        {
-            Assert.AreEqual(
-                expected: "0>=1",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateGreaterEqualNode(_nodeZero, _nodeOne)));
-            Assert.Inconclusive("Loose or tight?");
-        }
-
-        #endregion
-
-        #region logic
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestTrue()
-        {
-            Assert.Inconclusive();
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestFalse()
-        {
-            Assert.Inconclusive();
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestAnd()
-        {
-            Assert.Inconclusive();
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestOr()
-        {
-            Assert.Inconclusive();
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestNot()
-        {
-            Assert.Inconclusive();
-        }
-
-        #endregion
-
-        #region min/max
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestMin()
-        {
-            Assert.AreEqual(
-                expected: "min(0, 1)",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateMinNode(_nodeZero, _nodeOne)));
-            Assert.Inconclusive("Loose or tight?");
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestMax()
-        {
-            Assert.AreEqual(
-                expected: "max(0, 1)",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateMaxNode(_nodeZero, _nodeOne)));
-            Assert.Inconclusive("Loose or tight?");
-        }
-
-        #endregion
-
-        #region exponential function and logarithms
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestExp()
-        {
-            Assert.AreEqual(
-                expected: "exp(0)",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateExpNode(_nodeZero)));
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestLog()
-        {
-            Assert.AreEqual(
-                expected: "log(0)",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateLogNode(_nodeZero)));
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestLn()
-        {
-            Assert.AreEqual(
-                expected: "ln(0)",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateLnNode(_nodeZero)));
-        }
-
-        #endregion
-
-        #region trigonometric functions
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestSin()
-        {
-            Assert.AreEqual(
-                expected: "sin(0)",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateSinNode(_nodeZero)));
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestCos()
-        {
-            Assert.AreEqual(
-                expected: "cos(0)",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateCosNode(_nodeZero)));
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestTan()
-        {
-            Assert.AreEqual(
-                expected: "tan(0)",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateTanNode(_nodeZero)));
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestArcsin()
-        {
-            Assert.AreEqual(
-                expected: "arcsin(0)",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateArcsinNode(_nodeZero)));
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestArccos()
-        {
-            Assert.AreEqual(
-                expected: "arccos(0)",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateArccosNode(_nodeZero)));
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestArcTan()
-        {
-            Assert.AreEqual(
-                expected: "arctan(0)",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateArctanNode(_nodeZero)));
-        }
-
-
-        #endregion
-
-        #region miscellaneous functions
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestSqrt()
-        {
-            Assert.AreEqual(
-                expected: "sqrt(0)",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateSqrtNode(_nodeZero)));
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestAbs()
-        {
-            Assert.AreEqual(
-                expected: "abs(0)",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateAbsNode(_nodeZero)));
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestMod()
-        {
-            Assert.AreEqual(
-                expected: "0 mod 1",
-                actual: _serializer.Serialize(FormulaTreeFactory.CreateModuloNode(_nodeZero, _nodeOne)));
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestRound()
-        {
-            Assert.Inconclusive();
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestRandom()
-        {
-            Assert.Inconclusive();
-        }
-
-        #endregion
-
-        #region sensors
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSensors()
         {
-            Assert.Inconclusive();
+            TestSerializer("AccelerationX", FormulaTreeFactory.CreateAccelerationXNode);
+            TestSerializer("AccelerationY", FormulaTreeFactory.CreateAccelerationYNode);
+            TestSerializer("AccelerationZ", FormulaTreeFactory.CreateAccelerationZNode);
+            TestSerializer("Compass", FormulaTreeFactory.CreateCompassNode);
+            TestSerializer("InclinationX", FormulaTreeFactory.CreateInclinationXNode);
+            TestSerializer("InclinationY", FormulaTreeFactory.CreateInclinationYNode);
+            TestSerializer("Loudness", FormulaTreeFactory.CreateLoudnessNode);
+
+            Assert.Inconclusive("Translations");
         }
-
-        #endregion
-
-        #region object variables
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestObjectVariables()
+        public void TestProperties()
         {
-            Assert.Inconclusive();
+            TestSerializer("Brightness", FormulaTreeFactory.CreateBrightnessNode);
+            TestSerializer("Layer", FormulaTreeFactory.CreateLayerNode);
+            TestSerializer("Transparency", FormulaTreeFactory.CreateTransparencyNode);
+            TestSerializer("PositionX", FormulaTreeFactory.CreatePositionXNode);
+            TestSerializer("PositionY", FormulaTreeFactory.CreatePositionYNode);
+            TestSerializer("Rotation", FormulaTreeFactory.CreateRotationNode);
+            TestSerializer("Size", FormulaTreeFactory.CreateSizeNode);
+
+            Assert.Inconclusive("Translations");
         }
-
-        #endregion
-
-        #region user variables
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestUserVariable()
+        public void TestVariables()
         {
-            Assert.Inconclusive();
+            TestSerializer("{0}", FormulaTreeFactory.CreateLocalVariableNode);
+            TestSerializer("{0}", FormulaTreeFactory.CreateGlobalVariableNode);
         }
-
-        #endregion
-
-        #region brackets
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestParentheses()
         {
-            Assert.AreEqual(
-                 expected: "(0)",
-                 actual: _serializer.Serialize(FormulaTreeFactory.CreateParenthesesNode(_nodeZero)));
+            TestSerializer("({0})", FormulaTreeFactory.CreateParenthesesNode);
+        }
+
+        #region Helpers
+
+        private void TestSerializer(string expectedValue, IFormulaTree formula)
+        {
+            Assert.AreEqual(expectedValue, _serializer.Serialize(formula));
+        }
+
+        private void TestSerializer(string expectedValue, Func<IFormulaTree> formulaCreator)
+        {
+            TestSerializer(expectedValue, formulaCreator.Invoke());
+        }
+
+        private void TestSerializer(Func<double, string> expectedValue, Func<double, ConstantFormulaTree> formulaCreator)
+        {
+            foreach (var x in new[] { _random.Next(), _random.NextDouble(), 0, _random.NextDouble(-1, 0) })
+            {
+                TestSerializer(expectedValue.Invoke(x), formulaCreator.Invoke(x));
+            }
+        }
+
+        private void TestSerializerN(string format, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        {
+            var x = _random.Next();
+            TestSerializer(string.Format(format, x), formulaCreator.Invoke(FormulaTreeFactory.CreateNumberNode(x)));
+            TestSerializer(string.Format(format, " "), formulaCreator.Invoke(null));
+        }
+
+        private void TestSerializerL(string format, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        {
+            var x = _random.NextBool();
+            TestSerializer(string.Format(format, x), formulaCreator.Invoke(FormulaTreeFactory.CreateTruthValueNode(x)));
+            TestSerializer(string.Format(format, " "), formulaCreator.Invoke(null));
+        }
+
+        private void TestSerializer(string format, Func<IFormulaTree, UnaryFormulaTree> formulaCreator)
+        {
+            TestSerializerL(format, formulaCreator);
+            TestSerializerN(format, formulaCreator);
+        }
+
+        private void TestSerializer(string format, Func<UserVariable, ConstantFormulaTree> formulaCreator)
+        {
+            var x = new UserVariable
+            {
+                Name = "TestVariable"
+            };
+            var y = new UserVariable();
+            TestSerializer(string.Format(format, x.Name), formulaCreator.Invoke(x));
+            TestSerializer(string.Format(format, y.Name), formulaCreator.Invoke(y));
+            TestSerializer(string.Format(format, " "), formulaCreator.Invoke(null));
+        }
+
+        private void TestSerializerN(string format, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        {
+            var x = _random.Next();
+            var y = _random.Next();
+            TestSerializer(
+                expectedValue: string.Format(format, x, y), 
+                formula: formulaCreator.Invoke(FormulaTreeFactory.CreateNumberNode(x), FormulaTreeFactory.CreateNumberNode(y)));
+            TestSerializer(
+                expectedValue: string.Format(format, " ", " "),
+                formula: formulaCreator.Invoke(null, null));
+        }
+
+        private void TestSerializerL(string format, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        {
+            var x = _random.NextBool();
+            var y = _random.NextBool();
+            TestSerializer(
+                expectedValue: string.Format(format, x, y), 
+                formula: formulaCreator.Invoke(FormulaTreeFactory.CreateTruthValueNode(x), FormulaTreeFactory.CreateTruthValueNode(y)));
+            TestSerializer(
+                expectedValue: string.Format(format, " ", " "),
+                formula: formulaCreator.Invoke(null, null));
+        }
+
+        private void TestSerializer(string format, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        {
+            TestSerializerN(format, formulaCreator);
+            TestSerializerL(format, formulaCreator);
         }
 
         #endregion
-
     }
 }

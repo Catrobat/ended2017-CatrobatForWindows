@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
+using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.FormulaEditor;
 
 // ReSharper disable once CheckNamespace
@@ -123,6 +124,11 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
             }
         }
 
+        public override bool IsNumber()
+        {
+            return IsNumberT2T();
+        }
+
         public override double EvaluateNumber()
         {
             var from = FirstChild.EvaluateNumber();
@@ -130,10 +136,17 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
             return from + Random.NextDouble()*(to - from);
         }
 
+        public override bool EvaluateLogic()
+        {
+            var from = FirstChild.EvaluateLogic();
+            var to = SecondChild.EvaluateLogic();
+            return from == to ? from : Random.NextBool();
+        }
+
         protected override void SerializeToken(StringBuilder sb)
         {
             // TODO: translate
-            sb.Append("rand");
+            sb.Append("random");
         }
 
         protected override XmlFormulaTree ToXmlFormula(XmlFormulaTree firstChild, XmlFormulaTree secondChild)

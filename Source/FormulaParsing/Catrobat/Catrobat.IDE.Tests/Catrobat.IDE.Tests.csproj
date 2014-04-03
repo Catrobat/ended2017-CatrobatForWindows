@@ -159,6 +159,7 @@
     <Compile Include="Tests\IDE\Converter\SecondStringMillisecondConverterTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaEvaluationTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaInterpreterTests.cs" />
+    <Compile Include="Tests\IDE\Formula\FormulaTokenizerTests.cs" />
     <Compile Include="Tests\IDE\Formula\XmlFormulaTreeConverterTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaSerializerTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaParserTests.cs" />

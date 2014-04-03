@@ -98,6 +98,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                     (x == y && x == result && result == y), 
                     // ReSharper restore CompareOfFloatsByEqualityOperator
                 formulaCreator: FormulaTreeFactory.CreateRandomNode);
+            TestEvaluator(
+                condition: (bool x, bool y, bool result) => result == x || result == y, 
+                formulaCreator: FormulaTreeFactory.CreateRandomNode);
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
@@ -148,12 +151,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestVariables()
         {
-            var testVariable = new UserVariable
-            {
-                Name = "TestVariable"
-            };
-            TestEvaluator(0, FormulaTreeFactory.CreateLocalVariableNode(testVariable));
-            TestEvaluator(0, FormulaTreeFactory.CreateGlobalVariableNode(testVariable));
+            TestEvaluator(0, FormulaTreeFactory.CreateLocalVariableNode);
+            TestEvaluator(0, FormulaTreeFactory.CreateGlobalVariableNode);
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
@@ -184,9 +183,23 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(condition(formula.EvaluateNumber()));
         }
 
+        private void TestEvaluator(Func<bool, bool> condition, IFormulaTree formula)
+        {
+            Assert.IsTrue(condition(formula.EvaluateLogic()));
+        }
+
         private void TestEvaluator(Func<double, bool> condition, Func<ConstantFormulaTree> formulaCreator)
         {
             TestEvaluator(condition, formulaCreator.Invoke());
+        }
+
+        private void TestEvaluator(double expectedValue, Func<UserVariable, ConstantFormulaTree> formulaCreator)
+        {
+            var x = new UserVariable
+            {
+                Name = "TestVariable"
+            };
+            TestEvaluator(expectedValue, formulaCreator.Invoke(x));
         }
 
         private void TestEvaluator(Func<double, double, double, bool> condition, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
@@ -197,7 +210,24 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 {
                     TestEvaluator(
                         condition: result => condition(x, y, result),
-                        formula: formulaCreator.Invoke(FormulaTreeFactory.CreateNumberNode(x), FormulaTreeFactory.CreateNumberNode(y)));
+                        formula: formulaCreator.Invoke(
+                            arg1: FormulaTreeFactory.CreateNumberNode(x),
+                            arg2: FormulaTreeFactory.CreateNumberNode(y)));
+                }
+            }
+        }
+
+        private void TestEvaluator(Func<bool, bool, bool, bool> condition, Func<IFormulaTree, IFormulaTree, BinaryFormulaTree> formulaCreator)
+        {
+            foreach (var x in new[] { true, false })
+            {
+                foreach (var y in new[] { true, false })
+                {
+                    TestEvaluator(
+                        condition: result => condition(x, y, result),
+                        formula: formulaCreator.Invoke(
+                            arg1: FormulaTreeFactory.CreateTruthValueNode(x),
+                            arg2: FormulaTreeFactory.CreateTruthValueNode(y)));
                 }
             }
         }
@@ -217,8 +247,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             foreach (var x in new[] { _random.NextDouble(), 0, _random.NextDouble(-1, 0) })
             {
                 TestEvaluator(
-                expectedValue: expectedValue(x),
-                formula: formulaCreator.Invoke(x));
+                    expectedValue: expectedValue(x),
+                    formula: formulaCreator.Invoke(x));
             }
         }
 
@@ -248,9 +278,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 {
                     TestEvaluator(
                         expectedValue: expectedValue(x, y),
-                        formula:
-                            formulaCreator.Invoke(FormulaTreeFactory.CreateNumberNode(x),
-                                FormulaTreeFactory.CreateNumberNode(y)));
+                        formula: formulaCreator.Invoke(
+                            arg1: FormulaTreeFactory.CreateNumberNode(x), 
+                            arg2: FormulaTreeFactory.CreateNumberNode(y)));
                 }
             }
         }
@@ -263,9 +293,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 {
                     TestEvaluator(
                         expectedValue: expectedValue(x, y),
-                        formula:
-                            formulaCreator.Invoke(FormulaTreeFactory.CreateNumberNode(x),
-                                FormulaTreeFactory.CreateNumberNode(y)));
+                        formula: formulaCreator.Invoke(FormulaTreeFactory.CreateNumberNode(x), FormulaTreeFactory.CreateNumberNode(y)));
                 }
             }
         }
@@ -276,7 +304,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var y = _random.NextBool();
             TestEvaluator(
                 expectedValue: expectedValue(x, y),
-                formula: formulaCreator.Invoke(FormulaTreeFactory.CreateTruthValueNode(x), FormulaTreeFactory.CreateTruthValueNode(y)));
+                formula: formulaCreator.Invoke(
+                    arg1: FormulaTreeFactory.CreateTruthValueNode(x),
+                    arg2: FormulaTreeFactory.CreateTruthValueNode(y)));
         }
 
         #endregion
