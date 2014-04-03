@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
     public class FormulaEditorTests
     {
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestConstants()
         {
             TestKey(FormulaEditorKey.D0, FormulaTokenFactory.CreateNumberToken(0));
@@ -34,7 +34,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestOperators()
         {
             TestKey(FormulaEditorKey.Plus, FormulaTokenFactory.CreatePlusToken());
@@ -54,7 +54,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestKey(FormulaEditorKey.Mod, FormulaTokenFactory.CreateModToken());
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestFunctions()
         {
             TestKey(FormulaEditorKey.Exp, new IFormulaToken[] { FormulaTokenFactory.CreateExpToken(), FormulaTokenFactory.CreateParenthesisToken(true) });
@@ -74,7 +74,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestKey(FormulaEditorKey.Random, new IFormulaToken[] { FormulaTokenFactory.CreateRandomToken(), FormulaTokenFactory.CreateParenthesisToken(true) });
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSensors()
         {
             TestKey(FormulaEditorKey.AccelerationX, FormulaTokenFactory.CreateAccelerationXToken());
@@ -86,7 +86,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestKey(FormulaEditorKey.Loudness, FormulaTokenFactory.CreateLoudnessToken());
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestProperties()
         {
             TestKey(FormulaEditorKey.Brightness, FormulaTokenFactory.CreateBrightnessToken());
@@ -98,7 +98,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestKey(FormulaEditorKey.Size, FormulaTokenFactory.CreateSizeToken());
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestVariables()
         {
             var testVariable = new UserVariable { Name = "TestVariable" };
@@ -106,14 +106,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestKey(FormulaEditorKey.GlobalVariable, testVariable, FormulaTokenFactory.CreateGlobalVariableToken(testVariable));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestBrackets()
         {
             TestKey(FormulaEditorKey.OpeningParenthesis, FormulaTokenFactory.CreateParenthesisToken(true));
             TestKey(FormulaEditorKey.ClosingParenthesis, FormulaTokenFactory.CreateParenthesisToken(false));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestDelete()
         {
             var editor = new FormulaEditor3();
@@ -125,7 +125,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsTrue(editor.HandleKey(FormulaEditorKey.Exp));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestUndoRedo()
         {
             var editor = new FormulaEditor3();
@@ -174,7 +174,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsFalse(editor.CanRedo);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestBindings()
         {
             var editor = new FormulaEditor3
@@ -193,7 +193,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsNull(editor.ParsingError);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSelection()
         {
             var editor = new FormulaEditor3();
@@ -208,7 +208,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.AreEqual(0, editor.SelectionLength);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void MonkeyTest()
         {
             const int iterations = 1000;

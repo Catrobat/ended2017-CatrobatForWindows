@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private readonly IFormulaTree _nodeZero = FormulaTreeFactory.CreateNumberNode(0);
         private readonly IFormulaTree _nodeOne = FormulaTreeFactory.CreateNumberNode(1);
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNull()
         {
             Assert.AreEqual(string.Empty, _serializer.Serialize(null));
@@ -22,7 +22,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         
         #region numbers
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNumber()
         {
             foreach (var value in new[] { 0, _random.NextDouble(), -_random.NextDouble() })
@@ -33,7 +33,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestPi()
         {
             Assert.AreEqual(
@@ -45,7 +45,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region arithmetic
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestAdd()
         {
             Assert.AreEqual(
@@ -56,7 +56,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("TODO: what to do in the case +5 ? new class FormulaNodeSign?");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSubtract()
         {
             Assert.AreEqual(
@@ -67,7 +67,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("TODO: what to do in the case -5 ? new class FormulaNodeSign?");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestMultiply()
         {
             Assert.AreEqual(
@@ -76,7 +76,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("Loose or tight?");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestDivide()
         {
             Assert.AreEqual(
@@ -89,21 +89,21 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region relational operators
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestEquals()
         {
             Assert.Inconclusive();
             Assert.Inconclusive("Loose or tight?");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNotEquals()
         {
             Assert.Inconclusive();
             Assert.Inconclusive("Loose or tight?");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestLess()
         {
             Assert.AreEqual(
@@ -112,7 +112,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("Loose or tight?");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestLessEqual()
         {
             Assert.AreEqual(
@@ -121,7 +121,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("Loose or tight?");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestGreater()
         {
             Assert.AreEqual(
@@ -130,7 +130,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("Loose or tight?");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestGreaterEqual()
         {
             Assert.AreEqual(
@@ -143,31 +143,31 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region logic
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestTrue()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestFalse()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestAnd()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestOr()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNot()
         {
             Assert.Inconclusive();
@@ -177,7 +177,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region min/max
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestMin()
         {
             Assert.AreEqual(
@@ -186,7 +186,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("Loose or tight?");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestMax()
         {
             Assert.AreEqual(
@@ -199,7 +199,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region exponential function and logarithms
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestExp()
         {
             Assert.AreEqual(
@@ -207,7 +207,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 actual: _serializer.Serialize(FormulaTreeFactory.CreateExpNode(_nodeZero)));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestLog()
         {
             Assert.AreEqual(
@@ -215,7 +215,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 actual: _serializer.Serialize(FormulaTreeFactory.CreateLogNode(_nodeZero)));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestLn()
         {
             Assert.AreEqual(
@@ -227,7 +227,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region trigonometric functions
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSin()
         {
             Assert.AreEqual(
@@ -235,7 +235,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 actual: _serializer.Serialize(FormulaTreeFactory.CreateSinNode(_nodeZero)));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestCos()
         {
             Assert.AreEqual(
@@ -243,7 +243,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 actual: _serializer.Serialize(FormulaTreeFactory.CreateCosNode(_nodeZero)));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestTan()
         {
             Assert.AreEqual(
@@ -251,7 +251,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 actual: _serializer.Serialize(FormulaTreeFactory.CreateTanNode(_nodeZero)));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestArcsin()
         {
             Assert.AreEqual(
@@ -259,7 +259,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 actual: _serializer.Serialize(FormulaTreeFactory.CreateArcsinNode(_nodeZero)));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestArccos()
         {
             Assert.AreEqual(
@@ -267,7 +267,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 actual: _serializer.Serialize(FormulaTreeFactory.CreateArccosNode(_nodeZero)));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestArcTan()
         {
             Assert.AreEqual(
@@ -280,7 +280,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region miscellaneous functions
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSqrt()
         {
             Assert.AreEqual(
@@ -288,7 +288,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 actual: _serializer.Serialize(FormulaTreeFactory.CreateSqrtNode(_nodeZero)));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestAbs()
         {
             Assert.AreEqual(
@@ -296,7 +296,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 actual: _serializer.Serialize(FormulaTreeFactory.CreateAbsNode(_nodeZero)));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestMod()
         {
             Assert.AreEqual(
@@ -304,13 +304,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 actual: _serializer.Serialize(FormulaTreeFactory.CreateModuloNode(_nodeZero, _nodeOne)));
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestRound()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestRandom()
         {
             Assert.Inconclusive();
@@ -320,7 +320,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region sensors
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSensors()
         {
             Assert.Inconclusive();
@@ -330,7 +330,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region object variables
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestObjectVariables()
         {
             Assert.Inconclusive();
@@ -340,7 +340,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region user variables
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestUserVariable()
         {
             Assert.Inconclusive();
@@ -350,7 +350,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region brackets
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestParentheses()
         {
             Assert.AreEqual(
