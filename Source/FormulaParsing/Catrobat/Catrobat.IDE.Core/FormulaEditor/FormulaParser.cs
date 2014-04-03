@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
@@ -6,6 +7,7 @@ using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
 namespace Catrobat.IDE.Core.FormulaEditor
 {
+    [Obsolete("Use FormulaInterpreter instead. ")]
     class FormulaParser
     {
         private readonly FormulaTokenizer _tokenizer;
@@ -18,8 +20,6 @@ namespace Catrobat.IDE.Core.FormulaEditor
 
         public bool Parse(string input, out IFormulaTree formula, out ParsingError parsingError)
         {
-            // TODO: how to translate parsing errors?
-
             formula = null;
             parsingError = null;
 

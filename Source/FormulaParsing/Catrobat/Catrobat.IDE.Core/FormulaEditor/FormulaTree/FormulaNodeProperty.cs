@@ -10,6 +10,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         #region Implements IFormulaEvaluation
 
+        [Obsolete("TODO: Evaluate properties with default values like in Catroid")]
         public override double EvaluateNumber()
         {
             // TODO: evaluate properties with default values like in Catroid

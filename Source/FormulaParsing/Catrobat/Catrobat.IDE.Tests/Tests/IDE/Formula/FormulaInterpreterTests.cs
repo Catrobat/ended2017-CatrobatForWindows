@@ -19,7 +19,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         public void TestNullOrEmpty()
         {
             IFormulaToken formula;
-            string parsingError;
+            ParsingError parsingError;
             Assert.AreEqual(null, _interpreter.Interpret(null, out parsingError));
             Assert.IsNull(parsingError);
             Assert.AreEqual(null, _interpreter.Interpret(Enumerable.Empty<IFormulaToken>(), out parsingError));
@@ -181,7 +181,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         [TestMethod]
         public void TestWrongParameter()
         {
-            string parsingError;
+            ParsingError parsingError;
             Assert.IsNull(_interpreter.Interpret(
                 tokens: new IFormulaToken[]
                 {
@@ -200,7 +200,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         [TestMethod]
         public void TestSemanticError()
         {
-            string parsingError;
+            ParsingError parsingError;
             Assert.IsNull(_interpreter.Interpret(
                 tokens: new IFormulaToken[]
                 {
@@ -218,7 +218,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         private void TestInterpreter(IFormulaTree expected, IEnumerable<IFormulaToken> tokens)
         {
-            string parsingError;
+            ParsingError parsingError;
             Assert.AreEqual(expected, _interpreter.Interpret(tokens, out parsingError));
             Assert.IsNull(parsingError);
         }

@@ -114,6 +114,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumerableAssert.cs" />
     <Compile Include="Misc\FormulaComparer.cs" />
     <Compile Include="Misc\ITestProjectGenerator.cs" />
     <Compile Include="Misc\PlatformInformationHelperTests.cs" />
