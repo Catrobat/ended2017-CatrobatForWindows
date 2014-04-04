@@ -1,24 +1,13 @@
-﻿using System;
-using System.Text;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
+using System;
+using System.Text;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 {
     abstract partial class FormulaNodeProperty
     {
-        #region Implements IFormulaEvaluation
-
-        [Obsolete("TODO: Evaluate properties with default values like in Catroid")]
-        public override double EvaluateNumber()
-        {
-            // TODO: evaluate properties with default values like in Catroid
-            return 0;
-        }
-
-        #endregion
-
         #region Implements IFormulaSerialization
 
         protected override void SerializeToken(StringBuilder sb)
@@ -33,7 +22,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         public override bool IsNumber()
         {
-            return IsNumberN();
+            return true;
         }
 
         #endregion
@@ -43,6 +32,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
     partial class FormulaNodeBrightness
     {
+        public override double EvaluateNumber()
+        {
+            // see /catroid/src/org/catrobat/catroid/formulaeditor/FormulaElement.java:interpretObjectSensor()
+            return 100;
+        }
+
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreateBrightnessToken();
@@ -62,6 +57,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
     partial class FormulaNodeLayer
     {
+        public override double EvaluateNumber()
+        {
+            // see /catroid/src/org/catrobat/catroid/formulaeditor/FormulaElement.java:interpretObjectSensor()
+            return -1;
+        }
+
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreateLayerToken();
@@ -81,6 +82,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
     partial class FormulaNodeTransparency
     {
+        public override double EvaluateNumber()
+        {
+            // see /catroid/src/org/catrobat/catroid/formulaeditor/FormulaElement.java:interpretObjectSensor()
+            return 0;
+        }
+
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreateTransparencyToken();
@@ -100,6 +107,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
     partial class FormulaNodePositionX
     {
+        public override double EvaluateNumber()
+        {
+            // see /catroid/src/org/catrobat/catroid/formulaeditor/FormulaElement.java:interpretObjectSensor()
+            return 0;
+        }
+
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreatePositionXToken();
@@ -119,6 +132,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
     partial class FormulaNodePositionY
     {
+        public override double EvaluateNumber()
+        {
+            // see /catroid/src/org/catrobat/catroid/formulaeditor/FormulaElement.java:interpretObjectSensor()
+            return 0;
+        }
+
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreatePositionYToken();
@@ -138,6 +157,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
     partial class FormulaNodeRotation
     {
+        public override double EvaluateNumber()
+        {
+            // see /catroid/src/org/catrobat/catroid/formulaeditor/FormulaElement.java:interpretObjectSensor()
+            return 90;
+        }
+
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreateRotationToken();
@@ -157,6 +182,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
     partial class FormulaNodeSize
     {
+        public override double EvaluateNumber()
+        {
+            // see /catroid/src/org/catrobat/catroid/formulaeditor/FormulaElement.java:interpretObjectSensor()
+            return 100;
+        }
+
         protected override IFormulaToken CreateToken()
         {
             return FormulaTokenFactory.CreateSizeToken();

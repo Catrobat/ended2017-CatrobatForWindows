@@ -19,6 +19,13 @@ namespace Catrobat.IDE.Core.FormulaEditor
             }
 
             var tokens2 = tokens.ToList();
+
+            // clear previously set children
+            foreach (var token in tokens2.OfType<IFormulaTree>())
+            {
+                token.ClearChildren();
+            }
+
             if (!InterpretSyntax(tokens2, out parsingError)) return null;
 
             IFormulaTree formula;
@@ -35,64 +42,8 @@ namespace Catrobat.IDE.Core.FormulaEditor
             return InterpretBrackets(tokens, out parsingError) &&
                    InterpretNumbers(tokens, out parsingError) &&
                    InterpretMinus(tokens, out parsingError) &&
+                   InterpretSeparators(tokens, out parsingError) &&
                    InterpretChildren(tokens, out parsingError);
-        }
-
-        /// <summary>
-        /// Resolves the ambiguity between <see cref="FormulaNodeSubtract"/> and <seealso cref="FormulaNodeNegativeSign"/>. 
-        /// </summary>
-        /// <remarks>Running time O(n). </remarks>
-        /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
-        private bool InterpretMinus(List<IFormulaToken> tokens, out ParsingError parsingError)
-        {
-            IFormulaToken previousToken = null;
-            for (var index = 0; index < tokens.Count; index++)
-            {
-                var token = tokens[index];
-                var minusToken = token as FormulaNodeSubtract;
-                if (minusToken != null && 
-                    (previousToken == null || 
-                     previousToken is IFormulaFunction || 
-                     previousToken is IFormulaOperator))
-                {
-                    tokens[index] = FormulaTokenFactory.CreateNegativeSignToken();
-                }
-                previousToken = token;
-            }
-            parsingError = null;
-            return true;
-        }
-
-        /// <summary>
-        /// Combines all adjacent digits and <see cref="FormulaTokenDecimalSeparator"/> to <seealso cref="FormulaNodeNumber"/>. 
-        /// </summary>
-        /// <remarks>Running time O(n). </remarks>
-        /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
-        private bool InterpretNumbers(List<IFormulaToken> tokens, out ParsingError parsingError)
-        {
-            for (var index = 0; index < tokens.Count; index++)
-            {
-                var numberTokens = tokens.Skip(index)
-                    .TakeWhile(token =>
-                        token.GetType() == typeof (FormulaNodeNumber) ||
-                        token.GetType() == typeof (FormulaTokenDecimalSeparator))
-                    .ToList();
-                if (numberTokens.Count <= 1) continue;
-                var valueString = numberTokens.Aggregate(string.Empty,
-                    (accumulate, token) => accumulate + (token.GetType() == typeof (FormulaNodeNumber)
-                        ? ((FormulaNodeNumber) token).Value.ToString()
-                        : CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
-
-                double value;
-                if (!double.TryParse(valueString, out value))
-                {
-                    parsingError = new ParsingError("Overflow error. ");
-                    return false;
-                }
-                tokens.ReplaceRange(index, numberTokens.Count, FormulaTokenFactory.CreateNumberToken(value));
-            }
-            parsingError = null;
-            return true;
         }
 
         /// <summary>
@@ -137,6 +88,86 @@ namespace Catrobat.IDE.Core.FormulaEditor
         }
 
         /// <summary>
+        /// Resolves the ambiguity between <see cref="FormulaTokenDecimalSeparator"/> and <seealso cref="FormulaTokenParameterSeparator"/>. 
+        /// </summary>
+        /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
+        private bool InterpretSeparators(List<IFormulaToken> tokens, out ParsingError parsingError)
+        {
+            if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
+            {
+                // TODO
+            }
+            parsingError = null;
+            return true;
+        }
+
+        /// <summary>
+        /// Resolves the ambiguity between <see cref="FormulaTokenDecimalSeparator"/> and <seealso cref="FormulaTokenParameterSeparator"/>. 
+        /// </summary>
+        /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
+        private bool InterpretNumbers(List<IFormulaToken> tokens, out ParsingError parsingError)
+        {
+            for (var index = 0; index < tokens.Count; index++)
+            {
+                var numberTokens = tokens.Skip(index)
+                    .TakeWhile(token =>
+                        token.GetType() == typeof (FormulaNodeNumber) ||
+                        token.GetType() == typeof(FormulaTokenDecimalSeparator))
+                    .ToList();
+                if (numberTokens.Count == 0) continue;
+                if (numberTokens.OfType<FormulaTokenDecimalSeparator>().Skip(1).Any())
+                {
+                    parsingError = new ParsingError("Remove duplicate decimal separator. ");
+                    return false;
+                }
+                if (!numberTokens.OfType<FormulaNodeNumber>().Any())
+                {
+                    parsingError = new ParsingError("Remove decimal separator. ");
+                    return false;
+                }
+                var valueString = numberTokens.Aggregate(string.Empty,
+                    (accumulate, token) => accumulate + (token.GetType() == typeof (FormulaNodeNumber)
+                        ? ((FormulaNodeNumber) token).Value.ToString()
+                        : CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
+
+                double value;
+                if (!double.TryParse(valueString, out value))
+                {
+                    parsingError = new ParsingError("Overflow error. ");
+                    return false;
+                }
+                tokens.ReplaceRange(index, numberTokens.Count, FormulaTokenFactory.CreateNumberToken(value));
+            }
+            parsingError = null;
+            return true;
+        }
+
+        /// <summary>
+        /// Resolves the ambiguity between <see cref="FormulaNodeSubtract"/> and <seealso cref="FormulaNodeNegativeSign"/>. 
+        /// </summary>
+        /// <remarks>Running time O(n). </remarks>
+        /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
+        private bool InterpretMinus(List<IFormulaToken> tokens, out ParsingError parsingError)
+        {
+            IFormulaToken previousToken = null;
+            for (var index = 0; index < tokens.Count; index++)
+            {
+                var token = tokens[index];
+                var minusToken = token as FormulaNodeSubtract;
+                if (minusToken != null &&
+                    (previousToken == null ||
+                     previousToken is IFormulaFunction ||
+                     previousToken is IFormulaOperator))
+                {
+                    tokens[index] = FormulaTokenFactory.CreateNegativeSignToken();
+                }
+                previousToken = token;
+            }
+            parsingError = null;
+            return true;
+        }
+
+        /// <summary>
         /// Assigns children to all tokens considering operator order like * before +. 
         /// <remarks>Running time O(n). </remarks>
         /// </summary>
@@ -156,7 +187,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                 var constantTree = element as ConstantFormulaTree;
                 if (constantTree != null)
                 {
-                    // numbers are already finished (see InterpretNumbers)
+                    // constants are already finished (see InterpretNumbers)
                     processed = true;
                 }
                 
@@ -176,7 +207,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                         processed = false;
 
                         var pendingElement = tokens[index - 1];
-                        parenthesesToken = element as FormulaTokenParentheses;
+                        parenthesesToken = element as FormulaTokenParentheses; // function parameters
                         var parenthesesNode = element as FormulaNodeParentheses;
 
                         // consider operator order
@@ -209,8 +240,14 @@ namespace Catrobat.IDE.Core.FormulaEditor
                             }
 
                             var previousElement = tokens[index - 2];
+                            if (previousElement is FormulaTokenParameterSeparator)
+                            {
+                                parsingError = new ParsingError("Remove parameter separator. ");
+                                return false;
+                            }
                             tokens.RemoveAt(index - 2);
                             index--;
+                            pending--;
                             infixOperator.LeftChild = (IFormulaTree)previousElement;
                             infixOperator.RightChild = (IFormulaTree)element;
                             processed = true;
@@ -383,12 +420,6 @@ namespace Catrobat.IDE.Core.FormulaEditor
                     formula = null;
                     return false;
                 case 1:
-                    if (tokens.OfType<FormulaTokenDecimalSeparator>().Any())
-                    {
-                        parsingError = new ParsingError("Remove decimal separator. ");
-                        formula = null;
-                        return false;
-                    }
                     if (tokens.OfType<FormulaTokenParameterSeparator>().Any())
                     {
                         parsingError = new ParsingError("Remove parameter separator. ");

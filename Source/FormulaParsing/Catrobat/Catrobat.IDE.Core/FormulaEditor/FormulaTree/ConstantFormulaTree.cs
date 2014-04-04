@@ -28,19 +28,13 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         #region Implements IFormulaInterpreter
 
-        protected bool IsNumberN()
+        public override void ClearChildren()
         {
-            return true;
-        }
-
-        protected bool IsNumberL()
-        {
-            return false;
+            // nothing to do
         }
 
         #endregion
     }
-
 
     #region Implementations
 
@@ -115,7 +109,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         public override bool IsNumber()
         {
-            return IsNumberN();
+            return true;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -144,7 +138,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         public override bool IsNumber()
         {
-            return IsNumberN();
+            return true;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -173,7 +167,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         public override bool IsNumber()
         {
-            return IsNumberL();
+            return false;
         }
 
         public override XmlFormulaTree ToXmlFormula()
@@ -202,7 +196,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         public override bool IsNumber()
         {
-            return IsNumberL();
+            return false;
         }
 
         public override XmlFormulaTree ToXmlFormula()

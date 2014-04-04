@@ -1,4 +1,5 @@
 ﻿using System.Collections.Specialized;
+using System.Security.Principal;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
@@ -140,7 +141,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region Key handler
 
-        public bool HandleKey(FormulaEditorKey key, UserVariable variable)
+        public bool HandleKey(FormulaEditorKey key, UserVariable variable = null)
         {
             switch (key)
             {
@@ -258,10 +259,18 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #region Undo/redo
 
-        private class EditorState
+        protected class EditorState
         {
-            public List<IFormulaToken> Tokens { get; set; }
-            public int CaretIndex { get; set; }
+            public EditorState(IEnumerable<IFormulaToken> tokens, int caretIndex, int selectionLength)
+            {
+                Tokens = tokens == null ? null : tokens.ToList();
+                CaretIndex = caretIndex;
+                SelectionLength = selectionLength;
+            }
+
+            public List<IFormulaToken> Tokens { get; private set; }
+            public int CaretIndex { get; private set; }
+            public int SelectionLength { get; private set; }
         }
 
         private bool Undo()
@@ -300,18 +309,15 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         private void PushState(Stack<EditorState> stack)
         {
-            stack.Push(new EditorState
-            {
-                CaretIndex = CaretIndex,
-                Tokens = Tokens == null ? null : Tokens.ToList()
-            });
+            stack.Push(new EditorState(Tokens, CaretIndex, SelectionLength));
         }
 
         private void PopState(Stack<EditorState> stack)
         {
             var state = stack.Pop();
-            CaretIndex = state.CaretIndex;
             Tokens = state.Tokens == null ? null : new ObservableCollection<IFormulaToken>(state.Tokens);
+            CaretIndex = state.CaretIndex;
+            SelectionLength = state.SelectionLength;
         }
 
         #endregion
@@ -337,6 +343,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
             if (0 <= index && index < Tokens.Count)
             {
                 Tokens.ReplaceRange(index, SelectionLength, token);
+                SelectionLength = 0;
             }
             else
             {

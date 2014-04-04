@@ -124,6 +124,7 @@
     <Compile Include="Misc\Storage\BasePathHelper.cs" />
     <Compile Include="Services\DispatcherServiceTest.cs" />
     <Compile Include="Services\ImageResizeServiceTest.cs" />
+    <Compile Include="Services\SensorServiceTest.cs" />
     <Compile Include="Services\Storage\NotificationServiceTest.cs" />
     <Compile Include="Services\Storage\ResourceLoaderFactoryTest.cs" />
     <Compile Include="Services\Storage\ResourcesTest.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Tests\IDE\Converter\SecondStringMillisecondConverterTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaEvaluationTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaInterpreterTests.cs" />
+    <Compile Include="Tests\IDE\Formula\FormulaTokenizerTests.cs" />
     <Compile Include="Tests\IDE\Formula\XmlFormulaTreeConverterTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaSerializerTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaParserTests.cs" />

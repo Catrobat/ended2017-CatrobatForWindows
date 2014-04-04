@@ -15,7 +15,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private readonly FormulaInterpreter _interpreter = new FormulaInterpreter();
         private readonly Random _random = new Random();
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNullOrEmpty()
         {
             IFormulaToken formula;
@@ -26,7 +26,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsNotNull(parsingError);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNumber()
         {
             string parsingError;
@@ -46,7 +46,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestArithmetic()
         {
             TestDoubleInfixOperator(FormulaTreeFactory.CreateAddNode, FormulaTokenFactory.CreatePlusToken);
@@ -55,7 +55,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestDoubleInfixOperator(FormulaTreeFactory.CreateDivideNode, FormulaTokenFactory.CreateDivideToken);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestRelationalOperators()
         {
             TestBoolInfixOperator(FormulaTreeFactory.CreateEqualsNode, FormulaTokenFactory.CreateEqualsToken);
@@ -69,7 +69,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestLogic()
         {
             TestConstant(FormulaTreeFactory.CreateTrueNode, FormulaTokenFactory.CreateTrueToken);
@@ -82,7 +82,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestBoolPrefixOperator(FormulaTreeFactory.CreateNotNode, FormulaTokenFactory.CreateNotToken);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestMinMax()
         {
             TestDoubleBinaryFunction(FormulaTreeFactory.CreateMinNode, FormulaTokenFactory.CreateMinToken);
@@ -90,7 +90,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         }
 
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestExponentialFunctionAndLogarithms()
         {
             TestDoubleUnaryFunction(FormulaTreeFactory.CreateExpNode, FormulaTokenFactory.CreateExpToken);
@@ -98,7 +98,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestDoubleUnaryFunction(FormulaTreeFactory.CreateLnNode, FormulaTokenFactory.CreateLnToken);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestTrigonometricFunctions()
         {
             TestDoubleUnaryFunction(FormulaTreeFactory.CreateSinNode, FormulaTokenFactory.CreateSinToken);
@@ -109,7 +109,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestDoubleUnaryFunction(FormulaTreeFactory.CreateArctanNode, FormulaTokenFactory.CreateArctanToken);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestMiscellaneousFunctions()
         {
             TestDoubleUnaryFunction(FormulaTreeFactory.CreateSqrtNode, FormulaTokenFactory.CreateSqrtToken);
@@ -119,25 +119,25 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestDoubleInfixOperator(FormulaTreeFactory.CreateModuloNode, FormulaTokenFactory.CreateModToken);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSensors()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestObjectVariables()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestUserVariable()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestBrackets()
         {
             var x = _random.NextDouble();
@@ -154,7 +154,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestOperatorOrder()
         {
             var x = _random.NextDouble();
@@ -178,7 +178,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestWrongParameter()
         {
             ParsingError parsingError;
@@ -197,7 +197,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSemanticError()
         {
             ParsingError parsingError;

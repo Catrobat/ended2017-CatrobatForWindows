@@ -23,7 +23,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         public override bool IsNumber()
         {
-            return IsNumberN();
+            return true;
         }
 
         #endregion

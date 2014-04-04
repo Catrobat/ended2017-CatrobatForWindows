@@ -87,7 +87,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
             };
         }
 
-
         public static FormulaNodeEquals CreateEqualsNode(IFormulaTree leftChild, IFormulaTree rightChild)
         {
             return new FormulaNodeEquals

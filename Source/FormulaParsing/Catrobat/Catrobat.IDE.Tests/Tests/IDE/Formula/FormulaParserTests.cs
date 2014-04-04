@@ -22,7 +22,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private readonly IFormulaTree _nodeZero = FormulaTreeFactory.CreateNumberNode(0);
         private readonly IFormulaTree _nodeOne = FormulaTreeFactory.CreateNumberNode(1);
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNullOrWhitespace()
         {
             foreach (var input in new[] { null, string.Empty, " ", "  " })
@@ -37,7 +37,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region numbers
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNumber()
         {
             foreach (var value in new[] { 0, _random.Next(), -_random.Next(), _random.NextDouble() })
@@ -48,7 +48,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestPi()
         {
             foreach (var input in new[] { "pi", "PI", "Pi" })
@@ -63,7 +63,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region arithmetic
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestAdd()
         {
             foreach (var input in new[] { "0+1", "0 + 1" })
@@ -75,7 +75,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("TODO: what to do in the case +5 ?");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSubtract()
         {
             foreach (var input in new[] { "0-1", "0 - 1" })
@@ -87,7 +87,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("TODO: what to do in the case -5 ?");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestMultiply()
         {
             foreach (var input in new[] { "0*1", "0 * 1" })
@@ -98,7 +98,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestDivide()
         {
             foreach (var input in new[] { "0/1", "0 / 1", "0:1" })
@@ -113,19 +113,19 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region relational operators
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestEquals()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNotEquals()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestLess()
         {
             foreach (var input in new[] { "0<1", "0 < 1" })
@@ -136,7 +136,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestLessEqual()
         {
             foreach (var input in new[] { "0<=1", "0 <= 1" })
@@ -147,7 +147,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestGreater()
         {
             foreach (var input in new[] { "0>1", "0 > 1" })
@@ -158,7 +158,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestGreaterEqual()
         {
             foreach (var input in new[] { "0>=1", "0 >= 1" })
@@ -173,31 +173,31 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region logic
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestTrue()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestFalse()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestAnd()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestOr()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNot()
         {
             Assert.Inconclusive();
@@ -207,7 +207,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region min/max
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestMin()
         {
             foreach (var input in new[] { "min{0,1}", "Min{0,1}", "min{0, 1}", "min(0, 1)", "min 0, 1" })
@@ -218,7 +218,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestMax()
         {
             foreach (var input in new[] { "max{0,1}", "Max{0,1}", "max{0, 1}", "max(0, 1)", "max 0, 1" })
@@ -233,7 +233,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region exponential function and logarithms
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestExp()
         {
             foreach (var input in new[] { "exp(0)", "Exp(0)", "exp 0", "e^0" })
@@ -244,7 +244,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestLog()
         {
             foreach (var input in new[] { "log(0)", "Log(0)", "log 0" })
@@ -255,7 +255,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestLn()
         {
             foreach (var input in new[] { "ln(0)", "ln(0)", "ln 0" })
@@ -270,7 +270,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region trigonometric functions
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSin()
         {
             foreach (var input in new[] { "sin(0)", "Sin(0)", "sin 0" })
@@ -281,7 +281,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestCos()
         {
             foreach (var input in new[] { "cos(0)", "Cos(0)", "cos 0" })
@@ -292,7 +292,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestTan()
         {
             foreach (var input in new[] { "tan(0)", "Tan(0)", "tan 0" })
@@ -303,7 +303,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestArcsin()
         {
             foreach (var input in new[] { "arcsin(0)", "Arcsin(0)", "ArcSin(0)", "arcsin 0" })
@@ -314,7 +314,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestArccos()
         {
             foreach (var input in new[] { "arccos(0)", "Arccos(0)", "ArcCos(0)", "arccos 0" })
@@ -325,7 +325,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestArcTan()
         {
             foreach (var input in new[] { "arctan(0)", "Arctan(0)", "ArcTan(0)", "arctan 0" })
@@ -340,7 +340,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region miscellaneous functions
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSqrt()
         {
             foreach (var input in new[] { "sqrt(0)", "Sqrt(0)", "sqrt 0", "sqrt{0}" })
@@ -351,7 +351,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestAbs()
         {
             foreach (var input in new[] { "|0|", "abs(0)", "Abs(0)", "abs 0", "abs{0}" })
@@ -362,7 +362,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestMod()
         {
             foreach (var input in new[] { "0 mod 1", "0 Mod 1" })
@@ -373,13 +373,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestRound()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestRandom()
         {
             Assert.Inconclusive();
@@ -389,7 +389,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region sensors
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSensors()
         {
             Assert.Inconclusive();
@@ -399,7 +399,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region object variables
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestObjectVariables()
         {
             Assert.Inconclusive();
@@ -409,7 +409,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region user variables
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestUserVariable()
         {
             Assert.Inconclusive();
@@ -419,7 +419,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         #region brackets
 
-        [TestMethod]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestParentheses()
         {
             foreach (var input in new[] { "(0)", "( 0 )", "{0}", "[0]", "((0))", "(((0)))" })
