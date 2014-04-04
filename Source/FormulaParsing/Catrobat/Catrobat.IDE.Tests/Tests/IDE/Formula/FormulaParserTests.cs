@@ -2,6 +2,7 @@
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.FormulaEditor;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
     [TestClass]
     public class FormulaParserTests
     {
+        [TestInitialize]
+        public void TestClassInitialize()
+        {
+            ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
+        }
+
         private static readonly IEnumerable<UserVariable> UserVariables = new[]
         {
             new UserVariable { Name = "UserVariable1" }, 

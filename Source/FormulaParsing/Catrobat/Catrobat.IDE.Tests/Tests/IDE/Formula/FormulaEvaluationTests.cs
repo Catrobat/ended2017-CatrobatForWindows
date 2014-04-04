@@ -15,8 +15,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private readonly FormulaEvaluator _evaluator = new FormulaEvaluator();
         private readonly Random _random = new Random();
 
-        [ClassInitialize]
-        public static void TestClassInitialize(TestContext testContext)
+        [TestInitialize]
+        public void TestClassInitialize()
         {
             ServiceLocator.Register<SensorServiceTest>(TypeCreationMode.Lazy);
         }
