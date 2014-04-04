@@ -6,6 +6,7 @@ using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Core.FormulaEditor
 {
@@ -132,7 +133,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                     double.TryParse(
                         s: input.Substring(startIndex, length),
                         style: NumberStyles.Number,
-                        provider: CultureInfo.CurrentCulture,
+                        provider: ServiceLocator.CulureService.GetCulture(),
                         result: out parsedValue))
                 {
                     value = parsedValue;

@@ -5,6 +5,7 @@ using System.Linq;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Core.FormulaEditor
 {
@@ -109,7 +110,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
         /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
         private bool InterpretSeparators(List<IFormulaToken> tokens, out ParsingError parsingError)
         {
-            if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
+            if (ServiceLocator.CulureService.GetCulture().NumberFormat.NumberDecimalSeparator == ",")
             {
                 // TODO
             }
@@ -144,7 +145,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                 var valueString = numberTokens.Aggregate(string.Empty,
                     (accumulate, token) => accumulate + (token.GetType() == typeof (FormulaNodeNumber)
                         ? ((FormulaNodeNumber) token).Value.ToString()
-                        : CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
+                        : ServiceLocator.CulureService.GetCulture().NumberFormat.NumberDecimalSeparator));
 
                 double value;
                 if (!double.TryParse(valueString, out value))
@@ -263,7 +264,6 @@ namespace Catrobat.IDE.Core.FormulaEditor
                             }
                             tokens.RemoveAt(index - 2);
                             index--;
-                            pending--;
                             infixOperator.LeftChild = (IFormulaTree)previousElement;
                             infixOperator.RightChild = (IFormulaTree)element;
                             processed = true;

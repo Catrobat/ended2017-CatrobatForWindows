@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
@@ -25,7 +24,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata((d, e) => ((FormulaKeyboard)d).ProjectChanged(e)));
         public Project Project
         {
-            get { return (Project)GetValue(ProjectProperty); }
+            get { return (Project) GetValue(ProjectProperty); }
             set { SetValue(ProjectProperty, value); }
         }
         private void ProjectChanged(DependencyPropertyChangedEventArgs e)
@@ -39,7 +38,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool CanDelete
         {
-            get { return (bool)GetValue(CanDeleteProperty); }
+            get { return (bool) GetValue(CanDeleteProperty); }
             set { SetValue(CanDeleteProperty, value); }
         }
 
@@ -50,7 +49,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool CanUndo
         {
-            get { return (bool)GetValue(CanUndoProperty); }
+            get { return (bool) GetValue(CanUndoProperty); }
             set { SetValue(CanUndoProperty, value); }
         }
 
@@ -61,7 +60,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool CanRedo
         {
-            get { return (bool)GetValue(CanRedoProperty); }
+            get { return (bool) GetValue(CanRedoProperty); }
             set { SetValue(CanRedoProperty, value); }
         }
 
@@ -72,7 +71,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool CanLeft
         {
-            get { return (bool)GetValue(CanLeftProperty); }
+            get { return (bool) GetValue(CanLeftProperty); }
             set { SetValue(CanLeftProperty, value); }
         }
 
@@ -83,7 +82,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool CanRight
         {
-            get { return (bool)GetValue(CanRightProperty); }
+            get { return (bool) GetValue(CanRightProperty); }
             set { SetValue(CanRightProperty, value); }
         }
 
@@ -94,7 +93,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool CanEvaluate
         {
-            get { return (bool)GetValue(CanEvaluateProperty); }
+            get { return (bool) GetValue(CanEvaluateProperty); }
             set { SetValue(CanEvaluateProperty, value); }
         }
 
@@ -105,7 +104,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(false));
         public bool HasError
         {
-            get { return (bool)GetValue(HasErrorProperty); }
+            get { return (bool) GetValue(HasErrorProperty); }
             set { SetValue(HasErrorProperty, value); }
         }
 
@@ -116,8 +115,15 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             typeMetadata: new PropertyMetadata(null));
         public string ParsingError
         {
-            get { return (string)GetValue(ParsingErrorProperty); }
+            get { return (string) GetValue(ParsingErrorProperty); }
             set { SetValue(ParsingErrorProperty, value); }
+        }
+
+        public static readonly DependencyProperty DecimalSeparatorProperty = DependencyProperty.Register("DecimalSeparator", typeof(string), typeof(FormulaKeyboard), new PropertyMetadata("."));
+        public string DecimalSeparator
+        {
+            get { return (string) GetValue(DecimalSeparatorProperty); }
+            private set { SetValue(DecimalSeparatorProperty, value); }
         }
 
         #endregion
@@ -149,6 +155,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         {
             InitializeComponent();
 
+            DecimalSeparator = ServiceLocator.CulureService.GetCulture().NumberFormat.NumberDecimalSeparator;
             _variableContainer.PropertyChanged += VariableContainer_OnPropertyChanged;
             ServiceLocator.ViewModelLocator.VariableSelectionViewModel.SelectedVariableContainer = _variableContainer;
         }

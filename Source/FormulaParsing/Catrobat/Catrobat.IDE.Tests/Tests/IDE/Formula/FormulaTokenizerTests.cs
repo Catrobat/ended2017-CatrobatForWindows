@@ -7,6 +7,7 @@ using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.FormulaEditor;
+using Catrobat.IDE.Core.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formula
@@ -34,7 +35,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                     var digitToken = token as FormulaNodeNumber;
                     if (digitToken != null)
                     {
-                        var digitString = digitToken.Value.ToString(CultureInfo.CurrentCulture);
+                        var digitString = digitToken.Value.ToString(CultureInfo.InvariantCulture);
                         Assert.AreEqual(1, digitString.Length);
                         return digitString;
                     }
@@ -42,20 +43,20 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                     var minusToken = token as FormulaNodeNegativeSign;
                     if (minusToken != null)
                     {
-                        return CultureInfo.CurrentCulture.NumberFormat.NegativeSign;
+                        return CultureInfo.InvariantCulture.NumberFormat.NegativeSign;
                     }
 
                     var decimalToken = token as FormulaTokenDecimalSeparator;
                     if (decimalToken != null)
                     {
-                        return CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+                        return CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator;
                     }
 
                     Assert.Fail();
                     return null;
                 }).Aggregate(string.Empty, (acc, x) => acc + x);
                 double actualValue;
-                Assert.IsTrue(double.TryParse(valueString, out actualValue));
+                Assert.IsTrue(double.TryParse(valueString, NumberStyles.Number, CultureInfo.InvariantCulture, out actualValue));
                 Assert.AreEqual(value, actualValue);
             }
 

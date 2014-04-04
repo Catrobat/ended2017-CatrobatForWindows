@@ -1,6 +1,7 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.FormulaEditor;
+using Catrobat.IDE.Core.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             foreach (var value in new[] { 0, _random.Next(), -_random.Next(), _random.NextDouble() })
             {
                 TestParser(
-                    input: value.ToString(CultureInfo.CurrentCulture),
+                    input: value.ToString(ServiceLocator.CulureService.GetCulture()),
                     expectedFormula: FormulaTreeFactory.CreateNumberNode(value));
             }
         }

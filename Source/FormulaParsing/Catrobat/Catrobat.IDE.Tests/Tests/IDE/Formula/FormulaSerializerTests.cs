@@ -3,6 +3,8 @@ using System.Globalization;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.FormulaEditor;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Catrobat.IDE.Core.ExtensionMethods;
 
@@ -14,6 +16,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private readonly FormulaSerializer _serializer = new FormulaSerializer();
         private readonly Random _random = new Random();
 
+        [ClassInitialize]
+        public static void TestClassInitialize(TestContext testContext)
+        {
+            ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
+        }
+
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNull()
         {
@@ -24,7 +32,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         public void TestConstants()
         {
             TestSerializer(
-                expectedValue: x => x.ToString(CultureInfo.CurrentCulture), 
+                expectedValue: x => x.ToString("R", ServiceLocator.CulureService.GetCulture()), 
                 formulaCreator: FormulaTreeFactory.CreateNumberNode);
 
             TestSerializer("pi", FormulaTreeFactory.CreatePiNode);

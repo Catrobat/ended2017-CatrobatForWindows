@@ -1,6 +1,8 @@
-﻿using System.Globalization;
+﻿using System;
 using System.Windows.Controls;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Services;
+using System.Windows;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {
@@ -8,7 +10,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
     {
         public string GetText()
         {
-            return CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+            return ServiceLocator.CulureService.GetCulture().NumberFormat.NumberDecimalSeparator;
         }
 
         #region FormulaPartControl
@@ -16,11 +18,13 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
         protected override Grid CreateControls(double fontSize, bool isParentSelected, bool isSelected, bool isError)
         {
             var grid = new Grid {DataContext = this};
-            grid.Children.Add(new TextBlock
+            var textBlock = new TextBlock
             {
                 Text = GetText(),
                 FontSize = fontSize
-            });
+            };
+            textBlock.Margin = new Thickness(-Math.Floor(textBlock.ActualWidth / 2), 0, -Math.Ceiling(textBlock.ActualWidth / 2), 0);
+            grid.Children.Add(textBlock);
 
             return grid;
         }

@@ -5,6 +5,7 @@ using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.FormulaEditor;
+using Catrobat.IDE.Core.Services;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
@@ -84,7 +85,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         protected override void SerializeToken(StringBuilder sb)
         {
             // TODO: translate
-            sb.Append(CultureInfo.CurrentCulture.NumberFormat.NegativeSign);
+            sb.Append(ServiceLocator.CulureService.GetCulture().NumberFormat.NegativeSign);
         }
 
         public override bool IsNumber()

@@ -13,7 +13,6 @@ namespace Catrobat.IDE.Core.FormulaEditor
     /// See <see cref="XmlFormulaTreeFactory"/> and <see cref="FormulaTreeFactory"/> for types to implement. </summary>
     public class XmlFormulaTreeConverter
     {
-
         #region Convert
 
         private readonly IDictionary<string, UserVariable> _localVariables;

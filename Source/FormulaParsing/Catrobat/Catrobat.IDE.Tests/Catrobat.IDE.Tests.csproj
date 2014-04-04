@@ -124,6 +124,7 @@
     <Compile Include="Misc\Storage\BasePathHelper.cs" />
     <Compile Include="Services\DispatcherServiceTest.cs" />
     <Compile Include="Services\ImageResizeServiceTest.cs" />
+    <Compile Include="Services\CultureServiceTest.cs" />
     <Compile Include="Services\SensorServiceTest.cs" />
     <Compile Include="Services\Storage\NotificationServiceTest.cs" />
     <Compile Include="Services\Storage\ResourceLoaderFactoryTest.cs" />

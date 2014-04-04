@@ -7,6 +7,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     xmlns:formula="clr-namespace:Catrobat.IDE.Phone.Views.Editor.Formula"
+    xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -316,7 +317,7 @@
         <Button Grid.Row="2" Grid.Column="1" Content="8" DataContext="{StaticResource FormulaEditorKeyD8}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
         <Button Grid.Row="2" Grid.Column="2" Content="9" DataContext="{StaticResource FormulaEditorKeyD9}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
         <Button Grid.Row="3" Grid.Column="0" Content="0" DataContext="{StaticResource FormulaEditorKeyD0}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
-        <Button Grid.Row="3" Grid.Column="1" Content="." DataContext="{StaticResource FormulaEditorKeyDecimalSeparator}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
+        <Button Grid.Row="3" Grid.Column="1" Content="{Binding DecimalSeparator, ElementName=FormulaKeyboardXaml}" DataContext="{StaticResource FormulaEditorKeyDecimalSeparator}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
         <Button Grid.Row="3" Grid.Column="2" Content="," DataContext="{StaticResource FormulaEditorKeyParameterSeparator}" Style="{StaticResource StyleButtonNumbers}" Click="KeyButton_OnClick"/>
       </Grid>
     </Grid>

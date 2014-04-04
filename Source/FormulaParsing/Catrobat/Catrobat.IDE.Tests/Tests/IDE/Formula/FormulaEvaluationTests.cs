@@ -15,6 +15,12 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private readonly FormulaEvaluator _evaluator = new FormulaEvaluator();
         private readonly Random _random = new Random();
 
+        [ClassInitialize]
+        public static void TestClassInitialize(TestContext testContext)
+        {
+            ServiceLocator.Register<SensorServiceTest>(TypeCreationMode.Lazy);
+        }
+
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNull()
         {
@@ -106,8 +112,6 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestSensors()
         {
-            ServiceLocator.Register<SensorServiceTest>(TypeCreationMode.Lazy);
-
             TestEvaluator(0, FormulaTreeFactory.CreateAccelerationXNode);
             TestEvaluator(0, FormulaTreeFactory.CreateAccelerationYNode);
             TestEvaluator(0, FormulaTreeFactory.CreateAccelerationZNode);
