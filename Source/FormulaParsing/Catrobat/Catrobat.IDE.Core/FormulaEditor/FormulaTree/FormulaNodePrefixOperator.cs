@@ -85,7 +85,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         protected override void SerializeToken(StringBuilder sb)
         {
             // TODO: translate
-            sb.Append(ServiceLocator.CulureService.GetCulture().NumberFormat.NegativeSign);
+            sb.Append(ServiceLocator.CultureService.GetCulture().NumberFormat.NegativeSign);
         }
 
         public override bool IsNumber()

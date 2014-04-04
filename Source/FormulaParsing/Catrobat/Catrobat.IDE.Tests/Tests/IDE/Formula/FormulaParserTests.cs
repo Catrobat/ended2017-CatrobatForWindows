@@ -44,7 +44,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             foreach (var value in new[] { 0, _random.Next(), -_random.Next(), _random.NextDouble() })
             {
                 TestParser(
-                    input: value.ToString(ServiceLocator.CulureService.GetCulture()),
+                    input: value.ToString(ServiceLocator.CultureService.GetCulture()),
                     expectedFormula: FormulaTreeFactory.CreateNumberNode(value));
             }
         }

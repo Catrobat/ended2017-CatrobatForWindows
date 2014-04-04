@@ -32,7 +32,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         public void TestConstants()
         {
             TestSerializer(
-                expectedValue: x => x.ToString("R", ServiceLocator.CulureService.GetCulture()), 
+                expectedValue: x => x.ToString("R", ServiceLocator.CultureService.GetCulture()), 
                 formulaCreator: FormulaTreeFactory.CreateNumberNode);
 
             TestSerializer("pi", FormulaTreeFactory.CreatePiNode);

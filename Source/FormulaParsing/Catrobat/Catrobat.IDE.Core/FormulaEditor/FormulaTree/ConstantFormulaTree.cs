@@ -54,12 +54,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                     {
                         // add decimal separator mapping
                         new KeyValuePair<string, Func<IFormulaToken>>(
-                            key: ServiceLocator.CulureService.GetCulture().NumberFormat.NumberDecimalSeparator,
+                            key: ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator,
                             value: FormulaTokenFactory.CreateDecimalSeparatorToken),
 
                         // add minus sign mapping
                         new KeyValuePair<string, Func<IFormulaToken>>(
-                            key: ServiceLocator.CulureService.GetCulture().NumberFormat.NegativeSign,
+                            key: ServiceLocator.CultureService.GetCulture().NumberFormat.NegativeSign,
                             value: FormulaTokenFactory.CreateNegativeSignToken)
                     };
 
@@ -86,7 +86,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         {
             // split off tokens from the string representation
             var tokens = new List<IFormulaToken>();
-            var value = Value.ToString("R", ServiceLocator.CulureService.GetCulture());
+            var value = Value.ToString("R", ServiceLocator.CultureService.GetCulture());
             while (value.Length != 0)
             {
                 var mapping = TokenMappings.First(kvp => value.StartsWith(kvp.Key));
@@ -105,7 +105,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            sb.Append(Value.ToString("R", ServiceLocator.CulureService.GetCulture()));
+            sb.Append(Value.ToString("R", ServiceLocator.CultureService.GetCulture()));
         }
 
         public override bool IsNumber()

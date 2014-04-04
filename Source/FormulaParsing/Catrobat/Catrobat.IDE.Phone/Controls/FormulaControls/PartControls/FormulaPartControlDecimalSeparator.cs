@@ -10,7 +10,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
     {
         public string GetText()
         {
-            return ServiceLocator.CulureService.GetCulture().NumberFormat.NumberDecimalSeparator;
+            return ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator;
         }
 
         #region FormulaPartControl

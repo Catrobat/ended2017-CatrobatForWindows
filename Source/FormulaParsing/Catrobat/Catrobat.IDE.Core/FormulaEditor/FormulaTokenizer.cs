@@ -133,7 +133,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                     double.TryParse(
                         s: input.Substring(startIndex, length),
                         style: NumberStyles.Number,
-                        provider: ServiceLocator.CulureService.GetCulture(),
+                        provider: ServiceLocator.CultureService.GetCulture(),
                         result: out parsedValue))
                 {
                     value = parsedValue;

@@ -110,7 +110,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
         /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
         private bool InterpretSeparators(List<IFormulaToken> tokens, out ParsingError parsingError)
         {
-            if (ServiceLocator.CulureService.GetCulture().NumberFormat.NumberDecimalSeparator == ",")
+            if (ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator == ",")
             {
                 // TODO
             }
@@ -145,7 +145,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                 var valueString = numberTokens.Aggregate(string.Empty,
                     (accumulate, token) => accumulate + (token.GetType() == typeof (FormulaNodeNumber)
                         ? ((FormulaNodeNumber) token).Value.ToString()
-                        : ServiceLocator.CulureService.GetCulture().NumberFormat.NumberDecimalSeparator));
+                        : ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator));
 
                 double value;
                 if (!double.TryParse(valueString, out value))

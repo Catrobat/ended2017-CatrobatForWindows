@@ -31,16 +31,16 @@ namespace Catrobat.IDE.Core.ViewModel.Settings
 
         public CultureInfo CurrentCulture
         {
-            get { return ServiceLocator.CulureService.GetCulture(); }
+            get { return ServiceLocator.CultureService.GetCulture(); }
 
             set
             {
-                if (ServiceLocator.CulureService.GetCulture().Equals(value))
+                if (ServiceLocator.CultureService.GetCulture().Equals(value))
                 {
                     return;
                 }
 
-                ServiceLocator.CulureService.SetCulture(value);
+                ServiceLocator.CultureService.SetCulture(value);
                 //Thread.CurrentThread.CurrentUICulture = value;
 
                 // todo: portable

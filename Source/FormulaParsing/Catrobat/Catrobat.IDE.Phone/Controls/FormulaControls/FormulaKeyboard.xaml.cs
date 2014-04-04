@@ -155,7 +155,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         {
             InitializeComponent();
 
-            DecimalSeparator = ServiceLocator.CulureService.GetCulture().NumberFormat.NumberDecimalSeparator;
+            DecimalSeparator = ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator;
             _variableContainer.PropertyChanged += VariableContainer_OnPropertyChanged;
             ServiceLocator.ViewModelLocator.VariableSelectionViewModel.SelectedVariableContainer = _variableContainer;
         }
