@@ -186,7 +186,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 case FormulaEditorKey.D8: return FormulaTokenFactory.CreateDigitToken(8);
                 case FormulaEditorKey.D9: return FormulaTokenFactory.CreateDigitToken(9);
                 case FormulaEditorKey.DecimalSeparator: return FormulaTokenFactory.CreateDecimalSeparatorToken();
-                case FormulaEditorKey.ArgumentSeparator: return FormulaTokenFactory.CreateArgumentSeparatorToken();
+                case FormulaEditorKey.ParameterSeparator: return FormulaTokenFactory.CreateParameterSeparatorToken();
                 case FormulaEditorKey.Pi: return FormulaTokenFactory.CreatePiToken();
                 case FormulaEditorKey.True: return FormulaTokenFactory.CreateTrueToken();
                 case FormulaEditorKey.False: return FormulaTokenFactory.CreateFalseToken();

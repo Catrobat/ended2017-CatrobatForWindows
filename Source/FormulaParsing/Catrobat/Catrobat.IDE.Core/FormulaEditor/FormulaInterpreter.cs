@@ -25,13 +25,29 @@ namespace Catrobat.IDE.Core.FormulaEditor
             {
                 token.ClearChildren();
             }
-
+#if DEBUG
             if (!InterpretSyntax(tokens2, out parsingError)) return null;
 
             IFormulaTree formula;
             if (!InterpretSemantic(tokens2, out formula, out parsingError)) return null;
 
             return formula;
+#else
+            try
+            {
+                if (!InterpretSyntax(tokens2, out parsingError)) return null;
+
+                IFormulaTree formula;
+                if (!InterpretSemantic(tokens2, out formula, out parsingError)) return null;
+
+                return formula;
+            }
+            catch (Exception)
+            {
+                parsingError = new ParsingError("Unknown error");
+                return null;
+            }
+#endif
         }
 
         #region Syntax

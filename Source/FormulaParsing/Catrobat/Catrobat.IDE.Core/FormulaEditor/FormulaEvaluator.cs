@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+﻿using System;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Core.FormulaEditor
 {
@@ -18,7 +19,18 @@ namespace Catrobat.IDE.Core.FormulaEditor
         {
             if (formula == null) return null;
 
-            return formula.IsNumber() ? (object) formula.EvaluateNumber() : formula.EvaluateLogic();
+#if DEBUG
+            return formula.IsNumber() ? (object)formula.EvaluateNumber() : formula.EvaluateLogic();
+#else
+            try
+            {
+                return formula.IsNumber() ? (object)formula.EvaluateNumber() : formula.EvaluateLogic();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+#endif
         }
     }
 }

@@ -59,7 +59,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                         // add minus sign mapping
                         new KeyValuePair<string, Func<IFormulaToken>>(
                             key: CultureInfo.CurrentCulture.NumberFormat.NegativeSign,
-                            value: FormulaTokenFactory.CreateMinusToken)
+                            value: FormulaTokenFactory.CreateNegativeSignToken)
                     };
 
                     // add digits mapping
@@ -85,7 +85,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         {
             // split off tokens from the string representation
             var tokens = new List<IFormulaToken>();
-            var value = Value.ToString();
+            var value = Value.ToString("R");
             while (value.Length != 0)
             {
                 var mapping = TokenMappings.First(kvp => value.StartsWith(kvp.Key));

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
+using Catrobat.IDE.Core.FormulaEditor;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
@@ -23,7 +24,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         public override IEnumerable<IFormulaToken> Tokenize()
         {
             return Enumerable.Repeat(CreateToken(true), 1)
-                .Concat(Child.Tokenize())
+                .Concat(Child == null ? FormulaTokenizer.EmptyChild : Child.Tokenize())
                 .Concat(Enumerable.Repeat(CreateToken(false), 1));
         }
 

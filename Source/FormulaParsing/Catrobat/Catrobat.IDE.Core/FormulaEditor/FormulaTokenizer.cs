@@ -11,7 +11,9 @@ namespace Catrobat.IDE.Core.FormulaEditor
 {
     class FormulaTokenizer
     {
-        #region tokenize string
+        public static IEnumerable<IFormulaToken> EmptyChild = Enumerable.Empty<IFormulaToken>();
+
+        #region Tokenize string
 
         private readonly IDictionary<string, UserVariable> _userVariables = null;
         private readonly IEnumerable<UserVariable> _objectVariable = null;
@@ -148,14 +150,27 @@ namespace Catrobat.IDE.Core.FormulaEditor
 
         #endregion
 
-        #region tokenize formula
+        #region Tokenize formula
+
         public FormulaTokenizer()
         {
         }
 
         public IEnumerable<IFormulaToken> Tokenize(IFormulaTree formula)
         {
-            return formula == null ? null : formula.Tokenize();
+            if (formula == null) return null;
+#if DEBUG
+            return formula.Tokenize();
+#else
+            try
+            {
+                return formula.Tokenize();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+#endif
         }
 
         #endregion

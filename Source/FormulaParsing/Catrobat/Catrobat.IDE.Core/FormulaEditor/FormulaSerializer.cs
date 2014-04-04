@@ -8,7 +8,19 @@ namespace Catrobat.IDE.Core.FormulaEditor
 
         public string Serialize(IFormulaTree formula)
         {
-            return formula == null ? string.Empty : formula.Serialize();
+            if (formula == null) return string.Empty;
+#if DEBUG
+            return formula.Serialize();
+#else
+            try
+            {
+                return formula.Serialize();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+#endif
         }
     }
 }

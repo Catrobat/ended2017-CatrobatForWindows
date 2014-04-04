@@ -16,7 +16,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         public override IEnumerable<IFormulaToken> Tokenize()
         {
             return Enumerable.Repeat(CreateToken(), 1)
-                .Concat(Child.Tokenize());
+                .Concat(Child == null ? FormulaTokenizer.EmptyChild : Child.Tokenize());
         }
 
         #endregion
@@ -73,7 +73,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         protected override IFormulaToken CreateToken()
         {
-            return FormulaTokenFactory.CreateMinusToken();
+            return FormulaTokenFactory.CreateNegativeSignToken();
         }
 
         public override double EvaluateNumber()

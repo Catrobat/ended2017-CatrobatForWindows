@@ -119,7 +119,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
 
         #region Functions
 
-        public static FormulaTokenParameterSeparator CreateArgumentSeparatorToken()
+        public static FormulaTokenParameterSeparator CreateParameterSeparatorToken()
         {
             return new FormulaTokenParameterSeparator();
         }

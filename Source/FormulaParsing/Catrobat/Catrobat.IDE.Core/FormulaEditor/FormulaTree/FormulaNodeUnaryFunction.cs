@@ -17,7 +17,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         {
             return Enumerable.Repeat(CreateToken(), 1)
                 .Concat(Enumerable.Repeat(FormulaTokenFactory.CreateParenthesisToken(true), 1))
-                .Concat(Child.Tokenize())
+                .Concat(Child == null ? FormulaTokenizer.EmptyChild : Child.Tokenize())
                 .Concat(Enumerable.Repeat(FormulaTokenFactory.CreateParenthesisToken(false), 1));
 
         }

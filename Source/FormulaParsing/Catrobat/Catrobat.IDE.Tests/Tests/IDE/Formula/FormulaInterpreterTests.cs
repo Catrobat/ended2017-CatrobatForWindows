@@ -188,7 +188,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                     FormulaTokenFactory.CreateSinToken(), 
                     FormulaTokenFactory.CreateParenthesisToken(true), 
                     FormulaTokenFactory.CreateNumberToken(0), 
-                    FormulaTokenFactory.CreateArgumentSeparatorToken(), 
+                    FormulaTokenFactory.CreateParameterSeparatorToken(), 
                     FormulaTokenFactory.CreateNumberToken(0), 
                     FormulaTokenFactory.CreateParenthesisToken(false)
                 },
@@ -213,6 +213,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.IsNotNull(parsingError);
             Assert.Inconclusive();
         }
+
+
+        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        public void MonkeyTest()
+        {
+            Assert.Inconclusive();
+        }
+
 
         #region Helpers
 
@@ -281,7 +289,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             var y = _random.Next(0, 10);
             TestInterpreter(
                 expected: expected.Invoke(FormulaTreeFactory.CreateNumberNode(x), FormulaTreeFactory.CreateNumberNode(y)),
-                tokens: new[] { token.Invoke(), FormulaTokenFactory.CreateParenthesisToken(true), FormulaTokenFactory.CreateDigitToken(x), FormulaTokenFactory.CreateArgumentSeparatorToken(), FormulaTokenFactory.CreateDigitToken(y), FormulaTokenFactory.CreateParenthesisToken(false) });
+                tokens: new[] { token.Invoke(), FormulaTokenFactory.CreateParenthesisToken(true), FormulaTokenFactory.CreateDigitToken(x), FormulaTokenFactory.CreateParameterSeparatorToken(), FormulaTokenFactory.CreateDigitToken(y), FormulaTokenFactory.CreateParenthesisToken(false) });
         }
 
         #endregion
