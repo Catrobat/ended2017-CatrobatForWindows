@@ -83,7 +83,7 @@ namespace Catrobat.IDE.Core
 
             if (_context.LocalSettings.CurrentLanguageString == null)
                 _context.LocalSettings.CurrentLanguageString =
-                    ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName;
+                    ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName;
 
             var themeChooser = (ThemeChooser)Core.Services.ServiceLocator.ThemeChooser;
             if (_context.LocalSettings.CurrentThemeIndex != -1)

@@ -100,7 +100,7 @@ namespace Catrobat.IDE.Core.ViewModel.Service
             else
             {
                 CatrobatWebCommunicationService.RegisterOrCheckToken(_username, _password, _email,
-                                                         ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName,
+                                                         ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName,
                                                          RegionInfo.CurrentRegion.TwoLetterISORegionName,
                                                          UtilTokenHelper.CalculateToken(_username, _password),
                                                          RegisterOrCheckTokenCallback);
