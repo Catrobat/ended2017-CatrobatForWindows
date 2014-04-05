@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
+using Catrobat.IDE.Core.Services;
 
 // ReSharper disable once CheckNamespace
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
@@ -53,13 +54,13 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                     {
                         // add decimal separator mapping
                         new KeyValuePair<string, Func<IFormulaToken>>(
-                            key: CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator,
+                            key: ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator,
                             value: FormulaTokenFactory.CreateDecimalSeparatorToken),
 
                         // add minus sign mapping
                         new KeyValuePair<string, Func<IFormulaToken>>(
-                            key: CultureInfo.CurrentCulture.NumberFormat.NegativeSign,
-                            value: FormulaTokenFactory.CreateMinusToken)
+                            key: ServiceLocator.CultureService.GetCulture().NumberFormat.NegativeSign,
+                            value: FormulaTokenFactory.CreateNegativeSignToken)
                     };
 
                     // add digits mapping
@@ -85,7 +86,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         {
             // split off tokens from the string representation
             var tokens = new List<IFormulaToken>();
-            var value = Value.ToString();
+            var value = Value.ToString("R", ServiceLocator.CultureService.GetCulture());
             while (value.Length != 0)
             {
                 var mapping = TokenMappings.First(kvp => value.StartsWith(kvp.Key));
@@ -104,7 +105,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         internal override void Serialize(StringBuilder sb)
         {
-            sb.Append(Value);
+            sb.Append(Value.ToString("R", ServiceLocator.CultureService.GetCulture()));
         }
 
         public override bool IsNumber()

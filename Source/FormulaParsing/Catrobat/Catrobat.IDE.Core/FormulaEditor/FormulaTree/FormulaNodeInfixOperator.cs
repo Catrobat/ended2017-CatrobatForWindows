@@ -15,9 +15,9 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
         public override IEnumerable<IFormulaToken> Tokenize()
         {
-            return LeftChild.Tokenize()
+            return (LeftChild == null ? FormulaTokenizer.EmptyChild : LeftChild.Tokenize())
                 .Concat(Enumerable.Repeat(CreateToken(), 1))
-                .Concat(RightChild.Tokenize());
+                .Concat(RightChild == null ? FormulaTokenizer.EmptyChild : RightChild.Tokenize());
         }
 
         #endregion

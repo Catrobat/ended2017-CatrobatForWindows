@@ -1,4 +1,6 @@
-﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
+﻿using System.Diagnostics;
+
+namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 {
     /// <remarks>See /catroid/src/org/catrobat/catroid/formulaeditor/Operators.java</remarks>
     public abstract partial class FormulaNodePrefixOperator : UnaryFormulaTree, IFormulaOperator
@@ -8,6 +10,7 @@
 
     #region Implementations
 
+    [DebuggerDisplay("not {Child}")]
     public partial class FormulaNodeNot : FormulaNodePrefixOperator
     {
         public override int Order
@@ -16,6 +19,7 @@
         }
     }
 
+    [DebuggerDisplay("-{Child}")]
     public partial class FormulaNodeNegativeSign : FormulaNodePrefixOperator
     {
         /// <remarks>Must be the same as <see cref="FormulaNodeSubtract.Order"/></remarks>

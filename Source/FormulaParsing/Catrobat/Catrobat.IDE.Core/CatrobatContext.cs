@@ -52,7 +52,7 @@ namespace Catrobat.IDE.Core
         {
             IProjectGenerator projectGenerator = new ProjectGeneratorDefault();
 
-            return await projectGenerator.GenerateProject(ServiceLocator.CulureService.GetCulture().TwoLetterISOLanguageName, true);
+            return await projectGenerator.GenerateProject(ServiceLocator.CultureService.GetCulture().TwoLetterISOLanguageName, true);
         }
 
         public static async Task<Project> CreateEmptyProject(string newProjectName)

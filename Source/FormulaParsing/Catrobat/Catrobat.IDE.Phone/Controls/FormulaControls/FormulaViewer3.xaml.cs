@@ -572,7 +572,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
                 FontSize = fontSize,
                 Text = "|"
             };
-            textBlock.Margin = new Thickness(-textBlock.ActualWidth / 2, 0, -textBlock.ActualWidth / 2, 0);
+            textBlock.Margin = new Thickness(-Math.Ceiling(textBlock.ActualWidth / 2), 0, -Math.Floor(textBlock.ActualWidth / 2), 0);
 
             var storyboard = CreateBlinkingEffect(textBlock);
             textBlock.Loaded += (sender, e) => storyboard.Begin();

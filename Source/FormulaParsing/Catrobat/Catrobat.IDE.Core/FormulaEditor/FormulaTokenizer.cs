@@ -6,12 +6,15 @@ using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Core.FormulaEditor
 {
     class FormulaTokenizer
     {
-        #region tokenize string
+        public static IEnumerable<IFormulaToken> EmptyChild = Enumerable.Empty<IFormulaToken>();
+
+        #region Tokenize string
 
         private readonly IDictionary<string, UserVariable> _userVariables = null;
         private readonly IEnumerable<UserVariable> _objectVariable = null;
@@ -130,7 +133,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                     double.TryParse(
                         s: input.Substring(startIndex, length),
                         style: NumberStyles.Number,
-                        provider: CultureInfo.CurrentCulture,
+                        provider: ServiceLocator.CultureService.GetCulture(),
                         result: out parsedValue))
                 {
                     value = parsedValue;
@@ -148,14 +151,27 @@ namespace Catrobat.IDE.Core.FormulaEditor
 
         #endregion
 
-        #region tokenize formula
+        #region Tokenize formula
+
         public FormulaTokenizer()
         {
         }
 
         public IEnumerable<IFormulaToken> Tokenize(IFormulaTree formula)
         {
-            return formula == null ? null : formula.Tokenize();
+            if (formula == null) return null;
+#if DEBUG
+            return formula.Tokenize();
+#else
+            try
+            {
+                return formula.Tokenize();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+#endif
         }
 
         #endregion

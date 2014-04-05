@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Threading;
 using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Phone.Services
@@ -8,12 +7,12 @@ namespace Catrobat.IDE.Phone.Services
     {
         public CultureInfo GetCulture()
         {
-            return Thread.CurrentThread.CurrentUICulture;
+            return CultureInfo.CurrentUICulture;
         }
 
         public void SetCulture(CultureInfo culture)
         {
-            Thread.CurrentThread.CurrentUICulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
         }
     }
 }

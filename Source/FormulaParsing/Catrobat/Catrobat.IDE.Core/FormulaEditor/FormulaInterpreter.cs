@@ -5,6 +5,7 @@ using System.Linq;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.ExtensionMethods;
+using Catrobat.IDE.Core.Services;
 
 namespace Catrobat.IDE.Core.FormulaEditor
 {
@@ -25,13 +26,29 @@ namespace Catrobat.IDE.Core.FormulaEditor
             {
                 token.ClearChildren();
             }
-
+#if DEBUG
             if (!InterpretSyntax(tokens2, out parsingError)) return null;
 
             IFormulaTree formula;
             if (!InterpretSemantic(tokens2, out formula, out parsingError)) return null;
 
             return formula;
+#else
+            try
+            {
+                if (!InterpretSyntax(tokens2, out parsingError)) return null;
+
+                IFormulaTree formula;
+                if (!InterpretSemantic(tokens2, out formula, out parsingError)) return null;
+
+                return formula;
+            }
+            catch (Exception)
+            {
+                parsingError = new ParsingError("Unknown error");
+                return null;
+            }
+#endif
         }
 
         #region Syntax
@@ -93,7 +110,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
         /// <returns><paramref name="parsingError"/> is not <c>null</c></returns>
         private bool InterpretSeparators(List<IFormulaToken> tokens, out ParsingError parsingError)
         {
-            if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
+            if (ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator == ",")
             {
                 // TODO
             }
@@ -128,7 +145,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                 var valueString = numberTokens.Aggregate(string.Empty,
                     (accumulate, token) => accumulate + (token.GetType() == typeof (FormulaNodeNumber)
                         ? ((FormulaNodeNumber) token).Value.ToString()
-                        : CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
+                        : ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator));
 
                 double value;
                 if (!double.TryParse(valueString, out value))
@@ -247,7 +264,6 @@ namespace Catrobat.IDE.Core.FormulaEditor
                             }
                             tokens.RemoveAt(index - 2);
                             index--;
-                            pending--;
                             infixOperator.LeftChild = (IFormulaTree)previousElement;
                             infixOperator.RightChild = (IFormulaTree)element;
                             processed = true;

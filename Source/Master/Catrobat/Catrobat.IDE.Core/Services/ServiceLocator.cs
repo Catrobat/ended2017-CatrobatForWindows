@@ -28,7 +28,7 @@ namespace Catrobat.IDE.Core.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
         "CA1822:MarkMembersAsStatic",
         Justification = "This non-static member is needed for data binding purposes.")]
-        public static ICultureService CulureService
+        public static ICultureService CultureService
         { get { return GetInstance<ICultureService>(); } }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
