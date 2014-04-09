@@ -46,7 +46,15 @@ namespace Catrobat.Paint.Phone.Tool
         public void RotateLeft()
         {
             var rotateTransform = new RotateTransform();
-            rotateTransform.Angle = 120;
+            if (_angle == 0)
+            {
+                _angle = 270;
+            }
+            else
+            {
+                _angle -= 90;
+            }
+            rotateTransform.Angle = _angle;
             rotateTransform.CenterX = 250;
             rotateTransform.CenterY = 290;
             //PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = rotateTransform;
