@@ -55,8 +55,8 @@ namespace Catrobat.Paint.Phone.Tool
                 _angle -= 90;
             }
             rotateTransform.Angle = _angle;
-            rotateTransform.CenterX = 250;
-            rotateTransform.CenterY = 290;
+            rotateTransform.CenterX = 225;
+            rotateTransform.CenterY = 295;
             //PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = rotateTransform;
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = rotateTransform;
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
@@ -69,8 +69,8 @@ namespace Catrobat.Paint.Phone.Tool
             var rotateTransform = new RotateTransform();
             _angle += 90;
             rotateTransform.Angle = _angle;
-            rotateTransform.CenterX = 250;
-            rotateTransform.CenterY = 290;
+            rotateTransform.CenterX = 225;
+            rotateTransform.CenterY = 295;
             //PocketPaintApplication.GetInstance().PaintingAreaCanvas.RenderTransform = rotateTransform;
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = rotateTransform;
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
