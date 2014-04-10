@@ -126,6 +126,22 @@
 
         </shell:ApplicationBar>
 
+        <shell:ApplicationBar x:Key="barFlip" IsVisible="True">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Speichern" Click="ApplicationBarMenuItem_OnClick"/>
+                <shell:ApplicationBarMenuItem Text="Kopie speichern"/>
+                <shell:ApplicationBarMenuItem Text="Neues Bild"/>
+                <shell:ApplicationBarMenuItem Text="Laden"/>
+                <shell:ApplicationBarMenuItem Text="Vollbild"/>
+                <shell:ApplicationBarMenuItem Text="Über"/>
+            </shell:ApplicationBar.MenuItems>
+
+            <shell:ApplicationBarIconButton x:Name="BtnHorizontal"  IconUri="/Assets/AppBar/icon_menu_flip_horizontal.png" IsEnabled="True" Text="Thickness" Click="BtnHorizotal_OnClick" />
+            <shell:ApplicationBarIconButton x:Name="BtnVertical"  IconUri="/Assets/AppBar/icon_menu_flip_vertical.png" IsEnabled="True" Text="Thickness" Click="BtnVertical_OnClick" />
+            <shell:ApplicationBarIconButton x:Name="BtnTools7" Click="BtnTools_OnClick" IconUri="/Assets/AppBar/menu_tools_.png" IsEnabled="True" Text="tools"/>
+
+        </shell:ApplicationBar>
+
 
 
     </phone:PhoneApplicationPage.Resources>

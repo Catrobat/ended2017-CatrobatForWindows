@@ -265,6 +265,9 @@ namespace Catrobat.Paint.Phone.View
                 case ToolType.Rotate:
                     ApplicationBar = (IApplicationBar) this.Resources["barRotate"];
                     break;
+                case ToolType.Flip:
+                    ApplicationBar = (IApplicationBar)this.Resources["barFlip"];
+                    break;
 
 
 
@@ -302,6 +305,28 @@ namespace Catrobat.Paint.Phone.View
             {
                 var rotateTool = (RotateTool)PocketPaintApplication.GetInstance().ToolCurrent;
                 rotateTool.RotateRight();
+            }
+            else
+                return;
+        }
+
+        private void BtnHorizotal_OnClick(object sender, EventArgs e)
+        {
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Flip)
+            {
+                var flipTool = (FlipTool)PocketPaintApplication.GetInstance().ToolCurrent;
+                flipTool.FlipHorizontal();
+            }
+            else
+                return;
+        }
+
+        private void BtnVertical_OnClick(object sender, EventArgs e)
+        {
+            if (PocketPaintApplication.GetInstance().ToolCurrent.GetToolType() == ToolType.Flip)
+            {
+                var flipTool = (FlipTool)PocketPaintApplication.GetInstance().ToolCurrent;
+                flipTool.FlipVertical();
             }
             else
                 return;

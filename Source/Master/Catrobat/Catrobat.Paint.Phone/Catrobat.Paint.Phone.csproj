@@ -109,6 +109,7 @@
     <Compile Include="Resources\LocalizedStrings.cs" />
     <Compile Include="Tool\BrushTool.cs" />
     <Compile Include="Tool\EraserTool.cs" />
+    <Compile Include="Tool\FlipTool.cs" />
     <Compile Include="Tool\LineTool.cs" />
     <Compile Include="Tool\MoveZoomTool.cs" />
     <Compile Include="Tool\PipetteTool.cs" />
@@ -172,6 +173,8 @@
     <Content Include="Assets\AppBar\feature.settings.png" />
     <Content Include="Assets\AppBar\icon_menu_crop_adjust.png" />
     <Content Include="Assets\AppBar\icon_menu_crop_cut.png" />
+    <Content Include="Assets\AppBar\icon_menu_flip_horizontal.png" />
+    <Content Include="Assets\AppBar\icon_menu_flip_vertical.png" />
     <Content Include="Assets\AppBar\icon_menu_rotate_left.png" />
     <Content Include="Assets\AppBar\icon_menu_rotate_right.png" />
     <Content Include="Assets\AppBar\icon_zoom_in.png" />
