@@ -86,7 +86,7 @@ namespace Catrobat.Paint.Phone.Tool
 
         public override void HandleUp(object arg)
         {
-            CommandManager.GetInstance().CommitCommand(new BrushCommand(_path));            
+            CommandManager.GetInstance().CommitCommand(new LineCommand(_path));            
         }
 
         public override void Draw(object o)

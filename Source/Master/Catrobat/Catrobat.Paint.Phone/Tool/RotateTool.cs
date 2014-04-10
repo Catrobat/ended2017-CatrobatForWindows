@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using Catrobat.Paint.Phone.Command;
 using ImageTools;
 
 namespace Catrobat.Paint.Phone.Tool
@@ -62,6 +63,9 @@ namespace Catrobat.Paint.Phone.Tool
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.UpdateLayout();
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateArrange();
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.InvalidateMeasure();
+
+            //CommandManager.GetInstance().CommitCommand(new RotateCommand(RotateCommand.Direction.Left, _angle));
+
         }
 
         public void RotateRight()
@@ -79,6 +83,7 @@ namespace Catrobat.Paint.Phone.Tool
             //var rotated = new RotateTransform();
             //rotated.Angle = 90;
             //PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = rotated;
+            //CommandManager.GetInstance().CommitCommand(new RotateCommand(RotateCommand.Direction.Right, _angle));
         }
     }
 }
