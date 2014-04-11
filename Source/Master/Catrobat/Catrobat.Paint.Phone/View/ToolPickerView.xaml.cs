@@ -77,7 +77,6 @@ namespace Catrobat.Paint.Phone.View
                     NavigationService.GoBack();
                     break;
 
-
             }
         }
 

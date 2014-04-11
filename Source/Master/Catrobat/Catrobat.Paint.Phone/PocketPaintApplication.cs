@@ -136,6 +136,9 @@ namespace Catrobat.Paint.Phone
                 case ToolType.Line:
                     ToolCurrent = new LineTool();
                     break;
+                case ToolType.Flip:
+                    ToolCurrent = new FlipTool();
+                    break;
                 default:
                     break;
             }
