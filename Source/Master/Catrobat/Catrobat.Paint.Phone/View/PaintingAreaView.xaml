@@ -204,7 +204,7 @@
 
             <UserControl x:Name="SliderThicknessControl" Height="auto" Width="auto" >
                 <Grid x:Name="SliderThicknessGrid" Background="#1F1F1F" Visibility="Visible" MinHeight="120" VerticalAlignment="Bottom" RenderTransformOrigin="0.502,-0.04">
-                    <Slider x:Name="SliderThickness" Background="Red" Maximum="50"  Minimum="1" Margin="1,1,111,27" ValueChanged="SliderThickness_ValueChanged"/>
+                    <Slider x:Name="SliderThickness" Background="Red" Maximum="50"  Minimum="1" Margin="10,1,102,27" ValueChanged="SliderThickness_ValueChanged"/>
                     <RadioButton x:Name="RoundRadioButton" Content="" HorizontalAlignment="Left"  Margin="23,60,0,-10"  VerticalAlignment="Top" Foreground="Black" Click="RoundRadioButon_OnClick" IsChecked="True" UseLayoutRounding="True" Background="Black" GroupName="BrushStyle"/>
                     <RadioButton x:Name="SquareRadioButton" Content="" HorizontalAlignment="Left" Margin="172,60,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="SquareRadioButon_OnClick" GroupName="BrushStyle"/>
                     <RadioButton x:Name="TriangleRadioButton" Content="" HorizontalAlignment="Left" Margin="323,60,0,0" VerticalAlignment="Top" Background="Black" Foreground="Black" Click="TriangleRadioButon_OnClick" GroupName="BrushStyle"/>
