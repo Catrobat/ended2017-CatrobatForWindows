@@ -106,6 +106,15 @@ namespace Catrobat.Paint.Phone.Controls.AppBar
                         Opacity = 0.2
                     };
                     break;
+                case ToolType.Flip:
+                    BtnMoveScreen.ImageSource = new BitmapImage(GetToolImageUri(ToolType.Flip));
+                    BtnMoveScreen.Background = new ImageBrush
+                    {
+                        ImageSource =
+                            new BitmapImage(GetToolImageUri(ToolType.Move)),
+                        Opacity = 0.2
+                    };
+                    break;
                 default:
                     BtnMoveScreen.ImageSource = null;
                     BtnMoveScreen.Background = null;
@@ -131,6 +140,8 @@ namespace Catrobat.Paint.Phone.Controls.AppBar
                     return new Uri("/Assets/ToolMenu/icon_menu_rotate_left.png", UriKind.Relative);
                 case ToolType.Line:
                     return new Uri("/Assets/ToolMenu/icon_menu_straight_line.png", UriKind.Relative);
+                case ToolType.Flip:
+                    return new Uri("/Assets/ToolMenu/icon_menu_flip_horizontal.png", UriKind.Relative);
 
                 default:
                     return null;
