@@ -9,9 +9,13 @@ namespace Catrobat.Paint.Phone.Tool
 {
     class FlipTool : ToolBase
     {
+        private int _scaleX;
+        private int _scaleY;
         public FlipTool()
         {
             this.ToolType = ToolType.Flip;
+            this._scaleX = 1;
+            this._scaleY = 1;
         }
 
 
@@ -38,7 +42,17 @@ namespace Catrobat.Paint.Phone.Tool
         public void FlipHorizontal()
         {
             var renderTransform = new ScaleTransform();
-            renderTransform.ScaleY = -1;
+            if (_scaleY == 1)
+            {
+                renderTransform.ScaleY = -1;
+                _scaleY = -1;
+            }
+            else 
+            {
+                renderTransform.ScaleY = 1;
+                _scaleY = 1;
+
+            }
             renderTransform.CenterY = 295;
 
             PocketPaintApplication.GetInstance().PaintingAreaContentPanelGrid.RenderTransform = renderTransform;
@@ -52,7 +66,17 @@ namespace Catrobat.Paint.Phone.Tool
             
 
             var renderTransform = new ScaleTransform();
-            renderTransform.ScaleX = -1;
+            if (_scaleX == 1)
+            {
+                renderTransform.ScaleX = -1;
+                _scaleX = -1;
+            }
+            else
+            {
+                renderTransform.ScaleX = 1;
+                _scaleX = 1;
+
+            }
 
             renderTransform.CenterX = 225;
 
