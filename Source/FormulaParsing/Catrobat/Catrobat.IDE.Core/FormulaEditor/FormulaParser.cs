@@ -11,7 +11,6 @@ namespace Catrobat.IDE.Core.FormulaEditor
     class FormulaParser
     {
         private readonly FormulaTokenizer _tokenizer;
-        private readonly FormulaInterpreter _interpreter = new FormulaInterpreter();
 
         public FormulaParser(IEnumerable<UserVariable> localVariables, IEnumerable<UserVariable> globalVariables)
         {
@@ -32,7 +31,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                 parsingError = new ParsingError(parsingErrors1.FirstOrDefault());
                 return false;
             }
-            formula = _interpreter.Interpret(tokens, out parsingError);
+            formula = FormulaInterpreter.Interpret(tokens.ToList(), out parsingError);
             return parsingError == null;
         }
 

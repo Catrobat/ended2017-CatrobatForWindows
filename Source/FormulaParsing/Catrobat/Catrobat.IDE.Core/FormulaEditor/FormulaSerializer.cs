@@ -1,12 +1,13 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+﻿using System;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Core.FormulaEditor
 {
     public class FormulaSerializer
     {
-        public static string EmptyChild = " ";
+        public const string EmptyChild = " ";
 
-        public string Serialize(IFormulaTree formula)
+        public static string Serialize(IFormulaTree formula)
         {
             if (formula == null) return string.Empty;
 #if DEBUG

@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
-
-namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
+﻿namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
 {
-    public abstract partial class BaseFormulaToken : IFormulaToken
+    public abstract class BaseFormulaToken : IFormulaToken
     {
-        #region overrides Equals
+        #region Overrides Equals
 
         public override bool Equals(object obj)
         {
@@ -18,12 +15,23 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
 
         protected bool Equals(BaseFormulaToken other)
         {
+            // auto-implemented by ReSharper
             return true;
         }
 
         public override int GetHashCode()
         {
+            // auto-implemented by ReSharper
             return 0;
+        }
+
+        #endregion
+
+        #region Implements ICloneable
+
+        public virtual object Clone()
+        {
+            return MemberwiseClone();
         }
 
         #endregion

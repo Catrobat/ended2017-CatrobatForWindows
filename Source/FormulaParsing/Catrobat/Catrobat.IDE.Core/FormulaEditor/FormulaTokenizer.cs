@@ -45,6 +45,10 @@ namespace Catrobat.IDE.Core.FormulaEditor
                 // brackets
                 else if (Tokenize(input, ref index, "(", () => FormulaTokenFactory.CreateParenthesisToken(true), ref tokens)) { }
                 else if (Tokenize(input, ref index, ")", () => FormulaTokenFactory.CreateParenthesisToken(false), ref tokens)) { }
+                else if (Tokenize(input, ref index, "{", () => FormulaTokenFactory.CreateParenthesisToken(true), ref tokens)) { }
+                else if (Tokenize(input, ref index, "}", () => FormulaTokenFactory.CreateParenthesisToken(false), ref tokens)) { }
+                else if (Tokenize(input, ref index, "[", () => FormulaTokenFactory.CreateParenthesisToken(true), ref tokens)) { }
+                else if (Tokenize(input, ref index, "]", () => FormulaTokenFactory.CreateParenthesisToken(false), ref tokens)) { }
 
                 // numbers
                 else if (Tokenize(input, ref index, "pi", FormulaTokenFactory.CreatePiToken, ref tokens)) { }
@@ -59,10 +63,13 @@ namespace Catrobat.IDE.Core.FormulaEditor
                 // relational operators
                 else if (Tokenize(input, ref index, "==", FormulaTokenFactory.CreateEqualsToken, ref tokens)) { }
                 else if (Tokenize(input, ref index, "=", FormulaTokenFactory.CreateEqualsToken, ref tokens)) { }
+                else if (Tokenize(input, ref index, "≠", FormulaTokenFactory.CreateNotEqualsToken, ref tokens)) { }
                 else if (Tokenize(input, ref index, "<>", FormulaTokenFactory.CreateNotEqualsToken, ref tokens)) { }
                 else if (Tokenize(input, ref index, "!=", FormulaTokenFactory.CreateNotEqualsToken, ref tokens)) { }
+                else if (Tokenize(input, ref index, "≤", FormulaTokenFactory.CreateLessEqualToken, ref tokens)) { }
                 else if (Tokenize(input, ref index, "<=", FormulaTokenFactory.CreateLessEqualToken, ref tokens)) { }
                 else if (Tokenize(input, ref index, "<", FormulaTokenFactory.CreateLessToken, ref tokens)) { }
+                else if (Tokenize(input, ref index, "≥", FormulaTokenFactory.CreateGreaterEqualToken, ref tokens)) { }
                 else if (Tokenize(input, ref index, ">=", FormulaTokenFactory.CreateGreaterEqualToken, ref tokens)) { }
                 else if (Tokenize(input, ref index, ">", FormulaTokenFactory.CreateGreaterToken, ref tokens)) { }
                 
@@ -153,11 +160,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
 
         #region Tokenize formula
 
-        public FormulaTokenizer()
-        {
-        }
-
-        public IEnumerable<IFormulaToken> Tokenize(IFormulaTree formula)
+        public static IEnumerable<IFormulaToken> Tokenize(IFormulaTree formula)
         {
             if (formula == null) return null;
 #if DEBUG

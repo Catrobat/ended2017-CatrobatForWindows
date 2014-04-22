@@ -2,7 +2,7 @@
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
 {
-    public abstract partial class FormulaTokenBracket : BaseFormulaToken
+    public abstract class FormulaTokenBracket : BaseFormulaToken
     {
         public virtual bool IsOpening { get; set; }
 
@@ -12,12 +12,18 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
             set { IsOpening = !value; }
         }
 
-        #region overrides Equals
+        #region Overrides Equals
+
+        public override bool Equals(object obj)
+        {
+            // auto-implemented by ReSharper
+            return base.Equals(obj) && Equals((FormulaTokenBracket)obj);
+        }
 
         protected bool Equals(FormulaTokenBracket other)
         {
             // auto-implemented by ReSharper
-            return base.Equals(other) && IsOpening.Equals(other.IsOpening);
+            return Equals(IsOpening, other.IsOpening);
         }
 
         public override int GetHashCode()
@@ -35,7 +41,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
     #region Implementations
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public partial class FormulaTokenParenthesis : FormulaTokenBracket
+    public class FormulaTokenParenthesis : FormulaTokenBracket
     {
         protected string DebuggerDisplay
         {

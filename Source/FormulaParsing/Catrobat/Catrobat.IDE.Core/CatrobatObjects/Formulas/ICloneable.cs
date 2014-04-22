@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
+namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 {
     /// <summary>Supports cloning, which creates a new instance of a class with the same value as an existing instance. </summary>
     /// <remarks><see cref="http://msdn.microsoft.com/en-us/library/system.icloneable.aspx"/></remarks>
@@ -12,6 +12,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         /// <para>The resulting clone must be of the same type as, or compatible with, the original instance. </para>
         /// <para>See <see cref="Object.MemberwiseClone"/> for more information on cloning, deep versus shallow copies, and examples. </para>
         /// </remarks>
-        Object Clone();
+        object Clone();
     }
 }

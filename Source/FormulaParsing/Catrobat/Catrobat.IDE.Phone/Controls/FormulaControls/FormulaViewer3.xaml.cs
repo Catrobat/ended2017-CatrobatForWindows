@@ -15,6 +15,8 @@ using System.Windows.Media.Animation;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {
+    public delegate void DoubleTap(int index);
+
     public partial class FormulaViewer3
     {
         #region DependencyProperties
@@ -106,6 +108,8 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
  
             MoveCaret((int)e.OldValue, (int)e.NewValue);
         }
+
+        // TODO: Create SelectionStart property and calculate CaretIndex = SelectionStart + SelectionLength
 
         public static readonly DependencyProperty SelectionLengthProperty = DependencyProperty.Register(
             name: "SelectionLength",
@@ -254,6 +258,16 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         #endregion
 
+        #region Events
+
+        public DoubleTap DoubleTap;
+        private void RaiseDoubleTap(int index)
+        {
+            if (DoubleTap != null) DoubleTap.Invoke(index);
+        }
+
+        #endregion
+
         private List<FormulaPartControl> _templates;
 
         public FormulaViewer3()
@@ -284,6 +298,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             var index = Children.IndexOf(sender);
             if (index == -1) return;
             if (CaretIndex < index) index--;
+            if (e.GetPosition(sender).X > sender.ActualWidth/2) index++;
             CaretIndex = index;
             e.Handled = true;
         }
@@ -293,9 +308,8 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             var index = Children.IndexOf(sender);
             if (index == -1) return;
             if (CaretIndex < index) index--;
-            // TODO: select whole part
-            CaretIndex = index;
-            SelectionLength = 1;
+            RaiseDoubleTap(index);
+            e.Handled = true;
         }
 
         private void Panel_OnTap(object sender, GestureEventArgs e)

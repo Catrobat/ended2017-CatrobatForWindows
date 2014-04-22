@@ -8,22 +8,17 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         #region Implements IFormulaInterpreter
 
-        public override void ClearChildren()
-        {
-            Child = null;
-        }
-
         protected bool IsNumberN1N()
         {
             // TODO: meaningful (translated?) error message
-            if (!Child.IsNumber()) throw new SemanticErrorException(this, "Child must be number");
+            if (!Child.IsNumber()) throw new SemanticsErrorException(this, "Child must be number");
             return true;
         }
 
         protected bool IsNumberL1L()
         {
             // TODO: meaningful (translated?) error message
-            if (Child.IsNumber()) throw new SemanticErrorException(this, "Child must be logic value");
+            if (Child.IsNumber()) throw new SemanticsErrorException(this, "Child must be logic value");
             return true;
         }
 

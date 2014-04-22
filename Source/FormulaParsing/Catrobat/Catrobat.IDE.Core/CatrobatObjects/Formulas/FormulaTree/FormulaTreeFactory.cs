@@ -336,11 +336,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         {
             return new FormulaNodeLayer();
         }
-        public static FormulaNodeTransparency CreateTransparencyNode()
-        {
-            return new FormulaNodeTransparency();
-        }
-        public static FormulaNodePositionX CreatePositionXNode()
+         public static FormulaNodePositionX CreatePositionXNode()
         {
             return new FormulaNodePositionX();
         }
@@ -355,6 +351,10 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         public static FormulaNodeSize CreateSizeNode()
         {
             return new FormulaNodeSize();
+        }
+        public static FormulaNodeTransparency CreateTransparencyNode()
+        {
+            return new FormulaNodeTransparency();
         }
 
         #endregion

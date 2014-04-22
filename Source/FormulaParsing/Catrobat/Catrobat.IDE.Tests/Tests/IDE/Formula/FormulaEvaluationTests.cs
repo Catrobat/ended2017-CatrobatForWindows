@@ -12,7 +12,6 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
     [TestClass]
     public class FormulaEvaluationTests
     {
-        private readonly FormulaEvaluator _evaluator = new FormulaEvaluator();
         private readonly Random _random = new Random();
 
         [TestInitialize]
@@ -24,7 +23,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNull()
         {
-            Assert.AreEqual(null, _evaluator.Evaluate(null));
+            Assert.AreEqual(null, FormulaEvaluator.Evaluate(null));
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
@@ -172,24 +171,24 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         {
             Assert.AreEqual(
                 expected: expectedValue,
-                actual: formula.EvaluateNumber());
+                actual: FormulaEvaluator.Evaluate(formula));
         }
 
         private void TestEvaluator(bool expectedValue, IFormulaTree formula)
         {
             Assert.AreEqual(
                 expected: expectedValue,
-                actual: formula.EvaluateLogic());
+                actual: FormulaEvaluator.EvaluateLogic(formula));
         }
 
         private void TestEvaluator(Func<double, bool> condition, IFormulaTree formula)
         {
-            Assert.IsTrue(condition(formula.EvaluateNumber()));
+            Assert.IsTrue(condition(FormulaEvaluator.EvaluateNumber(formula)));
         }
 
         private void TestEvaluator(Func<bool, bool> condition, IFormulaTree formula)
         {
-            Assert.IsTrue(condition(formula.EvaluateLogic()));
+            Assert.IsTrue(condition(FormulaEvaluator.EvaluateLogic(formula)));
         }
 
         private void TestEvaluator(Func<double, bool> condition, Func<ConstantFormulaTree> formulaCreator)

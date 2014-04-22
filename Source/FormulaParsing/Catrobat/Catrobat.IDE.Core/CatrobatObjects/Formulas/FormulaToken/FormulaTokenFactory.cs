@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 
@@ -10,10 +9,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
         #region Constants
 
         public static FormulaNodeNumber CreateDigitToken(int value)
-        {
-            return FormulaTreeFactory.CreateNumberNode(value);
-        }
-        public static FormulaNodeNumber CreateNumberToken(double value)
         {
             return FormulaTreeFactory.CreateNumberNode(value);
         }
@@ -123,6 +118,15 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
         {
             return new FormulaTokenParameterSeparator();
         }
+        internal static FormulaTokenParameters CreateParametersToken(IFormulaTree arg1, IFormulaTree arg2)
+        {
+            return new FormulaTokenParameters
+            {
+                FirstParameter = arg1,
+                SecondParameter = arg2
+            };
+        }
+
         public static FormulaNodeExp CreateExpToken()
         {
             return FormulaTreeFactory.CreateExpNode(null);
@@ -235,10 +239,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
         {
             return FormulaTreeFactory.CreateLayerNode();
         }
-        public static FormulaNodeTransparency CreateTransparencyToken()
-        {
-            return FormulaTreeFactory.CreateTransparencyNode();
-        }
         public static FormulaNodePositionX CreatePositionXToken()
         {
             return FormulaTreeFactory.CreatePositionXNode();
@@ -254,6 +254,10 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
         public static FormulaNodeSize CreateSizeToken()
         {
             return FormulaTreeFactory.CreateSizeNode();
+        }
+        public static FormulaNodeTransparency CreateTransparencyToken()
+        {
+            return FormulaTreeFactory.CreateTransparencyNode();
         }
 
         #endregion
@@ -280,14 +284,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
                 IsOpening = isOpening
             };
         }
-        public static FormulaTokenParentheses CreateParenthesesToken(IEnumerable<IFormulaToken> children)
-        {
-            return new FormulaTokenParentheses
-            {
-                Children = children.ToList()
-            };
-        }
-
+ 
         #endregion
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Specialized;
-using System.Security.Principal;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
@@ -17,7 +16,6 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
  
         #region Members
 
-        private readonly FormulaTokenizer _tokenizer;
         private IFormulaTree _formula;
         public IFormulaTree Formula
         {
@@ -28,7 +26,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 RaisePropertyChanged(() => Formula);
                 Tokens = _formula == null ? 
                     new ObservableCollection<IFormulaToken>() : 
-                    new ObservableCollection<IFormulaToken>(_tokenizer.Tokenize(_formula));
+                    new ObservableCollection<IFormulaToken>(FormulaTokenizer.Tokenize(_formula));
                 CaretIndex = Tokens.Count;
             }
         }
@@ -114,6 +112,7 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         public bool CanDelete
         {
+            // TODO: change to SelectionLength <> 0 || CaretIndex > 0
             get { return CaretIndex > 0; }
         }
 
@@ -123,11 +122,6 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
         }
 
         #endregion
-
-        public FormulaEditor3()
-        {
-            _tokenizer = new FormulaTokenizer();
-        }
 
         public void ResetViewModel()
         {
@@ -156,7 +150,14 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 case FormulaEditorKey.Delete:
                     if (CaretIndex == 0) return false;
                     PushUndo();
-                    return RemoveToken();
+                    if (SelectionLength == 0) return RemoveToken();
+                    var count = SelectionLength;
+                    for (var i = 1; i <= count; i++)
+                    {
+                        RemoveToken(CaretIndex);
+                    }
+                    SelectionLength = 0;
+                    return true;
                 case FormulaEditorKey.Undo:
                     return Undo();
                 case FormulaEditorKey.Redo:
@@ -322,17 +323,26 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         #endregion
 
-        private readonly FormulaInterpreter _interpreter = new FormulaInterpreter();
         private void InterpretTokens()
         {
-            var interpretedFormula = _interpreter.Interpret(Tokens, out _parsingError);
-            if (interpretedFormula != null)
+            if (Tokens == null || Tokens.Count == 0)
             {
-                _formula = interpretedFormula;
-                RaisePropertyChanged(() => Formula);
+                // TODO: translate parsing error message
+                _parsingError = new ParsingError("Type something", 0, 0);
+                RaisePropertyChanged(() => ParsingError);
+                RaisePropertyChanged(() => HasError);
             }
-            RaisePropertyChanged(() => ParsingError);
-            RaisePropertyChanged(() => HasError);
+            else
+            {
+                var interpretedFormula = FormulaInterpreter.Interpret(Tokens, out _parsingError);
+                if (interpretedFormula != null)
+                {
+                    _formula = interpretedFormula;
+                    RaisePropertyChanged(() => Formula);
+                }
+                RaisePropertyChanged(() => ParsingError);
+                RaisePropertyChanged(() => HasError);
+            }
         }
 
         private bool InsertToken(IFormulaToken token)
@@ -350,7 +360,6 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
                 Tokens.Insert(index, token);
             }
             CaretIndex = index + 1;
-            InterpretTokens();
             RaisePropertyChanged(() => CanLeft);
             RaisePropertyChanged(() => CanDelete);
             return true;
@@ -358,12 +367,15 @@ namespace Catrobat.IDE.Core.FormulaEditor.Editor
 
         private bool RemoveToken()
         {
+            return RemoveToken(CaretIndex - 1);
+        }
+
+        private bool RemoveToken(int index)
+        {
             if (Tokens == null) return false;
-            var index = CaretIndex - 1;
             if (!(0 <= index && index < Tokens.Count)) return false;
             Tokens.RemoveAt(index);
             CaretIndex = index;
-            InterpretTokens();
             RaisePropertyChanged(() => CanLeft);
             RaisePropertyChanged(() => CanDelete);
             return true;
