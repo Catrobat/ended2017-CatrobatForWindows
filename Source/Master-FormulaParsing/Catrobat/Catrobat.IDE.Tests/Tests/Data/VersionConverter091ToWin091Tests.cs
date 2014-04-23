@@ -81,7 +81,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             var error = CatrobatVersionConverter.ConvertVersions("0.91", "Win0.91", actualDocument);
             Assert.AreEqual(CatrobatVersionConverter.VersionConverterError.NoError, error);
 
-            XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+            XmlDocumentComparer.Compare(expectedDocument, actualDocument);
         }
 
     }

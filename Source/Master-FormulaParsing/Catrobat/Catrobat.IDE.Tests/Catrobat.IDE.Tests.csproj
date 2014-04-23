@@ -115,7 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnumerableAssert.cs" />
-    <Compile Include="Misc\FormulaComparer.cs" />
+    <Compile Include="Misc\XmlFormulaTreeComparer.cs" />
     <Compile Include="Misc\ITestProjectGenerator.cs" />
     <Compile Include="Misc\PlatformInformationHelperTests.cs" />
     <Compile Include="Misc\ProjectGeneratorForReferenceHelperTests.cs" />
@@ -132,7 +132,7 @@
     <Compile Include="Services\Storage\StorageFactoryTest.cs" />
     <Compile Include="Services\Storage\StorageTest.cs" />
     <Compile Include="Misc\TestHelper.cs" />
-    <Compile Include="Misc\XmlDocumentCompare.cs" />
+    <Compile Include="Misc\XmlDocumentComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleData\SampleLoader.cs" />
     <Compile Include="Services\NavigationServiceTest.cs" />

@@ -212,7 +212,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         {
             foreach (var formula in formulas)
             {
-                FormulaComparer.CompareFormulasGenerously(
+                XmlFormulaTreeComparer.CompareFormulas(
                     actualFormula: formula, 
                     expectedFormula: converter.ConvertBack(converter.Convert(formula)));
             }
