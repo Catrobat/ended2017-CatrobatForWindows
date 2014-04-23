@@ -5,6 +5,7 @@ using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Bricks;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using Catrobat.IDE.Core.CatrobatObjects.Scripts;
 using Catrobat.IDE.Core.Resources.Localization;
 using Catrobat.IDE.Core.Services.Storage;
@@ -115,20 +116,10 @@ namespace Catrobat.IDE.Core.Services.Common
             });
 
             objectBackground.Scripts.Scripts.Add(new StartScript());
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick{YPosition = new Formula{FormulaTree = new FormulaTree()}});
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new FormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new FormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new FormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new FormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new FormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new FormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new FormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new FormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new FormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new FormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new FormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new FormulaTree() } });
-            objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick { YPosition = new Formula { FormulaTree = new FormulaTree() } });
+            for (var i = 1; i <= 14; i++)
+            {
+                objectBackground.Scripts.Scripts[0].Bricks.Bricks.Add(new SetYBrick {YPosition = new Formula {FormulaTree2 = null}});
+            }
 
             objectBackground.Scripts.Scripts.Add(new WhenScript());
             objectBackground.Scripts.Scripts.Add(new BroadcastScript());

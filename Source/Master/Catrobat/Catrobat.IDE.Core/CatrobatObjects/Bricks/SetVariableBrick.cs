@@ -3,6 +3,7 @@ using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using System.ComponentModel;
 using System.Globalization;
 using System.Xml.Linq;
+using Catrobat.IDE.Core.FormulaEditor;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
 {
@@ -92,10 +93,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
             return xRoot;
         }
 
-        internal override void LoadReference()
+        internal override void LoadReference(XmlFormulaTreeConverter converter)
         {
             if(_userVariableReference != null)
                 _userVariableReference.LoadReference();
+            if(_variableFormula != null)
+                _variableFormula.LoadReference(converter);
         }
 
         public override DataObject Copy()

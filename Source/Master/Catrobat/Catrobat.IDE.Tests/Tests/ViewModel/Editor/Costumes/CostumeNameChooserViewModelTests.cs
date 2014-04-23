@@ -24,6 +24,7 @@ namespace Catrobat.IDE.Tests.Tests.ViewModel.Editor.Costumes
             ServiceLocator.Register<StorageFactoryTest>(TypeCreationMode.Normal);
             ServiceLocator.Register<StorageTest>(TypeCreationMode.Normal);
             ServiceLocator.Register<ImageResizeServiceTest>(TypeCreationMode.Normal);
+            ServiceLocator.Register<SensorServiceTest>(TypeCreationMode.Normal);
         }
 
         [TestMethod] // , TestCategory("GatedTests") // TODO: fix test takes very long time on server

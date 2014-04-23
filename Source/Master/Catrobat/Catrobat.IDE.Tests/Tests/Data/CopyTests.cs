@@ -60,7 +60,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             var document1 = XDocument.Load(new StringReader(xml1));
             var document2 = XDocument.Load(new StringReader(xml2));
 
-            XmlDocumentCompare.Compare(document1, document2);
+            XmlDocumentComparer.Compare(document1, document2);
         }
     }
 }
