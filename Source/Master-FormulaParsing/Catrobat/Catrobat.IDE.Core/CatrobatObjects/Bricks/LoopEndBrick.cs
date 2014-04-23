@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using Catrobat.IDE.Core.FormulaEditor;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
 {
@@ -62,7 +63,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
             xRoot.Add(_loopBeginBrickReference.CreateXML());
         }
 
-        internal override void LoadReference()
+        internal override void LoadReference(XmlFormulaTreeConverter converter)
         {
             if (_loopBeginBrickReference != null)
                 _loopBeginBrickReference.LoadReference();

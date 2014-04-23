@@ -18,6 +18,8 @@ namespace Catrobat.IDE.Phone.Converters
 
     public class FloatStringConverterBootstrap : PortableValueConverterPhone<FloatStringConverter> { }
 
+    public class FormulaStringConverterBootstrap : PortableValueConverterPhone<FormulaStringConverter> { }
+
     public class IntPixelConverterBootstrap : PortableValueConverterPhone<IntPixelConverter> { }
 
     public class IntStringConverterBootstrap : PortableValueConverterPhone<IntStringConverter> { }

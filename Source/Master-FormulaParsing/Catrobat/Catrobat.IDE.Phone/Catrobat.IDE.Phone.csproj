@@ -176,6 +176,16 @@
     <Compile Include="Content\Images\Misc\ImageGallery.xaml.cs">
       <DependentUpon>ImageGallery.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FormulaControls\Templates\UiFormulaTokenDefinitionCollection.cs" />
+    <Compile Include="Controls\FormulaControls\Templates\UiFormulaTokenDefinition.cs" />
+    <Compile Include="Controls\FormulaControls\FormulaViewer3.xaml.cs">
+      <DependentUpon>FormulaViewer3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlDecimalSeparator.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlNumber.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlVariable.cs" />
+    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlParenthesis.cs" />
+    <Compile Include="Converters\NamespaceTypeConverter.cs" />
     <Compile Include="Controls\SplashScreen\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
@@ -206,22 +216,9 @@
     <Compile Include="Controls\FormulaControls\FormulaKeyboard.xaml.cs">
       <DependentUpon>FormulaKeyboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FormulaControls\Formulas\FormulaDefinition.cs" />
-    <Compile Include="Controls\FormulaControls\Formulas\FormulaDefinitionCollection.cs" />
-    <Compile Include="Controls\FormulaControls\Formulas\StringList.cs" />
-    <Compile Include="Controls\FormulaControls\Formulas\UiFormula.cs" />
-    <Compile Include="Controls\FormulaControls\Formulas\UiFormulaMappings.cs" />
-    <Compile Include="Controls\FormulaControls\FormulaViewer.xaml.cs">
-      <DependentUpon>FormulaViewer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControl.cs" />
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlDynamicLocalizedText.cs" />
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlList.cs" />
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlPlaceholderLeft.cs" />
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlPlaceholderRight.cs" />
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlStaticLocalizedText.cs" />
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlText.cs" />
-    <Compile Include="Controls\FormulaControls\PartControls\FormulaPartStyleCollection.cs" />
+    <Compile Include="Controls\FormulaControls\Templates\FormulaPartStyleCollection.cs" />
     <Compile Include="Controls\FormulaControls\VariableButton.xaml.cs">
       <DependentUpon>VariableButton.xaml</DependentUpon>
     </Compile>
@@ -251,7 +248,8 @@
     <Compile Include="Services\DispatcherServicePhone.cs" />
     <Compile Include="Services\ImageResizeServicePhone.cs" />
     <Compile Include="Services\ImageSourceConversionServicePhone.cs" />
-    <Compile Include="Services\SoundServicePhone.cs" />
+    <Compile Include="Services\Microphone2.cs" />
+    <Compile Include="Services\MicrophoneReading.cs" />
     <Compile Include="Services\ProjectImporterServicePhone.cs" />
     <Compile Include="Services\NavigationServicePhone.cs" />
     <Compile Include="Services\NotificationServicePhone.cs" />
@@ -262,6 +260,8 @@
     <Compile Include="Services\ShareServicePhone.cs" />
     <Compile Include="Services\SoundPlayerServicePhone.cs" />
     <Compile Include="Services\SoundRecorderServicePhone.cs" />
+    <Compile Include="Services\SensorServicePhone.cs" />
+    <Compile Include="Services\SoundServicePhone.cs" />
     <Compile Include="Services\Storage\ResourceLoaderFactoryPhone.cs" />
     <Compile Include="Services\Storage\ResourcesPhone.cs" />
     <Compile Include="Services\Storage\StorageFactoryPhone.cs" />
@@ -442,11 +442,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\FormulaControls\FormulaViewer.xaml">
+    <Page Include="Controls\FormulaControls\FormulaViewer3.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\FormulaControls\Templates\FormulaTemplates.xaml">
+    <Page Include="Controls\FormulaControls\Templates\FormulaTokenTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -885,6 +885,7 @@
   <ItemGroup>
     <Folder Include="Content\Libs\" />
     <Folder Include="Content\Programs\Default\Sounds\" />
+    <Folder Include="Controls\FormulaControls\Formulas\" />
     <Folder Include="Services\LocalServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

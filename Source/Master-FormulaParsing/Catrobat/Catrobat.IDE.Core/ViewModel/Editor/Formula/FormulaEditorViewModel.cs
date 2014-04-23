@@ -1,52 +1,47 @@
-﻿using Catrobat.IDE.Core.FormulaEditor.Editor;
+﻿using Catrobat.IDE.Core.CatrobatObjects;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+using Catrobat.IDE.Core.FormulaEditor;
+using Catrobat.IDE.Core.FormulaEditor.Editor;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.UI.Formula;
-using Catrobat.IDE.Core.Utilities.Helpers;
-using Catrobat.IDE.Core.CatrobatObjects;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.UI;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using System.Collections.Generic;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas;
+using System.Collections.ObjectModel;
 
 namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 {
-    public delegate void FormulaChanged(SelectedFormulaInformation formulaInformation);
-
     public delegate void ErrorOccurred();
+    public delegate void Reset();
+    public delegate void Evaluated(object value);
 
     public class FormulaEditorViewModel : ViewModelBase
     {
         #region Events
 
-        public FormulaChanged FormulaChanged;
-
-        public ErrorOccurred ErrorOccurred;
-
-        private void RaiseFormulaChanged(SelectedFormulaInformation formulaInformation)
-        {
-            if (FormulaChanged != null)
-                FormulaChanged.Invoke(formulaInformation);
-        }
-
+        public event ErrorOccurred ErrorOccurred;
         private void RaiseKeyError()
         {
             if (ErrorOccurred != null)
                 ErrorOccurred.Invoke();
         }
 
+        public event Reset Reset;
+        private void RaiseReset()
+        {
+            if (Reset != null)
+                Reset.Invoke();
+        }
+
         #endregion
 
-        #region Private Members
+        #region Members
 
-        private Core.CatrobatObjects.Formulas.Formula _formula;
+        private readonly FormulaEditor3 _editor = new FormulaEditor3();
         private Sprite _selectedSprite;
-        private IPortableFormulaButton _formulaButton;
         private Project _currentProject;
-        private SelectedFormulaInformation _selectedFormulaInformation;
-        private readonly Stack<FormulaTree> _undoStack = new Stack<FormulaTree>();
-        private readonly Stack<FormulaTree> _redoStack = new Stack<FormulaTree>(); 
-
+        private VariableConteiner _variableContainer;
+        
         #endregion
 
         #region Properties
@@ -54,26 +49,10 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         public Project CurrentProject
         {
             get { return _currentProject; }
-            private set { _currentProject = value; RaisePropertyChanged(() => CurrentProject); }
-        }
-
-        public IPortableFormulaButton FormulaButton
-        {
-            get { return _formulaButton; }
-            set
+            private set
             {
-                _formulaButton = value;
-                RaisePropertyChanged(() => FormulaButton);
-            }
-        }
-
-        public SelectedFormulaInformation SelectedFormulaInformation
-        {
-            get { return _selectedFormulaInformation; }
-            set
-            {
-                _selectedFormulaInformation = value;
-                RaisePropertyChanged(() => SelectedFormulaInformation);
+                _currentProject = value; 
+                RaisePropertyChanged(() => CurrentProject);
             }
         }
 
@@ -87,99 +66,119 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             }
         }
 
-        public Core.CatrobatObjects.Formulas.Formula Formula
+        public IFormulaTree Formula
         {
-            get { return _formula; }
-            set
-            {
-                _formula = value;
-                RaisePropertyChanged(() => Formula);
-            }
+            get { return _editor.Formula; }
+            set { _editor.Formula = value; }
+        }
+
+        public ObservableCollection<IFormulaToken> Tokens
+        {
+            get { return _editor.Tokens; }
+        }
+
+        public int CaretIndex
+        {
+            get { return _editor.CaretIndex; }
+            set { _editor.CaretIndex = value; }
+        }
+
+        public int SelectionLength
+        {
+            get { return _editor.SelectionLength; }
+            set { _editor.SelectionLength = value; }
+        }
+
+        public ParsingError ParsingError
+        {
+            get { return _editor.ParsingError; }
+        }
+
+        public bool CanLeft
+        {
+            get { return _editor.CanLeft; }
+        }
+
+        public bool CanRight
+        {
+            get { return _editor.CanRight; }
+        }
+
+        public bool CanDelete
+        {
+            get { return _editor.CanDelete; }
+        }
+
+        public bool CanUndo
+        {
+            get { return _editor.CanUndo; }
+        }
+
+        public bool CanRedo
+        {
+            get { return _editor.CanRedo; }
+        }
+
+        public bool HasError
+        {
+            get { return _editor.HasError; }
+        }
+
+        public bool CanEvaluate
+        {
+            get { return !HasError; }
         }
 
         #endregion
 
         #region Commands
 
-        public RelayCommand<IPortableUIFormula> FormulaPartSelectedComand { get; private set; }
-
-        public RelayCommand FormulaChangedCommand { get; private set; }
-
-        public RelayCommand<SensorVariable> SensorVariableSelectedCommand { get; private set; }
-
-        public RelayCommand<ObjectVariable> ObjectVariableSelectedCommand { get; private set; }
-
-        public RelayCommand<FormulaEditorKey> KeyPressedCommand { get; private set; }
-
-        #endregion
-
-        #region Actions
-
-        private static void FormulaPartSelectedAction(IPortableUIFormula formula)
+        public RelayCommand<FormulaKeyEventArgs> KeyPressedCommand { get; private set; }
+        private void KeyPressedAction(FormulaKeyEventArgs e)
         {
-            bool wasSelected = formula.IsSelected;
-
-            formula.ClearAllSelection();
-
-            if (formula.IsEditEnabled)
-                formula.IsSelected = !wasSelected;
+            if (!_editor.HandleKey(e.Key, e.UserVariable)) RaiseKeyError();
         }
 
-        private void FormulaChangedAction()
+        public RelayCommand EvaluatePressedCommand { get; private set; }
+
+        private void EvaluatePressedAction()
         {
-            if (FormulaButton != null)
-                FormulaButton.FormulaChanged();
+            var value = FormulaEvaluator.Evaluate(Formula);
+            var message = value == null ? string.Empty : value.ToString();
+            ServiceLocator.NotifictionService.ShowToastNotification("", message, ToastNotificationTime.Medeum);
         }
 
-        private void KeyPressedCommandAction(FormulaEditorKey key)
-        {
-            var formulaEditor = new FormulaEditor.Editor.FormulaEditor
-            {
-                SelectedFormula = SelectedFormulaInformation,
-                UndoStack = _undoStack,
-                RedoStack = _redoStack
-            };
-            if (!formulaEditor.KeyPressed(key))
-                RaiseKeyError();
+        public RelayCommand ShowErrorPressedCommand { get; private set; }
 
-            FormulaButton.FormulaChanged();
-            RaiseFormulaChanged(SelectedFormulaInformation);
+        private void ShowErrorPressedAction()
+        {
+            // TODO: pretty up toast notification
+            CaretIndex = ParsingError.Index;
+            SelectionLength = ParsingError.Length;
+            ServiceLocator.NotifictionService.ShowToastNotification(
+                title: "",
+                message: ParsingError.Message,
+                timeTillHide: ToastNotificationTime.Medeum);
         }
 
-        private void ObjectVariableSelectedAction(ObjectVariable variable)
+        public RelayCommand StartSensorsCommand { get; private set; }
+        private void StartSensorsAction()
         {
-            var formulaEditor = new FormulaEditor.Editor.FormulaEditor
-            {
-                SelectedFormula = SelectedFormulaInformation,
-                UndoStack = _undoStack,
-                RedoStack = _redoStack
-            };
-            if (!formulaEditor.ObjectVariableSelected(variable))
-                RaiseKeyError();
-
-            FormulaButton.FormulaChanged();
-            RaiseFormulaChanged(SelectedFormulaInformation);
+            ServiceLocator.SensorService.Start();
         }
 
-        private void SensorVariableSelectedAction(SensorVariable variable)
+        public RelayCommand StopSensorsCommand { get; private set; }
+        private void StopSensorsAction()
         {
-            var formulaEditor = new FormulaEditor.Editor.FormulaEditor
-            {
-                SelectedFormula = SelectedFormulaInformation,
-                UndoStack = _undoStack,
-                RedoStack = _redoStack
-            };
-            if (!formulaEditor.SensorVariableSelected(variable))
-                RaiseKeyError();
-
-            FormulaButton.FormulaChanged();
-            RaiseFormulaChanged(SelectedFormulaInformation);
+            ServiceLocator.SensorService.Stop();
         }
 
-        protected override void GoBackAction()
+        public RelayCommand<int> CompleteTokenCommand { get; private set; }
+        private void CompleteTokenAction(int index)
         {
-            ResetViewModel();
-            base.GoBackAction();
+            var selection = FormulaInterpreter.CompleteToken(Tokens, index);
+            CaretIndex = selection.Start;
+            SelectionLength = selection.Length;
         }
 
         #endregion
@@ -196,56 +195,48 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
             SelectedSprite = message.Content;
         }
 
-        private void SelectedUserVariableChangedMessageAction(GenericMessage<UserVariable> message)
-        {
-            var formulaEditor = new FormulaEditor.Editor.FormulaEditor { SelectedFormula = SelectedFormulaInformation };
-            var variable = message.Content;
-
-            if (VariableHelper.IsVariableLocal(CurrentProject, variable))
-            {
-                if (!formulaEditor.LocalVariableSelected(variable))
-                    RaiseKeyError();
-            }
-            else
-            {
-                if (!formulaEditor.GlobalVariableSelected(variable))
-                    RaiseKeyError();
-            }
-
-            RaiseFormulaChanged(SelectedFormulaInformation);
-        }
-
         #endregion
 
         public FormulaEditorViewModel()
         {
-            FormulaPartSelectedComand = new RelayCommand<IPortableUIFormula>(FormulaPartSelectedAction);
-            FormulaChangedCommand = new RelayCommand(FormulaChangedAction);
+            KeyPressedCommand = new RelayCommand<FormulaKeyEventArgs>(KeyPressedAction);
+            EvaluatePressedCommand = new RelayCommand(EvaluatePressedAction);
+            ShowErrorPressedCommand = new RelayCommand(ShowErrorPressedAction);
+            StartSensorsCommand = new RelayCommand(StartSensorsAction);
+            StopSensorsCommand = new RelayCommand(StopSensorsAction);
+            CompleteTokenCommand = new RelayCommand<int>(CompleteTokenAction);
+            
+            Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
+            Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
 
-            SensorVariableSelectedCommand = new RelayCommand<SensorVariable>(SensorVariableSelectedAction);
-            ObjectVariableSelectedCommand = new RelayCommand<ObjectVariable>(ObjectVariableSelectedAction);
-            KeyPressedCommand = new RelayCommand<FormulaEditorKey>(KeyPressedCommandAction);
-
-
-            Messenger.Default.Register<GenericMessage<Sprite>>(this,
-                ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
-
-            Messenger.Default.Register<GenericMessage<Project>>(this,
-                 ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
-
-
-            Messenger.Default.Register<GenericMessage<UserVariable>>(this,
-                 ViewModelMessagingToken.SelectedUserVariableChangedListener, SelectedUserVariableChangedMessageAction); 
+            InitEditorBindings();
         }
 
-
-        private void ResetViewModel() { }
+        private void InitEditorBindings()
+        {
+            _editor.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == GetPropertyName(() => _editor.Formula)) RaisePropertyChanged(() => Formula);
+                if (e.PropertyName == GetPropertyName(() => _editor.Tokens)) RaisePropertyChanged(() => Tokens);
+                if (e.PropertyName == GetPropertyName(() => _editor.CaretIndex)) RaisePropertyChanged(() => CaretIndex);
+                if (e.PropertyName == GetPropertyName(() => _editor.SelectionLength)) RaisePropertyChanged(() => SelectionLength);
+                if (e.PropertyName == GetPropertyName(() => _editor.CanUndo)) RaisePropertyChanged(() => CanUndo);
+                if (e.PropertyName == GetPropertyName(() => _editor.CanRedo)) RaisePropertyChanged(() => CanRedo);
+                if (e.PropertyName == GetPropertyName(() => _editor.CanLeft)) RaisePropertyChanged(() => CanLeft);
+                if (e.PropertyName == GetPropertyName(() => _editor.CanRight)) RaisePropertyChanged(() => CanRight);
+                if (e.PropertyName == GetPropertyName(() => _editor.CanDelete)) RaisePropertyChanged(() => CanDelete);
+                if (e.PropertyName == GetPropertyName(() => _editor.HasError)) RaisePropertyChanged(() => HasError);
+                if (e.PropertyName == GetPropertyName(() => _editor.HasError)) RaisePropertyChanged(() => CanEvaluate);
+                if (e.PropertyName == GetPropertyName(() => _editor.ParsingError)) RaisePropertyChanged(() => ParsingError);
+            };
+        }
 
         public override void Cleanup()
         {
+            StopSensorsCommand.Execute(null);
+            RaiseReset();
+            _editor.ResetViewModel();
             base.Cleanup();
-            _undoStack.Clear();
-            _redoStack.Clear();
         }
     }
 }

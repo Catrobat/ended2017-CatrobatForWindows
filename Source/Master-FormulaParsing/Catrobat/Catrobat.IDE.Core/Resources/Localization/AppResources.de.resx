@@ -968,4 +968,10 @@
   <data name="Main_Settings" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
+  <data name="Formula_LOUDNESS" xml:space="preserve">
+    <value>Lautstärke</value>
+  </data>
+  <data name="Editor_ReallyDismissFormula" xml:space="preserve">
+    <value>Erneut auf "zurück" um die Änderungen zu verwerfen?</value>
+  </data>
 </root>

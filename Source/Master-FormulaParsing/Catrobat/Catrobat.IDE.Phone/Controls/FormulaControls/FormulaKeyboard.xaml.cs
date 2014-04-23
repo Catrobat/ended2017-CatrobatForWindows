@@ -1,91 +1,173 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.ComponentModel;
+using System.Windows;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.FormulaEditor.Editor;
+using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Core.UI;
+using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.ViewModel.Editor.Formula;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {
-    public delegate void KeyPressed(FormulaEditorKey key);
-    public delegate void ObjectVariableSelected(ObjectVariable variable);
-    public delegate void SensorVariableSelected(SensorVariable variable);
-    public delegate void LocalUserVariableSelected(UserVariable variable);
-    public delegate void GlobalUserVariableSelected(UserVariable variable);
-    public delegate void EvaluatePresed();
-    public partial class FormulaKeyboard : UserControl
+    public delegate void KeyPressed(FormulaKeyEventArgs e);
+    public delegate void EvaluatePressed();
+    public delegate void ShowErrorPressed();
+
+    public partial class FormulaKeyboard
     {
-        #region DependancyProperties
+        #region Dependency properties
 
-        public UserVariable GlobalVariables
+        public static readonly DependencyProperty ProjectProperty = DependencyProperty.Register(
+            name: "Project",
+            propertyType: typeof(Project),
+            ownerType: typeof(FormulaKeyboard),
+            typeMetadata: new PropertyMetadata((d, e) => ((FormulaKeyboard)d).ProjectChanged(e)));
+        public Project Project
         {
-            get { return (UserVariable)GetValue(GlobalVariablesProperty); }
-            set { SetValue(GlobalVariablesProperty, value); }
+            get { return (Project) GetValue(ProjectProperty); }
+            set { SetValue(ProjectProperty, value); }
+        }
+        private void ProjectChanged(DependencyPropertyChangedEventArgs e)
+        {
         }
 
-        public static readonly DependencyProperty GlobalVariablesProperty = DependencyProperty.Register("GlobalVariables", typeof(UserVariable), typeof(FormulaKeyboard), new PropertyMetadata(GlobalVariablesChanged));
-
-        private static void GlobalVariablesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty CanDeleteProperty = DependencyProperty.Register(
+            name: "CanDelete",
+            propertyType: typeof(bool),
+            ownerType: typeof(FormulaKeyboard),
+            typeMetadata: new PropertyMetadata(false));
+        public bool CanDelete
         {
-            //((FormulaKeyboard) d).ListBoxGlobalVariables.ItemsSource = e.NewValue as IEnumerable;
+            get { return (bool) GetValue(CanDeleteProperty); }
+            set { SetValue(CanDeleteProperty, value); }
         }
 
-
-
-
-        public UserVariable LocalVariables
+        public static readonly DependencyProperty CanUndoProperty = DependencyProperty.Register(
+            name: "CanUndo",
+            propertyType: typeof(bool),
+            ownerType: typeof(FormulaKeyboard),
+            typeMetadata: new PropertyMetadata(false));
+        public bool CanUndo
         {
-            get { return (UserVariable)GetValue(LocalVariablesProperty); }
-            set { SetValue(LocalVariablesProperty, value); }
+            get { return (bool) GetValue(CanUndoProperty); }
+            set { SetValue(CanUndoProperty, value); }
         }
 
-        public static readonly DependencyProperty LocalVariablesProperty = DependencyProperty.Register("LocalVariables", typeof(UserVariable), typeof(FormulaKeyboard), new PropertyMetadata(LocalVariablesChanged));
-
-        private static void LocalVariablesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty CanRedoProperty = DependencyProperty.Register(
+            name: "CanRedo",
+            propertyType: typeof(bool),
+            ownerType: typeof(FormulaKeyboard),
+            typeMetadata: new PropertyMetadata(false));
+        public bool CanRedo
         {
-            //((FormulaKeyboard)d).ListBoxLocalVariables.ItemsSource = e.NewValue as IEnumerable;
+            get { return (bool) GetValue(CanRedoProperty); }
+            set { SetValue(CanRedoProperty, value); }
+        }
+
+        public static readonly DependencyProperty CanLeftProperty = DependencyProperty.Register(
+            name: "CanLeft",
+            propertyType: typeof(bool),
+            ownerType: typeof(FormulaKeyboard),
+            typeMetadata: new PropertyMetadata(false));
+        public bool CanLeft
+        {
+            get { return (bool) GetValue(CanLeftProperty); }
+            set { SetValue(CanLeftProperty, value); }
+        }
+
+        public static readonly DependencyProperty CanRightProperty = DependencyProperty.Register(
+            name: "CanRight",
+            propertyType: typeof(bool),
+            ownerType: typeof(FormulaKeyboard),
+            typeMetadata: new PropertyMetadata(false));
+        public bool CanRight
+        {
+            get { return (bool) GetValue(CanRightProperty); }
+            set { SetValue(CanRightProperty, value); }
+        }
+
+        public static readonly DependencyProperty CanEvaluateProperty = DependencyProperty.Register(
+            name: "CanEvaluate",
+            propertyType: typeof(bool),
+            ownerType: typeof(FormulaKeyboard),
+            typeMetadata: new PropertyMetadata(false));
+        public bool CanEvaluate
+        {
+            get { return (bool) GetValue(CanEvaluateProperty); }
+            set { SetValue(CanEvaluateProperty, value); }
+        }
+
+        public static readonly DependencyProperty HasErrorProperty = DependencyProperty.Register(
+            name: "HasError",
+            propertyType: typeof(bool),
+            ownerType: typeof(FormulaKeyboard),
+            typeMetadata: new PropertyMetadata(false));
+        public bool HasError
+        {
+            get { return (bool) GetValue(HasErrorProperty); }
+            set { SetValue(HasErrorProperty, value); }
+        }
+
+        public static readonly DependencyProperty DecimalSeparatorProperty = DependencyProperty.Register("DecimalSeparator", typeof(string), typeof(FormulaKeyboard), new PropertyMetadata("."));
+        public string DecimalSeparator
+        {
+            get { return (string) GetValue(DecimalSeparatorProperty); }
+            private set { SetValue(DecimalSeparatorProperty, value); }
         }
 
         #endregion
 
+        #region Events
 
         public KeyPressed KeyPressed;
-        public ObjectVariableSelected ObjectVariableSelected;
-        public SensorVariableSelected SensorVariableSelected;
-        public LocalUserVariableSelected LocalUserVariableSelected;
-        public GlobalUserVariableSelected GlobalUserVariableSelected;
-        public EvaluatePresed EvaluatePresed;
-        public void RaiseKeyPressed(FormulaEditorKey key)
+        private void RaiseKeyPressed(FormulaKeyEventArgs e)
         {
-            if(KeyPressed != null)
-                KeyPressed.Invoke(key);
+            if(KeyPressed != null) KeyPressed.Invoke(e);
+        }
+        public void RaiseKeyPressed(FormulaEditorKey key, UserVariable  variable = null)
+        {
+            RaiseKeyPressed(new FormulaKeyEventArgs(key, variable));
         }
 
-        public void RaiseObjectVariableSelected(ObjectVariable variable)
+        public EvaluatePressed EvaluatePressed;
+        private void RaiseEvaluatePressed()
         {
-            if (ObjectVariableSelected != null)
-                ObjectVariableSelected.Invoke(variable);
+            if (EvaluatePressed != null) EvaluatePressed.Invoke();
         }
 
-        public void RaiseSensorVariableSelected(SensorVariable variable)
+        public ShowErrorPressed ShowErrorPressed;
+        private void RaiseShowErrorPressed()
         {
-            if (SensorVariableSelected != null)
-                SensorVariableSelected.Invoke(variable);
+            if (ShowErrorPressed != null) ShowErrorPressed.Invoke();
         }
 
-        public void RaiseLocalUserVariableSelected(UserVariable variable)
-        {
-            if (LocalUserVariableSelected != null)
-                LocalUserVariableSelected.Invoke(variable);
-        }
+        #endregion
 
-        public void RaiseGlobalUserVariableSelected(UserVariable variable)
-        {
-            if (GlobalUserVariableSelected != null)
-                GlobalUserVariableSelected.Invoke(variable);
-        }
+        private readonly VariableConteiner _variableContainer = new VariableConteiner();
 
         public FormulaKeyboard()
         {
             InitializeComponent();
+
+            DecimalSeparator = ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator;
+            _variableContainer.PropertyChanged += VariableContainer_OnPropertyChanged;
+            ServiceLocator.ViewModelLocator.VariableSelectionViewModel.SelectedVariableContainer = _variableContainer;
+        }
+        private void FormulaKeyboard_OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            ServiceLocator.ViewModelLocator.VariableSelectionViewModel.SelectedVariableContainer = null;
+            _variableContainer.PropertyChanged -= VariableContainer_OnPropertyChanged;
+        }
+
+        private void VariableContainer_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var variable = _variableContainer.Variable;
+            if (variable == null) return;
+            ShowMain();
+            RaiseKeyPressed(
+                key: VariableHelper.IsVariableLocal(Project, variable) ? FormulaEditorKey.LocalVariable : FormulaEditorKey.GlobalVariable,
+                variable: variable);
         }
 
         private void ButtonVariable_OnClick(object sender, RoutedEventArgs e)
@@ -113,6 +195,37 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             ShowMain();
         }
 
+        private void KeyButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var key = (FormulaEditorKey)(uint)((FrameworkElement)sender).DataContext;
+            ShowMain();
+            RaiseKeyPressed(key);
+        }
+
+        private void SensorButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var key = (FormulaEditorKey)(uint)((FrameworkElement)sender).DataContext;
+            ShowMain();
+            RaiseKeyPressed(key);
+        }
+
+        private void ObjectButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var key = (FormulaEditorKey)(uint)((FrameworkElement)sender).DataContext;
+            ShowMain();
+            RaiseKeyPressed(key);
+        }
+
+        private void ButtonEvaluate_OnClick(object sender, RoutedEventArgs e)
+        {
+            RaiseEvaluatePressed();
+        }
+
+        private void ButtonError_OnClick(object sender, RoutedEventArgs e)
+        {
+            RaiseShowErrorPressed();
+        }
+
         private void ShowMain()
         {
             GridMain.Visibility = Visibility.Visible;
@@ -130,6 +243,9 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private void ShowVariable()
         {
+            var variableSelectionViewModel = ServiceLocator.ViewModelLocator.VariableSelectionViewModel;
+            variableSelectionViewModel.SelectedLocalVariable = null;
+            variableSelectionViewModel.SelectedGlobalVariable = null;
             GridMain.Visibility = Visibility.Collapsed;
             GridMath.Visibility = Visibility.Collapsed;
             GridVariable.Visibility = Visibility.Visible;
@@ -142,27 +258,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             GridMath.Visibility = Visibility.Collapsed;
             GridVariable.Visibility = Visibility.Collapsed;
             GridSensors.Visibility = Visibility.Visible;
-        }
-
-        private void KeyButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var key = (FormulaEditorKey)(uint)((FrameworkElement)sender).DataContext;
-            ShowMain();
-            RaiseKeyPressed(key);
-        }
-
-        private void SensorButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var variable = (SensorVariable)(uint)((FrameworkElement)sender).DataContext;
-            ShowMain();
-            RaiseSensorVariableSelected(variable);
-        }
-
-        private void ObjectButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var variable = (ObjectVariable)(uint)((FrameworkElement)sender).DataContext;
-            ShowMain();
-            RaiseObjectVariableSelected(variable);
         }
     }
 }

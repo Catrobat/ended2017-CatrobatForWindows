@@ -17,8 +17,9 @@
   <converters:BoolOpacityConverterBootstrap x:Key="BoolOpacityConverter"/>
   <converters:IntPixelConverterBootstrap x:Key="IntPixelConverter"/>
   <converters:NullIntCountConverterBootstrap x:Key="NullIntCountConverter"/>
-  <converters:DoubleStringConverterBootstrap  x:Key="DoubleStringConverter" />
-  <converters:FloatStringConverterBootstrap  x:Key="FloatStringConverter" />
+  <converters:DoubleStringConverterBootstrap x:Key="DoubleStringConverter" />
+  <converters:FloatStringConverterBootstrap x:Key="FloatStringConverter" />
+  <converters:FormulaStringConverterBootstrap x:Key="FormulaStringConverter" />
   <converters:IntStringConverterBootstrap x:Key="IntStringConverter" />
   <converters:SecondStringMillisecondConverterBootstrap x:Key="SecondStringMillisecondConverter" />
   <converters:BoolVisibilityNegativeConverterBootstrap x:Key="NegativeBoolVisibilityConverter" />
