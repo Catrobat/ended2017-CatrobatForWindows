@@ -8,25 +8,19 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         #region Implements IFormulaInterpreter
 
-        public override void ClearChildren()
-        {
-            FirstChild = null;
-            SecondChild = null;
-        }
-
         protected bool IsNumberN2N()
         {
             // TODO: meaningful (translated?) error message
-            if (!FirstChild.IsNumber()) throw new SemanticErrorException(this, "First child must be number");
-            if (!SecondChild.IsNumber()) throw new SemanticErrorException(this, "Second child must be number");
+            if (!FirstChild.IsNumber()) throw new SemanticsErrorException(this, "First child must be number");
+            if (!SecondChild.IsNumber()) throw new SemanticsErrorException(this, "Second child must be number");
             return true;
         }
 
         protected bool IsNumberN2L()
         {
             // TODO: meaningful (translated?) error message
-            if (!FirstChild.IsNumber()) throw new SemanticErrorException(this, "First child must be number");
-            if (!SecondChild.IsNumber()) throw new SemanticErrorException(this, "Second child must be number");
+            if (!FirstChild.IsNumber()) throw new SemanticsErrorException(this, "First child must be number");
+            if (!SecondChild.IsNumber()) throw new SemanticsErrorException(this, "Second child must be number");
             return false;
         }
 
@@ -34,7 +28,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         {
             // TODO: meaningful (translated?) error message
             var t = FirstChild.IsNumber();
-            if (!SecondChild.IsNumber() == t) throw new SemanticErrorException(this, "Children are different");
+            if (!SecondChild.IsNumber() == t) throw new SemanticsErrorException(this, "Children are different");
             return t;
         }
 
@@ -42,7 +36,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         {
             // TODO: meaningful (translated?) error message
             var t = FirstChild.IsNumber();
-            if (!SecondChild.IsNumber() == t) throw new SemanticErrorException(this, "Children are different");
+            if (!SecondChild.IsNumber() == t) throw new SemanticsErrorException(this, "Children are different");
             return false;
         }
 

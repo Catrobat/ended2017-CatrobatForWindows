@@ -33,13 +33,6 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
                 Reset.Invoke();
         }
 
-        public event Evaluated Evaluated;
-        private void RaiseEvaluated(object value)
-        {
-            if (Evaluated != null)
-                Evaluated.Invoke(value);
-        }
-
         #endregion
 
         #region Members
@@ -150,8 +143,22 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
 
         private void EvaluatePressedAction()
         {
-            var value = new FormulaEvaluator().Evaluate(Formula);
-            RaiseEvaluated(value);
+            var value = FormulaEvaluator.Evaluate(Formula);
+            var message = value == null ? string.Empty : value.ToString();
+            ServiceLocator.NotifictionService.ShowToastNotification("", message, ToastNotificationTime.Medeum);
+        }
+
+        public RelayCommand ShowErrorPressedCommand { get; private set; }
+
+        private void ShowErrorPressedAction()
+        {
+            // TODO: pretty up toast notification
+            CaretIndex = ParsingError.Index;
+            SelectionLength = ParsingError.Length;
+            ServiceLocator.NotifictionService.ShowToastNotification(
+                title: "",
+                message: ParsingError.Message,
+                timeTillHide: ToastNotificationTime.Medeum);
         }
 
         public RelayCommand StartSensorsCommand { get; private set; }
@@ -164,6 +171,14 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         private void StopSensorsAction()
         {
             ServiceLocator.SensorService.Stop();
+        }
+
+        public RelayCommand<int> CompleteTokenCommand { get; private set; }
+        private void CompleteTokenAction(int index)
+        {
+            var selection = FormulaInterpreter.CompleteToken(Tokens, index);
+            CaretIndex = selection.Start;
+            SelectionLength = selection.Length;
         }
 
         #endregion
@@ -186,8 +201,10 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
         {
             KeyPressedCommand = new RelayCommand<FormulaKeyEventArgs>(KeyPressedAction);
             EvaluatePressedCommand = new RelayCommand(EvaluatePressedAction);
+            ShowErrorPressedCommand = new RelayCommand(ShowErrorPressedAction);
             StartSensorsCommand = new RelayCommand(StartSensorsAction);
             StopSensorsCommand = new RelayCommand(StopSensorsAction);
+            CompleteTokenCommand = new RelayCommand<int>(CompleteTokenAction);
             
             Messenger.Default.Register<GenericMessage<Sprite>>(this, ViewModelMessagingToken.CurrentSpriteChangedListener, SelectedSpriteChangedMessageAction);
             Messenger.Default.Register<GenericMessage<Project>>(this, ViewModelMessagingToken.CurrentProjectChangedListener, CurrentProjectChangedMessageAction);
@@ -202,6 +219,7 @@ namespace Catrobat.IDE.Core.ViewModel.Editor.Formula
                 if (e.PropertyName == GetPropertyName(() => _editor.Formula)) RaisePropertyChanged(() => Formula);
                 if (e.PropertyName == GetPropertyName(() => _editor.Tokens)) RaisePropertyChanged(() => Tokens);
                 if (e.PropertyName == GetPropertyName(() => _editor.CaretIndex)) RaisePropertyChanged(() => CaretIndex);
+                if (e.PropertyName == GetPropertyName(() => _editor.SelectionLength)) RaisePropertyChanged(() => SelectionLength);
                 if (e.PropertyName == GetPropertyName(() => _editor.CanUndo)) RaisePropertyChanged(() => CanUndo);
                 if (e.PropertyName == GetPropertyName(() => _editor.CanRedo)) RaisePropertyChanged(() => CanRedo);
                 if (e.PropertyName == GetPropertyName(() => _editor.CanLeft)) RaisePropertyChanged(() => CanLeft);

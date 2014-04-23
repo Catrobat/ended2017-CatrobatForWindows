@@ -19,10 +19,11 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
         {
             InitializeComponent();
 
+            FormulaViewer.DoubleTap += FormulaViewer_DoubleTap;
             FormulaKeyboard.KeyPressed += KeyPressed;
             FormulaKeyboard.EvaluatePressed += EvaluatePressed;
+            FormulaKeyboard.ShowErrorPressed += ShowErrorPressed;
             _viewModel.ErrorOccurred += ErrorOccurred;
-            _viewModel.Evaluated += Evaluated;
         }
 
         #region Transition animations
@@ -62,6 +63,11 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             ShowKeyErrorAnimation();
         }
 
+        private void FormulaViewer_DoubleTap(int index)
+        {
+            _viewModel.CompleteTokenCommand.Execute(index);
+        }
+
         private void KeyPressed(FormulaKeyEventArgs e)
         {
             _viewModel.KeyPressedCommand.Execute(e);
@@ -72,11 +78,9 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             _viewModel.EvaluatePressedCommand.Execute(null);
         }
 
-        private void Evaluated(object value)
+        private void ShowErrorPressed()
         {
-            // TODO: pretty up toast notification
-            var message = value == null ? string.Empty : value.ToString();
-            ServiceLocator.NotifictionService.ShowToastNotification("", message, ToastNotificationTime.Medeum);
+            _viewModel.ShowErrorPressedCommand.Execute(null);
         }
 
         private bool _firstBackPressed = true;
@@ -118,10 +122,9 @@ namespace Catrobat.IDE.Phone.Views.Editor.Formula
             FormulaKeyboard.ClearValue(FormulaKeyboard.CanLeftProperty);
             FormulaKeyboard.ClearValue(FormulaKeyboard.CanRightProperty);
             FormulaKeyboard.ClearValue(FormulaKeyboard.CanEvaluateProperty);
-            FormulaKeyboard.ClearValue(FormulaKeyboard.ParsingErrorProperty);
+            FormulaKeyboard.ClearValue(FormulaKeyboard.HasErrorProperty);
 
             _viewModel.ErrorOccurred -= ErrorOccurred;
-            _viewModel.Evaluated -= Evaluated;
 
             _viewModel.Cleanup();
         }

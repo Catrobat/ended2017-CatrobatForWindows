@@ -5,17 +5,17 @@ namespace Catrobat.IDE.Core.FormulaEditor
 {
     class FormulaEvaluator
     {
-        public double EvaluateNumber(IFormulaTree formula)
+        public static double EvaluateNumber(IFormulaTree formula)
         {
             return formula == null ? 0 : formula.EvaluateNumber();
         }
 
-        public bool EvaluateLogic(IFormulaTree formula)
+        public static bool EvaluateLogic(IFormulaTree formula)
         {
             return formula != null && formula.EvaluateLogic();
         }
 
-        public object Evaluate(IFormulaTree formula)
+        public static object Evaluate(IFormulaTree formula)
         {
             if (formula == null) return null;
 

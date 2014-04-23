@@ -32,7 +32,7 @@ namespace Catrobat.Paint.Phone.View
 
                 if (selected_color == Colors.Transparent)
                 {
-                    btnTransparence.Visibility = Visibility.Visible;
+                    recTransparence.Visibility = Visibility.Visible;
                     SelectedColorRectangle.Visibility = Visibility.Collapsed;
                     BtnSelectedColor.Background = new SolidColorBrush(Colors.Transparent);
                 }
@@ -72,7 +72,7 @@ namespace Catrobat.Paint.Phone.View
                 {
                     ImageSource = new BitmapImage(new Uri("Assets/checkeredbgWXGA.png", UriKind.Relative))
                 };*/
-                btnTransparence.Visibility = Visibility.Visible;
+                recTransparence.Visibility = Visibility.Visible;
                 SelectedColorRectangle.Visibility = Visibility.Collapsed;
                 BtnSelectedColor.Background = new SolidColorBrush(Colors.Transparent);
 
@@ -80,7 +80,7 @@ namespace Catrobat.Paint.Phone.View
             else
             {
                 BtnSelectedColor.Background = color;
-                btnTransparence.Visibility = Visibility.Collapsed;
+                recTransparence.Visibility = Visibility.Collapsed;
                 SelectedColorRectangle.Visibility = Visibility.Visible;
             }
 

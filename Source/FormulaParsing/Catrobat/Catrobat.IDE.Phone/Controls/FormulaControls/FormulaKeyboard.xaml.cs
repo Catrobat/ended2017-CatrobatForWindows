@@ -12,6 +12,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {
     public delegate void KeyPressed(FormulaKeyEventArgs e);
     public delegate void EvaluatePressed();
+    public delegate void ShowErrorPressed();
 
     public partial class FormulaKeyboard
     {
@@ -108,17 +109,6 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
             set { SetValue(HasErrorProperty, value); }
         }
 
-        public static readonly DependencyProperty ParsingErrorProperty = DependencyProperty.Register(
-            name: "ParsingError",
-            propertyType: typeof(string),
-            ownerType: typeof(FormulaKeyboard),
-            typeMetadata: new PropertyMetadata(null));
-        public string ParsingError
-        {
-            get { return (string) GetValue(ParsingErrorProperty); }
-            set { SetValue(ParsingErrorProperty, value); }
-        }
-
         public static readonly DependencyProperty DecimalSeparatorProperty = DependencyProperty.Register("DecimalSeparator", typeof(string), typeof(FormulaKeyboard), new PropertyMetadata("."));
         public string DecimalSeparator
         {
@@ -139,12 +129,17 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
         {
             RaiseKeyPressed(new FormulaKeyEventArgs(key, variable));
         }
- 
+
         public EvaluatePressed EvaluatePressed;
         private void RaiseEvaluatePressed()
         {
-            if (EvaluatePressed != null)
-                EvaluatePressed.Invoke();
+            if (EvaluatePressed != null) EvaluatePressed.Invoke();
+        }
+
+        public ShowErrorPressed ShowErrorPressed;
+        private void RaiseShowErrorPressed()
+        {
+            if (ShowErrorPressed != null) ShowErrorPressed.Invoke();
         }
 
         #endregion
@@ -228,11 +223,7 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private void ButtonError_OnClick(object sender, RoutedEventArgs e)
         {
-            // TODO: pretty up toast notification
-            ServiceLocator.NotifictionService.ShowToastNotification(
-                title: "", 
-                message: ParsingError,  
-                timeTillHide:ToastNotificationTime.Medeum);
+            RaiseShowErrorPressed();
         }
 
         private void ShowMain()

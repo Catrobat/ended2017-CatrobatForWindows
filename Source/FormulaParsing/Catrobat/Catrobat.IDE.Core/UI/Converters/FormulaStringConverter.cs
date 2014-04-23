@@ -8,11 +8,9 @@ namespace Catrobat.IDE.Core.UI.Converters
 {
     public class FormulaStringConverter : IPortableValueConverter
     {
-        private readonly FormulaSerializer _serializer = new FormulaSerializer();
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return _serializer.Serialize((IFormulaTree) value);
+            return FormulaSerializer.Serialize((IFormulaTree) value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

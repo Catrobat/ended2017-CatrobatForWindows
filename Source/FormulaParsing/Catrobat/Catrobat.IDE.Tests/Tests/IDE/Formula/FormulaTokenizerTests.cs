@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.FormulaEditor;
-using Catrobat.IDE.Core.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 {
     [TestClass]
     public class FormulaTokenizerTests
     {
-        private readonly FormulaTokenizer _tokenizer = new FormulaTokenizer();
         private readonly Random _random = new Random();
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNull()
         {
-            Assert.IsNull(_tokenizer.Tokenize(null));
+            Assert.IsNull(FormulaTokenizer.Tokenize(null));
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
@@ -29,7 +27,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         {
             foreach (var value in new[] {0, _random.Next(), -_random.Next(), _random.NextDouble()})
             {
-                var tokens = _tokenizer.Tokenize(FormulaTreeFactory.CreateNumberNode(value));
+                var tokens = FormulaTokenizer.Tokenize(FormulaTreeFactory.CreateNumberNode(value));
                 var valueString = tokens.Select(token =>
                 {
                     var digitToken = token as FormulaNodeNumber;
@@ -161,7 +159,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         private void TestTokenizer(IEnumerable<IFormulaToken> expectedTokens, IFormulaTree formula)
         {
-            EnumerableAssert.AreEqual(expectedTokens, _tokenizer.Tokenize(formula));
+            EnumerableAssert.AreEqual(expectedTokens, FormulaTokenizer.Tokenize(formula));
         }
 
         private void TestTokenizer(IEnumerable<IFormulaToken> expectedTokens, Func<IFormulaTree> formulaCreator)

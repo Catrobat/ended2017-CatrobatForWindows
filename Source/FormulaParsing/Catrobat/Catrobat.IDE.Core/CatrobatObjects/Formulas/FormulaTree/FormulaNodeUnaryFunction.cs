@@ -9,47 +9,47 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
 
     #region Implementations
 
-    [DebuggerDisplay("exp()")]
+    [DebuggerDisplay("exp({Child})")]
     public partial class FormulaNodeExp : FormulaNodeUnaryFunction
     {
     }
 
-    [DebuggerDisplay("log()")]
+    [DebuggerDisplay("log({Child})")]
     public partial class FormulaNodeLog : FormulaNodeUnaryFunction
     {
     }
 
-    [DebuggerDisplay("ln()")]
+    [DebuggerDisplay("ln({Child})")]
     public partial class FormulaNodeLn : FormulaNodeUnaryFunction
     {
     }
 
-    [DebuggerDisplay("sin()")]
+    [DebuggerDisplay("sin({Child})")]
     public partial class FormulaNodeSin : FormulaNodeUnaryFunction
     {
     }
 
-    [DebuggerDisplay("cos()")]
+    [DebuggerDisplay("cos({Child})")]
     public partial class FormulaNodeCos : FormulaNodeUnaryFunction
     {
     }
 
-    [DebuggerDisplay("tan()")]
+    [DebuggerDisplay("tan({Child})")]
     public partial class FormulaNodeTan : FormulaNodeUnaryFunction
     {
     }
 
-    [DebuggerDisplay("arcsin()")]
+    [DebuggerDisplay("arcsin({Child})")]
     public partial class FormulaNodeArcsin : FormulaNodeUnaryFunction
     {
     }
 
-    [DebuggerDisplay("arccos()")]
+    [DebuggerDisplay("arccos({Child})")]
     public partial class FormulaNodeArccos : FormulaNodeUnaryFunction
     {
     }
 
-    [DebuggerDisplay("arctan()")]
+    [DebuggerDisplay("arctan({Child})")]
     public partial class FormulaNodeArctan : FormulaNodeUnaryFunction
     {
     }

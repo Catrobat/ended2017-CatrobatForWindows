@@ -26,15 +26,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         }
 
         #endregion
-
-        #region Implements IFormulaInterpreter
-
-        public override void ClearChildren()
-        {
-            // nothing to do
-        }
-
-        #endregion
     }
 
     #region Implementations
@@ -54,12 +45,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                     {
                         // add decimal separator mapping
                         new KeyValuePair<string, Func<IFormulaToken>>(
-                            key: ServiceLocator.CultureService.GetCulture().NumberFormat.NumberDecimalSeparator,
+                            key: CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator,
                             value: FormulaTokenFactory.CreateDecimalSeparatorToken),
 
                         // add minus sign mapping
                         new KeyValuePair<string, Func<IFormulaToken>>(
-                            key: ServiceLocator.CultureService.GetCulture().NumberFormat.NegativeSign,
+                            key: CultureInfo.InvariantCulture.NumberFormat.NegativeSign,
                             value: FormulaTokenFactory.CreateNegativeSignToken)
                     };
 
@@ -86,7 +77,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         {
             // split off tokens from the string representation
             var tokens = new List<IFormulaToken>();
-            var value = Value.ToString("R", ServiceLocator.CultureService.GetCulture());
+            var value = Value.ToString("R", CultureInfo.InvariantCulture);
             while (value.Length != 0)
             {
                 var mapping = TokenMappings.First(kvp => value.StartsWith(kvp.Key));

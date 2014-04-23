@@ -24,7 +24,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
         public override object Clone()
         {
             var clone = (UnaryFormulaTree) base.Clone();
-            clone.Child = (IFormulaTree) Child.Clone();
+            clone.Child = Child == null ? null : (IFormulaTree) Child.Clone();
             return clone;
         }
 

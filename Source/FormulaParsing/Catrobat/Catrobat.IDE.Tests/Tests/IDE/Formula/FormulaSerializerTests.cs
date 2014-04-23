@@ -1,23 +1,21 @@
-﻿using System;
-using System.Globalization;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
+using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.FormulaEditor;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Catrobat.IDE.Core.ExtensionMethods;
+using System;
 
 namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 {
     [TestClass]
     public class FormulaSerializerTests
     {
-        private readonly FormulaSerializer _serializer = new FormulaSerializer();
         private readonly Random _random = new Random();
 
-        [ClassInitialize]
-        public static void TestClassInitialize(TestContext testContext)
+        [TestInitialize]
+        public void TestClassInitialize()
         {
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
         }
@@ -25,7 +23,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestNull()
         {
-            Assert.AreEqual(string.Empty, _serializer.Serialize(null));
+            Assert.AreEqual(string.Empty, FormulaSerializer.Serialize(null));
         }
         
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
@@ -143,7 +141,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
 
         private void TestSerializer(string expectedValue, IFormulaTree formula)
         {
-            Assert.AreEqual(expectedValue, _serializer.Serialize(formula));
+            Assert.AreEqual(expectedValue, FormulaSerializer.Serialize(formula));
         }
 
         private void TestSerializer(string expectedValue, Func<IFormulaTree> formulaCreator)
