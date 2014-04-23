@@ -111,14 +111,10 @@ namespace Catrobat.IDE.Core.FormulaEditor
             var parenthesisToken = token as FormulaTokenParenthesis;
             if (parenthesisToken != null)
             {
-                if (parenthesisToken.IsOpening)
-                {
-                    CompleteBrackets(tokens.Skip(index)).FirstOrDefault();
-                }
-                {
-                    CompleteBrackets(tokens.Take(index + 1).Reverse(), false).FirstOrDefault();
-                }
-                return GetOrigin(token);
+                var parenthesesNode = (parenthesisToken.IsOpening
+                    ? CompleteBrackets(tokens.Skip(index))
+                    : CompleteBrackets(tokens.Take(index + 1).Reverse(), false)).FirstOrDefault();
+                if (parenthesesNode != null) return GetOrigin(parenthesesNode);
             }
 
             // complete function
@@ -128,9 +124,9 @@ namespace Catrobat.IDE.Core.FormulaEditor
                 tokensAftwerwards = CompleteNumbers(tokensAftwerwards);
                 tokensAftwerwards = CompleteBrackets(tokensAftwerwards);
                 tokensAftwerwards = CompleteFunctions(tokensAftwerwards);
-                tokensAftwerwards.FirstOrDefault();
 
-                return GetOrigin(token);
+                var functionNode = tokensAftwerwards.FirstOrDefault();
+                if (functionNode != null) return GetOrigin(functionNode);
             }
 
             // complete prefix operator
