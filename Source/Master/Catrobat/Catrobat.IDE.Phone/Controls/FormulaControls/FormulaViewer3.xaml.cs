@@ -277,8 +277,8 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls
 
         private FormulaPartControl CreateTemplate(IFormulaToken token)
         {
+            // find template in FormulaTokenTemplates.xaml
             var template = FormulaTokenDefinitions[token.GetType()];
-            Debug.Assert(template != null, "Please add template for \"" + token.GetType().Name + "\" to FormulaTokenTemplates.xaml. ");
             return template.CreateUiTokenTemplate(token);
         }
 

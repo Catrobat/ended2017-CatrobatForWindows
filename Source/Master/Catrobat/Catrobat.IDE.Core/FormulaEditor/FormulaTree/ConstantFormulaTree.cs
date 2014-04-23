@@ -51,7 +51,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
                         // add minus sign mapping
                         new KeyValuePair<string, Func<IFormulaToken>>(
                             key: CultureInfo.InvariantCulture.NumberFormat.NegativeSign,
-                            value: FormulaTokenFactory.CreateNegativeSignToken)
+                            value: FormulaTokenFactory.CreateMinusToken)
                     };
 
                     // add digits mapping

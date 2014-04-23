@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                     tokens: new IFormulaToken[] { FormulaTokenFactory.CreateDigitToken(digit) });
                 TestInterpreter(
                         expected: FormulaTreeFactory.CreateNumberNode(-digit),
-                        tokens: new IFormulaToken[] { FormulaTokenFactory.CreateNegativeSignToken(), FormulaTokenFactory.CreateDigitToken(digit) });
+                        tokens: new IFormulaToken[] { FormulaTokenFactory.CreateMinusToken(), FormulaTokenFactory.CreateDigitToken(digit) });
             }
             TestInterpreter(
                     expected: FormulaTreeFactory.CreateNumberNode(42),
@@ -57,7 +57,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestDoubleInfixOperator(FormulaTreeFactory.CreateSubtractNode, FormulaTokenFactory.CreateMinusToken);
             TestInterpreter(
                     expected: FormulaTreeFactory.CreateNegativeSignNode(FormulaTreeFactory.CreatePiNode()),
-                    tokens: new IFormulaToken[] { FormulaTokenFactory.CreateNegativeSignToken(), FormulaTokenFactory.CreatePiToken() });
+                    tokens: new IFormulaToken[] { FormulaTokenFactory.CreateMinusToken(), FormulaTokenFactory.CreatePiToken() });
             TestDoubleInfixOperator(FormulaTreeFactory.CreateMultiplyNode, FormulaTokenFactory.CreateMultiplyToken);
             TestDoubleInfixOperator(FormulaTreeFactory.CreateDivideNode, FormulaTokenFactory.CreateDivideToken);
             TestDoubleInfixOperator(FormulaTreeFactory.CreatePowerNode, FormulaTokenFactory.CreateCaretToken);

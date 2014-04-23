@@ -856,7 +856,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                     // change from minus token to negative sign token
                     if (previousToken == null || previousToken is IFormulaOperator || previousToken is FormulaTokenParameterSeparator)
                     {
-                        var negativeSignToken = FormulaTokenFactory.CreateNegativeSignToken();
+                        var negativeSignToken = FormulaTreeFactory.CreateNegativeSignNode(null);
                         SetOrigin(negativeSignToken, minusToken);
                         yield return negativeSignToken;
                         continue;
@@ -889,7 +889,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
                     // change from minus token to negative sign token
                     if (token == null || token is IFormulaOperator || token is FormulaTokenParameterSeparator)
                     {
-                        var negativeSignToken = FormulaTokenFactory.CreateNegativeSignToken();
+                        var negativeSignToken = FormulaTreeFactory.CreateNegativeSignNode(null);
                         SetOrigin(negativeSignToken, minusToken);
                         yield return negativeSignToken;
                     }

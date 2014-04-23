@@ -38,7 +38,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                         return digitString;
                     }
 
-                    var minusToken = token as FormulaNodeNegativeSign;
+                    var minusToken = token as FormulaNodeSubtract;
                     if (minusToken != null)
                     {
                         return CultureInfo.InvariantCulture.NumberFormat.NegativeSign;
@@ -69,7 +69,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         {
             TestTokenizerN(CreateExpectedTokens(FormulaTokenFactory.CreatePlusToken()), FormulaTreeFactory.CreateAddNode);
             TestTokenizerN(CreateExpectedTokens(FormulaTokenFactory.CreateMinusToken()), FormulaTreeFactory.CreateSubtractNode);
-            TestTokenizerN(CreateExpectedTokens(FormulaTokenFactory.CreateNegativeSignToken()), FormulaTreeFactory.CreateNegativeSignNode);
+            TestTokenizerN(x => Enumerable.Repeat(FormulaTokenFactory.CreateMinusToken(), 1).Concat(x), FormulaTreeFactory.CreateNegativeSignNode);
             TestTokenizerN(CreateExpectedTokens(FormulaTokenFactory.CreateMultiplyToken()), FormulaTreeFactory.CreateMultiplyNode);
             TestTokenizerN(CreateExpectedTokens(FormulaTokenFactory.CreateDivideToken()), FormulaTreeFactory.CreateDivideNode);
             TestTokenizerN(CreateExpectedTokens(FormulaTokenFactory.CreateCaretToken()), FormulaTreeFactory.CreatePowerNode);

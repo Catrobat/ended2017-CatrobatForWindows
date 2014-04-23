@@ -47,10 +47,6 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken
         {
             return FormulaTreeFactory.CreateSubtractNode(null, null);
         }
-        public static FormulaNodeNegativeSign CreateNegativeSignToken()
-        {
-            return FormulaTreeFactory.CreateNegativeSignNode(null);
-        }
         public static FormulaNodeMultiply CreateMultiplyToken()
         {
             return FormulaTreeFactory.CreateMultiplyNode(null, null);

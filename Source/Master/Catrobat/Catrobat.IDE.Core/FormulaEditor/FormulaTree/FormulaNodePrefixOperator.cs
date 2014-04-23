@@ -74,7 +74,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree
     {
         protected override IFormulaToken CreateToken()
         {
-            return FormulaTokenFactory.CreateNegativeSignToken();
+            return FormulaTokenFactory.CreateMinusToken();
         }
 
         public override double EvaluateNumber()
