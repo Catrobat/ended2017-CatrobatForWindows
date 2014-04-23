@@ -595,6 +595,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
             if (parametersToken != null)
             {
                 var interpretedChildren = InterpretFunctions(children);
+                interpretedChildren = InterpretMinusTokenForward(interpretedChildren);
                 interpretedChildren = InterpretOperators(interpretedChildren);
                 interpretedChildren = InterpretParameters(interpretedChildren);
                 var parameters = interpretedChildren.Cast<IFormulaTree>().Take(2).ToList();
@@ -625,6 +626,7 @@ namespace Catrobat.IDE.Core.FormulaEditor
             {
                 var interpretedChildren = InterpretNonParameter(children);
                 interpretedChildren = InterpretFunctions(interpretedChildren);
+                interpretedChildren = InterpretMinusTokenForward(interpretedChildren);
                 interpretedChildren = InterpretOperators(interpretedChildren);
                 var child = (IFormulaTree) interpretedChildren.FirstOrDefault();
                 if (IsCancellationRequested) return;
