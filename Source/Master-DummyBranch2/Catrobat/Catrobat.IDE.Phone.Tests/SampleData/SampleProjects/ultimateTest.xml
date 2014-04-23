@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<project>
+  <applicationVersionCode>10</applicationVersionCode>
+  <applicationVersionName>0.6.0beta</applicationVersionName>
+  <applicationXmlVersion>1.0</applicationXmlVersion>
+  <deviceName>HTC Desire</deviceName>
+  <platform>Android</platform>
+  <platformVersion>10</platformVersion>
+  <projectName>UltimateTest</projectName>
+  <screenHeight>800</screenHeight>
+  <screenWidth>480</screenWidth>
+  <spriteList>
+    <sprite>
+      <costumeDataList>
+        <costumeData>
+          <fileName>B978398F6E8D16B857AA81618F3EF879_Hintergrund</fileName>
+          <name>Hintergrund</name>
+        </costumeData>
+      </costumeDataList>
+      <name>Hintergrund</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <placeAtBrick>
+              <xPosition>0</xPosition>
+              <yPosition>0</yPosition>
+            </placeAtBrick>
+            <setXBrick>
+              <xPosition>0</xPosition>
+            </setXBrick>
+            <setYBrick>
+              <yPosition>0</yPosition>
+            </setYBrick>
+            <changeXByBrick>
+              <xMovement>100</xMovement>
+            </changeXByBrick>
+            <changeYByBrick>
+              <yMovement>100</yMovement>
+            </changeYByBrick>
+            <ifOnEdgeBounceBrick />
+            <moveNStepsBrick>
+              <steps>10.0</steps>
+            </moveNStepsBrick>
+            <turnLeftBrick>
+              <degrees>15.0</degrees>
+            </turnLeftBrick>
+            <turnRightBrick>
+              <degrees>15.0</degrees>
+            </turnRightBrick>
+            <pointInDirectionBrick>
+              <degrees>90.0</degrees>
+            </pointInDirectionBrick>
+            <pointToBrick>
+              <pointedSprite reference="../../../../../../sprite[2]" />
+            </pointToBrick>
+            <glideToBrick>
+              <durationInMilliSeconds>1000</durationInMilliSeconds>
+              <xDestination>800</xDestination>
+              <yDestination>0</yDestination>
+            </glideToBrick>
+            <setCostumeBrick>
+              <costumeData reference="../../../../../costumeDataList/costumeData" />
+            </setCostumeBrick>
+            <nextCostumeBrick />
+            <setSizeToBrick>
+              <size>100.0</size>
+            </setSizeToBrick>
+            <changeSizeByNBrick>
+              <size>20.0</size>
+            </changeSizeByNBrick>
+            <hideBrick />
+            <showBrick />
+            <setGhostEffectBrick>
+              <transparency>0.0</transparency>
+            </setGhostEffectBrick>
+            <changeGhostEffectBrick>
+              <changeGhostEffect>25.0</changeGhostEffect>
+            </changeGhostEffectBrick>
+            <setBrightnessBrick>
+              <brightness>0.0</brightness>
+            </setBrightnessBrick>
+            <changeBrightnessBrick>
+              <changeBrightness>25.0</changeBrightness>
+            </changeBrightnessBrick>
+            <clearGraphicEffectBrick />
+          </brickList>
+        </startScript>
+      </scriptList>
+      <soundList />
+    </sprite>
+    <sprite>
+      <costumeDataList>
+        <costumeData>
+          <fileName>9CC1F04E1A241687B199E4D189E13843_IMG_20120727_130526.jpg</fileName>
+          <name>IMG_20120727_130526</name>
+        </costumeData>
+        <costumeData>
+          <fileName>9CC1F04E1A241687B199E4D189E13843_IMG_20120727_130526.jpg</fileName>
+          <name>IMG_20120727_130526_Kopie</name>
+        </costumeData>
+      </costumeDataList>
+      <name>Sound</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <playSoundBrick>
+              <soundInfo reference="../../../../../soundList/soundInfo" />
+            </playSoundBrick>
+            <playSoundBrick>
+              <soundInfo reference="../../../../../soundList/soundInfo" />
+            </playSoundBrick>
+            <playSoundBrick>
+              <soundInfo reference="../../../../../soundList/soundInfo[2]" />
+            </playSoundBrick>
+          </brickList>
+        </startScript>
+        <whenScript>
+          <brickList>
+            <broadcastBrick>
+              <broadcastMessage>sprechen</broadcastMessage>
+            </broadcastBrick>
+            <pointToBrick>
+              <pointedSprite reference="../../../../../../sprite" />
+            </pointToBrick>
+            <broadcastWaitBrick>
+              <broadcastMessage>sprechen</broadcastMessage>
+            </broadcastWaitBrick>
+            <stopAllSoundsBrick />
+            <waitBrick>
+              <timeToWaitInMilliSeconds>1000</timeToWaitInMilliSeconds>
+            </waitBrick>
+            <noteBrick>
+              <note>Notiz</note>
+            </noteBrick>
+            <setVolumeToBrick>
+              <volume>100.0</volume>
+            </setVolumeToBrick>
+          </brickList>
+          <action>Tapped</action>
+        </whenScript>
+        <broadcastScript>
+          <brickList>
+            <foreverBrick>
+              <loopEndBrick reference="../../loopEndBrick" />
+            </foreverBrick>
+            <repeatBrick>
+              <loopEndBrick reference="../../loopEndBrick[2]" />
+              <timesToRepeat>2</timesToRepeat>
+            </repeatBrick>
+            <changeVolumeByBrick>
+              <volume>25.0</volume>
+            </changeVolumeByBrick>
+            <loopEndBrick>
+              <loopBeginBrick class="foreverBrick" reference="../../foreverBrick" />
+            </loopEndBrick>
+            <speakBrick>
+              <text>aaaa</text>
+            </speakBrick>
+            <loopEndBrick>
+              <loopBeginBrick class="repeatBrick" reference="../../repeatBrick" />
+            </loopEndBrick>
+          </brickList>
+          <receivedMessage>sprechen</receivedMessage>
+        </broadcastScript>
+        <broadcastScript>
+          <brickList />
+          <receivedMessage></receivedMessage>
+        </broadcastScript>
+      </scriptList>
+      <soundList>
+        <soundInfo>
+          <fileName>68223C25ABEFABA96FD2BEC8C44D5A12_Aufnahme.mp3</fileName>
+          <name>Aufnahme</name>
+        </soundInfo>
+        <soundInfo>
+          <fileName>84904B77F5B78BBDCC04634285D1B8DE_Aufnahme.mp3</fileName>
+          <name>Aufnahme1</name>
+        </soundInfo>
+      </soundList>
+    </sprite>
+    <sprite>
+      <costumeDataList />
+      <name>Robot</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <nxtMotorTurnAngleBrick>
+              <degrees>180</degrees>
+              <motor>MOTOR_A</motor>
+            </nxtMotorTurnAngleBrick>
+            <pointToBrick>
+              <pointedSprite reference="../../../../../../sprite[2]" />
+            </pointToBrick>
+            <nxtMotorStopBrick>
+              <motor>MOTOR_A</motor>
+            </nxtMotorStopBrick>
+            <nxtMotorActionBrick>
+              <motor>MOTOR_A</motor>
+              <speed>3</speed>
+            </nxtMotorActionBrick>
+            <nxtPlayToneBrick>
+              <durationInMs>1000</durationInMs>
+              <hertz>2800</hertz>
+            </nxtPlayToneBrick>
+          </brickList>
+        </startScript>
+      </scriptList>
+      <soundList />
+    </sprite>
+  </spriteList>
+</project>
