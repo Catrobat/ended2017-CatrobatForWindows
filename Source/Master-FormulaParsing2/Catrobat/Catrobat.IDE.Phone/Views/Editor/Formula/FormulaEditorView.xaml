@@ -1,0 +1,66 @@
+﻿<phone:PhoneApplicationPage 
+  x:Class="Catrobat.IDE.Phone.Views.Editor.Formula.FormulaEditorView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+  xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+  xmlns:abu ="clr-namespace:AppBarUtils;assembly=AppBarUtils"
+  xmlns:formulaControls="clr-namespace:Catrobat.IDE.Phone.Controls.FormulaControls"
+  FontFamily="{StaticResource PhoneFontFamilyNormal}"
+  FontSize="{StaticResource PhoneFontSizeNormal}"
+  Foreground="{StaticResource PhoneForegroundBrush}"
+  SupportedOrientations="Portrait" Orientation="Portrait"
+  mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+  DataContext="{Binding FormulaEditorViewModel, Source={StaticResource Locator}}"
+  shell:SystemTray.IsVisible="True">
+
+  <phone:PhoneApplicationPage.Resources>
+
+  </phone:PhoneApplicationPage.Resources>
+
+  <Grid x:Name="LayoutRoot"
+          Background="Transparent">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="480" />
+    </Grid.RowDefinitions>
+    <ScrollViewer Grid.Row="0">
+      <formulaControls:FormulaViewer Name="FormulaViewer" 
+                                     CharactersInOneLineNormalFontSize="15"
+                                     LinesNormalFontSize="4"
+                                     NormalFontSize="50"
+                                     MinFontSize="26"
+                                     MaxFontSize="70"
+                                     IsAutoFontSize="True" 
+                                     IsEditEnabled="True" 
+                                     IsMultiline="True" 
+                                     Formula="{Binding Formula}" 
+                                     VerticalAlignment="Stretch" 
+                                     Height="290"
+                                     Grid.Row="0"/>
+    </ScrollViewer>
+    <Grid Grid.Row="1">
+      <formulaControls:FormulaKeyboard Name="FormulaKeyboard" 
+                                     LocalVariables="{Binding LocalVariables}" 
+                                     GlobalVariables="{Binding GlobalVariables}" 
+                                     />
+      
+      <Grid Name="GridError" Background="Tomato" Opacity="0.0" Height="10" VerticalAlignment="Top">
+        <Grid.Resources>
+          <Storyboard x:Name="KeyErrorAnimation">
+            <DoubleAnimationUsingKeyFrames 
+            Storyboard.TargetName="GridError"
+            Storyboard.TargetProperty="Opacity">
+              <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="1.0" />
+              <DiscreteDoubleKeyFrame KeyTime="0:0:0.4" Value="1.0" />
+              <LinearDoubleKeyFrame KeyTime="0:0:0.6" Value="0.0" />
+            </DoubleAnimationUsingKeyFrames>
+          </Storyboard>
+        </Grid.Resources>
+      </Grid>
+    </Grid>
+  </Grid>
+</phone:PhoneApplicationPage>
