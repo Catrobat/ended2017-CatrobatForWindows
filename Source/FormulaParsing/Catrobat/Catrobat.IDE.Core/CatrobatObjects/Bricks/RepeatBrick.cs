@@ -48,6 +48,8 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
 
         internal override void LoadReference(XmlFormulaTreeConverter converter)
         {
+            base.LoadReference(converter);
+
             if (_timesToRepeat != null)
                 _timesToRepeat.LoadReference(converter);
         }

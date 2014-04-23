@@ -67,7 +67,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
         {
             return new Formula
             {
-                _formulaTree2 = (IFormulaTree) _formulaTree2.Clone()
+                _formulaTree2 = _formulaTree2 == null ? null : (IFormulaTree) _formulaTree2.Clone()
             };
         }
 
