@@ -127,7 +127,7 @@ namespace Catrobat.IDE.Tests.Tests.Data
             if (output != null)
             {
                 var expectedDocument = SampleLoader.LoadSampleXDocument(output);
-                XmlDocumentCompare.Compare(expectedDocument, actualDocument);
+                XmlDocumentComparer.Compare(expectedDocument, actualDocument);
             }
         }
 

@@ -1,7 +1,9 @@
-﻿using System.Windows.Controls;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Phone.Controls.FormulaControls.Templates;
+using System;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Catrobat.IDE.Phone.Controls.FormulaControls.Formulas;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {
@@ -9,9 +11,10 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
     {
         public FormulaPartStyleCollection Style { get; set; }
 
-        public Grid CreateUiControls(int fontSize, bool isSelected, bool isParentSelected, bool isError)
+        public Grid CreateUiControls(double fontSize, bool isSelected, bool isParentSelected, bool isError, Action<Grid, GestureEventArgs> onTap, Action<Grid, GestureEventArgs> onDoubleTap)
         {
             var control = CreateControls(fontSize, isSelected, isParentSelected, isError);
+            if (control == null) return null;
 
             if (isError)
             {
@@ -23,43 +26,27 @@ namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
                 control.Children.Add(errorGrid);
             }
 
-            if (control != null)
-            {
-                control.Tap += ControlOnTap;
-                UiFormula.UiControls.Add(control);
-            }
+            control.Tap += (sender, e) => onTap((Grid) sender, e);
+            control.DoubleTap += (sender, e) => onDoubleTap((Grid) sender, e);
 
             return control;
         }
 
-        protected abstract Grid CreateControls(int fontSize, bool isParentSelected, bool isSelected, bool isError);
-
-        protected void ControlOnTap(object sender, GestureEventArgs gestureEventArgs)
-        {
-            if (UiFormula.IsEditEnabled)
-            {
-                bool wasSelected = UiFormula.IsSelected;
-
-                UiFormula.ClearAllSelection();
-                UiFormula.ClearAllBackground();
-                UiFormula.IsSelected = !wasSelected;
-                
-                if(UiFormula.IsSelected)
-                    UiFormula.Viewer.SelectedFormulaChanged(UiFormula.TreeItem);
-                else
-                    UiFormula.Viewer.SelectedFormulaChanged(null);
-
-                if (UiFormula.IsSelected)
-                    UiFormula.SetStyle(true, false);
-            }
-
-            gestureEventArgs.Handled = true;
-        }
+        protected abstract Grid CreateControls(double fontSize, bool isParentSelected, bool isSelected, bool isError);
 
         public abstract int GetCharacterWidth();
 
-        public UiFormula UiFormula { get; set; }
+        public IFormulaToken Token { get; set; }
 
+        [Obsolete]
         public abstract FormulaPartControl Copy();
+
+        public virtual FormulaPartControl CreateUiTokenTemplate(IFormulaToken token)
+        {
+            // TODO: implement CreateUiTokenTemplate in derived classes
+            var template = Copy();
+            template.Token = token;
+            return template;
+        }
     }
 }

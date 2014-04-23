@@ -1026,4 +1026,13 @@
   <data name="Main_Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="Editor_TypeSomething" xml:space="preserve">
+    <value>Type something</value>
+  </data>
+  <data name="Formula_LOUDNESS" xml:space="preserve">
+    <value>loudness</value>
+  </data>
+  <data name="Editor_ReallyDismissFormula" xml:space="preserve">
+    <value>Press "back" again to dismiss your changes?</value>
+  </data>
 </root>

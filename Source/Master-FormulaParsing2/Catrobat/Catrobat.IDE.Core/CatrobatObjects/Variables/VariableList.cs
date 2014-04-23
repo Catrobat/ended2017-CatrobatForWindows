@@ -4,7 +4,10 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Variables
 {
     public class VariableList : DataObject
     {
+        /// <summary>Local variables</summary>
         public ObjectVariableList ObjectVariableList;
+
+        /// <summary>Global variables</summary>
         public ProgramVariableList ProgramVariableList;
 
         public VariableList()

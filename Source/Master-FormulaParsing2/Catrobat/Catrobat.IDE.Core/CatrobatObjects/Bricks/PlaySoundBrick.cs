@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Xml.Linq;
+using Catrobat.IDE.Core.FormulaEditor;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 
@@ -79,7 +80,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
             return xRoot;
         }
 
-        internal override void LoadReference()
+        internal override void LoadReference(XmlFormulaTreeConverter converter)
         {
             if (_soundReference != null)
                 _soundReference.LoadReference();
