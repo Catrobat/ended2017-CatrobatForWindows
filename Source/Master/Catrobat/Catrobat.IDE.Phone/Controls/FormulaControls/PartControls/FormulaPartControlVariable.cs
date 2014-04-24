@@ -1,6 +1,5 @@
-﻿using System;
-using System.Windows.Controls;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+﻿using System.Windows.Controls;
+using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls.PartControls
 {

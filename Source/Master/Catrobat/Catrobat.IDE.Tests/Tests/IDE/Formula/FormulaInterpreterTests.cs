@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.ExtensionMethods;
-using Catrobat.IDE.Core.FormulaEditor;
+using Catrobat.IDE.Core.Formulas;
+using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 

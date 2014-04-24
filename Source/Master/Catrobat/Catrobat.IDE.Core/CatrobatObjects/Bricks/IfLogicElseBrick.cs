@@ -1,5 +1,5 @@
 ﻿using System.Xml.Linq;
-using Catrobat.IDE.Core.FormulaEditor;
+using Catrobat.IDE.Core.Formulas;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
 {

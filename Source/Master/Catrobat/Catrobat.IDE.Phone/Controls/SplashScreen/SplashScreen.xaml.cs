@@ -3,10 +3,10 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Main;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Main;
 using Microsoft.Phone.Controls;
-using ViewModelBase = Catrobat.IDE.Core.ViewModel.ViewModelBase;
+using ViewModelBase = Catrobat.IDE.Core.ViewModels.ViewModelBase;
 
 namespace Catrobat.IDE.Phone.Controls.SplashScreen
 {

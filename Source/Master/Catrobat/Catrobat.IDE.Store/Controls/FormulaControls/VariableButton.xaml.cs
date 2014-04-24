@@ -13,8 +13,8 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
 using Catrobat.IDE.Core.UI.Converters;
 using Catrobat.IDE.Core.Utilities.Helpers;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Editor.Formula;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Editor.Formula;
 
 namespace Catrobat.IDE.Store.Controls.FormulaControls
 {

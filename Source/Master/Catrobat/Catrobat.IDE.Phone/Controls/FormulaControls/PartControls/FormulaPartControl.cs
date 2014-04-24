@@ -1,4 +1,4 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+﻿using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Phone.Controls.FormulaControls.Templates;
 using System;
 using System.Windows.Controls;

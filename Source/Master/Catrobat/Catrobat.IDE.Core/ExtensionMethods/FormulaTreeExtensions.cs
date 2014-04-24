@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Core.ExtensionMethods
 {

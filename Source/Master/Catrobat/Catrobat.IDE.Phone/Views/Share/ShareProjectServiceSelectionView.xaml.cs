@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Share;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Share;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDE.Phone.Views.Share

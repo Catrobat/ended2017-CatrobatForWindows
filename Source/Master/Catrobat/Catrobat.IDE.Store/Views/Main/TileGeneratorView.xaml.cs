@@ -5,8 +5,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Services.Storage;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Main;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Main;
 
 namespace Catrobat.IDE.Store.Views.Main
 {

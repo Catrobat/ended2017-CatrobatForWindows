@@ -12,8 +12,8 @@ using Catrobat.IDE.Core.UI.Converters;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects.Bricks;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Editor.Formula;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Editor.Formula;
 
 namespace Catrobat.IDE.Phone.Controls.FormulaControls
 {

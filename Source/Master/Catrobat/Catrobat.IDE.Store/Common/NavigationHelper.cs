@@ -6,7 +6,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModel;
+using Catrobat.IDE.Core.ViewModels;
 
 namespace Catrobat.IDE.Store.Common
 {

@@ -1,8 +1,8 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
-using Catrobat.IDE.Core.FormulaEditor;
+﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas.XmlFormula;
 using System;
 using System.Xml.Linq;
+using Catrobat.IDE.Core.Formulas;
+using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Formulas
 {

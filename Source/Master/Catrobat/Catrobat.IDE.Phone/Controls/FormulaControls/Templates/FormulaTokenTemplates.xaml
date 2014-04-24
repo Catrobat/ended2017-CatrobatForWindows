@@ -4,9 +4,9 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:partControls="clr-namespace:Catrobat.IDE.Phone.Controls.FormulaControls.PartControls"
-  xmlns:formulaTree="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;assembly=Catrobat.IDE.Core"
-  xmlns:formulaToken="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;assembly=Catrobat.IDE.Core"
   xmlns:templates="clr-namespace:Catrobat.IDE.Phone.Controls.FormulaControls.Templates"
+  xmlns:formulaToken="clr-namespace:Catrobat.IDE.Core.Models.Formulas.FormulaToken;assembly=Catrobat.IDE.Core"
+  xmlns:formulaTree="clr-namespace:Catrobat.IDE.Core.Models.Formulas.FormulaTree;assembly=Catrobat.IDE.Core"
   mc:Ignorable="d">
 
   <SolidColorBrush x:Key="FormulaSelectedBackground" Color="Orange" />

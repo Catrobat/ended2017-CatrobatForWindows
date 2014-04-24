@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.ViewModel.Main;
+using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Store.Common;
 using Catrobat.IDE.Store.Services;
 using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;

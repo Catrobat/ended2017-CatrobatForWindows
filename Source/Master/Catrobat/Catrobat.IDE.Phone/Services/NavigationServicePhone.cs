@@ -5,7 +5,7 @@ using System.Windows;
 using Catrobat.IDE.Core.Services;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
-using ViewModelBase = Catrobat.IDE.Core.ViewModel.ViewModelBase;
+using ViewModelBase = Catrobat.IDE.Core.ViewModels.ViewModelBase;
 
 namespace Catrobat.IDE.Phone.Services
 {
@@ -36,7 +36,7 @@ namespace Catrobat.IDE.Phone.Services
             if (type.BaseType == typeof(ViewModelBase))
             {
                 //Catrobat/IDE/Phone/Views/Main/MainView.xaml
-                pathToXaml = pathToXaml.Replace("Catrobat/IDE/Core/ViewModel", "/Views");
+                pathToXaml = pathToXaml.Replace("Catrobat/IDE/Core/ViewModels", "/Views");
 
                 pathToXaml = pathToXaml.Replace("ViewModel.xaml", "View.xaml");
             }

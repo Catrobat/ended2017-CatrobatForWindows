@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModel.Editor.Formula;
+using Catrobat.IDE.Core.ViewModels.Editor.Formula;
 
 namespace Catrobat.IDE.Store.Controls.FormulaControls
 {
