@@ -19,6 +19,8 @@ namespace Catrobat.IDE.Core.Formulas
     /// </remarks>
     internal class FormulaInterpreter
     {
+        #region Static functions
+
         public static IFormulaTree Interpret(IList<IFormulaToken> tokens, out ParsingError parsingError)
         {
             // TODO: split to InterpretNumber and InterpretLogic
@@ -44,47 +46,6 @@ namespace Catrobat.IDE.Core.Formulas
             return result;
         }
 
-        private IFormulaTree Interpret2(IList<IFormulaToken> tokens)
-        {
-            var tokens2 = SetOrigin(tokens);
-            tokens2 = InterpretNumbersForward(tokens2);
-            tokens2 = InterpretBrackets(tokens2);
-            tokens2 = InterpretNonParameter(tokens2);
-            tokens2 = InterpretFunctions(tokens2);
-            tokens2 = InterpretMinusTokenForward(tokens2);
-            tokens2 = InterpretOperators(tokens2);
-            var formula = tokens2.Cast<IFormulaTree>().FirstOrDefault();
-
-            if (IsCancellationRequested) return null;
-
-            if (formula == null)
-            {
-                SetParsingError(null, "Empty formula");
-                return null;
-            }
-            if (GetOrigin(formula).Length < tokens.Count)
-            {
-                SetParsingError(Range.Empty(GetOrigin(formula).End), "Missing infix operator. ");
-                return null;
-            }
-
-            try
-            {
-                // validate evaluation constraints like sin(True + 4)
-                var isNumber = formula.IsNumber();
-            }
-            catch (SemanticsErrorException ex)
-            {
-                var selection = ex.Node == null ? Range.Empty(0) : GetOrigin(ex.Node);
-                ParsingError = new ParsingError(ex.Message, selection.Start, selection.Length);
-                return null;
-            }
-
-            return formula;
-        }
-
-        #region Complete only
-
         public static Range CompleteToken(IList<IFormulaToken> tokens, int index)
         {
             var sw = new Stopwatch();
@@ -103,88 +64,63 @@ namespace Catrobat.IDE.Core.Formulas
             return result;
         }
 
+        #endregion
+
+        /// <remarks>See <see cref="http://stackoverflow.com/questions/160118/static-and-instance-methods-with-the-same-name" />. </remarks>
+        private IFormulaTree Interpret2(IList<IFormulaToken> tokens)
+        {
+            // interpret syntax
+            var tokens2 = SetOriginAndClone(tokens);
+            tokens2 = InterpretNumbers(tokens2);
+            tokens2 = InterpretBrackets(tokens2);
+            tokens2 = InterpretNonParameter(tokens2);
+            tokens2 = InterpretFunctions(tokens2);
+            tokens2 = InterpretMinusTokenForward(tokens2);
+            tokens2 = InterpretOperators(tokens2);
+            var formula = tokens2.Cast<IFormulaTree>().FirstOrDefault();
+            if (IsCancellationRequested) return null;
+
+            // valid formula
+            if (formula == null)
+            {
+                SetParsingError(null, "Empty formula");
+                return null;
+            }
+            if (GetOrigin(formula).Length < tokens.Count)
+            {
+                SetParsingError(Range.Empty(GetOrigin(formula).End), "Missing infix operator. ");
+                return null;
+            }
+
+            // interpret semantics
+            try
+            {
+                // validate evaluation constraints like sin(True + 4)
+                var isNumber = formula.IsNumber();
+            }
+            catch (SemanticsErrorException ex)
+            {
+                var selection = ex.Node == null ? Range.Empty(0) : GetOrigin(ex.Node);
+                ParsingError = new ParsingError(ex.Message, selection.Start, selection.Length);
+                return null;
+            }
+
+            return formula;
+        }
+
         /// <remarks>See <see cref="http://stackoverflow.com/questions/160118/static-and-instance-methods-with-the-same-name" />. </remarks>
         private Range CompleteToken2(IList<IFormulaToken> tokens, int index)
         {
-            tokens = SetOrigin(tokens).ToList();
+            SetOrigin(tokens);
             var token = tokens[index];
 
-            // complete number token
-            if (token is FormulaNodeNumber || token is FormulaTokenDecimalSeparator)
-            {
-                var numberTokens = CompleteNumberToken(tokens, index);
-                return GetOrigin(numberTokens);
-            }
+            if (token is FormulaNodeNumber || token is FormulaTokenDecimalSeparator) return GetOrigin(CompleteNumber(tokens, index));
+            if (token is FormulaTokenParenthesis) return GetOrigin(CompleteBracket(tokens, index));
+            if (token is IFormulaFunction) return GetOrigin(CompleteFunction(tokens, index) ?? token);
+            if (token is IFormulaOperator) return GetOrigin(CompleteOperator(tokens, index));
 
-            // complete parenthesis
-            var parenthesisToken = token as FormulaTokenParenthesis;
-            if (parenthesisToken != null)
-            {
-                var parenthesesNode = (parenthesisToken.IsOpening
-                    ? CompleteBrackets(tokens.Skip(index))
-                    : CompleteBrackets(tokens.Take(index + 1).Reverse(), false)).FirstOrDefault();
-                if (parenthesesNode != null) return GetOrigin(parenthesesNode);
-            }
-
-            // complete function
-            if (token is IFormulaFunction)
-            {
-                var tokensAftwerwards = tokens.Skip(index);
-                tokensAftwerwards = CompleteNumbers(tokensAftwerwards);
-                tokensAftwerwards = CompleteBrackets(tokensAftwerwards);
-                tokensAftwerwards = CompleteFunctions(tokensAftwerwards);
-
-                var functionNode = tokensAftwerwards.FirstOrDefault();
-                if (functionNode != null) return GetOrigin(functionNode);
-            }
-
-            // complete prefix operator
-            if (token is FormulaNodePrefixOperator)
-            {
-                // TODO: implement me
-                return GetOrigin(token);
-            }
-
-            var minusToken = token as FormulaNodeSubtract;
-            if (minusToken != null)
-            {
-                // TODO: implement me
-                return GetOrigin(token);
-            }
-
-            // complete infix operator
-            var infixOperatorToken = token as FormulaNodeInfixOperator;
-            if (infixOperatorToken != null)
-            {
-                var dummyToken = FormulaTokenFactory.CreatePiToken();
-
-                infixOperatorToken.LeftChild = dummyToken;
-                var tokensAfterwards = Enumerable.Repeat(dummyToken, 1).Concat(tokens.Skip(index));
-                SetOrigin(dummyToken, Range.FromIndices(index - 1, 1));
-                tokensAfterwards = CompleteNumbers(tokensAfterwards);
-                tokensAfterwards = CompleteBrackets(tokensAfterwards);
-                tokensAfterwards = CompleteFunctions(tokensAfterwards);
-                tokensAfterwards = InterpretMinusTokenForward(tokensAfterwards);
-                tokensAfterwards = CompleteOperators(tokensAfterwards);
-                var tmp = (FormulaNodeInfixOperator) tokensAfterwards.FirstOrDefault();
-
-                var tokensBefore = tokens.Take(index + 1).Reverse().Concat(Enumerable.Repeat(dummyToken, 1));
-                SetOrigin(dummyToken, Range.FromIndices(index + 1, 1));
-                tokensBefore = CompleteNumbers(tokensBefore);
-                tokensBefore = CompleteBrackets(tokensBefore, false);
-                tokensBefore = CompleteFunctions(tokensBefore);
-                tokensBefore = InterpretMinusTokenBackwards(tokensBefore);
-                tokensBefore = CompleteOperatorsBackwards(tokensBefore);
-                var tmp2 = (FormulaNodeInfixOperator) tokensBefore.FirstOrDefault();
-
-                // TODO: SetOrigin(token) = common range of tmp and tmp2
-            }
-
-            // complete constant, parameter separator token or failed tokens from above
             return GetOrigin(token);
         }
-
-        #endregion
 
         #region Members
 
@@ -220,7 +156,15 @@ namespace Catrobat.IDE.Core.Formulas
         {
             _origin[token] = GetOrigin(tokens);
         }
-        private IEnumerable<IFormulaToken> SetOrigin(IList<IFormulaToken> tokens)
+        private void SetOrigin(IList<IFormulaToken> tokens)
+        {
+            for (var index = 0; index < tokens.Count; index++)
+            {
+                var token = tokens[index];
+                SetOrigin(token, Range.Single(index));
+            }
+        }
+        private IEnumerable<IFormulaToken> SetOriginAndClone(IList<IFormulaToken> tokens)
         {
             for (var index = 0; index < tokens.Count; index++)
             {
@@ -254,14 +198,14 @@ namespace Catrobat.IDE.Core.Formulas
         /// <summary>
         /// Merges <see cref="FormulaTokenFactory.CreateDigitToken" /> and <see cref="FormulaTokenFactory.CreateDecimalSeparatorToken" /> to <see cref="FormulaTreeFactory.CreateNumberNode" />. 
         /// </summary>
-        private IEnumerable<IFormulaToken> InterpretNumbersForward(IEnumerable<IFormulaToken> tokens)
+        private IEnumerable<IFormulaToken> InterpretNumbers(IEnumerable<IFormulaToken> tokens)
         {
             var decimalSeparator = CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator;
             var valueTokens = new List<IFormulaToken>();
             var valueBuilder = new StringBuilder();
             var valueContainsDecimalSeparator = false;
 
-            // Helper to avoid duplicate code
+            // helper to avoid duplicate code
             Func<IFormulaToken> createCommonToken = () =>
             {
                 IFormulaToken commonToken;
@@ -295,7 +239,7 @@ namespace Catrobat.IDE.Core.Formulas
 
             foreach (var token in tokens)
             {
-                // Append digit to value
+                // append digit to value
                 var digitToken = token as FormulaNodeNumber;
                 if (digitToken != null)
                 {
@@ -304,7 +248,7 @@ namespace Catrobat.IDE.Core.Formulas
                     continue;
                 }
 
-                // Append decimal separator to value
+                // append decimal separator to value
                 var decimalSeparatorToken = token as FormulaTokenDecimalSeparator;
                 if (decimalSeparatorToken != null)
                 {
@@ -319,7 +263,7 @@ namespace Catrobat.IDE.Core.Formulas
                     continue;
                 }
 
-                // Create common token of value
+                // create common token of value
                 if (valueTokens.Count != 0)
                 {
                     var commonToken = createCommonToken();
@@ -327,11 +271,11 @@ namespace Catrobat.IDE.Core.Formulas
                     yield return commonToken;
                 }
 
-                // Yield any non-number token
+                // yield any non-number token
                 yield return token;
             }
 
-            // Create common token of value
+            // create common token of value
             if (valueTokens.Count != 0)
             {
                 var commonToken = createCommonToken();
@@ -340,12 +284,13 @@ namespace Catrobat.IDE.Core.Formulas
             }
         }
 
+        /// <remarks>Compare <see cref="InterpretNumbers"/>. </remarks>
         private IEnumerable<IFormulaToken> CompleteNumbers(IEnumerable<IFormulaToken> tokens)
         {
             var valueTokens = new List<IFormulaToken>();
             var valueContainsDecimalSeparator = false;
 
-            // Helper to avoid duplicate code
+            // helper to avoid duplicate code
             Func<IFormulaToken> createCommonToken = () =>
             {
                 IFormulaToken commonToken;
@@ -367,7 +312,7 @@ namespace Catrobat.IDE.Core.Formulas
 
             foreach (var token in tokens)
             {
-                // Append digit to value
+                // append digit to value
                 var digitToken = token as FormulaNodeNumber;
                 if (digitToken != null)
                 {
@@ -375,7 +320,7 @@ namespace Catrobat.IDE.Core.Formulas
                     continue;
                 }
 
-                // Append decimal separator to value
+                // append decimal separator to value
                 var decimalSeparatorToken = token as FormulaTokenDecimalSeparator;
                 if (decimalSeparatorToken != null)
                 {
@@ -386,7 +331,7 @@ namespace Catrobat.IDE.Core.Formulas
                     continue;
                 }
 
-                // Create common token of value
+                // create common token of value
                 if (valueTokens.Count != 0)
                 {
                     var commonToken = createCommonToken();
@@ -394,11 +339,11 @@ namespace Catrobat.IDE.Core.Formulas
                     yield return commonToken;
                 }
 
-                // Yield any non-number token
+                // yield any non-number token
                 yield return token;
             }
 
-            // Create common token of value
+            // create common token of value
             if (valueTokens.Count != 0)
             {
                 var commonToken = createCommonToken();
@@ -407,7 +352,7 @@ namespace Catrobat.IDE.Core.Formulas
             }
         }
 
-        private IEnumerable<IFormulaToken> CompleteNumberToken(IList<IFormulaToken> tokens, int index)
+        private IEnumerable<IFormulaToken> CompleteNumber(IList<IFormulaToken> tokens, int index)
         {
             var token = tokens[index];
             var containsDecimalSeparator = tokens[index] is FormulaTokenDecimalSeparator;
@@ -435,6 +380,7 @@ namespace Catrobat.IDE.Core.Formulas
             {
                 yield return token2;
             }
+
             yield return token;
 
             // gather tokens afterwards
@@ -473,6 +419,17 @@ namespace Catrobat.IDE.Core.Formulas
                 if (IsCancellationRequested) yield break;
                 var previousToken = context[0];
                 var token = context[1];
+
+                if (token == null)
+                {
+                    if (parenthesesTokens.Count != 0)
+                    {
+                        SetParsingError(
+                            source: Range.Empty(GetOrigin(parenthesesTokens.Peek().Last()).End),
+                            message: "Add missing closing bracket. ");
+                    }
+                    continue;
+                }
 
                 var parenthesisToken = token as FormulaTokenParenthesis;
                 if (parenthesisToken != null)
@@ -514,22 +471,16 @@ namespace Catrobat.IDE.Core.Formulas
                 }
 
                 // stash tokens inside parentheses
-                if (token != null && parenthesesTokens.Count != 0)
+                if (parenthesesTokens.Count != 0)
                 {
                     parenthesesTokens.Peek().Add(token);
                     continue;
                 }
 
                 // yield any token outside parentheses
-                if (token != null) yield return token;
+                yield return token;
             }
 
-            if (!IsCancellationRequested && parenthesesTokens.Count != 0)
-            {
-                SetParsingError(
-                    source: Range.Empty(GetOrigin(parenthesesTokens.Peek().Last()).End), 
-                    message: "Add missing closing bracket. ");
-            }
         }
 
         /// <remarks>Compare <see cref="InterpretBrackets"/>. </remarks>
@@ -542,6 +493,27 @@ namespace Catrobat.IDE.Core.Formulas
                 var previousToken = context[0];
                 var token = context[1];
 
+                // complete incomplete parentheses
+                if (token == null)
+                {
+                    while (parenthesesTokens.Count != 0)
+                    {
+                        parenthesesTokens.Peek().Add(previousToken);
+
+                        var commonToken = parentheses.Pop();
+                        CompleteChildren(commonToken, parenthesesTokens.Pop());
+                        if (parenthesesTokens.Count != 0)
+                        {
+                            parenthesesTokens.Peek().Add(commonToken);
+                        }
+                        else
+                        {
+                            yield return commonToken;
+                        }
+                    }
+                    continue;
+                }
+
                 var parenthesisToken = token as FormulaTokenParenthesis;
                 if (parenthesisToken != null)
                 {
@@ -549,9 +521,7 @@ namespace Catrobat.IDE.Core.Formulas
                     {
                         parenthesesTokens.Push(new List<IFormulaToken>());
                         parenthesesTokens.Peek().Add(token);
-                        parentheses.Push(previousToken is FormulaNodeBinaryFunction
-                            ? (IFormulaToken)FormulaTokenFactory.CreateParametersToken(null, null)
-                            : FormulaTreeFactory.CreateParenthesesNode(null));
+                        parentheses.Push(FormulaTreeFactory.CreateParenthesesNode(null));
                     }
                     else
                     {
@@ -575,14 +545,19 @@ namespace Catrobat.IDE.Core.Formulas
                 }
 
                 // dismiss tokens inside parentheses
-                if (token != null && parenthesesTokens.Count != 0)
-                {
-                    continue;
-                }
+                if (parenthesesTokens.Count != 0) continue;
 
                 // yield any token outside parentheses
-                if (token != null) yield return token;
+                yield return token;
             }
+        }
+
+        private IFormulaToken CompleteBracket(IList<IFormulaToken> tokens, int index)
+        {
+            var parenthesisToken = (FormulaTokenParenthesis) tokens[index];
+            return (parenthesisToken.IsOpening
+                ? CompleteBrackets(tokens.Skip(index))
+                : CompleteBrackets(tokens.Take(index + 1).Reverse(), false)).First();
         }
 
         private void InterpretChildren(IFormulaToken commonToken, List<IFormulaToken> parenthesesTokens)
@@ -745,7 +720,7 @@ namespace Catrobat.IDE.Core.Formulas
                 var previousToken = context[0];
                 var token = context[1];
 
-                // assign parentheses to unary function
+                // attach parentheses to unary function
                 var unaryFunctionToken = previousToken as FormulaNodeUnaryFunction;
                 if (unaryFunctionToken != null)
                 {
@@ -762,7 +737,7 @@ namespace Catrobat.IDE.Core.Formulas
                     continue;
                 }
 
-                // assign parameters to binary function
+                // attach parameters to binary function
                 var binaryFunctionToken = previousToken as FormulaNodeBinaryFunction;
                 if (binaryFunctionToken != null)
                 {
@@ -780,12 +755,6 @@ namespace Catrobat.IDE.Core.Formulas
                     continue;
                 }
 
-                if (token is FormulaTokenParameters)
-                {
-                    SetParsingError(Range.Empty(GetOrigin(token).Start), "Missing binary function name");
-                    yield break;
-                }
-
                 // yield any other token
                 if (token != null && !(token is IFormulaFunction))
                 {
@@ -795,47 +764,61 @@ namespace Catrobat.IDE.Core.Formulas
         }
 
         /// <remarks>Compare <see cref="InterpretFunctions"/>. </remarks>
-        private IEnumerable<IFormulaToken> CompleteFunctions(IEnumerable<IFormulaToken> tokens)
+        private IEnumerable<IFormulaToken> CompleteFunctionsForward(IEnumerable<IFormulaToken> tokens)
         {
             foreach (var context in tokens.WithContext())
             {
                 var previousToken = context[0];
                 var token = context[1];
 
-                // assign parentheses to unary function
-                var unaryFunctionToken = previousToken as FormulaNodeUnaryFunction;
-                if (unaryFunctionToken != null)
+                // attach parentheses to function
+                if (previousToken is IFormulaFunction)
                 {
-                    var parameterToken = token as FormulaNodeParentheses;
-
                     // missing function argument
-                    if (parameterToken == null) yield break;
+                    if (!(token is FormulaNodeParentheses)) yield break;
 
-                    SetOrigin(unaryFunctionToken, new IFormulaToken[] { unaryFunctionToken, parameterToken });
+                    SetOrigin(previousToken, new[] { previousToken, token });
                     yield return previousToken;
                     continue;
                 }
-
-                // assign parameters to binary function
-                var binaryFunctionToken = previousToken as FormulaNodeBinaryFunction;
-                if (binaryFunctionToken != null)
-                {
-                    var parameterToken = token as FormulaTokenParameters;
-
-                    // missing function argument
-                    if (parameterToken == null) yield break;
-
-                    SetOrigin(binaryFunctionToken, new IFormulaToken[] { binaryFunctionToken, parameterToken });
-                    yield return previousToken;
-                    continue;
-                }
-
-                // missing binary function
-                if (token is FormulaTokenParameters) yield break;
 
                 // yield any other token
                 if (token != null && !(token is IFormulaFunction)) yield return token;
             }
+        }
+
+        private IEnumerable<IFormulaToken> CompleteFunctionsBackwards(IEnumerable<IFormulaToken> tokens)
+        {
+            foreach (var context in tokens.WithContext())
+            {
+                var nextToken = context[0];
+                var token = context[1];
+
+                // attach parentheses to function
+                if (token is IFormulaFunction)
+                {
+                    // missing function argument
+                    if (!(nextToken is FormulaNodeParentheses)) yield break;
+
+                    SetOrigin(token, new[] { token, nextToken });
+                    yield return token;
+                    continue;
+                }
+
+                // yield unattached parentheses
+                if (nextToken is FormulaNodeParentheses) yield return nextToken;
+
+                // yield any other token
+                if (token != null && !(token is FormulaNodeParentheses)) yield return token;
+            }
+        }
+
+        private IFormulaToken CompleteFunction(IEnumerable<IFormulaToken> tokens, int index)
+        {
+            var tokensAftwerwards = tokens.Skip(index);
+            tokensAftwerwards = CompleteBrackets(tokensAftwerwards);
+            tokensAftwerwards = CompleteFunctionsForward(tokensAftwerwards);
+            return tokensAftwerwards.FirstOrDefault();
         }
 
         #endregion
@@ -855,15 +838,7 @@ namespace Catrobat.IDE.Core.Formulas
 
                 // handle minus token
                 var minusToken = token as FormulaNodeSubtract;
-                if (minusToken != null)
-                {
-                    // change from minus token to negative sign token
-                    if (previousToken == null || previousToken is IFormulaOperator || previousToken is FormulaTokenParameterSeparator)
-                    {
-                        token = FormulaTreeFactory.CreateNegativeSignNode(null);
-                        SetOrigin(token, minusToken);
-                    }
-                }
+                if (minusToken != null) token = InterpretMinusToken(previousToken, minusToken);
 
                 if (token != null) yield return token;
             }
@@ -883,18 +858,25 @@ namespace Catrobat.IDE.Core.Formulas
                 var minusToken = nextToken as FormulaNodeSubtract;
                 if (minusToken != null)
                 {
-                    // change from minus token to negative sign token
-                    if (token == null || token is IFormulaOperator || token is FormulaTokenParameterSeparator)
-                    {
-                        nextToken = FormulaTreeFactory.CreateNegativeSignNode(null);
-                        SetOrigin(nextToken, minusToken);
-                    }
+                    nextToken = InterpretMinusToken(token, minusToken);
                     yield return nextToken;
                 }
 
                 // yield any non minus token
                 if (token != null && !(token is FormulaNodeSubtract)) yield return token;
             }
+        }
+
+        private IFormulaOperator InterpretMinusToken(IFormulaToken previousToken, FormulaNodeSubtract minusToken)
+        {
+            // change from subtract to negative sign token
+            if (previousToken == null || previousToken is IFormulaOperator || previousToken is FormulaTokenParameterSeparator)
+            {
+                var negativeSignToken = FormulaTreeFactory.CreateNegativeSignNode(null);
+                SetOrigin(negativeSignToken, minusToken);
+                return negativeSignToken;
+            }
+            return minusToken;
         }
 
         /// <summary>
@@ -998,170 +980,71 @@ namespace Catrobat.IDE.Core.Formulas
             return token;
         }
 
-        private IEnumerable<IFormulaToken> CompleteOperators(IEnumerable<IFormulaToken> tokens)
+        private IEnumerable<IFormulaToken> CompleteOperatorForward(IEnumerable<IFormulaToken> tokens, IFormulaOperator operatorToken)
         {
-            var pending = new Stack<IFormulaTree>();
-            foreach (var context in tokens.WithContext())
-            {
-                var token = context[0];
-                var nextToken = context[1];
-
-                if (token == null) continue;
-
-                // yield parameter separator
-                if (token is FormulaTokenParameterSeparator)
+            var operatorOrder = operatorToken.Order;
+            return tokens
+                .TakeWhile(token => !(token is FormulaTokenParameterSeparator))
+                .WithContext()
+                .TakeWhile(context =>
                 {
-                    // missing left value
-                    if (nextToken is FormulaNodeInfixOperator) yield break;
-
-                    yield return token;
-                    continue;
-                }
-                var token2 = (IFormulaTree)token;
-
-                // stash operator
-                var operatorToken = token2 as IFormulaOperator;
-                if (operatorToken != null)
-                {
-                    // missing left value
-                    if (operatorToken is FormulaNodeInfixOperator && pending.Count == 0) yield break;
-
-                    // missing (right) value
-                    if (nextToken == null || nextToken is FormulaNodeInfixOperator) yield break;
-                    
-                    if (nextToken is FormulaTokenParameterSeparator) yield break;
-
-                    pending.Push(token2);
-                    continue;
-                }
-
-                // stash any other attached tokens (regarding operator order)
-                var nextInfixOperatorToken = nextToken as FormulaNodeInfixOperator;
-                if (nextInfixOperatorToken != null && (pending.Count == 0 || ((IFormulaOperator)pending.Peek()).Order <= nextInfixOperatorToken.Order))
-                {
-                    pending.Push(token2);
-                    continue;
-                }
-
-                // merge with pending tokens
-                while (pending.Count != 0)
-                {
-                    var pendingOperator = pending.Pop();
-
-                    // attach token to prefix operator
-                    var pendingPrefixOperator = pendingOperator as FormulaNodePrefixOperator;
-                    if (pendingPrefixOperator != null)
-                    {
-                        SetOrigin(pendingPrefixOperator, new[] { pendingOperator, token2 });
-                        token2 = pendingOperator;
-                    }
-
-                    // attach token to infix operator
-                    var pendingInfixOperator = pendingOperator as FormulaNodeInfixOperator;
-                    if (pendingInfixOperator != null)
-                    {
-                        SetOrigin(pendingInfixOperator, new[] { pending.Pop(), pendingOperator, token2 });
-                        token2 = pendingOperator;
-                    }
-                }
-
-                // yield unattached or merged token
-                if (nextInfixOperatorToken == null)
-                {
-                    yield return token2;
-                }
-                else
-                {
-                    pending.Push(token2);
-                }
-            }
+                    var previousToken = context[0];
+                    var token = context[1];
+                    var pending = previousToken == null || previousToken is IFormulaOperator;
+                    var operatorToken2 = token as IFormulaOperator;
+                    return token != null &&
+                        !(pending && operatorToken2 is FormulaNodeInfixOperator) && // missing value of operator
+                        (pending || (operatorToken2 != null && operatorToken2.Order > operatorOrder)); // operator fully completed
+                }).Select(context => context[1]);
         }
 
-        private IEnumerable<IFormulaToken> CompleteOperatorsBackwards(IEnumerable<IFormulaToken> tokens)
+        private IEnumerable<IFormulaToken> CompleteOperatorBackwards(IEnumerable<IFormulaToken> tokens, IFormulaOperator operatorToken)
         {
-            var pending = new Stack<IFormulaTree>();
-            foreach (var context in tokens.WithContext())
+            var operatorOrder = operatorToken.Order;
+            return tokens
+                .TakeWhile(token => !(token is FormulaTokenParameterSeparator))
+                .WithContext()
+                .TakeWhile(context =>
+                {
+                    var nextToken = context[0];
+                    var token = context[1];
+                    var pending = nextToken == null || nextToken is FormulaNodeInfixOperator;
+                    var infixOperatorToken2 = token as FormulaNodeInfixOperator;
+                    return token != null &&
+                        !(pending && token is IFormulaOperator) && // missing value of operator
+                        (pending || (infixOperatorToken2 != null && infixOperatorToken2.Order > operatorOrder)); // operator fully completed
+                }).Select(context => context[1]);
+        }
+
+        private IEnumerable<IFormulaToken> CompleteOperator(IList<IFormulaToken> tokens, int index)
+        {
+            var operatorToken = (IFormulaOperator) tokens[index];
+            var operatorTokens = Enumerable.Repeat((IFormulaToken) operatorToken, 1);
+
+            // handle minus token
+            var minusToken = operatorToken as FormulaNodeSubtract;
+            if (minusToken != null) operatorToken = InterpretMinusToken(index == 0 ? null : tokens[index - 1], minusToken);
+
+            // gather tokens before
+            if (operatorToken is FormulaNodeInfixOperator)
             {
-                var token = context[0];
-                var previousToken = context[1];
-
-                if (token == null) continue;
-
-                // yield parameter separator
-                if (token is FormulaTokenParameterSeparator)
-                {
-                    yield return token;
-                    continue;
-                }
-                var token2 = (IFormulaTree)token;
-
-                // stash infix operator
-                var infixOperatorToken = token2 as FormulaNodeInfixOperator;
-                if (infixOperatorToken != null)
-                {
-                    // missing right value
-                    if (pending.Count == 0) yield break;
-                    
-                    // missing left value
-                    if (previousToken == null || previousToken is FormulaTokenParameterSeparator || previousToken is IFormulaOperator) yield break;
-
-                    pending.Push(token2);
-                    continue;
-                }
-
-                // attack pending token to prefix operator
-                var prefixOperatorToken = token2 as FormulaNodePrefixOperator;
-                if (prefixOperatorToken != null)
-                {
-                    // missing value
-                    if (pending.Count == 0) yield break;
-
-                    var pendingToken = pending.Pop();
-                    if (pendingToken != null)
-                    {
-                        var numberToken = pendingToken as FormulaNodeNumber;
-
-                        // merge negative sign and number
-                        if (numberToken != null && prefixOperatorToken is FormulaNodeNegativeSign)
-                        {
-                            SetOrigin(pendingToken, new[] { token2, pendingToken });
-                            token2 = pendingToken;
-                        }
-                        else
-                        {
-                            SetOrigin(token2, new[] { token2, pendingToken });
-                        }
-                    }
-                }
-
-                // stash any other attached tokens (regarding operator order)
-                var previousOperatorToken = previousToken as IFormulaOperator;
-                if (previousOperatorToken != null && (pending.Count == 0 || previousOperatorToken.Order > ((IFormulaOperator)pending.Peek()).Order))
-                {
-                    pending.Push(token2);
-                    continue;
-                }
-
-                // merge infix operator with pending tokens
-                while (pending.Count != 0)
-                {
-                    var pendingInfixOperator = (FormulaNodeInfixOperator) pending.Pop();
-                    pendingInfixOperator.LeftChild = token2;
-                    pendingInfixOperator.RightChild = pending.Pop();
-                    SetOrigin(pendingInfixOperator, new[] { pendingInfixOperator.LeftChild, pendingInfixOperator, pendingInfixOperator.RightChild });
-                    token2 = pendingInfixOperator;
-                }
- 
-                // yield unattached or merged token
-                if (previousOperatorToken == null)
-                {
-                    yield return token2;
-                }
-                else
-                {
-                    pending.Push(token2);
-                }
+                var tokensBefore = tokens.Take(index).Reverse();
+                tokensBefore = CompleteBrackets(tokensBefore, false);
+                tokensBefore = CompleteFunctionsBackwards(tokensBefore);
+                tokensBefore = CompleteNumbers(tokensBefore);
+                tokensBefore = InterpretMinusTokenBackwards(tokensBefore);
+                operatorTokens = CompleteOperatorBackwards(tokensBefore, operatorToken).Concat(operatorTokens);
             }
+
+            // gather tokens afterwards
+            var tokensAfterwards = tokens.Skip(index + 1);
+            tokensAfterwards = CompleteBrackets(tokensAfterwards);
+            tokensAfterwards = CompleteFunctionsForward(tokensAfterwards);
+            tokensAfterwards = CompleteNumbers(tokensAfterwards);
+            tokensAfterwards = InterpretMinusTokenForward(tokensAfterwards);
+            operatorTokens = operatorTokens.Concat(CompleteOperatorForward(tokensAfterwards, operatorToken));
+
+            return operatorTokens;
         }
 
         #endregion
