@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Catrobat.IDE.Core.CatrobatObjects
 {
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     internal struct Range
     {
         #region Members
@@ -49,6 +51,12 @@ namespace Catrobat.IDE.Core.CatrobatObjects
         public bool Contains(Range other)
         {
             return this.Start <= other.Start && other.End <= this.End;
+        }
+
+        // ReSharper disable once UnusedMember.Local
+        private string DebuggerDisplay
+        {
+            get { return "[" + Start + ", " + (End - 1) + "]"; }
         }
     }
 }

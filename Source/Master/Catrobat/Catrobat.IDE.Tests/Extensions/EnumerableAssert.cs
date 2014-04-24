@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Catrobat.IDE.Tests
+namespace Catrobat.IDE.Tests.Extensions
 {
     public static class EnumerableAssert
     {

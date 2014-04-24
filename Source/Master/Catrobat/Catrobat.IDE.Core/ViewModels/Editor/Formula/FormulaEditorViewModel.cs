@@ -176,7 +176,7 @@ namespace Catrobat.IDE.Core.ViewModels.Editor.Formula
         public RelayCommand<int> CompleteTokenCommand { get; private set; }
         private void CompleteTokenAction(int index)
         {
-            var selection = FormulaInterpreter.CompleteToken(Tokens, index);
+            var selection = FormulaInterpreter.Complete(Tokens, index);
             CaretIndex = selection.Start;
             SelectionLength = selection.Length;
         }

@@ -25,6 +25,7 @@ namespace Catrobat.IDE.Core.Formulas
         {
             // TODO: split to InterpretNumber and InterpretLogic
 
+            // TODO: remove this
             var sw = new Stopwatch();
             sw.Start();
 
@@ -40,14 +41,16 @@ namespace Catrobat.IDE.Core.Formulas
             var result = instance.Interpret2(tokens);
             parsingError = instance.ParsingError;
 
+            // TODO: remove this
             sw.Stop();
-            Debug.WriteLine("Interpreter.Interpret needed " + sw.ElapsedMilliseconds + "ms");
+            // Debug.WriteLine("Interpreter.Interpret needed " + sw.ElapsedMilliseconds + "ms");
 
             return result;
         }
 
-        public static Range CompleteToken(IList<IFormulaToken> tokens, int index)
+        public static Range Complete(IList<IFormulaToken> tokens, int index)
         {
+            // TODO: remove this
             var sw = new Stopwatch();
             sw.Start();
 
@@ -56,10 +59,11 @@ namespace Catrobat.IDE.Core.Formulas
 
             // complete token
             var instance = new FormulaInterpreter();
-            var result = instance.CompleteToken2(tokens, index);
+            var result = instance.Complete2(tokens, index);
 
+            // TODO: remove this
             sw.Stop();
-            Debug.WriteLine("Interpreter.CompleteToken needed " + sw.ElapsedMilliseconds + "ms");
+            // Debug.WriteLine("Interpreter.CompleteToken needed " + sw.ElapsedMilliseconds + "ms");
 
             return result;
         }
@@ -70,7 +74,7 @@ namespace Catrobat.IDE.Core.Formulas
         private IFormulaTree Interpret2(IList<IFormulaToken> tokens)
         {
             // interpret syntax
-            var tokens2 = SetOriginAndClone(tokens);
+            var tokens2 = SetOrigin(tokens);
             tokens2 = InterpretNumbers(tokens2);
             tokens2 = InterpretBrackets(tokens2);
             tokens2 = InterpretNonParameter(tokens2);
@@ -109,9 +113,9 @@ namespace Catrobat.IDE.Core.Formulas
         }
 
         /// <remarks>See <see cref="http://stackoverflow.com/questions/160118/static-and-instance-methods-with-the-same-name" />. </remarks>
-        private Range CompleteToken2(IList<IFormulaToken> tokens, int index)
+        private Range Complete2(IList<IFormulaToken> tokens, int index)
         {
-            SetOrigin(tokens);
+            tokens = SetOrigin(tokens).ToList();
             var token = tokens[index];
 
             if (token is FormulaNodeNumber || token is FormulaTokenDecimalSeparator) return GetOrigin(CompleteNumber(tokens, index));
@@ -156,21 +160,13 @@ namespace Catrobat.IDE.Core.Formulas
         {
             _origin[token] = GetOrigin(tokens);
         }
-        private void SetOrigin(IList<IFormulaToken> tokens)
+        private IEnumerable<IFormulaToken> SetOrigin(IList<IFormulaToken> tokens)
         {
             for (var index = 0; index < tokens.Count; index++)
             {
                 var token = tokens[index];
-                SetOrigin(token, Range.Single(index));
-            }
-        }
-        private IEnumerable<IFormulaToken> SetOriginAndClone(IList<IFormulaToken> tokens)
-        {
-            for (var index = 0; index < tokens.Count; index++)
-            {
-                var token = tokens[index];
-                // IFormulaTree is misused as IFormulaToken
-                if (token is IFormulaTree) token = (IFormulaToken)token.Clone();
+                // clones tokens because _origin depends on unique tokens
+                token = (IFormulaToken) token.Clone();
                 SetOrigin(token, Range.Single(index));
                 yield return token;
             }
@@ -420,17 +416,6 @@ namespace Catrobat.IDE.Core.Formulas
                 var previousToken = context[0];
                 var token = context[1];
 
-                if (token == null)
-                {
-                    if (parenthesesTokens.Count != 0)
-                    {
-                        SetParsingError(
-                            source: Range.Empty(GetOrigin(parenthesesTokens.Peek().Last()).End),
-                            message: "Add missing closing bracket. ");
-                    }
-                    continue;
-                }
-
                 var parenthesisToken = token as FormulaTokenParenthesis;
                 if (parenthesisToken != null)
                 {
@@ -470,6 +455,17 @@ namespace Catrobat.IDE.Core.Formulas
                     continue;
                 }
 
+                if (token == null)
+                {
+                    if (parenthesesTokens.Count != 0)
+                    {
+                        SetParsingError(
+                            source: Range.Empty(GetOrigin(parenthesesTokens.Peek().Last()).End),
+                            message: "Add missing closing bracket. ");
+                    }
+                    continue;
+                }
+
                 // stash tokens inside parentheses
                 if (parenthesesTokens.Count != 0)
                 {
@@ -493,27 +489,6 @@ namespace Catrobat.IDE.Core.Formulas
                 var previousToken = context[0];
                 var token = context[1];
 
-                // complete incomplete parentheses
-                if (token == null)
-                {
-                    while (parenthesesTokens.Count != 0)
-                    {
-                        parenthesesTokens.Peek().Add(previousToken);
-
-                        var commonToken = parentheses.Pop();
-                        CompleteChildren(commonToken, parenthesesTokens.Pop());
-                        if (parenthesesTokens.Count != 0)
-                        {
-                            parenthesesTokens.Peek().Add(commonToken);
-                        }
-                        else
-                        {
-                            yield return commonToken;
-                        }
-                    }
-                    continue;
-                }
-
                 var parenthesisToken = token as FormulaTokenParenthesis;
                 if (parenthesisToken != null)
                 {
@@ -529,6 +504,27 @@ namespace Catrobat.IDE.Core.Formulas
                         if (parenthesesTokens.Count == 0) yield break;
 
                         parenthesesTokens.Peek().Add(token);
+
+                        var commonToken = parentheses.Pop();
+                        CompleteChildren(commonToken, parenthesesTokens.Pop());
+                        if (parenthesesTokens.Count != 0)
+                        {
+                            parenthesesTokens.Peek().Add(commonToken);
+                        }
+                        else
+                        {
+                            yield return commonToken;
+                        }
+                    }
+                    continue;
+                }
+
+                // complete incomplete parentheses
+                if (token == null)
+                {
+                    while (parenthesesTokens.Count != 0)
+                    {
+                        parenthesesTokens.Peek().Add(previousToken);
 
                         var commonToken = parentheses.Pop();
                         CompleteChildren(commonToken, parenthesesTokens.Pop());

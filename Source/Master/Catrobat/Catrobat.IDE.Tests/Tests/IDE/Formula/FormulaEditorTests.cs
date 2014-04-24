@@ -4,6 +4,7 @@ using Catrobat.IDE.Core.Formulas.Editor;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 using Catrobat.IDE.Core.Services;
+using Catrobat.IDE.Tests.Extensions;
 using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -226,8 +227,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 var editor = new FormulaEditor();
                 for (var i = 1; i <= pressedKeys; i++)
                 {
-                    var randomKey = keys[random.Next(0, keys.Count)];
-                    editor.HandleKey(randomKey);
+                    editor.HandleKey(random.Next(keys));
                 }
                 if (editor.Formula != null)
                 {
