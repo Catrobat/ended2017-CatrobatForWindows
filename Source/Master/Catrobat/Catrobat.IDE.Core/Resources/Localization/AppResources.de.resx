@@ -974,4 +974,7 @@
   <data name="Editor_ReallyDismissFormula" xml:space="preserve">
     <value>Erneut auf "zurück" um die Änderungen zu verwerfen?</value>
   </data>
+  <data name="Editor_ButtonChange" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
 </root>

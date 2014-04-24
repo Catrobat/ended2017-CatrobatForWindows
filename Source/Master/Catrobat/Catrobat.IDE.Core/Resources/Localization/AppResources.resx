@@ -1035,4 +1035,7 @@
   <data name="Editor_ReallyDismissFormula" xml:space="preserve">
     <value>Press "back" again to dismiss your changes?</value>
   </data>
+  <data name="Editor_ButtonChange" xml:space="preserve">
+    <value>rename</value>
+  </data>
 </root>
