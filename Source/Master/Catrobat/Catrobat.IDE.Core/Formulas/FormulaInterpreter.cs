@@ -11,6 +11,12 @@ using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Core.Formulas
 {
+    /// <remarks>
+    /// <para>This class is implemented manually to improve parsing errors. </para>
+    /// <para>All functions have running time O(n). </para>
+    /// <para>This class internally uses yield return to report early errors first. </para>
+    /// <para>Parsing error and token tracking is implemented with local members to improve readability (see <see cref="ParsingError"/> and <see cref="_origin"/>). </para>
+    /// </remarks>
     internal class FormulaInterpreter
     {
         public static IFormulaTree Interpret(IList<IFormulaToken> tokens, out ParsingError parsingError)
@@ -38,27 +44,9 @@ namespace Catrobat.IDE.Core.Formulas
             return result;
         }
 
-        public static Range CompleteToken(IList<IFormulaToken> tokens, int index)
-        {
-            var sw = new Stopwatch();
-            sw.Start();
-
-            // validate input
-            if (tokens == null || !(0 <= index && index < tokens.Count)) return Range.Empty(0);
-
-            // complete token
-            var instance = new FormulaInterpreter();
-            var result = instance.CompleteToken2(tokens, index);
-
-            sw.Stop();
-            Debug.WriteLine("Interpreter.CompleteToken needed " + sw.ElapsedMilliseconds + "ms");
-
-            return result;
-        }
-
         private IFormulaTree Interpret2(IList<IFormulaToken> tokens)
         {
-            IEnumerable<IFormulaToken> tokens2 = SetOrigin(tokens);
+            var tokens2 = SetOrigin(tokens);
             tokens2 = InterpretNumbersForward(tokens2);
             tokens2 = InterpretBrackets(tokens2);
             tokens2 = InterpretNonParameter(tokens2);
@@ -80,10 +68,10 @@ namespace Catrobat.IDE.Core.Formulas
                 return null;
             }
 
-            // TODO: don't throw exceptions (300ms!)
             try
             {
-                var isNumber = InterpretSemantic(formula);
+                // validate evaluation constraints like sin(True + 4)
+                var isNumber = formula.IsNumber();
             }
             catch (SemanticsErrorException ex)
             {
@@ -93,6 +81,26 @@ namespace Catrobat.IDE.Core.Formulas
             }
 
             return formula;
+        }
+
+        #region Complete only
+
+        public static Range CompleteToken(IList<IFormulaToken> tokens, int index)
+        {
+            var sw = new Stopwatch();
+            sw.Start();
+
+            // validate input
+            if (tokens == null || !(0 <= index && index < tokens.Count)) return Range.Empty(0);
+
+            // complete token
+            var instance = new FormulaInterpreter();
+            var result = instance.CompleteToken2(tokens, index);
+
+            sw.Stop();
+            Debug.WriteLine("Interpreter.CompleteToken needed " + sw.ElapsedMilliseconds + "ms");
+
+            return result;
         }
 
         /// <remarks>See <see cref="http://stackoverflow.com/questions/160118/static-and-instance-methods-with-the-same-name" />. </remarks>
@@ -176,8 +184,11 @@ namespace Catrobat.IDE.Core.Formulas
             return GetOrigin(token);
         }
 
+        #endregion
+
         #region Members
 
+        /// <summary>Tracks the origin indices of interpreted tokens</summary>
         private readonly Dictionary<IFormulaToken, Range> _origin = new Dictionary<IFormulaToken, Range>(new ReferenceEqualityComparer<IFormulaToken>());
         private Range GetOrigin(IFormulaToken token)
         {
@@ -193,7 +204,6 @@ namespace Catrobat.IDE.Core.Formulas
                 ? Range.Empty(0)
                 : GetOrigin(tokens.First(), tokens.Last());
         }
-
         private Range GetOrigin(IEnumerable<IFormulaToken> tokens)
         {
             return GetOrigin(tokens.ToList());
@@ -244,10 +254,6 @@ namespace Catrobat.IDE.Core.Formulas
         /// <summary>
         /// Merges <see cref="FormulaTokenFactory.CreateDigitToken" /> and <see cref="FormulaTokenFactory.CreateDecimalSeparatorToken" /> to <see cref="FormulaTreeFactory.CreateNumberNode" />. 
         /// </summary>
-        /// <remarks>Running time O(n). </remarks>
-        /// <remarks>
-        /// This function is implemented using yield return to report early errors first. 
-        /// </remarks>
         private IEnumerable<IFormulaToken> InterpretNumbersForward(IEnumerable<IFormulaToken> tokens)
         {
             var decimalSeparator = CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator;
@@ -334,13 +340,6 @@ namespace Catrobat.IDE.Core.Formulas
             }
         }
 
-        /// <summary>
-        /// Merges <see cref="FormulaTokenFactory.CreateDigitToken" /> and <see cref="FormulaTokenFactory.CreateDecimalSeparatorToken" /> to <see cref="FormulaTreeFactory.CreateNumberNode" />. 
-        /// </summary>
-        /// <remarks>Running time O(n). </remarks>
-        /// <remarks>
-        /// This function is implemented using yield return to make completion of partiallay invalid tokens possible. 
-        /// </remarks>
         private IEnumerable<IFormulaToken> CompleteNumbers(IEnumerable<IFormulaToken> tokens)
         {
             var valueTokens = new List<IFormulaToken>();
@@ -465,13 +464,13 @@ namespace Catrobat.IDE.Core.Formulas
         /// <summary>
         /// Maps all opening and closing parentheses and packs them with their interpreted children into <see cref="FormulaNodeParentheses"/> or <see cref="FormulaTokenParameters"/>. 
         /// </summary>
-        /// <remarks>Running time O(n). </remarks>
         private IEnumerable<IFormulaToken> InterpretBrackets(IEnumerable<IFormulaToken> tokens)
         {
             var parenthesesTokens = new Stack<List<IFormulaToken>>();
             var parentheses = new Stack<IFormulaToken>();
             foreach (var context in tokens.WithContext())
             {
+                if (IsCancellationRequested) yield break;
                 var previousToken = context[0];
                 var token = context[1];
 
@@ -677,6 +676,7 @@ namespace Catrobat.IDE.Core.Formulas
             var expectSeparator = false;
             foreach (var context in tokens.WithContext())
             {
+                if (IsCancellationRequested) yield break;
                 var previousToken = context[0];
                 var token = context[1];
 
@@ -734,10 +734,14 @@ namespace Catrobat.IDE.Core.Formulas
 
         #region Functions
 
+        /// <summary>
+        /// Attaches the children of <see cref="FormulaNodeUnaryFunction"/> and <see cref="FormulaNodeBinaryFunction"/>. 
+        /// </summary>
         private IEnumerable<IFormulaToken> InterpretFunctions(IEnumerable<IFormulaToken> tokens)
         {
             foreach (var context in tokens.WithContext())
             {
+                if (IsCancellationRequested) yield break;
                 var previousToken = context[0];
                 var token = context[1];
 
@@ -841,14 +845,11 @@ namespace Catrobat.IDE.Core.Formulas
         /// <summary>
         /// Resolves the ambiguity between <see cref="FormulaNodeSubtract"/> and <seealso cref="FormulaNodeNegativeSign"/>. 
         /// </summary>
-        /// <remarks>Running time O(n). </remarks>
-        /// <remarks>
-        /// This function is implemented using yield return to report early errors first.
-        /// </remarks>
         private IEnumerable<IFormulaToken> InterpretMinusTokenForward(IEnumerable<IFormulaToken> tokens)
         {
             foreach (var context in tokens.WithContext())
             {
+                if (IsCancellationRequested) yield break;
                 var previousToken = context[0];
                 var token = context[1];
 
@@ -859,14 +860,11 @@ namespace Catrobat.IDE.Core.Formulas
                     // change from minus token to negative sign token
                     if (previousToken == null || previousToken is IFormulaOperator || previousToken is FormulaTokenParameterSeparator)
                     {
-                        var negativeSignToken = FormulaTreeFactory.CreateNegativeSignNode(null);
-                        SetOrigin(negativeSignToken, minusToken);
-                        yield return negativeSignToken;
-                        continue;
+                        token = FormulaTreeFactory.CreateNegativeSignNode(null);
+                        SetOrigin(token, minusToken);
                     }
                 }
 
-                // yield any other token
                 if (token != null) yield return token;
             }
         }
@@ -874,10 +872,6 @@ namespace Catrobat.IDE.Core.Formulas
         /// <summary>
         /// Resolves the ambiguity between <see cref="FormulaNodeSubtract"/> and <seealso cref="FormulaNodeNegativeSign"/>. 
         /// </summary>
-        /// <remarks>Running time O(n). </remarks>
-        /// <remarks>
-        /// This function is implemented using yield return to report early errors first.
-        /// </remarks>
         private IEnumerable<IFormulaToken> InterpretMinusTokenBackwards(IEnumerable<IFormulaToken> tokens)
         {
             foreach (var context in tokens.WithContext())
@@ -892,9 +886,8 @@ namespace Catrobat.IDE.Core.Formulas
                     // change from minus token to negative sign token
                     if (token == null || token is IFormulaOperator || token is FormulaTokenParameterSeparator)
                     {
-                        var negativeSignToken = FormulaTreeFactory.CreateNegativeSignNode(null);
-                        SetOrigin(negativeSignToken, minusToken);
-                        yield return negativeSignToken;
+                        nextToken = FormulaTreeFactory.CreateNegativeSignNode(null);
+                        SetOrigin(nextToken, minusToken);
                     }
                     yield return nextToken;
                 }
@@ -904,56 +897,60 @@ namespace Catrobat.IDE.Core.Formulas
             }
         }
 
+        /// <summary>
+        /// Attaches the children of <see cref="FormulaNodePrefixOperator"/> and <see cref="FormulaNodeInfixOperator"/>. 
+        /// </summary>
         private IEnumerable<IFormulaToken> InterpretOperators(IEnumerable<IFormulaToken> tokens)
         {
             var pending = new Stack<IFormulaTree>();
             foreach (var context in tokens.WithContext())
             {
-                var token = context[0];
-                var nextToken = context[1];
+                if (IsCancellationRequested) yield break;
+                var previousToken = context[0];
+                var token = context[1];
 
-                if (token == null) continue;
-
-                // yield parameter separator
-                if (token is FormulaTokenParameterSeparator)
+                if ((token == null || token is FormulaTokenParameterSeparator) && previousToken is IFormulaOperator)
                 {
-                    if (nextToken is FormulaNodeInfixOperator)
-                    {
-                        SetParsingError(Range.Empty(GetOrigin(token).End), "Missing left value. ");
-                        yield break;
-                    }
-                    yield return token;
-                    continue;
+                    SetParsingError(
+                        source: Range.Empty(GetOrigin(previousToken).End), 
+                        message: previousToken is FormulaNodePrefixOperator ? "Missing value. " : "Missing right value. ");
+                    yield break;
                 }
-                var token2 = (IFormulaTree)token;
-
-                // stash operator
-                var operatorToken = token2 as IFormulaOperator;
-                if (operatorToken != null)
+                if (token is FormulaNodeInfixOperator && (previousToken == null || previousToken is FormulaTokenParameterSeparator || previousToken is IFormulaOperator))
                 {
-                    if (operatorToken is FormulaNodeInfixOperator && pending.Count == 0)
-                    {
-                        SetParsingError(Range.Empty(GetOrigin(token2).Start), "Missing left value. ");
-                        yield break;
-                    }
-                    if (nextToken == null || nextToken is FormulaNodeInfixOperator || nextToken is FormulaTokenParameterSeparator)
-                    {
-                        SetParsingError(Range.Empty(GetOrigin(token2).End), operatorToken is FormulaNodeInfixOperator ? "Missing right value. " : "Missing value. ");
-                        yield break;
-                    }
-                    pending.Push(token2);
-                    continue;
+                    SetParsingError(
+                        source: Range.Empty(GetOrigin(token).Start), 
+                        message: "Missing left value. ");
+                    yield break;
                 }
 
-                // stash any other attached tokens (regarding operator order)
-                var nextInfixOperatorToken = nextToken as FormulaNodeInfixOperator;
-                if (nextInfixOperatorToken != null && (pending.Count == 0 || ((IFormulaOperator)pending.Peek()).Order <= nextInfixOperatorToken.Order))
+                // interpret any token except parameter separator with additional lookahead
+                if (previousToken != null && !(previousToken is FormulaTokenParameterSeparator))
                 {
-                    pending.Push(token2);
-                    continue;
+                    var previousToken2 = (IFormulaTree)previousToken;
+                    var interpretedToken = InterpretOperators2(previousToken2, token, pending);
+                    if (interpretedToken != null) yield return interpretedToken;
                 }
 
-                // merge with pending tokens
+                // yield parameter separator without lookahead
+                if (token is FormulaTokenParameterSeparator) yield return token;
+            }
+        }
+
+        private IFormulaTree InterpretOperators2(IFormulaTree token, IFormulaToken nextToken, Stack<IFormulaTree> pending)
+        {
+            // stash operators
+            if (token is IFormulaOperator)
+            {
+                pending.Push(token);
+                return null;
+            }
+
+
+            // merge with pending tokens (regarding operator order)
+            var nextInfixOperatorToken = nextToken as FormulaNodeInfixOperator;
+            if (nextInfixOperatorToken == null || (pending.Count != 0 && ((IFormulaOperator)pending.Peek()).Order > nextInfixOperatorToken.Order))
+            {
                 while (pending.Count != 0)
                 {
                     var pendingOperator = pending.Pop();
@@ -962,19 +959,19 @@ namespace Catrobat.IDE.Core.Formulas
                     var pendingPrefixOperator = pendingOperator as FormulaNodePrefixOperator;
                     if (pendingPrefixOperator != null)
                     {
-                        var numberToken = token2 as FormulaNodeNumber;
+                        var numberToken = token as FormulaNodeNumber;
 
                         // merge negative sign and number
                         if (numberToken != null && pendingPrefixOperator is FormulaNodeNegativeSign)
                         {
                             numberToken.Value *= -1;
-                            SetOrigin(token2, new[] { pendingOperator, token2 });
+                            SetOrigin(token, new[] { pendingOperator, token });
                         }
                         else
                         {
-                            pendingPrefixOperator.Child = token2;
-                            SetOrigin(pendingPrefixOperator, new[] { pendingOperator, token2 });
-                            token2 = pendingOperator;
+                            pendingPrefixOperator.Child = token;
+                            SetOrigin(pendingPrefixOperator, new[] { pendingOperator, token });
+                            token = pendingOperator;
                         }
                     }
 
@@ -983,22 +980,22 @@ namespace Catrobat.IDE.Core.Formulas
                     if (pendingInfixOperator != null)
                     {
                         pendingInfixOperator.LeftChild = pending.Pop();
-                        pendingInfixOperator.RightChild = token2;
-                        SetOrigin(pendingInfixOperator, new[] { pendingInfixOperator.LeftChild, pendingOperator, token2 });
-                        token2 = pendingOperator;
+                        pendingInfixOperator.RightChild = token;
+                        SetOrigin(pendingInfixOperator, new[] { pendingInfixOperator.LeftChild, pendingOperator, token });
+                        token = pendingOperator;
                     }
                 }
-
-                // yield unattached or merged token
-                if (nextInfixOperatorToken == null)
-                {
-                    yield return token2;
-                }
-                else
-                {
-                    pending.Push(token2);
-                }
             }
+
+            // stash to infix operator attached tokens
+            if (nextInfixOperatorToken != null)
+            {
+                pending.Push(token);
+                return null;
+            }
+
+            // yield finished or unattached tokens
+            return token;
         }
 
         private IEnumerable<IFormulaToken> CompleteOperators(IEnumerable<IFormulaToken> tokens)
@@ -1168,11 +1165,5 @@ namespace Catrobat.IDE.Core.Formulas
         }
 
         #endregion
-
-        private bool InterpretSemantic(IFormulaTree formula)
-        {
-            // validate evaluation constraints like sin(True + 4)
-            return formula.IsNumber();
-        }
     }
 }

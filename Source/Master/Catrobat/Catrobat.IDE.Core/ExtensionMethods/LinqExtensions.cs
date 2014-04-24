@@ -13,7 +13,36 @@ namespace Catrobat.IDE.Core.ExtensionMethods
             return source.GroupBy(keySelector).Select(group => group.First());
         }
 
-        /// <see cref="http://stackoverflow.com/a/8760569/1220972"/>
+        /// <summary>Includes the previous element to each element.</summary>
+        /// <remarks>
+        /// <para>
+        /// Usage:
+        /// <example>
+        /// <code>
+        /// foreach (var context in source.WithContext())
+        /// {
+        ///     var previousElement = context[0];
+        ///     var element = context[1];
+        /// 
+        ///     if (previousElement == null)
+        ///     {
+        ///         var firstElement = element;
+        ///     }
+        /// 
+        ///     if (element == null)
+        ///     {
+        ///         var lastElement = previousElement;
+        ///     }
+        ///     
+        ///     if (element != null) yield return element;
+        /// }
+        /// </code>
+        /// </example>
+        /// </para>
+        /// <para>
+        /// Inspired by <see cref="http://stackoverflow.com/a/8760569/1220972"/>. 
+        /// </para>
+        /// </remarks>
         public static IEnumerable<TSource[]> WithContext<TSource>(this IEnumerable<TSource> source) where TSource : class
         {
             var previousElement = (TSource) null;
@@ -27,6 +56,5 @@ namespace Catrobat.IDE.Core.ExtensionMethods
                 yield return new[] { previousElement, null };
             }
         }
-
     }
 }
