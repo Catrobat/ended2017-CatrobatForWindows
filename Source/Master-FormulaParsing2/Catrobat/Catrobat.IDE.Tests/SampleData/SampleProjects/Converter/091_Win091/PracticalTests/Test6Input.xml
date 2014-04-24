@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+  <header>
+    <applicationBuildName/>
+    <applicationBuildNumber>0</applicationBuildNumber>
+    <applicationName>Pocket Code</applicationName>
+    <applicationVersion>0.9.2-660-debug</applicationVersion>
+    <catrobatLanguageVersion>0.91</catrobatLanguageVersion>
+    <dateTimeUpload/>
+    <description>Demonstrates bugs! Admin, please remove after testing.</description>
+    <deviceName>724LE</deviceName>
+    <mediaLicense>http://developer.catrobat.org/ccbysa_v3</mediaLicense>
+    <platform>Android</platform>
+    <platformVersion>17</platformVersion>
+    <programLicense>http://developer.catrobat.org/agpl_v3</programLicense>
+    <programName>Football Barbra Streisand</programName>
+    <remixOf/>
+    <screenHeight>752</screenHeight>
+    <screenWidth>480</screenWidth>
+    <tags/>
+    <url>http://pocketcode.org/details/978</url>
+    <userHandle>mobluse</userHandle>
+  </header>
+  <objectList>
+    <object>
+      <lookList>
+        <look>
+          <fileName>fdc5b75b027ecdc517bb38c1293f7c87_look.png</fileName>
+          <name>field</name>
+        </look>
+      </lookList>
+      <name>Background</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <noteBrick>
+              <object reference="../../../../.."/>
+              <note>Insert song from Frets on Fire for Android here</note>
+            </noteBrick>
+            <playSoundBrick>
+              <object reference="../../../../.."/>
+              <sound>
+                <fileName>5588cc9c9a25961407af6a561b93a71c_song.ogg</fileName>
+                <name>song</name>
+              </sound>
+            </playSoundBrick>
+            <foreverBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick class="loopEndlessBrick">
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="foreverBrick" reference="../.."/>
+              </loopEndBrick>
+            </foreverBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <leftChild>
+                    <type>NUMBER</type>
+                    <value>2</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>30</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <speakBrick>
+              <object reference="../../../../.."/>
+              <text>Barbra Streisand</text>
+            </speakBrick>
+            <loopEndlessBrick reference="../foreverBrick/loopEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+      </scriptList>
+      <soundList>
+        <sound reference="../../scriptList/startScript/brickList/playSoundBrick/sound"/>
+      </soundList>
+    </object>
+    <object>
+      <lookList>
+        <look>
+          <fileName>5705ac4865cbbf77bbcb6e3c5b9667f7_look.png</fileName>
+          <name>football</name>
+        </look>
+      </lookList>
+      <name>Ball</name>
+      <scriptList>
+        <startScript>
+          <brickList>
+            <foreverBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick class="loopEndlessBrick">
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="foreverBrick" reference="../.."/>
+              </loopEndBrick>
+            </foreverBrick>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>cx</name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>180</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>180</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>cy</name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>280</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>280</value>
+                  </rightChild>
+                  <type>FUNCTION</type>
+                  <value>RAND</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>directionNew</name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <leftChild>
+                    <leftChild>
+                      <type>NUMBER</type>
+                      <value>90</value>
+                    </leftChild>
+                    <rightChild>
+                      <leftChild>
+                        <leftChild>
+                          <rightChild>
+                            <leftChild>
+                              <type>USER_VARIABLE</type>
+                              <value>cy</value>
+                            </leftChild>
+                            <rightChild>
+                              <type>SENSOR</type>
+                              <value>OBJECT_Y</value>
+                            </rightChild>
+                            <type>OPERATOR</type>
+                            <value>MINUS</value>
+                          </rightChild>
+                          <type>BRACKET</type>
+                        </leftChild>
+                        <rightChild>
+                          <rightChild>
+                            <leftChild>
+                              <type>USER_VARIABLE</type>
+                              <value>cx</value>
+                            </leftChild>
+                            <rightChild>
+                              <type>SENSOR</type>
+                              <value>OBJECT_X</value>
+                            </rightChild>
+                            <type>OPERATOR</type>
+                            <value>MINUS</value>
+                          </rightChild>
+                          <type>BRACKET</type>
+                        </rightChild>
+                        <type>OPERATOR</type>
+                        <value>DIVIDE</value>
+                      </leftChild>
+                      <type>FUNCTION</type>
+                      <value>ARCTAN</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MINUS</value>
+                  </leftChild>
+                  <rightChild>
+                    <leftChild>
+                      <rightChild>
+                        <leftChild>
+                          <leftChild>
+                            <type>USER_VARIABLE</type>
+                            <value>cx</value>
+                          </leftChild>
+                          <rightChild>
+                            <type>SENSOR</type>
+                            <value>OBJECT_X</value>
+                          </rightChild>
+                          <type>OPERATOR</type>
+                          <value>MINUS</value>
+                        </leftChild>
+                        <rightChild>
+                          <type>NUMBER</type>
+                          <value>0</value>
+                        </rightChild>
+                        <type>OPERATOR</type>
+                        <value>SMALLER_THAN</value>
+                      </rightChild>
+                      <type>BRACKET</type>
+                    </leftChild>
+                    <rightChild>
+                      <type>NUMBER</type>
+                      <value>180</value>
+                    </rightChild>
+                    <type>OPERATOR</type>
+                    <value>MULT</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>PLUS</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+            <setVariableBrick>
+              <object reference="../../../../.."/>
+              <userVariable>
+                <name>directionInc</name>
+              </userVariable>
+              <variableFormula>
+                <formulaTree>
+                  <leftChild>
+                    <rightChild>
+                      <leftChild>
+                        <type>USER_VARIABLE</type>
+                        <value>directionNew</value>
+                      </leftChild>
+                      <rightChild>
+                        <type>SENSOR</type>
+                        <value>OBJECT_ROTATION</value>
+                      </rightChild>
+                      <type>OPERATOR</type>
+                      <value>MINUS</value>
+                    </rightChild>
+                    <type>BRACKET</type>
+                  </leftChild>
+                  <rightChild>
+                    <type>NUMBER</type>
+                    <value>20</value>
+                  </rightChild>
+                  <type>OPERATOR</type>
+                  <value>DIVIDE</value>
+                </formulaTree>
+              </variableFormula>
+            </setVariableBrick>
+            <repeatBrick>
+              <object reference="../../../../.."/>
+              <loopEndBrick>
+                <object reference="../../../../../.."/>
+                <loopBeginBrick class="repeatBrick" reference="../.."/>
+              </loopEndBrick>
+              <timesToRepeat>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>20</value>
+                </formulaTree>
+              </timesToRepeat>
+            </repeatBrick>
+            <turnRightBrick>
+              <object reference="../../../../.."/>
+              <degrees>
+                <formulaTree>
+                  <type>USER_VARIABLE</type>
+                  <value>directionInc</value>
+                </formulaTree>
+              </degrees>
+            </turnRightBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>0.05</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <loopEndBrick reference="../repeatBrick/loopEndBrick"/>
+            <pointInDirectionBrick>
+              <object reference="../../../../.."/>
+              <degrees>
+                <formulaTree>
+                  <type>USER_VARIABLE</type>
+                  <value>directionNew</value>
+                </formulaTree>
+              </degrees>
+            </pointInDirectionBrick>
+            <speakBrick>
+              <object reference="../../../../.."/>
+              <text>American Football</text>
+            </speakBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <glideToBrick>
+              <object reference="../../../../.."/>
+              <durationInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1.0</value>
+                </formulaTree>
+              </durationInSeconds>
+              <xDestination>
+                <formulaTree>
+                  <type>USER_VARIABLE</type>
+                  <value>cx</value>
+                </formulaTree>
+              </xDestination>
+              <yDestination>
+                <formulaTree>
+                  <type>USER_VARIABLE</type>
+                  <value>cy</value>
+                </formulaTree>
+              </yDestination>
+            </glideToBrick>
+            <waitBrick>
+              <object reference="../../../../.."/>
+              <timeToWaitInSeconds>
+                <formulaTree>
+                  <type>NUMBER</type>
+                  <value>1</value>
+                </formulaTree>
+              </timeToWaitInSeconds>
+            </waitBrick>
+            <loopEndlessBrick reference="../foreverBrick/loopEndBrick"/>
+          </brickList>
+          <object reference="../../.."/>
+        </startScript>
+      </scriptList>
+      <soundList/>
+    </object>
+  </objectList>
+  <variables>
+    <objectVariableList>
+      <entry>
+        <object reference="../../../../objectList/object"/>
+        <list/>
+      </entry>
+      <entry>
+        <object reference="../../../../objectList/object[2]"/>
+        <list>
+          <userVariable>
+            <name>x</name>
+          </userVariable>
+          <userVariable>
+            <name>y</name>
+          </userVariable>
+          <userVariable reference="../../../../../objectList/object[2]/scriptList/startScript/brickList/setVariableBrick[3]/userVariable"/>
+          <userVariable reference="../../../../../objectList/object[2]/scriptList/startScript/brickList/setVariableBrick[4]/userVariable"/>
+        </list>
+      </entry>
+    </objectVariableList>
+    <programVariableList>
+      <userVariable reference="../../../objectList/object[2]/scriptList/startScript/brickList/setVariableBrick/userVariable"/>
+      <userVariable reference="../../../objectList/object[2]/scriptList/startScript/brickList/setVariableBrick[2]/userVariable"/>
+    </programVariableList>
+  </variables>
+</program>

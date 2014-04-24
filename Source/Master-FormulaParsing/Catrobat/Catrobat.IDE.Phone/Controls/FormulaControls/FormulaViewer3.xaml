@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Catrobat.IDE.Phone.Controls.FormulaControls.FormulaViewer3"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:formulaControls="clr-namespace:Catrobat.IDE.Phone.Controls.FormulaControls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="80" d:DesignWidth="480"
+    x:Name="FormulaViewer3Xaml">
+
+  <Grid x:Name="LayoutRoot" VerticalAlignment="Stretch">
+    <ScrollViewer Name="ScrollViewerContent" VerticalAlignment="Stretch" Tap="Panel_OnTap">
+        <toolkit:WrapPanel Name="MultilinePanelContent"/>
+    </ScrollViewer>
+    <StackPanel Name="SingleLinePanelContent" Orientation="Horizontal" Tap="Panel_OnTap"/>
+    <TextBlock 
+      Text="{Binding Resources.Editor_TypeSomething, Source={StaticResource LocalizedStrings}}"
+      Visibility="{Binding IsTokensEmpty, Converter={StaticResource BoolVisibilityConverter}, ElementName=FormulaViewer3Xaml}"
+      Style="{StaticResource PhoneTextLargeStyle}"
+      TextWrapping="Wrap"
+      TextAlignment="Center"
+      VerticalAlignment="Center"
+      HorizontalAlignment="Center" />
+  </Grid>
+</UserControl>
