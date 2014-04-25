@@ -2096,6 +2096,168 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a comma or times sign..
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_DoubleValue {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_DoubleValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type something..
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_EmptyParameter {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_EmptyParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type something. .
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_EmptyParentheses {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_EmptyParentheses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove the comma. .
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_NonParameterParameterSeparator {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_NonParameterParameterSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a comma. .
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_TooFewParameters {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_TooFewParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove the superfluous parameter(s). .
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_TooManyParameters {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_TooManyParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove the unmatched closing parenthesis. .
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_UnmatchedClosingParenthesis {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_UnmatchedClosingParenthesis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add the missing closing parenthesis. .
+        /// </summary>
+        public static string FormulaInterpreter_Brackets_UnmatchedOpeningParenthesis {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_UnmatchedOpeningParenthesis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a times sign. .
+        /// </summary>
+        public static string FormulaInterpreter_DoubleValue {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_DoubleValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an opening parenthesis..
+        /// </summary>
+        public static string FormulaInterpreter_Function_EmptyBinaryFunction {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Function_EmptyBinaryFunction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an opening parenthesis. .
+        /// </summary>
+        public static string FormulaInterpreter_Function_EmptyUnaryFunction {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Function_EmptyUnaryFunction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type something. .
+        /// </summary>
+        public static string FormulaInterpreter_NullOrEmpty {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_NullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove the double decimal point. .
+        /// </summary>
+        public static string FormulaInterpreter_Number_DoubleDecimalSeparator {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Number_DoubleDecimalSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number is too large. .
+        /// </summary>
+        public static string FormulaInterpreter_Number_Overflow {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Number_Overflow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove the decimal point. .
+        /// </summary>
+        public static string FormulaInterpreter_Number_SingleDecimalSeparator {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Number_SingleDecimalSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type something. .
+        /// </summary>
+        public static string FormulaInterpreter_Operator_EmptyPrefixOperator {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Operator_EmptyPrefixOperator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type something..
+        /// </summary>
+        public static string FormulaInterpreter_Operator_LeftEmptyInfixOperator {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Operator_LeftEmptyInfixOperator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type something..
+        /// </summary>
+        public static string FormulaInterpreter_Operator_RightEmptyInfixOperator {
+            get {
+                return ResourceManager.GetString("FormulaInterpreter_Operator_RightEmptyInfixOperator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pocket Code for Windows Phone is an on-device visual programming system for the Catrobat programming language..
         /// </summary>
         public static string Main_AboutText {

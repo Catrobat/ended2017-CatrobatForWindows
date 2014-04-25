@@ -15,9 +15,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private readonly Random _random = new Random();
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestEmpty()
+        public void TestNullOrEmpty()
         {
             ParsingError parsingError;
+            Assert.IsNull(FormulaInterpreter.Interpret(null, out parsingError));
+            Assert.IsNotNull(parsingError);
             Assert.IsNull(FormulaInterpreter.Interpret(new IFormulaToken[] { }, out parsingError));
             Assert.IsNotNull(parsingError);
         }

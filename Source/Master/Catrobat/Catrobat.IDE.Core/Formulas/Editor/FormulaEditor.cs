@@ -325,24 +325,14 @@ namespace Catrobat.IDE.Core.Formulas.Editor
 
         private void InterpretTokens()
         {
-            if (Tokens == null || Tokens.Count == 0)
+            var interpretedFormula = FormulaInterpreter.Interpret(Tokens, out _parsingError);
+            if (interpretedFormula != null)
             {
-                // TODO: translate parsing error message
-                _parsingError = new ParsingError("Type something", 0, 0);
-                RaisePropertyChanged(() => ParsingError);
-                RaisePropertyChanged(() => HasError);
+                _formula = interpretedFormula;
+                RaisePropertyChanged(() => Formula);
             }
-            else
-            {
-                var interpretedFormula = FormulaInterpreter.Interpret(Tokens, out _parsingError);
-                if (interpretedFormula != null)
-                {
-                    _formula = interpretedFormula;
-                    RaisePropertyChanged(() => Formula);
-                }
-                RaisePropertyChanged(() => ParsingError);
-                RaisePropertyChanged(() => HasError);
-            }
+            RaisePropertyChanged(() => ParsingError);
+            RaisePropertyChanged(() => HasError);
         }
 
         private bool InsertToken(IFormulaToken token)

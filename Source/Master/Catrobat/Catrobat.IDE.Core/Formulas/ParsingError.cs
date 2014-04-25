@@ -16,7 +16,6 @@ namespace Catrobat.IDE.Core.Formulas
             Message = message;
         }
 
-        [Obsolete("TODO: translate message. ")]
         public ParsingError(string message, int index, int length)
         {
             Message = message;
