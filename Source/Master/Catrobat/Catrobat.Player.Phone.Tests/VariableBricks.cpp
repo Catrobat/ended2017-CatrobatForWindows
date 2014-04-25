@@ -16,75 +16,129 @@ namespace PlayerWindowsPhone8Test
 {
 	TEST_CLASS(VariableBricks)
 	{
+    private:
+
+        string m_variableName;
+        string m_defaultValue;
+        string m_formulaValue;
+        UserVariable *m_variable;
+        FormulaTree *m_formulaTree;
+        Object *m_object;
+        StartScript *m_script;
+
+        TEST_METHOD_INITIALIZE(TestInitialization)
+        {
+            m_defaultValue = "5";
+            m_variableName = "testVariable";
+            m_variable = new UserVariable(m_variableName, m_defaultValue);
+            m_object = new Object("TestObject");
+            m_script = new StartScript(m_object);
+            m_formulaTree = NULL;
+        }
+
+        TEST_METHOD_CLEANUP(TestCleanup)
+        {
+            //delete m_script;
+            //delete m_object;
+            //delete m_variable;
+            //if (m_formulaTree != NULL)
+            //    delete m_formulaTree;
+        }
+
+
 	public:
 		
 		TEST_METHOD(VariableBricks_SetVariableBrick_SimpleCheck)
 		{
-            string variableName = "testVariable";
-            UserVariable *variable = new UserVariable(variableName, "5");
-            FormulaTree *formulaTree = new FormulaTree("USER_VARIABLE", variableName);
-			Object *object = new Object("TestObject"); 
-            
+            m_formulaValue = "10";
+            m_formulaTree = new FormulaTree("NUMBER", m_formulaValue);
+            SetVariableBrick *brick = new SetVariableBrick(m_formulaTree, m_script);
+            brick->SetVariable(m_variable);
 
-			StartScript *script = new StartScript(object);
-            formulaTree = new FormulaTree("NUMBER", "10");
-            SetVariableBrick *brick = new SetVariableBrick(formulaTree, script);
-            brick->SetVariable(variable);
-
-            Assert::AreEqual(atoi(variable->GetValue().c_str()), 5);
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_defaultValue.c_str()));
             brick->Execute();
-            Assert::AreEqual(atoi(variable->GetValue().c_str()), 10);
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_formulaValue.c_str()));
 		}
 
         TEST_METHOD(VariableBricks_SetVariableBrick_NegativCheck)
 		{
-            string variableName = "testVariable";
-            UserVariable *variable = new UserVariable(variableName, "5");
-            FormulaTree *formulaTree = new FormulaTree("USER_VARIABLE", variableName);
-			Object *object = new Object("TestObject"); 
+            m_formulaValue = "-20";
+            m_formulaTree = new FormulaTree("NUMBER", m_formulaValue);
+            SetVariableBrick *brick = new SetVariableBrick(m_formulaTree, m_script);
+            brick->SetVariable(m_variable);
 
-			StartScript *script = new StartScript(object);
-            formulaTree = new FormulaTree("NUMBER", "-20");
-            SetVariableBrick *brick = new SetVariableBrick(formulaTree, script);
-            brick->SetVariable(variable);
-
-            Assert::AreEqual(atoi(variable->GetValue().c_str()), 5);
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_defaultValue.c_str()));
             brick->Execute();
-            Assert::AreEqual(atoi(variable->GetValue().c_str()), -20);
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_formulaValue.c_str()));
 		}
 
         TEST_METHOD(VariableBricks_ChangeVariableBrick_SimpleCheck)
 		{
-            string variableName = "testVariable";
-            UserVariable *variable = new UserVariable(variableName, "5");
-            FormulaTree *formulaTree = new FormulaTree("USER_VARIABLE", variableName);
-			Object *object = new Object("TestObject"); 
+            m_formulaValue = "10";
+            m_formulaTree = new FormulaTree("NUMBER", m_formulaValue);
+            ChangeVariableBrick *brick = new ChangeVariableBrick(m_formulaTree, m_script);
+            brick->SetVariable(m_variable);
 
-			StartScript *script = new StartScript(object);
-            formulaTree = new FormulaTree("NUMBER", "10");
-            ChangeVariableBrick *brick = new ChangeVariableBrick(formulaTree, script);
-            brick->SetVariable(variable);
-
-            Assert::AreEqual(atoi(variable->GetValue().c_str()), 5);
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_defaultValue.c_str()));
             brick->Execute();
-            Assert::AreEqual(atoi(variable->GetValue().c_str()), 15);
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_defaultValue.c_str()) + atof(m_formulaValue.c_str()));
+            //delete brick;
 		}
 
         TEST_METHOD(VariableBricks_ChangeVariableBrick_NegativCheck)
 		{
-			string variableName = "testVariable";
-            UserVariable *variable = new UserVariable(variableName, "5");
-            FormulaTree *formulaTree = new FormulaTree("USER_VARIABLE", variableName);
-			Object *object = new Object("TestObject"); 
+            m_formulaValue = "-20";
+            m_formulaTree = new FormulaTree("NUMBER", m_formulaValue);
+            ChangeVariableBrick *brick = new ChangeVariableBrick(m_formulaTree, m_script);
+            brick->SetVariable(m_variable);
 
-			StartScript *script = new StartScript(object);
-            formulaTree = new FormulaTree("NUMBER", "-20");
-            ChangeVariableBrick *brick = new ChangeVariableBrick(formulaTree, script);
-            brick->SetVariable(variable);
-
-            Assert::AreEqual(atoi(variable->GetValue().c_str()), 5);
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_defaultValue.c_str()));
             brick->Execute();
-            Assert::AreEqual(atoi(variable->GetValue().c_str()), -15);
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_defaultValue.c_str()) + atof(m_formulaValue.c_str()));
+            //delete brick;
 		}
+
+        TEST_METHOD(VariableBricks_ChangeVariableBrick_FormulaNoNumberCheck)
+        {        
+            m_formulaValue = "0x10";
+            m_formulaTree = new FormulaTree("NUMBER", m_formulaValue);
+            ChangeVariableBrick *brick = new ChangeVariableBrick(m_formulaTree, m_script);
+            brick->SetVariable(m_variable);
+
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_defaultValue.c_str()));
+            brick->Execute();
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_defaultValue.c_str()));
+            //delete brick;
+        }
+
+        TEST_METHOD(VariableBricks_ChangeVariableBrick_OverFlowCheck)
+        {
+            m_formulaValue = std::to_string(DBL_MAX);
+            m_formulaTree = new FormulaTree("NUMBER", m_formulaValue);
+            ChangeVariableBrick *brick = new ChangeVariableBrick(m_formulaTree, m_script);
+            brick->SetVariable(m_variable);
+
+            // TODO due to wrong conversion, no actual overflow
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_defaultValue.c_str()));
+            brick->Execute();
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_defaultValue.c_str()));
+            //delete brick;
+        }
+
+        TEST_METHOD(VariableBricks_ChangeVariableBrick_UnderFlowCheck)
+        {
+            m_defaultValue = "-10";
+            m_variable->SetValue(m_defaultValue);
+
+            m_formulaValue = std::to_string(-DBL_MAX); // TODO conversion of DBL_MIN does not work
+            m_formulaTree = new FormulaTree("NUMBER", m_formulaValue);
+            ChangeVariableBrick *brick = new ChangeVariableBrick(m_formulaTree, m_script);
+            brick->SetVariable(m_variable);
+            // TODO due to wrong conversion, no actual underflow
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_defaultValue.c_str()));
+            brick->Execute();
+            Assert::AreEqual(atof(m_variable->GetValue().c_str()), atof(m_defaultValue.c_str()));
+            //delete brick;
+        }
 	};
 }

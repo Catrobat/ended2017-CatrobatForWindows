@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.Utilities.Helpers;
-using Catrobat.IDE.Core.ViewModel.Main;
+using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Store.Common;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;

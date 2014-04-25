@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Services;
 using System.Windows;
 

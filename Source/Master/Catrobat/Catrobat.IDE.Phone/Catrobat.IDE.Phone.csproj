@@ -178,8 +178,8 @@
     </Compile>
     <Compile Include="Controls\FormulaControls\Templates\UiFormulaTokenDefinitionCollection.cs" />
     <Compile Include="Controls\FormulaControls\Templates\UiFormulaTokenDefinition.cs" />
-    <Compile Include="Controls\FormulaControls\FormulaViewer3.xaml.cs">
-      <DependentUpon>FormulaViewer3.xaml</DependentUpon>
+    <Compile Include="Controls\FormulaControls\FormulaViewer.xaml.cs">
+      <DependentUpon>FormulaViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlDecimalSeparator.cs" />
     <Compile Include="Controls\FormulaControls\PartControls\FormulaPartControlNumber.cs" />
@@ -442,7 +442,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\FormulaControls\FormulaViewer3.xaml">
+    <Page Include="Controls\FormulaControls\FormulaViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -6,7 +6,7 @@
   xmlns:formulas="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas;assembly=Catrobat.IDE.Core"
   xmlns:bricks="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Bricks;assembly=Catrobat.IDE.Core"
   xmlns:ui="clr-namespace:Catrobat.IDE.Core.UI;assembly=Catrobat.IDE.Core"
-  xmlns:formulaTree="clr-namespace:Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;assembly=Catrobat.IDE.Core">
+  xmlns:formulaTree="clr-namespace:Catrobat.IDE.Core.Models.Formulas.FormulaTree;assembly=Catrobat.IDE.Core">
 
   <ui:BrickCollection x:Key="ScriptBrickAddDataMovement">
     <bricks:PlaceAtBrick IsRealObject="False">

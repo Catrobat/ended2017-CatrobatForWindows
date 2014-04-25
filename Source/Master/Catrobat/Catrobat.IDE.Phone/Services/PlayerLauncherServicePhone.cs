@@ -4,8 +4,8 @@ using System.Windows;
 using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Core.UI;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Main;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Main;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
 

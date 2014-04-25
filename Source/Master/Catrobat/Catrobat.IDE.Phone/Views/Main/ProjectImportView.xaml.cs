@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Windows.Navigation;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Main;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Main;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDE.Phone.Views.Main

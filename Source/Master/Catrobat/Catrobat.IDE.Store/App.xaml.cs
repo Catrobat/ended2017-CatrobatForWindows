@@ -5,7 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModel.Main;
+using Catrobat.IDE.Core.ViewModels.Main;
 using Catrobat.IDE.Store.Common;
 
 namespace Catrobat.IDE.Store

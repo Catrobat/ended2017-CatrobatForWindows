@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
 using Catrobat.IDE.Core.Services;
-using Catrobat.IDE.Core.ViewModel;
-using Catrobat.IDE.Core.ViewModel.Editor.Formula;
+using Catrobat.IDE.Core.ViewModels;
+using Catrobat.IDE.Core.ViewModels.Editor.Formula;
 using Microsoft.Phone.Controls;
 
 namespace Catrobat.IDE.Phone.Views.Editor.Formula

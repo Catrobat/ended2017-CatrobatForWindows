@@ -1,7 +1,5 @@
-﻿using System.ComponentModel;
-using System.Xml.Linq;
-using Catrobat.IDE.Core.FormulaEditor;
-using Catrobat.IDE.Core.Utilities.Helpers;
+﻿using System.Xml.Linq;
+using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.CatrobatObjects.Sounds;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Bricks

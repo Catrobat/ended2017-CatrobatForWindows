@@ -1,9 +1,7 @@
 ﻿using Catrobat.IDE.Core.CatrobatObjects.Formulas;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using System.ComponentModel;
-using System.Globalization;
 using System.Xml.Linq;
-using Catrobat.IDE.Core.FormulaEditor;
+using Catrobat.IDE.Core.Formulas;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
 {

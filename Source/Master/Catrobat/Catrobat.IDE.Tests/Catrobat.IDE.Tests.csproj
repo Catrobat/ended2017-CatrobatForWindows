@@ -114,7 +114,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnumerableAssert.cs" />
+    <Compile Include="Extensions\EnumerableAssert.cs" />
+    <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Misc\XmlFormulaTreeComparer.cs" />
     <Compile Include="Misc\ITestProjectGenerator.cs" />
     <Compile Include="Misc\PlatformInformationHelperTests.cs" />
@@ -159,7 +160,9 @@
     <Compile Include="Tests\IDE\Converter\NullIntCountConverterTests.cs" />
     <Compile Include="Tests\IDE\Converter\SecondStringMillisecondConverterTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaEvaluationTests.cs" />
-    <Compile Include="Tests\IDE\Formula\FormulaInterpreterTests.cs" />
+    <Compile Include="Tests\IDE\Formula\FormulaInterpreterCompleteTests.cs" />
+    <Compile Include="Tests\IDE\Formula\FormulaInterpreterParsingErrorTests.cs" />
+    <Compile Include="Tests\IDE\Formula\FormulaInterpreterInterpretTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaTokenizerTests.cs" />
     <Compile Include="Tests\IDE\Formula\XmlFormulaTreeConverterTests.cs" />
     <Compile Include="Tests\IDE\Formula\FormulaSerializerTests.cs" />

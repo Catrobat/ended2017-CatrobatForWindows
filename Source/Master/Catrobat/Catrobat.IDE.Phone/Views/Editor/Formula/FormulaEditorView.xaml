@@ -28,7 +28,7 @@
       <RowDefinition Height="480" />
     </Grid.RowDefinitions>
     <ScrollViewer Grid.Row="0">
-      <formulaControls:FormulaViewer3
+      <formulaControls:FormulaViewer
         Name="FormulaViewer"
         CharactersInOneLineNormalFontSize="15"
         LinesNormalFontSize="3"

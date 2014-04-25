@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Catrobat.IDE.Core.CatrobatObjects.Formulas;
-using Catrobat.IDE.Core.CatrobatObjects.Variables;
-using Catrobat.IDE.Core.FormulaEditor;
-using Catrobat.IDE.Core.Utilities.Helpers;
+using Catrobat.IDE.Core.Formulas;
 
 namespace Catrobat.IDE.Core.CatrobatObjects.Bricks
 {

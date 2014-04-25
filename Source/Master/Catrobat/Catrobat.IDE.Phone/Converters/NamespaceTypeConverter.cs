@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaToken;
-using Catrobat.IDE.Core.CatrobatObjects.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
+using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 
 namespace Catrobat.IDE.Phone.Converters
 {
@@ -14,7 +14,7 @@ namespace Catrobat.IDE.Phone.Converters
     /// </summary>
     public class NamespaceTypeConverter : TypeConverter
     {
-        #region static members
+        #region Static members
 
         private static Assembly _core;
         private static Assembly Core

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Catrobat.IDE.Core.FormulaEditor;
+using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Utilities.Helpers;
 using Catrobat.IDE.Core.CatrobatObjects.Costumes;
 using Catrobat.IDE.Core.CatrobatObjects.Scripts;
