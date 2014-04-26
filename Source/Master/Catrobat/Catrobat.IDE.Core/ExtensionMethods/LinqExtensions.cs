@@ -56,5 +56,30 @@ namespace Catrobat.IDE.Core.ExtensionMethods
                 yield return new[] { previousElement, null };
             }
         }
+
+        /// <summary>
+        /// Returns the first element of the sequence that satisfies a condition 
+        /// or a default value if no such element is found. 
+        ///</summary>
+        /// <param name="source">An <see cref="System.Collections.Generic.IEnumerator{T}" /> to return an element from. </param>
+        /// <param name="predicate"> A function to test each element for a condition.</param>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <returns>
+        /// <c>default(<typeparamref name="TSource" />)</c> if <paramref name="source"/> is empty 
+        /// or if no element passes the test specified by predicate; 
+        /// otherwise, the first element in <paramref name="source"/> 
+        /// that passes the test specified by <paramref name="predicate"/>.</returns>
+        /// <exception cref="System.ArgumentNullException"><paramref name="source"/> or <paramref name="predicate"/> is null.</exception>
+        public static TSource FirstOrDefault<TSource>(this IEnumerator<TSource> source, Func<TSource, bool> predicate)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            if (predicate == null) throw new ArgumentNullException("predicate");
+
+            while (source.MoveNext())
+            {
+                if (predicate.Invoke(source.Current)) return source.Current;
+            }
+            return default(TSource);
+        }
     }
 }

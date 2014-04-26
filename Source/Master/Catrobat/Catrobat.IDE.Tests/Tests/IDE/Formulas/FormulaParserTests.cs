@@ -1,34 +1,45 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using System;
+using System.Collections.Generic;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 
-namespace Catrobat.IDE.Tests.Tests.IDE.Formula
+namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 {
     [TestClass]
     public class FormulaParserTests
     {
+        private readonly UserVariable[] _localVariables = 
+        {
+            new UserVariable { Name = "Variable1" }, 
+            new UserVariable { Name = "Variable2" }
+        };
+        private readonly UserVariable[] _globalVariables = 
+        {
+            new UserVariable { Name = "Variable2" }, 
+            new UserVariable { Name = "Variable3" }
+        };
+        private readonly Random _random = new Random();
+        private readonly IFormulaTree _nodeZero = FormulaTreeFactory.CreateNumberNode(0);
+        private readonly IFormulaTree _nodeOne = FormulaTreeFactory.CreateNumberNode(1);
+        private readonly FormulaParser _parser;
+
+        public FormulaParserTests()
+        {
+            _parser = new FormulaParser(_localVariables, _globalVariables);
+        }
+
         [TestInitialize]
         public void TestClassInitialize()
         {
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
         }
 
-        private static readonly IEnumerable<UserVariable> UserVariables = new[]
-        {
-            new UserVariable { Name = "UserVariable1" }, 
-            new UserVariable { Name = "UserVariable2" }
-        };
-        private readonly FormulaParser _parser = new FormulaParser(UserVariables, null);
-        private readonly Random _random = new Random();
-        private readonly IFormulaTree _nodeZero = FormulaTreeFactory.CreateNumberNode(0);
-        private readonly IFormulaTree _nodeOne = FormulaTreeFactory.CreateNumberNode(1);
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestNullOrWhitespace()
         {
             foreach (var input in new[] { null, string.Empty, " ", "  " })
@@ -41,7 +52,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             }
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestConstants()
         {
             foreach (var value in new[] { 0, _random.Next(), -_random.Next(), _random.NextDouble() })
@@ -60,7 +71,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("False");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestOperators()
         {
             foreach (var input in new[] { "0+1", "0 + 1" })
@@ -116,7 +127,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("Not");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestFunctions()
         {
             foreach (var input in new[] { "exp(0)", "Exp(0)" })
@@ -155,11 +166,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             {
                 TestParser(expectedFormula: FormulaTreeFactory.CreateArctanNode(_nodeZero), input: input);
             }
-            foreach (var input in new[] { "sqrt(0)", "Sqrt(0)", "sqrt{0}" })
+            foreach (var input in new[] { "sqrt(0)", "Sqrt(0)" })
             {
                 TestParser(expectedFormula: FormulaTreeFactory.CreateSqrtNode(_nodeZero), input: input);
             }
-            foreach (var input in new[] { "abs(0)", "Abs(0)", "abs{0}" })
+            foreach (var input in new[] { "abs(0)", "Abs(0)" })
             {
                 TestParser(expectedFormula: FormulaTreeFactory.CreateAbsNode(_nodeZero), input: input);
             }
@@ -168,28 +179,28 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             Assert.Inconclusive("Min/Max");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestSensors()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestProperties()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestVariables()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestBrackets()
         {
-            foreach (var input in new[] { "(0)", "( 0 )", "{0}", "[0]", "((0))", "(((0)))" })
+            foreach (var input in new[] { "(0)", "( 0 )", "((0))", "(((0)))" })
             {
                 TestParser(expectedFormula: FormulaTreeFactory.CreateParenthesesNode(_nodeZero), input: input);
             }

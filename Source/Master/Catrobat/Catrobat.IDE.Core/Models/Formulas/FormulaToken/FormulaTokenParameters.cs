@@ -2,7 +2,43 @@
 
 namespace Catrobat.IDE.Core.Models.Formulas.FormulaToken
 {
-    internal class FormulaTokenParameters : BaseFormulaToken
+    internal abstract class FormulaTokenParameter : BaseFormulaToken
+    {
+    }
+
+    #region Implementations
+
+    internal class FormulaTokenUnaryParameter : FormulaTokenParameter
+    {
+        public IFormulaTree Parameter { get; set; }
+        
+        #region Overrides Equals
+
+        public override bool Equals(object obj)
+        {
+            // auto-implemented by ReSharper
+            return base.Equals(obj) && Equals((FormulaTokenUnaryParameter) obj);
+        }
+
+        protected bool Equals(FormulaTokenUnaryParameter other)
+        {
+            // auto-implemented by ReSharper
+            return base.Equals(other) && Equals(Parameter, other.Parameter);
+        }
+
+        public override int GetHashCode()
+        {
+            // auto-implemented by ReSharper
+            unchecked
+            {
+                return (base.GetHashCode()*397) ^ (Parameter != null ? Parameter.GetHashCode() : 0);
+            }
+        }
+
+        #endregion
+    }
+
+    internal class FormulaTokenBinaryParameter : FormulaTokenParameter
     {
         public IFormulaTree FirstParameter { get; set; }
         public IFormulaTree SecondParameter { get; set; }
@@ -12,13 +48,13 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaToken
         public override bool Equals(object obj)
         {
             // auto-implemented by ReSharper
-            return base.Equals(obj) && Equals((FormulaTokenParameters) obj);
+            return base.Equals(obj) && Equals((FormulaTokenBinaryParameter) obj);
         }
 
-        protected bool Equals(FormulaTokenParameters other)
+        protected bool Equals(FormulaTokenBinaryParameter other)
         {
             // auto-implemented by ReSharper
-            return Equals(FirstParameter, other.FirstParameter) && Equals(SecondParameter, other.SecondParameter);
+            return base.Equals(other) && Equals(FirstParameter, other.FirstParameter) && Equals(SecondParameter, other.SecondParameter);
         }
 
         public override int GetHashCode()
@@ -32,4 +68,6 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaToken
 
         #endregion
     }
+    
+    #endregion
 }

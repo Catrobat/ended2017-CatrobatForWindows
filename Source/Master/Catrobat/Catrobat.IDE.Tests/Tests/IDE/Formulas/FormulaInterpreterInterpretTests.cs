@@ -3,11 +3,13 @@ using Catrobat.IDE.Core.ExtensionMethods;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Tests.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Catrobat.IDE.Tests.Tests.IDE.Formula
+namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 {
     /// <summary>Tests <see cref="FormulaInterpreter.Interpret" /> with valid tokens. </summary>
     [TestClass]
@@ -15,7 +17,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
     {
         private readonly Random _random = new Random();
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        #region Constants
+
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestConstants()
         {
             for (var digit = 0; digit <= 9; digit++)
@@ -38,8 +42,11 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestConstant(FormulaTreeFactory.CreateFalseNode, FormulaTokenFactory.CreateFalseToken);
         }
 
+        #endregion
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        #region Operators
+
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestOperators()
         {
             TestDoubleInfixOperator(FormulaTreeFactory.CreateAddNode, FormulaTokenFactory.CreatePlusToken);
@@ -67,91 +74,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestDoubleInfixOperator(FormulaTreeFactory.CreateModuloNode, FormulaTokenFactory.CreateModToken);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestFunctions()
-        {
-            TestDoubleUnaryFunction(FormulaTreeFactory.CreateExpNode, FormulaTokenFactory.CreateExpToken);
-            TestDoubleUnaryFunction(FormulaTreeFactory.CreateLogNode, FormulaTokenFactory.CreateLogToken);
-            TestDoubleUnaryFunction(FormulaTreeFactory.CreateLnNode, FormulaTokenFactory.CreateLnToken);
-            TestDoubleBinaryFunction(FormulaTreeFactory.CreateMinNode, FormulaTokenFactory.CreateMinToken);
-            TestDoubleBinaryFunction(FormulaTreeFactory.CreateMaxNode, FormulaTokenFactory.CreateMaxToken);
-            TestDoubleUnaryFunction(FormulaTreeFactory.CreateSinNode, FormulaTokenFactory.CreateSinToken);
-            TestDoubleUnaryFunction(FormulaTreeFactory.CreateCosNode, FormulaTokenFactory.CreateCosToken);
-            TestDoubleUnaryFunction(FormulaTreeFactory.CreateTanNode, FormulaTokenFactory.CreateTanToken);
-            TestDoubleUnaryFunction(FormulaTreeFactory.CreateArcsinNode, FormulaTokenFactory.CreateArcsinToken);
-            TestDoubleUnaryFunction(FormulaTreeFactory.CreateArccosNode, FormulaTokenFactory.CreateArccosToken);
-            TestDoubleUnaryFunction(FormulaTreeFactory.CreateArctanNode, FormulaTokenFactory.CreateArctanToken);
-            TestDoubleUnaryFunction(FormulaTreeFactory.CreateSqrtNode, FormulaTokenFactory.CreateSqrtToken);
-            TestDoubleUnaryFunction(FormulaTreeFactory.CreateAbsNode, FormulaTokenFactory.CreateAbsToken);
-            TestDoubleUnaryFunction(FormulaTreeFactory.CreateRoundNode, FormulaTokenFactory.CreateRoundToken);
-            TestDoubleBinaryFunction(FormulaTreeFactory.CreateRandomNode, FormulaTokenFactory.CreateRandomToken);
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestSensors()
-        {
-            TestConstant(FormulaTreeFactory.CreateAccelerationXNode, FormulaTokenFactory.CreateAccelerationXToken);
-            TestConstant(FormulaTreeFactory.CreateAccelerationYNode, FormulaTokenFactory.CreateAccelerationYToken);
-            TestConstant(FormulaTreeFactory.CreateAccelerationZNode, FormulaTokenFactory.CreateAccelerationZToken);
-            TestConstant(FormulaTreeFactory.CreateCompassNode, FormulaTokenFactory.CreateCompassToken);
-            TestConstant(FormulaTreeFactory.CreateInclinationXNode, FormulaTokenFactory.CreateInclinationXToken);
-            TestConstant(FormulaTreeFactory.CreateInclinationYNode, FormulaTokenFactory.CreateInclinationYToken);
-            TestConstant(FormulaTreeFactory.CreateLoudnessNode, FormulaTokenFactory.CreateLoudnessToken);
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestProperties()
-        {
-            TestConstant(FormulaTreeFactory.CreateBrightnessNode, FormulaTokenFactory.CreateBrightnessToken);
-            TestConstant(FormulaTreeFactory.CreateLayerNode, FormulaTokenFactory.CreateLayerToken);
-            TestConstant(FormulaTreeFactory.CreatePositionXNode, FormulaTokenFactory.CreatePositionXToken);
-            TestConstant(FormulaTreeFactory.CreatePositionYNode, FormulaTokenFactory.CreatePositionYToken);
-            TestConstant(FormulaTreeFactory.CreateRotationNode, FormulaTokenFactory.CreateRotationToken);
-            TestConstant(FormulaTreeFactory.CreateSizeNode, FormulaTokenFactory.CreateSizeToken);
-            TestConstant(FormulaTreeFactory.CreateTransparencyNode, FormulaTokenFactory.CreateTransparencyToken);
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestVariables()
-        {
-            TestVariable(FormulaTreeFactory.CreateLocalVariableNode, FormulaTokenFactory.CreateLocalVariableToken);
-            TestVariable(FormulaTreeFactory.CreateGlobalVariableNode, FormulaTokenFactory.CreateGlobalVariableToken);
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestBrackets()
-        {
-            var x = _random.Next();
-            var y = _random.Next();
-            var z = _random.Next();
-
-            // shortcuts to improve readability
-            var xToken = FormulaTokenFactory.CreateDigitToken(x);
-            var yToken = FormulaTokenFactory.CreateDigitToken(y);
-            var zToken = FormulaTokenFactory.CreateDigitToken(z);
-            var openingToken = FormulaTokenFactory.CreateParenthesisToken(true);
-            var closingToken = FormulaTokenFactory.CreateParenthesisToken(false);
-            var plusToken = FormulaTokenFactory.CreatePlusToken();
-            var multiplyToken = FormulaTokenFactory.CreateMultiplyToken();
-            var xNode = FormulaTreeFactory.CreateNumberNode(x);
-            var yNode = FormulaTreeFactory.CreateNumberNode(y);
-            var zNode = FormulaTreeFactory.CreateNumberNode(z);
-            Func<IFormulaTree, IFormulaTree> createParenthesesNode = FormulaTreeFactory.CreateParenthesesNode;
-            Func<IFormulaTree, IFormulaTree, IFormulaTree> createAddNode = FormulaTreeFactory.CreateAddNode;
-            Func<IFormulaTree, IFormulaTree, IFormulaTree> createMultiplyNode = FormulaTreeFactory.CreateMultiplyNode;
-
-            TestInterpret(
-                expected: createParenthesesNode(xNode),
-                tokens: new IFormulaToken[] {openingToken, xToken, closingToken});
-            TestInterpret(
-                expected: createParenthesesNode(xNode),
-                tokens: new IFormulaToken[] {openingToken, openingToken, xToken, closingToken, closingToken});
-            TestInterpret(
-                expected: createMultiplyNode(createParenthesesNode(createAddNode(xNode, yNode)), zNode),
-                tokens: new IFormulaToken[] { openingToken, xToken, plusToken, yToken, closingToken, multiplyToken, zToken });
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestOperatorOrder()
         {
             var x = _random.Next();
@@ -183,7 +106,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
                 expected: createAddNode(createMultiplyNode(xNode, yNode), zNode),
                 tokens: new IFormulaToken[] { xToken, multiplyToken, yToken, plusToken, zToken });
             TestInterpret(
-                expected: createAddNode(xNode, createAddNode(yNode, zNode)), 
+                expected: createAddNode(xNode, createAddNode(yNode, zNode)),
                 tokens: new IFormulaToken[] { xToken, plusToken, yToken, plusToken, zToken });
             TestInterpret(
                 expected: createEqualsNode(createNotNode(xNode), yNode),
@@ -197,6 +120,177 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestInterpret(
                 expected: createLessNode(xNode, createNotNode(yNode)),
                 tokens: new IFormulaToken[] { xToken, lessToken, notToken, yToken });
+        }
+
+        #endregion
+
+        #region Functions
+
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        public void TestFunctions()
+        {
+            TestDoubleUnaryFunction(FormulaTreeFactory.CreateExpNode, FormulaTokenFactory.CreateExpToken);
+            TestDoubleUnaryFunction(FormulaTreeFactory.CreateLogNode, FormulaTokenFactory.CreateLogToken);
+            TestDoubleUnaryFunction(FormulaTreeFactory.CreateLnNode, FormulaTokenFactory.CreateLnToken);
+            TestDoubleBinaryFunction(FormulaTreeFactory.CreateMinNode, FormulaTokenFactory.CreateMinToken);
+            TestDoubleBinaryFunction(FormulaTreeFactory.CreateMaxNode, FormulaTokenFactory.CreateMaxToken);
+            TestDoubleUnaryFunction(FormulaTreeFactory.CreateSinNode, FormulaTokenFactory.CreateSinToken);
+            TestDoubleUnaryFunction(FormulaTreeFactory.CreateCosNode, FormulaTokenFactory.CreateCosToken);
+            TestDoubleUnaryFunction(FormulaTreeFactory.CreateTanNode, FormulaTokenFactory.CreateTanToken);
+            TestDoubleUnaryFunction(FormulaTreeFactory.CreateArcsinNode, FormulaTokenFactory.CreateArcsinToken);
+            TestDoubleUnaryFunction(FormulaTreeFactory.CreateArccosNode, FormulaTokenFactory.CreateArccosToken);
+            TestDoubleUnaryFunction(FormulaTreeFactory.CreateArctanNode, FormulaTokenFactory.CreateArctanToken);
+            TestDoubleUnaryFunction(FormulaTreeFactory.CreateSqrtNode, FormulaTokenFactory.CreateSqrtToken);
+            TestDoubleUnaryFunction(FormulaTreeFactory.CreateAbsNode, FormulaTokenFactory.CreateAbsToken);
+            TestDoubleUnaryFunction(FormulaTreeFactory.CreateRoundNode, FormulaTokenFactory.CreateRoundToken);
+            TestDoubleBinaryFunction(FormulaTreeFactory.CreateRandomNode, FormulaTokenFactory.CreateRandomToken);
+        }
+
+        #endregion
+
+        #region Senesors
+
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        public void TestSensors()
+        {
+            TestConstant(FormulaTreeFactory.CreateAccelerationXNode, FormulaTokenFactory.CreateAccelerationXToken);
+            TestConstant(FormulaTreeFactory.CreateAccelerationYNode, FormulaTokenFactory.CreateAccelerationYToken);
+            TestConstant(FormulaTreeFactory.CreateAccelerationZNode, FormulaTokenFactory.CreateAccelerationZToken);
+            TestConstant(FormulaTreeFactory.CreateCompassNode, FormulaTokenFactory.CreateCompassToken);
+            TestConstant(FormulaTreeFactory.CreateInclinationXNode, FormulaTokenFactory.CreateInclinationXToken);
+            TestConstant(FormulaTreeFactory.CreateInclinationYNode, FormulaTokenFactory.CreateInclinationYToken);
+            TestConstant(FormulaTreeFactory.CreateLoudnessNode, FormulaTokenFactory.CreateLoudnessToken);
+        }
+
+        #endregion
+
+        #region Properties
+
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        public void TestProperties()
+        {
+            TestConstant(FormulaTreeFactory.CreateBrightnessNode, FormulaTokenFactory.CreateBrightnessToken);
+            TestConstant(FormulaTreeFactory.CreateLayerNode, FormulaTokenFactory.CreateLayerToken);
+            TestConstant(FormulaTreeFactory.CreatePositionXNode, FormulaTokenFactory.CreatePositionXToken);
+            TestConstant(FormulaTreeFactory.CreatePositionYNode, FormulaTokenFactory.CreatePositionYToken);
+            TestConstant(FormulaTreeFactory.CreateRotationNode, FormulaTokenFactory.CreateRotationToken);
+            TestConstant(FormulaTreeFactory.CreateSizeNode, FormulaTokenFactory.CreateSizeToken);
+            TestConstant(FormulaTreeFactory.CreateTransparencyNode, FormulaTokenFactory.CreateTransparencyToken);
+        }
+
+        #endregion
+
+        #region Variables
+
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        public void TestVariables()
+        {
+            TestVariable(FormulaTreeFactory.CreateLocalVariableNode, FormulaTokenFactory.CreateLocalVariableToken);
+            TestVariable(FormulaTreeFactory.CreateGlobalVariableNode, FormulaTokenFactory.CreateGlobalVariableToken);
+        }
+
+        #endregion
+
+        #region Brackets
+
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        public void TestBrackets()
+        {
+            var x = _random.Next();
+            var y = _random.Next();
+            var z = _random.Next();
+
+            // shortcuts to improve readability
+            var xToken = FormulaTokenFactory.CreateDigitToken(x);
+            var yToken = FormulaTokenFactory.CreateDigitToken(y);
+            var zToken = FormulaTokenFactory.CreateDigitToken(z);
+            var openingToken = FormulaTokenFactory.CreateParenthesisToken(true);
+            var closingToken = FormulaTokenFactory.CreateParenthesisToken(false);
+            var xNode = FormulaTreeFactory.CreateNumberNode(x);
+            var yNode = FormulaTreeFactory.CreateNumberNode(y);
+            var zNode = FormulaTreeFactory.CreateNumberNode(z);
+            Func<IFormulaTree, IFormulaTree> createParenthesesNode = FormulaTreeFactory.CreateParenthesesNode;
+
+            // (x)
+            TestInterpret(
+                expected: createParenthesesNode(xNode),
+                tokens: new IFormulaToken[] {openingToken, xToken, closingToken});
+
+            // ((x))
+            TestInterpret(
+                expected: createParenthesesNode(xNode),
+                tokens: new IFormulaToken[] {openingToken, openingToken, xToken, closingToken, closingToken});
+
+            // (x+y)*z
+            TestInterpret(
+                expected: FormulaTreeFactory.CreateMultiplyNode(createParenthesesNode(FormulaTreeFactory.CreateAddNode(xNode, yNode)), zNode),
+                tokens: new IFormulaToken[]
+                {
+                    openingToken, xToken, FormulaTokenFactory.CreatePlusToken(), yToken, closingToken, 
+                    FormulaTokenFactory.CreateMultiplyToken(), zToken
+                });
+        }
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        public void TestRedundantBrackets()
+        {
+            var x = _random.Next();
+            var y = _random.Next();
+
+            // shortcuts to improve readability
+            var xToken = FormulaTokenFactory.CreateDigitToken(x);
+            var yToken = FormulaTokenFactory.CreateDigitToken(y);
+            var openingToken = FormulaTokenFactory.CreateParenthesisToken(true);
+            var closingToken = FormulaTokenFactory.CreateParenthesisToken(false);
+            var xNode = FormulaTreeFactory.CreateNumberNode(x);
+            var yNode = FormulaTreeFactory.CreateNumberNode(y);
+            Func<IFormulaTree, IFormulaTree> createParenthesesNode = FormulaTreeFactory.CreateParenthesesNode;
+
+            // ((x))
+            TestInterpret(
+                expected: createParenthesesNode(xNode),
+                tokens: new IFormulaToken[] { openingToken, openingToken, xToken, closingToken, closingToken });
+
+            // sin((x))
+            TestInterpret(
+                expected: FormulaTreeFactory.CreateSinNode(xNode),
+                tokens: new IFormulaToken[]
+                {
+                    FormulaTokenFactory.CreateSinToken(), 
+                    openingToken, openingToken, xToken, closingToken, closingToken
+                });
+
+            // min((x), (y))
+            TestInterpret(
+                expected: FormulaTreeFactory.CreateMinNode(xNode, yNode),
+                tokens: new IFormulaToken[]
+                {
+                    FormulaTokenFactory.CreateMinToken(), openingToken, 
+                    openingToken, xToken, closingToken, FormulaTokenFactory.CreateParameterSeparatorToken(), 
+                    openingToken, yToken, closingToken, closingToken
+                });
+        }
+
+
+        #endregion
+
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
+        public void MonkeyTest()
+        {
+            const int iterations = 100000;
+            const int minLength = 1;
+            const int maxLength = 10;
+
+            for (var iteration = 1; iteration <= iterations; iteration++)
+            {
+                var length = _random.Next(minLength, maxLength);
+                var tokens = Enumerable.Range(1, length).Select(i => _random.NextFormulaToken()).ToList();
+                ParsingError parsingError;
+                var formula = FormulaInterpreter.Interpret(tokens, out parsingError);
+                if (formula != null)
+                {
+                    Assert.IsTrue(formula.AsEnumerable().All(node => node != null));
+                }
+            }
         }
 
         #region Helpers

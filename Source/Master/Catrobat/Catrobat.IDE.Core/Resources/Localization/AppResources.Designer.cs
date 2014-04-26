@@ -2098,18 +2098,18 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Add a comma or times sign..
         /// </summary>
-        public static string FormulaInterpreter_Brackets_DoubleValue {
+        public static string FormulaInterpreter_Brackets_ArgumentDoubleValue {
             get {
-                return ResourceManager.GetString("FormulaInterpreter_Brackets_DoubleValue", resourceCulture);
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_ArgumentDoubleValue", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type something..
+        ///   Looks up a localized string similar to Type something. .
         /// </summary>
-        public static string FormulaInterpreter_Brackets_EmptyParameter {
+        public static string FormulaInterpreter_Brackets_EmptyArgument {
             get {
-                return ResourceManager.GetString("FormulaInterpreter_Brackets_EmptyParameter", resourceCulture);
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_EmptyArgument", resourceCulture);
             }
         }
         
@@ -2125,27 +2125,27 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Remove the comma. .
         /// </summary>
-        public static string FormulaInterpreter_Brackets_NonParameterParameterSeparator {
+        public static string FormulaInterpreter_Brackets_NonArgumentParameterSeparator {
             get {
-                return ResourceManager.GetString("FormulaInterpreter_Brackets_NonParameterParameterSeparator", resourceCulture);
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_NonArgumentParameterSeparator", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Add a comma. .
         /// </summary>
-        public static string FormulaInterpreter_Brackets_TooFewParameters {
+        public static string FormulaInterpreter_Brackets_TooFewArguments {
             get {
-                return ResourceManager.GetString("FormulaInterpreter_Brackets_TooFewParameters", resourceCulture);
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_TooFewArguments", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove the superfluous parameter(s). .
+        ///   Looks up a localized string similar to Remove the superfluous argument(s). .
         /// </summary>
-        public static string FormulaInterpreter_Brackets_TooManyParameters {
+        public static string FormulaInterpreter_Brackets_TooManyArguments {
             get {
-                return ResourceManager.GetString("FormulaInterpreter_Brackets_TooManyParameters", resourceCulture);
+                return ResourceManager.GetString("FormulaInterpreter_Brackets_TooManyArguments", resourceCulture);
             }
         }
         
@@ -2179,18 +2179,9 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Add an opening parenthesis..
         /// </summary>
-        public static string FormulaInterpreter_Function_EmptyBinaryFunction {
+        public static string FormulaInterpreter_Function_Empty {
             get {
-                return ResourceManager.GetString("FormulaInterpreter_Function_EmptyBinaryFunction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add an opening parenthesis. .
-        /// </summary>
-        public static string FormulaInterpreter_Function_EmptyUnaryFunction {
-            get {
-                return ResourceManager.GetString("FormulaInterpreter_Function_EmptyUnaryFunction", resourceCulture);
+                return ResourceManager.GetString("FormulaInterpreter_Function_Empty", resourceCulture);
             }
         }
         
@@ -2240,7 +2231,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type something..
+        ///   Looks up a localized string similar to Type something. .
         /// </summary>
         public static string FormulaInterpreter_Operator_LeftEmptyInfixOperator {
             get {
@@ -2249,7 +2240,7 @@ namespace Catrobat.IDE.Core.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type something..
+        ///   Looks up a localized string similar to Type something. .
         /// </summary>
         public static string FormulaInterpreter_Operator_RightEmptyInfixOperator {
             get {

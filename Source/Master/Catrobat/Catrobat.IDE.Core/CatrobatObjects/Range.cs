@@ -56,7 +56,7 @@ namespace Catrobat.IDE.Core.CatrobatObjects
         // ReSharper disable once UnusedMember.Local
         private string DebuggerDisplay
         {
-            get { return "[" + Start + ", " + (End - 1) + "]"; }
+            get { return "[" + Start + ", " + End + ")"; }
         }
     }
 }

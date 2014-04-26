@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 
 namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
 {
@@ -80,7 +81,7 @@ namespace Catrobat.IDE.Core.Models.Formulas.FormulaTree
     #region Implementations
 
     [DebuggerDisplay("{Value}")]
-    public partial class FormulaNodeNumber : ConstantFormulaTree<double>
+    public partial class FormulaNodeNumber : ConstantFormulaTree<double>, IFormulaNumber
     {
     }
 

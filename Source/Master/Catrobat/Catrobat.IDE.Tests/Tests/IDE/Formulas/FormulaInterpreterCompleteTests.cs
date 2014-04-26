@@ -1,15 +1,15 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
 using Catrobat.IDE.Tests.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Catrobat.IDE.Tests.Tests.IDE.Formula
+namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 {
     /// <summary>Tests <see cref="FormulaInterpreter.Complete" />. </summary>
     [TestClass]
@@ -17,14 +17,14 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
     {
         private readonly Random _random = new Random();
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestNullOrEmpty()
         {
             TestComplete(null);
             TestComplete(new IFormulaToken[] {});
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestConstants()
         {
             for (var digit = 0; digit <= 9; digit++)
@@ -39,7 +39,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestConstant(FormulaTokenFactory.CreateFalseToken);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestOperators()
         {
             Assert.Inconclusive();
@@ -68,7 +68,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             //TestDoubleInfixOperator(FormulaTreeFactory.CreateModuloNode, FormulaTokenFactory.CreateModToken);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestFunctions()
         {
             Assert.Inconclusive();
@@ -89,7 +89,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             //TestDoubleBinaryFunction(FormulaTreeFactory.CreateRandomNode, FormulaTokenFactory.CreateRandomToken);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestSensors()
         {
             TestConstant(FormulaTokenFactory.CreateAccelerationXToken);
@@ -101,7 +101,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestConstant(FormulaTokenFactory.CreateLoudnessToken);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestProperties()
         {
             TestConstant(FormulaTokenFactory.CreateBrightnessToken);
@@ -113,26 +113,26 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
             TestConstant(FormulaTokenFactory.CreateTransparencyToken);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestVariables()
         {
             TestVariable(FormulaTokenFactory.CreateLocalVariableToken);
             TestVariable(FormulaTokenFactory.CreateGlobalVariableToken);
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestBrackets()
         {
             Assert.Inconclusive();
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void Test()
         {
             Assert.Inconclusive("Write some tests. ");
         }
 
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
+        [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void MonkeyTest()
         {
             const int iterations = 100000;
