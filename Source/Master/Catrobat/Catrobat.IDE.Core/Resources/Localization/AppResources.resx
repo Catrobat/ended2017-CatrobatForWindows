@@ -1038,4 +1038,58 @@
   <data name="Editor_ButtonChange" xml:space="preserve">
     <value>rename</value>
   </data>
+  <data name="FormulaInterpreter_Brackets_DoubleValue" xml:space="preserve">
+    <value>Add a comma or times sign.</value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_EmptyParameter" xml:space="preserve">
+    <value>Type something.</value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_EmptyParentheses" xml:space="preserve">
+    <value>Type something. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_NonParameterParameterSeparator" xml:space="preserve">
+    <value>Remove the comma. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_TooFewParameters" xml:space="preserve">
+    <value>Add a comma. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_TooManyParameters" xml:space="preserve">
+    <value>Remove the superfluous parameter(s). </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_UnmatchedClosingParenthesis" xml:space="preserve">
+    <value>Remove the unmatched closing parenthesis. </value>
+  </data>
+  <data name="FormulaInterpreter_Brackets_UnmatchedOpeningParenthesis" xml:space="preserve">
+    <value>Add the missing closing parenthesis. </value>
+  </data>
+  <data name="FormulaInterpreter_DoubleValue" xml:space="preserve">
+    <value>Add a times sign. </value>
+  </data>
+  <data name="FormulaInterpreter_Function_EmptyBinaryFunction" xml:space="preserve">
+    <value>Add an opening parenthesis.</value>
+  </data>
+  <data name="FormulaInterpreter_Function_EmptyUnaryFunction" xml:space="preserve">
+    <value>Add an opening parenthesis. </value>
+  </data>
+  <data name="FormulaInterpreter_NullOrEmpty" xml:space="preserve">
+    <value>Type something. </value>
+  </data>
+  <data name="FormulaInterpreter_Number_DoubleDecimalSeparator" xml:space="preserve">
+    <value>Remove the double decimal point. </value>
+  </data>
+  <data name="FormulaInterpreter_Number_Overflow" xml:space="preserve">
+    <value>The number is too large. </value>
+  </data>
+  <data name="FormulaInterpreter_Number_SingleDecimalSeparator" xml:space="preserve">
+    <value>Remove the decimal point. </value>
+  </data>
+  <data name="FormulaInterpreter_Operator_EmptyPrefixOperator" xml:space="preserve">
+    <value>Type something. </value>
+  </data>
+  <data name="FormulaInterpreter_Operator_LeftEmptyInfixOperator" xml:space="preserve">
+    <value>Type something.</value>
+  </data>
+  <data name="FormulaInterpreter_Operator_RightEmptyInfixOperator" xml:space="preserve">
+    <value>Type something.</value>
+  </data>
 </root>

@@ -16,12 +16,6 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formula
         private readonly Random _random = new Random();
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
-        public void TestNull()
-        {
-            TestInterpret(null, null);
-        }
-
-        [TestMethod, TestCategory("Catrobat.IDE.Core.FormulaEditor")]
         public void TestConstants()
         {
             for (var digit = 0; digit <= 9; digit++)

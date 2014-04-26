@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\EnumerableAssert.cs" />
+    <Compile Include="Extensions\ResourceSetExtensions.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Misc\XmlFormulaTreeComparer.cs" />
     <Compile Include="Misc\ITestProjectGenerator.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="SampleData\SampleLoader.cs" />
     <Compile Include="Services\NavigationServiceTest.cs" />
     <Compile Include="Services\PictureServiceTest.cs" />
+    <Compile Include="Tests\Data\LocalizationTests.cs" />
     <Compile Include="Tests\Data\CatrobatContextTests.cs" />
     <Compile Include="Tests\Data\CopyTests.cs" />
     <Compile Include="Tests\Data\DataDeletingTests.cs" />

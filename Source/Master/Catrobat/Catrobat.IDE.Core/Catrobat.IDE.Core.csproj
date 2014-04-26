@@ -239,8 +239,6 @@
     <Compile Include="UI\Converters\NullVisibilityConverter.cs" />
     <Compile Include="UI\Converters\SecondStringMillisecondConverter.cs" />
     <Compile Include="UI\Converters\VariableButtonVisibilityConverter.cs" />
-    <Compile Include="UI\Formula\IPortableFormulaButton.cs" />
-    <Compile Include="UI\Formula\IPortableUIFormula.cs" />
     <Compile Include="UI\ManualImageCache.cs" />
     <Compile Include="UI\Converters\NullBoolConverter.cs" />
     <Compile Include="UI\PortableUI\IPortableValueConverter.cs" />
