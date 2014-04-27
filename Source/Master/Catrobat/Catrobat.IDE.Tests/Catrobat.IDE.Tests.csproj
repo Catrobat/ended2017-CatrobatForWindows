@@ -115,6 +115,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\EnumerableAssert.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Extensions\MethodInfoExtensions.cs" />
     <Compile Include="Extensions\ResourceSetExtensions.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Misc\XmlFormulaTreeComparer.cs" />

@@ -18,14 +18,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
     public class FormulaInterpreterSyntaxErrorTests
     {
         private readonly Random _random = new Random();
-        private readonly UserVariable[] _localVariables = {new UserVariable {Name = "LocalVariable"}};
-        private readonly UserVariable[] _globalVariables = {new UserVariable {Name = "GlobalVariable"}};
-        private readonly FormulaTokenizer _tokenizer;
-
-        public FormulaInterpreterSyntaxErrorTests()
-        {
-            _tokenizer = new FormulaTokenizer(_localVariables, _globalVariables);
-        }
+        private readonly FormulaTokenizer _tokenizer = new FormulaTokenizer(Enumerable.Empty<UserVariable>(), Enumerable.Empty<UserVariable>());
 
         [TestInitialize]
         public void TestClassInitialize()
@@ -47,9 +40,8 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             var message1 = AppResources.FormulaInterpreter_DoubleValue;
             var message2 = AppResources.FormulaInterpreter_Brackets_ArgumentDoubleValue;
 
-            TestParsingError(message1, 1, 0, "1 InclinationX");
-            TestParsingError(message1, 1, 0, "Transparency 3)");
-            TestParsingError(message1, 3, 0, "1*2 LocalVariable,");
+            TestParsingError(message1, 1, 0, "1 InclinationX,");
+            TestParsingError(message1, 3, 0, "1*2 Transparency)");
             TestParsingError(message1, 4, 0, "sin(1)cos");
             TestParsingError(message1, 1, 0, "1(2-)");
             TestParsingError(message1, 1, 0, "1(2-");
@@ -157,7 +149,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
             TestParsingError(message, 3, 2, "sin(1,.))");
             TestParsingError(message, 5, 2, "random(1, 2,.))");
-            TestParsingError(message, 5, 1, "1+sin(1,))");
+            TestParsingError(message, 5, 1, "1+sin(2,))");
         }
 
         #endregion

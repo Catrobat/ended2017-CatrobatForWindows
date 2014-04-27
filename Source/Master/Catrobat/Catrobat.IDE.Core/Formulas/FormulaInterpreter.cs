@@ -210,7 +210,7 @@ namespace Catrobat.IDE.Core.Formulas
             var decimalSeparator = CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator;
             var numberTokens = new List<IFormulaToken>();
             var sbValue = new StringBuilder();
-            var numberContainsDecimalSeparator = false;
+            var containsDecimalSeparator = false;
 
             var lookAhead2 = lookAhead.GetEnumerator();
             foreach (var token in tokens)
@@ -235,14 +235,14 @@ namespace Catrobat.IDE.Core.Formulas
                 var decimalSeparatorToken = numberToken as FormulaTokenDecimalSeparator;
                 if (decimalSeparatorToken != null)
                 {
-                    if (numberContainsDecimalSeparator)
+                    if (containsDecimalSeparator)
                     {
                         SetParsingError(numberToken, AppResources.FormulaInterpreter_Number_DoubleDecimalSeparator);
                         yield break;
                     }
                     numberTokens.Add(numberToken);
                     sbValue.Append(decimalSeparator);
-                    numberContainsDecimalSeparator = true;
+                    containsDecimalSeparator = true;
                 }
 
                 // advance lookAhead parallel to tokens
@@ -254,7 +254,7 @@ namespace Catrobat.IDE.Core.Formulas
                 IFormulaTree commonToken;
                 if (numberTokens.Count == 1)
                 {
-                    if (numberTokens[0] is FormulaTokenDecimalSeparator)
+                    if (containsDecimalSeparator)
                     {
                         SetParsingError(numberTokens[0], AppResources.FormulaInterpreter_Number_SingleDecimalSeparator);
                         yield break;
@@ -273,10 +273,10 @@ namespace Catrobat.IDE.Core.Formulas
                     commonToken = FormulaTreeFactory.CreateNumberNode(value);
                     SetOrigin(commonToken, GetOrigin(numberTokens));
                 }
+                yield return commonToken;
                 numberTokens.Clear();
                 sbValue.Clear();
-                numberContainsDecimalSeparator = false;
-                yield return commonToken;
+                containsDecimalSeparator = false;
             }
         }
 
@@ -284,7 +284,7 @@ namespace Catrobat.IDE.Core.Formulas
         private IEnumerable<IFormulaToken> CompleteNumbers(IEnumerable<IFormulaToken> tokens)
         {
             var numberTokens = new List<IFormulaToken>();
-            var numberContainsDecimalSeparator = false;
+            var decimalSeparators = 0;
 
             foreach (var token in tokens.WithContext().Select(context => context[1]))
             {
@@ -298,11 +298,13 @@ namespace Catrobat.IDE.Core.Formulas
                 // append decimal separator
                 if (token is FormulaTokenDecimalSeparator)
                 {
-                    // duplicate decimal separator
-                    if (numberContainsDecimalSeparator) yield break;
-                    numberTokens.Add(token);
-                    numberContainsDecimalSeparator = true;
-                    continue;
+                    if (decimalSeparators == 0)
+                    {
+                        numberTokens.Add(token);
+                        decimalSeparators++;
+                        continue;
+                    }
+                    decimalSeparators++;
                 }
 
                 // create common token of value
@@ -311,8 +313,7 @@ namespace Catrobat.IDE.Core.Formulas
                     IFormulaToken commonToken;
                     if (numberTokens.Count == 1)
                     {
-                        // single decimal separator
-                        if (numberTokens[0] is FormulaTokenDecimalSeparator) yield break;
+                        if (decimalSeparators != 0) yield break;
                         commonToken = numberTokens[0];
                     }
                     else
@@ -320,9 +321,10 @@ namespace Catrobat.IDE.Core.Formulas
                         commonToken = FormulaTreeFactory.CreateNumberNode(default(double));
                         SetOrigin(commonToken, GetOrigin(numberTokens));
                     }
-                    numberTokens.Clear();
-                    numberContainsDecimalSeparator = false;
                     yield return commonToken;
+                    if (decimalSeparators > 1) yield break;
+                    numberTokens.Clear();
+                    decimalSeparators = 0;
                 }
 
                 // yield any non-number token
@@ -1019,11 +1021,18 @@ namespace Catrobat.IDE.Core.Formulas
                 {
                     var previousToken = context[0];
                     var token = context[1];
-                    var pending = previousToken == null || previousToken is IFormulaOperator;
-                    var operatorToken2 = token as IFormulaOperator;
-                    return token != null &&
-                        !(pending && operatorToken2 is FormulaNodeInfixOperator) && // missing value of operator
-                        (pending || (operatorToken2 != null && operatorToken2.Order > operatorOrder)); // operator fully completed
+                    if (token == null) return false;
+                    var infixOperatorToken = token as FormulaNodeInfixOperator;
+
+                    var expectValue = previousToken == null || previousToken is IFormulaOperator;
+                    if (expectValue)
+                    {
+                        // missing value of operator
+                        return infixOperatorToken == null;
+                    }
+
+                    // operator fully completed
+                    return infixOperatorToken != null && infixOperatorToken.Order > operatorOrder;
                 }).Select(context => context[1]);
         }
 
@@ -1037,11 +1046,18 @@ namespace Catrobat.IDE.Core.Formulas
                 {
                     var nextToken = context[0];
                     var token = context[1];
-                    var pending = nextToken == null || nextToken is FormulaNodeInfixOperator;
-                    var infixOperatorToken2 = token as FormulaNodeInfixOperator;
-                    return token != null &&
-                        !(pending && token is IFormulaOperator) && // missing value of operator
-                        (pending || (infixOperatorToken2 != null && infixOperatorToken2.Order > operatorOrder)); // operator fully completed
+                    if (token == null) return false;
+                    var operatorToken2 = token as IFormulaOperator;
+
+                    var expectValue = nextToken == null || nextToken is FormulaNodeInfixOperator;
+                    if (expectValue)
+                    {
+                        // missing value of operator
+                        return operatorToken2 == null;
+                    }
+
+                    // operator fully completed
+                    return operatorToken2 != null && operatorOrder < operatorToken2.Order;
                 }).Select(context => context[1]);
         }
 
@@ -1062,7 +1078,7 @@ namespace Catrobat.IDE.Core.Formulas
                 tokensBefore = CompleteFunctionsBackwards(tokensBefore);
                 tokensBefore = CompleteNumbers(tokensBefore);
                 tokensBefore = InterpretMinusTokenBackwards(tokensBefore);
-                operatorTokens = CompleteOperatorBackwards(tokensBefore, operatorToken).Concat(operatorTokens);
+                operatorTokens = CompleteOperatorBackwards(tokensBefore, operatorToken).Reverse().Concat(operatorTokens);
             }
 
             // gather tokens afterwards
