@@ -169,9 +169,9 @@
     <Compile Include="Tests\IDE\Formulas\FormulaInterpreterInterpretTests.cs" />
     <Compile Include="Tests\IDE\Formulas\FormulaInterpreterSemanticErrorTests.cs" />
     <Compile Include="Tests\IDE\Formulas\FormulaInterpreterSyntaxErrorTests.cs" />
-    <Compile Include="Tests\IDE\Formulas\FormulaParserTests.cs" />
     <Compile Include="Tests\IDE\Formulas\FormulaSerializerTests.cs" />
-    <Compile Include="Tests\IDE\Formulas\FormulaTokenizerTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaTokenizerStringTests.cs" />
+    <Compile Include="Tests\IDE\Formulas\FormulaTokenizerTokenTests.cs" />
     <Compile Include="Tests\IDE\Formulas\XmlFormulaTreeConverterTests.cs" />
     <Compile Include="Tests\IDE\ImageSizeEntryTests.cs" />
     <Compile Include="Tests\IDE\NullItemCollectionTests.cs" />

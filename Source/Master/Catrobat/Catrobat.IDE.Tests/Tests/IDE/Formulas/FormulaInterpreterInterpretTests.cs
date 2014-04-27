@@ -148,7 +148,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         #endregion
 
-        #region Senesors
+        #region Sensors
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestSensors()

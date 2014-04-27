@@ -1,9 +1,12 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects;
+﻿using System.Globalization;
+using Catrobat.IDE.Core.CatrobatObjects;
 using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
+using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Extensions;
+using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -19,6 +22,13 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
         private readonly Random _random = new Random();
         private readonly FormulaTokenizer _tokenizer = new FormulaTokenizer(Enumerable.Empty<UserVariable>(), Enumerable.Empty<UserVariable>());
+
+        [TestInitialize]
+        public void TestClassInitialize()
+        {
+            ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
+            ServiceLocator.CultureService.SetCulture(CultureInfo.InvariantCulture);
+        }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestNullOrEmpty()
@@ -51,18 +61,39 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestOperators()
         {
-            TestComplete(Range.FromLength(0, 2), "not true", 0);
-            TestComplete(Range.FromLength(0, 3), "rotation <= compass", 1);
-            TestComplete(Range.FromLength(0, 3), "inclinationy * positiony", 1);
-            TestComplete(Range.FromLength(0, 8), "sin(.)*(+)", 4);
-            TestComplete(Range.FromLength(1, 6), ".1.2*.2.", 4);
-            TestComplete(Range.FromLength(2, 3), "1-2*3", 3, false);
-            TestComplete(Range.FromLength(0, 5), "1-2*3", 1, false);
-            TestComplete(Range.FromLength(1, 4), "-1--2", 2, false);
-            TestComplete(Range.FromLength(0, 5), "-1=-2", 2, false);
-            TestComplete(Range.FromLength(2, 4), "true not true*not true not", 3, false);
-            TestComplete(Range.FromLength(1, 5), "true not true=not true not", 3, false);
-            TestComplete(Range.FromLength(2, 3), "1+2+3+4", 3, false);
+            TestOperator(Range.FromLength(0, 2), "not true", 0);
+            TestOperator(Range.FromLength(0, 3), "rotation <= compass", 1);
+            TestOperator(Range.FromLength(0, 3), "inclinationy * positiony", 1);
+            TestOperator(Range.FromLength(0, 8), "sin(.)*(+)", 4);
+            TestOperator(Range.FromLength(1, 6), ".1.2*.2.", 4);
+            TestOperator(Range.FromLength(2, 3), "1-2*3", 3, false);
+            TestOperator(Range.FromLength(0, 5), "1-2*3", 1, false);
+            TestOperator(Range.FromLength(1, 4), "-1--2", 2, false);
+            TestOperator(Range.FromLength(0, 5), "-1=-2", 2, false);
+            TestOperator(Range.FromLength(2, 4), "true not true*not true not", 3, false);
+            TestOperator(Range.FromLength(1, 5), "true not true=not true not", 3, false);
+            TestOperator(Range.FromLength(2, 3), "1+2+3+4", 3, false);
+        }
+
+        private void TestOperator(Range expected, string input, int index, bool wrapTokens = true)
+        {
+            // tokenize input
+            ParsingError parsingError;
+            var tokens = _tokenizer.Tokenize(input, out parsingError);
+            Assert.IsNull(parsingError);
+
+            // randomize digits
+            tokens = tokens.Select(token => token is FormulaNodeNumber
+                ? FormulaTokenFactory.CreateDigitToken(_random.Next(0, 10))
+                : token);
+
+            // wrap random tokens
+            var tokensBefore = wrapTokens ? CreateNonOperatorTokens(0, 10) : new List<IFormulaToken>();
+            var tokensAfterwards = wrapTokens ? CreateNonOperatorTokens(0, 10) : new List<IFormulaToken>();
+            tokens = tokensBefore.Concat(tokens).Concat(tokensAfterwards);
+            expected.Start += tokensBefore.Count;
+
+            TestComplete(expected, tokens.ToList(), index + tokensBefore.Count);
         }
 
         #endregion
@@ -72,7 +103,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestEmptyFunction()
         {
-            TestComplete(functionToken =>
+            TestFunction(functionToken =>
             {
                 var tokensBefore = CreateTokens(0, 10);
                 var tokensAfterwards = CreateNonArgumentTokens(0, 10);
@@ -89,7 +120,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestFunctionWithUnfinishedArgument()
         {
-            TestComplete(functionToken =>
+            TestFunction(functionToken =>
             {
                 var tokensBefore = CreateTokens(0, 10);
                 var tokensAfterwards = CreateLeftUnmatchingTokens(0, 10);
@@ -106,7 +137,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestFunctionWithArgument()
         {
-            TestComplete(functionToken =>
+            TestFunction(functionToken =>
             {
                 var tokensBefore = CreateTokens(0, 10);
                 var tokensBetween = CreateUnmatchingTokens(0, 10);
@@ -121,6 +152,21 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
 
                 TestComplete(Range.FromLength(tokensBefore.Count, tokensBetween.Count + 3), tokens, tokensBefore.Count);
             });
+        }
+
+        private void TestFunction(Action<IFormulaFunction> action)
+        {
+            var functionTokens = typeof(FormulaTokenFactory).GetMethods()
+                .Where(method => method.IsStatic && method.GetParameters().Length == 0 && method.ReturnType.IsImplementationOf<IFormulaFunction>())
+                .Select(method => method.AsFunction<IFormulaFunction>().Invoke());
+
+            foreach (var functionToken in functionTokens)
+            {
+                for (var iteration = 1; iteration <= Iterations; iteration++)
+                {
+                    action.Invoke(functionToken);
+                }
+            }
         }
 
         #endregion
@@ -150,8 +196,15 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
         public void TestVariables()
         {
-            TestComplete(FormulaTokenFactory.CreateLocalVariableToken);
-            TestComplete(FormulaTokenFactory.CreateGlobalVariableToken);
+            TestVariable(FormulaTokenFactory.CreateLocalVariableToken);
+            TestVariable(FormulaTokenFactory.CreateGlobalVariableToken);
+        }
+
+        private void TestVariable(Func<UserVariable, ConstantFormulaTree> tokenCreator)
+        {
+            TestComplete(tokenCreator.Invoke(new UserVariable { Name = "TestVariable" }));
+            TestComplete(tokenCreator.Invoke(new UserVariable()));
+            TestComplete(tokenCreator.Invoke(null));
         }
 
         #endregion
@@ -249,27 +302,6 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             TestComplete(Range.FromLength(0, tokens == null ? 0 : tokens.Count), tokens, index);
         }
 
-        private void TestComplete(Range expected, string input, int index, bool wrapTokens = true)
-        {
-            // tokenize input
-            IEnumerable<IFormulaToken> tokens;
-            IEnumerable<string> parsingErrors;
-            Assert.IsTrue(_tokenizer.Tokenize(input, out tokens, out parsingErrors));
-
-            // randomize digits
-            tokens = tokens.Select(token => token is FormulaNodeNumber
-                ? FormulaTokenFactory.CreateDigitToken(_random.Next(0, 10))
-                : token);
-
-            // wrap random tokens
-            var tokensBefore = wrapTokens ? CreateNonOperatorTokens(0, 10) : new List<IFormulaToken>();
-            var tokensAfterwards = wrapTokens ? CreateNonOperatorTokens(0, 10) : new List<IFormulaToken>();
-            tokens = tokensBefore.Concat(tokens).Concat(tokensAfterwards);
-            expected.Start += tokensBefore.Count;
-
-            TestComplete(expected, tokens.ToList(), index + tokensBefore.Count);
-        }
-
         private void TestComplete(ConstantFormulaTree token)
         {
             for (var iteration = 1; iteration <= Iterations; iteration++)
@@ -300,28 +332,6 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
             foreach (var token in tokens)
             {
                 TestComplete(token);
-            }
-        }
-
-        private void TestComplete(Func<UserVariable, ConstantFormulaTree> tokenCreator)
-        {
-            TestComplete(tokenCreator.Invoke(new UserVariable { Name = "TestVariable" }));
-            TestComplete(tokenCreator.Invoke(new UserVariable()));
-            TestComplete(tokenCreator.Invoke(null));
-        }
-
-        private void TestComplete(Action<IFormulaFunction> action)
-        {
-            var functionTokens = typeof (FormulaTokenFactory).GetMethods()
-                .Where(method => method.IsStatic && method.GetParameters().Length == 0 && method.ReturnType.IsImplementationOf<IFormulaFunction>())
-                .Select(method => method.AsFunction<IFormulaFunction>().Invoke());
-
-            foreach (var functionToken in functionTokens)
-            {
-                for (var iteration = 1; iteration <= Iterations; iteration++)
-                {
-                    action.Invoke(functionToken);
-                }
             }
         }
 

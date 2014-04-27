@@ -1,4 +1,5 @@
-﻿using Catrobat.IDE.Core.CatrobatObjects.Variables;
+﻿using System.Globalization;
+using Catrobat.IDE.Core.CatrobatObjects.Variables;
 using Catrobat.IDE.Core.Formulas;
 using Catrobat.IDE.Core.Models.Formulas.FormulaToken;
 using Catrobat.IDE.Core.Models.Formulas.FormulaTree;
@@ -7,7 +8,6 @@ using Catrobat.IDE.Core.Services;
 using Catrobat.IDE.Tests.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -24,6 +24,7 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         public void TestClassInitialize()
         {
             ServiceLocator.Register<CultureServiceTest>(TypeCreationMode.Lazy);
+            ServiceLocator.CultureService.SetCulture(CultureInfo.InvariantCulture);
         }
 
         [TestMethod, TestCategory("Catrobat.IDE.Core.Formulas")]
@@ -213,9 +214,9 @@ namespace Catrobat.IDE.Tests.Tests.IDE.Formulas
         private void TestParsingError(string expectedMessage, int expectedIndex, int expectedLength, string input, bool randomDigits = true)
         {
             // tokenize input
-            IEnumerable<IFormulaToken> tokens;
-            IEnumerable<string> parsingErrors;
-            Assert.IsTrue(_tokenizer.Tokenize(input, out tokens, out parsingErrors));
+            ParsingError parsingError;
+            var tokens = _tokenizer.Tokenize(input, out parsingError);
+            Assert.IsNull(parsingError);
 
             // randomize digits
             if (tokens != null) tokens = tokens.Select(token => randomDigits && token is FormulaNodeNumber
